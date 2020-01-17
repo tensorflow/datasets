@@ -52,7 +52,6 @@ TRAIN | 31,500
 *   [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

@@ -45,7 +45,6 @@ None computed
 *   [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

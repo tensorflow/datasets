@@ -88,7 +88,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/shot_noise`
@@ -120,7 +119,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/impulse_noise`
@@ -152,7 +150,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/glass_blur`
@@ -184,7 +181,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/motion_blur`
@@ -216,7 +212,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/shear`
@@ -248,7 +243,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/scale`
@@ -280,7 +274,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/rotate`
@@ -312,7 +305,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/brightness`
@@ -344,7 +336,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/translate`
@@ -376,7 +367,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/stripe`
@@ -408,7 +398,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/fog`
@@ -440,7 +429,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/spatter`
@@ -472,7 +460,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/dotted_line`
@@ -504,7 +491,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/zigzag`
@@ -536,7 +522,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `mnist_corrupted/canny_edges`
@@ -568,7 +553,6 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

@@ -86,7 +86,6 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('cs', 'en')`
 
 ## `wmt14_translate/de-en`
@@ -124,7 +123,6 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('de', 'en')`
 
 ## `wmt14_translate/fr-en`
@@ -162,7 +160,6 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fr', 'en')`
 
 ## `wmt14_translate/hi-en`
@@ -200,7 +197,6 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('hi', 'en')`
 
 ## `wmt14_translate/ru-en`
@@ -238,7 +234,6 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ru', 'en')`
 
 ## Citation

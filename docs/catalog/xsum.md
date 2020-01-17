@@ -61,7 +61,6 @@ TEST       | 11,301
 *   [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('document', 'summary')`
 
 ## Citation

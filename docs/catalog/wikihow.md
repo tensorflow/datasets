@@ -77,7 +77,6 @@ FeaturesDict({
 *   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'headline')`
 
 ## `wikihow/sep`
@@ -117,7 +116,6 @@ FeaturesDict({
 *   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'headline')`
 
 ## Citation

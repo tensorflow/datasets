@@ -703,6 +703,7 @@ mnist_corrupted/translate/0.0.1
 mnist_corrupted/translate/1.0.0
 mnist_corrupted/zigzag/0.0.1
 mnist_corrupted/zigzag/1.0.0
+movie_rationales/0.1.0
 moving_mnist/0.1.0
 multi_news/1.0.0
 multi_nli/plain_text/0.0.2

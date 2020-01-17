@@ -52,7 +52,6 @@ VALIDATION | 22,628
 *   [https://github.com/google-research/task_adaptation](https://github.com/google-research/task_adaptation)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

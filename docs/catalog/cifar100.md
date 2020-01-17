@@ -50,7 +50,6 @@ TEST  | 10,000
 *   [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

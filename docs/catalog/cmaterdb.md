@@ -64,7 +64,6 @@ FeaturesDict({
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cmaterdb/devanagari`
@@ -95,7 +94,6 @@ FeaturesDict({
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cmaterdb/telugu`
@@ -126,7 +124,6 @@ FeaturesDict({
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

@@ -336,7 +336,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/brightness_2`
@@ -367,7 +366,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/brightness_3`
@@ -398,7 +396,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/brightness_4`
@@ -429,7 +426,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/brightness_5`
@@ -460,7 +456,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/contrast_1`
@@ -491,7 +486,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/contrast_2`
@@ -522,7 +516,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/contrast_3`
@@ -553,7 +546,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/contrast_4`
@@ -584,7 +576,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/contrast_5`
@@ -615,7 +606,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_1`
@@ -646,7 +636,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_2`
@@ -677,7 +666,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_3`
@@ -708,7 +696,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_4`
@@ -739,7 +726,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_5`
@@ -770,7 +756,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/elastic_1`
@@ -801,7 +786,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/elastic_2`
@@ -832,7 +816,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/elastic_3`
@@ -863,7 +846,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/elastic_4`
@@ -894,7 +876,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/elastic_5`
@@ -925,7 +906,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/fog_1`
@@ -956,7 +936,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/fog_2`
@@ -987,7 +966,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/fog_3`
@@ -1018,7 +996,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/fog_4`
@@ -1049,7 +1026,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/fog_5`
@@ -1080,7 +1056,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frost_1`
@@ -1111,7 +1086,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frost_2`
@@ -1142,7 +1116,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frost_3`
@@ -1173,7 +1146,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frost_4`
@@ -1204,7 +1176,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frost_5`
@@ -1235,7 +1206,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_1`
@@ -1266,7 +1236,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_2`
@@ -1297,7 +1266,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_3`
@@ -1328,7 +1296,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_4`
@@ -1359,7 +1326,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_5`
@@ -1390,7 +1356,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_1`
@@ -1421,7 +1386,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_2`
@@ -1452,7 +1416,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_3`
@@ -1483,7 +1446,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_4`
@@ -1514,7 +1476,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_5`
@@ -1545,7 +1506,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_1`
@@ -1576,7 +1536,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_2`
@@ -1607,7 +1566,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_3`
@@ -1638,7 +1596,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_4`
@@ -1669,7 +1626,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_5`
@@ -1700,7 +1656,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_1`
@@ -1731,7 +1686,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_2`
@@ -1762,7 +1716,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_3`
@@ -1793,7 +1746,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_4`
@@ -1824,7 +1776,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_5`
@@ -1855,7 +1806,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_1`
@@ -1886,7 +1836,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_2`
@@ -1917,7 +1866,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_3`
@@ -1948,7 +1896,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_4`
@@ -1979,7 +1926,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_5`
@@ -2010,7 +1956,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_1`
@@ -2041,7 +1986,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_2`
@@ -2072,7 +2016,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_3`
@@ -2103,7 +2046,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_4`
@@ -2134,7 +2076,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_5`
@@ -2165,7 +2106,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_1`
@@ -2196,7 +2136,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_2`
@@ -2227,7 +2166,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_3`
@@ -2258,7 +2196,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_4`
@@ -2289,7 +2226,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_5`
@@ -2320,7 +2256,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/saturate_1`
@@ -2351,7 +2286,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/saturate_2`
@@ -2382,7 +2316,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/saturate_3`
@@ -2413,7 +2346,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/saturate_4`
@@ -2444,7 +2376,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/saturate_5`
@@ -2475,7 +2406,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_1`
@@ -2506,7 +2436,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_2`
@@ -2537,7 +2466,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_3`
@@ -2568,7 +2496,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_4`
@@ -2599,7 +2526,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_5`
@@ -2630,7 +2556,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/snow_1`
@@ -2661,7 +2586,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/snow_2`
@@ -2692,7 +2616,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/snow_3`
@@ -2723,7 +2646,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/snow_4`
@@ -2754,7 +2676,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/snow_5`
@@ -2785,7 +2706,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/spatter_1`
@@ -2816,7 +2736,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/spatter_2`
@@ -2847,7 +2766,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/spatter_3`
@@ -2878,7 +2796,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/spatter_4`
@@ -2909,7 +2826,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/spatter_5`
@@ -2940,7 +2856,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_1`
@@ -2971,7 +2886,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_2`
@@ -3002,7 +2916,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_3`
@@ -3033,7 +2946,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_4`
@@ -3064,7 +2976,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_5`
@@ -3095,7 +3006,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_1`
@@ -3126,7 +3036,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_2`
@@ -3157,7 +3066,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_3`
@@ -3188,7 +3096,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_4`
@@ -3219,7 +3126,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_5`
@@ -3250,7 +3156,6 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

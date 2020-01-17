@@ -64,7 +64,6 @@ FeaturesDict({
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('article', 'highlights')`
 
 ## `cnn_dailymail/bytes`
@@ -98,7 +97,6 @@ FeaturesDict({
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('article', 'highlights')`
 
 ## `cnn_dailymail/subwords32k`
@@ -132,7 +130,6 @@ FeaturesDict({
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('article', 'highlights')`
 
 ## Citation

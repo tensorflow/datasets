@@ -56,7 +56,6 @@ Translation({
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ne', 'en')`
 
 ## `flores/sien_plain_text`
@@ -88,7 +87,6 @@ Translation({
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('si', 'en')`
 
 ## Citation

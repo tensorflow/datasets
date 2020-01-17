@@ -62,7 +62,6 @@ FeaturesDict({
 *   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('documents', 'title')`
 
 ## `reddit_tifu/long`
@@ -97,7 +96,6 @@ FeaturesDict({
 *   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('documents', 'tldr')`
 
 ## Citation

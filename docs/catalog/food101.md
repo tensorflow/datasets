@@ -49,7 +49,6 @@ VALIDATION | 25,250
 *   [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

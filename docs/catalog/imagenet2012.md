@@ -62,7 +62,6 @@ VALIDATION | 50,000
 *   [http://image-net.org/](http://image-net.org/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

@@ -53,7 +53,6 @@ TRAIN | 2,153
 *   [https://data.mendeley.com/datasets/t6j2h22jpx/1](https://data.mendeley.com/datasets/t6j2h22jpx/1)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

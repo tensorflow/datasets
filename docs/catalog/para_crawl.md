@@ -117,7 +117,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'bg')`
 
 ## `para_crawl/encs_plain_text`
@@ -148,7 +147,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'cs')`
 
 ## `para_crawl/enda_plain_text`
@@ -179,7 +177,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'da')`
 
 ## `para_crawl/ende_plain_text`
@@ -210,7 +207,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'de')`
 
 ## `para_crawl/enel_plain_text`
@@ -241,7 +237,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'el')`
 
 ## `para_crawl/enes_plain_text`
@@ -272,7 +267,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'es')`
 
 ## `para_crawl/enet_plain_text`
@@ -303,7 +297,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'et')`
 
 ## `para_crawl/enfi_plain_text`
@@ -334,7 +327,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'fi')`
 
 ## `para_crawl/enfr_plain_text`
@@ -365,7 +357,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'fr')`
 
 ## `para_crawl/enga_plain_text`
@@ -396,7 +387,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'ga')`
 
 ## `para_crawl/enhr_plain_text`
@@ -427,7 +417,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'hr')`
 
 ## `para_crawl/enhu_plain_text`
@@ -458,7 +447,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'hu')`
 
 ## `para_crawl/enit_plain_text`
@@ -489,7 +477,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'it')`
 
 ## `para_crawl/enlt_plain_text`
@@ -520,7 +507,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'lt')`
 
 ## `para_crawl/enlv_plain_text`
@@ -551,7 +537,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'lv')`
 
 ## `para_crawl/enmt_plain_text`
@@ -582,7 +567,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'mt')`
 
 ## `para_crawl/ennl_plain_text`
@@ -613,7 +597,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'nl')`
 
 ## `para_crawl/enpl_plain_text`
@@ -644,7 +627,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'pl')`
 
 ## `para_crawl/enpt_plain_text`
@@ -675,7 +657,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'pt')`
 
 ## `para_crawl/enro_plain_text`
@@ -706,7 +687,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'ro')`
 
 ## `para_crawl/ensk_plain_text`
@@ -737,7 +717,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'sk')`
 
 ## `para_crawl/ensl_plain_text`
@@ -768,7 +747,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'sl')`
 
 ## `para_crawl/ensv_plain_text`
@@ -799,7 +777,6 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('en', 'sv')`
 
 ## Citation

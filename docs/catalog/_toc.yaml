@@ -216,6 +216,8 @@ toc:
     title: c4 (manual)
   - path: /datasets/catalog/civil_comments
     title: civil_comments
+  - path: /datasets/catalog/cos_e
+    title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/esnli
@@ -230,6 +232,8 @@ toc:
     title: lm1b
   - path: /datasets/catalog/math_dataset
     title: math_dataset
+  - path: /datasets/catalog/movie_rationales
+    title: movie_rationales
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch

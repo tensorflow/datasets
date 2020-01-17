@@ -88,7 +88,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/a`
@@ -120,7 +119,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/b`
@@ -154,7 +152,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/c`
@@ -186,7 +183,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/d`
@@ -218,7 +214,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/e`
@@ -250,7 +245,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/f`
@@ -284,7 +278,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/g`
@@ -316,7 +309,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/h`
@@ -348,7 +340,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## `big_patent/y`
@@ -382,7 +373,6 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('description', 'abstract')`
 
 ## Citation

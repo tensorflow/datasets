@@ -97,7 +97,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('cs', 'en')`
 
 ## `wmt19_translate/de-en`
@@ -134,7 +133,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('de', 'en')`
 
 ## `wmt19_translate/fi-en`
@@ -171,7 +169,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fi', 'en')`
 
 ## `wmt19_translate/gu-en`
@@ -208,7 +205,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('gu', 'en')`
 
 ## `wmt19_translate/kk-en`
@@ -245,7 +241,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('kk', 'en')`
 
 ## `wmt19_translate/lt-en`
@@ -282,7 +277,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('lt', 'en')`
 
 ## `wmt19_translate/ru-en`
@@ -319,7 +313,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ru', 'en')`
 
 ## `wmt19_translate/zh-en`
@@ -356,7 +349,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('zh', 'en')`
 
 ## `wmt19_translate/fr-de`
@@ -393,7 +385,6 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fr', 'de')`
 
 ## Citation

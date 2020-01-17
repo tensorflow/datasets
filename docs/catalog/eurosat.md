@@ -60,7 +60,6 @@ FeaturesDict({
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `eurosat/all`
@@ -91,7 +90,6 @@ FeaturesDict({
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('sentinel2', 'label')`
 
 ## Citation

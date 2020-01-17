@@ -52,7 +52,6 @@ TEST       | 1,885
 *   [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

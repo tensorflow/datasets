@@ -58,7 +58,6 @@ TEST  | 169,396
 *   [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

@@ -64,7 +64,6 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'label')`
 
 ## `imdb_reviews/bytes`
@@ -97,7 +96,6 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'label')`
 
 ## `imdb_reviews/subwords8k`
@@ -130,7 +128,6 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'label')`
 
 ## `imdb_reviews/subwords32k`
@@ -163,7 +160,6 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'label')`
 
 ## Citation

@@ -48,7 +48,6 @@ TEST       | 1,906
 *   [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('email_body', 'subject_line')`
 
 ## Citation

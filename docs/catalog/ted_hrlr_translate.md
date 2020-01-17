@@ -93,7 +93,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('az', 'en')`
 
 ## `ted_hrlr_translate/aztr_to_en`
@@ -126,7 +125,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('az_tr', 'en')`
 
 ## `ted_hrlr_translate/be_to_en`
@@ -159,7 +157,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('be', 'en')`
 
 ## `ted_hrlr_translate/beru_to_en`
@@ -192,7 +189,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('be_ru', 'en')`
 
 ## `ted_hrlr_translate/es_to_pt`
@@ -225,7 +221,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('es', 'pt')`
 
 ## `ted_hrlr_translate/fr_to_pt`
@@ -258,7 +253,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fr', 'pt')`
 
 ## `ted_hrlr_translate/gl_to_en`
@@ -291,7 +285,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('gl', 'en')`
 
 ## `ted_hrlr_translate/glpt_to_en`
@@ -324,7 +317,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('gl_pt', 'en')`
 
 ## `ted_hrlr_translate/he_to_pt`
@@ -357,7 +349,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('he', 'pt')`
 
 ## `ted_hrlr_translate/it_to_pt`
@@ -390,7 +381,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('it', 'pt')`
 
 ## `ted_hrlr_translate/pt_to_en`
@@ -423,7 +413,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('pt', 'en')`
 
 ## `ted_hrlr_translate/ru_to_en`
@@ -456,7 +445,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ru', 'en')`
 
 ## `ted_hrlr_translate/ru_to_pt`
@@ -489,7 +477,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ru', 'pt')`
 
 ## `ted_hrlr_translate/tr_to_en`
@@ -522,7 +509,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('tr', 'en')`
 
 ## Citation

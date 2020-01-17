@@ -110,7 +110,6 @@ FeaturesDict({
 *   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `imagenette/320px`
@@ -152,7 +151,6 @@ FeaturesDict({
 *   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `imagenette/160px`
@@ -194,7 +192,6 @@ FeaturesDict({
 *   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

@@ -67,7 +67,6 @@ TEST  | 14,465
 *   [https://www.kaggle.com/c/petfinder-adoption-prediction/data](https://www.kaggle.com/c/petfinder-adoption-prediction/data)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('attributes', 'label')`
 
 ## Citation

@@ -44,7 +44,6 @@ TEST  | 10,000
 *   [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

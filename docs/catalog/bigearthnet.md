@@ -90,7 +90,6 @@ FeaturesDict({
 *   [http://bigearth.net](http://bigearth.net)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'labels')`
 
 ## `bigearthnet/all`

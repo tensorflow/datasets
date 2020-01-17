@@ -74,7 +74,6 @@ FeaturesDict({
 *   [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## `cifar10_1/v6`
@@ -107,7 +106,6 @@ FeaturesDict({
 *   [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

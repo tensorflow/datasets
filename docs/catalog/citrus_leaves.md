@@ -53,7 +53,6 @@ TRAIN | 594
 *   [https://data.mendeley.com/datasets/3f83gxmv57/2](https://data.mendeley.com/datasets/3f83gxmv57/2)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label')`
 
 ## Citation

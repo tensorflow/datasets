@@ -61,7 +61,6 @@ FeaturesDict({
 *   [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('article', 'abstract')`
 
 ## `scientific_papers/pubmed`
@@ -94,7 +93,6 @@ FeaturesDict({
 *   [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('article', 'abstract')`
 
 ## Citation

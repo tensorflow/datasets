@@ -73,7 +73,6 @@ VALIDATION | 278
 *   [https://github.com/ouwen/mimicknet](https://github.com/ouwen/mimicknet)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('das/dB', 'dtce')`
 
 ## Citation

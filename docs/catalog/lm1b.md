@@ -60,7 +60,6 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'text')`
 
 ## `lm1b/bytes`
@@ -91,7 +90,6 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'text')`
 
 ## `lm1b/subwords8k`
@@ -122,7 +120,6 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'text')`
 
 ## `lm1b/subwords32k`
@@ -153,7 +150,6 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('text', 'text')`
 
 ## Citation

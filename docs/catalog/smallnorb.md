@@ -59,7 +59,6 @@ TRAIN | 24,300
 *   [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `('image', 'label_category')`
 
 ## Citation

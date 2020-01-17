@@ -101,7 +101,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('cs', 'en')`
 
 ## `wmt15_translate/de-en`
@@ -139,7 +138,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('de', 'en')`
 
 ## `wmt15_translate/fi-en`
@@ -177,7 +175,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fi', 'en')`
 
 ## `wmt15_translate/fr-en`
@@ -215,7 +212,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fr', 'en')`
 
 ## `wmt15_translate/ru-en`
@@ -253,7 +249,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ru', 'en')`
 
 ## `wmt15_translate/cs-en.subwords8k`
@@ -290,7 +285,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('cs', 'en')`
 
 ## `wmt15_translate/de-en.subwords8k`
@@ -327,7 +321,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('de', 'en')`
 
 ## `wmt15_translate/fi-en.subwords8k`
@@ -364,7 +357,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fi', 'en')`
 
 ## `wmt15_translate/fr-en.subwords8k`
@@ -401,7 +393,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('fr', 'en')`
 
 ## `wmt15_translate/ru-en.subwords8k`
@@ -438,7 +429,6 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `('ru', 'en')`
 
 ## Citation
