@@ -4,8 +4,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
 import csv
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -35,10 +36,29 @@ Attributes X1 to X6 have values 1 to 5.
 """
 _FEELING = ["happy", "unhappy"]
 
+_FEELING_DICT = {"1": "happy", "0": "unhappy"}
+
+def check_input(d):
+  if d <= 5:
+    return d
+
+def check_input_for_D(d):
+  if d <= 1:
+    return d
+
+FEATURE_DICT = collections.OrderedDict([
+    ("D", (tf.int32, check_input_for_D)),
+    ("X1", (tf.int32, check_input)),
+    ("X2", (tf.int32, check_input)),
+    ("X3", (tf.int32, check_input)),
+    ("X4", (tf.int32, check_input)),
+    ("X5", (tf.int32, check_input)),
+    ("X6", (tf.int32, check_input))
+])
+
 _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00479/SomervilleHappinessSurvey2015.csv'
 
 class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
-  
   
   VERSION = tfds.core.Version('2.0.0')
 
@@ -49,16 +69,11 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
         
         features=tfds.features.FeaturesDict({
            "feeling": tfds.features.ClassLabel(names=_FEELING),
-           "D": tfds.features.ClassLabel(num_classes=2),
-           "X1": tfds.features.ClassLabel(num_classes=5),
-           "X2": tfds.features.ClassLabel(num_classes=5),
-           "X3": tfds.features.ClassLabel(num_classes=5),
-           "X4": tfds.features.ClassLabel(num_classes=5),
-           "X5": tfds.features.ClassLabel(num_classes=5),
-           "X6": tfds.features.ClassLabel(num_classes=5),
+           "features": {name: dtype
+                         for name, (dtype, func) in FEATURE_DICT.items()}
         }),
-        supervised_keys=("D", "feeling"),
-        homepage='https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey',
+        supervised_keys=("features", "feeling"),
+        urls='https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey',
         citation=_CITATION,
     )
 
@@ -76,13 +91,11 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, file_path):
-    fieldnames = ['D', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6']
-    with tf.io.gfile.GFile(file_path) as f:
-      reader = csv.DictReader(f, fieldnames=fieldnames),
-      for row in reader:
-        for i, row in zip(row, reader):
-          yield i, {
-               "feeling":_FEELING[1],
-               "D": 1,
+    with open(file_path, newline='', encoding='utf-16') as f:
+      reader = csv.DictReader(f, quoting=csv.QUOTE_NONE)
+      for i, row in enumerate(reader):
+        feeling = "1"
+        yield i, {
+               "feeling": _FEELING_DICT['1'],
+               "features": row,
           }
-
