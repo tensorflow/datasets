@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
 import json
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -82,8 +82,8 @@ class CocoCaptions(tfds.core.GeneratorBasedBuilder):
     return [tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
                 gen_kwargs={
-                    "images_path": os.path.join(img_path, 'val2014'),
-                    "annotations_path": os.path.join(ann_path, 'annotations')
+                    "images_path": img_path + '/val2014',
+                    "annotations_path": ann_path + '/annotations'
                 })]
 
   def _generate_examples(self, images_path, annotations_path):
@@ -95,8 +95,8 @@ class CocoCaptions(tfds.core.GeneratorBasedBuilder):
     Yields:
       key (image id) and datapoint of (image, caption)
     """
-    caption_file = 'captions_val2014.json'
-    with open(os.path.join(annotations_path, caption_file), "r") as f:
+    caption_file = '/captions_val2014.json'
+    with tf.io.gfile.GFile(annotations_path + caption_file) as f:
       data = json.load(f)
     path_head = images_path + '/COCO_val2014_'
     ann = data['annotations']
