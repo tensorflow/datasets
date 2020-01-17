@@ -42,10 +42,6 @@ def check_input(d):
   if d <= 5:
     return d
 
-def check_input_for_D(d):
-  if d <= 1:
-    return d
-
 FEATURE_DICT = collections.OrderedDict([
     ("X1", (tf.int32, check_input)),
     ("X2", (tf.int32, check_input)),
