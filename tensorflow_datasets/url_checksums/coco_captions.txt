@@ -1,0 +1,3 @@
+http://images.cocodataset.org/annotations/annotations_trainval2014.zip 252872794 031296bbc80c45a1d1f76bf9a90ead27e94e99ec629208449507a4917a3bf009
+http://images.cocodataset.org/zips/train2014.zip 13510573713 ede4087e640bddba550e090eae701092534b554b42b05ac33f0300b984b31775
+http://images.cocodataset.org/zips/val2014.zip 6645013297 fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0
