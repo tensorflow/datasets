@@ -556,17 +556,9 @@ for more information.
 
 ### 6. Send for review!
 
-Send the pull request for review. When creating the pull request, please use the
-`add_dataset` template, which provides a guide and a checklist for adding a
-dataset to TFDS.
-
-To use the template, simply add `?template=add_dataset.md` at
-the end of the link when creating the pull request. For example:
-
-`https://github.com/tensorflow/datasets/compare/master...<username>:<branch>?template=add_dataset.md`
-
-Fill in the areas for the name, issue reference, and GitHub Gist link. When
-using the checklist, replace each `[ ]` with `[x]` to mark it off.
+Send the pull request for review. When creating the pull request, fill in the
+areas for the name, issue reference, and GitHub Gist link. When using the
+checklist, replace each `[ ]` with `[x]` to mark it off.
 
 
 ## Define the dataset outside TFDS.
