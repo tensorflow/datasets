@@ -5,7 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 import json
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -56,7 +56,7 @@ _HOMEPAGE = "http://cocodataset.org/"
 class CocoCaptions(tfds.core.GeneratorBasedBuilder):
   """MSCOCO Image Captioning Dataset - 2014"""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('0.0.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -99,10 +99,15 @@ class CocoCaptions(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(annotations_path + caption_file) as f:
       data = json.load(f)
     path_head = images_path + '/COCO_val2014_'
-    ann = data['annotations']
-    img_names = [path_head + '%012d.jpg' % i['image_id'] for i in ann]
+    ann = data['annotations'] # Contains annotations
+    
+    img_names = [path_head + '%012d.jpg' % i['image_id'] for i in ann] 
     captions = ['<start> ' + i['caption'] + ' <end>' for i in ann]
     ids = [i['id'] for i in ann]
+    
+    # The above lines create the captions (start and end tokens), the 
+    # image names (which consist of the path head and a 12 digit number,
+    # right-aligned with the id), and the id to distinguish each unique image.
 
     for (i, name) in enumerate(img_names):
       yield ids[i], {
