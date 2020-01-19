@@ -25,7 +25,7 @@ Interestingly, this raw database gives a stripped-down decision tree algorithm (
 class TicTacToe(tfds.core.GeneratorBasedBuilder):
   """Binary classification task on possible configurations of tic-tac-toe game"""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('0.0.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -46,7 +46,6 @@ class TicTacToe(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-
                 "file_path": data
             },
         ),
