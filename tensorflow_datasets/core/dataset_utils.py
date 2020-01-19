@@ -190,7 +190,23 @@ def as_numpy(dataset, graph=None):
   are left as-is for the user to deal with them (e.g. using `to_list()`).
   In TF 1 (i.e. graph mode), `tf.RaggedTensor`s are returned as
   `tf.ragged.RaggedTensorValue`s.
-
+  
+  Example:
+    A numpy generator produced from a loaded dataset with `as_supervised=False`
+    will yield dictionaries with the keys and the features as listed in the dataset.
+    ```
+    mnist = tfds.load(name="mnist",split="train")
+    numpy_gen = tfds.as_numpy(mnist)
+    ```
+    `numpy_gen` will yield samples in the format:
+    `{"image":...,"labels":...}`
+    The shape of the numpy arrays depend on the `batch_size` argument of `tfds.load`.
+    If `batch_size` is set to any number, the shape of the arrays will include the batch
+    index(shape: (1,28,28,1) instead of (28,28,1)).
+    
+    If `as_supervised=True` the generator will yield tuples in the same order as the
+    normal dataset would. The shape convention described above still applies.
+  
   Args:
     dataset: a possibly nested structure of `tf.data.Dataset`s and/or
       `tf.Tensor`s.
