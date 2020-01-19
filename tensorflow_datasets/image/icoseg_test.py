@@ -12,7 +12,7 @@ class IcosegTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = icoseg.Icoseg
 
   SPLITS = {
-      "train": 4,
+      "train": 1,
   }
 
 if __name__ == "__main__":

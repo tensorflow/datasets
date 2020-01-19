@@ -1,13 +1,11 @@
-
-"""
-CMU-Cornell iCoseg dataset for image segmentation.
-"""
+"""CMU-Cornell iCoseg dataset for image segmentation."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import os
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -60,10 +58,10 @@ class Icoseg(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, imgs_dir_path, labels_dir_path):
-    for folder in os.listdir(imgs_dir_path):
+    for folder in tf.io.gfile.listdir(imgs_dir_path):
       img_dir_path = os.path.join(imgs_dir_path, folder)
       label_dir_path = os.path.join(labels_dir_path, folder)
-      for img_name in os.listdir(img_dir_path):
+      for img_name in tf.io.gfile.listdir(img_dir_path):
         if img_name != "Thumbs.db" and img_name != "DS.Store":
           img_path = os.path.join(img_dir_path, img_name)
           no_ext = os.path.splitext(img_name)
@@ -74,4 +72,3 @@ class Icoseg(tfds.core.GeneratorBasedBuilder):
                 "label_png": label_img_path,
           }
           yield img_name, features
-
