@@ -65,21 +65,7 @@ _INTERPOLATE_CATEGORY = [
 
 _MODULES = [
     # extrapolate
-    "algebra__polynomial_roots_big",
-    "arithmetic__add_or_sub_big",
-    "arithmetic__add_sub_multiple_longer",
-    "arithmetic__div_big",
-    "arithmetic__mixed_longer",
-    "arithmetic__mul_big",
-    "arithmetic__mul_div_multiple_longer",
-    "comparison__closest_more",
-    "comparison__kth_biggest_more",
-    "comparison__sort_more",
     "measurement__conversion",
-    "numbers__place_value_big",
-    "numbers__round_number_big",
-    "probability__swr_p_level_set_more_samples",
-    "probability__swr_p_sequence_more_samples",
 
     # interpolate
     "algebra__linear_1d",

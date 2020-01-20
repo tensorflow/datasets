@@ -5,7 +5,7 @@
 
 # tfds.percent
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,9 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `percent`
-
-<!-- Start diff -->
 
 Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
 
@@ -24,4 +23,3 @@ Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
 for more information.
-

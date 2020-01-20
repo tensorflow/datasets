@@ -346,9 +346,6 @@ following configurations predefined (defaults to the first one):
 *   `20190301.hy` (`v0.0.4`) (`Size: 277.53 MiB`): Wikipedia dataset for hy,
     parsed from 20190301 dump.
 
-*   `20190301.hz` (`v0.0.4`) (`Size: 16.35 KiB`): Wikipedia dataset for hz,
-    parsed from 20190301 dump.
-
 *   `20190301.ia` (`v0.0.4`) (`Size: 7.85 MiB`): Wikipedia dataset for ia,
     parsed from 20190301 dump.
 
@@ -437,9 +434,6 @@ following configurations predefined (defaults to the first one):
     parsed from 20190301 dump.
 
 *   `20190301.koi` (`v0.0.4`) (`Size: 2.12 MiB`): Wikipedia dataset for koi,
-    parsed from 20190301 dump.
-
-*   `20190301.kr` (`v0.0.4`) (`Size: 13.89 KiB`): Wikipedia dataset for kr,
     parsed from 20190301 dump.
 
 *   `20190301.krc` (`v0.0.4`) (`Size: 3.16 MiB`): Wikipedia dataset for krc,
@@ -934,6 +928,7 @@ Wikipedia dataset for aa, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -957,6 +952,7 @@ Wikipedia dataset for ab, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -980,6 +976,7 @@ Wikipedia dataset for ace, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1003,6 +1000,7 @@ Wikipedia dataset for ady, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1026,6 +1024,7 @@ Wikipedia dataset for af, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1049,6 +1048,7 @@ Wikipedia dataset for ak, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1072,6 +1072,7 @@ Wikipedia dataset for als, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1095,6 +1096,7 @@ Wikipedia dataset for am, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1118,6 +1120,7 @@ Wikipedia dataset for an, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1141,6 +1144,7 @@ Wikipedia dataset for ang, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1164,6 +1168,7 @@ Wikipedia dataset for ar, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1187,6 +1192,7 @@ Wikipedia dataset for arc, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1210,6 +1216,7 @@ Wikipedia dataset for arz, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1233,6 +1240,7 @@ Wikipedia dataset for as, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1256,6 +1264,7 @@ Wikipedia dataset for ast, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1279,6 +1288,7 @@ Wikipedia dataset for atj, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1302,6 +1312,7 @@ Wikipedia dataset for av, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1325,6 +1336,7 @@ Wikipedia dataset for ay, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1348,6 +1360,7 @@ Wikipedia dataset for az, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1371,6 +1384,7 @@ Wikipedia dataset for azb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1394,6 +1408,7 @@ Wikipedia dataset for ba, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1417,6 +1432,7 @@ Wikipedia dataset for bar, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1440,6 +1456,7 @@ Wikipedia dataset for bat-smg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1463,6 +1480,7 @@ Wikipedia dataset for bcl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1486,6 +1504,7 @@ Wikipedia dataset for be, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1509,6 +1528,7 @@ Wikipedia dataset for be-x-old, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1532,6 +1552,7 @@ Wikipedia dataset for bg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1555,6 +1576,7 @@ Wikipedia dataset for bh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1578,6 +1600,7 @@ Wikipedia dataset for bi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1601,6 +1624,7 @@ Wikipedia dataset for bjn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1624,6 +1648,7 @@ Wikipedia dataset for bm, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1647,6 +1672,7 @@ Wikipedia dataset for bn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1670,6 +1696,7 @@ Wikipedia dataset for bo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1693,6 +1720,7 @@ Wikipedia dataset for bpy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1716,6 +1744,7 @@ Wikipedia dataset for br, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1739,6 +1768,7 @@ Wikipedia dataset for bs, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1762,6 +1792,7 @@ Wikipedia dataset for bug, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1785,6 +1816,7 @@ Wikipedia dataset for bxr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1808,6 +1840,7 @@ Wikipedia dataset for ca, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1831,6 +1864,7 @@ Wikipedia dataset for cbk-zam, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1854,6 +1888,7 @@ Wikipedia dataset for cdo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1877,6 +1912,7 @@ Wikipedia dataset for ce, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1900,6 +1936,7 @@ Wikipedia dataset for ceb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1923,6 +1960,7 @@ Wikipedia dataset for ch, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1946,6 +1984,7 @@ Wikipedia dataset for cho, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1969,6 +2008,7 @@ Wikipedia dataset for chr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -1992,6 +2032,7 @@ Wikipedia dataset for chy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2015,6 +2056,7 @@ Wikipedia dataset for ckb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2038,6 +2080,7 @@ Wikipedia dataset for co, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2061,6 +2104,7 @@ Wikipedia dataset for cr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2084,6 +2128,7 @@ Wikipedia dataset for crh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2107,6 +2152,7 @@ Wikipedia dataset for cs, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2130,6 +2176,7 @@ Wikipedia dataset for csb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2153,6 +2200,7 @@ Wikipedia dataset for cu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2176,6 +2224,7 @@ Wikipedia dataset for cv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2199,6 +2248,7 @@ Wikipedia dataset for cy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2222,6 +2272,7 @@ Wikipedia dataset for da, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2245,6 +2296,7 @@ Wikipedia dataset for de, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2268,6 +2320,7 @@ Wikipedia dataset for din, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2291,6 +2344,7 @@ Wikipedia dataset for diq, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2314,6 +2368,7 @@ Wikipedia dataset for dsb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2337,6 +2392,7 @@ Wikipedia dataset for dty, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2360,6 +2416,7 @@ Wikipedia dataset for dv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2383,6 +2440,7 @@ Wikipedia dataset for dz, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2406,6 +2464,7 @@ Wikipedia dataset for ee, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2429,6 +2488,7 @@ Wikipedia dataset for el, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2452,6 +2512,7 @@ Wikipedia dataset for eml, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2475,6 +2536,7 @@ Wikipedia dataset for en, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2498,6 +2560,7 @@ Wikipedia dataset for eo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2521,6 +2584,7 @@ Wikipedia dataset for es, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2544,6 +2608,7 @@ Wikipedia dataset for et, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2567,6 +2632,7 @@ Wikipedia dataset for eu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2590,6 +2656,7 @@ Wikipedia dataset for ext, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2613,6 +2680,7 @@ Wikipedia dataset for fa, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2636,6 +2704,7 @@ Wikipedia dataset for ff, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2659,6 +2728,7 @@ Wikipedia dataset for fi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2682,6 +2752,7 @@ Wikipedia dataset for fiu-vro, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2705,6 +2776,7 @@ Wikipedia dataset for fj, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2728,6 +2800,7 @@ Wikipedia dataset for fo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2751,6 +2824,7 @@ Wikipedia dataset for fr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2774,6 +2848,7 @@ Wikipedia dataset for frp, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2797,6 +2872,7 @@ Wikipedia dataset for frr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2820,6 +2896,7 @@ Wikipedia dataset for fur, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2843,6 +2920,7 @@ Wikipedia dataset for fy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2866,6 +2944,7 @@ Wikipedia dataset for ga, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2889,6 +2968,7 @@ Wikipedia dataset for gag, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2912,6 +2992,7 @@ Wikipedia dataset for gan, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2935,6 +3016,7 @@ Wikipedia dataset for gd, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2958,6 +3040,7 @@ Wikipedia dataset for gl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -2981,6 +3064,7 @@ Wikipedia dataset for glk, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3004,6 +3088,7 @@ Wikipedia dataset for gn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3027,6 +3112,7 @@ Wikipedia dataset for gom, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3050,6 +3136,7 @@ Wikipedia dataset for gor, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3073,6 +3160,7 @@ Wikipedia dataset for got, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3096,6 +3184,7 @@ Wikipedia dataset for gu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3119,6 +3208,7 @@ Wikipedia dataset for gv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3142,6 +3232,7 @@ Wikipedia dataset for ha, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3165,6 +3256,7 @@ Wikipedia dataset for hak, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3188,6 +3280,7 @@ Wikipedia dataset for haw, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3211,6 +3304,7 @@ Wikipedia dataset for he, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3234,6 +3328,7 @@ Wikipedia dataset for hi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3257,6 +3352,7 @@ Wikipedia dataset for hif, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3280,6 +3376,7 @@ Wikipedia dataset for ho, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3303,6 +3400,7 @@ Wikipedia dataset for hr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3326,6 +3424,7 @@ Wikipedia dataset for hsb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3349,6 +3448,7 @@ Wikipedia dataset for ht, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3372,6 +3472,7 @@ Wikipedia dataset for hu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3395,29 +3496,7 @@ Wikipedia dataset for hy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
-*   `0.0.3`: None
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hz`
-Wikipedia dataset for hz, parsed from 20190301 dump.
-
-Versions:
-
-*   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3441,6 +3520,7 @@ Wikipedia dataset for ia, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3464,6 +3544,7 @@ Wikipedia dataset for id, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3487,6 +3568,7 @@ Wikipedia dataset for ie, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3510,6 +3592,7 @@ Wikipedia dataset for ig, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3533,6 +3616,7 @@ Wikipedia dataset for ii, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3556,6 +3640,7 @@ Wikipedia dataset for ik, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3579,6 +3664,7 @@ Wikipedia dataset for ilo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3602,6 +3688,7 @@ Wikipedia dataset for inh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3625,6 +3712,7 @@ Wikipedia dataset for io, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3648,6 +3736,7 @@ Wikipedia dataset for is, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3671,6 +3760,7 @@ Wikipedia dataset for it, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3694,6 +3784,7 @@ Wikipedia dataset for iu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3717,6 +3808,7 @@ Wikipedia dataset for ja, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3740,6 +3832,7 @@ Wikipedia dataset for jam, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3763,6 +3856,7 @@ Wikipedia dataset for jbo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3786,6 +3880,7 @@ Wikipedia dataset for jv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3809,6 +3904,7 @@ Wikipedia dataset for ka, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3832,6 +3928,7 @@ Wikipedia dataset for kaa, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3855,6 +3952,7 @@ Wikipedia dataset for kab, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3878,6 +3976,7 @@ Wikipedia dataset for kbd, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3901,6 +4000,7 @@ Wikipedia dataset for kbp, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3924,6 +4024,7 @@ Wikipedia dataset for kg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3947,6 +4048,7 @@ Wikipedia dataset for ki, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3970,6 +4072,7 @@ Wikipedia dataset for kj, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -3993,6 +4096,7 @@ Wikipedia dataset for kk, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4016,6 +4120,7 @@ Wikipedia dataset for kl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4039,6 +4144,7 @@ Wikipedia dataset for km, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4062,6 +4168,7 @@ Wikipedia dataset for kn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4085,6 +4192,7 @@ Wikipedia dataset for ko, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4108,29 +4216,7 @@ Wikipedia dataset for koi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
-*   `0.0.3`: None
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kr`
-Wikipedia dataset for kr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4154,6 +4240,7 @@ Wikipedia dataset for krc, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4177,6 +4264,7 @@ Wikipedia dataset for ks, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4200,6 +4288,7 @@ Wikipedia dataset for ksh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4223,6 +4312,7 @@ Wikipedia dataset for ku, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4246,6 +4336,7 @@ Wikipedia dataset for kv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4269,6 +4360,7 @@ Wikipedia dataset for kw, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4292,6 +4384,7 @@ Wikipedia dataset for ky, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4315,6 +4408,7 @@ Wikipedia dataset for la, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4338,6 +4432,7 @@ Wikipedia dataset for lad, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4361,6 +4456,7 @@ Wikipedia dataset for lb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4384,6 +4480,7 @@ Wikipedia dataset for lbe, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4407,6 +4504,7 @@ Wikipedia dataset for lez, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4430,6 +4528,7 @@ Wikipedia dataset for lfn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4453,6 +4552,7 @@ Wikipedia dataset for lg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4476,6 +4576,7 @@ Wikipedia dataset for li, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4499,6 +4600,7 @@ Wikipedia dataset for lij, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4522,6 +4624,7 @@ Wikipedia dataset for lmo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4545,6 +4648,7 @@ Wikipedia dataset for ln, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4568,6 +4672,7 @@ Wikipedia dataset for lo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4591,6 +4696,7 @@ Wikipedia dataset for lrc, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4614,6 +4720,7 @@ Wikipedia dataset for lt, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4637,6 +4744,7 @@ Wikipedia dataset for ltg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4660,6 +4768,7 @@ Wikipedia dataset for lv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4683,6 +4792,7 @@ Wikipedia dataset for mai, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4706,6 +4816,7 @@ Wikipedia dataset for map-bms, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4729,6 +4840,7 @@ Wikipedia dataset for mdf, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4752,6 +4864,7 @@ Wikipedia dataset for mg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4775,6 +4888,7 @@ Wikipedia dataset for mh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4798,6 +4912,7 @@ Wikipedia dataset for mhr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4821,6 +4936,7 @@ Wikipedia dataset for mi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4844,6 +4960,7 @@ Wikipedia dataset for min, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4867,6 +4984,7 @@ Wikipedia dataset for mk, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4890,6 +5008,7 @@ Wikipedia dataset for ml, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4913,6 +5032,7 @@ Wikipedia dataset for mn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4936,6 +5056,7 @@ Wikipedia dataset for mr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4959,6 +5080,7 @@ Wikipedia dataset for mrj, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -4982,6 +5104,7 @@ Wikipedia dataset for ms, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5005,6 +5128,7 @@ Wikipedia dataset for mt, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5028,6 +5152,7 @@ Wikipedia dataset for mus, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5051,6 +5176,7 @@ Wikipedia dataset for mwl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5074,6 +5200,7 @@ Wikipedia dataset for my, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5097,6 +5224,7 @@ Wikipedia dataset for myv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5120,6 +5248,7 @@ Wikipedia dataset for mzn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5143,6 +5272,7 @@ Wikipedia dataset for na, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5166,6 +5296,7 @@ Wikipedia dataset for nah, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5189,6 +5320,7 @@ Wikipedia dataset for nap, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5212,6 +5344,7 @@ Wikipedia dataset for nds, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5235,6 +5368,7 @@ Wikipedia dataset for nds-nl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5258,6 +5392,7 @@ Wikipedia dataset for ne, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5281,6 +5416,7 @@ Wikipedia dataset for new, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5304,6 +5440,7 @@ Wikipedia dataset for ng, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5327,6 +5464,7 @@ Wikipedia dataset for nl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5350,6 +5488,7 @@ Wikipedia dataset for nn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5373,6 +5512,7 @@ Wikipedia dataset for no, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5396,6 +5536,7 @@ Wikipedia dataset for nov, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5419,6 +5560,7 @@ Wikipedia dataset for nrm, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5442,6 +5584,7 @@ Wikipedia dataset for nso, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5465,6 +5608,7 @@ Wikipedia dataset for nv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5488,6 +5632,7 @@ Wikipedia dataset for ny, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5511,6 +5656,7 @@ Wikipedia dataset for oc, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5534,6 +5680,7 @@ Wikipedia dataset for olo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5557,6 +5704,7 @@ Wikipedia dataset for om, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5580,6 +5728,7 @@ Wikipedia dataset for or, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5603,6 +5752,7 @@ Wikipedia dataset for os, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5626,6 +5776,7 @@ Wikipedia dataset for pa, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5649,6 +5800,7 @@ Wikipedia dataset for pag, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5672,6 +5824,7 @@ Wikipedia dataset for pam, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5695,6 +5848,7 @@ Wikipedia dataset for pap, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5718,6 +5872,7 @@ Wikipedia dataset for pcd, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5741,6 +5896,7 @@ Wikipedia dataset for pdc, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5764,6 +5920,7 @@ Wikipedia dataset for pfl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5787,6 +5944,7 @@ Wikipedia dataset for pi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5810,6 +5968,7 @@ Wikipedia dataset for pih, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5833,6 +5992,7 @@ Wikipedia dataset for pl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5856,6 +6016,7 @@ Wikipedia dataset for pms, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5879,6 +6040,7 @@ Wikipedia dataset for pnb, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5902,6 +6064,7 @@ Wikipedia dataset for pnt, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5925,6 +6088,7 @@ Wikipedia dataset for ps, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5948,6 +6112,7 @@ Wikipedia dataset for pt, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5971,6 +6136,7 @@ Wikipedia dataset for qu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -5994,6 +6160,7 @@ Wikipedia dataset for rm, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6017,6 +6184,7 @@ Wikipedia dataset for rmy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6040,6 +6208,7 @@ Wikipedia dataset for rn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6063,6 +6232,7 @@ Wikipedia dataset for ro, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6086,6 +6256,7 @@ Wikipedia dataset for roa-rup, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6109,6 +6280,7 @@ Wikipedia dataset for roa-tara, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6132,6 +6304,7 @@ Wikipedia dataset for ru, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6155,6 +6328,7 @@ Wikipedia dataset for rue, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6178,6 +6352,7 @@ Wikipedia dataset for rw, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6201,6 +6376,7 @@ Wikipedia dataset for sa, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6224,6 +6400,7 @@ Wikipedia dataset for sah, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6247,6 +6424,7 @@ Wikipedia dataset for sat, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6270,6 +6448,7 @@ Wikipedia dataset for sc, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6293,6 +6472,7 @@ Wikipedia dataset for scn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6316,6 +6496,7 @@ Wikipedia dataset for sco, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6339,6 +6520,7 @@ Wikipedia dataset for sd, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6362,6 +6544,7 @@ Wikipedia dataset for se, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6385,6 +6568,7 @@ Wikipedia dataset for sg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6408,6 +6592,7 @@ Wikipedia dataset for sh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6431,6 +6616,7 @@ Wikipedia dataset for si, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6454,6 +6640,7 @@ Wikipedia dataset for simple, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6477,6 +6664,7 @@ Wikipedia dataset for sk, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6500,6 +6688,7 @@ Wikipedia dataset for sl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6523,6 +6712,7 @@ Wikipedia dataset for sm, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6546,6 +6736,7 @@ Wikipedia dataset for sn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6569,6 +6760,7 @@ Wikipedia dataset for so, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6592,6 +6784,7 @@ Wikipedia dataset for sq, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6615,6 +6808,7 @@ Wikipedia dataset for sr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6638,6 +6832,7 @@ Wikipedia dataset for srn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6661,6 +6856,7 @@ Wikipedia dataset for ss, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6684,6 +6880,7 @@ Wikipedia dataset for st, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6707,6 +6904,7 @@ Wikipedia dataset for stq, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6730,6 +6928,7 @@ Wikipedia dataset for su, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6753,6 +6952,7 @@ Wikipedia dataset for sv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6776,6 +6976,7 @@ Wikipedia dataset for sw, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6799,6 +7000,7 @@ Wikipedia dataset for szl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6822,6 +7024,7 @@ Wikipedia dataset for ta, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6845,6 +7048,7 @@ Wikipedia dataset for tcy, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6868,6 +7072,7 @@ Wikipedia dataset for te, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6891,6 +7096,7 @@ Wikipedia dataset for tet, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6914,6 +7120,7 @@ Wikipedia dataset for tg, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6937,6 +7144,7 @@ Wikipedia dataset for th, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6960,6 +7168,7 @@ Wikipedia dataset for ti, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -6983,6 +7192,7 @@ Wikipedia dataset for tk, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7006,6 +7216,7 @@ Wikipedia dataset for tl, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7029,6 +7240,7 @@ Wikipedia dataset for tn, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7052,6 +7264,7 @@ Wikipedia dataset for to, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7075,6 +7288,7 @@ Wikipedia dataset for tpi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7098,6 +7312,7 @@ Wikipedia dataset for tr, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7121,6 +7336,7 @@ Wikipedia dataset for ts, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7144,6 +7360,7 @@ Wikipedia dataset for tt, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7167,6 +7384,7 @@ Wikipedia dataset for tum, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7190,6 +7408,7 @@ Wikipedia dataset for tw, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7213,6 +7432,7 @@ Wikipedia dataset for ty, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7236,6 +7456,7 @@ Wikipedia dataset for tyv, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7259,6 +7480,7 @@ Wikipedia dataset for udm, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7282,6 +7504,7 @@ Wikipedia dataset for ug, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7305,6 +7528,7 @@ Wikipedia dataset for uk, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7328,6 +7552,7 @@ Wikipedia dataset for ur, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7351,6 +7576,7 @@ Wikipedia dataset for uz, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7374,6 +7600,7 @@ Wikipedia dataset for ve, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7397,6 +7624,7 @@ Wikipedia dataset for vec, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7420,6 +7648,7 @@ Wikipedia dataset for vep, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7443,6 +7672,7 @@ Wikipedia dataset for vi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7466,6 +7696,7 @@ Wikipedia dataset for vls, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7489,6 +7720,7 @@ Wikipedia dataset for vo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7512,6 +7744,7 @@ Wikipedia dataset for wa, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7535,6 +7768,7 @@ Wikipedia dataset for war, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7558,6 +7792,7 @@ Wikipedia dataset for wo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7581,6 +7816,7 @@ Wikipedia dataset for wuu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7604,6 +7840,7 @@ Wikipedia dataset for xal, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7627,6 +7864,7 @@ Wikipedia dataset for xh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7650,6 +7888,7 @@ Wikipedia dataset for xmf, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7673,6 +7912,7 @@ Wikipedia dataset for yi, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7696,6 +7936,7 @@ Wikipedia dataset for yo, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7719,6 +7960,7 @@ Wikipedia dataset for za, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7742,6 +7984,7 @@ Wikipedia dataset for zea, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7765,6 +8008,7 @@ Wikipedia dataset for zh, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7788,6 +8032,7 @@ Wikipedia dataset for zh-classical, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7811,6 +8056,7 @@ Wikipedia dataset for zh-min-nan, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7834,6 +8080,7 @@ Wikipedia dataset for zh-yue, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics
@@ -7857,6 +8104,7 @@ Wikipedia dataset for zu, parsed from 20190301 dump.
 Versions:
 
 *   **`0.0.4`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   `0.0.3`: None
 
 ### Statistics

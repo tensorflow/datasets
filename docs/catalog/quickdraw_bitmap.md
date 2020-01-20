@@ -46,7 +46,7 @@ TRAIN | 50,426,266
 *   [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
 ```

@@ -41,7 +41,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
-    'attrs',
+    'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
@@ -86,8 +86,10 @@ DATASET_FILES = [
     'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
     'image/food-101_classes.txt',
+    'image/imagenet_resized_labels.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/imagenette_labels.txt',
     'image/inaturalist_labels.txt',
     'image/inaturalist_supercategories.txt',
     'image/open_images_classes_all.txt',
@@ -100,6 +102,7 @@ DATASET_FILES = [
     'image/sun397_tfds_te.txt',
     'image/sun397_tfds_tr.txt',
     'image/sun397_tfds_va.txt',
+    'image/vgg_face2_labels.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
@@ -130,12 +133,20 @@ DATASET_EXTRAS = {
     'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'lsun': ['tensorflow-io'],
 }
 
 
+# Those datasets have dependencies which conflict with the rest of TFDS, so
+# running them in an isolated environements.
+# See `./oss_scripts/oss_tests.sh` for the isolated test.
+ISOLATED_DATASETS = ('nsynth', 'lsun')
+
 # Extra dataset deps are required for the tests
 all_dataset_extras = list(itertools.chain.from_iterable(
-    deps for ds_name, deps in DATASET_EXTRAS.items() if ds_name != 'nsynth'))
+    deps for ds_name, deps in DATASET_EXTRAS.items()
+    if ds_name not in ISOLATED_DATASETS
+))
 
 
 EXTRAS_REQUIRE = {
@@ -146,9 +157,6 @@ EXTRAS_REQUIRE = {
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
     'tests': TESTS_REQUIRE + all_dataset_extras,
-    # Nsynth is run in isolation, installed and run in
-    # ./oss_scripts/oss_tests.sh.
-    'tests_nsynth': TESTS_REQUIRE + DATASET_EXTRAS['nsynth'],
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 

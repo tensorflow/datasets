@@ -2,6 +2,4 @@ id,split
 bass_synthetic_033-100-100,train
 bass_synthetic_033-100-127,valid
 bass_synthetic_033-103-127,train
-bass_synthetic_033-104-025,valid
-bass_synthetic_033-105-075,train
 bass_synthetic_033-107-100,test

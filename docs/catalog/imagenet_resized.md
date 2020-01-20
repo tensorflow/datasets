@@ -125,7 +125,7 @@ FeaturesDict({
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `imagenet_resized/16x16`
 
@@ -169,7 +169,7 @@ FeaturesDict({
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `imagenet_resized/32x32`
 
@@ -213,7 +213,7 @@ FeaturesDict({
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `imagenet_resized/64x64`
 
@@ -257,7 +257,7 @@ FeaturesDict({
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
 ```

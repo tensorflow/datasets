@@ -77,7 +77,7 @@ FeaturesDict({
 *   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'headline')`
+`('text', 'headline')`
 
 ## `wikihow/sep`
 use each paragraph and its summary.
@@ -116,7 +116,7 @@ FeaturesDict({
 *   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'headline')`
+`('text', 'headline')`
 
 ## Citation
 ```

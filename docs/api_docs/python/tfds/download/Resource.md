@@ -8,7 +8,7 @@
 
 # tfds.download.Resource
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -16,9 +16,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `Resource`
 
-<!-- Start diff -->
 Represents a resource to download, extract, or both.
 
 <!-- Placeholder for "Used in" -->

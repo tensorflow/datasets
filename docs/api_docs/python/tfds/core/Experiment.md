@@ -7,7 +7,7 @@
 
 # tfds.core.Experiment
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -15,9 +15,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `Experiment`
 
-<!-- Start diff -->
 Experiments which can be enabled/disabled on a per version basis.
 
 <!-- Placeholder for "Used in" -->

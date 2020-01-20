@@ -65,4 +65,3 @@ dependencies.
 Requires function to be called using keyword arguments.
 
 [`get_tfds_path(...)`](../tfds/core/get_tfds_path.md): Returns absolute path to file given path relative to tfds root.
-

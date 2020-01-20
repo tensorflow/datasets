@@ -10,7 +10,7 @@
 
 # tfds.decode.SkipDecoding
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -18,9 +18,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `SkipDecoding`
 
-<!-- Start diff -->
 Transformation which skip the decoding entirelly.
 
 Inherits From: [`Decoder`](../../tfds/decode/Decoder.md)
@@ -51,9 +51,13 @@ source</a>
 __init__()
 ```
 
+Initialize self. See help(type(self)) for accurate signature.
+
 ## Properties
 
 <h3 id="dtype"><code>dtype</code></h3>
+
+Returns the `dtype` after decoding.
 
 ## Methods
 

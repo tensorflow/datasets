@@ -117,7 +117,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'bg')`
+`('en', 'bg')`
 
 ## `para_crawl/encs_plain_text`
 Translation dataset from English to cs, uses encoder plain_text.
@@ -147,7 +147,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'cs')`
+`('en', 'cs')`
 
 ## `para_crawl/enda_plain_text`
 Translation dataset from English to da, uses encoder plain_text.
@@ -177,7 +177,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'da')`
+`('en', 'da')`
 
 ## `para_crawl/ende_plain_text`
 Translation dataset from English to de, uses encoder plain_text.
@@ -207,7 +207,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'de')`
+`('en', 'de')`
 
 ## `para_crawl/enel_plain_text`
 Translation dataset from English to el, uses encoder plain_text.
@@ -237,7 +237,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'el')`
+`('en', 'el')`
 
 ## `para_crawl/enes_plain_text`
 Translation dataset from English to es, uses encoder plain_text.
@@ -267,7 +267,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'es')`
+`('en', 'es')`
 
 ## `para_crawl/enet_plain_text`
 Translation dataset from English to et, uses encoder plain_text.
@@ -297,7 +297,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'et')`
+`('en', 'et')`
 
 ## `para_crawl/enfi_plain_text`
 Translation dataset from English to fi, uses encoder plain_text.
@@ -327,7 +327,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'fi')`
+`('en', 'fi')`
 
 ## `para_crawl/enfr_plain_text`
 Translation dataset from English to fr, uses encoder plain_text.
@@ -357,7 +357,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'fr')`
+`('en', 'fr')`
 
 ## `para_crawl/enga_plain_text`
 Translation dataset from English to ga, uses encoder plain_text.
@@ -387,7 +387,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'ga')`
+`('en', 'ga')`
 
 ## `para_crawl/enhr_plain_text`
 Translation dataset from English to hr, uses encoder plain_text.
@@ -417,7 +417,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'hr')`
+`('en', 'hr')`
 
 ## `para_crawl/enhu_plain_text`
 Translation dataset from English to hu, uses encoder plain_text.
@@ -447,7 +447,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'hu')`
+`('en', 'hu')`
 
 ## `para_crawl/enit_plain_text`
 Translation dataset from English to it, uses encoder plain_text.
@@ -477,7 +477,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'it')`
+`('en', 'it')`
 
 ## `para_crawl/enlt_plain_text`
 Translation dataset from English to lt, uses encoder plain_text.
@@ -507,7 +507,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'lt')`
+`('en', 'lt')`
 
 ## `para_crawl/enlv_plain_text`
 Translation dataset from English to lv, uses encoder plain_text.
@@ -537,7 +537,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'lv')`
+`('en', 'lv')`
 
 ## `para_crawl/enmt_plain_text`
 Translation dataset from English to mt, uses encoder plain_text.
@@ -567,7 +567,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'mt')`
+`('en', 'mt')`
 
 ## `para_crawl/ennl_plain_text`
 Translation dataset from English to nl, uses encoder plain_text.
@@ -597,7 +597,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'nl')`
+`('en', 'nl')`
 
 ## `para_crawl/enpl_plain_text`
 Translation dataset from English to pl, uses encoder plain_text.
@@ -627,7 +627,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'pl')`
+`('en', 'pl')`
 
 ## `para_crawl/enpt_plain_text`
 Translation dataset from English to pt, uses encoder plain_text.
@@ -657,7 +657,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'pt')`
+`('en', 'pt')`
 
 ## `para_crawl/enro_plain_text`
 Translation dataset from English to ro, uses encoder plain_text.
@@ -687,7 +687,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'ro')`
+`('en', 'ro')`
 
 ## `para_crawl/ensk_plain_text`
 Translation dataset from English to sk, uses encoder plain_text.
@@ -717,7 +717,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'sk')`
+`('en', 'sk')`
 
 ## `para_crawl/ensl_plain_text`
 Translation dataset from English to sl, uses encoder plain_text.
@@ -747,7 +747,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'sl')`
+`('en', 'sl')`
 
 ## `para_crawl/ensv_plain_text`
 Translation dataset from English to sv, uses encoder plain_text.
@@ -777,7 +777,7 @@ Translation({
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'en', u'sv')`
+`('en', 'sv')`
 
 ## Citation
 ```

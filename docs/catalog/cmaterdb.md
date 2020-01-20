@@ -64,7 +64,7 @@ FeaturesDict({
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cmaterdb/devanagari`
 CMATERdb Devangari Numerals
@@ -94,7 +94,7 @@ FeaturesDict({
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cmaterdb/telugu`
 CMATERdb Telugu Numerals
@@ -124,7 +124,7 @@ FeaturesDict({
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
 

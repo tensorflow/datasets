@@ -10,7 +10,7 @@
 
 # tfds.Split
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -18,9 +18,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `Split`
 
-<!-- Start diff -->
 `Enum` for dataset splits.
 
 <!-- Placeholder for "Used in" -->

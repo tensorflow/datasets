@@ -336,7 +336,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/brightness_2`
 Corruption method: brightness, severity level: 2
@@ -366,7 +366,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/brightness_3`
 Corruption method: brightness, severity level: 3
@@ -396,7 +396,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/brightness_4`
 Corruption method: brightness, severity level: 4
@@ -426,7 +426,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/brightness_5`
 Corruption method: brightness, severity level: 5
@@ -456,7 +456,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/contrast_1`
 Corruption method: contrast, severity level: 1
@@ -486,7 +486,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/contrast_2`
 Corruption method: contrast, severity level: 2
@@ -516,7 +516,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/contrast_3`
 Corruption method: contrast, severity level: 3
@@ -546,7 +546,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/contrast_4`
 Corruption method: contrast, severity level: 4
@@ -576,7 +576,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/contrast_5`
 Corruption method: contrast, severity level: 5
@@ -606,7 +606,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_1`
 Corruption method: defocus_blur, severity level: 1
@@ -636,7 +636,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_2`
 Corruption method: defocus_blur, severity level: 2
@@ -666,7 +666,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_3`
 Corruption method: defocus_blur, severity level: 3
@@ -696,7 +696,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_4`
 Corruption method: defocus_blur, severity level: 4
@@ -726,7 +726,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/defocus_blur_5`
 Corruption method: defocus_blur, severity level: 5
@@ -756,7 +756,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/elastic_1`
 Corruption method: elastic, severity level: 1
@@ -786,7 +786,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/elastic_2`
 Corruption method: elastic, severity level: 2
@@ -816,7 +816,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/elastic_3`
 Corruption method: elastic, severity level: 3
@@ -846,7 +846,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/elastic_4`
 Corruption method: elastic, severity level: 4
@@ -876,7 +876,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/elastic_5`
 Corruption method: elastic, severity level: 5
@@ -906,7 +906,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/fog_1`
 Corruption method: fog, severity level: 1
@@ -936,7 +936,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/fog_2`
 Corruption method: fog, severity level: 2
@@ -966,7 +966,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/fog_3`
 Corruption method: fog, severity level: 3
@@ -996,7 +996,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/fog_4`
 Corruption method: fog, severity level: 4
@@ -1026,7 +1026,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/fog_5`
 Corruption method: fog, severity level: 5
@@ -1056,7 +1056,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frost_1`
 Corruption method: frost, severity level: 1
@@ -1086,7 +1086,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frost_2`
 Corruption method: frost, severity level: 2
@@ -1116,7 +1116,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frost_3`
 Corruption method: frost, severity level: 3
@@ -1146,7 +1146,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frost_4`
 Corruption method: frost, severity level: 4
@@ -1176,7 +1176,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frost_5`
 Corruption method: frost, severity level: 5
@@ -1206,7 +1206,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_1`
 Corruption method: frosted_glass_blur, severity level: 1
@@ -1236,7 +1236,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_2`
 Corruption method: frosted_glass_blur, severity level: 2
@@ -1266,7 +1266,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_3`
 Corruption method: frosted_glass_blur, severity level: 3
@@ -1296,7 +1296,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_4`
 Corruption method: frosted_glass_blur, severity level: 4
@@ -1326,7 +1326,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/frosted_glass_blur_5`
 Corruption method: frosted_glass_blur, severity level: 5
@@ -1356,7 +1356,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_1`
 Corruption method: gaussian_blur, severity level: 1
@@ -1386,7 +1386,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_2`
 Corruption method: gaussian_blur, severity level: 2
@@ -1416,7 +1416,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_3`
 Corruption method: gaussian_blur, severity level: 3
@@ -1446,7 +1446,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_4`
 Corruption method: gaussian_blur, severity level: 4
@@ -1476,7 +1476,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_blur_5`
 Corruption method: gaussian_blur, severity level: 5
@@ -1506,7 +1506,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_1`
 Corruption method: gaussian_noise, severity level: 1
@@ -1536,7 +1536,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_2`
 Corruption method: gaussian_noise, severity level: 2
@@ -1566,7 +1566,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_3`
 Corruption method: gaussian_noise, severity level: 3
@@ -1596,7 +1596,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_4`
 Corruption method: gaussian_noise, severity level: 4
@@ -1626,7 +1626,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/gaussian_noise_5`
 Corruption method: gaussian_noise, severity level: 5
@@ -1656,7 +1656,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_1`
 Corruption method: impulse_noise, severity level: 1
@@ -1686,7 +1686,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_2`
 Corruption method: impulse_noise, severity level: 2
@@ -1716,7 +1716,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_3`
 Corruption method: impulse_noise, severity level: 3
@@ -1746,7 +1746,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_4`
 Corruption method: impulse_noise, severity level: 4
@@ -1776,7 +1776,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/impulse_noise_5`
 Corruption method: impulse_noise, severity level: 5
@@ -1806,7 +1806,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_1`
 Corruption method: jpeg_compression, severity level: 1
@@ -1836,7 +1836,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_2`
 Corruption method: jpeg_compression, severity level: 2
@@ -1866,7 +1866,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_3`
 Corruption method: jpeg_compression, severity level: 3
@@ -1896,7 +1896,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_4`
 Corruption method: jpeg_compression, severity level: 4
@@ -1926,7 +1926,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/jpeg_compression_5`
 Corruption method: jpeg_compression, severity level: 5
@@ -1956,7 +1956,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_1`
 Corruption method: motion_blur, severity level: 1
@@ -1986,7 +1986,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_2`
 Corruption method: motion_blur, severity level: 2
@@ -2016,7 +2016,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_3`
 Corruption method: motion_blur, severity level: 3
@@ -2046,7 +2046,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_4`
 Corruption method: motion_blur, severity level: 4
@@ -2076,7 +2076,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/motion_blur_5`
 Corruption method: motion_blur, severity level: 5
@@ -2106,7 +2106,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_1`
 Corruption method: pixelate, severity level: 1
@@ -2136,7 +2136,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_2`
 Corruption method: pixelate, severity level: 2
@@ -2166,7 +2166,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_3`
 Corruption method: pixelate, severity level: 3
@@ -2196,7 +2196,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_4`
 Corruption method: pixelate, severity level: 4
@@ -2226,7 +2226,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/pixelate_5`
 Corruption method: pixelate, severity level: 5
@@ -2256,7 +2256,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/saturate_1`
 Corruption method: saturate, severity level: 1
@@ -2286,7 +2286,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/saturate_2`
 Corruption method: saturate, severity level: 2
@@ -2316,7 +2316,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/saturate_3`
 Corruption method: saturate, severity level: 3
@@ -2346,7 +2346,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/saturate_4`
 Corruption method: saturate, severity level: 4
@@ -2376,7 +2376,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/saturate_5`
 Corruption method: saturate, severity level: 5
@@ -2406,7 +2406,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_1`
 Corruption method: shot_noise, severity level: 1
@@ -2436,7 +2436,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_2`
 Corruption method: shot_noise, severity level: 2
@@ -2466,7 +2466,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_3`
 Corruption method: shot_noise, severity level: 3
@@ -2496,7 +2496,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_4`
 Corruption method: shot_noise, severity level: 4
@@ -2526,7 +2526,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/shot_noise_5`
 Corruption method: shot_noise, severity level: 5
@@ -2556,7 +2556,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/snow_1`
 Corruption method: snow, severity level: 1
@@ -2586,7 +2586,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/snow_2`
 Corruption method: snow, severity level: 2
@@ -2616,7 +2616,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/snow_3`
 Corruption method: snow, severity level: 3
@@ -2646,7 +2646,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/snow_4`
 Corruption method: snow, severity level: 4
@@ -2676,7 +2676,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/snow_5`
 Corruption method: snow, severity level: 5
@@ -2706,7 +2706,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/spatter_1`
 Corruption method: spatter, severity level: 1
@@ -2736,7 +2736,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/spatter_2`
 Corruption method: spatter, severity level: 2
@@ -2766,7 +2766,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/spatter_3`
 Corruption method: spatter, severity level: 3
@@ -2796,7 +2796,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/spatter_4`
 Corruption method: spatter, severity level: 4
@@ -2826,7 +2826,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/spatter_5`
 Corruption method: spatter, severity level: 5
@@ -2856,7 +2856,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_1`
 Corruption method: speckle_noise, severity level: 1
@@ -2886,7 +2886,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_2`
 Corruption method: speckle_noise, severity level: 2
@@ -2916,7 +2916,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_3`
 Corruption method: speckle_noise, severity level: 3
@@ -2946,7 +2946,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_4`
 Corruption method: speckle_noise, severity level: 4
@@ -2976,7 +2976,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/speckle_noise_5`
 Corruption method: speckle_noise, severity level: 5
@@ -3006,7 +3006,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_1`
 Corruption method: zoom_blur, severity level: 1
@@ -3036,7 +3036,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_2`
 Corruption method: zoom_blur, severity level: 2
@@ -3066,7 +3066,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_3`
 Corruption method: zoom_blur, severity level: 3
@@ -3096,7 +3096,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_4`
 Corruption method: zoom_blur, severity level: 4
@@ -3126,7 +3126,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `cifar10_corrupted/zoom_blur_5`
 Corruption method: zoom_blur, severity level: 5
@@ -3156,7 +3156,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
 ```

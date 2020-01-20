@@ -5,7 +5,7 @@
 
 # tfds.disable_progress_bar
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,7 +13,7 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/tqdm_utils.py">View
 source</a>
 
-<!-- Start diff -->
+<!-- Equality marker -->
 Disabled Tqdm progress bar.
 
 ```python

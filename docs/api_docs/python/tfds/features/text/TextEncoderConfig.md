@@ -6,7 +6,7 @@
 
 # tfds.features.text.TextEncoderConfig
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -14,9 +14,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `TextEncoderConfig`
-
-<!-- Start diff -->
 
 Configuration for
 <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
@@ -37,3 +36,5 @@ __init__(
     name=None
 )
 ```
+
+Initialize self. See help(type(self)) for accurate signature.

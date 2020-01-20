@@ -16,6 +16,8 @@
 """Text datasets."""
 
 from tensorflow_datasets.text.c4 import C4
+from tensorflow_datasets.text.civil_comments import CivilComments
+from tensorflow_datasets.text.cos_e import CosE
 from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
 from tensorflow_datasets.text.esnli import Esnli
 from tensorflow_datasets.text.gap import Gap
@@ -25,8 +27,10 @@ from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.math_dataset import MathDataset
+from tensorflow_datasets.text.movie_rationales import MovieRationales
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
+from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad import Squad

@@ -22,7 +22,7 @@ the pre-processed dataset as .tfrecord file
 
 ```python
 return TFRecordExampleAdapter({
-    "x": tf.FixedLenFeature(tuple(), tf.int64)
+    "x": tf.io.FixedLenFeature(tuple(), tf.int64)
 })
 ```
 
@@ -31,4 +31,3 @@ return TFRecordExampleAdapter({
 [`class FileFormatAdapter`](../tfds/file_adapter/FileFormatAdapter.md): Provides writing and reading methods for a file format.
 
 [`class TFRecordExampleAdapter`](../tfds/file_adapter/TFRecordExampleAdapter.md): Writes/Reads serialized Examples protos to/from TFRecord files.
-

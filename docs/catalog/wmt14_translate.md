@@ -86,7 +86,7 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'cs', u'en')`
+`('cs', 'en')`
 
 ## `wmt14_translate/de-en`
 WMT 2014 de-en translation task dataset.
@@ -123,7 +123,7 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+`('de', 'en')`
 
 ## `wmt14_translate/fr-en`
 WMT 2014 fr-en translation task dataset.
@@ -160,7 +160,7 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'en')`
+`('fr', 'en')`
 
 ## `wmt14_translate/hi-en`
 WMT 2014 hi-en translation task dataset.
@@ -197,7 +197,7 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'hi', u'en')`
+`('hi', 'en')`
 
 ## `wmt14_translate/ru-en`
 WMT 2014 ru-en translation task dataset.
@@ -234,7 +234,7 @@ Translation({
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+`('ru', 'en')`
 
 ## Citation
 ```

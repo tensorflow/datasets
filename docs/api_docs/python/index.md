@@ -4,6 +4,7 @@
 
 *   <a href="./tfds.md"><code>tfds</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>
+*   <a href="./tfds/ReadConfig.md"><code>tfds.ReadConfig</code></a>
 *   <a href="./tfds/Split.md"><code>tfds.Split</code></a>
 *   <a href="./tfds/as_numpy.md"><code>tfds.as_numpy</code></a>
 *   <a href="./tfds/builder.md"><code>tfds.builder</code></a>

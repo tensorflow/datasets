@@ -88,7 +88,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/a`
 Patents under Cooperative Patent Classification (CPC)a: Human Necessities
@@ -119,7 +119,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/b`
 
@@ -152,7 +152,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/c`
 Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
@@ -183,7 +183,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/d`
 Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
@@ -214,7 +214,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/e`
 Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
@@ -245,7 +245,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/f`
 
@@ -278,7 +278,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/g`
 Patents under Cooperative Patent Classification (CPC)g: Physics
@@ -309,7 +309,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/h`
 Patents under Cooperative Patent Classification (CPC)h: Electricity
@@ -340,7 +340,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## `big_patent/y`
 
@@ -373,7 +373,7 @@ FeaturesDict({
 *   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+`('description', 'abstract')`
 
 ## Citation
 ```

@@ -9,7 +9,7 @@
 
 # tfds.core.ReadInstruction
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -17,9 +17,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/tfrecords_reader.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `ReadInstruction`
 
-<!-- Start diff -->
 Reading instruction for a dataset.
 
 <!-- Placeholder for "Used in" -->
