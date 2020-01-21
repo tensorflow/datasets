@@ -34,7 +34,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `DatasetInfo`
 
 Information about a dataset.

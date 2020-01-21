@@ -15,7 +15,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `Experiment`
 
 Experiments which can be enabled/disabled on a per version basis.

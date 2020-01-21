@@ -18,7 +18,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `FileFormatAdapter`
 
 Provides writing and reading methods for a file format.

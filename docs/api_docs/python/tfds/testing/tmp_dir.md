@@ -10,7 +10,6 @@
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
-<!-- Equality marker -->
 Context manager for a temporary directory.
 
 ``` python

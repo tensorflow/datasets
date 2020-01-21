@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/gcs_utils.py">View
 source</a>
 
-<!-- Equality marker -->
 If the dataset is available on the GCS bucket gs://tfds-data/datasets.
 
 ```python

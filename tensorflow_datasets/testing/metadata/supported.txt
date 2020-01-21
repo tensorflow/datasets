@@ -350,6 +350,7 @@ colorectal_histology/0.0.1
 colorectal_histology/2.0.0
 colorectal_histology_large/0.0.1
 colorectal_histology_large/2.0.0
+cos_e/0.0.1
 curated_breast_imaging_ddsm/original-calc/0.1.0
 curated_breast_imaging_ddsm/original-calc/2.0.0
 curated_breast_imaging_ddsm/original-mass/0.1.0

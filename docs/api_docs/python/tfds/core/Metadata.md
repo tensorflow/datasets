@@ -27,7 +27,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `Metadata`
 
 Abstract base class for DatasetInfo metadata container.

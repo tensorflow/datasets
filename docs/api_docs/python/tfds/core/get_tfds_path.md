@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py">View
 source</a>
 
-<!-- Equality marker -->
 Returns absolute path to file given path relative to tfds root.
 
 ``` python

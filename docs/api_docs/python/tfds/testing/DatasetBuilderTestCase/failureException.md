@@ -12,7 +12,6 @@
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
-<!-- Equality marker -->
 ## Class `failureException`
 
 Assertion failed.

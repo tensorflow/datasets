@@ -27,7 +27,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `GeneratorBasedBuilder`
 
 Base class for datasets with data generation based on dict generators.

@@ -21,7 +21,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `ExtractMethod`
 
 The extraction method to use to pre-process a downloaded file.

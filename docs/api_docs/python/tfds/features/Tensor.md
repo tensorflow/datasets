@@ -24,7 +24,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `Tensor`
 
 `FeatureConnector` for generic data of arbitrary shape and type.

@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="cos_e" />
   <meta itemprop="description" content="&#10;Common Sense Explanations (CoS-E) allows for training language models to&#10;automatically generate explanations that can be used during training and&#10;inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('cos_e', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cos_e" />
   <meta itemprop="sameAs" content="https://github.com/salesforce/cos-e" />
   <meta itemprop="citation" content="&#10;@inproceedings{rajani2019explain,&#10;     title = &quot;Explain Yourself! Leveraging Language models for Commonsense Reasoning&quot;,&#10;    author = &quot;Rajani, Nazneen Fatema  and&#10;      McCann, Bryan  and&#10;      Xiong, Caiming  and&#10;      Socher, Richard&quot;,&#10;      year=&quot;2019&quot;,&#10;    booktitle = &quot;Proceedings of the 2019 Conference of the Association for Computational Linguistics (ACL2019)&quot;,&#10;    url =&quot;https://arxiv.org/abs/1906.02361&quot;&#10;}&#10;" />
 </div>
-
 # `cos_e`
 
 Common Sense Explanations (CoS-E) allows for training language models to
@@ -25,10 +23,9 @@ inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
     *   **`0.0.1`** (default):
 
-*   Size: `?? GiB`
+*   Size: `6.23 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'abstractive_explanation': Text(shape=(), dtype=tf.string),
@@ -42,14 +39,17 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split      | Examples
+:--------- | -------:
+ALL        | 10,962
+TRAIN      | 9,741
+VALIDATION | 1,221
 
 ## Homepage
 
 *   [https://github.com/salesforce/cos-e](https://github.com/salesforce/cos-e)
 
 ## Citation
-
 ```
 @inproceedings{rajani2019explain,
      title = "Explain Yourself! Leveraging Language models for Commonsense Reasoning",

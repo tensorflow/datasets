@@ -31,7 +31,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `FeaturesDict`
 
 Composite `FeatureConnector`; each feature in `dict` has its own connector.

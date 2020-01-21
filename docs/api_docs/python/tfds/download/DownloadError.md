@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/downloader.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `DownloadError`
 
 Common base class for all non-exit exceptions.

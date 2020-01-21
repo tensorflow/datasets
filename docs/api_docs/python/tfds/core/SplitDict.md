@@ -32,7 +32,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `SplitDict`
 
 Split info object.

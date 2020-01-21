@@ -17,7 +17,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/tfrecords_reader.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `ReadInstruction`
 
 Reading instruction for a dataset.

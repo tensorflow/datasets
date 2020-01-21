@@ -16,7 +16,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `GenerateMode`
 
 `Enum` for how to treat pre-existing downloads and data.

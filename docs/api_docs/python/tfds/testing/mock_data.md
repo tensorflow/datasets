@@ -10,7 +10,6 @@
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
-<!-- Equality marker -->
 Mock tfds to generate random data.
 
 ```python

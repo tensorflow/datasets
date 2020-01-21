@@ -20,7 +20,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/read_config.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `ReadConfig`
 
 Configures input reading pipeline.

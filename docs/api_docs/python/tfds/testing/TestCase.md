@@ -145,7 +145,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `TestCase`
 
 Base TestCase to be used for all tests.

@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py">View
 source</a>
 
-<!-- Equality marker -->
 Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
 ``` python

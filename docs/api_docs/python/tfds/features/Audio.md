@@ -24,7 +24,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py">View
 source</a>
 
-<!-- Equality marker -->
 ## Class `Audio`
 
 `FeatureConnector` for audio, encoded as raw integer wave form.
