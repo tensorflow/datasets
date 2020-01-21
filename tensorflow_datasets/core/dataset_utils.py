@@ -191,6 +191,16 @@ def as_numpy(dataset, graph=None):
   In TF 1 (i.e. graph mode), `tf.RaggedTensor`s are returned as
   `tf.ragged.RaggedTensorValue`s.
 
+  Example:
+
+  ```
+  ds = tfds.load(name="mnist", split="train")
+  ds_numpy = tfds.as_numpy(ds)  # Convert `tf.data.Dataset` to Python generator
+  for ex in ds_numpy:
+    # `{'image': np.array(shape=(28, 28, 1)), 'labels': np.array(shape=())}`
+    print(ex)
+  ```
+
   Args:
     dataset: a possibly nested structure of `tf.data.Dataset`s and/or
       `tf.Tensor`s.
