@@ -98,7 +98,7 @@ This line looks like it has three sentences...but it's actually just 1."""
     self.assertEqual(None, clean_en)
     self.assertEqual({
         "lines-valid": 2,
-        "filtered-url-toofewsentences": 1
+        "filtered-page-toofewsentences": 1
     }, dict(counters))
 
   def test_clean_page_squigglybracket(self):
@@ -114,7 +114,7 @@ fn foo(a) { bar = a + 10; }."""
     })
     self.assertEqual(None, clean_en)
     self.assertEqual({
-        "filtered-url-squigglybracket": 1,
+        "filtered-page-squigglybracket": 1,
         "lines-valid": 3
     }, dict(counters))
 
@@ -130,7 +130,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
         "timestamp": FAKE_TIMESTAMP
     })
     self.assertEqual(None, clean_en)
-    self.assertEqual({"filtered-url-loremipsum": 1}, dict(counters))
+    self.assertEqual({"filtered-page-loremipsum": 1}, dict(counters))
 
   def test_clean_page_badwords(self):
     padding_text = """This page starts out with some text.
@@ -155,15 +155,15 @@ But then, all of a sudden, there's a badword... or not?
         },
         {
             "lines-valid": 3,
-            "filtered-url-badword": 1
+            "filtered-page-badword": 1
         },
         {
             "lines-valid": 3,
-            "filtered-url-badword": 1
+            "filtered-page-badword": 1
         },
         {
             "lines-valid": 3,
-            "filtered-url-badword": 1
+            "filtered-page-badword": 1
         },
     ]
     for final_sentence, output_should_be_none, expected_counter in zip(
