@@ -66,14 +66,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         ),
     ]
 
-  def _build_pcollection(self, pipeline, num_examples):
-    """Generate examples as dicts."""
-    examples = (
-        pipeline
-        | beam.Create(range(num_examples))
-        | beam.Map(_gen_example)
-    )
-
+  def _compute_metadata(self, examples, num_examples):
     self.info.metadata["label_sum_%d" % num_examples] = (
         examples
         | beam.Map(lambda x: x[1]["label"])
@@ -83,6 +76,14 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         | beam.Map(lambda x: x[1]["id"])
         | beam.CombineGlobally(beam.combiners.MeanCombineFn()))
 
+  def _build_pcollection(self, pipeline, num_examples):
+    """Generate examples as dicts."""
+    examples = (
+        pipeline
+        | beam.Create(range(num_examples))
+        | beam.Map(_gen_example)
+    )
+    self._compute_metadata(examples, num_examples)
     return examples
 
 
@@ -92,6 +93,36 @@ def _gen_example(x):
       "label": x % 2,
       "id": x,
   })
+
+
+class CommonPipelineDummyBeamDataset(DummyBeamDataset):
+
+  def _split_generators(self, dl_manager, pipeline):
+    del dl_manager
+
+    examples = (
+        pipeline
+        | beam.Create(range(1000))
+        | beam.Map(_gen_example)
+    )
+
+    return [
+        splits_lib.SplitGenerator(
+            name=splits_lib.Split.TRAIN,
+            gen_kwargs=dict(examples=examples, num_examples=1000),
+        ),
+        splits_lib.SplitGenerator(
+            name=splits_lib.Split.TEST,
+            gen_kwargs=dict(examples=examples, num_examples=725),
+        ),
+    ]
+
+  def _build_pcollection(self, pipeline, examples, num_examples):
+    """Generate examples as dicts."""
+    del pipeline
+    examples |= beam.Filter(lambda x: x[0] < num_examples)
+    self._compute_metadata(examples, num_examples)
+    return examples
 
 
 class FaultyS3DummyBeamDataset(DummyBeamDataset):
@@ -107,24 +138,24 @@ class BeamBasedBuilderTest(testing.TestCase):
       with self.assertRaisesWithPredicateMatch(ValueError, "no Beam Runner"):
         builder.download_and_prepare()
 
-  def _assertBeamGeneration(self, dl_config):
+  def _assertBeamGeneration(self, dl_config, dataset_cls, dataset_name):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyBeamDataset(data_dir=tmp_dir)
+      builder = dataset_cls(data_dir=tmp_dir)
       builder.download_and_prepare(download_config=dl_config)
 
-      data_dir = os.path.join(tmp_dir, "dummy_beam_dataset", "1.0.0")
+      data_dir = os.path.join(tmp_dir, dataset_name, "1.0.0")
       self.assertEqual(data_dir, builder._data_dir)
 
       # Check number of shards
       self._assertShards(
           data_dir,
-          pattern="dummy_beam_dataset-test.tfrecord-{:05}-of-{:05}",
+          pattern="%s-test.tfrecord-{:05}-of-{:05}" % dataset_name,
           # Liquid sharding is not guaranteed to always use the same number.
           num_shards=builder.info.splits["test"].num_shards,
       )
       self._assertShards(
           data_dir,
-          pattern="dummy_beam_dataset-train.tfrecord-{:05}-of-{:05}",
+          pattern="%s-train.tfrecord-{:05}-of-{:05}" % dataset_name,
           num_shards=1,
       )
 
@@ -177,7 +208,11 @@ class BeamBasedBuilderTest(testing.TestCase):
     dl_config = self._get_dl_config_if_need_to_run()
     if not dl_config:
       return
-    self._assertBeamGeneration(dl_config)
+    self._assertBeamGeneration(
+        dl_config, DummyBeamDataset, "dummy_beam_dataset")
+    self._assertBeamGeneration(
+        dl_config, CommonPipelineDummyBeamDataset,
+        "common_pipeline_dummy_beam_dataset")
 
 
 if __name__ == "__main__":
