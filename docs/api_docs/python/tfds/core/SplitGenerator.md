@@ -30,9 +30,10 @@ of usage.
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
-``` python
+```python
 __init__(
     name,
+    num_shards=1,
     gen_kwargs=None
 )
 ```
