@@ -116,12 +116,12 @@ class WikipediaConfig(tfds.core.BuilderConfig):
 
 
 _VERSION = tfds.core.Version(
-    "0.0.4", experiments={tfds.core.Experiment.S3: False},
-    tfds_version_to_prepare="f567c68af2e9ea39fe866ada8c92aef3b6dba613")
+    "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
 _SUPPORTED_VERSIONS = [
     tfds.core.Version(
-        "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+        "0.0.4", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="f567c68af2e9ea39fe866ada8c92aef3b6dba613"),
     tfds.core.Version(
         "0.0.3", experiments={tfds.core.Experiment.S3: False},
         tfds_version_to_prepare="ec93f3121369716b5d0a3b076d9e080602959b2a"),
