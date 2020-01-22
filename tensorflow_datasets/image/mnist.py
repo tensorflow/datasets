@@ -95,10 +95,11 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0", "S3: www.tensorflow.org/datasets/splits"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -171,9 +172,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 class FashionMNIST(MNIST):
   URL = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/"
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-
   # TODO(afrozm): Try to inherit from MNIST's _info and mutate things as needed.
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -200,9 +198,6 @@ class FashionMNIST(MNIST):
 
 class KMNIST(MNIST):
   URL = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/"
-
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -243,11 +238,11 @@ class EMNISTConfig(tfds.core.BuilderConfig):
     """
     super(EMNISTConfig, self).__init__(
         version=tfds.core.Version(
-            "1.0.1", experiments={tfds.core.Experiment.S3: False}),
+            "3.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "3.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                "1.0.1", experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.class_number = class_number

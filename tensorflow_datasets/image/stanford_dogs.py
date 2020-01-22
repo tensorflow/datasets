@@ -135,7 +135,6 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(images_path),
                 "file_names": train_list,
@@ -143,7 +142,6 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(images_path),
                 "file_names": test_list,

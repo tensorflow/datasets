@@ -64,11 +64,11 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
     """
     super(IMDBReviewsConfig, self).__init__(
         version=tfds.core.Version(
-            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                "0.1.0", experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.text_encoder_config = (

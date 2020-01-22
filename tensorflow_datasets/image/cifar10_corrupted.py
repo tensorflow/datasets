@@ -128,18 +128,17 @@ def _make_builder_configs():
     A list of 95 Cifar10CorruptedConfig objects.
   """
   config_list = []
+  v1 = tfds.core.Version(
+      '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+  v001 = tfds.core.Version(
+      '0.0.1', experiments={tfds.core.Experiment.S3: False})
   for corruption in _CORRUPTIONS:
     for severity in range(1, 6):
       config_list.append(
           Cifar10CorruptedConfig(
               name=corruption + '_' + str(severity),
-              version=tfds.core.Version(
-                  '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-              supported_versions=[
-                  tfds.core.Version(
-                      '1.0.0',
-                      'New split API (https://tensorflow.org/datasets/splits)'),
-              ],
+              version=v1,
+              supported_versions=[v001],
               description='Corruption method: ' + corruption +
               ', severity level: ' + str(severity),
               corruption_type=corruption,

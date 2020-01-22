@@ -48,11 +48,11 @@ _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 class CLEVR(tfds.core.GeneratorBasedBuilder):
   """CLEVR dataset."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

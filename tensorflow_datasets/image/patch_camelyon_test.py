@@ -43,9 +43,5 @@ class PatchCamelyonTest(testing.DatasetBuilderTestCase):
   }
 
 
-class PatchCamelyonS3Test(PatchCamelyonTest):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   testing.test_main()

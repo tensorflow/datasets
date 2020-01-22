@@ -98,9 +98,6 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
         (text) features
       **kwargs: keyword arguments forwarded to super.
     """
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.2: Initial version.
     super(CnnDailymailConfig, self).__init__(
         version=_DEFAULT_VERSION,
         supported_versions=_SUPPORTED_VERSIONS,

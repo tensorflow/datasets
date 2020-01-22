@@ -66,10 +66,6 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
   """NWPU Remote Sensing Image Scene Classification (RESISC) Dataset."""
 
   VERSION = tfds.core.Version('3.0.0')
-  # Version history:
-  # 3.0.0: Fix manual file.
-  # 2.0.0: S3 with new hashing function (different shuffle).
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Dataset can be downloaded from OneDrive:
@@ -101,7 +97,6 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={'path': path},
         ),
     ]

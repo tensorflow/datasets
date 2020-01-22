@@ -73,11 +73,11 @@ _LABELS = collections.OrderedDict({
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\

@@ -35,11 +35,6 @@ class CuratedBreastImagingDDSMOriginalCalcTest(testing.DatasetBuilderTestCase):
   }
 
 
-class CuratedBreastImagingDDSMOriginalCalcS3Test(
-    CuratedBreastImagingDDSMOriginalCalcTest):
-  VERSION = 'experimental_latest'
-
-
 class CuratedBreastImagingDDSMOriginalMassTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cbis_ddsm.CuratedBreastImagingDDSM
   BUILDER_CONFIG_NAMES_TO_TEST = ['original-mass']
@@ -51,11 +46,6 @@ class CuratedBreastImagingDDSMOriginalMassTest(testing.DatasetBuilderTestCase):
       'test': 'mass_case_description_test_set.csv',
       'train': 'mass_case_description_train_set.csv',
   }
-
-
-class CuratedBreastImagingDDSMOriginalMassS3Test(
-    CuratedBreastImagingDDSMOriginalMassTest):
-  VERSION = 'experimental_latest'
 
 
 class CuratedBreastImagingDDSMPatchesTest(testing.DatasetBuilderTestCase):
@@ -73,11 +63,6 @@ class CuratedBreastImagingDDSMPatchesTest(testing.DatasetBuilderTestCase):
       'mass-test': 'mass_case_description_test_set.csv',
       'mass-train': 'mass_case_description_train_set.csv',
   }
-
-
-class CuratedBreastImagingDDSMPatchesS3Test(
-    CuratedBreastImagingDDSMPatchesTest):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

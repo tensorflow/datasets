@@ -64,11 +64,11 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(
           name='plain_text',
           version=tfds.core.Version(
-              '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+              '1.0.0',
+              'New split API (https://tensorflow.org/datasets/splits)'),
           supported_versions=[
               tfds.core.Version(
-                  '1.0.0',
-                  'New split API (https://tensorflow.org/datasets/splits)'),
+                  '0.0.1', experiments={tfds.core.Experiment.S3: False}),
           ],
           description='Plain text import of XNLI',
       )

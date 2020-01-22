@@ -36,9 +36,5 @@ class RockPaperScissorsTest(tfds_test.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = ['rps_train.zip', 'rps_test.zip']
 
 
-class RockPaperScissorsS3Test(RockPaperScissorsTest):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   tfds_test.test_main()

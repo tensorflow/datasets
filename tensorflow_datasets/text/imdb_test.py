@@ -33,9 +33,5 @@ class IMDBReviewsTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = "aclImdb_v1.tar.gz"
 
 
-class IMDBReviewsS3Test(IMDBReviewsTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

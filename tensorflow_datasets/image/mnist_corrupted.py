@@ -102,11 +102,11 @@ def _make_builder_configs():
         MNISTCorruptedConfig(
             name=corruption,
             version=tfds.core.Version(
-                '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+                '1.0.0',
+                'New split API (https://tensorflow.org/datasets/splits)'),
             supported_versions=[
                 tfds.core.Version(
-                    '1.0.0',
-                    'New split API (https://tensorflow.org/datasets/splits)'),
+                    '0.0.1', experiments={tfds.core.Experiment.S3: False}),
             ],
             description='Corruption method: ' + corruption,
             corruption_type=corruption,

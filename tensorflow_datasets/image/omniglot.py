@@ -59,10 +59,10 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
   """Omniglot dataset."""
 
   VERSION = tfds.core.Version(
-      "1.0.0", experiments={tfds.core.Experiment.S3: False})
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+          "1.0.0", experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

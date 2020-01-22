@@ -76,12 +76,8 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = "This is a 'template' dataset."
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-  ]
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   # TODO(epot): Image shape should be automatically deduced
 
@@ -146,16 +142,10 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
     self.info.features["image"].set_encoding_format(encoding_format)
     self.info.features["label"].names = labels
 
-    def num_examples(label_images):
-      return sum(len(imgs) for imgs in label_images.values())
-
     # Define the splits
     return [
         tfds.core.SplitGenerator(
             name=split_name,
-            # The number of shards is a dynamic function of the total
-            # number of images (between 0-10)
-            num_shards=min(10, max(num_examples(label_images) // 1000, 1)),
             gen_kwargs=dict(label_images=label_images,),
         ) for split_name, label_images in split_label_images.items()
     ]

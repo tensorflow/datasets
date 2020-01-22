@@ -60,8 +60,7 @@ _DESCRIPTION = ((
 
 class PetFinder(tfds.core.GeneratorBasedBuilder):
   """Pet Finder."""
-  VERSION = tfds.core.Version(
-      "1.0.0", experiments={tfds.core.Experiment.S3: True})
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -91,7 +90,6 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "csv_name": "train.csv",
                 "csv_paths": dl_paths["train"],
@@ -100,7 +98,6 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={
                 "csv_name": "test.csv",
                 "csv_paths": dl_paths["test"],

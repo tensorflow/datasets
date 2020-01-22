@@ -34,9 +34,5 @@ class MNISTCorruptedTest(testing.DatasetBuilderTestCase):
   }
 
 
-class MNISTCorruptedS3Test(MNISTCorruptedTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

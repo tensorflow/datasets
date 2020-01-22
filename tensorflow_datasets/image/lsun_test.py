@@ -34,9 +34,5 @@ class LsunTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {"train": "", "val": ""}
 
 
-class LsunS3Test(LsunTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

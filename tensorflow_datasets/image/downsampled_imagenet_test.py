@@ -39,9 +39,5 @@ class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
   ]
 
 
-class DownsampledImagenetS3Test(DownsampledImagenetTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

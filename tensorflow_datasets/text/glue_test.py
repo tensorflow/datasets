@@ -133,45 +133,5 @@ class GlueAxTest(testing.DatasetBuilderTestCase):
   }
 
 
-class GlueColaS3Test(GlueColaTest):
-  VERSION = "experimental_latest"
-
-
-class GlueSst2S3Test(GlueSst2Test):
-  VERSION = "experimental_latest"
-
-
-class GlueQqpS3Test(GlueQqpTest):
-  VERSION = "experimental_latest"
-
-
-class GlueStsbS3Test(GlueStsbTest):
-  VERSION = "experimental_latest"
-
-
-class GlueMnliS3Test(GlueMnliTest):
-  VERSION = "experimental_latest"
-
-
-class GlueQnliS3Test(GlueQnliTest):
-  VERSION = "experimental_latest"
-
-
-class GlueRteS3Test(GlueRteTest):
-  VERSION = "experimental_latest"
-
-
-class GlueWnliS3Test(GlueWnliTest):
-  VERSION = "experimental_latest"
-
-
-class GlueMrpcS3Test(GlueMrpcTest):
-  VERSION = "experimental_latest"
-
-
-class GlueAxS3Test(GlueAxTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

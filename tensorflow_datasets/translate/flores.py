@@ -73,18 +73,15 @@ class FloresConfig(tfds.core.BuilderConfig):
     description = (
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.3: initial version.
     super(FloresConfig, self).__init__(
         name=name,
         description=description,
         version=tfds.core.Version(
-            "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                "0.0.3", experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.text_encoder_config = (

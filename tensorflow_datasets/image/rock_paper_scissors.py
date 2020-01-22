@@ -45,11 +45,11 @@ _NAME_RE = re.compile(r"^(rps|rps-test-set)/(rock|paper|scissors)/[\w-]*\.png$")
 class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
   """Rock, Paper, Scissors dataset."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

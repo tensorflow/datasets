@@ -56,7 +56,6 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name="train",
-            num_shards=1,
             gen_kwargs={
                 "path": dl_path,
             },

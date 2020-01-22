@@ -48,11 +48,11 @@ _DATA_URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.g
 class Dtd(tfds.core.GeneratorBasedBuilder):
   """Describable Textures Dataset (DTD)."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

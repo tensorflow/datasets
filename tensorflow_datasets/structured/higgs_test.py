@@ -32,9 +32,5 @@ class HiggsTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = "test.csv"
 
 
-class HiggsS3Test(HiggsTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

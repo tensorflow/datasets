@@ -36,9 +36,5 @@ class HorsesOrHumansTest(tfds_test.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = ['hoh_train.zip', 'hoh_test.zip']
 
 
-class HorsesOrHumansS3Test(HorsesOrHumansTest):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   tfds_test.test_main()

@@ -33,9 +33,5 @@ class CatsVsDogsTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = 'cats_vs_dogs.zip'
 
 
-class CatsVsDogsS3Test(CatsVsDogsTest):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   testing.test_main()

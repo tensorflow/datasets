@@ -35,9 +35,5 @@ class Cifar10CorruptedTest(testing.DatasetBuilderTestCase):
   }
 
 
-class Cifar10CorruptedS3Test(Cifar10CorruptedTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

@@ -45,11 +45,11 @@ _NAME_RE = re.compile(r"^(humans|horses)/[\w-]*\.png$")
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
   """Horses or Humans dataset."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

@@ -36,9 +36,5 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
     caltech._TRAIN_POINTS_PER_CLASS = 1
 
 
-class Caltech101S3Test(Caltech101Test):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   testing.test_main()

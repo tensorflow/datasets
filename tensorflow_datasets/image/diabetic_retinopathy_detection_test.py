@@ -33,9 +33,5 @@ class DiabeticRetinopathyDetectionTest(testing.DatasetBuilderTestCase):
   OVERLAPPING_SPLITS = ["sample"]  # contains examples from other examples
 
 
-class DiabeticRetinopathyDetectionS3Test(DiabeticRetinopathyDetectionTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

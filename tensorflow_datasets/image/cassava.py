@@ -78,21 +78,18 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=5,
             gen_kwargs={
                 "datapath": train_path},
         ),
 
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "datapath": test_path},
         ),
 
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "datapath": validation_path},
         ),

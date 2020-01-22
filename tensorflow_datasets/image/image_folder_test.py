@@ -44,9 +44,5 @@ class ImageLabelFolderTest(testing.DatasetBuilderTestCase):
                   "Dataset was not registered.")
 
 
-class ImageLabelFolderS3Test(ImageLabelFolderTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

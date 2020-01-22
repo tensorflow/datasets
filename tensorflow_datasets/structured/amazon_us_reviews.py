@@ -150,7 +150,7 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name="train", num_shards=10, gen_kwargs={
+            name="train", gen_kwargs={
                 "file_path": path,
             }),
     ]

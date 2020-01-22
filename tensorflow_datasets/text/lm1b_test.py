@@ -31,8 +31,5 @@ class Lm1bTest(testing.DatasetBuilderTestCase):
   }
 
 
-class Lm1bS3Test(Lm1bTest):
-  VERSION = "experimental_latest"
-
 if __name__ == "__main__":
   testing.test_main()

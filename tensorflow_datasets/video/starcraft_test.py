@@ -60,9 +60,5 @@ class StarcraftVideoDataset128Test(testing.DatasetBuilderTestCase):
   }
 
 
-class StarcraftVideoDataset128S3Test(StarcraftVideoDataset128Test):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

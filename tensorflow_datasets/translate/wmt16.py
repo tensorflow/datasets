@@ -41,19 +41,16 @@ _LANGUAGE_PAIRS = [
 class Wmt16Translate(wmt.WmtTranslate):
   """WMT 16 translation datasets for all {xx, "en"} language pairs."""
 
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.3: Initial version.
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
           description="WMT 2016 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version=tfds.core.Version(
-              "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "0.0.3", experiments={tfds.core.Experiment.S3: False}),
           ],
       ) for l1, l2 in _LANGUAGE_PAIRS
   ]

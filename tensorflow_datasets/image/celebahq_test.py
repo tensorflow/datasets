@@ -32,9 +32,5 @@ class CelebAHQTest(tfds_test.DatasetBuilderTestCase):
   }
 
 
-class CelebAHQS3Test(CelebAHQTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   tfds_test.test_main()

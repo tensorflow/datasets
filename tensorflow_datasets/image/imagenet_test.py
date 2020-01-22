@@ -42,9 +42,5 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
   ]
 
 
-class Imagenet2012S3(Imagenet2012Test):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()

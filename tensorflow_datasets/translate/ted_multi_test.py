@@ -33,8 +33,5 @@ class TedMultiTranslateTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = ""
 
 
-class TedMultiTranslateS3Test(TedMultiTranslateTest):
-  VERSION = "experimental_latest"
-
 if __name__ == "__main__":
   testing.test_main()

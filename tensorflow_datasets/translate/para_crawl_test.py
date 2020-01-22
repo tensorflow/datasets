@@ -33,8 +33,5 @@ class ParacrawlTest(tfds_test.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {"data_file": "en-hu.bicleaner07.txt"}
 
 
-class ParacrawlS3Test(ParacrawlTest):
-  VERSION = "experimental_latest"
-
 if __name__ == "__main__":
   tfds_test.test_main()

@@ -47,11 +47,11 @@ _URL = 'https://patchcamelyon.grand-challenge.org/'
 class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
   """PatchCamelyon."""
 
-  VERSION = tfds.core.Version('0.1.0',
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
+      tfds.core.Version('0.1.0',
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
