@@ -4,7 +4,7 @@
   </div>
 
   <meta itemprop="name" content="groove" />
-  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and&#10;(synthesized) audio of human-performed, tempo-aligned expressive drumming&#10;captured on a Roland TD-11 V-Drum electronic drum kit.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('groove', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and&#10;(synthesized) audio of human-performed, tempo-aligned expressive drumming&#10;captured on a Roland TD-11 V-Drum electronic drum kit.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;groove&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/groove" />
   <meta itemprop="sameAs" content="https://g.co/magenta/groove-dataset" />
   <meta itemprop="citation" content="&#10;@inproceedings{groove2019,&#10;    Author = {Jon Gillick and Adam Roberts and Jesse Engel and Douglas Eck and David Bamman},&#10;    Title = {Learning to Groove with Inverse Sequence Transformations},&#10;    Booktitle    = {International Conference on Machine Learning (ICML)}&#10;    Year = {2019},&#10;}&#10;" />
@@ -24,19 +24,19 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 `groove` is configured with `tfds.audio.groove.GrooveConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `full-midionly` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
+*   `full-midionly` (`v2.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
     unsplit.
 
-*   `full-16000hz` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
+*   `full-16000hz` (`v2.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
     unsplit.
 
-*   `2bar-midionly` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
+*   `2bar-midionly` (`v2.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
     split into 2-bar chunks.
 
-*   `2bar-16000hz` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
+*   `2bar-16000hz` (`v2.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
     split into 2-bar chunks.
 
-*   `4bar-midionly` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
+*   `4bar-midionly` (`v2.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
     split into 4-bar chunks.
 
 ## `groove/full-midionly`
@@ -44,8 +44,9 @@ Groove dataset without audio, unsplit.
 
 Versions:
 
-*   **`1.0.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -81,8 +82,9 @@ Groove dataset with audio, unsplit.
 
 Versions:
 
-*   **`1.0.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -119,8 +121,9 @@ Groove dataset without audio, split into 2-bar chunks.
 
 Versions:
 
-*   **`1.0.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -156,8 +159,9 @@ Groove dataset with audio, split into 2-bar chunks.
 
 Versions:
 
-*   **`1.0.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -194,8 +198,9 @@ Groove dataset without audio, split into 4-bar chunks.
 
 Versions:
 
-*   **`1.0.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.0`: None
 
 ### Statistics
 

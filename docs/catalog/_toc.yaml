@@ -82,6 +82,8 @@ toc:
     title: eurosat
   - path: /datasets/catalog/fashion_mnist
     title: fashion_mnist
+  - path: /datasets/catalog/flic
+    title: flic
   - path: /datasets/catalog/food101
     title: food101
   - path: /datasets/catalog/horses_or_humans
