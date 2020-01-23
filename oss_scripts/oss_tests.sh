@@ -74,8 +74,6 @@ docs/_index.ipynb
 function test_notebook() {
   local notebook=$1
   create_virtualenv tfds_notebook $PY_BIN
-  # Pinning ipykernel to avoid https://github.com/ipython/ipykernel/issues/422
-  pip install -q jupyter "ipykernel==5.1.1"
   ipython kernel install --user --name tfds-notebook
   jupyter nbconvert \
     --ExecutePreprocessor.timeout=600 \
