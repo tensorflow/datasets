@@ -13,10 +13,13 @@ then
   echo "Using installed ffmpeg"
 else
   echo "Installing ffmpeg"
-  sudo add-apt-repository -y ppa:mc3man/trusty-media
+  sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
   sudo apt-get update -qq
   sudo apt-get install -qq -y ffmpeg
 fi
+
+# Required for opencv2
+sudo apt-get install -qq -y libsm6
 
 install_tf "$TF_VERSION"
 
