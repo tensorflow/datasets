@@ -78,7 +78,7 @@ function test_notebook() {
   pip install -q jupyter "ipykernel==5.1.1"
   ipython kernel install --user --name tfds-notebook
   jupyter nbconvert \
-    --ExecutePreprocessor.timeout=600 \
+    --ExecutePreprocessor.timeout=900 \
     --ExecutePreprocessor.kernel_name=tfds-notebook \
     --to notebook \
     --execute $notebook
