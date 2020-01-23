@@ -85,17 +85,10 @@ function test_notebook() {
   set_status
 }
 
-# TODO(tfds): Re-enable as TF 2.0 gets closer to stable release
-if [[ "$PY_BIN" = "python2.7" && "$TF_VERSION" = "2.0.0" ]]
-then
-  echo "Skipping notebook tests"
-else
-  for notebook in $NOTEBOOKS
-  do
-    test_notebook $notebook
-  done
-fi
-
+for notebook in $NOTEBOOKS
+do
+  test_notebook $notebook
+done
 
 # Run NSynth, in a contained enviornement
 function test_isolation_nsynth() {
