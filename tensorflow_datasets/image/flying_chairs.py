@@ -43,9 +43,9 @@ background are purely planar.
 This dataset has been used for training convolutional networks in the ICCV 2015 paper
 FlowNet: Learning Optical Flow with Convolutional Networks."""
 
-_URL_SPLIT_ROOT = "https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs/"
+_URL_SPLIT_ROOT = "http://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs/"
 _URL_SPLIT_FILE = "FlyingChairs_train_val.txt"
-_URL_DATA_ROOT = "https://lmb.informatik.uni-freiburg.de/data/FlyingChairs/"
+_URL_DATA_ROOT = "http://lmb.informatik.uni-freiburg.de/data/FlyingChairs/"
 _URL_DATA_ZIP = "FlyingChairs.zip"
 
 _WIDTH, _HEIGHT, _CHANNELS = 512, 384, 3
