@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -82,6 +82,8 @@ class FileFormatAdapterTest(testing.TestCase):
       train_dataset = builder.as_dataset(split=splits.Split.TRAIN)
       valid_dataset = builder.as_dataset(split=splits.Split.VALIDATION)
       test_dataset = builder.as_dataset(split=splits.Split.TEST)
+
+      self.assertIsInstance(train_dataset, tf.compat.v1.data.Dataset)
 
       def validate_dataset(dataset, min_val, max_val, test_range=False):
         els = []

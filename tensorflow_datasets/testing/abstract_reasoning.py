@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ from absl import app
 from absl import flags
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_utils
@@ -100,7 +100,7 @@ def _random_content(random_state):
 def _create_fake_file(folder, split_type, random_state):
   """Creates a fake data file."""
   path = os.path.join(folder, "{}.tar.gz".format(split_type))
-  with tf.gfile.GFile(path, "w") as fout:
+  with tf.io.gfile.GFile(path, "w") as fout:
     with tarfile.open(fileobj=fout, mode="w:gz") as tar:
       for i in range(5):
         for split in ["train", "test", "val"]:

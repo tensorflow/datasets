@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ from __future__ import print_function
 import csv
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download"
@@ -69,7 +69,12 @@ _CITATION = """\
 class DeepWeeds(tfds.core.GeneratorBasedBuilder):
   """DeepWeeds Image Dataset Class."""
 
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("2.0.0", "Fixes wrong labels in V1.")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "1.0.0",
+          tfds_version_to_prepare="c28a63fa9d9fb9ba3cced7052ea243e8884f9bf1"),
+  ]
 
   def _info(self):
     """Define Dataset Info."""

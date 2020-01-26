@@ -35,5 +35,9 @@
                 }
             ]
         }
-    ]
+    ],
+    "Domain": "Web",
+    "Split": "dev",
+    "VerifiedEval": true,
+    "Version": 1.0
 }

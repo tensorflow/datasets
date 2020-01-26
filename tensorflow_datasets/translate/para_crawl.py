@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -124,10 +124,10 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
           target_language=target_language,
-          version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           ],
       )
       for target_language in _target_languages()

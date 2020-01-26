@@ -6,7 +6,7 @@
 
 # tfds.download.DownloadConfig
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -15,8 +15,6 @@
 source</a>
 
 ## Class `DownloadConfig`
-
-<!-- Start diff -->
 
 Configuration for
 <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
@@ -59,7 +57,7 @@ Constructs a `DownloadConfig`.
 *   <b>`compute_stats`</b>: `tfds.download.ComputeStats`, whether to compute
     statistics over the generated data. Defaults to `AUTO`.
 *   <b>`max_examples_per_split`</b>: `int`, optional max number of examples to
-    write into each split.
+    write into each split (used for testing).
 *   <b>`register_checksums`</b>: `bool`, defaults to False. If True, checksum of
     downloaded files are recorded.
 *   <b>`beam_runner`</b>: Runner to pass to `beam.Pipeline`, only used for

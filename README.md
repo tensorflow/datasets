@@ -46,8 +46,7 @@ to receive updates on the project.
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
-# tfds works in both Eager and Graph modes
-tf.compat.v1.enable_eager_execution()
+# Here we assume Eager mode is enabled (TF2), but tfds also works in Graph mode.
 
 # See available datasets
 print(tfds.list_builders())
@@ -92,32 +91,36 @@ ds = mnist_builder.as_dataset(split='train')
 # dataset and its features
 info = mnist_builder.info
 print(info)
+```
 
-    tfds.core.DatasetInfo(
-        name='mnist',
-        version=1.0.0,
-        description='The MNIST database of handwritten digits.',
-        homepage='http://yann.lecun.com/exdb/mnist/',
-        features=FeaturesDict({
-            'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-            'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
-        },
-        total_num_examples=70000,
-        splits={
-            'test': <tfds.core.SplitInfo num_examples=10000>,
-            'train': <tfds.core.SplitInfo num_examples=60000>
-        },
-        supervised_keys=('image', 'label'),
-        citation='"""
-            @article{lecun2010mnist,
-              title={MNIST handwritten digit database},
-              author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-              journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-              volume={2},
-              year={2010}
-            }
-      """',
-  )
+This will print the dataset info content:
+
+```
+tfds.core.DatasetInfo(
+    name='mnist',
+    version=1.0.0,
+    description='The MNIST database of handwritten digits.',
+    homepage='http://yann.lecun.com/exdb/mnist/',
+    features=FeaturesDict({
+        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
+    },
+    total_num_examples=70000,
+    splits={
+        'test': <tfds.core.SplitInfo num_examples=10000>,
+        'train': <tfds.core.SplitInfo num_examples=60000>
+    },
+    supervised_keys=('image', 'label'),
+    citation='"""
+        @article{lecun2010mnist,
+          title={MNIST handwritten digit database},
+          author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+          journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+          volume={2},
+          year={2010}
+        }
+    """',
+)
 ```
 
 You can also get details about the classes (number of classes and their names).
@@ -142,7 +145,7 @@ input pipelines with `tf.data` but use whatever you'd like for your model
 components.
 
 ```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
+train_ds = tfds.load("mnist", split="train")
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
 for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]

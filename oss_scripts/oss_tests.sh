@@ -18,23 +18,30 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
-# Certain datasets/tests don't work with TF2
-# Skip them here, and link to a GitHub issue that explains why it doesn't work
-# and what the plan is to support it.
-TF2_IGNORE_TESTS=""
-if [[ "$TF_VERSION" == "2.0.0"  ]]
+PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
+
+
+# Certain datasets/tests don't work with Python 2
+PY2_IGNORE_TESTS=""
+if [[ "$PY_BIN" = "python2.7"  ]]
 then
-  # * lsun_test: https://github.com/tensorflow/datasets/issues/34
-  TF2_IGNORE_TESTS="
-  tensorflow_datasets/image/lsun_test.py
+  PY2_IGNORE_TESTS="
+  tensorflow_datasets/audio/nsynth_test.py
+  tensorflow_datasets/text/c4_test.py
+  tensorflow_datasets/text/c4_utils_test.py
+  tensorflow_datasets/image/imagenet2012_corrupted_test.py
   "
 fi
-TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
+PY2_IGNORE=$(for test in $PY2_IGNORE_TESTS; do echo "--ignore=$test "; done)
+
 
 # Run Tests
 # Ignores:
-# * Some TF2 tests if running against TF2 (see above)
+# * Some Python2 tests if running against Python2 (see above)
 # * Nsynth is run is isolation due to dependency conflict (crepe)
+# * Lsun tests is disabled because the tensorflow_io used in open-source
+#   is linked to static libraries compiled again specific TF version, which
+#   makes test fails with linking error (libtensorflow_io_golang.so).
 # * test_utils.py is not a test file
 # * eager_not_enabled_by_default_test needs to be run separately because the
 #   enable_eager_execution calls set global state and pytest runs all the tests
@@ -43,8 +50,9 @@ TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 pytest \
   -n auto \
   --disable-warnings \
-  $TF2_IGNORE \
+  $PY2_IGNORE \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+  --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/scripts/build_docs_test.py" \
   --ignore="tensorflow_datasets/eager_not_enabled_by_default_test.py"
@@ -63,11 +71,9 @@ NOTEBOOKS="
 docs/overview.ipynb
 docs/_index.ipynb
 "
-PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 function test_notebook() {
   local notebook=$1
   create_virtualenv tfds_notebook $PY_BIN
-  pip install -q jupyter ipykernel
   ipython kernel install --user --name tfds-notebook
   jupyter nbconvert \
     --ExecutePreprocessor.timeout=600 \
@@ -77,23 +83,16 @@ function test_notebook() {
   set_status
 }
 
-# TODO(tfds): Re-enable as TF 2.0 gets closer to stable release
-if [[ "$PY_BIN" = "python2.7" && "$TF_VERSION" = "2.0.0" ]]
-then
-  echo "Skipping notebook tests"
-else
-  for notebook in $NOTEBOOKS
-  do
-    test_notebook $notebook
-  done
-fi
-
+for notebook in $NOTEBOOKS
+do
+  test_notebook $notebook
+done
 
 # Run NSynth, in a contained enviornement
-function test_nsynth() {
+function test_isolation_nsynth() {
   create_virtualenv tfds_nsynth $PY_BIN
   ./oss_scripts/oss_pip_install.sh
-  pip install -e .[tests_nsynth]
+  pip install -e .[nsynth]
   pytest \
     --disable-warnings \
     "tensorflow_datasets/audio/nsynth_test.py"
@@ -102,8 +101,8 @@ function test_nsynth() {
 
 if [[ "$PY_BIN" != "python2.7" && "$TF_VERSION" == "2.0.0" ]]
 then
-  echo "Testing NSynth"
-  test_nsynth
+  echo "============= Testing Isolation ============="
+  test_isolation_nsynth
   set_status
 fi
 

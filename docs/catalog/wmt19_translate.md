@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="wmt19_translate" />
-  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('wmt19_translate', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wmt19_translate&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wmt19_translate" />
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt19/translation-task.html" />
   <meta itemprop="citation" content="&#10;@ONLINE {wmt19translate,&#10;    author = &quot;Wikimedia Foundation&quot;,&#10;    title  = &quot;ACL 2019 Fourth Conference on Machine Translation (WMT19), Shared Task: Machine Translation of News&quot;,&#10;    url    = &quot;http://www.statmt.org/wmt19/translation-task.html&quot;&#10;}&#10;" />
 </div>
+
 # `wmt19_translate` (Manual download)
 
 Translate dataset based on the data from statmt.org.
@@ -36,31 +38,31 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt19_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `cs-en` (`v0.0.3`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
+*   `cs-en` (`v1.0.0`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
     dataset.
 
-*   `de-en` (`v0.0.3`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
+*   `de-en` (`v1.0.0`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
     dataset.
 
-*   `fi-en` (`v0.0.3`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
+*   `fi-en` (`v1.0.0`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
     dataset.
 
-*   `gu-en` (`v0.0.3`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
+*   `gu-en` (`v1.0.0`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
     dataset.
 
-*   `kk-en` (`v0.0.3`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
+*   `kk-en` (`v1.0.0`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
     dataset.
 
-*   `lt-en` (`v0.0.3`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
+*   `lt-en` (`v1.0.0`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
     dataset.
 
-*   `ru-en` (`v0.0.3`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
+*   `ru-en` (`v1.0.0`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
     dataset.
 
-*   `zh-en` (`v0.0.3`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
+*   `zh-en` (`v1.0.0`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
     dataset.
 
-*   `fr-de` (`v0.0.3`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
+*   `fr-de` (`v1.0.0`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
     dataset.
 
 ## `wmt19_translate/cs-en`
@@ -68,8 +70,8 @@ WMT 2019 cs-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -80,8 +82,8 @@ see the exact path (and file name) that has to be downloaded.
 
 Split      | Examples
 :--------- | ---------:
-ALL        | 64,339,036
-TRAIN      | 64,336,053
+ALL        | 20,249,531
+TRAIN      | 20,246,548
 VALIDATION | 2,983
 
 ### Features
@@ -97,15 +99,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'cs', u'en')`
+`('cs', 'en')`
 
 ## `wmt19_translate/de-en`
 WMT 2019 de-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -133,15 +135,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+`('de', 'en')`
 
 ## `wmt19_translate/fi-en`
 WMT 2019 fi-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -169,15 +171,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fi', u'en')`
+`('fi', 'en')`
 
 ## `wmt19_translate/gu-en`
 WMT 2019 gu-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -205,15 +207,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'gu', u'en')`
+`('gu', 'en')`
 
 ## `wmt19_translate/kk-en`
 WMT 2019 kk-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -241,15 +243,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'kk', u'en')`
+`('kk', 'en')`
 
 ## `wmt19_translate/lt-en`
 WMT 2019 lt-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -277,15 +279,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'lt', u'en')`
+`('lt', 'en')`
 
 ## `wmt19_translate/ru-en`
 WMT 2019 ru-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -313,15 +315,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+`('ru', 'en')`
 
 ## `wmt19_translate/zh-en`
 WMT 2019 zh-en translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -349,15 +351,15 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'zh', u'en')`
+`('zh', 'en')`
 
 ## `wmt19_translate/fr-de`
 WMT 2019 fr-de translation task dataset.
 
 Versions:
 
-*   **`0.0.3`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.0.3`: None
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
@@ -385,7 +387,7 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'de')`
+`('fr', 'de')`
 
 ## Citation
 ```

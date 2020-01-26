@@ -10,7 +10,7 @@
 
 # tfds.file_adapter.FileFormatAdapter
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -20,7 +20,6 @@ source</a>
 
 ## Class `FileFormatAdapter`
 
-<!-- Start diff -->
 Provides writing and reading methods for a file format.
 
 <!-- Placeholder for "Used in" -->

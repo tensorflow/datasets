@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import h5py
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -66,15 +66,12 @@ class So2satConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
+    v2 = tfds.core.Version(
+        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+    v001 = tfds.core.Version(
+        '0.0.1', experiments={tfds.core.Experiment.S3: False})
     super(So2satConfig, self).__init__(
-        version=tfds.core.Version(
-            '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                '2.0.0',
-                'New split API (https://tensorflow.org/datasets/splits)'),
-        ],
-        **kwargs)
+        version=v2, supported_versions=[v001], **kwargs)
     self.selection = selection
 
 

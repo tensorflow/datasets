@@ -10,7 +10,7 @@
 
 # tfds.file_adapter.TFRecordExampleAdapter
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -20,7 +20,6 @@ source</a>
 
 ## Class `TFRecordExampleAdapter`
 
-<!-- Start diff -->
 Writes/Reads serialized Examples protos to/from TFRecord files.
 
 Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.md)
@@ -43,9 +42,19 @@ source</a>
 __init__(example_specs)
 ```
 
+Constructor.
+
+#### Args:
+
+*   <b>`example_specs`</b>: Nested `dict` of
+    <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>,
+    corresponding to the structure of data to write/read.
+
 ## Properties
 
 <h3 id="filetype_suffix"><code>filetype_suffix</code></h3>
+
+Returns a str file type suffix (e.g. "tfrecord").
 
 ## Methods
 
@@ -57,6 +66,8 @@ source</a>
 ```python
 dataset_from_filename(filename)
 ```
+
+Returns a `tf.data.Dataset` whose elements are dicts given a filename.
 
 <h3 id="write_from_generator"><code>write_from_generator</code></h3>
 
@@ -70,6 +81,14 @@ write_from_generator(
 )
 ```
 
+Write to files from generators_and_filenames.
+
+#### Args:
+
+*   <b>`generator`</b>: generator yielding dictionaries of feature name to
+    value.
+*   <b>`output_files`</b>: `list<str>`, output files to write files to.
+
 <h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
@@ -82,3 +101,12 @@ write_from_pcollection(
     num_shards
 )
 ```
+
+Write the PCollection to file.
+
+#### Args:
+
+*   <b>`pcollection`</b>: `beam.PCollection`, the PCollection containing the
+    examples to write.
+*   <b>`file_path_prefix`</b>: `str`, output files to write files to.
+*   <b>`num_shards`</b>: `int`,

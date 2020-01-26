@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import os
 
 from absl import logging
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 
@@ -230,102 +230,116 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files, web_dir, wiki_dir):
     """This function returns the examples."""
 
-    def _strip(collection):
-      return [item.strip() for item in collection]
+    def parse_example(article):
+      """Return a single example from an article JSON record."""
+      def _strip(collection):
+        return [item.strip() for item in collection]
+
+      if "Answer" in article:
+        answer = article["Answer"]
+        answer_dict = {
+            "aliases":
+                _strip(answer["Aliases"]),
+            "normalized_aliases":
+                _strip(answer["NormalizedAliases"]),
+            "matched_wiki_entity_name":
+                answer.get("MatchedWikiEntryName", "").strip(),
+            "normalized_matched_wiki_entity_name":
+                answer.get("NormalizedMatchedWikiEntryName", "").strip(),
+            "normalized_value":
+                answer["NormalizedValue"].strip(),
+            "type":
+                answer["Type"].strip(),
+            "value":
+                answer["Value"].strip(),
+        }
+      else:
+        answer_dict = {
+            "aliases":
+                [],
+            "normalized_aliases":
+                [],
+            "matched_wiki_entity_name":
+                "<unk>",
+            "normalized_matched_wiki_entity_name":
+                "<unk>",
+            "normalized_value":
+                "<unk>",
+            "type":
+                "",
+            "value":
+                "<unk>",
+        }
+
+      if self.builder_config.exclude_context:
+        article["SearchResults"] = []
+        article["EntityPages"] = []
+
+      def _add_context(collection, context_field, file_dir):
+        """Adds context from file, or skips if file does not exist."""
+        new_items = []
+        for item in collection:
+          if "Filename" not in item:
+            logging.info("Missing context 'Filename', skipping.")
+            continue
+
+          new_item = item.copy()
+          fname = item["Filename"]
+          try:
+            with tf.io.gfile.GFile(os.path.join(file_dir, fname)) as f:
+              new_item[context_field] = f.read()
+          except (IOError, tf.errors.NotFoundError):
+            logging.info("File does not exist, skipping: %s", fname)
+            continue
+          new_items.append(new_item)
+        return new_items
+
+      def _strip_if_str(v):
+        return v.strip() if isinstance(v, six.string_types) else v
+      def _transpose_and_strip_dicts(dicts, field_names):
+        return {
+            tfds.core.naming.camelcase_to_snakecase(k):
+                [_strip_if_str(d[k]) for d in dicts]
+            for k in field_names
+        }
+
+      search_results = _transpose_and_strip_dicts(
+          _add_context(
+              article.get("SearchResults", []), "SearchContext", web_dir),
+          ["Description", "Filename", "Rank", "Title", "Url",
+           "SearchContext"])
+
+      entity_pages = _transpose_and_strip_dicts(
+          _add_context(
+              article.get("EntityPages", []), "WikiContext", wiki_dir),
+          ["DocSource", "Filename", "Title", "WikiContext"])
+
+      question = article["Question"].strip()
+      question_id = article["QuestionId"]
+      question_source = article["QuestionSource"].strip()
+
+      return {
+          "entity_pages": entity_pages,
+          "search_results": search_results,
+          "question": question,
+          "question_id": question_id,
+          "question_source": question_source,
+          "answer": answer_dict,
+      }
 
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
+      fname = os.path.basename(filepath)
+
       with tf.io.gfile.GFile(filepath) as f:
-        triviaqa = json.load(f)
-        for article in triviaqa["Data"]:
-          if "Answer" in article:
-            answer = article["Answer"]
-            answer_dict = {
-                "aliases":
-                    _strip(answer["Aliases"]),
-                "normalized_aliases":
-                    _strip(answer["NormalizedAliases"]),
-                "matched_wiki_entity_name":
-                    answer.get("MatchedWikiEntryName", "").strip(),
-                "normalized_matched_wiki_entity_name":
-                    answer.get("NormalizedMatchedWikiEntryName", "").strip(),
-                "normalized_value":
-                    answer["NormalizedValue"].strip(),
-                "type":
-                    answer["Type"].strip(),
-                "value":
-                    answer["Value"].strip(),
-            }
+        current_record = ""
+        for line in f:
+          if line == "        {\n":
+            current_record = line
+          elif line.startswith("        }"):  # Handles final record as well.
+            article = json.loads(current_record + "}")
+            current_record = ""
+            example = parse_example(article)
+            yield "%s_%s" % (fname, example["question_id"]), example
           else:
-            answer_dict = {
-                "aliases":
-                    [],
-                "normalized_aliases":
-                    [],
-                "matched_wiki_entity_name":
-                    "<unk>",
-                "normalized_matched_wiki_entity_name":
-                    "<unk>",
-                "normalized_value":
-                    "<unk>",
-                "type":
-                    "",
-                "value":
-                    "<unk>",
-            }
-
-          if self.builder_config.exclude_context:
-            article["SearchResults"] = []
-            article["EntityPages"] = []
-
-          def _add_context(collection, context_field, file_dir):
-            """Adds context from file, or skips if file does not exist."""
-            new_items = []
-            for item in collection:
-              if "Filename" not in item:
-                logging.info("Missing context 'Filename', skipping.")
-                continue
-
-              new_item = item.copy()
-              fname = item["Filename"]
-              try:
-                with tf.io.gfile.GFile(os.path.join(file_dir, fname)) as f:
-                  new_item[context_field] = f.read()
-              except (IOError, tf.errors.NotFoundError):
-                logging.info("File does not exist, skipping: %s", fname)
-                continue
-              new_items.append(new_item)
-            return new_items
-
-          def _strip_if_str(v):
-            return v.strip() if isinstance(v, six.string_types) else v
-          def _transpose_and_strip_dicts(dicts, field_names):
-            return {
-                tfds.core.naming.camelcase_to_snakecase(k):
-                    [_strip_if_str(d[k]) for d in dicts]
-                for k in field_names
-            }
-
-          search_results = _transpose_and_strip_dicts(
-              _add_context(
-                  article.get("SearchResults", []), "SearchContext", web_dir),
-              ["Description", "Filename", "Rank", "Title", "Url",
-               "SearchContext"])
-
-          entity_pages = _transpose_and_strip_dicts(
-              _add_context(
-                  article.get("EntityPages", []), "WikiContext", wiki_dir),
-              ["DocSource", "Filename", "Title", "WikiContext"])
-
-          question = article["Question"].strip()
-          question_id = article["QuestionId"]
-          question_source = article["QuestionSource"].strip()
-
-          yield "%s_%s" % (os.path.basename(filepath), question_id), {
-              "entity_pages": entity_pages,
-              "search_results": search_results,
-              "question": question,
-              "question_id": question_id,
-              "question_source": question_source,
-              "answer": answer_dict,
-          }
+            current_record += line

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -42,16 +42,28 @@ _NUM_SHARDS = 1
 
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
+_LABEL_CLASSES = [
+    "Abyssinian", "american_bulldog", "american_pit_bull_terrier",
+    "basset_hound", "beagle", "Bengal", "Birman", "Bombay", "boxer",
+    "British_Shorthair", "chihuahua", "Egyptian_Mau", "english_cocker_spaniel",
+    "english_setter", "german_shorthaired", "great_pyrenees", "havanese",
+    "japanese_chin", "keeshond", "leonberger", "Maine_Coon",
+    "miniature_pinscher", "newfoundland", "Persian", "pomeranian", "pug",
+    "Ragdoll", "Russian_Blue", "saint_bernard", "samoyed", "scottish_terrier",
+    "shiba_inu", "Siamese", "Sphynx", "staffordshire_bull_terrier",
+    "wheaten_terrier", "yorkshire_terrier"
+]
+_SPECIES_CLASSES = ["Cat", "Dog"]
+
 
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("1.1.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version("3.1.0",
+                              "Added species and labels, new split API.")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
-          "3.0.0", ("New split API (https://tensorflow.org/datasets/splits);"
-                    "additon of segmentation_mask feature.")),
+          "1.2.0", experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -60,7 +72,8 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(num_classes=37),
+            "label": tfds.features.ClassLabel(names=_LABEL_CLASSES),
+            "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
             "file_name": tfds.features.Text(),
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
         }),
@@ -114,17 +127,19 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
                          images_list_file):
     with tf.io.gfile.GFile(images_list_file, "r") as images_list:
       for line in images_list:
-        image_name, label, _, _ = line.strip().split(" ")
+        image_name, label, species, _ = line.strip().split(" ")
 
         trimaps_dir_path = os.path.join(annotations_dir_path, "trimaps")
 
         trimap_name = image_name + ".png"
         image_name += ".jpg"
         label = int(label) - 1
+        species = int(species) - 1
 
         record = {
             "image": os.path.join(images_dir_path, image_name),
             "label": int(label),
+            "species": species,
             "file_name": image_name,
             "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name)
         }

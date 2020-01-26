@@ -53,6 +53,8 @@ converting various units.
 
 [`class GenerateMode`](./tfds/download/GenerateMode.md): `Enum` for how to treat pre-existing downloads and data.
 
+[`class ReadConfig`](./tfds/ReadConfig.md): Configures input reading pipeline.
+
 [`class Split`](./tfds/Split.md): `Enum` for dataset splits.
 
 [`class percent`](./tfds/percent.md): Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.

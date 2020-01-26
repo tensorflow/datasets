@@ -20,7 +20,7 @@
 
 # tfds.features.ClassLabel
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -30,7 +30,6 @@ source</a>
 
 ## Class `ClassLabel`
 
-<!-- Start diff -->
 `FeatureConnector` for integer class labels.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
@@ -143,6 +142,8 @@ source</a>
 ``` python
 encode_example(example_data)
 ```
+
+See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 

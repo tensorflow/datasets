@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import uuid
 from absl import logging
 import promise
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
@@ -72,7 +72,7 @@ class DownloadConfig(object):
       compute_stats: `tfds.download.ComputeStats`, whether to compute
         statistics over the generated data. Defaults to `AUTO`.
       max_examples_per_split: `int`, optional max number of examples to write
-        into each split.
+        into each split (used for testing).
       register_checksums: `bool`, defaults to False. If True, checksum of
         downloaded files are recorded.
       beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,8 @@ class SplitInfo(object):
 
   @property
   def num_examples(self):
+    if self.shard_lengths:
+      return sum(int(sl) for sl in self.shard_lengths)
     return int(self.statistics.num_examples)
 
   def __repr__(self):

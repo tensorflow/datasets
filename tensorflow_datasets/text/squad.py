@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import json
 import os
 
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -71,11 +71,11 @@ class Squad(tfds.core.GeneratorBasedBuilder):
       SquadConfig(
           name="plain_text",
           version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+              "1.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
           supported_versions=[
               tfds.core.Version(
-                  "1.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
+                  "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           ],
           description="Plain text",
       ),

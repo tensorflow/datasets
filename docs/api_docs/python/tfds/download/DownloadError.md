@@ -5,7 +5,7 @@
 
 # tfds.download.DownloadError
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -15,6 +15,6 @@ source</a>
 
 ## Class `DownloadError`
 
-<!-- Start diff -->
+Common base class for all non-exit exceptions.
 
 <!-- Placeholder for "Used in" -->

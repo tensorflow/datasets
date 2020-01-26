@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -66,10 +66,6 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
   """NWPU Remote Sensing Image Scene Classification (RESISC) Dataset."""
 
   VERSION = tfds.core.Version('3.0.0')
-  # Version history:
-  # 3.0.0: Fix manual file.
-  # 2.0.0: S3 with new hashing function (different shuffle).
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Dataset can be downloaded from OneDrive:
@@ -101,7 +97,6 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={'path': path},
         ),
     ]

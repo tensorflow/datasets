@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 # petfinder: BibTeX citation
@@ -60,8 +60,7 @@ _DESCRIPTION = ((
 
 class PetFinder(tfds.core.GeneratorBasedBuilder):
   """Pet Finder."""
-  VERSION = tfds.core.Version(
-      "1.0.0", experiments={tfds.core.Experiment.S3: True})
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -91,7 +90,6 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "csv_name": "train.csv",
                 "csv_paths": dl_paths["train"],
@@ -100,7 +98,6 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={
                 "csv_name": "test.csv",
                 "csv_paths": dl_paths["test"],

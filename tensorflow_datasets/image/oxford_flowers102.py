@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 
@@ -51,11 +51,11 @@ The test set consists of the remaining 6149 images (minimum 20 per class).
 class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
   """Oxford 102 category flower dataset."""
 
-  VERSION = tfds.core.Version("0.0.1",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("0.0.1",
+                        experiments={tfds.core.Experiment.S3: False})
   ]
 
   def _info(self):

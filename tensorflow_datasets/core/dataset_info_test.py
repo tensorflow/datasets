@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import os
 import tempfile
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
@@ -35,9 +35,9 @@ tf.compat.v1.enable_eager_execution()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
-                         "mnist", "1.0.0")
+                         "mnist", "3.0.0")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
-                                   "dataset_info", "mnist_unlabeled", "1.0.0")
+                                   "dataset_info", "mnist_unlabeled", "3.0.0")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
@@ -305,7 +305,7 @@ class DatasetInfoTest(testing.TestCase):
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='mnist',
-    version=1.0.0,
+    version=3.0.0,
     description='The MNIST database of handwritten digits.',
     homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     features=FeaturesDict({

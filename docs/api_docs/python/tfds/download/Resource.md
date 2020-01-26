@@ -8,7 +8,7 @@
 
 # tfds.download.Resource
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -18,7 +18,6 @@ source</a>
 
 ## Class `Resource`
 
-<!-- Start diff -->
 Represents a resource to download, extract, or both.
 
 <!-- Placeholder for "Used in" -->

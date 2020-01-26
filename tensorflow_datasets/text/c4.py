@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import json
 import os
 
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
 
@@ -47,11 +47,18 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version(
-    "1.1.0", experiments={tfds.core.Experiment.S3: False})
+_VERSION = tfds.core.Version("2.2.0")
+
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False}),
-    tfds.core.Version("1.0.1", experiments={tfds.core.Experiment.S3: False}),
+    tfds.core.Version(
+        "1.1.0", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="42f5bf89efcfd2cd165c2511b22be49cb1a50856"),
+    tfds.core.Version(
+        "1.0.1", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
+    tfds.core.Version(
+        "1.0.0", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
 ]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
@@ -67,7 +74,6 @@ _DEFAULT_CC_VERSIONS = ("2019-18",)  # April 2019
 _DEFAULT_WEBTEXTLIKE_CC_VERSIONS = (  # August 2018 - July 2019
     "2018-34", "2018-39", "2018-43", "2018-47", "2018-51",
     "2019-04", "2019-09", "2019-13", "2019-18", "2019-22", "2019-26", "2019-30")
-_DEFAULT_NUM_SHARDS = 10000
 
 
 class C4Config(tfds.core.BuilderConfig):
@@ -167,7 +173,7 @@ class C4(tfds.core.BeamBasedBuilder):
         "https://github.com/google-research/text-to-text-transfer-transformer#datasets",
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager, pipeline):
     dl_manager.download_checksums(_CHECKSUMS_URL)
 
     # We will automatically down the default CC version(s), but others need to
@@ -216,21 +222,28 @@ class C4(tfds.core.BeamBasedBuilder):
           len(wet_files), cc_version)
       file_paths["wet_files"].extend(wet_files)
 
-    if self.builder_config.realnewslike or self.builder_config.webtextlike:
-      num_shards = max(1, _DEFAULT_NUM_SHARDS // 10)
-    else:
-      num_shards = _DEFAULT_NUM_SHARDS
-
+    page_content_pcollection = self._get_page_content(pipeline, file_paths)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=num_shards,
-            gen_kwargs={"file_paths": file_paths},
-        )
+            gen_kwargs=dict(
+                split="train",
+                page_content=page_content_pcollection,
+                hashed_url_predicate=lambda x: x % 1000 != 0  # 99.9%
+            ),
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs=dict(
+                split="validation",
+                page_content=page_content_pcollection,
+                hashed_url_predicate=lambda x: x % 1000 == 0  # 0.01%
+            ),
+        ),
     ]
 
-  def _build_pcollection(self, pipeline, file_paths):
-    """Build PCollection of examples in the raw (text) form."""
+  def _get_page_content(self, pipeline, file_paths):
+    """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
 
     # Parse WET files and filter by length.
@@ -293,18 +306,23 @@ class C4(tfds.core.BeamBasedBuilder):
     page_content |= beam.Filter(
         c4_utils.is_language, language=self.builder_config.lang)
 
-    # Emit final examples.
-    # Output: {"url": url, "text": text, "content-type": content-type,\
-    #          "content-length": content-length, "timestamp": timestamp}
+    return page_content
+
+  def _build_pcollection(
+      self, unused_pipeline, split, page_content, hashed_url_predicate):
+    beam = tfds.core.lazy_imports.apache_beam
+
     def _emit_examples(el):
-      c4_utils.get_counter_inc_fn("emit-examples")("emitted")
+      c4_utils.get_counter_inc_fn(split)("examples")
       _, features = el
-      return {
+      return features["url"], {
           "url": features["url"],
           "text": features["text"],
           "content-type": features["content-type"],
           "content-length": features["content-length"],
           "timestamp": features["timestamp"]
       }
-
-    return page_content | beam.Map(_emit_examples)
+    return (page_content
+            | beam.Filter(
+                c4_utils.get_hashed_url_filter_fn(hashed_url_predicate))
+            | beam.Map(_emit_examples))

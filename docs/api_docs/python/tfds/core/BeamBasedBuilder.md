@@ -12,16 +12,14 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
-<meta itemprop="property" content="MANUAL_DOWNLOAD_INSTRUCTIONS"/>
 <meta itemprop="property" content="SUPPORTED_VERSIONS"/>
-<meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
 </div>
 
 # tfds.core.BeamBasedBuilder
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -31,7 +29,6 @@ source</a>
 
 ## Class `BeamBasedBuilder`
 
-<!-- Start diff -->
 Beam based Builder.
 
 <!-- Placeholder for "Used in" -->
@@ -44,9 +41,8 @@ source</a>
 
 ```python
 __init__(
-    data_dir=None,
-    config=None,
-    version=None
+    *args,
+    **kwargs
 )
 ```
 
@@ -104,6 +100,7 @@ as_dataset(
     batch_size=None,
     shuffle_files=False,
     decoders=None,
+    read_config=None,
     as_supervised=False,
     in_memory=None
 )
@@ -171,6 +168,10 @@ assert isinstance(ds_test_supervised, tf.data.Dataset)
     customized feature keys need to be present. See
     [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
     for more info.
+*   <b>`read_config`</b>:
+    <a href="../../tfds/ReadConfig.md"><code>tfds.ReadConfig</code></a>,
+    Additional options to configure the input pipeline (e.g. seed, num parallel
+    reads,...).
 *   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -219,9 +220,6 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 *   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
-*   `MANUAL_DOWNLOAD_INSTRUCTIONS = None`
-    <a id="MANUAL_DOWNLOAD_INSTRUCTIONS"></a>
 *   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
-*   `VERSION = None` <a id="VERSION"></a>
 *   `builder_configs` <a id="builder_configs"></a>
 *   `name = 'beam_based_builder'` <a id="name"></a>

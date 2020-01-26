@@ -15,7 +15,7 @@
 
 # tfds.features.text.TokenTextEncoder
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -25,7 +25,6 @@ source</a>
 
 ## Class `TokenTextEncoder`
 
-<!-- Start diff -->
 TextEncoder backed by a list of tokens.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
@@ -86,6 +85,8 @@ use
 
 <h3 id="vocab_size"><code>vocab_size</code></h3>
 
+Size of the vocabulary. Decode produces ints [1, vocab_size).
+
 ## Methods
 
 <h3 id="decode"><code>decode</code></h3>
@@ -97,6 +98,8 @@ source</a>
 decode(ids)
 ```
 
+Decodes a list of integers into text.
+
 <h3 id="encode"><code>encode</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
@@ -105,6 +108,8 @@ source</a>
 ``` python
 encode(s)
 ```
+
+Encodes text into a list of integers.
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
 
@@ -119,6 +124,8 @@ load_from_file(
 )
 ```
 
+Load from file. Inverse of save_to_file.
+
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
@@ -127,3 +134,5 @@ source</a>
 ``` python
 save_to_file(filename_prefix)
 ```
+
+Store to file. Inverse of load_from_file.

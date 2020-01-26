@@ -10,7 +10,7 @@
 
 # tfds.decode.Decoder
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -20,7 +20,6 @@ source</a>
 
 ## Class `Decoder`
 
-<!-- Start diff -->
 Base decoder object.
 
 <!-- Placeholder for "Used in" -->
@@ -53,6 +52,8 @@ source</a>
 ```python
 __init__()
 ```
+
+Initialize self. See help(type(self)) for accurate signature.
 
 ## Properties
 

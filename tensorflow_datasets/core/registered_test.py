@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -126,6 +126,7 @@ class RegisteredTest(testing.TestCase):
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
     self.assertIsNone(builder.as_dataset_kwargs.pop("in_memory"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("read_config"))
     self.assertFalse(builder.as_dataset_kwargs.pop("shuffle_files"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)

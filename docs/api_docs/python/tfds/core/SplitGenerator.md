@@ -6,7 +6,7 @@
 
 # tfds.core.SplitGenerator
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -16,7 +16,6 @@ source</a>
 
 ## Class `SplitGenerator`
 
-<!-- Start diff -->
 Defines the split information for the generator.
 
 <!-- Placeholder for "Used in" -->
@@ -31,7 +30,7 @@ of usage.
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
-``` python
+```python
 __init__(
     name,
     num_shards=1,

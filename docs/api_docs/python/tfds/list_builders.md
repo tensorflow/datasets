@@ -5,15 +5,13 @@
 
 # tfds.list_builders
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
 source</a>
-
-<!-- Start diff -->
 
 Returns the string names of all
 <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.

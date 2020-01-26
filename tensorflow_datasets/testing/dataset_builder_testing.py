@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -63,6 +63,11 @@ FORBIDDEN_OS_FUNCTIONS = (
     "unlink",
     "walk",
 )
+FORBIDDEN_OS_PATH_FUNCTIONS = (
+    "exists",
+    "isdir",
+    "isfile",
+)
 
 
 _ORGINAL_NP_LOAD = np.load
@@ -71,7 +76,7 @@ _ORGINAL_NP_LOAD = np.load
 def _np_load(file_, mmap_mode=None, allow_pickle=False, **kwargs):
   if not hasattr(file_, "read"):
     raise AssertionError(
-        "You MUST pass a `tf.gfile.GFile` or file-like instance to `np.load`.")
+        "You MUST pass a `tf.io.gfile.GFile` or file-like object to `np.load`.")
   if allow_pickle:
     raise AssertionError("Unpicling files is forbidden for security reasons.")
   return _ORGINAL_NP_LOAD(file_, mmap_mode, allow_pickle, **kwargs)
@@ -167,8 +172,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   def _mock_out_forbidden_os_functions(self):
     """Raises error if forbidden os functions are called instead of gfile."""
-    err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead.")
-    mock_os = absltest.mock.Mock(os, path=os.path)
+    err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead. "
+                         "This makes code compatible with more filesystems.")
+    mock_os_path = absltest.mock.Mock(os.path, wraps=os.path)
+    for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
+      getattr(mock_os_path, fop).side_effect = err
+    mock_os = absltest.mock.Mock(os, path=mock_os_path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
     os_patcher = absltest.mock.patch(
@@ -359,6 +368,9 @@ def checksum(example):
         element = element.decode("latin-1")
       element = element.encode("utf-8")
       ret += element
+    elif isinstance(element,
+                    (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
+      ret += str(element.to_list()).encode("utf-8")
     elif isinstance(element, np.ndarray):
       ret += element.tobytes()
     else:
