@@ -97,12 +97,14 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
             "lr": tfds.features.Image(),
             "hr": tfds.features.Image(),
         }),
+        supervised_keys=("lr", "hr"),
         homepage=_DL_URL,
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
+    print("EXTRACTING", self.builder_config.download_urls)
     extracted_paths = dl_manager.download_and_extract(
         self.builder_config.download_urls)
 
@@ -125,16 +127,10 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, lr_path, hr_path):
     """Yields examples."""
-    if not tf.io.gfile.listdir(hr_path)[0].endswith(".png"):
-      hr_path = os.path.join(hr_path, tf.io.gfile.listdir(hr_path)[0])
-
     for root, _, files in tf.io.gfile.walk(lr_path):
-      if len(files):
-        for file_path in files:
-          yield root + file_path, {
-              "lr": os.path.join(root, file_path),
-              #extract for corresponding file with matching 4 digit id
-              "hr": os.path.join(hr_path,
-                                 re.search(r'\d{4}',
-                                           str(file_path)).group(0) + ".png")
-          }
+      for file_path in files:
+        yield file_path, {
+            "lr": os.path.join(root, file_path),
+            #Extract the image id from the filename: "0001x2.png"
+            "hr": os.path.join(hr_path, file_path[:4]+".png")
+        }
