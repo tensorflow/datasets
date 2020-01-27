@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="billsum" />
   <meta itemprop="description" content="&#10;BillSum, summarization of US Congressional and California state bills.&#10;&#10;There are several features:&#10;  - text: bill text.&#10;  - summary: summary of the bills.&#10;  - title: title of the bills.&#10;features for us bills. ca bills does not have.&#10;  - text_len: number of chars in text.&#10;  - sum_len: number of chars in summary.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;billsum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/billsum" />
   <meta itemprop="sameAs" content="https://github.com/FiscalNote/BillSum" />
   <meta itemprop="citation" content="&#10;@misc{kornilova2019billsum,&#10;    title={BillSum: A Corpus for Automatic Summarization of US Legislation},&#10;    author={Anastassia Kornilova and Vlad Eidelman},&#10;    year={2019},&#10;    eprint={1910.00523},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
-
 # `billsum`
 
 BillSum, summarization of US Congressional and California state bills.

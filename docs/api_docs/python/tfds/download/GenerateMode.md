@@ -20,7 +20,13 @@ source</a>
 
 `Enum` for how to treat pre-existing downloads and data.
 
-**Aliases**: `tfds.GenerateMode`
+<section class="expandable">
+  <h4 class="showalways"><b>View aliases</b></h4>
+  <p>
+<b>Main aliases</b>
+<p>`tfds.GenerateMode`</p>
+</p>
+</section>
 
 <!-- Placeholder for "Used in" -->
 

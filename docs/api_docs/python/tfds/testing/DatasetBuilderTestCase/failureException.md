@@ -16,9 +16,13 @@
 
 Assertion failed.
 
-**Aliases**: `tfds.testing.FeatureExpectationsTestCase.failureException`,
-`tfds.testing.SubTestCase.failureException`,
-`tfds.testing.TestCase.failureException`
+<section class="expandable">
+  <h4 class="showalways"><b>View aliases</b></h4>
+  <p>
+<b>Main aliases</b>
+<p>`tfds.testing.FeatureExpectationsTestCase.failureException`, `tfds.testing.SubTestCase.failureException`, `tfds.testing.TestCase.failureException`</p>
+</p>
+</section>
 
 <!-- Placeholder for "Used in" -->
 

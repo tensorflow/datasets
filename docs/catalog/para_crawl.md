@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="para_crawl" />
   <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;para_crawl&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
   <meta itemprop="citation" content="@misc {paracrawl,&#10;    title  = &quot;ParaCrawl&quot;,&#10;    year   = &quot;2018&quot;,&#10;    url    = &quot;http://paracrawl.eu/download.html.&quot;&#10;}&#10;" />
 </div>
-
 # `para_crawl`
 
 Web-Scale Parallel Corpora for Official European Languages.

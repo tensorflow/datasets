@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="cycle_gan" />
   <meta itemprop="description" content="A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;cycle_gan&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cycle_gan" />
   <meta itemprop="sameAs" content="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/ZhuPIE17,&#10;  author    = {Jun{-}Yan Zhu and&#10;               Taesung Park and&#10;               Phillip Isola and&#10;               Alexei A. Efros},&#10;  title     = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial&#10;               Networks},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1703.10593},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1703.10593},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1703.10593},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:06 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuPIE17},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;" />
 </div>
-
 # `cycle_gan`
 
 A dataset consisting of images from two classes A and B (For example:

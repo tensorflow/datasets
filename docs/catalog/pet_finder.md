@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="pet_finder" />
   <meta itemprop="description" content="Dataset with images from 5 classes (see config name for information on the specific class)&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;pet_finder&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/pet_finder" />
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/petfinder-adoption-prediction/data" />
   <meta itemprop="citation" content="&#10;@ONLINE {kaggle-petfinder-adoption-prediction,&#10;    author = &quot;Kaggle and PetFinder.my&quot;,&#10;    title  = &quot;PetFinder.my Adoption Prediction&quot;,&#10;    month  = &quot;april&quot;,&#10;    year   = &quot;2019&quot;,&#10;    url    = &quot;https://www.kaggle.com/c/petfinder-adoption-prediction/data/&quot;&#10;}&#10;" />
 </div>
-
 # `pet_finder`
 
 Dataset with images from 5 classes (see config name for information on the

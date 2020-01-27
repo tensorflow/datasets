@@ -259,8 +259,11 @@ type equality functions to provide nicer error messages.
 
 ```python
 assertAllClose(
-    *args,
-    **kwds
+    a,
+    b,
+    rtol=1e-06,
+    atol=1e-06,
+    msg=None
 )
 ```
 
@@ -292,8 +295,17 @@ can be a `dict`, `namedtuple`, `tuple` or `list`.
 
 ```python
 assertAllCloseAccordingToType(
-    *args,
-    **kwds
+    a,
+    b,
+    rtol=1e-06,
+    atol=1e-06,
+    float_rtol=1e-06,
+    float_atol=1e-06,
+    half_rtol=0.001,
+    half_atol=0.001,
+    bfloat16_rtol=0.01,
+    bfloat16_atol=0.01,
+    msg=None
 )
 ```
 
@@ -320,8 +332,9 @@ is of type float16.
 
 ```python
 assertAllEqual(
-    *args,
-    **kwds
+    a,
+    b,
+    msg=None
 )
 ```
 
@@ -351,8 +364,8 @@ Same as assertAllEqual but compatible with nested dict.
 
 ```python
 assertAllGreater(
-    *args,
-    **kwds
+    a,
+    comparison_target
 )
 ```
 
@@ -368,8 +381,8 @@ Assert element values are all greater than a target value.
 
 ```python
 assertAllGreaterEqual(
-    *args,
-    **kwds
+    a,
+    comparison_target
 )
 ```
 
@@ -385,8 +398,11 @@ Assert element values are all greater than or equal to a target value.
 
 ```python
 assertAllInRange(
-    *args,
-    **kwds
+    target,
+    lower_bound,
+    upper_bound,
+    open_lower_bound=False,
+    open_upper_bound=False
 )
 ```
 
@@ -413,8 +429,8 @@ Assert that elements in a Tensor are all in a given range.
 
 ```python
 assertAllInSet(
-    *args,
-    **kwds
+    target,
+    expected_set
 )
 ```
 
@@ -436,8 +452,8 @@ Assert that elements of a Tensor are all in a given closed set.
 
 ```python
 assertAllLess(
-    *args,
-    **kwds
+    a,
+    comparison_target
 )
 ```
 
@@ -453,8 +469,8 @@ Assert element values are all less than a target value.
 
 ```python
 assertAllLessEqual(
-    *args,
-    **kwds
+    a,
+    comparison_target
 )
 ```
 
@@ -502,8 +518,10 @@ assertAlmostEquals(
 
 ```python
 assertArrayNear(
-    *args,
-    **kwds
+    farray1,
+    farray2,
+    err,
+    msg=None
 )
 ```
 
@@ -687,8 +705,8 @@ unequal.
 
 ```python
 assertDTypeEqual(
-    *args,
-    **kwds
+    target,
+    expected_dtype
 )
 ```
 
@@ -1059,8 +1077,10 @@ Asserts that two multi-line strings are equal.
 
 ```python
 assertNDArrayNear(
-    *args,
-    **kwds
+    ndarray1,
+    ndarray2,
+    err,
+    msg=None
 )
 ```
 
@@ -1077,8 +1097,10 @@ Asserts that two numpy arrays have near values.
 
 ```python
 assertNear(
-    *args,
-    **kwds
+    f1,
+    f2,
+    err,
+    msg=None
 )
 ```
 
@@ -1109,8 +1131,9 @@ Checks whether actual iterable and expected iterable are disjoint.
 
 ```python
 assertNotAllClose(
-    *args,
-    **kwds
+    a,
+    b,
+    **kwargs
 )
 ```
 
@@ -1132,8 +1155,9 @@ Assert that two numpy arrays, or Tensors, do not have near values.
 
 ```python
 assertNotAllEqual(
-    *args,
-    **kwds
+    a,
+    b,
+    msg=None
 )
 ```
 
@@ -2444,6 +2468,7 @@ Hook method for deconstructing the test fixture after testing it.
 <h3 id="tearDownClass"><code>tearDownClass</code></h3>
 
 ```python
+@classmethod
 tearDownClass(cls)
 ```
 
@@ -2454,8 +2479,10 @@ class.
 
 ```python
 test_session(
-    *args,
-    **kwds
+    graph=None,
+    config=None,
+    use_gpu=False,
+    force_gpu=False
 )
 ```
 

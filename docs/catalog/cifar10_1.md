@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="cifar10_1" />
   <meta itemprop="description" content="The CIFAR-10.1 dataset is a new test set for CIFAR-10. CIFAR-10.1 contains roughly 2,000 new test images &#10;that were sampled after multiple years of research on the original CIFAR-10 dataset. The data collection &#10;for CIFAR-10.1 was designed to minimize distribution shift relative to the original dataset. We describe &#10;the creation of CIFAR-10.1 in the paper &quot;Do CIFAR-10 Classifiers Generalize to CIFAR-10?&quot;. &#10;The images in CIFAR-10.1 are a subset of the TinyImages dataset. &#10;There are currently two versions of the CIFAR-10.1 dataset: v4 and v6.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;cifar10_1&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cifar10_1" />
   <meta itemprop="sameAs" content="https://github.com/modestyachts/CIFAR-10.1" />
   <meta itemprop="citation" content="@article{recht2018cifar10.1,&#10;  author = {Benjamin Recht and Rebecca Roelofs and Ludwig Schmidt and Vaishaal Shankar},&#10;  title = {Do CIFAR-10 Classifiers Generalize to CIFAR-10?},&#10;  year = {2018},&#10;  note = {\url{https://arxiv.org/abs/1806.00451}},&#10;}&#10;&#10;@article{torralba2008tinyimages, &#10;  author = {Antonio Torralba and Rob Fergus and William T. Freeman}, &#10;  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence}, &#10;  title = {80 Million Tiny Images: A Large Data Set for Nonparametric Object and Scene Recognition}, &#10;  year = {2008}, &#10;  volume = {30}, &#10;  number = {11}, &#10;  pages = {1958-1970}&#10;}&#10;" />
 </div>
-
 # `cifar10_1`
 
 The CIFAR-10.1 dataset is a new test set for CIFAR-10. CIFAR-10.1 contains

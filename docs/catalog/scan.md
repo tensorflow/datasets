@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="scan" />
   <meta itemprop="description" content="SCAN tasks with various splits.&#10;&#10;SCAN is a set of simple language-driven navigation tasks for studying&#10;compositional learning and zero-shot generalization.&#10;&#10;See https://github.com/brendenlake/SCAN for a description of the splits.&#10;&#10;Example usage:&#10;data = tfds.load(&#x27;scan/length&#x27;)&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;scan&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/scan" />
   <meta itemprop="sameAs" content="https://github.com/brendenlake/SCAN" />
   <meta itemprop="citation" content="&#10;@inproceedings{Lake2018GeneralizationWS,&#10;  title={Generalization without Systematicity: On the Compositional Skills of&#10;         Sequence-to-Sequence Recurrent Networks},&#10;  author={Brenden M. Lake and Marco Baroni},&#10;  booktitle={ICML},&#10;  year={2018},&#10;  url={https://arxiv.org/pdf/1711.00350.pdf},&#10;}&#10;" />
 </div>
-
 # `scan`
 
 SCAN tasks with various splits.

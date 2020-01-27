@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="imagenette" />
   <meta itemprop="description" content="Imagenette is a subset of 10 easily classified classes from the Imagenet&#10;dataset. It was originally prepared by Jeremy Howard of FastAI. The objective&#10;behind putting together a small version of the Imagenet dataset was mainly&#10;because running new ideas/algorithms/experiments on the whole Imagenet take a&#10;lot of time.&#10;&#10;This version of the dataset allows researchers/practitioners to quickly try out&#10;ideas and share with others. The dataset comes in three variants:&#10;&#10;  * Full size&#10;  * 320 px&#10;  * 160 px&#10;This dataset consists of the Imagenette dataset {size} variant.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;imagenette&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/imagenette" />
   <meta itemprop="sameAs" content="https://github.com/fastai/imagenette" />
   <meta itemprop="citation" content="&#10;" />
 </div>
-
 # `imagenette`
 
 Imagenette is a subset of 10 easily classified classes from the Imagenet
