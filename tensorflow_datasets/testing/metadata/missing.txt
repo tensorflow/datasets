@@ -22,11 +22,6 @@ trivia_qa/rc.nocontext/1.1.0
 trivia_qa/rc/1.1.0
 trivia_qa/unfiltered.nocontext/1.1.0
 trivia_qa/unfiltered/1.1.0
-wmt15_translate/cs-en.subwords8k/1.0.0
-wmt15_translate/de-en.subwords8k/1.0.0
-wmt15_translate/fi-en.subwords8k/1.0.0
-wmt15_translate/fr-en.subwords8k/1.0.0
-wmt15_translate/ru-en.subwords8k/1.0.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0

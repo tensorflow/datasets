@@ -44,7 +44,6 @@ Versions:
 *   `2.0.0`: Separate target sentences with newline.
 
 ### Statistics
-
 None computed
 
 ### Features
@@ -73,7 +72,6 @@ Versions:
 *   `2.0.0`: Separate target sentences with newline.
 
 ### Statistics
-
 None computed
 
 ### Features
@@ -102,11 +100,9 @@ Versions:
 *   `2.0.0`: Separate target sentences with newline.
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'article': Text(shape=(None,), dtype=tf.int64),

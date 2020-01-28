@@ -66,6 +66,8 @@ toc:
     title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
     title: diabetic_retinopathy_detection (manual)
+  - path: /datasets/catalog/div2k
+    title: div2k
   - path: /datasets/catalog/dmlab
     title: dmlab
   - path: /datasets/catalog/downsampled_imagenet
@@ -222,6 +224,8 @@ toc:
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/eraser_multi_rc
+    title: eraser_multi_rc
   - path: /datasets/catalog/esnli
     title: esnli
   - path: /datasets/catalog/gap
@@ -240,6 +244,8 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
   - path: /datasets/catalog/scan
     title: scan
   - path: /datasets/catalog/scicite

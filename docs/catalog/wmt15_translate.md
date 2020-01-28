@@ -51,19 +51,19 @@ following configurations predefined (defaults to the first one):
 *   `ru-en` (`v1.0.0`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
     dataset.
 
-*   `cs-en.subwords8k` (`v1.0.0`) (`Size: ?? GiB`): WMT 2015 cs-en translation
+*   `cs-en.subwords8k` (`v1.0.0`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation
     task dataset with subword encoding.
 
-*   `de-en.subwords8k` (`v1.0.0`) (`Size: ?? GiB`): WMT 2015 de-en translation
+*   `de-en.subwords8k` (`v1.0.0`) (`Size: 1.62 GiB`): WMT 2015 de-en translation
     task dataset with subword encoding.
 
-*   `fi-en.subwords8k` (`v1.0.0`) (`Size: ?? GiB`): WMT 2015 fi-en translation
+*   `fi-en.subwords8k` (`v1.0.0`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+    translation task dataset with subword encoding.
+
+*   `fr-en.subwords8k` (`v1.0.0`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation
     task dataset with subword encoding.
 
-*   `fr-en.subwords8k` (`v1.0.0`) (`Size: ?? GiB`): WMT 2015 fr-en translation
-    task dataset with subword encoding.
-
-*   `ru-en.subwords8k` (`v1.0.0`) (`Size: ?? GiB`): WMT 2015 ru-en translation
+*   `ru-en.subwords8k` (`v1.0.0`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation
     task dataset with subword encoding.
 
 ## `wmt15_translate/cs-en`
@@ -265,13 +265,20 @@ of the wmt configs here, require a manual download. Please look into wmt.py to
 see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
-None computed
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 15,798,785
+TRAIN      | 15,793,126
+VALIDATION | 3,003
+TEST       | 2,656
 
 ### Features
+
 ```python
 Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64),
-    'en': Text(shape=(None,), dtype=tf.int64),
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
 })
 ```
 
@@ -296,13 +303,20 @@ of the wmt configs here, require a manual download. Please look into wmt.py to
 see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 4,528,170
+TRAIN      | 4,522,998
+VALIDATION | 3,003
+TEST       | 2,169
 
 ### Features
+
 ```python
 Translation({
-    'de': Text(shape=(None,), dtype=tf.int64),
-    'en': Text(shape=(None,), dtype=tf.int64),
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
 })
 ```
 
@@ -327,13 +341,20 @@ of the wmt configs here, require a manual download. Please look into wmt.py to
 see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,076,264
+TRAIN      | 2,073,394
+VALIDATION | 1,500
+TEST       | 1,370
 
 ### Features
+
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64),
-    'fi': Text(shape=(None,), dtype=tf.int64),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
 })
 ```
 
@@ -358,13 +379,20 @@ of the wmt configs here, require a manual download. Please look into wmt.py to
 see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
-None computed
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 40,859,301
+TRAIN      | 40,853,298
+VALIDATION | 4,503
+TEST       | 1,500
 
 ### Features
+
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64),
-    'fr': Text(shape=(None,), dtype=tf.int64),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
 })
 ```
 
@@ -389,13 +417,20 @@ of the wmt configs here, require a manual download. Please look into wmt.py to
 see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,500,902
+TRAIN      | 2,495,081
+VALIDATION | 3,003
+TEST       | 2,818
 
 ### Features
+
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64),
-    'ru': Text(shape=(None,), dtype=tf.int64),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
 })
 ```
 
