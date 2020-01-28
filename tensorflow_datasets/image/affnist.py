@@ -68,13 +68,14 @@ class Affnist(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
 
-    extracted_path = {
+    filenames = {
       "train_data": _AFFNIST_TRAIN_DATA_FILENAME,
       "validation_data": _AFFNIST_VALIDATION_DATA_FILENAME,
       "test_data": _AFFNIST_TEST_DATA_FILENAME,
     }
+
     files = dl_manager.download_and_extract(
-      {k: urllib.parse.urljoin(self.URL, v) for k, v in extracted_path.items()})
+      {k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()})
 
     return [
       tfds.core.SplitGenerator(
@@ -106,9 +107,9 @@ class Affnist(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next examples
     """
-
-    images = [scipy.io.loadmat(os.path.join(images_dir_path,i))["affNISTdata"][0][0]["image"] for i in os.listdir(images_dir_path)]
-    labels = [scipy.io.loadmat(os.path.join(images_dir_path,i))["affNISTdata"][0][0]["label_int"] for i in os.listdir(images_dir_path)]
+    
+    images = [scipy.io.loadmat(os.path.join(images_dir_path,i))["affNISTdata"][0][0]["image"] for i in tf.io.gfile.listdir(images_dir_path)]
+    labels = [scipy.io.loadmat(os.path.join(images_dir_path,i))["affNISTdata"][0][0]["label_int"] for i in tf.io.gfile.listdir(images_dir_path)]
 
     images = np.concatenate(images, axis = 1).T.reshape(-1, 40, 40, 1)
     labels = np.concatenate(labels, axis = 1).T.reshape(-1)
