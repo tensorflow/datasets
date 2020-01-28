@@ -36,7 +36,7 @@ flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")
 FLAGS = flags.FLAGS
 
-_IMAGE_FILENAME = 'test_image'
+_IMAGE_FILENAME = 'test_image.JPEG'
 _LABEL_DIRNAME = 'label'
 
 _SIZES = ["full-size", "320px", "160px"]

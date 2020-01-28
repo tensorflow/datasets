@@ -1,4 +1,4 @@
-""" Tests for Imagewang contains Imagenette and Imagewoof combined. """
+""" Tests for Imagewang """
 
 from __future__ import absolute_import
 from __future__ import division
@@ -12,8 +12,8 @@ class ImagewangFullSizeTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
   BUILDER_CONFIG_NAMES_TO_TEST = ['full-size']
   SPLITS = {
-      "train": 1,
-      "validation": 1,
+      "train": 4,
+      "validation": 4,
   }
 
 
@@ -21,8 +21,8 @@ class Imagewang320Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
   BUILDER_CONFIG_NAMES_TO_TEST = ['320px']
   SPLITS = {
-      "train": 1,
-      "validation": 1,
+      "train": 4,
+      "validation": 4,
   }
 
 
@@ -30,8 +30,8 @@ class Imagewang160Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
   BUILDER_CONFIG_NAMES_TO_TEST = ['160px']
   SPLITS = {
-      "train": 1,
-      "validation": 1,
+      "train": 4,
+      "validation": 4,
   }
 
 
