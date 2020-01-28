@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
+from tensorflow_datasets.image.affnist import Affnist
 from tensorflow_datasets.image.arc import ARC
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
@@ -94,4 +95,3 @@ from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.vgg_face2 import VggFace2
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.affnist import Affnist  # TODO(affnist) Sort alphabetically
