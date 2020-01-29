@@ -170,9 +170,7 @@ a look at the
 ```python
 class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
-  # BeamBasedBuilder does not support S3 yet.
-  VERSION = tfds.core.Version(
-      '1.0.0', experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -192,7 +190,6 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
         ),
         splits_lib.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs=dict(file_dir='path/to/test_data/'),
         ),
     ]
@@ -202,7 +199,8 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
 
     def _process_example(filename):
-      return key, {
+      # Use filename as key
+      return filename, {
           'image': os.path.join(file_dir, filename),
           'label': filename.split('.')[1],  # Extract label: "0010102.dog.jpeg"
       }

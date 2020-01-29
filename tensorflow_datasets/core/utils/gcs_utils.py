@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,7 +76,14 @@ def is_dataset_on_gcs(dataset_name):
 def download_gcs_dataset(
     dataset_name, local_dataset_dir, max_simultaneous_downloads=50):
   """Downloads prepared GCS dataset to local dataset directory."""
-  gcs_paths_to_dl = gcs_files(posixpath.join(GCS_DATASETS_DIR, dataset_name))
+  prefix = posixpath.join(GCS_DATASETS_DIR, dataset_name)
+  gcs_paths_to_dl = gcs_files(prefix)
+
+  # Filter out the diffs folder if present
+  filter_prefix = posixpath.join(prefix, "diffs")
+  gcs_paths_to_dl = [p for p in gcs_paths_to_dl
+                     if not p.startswith(filter_prefix)]
+
   with utils.async_tqdm(
       total=len(gcs_paths_to_dl), desc="Dl Completed...", unit=" file") as pbar:
     def _copy_from_gcs(gcs_path):

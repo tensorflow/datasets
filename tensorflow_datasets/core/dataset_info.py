@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -205,11 +205,17 @@ class DatasetInfo(object):
 
   @property
   def size_in_bytes(self):
-    return self.as_proto.size_in_bytes
+    size_in_bytes = sum(split.num_bytes for split in self.splits.values())
+    # Fall back to deprecated proto field if `num_bytes` fields are empty.
+    return size_in_bytes or self.as_proto.size_in_bytes
 
-  @size_in_bytes.setter
-  def size_in_bytes(self, size):
-    self.as_proto.size_in_bytes = size
+  @property
+  def download_size(self):
+    return self.as_proto.download_size
+
+  @download_size.setter
+  def download_size(self, size):
+    self.as_proto.download_size = size
 
   @property
   def features(self):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import abc
 import functools
+import inspect
 import itertools
 import os
 import sys
@@ -308,9 +309,15 @@ class DatasetBuilder(object):
 
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
-        self.info.size_in_bytes, directory=self._data_dir_root):
-      raise IOError("Not enough disk space. Needed: %s" %
-                    units.size_str(self.info.size_in_bytes))
+        self.info.size_in_bytes + self.info.download_size,
+        directory=self._data_dir_root):
+      raise IOError(
+          "Not enough disk space. Needed: {} (download: {}, generated: {})"
+          .format(
+              units.size_str(self.info.size_in_bytes + self.info.download_size),
+              units.size_str(self.info.download_size),
+              units.size_str(self.info.size_in_bytes),
+          ))
     self._log_download_bytes()
 
     dl_manager = self._make_download_manager(
@@ -351,7 +358,7 @@ class DatasetBuilder(object):
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
-          self.info.size_in_bytes = dl_manager.downloaded_size
+          self.info.downloaded_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
@@ -853,13 +860,21 @@ class FileAdapterBuilder(DatasetBuilder):
     """
     raise NotImplementedError()
 
+  def _make_split_generators_kwargs(self, prepare_split_kwargs):
+    """Get kwargs for `self._split_generators()` from `prepare_split_kwargs`."""
+    del prepare_split_kwargs
+    return {}
+
   def _download_and_prepare(self, dl_manager, **prepare_split_kwargs):
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
 
     # Generating data for all splits
     split_dict = splits_lib.SplitDict()
-    for split_generator in self._split_generators(dl_manager):
+    split_generators_kwargs = self._make_split_generators_kwargs(
+        prepare_split_kwargs)
+    for split_generator in self._split_generators(
+        dl_manager, **split_generators_kwargs):
       if splits_lib.Split.ALL == split_generator.split_info.name:
         raise ValueError(
             "tfds.Split.ALL is a special split keyword corresponding to the "
@@ -1046,8 +1061,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
                                   total=split_info.num_examples, leave=False):
       example = self.info.features.encode_example(record)
       writer.write(key, example)
-    shard_lengths = writer.finalize()
+    shard_lengths, total_size = writer.finalize()
     split_generator.split_info.shard_lengths.extend(shard_lengths)
+    split_generator.split_info.num_bytes = total_size
 
 
 class BeamBasedBuilder(FileAdapterBuilder):
@@ -1056,6 +1072,18 @@ class BeamBasedBuilder(FileAdapterBuilder):
   def __init__(self, *args, **kwargs):
     super(BeamBasedBuilder, self).__init__(*args, **kwargs)
     self._beam_writers = {}  # {split: beam_writer} mapping.
+
+  def _make_split_generators_kwargs(self, prepare_split_kwargs):
+    # Pass `pipeline` into `_split_generators()` from `prepare_split_kwargs` if
+    # it's in the call signature of `_split_generators()`.
+    # This allows for global preprocessing in beam.
+    split_generators_kwargs = {}
+    split_generators_arg_names = (
+        inspect.getargspec(self._split_generators).args if six.PY2 else
+        inspect.signature(self._split_generators).parameters.keys())
+    if "pipeline" in split_generators_arg_names:
+      split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]
+    return split_generators_kwargs
 
   @abc.abstractmethod
   def _build_pcollection(self, pipeline, **kwargs):
@@ -1127,10 +1155,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
     split_dict = self.info.splits
     for split_name, beam_writer in self._beam_writers.items():
       logging.info("Retrieving shard lengths for %s...", split_name)
-      shard_lengths = beam_writer.finalize()
+      shard_lengths, total_size = beam_writer.finalize()
       split_info = split_dict[split_name]
       split_info.shard_lengths.extend(shard_lengths)
       split_info.num_shards = len(shard_lengths)
+      split_info.num_bytes = total_size
     logging.info("Updating split info...")
     self.info.update_splits_if_different(split_dict)
 

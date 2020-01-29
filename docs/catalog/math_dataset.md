@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="math_dataset" />
-  <meta itemprop="description" content="&#10;Mathematics database.&#10;&#10;This dataset code generates mathematical question and answer pairs,&#10;from a range of question types at roughly school-level difficulty.&#10;This is designed to test the mathematical learning and algebraic&#10;reasoning skills of learning models.&#10;&#10;Original paper: Analysing Mathematical Reasoning Abilities of Neural Models&#10;(Saxton, Grefenstette, Hill, Kohli).&#10;&#10;Example usage:&#10;train_examples, val_examples = tfds.load(&#10;    'math_dataset/arithmetic__mul',&#10;    split=['train', 'test'],&#10;    as_supervised=True)&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('math_dataset', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="&#10;Mathematics database.&#10;&#10;This dataset code generates mathematical question and answer pairs,&#10;from a range of question types at roughly school-level difficulty.&#10;This is designed to test the mathematical learning and algebraic&#10;reasoning skills of learning models.&#10;&#10;Original paper: Analysing Mathematical Reasoning Abilities of Neural Models&#10;(Saxton, Grefenstette, Hill, Kohli).&#10;&#10;Example usage:&#10;train_examples, val_examples = tfds.load(&#10;    &#x27;math_dataset/arithmetic__mul&#x27;,&#10;    split=[&#x27;train&#x27;, &#x27;test&#x27;],&#10;    as_supervised=True)&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;math_dataset&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/math_dataset" />
   <meta itemprop="sameAs" content="https://github.com/deepmind/mathematics_dataset" />
   <meta itemprop="citation" content="&#10;@article{2019arXiv,&#10;  author = {Saxton, Grefenstette, Hill, Kohli},&#10;  title = {Analysing Mathematical Reasoning Abilities of Neural Models},&#10;  year = {2019},&#10;  journal = {arXiv:1904.01557}&#10;}&#10;" />
@@ -774,7 +774,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__linear_1d_composed`
 Mathematics database.
@@ -814,7 +814,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__linear_2d`
 Mathematics database.
@@ -854,7 +854,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__linear_2d_composed`
 Mathematics database.
@@ -894,7 +894,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__polynomial_roots`
 Mathematics database.
@@ -934,7 +934,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__polynomial_roots_composed`
 Mathematics database.
@@ -974,7 +974,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__sequence_next_term`
 Mathematics database.
@@ -1014,7 +1014,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/algebra__sequence_nth_term`
 Mathematics database.
@@ -1054,7 +1054,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__add_or_sub`
 Mathematics database.
@@ -1094,7 +1094,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__add_or_sub_in_base`
 Mathematics database.
@@ -1134,7 +1134,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__add_sub_multiple`
 Mathematics database.
@@ -1174,7 +1174,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__div`
 Mathematics database.
@@ -1214,7 +1214,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__mixed`
 Mathematics database.
@@ -1254,7 +1254,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__mul`
 Mathematics database.
@@ -1294,7 +1294,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__mul_div_multiple`
 Mathematics database.
@@ -1334,7 +1334,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__nearest_integer_root`
 Mathematics database.
@@ -1374,7 +1374,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/arithmetic__simplify_surd`
 Mathematics database.
@@ -1414,7 +1414,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/calculus__differentiate`
 Mathematics database.
@@ -1454,7 +1454,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/calculus__differentiate_composed`
 Mathematics database.
@@ -1494,7 +1494,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__closest`
 Mathematics database.
@@ -1534,7 +1534,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__closest_composed`
 Mathematics database.
@@ -1574,7 +1574,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__kth_biggest`
 Mathematics database.
@@ -1614,7 +1614,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__kth_biggest_composed`
 Mathematics database.
@@ -1654,7 +1654,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__pair`
 Mathematics database.
@@ -1694,7 +1694,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__pair_composed`
 Mathematics database.
@@ -1734,7 +1734,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__sort`
 Mathematics database.
@@ -1774,7 +1774,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/comparison__sort_composed`
 Mathematics database.
@@ -1814,7 +1814,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/measurement__conversion`
 Mathematics database.
@@ -1854,7 +1854,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/measurement__time`
 Mathematics database.
@@ -1894,7 +1894,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__base_conversion`
 Mathematics database.
@@ -1934,7 +1934,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__div_remainder`
 Mathematics database.
@@ -1974,7 +1974,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__div_remainder_composed`
 Mathematics database.
@@ -2014,7 +2014,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__gcd`
 Mathematics database.
@@ -2054,7 +2054,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__gcd_composed`
 Mathematics database.
@@ -2094,7 +2094,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__is_factor`
 Mathematics database.
@@ -2134,7 +2134,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__is_factor_composed`
 Mathematics database.
@@ -2174,7 +2174,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__is_prime`
 Mathematics database.
@@ -2214,7 +2214,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__is_prime_composed`
 Mathematics database.
@@ -2254,7 +2254,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__lcm`
 Mathematics database.
@@ -2294,7 +2294,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__lcm_composed`
 Mathematics database.
@@ -2334,7 +2334,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__list_prime_factors`
 Mathematics database.
@@ -2374,7 +2374,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__list_prime_factors_composed`
 Mathematics database.
@@ -2414,7 +2414,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__place_value`
 Mathematics database.
@@ -2454,7 +2454,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__place_value_composed`
 Mathematics database.
@@ -2494,7 +2494,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__round_number`
 Mathematics database.
@@ -2534,7 +2534,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/numbers__round_number_composed`
 Mathematics database.
@@ -2574,7 +2574,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__add`
 Mathematics database.
@@ -2614,7 +2614,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__coefficient_named`
 Mathematics database.
@@ -2654,7 +2654,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__collect`
 Mathematics database.
@@ -2694,7 +2694,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__compose`
 Mathematics database.
@@ -2734,7 +2734,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__evaluate`
 Mathematics database.
@@ -2774,7 +2774,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__evaluate_composed`
 Mathematics database.
@@ -2814,7 +2814,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__expand`
 Mathematics database.
@@ -2854,7 +2854,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/polynomials__simplify_power`
 Mathematics database.
@@ -2894,7 +2894,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/probability__swr_p_level_set`
 Mathematics database.
@@ -2934,7 +2934,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## `math_dataset/probability__swr_p_sequence`
 Mathematics database.
@@ -2974,7 +2974,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
+`('question', 'answer')`
 
 ## Citation
 ```

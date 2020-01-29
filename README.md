@@ -145,7 +145,7 @@ input pipelines with `tf.data` but use whatever you'd like for your model
 components.
 
 ```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
+train_ds = tfds.load("mnist", split="train")
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
 for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
