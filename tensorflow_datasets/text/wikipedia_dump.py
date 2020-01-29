@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,13 +34,13 @@ _CITATION = """\
 """
 
 _DESCRIPTION = '''\
-Collection of 7.8 million sentences (one per line) from August 2018 English wikipedia dump. 
+Collection of 7.8 million sentences (one per line) from August 2018 English Wikipedia dump. 
 '''
 
 class WikipediaDump(tfds.core.GeneratorBasedBuilder):
   '''Wikipedia dump dataset builder'''
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -62,31 +62,22 @@ class WikipediaDump(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(txt_path, 'r') as f:
       text = f.read()
 
-    # 80/10/10 split
-    i = int(len(text) * 0.8)
-    train_text = text[:i], text[i:]
-    i = int(len(text) * 0.5)
-    validation_text, text = text[:i], text[i:]
-    test_text = text
+    # Since there's no official split, putting everything under training split
 
     return [
             tfds.core.SplitGenerator(
                 name = tfds.Split.TRAIN,
                 gen_kwargs = {
                     'split_key' : 'train',
-                    'split_text' : train_text
-                },
-            ),
-            tfds.core.SplitGenerator(
-                name = tfds.Split.VALIDATION,
-                gen_kwargs = {
-                    'split_key' : 'validation',
-                    'split_text' : validation_text,
+                    'split_text' : text,
                 },
             ),
     ]
 
     def _generate_examples(self, split_key, split_text):
-      data_key = split_key 
-      feature_dict = {'text' : split_text}
-      yield data_key, feature_dict
+      def abc():
+        with open(txt_path) as f:
+          for line in f:
+            yield line
+      for index, text in enumerate(abc()):
+        yield index, {"text": split_text}
