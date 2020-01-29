@@ -309,9 +309,15 @@ class DatasetBuilder(object):
 
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
-        self.info.size_in_bytes, directory=self._data_dir_root):
-      raise IOError("Not enough disk space. Needed: %s" %
-                    units.size_str(self.info.size_in_bytes))
+        self.info.size_in_bytes + self.info.download_size,
+        directory=self._data_dir_root):
+      raise IOError(
+          "Not enough disk space. Needed: {} (download: {}, generated: {})"
+          .format(
+              units.size_str(self.info.size_in_bytes + self.info.download_size),
+              units.size_str(self.info.download_size),
+              units.size_str(self.info.size_in_bytes),
+          ))
     self._log_download_bytes()
 
     dl_manager = self._make_download_manager(
@@ -352,7 +358,7 @@ class DatasetBuilder(object):
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
-          self.info.size_in_bytes = dl_manager.downloaded_size
+          self.info.downloaded_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
@@ -1055,8 +1061,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
                                   total=split_info.num_examples, leave=False):
       example = self.info.features.encode_example(record)
       writer.write(key, example)
-    shard_lengths = writer.finalize()
+    shard_lengths, total_size = writer.finalize()
     split_generator.split_info.shard_lengths.extend(shard_lengths)
+    split_generator.split_info.num_bytes = total_size
 
 
 class BeamBasedBuilder(FileAdapterBuilder):
@@ -1148,10 +1155,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
     split_dict = self.info.splits
     for split_name, beam_writer in self._beam_writers.items():
       logging.info("Retrieving shard lengths for %s...", split_name)
-      shard_lengths = beam_writer.finalize()
+      shard_lengths, total_size = beam_writer.finalize()
       split_info = split_dict[split_name]
       split_info.shard_lengths.extend(shard_lengths)
       split_info.num_shards = len(shard_lengths)
+      split_info.num_bytes = total_size
     logging.info("Updating split info...")
     self.info.update_splits_if_different(split_dict)
 

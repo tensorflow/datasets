@@ -32,7 +32,7 @@
       }
     ]
   },
-  "sizeInBytes": "11594722",
+  "downloadSize": "2000",
   "splits": [
     {
       "name": "test",
@@ -40,6 +40,7 @@
       "shardLengths": [
         "20"
       ],
+      "numBytes": "11594722",
       "statistics": {
         "features": [
           {
