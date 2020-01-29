@@ -1,3 +1,4 @@
+# coding=utf-8
 """This is a difficult regression task, where the aim is to predict the burned area of forest fires, in the northeast region of Portugal, by using meteorological and other data."""
 
 from __future__ import absolute_import
@@ -79,7 +80,7 @@ FEATURES = collections.OrderedDict([
 class ForestFires(tfds.core.GeneratorBasedBuilder):
   """Regression task aimed to predict the burned area of forest fires."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('0.0.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(

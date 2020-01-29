@@ -1,4 +1,5 @@
-"""Test for Forest Fires dataset"""
+# coding=utf-8
+"""Test for Forest Fires dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
