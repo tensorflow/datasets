@@ -53,7 +53,7 @@ _DOWNLOAD_URL = 'http://www.eraserbenchmark.com/zipped/multirc.tar.gz'
 class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
   """Multi Sentence Reasoning with Explanations (Eraser Benchmark)."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -62,7 +62,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'passage': tfds.features.Text(),
             'query_and_answer': tfds.features.Text(),
-            'label': tfds.features.ClassLabel(names=['True', 'False']),
+            'label': tfds.features.ClassLabel(names=['False', 'True']),
             'evidences': tfds.features.Sequence(tfds.features.Text())
         }),
         supervised_keys=None,
