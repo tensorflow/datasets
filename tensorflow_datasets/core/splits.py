@@ -27,6 +27,7 @@ import six
 from six.moves import range  # pylint: disable=redefined-builtin
 
 from tensorflow_datasets.core import proto
+from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
 
 
@@ -43,6 +44,37 @@ class SplitInfo(object):
   def __repr__(self):
     num_examples = self.num_examples or "unknown"
     return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)
+
+
+class SubSplitInfo(object):
+  """Wrapper around a sub split info.
+
+  This class expose info on the subsplit:
+
+  ```
+  ds, info = tfds.load(..., split='train[75%:]', with_info=True)
+  info.splits['train[75%:]'].num_examples
+  ```
+
+  """
+
+  def __init__(self, file_instructions):
+    """Constructor.
+
+    Args:
+      file_instructions: _FileInstructionOutput
+    """
+    self._file_instructions = file_instructions
+
+  @property
+  def num_examples(self):
+    """Returns the number of example in the subsplit."""
+    return self._file_instructions.num_examples
+
+  @property
+  def file_instructions(self):
+    """Returns the list of dict(filename, take, skip)."""
+    return self._file_instructions.file_instructions
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -527,14 +559,22 @@ def compute_mask_offsets(shard_id2num_examples):
 class SplitDict(utils.NonMutableDict):
   """Split info object."""
 
-  def __init__(self):
+  def __init__(self, dataset_name):
     super(SplitDict, self).__init__(error_msg="Split {key} already present")
+    self._dataset_name = dataset_name
 
   def __getitem__(self, key):
-    if str(key) not in self:
-      raise KeyError("Invalid split %s. Available splits are: %s" % (
-          key, sorted(list(self.keys()))))
-    return super(SplitDict, self).__getitem__(str(key))
+    # 1st case: The key exists: `info.splits['train']`
+    if str(key) in self:
+      return super(SplitDict, self).__getitem__(str(key))
+    # 2nd case: Uses instructions: `info.splits['train[50%]']`
+    else:
+      instructions = tfrecords_reader.make_file_instructions(
+          name=self._dataset_name,
+          split_infos=self.values(),
+          instruction=key,
+      )
+      return SubSplitInfo(instructions)
 
   def __setitem__(self, key, value):
     raise ValueError("Cannot add elem. Use .add() instead.")
@@ -547,9 +587,9 @@ class SplitDict(utils.NonMutableDict):
     super(SplitDict, self).__setitem__(split_info.name, split_info)
 
   @classmethod
-  def from_proto(cls, repeated_split_infos):
+  def from_proto(cls, dataset_name, repeated_split_infos):
     """Returns a new SplitDict initialized from the `repeated_split_infos`."""
-    split_dict = cls()
+    split_dict = cls(dataset_name)
     for split_info_proto in repeated_split_infos:
       split_info = SplitInfo()
       split_info.CopyFrom(split_info_proto)
@@ -567,7 +607,7 @@ class SplitDict(utils.NonMutableDict):
     return sum(s.num_examples for s in self.values())
 
   def copy(self):
-    return SplitDict.from_proto(self.to_proto())
+    return SplitDict.from_proto(self._dataset_name, self.to_proto())
 
 
 def check_splits_equals(splits1, splits2):

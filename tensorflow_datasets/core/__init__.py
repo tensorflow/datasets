@@ -39,6 +39,7 @@ from tensorflow_datasets.core.splits import SplitBase
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+from tensorflow_datasets.core.splits import SubSplitInfo
 
 from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 

@@ -870,7 +870,7 @@ class FileAdapterBuilder(DatasetBuilder):
       tf.io.gfile.makedirs(self._data_dir)
 
     # Generating data for all splits
-    split_dict = splits_lib.SplitDict()
+    split_dict = splits_lib.SplitDict(dataset_name=self.name)
     split_generators_kwargs = self._make_split_generators_kwargs(
         prepare_split_kwargs)
     for split_generator in self._split_generators(

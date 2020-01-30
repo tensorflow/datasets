@@ -64,6 +64,15 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     split = splits.Split.TRAIN
     self.assertEqual(expected, naming.filename_prefix_for_split(prefix, split))
 
+  def test_filenames_for_dataset_split(self):
+    self.assertEqual([
+        "foo-train-00000-of-00002",
+        "foo-train-00001-of-00002",
+    ], naming.filenames_for_dataset_split(
+        dataset_name="foo",
+        split=splits.Split.TRAIN,
+        num_shards=2))
+
   def test_filepaths_for_dataset_split(self):
     self.assertEqual([
         "/tmp/bar/foo-train-00000-of-00002",

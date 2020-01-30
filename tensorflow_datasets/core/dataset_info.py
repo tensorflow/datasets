@@ -151,7 +151,7 @@ class DatasetInfo(object):
             "the top-level. Got {}".format(features))
       features._set_top_level()  # pylint: disable=protected-access
     self._features = features
-    self._splits = splits_lib.SplitDict()
+    self._splits = splits_lib.SplitDict(self._builder.name)
     if supervised_keys is not None:
       assert isinstance(supervised_keys, tuple)
       assert len(supervised_keys) == 2
@@ -202,6 +202,10 @@ class DatasetInfo(object):
   @property
   def citation(self):
     return self.as_proto.citation
+
+  @property
+  def data_dir(self):
+    return self._builder.data_dir
 
   @property
   def size_in_bytes(self):
@@ -362,7 +366,8 @@ class DatasetInfo(object):
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
-    self._set_splits(splits_lib.SplitDict.from_proto(parsed_proto.splits))
+    split_dict = splits_lib.SplitDict.from_proto(self.name, parsed_proto.splits)
+    self._set_splits(split_dict)
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
