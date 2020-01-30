@@ -9,11 +9,13 @@ from tensorflow_datasets.structured import somerville_happiness
 
 
 class SomervilleHappinessTest(testing.DatasetBuilderTestCase):
- 
+
   DATASET_CLASS = somerville_happiness.SomervilleHappiness
   SPLITS = {
-      "train": 1, 
+      "train": 1,  
   }
+
+  DL_EXTRACT_RESULT = "test.csv"
 
 if __name__ == "__main__":
   testing.test_main()

@@ -14,7 +14,7 @@ _CITATION = """
 author = "Waldemar W. Koczkodaj",
 year = "2015",
 title = "{UCI} Machine Learning Repository",
-url = "http://archive.ics.uci.edu/ml",
+url = "https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey",
 institution = "University of California, Irvine, School of Information and Computer Sciences"
 }
 """
@@ -42,7 +42,12 @@ def check_input(d):
   if d <= 5:
     return d
 
+def check_input_for_D(d):
+  if d <= 1:
+    return d
+
 FEATURE_DICT = collections.OrderedDict([
+    ("D", (tf.int32, check_input_for_D)),
     ("X1", (tf.int32, check_input)),
     ("X2", (tf.int32, check_input)),
     ("X3", (tf.int32, check_input)),
@@ -54,8 +59,9 @@ FEATURE_DICT = collections.OrderedDict([
 _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00479/SomervilleHappinessSurvey2015.csv'
 
 class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
-  
-  VERSION = tfds.core.Version('2.0.0')
+
+
+  VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -89,7 +95,9 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
     with open(file_path, newline='', encoding='utf-16') as f:
       reader = csv.DictReader(f, quoting=csv.QUOTE_NONE)
       for i, row in enumerate(reader):
+        feeling = "1"
         yield i, {
                "feeling": _FEELING_DICT['1'],
                "features": row,
           }
+
