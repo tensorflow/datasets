@@ -24,9 +24,12 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-# TODO(imagewang): BibTeX citation
-# See https://github.com/fastai/imagenette/issues/16.
 _CITATION = """
+@misc{imagewang,
+  author    = "Jeremy Howard",
+  title     = "Imagewang",
+  url       = "https://github.com/fastai/imagenette/"
+}
 """
 
 _DESCRIPTION = """\
