@@ -58,7 +58,8 @@ def _default_options():
   options.experimental_threading.max_intra_op_parallelism = 1
   options.experimental_threading.private_threadpool_size = 16
   options.experimental_optimization.apply_default_optimizations = True
-  options.experimental_optimization.map_fusion = True
+  # TODO(b/148173095): Map fusion do not works with unbatching (b/148519959)
+  # options.experimental_optimization.map_fusion = True
   options.experimental_optimization.map_parallelization = True
   return options
 
