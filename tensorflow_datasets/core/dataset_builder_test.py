@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -163,12 +163,12 @@ class DatasetBuilderTest(testing.TestCase):
               data_dir=tmp_dir,
               with_info=True)
       self.assertSetEqual(
-          set(["dataset_info.json", "image.image.json",
-               "mnist-test.counts.txt-00000-of-00001",
+          set(["dataset_info.json",
+               "image.image.json",
                "mnist-test.tfrecord-00000-of-00001",
-               "mnist-train.counts.txt-00000-of-00001"] +
-              ["mnist-train.tfrecord-0000%d-of-00010" % i for i in range(10)]),
-          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/1.0.0"))))
+               "mnist-train.tfrecord-00000-of-00001",
+              ]),
+          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.0"))))
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
 
@@ -350,7 +350,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
     def load_mnist_dataset_info(self):
       mnist_info_path = os.path.join(
           utils.tfds_dir(),
-          "testing/test_data/dataset_info/mnist/1.0.0",
+          "testing/test_data/dataset_info/mnist/3.0.0",
       )
       mnist_info_path = os.path.normpath(mnist_info_path)
       self.read_from_directory(mnist_info_path)

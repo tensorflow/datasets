@@ -5,8 +5,8 @@
 
 
 # Ensure we have the desired protoc version.
-if [[ $(protoc --version) != 'libprotoc 3.6.1' ]]; then
-  echo 'Please use version 3.6.1 of protoc for compatibility with Python 2 and 3.'
+if [[ $(protoc --version) != 'libprotoc 3.11.2' ]]; then
+  echo 'Please use version 3.11.2 or above.'
   echo 'Please run install_protoc.sh to install it.'
   exit
 fi

@@ -18,7 +18,7 @@ publisher: Common Crawl
 
 WARC/1.0
 WARC-Type: conversion
-WARC-Target-URI: http://fake/url/1
+WARC-Target-URI: http://fake.com/url/1
 WARC-Date: 2019-04-18T10:38:25Z
 WARC-Record-ID: <urn:uuid:23d84b81-bffc-4ed9-90ae-55a429dbf541>
 WARC-Refers-To: <urn:uuid:716838d3-9c47-4879-9767-a891453e47c0>
@@ -31,7 +31,7 @@ And here is some more text. One more sentence to make this long enough.
 
 WARC/1.0
 WARC-Type: conversion
-WARC-Target-URI: http://fake/url/2
+WARC-Target-URI: http://fake.com/url/2
 WARC-Date: 2019-04-18T11:05:28Z
 WARC-Record-ID: <urn:uuid:1c03ff34-fe12-4dd7-9857-149952095cbb>
 WARC-Refers-To: <urn:uuid:7da148a2-62dd-46ba-9d15-16d52764dc64>

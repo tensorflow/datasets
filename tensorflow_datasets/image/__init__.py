@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,12 +44,14 @@ from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLa
 from tensorflow_datasets.image.cycle_gan import CycleGAN
 from tensorflow_datasets.image.deep_weeds import DeepWeeds
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
+from tensorflow_datasets.image.div2k import Div2k
 from tensorflow_datasets.image.dmlab import Dmlab
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
 from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.eurosat import Eurosat
+from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.food101 import Food101
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans

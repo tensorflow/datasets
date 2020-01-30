@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,8 @@ class C4Test(testing.DatasetBuilderTestCase):
       "badwords": "badwords.txt",
   }
   SPLITS = {
-      "train": 2,
+      "train": 1,
+      "validation": 1,
   }
 
 
@@ -47,7 +48,8 @@ class C4NoCleanTest(C4Test):
   # GzipFile + GFile and TextIOWrapper are broken for py2.
   BUILDER_CONFIG_NAMES_TO_TEST = ["en.noclean"] if six.PY3 else []
   SPLITS = {
-      "train": 4,
+      "train": 3,
+      "validation": 1,
   }
 
 

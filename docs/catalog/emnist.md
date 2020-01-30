@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="emnist" />
-  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('emnist', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;emnist&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/emnist" />
   <meta itemprop="sameAs" content="https://www.nist.gov/itl/products-and-services/emnist-dataset" />
   <meta itemprop="citation" content="@article{cohen_afshar_tapson_schaik_2017,&#10;    title={EMNIST: Extending MNIST to handwritten letters},&#10;    DOI={10.1109/ijcnn.2017.7966217},&#10;    journal={2017 International Joint Conference on Neural Networks (IJCNN)},&#10;    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},&#10;    year={2017}&#10;}&#10;" />
@@ -26,25 +26,26 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `byclass` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST ByClass
+*   `byclass` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST ByClass
 
-*   `bymerge` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST ByMerge
+*   `bymerge` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST ByMerge
 
-*   `balanced` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST Balanced
+*   `balanced` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST Balanced
 
-*   `letters` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST Letters
+*   `letters` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST Letters
 
-*   `digits` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST Digits
+*   `digits` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST Digits
 
-*   `mnist` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST MNIST
+*   `mnist` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST MNIST
 
 ## `emnist/byclass`
 EMNIST ByClass
 
 Versions:
 
-*   **`1.0.1`** (default):
-*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`3.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.1`: None
 
 ### Statistics
 
@@ -67,15 +68,16 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `emnist/bymerge`
 EMNIST ByMerge
 
 Versions:
 
-*   **`1.0.1`** (default):
-*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`3.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.1`: None
 
 ### Statistics
 
@@ -98,15 +100,16 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `emnist/balanced`
 EMNIST Balanced
 
 Versions:
 
-*   **`1.0.1`** (default):
-*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`3.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.1`: None
 
 ### Statistics
 
@@ -129,15 +132,16 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `emnist/letters`
 EMNIST Letters
 
 Versions:
 
-*   **`1.0.1`** (default):
-*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`3.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.1`: None
 
 ### Statistics
 
@@ -160,15 +164,16 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `emnist/digits`
 EMNIST Digits
 
 Versions:
 
-*   **`1.0.1`** (default):
-*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`3.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.1`: None
 
 ### Statistics
 
@@ -191,15 +196,16 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## `emnist/mnist`
 EMNIST MNIST
 
 Versions:
 
-*   **`1.0.1`** (default):
-*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`3.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `1.0.1`: None
 
 ### Statistics
 
@@ -222,7 +228,7 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
 ```

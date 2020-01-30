@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,18 +59,15 @@ _LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
 class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk multilingual data set."""
 
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.3: Initial version.
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
           version=tfds.core.Version(
-              '0.0.3', experiments={tfds.core.Experiment.S3: False}),
+              '1.0.0',
+              'New split API (https://tensorflow.org/datasets/splits)'),
           supported_versions=[
               tfds.core.Version(
-                  '1.0.0',
-                  'New split API (https://tensorflow.org/datasets/splits)'),
+                  '0.0.3', experiments={tfds.core.Experiment.S3: False}),
           ],
           description='Plain text import of multilingual TED talk translations',
       )

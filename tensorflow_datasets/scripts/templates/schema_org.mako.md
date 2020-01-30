@@ -10,11 +10,10 @@ Microdata format was chosen over JSON-LD due to the fact that Markdown
 rendering engines remove all \<script\> tags.
 """
 
-# We are using cgi module instead of html due to Python 2 compatibility
-import cgi
+import html
 
 def escape(val):
-  val = cgi.escape(val, quote=True)
+  val = html.escape(val, quote=True)
   val = val.replace("\n", "&#10;")
   val = val.strip()
   return val

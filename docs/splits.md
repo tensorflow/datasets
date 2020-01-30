@@ -23,9 +23,9 @@ as well as combinations of those.
 ## Two APIs: S3 and legacy
 
 Each versioned dataset either implements the new S3 API, or the legacy API,
-which will eventually be retired. New datasets (except Beam ones for now) all
-implement S3, and we're slowly rolling it out to all datasets.
-If the dataset you're interested in implements S3, use S3.
+which will eventually be retired. New datasets all implement S3, and we're
+slowly rolling it out to all datasets. If the dataset you're interested in
+implements S3, use S3.
 
 To find out whether a dataset implements S3, look at the dataset's source code
 (specifically see if the `tfds.core.Version` object is constructed with

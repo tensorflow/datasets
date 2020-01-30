@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,10 +34,6 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
   def setUp(self):
     super(Caltech101Test, self).setUp()
     caltech._TRAIN_POINTS_PER_CLASS = 1
-
-
-class Caltech101S3Test(Caltech101Test):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':
