@@ -1,0 +1,113 @@
+{
+  "citation": "\n",
+  "description": "Imagewoof is a subset of 10 classified classes from the Imagenet\ndataset. It was originally prepared by FastAI. The objective\nbehind putting together a small version of the Imagenet dataset \nwas mainly because running new ideas/algorithms/experiments on \nthe whole Imagenet take a lot of time.\n\nThis version of the dataset allows researchers/practitioners to quickly \ntry out ideas and share with others. This is similar to imagenette \n(another subset of imagenet with 10 classes), but only more complicated \nto classify because all images are of different dog breeds. \n\nThe dataset comes in three variants:\n  * Full size\n  * 320 px\n  * 160 px\nThis dataset consists of the Imagewoof dataset {size} variant.\n",
+  "location": {
+    "urls": [
+      "https://github.com/fastai/imagenette"
+    ]
+  },
+  "name": "imagewoof",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "1343482285",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "1128",
+        "1128",
+        "1128",
+        "1128",
+        "1129",
+        "1128",
+        "1128",
+        "1128"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "9025"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "9025"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "9025"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "982",
+        "982",
+        "983",
+        "982"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3929"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3929"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "3929"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

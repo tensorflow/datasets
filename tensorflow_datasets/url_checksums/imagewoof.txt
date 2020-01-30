@@ -1,0 +1,3 @@
+https://s3.amazonaws.com/fast-ai-imageclas/imagewoof2-160.tgz 92560471 663c22f69c2802d85e2a67103c017e047096702ffddf9149a14011b7002539bf
+https://s3.amazonaws.com/fast-ai-imageclas/imagewoof2-320.tgz 328288506 4e4905ed7643120daaf9bf3b2ef7f3a7e8396d9bdaf254a38c6f01f618b4973d
+https://s3.amazonaws.com/fast-ai-imageclas/imagewoof2.tgz 1343482285 d6f2ffc7b95663f7701b94cea32db1683b9a50dd389382c7cca024e840af0379
