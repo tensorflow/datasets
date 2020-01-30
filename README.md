@@ -162,6 +162,8 @@ numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 
 Note that the library still requires `tensorflow` as an internal dependency.
 
+To learn more about TensorFlow Datasets check the course [Data Pipelines with TensorFlow Data Services](https://www.coursera.org/learn/data-pipelines-tensorflow) offered by `deeplearning.ai` and `Laurence Moroney`.
+
 ## Want a certain dataset?
 
 Adding a dataset is really straightforward by following
