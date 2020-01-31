@@ -383,6 +383,16 @@ class ReaderTest(testing.TestCase):
         [b'a', b'b', b'c', b'd', b'e', b'f', b'j', b'k', b'l'],
         [b'a', b'b', b'c', b'd', b'e', b'f', b'g', b'h', b'i']])
 
+  def test_read_files(self):
+    self._write_tfrecord('train', 4, 'abcdefghijkl')
+    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    ds = self.reader.read_files(
+        [{'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
+         {'filename': fname_pattern % 3, 'skip': 1, 'take': 1}],
+        read_config=read_config_lib.ReadConfig(),
+        shuffle_files=False)
+    read_data = list(tfds.as_numpy(ds))
+    self.assertEqual(read_data, [six.b(l) for l in 'defk'])
 
 if __name__ == '__main__':
   testing.test_main()
