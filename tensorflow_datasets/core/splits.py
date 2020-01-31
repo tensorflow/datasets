@@ -45,6 +45,17 @@ class SplitInfo(object):
     num_examples = self.num_examples or "unknown"
     return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)
 
+  @property
+  def file_instructions(self):
+    """Returns the list of dict(filename, take, skip)."""
+    # `self._dataset_name` is assigned in `SplitDict.add()`.
+    instructions = tfrecords_reader.make_file_instructions(
+        name=self._dataset_name,
+        split_infos=[self],
+        instruction=str(self.name),
+    )
+    return instructions.file_instructions
+
 
 class SubSplitInfo(object):
   """Wrapper around a sub split info.
@@ -583,7 +594,10 @@ class SplitDict(utils.NonMutableDict):
     """Add the split info."""
     if split_info.name in self:
       raise ValueError("Split {} already present".format(split_info.name))
-    # TODO(epot): Make sure this works with Named splits correctly.
+    # Forward the dataset name required to build file instructions:
+    # info.splits['train'].file_instructions
+    # Use `object.__setattr__`, because ProtoCls forbid new fields assignement.
+    object.__setattr__(split_info, "_dataset_name", self._dataset_name)
     super(SplitDict, self).__setitem__(split_info.name, split_info)
 
   @classmethod
