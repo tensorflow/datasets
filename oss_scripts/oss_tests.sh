@@ -74,7 +74,6 @@ docs/_index.ipynb
 function test_notebook() {
   local notebook=$1
   create_virtualenv tfds_notebook $PY_BIN
-  pip install -q jupyter ipykernel
   ipython kernel install --user --name tfds-notebook
   jupyter nbconvert \
     --ExecutePreprocessor.timeout=600 \
@@ -84,17 +83,10 @@ function test_notebook() {
   set_status
 }
 
-# TODO(tfds): Re-enable as TF 2.0 gets closer to stable release
-if [[ "$PY_BIN" = "python2.7" && "$TF_VERSION" = "2.0.0" ]]
-then
-  echo "Skipping notebook tests"
-else
-  for notebook in $NOTEBOOKS
-  do
-    test_notebook $notebook
-  done
-fi
-
+for notebook in $NOTEBOOKS
+do
+  test_notebook $notebook
+done
 
 # Run NSynth, in a contained enviornement
 function test_isolation_nsynth() {

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,15 +77,12 @@ class GrooveConfig(tfds.core.BuilderConfig):
     else:
       name_parts.append("midionly")
 
+    v1 = tfds.core.Version(
+        "1.0.0", experiments={tfds.core.Experiment.S3: False})
+    v2 = tfds.core.Version(
+        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(GrooveConfig, self).__init__(
-        name="-".join(name_parts),
-        version=tfds.core.Version(
-            "1.0.0", experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                "2.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
-        ],
+        name="-".join(name_parts), version=v2, supported_versions=[v1],
         **kwargs)
     self.split_bars = split_bars
     self.include_audio = include_audio

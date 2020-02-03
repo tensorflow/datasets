@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -153,17 +153,18 @@ class WriterTest(testing.TestCase):
         (3, b'c'),
         (4, b'd'), (5, b'e'),
         (6, b'f'),
-        (7, b'g'), (8, b'h'),
+        (7, b'g'), (8, b'hi'),
     ]
     with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                                     return_value=5):
-      shards_length = self._write(to_write, path)
+      shards_length, total_size = self._write(to_write, path)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     self.assertEqual(written_files,
                      ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
-        [b'f', b'g'], [b'd'], [b'a', b'b'], [b'h'], [b'e', b'c'],
+        [b'f', b'g'], [b'd'], [b'a', b'b'], [b'hi'], [b'e', b'c'],
     ])
 
   @absltest.mock.patch.object(

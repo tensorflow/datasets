@@ -6,10 +6,13 @@ cityscapes/semantic_segmentation/1.0.0
 cityscapes/semantic_segmentation_extra/1.0.0
 cityscapes/stereo_disparity/1.0.0
 cityscapes/stereo_disparity_extra/1.0.0
+cnn_dailymail/bytes/3.0.0
+cnn_dailymail/plain_text/3.0.0
+cnn_dailymail/subwords32k/3.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
-image_label_folder/1.0.0
 image_label_folder/2.0.0
+moving_mnist/1.0.0
 oxford_iiit_pet/1.2.0
 so2sat/all/0.0.1
 so2sat/all/2.0.0

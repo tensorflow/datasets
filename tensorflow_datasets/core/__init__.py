@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,6 +39,7 @@ from tensorflow_datasets.core.splits import SplitBase
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+from tensorflow_datasets.core.splits import SubSplitInfo
 
 from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 

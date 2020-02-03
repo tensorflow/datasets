@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,10 +29,6 @@ class ChexpertTest(testing.DatasetBuilderTestCase):
       "train": 1,
       "validation": 1,
   }
-
-
-class ChexpertS3Test(ChexpertTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

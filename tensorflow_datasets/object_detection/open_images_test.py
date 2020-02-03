@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,10 +44,6 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'test-annotations-bbox': 'test-annotations-bbox.csv',
       'validation-annotations-bbox': 'validation-annotations-bbox.csv',
   }
-
-
-class OpenImagesV42012S3Test(OpenImagesV42012Test):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

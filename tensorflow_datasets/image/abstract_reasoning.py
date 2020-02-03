@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -146,8 +146,8 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
     v100 = tfds.core.Version(
         "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(AbstractReasoningConfig, self).__init__(
-        version=v002,
-        supported_versions=[v100],
+        version=v100,
+        supported_versions=[v002],
         **kwargs)
     self.split_type = split_type
 
