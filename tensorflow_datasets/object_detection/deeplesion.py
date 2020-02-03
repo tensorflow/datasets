@@ -63,7 +63,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
   """DeepLesion dataset builder.
   """
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
