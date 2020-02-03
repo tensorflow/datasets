@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -190,6 +190,16 @@ def as_numpy(dataset, graph=None):
   are left as-is for the user to deal with them (e.g. using `to_list()`).
   In TF 1 (i.e. graph mode), `tf.RaggedTensor`s are returned as
   `tf.ragged.RaggedTensorValue`s.
+
+  Example:
+
+  ```
+  ds = tfds.load(name="mnist", split="train")
+  ds_numpy = tfds.as_numpy(ds)  # Convert `tf.data.Dataset` to Python generator
+  for ex in ds_numpy:
+    # `{'image': np.array(shape=(28, 28, 1)), 'labels': np.array(shape=())}`
+    print(ex)
+  ```
 
   Args:
     dataset: a possibly nested structure of `tf.data.Dataset`s and/or

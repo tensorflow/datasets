@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,11 +52,11 @@ _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("2.0.1",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "4.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "4.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("2.0.1",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

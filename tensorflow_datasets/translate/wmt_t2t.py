@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,19 +37,16 @@ _CITATION = """
 class WmtT2tTranslate(wmt.WmtTranslate):
   """The WMT EnDe Translate dataset used by the Tensor2Tensor library."""
 
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
           description="WMT T2T EnDe translation task dataset.",
           url=_URL,
           citation=_CITATION,
           language_pair=("de", "en"),
-          version=tfds.core.Version(
-              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "0.0.1", experiments={tfds.core.Experiment.S3: False}),
           ]
       )
   ]

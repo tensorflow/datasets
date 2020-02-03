@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -149,21 +149,16 @@ def _make_builder_configs():
           vocab_size=2**15),
   ]
   configs = []
+  v001 = tfds.core.Version(
+      "0.0.1", experiments={tfds.core.Experiment.S3: False})
+  v1 = tfds.core.Version(
+      "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   for text_encoder_config in text_encoder_configs:
     for data in _DATA_OPTIONS:
       config = LibrispeechConfig(
-          version=tfds.core.Version(
-              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  "1.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
-          ],
+          version=v1, supported_versions=[v001],
           text_encoder_config=text_encoder_config,
           data=data)
-      # Version history:
-      # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-      # 0.0.1: Initial version.
       configs.append(config)
   return configs
 
