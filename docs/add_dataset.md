@@ -6,10 +6,10 @@ See our [list of datasets](catalog/overview.md) to see if the dataset you want
 isn't already added.
 
 *   [Overview](#overview)
-*   [Writing `my_dataset.py`](#writing-my-datasetpy)
+*   [Writing `my_dataset.py`](#writing-my_datasetpy)
     *   [Use the default template](#use-the-default-template)
-    *   [DatasetBuilder](#datasetbuilde)
-    *   [my_dataset.py](#my-datasetpy)
+    *   [DatasetBuilder](#datasetbuilder)
+    *   [my_dataset.py](#my_datasetpy)
 *   [Specifying `DatasetInfo`](#specifying-datasetinfo)
     *   [`FeatureConnector`s](#featureconnectors)
 *   [Downloading and extracting source data](#downloading-and-extracting-source-data)
@@ -557,6 +557,10 @@ for more information.
 ### 6. Send for review!
 
 Send the pull request for review.
+
+When creating the pull request, fill in the areas for the name, issue reference,
+and GitHub Gist link. When using the checklist, replace each `[ ]` with `[x]` to
+mark it off.
 
 
 ## Define the dataset outside TFDS.

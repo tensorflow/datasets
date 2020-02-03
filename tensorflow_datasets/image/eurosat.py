@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -73,12 +73,8 @@ class EurosatConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    # Version history:
-    # 2.0.0: S3 with new hashing function (different shuffle).
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    super(EurosatConfig, self).__init__(
-        version=tfds.core.Version('2.0.0'),
-        **kwargs)
+    super(EurosatConfig, self).__init__(version=tfds.core.Version('2.0.0'),
+                                        **kwargs)
     self.selection = selection
     self.download_url = download_url
     self.subdir = subdir
@@ -137,7 +133,6 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 'path': path,
                 'selection': self.builder_config.selection

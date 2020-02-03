@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,11 +75,11 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version("0.1.1", {tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version(
+              "3.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
           supported_versions=[
-              tfds.core.Version(
-                  "3.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
+              tfds.core.Version("0.1.1", {tfds.core.Experiment.S3: False}),
           ],
       ) for category in _CATEGORIES
   ]

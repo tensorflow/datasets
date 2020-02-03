@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -144,7 +144,8 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     )
 
   def dataset_from_filename(self, filename):
-    dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
+    dataset = tf.compat.v1.data.TFRecordDataset(
+        filename, buffer_size=int(16 * 1e6))
     return dataset.map(self._parser.parse_example,
                        num_parallel_calls=tf.data.experimental.AUTOTUNE)
 

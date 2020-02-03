@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import copy
 import functools
-import itertools
 import math
+import os
 import re
 
 import attr
@@ -33,6 +34,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
+
 
 _BUFFER_SIZE = 8<<20  # 8 MiB per file.
 
@@ -68,7 +70,11 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   filename, skip, take = (filename_skip_take['filename'],
                           filename_skip_take['skip'],
                           filename_skip_take['take'],)
-  ds = tf.data.TFRecordDataset(
+
+  # Explictly use DatasetV1 for backward compatibility:
+  # * isinstance(ds, tf.data.Dataset)
+  # * ds.make_one_shot_iterator()
+  ds = tf.compat.v1.data.TFRecordDataset(
       filename,
       buffer_size=_BUFFER_SIZE,
       num_parallel_reads=1,
@@ -80,67 +86,97 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   return ds
 
 
-def _get_dataset_files(name, path, instruction, name2shard_lengths):
-  """Returns a list of files (+skip/take) corresponding to given instruction.
+@attr.s(frozen=True)
+class FileInstructions(object):
+  """The file instructions associated with a split ReadInstruction.
+
+  Attributes:
+    num_examples: `int`, The total number of examples
+    file_instructions: List[dict(filename, skip, take)], the files information.
+      The filenames contains the relative path, not absolute.
+      skip/take indicates which example read in the shard: `ds.skip().take()`
+  """
+  num_examples = attr.ib()
+  file_instructions = attr.ib()
+
+
+def make_file_instructions(name, split_infos, instruction):
+  """Returns instructions of the split dict.
 
   Args:
     name: Name of the dataset.
-    path: path to tfrecords.
-    instruction: _AbsoluteInstruction instance.
-    name2shard_lengths: dict associating split names to shard lengths.
+    split_infos: `List[SplitInfo]`, Dataset splits information
+    instruction: `ReadInstruction` or `str`
 
   Returns:
-    list of dict(filename, skip, take).
+    file_intructions: FileInstructions instance
   """
-  shard_lengths = name2shard_lengths[instruction.splitname]
-  if not shard_lengths:
-    msg = ('`DatasetInfo.SplitInfo.num_shards` is empty. S3 tfrecords_reader '
-           'cannot be used. Make sure the data you are trying to read was '
-           'generated using tfrecords_writer module (S3).')
-    raise AssertionError(msg)
-  filenames = naming.filepaths_for_dataset_split(
-      dataset_name=name, split=instruction.splitname,
-      num_shards=len(shard_lengths),
-      data_dir=path,
-      filetype_suffix='tfrecord')
-  from_ = 0 if instruction.from_ is None else instruction.from_
-  to = sum(shard_lengths) if instruction.to is None else instruction.to
-  return _sharded_files.get_read_instructions(from_, to, filenames,
-                                              shard_lengths)
+  name2shard_lengths = {
+      info.name: info.shard_lengths for info in split_infos
+  }
+  name2len = {
+      name: sum(lengths) for name, lengths in name2shard_lengths.items()
+  }
+  if not isinstance(instruction, ReadInstruction):
+    instruction = ReadInstruction.from_spec(instruction)
+  # Create the absolute instruction (per split)
+  absolute_instructions = instruction.to_absolute(name2len)
+
+  return _make_file_instructions_from_absolutes(
+      name=name,
+      name2shard_lengths=name2shard_lengths,
+      absolute_instructions=absolute_instructions,
+  )
 
 
-def _read_single_instruction(
-    instruction,
+def _make_file_instructions_from_absolutes(
+    name,
+    name2shard_lengths,
+    absolute_instructions,
+):
+  """Returns the files instructions from the absolute instructions list."""
+  # For each split, return the files instruction (skip/take)
+  file_instructions = []
+  num_examples = 0
+  for abs_instr in absolute_instructions:
+    shard_lengths = name2shard_lengths[abs_instr.splitname]
+    if not shard_lengths:
+      raise ValueError(
+          'Shard empty. This might means that dataset hasn\'t been generated '
+          'yet and info not restored from GCS, or that legacy dataset is used.')
+    filenames = naming.filenames_for_dataset_split(
+        dataset_name=name,
+        split=abs_instr.splitname,
+        num_shards=len(shard_lengths),
+        filetype_suffix='tfrecord')
+    from_ = 0 if abs_instr.from_ is None else abs_instr.from_
+    to = sum(shard_lengths) if abs_instr.to is None else abs_instr.to
+    num_examples += to - from_
+    single_file_instructions = _sharded_files.get_read_instructions(
+        from_, to, filenames, shard_lengths)
+    file_instructions.extend(single_file_instructions)
+  return FileInstructions(
+      num_examples=int(num_examples),  # int() due to proto shard_length `long`
+      file_instructions=file_instructions,
+  )
+
+
+def _read_files(
+    files,
     parse_fn,
     read_config,
-    name,
-    path,
-    name2len,
-    name2shard_lengths,
     shuffle_files):
-  """Returns tf.data.Dataset for given instruction.
+  """Returns tf.data.Dataset for given file instructions.
 
   Args:
-    instruction (ReadInstruction or str): if str, a ReadInstruction will be
-      constructed using `ReadInstruction.from_spec(str)`.
+    files: List[dict(filename, skip, take)], the files information.
+      The filenames contain the absolute path, not relative.
+      skip/take indicates which example read in the shard: `ds.skip().take()`
     parse_fn (callable): function used to parse each record.
     read_config: `tfds.ReadConfig`, Additional options to configure the
       input pipeline (e.g. seed, num parallel reads,...).
-    name (str): name of the dataset.
-    path (str): path to directory where to read tfrecords from.
-    name2len: dict associating split names to number of examples.
-    name2shard_lengths: dict associating split names to shard lengths.
     shuffle_files (bool): Defaults to False. True to shuffle input files.
   """
-  if not isinstance(instruction, ReadInstruction):
-    instruction = ReadInstruction.from_spec(instruction)
-  absolute_instructions = instruction.to_absolute(name2len)
-  files = list(itertools.chain.from_iterable([
-      _get_dataset_files(name, path, abs_instr, name2shard_lengths)
-      for abs_instr in absolute_instructions]))
-  if not files:
-    msg = 'Instruction "%s" corresponds to no data!' % instruction
-    raise AssertionError(msg)
   # Eventually apply a transformation to the instruction function.
   # This allow the user to have direct control over the interleave order.
   if read_config.experimental_interleave_sort_fn is not None:
@@ -159,7 +195,7 @@ def _read_single_instruction(
   parallel_reads = read_config.interleave_parallel_reads
   block_length = read_config.interleave_block_length
 
-  instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
+  instruction_ds = tf.compat.v1.data.Dataset.from_tensor_slices(tensor_inputs)
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
@@ -229,18 +265,51 @@ class Reader(object):
        ReadInstruction instance. Otherwise a dict/list of tf.data.Dataset
        corresponding to given instructions param shape.
     """
-    name2shard_lengths = {info.name: info.shard_lengths for info in split_infos}
-    name2len = {name: sum(lengths)
-                for name, lengths in name2shard_lengths.items()}
-    read_instruction = functools.partial(
-        _read_single_instruction,
-        parse_fn=self._parser.parse_example,
+    def _read_instruction_to_file_instructions(instruction):
+      file_instructions = make_file_instructions(name, split_infos, instruction)
+      files = file_instructions.file_instructions
+      if not files:
+        msg = 'Instruction "%s" corresponds to no data!' % instruction
+        raise AssertionError(msg)
+      return tuple(files)
+
+    files = utils.map_nested(
+        _read_instruction_to_file_instructions, instructions, map_tuple=False)
+    return utils.map_nested(
+        functools.partial(
+            self.read_files, read_config=read_config,
+            shuffle_files=shuffle_files),
+        files,
+        map_tuple=False)
+
+  def read_files(
+      self,
+      files,
+      read_config,
+      shuffle_files
+  ):
+    """Returns single tf.data.Dataset instance for the set of file instructions.
+
+    Args:
+      files: List[dict(filename, skip, take)], the files information.
+        The filenames contains the relative path, not absolute.
+        skip/take indicates which example read in the shard: `ds.skip().take()`
+      read_config: `tfds.ReadConfig`, the input pipeline options
+      shuffle_files (bool): If True, input files are shuffled before being read.
+
+    Returns:
+       a tf.data.Dataset instance.
+    """
+    # Prepend path to filename
+    files = copy.deepcopy(files)
+    for f in files:
+      f.update(filename=os.path.join(self._path, f['filename']))
+    dataset = _read_files(
+        files=files,
         read_config=read_config,
-        name=name, path=self._path,
-        name2len=name2len, name2shard_lengths=name2shard_lengths,
+        parse_fn=self._parser.parse_example,
         shuffle_files=shuffle_files)
-    datasets = utils.map_nested(read_instruction, instructions, map_tuple=True)
-    return datasets
+    return dataset
 
 
 @attr.s(frozen=True)
@@ -307,7 +376,8 @@ def _rel_to_abs_instr(rel_instr, name2len):
                 else _pct_to_abs_pct1)
   split = rel_instr.splitname
   if split not in name2len:
-    raise AssertionError('Requested split "%s" does not exist.' % split)
+    raise ValueError('Unknown split "{}". Should be one of {}.'.format(
+        split, list(name2len)))
   num_examples = name2len[split]
   from_ = rel_instr.from_
   to = rel_instr.to

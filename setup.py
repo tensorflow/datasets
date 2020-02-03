@@ -90,6 +90,7 @@ DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/imagenette_labels.txt',
+    'image/imagewang_labels.txt',
     'image/inaturalist_labels.txt',
     'image/inaturalist_supercategories.txt',
     'image/open_images_classes_all.txt',
@@ -102,6 +103,7 @@ DATASET_FILES = [
     'image/sun397_tfds_te.txt',
     'image/sun397_tfds_tr.txt',
     'image/sun397_tfds_va.txt',
+    'image/vgg_face2_labels.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@ class Places365SmallTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = places365_small.Places365Small
   SPLITS = {'train': 2, 'test': 2, 'validation': 2}
 
-  DL_EXTRACT_RESULT = {
-      'train': '',
-      'test': '',
-      'validation': '',
-      'annotation': 'annotation',
+  DL_DOWNLOAD_RESULT = {
+      'train': 'data_256.tar',
+      'test': 'test_256.tar',
+      'validation': 'val_256.tar',
   }
+  DL_EXTRACT_RESULT = 'annotation'
 
 
 if __name__ == '__main__':

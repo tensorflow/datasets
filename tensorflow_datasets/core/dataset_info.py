@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -87,9 +87,9 @@ class DatasetInfo(object):
   See the constructor arguments and properties for a full list.
 
   Note: Not all fields are known on construction and may be updated later
-  by `compute_dynamic_properties`. For example, the number of examples in each
-  split is typically updated during data generation (i.e. on calling
-  `builder.download_and_prepare()`).
+  by `compute_dynamic_properties`. For example: the min and max values of a
+  feature is typically updated during data generation (i.e. on calling
+  builder.download_and_prepare()`).
   """
 
   @api_utils.disallow_positional_args
@@ -151,7 +151,7 @@ class DatasetInfo(object):
             "the top-level. Got {}".format(features))
       features._set_top_level()  # pylint: disable=protected-access
     self._features = features
-    self._splits = splits_lib.SplitDict()
+    self._splits = splits_lib.SplitDict(self._builder.name)
     if supervised_keys is not None:
       assert isinstance(supervised_keys, tuple)
       assert len(supervised_keys) == 2
@@ -204,12 +204,22 @@ class DatasetInfo(object):
     return self.as_proto.citation
 
   @property
-  def size_in_bytes(self):
-    return self.as_proto.size_in_bytes
+  def data_dir(self):
+    return self._builder.data_dir
 
-  @size_in_bytes.setter
-  def size_in_bytes(self, size):
-    self.as_proto.size_in_bytes = size
+  @property
+  def size_in_bytes(self):
+    size_in_bytes = sum(split.num_bytes for split in self.splits.values())
+    # Fall back to deprecated proto field if `num_bytes` fields are empty.
+    return size_in_bytes or self.as_proto.size_in_bytes
+
+  @property
+  def download_size(self):
+    return self.as_proto.download_size
+
+  @download_size.setter
+  def download_size(self, size):
+    self.as_proto.download_size = size
 
   @property
   def features(self):
@@ -356,7 +366,8 @@ class DatasetInfo(object):
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
-    self._set_splits(splits_lib.SplitDict.from_proto(parsed_proto.splits))
+    split_dict = splits_lib.SplitDict.from_proto(self.name, parsed_proto.splits)
+    self._set_splits(split_dict)
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,11 +59,11 @@ _SPECIES_CLASSES = ["Cat", "Dog"]
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("1.2.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version("3.1.0",
+                              "Added species and labels, new split API.")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
-          "3.1.0", ("Added species and labels.")),
+          "1.2.0", experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):

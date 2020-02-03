@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ class BigearthnetTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 1,
   }
-
+  DL_EXTRACT_RESULT = "BigEarthNet-v1.0.tar.gz"
 
 if __name__ == "__main__":
   testing.test_main()

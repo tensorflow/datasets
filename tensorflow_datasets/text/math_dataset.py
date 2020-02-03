@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -65,21 +65,7 @@ _INTERPOLATE_CATEGORY = [
 
 _MODULES = [
     # extrapolate
-    "algebra__polynomial_roots_big",
-    "arithmetic__add_or_sub_big",
-    "arithmetic__add_sub_multiple_longer",
-    "arithmetic__div_big",
-    "arithmetic__mixed_longer",
-    "arithmetic__mul_big",
-    "arithmetic__mul_div_multiple_longer",
-    "comparison__closest_more",
-    "comparison__kth_biggest_more",
-    "comparison__sort_more",
     "measurement__conversion",
-    "numbers__place_value_big",
-    "numbers__round_number_big",
-    "probability__swr_p_level_set_more_samples",
-    "probability__swr_p_sequence_more_samples",
 
     # interpolate
     "algebra__linear_1d",

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,10 +41,6 @@ class PatchCamelyonTest(testing.DatasetBuilderTestCase):
       'valid_x': 'camelyonpatch_level_2_split_valid_x.h5',
       'valid_y': 'camelyonpatch_level_2_split_valid_y.h5',
   }
-
-
-class PatchCamelyonS3Test(PatchCamelyonTest):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

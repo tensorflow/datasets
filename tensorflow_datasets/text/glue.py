@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -121,16 +121,13 @@ class GlueConfig(tfds.core.BuilderConfig):
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
     """
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.2: Initial version.
     super(GlueConfig, self).__init__(
         version=tfds.core.Version(
-            "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                "0.0.2", experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.text_features = text_features

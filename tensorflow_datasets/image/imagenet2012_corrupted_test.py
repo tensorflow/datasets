@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,18 +26,24 @@ from tensorflow_datasets.image import imagenet2012_corrupted
 
 class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = [  # pylint: disable=g-long-ternary
-      "defocus_blur_5", "elastic_2", "brightness_3", "zoom_blur_1",
-      "frosted_glass_blur_4"
+      "gaussian_noise_1", "shot_noise_2", "impulse_noise_3", "defocus_blur_4",
+      "glass_blur_5", "motion_blur_1", "zoom_blur_2", "snow_3", "frost_4",
+      "fog_5", "brightness_1", "contrast_2", "elastic_transform_3",
+      "pixelate_4", "jpeg_compression_5", "gaussian_blur_1", "saturate_2",
+      "spatter_3", "speckle_noise_4"
   ] if six.PY2 else []  # TODO(rsepassi): Re-enable Py3 test (b/129964829)
 
   DATASET_CLASS = imagenet2012_corrupted.Imagenet2012Corrupted
   SPLITS = {  # Expected number of examples on the train/validation splits.
-      "train": 100,
       "validation": 10,
   }
   DL_EXTRACT_RESULT = [
       "ILSVRC2012_img_train.tar",
       "ILSVRC2012_img_val.tar",
+  ]
+  DL_DOWNLOAD_RESULT = [
+      "frost1.png", "frost2.png", "frost3.png", "frost4.jpg", "frost5.jpg",
+      "frost6.jpg"
   ]
 
 

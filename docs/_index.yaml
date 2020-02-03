@@ -33,7 +33,7 @@ landing_page:
         print(tfds.list_builders())
 
         # Construct a tf.data.Dataset
-        dataset = tfds.load(name="mnist", split=tfds.Split.TRAIN)
+        dataset = tfds.load(name="mnist", split="train")
 
         # Build your input pipeline
         dataset = dataset.shuffle(1024).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
@@ -48,10 +48,10 @@ landing_page:
     items:
     - heading: Introducing TensorFlow Datasets
       image_path: /resources/images/tf-logo-card-16x9.png
-      path: https://github.com/tensorflow/datasets/blob/master/docs/announce_proxy.md
+      path: https://blog.tensorflow.org/2019/02/introducing-tensorflow-datasets.html
       buttons:
       - label: Read on TensorFlow Blog
-        path: https://github.com/tensorflow/datasets/blob/master/docs/announce_proxy.md
+        path: https://blog.tensorflow.org/2019/02/introducing-tensorflow-datasets.html
     - heading: TensorFlow Datasets on GitHub
       image_path: /resources/images/github-card-16x9.png
       path: https://github.com/tensorflow/datasets
