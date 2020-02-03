@@ -23,6 +23,7 @@ from __future__ import print_function
 
 import csv
 import os
+import zipfile
 
 from absl import app
 from absl import flags
@@ -46,9 +47,11 @@ def _output_dir():
   return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data',
                       'fake_examples', 'deeplesion')
 
+
 MIN_HEIGHT_WIDTH = 10
 MAX_HEIGHT_WIDTH = 15
 CHANNELS_NB = 1
+
 
 def get_random_picture(height=None, width=None, channels=CHANNELS_NB):
   """Returns random picture as np.ndarray (int)."""
@@ -56,6 +59,7 @@ def get_random_picture(height=None, width=None, channels=CHANNELS_NB):
   width = width or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
   return np.random.randint(
       32768, size=(height, width, channels), dtype=np.uint16)
+
 
 def get_random_png(height=None, width=None, channels=CHANNELS_NB):
   """Returns path to PNG picture."""
@@ -71,46 +75,30 @@ def get_random_png(height=None, width=None, channels=CHANNELS_NB):
   fobj.close()
   return fobj.name
 
-def _generate_data():
+
+def _generate_data(num_zipfiles, num_images):
   """Generate images archive."""
+  paths = []
+  for i in range(1, num_zipfiles+1):
+    paths.append(os.path.join(_output_dir(), 'zipfile{:02d}.zip'.format(i)))
+  
+  idx = 0
+  for p in paths:
+    idx += 1
+    print('Following files will be zipped in {}:'.format(p)) 
+    with zipfile.ZipFile(p, "w") as image_zip:
+      # Generate images
+      for i in range(0, num_images):
+        png = get_random_png(512, 512)
+        image_name = os.path.join("Images_png", "{:06d}_01_01".format(idx),
+                              "{:03d}.png".format(i))
+        image_zip.write(png, image_name, zipfile.ZIP_DEFLATED)
+        print(image_name)
+  
+  print('All files zipped successfully!')        
 
-  # Generate images
-  images_dir1 = os.path.join(_output_dir(), 'zipfile01', 'Images_png')
-  images_dir2 = os.path.join(_output_dir(), 'zipfile02', 'Images_png')
-  images_dir3 = os.path.join(_output_dir(), 'zipfile03', 'Images_png')
-
-  images_p1 = os.path.join(images_dir1, '000001_01_01')
-  images_p2 = os.path.join(images_dir2, '000002_01_01')
-  images_p3 = os.path.join(images_dir3, '000003_01_01') 
-  if not tf.io.gfile.exists(images_dir1):
-    tf.io.gfile.makedirs(images_dir1)
-  if not tf.io.gfile.exists(images_dir2):
-    tf.io.gfile.makedirs(images_dir2)
-  if not tf.io.gfile.exists(images_dir3):
-    tf.io.gfile.makedirs(images_dir3)
-  if not tf.io.gfile.exists(images_p1):
-    tf.io.gfile.makedirs(images_p1)
-  if not tf.io.gfile.exists(images_p2):
-    tf.io.gfile.makedirs(images_p2)
-  if not tf.io.gfile.exists(images_p3):
-    tf.io.gfile.makedirs(images_p3)
-
-  for i in range(5):
-    image_name = '{:03d}.png'.format(i)
-    tf.io.gfile.copy(get_random_png(512, 512),
-                     os.path.join(images_p1, image_name),
-                     overwrite=True)
-  for i in range(5):
-    image_name = '{:03d}.png'.format(i)
-    tf.io.gfile.copy(get_random_png(512, 512),
-                     os.path.join(images_p2, image_name),
-                     overwrite=True)
-
-  for i in range(5):
-    image_name = '{:03d}.png'.format(i)
-    tf.io.gfile.copy(get_random_png(512, 512),
-                     os.path.join(images_p3, image_name),
-                     overwrite=True)
+  return paths
+     
 
 def _generate_csv():
 # Generate annotations
@@ -148,7 +136,7 @@ def _generate_csv():
 def main(argv):
   if len(argv) > 1:
     raise app.UsageError('Too many command-line arguments.')
-  _generate_data()
+  dirs = _generate_data(3, 5)
   _generate_csv()
 
 

@@ -31,9 +31,9 @@ class DeeplesionTest(testing.DatasetBuilderTestCase):
       "test":5,
   }
   DL_EXTRACT_RESULT = {
-      "zipfile01": "zipfile01",  # Relative to fake_examples/my_dataset dir.
-      "zipfile02": "zipfile02",
-      "zipfile03": "zipfile03",
+      "zipfile01": "zipfile01.zip",  # Relative to fake_examples/my_dataset dir.
+      "zipfile02": "zipfile02.zip",
+      "zipfile03": "zipfile03.zip",
       'ann_file': "fake_DL_info.csv"
   }
 
