@@ -29,34 +29,34 @@ summary: Patent abastract.
 `big_patent` is configured with `tfds.summarization.big_patent.BigPatentConfig`
 and has the following configurations predefined (defaults to the first one):
 
-*   `all` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under all categories.
+*   `all` (`v2.0.0`) (`Size: 24.22 GiB`): Patents under all categories.
 
-*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `a` (`v2.0.0`) (`Size: 3.45 GiB`): Patents under Cooperative Patent
     Classification (CPC)a: Human Necessities
 
-*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `b` (`v2.0.0`) (`Size: 2.67 GiB`): Patents under Cooperative Patent
     Classification (CPC)b: Performing Operations; Transporting
 
-*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `c` (`v2.0.0`) (`Size: 2.74 GiB`): Patents under Cooperative Patent
     Classification (CPC)c: Chemistry; Metallurgy
 
-*   `d` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `d` (`v2.0.0`) (`Size: 170.08 MiB`): Patents under Cooperative Patent
     Classification (CPC)d: Textiles; Paper
 
-*   `e` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `e` (`v2.0.0`) (`Size: 568.03 MiB`): Patents under Cooperative Patent
     Classification (CPC)e: Fixed Constructions
 
-*   `f` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `f` (`v2.0.0`) (`Size: 1.35 GiB`): Patents under Cooperative Patent
     Classification (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons;
     Blasting
 
-*   `g` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `g` (`v2.0.0`) (`Size: 5.78 GiB`): Patents under Cooperative Patent
     Classification (CPC)g: Physics
 
-*   `h` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `h` (`v2.0.0`) (`Size: 5.17 GiB`): Patents under Cooperative Patent
     Classification (CPC)h: Electricity
 
-*   `y` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+*   `y` (`v2.0.0`) (`Size: 2.35 GiB`): Patents under Cooperative Patent
     Classification (CPC)y: General tagging of new or cross-sectional technology
 
 ## `big_patent/all`
@@ -64,7 +64,8 @@ Patents under all categories.
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -95,7 +96,8 @@ Patents under Cooperative Patent Classification (CPC)a: Human Necessities
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -128,7 +130,8 @@ Transporting
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -159,7 +162,8 @@ Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -190,7 +194,8 @@ Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -221,7 +226,8 @@ Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -254,7 +260,8 @@ Lightning; Heating; Weapons; Blasting
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -285,7 +292,8 @@ Patents under Cooperative Patent Classification (CPC)g: Physics
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -316,7 +324,8 @@ Patents under Cooperative Patent Classification (CPC)h: Electricity
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -349,7 +358,8 @@ or cross-sectional technology
 
 Versions:
 
-*   **`1.0.0`** (default):
+*   **`2.0.0`** (default): Updated to cased raw strings.
+*   `1.0.0`: None
 
 ### Statistics
 
