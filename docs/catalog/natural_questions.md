@@ -30,7 +30,6 @@ NQ to be a more realistic and challenging task than prior QA datasets.
 *   Size: `41.97 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'annotations': Sequence({

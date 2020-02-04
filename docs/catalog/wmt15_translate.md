@@ -274,7 +274,6 @@ VALIDATION | 3,003
 TEST       | 2,656
 
 ### Features
-
 ```python
 Translation({
     'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
@@ -312,7 +311,6 @@ VALIDATION | 3,003
 TEST       | 2,169
 
 ### Features
-
 ```python
 Translation({
     'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
@@ -350,7 +348,6 @@ VALIDATION | 1,500
 TEST       | 1,370
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
@@ -388,7 +385,6 @@ VALIDATION | 4,503
 TEST       | 1,500
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
@@ -426,7 +422,6 @@ VALIDATION | 3,003
 TEST       | 2,818
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),

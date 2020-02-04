@@ -14,6 +14,8 @@ toc:
     title: aflw2k3d
   - path: /datasets/catalog/arc
     title: arc
+  - path: /datasets/catalog/beans
+    title: beans
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binarized_mnist
@@ -102,6 +104,8 @@ toc:
     title: imagenet_resized
   - path: /datasets/catalog/imagenette
     title: imagenette
+  - path: /datasets/catalog/imagewang
+    title: imagewang
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
@@ -218,6 +222,8 @@ toc:
 - section:
   - path: /datasets/catalog/c4
     title: c4 (manual)
+  - path: /datasets/catalog/cfq
+    title: cfq
   - path: /datasets/catalog/civil_comments
     title: civil_comments
   - path: /datasets/catalog/cos_e
@@ -246,6 +252,8 @@ toc:
     title: multi_nli_mismatch
   - path: /datasets/catalog/natural_questions
     title: natural_questions
+  - path: /datasets/catalog/qa4mre
+    title: qa4mre
   - path: /datasets/catalog/scan
     title: scan
   - path: /datasets/catalog/scicite
