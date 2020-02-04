@@ -82,7 +82,6 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=5,
             gen_kwargs=dict(data_path=data_path)),
     ]
 
@@ -99,5 +98,5 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
       images = np.load(fp)
     images = np.transpose(images, (1, 0, 2, 3))
     images = np.expand_dims(images, axis=-1)
-    for sequence in images:
-      yield dict(image_sequence=sequence)
+    for i, sequence in enumerate(images):
+      yield i, dict(image_sequence=sequence)
