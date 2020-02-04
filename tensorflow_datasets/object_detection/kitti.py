@@ -104,9 +104,9 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     filenames = {
-        "images": os.path.join(_DATA_URL, _IMAGES_FNAME),
-        "annotations": os.path.join(_DATA_URL, _LABELS_FNAME),
-        "devkit": os.path.join(_DATA_URL, _DEVKIT_FNAME),
+        "images": _DATA_URL + "/" + _IMAGES_FNAME,
+        "annotations": _DATA_URL + "/" + _LABELS_FNAME,
+        "devkit": _DATA_URL + "/" + _DEVKIT_FNAME,
     }
     files = dl_manager.download(filenames)
     train_images, validation_images, test_images = _build_splits(
