@@ -68,30 +68,39 @@ _DOWNLOAD_URLS = {
 class NaturalQuestions(tfds.core.BeamBasedBuilder):
   """Natural Questions: A Benchmark for Question Answering Research."""
 
-  VERSION = tfds.core.Version('0.0.1')
+  VERSION = tfds.core.Version('0.0.2')
+  SUPPORTED_VERSIONS = [tfds.core.Version('0.0.1')]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        # TODO(adarob): Pull in NQ token features if needed.
         features=tfds.features.FeaturesDict({
             'id': tf.string,
             'document': {
                 'title': tfds.features.Text(),
                 'url': tfds.features.Text(),
                 'html': tfds.features.Text(),
+                'tokens': tfds.features.Sequence({
+                    'token': tfds.features.Text(),
+                    'is_html': tf.bool,
+                })
             },
             'question': {
                 'text': tfds.features.Text(),
+                'tokens': tfds.features.Sequence(tf.string),
             },
             'annotations': tfds.features.Sequence({
                 'id': tf.string,
                 'long_answer': {
+                    'start_token': tf.int64,
+                    'end_token': tf.int64,
                     'start_byte': tf.int64,
                     'end_byte': tf.int64,
                 },
                 'short_answers': tfds.features.Sequence({
+                    'start_token': tf.int64,
+                    'end_token': tf.int64,
                     'start_byte': tf.int64,
                     'end_byte': tf.int64,
                     'text': tfds.features.Text(),
@@ -142,6 +151,8 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
         text = re.sub('<([^>]*)>', '', html_unescape(text))
         # Replace \xa0 characters with spaces.
         return {
+            'start_token': short_ans['start_token'],
+            'end_token': short_ans['end_token'],
             'start_byte': short_ans['start_byte'],
             'end_byte': short_ans['end_byte'],
             'text': text
@@ -152,6 +163,8 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
             # Convert to str since some IDs cannot be represented by tf.int64.
             'id': str(an_json['annotation_id']),
             'long_answer': {
+                'start_token': an_json['long_answer']['start_token'],
+                'end_token': an_json['long_answer']['end_token'],
                 'start_byte': an_json['long_answer']['start_byte'],
                 'end_byte': an_json['long_answer']['end_byte'],
             },
@@ -171,9 +184,14 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
               'title': ex_json['document_title'],
               'url': ex_json['document_url'],
               'html': html_bytes,
+              'tokens': [
+                  {'token': t['token'], 'is_html': t['html_token']}
+                  for t in ex_json['document_tokens']
+              ]
           },
           'question': {
-              'text': ex_json['question_text']
+              'text': ex_json['question_text'],
+              'tokens': ex_json['question_tokens'],
           },
           'annotations': [
               _parse_annotation(an_json) for an_json in ex_json['annotations']
