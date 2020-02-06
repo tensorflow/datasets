@@ -90,7 +90,8 @@ class C4Config(tfds.core.BuilderConfig):
     """BuilderConfig for C4.
 
     Args:
-      language: string, the language code.
+      language: string, the language code, or "all" to disable language
+        filtering.
       cc_versions: tuple(string), a collection of versions of Common Crawl to
         use as the raw source text. Set to None to use defaults.
       clean: bool, whether to clean the dataset for badwords, duplications, etc.
@@ -301,10 +302,11 @@ class C4(tfds.core.BeamBasedBuilder):
           | "clean_pages" >> beam.FlatMap(c4_utils.get_clean_page_fn(badwords)))
       page_content = c4_utils.remove_duplicate_text(page_content)
 
-    # Filter out non-English pages. We do this after cleaning since it may
-    # change the predominate language.
-    page_content |= beam.Filter(
-        c4_utils.is_language, language=self.builder_config.lang)
+    # Optionally filter out non-`language` pages. We do this after cleaning
+    # since it may change the predominate language.
+    if self.builder_config.lang != "all":
+      page_content |= beam.Filter(
+          c4_utils.is_language, language=self.builder_config.lang)
 
     return page_content
 
