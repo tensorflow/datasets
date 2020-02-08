@@ -58,7 +58,7 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(num_classes=2),
         }),
         supervised_keys=("features", "label"),
-        urls=["https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)"],
+        homepage="https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)",
         citation=_CITATION,
     )
 
