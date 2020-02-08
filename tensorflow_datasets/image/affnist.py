@@ -45,57 +45,49 @@ class Affnist(tfds.core.GeneratorBasedBuilder):
   """
   URL = _AFFNIST_URL
 
-  VERSION = tfds.core.Version(
-    "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-    tfds.core.Version("1.0.0",
-                      experiments={tfds.core.Experiment.S3: False}),
-  ]
+  VERSION = tfds.core.Version("0.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
-    builder=self,
-    description=_DESCRIPTION,
-    features=tfds.features.FeaturesDict({
-      "image": tfds.features.Image(shape=AFFNIST_IMAGE_SHAPE),
-      "label": tfds.features.ClassLabel(num_classes=AFFNIST_NUM_CLASSES),
-    }),
-    supervised_keys=("image", "label"),
-    homepage='http://www.cs.toronto.edu/~tijmen/affNIST/',
-    citation=_CITATION,
-  )
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape=AFFNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(num_classes=AFFNIST_NUM_CLASSES),
+        }),
+        supervised_keys=("image", "label"),
+        homepage='http://www.cs.toronto.edu/~tijmen/affNIST/',
+        citation=_CITATION,
+   )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
 
     filenames = {
-      "train_data": _AFFNIST_TRAIN_DATA_FILENAME,
-      "validation_data": _AFFNIST_VALIDATION_DATA_FILENAME,
-      "test_data": _AFFNIST_TEST_DATA_FILENAME,
+        "train_data": _AFFNIST_TRAIN_DATA_FILENAME,
+        "validation_data": _AFFNIST_VALIDATION_DATA_FILENAME,
+        "test_data": _AFFNIST_TEST_DATA_FILENAME,
     }
 
     files = dl_manager.download_and_extract(
       {k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()})
 
     return [
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TRAIN,
-        gen_kwargs={
-          "images_dir_path": os.path.join(files["train_data"], "training_batches")
-        },
-      ),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.VALIDATION,
-        gen_kwargs={
-          "images_dir_path": os.path.join(files["validation_data"], "validation_batches")
-        },
-      ),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TEST,
-        gen_kwargs={
-          "images_dir_path": os.path.join(files["test_data"], "test_batches")
-        },
-      ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
+                "images_dir_path": os.path.join(files["train_data"], "training_batches")},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                "images_dir_path": os.path.join(files["validation_data"], "validation_batches")},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs={
+                "images_dir_path": os.path.join(files["test_data"], "test_batches")},
+        ),
     ]
 
   def _generate_examples(self, images_dir_path):
