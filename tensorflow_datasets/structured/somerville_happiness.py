@@ -95,9 +95,8 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
     with open(file_path, newline='', encoding='utf-16') as f:
       reader = csv.DictReader(f, quoting=csv.QUOTE_NONE)
       for i, row in enumerate(reader):
-        feeling = "1"
         yield i, {
-               "feeling": _FEELING_DICT['1'],
+               "feeling": _FEELING_DICT[row["D"]],
                "features": row,
           }
 
