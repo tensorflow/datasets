@@ -22,25 +22,31 @@ NQ to be a more realistic and challenging task than prior QA datasets.
     [https://ai.google.com/research/NaturalQuestions/dataset](https://ai.google.com/research/NaturalQuestions/dataset)
 *   `DatasetBuilder`:
     [`tfds.text.natural_questions.NaturalQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/natural_questions.py)
-*   Version: `v0.0.1`
+*   Version: `v0.0.2`
 *   Versions:
 
-    *   **`0.0.1`** (default):
+    *   **`0.0.2`** (default):
+    *   `0.0.1`: None
 
-*   Size: `41.97 GiB`
+*   Size: `90.26 GiB`
 
 ## Features
+
 ```python
 FeaturesDict({
     'annotations': Sequence({
         'id': Tensor(shape=(), dtype=tf.string),
         'long_answer': FeaturesDict({
             'end_byte': Tensor(shape=(), dtype=tf.int64),
+            'end_token': Tensor(shape=(), dtype=tf.int64),
             'start_byte': Tensor(shape=(), dtype=tf.int64),
+            'start_token': Tensor(shape=(), dtype=tf.int64),
         }),
         'short_answers': Sequence({
             'end_byte': Tensor(shape=(), dtype=tf.int64),
+            'end_token': Tensor(shape=(), dtype=tf.int64),
             'start_byte': Tensor(shape=(), dtype=tf.int64),
+            'start_token': Tensor(shape=(), dtype=tf.int64),
             'text': Text(shape=(), dtype=tf.string),
         }),
         'yes_no_answer': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
@@ -48,11 +54,16 @@ FeaturesDict({
     'document': FeaturesDict({
         'html': Text(shape=(), dtype=tf.string),
         'title': Text(shape=(), dtype=tf.string),
+        'tokens': Sequence({
+            'is_html': Tensor(shape=(), dtype=tf.bool),
+            'token': Text(shape=(), dtype=tf.string),
+        }),
         'url': Text(shape=(), dtype=tf.string),
     }),
     'id': Tensor(shape=(), dtype=tf.string),
     'question': FeaturesDict({
         'text': Text(shape=(), dtype=tf.string),
+        'tokens': Sequence(Tensor(shape=(), dtype=tf.string)),
     }),
 })
 ```

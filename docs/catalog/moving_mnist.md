@@ -26,7 +26,7 @@ training/validation data from the MNIST dataset.
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: None
 
-*   Size: `?? GiB`
+*   Size: `91.70 MiB`
 
 ## Features
 ```python
@@ -36,7 +36,11 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 10,000
+TEST  | 10,000
 
 ## Homepage
 
