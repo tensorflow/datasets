@@ -216,10 +216,12 @@ data and place it in `manual_dir`, which you can access with
 ## Specifying dataset splits
 
 If the dataset comes with pre-defined splits (for example, MNIST has train and
-test splits), keep those splits in the `DatasetBuilder`. If this is your own
-data and you can decide your own splits, we suggest using a split of
-`(TRAIN:80%, VALIDATION: 10%, TEST: 10%)`. Users can always get subsplits
-through [`tfds.Split.subsplit`](splits.md#subsplit).
+test splits), keep those splits in the `DatasetBuilder`. If the dataset does not
+have predefined splits, `DatasetBuilder` should only specify a single
+`tfds.Split.TRAIN` split. Users can dynamically create their own subsplits
+with the
+[subsplit API](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+(e.g. `split='train[80%:]'`).
 
 ```python
   def _split_generators(self, dl_manager):
