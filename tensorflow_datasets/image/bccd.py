@@ -28,7 +28,7 @@ The cell types are Eosinophil, Lymphocyte, Monocyte, and Neutrophil.
 """
 
 _URL = "https://github.com/Shenggan/BCCD_Dataset"
-_URL_BCCD = "https://raw.githubusercontent.com/Shenggan/BCCD_Dataset/master/BCCD"
+_URL_BCCD = "https://github.com/Shenggan/BCCD_Dataset/raw/master/BCCD"
 _URL_TRAIN_TXT = _URL_BCCD + "/ImageSets/Main/train.txt"
 _URL_Val_TXT = _URL_BCCD + "/ImageSets/Main/val.txt"
 _URL_TEST_TXT = _URL_BCCD + "/ImageSets/Main/test.txt"
