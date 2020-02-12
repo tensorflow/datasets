@@ -222,7 +222,7 @@ def _read_files(
   # `tf.io.parse_single_example`. It might be faster to use `parse_example`,
   # after batching.
   # https://www.tensorflow.org/api_docs/python/tf/io/parse_example
-  return ds.map(parse_fn)
+  return ds.map(parse_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
 
 class Reader(object):
