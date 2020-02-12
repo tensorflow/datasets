@@ -519,6 +519,10 @@ class DatasetBuilder(object):
 
     # Build base dataset
     if in_memory and not wants_full_dataset:
+      logging.warning(
+          "`in_memory` if deprecated and will be removed in a future version. "
+          "Please use `ds = ds.cache()` instead.")
+
       # TODO(tfds): Enable in_memory without padding features. May be able
       # to do by using a requested version of tf.data.Dataset.cache that can
       # persist a cache beyond iterator instances.
