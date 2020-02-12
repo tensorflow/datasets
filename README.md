@@ -55,8 +55,11 @@ print(tfds.list_builders())
 ds_train = tfds.load(name="mnist", split="train", shuffle_files=True)
 
 # Build your input pipeline
-ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
-for features in ds_train.take(1):
+# Here, we use in-memory caching
+# If your dataset is large, instead use .cache("filename")
+# and an efficient on-disk cache will be created automatically
+ds_train = ds_train.cache().shuffle(1000).batch(128).prefetch(10)
+for features in ds_train:
   image, label = features["image"], features["label"]
 ```
 
@@ -146,7 +149,7 @@ components.
 
 ```python
 train_ds = tfds.load("mnist", split="train")
-train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
+train_ds = train_ds.cache().shuffle(1024).batch(128).repeat(5).prefetch(10)
 for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
 ```
