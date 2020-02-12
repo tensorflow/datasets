@@ -39,8 +39,7 @@ from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad import Squad
 from tensorflow_datasets.text.super_glue import SuperGlue
+from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trivia_qa import TriviaQA
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
-
-
