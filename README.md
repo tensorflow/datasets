@@ -22,6 +22,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 * [Usage](#usage)
 * [`DatasetBuilder`](#datasetbuilder)
 * [NumPy usage](#numpy-usage-with-tfdsas-numpy)
+* [Citation](#citation)
 * [Want a certain dataset?](#want-a-certain-dataset)
 * [Disclaimers](#disclaimers)
 
@@ -161,6 +162,18 @@ numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.
+
+### Citation
+
+Please include the following citation when using `tensorflow-datasets` for a
+paper, in addition to any citation specific to the used datasets.
+
+```
+@misc{TFDS,
+  title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
+  howpublished = {\url{https://www.tensorflow.org/datasets}},
+}
+```
 
 ## Want a certain dataset?
 
