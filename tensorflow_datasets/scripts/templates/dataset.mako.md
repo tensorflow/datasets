@@ -47,7 +47,8 @@ ${display_description(builder)}
 * Versions:
   * **`${builder.info.version}`** (default): ${builder.info.version.description or ''}
 ${supported_versions(builder, level=1)}
-* Size: `${tfds.units.size_str(builder.info.size_in_bytes)}`
+* Download size: `${tfds.units.size_str(builder.info.download_size)}`
+* Dataset size: `${tfds.units.size_str(builder.info.dataset_size)}`
 
 %if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
 WARNING: This dataset requires you to download the source data manually into manual_dir
@@ -80,7 +81,7 @@ the following configurations predefined (defaults to the first one):
 
 %for config, config_builder in zip(builder.BUILDER_CONFIGS, config_builders):
 <%
-  size = tfds.units.size_str(config_builder.info.size_in_bytes)
+  size = tfds.units.size_str(config_builder.info.dataset_size)
 %>
 * `${config.name}` (`v${str(config.version)}`) (`Size: ${size}`): ${config.description}
 %endfor

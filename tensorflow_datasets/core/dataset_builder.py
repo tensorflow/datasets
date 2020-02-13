@@ -309,14 +309,14 @@ class DatasetBuilder(object):
 
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
-        self.info.size_in_bytes + self.info.download_size,
+        self.info.dataset_size + self.info.download_size,
         directory=self._data_dir_root):
       raise IOError(
           "Not enough disk space. Needed: {} (download: {}, generated: {})"
           .format(
-              units.size_str(self.info.size_in_bytes + self.info.download_size),
+              units.size_str(self.info.dataset_size + self.info.download_size),
               units.size_str(self.info.download_size),
-              units.size_str(self.info.size_in_bytes),
+              units.size_str(self.info.dataset_size),
           ))
     self._log_download_bytes()
 
@@ -650,13 +650,16 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
-    size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
-        "Downloading and preparing dataset %s (%s) to %s..." %
-        (self.name, size_text, self._data_dir),
+        "Downloading and preparing dataset {} (download: {}, generated: {}, "
+        "total: {}) to {}...".format(
+            self.info.full_name,
+            units.size_str(self.info.download_size),
+            units.size_str(self.info.dataset_size),
+            units.size_str(self.info.download_size + self.info.dataset_size),
+            self._data_dir,
+        ),
         attrs=["bold"])
-    # TODO(tfds): Should try to estimate the available free disk space (if
-    # possible) and raise an error if not.
 
   @abc.abstractmethod
   def _info(self):
