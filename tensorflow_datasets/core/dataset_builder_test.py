@@ -541,6 +541,54 @@ class DatasetBuilderReadTest(testing.TestCase):
       ds.make_initializable_iterator()
       self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
 
+  def test_autocache(self):
+    # All the following should cache
+
+    # Default should cache as dataset is small and has a single shard
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
+    # Multiple shards should cache when shuffling is disabled
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train+test",
+        shuffle_files=False,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
+    # Multiple shards should cache when re-shuffling is disabled
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train+test",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(
+            shuffle_reshuffle_each_iteration=False),
+    ))
+
+    # Sub-split API can cache if only a single shard is selected.
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train+test[:0]",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
+    # All the following should NOT cache
+
+    # Default should not cache if try_autocache is disabled
+    self.assertFalse(self.builder._should_cache_ds(
+        split="train",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(try_autocache=False),
+    ))
+
+    # Multiple shards should not cache when shuffling is enabled
+    self.assertFalse(self.builder._should_cache_ds(
+        split="train+test",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
 
 
 

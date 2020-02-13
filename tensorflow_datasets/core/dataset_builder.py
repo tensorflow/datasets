@@ -499,26 +499,11 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
-    # If the dataset is small, load it in memory
-    dataset_shape_is_fully_defined = (
-        dataset_utils.features_shape_is_fully_defined(self.info.features))
-    in_memory_default = False
-    # TODO(tfds): Consider default in_memory=True for small datasets with
-    # fully-defined shape.
-    # Expose and use the actual data size on disk and rm the manual
-    # name guards. size_in_bytes is the download size, which is misleading,
-    # particularly for datasets that use manual_dir as well as some downloads
-    # (wmt and diabetic_retinopathy_detection).
-    # in_memory_default = (
-    #     self.info.size_in_bytes and
-    #     self.info.size_in_bytes <= 1e9 and
-    #     not self.name.startswith("wmt") and
-    #     not self.name.startswith("diabetic") and
-    #     dataset_shape_is_fully_defined)
-    in_memory = in_memory_default if in_memory is None else in_memory
-
     # Build base dataset
     if in_memory and not wants_full_dataset:
+      # TODO(tfds): Remove once users have been migrated
+
+      # If the dataset is small, load it in memory
       logging.warning(
           "`in_memory` if deprecated and will be removed in a future version. "
           "Please use `ds = ds.cache()` instead.")
@@ -526,6 +511,8 @@ class DatasetBuilder(object):
       # TODO(tfds): Enable in_memory without padding features. May be able
       # to do by using a requested version of tf.data.Dataset.cache that can
       # persist a cache beyond iterator instances.
+      dataset_shape_is_fully_defined = (
+          dataset_utils.features_shape_is_fully_defined(self.info.features))
       if not dataset_shape_is_fully_defined:
         logging.warning("Called in_memory=True on a dataset that does not "
                         "have fully defined shapes. Note that features with "
@@ -553,6 +540,14 @@ class DatasetBuilder(object):
           decoders=decoders,
           read_config=read_config,
       )
+      # Auto-cache small datasets which are small enough to fit in memory.
+      # TODO(tfds): Should expose auto-caching default value in the dataset doc.
+      if self._should_cache_ds(
+          split=split,
+          shuffle_files=shuffle_files,
+          read_config=read_config
+      ):
+        ds = ds.cache()
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
@@ -586,6 +581,48 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(ds)
     return ds
+
+  def _should_cache_ds(self, split, shuffle_files, read_config):
+    """Returns True if TFDS should auto-cache the dataset."""
+    # The user can explicitly opt-out from auto-caching
+    if not read_config.try_autocache:
+      return False
+
+    # Skip datasets with unknown size.
+    # Even by using heuristic with `download_size` and
+    # `MANUAL_DOWNLOAD_INSTRUCTIONS`, it wouldn't catch datasets which hardcode
+    # the non-processed data-dir, nor DatasetBuilder not based on tf-record.
+    if not self.info.dataset_size:
+      return False
+
+    # Do not cache big datasets
+    # Instead of using the global size, we could infer the requested bytes:
+    # `self.info.splits[split].num_bytes`
+    # The info is available for full splits, and could be approximated
+    # for subsplits `train[:50%]`.
+    # However if the user is creating multiple small splits from a big
+    # dataset, those could adds up and fill up the entire RAM.
+    # 250 MiB is arbitrary picked. For comparison, Cifar10 is about 150 MiB.
+    if self.info.dataset_size > 250 * units.MiB:
+      return False
+
+    # Do not support old-split API.
+    if not self.version.implements(utils.Experiment.S3):
+      return False
+
+    # We do not want to cache data which has more than one shards when
+    # shuffling is enabled, as this would effectivelly disable shuffling.
+    # An exception is for single shard (as shuffling is a no-op).
+    # Another exception is if reshuffle is disabled (shuffling already cached)
+    num_shards = len(self.info.splits[split].file_instructions)
+    if (shuffle_files and
+        # Shuffling only matter when reshuffle is True or None (default)
+        read_config.shuffle_reshuffle_each_iteration is not False and  # pylint: disable=g-bool-id-comparison
+        num_shards > 1):
+      return False
+
+    # If the dataset satisfy all the right conditions, activate autocaching.
+    return True
 
   def _relative_data_dir(self, with_version=True):
     """Relative path of this dataset in data_dir."""
@@ -658,8 +695,7 @@ class DatasetBuilder(object):
             units.size_str(self.info.dataset_size),
             units.size_str(self.info.download_size + self.info.dataset_size),
             self._data_dir,
-        ),
-        attrs=["bold"])
+        ), attrs=["bold"])
 
   @abc.abstractmethod
   def _info(self):
