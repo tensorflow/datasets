@@ -41,7 +41,7 @@ class Opinosis(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             _REVIEW_SENTS: tfds.features.Text(),
-            _SUMMARIES: tfds.features.Text(),
+            _SUMMARIES: tfds.features.Sequence(tfds.features.Text())
         }),
         supervised_keys=(_REVIEW_SENTS, _SUMMARIES),
         homepage='http://kavita-ganesan.com/opinosis/#.XeTZopNKhTY',
@@ -62,7 +62,7 @@ class Opinosis(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     topics_path = os.path.join(path, "topics")
     filenames = tf.io.gfile.listdir(topics_path)
-    for i, filename in enumerate(filenames):
+    for filename in filenames:
       file_path = os.path.join(topics_path, filename)
       topic_name = filename.split(".txt")[0]
       with tf.io.gfile.GFile(file_path, "rb") as src_f:
@@ -74,8 +74,8 @@ class Opinosis(tfds.core.GeneratorBasedBuilder):
         with tf.io.gfile.GFile(file_path, "rb") as tgt_f:
           data = tgt_f.read()
           summary_lst.append(data)
-      summary_data = b"[SEP_SUM]".join(summary_lst)
-      yield i, {
+      summary_data = summary_lst
+      yield filename, {
           _REVIEW_SENTS: input_data,
           _SUMMARIES: summary_data
           }
