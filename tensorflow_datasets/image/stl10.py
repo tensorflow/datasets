@@ -38,8 +38,9 @@ def read_all_images(images_path):
     :param path_to_data: the file containing the binary images from the STL-10 dataset
     :return: an array containing all the images
     """
-    with tf.io.gfile.GFile(images_path, 'rb') as f:
-        everything = np.fromfile(f, dtype=np.uint8)
+    with open(images_path, 'rb') as f:
+        # tf.io.gfile.GFile doesn't works with np.fromfile as it doesn't has fileno() method
+        everything= np.fromfile(f,dtype=np.uint8)
         images = np.reshape(everything, (-1, 3, 96, 96))
         images = np.transpose(images, (0, 3, 2, 1))
         return images
@@ -51,7 +52,7 @@ def read_labels(path_to_labels):
      :return: an array containing the labels
     """
     with tf.io.gfile.GFile(path_to_labels, 'rb') as f:
-        labels = np.fromfile(f, dtype=np.uint8)
+        labels = f.read()
         return labels
 
 
@@ -69,7 +70,7 @@ class Stl10(tfds.core.GeneratorBasedBuilder):
             description=_DESCRIPTION,
             # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
-                "image": tfds.features.Image(),
+                "image": tfds.features.Image(shape=(96,96,3)),
                 "label": tfds.features.ClassLabel(num_classes=11)
             }),
             # If there's a common (input, target) tuple from the features,
