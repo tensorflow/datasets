@@ -26,7 +26,9 @@ summary.
 
     *   **`3.0.0`** (default):
 
-*   Size: `64.14 MiB`
+*   Download size: `64.14 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

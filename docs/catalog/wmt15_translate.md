@@ -36,35 +36,35 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `cs-en` (`v1.0.0`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
+*   `cs-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 cs-en translation task
     dataset.
 
-*   `de-en` (`v1.0.0`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
+*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 de-en translation task
     dataset.
 
-*   `fi-en` (`v1.0.0`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
+*   `fi-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fi-en translation task
     dataset.
 
-*   `fr-en` (`v1.0.0`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
+*   `fr-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fr-en translation task
     dataset.
 
-*   `ru-en` (`v1.0.0`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
+*   `ru-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 ru-en translation task
     dataset.
 
-*   `cs-en.subwords8k` (`v1.0.0`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation
-    task dataset with subword encoding.
-
-*   `de-en.subwords8k` (`v1.0.0`) (`Size: 1.62 GiB`): WMT 2015 de-en translation
-    task dataset with subword encoding.
-
-*   `fi-en.subwords8k` (`v1.0.0`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+*   `cs-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 cs-en
     translation task dataset with subword encoding.
 
-*   `fr-en.subwords8k` (`v1.0.0`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation
-    task dataset with subword encoding.
+*   `de-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 de-en
+    translation task dataset with subword encoding.
 
-*   `ru-en.subwords8k` (`v1.0.0`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation
-    task dataset with subword encoding.
+*   `fi-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fi-en
+    translation task dataset with subword encoding.
+
+*   `fr-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fr-en
+    translation task dataset with subword encoding.
+
+*   `ru-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 ru-en
+    translation task dataset with subword encoding.
 
 ## `wmt15_translate/cs-en`
 WMT 2015 cs-en translation task dataset.

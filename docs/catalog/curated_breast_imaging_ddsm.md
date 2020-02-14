@@ -40,15 +40,15 @@ in order to guarantee reproducible results:
 `tfds.image.cbis_ddsm.CuratedBreastImagingDDSMConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `patches` (`v2.0.0`) (`Size: 2.01 MiB`): Patches containing both
+*   `patches` (`v2.0.0`) (`Size: Unknown size`): Patches containing both
     calsification and mass cases, plus pathces with no abnormalities. Designed
     as a traditional 5-class classification task.
 
-*   `original-calc` (`v2.0.0`) (`Size: 1.06 MiB`): Original images of the
+*   `original-calc` (`v2.0.0`) (`Size: Unknown size`): Original images of the
     calcification cases compressed in lossless PNG.
 
-*   `original-mass` (`v2.0.0`) (`Size: 966.57 KiB`): Original images of the mass
-    cases compressed in lossless PNG.
+*   `original-mass` (`v2.0.0`) (`Size: Unknown size`): Original images of the
+    mass cases compressed in lossless PNG.
 
 ## `curated_breast_imaging_ddsm/patches`
 

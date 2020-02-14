@@ -26,7 +26,9 @@ to 21 points, as the original paper mentioned.
 
     *   **`1.0.0`** (default):
 
-*   Size: `83.36 MiB`
+*   Download size: `83.36 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -25,7 +25,9 @@ contains these drawings converted from vector format into 28x28 grayscale images
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `36.82 GiB`
+*   Download size: `36.82 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

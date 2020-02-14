@@ -25,7 +25,9 @@ cropped to 32x32.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `1.47 GiB`
+*   Download size: `1.47 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

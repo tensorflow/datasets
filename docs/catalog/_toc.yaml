@@ -264,6 +264,8 @@ toc:
     title: squad
   - path: /datasets/catalog/super_glue
     title: super_glue
+  - path: /datasets/catalog/tiny_shakespeare
+    title: tiny_shakespeare
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
   - path: /datasets/catalog/wikipedia

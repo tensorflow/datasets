@@ -25,7 +25,9 @@ bounding box annotations are provided for all the 12,000 images.
 
     *   **`0.2.0`** (default):
 
-*   Size: `778.12 MiB`
+*   Download size: `778.12 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

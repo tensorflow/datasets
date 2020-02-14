@@ -27,7 +27,9 @@ superclass to which it belongs).
         (https://tensorflow.org/datasets/splits)
     *   `1.3.1`: None
 
-*   Size: `160.71 MiB`
+*   Download size: `160.71 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

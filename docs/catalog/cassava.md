@@ -27,7 +27,9 @@ CBSD having 72% of the images.
 
     *   **`0.1.0`** (default):
 
-*   Size: `1.26 GiB`
+*   Download size: `1.26 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

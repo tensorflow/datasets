@@ -28,7 +28,9 @@ NQ to be a more realistic and challenging task than prior QA datasets.
     *   **`0.0.2`** (default):
     *   `0.0.1`: None
 
-*   Size: `90.26 GiB`
+*   Download size: `Unknown size`
+
+*   Dataset size: `90.26 GiB`
 
 ## Features
 ```python

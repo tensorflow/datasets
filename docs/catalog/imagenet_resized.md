@@ -19,9 +19,9 @@
 `tfds.image.imagenet_resized.ImagenetResizedConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `8x8` (`v0.1.0`) (`Size: 237.11 MiB`): This dataset consists of the ImageNet
-    dataset resized to 8x8. The images here are the ones provided by Chrabaszcz
-    et. al. using the box resize method.
+*   `8x8` (`v0.1.0`) (`Size: Unknown size`): This dataset consists of the
+    ImageNet dataset resized to 8x8. The images here are the ones provided by
+    Chrabaszcz et. al. using the box resize method.
 
 For [downsampled ImageNet](http://image-net.org/small/download.php) for
 unsupervised learning see `downsampled_imagenet`.
@@ -35,7 +35,7 @@ and the
 Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
-*   `16x16` (`v0.1.0`) (`Size: 923.34 MiB`): This dataset consists of the
+*   `16x16` (`v0.1.0`) (`Size: Unknown size`): This dataset consists of the
     ImageNet dataset resized to 16x16. The images here are the ones provided by
     Chrabaszcz et. al. using the box resize method.
 
@@ -51,8 +51,8 @@ and the
 Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
-*   `32x32` (`v0.1.0`) (`Size: 3.46 GiB`): This dataset consists of the ImageNet
-    dataset resized to 32x32. The images here are the ones provided by
+*   `32x32` (`v0.1.0`) (`Size: Unknown size`): This dataset consists of the
+    ImageNet dataset resized to 32x32. The images here are the ones provided by
     Chrabaszcz et. al. using the box resize method.
 
 For [downsampled ImageNet](http://image-net.org/small/download.php) for
@@ -67,7 +67,7 @@ and the
 Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
-*   `64x64` (`v0.1.0`) (`Size: 13.13 GiB`): This dataset consists of the
+*   `64x64` (`v0.1.0`) (`Size: Unknown size`): This dataset consists of the
     ImageNet dataset resized to 64x64. The images here are the ones provided by
     Chrabaszcz et. al. using the box resize method.
 

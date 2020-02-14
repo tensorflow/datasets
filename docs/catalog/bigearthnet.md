@@ -50,9 +50,9 @@ URL: http://bigearth.net/
 `bigearthnet` is configured with `tfds.image.bigearthnet.BigearthnetConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `rgb` (`v1.0.0`) (`Size: 65.22 GiB`): Sentinel-2 RGB channels
+*   `rgb` (`v1.0.0`) (`Size: Unknown size`): Sentinel-2 RGB channels
 
-*   `all` (`v1.0.0`) (`Size: 65.22 GiB`): 13 Sentinel-2 channels
+*   `all` (`v1.0.0`) (`Size: Unknown size`): 13 Sentinel-2 channels
 
 ## `bigearthnet/rgb`
 Sentinel-2 RGB channels

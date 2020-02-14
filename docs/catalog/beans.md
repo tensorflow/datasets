@@ -25,7 +25,9 @@ and collected by the Makerere AI research lab.
 
     *   **`0.1.0`** (default):
 
-*   Size: `171.63 MiB`
+*   Download size: `Unknown size`
+
+*   Dataset size: `171.63 MiB`
 
 ## Features
 ```python

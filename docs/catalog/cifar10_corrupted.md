@@ -23,290 +23,290 @@ the corrupted Cifar10 test images uploaded by the original authors.
 `tfds.image.cifar10_corrupted.Cifar10CorruptedConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `brightness_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: brightness,
+*   `brightness_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    brightness, severity level: 1
+
+*   `brightness_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    brightness, severity level: 2
+
+*   `brightness_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    brightness, severity level: 3
+
+*   `brightness_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    brightness, severity level: 4
+
+*   `brightness_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    brightness, severity level: 5
+
+*   `contrast_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: contrast,
     severity level: 1
 
-*   `brightness_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: brightness,
+*   `contrast_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: contrast,
     severity level: 2
 
-*   `brightness_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: brightness,
+*   `contrast_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: contrast,
     severity level: 3
 
-*   `brightness_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: brightness,
+*   `contrast_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: contrast,
     severity level: 4
 
-*   `brightness_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: brightness,
+*   `contrast_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: contrast,
     severity level: 5
 
-*   `contrast_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: contrast,
-    severity level: 1
-
-*   `contrast_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: contrast,
-    severity level: 2
-
-*   `contrast_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: contrast,
-    severity level: 3
-
-*   `contrast_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: contrast,
-    severity level: 4
-
-*   `contrast_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: contrast,
-    severity level: 5
-
-*   `defocus_blur_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `defocus_blur_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     defocus_blur, severity level: 1
 
-*   `defocus_blur_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `defocus_blur_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     defocus_blur, severity level: 2
 
-*   `defocus_blur_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `defocus_blur_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     defocus_blur, severity level: 3
 
-*   `defocus_blur_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `defocus_blur_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     defocus_blur, severity level: 4
 
-*   `defocus_blur_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `defocus_blur_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     defocus_blur, severity level: 5
 
-*   `elastic_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: elastic,
+*   `elastic_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: elastic,
     severity level: 1
 
-*   `elastic_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: elastic,
+*   `elastic_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: elastic,
     severity level: 2
 
-*   `elastic_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: elastic,
+*   `elastic_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: elastic,
     severity level: 3
 
-*   `elastic_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: elastic,
+*   `elastic_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: elastic,
     severity level: 4
 
-*   `elastic_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: elastic,
+*   `elastic_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: elastic,
     severity level: 5
 
-*   `fog_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: fog, severity
+*   `fog_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: fog, severity
     level: 1
 
-*   `fog_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: fog, severity
+*   `fog_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: fog, severity
     level: 2
 
-*   `fog_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: fog, severity
+*   `fog_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: fog, severity
     level: 3
 
-*   `fog_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: fog, severity
+*   `fog_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: fog, severity
     level: 4
 
-*   `fog_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: fog, severity
+*   `fog_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: fog, severity
     level: 5
 
-*   `frost_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: frost, severity
-    level: 1
+*   `frost_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: frost,
+    severity level: 1
 
-*   `frost_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: frost, severity
-    level: 2
+*   `frost_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: frost,
+    severity level: 2
 
-*   `frost_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: frost, severity
-    level: 3
+*   `frost_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: frost,
+    severity level: 3
 
-*   `frost_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: frost, severity
-    level: 4
+*   `frost_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: frost,
+    severity level: 4
 
-*   `frost_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: frost, severity
-    level: 5
+*   `frost_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: frost,
+    severity level: 5
 
-*   `frosted_glass_blur_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `frosted_glass_blur_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     frosted_glass_blur, severity level: 1
 
-*   `frosted_glass_blur_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `frosted_glass_blur_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     frosted_glass_blur, severity level: 2
 
-*   `frosted_glass_blur_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `frosted_glass_blur_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     frosted_glass_blur, severity level: 3
 
-*   `frosted_glass_blur_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `frosted_glass_blur_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     frosted_glass_blur, severity level: 4
 
-*   `frosted_glass_blur_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `frosted_glass_blur_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     frosted_glass_blur, severity level: 5
 
-*   `gaussian_blur_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_blur_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_blur, severity level: 1
 
-*   `gaussian_blur_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_blur_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_blur, severity level: 2
 
-*   `gaussian_blur_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_blur_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_blur, severity level: 3
 
-*   `gaussian_blur_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_blur_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_blur, severity level: 4
 
-*   `gaussian_blur_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_blur_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_blur, severity level: 5
 
-*   `gaussian_noise_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_noise_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_noise, severity level: 1
 
-*   `gaussian_noise_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_noise_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_noise, severity level: 2
 
-*   `gaussian_noise_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_noise_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_noise, severity level: 3
 
-*   `gaussian_noise_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_noise_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_noise, severity level: 4
 
-*   `gaussian_noise_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `gaussian_noise_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     gaussian_noise, severity level: 5
 
-*   `impulse_noise_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `impulse_noise_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     impulse_noise, severity level: 1
 
-*   `impulse_noise_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `impulse_noise_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     impulse_noise, severity level: 2
 
-*   `impulse_noise_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `impulse_noise_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     impulse_noise, severity level: 3
 
-*   `impulse_noise_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `impulse_noise_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     impulse_noise, severity level: 4
 
-*   `impulse_noise_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `impulse_noise_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     impulse_noise, severity level: 5
 
-*   `jpeg_compression_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `jpeg_compression_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     jpeg_compression, severity level: 1
 
-*   `jpeg_compression_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `jpeg_compression_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     jpeg_compression, severity level: 2
 
-*   `jpeg_compression_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `jpeg_compression_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     jpeg_compression, severity level: 3
 
-*   `jpeg_compression_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `jpeg_compression_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     jpeg_compression, severity level: 4
 
-*   `jpeg_compression_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `jpeg_compression_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     jpeg_compression, severity level: 5
 
-*   `motion_blur_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `motion_blur_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     motion_blur, severity level: 1
 
-*   `motion_blur_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `motion_blur_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     motion_blur, severity level: 2
 
-*   `motion_blur_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `motion_blur_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     motion_blur, severity level: 3
 
-*   `motion_blur_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `motion_blur_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     motion_blur, severity level: 4
 
-*   `motion_blur_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `motion_blur_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     motion_blur, severity level: 5
 
-*   `pixelate_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: pixelate,
+*   `pixelate_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: pixelate,
     severity level: 1
 
-*   `pixelate_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: pixelate,
+*   `pixelate_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: pixelate,
     severity level: 2
 
-*   `pixelate_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: pixelate,
+*   `pixelate_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: pixelate,
     severity level: 3
 
-*   `pixelate_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: pixelate,
+*   `pixelate_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: pixelate,
     severity level: 4
 
-*   `pixelate_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: pixelate,
+*   `pixelate_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: pixelate,
     severity level: 5
 
-*   `saturate_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: saturate,
+*   `saturate_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: saturate,
     severity level: 1
 
-*   `saturate_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: saturate,
+*   `saturate_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: saturate,
     severity level: 2
 
-*   `saturate_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: saturate,
+*   `saturate_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: saturate,
     severity level: 3
 
-*   `saturate_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: saturate,
+*   `saturate_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: saturate,
     severity level: 4
 
-*   `saturate_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: saturate,
+*   `saturate_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: saturate,
     severity level: 5
 
-*   `shot_noise_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: shot_noise,
+*   `shot_noise_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    shot_noise, severity level: 1
+
+*   `shot_noise_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    shot_noise, severity level: 2
+
+*   `shot_noise_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    shot_noise, severity level: 3
+
+*   `shot_noise_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    shot_noise, severity level: 4
+
+*   `shot_noise_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    shot_noise, severity level: 5
+
+*   `snow_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: snow,
     severity level: 1
 
-*   `shot_noise_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: shot_noise,
+*   `snow_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: snow,
     severity level: 2
 
-*   `shot_noise_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: shot_noise,
+*   `snow_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: snow,
     severity level: 3
 
-*   `shot_noise_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: shot_noise,
+*   `snow_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: snow,
     severity level: 4
 
-*   `shot_noise_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: shot_noise,
+*   `snow_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: snow,
     severity level: 5
 
-*   `snow_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: snow, severity
-    level: 1
-
-*   `snow_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: snow, severity
-    level: 2
-
-*   `snow_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: snow, severity
-    level: 3
-
-*   `snow_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: snow, severity
-    level: 4
-
-*   `snow_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: snow, severity
-    level: 5
-
-*   `spatter_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: spatter,
+*   `spatter_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method: spatter,
     severity level: 1
 
-*   `spatter_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: spatter,
+*   `spatter_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method: spatter,
     severity level: 2
 
-*   `spatter_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: spatter,
+*   `spatter_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method: spatter,
     severity level: 3
 
-*   `spatter_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: spatter,
+*   `spatter_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method: spatter,
     severity level: 4
 
-*   `spatter_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: spatter,
+*   `spatter_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method: spatter,
     severity level: 5
 
-*   `speckle_noise_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `speckle_noise_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     speckle_noise, severity level: 1
 
-*   `speckle_noise_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `speckle_noise_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     speckle_noise, severity level: 2
 
-*   `speckle_noise_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `speckle_noise_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     speckle_noise, severity level: 3
 
-*   `speckle_noise_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `speckle_noise_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     speckle_noise, severity level: 4
 
-*   `speckle_noise_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method:
+*   `speckle_noise_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     speckle_noise, severity level: 5
 
-*   `zoom_blur_1` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: zoom_blur,
-    severity level: 1
+*   `zoom_blur_1` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    zoom_blur, severity level: 1
 
-*   `zoom_blur_2` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: zoom_blur,
-    severity level: 2
+*   `zoom_blur_2` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    zoom_blur, severity level: 2
 
-*   `zoom_blur_3` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: zoom_blur,
-    severity level: 3
+*   `zoom_blur_3` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    zoom_blur, severity level: 3
 
-*   `zoom_blur_4` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: zoom_blur,
-    severity level: 4
+*   `zoom_blur_4` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    zoom_blur, severity level: 4
 
-*   `zoom_blur_5` (`v1.0.0`) (`Size: 2.72 GiB`): Corruption method: zoom_blur,
-    severity level: 5
+*   `zoom_blur_5` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    zoom_blur, severity level: 5
 
 ## `cifar10_corrupted/brightness_1`
 Corruption method: brightness, severity level: 1

@@ -20,8 +20,8 @@
 `voc` is configured with `tfds.object_detection.voc.VocConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `2007` (`v4.0.0`) (`Size: 868.85 MiB`): This dataset contains the data from
-    the PASCAL Visual Object Classes Challenge 2007, a.k.a. VOC2007,
+*   `2007` (`v4.0.0`) (`Size: Unknown size`): This dataset contains the data
+    from the PASCAL Visual Object Classes Challenge 2007, a.k.a. VOC2007,
     corresponding to the Classification and Detection competitions. A total of
     9963 images are included in this dataset, where each image contains a set of
     objects, out of 20 different classes, making a total of 24640 annotated
@@ -31,8 +31,8 @@ following configurations predefined (defaults to the first one):
     WARNING: As per the official dataset, the test set of VOC2012 does not
     contain annotations.
 
-*   `2012` (`v4.0.0`) (`Size: 3.59 GiB`): This dataset contains the data from
-    the PASCAL Visual Object Classes Challenge 2012, a.k.a. VOC2012,
+*   `2012` (`v4.0.0`) (`Size: Unknown size`): This dataset contains the data
+    from the PASCAL Visual Object Classes Challenge 2012, a.k.a. VOC2012,
     corresponding to the Classification and Detection competitions. A total of
     11540 images are included in this dataset, where each image contains a set
     of objects, out of 20 different classes, making a total of 27450 annotated

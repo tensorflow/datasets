@@ -36,25 +36,25 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt17_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `cs-en` (`v1.0.0`) (`Size: 1.66 GiB`): WMT 2017 cs-en translation task
+*   `cs-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 cs-en translation task
     dataset.
 
-*   `de-en` (`v1.0.0`) (`Size: 1.81 GiB`): WMT 2017 de-en translation task
+*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 de-en translation task
     dataset.
 
-*   `fi-en` (`v1.0.0`) (`Size: 414.10 MiB`): WMT 2017 fi-en translation task
+*   `fi-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 fi-en translation task
     dataset.
 
-*   `lv-en` (`v1.0.0`) (`Size: 161.69 MiB`): WMT 2017 lv-en translation task
+*   `lv-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 lv-en translation task
     dataset.
 
-*   `ru-en` (`v1.0.0`) (`Size: 3.34 GiB`): WMT 2017 ru-en translation task
+*   `ru-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 ru-en translation task
     dataset.
 
-*   `tr-en` (`v1.0.0`) (`Size: 59.32 MiB`): WMT 2017 tr-en translation task
+*   `tr-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 tr-en translation task
     dataset.
 
-*   `zh-en` (`v1.0.0`) (`Size: 2.16 GiB`): WMT 2017 zh-en translation task
+*   `zh-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 zh-en translation task
     dataset.
 
 ## `wmt17_translate/cs-en`

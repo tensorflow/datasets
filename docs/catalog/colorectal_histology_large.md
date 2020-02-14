@@ -23,7 +23,9 @@
         (https://tensorflow.org/datasets/splits)
     *   `0.0.1`: None
 
-*   Size: `707.65 MiB`
+*   Download size: `707.65 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

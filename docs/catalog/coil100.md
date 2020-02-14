@@ -28,7 +28,9 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
 
     *   **`1.0.0`** (default):
 
-*   Size: `124.63 MiB`
+*   Download size: `124.63 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

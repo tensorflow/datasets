@@ -36,31 +36,31 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt19_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `cs-en` (`v1.0.0`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
+*   `cs-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 cs-en translation task
     dataset.
 
-*   `de-en` (`v1.0.0`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
+*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 de-en translation task
     dataset.
 
-*   `fi-en` (`v1.0.0`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
+*   `fi-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 fi-en translation task
     dataset.
 
-*   `gu-en` (`v1.0.0`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
+*   `gu-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 gu-en translation task
     dataset.
 
-*   `kk-en` (`v1.0.0`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
+*   `kk-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 kk-en translation task
     dataset.
 
-*   `lt-en` (`v1.0.0`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
+*   `lt-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 lt-en translation task
     dataset.
 
-*   `ru-en` (`v1.0.0`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
+*   `ru-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 ru-en translation task
     dataset.
 
-*   `zh-en` (`v1.0.0`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
+*   `zh-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 zh-en translation task
     dataset.
 
-*   `fr-de` (`v1.0.0`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
+*   `fr-de` (`v1.0.0`) (`Size: Unknown size`): WMT 2019 fr-de translation task
     dataset.
 
 ## `wmt19_translate/cs-en`

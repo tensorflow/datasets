@@ -23,7 +23,7 @@ incomplete translations will be filtered out.
 `tfds.core.dataset_builder.BuilderConfig` and has the following configurations
 predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 335.91 MiB`): Plain text import of
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of
     multilingual TED talk translations
 
 ## `ted_multi_translate/plain_text`

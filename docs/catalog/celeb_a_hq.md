@@ -23,28 +23,34 @@ WARNING: This dataset currently requires you to prepare images on your own.
 `celeb_a_hq` is configured with `tfds.image.celebahq.CelebaHQConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `1024` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 1024 x 1024
+*   `1024` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 1024 x 1024
     resolution
 
-*   `512` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 512 x 512 resolution
+*   `512` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 512 x 512
+    resolution
 
-*   `256` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 256 x 256 resolution
+*   `256` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 256 x 256
+    resolution
 
-*   `128` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 128 x 128 resolution
+*   `128` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 128 x 128
+    resolution
 
-*   `64` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 64 x 64 resolution
+*   `64` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 64 x 64
+    resolution
 
-*   `32` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 32 x 32 resolution
+*   `32` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 32 x 32
+    resolution
 
-*   `16` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 16 x 16 resolution
+*   `16` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 16 x 16
+    resolution
 
-*   `8` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 8 x 8 resolution
+*   `8` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 8 x 8 resolution
 
-*   `4` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 4 x 4 resolution
+*   `4` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 4 x 4 resolution
 
-*   `2` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 2 x 2 resolution
+*   `2` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 2 x 2 resolution
 
-*   `1` (`v2.0.0`) (`Size: ?? GiB`): CelebaHQ images in 1 x 1 resolution
+*   `1` (`v2.0.0`) (`Size: Unknown size`): CelebaHQ images in 1 x 1 resolution
 
 ## `celeb_a_hq/1024`
 CelebaHQ images in 1024 x 1024 resolution

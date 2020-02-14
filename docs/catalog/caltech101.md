@@ -28,7 +28,9 @@ boxes.
         (https://tensorflow.org/datasets/splits)
     *   `1.1.0`: None
 
-*   Size: `125.64 MiB`
+*   Download size: `125.64 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -28,7 +28,9 @@ under Grant 5T32GM007171-44. A usage example is avalible
 
     *   **`1.0.0`** (default):
 
-*   Size: `12.78 GiB`
+*   Download size: `12.78 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

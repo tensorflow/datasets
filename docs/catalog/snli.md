@@ -25,7 +25,7 @@ inference (NLI), also known as recognizing textual entailment (RTE).
 `snli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 90.17 MiB`): Plain text import of SNLI
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of SNLI
 
 ## `snli/plain_text`
 Plain text import of SNLI

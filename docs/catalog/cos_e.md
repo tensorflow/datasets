@@ -23,7 +23,9 @@ inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
     *   **`0.0.1`** (default):
 
-*   Size: `6.23 MiB`
+*   Download size: `6.23 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

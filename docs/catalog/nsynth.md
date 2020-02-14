@@ -25,17 +25,17 @@ heuristic algorithms: Source, Family, and Qualities.
 `nsynth` is configured with `tfds.audio.nsynth.NsynthConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `full` (`v2.3.0`) (`Size: 73.07 GiB`): Full NSynth Dataset is split into
+*   `full` (`v2.3.0`) (`Size: Unknown size`): Full NSynth Dataset is split into
     train, valid, and test sets, with no instruments overlapping between the
     train set and the valid/test sets.
 
-*   `gansynth_subset` (`v2.3.0`) (`Size: 73.08 GiB`): NSynth Dataset limited to
-    acoustic instruments in the MIDI pitch interval [24, 84]. Uses alternate
+*   `gansynth_subset` (`v2.3.0`) (`Size: Unknown size`): NSynth Dataset limited
+    to acoustic instruments in the MIDI pitch interval [24, 84]. Uses alternate
     splits that have overlap in instruments (but not exact notes) between the
     train set and valid/test sets. This variant was originally introduced in the
     ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 
-*   `gansynth_subset.f0_and_loudness` (`v2.3.0`) (`Size: 73.08 GiB`): NSynth
+*   `gansynth_subset.f0_and_loudness` (`v2.3.0`) (`Size: Unknown size`): NSynth
     Dataset limited to acoustic instruments in the MIDI pitch interval [24, 84].
     Uses alternate splits that have overlap in instruments (but not exact notes)
     between the train set and valid/test sets. This variant was originally

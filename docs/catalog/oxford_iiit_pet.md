@@ -24,7 +24,9 @@ lighting. All images have an associated ground truth annotation of breed.
     *   **`3.1.0`** (default): Added species and labels, new split API.
     *   `1.2.0`: None
 
-*   Size: `801.24 MiB`
+*   Download size: `801.24 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

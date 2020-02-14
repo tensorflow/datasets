@@ -42,7 +42,9 @@ array.
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: None
 
-*   Size: `255.18 MiB`
+*   Download size: `255.18 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -943,6 +943,7 @@ ted_multi_translate/plain_text/1.0.0
 tf_flowers/1.0.0
 tf_flowers/3.0.0
 the300w_lp/1.0.0
+tiny_shakespeare/1.0.0
 titanic/1.0.0
 titanic/2.0.0
 trivia_qa/rc.nocontext/1.1.0

@@ -24,7 +24,9 @@ dropped.
         (https://tensorflow.org/datasets/splits)
     *   `2.0.1`: None
 
-*   Size: `786.68 MiB`
+*   Download size: `786.68 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

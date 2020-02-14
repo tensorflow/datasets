@@ -24,7 +24,7 @@ labels).
 `xnli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 17.04 MiB`): Plain text import of XNLI
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of XNLI
 
 ## `xnli/plain_text`
 Plain text import of XNLI

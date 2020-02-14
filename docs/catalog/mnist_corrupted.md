@@ -23,40 +23,43 @@ images uploaded by the original authors
 `tfds.image.mnist_corrupted.MNISTCorruptedConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `identity` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: identity
+*   `identity` (`v1.0.0`) (`Size: Unknown size`): Corruption method: identity
 
-*   `shot_noise` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: shot_noise
+*   `shot_noise` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    shot_noise
 
-*   `impulse_noise` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method:
+*   `impulse_noise` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     impulse_noise
 
-*   `glass_blur` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: glass_blur
+*   `glass_blur` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    glass_blur
 
-*   `motion_blur` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method:
+*   `motion_blur` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     motion_blur
 
-*   `shear` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: shear
+*   `shear` (`v1.0.0`) (`Size: Unknown size`): Corruption method: shear
 
-*   `scale` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: scale
+*   `scale` (`v1.0.0`) (`Size: Unknown size`): Corruption method: scale
 
-*   `rotate` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: rotate
+*   `rotate` (`v1.0.0`) (`Size: Unknown size`): Corruption method: rotate
 
-*   `brightness` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: brightness
+*   `brightness` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
+    brightness
 
-*   `translate` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: translate
+*   `translate` (`v1.0.0`) (`Size: Unknown size`): Corruption method: translate
 
-*   `stripe` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: stripe
+*   `stripe` (`v1.0.0`) (`Size: Unknown size`): Corruption method: stripe
 
-*   `fog` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: fog
+*   `fog` (`v1.0.0`) (`Size: Unknown size`): Corruption method: fog
 
-*   `spatter` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: spatter
+*   `spatter` (`v1.0.0`) (`Size: Unknown size`): Corruption method: spatter
 
-*   `dotted_line` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method:
+*   `dotted_line` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     dotted_line
 
-*   `zigzag` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method: zigzag
+*   `zigzag` (`v1.0.0`) (`Size: Unknown size`): Corruption method: zigzag
 
-*   `canny_edges` (`v1.0.0`) (`Size: 235.23 MiB`): Corruption method:
+*   `canny_edges` (`v1.0.0`) (`Size: Unknown size`): Corruption method:
     canny_edges
 
 ## `mnist_corrupted/identity`

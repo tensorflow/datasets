@@ -30,7 +30,9 @@ required to submit final prediction files, which we shall proceed to evaluate.
 
     *   **`0.1.0`** (default):
 
-*   Size: `3.42 GiB`
+*   Download size: `3.42 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

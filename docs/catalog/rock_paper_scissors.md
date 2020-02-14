@@ -23,7 +23,9 @@ Images of hands playing rock, paper, scissor game.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `219.53 MiB`
+*   Download size: `219.53 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

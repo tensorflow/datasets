@@ -24,7 +24,9 @@ subject text.
 
     *   **`1.0.0`** (default):
 
-*   Size: `11.10 MiB`
+*   Download size: `11.10 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -36,7 +36,7 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt_t2t_translate` is configured with `tfds.translate.wmt.WmtConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `de-en` (`v1.0.0`) (`Size: 1.61 GiB`): WMT T2T EnDe translation task
+*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT T2T EnDe translation task
     dataset.
 
 ## `wmt_t2t_translate/de-en`

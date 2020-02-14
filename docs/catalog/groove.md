@@ -24,20 +24,20 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 `groove` is configured with `tfds.audio.groove.GrooveConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `full-midionly` (`v2.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
+*   `full-midionly` (`v2.0.0`) (`Size: Unknown size`): Groove dataset without
+    audio, unsplit.
+
+*   `full-16000hz` (`v2.0.0`) (`Size: Unknown size`): Groove dataset with audio,
     unsplit.
 
-*   `full-16000hz` (`v2.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
-    unsplit.
+*   `2bar-midionly` (`v2.0.0`) (`Size: Unknown size`): Groove dataset without
+    audio, split into 2-bar chunks.
 
-*   `2bar-midionly` (`v2.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
+*   `2bar-16000hz` (`v2.0.0`) (`Size: Unknown size`): Groove dataset with audio,
     split into 2-bar chunks.
 
-*   `2bar-16000hz` (`v2.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
-    split into 2-bar chunks.
-
-*   `4bar-midionly` (`v2.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio,
-    split into 4-bar chunks.
+*   `4bar-midionly` (`v2.0.0`) (`Size: Unknown size`): Groove dataset without
+    audio, split into 4-bar chunks.
 
 ## `groove/full-midionly`
 Groove dataset without audio, unsplit.

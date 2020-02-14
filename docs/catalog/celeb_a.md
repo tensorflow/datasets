@@ -32,7 +32,9 @@ computer vision tasks: face attribute recognition, face detection, and landmark
         (https://tensorflow.org/datasets/splits)
     *   `0.3.0`: None
 
-*   Size: `1.38 GiB`
+*   Download size: `1.38 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

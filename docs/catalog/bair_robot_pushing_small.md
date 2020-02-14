@@ -25,7 +25,9 @@ including one training set (train) and two test sets of previously seen
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `30.06 GiB`
+*   Download size: `30.06 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

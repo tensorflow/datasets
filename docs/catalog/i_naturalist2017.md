@@ -29,7 +29,9 @@ the test images (label = -1).
 
     *   **`0.1.0`** (default):
 
-*   Size: `237.35 GiB`
+*   Download size: `237.35 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

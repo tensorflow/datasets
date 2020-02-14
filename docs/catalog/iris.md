@@ -28,7 +28,9 @@ separable from each other.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `4.44 KiB`
+*   Download size: `4.44 KiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

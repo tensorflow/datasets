@@ -24,56 +24,56 @@ Example usage: data = tfds.load('cfq/mcd1')
 `cfq` is configured with `tfds.text.cfq.CFQConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `mcd1` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset (and it's splits)
+*   `mcd1` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's splits)
     for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   `mcd2` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset (and it's splits)
+*   `mcd2` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's splits)
     for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   `mcd3` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset (and it's splits)
+*   `mcd3` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's splits)
     for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   `question_complexity_split` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset
+*   `question_complexity_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ
+    dataset (and it's splits) for measuring compositional generalization.
+
+See https://arxiv.org/abs/1912.09713.pdf for background.
+
+Example usage: data = tfds.load('cfq/mcd1')
+
+*   `question_pattern_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset
     (and it's splits) for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   `question_pattern_split` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset
+*   `query_complexity_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset
     (and it's splits) for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   `query_complexity_split` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset
+*   `query_pattern_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset
     (and it's splits) for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   `query_pattern_split` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset (and
-    it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `random_split` (`v1.0.0`) (`Size: 255.20 MiB`): The CFQ dataset (and it's
+*   `random_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's
     splits) for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.

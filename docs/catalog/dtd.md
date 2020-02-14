@@ -30,7 +30,9 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `608.33 MiB`
+*   Download size: `608.33 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -21,46 +21,46 @@ where one is high resource and the other is low resource.
 `ted_hrlr_translate` is configured with `tfds.translate.ted_hrlr.TedHrlrConfig`
 and has the following configurations predefined (defaults to the first one):
 
-*   `az_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from az to
+*   `az_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from az to
     en in plain text.
 
-*   `aztr_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from az_tr
-    to en in plain text.
+*   `aztr_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from
+    az_tr to en in plain text.
 
-*   `be_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from be to
+*   `be_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from be to
     en in plain text.
 
-*   `beru_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from be_ru
-    to en in plain text.
+*   `beru_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from
+    be_ru to en in plain text.
 
-*   `es_to_pt` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from es to
+*   `es_to_pt` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from es to
     pt in plain text.
 
-*   `fr_to_pt` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from fr to
+*   `fr_to_pt` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from fr to
     pt in plain text.
 
-*   `gl_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from gl to
+*   `gl_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from gl to
     en in plain text.
 
-*   `glpt_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from gl_pt
-    to en in plain text.
+*   `glpt_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from
+    gl_pt to en in plain text.
 
-*   `he_to_pt` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from he to
+*   `he_to_pt` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from he to
     pt in plain text.
 
-*   `it_to_pt` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from it to
+*   `it_to_pt` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from it to
     pt in plain text.
 
-*   `pt_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from pt to
+*   `pt_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from pt to
     en in plain text.
 
-*   `ru_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from ru to
+*   `ru_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from ru to
     en in plain text.
 
-*   `ru_to_pt` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from ru to
+*   `ru_to_pt` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from ru to
     pt in plain text.
 
-*   `tr_to_en` (`v1.0.0`) (`Size: 124.94 MiB`): Translation dataset from tr to
+*   `tr_to_en` (`v1.0.0`) (`Size: Unknown size`): Translation dataset from tr to
     en in plain text.
 
 ## `ted_hrlr_translate/az_to_en`

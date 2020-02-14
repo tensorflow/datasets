@@ -21,7 +21,9 @@ Unconstrained Environments
 
     *   **`0.1.0`** (default):
 
-*   Size: `172.20 MiB`
+*   Download size: `172.20 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

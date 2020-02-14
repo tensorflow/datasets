@@ -24,7 +24,9 @@ dataset. Annotations include bounding boxes, segmentation labels.
 
     *   **`0.1.0`** (default):
 
-*   Size: `659.14 MiB`
+*   Download size: `659.14 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

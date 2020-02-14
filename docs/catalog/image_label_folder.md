@@ -22,7 +22,9 @@ Generic image classification dataset.
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   Size: `?? GiB`
+*   Download size: `Unknown size`
+
+*   Dataset size: `Unknown size`
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/image_label_folder/`):

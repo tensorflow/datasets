@@ -24,7 +24,9 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
     *   **`2.0.0`** (default):
 
-*   Size: `1.82 GiB`
+*   Download size: `1.82 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

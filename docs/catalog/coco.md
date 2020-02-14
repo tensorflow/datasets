@@ -17,7 +17,7 @@
 `coco` is configured with `tfds.object_detection.coco.CocoConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `2014` (`v1.1.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
+*   `2014` (`v1.1.0`) (`Size: Unknown size`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2014 version. Note:
 
@@ -28,7 +28,7 @@ following configurations predefined (defaults to the first one):
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `2017` (`v1.1.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
+*   `2017` (`v1.1.0`) (`Size: Unknown size`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2017 version. Note:
 
@@ -39,9 +39,9 @@ following configurations predefined (defaults to the first one):
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `2017_panoptic` (`v1.1.0`) (`Size: 19.57 GiB`): COCO is a large-scale object
-    detection, segmentation, and captioning dataset. This version contains
-    images, bounding boxes " and labels for the 2017 version. Note:
+*   `2017_panoptic` (`v1.1.0`) (`Size: Unknown size`): COCO is a large-scale
+    object detection, segmentation, and captioning dataset. This version
+    contains images, bounding boxes " and labels for the 2017 version. Note:
 
     *   Some images from the train and validation sets don't have annotations.
     *   Coco 2014 and 2017 uses the same images, but different train/val/test

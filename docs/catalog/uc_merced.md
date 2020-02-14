@@ -27,7 +27,9 @@ measures 256x256 pixels.
         (https://tensorflow.org/datasets/splits)
     *   `0.0.1`: None
 
-*   Size: `317.07 MiB`
+*   Download size: `317.07 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

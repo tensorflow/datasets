@@ -25,279 +25,289 @@ randomness is fixed so that regeneration is deterministic.
 `tfds.image.imagenet2012_corrupted.Imagenet2012CorruptedConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `gaussian_noise_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_noise_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_noise, severity = 1
 
-*   `gaussian_noise_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_noise_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_noise, severity = 2
 
-*   `gaussian_noise_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_noise_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_noise, severity = 3
 
-*   `gaussian_noise_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_noise_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_noise, severity = 4
 
-*   `gaussian_noise_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_noise_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_noise, severity = 5
 
-*   `shot_noise_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = shot_noise,
-    severity = 1
+*   `shot_noise_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    shot_noise, severity = 1
 
-*   `shot_noise_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = shot_noise,
-    severity = 2
+*   `shot_noise_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    shot_noise, severity = 2
 
-*   `shot_noise_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = shot_noise,
-    severity = 3
+*   `shot_noise_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    shot_noise, severity = 3
 
-*   `shot_noise_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = shot_noise,
-    severity = 4
+*   `shot_noise_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    shot_noise, severity = 4
 
-*   `shot_noise_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = shot_noise,
-    severity = 5
+*   `shot_noise_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    shot_noise, severity = 5
 
-*   `impulse_noise_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `impulse_noise_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     impulse_noise, severity = 1
 
-*   `impulse_noise_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `impulse_noise_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     impulse_noise, severity = 2
 
-*   `impulse_noise_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `impulse_noise_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     impulse_noise, severity = 3
 
-*   `impulse_noise_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `impulse_noise_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     impulse_noise, severity = 4
 
-*   `impulse_noise_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `impulse_noise_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     impulse_noise, severity = 5
 
-*   `defocus_blur_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `defocus_blur_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     defocus_blur, severity = 1
 
-*   `defocus_blur_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `defocus_blur_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     defocus_blur, severity = 2
 
-*   `defocus_blur_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `defocus_blur_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     defocus_blur, severity = 3
 
-*   `defocus_blur_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `defocus_blur_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     defocus_blur, severity = 4
 
-*   `defocus_blur_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `defocus_blur_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     defocus_blur, severity = 5
 
-*   `glass_blur_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = glass_blur,
-    severity = 1
+*   `glass_blur_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    glass_blur, severity = 1
 
-*   `glass_blur_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = glass_blur,
-    severity = 2
+*   `glass_blur_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    glass_blur, severity = 2
 
-*   `glass_blur_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = glass_blur,
-    severity = 3
+*   `glass_blur_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    glass_blur, severity = 3
 
-*   `glass_blur_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = glass_blur,
-    severity = 4
+*   `glass_blur_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    glass_blur, severity = 4
 
-*   `glass_blur_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = glass_blur,
-    severity = 5
+*   `glass_blur_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    glass_blur, severity = 5
 
-*   `motion_blur_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `motion_blur_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     motion_blur, severity = 1
 
-*   `motion_blur_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `motion_blur_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     motion_blur, severity = 2
 
-*   `motion_blur_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `motion_blur_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     motion_blur, severity = 3
 
-*   `motion_blur_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `motion_blur_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     motion_blur, severity = 4
 
-*   `motion_blur_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `motion_blur_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     motion_blur, severity = 5
 
-*   `zoom_blur_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = zoom_blur,
+*   `zoom_blur_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    zoom_blur, severity = 1
+
+*   `zoom_blur_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    zoom_blur, severity = 2
+
+*   `zoom_blur_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    zoom_blur, severity = 3
+
+*   `zoom_blur_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    zoom_blur, severity = 4
+
+*   `zoom_blur_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    zoom_blur, severity = 5
+
+*   `snow_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = snow,
     severity = 1
 
-*   `zoom_blur_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = zoom_blur,
+*   `snow_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = snow,
     severity = 2
 
-*   `zoom_blur_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = zoom_blur,
+*   `snow_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = snow,
     severity = 3
 
-*   `zoom_blur_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = zoom_blur,
+*   `snow_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = snow,
     severity = 4
 
-*   `zoom_blur_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = zoom_blur,
+*   `snow_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = snow,
     severity = 5
 
-*   `snow_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = snow, severity = 1
+*   `frost_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = frost,
+    severity = 1
 
-*   `snow_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = snow, severity = 2
+*   `frost_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = frost,
+    severity = 2
 
-*   `snow_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = snow, severity = 3
+*   `frost_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = frost,
+    severity = 3
 
-*   `snow_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = snow, severity = 4
+*   `frost_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = frost,
+    severity = 4
 
-*   `snow_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = snow, severity = 5
+*   `frost_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = frost,
+    severity = 5
 
-*   `frost_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = frost, severity =
+*   `fog_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = fog, severity =
     1
 
-*   `frost_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = frost, severity =
+*   `fog_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = fog, severity =
     2
 
-*   `frost_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = frost, severity =
+*   `fog_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = fog, severity =
     3
 
-*   `frost_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = frost, severity =
+*   `fog_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = fog, severity =
     4
 
-*   `frost_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = frost, severity =
+*   `fog_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = fog, severity =
     5
 
-*   `fog_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = fog, severity = 1
+*   `brightness_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    brightness, severity = 1
 
-*   `fog_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = fog, severity = 2
+*   `brightness_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    brightness, severity = 2
 
-*   `fog_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = fog, severity = 3
+*   `brightness_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    brightness, severity = 3
 
-*   `fog_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = fog, severity = 4
+*   `brightness_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    brightness, severity = 4
 
-*   `fog_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = fog, severity = 5
+*   `brightness_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
+    brightness, severity = 5
 
-*   `brightness_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = brightness,
+*   `contrast_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = contrast,
     severity = 1
 
-*   `brightness_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = brightness,
+*   `contrast_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = contrast,
     severity = 2
 
-*   `brightness_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = brightness,
+*   `contrast_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = contrast,
     severity = 3
 
-*   `brightness_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = brightness,
+*   `contrast_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = contrast,
     severity = 4
 
-*   `brightness_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = brightness,
+*   `contrast_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = contrast,
     severity = 5
 
-*   `contrast_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = contrast,
-    severity = 1
-
-*   `contrast_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = contrast,
-    severity = 2
-
-*   `contrast_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = contrast,
-    severity = 3
-
-*   `contrast_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = contrast,
-    severity = 4
-
-*   `contrast_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = contrast,
-    severity = 5
-
-*   `elastic_transform_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `elastic_transform_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     elastic_transform, severity = 1
 
-*   `elastic_transform_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `elastic_transform_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     elastic_transform, severity = 2
 
-*   `elastic_transform_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `elastic_transform_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     elastic_transform, severity = 3
 
-*   `elastic_transform_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `elastic_transform_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     elastic_transform, severity = 4
 
-*   `elastic_transform_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `elastic_transform_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     elastic_transform, severity = 5
 
-*   `pixelate_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = pixelate,
+*   `pixelate_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = pixelate,
     severity = 1
 
-*   `pixelate_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = pixelate,
+*   `pixelate_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = pixelate,
     severity = 2
 
-*   `pixelate_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = pixelate,
+*   `pixelate_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = pixelate,
     severity = 3
 
-*   `pixelate_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = pixelate,
+*   `pixelate_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = pixelate,
     severity = 4
 
-*   `pixelate_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = pixelate,
+*   `pixelate_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = pixelate,
     severity = 5
 
-*   `jpeg_compression_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `jpeg_compression_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     jpeg_compression, severity = 1
 
-*   `jpeg_compression_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `jpeg_compression_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     jpeg_compression, severity = 2
 
-*   `jpeg_compression_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `jpeg_compression_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     jpeg_compression, severity = 3
 
-*   `jpeg_compression_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `jpeg_compression_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     jpeg_compression, severity = 4
 
-*   `jpeg_compression_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `jpeg_compression_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     jpeg_compression, severity = 5
 
-*   `gaussian_blur_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_blur_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_blur, severity = 1
 
-*   `gaussian_blur_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_blur_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_blur, severity = 2
 
-*   `gaussian_blur_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_blur_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_blur, severity = 3
 
-*   `gaussian_blur_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_blur_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_blur, severity = 4
 
-*   `gaussian_blur_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `gaussian_blur_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     gaussian_blur, severity = 5
 
-*   `saturate_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = saturate,
+*   `saturate_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = saturate,
     severity = 1
 
-*   `saturate_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = saturate,
+*   `saturate_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = saturate,
     severity = 2
 
-*   `saturate_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = saturate,
+*   `saturate_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = saturate,
     severity = 3
 
-*   `saturate_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = saturate,
+*   `saturate_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = saturate,
     severity = 4
 
-*   `saturate_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = saturate,
+*   `saturate_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = saturate,
     severity = 5
 
-*   `spatter_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = spatter,
+*   `spatter_1` (`v3.1.0`) (`Size: Unknown size`): corruption type = spatter,
     severity = 1
 
-*   `spatter_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = spatter,
+*   `spatter_2` (`v3.1.0`) (`Size: Unknown size`): corruption type = spatter,
     severity = 2
 
-*   `spatter_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = spatter,
+*   `spatter_3` (`v3.1.0`) (`Size: Unknown size`): corruption type = spatter,
     severity = 3
 
-*   `spatter_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = spatter,
+*   `spatter_4` (`v3.1.0`) (`Size: Unknown size`): corruption type = spatter,
     severity = 4
 
-*   `spatter_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type = spatter,
+*   `spatter_5` (`v3.1.0`) (`Size: Unknown size`): corruption type = spatter,
     severity = 5
 
-*   `speckle_noise_1` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `speckle_noise_1` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     speckle_noise, severity = 1
 
-*   `speckle_noise_2` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `speckle_noise_2` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     speckle_noise, severity = 2
 
-*   `speckle_noise_3` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `speckle_noise_3` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     speckle_noise, severity = 3
 
-*   `speckle_noise_4` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `speckle_noise_4` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     speckle_noise, severity = 4
 
-*   `speckle_noise_5` (`v3.1.0`) (`Size: 1.98 MiB`): corruption type =
+*   `speckle_noise_5` (`v3.1.0`) (`Size: Unknown size`): corruption type =
     speckle_noise, severity = 5
 
 ## `imagenet2012_corrupted/gaussian_noise_1`

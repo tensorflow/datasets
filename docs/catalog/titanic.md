@@ -25,7 +25,9 @@ missing values are replaced with -1, string missing values are replaced with
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `114.98 KiB`
+*   Download size: `114.98 KiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

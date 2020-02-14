@@ -23,7 +23,9 @@ A large set of images of flowers
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `218.21 MiB`
+*   Download size: `218.21 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

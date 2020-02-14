@@ -26,7 +26,7 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 `tfds.text.multi_nli_mismatch.MultiNLIMismatchConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
+*   `plain_text` (`v0.0.1`) (`Size: Unknown size`): Plain text
 
 ## `multi_nli_mismatch/plain_text`
 Plain text

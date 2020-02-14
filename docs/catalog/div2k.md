@@ -21,28 +21,28 @@ challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
 `div2k` is configured with `tfds.image.div2k.Div2kConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `bicubic_x2` (`v2.0.0`) (`Size: 4.68 GiB`): Uses bicubic_x2 data.
+*   `bicubic_x2` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x2 data.
 
-*   `bicubic_x3` (`v2.0.0`) (`Size: 4.16 GiB`): Uses bicubic_x3 data.
+*   `bicubic_x3` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x3 data.
 
-*   `bicubic_x4` (`v2.0.0`) (`Size: 3.97 GiB`): Uses bicubic_x4 data.
+*   `bicubic_x4` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x4 data.
 
-*   `bicubic_x8` (`v2.0.0`) (`Size: 3.78 GiB`): Uses bicubic_x8 data.
+*   `bicubic_x8` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x8 data.
 
-*   `unknown_x2` (`v2.0.0`) (`Size: 4.48 GiB`): Uses unknown_x2 data.
+*   `unknown_x2` (`v2.0.0`) (`Size: Unknown size`): Uses unknown_x2 data.
 
-*   `unknown_x3` (`v2.0.0`) (`Size: 4.10 GiB`): Uses unknown_x3 data.
+*   `unknown_x3` (`v2.0.0`) (`Size: Unknown size`): Uses unknown_x3 data.
 
-*   `unknown_x4` (`v2.0.0`) (`Size: 3.93 GiB`): Uses unknown_x4 data.
+*   `unknown_x4` (`v2.0.0`) (`Size: Unknown size`): Uses unknown_x4 data.
 
-*   `realistic_mild_x4` (`v2.0.0`) (`Size: 4.00 GiB`): Uses realistic_mild_x4
-    data.
+*   `realistic_mild_x4` (`v2.0.0`) (`Size: Unknown size`): Uses
+    realistic_mild_x4 data.
 
-*   `realistic_difficult_x4` (`v2.0.0`) (`Size: 3.98 GiB`): Uses
+*   `realistic_difficult_x4` (`v2.0.0`) (`Size: Unknown size`): Uses
     realistic_difficult_x4 data.
 
-*   `realistic_wild_x4` (`v2.0.0`) (`Size: 4.74 GiB`): Uses realistic_wild_x4
-    data.
+*   `realistic_wild_x4` (`v2.0.0`) (`Size: Unknown size`): Uses
+    realistic_wild_x4 data.
 
 ## `div2k/bicubic_x2`
 Uses bicubic_x2 data.

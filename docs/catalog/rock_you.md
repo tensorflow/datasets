@@ -26,7 +26,9 @@ Machine Learning models for password guessing and cracking.
 
     *   **`0.1.0`** (default):
 
-*   Size: `133.44 MiB`
+*   Download size: `133.44 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

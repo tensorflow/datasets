@@ -19,15 +19,15 @@
 `tfds.image.lost_and_found.LostAndFoundConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `semantic_segmentation` (`v1.0.0`) (`Size: 5.44 GiB`): Lost and Found
+*   `semantic_segmentation` (`v1.0.0`) (`Size: Unknown size`): Lost and Found
     semantic segmentation dataset.
 
-*   `stereo_disparity` (`v1.0.0`) (`Size: 12.16 GiB`): Lost and Found stereo
+*   `stereo_disparity` (`v1.0.0`) (`Size: Unknown size`): Lost and Found stereo
     images and disparity maps.
 
-*   `full` (`v1.0.0`) (`Size: 12.19 GiB`): Full Lost and Found dataset.
+*   `full` (`v1.0.0`) (`Size: Unknown size`): Full Lost and Found dataset.
 
-*   `full_16bit` (`v1.0.0`) (`Size: 34.90 GiB`): Full Lost and Found dataset.
+*   `full_16bit` (`v1.0.0`) (`Size: Unknown size`): Full Lost and Found dataset.
 
 ## `lost_and_found/semantic_segmentation`
 Lost and Found semantic segmentation dataset.

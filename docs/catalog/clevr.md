@@ -25,7 +25,9 @@ reasoning each question requires.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `17.72 GiB`
+*   Download size: `17.72 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

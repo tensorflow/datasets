@@ -24,7 +24,9 @@ applications.
 
     *   **`0.1.0`** (default):
 
-*   Size: `2.29 MiB`
+*   Download size: `2.29 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

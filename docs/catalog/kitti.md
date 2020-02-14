@@ -28,7 +28,9 @@ the Kitti homepage.
     *   **`3.1.0`** (default):
     *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
-*   Size: `11.71 GiB`
+*   Download size: `11.71 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

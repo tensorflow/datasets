@@ -22,7 +22,7 @@ human-like form of general fluid intelligence.
 `arc` is configured with `tfds.image.arc.ARCConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `2019-12-06` (`v1.0.0`) (`Size: 465.07 KiB`): ARC commit bd9e2c9 from
+*   `2019-12-06` (`v1.0.0`) (`Size: Unknown size`): ARC commit bd9e2c9 from
     2019-12-06
 
 ## `arc/2019-12-06`

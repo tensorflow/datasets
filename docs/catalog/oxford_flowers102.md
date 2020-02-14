@@ -32,7 +32,9 @@ training set and validation set each consist of 10 images per class (totalling
         (https://tensorflow.org/datasets/splits)
     *   `0.0.1`: None
 
-*   Size: `336.76 MiB`
+*   Download size: `336.76 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

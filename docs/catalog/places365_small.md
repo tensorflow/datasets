@@ -22,7 +22,9 @@ category in the validation set and 900 images per category in the testing set.
 
     *   **`2.0.0`** (default):
 
-*   Size: `29.27 GiB`
+*   Download size: `29.27 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -31,9 +31,10 @@ http://creativecommons.org/licenses/by/4.0
 `so2sat` is configured with `tfds.image.so2sat.So2satConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `rgb` (`v2.0.0`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+*   `rgb` (`v2.0.0`) (`Size: Unknown size`): Sentinel-2 RGB channels
 
-*   `all` (`v2.0.0`) (`Size: ?? GiB`): 8 Sentinel-1 and 10 Sentinel-2 channels
+*   `all` (`v2.0.0`) (`Size: Unknown size`): 8 Sentinel-1 and 10 Sentinel-2
+    channels
 
 ## `so2sat/rgb`
 Sentinel-2 RGB channels

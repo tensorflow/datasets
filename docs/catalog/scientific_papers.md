@@ -27,9 +27,10 @@ seperated by "/n".
 `tfds.summarization.scientific_papers.ScientificPapersConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `arxiv` (`v1.1.0`) (`Size: 4.20 GiB`): Documents from ArXiv repository.
+*   `arxiv` (`v1.1.0`) (`Size: Unknown size`): Documents from ArXiv repository.
 
-*   `pubmed` (`v1.1.0`) (`Size: 4.20 GiB`): Documents from PubMed repository.
+*   `pubmed` (`v1.1.0`) (`Size: Unknown size`): Documents from PubMed
+    repository.
 
 ## `scientific_papers/arxiv`
 Documents from ArXiv repository.

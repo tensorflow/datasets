@@ -52,189 +52,190 @@ review_body - The review text. review_date - The date the review was written.
 `tfds.structured.amazon_us_reviews.AmazonUSReviewsConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `Wireless_v1_00` (`v0.1.0`) (`Size: 1.59 GiB`): A dataset consisting of
+*   `Wireless_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Wireless_v1_00 products in US marketplace. Each product
     has its own version as specified with it.
 
-*   `Watches_v1_00` (`v0.1.0`) (`Size: 155.42 MiB`): A dataset consisting of
+*   `Watches_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Watches_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Video_Games_v1_00` (`v0.1.0`) (`Size: 453.19 MiB`): A dataset consisting of
-    reviews of Amazon Video_Games_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   `Video_Games_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
+    of reviews of Amazon Video_Games_v1_00 products in US marketplace. Each
+    product has its own version as specified with it.
 
-*   `Video_DVD_v1_00` (`v0.1.0`) (`Size: 1.41 GiB`): A dataset consisting of
+*   `Video_DVD_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Video_DVD_v1_00 products in US marketplace. Each product
     has its own version as specified with it.
 
-*   `Video_v1_00` (`v0.1.0`) (`Size: 132.49 MiB`): A dataset consisting of
+*   `Video_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Video_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Toys_v1_00` (`v0.1.0`) (`Size: 799.61 MiB`): A dataset consisting of
+*   `Toys_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Toys_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Tools_v1_00` (`v0.1.0`) (`Size: 318.32 MiB`): A dataset consisting of
+*   `Tools_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Tools_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Sports_v1_00` (`v0.1.0`) (`Size: 832.06 MiB`): A dataset consisting of
+*   `Sports_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Sports_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Software_v1_00` (`v0.1.0`) (`Size: 89.66 MiB`): A dataset consisting of
+*   `Software_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Software_v1_00 products in US marketplace. Each product
     has its own version as specified with it.
 
-*   `Shoes_v1_00` (`v0.1.0`) (`Size: 612.50 MiB`): A dataset consisting of
+*   `Shoes_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Shoes_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Pet_Products_v1_00` (`v0.1.0`) (`Size: 491.92 MiB`): A dataset consisting
+*   `Pet_Products_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
     of reviews of Amazon Pet_Products_v1_00 products in US marketplace. Each
     product has its own version as specified with it.
 
-*   `Personal_Care_Appliances_v1_00` (`v0.1.0`) (`Size: 16.82 MiB`): A dataset
-    consisting of reviews of Amazon Personal_Care_Appliances_v1_00 products in
-    US marketplace. Each product has its own version as specified with it.
+*   `Personal_Care_Appliances_v1_00` (`v0.1.0`) (`Size: Unknown size`): A
+    dataset consisting of reviews of Amazon Personal_Care_Appliances_v1_00
+    products in US marketplace. Each product has its own version as specified
+    with it.
 
-*   `PC_v1_00` (`v0.1.0`) (`Size: 1.41 GiB`): A dataset consisting of reviews of
-    Amazon PC_v1_00 products in US marketplace. Each product has its own version
-    as specified with it.
+*   `PC_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
+    reviews of Amazon PC_v1_00 products in US marketplace. Each product has its
+    own version as specified with it.
 
-*   `Outdoors_v1_00` (`v0.1.0`) (`Size: 428.16 MiB`): A dataset consisting of
+*   `Outdoors_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Outdoors_v1_00 products in US marketplace. Each product
     has its own version as specified with it.
 
-*   `Office_Products_v1_00` (`v0.1.0`) (`Size: 488.59 MiB`): A dataset
+*   `Office_Products_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Office_Products_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Musical_Instruments_v1_00` (`v0.1.0`) (`Size: 184.43 MiB`): A dataset
+*   `Musical_Instruments_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Musical_Instruments_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Music_v1_00` (`v0.1.0`) (`Size: 1.42 GiB`): A dataset consisting of reviews
-    of Amazon Music_v1_00 products in US marketplace. Each product has its own
-    version as specified with it.
+*   `Music_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
+    reviews of Amazon Music_v1_00 products in US marketplace. Each product has
+    its own version as specified with it.
 
-*   `Mobile_Electronics_v1_00` (`v0.1.0`) (`Size: 21.81 MiB`): A dataset
+*   `Mobile_Electronics_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Mobile_Electronics_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Mobile_Apps_v1_00` (`v0.1.0`) (`Size: 532.11 MiB`): A dataset consisting of
-    reviews of Amazon Mobile_Apps_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   `Mobile_Apps_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
+    of reviews of Amazon Mobile_Apps_v1_00 products in US marketplace. Each
+    product has its own version as specified with it.
 
-*   `Major_Appliances_v1_00` (`v0.1.0`) (`Size: 23.23 MiB`): A dataset
+*   `Major_Appliances_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Major_Appliances_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Luggage_v1_00` (`v0.1.0`) (`Size: 57.53 MiB`): A dataset consisting of
+*   `Luggage_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Luggage_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Lawn_and_Garden_v1_00` (`v0.1.0`) (`Size: 464.22 MiB`): A dataset
+*   `Lawn_and_Garden_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Lawn_and_Garden_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Kitchen_v1_00` (`v0.1.0`) (`Size: 887.63 MiB`): A dataset consisting of
+*   `Kitchen_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Kitchen_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Jewelry_v1_00` (`v0.1.0`) (`Size: 235.58 MiB`): A dataset consisting of
+*   `Jewelry_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Jewelry_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Home_Improvement_v1_00` (`v0.1.0`) (`Size: 480.02 MiB`): A dataset
+*   `Home_Improvement_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Home_Improvement_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Home_Entertainment_v1_00` (`v0.1.0`) (`Size: 184.22 MiB`): A dataset
+*   `Home_Entertainment_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Home_Entertainment_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Home_v1_00` (`v0.1.0`) (`Size: 1.01 GiB`): A dataset consisting of reviews
-    of Amazon Home_v1_00 products in US marketplace. Each product has its own
-    version as specified with it.
+*   `Home_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
+    reviews of Amazon Home_v1_00 products in US marketplace. Each product has
+    its own version as specified with it.
 
-*   `Health_Personal_Care_v1_00` (`v0.1.0`) (`Size: 964.34 MiB`): A dataset
+*   `Health_Personal_Care_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Health_Personal_Care_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Grocery_v1_00` (`v0.1.0`) (`Size: 382.74 MiB`): A dataset consisting of
+*   `Grocery_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Grocery_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Gift_Card_v1_00` (`v0.1.0`) (`Size: 11.57 MiB`): A dataset consisting of
+*   `Gift_Card_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Gift_Card_v1_00 products in US marketplace. Each product
     has its own version as specified with it.
 
-*   `Furniture_v1_00` (`v0.1.0`) (`Size: 142.08 MiB`): A dataset consisting of
+*   `Furniture_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Furniture_v1_00 products in US marketplace. Each product
     has its own version as specified with it.
 
-*   `Electronics_v1_00` (`v0.1.0`) (`Size: 666.45 MiB`): A dataset consisting of
-    reviews of Amazon Electronics_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   `Electronics_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
+    of reviews of Amazon Electronics_v1_00 products in US marketplace. Each
+    product has its own version as specified with it.
 
-*   `Digital_Video_Games_v1_00` (`v0.1.0`) (`Size: 26.17 MiB`): A dataset
+*   `Digital_Video_Games_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Digital_Video_Games_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Digital_Video_Download_v1_00` (`v0.1.0`) (`Size: 483.49 MiB`): A dataset
+*   `Digital_Video_Download_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Digital_Video_Download_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Digital_Software_v1_00` (`v0.1.0`) (`Size: 18.12 MiB`): A dataset
+*   `Digital_Software_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Digital_Software_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Digital_Music_Purchase_v1_00` (`v0.1.0`) (`Size: 241.82 MiB`): A dataset
+*   `Digital_Music_Purchase_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Digital_Music_Purchase_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Digital_Ebook_Purchase_v1_00` (`v0.1.0`) (`Size: 2.51 GiB`): A dataset
+*   `Digital_Ebook_Purchase_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Digital_Ebook_Purchase_v1_00 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Camera_v1_00` (`v0.1.0`) (`Size: 422.15 MiB`): A dataset consisting of
+*   `Camera_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Camera_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Books_v1_00` (`v0.1.0`) (`Size: 2.55 GiB`): A dataset consisting of reviews
-    of Amazon Books_v1_00 products in US marketplace. Each product has its own
-    version as specified with it.
+*   `Books_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
+    reviews of Amazon Books_v1_00 products in US marketplace. Each product has
+    its own version as specified with it.
 
-*   `Beauty_v1_00` (`v0.1.0`) (`Size: 871.73 MiB`): A dataset consisting of
+*   `Beauty_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Beauty_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Baby_v1_00` (`v0.1.0`) (`Size: 340.84 MiB`): A dataset consisting of
+*   `Baby_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Baby_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Automotive_v1_00` (`v0.1.0`) (`Size: 555.18 MiB`): A dataset consisting of
-    reviews of Amazon Automotive_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   `Automotive_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
+    of reviews of Amazon Automotive_v1_00 products in US marketplace. Each
+    product has its own version as specified with it.
 
-*   `Apparel_v1_00` (`v0.1.0`) (`Size: 618.59 MiB`): A dataset consisting of
+*   `Apparel_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
     reviews of Amazon Apparel_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   `Digital_Ebook_Purchase_v1_01` (`v0.1.0`) (`Size: 1.21 GiB`): A dataset
+*   `Digital_Ebook_Purchase_v1_01` (`v0.1.0`) (`Size: Unknown size`): A dataset
     consisting of reviews of Amazon Digital_Ebook_Purchase_v1_01 products in US
     marketplace. Each product has its own version as specified with it.
 
-*   `Books_v1_01` (`v0.1.0`) (`Size: 2.51 GiB`): A dataset consisting of reviews
-    of Amazon Books_v1_01 products in US marketplace. Each product has its own
-    version as specified with it.
+*   `Books_v1_01` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
+    reviews of Amazon Books_v1_01 products in US marketplace. Each product has
+    its own version as specified with it.
 
-*   `Books_v1_02` (`v0.1.0`) (`Size: 1.24 GiB`): A dataset consisting of reviews
-    of Amazon Books_v1_02 products in US marketplace. Each product has its own
-    version as specified with it.
+*   `Books_v1_02` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
+    reviews of Amazon Books_v1_02 products in US marketplace. Each product has
+    its own version as specified with it.
 
 ## `amazon_us_reviews/Wireless_v1_00`
 

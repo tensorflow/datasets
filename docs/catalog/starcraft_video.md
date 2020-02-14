@@ -20,27 +20,28 @@ This data set contains videos generated from Starcraft.
 `starcraft_video` is configured with `tfds.video.starcraft.StarcraftVideoConfig`
 and has the following configurations predefined (defaults to the first one):
 
-*   `brawl_64` (`v1.0.0`) (`Size: 6.40 GiB`): Brawl map with 64x64 resolution.
-
-*   `brawl_128` (`v1.0.0`) (`Size: 20.76 GiB`): Brawl map with 128x128
+*   `brawl_64` (`v1.0.0`) (`Size: Unknown size`): Brawl map with 64x64
     resolution.
 
-*   `collect_mineral_shards_64` (`v1.0.0`) (`Size: 7.83 GiB`):
+*   `brawl_128` (`v1.0.0`) (`Size: Unknown size`): Brawl map with 128x128
+    resolution.
+
+*   `collect_mineral_shards_64` (`v1.0.0`) (`Size: Unknown size`):
     CollectMineralShards map with 64x64 resolution.
 
-*   `collect_mineral_shards_128` (`v1.0.0`) (`Size: 24.83 GiB`):
+*   `collect_mineral_shards_128` (`v1.0.0`) (`Size: Unknown size`):
     CollectMineralShards map with 128x128 resolution.
 
-*   `move_unit_to_border_64` (`v1.0.0`) (`Size: 1.77 GiB`): MoveUnitToBorder map
-    with 64x64 resolution.
+*   `move_unit_to_border_64` (`v1.0.0`) (`Size: Unknown size`): MoveUnitToBorder
+    map with 64x64 resolution.
 
-*   `move_unit_to_border_128` (`v1.0.0`) (`Size: 5.75 GiB`): MoveUnitToBorder
-    map with 128x128 resolution.
+*   `move_unit_to_border_128` (`v1.0.0`) (`Size: Unknown size`):
+    MoveUnitToBorder map with 128x128 resolution.
 
-*   `road_trip_with_medivac_64` (`v1.0.0`) (`Size: 2.48 GiB`):
+*   `road_trip_with_medivac_64` (`v1.0.0`) (`Size: Unknown size`):
     RoadTripWithMedivac map with 64x64 resolution.
 
-*   `road_trip_with_medivac_128` (`v1.0.0`) (`Size: 7.80 GiB`):
+*   `road_trip_with_medivac_128` (`v1.0.0`) (`Size: Unknown size`):
     RoadTripWithMedivac map with 128x128 resolution.
 
 ## `starcraft_video/brawl_64`

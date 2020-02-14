@@ -26,17 +26,17 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `byclass` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST ByClass
+*   `byclass` (`v3.0.0`) (`Size: Unknown size`): EMNIST ByClass
 
-*   `bymerge` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST ByMerge
+*   `bymerge` (`v3.0.0`) (`Size: Unknown size`): EMNIST ByMerge
 
-*   `balanced` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST Balanced
+*   `balanced` (`v3.0.0`) (`Size: Unknown size`): EMNIST Balanced
 
-*   `letters` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST Letters
+*   `letters` (`v3.0.0`) (`Size: Unknown size`): EMNIST Letters
 
-*   `digits` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST Digits
+*   `digits` (`v3.0.0`) (`Size: Unknown size`): EMNIST Digits
 
-*   `mnist` (`v3.0.0`) (`Size: 535.73 MiB`): EMNIST MNIST
+*   `mnist` (`v3.0.0`) (`Size: Unknown size`): EMNIST MNIST
 
 ## `emnist/byclass`
 EMNIST ByClass

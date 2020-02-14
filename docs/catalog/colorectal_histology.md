@@ -24,7 +24,9 @@ x 150 x 3 RGB image of one of 8 classes.
         (https://tensorflow.org/datasets/splits)
     *   `0.0.1`: None
 
-*   Size: `246.14 MiB`
+*   Download size: `246.14 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

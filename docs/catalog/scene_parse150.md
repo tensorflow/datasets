@@ -24,7 +24,9 @@ evaluation platform for the algorithms of scene parsing.
 
     *   **`1.0.0`** (default):
 
-*   Size: `936.97 MiB`
+*   Download size: `936.97 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

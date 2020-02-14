@@ -27,7 +27,7 @@ Example usage: data = tfds.load('scan/length')
 `scan` is configured with `tfds.text.scan.ScanConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `simple` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various splits.
+*   `simple` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
 compositional learning and zero-shot generalization.
@@ -36,7 +36,7 @@ See https://github.com/brendenlake/SCAN for a description of the splits.
 
 Example usage: data = tfds.load('scan/length')
 
-*   `addprim_jump` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
+*   `addprim_jump` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
     splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
@@ -46,66 +46,7 @@ See https://github.com/brendenlake/SCAN for a description of the splits.
 
 Example usage: data = tfds.load('scan/length')
 
-*   `addprim_turn_left` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num0` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num1` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num2` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num3` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `length` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `template_around_right` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with
+*   `addprim_turn_left` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with
     various splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
@@ -115,7 +56,56 @@ See https://github.com/brendenlake/SCAN for a description of the splits.
 
 Example usage: data = tfds.load('scan/length')
 
-*   `template_jump_around_right` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with
+*   `filler_num0` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
+    splits.
+
+SCAN is a set of simple language-driven navigation tasks for studying
+compositional learning and zero-shot generalization.
+
+See https://github.com/brendenlake/SCAN for a description of the splits.
+
+Example usage: data = tfds.load('scan/length')
+
+*   `filler_num1` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
+    splits.
+
+SCAN is a set of simple language-driven navigation tasks for studying
+compositional learning and zero-shot generalization.
+
+See https://github.com/brendenlake/SCAN for a description of the splits.
+
+Example usage: data = tfds.load('scan/length')
+
+*   `filler_num2` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
+    splits.
+
+SCAN is a set of simple language-driven navigation tasks for studying
+compositional learning and zero-shot generalization.
+
+See https://github.com/brendenlake/SCAN for a description of the splits.
+
+Example usage: data = tfds.load('scan/length')
+
+*   `filler_num3` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
+    splits.
+
+SCAN is a set of simple language-driven navigation tasks for studying
+compositional learning and zero-shot generalization.
+
+See https://github.com/brendenlake/SCAN for a description of the splits.
+
+Example usage: data = tfds.load('scan/length')
+
+*   `length` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various splits.
+
+SCAN is a set of simple language-driven navigation tasks for studying
+compositional learning and zero-shot generalization.
+
+See https://github.com/brendenlake/SCAN for a description of the splits.
+
+Example usage: data = tfds.load('scan/length')
+
+*   `template_around_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with
     various splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
@@ -125,7 +115,17 @@ See https://github.com/brendenlake/SCAN for a description of the splits.
 
 Example usage: data = tfds.load('scan/length')
 
-*   `template_opposite_right` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with
+*   `template_jump_around_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks
+    with various splits.
+
+SCAN is a set of simple language-driven navigation tasks for studying
+compositional learning and zero-shot generalization.
+
+See https://github.com/brendenlake/SCAN for a description of the splits.
+
+Example usage: data = tfds.load('scan/length')
+
+*   `template_opposite_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with
     various splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
@@ -135,7 +135,7 @@ See https://github.com/brendenlake/SCAN for a description of the splits.
 
 Example usage: data = tfds.load('scan/length')
 
-*   `template_right` (`v1.0.0`) (`Size: 17.82 MiB`): SCAN tasks with various
+*   `template_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
     splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying

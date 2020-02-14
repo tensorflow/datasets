@@ -27,18 +27,18 @@ v4 and v6.
 `cifar10_1` is configured with `tfds.image.cifar10_1.Cifar10_1Config` and has
 the following configurations predefined (defaults to the first one):
 
-*   `v4` (`v1.0.0`) (`Size: 5.93 MiB`): It is the first version of our dataset
-    on which we tested any classifier. As mentioned above, this makes the v4
-    dataset independent of the classifiers we evaluate. The numbers reported in
-    the main sections of our paper use this version of the dataset. It was built
-    from the top 25 TinyImages keywords for each class, which led to a slight
-    class imbalance. The largest difference is that ships make up only 8% of the
-    test set instead of 10%. v4 contains 2,021 images.
+*   `v4` (`v1.0.0`) (`Size: Unknown size`): It is the first version of our
+    dataset on which we tested any classifier. As mentioned above, this makes
+    the v4 dataset independent of the classifiers we evaluate. The numbers
+    reported in the main sections of our paper use this version of the dataset.
+    It was built from the top 25 TinyImages keywords for each class, which led
+    to a slight class imbalance. The largest difference is that ships make up
+    only 8% of the test set instead of 10%. v4 contains 2,021 images.
 
-*   `v6` (`v1.0.0`) (`Size: 5.87 MiB`): It is derived from a slightly improved
-    keyword allocation that is exactly class balanced. This version of the
-    dataset corresponds to the results in Appendix D of our paper. v6 contains
-    2,000 images.
+*   `v6` (`v1.0.0`) (`Size: Unknown size`): It is derived from a slightly
+    improved keyword allocation that is exactly class balanced. This version of
+    the dataset corresponds to the results in Appendix D of our paper. v6
+    contains 2,000 images.
 
 ## `cifar10_1/v4`
 

@@ -36,19 +36,19 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt14_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `cs-en` (`v1.0.0`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task
+*   `cs-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2014 cs-en translation task
     dataset.
 
-*   `de-en` (`v1.0.0`) (`Size: 1.58 GiB`): WMT 2014 de-en translation task
+*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2014 de-en translation task
     dataset.
 
-*   `fr-en` (`v1.0.0`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task
+*   `fr-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2014 fr-en translation task
     dataset.
 
-*   `hi-en` (`v1.0.0`) (`Size: 44.65 MiB`): WMT 2014 hi-en translation task
+*   `hi-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2014 hi-en translation task
     dataset.
 
-*   `ru-en` (`v1.0.0`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task
+*   `ru-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2014 ru-en translation task
     dataset.
 
 ## `wmt14_translate/cs-en`

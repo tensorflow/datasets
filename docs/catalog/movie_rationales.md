@@ -22,7 +22,9 @@ reviews.
 
     *   **`0.1.0`** (default):
 
-*   Size: `3.72 MiB`
+*   Download size: `3.72 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

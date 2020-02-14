@@ -23,7 +23,7 @@ corresponding reading passage, or the question might be unanswerable.
 `squad` is configured with `tfds.text.squad.SquadConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 33.51 MiB`): Plain text
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text
 
 ## `squad/plain_text`
 Plain text

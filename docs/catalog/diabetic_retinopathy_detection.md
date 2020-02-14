@@ -22,19 +22,20 @@ conditions.
 `tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetectionConfig`
 and has the following configurations predefined (defaults to the first one):
 
-*   `original` (`v3.0.0`) (`Size: 1.13 MiB`): Images at their original
+*   `original` (`v3.0.0`) (`Size: Unknown size`): Images at their original
     resolution and quality.
 
-*   `1M` (`v3.0.0`) (`Size: 1.13 MiB`): Images have roughly 1,000,000 pixels, at
-    72 quality.
+*   `1M` (`v3.0.0`) (`Size: Unknown size`): Images have roughly 1,000,000
+    pixels, at 72 quality.
 
-*   `250K` (`v3.0.0`) (`Size: 1.13 MiB`): Images have roughly 250,000 pixels, at
-    72 quality.
+*   `250K` (`v3.0.0`) (`Size: Unknown size`): Images have roughly 250,000
+    pixels, at 72 quality.
 
-*   `btgraham-300` (`v3.0.0`) (`Size: 1.13 MiB`): Images have been preprocessed
-    as the winner of the Kaggle competition did in 2015: first they are resized
-    so that the radius of an eyeball is 300 pixels, then they are cropped to 90%
-    of the radius, and finally they are encoded with 72 JPEG quality.
+*   `btgraham-300` (`v3.0.0`) (`Size: Unknown size`): Images have been
+    preprocessed as the winner of the Kaggle competition did in 2015: first they
+    are resized so that the radius of an eyeball is 300 pixels, then they are
+    cropped to 90% of the radius, and finally they are encoded with 72 JPEG
+    quality.
 
 ## `diabetic_retinopathy_detection/original`
 Images at their original resolution and quality.

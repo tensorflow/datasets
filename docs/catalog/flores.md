@@ -21,11 +21,11 @@ Sinhala-English.
 `flores` is configured with `tfds.translate.flores.FloresConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `neen_plain_text` (`v1.0.0`) (`Size: 984.65 KiB`): Translation dataset from
-    ne to en, uses encoder plain_text.
+*   `neen_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from ne to en, uses encoder plain_text.
 
-*   `sien_plain_text` (`v1.0.0`) (`Size: 984.65 KiB`): Translation dataset from
-    si to en, uses encoder plain_text.
+*   `sien_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from si to en, uses encoder plain_text.
 
 ## `flores/neen_plain_text`
 Translation dataset from ne to en, uses encoder plain_text.

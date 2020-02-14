@@ -21,7 +21,9 @@ Stanford Online Products Dataset
 
     *   **`1.0.0`** (default):
 
-*   Size: `2.87 GiB`
+*   Download size: `2.87 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -29,7 +29,9 @@ locaization.
 
     *   **`1.0.0`** (default):
 
-*   Size: `2.63 GiB`
+*   Download size: `2.63 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -32,7 +32,9 @@ include splits for the training and validation sets here.
         (https://tensorflow.org/datasets/splits)
     *   `2.0.1`: None
 
-*   Size: `144.02 GiB`
+*   Download size: `144.02 GiB`
+
+*   Dataset size: `Unknown size`
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/imagenet2012/`):

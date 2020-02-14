@@ -28,9 +28,9 @@ URL: https://github.com/phelber/eurosat
 `eurosat` is configured with `tfds.image.eurosat.EurosatConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `rgb` (`v2.0.0`) (`Size: 89.91 MiB`): Sentinel-2 RGB channels
+*   `rgb` (`v2.0.0`) (`Size: Unknown size`): Sentinel-2 RGB channels
 
-*   `all` (`v2.0.0`) (`Size: 1.93 GiB`): 13 Sentinel-2 channels
+*   `all` (`v2.0.0`) (`Size: Unknown size`): 13 Sentinel-2 channels
 
 ## `eurosat/rgb`
 Sentinel-2 RGB channels

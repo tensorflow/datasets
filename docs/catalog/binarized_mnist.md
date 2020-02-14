@@ -23,7 +23,9 @@ images, so labels are not provided.
 
     *   **`1.0.0`** (default):
 
-*   Size: `104.68 MiB`
+*   Download size: `104.68 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

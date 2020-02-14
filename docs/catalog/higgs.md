@@ -30,7 +30,9 @@ networks are presented in the original paper.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `2.62 GiB`
+*   Download size: `2.62 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

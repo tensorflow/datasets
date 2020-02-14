@@ -31,7 +31,9 @@ This dataset can be downloaded upon requests. Unzip all the contents
 
     *   **`1.0.0`** (default):
 
-*   Size: `?? GiB`
+*   Download size: `Unknown size`
+
+*   Dataset size: `Unknown size`
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/newsroom/`): You should

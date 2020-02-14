@@ -30,7 +30,9 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
     *   **`1.1.0`** (default):
     *   `1.0.0`: Dataset without cleaning.
 
-*   Size: `2.59 MiB`
+*   Download size: `2.59 MiB`
+
+*   Dataset size: `Unknown size`
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/xsum/`): Detailed download

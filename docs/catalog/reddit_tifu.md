@@ -26,9 +26,9 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
 `tfds.summarization.reddit_tifu.RedditTifuConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `short` (`v1.1.0`) (`Size: 639.54 MiB`): Using title as summary.
+*   `short` (`v1.1.0`) (`Size: Unknown size`): Using title as summary.
 
-*   `long` (`v1.1.0`) (`Size: 639.54 MiB`): Using TLDR as summary.
+*   `long` (`v1.1.0`) (`Size: Unknown size`): Using TLDR as summary.
 
 ## `reddit_tifu/short`
 Using title as summary.

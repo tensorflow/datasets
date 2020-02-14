@@ -23,15 +23,15 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 `imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 80.23 MiB`): Plain text
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text
 
-*   `bytes` (`v1.0.0`) (`Size: 80.23 MiB`): Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+*   `bytes` (`v1.0.0`) (`Size: Unknown size`): Uses byte-level text encoding
+    with `tfds.features.text.ByteTextEncoder`
 
-*   `subwords8k` (`v1.0.0`) (`Size: 80.23 MiB`): Uses
+*   `subwords8k` (`v1.0.0`) (`Size: Unknown size`): Uses
     `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-*   `subwords32k` (`v1.0.0`) (`Size: 80.23 MiB`): Uses
+*   `subwords32k` (`v1.0.0`) (`Size: Unknown size`): Uses
     `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 ## `imdb_reviews/plain_text`

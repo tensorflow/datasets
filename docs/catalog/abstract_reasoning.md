@@ -34,15 +34,15 @@ a particular matrix.
 `tfds.image.abstract_reasoning.AbstractReasoningConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `neutral` (`v1.0.0`) (`Size: ?? GiB`): The structures encoding the matrices
-    in both the \
+*   `neutral` (`v1.0.0`) (`Size: Unknown size`): The structures encoding the
+    matrices in both the \
     training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
     $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
     separation occurring at the level of the input variables (i.e. pixel \
     manifestations).
 
-*   `interpolation` (`v1.0.0`) (`Size: ?? GiB`): As in the neutral split, $S$
-    consisted of any \
+*   `interpolation` (`v1.0.0`) (`Size: Unknown size`): As in the neutral split,
+    $S$ consisted of any \
     triples $[r, o, a]$. For interpolation, in the training set, when the \
     attribute was "colour" or "size" (i.e., the ordered attributes), the values
     of \
@@ -52,14 +52,14 @@ configurations predefined (defaults to the first one):
     $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
     Thus, generalisation is required for every question in the test set.
 
-*   `extrapolation` (`v1.0.0`) (`Size: ?? GiB`): Same as in interpolation, but
-    the values of \
+*   `extrapolation` (`v1.0.0`) (`Size: Unknown size`): Same as in interpolation,
+    but the values of \
     the attributes were restricted to the lower half of the discrete set during
     \
     training, whereas in the test set they took values in the upper half.
 
-*   `attr.rel.pairs` (`v1.0.0`) (`Size: ?? GiB`): All $S$ contained at least two
-    triples, \
+*   `attr.rel.pairs` (`v1.0.0`) (`Size: Unknown size`): All $S$ contained at
+    least two triples, \
     $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
     randomly allocated 360 to the training set and 40 to the test set. Members \
     $(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures
@@ -67,7 +67,7 @@ configurations predefined (defaults to the first one):
     in the training set, and all structures $S$ had at least one such pair \
     $(t_1, t_2)$ as a subset.
 
-*   `attr.rels` (`v1.0.0`) (`Size: ?? GiB`): In our dataset, there are 29
+*   `attr.rels` (`v1.0.0`) (`Size: Unknown size`): In our dataset, there are 29
     possible unique \
     triples $[r,o,a]$. We allocated seven of these for the test set, at random,
     \
@@ -77,7 +77,7 @@ configurations predefined (defaults to the first one):
     \
     every $S$ in the test set contained at least one of them.
 
-*   `attrs.pairs` (`v1.0.0`) (`Size: ?? GiB`): $S$ contained at least two
+*   `attrs.pairs` (`v1.0.0`) (`Size: Unknown size`): $S$ contained at least two
     triples. There are 20 \
     (unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
     $r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
@@ -88,15 +88,15 @@ configurations predefined (defaults to the first one):
     $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
     set, all $S$ contained triples with $a_1$ and $a_2$.
 
-*   `attrs.shape.color` (`v1.0.0`) (`Size: ?? GiB`): Held-out attribute
+*   `attrs.shape.color` (`v1.0.0`) (`Size: Unknown size`): Held-out attribute
     shape-colour. $S$ in \
     the training set contained no triples with $o$=shape and $a$=colour. \
     All structures governing puzzles in the test set contained at least one
     triple \
     with $o$=shape and $a$=colour.
 
-*   `attrs.line.type` (`v1.0.0`) (`Size: ?? GiB`): Held-out attribute line-type.
-    $S$ in \
+*   `attrs.line.type` (`v1.0.0`) (`Size: Unknown size`): Held-out attribute
+    line-type. $S$ in \
     the training set contained no triples with $o$=line and $a$=type. \
     All structures governing puzzles in the test set contained at least one
     triple \

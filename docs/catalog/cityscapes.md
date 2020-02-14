@@ -46,17 +46,17 @@ get the files.
 `cityscapes` is configured with `tfds.image.cityscapes.CityscapesConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `semantic_segmentation` (`v1.0.0`) (`Size: ?? GiB`): Cityscapes semantic
-    segmentation dataset.
+*   `semantic_segmentation` (`v1.0.0`) (`Size: Unknown size`): Cityscapes
+    semantic segmentation dataset.
 
-*   `semantic_segmentation_extra` (`v1.0.0`) (`Size: ?? GiB`): Cityscapes
+*   `semantic_segmentation_extra` (`v1.0.0`) (`Size: Unknown size`): Cityscapes
     semantic segmentation dataset with train_extra split and coarse labels.
 
-*   `stereo_disparity` (`v1.0.0`) (`Size: ?? GiB`): Cityscapes stereo image and
-    disparity maps dataset.
+*   `stereo_disparity` (`v1.0.0`) (`Size: Unknown size`): Cityscapes stereo
+    image and disparity maps dataset.
 
-*   `stereo_disparity_extra` (`v1.0.0`) (`Size: ?? GiB`): Cityscapes stereo
-    image and disparity maps dataset with train_extra split.
+*   `stereo_disparity_extra` (`v1.0.0`) (`Size: Unknown size`): Cityscapes
+    stereo image and disparity maps dataset with train_extra split.
 
 ## `cityscapes/semantic_segmentation`
 Cityscapes semantic segmentation dataset.

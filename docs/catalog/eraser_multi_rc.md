@@ -25,7 +25,9 @@ justifying the classification
 
     *   **`0.1.1`** (default):
 
-*   Size: `1.59 MiB`
+*   Download size: `1.59 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

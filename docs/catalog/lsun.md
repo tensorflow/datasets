@@ -20,27 +20,30 @@ tower etc.
 `lsun` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `classroom` (`v3.0.0`) (`Size: 3.06 GiB`): Images of category classroom
+*   `classroom` (`v3.0.0`) (`Size: Unknown size`): Images of category classroom
 
-*   `bedroom` (`v3.0.0`) (`Size: 42.77 GiB`): Images of category bedroom
+*   `bedroom` (`v3.0.0`) (`Size: Unknown size`): Images of category bedroom
 
-*   `bridge` (`v3.0.0`) (`Size: 15.35 GiB`): Images of category bridge
+*   `bridge` (`v3.0.0`) (`Size: Unknown size`): Images of category bridge
 
-*   `church_outdoor` (`v3.0.0`) (`Size: 2.29 GiB`): Images of category
+*   `church_outdoor` (`v3.0.0`) (`Size: Unknown size`): Images of category
     church_outdoor
 
-*   `conference_room` (`v3.0.0`) (`Size: 3.78 GiB`): Images of category
+*   `conference_room` (`v3.0.0`) (`Size: Unknown size`): Images of category
     conference_room
 
-*   `dining_room` (`v3.0.0`) (`Size: 10.80 GiB`): Images of category dining_room
+*   `dining_room` (`v3.0.0`) (`Size: Unknown size`): Images of category
+    dining_room
 
-*   `kitchen` (`v3.0.0`) (`Size: 33.34 GiB`): Images of category kitchen
+*   `kitchen` (`v3.0.0`) (`Size: Unknown size`): Images of category kitchen
 
-*   `living_room` (`v3.0.0`) (`Size: 21.23 GiB`): Images of category living_room
+*   `living_room` (`v3.0.0`) (`Size: Unknown size`): Images of category
+    living_room
 
-*   `restaurant` (`v3.0.0`) (`Size: 12.57 GiB`): Images of category restaurant
+*   `restaurant` (`v3.0.0`) (`Size: Unknown size`): Images of category
+    restaurant
 
-*   `tower` (`v3.0.0`) (`Size: 11.19 GiB`): Images of category tower
+*   `tower` (`v3.0.0`) (`Size: Unknown size`): Images of category tower
 
 ## `lsun/classroom`
 Images of category classroom

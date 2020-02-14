@@ -28,10 +28,10 @@ set aside 20% (1016 images) of the data for testing.
 `flic` is configured with `tfds.image.flic.FlicConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `small` (`v2.0.0`) (`Size: 286.35 MiB`): Uses 5003 examples used in CVPR13
+*   `small` (`v2.0.0`) (`Size: Unknown size`): Uses 5003 examples used in CVPR13
     MODEC paper.
 
-*   `full` (`v2.0.0`) (`Size: 1.10 GiB`): Uses 20928 examples, a superset of
+*   `full` (`v2.0.0`) (`Size: Unknown size`): Uses 20928 examples, a superset of
     FLIC consisting of more difficult examples.
 
 ## `flic/small`

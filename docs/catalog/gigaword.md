@@ -26,7 +26,9 @@ There are two features: - document: article. - summary: headline.
 
     *   **`1.2.0`** (default):
 
-*   Size: `551.61 MiB`
+*   Download size: `551.61 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

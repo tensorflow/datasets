@@ -28,7 +28,9 @@ Imagenet, trainable on a single GPU.
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: None
 
-*   Size: `7.48 GiB`
+*   Download size: `7.48 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

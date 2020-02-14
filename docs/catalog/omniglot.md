@@ -24,7 +24,9 @@ handwritten characters from 50 different alphabets.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `17.95 MiB`
+*   Download size: `17.95 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

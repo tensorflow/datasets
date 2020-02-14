@@ -32,7 +32,9 @@ released under CC0, as is the underlying comment text.
 
     *   **`0.9.0`** (default):
 
-*   Size: `395.73 MiB`
+*   Download size: `395.73 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

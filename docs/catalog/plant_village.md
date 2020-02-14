@@ -30,7 +30,9 @@ https://data.mendeley.com/datasets/tywbtsjrjv/1
 
     *   **`1.0.0`** (default):
 
-*   Size: `827.82 MiB`
+*   Download size: `827.82 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

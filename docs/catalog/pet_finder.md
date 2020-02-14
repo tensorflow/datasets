@@ -22,7 +22,9 @@ specific class)
 
     *   **`1.0.0`** (default):
 
-*   Size: `1.94 GiB`
+*   Download size: `1.94 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

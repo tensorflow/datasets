@@ -30,7 +30,9 @@ http://creativecommons.org/licenses/by/4.0
 
     *   **`0.1.0`** (default):
 
-*   Size: `63.87 MiB`
+*   Download size: `63.87 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

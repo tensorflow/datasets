@@ -29,7 +29,7 @@ more than once in the sentence, its first occurrence is the one to be resolved.
 `tfds.core.dataset_builder.BuilderConfig` and has the following configurations
 predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 222.12 KiB`): Plain text import of the
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of the
     Definite Pronoun Resolution Dataset.
 
 ## `definite_pronoun_resolution/plain_text`

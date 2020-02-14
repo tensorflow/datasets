@@ -25,7 +25,7 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 `multi_nli` is configured with `tfds.text.multi_nli.MultiNLIConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v1.0.0`) (`Size: 216.34 MiB`): Plain text
+*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text
 
 ## `multi_nli/plain_text`
 Plain text

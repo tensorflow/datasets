@@ -23,7 +23,9 @@ segmented cells.
 
     *   **`1.0.0`** (default):
 
-*   Size: `337.08 MiB`
+*   Download size: `337.08 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

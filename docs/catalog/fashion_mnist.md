@@ -25,7 +25,9 @@ set of 60,000 examples and a test set of 10,000 examples. Each example is a
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `29.45 MiB`
+*   Download size: `29.45 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

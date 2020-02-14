@@ -26,7 +26,9 @@ token "|||||". - summary: news summary.
 
     *   **`1.0.0`** (default):
 
-*   Size: `245.06 MiB`
+*   Download size: `245.06 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

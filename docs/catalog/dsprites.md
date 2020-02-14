@@ -45,7 +45,9 @@ ensuring that all pixel outputs were different. No noise was added.
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: None
 
-*   Size: `26.73 MiB`
+*   Download size: `26.73 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

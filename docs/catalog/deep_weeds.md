@@ -27,7 +27,9 @@ Range", "Kelso", "McKinlay" and "Paluma".
     *   **`2.0.0`** (default): Fixes wrong labels in V1.
     *   `1.0.0`: None
 
-*   Size: `892.52 MiB`
+*   Download size: `892.52 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -30,11 +30,11 @@ research lab, Jadavpur University, India.
 `cmaterdb` is configured with `tfds.image.cmaterdb.CmaterdbConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `bangla` (`v1.0.0`) (`Size: 573.81 KiB`): CMATERdb Bangla Numerals
+*   `bangla` (`v1.0.0`) (`Size: Unknown size`): CMATERdb Bangla Numerals
 
-*   `devanagari` (`v1.0.0`) (`Size: 275.29 KiB`): CMATERdb Devangari Numerals
+*   `devanagari` (`v1.0.0`) (`Size: Unknown size`): CMATERdb Devangari Numerals
 
-*   `telugu` (`v1.0.0`) (`Size: 283.90 KiB`): CMATERdb Telugu Numerals
+*   `telugu` (`v1.0.0`) (`Size: Unknown size`): CMATERdb Telugu Numerals
 
 ## `cmaterdb/bangla`
 CMATERdb Bangla Numerals

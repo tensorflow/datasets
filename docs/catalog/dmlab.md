@@ -27,7 +27,9 @@ respectively.
 
     *   **`2.0.0`** (default):
 
-*   Size: `2.81 GiB`
+*   Download size: `2.81 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

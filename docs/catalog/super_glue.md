@@ -28,39 +28,41 @@ containing the answer. Following the original work, we evaluate with accuracy.
 `super_glue` is configured with `tfds.text.super_glue.SuperGlueConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `boolq` (`v1.0.2`) (`Size: 3.93 MiB`): BoolQ (Boolean Questions, Clark et
-    al., 2019a) is a QA task where each example consists of a short passage and
-    a yes/no question about the passage. The questions are provided anonymously
-    and unsolicited by users of the Google search engine, and afterwards paired
-    with a paragraph from a Wikipedia article containing the answer. Following
-    the original work, we evaluate with accuracy.
+*   `boolq` (`v1.0.2`) (`Size: Unknown size`): BoolQ (Boolean Questions, Clark
+    et al., 2019a) is a QA task where each example consists of a short passage
+    and a yes/no question about the passage. The questions are provided
+    anonymously and unsolicited by users of the Google search engine, and
+    afterwards paired with a paragraph from a Wikipedia article containing the
+    answer. Following the original work, we evaluate with accuracy.
 
-*   `cb` (`v1.0.2`) (`Size: 73.71 KiB`): The CommitmentBank (De Marneffe et al.,
-    2019) is a corpus of short texts in which at least one sentence contains an
-    embedded clause. Each of these embedded clauses is annotated with the degree
-    to which we expect that the person who wrote the text is committed to the
-    truth of the clause. The resulting task framed as three-class textual
-    entailment on examples that are drawn from the Wall Street Journal, fiction
-    from the British National Corpus, and Switchboard. Each example consists of
-    a premise containing an embedded clause and the corresponding hypothesis is
-    the extraction of that clause. We use a subset of the data that had
-    inter-annotator agreement above 0.85. The data is imbalanced (relatively
-    fewer neutral examples), so we evaluate using accuracy and F1, where for
-    multi-class F1 we compute the unweighted average of the F1 per class.
+*   `cb` (`v1.0.2`) (`Size: Unknown size`): The CommitmentBank (De Marneffe et
+    al., 2019) is a corpus of short texts in which at least one sentence
+    contains an embedded clause. Each of these embedded clauses is annotated
+    with the degree to which we expect that the person who wrote the text is
+    committed to the truth of the clause. The resulting task framed as
+    three-class textual entailment on examples that are drawn from the Wall
+    Street Journal, fiction from the British National Corpus, and Switchboard.
+    Each example consists of a premise containing an embedded clause and the
+    corresponding hypothesis is the extraction of that clause. We use a subset
+    of the data that had inter-annotator agreement above 0.85. The data is
+    imbalanced (relatively fewer neutral examples), so we evaluate using
+    accuracy and F1, where for multi-class F1 we compute the unweighted average
+    of the F1 per class.
 
-*   `copa` (`v1.0.2`) (`Size: 42.96 KiB`): The Choice Of Plausible Alternatives
-    (COPA, Roemmele et al., 2011) dataset is a causal reasoning task in which a
-    system is given a premise sentence and two possible alternatives. The system
-    must choose the alternative which has the more plausible causal relationship
-    with the premise. The method used for the construction of the alternatives
-    ensures that the task requires causal reasoning to solve. Examples either
-    deal with alternative possible causes or alternative possible effects of the
-    premise sentence, accompanied by a simple question disambiguating between
-    the two instance types for the model. All examples are handcrafted and focus
-    on topics from online blogs and a photography-related encyclopedia.
-    Following the recommendation of the authors, we evaluate using accuracy.
+*   `copa` (`v1.0.2`) (`Size: Unknown size`): The Choice Of Plausible
+    Alternatives (COPA, Roemmele et al., 2011) dataset is a causal reasoning
+    task in which a system is given a premise sentence and two possible
+    alternatives. The system must choose the alternative which has the more
+    plausible causal relationship with the premise. The method used for the
+    construction of the alternatives ensures that the task requires causal
+    reasoning to solve. Examples either deal with alternative possible causes or
+    alternative possible effects of the premise sentence, accompanied by a
+    simple question disambiguating between the two instance types for the model.
+    All examples are handcrafted and focus on topics from online blogs and a
+    photography-related encyclopedia. Following the recommendation of the
+    authors, we evaluate using accuracy.
 
-*   `multirc` (`v1.0.2`) (`Size: 1.06 MiB`): The Multi-Sentence Reading
+*   `multirc` (`v1.0.2`) (`Size: Unknown size`): The Multi-Sentence Reading
     Comprehension dataset (MultiRC, Khashabi et al., 2018) is a true/false
     question-answering task. Each example consists of a context paragraph, a
     question about that paragraph, and a list of possible answers to that
@@ -74,7 +76,7 @@ the following configurations predefined (defaults to the first one):
     tasks than span-based extractive QA does. The paragraphs are drawn from
     seven domains including news, fiction, and historical text.
 
-*   `record` (`v1.0.2`) (`Size: 49.36 MiB`): (Reading Comprehension with
+*   `record` (`v1.0.2`) (`Size: Unknown size`): (Reading Comprehension with
     Commonsense Reasoning Dataset, Zhang et al., 2018) is a multiple-choice QA
     task. Each example consists of a news article and a Cloze-style question
     about the article in which one entity is masked out. The system must predict
@@ -84,7 +86,7 @@ the following configurations predefined (defaults to the first one):
     CNN and Daily Mail. Following the original work, we evaluate with max (over
     all mentions) token-level F1 and exact match (EM).
 
-*   `rte` (`v1.0.2`) (`Size: 733.32 KiB`): The Recognizing Textual Entailment
+*   `rte` (`v1.0.2`) (`Size: Unknown size`): The Recognizing Textual Entailment
     (RTE) datasets come from a series of annual competitions on textual
     entailment, the problem of predicting whether a given premise sentence
     entails a given hypothesis sentence (also known as natural language
@@ -100,7 +102,7 @@ the following configurations predefined (defaults to the first one):
     yet solved by machines, and we expect the remaining gap to be difficult to
     close.
 
-*   `wic` (`v1.0.2`) (`Size: 386.93 KiB`): The Word-in-Context (WiC, Pilehvar
+*   `wic` (`v1.0.2`) (`Size: Unknown size`): The Word-in-Context (WiC, Pilehvar
     and Camacho-Collados, 2019) dataset supports a word sense disambiguation
     task cast as binary classification over sentence pairs. Given two sentences
     and a polysemous (sense-ambiguous) word that appears in both sentences, the
@@ -109,7 +111,7 @@ the following configurations predefined (defaults to the first one):
     (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
     using accuracy.
 
-*   `wsc` (`v1.0.2`) (`Size: 31.98 KiB`): The Winograd Schema Challenge (WSC,
+*   `wsc` (`v1.0.2`) (`Size: Unknown size`): The Winograd Schema Challenge (WSC,
     Levesque et al., 2012) is a reading comprehension task in which a system
     must read a sentence with a pronoun and select the referent of that pronoun
     from a list of choices. Given the difficulty of this task and the headroom
@@ -143,7 +145,7 @@ phrase word will change the coreference dependencies in the sentence. The test
 set consists only of more straightforward examples, with a high number of noun
 phrases (and thus more choices for the model), but low to no ambiguity.
 
-*   `wsc.fixed` (`v1.0.2`) (`Size: 31.98 KiB`): The Winograd Schema Challenge
+*   `wsc.fixed` (`v1.0.2`) (`Size: Unknown size`): The Winograd Schema Challenge
     (WSC, Levesque et al., 2012) is a reading comprehension task in which a
     system must read a sentence with a pronoun and select the referent of that
     pronoun from a list of choices. Given the difficulty of this task and the
@@ -180,7 +182,7 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 This version fixes issues where the spans are not actually substrings of the
 text.
 
-*   `axb` (`v1.0.2`) (`Size: 33.15 KiB`): An expert-constructed, diagnostic
+*   `axb` (`v1.0.2`) (`Size: Unknown size`): An expert-constructed, diagnostic
     dataset that automatically tests models for a broad range of linguistic,
     commonsense, and world knowledge. Each example in this broad-coverage
     diagnostic is a sentence pair labeled with a three-way entailment relation
@@ -195,7 +197,7 @@ text.
     request that submissions include predictions on the resulting set from the
     model used for the RTE task.
 
-*   `axg` (`v1.0.2`) (`Size: 10.17 KiB`): Winogender is designed to measure
+*   `axg` (`v1.0.2`) (`Size: Unknown size`): Winogender is designed to measure
     gender bias in coreference resolution systems. We use the Diverse Natural
     Language Inference Collection (DNC; Poliak et al., 2018) version that casts
     Winogender as a textual entailment task. Each example consists of a premise

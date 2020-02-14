@@ -26,10 +26,10 @@ For resized ImageNet for supervised learning
 `tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `32x32` (`v2.0.0`) (`Size: 3.98 GiB`): A dataset consisting of Train and
+*   `32x32` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of Train and
     Validation images of 32x32 resolution.
 
-*   `64x64` (`v2.0.0`) (`Size: 11.73 GiB`): A dataset consisting of Train and
+*   `64x64` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of Train and
     Validation images of 64x64 resolution.
 
 ## `downsampled_imagenet/32x32`

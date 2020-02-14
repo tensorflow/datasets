@@ -32,7 +32,7 @@ ideas and share with others. The dataset comes in three variants:
 `imagenette` is configured with `tfds.image.imagenette.ImagenetteConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `full-size` (`v0.1.0`) (`Size: 1.45 GiB`): Imagenette is a subset of 10
+*   `full-size` (`v0.1.0`) (`Size: Unknown size`): Imagenette is a subset of 10
     easily classified classes from the Imagenet dataset. It was originally
     prepared by Jeremy Howard of FastAI. The objective behind putting together a
     small version of the Imagenet dataset was mainly because running new
@@ -45,10 +45,10 @@ ideas and share with others. The dataset comes in three variants:
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset full-size variant.
 
-*   `320px` (`v0.1.0`) (`Size: 325.48 MiB`): Imagenette is a subset of 10 easily
-    classified classes from the Imagenet dataset. It was originally prepared by
-    Jeremy Howard of FastAI. The objective behind putting together a small
-    version of the Imagenet dataset was mainly because running new
+*   `320px` (`v0.1.0`) (`Size: Unknown size`): Imagenette is a subset of 10
+    easily classified classes from the Imagenet dataset. It was originally
+    prepared by Jeremy Howard of FastAI. The objective behind putting together a
+    small version of the Imagenet dataset was mainly because running new
     ideas/algorithms/experiments on the whole Imagenet take a lot of time.
 
 This version of the dataset allows researchers/practitioners to quickly try out
@@ -58,10 +58,10 @@ ideas and share with others. The dataset comes in three variants:
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset 320px variant.
 
-*   `160px` (`v0.1.0`) (`Size: 94.18 MiB`): Imagenette is a subset of 10 easily
-    classified classes from the Imagenet dataset. It was originally prepared by
-    Jeremy Howard of FastAI. The objective behind putting together a small
-    version of the Imagenet dataset was mainly because running new
+*   `160px` (`v0.1.0`) (`Size: Unknown size`): Imagenette is a subset of 10
+    easily classified classes from the Imagenet dataset. It was originally
+    prepared by Jeremy Howard of FastAI. The objective behind putting together a
+    small version of the Imagenet dataset was mainly because running new
     ideas/algorithms/experiments on the whole Imagenet take a lot of time.
 
 This version of the dataset allows researchers/practitioners to quickly try out

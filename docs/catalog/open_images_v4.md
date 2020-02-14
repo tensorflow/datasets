@@ -30,14 +30,14 @@ classes.
 `tfds.object_detection.open_images.OpenImagesV4Config` and has the following
 configurations predefined (defaults to the first one):
 
-*   `original` (`v2.0.0`) (`Size: 565.11 GiB`): Images at their original
+*   `original` (`v2.0.0`) (`Size: Unknown size`): Images at their original
     resolution and quality.
 
-*   `300k` (`v2.0.0`) (`Size: 565.11 GiB`): Images have roughly 300,000 pixels,
-    at 72 JPEG quality.
+*   `300k` (`v2.0.0`) (`Size: Unknown size`): Images have roughly 300,000
+    pixels, at 72 JPEG quality.
 
-*   `200k` (`v2.0.0`) (`Size: 565.11 GiB`): Images have roughly 200,000 pixels,
-    at 72 JPEG quality.
+*   `200k` (`v2.0.0`) (`Size: Unknown size`): Images have roughly 200,000
+    pixels, at 72 JPEG quality.
 
 ## `open_images_v4/original`
 Images at their original resolution and quality.

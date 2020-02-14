@@ -35,10 +35,10 @@ clean up extra commas.
 `wikihow` is configured with `tfds.summarization.wikihow.WikihowConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `all` (`v1.2.0`) (`Size: 5.21 MiB`): Use the concatenation of all paragraphs
-    as the articles and the bold lines as the reference summaries
+*   `all` (`v1.2.0`) (`Size: Unknown size`): Use the concatenation of all
+    paragraphs as the articles and the bold lines as the reference summaries
 
-*   `sep` (`v1.2.0`) (`Size: 5.21 MiB`): use each paragraph and its summary.
+*   `sep` (`v1.2.0`) (`Size: Unknown size`): use each paragraph and its summary.
 
 ## `wikihow/all`
 

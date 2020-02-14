@@ -25,12 +25,12 @@ each highlight, which is the target summary
 `tfds.summarization.cnn_dailymail.CnnDailymailConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v3.0.0`) (`Size: ?? GiB`): Plain text
+*   `plain_text` (`v3.0.0`) (`Size: Unknown size`): Plain text
 
-*   `bytes` (`v3.0.0`) (`Size: ?? GiB`): Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+*   `bytes` (`v3.0.0`) (`Size: Unknown size`): Uses byte-level text encoding
+    with `tfds.features.text.ByteTextEncoder`
 
-*   `subwords32k` (`v3.0.0`) (`Size: ?? GiB`): Uses
+*   `subwords32k` (`v3.0.0`) (`Size: Unknown size`): Uses
     `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 ## `cnn_dailymail/plain_text`

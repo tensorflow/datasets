@@ -26,7 +26,9 @@ of 512 pixels.
 
     *   **`2.0.0`** (default):
 
-*   Size: `4.65 GiB`
+*   Download size: `4.65 GiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

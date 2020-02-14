@@ -21,44 +21,45 @@ horses/zebras, apple/orange,...)
 `cycle_gan` is configured with `tfds.image.cycle_gan.CycleGANConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `apple2orange` (`v2.0.0`) (`Size: 74.82 MiB`): A dataset consisting of
+*   `apple2orange` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
     images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `summer2winter_yosemite` (`v2.0.0`) (`Size: 126.50 MiB`): A dataset
+*   `summer2winter_yosemite` (`v2.0.0`) (`Size: Unknown size`): A dataset
     consisting of images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `horse2zebra` (`v2.0.0`) (`Size: 111.45 MiB`): A dataset consisting of
+*   `horse2zebra` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
     images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `monet2photo` (`v2.0.0`) (`Size: 291.09 MiB`): A dataset consisting of
+*   `monet2photo` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
     images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `cezanne2photo` (`v2.0.0`) (`Size: 266.92 MiB`): A dataset consisting of
+*   `cezanne2photo` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
     images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `ukiyoe2photo` (`v2.0.0`) (`Size: 279.38 MiB`): A dataset consisting of
+*   `ukiyoe2photo` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
     images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `vangogh2photo` (`v2.0.0`) (`Size: 292.39 MiB`): A dataset consisting of
+*   `vangogh2photo` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
     images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 
-*   `maps` (`v2.0.0`) (`Size: 1.38 GiB`): A dataset consisting of images from
-    two classes A and B (For example: horses/zebras, apple/orange,...)
-
-*   `cityscapes` (`v2.0.0`) (`Size: 266.65 MiB`): A dataset consisting of images
+*   `maps` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of images
     from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `facades` (`v2.0.0`) (`Size: 33.51 MiB`): A dataset consisting of images
+*   `cityscapes` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
+
+*   `facades` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of images
     from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `iphone2dslr_flower` (`v2.0.0`) (`Size: 324.22 MiB`): A dataset consisting
+*   `iphone2dslr_flower` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting
     of images from two classes A and B (For example: horses/zebras,
     apple/orange,...)
 

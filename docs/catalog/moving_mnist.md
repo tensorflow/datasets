@@ -26,7 +26,9 @@ training/validation data from the MNIST dataset.
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: None
 
-*   Size: `91.70 MiB`
+*   Download size: `Unknown size`
+
+*   Dataset size: `91.70 MiB`
 
 ## Features
 ```python

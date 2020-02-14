@@ -26,7 +26,9 @@ of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `20.26 MiB`
+*   Download size: `20.26 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

@@ -29,7 +29,9 @@ using the provided paper ids with the Semantic Scholar API
 
     *   **`1.0.0`** (default):
 
-*   Size: `22.12 MiB`
+*   Download size: `22.12 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python

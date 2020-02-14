@@ -23,7 +23,9 @@ A large set of images of horses and humans.
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: None
 
-*   Size: `153.59 MiB`
+*   Download size: `153.59 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python
