@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -71,12 +71,11 @@ def _load_tif(path):
 
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
-  URL = _URL
-  VERSION = tfds.core.Version("0.0.1",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("0.0.1",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -91,7 +90,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
                 names=_CLASS_NAMES),
             "filename": tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
         supervised_keys=("image", "label"),
     )
@@ -124,12 +123,11 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
 
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
   """10 Large 5000 x 5000 colorectal histology images without labels."""
-  URL = _URL
-  VERSION = tfds.core.Version("0.0.1",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("0.0.1",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -141,7 +139,7 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=(_LARGE_SIZE,)*2 + (3,)),
             "filename": tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION
     )
 

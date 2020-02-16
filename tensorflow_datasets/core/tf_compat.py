@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     inadequate.
   """
   try:
-    import tensorflow as tf
+    import tensorflow.compat.v2 as tf
   except ImportError:
     # Print more informative error message, then reraise.
     print("\n\nFailed to import TensorFlow. Please note that TensorFlow is not "
@@ -78,17 +78,6 @@ def _patch_tf(tf):
   if v_1_13 <= tf_version < v_2:
     TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
-  else:
-    TF_PATCH = "tf2"
-    _patch_for_tf2(tf)
-
-
-def _patch_for_tf2(tf):
-  if not hasattr(tf.data.Dataset, "output_shapes"):
-    from tensorflow.python.data.ops import dataset_ops
-    tf.data.Dataset.output_shapes = property(
-        dataset_ops.get_legacy_output_shapes)
-    tf.data.Dataset.output_types = property(dataset_ops.get_legacy_output_types)
 
 
 def _patch_for_tf1_13(tf):
@@ -102,13 +91,6 @@ def _patch_for_tf1_13(tf):
     tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")
     from tensorflow.python.data.ops import dataset_ops
     tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
-  if not hasattr(tf.compat.v2.data.Dataset, "output_shapes"):
-    from tensorflow.python.data.ops import dataset_ops
-    if hasattr(dataset_ops, "get_legacy_output_shapes"):
-      tf.compat.v2.data.Dataset.output_shapes = property(
-          dataset_ops.get_legacy_output_shapes)
-      tf.compat.v2.data.Dataset.output_types = property(
-          dataset_ops.get_legacy_output_types)
   if not hasattr(tf.autograph.experimental, "do_not_convert"):
     tf.autograph.experimental.do_not_convert = (
         tf.contrib.autograph.do_not_convert)
@@ -116,7 +98,7 @@ def _patch_for_tf1_13(tf):
 
 def is_dataset(ds):
   """Whether ds is a Dataset. Compatible across TF versions."""
-  import tensorflow as tf
+  import tensorflow.compat.v2 as tf
   from tensorflow_datasets.core.utils import py_utils
   dataset_types = [tf.data.Dataset]
   v1_ds = py_utils.rgetattr(tf, "compat.v1.data.Dataset", None)

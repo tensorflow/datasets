@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
 
@@ -86,6 +86,9 @@ class ClassLabel(feature.Tensor):
     # Set-up [new] names
     self._int2str = int2str
     self._str2int = {name: i for i, name in enumerate(self._int2str)}
+    if len(self._int2str) != len(self._str2int):
+      raise ValueError(
+          "Some label names are duplicated. Each label name should be unique.")
 
     # If num_classes has been defined, ensure that num_classes and names match
     num_classes = len(self._str2int)

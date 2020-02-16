@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -48,7 +48,9 @@ _CITATION = """
 
 _DESCRIPTION = """
 Headline-generation on a corpus of article pairs from Gigaword consisting of
-around 4 million articles. Train/test splits follows Rush_2015.
+around 4 million articles. Use the 'org_data' provided by
+https://github.com/microsoft/unilm/ which is identical to
+https://github.com/harvardnlp/sent-summary but with better format.
 
 There are two features:
   - document: article.
@@ -56,7 +58,7 @@ There are two features:
 
 """
 
-_URL = "https://drive.google.com/uc?export=download&id=0B6N7tANPyVeBNmlSX19Ld2xDU1E"
+_URL = "https://drive.google.com/uc?export=download&id=1USoQ8lJgN8kAWnUnRrupMGrPMLlDVqlV"
 
 _DOCUMENT = "document"
 _SUMMARY = "summary"
@@ -65,7 +67,10 @@ _SUMMARY = "summary"
 class Gigaword(tfds.core.GeneratorBasedBuilder):
   """Gigaword summarization dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  # 1.0.0 contains a bug that uses validation data as training data.
+  # 1.1.0 Update to the correct train, validation and test data.
+  # 1.2.0 Replace <unk> with <UNK> in train/val to be consistent with test.
+  VERSION = tfds.core.Version("1.2.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -76,38 +81,49 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text()
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/harvardnlp/sent-summary"],
+        homepage="https://github.com/harvardnlp/sent-summary",
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_URL)
-    gigaword_path = os.path.join(dl_path, "sumdata")
-    train_path = {
-        _DOCUMENT:
-            os.path.join(gigaword_path, "train/valid.article.filter.txt"),
-        _SUMMARY:
-            os.path.join(gigaword_path, "train/valid.title.filter.txt")
-    }
-    test_path = {
-        _DOCUMENT: os.path.join(gigaword_path, "Giga/input.txt"),
-        _SUMMARY: os.path.join(gigaword_path, "Giga/task1_ref0.txt")
-    }
+    pattern = os.path.join(dl_path, "org_data", "%s.%s.txt")
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"path": train_path},
+            gen_kwargs={
+                "src_path": pattern % ("train", "src"),
+                "tgt_path": pattern % ("train", "tgt"),
+                "replace_unk": True,
+            },
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                "src_path": pattern % ("dev", "src"),
+                "tgt_path": pattern % ("dev", "tgt"),
+                "replace_unk": True,
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"path": test_path},
+            gen_kwargs={
+                "src_path": pattern % ("test", "src"),
+                "tgt_path": pattern % ("test", "tgt"),
+                "replace_unk": False,
+            },
         ),
     ]
 
-  def _generate_examples(self, path=None):
+  def _generate_examples(self, src_path=None, tgt_path=None, replace_unk=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(path[_DOCUMENT]) as f_d, tf.io.gfile.GFile(
-        path[_SUMMARY]) as f_s:
+    with tf.io.gfile.GFile(src_path) as f_d, tf.io.gfile.GFile(tgt_path) as f_s:
       for i, (doc_text, sum_text) in enumerate(zip(f_d, f_s)):
-        yield i, {_DOCUMENT: doc_text.strip(), _SUMMARY: sum_text.strip()}
+        if replace_unk:
+          yield i, {
+              _DOCUMENT: doc_text.strip().replace("<unk>", "UNK"),
+              _SUMMARY: sum_text.strip().replace("<unk>", "UNK")
+          }
+        else:
+          yield i, {_DOCUMENT: doc_text.strip(), _SUMMARY: sum_text.strip()}

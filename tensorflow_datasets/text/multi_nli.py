@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -58,7 +57,7 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 class MultiNLIConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MultiNLI."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for MultiNLI.
 
@@ -69,11 +68,10 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
     """
     super(MultiNLIConfig, self).__init__(
         version=tfds.core.Version(
-            "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                "0.0.2", experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.text_encoder_config = (
@@ -108,7 +106,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
         supervised_keys=None,
-        urls=["https://www.nyu.edu/projects/bowman/multinli/"],
+        homepage="https://www.nyu.edu/projects/bowman/multinli/",
         citation=_CITATION,
     )
 

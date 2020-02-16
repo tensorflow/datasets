@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import os
 import tempfile
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
@@ -35,9 +35,9 @@ tf.compat.v1.enable_eager_execution()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
-                         "mnist", "1.0.0")
+                         "mnist", "3.0.0")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
-                                   "dataset_info", "mnist_unlabeled", "1.0.0")
+                                   "dataset_info", "mnist_unlabeled", "3.0.0")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
@@ -113,6 +113,7 @@ class DatasetInfoTest(testing.TestCase):
 
     # Assert that this is computed correctly.
     self.assertEqual(40, info.splits.total_num_examples)
+    self.assertEqual(11594722, info.dataset_size)
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
@@ -165,11 +166,13 @@ class DatasetInfoTest(testing.TestCase):
         builder=self._builder,
         description="A description",
         supervised_keys=("input", "output"),
-        urls=["some location"],
+        homepage="http://some-location",
         citation="some citation",
         redistribution_info={"license": "some license"}
     )
-    info.size_in_bytes = 456
+    info.download_size = 456
+    info.as_proto.splits.add(name="train", num_bytes=512)
+    info.as_proto.splits.add(name="validation", num_bytes=64)
     info.as_proto.schema.feature.add()
     info.as_proto.schema.feature.add()  # Add dynamic statistics
     info.download_checksums = {
@@ -194,11 +197,12 @@ class DatasetInfoTest(testing.TestCase):
       restored_info = dataset_info.DatasetInfo(
           builder=self._builder,
           supervised_keys=("input (new)", "output (new)"),
-          urls=["some location (new)"],
+          homepage="http://some-location-new",
           citation="some citation (new)",
           redistribution_info={"license": "some license (new)"}
       )
-      restored_info.size_in_bytes = 789
+      restored_info.download_size = 789
+      restored_info.as_proto.splits.add(name="validation", num_bytes=288)
       restored_info.as_proto.schema.feature.add()
       restored_info.as_proto.schema.feature.add()
       restored_info.as_proto.schema.feature.add()
@@ -215,11 +219,12 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(restored_info.description, "A description")
       self.assertEqual(
           restored_info.supervised_keys, ("input (new)", "output (new)"))
-      self.assertEqual(restored_info.urls, ["some location (new)"])
+      self.assertEqual(restored_info.homepage, "http://some-location-new")
       self.assertEqual(restored_info.citation, "some citation (new)")
       self.assertEqual(restored_info.redistribution_info.license,
                        "some license (new)")
-      self.assertEqual(restored_info.size_in_bytes, 789)
+      self.assertEqual(restored_info.download_size, 789)
+      self.assertEqual(restored_info.dataset_size, 576)
       self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
       self.assertEqual(restored_info.download_checksums, {
           "url2": "some other checksum (new)",
@@ -305,9 +310,9 @@ class DatasetInfoTest(testing.TestCase):
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='mnist',
-    version=1.0.0,
+    version=3.0.0,
     description='The MNIST database of handwritten digits.',
-    urls=['https://storage.googleapis.com/cvdf-datasets/mnist/'],
+    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     features=FeaturesDict({
         'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),

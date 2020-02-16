@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ from __future__ import print_function
 import os
 
 import numpy as np
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -105,7 +104,7 @@ EXTRA_CORRUPTIONS = [
 class Cifar10CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Cifar10Corrupted."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, corruption_type, severity, **kwargs):
     """Constructor.
 
@@ -129,18 +128,17 @@ def _make_builder_configs():
     A list of 95 Cifar10CorruptedConfig objects.
   """
   config_list = []
+  v1 = tfds.core.Version(
+      '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+  v001 = tfds.core.Version(
+      '0.0.1', experiments={tfds.core.Experiment.S3: False})
   for corruption in _CORRUPTIONS:
     for severity in range(1, 6):
       config_list.append(
           Cifar10CorruptedConfig(
               name=corruption + '_' + str(severity),
-              version=tfds.core.Version(
-                  '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-              supported_versions=[
-                  tfds.core.Version(
-                      '1.0.0',
-                      'New split API (https://tensorflow.org/datasets/splits)'),
-              ],
+              version=v1,
+              supported_versions=[v001],
               description='Corruption method: ' + corruption +
               ', severity level: ' + str(severity),
               corruption_type=corruption,
@@ -167,7 +165,7 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(num_classes=_CIFAR_CLASSES),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://github.com/hendrycks/robustness'],
+        homepage='https://github.com/hendrycks/robustness',
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

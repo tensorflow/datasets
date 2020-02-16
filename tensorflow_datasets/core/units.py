@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ _NAME_LIST = [("PiB", PiB), ("TiB", TiB), ("GiB", GiB), ("MiB", MiB),
 def size_str(size_in_bytes):
   """Returns a human readable size string.
 
-  If size_in_bytes is None, then returns "?? GiB".
+  If size_in_bytes is None, then returns "Unknown size".
 
   For example `size_str(1.5 * tfds.units.GiB) == "1.50 GiB"`.
 
@@ -43,7 +43,7 @@ def size_str(size_in_bytes):
       format as a human-readable size string.
   """
   if not size_in_bytes:
-    return "?? GiB"
+    return "Unknown size"
 
   size_in_bytes = float(size_in_bytes)
   for (name, size_bytes) in _NAME_LIST:

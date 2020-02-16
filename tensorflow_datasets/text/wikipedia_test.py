@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,11 +26,12 @@ from tensorflow_datasets.text import wikipedia
 
 class WikipediaTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wikipedia.Wikipedia
+  VERSION = "experimental_latest"
   BUILDER_CONFIG_NAMES_TO_TEST = ["20190301.en"]
 
   DL_EXTRACT_RESULT = {
       "info": "dumpstatus.json",
-      "xml": ["enwiki_fake.xml", "enwiki_fake.xml"]
+      "xml": ["enwiki_fake.xml.bz2", "enwiki_fake2.xml.bz2"]
   }
 
   SPLITS = {

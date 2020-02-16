@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -49,11 +49,11 @@ _TRAIN_POINTS_PER_CLASS = 30
 class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
-  VERSION = tfds.core.Version("1.1.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+          "1.1.0", experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -67,7 +67,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
             "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION
         )
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -80,7 +79,7 @@ def _target_languages():
 class ParaCrawlConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ParaCrawl."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, target_language=None, **kwargs):
     """BuilderConfig for ParaCrawl.
 
@@ -125,10 +124,10 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
           target_language=target_language,
-          version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           ],
       )
       for target_language in _target_languages()
@@ -143,10 +142,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
             languages=("en", target_language),
             encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=("en", target_language),
-        urls=[
-            _BENCHMARK_URL,
-            _BASE_DATA_URL_FORMAT_STR.format(target_lang=target_language)
-        ],
+        homepage=_BENCHMARK_URL,
         citation=_CITATION)
 
   def _vocab_text_gen(self, files, language):

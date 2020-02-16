@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import re
 
 import enum
 from six.moves import urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.download import util
@@ -173,7 +173,7 @@ def get_dl_fname(url, checksum):
   Windows however expects short paths (260 chars), so we limit the file name
   to an arbitrary 90 chars.
 
-  Naming pattern: '${url}${checksum}'.
+  Naming pattern: '{url}{checksum}'.
    - url: url sanitized and shortened to 46 chars.
    - checksum: base64url encoded sha256: 44 chars (removing trailing '=').
 

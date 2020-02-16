@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ from __future__ import print_function
 
 import io
 import os
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -64,6 +64,10 @@ _CATEGORIES = [
 ]
 
 
+def _make_lmdb_dataset(path):
+  return tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
+
+
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
@@ -71,11 +75,12 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version("0.1.1", {tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version(
+              "3.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
           supported_versions=[
               tfds.core.Version(
-                  "3.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
+                  "0.1.1", experiments={tfds.core.Experiment.S3: False}),
           ],
       ) for category in _CATEGORIES
   ]
@@ -88,7 +93,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
         }),
-        urls=["https://www.yf.io/p/lsun"],
+        homepage="https://www.yf.io/p/lsun",
         citation=_CITATION,
     )
 
@@ -116,8 +121,8 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extracted_dir, file_path):
     with tf.Graph().as_default():
-      dataset = tf.contrib.data.LMDBDataset(
-          os.path.join(extracted_dir, file_path, "data.mdb"))
+      path = os.path.join(extracted_dir, file_path, "data.mdb")
+      dataset = _make_lmdb_dataset(path)
       for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {"image": io.BytesIO(jpeg_image)}
         yield i, record

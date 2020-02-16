@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,7 @@ tf_compat.ensure_tf_install()
 # pylint: disable=g-import-not-at-top
 from tensorflow_datasets import audio
 from tensorflow_datasets import image
+from tensorflow_datasets import object_detection
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
 from tensorflow_datasets import text

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@ from __future__ import print_function
 
 import json
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -62,7 +61,7 @@ _ADDITIONAL_FEATURES = ["ups", "num_comments", "score", "upvote_ratio"]
 class RedditTifuConfig(tfds.core.BuilderConfig):
   """BuilderConfig for RedditTifu."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, summary_key=None, **kwargs):
     """BuilderConfig for RedditTifu.
 
@@ -70,8 +69,9 @@ class RedditTifuConfig(tfds.core.BuilderConfig):
       summary_key: key string of summary in downloaded json file.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version 1.1.0 remove empty document and summary strings.
     super(RedditTifuConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.1.0"), **kwargs)
     self.summary_key = summary_key
 
 
@@ -103,7 +103,7 @@ class RedditTifu(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         supervised_keys=(_DOCUMENT, self.builder_config.summary_key),
-        urls=["https://github.com/ctr4si/MMN"],
+        homepage="https://github.com/ctr4si/MMN",
         citation=_CITATION,
     )
 
@@ -127,13 +127,12 @@ class RedditTifu(tfds.core.GeneratorBasedBuilder):
         #   'selftext','trimmed_title','selftext_without_tldr_tokenized',
         #   'id','selftext_without_tldr'
         d = json.loads(line)
-        # skip if tldr is empty
-        if self.builder_config.summary_key == _TLDR and not d["tldr"]:
-          continue
         r = {
-            _DOCUMENT: d["selftext_without_tldr"],
-            _TITLE: d["trimmed_title"],
-            _TLDR: d["tldr"] or "",
+            _DOCUMENT: d["selftext_without_tldr"].strip(),
+            _TITLE: d["trimmed_title"].strip(),
+            _TLDR: (d["tldr"] or "").strip(),
         }
         r.update({k: d[k] for k in _ADDITIONAL_FEATURES})
-        yield i, r
+        # skip if document or summary is empty
+        if r[_DOCUMENT] and r[self.builder_config.summary_key]:
+          yield i, r

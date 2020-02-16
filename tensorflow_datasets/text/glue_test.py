@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -124,40 +124,13 @@ class GlueMrpcTest(testing.DatasetBuilderTestCase):
   }
 
 
-class GlueColaS3Test(GlueColaTest):
-  VERSION = "experimental_latest"
-
-
-class GlueSst2S3Test(GlueSst2Test):
-  VERSION = "experimental_latest"
-
-
-class GlueQqpS3Test(GlueQqpTest):
-  VERSION = "experimental_latest"
-
-
-class GlueStsbS3Test(GlueStsbTest):
-  VERSION = "experimental_latest"
-
-
-class GlueMnliS3Test(GlueMnliTest):
-  VERSION = "experimental_latest"
-
-
-class GlueQnliS3Test(GlueQnliTest):
-  VERSION = "experimental_latest"
-
-
-class GlueRteS3Test(GlueRteTest):
-  VERSION = "experimental_latest"
-
-
-class GlueWnliS3Test(GlueWnliTest):
-  VERSION = "experimental_latest"
-
-
-class GlueMrpcS3Test(GlueMrpcTest):
-  VERSION = "experimental_latest"
+class GlueAxTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["ax"]
+  DATASET_CLASS = glue.Glue
+  DL_EXTRACT_RESULT = "AX/ax.tsv"
+  SPLITS = {
+      "test": 3,
+  }
 
 
 if __name__ == "__main__":

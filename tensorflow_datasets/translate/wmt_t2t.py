@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,9 +43,12 @@ class WmtT2tTranslate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=("de", "en"),
-          version=tfds.core.Version(
-              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          )
+          version=tfds.core.Version("1.0.0"),
+          supported_versions=[
+              tfds.core.Version(
+                  "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          ]
+      )
   ]
 
   @property

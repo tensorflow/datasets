@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,10 +47,12 @@ class Wmt15Translate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version=tfds.core.Version(
-              "0.0.4", experiments={tfds.core.Experiment.S3: False}),
-          )
-      for l1, l2 in _LANGUAGE_PAIRS
+          version=tfds.core.Version("1.0.0"),
+          supported_versions=[
+              tfds.core.Version(
+                  "0.0.4", experiments={tfds.core.Experiment.S3: False}),
+          ],
+      ) for l1, l2 in _LANGUAGE_PAIRS
   ] + [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
           description=(
@@ -63,8 +65,11 @@ class Wmt15Translate(wmt.WmtTranslate):
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
               vocab_size=2**13),
-          version=tfds.core.Version(
-              "0.0.4", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
+          supported_versions=[
+              tfds.core.Version(
+                  "0.0.4", experiments={tfds.core.Experiment.S3: False}),
+          ],
           )
       for l1, l2 in _LANGUAGE_PAIRS
   ]

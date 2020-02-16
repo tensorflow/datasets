@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import collections
 import csv
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 
@@ -73,12 +73,20 @@ _LABELS = collections.OrderedDict({
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You must register and agree to user agreement on the dataset page:
+  https://stanfordmlgroup.github.io/competitions/chexpert/
+  Afterwards, you have to put the CheXpert-v1.0-small directory in the
+  manual_dir. It should contain subdirectories: train/ and valid/ with images
+  and also train.csv and valid.csv files.
+  """
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -91,7 +99,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_LABELS.values())),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
+        homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
         citation=_CITATION
     )
 

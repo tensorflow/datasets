@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ import json
 import os
 
 import six
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _SUPER_GLUE_CITATION = """\
@@ -37,6 +36,13 @@ _SUPER_GLUE_CITATION = """\
 
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
+"""
+
+_GLUE_DESCRIPTION = """\
+SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
+GLUE with a new set of more difficult language understanding tasks, improved
+resources, and a new public leaderboard.
+
 """
 
 _BOOLQ_DESCRIPTION = """\
@@ -136,6 +142,35 @@ of ambiguous examples such that changing one non-noun phrase word will change th
 dependencies in the sentence. The test set consists only of more straightforward examples, with a
 high number of noun phrases (and thus more choices for the model), but low to no ambiguity."""
 
+_AXB_DESCRIPTION = """\
+An expert-constructed,
+diagnostic dataset that automatically tests models for a broad range of linguistic, commonsense, and
+world knowledge. Each example in this broad-coverage diagnostic is a sentence pair labeled with
+a three-way entailment relation (entailment, neutral, or contradiction) and tagged with labels that
+indicate the phenomena that characterize the relationship between the two sentences. Submissions
+to the GLUE leaderboard are required to include predictions from the submission's MultiNLI
+classifier on the diagnostic dataset, and analyses of the results were shown alongside the main
+leaderboard. Since this broad-coverage diagnostic task has proved difficult for top models, we retain
+it in SuperGLUE. However, since MultiNLI is not part of SuperGLUE, we collapse contradiction
+and neutral into a single not_entailment label, and request that submissions include predictions
+on the resulting set from the model used for the RTE task.
+"""
+
+_AXG_DESCRIPTION = """\
+Winogender is designed to measure gender
+bias in coreference resolution systems. We use the Diverse Natural Language Inference Collection
+(DNC; Poliak et al., 2018) version that casts Winogender as a textual entailment task. Each example
+consists of a premise sentence with a male or female pronoun and a hypothesis giving a possible
+antecedent of the pronoun. Examples occur in minimal pairs, where the only difference between
+an example and its pair is the gender of the pronoun in the premise. Performance on Winogender
+is measured with both accuracy and the gender parity score: the percentage of minimal pairs for
+which the predictions are the same. We note that a system can trivially obtain a perfect gender parity
+score by guessing the same class for all examples, so a high gender parity score is meaningless unless
+accompanied by high accuracy. As a diagnostic test of gender bias, we view the schemas as having high
+positive predictive value and low negative predictive value; that is, they may demonstrate the presence
+of gender bias in a system, but not prove its absence.
+"""
+
 _BOOLQ_CITATION = """\
 @inproceedings{clark2019boolq,
   title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
@@ -233,11 +268,23 @@ _WSC_CITATION = """\
   year={2012}
 }"""
 
+_AXG_CITATION = """\
+@inproceedings{rudinger-EtAl:2018:N18,
+  author    = {Rudinger, Rachel  and  Naradowsky, Jason  and  Leonard, Brian  and  {Van Durme}, Benjamin},
+  title     = {Gender Bias in Coreference Resolution},
+  booktitle = {Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
+  month     = {June},
+  year      = {2018},
+  address   = {New Orleans, Louisiana},
+  publisher = {Association for Computational Linguistics}
+}
+"""
+
 
 class SuperGlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SuperGLUE."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self,
                features,
                data_url,
@@ -366,6 +413,22 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           citation=_WSC_CITATION,
           url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
       ),
+      SuperGlueConfig(
+          name="axb",
+          description=_AXB_DESCRIPTION,
+          features=["sentence1", "sentence2"],
+          label_classes=["entailment", "not_entailment"],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-b.zip",
+          citation="",  # The GLUE citation is sufficient.
+          url="https://gluebenchmark.com/diagnostics"),
+      SuperGlueConfig(
+          name="axg",
+          description=_AXG_DESCRIPTION,
+          features=["premise", "hypothesis"],
+          label_classes=["entailment", "not_entailment"],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-g.zip",
+          citation=_AXG_CITATION,
+          url="https://github.com/rudinger/winogender-schemas"),
   ]
 
   def _info(self):
@@ -406,19 +469,27 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_GLUE_DESCRIPTION + self.builder_config.description,
         features=tfds.features.FeaturesDict(features),
-        urls=[
-            self.builder_config.url,
-            "https://super.gluebenchmark.com/",
-        ],
+        homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     dl_dir = dl_manager.download_and_extract(self.builder_config.data_url) or ""
-    dl_dir = os.path.join(
-        dl_dir, _get_task_name_from_data_url(self.builder_config.data_url))
+    task_name = _get_task_name_from_data_url(self.builder_config.data_url)
+    dl_dir = os.path.join(dl_dir, task_name)
+    if self.builder_config.name in ["axb", "axg"]:
+      return [
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TEST,
+              gen_kwargs={
+                  "data_file":
+                      os.path.join(dl_dir, "{}.jsonl".format(task_name)),
+                  "split":
+                      tfds.Split.TEST,
+              }),
+      ]
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 """Version info."""
 
 # We follow Semantic Versioning (https://semver.org/)
-_MAJOR_VERSION = '1'
-_MINOR_VERSION = '2'
+_MAJOR_VERSION = '2'
+_MINOR_VERSION = '0'
 _PATCH_VERSION = '0'
 
 __version__ = '.'.join([

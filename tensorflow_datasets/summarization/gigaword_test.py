@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ from tensorflow_datasets.summarization import gigaword
 class GigawordOriginalTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = gigaword.Gigaword
   SPLITS = {
-      "train": 3,  # Number of fake train example
+      "train": 1,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
       "test": 1,  # Number of fake test example
   }
   DL_EXTRACT_RESULT = ""

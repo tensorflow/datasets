@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,6 +44,10 @@ class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = [
       'extracted/TAR_GZ.CUB_200_2011.tar.gz', 'extracted/segmentations.tgz'
+  ]
+
+  DL_DOWNLOAD_RESULT = [
+      'CUB_200_2011.tar.gz'
   ]
 
 

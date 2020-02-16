@@ -3,12 +3,21 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="glue" />
-  <meta itemprop="description" content="The Corpus of Linguistic Acceptability consists of English&#10;            acceptability judgments drawn from books and journal articles on&#10;            linguistic theory. Each example is a sequence of words annotated&#10;            with whether it is a grammatical English sentence." />
+  <meta itemprop="description" content="GLUE, the General Language Understanding Evaluation benchmark&#10;(https://gluebenchmark.com/) is a collection of resources for training,&#10;evaluating, and analyzing natural language understanding systems.&#10;&#10;            The Corpus of Linguistic Acceptability consists of English&#10;            acceptability judgments drawn from books and journal articles on&#10;            linguistic theory. Each example is a sequence of words annotated&#10;            with whether it is a grammatical English sentence.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;glue&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/glue" />
   <meta itemprop="sameAs" content="https://nyu-mll.github.io/CoLA/" />
+  <meta itemprop="citation" content="@article{warstadt2018neural,&#10;              title={Neural Network Acceptability Judgments},&#10;              author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},&#10;              journal={arXiv preprint arXiv:1805.12471},&#10;              year={2018}&#10;            }&#10;@inproceedings{wang2019glue,&#10;  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},&#10;  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},&#10;  note={In the Proceedings of ICLR.},&#10;  year={2019}&#10;}&#10;&#10;Note that each GLUE dataset has its own citation. Please see the source to see&#10;the correct citation for each contained dataset." />
 </div>
-
 # `glue`
+
+GLUE, the General Language Understanding Evaluation benchmark
+(https://gluebenchmark.com/) is a collection of resources for training,
+evaluating, and analyzing natural language understanding systems.
+
+            The Corpus of Linguistic Acceptability consists of English
+            acceptability judgments drawn from books and journal articles on
+            linguistic theory. Each example is a sequence of words annotated
+            with whether it is a grammatical English sentence.
 
 *   URL: [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
 *   `DatasetBuilder`:
@@ -17,33 +26,33 @@
 `glue` is configured with `tfds.text.glue.GlueConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `cola` (`v0.0.2`) (`Size: 368.14 KiB`): The Corpus of Linguistic
+*   `cola` (`v1.0.0`) (`Size: Unknown size`): The Corpus of Linguistic
     Acceptability consists of English acceptability judgments drawn from books
     and journal articles on linguistic theory. Each example is a sequence of
     words annotated with whether it is a grammatical English sentence.
 
-*   `sst2` (`v0.0.2`) (`Size: 7.09 MiB`): The Stanford Sentiment Treebank
+*   `sst2` (`v1.0.0`) (`Size: Unknown size`): The Stanford Sentiment Treebank
     consists of sentences from movie reviews and human annotations of their
     sentiment. The task is to predict the sentiment of a given sentence. We use
     the two-way (positive/negative) class split, and use only sentence-level
     labels.
 
-*   `mrpc` (`v0.0.2`) (`Size: 1.43 MiB`): The Microsoft Research Paraphrase
+*   `mrpc` (`v1.0.0`) (`Size: Unknown size`): The Microsoft Research Paraphrase
     Corpus (Dolan & Brockett, 2005) is a corpus of sentence pairs automatically
     extracted from online news sources, with human annotations for whether the
     sentences in the pair are semantically equivalent.
 
-*   `qqp` (`v0.0.2`) (`Size: 57.73 MiB`): The Quora Question Pairs2 dataset is a
-    collection of question pairs from the community question-answering website
-    Quora. The task is to determine whether a pair of questions are semantically
-    equivalent.
+*   `qqp` (`v1.0.0`) (`Size: Unknown size`): The Quora Question Pairs2 dataset
+    is a collection of question pairs from the community question-answering
+    website Quora. The task is to determine whether a pair of questions are
+    semantically equivalent.
 
-*   `stsb` (`v0.0.2`) (`Size: 784.05 KiB`): The Semantic Textual Similarity
+*   `stsb` (`v1.0.0`) (`Size: Unknown size`): The Semantic Textual Similarity
     Benchmark (Cer et al., 2017) is a collection of sentence pairs drawn from
     news headlines, video and image captions, and natural language inference
     data. Each pair is human-annotated with a similarity score from 1 to 5.
 
-*   `mnli` (`v0.0.2`) (`Size: 298.29 MiB`): The Multi-Genre Natural Language
+*   `mnli` (`v1.0.0`) (`Size: Unknown size`): The Multi-Genre Natural Language
     Inference Corpusn is a crowdsourced collection of sentence pairs with
     textual entailment annotations. Given a premise sentence and a hypothesis
     sentence, the task is to predict whether the premise entails the hypothesis
@@ -55,15 +64,15 @@ configurations predefined (defaults to the first one):
     section. We also use and recommend the SNLI corpus as 550k examples of
     auxiliary training data.
 
-*   `mnli_mismatched` (`v0.0.2`) (`Size: 298.29 MiB`): The mismatched validation
-    and test splits from MNLI. See the "mnli" BuilderConfig for additional
-    information.
+*   `mnli_mismatched` (`v1.0.0`) (`Size: Unknown size`): The mismatched
+    validation and test splits from MNLI. See the "mnli" BuilderConfig for
+    additional information.
 
-*   `mnli_matched` (`v0.0.2`) (`Size: 298.29 MiB`): The matched validation and
+*   `mnli_matched` (`v1.0.0`) (`Size: Unknown size`): The matched validation and
     test splits from MNLI. See the "mnli" BuilderConfig for additional
     information.
 
-*   `qnli` (`v0.0.2`) (`Size: 10.14 MiB`): The Stanford Question Answering
+*   `qnli` (`v1.0.0`) (`Size: Unknown size`): The Stanford Question Answering
     Dataset is a question-answering dataset consisting of question-paragraph
     pairs, where one of the sentences in the paragraph (drawn from Wikipedia)
     contains the answer to the corresponding question (written by an annotator).
@@ -76,7 +85,7 @@ configurations predefined (defaults to the first one):
     also removes the simplifying assumptions that the answer is always present
     in the input and that lexical overlap is a reliable cue.
 
-*   `rte` (`v0.0.2`) (`Size: 680.81 KiB`): The Recognizing Textual Entailment
+*   `rte` (`v1.0.0`) (`Size: Unknown size`): The Recognizing Textual Entailment
     (RTE) datasets come from a series of annual textual entailment challenges.
     We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim et al.,
     2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4
@@ -84,7 +93,7 @@ configurations predefined (defaults to the first one):
     datasets to a two-class split, where for three-class datasets we collapse
     neutral and contradiction into not entailment, for consistency.
 
-*   `wnli` (`v0.0.2`) (`Size: 28.32 KiB`): The Winograd Schema Challenge
+*   `wnli` (`v1.0.0`) (`Size: Unknown size`): The Winograd Schema Challenge
     (Levesque et al., 2011) is a reading comprehension task in which a system
     must read a sentence with a pronoun and select the referent of that pronoun
     from a list of choices. The examples are manually constructed to foil simple
@@ -105,6 +114,12 @@ configurations predefined (defaults to the first one):
     task and its score on the unconverted original task. We call converted
     dataset WNLI (Winograd NLI).
 
+*   `ax` (`v1.0.0`) (`Size: Unknown size`): A manually-curated evaluation
+    dataset for fine-grained analysis of system performance on a broad range of
+    linguistic phenomena. This dataset evaluates sentence understanding through
+    Natural Language Inference (NLI) problems. Use a model trained on MulitNLI
+    to produce predictions for this dataset.
+
 ## `glue/cola`
 
 The Corpus of Linguistic Acceptability consists of English acceptability
@@ -114,8 +129,9 @@ English sentence.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -127,7 +143,6 @@ TEST       | 1,063
 VALIDATION | 1,043
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -136,10 +151,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/sst2`
 
@@ -150,8 +164,9 @@ sentence-level labels.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -163,7 +178,6 @@ TEST       | 1,821
 VALIDATION | 872
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -172,10 +186,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://nlp.stanford.edu/sentiment/index.html](https://nlp.stanford.edu/sentiment/index.html)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mrpc`
 
@@ -185,8 +198,9 @@ annotations for whether the sentences in the pair are semantically equivalent.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -198,7 +212,6 @@ TEST       | 1,725
 VALIDATION | 408
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -208,10 +221,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/qqp`
 
@@ -221,8 +233,9 @@ pair of questions are semantically equivalent.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -234,7 +247,6 @@ TRAIN      | 363,849
 VALIDATION | 40,430
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -244,10 +256,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/stsb`
 
@@ -258,8 +269,9 @@ from 1 to 5.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -271,7 +283,6 @@ VALIDATION | 1,500
 TEST       | 1,379
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -281,10 +292,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mnli`
 
@@ -301,8 +311,9 @@ training data.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -316,7 +327,6 @@ VALIDATION_MATCHED    | 9,815
 TEST_MATCHED          | 9,796
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -326,10 +336,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mnli_mismatched`
 
@@ -338,8 +347,9 @@ BuilderConfig for additional information.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -350,7 +360,6 @@ TEST       | 9,847
 VALIDATION | 9,832
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -360,10 +369,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mnli_matched`
 
@@ -372,8 +380,9 @@ for additional information.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -384,7 +393,6 @@ VALIDATION | 9,815
 TEST       | 9,796
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -394,10 +402,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/qnli`
 
@@ -415,8 +422,9 @@ present in the input and that lexical overlap is a reliable cue.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -428,7 +436,6 @@ TEST       | 5,463
 VALIDATION | 5,463
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -438,10 +445,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/rte`
 
@@ -455,8 +461,9 @@ consistency.
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -468,7 +475,6 @@ TRAIN      | 2,490
 VALIDATION | 277
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -478,10 +484,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/wnli`
 
@@ -507,8 +512,9 @@ and its score on the unconverted original task. We call converted dataset WNLI
 
 Versions:
 
-*   **`0.0.2`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
 
 ### Statistics
 
@@ -520,7 +526,6 @@ TEST       | 146
 VALIDATION | 71
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -530,19 +535,46 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
+
+## `glue/ax`
+
+A manually-curated evaluation dataset for fine-grained analysis of system
+performance on a broad range of linguistic phenomena. This dataset evaluates
+sentence understanding through Natural Language Inference (NLI) problems. Use a
+model trained on MulitNLI to produce predictions for this dataset.
+
+Versions:
+
+*   **`1.0.0`** (default): New split API
+    (https://tensorflow.org/datasets/splits)
+*   `0.0.2`: None
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,104
+TEST  | 1,104
+
+### Features
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
 
 ## Citation
 ```
-@inproceedings{levesque2012winograd,
-              title={The winograd schema challenge},
-              author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
-              booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
-              year={2012}
-            }
 @inproceedings{wang2019glue,
   title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
   author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},

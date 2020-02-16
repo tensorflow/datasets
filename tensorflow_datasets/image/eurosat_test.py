@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ class EurosatTest(testing.DatasetBuilderTestCase):
   # TODO(mnn): Re-enable Py3 test (b/129964829)
   # None implies testing all BUILDER_CONFIGS, while [] implies no tests.
   BUILDER_CONFIG_NAMES_TO_TEST = None if six.PY2 else []
+
 
   DATASET_CLASS = eurosat.Eurosat
   SPLITS = {

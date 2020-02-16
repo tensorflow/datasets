@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 # CMATERdb constants
@@ -93,7 +92,7 @@ CMATERdb is the pattern recognition database repository created at the 'Center f
 class CmaterdbConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CMATERdb Config."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, **kwargs):
     """BuilderConfig for CMATERdb examples.
 
@@ -105,7 +104,6 @@ class CmaterdbConfig(tfds.core.BuilderConfig):
 
 class Cmaterdb(tfds.core.GeneratorBasedBuilder):
   """CMATERdb dataset."""
-  URL = "https://code.google.com/archive/p/cmaterdb/"
 
   BUILDER_CONFIGS = [
       CmaterdbConfig(
@@ -134,7 +132,7 @@ class Cmaterdb(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=[self.URL],
+        homepage="https://code.google.com/archive/p/cmaterdb/",
         citation=_CITATION,
     )
 

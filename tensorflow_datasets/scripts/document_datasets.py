@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,14 +24,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import cgi
 import collections
 import os
 
 from absl import app
 from concurrent import futures
 import mako.lookup
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import py_utils
 
@@ -41,9 +40,8 @@ WORKER_COUNT_CONFIGS = 50
 BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets"
 
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
-# coco2014: Deprecated (b/140916921)
 # TODO(tfds): Document image_label_folder datasets in a separate section
-BUILDER_BLACKLIST = ["wmt_translate", "coco2014"]
+BUILDER_BLACKLIST = ["wmt_translate"]
 
 
 @py_utils.memoize()
@@ -83,7 +81,12 @@ def document_single_builder(builder):
       builder=builder,
       config_builders=config_builders,
   ).strip()
-  out_str = schema_org(builder) + "\n" + out_str
+  schema_org_tmpl = get_mako_template("schema_org")
+  schema_org_out_str = schema_org_tmpl.render_unicode(
+      builder=builder,
+      config_builders=config_builders,
+  ).strip()
+  out_str = schema_org_out_str + "\n" + out_str
   return out_str
 
 
@@ -130,7 +133,8 @@ def dataset_docs_str(datasets=None):
   Returns:
     - overview document
     - a dictionary of sections. Each dataset in a section is represented by a
-    pair (dataset_name, string describing the datasets (in the MarkDown format))
+    tuple (dataset_name, is_manual_dataset, string describing the datasets
+    (in the MarkDown format))
   """
 
   print("Retrieving the list of builders...")
@@ -144,81 +148,13 @@ def dataset_docs_str(datasets=None):
     unused_ = get_mako_template("dataset")  # To warm cache.
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
       builder_docs = tpool.map(document_single_builder, builders)
-    builder_docs = [(builder.name, builder_doc)
+    builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
+                     builder_doc)
                     for (builder, builder_doc) in zip(builders, builder_docs)]
     section_docs[section.capitalize()] = builder_docs
   tmpl = get_mako_template("catalog_overview")
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]
-
-
-SCHEMA_ORG_PRE = """\
-<div itemscope itemtype="http://schema.org/Dataset">
-  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
-    <meta itemprop="name" content="TensorFlow Datasets" />
-  </div>
-"""
-
-SCHEMA_ORG_NAME = """\
-  <meta itemprop="name" content="{val}" />
-"""
-
-SCHEMA_ORG_URL = """\
-  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/{val}" />
-"""
-
-SCHEMA_ORG_DESC = """\
-  <meta itemprop="description" content="{val}" />
-"""
-
-SCHEMA_ORG_SAMEAS = """\
-  <meta itemprop="sameAs" content="{val}" />
-"""
-
-SCHEMA_ORG_POST = """\
-</div>
-"""
-
-
-def schema_org(builder):
-  # pylint: disable=line-too-long
-  """Builds schema.org microdata for DatasetSearch from DatasetBuilder.
-
-  Markup spec: https://developers.google.com/search/docs/data-types/dataset#dataset
-  Testing tool: https://search.google.com/structured-data/testing-tool
-  For Google Dataset Search: https://toolbox.google.com/datasetsearch
-
-  Microdata format was chosen over JSON-LD due to the fact that Markdown
-  rendering engines remove all <script> tags.
-
-  Args:
-    builder: `tfds.core.DatasetBuilder`
-
-  Returns:
-    HTML string with microdata
-  """
-  # pylint: enable=line-too-long
-
-  properties = [
-      (lambda x: x.name, SCHEMA_ORG_NAME),
-      (lambda x: x.description, SCHEMA_ORG_DESC),
-      (lambda x: x.name, SCHEMA_ORG_URL),
-      (lambda x: (x.urls and x.urls[0]) or "", SCHEMA_ORG_SAMEAS)
-  ]
-
-  info = builder.info
-  out_str = SCHEMA_ORG_PRE
-  for extractor, template in properties:
-    val = extractor(info)
-    if val:
-      # We are using cgi module instead of html due to Python 2 compatibility
-      val = cgi.escape(val, quote=True)
-      val = val.replace("\n", "&#10;")
-      val = val.strip()
-      out_str += template.format(val=val)
-  out_str += SCHEMA_ORG_POST
-
-  return out_str
 
 
 def main(_):

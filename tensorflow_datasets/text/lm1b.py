@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ from __future__ import print_function
 import os
 
 from absl import logging
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -67,12 +66,12 @@ _HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
 class Lm1bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Lm1b."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, version=None, text_encoder_config=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, old_version=None, text_encoder_config=None, **kwargs):
     """BuilderConfig for Lm1b.
 
     Args:
-      version (string): version as string.
+      old_version (string): old_version as string.
       text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
         for the `tfds.features.text.TextEncoder` used for the Lm1b `"text"`
         feature.
@@ -80,11 +79,11 @@ class Lm1bConfig(tfds.core.BuilderConfig):
     """
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
-            version, experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                old_version, experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.text_encoder_config = (
@@ -104,12 +103,12 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       Lm1bConfig(
           name="plain_text",
-          version="0.0.1",
+          old_version="0.0.1",
           description="Plain text",
       ),
       Lm1bConfig(
           name="bytes",
-          version="0.0.1",
+          old_version="0.0.1",
           description=("Uses byte-level text encoding with "
                        "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -117,7 +116,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords8k",
-          version="0.0.2",
+          old_version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -126,7 +125,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords32k",
-          version="0.0.2",
+          old_version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -145,7 +144,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
                     encoder_config=self.builder_config.text_encoder_config),
         }),
         supervised_keys=("text", "text"),
-        urls=["http://www.statmt.org/lm-benchmark/"],
+        homepage="http://www.statmt.org/lm-benchmark/",
         citation=_CITATION,
     )
 

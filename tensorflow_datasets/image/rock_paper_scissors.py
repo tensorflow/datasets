@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,11 +45,11 @@ _NAME_RE = re.compile(r"^(rps|rps-test-set)/(rock|paper|scissors)/[\w-]*\.png$")
 class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
   """Rock, Paper, Scissors dataset."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -62,7 +62,7 @@ class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
                 names=["rock", "paper", "scissors"]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://laurencemoroney.com/rock-paper-scissors-dataset"],
+        homepage="http://laurencemoroney.com/rock-paper-scissors-dataset",
         citation=_CITATION
         )
 

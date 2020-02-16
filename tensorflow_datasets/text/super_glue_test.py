@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -106,6 +106,22 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
       "train": 3,
       "validation": 2,
       "test": 1,
+  }
+
+
+class SuperGlueAxBTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axb"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
+
+
+class SuperGlueAxGTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axg"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
   }
 
 

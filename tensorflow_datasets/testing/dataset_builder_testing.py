@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -63,6 +63,11 @@ FORBIDDEN_OS_FUNCTIONS = (
     "unlink",
     "walk",
 )
+FORBIDDEN_OS_PATH_FUNCTIONS = (
+    "exists",
+    "isdir",
+    "isfile",
+)
 
 
 _ORGINAL_NP_LOAD = np.load
@@ -71,7 +76,7 @@ _ORGINAL_NP_LOAD = np.load
 def _np_load(file_, mmap_mode=None, allow_pickle=False, **kwargs):
   if not hasattr(file_, "read"):
     raise AssertionError(
-        "You MUST pass a `tf.gfile.GFile` or file-like instance to `np.load`.")
+        "You MUST pass a `tf.io.gfile.GFile` or file-like object to `np.load`.")
   if allow_pickle:
     raise AssertionError("Unpicling files is forbidden for security reasons.")
   return _ORGINAL_NP_LOAD(file_, mmap_mode, allow_pickle, **kwargs)
@@ -95,6 +100,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified, path to `fake_examples` will always be returned.
+    * DL_DOWNLOAD_RESULT: `dict[str]`, the returned result of mocked
+      `download_and_extract` method. The values should be the path of files
+      present in the `fake_examples` directory, relative to that directory.
+      If not specified: will use DL_EXTRACT_RESULT (this is due to backwards
+      compatibility and will be removed in the future).
     * EXAMPLE_DIR: `str`, the base directory in in which fake examples are
       contained. Optional; defaults to
       tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
@@ -108,7 +118,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
    - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
    - the dataset builder can read the fake examples stored in
-       testing/test_data/fake_examples/${dataset_name};
+       testing/test_data/fake_examples/{dataset_name};
    - the dataset builder can produce serialized data;
    - the dataset builder produces a valid Dataset object from serialized data
      - in eager mode;
@@ -123,6 +133,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   VERSION = None
   BUILDER_CONFIG_NAMES_TO_TEST = None
   DL_EXTRACT_RESULT = None
+  DL_DOWNLOAD_RESULT = None
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
@@ -144,8 +155,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
     # Determine the fake_examples directory.
     self.example_dir = os.path.join(
-        os.path.dirname(__file__),
-        "test_data", "fake_examples", self.builder.name)
+        test_utils.fake_examples_dir(), self.builder.name)
     if self.EXAMPLE_DIR is not None:
       self.example_dir = self.EXAMPLE_DIR
 
@@ -162,8 +172,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   def _mock_out_forbidden_os_functions(self):
     """Raises error if forbidden os functions are called instead of gfile."""
-    err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead.")
-    mock_os = absltest.mock.Mock(os, path=os.path)
+    err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead. "
+                         "This makes code compatible with more filesystems.")
+    mock_os_path = absltest.mock.Mock(os.path, wraps=os.path)
+    for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
+      getattr(mock_os_path, fop).side_effect = err
+    mock_os = absltest.mock.Mock(os, path=mock_os_path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
     os_patcher = absltest.mock.patch(
@@ -208,6 +222,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_EXTRACT_RESULT)
 
+  def _get_dl_download_result(self, url):
+    if self.DL_DOWNLOAD_RESULT is None:
+      # This is only to be backwards compatible with old approach.
+      # In the future it will be replaced with using self.example_dir.
+      return self._get_dl_extract_result(url)
+    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
+                            self.DL_DOWNLOAD_RESULT)
+
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(  # pylint: disable=not-callable
         data_dir=self.tmp_dir,
@@ -240,11 +262,21 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       self._download_and_prepare_as_dataset(self.builder)
 
   def _download_and_prepare_as_dataset(self, builder):
+    # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
+    # set.
+
+    missing_dir_mock = absltest.mock.PropertyMock(
+        side_effect=Exception("Missing MANUAL_DOWNLOAD_INSTRUCTIONS"))
+
+    manual_dir = (
+        self.example_dir
+        if builder.MANUAL_DOWNLOAD_INSTRUCTIONS else missing_dir_mock)
     with absltest.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
-        download=self._get_dl_extract_result,
-        manual_dir=self.example_dir,
+        download=self._get_dl_download_result,
+        download_checksums=lambda *_: None,
+        manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
         import apache_beam as beam   # pylint: disable=g-import-not-at-top
@@ -281,9 +313,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
-      dataset = builder.as_dataset(split=split_name)
-      compare_shapes_and_types(builder.info.features.get_tensor_info(),
-                               dataset.output_types, dataset.output_shapes)
+      ds = builder.as_dataset(split=split_name)
+      compare_shapes_and_types(
+          builder.info.features.get_tensor_info(),
+          tf.compat.v1.data.get_output_types(ds),
+          tf.compat.v1.data.get_output_shapes(ds),
+      )
       examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
@@ -333,6 +368,9 @@ def checksum(example):
         element = element.decode("latin-1")
       element = element.encode("utf-8")
       ret += element
+    elif isinstance(element,
+                    (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
+      ret += str(element.to_list()).encode("utf-8")
     elif isinstance(element, np.ndarray):
       ret += element.tobytes()
     else:
@@ -360,4 +398,3 @@ def compare_shapes_and_types(tensor_info, output_types, output_shapes):
       expected_shape = feature_info.shape
       output_shape = output_shapes[feature_name]
       tf_utils.assert_shape_match(expected_shape, output_shape)
-

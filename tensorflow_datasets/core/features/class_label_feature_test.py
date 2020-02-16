@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
@@ -150,6 +150,12 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     with self.assertRaisesWithPredicateMatch(
         ValueError, 'number of names do not match the defined num_classes'):
       labels.names = ['label3', 'label1']
+
+  def test_duplicate_names(self):
+
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'label names are duplicated'):
+      features.ClassLabel(names=['label1', 'label1', 'label2'])
 
 
 if __name__ == '__main__':

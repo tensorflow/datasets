@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,10 +19,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import downsampled_imagenet
+import tensorflow_datasets.public_api as tfds
 
 
 class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
@@ -38,10 +37,6 @@ class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
       "train_32x32.tar",
       "valid_32x32.tar",
   ]
-
-
-class DownsampledImagenetS3Test(DownsampledImagenetTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

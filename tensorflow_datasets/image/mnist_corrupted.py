@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@ from __future__ import print_function
 import os
 
 import numpy as np
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.image import mnist
 import tensorflow_datasets.public_api as tfds
 
@@ -76,7 +75,7 @@ _TEST_LABELS_FILENAME = 'test_labels.npy'
 class MNISTCorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MNISTcorrupted."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, corruption_type, **kwargs):
     """Constructor.
 
@@ -103,11 +102,11 @@ def _make_builder_configs():
         MNISTCorruptedConfig(
             name=corruption,
             version=tfds.core.Version(
-                '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+                '1.0.0',
+                'New split API (https://tensorflow.org/datasets/splits)'),
             supported_versions=[
                 tfds.core.Version(
-                    '1.0.0',
-                    'New split API (https://tensorflow.org/datasets/splits)'),
+                    '0.0.1', experiments={tfds.core.Experiment.S3: False}),
             ],
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
@@ -135,7 +134,7 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(num_classes=mnist.MNIST_NUM_CLASSES),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://github.com/google-research/mnist-c'],
+        homepage='https://github.com/google-research/mnist-c',
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

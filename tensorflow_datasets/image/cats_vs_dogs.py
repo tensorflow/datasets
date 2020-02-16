@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ from __future__ import print_function
 import re
 
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -52,11 +52,11 @@ _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("2.0.1",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "4.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "4.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("2.0.1",
+                        experiments={tfds.core.Experiment.S3: False}),
   ]
 
   def _info(self):
@@ -69,7 +69,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["cat", "dog"]),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.microsoft.com/en-us/download/details.aspx?id=54765"],
+        homepage=
+        "https://www.microsoft.com/en-us/download/details.aspx?id=54765",
         citation=_CITATION
         )
 

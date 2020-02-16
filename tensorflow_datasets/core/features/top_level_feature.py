@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import feature as feature_lib
 
 
@@ -118,22 +118,11 @@ def _decode_feature(feature, example, serialized_info, decoder):
   if sequence_rank == 0:
     return decoder.decode_example(example)
   elif sequence_rank == 1:
-    # Note: This all works fine in Eager mode (without tf.function) because
-    # tf.data pipelines are always executed in Graph mode.
-
-    # Apply the decoding to each of the individual distributed features.
-    return tf.map_fn(
-        decoder.decode_example,
-        example,
-        dtype=decoder.dtype,
-        parallel_iterations=10,
-        back_prop=False,
-        name='sequence_decode',
-    )
-  else:
-    raise NotImplementedError(
-        'Nested sequences not supported yet. Got: {}'.format(serialized_info)
-    )
+    # Return a batch of examples from a sequence
+    return decoder.decode_batch_example(example)
+  elif sequence_rank > 1:
+    # Use ragged tensor if the sequance rank is greater than one
+    return decoder.decode_ragged_example(example)
 
 
 def _get_sequence_rank(serialized_info):

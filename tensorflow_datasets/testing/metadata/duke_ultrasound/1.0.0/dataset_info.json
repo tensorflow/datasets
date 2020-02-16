@@ -1,0 +1,1240 @@
+{
+  "citation": "@article{DBLP:journals/corr/abs-1908-05782,\n  author    = {Ouwen Huang and\n               Will Long and\n               Nick Bottenus and\n               Gregg E. Trahey and\n               Sina Farsiu and\n               Mark L. Palmeri},\n  title     = {MimickNet, Matching Clinical Post-Processing Under Realistic Black-Box\n               Constraints},\n  journal   = {CoRR},\n  volume    = {abs/1908.05782},\n  year      = {2019},\n  url       = {http://arxiv.org/abs/1908.05782},\n  archivePrefix = {arXiv},\n  eprint    = {1908.05782},\n  timestamp = {Mon, 19 Aug 2019 13:21:03 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1908-05782},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "description": "DukeUltrasound is an ultrasound dataset collected at Duke University with a \nVerasonics c52v probe. It contains delay-and-sum (DAS) beamformed data \nas well as data post-processed with Siemens Dynamic TCE for speckle \nreduction, contrast enhancement and improvement in conspicuity of \nanatomical structures. These data were collected with support from the\nNational Institute of Biomedical Imaging and Bioengineering under Grant \nR01-EB026574 and National Institutes of Health under Grant 5T32GM007171-44.\nA usage example is avalible \n[here](https://colab.research.google.com/drive/1R_ARqpWoiHcUQWg1Fxwyx-ZkLi0IZ5qs).",
+  "location": {
+    "urls": [
+      "https://arxiv.org/abs/1908.05782"
+    ]
+  },
+  "name": "duke_ultrasound",
+  "schema": {
+    "feature": [
+      {
+        "name": "das"
+      },
+      {
+        "name": "dtce",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "FLOAT"
+      },
+      {
+        "name": "f0_hz",
+        "type": "FLOAT"
+      },
+      {
+        "name": "final_angle",
+        "type": "FLOAT"
+      },
+      {
+        "name": "final_radius",
+        "type": "FLOAT"
+      },
+      {
+        "name": "focus_cm",
+        "type": "FLOAT"
+      },
+      {
+        "name": "harmonic",
+        "type": "BYTES"
+      },
+      {
+        "name": "height",
+        "type": "INT"
+      },
+      {
+        "name": "initial_angle",
+        "type": "FLOAT"
+      },
+      {
+        "name": "initial_radius",
+        "type": "FLOAT"
+      },
+      {
+        "name": "probe",
+        "type": "BYTES"
+      },
+      {
+        "name": "scanner",
+        "type": "BYTES"
+      },
+      {
+        "name": "target",
+        "type": "BYTES"
+      },
+      {
+        "name": "timestamp_id",
+        "type": "INT"
+      },
+      {
+        "name": "voltage",
+        "type": "FLOAT"
+      },
+      {
+        "name": "width",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "13726187043",
+  "splits": [
+    {
+      "name": "A",
+      "numShards": "1",
+      "shardLengths": [
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43",
+        "42",
+        "43"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "dtce",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 4096.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "f0_hz",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 8333333.5,
+              "min": 1562500.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 0.4917465150356293,
+              "min": 0.15053464472293854
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 3267.254150390625,
+              "min": 843.2090454101562
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "focus_cm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 10.0,
+              "min": 4.5
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              }
+            },
+            "name": "harmonic",
+            "type": "BYTES"
+          },
+          {
+            "name": "height",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 2048.0,
+              "min": 640.0
+            }
+          },
+          {
+            "name": "initial_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": -0.14617133140563965,
+              "min": -0.4856378734111786
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "initial_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 1219.2542724609375,
+              "min": 203.20904541015625
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              }
+            },
+            "name": "probe",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              }
+            },
+            "name": "scanner",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              }
+            },
+            "name": "target",
+            "type": "BYTES"
+          },
+          {
+            "name": "timestamp_id",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 2449837610.0,
+              "min": 1334690421.0
+            }
+          },
+          {
+            "name": "voltage",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 70.0,
+              "min": 1.600000023841858
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "width",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1362"
+              },
+              "max": 200.0,
+              "min": 70.0
+            }
+          }
+        ],
+        "numExamples": "1362"
+      }
+    },
+    {
+      "name": "B",
+      "numShards": "1",
+      "shardLengths": [
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "37",
+        "38",
+        "37",
+        "37",
+        "38",
+        "37"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "dtce",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 4096.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "f0_hz",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 8333333.5,
+              "min": 1404494.375
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 0.4917465150356293,
+              "min": 0.10210175812244415
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 3276.4111328125,
+              "min": 843.2090454101562
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "focus_cm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 8.5,
+              "min": 5.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              }
+            },
+            "name": "harmonic",
+            "type": "BYTES"
+          },
+          {
+            "name": "height",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 2048.0,
+              "min": 640.0
+            }
+          },
+          {
+            "name": "initial_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": -0.10210175812244415,
+              "min": -0.4856378734111786
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "initial_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 1228.4112548828125,
+              "min": 203.20904541015625
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              }
+            },
+            "name": "probe",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              }
+            },
+            "name": "scanner",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              }
+            },
+            "name": "target",
+            "type": "BYTES"
+          },
+          {
+            "name": "timestamp_id",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 2449837848.0,
+              "min": 1334698613.0
+            }
+          },
+          {
+            "name": "voltage",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 70.0,
+              "min": 1.600000023841858
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "width",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1194"
+              },
+              "max": 200.0,
+              "min": 40.0
+            }
+          }
+        ],
+        "numExamples": "1194"
+      }
+    },
+    {
+      "name": "MARK",
+      "numShards": "1",
+      "shardLengths": [
+        "26",
+        "26",
+        "27",
+        "26",
+        "26",
+        "27",
+        "26",
+        "26",
+        "26",
+        "26",
+        "27",
+        "26",
+        "26",
+        "27",
+        "26",
+        "26"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "dtce",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 4096.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "f0_hz",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 4716981.0,
+              "min": 2358490.5
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 0.43415066599845886,
+              "min": 0.43415066599845886
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 2382.791259765625,
+              "min": 1183.3956298828125
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "focus_cm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 0.05999999865889549,
+              "min": 0.05999999865889549
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              }
+            },
+            "name": "harmonic",
+            "type": "BYTES"
+          },
+          {
+            "name": "height",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 1808.0,
+              "min": 896.0
+            }
+          },
+          {
+            "name": "initial_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": -0.43415066599845886,
+              "min": -0.43415066599845886
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "initial_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 574.791259765625,
+              "min": 287.3956298828125
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              }
+            },
+            "name": "probe",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              }
+            },
+            "name": "scanner",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              }
+            },
+            "name": "target",
+            "type": "BYTES"
+          },
+          {
+            "name": "timestamp_id",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 68894854.0,
+              "min": 68894145.0
+            }
+          },
+          {
+            "name": "voltage",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 35.0,
+              "min": 35.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "width",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "420"
+              },
+              "max": 200.0,
+              "min": 200.0
+            }
+          }
+        ],
+        "numExamples": "420"
+      }
+    },
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "27",
+        "28",
+        "27",
+        "28",
+        "27",
+        "27",
+        "28",
+        "27",
+        "27",
+        "28",
+        "27",
+        "27",
+        "28",
+        "27",
+        "28",
+        "27"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "dtce",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 4096.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "f0_hz",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 8333333.5,
+              "min": 1562500.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 0.4917465150356293,
+              "min": 0.15053464472293854
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 3276.4111328125,
+              "min": 843.2090454101562
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "focus_cm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 10.0,
+              "min": 4.5
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              }
+            },
+            "name": "harmonic",
+            "type": "BYTES"
+          },
+          {
+            "name": "height",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 2048.0,
+              "min": 640.0
+            }
+          },
+          {
+            "name": "initial_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": -0.15053464472293854,
+              "min": -0.4795292019844055
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "initial_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 1228.4112548828125,
+              "min": 203.20904541015625
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              }
+            },
+            "name": "probe",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              }
+            },
+            "name": "scanner",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              }
+            },
+            "name": "target",
+            "type": "BYTES"
+          },
+          {
+            "name": "timestamp_id",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 2449838011.0,
+              "min": 1334690587.0
+            }
+          },
+          {
+            "name": "voltage",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 70.0,
+              "min": 1.600000023841858
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "width",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "438"
+              },
+              "max": 200.0,
+              "min": 70.0
+            }
+          }
+        ],
+        "numExamples": "438"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "39",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "39",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "39",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "39",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "dtce",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 4096.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "f0_hz",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 8333333.5,
+              "min": 1404494.375
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 0.4917465150356293,
+              "min": 0.10210175812244415
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 3276.4111328125,
+              "min": 843.2090454101562
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "focus_cm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 10.0,
+              "min": 4.5
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              }
+            },
+            "name": "harmonic",
+            "type": "BYTES"
+          },
+          {
+            "name": "height",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 2048.0,
+              "min": 640.0
+            }
+          },
+          {
+            "name": "initial_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": -0.10210175812244415,
+              "min": -0.4856378734111786
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "initial_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 1228.4112548828125,
+              "min": 203.20904541015625
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              }
+            },
+            "name": "probe",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              }
+            },
+            "name": "scanner",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              }
+            },
+            "name": "target",
+            "type": "BYTES"
+          },
+          {
+            "name": "timestamp_id",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 2449837848.0,
+              "min": 1334690421.0
+            }
+          },
+          {
+            "name": "voltage",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 70.0,
+              "min": 1.600000023841858
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "width",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2556"
+              },
+              "max": 200.0,
+              "min": 40.0
+            }
+          }
+        ],
+        "numExamples": "2556"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "70",
+        "69",
+        "69",
+        "70"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "dtce",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 4096.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "f0_hz",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 4716981.0,
+              "min": 1893939.375
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 0.4917465150356293,
+              "min": 0.15053464472293854
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "final_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 2546.98046875,
+              "min": 1011.850830078125
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "focus_cm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 8.5,
+              "min": 6.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              }
+            },
+            "name": "harmonic",
+            "type": "BYTES"
+          },
+          {
+            "name": "height",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 1936.0,
+              "min": 736.0
+            }
+          },
+          {
+            "name": "initial_angle",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": -0.15053464472293854,
+              "min": -0.4856378734111786
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "initial_radius",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 621.3807373046875,
+              "min": 243.85084533691406
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              }
+            },
+            "name": "probe",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              }
+            },
+            "name": "scanner",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              }
+            },
+            "name": "target",
+            "type": "BYTES"
+          },
+          {
+            "name": "timestamp_id",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 2449837393.0,
+              "min": 1334699542.0
+            }
+          },
+          {
+            "name": "voltage",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 70.0,
+              "min": 1.600000023841858
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "width",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "278"
+              },
+              "max": 160.0,
+              "min": 70.0
+            }
+          }
+        ],
+        "numExamples": "278"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "das/dB",
+    "output": "dtce"
+  },
+  "version": "1.0.0"
+}

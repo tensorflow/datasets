@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,12 +25,13 @@ import re
 
 from absl import flags
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import py_utils
 
 
 FLAGS = flags.FLAGS
@@ -111,12 +112,14 @@ class RegisteredDataset(abc.ABCMeta):
     cls = super(RegisteredDataset, mcs).__new__(
         mcs, cls_name, bases, class_dict)
 
-    if name in _DATASET_REGISTRY:
+    if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
+      pass
+    elif name in _DATASET_REGISTRY:
       raise ValueError("Dataset with name %s already registered." % name)
-    if name in _IN_DEVELOPMENT_REGISTRY:
+    elif name in _IN_DEVELOPMENT_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as in development." % name)
-    if name in _ABSTRACT_DATASET_REGISTRY:
+    elif name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
@@ -182,6 +185,7 @@ def load(name,
          download=True,
          as_supervised=False,
          decoders=None,
+         read_config=None,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
@@ -256,6 +260,8 @@ def load(name,
       customized feature keys need to be present. See
       [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
       for more info.
+    read_config: `tfds.ReadConfig`, Additional options to configure the
+      input pipeline (e.g. seed, num parallel reads,...).
     with_info: `bool`, if True, tfds.load will return the tuple
       (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
       with the builder.
@@ -307,6 +313,7 @@ def load(name,
   as_dataset_kwargs.setdefault("decoders", decoders)
   as_dataset_kwargs.setdefault("in_memory", in_memory)
   as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
+  as_dataset_kwargs.setdefault("read_config", read_config)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

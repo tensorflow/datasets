@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,12 +30,7 @@ class BillsumTest(testing.DatasetBuilderTestCase):
       "test": 1,  # Number of fake test example
       "ca_test": 1  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = {
-      "us_train": "us_train.jsonl",
-      "us_test": "us_test.jsonl",
-      "ca_test": "ca_test.jsonl"
-  }
-
+  DL_EXTRACT_RESULT = ""
 
 if __name__ == "__main__":
   testing.test_main()

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ from __future__ import print_function
 import fnmatch
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip"
@@ -67,7 +67,7 @@ class Malaria(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_NAMES),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage="https://lhncbc.nlm.nih.gov/publication/pub9932",
         citation=_CITATION,
     )
 

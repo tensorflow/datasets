@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,8 @@ class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
       'test': 3,
   }
 
-  DL_EXTRACT_RESULT = ['list.tar', 'Annotation.tar', 'Images.tar']
+  DL_DOWNLOAD_RESULT = 'Images.tar'
+  DL_EXTRACT_RESULT = ['list.tar', 'Annotation.tar']
 
 
 if __name__ == '__main__':

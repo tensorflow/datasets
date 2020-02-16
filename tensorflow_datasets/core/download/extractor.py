@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import zipfile
 import concurrent.futures
 import promise
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
@@ -85,12 +85,14 @@ class _Extractor(object):
     """Returns `to_path` once resource has been extracted there."""
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
+    path = None
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
-      msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)
+      msg = 'Error while extracting %s to %s (file: %s) : %s' % (
+          from_path, to_path, path, err)
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.

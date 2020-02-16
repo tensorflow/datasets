@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,10 +40,6 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
       "ILSVRC2012_img_train.tar",
       "ILSVRC2012_img_val.tar",
   ]
-
-
-class Imagenet2012S3(Imagenet2012Test):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

@@ -1,0 +1,70 @@
+{
+  "citation": "\n@misc{chollet_francois_2019,\n  title     = {The Measure of Intelligence},\n  url       = {https://arxiv.org/abs/1911.01547},\n  journal   = {arXiv.org},\n  author    = {Francois Chollet},\n  year      = {2019},\n  month     = {Nov}\n}\n",
+  "description": "\nARC can be seen as a general artificial intelligence benchmark, as a program\nsynthesis benchmark, or as a psychometric intelligence test. It is targeted at\nboth humans and artificially intelligent systems that aim at emulating a\nhuman-like form of general fluid intelligence.\n",
+  "location": {
+    "urls": [
+      "https://github.com/fchollet/ARC/"
+    ]
+  },
+  "name": "arc",
+  "schema": {
+    "feature": [
+      {
+        "name": "task_id",
+        "type": "BYTES"
+      },
+      {
+        "name": "test"
+      },
+      {
+        "name": "train"
+      }
+    ]
+  },
+  "sizeInBytes": "476234",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "400"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "400"
+              }
+            },
+            "name": "task_id",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "400"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "400"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "400"
+              }
+            },
+            "name": "task_id",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "400"
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

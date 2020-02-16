@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -52,14 +52,11 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})
   ]
-  # Versions history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
@@ -78,7 +75,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         "two test sets of previously seen (testseen) and unseen "
         "(testnovel) objects. This is the small 64x64 version.",
         features=features,
-        urls=["https://sites.google.com/view/sna-visual-mpc/"],
+        homepage="https://sites.google.com/view/sna-visual-mpc/",
         citation=_CITATION,
     )
 

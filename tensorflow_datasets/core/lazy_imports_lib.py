@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,9 +30,10 @@ def _try_import(module_name):
     mod = importlib.import_module(module_name)
     return mod
   except ImportError:
-    err_msg = ("Tried importing %s but failed. See setup.py extras_require. "
-               "The dataset you are trying to use may have additional "
-               "dependencies.")
+    err_msg = ("Failed importing {name}. This likely means that the dataset "
+               "requires additional dependencies that have to be "
+               "manually installed (usually with `pip install {name}`). See "
+               "setup.py extras_require.").format(name=module_name)
     utils.reraise(suffix=err_msg)
 
 
@@ -51,6 +52,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def crepe(cls):
+    return _try_import("crepe")
+
+  @utils.classproperty
+  @classmethod
   def cv2(cls):
     return _try_import("cv2")  # pylint: disable=unreachable
 
@@ -58,6 +64,11 @@ class LazyImporter(object):
   @classmethod
   def langdetect(cls):
     return _try_import("langdetect")
+
+  @utils.classproperty
+  @classmethod
+  def librosa(cls):
+    return _try_import("librosa")
 
   @utils.classproperty
   @classmethod
@@ -111,6 +122,11 @@ class LazyImporter(object):
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
+
+  @utils.classproperty
+  @classmethod
+  def tensorflow_io(cls):
+    return _try_import("tensorflow_io")
 
   @utils.classproperty
   @classmethod

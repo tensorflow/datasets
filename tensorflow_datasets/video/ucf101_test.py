@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,6 +53,11 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
     self.assertEqual(dict(label_frequncies),
                      {'test': {'Archery': 1, 'Nunchucks': 1},
                       'train': {'Archery': 1, 'Nunchucks': 2}})
+
+
+class Ucf101S3Test(Ucf101Test):
+  VERSION = 'experimental_latest'
+
 
 if __name__ == '__main__':
   testing.test_main()

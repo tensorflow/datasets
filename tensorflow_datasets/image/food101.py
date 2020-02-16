@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
@@ -49,7 +50,12 @@ _CITATION = """\
 class Food101(tfds.core.GeneratorBasedBuilder):
   """Food-101 Images dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "1.0.0",
+          tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55"),
+  ]
 
   def _info(self):
     """Define Dataset Info."""
@@ -63,32 +69,42 @@ class Food101(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
         supervised_keys=("image", "label"),
-        urls=[_BASE_URL],
+        homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
 
-    path = dl_manager.download_and_extract(_BASE_URL)
+    dl_path = dl_manager.download_and_extract(_BASE_URL)
+    meta_path = os.path.join(dl_path, "food-101", "meta")
+    image_dir_path = os.path.join(dl_path, "food-101", "images")
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=4,
             gen_kwargs={
-                "data_dir_path": os.path.join(path, "food-101/images"),
+                "json_file_path": os.path.join(meta_path, "train.json"),
+                "image_dir_path": image_dir_path
+            },
+        ),
+
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                "json_file_path": os.path.join(meta_path, "test.json"),
+                "image_dir_path": image_dir_path
             },
         ),
     ]
 
-  def _generate_examples(self, data_dir_path):
+  def _generate_examples(self, json_file_path, image_dir_path):
     """Generate images and labels for splits."""
-
-    for class_name in tf.io.gfile.listdir(data_dir_path):
-      class_dir_path = os.path.join(data_dir_path, class_name)
-      for image_name in tf.io.gfile.listdir(class_dir_path):
-        image = os.path.join(class_dir_path, image_name)
-        yield image, {
+    with tf.io.gfile.GFile(json_file_path) as f:
+      data = json.loads(f.read())
+    for label, images in data.items():
+      for image_name in images:
+        image = os.path.join(image_dir_path, image_name + ".jpg")
+        yield image_name, {
             "image": image,
-            "label": class_name,
+            "label": label,
         }

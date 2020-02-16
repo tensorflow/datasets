@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,11 @@ import tensorflow_datasets.testing as tfds_test
 class DeepWeedsTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = deep_weeds.DeepWeeds
   SPLITS = {
-      "train": 4,
+      "train": 9,
+  }
+  DL_EXTRACT_RESULT = {
+      "image": "images",
+      "label": "labels.csv",
   }
 
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
+from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
 from tensorflow_datasets.core.visualization import show_examples
 from tensorflow_datasets.version import __version__
@@ -51,6 +52,7 @@ __all__ = [
     "list_builders",
     "load",
     "percent",
+    "ReadConfig",
     "Split",
     "testing",
     "disable_progress_bar",

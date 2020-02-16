@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """Stanford Online Products Dataset."""
 import csv
 import os
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DOWNLOAD_LINK = "ftp://cs.stanford.edu/cs/cvgl/Stanford_Online_Products.zip"
@@ -46,7 +46,7 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
         description=("Stanford Online Products Dataset"),
         builder=self,
         citation=_CITATION,
-        urls=["http://cvgl.stanford.edu/projects/lifted_struct/"],
+        homepage="http://cvgl.stanford.edu/projects/lifted_struct/",
         features=tfds.features.FeaturesDict({
             "class_id":
                 tfds.features.ClassLabel(num_classes=22634),

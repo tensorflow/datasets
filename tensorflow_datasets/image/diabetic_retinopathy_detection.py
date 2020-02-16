@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 
@@ -50,22 +50,22 @@ _BTGRAHAM_DESCRIPTION_PATTERN = (
 class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
   """BuilderConfig for DiabeticRetinopathyDetection."""
 
-  def __init__(self, version, target_pixels=None, **kwargs):
+  def __init__(self, old_version, target_pixels=None, **kwargs):
     """BuilderConfig for DiabeticRetinopathyDetection.
 
     Args:
-      version: str version, defined with {S3: False} experiment.
+      old_version: str old_version.
       target_pixels: If given, rescale the images so that the total number of
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
     super(DiabeticRetinopathyDetectionConfig, self).__init__(
         version=tfds.core.Version(
-            version, experiments={tfds.core.Experiment.S3: False}),
+            "3.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "3.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                old_version, experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self._target_pixels = target_pixels
@@ -78,24 +78,32 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You have to download this dataset from Kaggle.
+  https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+  After downloading, unpack the test.zip file into test/ directory in manual_dir
+  and sample.zip to sample/. Also unpack the sampleSubmissions.csv and
+  trainLabels.csv.
+  """
+
   BUILDER_CONFIGS = [
       DiabeticRetinopathyDetectionConfig(
           name="original",
-          version="2.0.0",
+          old_version="2.0.0",
           description="Images at their original resolution and quality."),
       DiabeticRetinopathyDetectionConfig(
           name="1M",
-          version="2.1.0",
+          old_version="2.1.0",
           description="Images have roughly 1,000,000 pixels, at 72 quality.",
           target_pixels=1000000),
       DiabeticRetinopathyDetectionConfig(
           name="250K",
-          version="2.1.0",
+          old_version="2.1.0",
           description="Images have roughly 250,000 pixels, at 72 quality.",
           target_pixels=250000),
       DiabeticRetinopathyDetectionConfig(
           name="btgraham-300",
-          version="1.0.0",
+          old_version="1.0.0",
           description=_BTGRAHAM_DESCRIPTION_PATTERN.format(300),
           target_pixels=300),
   ]
@@ -111,7 +119,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             # From 0 (no DR - saine) to 4 (Proliferative DR). -1 means no label.
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
-        urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
+        homepage="https://www.kaggle.com/c/diabetic-retinopathy-detection/data",
         citation=_CITATION,
     )
 

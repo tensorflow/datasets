@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from __future__ import print_function
 import os
 import re
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -53,7 +52,7 @@ _DOWNLOAD_URL = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 class IMDBReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for IMDBReviews."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for IMDBReviews.
 
@@ -65,11 +64,11 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
     """
     super(IMDBReviewsConfig, self).__init__(
         version=tfds.core.Version(
-            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
+                "0.1.0", experiments={tfds.core.Experiment.S3: False}),
         ],
         **kwargs)
     self.text_encoder_config = (
@@ -118,7 +117,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
-        urls=["http://ai.stanford.edu/~amaas/data/sentiment/"],
+        homepage="http://ai.stanford.edu/~amaas/data/sentiment/",
         citation=_CITATION,
     )
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ from __future__ import print_function
 import json
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -80,6 +80,12 @@ class Newsroom(tfds.core.GeneratorBasedBuilder):
   """NEWSROOM Dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You should download the dataset from https://summari.es/download/
+  The webpage requires registration.
+  After downloading, please put dev.jsonl, test.jsonl and train.jsonl
+  files in the manual_dir.
+  """
 
   def _info(self):
     features = {
@@ -95,7 +101,7 @@ class Newsroom(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://summari.es"],
+        homepage="https://summari.es",
         citation=_CITATION,
     )
 

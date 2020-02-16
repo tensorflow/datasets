@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ from __future__ import print_function
 import json
 import os
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -66,7 +65,7 @@ _URLS = {
 class ScientificPapersConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Scientific Papers."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, filename=None, **kwargs):
     """BuilderConfig for Wikihow.
 
@@ -74,8 +73,9 @@ class ScientificPapersConfig(tfds.core.BuilderConfig):
       filename: filename of different configs for the dataset.
       **kwargs: keyword arguments forwarded to super.
     """
+    # 1.1.0 remove sentence breaker <S> and </S> in summary.
     super(ScientificPapersConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.1.0"), **kwargs)
     self.filename = filename
 
 
@@ -99,7 +99,7 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
             "section_names": tfds.features.Text(),
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/armancohan/long-summarization"],
+        homepage="https://github.com/armancohan/long-summarization",
         citation=_CITATION,
     )
 
@@ -134,8 +134,13 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
         # "section_names": list[str], list of section names.
         # "sections": list[list[str]], list of sections (list of paragraphs)
         d = json.loads(line)
+        summary = "\n".join(d["abstract_text"])
+        # In original paper, <S> and </S> are not used in vocab during training
+        # or during decoding.
+        # https://github.com/armancohan/long-summarization/blob/master/data.py#L27
+        summary = summary.replace("<S>", "").replace("</S>", "")
         yield d["article_id"], {
             _DOCUMENT: "\n".join(d["article_text"]),
-            _SUMMARY: "\n".join(d["abstract_text"]),
+            _SUMMARY: summary,
             "section_names": "\n".join(d["section_names"])
         }

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -55,7 +54,7 @@ _DATA_OPTIONS = ["32x32", "64x64"]
 class DownsampledImagenetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Downsampled Imagenet."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a DownsampledImagenetConfig.
 
@@ -80,11 +79,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
               "A dataset consisting of Train and Validation images of " +
               config_name + " resolution."),
           version=tfds.core.Version(
-              "1.0.0", experiments={tfds.core.Experiment.S3: False}),
+              "2.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
           supported_versions=[
               tfds.core.Version(
-                  "2.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
+                  "1.0.0", experiments={tfds.core.Experiment.S3: False}),
           ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
@@ -98,7 +97,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
         }),
         supervised_keys=None,
-        urls=["http://image-net.org/small/download.php"],
+        homepage="http://image-net.org/small/download.php",
         citation=_CITATION,
     )
 

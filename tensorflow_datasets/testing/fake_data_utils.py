@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import random
 import tempfile
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 
@@ -54,7 +54,11 @@ def get_random_jpeg(height=None, width=None, channels=CHANNELS_NB):
 
 def get_random_png(height=None, width=None, channels=CHANNELS_NB):
   """Returns path to PNG picture."""
-  image = get_random_picture(height, width, channels)
+  # Big randomly generated pngs take large amounts of diskspace.
+  # Instead, we resize a 4x4 random image to the png size.
+  image = get_random_picture(4, 4, channels)
+  image = tf.image.resize_nearest_neighbor(
+      tf.expand_dims(image, 0), (height, width))[0]
   png = tf.image.encode_png(image)
   with utils.nogpu_session() as sess:
     res = sess.run(png)

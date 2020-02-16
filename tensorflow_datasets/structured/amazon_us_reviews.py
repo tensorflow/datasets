@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,8 @@ from __future__ import print_function
 
 import collections
 import csv
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -91,7 +90,7 @@ _DL_URLS = {
 class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AmazonUSReviews."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a AmazonUSReviewsConfig.
 
@@ -140,7 +139,7 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
                 ])
         }),
         supervised_keys=None,
-        urls=["https://s3.amazonaws.com/amazon-reviews-pds/readme.html"],
+        homepage="https://s3.amazonaws.com/amazon-reviews-pds/readme.html",
         citation=_CITATION,
     )
 
@@ -151,7 +150,7 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name="train", num_shards=10, gen_kwargs={
+            name="train", gen_kwargs={
                 "file_path": path,
             }),
     ]

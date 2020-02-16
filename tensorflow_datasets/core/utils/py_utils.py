@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,13 +29,16 @@ import os
 import sys
 import uuid
 
-import psutil
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
 
 
 # pylint: disable=g-import-not-at-top
+try:  # Use shutil on Python 3.3+
+  from shutil import disk_usage  # pylint: disable=g-importing-member
+except ImportError:
+  from psutil import disk_usage  # pylint: disable=g-importing-member
 if sys.version_info[0] > 2:
   import functools
 else:
@@ -49,6 +52,19 @@ else:
 # https://stackoverflow.com/questions/14946264/python-lru-cache-decorator-per-instance
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
+
+
+def is_notebook():
+  """Returns True if running in a notebook (Colab, Jupyter) environement."""
+  # Inspired from the tfdm autonotebook code
+  try:
+    from IPython import get_ipython  # pylint: disable=g-import-not-at-top
+    if "IPKernelApp" not in get_ipython().config:
+      return False  # Run in a IPython terminal
+  except:  # pylint: disable=bare-except
+    return False
+  else:
+    return True
 
 
 @contextlib.contextmanager
@@ -338,7 +354,7 @@ def rgetattr(obj, attr, *args):
 
 def has_sufficient_disk_space(needed_bytes, directory="."):
   try:
-    free_bytes = psutil.disk_usage(os.path.abspath(directory)).free
+    free_bytes = disk_usage(os.path.abspath(directory)).free
   except OSError:
     return True
   return needed_bytes < free_bytes

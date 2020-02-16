@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   If the length of the sequence is static and known in advance, it should be
   specified in the constructor using the `length` param.
 
-  Note that `SequenceDict` do not support features which are of type
+  Note that `Sequence` does not support features which are of type
   `tf.io.FixedLenSequenceFeature`.
 
   Example:
@@ -144,15 +144,20 @@ class Sequence(top_level_feature.TopLevelFeature):
         for sequence_elem in sequence_elements
     ]
 
-    # Then merge the elements back together
+    # Then convert back list[nested dict] => nested dict[list]
     def _stack_nested(sequence_elements):
+      """Recursivelly stack the tensors from the same dict field."""
       if isinstance(sequence_elements[0], dict):
         return {
             # Stack along the first dimension
             k: _stack_nested(sub_sequence)
             for k, sub_sequence in utils.zip_dict(*sequence_elements)
         }
-      return stack_arrays(*sequence_elements)
+      # Note: As each field can be a nested ragged list, we don't check here
+      # that all elements from the list have matching dtype/shape.
+      # Checking is done in `example_serializer` when elements
+      # are converted to numpy array and stacked togethers.
+      return list(sequence_elements)
 
     return _stack_nested(sequence_elements)
 
@@ -203,14 +208,7 @@ class Sequence(top_level_feature.TopLevelFeature):
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
 
-def stack_arrays(*elems):
-  if isinstance(elems[0], np.ndarray):
-    return np.stack(elems)
-  else:
-    return [e for e in elems]
-
-
-def np_to_list(elem):
+def _np_to_list(elem):
   """Returns list from list, tuple or ndarray."""
   if isinstance(elem, list):
     return elem
@@ -227,7 +225,7 @@ def np_to_list(elem):
 def _transpose_dict_list(dict_list):
   """Transpose a nested dict[list] into a list[nested dict]."""
   # 1. Unstack numpy arrays into list
-  dict_list = utils.map_nested(np_to_list, dict_list, dict_only=True)
+  dict_list = utils.map_nested(_np_to_list, dict_list, dict_only=True)
 
   # 2. Extract the sequence length (and ensure the length is constant for all
   # elements)

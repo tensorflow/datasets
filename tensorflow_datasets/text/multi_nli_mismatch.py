@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -60,7 +59,7 @@ ROOT_URL = "http://storage.googleapis.com/tfds-data/downloads/multi_nli/multinli
 class MultiNLIMismatchConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MultiNLI Mismatch."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for MultiNLI Mismatch.
 
@@ -103,7 +102,7 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
         supervised_keys=None,
-        urls=["https://www.nyu.edu/projects/bowman/multinli/"],
+        homepage="https://www.nyu.edu/projects/bowman/multinli/",
         citation=_CITATION,
     )
 

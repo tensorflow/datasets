@@ -22,6 +22,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 * [Usage](#usage)
 * [`DatasetBuilder`](#datasetbuilder)
 * [NumPy usage](#numpy-usage-with-tfdsas-numpy)
+* [Citation](#citation)
 * [Want a certain dataset?](#want-a-certain-dataset)
 * [Disclaimers](#disclaimers)
 
@@ -30,7 +31,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.14+ to be installed.
+# Requires TF 1.15+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:
@@ -46,14 +47,13 @@ to receive updates on the project.
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
-# tfds works in both Eager and Graph modes
-tf.compat.v1.enable_eager_execution()
+# Here we assume Eager mode is enabled (TF2), but tfds also works in Graph mode.
 
 # See available datasets
 print(tfds.list_builders())
 
 # Construct a tf.data.Dataset
-ds_train, ds_test = tfds.load(name="mnist", split=["train", "test"])
+ds_train = tfds.load(name="mnist", split="train", shuffle_files=True)
 
 # Build your input pipeline
 ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
@@ -80,44 +80,48 @@ import tensorflow_datasets as tfds
 # The following is the equivalent of the `load` call above.
 
 # You can fetch the DatasetBuilder class by string
-mnist_builder = tfds.builder("mnist")
+mnist_builder = tfds.builder('mnist')
 
 # Download the dataset
 mnist_builder.download_and_prepare()
 
 # Construct a tf.data.Dataset
-ds = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
+ds = mnist_builder.as_dataset(split='train')
 
 # Get the `DatasetInfo` object, which contains useful information about the
 # dataset and its features
 info = mnist_builder.info
 print(info)
+```
 
-    tfds.core.DatasetInfo(
-        name='mnist',
-        version=1.0.0,
-        description='The MNIST database of handwritten digits.',
-        urls=[u'http://yann.lecun.com/exdb/mnist/'],
-        features=FeaturesDict({
-            'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-            'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
-        },
-        total_num_examples=70000,
-        splits={
-            u'test': <tfds.core.SplitInfo num_examples=10000>,
-            u'train': <tfds.core.SplitInfo num_examples=60000>
-        },
-        supervised_keys=(u'image', u'label'),
-        citation='"""
-            @article{lecun2010mnist,
-              title={MNIST handwritten digit database},
-              author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-              journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-              volume={2},
-              year={2010}
-            }
-      """',
-  )
+This will print the dataset info content:
+
+```
+tfds.core.DatasetInfo(
+    name='mnist',
+    version=1.0.0,
+    description='The MNIST database of handwritten digits.',
+    homepage='http://yann.lecun.com/exdb/mnist/',
+    features=FeaturesDict({
+        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
+    },
+    total_num_examples=70000,
+    splits={
+        'test': <tfds.core.SplitInfo num_examples=10000>,
+        'train': <tfds.core.SplitInfo num_examples=60000>
+    },
+    supervised_keys=('image', 'label'),
+    citation='"""
+        @article{lecun2010mnist,
+          title={MNIST handwritten digit database},
+          author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+          journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+          volume={2},
+          year={2010}
+        }
+    """',
+)
 ```
 
 You can also get details about the classes (number of classes and their names).
@@ -142,7 +146,7 @@ input pipelines with `tf.data` but use whatever you'd like for your model
 components.
 
 ```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
+train_ds = tfds.load("mnist", split="train")
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
 for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
@@ -158,6 +162,18 @@ numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.
+
+### Citation
+
+Please include the following citation when using `tensorflow-datasets` for a
+paper, in addition to any citation specific to the used datasets.
+
+```
+@misc{TFDS,
+  title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
+  howpublished = {\url{https://www.tensorflow.org/datasets}},
+}
+```
 
 ## Want a certain dataset?
 

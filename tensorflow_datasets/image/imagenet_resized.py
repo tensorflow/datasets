@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ class ImagenetResized(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(names_file=names_file)
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://patrykchrabaszcz.github.io/Imagenet32/'],
+        homepage='https://patrykchrabaszcz.github.io/Imagenet32/',
         citation=_CITATION,
     )
 
@@ -118,7 +118,6 @@ class ImagenetResized(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive':
                     itertools.chain(*[
@@ -129,7 +128,6 @@ class ImagenetResized(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
             },

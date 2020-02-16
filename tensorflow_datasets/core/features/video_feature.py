@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import subprocess
 import tempfile
 
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 
@@ -31,7 +31,7 @@ from tensorflow_datasets.core.features import sequence_feature
 class Video(sequence_feature.Sequence):
   """`FeatureConnector` for videos, encoding frames individually on disk.
 
-  Video: The image connector accepts as input a 4 dimensional uint8 array
+  Video: The image connector accepts as input a 4 dimensional `tf.uint8` array
   representing a video, a sequence of paths to encoded frames, or a path or a
   file object that can be decoded with ffmpeg. Note that not all formats in
   ffmpeg support reading from pipes, so providing a file object might fail.
@@ -39,39 +39,50 @@ class Video(sequence_feature.Sequence):
   copy it to a temporary local file before passing it to ffmpeg.
 
   Output:
-    video: tf.Tensor of type tf.uint8 and shape
+    video: tf.Tensor of type `tf.uint8` and shape
       [num_frames, height, width, channels], where channels must be 1 or 3
 
   Example:
     * In the DatasetInfo object:
-        features=features.FeatureDict({
-            'video': features.Video(shape=(None, 64, 64, 3)),
-        })
 
-    * During generation:
-        ```
-        yield {
-            'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
-        }
-        ```
-        or
-        ```
-        yield {
-    '      video': ['path/to/frame001.png', 'path/to/frame002.png'],
-        }
-        ```
-        or
-        ```
-        yield {
-              'input': '/path/to/video.avi',
-        }
-        ```
-        or
-        ```
-        yield {
-              'input': gfile.GFile('/complex/path/video.avi'),
-        }
-        ```
+    ```
+    features=features.FeatureDict({
+        'video': features.Video(shape=(None, 64, 64, 3)),
+    })
+    ```
+
+    * During generation, you can use any of:
+
+    ```
+    yield {
+        'video': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
+    }
+    ```
+
+    or list of frames:
+
+    ```
+    yield {
+        'video': ['path/to/frame001.png', 'path/to/frame002.png'],
+    }
+    ```
+
+    or path to video:
+
+    ```
+    yield {
+        'video': '/path/to/video.avi',
+    }
+    ```
+
+    or file object:
+
+    ```
+    yield {
+        'video': tf.io.gfile.GFile('/complex/path/video.avi'),
+    }
+    ```
+
   """
 
   def __init__(self, shape, encoding_format='png', ffmpeg_extra_args=()):
@@ -151,7 +162,8 @@ class Video(sequence_feature.Sequence):
       if not os.path.isfile(video_or_path_or_fobj):
         _, video_temp_path = tempfile.mkstemp()
         try:
-          tf.gfile.Copy(video_or_path_or_fobj, video_temp_path, overwrite=True)
+          tf.io.gfile.copy(
+              video_or_path_or_fobj, video_temp_path, overwrite=True)
           encoded_video = self._ffmpeg_decode(video_temp_path)
         finally:
           os.unlink(video_temp_path)

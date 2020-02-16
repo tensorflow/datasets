@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ from tensorflow_datasets.core import units
 class UnitsTest(testing.TestCase):
 
   def test_none(self):
-    self.assertEqual("?? GiB", units.size_str(None))
+    self.assertEqual("Unknown size", units.size_str(None))
 
   def test_normal_sizes(self):
     self.assertEqual("1.50 PiB", units.size_str(1.5 * units.PiB))

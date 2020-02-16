@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 
 
@@ -63,10 +63,25 @@ class ExampleParser(object):
       example: A nested `dict` of `tf.Tensor` values. The structure and tensors
         shape/dtype match the  `example_specs` provided at construction.
     """
+    nested_feature_specs = self._build_feature_specs()
+
+    # Because of RaggedTensor specs, feature_specs can be a 2-level nested dict,
+    # so have to wrap `tf.io.parse_single_example` between
+    # `flatten_nest_dict`/`pack_as_nest_dict`.
+    # {
+    #     'video/image': tf.io.FixedLenSequenceFeature(...),
+    #     'video/object/bbox': {
+    #         'ragged_flat_values': tf.io.FixedLenSequenceFeature(...),
+    #         'ragged_row_lengths_0', tf.io.FixedLenSequenceFeature(...),
+    #     },
+    # }
+    flat_feature_specs = utils.flatten_nest_dict(nested_feature_specs)
     example = tf.io.parse_single_example(
         serialized=serialized_example,
-        features=self._build_feature_specs(),
+        features=flat_feature_specs,
     )
+    example = utils.pack_as_nest_dict(example, nested_feature_specs)
+
     example = {
         k: _deserialize_single_field(example_data, tensor_info)
         for k, (example_data, tensor_info)
@@ -79,9 +94,12 @@ class ExampleParser(object):
 
 def _deserialize_single_field(example_data, tensor_info):
   """Reconstruct the serialized field."""
+  # Ragged tensor case:
+  if tensor_info.sequence_rank > 1:
+    example_data = _dict_to_ragged(example_data, tensor_info)
 
   # Restore shape if possible. TF Example flattened it.
-  if tensor_info.shape.count(None) < 2:
+  elif tensor_info.shape.count(None) < 2:
     shape = [-1 if i is None else i for i in tensor_info.shape]
     example_data = tf.reshape(example_data, shape)
 
@@ -89,6 +107,17 @@ def _deserialize_single_field(example_data, tensor_info):
   if example_data.dtype != tensor_info.dtype:
     example_data = tf.dtypes.cast(example_data, tensor_info.dtype)
   return example_data
+
+
+def _dict_to_ragged(example_data, tensor_info):
+  """Reconstruct the ragged tensor from the row ids."""
+  return tf.RaggedTensor.from_nested_row_lengths(
+      flat_values=example_data["ragged_flat_values"],
+      nested_row_lengths=[
+          example_data["ragged_row_lengths_{}".format(k)]
+          for k in range(tensor_info.sequence_rank - 1)
+      ],
+  )
 
 
 def _to_tf_example_spec(tensor_info):
@@ -126,6 +155,24 @@ def _to_tf_example_spec(tensor_info):
         allow_missing=True,
         default_value=tensor_info.default_value,
     )
+  elif tensor_info.sequence_rank > 1:  # RaggedTensor
+    # Decoding here should match encoding from `_add_ragged_fields` in
+    # `example_serializer.py`
+    tf_specs = {
+        "ragged_row_lengths_{}".format(k): tf.io.FixedLenSequenceFeature(  # pylint: disable=g-complex-comprehension
+            shape=(),
+            dtype=tf.int64,
+            allow_missing=True,
+        )
+        for k in range(tensor_info.sequence_rank - 1)
+    }
+    tf_specs["ragged_flat_values"] = tf.io.FixedLenSequenceFeature(
+        shape=tensor_info.shape[tensor_info.sequence_rank:],
+        dtype=dtype,
+        allow_missing=True,
+        default_value=tensor_info.default_value,
+    )
+    return tf_specs
   else:
     raise NotImplementedError(
         "Tensor with a unknown dimension not at the first position not "

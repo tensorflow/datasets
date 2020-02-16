@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,8 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 
@@ -63,7 +62,7 @@ _DATA_OPTIONS = ["v4", "v6"]
 class Cifar10_1Config(tfds.core.BuilderConfig):  # pylint: disable=invalid-name
   """BuilderConfig for Cifar-10.1."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a Cifar10_1Config.
 
@@ -112,7 +111,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://github.com/modestyachts/CIFAR-10.1"],
+        homepage="https://github.com/modestyachts/CIFAR-10.1",
         citation=_CITATION,
     )
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,10 +44,11 @@ import tempfile
 from absl import logging
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -66,7 +67,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
     version={version},
     description='{description}',
-    urls={urls},
+    homepage='{homepage}',
     features={features},
     total_num_examples={total_num_examples},
     splits={splits},
@@ -86,9 +87,9 @@ class DatasetInfo(object):
   See the constructor arguments and properties for a full list.
 
   Note: Not all fields are known on construction and may be updated later
-  by `compute_dynamic_properties`. For example, the number of examples in each
-  split is typically updated during data generation (i.e. on calling
-  `builder.download_and_prepare()`).
+  by `compute_dynamic_properties`. For example: the min and max values of a
+  feature is typically updated during data generation (i.e. on calling
+  builder.download_and_prepare()`).
   """
 
   @api_utils.disallow_positional_args
@@ -97,6 +98,7 @@ class DatasetInfo(object):
                description=None,
                features=None,
                supervised_keys=None,
+               homepage=None,
                urls=None,
                citation=None,
                metadata=None,
@@ -115,7 +117,8 @@ class DatasetInfo(object):
         `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
         with `as_supervised=True`, the `tf.data.Dataset` object will yield
         the (input, target) defined here.
-      urls: `list(str)`, optional, the homepage(s) for this dataset.
+      homepage: `str`, optional, the homepage for this dataset.
+      urls: DEPRECATED, use `homepage` instead.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
@@ -134,10 +137,12 @@ class DatasetInfo(object):
         citation=citation,
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
-    if urls:
-      if isinstance(urls, six.string_types):
-        urls = [urls]
-      self._info_proto.location.urls[:] = urls
+
+    if urls:  # TODO(epot):Delete field once every user have been migrated
+      raise ValueError("`urls=` field is deprecated. Please use "
+                       "`homepage='{}'` instead.".format(urls[0]))
+    if homepage:
+      self._info_proto.location.urls[:] = [homepage]
 
     if features:
       if not isinstance(features, top_level_feature.TopLevelFeature):
@@ -146,7 +151,7 @@ class DatasetInfo(object):
             "the top-level. Got {}".format(features))
       features._set_top_level()  # pylint: disable=protected-access
     self._features = features
-    self._splits = splits_lib.SplitDict()
+    self._splits = splits_lib.SplitDict(self._builder.name)
     if supervised_keys is not None:
       assert isinstance(supervised_keys, tuple)
       assert len(supervised_keys) == 2
@@ -188,20 +193,35 @@ class DatasetInfo(object):
     return self._builder.version
 
   @property
-  def homepage_url(self):
-    return self.urls and self.urls[0] or "https://www.tensorflow.org/datasets"
+  def homepage(self):
+    urls = self.as_proto.location.urls
+    tfds_homepage = "https://www.tensorflow.org/datasets/catalog/{}".format(
+        self.name)
+    return urls and urls[0] or tfds_homepage
 
   @property
   def citation(self):
     return self.as_proto.citation
 
   @property
-  def size_in_bytes(self):
-    return self.as_proto.size_in_bytes
+  def data_dir(self):
+    return self._builder.data_dir
 
-  @size_in_bytes.setter
-  def size_in_bytes(self, size):
-    self.as_proto.size_in_bytes = size
+  @property
+  def dataset_size(self):
+    """Generated dataset files size, in bytes."""
+    # For old datasets, maybe empty.
+    return sum(split.num_bytes for split in self.splits.values())
+
+  @property
+  def download_size(self):
+    """Downloaded files size, in bytes."""
+    # Fallback to deprecated `size_in_bytes` if `download_size` is empty.
+    return self.as_proto.download_size or self.as_proto.size_in_bytes
+
+  @download_size.setter
+  def download_size(self, size):
+    self.as_proto.download_size = size
 
   @property
   def features(self):
@@ -258,10 +278,6 @@ class DatasetInfo(object):
     del self.as_proto.splits[:]  # Clear previous
     for split_info in split_dict.to_proto():
       self.as_proto.splits.add().CopyFrom(split_info)
-
-  @property
-  def urls(self):
-    return self.as_proto.location.urls
 
   @property
   def initialized(self):
@@ -352,7 +368,8 @@ class DatasetInfo(object):
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
-    self._set_splits(splits_lib.SplitDict.from_proto(parsed_proto.splits))
+    split_dict = splits_lib.SplitDict.from_proto(self.name, parsed_proto.splits)
+    self._set_splits(split_dict)
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
@@ -432,7 +449,7 @@ class DatasetInfo(object):
         features=features_pprint,
         splits=splits_pprint,
         citation=citation_pprint,
-        urls=self.urls,
+        homepage=self.homepage,
         supervised_keys=self.supervised_keys,
         # Proto add a \n that we strip.
         redistribution_info=str(self.redistribution_info).strip())
@@ -544,8 +561,8 @@ def get_dataset_feature_statistics(builder, split):
 
   # Start here, we've processed all examples.
 
-  output_shapes_dict = dataset.output_shapes
-  output_types_dict = dataset.output_types
+  output_shapes_dict = tf.compat.v1.data.get_output_shapes(dataset)
+  output_types_dict = tf.compat.v1.data.get_output_types(dataset)
 
   for feature_name in sorted(feature_to_num_examples.keys()):
     # Try to fill in the schema.
@@ -651,3 +668,57 @@ class MetadataDict(Metadata, dict):
     self.clear()
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
       self.update(json.load(f))
+
+
+class BeamMetadataDict(MetadataDict):
+  """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
+
+  def __init__(self):
+    super(BeamMetadataDict, self).__init__()
+    self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
+
+  def _temp_filepath(self, key):
+    return os.path.join(self._tempdir, "%s.json" % key)
+
+  def __setitem__(self, key, item):
+    """Creates write sink for beam PValues or sets value of key in `dict`.
+
+    If the item is a PValue, it is expected to contain exactly one element,
+    which will be written out as a temporary JSON file once the beam pipeline
+    runs. These outputs will be loaded and stored in a single JSON when
+    `save_metadata` is called after the pipeline completes.
+
+    Args:
+      key: hashable type, the key for the item.
+      item: `beam.pvalue.PValue` or other, the metadata value.
+    """
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    if isinstance(item, beam.pvalue.PValue):
+      if key in self:
+        raise ValueError("Already added PValue with key: %s" % key)
+      logging.info("Lazily adding metadata item with Beam: %s", key)
+      def _to_json(item_list):
+        if len(item_list) != 1:
+          raise ValueError(
+              "Each metadata PValue must contain a single element. Got %d." %
+              len(item_list))
+        item = item_list[0]
+        return json.dumps(item)
+      _ = (item
+           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+           | "metadata_%s_write" % key >> beam.io.WriteToText(
+               self._temp_filepath(key),
+               num_shards=1,
+               shard_name_template=""))
+    super(BeamMetadataDict, self).__setitem__(key, item)
+
+  def save_metadata(self, data_dir):
+    """Save the metadata inside the beam job."""
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    for key, item in self.items():
+      if isinstance(item, beam.pvalue.PValue):
+        with tf.io.gfile.GFile(self._temp_filepath(key), "r") as f:
+          self[key] = json.load(f)
+    tf.io.gfile.rmtree(self._tempdir)
+    super(BeamMetadataDict, self).save_metadata(data_dir)

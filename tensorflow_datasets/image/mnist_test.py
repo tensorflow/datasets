@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,24 +43,12 @@ class MNISTTest(testing.DatasetBuilderTestCase):
   }
 
 
-class MNISTTestS3(MNISTTest):
-  VERSION = "experimental_latest"
-
-
 class FashionMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.FashionMNIST
 
 
-class FashionMNISTTestS3(FashionMNISTTest):
-  VERSION = "experimental_latest"
-
-
 class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
-
-
-class KMNISTTestS3(KMNISTTest):
-  VERSION = "experimental_latest"
 
 
 mnist.EMNIST.BUILDER_CONFIGS.extend([
@@ -81,10 +69,6 @@ class EMNISTTest(testing.DatasetBuilderTestCase):
       "test": 2,
   }
   BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
-
-
-class EMNISTTestS3(EMNISTTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

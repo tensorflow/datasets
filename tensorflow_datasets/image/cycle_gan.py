@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,8 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # From https://arxiv.org/abs/1703.10593
@@ -62,7 +61,7 @@ _DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
 class CycleGANConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CycleGAN."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a CycleGANConfig.
 
@@ -86,11 +85,11 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           description=("A dataset consisting of images from two classes A and "
                        "B (For example: horses/zebras, apple/orange,...)"),
           version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+              "2.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
           supported_versions=[
               tfds.core.Version(
-                  "2.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
+                  "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
@@ -105,9 +104,8 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["A", "B"]),
         }),
         supervised_keys=("image", "label"),
-        urls=[
-            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
-        ],
+        homepage=
+        "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/",
         citation=_CITATION,
     )
 

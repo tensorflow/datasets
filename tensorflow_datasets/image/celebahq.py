@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
 """Celeba-HQ dataset."""
 import os
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -50,7 +49,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
@@ -59,17 +58,16 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
+    v2 = tfds.core.Version(
+        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v01 = tfds.core.Version(
+        "0.1.0", experiments={tfds.core.Experiment.S3: False})
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
-        version=tfds.core.Version(
-            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                "2.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
-        ],
+        version=v2,
+        supported_versions=[v01],
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -77,6 +75,13 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
 
 class CelebAHq(tfds.core.GeneratorBasedBuilder):
   """Celeba_HQ Dataset."""
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  manual_dir should contain multiple tar files with images (data2x2.tar,
+  data4x4.tar .. data1024x1024.tar).
+  Detailed instructions are here:
+  https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
+  """
 
   VERSION = tfds.core.Version("0.1.0")
 
@@ -107,7 +112,7 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
             "image/filename":
                 tfds.features.Text(),
         },),
-        urls=["https://github.com/tkarras/progressive_growing_of_gans"],
+        homepage="https://github.com/tkarras/progressive_growing_of_gans",
         citation=_CITATION,
     )
 

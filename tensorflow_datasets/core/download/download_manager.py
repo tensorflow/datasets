@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import uuid
 from absl import logging
 import promise
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
@@ -56,7 +56,8 @@ class DownloadConfig(object):
                max_examples_per_split=None,
                register_checksums=False,
                beam_runner=None,
-               beam_options=None):
+               beam_options=None,
+               try_download_gcs=True):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -71,13 +72,16 @@ class DownloadConfig(object):
       compute_stats: `tfds.download.ComputeStats`, whether to compute
         statistics over the generated data. Defaults to `AUTO`.
       max_examples_per_split: `int`, optional max number of examples to write
-        into each split.
+        into each split (used for testing).
       register_checksums: `bool`, defaults to False. If True, checksum of
         downloaded files are recorded.
       beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
         based on Beam for the generation.
       beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
         datasets based on Beam for the generation.
+      try_download_gcs: `bool`, defaults to True. If True, prepared dataset
+        will be downloaded from GCS, when available. If False, dataset will be
+        downloaded and prepared from scratch.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -89,20 +93,21 @@ class DownloadConfig(object):
     self.register_checksums = register_checksums
     self.beam_runner = beam_runner
     self.beam_options = beam_options
+    self.try_download_gcs = try_download_gcs
 
 
 class DownloadManager(object):
   """Manages the download and extraction of files, as well as caching.
 
   Downloaded files are cached under `download_dir`. The file name of downloaded
-   files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:
+   files follows pattern "{sanitized_url}{content_checksum}.{ext}". Eg:
    'cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz'.
 
   While a file is being downloaded, it is placed into a directory following a
   similar but different pattern:
-  "%{sanitized_url}${url_checksum}.tmp.${uuid}".
+  "{sanitized_url}{url_checksum}.tmp.{uuid}".
 
-  When a file is downloaded, a "%{fname}s.INFO.json" file is created next to it.
+  When a file is downloaded, a "{fname}.INFO.json" file is created next to it.
   This INFO file contains the following information:
   {"dataset_names": ["name1", "name2"],
    "urls": ["http://url.of/downloaded_file"]}
@@ -110,7 +115,7 @@ class DownloadManager(object):
   Extracted files/dirs are stored under `extract_dir`. The file name or
   directory name is the same as the original name, prefixed with the extraction
   method. E.g.
-   "${extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
+   "{extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
 
   The function members accept either plain value, or values wrapped into list
   or dict. Giving a data structure will parallelize the downloads.
@@ -144,6 +149,7 @@ class DownloadManager(object):
                download_dir,
                extract_dir=None,
                manual_dir=None,
+               manual_dir_instructions=None,
                dataset_name=None,
                force_download=False,
                force_extraction=False,
@@ -154,6 +160,8 @@ class DownloadManager(object):
       download_dir: `str`, path to directory where downloads are stored.
       extract_dir: `str`, path to directory where artifacts are extracted.
       manual_dir: `str`, path to manually downloaded/extracted data directory.
+      manual_dir_instructions: `str`, human readable instructions on how to
+                         prepare contents of the manual_dir for this dataset.
       dataset_name: `str`, name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
       force_download: `bool`, default to False. If True, always [re]download.
@@ -166,6 +174,7 @@ class DownloadManager(object):
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
     self._manual_dir = manual_dir and os.path.expanduser(manual_dir)
+    self._manual_dir_instructions = manual_dir_instructions
     tf.io.gfile.makedirs(self._download_dir)
     tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download
@@ -367,10 +376,15 @@ class DownloadManager(object):
   @property
   def manual_dir(self):
     """Returns the directory containing the manually extracted data."""
+    if not self._manual_dir:
+      raise AssertionError(
+          'Manual directory was enabled. '
+          'Did you set MANUAL_DOWNLOAD_INSTRUCTIONS in your dataset?')
     if not tf.io.gfile.exists(self._manual_dir):
       raise AssertionError(
           'Manual directory {} does not exist. Create it and download/extract '
-          'dataset artifacts in there.'.format(self._manual_dir))
+          'dataset artifacts in there. Additional instructions: {}'.format(
+              self._manual_dir, self._manual_dir_instructions))
     return self._manual_dir
 
 

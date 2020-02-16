@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import numpy as np
 from six.moves import urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.image import mnist
 import tensorflow_datasets.public_api as tfds
 
@@ -50,7 +50,6 @@ _TEST_DATA_FILENAME = "binarized_mnist_test.amat"
 
 class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
   """A specific binarization of the MNIST dataset."""
-  URL = _URL
 
   VERSION = tfds.core.Version("1.0.0")
 
@@ -61,7 +60,8 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(
                 shape=mnist.MNIST_IMAGE_SHAPE)}),
-        urls=[self.URL],
+        homepage=
+        "http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html",
         citation=_CITATION,
     )
 
@@ -73,7 +73,7 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
         "test_data": _TEST_DATA_FILENAME,
     }
     files = dl_manager.download(
-        {k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()})
+        {k: urllib.parse.urljoin(_URL, v) for k, v in filenames.items()})
 
     return [
         tfds.core.SplitGenerator(

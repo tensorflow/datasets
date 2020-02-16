@@ -3,11 +3,11 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;para_crawl&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
+  <meta itemprop="citation" content="@misc {paracrawl,&#10;    title  = &quot;ParaCrawl&quot;,&#10;    year   = &quot;2018&quot;,&#10;    url    = &quot;http://paracrawl.eu/download.html.&quot;&#10;}&#10;" />
 </div>
-
 # `para_crawl`
 
 Web-Scale Parallel Corpora for Official European Languages.
@@ -20,83 +20,82 @@ Web-Scale Parallel Corpora for Official European Languages.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `enbg_plain_text` (`v0.1.0`) (`Size: 98.94 MiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
+*   `enbg_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to bg, uses encoder plain_text.
 
-*   `encs_plain_text` (`v0.1.0`) (`Size: 187.31 MiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
+*   `encs_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to cs, uses encoder plain_text.
 
-*   `enda_plain_text` (`v0.1.0`) (`Size: 174.34 MiB`): Translation dataset from
-    English to da, uses encoder plain_text.
+*   `enda_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to da, uses encoder plain_text.
 
-*   `ende_plain_text` (`v0.1.0`) (`Size: 1.22 GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
+*   `ende_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to de, uses encoder plain_text.
 
-*   `enel_plain_text` (`v0.1.0`) (`Size: 184.59 MiB`): Translation dataset from
-    English to el, uses encoder plain_text.
+*   `enel_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to el, uses encoder plain_text.
 
-*   `enes_plain_text` (`v0.1.0`) (`Size: 1.82 GiB`): Translation dataset from
-    English to es, uses encoder plain_text.
+*   `enes_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to es, uses encoder plain_text.
 
-*   `enet_plain_text` (`v0.1.0`) (`Size: 66.91 MiB`): Translation dataset from
-    English to et, uses encoder plain_text.
+*   `enet_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to et, uses encoder plain_text.
 
-*   `enfi_plain_text` (`v0.1.0`) (`Size: 151.83 MiB`): Translation dataset from
-    English to fi, uses encoder plain_text.
+*   `enfi_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to fi, uses encoder plain_text.
 
-*   `enfr_plain_text` (`v0.1.0`) (`Size: 2.63 GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
+*   `enfr_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to fr, uses encoder plain_text.
 
-*   `enga_plain_text` (`v0.1.0`) (`Size: 28.03 MiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
+*   `enga_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to ga, uses encoder plain_text.
 
-*   `enhr_plain_text` (`v0.1.0`) (`Size: 80.97 MiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
+*   `enhr_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to hr, uses encoder plain_text.
 
-*   `enhu_plain_text` (`v0.1.0`) (`Size: 114.24 MiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
+*   `enhu_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to hu, uses encoder plain_text.
 
-*   `enit_plain_text` (`v0.1.0`) (`Size: 1017.30 MiB`): Translation dataset from
-    English to it, uses encoder plain_text.
+*   `enit_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to it, uses encoder plain_text.
 
-*   `enlt_plain_text` (`v0.1.0`) (`Size: 63.28 MiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
+*   `enlt_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to lt, uses encoder plain_text.
 
-*   `enlv_plain_text` (`v0.1.0`) (`Size: 45.17 MiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+*   `enlv_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to lv, uses encoder plain_text.
 
-*   `enmt_plain_text` (`v0.1.0`) (`Size: 18.15 MiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
+*   `enmt_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to mt, uses encoder plain_text.
 
-*   `ennl_plain_text` (`v0.1.0`) (`Size: 400.63 MiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
+*   `ennl_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to nl, uses encoder plain_text.
 
-*   `enpl_plain_text` (`v0.1.0`) (`Size: 257.90 MiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
+*   `enpl_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to pl, uses encoder plain_text.
 
-*   `enpt_plain_text` (`v0.1.0`) (`Size: 608.62 MiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
+*   `enpt_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to pt, uses encoder plain_text.
 
-*   `enro_plain_text` (`v0.1.0`) (`Size: 153.24 MiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
+*   `enro_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to ro, uses encoder plain_text.
 
-*   `ensk_plain_text` (`v0.1.0`) (`Size: 96.61 MiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
+*   `ensk_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to sk, uses encoder plain_text.
 
-*   `ensl_plain_text` (`v0.1.0`) (`Size: 62.02 MiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
+*   `ensl_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to sl, uses encoder plain_text.
 
-*   `ensv_plain_text` (`v0.1.0`) (`Size: 262.76 MiB`): Translation dataset from
-    English to sv, uses encoder plain_text.
+*   `ensv_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
+    from English to sv, uses encoder plain_text.
 
 ## `para_crawl/enbg_plain_text`
-
 Translation dataset from English to bg, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -106,7 +105,6 @@ ALL   | 1,039,885
 TRAIN | 1,039,885
 
 ### Features
-
 ```python
 Translation({
     'bg': Text(shape=(), dtype=tf.string),
@@ -114,23 +112,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'bg')`
+`('en', 'bg')`
 
 ## `para_crawl/encs_plain_text`
-
 Translation dataset from English to cs, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -140,7 +135,6 @@ ALL   | 2,981,949
 TRAIN | 2,981,949
 
 ### Features
-
 ```python
 Translation({
     'cs': Text(shape=(), dtype=tf.string),
@@ -148,23 +142,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-cs.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-cs.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'cs')`
+`('en', 'cs')`
 
 ## `para_crawl/enda_plain_text`
-
 Translation dataset from English to da, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -174,7 +165,6 @@ ALL   | 2,414,895
 TRAIN | 2,414,895
 
 ### Features
-
 ```python
 Translation({
     'da': Text(shape=(), dtype=tf.string),
@@ -182,23 +172,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-da.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-da.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'da')`
+`('en', 'da')`
 
 ## `para_crawl/ende_plain_text`
-
 Translation dataset from English to de, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -208,7 +195,6 @@ ALL   | 16,264,448
 TRAIN | 16,264,448
 
 ### Features
-
 ```python
 Translation({
     'de': Text(shape=(), dtype=tf.string),
@@ -216,23 +202,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'de')`
+`('en', 'de')`
 
 ## `para_crawl/enel_plain_text`
-
 Translation dataset from English to el, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -242,7 +225,6 @@ ALL   | 1,985,233
 TRAIN | 1,985,233
 
 ### Features
-
 ```python
 Translation({
     'el': Text(shape=(), dtype=tf.string),
@@ -250,23 +232,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'el')`
+`('en', 'el')`
 
 ## `para_crawl/enes_plain_text`
-
 Translation dataset from English to es, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -276,7 +255,6 @@ ALL   | 21,987,267
 TRAIN | 21,987,267
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -284,23 +262,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-es.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-es.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'es')`
+`('en', 'es')`
 
 ## `para_crawl/enet_plain_text`
-
 Translation dataset from English to et, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -310,7 +285,6 @@ ALL   | 853,422
 TRAIN | 853,422
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -318,23 +292,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-et.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-et.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'et')`
+`('en', 'et')`
 
 ## `para_crawl/enfi_plain_text`
-
 Translation dataset from English to fi, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -344,7 +315,6 @@ ALL   | 2,156,069
 TRAIN | 2,156,069
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -352,23 +322,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fi.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fi.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'fi')`
+`('en', 'fi')`
 
 ## `para_crawl/enfr_plain_text`
-
 Translation dataset from English to fr, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -378,7 +345,6 @@ ALL   | 31,374,161
 TRAIN | 31,374,161
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -386,23 +352,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'fr')`
+`('en', 'fr')`
 
 ## `para_crawl/enga_plain_text`
-
 Translation dataset from English to ga, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -412,7 +375,6 @@ ALL   | 357,399
 TRAIN | 357,399
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -420,23 +382,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ga.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ga.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'ga')`
+`('en', 'ga')`
 
 ## `para_crawl/enhr_plain_text`
-
 Translation dataset from English to hr, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -446,7 +405,6 @@ ALL   | 1,002,053
 TRAIN | 1,002,053
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -454,23 +412,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hr.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'hr')`
+`('en', 'hr')`
 
 ## `para_crawl/enhu_plain_text`
-
 Translation dataset from English to hu, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -480,7 +435,6 @@ ALL   | 1,901,342
 TRAIN | 1,901,342
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -488,23 +442,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hu.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hu.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'hu')`
+`('en', 'hu')`
 
 ## `para_crawl/enit_plain_text`
-
 Translation dataset from English to it, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -514,7 +465,6 @@ ALL   | 12,162,239
 TRAIN | 12,162,239
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -522,23 +472,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-it.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-it.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'it')`
+`('en', 'it')`
 
 ## `para_crawl/enlt_plain_text`
-
 Translation dataset from English to lt, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -548,7 +495,6 @@ ALL   | 844,643
 TRAIN | 844,643
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -556,23 +502,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lt.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'lt')`
+`('en', 'lt')`
 
 ## `para_crawl/enlv_plain_text`
-
 Translation dataset from English to lv, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -582,7 +525,6 @@ ALL   | 553,060
 TRAIN | 553,060
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -590,23 +532,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lv.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'lv')`
+`('en', 'lv')`
 
 ## `para_crawl/enmt_plain_text`
-
 Translation dataset from English to mt, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -616,7 +555,6 @@ ALL   | 195,502
 TRAIN | 195,502
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -624,23 +562,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-mt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-mt.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'mt')`
+`('en', 'mt')`
 
 ## `para_crawl/ennl_plain_text`
-
 Translation dataset from English to nl, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -650,7 +585,6 @@ ALL   | 5,659,268
 TRAIN | 5,659,268
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -658,23 +592,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-nl.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-nl.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'nl')`
+`('en', 'nl')`
 
 ## `para_crawl/enpl_plain_text`
-
 Translation dataset from English to pl, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -684,7 +615,6 @@ ALL   | 3,503,276
 TRAIN | 3,503,276
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -692,23 +622,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pl.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pl.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'pl')`
+`('en', 'pl')`
 
 ## `para_crawl/enpt_plain_text`
-
 Translation dataset from English to pt, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -718,7 +645,6 @@ ALL   | 8,141,940
 TRAIN | 8,141,940
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -726,23 +652,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pt.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'pt')`
+`('en', 'pt')`
 
 ## `para_crawl/enro_plain_text`
-
 Translation dataset from English to ro, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -752,7 +675,6 @@ ALL   | 1,952,043
 TRAIN | 1,952,043
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -760,23 +682,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ro.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ro.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'ro')`
+`('en', 'ro')`
 
 ## `para_crawl/ensk_plain_text`
-
 Translation dataset from English to sk, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -786,7 +705,6 @@ ALL   | 1,591,831
 TRAIN | 1,591,831
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -794,23 +712,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'sk')`
+`('en', 'sk')`
 
 ## `para_crawl/ensl_plain_text`
-
 Translation dataset from English to sl, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -820,7 +735,6 @@ ALL   | 660,161
 TRAIN | 660,161
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -828,23 +742,20 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sl.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sl.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'sl')`
+`('en', 'sl')`
 
 ## `para_crawl/ensv_plain_text`
-
 Translation dataset from English to sv, uses encoder plain_text.
 
 Versions:
 
-*   **`0.1.0`** (default):
-*   `1.0.0`: None
+*   **`1.0.0`** (default):
+*   `0.1.0`: None
 
 ### Statistics
 
@@ -854,7 +765,6 @@ ALL   | 3,476,729
 TRAIN | 3,476,729
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -862,14 +772,12 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'sv')`
+`('en', 'sv')`
 
 ## Citation
 ```

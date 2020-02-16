@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,8 @@ from __future__ import division
 from __future__ import print_function
 
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"
@@ -52,11 +51,13 @@ _CITATION = """\
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
   """Config for StarcraftVideo dataset."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
-            "0.1.2", experiments={tfds.core.Experiment.S3: False}),
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+        supported_versions=[tfds.core.Version(
+            "0.1.2", experiments={tfds.core.Experiment.S3: False})],
         **kwargs)
     self.map_name = map_name
     self.resolution = resolution
@@ -136,7 +137,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description="This data set contains videos generated from Starcraft.",
         features=features,
-        urls=["https://storage.googleapis.com/scv_dataset/README.html"],
+        homepage="https://storage.googleapis.com/scv_dataset/README.html",
         citation=_CITATION,
     )
 
@@ -206,7 +207,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
-      ds = tf.data.TFRecordDataset(files)
+      ds = tf.data.TFRecordDataset(sorted(files))
       ds = ds.map(
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -214,9 +215,11 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())
         try:
+          i = 0
           while True:
             video = sess.run(iterator)
-            yield {"rgb_screen": video}
+            yield i, {"rgb_screen": video}
+            i += 1
 
         except tf.errors.OutOfRangeError:
           # End of file.

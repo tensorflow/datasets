@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,15 +30,25 @@ import os
 from absl import app
 from absl import flags
 
-from tensorflow.io import gfile
-from tensorflow_datasets.core import naming
+# gfile cannot be imported directly `from tensorflow.io import gfile`
+import tensorflow.compat.v2 as tf
+gfile = tf.io.gfile
+del tf
+
+from tensorflow_datasets.core import naming  # pylint: disable=g-import-not-at-top
 from tensorflow_datasets.core.utils import py_utils
 
 FLAGS = flags.FLAGS
 
 _DATASET_TYPE = [
-    'image', 'video', 'audio', 'text', 'structured', 'translate',
-    'summarization'
+    'audio',
+    'image',
+    'object_detection',
+    'structured',
+    'summarization',
+    'text',
+    'translate',
+    'video',
 ]
 
 flags.DEFINE_string('tfds_dir', None, 'Root directory of tfds (auto-computed)')
@@ -100,7 +110,7 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
         # builder.as_dataset.
         supervised_keys=(),
         # Homepage of the dataset for documentation
-        urls=[],
+        homepage='https://dataset-homepage/',
         citation=_CITATION,
     )
 

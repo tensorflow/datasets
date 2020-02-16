@@ -3,11 +3,11 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="horses_or_humans" />
-  <meta itemprop="description" content="A large set of images of horses and humans." />
+  <meta itemprop="description" content="A large set of images of horses and humans.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;horses_or_humans&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/horses_or_humans" />
   <meta itemprop="sameAs" content="http://laurencemoroney.com/horses-or-humans-dataset" />
+  <meta itemprop="citation" content="@ONLINE {horses_or_humans,&#10;author = &quot;Laurence Moroney&quot;,&#10;title = &quot;Horses or Humans Dataset&quot;,&#10;month = &quot;feb&quot;,&#10;year = &quot;2019&quot;,&#10;url = &quot;http://laurencemoroney.com/horses-or-humans-dataset&quot;&#10;}&#10;" />
 </div>
-
 # `horses_or_humans`
 
 A large set of images of horses and humans.
@@ -16,12 +16,16 @@ A large set of images of horses and humans.
     [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 *   `DatasetBuilder`:
     [`tfds.image.horses_or_humans.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/horses_or_humans.py)
+*   Version: `v3.0.0`
 *   Versions:
 
-    *   **`1.0.0`** (default):
-    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `1.0.0`: None
 
-*   Size: `153.59 MiB`
+*   Download size: `153.59 MiB`
+
+*   Dataset size: `Unknown size`
 
 ## Features
 ```python
@@ -39,12 +43,12 @@ ALL   | 1,283
 TRAIN | 1,027
 TEST  | 256
 
-## Urls
+## Homepage
 
 *   [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
 ```

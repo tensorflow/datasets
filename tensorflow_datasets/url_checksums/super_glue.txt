@@ -4,6 +4,8 @@ https://dl.fbaipublicfiles.com/glue/superglue/data/MultiRC.zip 1216866 f1ee6f706
 https://dl.fbaipublicfiles.com/glue/superglue/data/RTE.zip 750760 3846141c898099944685766790201381369c7a9de33759a56311af63c1ff6c2e
 https://dl.fbaipublicfiles.com/glue/superglue/data/WSC.zip 32591 c55ecface9457c56a3ee8b29fe802f724495714742b220170e6db06716efc953
 https://dl.fbaipublicfiles.com/glue/superglue/data/WiC.zip 355479 e87b14d34bc5876dfec24fd26b5332becbabb03263f74a56b7a8192ab09383af
+https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-b.zip 33950 43b45c55a273575c58a33cd68f10a971f83daa3aa223bfbc4077b92fbdf960b3
+https://dl.fbaipublicfiles.com/glue/superglue/data/v2/AX-g.zip 10413 2d4e00d3a7d23d2c3787ee4c1382cc81a72cb05a76fc9d78d142949247ed61b9
 https://dl.fbaipublicfiles.com/glue/superglue/data/v2/BoolQ.zip 4118001 853fbe7922f70c59629f06a39e8d9ca440c3d740e760fd3b87a5ddf3dcba2436
 https://dl.fbaipublicfiles.com/glue/superglue/data/v2/CB.zip 75482 8d641383298d54554066ba1c93f56ae7410af75df621b90c63028806bbbbb535
 https://dl.fbaipublicfiles.com/glue/superglue/data/v2/COPA.zip 43986 405906cddac74bc1e1ce8220f1107d1025b66a25ef10149d91b10bb30651125f

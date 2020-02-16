@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ class GetShardTest(testing.TestCase):
   @mock.patch.object(shuffle, 'HKEY_SIZE', 10)  # 1024 keys.
   def test_order(self):
     shards_number = 10
-    shards = [shuffle._get_shard(k, shards_number) for k in range(1024)]
+    shards = [shuffle.get_bucket_number(k, shards_number) for k in range(1024)]
     # Check max(shard_x) < min(shard_y) if x < y.
     previous_shard = 0
     for shard in shards:
@@ -125,8 +125,7 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
     self.assertEqual(next(iterator), b'a')
-    with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'Two records share the same hashed key!'):
+    with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 
 
