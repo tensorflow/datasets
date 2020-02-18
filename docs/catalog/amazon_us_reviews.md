@@ -10,6 +10,8 @@
 </div>
 # `amazon_us_reviews`
 
+*   **Description**:
+
 Amazon Customer Reviews (a.k.a. Product Reviews) is one of Amazons iconic
 products. In a period of over two decades since the first review in 1995,
 millions of Amazon customers have contributed over a hundred million reviews to
@@ -43,2177 +45,544 @@ vine - Review was written as part of the Vine program. verified_purchase - The
 review is on a verified purchase. review_headline - The title of the review.
 review_body - The review text. review_date - The date the review was written.
 
-*   URL:
+*   **Homepage**:
     [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.structured.amazon_us_reviews.AmazonUSReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/amazon_us_reviews.py)
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `1.59 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Features**:
 
-`amazon_us_reviews` is configured with
-`tfds.structured.amazon_us_reviews.AmazonUSReviewsConfig` and has the following
-configurations predefined (defaults to the first one):
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
 
-*   `Wireless_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Wireless_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
 
-*   `Watches_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Watches_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+## amazon_us_reviews/Wireless_v1_00(default config)
 
-*   `Video_Games_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
-    of reviews of Amazon Video_Games_v1_00 products in US marketplace. Each
-    product has its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Wireless_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
 
-*   `Video_DVD_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Video_DVD_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+Split   | Examples
+:------ | --------:
+'train' | 9,002,021
 
-*   `Video_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Video_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+## amazon_us_reviews/Watches_v1_00
 
-*   `Toys_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Toys_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Watches_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
 
-*   `Tools_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Tools_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+Split   | Examples
+:------ | -------:
+'train' | 960,872
 
-*   `Sports_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Sports_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+## amazon_us_reviews/Video_Games_v1_00
 
-*   `Software_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Software_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Video_Games_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
 
-*   `Shoes_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Shoes_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+Split   | Examples
+:------ | --------:
+'train' | 1,785,997
 
-*   `Pet_Products_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
-    of reviews of Amazon Pet_Products_v1_00 products in US marketplace. Each
-    product has its own version as specified with it.
+## amazon_us_reviews/Video_DVD_v1_00
 
-*   `Personal_Care_Appliances_v1_00` (`v0.1.0`) (`Size: Unknown size`): A
-    dataset consisting of reviews of Amazon Personal_Care_Appliances_v1_00
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Video_DVD_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,069,140
+
+## amazon_us_reviews/Video_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Video_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 380,604
+
+## amazon_us_reviews/Toys_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon Toys_v1_00
     products in US marketplace. Each product has its own version as specified
     with it.
+*   **Splits**:
 
-*   `PC_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon PC_v1_00 products in US marketplace. Each product has its
+Split   | Examples
+:------ | --------:
+'train' | 4,864,249
+
+## amazon_us_reviews/Tools_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Tools_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,741,100
+
+## amazon_us_reviews/Sports_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Sports_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 4,850,360
+
+## amazon_us_reviews/Software_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Software_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 341,931
+
+## amazon_us_reviews/Shoes_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Shoes_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 4,366,916
+
+## amazon_us_reviews/Pet_Products_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Pet_Products_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,643,619
+
+## amazon_us_reviews/Personal_Care_Appliances_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Personal_Care_Appliances_v1_00 products in US marketplace. Each product has
+    its own version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 85,981
+
+## amazon_us_reviews/PC_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon PC_v1_00
+    products in US marketplace. Each product has its own version as specified
+    with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 6,908,554
+
+## amazon_us_reviews/Outdoors_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Outdoors_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,302,401
+
+## amazon_us_reviews/Office_Products_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Office_Products_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,642,434
+
+## amazon_us_reviews/Musical_Instruments_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Musical_Instruments_v1_00 products in US marketplace. Each product has its
     own version as specified with it.
+*   **Splits**:
 
-*   `Outdoors_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Outdoors_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+Split   | Examples
+:------ | -------:
+'train' | 904,765
 
-*   `Office_Products_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Office_Products_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+## amazon_us_reviews/Music_v1_00
 
-*   `Musical_Instruments_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Musical_Instruments_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Music_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
 
-*   `Music_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Music_v1_00 products in US marketplace. Each product has
+Split   | Examples
+:------ | --------:
+'train' | 4,751,577
+
+## amazon_us_reviews/Mobile_Electronics_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Mobile_Electronics_v1_00 products in US marketplace. Each product has its
+    own version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 104,975
+
+## amazon_us_reviews/Mobile_Apps_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Mobile_Apps_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,033,376
+
+## amazon_us_reviews/Major_Appliances_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Major_Appliances_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 96,901
+
+## amazon_us_reviews/Luggage_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Luggage_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 348,657
+
+## amazon_us_reviews/Lawn_and_Garden_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Lawn_and_Garden_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,557,288
+
+## amazon_us_reviews/Kitchen_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Kitchen_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 4,880,466
+
+## amazon_us_reviews/Jewelry_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Jewelry_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,767,753
+
+## amazon_us_reviews/Home_Improvement_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Home_Improvement_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,634,781
+
+## amazon_us_reviews/Home_Entertainment_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Home_Entertainment_v1_00 products in US marketplace. Each product has its
+    own version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 705,889
+
+## amazon_us_reviews/Home_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon Home_v1_00
+    products in US marketplace. Each product has its own version as specified
+    with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 6,221,559
+
+## amazon_us_reviews/Health_Personal_Care_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Health_Personal_Care_v1_00 products in US marketplace. Each product has its
+    own version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,331,449
+
+## amazon_us_reviews/Grocery_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Grocery_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,402,458
+
+## amazon_us_reviews/Gift_Card_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Gift_Card_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 149,086
+
+## amazon_us_reviews/Furniture_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Furniture_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 792,113
+
+## amazon_us_reviews/Electronics_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Electronics_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 3,093,869
+
+## amazon_us_reviews/Digital_Video_Games_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Digital_Video_Games_v1_00 products in US marketplace. Each product has its
+    own version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 145,431
+
+## amazon_us_reviews/Digital_Video_Download_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Digital_Video_Download_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
+*   **Splits**:
 
-*   `Mobile_Electronics_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Mobile_Electronics_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+Split   | Examples
+:------ | --------:
+'train' | 4,057,147
 
-*   `Mobile_Apps_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
-    of reviews of Amazon Mobile_Apps_v1_00 products in US marketplace. Each
-    product has its own version as specified with it.
+## amazon_us_reviews/Digital_Software_v1_00
 
-*   `Major_Appliances_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Major_Appliances_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Digital_Software_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
 
-*   `Luggage_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Luggage_v1_00 products in US marketplace. Each product has
+Split   | Examples
+:------ | -------:
+'train' | 102,084
+
+## amazon_us_reviews/Digital_Music_Purchase_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Digital_Music_Purchase_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
+*   **Splits**:
 
-*   `Lawn_and_Garden_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Lawn_and_Garden_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+Split   | Examples
+:------ | --------:
+'train' | 1,688,884
 
-*   `Kitchen_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Kitchen_v1_00 products in US marketplace. Each product has
+## amazon_us_reviews/Digital_Ebook_Purchase_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Digital_Ebook_Purchase_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
+*   **Splits**:
 
-*   `Jewelry_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Jewelry_v1_00 products in US marketplace. Each product has
+Split   | Examples
+:------ | ---------:
+'train' | 12,520,722
+
+## amazon_us_reviews/Camera_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Camera_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,801,974
+
+## amazon_us_reviews/Books_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Books_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | ---------:
+'train' | 10,319,090
+
+## amazon_us_reviews/Beauty_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Beauty_v1_00 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,115,666
+
+## amazon_us_reviews/Baby_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon Baby_v1_00
+    products in US marketplace. Each product has its own version as specified
+    with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,752,932
+
+## amazon_us_reviews/Automotive_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Automotive_v1_00 products in US marketplace. Each product has its own
+    version as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 3,514,942
+
+## amazon_us_reviews/Apparel_v1_00
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Apparel_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,906,333
+
+## amazon_us_reviews/Digital_Ebook_Purchase_v1_01
+
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Digital_Ebook_Purchase_v1_01 products in US marketplace. Each product has
     its own version as specified with it.
+*   **Splits**:
 
-*   `Home_Improvement_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Home_Improvement_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+Split   | Examples
+:------ | --------:
+'train' | 5,101,693
 
-*   `Home_Entertainment_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Home_Entertainment_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+## amazon_us_reviews/Books_v1_01
 
-*   `Home_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Home_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Books_v1_01 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
 
-*   `Health_Personal_Care_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Health_Personal_Care_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
+Split   | Examples
+:------ | --------:
+'train' | 6,106,719
 
-*   `Grocery_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Grocery_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
+## amazon_us_reviews/Books_v1_02
 
-*   `Gift_Card_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Gift_Card_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Books_v1_02 products in US marketplace. Each product has its own version as
+    specified with it.
+*   **Splits**:
 
-*   `Furniture_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Furniture_v1_00 products in US marketplace. Each product
-    has its own version as specified with it.
-
-*   `Electronics_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
-    of reviews of Amazon Electronics_v1_00 products in US marketplace. Each
-    product has its own version as specified with it.
-
-*   `Digital_Video_Games_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Digital_Video_Games_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
-
-*   `Digital_Video_Download_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Digital_Video_Download_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
-
-*   `Digital_Software_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Digital_Software_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
-
-*   `Digital_Music_Purchase_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Digital_Music_Purchase_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
-
-*   `Digital_Ebook_Purchase_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Digital_Ebook_Purchase_v1_00 products in US
-    marketplace. Each product has its own version as specified with it.
-
-*   `Camera_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Camera_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
-
-*   `Books_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Books_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
-
-*   `Beauty_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Beauty_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
-
-*   `Baby_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Baby_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
-
-*   `Automotive_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting
-    of reviews of Amazon Automotive_v1_00 products in US marketplace. Each
-    product has its own version as specified with it.
-
-*   `Apparel_v1_00` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Apparel_v1_00 products in US marketplace. Each product has
-    its own version as specified with it.
-
-*   `Digital_Ebook_Purchase_v1_01` (`v0.1.0`) (`Size: Unknown size`): A dataset
-    consisting of reviews of Amazon Digital_Ebook_Purchase_v1_01 products in US
-    marketplace. Each product has its own version as specified with it.
-
-*   `Books_v1_01` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Books_v1_01 products in US marketplace. Each product has
-    its own version as specified with it.
-
-*   `Books_v1_02` (`v0.1.0`) (`Size: Unknown size`): A dataset consisting of
-    reviews of Amazon Books_v1_02 products in US marketplace. Each product has
-    its own version as specified with it.
-
-## `amazon_us_reviews/Wireless_v1_00`
-
-A dataset consisting of reviews of Amazon Wireless_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 9,002,021
-TRAIN | 9,002,021
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Watches_v1_00`
-
-A dataset consisting of reviews of Amazon Watches_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 960,872
-TRAIN | 960,872
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Video_Games_v1_00`
-
-A dataset consisting of reviews of Amazon Video_Games_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,785,997
-TRAIN | 1,785,997
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Video_DVD_v1_00`
-
-A dataset consisting of reviews of Amazon Video_DVD_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,069,140
-TRAIN | 5,069,140
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Video_v1_00`
-
-A dataset consisting of reviews of Amazon Video_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 380,604
-TRAIN | 380,604
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Toys_v1_00`
-
-A dataset consisting of reviews of Amazon Toys_v1_00 products in US marketplace.
-Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 4,864,249
-TRAIN | 4,864,249
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Tools_v1_00`
-
-A dataset consisting of reviews of Amazon Tools_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,741,100
-TRAIN | 1,741,100
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Sports_v1_00`
-
-A dataset consisting of reviews of Amazon Sports_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 4,850,360
-TRAIN | 4,850,360
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Software_v1_00`
-
-A dataset consisting of reviews of Amazon Software_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 341,931
-TRAIN | 341,931
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Shoes_v1_00`
-
-A dataset consisting of reviews of Amazon Shoes_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 4,366,916
-TRAIN | 4,366,916
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Pet_Products_v1_00`
-
-A dataset consisting of reviews of Amazon Pet_Products_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,643,619
-TRAIN | 2,643,619
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Personal_Care_Appliances_v1_00`
-
-A dataset consisting of reviews of Amazon Personal_Care_Appliances_v1_00
-products in US marketplace. Each product has its own version as specified with
-it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 85,981
-TRAIN | 85,981
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/PC_v1_00`
-
-A dataset consisting of reviews of Amazon PC_v1_00 products in US marketplace.
-Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 6,908,554
-TRAIN | 6,908,554
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Outdoors_v1_00`
-
-A dataset consisting of reviews of Amazon Outdoors_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,302,401
-TRAIN | 2,302,401
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Office_Products_v1_00`
-
-A dataset consisting of reviews of Amazon Office_Products_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,642,434
-TRAIN | 2,642,434
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Musical_Instruments_v1_00`
-
-A dataset consisting of reviews of Amazon Musical_Instruments_v1_00 products in
-US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 904,765
-TRAIN | 904,765
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Music_v1_00`
-
-A dataset consisting of reviews of Amazon Music_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 4,751,577
-TRAIN | 4,751,577
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Mobile_Electronics_v1_00`
-
-A dataset consisting of reviews of Amazon Mobile_Electronics_v1_00 products in
-US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 104,975
-TRAIN | 104,975
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Mobile_Apps_v1_00`
-
-A dataset consisting of reviews of Amazon Mobile_Apps_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,033,376
-TRAIN | 5,033,376
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Major_Appliances_v1_00`
-
-A dataset consisting of reviews of Amazon Major_Appliances_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 96,901
-TRAIN | 96,901
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Luggage_v1_00`
-
-A dataset consisting of reviews of Amazon Luggage_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 348,657
-TRAIN | 348,657
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Lawn_and_Garden_v1_00`
-
-A dataset consisting of reviews of Amazon Lawn_and_Garden_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,557,288
-TRAIN | 2,557,288
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Kitchen_v1_00`
-
-A dataset consisting of reviews of Amazon Kitchen_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 4,880,466
-TRAIN | 4,880,466
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Jewelry_v1_00`
-
-A dataset consisting of reviews of Amazon Jewelry_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,767,753
-TRAIN | 1,767,753
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Home_Improvement_v1_00`
-
-A dataset consisting of reviews of Amazon Home_Improvement_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,634,781
-TRAIN | 2,634,781
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Home_Entertainment_v1_00`
-
-A dataset consisting of reviews of Amazon Home_Entertainment_v1_00 products in
-US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 705,889
-TRAIN | 705,889
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Home_v1_00`
-
-A dataset consisting of reviews of Amazon Home_v1_00 products in US marketplace.
-Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 6,221,559
-TRAIN | 6,221,559
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Health_Personal_Care_v1_00`
-
-A dataset consisting of reviews of Amazon Health_Personal_Care_v1_00 products in
-US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,331,449
-TRAIN | 5,331,449
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Grocery_v1_00`
-
-A dataset consisting of reviews of Amazon Grocery_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,402,458
-TRAIN | 2,402,458
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Gift_Card_v1_00`
-
-A dataset consisting of reviews of Amazon Gift_Card_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 149,086
-TRAIN | 149,086
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Furniture_v1_00`
-
-A dataset consisting of reviews of Amazon Furniture_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 792,113
-TRAIN | 792,113
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Electronics_v1_00`
-
-A dataset consisting of reviews of Amazon Electronics_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,093,869
-TRAIN | 3,093,869
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Digital_Video_Games_v1_00`
-
-A dataset consisting of reviews of Amazon Digital_Video_Games_v1_00 products in
-US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 145,431
-TRAIN | 145,431
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Digital_Video_Download_v1_00`
-
-A dataset consisting of reviews of Amazon Digital_Video_Download_v1_00 products
-in US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 4,057,147
-TRAIN | 4,057,147
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Digital_Software_v1_00`
-
-A dataset consisting of reviews of Amazon Digital_Software_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 102,084
-TRAIN | 102,084
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Digital_Music_Purchase_v1_00`
-
-A dataset consisting of reviews of Amazon Digital_Music_Purchase_v1_00 products
-in US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,688,884
-TRAIN | 1,688,884
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Digital_Ebook_Purchase_v1_00`
-
-A dataset consisting of reviews of Amazon Digital_Ebook_Purchase_v1_00 products
-in US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 12,520,722
-TRAIN | 12,520,722
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Camera_v1_00`
-
-A dataset consisting of reviews of Amazon Camera_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,801,974
-TRAIN | 1,801,974
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Books_v1_00`
-
-A dataset consisting of reviews of Amazon Books_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 10,319,090
-TRAIN | 10,319,090
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Beauty_v1_00`
-
-A dataset consisting of reviews of Amazon Beauty_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,115,666
-TRAIN | 5,115,666
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Baby_v1_00`
-
-A dataset consisting of reviews of Amazon Baby_v1_00 products in US marketplace.
-Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,752,932
-TRAIN | 1,752,932
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Automotive_v1_00`
-
-A dataset consisting of reviews of Amazon Automotive_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,514,942
-TRAIN | 3,514,942
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Apparel_v1_00`
-
-A dataset consisting of reviews of Amazon Apparel_v1_00 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,906,333
-TRAIN | 5,906,333
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Digital_Ebook_Purchase_v1_01`
-
-A dataset consisting of reviews of Amazon Digital_Ebook_Purchase_v1_01 products
-in US marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,101,693
-TRAIN | 5,101,693
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Books_v1_01`
-
-A dataset consisting of reviews of Amazon Books_v1_01 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 6,106,719
-TRAIN | 6,106,719
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
-## `amazon_us_reviews/Books_v1_02`
-
-A dataset consisting of reviews of Amazon Books_v1_02 products in US
-marketplace. Each product has its own version as specified with it.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,105,520
-TRAIN | 3,105,520
-
-### Features
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
-
---------------------------------------------------------------------------------
+Split   | Examples
+:------ | --------:
+'train' | 3,105,520

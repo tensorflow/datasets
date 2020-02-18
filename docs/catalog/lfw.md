@@ -10,22 +10,27 @@
 </div>
 # `lfw`
 
+*   **Description**:
+
 Labeled Faces in the Wild: A Database for Studying Face Recognition in
 Unconstrained Environments
 
-*   URL: [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
-*   `DatasetBuilder`:
+*   **Homepage**:
+    [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
+*   **Source code**:
     [`tfds.image.lfw.LFW`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lfw.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `172.20 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 13,233
 
-*   Download size: `172.20 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(250, 250, 3), dtype=tf.uint8),
@@ -33,21 +38,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('label', 'image')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 13,233
-TRAIN | 13,233
-
-## Homepage
-
-*   [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
-
-## Supervised keys (for `as_supervised=True`)
-`('label', 'image')`
-
-## Citation
 ```
 @TechReport{LFWTech,
     author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},
@@ -58,5 +53,3 @@ TRAIN | 13,233
     month = {October}
 }
 ```
-
---------------------------------------------------------------------------------

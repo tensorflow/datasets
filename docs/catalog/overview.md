@@ -170,6 +170,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`trivia_qa`](trivia_qa.md)
     *   [`wikipedia`](wikipedia.md)
     *   [`xnli`](xnli.md)
+    *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 *   `Translate`
     *   [`flores`](flores.md)
     *   [`para_crawl`](para_crawl.md)

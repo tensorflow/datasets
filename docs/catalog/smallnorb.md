@@ -10,6 +10,8 @@
 </div>
 # `smallnorb`
 
+*   **Description**:
+
 \
 This database is intended for experiments in 3D object recognition from shape.
 It contains images of 50 toys belonging to 5 generic categories: four-legged
@@ -21,22 +23,25 @@ The training set is composed of 5 instances of each category (instances 4, 6, 7,
 8 and 9), and the test set of the remaining 5 instances (instances 0, 1, 2, 3,
 and 5).
 
-*   URL:
+*   **Homepage**:
     [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.smallnorb.Smallnorb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/smallnorb.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: None
+    *   `0.1.0`: No release notes.
+*   **Download size**: `250.60 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `250.60 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 24,300
+'train' | 24,300
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(96, 96, 1), dtype=tf.uint8),
@@ -49,22 +54,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label_category')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 48,600
-TEST  | 24,300
-TRAIN | 24,300
-
-## Homepage
-
-*   [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label_category')`
-
-## Citation
 ```
 \
 @article{LeCun2004LearningMF,
@@ -76,5 +70,3 @@ TRAIN | 24,300
   pages={II-104 Vol.2}
 }
 ```
-
---------------------------------------------------------------------------------

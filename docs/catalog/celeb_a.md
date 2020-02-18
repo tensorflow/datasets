@@ -10,6 +10,8 @@
 </div>
 # `celeb_a`
 
+*   **Description**:
+
 CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset
 with more than 200K celebrity images, each with 40 attribute annotations. The
 images in this dataset cover large pose variations and background clutter.
@@ -21,22 +23,26 @@ The dataset can be employed as the training and test sets for the following
 computer vision tasks: face attribute recognition, face detection, and landmark
 (or facial part) localization.
 
-*   URL:
+*   **Homepage**:
     [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.3.0`: None
+    *   `0.3.0`: No release notes.
+*   **Download size**: `1.38 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `1.38 GiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 19,962
+'train'      | 162,770
+'validation' | 19,867
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'attributes': FeaturesDict({
@@ -97,20 +103,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 202,599
-TRAIN      | 162,770
-TEST       | 19,962
-VALIDATION | 19,867
-
-## Homepage
-
-*   [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
-
-## Citation
 ```
 @inproceedings{conf/iccv/LiuLWT15,
   added-at = {2018-10-09T00:00:00.000+0200},
@@ -131,5 +128,3 @@ VALIDATION | 19,867
   year = 2015
 }
 ```
-
---------------------------------------------------------------------------------

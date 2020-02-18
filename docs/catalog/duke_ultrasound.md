@@ -10,6 +10,8 @@
 </div>
 # `duke_ultrasound`
 
+*   **Description**:
+
 DukeUltrasound is an ultrasound dataset collected at Duke University with a
 Verasonics c52v probe. It contains delay-and-sum (DAS) beamformed data as well
 as data post-processed with Siemens Dynamic TCE for speckle reduction, contrast
@@ -19,20 +21,27 @@ and Bioengineering under Grant R01-EB026574 and National Institutes of Health
 under Grant 5T32GM007171-44. A usage example is avalible
 [here](https://colab.research.google.com/drive/1R_ARqpWoiHcUQWg1Fxwyx-ZkLi0IZ5qs).
 
-*   URL:
+*   **Homepage**:
     [https://github.com/ouwen/mimicknet](https://github.com/ouwen/mimicknet)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.duke_ultrasound.DukeUltrasound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/duke_ultrasound.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `12.78 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'A'          | 1,362
+'B'          | 1,194
+'MARK'       | 420
+'test'       | 438
+'train'      | 2,556
+'validation' | 278
 
-*   Download size: `12.78 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'das': FeaturesDict({
@@ -58,26 +67,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('das/dB', 'dtce')`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 6,248
-TRAIN      | 2,556
-A          | 1,362
-B          | 1,194
-TEST       | 438
-MARK       | 420
-VALIDATION | 278
-
-## Homepage
-
-*   [https://github.com/ouwen/mimicknet](https://github.com/ouwen/mimicknet)
-
-## Supervised keys (for `as_supervised=True`)
-`('das/dB', 'dtce')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/abs-1908-05782,
   author    = {Ouwen Huang and
@@ -99,5 +93,3 @@ VALIDATION | 278
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

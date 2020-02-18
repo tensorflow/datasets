@@ -10,26 +10,31 @@
 </div>
 # `bair_robot_pushing_small`
 
+*   **Description**:
+
 This data set contains roughly 44,000 examples of robot pushing motions,
 including one training set (train) and two test sets of previously seen
 (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-*   URL:
+*   **Homepage**:
     [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `30.06 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `30.06 GiB`
+Split   | Examples
+:------ | -------:
+'test'  | 256
+'train' | 43,264
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 Sequence({
     'action': Tensor(shape=(4,), dtype=tf.float32),
@@ -39,19 +44,11 @@ Sequence({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 43,520
-TRAIN | 43,264
-TEST  | 256
-
-## Homepage
-
-*   [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
-
-## Citation
 ```
 @misc{1710.05268,
   Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
@@ -60,5 +57,3 @@ TEST  | 256
   Eprint = {arXiv:1710.05268},
 }
 ```
-
---------------------------------------------------------------------------------

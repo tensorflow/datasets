@@ -12,40 +12,34 @@
 
 # `snli`
 
+*   **Description**:
+
 The SNLI corpus (version 1.0) is a collection of 570k human-written English
 sentence pairs manually labeled for balanced classification with the labels
 entailment, contradiction, and neutral, supporting the task of natural language
 inference (NLI), also known as recognizing textual entailment (RTE).
 
-*   URL:
+*   **Config description**: Plain text import of SNLI
+*   **Homepage**:
     [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.snli.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
+*   **Download size**: `90.17 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`snli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
-following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'test'       | 10,000
+'train'      | 550,152
+'validation' | 10,000
 
-*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of SNLI
+*   **Features**:
 
-## `snli/plain_text`
-Plain text import of SNLI
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 570,152
-TRAIN      | 550,152
-TEST       | 10,000
-VALIDATION | 10,000
-
-### Features
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -54,11 +48,10 @@ FeaturesDict({
 })
 ```
 
-### Homepage
-
-*   [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
 ```
 @inproceedings{snli:emnlp2015,
@@ -70,4 +63,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## snli/plain_text(default config)

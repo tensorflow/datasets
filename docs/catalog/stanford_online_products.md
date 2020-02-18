@@ -10,22 +10,27 @@
 </div>
 # `stanford_online_products`
 
+*   **Description**:
+
 Stanford Online Products Dataset
 
-*   URL:
+*   **Homepage**:
     [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.stanford_online_products.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_online_products.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `2.87 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 60,502
+'train' | 59,551
 
-*   Download size: `2.87 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=22634),
@@ -35,19 +40,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 120,053
-TEST  | 60,502
-TRAIN | 59,551
-
-## Homepage
-
-*   [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
-
-## Citation
 ```
 @inproceedings{song2016deep,
  author    = {Song, Hyun Oh and Xiang, Yu and Jegelka, Stefanie and Savarese, Silvio},
@@ -56,5 +53,3 @@ TRAIN | 59,551
  year      = {2016}
 }
 ```
-
---------------------------------------------------------------------------------

@@ -10,24 +10,28 @@
 </div>
 # `tf_flowers`
 
+*   **Description**:
+
 A large set of images of flowers
 
-*   URL:
+*   **Homepage**:
     [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.flowers.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flowers.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `218.21 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `218.21 MiB`
+Split   | Examples
+:------ | -------:
+'train' | 3,670
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -35,21 +39,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 3,670
-TRAIN | 3,670
-
-## Homepage
-
-*   [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @ONLINE {tfflowers,
 author = "The TensorFlow Team",
@@ -58,5 +52,3 @@ month = "jan",
 year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
-
---------------------------------------------------------------------------------

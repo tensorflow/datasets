@@ -10,6 +10,8 @@
 </div>
 # `food101`
 
+*   **Description**:
+
 This dataset consists of 101 food categories, with 101'000 images. For each
 class, 250 manually reviewed test images are provided as well as 750 training
 images. On purpose, the training images were not cleaned, and thus still contain
@@ -17,20 +19,24 @@ some amount of noise. This comes mostly in the form of intense colors and
 sometimes wrong labels. All images were rescaled to have a maximum side length
 of 512 pixels.
 
-*   URL:
+*   **Homepage**:
     [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/food101.py)
-*   Version: `v2.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`2.0.0`** (default): No release notes.
+    *   `1.0.0`: No release notes.
+*   **Download size**: `4.65 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`2.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'train'      | 75,750
+'validation' | 25,250
 
-*   Download size: `4.65 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -38,22 +44,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 101,000
-TRAIN      | 75,750
-VALIDATION | 25,250
-
-## Homepage
-
-*   [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @inproceedings{bossard14,
   title = {Food-101 -- Mining Discriminative Components with Random Forests},
@@ -62,5 +57,3 @@ VALIDATION | 25,250
   year = {2014}
 }
 ```
-
---------------------------------------------------------------------------------

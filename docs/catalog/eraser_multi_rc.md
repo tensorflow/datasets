@@ -10,26 +10,32 @@
 </div>
 # `eraser_multi_rc`
 
+*   **Description**:
+
 Eraser Multi RC is a dataset for queries over multi-line passages, along with
 answers and a rationalte. Each example in this dataset has the following 5 parts
 1. A Mutli-line Passage 2. A Query about the passage 3. An Answer to the query
 4. A Classification as to whether the answer is right or wrong 5. An Explanation
 justifying the classification
 
-*   URL:
+*   **Homepage**:
     [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.eraser_multi_rc.EraserMultiRc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/eraser_multi_rc.py)
-*   Version: `v0.1.1`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.1`** (default): No release notes.
+*   **Download size**: `1.59 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`0.1.1`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 4,848
+'train'      | 24,029
+'validation' | 3,214
 
-*   Download size: `1.59 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'evidences': Sequence(Text(shape=(), dtype=tf.string)),
@@ -39,20 +45,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 32,091
-TRAIN      | 24,029
-TEST       | 4,848
-VALIDATION | 3,214
-
-## Homepage
-
-*   [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
-
-## Citation
 ```
 @unpublished{eraser2019,
     title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
@@ -65,5 +62,3 @@ VALIDATION | 3,214
     year = {2018}
 }
 ```
-
---------------------------------------------------------------------------------

@@ -10,37 +10,31 @@
 </div>
 # `esnli`
 
+*   **Description**:
+
 The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to
 include human-annotated natural language explanations of the entailment
 relations.
 
-*   URL:
+*   **Config description**: Plain text import of e-SNLI
+*   **Homepage**:
     [https://github.com/OanaMariaCamburu/e-SNLI](https://github.com/OanaMariaCamburu/e-SNLI)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.esnli.Esnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/esnli.py)
+*   **Versions**:
+    *   **`0.0.2`** (default): No release notes.
+*   **Download size**: `195.04 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`esnli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
-following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'test'       | 9,824
+'train'      | 549,367
+'validation' | 9,842
 
-*   `plain_text` (`v0.0.2`) (`Size: Unknown size`): Plain text import of e-SNLI
+*   **Features**:
 
-## `esnli/plain_text`
-Plain text import of e-SNLI
-
-Versions:
-
-*   **`0.0.2`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 569,033
-TRAIN      | 549,367
-VALIDATION | 9,842
-TEST       | 9,824
-
-### Features
 ```python
 FeaturesDict({
     'explanation_1': Text(shape=(), dtype=tf.string),
@@ -52,11 +46,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-*   [https://github.com/OanaMariaCamburu/e-SNLI](https://github.com/OanaMariaCamburu/e-SNLI)
-
-## Citation
 ```
 @incollection{NIPS2018_8163,
 title = {e-SNLI: Natural Language Inference with Natural Language Explanations},
@@ -70,4 +64,4 @@ url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-n
 }
 ```
 
---------------------------------------------------------------------------------
+## esnli/plain_text(default config)

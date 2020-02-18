@@ -10,6 +10,8 @@
 </div>
 # `scicite`
 
+*   **Description**:
+
 This is a dataset for classifying citation intents in academic papers. The main
 citation intent label for each Json object is specified with the label key while
 the citation context is specified in with a context key. Example: { 'string':
@@ -20,20 +22,24 @@ friendships and paternity success [30,31].' 'sectionName': 'Introduction',
 using the provided paper ids with the Semantic Scholar API
 (https://api.semanticscholar.org/). The labels are: Method, Background, Result
 
-*   URL:
+*   **Homepage**:
     [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.scicite.Scicite`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scicite.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `22.12 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 1,859
+'train'      | 8,194
+'validation' | 916
 
-*   Download size: `22.12 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'citeEnd': Tensor(shape=(), dtype=tf.int64),
@@ -53,23 +59,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('string', 'label')`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 10,969
-TRAIN      | 8,194
-TEST       | 1,859
-VALIDATION | 916
-
-## Homepage
-
-*   [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
-
-## Supervised keys (for `as_supervised=True`)
-`('string', 'label')`
-
-## Citation
 ```
 @InProceedings{Cohan2019Structural,
   author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},
@@ -78,5 +72,3 @@ VALIDATION | 916
   year="2019"
 }
 ```
-
---------------------------------------------------------------------------------

@@ -10,39 +10,33 @@
 </div>
 # `squad`
 
+*   **Description**:
+
 Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset,
 consisting of questions posed by crowdworkers on a set of Wikipedia articles,
 where the answer to every question is a segment of text, or span, from the
 corresponding reading passage, or the question might be unanswerable.
 
-*   URL:
+*   **Config description**: Plain text
+*   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/squad.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.1.0`: No release notes.
+*   **Download size**: `33.51 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`squad` is configured with `tfds.text.squad.SquadConfig` and has the following
-configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'train'      | 87,599
+'validation' | 10,570
 
-*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text
+*   **Features**:
 
-## `squad/plain_text`
-Plain text
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 98,169
-TRAIN      | 87,599
-VALIDATION | 10,570
-
-### Features
 ```python
 FeaturesDict({
     'answers': Sequence({
@@ -56,11 +50,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-*   [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
-
-## Citation
 ```
 @article{2016arXiv160605250R,
        author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},
@@ -75,4 +69,4 @@ archivePrefix = {arXiv},
 }
 ```
 
---------------------------------------------------------------------------------
+## squad/plain_text(default config)

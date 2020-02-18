@@ -10,6 +10,8 @@
 </div>
 # `so2sat`
 
+*   **Description**:
+
 So2Sat LCZ42 is a dataset consisting of co-registered synthetic aperture radar
 and multispectral optical image patches acquired by the Sentinel-1 and
 Sentinel-2 remote sensing satellites, and the corresponding local climate zones
@@ -23,32 +25,23 @@ frequency bands of Sentinel-2, rescaled and encoded as JPEG.
 Dataset URL: http://doi.org/10.14459/2018MP1454690 License:
 http://creativecommons.org/licenses/by/4.0
 
-*   URL:
+*   **Homepage**:
     [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/so2sat.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`so2sat` is configured with `tfds.image.so2sat.So2satConfig` and has the
-following configurations predefined (defaults to the first one):
+Split | Examples
+:---- | -------:
 
-*   `rgb` (`v2.0.0`) (`Size: Unknown size`): Sentinel-2 RGB channels
+*   **Features**:
 
-*   `all` (`v2.0.0`) (`Size: Unknown size`): 8 Sentinel-1 and 10 Sentinel-2
-    channels
-
-## `so2sat/rgb`
-Sentinel-2 RGB channels
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-None computed
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -57,37 +50,14 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
 
-*   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+## so2sat/rgb(default config)
 
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
+*   **Config description**: Sentinel-2 RGB channels
 
-## `so2sat/all`
-8 Sentinel-1 and 10 Sentinel-2 channels
+## so2sat/all
 
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
-    'sample_id': Tensor(shape=(), dtype=tf.int64),
-    'sentinel1': Tensor(shape=[32, 32, 8], dtype=tf.float32),
-    'sentinel2': Tensor(shape=[32, 32, 10], dtype=tf.float32),
-})
-```
-
-### Homepage
-
-*   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
-
---------------------------------------------------------------------------------
+*   **Config description**: 8 Sentinel-1 and 10 Sentinel-2 channels

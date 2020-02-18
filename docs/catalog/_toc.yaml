@@ -272,6 +272,8 @@ toc:
     title: wikipedia
   - path: /datasets/catalog/xnli
     title: xnli
+  - path: /datasets/catalog/yelp_polarity_reviews
+    title: yelp_polarity_reviews
   title: Text
 - section:
   - path: /datasets/catalog/flores

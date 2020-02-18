@@ -10,26 +10,31 @@
 </div>
 # `titanic`
 
+*   **Description**:
+
 Dataset describing the survival status of individual passengers on the Titanic.
 Missing values in the original dataset are represented using ?. Float and int
 missing values are replaced with -1, string missing values are replaced with
 'Unknown'.
 
-*   URL: [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
-*   `DatasetBuilder`:
+*   **Homepage**:
+    [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
+*   **Source code**:
     [`tfds.structured.titanic.Titanic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/titanic.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `114.98 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `114.98 KiB`
+Split   | Examples
+:------ | -------:
+'train' | 1,309
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'features': FeaturesDict({
@@ -51,21 +56,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('features', 'survived')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 1,309
-TRAIN | 1,309
-
-## Homepage
-
-*   [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
-
-## Supervised keys (for `as_supervised=True`)
-`('features', 'survived')`
-
-## Citation
 ```
 @ONLINE {titanic,
 author = "Frank E. Harrell Jr., Thomas Cason",
@@ -75,5 +70,3 @@ year   = "2017",
 url    = "https://www.openml.org/d/40945"
 }
 ```
-
---------------------------------------------------------------------------------

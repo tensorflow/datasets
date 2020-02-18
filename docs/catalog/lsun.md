@@ -10,322 +10,33 @@
 </div>
 # `lsun`
 
+*   **Description**:
+
 Large scale images showing different objects from given categories like bedroom,
 tower etc.
 
-*   URL: [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-*   `DatasetBuilder`:
+*   **Homepage**: [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
+*   **Source code**:
     [`tfds.image.lsun.Lsun`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lsun.py)
+*   **Versions**:
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.1.1`: No release notes.
+*   **Download size**: `3.06 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Features**:
 
-`lsun` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `classroom` (`v3.0.0`) (`Size: Unknown size`): Images of category classroom
-
-*   `bedroom` (`v3.0.0`) (`Size: Unknown size`): Images of category bedroom
-
-*   `bridge` (`v3.0.0`) (`Size: Unknown size`): Images of category bridge
-
-*   `church_outdoor` (`v3.0.0`) (`Size: Unknown size`): Images of category
-    church_outdoor
-
-*   `conference_room` (`v3.0.0`) (`Size: Unknown size`): Images of category
-    conference_room
-
-*   `dining_room` (`v3.0.0`) (`Size: Unknown size`): Images of category
-    dining_room
-
-*   `kitchen` (`v3.0.0`) (`Size: Unknown size`): Images of category kitchen
-
-*   `living_room` (`v3.0.0`) (`Size: Unknown size`): Images of category
-    living_room
-
-*   `restaurant` (`v3.0.0`) (`Size: Unknown size`): Images of category
-    restaurant
-
-*   `tower` (`v3.0.0`) (`Size: Unknown size`): Images of category tower
-
-## `lsun/classroom`
-Images of category classroom
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 168,403
-TRAIN      | 168,103
-VALIDATION | 300
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/bedroom`
-Images of category bedroom
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 3,033,342
-TRAIN      | 3,033,042
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/bridge`
-Images of category bridge
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 818,987
-TRAIN      | 818,687
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/church_outdoor`
-Images of category church_outdoor
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 126,527
-TRAIN      | 126,227
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/conference_room`
-Images of category conference_room
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 229,369
-TRAIN      | 229,069
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/dining_room`
-Images of category dining_room
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 657,871
-TRAIN      | 657,571
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/kitchen`
-Images of category kitchen
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,212,577
-TRAIN      | 2,212,277
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/living_room`
-Images of category living_room
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,316,102
-TRAIN      | 1,315,802
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/restaurant`
-Images of category restaurant
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 626,631
-TRAIN      | 626,331
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## `lsun/tower`
-Images of category tower
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.1`: {<Experiment.S3: 2>: False}
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 708,564
-TRAIN      | 708,264
-VALIDATION | 300
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## Citation
 ```
 @article{journals/corr/YuZSSX15,
   added-at = {2018-08-13T00:00:00.000+0200},
@@ -344,4 +55,102 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## lsun/classroom(default config)
+
+*   **Config description**: Images of category classroom
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 168,103
+'validation' | 300
+
+## lsun/bedroom
+
+*   **Config description**: Images of category bedroom
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'train'      | 3,033,042
+'validation' | 300
+
+## lsun/bridge
+
+*   **Config description**: Images of category bridge
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 818,687
+'validation' | 300
+
+## lsun/church_outdoor
+
+*   **Config description**: Images of category church_outdoor
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 126,227
+'validation' | 300
+
+## lsun/conference_room
+
+*   **Config description**: Images of category conference_room
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 229,069
+'validation' | 300
+
+## lsun/dining_room
+
+*   **Config description**: Images of category dining_room
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 657,571
+'validation' | 300
+
+## lsun/kitchen
+
+*   **Config description**: Images of category kitchen
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'train'      | 2,212,277
+'validation' | 300
+
+## lsun/living_room
+
+*   **Config description**: Images of category living_room
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'train'      | 1,315,802
+'validation' | 300
+
+## lsun/restaurant
+
+*   **Config description**: Images of category restaurant
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 626,331
+'validation' | 300
+
+## lsun/tower
+
+*   **Config description**: Images of category tower
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 708,264
+'validation' | 300
