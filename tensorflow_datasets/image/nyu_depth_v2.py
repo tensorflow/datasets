@@ -7,7 +7,7 @@ from __future__ import print_function
 import h5py
 import os
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets as tfds
 
@@ -41,7 +41,7 @@ _URL = 'http://datasets.lids.mit.edu/fastdepth/data/nyudepthv2.tar.gz'
 class NyuDepthV2(tfds.core.GeneratorBasedBuilder):
   """NYU Depth V2 Dataset."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('0.0.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -69,7 +69,7 @@ class NyuDepthV2(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'root_dir': os.path.join(base_path, 'nyudepthv2', 'val')
             },
