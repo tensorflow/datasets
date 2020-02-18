@@ -10,41 +10,23 @@
 </div>
 # `flores`
 
+*   **Description**:
+
 Evaluation datasets for low-resource machine translation: Nepali-English and
 Sinhala-English.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.translate.flores.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.3`: No release notes.
+*   **Download size**: `984.65 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Features**:
 
-`flores` is configured with `tfds.translate.flores.FloresConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `neen_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from ne to en, uses encoder plain_text.
-
-*   `sien_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from si to en, uses encoder plain_text.
-
-## `flores/neen_plain_text`
-Translation dataset from ne to en, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.3`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 5,394
-TEST       | 2,835
-VALIDATION | 2,559
-
-### Features
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -52,46 +34,11 @@ Translation({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ne', 'en')`
+*   **Citation**:
 
-*   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
-
-### Supervised keys (for `as_supervised=True`)
-`('ne', 'en')`
-
-## `flores/sien_plain_text`
-Translation dataset from si to en, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.3`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 5,664
-VALIDATION | 2,898
-TEST       | 2,766
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'si': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
-
-### Supervised keys (for `as_supervised=True`)
-`('si', 'en')`
-
-## Citation
 ```
 @misc{guzmn2019new,
     title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
@@ -103,4 +50,24 @@ Translation({
 }
 ```
 
---------------------------------------------------------------------------------
+## flores/neen_plain_text(default config)
+
+*   **Config description**: Translation dataset from ne to en, uses encoder
+    plain_text.
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 2,835
+'validation' | 2,559
+
+## flores/sien_plain_text
+
+*   **Config description**: Translation dataset from si to en, uses encoder
+    plain_text.
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 2,766
+'validation' | 2,898

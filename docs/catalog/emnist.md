@@ -10,6 +10,8 @@
 </div>
 # `emnist`
 
+*   **Description**:
+
 The EMNIST dataset is a set of handwritten character digits derived from the
 NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
 structure that directly matches the MNIST dataset.
@@ -18,44 +20,18 @@ Note: Like the original EMNIST data, images provided here are inverted
 horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 `ds.map` to convert the images to a human-friendlier format.
 
-*   URL:
+*   **Homepage**:
     [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+*   **Versions**:
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `1.0.1`: No release notes.
+*   **Download size**: `535.73 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Features**:
 
-`emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `byclass` (`v3.0.0`) (`Size: Unknown size`): EMNIST ByClass
-
-*   `bymerge` (`v3.0.0`) (`Size: Unknown size`): EMNIST ByMerge
-
-*   `balanced` (`v3.0.0`) (`Size: Unknown size`): EMNIST Balanced
-
-*   `letters` (`v3.0.0`) (`Size: Unknown size`): EMNIST Letters
-
-*   `digits` (`v3.0.0`) (`Size: Unknown size`): EMNIST Digits
-
-*   `mnist` (`v3.0.0`) (`Size: Unknown size`): EMNIST MNIST
-
-## `emnist/byclass`
-EMNIST ByClass
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 814,255
-TRAIN | 697,932
-TEST  | 116,323
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -63,174 +39,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-*   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `emnist/bymerge`
-EMNIST ByMerge
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 814,255
-TRAIN | 697,932
-TEST  | 116,323
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
-})
-```
-
-### Homepage
-
-*   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `emnist/balanced`
-EMNIST Balanced
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 131,600
-TRAIN | 112,800
-TEST  | 18,800
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
-})
-```
-
-### Homepage
-
-*   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `emnist/letters`
-EMNIST Letters
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 103,600
-TRAIN | 88,800
-TEST  | 14,800
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
-})
-```
-
-### Homepage
-
-*   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `emnist/digits`
-EMNIST Digits
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 280,000
-TRAIN | 240,000
-TEST  | 40,000
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `emnist/mnist`
-EMNIST MNIST
-
-Versions:
-
-*   **`3.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 70,000
-TRAIN | 60,000
-TEST  | 10,000
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{cohen_afshar_tapson_schaik_2017,
     title={EMNIST: Extending MNIST to handwritten letters},
@@ -241,4 +54,62 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## emnist/byclass(default config)
+
+*   **Config description**: EMNIST ByClass
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 116,323
+'train' | 697,932
+
+## emnist/bymerge
+
+*   **Config description**: EMNIST ByMerge
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 116,323
+'train' | 697,932
+
+## emnist/balanced
+
+*   **Config description**: EMNIST Balanced
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 18,800
+'train' | 112,800
+
+## emnist/letters
+
+*   **Config description**: EMNIST Letters
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 14,800
+'train' | 88,800
+
+## emnist/digits
+
+*   **Config description**: EMNIST Digits
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 40,000
+'train' | 240,000
+
+## emnist/mnist
+
+*   **Config description**: EMNIST MNIST
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 10,000
+'train' | 60,000

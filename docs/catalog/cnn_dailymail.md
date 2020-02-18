@@ -10,43 +10,32 @@
 </div>
 # `cnn_dailymail`
 
+*   **Description**:
+
 CNN/DailyMail non-anonymized summarization dataset.
 
 There are two features: - article: text of news article, used as the document to
 be summarized - highlights: joined text of highlights with <s> and </s> around
 each highlight, which is the target summary
 
-*   URL:
+*   **Homepage**:
     [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.cnn_dailymail.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/cnn_dailymail.py)
+*   **Versions**:
+    *   **`3.0.0`** (default): Using cased version.
+    *   `0.0.2`: No release notes.
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   `2.0.0`: Separate target sentences with newline.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`cnn_dailymail` is configured with
-`tfds.summarization.cnn_dailymail.CnnDailymailConfig` and has the following
-configurations predefined (defaults to the first one):
+Split | Examples
+:---- | -------:
 
-*   `plain_text` (`v3.0.0`) (`Size: Unknown size`): Plain text
+*   **Features**:
 
-*   `bytes` (`v3.0.0`) (`Size: Unknown size`): Uses byte-level text encoding
-    with `tfds.features.text.ByteTextEncoder`
-
-*   `subwords32k` (`v3.0.0`) (`Size: Unknown size`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
-## `cnn_dailymail/plain_text`
-Plain text
-
-Versions:
-
-*   **`3.0.0`** (default): Using cased version.
-*   `0.0.2`: None
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-*   `2.0.0`: Separate target sentences with newline.
-
-### Statistics
-None computed
-
-### Features
 ```python
 FeaturesDict({
     'article': Text(shape=(), dtype=tf.string),
@@ -54,70 +43,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('article', 'highlights')`
+*   **Citation**:
 
-*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
-
-### Supervised keys (for `as_supervised=True`)
-`('article', 'highlights')`
-
-## `cnn_dailymail/bytes`
-Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
-
-Versions:
-
-*   **`3.0.0`** (default): Using cased version.
-*   `0.0.2`: None
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-*   `2.0.0`: Separate target sentences with newline.
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-### Homepage
-
-*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
-
-### Supervised keys (for `as_supervised=True`)
-`('article', 'highlights')`
-
-## `cnn_dailymail/subwords32k`
-Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
-Versions:
-
-*   **`3.0.0`** (default): Using cased version.
-*   `0.0.2`: None
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-*   `2.0.0`: Separate target sentences with newline.
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64),
-    'highlights': Text(shape=(None,), dtype=tf.int64),
-})
-```
-
-### Homepage
-
-*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
-
-### Supervised keys (for `as_supervised=True`)
-`('article', 'highlights')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/SeeLM17,
   author    = {Abigail See and
@@ -144,4 +74,16 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## cnn_dailymail/plain_text(default config)
+
+*   **Config description**: Plain text
+
+## cnn_dailymail/bytes
+
+*   **Config description**: Uses byte-level text encoding with
+    `tfds.features.text.ByteTextEncoder`
+
+## cnn_dailymail/subwords32k
+
+*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
+    32k vocab size

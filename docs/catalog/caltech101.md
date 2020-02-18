@@ -10,6 +10,8 @@
 </div>
 # `caltech101`
 
+*   **Description**:
+
 Caltech-101 consists of pictures of objects belonging to 101 classes, plus one
 `background clutter` class. Each image is labelled with a single object. Each
 class contains roughly 40 to 800 images, totalling around 9k images. Images are
@@ -17,22 +19,25 @@ of variable sizes, with typical edge lengths of 200-300 pixels. This version
 contains image-level labels only. The original dataset also contains bounding
 boxes.
 
-*   URL:
+*   **Homepage**:
     [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.1.0`: None
+    *   `1.1.0`: No release notes.
+*   **Download size**: `125.64 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `125.64 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 6,084
+'train' | 3,060
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -41,22 +46,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 9,144
-TEST  | 6,084
-TRAIN | 3,060
-
-## Homepage
-
-*   [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{FeiFei2004LearningGV,
   title={Learning Generative Visual Models from Few Training Examples: An Incremental Bayesian Approach Tested on 101 Object Categories},
@@ -65,5 +59,3 @@ TRAIN | 3,060
   year={2004},
 }
 ```
-
---------------------------------------------------------------------------------

@@ -10,49 +10,33 @@
 </div>
 # `imdb_reviews`
 
+*   **Description**:
+
 Large Movie Review Dataset. This is a dataset for binary sentiment
 classification containing substantially more data than previous benchmark
 datasets. We provide a set of 25,000 highly polar movie reviews for training,
 and 25,000 for testing. There is additional unlabeled data for use as well.
 
-*   URL:
+*   **Homepage**:
     [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.1.0`: No release notes.
+*   **Download size**: `80.23 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the
-following configurations predefined (defaults to the first one):
+Split          | Examples
+:------------- | -------:
+'test'         | 25,000
+'train'        | 25,000
+'unsupervised' | 50,000
 
-*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text
+*   **Features**:
 
-*   `bytes` (`v1.0.0`) (`Size: Unknown size`): Uses byte-level text encoding
-    with `tfds.features.text.ByteTextEncoder`
-
-*   `subwords8k` (`v1.0.0`) (`Size: Unknown size`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 8k vocab size
-
-*   `subwords32k` (`v1.0.0`) (`Size: Unknown size`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
-## `imdb_reviews/plain_text`
-Plain text
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split        | Examples
-:----------- | -------:
-ALL          | 100,000
-UNSUPERVISED | 50,000
-TEST         | 25,000
-TRAIN        | 25,000
-
-### Features
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
@@ -60,113 +44,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('text', 'label')`
+*   **Citation**:
 
-*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'label')`
-
-## `imdb_reviews/bytes`
-Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split        | Examples
-:----------- | -------:
-ALL          | 100,000
-UNSUPERVISED | 50,000
-TEST         | 25,000
-TRAIN        | 25,000
-
-### Features
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-### Homepage
-
-*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'label')`
-
-## `imdb_reviews/subwords8k`
-Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split        | Examples
-:----------- | -------:
-ALL          | 100,000
-UNSUPERVISED | 50,000
-TEST         | 25,000
-TRAIN        | 25,000
-
-### Features
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
-})
-```
-
-### Homepage
-
-*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'label')`
-
-## `imdb_reviews/subwords32k`
-Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split        | Examples
-:----------- | -------:
-ALL          | 100,000
-UNSUPERVISED | 50,000
-TEST         | 25,000
-TRAIN        | 25,000
-
-### Features
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
-})
-```
-
-### Homepage
-
-*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'label')`
-
-## Citation
 ```
 @InProceedings{maas-EtAl:2011:ACL-HLT2011,
   author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},
@@ -181,4 +63,21 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## imdb_reviews/plain_text(default config)
+
+*   **Config description**: Plain text
+
+## imdb_reviews/bytes
+
+*   **Config description**: Uses byte-level text encoding with
+    `tfds.features.text.ByteTextEncoder`
+
+## imdb_reviews/subwords8k
+
+*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
+    vocab size
+
+## imdb_reviews/subwords32k
+
+*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
+    32k vocab size

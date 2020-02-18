@@ -10,41 +10,37 @@
 </div>
 # `lost_and_found`
 
-*   URL:
+*   **Description**:
+
+The LostAndFound Dataset addresses the problem of detecting unexpected small
+obstacles on the road often caused by lost cargo. The dataset comprises 112
+stereo video sequences with 2104 annotated frames (picking roughly every tenth
+frame from the recorded data).
+
+The dataset is designed analogous to the 'Cityscapes' dataset. The datset
+provides: - stereo image pairs in either 8 or 16 bit color resolution -
+precomputed disparity maps - coarse semantic labels for objects and street
+
+Descriptions of the labels are given here:
+http://www.6d-vision.com/laf_table.pdf
+
+*   **Homepage**:
     [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.lost_and_found.LostAndFound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lost_and_found.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `5.44 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`lost_and_found` is configured with
-`tfds.image.lost_and_found.LostAndFoundConfig` and has the following
-configurations predefined (defaults to the first one):
+Split   | Examples
+:------ | -------:
+'test'  | 1,203
+'train' | 1,036
 
-*   `semantic_segmentation` (`v1.0.0`) (`Size: Unknown size`): Lost and Found
-    semantic segmentation dataset.
+*   **Features**:
 
-*   `stereo_disparity` (`v1.0.0`) (`Size: Unknown size`): Lost and Found stereo
-    images and disparity maps.
-
-*   `full` (`v1.0.0`) (`Size: Unknown size`): Full Lost and Found dataset.
-
-*   `full_16bit` (`v1.0.0`) (`Size: Unknown size`): Full Lost and Found dataset.
-
-## `lost_and_found/semantic_segmentation`
-Lost and Found semantic segmentation dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,239
-TEST  | 1,203
-TRAIN | 1,036
-
-### Features
 ```python
 FeaturesDict({
     'image_id': Text(shape=(), dtype=tf.string),
@@ -53,102 +49,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-*   [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
-
-## `lost_and_found/stereo_disparity`
-Lost and Found stereo images and disparity maps.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,239
-TEST  | 1,203
-TRAIN | 1,036
-
-### Features
-```python
-FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
-
-## `lost_and_found/full`
-Full Lost and Found dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,239
-TEST  | 1,203
-TRAIN | 1,036
-
-### Features
-```python
-FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'instance_id': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
-
-## `lost_and_found/full_16bit`
-Full Lost and Found dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,239
-TEST  | 1,203
-TRAIN | 1,036
-
-### Features
-```python
-FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'instance_id': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
-
-## Citation
 ```
 @inproceedings{pinggera2016lost,
   title={Lost and found: detecting small road hazards for self-driving vehicles},
@@ -158,4 +63,18 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## lost_and_found/semantic_segmentation(default config)
+
+*   **Config description**: Lost and Found semantic segmentation dataset.
+
+## lost_and_found/stereo_disparity
+
+*   **Config description**: Lost and Found stereo images and disparity maps.
+
+## lost_and_found/full
+
+*   **Config description**: Full Lost and Found dataset.
+
+## lost_and_found/full_16bit
+
+*   **Config description**: Full Lost and Found dataset.

@@ -10,6 +10,8 @@
 </div>
 # `citrus_leaves`
 
+*   **Description**:
+
 The original citrus dataset contains 759 images of healthy and unhealthy citrus
 fruits and leaves. However, for now we only export 594 images of citrus leaves
 with the following labels: Black Spot, Canker, Greening, and Healthy. The
@@ -21,20 +23,22 @@ other non-leaf images being present in the same directory.
 Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2 License:
 http://creativecommons.org/licenses/by/4.0
 
-*   URL:
+*   **Homepage**:
     [https://data.mendeley.com/datasets/3f83gxmv57/2](https://data.mendeley.com/datasets/3f83gxmv57/2)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.citrus.CitrusLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/citrus.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `63.87 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 594
 
-*   Download size: `63.87 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -43,21 +47,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 594
-TRAIN | 594
-
-## Homepage
-
-*   [https://data.mendeley.com/datasets/3f83gxmv57/2](https://data.mendeley.com/datasets/3f83gxmv57/2)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{rauf2019citrus,
   title={A citrus fruits and leaves dataset for detection and classification of
@@ -71,5 +65,3 @@ and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
   publisher={Elsevier}
 }
 ```
-
---------------------------------------------------------------------------------

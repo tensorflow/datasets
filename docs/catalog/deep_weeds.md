@@ -10,6 +10,8 @@
 </div>
 # `deep_weeds`
 
+*   **Description**:
+
 The DeepWeeds dataset consists of 17,509 images capturing eight different weed
 species native to Australia in situ with neighbouring flora.The selected weed
 species are local to pastoral grasslands across the state of Queensland.The
@@ -17,21 +19,23 @@ images were collected from weed infestations at the following sites across
 Queensland: "Black River", "Charters Towers", "Cluden", "Douglas", "Hervey
 Range", "Kelso", "McKinlay" and "Paluma".
 
-*   URL:
+*   **Homepage**:
     [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.deep_weeds.DeepWeeds`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/deep_weeds.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): Fixes wrong labels in V1.
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `892.52 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-*   Download size: `892.52 MiB`
+Split   | Examples
+:------ | -------:
+'train' | 17,509
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
@@ -39,21 +43,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 17,509
-TRAIN | 17,509
-
-## Homepage
-
-*   [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{DeepWeeds2019,
   author = {Alex Olsen and
@@ -81,5 +75,3 @@ TRAIN | 17,509
   doi = "10.1038/s41598-018-38343-3"
 }
 ```
-
---------------------------------------------------------------------------------

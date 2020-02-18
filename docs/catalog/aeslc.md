@@ -10,25 +10,31 @@
 </div>
 # `aeslc`
 
+*   **Description**:
+
 A collection of email messages of employees in the Enron Corporation.
 
 There are two features: - email_body: email body text. - subject_line: email
 subject text.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.aeslc.Aeslc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/aeslc.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `11.10 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 1,906
+'train'      | 14,436
+'validation' | 1,960
 
-*   Download size: `11.10 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'email_body': Text(shape=(), dtype=tf.string),
@@ -36,23 +42,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('email_body', 'subject_line')`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 18,302
-TRAIN      | 14,436
-VALIDATION | 1,960
-TEST       | 1,906
-
-## Homepage
-
-*   [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
-
-## Supervised keys (for `as_supervised=True`)
-`('email_body', 'subject_line')`
-
-## Citation
 ```
 @misc{zhang2019email,
     title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},
@@ -63,5 +57,3 @@ TEST       | 1,906
     primaryClass={cs.CL}
 }
 ```
-
---------------------------------------------------------------------------------

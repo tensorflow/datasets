@@ -10,6 +10,8 @@
 </div>
 # `dmlab`
 
+*   **Description**:
+
 The Dmlab dataset contains frames observed by the agent acting in the DeepMind
 Lab environment, which are annotated by the distance between the agent and
 various objects present in the environment. The goal is to is to evaluate the
@@ -18,20 +20,24 @@ environments. The Dmlab dataset consists of 360x480 color images in 6 classes.
 The classes are {close, far, very far} x {positive reward, negative reward}
 respectively.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/google-research/task_adaptation](https://github.com/google-research/task_adaptation)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.dmlab.Dmlab`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dmlab.py)
-*   Version: `v2.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`2.0.0`** (default): No release notes.
+*   **Download size**: `2.81 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`2.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 22,735
+'train'      | 65,550
+'validation' | 22,628
 
-*   Download size: `2.81 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -40,23 +46,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 110,913
-TRAIN      | 65,550
-TEST       | 22,735
-VALIDATION | 22,628
-
-## Homepage
-
-*   [https://github.com/google-research/task_adaptation](https://github.com/google-research/task_adaptation)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{zhai2019visual,
         title={The Visual Task Adaptation Benchmark},
@@ -73,5 +67,3 @@ VALIDATION | 22,628
                               url = {https://arxiv.org/abs/1910.04867}
                           }
 ```
-
---------------------------------------------------------------------------------

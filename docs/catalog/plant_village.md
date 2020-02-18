@@ -10,6 +10,8 @@
 </div>
 # `plant_village`
 
+*   **Description**:
+
 The PlantVillage dataset consists of 54303 healthy and unhealthy leaf images
 divided into 38 categories by species and disease.
 
@@ -22,19 +24,22 @@ dataset.
 Original paper URL: https://arxiv.org/abs/1511.08060 Dataset URL:
 https://data.mendeley.com/datasets/tywbtsjrjv/1
 
-*   URL: [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
-*   `DatasetBuilder`:
+*   **Homepage**:
+    [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
+*   **Source code**:
     [`tfds.image.plant_village.PlantVillage`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/plant_village.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `827.82 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 54,303
 
-*   Download size: `827.82 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -43,21 +48,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 54,303
-TRAIN | 54,303
-
-## Homepage
-
-*   [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/HughesS15,
   author    = {David P. Hughes and
@@ -76,5 +71,3 @@ TRAIN | 54,303
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

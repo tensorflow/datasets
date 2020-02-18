@@ -10,41 +10,34 @@
 </div>
 # `ted_multi_translate`
 
+*   **Description**:
+
 Massively multilingual (60 language) data set derived from TED Talk transcripts.
 Each record consists of parallel arrays of language and text. Missing and
 incomplete translations will be filtered out.
 
-*   URL:
+*   **Config description**: Plain text import of multilingual TED talk
+    translations
+*   **Homepage**:
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.translate.ted_multi.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.3`: No release notes.
+*   **Download size**: `335.91 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-`ted_multi_translate` is configured with
-`tfds.core.dataset_builder.BuilderConfig` and has the following configurations
-predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'test'       | 7,213
+'train'      | 258,098
+'validation' | 6,049
 
-*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of
-    multilingual TED talk translations
+*   **Features**:
 
-## `ted_multi_translate/plain_text`
-Plain text import of multilingual TED talk translations
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.3`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 271,360
-TRAIN      | 258,098
-TEST       | 7,213
-VALIDATION | 6,049
-
-### Features
 ```python
 FeaturesDict({
     'talk_name': Text(shape=(), dtype=tf.string),
@@ -55,11 +48,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
-
-## Citation
 ```
 @InProceedings{qi-EtAl:2018:N18-2,
   author    = {Qi, Ye  and  Sachan, Devendra  and  Felix, Matthieu  and  Padmanabhan, Sarguna  and  Neubig, Graham},
@@ -75,4 +68,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## ted_multi_translate/plain_text(default config)

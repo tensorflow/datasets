@@ -10,6 +10,8 @@
 </div>
 # `scientific_papers`
 
+*   **Description**:
+
 Scientific papers datasets contains two sets of long and structured documents.
 The datasets are obtained from ArXiv and PubMed OpenAccess repositories.
 
@@ -18,37 +20,16 @@ document, pagragraphs seperated by "/n". - abstract: the abstract of the
 document, pagragraphs seperated by "/n". - section_names: titles of sections,
 seperated by "/n".
 
-*   URL:
+*   **Homepage**:
     [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
+*   **Versions**:
+    *   **`1.1.0`** (default): No release notes.
+*   **Download size**: `4.20 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Features**:
 
-`scientific_papers` is configured with
-`tfds.summarization.scientific_papers.ScientificPapersConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `arxiv` (`v1.1.0`) (`Size: Unknown size`): Documents from ArXiv repository.
-
-*   `pubmed` (`v1.1.0`) (`Size: Unknown size`): Documents from PubMed
-    repository.
-
-## `scientific_papers/arxiv`
-Documents from ArXiv repository.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 215,913
-TRAIN      | 203,037
-TEST       | 6,440
-VALIDATION | 6,436
-
-### Features
 ```python
 FeaturesDict({
     'abstract': Text(shape=(), dtype=tf.string),
@@ -57,46 +38,11 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('article', 'abstract')`
+*   **Citation**:
 
-*   [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
-
-### Supervised keys (for `as_supervised=True`)
-`('article', 'abstract')`
-
-## `scientific_papers/pubmed`
-Documents from PubMed repository.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 133,215
-TRAIN      | 119,924
-TEST       | 6,658
-VALIDATION | 6,633
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'article': Text(shape=(), dtype=tf.string),
-    'section_names': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
-
-### Supervised keys (for `as_supervised=True`)
-`('article', 'abstract')`
-
-## Citation
 ```
 @article{Cohan_2018,
    title={A Discourse-Aware Attention Model for Abstractive Summarization of
@@ -112,4 +58,24 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## scientific_papers/arxiv(default config)
+
+*   **Config description**: Documents from ArXiv repository.
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 6,440
+'train'      | 203,037
+'validation' | 6,436
+
+## scientific_papers/pubmed
+
+*   **Config description**: Documents from PubMed repository.
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 6,658
+'train'      | 119,924
+'validation' | 6,633

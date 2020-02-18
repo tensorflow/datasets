@@ -10,24 +10,29 @@
 </div>
 # `cos_e`
 
+*   **Description**:
+
 Common Sense Explanations (CoS-E) allows for training language models to
 automatically generate explanations that can be used during training and
 inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/salesforce/cos-e](https://github.com/salesforce/cos-e)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.cos_e.CosE`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cos_e.py)
-*   Version: `v0.0.1`
-*   Versions:
+*   **Versions**:
+    *   **`0.0.1`** (default): No release notes.
+*   **Download size**: `6.23 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Splits**:
 
-    *   **`0.0.1`** (default):
+Split        | Examples
+:----------- | -------:
+'train'      | 9,741
+'validation' | 1,221
 
-*   Download size: `6.23 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'abstractive_explanation': Text(shape=(), dtype=tf.string),
@@ -39,19 +44,11 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 10,962
-TRAIN      | 9,741
-VALIDATION | 1,221
-
-## Homepage
-
-*   [https://github.com/salesforce/cos-e](https://github.com/salesforce/cos-e)
-
-## Citation
 ```
 @inproceedings{rajani2019explain,
      title = "Explain Yourself! Leveraging Language models for Commonsense Reasoning",
@@ -64,5 +61,3 @@ VALIDATION | 1,221
     url ="https://arxiv.org/abs/1906.02361"
 }
 ```
-
---------------------------------------------------------------------------------
