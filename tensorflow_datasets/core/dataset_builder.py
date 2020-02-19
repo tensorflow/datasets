@@ -541,7 +541,6 @@ class DatasetBuilder(object):
           read_config=read_config,
       )
       # Auto-cache small datasets which are small enough to fit in memory.
-      # TODO(tfds): Should expose auto-caching default value in the dataset doc.
       if self._should_cache_ds(
           split=split,
           shuffle_files=shuffle_files,

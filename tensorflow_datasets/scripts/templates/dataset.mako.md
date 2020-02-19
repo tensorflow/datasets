@@ -7,8 +7,7 @@ Displayed in https://www.tensorflow.org/datasets/catalog/.
 
 import collections
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core.utils.py_utils import get_class_path
-from tensorflow_datasets.core.utils.py_utils import get_class_url
+from tensorflow_datasets.core.utils import py_utils
 
 %>
 
@@ -36,16 +35,14 @@ ${builder.info.description}
 </%def>
 
 <%def name="display_source(builder)">\
-*   **Source code**: [`${get_class_path(builder)}`](${get_class_url(builder)})
+*   **Source code**:
+    [`${py_utils.get_class_path(builder)}`](${py_utils.get_class_url(builder)})
 </%def>
 
 <%def name="display_versions(builder)">\
 <%
 def list_versions(builder):
-  # List all available versions
-  # Sort them in order
-  # Get the default version
-  for v in builder.versions:
+  for v in builder.versions:  # List all available versions (in default order)
     if v == builder.version:  # Highlight the default version
       version_name = '**`{}`** (default)'.format(str(v))
     else:
@@ -61,6 +58,54 @@ def list_versions(builder):
 <%def name="display_size(builder)">\
 *   **Download size**: `${tfds.units.size_str(builder.info.download_size)}`
 *   **Dataset size**: `${tfds.units.size_str(builder.info.dataset_size)}`
+</%def>
+
+<%
+def build_autocached_info(builder):
+  """Returns the auto-cache information string."""
+  always_cached = set()
+  never_cached = set()
+  unshuffle_cached = set()
+  for split_name in builder.info.splits.keys():
+    split_name = str(split_name)
+    cache_shuffled = builder._should_cache_ds(
+        split_name, shuffle_files=True, read_config=tfds.ReadConfig())
+    cache_unshuffled = builder._should_cache_ds(
+        split_name, shuffle_files=False, read_config=tfds.ReadConfig())
+
+    if cache_shuffled == cache_unshuffled == True:
+      always_cached.add(split_name)
+    elif cache_shuffled == cache_unshuffled == False:
+      never_cached.add(split_name)
+    else:  # Dataset is only cached when shuffled_files is False
+      assert not cache_shuffled and cache_unshuffled
+      unshuffle_cached.add(split_name)
+
+
+  if len(always_cached) == len(builder.info.splits.keys()):
+    autocached_info = 'Yes'  # All splits are auto-cached.
+  elif len(never_cached) == len(builder.info.splits.keys()):
+    autocached_info = 'No'  # Splits never auto-cached.
+  else:  # Some splits cached, some not.
+    autocached_info_parts = []
+    if always_cached:
+      split_names_str = ', '.join(always_cached)
+      autocached_info_parts.append('Yes ({})'.format(split_names_str))
+    if never_cached:
+      split_names_str = ', '.join(never_cached)
+      autocached_info_parts.append('No ({})'.format(split_names_str))
+    if unshuffle_cached:
+      split_names_str = ', '.join(unshuffle_cached)
+      autocached_info_parts.append(
+          'Only when `shuffle_files=False` ({})'.format(split_names_str))
+    autocached_info = ', '.join(autocached_info_parts)
+  return autocached_info
+
+%>
+<%def name="display_autocache(builder)">\
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    ${build_autocached_info(builder)}
 </%def>
 
 <%def name="display_manual(builder)">\
@@ -129,6 +174,7 @@ def get_versions(builder):
   return tuple((str(v), v.description) for v in builder.versions)
 def get_size(builder): (builder.info.download_size, builder.info.dataset_size)
 def get_manual(builder): builder.MANUAL_DOWNLOAD_INSTRUCTIONS
+def get_autocache(builder): build_autocached_info(builder)
 def get_splits(builder):
   return tuple(
       (str(s.name), int(s.num_examples)) for s in builder.info.splits.values()
@@ -145,6 +191,7 @@ all_sections = [
     Section(get_versions, display_versions),
     Section(get_size, display_size),
     Section(get_manual, display_manual),
+    Section(get_autocache, display_autocache),
     Section(get_splits, display_splits),
     Section(get_features, display_features),
     Section(get_supervised, display_supervised),
@@ -161,7 +208,7 @@ ${section.make(builder)}\
 % endfor
 </%def>
 
-## --------------------------- Builder builder ---------------------------
+## --------------------------- Builder configs ---------------------------
 
 <%def name="display_all_builders(builders)">\
 <%
@@ -181,9 +228,9 @@ ${display_builder(next(iter(builders)), common_sections)}
 
 % for i, builder in enumerate(builders):
 <%
-header_suffix = ' (default config)' if i == 0 else ''
+header_suffix = '(default config)' if i == 0 else ''
 %>\
-${'##'} ${builder.name}/${builder.builder_config.name}${header_suffix}
+${'##'} ${builder.name}/${builder.builder_config.name} ${header_suffix}
 
 ${display_builder(builder, unique_sections)}
 % endfor
