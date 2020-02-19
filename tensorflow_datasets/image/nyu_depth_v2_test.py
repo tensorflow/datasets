@@ -10,7 +10,7 @@ from tensorflow_datasets.image import nyu_depth_v2
 
 class NyuDepthV2Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = nyu_depth_v2.NyuDepthV2
-  SPLITS = {"train": 2, "test": 1}
+  SPLITS = {"train": 2, "validation": 1}
 
 
 if __name__ == "__main__":
