@@ -358,7 +358,7 @@ class DatasetBuilder(object):
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
-          self.info.downloaded_size = dl_manager.downloaded_size
+          self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
