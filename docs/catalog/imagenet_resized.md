@@ -35,6 +35,9 @@ indexed by subtracting one.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `237.11 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -50,7 +53,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -65,7 +67,7 @@ FeaturesDict({
 }
 ```
 
-## imagenet_resized/8x8(default config)
+## imagenet_resized/8x8 (default config)
 
 *   **Config description**: This dataset consists of the ImageNet dataset
     resized to 8x8. The images here are the ones provided by Chrabaszcz et. al.

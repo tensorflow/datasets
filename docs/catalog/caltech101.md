@@ -29,6 +29,9 @@ boxes.
     *   `1.1.0`: No release notes.
 *   **Download size**: `125.64 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -45,7 +48,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`

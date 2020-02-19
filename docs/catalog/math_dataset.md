@@ -40,7 +40,9 @@ Example usage: train_examples, val_examples = tfds.load(
 * **Source code**:
 [`tfds.text.math_dataset.MathDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_dataset.py)
 * **Versions**: * **`1.0.0`** (default): No release notes. * **Download size**:
-`2.17 GiB` * **Dataset size**: `Unknown size` * **Splits**:
+`2.17 GiB` * **Dataset size**: `Unknown size` * **Auto-cached**
+([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+No * **Splits**:
 
 Split   | Examples
 :------ | --------:
@@ -55,7 +57,6 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('question', 'answer')`
@@ -70,7 +71,7 @@ FeaturesDict({
 }
 ```
 
-## math_dataset/algebra__linear_1d(default config)
+## math_dataset/algebra__linear_1d (default config)
 
 ## math_dataset/algebra__linear_1d_composed
 

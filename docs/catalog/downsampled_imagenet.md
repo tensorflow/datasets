@@ -29,6 +29,9 @@ For resized ImageNet for supervised learning
     *   `1.0.0`: No release notes.
 *   **Download size**: `3.98 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -43,7 +46,6 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -67,7 +69,7 @@ FeaturesDict({
 }
 ```
 
-## downsampled_imagenet/32x32(default config)
+## downsampled_imagenet/32x32 (default config)
 
 *   **Config description**: A dataset consisting of Train and Validation images
     of 32x32 resolution.

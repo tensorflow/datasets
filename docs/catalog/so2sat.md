@@ -35,6 +35,9 @@ http://creativecommons.org/licenses/by/4.0
     *   `0.0.1`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split | Examples
@@ -49,12 +52,11 @@ FeaturesDict({
     'sample_id': Tensor(shape=(), dtype=tf.int64),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
 
-## so2sat/rgb(default config)
+## so2sat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
 

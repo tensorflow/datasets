@@ -27,6 +27,9 @@ horses/zebras, apple/orange,...)
     *   `0.1.0`: No release notes.
 *   **Download size**: `74.82 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -35,7 +38,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -61,7 +63,7 @@ FeaturesDict({
 }
 ```
 
-## cycle_gan/apple2orange(default config)
+## cycle_gan/apple2orange (default config)
 
 *   **Splits**:
 

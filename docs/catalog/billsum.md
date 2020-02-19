@@ -27,6 +27,9 @@ summary.
     *   **`3.0.0`** (default): No release notes.
 *   **Download size**: `64.14 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split     | Examples
@@ -44,7 +47,6 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('text', 'summary')`

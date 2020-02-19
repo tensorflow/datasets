@@ -27,6 +27,9 @@ defines 200 classes but only uses 133.
     *   **`1.1.0`** (default): No release notes.
 *   **Download size**: `37.57 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -43,7 +46,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -74,7 +76,7 @@ FeaturesDict({
 }
 ```
 
-## coco/2014(default config)
+## coco/2014 (default config)
 
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding

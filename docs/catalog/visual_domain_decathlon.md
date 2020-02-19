@@ -31,6 +31,9 @@ the competition.
     *   **`1.1.0`** (default): No release notes.
 *   **Download size**: `1.04 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -40,7 +43,6 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -55,7 +57,7 @@ FeaturesDict({
 }
 ```
 
-## visual_domain_decathlon/aircraft(default config)
+## visual_domain_decathlon/aircraft (default config)
 
 *   **Config description**: Data based on "Aircraft", with images resized
     isotropically to have a shorter size of 72 pixels.

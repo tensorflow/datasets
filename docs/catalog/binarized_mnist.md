@@ -24,6 +24,9 @@ images, so labels are not provided.
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `104.68 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -39,7 +42,6 @@ FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

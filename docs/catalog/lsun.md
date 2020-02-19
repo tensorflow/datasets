@@ -24,6 +24,9 @@ tower etc.
     *   `0.1.1`: No release notes.
 *   **Download size**: `3.06 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -31,7 +34,6 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -55,7 +57,7 @@ FeaturesDict({
 }
 ```
 
-## lsun/classroom(default config)
+## lsun/classroom (default config)
 
 *   **Config description**: Images of category classroom
 *   **Splits**:

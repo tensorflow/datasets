@@ -54,6 +54,9 @@ URL: http://bigearth.net/
     *   `0.0.2`: No release notes.
 *   **Download size**: `65.22 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -80,7 +83,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'labels')`
@@ -96,7 +98,7 @@ FeaturesDict({
 }
 ```
 
-## bigearthnet/rgb(default config)
+## bigearthnet/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
 

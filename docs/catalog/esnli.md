@@ -25,6 +25,9 @@ relations.
     *   **`0.0.2`** (default): No release notes.
 *   **Download size**: `195.04 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -45,7 +48,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -64,4 +66,4 @@ url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-n
 }
 ```
 
-## esnli/plain_text(default config)
+## esnli/plain_text (default config)

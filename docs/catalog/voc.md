@@ -32,6 +32,9 @@ contain annotations.
     *   **`4.0.0`** (default): No release notes.
 *   **Download size**: `868.85 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -49,7 +52,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -62,7 +64,7 @@ FeaturesDict({
     howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
 ```
 
-## voc/2007(default config)
+## voc/2007 (default config)
 
 *   **Config description**: This dataset contains the data from the PASCAL
     Visual Object Classes Challenge 2007, a.k.a. VOC2007, corresponding to the

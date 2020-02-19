@@ -46,6 +46,9 @@ ensuring that all pixel outputs were different. No noise was added.
     *   `0.1.0`: No release notes.
 *   **Download size**: `26.73 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -69,7 +72,6 @@ FeaturesDict({
     'value_y_position': Tensor(shape=[], dtype=tf.float32),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

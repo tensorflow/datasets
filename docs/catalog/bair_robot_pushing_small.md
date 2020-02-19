@@ -26,6 +26,9 @@ including one training set (train) and two test sets of previously seen
     *   `1.0.0`: No release notes.
 *   **Download size**: `30.06 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -43,7 +46,6 @@ Sequence({
     'image_main': Image(shape=(64, 64, 3), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

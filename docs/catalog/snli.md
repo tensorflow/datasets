@@ -30,6 +30,9 @@ inference (NLI), also known as recognizing textual entailment (RTE).
     *   `0.0.1`: No release notes.
 *   **Download size**: `90.17 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -47,7 +50,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -63,4 +65,4 @@ FeaturesDict({
 }
 ```
 
-## snli/plain_text(default config)
+## snli/plain_text (default config)

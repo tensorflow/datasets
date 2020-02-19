@@ -21,6 +21,9 @@ modeling. This has almost one billion words in the training data.
     [`tfds.text.lm1b.Lm1b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/lm1b.py)
 *   **Download size**: `1.67 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -35,7 +38,6 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('text', 'text')`
@@ -63,7 +65,7 @@ FeaturesDict({
 }
 ```
 
-## lm1b/plain_text(default config)
+## lm1b/plain_text (default config)
 
 *   **Config description**: Plain text
 *   **Versions**:

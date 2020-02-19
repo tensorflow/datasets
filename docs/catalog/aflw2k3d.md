@@ -27,6 +27,9 @@ to 21 points, as the original paper mentioned.
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `83.36 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -42,7 +45,6 @@ FeaturesDict({
     'landmarks_68_3d_z': Tensor(shape=(68, 1), dtype=tf.float32),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

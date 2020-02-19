@@ -28,7 +28,9 @@ Example usage: data = tfds.load('cfq/mcd1') * **Homepage**:
 * **Source code**:
 [`tfds.text.cfq.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)
 * **Versions**: * **`1.0.0`** (default): No release notes. * **Download size**:
-`255.20 MiB` * **Dataset size**: `Unknown size` * **Features**:
+`255.20 MiB` * **Dataset size**: `Unknown size` * **Auto-cached**
+([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+No * **Features**:
 
 ```python
 FeaturesDict({
@@ -36,7 +38,6 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('question', 'query')`
@@ -53,7 +54,7 @@ FeaturesDict({
 }
 ```
 
-## cfq/mcd1(default config)
+## cfq/mcd1 (default config)
 
 *   **Splits**:
 

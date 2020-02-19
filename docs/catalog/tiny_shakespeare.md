@@ -39,6 +39,9 @@ d = d.batch(batch_size)
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `1.06 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split        | Examples
@@ -54,7 +57,6 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

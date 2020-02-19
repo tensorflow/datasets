@@ -28,6 +28,9 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
     *   **`0.0.1`** (default): No release notes.
 *   **Download size**: `216.34 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -44,7 +47,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -70,4 +72,4 @@ FeaturesDict({
 }
 ```
 
-## multi_nli_mismatch/plain_text(default config)
+## multi_nli_mismatch/plain_text (default config)

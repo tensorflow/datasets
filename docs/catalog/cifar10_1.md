@@ -29,6 +29,9 @@ v4 and v6.
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `5.93 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -37,7 +40,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -62,7 +64,7 @@ FeaturesDict({
 }
 ```
 
-## cifar10_1/v4(default config)
+## cifar10_1/v4 (default config)
 
 *   **Config description**: It is the first version of our dataset on which we
     tested any classifier. As mentioned above, this makes the v4 dataset

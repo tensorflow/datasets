@@ -28,6 +28,9 @@ heuristic algorithms: Source, Family, and Qualities.
         (unormalized).
 *   **Download size**: `73.07 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -55,7 +58,6 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -79,7 +81,7 @@ FeaturesDict({
 }
 ```
 
-## nsynth/full(default config)
+## nsynth/full (default config)
 
 *   **Config description**: Full NSynth Dataset is split into train, valid, and
     test sets, with no instruments overlapping between the train set and the

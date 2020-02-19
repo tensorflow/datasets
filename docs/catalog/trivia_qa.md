@@ -26,6 +26,9 @@ answering the questions.
     *   **`1.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `119.78 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split        | Examples
@@ -66,7 +69,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -86,7 +88,7 @@ archivePrefix = {arXiv},
 }
 ```
 
-## trivia_qa/rc(default config)
+## trivia_qa/rc (default config)
 
 *   **Config description**: Question-answer pairs where all documents for a
     given question contain the answer string(s). Includes context from Wikipedia

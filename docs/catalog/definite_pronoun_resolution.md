@@ -34,6 +34,9 @@ more than once in the sentence, its first occurrence is the one to be resolved.
     *   `0.0.1`: No release notes.
 *   **Download size**: `222.12 KiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -51,7 +54,6 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('sentence', 'label')`
@@ -68,4 +70,4 @@ FeaturesDict({
 }
 ```
 
-## definite_pronoun_resolution/plain_text(default config)
+## definite_pronoun_resolution/plain_text (default config)

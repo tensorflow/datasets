@@ -25,6 +25,9 @@ Sinhala-English.
     *   `0.0.3`: No release notes.
 *   **Download size**: `984.65 KiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -33,7 +36,6 @@ Translation({
     'ne': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('ne', 'en')`
@@ -50,7 +52,7 @@ Translation({
 }
 ```
 
-## flores/neen_plain_text(default config)
+## flores/neen_plain_text (default config)
 
 *   **Config description**: Translation dataset from ne to en, uses encoder
     plain_text.

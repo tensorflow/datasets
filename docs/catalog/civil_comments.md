@@ -33,6 +33,9 @@ released under CC0, as is the underlying comment text.
     *   **`0.9.0`** (default): No release notes.
 *   **Download size**: `395.73 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -55,7 +58,6 @@ FeaturesDict({
     'toxicity': Tensor(shape=(), dtype=tf.float32),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('text', 'toxicity')`

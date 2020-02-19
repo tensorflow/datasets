@@ -26,6 +26,9 @@ reasoning each question requires.
     *   `1.0.0`: No release notes.
 *   **Download size**: `17.72 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -51,7 +54,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

@@ -29,6 +29,9 @@ NQ to be a more realistic and challenging task than prior QA datasets.
     *   `0.0.1`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `90.26 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -73,7 +76,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

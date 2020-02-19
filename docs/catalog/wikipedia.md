@@ -27,6 +27,9 @@ cleaning to strip markdown and unwanted sections (references, etc.).
     *   `0.0.3`: No release notes.
 *   **Download size**: `44.09 KiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -35,7 +38,6 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -49,7 +51,7 @@ FeaturesDict({
 }
 ```
 
-## wikipedia/20190301.aa(default config)
+## wikipedia/20190301.aa (default config)
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20190301 dump.
 *   **Splits**:

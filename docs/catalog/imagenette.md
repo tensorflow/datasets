@@ -39,6 +39,10 @@ ideas and share with others. The dataset comes in three variants:
 
 *   **Dataset size**: `Unknown size`
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Splits**:
 
 Split        | Examples
@@ -54,7 +58,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -64,7 +67,7 @@ FeaturesDict({
 
 ```
 
-## imagenette/full-size(default config)
+## imagenette/full-size (default config)
 
 *   **Config description**: Imagenette is a subset of 10 easily classified
     classes from the Imagenet dataset. It was originally prepared by Jeremy

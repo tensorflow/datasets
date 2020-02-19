@@ -24,6 +24,9 @@
     *   `0.0.1`: No release notes.
 *   **Download size**: `707.65 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split  | Examples
@@ -38,7 +41,6 @@ FeaturesDict({
     'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

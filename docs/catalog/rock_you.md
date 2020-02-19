@@ -27,6 +27,9 @@ Machine Learning models for password guessing and cracking.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `133.44 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples

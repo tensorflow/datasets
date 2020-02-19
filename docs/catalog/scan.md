@@ -33,7 +33,9 @@ Example usage: data = tfds.load('scan/length') * **Homepage**:
 **Source code**:
 [`tfds.text.scan.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
 * **Versions**: * **`1.0.0`** (default): No release notes. * **Download size**:
-`17.82 MiB` * **Dataset size**: `Unknown size` * **Features**:
+`17.82 MiB` * **Dataset size**: `Unknown size` * **Auto-cached**
+([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+No * **Features**:
 
 ```python
 FeaturesDict({
@@ -41,7 +43,6 @@ FeaturesDict({
     'commands': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('commands', 'actions')`
@@ -58,7 +59,7 @@ FeaturesDict({
 }
 ```
 
-## scan/simple(default config)
+## scan/simple (default config)
 
 *   **Splits**:
 

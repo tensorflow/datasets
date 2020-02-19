@@ -28,6 +28,9 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
     *   `1.0.0`: No release notes.
 *   **Download size**: `3.11 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -44,7 +47,6 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -59,7 +61,7 @@ FeaturesDict({
 }
 ```
 
-## groove/full-midionly(default config)
+## groove/full-midionly (default config)
 
 *   **Config description**: Groove dataset without audio, unsplit.
 *   **Splits**:

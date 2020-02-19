@@ -45,6 +45,9 @@ a particular matrix.
     Data can be downloaded from
     https://console.cloud.google.com/storage/browser/ravens-matrices
     Please put all the tar.gz files in manual_dir.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -65,7 +68,6 @@ FeaturesDict({
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -90,7 +92,7 @@ FeaturesDict({
 }
 ```
 
-## abstract_reasoning/neutral(default config)
+## abstract_reasoning/neutral (default config)
 
 *   **Config description**: The structures encoding the matrices in both the \
     training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \

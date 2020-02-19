@@ -23,6 +23,9 @@ challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
     *   **`2.0.0`** (default): No release notes.
 *   **Download size**: `4.68 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -31,7 +34,6 @@ FeaturesDict({
     'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('lr', 'hr')`
@@ -48,7 +50,7 @@ year = {2019}
 }
 ```
 
-## div2k/bicubic_x2(default config)
+## div2k/bicubic_x2 (default config)
 
 *   **Config description**: Uses bicubic_x2 data.
 *   **Splits**:

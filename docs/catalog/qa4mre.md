@@ -28,6 +28,9 @@ alzheimers data, and the other on entrance exams data.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `1.69 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Features**:
 
 ```python
@@ -47,7 +50,6 @@ FeaturesDict({
     'topic_name': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -77,7 +79,7 @@ isbn="978-3-642-40802-1"
 }
 ```
 
-## qa4mre/2011.main.DE(default config)
+## qa4mre/2011.main.DE (default config)
 
 *   **Config description**: QA4MRE dataset was created for the CLEF
     2011/2012/2013 shared tasks to promote research in question answering and

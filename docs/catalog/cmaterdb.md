@@ -32,6 +32,9 @@ research lab, Jadavpur University, India.
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `573.81 KiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -40,7 +43,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -91,7 +93,7 @@ FeaturesDict({
 }
 ```
 
-## cmaterdb/bangla(default config)
+## cmaterdb/bangla (default config)
 
 *   **Config description**: CMATERdb Bangla Numerals
 *   **Splits**:

@@ -25,6 +25,9 @@ where one is high resource and the other is low resource.
     *   `0.0.1`: No release notes.
 *   **Download size**: `124.94 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -33,7 +36,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('az', 'en')`
@@ -48,7 +50,7 @@ Translation({
   }
 ```
 
-## ted_hrlr_translate/az_to_en(default config)
+## ted_hrlr_translate/az_to_en (default config)
 
 *   **Config description**: Translation dataset from az to en in plain text.
 *   **Splits**:

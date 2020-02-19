@@ -32,6 +32,9 @@ summary: Patent abastract.
     *   `1.0.0`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `24.22 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -40,7 +43,6 @@ FeaturesDict({
     'description': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('description', 'abstract')`
@@ -57,7 +59,7 @@ FeaturesDict({
 }
 ```
 
-## big_patent/all(default config)
+## big_patent/all (default config)
 
 *   **Config description**: Patents under all categories.
 *   **Splits**:

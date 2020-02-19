@@ -53,6 +53,9 @@ review_body - The review text. review_date - The date the review was written.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `1.59 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -76,12 +79,11 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
 
-## amazon_us_reviews/Wireless_v1_00(default config)
+## amazon_us_reviews/Wireless_v1_00 (default config)
 
 *   **Config description**: A dataset consisting of reviews of Amazon
     Wireless_v1_00 products in US marketplace. Each product has its own version

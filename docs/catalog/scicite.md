@@ -30,6 +30,9 @@ using the provided paper ids with the Semantic Scholar API
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `22.12 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -58,7 +61,6 @@ FeaturesDict({
     'string': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('string', 'label')`

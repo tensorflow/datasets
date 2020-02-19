@@ -28,6 +28,9 @@ corresponding reading passage, or the question might be unanswerable.
     *   `0.1.0`: No release notes.
 *   **Download size**: `33.51 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -49,7 +52,6 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -69,4 +71,4 @@ archivePrefix = {arXiv},
 }
 ```
 
-## squad/plain_text(default config)
+## squad/plain_text (default config)

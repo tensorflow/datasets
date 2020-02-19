@@ -32,6 +32,9 @@ required to submit final prediction files, which we shall proceed to evaluate.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `3.42 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -57,7 +60,6 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

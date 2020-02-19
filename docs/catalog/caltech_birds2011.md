@@ -25,6 +25,9 @@ dataset. Annotations include bounding boxes, segmentation labels.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `1.11 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -44,7 +47,6 @@ FeaturesDict({
     'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`

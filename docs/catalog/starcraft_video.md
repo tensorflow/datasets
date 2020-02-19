@@ -24,6 +24,9 @@ This data set contains videos generated from Starcraft.
     *   `0.1.2`: No release notes.
 *   **Download size**: `6.40 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -39,7 +42,6 @@ FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -67,7 +69,7 @@ FeaturesDict({
 }
 ```
 
-## starcraft_video/brawl_64(default config)
+## starcraft_video/brawl_64 (default config)
 
 *   **Config description**: Brawl map with 64x64 resolution.
 

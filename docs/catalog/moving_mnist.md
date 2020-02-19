@@ -27,6 +27,9 @@ training/validation data from the MNIST dataset.
     *   `0.1.0`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `91.70 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split  | Examples
@@ -40,7 +43,6 @@ FeaturesDict({
     'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

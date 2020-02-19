@@ -29,6 +29,9 @@ classes.
     [`tfds.object_detection.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
 *   **Download size**: `565.11 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -65,7 +68,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -120,7 +122,7 @@ FeaturesDict({
 }
 ```
 
-## open_images_v4/original(default config)
+## open_images_v4/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
 *   **Versions**:

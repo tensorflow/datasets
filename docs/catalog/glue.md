@@ -31,6 +31,9 @@ evaluating, and analyzing natural language understanding systems.
     *   `0.0.2`: No release notes.
 *   **Download size**: `368.14 KiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -40,7 +43,6 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -64,7 +66,7 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-## glue/cola(default config)
+## glue/cola (default config)
 
 *   **Config description**: The Corpus of Linguistic Acceptability consists of
     English acceptability judgments drawn from books and journal articles on

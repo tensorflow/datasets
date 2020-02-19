@@ -30,6 +30,9 @@ set aside 20% (1016 images) of the data for testing.
     *   **`2.0.0`** (default): No release notes.
 *   **Download size**: `286.35 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -50,7 +53,6 @@ FeaturesDict({
     'ycoords': Sequence(Tensor(shape=(), dtype=tf.float64)),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -65,7 +67,7 @@ FeaturesDict({
   }
 ```
 
-## flic/small(default config)
+## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.
 

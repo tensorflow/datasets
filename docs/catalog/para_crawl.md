@@ -23,6 +23,9 @@ Web-Scale Parallel Corpora for Official European Languages.
     *   `0.1.0`: No release notes.
 *   **Download size**: `98.94 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -31,7 +34,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('en', 'bg')`
@@ -45,7 +47,7 @@ Translation({
 }
 ```
 
-## para_crawl/enbg_plain_text(default config)
+## para_crawl/enbg_plain_text (default config)
 
 *   **Config description**: Translation dataset from English to bg, uses encoder
     plain_text.

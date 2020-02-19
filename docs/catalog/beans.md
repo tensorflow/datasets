@@ -26,6 +26,9 @@ and collected by the Makerere AI research lab.
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `171.63 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 *   **Splits**:
 
 Split        | Examples
@@ -42,7 +45,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`

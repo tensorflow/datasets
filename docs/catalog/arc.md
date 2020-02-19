@@ -26,6 +26,9 @@ human-like form of general fluid intelligence.
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `465.07 KiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -48,7 +51,6 @@ FeaturesDict({
     }),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -65,4 +67,4 @@ FeaturesDict({
 }
 ```
 
-## arc/2019-12-06(default config)
+## arc/2019-12-06 (default config)

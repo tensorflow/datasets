@@ -29,6 +29,9 @@ each highlight, which is the target summary
     *   `2.0.0`: Separate target sentences with newline.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split | Examples
@@ -42,7 +45,6 @@ FeaturesDict({
     'highlights': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('article', 'highlights')`
@@ -74,7 +76,7 @@ FeaturesDict({
 }
 ```
 
-## cnn_dailymail/plain_text(default config)
+## cnn_dailymail/plain_text (default config)
 
 *   **Config description**: Plain text
 

@@ -32,6 +32,9 @@ http://www.6d-vision.com/laf_table.pdf
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `5.44 GiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split   | Examples
@@ -48,7 +51,6 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -63,7 +65,7 @@ FeaturesDict({
 }
 ```
 
-## lost_and_found/semantic_segmentation(default config)
+## lost_and_found/semantic_segmentation (default config)
 
 *   **Config description**: Lost and Found semantic segmentation dataset.
 

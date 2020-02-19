@@ -30,6 +30,9 @@ containing the answer. Following the original work, we evaluate with accuracy.
     *   **`1.0.2`** (default): No release notes.
 *   **Download size**: `3.93 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -40,7 +43,6 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -64,7 +66,7 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
-## super_glue/boolq(default config)
+## super_glue/boolq (default config)
 
 *   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a
     QA task where each example consists of a short passage and a yes/no question

@@ -27,6 +27,9 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
     *   **`1.1.0`** (default): No release notes.
 *   **Download size**: `639.54 MiB`
 *   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Features**:
 
 ```python
@@ -40,7 +43,6 @@ FeaturesDict({
     'upvote_ratio': Tensor(shape=[], dtype=tf.float32),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('documents', 'title')`
@@ -57,7 +59,7 @@ FeaturesDict({
 }
 ```
 
-## reddit_tifu/short(default config)
+## reddit_tifu/short (default config)
 
 *   **Config description**: Using title as summary.
 *   **Splits**:
