@@ -24,6 +24,8 @@ import numpy as np
 import os
 import io
 from zipfile import ZipFile
+import random
+import math
 
 
 # info of deeplesion dataset
@@ -59,21 +61,73 @@ _CITATION = """\
 """
 
 
+class DeeplesionConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for DeeplesionConfig."""
+  def __init__(self, name = None, thickness = None, **kwargs):
+    super(DeeplesionConfig, self).__init__(name = name, version=tfds.core.Version('1.0.0'), **kwargs)
+    self.thickness = thickness
+
+
 class Deeplesion(tfds.core.GeneratorBasedBuilder):
   """DeepLesion dataset builder.
   """
-
-  VERSION = tfds.core.Version('1.0.0')
+  BUILDER_CONFIGS = [
+    DeeplesionConfig(
+      name='2d',
+      description=_DESCRIPTION,
+    ),
+    
+    DeeplesionConfig(
+      name='2d_clf',
+      description=_DESCRIPTION,
+    ),
+      
+    DeeplesionConfig(
+      name='3d_truncated',
+      description=_DESCRIPTION,
+      thickness = 5,
+    ),
+  ]
 
   def _info(self):
+    if self.builder_config.name == '2d':
+      features = tfds.features.FeaturesDict({
+          "image/name":tfds.features.Text(),
+          "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
+          "bboxs":tfds.features.Sequence(tfds.features.BBoxFeature()),
+          "label": tfds.features.ClassLabel(names=["normal", "abnormal"]),
+        })
+    elif self.builder_config.name == '2d_clf':
+      features = tfds.features.FeaturesDict({
+        "image/name":tfds.features.Text(),
+        "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
+        "label": tfds.features.ClassLabel(names=["normal", "abnormal"]),
+      })
+    elif self.builder_config.name == '3d_truncated':
+      features = tfds.features.FeaturesDict({
+        "key_image/name":tfds.features.Text(),
+        "images":tfds.features.Sequence(tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png')),
+        "bboxs":tfds.features.Sequence(tfds.features.BBoxFeature()),
+        "key_index":tfds.features.Tensor(shape=(),dtype=tf.int32),
+        "measurement_coord":tfds.features.Sequence(tfds.features.Tensor(shape=(8,),dtype=tf.float32)),
+        "lesion_diameters_pixel":tfds.features.Sequence(tfds.features.Tensor(shape=(2,),dtype=tf.float32)),
+        "normalized_lesion_loc":tfds.features.Sequence(tfds.features.Tensor(shape=(3,),dtype=tf.float32)),
+        "possibly_noisy":tfds.features.Tensor(shape=(),dtype=tf.int32),
+        "slice_range":tfds.features.Tensor(shape=(2,),dtype=tf.int32),
+        "slice_range_trunc":tfds.features.Tensor(shape=(2,),dtype=tf.int32),
+        "spacing_mm_px":tfds.features.Tensor(shape=(3,),dtype=tf.float32),
+        "image_size":tfds.features.Tensor(shape=(2,),dtype=tf.int32),
+        "dicom_windows":tfds.features.Sequence(tfds.features.Tensor(shape=(2,),dtype=tf.int32)),
+        "patient_gender":tfds.features.Tensor(shape=(),dtype=tf.int32),
+        "patient_age":tfds.features.Tensor(shape=(),dtype=tf.int32),
+      })
+    else:
+      raise AssertionError ('No builder_config found!')
+    
     return tfds.core.DatasetInfo(
       builder=self,
       description=_DESCRIPTION,
-      features=tfds.features.FeaturesDict({
-        "image/name":tfds.features.Text(),
-        "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
-        "bboxs":tfds.features.Sequence(tfds.features.BBoxFeature())
-      }),
+      features= features,
       homepage=_URL,
       citation=_CITATION,
     )
@@ -153,113 +207,255 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     ann_path = archive_paths['ann_file']
     del archive_paths['ann_file']
 
-    # build hash table to lookup images
-    lut_archive = _build_lut_archive(archive_paths)
-
-    # split anns by `Train_Val_Test`
-    train_split, val_split, test_split = _ann_parser(ann_path)
+    # create two helper instances:
+    # `archiveUtils` to read images from archives
+    # `annParser` to parse the annotation file `DL_info.csv`
+    archiveUtils = ArchiveUtils(archive_paths)
+    annParser = AnnParser(ann_path, config=self.builder_config.name)
 
     return [
       tfds.core.SplitGenerator(
         name=tfds.Split.TRAIN,
         gen_kwargs={
-          "lut_archive": lut_archive,
-          "split": train_split,
+          "archive": archiveUtils,
+          "split": annParser.annTrain,
         },
       ),
       tfds.core.SplitGenerator(
         name=tfds.Split.VALIDATION,
         gen_kwargs={
-          "lut_archive": lut_archive,
-          "split": val_split,
+          "archive": archiveUtils,
+          "split": annParser.annVal,
         },
       ),
       tfds.core.SplitGenerator(
         name=tfds.Split.TEST,
         gen_kwargs={
-          "lut_archive": lut_archive,
-          "split": test_split,
+          "archive": archiveUtils,
+          "split": annParser.annTest,
         },
       ),
     ]
 
 
-  def _generate_examples(self, lut_archive, split):
+  def _generate_examples(self, archive, split):
     """Returns examples
 
     Args:
-      lut_archive: `dict`, lookup dictionary to lookup which archive a series_folder belongs to
-      split: `dataframe`, annotation information of images
+      archive: `ArchiveUtils`, helper class using filename(s) to read image(s) from archives
+      split: `pandas.DataFrame`, each row contains annotations of an image
 
     Yields:
       example key and data
     """
-    for idx, value in enumerate(split.values):
-      file_name, bboxs, size, sp = value
-      record = {
-        "image/name": file_name,
-        "image": _extract_image(file_name, lut_archive[_parse_fname(file_name)[0]]),
-        "bboxs": _format_bboxs(bboxs, size)
-      }
-      yield idx, record
+    if self.builder_config.name.startswith('2d'):
+      for idx, value in enumerate(split.values):
+        # collect annotations
+        file_name, bboxs, size, _, _, _, _, _, _, _, _, _, _, _, label = value
 
+        # build example
+        record = {
+          "image/name": file_name,
+          "image": archive.extract_image(file_name),
+          "label": int(label)
+        }
+        if self.builder_config.name == '2d':
+          record["bboxs"] = _format_bboxs(bboxs, size)
+        yield idx, record
 
-def _build_lut_archive(paths):
-  """Returns dicionary to lookup which archive a series_folder belongs to.
-
-  Args:
-    paths: `dict`, <zipfile#>:<path_zipfile>
-
-  Returns:
-    `dict`, <series_folder>:<path_zipfile>
-  """
-  lut = {}
-  for k, v in paths.items(): # {<zipfn>:<unzip_path>}
-    with ZipFile(v, 'r') as zip:
-      for name in zip.namelist():
-        series_folder = name.split('/')[1]
-        lut[series_folder] = v
-  return lut
-
-
-def _extract_image(fname, archive):
-  """Returns a file object from an archive
-
-  Args:
-    fname: `string`, file_name in annotation files
-    archive: `ZipFile`, path of a zipfile
-
-  Returns:
-    file object with the file name
-  """
-  with ZipFile(archive, 'r') as zip:
-    series_folder, slice_fname = _parse_fname(fname)
-    fpath = os.path.join('Images_png', series_folder, slice_fname)
-    f_obj = io.BytesIO(zip.read(fpath))
-  return f_obj
-
+    elif self.builder_config.name == '3d_truncated':
+      for idx, value in enumerate(split.values):
+        # collect annotations
+        file_name, bboxs, size, ks_idx, m_coords, diameters, n_loc, p_noisy, slice_range, spacing, dicom_windows, p_gender, p_age, sp, label = value
         
-def _parse_fname(fname):
-  """Returns the series_folder and the name of a slice parsed from given file name
+        # generate name list and cutoff indices for tructated series
+        fileNameUtil = FileNameUtils(file_name)
+        startIdx, endIdx = [int(x) for x in slice_range.split(',')]
+        fname_list = fileNameUtil.get_fname_list(startIdx, endIdx)
+        t_startIdx, t_endIdx = _cal_cutoff_position(len(fname_list), self.builder_config.thickness, ks_idx - startIdx)
+
+        # build example
+        record = {
+            "key_image/name": file_name,
+            "images": archive.extract_images(fname_list[t_startIdx:t_endIdx+1]),
+            "bboxs": _format_bboxs(bboxs, size),
+            "key_index": ks_idx - startIdx - t_startIdx,
+            "measurement_coord": _format_values(m_coords, 8, float),
+            "lesion_diameters_pixel": _format_values(diameters, 2, float),
+            "normalized_lesion_loc": _format_values(n_loc, 3, float),
+            "possibly_noisy": int(p_noisy),
+            "slice_range": [startIdx, endIdx],
+            "slice_range_trunc": [t_startIdx+startIdx, t_endIdx+startIdx],
+            "spacing_mm_px": [float(x) for x in spacing.split(',')],
+            "image_size": [int(x) for x in size.split(',')],
+            "dicom_windows": _format_values(dicom_windows, 2, int),
+            "patient_gender": int(p_gender),
+            "patient_age": int(p_age),
+        }
+        yield idx, record
+
+    else:
+      raise AssertionError ('No builder_config found!')
+
+
+class ArchiveUtils():
+  """Helper class to read image(s) from archives
+
+  Attributes:
+    path: `dict`, paths of archives
+    _lut: `dict`, hash table to lookup file path in archives
+  """
+  def __init__(self, path):
+    """Inits ArchiveUtils with paths of archives"""
+    self.path = path
+    self._lut = None
+
+
+  @property
+  def lut(self):
+    if not self._lut:
+      self._build_lut()
+    return self._lut
+
+
+  def extract_image(self, fileName):
+    """Returns a file object according to the fileName
+
+    Args:
+      fileName: `str`, a fileName from the annotation file
+
+    Returns:
+      a file object of the fileName
+    """
+    fileNameUtil = FileNameUtils(fileName)
+    archive = self.lut[fileNameUtil.seriesFolder]
+    with ZipFile(archive, 'r') as zip:
+      fpath = os.path.join('Images_png', fileNameUtil.filePath)
+      fObj = io.BytesIO(zip.read(fpath))
+    return fObj
+
+
+  def extract_images(self, fileNames):
+    """Returns a list of file objects according to the list of fileName
+    """
+    fObj = []
+    for fname in fileNames:
+      fObj.append(self.extract_image(fname))
+    return fObj
+
+
+  def _build_lut(self):
+    """create a hash table to lookup path of an archive using seriesFolder.
+    """
+    lut = {}
+    for k, v in self.path.items(): # k:v, <zipfile#>:<path of the zipfile>
+      with ZipFile(v, 'r') as zip:
+        for name in zip.namelist(): # name, "Image_pngs/<seriesFolder>/<xxx>.png"
+          seriesFolder = name.split('/')[1]
+          lut[seriesFolder] = v
+    self._lut = lut
+
+
+class FileNameUtils():
+  """Helper class to parse fileName from the annotation file
+
+  Attributes:
+    fileName: `str`, "<seriesFolder>_<%03d>.png"
+    _seriesFolder: `str`, "<seriesFolder>"
+    _sliceIdx: `int`, d
+    _sliceFileName: `str`, "<%03d>.png"
+    _filePath: `str`, "<seriesFolder>/<%03d>.png"
+  """
+  def __init__(self, fileName):
+    """Inits with a fileName"""
+    self.fileName = fileName
+    self._seriesFolder = None
+    self._sliceIdx = None
+    self._sliceFileName = None
+    self._filePath = None
+
+  @property
+  def seriesFolder(self):
+    if not self._seriesFolder:
+      self._parse_fname()
+    return self._seriesFolder
+
+  @property
+  def sliceIdx(self):
+    if not self._sliceIdx:
+      self._parse_fname()
+    return self._sliceIdx
+  
+  @property
+  def sliceFileName(self):
+    if not self._sliceFileName:
+      self._sliceFileName = '%03d.png' % self.sliceIdx
+    return self._sliceFileName
+
+  @property
+  def filePath(self):
+    if not self._filePath:
+      self._filePath = os.path.join(self.seriesFolder, self.sliceFileName)
+    return self._filePath
+
+
+  def _parse_fname(self):
+    """Parses fileName into _seriesFolder and _sliceIdx
+    """
+    self._sliceIdx = int(self.fileName.split('_')[-1][:-4])
+    self._seriesFolder = '_'.join(self.fileName.split('_')[:-1])
+
+
+  def get_fname(self, sliceIdx):
+    """Returns a fileName in annotated format
+
+    Args:
+      sliceIdx: `int`, index of a slice (the index should in valid slice_range)
+
+    Returns:
+      a `str` in "<seriesFolder>_<%03d>.png" format
+    """
+    return '_'.join([self.seriesFolder, '%03d.png' % sliceIdx])
+
+
+  def get_fname_list(self, start, end):
+    """Returns a list of names contructed by continuous indices
+
+    Args:
+      start: `int`, start point of continuous indices
+      end: `int`, end point of continuous indices (inclusive)
+
+    Returns:
+      a list of `str`
+    """
+    return [self.get_fname(s) for s in range(start, end+1)]
+
+
+def _cal_cutoff_position(length, thickness, keyIdx):
+  """Returns cutoff indices of keyIdx-centred truncated list
 
   Args:
-    fname: `string`, file_name in annotation files
+    length: `int`, length of a list
+    thickness: `int`, cutoff thickness - number of slices
+    keyIdx: `int`, index of the key slice
 
   Returns:
-    tuple of two strings, (series_folder, name of a slice)
+    a tuple of two `int`
   """
-  slice_fname = fname.split('_')[-1]
-  series_folder = '_'.join(fname.split('_')[:-1])
+  left_block = (thickness - 1)// 2
+  right_block = thickness - 1 - left_block
 
-  return series_folder, slice_fname
+  start = max(0, keyIdx - left_block)
+  end = min(length-1, keyIdx + right_block)
+  return start, end
 
 
 def _format_bboxs(bboxs, size):
   """Returns bbox feature
 
   Args:
-    bboxs: `string`, "xmin,ymin,xmax,ymax"
-    size: `string`, "height,width", height is assumed to be equal with width.
+    bboxs: `str`, "xmin,ymin,xmax,ymax"
+    size: `str`, "height,width", height is assumed to be equal with width.
 
   Returns:
     tfds.features.BBox
@@ -280,28 +476,206 @@ def _format_bboxs(bboxs, size):
       bbox_list.append(tfds.features.BBox(ymin=ymin, xmin=xmin, ymax=ymax, xmax=xmax))
 
   return bbox_list
-    
-    
-def _ann_parser(ann_path):
-  """parsers the annotation file and returns the splits in dataframes
 
+
+def _format_values(val, n, e_type):
+  """Returns a feature formated value
+  
   Args:
-    ann_path: `string`, path of the annotation file
-
-  Returns:
-    tuple with 3 dataframes: (train, validation, test)
+    val: `str`, "num1,num2,num3,...", value to format
+    n: `int`, number of elememts within tuples
+    e_type: `str`, the type of each elements within tuples
+  
+  Returns
+    a list of tuples of e_type values
   """
-  pd = tfds.core.lazy_imports.pandas
-  with tf.io.gfile.GFile(ann_path) as csv_f:
+  def _divide_chunks(l, n):
+      """Yield successive n-sized chunks from l.
+      """
+      for i in range(0, len(l), n):  
+          yield tuple(l[i:i + n])
+          
+  lst = [e_type(float(x)) for x in val.split(',')]
+  return list(_divide_chunks(lst, n))
+
+
+class AnnParser():
+  """Deeplesion Annotation Parser
+
+  Attributes:
+    ann_path: `str`, path of the annotation file
+    config: `str`, self.builder_config.name
+    _annTrain: `pandas.Dataframe`, annotations of train split
+    _annVal: `pandas.Dataframe`, annotations of validation split
+    _annTest: `pandas.Dataframe`, annotations of test split
+  """
+  def __init__(self, ann_path, config=None):
+    """Inits with path of the annotation file
+    """
+    self.ann_path = ann_path
+    self.config = config
+    self._annTrain = None
+    self._annVal = None
+    self._annTest = None
+
+  @property
+  def annTrain(self):
+    if self._annTrain is None:
+      self._ann_parser()
+    if self.config == '2d_clf':
+      normal_ann = self._create_ann_for_normals(self._annTrain)
+      self._annTrain = self._annTrain.append(normal_ann)
+
+    return self._annTrain
+
+  @property
+  def annVal(self):
+    if self._annVal is None:
+      self._ann_parser()
+    if self.config == '2d_clf':
+      normal_ann = self._create_ann_for_normals(self._annVal)
+      self._annVal = self._annVal.append(normal_ann)
+
+    return self._annVal
+
+  @property
+  def annTest(self):
+    if self._annTest is None:
+      self._ann_parser()
+    if self.config == '2d_clf':
+      normal_ann = self._create_ann_for_normals(self._annTest)
+      self._annTest = self._annTest.append(normal_ann)
+
+    return self._annTest
+
+
+  def _ann_parser(self):
+    """Generates annotions of three splits
+
+    cleanup the annotations
+    group the annotations by File_name,
+    append a new column: "Label": 1, all annotationed images are abnormal scans
+    split the annotations by Train_Val_Test
+    """
+    pd = tfds.core.lazy_imports.pandas
+    with tf.io.gfile.GFile(self.ann_path) as csv_f:
+      # read file
       df = pd.read_csv(csv_f)
-      df_t = df[['File_name', 'Bounding_boxes', 'Image_size', 'Train_Val_Test']]
-      concat = lambda a: ", ".join(a)
+      
+      # select columns
+      df_t = df[['File_name', 'Bounding_boxes', 'Image_size', \
+                 'Key_slice_index', 'Measurement_coordinates', 'Lesion_diameters_Pixel_', \
+                 'Normalized_lesion_location', 'Possibly_noisy', 'Slice_range', \
+                 'Spacing_mm_px_', 'DICOM_windows', 'Patient_gender', \
+                 'Patient_age', 'Train_Val_Test']]
+      df_t = df_t.copy()
+      
+      # clean data
+      df_t.fillna(-1, inplace=True)
+      df_t.Patient_gender.replace(['M', 'F'], [1, 0], inplace=True)
+      
+      # group and aggregate
+      concat = lambda a: ", ".join(a) # rules for aggregation
       d = {'Bounding_boxes': concat,
-           'Image_size':'first',
-           'Train_Val_Test':'first'}
+           'Image_size': 'first',
+           'Key_slice_index': 'first',
+           'Measurement_coordinates': concat,
+           'Lesion_diameters_Pixel_': concat,
+           'Normalized_lesion_location': concat,
+           'Possibly_noisy': 'first',
+           'Slice_range': 'first',
+           'Spacing_mm_px_': 'first',
+           'DICOM_windows': concat,
+           'Patient_gender': 'first',
+           'Patient_age': 'first',
+           'Train_Val_Test': 'first',
+      }
       df_new = df_t.groupby('File_name', as_index=False).aggregate(d).reindex(columns=df_t.columns)
 
-      df_train = df_new[df_new['Train_Val_Test']==1]
-      df_val = df_new[df_new['Train_Val_Test']==2]
-      df_test = df_new[df_new['Train_Val_Test']==3]
-  return df_train, df_val, df_test
+      # append new column label
+      df_new['Label'] = 1
+      
+      # split
+      self._annTrain = df_new[df_new['Train_Val_Test']==1]
+      self._annVal = df_new[df_new['Train_Val_Test']==2]
+      self._annTest = df_new[df_new['Train_Val_Test']==3]
+
+
+  def _create_ann_for_normals(self, ann):
+    """Returns new created dataframe of normal scans
+
+    To calulate the length of abnormal area in z direction
+    known: spacing (mm per pixel) in z direction, and the length of long axis of lesion(pixels)
+    assumption: assume lesions are enclosed in a ball-shape area, and the long axis is the longest axis in all direction.
+    1. convert length of long axis from pixels into mm using spacing (mm per pixel) in x-y plane
+    2. take this length as the abnormal range in z direction, convert it into num of slice 
+
+    Args:
+      ann: `pandas.Dataframe`, annotations of abnormal scans
+
+    Returns:
+      a `pandas.Dataframe`, columns align with ann
+    """
+    normal_scans_ann = [] # list of dicts to initiate a new dataframe
+    for idx, value in enumerate(ann.values):
+      # collect info from each row
+      file_name, bboxs, size, ks_idx, m_coords, diameters, n_loc, p_noisy, slice_range, spacing, dicom_windows, p_gender, p_age, sp, label = value
+
+      # calculate (approximately) offset of normal area from key slice in z direction
+      spacing_xy_mm_px = float(spacing.split(',')[0]) # spacing in x, y, z direction, (float, float, float)
+      spacing_z_mm_interval = float(spacing.split(',')[2])
+      longest_px = max([float(x) for x in diameters.split(',')]) # the first one is always the longest, list of (float, float)
+      longest_mm = longest_px * spacing_xy_mm_px
+      offset_z = math.ceil(longest_mm / spacing_z_mm_interval)
+
+      # randomly pick out a normal scan 
+      s_range = [int(x) for x in slice_range.split(',')]
+      slice_idxs = [x for x in range(s_range[0], s_range[1]+1)] # collect all valid idxs within the boundaries (includsively)
+      key_idx = int(ks_idx)
+      valid_idxs_pool = list(filter(lambda x: True if abs(x-key_idx) > offset_z else False, slice_idxs))
+      normal_idx = -1
+      if valid_idxs_pool:
+        normal_idx = random.choice(valid_idxs_pool)
+      else:
+        continue
+
+      # create a record for the normal scan
+      normal = {
+        'File_name':FileNameUtils(file_name).get_fname(normal_idx), 
+        'Bounding_boxes':None, 
+        'Image_size':size,
+        'Key_slice_index':ks_idx, 
+        'Measurement_coordinates':None, 
+        'Lesion_diameters_Pixel_':None,
+        'Normalized_lesion_location':None, 
+        'Possibly_noisy':p_noisy, 
+        'Slice_range':slice_range,
+        'Spacing_mm_px_':spacing, 
+        'DICOM_windows':dicom_windows, 
+        'Patient_gender':p_gender,
+        'Patient_age':p_age,
+        'Train_Val_Test':sp,
+        'Label':0
+      }
+      normal_scans_ann.append(normal)
+    
+    # create a new Dataframe of normals
+    pd = tfds.core.lazy_imports.pandas
+    normal_ann = pd.DataFrame(normal_scans_ann, 
+                              columns=['File_name', 
+                                      'Bounding_boxes', 
+                                      'Image_size',
+                                      'Key_slice_index', 
+                                      'Measurement_coordinates', 
+                                      'Lesion_diameters_Pixel_',
+                                      'Normalized_lesion_location', 
+                                      'Possibly_noisy', 
+                                      'Slice_range',
+                                      'Spacing_mm_px_', 
+                                      'DICOM_windows', 
+                                      'Patient_gender',
+                                      'Patient_age',
+                                      'Train_Val_Test',
+                                      'Label'
+                                      ])
+    return normal_ann
