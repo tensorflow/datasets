@@ -89,7 +89,7 @@ class FlyingChairs(tfds.core.GeneratorBasedBuilder):
         os.path.join(_URL_DATA_ROOT, _URL_DATA_ZIP),
         os.path.join(_URL_SPLIT_ROOT, _URL_SPLIT_FILE)])
 
-    # Sparse splits
+    # Parse splits
     split_map = self._parse_split_file(path_split_file)
     train_map = [i for i, e in enumerate(split_map)
                  if e == self.SPLIT_TAG_TRAIN]
