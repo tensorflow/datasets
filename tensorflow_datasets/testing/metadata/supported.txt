@@ -761,6 +761,7 @@ open_images_v4/300k/0.2.1
 open_images_v4/300k/2.0.0
 open_images_v4/original/0.2.0
 open_images_v4/original/2.0.0
+opinosis/1.0.0
 oxford_flowers102/0.0.1
 oxford_flowers102/2.0.0
 oxford_iiit_pet/3.1.0

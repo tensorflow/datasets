@@ -210,6 +210,8 @@ toc:
     title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/opinosis
+    title: opinosis
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
   - path: /datasets/catalog/scientific_papers
