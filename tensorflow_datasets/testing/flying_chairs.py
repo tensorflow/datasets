@@ -72,16 +72,16 @@ def _generate_flying_chairs_fake_data():
   test_utils.remake_dir(data_dir)
 
   # list with train and validation randomly sorted
-  numbers = [str(FlyingChairs.SPLIT_TAG_TRAIN)] * NUMBER_TRAIN \
-            + [str(FlyingChairs.SPLIT_TAG_VALIDATION)] * NUMBER_VALIDATION
-  shuffle(numbers)
+  tags = [str(FlyingChairs.SPLIT_TAG_TRAIN)] * NUMBER_TRAIN \
+         + [str(FlyingChairs.SPLIT_TAG_VALIDATION)] * NUMBER_VALIDATION
+  shuffle(tags)
 
-  for number in range(1, len(numbers) + 1):
+  for number in range(1, len(tags) + 1):
     _generate_flying_chairs_data(number, data_dir)
 
-  # write numbers into split file
+  # write split tags into split file
   with open(os.path.join(output_dir, "FlyingChairs_train_val.txt"), "w") as f:
-    f.write("\n".join(numbers))
+    f.write("\n".join(tags))
 
 
 def main(argv):
