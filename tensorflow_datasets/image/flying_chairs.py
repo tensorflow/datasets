@@ -55,7 +55,7 @@ class FlyingChairs(tfds.core.GeneratorBasedBuilder):
   """Supervised Optical Flow dataset from the Freiburg Computer Vision group"""
 
   VERSION = tfds.core.Version('1.0.0')
-  DATA_DIR = "FlyingChairs_release/data"
+  DATA_DIR = os.path.join("FlyingChairs_release", "data")
 
   SPLIT_TAG_TRAIN = 1
   SPLIT_TAG_VALIDATION = 2
@@ -157,15 +157,15 @@ class FlyingChairs(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     data_dir = os.path.join(extraction_dir, self.DATA_DIR)
 
-    for img_number in split_ids:
-      im1_path = "%s/%s_img1.ppm" % (data_dir, str(img_number).zfill(5))
+    for number in split_ids:
+      im1_path = os.path.join(data_dir, "%s_img1.ppm" % str(number).zfill(5))
       im1 = self._read_image(im1_path)
 
-      im2_path = "%s/%s_img2.ppm" % (data_dir, str(img_number).zfill(5))
+      im2_path = os.path.join(data_dir, "%s_img2.ppm" % str(number).zfill(5))
       im2 = self._read_image(im2_path)
 
-      flow_path = "%s/%s_flow.flo" % (data_dir, str(img_number).zfill(5))
+      flow_path = os.path.join(data_dir, "%s_flow.flo" % str(number).zfill(5))
       flow = self._read_flow(flow_path)
 
-      yield img_number, dict(image_pair=dict(image_one=im1, image_two=im2),
-                             flow=flow)
+      yield number, dict(image_pair=dict(image_one=im1, image_two=im2),
+                         flow=flow)
