@@ -75,7 +75,7 @@ class FlyingChairs(tfds.core.GeneratorBasedBuilder):
             }),
             #  The flow field has a (x,y) velocity vector for every pixel in the image.
             "flow": tfds.features.Tensor(shape=(_HEIGHT, _WIDTH, 2),
-                                         dtype=tf.float32)  # TODO(Adriaan): really fl32?
+                                         dtype=tf.float32)
         }),
         supervised_keys=("image_pair", "flow"),
         homepage='https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs.en.html',
@@ -114,8 +114,6 @@ class FlyingChairs(tfds.core.GeneratorBasedBuilder):
 
     with tf.io.gfile.GFile(file_path) as f:
       lines = f.readlines()
-      # TODO(Adriaan): assert # nr lines equals nr of img files
-
       splits = [None] * (len(lines) + 1)
 
       for i, line in enumerate(lines, start=1):
