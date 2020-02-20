@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Generate FlyingChairs like files, smaller and with random data."""
+r"""Generate FlyingChairs .ppm  and .flo files"""
 
 from __future__ import absolute_import
 from __future__ import division
