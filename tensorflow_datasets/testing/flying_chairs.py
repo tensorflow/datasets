@@ -32,7 +32,7 @@ from tensorflow_datasets.image import FlyingChairs
 from tensorflow_datasets.testing import test_utils
 from tensorflow_datasets.testing.fake_data_utils import get_random_picture
 
-HEIGHT, WIDTH, CHANNELS = (512, 384, 3)
+HEIGHT, WIDTH, CHANNELS = (384, 512, 3)
 NUMBER_TRAIN = 3
 NUMBER_VALIDATION = 2
 
@@ -51,13 +51,11 @@ def _generate_flying_chairs_data(number, data_dir):
 
   number = str(number).zfill(5)
   for fname in ["%s_img%s.ppm" % (number, i) for i in (1, 2)]:
-    # axis are swapped to match PIL_Image convention
-    fake_im = get_random_picture(WIDTH, HEIGHT, CHANNELS)
+    fake_im = get_random_picture(HEIGHT, WIDTH, CHANNELS)
     with open(os.path.join(data_dir, fname), 'wb') as f:
       tfds.core.lazy_imports.PIL_Image.fromarray(fake_im).save(f, 'ppm')
 
-  # axis are swapped to match PIL_Image convention
-  fake_flo = get_random_picture(WIDTH, HEIGHT, 2)  # 2D planar flow
+  fake_flo = get_random_picture(HEIGHT, WIDTH, 2)  # 2D planar flow
   with open(os.path.join(data_dir, "%s_flow.flo" % number), 'wb') as f:
     f.write('PIEH'.encode('utf-8'))
     np.array(fake_flo.shape, dtype=np.int32).tofile(f)  # write dims
