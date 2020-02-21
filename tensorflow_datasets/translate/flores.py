@@ -77,7 +77,7 @@ class FloresConfig(tfds.core.BuilderConfig):
         name=name,
         description=description,
         version=tfds.core.Version(
-            "1.0.0",
+            "1.1.0",
             "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
@@ -173,6 +173,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
         source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (
             len(source_sentences), len(target_sentences), source_file,
             target_file)
+
+    assert len(target_sentences) == 0, "Dataset file downloaded is empty"
+    assert len(source_sentences) == 0, "Dataset file downloaded is empty"
 
     source, target = self.builder_config.language_pair
     for idx, (l1, l2) in enumerate(
