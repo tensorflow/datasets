@@ -36,6 +36,7 @@ np_datasets = tfds.as_numpy(datasets)
 
 *   `Audio`
     *   [`groove`](groove.md)
+    *   [`librispeech`](librispeech.md)
     *   [`nsynth`](nsynth.md)
 *   `Image`
     *   [`abstract_reasoning`](abstract_reasoning.md)
@@ -155,6 +156,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`gap`](gap.md)
     *   [`glue`](glue.md)
     *   [`imdb_reviews`](imdb_reviews.md)
+    *   [`librispeech_lm`](librispeech_lm.md)
     *   [`lm1b`](lm1b.md)
     *   [`math_dataset`](math_dataset.md)
     *   [`movie_rationales`](movie_rationales.md)

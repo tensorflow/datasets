@@ -60,7 +60,7 @@ get the files.
     Other configs do require additional files - please see code for more details.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 *   **Splits**:
 
 Split | Examples

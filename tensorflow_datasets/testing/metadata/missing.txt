@@ -16,6 +16,10 @@ cnn_dailymail/subwords32k/3.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
 image_label_folder/2.0.0
+librispeech/plain_text/1.1.0
+librispeech/subwords32k/1.1.0
+librispeech/subwords8k/1.1.0
+librispeech_lm/0.1.0
 oxford_iiit_pet/1.2.0
 so2sat/all/0.0.1
 so2sat/all/2.0.0

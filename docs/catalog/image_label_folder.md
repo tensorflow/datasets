@@ -31,7 +31,7 @@ Generic image classification dataset.
     This is a 'template' dataset.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 *   **Splits**:
 
 Split | Examples

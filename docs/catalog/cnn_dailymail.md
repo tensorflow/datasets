@@ -31,7 +31,7 @@ each highlight, which is the target summary
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 *   **Splits**:
 
 Split | Examples

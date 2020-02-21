@@ -37,7 +37,7 @@ http://creativecommons.org/licenses/by/4.0
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 *   **Splits**:
 
 Split | Examples
