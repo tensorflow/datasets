@@ -139,6 +139,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         supervised_keys=("speech", "text"),
         homepage=_URL,
         citation=_CITATION,
+        metadata=tfds.core.MetadataDict(sample_rate=16000,),
     )
 
   def _vocab_text_gen(self, dirs):

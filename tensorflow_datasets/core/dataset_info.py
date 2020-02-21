@@ -673,8 +673,8 @@ class MetadataDict(Metadata, dict):
 class BeamMetadataDict(MetadataDict):
   """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
 
-  def __init__(self):
-    super(BeamMetadataDict, self).__init__()
+  def __init__(self, *args, **kwargs):
+    super(BeamMetadataDict, self).__init__(*args, **kwargs)
     self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
 
   def _temp_filepath(self, key):
