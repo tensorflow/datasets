@@ -52,13 +52,16 @@ class WikipediaDump(tfds.core.GeneratorBasedBuilder):
         citation = _CITATION,
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     '''RETURNS SplitGenerators'''
-    download_path = dl_manager.download_and_extract('https://www.kaggle.com/mikeortman/wikipedia-sentences/download/PgEEhE0Qepk09CFW4P6a%2Fversions%2FkOLDVvHsx79ZASdBRIKR%2Ffiles%2Fwikisent2.txt?datasetVersionNumber=3')
-    if tf.io.gfile.isdir(download_path):
-      txt_path = os.path.join(download_path, 'input.txt')
-    else:
-      txt_path = download_path
+    dl_paths = dl.manager.download_kaggle_data('Wikipedia sentences')
+
+    data_dir = dl_manager.download({
+            'sentences_train': dl_paths['wikisent2.txt'],
+    })
+
+    txt_path = data_dir
+    
     with tf.io.gfile.GFile(txt_path, 'r') as f:
       text = f.read()
 
@@ -75,9 +78,6 @@ class WikipediaDump(tfds.core.GeneratorBasedBuilder):
     ]
 
     def _generate_examples(self, split_key, split_text):
-      def abc():
-        with open(txt_path) as f:
-          for line in f:
-            yield line
-      for index, text in enumerate(abc()):
+      each_sentence = iter(text)
+      for index, text in enumerate(each_sentence):
         yield index, {"text": split_text}
