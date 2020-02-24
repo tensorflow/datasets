@@ -12,7 +12,7 @@
 
 # `abstract_reasoning`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
