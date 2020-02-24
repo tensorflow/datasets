@@ -147,6 +147,30 @@ class Librispeech(tfds.core.BeamBasedBuilder):
       for _, example in _generate_librispeech_examples(directory):
         yield example["text"]
 
+  def _populate_metadata(self, dirs):
+    # All dirs contain the same metadata.
+    directory = list(dirs.values())[0]
+    self.info.metadata["speakers"] = self._read_metadata_file(
+        os.path.join(directory, "LibriSpeech/SPEAKERS.TXT"),
+        ["speaker_id", "gender", "subset", "minutes", "name"])
+    self.info.metadata["chapters"] = self._read_metadata_file(
+        os.path.join(directory, "LibriSpeech/CHAPTERS.TXT"), [
+            "chapter_id", "speaker_id", "minutes", "subset", "project_id",
+            "book_id", "chapter_title", "project_title"
+        ])
+
+  def _read_metadata_file(self, path, field_names):
+    metadata = {}
+    with tf.io.gfile.GFile(path) as f:
+      for line in f:
+        if line.startswith(";"):
+          continue
+        fields = line.split("|", len(field_names))
+        metadata[int(fields[0])] = {
+            k: v.strip() for k, v in zip(field_names[1:], fields[1:])
+        }
+    return metadata
+
   def _split_generators(self, dl_manager):
     extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
     # Generate vocabulary from training data if SubwordTextEncoder configured.
@@ -155,7 +179,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
     ]
     self.info.features["text"].maybe_build_from_corpus(
         self._vocab_text_gen(all_train_dirs))
-
+    self._populate_metadata(extracted_dirs)
     splits = [tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
               for k, v in extracted_dirs.items()]
     return splits
