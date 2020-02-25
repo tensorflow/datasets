@@ -5,7 +5,6 @@ from __future__ import print_function
 import os
 import numpy as np
 from six.moves import urllib
-import scipy.io
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -32,10 +31,6 @@ _AFFNIST_TEST_DATA_FILENAME = "test_batches.zip"
 _AFFNIST_IMAGE_SIZE = 40
 AFFNIST_IMAGE_SHAPE = (_AFFNIST_IMAGE_SIZE, _AFFNIST_IMAGE_SIZE, 1)
 AFFNIST_NUM_CLASSES = 10
-
-# _TRAIN_EXAMPLES = 1600000
-# _VALIDATION_EXAMPLES = 320000
-# _TEST_EXAMPLES = 320000
 
 
 class Affnist(tfds.core.GeneratorBasedBuilder):
@@ -99,9 +94,10 @@ class Affnist(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next examples
     """
-    
-    images = [scipy.io.loadmat(os.path.join(images_dir_path,i))["affNISTdata"][0][0]["image"] for i in tf.io.gfile.listdir(images_dir_path)]
-    labels = [scipy.io.loadmat(os.path.join(images_dir_path,i))["affNISTdata"][0][0]["label_int"] for i in tf.io.gfile.listdir(images_dir_path)]
+    path = sorted(tf.io.gfile.listdir(images_dir_path))
+    loadmat = tfds.core.lazy_imports.scipy.io.loadmat
+    images = [loadmat(tf.io.gfile.GFile(os.path.join(images_dir_path,i), "rb"))["affNISTdata"][0][0]["image"] for i in path]
+    labels = [loadmat(tf.io.gfile.GFile(os.path.join(images_dir_path,i), "rb"))["affNISTdata"][0][0]["label_int"] for i in path]
 
     images = np.concatenate(images, axis = 1).T.reshape(-1, 40, 40, 1)
     labels = np.concatenate(labels, axis = 1).T.reshape(-1)
