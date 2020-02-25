@@ -72,7 +72,7 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.1.0")
+  VERSION = tfds.core.Version("3.1.1")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
           "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
