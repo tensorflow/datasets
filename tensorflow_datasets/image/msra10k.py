@@ -79,18 +79,14 @@ class Msra10k(tfds.core.GeneratorBasedBuilder):
     VERSION = tfds.core.Version('0.1.0')
 
     def _info(self):
-        # TODO(msra10k): Specifies the tfds.core.DatasetInfo object
         return tfds.core.DatasetInfo(
             builder=self,
-            # This is the description that will appear on the datasets page.
             description=_DESCRIPTION,
-            # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
                 "image": tfds.features.Image(),
                 "mask": tfds.features.Image(),
             }),
             supervised_keys=("image", "mask"),
-            # Homepage of the dataset for documentation
             homepage='http://mmcheng.net/msra10k/',
             citation=_CITATION,
         )
