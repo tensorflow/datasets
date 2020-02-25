@@ -244,7 +244,7 @@ class DownloadManager(object):
       if not self._force_download and resource.exists_locally(download_path):
         logging.info('URL %s already downloaded: reusing %s.',
                      url[:-1], download_path)
-        self._recorded_sizes_checksums[url[:-1]] = self._sizes_checksums[url[:-1]]
+        self._recorded_sizes_checksums[url[:-1]] = self._sizes_checksums[url[:-1]] #pylint: disable=line-too-long
         return promise.Promise.resolve(download_path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager

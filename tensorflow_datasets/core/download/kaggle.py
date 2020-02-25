@@ -78,7 +78,8 @@ class KaggleFile(object):
   def to_url(self):
     dataset_type = int("/" in self._competition_name)
     return "%s%s/%s%d" % (self._URL_PREFIX, self._competition_name,
-                        self._filename, KaggleFile._DATASET_COMPETITION_SUFFIX[dataset_type])
+                          self._filename,
+                          KaggleFile._DATASET_COMPETITION_SUFFIX[dataset_type])
 
 
 class KaggleCompetitionDownloader(object):
