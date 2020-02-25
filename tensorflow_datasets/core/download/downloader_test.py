@@ -28,6 +28,7 @@ from absl.testing import absltest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
+from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 
 
@@ -128,8 +129,21 @@ class DownloaderTest(testing.TestCase):
   def test_kaggle_api(self):
     fname = 'a.csv'
     with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
-      promise = self.downloader.download('kaggle://some-competition/a.csv',
-                                         self.tmp_dir)
+      # Testing Competition Downloader
+      promise = self.downloader.download(
+          'kaggle://some-competition/a.csv%s' % \
+          (kaggle.KaggleFile._COMPETITION_SUFFIX),
+          self.tmp_dir)
+      _, dl_size = promise.get()
+      self.assertEqual(dl_size, len(fname))
+      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
+        self.assertEqual(fname, f.read())
+
+      # Testing Dataset Downloader
+      promise = self.downloader.download(
+          'kaggle://some-author/some-dataset/a.csv%s' % \
+          (kaggle.KaggleFile._DATASET_SUFFIX),
+          self.tmp_dir)
       _, dl_size = promise.get()
       self.assertEqual(dl_size, len(fname))
       with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
