@@ -33,9 +33,9 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
+from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
-
 
 class NonMatchingChecksumError(Exception):
   """The downloaded file doesn't have expected checksum."""
@@ -238,20 +238,24 @@ class DownloadManager(object):
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
+    download_type = ""
+    if kaggle.KaggleFile.is_kaggle_url(url):
+      download_type = url[-1]
+      url = url[:-1]
     if url in self._sizes_checksums:
-      expected_sha256 = self._sizes_checksums[url[:-1]][1]
-      download_path = self._get_final_dl_path(url[:-1], expected_sha256)
+      expected_sha256 = self._sizes_checksums[url][1]
+      download_path = self._get_final_dl_path(url, expected_sha256)
       if not self._force_download and resource.exists_locally(download_path):
         logging.info('URL %s already downloaded: reusing %s.',
-                     url[:-1], download_path)
-        self._recorded_sizes_checksums[url[:-1]] = self._sizes_checksums[url[:-1]] #pylint: disable=line-too-long
+                     url, download_path)
+        self._recorded_sizes_checksums[url] = self._sizes_checksums[url] #pylint: disable=line-too-long
         return promise.Promise.resolve(download_path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
     download_dir_path = os.path.join(
         self._download_dir,
-        '%s.tmp.%s' % (resource_lib.get_dl_dirname(url[:-1]), uuid.uuid4().hex))
+        '%s.tmp.%s' % (resource_lib.get_dl_dirname(url), uuid.uuid4().hex))
     tf.io.gfile.makedirs(download_dir_path)
     logging.info('Downloading %s into %s...', url, download_dir_path)
 
@@ -259,7 +263,7 @@ class DownloadManager(object):
       checksum, dl_size = val
       return self._handle_download_result(
           resource, download_dir_path, checksum, dl_size)
-    return self._downloader.download(url, download_dir_path).then(callback)
+    return self._downloader.download("%s%s" % (url, download_type), download_dir_path).then(callback)
 
   @util.build_synchronize_decorator()
   @utils.memoize()
