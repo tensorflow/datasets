@@ -82,6 +82,7 @@ from tensorflow_datasets.image.plant_leaves import PlantLeaves
 from tensorflow_datasets.image.plant_village import PlantVillage
 from tensorflow_datasets.image.plantae_k import PlantaeK
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
+from tensorflow_datasets.image.reds import REDS
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
