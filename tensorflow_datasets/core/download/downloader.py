@@ -110,10 +110,12 @@ class _Downloader(object):
 
   def _sync_kaggle_download(self, kaggle_url, destination_path):
     """Download with Kaggle API."""
-    kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
+    download_type = kaggle.KaggleFile._DATASET_COMPETITION_SUFFIX[int(kaggle_url[-1])]
+    kaggle_url = kaggle_url[:-1]
+    kaggle_file = kaggle.KaggleFile.from_url(kaggle_url, download_type)
     downloader = self.kaggle_downloader(kaggle_file.competition)
     filepath = downloader.download_file(kaggle_file.filename, destination_path)
-
+    
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer()
     with tf.io.gfile.GFile(filepath, 'rb') as f:

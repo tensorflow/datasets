@@ -46,7 +46,9 @@ correctly.
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle://"
-
+  _DATASET_SUFFIX = 1
+  _COMPETITION_SUFFIX = 0
+  _DATASET_COMPETITION_SUFFIX = [_COMPETITION_SUFFIX, _DATASET_SUFFIX]
   def __init__(self, competition_name, filename):
     self._competition_name = competition_name
     self._filename = filename
@@ -60,10 +62,13 @@ class KaggleFile(object):
     return self._filename
 
   @classmethod
-  def from_url(cls, url):
+  def from_url(cls, url, download_type):
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
     competition_name, filename = url[len(cls._URL_PREFIX):].split("/", 1)
+    if download_type == KaggleFile._DATASET_SUFFIX:
+      dataset_name, filename = filename.split("/", 1)
+      competition_name = "%s/%s" % (competition_name, dataset_name)
     return cls(competition_name, filename)
 
   @staticmethod
@@ -71,8 +76,9 @@ class KaggleFile(object):
     return url.startswith(KaggleFile._URL_PREFIX)
 
   def to_url(self):
-    return "%s%s/%s" % (self._URL_PREFIX, self._competition_name,
-                        self._filename)
+    dataset_type = int("/" in self._competition_name)
+    return "%s%s/%s%d" % (self._URL_PREFIX, self._competition_name,
+                        self._filename, KaggleFile._DATASET_COMPETITION_SUFFIX[dataset_type])
 
 
 class KaggleCompetitionDownloader(object):
@@ -120,17 +126,20 @@ class KaggleCompetitionDownloader(object):
     if fname not in self.competition_files:  # pylint: disable=unsupported-membership-test
       raise ValueError("%s is not one of the competition's "
                        "files: %s" % (fname, self.competition_files))
+    is_dataset = "/" in self._competition_name
     command = [
         "kaggle",
-        "competitions",
+        "competitions" if not is_dataset else "datasets",
         "download",
         "--file",
         fname,
         "--path",
         output_dir,
-        "-c",
-        self._competition_name,
+        "-c" if not is_dataset else "-d",
+        self._competition_name
     ]
+    if is_dataset:
+      command.append("--unzip")
     _run_kaggle_command(command, self._competition_name)
     return os.path.join(output_dir, fname)
 

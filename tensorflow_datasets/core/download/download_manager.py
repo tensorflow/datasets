@@ -239,19 +239,19 @@ class DownloadManager(object):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
     if url in self._sizes_checksums:
-      expected_sha256 = self._sizes_checksums[url][1]
-      download_path = self._get_final_dl_path(url, expected_sha256)
+      expected_sha256 = self._sizes_checksums[url[:-1]][1]
+      download_path = self._get_final_dl_path(url[:-1], expected_sha256)
       if not self._force_download and resource.exists_locally(download_path):
         logging.info('URL %s already downloaded: reusing %s.',
-                     url, download_path)
-        self._recorded_sizes_checksums[url] = self._sizes_checksums[url]
+                     url[:-1], download_path)
+        self._recorded_sizes_checksums[url[:-1]] = self._sizes_checksums[url[:-1]]
         return promise.Promise.resolve(download_path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
     download_dir_path = os.path.join(
         self._download_dir,
-        '%s.tmp.%s' % (resource_lib.get_dl_dirname(url), uuid.uuid4().hex))
+        '%s.tmp.%s' % (resource_lib.get_dl_dirname(url[:-1]), uuid.uuid4().hex))
     tf.io.gfile.makedirs(download_dir_path)
     logging.info('Downloading %s into %s...', url, download_dir_path)
 
