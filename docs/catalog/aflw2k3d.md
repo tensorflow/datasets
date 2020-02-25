@@ -10,6 +10,8 @@
 </div>
 # `aflw2k3d`
 
+*   **Description**:
+
 AFLW2000-3D is a dataset of 2000 images that have been annotated with
 image-level 68-point 3D facial landmarks. This dataset is typically used for
 evaluation of 3D facial landmark detection models. The head poses are very
@@ -17,18 +19,25 @@ diverse and often hard to be detected by a cnn-based face detector. The 2D
 landmarks are skipped in this dataset, since some of the data are not consistent
 to 21 points, as the original paper mentioned.
 
-*   URL:
+*   **Homepage**:
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.aflw2k3d.Aflw2k3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/aflw2k3d.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `83.36 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 2,000
 
-*   Size: `83.36 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(450, 450, 3), dtype=tf.uint8),
@@ -36,19 +45,11 @@ FeaturesDict({
     'landmarks_68_3d_z': Tensor(shape=(68, 1), dtype=tf.float32),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,000
-TRAIN | 2,000
-
-## Homepage
-
-*   [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
-
-## Citation
 ```
 @article{DBLP:journals/corr/ZhuLLSL15,
   author    = {Xiangyu Zhu and
@@ -68,5 +69,3 @@ TRAIN | 2,000
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

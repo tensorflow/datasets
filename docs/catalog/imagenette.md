@@ -10,6 +10,8 @@
 </div>
 # `imagenette`
 
+*   **Description**:
+
 Imagenette is a subset of 10 easily classified classes from the Imagenet
 dataset. It was originally prepared by Jeremy Howard of FastAI. The objective
 behind putting together a small version of the Imagenet dataset was mainly
@@ -23,19 +25,54 @@ ideas and share with others. The dataset comes in three variants:
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset {size} variant.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.imagenette.Imagenette`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenette.py)
 
-`imagenette` is configured with `tfds.image.imagenette.ImagenetteConfig` and has
-the following configurations predefined (defaults to the first one):
+*   **Versions**:
 
-*   `full-size` (`v0.1.0`) (`Size: 1.45 GiB`): Imagenette is a subset of 10
-    easily classified classes from the Imagenet dataset. It was originally
-    prepared by Jeremy Howard of FastAI. The objective behind putting together a
-    small version of the Imagenet dataset was mainly because running new
+    *   **`0.1.0`** (default): No release notes.
+
+*   **Download size**: `1.45 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 12,894
+'validation' | 500
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
+
+```
+
+```
+
+## imagenette/full-size (default config)
+
+*   **Config description**: Imagenette is a subset of 10 easily classified
+    classes from the Imagenet dataset. It was originally prepared by Jeremy
+    Howard of FastAI. The objective behind putting together a small version of
+    the Imagenet dataset was mainly because running new
     ideas/algorithms/experiments on the whole Imagenet take a lot of time.
 
 This version of the dataset allows researchers/practitioners to quickly try out
@@ -45,10 +82,12 @@ ideas and share with others. The dataset comes in three variants:
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset full-size variant.
 
-*   `320px` (`v0.1.0`) (`Size: 325.48 MiB`): Imagenette is a subset of 10 easily
-    classified classes from the Imagenet dataset. It was originally prepared by
-    Jeremy Howard of FastAI. The objective behind putting together a small
-    version of the Imagenet dataset was mainly because running new
+## imagenette/320px
+
+*   **Config description**: Imagenette is a subset of 10 easily classified
+    classes from the Imagenet dataset. It was originally prepared by Jeremy
+    Howard of FastAI. The objective behind putting together a small version of
+    the Imagenet dataset was mainly because running new
     ideas/algorithms/experiments on the whole Imagenet take a lot of time.
 
 This version of the dataset allows researchers/practitioners to quickly try out
@@ -58,10 +97,12 @@ ideas and share with others. The dataset comes in three variants:
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset 320px variant.
 
-*   `160px` (`v0.1.0`) (`Size: 94.18 MiB`): Imagenette is a subset of 10 easily
-    classified classes from the Imagenet dataset. It was originally prepared by
-    Jeremy Howard of FastAI. The objective behind putting together a small
-    version of the Imagenet dataset was mainly because running new
+## imagenette/160px
+
+*   **Config description**: Imagenette is a subset of 10 easily classified
+    classes from the Imagenet dataset. It was originally prepared by Jeremy
+    Howard of FastAI. The objective behind putting together a small version of
+    the Imagenet dataset was mainly because running new
     ideas/algorithms/experiments on the whole Imagenet take a lot of time.
 
 This version of the dataset allows researchers/practitioners to quickly try out
@@ -70,134 +111,3 @@ ideas and share with others. The dataset comes in three variants:
 *   Full size
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset 160px variant.
-
-## `imagenette/full-size`
-Imagenette is a subset of 10 easily classified classes from the Imagenet
-dataset. It was originally prepared by Jeremy Howard of FastAI. The objective
-behind putting together a small version of the Imagenet dataset was mainly
-because running new ideas/algorithms/experiments on the whole Imagenet take a
-lot of time.
-
-This version of the dataset allows researchers/practitioners to quickly try out
-ideas and share with others. The dataset comes in three variants:
-
-*   Full size
-*   320 px
-*   160 px This dataset consists of the Imagenette dataset full-size variant.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 13,394
-TRAIN      | 12,894
-VALIDATION | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `imagenette/320px`
-Imagenette is a subset of 10 easily classified classes from the Imagenet
-dataset. It was originally prepared by Jeremy Howard of FastAI. The objective
-behind putting together a small version of the Imagenet dataset was mainly
-because running new ideas/algorithms/experiments on the whole Imagenet take a
-lot of time.
-
-This version of the dataset allows researchers/practitioners to quickly try out
-ideas and share with others. The dataset comes in three variants:
-
-*   Full size
-*   320 px
-*   160 px This dataset consists of the Imagenette dataset 320px variant.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 13,394
-TRAIN      | 12,894
-VALIDATION | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `imagenette/160px`
-Imagenette is a subset of 10 easily classified classes from the Imagenet
-dataset. It was originally prepared by Jeremy Howard of FastAI. The objective
-behind putting together a small version of the Imagenet dataset was mainly
-because running new ideas/algorithms/experiments on the whole Imagenet take a
-lot of time.
-
-This version of the dataset allows researchers/practitioners to quickly try out
-ideas and share with others. The dataset comes in three variants:
-
-*   Full size
-*   320 px
-*   160 px This dataset consists of the Imagenette dataset 160px variant.
-
-Versions:
-
-*   **`0.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 13,394
-TRAIN      | 12,894
-VALIDATION | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
-
-```
-
-```
-
---------------------------------------------------------------------------------

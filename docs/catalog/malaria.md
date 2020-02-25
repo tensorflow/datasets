@@ -10,44 +10,41 @@
 </div>
 # `malaria`
 
+*   **Description**:
+
 The Malaria dataset contains a total of 27,558 cell images with equal instances
 of parasitized and uninfected cells from the thin blood smear slide images of
 segmented cells.
 
-*   URL:
+*   **Homepage**:
     [https://lhncbc.nlm.nih.gov/publication/pub9932](https://lhncbc.nlm.nih.gov/publication/pub9932)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.malaria.Malaria`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/malaria.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `337.08 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 27,558
 
-*   Size: `337.08 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
-
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 27,558
-TRAIN | 27,558
-
-## Homepage
-
-*   [https://lhncbc.nlm.nih.gov/publication/pub9932](https://lhncbc.nlm.nih.gov/publication/pub9932)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
 ```
 @article{rajaraman2018pre,
@@ -63,5 +60,3 @@ TRAIN | 27,558
   publisher={PeerJ Inc.}
 }
 ```
-
---------------------------------------------------------------------------------

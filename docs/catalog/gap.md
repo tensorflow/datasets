@@ -10,23 +10,34 @@
 </div>
 # `gap`
 
+*   **Description**:
+
 GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
 (ambiguous pronoun, antecedent name), sampled from Wikipedia and released by
 Google AI Language for the evaluation of coreference resolution in practical
 applications.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.gap.Gap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gap.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `2.29 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 2,000
+'train'      | 2,000
+'validation' | 454
 
-*   Size: `2.29 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'A': Text(shape=(), dtype=tf.string),
@@ -42,21 +53,11 @@ FeaturesDict({
     'URL': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 4,454
-TEST       | 2,000
-TRAIN      | 2,000
-VALIDATION | 454
-
-## Homepage
-
-*   [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
-
-## Citation
 ```
 @article{DBLP:journals/corr/abs-1810-05201,
   author    = {Kellie Webster and
@@ -75,5 +76,3 @@ VALIDATION | 454
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

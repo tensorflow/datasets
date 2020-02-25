@@ -10,6 +10,8 @@
 </div>
 # `gigaword`
 
+*   **Description**:
+
 Headline-generation on a corpus of article pairs from Gigaword consisting of
 around 4 million articles. Use the 'org_data' provided by
 https://github.com/microsoft/unilm/ which is identical to
@@ -17,42 +19,38 @@ https://github.com/harvardnlp/sent-summary but with better format.
 
 There are two features: - document: article. - summary: headline.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.gigaword.Gigaword`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/gigaword.py)
-*   Version: `v1.2.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.2.0`** (default): No release notes.
+*   **Download size**: `551.61 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.2.0`** (default):
+Split        | Examples
+:----------- | --------:
+'test'       | 1,951
+'train'      | 3,803,957
+'validation' | 189,651
 
-*   Size: `551.61 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'document': Text(shape=(), dtype=tf.string),
     'summary': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('document', 'summary')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 3,995,559
-TRAIN      | 3,803,957
-VALIDATION | 189,651
-TEST       | 1,951
-
-## Homepage
-
-*   [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
-
-## Supervised keys (for `as_supervised=True`)
-`('document', 'summary')`
-
-## Citation
 ```
 @article{graff2003english,
   title={English gigaword},
@@ -74,5 +72,3 @@ TEST       | 1,951
    year={2015}
 }
 ```
-
---------------------------------------------------------------------------------

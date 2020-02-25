@@ -10,6 +10,8 @@
 </div>
 # `multi_nli_mismatch`
 
+*   **Description**:
+
 The Multi-Genre Natural Language Inference (MultiNLI) corpus is a crowd-sourced
 collection of 433k sentence pairs annotated with textual entailment information.
 The corpus is modeled on the SNLI corpus, but differs in that covers a range of
@@ -17,33 +19,27 @@ genres of spoken and written text, and supports a distinctive cross-genre
 generalization evaluation. The corpus served as the basis for the shared task of
 the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
-*   URL:
+*   **Config description**: Plain text
+*   **Homepage**:
     [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.multi_nli_mismatch.MultiNLIMismatch`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli_mismatch.py)
+*   **Versions**:
+    *   **`0.0.1`** (default): No release notes.
+*   **Download size**: `216.34 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`multi_nli_mismatch` is configured with
-`tfds.text.multi_nli_mismatch.MultiNLIMismatchConfig` and has the following
-configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'train'      | 392,702
+'validation' | 10,000
 
-*   `plain_text` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
+*   **Features**:
 
-## `multi_nli_mismatch/plain_text`
-Plain text
-
-Versions:
-
-*   **`0.0.1`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 402,702
-TRAIN      | 392,702
-VALIDATION | 10,000
-
-### Features
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -51,12 +47,11 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
-
-## Citation
 ```
 @InProceedings{N18-1101,
   author = "Williams, Adina
@@ -77,4 +72,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## multi_nli_mismatch/plain_text (default config)

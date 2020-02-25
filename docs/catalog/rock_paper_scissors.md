@@ -10,45 +10,43 @@
 </div>
 # `rock_paper_scissors`
 
+*   **Description**:
+
 Images of hands playing rock, paper, scissor game.
 
-*   URL:
+*   **Homepage**:
     [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.rock_paper_scissors.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/rock_paper_scissors.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `219.53 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `219.53 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 372
+'train' | 2,520
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,892
-TRAIN | 2,520
-TEST  | 372
-
-## Homepage
-
-*   [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @ONLINE {rps,
 author = "Laurence Moroney",
@@ -58,5 +56,3 @@ year = "2019",
 url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 }
 ```
-
---------------------------------------------------------------------------------

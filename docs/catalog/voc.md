@@ -12,37 +12,7 @@
 
 # `voc`
 
-*   URL:
-    [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
-*   `DatasetBuilder`:
-    [`tfds.object_detection.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
-
-`voc` is configured with `tfds.object_detection.voc.VocConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `2007` (`v4.0.0`) (`Size: 868.85 MiB`): This dataset contains the data from
-    the PASCAL Visual Object Classes Challenge 2007, a.k.a. VOC2007,
-    corresponding to the Classification and Detection competitions. A total of
-    9963 images are included in this dataset, where each image contains a set of
-    objects, out of 20 different classes, making a total of 24640 annotated
-    objects. In the Classification competition, the goal is to predict the set
-    of labels contained in the image, while in the Detection competition the
-    goal is to predict the bounding box and label of each individual object.
-    WARNING: As per the official dataset, the test set of VOC2012 does not
-    contain annotations.
-
-*   `2012` (`v4.0.0`) (`Size: 3.59 GiB`): This dataset contains the data from
-    the PASCAL Visual Object Classes Challenge 2012, a.k.a. VOC2012,
-    corresponding to the Classification and Detection competitions. A total of
-    11540 images are included in this dataset, where each image contains a set
-    of objects, out of 20 different classes, making a total of 27450 annotated
-    objects. In the Classification competition, the goal is to predict the set
-    of labels contained in the image, while in the Detection competition the
-    goal is to predict the bounding box and label of each individual object.
-    WARNING: As per the official dataset, the test set of VOC2012 does not
-    contain annotations.
-
-## `voc/2007`
+*   **Description**:
 
 This dataset contains the data from the PASCAL Visual Object Classes Challenge
 2007, a.k.a. VOC2007, corresponding to the Classification and Detection
@@ -54,20 +24,19 @@ competition the goal is to predict the bounding box and label of each individual
 object. WARNING: As per the official dataset, the test set of VOC2012 does not
 contain annotations.
 
-Versions:
+*   **Homepage**:
+    [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
+*   **Source code**:
+    [`tfds.object_detection.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
+*   **Versions**:
+    *   **`4.0.0`** (default): No release notes.
+*   **Download size**: `868.85 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-*   **`4.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 9,963
-TEST       | 4,952
-VALIDATION | 2,510
-TRAIN      | 2,501
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -83,64 +52,54 @@ FeaturesDict({
     }),
 })
 ```
-
-### Homepage
-
-*   [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
-
-## `voc/2012`
-
-This dataset contains the data from the PASCAL Visual Object Classes Challenge
-2012, a.k.a. VOC2012, corresponding to the Classification and Detection
-competitions. A total of 11540 images are included in this dataset, where each
-image contains a set of objects, out of 20 different classes, making a total of
-27450 annotated objects. In the Classification competition, the goal is to
-predict the set of labels contained in the image, while in the Detection
-competition the goal is to predict the bounding box and label of each individual
-object. WARNING: As per the official dataset, the test set of VOC2012 does not
-contain annotations.
-
-Versions:
-
-*   **`4.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 22,531
-TEST       | 10,991
-VALIDATION | 5,823
-TRAIN      | 5,717
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_difficult': Tensor(shape=(), dtype=tf.bool),
-        'is_truncated': Tensor(shape=(), dtype=tf.bool),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    }),
-})
-```
-
-### Homepage
-
-*   [http://host.robots.ox.ac.uk/pascal/VOC/voc2012/](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/)
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
 ```
-@misc{pascal-voc-2012,
+@misc{pascal-voc-2007,
     author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults",
-    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
+    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
+    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
 ```
 
---------------------------------------------------------------------------------
+## voc/2007 (default config)
+
+*   **Config description**: This dataset contains the data from the PASCAL
+    Visual Object Classes Challenge 2007, a.k.a. VOC2007, corresponding to the
+    Classification and Detection competitions. A total of 9963 images are
+    included in this dataset, where each image contains a set of objects, out of
+    20 different classes, making a total of 24640 annotated objects. In the
+    Classification competition, the goal is to predict the set of labels
+    contained in the image, while in the Detection competition the goal is to
+    predict the bounding box and label of each individual object. WARNING: As
+    per the official dataset, the test set of VOC2012 does not contain
+    annotations.
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 4,952
+'train'      | 2,501
+'validation' | 2,510
+
+## voc/2012
+
+*   **Config description**: This dataset contains the data from the PASCAL
+    Visual Object Classes Challenge 2012, a.k.a. VOC2012, corresponding to the
+    Classification and Detection competitions. A total of 11540 images are
+    included in this dataset, where each image contains a set of objects, out of
+    20 different classes, making a total of 27450 annotated objects. In the
+    Classification competition, the goal is to predict the set of labels
+    contained in the image, while in the Detection competition the goal is to
+    predict the bounding box and label of each individual object. WARNING: As
+    per the official dataset, the test set of VOC2012 does not contain
+    annotations.
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 10,991
+'train'      | 5,717
+'validation' | 5,823

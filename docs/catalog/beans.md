@@ -10,48 +10,46 @@
 </div>
 # `beans`
 
+*   **Description**:
+
 Beans is a dataset of images of beans taken in the field using smartphone
 cameras. It consists of 3 classes: 2 disease classes and the healthy class.
 Diseases depicted include Angular Leaf Spot and Bean Rust. Data was annotated by
 experts from the National Crops Resources Research Institute (NaCRRI) in Uganda
 and collected by the Makerere AI research lab.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/AI-Lab-Makerere/ibean/](https://github.com/AI-Lab-Makerere/ibean/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.beans.Beans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/beans.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `171.63 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (validation, test), Only when `shuffle_files=False` (train)
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 128
+'train'      | 1,034
+'validation' | 133
 
-*   Size: `171.63 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(500, 500, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 1,295
-TRAIN      | 1,034
-VALIDATION | 133
-TEST       | 128
-
-## Homepage
-
-*   [https://github.com/AI-Lab-Makerere/ibean/](https://github.com/AI-Lab-Makerere/ibean/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @ONLINE {beansdata,
     author="Makerere AI Lab",
@@ -61,5 +59,3 @@ TEST       | 128
     url="https://github.com/AI-Lab-Makerere/ibean/"
 }
 ```
-
---------------------------------------------------------------------------------

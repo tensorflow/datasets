@@ -10,24 +10,34 @@
 </div>
 # `stanford_dogs`
 
+*   **Description**:
+
 The Stanford Dogs dataset contains images of 120 breeds of dogs from around the
 world. This dataset has been built using images and annotation from ImageNet for
 the task of fine-grained image categorization. There are 20,580 images, out of
 which 12,000 are used for training and 8580 for testing. Class labels and
 bounding box annotations are provided for all the 12,000 images.
 
-*   URL:
+*   **Homepage**:
     [http://vision.stanford.edu/aditya86/ImageNetDogs/main.html](http://vision.stanford.edu/aditya86/ImageNetDogs/main.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.stanford_dogs.StanfordDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_dogs.py)
-*   Version: `v0.2.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.2.0`** (default): No release notes.
+*   **Download size**: `778.12 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.2.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 8,580
+'train' | 12,000
 
-*   Size: `778.12 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -38,23 +48,11 @@ FeaturesDict({
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 20,580
-TRAIN | 12,000
-TEST  | 8,580
-
-## Homepage
-
-*   [http://vision.stanford.edu/aditya86/ImageNetDogs/main.html](http://vision.stanford.edu/aditya86/ImageNetDogs/main.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @inproceedings{KhoslaYaoJayadevaprakashFeiFei_FGVC2011,
 author = "Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and
@@ -74,5 +72,3 @@ address = "Colorado Springs, CO",
         YEAR = {2009},
         BIBSOURCE = "http://www.image-net.org/papers/imagenet_cvpr09.bib"}
 ```
-
---------------------------------------------------------------------------------

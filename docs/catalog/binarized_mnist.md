@@ -10,42 +10,43 @@
 </div>
 # `binarized_mnist`
 
+*   **Description**:
+
 A specific binarization of the MNIST images originally used in (Salakhutdinov &
 Murray, 2008). This dataset is frequently used to evaluate generative models of
 images, so labels are not provided.
 
-*   URL:
+*   **Homepage**:
     [http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html](http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.binarized_mnist.BinarizedMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binarized_mnist.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `104.68 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 10,000
+'train'      | 50,000
+'validation' | 10,000
 
-*   Size: `104.68 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 70,000
-TRAIN      | 50,000
-TEST       | 10,000
-VALIDATION | 10,000
-
-## Homepage
-
-*   [http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html](http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html)
-
-## Citation
 ```
 @inproceedings{salakhutdinov2008quantitative,
 title={On the quantitative analysis of deep belief networks},
@@ -56,5 +57,3 @@ year={2008},
 organization={ACM}
 }
 ```
-
---------------------------------------------------------------------------------

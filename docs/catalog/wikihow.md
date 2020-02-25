@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="https://github.com/mahnazkoupaee/WikiHow-Dataset" />
   <meta itemprop="citation" content="&#10;@misc{koupaee2018wikihow,&#10;    title={WikiHow: A Large Scale Text Summarization Dataset},&#10;    author={Mahnaz Koupaee and William Yang Wang},&#10;    year={2018},&#10;    eprint={1810.09305},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
-# `wikihow` (Manual download)
+# `wikihow`
+
+Warning: Manual download required. See instructions bellow.
+
+*   **Description**:
 
 WikiHow is a new large-scale dataset using the online WikiHow
 (http://www.wikihow.com/) knowledge base.
@@ -27,43 +31,24 @@ Train/validation/test splits are provided by the authors. Preprocessing is
 applied to remove short articles (abstract length < 0.75 article length) and
 clean up extra commas.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.wikihow.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
+*   **Versions**:
+    *   **`1.2.0`** (default): No release notes.
+*   **Download size**: `5.21 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/wikihow/`):<br/>
+    Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
+    Please download both wikihowAll.csv and wikihowSep.csv.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`wikihow` is configured with `tfds.summarization.wikihow.WikihowConfig` and has
-the following configurations predefined (defaults to the first one):
-
-*   `all` (`v1.2.0`) (`Size: 5.21 MiB`): Use the concatenation of all paragraphs
-    as the articles and the bold lines as the reference summaries
-
-*   `sep` (`v1.2.0`) (`Size: 5.21 MiB`): use each paragraph and its summary.
-
-## `wikihow/all`
-
-Use the concatenation of all paragraphs as the articles and the bold lines as
-the reference summaries
-
-Versions:
-
-*   **`1.2.0`** (default):
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wikihow/`): Links to files
-can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset Please download
-both wikihowAll.csv and wikihowSep.csv.
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 168,428
-TRAIN      | 157,252
-VALIDATION | 5,599
-TEST       | 5,577
-
-### Features
 ```python
 FeaturesDict({
     'headline': Text(shape=(), dtype=tf.string),
@@ -71,54 +56,11 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('text', 'headline')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'headline')`
-
-## `wikihow/sep`
-use each paragraph and its summary.
-
-Versions:
-
-*   **`1.2.0`** (default):
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wikihow/`): Links to files
-can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset Please download
-both wikihowAll.csv and wikihowSep.csv.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,136,464
-TRAIN      | 1,060,732
-VALIDATION | 37,932
-TEST       | 37,800
-
-### Features
-```python
-FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'overview': Text(shape=(), dtype=tf.string),
-    'sectionLabel': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'headline')`
-
-## Citation
 ```
 @misc{koupaee2018wikihow,
     title={WikiHow: A Large Scale Text Summarization Dataset},
@@ -130,4 +72,25 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## wikihow/all (default config)
+
+*   **Config description**: Use the concatenation of all paragraphs as the
+    articles and the bold lines as the reference summaries
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 5,577
+'train'      | 157,252
+'validation' | 5,599
+
+## wikihow/sep
+
+*   **Config description**: use each paragraph and its summary.
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 37,800
+'train'      | 1,060,732
+'validation' | 37,932

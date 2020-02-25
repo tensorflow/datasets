@@ -10,50 +10,35 @@
 </div>
 # `trivia_qa`
 
+*   **Description**:
+
 TriviaqQA is a reading comprehension dataset containing over 650K
 question-answer-evidence triples. TriviaqQA includes 95K question-answer pairs
 authored by trivia enthusiasts and independently gathered evidence documents,
 six per question on average, that provide high quality distant supervision for
 answering the questions.
 
-*   URL:
+*   **Homepage**:
     [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
+*   **Versions**:
+    *   **`1.1.0`** (default): No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `119.78 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+*   **Splits**:
 
-`trivia_qa` is configured with `tfds.text.trivia_qa.TriviaQAConfig` and has the
-following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'test'       | 10,832
+'train'      | 87,622
+'validation' | 11,313
 
-*   `rc` (`v1.1.0`) (`Size: ?? GiB`): Question-answer pairs where all documents
-    for a given question contain the answer string(s). Includes context from
-    Wikipedia and search results.
+*   **Features**:
 
-*   `rc.nocontext` (`v1.1.0`) (`Size: ?? GiB`): Question-answer pairs where all
-    documents for a given question contain the answer string(s).
-
-*   `unfiltered` (`v1.1.0`) (`Size: ?? GiB`): 110k question-answer pairs for
-    open domain QA where not all documents for a given question contain the
-    answer string(s). This makes the unfiltered dataset more appropriate for
-    IR-style QA. Includes context from Wikipedia and search results.
-
-*   `unfiltered.nocontext` (`v1.1.0`) (`Size: ?? GiB`): 110k question-answer
-    pairs for open domain QA where not all documents for a given question
-    contain the answer string(s). This makes the unfiltered dataset more
-    appropriate for IR-style QA.
-
-## `trivia_qa/rc`
-
-Question-answer pairs where all documents for a given question contain the
-answer string(s). Includes context from Wikipedia and search results.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-None computed
-
-### Features
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
@@ -84,157 +69,11 @@ FeaturesDict({
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-
-## `trivia_qa/rc.nocontext`
-Question-answer pairs where all documents for a given question contain the
-answer string(s).
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': FeaturesDict({
-        'aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_value': Text(shape=(), dtype=tf.string),
-        'type': Text(shape=(), dtype=tf.string),
-        'value': Text(shape=(), dtype=tf.string),
-    }),
-    'entity_pages': Sequence({
-        'doc_source': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'wiki_context': Text(shape=(), dtype=tf.string),
-    }),
-    'question': Text(shape=(), dtype=tf.string),
-    'question_id': Text(shape=(), dtype=tf.string),
-    'question_source': Text(shape=(), dtype=tf.string),
-    'search_results': Sequence({
-        'description': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'rank': Tensor(shape=(), dtype=tf.int32),
-        'search_context': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'url': Text(shape=(), dtype=tf.string),
-    }),
-})
-```
-
-### Homepage
-
-*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-
-## `trivia_qa/unfiltered`
-
-110k question-answer pairs for open domain QA where not all documents for a
-given question contain the answer string(s). This makes the unfiltered dataset
-more appropriate for IR-style QA. Includes context from Wikipedia and search
-results.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': FeaturesDict({
-        'aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_value': Text(shape=(), dtype=tf.string),
-        'type': Text(shape=(), dtype=tf.string),
-        'value': Text(shape=(), dtype=tf.string),
-    }),
-    'entity_pages': Sequence({
-        'doc_source': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'wiki_context': Text(shape=(), dtype=tf.string),
-    }),
-    'question': Text(shape=(), dtype=tf.string),
-    'question_id': Text(shape=(), dtype=tf.string),
-    'question_source': Text(shape=(), dtype=tf.string),
-    'search_results': Sequence({
-        'description': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'rank': Tensor(shape=(), dtype=tf.int32),
-        'search_context': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'url': Text(shape=(), dtype=tf.string),
-    }),
-})
-```
-
-### Homepage
-
-*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-
-## `trivia_qa/unfiltered.nocontext`
-110k question-answer pairs for open domain QA where not all documents for a
-given question contain the answer string(s). This makes the unfiltered dataset
-more appropriate for IR-style QA.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': FeaturesDict({
-        'aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string)),
-        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
-        'normalized_value': Text(shape=(), dtype=tf.string),
-        'type': Text(shape=(), dtype=tf.string),
-        'value': Text(shape=(), dtype=tf.string),
-    }),
-    'entity_pages': Sequence({
-        'doc_source': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'wiki_context': Text(shape=(), dtype=tf.string),
-    }),
-    'question': Text(shape=(), dtype=tf.string),
-    'question_id': Text(shape=(), dtype=tf.string),
-    'question_source': Text(shape=(), dtype=tf.string),
-    'search_results': Sequence({
-        'description': Text(shape=(), dtype=tf.string),
-        'filename': Text(shape=(), dtype=tf.string),
-        'rank': Tensor(shape=(), dtype=tf.int32),
-        'search_context': Text(shape=(), dtype=tf.string),
-        'title': Text(shape=(), dtype=tf.string),
-        'url': Text(shape=(), dtype=tf.string),
-    }),
-})
-```
-
-### Homepage
-
-*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-
-## Citation
 ```
 @article{2017arXivtriviaqa,
        author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},
@@ -249,4 +88,26 @@ archivePrefix = {arXiv},
 }
 ```
 
---------------------------------------------------------------------------------
+## trivia_qa/rc (default config)
+
+*   **Config description**: Question-answer pairs where all documents for a
+    given question contain the answer string(s). Includes context from Wikipedia
+    and search results.
+
+## trivia_qa/rc.nocontext
+
+*   **Config description**: Question-answer pairs where all documents for a
+    given question contain the answer string(s).
+
+## trivia_qa/unfiltered
+
+*   **Config description**: 110k question-answer pairs for open domain QA where
+    not all documents for a given question contain the answer string(s). This
+    makes the unfiltered dataset more appropriate for IR-style QA. Includes
+    context from Wikipedia and search results.
+
+## trivia_qa/unfiltered.nocontext
+
+*   **Config description**: 110k question-answer pairs for open domain QA where
+    not all documents for a given question contain the answer string(s). This
+    makes the unfiltered dataset more appropriate for IR-style QA.

@@ -10,6 +10,8 @@
 </div>
 # `plantae_k`
 
+*   **Description**:
+
 This dataset contains 2153 images of healthy and unhealthy plant leaves divided
 16 categories by species and state of health. The images are in high resolution
 JPG format.
@@ -21,18 +23,25 @@ downloads repeatedly fails.
 Dataset URL: https://data.mendeley.com/datasets/t6j2h22jpx/1 License:
 http://creativecommons.org/licenses/by/4.0
 
-*   URL:
+*   **Homepage**:
     [https://data.mendeley.com/datasets/t6j2h22jpx/1](https://data.mendeley.com/datasets/t6j2h22jpx/1)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.plantae_k.PlantaeK`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/plantae_k.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `4.30 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 2,153
 
-*   Size: `4.30 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -40,22 +49,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,153
-TRAIN | 2,153
-
-## Homepage
-
-*   [https://data.mendeley.com/datasets/t6j2h22jpx/1](https://data.mendeley.com/datasets/t6j2h22jpx/1)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @misc{,
   author={Vippon Preet Kour, Sakshi Arora},
@@ -64,5 +62,3 @@ TRAIN | 2,153
   year={2019}
 }
 ```
-
---------------------------------------------------------------------------------

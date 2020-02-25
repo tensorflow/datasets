@@ -10,46 +10,44 @@
 </div>
 # `scene_parse150`
 
+*   **Description**:
+
 Scene parsing is to segment and parse an image into different image regions
 associated with semantic categories, such as sky, road, person, and bed. MIT
 Scene Parsing Benchmark (SceneParse150) provides a standard training and
 evaluation platform for the algorithms of scene parsing.
 
-*   URL:
+*   **Homepage**:
     [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.scene_parse_150.SceneParse150`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/scene_parse_150.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `936.97 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 2,000
+'train' | 20,210
 
-*   Size: `936.97 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'annotation': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'annotation')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 22,210
-TRAIN | 20,210
-TEST  | 2,000
-
-## Homepage
-
-*   [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'annotation')`
-
-## Citation
 ```
 @inproceedings{zhou2017scene,
 title={Scene Parsing through ADE20K Dataset},
@@ -58,5 +56,3 @@ booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Rec
 year={2017}
 }
 ```
-
---------------------------------------------------------------------------------

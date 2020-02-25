@@ -10,6 +10,8 @@
 </div>
 # `plant_leaves`
 
+*   **Description**:
+
 This dataset consists of 4502 images of healthy and unhealthy plant leaves
 divided into 22 categories by species and state of health. The images are in
 high resolution JPG format.
@@ -24,18 +26,25 @@ downloads repeatedly fails.
 Dataset URL: https://data.mendeley.com/datasets/hb74ynkjcn/1 License:
 http://creativecommons.org/licenses/by/4.0
 
-*   URL:
+*   **Homepage**:
     [https://data.mendeley.com/datasets/hb74ynkjcn/1](https://data.mendeley.com/datasets/hb74ynkjcn/1)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.plant_leaves.PlantLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/plant_leaves.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `6.81 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 4,502
 
-*   Size: `6.81 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -43,22 +52,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=22),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,502
-TRAIN | 4,502
-
-## Homepage
-
-*   [https://data.mendeley.com/datasets/hb74ynkjcn/1](https://data.mendeley.com/datasets/hb74ynkjcn/1)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @misc{,
   author={Siddharth Singh Chouhan, Ajay Kaul, Uday Pratap Singh, Sanjeev
@@ -69,5 +67,3 @@ Plant Pathology},
   year={2019}
 }
 ```
-
---------------------------------------------------------------------------------

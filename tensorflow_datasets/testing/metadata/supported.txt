@@ -453,6 +453,7 @@ flores/neen_plain_text/0.0.3
 flores/neen_plain_text/1.0.0
 flores/sien_plain_text/0.0.3
 flores/sien_plain_text/1.0.0
+food101/1.0.0
 food101/2.0.0
 gap/0.1.0
 gigaword/1.2.0
@@ -760,6 +761,7 @@ open_images_v4/300k/0.2.1
 open_images_v4/300k/2.0.0
 open_images_v4/original/0.2.0
 open_images_v4/original/2.0.0
+opinosis/1.0.0
 oxford_flowers102/0.0.1
 oxford_flowers102/2.0.0
 oxford_iiit_pet/3.1.0
@@ -943,8 +945,13 @@ ted_multi_translate/plain_text/1.0.0
 tf_flowers/1.0.0
 tf_flowers/3.0.0
 the300w_lp/1.0.0
+tiny_shakespeare/1.0.0
 titanic/1.0.0
 titanic/2.0.0
+trivia_qa/rc.nocontext/1.1.0
+trivia_qa/rc/1.1.0
+trivia_qa/unfiltered.nocontext/1.1.0
+trivia_qa/unfiltered/1.1.0
 uc_merced/0.0.1
 uc_merced/2.0.0
 ucf101/ucf101_1/1.0.0
@@ -1959,3 +1966,7 @@ xnli/plain_text/0.0.1
 xnli/plain_text/1.0.0
 xsum/1.0.0
 xsum/1.1.0
+yelp_polarity_reviews/bytes/0.1.0
+yelp_polarity_reviews/plain_text/0.1.0
+yelp_polarity_reviews/subwords32k/0.1.0
+yelp_polarity_reviews/subwords8k/0.1.0

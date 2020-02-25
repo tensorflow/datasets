@@ -10,455 +10,39 @@
 </div>
 # `cycle_gan`
 
+*   **Description**:
+
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
-*   URL:
+*   **Config description**: A dataset consisting of images from two classes A
+    and B (For example: horses/zebras, apple/orange,...)
+*   **Homepage**:
     [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cycle_gan.CycleGAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cycle_gan.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.1.0`: No release notes.
+*   **Download size**: `74.82 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`cycle_gan` is configured with `tfds.image.cycle_gan.CycleGANConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `apple2orange` (`v2.0.0`) (`Size: 74.82 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `summer2winter_yosemite` (`v2.0.0`) (`Size: 126.50 MiB`): A dataset
-    consisting of images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `horse2zebra` (`v2.0.0`) (`Size: 111.45 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `monet2photo` (`v2.0.0`) (`Size: 291.09 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `cezanne2photo` (`v2.0.0`) (`Size: 266.92 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `ukiyoe2photo` (`v2.0.0`) (`Size: 279.38 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `vangogh2photo` (`v2.0.0`) (`Size: 292.39 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-*   `maps` (`v2.0.0`) (`Size: 1.38 GiB`): A dataset consisting of images from
-    two classes A and B (For example: horses/zebras, apple/orange,...)
-
-*   `cityscapes` (`v2.0.0`) (`Size: 266.65 MiB`): A dataset consisting of images
-    from two classes A and B (For example: horses/zebras, apple/orange,...)
-
-*   `facades` (`v2.0.0`) (`Size: 33.51 MiB`): A dataset consisting of images
-    from two classes A and B (For example: horses/zebras, apple/orange,...)
-
-*   `iphone2dslr_flower` (`v2.0.0`) (`Size: 324.22 MiB`): A dataset consisting
-    of images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
-
-## `cycle_gan/apple2orange`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 2,528
-TRAINB | 1,019
-TRAINA | 995
-TESTA  | 266
-TESTB  | 248
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/summer2winter_yosemite`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 2,740
-TRAINA | 1,231
-TRAINB | 962
-TESTA  | 309
-TESTB  | 238
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/horse2zebra`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 2,661
-TRAINB | 1,334
-TRAINA | 1,067
-TESTB  | 140
-TESTA  | 120
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/monet2photo`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 8,231
-TRAINB | 6,287
-TRAINA | 1,072
-TESTB  | 751
-TESTA  | 121
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/cezanne2photo`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 7,621
-TRAINB | 6,287
-TESTB  | 751
-TRAINA | 525
-TESTA  | 58
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/ukiyoe2photo`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 7,863
-TRAINB | 6,287
-TESTB  | 751
-TRAINA | 562
-TESTA  | 263
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/vangogh2photo`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 7,838
-TRAINB | 6,287
-TESTB  | 751
-TESTA  | 400
-TRAINA | 400
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/maps`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 4,388
-TESTA  | 1,098
-TESTB  | 1,098
-TRAINA | 1,096
-TRAINB | 1,096
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/cityscapes`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 6,950
-TRAINA | 2,975
-TRAINB | 2,975
-TESTA  | 500
-TESTB  | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/facades`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 1,012
-TRAINA | 400
-TRAINB | 400
-TESTA  | 106
-TESTB  | 106
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cycle_gan/iphone2dslr_flower`
-
-A dataset consisting of images from two classes A and B (For example:
-horses/zebras, apple/orange,...)
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.1.0`: None
-
-### Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 6,186
-TRAINB | 3,325
-TRAINA | 1,812
-TESTA  | 569
-TESTB  | 480
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
-
-### Homepage
-
-*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/ZhuPIE17,
   author    = {Jun{-}Yan Zhu and
@@ -479,4 +63,123 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## cycle_gan/apple2orange (default config)
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 266
+'testB'  | 248
+'trainA' | 995
+'trainB' | 1,019
+
+## cycle_gan/summer2winter_yosemite
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 309
+'testB'  | 238
+'trainA' | 1,231
+'trainB' | 962
+
+## cycle_gan/horse2zebra
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 120
+'testB'  | 140
+'trainA' | 1,067
+'trainB' | 1,334
+
+## cycle_gan/monet2photo
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 121
+'testB'  | 751
+'trainA' | 1,072
+'trainB' | 6,287
+
+## cycle_gan/cezanne2photo
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 58
+'testB'  | 751
+'trainA' | 525
+'trainB' | 6,287
+
+## cycle_gan/ukiyoe2photo
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 263
+'testB'  | 751
+'trainA' | 562
+'trainB' | 6,287
+
+## cycle_gan/vangogh2photo
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 400
+'testB'  | 751
+'trainA' | 400
+'trainB' | 6,287
+
+## cycle_gan/maps
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 1,098
+'testB'  | 1,098
+'trainA' | 1,096
+'trainB' | 1,096
+
+## cycle_gan/cityscapes
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 500
+'testB'  | 500
+'trainA' | 2,975
+'trainB' | 2,975
+
+## cycle_gan/facades
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 106
+'testB'  | 106
+'trainA' | 400
+'trainB' | 400
+
+## cycle_gan/iphone2dslr_flower
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+'testA'  | 569
+'testB'  | 480
+'trainA' | 1,812
+'trainB' | 3,325

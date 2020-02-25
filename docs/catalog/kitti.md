@@ -10,6 +10,8 @@
 </div>
 # `kitti`
 
+*   **Description**:
+
 Kitti contains a suite of vision tasks built using an autonomous driving
 platform. The full benchmark contains many tasks such as stereo, optical flow,
 visual odometry, etc. This dataset contains the object detection dataset,
@@ -18,19 +20,28 @@ training images annotated with 3D bounding boxes. A full description of the
 annotations can be found in the readme of the object development kit readme on
 the Kitti homepage.
 
-*   URL:
+*   **Homepage**:
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.object_detection.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
-*   Version: `v3.1.0`
-*   Versions:
-
-    *   **`3.1.0`** (default):
+*   **Versions**:
+    *   **`3.1.0`** (default): No release notes.
     *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **Download size**: `11.71 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `11.71 GiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 711
+'train'      | 6,347
+'validation' | 423
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -47,21 +58,11 @@ FeaturesDict({
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 7,481
-TRAIN      | 6,347
-TEST       | 711
-VALIDATION | 423
-
-## Homepage
-
-*   [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
-
-## Citation
 ```
 @inproceedings{Geiger2012CVPR,
   author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},
@@ -70,5 +71,3 @@ VALIDATION | 423
   year = {2012}
 }
 ```
-
---------------------------------------------------------------------------------

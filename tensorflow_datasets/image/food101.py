@@ -51,6 +51,11 @@ class Food101(tfds.core.GeneratorBasedBuilder):
   """Food-101 Images dataset."""
 
   VERSION = tfds.core.Version("2.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "1.0.0",
+          tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55"),
+  ]
 
   def _info(self):
     """Define Dataset Info."""

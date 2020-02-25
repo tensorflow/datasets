@@ -10,6 +10,8 @@
 </div>
 # `oxford_flowers102`
 
+*   **Description**:
+
 The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly
 occurring in the United Kingdom. Each class consists of between 40 and 258
 images. The images have large scale, pose and light variations. In addition,
@@ -21,20 +23,29 @@ training set and validation set each consist of 10 images per class (totalling
 1020 images each). The test set consists of the remaining 6149 images (minimum
 20 per class).
 
-*   URL:
+*   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: None
+    *   `0.0.1`: No release notes.
+*   **Download size**: `336.76 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `336.76 MiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 6,149
+'train'      | 1,020
+'validation' | 1,020
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -42,24 +53,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 8,189
-TEST       | 6,149
-TRAIN      | 1,020
-VALIDATION | 1,020
-
-## Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @InProceedings{Nilsback08,
    author = "Nilsback, M-E. and Zisserman, A.",
@@ -69,5 +67,3 @@ VALIDATION | 1,020
    month = "Dec"
 }
 ```
-
---------------------------------------------------------------------------------

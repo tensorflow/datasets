@@ -10,47 +10,45 @@
 </div>
 # `fashion_mnist`
 
+*   **Description**:
+
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training
 set of 60,000 examples and a test set of 10,000 examples. Each example is a
 28x28 grayscale image, associated with a label from 10 classes.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `29.45 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `29.45 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 10,000
+'train' | 60,000
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 70,000
-TRAIN | 60,000
-TEST  | 10,000
-
-## Homepage
-
-*   [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/abs-1708-07747,
   author    = {Han Xiao and
@@ -69,5 +67,3 @@ TEST  | 10,000
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

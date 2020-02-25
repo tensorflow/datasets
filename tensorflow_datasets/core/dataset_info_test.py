@@ -113,7 +113,7 @@ class DatasetInfoTest(testing.TestCase):
 
     # Assert that this is computed correctly.
     self.assertEqual(40, info.splits.total_num_examples)
-    self.assertEqual(11594722, info.size_in_bytes)
+    self.assertEqual(11594722, info.dataset_size)
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
@@ -224,7 +224,7 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(restored_info.redistribution_info.license,
                        "some license (new)")
       self.assertEqual(restored_info.download_size, 789)
-      self.assertEqual(restored_info.size_in_bytes, 576)
+      self.assertEqual(restored_info.dataset_size, 576)
       self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
       self.assertEqual(restored_info.download_checksums, {
           "url2": "some other checksum (new)",

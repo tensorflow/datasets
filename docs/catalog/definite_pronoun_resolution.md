@@ -10,6 +10,8 @@
 </div>
 # `definite_pronoun_resolution`
 
+*   **Description**:
+
 Composed by 30 students from one of the author's undergraduate classes. These
 sentence pairs cover topics ranging from real events (e.g., Iran's plan to
 attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,
@@ -20,36 +22,30 @@ the target pronoun, the third line contains the two candidate antecedents, and
 the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 
-*   URL:
+*   **Config description**: Plain text import of the Definite Pronoun Resolution
+    Dataset.
+*   **Homepage**:
     [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
+*   **Download size**: `222.12 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`definite_pronoun_resolution` is configured with
-`tfds.core.dataset_builder.BuilderConfig` and has the following configurations
-predefined (defaults to the first one):
+Split   | Examples
+:------ | -------:
+'test'  | 564
+'train' | 1,322
 
-*   `plain_text` (`v1.0.0`) (`Size: 222.12 KiB`): Plain text import of the
-    Definite Pronoun Resolution Dataset.
+*   **Features**:
 
-## `definite_pronoun_resolution/plain_text`
-Plain text import of the Definite Pronoun Resolution Dataset.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,886
-TRAIN | 1,322
-TEST  | 564
-
-### Features
 ```python
 FeaturesDict({
     'candidates': Sequence(Text(shape=(), dtype=tf.string)),
@@ -58,15 +54,11 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('sentence', 'label')`
+*   **Citation**:
 
-### Homepage
-
-*   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
-
-### Supervised keys (for `as_supervised=True`)
-`('sentence', 'label')`
-
-## Citation
 ```
 @inproceedings{rahman2012resolving,
   title={Resolving complex cases of definite pronouns: the winograd schema challenge},
@@ -78,4 +70,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## definite_pronoun_resolution/plain_text (default config)

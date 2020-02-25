@@ -10,6 +10,8 @@
 </div>
 # `iris`
 
+*   **Description**:
+
 This is perhaps the best known database to be found in the pattern recognition
 literature. Fisher's paper is a classic in the field and is referenced
 frequently to this day. (See Duda & Hart, for example.) The data set contains 3
@@ -17,42 +19,38 @@ classes of 50 instances each, where each class refers to a type of iris plant.
 One class is linearly separable from the other 2; the latter are NOT linearly
 separable from each other.
 
-*   URL:
+*   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.structured.iris.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `4.44 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `4.44 KiB`
+Split   | Examples
+:------ | -------:
+'train' | 150
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'features': Tensor(shape=(4,), dtype=tf.float32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('features', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 150
-TRAIN | 150
-
-## Homepage
-
-*   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
-
-## Supervised keys (for `as_supervised=True`)
-`('features', 'label')`
-
-## Citation
 ```
 @misc{Dua:2019 ,
 author = "Dua, Dheeru and Graff, Casey",
@@ -62,5 +60,3 @@ url = "http://archive.ics.uci.edu/ml",
 institution = "University of California, Irvine, School of Information and Computer Sciences"
 }
 ```
-
---------------------------------------------------------------------------------

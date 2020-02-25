@@ -10,23 +10,33 @@
 </div>
 # `oxford_iiit_pet`
 
+*   **Description**:
+
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
 images for each class. The images have large variations in scale, pose and
 lighting. All images have an associated ground truth annotation of breed.
 
-*   URL:
+*   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
-*   Version: `v3.1.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.1.0`** (default): Added species and labels, new split API.
-    *   `1.2.0`: None
+    *   `1.2.0`: No release notes.
+*   **Download size**: `801.24 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `801.24 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 3,669
+'train' | 3,680
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -36,23 +46,11 @@ FeaturesDict({
     'species': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,349
-TRAIN | 3,680
-TEST  | 3,669
-
-## Homepage
-
-*   [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @InProceedings{parkhi12a,
   author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",
@@ -61,5 +59,3 @@ TEST  | 3,669
   year         = "2012",
 }
 ```
-
---------------------------------------------------------------------------------

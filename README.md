@@ -22,6 +22,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 * [Usage](#usage)
 * [`DatasetBuilder`](#datasetbuilder)
 * [NumPy usage](#numpy-usage-with-tfdsas-numpy)
+* [Citation](#citation)
 * [Want a certain dataset?](#want-a-certain-dataset)
 * [Disclaimers](#disclaimers)
 
@@ -65,13 +66,14 @@ Try it interactively in a
 
 ### `DatasetBuilder`
 
-All datasets are implemented as subclasses of
-[`DatasetBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetBuilder.md)
-and
-[`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load.md)
-is a thin convenience wrapper.
-[`DatasetInfo`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo.md)
-documents the dataset.
+All datasets are implemented as subclasses of `tfds.core.DatasetBuilder`. TFDS
+has two entry points:
+
+*   `tfds.builder`: Returns the `tfds.core.DatasetBuilder` instance, giving
+     control over `builder.download_and_prepate()` and
+     `builder.as_dataset()`.
+*   `tfds.load`: Convenience wrapper which hides the `download_and_prepate` and
+    `as_dataset` calls, and directly returns the `tf.data.Dataset`.
 
 ```python
 import tensorflow_datasets as tfds
@@ -137,9 +139,7 @@ info.features['label'].str2int('cat')  # 0
 ### NumPy Usage with `tfds.as_numpy`
 
 As a convenience for users that want simple NumPy arrays in their programs, you
-can use
-[`tfds.as_numpy`](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_numpy.md)
-to return a generator that yields NumPy array
+can use `tfds.as_numpy` to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.
@@ -161,6 +161,18 @@ numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.
+
+### Citation
+
+Please include the following citation when using `tensorflow-datasets` for a
+paper, in addition to any citation specific to the used datasets.
+
+```
+@misc{TFDS,
+  title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
+  howpublished = {\url{https://www.tensorflow.org/datasets}},
+}
+```
 
 ## Want a certain dataset?
 

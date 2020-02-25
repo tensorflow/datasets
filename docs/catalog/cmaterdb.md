@@ -10,6 +10,8 @@
 </div>
 # `cmaterdb`
 
+*   **Description**:
+
 This dataset contains images of - Handwritten Bangla numerals - balanced dataset
 of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600
 images per class(per digit). Handwritten Devanagari numerals - balanced dataset
@@ -22,111 +24,29 @@ CMATERdb is the pattern recognition database repository created at the 'Center
 for Microprocessor Applications for Training Education and Research' (CMATER)
 research lab, Jadavpur University, India.
 
-*   URL:
+*   **Homepage**:
     [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cmaterdb.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cmaterdb.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `573.81 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`cmaterdb` is configured with `tfds.image.cmaterdb.CmaterdbConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `bangla` (`v1.0.0`) (`Size: 573.81 KiB`): CMATERdb Bangla Numerals
-
-*   `devanagari` (`v1.0.0`) (`Size: 275.29 KiB`): CMATERdb Devangari Numerals
-
-*   `telugu` (`v1.0.0`) (`Size: 283.90 KiB`): CMATERdb Telugu Numerals
-
-## `cmaterdb/bangla`
-CMATERdb Bangla Numerals
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,000
-TRAIN | 5,000
-TEST  | 1,000
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
-
-### Homepage
-
-*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cmaterdb/devanagari`
-CMATERdb Devangari Numerals
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,000
-TRAIN | 2,500
-TEST  | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cmaterdb/telugu`
-CMATERdb Telugu Numerals
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,000
-TRAIN | 2,500
-TEST  | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
 ```
 @article{Das:2012:GAB:2161007.2161320,
@@ -173,4 +93,32 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## cmaterdb/bangla (default config)
+
+*   **Config description**: CMATERdb Bangla Numerals
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,000
+'train' | 5,000
+
+## cmaterdb/devanagari
+
+*   **Config description**: CMATERdb Devangari Numerals
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 500
+'train' | 2,500
+
+## cmaterdb/telugu
+
+*   **Config description**: CMATERdb Telugu Numerals
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 500
+'train' | 2,500

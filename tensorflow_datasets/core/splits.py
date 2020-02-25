@@ -73,7 +73,7 @@ class SubSplitInfo(object):
     """Constructor.
 
     Args:
-      file_instructions: _FileInstructionOutput
+      file_instructions: FileInstructions
     """
     self._file_instructions = file_instructions
 

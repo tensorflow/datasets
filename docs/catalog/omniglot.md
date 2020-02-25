@@ -10,23 +10,35 @@
 </div>
 # `omniglot`
 
+*   **Description**:
+
 Omniglot data set for one-shot learning. This dataset contains 1623 different
 handwritten characters from 50 different alphabets.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/omniglot.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `17.95 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `17.95 MiB`
+Split    | Examples
+:------- | -------:
+'small1' | 2,720
+'small2' | 3,120
+'test'   | 13,180
+'train'  | 19,280
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
@@ -35,25 +47,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split  | Examples
-:----- | -------:
-ALL    | 38,300
-TRAIN  | 19,280
-TEST   | 13,180
-SMALL2 | 3,120
-SMALL1 | 2,720
-
-## Homepage
-
-*   [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{lake2015human,
   title={Human-level concept learning through probabilistic program induction},
@@ -66,5 +64,3 @@ SMALL1 | 2,720
   publisher={American Association for the Advancement of Science}
 }
 ```
-
---------------------------------------------------------------------------------

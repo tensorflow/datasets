@@ -10,6 +10,8 @@
 </div>
 # `civil_comments`
 
+*   **Description**:
+
 The comments in this dataset come from an archive of the Civil Comments
 platform, a commenting plugin for independent news sites. These public comments
 were created from 2015 - 2017 and appeared on approximately 50 English-language
@@ -23,18 +25,27 @@ mentions. This data set is an exact replica of the data released for the Jigsaw
 Unintended Bias in Toxicity Classification Kaggle challenge. This dataset is
 released under CC0, as is the underlying comment text.
 
-*   URL:
+*   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.civil_comments.CivilComments`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/civil_comments.py)
-*   Version: `v0.9.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.9.0`** (default): No release notes.
+*   **Download size**: `395.73 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.9.0`** (default):
+Split        | Examples
+:----------- | --------:
+'test'       | 97,320
+'train'      | 1,804,874
+'validation' | 97,320
 
-*   Size: `395.73 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'identity_attack': Tensor(shape=(), dtype=tf.float32),
@@ -47,24 +58,11 @@ FeaturesDict({
     'toxicity': Tensor(shape=(), dtype=tf.float32),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('text', 'toxicity')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,999,514
-TRAIN      | 1,804,874
-TEST       | 97,320
-VALIDATION | 97,320
-
-## Homepage
-
-*   [https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data)
-
-## Supervised keys (for `as_supervised=True`)
-`('text', 'toxicity')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/abs-1903-04561,
   author    = {Daniel Borkan and
@@ -85,5 +83,3 @@ VALIDATION | 97,320
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

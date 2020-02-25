@@ -10,48 +10,46 @@
 </div>
 # `kmnist`
 
+*   **Description**:
+
 Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale,
 70,000 images), provided in the original MNIST format as well as a NumPy format.
 Since MNIST restricts us to 10 classes, we chose one character to represent each
 of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 
-*   URL:
+*   **Homepage**:
     [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.mnist.KMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `20.26 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `20.26 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 10,000
+'train' | 60,000
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 70,000
-TRAIN | 60,000
-TEST  | 10,000
-
-## Homepage
-
-*   [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @online{clanuwat2018deep,
   author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},
@@ -63,5 +61,3 @@ TEST  | 10,000
   eprint       = {cs.CV/1812.01718},
 }
 ```
-
---------------------------------------------------------------------------------

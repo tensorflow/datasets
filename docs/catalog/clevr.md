@@ -10,24 +10,35 @@
 </div>
 # `clevr`
 
+*   **Description**:
+
 CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
 It contains minimal biases and has detailed annotations describing the kind of
 reasoning each question requires.
 
-*   URL:
+*   **Homepage**:
     [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.clevr.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `17.72 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `17.72 GiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 15,000
+'train'      | 70,000
+'validation' | 15,000
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -43,21 +54,11 @@ FeaturesDict({
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 100,000
-TRAIN      | 70,000
-TEST       | 15,000
-VALIDATION | 15,000
-
-## Homepage
-
-*   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
-
-## Citation
 ```
 @inproceedings{johnson2017clevr,
   title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},
@@ -66,5 +67,3 @@ VALIDATION | 15,000
   year={2017}
 }
 ```
-
---------------------------------------------------------------------------------

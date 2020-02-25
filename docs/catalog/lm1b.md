@@ -10,153 +10,39 @@
 </div>
 # `lm1b`
 
+*   **Description**:
+
 A benchmark corpus to be used for measuring progress in statistical language
 modeling. This has almost one billion words in the training data.
 
-*   URL:
+*   **Homepage**:
     [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.lm1b.Lm1b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/lm1b.py)
+*   **Download size**: `1.67 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`lm1b` is configured with `tfds.text.lm1b.Lm1bConfig` and has the following
-configurations predefined (defaults to the first one):
+Split   | Examples
+:------ | ---------:
+'test'  | 306,688
+'train' | 30,301,028
 
-*   `plain_text` (`v1.0.0`) (`Size: 1.67 GiB`): Plain text
+*   **Features**:
 
-*   `bytes` (`v1.0.0`) (`Size: 1.67 GiB`): Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
-
-*   `subwords8k` (`v1.0.0`) (`Size: 1.67 GiB`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 8k vocab size
-
-*   `subwords32k` (`v1.0.0`) (`Size: 1.67 GiB`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
-## `lm1b/plain_text`
-Plain text
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 30,607,716
-TRAIN | 30,301,028
-TEST  | 306,688
-
-### Features
 ```python
 FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('text', 'text')`
+*   **Citation**:
 
-### Homepage
-
-*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'text')`
-
-## `lm1b/bytes`
-Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 30,607,716
-TRAIN | 30,301,028
-TEST  | 306,688
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'text')`
-
-## `lm1b/subwords8k`
-Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.2`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 30,607,716
-TRAIN | 30,301,028
-TEST  | 306,688
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'text')`
-
-## `lm1b/subwords32k`
-Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.2`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 30,607,716
-TRAIN | 30,301,028
-TEST  | 306,688
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
-
-### Supervised keys (for `as_supervised=True`)
-`('text', 'text')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/ChelbaMSGBK13,
   author    = {Ciprian Chelba and
@@ -179,4 +65,37 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## lm1b/plain_text (default config)
+
+*   **Config description**: Plain text
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
+
+## lm1b/bytes
+
+*   **Config description**: Uses byte-level text encoding with
+    `tfds.features.text.ByteTextEncoder`
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
+
+## lm1b/subwords8k
+
+*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
+    vocab size
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.2`: No release notes.
+
+## lm1b/subwords32k
+
+*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
+    32k vocab size
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.2`: No release notes.

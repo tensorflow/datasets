@@ -19,6 +19,8 @@ upper_tabs:
       contents:
       - title: Overview
         path: /datasets/overview
+      - title: Performance tips
+        path: /datasets/performances
       - title: Versioning
         path: /datasets/datasets_versioning
       - title: Splits

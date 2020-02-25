@@ -10,21 +10,32 @@
 </div>
 # `movie_rationales`
 
+*   **Description**:
+
 The movie rationale dataset contains human annotated rationales for movie
 reviews.
 
-*   URL:
+*   **Homepage**:
     [http://www.cs.jhu.edu/~ozaidan/rationales/](http://www.cs.jhu.edu/~ozaidan/rationales/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.movie_rationales.MovieRationales`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/movie_rationales.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `3.72 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 199
+'train'      | 1,600
+'validation' | 200
 
-*   Size: `3.72 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'evidences': Sequence(Text(shape=(), dtype=tf.string)),
@@ -32,21 +43,11 @@ FeaturesDict({
     'review': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 1,999
-TRAIN      | 1,600
-VALIDATION | 200
-TEST       | 199
-
-## Homepage
-
-*   [http://www.cs.jhu.edu/~ozaidan/rationales/](http://www.cs.jhu.edu/~ozaidan/rationales/)
-
-## Citation
 ```
 @unpublished{eraser2019,
     title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
@@ -60,5 +61,3 @@ TEST       | 199
   year      =  {2008}
 }
 ```
-
---------------------------------------------------------------------------------

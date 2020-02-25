@@ -10,46 +10,44 @@
 </div>
 # `quickdraw_bitmap`
 
+*   **Description**:
+
 The Quick Draw Dataset is a collection of 50 million drawings across 345
 categories, contributed by players of the game Quick, Draw!. The bitmap dataset
 contains these drawings converted from vector format into 28x28 grayscale images
 
-*   URL:
+*   **Homepage**:
     [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `36.82 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `36.82 GiB`
+Split   | Examples
+:------ | ---------:
+'train' | 50,426,266
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=345),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 50,426,266
-TRAIN | 50,426,266
-
-## Homepage
-
-*   [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/HaE17,
   author    = {David Ha and
@@ -66,5 +64,3 @@ TRAIN | 50,426,266
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

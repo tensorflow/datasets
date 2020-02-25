@@ -10,6 +10,8 @@
 </div>
 # `the300w_lp`
 
+*   **Description**:
+
 300W-LP Dataset is expanded from 300W, which standardises multiple alignment
 databases with 68 landmarks, including AFW, LFPW, HELEN, IBUG and XM2VTS. With
 300W, 300W-LP adopt the proposed face profiling to generate 61,225 samples
@@ -20,18 +22,25 @@ The dataset can be employed as the training set for the following computer
 vision tasks: face attribute recognition and landmark (or facial part)
 locaization.
 
-*   URL:
+*   **Homepage**:
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.the300w_lp.The300wLp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/the300w_lp.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `2.63 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 61,225
 
-*   Size: `2.63 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'color_params': Tensor(shape=(7,), dtype=tf.float32),
@@ -47,19 +56,11 @@ FeaturesDict({
     'tex_params': Tensor(shape=(199,), dtype=tf.float32),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 61,225
-TRAIN | 61,225
-
-## Homepage
-
-*   [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
-
-## Citation
 ```
 @article{DBLP:journals/corr/ZhuLLSL15,
   author    = {Xiangyu Zhu and
@@ -79,5 +80,3 @@ TRAIN | 61,225
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

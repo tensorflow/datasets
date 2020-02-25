@@ -10,6 +10,8 @@
 </div>
 # `dtd`
 
+*   **Description**:
+
 The Describable Textures Dataset (DTD) is an evolving collection of textural
 images in the wild, annotated with a series of human-centric attributes,
 inspired by the perceptual properties of textures. This data is made available
@@ -19,20 +21,29 @@ The "label" of each example is its "key attribute" (see the official website).
 The official release of the dataset defines a 10-fold cross-validation
 partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
-*   URL:
+*   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.dtd.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dtd.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `608.33 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `608.33 MiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 1,880
+'train'      | 1,880
+'validation' | 1,880
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -40,21 +51,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 5,640
-TEST       | 1,880
-TRAIN      | 1,880
-VALIDATION | 1,880
-
-## Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
-
-## Citation
 ```
 @InProceedings{cimpoi14describing,
 Author    = {M. Cimpoi and S. Maji and I. Kokkinos and S. Mohamed and A. Vedaldi},
@@ -62,5 +63,3 @@ Title     = {Describing Textures in the Wild},
 Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Recognition ({CVPR})},
 Year      = {2014}}
 ```
-
---------------------------------------------------------------------------------

@@ -10,6 +10,8 @@
 </div>
 # `cifar10_1`
 
+*   **Description**:
+
 The CIFAR-10.1 dataset is a new test set for CIFAR-10. CIFAR-10.1 contains
 roughly 2,000 new test images that were sampled after multiple years of research
 on the original CIFAR-10 dataset. The data collection for CIFAR-10.1 was
@@ -19,96 +21,29 @@ Generalize to CIFAR-10?". The images in CIFAR-10.1 are a subset of the
 TinyImages dataset. There are currently two versions of the CIFAR-10.1 dataset:
 v4 and v6.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cifar10_1.Cifar10_1`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar10_1.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `5.93 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`cifar10_1` is configured with `tfds.image.cifar10_1.Cifar10_1Config` and has
-the following configurations predefined (defaults to the first one):
-
-*   `v4` (`v1.0.0`) (`Size: 5.93 MiB`): It is the first version of our dataset
-    on which we tested any classifier. As mentioned above, this makes the v4
-    dataset independent of the classifiers we evaluate. The numbers reported in
-    the main sections of our paper use this version of the dataset. It was built
-    from the top 25 TinyImages keywords for each class, which led to a slight
-    class imbalance. The largest difference is that ships make up only 8% of the
-    test set instead of 10%. v4 contains 2,021 images.
-
-*   `v6` (`v1.0.0`) (`Size: 5.87 MiB`): It is derived from a slightly improved
-    keyword allocation that is exactly class balanced. This version of the
-    dataset corresponds to the results in Appendix D of our paper. v6 contains
-    2,000 images.
-
-## `cifar10_1/v4`
-
-It is the first version of our dataset on which we tested any classifier. As
-mentioned above, this makes the v4 dataset independent of the classifiers we
-evaluate. The numbers reported in the main sections of our paper use this
-version of the dataset. It was built from the top 25 TinyImages keywords for
-each class, which led to a slight class imbalance. The largest difference is
-that ships make up only 8% of the test set instead of 10%. v4 contains 2,021
-images.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,021
-TEST  | 2,021
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
-
-### Homepage
-
-*   [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `cifar10_1/v6`
-
-It is derived from a slightly improved keyword allocation that is exactly class
-balanced. This version of the dataset corresponds to the results in Appendix D
-of our paper. v6 contains 2,000 images.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,000
-TEST  | 2,000
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
 ```
 @article{recht2018cifar10.1,
@@ -129,4 +64,29 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## cifar10_1/v4 (default config)
+
+*   **Config description**: It is the first version of our dataset on which we
+    tested any classifier. As mentioned above, this makes the v4 dataset
+    independent of the classifiers we evaluate. The numbers reported in the main
+    sections of our paper use this version of the dataset. It was built from the
+    top 25 TinyImages keywords for each class, which led to a slight class
+    imbalance. The largest difference is that ships make up only 8% of the test
+    set instead of 10%. v4 contains 2,021 images.
+*   **Splits**:
+
+Split  | Examples
+:----- | -------:
+'test' | 2,021
+
+## cifar10_1/v6
+
+*   **Config description**: It is derived from a slightly improved keyword
+    allocation that is exactly class balanced. This version of the dataset
+    corresponds to the results in Appendix D of our paper. v6 contains 2,000
+    images.
+*   **Splits**:
+
+Split  | Examples
+:----- | -------:
+'test' | 2,000

@@ -361,8 +361,7 @@ Heavy configuration affects how the data is written to disk. For example, for
 text datasets, different `TextEncoder`s and vocabularies affect the token ids
 that are written to disk.
 
-Heavy configuration is done through
-[`tfds.core.BuilderConfig`s](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/BuilderConfig.md):
+Heavy configuration is done through `tfds.core.BuilderConfig`s:
 
 1. Define your own configuration object as a subclass of
    `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.

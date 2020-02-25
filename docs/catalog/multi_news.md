@@ -10,6 +10,8 @@
 </div>
 # `multi_news`
 
+*   **Description**:
+
 Multi-News, consists of news articles and human-written summaries of these
 articles from the site newser.com. Each summary is professionally written by
 editors and includes links to the original articles cited.
@@ -17,42 +19,38 @@ editors and includes links to the original articles cited.
 There are two features: - document: text of news articles seperated by special
 token "|||||". - summary: news summary.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.multi_news.MultiNews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/multi_news.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `245.06 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 5,622
+'train'      | 44,972
+'validation' | 5,622
 
-*   Size: `245.06 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'document': Text(shape=(), dtype=tf.string),
     'summary': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('document', 'summary')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 56,216
-TRAIN      | 44,972
-TEST       | 5,622
-VALIDATION | 5,622
-
-## Homepage
-
-*   [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
-
-## Supervised keys (for `as_supervised=True`)
-`('document', 'summary')`
-
-## Citation
 ```
 @misc{alex2019multinews,
     title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},
@@ -63,5 +61,3 @@ VALIDATION | 5,622
     primaryClass={cs.CL}
 }
 ```
-
---------------------------------------------------------------------------------

@@ -8,27 +8,37 @@
   <meta itemprop="sameAs" content="https://www.tensorflow.org/datasets/catalog/image_label_folder" />
   <meta itemprop="citation" content="" />
 </div>
-# `image_label_folder` (Manual download)
+# `image_label_folder`
+
+Warning: Manual download required. See instructions bellow.
+
+*   **Description**:
 
 Generic image classification dataset.
 
-*   URL:
+*   **Homepage**:
     [https://www.tensorflow.org/datasets/catalog/image_label_folder](https://www.tensorflow.org/datasets/catalog/image_label_folder)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/image_label_folder/`):<br/>
+    This is a 'template' dataset.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+*   **Splits**:
 
-*   Size: `?? GiB`
+Split | Examples
+:---- | -------:
 
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/image_label_folder/`):
-This is a 'template' dataset.
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -36,15 +46,6 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-None computed
-
-## Homepage
-
-*   [https://www.tensorflow.org/datasets/catalog/image_label_folder](https://www.tensorflow.org/datasets/catalog/image_label_folder)
-
-## Supervised keys (for `as_supervised=True`)
-
-`('image', 'label')`
-
---------------------------------------------------------------------------------
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`

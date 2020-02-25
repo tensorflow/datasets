@@ -208,14 +208,16 @@ class DatasetInfo(object):
     return self._builder.data_dir
 
   @property
-  def size_in_bytes(self):
-    size_in_bytes = sum(split.num_bytes for split in self.splits.values())
-    # Fall back to deprecated proto field if `num_bytes` fields are empty.
-    return size_in_bytes or self.as_proto.size_in_bytes
+  def dataset_size(self):
+    """Generated dataset files size, in bytes."""
+    # For old datasets, maybe empty.
+    return sum(split.num_bytes for split in self.splits.values())
 
   @property
   def download_size(self):
-    return self.as_proto.download_size
+    """Downloaded files size, in bytes."""
+    # Fallback to deprecated `size_in_bytes` if `download_size` is empty.
+    return self.as_proto.download_size or self.as_proto.size_in_bytes
 
   @download_size.setter
   def download_size(self, size):
@@ -671,8 +673,8 @@ class MetadataDict(Metadata, dict):
 class BeamMetadataDict(MetadataDict):
   """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
 
-  def __init__(self):
-    super(BeamMetadataDict, self).__init__()
+  def __init__(self, *args, **kwargs):
+    super(BeamMetadataDict, self).__init__(*args, **kwargs)
     self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
 
   def _temp_filepath(self, key):

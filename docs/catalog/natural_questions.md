@@ -12,25 +12,34 @@
 
 # `natural_questions`
 
+*   **Description**:
+
 The NQ corpus contains questions from real users, and it requires QA systems to
 read and comprehend an entire Wikipedia article that may or may not contain the
 answer to the question. The inclusion of real user questions, and the
 requirement that solutions should read an entire page to find the answer, cause
 NQ to be a more realistic and challenging task than prior QA datasets.
 
-*   URL:
+*   **Homepage**:
     [https://ai.google.com/research/NaturalQuestions/dataset](https://ai.google.com/research/NaturalQuestions/dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.natural_questions.NaturalQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/natural_questions.py)
-*   Version: `v0.0.2`
-*   Versions:
+*   **Versions**:
+    *   **`0.0.2`** (default): No release notes.
+    *   `0.0.1`: No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `90.26 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.0.2`** (default):
-    *   `0.0.1`: None
+Split        | Examples
+:----------- | -------:
+'train'      | 307,373
+'validation' | 7,830
 
-*   Size: `90.26 GiB`
-
-## Features
+*   **Features**:
 
 ```python
 FeaturesDict({
@@ -67,20 +76,10 @@ FeaturesDict({
     }),
 })
 ```
-
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 315,203
-TRAIN      | 307,373
-VALIDATION | 7,830
-
-## Homepage
-
-*   [https://ai.google.com/research/NaturalQuestions/dataset](https://ai.google.com/research/NaturalQuestions/dataset)
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
 ```
 @article{47761,
@@ -90,5 +89,3 @@ year    = {2019},
 journal = {Transactions of the Association of Computational Linguistics}
 }
 ```
-
---------------------------------------------------------------------------------

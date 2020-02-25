@@ -10,6 +10,8 @@
 </div>
 # `i_naturalist2017`
 
+*   **Description**:
+
 This dataset contains a total of 5,089 categories, across 579,184 training
 images and 95,986 validation images. For the training set, the distribution of
 images per category follows the observation frequency of that category by the
@@ -20,18 +22,27 @@ currently, only image-level annotations are provided (single label/image). In
 addition, the organizers have not published the test labels, so we only provide
 the test images (label = -1).
 
-*   URL:
+*   **Homepage**:
     [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.inaturalist.INaturalist2017`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/inaturalist.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `237.35 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 182,707
+'train'      | 579,184
+'validation' | 95,986
 
-*   Size: `237.35 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string),
@@ -40,24 +51,11 @@ FeaturesDict({
     'supercategory': ClassLabel(shape=(), dtype=tf.int64, num_classes=13),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 857,877
-TRAIN      | 579,184
-TEST       | 182,707
-VALIDATION | 95,986
-
-## Homepage
-
-*   [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @InProceedings{Horn_2018_CVPR,
 author = {
@@ -70,5 +68,3 @@ month = {June},
 year = {2018}
 }
 ```
-
---------------------------------------------------------------------------------

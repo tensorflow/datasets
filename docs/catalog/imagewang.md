@@ -10,114 +10,57 @@
 </div>
 # `imagewang`
 
-*   URL:
+*   **Description**:
+
+Imagewang contains Imagenette and Imagewoof combined Image网 (pronounced
+"Imagewang"; 网 means "net" in Chinese) contains Imagenette and Imagewoof
+combined, but with some twists that make it into a tricky semi-supervised
+unbalanced classification problem:
+
+*   The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);
+    there are no Imagenette images in the validation set (they're all in the
+    training set)
+*   Only 10% of Imagewoof images are in the training set!
+*   The remaining are in the unsup ("unsupervised") directory, and you can not
+    use their labels in training!
+*   It's even hard to type and hard to say!
+
+The dataset comes in three variants: * Full size * 320 px * 160 px This dataset
+consists of the Imagenette dataset {size} variant.
+
+*   **Config description**: Imagewang contains Imagenette and Imagewoof
+    combined.
+*   **Homepage**:
     [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.imagewang.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagewang.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `1.97 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`imagewang` is configured with `tfds.image.imagewang.ImagewangConfig` and has
-the following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'train'      | 14,669
+'validation' | 3,929
 
-*   `full-size` (`v2.0.0`) (`Size: 1.97 GiB`): Imagewang contains Imagenette and
-    Imagewoof combined.
+*   **Features**:
 
-*   `320px` (`v2.0.0`) (`Size: 460.81 MiB`): Imagewang contains Imagenette and
-    Imagewoof combined.
-
-*   `160px` (`v2.0.0`) (`Size: 140.40 MiB`): Imagewang contains Imagenette and
-    Imagewoof combined.
-
-## `imagewang/full-size`
-Imagewang contains Imagenette and Imagewoof combined.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 18,598
-TRAIN      | 14,669
-VALIDATION | 3,929
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `imagewang/320px`
-Imagewang contains Imagenette and Imagewoof combined.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 18,598
-TRAIN      | 14,669
-VALIDATION | 3,929
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-})
-```
-
-### Homepage
-
-*   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `imagewang/160px`
-Imagewang contains Imagenette and Imagewoof combined.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 18,598
-TRAIN      | 14,669
-VALIDATION | 3,929
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-})
-```
-
-### Homepage
-
-*   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @misc{imagewang,
   author    = "Jeremy Howard",
@@ -126,4 +69,8 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## imagewang/full-size (default config)
+
+## imagewang/320px
+
+## imagewang/160px

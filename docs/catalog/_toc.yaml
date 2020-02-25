@@ -4,6 +4,8 @@ toc:
 - section:
   - path: /datasets/catalog/groove
     title: groove
+  - path: /datasets/catalog/librispeech
+    title: librispeech
   - path: /datasets/catalog/nsynth
     title: nsynth
   title: Audio
@@ -210,6 +212,8 @@ toc:
     title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/opinosis
+    title: opinosis
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
   - path: /datasets/catalog/scientific_papers
@@ -240,6 +244,8 @@ toc:
     title: glue
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
+  - path: /datasets/catalog/librispeech_lm
+    title: librispeech_lm
   - path: /datasets/catalog/lm1b
     title: lm1b
   - path: /datasets/catalog/math_dataset
@@ -264,12 +270,16 @@ toc:
     title: squad
   - path: /datasets/catalog/super_glue
     title: super_glue
+  - path: /datasets/catalog/tiny_shakespeare
+    title: tiny_shakespeare
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
   - path: /datasets/catalog/wikipedia
     title: wikipedia
   - path: /datasets/catalog/xnli
     title: xnli
+  - path: /datasets/catalog/yelp_polarity_reviews
+    title: yelp_polarity_reviews
   title: Text
 - section:
   - path: /datasets/catalog/flores

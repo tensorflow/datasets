@@ -10,6 +10,8 @@
 </div>
 # `higgs`
 
+*   **Description**:
+
 The data has been produced using Monte Carlo simulations. The first 21 features
 (columns 2-22) are kinematic properties measured by the particle detectors in
 the accelerator. The last seven features are functions of the first 21 features;
@@ -19,20 +21,27 @@ the need for physicists to manually develop such features. Benchmark results
 using Bayesian Decision Trees from a standard physics package and 5-layer neural
 networks are presented in the original paper.
 
-*   URL:
+*   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.structured.higgs.Higgs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/higgs.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `2.62 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `2.62 GiB`
+Split   | Examples
+:------ | ---------:
+'train' | 11,000,000
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'class_label': Tensor(shape=(), dtype=tf.float32),
@@ -66,19 +75,11 @@ FeaturesDict({
     'missing_energy_phi': Tensor(shape=(), dtype=tf.float64),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 11,000,000
-TRAIN | 11,000,000
-
-## Homepage
-
-*   [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
-
-## Citation
 ```
 @article{Baldi:2014kfa,
       author         = "Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel",
@@ -95,5 +96,3 @@ TRAIN | 11,000,000
       SLACcitation   = "%%CITATION = ARXIV:1402.4735;%%"
 }
 ```
-
---------------------------------------------------------------------------------

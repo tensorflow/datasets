@@ -10,6 +10,8 @@
 </div>
 # `shapes3d`
 
+*   **Description**:
+
 3dshapes is a dataset of 3D shapes procedurally generated from 6 ground truth
 independent latent factors. These factors are *floor colour*, *wall colour*,
 *object colour*, *scale*, *shape* and *orientation*.
@@ -31,20 +33,27 @@ sequentially stored the images in fixed order in the `images` array. The
 corresponding values of the factors are stored in the same order in the `labels`
 array.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.shapes3d.Shapes3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/shapes3d.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: None
+    *   `0.1.0`: No release notes.
+*   **Download size**: `255.18 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `255.18 MiB`
+Split   | Examples
+:------ | -------:
+'train' | 480,000
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
@@ -62,19 +71,11 @@ FeaturesDict({
     'value_wall_hue': Tensor(shape=[], dtype=tf.float32),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 480,000
-TRAIN | 480,000
-
-## Homepage
-
-*   [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
-
-## Citation
 ```
 @misc{3dshapes18,
   title={3D Shapes Dataset},
@@ -83,5 +84,3 @@ TRAIN | 480,000
   year={2018}
 }
 ```
-
---------------------------------------------------------------------------------

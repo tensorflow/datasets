@@ -10,23 +10,33 @@
 </div>
 # `caltech_birds2011`
 
+*   **Description**:
+
 Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos of 200 bird
 species (mostly North American). The total number of categories of birds is 200
 and there are 6033 images in the 2010 dataset and 11,788 images in the 2011
 dataset. Annotations include bounding boxes, segmentation labels.
 
-*   URL:
+*   **Homepage**:
     [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.caltech_birds.CaltechBirds2011`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech_birds.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `1.11 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 5,794
+'train' | 5,994
 
-*   Size: `1.11 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -37,23 +47,11 @@ FeaturesDict({
     'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 11,788
-TRAIN | 5,994
-TEST  | 5,794
-
-## Homepage
-
-*   [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @techreport{WelinderEtal2010,
 Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
@@ -63,5 +61,3 @@ Title = {{Caltech-UCSD Birds 200}},
 Year = {2010}
 }
 ```
-
---------------------------------------------------------------------------------

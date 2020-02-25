@@ -10,21 +10,31 @@
 </div>
 # `pet_finder`
 
+*   **Description**:
+
 Dataset with images from 5 classes (see config name for information on the
 specific class)
 
-*   URL:
+*   **Homepage**:
     [https://www.kaggle.com/c/petfinder-adoption-prediction/data](https://www.kaggle.com/c/petfinder-adoption-prediction/data)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `1.94 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 14,465
+'train' | 58,311
 
-*   Size: `1.94 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'PetID': Text(shape=(), dtype=tf.string),
@@ -53,23 +63,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('attributes', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 72,776
-TRAIN | 58,311
-TEST  | 14,465
-
-## Homepage
-
-*   [https://www.kaggle.com/c/petfinder-adoption-prediction/data](https://www.kaggle.com/c/petfinder-adoption-prediction/data)
-
-## Supervised keys (for `as_supervised=True`)
-`('attributes', 'label')`
-
-## Citation
 ```
 @ONLINE {kaggle-petfinder-adoption-prediction,
     author = "Kaggle and PetFinder.my",
@@ -79,5 +77,3 @@ TEST  | 14,465
     url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
 }
 ```
-
---------------------------------------------------------------------------------

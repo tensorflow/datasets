@@ -165,7 +165,8 @@ def _read_files(
     files,
     parse_fn,
     read_config,
-    shuffle_files):
+    shuffle_files,
+    num_examples):
   """Returns tf.data.Dataset for given file instructions.
 
   Args:
@@ -176,6 +177,8 @@ def _read_files(
     read_config: `tfds.ReadConfig`, Additional options to configure the
       input pipeline (e.g. seed, num parallel reads,...).
     shuffle_files (bool): Defaults to False. True to shuffle input files.
+    num_examples: `int`, if defined, set the cardinality on the
+      tf.data.Dataset instance with `tf.data.experimental.with_cardinality`.
   """
   # Eventually apply a transformation to the instruction function.
   # This allow the user to have direct control over the interleave order.
@@ -211,7 +214,13 @@ def _read_files(
       cycle_length=parallel_reads,
       block_length=block_length,
       num_parallel_calls=tf.data.experimental.AUTOTUNE,
-      )
+  )
+
+  # If the number of examples read in the tf-record is known, we forward
+  # the information to the tf.data.Dataset object.
+  # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
+  if num_examples and hasattr(tf.data.experimental, 'assert_cardinality'):
+    ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
 
   # TODO(tfds): Should merge the default options with read_config to allow users
   # to overwrite the default options.
@@ -222,7 +231,7 @@ def _read_files(
   # `tf.io.parse_single_example`. It might be faster to use `parse_example`,
   # after batching.
   # https://www.tensorflow.org/api_docs/python/tf/io/parse_example
-  return ds.map(parse_fn)
+  return ds.map(parse_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
 
 class Reader(object):
@@ -265,28 +274,27 @@ class Reader(object):
        ReadInstruction instance. Otherwise a dict/list of tf.data.Dataset
        corresponding to given instructions param shape.
     """
-    def _read_instruction_to_file_instructions(instruction):
+    def _read_instruction_to_ds(instruction):
       file_instructions = make_file_instructions(name, split_infos, instruction)
       files = file_instructions.file_instructions
       if not files:
         msg = 'Instruction "%s" corresponds to no data!' % instruction
         raise AssertionError(msg)
-      return tuple(files)
+      return self.read_files(
+          files=tuple(files),
+          read_config=read_config,
+          shuffle_files=shuffle_files,
+          num_examples=file_instructions.num_examples,
+      )
 
-    files = utils.map_nested(
-        _read_instruction_to_file_instructions, instructions, map_tuple=False)
-    return utils.map_nested(
-        functools.partial(
-            self.read_files, read_config=read_config,
-            shuffle_files=shuffle_files),
-        files,
-        map_tuple=False)
+    return tf.nest.map_structure(_read_instruction_to_ds, instructions)
 
   def read_files(
       self,
       files,
       read_config,
-      shuffle_files
+      shuffle_files,
+      num_examples=None,
   ):
     """Returns single tf.data.Dataset instance for the set of file instructions.
 
@@ -296,6 +304,8 @@ class Reader(object):
         skip/take indicates which example read in the shard: `ds.skip().take()`
       read_config: `tfds.ReadConfig`, the input pipeline options
       shuffle_files (bool): If True, input files are shuffled before being read.
+      num_examples: `int`, if defined, set the cardinality on the
+        tf.data.Dataset instance with `tf.data.experimental.with_cardinality`.
 
     Returns:
        a tf.data.Dataset instance.
@@ -308,7 +318,9 @@ class Reader(object):
         files=files,
         read_config=read_config,
         parse_fn=self._parser.parse_example,
-        shuffle_files=shuffle_files)
+        shuffle_files=shuffle_files,
+        num_examples=num_examples,
+    )
     return dataset
 
 

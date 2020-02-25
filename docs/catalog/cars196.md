@@ -10,23 +10,33 @@
 </div>
 # `cars196`
 
+*   **Description**:
+
 The Cars dataset contains 16,185 images of 196 classes of cars. The data is
 split into 8,144 training images and 8,041 testing images, where each class has
 been split roughly in a 50-50 split. Classes are typically at the level of Make,
 Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
-*   URL:
+*   **Homepage**:
     [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cars196.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cars196.py)
-*   Version: `v2.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`2.0.0`** (default): No release notes.
+*   **Download size**: `1.82 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`2.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 8,041
+'train' | 8,144
 
-*   Size: `1.82 GiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -34,23 +44,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=196),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 16,185
-TRAIN | 8,144
-TEST  | 8,041
-
-## Homepage
-
-*   [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @inproceedings{KrauseStarkDengFei-Fei_3DRR2013,
   title = {3D Object Representations for Fine-Grained Categorization},
@@ -60,5 +58,3 @@ TEST  | 8,041
   author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}
   }
 ```
-
---------------------------------------------------------------------------------

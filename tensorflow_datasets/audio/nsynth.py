@@ -178,7 +178,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         features=tfds.features.FeaturesDict(features),
         homepage="https://g.co/magenta/nsynth-dataset",
         citation=_CITATION,
-        metadata=tfds.core.BeamMetadataDict(),
+        metadata=tfds.core.BeamMetadataDict(sample_rate=_AUDIO_RATE,),
     )
 
   def _split_generators(self, dl_manager):

@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="http://image-net.org/" />
   <meta itemprop="citation" content="@article{ILSVRC15,&#10;Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},&#10;Title = {{ImageNet Large Scale Visual Recognition Challenge}},&#10;Year = {2015},&#10;journal   = {International Journal of Computer Vision (IJCV)},&#10;doi = {10.1007/s11263-015-0816-y},&#10;volume={115},&#10;number={3},&#10;pages={211-252}&#10;}&#10;" />
 </div>
-# `imagenet2012` (Manual download)
+# `imagenet2012`
+
+Warning: Manual download required. See instructions bellow.
+
+*   **Description**:
 
 ILSVRC 2012, aka ImageNet is an image dataset organized according to the WordNet
 hierarchy. Each meaningful concept in WordNet, possibly described by multiple
@@ -22,26 +26,34 @@ images for most of the concepts in the WordNet hierarchy.
 Note that labels were never publicly released for the test set, so we only
 include splits for the training and validation sets here.
 
-*   URL: [http://image-net.org/](http://image-net.org/)
-*   `DatasetBuilder`:
+*   **Homepage**: [http://image-net.org/](http://image-net.org/)
+*   **Source code**:
     [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
-*   Version: `v5.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`5.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `2.0.1`: None
+    *   `2.0.1`: No release notes.
+*   **Download size**: `144.02 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/imagenet2012/`):<br/>
+    manual_dir should contain two files: ILSVRC2012_img_train.tar and
+    ILSVRC2012_img_val.tar.
+    You need to register on http://www.image-net.org/download-images in order
+    to get the link to download the dataset.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `144.02 GiB`
+Split        | Examples
+:----------- | --------:
+'train'      | 1,281,167
+'validation' | 50,000
 
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/imagenet2012/`):
-manual_dir should contain two files: ILSVRC2012_img_train.tar and
-ILSVRC2012_img_val.tar. You need to register on
-http://www.image-net.org/download-images in order to get the link to download
-the dataset.
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -49,23 +61,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,331,167
-TRAIN      | 1,281,167
-VALIDATION | 50,000
-
-## Homepage
-
-*   [http://image-net.org/](http://image-net.org/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{ILSVRC15,
 Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},
@@ -78,5 +78,3 @@ number={3},
 pages={211-252}
 }
 ```
-
---------------------------------------------------------------------------------
