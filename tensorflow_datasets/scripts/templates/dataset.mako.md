@@ -243,7 +243,7 @@ ${display_builder(builder, unique_sections)}
 ${'#'} `${builder.name}`
 
 %if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 %endif
 
 <%doc>First case: Single builder.</%doc>\
