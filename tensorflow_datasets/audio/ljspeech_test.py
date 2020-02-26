@@ -13,12 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Audio datasets."""
+"""Tests for ljspeech dataset module."""
 
-from tensorflow_datasets.audio.groove import Groove
-from tensorflow_datasets.audio.librispeech import Librispeech
-from tensorflow_datasets.audio.librispeech import LibrispeechConfig
-from tensorflow_datasets.audio.libritts import Libritts
-from tensorflow_datasets.audio.ljspeech import Ljspeech
-from tensorflow_datasets.audio.nsynth import Nsynth
-from tensorflow_datasets.audio.speech_commands import SpeechCommands
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.audio import ljspeech
+
+
+class LJSpeechTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ljspeech.Ljspeech
+  SPLITS = {
+      "train": 2,
+  }
+
+
+if __name__ == "__main__":
+  testing.test_main()
