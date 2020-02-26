@@ -46,28 +46,29 @@ Split        | Examples
 FeaturesDict({
     'bobjects': Sequence({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'is_depiction': tf.int8,
+        'is_group_of': tf.int8,
+        'is_inside': tf.int8,
+        'is_occluded': tf.int8,
+        'is_truncated': tf.int8,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
     'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'confidence': tf.int32,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'confidence': tf.int32,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

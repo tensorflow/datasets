@@ -48,16 +48,17 @@ Split        | Examples
 
 ```python
 FeaturesDict({
-    'identity_attack': Tensor(shape=(), dtype=tf.float32),
-    'insult': Tensor(shape=(), dtype=tf.float32),
-    'obscene': Tensor(shape=(), dtype=tf.float32),
-    'severe_toxicity': Tensor(shape=(), dtype=tf.float32),
-    'sexual_explicit': Tensor(shape=(), dtype=tf.float32),
+    'identity_attack': tf.float32,
+    'insult': tf.float32,
+    'obscene': tf.float32,
+    'severe_toxicity': tf.float32,
+    'sexual_explicit': tf.float32,
     'text': Text(shape=(), dtype=tf.string),
-    'threat': Tensor(shape=(), dtype=tf.float32),
-    'toxicity': Tensor(shape=(), dtype=tf.float32),
+    'threat': tf.float32,
+    'toxicity': tf.float32,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('text', 'toxicity')`

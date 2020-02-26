@@ -44,15 +44,16 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'currframe': Tensor(shape=(), dtype=tf.float64),
+    'currframe': tf.float64,
     'image': Image(shape=(480, 720, 3), dtype=tf.uint8),
     'moviename': Text(shape=(), dtype=tf.string),
-    'poselet_hit_idx': Sequence(Tensor(shape=(), dtype=tf.uint16)),
+    'poselet_hit_idx': Sequence(tf.uint16),
     'torsobox': BBoxFeature(shape=(4,), dtype=tf.float32),
-    'xcoords': Sequence(Tensor(shape=(), dtype=tf.float64)),
-    'ycoords': Sequence(Tensor(shape=(), dtype=tf.float64)),
+    'xcoords': Sequence(tf.float64),
+    'ycoords': Sequence(tf.float64),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

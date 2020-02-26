@@ -36,16 +36,17 @@ defines 200 classes but only uses 133.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
-    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'image/id': tf.int64,
     'objects': Sequence({
-        'area': Tensor(shape=(), dtype=tf.int64),
+        'area': tf.int64,
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': Tensor(shape=(), dtype=tf.int64),
-        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'id': tf.int64,
+        'is_crowd': tf.bool,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

@@ -37,12 +37,13 @@ containing the answer. Following the original work, we evaluate with accuracy.
 
 ```python
 FeaturesDict({
-    'idx': Tensor(shape=(), dtype=tf.int32),
+    'idx': tf.int32,
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'passage': Text(shape=(), dtype=tf.string),
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

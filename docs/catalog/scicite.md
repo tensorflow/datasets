@@ -45,22 +45,23 @@ Split        | Examples
 
 ```python
 FeaturesDict({
-    'citeEnd': Tensor(shape=(), dtype=tf.int64),
-    'citeStart': Tensor(shape=(), dtype=tf.int64),
+    'citeEnd': tf.int64,
+    'citeStart': tf.int64,
     'citedPaperId': Text(shape=(), dtype=tf.string),
     'citingPaperId': Text(shape=(), dtype=tf.string),
-    'excerpt_index': Tensor(shape=(), dtype=tf.int32),
+    'excerpt_index': tf.int32,
     'id': Text(shape=(), dtype=tf.string),
-    'isKeyCitation': Tensor(shape=(), dtype=tf.bool),
+    'isKeyCitation': tf.bool,
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'label2': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-    'label2_confidence': Tensor(shape=(), dtype=tf.float32),
-    'label_confidence': Tensor(shape=(), dtype=tf.float32),
+    'label2_confidence': tf.float32,
+    'label_confidence': tf.float32,
     'sectionName': Text(shape=(), dtype=tf.string),
     'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=7),
     'string': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('string', 'label')`

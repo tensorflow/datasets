@@ -73,16 +73,17 @@ FeaturesDict({
     'metadata': FeaturesDict({
         'acquisition_date': Text(shape=(), dtype=tf.string),
         'coordinates': FeaturesDict({
-            'lrx': Tensor(shape=(), dtype=tf.int64),
-            'lry': Tensor(shape=(), dtype=tf.int64),
-            'ulx': Tensor(shape=(), dtype=tf.int64),
-            'uly': Tensor(shape=(), dtype=tf.int64),
+            'lrx': tf.int64,
+            'lry': tf.int64,
+            'ulx': tf.int64,
+            'uly': tf.int64,
         }),
         'projection': Text(shape=(), dtype=tf.string),
         'tile_source': Text(shape=(), dtype=tf.string),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'labels')`

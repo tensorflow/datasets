@@ -42,11 +42,12 @@ Split    | Examples
 ```python
 FeaturesDict({
     'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
-    'alphabet_char_id': Tensor(shape=(), dtype=tf.int64),
+    'alphabet_char_id': tf.int64,
     'image': Image(shape=(105, 105, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`

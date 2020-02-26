@@ -65,13 +65,14 @@ FeaturesDict({
     'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'label_x_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
     'label_y_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
-    'value_orientation': Tensor(shape=[], dtype=tf.float32),
-    'value_scale': Tensor(shape=[], dtype=tf.float32),
-    'value_shape': Tensor(shape=[], dtype=tf.float32),
-    'value_x_position': Tensor(shape=[], dtype=tf.float32),
-    'value_y_position': Tensor(shape=[], dtype=tf.float32),
+    'value_orientation': tf.float32,
+    'value_scale': tf.float32,
+    'value_shape': tf.float32,
+    'value_x_position': tf.float32,
+    'value_y_position': tf.float32,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

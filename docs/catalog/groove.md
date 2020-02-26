@@ -35,18 +35,19 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 ```python
 FeaturesDict({
-    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'bpm': tf.int32,
     'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': Tensor(shape=(), dtype=tf.string),
-    'midi': Tensor(shape=(), dtype=tf.string),
+    'id': tf.string,
+    'midi': tf.string,
     'style': FeaturesDict({
         'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': Tensor(shape=(), dtype=tf.string),
+        'secondary': tf.string,
     }),
     'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

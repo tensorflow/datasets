@@ -63,11 +63,12 @@ FeaturesDict({
     'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'meta_target': Tensor(shape=(12,), dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=(4, 12), dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

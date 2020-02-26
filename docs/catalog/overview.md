@@ -38,6 +38,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`groove`](groove.md)
     *   [`librispeech`](librispeech.md)
     *   [`nsynth`](nsynth.md)
+    *   [`speech_commands`](speech_commands.md)
 *   `Image`
     *   [`abstract_reasoning`](abstract_reasoning.md)
     *   [`aflw2k3d`](aflw2k3d.md)

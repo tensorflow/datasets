@@ -47,17 +47,18 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/file_name': Text(shape=(), dtype=tf.string),
     'objects': Sequence({
-        'alpha': Tensor(shape=(), dtype=tf.float32),
+        'alpha': tf.float32,
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
         'dimensions': Tensor(shape=(3,), dtype=tf.float32),
         'location': Tensor(shape=(3,), dtype=tf.float32),
         'occluded': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-        'rotation_y': Tensor(shape=(), dtype=tf.float32),
-        'truncated': Tensor(shape=(), dtype=tf.float32),
+        'rotation_y': tf.float32,
+        'truncated': tf.float32,
         'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

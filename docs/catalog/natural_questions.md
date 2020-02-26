@@ -44,18 +44,18 @@ Split        | Examples
 ```python
 FeaturesDict({
     'annotations': Sequence({
-        'id': Tensor(shape=(), dtype=tf.string),
+        'id': tf.string,
         'long_answer': FeaturesDict({
-            'end_byte': Tensor(shape=(), dtype=tf.int64),
-            'end_token': Tensor(shape=(), dtype=tf.int64),
-            'start_byte': Tensor(shape=(), dtype=tf.int64),
-            'start_token': Tensor(shape=(), dtype=tf.int64),
+            'end_byte': tf.int64,
+            'end_token': tf.int64,
+            'start_byte': tf.int64,
+            'start_token': tf.int64,
         }),
         'short_answers': Sequence({
-            'end_byte': Tensor(shape=(), dtype=tf.int64),
-            'end_token': Tensor(shape=(), dtype=tf.int64),
-            'start_byte': Tensor(shape=(), dtype=tf.int64),
-            'start_token': Tensor(shape=(), dtype=tf.int64),
+            'end_byte': tf.int64,
+            'end_token': tf.int64,
+            'start_byte': tf.int64,
+            'start_token': tf.int64,
             'text': Text(shape=(), dtype=tf.string),
         }),
         'yes_no_answer': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
@@ -64,18 +64,19 @@ FeaturesDict({
         'html': Text(shape=(), dtype=tf.string),
         'title': Text(shape=(), dtype=tf.string),
         'tokens': Sequence({
-            'is_html': Tensor(shape=(), dtype=tf.bool),
+            'is_html': tf.bool,
             'token': Text(shape=(), dtype=tf.string),
         }),
         'url': Text(shape=(), dtype=tf.string),
     }),
-    'id': Tensor(shape=(), dtype=tf.string),
+    'id': tf.string,
     'question': FeaturesDict({
         'text': Text(shape=(), dtype=tf.string),
-        'tokens': Sequence(Tensor(shape=(), dtype=tf.string)),
+        'tokens': Sequence(tf.string),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

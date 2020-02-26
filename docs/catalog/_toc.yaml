@@ -8,6 +8,8 @@ toc:
     title: librispeech
   - path: /datasets/catalog/nsynth
     title: nsynth
+  - path: /datasets/catalog/speech_commands
+    title: speech_commands
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning

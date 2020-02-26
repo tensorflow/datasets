@@ -61,24 +61,25 @@ review_body - The review text. review_date - The date the review was written.
 ```python
 FeaturesDict({
     'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'customer_id': tf.string,
+        'helpful_votes': tf.int32,
+        'marketplace': tf.string,
+        'product_category': tf.string,
+        'product_id': tf.string,
+        'product_parent': tf.string,
+        'product_title': tf.string,
+        'review_body': tf.string,
+        'review_date': tf.string,
+        'review_headline': tf.string,
+        'review_id': tf.string,
+        'star_rating': tf.int32,
+        'total_votes': tf.int32,
         'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
         'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

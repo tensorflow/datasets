@@ -48,12 +48,13 @@ FeaturesDict({
         'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
         'material': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
         'pixel_coords': Tensor(shape=(3,), dtype=tf.float32),
-        'rotation': Tensor(shape=(), dtype=tf.float32),
+        'rotation': tf.float32,
         'shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
         'size': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

@@ -49,9 +49,10 @@ Split | Examples
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
-    'sample_id': Tensor(shape=(), dtype=tf.int64),
+    'sample_id': tf.int64,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`

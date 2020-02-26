@@ -36,7 +36,7 @@ heuristic algorithms: Source, Family, and Qualities.
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
-    'id': Tensor(shape=(), dtype=tf.string),
+    'id': tf.string,
     'instrument': FeaturesDict({
         'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
@@ -44,20 +44,21 @@ FeaturesDict({
     }),
     'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
     'qualities': FeaturesDict({
-        'bright': Tensor(shape=(), dtype=tf.bool),
-        'dark': Tensor(shape=(), dtype=tf.bool),
-        'distortion': Tensor(shape=(), dtype=tf.bool),
-        'fast_decay': Tensor(shape=(), dtype=tf.bool),
-        'long_release': Tensor(shape=(), dtype=tf.bool),
-        'multiphonic': Tensor(shape=(), dtype=tf.bool),
-        'nonlinear_env': Tensor(shape=(), dtype=tf.bool),
-        'percussive': Tensor(shape=(), dtype=tf.bool),
-        'reverb': Tensor(shape=(), dtype=tf.bool),
-        'tempo-synced': Tensor(shape=(), dtype=tf.bool),
+        'bright': tf.bool,
+        'dark': tf.bool,
+        'distortion': tf.bool,
+        'fast_decay': tf.bool,
+        'long_release': tf.bool,
+        'multiphonic': tf.bool,
+        'nonlinear_env': tf.bool,
+        'percussive': tf.bool,
+        'reverb': tf.bool,
+        'tempo-synced': tf.bool,
     }),
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

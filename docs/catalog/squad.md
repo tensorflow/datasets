@@ -43,15 +43,16 @@ Split        | Examples
 ```python
 FeaturesDict({
     'answers': Sequence({
-        'answer_start': Tensor(shape=(), dtype=tf.int32),
+        'answer_start': tf.int32,
         'text': Text(shape=(), dtype=tf.string),
     }),
     'context': Text(shape=(), dtype=tf.string),
-    'id': Tensor(shape=(), dtype=tf.string),
+    'id': tf.string,
     'question': Text(shape=(), dtype=tf.string),
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
