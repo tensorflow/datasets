@@ -40,7 +40,7 @@ class Affnist(tfds.core.GeneratorBasedBuilder):
   """
   URL = _AFFNIST_URL
 
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
