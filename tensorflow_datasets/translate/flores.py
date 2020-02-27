@@ -77,7 +77,7 @@ class FloresConfig(tfds.core.BuilderConfig):
         name=name,
         description=description,
         version=tfds.core.Version(
-            "1.0.0",
+            "1.1.0",
             "New split API (https://tensorflow.org/datasets/splits)"),
         supported_versions=[
             tfds.core.Version(
