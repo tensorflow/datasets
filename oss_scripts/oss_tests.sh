@@ -18,7 +18,7 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
-PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
+PY_BIN=$(python3 -c "import sys; print('python%s' % sys.version[0:3])")
 
 
 # Run Tests
@@ -64,7 +64,7 @@ done
 function test_isolation_nsynth() {
   create_virtualenv tfds_nsynth $PY_BIN
   ./oss_scripts/oss_pip_install.sh
-  pip install -e .[nsynth]
+  pip3 install -e .[nsynth]
   pytest \
     --disable-warnings \
     "tensorflow_datasets/audio/nsynth_test.py"

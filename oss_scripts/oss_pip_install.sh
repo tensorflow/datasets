@@ -28,13 +28,13 @@ sudo apt-get install -qq -y libpython${PY_VERSION}-dev
 
 # Make sure we have the latest version of numpy - avoid problems we were
 # seeing with Python 3
-pip install -q -U numpy
+pip3 install -q -U numpy
 
 # First ensure that the base dependencies are sufficient for a full import and
 # data load
-pip install -e .
-python -c "import tensorflow_datasets as tfds"
-python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')"
+pip3 install -e .
+python3 -c "import tensorflow_datasets as tfds"
+python3 -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')"
 
 # Then install the test dependencies
-pip install -e .[tests]
+pip3 install -e .[tests]

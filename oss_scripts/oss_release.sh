@@ -6,8 +6,8 @@ set -e   # fail and exit on any command erroring
 source ./oss_scripts/utils.sh
 function setup_env() {
   create_virtualenv $1 $2
-  pip install -q --upgrade setuptools pip
-  pip install -q wheel twine pyopenssl
+  pip3 install -q --upgrade setuptools pip
+  pip3 install -q wheel twine pyopenssl
 }
 
 GIT_COMMIT_ID=${1:-""}
@@ -32,8 +32,8 @@ echo "Building source distribution"
 
 # Build the wheels
 setup_env tfds_py3 python3.6
-python setup.py sdist $SETUP_ARGS
-python setup.py bdist_wheel $SETUP_ARGS
+python3 setup.py sdist $SETUP_ARGS
+python3 setup.py bdist_wheel $SETUP_ARGS
 
 # Publish to PyPI
 read -p "Publish? (y/n) " -r

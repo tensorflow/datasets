@@ -12,7 +12,7 @@ function create_virtualenv() {
   rm -rf $env_name
   virtualenv -p $env_python $env_name
   source $env_name/bin/activate
-  pip install --upgrade pip
+  pip3 install --upgrade pip
   popd
 }
 
@@ -20,8 +20,8 @@ function install_tf() {
   local version=$1
   if [[ "$version" == "tf-nightly"  ]]
   then
-    pip install -q tf-nightly;
+    pip3 install -q tf-nightly;
   else
-    pip install -q "tensorflow==$version"
+    pip3 install -q "tensorflow==$version"
   fi
 }

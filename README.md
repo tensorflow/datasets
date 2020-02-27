@@ -29,13 +29,13 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ### Installation
 
 ```sh
-pip install tensorflow-datasets
+pip3 install tensorflow-datasets
 
 # Requires TF 1.5+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
-pip install tensorflow
+pip3 install tensorflow
 # or:
-pip install tensorflow-gpu
+pip3 install tensorflow-gpu
 ```
 
 Join [our Google group](https://groups.google.com/forum/#!forum/tensorflow-datasets-public-announce)
