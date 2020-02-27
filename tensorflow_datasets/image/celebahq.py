@@ -130,7 +130,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
         )
     ]

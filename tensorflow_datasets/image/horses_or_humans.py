@@ -72,13 +72,11 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(train_path)
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(test_path)
             }),

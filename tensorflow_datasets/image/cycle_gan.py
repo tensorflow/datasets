@@ -124,28 +124,24 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name="trainA",
-            num_shards=10,
             gen_kwargs={
                 "path": train_a_path,
                 "label": "A",
             }),
         tfds.core.SplitGenerator(
             name="trainB",
-            num_shards=10,
             gen_kwargs={
                 "path": train_b_path,
                 "label": "B",
             }),
         tfds.core.SplitGenerator(
             name="testA",
-            num_shards=1,
             gen_kwargs={
                 "path": test_a_path,
                 "label": "A",
             }),
         tfds.core.SplitGenerator(
             name="testB",
-            num_shards=1,
             gen_kwargs={
                 "path": test_b_path,
                 "label": "B",

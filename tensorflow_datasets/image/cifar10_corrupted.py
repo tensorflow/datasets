@@ -181,7 +181,6 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={'data_dir': os.path.join(path, _DIRNAME)})
     ]
 

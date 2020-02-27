@@ -93,7 +93,6 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=25,
             gen_kwargs={
                 "file_paths": file_paths,
             })

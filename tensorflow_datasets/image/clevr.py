@@ -93,7 +93,6 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
       name_map = {"train": "train", "val": "validation", "test": "test"}
       splits.append(tfds.core.SplitGenerator(
           name=name_map[split_name],
-          num_shards=_NUM_SHARDS,
           gen_kwargs={
               "images_dir_path": os.path.join(images_path_dir, split_name),
               "scenes_description_file": os.path.join(

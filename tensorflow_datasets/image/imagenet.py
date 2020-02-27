@@ -157,14 +157,12 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1000,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(train_path),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=5,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
                 'validation_labels': self._get_validation_labels(val_path),

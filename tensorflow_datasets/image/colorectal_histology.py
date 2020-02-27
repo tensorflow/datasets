@@ -100,7 +100,6 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs=dict(root_dir=folder),
         ),
     ]
@@ -148,7 +147,6 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(folder=folder)
         )
     ]

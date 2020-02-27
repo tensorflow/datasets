@@ -95,25 +95,21 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "directory": extracted_dirs["train"],
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "directory": extracted_dirs["eval"],
             }),
         tfds.core.SplitGenerator(
             name="small1",
-            num_shards=1,
             gen_kwargs={
                 "directory": extracted_dirs["small1"],
             }),
         tfds.core.SplitGenerator(
             name="small2",
-            num_shards=1,
             gen_kwargs={
                 "directory": extracted_dirs["small2"],
             }),

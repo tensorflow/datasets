@@ -117,7 +117,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={
                 "imgs_path": path,  # Relative img path is provided in csv
                 "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME)
@@ -125,7 +124,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
             gen_kwargs={
                 "imgs_path": path,
                 "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME)

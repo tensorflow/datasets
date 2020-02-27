@@ -102,7 +102,6 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     # Setup train and test splits
     train_split = tfds.core.SplitGenerator(
         name="train",
-        num_shards=_NUM_SHARDS,
         gen_kwargs={
             "images_dir_path": images_path_dir,
             "annotations_dir_path": annotations_path_dir,
@@ -112,7 +111,6 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         )
     test_split = tfds.core.SplitGenerator(
         name="test",
-        num_shards=_NUM_SHARDS,
         gen_kwargs={
             "images_dir_path": images_path_dir,
             "annotations_dir_path": annotations_path_dir,

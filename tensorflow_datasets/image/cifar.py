@@ -104,11 +104,9 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
     ]
 

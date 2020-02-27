@@ -76,14 +76,12 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=5,
             gen_kwargs={
                 "images_dir_path": path,
                 "is_train_split": True,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=5,
             gen_kwargs={
                 "images_dir_path": path,
                 "is_train_split": False,

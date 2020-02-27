@@ -274,7 +274,6 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 'generate_fn': self._generate_examples_original,
                 'patients_data': patients_data,
@@ -283,7 +282,6 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'generate_fn': self._generate_examples_original,
                 'patients_data': patients_data,

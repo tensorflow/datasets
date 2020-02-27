@@ -105,14 +105,12 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=40,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["train"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "train")
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["val"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "val")

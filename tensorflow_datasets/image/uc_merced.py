@@ -99,7 +99,6 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={"path": os.path.join(path, _ZIP_SUBDIR)},
         ),
     ]
