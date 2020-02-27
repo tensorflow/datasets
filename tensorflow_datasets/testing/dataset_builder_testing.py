@@ -372,7 +372,11 @@ def checksum(example):
                     (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
       ret += str(element.to_list()).encode("utf-8")
     elif isinstance(element, np.ndarray):
-      ret += element.tobytes()
+      if element.dtype.type is np.object_:
+        element = element.ravel()
+        ret += _bytes_flatten(np.sum(element))
+      else:
+        ret += element.tobytes()
     else:
       ret += bytes(element)
     return ret
