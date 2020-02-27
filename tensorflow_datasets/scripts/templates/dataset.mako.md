@@ -186,7 +186,6 @@ def get_versions(builder):
   return tuple((str(v), v.description) for v in builder.versions)
 
 def get_download_size(builder):
-  print('>>>', builder.info.download_size)
   return builder.info.download_size
 
 def get_dataset_size(builder):
