@@ -84,13 +84,11 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "train"),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=4,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "test"),
             }),

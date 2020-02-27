@@ -291,17 +291,14 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={'files': train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
             gen_kwargs={
                 'files': _subset_filenames(dl_paths, tfds.Split.VALIDATION)
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)})
     ]
 

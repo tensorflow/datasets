@@ -158,7 +158,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "files": [
                     download for name, download in downloaded_urls.items()
@@ -167,11 +166,9 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={"files": [downloaded_urls["test"]]}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={"files": [downloaded_urls["valid"]]}),
     ]
 
