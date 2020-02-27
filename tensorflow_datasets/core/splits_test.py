@@ -262,10 +262,7 @@ class SplitsUnitTest(testing.TestCase):
     self.assertEqual(tfds.Split.TEST, tfds.Split.TEST)
     self.assertEqual(tfds.Split.TEST, "test")
     self.assertEqual("test", tfds.Split.TEST)
-    self.assertEqual(tfds.Split.ALL, "all")
 
-    self.assertNotEqual(tfds.Split.ALL, "test")
-    self.assertNotEqual(tfds.Split.ALL, test)
     self.assertNotEqual(train, test)
     self.assertNotEqual(train, train.subsplit(tfds.percent[:50]))
     self.assertNotEqual(train.subsplit(tfds.percent[:50]), train)
@@ -381,15 +378,6 @@ class SplitsIntegrationTest(testing.TestCase):
     cls._builder = DummyDataset(data_dir=testing.make_tmp_dir())
     cls._builder.download_and_prepare()
 
-  def test_split_all(self):
-    split = tfds.Split.ALL
-    all_values = self._builder.values(split=split)
-
-    self.assertEqual(
-        list(sorted(all_values)),
-        list(sorted(RANGE_TRAIN + RANGE_TEST + RANGE_VAL)),
-    )
-
   def test_split_merge(self):
     split = tfds.Split.TRAIN + tfds.Split.TEST
     all_values = self._builder.values(split=split)
@@ -480,10 +468,6 @@ class SplitsIntegrationTest(testing.TestCase):
 
     with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
       split = test + test
-      self._builder.values(split=split)
-
-    with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
-      split = test + tfds.Split.ALL
       self._builder.values(split=split)
 
     with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):

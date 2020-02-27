@@ -432,8 +432,6 @@ class Split(object):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
-  * `ALL`: Special value, never defined by a dataset, but corresponding to all
-    defined splits of a dataset merged together.
 
   Note: All splits, including compositions inherit from `tfds.core.SplitBase`
 
@@ -445,8 +443,6 @@ class Split(object):
   TRAIN = NamedSplit("train")
   TEST = NamedSplit("test")
   VALIDATION = NamedSplit("validation")
-  # All is a special Split which correspond to all split merged together
-  ALL = NamedSplitAll()
 
   def __new__(cls, name):
     """Create a custom split with tfds.Split('custom_name')."""

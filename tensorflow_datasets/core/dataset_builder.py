@@ -917,9 +917,9 @@ class FileAdapterBuilder(DatasetBuilder):
         prepare_split_kwargs)
     for split_generator in self._split_generators(
         dl_manager, **split_generators_kwargs):
-      if splits_lib.Split.ALL == split_generator.split_info.name:
+      if str(split_generator.split_info.name).lower() == "all":
         raise ValueError(
-            "tfds.Split.ALL is a special split keyword corresponding to the "
+            "`all` is a special split keyword corresponding to the "
             "union of all splits, so cannot be used as key in "
             "._split_generator()."
         )

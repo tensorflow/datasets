@@ -98,7 +98,7 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
   def _split_generators(self, _):
     return [
         splits_lib.SplitGenerator(
-            name=splits_lib.Split.ALL,  # Error: ALL cannot be used as Split key
+            name="all",  # Error: ALL cannot be used as Split key
         )
     ]
 
@@ -324,7 +324,8 @@ class DatasetBuilderTest(testing.TestCase):
 
   def test_invalid_split_dataset(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      with self.assertRaisesWithPredicateMatch(ValueError, "ALL is a special"):
+      with self.assertRaisesWithPredicateMatch(
+          ValueError, "`all` is a special"):
         # Raise error during .download_and_prepare()
         registered.load(
             name="invalid_split_dataset",
