@@ -60,10 +60,6 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "1.0.0", experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -95,25 +91,21 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "directory": extracted_dirs["train"],
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "directory": extracted_dirs["eval"],
             }),
         tfds.core.SplitGenerator(
             name="small1",
-            num_shards=1,
             gen_kwargs={
                 "directory": extracted_dirs["small1"],
             }),
         tfds.core.SplitGenerator(
             name="small2",
-            num_shards=1,
             gen_kwargs={
                 "directory": extracted_dirs["small2"],
             }),

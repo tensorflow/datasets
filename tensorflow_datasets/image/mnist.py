@@ -97,10 +97,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -132,7 +128,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=mnist_files["train_data"],
@@ -140,7 +135,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
                 data_path=mnist_files["test_data"],
