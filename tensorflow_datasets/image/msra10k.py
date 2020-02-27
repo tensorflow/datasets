@@ -70,55 +70,57 @@ The  MSRA Salient Object Database, which originally provides salient\
 
 
 class Msra10k(tfds.core.GeneratorBasedBuilder):
-    """
+  """
     The  MSRA Salient Object Database, which originally provides salient object\
     annotation in terms of bounding boxes provided by 3-9 users,\
     is widely used in salient object detection and segmentation community
-    """
+  """
 
-    VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.0.1')
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description=_DESCRIPTION,
-            features=tfds.features.FeaturesDict({
-                "image": tfds.features.Image(),
-                "mask": tfds.features.Image(),
-            }),
-            supervised_keys=("image", "mask"),
-            homepage='http://mmcheng.net/msra10k/',
-            citation=_CITATION,
-        )
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(),
+            "mask": tfds.features.Image(),
+        }),
+        supervised_keys=("image", "mask"),
+        homepage='http://mmcheng.net/msra10k/',
+        citation=_CITATION,
+    )
 
-    def _split_generators(self, dl_manager):
-        """Returns SplitGenerators."""
-
-        dl_paths = dl_manager.download_and_extract({
-            'msra10k': 'http://mftp.mmcheng.net/Data/MSRA10K_Imgs_GT.zip',
-        })
-        extracted_path = dl_paths['msra10k']
-        return[
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                # These kwargs will be passed to _generate_examples
-                gen_kwargs={
-                    "images_dir_path": os.path.join(extracted_path, "MSRA10K_Imgs_GT/Imgs/")
+  def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
+    dl_paths = dl_manager.download_and_extract({
+        'msra10k': 'http://mftp.mmcheng.net/Data/MSRA10K_Imgs_GT.zip',
+    })
+    extracted_path = dl_paths['msra10k']
+    return[
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            # These kwargs will be passed to _generate_examples
+            gen_kwargs={
+                "images_dir_path":
+                    os.path.join(extracted_path, "MSRA10K_Imgs_GT/Imgs/")
                 },
-            ),
-        ]
+        ),
+    ]
 
-    def _generate_examples(self, images_dir_path):
-        """Yields examples."""
+  def _generate_examples(self, images_dir_path):
+    """Yields examples."""
 
-        images_jpeg = []
-        images_png = []
-        for image_file in tf.io.gfile.listdir(images_dir_path):
-            if(image_file.endswith('.png')):
-                images_png.append(image_file)
-            else:
-                images_jpeg.append(image_file)
-        for i, image_name in enumerate(images_jpeg):
-            fname = (image_name.split("."))[0]
-            yield i, {"image": images_dir_path + image_name,
-                      "mask": images_dir_path + fname + ".png"}
+    images_jpeg = []
+    images_png = []
+
+    for image_file in tf.io.gfile.listdir(images_dir_path):
+      if image_file.endswith('.png'):
+        images_png.append(image_file)
+      else:
+        images_jpeg.append(image_file)
+
+    for i, image_name in enumerate(images_jpeg):
+      fname = (image_name.split("."))[0]
+      yield i, {"image": images_dir_path + image_name,
+                "mask": images_dir_path + fname + ".png"}
