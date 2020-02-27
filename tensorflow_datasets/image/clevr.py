@@ -39,8 +39,6 @@ _CITATION = """\
 }
 """
 
-_NUM_SHARDS = 128
-
 _BASE_URL = "https://cs.stanford.edu/people/jcjohns/clevr/"
 _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 

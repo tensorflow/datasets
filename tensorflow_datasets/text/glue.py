@@ -82,8 +82,7 @@ _MNLI_BASE_KWARGS = dict(
         journal={arXiv preprint arXiv:1508.05326},
         year={2015}
       }""",
-    url="http://www.nyu.edu/projects/bowman/multinli/",
-    train_shards=2)
+    url="http://www.nyu.edu/projects/bowman/multinli/")
 
 
 class GlueConfig(tfds.core.BuilderConfig):
@@ -98,7 +97,6 @@ class GlueConfig(tfds.core.BuilderConfig):
                citation,
                url,
                label_classes=None,
-               train_shards=1,
                process_label=lambda x: x,
                **kwargs):
     """BuilderConfig for GLUE.
@@ -116,7 +114,6 @@ class GlueConfig(tfds.core.BuilderConfig):
       label_classes: `list[string]`, the list of classes if the label is
         categorical. If not provided, then the label will be of type
         `tf.float32`.
-      train_shards: `int`, number of shards for the train data set
       process_label: `Function[string, any]`, function taking in the raw value
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
@@ -137,7 +134,6 @@ class GlueConfig(tfds.core.BuilderConfig):
     self.data_dir = data_dir
     self.citation = citation
     self.url = url
-    self.train_shards = train_shards
     self.process_label = process_label
 
 

@@ -38,8 +38,6 @@ _CITATION = """\
 }
 """
 
-_NUM_SHARDS = 1
-
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
 _LABEL_CLASSES = [
