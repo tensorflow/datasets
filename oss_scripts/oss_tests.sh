@@ -18,7 +18,7 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
-PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
+PY_BIN=$(python3 -c "import sys; print('python%s' % sys.version[0:3])")
 
 
 # Run Tests

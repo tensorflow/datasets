@@ -32,8 +32,8 @@ echo "Building source distribution"
 
 # Build the wheels
 setup_env tfds_py3 python3.6
-python setup.py sdist $SETUP_ARGS
-python setup.py bdist_wheel $SETUP_ARGS
+python3 setup.py sdist $SETUP_ARGS
+python3 setup.py bdist_wheel $SETUP_ARGS
 
 # Publish to PyPI
 read -p "Publish? (y/n) " -r
