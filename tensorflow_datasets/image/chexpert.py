@@ -75,10 +75,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You must register and agree to user agreement on the dataset page:

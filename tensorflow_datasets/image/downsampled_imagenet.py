@@ -81,10 +81,6 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "2.0.0",
               "New split API (https://tensorflow.org/datasets/splits)"),
-          supported_versions=[
-              tfds.core.Version(
-                  "1.0.0", experiments={tfds.core.Experiment.S3: False}),
-          ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
   ]

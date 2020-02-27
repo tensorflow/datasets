@@ -46,10 +46,6 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.2",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -137,10 +133,6 @@ class Cifar100(Cifar10):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.3.1",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   @property
   def _cifar_info(self):

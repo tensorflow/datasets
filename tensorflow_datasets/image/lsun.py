@@ -78,10 +78,6 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "3.0.0",
               "New split API (https://tensorflow.org/datasets/splits)"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.1.1", experiments={tfds.core.Experiment.S3: False}),
-          ],
       ) for category in _CATEGORIES
   ]
 

@@ -98,10 +98,6 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       '5.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version('2.0.1',
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   manual_dir should contain two files: ILSVRC2012_img_train.tar and
