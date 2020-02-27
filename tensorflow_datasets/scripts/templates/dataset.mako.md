@@ -55,8 +55,11 @@ def list_versions(builder):
 % endfor
 </%def>
 
-<%def name="display_size(builder)">\
+<%def name="display_download_size(builder)">\
 *   **Download size**: `${tfds.units.size_str(builder.info.download_size)}`
+</%def>
+
+<%def name="display_dataset_size(builder)">\
 *   **Dataset size**: `${tfds.units.size_str(builder.info.dataset_size)}`
 </%def>
 
@@ -167,23 +170,47 @@ Section = collections.namedtuple('Section', 'get_signature, make')
 
 # Getter function returns a hashable signature of the section value
 # which allow to detect sections shared accross all builders.
-def get_description(builder): builder.info.description
+def get_description(builder):
+  return builder.info.description
+
 def get_config_description(builder):
   return builder.builder_config.description
-def get_homepage(builder): builder.info.homepage
-def get_source(builder): True  # Always common to all configs
+
+def get_homepage(builder):
+  return builder.info.homepage
+
+def get_source(builder):
+  return True  # Always common to all configs
+
 def get_versions(builder):
   return tuple((str(v), v.description) for v in builder.versions)
-def get_size(builder): (builder.info.download_size, builder.info.dataset_size)
-def get_manual(builder): builder.MANUAL_DOWNLOAD_INSTRUCTIONS
-def get_autocache(builder): build_autocached_info(builder)
+
+def get_download_size(builder):
+  print('>>>', builder.info.download_size)
+  return builder.info.download_size
+
+def get_dataset_size(builder):
+  return builder.info.dataset_size
+
+def get_manual(builder):
+  return builder.MANUAL_DOWNLOAD_INSTRUCTIONS
+
+def get_autocache(builder):
+  return build_autocached_info(builder)
+
 def get_splits(builder):
   return tuple(
       (str(s.name), int(s.num_examples)) for s in builder.info.splits.values()
   )
-def get_features(builder): repr(builder.info.features)
-def get_supervised(builder): builder.info.supervised_keys
-def get_citation(builder): builder.info.citation
+
+def get_features(builder):
+  return repr(builder.info.features)
+
+def get_supervised(builder):
+  return builder.info.supervised_keys
+
+def get_citation(builder):
+  return builder.info.citation
 
 all_sections = [
     Section(get_description, display_description),
@@ -191,7 +218,8 @@ all_sections = [
     Section(get_homepage, display_homepage),
     Section(get_source, display_source),
     Section(get_versions, display_versions),
-    Section(get_size, display_size),
+    Section(get_download_size, display_download_size),
+    Section(get_dataset_size, display_dataset_size),
     Section(get_manual, display_manual),
     Section(get_autocache, display_autocache),
     Section(get_splits, display_splits),
