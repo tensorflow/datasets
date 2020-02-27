@@ -110,6 +110,7 @@ DATASET_FILES = [
 # Extra dependencies required by specific datasets
 DATASET_EXTRAS = {
     # In alphabetical order
+    'affnist': ['scipy'],
     'aflw2k3d': ['scipy'],
     'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
