@@ -24,9 +24,5 @@ class Shapes3dTest(tfds_test.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = "3dshapes.h5"
 
 
-class Shapes3dS3Test(Shapes3dTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   tfds_test.test_main()

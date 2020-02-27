@@ -33,11 +33,6 @@ class BeansTest(tfds_test.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = ['beans_train.zip', 'beans_validation.zip',
                        'beans_test.zip']
 
-
-class BeansS3Test(BeansTest):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   tfds_test.test_main()
 
