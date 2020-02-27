@@ -87,18 +87,15 @@ class Snli(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_test.txt')
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={'filepath': os.path.join(data_dir,
                                                  'snli_1.0_dev.txt')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=2,
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_train.txt')
             }),

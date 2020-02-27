@@ -165,11 +165,9 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={"files": train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=50,
             gen_kwargs={"files": test_files}),
     ]
 

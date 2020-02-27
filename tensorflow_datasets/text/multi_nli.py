@@ -138,15 +138,12 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={"filepath": train_path}),
         tfds.core.SplitGenerator(
             name="validation_matched",
-            num_shards=1,
             gen_kwargs={"filepath": matched_validation_path}),
         tfds.core.SplitGenerator(
             name="validation_mismatched",
-            num_shards=1,
             gen_kwargs={"filepath": mismatched_validation_path}),
     ]
 

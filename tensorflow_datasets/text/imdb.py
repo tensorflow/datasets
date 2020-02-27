@@ -137,17 +137,14 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "train")}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "test")}),
         tfds.core.SplitGenerator(
             name=tfds.Split("unsupervised"),
-            num_shards=20,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "train"),
                         "labeled": False}),

@@ -117,11 +117,9 @@ class Squad(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={"filepath": downloaded_files["train"]}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={"filepath": downloaded_files["dev"]}),
     ]
 
