@@ -34,6 +34,13 @@ class VisualizationTest(testing.TestCase):
     ds = builder.as_dataset(split="train")
     visualization.show_examples(builder.info, ds)
 
+  def test_show_examples_text(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyFlores(data_dir=tmp_dir)
+    builder.download_and_prepare()
+    ds = builder.as_dataset(split="validation")
+    visualization.show_examples(builder.info, ds)
+
 
 if __name__ == "__main__":
   testing.test_main()

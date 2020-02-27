@@ -422,6 +422,39 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
       }
 
 
+class DummyFlores(dataset_builder.GeneratorBasedBuilder):
+  """Test DatasetBuilder."""
+
+  VERSION = utils.Version("1.0.0")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            "en": features.Text(),
+            "ne": features.Text(),
+        }),
+        description="Flores description.",
+    )
+
+  def _split_generators(self, dl_manager):
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.VALIDATION,
+            gen_kwargs=dict()),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            gen_kwargs=dict()),
+    ]
+
+  def _generate_examples(self):
+    for i in range(20):
+      yield i, {
+          "en": "Random English Text"+str(i),
+          "ne": "Random Nepali text"+str(i),
+      }
+
+
 def test_main():
   """Entrypoint for tests."""
   tf.compat.v1.enable_eager_execution()
