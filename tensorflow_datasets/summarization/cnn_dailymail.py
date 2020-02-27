@@ -78,7 +78,6 @@ _DL_URLS = {
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version('0.0.2', experiments={tfds.core.Experiment.S3: False}),
     # Same data as 0.0.2
     tfds.core.Version('1.0.0',
                       'New split API (https://tensorflow.org/datasets/splits)'),

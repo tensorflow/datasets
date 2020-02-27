@@ -48,10 +48,6 @@ class Wmt16Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.3", experiments={tfds.core.Experiment.S3: False}),
-          ],
       ) for l1, l2 in _LANGUAGE_PAIRS
   ]
 

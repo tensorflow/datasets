@@ -107,10 +107,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "1.0.0",
               "New split API (https://tensorflow.org/datasets/splits)"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          ]) for pair in _VALID_LANGUAGE_PAIRS
+          ) for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):

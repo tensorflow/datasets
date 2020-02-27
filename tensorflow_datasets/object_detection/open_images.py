@@ -165,19 +165,13 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       OpenImagesV4Config(
           name='original',
-          supported_versions=[tfds.core.Version(
-              '0.2.0', experiments={tfds.core.Experiment.S3: False})],
           description='Images at their original resolution and quality.'),
       OpenImagesV4Config(
           name='300k',
-          supported_versions=[tfds.core.Version(
-              '0.2.1', experiments={tfds.core.Experiment.S3: False})],
           description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
           target_pixels=300000),
       OpenImagesV4Config(
           name='200k',
-          supported_versions=[tfds.core.Version(
-              '0.2.1', experiments={tfds.core.Experiment.S3: False})],
           description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
           target_pixels=200000)
   ]

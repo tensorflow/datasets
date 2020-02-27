@@ -81,10 +81,6 @@ class Ucf101Config(tfds.core.BuilderConfig):
 
 _VERSION = tfds.core.Version(
     '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-_SUPPORTED_VERSIONS = [
-    tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: False}),
-]
-
 
 class Ucf101(tfds.core.GeneratorBasedBuilder):
   """Ucf101 action recognition dataset.
@@ -101,7 +97,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=256,
           split_number=1,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_1',
@@ -110,7 +105,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=None,
           split_number=1,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_2',
@@ -119,7 +113,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=None,
           split_number=2,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_3',
@@ -128,7 +121,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=None,
           split_number=3,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
   ]
 

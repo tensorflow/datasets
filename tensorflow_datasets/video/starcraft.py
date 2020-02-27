@@ -56,8 +56,6 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
             "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-        supported_versions=[tfds.core.Version(
-            "0.1.2", experiments={tfds.core.Experiment.S3: False})],
         **kwargs)
     self.map_name = map_name
     self.resolution = resolution

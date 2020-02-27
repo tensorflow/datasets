@@ -117,7 +117,6 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
   """ParaCrawl machine translation dataset."""
 
   # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   # 0.1.0: Initial versio.
   BUILDER_CONFIGS = [
       # The version below does not refer to the version of the released
@@ -125,10 +124,6 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
           target_language=target_language,
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-          ],
       )
       for target_language in _target_languages()
   ]
