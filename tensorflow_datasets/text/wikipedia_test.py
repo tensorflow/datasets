@@ -26,7 +26,6 @@ from tensorflow_datasets.text import wikipedia
 
 class WikipediaTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wikipedia.Wikipedia
-  VERSION = "experimental_latest"
   BUILDER_CONFIG_NAMES_TO_TEST = ["20190301.en"]
 
   DL_EXTRACT_RESULT = {
