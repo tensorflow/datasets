@@ -126,7 +126,6 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=8,
             gen_kwargs={'filepaths': files['validation']},
         ),
     ]

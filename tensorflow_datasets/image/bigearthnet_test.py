@@ -25,7 +25,6 @@ from tensorflow_datasets.image import bigearthnet
 
 class BigearthnetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = bigearthnet.Bigearthnet
-  VERSION = "experimental_latest"
   SPLITS = {
       "train": 1,
   }

@@ -31,10 +31,6 @@ class CassavaTest(testing.DatasetBuilderTestCase):
       "validation": 5,
   }
 
-
-class CassavaS3Test(CassavaTest):
-  VERSION = "experimental_latest"
-
 if __name__ == "__main__":
   testing.test_main()
 

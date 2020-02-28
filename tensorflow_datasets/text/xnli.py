@@ -66,10 +66,6 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               '1.0.0',
               'New split API (https://tensorflow.org/datasets/splits)'),
-          supported_versions=[
-              tfds.core.Version(
-                  '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-          ],
           description='Plain text import of XNLI',
       )
   ]
@@ -102,11 +98,9 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.test.tsv')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')}),
     ]
 

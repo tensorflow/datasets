@@ -68,10 +68,7 @@ class So2satConfig(tfds.core.BuilderConfig):
 
     v2 = tfds.core.Version(
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-    v001 = tfds.core.Version(
-        '0.0.1', experiments={tfds.core.Experiment.S3: False})
-    super(So2satConfig, self).__init__(
-        version=v2, supported_versions=[v001], **kwargs)
+    super(So2satConfig, self).__init__(version=v2, **kwargs)
     self.selection = selection
 
 
@@ -126,7 +123,6 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=20,
             gen_kwargs={
                 'path': paths['train'],
                 'selection': self.builder_config.selection,
@@ -134,7 +130,6 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=5,
             gen_kwargs={
                 'path': paths['val'],
                 'selection': self.builder_config.selection,

@@ -104,10 +104,6 @@ def _make_builder_configs():
             version=tfds.core.Version(
                 '1.0.0',
                 'New split API (https://tensorflow.org/datasets/splits)'),
-            supported_versions=[
-                tfds.core.Version(
-                    '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-            ],
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
         ))
@@ -150,14 +146,12 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 'data_dir': os.path.join(path, _DIRNAME),
                 'is_train': True
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'data_dir': os.path.join(path, _DIRNAME),
                 'is_train': False

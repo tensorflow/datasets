@@ -78,19 +78,16 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs=dict(
                 data_path=files["train_data"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=dict(
                 data_path=files["validation_data"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(
                 data_path=files["test_data"],
             )),

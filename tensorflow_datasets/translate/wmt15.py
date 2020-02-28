@@ -48,10 +48,6 @@ class Wmt15Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.4", experiments={tfds.core.Experiment.S3: False}),
-          ],
       ) for l1, l2 in _LANGUAGE_PAIRS
   ] + [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
@@ -66,10 +62,6 @@ class Wmt15Translate(wmt.WmtTranslate):
               name="subwords8k",
               vocab_size=2**13),
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.4", experiments={tfds.core.Experiment.S3: False}),
-          ],
           )
       for l1, l2 in _LANGUAGE_PAIRS
   ]
