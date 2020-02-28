@@ -76,6 +76,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
+            num_shards=20,
             gen_kwargs={"archive": dl_manager.iter_archive(path)},
         )
     ]
