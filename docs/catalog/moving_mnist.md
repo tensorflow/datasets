@@ -10,45 +10,44 @@
 </div>
 # `moving_mnist`
 
+*   **Description**:
+
 Moving variant of MNIST database of handwritten digits. This is the data used by
 the authors for reporting model performance. See
 `tfds.video.moving_mnist.image_as_moving_sequence` for generating
 training/validation data from the MNIST dataset.
 
-*   URL:
+*   **Homepage**:
     [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.video.moving_mnist.MovingMnist`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/moving_mnist.py)
-*   Version: `v1.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: None
+    *   `0.1.0`: No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `91.70 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+*   **Splits**:
 
-*   Download size: `Unknown size`
+Split  | Examples
+:----- | -------:
+'test' | 10,000
 
-*   Dataset size: `91.70 MiB`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,000
-TEST  | 10,000
-
-## Homepage
-
-*   [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
-
-## Citation
 ```
 @article{DBLP:journals/corr/SrivastavaMS15,
   author    = {Nitish Srivastava and
@@ -66,5 +65,3 @@ TEST  | 10,000
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
---------------------------------------------------------------------------------

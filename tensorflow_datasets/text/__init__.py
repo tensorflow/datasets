@@ -26,6 +26,7 @@ from tensorflow_datasets.text.gap import Gap
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
+from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.math_dataset import MathDataset
@@ -43,3 +44,5 @@ from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trivia_qa import TriviaQA
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
+from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
+

@@ -401,6 +401,7 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
             "image": features.Image(shape=(28, 28, 1)),
             "label": features.ClassLabel(num_classes=10),
         }),
+        description="Mnist description.",
     )
 
   def _split_generators(self, dl_manager):

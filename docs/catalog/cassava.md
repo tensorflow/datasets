@@ -10,6 +10,8 @@
 </div>
 # `cassava`
 
+*   **Description**:
+
 Cassava consists of leaf images for the cassava plant depicting healthy and four
 (4) disease conditions; Cassava Mosaic Disease (CMD), Cassava Bacterial Blight
 (CBB), Cassava Greem Mite (CGM) and Cassava Brown Streak Disease (CBSD). Dataset
@@ -18,20 +20,27 @@ into a training set (5656), a test set(1885) and a validation set (1889). The
 number of images per class are unbalanced with the two disease classes CMD and
 CBSD having 72% of the images.
 
-*   URL:
+*   **Homepage**:
     [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cassava.Cassava`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cassava.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `1.26 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 1,885
+'train'      | 5,656
+'validation' | 1,889
 
-*   Download size: `1.26 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -39,24 +48,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 9,430
-TRAIN      | 5,656
-VALIDATION | 1,889
-TEST       | 1,885
-
-## Homepage
-
-*   [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @misc{mwebaze2019icassava,
     title={iCassava 2019Fine-Grained Visual Categorization Challenge},
@@ -67,5 +63,3 @@ TEST       | 1,885
     primaryClass={cs.CV}
 }
 ```
-
---------------------------------------------------------------------------------

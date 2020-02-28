@@ -201,7 +201,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature."""
-    inner_feature_repr = repr(self._feature)
+    inner_feature_repr = feature_lib.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]

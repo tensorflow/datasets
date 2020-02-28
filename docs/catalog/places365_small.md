@@ -10,47 +10,43 @@
 </div>
 # `places365_small`
 
+*   **Description**:
+
 The Places365-Standard dataset contains 1.8 million train images from 365 scene
 categories,which are used to train the Places365 CNNs.There are 50 images per
 category in the validation set and 900 images per category in the testing set.
 
-*   URL: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
-*   `DatasetBuilder`:
+*   **Homepage**: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
+*   **Source code**:
     [`tfds.image.places365_small.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/places365_small.py)
-*   Version: `v2.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`2.0.0`** (default): No release notes.
+*   **Download size**: `29.27 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`2.0.0`** (default):
+Split        | Examples
+:----------- | --------:
+'test'       | 328,500
+'train'      | 1,803,460
+'validation' | 36,500
 
-*   Download size: `29.27 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=365),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,168,460
-TRAIN      | 1,803,460
-TEST       | 328,500
-VALIDATION | 36,500
-
-## Homepage
-
-*   [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{zhou2017places,
   title={Places: A 10 million Image Database for Scene Recognition},
@@ -60,5 +56,3 @@ VALIDATION | 36,500
   publisher={IEEE}
 }
 ```
-
---------------------------------------------------------------------------------

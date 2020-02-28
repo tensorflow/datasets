@@ -26,7 +26,7 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 # pylint: disable=anomalous-backslash-in-string
-_CITATION = """
+_CITATION = r"""
 @InProceedings{10.1007/978-3-642-40802-1_29,
 author="Pe{\~{n}}as, Anselmo
 and Hovy, Eduard

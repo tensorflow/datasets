@@ -10,28 +10,36 @@
 </div>
 # `cifar100`
 
+*   **Description**:
+
 This dataset is just like the CIFAR-10, except it has 100 classes containing 600
 images each. There are 500 training images and 100 testing images per class. The
 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes
 with a "fine" label (the class to which it belongs) and a "coarse" label (the
 superclass to which it belongs).
 
-*   URL:
+*   **Homepage**:
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.3.1`: None
+    *   `1.3.1`: No release notes.
+*   **Download size**: `160.71 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `160.71 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 10,000
+'train' | 50,000
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'coarse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
@@ -39,23 +47,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 60,000
-TRAIN | 50,000
-TEST  | 10,000
-
-## Homepage
-
-*   [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},
@@ -64,5 +60,3 @@ TEST  | 10,000
     year = {2009}
 }
 ```
-
---------------------------------------------------------------------------------

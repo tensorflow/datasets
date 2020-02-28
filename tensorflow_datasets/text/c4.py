@@ -47,18 +47,10 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version("2.2.0")
+_VERSION = tfds.core.Version("2.2.1", "Update dataset_info.json")
 
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version(
-        "1.1.0", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="42f5bf89efcfd2cd165c2511b22be49cb1a50856"),
-    tfds.core.Version(
-        "1.0.1", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
-    tfds.core.Version(
-        "1.0.0", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
+    tfds.core.Version("2.2.0"),
 ]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"

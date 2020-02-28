@@ -10,68 +10,64 @@
 </div>
 # `pet_finder`
 
+*   **Description**:
+
 Dataset with images from 5 classes (see config name for information on the
 specific class)
 
-*   URL:
+*   **Homepage**:
     [https://www.kaggle.com/c/petfinder-adoption-prediction/data](https://www.kaggle.com/c/petfinder-adoption-prediction/data)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `1.94 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'test'  | 14,465
+'train' | 58,311
 
-*   Download size: `1.94 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'PetID': Text(shape=(), dtype=tf.string),
     'attributes': FeaturesDict({
-        'Age': Tensor(shape=(), dtype=tf.int64),
-        'Breed1': Tensor(shape=(), dtype=tf.int64),
-        'Breed2': Tensor(shape=(), dtype=tf.int64),
-        'Color1': Tensor(shape=(), dtype=tf.int64),
-        'Color2': Tensor(shape=(), dtype=tf.int64),
-        'Color3': Tensor(shape=(), dtype=tf.int64),
-        'Dewormed': Tensor(shape=(), dtype=tf.int64),
-        'Fee': Tensor(shape=(), dtype=tf.int64),
-        'FurLength': Tensor(shape=(), dtype=tf.int64),
-        'Gender': Tensor(shape=(), dtype=tf.int64),
-        'Health': Tensor(shape=(), dtype=tf.int64),
-        'MaturitySize': Tensor(shape=(), dtype=tf.int64),
-        'Quantity': Tensor(shape=(), dtype=tf.int64),
-        'State': Tensor(shape=(), dtype=tf.int64),
-        'Sterilized': Tensor(shape=(), dtype=tf.int64),
-        'Type': Tensor(shape=(), dtype=tf.int64),
-        'Vaccinated': Tensor(shape=(), dtype=tf.int64),
-        'VideoAmt': Tensor(shape=(), dtype=tf.int64),
+        'Age': tf.int64,
+        'Breed1': tf.int64,
+        'Breed2': tf.int64,
+        'Color1': tf.int64,
+        'Color2': tf.int64,
+        'Color3': tf.int64,
+        'Dewormed': tf.int64,
+        'Fee': tf.int64,
+        'FurLength': tf.int64,
+        'Gender': tf.int64,
+        'Health': tf.int64,
+        'MaturitySize': tf.int64,
+        'Quantity': tf.int64,
+        'State': tf.int64,
+        'Sterilized': tf.int64,
+        'Type': tf.int64,
+        'Vaccinated': tf.int64,
+        'VideoAmt': tf.int64,
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('attributes', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 72,776
-TRAIN | 58,311
-TEST  | 14,465
-
-## Homepage
-
-*   [https://www.kaggle.com/c/petfinder-adoption-prediction/data](https://www.kaggle.com/c/petfinder-adoption-prediction/data)
-
-## Supervised keys (for `as_supervised=True`)
-`('attributes', 'label')`
-
-## Citation
 ```
 @ONLINE {kaggle-petfinder-adoption-prediction,
     author = "Kaggle and PetFinder.my",
@@ -81,5 +77,3 @@ TEST  | 14,465
     url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
 }
 ```
-
---------------------------------------------------------------------------------

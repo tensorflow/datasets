@@ -8,32 +8,42 @@
   <meta itemprop="sameAs" content="http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html" />
   <meta itemprop="citation" content="@article{Cheng_2017,&#10;   title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},&#10;   volume={105},&#10;   ISSN={1558-2256},&#10;   url={http://dx.doi.org/10.1109/JPROC.2017.2675998},&#10;   DOI={10.1109/jproc.2017.2675998},&#10;   number={10},&#10;   journal={Proceedings of the IEEE},&#10;   publisher={Institute of Electrical and Electronics Engineers (IEEE)},&#10;   author={Cheng, Gong and Han, Junwei and Lu, Xiaoqiang},&#10;   year={2017},&#10;   month={Oct},&#10;   pages={1865-1883}&#10;}" />
 </div>
-# `resisc45` (Manual download)
+# `resisc45`
+
+Warning: Manual download required. See instructions below.
+
+*   **Description**:
 
 RESISC45 dataset is a publicly available benchmark for Remote Sensing Image
 Scene Classification (RESISC), created by Northwestern Polytechnical University
 (NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700
 images in each class.
 
-*   URL:
+*   **Homepage**:
     [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/resisc45.py)
-*   Version: `v3.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`3.0.0`** (default): No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/resisc45/`):<br/>
+    Dataset can be downloaded from OneDrive:
+    https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs
+    After downloading the rar file, please extract it to the manual_dir.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`3.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 31,500
 
-*   Download size: `Unknown size`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/resisc45/`): Dataset can
-be downloaded from OneDrive: https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs
-After downloading the rar file, please extract it to the manual_dir.
-
-## Features
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -41,22 +51,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=45),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 31,500
-TRAIN | 31,500
-
-## Homepage
-
-*   [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{Cheng_2017,
    title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},
@@ -73,5 +72,3 @@ TRAIN | 31,500
    pages={1865-1883}
 }
 ```
-
---------------------------------------------------------------------------------

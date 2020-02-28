@@ -10,48 +10,44 @@
 </div>
 # `cifar10`
 
+*   **Description**:
+
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with
 6000 images per class. There are 50000 training images and 10000 test images.
 
-*   URL:
+*   **Homepage**:
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.2`: None
+    *   `1.0.2`: No release notes.
+*   **Download size**: `162.17 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `162.17 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 10,000
+'train' | 50,000
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 60,000
-TRAIN | 50,000
-TEST  | 10,000
-
-## Homepage
-
-*   [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},
@@ -60,5 +56,3 @@ TEST  | 10,000
     year = {2009}
 }
 ```
-
---------------------------------------------------------------------------------

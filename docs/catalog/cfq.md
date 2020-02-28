@@ -10,349 +10,39 @@
 </div>
 # `cfq`
 
+*   **Description**:
+
 The CFQ dataset (and it's splits) for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage: data = tfds.load('cfq/mcd1')
 
-*   URL:
-    [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-*   `DatasetBuilder`:
-    [`tfds.text.cfq.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)
-
-`cfq` is configured with `tfds.text.cfq.CFQConfig` and has the following
-configurations predefined (defaults to the first one):
-
-*   `mcd1` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's splits)
-    for measuring compositional generalization.
+*   **Config description**: The CFQ dataset (and it's splits) for measuring
+    compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
-Example usage: data = tfds.load('cfq/mcd1')
+Example usage: data = tfds.load('cfq/mcd1') * **Homepage**:
+[https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
+* **Source code**:
+[`tfds.text.cfq.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)
+* **Versions**: * **`1.0.0`** (default): No release notes. * **Download size**:
+`255.20 MiB` * **Dataset size**: `Unknown size` * **Auto-cached**
+([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+No * **Features**:
 
-*   `mcd2` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's splits)
-    for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `mcd3` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's splits)
-    for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `question_complexity_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ
-    dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `question_pattern_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset
-    (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `query_complexity_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset
-    (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `query_pattern_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset
-    (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-*   `random_split` (`v1.0.0`) (`Size: Unknown size`): The CFQ dataset (and it's
-    splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-## `cfq/mcd1`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 107,711
-TRAIN | 95,743
-TEST  | 11,968
-
-### Features
 ```python
 FeaturesDict({
     'query': Text(shape=(), dtype=tf.string),
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('question', 'query')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/mcd2`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 107,711
-TRAIN | 95,743
-TEST  | 11,968
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/mcd3`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 107,711
-TRAIN | 95,743
-TEST  | 11,968
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/question_complexity_split`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 109,339
-TRAIN | 98,999
-TEST  | 10,340
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/question_pattern_split`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 107,563
-TRAIN | 95,654
-TEST  | 11,909
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/query_complexity_split`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 110,166
-TRAIN | 100,654
-TEST  | 9,512
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/query_pattern_split`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 107,189
-TRAIN | 94,600
-TEST  | 12,589
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## `cfq/random_split`
-The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-Example usage: data = tfds.load('cfq/mcd1')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 107,711
-TRAIN | 95,744
-TEST  | 11,967
-
-### Features
-```python
-FeaturesDict({
-    'query': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
-
-### Supervised keys (for `as_supervised=True`)
-`('question', 'query')`
-
-## Citation
 ```
 @inproceedings{Lake2018GeneralizationWS,
   title={Measuring Compositional Generalization: A Comprehensive Method on
@@ -364,4 +54,74 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## cfq/mcd1 (default config)
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 11,968
+'train' | 95,743
+
+## cfq/mcd2
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 11,968
+'train' | 95,743
+
+## cfq/mcd3
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 11,968
+'train' | 95,743
+
+## cfq/question_complexity_split
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 10,340
+'train' | 98,999
+
+## cfq/question_pattern_split
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 11,909
+'train' | 95,654
+
+## cfq/query_complexity_split
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 9,512
+'train' | 100,654
+
+## cfq/query_pattern_split
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 12,589
+'train' | 94,600
+
+## cfq/random_split
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 11,967
+'train' | 95,744

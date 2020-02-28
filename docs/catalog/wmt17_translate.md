@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt17/translation-task.html" />
   <meta itemprop="citation" content="&#10;@InProceedings{bojar-EtAl:2017:WMT1,&#10;  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huang, Shujian  and  Huck, Matthias  and  Koehn, Philipp  and  Liu, Qun  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Rubino, Raphael  and  Specia, Lucia  and  Turchi, Marco},&#10;  title     = {Findings of the 2017 Conference on Machine Translation (WMT17)},&#10;  booktitle = {Proceedings of the Second Conference on Machine Translation, Volume 2: Shared Task Papers},&#10;  month     = {September},&#10;  year      = {2017},&#10;  address   = {Copenhagen, Denmark},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {169--214},&#10;  url       = {http://www.aclweb.org/anthology/W17-4717}&#10;}&#10;" />
 </div>
-# `wmt17_translate` (Manual download)
+# `wmt17_translate`
+
+Warning: Manual download required. See instructions below.
+
+*   **Description**:
 
 Translate dataset based on the data from statmt.org.
 
@@ -28,295 +32,25 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
-*   URL:
+*   **Homepage**:
     [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.translate.wmt17.Wmt17Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt17.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+    *   `0.0.3`: No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`):<br/>
+    Some of the wmt configs here, require a manual download.
+    Please look into wmt.py to see the exact path (and file name) that has to
+    be downloaded.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Citation**:
 
-`wmt17_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `cs-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 cs-en translation task
-    dataset.
-
-*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 de-en translation task
-    dataset.
-
-*   `fi-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 fi-en translation task
-    dataset.
-
-*   `lv-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 lv-en translation task
-    dataset.
-
-*   `ru-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 ru-en translation task
-    dataset.
-
-*   `tr-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 tr-en translation task
-    dataset.
-
-*   `zh-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2017 zh-en translation task
-    dataset.
-
-## `wmt17_translate/cs-en`
-WMT 2017 cs-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 15,857,653
-TRAIN      | 15,851,649
-TEST       | 3,005
-VALIDATION | 2,999
-
-### Features
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('cs', 'en')`
-
-## `wmt17_translate/de-en`
-WMT 2017 de-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 5,912,187
-TRAIN      | 5,906,184
-TEST       | 3,004
-VALIDATION | 2,999
-
-### Features
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('de', 'en')`
-
-## `wmt17_translate/fi-en`
-WMT 2017 fi-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,668,546
-TRAIN      | 2,656,542
-TEST       | 6,004
-VALIDATION | 6,000
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'fi': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('fi', 'en')`
-
-## `wmt17_translate/lv-en`
-WMT 2017 lv-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 3,571,532
-TRAIN      | 3,567,528
-VALIDATION | 2,003
-TEST       | 2,001
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'lv': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('lv', 'en')`
-
-## `wmt17_translate/ru-en`
-WMT 2017 ru-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 25,788,719
-TRAIN      | 25,782,720
-TEST       | 3,001
-VALIDATION | 2,998
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ru': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('ru', 'en')`
-
-## `wmt17_translate/tr-en`
-WMT 2017 tr-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 211,763
-TRAIN      | 205,756
-TEST       | 3,007
-VALIDATION | 3,000
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'tr': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('tr', 'en')`
-
-## `wmt17_translate/zh-en`
-WMT 2017 zh-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.3`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt17_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 25,140,612
-TRAIN      | 25,136,609
-VALIDATION | 2,002
-TEST       | 2,001
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'zh': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('zh', 'en')`
-
-## Citation
 ```
 @InProceedings{bojar-EtAl:2017:WMT1,
   author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huang, Shujian  and  Huck, Matthias  and  Koehn, Philipp  and  Liu, Qun  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Rubino, Raphael  and  Specia, Lucia  and  Turchi, Marco},
@@ -331,4 +65,177 @@ Translation({
 }
 ```
 
---------------------------------------------------------------------------------
+## wmt17_translate/cs-en (default config)
+
+*   **Config description**: WMT 2017 cs-en translation task dataset.
+*   **Download size**: `1.66 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 3,005
+'train'      | 15,851,649
+'validation' | 2,999
+
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('cs', 'en')`
+
+## wmt17_translate/de-en
+
+*   **Config description**: WMT 2017 de-en translation task dataset.
+*   **Download size**: `1.81 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 3,004
+'train'      | 5,906,184
+'validation' | 2,999
+
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('de', 'en')`
+
+## wmt17_translate/fi-en
+
+*   **Config description**: WMT 2017 fi-en translation task dataset.
+*   **Download size**: `414.10 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 6,004
+'train'      | 2,656,542
+'validation' | 6,000
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fi', 'en')`
+
+## wmt17_translate/lv-en
+
+*   **Config description**: WMT 2017 lv-en translation task dataset.
+*   **Download size**: `161.69 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 2,001
+'train'      | 3,567,528
+'validation' | 2,003
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'lv': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('lv', 'en')`
+
+## wmt17_translate/ru-en
+
+*   **Config description**: WMT 2017 ru-en translation task dataset.
+*   **Download size**: `3.34 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 3,001
+'train'      | 25,782,720
+'validation' | 2,998
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'en')`
+
+## wmt17_translate/tr-en
+
+*   **Config description**: WMT 2017 tr-en translation task dataset.
+*   **Download size**: `59.32 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 3,007
+'train'      | 205,756
+'validation' | 3,000
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('tr', 'en')`
+
+## wmt17_translate/zh-en
+
+*   **Config description**: WMT 2017 zh-en translation task dataset.
+*   **Download size**: `2.16 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 2,001
+'train'      | 25,136,609
+'validation' | 2,002
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'zh': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('zh', 'en')`

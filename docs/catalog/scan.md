@@ -10,6 +10,8 @@
 </div>
 # `scan`
 
+*   **Description**:
+
 SCAN tasks with various splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
@@ -19,577 +21,33 @@ See https://github.com/brendenlake/SCAN for a description of the splits.
 
 Example usage: data = tfds.load('scan/length')
 
-*   URL:
-    [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-*   `DatasetBuilder`:
-    [`tfds.text.scan.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
-
-`scan` is configured with `tfds.text.scan.ScanConfig` and has the following
-configurations predefined (defaults to the first one):
-
-*   `simple` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various splits.
+*   **Config description**: SCAN tasks with various splits.
 
 SCAN is a set of simple language-driven navigation tasks for studying
 compositional learning and zero-shot generalization.
 
 See https://github.com/brendenlake/SCAN for a description of the splits.
 
-Example usage: data = tfds.load('scan/length')
+Example usage: data = tfds.load('scan/length') * **Homepage**:
+[https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN) *
+**Source code**:
+[`tfds.text.scan.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
+* **Versions**: * **`1.0.0`** (default): No release notes. * **Download size**:
+`17.82 MiB` * **Dataset size**: `Unknown size` * **Auto-cached**
+([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+No * **Features**:
 
-*   `addprim_jump` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `addprim_turn_left` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with
-    various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num0` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num1` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num2` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `filler_num3` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `length` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `template_around_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with
-    various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `template_jump_around_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks
-    with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `template_opposite_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with
-    various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-*   `template_right` (`v1.0.0`) (`Size: Unknown size`): SCAN tasks with various
-    splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-## `scan/simple`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 20,910
-TRAIN | 16,728
-TEST  | 4,182
-
-### Features
 ```python
 FeaturesDict({
     'actions': Text(shape=(), dtype=tf.string),
     'commands': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('commands', 'actions')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/addprim_jump`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 22,376
-TRAIN | 14,670
-TEST  | 7,706
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/addprim_turn_left`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 23,098
-TRAIN | 21,890
-TEST  | 1,208
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/filler_num0`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 16,398
-TRAIN | 15,225
-TEST  | 1,173
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/filler_num1`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 17,463
-TRAIN | 16,290
-TEST  | 1,173
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/filler_num2`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 18,564
-TRAIN | 17,391
-TEST  | 1,173
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/filler_num3`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,701
-TRAIN | 18,528
-TEST  | 1,173
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/length`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 20,910
-TRAIN | 16,990
-TEST  | 3,920
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/template_around_right`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,701
-TRAIN | 15,225
-TEST  | 4,476
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/template_jump_around_right`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,701
-TRAIN | 18,528
-TEST  | 1,173
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/template_opposite_right`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,701
-TRAIN | 15,225
-TEST  | 4,476
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## `scan/template_right`
-SCAN tasks with various splits.
-
-SCAN is a set of simple language-driven navigation tasks for studying
-compositional learning and zero-shot generalization.
-
-See https://github.com/brendenlake/SCAN for a description of the splits.
-
-Example usage: data = tfds.load('scan/length')
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,701
-TRAIN | 15,225
-TEST  | 4,476
-
-### Features
-```python
-FeaturesDict({
-    'actions': Text(shape=(), dtype=tf.string),
-    'commands': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
-
-### Supervised keys (for `as_supervised=True`)
-`('commands', 'actions')`
-
-## Citation
 ```
 @inproceedings{Lake2018GeneralizationWS,
   title={Generalization without Systematicity: On the Compositional Skills of
@@ -601,4 +59,110 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## scan/simple (default config)
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 4,182
+'train' | 16,728
+
+## scan/addprim_jump
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 7,706
+'train' | 14,670
+
+## scan/addprim_turn_left
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,208
+'train' | 21,890
+
+## scan/filler_num0
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,173
+'train' | 15,225
+
+## scan/filler_num1
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,173
+'train' | 16,290
+
+## scan/filler_num2
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,173
+'train' | 17,391
+
+## scan/filler_num3
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,173
+'train' | 18,528
+
+## scan/length
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 3,920
+'train' | 16,990
+
+## scan/template_around_right
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 4,476
+'train' | 15,225
+
+## scan/template_jump_around_right
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 1,173
+'train' | 18,528
+
+## scan/template_opposite_right
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 4,476
+'train' | 15,225
+
+## scan/template_right
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'test'  | 4,476
+'train' | 15,225

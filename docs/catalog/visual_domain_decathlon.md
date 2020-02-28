@@ -10,6 +10,8 @@
 </div>
 # `visual_domain_decathlon`
 
+*   **Description**:
+
 This contains the 10 datasets used in the Visual Domain Decathlon, part of the
 PASCAL in Detail Workshop Challenge (CVPR 2017). The goal of this challenge is
 to solve simultaneously ten image classification problems representative of very
@@ -21,392 +23,21 @@ Decathlon (resized isotropically to have a shorter size of 72 pixels) and might
 have different train/validation/test splits. Here we use the official splits for
 the competition.
 
-*   URL:
+*   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.visual_domain_decathlon.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/visual_domain_decathlon.py)
+*   **Versions**:
+    *   **`1.1.0`** (default): No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-`visual_domain_decathlon` is configured with
-`tfds.image.visual_domain_decathlon.VisualDomainDecathlonConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `aircraft` (`v1.1.0`) (`Size: Unknown size`): Data based on "Aircraft", with
-    images resized isotropically to have a shorter size of 72 pixels.
-
-*   `cifar100` (`v1.1.0`) (`Size: Unknown size`): Data based on "CIFAR-100",
-    with images resized isotropically to have a shorter size of 72 pixels.
-
-*   `daimlerpedcls` (`v1.1.0`) (`Size: Unknown size`): Data based on "Daimler
-    Pedestrian Classification", with images resized isotropically to have a
-    shorter size of 72 pixels.
-
-*   `dtd` (`v1.1.0`) (`Size: Unknown size`): Data based on "Describable
-    Textures", with images resized isotropically to have a shorter size of 72
-    pixels.
-
-*   `gtsrb` (`v1.1.0`) (`Size: Unknown size`): Data based on "German Traffic
-    Signs", with images resized isotropically to have a shorter size of 72
-    pixels.
-
-*   `imagenet12` (`v1.1.0`) (`Size: Unknown size`): Data based on "Imagenet",
-    with images resized isotropically to have a shorter size of 72 pixels.
-
-*   `omniglot` (`v1.1.0`) (`Size: Unknown size`): Data based on "Omniglot", with
-    images resized isotropically to have a shorter size of 72 pixels.
-
-*   `svhn` (`v1.1.0`) (`Size: Unknown size`): Data based on "Street View House
-    Numbers", with images resized isotropically to have a shorter size of 72
-    pixels.
-
-*   `ucf101` (`v1.1.0`) (`Size: Unknown size`): Data based on "UCF101 Dynamic
-    Images", with images resized isotropically to have a shorter size of 72
-    pixels.
-
-*   `vgg-flowers` (`v1.1.0`) (`Size: Unknown size`): Data based on
-    "VGG-Flowers", with images resized isotropically to have a shorter size of
-    72 pixels.
-
-## `visual_domain_decathlon/aircraft`
-
-Data based on "Aircraft", with images resized isotropically to have a shorter
-size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 10,000
-TRAIN      | 3,334
-TEST       | 3,333
-VALIDATION | 3,333
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/cifar100`
-
-Data based on "CIFAR-100", with images resized isotropically to have a shorter
-size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 60,000
-TRAIN      | 40,000
-TEST       | 10,000
-VALIDATION | 10,000
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/daimlerpedcls`
-
-Data based on "Daimler Pedestrian Classification", with images resized
-isotropically to have a shorter size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 49,000
-TRAIN      | 23,520
-TEST       | 19,600
-VALIDATION | 5,880
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/dtd`
-
-Data based on "Describable Textures", with images resized isotropically to have
-a shorter size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 5,640
-TEST       | 1,880
-TRAIN      | 1,880
-VALIDATION | 1,880
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/gtsrb`
-
-Data based on "German Traffic Signs", with images resized isotropically to have
-a shorter size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 51,839
-TRAIN      | 31,367
-TEST       | 12,630
-VALIDATION | 7,842
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=43),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/imagenet12`
-
-Data based on "Imagenet", with images resized isotropically to have a shorter
-size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,329,405
-TRAIN      | 1,232,167
-VALIDATION | 49,000
-TEST       | 48,238
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/omniglot`
-
-Data based on "Omniglot", with images resized isotropically to have a shorter
-size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 32,460
-TRAIN      | 17,853
-TEST       | 8,115
-VALIDATION | 6,492
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/svhn`
-
-Data based on "Street View House Numbers", with images resized isotropically to
-have a shorter size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 99,289
-TRAIN      | 47,217
-VALIDATION | 26,040
-TEST       | 26,032
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/ucf101`
-
-Data based on "UCF101 Dynamic Images", with images resized isotropically to have
-a shorter size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 13,320
-TRAIN      | 7,585
-TEST       | 3,783
-VALIDATION | 1,952
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## `visual_domain_decathlon/vgg-flowers`
-
-Data based on "VGG-Flowers", with images resized isotropically to have a shorter
-size of 72 pixels.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 8,189
-TEST       | 6,149
-TRAIN      | 1,020
-VALIDATION | 1,020
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
-
-### Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @ONLINE{hakanbilensylvestrerebuffitomasjakab2017,
     author = "Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab",
@@ -416,4 +47,232 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## visual_domain_decathlon/aircraft (default config)
+
+*   **Config description**: Data based on "Aircraft", with images resized
+    isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 3,333
+'train'      | 3,334
+'validation' | 3,333
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/cifar100
+
+*   **Config description**: Data based on "CIFAR-100", with images resized
+    isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 10,000
+'train'      | 40,000
+'validation' | 10,000
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/daimlerpedcls
+
+*   **Config description**: Data based on "Daimler Pedestrian Classification",
+    with images resized isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 19,600
+'train'      | 23,520
+'validation' | 5,880
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/dtd
+
+*   **Config description**: Data based on "Describable Textures", with images
+    resized isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 1,880
+'train'      | 1,880
+'validation' | 1,880
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/gtsrb
+
+*   **Config description**: Data based on "German Traffic Signs", with images
+    resized isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 12,630
+'train'      | 31,367
+'validation' | 7,842
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=43),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/imagenet12
+
+*   **Config description**: Data based on "Imagenet", with images resized
+    isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `6.40 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 48,238
+'train'      | 1,232,167
+'validation' | 49,000
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/omniglot
+
+*   **Config description**: Data based on "Omniglot", with images resized
+    isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 8,115
+'train'      | 17,853
+'validation' | 6,492
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/svhn
+
+*   **Config description**: Data based on "Street View House Numbers", with
+    images resized isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 26,032
+'train'      | 47,217
+'validation' | 26,040
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/ucf101
+
+*   **Config description**: Data based on "UCF101 Dynamic Images", with images
+    resized isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 3,783
+'train'      | 7,585
+'validation' | 1,952
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+## visual_domain_decathlon/vgg-flowers
+
+*   **Config description**: Data based on "VGG-Flowers", with images resized
+    isotropically to have a shorter size of 72 pixels.
+*   **Download size**: `1.04 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 6,149
+'train'      | 1,020
+'validation' | 1,020
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```

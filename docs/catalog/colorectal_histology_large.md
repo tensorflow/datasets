@@ -10,43 +10,42 @@
 </div>
 # `colorectal_histology_large`
 
+*   **Description**:
+
 10 large 5000 x 5000 textured colorectal cancer histology images
 
-*   URL:
+*   **Homepage**:
     [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.colorectal_histology.ColorectalHistologyLarge`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: None
+    *   `0.0.1`: No release notes.
+*   **Download size**: `707.65 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `707.65 MiB`
+Split  | Examples
+:----- | -------:
+'test' | 10
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10
-TEST  | 10
-
-## Homepage
-
-*   [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
-
-## Citation
 ```
 @article{kather2016multi,
   title={Multi-class texture analysis in colorectal cancer histology},
@@ -58,5 +57,3 @@ TEST  | 10
   publisher={Nature Publishing Group}
 }
 ```
-
---------------------------------------------------------------------------------

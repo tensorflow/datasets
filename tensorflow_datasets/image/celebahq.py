@@ -60,14 +60,11 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
     """
     v2 = tfds.core.Version(
         "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-    v01 = tfds.core.Version(
-        "0.1.0", experiments={tfds.core.Experiment.S3: False})
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
         version=v2,
-        supported_versions=[v01],
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -130,7 +127,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
         )
     ]

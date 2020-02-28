@@ -10,40 +10,37 @@
 </div>
 # `xnli`
 
+*   **Description**:
+
 XNLI is a subset of a few thousand examples from MNLI which has been translated
 into a 14 different languages (some low-ish resource). As with MNLI, the goal is
 to predict textual entailment (does sentence A imply/contradict/neither sentence
 B) and is a classification task (given two sentences, predict one of three
 labels).
 
-*   URL:
+*   **Config description**: Plain text import of XNLI
+*   **Homepage**:
     [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.xnli.Xnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xnli.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
+*   **Download size**: `17.04 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`xnli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
-following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | -------:
+'test'       | 5,010
+'validation' | 2,490
 
-*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text import of XNLI
+*   **Features**:
 
-## `xnli/plain_text`
-Plain text import of XNLI
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 7,500
-TEST       | 5,010
-VALIDATION | 2,490
-
-### Features
 ```python
 FeaturesDict({
     'hypothesis': TranslationVariableLanguages({
@@ -70,12 +67,11 @@ FeaturesDict({
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
-
-## Citation
 ```
 @InProceedings{conneau2018xnli,
   author = "Conneau, Alexis
@@ -94,4 +90,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## xnli/plain_text (default config)

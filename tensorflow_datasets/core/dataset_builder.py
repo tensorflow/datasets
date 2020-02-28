@@ -358,7 +358,7 @@ class DatasetBuilder(object):
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
-          self.info.downloaded_size = dl_manager.downloaded_size
+          self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
@@ -541,7 +541,6 @@ class DatasetBuilder(object):
           read_config=read_config,
       )
       # Auto-cache small datasets which are small enough to fit in memory.
-      # TODO(tfds): Should expose auto-caching default value in the dataset doc.
       if self._should_cache_ds(
           split=split,
           shuffle_files=shuffle_files,
@@ -918,9 +917,9 @@ class FileAdapterBuilder(DatasetBuilder):
         prepare_split_kwargs)
     for split_generator in self._split_generators(
         dl_manager, **split_generators_kwargs):
-      if splits_lib.Split.ALL == split_generator.split_info.name:
+      if str(split_generator.split_info.name).lower() == "all":
         raise ValueError(
-            "tfds.Split.ALL is a special split keyword corresponding to the "
+            "`all` is a special split keyword corresponding to the "
             "union of all splits, so cannot be used as key in "
             "._split_generator()."
         )

@@ -10,776 +10,23 @@
 </div>
 # `para_crawl`
 
+*   **Description**:
+
 Web-Scale Parallel Corpora for Official European Languages.
 
-*   URL:
+*   **Homepage**:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.translate.para_crawl.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+    *   `0.1.0`: No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Citation**:
 
-`para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
-has the following configurations predefined (defaults to the first one):
-
-*   `enbg_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to bg, uses encoder plain_text.
-
-*   `encs_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to cs, uses encoder plain_text.
-
-*   `enda_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to da, uses encoder plain_text.
-
-*   `ende_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to de, uses encoder plain_text.
-
-*   `enel_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to el, uses encoder plain_text.
-
-*   `enes_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to es, uses encoder plain_text.
-
-*   `enet_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to et, uses encoder plain_text.
-
-*   `enfi_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to fi, uses encoder plain_text.
-
-*   `enfr_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to fr, uses encoder plain_text.
-
-*   `enga_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to ga, uses encoder plain_text.
-
-*   `enhr_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to hr, uses encoder plain_text.
-
-*   `enhu_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to hu, uses encoder plain_text.
-
-*   `enit_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to it, uses encoder plain_text.
-
-*   `enlt_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to lt, uses encoder plain_text.
-
-*   `enlv_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to lv, uses encoder plain_text.
-
-*   `enmt_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to mt, uses encoder plain_text.
-
-*   `ennl_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to nl, uses encoder plain_text.
-
-*   `enpl_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to pl, uses encoder plain_text.
-
-*   `enpt_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to pt, uses encoder plain_text.
-
-*   `enro_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to ro, uses encoder plain_text.
-
-*   `ensk_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to sk, uses encoder plain_text.
-
-*   `ensl_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to sl, uses encoder plain_text.
-
-*   `ensv_plain_text` (`v1.0.0`) (`Size: Unknown size`): Translation dataset
-    from English to sv, uses encoder plain_text.
-
-## `para_crawl/enbg_plain_text`
-Translation dataset from English to bg, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,039,885
-TRAIN | 1,039,885
-
-### Features
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'bg')`
-
-## `para_crawl/encs_plain_text`
-Translation dataset from English to cs, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,981,949
-TRAIN | 2,981,949
-
-### Features
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'cs')`
-
-## `para_crawl/enda_plain_text`
-Translation dataset from English to da, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,414,895
-TRAIN | 2,414,895
-
-### Features
-```python
-Translation({
-    'da': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'da')`
-
-## `para_crawl/ende_plain_text`
-Translation dataset from English to de, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 16,264,448
-TRAIN | 16,264,448
-
-### Features
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'de')`
-
-## `para_crawl/enel_plain_text`
-Translation dataset from English to el, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,985,233
-TRAIN | 1,985,233
-
-### Features
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'el')`
-
-## `para_crawl/enes_plain_text`
-Translation dataset from English to es, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 21,987,267
-TRAIN | 21,987,267
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'es': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'es')`
-
-## `para_crawl/enet_plain_text`
-Translation dataset from English to et, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 853,422
-TRAIN | 853,422
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'et': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'et')`
-
-## `para_crawl/enfi_plain_text`
-Translation dataset from English to fi, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,156,069
-TRAIN | 2,156,069
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'fi': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'fi')`
-
-## `para_crawl/enfr_plain_text`
-Translation dataset from English to fr, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 31,374,161
-TRAIN | 31,374,161
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'fr': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'fr')`
-
-## `para_crawl/enga_plain_text`
-Translation dataset from English to ga, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 357,399
-TRAIN | 357,399
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ga': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'ga')`
-
-## `para_crawl/enhr_plain_text`
-Translation dataset from English to hr, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,002,053
-TRAIN | 1,002,053
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'hr': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'hr')`
-
-## `para_crawl/enhu_plain_text`
-Translation dataset from English to hu, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,901,342
-TRAIN | 1,901,342
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'hu': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'hu')`
-
-## `para_crawl/enit_plain_text`
-Translation dataset from English to it, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 12,162,239
-TRAIN | 12,162,239
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'it': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'it')`
-
-## `para_crawl/enlt_plain_text`
-Translation dataset from English to lt, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 844,643
-TRAIN | 844,643
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'lt': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'lt')`
-
-## `para_crawl/enlv_plain_text`
-Translation dataset from English to lv, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 553,060
-TRAIN | 553,060
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'lv': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'lv')`
-
-## `para_crawl/enmt_plain_text`
-Translation dataset from English to mt, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 195,502
-TRAIN | 195,502
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'mt': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'mt')`
-
-## `para_crawl/ennl_plain_text`
-Translation dataset from English to nl, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,659,268
-TRAIN | 5,659,268
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'nl': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'nl')`
-
-## `para_crawl/enpl_plain_text`
-Translation dataset from English to pl, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,503,276
-TRAIN | 3,503,276
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'pl': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'pl')`
-
-## `para_crawl/enpt_plain_text`
-Translation dataset from English to pt, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 8,141,940
-TRAIN | 8,141,940
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'pt': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'pt')`
-
-## `para_crawl/enro_plain_text`
-Translation dataset from English to ro, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,952,043
-TRAIN | 1,952,043
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ro': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'ro')`
-
-## `para_crawl/ensk_plain_text`
-Translation dataset from English to sk, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,591,831
-TRAIN | 1,591,831
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'sk': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'sk')`
-
-## `para_crawl/ensl_plain_text`
-Translation dataset from English to sl, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 660,161
-TRAIN | 660,161
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'sl': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'sl')`
-
-## `para_crawl/ensv_plain_text`
-Translation dataset from English to sv, uses encoder plain_text.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.1.0`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,476,729
-TRAIN | 3,476,729
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'sv': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('en', 'sv')`
-
-## Citation
 ```
 @misc {paracrawl,
     title  = "ParaCrawl",
@@ -788,4 +35,554 @@ Translation({
 }
 ```
 
---------------------------------------------------------------------------------
+## para_crawl/enbg_plain_text (default config)
+
+*   **Config description**: Translation dataset from English to bg, uses encoder
+    plain_text.
+*   **Download size**: `98.94 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,039,885
+
+*   **Features**:
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'bg')`
+
+## para_crawl/encs_plain_text
+
+*   **Config description**: Translation dataset from English to cs, uses encoder
+    plain_text.
+*   **Download size**: `187.31 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,981,949
+
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'cs')`
+
+## para_crawl/enda_plain_text
+
+*   **Config description**: Translation dataset from English to da, uses encoder
+    plain_text.
+*   **Download size**: `174.34 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,414,895
+
+*   **Features**:
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'da')`
+
+## para_crawl/ende_plain_text
+
+*   **Config description**: Translation dataset from English to de, uses encoder
+    plain_text.
+*   **Download size**: `1.22 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | ---------:
+'train' | 16,264,448
+
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'de')`
+
+## para_crawl/enel_plain_text
+
+*   **Config description**: Translation dataset from English to el, uses encoder
+    plain_text.
+*   **Download size**: `184.59 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,985,233
+
+*   **Features**:
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'el')`
+
+## para_crawl/enes_plain_text
+
+*   **Config description**: Translation dataset from English to es, uses encoder
+    plain_text.
+*   **Download size**: `1.82 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | ---------:
+'train' | 21,987,267
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'es': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'es')`
+
+## para_crawl/enet_plain_text
+
+*   **Config description**: Translation dataset from English to et, uses encoder
+    plain_text.
+*   **Download size**: `66.91 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 853,422
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'et': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'et')`
+
+## para_crawl/enfi_plain_text
+
+*   **Config description**: Translation dataset from English to fi, uses encoder
+    plain_text.
+*   **Download size**: `151.83 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,156,069
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'fi')`
+
+## para_crawl/enfr_plain_text
+
+*   **Config description**: Translation dataset from English to fr, uses encoder
+    plain_text.
+*   **Download size**: `2.63 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | ---------:
+'train' | 31,374,161
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'fr')`
+
+## para_crawl/enga_plain_text
+
+*   **Config description**: Translation dataset from English to ga, uses encoder
+    plain_text.
+*   **Download size**: `28.03 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 357,399
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ga': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'ga')`
+
+## para_crawl/enhr_plain_text
+
+*   **Config description**: Translation dataset from English to hr, uses encoder
+    plain_text.
+*   **Download size**: `80.97 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,002,053
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'hr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'hr')`
+
+## para_crawl/enhu_plain_text
+
+*   **Config description**: Translation dataset from English to hu, uses encoder
+    plain_text.
+*   **Download size**: `114.24 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,901,342
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'hu': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'hu')`
+
+## para_crawl/enit_plain_text
+
+*   **Config description**: Translation dataset from English to it, uses encoder
+    plain_text.
+*   **Download size**: `1017.30 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | ---------:
+'train' | 12,162,239
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'it': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'it')`
+
+## para_crawl/enlt_plain_text
+
+*   **Config description**: Translation dataset from English to lt, uses encoder
+    plain_text.
+*   **Download size**: `63.28 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 844,643
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'lt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'lt')`
+
+## para_crawl/enlv_plain_text
+
+*   **Config description**: Translation dataset from English to lv, uses encoder
+    plain_text.
+*   **Download size**: `45.17 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 553,060
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'lv': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'lv')`
+
+## para_crawl/enmt_plain_text
+
+*   **Config description**: Translation dataset from English to mt, uses encoder
+    plain_text.
+*   **Download size**: `18.15 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 195,502
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'mt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'mt')`
+
+## para_crawl/ennl_plain_text
+
+*   **Config description**: Translation dataset from English to nl, uses encoder
+    plain_text.
+*   **Download size**: `400.63 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,659,268
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'nl': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'nl')`
+
+## para_crawl/enpl_plain_text
+
+*   **Config description**: Translation dataset from English to pl, uses encoder
+    plain_text.
+*   **Download size**: `257.90 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 3,503,276
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'pl': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'pl')`
+
+## para_crawl/enpt_plain_text
+
+*   **Config description**: Translation dataset from English to pt, uses encoder
+    plain_text.
+*   **Download size**: `608.62 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 8,141,940
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'pt')`
+
+## para_crawl/enro_plain_text
+
+*   **Config description**: Translation dataset from English to ro, uses encoder
+    plain_text.
+*   **Download size**: `153.24 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,952,043
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ro': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'ro')`
+
+## para_crawl/ensk_plain_text
+
+*   **Config description**: Translation dataset from English to sk, uses encoder
+    plain_text.
+*   **Download size**: `96.61 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,591,831
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'sk': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'sk')`
+
+## para_crawl/ensl_plain_text
+
+*   **Config description**: Translation dataset from English to sl, uses encoder
+    plain_text.
+*   **Download size**: `62.02 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 660,161
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'sl': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'sl')`
+
+## para_crawl/ensv_plain_text
+
+*   **Config description**: Translation dataset from English to sv, uses encoder
+    plain_text.
+*   **Download size**: `262.76 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 3,476,729
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'sv': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('en', 'sv')`

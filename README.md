@@ -31,7 +31,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.15+ to be installed.
+# Requires TF 1.5+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:
@@ -66,13 +66,14 @@ Try it interactively in a
 
 ### `DatasetBuilder`
 
-All datasets are implemented as subclasses of
-[`DatasetBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetBuilder.md)
-and
-[`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load.md)
-is a thin convenience wrapper.
-[`DatasetInfo`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo.md)
-documents the dataset.
+All datasets are implemented as subclasses of `tfds.core.DatasetBuilder`. TFDS
+has two entry points:
+
+*   `tfds.builder`: Returns the `tfds.core.DatasetBuilder` instance, giving
+     control over `builder.download_and_prepate()` and
+     `builder.as_dataset()`.
+*   `tfds.load`: Convenience wrapper which hides the `download_and_prepate` and
+    `as_dataset` calls, and directly returns the `tf.data.Dataset`.
 
 ```python
 import tensorflow_datasets as tfds
@@ -138,9 +139,7 @@ info.features['label'].str2int('cat')  # 0
 ### NumPy Usage with `tfds.as_numpy`
 
 As a convenience for users that want simple NumPy arrays in their programs, you
-can use
-[`tfds.as_numpy`](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_numpy.md)
-to return a generator that yields NumPy array
+can use `tfds.as_numpy` to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.

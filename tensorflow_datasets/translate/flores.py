@@ -77,12 +77,8 @@ class FloresConfig(tfds.core.BuilderConfig):
         name=name,
         description=description,
         version=tfds.core.Version(
-            "1.0.0",
+            "1.1.0",
             "New split API (https://tensorflow.org/datasets/splits)"),
-        supported_versions=[
-            tfds.core.Version(
-                "0.0.3", experiments={tfds.core.Experiment.S3: False}),
-        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())

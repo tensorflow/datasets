@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt15/translation-task.html" />
   <meta itemprop="citation" content="&#10;@InProceedings{bojar-EtAl:2015:WMT,&#10;  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Haddow, Barry  and  Huck, Matthias  and  Hokamp, Chris  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco},&#10;  title     = {Findings of the 2015 Workshop on Statistical Machine Translation},&#10;  booktitle = {Proceedings of the Tenth Workshop on Statistical Machine Translation},&#10;  month     = {September},&#10;  year      = {2015},&#10;  address   = {Lisbon, Portugal},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {1--46},&#10;  url       = {http://aclweb.org/anthology/W15-3001}&#10;}&#10;" />
 </div>
-# `wmt15_translate` (Manual download)
+# `wmt15_translate`
+
+Warning: Manual download required. See instructions below.
+
+*   **Description**:
 
 Translate dataset based on the data from statmt.org.
 
@@ -28,415 +32,25 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
-*   URL:
+*   **Homepage**:
     [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.translate.wmt15.Wmt15Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt15.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+    *   `0.0.4`: No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`):<br/>
+    Some of the wmt configs here, require a manual download.
+    Please look into wmt.py to see the exact path (and file name) that has to
+    be downloaded.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Citation**:
 
-`wmt15_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `cs-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 cs-en translation task
-    dataset.
-
-*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 de-en translation task
-    dataset.
-
-*   `fi-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fi-en translation task
-    dataset.
-
-*   `fr-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fr-en translation task
-    dataset.
-
-*   `ru-en` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 ru-en translation task
-    dataset.
-
-*   `cs-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 cs-en
-    translation task dataset with subword encoding.
-
-*   `de-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 de-en
-    translation task dataset with subword encoding.
-
-*   `fi-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fi-en
-    translation task dataset with subword encoding.
-
-*   `fr-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 fr-en
-    translation task dataset with subword encoding.
-
-*   `ru-en.subwords8k` (`v1.0.0`) (`Size: Unknown size`): WMT 2015 ru-en
-    translation task dataset with subword encoding.
-
-## `wmt15_translate/cs-en`
-WMT 2015 cs-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 15,798,785
-TRAIN      | 15,793,126
-VALIDATION | 3,003
-TEST       | 2,656
-
-### Features
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('cs', 'en')`
-
-## `wmt15_translate/de-en`
-WMT 2015 de-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 4,528,170
-TRAIN      | 4,522,998
-VALIDATION | 3,003
-TEST       | 2,169
-
-### Features
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('de', 'en')`
-
-## `wmt15_translate/fi-en`
-WMT 2015 fi-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,076,264
-TRAIN      | 2,073,394
-VALIDATION | 1,500
-TEST       | 1,370
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'fi': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('fi', 'en')`
-
-## `wmt15_translate/fr-en`
-WMT 2015 fr-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 40,859,301
-TRAIN      | 40,853,298
-VALIDATION | 4,503
-TEST       | 1,500
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'fr': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('fr', 'en')`
-
-## `wmt15_translate/ru-en`
-WMT 2015 ru-en translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,500,902
-TRAIN      | 2,495,081
-VALIDATION | 3,003
-TEST       | 2,818
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ru': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('ru', 'en')`
-
-## `wmt15_translate/cs-en.subwords8k`
-WMT 2015 cs-en translation task dataset with subword encoding.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 15,798,785
-TRAIN      | 15,793,126
-VALIDATION | 3,003
-TEST       | 2,656
-
-### Features
-```python
-Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('cs', 'en')`
-
-## `wmt15_translate/de-en.subwords8k`
-WMT 2015 de-en translation task dataset with subword encoding.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 4,528,170
-TRAIN      | 4,522,998
-VALIDATION | 3,003
-TEST       | 2,169
-
-### Features
-```python
-Translation({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('de', 'en')`
-
-## `wmt15_translate/fi-en.subwords8k`
-WMT 2015 fi-en translation task dataset with subword encoding.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,076,264
-TRAIN      | 2,073,394
-VALIDATION | 1,500
-TEST       | 1,370
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
-    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('fi', 'en')`
-
-## `wmt15_translate/fr-en.subwords8k`
-WMT 2015 fr-en translation task dataset with subword encoding.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | ---------:
-ALL        | 40,859,301
-TRAIN      | 40,853,298
-VALIDATION | 4,503
-TEST       | 1,500
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('fr', 'en')`
-
-## `wmt15_translate/ru-en.subwords8k`
-WMT 2015 ru-en translation task dataset with subword encoding.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.4`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 2,500,902
-TRAIN      | 2,495,081
-VALIDATION | 3,003
-TEST       | 2,818
-
-### Features
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
-    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
-})
-```
-
-### Homepage
-
-*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
-
-### Supervised keys (for `as_supervised=True`)
-`('ru', 'en')`
-
-## Citation
 ```
 @InProceedings{bojar-EtAl:2015:WMT,
   author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Haddow, Barry  and  Huck, Matthias  and  Hokamp, Chris  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco},
@@ -451,4 +65,257 @@ Translation({
 }
 ```
 
---------------------------------------------------------------------------------
+## wmt15_translate/cs-en (default config)
+
+*   **Config description**: WMT 2015 cs-en translation task dataset.
+*   **Download size**: `1.62 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 2,656
+'train'      | 15,793,126
+'validation' | 3,003
+
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('cs', 'en')`
+
+## wmt15_translate/de-en
+
+*   **Config description**: WMT 2015 de-en translation task dataset.
+*   **Download size**: `1.62 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 2,169
+'train'      | 4,522,998
+'validation' | 3,003
+
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('de', 'en')`
+
+## wmt15_translate/fi-en
+
+*   **Config description**: WMT 2015 fi-en translation task dataset.
+*   **Download size**: `260.51 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 1,370
+'train'      | 2,073,394
+'validation' | 1,500
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fi', 'en')`
+
+## wmt15_translate/fr-en
+
+*   **Config description**: WMT 2015 fr-en translation task dataset.
+*   **Download size**: `6.24 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 1,500
+'train'      | 40,853,298
+'validation' | 4,503
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fr', 'en')`
+
+## wmt15_translate/ru-en
+
+*   **Config description**: WMT 2015 ru-en translation task dataset.
+*   **Download size**: `1.02 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 2,818
+'train'      | 2,495,081
+'validation' | 3,003
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'en')`
+
+## wmt15_translate/cs-en.subwords8k
+
+*   **Config description**: WMT 2015 cs-en translation task dataset with subword
+    encoding.
+*   **Download size**: `1.62 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 2,656
+'train'      | 15,793,126
+'validation' | 3,003
+
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('cs', 'en')`
+
+## wmt15_translate/de-en.subwords8k
+
+*   **Config description**: WMT 2015 de-en translation task dataset with subword
+    encoding.
+*   **Download size**: `1.62 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 2,169
+'train'      | 4,522,998
+'validation' | 3,003
+
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('de', 'en')`
+
+## wmt15_translate/fi-en.subwords8k
+
+*   **Config description**: WMT 2015 fi-en translation task dataset with subword
+    encoding.
+*   **Download size**: `260.51 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 1,370
+'train'      | 2,073,394
+'validation' | 1,500
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fi', 'en')`
+
+## wmt15_translate/fr-en.subwords8k
+
+*   **Config description**: WMT 2015 fr-en translation task dataset with subword
+    encoding.
+*   **Download size**: `6.24 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | ---------:
+'test'       | 1,500
+'train'      | 40,853,298
+'validation' | 4,503
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fr', 'en')`
+
+## wmt15_translate/ru-en.subwords8k
+
+*   **Config description**: WMT 2015 ru-en translation task dataset with subword
+    encoding.
+*   **Download size**: `1.02 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 2,818
+'train'      | 2,495,081
+'validation' | 3,003
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'en')`

@@ -10,28 +10,35 @@
 </div>
 # `uc_merced`
 
+*   **Description**:
+
 UC Merced is a 21 class land use remote sensing image dataset, with 100 images
 per class. The images were manually extracted from large images from the USGS
 National Map Urban Area Imagery collection for various urban areas around the
 country. The pixel resolution of this public domain imagery is 0.3 m. Each image
 measures 256x256 pixels.
 
-*   URL:
+*   **Homepage**:
     [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.uc_merced.UcMerced`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/uc_merced.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: None
+    *   `0.0.1`: No release notes.
+*   **Download size**: `317.07 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `317.07 MiB`
+Split   | Examples
+:------ | -------:
+'train' | 2,100
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -39,22 +46,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,100
-TRAIN | 2,100
-
-## Homepage
-
-*   [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @InProceedings{Nilsback08,
    author = "Yang, Yi and Newsam, Shawn",
@@ -63,5 +59,3 @@ TRAIN | 2,100
    year = "2010",
 }
 ```
-
---------------------------------------------------------------------------------

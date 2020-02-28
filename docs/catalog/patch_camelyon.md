@@ -10,6 +10,8 @@
 </div>
 # `patch_camelyon`
 
+*   **Description**:
+
 The PatchCamelyon benchmark is a new and challenging image classification
 dataset. It consists of 327.680 color images (96 x 96px) extracted from
 histopathologic scans of lymph node sections. Each image is annoted with a
@@ -17,22 +19,29 @@ binary label indicating presence of metastatic tissue. PCam provides a new
 benchmark for machine learning models: bigger than CIFAR10, smaller than
 Imagenet, trainable on a single GPU.
 
-*   URL:
+*   **Homepage**:
     [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/patch_camelyon.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: None
+    *   `0.1.0`: No release notes.
+*   **Download size**: `7.48 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `7.48 GiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 32,768
+'train'      | 262,144
+'validation' | 32,768
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string),
@@ -40,24 +49,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 327,680
-TRAIN      | 262,144
-TEST       | 32,768
-VALIDATION | 32,768
-
-## Homepage
-
-*   [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @misc{b_s_veeling_j_linmans_j_winkens_t_cohen_2018_2546921,
   author       = {B. S. Veeling, J. Linmans, J. Winkens, T. Cohen, M. Welling},
@@ -68,5 +64,3 @@ VALIDATION | 32,768
   url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
 }
 ```
-
---------------------------------------------------------------------------------

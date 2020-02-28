@@ -10,25 +10,32 @@
 </div>
 # `cats_vs_dogs`
 
+*   **Description**:
+
 A large set of images of cats and dogs.There are 1738 corrupted images that are
 dropped.
 
-*   URL:
+*   **Homepage**:
     [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
-*   Version: `v4.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`4.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `2.0.1`: None
+    *   `2.0.1`: No release notes.
+*   **Download size**: `786.68 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `786.68 MiB`
+Split   | Examples
+:------ | -------:
+'train' | 23,262
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -36,22 +43,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 23,262
-TRAIN | 23,262
-
-## Homepage
-
-*   [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
 author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
@@ -64,5 +60,3 @@ url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-tha
 edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
 }
 ```
-
---------------------------------------------------------------------------------

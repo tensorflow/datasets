@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="http://zeus.robots.ox.ac.uk/vgg_face2/" />
   <meta itemprop="citation" content="@InProceedings{Cao18,&#10;author = &quot;Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.&quot;,&#10;title  = &quot;VGGFace2: A dataset for recognising faces across pose and age&quot;,&#10;booktitle = &quot;International Conference on Automatic Face and Gesture Recognition&quot;,&#10;year  = &quot;2018&quot;}" />
 </div>
-# `vgg_face2` (Manual download)
+# `vgg_face2`
+
+Warning: Manual download required. See instructions below.
+
+*   **Description**:
 
 VGGFace2 is a large-scale face recognition dataset. Images are downloaded from
 Google Image Search and have large variations in pose, age, illumination,
@@ -19,26 +23,33 @@ different lighting and occlusion conditions. Face distribution for different
 identities is varied, from 87 to 843, with an average of 362 images for each
 subject.
 
-*   URL:
+*   **Homepage**:
     [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.vgg_face2.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/vgg_face2.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/vgg_face2/`):<br/>
+    manual_dir should contain two files: vggface2_test.tar.gz and
+    vggface2_train.tar.gz.
+    You need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in
+    order to get the link to download the dataset.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | --------:
+'test'  | 169,396
+'train' | 3,141,890
 
-*   Download size: `Unknown size`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/vgg_face2/`): manual_dir
-should contain two files: vggface2_test.tar.gz and vggface2_train.tar.gz. You
-need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in order to
-get the link to download the dataset.
-
-## Features
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -46,23 +57,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=9131),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,311,286
-TRAIN | 3,141,890
-TEST  | 169,396
-
-## Homepage
-
-*   [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @InProceedings{Cao18,
 author = "Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.",
@@ -70,5 +69,3 @@ title  = "VGGFace2: A dataset for recognising faces across pose and age",
 booktitle = "International Conference on Automatic Face and Gesture Recognition",
 year  = "2018"}
 ```
-
---------------------------------------------------------------------------------

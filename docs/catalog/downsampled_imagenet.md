@@ -10,6 +10,8 @@
 </div>
 # `downsampled_imagenet`
 
+*   **Description**:
+
 Dataset with images of 2 resolutions (see config name for information on the
 resolution). It is used for density estimation and generative modeling
 experiments.
@@ -17,78 +19,37 @@ experiments.
 For resized ImageNet for supervised learning
 ([link](https://patrykchrabaszcz.github.io/Imagenet32/)) see `imagenet_resized`.
 
-*   URL:
+*   **Homepage**:
     [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.downsampled_imagenet.DownsampledImagenet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/downsampled_imagenet.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `1.0.0`: No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`downsampled_imagenet` is configured with
-`tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the
-following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | --------:
+'train'      | 1,281,149
+'validation' | 49,999
 
-*   `32x32` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of Train and
-    Validation images of 32x32 resolution.
+*   **Features**:
 
-*   `64x64` (`v2.0.0`) (`Size: Unknown size`): A dataset consisting of Train and
-    Validation images of 64x64 resolution.
-
-## `downsampled_imagenet/32x32`
-A dataset consisting of Train and Validation images of 32x32 resolution.
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.0`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,331,148
-TRAIN      | 1,281,149
-VALIDATION | 49,999
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
-
-## `downsampled_imagenet/64x64`
-A dataset consisting of Train and Validation images of 64x64 resolution.
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `1.0.0`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,331,148
-TRAIN      | 1,281,149
-VALIDATION | 49,999
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
-
-## Citation
 ```
 @article{DBLP:journals/corr/OordKK16,
   author    = {A{"{a}}ron van den Oord and
@@ -107,4 +68,14 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## downsampled_imagenet/32x32 (default config)
+
+*   **Config description**: A dataset consisting of Train and Validation images
+    of 32x32 resolution.
+*   **Download size**: `3.98 GiB`
+
+## downsampled_imagenet/64x64
+
+*   **Config description**: A dataset consisting of Train and Validation images
+    of 64x64 resolution.
+*   **Download size**: `11.73 GiB`

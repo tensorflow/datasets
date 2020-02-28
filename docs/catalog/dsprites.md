@@ -10,6 +10,8 @@
 </div>
 # `dsprites`
 
+*   **Description**:
+
 dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth
 independent latent factors. These factors are *color*, *shape*, *scale*,
 *rotation*, *x* and *y* positions of a sprite.
@@ -34,22 +36,27 @@ corresponding to that image.
 We chose the latents values deliberately to have the smallest step changes while
 ensuring that all pixel outputs were different. No noise was added.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.dsprites.Dsprites`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dsprites.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: None
+    *   `0.1.0`: No release notes.
+*   **Download size**: `26.73 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `26.73 MiB`
+Split   | Examples
+:------ | -------:
+'train' | 737,280
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 1), dtype=tf.uint8),
@@ -58,26 +65,18 @@ FeaturesDict({
     'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'label_x_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
     'label_y_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
-    'value_orientation': Tensor(shape=[], dtype=tf.float32),
-    'value_scale': Tensor(shape=[], dtype=tf.float32),
-    'value_shape': Tensor(shape=[], dtype=tf.float32),
-    'value_x_position': Tensor(shape=[], dtype=tf.float32),
-    'value_y_position': Tensor(shape=[], dtype=tf.float32),
+    'value_orientation': tf.float32,
+    'value_scale': tf.float32,
+    'value_shape': tf.float32,
+    'value_x_position': tf.float32,
+    'value_y_position': tf.float32,
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 737,280
-TRAIN | 737,280
-
-## Homepage
-
-*   [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
-
-## Citation
 ```
 @misc{dsprites17,
 author = {Loic Matthey and Irina Higgins and Demis Hassabis and Alexander Lerchner},
@@ -86,5 +85,3 @@ howpublished= {https://github.com/deepmind/dsprites-dataset/},
 year = "2017",
 }
 ```
-
---------------------------------------------------------------------------------

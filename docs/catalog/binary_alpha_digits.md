@@ -10,46 +10,41 @@
 </div>
 # `binary_alpha_digits`
 
+*   **Description**:
+
 Binary 20x16 digits of '0' through '9' and capital 'A' through 'Z'. 39 examples
 of each class.
 
-*   URL: [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
-*   `DatasetBuilder`:
+*   **Homepage**:
+    [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
+*   **Source code**:
     [`tfds.image.binary_alpha_digits.BinaryAlphaDigits`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binary_alpha_digits.py)
-*   Version: `v1.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `519.83 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`1.0.0`** (default):
+Split   | Examples
+:------ | -------:
+'train' | 1,404
 
-*   Download size: `519.83 KiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(20, 16, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=36),
 })
 ```
-
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,404
-TRAIN | 1,404
-
-## Homepage
-
-*   [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
-```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
 ```
 
---------------------------------------------------------------------------------
+```

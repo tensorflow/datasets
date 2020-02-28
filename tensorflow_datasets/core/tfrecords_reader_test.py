@@ -26,6 +26,8 @@ import os
 from absl.testing import absltest
 import six
 
+import tensorflow as tf
+
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import example_parser
@@ -33,6 +35,10 @@ from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+
+
+# Skip the cardinality test for backward compatibility with TF <= 2.1.
+_SKIP_CARDINALITY_TEST = not hasattr(tf.data.experimental, 'assert_cardinality')
 
 
 class GetDatasetFilesTest(testing.TestCase):
@@ -308,11 +314,21 @@ class ReaderTest(testing.TestCase):
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijkl'])
 
+    if not _SKIP_CARDINALITY_TEST:
+      # Check that the cardinality is correctly set.
+      self.assertEqual(
+          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
+
   def test_overlap(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
     ds = self.reader.read('mnist', 'train+train[:2]', self.SPLIT_INFOS)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijklab'])
+
+    if not _SKIP_CARDINALITY_TEST:
+      # Check that the cardinality is correctly set.
+      self.assertEqual(
+          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_complex(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -320,6 +336,11 @@ class ReaderTest(testing.TestCase):
     ds = self.reader.read('mnist', 'train[1:-1]+test[:-50%]', self.SPLIT_INFOS)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'bcdefghijkmno'])
+
+    if not _SKIP_CARDINALITY_TEST:
+      # Check that the cardinality is correctly set.
+      self.assertEqual(
+          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_shuffle_files(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')

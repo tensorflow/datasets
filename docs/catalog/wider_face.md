@@ -12,6 +12,8 @@
 
 # `wider_face`
 
+*   **Description**:
+
 WIDER FACE dataset is a face detection benchmark dataset, of which images are
 selected from the publicly available WIDER dataset. We choose 32,203 images and
 label 393,703 faces with a high degree of variability in scale, pose and
@@ -22,49 +24,46 @@ metric employed in the PASCAL VOC dataset. Similar to MALF and Caltech datasets,
 we do not release bounding box ground truth for the test images. Users are
 required to submit final prediction files, which we shall proceed to evaluate.
 
-*   URL: [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
-*   `DatasetBuilder`:
+*   **Homepage**:
+    [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
+*   **Source code**:
     [`tfds.object_detection.wider_face.WiderFace`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/wider_face.py)
-*   Version: `v0.1.0`
-*   Versions:
+*   **Versions**:
+    *   **`0.1.0`** (default): No release notes.
+*   **Download size**: `3.42 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`0.1.0`** (default):
+Split        | Examples
+:----------- | -------:
+'test'       | 16,097
+'train'      | 12,880
+'validation' | 3,226
 
-*   Download size: `3.42 GiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'faces': Sequence({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'blur': Tensor(shape=(), dtype=tf.uint8),
-        'expression': Tensor(shape=(), dtype=tf.bool),
-        'illumination': Tensor(shape=(), dtype=tf.bool),
-        'invalid': Tensor(shape=(), dtype=tf.bool),
-        'occlusion': Tensor(shape=(), dtype=tf.uint8),
-        'pose': Tensor(shape=(), dtype=tf.bool),
+        'blur': tf.uint8,
+        'expression': tf.bool,
+        'illumination': tf.bool,
+        'invalid': tf.bool,
+        'occlusion': tf.uint8,
+        'pose': tf.bool,
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 32,203
-TEST       | 16,097
-TRAIN      | 12,880
-VALIDATION | 3,226
-
-## Homepage
-
-*   [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
-
-## Citation
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
 ```
 @inproceedings{yang2016wider,
@@ -73,5 +72,3 @@ VALIDATION | 3,226
     Title = {WIDER FACE: A Face Detection Benchmark},
     Year = {2016}}
 ```
-
---------------------------------------------------------------------------------

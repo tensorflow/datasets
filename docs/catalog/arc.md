@@ -10,56 +10,52 @@
 </div>
 # `arc`
 
+*   **Description**:
+
 ARC can be seen as a general artificial intelligence benchmark, as a program
 synthesis benchmark, or as a psychometric intelligence test. It is targeted at
 both humans and artificially intelligent systems that aim at emulating a
 human-like form of general fluid intelligence.
 
-*   URL: [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
-*   `DatasetBuilder`:
+*   **Config description**: ARC commit bd9e2c9 from 2019-12-06
+*   **Homepage**:
+    [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
+*   **Source code**:
     [`tfds.image.arc.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+*   **Download size**: `465.07 KiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`arc` is configured with `tfds.image.arc.ARCConfig` and has the following
-configurations predefined (defaults to the first one):
+Split   | Examples
+:------ | -------:
+'test'  | 400
+'train' | 400
 
-*   `2019-12-06` (`v1.0.0`) (`Size: Unknown size`): ARC commit bd9e2c9 from
-    2019-12-06
+*   **Features**:
 
-## `arc/2019-12-06`
-ARC commit bd9e2c9 from 2019-12-06
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 800
-TEST  | 400
-TRAIN | 400
-
-### Features
 ```python
 FeaturesDict({
     'task_id': Text(shape=(), dtype=tf.string),
     'test': Sequence({
-        'input': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
-        'output': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
+        'input': Sequence(Sequence(tf.int32)),
+        'output': Sequence(Sequence(tf.int32)),
     }),
     'train': Sequence({
-        'input': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
-        'output': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
+        'input': Sequence(Sequence(tf.int32)),
+        'output': Sequence(Sequence(tf.int32)),
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
-
-## Citation
 ```
 @misc{chollet_francois_2019,
   title     = {The Measure of Intelligence},
@@ -71,4 +67,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## arc/2019-12-06 (default config)

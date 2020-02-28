@@ -10,46 +10,43 @@
 </div>
 # `mnist`
 
+*   **Description**:
+
 The MNIST database of handwritten digits.
 
-*   URL: [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
-*   `DatasetBuilder`:
+*   **Homepage**:
+    [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
+*   **Source code**:
     [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `11.06 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `11.06 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 10,000
+'train' | 60,000
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 70,000
-TRAIN | 60,000
-TEST  | 10,000
-
-## Homepage
-
-*   [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{lecun2010mnist,
   title={MNIST handwritten digit database},
@@ -59,5 +56,3 @@ TEST  | 10,000
   year={2010}
 }
 ```
-
---------------------------------------------------------------------------------

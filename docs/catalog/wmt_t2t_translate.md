@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py" />
   <meta itemprop="citation" content="&#10;@InProceedings{bojar-EtAl:2014:W14-33,&#10;  author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},&#10;  title     = {Findings of the 2014 Workshop on Statistical Machine Translation},&#10;  booktitle = {Proceedings of the Ninth Workshop on Statistical Machine Translation},&#10;  month     = {June},&#10;  year      = {2014},&#10;  address   = {Baltimore, Maryland, USA},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {12--58},&#10;  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}&#10;}&#10;" />
 </div>
-# `wmt_t2t_translate` (Manual download)
+# `wmt_t2t_translate`
+
+Warning: Manual download required. See instructions below.
+
+*   **Description**:
 
 Translate dataset based on the data from statmt.org.
 
@@ -28,55 +32,46 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
-*   URL:
+*   **Config description**: WMT T2T EnDe translation task dataset.
+*   **Homepage**:
     [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): No release notes.
+    *   `0.0.1`: No release notes.
+*   **Download size**: `1.61 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/wmt_t2t_translate/`):<br/>
+    Some of the wmt configs here, require a manual download.
+    Please look into wmt.py to see the exact path (and file name) that has to
+    be downloaded.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`wmt_t2t_translate` is configured with `tfds.translate.wmt.WmtConfig` and has
-the following configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | --------:
+'test'       | 3,003
+'train'      | 4,592,289
+'validation' | 3,000
 
-*   `de-en` (`v1.0.0`) (`Size: Unknown size`): WMT T2T EnDe translation task
-    dataset.
+*   **Features**:
 
-## `wmt_t2t_translate/de-en`
-WMT T2T EnDe translation task dataset.
-
-Versions:
-
-*   **`1.0.0`** (default):
-*   `0.0.1`: None
-
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/wmt_t2t_translate/`): Some
-of the wmt configs here, require a manual download. Please look into wmt.py to
-see the exact path (and file name) that has to be downloaded.
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 4,598,292
-TRAIN      | 4,592,289
-TEST       | 3,003
-VALIDATION | 3,000
-
-### Features
 ```python
 Translation({
     'de': Text(shape=(), dtype=tf.string),
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('de', 'en')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
-
-### Supervised keys (for `as_supervised=True`)
-`('de', 'en')`
-
-## Citation
 ```
 @InProceedings{bojar-EtAl:2014:W14-33,
   author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},
@@ -91,4 +86,4 @@ Translation({
 }
 ```
 
---------------------------------------------------------------------------------
+## wmt_t2t_translate/de-en (default config)

@@ -10,6 +10,8 @@
 </div>
 # `reddit_tifu`
 
+*   **Description**:
+
 Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu. As defined in
 the publication, styel "short" uses title as summary and "long" uses tldr as
 summary.
@@ -18,87 +20,34 @@ Features includes: - document: post text without tldr. - tldr: tldr line. -
 title: trimmed title without tldr. - ups: upvotes. - score: score. -
 num_comments: number of comments. - upvote_ratio: upvote ratio.
 
-*   URL: [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
-*   `DatasetBuilder`:
+*   **Homepage**: [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
+*   **Source code**:
     [`tfds.summarization.reddit_tifu.RedditTifu`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit_tifu.py)
+*   **Versions**:
+    *   **`1.1.0`** (default): No release notes.
+*   **Download size**: `639.54 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`reddit_tifu` is configured with
-`tfds.summarization.reddit_tifu.RedditTifuConfig` and has the following
-configurations predefined (defaults to the first one):
-
-*   `short` (`v1.1.0`) (`Size: Unknown size`): Using title as summary.
-
-*   `long` (`v1.1.0`) (`Size: Unknown size`): Using TLDR as summary.
-
-## `reddit_tifu/short`
-Using title as summary.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 79,740
-TRAIN | 79,740
-
-### Features
 ```python
 FeaturesDict({
     'documents': Text(shape=(), dtype=tf.string),
-    'num_comments': Tensor(shape=[], dtype=tf.float32),
-    'score': Tensor(shape=[], dtype=tf.float32),
+    'num_comments': tf.float32,
+    'score': tf.float32,
     'title': Text(shape=(), dtype=tf.string),
     'tldr': Text(shape=(), dtype=tf.string),
-    'ups': Tensor(shape=[], dtype=tf.float32),
-    'upvote_ratio': Tensor(shape=[], dtype=tf.float32),
+    'ups': tf.float32,
+    'upvote_ratio': tf.float32,
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('documents', 'title')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
-
-### Supervised keys (for `as_supervised=True`)
-`('documents', 'title')`
-
-## `reddit_tifu/long`
-Using TLDR as summary.
-
-Versions:
-
-*   **`1.1.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 42,139
-TRAIN | 42,139
-
-### Features
-```python
-FeaturesDict({
-    'documents': Text(shape=(), dtype=tf.string),
-    'num_comments': Tensor(shape=[], dtype=tf.float32),
-    'score': Tensor(shape=[], dtype=tf.float32),
-    'title': Text(shape=(), dtype=tf.string),
-    'tldr': Text(shape=(), dtype=tf.string),
-    'ups': Tensor(shape=[], dtype=tf.float32),
-    'upvote_ratio': Tensor(shape=[], dtype=tf.float32),
-})
-```
-
-### Homepage
-
-*   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
-
-### Supervised keys (for `as_supervised=True`)
-`('documents', 'tldr')`
-
-## Citation
 ```
 @misc{kim2018abstractive,
     title={Abstractive Summarization of Reddit Posts with Multi-level Memory Networks},
@@ -110,4 +59,20 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## reddit_tifu/short (default config)
+
+*   **Config description**: Using title as summary.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 79,740
+
+## reddit_tifu/long
+
+*   **Config description**: Using TLDR as summary.
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 42,139

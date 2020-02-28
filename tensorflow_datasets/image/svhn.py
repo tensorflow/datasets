@@ -44,10 +44,6 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -76,19 +72,16 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs=dict(
                 filepath=output_files["train"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(
                 filepath=output_files["test"],
             )),
         tfds.core.SplitGenerator(
             name="extra",
-            num_shards=10,
             gen_kwargs=dict(
                 filepath=output_files["extra"],
             )),

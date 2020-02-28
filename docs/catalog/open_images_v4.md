@@ -10,6 +10,8 @@
 </div>
 # `open_images_v4`
 
+*   **Description**:
+
 Open Images is a dataset of ~9M images that have been annotated with image-level
 labels and object bounding boxes.
 
@@ -21,175 +23,56 @@ often contain complex scenes with several objects (8.4 per image on average).
 Moreover, the dataset is annotated with image-level labels spanning thousands of
 classes.
 
-*   URL:
+*   **Homepage**:
     [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.object_detection.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
+*   **Download size**: `565.11 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`open_images_v4` is configured with
-`tfds.object_detection.open_images.OpenImagesV4Config` and has the following
-configurations predefined (defaults to the first one):
+Split        | Examples
+:----------- | --------:
+'test'       | 125,436
+'train'      | 1,743,042
+'validation' | 41,620
 
-*   `original` (`v2.0.0`) (`Size: Unknown size`): Images at their original
-    resolution and quality.
+*   **Features**:
 
-*   `300k` (`v2.0.0`) (`Size: Unknown size`): Images have roughly 300,000
-    pixels, at 72 JPEG quality.
-
-*   `200k` (`v2.0.0`) (`Size: Unknown size`): Images have roughly 200,000
-    pixels, at 72 JPEG quality.
-
-## `open_images_v4/original`
-Images at their original resolution and quality.
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.2.0`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,910,098
-TRAIN      | 1,743,042
-TEST       | 125,436
-VALIDATION | 41,620
-
-### Features
 ```python
 FeaturesDict({
     'bobjects': Sequence({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'is_depiction': tf.int8,
+        'is_group_of': tf.int8,
+        'is_inside': tf.int8,
+        'is_occluded': tf.int8,
+        'is_truncated': tf.int8,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
     'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'confidence': tf.int32,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'confidence': tf.int32,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
-
-## `open_images_v4/300k`
-Images have roughly 300,000 pixels, at 72 JPEG quality.
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.2.1`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,910,098
-TRAIN      | 1,743,042
-TEST       | 125,436
-VALIDATION | 41,620
-
-### Features
-```python
-FeaturesDict({
-    'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
-
-## `open_images_v4/200k`
-Images have roughly 200,000 pixels, at 72 JPEG quality.
-
-Versions:
-
-*   **`2.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.2.1`: None
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,910,098
-TRAIN      | 1,743,042
-TEST       | 125,436
-VALIDATION | 41,620
-
-### Features
-```python
-FeaturesDict({
-    'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-})
-```
-
-### Homepage
-
-*   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
-
-## Citation
 ```
 @article{OpenImages,
   author = {Alina Kuznetsova and
@@ -239,4 +122,28 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## open_images_v4/original (default config)
+
+*   **Config description**: Images at their original resolution and quality.
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.2.0`: No release notes.
+
+## open_images_v4/300k
+
+*   **Config description**: Images have roughly 300,000 pixels, at 72 JPEG
+    quality.
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.2.1`: No release notes.
+
+## open_images_v4/200k
+
+*   **Config description**: Images have roughly 200,000 pixels, at 72 JPEG
+    quality.
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.2.1`: No release notes.

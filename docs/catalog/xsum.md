@@ -8,7 +8,11 @@
   <meta itemprop="sameAs" content="https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset" />
   <meta itemprop="citation" content="&#10;@article{Narayan2018DontGM,&#10;  title={Don&#x27;t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},&#10;  author={Shashi Narayan and Shay B. Cohen and Mirella Lapata},&#10;  journal={ArXiv},&#10;  year={2018},&#10;  volume={abs/1808.08745}&#10;}&#10;" />
 </div>
-# `xsum` (Manual download)
+# `xsum`
+
+Warning: Manual download required. See instructions below.
+
+*   **Description**:
 
 Extreme Summarization (XSum) Dataset.
 
@@ -20,52 +24,46 @@ https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md. The
 folder 'xsum-extracts-from-downloads' need to be compressed as
 'xsum-extracts-from-downloads.tar.gz' and put in manually downloaded folder.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.xsum.Xsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/xsum.py)
-*   Version: `v1.1.0`
-*   Versions:
-
-    *   **`1.1.0`** (default):
+*   **Versions**:
+    *   **`1.1.0`** (default): No release notes.
     *   `1.0.0`: Dataset without cleaning.
+*   **Download size**: `2.59 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Manual download instructions**: This dataset requires you to download the
+    source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/manual/xsum/`):<br/>
+    Detailed download instructions (which require running a custom script) are
+    here:
+    https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
+    Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the manual_dir.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `2.59 MiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 11,301
+'train'      | 203,577
+'validation' | 11,305
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-WARNING: This dataset requires you to download the source data manually into
-manual_dir (defaults to `~/tensorflow_datasets/manual/xsum/`): Detailed download
-instructions (which require running a custom script) are here:
-https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
-Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the
-manual_dir.
-
-## Features
 ```python
 FeaturesDict({
     'document': Text(shape=(), dtype=tf.string),
     'summary': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('document', 'summary')`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 226,183
-TRAIN      | 203,577
-VALIDATION | 11,305
-TEST       | 11,301
-
-## Homepage
-
-*   [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
-
-## Supervised keys (for `as_supervised=True`)
-`('document', 'summary')`
-
-## Citation
 ```
 @article{Narayan2018DontGM,
   title={Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},
@@ -75,5 +73,3 @@ TEST       | 11,301
   volume={abs/1808.08745}
 }
 ```
-
---------------------------------------------------------------------------------

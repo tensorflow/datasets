@@ -10,6 +10,8 @@
 </div>
 # `multi_nli`
 
+*   **Description**:
+
 The Multi-Genre Natural Language Inference (MultiNLI) corpus is a crowd-sourced
 collection of 433k sentence pairs annotated with textual entailment information.
 The corpus is modeled on the SNLI corpus, but differs in that covers a range of
@@ -17,35 +19,30 @@ genres of spoken and written text, and supports a distinctive cross-genre
 generalization evaluation. The corpus served as the basis for the shared task of
 the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
-*   URL:
+*   **Config description**: Plain text
+*   **Homepage**:
     [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.text.multi_nli.MultiNLI`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.2`: No release notes.
+*   **Download size**: `216.34 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-`multi_nli` is configured with `tfds.text.multi_nli.MultiNLIConfig` and has the
-following configurations predefined (defaults to the first one):
+Split                   | Examples
+:---------------------- | -------:
+'train'                 | 392,702
+'validation_matched'    | 9,815
+'validation_mismatched' | 9,832
 
-*   `plain_text` (`v1.0.0`) (`Size: Unknown size`): Plain text
+*   **Features**:
 
-## `multi_nli/plain_text`
-Plain text
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.2`: None
-
-### Statistics
-
-Split                 | Examples
-:-------------------- | -------:
-ALL                   | 412,349
-TRAIN                 | 392,702
-VALIDATION_MISMATCHED | 9,832
-VALIDATION_MATCHED    | 9,815
-
-### Features
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -53,12 +50,11 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
-
-## Citation
 ```
 @InProceedings{N18-1101,
   author = "Williams, Adina
@@ -79,4 +75,4 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## multi_nli/plain_text (default config)

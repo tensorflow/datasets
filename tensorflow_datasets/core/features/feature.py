@@ -516,7 +516,7 @@ class Tensor(FeatureConnector):
   @api_utils.disallow_positional_args
   def __init__(self, shape, dtype):
     """Construct a Tensor feature."""
-    self._shape = shape
+    self._shape = tuple(shape)
     self._dtype = dtype
 
   def get_tensor_info(self):
@@ -544,3 +544,25 @@ class Tensor(FeatureConnector):
           example_data.dtype, np_dtype))
     utils.assert_shape_match(example_data.shape, self._shape)
     return example_data
+
+
+def get_inner_feature_repr(feature):
+  """Utils which returns the object which should get printed in __repr__.
+
+  This is used in container features (Sequence, FeatureDict) to print scalar
+  Tensor in a less verbose way `Sequence(tf.int32)` rather than
+  `Sequence(Tensor(shape=(), dtype=tf.in32))`.
+
+  Args:
+    feature: The feature to dispaly
+
+  Returns:
+    Either the feature or it's inner value.
+  """
+  # We only print `tf.int32` rather than `Tensor(shape=(), dtype=tf.int32)`
+  # * For the base `Tensor` class (and not subclass).
+  # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
+  if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
+    return repr(feature.dtype)
+  else:
+    return repr(feature)

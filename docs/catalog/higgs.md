@@ -10,6 +10,8 @@
 </div>
 # `higgs`
 
+*   **Description**:
+
 The data has been produced using Monte Carlo simulations. The first 21 features
 (columns 2-22) are kinematic properties measured by the particle detectors in
 the accelerator. The last seven features are functions of the first 21 features;
@@ -19,68 +21,65 @@ the need for physicists to manually develop such features. Benchmark results
 using Bayesian Decision Trees from a standard physics package and 5-layer neural
 networks are presented in the original paper.
 
-*   URL:
+*   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.structured.higgs.Higgs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/higgs.py)
-*   Version: `v2.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `2.62 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `2.62 GiB`
+Split   | Examples
+:------ | ---------:
+'train' | 11,000,000
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
-    'class_label': Tensor(shape=(), dtype=tf.float32),
-    'jet_1_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_1_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_1_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_1_pt': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_pt': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_pt': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_pt': Tensor(shape=(), dtype=tf.float64),
-    'lepton_eta': Tensor(shape=(), dtype=tf.float64),
-    'lepton_pT': Tensor(shape=(), dtype=tf.float64),
-    'lepton_phi': Tensor(shape=(), dtype=tf.float64),
-    'm_bb': Tensor(shape=(), dtype=tf.float64),
-    'm_jj': Tensor(shape=(), dtype=tf.float64),
-    'm_jjj': Tensor(shape=(), dtype=tf.float64),
-    'm_jlv': Tensor(shape=(), dtype=tf.float64),
-    'm_lv': Tensor(shape=(), dtype=tf.float64),
-    'm_wbb': Tensor(shape=(), dtype=tf.float64),
-    'm_wwbb': Tensor(shape=(), dtype=tf.float64),
-    'missing_energy_magnitude': Tensor(shape=(), dtype=tf.float64),
-    'missing_energy_phi': Tensor(shape=(), dtype=tf.float64),
+    'class_label': tf.float32,
+    'jet_1_b-tag': tf.float64,
+    'jet_1_eta': tf.float64,
+    'jet_1_phi': tf.float64,
+    'jet_1_pt': tf.float64,
+    'jet_2_b-tag': tf.float64,
+    'jet_2_eta': tf.float64,
+    'jet_2_phi': tf.float64,
+    'jet_2_pt': tf.float64,
+    'jet_3_b-tag': tf.float64,
+    'jet_3_eta': tf.float64,
+    'jet_3_phi': tf.float64,
+    'jet_3_pt': tf.float64,
+    'jet_4_b-tag': tf.float64,
+    'jet_4_eta': tf.float64,
+    'jet_4_phi': tf.float64,
+    'jet_4_pt': tf.float64,
+    'lepton_eta': tf.float64,
+    'lepton_pT': tf.float64,
+    'lepton_phi': tf.float64,
+    'm_bb': tf.float64,
+    'm_jj': tf.float64,
+    'm_jjj': tf.float64,
+    'm_jlv': tf.float64,
+    'm_lv': tf.float64,
+    'm_wbb': tf.float64,
+    'm_wwbb': tf.float64,
+    'missing_energy_magnitude': tf.float64,
+    'missing_energy_phi': tf.float64,
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | ---------:
-ALL   | 11,000,000
-TRAIN | 11,000,000
-
-## Homepage
-
-*   [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
-
-## Citation
 ```
 @article{Baldi:2014kfa,
       author         = "Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel",
@@ -97,5 +96,3 @@ TRAIN | 11,000,000
       SLACcitation   = "%%CITATION = ARXIV:1402.4735;%%"
 }
 ```
-
---------------------------------------------------------------------------------

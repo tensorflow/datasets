@@ -98,10 +98,6 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("0.3.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -131,21 +127,18 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "file_id": 0,
                 "extracted_dirs": extracted_dirs,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=4,
             gen_kwargs={
                 "file_id": 1,
                 "extracted_dirs": extracted_dirs,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=4,
             gen_kwargs={
                 "file_id": 2,
                 "extracted_dirs": extracted_dirs,

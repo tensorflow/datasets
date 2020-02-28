@@ -10,50 +10,46 @@
 </div>
 # `svhn_cropped`
 
+*   **Description**:
+
 The Street View House Numbers (SVHN) Dataset is an image digit recognition
 dataset of over 600,000 digit images coming from real world data. Images are
 cropped to 32x32.
 
-*   URL:
+*   **Homepage**:
     [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `1.47 GiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `1.47 GiB`
+Split   | Examples
+:------ | -------:
+'extra' | 531,131
+'test'  | 26,032
+'train' | 73,257
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 630,420
-EXTRA | 531,131
-TRAIN | 73,257
-TEST  | 26,032
-
-## Homepage
-
-*   [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @article{Netzer2011,
 author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
@@ -62,5 +58,3 @@ title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
 year = {2011}
 }
 ```
-
---------------------------------------------------------------------------------

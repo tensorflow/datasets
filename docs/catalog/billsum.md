@@ -10,6 +10,8 @@
 </div>
 # `billsum`
 
+*   **Description**:
+
 BillSum, summarization of US Congressional and California state bills.
 
 There are several features: - text: bill text. - summary: summary of the
@@ -17,20 +19,27 @@ bills. - title: title of the bills. features for us bills. ca bills does not
 have. - text_len: number of chars in text. - sum_len: number of chars in
 summary.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.billsum.Billsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/billsum.py)
-*   Version: `v3.0.0`
-*   Versions:
+*   **Versions**:
+    *   **`3.0.0`** (default): No release notes.
+*   **Download size**: `64.14 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-    *   **`3.0.0`** (default):
+Split     | Examples
+:-------- | -------:
+'ca_test' | 1,237
+'test'    | 3,269
+'train'   | 18,949
 
-*   Download size: `64.14 MiB`
+*   **Features**:
 
-*   Dataset size: `Unknown size`
-
-## Features
 ```python
 FeaturesDict({
     'summary': Text(shape=(), dtype=tf.string),
@@ -38,24 +47,11 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('text', 'summary')`
+*   **Citation**:
 
-## Statistics
-
-Split   | Examples
-:------ | -------:
-ALL     | 23,455
-TRAIN   | 18,949
-TEST    | 3,269
-CA_TEST | 1,237
-
-## Homepage
-
-*   [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
-
-## Supervised keys (for `as_supervised=True`)
-`('text', 'summary')`
-
-## Citation
 ```
 @misc{kornilova2019billsum,
     title={BillSum: A Corpus for Automatic Summarization of US Legislation},
@@ -66,5 +62,3 @@ CA_TEST | 1,237
     primaryClass={cs.CL}
 }
 ```
-
---------------------------------------------------------------------------------

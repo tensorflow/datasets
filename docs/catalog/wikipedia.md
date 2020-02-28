@@ -10,9619 +10,38 @@
 </div>
 # `wikipedia`
 
+*   **Description**:
+
 Wikipedia dataset containing cleaned articles of all languages. The datasets are
 built from the Wikipedia dump (https://dumps.wikimedia.org/) with one split per
 language. Each example contains the content of one full Wikipedia article with
 cleaning to strip markdown and unwanted sections (references, etc.).
 
-*   URL: [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-*   `DatasetBuilder`:
+*   **Homepage**: [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
+*   **Source code**:
     [`tfds.text.wikipedia.Wikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+    *   `0.0.4`: No release notes.
+    *   `0.0.3`: No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`wikipedia` is configured with `tfds.text.wikipedia.WikipediaConfig` and has the
-following configurations predefined (defaults to the first one):
-
-*   `20190301.aa` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for aa,
-    parsed from 20190301 dump.
-
-*   `20190301.ab` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ab,
-    parsed from 20190301 dump.
-
-*   `20190301.ace` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ace,
-    parsed from 20190301 dump.
-
-*   `20190301.ady` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ady,
-    parsed from 20190301 dump.
-
-*   `20190301.af` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for af,
-    parsed from 20190301 dump.
-
-*   `20190301.ak` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ak,
-    parsed from 20190301 dump.
-
-*   `20190301.als` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for als,
-    parsed from 20190301 dump.
-
-*   `20190301.am` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for am,
-    parsed from 20190301 dump.
-
-*   `20190301.an` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for an,
-    parsed from 20190301 dump.
-
-*   `20190301.ang` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ang,
-    parsed from 20190301 dump.
-
-*   `20190301.ar` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ar,
-    parsed from 20190301 dump.
-
-*   `20190301.arc` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for arc,
-    parsed from 20190301 dump.
-
-*   `20190301.arz` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for arz,
-    parsed from 20190301 dump.
-
-*   `20190301.as` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for as,
-    parsed from 20190301 dump.
-
-*   `20190301.ast` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ast,
-    parsed from 20190301 dump.
-
-*   `20190301.atj` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for atj,
-    parsed from 20190301 dump.
-
-*   `20190301.av` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for av,
-    parsed from 20190301 dump.
-
-*   `20190301.ay` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ay,
-    parsed from 20190301 dump.
-
-*   `20190301.az` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for az,
-    parsed from 20190301 dump.
-
-*   `20190301.azb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for azb,
-    parsed from 20190301 dump.
-
-*   `20190301.ba` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ba,
-    parsed from 20190301 dump.
-
-*   `20190301.bar` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bar,
-    parsed from 20190301 dump.
-
-*   `20190301.bat-smg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    bat-smg, parsed from 20190301 dump.
-
-*   `20190301.bcl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bcl,
-    parsed from 20190301 dump.
-
-*   `20190301.be` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for be,
-    parsed from 20190301 dump.
-
-*   `20190301.be-x-old` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    be-x-old, parsed from 20190301 dump.
-
-*   `20190301.bg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bg,
-    parsed from 20190301 dump.
-
-*   `20190301.bh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bh,
-    parsed from 20190301 dump.
-
-*   `20190301.bi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bi,
-    parsed from 20190301 dump.
-
-*   `20190301.bjn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bjn,
-    parsed from 20190301 dump.
-
-*   `20190301.bm` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bm,
-    parsed from 20190301 dump.
-
-*   `20190301.bn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bn,
-    parsed from 20190301 dump.
-
-*   `20190301.bo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bo,
-    parsed from 20190301 dump.
-
-*   `20190301.bpy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bpy,
-    parsed from 20190301 dump.
-
-*   `20190301.br` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for br,
-    parsed from 20190301 dump.
-
-*   `20190301.bs` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bs,
-    parsed from 20190301 dump.
-
-*   `20190301.bug` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bug,
-    parsed from 20190301 dump.
-
-*   `20190301.bxr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for bxr,
-    parsed from 20190301 dump.
-
-*   `20190301.ca` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ca,
-    parsed from 20190301 dump.
-
-*   `20190301.cbk-zam` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    cbk-zam, parsed from 20190301 dump.
-
-*   `20190301.cdo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cdo,
-    parsed from 20190301 dump.
-
-*   `20190301.ce` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ce,
-    parsed from 20190301 dump.
-
-*   `20190301.ceb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ceb,
-    parsed from 20190301 dump.
-
-*   `20190301.ch` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ch,
-    parsed from 20190301 dump.
-
-*   `20190301.cho` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cho,
-    parsed from 20190301 dump.
-
-*   `20190301.chr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for chr,
-    parsed from 20190301 dump.
-
-*   `20190301.chy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for chy,
-    parsed from 20190301 dump.
-
-*   `20190301.ckb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ckb,
-    parsed from 20190301 dump.
-
-*   `20190301.co` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for co,
-    parsed from 20190301 dump.
-
-*   `20190301.cr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cr,
-    parsed from 20190301 dump.
-
-*   `20190301.crh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for crh,
-    parsed from 20190301 dump.
-
-*   `20190301.cs` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cs,
-    parsed from 20190301 dump.
-
-*   `20190301.csb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for csb,
-    parsed from 20190301 dump.
-
-*   `20190301.cu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cu,
-    parsed from 20190301 dump.
-
-*   `20190301.cv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cv,
-    parsed from 20190301 dump.
-
-*   `20190301.cy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for cy,
-    parsed from 20190301 dump.
-
-*   `20190301.da` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for da,
-    parsed from 20190301 dump.
-
-*   `20190301.de` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for de,
-    parsed from 20190301 dump.
-
-*   `20190301.din` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for din,
-    parsed from 20190301 dump.
-
-*   `20190301.diq` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for diq,
-    parsed from 20190301 dump.
-
-*   `20190301.dsb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for dsb,
-    parsed from 20190301 dump.
-
-*   `20190301.dty` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for dty,
-    parsed from 20190301 dump.
-
-*   `20190301.dv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for dv,
-    parsed from 20190301 dump.
-
-*   `20190301.dz` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for dz,
-    parsed from 20190301 dump.
-
-*   `20190301.ee` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ee,
-    parsed from 20190301 dump.
-
-*   `20190301.el` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for el,
-    parsed from 20190301 dump.
-
-*   `20190301.eml` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for eml,
-    parsed from 20190301 dump.
-
-*   `20190301.en` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for en,
-    parsed from 20190301 dump.
-
-*   `20190301.eo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for eo,
-    parsed from 20190301 dump.
-
-*   `20190301.es` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for es,
-    parsed from 20190301 dump.
-
-*   `20190301.et` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for et,
-    parsed from 20190301 dump.
-
-*   `20190301.eu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for eu,
-    parsed from 20190301 dump.
-
-*   `20190301.ext` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ext,
-    parsed from 20190301 dump.
-
-*   `20190301.fa` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fa,
-    parsed from 20190301 dump.
-
-*   `20190301.ff` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ff,
-    parsed from 20190301 dump.
-
-*   `20190301.fi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fi,
-    parsed from 20190301 dump.
-
-*   `20190301.fiu-vro` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    fiu-vro, parsed from 20190301 dump.
-
-*   `20190301.fj` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fj,
-    parsed from 20190301 dump.
-
-*   `20190301.fo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fo,
-    parsed from 20190301 dump.
-
-*   `20190301.fr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fr,
-    parsed from 20190301 dump.
-
-*   `20190301.frp` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for frp,
-    parsed from 20190301 dump.
-
-*   `20190301.frr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for frr,
-    parsed from 20190301 dump.
-
-*   `20190301.fur` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fur,
-    parsed from 20190301 dump.
-
-*   `20190301.fy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for fy,
-    parsed from 20190301 dump.
-
-*   `20190301.ga` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ga,
-    parsed from 20190301 dump.
-
-*   `20190301.gag` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gag,
-    parsed from 20190301 dump.
-
-*   `20190301.gan` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gan,
-    parsed from 20190301 dump.
-
-*   `20190301.gd` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gd,
-    parsed from 20190301 dump.
-
-*   `20190301.gl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gl,
-    parsed from 20190301 dump.
-
-*   `20190301.glk` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for glk,
-    parsed from 20190301 dump.
-
-*   `20190301.gn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gn,
-    parsed from 20190301 dump.
-
-*   `20190301.gom` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gom,
-    parsed from 20190301 dump.
-
-*   `20190301.gor` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gor,
-    parsed from 20190301 dump.
-
-*   `20190301.got` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for got,
-    parsed from 20190301 dump.
-
-*   `20190301.gu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gu,
-    parsed from 20190301 dump.
-
-*   `20190301.gv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for gv,
-    parsed from 20190301 dump.
-
-*   `20190301.ha` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ha,
-    parsed from 20190301 dump.
-
-*   `20190301.hak` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hak,
-    parsed from 20190301 dump.
-
-*   `20190301.haw` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for haw,
-    parsed from 20190301 dump.
-
-*   `20190301.he` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for he,
-    parsed from 20190301 dump.
-
-*   `20190301.hi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hi,
-    parsed from 20190301 dump.
-
-*   `20190301.hif` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hif,
-    parsed from 20190301 dump.
-
-*   `20190301.ho` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ho,
-    parsed from 20190301 dump.
-
-*   `20190301.hr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hr,
-    parsed from 20190301 dump.
-
-*   `20190301.hsb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hsb,
-    parsed from 20190301 dump.
-
-*   `20190301.ht` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ht,
-    parsed from 20190301 dump.
-
-*   `20190301.hu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hu,
-    parsed from 20190301 dump.
-
-*   `20190301.hy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for hy,
-    parsed from 20190301 dump.
-
-*   `20190301.ia` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ia,
-    parsed from 20190301 dump.
-
-*   `20190301.id` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for id,
-    parsed from 20190301 dump.
-
-*   `20190301.ie` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ie,
-    parsed from 20190301 dump.
-
-*   `20190301.ig` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ig,
-    parsed from 20190301 dump.
-
-*   `20190301.ii` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ii,
-    parsed from 20190301 dump.
-
-*   `20190301.ik` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ik,
-    parsed from 20190301 dump.
-
-*   `20190301.ilo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ilo,
-    parsed from 20190301 dump.
-
-*   `20190301.inh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for inh,
-    parsed from 20190301 dump.
-
-*   `20190301.io` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for io,
-    parsed from 20190301 dump.
-
-*   `20190301.is` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for is,
-    parsed from 20190301 dump.
-
-*   `20190301.it` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for it,
-    parsed from 20190301 dump.
-
-*   `20190301.iu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for iu,
-    parsed from 20190301 dump.
-
-*   `20190301.ja` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ja,
-    parsed from 20190301 dump.
-
-*   `20190301.jam` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for jam,
-    parsed from 20190301 dump.
-
-*   `20190301.jbo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for jbo,
-    parsed from 20190301 dump.
-
-*   `20190301.jv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for jv,
-    parsed from 20190301 dump.
-
-*   `20190301.ka` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ka,
-    parsed from 20190301 dump.
-
-*   `20190301.kaa` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kaa,
-    parsed from 20190301 dump.
-
-*   `20190301.kab` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kab,
-    parsed from 20190301 dump.
-
-*   `20190301.kbd` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kbd,
-    parsed from 20190301 dump.
-
-*   `20190301.kbp` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kbp,
-    parsed from 20190301 dump.
-
-*   `20190301.kg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kg,
-    parsed from 20190301 dump.
-
-*   `20190301.ki` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ki,
-    parsed from 20190301 dump.
-
-*   `20190301.kj` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kj,
-    parsed from 20190301 dump.
-
-*   `20190301.kk` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kk,
-    parsed from 20190301 dump.
-
-*   `20190301.kl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kl,
-    parsed from 20190301 dump.
-
-*   `20190301.km` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for km,
-    parsed from 20190301 dump.
-
-*   `20190301.kn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kn,
-    parsed from 20190301 dump.
-
-*   `20190301.ko` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ko,
-    parsed from 20190301 dump.
-
-*   `20190301.koi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for koi,
-    parsed from 20190301 dump.
-
-*   `20190301.krc` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for krc,
-    parsed from 20190301 dump.
-
-*   `20190301.ks` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ks,
-    parsed from 20190301 dump.
-
-*   `20190301.ksh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ksh,
-    parsed from 20190301 dump.
-
-*   `20190301.ku` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ku,
-    parsed from 20190301 dump.
-
-*   `20190301.kv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kv,
-    parsed from 20190301 dump.
-
-*   `20190301.kw` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for kw,
-    parsed from 20190301 dump.
-
-*   `20190301.ky` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ky,
-    parsed from 20190301 dump.
-
-*   `20190301.la` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for la,
-    parsed from 20190301 dump.
-
-*   `20190301.lad` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lad,
-    parsed from 20190301 dump.
-
-*   `20190301.lb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lb,
-    parsed from 20190301 dump.
-
-*   `20190301.lbe` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lbe,
-    parsed from 20190301 dump.
-
-*   `20190301.lez` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lez,
-    parsed from 20190301 dump.
-
-*   `20190301.lfn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lfn,
-    parsed from 20190301 dump.
-
-*   `20190301.lg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lg,
-    parsed from 20190301 dump.
-
-*   `20190301.li` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for li,
-    parsed from 20190301 dump.
-
-*   `20190301.lij` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lij,
-    parsed from 20190301 dump.
-
-*   `20190301.lmo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lmo,
-    parsed from 20190301 dump.
-
-*   `20190301.ln` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ln,
-    parsed from 20190301 dump.
-
-*   `20190301.lo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lo,
-    parsed from 20190301 dump.
-
-*   `20190301.lrc` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lrc,
-    parsed from 20190301 dump.
-
-*   `20190301.lt` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lt,
-    parsed from 20190301 dump.
-
-*   `20190301.ltg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ltg,
-    parsed from 20190301 dump.
-
-*   `20190301.lv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for lv,
-    parsed from 20190301 dump.
-
-*   `20190301.mai` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mai,
-    parsed from 20190301 dump.
-
-*   `20190301.map-bms` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    map-bms, parsed from 20190301 dump.
-
-*   `20190301.mdf` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mdf,
-    parsed from 20190301 dump.
-
-*   `20190301.mg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mg,
-    parsed from 20190301 dump.
-
-*   `20190301.mh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mh,
-    parsed from 20190301 dump.
-
-*   `20190301.mhr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mhr,
-    parsed from 20190301 dump.
-
-*   `20190301.mi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mi,
-    parsed from 20190301 dump.
-
-*   `20190301.min` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for min,
-    parsed from 20190301 dump.
-
-*   `20190301.mk` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mk,
-    parsed from 20190301 dump.
-
-*   `20190301.ml` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ml,
-    parsed from 20190301 dump.
-
-*   `20190301.mn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mn,
-    parsed from 20190301 dump.
-
-*   `20190301.mr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mr,
-    parsed from 20190301 dump.
-
-*   `20190301.mrj` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mrj,
-    parsed from 20190301 dump.
-
-*   `20190301.ms` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ms,
-    parsed from 20190301 dump.
-
-*   `20190301.mt` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mt,
-    parsed from 20190301 dump.
-
-*   `20190301.mus` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mus,
-    parsed from 20190301 dump.
-
-*   `20190301.mwl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mwl,
-    parsed from 20190301 dump.
-
-*   `20190301.my` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for my,
-    parsed from 20190301 dump.
-
-*   `20190301.myv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for myv,
-    parsed from 20190301 dump.
-
-*   `20190301.mzn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for mzn,
-    parsed from 20190301 dump.
-
-*   `20190301.na` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for na,
-    parsed from 20190301 dump.
-
-*   `20190301.nah` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nah,
-    parsed from 20190301 dump.
-
-*   `20190301.nap` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nap,
-    parsed from 20190301 dump.
-
-*   `20190301.nds` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nds,
-    parsed from 20190301 dump.
-
-*   `20190301.nds-nl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    nds-nl, parsed from 20190301 dump.
-
-*   `20190301.ne` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ne,
-    parsed from 20190301 dump.
-
-*   `20190301.new` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for new,
-    parsed from 20190301 dump.
-
-*   `20190301.ng` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ng,
-    parsed from 20190301 dump.
-
-*   `20190301.nl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nl,
-    parsed from 20190301 dump.
-
-*   `20190301.nn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nn,
-    parsed from 20190301 dump.
-
-*   `20190301.no` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for no,
-    parsed from 20190301 dump.
-
-*   `20190301.nov` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nov,
-    parsed from 20190301 dump.
-
-*   `20190301.nrm` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nrm,
-    parsed from 20190301 dump.
-
-*   `20190301.nso` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nso,
-    parsed from 20190301 dump.
-
-*   `20190301.nv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for nv,
-    parsed from 20190301 dump.
-
-*   `20190301.ny` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ny,
-    parsed from 20190301 dump.
-
-*   `20190301.oc` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for oc,
-    parsed from 20190301 dump.
-
-*   `20190301.olo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for olo,
-    parsed from 20190301 dump.
-
-*   `20190301.om` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for om,
-    parsed from 20190301 dump.
-
-*   `20190301.or` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for or,
-    parsed from 20190301 dump.
-
-*   `20190301.os` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for os,
-    parsed from 20190301 dump.
-
-*   `20190301.pa` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pa,
-    parsed from 20190301 dump.
-
-*   `20190301.pag` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pag,
-    parsed from 20190301 dump.
-
-*   `20190301.pam` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pam,
-    parsed from 20190301 dump.
-
-*   `20190301.pap` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pap,
-    parsed from 20190301 dump.
-
-*   `20190301.pcd` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pcd,
-    parsed from 20190301 dump.
-
-*   `20190301.pdc` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pdc,
-    parsed from 20190301 dump.
-
-*   `20190301.pfl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pfl,
-    parsed from 20190301 dump.
-
-*   `20190301.pi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pi,
-    parsed from 20190301 dump.
-
-*   `20190301.pih` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pih,
-    parsed from 20190301 dump.
-
-*   `20190301.pl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pl,
-    parsed from 20190301 dump.
-
-*   `20190301.pms` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pms,
-    parsed from 20190301 dump.
-
-*   `20190301.pnb` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pnb,
-    parsed from 20190301 dump.
-
-*   `20190301.pnt` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pnt,
-    parsed from 20190301 dump.
-
-*   `20190301.ps` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ps,
-    parsed from 20190301 dump.
-
-*   `20190301.pt` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for pt,
-    parsed from 20190301 dump.
-
-*   `20190301.qu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for qu,
-    parsed from 20190301 dump.
-
-*   `20190301.rm` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for rm,
-    parsed from 20190301 dump.
-
-*   `20190301.rmy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for rmy,
-    parsed from 20190301 dump.
-
-*   `20190301.rn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for rn,
-    parsed from 20190301 dump.
-
-*   `20190301.ro` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ro,
-    parsed from 20190301 dump.
-
-*   `20190301.roa-rup` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    roa-rup, parsed from 20190301 dump.
-
-*   `20190301.roa-tara` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    roa-tara, parsed from 20190301 dump.
-
-*   `20190301.ru` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ru,
-    parsed from 20190301 dump.
-
-*   `20190301.rue` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for rue,
-    parsed from 20190301 dump.
-
-*   `20190301.rw` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for rw,
-    parsed from 20190301 dump.
-
-*   `20190301.sa` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sa,
-    parsed from 20190301 dump.
-
-*   `20190301.sah` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sah,
-    parsed from 20190301 dump.
-
-*   `20190301.sat` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sat,
-    parsed from 20190301 dump.
-
-*   `20190301.sc` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sc,
-    parsed from 20190301 dump.
-
-*   `20190301.scn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for scn,
-    parsed from 20190301 dump.
-
-*   `20190301.sco` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sco,
-    parsed from 20190301 dump.
-
-*   `20190301.sd` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sd,
-    parsed from 20190301 dump.
-
-*   `20190301.se` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for se,
-    parsed from 20190301 dump.
-
-*   `20190301.sg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sg,
-    parsed from 20190301 dump.
-
-*   `20190301.sh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sh,
-    parsed from 20190301 dump.
-
-*   `20190301.si` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for si,
-    parsed from 20190301 dump.
-
-*   `20190301.simple` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    simple, parsed from 20190301 dump.
-
-*   `20190301.sk` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sk,
-    parsed from 20190301 dump.
-
-*   `20190301.sl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sl,
-    parsed from 20190301 dump.
-
-*   `20190301.sm` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sm,
-    parsed from 20190301 dump.
-
-*   `20190301.sn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sn,
-    parsed from 20190301 dump.
-
-*   `20190301.so` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for so,
-    parsed from 20190301 dump.
-
-*   `20190301.sq` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sq,
-    parsed from 20190301 dump.
-
-*   `20190301.sr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sr,
-    parsed from 20190301 dump.
-
-*   `20190301.srn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for srn,
-    parsed from 20190301 dump.
-
-*   `20190301.ss` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ss,
-    parsed from 20190301 dump.
-
-*   `20190301.st` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for st,
-    parsed from 20190301 dump.
-
-*   `20190301.stq` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for stq,
-    parsed from 20190301 dump.
-
-*   `20190301.su` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for su,
-    parsed from 20190301 dump.
-
-*   `20190301.sv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sv,
-    parsed from 20190301 dump.
-
-*   `20190301.sw` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for sw,
-    parsed from 20190301 dump.
-
-*   `20190301.szl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for szl,
-    parsed from 20190301 dump.
-
-*   `20190301.ta` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ta,
-    parsed from 20190301 dump.
-
-*   `20190301.tcy` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tcy,
-    parsed from 20190301 dump.
-
-*   `20190301.te` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for te,
-    parsed from 20190301 dump.
-
-*   `20190301.tet` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tet,
-    parsed from 20190301 dump.
-
-*   `20190301.tg` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tg,
-    parsed from 20190301 dump.
-
-*   `20190301.th` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for th,
-    parsed from 20190301 dump.
-
-*   `20190301.ti` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ti,
-    parsed from 20190301 dump.
-
-*   `20190301.tk` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tk,
-    parsed from 20190301 dump.
-
-*   `20190301.tl` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tl,
-    parsed from 20190301 dump.
-
-*   `20190301.tn` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tn,
-    parsed from 20190301 dump.
-
-*   `20190301.to` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for to,
-    parsed from 20190301 dump.
-
-*   `20190301.tpi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tpi,
-    parsed from 20190301 dump.
-
-*   `20190301.tr` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tr,
-    parsed from 20190301 dump.
-
-*   `20190301.ts` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ts,
-    parsed from 20190301 dump.
-
-*   `20190301.tt` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tt,
-    parsed from 20190301 dump.
-
-*   `20190301.tum` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tum,
-    parsed from 20190301 dump.
-
-*   `20190301.tw` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tw,
-    parsed from 20190301 dump.
-
-*   `20190301.ty` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ty,
-    parsed from 20190301 dump.
-
-*   `20190301.tyv` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for tyv,
-    parsed from 20190301 dump.
-
-*   `20190301.udm` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for udm,
-    parsed from 20190301 dump.
-
-*   `20190301.ug` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ug,
-    parsed from 20190301 dump.
-
-*   `20190301.uk` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for uk,
-    parsed from 20190301 dump.
-
-*   `20190301.ur` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ur,
-    parsed from 20190301 dump.
-
-*   `20190301.uz` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for uz,
-    parsed from 20190301 dump.
-
-*   `20190301.ve` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for ve,
-    parsed from 20190301 dump.
-
-*   `20190301.vec` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for vec,
-    parsed from 20190301 dump.
-
-*   `20190301.vep` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for vep,
-    parsed from 20190301 dump.
-
-*   `20190301.vi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for vi,
-    parsed from 20190301 dump.
-
-*   `20190301.vls` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for vls,
-    parsed from 20190301 dump.
-
-*   `20190301.vo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for vo,
-    parsed from 20190301 dump.
-
-*   `20190301.wa` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for wa,
-    parsed from 20190301 dump.
-
-*   `20190301.war` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for war,
-    parsed from 20190301 dump.
-
-*   `20190301.wo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for wo,
-    parsed from 20190301 dump.
-
-*   `20190301.wuu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for wuu,
-    parsed from 20190301 dump.
-
-*   `20190301.xal` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for xal,
-    parsed from 20190301 dump.
-
-*   `20190301.xh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for xh,
-    parsed from 20190301 dump.
-
-*   `20190301.xmf` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for xmf,
-    parsed from 20190301 dump.
-
-*   `20190301.yi` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for yi,
-    parsed from 20190301 dump.
-
-*   `20190301.yo` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for yo,
-    parsed from 20190301 dump.
-
-*   `20190301.za` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for za,
-    parsed from 20190301 dump.
-
-*   `20190301.zea` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for zea,
-    parsed from 20190301 dump.
-
-*   `20190301.zh` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for zh,
-    parsed from 20190301 dump.
-
-*   `20190301.zh-classical` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset
-    for zh-classical, parsed from 20190301 dump.
-
-*   `20190301.zh-min-nan` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset
-    for zh-min-nan, parsed from 20190301 dump.
-
-*   `20190301.zh-yue` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for
-    zh-yue, parsed from 20190301 dump.
-
-*   `20190301.zu` (`v1.0.0`) (`Size: Unknown size`): Wikipedia dataset for zu,
-    parsed from 20190301 dump.
-
-## `wikipedia/20190301.aa`
-Wikipedia dataset for aa, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1
-TRAIN | 1
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ab`
-Wikipedia dataset for ab, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,053
-TRAIN | 4,053
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ace`
-Wikipedia dataset for ace, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 9,264
-TRAIN | 9,264
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ady`
-Wikipedia dataset for ady, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 547
-TRAIN | 547
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.af`
-Wikipedia dataset for af, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 92,366
-TRAIN | 92,366
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ak`
-Wikipedia dataset for ak, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 628
-TRAIN | 628
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.als`
-Wikipedia dataset for als, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 27,705
-TRAIN | 27,705
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.am`
-Wikipedia dataset for am, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 13,231
-TRAIN | 13,231
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.an`
-Wikipedia dataset for an, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 47,536
-TRAIN | 47,536
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ang`
-Wikipedia dataset for ang, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,135
-TRAIN | 3,135
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ar`
-Wikipedia dataset for ar, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,272,226
-TRAIN | 1,272,226
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.arc`
-Wikipedia dataset for arc, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,272
-TRAIN | 3,272
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.arz`
-Wikipedia dataset for arz, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 28,136
-TRAIN | 28,136
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.as`
-Wikipedia dataset for as, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,435
-TRAIN | 5,435
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ast`
-Wikipedia dataset for ast, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 106,275
-TRAIN | 106,275
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.atj`
-Wikipedia dataset for atj, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,005
-TRAIN | 1,005
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.av`
-Wikipedia dataset for av, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,918
-TRAIN | 2,918
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ay`
-Wikipedia dataset for ay, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,773
-TRAIN | 4,773
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.az`
-Wikipedia dataset for az, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 161,901
-TRAIN | 161,901
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.azb`
-Wikipedia dataset for azb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 159,459
-TRAIN | 159,459
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ba`
-Wikipedia dataset for ba, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 51,934
-TRAIN | 51,934
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bar`
-Wikipedia dataset for bar, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 42,237
-TRAIN | 42,237
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bat-smg`
-Wikipedia dataset for bat-smg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,344
-TRAIN | 19,344
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bcl`
-Wikipedia dataset for bcl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 9,025
-TRAIN | 9,025
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.be`
-Wikipedia dataset for be, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 164,589
-TRAIN | 164,589
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.be-x-old`
-Wikipedia dataset for be-x-old, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 93,527
-TRAIN | 93,527
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bg`
-Wikipedia dataset for bg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 362,723
-TRAIN | 362,723
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bh`
-Wikipedia dataset for bh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,725
-TRAIN | 6,725
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bi`
-Wikipedia dataset for bi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,352
-TRAIN | 1,352
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bjn`
-Wikipedia dataset for bjn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,476
-TRAIN | 2,476
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bm`
-Wikipedia dataset for bm, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 729
-TRAIN | 729
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bn`
-Wikipedia dataset for bn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 87,566
-TRAIN | 87,566
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bo`
-Wikipedia dataset for bo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 11,301
-TRAIN | 11,301
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bpy`
-Wikipedia dataset for bpy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 25,360
-TRAIN | 25,360
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.br`
-Wikipedia dataset for br, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 76,055
-TRAIN | 76,055
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bs`
-Wikipedia dataset for bs, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 181,802
-TRAIN | 181,802
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bug`
-Wikipedia dataset for bug, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14,378
-TRAIN | 14,378
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.bxr`
-Wikipedia dataset for bxr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,594
-TRAIN | 2,594
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ca`
-Wikipedia dataset for ca, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 650,189
-TRAIN | 650,189
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cbk-zam`
-Wikipedia dataset for cbk-zam, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,289
-TRAIN | 3,289
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cdo`
-Wikipedia dataset for cdo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 15,422
-TRAIN | 15,422
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ce`
-Wikipedia dataset for ce, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 213,978
-TRAIN | 213,978
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ceb`
-Wikipedia dataset for ceb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,379,484
-TRAIN | 5,379,484
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ch`
-Wikipedia dataset for ch, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 496
-TRAIN | 496
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cho`
-Wikipedia dataset for cho, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14
-TRAIN | 14
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.chr`
-Wikipedia dataset for chr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 947
-TRAIN | 947
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.chy`
-Wikipedia dataset for chy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 773
-TRAIN | 773
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ckb`
-Wikipedia dataset for ckb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 23,099
-TRAIN | 23,099
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.co`
-Wikipedia dataset for co, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,232
-TRAIN | 6,232
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cr`
-Wikipedia dataset for cr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 118
-TRAIN | 118
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.crh`
-Wikipedia dataset for crh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,341
-TRAIN | 6,341
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cs`
-Wikipedia dataset for cs, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 539,754
-TRAIN | 539,754
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.csb`
-Wikipedia dataset for csb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,620
-TRAIN | 5,620
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cu`
-Wikipedia dataset for cu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,463
-TRAIN | 1,463
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cv`
-Wikipedia dataset for cv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 44,865
-TRAIN | 44,865
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.cy`
-Wikipedia dataset for cy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 142,397
-TRAIN | 142,397
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.da`
-Wikipedia dataset for da, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 244,767
-TRAIN | 244,767
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.de`
-Wikipedia dataset for de, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,925,588
-TRAIN | 2,925,588
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.din`
-Wikipedia dataset for din, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 228
-TRAIN | 228
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.diq`
-Wikipedia dataset for diq, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 11,948
-TRAIN | 11,948
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.dsb`
-Wikipedia dataset for dsb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,438
-TRAIN | 3,438
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.dty`
-Wikipedia dataset for dty, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,323
-TRAIN | 3,323
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.dv`
-Wikipedia dataset for dv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,156
-TRAIN | 4,156
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.dz`
-Wikipedia dataset for dz, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 286
-TRAIN | 286
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ee`
-Wikipedia dataset for ee, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 368
-TRAIN | 368
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.el`
-Wikipedia dataset for el, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 224,159
-TRAIN | 224,159
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.eml`
-Wikipedia dataset for eml, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 13,957
-TRAIN | 13,957
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.en`
-Wikipedia dataset for en, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,824,596
-TRAIN | 5,824,596
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.eo`
-Wikipedia dataset for eo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 353,663
-TRAIN | 353,663
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.es`
-Wikipedia dataset for es, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,728,167
-TRAIN | 2,728,167
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.et`
-Wikipedia dataset for et, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 288,641
-TRAIN | 288,641
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.eu`
-Wikipedia dataset for eu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 400,162
-TRAIN | 400,162
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ext`
-Wikipedia dataset for ext, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,278
-TRAIN | 3,278
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fa`
-Wikipedia dataset for fa, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,201,990
-TRAIN | 2,201,990
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ff`
-Wikipedia dataset for ff, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 298
-TRAIN | 298
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fi`
-Wikipedia dataset for fi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 619,207
-TRAIN | 619,207
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fiu-vro`
-Wikipedia dataset for fiu-vro, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,050
-TRAIN | 6,050
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fj`
-Wikipedia dataset for fj, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 507
-TRAIN | 507
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fo`
-Wikipedia dataset for fo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 12,935
-TRAIN | 12,935
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fr`
-Wikipedia dataset for fr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,087,215
-TRAIN | 2,087,215
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.frp`
-Wikipedia dataset for frp, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,262
-TRAIN | 4,262
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.frr`
-Wikipedia dataset for frr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 9,706
-TRAIN | 9,706
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fur`
-Wikipedia dataset for fur, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,508
-TRAIN | 3,508
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.fy`
-Wikipedia dataset for fy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 41,573
-TRAIN | 41,573
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ga`
-Wikipedia dataset for ga, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 56,252
-TRAIN | 56,252
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gag`
-Wikipedia dataset for gag, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,034
-TRAIN | 3,034
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gan`
-Wikipedia dataset for gan, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,503
-TRAIN | 6,503
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gd`
-Wikipedia dataset for gd, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14,891
-TRAIN | 14,891
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gl`
-Wikipedia dataset for gl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 203,961
-TRAIN | 203,961
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.glk`
-Wikipedia dataset for glk, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,432
-TRAIN | 6,432
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gn`
-Wikipedia dataset for gn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,337
-TRAIN | 4,337
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gom`
-Wikipedia dataset for gom, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,259
-TRAIN | 4,259
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gor`
-Wikipedia dataset for gor, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,467
-TRAIN | 3,467
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.got`
-Wikipedia dataset for got, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 715
-TRAIN | 715
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gu`
-Wikipedia dataset for gu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 28,607
-TRAIN | 28,607
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.gv`
-Wikipedia dataset for gv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,996
-TRAIN | 4,996
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ha`
-Wikipedia dataset for ha, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,795
-TRAIN | 3,795
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hak`
-Wikipedia dataset for hak, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 11,445
-TRAIN | 11,445
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.haw`
-Wikipedia dataset for haw, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,935
-TRAIN | 3,935
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.he`
-Wikipedia dataset for he, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 393,436
-TRAIN | 393,436
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hi`
-Wikipedia dataset for hi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 156,142
-TRAIN | 156,142
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hif`
-Wikipedia dataset for hif, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,036
-TRAIN | 10,036
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ho`
-Wikipedia dataset for ho, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3
-TRAIN | 3
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hr`
-Wikipedia dataset for hr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 228,044
-TRAIN | 228,044
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hsb`
-Wikipedia dataset for hsb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14,693
-TRAIN | 14,693
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ht`
-Wikipedia dataset for ht, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 56,093
-TRAIN | 56,093
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hu`
-Wikipedia dataset for hu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 625,614
-TRAIN | 625,614
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.hy`
-Wikipedia dataset for hy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 575,357
-TRAIN | 575,357
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ia`
-Wikipedia dataset for ia, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 18,780
-TRAIN | 18,780
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.id`
-Wikipedia dataset for id, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 947,627
-TRAIN | 947,627
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ie`
-Wikipedia dataset for ie, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,403
-TRAIN | 4,403
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ig`
-Wikipedia dataset for ig, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,710
-TRAIN | 2,710
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ii`
-Wikipedia dataset for ii, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14
-TRAIN | 14
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ik`
-Wikipedia dataset for ik, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 647
-TRAIN | 647
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ilo`
-Wikipedia dataset for ilo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 11,808
-TRAIN | 11,808
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.inh`
-Wikipedia dataset for inh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 932
-TRAIN | 932
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.io`
-Wikipedia dataset for io, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 29,629
-TRAIN | 29,629
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.is`
-Wikipedia dataset for is, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 66,219
-TRAIN | 66,219
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.it`
-Wikipedia dataset for it, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,800,218
-TRAIN | 1,800,218
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.iu`
-Wikipedia dataset for iu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 510
-TRAIN | 510
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ja`
-Wikipedia dataset for ja, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,382,683
-TRAIN | 1,382,683
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.jam`
-Wikipedia dataset for jam, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,692
-TRAIN | 1,692
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.jbo`
-Wikipedia dataset for jbo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,301
-TRAIN | 1,301
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.jv`
-Wikipedia dataset for jv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 72,893
-TRAIN | 72,893
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ka`
-Wikipedia dataset for ka, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 161,290
-TRAIN | 161,290
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kaa`
-Wikipedia dataset for kaa, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,192
-TRAIN | 2,192
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kab`
-Wikipedia dataset for kab, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,415
-TRAIN | 3,415
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kbd`
-Wikipedia dataset for kbd, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,608
-TRAIN | 1,608
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kbp`
-Wikipedia dataset for kbp, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,706
-TRAIN | 1,706
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kg`
-Wikipedia dataset for kg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,240
-TRAIN | 1,240
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ki`
-Wikipedia dataset for ki, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,482
-TRAIN | 1,482
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kj`
-Wikipedia dataset for kj, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5
-TRAIN | 5
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kk`
-Wikipedia dataset for kk, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 266,609
-TRAIN | 266,609
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kl`
-Wikipedia dataset for kl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,713
-TRAIN | 1,713
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.km`
-Wikipedia dataset for km, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,889
-TRAIN | 10,889
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kn`
-Wikipedia dataset for kn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 24,679
-TRAIN | 24,679
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ko`
-Wikipedia dataset for ko, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 980,493
-TRAIN | 980,493
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.koi`
-Wikipedia dataset for koi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,964
-TRAIN | 3,964
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.krc`
-Wikipedia dataset for krc, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,317
-TRAIN | 2,317
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ks`
-Wikipedia dataset for ks, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 399
-TRAIN | 399
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ksh`
-Wikipedia dataset for ksh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,356
-TRAIN | 3,356
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ku`
-Wikipedia dataset for ku, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 30,811
-TRAIN | 30,811
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kv`
-Wikipedia dataset for kv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,733
-TRAIN | 6,733
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kw`
-Wikipedia dataset for kw, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,913
-TRAIN | 3,913
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ky`
-Wikipedia dataset for ky, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 79,311
-TRAIN | 79,311
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.la`
-Wikipedia dataset for la, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 130,161
-TRAIN | 130,161
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lad`
-Wikipedia dataset for lad, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,261
-TRAIN | 5,261
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lb`
-Wikipedia dataset for lb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 61,607
-TRAIN | 61,607
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lbe`
-Wikipedia dataset for lbe, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,545
-TRAIN | 1,545
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lez`
-Wikipedia dataset for lez, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,348
-TRAIN | 4,348
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lfn`
-Wikipedia dataset for lfn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,741
-TRAIN | 3,741
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lg`
-Wikipedia dataset for lg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,359
-TRAIN | 2,359
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.li`
-Wikipedia dataset for li, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14,155
-TRAIN | 14,155
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lij`
-Wikipedia dataset for lij, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,281
-TRAIN | 4,281
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lmo`
-Wikipedia dataset for lmo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 43,911
-TRAIN | 43,911
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ln`
-Wikipedia dataset for ln, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,192
-TRAIN | 3,192
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lo`
-Wikipedia dataset for lo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,074
-TRAIN | 4,074
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lrc`
-Wikipedia dataset for lrc, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,774
-TRAIN | 5,774
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lt`
-Wikipedia dataset for lt, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 217,121
-TRAIN | 217,121
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ltg`
-Wikipedia dataset for ltg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 920
-TRAIN | 920
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.lv`
-Wikipedia dataset for lv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 91,567
-TRAIN | 91,567
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mai`
-Wikipedia dataset for mai, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14,523
-TRAIN | 14,523
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.map-bms`
-Wikipedia dataset for map-bms, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 13,710
-TRAIN | 13,710
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mdf`
-Wikipedia dataset for mdf, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,344
-TRAIN | 1,344
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mg`
-Wikipedia dataset for mg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 126,066
-TRAIN | 126,066
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mh`
-Wikipedia dataset for mh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 8
-TRAIN | 8
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mhr`
-Wikipedia dataset for mhr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 12,204
-TRAIN | 12,204
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mi`
-Wikipedia dataset for mi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,174
-TRAIN | 7,174
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.min`
-Wikipedia dataset for min, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 226,002
-TRAIN | 226,002
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mk`
-Wikipedia dataset for mk, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 138,779
-TRAIN | 138,779
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ml`
-Wikipedia dataset for ml, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 112,979
-TRAIN | 112,979
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mn`
-Wikipedia dataset for mn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 23,195
-TRAIN | 23,195
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mr`
-Wikipedia dataset for mr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 95,825
-TRAIN | 95,825
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mrj`
-Wikipedia dataset for mrj, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,826
-TRAIN | 10,826
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ms`
-Wikipedia dataset for ms, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 357,957
-TRAIN | 357,957
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mt`
-Wikipedia dataset for mt, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,610
-TRAIN | 4,610
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mus`
-Wikipedia dataset for mus, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2
-TRAIN | 2
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mwl`
-Wikipedia dataset for mwl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,279
-TRAIN | 4,279
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.my`
-Wikipedia dataset for my, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 46,348
-TRAIN | 46,348
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.myv`
-Wikipedia dataset for myv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,077
-TRAIN | 6,077
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.mzn`
-Wikipedia dataset for mzn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 18,184
-TRAIN | 18,184
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.na`
-Wikipedia dataset for na, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,316
-TRAIN | 1,316
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nah`
-Wikipedia dataset for nah, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,613
-TRAIN | 10,613
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nap`
-Wikipedia dataset for nap, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 15,167
-TRAIN | 15,167
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nds`
-Wikipedia dataset for nds, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 45,754
-TRAIN | 45,754
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nds-nl`
-Wikipedia dataset for nds-nl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 8,644
-TRAIN | 8,644
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ne`
-Wikipedia dataset for ne, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 33,465
-TRAIN | 33,465
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.new`
-Wikipedia dataset for new, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 72,872
-TRAIN | 72,872
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ng`
-Wikipedia dataset for ng, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 21
-TRAIN | 21
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nl`
-Wikipedia dataset for nl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,409,491
-TRAIN | 2,409,491
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nn`
-Wikipedia dataset for nn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 213,859
-TRAIN | 213,859
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.no`
-Wikipedia dataset for no, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 783,420
-TRAIN | 783,420
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nov`
-Wikipedia dataset for nov, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,780
-TRAIN | 1,780
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nrm`
-Wikipedia dataset for nrm, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,048
-TRAIN | 4,048
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nso`
-Wikipedia dataset for nso, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 8,075
-TRAIN | 8,075
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.nv`
-Wikipedia dataset for nv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,105
-TRAIN | 7,105
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ny`
-Wikipedia dataset for ny, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 566
-TRAIN | 566
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.oc`
-Wikipedia dataset for oc, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 91,840
-TRAIN | 91,840
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.olo`
-Wikipedia dataset for olo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,348
-TRAIN | 3,348
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.om`
-Wikipedia dataset for om, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,054
-TRAIN | 1,054
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.or`
-Wikipedia dataset for or, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 28,368
-TRAIN | 28,368
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.os`
-Wikipedia dataset for os, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 13,490
-TRAIN | 13,490
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pa`
-Wikipedia dataset for pa, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 40,578
-TRAIN | 40,578
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pag`
-Wikipedia dataset for pag, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,042
-TRAIN | 5,042
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pam`
-Wikipedia dataset for pam, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 8,721
-TRAIN | 8,721
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pap`
-Wikipedia dataset for pap, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,126
-TRAIN | 2,126
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pcd`
-Wikipedia dataset for pcd, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,485
-TRAIN | 4,485
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pdc`
-Wikipedia dataset for pdc, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,331
-TRAIN | 2,331
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pfl`
-Wikipedia dataset for pfl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,744
-TRAIN | 3,744
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pi`
-Wikipedia dataset for pi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,057
-TRAIN | 3,057
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pih`
-Wikipedia dataset for pih, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 748
-TRAIN | 748
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pl`
-Wikipedia dataset for pl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,610,189
-TRAIN | 1,610,189
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pms`
-Wikipedia dataset for pms, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 65,551
-TRAIN | 65,551
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pnb`
-Wikipedia dataset for pnb, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 50,764
-TRAIN | 50,764
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pnt`
-Wikipedia dataset for pnt, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 521
-TRAIN | 521
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ps`
-Wikipedia dataset for ps, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,554
-TRAIN | 10,554
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.pt`
-Wikipedia dataset for pt, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,393,069
-TRAIN | 1,393,069
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.qu`
-Wikipedia dataset for qu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 29,495
-TRAIN | 29,495
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.rm`
-Wikipedia dataset for rm, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,710
-TRAIN | 3,710
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.rmy`
-Wikipedia dataset for rmy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 693
-TRAIN | 693
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.rn`
-Wikipedia dataset for rn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 696
-TRAIN | 696
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ro`
-Wikipedia dataset for ro, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 393,012
-TRAIN | 393,012
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.roa-rup`
-Wikipedia dataset for roa-rup, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,245
-TRAIN | 1,245
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.roa-tara`
-Wikipedia dataset for roa-tara, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 9,288
-TRAIN | 9,288
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ru`
-Wikipedia dataset for ru, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 2,449,364
-TRAIN | 2,449,364
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.rue`
-Wikipedia dataset for rue, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,526
-TRAIN | 7,526
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.rw`
-Wikipedia dataset for rw, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,950
-TRAIN | 1,950
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sa`
-Wikipedia dataset for sa, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 21,846
-TRAIN | 21,846
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sah`
-Wikipedia dataset for sah, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 15,504
-TRAIN | 15,504
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sat`
-Wikipedia dataset for sat, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,036
-TRAIN | 1,036
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sc`
-Wikipedia dataset for sc, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,214
-TRAIN | 6,214
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.scn`
-Wikipedia dataset for scn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 31,330
-TRAIN | 31,330
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sco`
-Wikipedia dataset for sco, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 53,525
-TRAIN | 53,525
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sd`
-Wikipedia dataset for sd, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 16,930
-TRAIN | 16,930
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.se`
-Wikipedia dataset for se, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 8,127
-TRAIN | 8,127
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sg`
-Wikipedia dataset for sg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 281
-TRAIN | 281
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sh`
-Wikipedia dataset for sh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,923,606
-TRAIN | 3,923,606
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.si`
-Wikipedia dataset for si, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 25,922
-TRAIN | 25,922
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.simple`
-Wikipedia dataset for simple, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 143,427
-TRAIN | 143,427
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sk`
-Wikipedia dataset for sk, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 244,877
-TRAIN | 244,877
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sl`
-Wikipedia dataset for sl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 191,938
-TRAIN | 191,938
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sm`
-Wikipedia dataset for sm, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 957
-TRAIN | 957
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sn`
-Wikipedia dataset for sn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,656
-TRAIN | 4,656
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.so`
-Wikipedia dataset for so, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,587
-TRAIN | 6,587
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sq`
-Wikipedia dataset for sq, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 102,156
-TRAIN | 102,156
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sr`
-Wikipedia dataset for sr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 3,043,191
-TRAIN | 3,043,191
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.srn`
-Wikipedia dataset for srn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,234
-TRAIN | 1,234
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ss`
-Wikipedia dataset for ss, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 495
-TRAIN | 495
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.st`
-Wikipedia dataset for st, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 605
-TRAIN | 605
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.stq`
-Wikipedia dataset for stq, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 4,477
-TRAIN | 4,477
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.su`
-Wikipedia dataset for su, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 43,393
-TRAIN | 43,393
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sv`
-Wikipedia dataset for sv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 5,950,503
-TRAIN | 5,950,503
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.sw`
-Wikipedia dataset for sw, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 48,434
-TRAIN | 48,434
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.szl`
-Wikipedia dataset for szl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 8,603
-TRAIN | 8,603
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ta`
-Wikipedia dataset for ta, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 154,505
-TRAIN | 154,505
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tcy`
-Wikipedia dataset for tcy, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,267
-TRAIN | 1,267
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.te`
-Wikipedia dataset for te, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 91,857
-TRAIN | 91,857
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tet`
-Wikipedia dataset for tet, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,556
-TRAIN | 1,556
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tg`
-Wikipedia dataset for tg, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 96,808
-TRAIN | 96,808
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.th`
-Wikipedia dataset for th, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 224,144
-TRAIN | 224,144
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ti`
-Wikipedia dataset for ti, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 304
-TRAIN | 304
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tk`
-Wikipedia dataset for tk, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,743
-TRAIN | 6,743
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tl`
-Wikipedia dataset for tl, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 76,905
-TRAIN | 76,905
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tn`
-Wikipedia dataset for tn, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 751
-TRAIN | 751
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.to`
-Wikipedia dataset for to, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,577
-TRAIN | 1,577
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tpi`
-Wikipedia dataset for tpi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,523
-TRAIN | 1,523
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tr`
-Wikipedia dataset for tr, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 548,768
-TRAIN | 548,768
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ts`
-Wikipedia dataset for ts, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 665
-TRAIN | 665
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tt`
-Wikipedia dataset for tt, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 120,720
-TRAIN | 120,720
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tum`
-Wikipedia dataset for tum, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 638
-TRAIN | 638
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tw`
-Wikipedia dataset for tw, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 697
-TRAIN | 697
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ty`
-Wikipedia dataset for ty, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,279
-TRAIN | 1,279
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.tyv`
-Wikipedia dataset for tyv, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,563
-TRAIN | 2,563
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.udm`
-Wikipedia dataset for udm, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,768
-TRAIN | 5,768
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ug`
-Wikipedia dataset for ug, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,908
-TRAIN | 5,908
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.uk`
-Wikipedia dataset for uk, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,131,279
-TRAIN | 1,131,279
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ur`
-Wikipedia dataset for ur, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 330,776
-TRAIN | 330,776
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.uz`
-Wikipedia dataset for uz, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 149,537
-TRAIN | 149,537
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.ve`
-Wikipedia dataset for ve, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 337
-TRAIN | 337
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.vec`
-Wikipedia dataset for vec, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 13,433
-TRAIN | 13,433
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.vep`
-Wikipedia dataset for vep, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,230
-TRAIN | 7,230
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.vi`
-Wikipedia dataset for vi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,377,623
-TRAIN | 1,377,623
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.vls`
-Wikipedia dataset for vls, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,233
-TRAIN | 7,233
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.vo`
-Wikipedia dataset for vo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 122,640
-TRAIN | 122,640
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.wa`
-Wikipedia dataset for wa, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 15,283
-TRAIN | 15,283
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.war`
-Wikipedia dataset for war, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,263,705
-TRAIN | 1,263,705
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.wo`
-Wikipedia dataset for wo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,336
-TRAIN | 1,336
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.wuu`
-Wikipedia dataset for wuu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 19,269
-TRAIN | 19,269
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.xal`
-Wikipedia dataset for xal, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,794
-TRAIN | 2,794
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.xh`
-Wikipedia dataset for xh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,004
-TRAIN | 1,004
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.xmf`
-Wikipedia dataset for xmf, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 14,297
-TRAIN | 14,297
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.yi`
-Wikipedia dataset for yi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 23,430
-TRAIN | 23,430
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.yo`
-Wikipedia dataset for yo, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 31,968
-TRAIN | 31,968
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.za`
-Wikipedia dataset for za, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 2,404
-TRAIN | 2,404
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.zea`
-Wikipedia dataset for zea, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 5,408
-TRAIN | 5,408
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.zh`
-Wikipedia dataset for zh, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | --------:
-ALL   | 1,482,100
-TRAIN | 1,482,100
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.zh-classical`
-Wikipedia dataset for zh-classical, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 10,173
-TRAIN | 10,173
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.zh-min-nan`
-Wikipedia dataset for zh-min-nan, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 233,720
-TRAIN | 233,720
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.zh-yue`
-Wikipedia dataset for zh-yue, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 70,666
-TRAIN | 70,666
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.zu`
-Wikipedia dataset for zu, parsed from 20190301 dump.
-
-Versions:
-
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.4`: None
-*   `0.0.3`: None
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,184
-TRAIN | 1,184
-
-### Features
 ```python
 FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`
+*   **Citation**:
 
-## Citation
 ```
 @ONLINE {wikidump,
     author = "Wikimedia Foundation",
@@ -9631,4 +50,3125 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## wikipedia/20190301.aa (default config)
+
+*   **Config description**: Wikipedia dataset for aa, parsed from 20190301 dump.
+*   **Download size**: `44.09 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1
+
+## wikipedia/20190301.ab
+
+*   **Config description**: Wikipedia dataset for ab, parsed from 20190301 dump.
+*   **Download size**: `1.31 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,053
+
+## wikipedia/20190301.ace
+
+*   **Config description**: Wikipedia dataset for ace, parsed from 20190301
+    dump.
+*   **Download size**: `2.66 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 9,264
+
+## wikipedia/20190301.ady
+
+*   **Config description**: Wikipedia dataset for ady, parsed from 20190301
+    dump.
+*   **Download size**: `349.43 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 547
+
+## wikipedia/20190301.af
+
+*   **Config description**: Wikipedia dataset for af, parsed from 20190301 dump.
+*   **Download size**: `84.13 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 92,366
+
+## wikipedia/20190301.ak
+
+*   **Config description**: Wikipedia dataset for ak, parsed from 20190301 dump.
+*   **Download size**: `377.84 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 628
+
+## wikipedia/20190301.als
+
+*   **Config description**: Wikipedia dataset for als, parsed from 20190301
+    dump.
+*   **Download size**: `46.90 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 27,705
+
+## wikipedia/20190301.am
+
+*   **Config description**: Wikipedia dataset for am, parsed from 20190301 dump.
+*   **Download size**: `6.54 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 13,231
+
+## wikipedia/20190301.an
+
+*   **Config description**: Wikipedia dataset for an, parsed from 20190301 dump.
+*   **Download size**: `31.39 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 47,536
+
+## wikipedia/20190301.ang
+
+*   **Config description**: Wikipedia dataset for ang, parsed from 20190301
+    dump.
+*   **Download size**: `3.77 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,135
+
+## wikipedia/20190301.ar
+
+*   **Config description**: Wikipedia dataset for ar, parsed from 20190301 dump.
+*   **Download size**: `805.82 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,272,226
+
+## wikipedia/20190301.arc
+
+*   **Config description**: Wikipedia dataset for arc, parsed from 20190301
+    dump.
+*   **Download size**: `952.49 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,272
+
+## wikipedia/20190301.arz
+
+*   **Config description**: Wikipedia dataset for arz, parsed from 20190301
+    dump.
+*   **Download size**: `20.32 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 28,136
+
+## wikipedia/20190301.as
+
+*   **Config description**: Wikipedia dataset for as, parsed from 20190301 dump.
+*   **Download size**: `19.06 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,435
+
+## wikipedia/20190301.ast
+
+*   **Config description**: Wikipedia dataset for ast, parsed from 20190301
+    dump.
+*   **Download size**: `216.68 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 106,275
+
+## wikipedia/20190301.atj
+
+*   **Config description**: Wikipedia dataset for atj, parsed from 20190301
+    dump.
+*   **Download size**: `467.05 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,005
+
+## wikipedia/20190301.av
+
+*   **Config description**: Wikipedia dataset for av, parsed from 20190301 dump.
+*   **Download size**: `3.61 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,918
+
+## wikipedia/20190301.ay
+
+*   **Config description**: Wikipedia dataset for ay, parsed from 20190301 dump.
+*   **Download size**: `2.06 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,773
+
+## wikipedia/20190301.az
+
+*   **Config description**: Wikipedia dataset for az, parsed from 20190301 dump.
+*   **Download size**: `163.04 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 161,901
+
+## wikipedia/20190301.azb
+
+*   **Config description**: Wikipedia dataset for azb, parsed from 20190301
+    dump.
+*   **Download size**: `50.59 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 159,459
+
+## wikipedia/20190301.ba
+
+*   **Config description**: Wikipedia dataset for ba, parsed from 20190301 dump.
+*   **Download size**: `55.04 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 51,934
+
+## wikipedia/20190301.bar
+
+*   **Config description**: Wikipedia dataset for bar, parsed from 20190301
+    dump.
+*   **Download size**: `30.14 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 42,237
+
+## wikipedia/20190301.bat-smg
+
+*   **Config description**: Wikipedia dataset for bat-smg, parsed from 20190301
+    dump.
+*   **Download size**: `4.61 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 19,344
+
+## wikipedia/20190301.bcl
+
+*   **Config description**: Wikipedia dataset for bcl, parsed from 20190301
+    dump.
+*   **Download size**: `6.18 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 9,025
+
+## wikipedia/20190301.be
+
+*   **Config description**: Wikipedia dataset for be, parsed from 20190301 dump.
+*   **Download size**: `192.23 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 164,589
+
+## wikipedia/20190301.be-x-old
+
+*   **Config description**: Wikipedia dataset for be-x-old, parsed from 20190301
+    dump.
+*   **Download size**: `74.77 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 93,527
+
+## wikipedia/20190301.bg
+
+*   **Config description**: Wikipedia dataset for bg, parsed from 20190301 dump.
+*   **Download size**: `326.20 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 362,723
+
+## wikipedia/20190301.bh
+
+*   **Config description**: Wikipedia dataset for bh, parsed from 20190301 dump.
+*   **Download size**: `13.28 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,725
+
+## wikipedia/20190301.bi
+
+*   **Config description**: Wikipedia dataset for bi, parsed from 20190301 dump.
+*   **Download size**: `424.88 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,352
+
+## wikipedia/20190301.bjn
+
+*   **Config description**: Wikipedia dataset for bjn, parsed from 20190301
+    dump.
+*   **Download size**: `2.09 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,476
+
+## wikipedia/20190301.bm
+
+*   **Config description**: Wikipedia dataset for bm, parsed from 20190301 dump.
+*   **Download size**: `447.98 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 729
+
+## wikipedia/20190301.bn
+
+*   **Config description**: Wikipedia dataset for bn, parsed from 20190301 dump.
+*   **Download size**: `145.04 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 87,566
+
+## wikipedia/20190301.bo
+
+*   **Config description**: Wikipedia dataset for bo, parsed from 20190301 dump.
+*   **Download size**: `12.41 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 11,301
+
+## wikipedia/20190301.bpy
+
+*   **Config description**: Wikipedia dataset for bpy, parsed from 20190301
+    dump.
+*   **Download size**: `5.05 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 25,360
+
+## wikipedia/20190301.br
+
+*   **Config description**: Wikipedia dataset for br, parsed from 20190301 dump.
+*   **Download size**: `49.14 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 76,055
+
+## wikipedia/20190301.bs
+
+*   **Config description**: Wikipedia dataset for bs, parsed from 20190301 dump.
+*   **Download size**: `103.26 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 181,802
+
+## wikipedia/20190301.bug
+
+*   **Config description**: Wikipedia dataset for bug, parsed from 20190301
+    dump.
+*   **Download size**: `1.76 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14,378
+
+## wikipedia/20190301.bxr
+
+*   **Config description**: Wikipedia dataset for bxr, parsed from 20190301
+    dump.
+*   **Download size**: `3.21 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,594
+
+## wikipedia/20190301.ca
+
+*   **Config description**: Wikipedia dataset for ca, parsed from 20190301 dump.
+*   **Download size**: `849.65 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 650,189
+
+## wikipedia/20190301.cbk-zam
+
+*   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20190301
+    dump.
+*   **Download size**: `1.84 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,289
+
+## wikipedia/20190301.cdo
+
+*   **Config description**: Wikipedia dataset for cdo, parsed from 20190301
+    dump.
+*   **Download size**: `3.22 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 15,422
+
+## wikipedia/20190301.ce
+
+*   **Config description**: Wikipedia dataset for ce, parsed from 20190301 dump.
+*   **Download size**: `43.89 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 213,978
+
+## wikipedia/20190301.ceb
+
+*   **Config description**: Wikipedia dataset for ceb, parsed from 20190301
+    dump.
+*   **Download size**: `1.79 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,379,484
+
+## wikipedia/20190301.ch
+
+*   **Config description**: Wikipedia dataset for ch, parsed from 20190301 dump.
+*   **Download size**: `684.97 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 496
+
+## wikipedia/20190301.cho
+
+*   **Config description**: Wikipedia dataset for cho, parsed from 20190301
+    dump.
+*   **Download size**: `25.99 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14
+
+## wikipedia/20190301.chr
+
+*   **Config description**: Wikipedia dataset for chr, parsed from 20190301
+    dump.
+*   **Download size**: `651.25 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 947
+
+## wikipedia/20190301.chy
+
+*   **Config description**: Wikipedia dataset for chy, parsed from 20190301
+    dump.
+*   **Download size**: `325.90 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 773
+
+## wikipedia/20190301.ckb
+
+*   **Config description**: Wikipedia dataset for ckb, parsed from 20190301
+    dump.
+*   **Download size**: `22.16 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 23,099
+
+## wikipedia/20190301.co
+
+*   **Config description**: Wikipedia dataset for co, parsed from 20190301 dump.
+*   **Download size**: `3.38 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,232
+
+## wikipedia/20190301.cr
+
+*   **Config description**: Wikipedia dataset for cr, parsed from 20190301 dump.
+*   **Download size**: `259.71 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 118
+
+## wikipedia/20190301.crh
+
+*   **Config description**: Wikipedia dataset for crh, parsed from 20190301
+    dump.
+*   **Download size**: `4.01 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,341
+
+## wikipedia/20190301.cs
+
+*   **Config description**: Wikipedia dataset for cs, parsed from 20190301 dump.
+*   **Download size**: `759.21 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 539,754
+
+## wikipedia/20190301.csb
+
+*   **Config description**: Wikipedia dataset for csb, parsed from 20190301
+    dump.
+*   **Download size**: `2.03 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,620
+
+## wikipedia/20190301.cu
+
+*   **Config description**: Wikipedia dataset for cu, parsed from 20190301 dump.
+*   **Download size**: `631.49 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,463
+
+## wikipedia/20190301.cv
+
+*   **Config description**: Wikipedia dataset for cv, parsed from 20190301 dump.
+*   **Download size**: `22.23 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 44,865
+
+## wikipedia/20190301.cy
+
+*   **Config description**: Wikipedia dataset for cy, parsed from 20190301 dump.
+*   **Download size**: `64.37 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 142,397
+
+## wikipedia/20190301.da
+
+*   **Config description**: Wikipedia dataset for da, parsed from 20190301 dump.
+*   **Download size**: `323.53 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 244,767
+
+## wikipedia/20190301.de
+
+*   **Config description**: Wikipedia dataset for de, parsed from 20190301 dump.
+*   **Download size**: `4.97 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,925,588
+
+## wikipedia/20190301.din
+
+*   **Config description**: Wikipedia dataset for din, parsed from 20190301
+    dump.
+*   **Download size**: `457.06 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 228
+
+## wikipedia/20190301.diq
+
+*   **Config description**: Wikipedia dataset for diq, parsed from 20190301
+    dump.
+*   **Download size**: `7.24 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 11,948
+
+## wikipedia/20190301.dsb
+
+*   **Config description**: Wikipedia dataset for dsb, parsed from 20190301
+    dump.
+*   **Download size**: `3.54 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,438
+
+## wikipedia/20190301.dty
+
+*   **Config description**: Wikipedia dataset for dty, parsed from 20190301
+    dump.
+*   **Download size**: `4.95 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,323
+
+## wikipedia/20190301.dv
+
+*   **Config description**: Wikipedia dataset for dv, parsed from 20190301 dump.
+*   **Download size**: `4.24 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,156
+
+## wikipedia/20190301.dz
+
+*   **Config description**: Wikipedia dataset for dz, parsed from 20190301 dump.
+*   **Download size**: `360.01 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 286
+
+## wikipedia/20190301.ee
+
+*   **Config description**: Wikipedia dataset for ee, parsed from 20190301 dump.
+*   **Download size**: `434.14 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 368
+
+## wikipedia/20190301.el
+
+*   **Config description**: Wikipedia dataset for el, parsed from 20190301 dump.
+*   **Download size**: `324.40 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 224,159
+
+## wikipedia/20190301.eml
+
+*   **Config description**: Wikipedia dataset for eml, parsed from 20190301
+    dump.
+*   **Download size**: `7.72 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 13,957
+
+## wikipedia/20190301.en
+
+*   **Config description**: Wikipedia dataset for en, parsed from 20190301 dump.
+*   **Download size**: `15.72 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,824,596
+
+## wikipedia/20190301.eo
+
+*   **Config description**: Wikipedia dataset for eo, parsed from 20190301 dump.
+*   **Download size**: `245.73 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 353,663
+
+## wikipedia/20190301.es
+
+*   **Config description**: Wikipedia dataset for es, parsed from 20190301 dump.
+*   **Download size**: `2.93 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,728,167
+
+## wikipedia/20190301.et
+
+*   **Config description**: Wikipedia dataset for et, parsed from 20190301 dump.
+*   **Download size**: `196.03 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 288,641
+
+## wikipedia/20190301.eu
+
+*   **Config description**: Wikipedia dataset for eu, parsed from 20190301 dump.
+*   **Download size**: `180.35 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 400,162
+
+## wikipedia/20190301.ext
+
+*   **Config description**: Wikipedia dataset for ext, parsed from 20190301
+    dump.
+*   **Download size**: `2.40 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,278
+
+## wikipedia/20190301.fa
+
+*   **Config description**: Wikipedia dataset for fa, parsed from 20190301 dump.
+*   **Download size**: `693.84 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,201,990
+
+## wikipedia/20190301.ff
+
+*   **Config description**: Wikipedia dataset for ff, parsed from 20190301 dump.
+*   **Download size**: `387.75 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 298
+
+## wikipedia/20190301.fi
+
+*   **Config description**: Wikipedia dataset for fi, parsed from 20190301 dump.
+*   **Download size**: `656.44 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 619,207
+
+## wikipedia/20190301.fiu-vro
+
+*   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20190301
+    dump.
+*   **Download size**: `2.00 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,050
+
+## wikipedia/20190301.fj
+
+*   **Config description**: Wikipedia dataset for fj, parsed from 20190301 dump.
+*   **Download size**: `262.98 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 507
+
+## wikipedia/20190301.fo
+
+*   **Config description**: Wikipedia dataset for fo, parsed from 20190301 dump.
+*   **Download size**: `13.67 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 12,935
+
+## wikipedia/20190301.fr
+
+*   **Config description**: Wikipedia dataset for fr, parsed from 20190301 dump.
+*   **Download size**: `4.14 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,087,215
+
+## wikipedia/20190301.frp
+
+*   **Config description**: Wikipedia dataset for frp, parsed from 20190301
+    dump.
+*   **Download size**: `2.03 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,262
+
+## wikipedia/20190301.frr
+
+*   **Config description**: Wikipedia dataset for frr, parsed from 20190301
+    dump.
+*   **Download size**: `7.88 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 9,706
+
+## wikipedia/20190301.fur
+
+*   **Config description**: Wikipedia dataset for fur, parsed from 20190301
+    dump.
+*   **Download size**: `2.29 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,508
+
+## wikipedia/20190301.fy
+
+*   **Config description**: Wikipedia dataset for fy, parsed from 20190301 dump.
+*   **Download size**: `45.52 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 41,573
+
+## wikipedia/20190301.ga
+
+*   **Config description**: Wikipedia dataset for ga, parsed from 20190301 dump.
+*   **Download size**: `24.78 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 56,252
+
+## wikipedia/20190301.gag
+
+*   **Config description**: Wikipedia dataset for gag, parsed from 20190301
+    dump.
+*   **Download size**: `2.04 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,034
+
+## wikipedia/20190301.gan
+
+*   **Config description**: Wikipedia dataset for gan, parsed from 20190301
+    dump.
+*   **Download size**: `3.82 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,503
+
+## wikipedia/20190301.gd
+
+*   **Config description**: Wikipedia dataset for gd, parsed from 20190301 dump.
+*   **Download size**: `8.51 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14,891
+
+## wikipedia/20190301.gl
+
+*   **Config description**: Wikipedia dataset for gl, parsed from 20190301 dump.
+*   **Download size**: `235.07 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 203,961
+
+## wikipedia/20190301.glk
+
+*   **Config description**: Wikipedia dataset for glk, parsed from 20190301
+    dump.
+*   **Download size**: `1.91 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,432
+
+## wikipedia/20190301.gn
+
+*   **Config description**: Wikipedia dataset for gn, parsed from 20190301 dump.
+*   **Download size**: `3.37 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,337
+
+## wikipedia/20190301.gom
+
+*   **Config description**: Wikipedia dataset for gom, parsed from 20190301
+    dump.
+*   **Download size**: `6.07 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,259
+
+## wikipedia/20190301.gor
+
+*   **Config description**: Wikipedia dataset for gor, parsed from 20190301
+    dump.
+*   **Download size**: `1.28 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,467
+
+## wikipedia/20190301.got
+
+*   **Config description**: Wikipedia dataset for got, parsed from 20190301
+    dump.
+*   **Download size**: `604.10 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 715
+
+## wikipedia/20190301.gu
+
+*   **Config description**: Wikipedia dataset for gu, parsed from 20190301 dump.
+*   **Download size**: `27.23 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 28,607
+
+## wikipedia/20190301.gv
+
+*   **Config description**: Wikipedia dataset for gv, parsed from 20190301 dump.
+*   **Download size**: `5.32 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,996
+
+## wikipedia/20190301.ha
+
+*   **Config description**: Wikipedia dataset for ha, parsed from 20190301 dump.
+*   **Download size**: `1.62 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,795
+
+## wikipedia/20190301.hak
+
+*   **Config description**: Wikipedia dataset for hak, parsed from 20190301
+    dump.
+*   **Download size**: `3.28 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 11,445
+
+## wikipedia/20190301.haw
+
+*   **Config description**: Wikipedia dataset for haw, parsed from 20190301
+    dump.
+*   **Download size**: `1017.76 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,935
+
+## wikipedia/20190301.he
+
+*   **Config description**: Wikipedia dataset for he, parsed from 20190301 dump.
+*   **Download size**: `572.30 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 393,436
+
+## wikipedia/20190301.hi
+
+*   **Config description**: Wikipedia dataset for hi, parsed from 20190301 dump.
+*   **Download size**: `137.86 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 156,142
+
+## wikipedia/20190301.hif
+
+*   **Config description**: Wikipedia dataset for hif, parsed from 20190301
+    dump.
+*   **Download size**: `4.57 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 10,036
+
+## wikipedia/20190301.ho
+
+*   **Config description**: Wikipedia dataset for ho, parsed from 20190301 dump.
+*   **Download size**: `18.37 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3
+
+## wikipedia/20190301.hr
+
+*   **Config description**: Wikipedia dataset for hr, parsed from 20190301 dump.
+*   **Download size**: `246.05 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 228,044
+
+## wikipedia/20190301.hsb
+
+*   **Config description**: Wikipedia dataset for hsb, parsed from 20190301
+    dump.
+*   **Download size**: `10.38 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14,693
+
+## wikipedia/20190301.ht
+
+*   **Config description**: Wikipedia dataset for ht, parsed from 20190301 dump.
+*   **Download size**: `10.23 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 56,093
+
+## wikipedia/20190301.hu
+
+*   **Config description**: Wikipedia dataset for hu, parsed from 20190301 dump.
+*   **Download size**: `810.17 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 625,614
+
+## wikipedia/20190301.hy
+
+*   **Config description**: Wikipedia dataset for hy, parsed from 20190301 dump.
+*   **Download size**: `277.53 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 575,357
+
+## wikipedia/20190301.ia
+
+*   **Config description**: Wikipedia dataset for ia, parsed from 20190301 dump.
+*   **Download size**: `7.85 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 18,780
+
+## wikipedia/20190301.id
+
+*   **Config description**: Wikipedia dataset for id, parsed from 20190301 dump.
+*   **Download size**: `523.94 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 947,627
+
+## wikipedia/20190301.ie
+
+*   **Config description**: Wikipedia dataset for ie, parsed from 20190301 dump.
+*   **Download size**: `1.70 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,403
+
+## wikipedia/20190301.ig
+
+*   **Config description**: Wikipedia dataset for ig, parsed from 20190301 dump.
+*   **Download size**: `1.00 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,710
+
+## wikipedia/20190301.ii
+
+*   **Config description**: Wikipedia dataset for ii, parsed from 20190301 dump.
+*   **Download size**: `30.88 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14
+
+## wikipedia/20190301.ik
+
+*   **Config description**: Wikipedia dataset for ik, parsed from 20190301 dump.
+*   **Download size**: `238.12 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 647
+
+## wikipedia/20190301.ilo
+
+*   **Config description**: Wikipedia dataset for ilo, parsed from 20190301
+    dump.
+*   **Download size**: `15.22 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 11,808
+
+## wikipedia/20190301.inh
+
+*   **Config description**: Wikipedia dataset for inh, parsed from 20190301
+    dump.
+*   **Download size**: `1.26 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 932
+
+## wikipedia/20190301.io
+
+*   **Config description**: Wikipedia dataset for io, parsed from 20190301 dump.
+*   **Download size**: `12.56 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 29,629
+
+## wikipedia/20190301.is
+
+*   **Config description**: Wikipedia dataset for is, parsed from 20190301 dump.
+*   **Download size**: `41.86 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 66,219
+
+## wikipedia/20190301.it
+
+*   **Config description**: Wikipedia dataset for it, parsed from 20190301 dump.
+*   **Download size**: `2.66 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,800,218
+
+## wikipedia/20190301.iu
+
+*   **Config description**: Wikipedia dataset for iu, parsed from 20190301 dump.
+*   **Download size**: `284.06 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 510
+
+## wikipedia/20190301.ja
+
+*   **Config description**: Wikipedia dataset for ja, parsed from 20190301 dump.
+*   **Download size**: `2.74 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,382,683
+
+## wikipedia/20190301.jam
+
+*   **Config description**: Wikipedia dataset for jam, parsed from 20190301
+    dump.
+*   **Download size**: `895.29 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,692
+
+## wikipedia/20190301.jbo
+
+*   **Config description**: Wikipedia dataset for jbo, parsed from 20190301
+    dump.
+*   **Download size**: `1.06 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,301
+
+## wikipedia/20190301.jv
+
+*   **Config description**: Wikipedia dataset for jv, parsed from 20190301 dump.
+*   **Download size**: `39.32 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 72,893
+
+## wikipedia/20190301.ka
+
+*   **Config description**: Wikipedia dataset for ka, parsed from 20190301 dump.
+*   **Download size**: `131.78 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 161,290
+
+## wikipedia/20190301.kaa
+
+*   **Config description**: Wikipedia dataset for kaa, parsed from 20190301
+    dump.
+*   **Download size**: `1.35 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,192
+
+## wikipedia/20190301.kab
+
+*   **Config description**: Wikipedia dataset for kab, parsed from 20190301
+    dump.
+*   **Download size**: `3.62 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,415
+
+## wikipedia/20190301.kbd
+
+*   **Config description**: Wikipedia dataset for kbd, parsed from 20190301
+    dump.
+*   **Download size**: `1.65 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,608
+
+## wikipedia/20190301.kbp
+
+*   **Config description**: Wikipedia dataset for kbp, parsed from 20190301
+    dump.
+*   **Download size**: `1.24 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,706
+
+## wikipedia/20190301.kg
+
+*   **Config description**: Wikipedia dataset for kg, parsed from 20190301 dump.
+*   **Download size**: `439.26 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,240
+
+## wikipedia/20190301.ki
+
+*   **Config description**: Wikipedia dataset for ki, parsed from 20190301 dump.
+*   **Download size**: `370.78 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,482
+
+## wikipedia/20190301.kj
+
+*   **Config description**: Wikipedia dataset for kj, parsed from 20190301 dump.
+*   **Download size**: `16.58 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5
+
+## wikipedia/20190301.kk
+
+*   **Config description**: Wikipedia dataset for kk, parsed from 20190301 dump.
+*   **Download size**: `113.46 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 266,609
+
+## wikipedia/20190301.kl
+
+*   **Config description**: Wikipedia dataset for kl, parsed from 20190301 dump.
+*   **Download size**: `862.51 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,713
+
+## wikipedia/20190301.km
+
+*   **Config description**: Wikipedia dataset for km, parsed from 20190301 dump.
+*   **Download size**: `21.92 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 10,889
+
+## wikipedia/20190301.kn
+
+*   **Config description**: Wikipedia dataset for kn, parsed from 20190301 dump.
+*   **Download size**: `69.62 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 24,679
+
+## wikipedia/20190301.ko
+
+*   **Config description**: Wikipedia dataset for ko, parsed from 20190301 dump.
+*   **Download size**: `625.16 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 980,493
+
+## wikipedia/20190301.koi
+
+*   **Config description**: Wikipedia dataset for koi, parsed from 20190301
+    dump.
+*   **Download size**: `2.12 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,964
+
+## wikipedia/20190301.krc
+
+*   **Config description**: Wikipedia dataset for krc, parsed from 20190301
+    dump.
+*   **Download size**: `3.16 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,317
+
+## wikipedia/20190301.ks
+
+*   **Config description**: Wikipedia dataset for ks, parsed from 20190301 dump.
+*   **Download size**: `309.15 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 399
+
+## wikipedia/20190301.ksh
+
+*   **Config description**: Wikipedia dataset for ksh, parsed from 20190301
+    dump.
+*   **Download size**: `3.07 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,356
+
+## wikipedia/20190301.ku
+
+*   **Config description**: Wikipedia dataset for ku, parsed from 20190301 dump.
+*   **Download size**: `17.09 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 30,811
+
+## wikipedia/20190301.kv
+
+*   **Config description**: Wikipedia dataset for kv, parsed from 20190301 dump.
+*   **Download size**: `3.36 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,733
+
+## wikipedia/20190301.kw
+
+*   **Config description**: Wikipedia dataset for kw, parsed from 20190301 dump.
+*   **Download size**: `1.71 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,913
+
+## wikipedia/20190301.ky
+
+*   **Config description**: Wikipedia dataset for ky, parsed from 20190301 dump.
+*   **Download size**: `33.13 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 79,311
+
+## wikipedia/20190301.la
+
+*   **Config description**: Wikipedia dataset for la, parsed from 20190301 dump.
+*   **Download size**: `82.72 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 130,161
+
+## wikipedia/20190301.lad
+
+*   **Config description**: Wikipedia dataset for lad, parsed from 20190301
+    dump.
+*   **Download size**: `3.39 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,261
+
+## wikipedia/20190301.lb
+
+*   **Config description**: Wikipedia dataset for lb, parsed from 20190301 dump.
+*   **Download size**: `45.70 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 61,607
+
+## wikipedia/20190301.lbe
+
+*   **Config description**: Wikipedia dataset for lbe, parsed from 20190301
+    dump.
+*   **Download size**: `1.22 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,545
+
+## wikipedia/20190301.lez
+
+*   **Config description**: Wikipedia dataset for lez, parsed from 20190301
+    dump.
+*   **Download size**: `4.16 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,348
+
+## wikipedia/20190301.lfn
+
+*   **Config description**: Wikipedia dataset for lfn, parsed from 20190301
+    dump.
+*   **Download size**: `2.81 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,741
+
+## wikipedia/20190301.lg
+
+*   **Config description**: Wikipedia dataset for lg, parsed from 20190301 dump.
+*   **Download size**: `1.58 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,359
+
+## wikipedia/20190301.li
+
+*   **Config description**: Wikipedia dataset for li, parsed from 20190301 dump.
+*   **Download size**: `13.86 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14,155
+
+## wikipedia/20190301.lij
+
+*   **Config description**: Wikipedia dataset for lij, parsed from 20190301
+    dump.
+*   **Download size**: `2.73 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,281
+
+## wikipedia/20190301.lmo
+
+*   **Config description**: Wikipedia dataset for lmo, parsed from 20190301
+    dump.
+*   **Download size**: `21.34 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 43,911
+
+## wikipedia/20190301.ln
+
+*   **Config description**: Wikipedia dataset for ln, parsed from 20190301 dump.
+*   **Download size**: `1.83 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,192
+
+## wikipedia/20190301.lo
+
+*   **Config description**: Wikipedia dataset for lo, parsed from 20190301 dump.
+*   **Download size**: `3.44 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,074
+
+## wikipedia/20190301.lrc
+
+*   **Config description**: Wikipedia dataset for lrc, parsed from 20190301
+    dump.
+*   **Download size**: `4.71 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,774
+
+## wikipedia/20190301.lt
+
+*   **Config description**: Wikipedia dataset for lt, parsed from 20190301 dump.
+*   **Download size**: `174.73 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 217,121
+
+## wikipedia/20190301.ltg
+
+*   **Config description**: Wikipedia dataset for ltg, parsed from 20190301
+    dump.
+*   **Download size**: `798.18 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 920
+
+## wikipedia/20190301.lv
+
+*   **Config description**: Wikipedia dataset for lv, parsed from 20190301 dump.
+*   **Download size**: `127.47 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 91,567
+
+## wikipedia/20190301.mai
+
+*   **Config description**: Wikipedia dataset for mai, parsed from 20190301
+    dump.
+*   **Download size**: `10.80 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14,523
+
+## wikipedia/20190301.map-bms
+
+*   **Config description**: Wikipedia dataset for map-bms, parsed from 20190301
+    dump.
+*   **Download size**: `4.49 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 13,710
+
+## wikipedia/20190301.mdf
+
+*   **Config description**: Wikipedia dataset for mdf, parsed from 20190301
+    dump.
+*   **Download size**: `1.04 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,344
+
+## wikipedia/20190301.mg
+
+*   **Config description**: Wikipedia dataset for mg, parsed from 20190301 dump.
+*   **Download size**: `25.64 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 126,066
+
+## wikipedia/20190301.mh
+
+*   **Config description**: Wikipedia dataset for mh, parsed from 20190301 dump.
+*   **Download size**: `27.71 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 8
+
+## wikipedia/20190301.mhr
+
+*   **Config description**: Wikipedia dataset for mhr, parsed from 20190301
+    dump.
+*   **Download size**: `5.69 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 12,204
+
+## wikipedia/20190301.mi
+
+*   **Config description**: Wikipedia dataset for mi, parsed from 20190301 dump.
+*   **Download size**: `1.96 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 7,174
+
+## wikipedia/20190301.min
+
+*   **Config description**: Wikipedia dataset for min, parsed from 20190301
+    dump.
+*   **Download size**: `25.05 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 226,002
+
+## wikipedia/20190301.mk
+
+*   **Config description**: Wikipedia dataset for mk, parsed from 20190301 dump.
+*   **Download size**: `140.69 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 138,779
+
+## wikipedia/20190301.ml
+
+*   **Config description**: Wikipedia dataset for ml, parsed from 20190301 dump.
+*   **Download size**: `117.24 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 112,979
+
+## wikipedia/20190301.mn
+
+*   **Config description**: Wikipedia dataset for mn, parsed from 20190301 dump.
+*   **Download size**: `28.23 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 23,195
+
+## wikipedia/20190301.mr
+
+*   **Config description**: Wikipedia dataset for mr, parsed from 20190301 dump.
+*   **Download size**: `49.58 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 95,825
+
+## wikipedia/20190301.mrj
+
+*   **Config description**: Wikipedia dataset for mrj, parsed from 20190301
+    dump.
+*   **Download size**: `3.01 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 10,826
+
+## wikipedia/20190301.ms
+
+*   **Config description**: Wikipedia dataset for ms, parsed from 20190301 dump.
+*   **Download size**: `205.79 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 357,957
+
+## wikipedia/20190301.mt
+
+*   **Config description**: Wikipedia dataset for mt, parsed from 20190301 dump.
+*   **Download size**: `8.21 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,610
+
+## wikipedia/20190301.mus
+
+*   **Config description**: Wikipedia dataset for mus, parsed from 20190301
+    dump.
+*   **Download size**: `14.20 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2
+
+## wikipedia/20190301.mwl
+
+*   **Config description**: Wikipedia dataset for mwl, parsed from 20190301
+    dump.
+*   **Download size**: `8.95 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,279
+
+## wikipedia/20190301.my
+
+*   **Config description**: Wikipedia dataset for my, parsed from 20190301 dump.
+*   **Download size**: `34.60 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 46,348
+
+## wikipedia/20190301.myv
+
+*   **Config description**: Wikipedia dataset for myv, parsed from 20190301
+    dump.
+*   **Download size**: `7.79 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,077
+
+## wikipedia/20190301.mzn
+
+*   **Config description**: Wikipedia dataset for mzn, parsed from 20190301
+    dump.
+*   **Download size**: `6.47 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 18,184
+
+## wikipedia/20190301.na
+
+*   **Config description**: Wikipedia dataset for na, parsed from 20190301 dump.
+*   **Download size**: `480.57 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,316
+
+## wikipedia/20190301.nah
+
+*   **Config description**: Wikipedia dataset for nah, parsed from 20190301
+    dump.
+*   **Download size**: `4.30 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 10,613
+
+## wikipedia/20190301.nap
+
+*   **Config description**: Wikipedia dataset for nap, parsed from 20190301
+    dump.
+*   **Download size**: `5.55 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 15,167
+
+## wikipedia/20190301.nds
+
+*   **Config description**: Wikipedia dataset for nds, parsed from 20190301
+    dump.
+*   **Download size**: `33.28 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 45,754
+
+## wikipedia/20190301.nds-nl
+
+*   **Config description**: Wikipedia dataset for nds-nl, parsed from 20190301
+    dump.
+*   **Download size**: `6.67 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 8,644
+
+## wikipedia/20190301.ne
+
+*   **Config description**: Wikipedia dataset for ne, parsed from 20190301 dump.
+*   **Download size**: `29.26 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 33,465
+
+## wikipedia/20190301.new
+
+*   **Config description**: Wikipedia dataset for new, parsed from 20190301
+    dump.
+*   **Download size**: `16.91 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 72,872
+
+## wikipedia/20190301.ng
+
+*   **Config description**: Wikipedia dataset for ng, parsed from 20190301 dump.
+*   **Download size**: `91.11 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 21
+
+## wikipedia/20190301.nl
+
+*   **Config description**: Wikipedia dataset for nl, parsed from 20190301 dump.
+*   **Download size**: `1.38 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,409,491
+
+## wikipedia/20190301.nn
+
+*   **Config description**: Wikipedia dataset for nn, parsed from 20190301 dump.
+*   **Download size**: `126.01 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 213,859
+
+## wikipedia/20190301.no
+
+*   **Config description**: Wikipedia dataset for no, parsed from 20190301 dump.
+*   **Download size**: `610.74 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 783,420
+
+## wikipedia/20190301.nov
+
+*   **Config description**: Wikipedia dataset for nov, parsed from 20190301
+    dump.
+*   **Download size**: `1.12 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,780
+
+## wikipedia/20190301.nrm
+
+*   **Config description**: Wikipedia dataset for nrm, parsed from 20190301
+    dump.
+*   **Download size**: `1.56 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,048
+
+## wikipedia/20190301.nso
+
+*   **Config description**: Wikipedia dataset for nso, parsed from 20190301
+    dump.
+*   **Download size**: `2.20 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 8,075
+
+## wikipedia/20190301.nv
+
+*   **Config description**: Wikipedia dataset for nv, parsed from 20190301 dump.
+*   **Download size**: `2.52 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 7,105
+
+## wikipedia/20190301.ny
+
+*   **Config description**: Wikipedia dataset for ny, parsed from 20190301 dump.
+*   **Download size**: `1.18 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 566
+
+## wikipedia/20190301.oc
+
+*   **Config description**: Wikipedia dataset for oc, parsed from 20190301 dump.
+*   **Download size**: `70.97 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 91,840
+
+## wikipedia/20190301.olo
+
+*   **Config description**: Wikipedia dataset for olo, parsed from 20190301
+    dump.
+*   **Download size**: `1.55 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,348
+
+## wikipedia/20190301.om
+
+*   **Config description**: Wikipedia dataset for om, parsed from 20190301 dump.
+*   **Download size**: `1.06 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,054
+
+## wikipedia/20190301.or
+
+*   **Config description**: Wikipedia dataset for or, parsed from 20190301 dump.
+*   **Download size**: `24.90 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 28,368
+
+## wikipedia/20190301.os
+
+*   **Config description**: Wikipedia dataset for os, parsed from 20190301 dump.
+*   **Download size**: `7.31 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 13,490
+
+## wikipedia/20190301.pa
+
+*   **Config description**: Wikipedia dataset for pa, parsed from 20190301 dump.
+*   **Download size**: `40.39 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 40,578
+
+## wikipedia/20190301.pag
+
+*   **Config description**: Wikipedia dataset for pag, parsed from 20190301
+    dump.
+*   **Download size**: `1.29 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,042
+
+## wikipedia/20190301.pam
+
+*   **Config description**: Wikipedia dataset for pam, parsed from 20190301
+    dump.
+*   **Download size**: `8.17 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 8,721
+
+## wikipedia/20190301.pap
+
+*   **Config description**: Wikipedia dataset for pap, parsed from 20190301
+    dump.
+*   **Download size**: `1.33 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,126
+
+## wikipedia/20190301.pcd
+
+*   **Config description**: Wikipedia dataset for pcd, parsed from 20190301
+    dump.
+*   **Download size**: `4.14 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,485
+
+## wikipedia/20190301.pdc
+
+*   **Config description**: Wikipedia dataset for pdc, parsed from 20190301
+    dump.
+*   **Download size**: `1.10 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,331
+
+## wikipedia/20190301.pfl
+
+*   **Config description**: Wikipedia dataset for pfl, parsed from 20190301
+    dump.
+*   **Download size**: `3.22 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,744
+
+## wikipedia/20190301.pi
+
+*   **Config description**: Wikipedia dataset for pi, parsed from 20190301 dump.
+*   **Download size**: `586.77 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,057
+
+## wikipedia/20190301.pih
+
+*   **Config description**: Wikipedia dataset for pih, parsed from 20190301
+    dump.
+*   **Download size**: `654.11 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 748
+
+## wikipedia/20190301.pl
+
+*   **Config description**: Wikipedia dataset for pl, parsed from 20190301 dump.
+*   **Download size**: `1.76 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,610,189
+
+## wikipedia/20190301.pms
+
+*   **Config description**: Wikipedia dataset for pms, parsed from 20190301
+    dump.
+*   **Download size**: `13.42 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 65,551
+
+## wikipedia/20190301.pnb
+
+*   **Config description**: Wikipedia dataset for pnb, parsed from 20190301
+    dump.
+*   **Download size**: `24.31 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 50,764
+
+## wikipedia/20190301.pnt
+
+*   **Config description**: Wikipedia dataset for pnt, parsed from 20190301
+    dump.
+*   **Download size**: `533.84 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 521
+
+## wikipedia/20190301.ps
+
+*   **Config description**: Wikipedia dataset for ps, parsed from 20190301 dump.
+*   **Download size**: `14.09 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 10,554
+
+## wikipedia/20190301.pt
+
+*   **Config description**: Wikipedia dataset for pt, parsed from 20190301 dump.
+*   **Download size**: `1.58 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,393,069
+
+## wikipedia/20190301.qu
+
+*   **Config description**: Wikipedia dataset for qu, parsed from 20190301 dump.
+*   **Download size**: `11.42 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 29,495
+
+## wikipedia/20190301.rm
+
+*   **Config description**: Wikipedia dataset for rm, parsed from 20190301 dump.
+*   **Download size**: `5.85 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 3,710
+
+## wikipedia/20190301.rmy
+
+*   **Config description**: Wikipedia dataset for rmy, parsed from 20190301
+    dump.
+*   **Download size**: `509.61 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 693
+
+## wikipedia/20190301.rn
+
+*   **Config description**: Wikipedia dataset for rn, parsed from 20190301 dump.
+*   **Download size**: `779.25 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 696
+
+## wikipedia/20190301.ro
+
+*   **Config description**: Wikipedia dataset for ro, parsed from 20190301 dump.
+*   **Download size**: `449.49 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 393,012
+
+## wikipedia/20190301.roa-rup
+
+*   **Config description**: Wikipedia dataset for roa-rup, parsed from 20190301
+    dump.
+*   **Download size**: `931.23 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,245
+
+## wikipedia/20190301.roa-tara
+
+*   **Config description**: Wikipedia dataset for roa-tara, parsed from 20190301
+    dump.
+*   **Download size**: `5.98 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 9,288
+
+## wikipedia/20190301.ru
+
+*   **Config description**: Wikipedia dataset for ru, parsed from 20190301 dump.
+*   **Download size**: `3.51 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 2,449,364
+
+## wikipedia/20190301.rue
+
+*   **Config description**: Wikipedia dataset for rue, parsed from 20190301
+    dump.
+*   **Download size**: `4.11 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 7,526
+
+## wikipedia/20190301.rw
+
+*   **Config description**: Wikipedia dataset for rw, parsed from 20190301 dump.
+*   **Download size**: `904.81 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,950
+
+## wikipedia/20190301.sa
+
+*   **Config description**: Wikipedia dataset for sa, parsed from 20190301 dump.
+*   **Download size**: `14.29 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 21,846
+
+## wikipedia/20190301.sah
+
+*   **Config description**: Wikipedia dataset for sah, parsed from 20190301
+    dump.
+*   **Download size**: `11.88 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 15,504
+
+## wikipedia/20190301.sat
+
+*   **Config description**: Wikipedia dataset for sat, parsed from 20190301
+    dump.
+*   **Download size**: `2.36 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,036
+
+## wikipedia/20190301.sc
+
+*   **Config description**: Wikipedia dataset for sc, parsed from 20190301 dump.
+*   **Download size**: `4.39 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,214
+
+## wikipedia/20190301.scn
+
+*   **Config description**: Wikipedia dataset for scn, parsed from 20190301
+    dump.
+*   **Download size**: `11.83 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 31,330
+
+## wikipedia/20190301.sco
+
+*   **Config description**: Wikipedia dataset for sco, parsed from 20190301
+    dump.
+*   **Download size**: `57.80 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 53,525
+
+## wikipedia/20190301.sd
+
+*   **Config description**: Wikipedia dataset for sd, parsed from 20190301 dump.
+*   **Download size**: `12.62 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 16,930
+
+## wikipedia/20190301.se
+
+*   **Config description**: Wikipedia dataset for se, parsed from 20190301 dump.
+*   **Download size**: `3.30 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 8,127
+
+## wikipedia/20190301.sg
+
+*   **Config description**: Wikipedia dataset for sg, parsed from 20190301 dump.
+*   **Download size**: `286.02 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 281
+
+## wikipedia/20190301.sh
+
+*   **Config description**: Wikipedia dataset for sh, parsed from 20190301 dump.
+*   **Download size**: `406.72 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 3,923,606
+
+## wikipedia/20190301.si
+
+*   **Config description**: Wikipedia dataset for si, parsed from 20190301 dump.
+*   **Download size**: `36.84 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 25,922
+
+## wikipedia/20190301.simple
+
+*   **Config description**: Wikipedia dataset for simple, parsed from 20190301
+    dump.
+*   **Download size**: `156.11 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 143,427
+
+## wikipedia/20190301.sk
+
+*   **Config description**: Wikipedia dataset for sk, parsed from 20190301 dump.
+*   **Download size**: `254.37 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 244,877
+
+## wikipedia/20190301.sl
+
+*   **Config description**: Wikipedia dataset for sl, parsed from 20190301 dump.
+*   **Download size**: `201.41 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 191,938
+
+## wikipedia/20190301.sm
+
+*   **Config description**: Wikipedia dataset for sm, parsed from 20190301 dump.
+*   **Download size**: `678.46 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 957
+
+## wikipedia/20190301.sn
+
+*   **Config description**: Wikipedia dataset for sn, parsed from 20190301 dump.
+*   **Download size**: `2.02 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,656
+
+## wikipedia/20190301.so
+
+*   **Config description**: Wikipedia dataset for so, parsed from 20190301 dump.
+*   **Download size**: `8.17 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,587
+
+## wikipedia/20190301.sq
+
+*   **Config description**: Wikipedia dataset for sq, parsed from 20190301 dump.
+*   **Download size**: `77.55 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 102,156
+
+## wikipedia/20190301.sr
+
+*   **Config description**: Wikipedia dataset for sr, parsed from 20190301 dump.
+*   **Download size**: `725.30 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 3,043,191
+
+## wikipedia/20190301.srn
+
+*   **Config description**: Wikipedia dataset for srn, parsed from 20190301
+    dump.
+*   **Download size**: `634.21 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,234
+
+## wikipedia/20190301.ss
+
+*   **Config description**: Wikipedia dataset for ss, parsed from 20190301 dump.
+*   **Download size**: `737.58 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 495
+
+## wikipedia/20190301.st
+
+*   **Config description**: Wikipedia dataset for st, parsed from 20190301 dump.
+*   **Download size**: `482.27 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 605
+
+## wikipedia/20190301.stq
+
+*   **Config description**: Wikipedia dataset for stq, parsed from 20190301
+    dump.
+*   **Download size**: `3.26 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 4,477
+
+## wikipedia/20190301.su
+
+*   **Config description**: Wikipedia dataset for su, parsed from 20190301 dump.
+*   **Download size**: `20.52 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 43,393
+
+## wikipedia/20190301.sv
+
+*   **Config description**: Wikipedia dataset for sv, parsed from 20190301 dump.
+*   **Download size**: `1.64 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 5,950,503
+
+## wikipedia/20190301.sw
+
+*   **Config description**: Wikipedia dataset for sw, parsed from 20190301 dump.
+*   **Download size**: `27.60 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 48,434
+
+## wikipedia/20190301.szl
+
+*   **Config description**: Wikipedia dataset for szl, parsed from 20190301
+    dump.
+*   **Download size**: `4.06 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 8,603
+
+## wikipedia/20190301.ta
+
+*   **Config description**: Wikipedia dataset for ta, parsed from 20190301 dump.
+*   **Download size**: `141.07 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 154,505
+
+## wikipedia/20190301.tcy
+
+*   **Config description**: Wikipedia dataset for tcy, parsed from 20190301
+    dump.
+*   **Download size**: `2.33 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,267
+
+## wikipedia/20190301.te
+
+*   **Config description**: Wikipedia dataset for te, parsed from 20190301 dump.
+*   **Download size**: `113.16 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 91,857
+
+## wikipedia/20190301.tet
+
+*   **Config description**: Wikipedia dataset for tet, parsed from 20190301
+    dump.
+*   **Download size**: `1.06 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,556
+
+## wikipedia/20190301.tg
+
+*   **Config description**: Wikipedia dataset for tg, parsed from 20190301 dump.
+*   **Download size**: `36.95 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 96,808
+
+## wikipedia/20190301.th
+
+*   **Config description**: Wikipedia dataset for th, parsed from 20190301 dump.
+*   **Download size**: `254.00 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 224,144
+
+## wikipedia/20190301.ti
+
+*   **Config description**: Wikipedia dataset for ti, parsed from 20190301 dump.
+*   **Download size**: `309.72 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 304
+
+## wikipedia/20190301.tk
+
+*   **Config description**: Wikipedia dataset for tk, parsed from 20190301 dump.
+*   **Download size**: `4.50 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 6,743
+
+## wikipedia/20190301.tl
+
+*   **Config description**: Wikipedia dataset for tl, parsed from 20190301 dump.
+*   **Download size**: `50.85 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 76,905
+
+## wikipedia/20190301.tn
+
+*   **Config description**: Wikipedia dataset for tn, parsed from 20190301 dump.
+*   **Download size**: `1.21 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 751
+
+## wikipedia/20190301.to
+
+*   **Config description**: Wikipedia dataset for to, parsed from 20190301 dump.
+*   **Download size**: `775.10 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,577
+
+## wikipedia/20190301.tpi
+
+*   **Config description**: Wikipedia dataset for tpi, parsed from 20190301
+    dump.
+*   **Download size**: `1.39 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,523
+
+## wikipedia/20190301.tr
+
+*   **Config description**: Wikipedia dataset for tr, parsed from 20190301 dump.
+*   **Download size**: `497.19 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 548,768
+
+## wikipedia/20190301.ts
+
+*   **Config description**: Wikipedia dataset for ts, parsed from 20190301 dump.
+*   **Download size**: `1.39 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 665
+
+## wikipedia/20190301.tt
+
+*   **Config description**: Wikipedia dataset for tt, parsed from 20190301 dump.
+*   **Download size**: `53.23 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 120,720
+
+## wikipedia/20190301.tum
+
+*   **Config description**: Wikipedia dataset for tum, parsed from 20190301
+    dump.
+*   **Download size**: `309.58 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 638
+
+## wikipedia/20190301.tw
+
+*   **Config description**: Wikipedia dataset for tw, parsed from 20190301 dump.
+*   **Download size**: `345.96 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 697
+
+## wikipedia/20190301.ty
+
+*   **Config description**: Wikipedia dataset for ty, parsed from 20190301 dump.
+*   **Download size**: `485.56 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,279
+
+## wikipedia/20190301.tyv
+
+*   **Config description**: Wikipedia dataset for tyv, parsed from 20190301
+    dump.
+*   **Download size**: `2.60 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,563
+
+## wikipedia/20190301.udm
+
+*   **Config description**: Wikipedia dataset for udm, parsed from 20190301
+    dump.
+*   **Download size**: `2.94 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,768
+
+## wikipedia/20190301.ug
+
+*   **Config description**: Wikipedia dataset for ug, parsed from 20190301 dump.
+*   **Download size**: `5.64 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,908
+
+## wikipedia/20190301.uk
+
+*   **Config description**: Wikipedia dataset for uk, parsed from 20190301 dump.
+*   **Download size**: `1.28 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,131,279
+
+## wikipedia/20190301.ur
+
+*   **Config description**: Wikipedia dataset for ur, parsed from 20190301 dump.
+*   **Download size**: `129.57 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 330,776
+
+## wikipedia/20190301.uz
+
+*   **Config description**: Wikipedia dataset for uz, parsed from 20190301 dump.
+*   **Download size**: `60.85 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 149,537
+
+## wikipedia/20190301.ve
+
+*   **Config description**: Wikipedia dataset for ve, parsed from 20190301 dump.
+*   **Download size**: `257.59 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 337
+
+## wikipedia/20190301.vec
+
+*   **Config description**: Wikipedia dataset for vec, parsed from 20190301
+    dump.
+*   **Download size**: `10.65 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 13,433
+
+## wikipedia/20190301.vep
+
+*   **Config description**: Wikipedia dataset for vep, parsed from 20190301
+    dump.
+*   **Download size**: `4.59 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 7,230
+
+## wikipedia/20190301.vi
+
+*   **Config description**: Wikipedia dataset for vi, parsed from 20190301 dump.
+*   **Download size**: `623.74 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,377,623
+
+## wikipedia/20190301.vls
+
+*   **Config description**: Wikipedia dataset for vls, parsed from 20190301
+    dump.
+*   **Download size**: `6.58 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 7,233
+
+## wikipedia/20190301.vo
+
+*   **Config description**: Wikipedia dataset for vo, parsed from 20190301 dump.
+*   **Download size**: `23.80 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 122,640
+
+## wikipedia/20190301.wa
+
+*   **Config description**: Wikipedia dataset for wa, parsed from 20190301 dump.
+*   **Download size**: `8.75 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 15,283
+
+## wikipedia/20190301.war
+
+*   **Config description**: Wikipedia dataset for war, parsed from 20190301
+    dump.
+*   **Download size**: `256.72 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,263,705
+
+## wikipedia/20190301.wo
+
+*   **Config description**: Wikipedia dataset for wo, parsed from 20190301 dump.
+*   **Download size**: `1.54 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,336
+
+## wikipedia/20190301.wuu
+
+*   **Config description**: Wikipedia dataset for wuu, parsed from 20190301
+    dump.
+*   **Download size**: `9.08 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 19,269
+
+## wikipedia/20190301.xal
+
+*   **Config description**: Wikipedia dataset for xal, parsed from 20190301
+    dump.
+*   **Download size**: `1.64 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,794
+
+## wikipedia/20190301.xh
+
+*   **Config description**: Wikipedia dataset for xh, parsed from 20190301 dump.
+*   **Download size**: `1.26 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,004
+
+## wikipedia/20190301.xmf
+
+*   **Config description**: Wikipedia dataset for xmf, parsed from 20190301
+    dump.
+*   **Download size**: `9.40 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 14,297
+
+## wikipedia/20190301.yi
+
+*   **Config description**: Wikipedia dataset for yi, parsed from 20190301 dump.
+*   **Download size**: `11.56 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 23,430
+
+## wikipedia/20190301.yo
+
+*   **Config description**: Wikipedia dataset for yo, parsed from 20190301 dump.
+*   **Download size**: `11.55 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 31,968
+
+## wikipedia/20190301.za
+
+*   **Config description**: Wikipedia dataset for za, parsed from 20190301 dump.
+*   **Download size**: `735.93 KiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 2,404
+
+## wikipedia/20190301.zea
+
+*   **Config description**: Wikipedia dataset for zea, parsed from 20190301
+    dump.
+*   **Download size**: `2.47 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 5,408
+
+## wikipedia/20190301.zh
+
+*   **Config description**: Wikipedia dataset for zh, parsed from 20190301 dump.
+*   **Download size**: `1.71 GiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | --------:
+'train' | 1,482,100
+
+## wikipedia/20190301.zh-classical
+
+*   **Config description**: Wikipedia dataset for zh-classical, parsed from
+    20190301 dump.
+*   **Download size**: `13.37 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 10,173
+
+## wikipedia/20190301.zh-min-nan
+
+*   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
+    20190301 dump.
+*   **Download size**: `50.30 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 233,720
+
+## wikipedia/20190301.zh-yue
+
+*   **Config description**: Wikipedia dataset for zh-yue, parsed from 20190301
+    dump.
+*   **Download size**: `52.41 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 70,666
+
+## wikipedia/20190301.zu
+
+*   **Config description**: Wikipedia dataset for zu, parsed from 20190301 dump.
+*   **Download size**: `1.50 MiB`
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 1,184

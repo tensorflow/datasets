@@ -10,341 +10,34 @@
 </div>
 # `div2k`
 
+*   **Description**:
+
 DIV2K dataset: DIVerse 2K resolution high quality images as used for the
 challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
 
-*   URL:
+*   **Homepage**:
     [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.div2k.Div2k`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/div2k.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): No release notes.
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Features**:
 
-`div2k` is configured with `tfds.image.div2k.Div2kConfig` and has the following
-configurations predefined (defaults to the first one):
-
-*   `bicubic_x2` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x2 data.
-
-*   `bicubic_x3` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x3 data.
-
-*   `bicubic_x4` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x4 data.
-
-*   `bicubic_x8` (`v2.0.0`) (`Size: Unknown size`): Uses bicubic_x8 data.
-
-*   `unknown_x2` (`v2.0.0`) (`Size: Unknown size`): Uses unknown_x2 data.
-
-*   `unknown_x3` (`v2.0.0`) (`Size: Unknown size`): Uses unknown_x3 data.
-
-*   `unknown_x4` (`v2.0.0`) (`Size: Unknown size`): Uses unknown_x4 data.
-
-*   `realistic_mild_x4` (`v2.0.0`) (`Size: Unknown size`): Uses
-    realistic_mild_x4 data.
-
-*   `realistic_difficult_x4` (`v2.0.0`) (`Size: Unknown size`): Uses
-    realistic_difficult_x4 data.
-
-*   `realistic_wild_x4` (`v2.0.0`) (`Size: Unknown size`): Uses
-    realistic_wild_x4 data.
-
-## `div2k/bicubic_x2`
-Uses bicubic_x2 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
 ```python
 FeaturesDict({
     'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
     'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('lr', 'hr')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/bicubic_x3`
-Uses bicubic_x3 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/bicubic_x4`
-Uses bicubic_x4 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/bicubic_x8`
-Uses bicubic_x8 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/unknown_x2`
-Uses unknown_x2 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/unknown_x3`
-Uses unknown_x3 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/unknown_x4`
-Uses unknown_x4 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/realistic_mild_x4`
-Uses realistic_mild_x4 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/realistic_difficult_x4`
-Uses realistic_difficult_x4 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 900
-TRAIN      | 800
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## `div2k/realistic_wild_x4`
-Uses realistic_wild_x4 data.
-
-Versions:
-
-*   **`2.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 3,300
-TRAIN      | 3,200
-VALIDATION | 100
-
-### Features
-```python
-FeaturesDict({
-    'hr': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-### Homepage
-
-*   [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
-
-### Supervised keys (for `as_supervised=True`)
-`('lr', 'hr')`
-
-## Citation
 ```
 @InProceedings{Ignatov_2018_ECCV_Workshops,
 author = {Ignatov, Andrey and Timofte, Radu and others},
@@ -356,4 +49,112 @@ year = {2019}
 }
 ```
 
---------------------------------------------------------------------------------
+## div2k/bicubic_x2 (default config)
+
+*   **Config description**: Uses bicubic_x2 data.
+*   **Download size**: `4.68 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/bicubic_x3
+
+*   **Config description**: Uses bicubic_x3 data.
+*   **Download size**: `4.16 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/bicubic_x4
+
+*   **Config description**: Uses bicubic_x4 data.
+*   **Download size**: `3.97 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/bicubic_x8
+
+*   **Config description**: Uses bicubic_x8 data.
+*   **Download size**: `3.78 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/unknown_x2
+
+*   **Config description**: Uses unknown_x2 data.
+*   **Download size**: `4.48 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/unknown_x3
+
+*   **Config description**: Uses unknown_x3 data.
+*   **Download size**: `4.10 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/unknown_x4
+
+*   **Config description**: Uses unknown_x4 data.
+*   **Download size**: `3.93 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/realistic_mild_x4
+
+*   **Config description**: Uses realistic_mild_x4 data.
+*   **Download size**: `4.00 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/realistic_difficult_x4
+
+*   **Config description**: Uses realistic_difficult_x4 data.
+*   **Download size**: `3.98 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 800
+'validation' | 100
+
+## div2k/realistic_wild_x4
+
+*   **Config description**: Uses realistic_wild_x4 data.
+*   **Download size**: `4.74 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 3,200
+'validation' | 100

@@ -10,47 +10,43 @@
 </div>
 # `horses_or_humans`
 
+*   **Description**:
+
 A large set of images of horses and humans.
 
-*   URL:
+*   **Homepage**:
     [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.horses_or_humans.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/horses_or_humans.py)
-*   Version: `v3.0.0`
-*   Versions:
-
+*   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: None
+    *   `1.0.0`: No release notes.
+*   **Download size**: `153.59 MiB`
+*   **Dataset size**: `Unknown size`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Download size: `153.59 MiB`
+Split   | Examples
+:------ | -------:
+'test'  | 256
+'train' | 1,027
 
-*   Dataset size: `Unknown size`
+*   **Features**:
 
-## Features
 ```python
 FeaturesDict({
     'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
+*   **Citation**:
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,283
-TRAIN | 1,027
-TEST  | 256
-
-## Homepage
-
-*   [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
-
-## Supervised keys (for `as_supervised=True`)
-`('image', 'label')`
-
-## Citation
 ```
 @ONLINE {horses_or_humans,
 author = "Laurence Moroney",
@@ -60,5 +56,3 @@ year = "2019",
 url = "http://laurencemoroney.com/horses-or-humans-dataset"
 }
 ```
-
---------------------------------------------------------------------------------
