@@ -37,6 +37,8 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Audio`
     *   [`groove`](groove.md)
     *   [`librispeech`](librispeech.md)
+    *   [`libritts`](libritts.md)
+    *   [`ljspeech`](ljspeech.md)
     *   [`nsynth`](nsynth.md)
     *   [`speech_commands`](speech_commands.md)
 *   `Image`
@@ -129,6 +131,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`wider_face`](wider_face.md)
 *   `Structured`
     *   [`amazon_us_reviews`](amazon_us_reviews.md)
+    *   [`forest_fires`](forest_fires.md)
     *   [`higgs`](higgs.md)
     *   [`iris`](iris.md)
     *   [`rock_you`](rock_you.md)

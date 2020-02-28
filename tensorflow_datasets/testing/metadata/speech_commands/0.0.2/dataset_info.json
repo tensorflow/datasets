@@ -1,0 +1,206 @@
+{
+  "citation": "\n@article{speechcommandsv2,\n   author = {{Warden}, P.},\n    title = \"{Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition}\",\n  journal = {ArXiv e-prints},\n  archivePrefix = \"arXiv\",\n  eprint = {1804.03209},\n  primaryClass = \"cs.CL\",\n  keywords = {Computer Science - Computation and Language, Computer Science - Human-Computer Interaction},\n    year = 2018,\n    month = apr,\n    url = {https://arxiv.org/abs/1804.03209},\n}\n",
+  "description": "\nAn audio dataset of spoken words designed to help train and evaluate keyword\nspotting systems. Its primary goal is to provide a way to build and test small\nmodels that detect when a single word is spoken, from a set of ten target words,\nwith as few false positives as possible from background noise or unrelated\nspeech. Note that in the train and validation set, the label \"unknown\" is much\nmore prevalent than the labels of the target words or background noise.\nOne difference from the release version is the handling of silent segments.\nWhile in the test set the silence segments are regular 1 second files, in the\ntraining they are provided as long segments under \"background_noise\" folder.\nHere we split these background noise into 1 second clips, and also keep one of\nthe files for the validation set.\n",
+  "downloadSize": "2541486466",
+  "location": {
+    "urls": [
+      "https://arxiv.org/abs/1804.03209"
+    ]
+  },
+  "name": "speech_commands",
+  "schema": {
+    "feature": [
+      {
+        "name": "audio",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "433975115",
+      "numShards": "1",
+      "shardLengths": [
+        "1222",
+        "1223",
+        "1223",
+        "1222"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "audio",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "4890"
+              },
+              "max": 32767.0,
+              "min": -32768.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "4890"
+              },
+              "max": 11.0
+            }
+          }
+        ],
+        "numExamples": "4890"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "7465386649",
+      "numShards": "1",
+      "shardLengths": [
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1336",
+        "1337",
+        "1336",
+        "1336",
+        "1336",
+        "1336"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "audio",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "85511"
+              },
+              "max": 32767.0,
+              "min": -32768.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "85511"
+              },
+              "max": 11.0
+            }
+          }
+        ],
+        "numExamples": "85511"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "870206902",
+      "numShards": "1",
+      "shardLengths": [
+        "1263",
+        "1263",
+        "1262",
+        "1263",
+        "1263",
+        "1262",
+        "1263",
+        "1263"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "audio",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10102"
+              },
+              "max": 32767.0,
+              "min": -32768.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10102"
+              },
+              "max": 11.0
+            }
+          }
+        ],
+        "numExamples": "10102"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "audio",
+    "output": "label"
+  },
+  "version": "0.0.2"
+}

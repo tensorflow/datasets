@@ -10,7 +10,7 @@
 </div>
 # `image_label_folder`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 

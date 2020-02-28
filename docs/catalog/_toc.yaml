@@ -6,6 +6,10 @@ toc:
     title: groove
   - path: /datasets/catalog/librispeech
     title: librispeech
+  - path: /datasets/catalog/libritts
+    title: libritts
+  - path: /datasets/catalog/ljspeech
+    title: ljspeech
   - path: /datasets/catalog/nsynth
     title: nsynth
   - path: /datasets/catalog/speech_commands
@@ -190,6 +194,8 @@ toc:
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
+  - path: /datasets/catalog/forest_fires
+    title: forest_fires
   - path: /datasets/catalog/higgs
     title: higgs
   - path: /datasets/catalog/iris

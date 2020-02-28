@@ -69,7 +69,6 @@ FeaturesDict({
     'width': tf.uint32,
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('das/dB', 'dtce')`

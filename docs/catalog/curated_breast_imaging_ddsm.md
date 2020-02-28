@@ -10,7 +10,7 @@
 </div>
 # `curated_breast_imaging_ddsm`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 

@@ -72,7 +72,6 @@ FeaturesDict({
     'value_y_position': tf.float32,
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`

@@ -359,12 +359,15 @@ cmaterdb/telugu/1.0.0
 cnn_dailymail/bytes/0.0.2
 cnn_dailymail/bytes/1.0.0
 cnn_dailymail/bytes/2.0.0
+cnn_dailymail/bytes/3.0.0
 cnn_dailymail/plain_text/0.0.2
 cnn_dailymail/plain_text/1.0.0
 cnn_dailymail/plain_text/2.0.0
+cnn_dailymail/plain_text/3.0.0
 cnn_dailymail/subwords32k/0.0.2
 cnn_dailymail/subwords32k/1.0.0
 cnn_dailymail/subwords32k/2.0.0
+cnn_dailymail/subwords32k/3.0.0
 coco/2014/1.1.0
 coco/2017/1.1.0
 coco/2017_panoptic/1.1.0
@@ -621,7 +624,11 @@ kitti/3.1.0
 kmnist/1.0.0
 kmnist/3.0.0
 lfw/0.1.0
+librispeech/plain_text/1.1.0
+librispeech/subwords32k/1.1.0
+librispeech/subwords8k/1.1.0
 librispeech_lm/0.1.0
+ljspeech/1.1.0
 lm1b/bytes/0.0.1
 lm1b/bytes/1.0.0
 lm1b/plain_text/0.0.1
@@ -873,6 +880,7 @@ smallnorb/0.1.0
 smallnorb/2.0.0
 snli/plain_text/0.0.1
 snli/plain_text/1.0.0
+speech_commands/0.0.2
 squad/plain_text/0.1.0
 squad/plain_text/1.0.0
 stanford_dogs/0.2.0

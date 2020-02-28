@@ -10,7 +10,7 @@
 </div>
 # `wmt_t2t_translate`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
