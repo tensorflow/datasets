@@ -1,0 +1,105 @@
+{
+  "citation": "\n  @article{DBLP:journals/corr/abs-1905-10498,\n  author    = {Chhavi Yadav and\n               L{'{e}}on Bottou},\n  title     = {Cold Case: The Lost {MNIST} Digits},\n  journal   = {CoRR},\n  volume    = {abs/1905.10498},\n  year      = {2019},\n  url       = {http://arxiv.org/abs/1905.10498},\n  archivePrefix = {arXiv},\n  eprint    = {1905.10498},\n  timestamp = {Mon, 03 Jun 2019 13:42:33 +0200},\n  biburl    = {https://dblp.org/rec/journals/corr/abs-1905-10498.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n",
+  "description": "\nThe QMNIST dataset was generated from the original data found in the NIST Special Database 19\nwith the goal to match the MNIST preprocessing as closely as possible.\nThe exact preprocessing steps used to construct the MNIST dataset have long been lost. \nThis leaves us with no reliable way to associate its characters with the ID of the writer \nand little hope to recover the full MNIST testing set that had 60K images but was never released. \nThe official MNIST testing set only contains 10K randomly sampled images and is often considered too small \nto provide meaninful confidence intervals.\n",
+  "downloadSize": "20436162",
+  "location": {
+    "urls": [
+      "https://github.com/facebookresearch/qmnist/blob/master/README.md"
+    ]
+  },
+  "name": "qmnist",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "28"
+            },
+            {
+              "size": "28"
+            },
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "18850783",
+      "numShards": "1",
+      "shardLengths": [
+        "60000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "60000"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "18806134",
+      "numShards": "10",
+      "shardLengths": [
+        "60000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "60000"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,4 @@
+https://raw.githubusercontent.com/facebookresearch/qmnist/master/qmnist-test-images-idx3-ubyte.gz 9742279 43fc22bf7498b8fc98de98369d72f752d0deabc280a43a7bcc364ab19e57b375
+https://raw.githubusercontent.com/facebookresearch/qmnist/master/qmnist-test-labels-idx2-int.gz 526800 9fbcbe594c3766fdf4f0b15c5165dc0d1e57ac604e01422608bb72c906030d06
+https://raw.githubusercontent.com/facebookresearch/qmnist/master/qmnist-train-images-idx3-ubyte.gz 9704059 9e26a7bf1683614e065d7b76460ccd52807165b3f22561fb782bd9f38c52b51d
+https://raw.githubusercontent.com/facebookresearch/qmnist/master/qmnist-train-labels-idx2-int.gz 463024 2c05dc77f6b916b38e455e97ab129a42a444f3dbef09b278a366f82904e0dd9f
