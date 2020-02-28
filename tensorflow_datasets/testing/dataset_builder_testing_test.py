@@ -20,7 +20,8 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
-import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets import testing
+from tensorflow_datasets.testing.dataset_builder_testing import checksum
 
 
 class DatasetBuilderTesting(tf.test.TestCase):
@@ -28,8 +29,9 @@ class DatasetBuilderTesting(tf.test.TestCase):
   def test_dataset_builder_testing(self):
 
     # pylint: disable=unreachable
-    self.assertIsNotNone(tfds.testing)
+    self.all_checksums = {checksum(tf.constant([b"foo", b"bar"]).numpy()) for _ in range(5)}
+    self.assertEqual(len(self.all_checksums), 1)  
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  testing.test_main()
