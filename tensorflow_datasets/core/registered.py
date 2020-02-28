@@ -376,3 +376,16 @@ def _cast_to_pod(val):
       return float(val)
     except ValueError:
       return tf.compat.as_text(val)
+
+def iter_dataset_full_names():
+  """Yield all supported datasets full_names."""
+  for builder_name, builder_cls in registered._DATASET_REGISTRY.items():  # pylint: disable=protected-access
+    if builder_cls.BUILDER_CONFIGS:
+      for config in builder_cls.BUILDER_CONFIGS:
+        for v in _get_all_versions(
+            [config.version] + config.supported_versions):
+          yield os.path.join(builder_name, config.name, v)
+    else:
+      for v in _get_all_versions(
+          [builder_cls.VERSION] + builder_cls.SUPPORTED_VERSIONS):
+        yield os.path.join(builder_name, v)
