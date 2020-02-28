@@ -28,17 +28,6 @@ where one is high resource and the other is low resource.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-Translation({
-    'az': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('az', 'en')`
 *   **Citation**:
 
 ```
@@ -61,6 +50,19 @@ Split        | Examples
 'train'      | 5,946
 'validation' | 671
 
+*   **Features**:
+
+```python
+Translation({
+    'az': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('az', 'en')`
+
 ## ted_hrlr_translate/aztr_to_en
 
 *   **Config description**: Translation dataset from az_tr to en in plain text.
@@ -71,6 +73,19 @@ Split        | Examples
 'test'       | 903
 'train'      | 188,396
 'validation' | 671
+
+*   **Features**:
+
+```python
+Translation({
+    'az_tr': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('az_tr', 'en')`
 
 ## ted_hrlr_translate/be_to_en
 
@@ -83,6 +98,19 @@ Split        | Examples
 'train'      | 4,509
 'validation' | 248
 
+*   **Features**:
+
+```python
+Translation({
+    'be': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('be', 'en')`
+
 ## ted_hrlr_translate/beru_to_en
 
 *   **Config description**: Translation dataset from be_ru to en in plain text.
@@ -93,6 +121,19 @@ Split        | Examples
 'test'       | 664
 'train'      | 212,614
 'validation' | 248
+
+*   **Features**:
+
+```python
+Translation({
+    'be_ru': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('be_ru', 'en')`
 
 ## ted_hrlr_translate/es_to_pt
 
@@ -105,6 +146,19 @@ Split        | Examples
 'train'      | 44,938
 'validation' | 1,016
 
+*   **Features**:
+
+```python
+Translation({
+    'es': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('es', 'pt')`
+
 ## ted_hrlr_translate/fr_to_pt
 
 *   **Config description**: Translation dataset from fr to pt in plain text.
@@ -115,6 +169,19 @@ Split        | Examples
 'test'       | 1,494
 'train'      | 43,873
 'validation' | 1,131
+
+*   **Features**:
+
+```python
+Translation({
+    'fr': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fr', 'pt')`
 
 ## ted_hrlr_translate/gl_to_en
 
@@ -127,6 +194,19 @@ Split        | Examples
 'train'      | 10,017
 'validation' | 682
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'gl': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('gl', 'en')`
+
 ## ted_hrlr_translate/glpt_to_en
 
 *   **Config description**: Translation dataset from gl_pt to en in plain text.
@@ -137,6 +217,19 @@ Split        | Examples
 'test'       | 1,007
 'train'      | 61,802
 'validation' | 682
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'gl_pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('gl_pt', 'en')`
 
 ## ted_hrlr_translate/he_to_pt
 
@@ -149,6 +242,19 @@ Split        | Examples
 'train'      | 48,511
 'validation' | 1,145
 
+*   **Features**:
+
+```python
+Translation({
+    'he': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('he', 'pt')`
+
 ## ted_hrlr_translate/it_to_pt
 
 *   **Config description**: Translation dataset from it to pt in plain text.
@@ -159,6 +265,19 @@ Split        | Examples
 'test'       | 1,669
 'train'      | 46,259
 'validation' | 1,162
+
+*   **Features**:
+
+```python
+Translation({
+    'it': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('it', 'pt')`
 
 ## ted_hrlr_translate/pt_to_en
 
@@ -171,6 +290,19 @@ Split        | Examples
 'train'      | 51,785
 'validation' | 1,193
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('pt', 'en')`
+
 ## ted_hrlr_translate/ru_to_en
 
 *   **Config description**: Translation dataset from ru to en in plain text.
@@ -181,6 +313,19 @@ Split        | Examples
 'test'       | 5,476
 'train'      | 208,106
 'validation' | 4,805
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'en')`
 
 ## ted_hrlr_translate/ru_to_pt
 
@@ -193,6 +338,19 @@ Split        | Examples
 'train'      | 47,278
 'validation' | 1,184
 
+*   **Features**:
+
+```python
+Translation({
+    'pt': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'pt')`
+
 ## ted_hrlr_translate/tr_to_en
 
 *   **Config description**: Translation dataset from tr to en in plain text.
@@ -203,3 +361,16 @@ Split        | Examples
 'test'       | 5,029
 'train'      | 182,450
 'validation' | 4,045
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('tr', 'en')`

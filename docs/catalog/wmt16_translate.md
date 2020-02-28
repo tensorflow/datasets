@@ -39,7 +39,6 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
     *   `0.0.3`: No release notes.
-*   **Download size**: `1.57 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
@@ -50,17 +49,6 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('cs', 'en')`
 *   **Citation**:
 
 ```
@@ -80,6 +68,7 @@ Translation({
 ## wmt16_translate/cs-en (default config)
 
 *   **Config description**: WMT 2016 cs-en translation task dataset.
+*   **Download size**: `1.57 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -88,9 +77,23 @@ Split        | Examples
 'train'      | 52,335,651
 'validation' | 2,656
 
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('cs', 'en')`
+
 ## wmt16_translate/de-en
 
 *   **Config description**: WMT 2016 de-en translation task dataset.
+*   **Download size**: `1.57 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -99,9 +102,23 @@ Split        | Examples
 'train'      | 4,548,885
 'validation' | 2,169
 
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('de', 'en')`
+
 ## wmt16_translate/fi-en
 
 *   **Config description**: WMT 2016 fi-en translation task dataset.
+*   **Download size**: `260.51 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -110,9 +127,23 @@ Split        | Examples
 'train'      | 2,073,394
 'validation' | 1,370
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fi', 'en')`
+
 ## wmt16_translate/ro-en
 
 *   **Config description**: WMT 2016 ro-en translation task dataset.
+*   **Download size**: `273.83 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -121,9 +152,23 @@ Split        | Examples
 'train'      | 610,320
 'validation' | 1,999
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ro': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ro', 'en')`
+
 ## wmt16_translate/ru-en
 
 *   **Config description**: WMT 2016 ru-en translation task dataset.
+*   **Download size**: `993.38 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -132,9 +177,23 @@ Split        | Examples
 'train'      | 2,516,162
 'validation' | 2,818
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'en')`
+
 ## wmt16_translate/tr-en
 
 *   **Config description**: WMT 2016 tr-en translation task dataset.
+*   **Download size**: `59.32 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -142,3 +201,16 @@ Split        | Examples
 'test'       | 3,000
 'train'      | 205,756
 'validation' | 1,001
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('tr', 'en')`

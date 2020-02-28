@@ -28,7 +28,6 @@ URL: https://github.com/phelber/eurosat
     [`tfds.image.eurosat.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/eurosat.py)
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
-*   **Download size**: `89.91 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -39,18 +38,6 @@ Split   | Examples
 :------ | -------:
 'train' | 27,000
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('image', 'label')`
 *   **Citation**:
 
 ```
@@ -67,7 +54,35 @@ FeaturesDict({
 ## eurosat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
+*   **Download size**: `89.91 MiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('image', 'label')`
 
 ## eurosat/all
 
 *   **Config description**: 13 Sentinel-2 channels
+*   **Download size**: `1.93 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'sentinel2': Tensor(shape=(64, 64, 13), dtype=tf.float32),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('sentinel2', 'label')`

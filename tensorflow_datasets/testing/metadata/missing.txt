@@ -7,6 +7,8 @@ cityscapes/semantic_segmentation_extra/1.0.0
 cityscapes/stereo_disparity/1.0.0
 cityscapes/stereo_disparity_extra/1.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
+flores/neen_plain_text/1.1.0
+flores/sien_plain_text/1.1.0
 forest_fires/0.0.1
 glue/ax/0.0.2
 image_label_folder/2.0.0

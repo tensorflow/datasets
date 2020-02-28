@@ -28,7 +28,6 @@ set aside 20% (1016 images) of the data for testing.
     [`tfds.image.flic.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
-*   **Download size**: `286.35 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -70,8 +69,10 @@ FeaturesDict({
 ## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.
+*   **Download size**: `286.35 MiB`
 
 ## flic/full
 
 *   **Config description**: Uses 20928 examples, a superset of FLIC consisting
     of more difficult examples.
+*   **Download size**: `1.10 GiB`

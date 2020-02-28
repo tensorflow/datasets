@@ -39,7 +39,6 @@ in order to guarantee reproducible results:
     [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
 *   **Source code**:
     [`tfds.image.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cbis_ddsm.py)
-*   **Download size**: `2.01 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
@@ -51,15 +50,6 @@ in order to guarantee reproducible results:
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -113,6 +103,7 @@ FeaturesDict({
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.2.0`: No release notes.
+*   **Download size**: `2.01 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -120,6 +111,16 @@ Split        | Examples
 'test'       | 9,770
 'train'      | 49,780
 'validation' | 5,580
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'id': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+})
+```
 
 ## curated_breast_imaging_ddsm/original-calc
 
@@ -129,12 +130,34 @@ Split        | Examples
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: No release notes.
+*   **Download size**: `1.06 MiB`
 *   **Splits**:
 
 Split   | Examples
 :------ | -------:
 'test'  | 284
 'train' | 1,227
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'calc_distribution': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+        'calc_type': ClassLabel(shape=(), dtype=tf.int64, num_classes=48),
+        'id': tf.int32,
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'id': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
+    'patient': Text(shape=(), dtype=tf.string),
+    'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
 
 ## curated_breast_imaging_ddsm/original-mass
 
@@ -144,9 +167,31 @@ Split   | Examples
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: No release notes.
+*   **Download size**: `966.57 KiB`
 *   **Splits**:
 
 Split   | Examples
 :------ | -------:
 'test'  | 348
 'train' | 1,166
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'id': tf.int32,
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'mass_margins': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'mass_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'id': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 1), dtype=tf.uint8),
+    'patient': Text(shape=(), dtype=tf.string),
+    'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```

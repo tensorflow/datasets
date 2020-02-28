@@ -38,14 +38,6 @@ Split          | Examples
 'train'        | 25,000
 'unsupervised' | 50,000
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('text', 'label')`
@@ -68,18 +60,50 @@ FeaturesDict({
 ## imdb_reviews/plain_text (default config)
 
 *   **Config description**: Plain text
+*   **Features**:
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## imdb_reviews/bytes
 
 *   **Config description**: Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
 
 ## imdb_reviews/subwords8k
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
     vocab size
+*   **Features**:
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
+})
+```
 
 ## imdb_reviews/subwords32k
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
     32k vocab size
+*   **Features**:
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
+})
+```

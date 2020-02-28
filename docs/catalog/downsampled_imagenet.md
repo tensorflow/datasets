@@ -27,7 +27,6 @@ For resized ImageNet for supervised learning
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `1.0.0`: No release notes.
-*   **Download size**: `3.98 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -73,8 +72,10 @@ FeaturesDict({
 
 *   **Config description**: A dataset consisting of Train and Validation images
     of 32x32 resolution.
+*   **Download size**: `3.98 GiB`
 
 ## downsampled_imagenet/64x64
 
 *   **Config description**: A dataset consisting of Train and Validation images
     of 64x64 resolution.
+*   **Download size**: `11.73 GiB`

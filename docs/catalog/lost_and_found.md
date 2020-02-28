@@ -30,7 +30,6 @@ http://www.6d-vision.com/laf_table.pdf
     [`tfds.image.lost_and_found.LostAndFound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lost_and_found.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-*   **Download size**: `5.44 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -42,15 +41,6 @@ Split   | Examples
 'test'  | 1,203
 'train' | 1,036
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -68,15 +58,62 @@ FeaturesDict({
 ## lost_and_found/semantic_segmentation (default config)
 
 *   **Config description**: Lost and Found semantic segmentation dataset.
+*   **Download size**: `5.44 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```
 
 ## lost_and_found/stereo_disparity
 
 *   **Config description**: Lost and Found stereo images and disparity maps.
+*   **Download size**: `12.16 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+})
+```
 
 ## lost_and_found/full
 
 *   **Config description**: Full Lost and Found dataset.
+*   **Download size**: `12.19 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'instance_id': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```
 
 ## lost_and_found/full_16bit
 
 *   **Config description**: Full Lost and Found dataset.
+*   **Download size**: `34.90 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'instance_id': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```

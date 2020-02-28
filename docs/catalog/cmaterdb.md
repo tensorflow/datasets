@@ -30,7 +30,6 @@ research lab, Jadavpur University, India.
     [`tfds.image.cmaterdb.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cmaterdb.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-*   **Download size**: `573.81 KiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -96,6 +95,7 @@ FeaturesDict({
 ## cmaterdb/bangla (default config)
 
 *   **Config description**: CMATERdb Bangla Numerals
+*   **Download size**: `573.81 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -106,6 +106,7 @@ Split   | Examples
 ## cmaterdb/devanagari
 
 *   **Config description**: CMATERdb Devangari Numerals
+*   **Download size**: `275.29 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -116,6 +117,7 @@ Split   | Examples
 ## cmaterdb/telugu
 
 *   **Config description**: CMATERdb Telugu Numerals
+*   **Download size**: `283.90 KiB`
 *   **Splits**:
 
 Split   | Examples

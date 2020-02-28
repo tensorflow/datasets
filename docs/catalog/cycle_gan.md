@@ -25,7 +25,6 @@ horses/zebras, apple/orange,...)
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.1.0`: No release notes.
-*   **Download size**: `74.82 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -65,6 +64,7 @@ FeaturesDict({
 
 ## cycle_gan/apple2orange (default config)
 
+*   **Download size**: `74.82 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -76,6 +76,7 @@ Split    | Examples
 
 ## cycle_gan/summer2winter_yosemite
 
+*   **Download size**: `126.50 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -87,6 +88,7 @@ Split    | Examples
 
 ## cycle_gan/horse2zebra
 
+*   **Download size**: `111.45 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -98,6 +100,7 @@ Split    | Examples
 
 ## cycle_gan/monet2photo
 
+*   **Download size**: `291.09 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -109,6 +112,7 @@ Split    | Examples
 
 ## cycle_gan/cezanne2photo
 
+*   **Download size**: `266.92 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -120,6 +124,7 @@ Split    | Examples
 
 ## cycle_gan/ukiyoe2photo
 
+*   **Download size**: `279.38 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -131,6 +136,7 @@ Split    | Examples
 
 ## cycle_gan/vangogh2photo
 
+*   **Download size**: `292.39 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -142,6 +148,7 @@ Split    | Examples
 
 ## cycle_gan/maps
 
+*   **Download size**: `1.38 GiB`
 *   **Splits**:
 
 Split    | Examples
@@ -153,6 +160,7 @@ Split    | Examples
 
 ## cycle_gan/cityscapes
 
+*   **Download size**: `266.65 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -164,6 +172,7 @@ Split    | Examples
 
 ## cycle_gan/facades
 
+*   **Download size**: `33.51 MiB`
 *   **Splits**:
 
 Split    | Examples
@@ -175,6 +184,7 @@ Split    | Examples
 
 ## cycle_gan/iphone2dslr_flower
 
+*   **Download size**: `324.22 MiB`
 *   **Splits**:
 
 Split    | Examples

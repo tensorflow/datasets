@@ -43,6 +43,9 @@ http://creativecommons.org/licenses/by/4.0
 Split | Examples
 :---- | -------:
 
+## so2sat/rgb (default config)
+
+*   **Config description**: Sentinel-2 RGB channels
 *   **Features**:
 
 ```python
@@ -56,10 +59,20 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
 
-## so2sat/rgb (default config)
-
-*   **Config description**: Sentinel-2 RGB channels
-
 ## so2sat/all
 
 *   **Config description**: 8 Sentinel-1 and 10 Sentinel-2 channels
+*   **Features**:
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
+    'sample_id': tf.int64,
+    'sentinel1': Tensor(shape=(32, 32, 8), dtype=tf.float32),
+    'sentinel2': Tensor(shape=(32, 32, 10), dtype=tf.float32),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`

@@ -20,25 +20,19 @@ Sinhala-English.
 *   **Source code**:
     [`tfds.translate.flores.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
 *   **Versions**:
-    *   **`1.0.0`** (default): New split API
+    *   **`1.1.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.0.3`: No release notes.
-*   **Download size**: `984.65 KiB`
+*   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-*   **Features**:
+    Unknown
+*   **Splits**:
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ne': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('ne', 'en')`
+Split | Examples
+:---- | -------:
+
 *   **Citation**:
 
 ```
@@ -56,20 +50,32 @@ Translation({
 
 *   **Config description**: Translation dataset from ne to en, uses encoder
     plain_text.
-*   **Splits**:
+*   **Features**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,835
-'validation' | 2,559
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ne': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ne', 'en')`
 
 ## flores/sien_plain_text
 
 *   **Config description**: Translation dataset from si to en, uses encoder
     plain_text.
-*   **Splits**:
+*   **Features**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,766
-'validation' | 2,898
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'si': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('si', 'en')`

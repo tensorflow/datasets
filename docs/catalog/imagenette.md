@@ -35,8 +35,6 @@ ideas and share with others. The dataset comes in three variants:
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `1.45 GiB`
-
 *   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
@@ -81,6 +79,7 @@ ideas and share with others. The dataset comes in three variants:
 *   Full size
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset full-size variant.
+*   **Download size**: `1.45 GiB`
 
 ## imagenette/320px
 
@@ -96,6 +95,7 @@ ideas and share with others. The dataset comes in three variants:
 *   Full size
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset 320px variant.
+*   **Download size**: `325.48 MiB`
 
 ## imagenette/160px
 
@@ -111,3 +111,4 @@ ideas and share with others. The dataset comes in three variants:
 *   Full size
 *   320 px
 *   160 px This dataset consists of the Imagenette dataset 160px variant.
+*   **Download size**: `94.18 MiB`

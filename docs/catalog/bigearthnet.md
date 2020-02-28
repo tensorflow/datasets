@@ -63,6 +63,21 @@ Split   | Examples
 :------ | -------:
 'train' | 590,326
 
+*   **Citation**:
+
+```
+@article{Sumbul2019BigEarthNetAL,
+  title={BigEarthNet: A Large-Scale Benchmark Archive For Remote Sensing Image Understanding},
+  author={Gencer Sumbul and Marcela Charfuelan and Beg{"u}m Demir and Volker Markl},
+  journal={CoRR},
+  year={2019},
+  volume={abs/1902.06148}
+}
+```
+
+## bigearthnet/rgb (default config)
+
+*   **Config description**: Sentinel-2 RGB channels
 *   **Features**:
 
 ```python
@@ -86,22 +101,42 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'labels')`
-*   **Citation**:
-
-```
-@article{Sumbul2019BigEarthNetAL,
-  title={BigEarthNet: A Large-Scale Benchmark Archive For Remote Sensing Image Understanding},
-  author={Gencer Sumbul and Marcela Charfuelan and Beg{"u}m Demir and Volker Markl},
-  journal={CoRR},
-  year={2019},
-  volume={abs/1902.06148}
-}
-```
-
-## bigearthnet/rgb (default config)
-
-*   **Config description**: Sentinel-2 RGB channels
 
 ## bigearthnet/all
 
 *   **Config description**: 13 Sentinel-2 channels
+*   **Features**:
+
+```python
+FeaturesDict({
+    'B01': Tensor(shape=(20, 20), dtype=tf.float32),
+    'B02': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B03': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B04': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B05': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B06': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B07': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B08': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B09': Tensor(shape=(20, 20), dtype=tf.float32),
+    'B11': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B12': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B8A': Tensor(shape=(60, 60), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'metadata': FeaturesDict({
+        'acquisition_date': Text(shape=(), dtype=tf.string),
+        'coordinates': FeaturesDict({
+            'lrx': tf.int64,
+            'lry': tf.int64,
+            'ulx': tf.int64,
+            'uly': tf.int64,
+        }),
+        'projection': Text(shape=(), dtype=tf.string),
+        'tile_source': Text(shape=(), dtype=tf.string),
+    }),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `None`

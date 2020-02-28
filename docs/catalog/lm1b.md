@@ -31,13 +31,6 @@ Split   | Examples
 'test'  | 306,688
 'train' | 30,301,028
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('text', 'text')`
@@ -72,6 +65,13 @@ FeaturesDict({
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.0.1`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## lm1b/bytes
 
@@ -81,6 +81,13 @@ FeaturesDict({
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.0.1`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
 
 ## lm1b/subwords8k
 
@@ -90,6 +97,13 @@ FeaturesDict({
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.0.2`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
+})
+```
 
 ## lm1b/subwords32k
 
@@ -99,3 +113,10 @@ FeaturesDict({
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `0.0.2`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
+})
+```

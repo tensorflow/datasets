@@ -33,14 +33,6 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=62),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('image', 'label')`
@@ -66,6 +58,15 @@ Split   | Examples
 'test'  | 116,323
 'train' | 697,932
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=62),
+})
+```
+
 ## emnist/bymerge
 
 *   **Config description**: EMNIST ByMerge
@@ -75,6 +76,15 @@ Split   | Examples
 :------ | -------:
 'test'  | 116,323
 'train' | 697,932
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+})
+```
 
 ## emnist/balanced
 
@@ -86,6 +96,15 @@ Split   | Examples
 'test'  | 18,800
 'train' | 112,800
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+})
+```
+
 ## emnist/letters
 
 *   **Config description**: EMNIST Letters
@@ -95,6 +114,15 @@ Split   | Examples
 :------ | -------:
 'test'  | 14,800
 'train' | 88,800
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+})
+```
 
 ## emnist/digits
 
@@ -106,6 +134,15 @@ Split   | Examples
 'test'  | 40,000
 'train' | 240,000
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
 ## emnist/mnist
 
 *   **Config description**: EMNIST MNIST
@@ -115,3 +152,12 @@ Split   | Examples
 :------ | -------:
 'test'  | 10,000
 'train' | 60,000
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```

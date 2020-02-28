@@ -39,7 +39,6 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
     *   `0.0.3`: No release notes.
-*   **Download size**: `1.58 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
@@ -50,17 +49,6 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('cs', 'en')`
 *   **Citation**:
 
 ```
@@ -80,6 +68,7 @@ Translation({
 ## wmt14_translate/cs-en (default config)
 
 *   **Config description**: WMT 2014 cs-en translation task dataset.
+*   **Download size**: `1.58 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -88,9 +77,23 @@ Split        | Examples
 'train'      | 15,786,979
 'validation' | 3,000
 
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('cs', 'en')`
+
 ## wmt14_translate/de-en
 
 *   **Config description**: WMT 2014 de-en translation task dataset.
+*   **Download size**: `1.58 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -99,9 +102,23 @@ Split        | Examples
 'train'      | 4,508,785
 'validation' | 3,000
 
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('de', 'en')`
+
 ## wmt14_translate/fr-en
 
 *   **Config description**: WMT 2014 fr-en translation task dataset.
+*   **Download size**: `6.20 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -110,9 +127,23 @@ Split        | Examples
 'train'      | 40,836,876
 'validation' | 3,000
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('fr', 'en')`
+
 ## wmt14_translate/hi-en
 
 *   **Config description**: WMT 2014 hi-en translation task dataset.
+*   **Download size**: `44.65 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -121,9 +152,23 @@ Split        | Examples
 'train'      | 313,748
 'validation' | 520
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'hi': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('hi', 'en')`
+
 ## wmt14_translate/ru-en
 
 *   **Config description**: WMT 2014 ru-en translation task dataset.
+*   **Download size**: `998.38 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -131,3 +176,16 @@ Split        | Examples
 'test'       | 3,003
 'train'      | 2,486,965
 'validation' | 3,000
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('ru', 'en')`
