@@ -353,7 +353,10 @@ def _str_to_relative_instruction(spec):
   """Returns ReadInstruction for given string."""
   res = _SUB_SPEC_RE.match(spec)
   if not res:
-    raise AssertionError('Unrecognized instruction format: %s' % spec)
+    if(spec == (NamedSplit('train') ):
+      raise AssertionError('The legacy split is deprecated and do not works anymore.\nPlease use the new split API(S3): https://www.tensorflow.org/datasets/splits')
+    else:
+      raise AssertionError('Unrecognized instruction format: %s' % spec)
   unit = '%' if res.group('from_pct') or res.group('to_pct') else 'abs'
   return ReadInstruction(
       split_name=res.group('split'),
