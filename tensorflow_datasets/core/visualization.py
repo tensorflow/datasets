@@ -142,10 +142,11 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None,tex
         plt.show()
     return fig
 
-  elif text_key:
+  elif text_key or text_keys:
     num_examples=5
     text_samples_list=[]
     examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+    text_keys= text_key if text_key else text_keys
 
     for i,ex in enumerate(examples):
       example_list=[]
