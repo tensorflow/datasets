@@ -38,9 +38,8 @@ def read_all_images(images_path):
     :param path_to_data: the file containing the binary images from the STL-10 dataset
     :return: an array containing all the images
     """
-    with open(images_path, 'rb') as f:
-        # tf.io.gfile.GFile doesn't works with np.fromfile as it doesn't has fileno() method
-        everything= np.fromfile(f,dtype=np.uint8)
+    with tf.io.gfile.GFile(images_path, 'rb') as f:
+        everything = np.frombuffer(f.read(),dtype=np.uint8)
         images = np.reshape(everything, (-1, 3, 96, 96))
         images = np.transpose(images, (0, 3, 2, 1))
         return images
@@ -52,7 +51,7 @@ def read_labels(path_to_labels):
      :return: an array containing the labels
     """
     with tf.io.gfile.GFile(path_to_labels, 'rb') as f:
-        labels = f.read()
+        labels = np.frombuffer(f.read(),dtype=np.uint8)
         return labels
 
 
@@ -61,21 +60,16 @@ class Stl10(tfds.core.GeneratorBasedBuilder):
     The STL-10 dataset is an image recognition dataset for developing unsupervised feature learning, deep learning, self-taught learning algorithms.
     """
 
-    VERSION = tfds.core.Version('0.1.0')
+    VERSION = tfds.core.Version('1.0.0')
 
     def _info(self):
         return tfds.core.DatasetInfo(
             builder=self,
-            # This is the description that will appear on the datasets page.
             description=_DESCRIPTION,
-            # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
                 "image": tfds.features.Image(shape=(96,96,3)),
                 "label": tfds.features.ClassLabel(num_classes=11)
             }),
-            # If there's a common (input, target) tuple from the features,
-            # specify them here. They'll be used if as_supervised=True in
-            # builder.as_dataset.
             supervised_keys=("image", "label"),
             # Homepage of the dataset for documentation
             urls=["https://cs.stanford.edu/~acoates/stl10/"],
