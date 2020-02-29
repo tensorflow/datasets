@@ -27,6 +27,9 @@ from __future__ import print_function
 
 import os
 
+import sys
+sys.path.insert(0,'.')
+
 from absl import app
 from absl import flags
 
