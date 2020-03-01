@@ -27,7 +27,7 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 
 
-def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None,text_key=None):
+def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None, text_key=None):
   """Visualize images (and labels) from an image classification dataset and Text dataset.
 
   Only works with datasets that have 1 image feature and optionally 1 label
@@ -83,11 +83,11 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None,tex
     if not text_keys and not image_keys:
       if not image_keys:
         raise ValueError(
-          "Visualisation not supported for dataset `{}`. Was not able to "
-          "auto-infer image.".format(ds_info.name))
+          "Visualisation not supported for dataset `{}`. Was not able to"
+            "auto-infer image.".format(ds_info.name))
       else:
         raise ValueError(
-          "show_examples not supported for dataset `{}`.".format(ds_info.name))
+            "show_examples supported only for Text/Supervised image dataset")
 
     if len(image_keys) > 1:
       raise ValueError(
@@ -143,13 +143,13 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None,tex
     return fig
 
   elif text_key or text_keys:
-    num_examples=5
-    text_samples_list=[]
+    num_examples = 5
+    text_samples_list = []
     examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-    text_keys= text_key if text_key else text_keys
+    text_keys = [text_key] if text_key else text_keys
 
-    for i,ex in enumerate(examples):
-      example_list=[]
+    for i, ex in enumerate(examples):
+      example_list = []
       for key in text_keys:
         example_list.append(ex[key])
       text_samples_list.append(example_list)
