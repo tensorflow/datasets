@@ -13,12 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Structured datasets."""
+"""Tests for tensorflow_datasets.structured.adult."""
 
-from tensorflow_datasets.structured.adult import Adult
-from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
-from tensorflow_datasets.structured.forest_fires import ForestFires
-from tensorflow_datasets.structured.higgs import Higgs
-from tensorflow_datasets.structured.iris import Iris
-from tensorflow_datasets.structured.rock_you import RockYou
-from tensorflow_datasets.structured.titanic import Titanic
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from tensorflow_datasets import testing
+from tensorflow_datasets.structured import adult
+
+
+class IrisTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = adult.Adult
+
+  SPLITS = {
+      "train": 15,
+      "test": 10
+  }
+  DL_EXTRACT_RESULT = "adult.data"
+
+
+if __name__ == "__main__":
+  testing.test_main()
