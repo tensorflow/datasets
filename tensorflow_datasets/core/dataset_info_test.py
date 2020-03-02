@@ -15,9 +15,6 @@
 
 """Tests for tensorflow_datasets.core.dataset_info."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os

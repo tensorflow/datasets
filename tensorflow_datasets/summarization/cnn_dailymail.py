@@ -14,9 +14,6 @@
 # limitations under the License.
 
 """CNN/DailyMail Summarization dataset, non-anonymized version."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 import hashlib
 import os
 from absl import logging

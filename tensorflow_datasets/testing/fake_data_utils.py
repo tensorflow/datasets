@@ -15,9 +15,6 @@
 
 """Utility library to generate dataset-like files."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import random
 import tempfile

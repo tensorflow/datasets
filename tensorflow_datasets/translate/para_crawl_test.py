@@ -15,9 +15,6 @@
 
 """Tests for para_crawl dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.translate import para_crawl

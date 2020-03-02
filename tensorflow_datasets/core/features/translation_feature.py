@@ -15,9 +15,6 @@
 
 """Translation feature that supports multiple languages."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import six
 from tensorflow_datasets.core.features import features_dict

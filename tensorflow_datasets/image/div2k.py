@@ -19,9 +19,6 @@ As used for the challenges @ NTIRE (CVPR 2017 and CVPR 2018)
 and @ PIRM (ECCV 2018)
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os.path
 

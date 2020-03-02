@@ -15,9 +15,6 @@
 
 """The Stanford Natural Language Inference (SNLI) Corpus."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import csv
 import os

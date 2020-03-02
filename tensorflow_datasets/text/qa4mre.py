@@ -15,8 +15,6 @@
 
 """QA4MRE (CLEF 2011/2012/2013): a reading comprehension dataset."""
 
-from __future__ import division
-from __future__ import print_function
 
 import os
 import xml.etree.ElementTree as ET

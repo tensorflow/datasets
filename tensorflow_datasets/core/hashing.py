@@ -45,9 +45,6 @@ The split name is being used as salt to avoid having the same keys in two splits
 result in same order.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import hashlib
 

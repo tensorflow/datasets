@@ -15,9 +15,6 @@
 
 r"""Generate ARC-like files, smaller and with random data."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os

@@ -18,10 +18,6 @@
 # This implementation is based on SubwordTextEncoder in Tensor2Tensor,
 # originally written by Noam Shazeer (GitHub: nshazeer).
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
 
 import collections
 
