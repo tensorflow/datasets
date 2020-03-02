@@ -14,6 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
+
+# Lint as: python3
 """Tests for tensorflow_datasets.core._sharded_files."""
 
 

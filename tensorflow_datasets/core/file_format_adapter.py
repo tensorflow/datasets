@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """`tfds.file_adapter.FileFormatAdapter`s for GeneratorBasedBuilder.
 
 FileFormatAdapters implement methods to write and read data from a

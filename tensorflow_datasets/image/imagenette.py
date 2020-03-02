@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """Imagenette: a subset of 10 easily classified classes from Imagenet.
 
 (tench, English springer, cassette player, chain saw, church, French horn,

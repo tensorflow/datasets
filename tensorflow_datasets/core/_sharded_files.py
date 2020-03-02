@@ -14,6 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
+
+# Lint as: python3
 """Logic to read sharded files (tfrecord, buckets, ...).
 
 This logic is shared between:

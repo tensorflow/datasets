@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """Helper functions to generate fake Cityscapes-like data for testing."""
 
 import os

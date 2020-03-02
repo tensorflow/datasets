@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """WMT18: Translate dataset."""
 
 import tensorflow_datasets.public_api as tfds

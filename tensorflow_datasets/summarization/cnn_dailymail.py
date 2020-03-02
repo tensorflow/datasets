@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """CNN/DailyMail Summarization dataset, non-anonymized version."""
 import hashlib
 import os

@@ -14,6 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
+
+# Lint as: python3
 """Utilities for generating the C4 dataset."""
 
 

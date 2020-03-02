@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """Stable hashing function using md5.
 
 Note that the properties we are looking at here are:

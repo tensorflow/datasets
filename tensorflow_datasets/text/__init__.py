@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+
 """Text datasets."""
 
 from tensorflow_datasets.text.c4 import C4
