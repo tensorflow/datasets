@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import api_utils
+from typing import Tuple
 
 
 class ApiUtilsTest(testing.TestCase):
@@ -27,7 +28,10 @@ class ApiUtilsTest(testing.TestCase):
   def test_disallow_positional_args(self):
 
     @api_utils.disallow_positional_args
-    def fn(a, b, c=api_utils.REQUIRED_ARG, d=4):
+    def fn(a: int,
+           b: int,
+           c: int = api_utils.REQUIRED_ARG,
+           d: int = 4) -> Tuple[int, int, int, int]:
       return (a, b, c, d)
 
     self.assertEqual(["a", "b", "c", "d"], api_utils.getargspec(fn).args)
@@ -43,7 +47,10 @@ class ApiUtilsTest(testing.TestCase):
   def test_disallow_positional_args_with_exceptions(self):
 
     @api_utils.disallow_positional_args(allowed=["a"])
-    def fn(a, b, c=api_utils.REQUIRED_ARG, d=4):
+    def fn(a: int,
+           b: int,
+           c: int = api_utils.REQUIRED_ARG,
+           d: int = 4) -> Tuple[int, int, int, int]:
       return (a, b, c, d)
 
     self.assertEqual(["a", "b", "c", "d"], api_utils.getargspec(fn).args)
@@ -61,7 +68,11 @@ class ApiUtilsTest(testing.TestCase):
         self.e = 5
 
       @api_utils.disallow_positional_args
-      def fn(self, a, b, c=api_utils.REQUIRED_ARG, d=4):
+      def fn(self,
+             a: int,
+             b: int,
+             c: int = api_utils.REQUIRED_ARG,
+             d: int = 4) -> Tuple[int, int, int, int, int]:
         return (a, b, c, d, self.e)
 
     obj = A()

@@ -25,6 +25,15 @@ import inspect
 import six
 import wrapt
 
+from typing import Optional
+from typing import Union
+from typing import Callable
+from typing import Sized
+from typing import Tuple
+from typing import List
+from typing import Any
+from typing import Iterable
+
 __all__ = [
     "disallow_positional_args"
 ]
@@ -36,7 +45,10 @@ _POSITIONAL_ARG_ERR_MSG = (
     "Positional arguments passed to fn %s: %s.")
 
 
-def disallow_positional_args(wrapped=None, allowed=None):
+def disallow_positional_args(
+  wrapped: Callable[..., Any] = None,
+  allowed: Optional[object] = None
+  ) -> Optional[object]:
   """Requires function to be called using keyword arguments."""
   # See
   # https://wrapt.readthedocs.io/en/latest/decorators.html#decorators-with-optional-arguments
@@ -45,16 +57,22 @@ def disallow_positional_args(wrapped=None, allowed=None):
     return functools.partial(disallow_positional_args, allowed=allowed)
 
   @wrapt.decorator
-  def disallow_positional_args_dec(fn, instance, args, kwargs):
+  def disallow_positional_args_dec(fn: Callable[[], Any],
+                                   instance: Optional[object],
+                                   args: Sized, kwargs: Iterable) -> object:
     ismethod = instance is not None
     _check_no_positional(fn, args, ismethod, allowed=allowed)
     _check_required(fn, kwargs)
     return fn(*args, **kwargs)
 
-  return disallow_positional_args_dec(wrapped)  # pylint: disable=no-value-for-parameter
+  return disallow_positional_args_dec(wrapped)
+  # pylint: disable=no-value-for-parameter
 
 
-def _check_no_positional(fn, args, is_method=False, allowed=None):
+def _check_no_positional(fn: Callable[[], Any],
+                         args: Sized,
+                         is_method: bool = False,
+                         allowed: Optional[object] = None) -> None:
   allowed = set(allowed or [])
   offset = int(is_method)
   if args:
@@ -64,7 +82,7 @@ def _check_no_positional(fn, args, is_method=False, allowed=None):
     raise ValueError(_POSITIONAL_ARG_ERR_MSG % (fn.__name__, str(arg_names)))
 
 
-def _required_args(fn):
+def _required_args(fn: Callable[[], Any]) -> List[str]:
   """Returns arguments of fn with default=REQUIRED_ARG."""
   spec = getargspec(fn)
   if not spec.defaults:
@@ -75,14 +93,16 @@ def _required_args(fn):
           if val is REQUIRED_ARG]
 
 
-def _check_required(fn, kwargs):
+def _check_required(fn: Callable[[], Any], kwargs: Iterable) -> None:
   required_args = _required_args(fn)
   for arg in required_args:
     if arg not in kwargs:
       raise ValueError("Argument %s is required." % arg)
 
 
-def getargspec(fn):
+def getargspec(
+  fn: Callable[[], Any]
+  ) -> Union[inspect.FullArgSpec, inspect.ArgSpec]:
   if six.PY3:
     spec = inspect.getfullargspec(fn)
   else:
