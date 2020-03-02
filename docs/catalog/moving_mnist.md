@@ -24,7 +24,6 @@ training/validation data from the MNIST dataset.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `91.70 MiB`
 *   **Auto-cached**

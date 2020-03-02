@@ -21,6 +21,9 @@ conditions.
     [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 *   **Source code**:
     [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
+*   **Versions**:
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 *   **Download size**: `1.13 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
@@ -70,26 +73,14 @@ FeaturesDict({
 ## diabetic_retinopathy_detection/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
-*   **Versions**:
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `2.0.0`: No release notes.
 
 ## diabetic_retinopathy_detection/1M
 
 *   **Config description**: Images have roughly 1,000,000 pixels, at 72 quality.
-*   **Versions**:
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `2.1.0`: No release notes.
 
 ## diabetic_retinopathy_detection/250K
 
 *   **Config description**: Images have roughly 250,000 pixels, at 72 quality.
-*   **Versions**:
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `2.1.0`: No release notes.
 
 ## diabetic_retinopathy_detection/btgraham-300
 
@@ -97,7 +88,3 @@ FeaturesDict({
     Kaggle competition did in 2015: first they are resized so that the radius of
     an eyeball is 300 pixels, then they are cropped to 90% of the radius, and
     finally they are encoded with 72 JPEG quality.
-*   **Versions**:
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.

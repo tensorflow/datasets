@@ -22,7 +22,6 @@ dropped.
 *   **Versions**:
     *   **`4.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `2.0.1`: No release notes.
 *   **Download size**: `786.68 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

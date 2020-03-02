@@ -22,17 +22,10 @@ Sinhala-English.
 *   **Versions**:
     *   **`1.1.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.3`: No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `1.47 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
+    Yes
 *   **Citation**:
 
 ```
@@ -50,6 +43,14 @@ Split | Examples
 
 *   **Config description**: Translation dataset from ne to en, uses encoder
     plain_text.
+*   **Dataset size**: `1.89 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 2,835
+'validation' | 2,559
+
 *   **Features**:
 
 ```python
@@ -58,7 +59,6 @@ Translation({
     'ne': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('ne', 'en')`
@@ -67,6 +67,14 @@ Translation({
 
 *   **Config description**: Translation dataset from si to en, uses encoder
     plain_text.
+*   **Dataset size**: `2.05 MiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 2,766
+'validation' | 2,898
+
 *   **Features**:
 
 ```python

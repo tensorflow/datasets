@@ -39,6 +39,9 @@ in order to guarantee reproducible results:
     [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
 *   **Source code**:
     [`tfds.image.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cbis_ddsm.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
@@ -99,10 +102,6 @@ in order to guarantee reproducible results:
 *   **Config description**: Patches containing both calsification and mass
     cases, plus pathces with no abnormalities. Designed as a traditional 5-class
     classification task.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.0`: No release notes.
 *   **Download size**: `2.01 MiB`
 *   **Splits**:
 
@@ -126,10 +125,6 @@ FeaturesDict({
 
 *   **Config description**: Original images of the calcification cases
     compressed in lossless PNG.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `1.06 MiB`
 *   **Splits**:
 
@@ -163,10 +158,6 @@ FeaturesDict({
 
 *   **Config description**: Original images of the mass cases compressed in
     lossless PNG.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `966.57 KiB`
 *   **Splits**:
 

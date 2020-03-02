@@ -28,7 +28,6 @@ networks are presented in the original paper.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `2.62 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

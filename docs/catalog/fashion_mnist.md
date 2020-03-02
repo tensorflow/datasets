@@ -23,7 +23,6 @@ set of 60,000 examples and a test set of 10,000 examples. Each example is a
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `29.45 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

@@ -23,7 +23,6 @@ reasoning each question requires.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `17.72 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

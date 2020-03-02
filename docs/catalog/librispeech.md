@@ -23,7 +23,6 @@ project, and has been carefully segmented and aligned.87
 *   **Versions**:
     *   **`1.1.0`** (default): No release notes.
 *   **Download size**: `57.14 GiB`
-*   **Dataset size**: `304.47 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
@@ -39,17 +38,6 @@ Split            | Examples
 'train_clean360' | 104,014
 'train_other500' | 148,688
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'chapter_id': tf.int64,
-    'id': tf.string,
-    'speaker_id': tf.int64,
-    'speech': Audio(shape=(None,), dtype=tf.int64),
-    'text': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('speech', 'text')`
@@ -69,11 +57,47 @@ FeaturesDict({
 ## librispeech/plain_text (default config)
 
 *   **Config description**: Transcriptions are in plain text.
+*   **Dataset size**: `304.47 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'chapter_id': tf.int64,
+    'id': tf.string,
+    'speaker_id': tf.int64,
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## librispeech/subwords8k
 
 *   **Config description**: Transcriptions use the SubwordTextEncoder
+*   **Dataset size**: `304.44 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'chapter_id': tf.int64,
+    'id': tf.string,
+    'speaker_id': tf.int64,
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8215>),
+})
+```
 
 ## librispeech/subwords32k
 
 *   **Config description**: Transcriptions use the SubwordTextEncoder
+*   **Dataset size**: `304.44 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'chapter_id': tf.int64,
+    'id': tf.string,
+    'speaker_id': tf.int64,
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32550>),
+})
+```

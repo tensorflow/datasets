@@ -24,7 +24,6 @@ missing values are replaced with -1, string missing values are replaced with
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `114.98 KiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

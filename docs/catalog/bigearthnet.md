@@ -51,7 +51,6 @@ URL: http://bigearth.net/
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.2`: No release notes.
 *   **Download size**: `65.22 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

@@ -23,7 +23,6 @@ contains these drawings converted from vector format into 28x28 grayscale images
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `36.82 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

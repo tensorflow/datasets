@@ -38,7 +38,6 @@ builder = tfds.builder("wmt_translate", config=config)
     [`tfds.translate.wmt17.Wmt17Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt17.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-    *   `0.0.3`: No release notes.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
@@ -85,7 +84,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('cs', 'en')`
@@ -110,7 +108,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('de', 'en')`
@@ -135,7 +132,6 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('fi', 'en')`
@@ -160,7 +156,6 @@ Translation({
     'lv': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('lv', 'en')`
@@ -185,7 +180,6 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('ru', 'en')`
@@ -210,7 +204,6 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('tr', 'en')`

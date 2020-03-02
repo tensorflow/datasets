@@ -25,7 +25,6 @@ corresponding reading passage, or the question might be unanswerable.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `33.51 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

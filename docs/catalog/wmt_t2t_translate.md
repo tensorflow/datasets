@@ -39,7 +39,6 @@ builder = tfds.builder("wmt_translate", config=config)
     [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-    *   `0.0.1`: No release notes.
 *   **Download size**: `1.61 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
