@@ -23,9 +23,6 @@ sudo apt-get install -qq -y libsm6
 
 install_tf "$TF_VERSION"
 
-# Beam requires Python header files for Python3 during YAML compilation
-sudo apt-get install -qq -y libpython${PY_VERSION}-dev
-
 # Make sure we have the latest version of numpy - avoid problems we were
 # seeing with Python 3
 pip install -q -U numpy
