@@ -36,14 +36,23 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Iterable
+from typing import Sized
+from typing import Tuple
+
 tf.compat.v1.enable_eager_execution()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
 class DummyBuilderConfig(dataset_builder.BuilderConfig):
+  increment: int
 
-  def __init__(self, increment=0, **kwargs):
+  def __init__(self, increment: int = 0, **kwargs):
     super(DummyBuilderConfig, self).__init__(**kwargs)
     self.increment = increment
 
@@ -64,7 +73,9 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
           increment=2),
   ]
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(
+    self,
+    dl_manager: download.DownloadManager) -> List[splits_lib.SplitGenerator]:
     del dl_manager
     return [
         splits_lib.SplitGenerator(
@@ -77,25 +88,26 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
         ),
     ]
 
-  def _info(self):
-
+  def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
         supervised_keys=("x", "x"),
     )
 
-  def _generate_examples(self, range_):
+  def _generate_examples(self, range_: Tuple[int, int]):
     for i in range_:
       x = i
       if self.builder_config:
+        # pytype: disable=attribute-error
         x += self.builder_config.increment
+        # pytype: enable=attribute-error
       yield i, {"x": x}
 
 
 class InvalidSplitDataset(DummyDatasetWithConfigs):
 
-  def _split_generators(self, _):
+  def _split_generators(self, _: Any) -> List[splits_lib.SplitGenerator]:
     return [
         splits_lib.SplitGenerator(
             name="all",  # Error: ALL cannot be used as Split key
@@ -146,11 +158,12 @@ class DatasetBuilderTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
-    from tensorflow_datasets.image import mnist  # pylint:disable=g-import-not-at-top
+    # pylint:disable=g-import-not-at-top
+    from tensorflow_datasets.image import mnist
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with absltest.mock.patch.object(
-          mnist.MNIST, "_download_and_prepare",
-          side_effect=NotImplementedError):
+        mnist.MNIST, "_download_and_prepare",
+        side_effect=NotImplementedError):
         # Make sure the dataset cannot be generated.
         with self.assertRaises(NotImplementedError):
           registered.load(
@@ -166,8 +179,7 @@ class DatasetBuilderTest(testing.TestCase):
           set(["dataset_info.json",
                "image.image.json",
                "mnist-test.tfrecord-00000-of-00001",
-               "mnist-train.tfrecord-00000-of-00001",
-              ]),
+               "mnist-train.tfrecord-00000-of-00001", ]),
           set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.0"))))
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
@@ -265,7 +277,8 @@ class DatasetBuilderTest(testing.TestCase):
 
   def test_read_config(self):
     is_called = []
-    def interleave_sort(lists):
+
+    def interleave_sort(lists: List[int]) -> List[int]:
       is_called.append(True)
       return lists
 
@@ -313,10 +326,11 @@ class DatasetBuilderTest(testing.TestCase):
   def test_non_preparable_version(self, *unused_mocks):
     expected = (
         "The version of the dataset you are trying to use ("
-        "dummy_dataset_shared_generator:0.0.7) can only be generated using TFDS"
-        " code synced @ v1.0.0 or earlier. Either sync to that version of TFDS "
-        "to first prepare the data or use another version of the dataset "
-        "(available for `download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
+        "dummy_dataset_shared_generator:0.0.7) can only be generated using"
+        " TFDS code synced @ v1.0.0 or earlier. Either sync to that version "
+        "of TFDS to first prepare the data or use another version of the "
+        "dataset (available for "
+        "`download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
     builder = DummyDatasetSharedGenerator(version="0.0.7")
     self.assertIsNotNone(builder)
     with self.assertRaisesWithPredicateMatch(AssertionError, expected):
@@ -374,20 +388,23 @@ class BuilderRestoreGcsTest(testing.TestCase):
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)  # noqa
       self.assertFalse(self.compute_dynamic_property.called)
 
       builder.download_and_prepare()
 
       # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples,
+                       20)
       self.assertFalse(self.compute_dynamic_property.called)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # If split are different that the one restored, stats should be recomputed
+      # If split are different that the one restored, stats should be
+      # recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples,
+                       20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       dl_config = download.DownloadConfig(max_examples_per_split=5)
@@ -479,8 +496,8 @@ class DatasetBuilderReadTest(testing.TestCase):
     self.assertEqual(20, len(train_data))
 
   def test_in_memory_with_device_ctx(self):
-    # Smoke test to ensure that the inner as_numpy call does not fail when under
-    # an explicit device context.
+    # Smoke test to ensure that the inner as_numpy call does not fail when
+    # under an explicit device context.
     # Only testing in graph mode. Eager mode would actually require job:foo to
     # exist in the cluster.
     with tf.Graph().as_default():
@@ -591,14 +608,12 @@ class DatasetBuilderReadTest(testing.TestCase):
     ))
 
 
-
-
 class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
   """Dataset containing nested sequences."""
 
   VERSION = utils.Version("0.0.1")
 
-  def _info(self):
+  def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({
@@ -610,7 +625,7 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
         }),
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager: download.DownloadManager):
     del dl_manager
     return [
         splits_lib.SplitGenerator(

@@ -33,6 +33,13 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
+from typing import Any
+from typing import Callable
+from typing import List
+from typing import Tuple
+from typing import Dict
+from typing import Iterable
+
 
 tf.compat.v1.enable_eager_execution()
 
@@ -41,7 +48,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
 
   VERSION = utils.Version("1.0.0")
 
-  def _info(self):
+  def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({
@@ -53,7 +60,9 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         metadata=dataset_info.BeamMetadataDict(),
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(
+    self,
+    dl_manager: download.DownloadManager) -> List[splits_lib.SplitGenerator]:
     del dl_manager
     return [
         splits_lib.SplitGenerator(
@@ -66,7 +75,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         ),
     ]
 
-  def _compute_metadata(self, examples, num_examples):
+  def _compute_metadata(self, examples: Iterable, num_examples: int) -> None:
     self.info.metadata["label_sum_%d" % num_examples] = (
         examples
         | beam.Map(lambda x: x[1]["label"])
@@ -76,7 +85,9 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         | beam.Map(lambda x: x[1]["id"])
         | beam.CombineGlobally(beam.combiners.MeanCombineFn()))
 
-  def _build_pcollection(self, pipeline, num_examples):
+  def _build_pcollection(self,
+                         pipeline: beam.pipeline,
+                         num_examples: int) -> Iterable:
     """Generate examples as dicts."""
     examples = (
         pipeline
@@ -87,7 +98,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
     return examples
 
 
-def _gen_example(x):
+def _gen_example(x: int) -> Tuple[int, Dict[str, Any]]:
   return (x, {
       "image": (np.ones((16, 16, 1)) * x % 255).astype(np.uint8),
       "label": x % 2,
@@ -97,7 +108,10 @@ def _gen_example(x):
 
 class CommonPipelineDummyBeamDataset(DummyBeamDataset):
 
-  def _split_generators(self, dl_manager, pipeline):
+  def _split_generators(
+    self,
+    dl_manager: download.DownloadManager,
+    pipeline: beam.Pipeline) -> List[splits_lib.SplitGenerator]:
     del dl_manager
 
     examples = (
@@ -117,7 +131,10 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
         ),
     ]
 
-  def _build_pcollection(self, pipeline, examples, num_examples):
+  def _build_pcollection(self,
+                         pipeline: beam.Pipeline,
+                         examples: Iterable,
+                         num_examples: int) -> Iterable:
     """Generate examples as dicts."""
     del pipeline
     examples |= beam.Filter(lambda x: x[0] < num_examples)
@@ -132,13 +149,16 @@ class FaultyS3DummyBeamDataset(DummyBeamDataset):
 
 class BeamBasedBuilderTest(testing.TestCase):
 
-  def test_download_prepare_raise(self):
+  def test_download_prepare_raise(self) -> None:
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyBeamDataset(data_dir=tmp_dir)
       with self.assertRaisesWithPredicateMatch(ValueError, "no Beam Runner"):
         builder.download_and_prepare()
 
-  def _assertBeamGeneration(self, dl_config, dataset_cls, dataset_name):
+  def _assertBeamGeneration(self,
+                            dl_config: download.DownloadConfig,
+                            dataset_cls: Callable[..., Any],
+                            dataset_name: str) -> None:
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = dataset_cls(data_dir=tmp_dir)
       builder.download_and_prepare(download_config=dl_config)
@@ -161,7 +181,7 @@ class BeamBasedBuilderTest(testing.TestCase):
 
       datasets = dataset_utils.as_numpy(builder.as_dataset())
 
-      def get_id(ex):
+      def get_id(ex: Dict[str, Any]) -> object:
         return ex["id"]
 
       self._assertElemsAllEqual(
@@ -181,7 +201,10 @@ class BeamBasedBuilderTest(testing.TestCase):
           }
       )
 
-  def _assertShards(self, data_dir, pattern, num_shards):
+  def _assertShards(self,
+                    data_dir: str,
+                    pattern: str,
+                    num_shards: int) -> None:
     self.assertTrue(num_shards)
     shards_filenames = [
         pattern.format(i, num_shards) for i in range(num_shards)
@@ -190,7 +213,9 @@ class BeamBasedBuilderTest(testing.TestCase):
         tf.io.gfile.exists(os.path.join(data_dir, f)) for f in shards_filenames
     ))
 
-  def _assertElemsAllEqual(self, nested_lhs, nested_rhs):
+  def _assertElemsAllEqual(self,
+                           nested_lhs: Iterable,
+                           nested_rhs: Iterable) -> None:
     """assertAllEqual applied to a list of nested elements."""
     for dict_lhs, dict_rhs in zip(nested_lhs, nested_rhs):
       flat_lhs = tf.nest.flatten(dict_lhs)
@@ -198,13 +223,12 @@ class BeamBasedBuilderTest(testing.TestCase):
       for lhs, rhs in zip(flat_lhs, flat_rhs):
         self.assertAllEqual(lhs, rhs)
 
-
-  def _get_dl_config_if_need_to_run(self):
+  def _get_dl_config_if_need_to_run(self) -> download.DownloadConfig:
     return download.DownloadConfig(
         beam_options=beam.options.pipeline_options.PipelineOptions(),
     )
 
-  def test_download_prepare(self):
+  def test_download_prepare(self) -> None:
     dl_config = self._get_dl_config_if_need_to_run()
     if not dl_config:
       return
