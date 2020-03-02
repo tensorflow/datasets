@@ -43,9 +43,6 @@ FeaturesDict({
     'upvote_ratio': tf.float32,
 })
 ```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('documents', 'title')`
 *   **Citation**:
 
 ```
@@ -68,6 +65,10 @@ Split   | Examples
 :------ | -------:
 'train' | 79,740
 
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('documents', 'title')`
+
 ## reddit_tifu/long
 
 *   **Config description**: Using TLDR as summary.
@@ -76,3 +77,7 @@ Split   | Examples
 Split   | Examples
 :------ | -------:
 'train' | 42,139
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    `('documents', 'tldr')`

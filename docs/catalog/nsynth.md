@@ -26,38 +26,10 @@ heuristic algorithms: Source, Family, and Qualities.
 *   **Versions**:
     *   **`2.3.0`** (default): New `loudness_db` feature in decibels
         (unormalized).
-*   **Download size**: `73.07 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-FeaturesDict({
-    'audio': Tensor(shape=(64000,), dtype=tf.float32),
-    'id': tf.string,
-    'instrument': FeaturesDict({
-        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    }),
-    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
-    'qualities': FeaturesDict({
-        'bright': tf.bool,
-        'dark': tf.bool,
-        'distortion': tf.bool,
-        'fast_decay': tf.bool,
-        'long_release': tf.bool,
-        'multiphonic': tf.bool,
-        'nonlinear_env': tf.bool,
-        'percussive': tf.bool,
-        'reverb': tf.bool,
-        'tempo-synced': tf.bool,
-    }),
-    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -86,6 +58,7 @@ FeaturesDict({
 *   **Config description**: Full NSynth Dataset is split into train, valid, and
     test sets, with no instruments overlapping between the train set and the
     valid/test sets.
+*   **Download size**: `73.07 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -94,6 +67,34 @@ Split   | Examples
 'train' | 289,205
 'valid' | 12,678
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'id': tf.string,
+    'instrument': FeaturesDict({
+        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'qualities': FeaturesDict({
+        'bright': tf.bool,
+        'dark': tf.bool,
+        'distortion': tf.bool,
+        'fast_decay': tf.bool,
+        'long_release': tf.bool,
+        'multiphonic': tf.bool,
+        'nonlinear_env': tf.bool,
+        'percussive': tf.bool,
+        'reverb': tf.bool,
+        'tempo-synced': tf.bool,
+    }),
+    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+})
+```
+
 ## nsynth/gansynth_subset
 
 *   **Config description**: NSynth Dataset limited to acoustic instruments in
@@ -101,6 +102,7 @@ Split   | Examples
     instruments (but not exact notes) between the train set and valid/test sets.
     This variant was originally introduced in the ICLR 2019 GANSynth paper
     (https://arxiv.org/abs/1902.08710).
+*   **Download size**: `73.08 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -108,6 +110,34 @@ Split   | Examples
 'test'  | 8,518
 'train' | 60,788
 'valid' | 17,469
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'id': tf.string,
+    'instrument': FeaturesDict({
+        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'qualities': FeaturesDict({
+        'bright': tf.bool,
+        'dark': tf.bool,
+        'distortion': tf.bool,
+        'fast_decay': tf.bool,
+        'long_release': tf.bool,
+        'multiphonic': tf.bool,
+        'nonlinear_env': tf.bool,
+        'percussive': tf.bool,
+        'reverb': tf.bool,
+        'tempo-synced': tf.bool,
+    }),
+    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+})
+```
 
 ## nsynth/gansynth_subset.f0_and_loudness
 
@@ -118,6 +148,7 @@ Split   | Examples
     (https://arxiv.org/abs/1902.08710). This version additionally contains
     estimates for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual
     loudness in decibels. Both signals are provided at a frame rate of 250Hz.
+*   **Download size**: `73.08 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -125,3 +156,39 @@ Split   | Examples
 'test'  | 8,518
 'train' | 60,788
 'valid' | 17,469
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'f0': FeaturesDict({
+        'confidence': Tensor(shape=(1000,), dtype=tf.float32),
+        'hz': Tensor(shape=(1000,), dtype=tf.float32),
+        'midi': Tensor(shape=(1000,), dtype=tf.float32),
+    }),
+    'id': tf.string,
+    'instrument': FeaturesDict({
+        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+    'loudness': FeaturesDict({
+        'db': Tensor(shape=(1000,), dtype=tf.float32),
+    }),
+    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'qualities': FeaturesDict({
+        'bright': tf.bool,
+        'dark': tf.bool,
+        'distortion': tf.bool,
+        'fast_decay': tf.bool,
+        'long_release': tf.bool,
+        'multiphonic': tf.bool,
+        'nonlinear_env': tf.bool,
+        'percussive': tf.bool,
+        'reverb': tf.bool,
+        'tempo-synced': tf.bool,
+    }),
+    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+})
+```

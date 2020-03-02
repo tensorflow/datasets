@@ -26,7 +26,6 @@ Imagenet, trainable on a single GPU.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `7.48 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

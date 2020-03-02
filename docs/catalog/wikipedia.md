@@ -23,8 +23,6 @@ cleaning to strip markdown and unwanted sections (references, etc.).
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.4`: No release notes.
-    *   `0.0.3`: No release notes.
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

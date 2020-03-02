@@ -31,7 +31,6 @@ more than once in the sentence, its first occurrence is the one to be resolved.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: No release notes.
 *   **Download size**: `222.12 KiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

@@ -26,7 +26,6 @@ WARNING: This dataset currently requires you to prepare images on your own.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the

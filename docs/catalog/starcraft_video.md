@@ -21,7 +21,6 @@ This data set contains videos generated from Starcraft.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.2`: No release notes.
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

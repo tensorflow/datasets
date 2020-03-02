@@ -22,7 +22,6 @@ where one is high resource and the other is low resource.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: No release notes.
 *   **Download size**: `124.94 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -58,7 +57,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('az', 'en')`
@@ -82,7 +80,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('az_tr', 'en')`
@@ -106,7 +103,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('be', 'en')`
@@ -130,7 +126,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('be_ru', 'en')`
@@ -154,7 +149,6 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('es', 'pt')`
@@ -178,7 +172,6 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('fr', 'pt')`
@@ -202,7 +195,6 @@ Translation({
     'gl': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('gl', 'en')`
@@ -226,7 +218,6 @@ Translation({
     'gl_pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('gl_pt', 'en')`
@@ -250,7 +241,6 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('he', 'pt')`
@@ -274,7 +264,6 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('it', 'pt')`
@@ -298,7 +287,6 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('pt', 'en')`
@@ -322,7 +310,6 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('ru', 'en')`
@@ -346,7 +333,6 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('ru', 'pt')`

@@ -25,7 +25,6 @@ measures 256x256 pixels.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: No release notes.
 *   **Download size**: `317.07 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

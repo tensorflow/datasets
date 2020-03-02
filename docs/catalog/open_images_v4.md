@@ -27,6 +27,9 @@ classes.
     [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 *   **Source code**:
     [`tfds.object_detection.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 *   **Download size**: `565.11 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -125,25 +128,13 @@ FeaturesDict({
 ## open_images_v4/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.0`: No release notes.
 
 ## open_images_v4/300k
 
 *   **Config description**: Images have roughly 300,000 pixels, at 72 JPEG
     quality.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.1`: No release notes.
 
 ## open_images_v4/200k
 
 *   **Config description**: Images have roughly 200,000 pixels, at 72 JPEG
     quality.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.1`: No release notes.

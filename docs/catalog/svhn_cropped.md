@@ -23,7 +23,6 @@ cropped to 32x32.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `1.47 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

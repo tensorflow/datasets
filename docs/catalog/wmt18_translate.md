@@ -38,7 +38,6 @@ builder = tfds.builder("wmt_translate", config=config)
     [`tfds.translate.wmt18.Wmt18Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt18.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-    *   `0.0.3`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
@@ -85,7 +84,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('cs', 'en')`
@@ -101,7 +99,6 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('de', 'en')`
@@ -117,7 +114,6 @@ Translation({
     'et': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('et', 'en')`
@@ -133,7 +129,6 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('fi', 'en')`
@@ -149,7 +144,6 @@ Translation({
     'kk': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('kk', 'en')`
@@ -165,7 +159,6 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('ru', 'en')`
@@ -181,7 +174,6 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `('tr', 'en')`

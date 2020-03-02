@@ -1,0 +1,52 @@
+{
+  "citation": "\n@misc{Dua:2019 ,\nauthor = \"Dua, Dheeru and Graff, Casey\",\nyear = \"2017\",\ntitle = \"{UCI} Machine Learning Repository\",\nurl = \"http://archive.ics.uci.edu/ml\",\ninstitution = \"University of California, Irvine, School of Information and Computer Sciences\" }\n\n@article{cortez2007data,\n  title={A data mining approach to predict forest fires using meteorological data},\n  author={Cortez, Paulo and Morais, Anibal de Jesus Raimundo},\n  year={2007},\n  publisher={Associa{\\c{c}}{\\~a}o Portuguesa para a Intelig{\\^e}ncia Artificial (APPIA)}\n}\n",
+  "description": "\n\nThis is a regression task, where the aim is to predict the burned area of\nforest fires, in the northeast region of Portugal,\nby using meteorological and other data.\n\n\nData Set Information:\n\nIn [Cortez and Morais, 2007], the output 'area' was first transformed\nwith a ln(x+1) function.\nThen, several Data Mining methods were applied. After fitting the models,\nthe outputs were\npost-processed with the inverse of the ln(x+1) transform. Four different\ninput setups were\nused. The experiments were conducted using a 10-fold (cross-validation)\nx 30 runs. Two\nregression metrics were measured: MAD and RMSE. A Gaussian support vector\nmachine (SVM) fed\nwith only 4 direct weather conditions (temp, RH, wind and rain) obtained\nthe best MAD value:\n12.71 +- 0.01 (mean and confidence interval within 95% using a t-student\ndistribution). The\nbest RMSE was attained by the naive mean predictor. An analysis to the\nregression error curve\n(REC) shows that the SVM model predicts more examples within a lower\nadmitted error. In effect,\nthe SVM model predicts better small fires, which are the majority.\n\nAttribute Information:\n\nFor more information, read [Cortez and Morais, 2007].\n\n1. X - x-axis spatial coordinate within the Montesinho park map: 1 to 9\n2. Y - y-axis spatial coordinate within the Montesinho park map: 2 to 9\n3. month - month of the year: 'jan' to 'dec'\n4. day - day of the week: 'mon' to 'sun'\n5. FFMC - FFMC index from the FWI system: 18.7 to 96.20\n6. DMC - DMC index from the FWI system: 1.1 to 291.3\n7. DC - DC index from the FWI system: 7.9 to 860.6\n8. ISI - ISI index from the FWI system: 0.0 to 56.10\n9. temp - temperature in Celsius degrees: 2.2 to 33.30\n10. RH - relative humidity in %: 15.0 to 100\n11. wind - wind speed in km/h: 0.40 to 9.40\n12. rain - outside rain in mm/m2 : 0.0 to 6.4\n13. area - the burned area of the forest (in ha): 0.00 to 1090.84\n(this output variable is very skewed towards 0.0, thus it may make\nsense to model with the logarithm transform).\n\n",
+  "downloadSize": "25478",
+  "location": {
+    "urls": [
+      "https://archive.ics.uci.edu/ml/datasets/Forest+Fires"
+    ]
+  },
+  "name": "forest_fires",
+  "schema": {
+    "feature": [
+      {
+        "name": "area",
+        "type": "FLOAT"
+      },
+      {
+        "name": "features"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "165957",
+      "numShards": "1",
+      "shardLengths": [
+        "517"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "area",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "517"
+              },
+              "max": 1090.8399658203125
+            },
+            "type": "FLOAT"
+          }
+        ],
+        "numExamples": "517"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "area",
+    "output": "features"
+  },
+  "version": "0.0.1"
+}

@@ -21,7 +21,6 @@ The MNIST database of handwritten digits.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `11.06 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

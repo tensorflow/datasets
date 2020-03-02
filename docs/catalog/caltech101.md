@@ -26,7 +26,6 @@ boxes.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.1.0`: No release notes.
 *   **Download size**: `125.64 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

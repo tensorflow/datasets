@@ -10,42 +10,15 @@
 </div>
 # `coco`
 
-*   **Description**:
-
-COCO is a large-scale object detection, segmentation, and captioning dataset.
-This version contains images, bounding boxes " and labels for the 2014 version.
-Note: * Some images from the train and validation sets don't have annotations. *
-Coco 2014 and 2017 uses the same images, but different train/val/test splits *
-The test split don't have any annotations (only images). * Coco defines 91
-classes but the data only uses 80 classes. * Panotptic annotations defines
-defines 200 classes but only uses 133.
-
 *   **Homepage**: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 *   **Source code**:
     [`tfds.object_detection.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/coco.py)
 *   **Versions**:
     *   **`1.1.0`** (default): No release notes.
-*   **Download size**: `37.57 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'image/id': tf.int64,
-    'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'is_crowd': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
-    }),
-})
-```
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
     `None`
@@ -78,6 +51,16 @@ FeaturesDict({
 
 ## coco/2014 (default config)
 
+*   **Description**:
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2014 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding
     boxes " and labels for the 2014 version. Note:
@@ -87,6 +70,7 @@ FeaturesDict({
     *   The test split don't have any annotations (only images).
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
+*   **Download size**: `37.57 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -96,7 +80,34 @@ Split        | Examples
 'train'      | 82,783
 'validation' | 40,504
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'image/id': tf.int64,
+    'objects': Sequence({
+        'area': tf.int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': tf.int64,
+        'is_crowd': tf.bool,
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
 ## coco/2017
+
+*   **Description**:
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
 
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding
@@ -107,6 +118,7 @@ Split        | Examples
     *   The test split don't have any annotations (only images).
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
+*   **Download size**: `25.20 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -115,7 +127,34 @@ Split        | Examples
 'train'      | 118,287
 'validation' | 5,000
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'image/id': tf.int64,
+    'objects': Sequence({
+        'area': tf.int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': tf.int64,
+        'is_crowd': tf.bool,
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
 ## coco/2017_panoptic
+
+*   **Description**:
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
 
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding
@@ -126,9 +165,29 @@ Split        | Examples
     *   The test split don't have any annotations (only images).
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
+*   **Download size**: `19.57 GiB`
 *   **Splits**:
 
 Split        | Examples
 :----------- | -------:
 'train'      | 118,287
 'validation' | 5,000
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'image/id': tf.int64,
+    'panoptic_image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'panoptic_image/filename': Text(shape=(), dtype=tf.string),
+    'panoptic_objects': Sequence({
+        'area': tf.int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': tf.int64,
+        'is_crowd': tf.bool,
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
+    }),
+})
+```

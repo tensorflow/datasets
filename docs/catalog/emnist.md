@@ -27,7 +27,6 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.1`: No release notes.
 *   **Download size**: `535.73 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
