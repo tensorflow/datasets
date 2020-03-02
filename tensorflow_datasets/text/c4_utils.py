@@ -295,11 +295,14 @@ def _remove_lines_from_text(
   text = features["text"]
   lines_to_remove = set(join_values["lines"])
   new_lines = []
+  hashed_lines = set()
   for line in text.split("\n"):
-    if _hash_line(line) in lines_to_remove:
+    hashed_line = _hash_line(line)
+    if hashed_line in lines_to_remove:
       counter_inc_fn("filtered-lines-duplicate")
-    else:
+    elif hashed_line not in hashed_lines:
       new_lines.append(line)
+      hashed_lines.add(hashed_line)
   new_text = "\n".join(new_lines)
   if len(_get_sentences(new_text)) < min_num_sentences:
     counter_inc_fn("filtered-doc-toofewsentences")

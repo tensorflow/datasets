@@ -237,7 +237,11 @@ This line should be okay."""
     input_urls_and_text = [
         ("url/1-0",
          "This is a duplicated line.\nThis is a unique line.\n"
-         "This one comes first and so it stays."),
+         "This one comes first and so it stays.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "Here is a sentence between the duplicates.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "this One is Duplicate WITHIN the page so the others are removed. "),
         ("url/2-1",
          "This is 2nd unique line.\nThis one comes second so it is removed "
          "even though the capitalizaiton is different.\n"
@@ -254,7 +258,9 @@ This line should be okay."""
     expected_urls_and_text = [
         ("url/1-0",
          "This is a duplicated line.\nThis is a unique line.\n"
-         "This one comes first and so it stays."),
+         "This one comes first and so it stays.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "Here is a sentence between the duplicates."),
         ("url/3-4",
          "This is a 3rd unique line.\n"
          "This one comes third and so it is removed. But the page stays "
