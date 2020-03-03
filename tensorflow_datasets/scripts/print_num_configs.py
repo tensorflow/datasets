@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Script that prints number of configs for a dataset."""
 
 

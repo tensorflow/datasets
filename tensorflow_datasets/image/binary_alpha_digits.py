@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """TensorFlow dataset for Binary Alphadigits."""
 
 import six.moves.urllib as urllib

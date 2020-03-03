@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Dataset class for Places365-Standard small(256x256) dataset."""
 
 import csv

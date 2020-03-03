@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """CelebA dataset.
 
 Large-scale CelebFaces Attributes (CelebA) Dataset

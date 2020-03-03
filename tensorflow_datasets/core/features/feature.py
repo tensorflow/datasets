@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Feature connector.
 
 FeatureConnector is a way of abstracting what data is returned by the

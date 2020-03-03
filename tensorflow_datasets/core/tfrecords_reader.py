@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Defined Reader and ReadInstruction to read tfrecord files."""
 
 

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Stanford Online Products Dataset."""
 import csv
 import os

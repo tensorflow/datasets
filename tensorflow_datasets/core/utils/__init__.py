@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Util import."""
 
 # pylint: disable=wildcard-import

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tool for putting given images into a single lmdb database.
 
 This is the format that's used by LSUN dataset (it also

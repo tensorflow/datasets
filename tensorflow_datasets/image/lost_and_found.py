@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Lost and Found Road Hazard Dataset."""
 
 

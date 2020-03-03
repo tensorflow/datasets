@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """DAS beamformed phantom images and paired clinical post-processed images."""
 
 

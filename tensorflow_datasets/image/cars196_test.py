@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 from tensorflow_datasets.image import cars196
 import tensorflow_datasets.testing as tfds_test
 

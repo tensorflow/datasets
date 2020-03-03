@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """To serialize Dict or sequence to Example."""
 
 

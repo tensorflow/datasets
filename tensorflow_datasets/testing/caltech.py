@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Script to generate Caltech101 like files with random data for testing.
 
 """

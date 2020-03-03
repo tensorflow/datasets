@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for Caltech data loading."""
 
 from tensorflow_datasets import testing

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Oxford-IIIT pet dataset."""
 
 import os

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Wrapper around FeatureDict to allow better control over decoding.
 """
 

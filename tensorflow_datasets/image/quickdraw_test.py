@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for Quickdraw data."""
 
 from tensorflow_datasets import testing

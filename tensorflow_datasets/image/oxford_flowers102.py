@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Oxford 102 Category Flower Dataset."""
 
 

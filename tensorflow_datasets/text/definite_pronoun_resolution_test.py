@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for definite_pronoun_resolution dataset module."""
 
 

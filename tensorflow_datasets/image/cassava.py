@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Cassava leaf dataset with images of health and diseased leaves."""
 
 

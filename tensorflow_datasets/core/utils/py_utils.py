@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Some python utils function and classes.
 
 """

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Script to generate fake 'Lost and Found' data."""
 import tensorflow.compat.v2 as tf
 

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Celeba-HQ dataset."""
 import os
 

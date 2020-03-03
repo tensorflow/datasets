@@ -15,7 +15,6 @@
 
 # Lint as: python3
 
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import imagenet_resized
 

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Beans leaf dataset with images of diseased and health leaves."""
 
 import tensorflow_datasets.public_api as tfds

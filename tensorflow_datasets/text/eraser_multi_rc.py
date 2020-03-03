@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Passage, query, answers and answer classification with explanations."""
 
 

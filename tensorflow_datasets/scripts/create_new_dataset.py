@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Generate the minimal source code for a new dataset.
 
 python -m tensorflow_datasets.scripts.create_new_dataset \

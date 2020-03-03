@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """WMT14: Translate dataset."""
 
 import tensorflow_datasets.public_api as tfds

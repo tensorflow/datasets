@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 # coding=utf-8
 """Tests for tensorflow_datasets.core.features.feature.
 

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Base TestCase to use test_data."""
 
 

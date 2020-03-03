@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Utilities to manipulate images.
 
 Note: these functions are not meant to be used inside of a TF graph.

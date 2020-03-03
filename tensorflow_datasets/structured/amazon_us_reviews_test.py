@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for amazon_us_reviews dataset module."""
 
 

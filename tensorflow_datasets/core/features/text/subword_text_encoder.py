@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 # coding=utf-8
 """SubwordTextEncoder."""
 # This implementation is based on SubwordTextEncoder in Tensor2Tensor,

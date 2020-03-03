@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Structured datasets."""
 
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews

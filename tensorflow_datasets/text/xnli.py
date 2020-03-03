@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """XNLI: The Cross-Lingual NLI Corpus."""
 
 

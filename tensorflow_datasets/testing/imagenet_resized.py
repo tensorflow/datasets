@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Script to generate imagenet resized like files for testing.
 
 """

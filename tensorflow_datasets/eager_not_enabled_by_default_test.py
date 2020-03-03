@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for checking that eager isn't enabled by default on importing tfds."""
 
 

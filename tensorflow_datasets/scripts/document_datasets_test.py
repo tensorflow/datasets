@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Test of `document_datasets.py`."""
 
 from tensorflow_datasets import testing

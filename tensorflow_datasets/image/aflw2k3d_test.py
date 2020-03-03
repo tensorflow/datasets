@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for AFLW2000-3D dataset module."""
 
 from tensorflow_datasets import testing

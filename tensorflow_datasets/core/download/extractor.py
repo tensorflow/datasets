@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Module to use to extract archives. No business logic."""
 
 

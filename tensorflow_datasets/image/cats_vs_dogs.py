@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Cats vs Dogs dataset.
 """
 

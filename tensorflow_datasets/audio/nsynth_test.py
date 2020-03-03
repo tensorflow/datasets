@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Nsynth Dataset Builder test."""
 from tensorflow_datasets.audio import nsynth
 import tensorflow_datasets.testing as tfds_test

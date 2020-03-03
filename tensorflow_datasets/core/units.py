@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Defines convenience constants/functions for converting various units."""
 
 

@@ -15,7 +15,6 @@
 
 # Lint as: python3
 
-
 """Tests for Cityscapes dataset module."""
 
 

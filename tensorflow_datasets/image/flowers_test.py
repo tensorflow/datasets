@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for flowers data loading."""
 
 from tensorflow_datasets import testing

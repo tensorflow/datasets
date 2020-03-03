@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Resized imagenet to 8x8, 16x16, 32x32.
 
 This is not to be confused with `downsampled_imagenet` which is a unsupervised

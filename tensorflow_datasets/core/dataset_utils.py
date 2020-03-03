@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Utilities for dealing with tf.data.Dataset."""
 
 

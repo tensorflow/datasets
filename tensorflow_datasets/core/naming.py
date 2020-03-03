@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Utilities for file names."""
 
 

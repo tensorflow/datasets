@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """To write records into sharded tfrecord files."""
 
 import collections

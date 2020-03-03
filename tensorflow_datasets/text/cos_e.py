@@ -14,8 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
-# Lint as: python3
 """Commonsense Explanations (CoS-E) Dataset."""
 
 

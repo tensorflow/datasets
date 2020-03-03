@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Remote Sensing Image Scene Classification (RESISC45) Dataset."""
 
 

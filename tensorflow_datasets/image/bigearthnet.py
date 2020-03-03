@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """BigEarthNet remote sensing dataset of Sentinel-2 image patches."""
 
 

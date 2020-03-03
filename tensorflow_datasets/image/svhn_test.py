@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for tfds.image.svhn."""
 
 from tensorflow_datasets import testing

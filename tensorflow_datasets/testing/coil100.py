@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Fake Data Generator for Coil-100 Dataset."""
 
 

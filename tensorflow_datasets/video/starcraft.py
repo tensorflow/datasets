@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
 

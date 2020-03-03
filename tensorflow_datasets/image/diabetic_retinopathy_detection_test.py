@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for diabetic_retinopathy_detection dataset module."""
 
 from tensorflow_datasets import testing

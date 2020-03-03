@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Generate MNIST-like files, smaller and with random data.
 
 """

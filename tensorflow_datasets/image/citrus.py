@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Healthy and unhealthy citrus fruits and leaves dataset."""
 
 

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """UC Merced: Small remote sensing dataset for land use classification."""
 
 

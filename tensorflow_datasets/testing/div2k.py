@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Generates DIV2K like files with random data for testing."""
 
 

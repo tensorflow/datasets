@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Generate Shapes3d-like files, smaller and with random data.
 
 """

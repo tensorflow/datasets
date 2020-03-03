@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """To deserialize bytes (Example) to tf.Example."""
 
 

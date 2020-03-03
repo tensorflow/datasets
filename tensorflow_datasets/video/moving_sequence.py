@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Provides `image_as_moving_sequence`."""
 
 

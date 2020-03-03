@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Open images datasets.
 
 https://storage.googleapis.com/openimages/web/index.html

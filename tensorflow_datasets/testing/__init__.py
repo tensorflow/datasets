@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Testing utilities."""
 
 from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase

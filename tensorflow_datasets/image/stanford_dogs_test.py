@@ -15,7 +15,6 @@
 
 # Lint as: python3
 
-
 from tensorflow_datasets.image import stanford_dogs
 import tensorflow_datasets.testing as tfds_test
 

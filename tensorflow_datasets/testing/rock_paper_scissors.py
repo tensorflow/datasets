@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Generate fake data for rock_paper_scissors dataset.
 
 """

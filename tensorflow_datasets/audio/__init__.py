@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Audio datasets."""
 
 from tensorflow_datasets.audio.groove import Groove

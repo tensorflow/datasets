@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for the GLUE data set.
 
 We have an individual test for each config so that we can use sharding to

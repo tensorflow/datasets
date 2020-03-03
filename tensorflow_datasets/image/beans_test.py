@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for Beans dataset."""
 
 from tensorflow_datasets.image import beans

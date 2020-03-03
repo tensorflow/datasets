@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Coil-100 Test."""
 
 

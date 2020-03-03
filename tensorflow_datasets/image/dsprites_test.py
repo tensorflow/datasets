@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """dSprites dataset test."""
 from tensorflow_datasets.image import dsprites
 import tensorflow_datasets.testing as tfds_test

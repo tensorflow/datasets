@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """SCAN tasks with various different splits."""
 
 

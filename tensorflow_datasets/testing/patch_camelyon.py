@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Create fake data for Camelyon Patch dataset.
 
 """

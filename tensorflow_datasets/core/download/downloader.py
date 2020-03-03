@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Async download API with checksum verification. No business logic."""
 
 

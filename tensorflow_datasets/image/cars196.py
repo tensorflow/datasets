@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Dataset class for Cars196 Dataset."""
 
 import os

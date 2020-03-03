@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 # coding=utf-8
 """TextEncoders convert between text and integers."""
 

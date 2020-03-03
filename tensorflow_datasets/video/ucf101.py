@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """UCF-101 dataset from https://www.crcv.ucf.edu/data/UCF101.php."""
 
 

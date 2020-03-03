@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Video datasets."""
 
 from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall

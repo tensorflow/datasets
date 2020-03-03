@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 r"""Generate ilsvrc2012 like files, smaller and with random data.
 
 """

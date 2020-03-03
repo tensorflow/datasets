@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """DIV2K dataset: DIVerse 2K resolution high quality images.
 
 As used for the challenges @ NTIRE (CVPR 2017 and CVPR 2018)

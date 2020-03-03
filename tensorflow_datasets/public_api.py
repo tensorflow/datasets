@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Public API of tfds, without the registered dataset."""
 
 # pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position

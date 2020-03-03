@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
 

@@ -14,8 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
-# Lint as: python3
 """C4 dataset based on Common Crawl."""
 
 

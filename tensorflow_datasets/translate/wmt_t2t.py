@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """The WMT EnDe Translate dataset used by the Tensor2Tensor library."""
 
 import tensorflow_datasets.public_api as tfds

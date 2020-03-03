@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for open_images dataset module."""
 
 from tensorflow_datasets import testing

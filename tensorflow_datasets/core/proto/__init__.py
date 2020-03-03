@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Public API of the proto package."""
 # pylint: disable=g-import-not-at-top
 

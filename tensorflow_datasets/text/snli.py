@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """The Stanford Natural Language Inference (SNLI) Corpus."""
 
 

@@ -15,7 +15,6 @@
 
 # Lint as: python3
 
-
 import collections
 
 from tensorflow_datasets import testing

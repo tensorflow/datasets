@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Berkeley (BAIR) robot pushing dataset.
 
 Self-Supervised Visual Planning with Temporal Skip Connections
