@@ -67,8 +67,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
         supervised_keys=("image", "label"),
         homepage=
         "https://www.microsoft.com/en-us/download/details.aspx?id=54765",
-        citation=_CITATION
-        )
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download(_URL)
