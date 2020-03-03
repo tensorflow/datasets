@@ -21,9 +21,16 @@ from __future__ import print_function
 
 import os
 
-import apache_beam as beam
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import Iterable
+from typing import List
+from typing import Tuple
+
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow.compat.v2 as tf  # type: ignore
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -33,18 +40,18 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
-from typing import Any
-from typing import Callable
-from typing import List
-from typing import Tuple
-from typing import Dict
-from typing import Iterable
+if typing.TYPE_CHECKING:  # type: ignore
+  try:
+    import apache_beam as beam
+  except ImportError:
+    beam = Any
 
 
 tf.compat.v1.enable_eager_execution()
 
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
+  """Created Dummy Beam Dataset for testing."""
 
   VERSION = utils.Version("1.0.0")
 
@@ -61,8 +68,8 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
     )
 
   def _split_generators(
-    self,
-    dl_manager: download.DownloadManager) -> List[splits_lib.SplitGenerator]:
+      self,
+      dl_manager: download.DownloadManager) -> List[splits_lib.SplitGenerator]:
     del dl_manager
     return [
         splits_lib.SplitGenerator(
@@ -75,7 +82,9 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         ),
     ]
 
-  def _compute_metadata(self, examples: Iterable, num_examples: int) -> None:
+  def _compute_metadata(self,
+                        examples: Iterable,
+                        num_examples: int) -> None:
     self.info.metadata["label_sum_%d" % num_examples] = (
         examples
         | beam.Map(lambda x: x[1]["label"])
@@ -85,6 +94,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         | beam.Map(lambda x: x[1]["id"])
         | beam.CombineGlobally(beam.combiners.MeanCombineFn()))
 
+  # pylint: disable=arguments-differ
   def _build_pcollection(self,
                          pipeline: beam.pipeline,
                          num_examples: int) -> Iterable:
@@ -107,11 +117,13 @@ def _gen_example(x: int) -> Tuple[int, Dict[str, Any]]:
 
 
 class CommonPipelineDummyBeamDataset(DummyBeamDataset):
+  """Dummy Beam Dataset with Pipeline."""
 
+  # pylint: disable=arguments-differ
   def _split_generators(
-    self,
-    dl_manager: download.DownloadManager,
-    pipeline: beam.Pipeline) -> List[splits_lib.SplitGenerator]:
+      self,
+      dl_manager: download.DownloadManager,
+      pipeline: beam.Pipeline) -> List[splits_lib.SplitGenerator]:
     del dl_manager
 
     examples = (
@@ -131,6 +143,7 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
         ),
     ]
 
+  # pylint: disable=arguments-differ
   def _build_pcollection(self,
                          pipeline: beam.Pipeline,
                          examples: Iterable,
@@ -148,6 +161,7 @@ class FaultyS3DummyBeamDataset(DummyBeamDataset):
 
 
 class BeamBasedBuilderTest(testing.TestCase):
+  """Beam based Builder class for testing."""
 
   def test_download_prepare_raise(self) -> None:
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -155,16 +169,18 @@ class BeamBasedBuilderTest(testing.TestCase):
       with self.assertRaisesWithPredicateMatch(ValueError, "no Beam Runner"):
         builder.download_and_prepare()
 
+  # pylint: disable=invalid-name
   def _assertBeamGeneration(self,
                             dl_config: download.DownloadConfig,
                             dataset_cls: Callable[..., Any],
                             dataset_name: str) -> None:
+    """Generating test beam."""
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = dataset_cls(data_dir=tmp_dir)
       builder.download_and_prepare(download_config=dl_config)
 
       data_dir = os.path.join(tmp_dir, dataset_name, "1.0.0")
-      self.assertEqual(data_dir, builder._data_dir)
+      self.assertEqual(data_dir, builder._data_dir)  # pylint: disable=protected-access
 
       # Check number of shards
       self._assertShards(
