@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.testing.dataset_builder_testing."""
+"""Test for checksum in tensorflow_datasets.testing.dataset_builder_testing."""
 
 from __future__ import absolute_import
 from __future__ import division
