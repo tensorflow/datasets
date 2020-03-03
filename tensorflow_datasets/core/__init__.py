@@ -46,7 +46,7 @@ from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
-
+import tensorflow as tfds
 
 __all__ = [
     "lazy_imports",
