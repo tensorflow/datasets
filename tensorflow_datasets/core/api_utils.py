@@ -19,20 +19,21 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import Any
+from typing import Callable
+from typing import Iterable
+from typing import List
+from typing import overload
+from typing import Optional
+from typing import Sized
+from typing import Union
+
 import functools
 import inspect
 
 import six
 import wrapt
 
-from typing import Optional
-from typing import Union
-from typing import Callable
-from typing import Sized
-from typing import Tuple
-from typing import List
-from typing import Any
-from typing import Iterable
 
 __all__ = [
     "disallow_positional_args"
@@ -44,11 +45,20 @@ _POSITIONAL_ARG_ERR_MSG = (
     "more flexible API development. Thank you!\n"
     "Positional arguments passed to fn %s: %s.")
 
+FNT = TypeVar('FNT')
 
-def disallow_positional_args(
-  wrapped: Callable[..., Any] = None,
-  allowed: Optional[object] = None
-  ) -> Optional[object]:
+# pytype: disable=pointless-statement
+# pylint: disable=unused-argument
+@overload
+def disallow_positional_args(wrapped: None,
+                             allowed: List[str]) -> Callable[[FNT], FNT]:
+  ...
+
+@overload
+def disallow_positional_args(wrapped: FNT, allowed: None) -> FNT:
+  ...
+
+def disallow_positional_args(wrapped=None, allowed=None):
   """Requires function to be called using keyword arguments."""
   # See
   # https://wrapt.readthedocs.io/en/latest/decorators.html#decorators-with-optional-arguments
@@ -65,14 +75,16 @@ def disallow_positional_args(
     _check_required(fn, kwargs)
     return fn(*args, **kwargs)
 
-  return disallow_positional_args_dec(wrapped)
-  # pylint: disable=no-value-for-parameter
+  return disallow_positional_args_dec(wrapped)  # pylint: disable=no-value-for-parameter
+# pylint: enable=unused-argument
+# pytype: enable=pointless-statement
 
 
 def _check_no_positional(fn: Callable[[], Any],
                          args: Sized,
                          is_method: bool = False,
                          allowed: Optional[object] = None) -> None:
+  """Method is to check for availability of positional args."""
   allowed = set(allowed or [])
   offset = int(is_method)
   if args:
@@ -82,7 +94,7 @@ def _check_no_positional(fn: Callable[[], Any],
     raise ValueError(_POSITIONAL_ARG_ERR_MSG % (fn.__name__, str(arg_names)))
 
 
-def _required_args(fn: Callable[[], Any]) -> List[str]:
+def _required_args(fn: Callable[..., Any]) -> List[str]:
   """Returns arguments of fn with default=REQUIRED_ARG."""
   spec = getargspec(fn)
   if not spec.defaults:
@@ -101,10 +113,10 @@ def _check_required(fn: Callable[[], Any], kwargs: Iterable) -> None:
 
 
 def getargspec(
-  fn: Callable[[], Any]
-  ) -> Union[inspect.FullArgSpec, inspect.ArgSpec]:
+    fn: Callable[[], Any]
+    ) -> Union[inspect.FullArgSpec, inspect.ArgSpec]:
   if six.PY3:
     spec = inspect.getfullargspec(fn)
   else:
-    spec = inspect.getargspec(fn)
+    spec = inspect.getargspec(fn)  # pylint: disable=deprecated-method
   return spec

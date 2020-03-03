@@ -26,15 +26,15 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from typing import List, Dict, Union, Optional
+from typing import Dict, List, Union
 
 
 def get_read_instructions(
-  from_: int,
-  to: int,
-  filenames: List[str],
-  shard_lengths: List[Optional[int]],
-  shardref_name: str = "filename") -> List[Dict[str, Union[str, int]]]:
+    from_: int,
+    to: int,
+    filenames: List[str],
+    shard_lengths: List[int],
+    shardref_name: str = "filename") -> List[Dict[str, Union[str, int]]]:
   """Returns a list of files (+skip/take) to read [from_:to] items from shards.
 
   Args:
