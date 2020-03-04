@@ -34,6 +34,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import Any, Dict, List, Optional, Tuple
+
 import abc
 import collections
 import json
@@ -47,7 +49,9 @@ import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -58,6 +62,12 @@ from tensorflow_datasets.core.utils import gcs_utils
 
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
+
+if typing.TYPE_CHECKING:
+  try:
+    import apache_beam as beam
+  except ImportError:
+    beam = Any
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
@@ -94,15 +104,15 @@ class DatasetInfo(object):
 
   @api_utils.disallow_positional_args
   def __init__(self,
-               builder,
-               description=None,
-               features=None,
-               supervised_keys=None,
-               homepage=None,
-               urls=None,
-               citation=None,
-               metadata=None,
-               redistribution_info=None):
+               builder: dataset_builder.DatasetBuilder,
+               description: Optional[str] = None,
+               features: Optional[features_lib.FeaturesDict] = None,
+               supervised_keys: Optional[Tuple[str, str]] = None,
+               homepage: Optional[str] = None,
+               urls: List[str] = None,
+               citation: Optional[str] = None,
+               metadata: Optional[Metadata] = None,
+               redistribution_info: Optional[Dict[Any, Any]] = None):
     """Constructs DatasetInfo.
 
     Args:
@@ -128,9 +138,9 @@ class DatasetInfo(object):
         The content of the `license` subfield will automatically be written to a
         LICENSE file stored with the dataset.
     """
-    self._builder = builder
+    self._builder: dataset_builder.DatasetBuilder = builder
 
-    self._info_proto = dataset_info_pb2.DatasetInfo(
+    self._info_proto: dataset_info_pb2.DatasetInfo = dataset_info_pb2.DatasetInfo(  # pylint: disable=line-too-long
         name=builder.name,
         description=description,
         version=str(builder._version),  # pylint: disable=protected-access
@@ -150,8 +160,9 @@ class DatasetInfo(object):
             "DatasetInfo.features only supports FeaturesDict or Sequence at "
             "the top-level. Got {}".format(features))
       features._set_top_level()  # pylint: disable=protected-access
-    self._features = features
-    self._splits = splits_lib.SplitDict(self._builder.name)
+    self._features: Optional[features_lib.FeaturesDict] = features
+    self._splits: splits_lib.SplitDict = splits_lib.SplitDict(
+        self._builder.name)
     if supervised_keys is not None:
       assert isinstance(supervised_keys, tuple)
       assert len(supervised_keys) == 2
@@ -162,21 +173,21 @@ class DatasetInfo(object):
       raise ValueError(
           "Metadata should be a `tfds.core.Metadata` instance. Received "
           "{}".format(metadata))
-    self._metadata = metadata
+    self._metadata: Optional[Metadata] = metadata
 
     # Is this object initialized with both the static and the dynamic data?
-    self._fully_initialized = False
+    self._fully_initialized: bool = False
 
   @property
-  def as_proto(self):
+  def as_proto(self) -> dataset_info_pb2.DatasetInfo:
     return self._info_proto
 
   @property
-  def name(self):
+  def name(self) -> str:
     return self.as_proto.name
 
   @property
-  def full_name(self):
+  def full_name(self) -> str:
     """Full canonical name: (<dataset_name>/<config_name>/<version>)."""
     names = [self._builder.name]
     if self._builder.builder_config:
@@ -185,68 +196,69 @@ class DatasetInfo(object):
     return posixpath.join(*names)
 
   @property
-  def description(self):
+  def description(self) -> str:
     return self.as_proto.description
 
   @property
-  def version(self):
+  def version(self) -> utils.Version:
     return self._builder.version
 
   @property
-  def homepage(self):
+  def homepage(self) -> str:
     urls = self.as_proto.location.urls
     tfds_homepage = "https://www.tensorflow.org/datasets/catalog/{}".format(
         self.name)
     return urls and urls[0] or tfds_homepage
 
   @property
-  def citation(self):
+  def citation(self) -> str:
     return self.as_proto.citation
 
   @property
-  def data_dir(self):
+  def data_dir(self) -> str:
     return self._builder.data_dir
 
   @property
-  def dataset_size(self):
+  def dataset_size(self) -> int:
     """Generated dataset files size, in bytes."""
     # For old datasets, maybe empty.
     return sum(split.num_bytes for split in self.splits.values())
 
   @property
-  def download_size(self):
+  def download_size(self) -> int:
     """Downloaded files size, in bytes."""
     # Fallback to deprecated `size_in_bytes` if `download_size` is empty.
     return self.as_proto.download_size or self.as_proto.size_in_bytes
 
   @download_size.setter
-  def download_size(self, size):
+  def download_size(self, size: int) -> None:
     self.as_proto.download_size = size
 
   @property
-  def features(self):
+  def features(self) -> features_lib.FeaturesDict:
     return self._features
 
   @property
-  def metadata(self):
+  def metadata(self) -> Metadata:
     return self._metadata
 
   @property
-  def supervised_keys(self):
+  def supervised_keys(self) -> Optional[Tuple[str, str]]:
     if not self.as_proto.HasField("supervised_keys"):
       return None
     supervised_keys = self.as_proto.supervised_keys
     return (supervised_keys.input, supervised_keys.output)
 
   @property
-  def redistribution_info(self):
+  def redistribution_info(self) -> Dict[Any, Any]:
     return self.as_proto.redistribution_info
 
   @property
-  def splits(self):
+  def splits(self) -> splits_lib.SplitDict:
     return self._splits.copy()
 
-  def update_splits_if_different(self, split_dict):
+  def update_splits_if_different(self,
+                                 split_dict: splits_lib.SplitDict) -> None:
     """Overwrite the splits if they are different from the current ones.
 
     * If splits aren't already defined or different (ex: different number of
@@ -268,7 +280,7 @@ class DatasetInfo(object):
 
     self._set_splits(split_dict)
 
-  def _set_splits(self, split_dict):
+  def _set_splits(self, split_dict: splits_lib.SplitDict) -> None:
     """Split setter (private method)."""
     # Update the dictionary representation.
     # Use from/to proto for a clean copy
@@ -280,21 +292,22 @@ class DatasetInfo(object):
       self.as_proto.splits.add().CopyFrom(split_info)
 
   @property
-  def initialized(self):
+  def initialized(self) -> bool:
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
-  def _dataset_info_path(self, dataset_info_dir):
+  def _dataset_info_path(self, dataset_info_dir: str) -> str:
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def _license_path(self, dataset_info_dir):
+  def _license_path(self, dataset_info_dir: str) -> str:
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
-  def compute_dynamic_properties(self):
+  def compute_dynamic_properties(self) -> None:
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
 
-  def _compute_dynamic_properties(self, builder):
+  def _compute_dynamic_properties(self,
+                                  builder: dataset_builder.DatasetBuilder):
     """Update from the DatasetBuilder."""
     # Fill other things by going over the dataset.
     splits = self.splits
@@ -326,10 +339,10 @@ class DatasetInfo(object):
     self._set_splits(splits)
 
   @property
-  def as_json(self):
+  def as_json(self) -> str:
     return json_format.MessageToJson(self.as_proto, sort_keys=True)
 
-  def write_to_directory(self, dataset_info_dir):
+  def write_to_directory(self, dataset_info_dir: str):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
@@ -346,7 +359,7 @@ class DatasetInfo(object):
     with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir):
+  def read_from_directory(self, dataset_info_dir: str):
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -434,7 +447,7 @@ class DatasetInfo(object):
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     splits_pprint = _indent("\n".join(["{"] + [
         "    '{}': {},".format(k, split.num_examples)
         for k, split in sorted(self.splits.items())
@@ -455,7 +468,7 @@ class DatasetInfo(object):
         redistribution_info=str(self.redistribution_info).strip())
 
 
-def _indent(content):
+def _indent(content) -> str:
   """Add indentation to all lines except the first."""
   lines = content.split("\n")
   return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
@@ -495,7 +508,10 @@ _SCHEMA_TYPE_MAP = {
 
 # TODO(afrozm): What follows below can *VERY EASILY* be done by TFDV - rewrite
 # this section once they are python 3 ready.
-def get_dataset_feature_statistics(builder, split):
+def get_dataset_feature_statistics(
+    builder: dataset_builder.DatasetBuilder,
+    split: splits_lib.SplitBase
+    ) -> Tuple[statistics_pb2.DatasetFeatureStatistics, schema_pb2.Schema]:
   """Calculate statistics for the specified split."""
   statistics = statistics_pb2.DatasetFeatureStatistics()
 
@@ -613,7 +629,9 @@ def get_dataset_feature_statistics(builder, split):
   return statistics, schema
 
 
-def read_from_json(json_filename):
+def read_from_json(
+    json_filename: str
+    ) -> Dict[str, dataset_info_pb2.DatasetInfo]:
   """Read JSON-formatted proto into DatasetInfo proto."""
   with tf.io.gfile.GFile(json_filename) as f:
     dataset_info_json_str = f.read()
@@ -639,12 +657,12 @@ class Metadata(dict):
   """
 
   @abc.abstractmethod
-  def save_metadata(self, data_dir):
+  def save_metadata(self, data_dir: str):
     """Save the metadata."""
     raise NotImplementedError()
 
   @abc.abstractmethod
-  def load_metadata(self, data_dir):
+  def load_metadata(self, data_dir: str):
     """Restore the metadata."""
     raise NotImplementedError()
 
@@ -655,15 +673,15 @@ class MetadataDict(Metadata, dict):
   By default, the metadata will be serialized as JSON.
   """
 
-  def _build_filepath(self, data_dir):
+  def _build_filepath(self, data_dir: str) -> str:
     return os.path.join(data_dir, "metadata.json")
 
-  def save_metadata(self, data_dir):
+  def save_metadata(self, data_dir: str):
     """Save the metadata."""
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "w") as f:
       json.dump(self, f)
 
-  def load_metadata(self, data_dir):
+  def load_metadata(self, data_dir: str):
     """Restore the metadata."""
     self.clear()
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
@@ -673,14 +691,14 @@ class MetadataDict(Metadata, dict):
 class BeamMetadataDict(MetadataDict):
   """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
 
-  def __init__(self, *args, **kwargs):
+  def __init__(self, *args: Any, **kwargs: Any):
     super(BeamMetadataDict, self).__init__(*args, **kwargs)
     self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
 
-  def _temp_filepath(self, key):
+  def _temp_filepath(self, key: str) -> str:
     return os.path.join(self._tempdir, "%s.json" % key)
 
-  def __setitem__(self, key, item):
+  def __setitem__(self, key: str, item: beam.pvalue.PValue) -> Optional[str]:
     """Creates write sink for beam PValues or sets value of key in `dict`.
 
     If the item is a PValue, it is expected to contain exactly one element,
@@ -713,7 +731,7 @@ class BeamMetadataDict(MetadataDict):
                shard_name_template=""))
     super(BeamMetadataDict, self).__setitem__(key, item)
 
-  def save_metadata(self, data_dir):
+  def save_metadata(self, data_dir: str):
     """Save the metadata inside the beam job."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
     for key, item in self.items():
