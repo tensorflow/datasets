@@ -21,15 +21,10 @@ from __future__ import print_function
 
 import os
 
-from typing import Any
-from typing import Callable
-from typing import Dict
-from typing import Iterable
-from typing import List
-from typing import Tuple
+from typing import Any, Callable, Dict, Iterable, List, Tuple
 
 import numpy as np
-import tensorflow.compat.v2 as tf  # type: ignore
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
@@ -40,7 +35,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
-if typing.TYPE_CHECKING:  # type: ignore
+if typing.TYPE_CHECKING:
   try:
     import apache_beam as beam
   except ImportError:
@@ -48,6 +43,8 @@ if typing.TYPE_CHECKING:  # type: ignore
 
 
 tf.compat.v1.enable_eager_execution()
+
+ExampleType = Tuple[int, Dict[str, Any]]
 
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
@@ -83,7 +80,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
     ]
 
   def _compute_metadata(self,
-                        examples: Iterable,
+                        examples: Iterable[ExampleType],
                         num_examples: int) -> None:
     self.info.metadata["label_sum_%d" % num_examples] = (
         examples
@@ -97,7 +94,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
   # pylint: disable=arguments-differ
   def _build_pcollection(self,
                          pipeline: beam.pipeline,
-                         num_examples: int) -> Iterable:
+                         num_examples: int) -> Iterable[ExampleType]:
     """Generate examples as dicts."""
     examples = (
         pipeline
@@ -108,7 +105,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
     return examples
 
 
-def _gen_example(x: int) -> Tuple[int, Dict[str, Any]]:
+def _gen_example(x: int) -> ExampleType:
   return (x, {
       "image": (np.ones((16, 16, 1)) * x % 255).astype(np.uint8),
       "label": x % 2,
@@ -146,8 +143,8 @@ class CommonPipelineDummyBeamDataset(DummyBeamDataset):
   # pylint: disable=arguments-differ
   def _build_pcollection(self,
                          pipeline: beam.Pipeline,
-                         examples: Iterable,
-                         num_examples: int) -> Iterable:
+                         examples: Iterable[ExampleType],
+                         num_examples: int) -> Iterable[ExampleType]:
     """Generate examples as dicts."""
     del pipeline
     examples |= beam.Filter(lambda x: x[0] < num_examples)

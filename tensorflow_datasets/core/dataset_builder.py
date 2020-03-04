@@ -26,22 +26,14 @@ import itertools
 import os
 import sys
 
-from typing import Any
-from typing import Dict
-from typing import Iterable
-from typing import List
-from typing import Mapping
-from typing import Optional
-from typing import Sized
-from typing import Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sized, Tuple
 
 import termcolor
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf  # type: ignore
+import tensorflow.compat.v2 as tf
 
-# pytype: disable=pyi-error
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
@@ -60,7 +52,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-if typing.TYPE_CHECKING:  # type: ignore
+if typing.TYPE_CHECKING:
   try:
     import apache_beam as beam
   except ImportError:
@@ -85,21 +77,17 @@ class BuilderConfig(object):  # pylint: disable=useless-object-inheritance
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
   """
-  _name: str
-  _version: str
-  _supported_versions: List[str]
-  _description: str
 
   @api_utils.disallow_positional_args
   def __init__(self,
                name: str,
-               version: str = None,
-               supported_versions: List[str] = None,
-               description: str = None):
-    self._name = name
-    self._version = version
-    self._supported_versions = supported_versions or []
-    self._description = description
+               version: Optional[str] = None,
+               supported_versions: Optional[List[str]] = None,
+               description: Optional[str] = None):
+    self._name: str = name
+    self._version: Optional[str] = version
+    self._supported_versions: Optional[List[str]] = supported_versions or []
+    self._description: Optional[str] = description
 
   @property
   def name(self):
@@ -161,11 +149,6 @@ class DatasetBuilder(object):
   image, label = features['image'], features['label']
   ```
   """
-  _original_state: Dict[Any, Any]
-  _builder_config: BuilderConfig
-  _version: utils.Version
-  _data_dir: str
-  _data_dir_root: str
 
   # Name of the dataset, filled by metaclass based on class name.
   name = None
@@ -195,9 +178,9 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def __init__(self,
-               data_dir: str = None,
-               config: BuilderConfig = None,
-               version: str = None):
+               data_dir: Optional[str] = None,
+               config: Optional[BuilderConfig] = None,
+               version: Optional[str] = None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -215,19 +198,20 @@ class DatasetBuilder(object):
         are doing, as the version could be broken.
     """
     # For pickling:
-    self._original_state = dict(data_dir=data_dir, config=config,
-                                version=version)
+    self._original_state: Dict[Any, Any] = dict(data_dir=data_dir,
+                                                config=config,
+                                                version=version)
     # To do the work:
-    self._builder_config = self._create_builder_config(config)
+    self._builder_config: BuilderConfig = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
           "DatasetBuilder {} does not have a defined version. Please add a "
           "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
-    self._version = self._pick_version(version)
-    self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
-    self._data_dir = self._build_data_dir()
+    self._version: utils.Version = self._pick_version(version)
+    self._data_dir_root: str = os.path.expanduser(data_dir or constants.DATA_DIR)
+    self._data_dir: str = self._build_data_dir()
     if tf.io.gfile.exists(self._data_dir):
       logging.info("Overwrite dataset info from restored data version.")
       self.info.read_from_directory(self._data_dir)
@@ -400,13 +384,13 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
-                 split: splits_lib.SplitBase = None,
-                 batch_size: int = None,
-                 shuffle_files: bool = False,
-                 decoders: Dict[str, decode.Decoder] = None,
-                 read_config: read_config_lib.ReadConfig = None,
+                 split: Optional[splits_lib.SplitBase] = None,
+                 batch_size: Optional[int] = None,
+                 shuffle_files: Optional[bool] = False,
+                 decoders: Optional[Dict[str, decode.Decoder]] = None,
+                 read_config: Optional[read_config_lib.ReadConfig] = None,
                  as_supervised: bool = False,
-                 in_memory: bool = None) -> tf.data.Dataset:
+                 in_memory: Optional[bool] = None) -> tf.data.Dataset:
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
@@ -564,10 +548,8 @@ class DatasetBuilder(object):
             read_config=read_config,
         )
         # Use padded_batch so that features with unknown shape are supported.
-        # pytype: disable=attribute-error
         ds = ds.padded_batch(
             full_bs, tf.compat.v1.data.get_output_shapes(ds))
-        # pytype: enable=attribute-error
         ds = tf.compat.v1.data.Dataset.from_tensor_slices(
             next(dataset_utils.as_numpy(ds)))
     else:
@@ -583,18 +565,13 @@ class DatasetBuilder(object):
           shuffle_files=shuffle_files,
           read_config=read_config
       ):
-        # pytype: disable=attribute-error
         ds = ds.cache()
-        # pytype: enable=attribute-error
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
-      # pytype: disable=attribute-error
       ds = ds.padded_batch(
           batch_size, tf.compat.v1.data.get_output_shapes(ds))
-      # pytype: enable=attribute-error
 
-    # pytype: disable=attribute-error
     if as_supervised:
       if not self.info.supervised_keys:
         raise ValueError(
@@ -605,7 +582,6 @@ class DatasetBuilder(object):
                   num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
-    # pytype: enable=attribute-error
 
     # If shuffling is True and seeds not set, allow pipeline to be
     # non-deterministic
@@ -758,7 +734,7 @@ class DatasetBuilder(object):
   def _download_and_prepare(
       self,
       dl_manager: download.DownloadManager,
-      download_config: download.DownloadConfig = None) -> None:
+      download_config: Optional[download.DownloadConfig] = None) -> None:
     """Downloads and prepares dataset for reading.
 
     This is the internal implementation to overwrite called when user calls
@@ -776,8 +752,8 @@ class DatasetBuilder(object):
   def _as_dataset(
       self,
       split: splits_lib.SplitBase,
-      decoders: Dict[str, decode.Decoder] = None,
-      read_config: read_config_lib.ReadConfig = None,
+      decoders: Optional[Dict[str, decode.Decoder]] = None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
       shuffle_files: bool = False) -> None:
     """Constructs a `tf.data.Dataset`.
 
@@ -833,7 +809,8 @@ class DatasetBuilder(object):
     return self._builder_config
 
   def _create_builder_config(self,
-                             builder_config: BuilderConfig) -> Optional[BuilderConfig]:  # noqa
+                             builder_config: BuilderConfig
+                             ) -> Optional[BuilderConfig]:
     """Create and validate BuilderConfig object."""
     if builder_config is None and self.BUILDER_CONFIGS:
       builder_config = self.BUILDER_CONFIGS[0]
@@ -956,7 +933,7 @@ class FileAdapterBuilder(DatasetBuilder):
   @abc.abstractmethod
   def _prepare_split(self,
                      split_generator: splits_lib.SplitGenerator,
-                     **kwargs: Iterable) -> None:
+                     **kwargs: Any) -> None:
     """Generate the examples and record them on disk.
 
     Args:
@@ -968,7 +945,7 @@ class FileAdapterBuilder(DatasetBuilder):
 
   def _make_split_generators_kwargs(
       self,
-      prepare_split_kwargs: Sized
+      prepare_split_kwargs: Any
       ) -> Mapping[str, Iterable]:
     """Get kwargs for `self._split_generators()` from `prepare_split_kwargs`."""
     del prepare_split_kwargs
@@ -978,7 +955,7 @@ class FileAdapterBuilder(DatasetBuilder):
   def _download_and_prepare(
       self,
       dl_manager: download.DownloadManager,
-      **prepare_split_kwargs: Iterable) -> None:
+      **prepare_split_kwargs: Any) -> None:
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
 
@@ -1003,12 +980,13 @@ class FileAdapterBuilder(DatasetBuilder):
 
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
+  # pylint: enable=arguments-differ
 
   def _as_dataset(
       self,
       split: splits_lib.SplitBase = splits_lib.Split.TRAIN,
-      decoders: Dict[str, decode.Decoder] = None,
-      read_config: read_config_lib.ReadConfig = None,
+      decoders: Optional[Dict[str, decode.Decoder]] = None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
       shuffle_files: bool = False) -> tf.data.Dataset:
 
     if self.version.implements(utils.Experiment.S3):
@@ -1119,7 +1097,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
   _data_dir: str
 
   @abc.abstractmethod
-  def _generate_examples(self, **kwargs: Dict[Any, Any]) -> Iterable:
+  def _generate_examples(self, **kwargs: Any) -> Iterable:
     """Default function generating examples for each `SplitGenerator`.
 
     This function preprocess the examples from the raw data to the preprocessed
@@ -1199,13 +1177,13 @@ class BeamBasedBuilder(FileAdapterBuilder):
   """Beam based Builder."""
   _data_dir: str
 
-  def __init__(self, *args: Sized, **kwargs: Sized) -> None:
+  def __init__(self, *args: Any, **kwargs: Any) -> None:
     super(BeamBasedBuilder, self).__init__(*args, **kwargs)
     self._beam_writers = {}  # {split: beam_writer} mapping.
 
   def _make_split_generators_kwargs(
       self,
-      prepare_split_kwargs: Dict[str, Any]) -> Dict[str, Any]:
+      prepare_split_kwargs: Any) -> Any:
     # Pass `pipeline` into `_split_generators()` from `prepare_split_kwargs` if
     # it's in the call signature of `_split_generators()`.
     # This allows for global preprocessing in beam.
@@ -1219,8 +1197,8 @@ class BeamBasedBuilder(FileAdapterBuilder):
 
   @abc.abstractmethod
   def _build_pcollection(self,
-                         pipeline: beam.Pipeline,
-                         **kwargs: Dict[str, Any]) -> None:
+                         pipeline: "beam.Pipeline",
+                         **kwargs: Any) -> None:
     """Build the beam pipeline examples for each `SplitGenerator`.
 
     This function extracts examples from the raw data with parallel transforms
@@ -1304,7 +1282,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
   # pylint: disable=used-before-assignment
   def _prepare_split(self,
                      split_generator: splits_lib.SplitGenerator,
-                     pipeline: beam.Pipeline) -> None:
+                     pipeline: "beam.Pipeline") -> None:
     beam = lazy_imports_lib.lazy_imports.apache_beam  # pylint: disable=redefined-outer-name
 
     if not tf.io.gfile.exists(self._data_dir):
@@ -1337,5 +1315,4 @@ class BeamBasedBuilder(FileAdapterBuilder):
       return beam_writer.write_from_pcollection(pcoll_examples)
 
     # Add the PCollection to the pipeline
-    # pylint: disable=no-value-for-parameter
-    _ = pipeline | split_name >> _build_pcollection()
+    _ = pipeline | split_name >> _build_pcollection()   # pylint: disable=no-value-for-parameter

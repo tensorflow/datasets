@@ -36,23 +36,14 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-from typing import Any
-from typing import Callable
-from typing import Dict
-from typing import List
-from typing import Iterable
-from typing import Sized
-from typing import Tuple
-
 tf.compat.v1.enable_eager_execution()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
 class DummyBuilderConfig(dataset_builder.BuilderConfig):
-  increment: int
 
-  def __init__(self, increment: int = 0, **kwargs):
+  def __init__(self, increment=0, **kwargs):
     super(DummyBuilderConfig, self).__init__(**kwargs)
     self.increment = increment
 
@@ -73,9 +64,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
           increment=2),
   ]
 
-  def _split_generators(
-    self,
-    dl_manager: download.DownloadManager) -> List[splits_lib.SplitGenerator]:
+  def _split_generators(self, dl_manager):
     del dl_manager
     return [
         splits_lib.SplitGenerator(
@@ -88,14 +77,14 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
         ),
     ]
 
-  def _info(self) -> dataset_info.DatasetInfo:
+  def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
         supervised_keys=("x", "x"),
     )
 
-  def _generate_examples(self, range_: Tuple[int, int]):
+  def _generate_examples(self, range_):
     for i in range_:
       x = i
       if self.builder_config:
@@ -107,7 +96,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
 
 class InvalidSplitDataset(DummyDatasetWithConfigs):
 
-  def _split_generators(self, _: Any) -> List[splits_lib.SplitGenerator]:
+  def _split_generators(self, _):
     return [
         splits_lib.SplitGenerator(
             name="all",  # Error: ALL cannot be used as Split key
@@ -613,7 +602,7 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
 
   VERSION = utils.Version("0.0.1")
 
-  def _info(self) -> dataset_info.DatasetInfo:
+  def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({
@@ -625,7 +614,7 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
         }),
     )
 
-  def _split_generators(self, dl_manager: download.DownloadManager):
+  def _split_generators(self, dl_manager):
     del dl_manager
     return [
         splits_lib.SplitGenerator(
