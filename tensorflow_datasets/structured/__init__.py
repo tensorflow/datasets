@@ -15,8 +15,10 @@
 
 """Structured datasets."""
 
+from tensorflow_datasets.structured.abalone import Abalone
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
 from tensorflow_datasets.structured.forest_fires import ForestFires
+from tensorflow_datasets.structured.car_evaluation import CarEvaluation
 from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.iris import Iris
 from tensorflow_datasets.structured.rock_you import RockYou
