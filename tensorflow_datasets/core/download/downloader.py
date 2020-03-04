@@ -79,8 +79,8 @@ class _Downloader(object):
     self._pbar_dl_size = None
 
   @utils.memoize()
-  def kaggle_downloader(self, competition_name):
-    return kaggle.KaggleCompetitionDownloader(competition_name)
+  def kaggle_downloader(self, competition_name, download_type=None):
+    return kaggle.KaggleCompetitionDownloader(competition_name, download_type)
 
   @contextlib.contextmanager
   def tqdm(self):
@@ -110,11 +110,8 @@ class _Downloader(object):
 
   def _sync_kaggle_download(self, kaggle_url, destination_path):
     """Download with Kaggle API."""
-    download_type = (kaggle.KaggleFile
-                     ._DATASET_COMPETITION_SUFFIX[int(kaggle_url[-1])])
-    kaggle_url = kaggle_url[:-1]
-    kaggle_file = kaggle.KaggleFile.from_url(kaggle_url, download_type)
-    downloader = self.kaggle_downloader(kaggle_file.competition)
+    kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
+    downloader = self.kaggle_downloader(kaggle_file.competition, kaggle_file.type)
     filepath = downloader.download_file(kaggle_file.filename, destination_path)
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer()

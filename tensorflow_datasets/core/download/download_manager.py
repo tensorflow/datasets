@@ -238,10 +238,6 @@ class DownloadManager(object):
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
-    download_type = ""
-    if kaggle.KaggleFile.is_kaggle_url(url):
-      download_type = url[-1]
-      url = url[:-1]
     if url in self._sizes_checksums:
       expected_sha256 = self._sizes_checksums[url][1]
       download_path = self._get_final_dl_path(url, expected_sha256)
@@ -263,7 +259,7 @@ class DownloadManager(object):
       checksum, dl_size = val
       return self._handle_download_result(
           resource, download_dir_path, checksum, dl_size)
-    return self._downloader.download("%s%s" % (url, download_type), download_dir_path).then(callback)
+    return self._downloader.download(url, download_dir_path).then(callback)
 
   @util.build_synchronize_decorator()
   @utils.memoize()

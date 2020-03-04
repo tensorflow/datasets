@@ -131,8 +131,8 @@ class DownloaderTest(testing.TestCase):
     with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
       # Testing Competition Downloader
       promise = self.downloader.download(
-          'kaggle://some-competition/a.csv%s' % \
-          (kaggle.KaggleFile._COMPETITION_SUFFIX),
+          'kaggle://%s/some-competition/a.csv' % \
+          (kaggle.KaggleFile._COMPETITION_PREFIX),
           self.tmp_dir)
       _, dl_size = promise.get()
       self.assertEqual(dl_size, len(fname))
@@ -141,8 +141,8 @@ class DownloaderTest(testing.TestCase):
 
       # Testing Dataset Downloader
       promise = self.downloader.download(
-          'kaggle://some-author/some-dataset/a.csv%s' % \
-          (kaggle.KaggleFile._DATASET_SUFFIX),
+          'kaggle://%s/some-author/some-dataset/a.csv' % \
+          (kaggle.KaggleFile._DATASET_PREFIX),
           self.tmp_dir)
       _, dl_size = promise.get()
       self.assertEqual(dl_size, len(fname))
