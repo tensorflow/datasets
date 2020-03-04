@@ -78,6 +78,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     ]
 
   def _info(self):
+
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
@@ -88,9 +89,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     for i in range_:
       x = i
       if self.builder_config:
-        # pytype: disable=attribute-error
         x += self.builder_config.increment
-        # pytype: enable=attribute-error
       yield i, {"x": x}
 
 
@@ -147,12 +146,11 @@ class DatasetBuilderTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
-    # pylint:disable=g-import-not-at-top
-    from tensorflow_datasets.image import mnist
+    from tensorflow_datasets.image import mnist  # pylint:disable=g-import-not-at-top
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with absltest.mock.patch.object(
-        mnist.MNIST, "_download_and_prepare",
-        side_effect=NotImplementedError):
+          mnist.MNIST, "_download_and_prepare",
+          side_effect=NotImplementedError):
         # Make sure the dataset cannot be generated.
         with self.assertRaises(NotImplementedError):
           registered.load(
@@ -168,7 +166,8 @@ class DatasetBuilderTest(testing.TestCase):
           set(["dataset_info.json",
                "image.image.json",
                "mnist-test.tfrecord-00000-of-00001",
-               "mnist-train.tfrecord-00000-of-00001", ]),
+               "mnist-train.tfrecord-00000-of-00001",
+              ]),
           set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.0"))))
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
@@ -266,8 +265,7 @@ class DatasetBuilderTest(testing.TestCase):
 
   def test_read_config(self):
     is_called = []
-
-    def interleave_sort(lists: List[int]) -> List[int]:
+    def interleave_sort(lists):
       is_called.append(True)
       return lists
 
@@ -315,11 +313,10 @@ class DatasetBuilderTest(testing.TestCase):
   def test_non_preparable_version(self, *unused_mocks):
     expected = (
         "The version of the dataset you are trying to use ("
-        "dummy_dataset_shared_generator:0.0.7) can only be generated using"
-        " TFDS code synced @ v1.0.0 or earlier. Either sync to that version "
-        "of TFDS to first prepare the data or use another version of the "
-        "dataset (available for "
-        "`download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
+        "dummy_dataset_shared_generator:0.0.7) can only be generated using TFDS"
+        " code synced @ v1.0.0 or earlier. Either sync to that version of TFDS "
+        "to first prepare the data or use another version of the dataset "
+        "(available for `download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
     builder = DummyDatasetSharedGenerator(version="0.0.7")
     self.assertIsNotNone(builder)
     with self.assertRaisesWithPredicateMatch(AssertionError, expected):
@@ -377,23 +374,20 @@ class BuilderRestoreGcsTest(testing.TestCase):
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)  # noqa
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       builder.download_and_prepare()
 
       # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples,
-                       20)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # If split are different that the one restored, stats should be
-      # recomputed
+      # If split are different that the one restored, stats should be recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples,
-                       20)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       dl_config = download.DownloadConfig(max_examples_per_split=5)
@@ -485,8 +479,8 @@ class DatasetBuilderReadTest(testing.TestCase):
     self.assertEqual(20, len(train_data))
 
   def test_in_memory_with_device_ctx(self):
-    # Smoke test to ensure that the inner as_numpy call does not fail when
-    # under an explicit device context.
+    # Smoke test to ensure that the inner as_numpy call does not fail when under
+    # an explicit device context.
     # Only testing in graph mode. Eager mode would actually require job:foo to
     # exist in the cluster.
     with tf.Graph().as_default():
@@ -595,6 +589,8 @@ class DatasetBuilderReadTest(testing.TestCase):
         shuffle_files=True,
         read_config=read_config_lib.ReadConfig(),
     ))
+
+
 
 
 class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
