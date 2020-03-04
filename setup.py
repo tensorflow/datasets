@@ -129,6 +129,7 @@ DATASET_EXTRAS = {
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     'nsynth': ['crepe>=0.0.9', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
+    'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'duke_ultrasound': ['scipy'],

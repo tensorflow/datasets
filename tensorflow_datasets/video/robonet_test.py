@@ -13,12 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Video datasets."""
+"""Tests for tensorflow_datasets.video.robonet."""
 
-from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
-from tensorflow_datasets.video.moving_mnist import MovingMnist
-from tensorflow_datasets.video.robonet import Robonet
-from tensorflow_datasets.video.starcraft import StarcraftVideo
-from tensorflow_datasets.video.starcraft import StarcraftVideoConfig
-from tensorflow_datasets.video.ucf101 import Ucf101
-from tensorflow_datasets.video.ucf101 import Ucf101Config
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.video import robonet
+
+
+class Robonet64Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = robonet.Robonet
+
+  SPLITS = {
+      "train": 9,
+  }
+
+if __name__ == "__main__":
+  testing.test_main()

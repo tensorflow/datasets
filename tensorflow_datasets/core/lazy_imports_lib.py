@@ -62,6 +62,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
+
+  @utils.classproperty
+  @classmethod
   def langdetect(cls):
     return _try_import("langdetect")
 
