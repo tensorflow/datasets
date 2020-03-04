@@ -22,6 +22,8 @@ from __future__ import print_function
 import os
 import subprocess as sp
 
+from typing import Type, TypeVar, List
+
 from absl import logging
 import tensorflow.compat.v2 as tf
 
@@ -42,35 +44,37 @@ Competition %s not found. Please ensure you have spelled the competition name \
 correctly.
 """
 
+T = TypeVar('T', bound='KaggleFile')
+
 
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle://"
 
-  def __init__(self, competition_name, filename):
-    self._competition_name = competition_name
-    self._filename = filename
+  def __init__(self, competition_name: str, filename: str) -> None:
+    self._competition_name: str = competition_name
+    self._filename: str = filename
 
   @property
-  def competition(self):
-    return self._competition_name
+  def competition(self) -> str:
+    return self._competition_name: str
 
   @property
-  def filename(self):
-    return self._filename
+  def filename(self) -> str:
+    return self._filename: str
 
   @classmethod
-  def from_url(cls, url):
+  def from_url(cls: Type[T], url: str) -> T:
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
     competition_name, filename = url[len(cls._URL_PREFIX):].split("/", 1)
     return cls(competition_name, filename)
 
   @staticmethod
-  def is_kaggle_url(url):
+  def is_kaggle_url(url: str) -> str:
     return url.startswith(KaggleFile._URL_PREFIX)
 
-  def to_url(self):
+  def to_url(self) -> str:
     return "%s%s/%s" % (self._URL_PREFIX, self._competition_name,
                         self._filename)
 
@@ -89,11 +93,11 @@ class KaggleCompetitionDownloader(object):
   ```
   """
 
-  def __init__(self, competition_name):
-    self._competition_name = competition_name
+  def __init__(self, competition_name: str) -> None:
+    self._competition_name: str = competition_name
 
   @utils.memoized_property
-  def competition_files(self):
+  def competition_files(self) -> List[str]:
     """List of competition files."""
     command = [
         "kaggle",
@@ -108,14 +112,14 @@ class KaggleCompetitionDownloader(object):
     ])
 
   @utils.memoized_property
-  def competition_urls(self):
+  def competition_urls(self) -> List[str]:
     """Returns 'kaggle://' urls."""
     return [
         KaggleFile(self._competition_name, fname).to_url()
         for fname in self.competition_files  # pylint: disable=not-an-iterable
     ]
 
-  def download_file(self, fname, output_dir):
+  def download_file(self, fname: str, output_dir: str) -> str:
     """Downloads competition file to output_dir."""
     if fname not in self.competition_files:  # pylint: disable=unsupported-membership-test
       raise ValueError("%s is not one of the competition's "
@@ -135,7 +139,7 @@ class KaggleCompetitionDownloader(object):
     return os.path.join(output_dir, fname)
 
 
-def _run_kaggle_command(command_args, competition_name):
+def _run_kaggle_command(command_args: List[str], competition_name: str) -> None:
   """Run kaggle command with subprocess."""
   try:
     output = sp.check_output(command_args)
@@ -150,6 +154,6 @@ def _run_kaggle_command(command_args, competition_name):
     raise
 
 
-def _log_command_output(output, error=False):
+def _log_command_output(output: str, error: bool=False) -> None:
   log = logging.error if error else logging.info
   log("kaggle command output:\n%s", tf.compat.as_text(output))
