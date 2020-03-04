@@ -19,14 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from typing import Any
-from typing import Callable
-from typing import Iterable
-from typing import List
-from typing import overload
-from typing import Optional
-from typing import Sized
-from typing import Union
+import typing
+from typing import Any, Callable, Iterable, List, Optional, Sized, Union
 
 import functools
 import inspect
@@ -45,17 +39,17 @@ _POSITIONAL_ARG_ERR_MSG = (
     "more flexible API development. Thank you!\n"
     "Positional arguments passed to fn %s: %s.")
 
-FNT = TypeVar('FNT')
+FnT = TypeVar('FnT')
 
 # pytype: disable=pointless-statement
 # pylint: disable=unused-argument
-@overload
+@typing.overload
 def disallow_positional_args(wrapped: None,
-                             allowed: List[str]) -> Callable[[FNT], FNT]:
+                             allowed: List[str]) -> Callable[[FnT], FnT]:
   ...
 
-@overload
-def disallow_positional_args(wrapped: FNT, allowed: None) -> FNT:
+@typing.overload
+def disallow_positional_args(wrapped: FnT, allowed: None) -> FnT:
   ...
 
 def disallow_positional_args(wrapped=None, allowed=None):
@@ -67,9 +61,9 @@ def disallow_positional_args(wrapped=None, allowed=None):
     return functools.partial(disallow_positional_args, allowed=allowed)
 
   @wrapt.decorator
-  def disallow_positional_args_dec(fn: Callable[[], Any],
+  def disallow_positional_args_dec(fn: Callable[..., Any],
                                    instance: Optional[object],
-                                   args: Sized, kwargs: Iterable) -> object:
+                                   args: Any, kwargs: Any) -> object:
     ismethod = instance is not None
     _check_no_positional(fn, args, ismethod, allowed=allowed)
     _check_required(fn, kwargs)
@@ -80,8 +74,8 @@ def disallow_positional_args(wrapped=None, allowed=None):
 # pytype: enable=pointless-statement
 
 
-def _check_no_positional(fn: Callable[[], Any],
-                         args: Sized,
+def _check_no_positional(fn: Callable[..., Any],
+                         args: Any,
                          is_method: bool = False,
                          allowed: Optional[object] = None) -> None:
   """Method is to check for availability of positional args."""
@@ -105,7 +99,7 @@ def _required_args(fn: Callable[..., Any]) -> List[str]:
           if val is REQUIRED_ARG]
 
 
-def _check_required(fn: Callable[[], Any], kwargs: Iterable) -> None:
+def _check_required(fn: Callable[..., Any], kwargs: Any) -> None:
   required_args = _required_args(fn)
   for arg in required_args:
     if arg not in kwargs:

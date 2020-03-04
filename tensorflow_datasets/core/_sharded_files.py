@@ -28,13 +28,15 @@ from __future__ import print_function
 
 from typing import Dict, List, Union
 
+InstructionDict = Dict[str, Union[str, int]]
+
 
 def get_read_instructions(
     from_: int,
     to: int,
     filenames: List[str],
     shard_lengths: List[int],
-    shardref_name: str = "filename") -> List[Dict[str, Union[str, int]]]:
+    shardref_name: str = "filename") -> List[InstructionDict]:
   """Returns a list of files (+skip/take) to read [from_:to] items from shards.
 
   Args:
@@ -43,8 +45,8 @@ def get_read_instructions(
     filenames: list of strings or ints, the filenames of the shards. Not really
       used, but to place in result.
     shard_lengths: the number of elements in every shard.
-    shardref_name: string, defaults to "filename". How to name the field
-      holding the shard-reference in result dict.
+    shardref_name: string, defaults to "filename". How to name the field holding
+      the shard-reference in result dict.
 
   Returns:
     list of dict(filename, skip, take).
