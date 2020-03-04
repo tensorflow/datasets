@@ -142,7 +142,7 @@ class DownloaderTest(testing.TestCase):
       # Testing Dataset Downloader
       promise = self.downloader.download(
           'kaggle://%s/some-author/some-dataset/a.csv' % \
-          (kaggle.KaggleFile._DATASET_PREFIX),
+          kaggle.KaggleFile._DATASET_PREFIX,
           self.tmp_dir)
       _, dl_size = promise.get()
       self.assertEqual(dl_size, len(fname))
