@@ -46,8 +46,8 @@ correctly.
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle://"
-  _DATASET_PREFIX = "d"
-  _COMPETITION_PREFIX = "c"
+  _DATASET_PREFIX = "dataset"
+  _COMPETITION_PREFIX = "competition"
 
   def __init__(self, competition_name, filename, download_type=None):
     self._competition_name = competition_name
