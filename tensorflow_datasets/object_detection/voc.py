@@ -191,19 +191,29 @@ def _get_detection_objects(annotation_filepath):
     # pytype: enable=attribute-error
 
 
+class VocPath(object):
+  def __init__(self, filename, relative_path):
+    self.filename = filename
+    self.relative_path = relative_path
+
+  def resolve(self, paths, example_id):
+    return os.path.join(
+        paths[self.filename], os.path.normpath(self.relative_path)
+    ).format(example_id)
+
+
 class VOCExampleBuilder(object):
   """A base class to build VOC examples."""
 
-  def __init__(self, filename, image_relative_path):
-    self.filename = filename
-    self.image_relative_path = image_relative_path
+  def __init__(self, year=None, filename=None, image_path=None):
+    if image_path is None:
+      image_path = VocPath(filename,
+          "VOCdevkit/VOC{}/JPEGImages/{{}}.jpg".format(year))
+    self.image_path = image_path
 
   def build(self, paths, example_id):
-    image_filepath = os.path.join(
-        paths[self.filename],
-        os.path.normpath(self.image_relative_path.format(example_id)))
     return {
-        "image": image_filepath,
+        "image": self.image_path.resolve(paths, example_id),
         "image/filename": example_id + ".jpg",
     }
 
@@ -211,22 +221,23 @@ class VOCExampleBuilder(object):
 class DetectionExampleBuilder(VOCExampleBuilder):
   """A helper class to build VOC object detection examples."""
 
-  def __init__(self, filename, image_relative_path, annotation_relative_path):
-    super(DetectionExampleBuilder, self).__init__(filename, image_relative_path)
-    self.annotation_relative_path = annotation_relative_path
+  def __init__(self, year=None, filename=None, image_path=None, annotation_path=None):
+    super(DetectionExampleBuilder, self).__init__(year, filename, image_path)
+    if annotation_path is None:
+      annotation_path = VocPath(filename,
+          "VOCdevkit/VOC{}/Annotations/{{}}.xml".format(year))
+    self.annotation_path = annotation_path
 
   def build(self, paths, example_id):
-    if self.annotation_relative_path is not None:
-      annotation_filepath = os.path.join(
-          paths[self.filename],
-          os.path.normpath(self.annotation_relative_path.format(example_id)))
+    if self.annotation_path:
+      annotation_filepath = self.annotation_path.resolve(paths, example_id)
       objects = list(_get_detection_objects(annotation_filepath))
       # Use set() to remove duplicates.
       labels = sorted(set(obj["label"] for obj in objects))
       labels_no_difficult = sorted(set(
           obj["label"] for obj in objects if obj["is_difficult"] == 0
       ))
-    else:  # If the annotation path is `None` there are no annotations.
+    else:  # If the annotation path is False there are no annotations.
       objects = []
       labels = []
       labels_no_difficult = []
@@ -237,14 +248,20 @@ class DetectionExampleBuilder(VOCExampleBuilder):
         "labels_no_difficult": labels_no_difficult,
     }
 
-class SegmentationExampleBuilder(VOCExampleBuilder):
+class SegmentationExampleBuilder(DetectionExampleBuilder):
   """A helper class to build VOC segmentation examples."""
 
-  def __init__(self, filename, image_relative_path, class_mask_relative_path,
-        instance_mask_relative_path):
-    super(SegmentationExampleBuilder, self).__init__(filename, image_relative_path)
-    self.class_mask_relative_path = class_mask_relative_path
-    self.instance_mask_relative_path = instance_mask_relative_path
+  def __init__(self, year=None, filename=None, image_path=None, annotation_path=None,
+      class_mask_path=None, instance_mask_path=None):
+    super(SegmentationExampleBuilder, self).__init__(year, filename, image_path, annotation_path)
+    if class_mask_path is None:
+      class_mask_path = VocPath(filename,
+          "VOCdevkit/VOC{}/SegmentationClass/{{}}.png".format(year))
+    if instance_mask_path is None:
+      instance_mask_path = VocPath(filename,
+          "VOCdevkit/VOC{}/SegmentationObject/{{}}.png".format(year))
+    self.class_mask_path = class_mask_path
+    self.instance_mask_path = instance_mask_path
 
   @staticmethod
   def _load_png_segmentation_mask(path):
@@ -262,13 +279,8 @@ class SegmentationExampleBuilder(VOCExampleBuilder):
     return np.expand_dims(record[key]["Segmentation"][0][0], axis=-1)
 
   def build(self, paths, example_id):
-    base_path = paths[self.filename]
-    class_mask_filepath = os.path.join(
-        base_path,
-        os.path.normpath(self.class_mask_relative_path.format(example_id)))
-    instance_mask_filepath = os.path.join(
-        base_path,
-        os.path.normpath(self.instance_mask_relative_path.format(example_id)))
+    class_mask_filepath = self.class_mask_path.resolve(paths, example_id)
+    instance_mask_filepath = self.instance_mask_path.resolve(paths, example_id)
     class_mask = (
         self._load_mat_segmentation_mask(class_mask_filepath, key="GTcls")
         if class_mask_filepath.endswith(".mat")
@@ -337,7 +349,7 @@ class VocDetectionConfig(VocConfig):
     })
 
 
-class VocSegmentationConfig(VocConfig):
+class VocSegmentationConfig(VocDetectionConfig):
   @property
   def features(self):
     return tfds.features.FeaturesDict({
@@ -365,27 +377,15 @@ class Voc(tfds.core.GeneratorBasedBuilder):
               SplitConfig(
                   name=tfds.Split.TRAIN,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2007/ImageSets/Main/train.txt"),
-                  example_builder=DetectionExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2007/JPEGImages/{}.jpg",
-                      annotation_relative_path="VOCdevkit/VOC2007/Annotations/{}.xml")
-              ),
+                  example_builder=DetectionExampleBuilder(year=2007, filename="trainval")),
               SplitConfig(
                   name=tfds.Split.VALIDATION,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2007/ImageSets/Main/val.txt"),
-                  example_builder=DetectionExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2007/JPEGImages/{}.jpg",
-                      annotation_relative_path="VOCdevkit/VOC2007/Annotations/{}.xml"),
-              ),
+                  example_builder=DetectionExampleBuilder(year=2007, filename="trainval")),
               SplitConfig(
                   name=tfds.Split.TEST,
                   id_generator=IDGenerator("test", "VOCdevkit/VOC2007/ImageSets/Main/test.txt"),
-                  example_builder=DetectionExampleBuilder(
-                      filename="test",
-                      image_relative_path="VOCdevkit/VOC2007/JPEGImages/{}.jpg",
-                      annotation_relative_path="VOCdevkit/VOC2007/Annotations/{}.xml"),
-              ),
+                  example_builder=DetectionExampleBuilder(year=2007, filename="test")),
           ],
       ),
       VocDetectionConfig(
@@ -402,29 +402,17 @@ class Voc(tfds.core.GeneratorBasedBuilder):
               SplitConfig(
                   name=tfds.Split.TRAIN,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Main/train.txt"),
-                  example_builder=DetectionExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2012/JPEGImages/{}.jpg",
-                      annotation_relative_path="VOCdevkit/VOC2012/Annotations/{}.xml"),
-              ),
+                  example_builder=DetectionExampleBuilder(year=2012, filename="trainval")),
               SplitConfig(
                   name=tfds.Split.VALIDATION,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Main/val.txt"),
-                  example_builder=DetectionExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2012/JPEGImages/{}.jpg",
-                      annotation_relative_path="VOCdevkit/VOC2012/Annotations/{}.xml"),
-              ),
+                  example_builder=DetectionExampleBuilder(year=2012, filename="trainval")),
               SplitConfig(
                   name=tfds.Split.TEST,
                   id_generator=IDGenerator("test", "VOCdevkit/VOC2012/ImageSets/Main/test.txt"),
-                  # We pass `None` as the `annotation_relative_path` because
-                  # VOC2012 has no annotations for the test split.
-                  example_builder=DetectionExampleBuilder(
-                      filename="test",
-                      image_relative_path="VOCdevkit/VOC2012/JPEGImages/{}.jpg",
-                      annotation_relative_path=None),
-              ),
+                  # We pass `False` as the `annotation_path` because VOC2012 has
+                  # no test annotations (`None` is used for the default).
+                  example_builder=DetectionExampleBuilder(year=2012, filename="test", annotation_path=False)),
           ],
       ),
       VocSegmentationConfig(
@@ -440,30 +428,15 @@ class Voc(tfds.core.GeneratorBasedBuilder):
               SplitConfig(
                   name=tfds.Split.TRAIN,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2007/ImageSets/Segmentation/train.txt"),
-                  example_builder=SegmentationExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2007/JPEGImages/{}.jpg",
-                      class_mask_relative_path="VOCdevkit/VOC2007/SegmentationClass/{}.png",
-                      instance_mask_relative_path="VOCdevkit/VOC2007/SegmentationObject/{}.png"),
-              ),
+                  example_builder=SegmentationExampleBuilder(year=2007, filename="trainval")),
               SplitConfig(
                   name=tfds.Split.VALIDATION,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2007/ImageSets/Segmentation/val.txt"),
-                  example_builder=SegmentationExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2007/JPEGImages/{}.jpg",
-                      class_mask_relative_path="VOCdevkit/VOC2007/SegmentationClass/{}.png",
-                      instance_mask_relative_path="VOCdevkit/VOC2007/SegmentationObject/{}.png"),
-              ),
+                  example_builder=SegmentationExampleBuilder(year=2007, filename="trainval")),
               SplitConfig(
                   name=tfds.Split.TEST,
                   id_generator=IDGenerator("test", "VOCdevkit/VOC2007/ImageSets/Segmentation/test.txt"),
-                  example_builder=SegmentationExampleBuilder(
-                      filename="test",
-                      image_relative_path="VOCdevkit/VOC2007/JPEGImages/{}.jpg",
-                      class_mask_relative_path="VOCdevkit/VOC2007/SegmentationClass/{}.png",
-                      instance_mask_relative_path="VOCdevkit/VOC2007/SegmentationObject/{}.png"),
-              ),
+                  example_builder=SegmentationExampleBuilder(year=2007, filename="test")),
           ],
       ),
       VocSegmentationConfig(
@@ -480,40 +453,30 @@ class Voc(tfds.core.GeneratorBasedBuilder):
               SplitConfig(
                   name=tfds.Split.TRAIN,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt"),
-                  example_builder=SegmentationExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2012/JPEGImages/{}.jpg",
-                      class_mask_relative_path="VOCdevkit/VOC2012/SegmentationClass/{}.png",
-                      instance_mask_relative_path="VOCdevkit/VOC2012/SegmentationObject/{}.png"),
+                  example_builder=SegmentationExampleBuilder(year=2012, filename="trainval"),
               ),
               SplitConfig(
                   name=tfds.Split.VALIDATION,
                   id_generator=IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt"),
-                  example_builder=SegmentationExampleBuilder(
-                      filename="trainval",
-                      image_relative_path="VOCdevkit/VOC2012/JPEGImages/{}.jpg",
-                      class_mask_relative_path="VOCdevkit/VOC2012/SegmentationClass/{}.png",
-                      instance_mask_relative_path="VOCdevkit/VOC2012/SegmentationObject/{}.png"),
+                  example_builder=SegmentationExampleBuilder(year=2012, filename="trainval"),
               ),
               SplitConfig(
                   name="sbd_train",
                   id_generator=IncludeExcludeIDGenerator(
-                      # The images of 'sbd_train' are all those contained in
-                      # the SBD train split, excluding any included in the
-                      # VOC2012 train or validation split.
-                      include_generators=[
-                          IDGenerator("sbd", "benchmark_RELEASE/dataset/train.txt"),
-                      ],
+                      # The images of 'sbd_train' are all those contained in the
+                      # SBD train split, excluding any included in the VOC2012
+                      # train or validation split.
+                      include_generators=[IDGenerator("sbd", "benchmark_RELEASE/dataset/train.txt")],
                       exclude_generators=[
                           IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt"),
                           IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt"),
                       ],
                   ),
                   example_builder=SegmentationExampleBuilder(
-                      filename="sbd",
-                      image_relative_path="benchmark_RELEASE/dataset/img/{}.jpg",
-                      class_mask_relative_path="benchmark_RELEASE/dataset/cls/{}.mat",
-                      instance_mask_relative_path="benchmark_RELEASE/dataset/inst/{}.mat"),
+                      year=2012,
+                      filename="trainval",
+                      class_mask_path=VocPath("sbd", "benchmark_RELEASE/dataset/cls/{}.mat"),
+                      instance_mask_path=VocPath("sbd", "benchmark_RELEASE/dataset/inst/{}.mat")),
               ),
               SplitConfig(
                   name="sbd_validation",
@@ -521,19 +484,17 @@ class Voc(tfds.core.GeneratorBasedBuilder):
                       # The images of 'sbd_validation' are all those contained
                       # in the SBD validation split, excluding any included in
                       # the VOC2012 train or validation split.
-                      include_generators=[
-                          IDGenerator("sbd", "benchmark_RELEASE/dataset/val.txt"),
-                      ],
+                      include_generators=[IDGenerator("sbd", "benchmark_RELEASE/dataset/val.txt")],
                       exclude_generators=[
                           IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Segmentation/train.txt"),
                           IDGenerator("trainval", "VOCdevkit/VOC2012/ImageSets/Segmentation/val.txt"),
                       ],
                   ),
                   example_builder=SegmentationExampleBuilder(
-                      filename="sbd",
-                      image_relative_path="benchmark_RELEASE/dataset/img/{}.jpg",
-                      class_mask_relative_path="benchmark_RELEASE/dataset/cls/{}.mat",
-                      instance_mask_relative_path="benchmark_RELEASE/dataset/inst/{}.mat"),
+                      year=2012,
+                      filename="trainval",
+                      class_mask_path=VocPath("sbd", "benchmark_RELEASE/dataset/cls/{}.mat"),
+                      instance_mask_path=VocPath("sbd", "benchmark_RELEASE/dataset/inst/{}.mat")),
               ),
           ],
       ),
