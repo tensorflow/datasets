@@ -137,6 +137,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
+  SKIP_CHECKSUMS = False
+  URLS = []
 
   @classmethod
   def setUpClass(cls):
@@ -216,6 +218,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEqual(self.builder.name, info.name)
 
   def _get_dl_extract_result(self, url):
+    self.URLS.append(url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
@@ -260,6 +263,20 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
           self._download_and_prepare_as_dataset(builder)
     else:
       self._download_and_prepare_as_dataset(self.builder)
+
+    if not self.SKIP_CHECKSUMS:
+      with self._subTest("url_checksums"):
+        self._test_checksums()
+
+  def _test_checksums(self):
+    urls = []
+    path = ""  # How to get this path
+
+    with tf.io.gfile.GFile(path, "rb") as f:
+      for line in f.readlines():
+        urls.append(line.split()[0].decode("utf-8"))
+
+    self.assertEqual(set(self.URLS), set(urls))
 
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
