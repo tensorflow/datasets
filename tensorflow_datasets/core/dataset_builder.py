@@ -26,7 +26,7 @@ import itertools
 import os
 import sys
 
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sized, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sized, Tuple, Union  # pylint: disable=line-too-long
 
 import termcolor
 
@@ -70,6 +70,15 @@ GCS bucket (recommended if you're running on GCP), you can instead set
 data_dir=gs://tfds-data/datasets.
 """
 
+class _Nested(metaclass=type):
+  """Nested Structure for Splits."""
+
+  def __getitem__(self, T):
+    return Union[T, List[Any], Tuple[Any], Dict[str, Any]]
+
+Nested = _Nested()  # pylint: disable=invalid-name
+SplitType = Union[str, splits_lib.SplitBase]  # pylint: disable=invalid-name
+
 
 class BuilderConfig(object):  # pylint: disable=useless-object-inheritance
   """Base class for `DatasetBuilder` data configuration.
@@ -86,11 +95,11 @@ class BuilderConfig(object):  # pylint: disable=useless-object-inheritance
                description: Optional[str] = None):
     self._name: str = name
     self._version: Optional[str] = version
-    self._supported_versions: Optional[List[str]] = supported_versions or []
+    self._supported_versions: List[str] = supported_versions or []
     self._description: Optional[str] = description
 
   @property
-  def name(self):
+  def name(self) -> str:
     return self._name
 
   @property
@@ -112,9 +121,8 @@ class BuilderConfig(object):  # pylint: disable=useless-object-inheritance
         version=self.version or "None")
 
 
-# pylint: disable=useless-object-inheritance
 @six.add_metaclass(registered.RegisteredDataset)
-class DatasetBuilder(object):
+class DatasetBuilder(object):  # pylint: disable=useless-object-inheritance
   """Abstract base class for all datasets.
 
   `DatasetBuilder` has 3 key methods:
@@ -219,10 +227,10 @@ class DatasetBuilder(object):
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
-  def __getstate__(self) -> Dict[Any, Any]:
+  def __getstate__(self) -> Dict[str, Any]:
     return self._original_state
 
-  def __setstate__(self, state: Dict[Any, Any]):
+  def __setstate__(self, state: Dict[str, Any]):
     self.__init__(**state)
 
   @utils.memoized_property
@@ -232,7 +240,7 @@ class DatasetBuilder(object):
     return self.VERSION
 
   @utils.memoized_property
-  def supported_versions(self) -> List[str]:
+  def supported_versions(self) -> List[utils.Version]:
     if self._builder_config:
       return self._builder_config.supported_versions
     return self.SUPPORTED_VERSIONS
@@ -384,13 +392,13 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
-                 split: Optional[splits_lib.SplitBase] = None,
+                 split: Optional[Nested[SplitType]] = None,
                  batch_size: Optional[int] = None,
                  shuffle_files: Optional[bool] = False,
-                 decoders: Optional[Dict[str, decode.Decoder]] = None,
+                 decoders: Optional[Nested[decode.Decoder]] = None,
                  read_config: Optional[read_config_lib.ReadConfig] = None,
                  as_supervised: bool = False,
-                 in_memory: Optional[bool] = None) -> tf.data.Dataset:
+                 in_memory: Optional[bool] = None) -> Nested[tf.data.Dataset]:
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
@@ -503,13 +511,13 @@ class DatasetBuilder(object):
 
   def _build_single_dataset(
       self,
-      split: splits_lib.SplitBase,
+      split: Nested[SplitType],
       shuffle_files: bool,
-      batch_size: int,
-      decoders: Dict[str, decode.Decoder],
+      batch_size: Optional[int],
+      decoders: Optional[Nested[decode.Decoder]],
       read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
-      in_memory: bool) -> tf.data.Dataset:
+      in_memory: bool) -> Nested[tf.data.Dataset]:
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -751,8 +759,8 @@ class DatasetBuilder(object):
   @abc.abstractmethod
   def _as_dataset(
       self,
-      split: splits_lib.SplitBase,
-      decoders: Optional[Dict[str, decode.Decoder]] = None,
+      split: Nested[SplitType],
+      decoders: Optional[Nested[decode.Decoder]] = None,
       read_config: Optional[read_config_lib.ReadConfig] = None,
       shuffle_files: bool = False) -> None:
     """Constructs a `tf.data.Dataset`.
@@ -984,10 +992,10 @@ class FileAdapterBuilder(DatasetBuilder):
 
   def _as_dataset(
       self,
-      split: splits_lib.SplitBase = splits_lib.Split.TRAIN,
-      decoders: Optional[Dict[str, decode.Decoder]] = None,
+      split: Nested[SplitType] = splits_lib.Split.TRAIN,
+      decoders: Optional[Nested[decode.Decoder]] = None,
       read_config: Optional[read_config_lib.ReadConfig] = None,
-      shuffle_files: bool = False) -> tf.data.Dataset:
+      shuffle_files: bool = False) -> Nested[tf.data.Dataset]:
 
     if self.version.implements(utils.Experiment.S3):
       ds = self._tfrecords_reader.read(
@@ -1126,8 +1134,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     """
     raise NotImplementedError()
 
-  # pylint: disable=arguments-differ
-  def _download_and_prepare(
+  def _download_and_prepare(  # pylint: disable=arguments-differ
       self,
       dl_manager: download.DownloadManager,
       download_config: download.DownloadConfig) -> None:
@@ -1138,7 +1145,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     )
 
   def _prepare_split_legacy(self,
-                            generator: Iterable,
+                            generator: Iterable[tf.tuple],
                             split_info: splits_lib.SplitInfo) -> None:
     # TODO(pierrot): delete function once S3 has been fully rolled-out.
     # For builders having both S3 and non S3 versions: drop key if any yielded.
@@ -1147,8 +1154,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     output_files = self._build_split_filenames(split_info)
     self._file_format_adapter.write_from_generator(generator, output_files)
 
-  # pylint: disable=arguments-differ
-  def _prepare_split(self,
+  def _prepare_split(self,  # pylint: disable=arguments-differ
                      split_generator: splits_lib.SplitGenerator,
                      max_examples_per_split: int) -> None:
     generator = self._generate_examples(**split_generator.gen_kwargs)
@@ -1232,8 +1238,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     """
     raise NotImplementedError()
 
-  # pylint: disable=arguments-differ
-  def _download_and_prepare(
+  def _download_and_prepare(  # pylint: disable=arguments-differ
       self,
       dl_manager: download.DownloadManager,
       download_config: download.DownloadConfig) -> None:
@@ -1279,7 +1284,6 @@ class BeamBasedBuilder(FileAdapterBuilder):
     logging.info("Updating split info...")
     self.info.update_splits_if_different(split_dict)
 
-  # pylint: disable=used-before-assignment
   def _prepare_split(self,
                      split_generator: splits_lib.SplitGenerator,
                      pipeline: "beam.Pipeline") -> None:
