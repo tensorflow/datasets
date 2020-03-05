@@ -168,7 +168,7 @@ class DatasetBuilderTest(testing.TestCase):
                "mnist-test.tfrecord-00000-of-00001",
                "mnist-train.tfrecord-00000-of-00001",
               ]),
-          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.0"))))
+          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.1"))))
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
 
@@ -351,7 +351,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
     def load_mnist_dataset_info(self):
       mnist_info_path = os.path.join(
           utils.tfds_dir(),
-          "testing/test_data/dataset_info/mnist/3.0.0",
+          "testing/test_data/dataset_info/mnist/3.0.1",
       )
       mnist_info_path = os.path.normpath(mnist_info_path)
       self.read_from_directory(mnist_info_path)

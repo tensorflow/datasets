@@ -95,13 +95,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.1", experiments={tfds.core.Experiment.METADATA: True}
-      ),
-  ]
+  VERSION = tfds.core.Version("3.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
