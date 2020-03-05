@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
 import os
 import subprocess as sp
 
@@ -46,27 +47,39 @@ correctly.
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle://"
-  _DATASET_PREFIX = "dataset"
-  _COMPETITION_PREFIX = "competition"
+  kaggle_type = collections.namedtuple(
+      "KaggleType",
+      ["prefix", "download_cmd", "dl_flag", "extra_flag"])
+  _DATASET_TYPE = kaggle_type(
+      prefix="dataset",
+      download_cmd="datasets",
+      dl_flag="-d",
+      extra_flag="--unzip")
+  _COMPETITION_TYPE = kaggle_type(
+      prefix="competition",
+      download_cmd="competitions",
+      dl_flag="-c",
+      extra_flag="")
+  KAGGLE_TYPES = {
+      _COMPETITION_TYPE.prefix: _COMPETITION_TYPE,
+      _DATASET_TYPE.prefix: _DATASET_TYPE
+      }
 
-  def __init__(self, competition_name, filename, download_type=None):
+  def __init__(self, competition_name, filename):
     self._competition_name = competition_name
     self._filename = filename
-    self._type = download_type
-  
-  @staticmethod
-  def get_type(
-      competition_name,
-      dataset_value=_DATASET_PREFIX,
-      competition_value=_COMPETITION_PREFIX):
+    self._type = None
 
-    return  dataset_value if "/" in competition_name \
-          else competition_value
-  
+  @staticmethod
+  def get_type(competition_name):
+
+    return  KaggleFile._DATASET_TYPE if "/" in competition_name \
+          else KaggleFile._COMPETITION_TYPE
+
   def get_original_url(self):
     return "%s%s/%s" % (self._URL_PREFIX,
                         self._competition_name,
-                        self._filename) 
+                        self._filename)
   @property
   def type(self):
     if self._type is None:
@@ -85,21 +98,21 @@ class KaggleFile(object):
   def from_url(cls, url):
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
-    download_type, competition_name, filename = url[len(cls._URL_PREFIX):].split("/", 2)
-    if download_type == KaggleFile._DATASET_PREFIX:
+    download_type, competition_name, filename = url[len(cls._URL_PREFIX):].split("/", 2) #pylint: disable=line-too-long
+    if KaggleFile.KAGGLE_TYPES[download_type] is KaggleFile._DATASET_TYPE:
       dataset_name, filename = filename.split("/", 1)
       competition_name = "%s/%s" % (competition_name, dataset_name)
-    return cls(competition_name, filename, download_type)
+    return cls(competition_name, filename)
 
   @staticmethod
   def is_kaggle_url(url):
     return url.startswith(KaggleFile._URL_PREFIX)
 
   def to_url(self):
-    return "%s%s/%s/%s" % (self._URL_PREFIX, 
-                          self.type, 
-                          self._competition_name,
-                          self._filename)
+    return "%s%s/%s/%s" % (self._URL_PREFIX,
+                           self.type.prefix,
+                           self._competition_name,
+                           self._filename)
 
 
 class KaggleCompetitionDownloader(object):
@@ -116,26 +129,16 @@ class KaggleCompetitionDownloader(object):
   ```
   """
 
-  def __init__(self, competition_name, competition_type=None):
-    assert competition_type in (None, KaggleFile._DATASET_PREFIX, KaggleFile._COMPETITION_PREFIX)
+  def __init__(self, competition_name):
     self._competition_name = competition_name
-    self._competition_type = competition_type
-    
-  def get_type(self, dataset_value, competition_value):
-    if not self._competition_type:
-      self._competition_type = KaggleFile.get_type(self._competition_name)
+    self._kaggle_type = KaggleFile.get_type(self._competition_name)
 
-    return dataset_value if self._competition_type == KaggleFile._DATASET_PREFIX \
-                            else competition_value
-      
   @utils.memoized_property
   def competition_files(self):
     """List of competition files."""
     command = [
         "kaggle",
-        self.get_type(
-            "datasets",
-            "competitions"),
+        self._kaggle_type.download_cmd,
         "files",
         "-v",
         self._competition_name,
@@ -160,20 +163,17 @@ class KaggleCompetitionDownloader(object):
                        "files: %s" % (fname, self.competition_files))
     command = [
         "kaggle",
-        self.get_type(
-            "datasets",
-            "competitions"),
+        self._kaggle_type.download_cmd,
         "download",
         "--file",
         fname,
         "--path",
         output_dir,
-        self.get_type(
-            "-d", "-c"),
+        self._kaggle_type.dl_flag,
         self._competition_name
     ]
-    if KaggleFile.get_type(self._competition_name) == KaggleFile._DATASET_PREFIX:
-      command.append("--unzip")
+    if self._kaggle_type.extra_flag:
+      command.append(self._kaggle_type.extra_flag)
     _run_kaggle_command(command, self._competition_name)
     return os.path.join(output_dir, fname)
 

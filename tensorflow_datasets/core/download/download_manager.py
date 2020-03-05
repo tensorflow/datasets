@@ -23,9 +23,9 @@ import os
 import sys
 import uuid
 
+import six
 from absl import logging
 import promise
-import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
@@ -33,7 +33,6 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
-from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
 
