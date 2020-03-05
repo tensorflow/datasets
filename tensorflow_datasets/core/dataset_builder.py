@@ -79,7 +79,6 @@ class _Nested(metaclass=type):
 Nested = _Nested()  # pylint: disable=invalid-name
 SplitType = Union[str, splits_lib.SplitBase]  # pylint: disable=invalid-name
 
-
 class BuilderConfig(object):  # pylint: disable=useless-object-inheritance
   """Base class for `DatasetBuilder` data configuration.
 
