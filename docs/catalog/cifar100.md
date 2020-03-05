@@ -25,6 +25,7 @@ superclass to which it belongs).
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+    *   `3.0.1`: No release notes.
 *   **Download size**: `160.71 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

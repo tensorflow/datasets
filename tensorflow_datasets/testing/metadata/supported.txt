@@ -86,12 +86,16 @@ binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
 c4/en.noclean/2.2.0
 c4/en.noclean/2.2.1
+c4/en.noclean/2.3.0
 c4/en.realnewslike/2.2.0
 c4/en.realnewslike/2.2.1
+c4/en.realnewslike/2.3.0
 c4/en.webtextlike/2.2.0
 c4/en.webtextlike/2.2.1
+c4/en.webtextlike/2.3.0
 c4/en/2.2.0
 c4/en/2.2.1
+c4/en/2.3.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
 caltech_birds2011/0.1.0
@@ -119,7 +123,9 @@ cfq/question_complexity_split/1.0.0
 cfq/question_pattern_split/1.0.0
 cfq/random_split/1.0.0
 cifar10/3.0.0
+cifar10/3.0.1
 cifar100/3.0.0
+cifar100/3.0.1
 cifar10_1/v4/1.0.0
 cifar10_1/v6/1.0.0
 cifar10_corrupted/brightness_1/1.0.0
@@ -287,6 +293,7 @@ esnli/plain_text/0.0.2
 eurosat/all/2.0.0
 eurosat/rgb/2.0.0
 fashion_mnist/3.0.0
+fashion_mnist/3.0.1
 flic/full/2.0.0
 flic/small/2.0.0
 flores/neen_plain_text/1.1.0
@@ -308,15 +315,10 @@ glue/rte/1.0.0
 glue/sst2/1.0.0
 glue/stsb/1.0.0
 glue/wnli/1.0.0
-groove/2bar-16000hz/1.0.0
 groove/2bar-16000hz/2.0.0
-groove/2bar-midionly/1.0.0
 groove/2bar-midionly/2.0.0
-groove/4bar-midionly/1.0.0
 groove/4bar-midionly/2.0.0
-groove/full-16000hz/1.0.0
 groove/full-16000hz/2.0.0
-groove/full-midionly/1.0.0
 groove/full-midionly/2.0.0
 higgs/2.0.0
 horses_or_humans/3.0.0
@@ -435,6 +437,7 @@ iris/2.0.0
 kitti/3.1.0
 kitti/3.2.0
 kmnist/3.0.0
+kmnist/3.0.1
 lfw/0.1.0
 librispeech/plain_text/1.1.0
 librispeech/subwords32k/1.1.0
@@ -517,6 +520,7 @@ math_dataset/polynomials__simplify_power/1.0.0
 math_dataset/probability__swr_p_level_set/1.0.0
 math_dataset/probability__swr_p_sequence/1.0.0
 mnist/3.0.0
+mnist/3.0.1
 mnist_corrupted/brightness/1.0.0
 mnist_corrupted/canny_edges/1.0.0
 mnist_corrupted/dotted_line/1.0.0

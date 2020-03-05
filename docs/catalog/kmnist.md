@@ -24,6 +24,7 @@ of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+    *   `3.0.1`: No release notes.
 *   **Download size**: `20.26 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

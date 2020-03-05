@@ -32,6 +32,7 @@ http://creativecommons.org/licenses/by/4.0
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+    *   `0.0.1`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

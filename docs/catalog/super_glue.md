@@ -136,7 +136,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -211,7 +210,6 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -291,7 +289,6 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -363,7 +360,6 @@ FeaturesDict({
     'query': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -441,7 +437,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -538,7 +533,6 @@ FeaturesDict({
     'word': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -661,7 +655,6 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -782,7 +775,6 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -858,7 +850,6 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
@@ -931,7 +922,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Citation**:
 
 ```
