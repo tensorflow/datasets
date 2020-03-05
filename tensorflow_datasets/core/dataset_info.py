@@ -70,10 +70,10 @@ if typing.TYPE_CHECKING:
     beam = Any
 
 # Name of the file to output the DatasetInfo protobuf object.
-DATASET_INFO_FILENAME = "dataset_info.json"
-LICENSE_FILENAME = "LICENSE"
+DATASET_INFO_FILENAME: str = "dataset_info.json"
+LICENSE_FILENAME: str = "LICENSE"
 
-INFO_STR = """tfds.core.DatasetInfo(
+INFO_STR: str = """tfds.core.DatasetInfo(
     name='{name}',
     version={version},
     description='{description}',
@@ -698,7 +698,7 @@ class BeamMetadataDict(MetadataDict):
   def _temp_filepath(self, key: str) -> str:
     return os.path.join(self._tempdir, "%s.json" % key)
 
-  def __setitem__(self, key: str, item: beam.pvalue.PValue) -> Optional[str]:
+  def __setitem__(self, key: str, item: "beam.pvalue.PValue") -> None:
     """Creates write sink for beam PValues or sets value of key in `dict`.
 
     If the item is a PValue, it is expected to contain exactly one element,
