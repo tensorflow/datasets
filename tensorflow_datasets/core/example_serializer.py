@@ -19,6 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import Any, Dict, List, Optional, Tuple, Union
+
 import collections
 import numpy as np
 import six
@@ -28,20 +30,24 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 
 
+RaggedFields = Union[Tuple[tf.Tensor, feature_lib.TensorInfo],
+                     Dict[str, Tuple[Any, Any]]]
+
 class ExampleSerializer(object):
   """To serialize examples."""
 
-  def __init__(self, example_specs):
+  def __init__(self, example_specs: feature_lib.TensorInfo):
     """Constructor.
 
     Args:
       example_specs: Nested `dict` of `tfds.features.TensorInfo`, corresponding
         to the structure of data to write/read.
     """
-    self._example_specs = example_specs
-    self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
+    self._example_specs: feature_lib.TensorInfo = example_specs
+    self._flat_example_specs: feature_lib.NonMutableDict = utils.flatten_nest_dict(  # pylint: disable=line-too-long
+        self._example_specs)
 
-  def serialize_example(self, example):
+  def serialize_example(self, example: Dict[Any, Any]) -> str:
     """Serialize the given example.
 
     Args:
@@ -57,7 +63,10 @@ class ExampleSerializer(object):
     return example.SerializeToString()
 
 
-def _dict_to_tf_example(example_dict, tensor_info_dict=None):
+def _dict_to_tf_example(
+    example_dict: Dict[Any, Any],
+    tensor_info_dict: Optional[Dict[str, feature_lib.TensorInfo]] = None
+    ) -> tf.train.Example:
   """Builds tf.train.Example from (string -> int/float/str list) dictionary.
 
   Args:
@@ -104,7 +113,7 @@ def _dict_to_tf_example(example_dict, tensor_info_dict=None):
   return tf.train.Example(features=tf.train.Features(feature=example_dict))
 
 
-def _is_string(item):
+def _is_string(item: object):
   """Check if the object contains string or bytes."""
   if isinstance(item, (six.binary_type, six.string_types)):
     return True
@@ -116,7 +125,9 @@ def _is_string(item):
   return False
 
 
-def _item_to_np_array(item, dtype, shape):
+def _item_to_np_array(item: object,
+                      dtype: tf.dtypes.DType,
+                      shape: tf.shape) -> object:
   """Single item to a np.array."""
   original_item = item
   item = np.array(item, dtype=dtype.as_numpy_dtype)
@@ -127,7 +138,10 @@ def _item_to_np_array(item, dtype, shape):
   return item
 
 
-def _item_to_tf_feature(item, tensor_info=None):
+def _item_to_tf_feature(
+    item: object,
+    tensor_info: Optional[feature_lib.TensorInfo] = None
+    ) -> Optional[tf.train.Feature]:
   """Single item to a tf.train.Feature."""
   v = item
   # TODO(epot): tensor_info is only None for file_format_adapter tests.
@@ -190,7 +204,10 @@ RaggedExtraction = collections.namedtuple("RaggedExtraction", [
 ])
 
 
-def _add_ragged_fields(example_data, tensor_info):
+def _add_ragged_fields(
+    example_data: tf.Tensor,
+    tensor_info: feature_lib.TensorInfo
+    ) -> RaggedFields:
   """Optionally convert the ragged data into flat/row_lengths fields.
 
   Example:
@@ -249,7 +266,9 @@ def _add_ragged_fields(example_data, tensor_info):
     return ragged_attr_dict
 
 
-def _extract_ragged_attributes(nested_list, tensor_info):
+def _extract_ragged_attributes(
+    nested_list: List[tf.RaggedTensor],
+    tensor_info: feature_lib.TensorInfo) -> Tuple[List[Any], List[Any]]:
   """Extract the values for the tf.RaggedTensor __init__.
 
   This extract the ragged tensor attributes which allow reconstruct the
@@ -286,7 +305,7 @@ def _extract_ragged_attributes(nested_list, tensor_info):
   return flat_values, nested_row_lengths[1:]
 
 
-def _fill_ragged_attribute(ext):
+def _fill_ragged_attribute(ext: tf.tuple) -> None:
   """Recurse the nested_list from the given RaggedExtraction.
 
   Args:
