@@ -19,25 +19,33 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import Any, Dict, Optional, Union
+
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import features as features_lib
 
+
+FeatureProto = Optional[Union[tf.io.FixedLenFeature,
+                              tf.io.FixedLenSequenceFeature,
+                              Dict[str, tf.io.FixedLenSequenceFeature]]]
 
 class ExampleParser(object):
   """To parse Examples."""
 
-  def __init__(self, example_specs):
-    self._example_specs = example_specs
-    self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
+  def __init__(self, example_specs: Dict[str, Any]):
+    self._example_specs: Dict[str, Any] = example_specs
+    self._flat_example_specs: Dict[Any, Any] = utils.flatten_nest_dict(
+        self._example_specs)
 
-  def _build_feature_specs(self):
+  def _build_feature_specs(self) -> Dict[str, Any]:
     """Returns the `tf.train.Example` feature specification.
 
     Returns:
       The `dict` of `tf.io.FixedLenFeature`, `tf.io.VarLenFeature`, ...
     """
     # Convert individual fields into tf.train.Example compatible format
-    def build_single_spec(k, v):
+    def build_single_spec(k: str, v: features_lib.TensorInfo) -> FeatureProto:
       with utils.try_reraise(
           "Specification error for feature {} ({}): ".format(k, v)):
         return _to_tf_example_spec(v)
@@ -46,7 +54,7 @@ class ExampleParser(object):
         k: build_single_spec(k, v) for k, v in self._flat_example_specs.items()
     }
 
-  def parse_example(self, serialized_example):
+  def parse_example(self, serialized_example: tf.Tensor) -> tf.train.Example:
     """Deserialize a single `tf.train.Example` proto.
 
     Usage:
@@ -92,7 +100,10 @@ class ExampleParser(object):
     return example
 
 
-def _deserialize_single_field(example_data, tensor_info):
+def _deserialize_single_field(
+    example_data: tf.Tensor,
+    tensor_info: features_lib.TensorInfo
+    ) -> Union[tf.RaggedTensor, tf.Tensor]:
   """Reconstruct the serialized field."""
   # Ragged tensor case:
   if tensor_info.sequence_rank > 1:
@@ -109,7 +120,8 @@ def _deserialize_single_field(example_data, tensor_info):
   return example_data
 
 
-def _dict_to_ragged(example_data, tensor_info):
+def _dict_to_ragged(example_data: tf.Tensor,
+                    tensor_info: features_lib.TensorInfo) -> tf.RaggedTensor:
   """Reconstruct the ragged tensor from the row ids."""
   return tf.RaggedTensor.from_nested_row_lengths(
       flat_values=example_data["ragged_flat_values"],
@@ -120,7 +132,7 @@ def _dict_to_ragged(example_data, tensor_info):
   )
 
 
-def _to_tf_example_spec(tensor_info):
+def _to_tf_example_spec(tensor_info: features_lib.TensorInfo) -> FeatureProto:
   """Convert a `TensorInfo` into a feature proto object."""
   # Convert the dtype
 
