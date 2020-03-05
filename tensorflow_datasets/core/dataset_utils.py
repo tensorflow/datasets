@@ -19,7 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from typing import Any, Callable, Dict, List, Optional
+import typing
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 import functools
 import itertools
@@ -32,10 +33,17 @@ from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 
 
+class _Nested(metaclass=type):
+  """Nested Structure for Types."""
+
+  def __getitem__(self, T):
+    return Union[T, List[Any], Tuple[Any], Dict[str, Any]]
+
+Nested = _Nested()  # pylint: disable=invalid-name
 Instruction = Dict[str, Any]
 
 def build_dataset(instruction_dicts: List[Instruction],
-                  dataset_from_file_fn: Callable[..., Any],
+                  dataset_from_file_fn: Callable[[str], tf.data.Dataset],
                   shuffle_files: bool = False,
                   parallel_reads: int = 64) -> tf.data.Dataset:
   """Constructs a `tf.data.Dataset` from TFRecord files.
@@ -185,9 +193,15 @@ def _graph_dataset_iterator(ds_iter: tf.data.Iterator,
         break
 
 
+@typing.overload
+def as_numpy(dataset: Nested[tf.Tensor],
+             graph: Optional[tf.Graph] = None) -> Nested[np.array]:
+  ...
+
 @api_utils.disallow_positional_args(allowed=["dataset"])
-def as_numpy(dataset: tf.data.Dataset,
-             graph: Optional[tf.Graph] = None) -> Callable[..., Any]:
+def as_numpy(dataset: Nested[tf.data.Dataset],
+             graph: Optional[tf.Graph] = None
+            ) -> Nested[Iterable[Nested[tf.Tensor]]]:
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
   `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
@@ -283,6 +297,6 @@ def dataset_shape_is_fully_defined(ds: tf.data.Dataset) -> bool:
 
 
 def features_shape_is_fully_defined(
-    features: features_lib.FeaturesDict) -> bool:
+    features: features_lib.FeatureConnector) -> bool:
   return all([tf.TensorShape(info.shape).is_fully_defined() for info in
               tf.nest.flatten(features.get_tensor_info())])
