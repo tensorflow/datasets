@@ -36,8 +36,8 @@ from tensorflow_datasets.core import utils
 class _Nested(metaclass=type):
   """Nested Structure for Types."""
 
-  def __getitem__(self, T):
-    return Union[T, List[Any], Tuple[Any], Dict[str, Any]]
+  def __getitem__(self, t):
+    return Union[t, List[Any], Tuple[Any], Dict[str, Any]]
 
 Nested = _Nested()  # pylint: disable=invalid-name
 Instruction = Dict[str, Any]
@@ -178,7 +178,7 @@ def _eager_dataset_iterator(dataset: tf.data.Dataset):
     yield tf.nest.pack_sequence_as(item, flat)
 
 
-def _graph_dataset_iterator(ds_iter: tf.data.Iterator,
+def _graph_dataset_iterator(ds_iter: tf.compat.v1.Iterator,
                             graph: Optional[tf.Graph] = None):
   """Constructs a Python generator from a tf.data.Iterator."""
   with utils.maybe_with_graph(graph, create_if_none=False):
@@ -198,10 +198,14 @@ def as_numpy(dataset: Nested[tf.Tensor],
              graph: Optional[tf.Graph] = None) -> Nested[np.array]:
   ...
 
-@api_utils.disallow_positional_args(allowed=["dataset"])
+@typing.overload
 def as_numpy(dataset: Nested[tf.data.Dataset],
              graph: Optional[tf.Graph] = None
             ) -> Nested[Iterable[Nested[tf.Tensor]]]:
+  ...
+
+@api_utils.disallow_positional_args(allowed=["dataset"])
+def as_numpy(dataset, graph):
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
   `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
