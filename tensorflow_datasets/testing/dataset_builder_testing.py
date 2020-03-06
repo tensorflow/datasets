@@ -139,7 +139,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
   SKIP_CHECKSUMS = False
   URLS = []
-
+  CHECKSUMS_PATH = None 
+  
   @classmethod
   def setUpClass(cls):
     tf.compat.v1.enable_eager_execution()
@@ -233,6 +234,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_DOWNLOAD_RESULT)
 
+  def _get_checksums_filepath(self):
+    if self.CHECKSUMS_PATH is None:
+      dir_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../url_checksums"))
+      return os.path.join(dir_path, self.builder.name + ".txt")
+    return self.CHECKSUMS_PATH
+
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(  # pylint: disable=not-callable
         data_dir=self.tmp_dir,
@@ -270,9 +277,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   def _test_checksums(self):
     urls = []
-    path = ""  # How to get this path
-
-    with tf.io.gfile.GFile(path, "rb") as f:
+    filepath = self._get_checksums_filepath()
+    with tf.io.gfile.GFile(filepath, "rb") as f:
       for line in f.readlines():
         urls.append(line.split()[0].decode("utf-8"))
 
