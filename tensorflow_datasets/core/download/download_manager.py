@@ -23,9 +23,9 @@ import os
 import sys
 import uuid
 
-import six
 from absl import logging
 import promise
+import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils

@@ -26,12 +26,12 @@ import os
 import re
 import ssl
 import sys
-import concurrent.futures
-from six.moves import urllib
 from absl import logging
+import concurrent.futures
 import promise
 import requests
 from requests.utils import extract_zipped_paths
+from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils

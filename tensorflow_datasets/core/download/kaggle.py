@@ -43,48 +43,37 @@ Competition %s not found. Please ensure you have spelled the competition name \
 correctly.
 """
 
+KaggleType = collections.namedtuple(
+    "KaggleType",
+    ["prefix", "download_cmd", "dl_flag", "extra_flag"])
 
-class KaggleFile(object):
-  """Represents a Kaggle competition file."""
-  _URL_PREFIX = "kaggle://"
-  kaggle_type = collections.namedtuple(
-      "KaggleType",
-      ["prefix", "download_cmd", "dl_flag", "extra_flag"])
-  _DATASET_TYPE = kaggle_type(
+_KAGGLE_TYPES = {
+  "dataset": KaggleType(
       prefix="dataset",
       download_cmd="datasets",
       dl_flag="-d",
-      extra_flag="--unzip")
-  _COMPETITION_TYPE = kaggle_type(
+      extra_flag="--unzip"),
+  "competition": KaggleType(
       prefix="competition",
       download_cmd="competitions",
       dl_flag="-c",
       extra_flag="")
-  KAGGLE_TYPES = {
-      _COMPETITION_TYPE.prefix: _COMPETITION_TYPE,
-      _DATASET_TYPE.prefix: _DATASET_TYPE
-      }
+}
+
+class KaggleFile(object):
+  """Represents a Kaggle competition file."""
+  _URL_PREFIX = "kaggle://"
 
   def __init__(self, competition_name, filename):
     self._competition_name = competition_name
     self._filename = filename
-    self._type = None
+    self.type = KaggleFile.get_type(competition_name)
 
   @staticmethod
   def get_type(competition_name):
 
-    return  KaggleFile._DATASET_TYPE if "/" in competition_name \
-          else KaggleFile._COMPETITION_TYPE
-
-  def get_original_url(self):
-    return "%s%s/%s" % (self._URL_PREFIX,
-                        self._competition_name,
-                        self._filename)
-  @property
-  def type(self):
-    if self._type is None:
-      self._type = KaggleFile.get_type(self._competition_name)
-    return self._type
+    return  _KAGGLE_TYPES['dataset'] if "/" in competition_name \
+          else _KAGGLE_TYPES['competition']
 
   @property
   def competition(self):
@@ -99,7 +88,7 @@ class KaggleFile(object):
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
     download_type, competition_name, filename = url[len(cls._URL_PREFIX):].split("/", 2) #pylint: disable=line-too-long
-    if KaggleFile.KAGGLE_TYPES[download_type] is KaggleFile._DATASET_TYPE:
+    if download_type == "dataset":
       dataset_name, filename = filename.split("/", 1)
       competition_name = "%s/%s" % (competition_name, dataset_name)
     return cls(competition_name, filename)
