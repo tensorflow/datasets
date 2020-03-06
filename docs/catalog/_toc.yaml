@@ -318,6 +318,8 @@ toc:
     title: bair_robot_pushing_small
   - path: /datasets/catalog/moving_mnist
     title: moving_mnist
+  - path: /datasets/catalog/robonet
+    title: robonet
   - path: /datasets/catalog/starcraft_video
     title: starcraft_video
   - path: /datasets/catalog/ucf101

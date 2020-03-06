@@ -122,9 +122,7 @@ cfq/query_pattern_split/1.0.0
 cfq/question_complexity_split/1.0.0
 cfq/question_pattern_split/1.0.0
 cfq/random_split/1.0.0
-cifar10/3.0.0
 cifar10/3.0.1
-cifar100/3.0.0
 cifar100/3.0.1
 cifar10_1/v4/1.0.0
 cifar10_1/v6/1.0.0
@@ -292,7 +290,6 @@ eraser_multi_rc/0.1.1
 esnli/plain_text/0.0.2
 eurosat/all/2.0.0
 eurosat/rgb/2.0.0
-fashion_mnist/3.0.0
 fashion_mnist/3.0.1
 flic/full/2.0.0
 flic/small/2.0.0
@@ -436,7 +433,6 @@ imdb_reviews/subwords8k/1.0.0
 iris/2.0.0
 kitti/3.1.0
 kitti/3.2.0
-kmnist/3.0.0
 kmnist/3.0.1
 lfw/0.1.0
 librispeech/plain_text/1.1.0
@@ -519,7 +515,6 @@ math_dataset/polynomials__expand/1.0.0
 math_dataset/polynomials__simplify_power/1.0.0
 math_dataset/probability__swr_p_level_set/1.0.0
 math_dataset/probability__swr_p_sequence/1.0.0
-mnist/3.0.0
 mnist/3.0.1
 mnist_corrupted/brightness/1.0.0
 mnist_corrupted/canny_edges/1.0.0
@@ -608,6 +603,7 @@ quickdraw_bitmap/3.0.0
 reddit_tifu/long/1.1.0
 reddit_tifu/short/1.1.0
 resisc45/3.0.0
+robonet/robonet_64/3.0.0
 rock_paper_scissors/3.0.0
 rock_you/0.1.0
 scan/addprim_jump/1.0.0

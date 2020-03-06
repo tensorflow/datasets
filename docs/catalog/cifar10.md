@@ -20,14 +20,12 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with
 *   **Source code**:
     [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
 *   **Versions**:
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `3.0.1`: No release notes.
+    *   **`3.0.1`** (default): No release notes.
 *   **Download size**: `162.17 MiB`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `131.10 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Yes
 *   **Splits**:
 
 Split   | Examples

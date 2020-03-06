@@ -193,6 +193,7 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Video`
     *   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
     *   [`moving_mnist`](moving_mnist.md)
+    *   [`robonet`](robonet.md)
     *   [`starcraft_video`](starcraft_video.md)
     *   [`ucf101`](ucf101.md)
 
