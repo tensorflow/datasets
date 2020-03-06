@@ -84,7 +84,7 @@ class Adult(tfds.core.GeneratorBasedBuilder):
                     names=["<=50K", ">50K"]),
         }),
         supervised_keys=("features", "prediction"),
-        homepage="https://archive.ics.uci.edu/ml/datasets/iris",
+        homepage="https://archive.ics.uci.edu/ml/datasets/adult",
         citation=_CITATION
       )
 
