@@ -109,7 +109,7 @@ class DatasetInfo(object):
                features: Optional[features_lib.FeaturesDict] = None,
                supervised_keys: Optional[Tuple[str, str]] = None,
                homepage: Optional[str] = None,
-               urls: List[str] = None,
+               urls: Optional[List[str]] = None,
                citation: Optional[str] = None,
                metadata: Optional[Metadata] = None,
                redistribution_info: Optional[Dict[Any, Any]] = None):
@@ -239,7 +239,7 @@ class DatasetInfo(object):
     return self._features
 
   @property
-  def metadata(self) -> Metadata:
+  def metadata(self) -> Optional[Metadata]:
     return self._metadata
 
   @property
@@ -342,7 +342,7 @@ class DatasetInfo(object):
   def as_json(self) -> str:
     return json_format.MessageToJson(self.as_proto, sort_keys=True)
 
-  def write_to_directory(self, dataset_info_dir: str):
+  def write_to_directory(self, dataset_info_dir: str) -> None:
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
@@ -359,7 +359,7 @@ class DatasetInfo(object):
     with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir: str):
+  def read_from_directory(self, dataset_info_dir: str) -> None:
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -433,7 +433,7 @@ class DatasetInfo(object):
     # Mark as fully initialized.
     self._fully_initialized = True
 
-  def initialize_from_bucket(self):
+  def initialize_from_bucket(self) -> None:
     """Initialize DatasetInfo from GCS bucket info files."""
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.
@@ -676,12 +676,12 @@ class MetadataDict(Metadata, dict):
   def _build_filepath(self, data_dir: str) -> str:
     return os.path.join(data_dir, "metadata.json")
 
-  def save_metadata(self, data_dir: str):
+  def save_metadata(self, data_dir: str) -> None:
     """Save the metadata."""
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "w") as f:
       json.dump(self, f)
 
-  def load_metadata(self, data_dir: str):
+  def load_metadata(self, data_dir: str) -> None:
     """Restore the metadata."""
     self.clear()
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
@@ -691,7 +691,7 @@ class MetadataDict(Metadata, dict):
 class BeamMetadataDict(MetadataDict):
   """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
 
-  def __init__(self, *args: Any, **kwargs: Any):
+  def __init__(self, *args: Any, **kwargs: Any) -> None:
     super(BeamMetadataDict, self).__init__(*args, **kwargs)
     self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
 
@@ -715,7 +715,7 @@ class BeamMetadataDict(MetadataDict):
       if key in self:
         raise ValueError("Already added PValue with key: %s" % key)
       logging.info("Lazily adding metadata item with Beam: %s", key)
-      def _to_json(item_list):
+      def _to_json(item_list: List[Any]) -> str:
         if len(item_list) != 1:
           raise ValueError(
               "Each metadata PValue must contain a single element. Got %d." %
@@ -731,7 +731,7 @@ class BeamMetadataDict(MetadataDict):
                shard_name_template=""))
     super(BeamMetadataDict, self).__setitem__(key, item)
 
-  def save_metadata(self, data_dir: str):
+  def save_metadata(self, data_dir: str) -> None:
     """Save the metadata inside the beam job."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
     for key, item in self.items():
