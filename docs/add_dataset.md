@@ -83,28 +83,22 @@ modifications.
 
 ### `DatasetBuilder`
 
-Each dataset is defined as a subclass of
-[`tfds.core.DatasetBuilder`](api_docs/python/tfds/core/DatasetBuilder.md)
-implementing the following methods:
+Each dataset is defined as a subclass of `tfds.core.DatasetBuilder` implementing
+the following methods:
 
-* `_info`: builds the
-  [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) object
-  describing the dataset
-* `_download_and_prepare`: to download and serialize the source data to disk
-* `_as_dataset`: to produce a `tf.data.Dataset` from the serialized data
+*   `_info`: builds the `tfds.core.DatasetInfo` object describing the dataset
+*   `_download_and_prepare`: to download and serialize the source data to disk
+*   `_as_dataset`: to produce a `tf.data.Dataset` from the serialized data
 
-Most datasets subclass
-[`tfds.core.GeneratorBasedBuilder`](api_docs/python/tfds/core/GeneratorBasedBuilder.md),
-which is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a
-dataset. It works well for datasets that can be generated on a single machine.
-Its subclasses implement:
+Most datasets subclass `tfds.core.GeneratorBasedBuilder`, which is a subclass of
+`tfds.core.DatasetBuilder` that simplifies defining a dataset. It works well for
+datasets that can be generated on a single machine. Its subclasses implement:
 
-* `_info`: builds the
-  [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) object
-  describing the dataset
-* `_split_generators`: downloads the source data and defines the dataset splits
-* `_generate_examples`: yields `(key, example)` tuples in the dataset from the
-  source data
+*   `_info`: builds the `tfds.core.DatasetInfo` object describing the dataset
+*   `_split_generators`: downloads the source data and defines the dataset
+    splits
+*   `_generate_examples`: yields `(key, example)` tuples in the dataset from the
+    source data
 
 This guide will use `GeneratorBasedBuilder`.
 
@@ -144,8 +138,7 @@ For an explanation of what the version is, please read
 
 ## Specifying `DatasetInfo`
 
-[`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) describes the
-dataset.
+`tfds.core.DatasetInfo` describes the dataset.
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -178,20 +171,17 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 ### `FeatureConnector`s
 
 Each feature is specified in `DatasetInfo` as a
-[`tfds.features.FeatureConnector`](api_docs/python/tfds/features.md).
-`FeatureConnector`s document each feature, provide shape and type checks, and
-abstract away serialization to and from disk. There are many feature types
-already defined and you can also
+`tfds.features.FeatureConnector`. `FeatureConnector`s document each feature,
+provide shape and type checks, and abstract away serialization to and from disk.
+There are many feature types already defined and you can also
 [add a new one](#create-your-own-featureconnector).
 
 If you've implemented the test harness, `test_info` should now pass.
 
 ## Downloading and extracting source data
 
-Most datasets need to download data from the web. All downloads and
-extractions must go through the
-[`tfds.download.DownloadManager`](api_docs/python/tfds/download/DownloadManager.md).
-`DownloadManager` currently
+Most datasets need to download data from the web. All downloads and extractions
+must go through the `tfds.download.DownloadManager`. `DownloadManager` currently
 supports extracting `.zip`, `.gz`, and `.tar` files.
 
 For example, one can both download and extract URLs with `download_and_extract`:
@@ -391,18 +381,17 @@ based on the member variables.
 
 ## Create your own `FeatureConnector`
 
-Note that most datasets will find the [current set of
-`tfds.features.FeatureConnector`s](api_docs/python/tfds/features.md)
-sufficient, but sometimes a new one may need to be defined.
+Note that most datasets will find the current set of
+`tfds.features.FeatureConnector`s sufficient, but sometimes a new one may need
+to be defined.
 
 Note: If you need a new `FeatureConnector` not present in the default set and
 are planning to submit it to `tensorflow/datasets`, please open a
 [new issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
 on GitHub with your proposal.
 
-[`tfds.features.FeatureConnector`s](api_docs/python/tfds/features/FeatureConnector.md)
-in `DatasetInfo` correspond to the elements returned in the
-`tf.data.Dataset` object. For instance, with:
+`tfds.features.FeatureConnector`s in `DatasetInfo` correspond to the elements
+returned in the `tf.data.Dataset` object. For instance, with:
 
 ```
 tfds.DatasetInfo(features=tfds.features.FeatureDict({
@@ -459,11 +448,8 @@ and implement the abstract methods:
     is to inherit from `tfds.features.FeaturesDict` and use the `super()`
     methods to automatically encode/decode the sub-connectors.
 
-Have a look at
-[`tfds.features.FeatureConnector`](api_docs/python/tfds/features/FeatureConnector.md)
-for more details and the
-[features package](api_docs/python/tfds/features.md)
-for more examples.
+Have a look at `tfds.features.FeatureConnector` for more details and the
+`tfds.features` package for more examples.
 
 ## Adding the dataset to `tensorflow/datasets`
 
