@@ -33,6 +33,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import typing
+from typing import Any, Dict, Iterator, List, Optional, Sized, Tuple, Union
+
 import abc
 import contextlib
 import random
@@ -45,8 +48,15 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
+from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
+
+if typing.TYPE_CHECKING:
+  try:
+    import apache_beam as beam
+  except ImportError:
+    beam = Any
 
 
 __all__ = [
@@ -54,12 +64,20 @@ __all__ = [
     "TFRecordExampleAdapter",
 ]
 
+class _Nested(metaclass=type):
+  """Nested Structure for Splits."""
+
+  def __getitem__(self, t):
+    return Union[t, List[Any], Tuple[Any], Dict[str, Any]]
+
+Nested = _Nested()  # pylint: disable=invalid-name
+
 
 @six.add_metaclass(abc.ABCMeta)
 class FileFormatAdapter(object):
   """Provides writing and reading methods for a file format."""
 
-  def __init__(self, example_specs):
+  def __init__(self, example_specs: Nested[features_lib.TensorInfo]):
     """Constructor.
 
     Args:
@@ -69,7 +87,9 @@ class FileFormatAdapter(object):
     del example_specs
 
   @abc.abstractmethod
-  def write_from_generator(self, generator, output_files):
+  def write_from_generator(self,
+                           generator: Dict[str, Any],
+                           output_files: List[str]):
     """Write to files from generators_and_filenames.
 
     Args:
@@ -79,7 +99,10 @@ class FileFormatAdapter(object):
     raise NotImplementedError
 
   def write_from_pcollection(
-      self, pcollection, file_path_prefix=None, num_shards=None):
+      self,
+      pcollection: "beam.PCollection",
+      file_path_prefix: Optional[str] = None,
+      num_shards: Optional[int] = None):
     """Write the PCollection to file.
 
     Args:
@@ -93,12 +116,12 @@ class FileFormatAdapter(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def dataset_from_filename(self, filename):
+  def dataset_from_filename(self, filename: str) -> Nested[tf.data.Dataset]:
     """Returns a `tf.data.Dataset` whose elements are dicts given a filename."""
     raise NotImplementedError
 
   @abc.abstractproperty
-  def filetype_suffix(self):
+  def filetype_suffix(self) -> str:
     """Returns a str file type suffix (e.g. "tfrecord")."""
     raise NotImplementedError
 
@@ -114,18 +137,24 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     Python 3; `unicode` strings will be encoded in `utf-8`), or lists thereof.
   """
 
-  def __init__(self, example_specs):
+  def __init__(self, example_specs: Nested[features_lib.TensorInfo]):
     super(TFRecordExampleAdapter, self).__init__(example_specs)
-    self._serializer = example_serializer.ExampleSerializer(
+    self._serializer: example_serializer.ExampleSerializer = example_serializer.ExampleSerializer(  # pylint: disable=line-too-long
         example_specs)
-    self._parser = example_parser.ExampleParser(example_specs)
+    self._parser: example_parser.ExampleParser = example_parser.ExampleParser(
+        example_specs)
 
-  def write_from_generator(self, generator, output_files):
+  def write_from_generator(self,
+                           generator: Dict[str, Any],
+                           output_files: List[str]):
     wrapped = (self._serializer.serialize_example(example)
                for example in generator)
     _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
 
-  def write_from_pcollection(self, pcollection, file_path_prefix, num_shards):
+  def write_from_pcollection(self,  # pylint: disable=signature-differs
+                             pcollection: "beam.PCollection",
+                             file_path_prefix: str,
+                             num_shards: int) -> Any:
     beam = lazy_imports_lib.lazy_imports.apache_beam
 
     # WARNING: WriteToTFRecord do not support long in python2 with the default,
@@ -143,18 +172,18 @@ class TFRecordExampleAdapter(FileFormatAdapter):
         )
     )
 
-  def dataset_from_filename(self, filename):
+  def dataset_from_filename(self, filename: str) -> Nested[tf.data.Dataset]:
     dataset = tf.compat.v1.data.TFRecordDataset(
         filename, buffer_size=int(16 * 1e6))
     return dataset.map(self._parser.parse_example,
                        num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
   @property
-  def filetype_suffix(self):
+  def filetype_suffix(self) -> str:
     return "tfrecord"
 
 
-def do_files_exist(filenames):
+def do_files_exist(filenames: List[str]) -> bool:
   """Whether any of the filenames exist."""
   preexisting = [tf.io.gfile.exists(f) for f in filenames]
   return any(preexisting)
@@ -170,7 +199,7 @@ def _close_on_exit(handles):
       handle.close()
 
 
-def get_incomplete_path(filename):
+def get_incomplete_path(filename: str) -> str:
   """Returns a temporary filename based on filename."""
   random_suffix = "".join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
@@ -178,7 +207,7 @@ def get_incomplete_path(filename):
 
 
 @contextlib.contextmanager
-def _incomplete_files(filenames):
+def _incomplete_files(filenames: List[str]) -> Iterator[Any]:
   """Create temporary files for filenames and rename on exit."""
   tmp_files = [get_incomplete_path(f) for f in filenames]
   try:
@@ -192,7 +221,7 @@ def _incomplete_files(filenames):
 
 
 @contextlib.contextmanager
-def incomplete_dir(dirname):
+def incomplete_dir(dirname: str) -> Iterator[Any]:
   """Create temporary dir for dirname and rename on exit."""
   tmp_dir = get_incomplete_path(dirname)
   tf.io.gfile.makedirs(tmp_dir)
@@ -204,7 +233,7 @@ def incomplete_dir(dirname):
       tf.io.gfile.rmtree(tmp_dir)
 
 
-def _shuffle_tfrecord(path, random_gen):
+def _shuffle_tfrecord(path: str, random_gen: object) -> None:
   """Shuffle a single record file in memory."""
   # Read all records
   record_iter = tf.compat.v1.io.tf_record_iterator(path)
@@ -221,7 +250,9 @@ def _shuffle_tfrecord(path, random_gen):
       writer.write(record)
 
 
-def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
+def _write_tfrecords_from_generator(generator: tf.train.Example,
+                                    output_files: List[str],
+                                    shuffle: bool = True) -> None:
   """Writes generated str records to output_files in round-robin order."""
   if do_files_exist(output_files):
     raise ValueError(
@@ -244,7 +275,8 @@ def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
         _shuffle_tfrecord(path, random_gen=random_gen)
 
 
-def _round_robin_write(writers, generator):
+def _round_robin_write(writers: Sized,
+                       generator: Dict[str, Any]):
   """Write records from generator round-robin across writers."""
   for i, example in enumerate(utils.tqdm(
       generator, unit=" examples", leave=False)):
