@@ -36,6 +36,7 @@ from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
 
+
 class NonMatchingChecksumError(Exception):
   """The downloaded file doesn't have expected checksum."""
 
@@ -243,7 +244,7 @@ class DownloadManager(object):
       if not self._force_download and resource.exists_locally(download_path):
         logging.info('URL %s already downloaded: reusing %s.',
                      url, download_path)
-        self._recorded_sizes_checksums[url] = self._sizes_checksums[url] #pylint: disable=line-too-long
+        self._recorded_sizes_checksums[url] = self._sizes_checksums[url]
         return promise.Promise.resolve(download_path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
