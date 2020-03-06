@@ -41,6 +41,12 @@ class SplitInfo(object):
       return sum(int(sl) for sl in self.shard_lengths)
     return int(self.statistics.num_examples)
 
+  @property
+  def num_shards(self):
+    if self.shard_lengths:
+      return len(self.shard_lengths)
+    return self._ProtoCls__proto.num_shards
+
   def __repr__(self):
     num_examples = self.num_examples or "unknown"
     return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)

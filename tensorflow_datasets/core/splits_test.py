@@ -85,6 +85,24 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
             tfds.as_numpy(self.as_dataset(split=split))]
 
 
+class SplitDictTest(testing.TestCase):
+
+  def test_num_shards(self):
+    sd = splits.SplitDict("ds_name")
+    sd.add(tfds.core.SplitInfo(name="train", shard_lengths=[1, 2, 3]))
+    self.assertEqual(sd["train"].num_shards, 3)
+
+    # When both values are set, shard_lengths has priority.
+    sd = splits.SplitDict("ds_name")
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=3, shard_lengths=[1,]))
+    self.assertEqual(sd["train"].num_shards, 1)
+
+    # With legacy mode, use legacy value
+    sd = splits.SplitDict("ds_name")
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=3))
+    self.assertEqual(sd["train"].num_shards, 3)
+
+
 class SplitsUnitTest(testing.TestCase):
 
   @classmethod
