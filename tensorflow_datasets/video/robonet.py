@@ -37,8 +37,10 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 
+DATA_URL_SAMPLE = ('https://drive.google.com/uc?export=download&'
+                   'id=1YX2TgT8IKSn9V4wGCwdzbRnS53yicV2P')
 DATA_URL = ('https://drive.google.com/uc?export=download&'
-            'id=1YX2TgT8IKSn9V4wGCwdzbRnS53yicV2P')
+            'id=1BkqHzfRkfzgzCfc73NbNnPMK_rg3i1n9')
 
 STATES_DIM = 5
 ACTIONS_DIM = 5
@@ -59,7 +61,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
   """"Configuration for RoboNet video rescaling."""
 
   @tfds.core.disallow_positional_args
-  def __init__(self, width=None, height=None, **kwargs):
+  def __init__(self, sample_dataset=False, width=None, height=None, **kwargs):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with three separate splits. You can specify which split
@@ -67,6 +69,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
     will be rescaled to have those heights and widths (using ffmpeg).
 
     Args:
+      sample_dataset: Whether or not to use the sample dataset.
       width: An integer with the width or None.
       height: An integer with the height or None.
       **kwargs: Passed on to the constructor of `BuilderConfig`.
@@ -75,6 +78,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version('3.0.0'), **kwargs)
     if (width is None) ^ (height is None):
       raise ValueError('Either both dimensions should be set, or none of them')
+    self.sample_dataset = sample_dataset
     self.width = width
     self.height = height
 
@@ -84,10 +88,35 @@ class Robonet(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       RobonetConfig(
-          name='robonet_64',
-          description='64x64 RoboNet.',
+          name='robonet_sample_64',
+          description='64x64 RoboNet Sample.',
+          sample_dataset=True,
           width=64,
           height=64,
+      ),
+
+      RobonetConfig(
+          name='robonet_sample_128',
+          description='128x128 RoboNet Sample.',
+          sample_dataset=True,
+          width=128,
+          height=128,
+      ),
+
+      RobonetConfig(
+          name='robonet_64',
+          description='64x64 RoboNet.',
+          sample_dataset=False,
+          width=64,
+          height=64,
+      ),
+
+      RobonetConfig(
+          name='robonet_128',
+          description='128x128 RoboNet.',
+          sample_dataset=False,
+          width=128,
+          height=128,
       ),
   ]
 
@@ -114,8 +143,6 @@ class Robonet(tfds.core.GeneratorBasedBuilder):
         'actions': tfds.features.Tensor(
             shape=(None, ACTIONS_DIM), dtype=tf.float32),
         # Robot states: float32, [None, STATE_DIM]
-        # e Cartesian end-effector control action space
-        # with restricted rotation, and a gripper joint
         'states': tfds.features.Tensor(
             shape=(None, STATES_DIM), dtype=tf.float32)
     })
@@ -126,8 +153,8 @@ class Robonet(tfds.core.GeneratorBasedBuilder):
         RoboNet contains over 15 million video frames of robot-object
         interaction, taken from 113 unique camera viewpoints.
 
-        *  The actions are deltas in position and rotation to the robot 
-        end-effector with one additional dimension of the action vector 
+        * The actions are deltas in position and rotation to the robot
+        end-effector with one additional dimension of the action vector
         reserved for the gripper joint.
 
         * The states are cartesian end-effector control action space
@@ -138,7 +165,8 @@ class Robonet(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    files = dl_manager.download_and_extract(DATA_URL)
+    files = dl_manager.download_and_extract(
+        DATA_URL_SAMPLE if self.builder_config.sample_dataset else DATA_URL)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
