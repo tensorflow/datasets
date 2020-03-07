@@ -31,9 +31,9 @@ def image_process(root):
 def rewrite_zip(filepath, filename):
     """ Rewrite the older .zip files into new better compressed one
 
-            Args:
-                filepath: path of the older zip file that need to be compressed
-                filename: name of the older zip file that need to be compressed
+        Args:
+            filepath: path of the older zip file that need to be compressed
+            filename: name of the older zip file that need to be compressed
 
     """
     # creating a temporary file to store images 
@@ -56,9 +56,9 @@ def rewrite_tar(filepath, filename):
     """ Rewrite the older .tar file into new better compressed one.
         Compression formats supports by this method (.tar.gz, .tgz, .tar.bz2)
 
-            Args:
-              filepath: path of the older .tar file that need to be compressed
-              filename: name of the older .tar file that need to be compressed
+        Args:
+            filepath: path of the older .tar file that need to be compressed
+            filename: name of the older .tar file that need to be compressed
 
     """
     # Create a tempfile to store the images with noise
@@ -78,9 +78,9 @@ def rewrite_tar(filepath, filename):
 
 def process_dir(path):
     """ This method process the whole directory which contains the
-         compressed files.
+        compressed files.
 
-          Args:
+        Args:
             path: path of the directory which contains all compression files
 
     """
