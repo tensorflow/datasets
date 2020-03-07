@@ -1,3 +1,7 @@
+
+""" Generate random images that compress better.
+By replacing the larger images with more compressable equivalents."""
+
 import os
 from zipfile import ZipFile
 from PIL import Image
@@ -22,7 +26,7 @@ def image_process(root):
     """
     images_path.append(root)
     image = np.array(Image.open(root))
-    image = np.ones_like(image) * np.random.randint(np.amax(image))
+    image = np.ones_like(image%255) * np.random.randint(np.amax(image%255))
     image = Image.fromarray(image)
     image = image.convert('RGB')
     image.save(root)
@@ -36,20 +40,20 @@ def rewrite_zip(filepath, filename):
             filename: name of the older zip file that need to be compressed
 
     """
-    # creating a temporary file to store images 
-    temp = tempfile.TemporaryDirectory(dir=filepath)
+     # creating a temporary file to store images 
+    with tempfile.TemporaryDirectory(dir=filepath) as temp:
 
-    # Extraction of compressed .zip file
-    with ZipFile(filepath+filename, 'r') as zip:
-        zip.extractall(path=temp.name)
-        print(temp.name)
+      # Extraction of compressed .zip file
+      with ZipFile(filepath+filename, 'r') as zip:
+          zip.extractall(path=temp.name)
+          print(temp.name)
 
-        process_dir(temp.name+"/")  # Image Processing
+          process_dir(temp.name+"/")  # Image Processing
 
-    # Compressed the .zip file again
-    with ZipFile(filepath+filename, 'w') as zip:
-        for file in images_path:
-            zip.write(file)
+      # Compressed the .zip file again
+      with ZipFile(filepath+filename, 'w') as zip:
+          for file in images_path:
+              zip.write(file)
 
 
 def rewrite_tar(filepath, filename):
@@ -62,18 +66,19 @@ def rewrite_tar(filepath, filename):
 
     """
     # Create a tempfile to store the images with noise
-    temp = tempfile.TemporaryDirectory(dir=filepath)
+    with tempfile.TemporaryDirectory(dir=filepath) as temp:
 
-    # Extraction of .tar file
-    with tarfile.open(filepath+filename, 'r') as tar:
-        tar.extractall(path=temp.name)
-        # Image Process to decrease the size
-        process_dir(temp.name+"/")
+      # Extraction of .tar file
+      with tarfile.open(filepath+filename, 'r') as tar:
+          tar.extractall(path=temp.name)
+          # Image Process to decrease the size
+          process_dir(temp.name+"/")
 
-    # Converting into tarfile again to decrease the space taken by the file-
-    with tarfile.open(filepath+filename, 'w') as tar:
-        for file in images_path:
-            tar_handle.add(os.path.join(filepath, file))
+      # Converting into tarfile again to decrease the space taken by the file-
+      with tarfile.open(filepath+filename, 'w') as tar:
+          for file in images_path:
+              tar_handle.add(os.path.join(filepath, file))
+
 
 
 def process_dir(path):
@@ -88,7 +93,7 @@ def process_dir(path):
     images_path = []
     for root, dirs, files in os.walk(path):
         for file in files:
-            filepath = os.path.join(root, file)
+            filepath = os.path.join(root, file).lower()
             fileName = filepath.split('/')[-1]
 
             if filepath.endswith('.png') or filepath.endswith('.jpg')
