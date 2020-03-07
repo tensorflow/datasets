@@ -93,6 +93,8 @@ from tensorflow_datasets.image.stanford_online_products import StanfordOnlinePro
 from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.the300w_lp import The300wLp
+from tensorflow_datasets.image.tiny_imagenet_dataset import TinyImagenetDataset 
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.vgg_face2 import VggFace2
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
+
