@@ -22,12 +22,12 @@ from __future__ import print_function
 import os
 import subprocess as sp
 
-from typing import Type, TypeVar, List
-
 from absl import logging
 import tensorflow.compat.v2 as tf
-
 from tensorflow_datasets.core import utils
+from typing import Any, List, Optional, Type, TypeVar
+
+
 
 _ERR_MSG = """\
 To download Kaggle data through TFDS, follow the instructions to install the \
@@ -49,7 +49,7 @@ T = TypeVar('T', bound='KaggleFile')
 
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
-  _URL_PREFIX = "kaggle://"
+  _URL_PREFIX: str = "kaggle://"
 
   def __init__(self, competition_name: str, filename: str) -> None:
     self._competition_name: str = competition_name
@@ -57,21 +57,21 @@ class KaggleFile(object):
 
   @property
   def competition(self) -> str:
-    return self._competition_name: str
+    return self._competition_name
 
   @property
   def filename(self) -> str:
-    return self._filename: str
+    return self._filename
 
   @classmethod
-  def from_url(cls: Type[T], url: str) -> T:
+  def from_url(cls: Type[T], url: str) -> Optional[T]:
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
     competition_name, filename = url[len(cls._URL_PREFIX):].split("/", 1)
     return cls(competition_name, filename)
 
   @staticmethod
-  def is_kaggle_url(url: str) -> str:
+  def is_kaggle_url(url: str) -> bool:
     return url.startswith(KaggleFile._URL_PREFIX)
 
   def to_url(self) -> str:
@@ -119,7 +119,7 @@ class KaggleCompetitionDownloader(object):
         for fname in self.competition_files  # pylint: disable=not-an-iterable
     ]
 
-  def download_file(self, fname: str, output_dir: str) -> str:
+  def download_file(self, fname: str, output_dir: str) -> Optional[str]:
     """Downloads competition file to output_dir."""
     if fname not in self.competition_files:  # pylint: disable=unsupported-membership-test
       raise ValueError("%s is not one of the competition's "
@@ -139,7 +139,7 @@ class KaggleCompetitionDownloader(object):
     return os.path.join(output_dir, fname)
 
 
-def _run_kaggle_command(command_args: List[str], competition_name: str) -> None:
+def _run_kaggle_command(command_args: Any, competition_name: str) -> Optional[str]:
   """Run kaggle command with subprocess."""
   try:
     output = sp.check_output(command_args)
