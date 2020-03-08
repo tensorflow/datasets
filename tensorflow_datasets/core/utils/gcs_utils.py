@@ -24,7 +24,7 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 
-GCS_URL = "http://storage.googleapis.com"
+GCS_URL = "https://storage.googleapis.com"
 
 # for dataset_info/
 GCS_BUCKET = posixpath.join(GCS_URL, "tfds-data")

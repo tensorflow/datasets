@@ -43,7 +43,7 @@ of distributed computation, first follow the
 Once your environment is set up, you can run the `download_and_prepare` script
 using a data directory on [GCS](https://cloud.google.com/storage/) and
 specifying the
-[required options](http://cloud/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
+[required options](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
 for the `--beam_pipeline_options` flag.
 
 To make it easier to launch the script, it's helpful to define the following

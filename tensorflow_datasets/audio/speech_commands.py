@@ -54,8 +54,8 @@ Here we split these background noise into 1 second clips, and also keep one of
 the files for the validation set.
 """
 
-_DOWNLOAD_PATH = 'http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz'
-_TEST_DOWNLOAD_PATH_ = 'http://download.tensorflow.org/data/speech_commands_test_set_v0.02.tar.gz'
+_DOWNLOAD_PATH = 'https://storage.googleapis.com/download.tensorflow.org/data/speech_commands_v0.02.tar.gz'
+_TEST_DOWNLOAD_PATH_ = 'http://storage.googleapis.com/download.tensorflow.org/data/speech_commands_test_set_v0.02.tar.gz'
 
 _SPLITS = ['train', 'valid', 'test']
 

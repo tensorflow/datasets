@@ -80,7 +80,7 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     extracted_path = dl_manager.download_and_extract(
-        "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/Database/AFLW2000-3D.zip"
+        "https://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/Database/AFLW2000-3D.zip"
     )
     return [
         tfds.core.SplitGenerator(

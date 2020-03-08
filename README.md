@@ -18,13 +18,14 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
 **Table of Contents**
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [`DatasetBuilder`](#datasetbuilder)
-* [NumPy usage](#numpy-usage-with-tfdsas-numpy)
-* [Citation](#citation)
-* [Want a certain dataset?](#want-a-certain-dataset)
-* [Disclaimers](#disclaimers)
+- [TensorFlow Datasets](#tensorflow-datasets)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [`DatasetBuilder`](#datasetbuilder)
+    - [NumPy Usage with `tfds.as_numpy`](#numpy-usage-with-tfdsasnumpy)
+    - [Citation](#citation)
+  - [Want a certain dataset?](#want-a-certain-dataset)
+      - [*Disclaimers*](#disclaimers)
 
 ### Installation
 
@@ -117,7 +118,7 @@ tfds.core.DatasetInfo(
         @article{lecun2010mnist,
           title={MNIST handwritten digit database},
           author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-          journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+          journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},
           volume={2},
           year={2010}
         }

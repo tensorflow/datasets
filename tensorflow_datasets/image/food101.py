@@ -25,7 +25,7 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-_BASE_URL = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
+_BASE_URL = "https://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
 
 _DESCRIPTION = (
     "This dataset consists of 101 food categories, with 101'000 images. For "
