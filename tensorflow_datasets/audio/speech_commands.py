@@ -55,7 +55,7 @@ the files for the validation set.
 """
 
 _DOWNLOAD_PATH = 'https://storage.googleapis.com/download.tensorflow.org/data/speech_commands_v0.02.tar.gz'
-_TEST_DOWNLOAD_PATH_ = 'http://storage.googleapis.com/download.tensorflow.org/data/speech_commands_test_set_v0.02.tar.gz'
+_TEST_DOWNLOAD_PATH_ = 'https://storage.googleapis.com/download.tensorflow.org/data/speech_commands_test_set_v0.02.tar.gz'
 
 _SPLITS = ['train', 'valid', 'test']
 
