@@ -25,6 +25,7 @@ from __future__ import print_function
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
+import numpy as np
 
 
 @py_utils.memoize()
@@ -32,13 +33,13 @@ def _get_runner():
   return tf_utils.TFGraphRunner()
 
 
-def decode_image(image_bytes):
+def decode_image(image_bytes: bytes) -> np.ndarray:
   """Returns np.array corresponding to encoded image."""
   runner = _get_runner()
   return runner.run(tf.image.decode_image, image_bytes)
 
 
-def png_to_jpeg(image_bytes, quality=100):
+def png_to_jpeg(image_bytes: bytes, quality=100: int) -> np.ndarray:
   """Converts PNG image (bytes or str) to JPEG (bytes)."""
   runner = _get_runner()
   decode_fn = lambda img: tf.image.decode_png(img, channels=3)
@@ -47,7 +48,7 @@ def png_to_jpeg(image_bytes, quality=100):
   return runner.run(fn, image)
 
 
-def jpeg_cmyk_to_rgb(image_bytes, quality=100):
+def jpeg_cmyk_to_rgb(image_bytes: bytes, quality=100: int) -> np.ndarray:
   """Converts JPEG CMYK image (bytes) to RGB JPEG (bytes)."""
   runner = _get_runner()
   image = runner.run(tf.image.decode_jpeg, image_bytes)
