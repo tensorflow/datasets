@@ -73,10 +73,10 @@ def get_random_png(height=None, width=None, channels=CHANNELS_NB):
 
 def get_random_audio(sample = SAMPLE_RATE):
   """Returns random audio as np.ndarray (float32)."""
-  each_sample_number = np.arange(AUDIO_DURATION * sample)
+  sample_number = np.arange(AUDIO_DURATION * sample)
   waveform = np.sin(2 * np.pi * each_sample_number * 440.0 / sample).astype(np.float32)
-  waveform_quiet = waveform * 0.3
-  return waveform_quiet
+  waveform = waveform * 0.3
+  return waveform
 
 def get_random_wav_C1(channels=1, sample = SAMPLE_RATE):
   """Returns path to WAV audio having channels = 1."""
