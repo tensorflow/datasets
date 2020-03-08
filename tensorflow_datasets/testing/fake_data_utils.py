@@ -31,6 +31,9 @@ MIN_HEIGHT_WIDTH = 10
 MAX_HEIGHT_WIDTH = 15
 CHANNELS_NB = 3
 
+SAMPLE_RATE = 44100
+AUDIO_DURATION = 5
+
 
 def get_random_picture(height=None, width=None, channels=CHANNELS_NB):
   """Returns random picture as np.ndarray (int)."""
@@ -63,6 +66,36 @@ def get_random_png(height=None, width=None, channels=CHANNELS_NB):
   with utils.nogpu_session() as sess:
     res = sess.run(png)
   fobj = tempfile.NamedTemporaryFile(delete=False, mode='wb', suffix='.PNG')
+  fobj.write(res)
+  fobj.close()
+  return fobj.name
+
+
+def get_random_audio(sample = SAMPLE_RATE):
+  """Returns random audio as np.ndarray (float32)."""
+  each_sample_number = np.arange(AUDIO_DURATION * sample)
+  waveform = np.sin(2 * np.pi * each_sample_number * 440.0 / sample).astype(np.float32)
+  waveform_quiet = waveform * 0.3
+  return waveform_quiet
+
+def get_random_wav_C1(channels=1, sample = SAMPLE_RATE):
+  """Returns path to WAV audio having channels = 1."""
+  audio = get_random_audio(sample).reshape(-1,channels)
+  wav = tf.audio.encode_wav(audio, sample)
+  with utils.nogpu_session() as sess:
+    res = sess.run(wav)
+  fobj = tempfile.NamedTemporaryFile(delete=False, mode='wb', suffix='.wav')
+  fobj.write(res)
+  fobj.close()
+  return fobj.name
+
+def get_random_wav_C2(channels=2, sample = SAMPLE_RATE):
+  """Returns path to WAV audio having channels = 2."""
+  audio = get_random_audio(sample).reshape(-1,channels)
+  wav = tf.audio.encode_wav(audio, sample)
+  with utils.nogpu_session() as sess:
+    res = sess.run(wav)
+  fobj = tempfile.NamedTemporaryFile(delete=False, mode='wb', suffix='.wav')
   fobj.write(res)
   fobj.close()
   return fobj.name
