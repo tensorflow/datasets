@@ -75,7 +75,7 @@ def is_dataset_on_gcs(dataset_name: str) -> bool:
 
 
 def download_gcs_dataset(
-    dataset_name: str, local_dataset_dir: str, max_simultaneous_downloads=50: int) -> None:
+    dataset_name: str, local_dataset_dir: str, max_simultaneous_downloads: int=50) -> None:
   """Downloads prepared GCS dataset to local dataset directory."""
   prefix = posixpath.join(GCS_DATASETS_DIR, dataset_name)
   gcs_paths_to_dl = gcs_files(prefix)
