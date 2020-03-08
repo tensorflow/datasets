@@ -23,16 +23,17 @@ import requests
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
+from typing import Union, Optional
 
-GCS_URL = "http://storage.googleapis.com"
+GCS_URL: str = "http://storage.googleapis.com"
 
 # for dataset_info/
-GCS_BUCKET = posixpath.join(GCS_URL, "tfds-data")
-GCS_DATASET_INFO_DIR = "dataset_info"
-GCS_DATASETS_DIR = "datasets"
+GCS_BUCKET: str = posixpath.join(GCS_URL, "tfds-data")
+GCS_DATASET_INFO_DIR: str = "dataset_info"
+GCS_DATASETS_DIR: str = "datasets"
 
 
-def download_gcs_file(path, out_fname=None, prefix_filter=None):
+def download_gcs_file(path: str, out_fname: Optional[str]=None, prefix_filter: Optional[str]=None) -> Union[None, str]:
   """Download a file from GCS, optionally to a file."""
   url = posixpath.join(GCS_BUCKET, path)
   if prefix_filter:
@@ -50,7 +51,7 @@ def download_gcs_file(path, out_fname=None, prefix_filter=None):
 
 
 @utils.memoize()
-def gcs_files(prefix_filter=None):
+def gcs_files(prefix_filter: Optional[str]=None) -> list:
   """List all files in GCS bucket."""
   top_level_xml_str = download_gcs_file("", prefix_filter=prefix_filter)
   xml_root = ElementTree.fromstring(top_level_xml_str)
@@ -58,7 +59,7 @@ def gcs_files(prefix_filter=None):
   return filenames
 
 
-def gcs_dataset_info_files(dataset_dir):
+def gcs_dataset_info_files(dataset_dir: str) -> list:
   """Return paths to GCS files in the given dataset directory."""
   prefix = posixpath.join(GCS_DATASET_INFO_DIR, dataset_dir, "")
   # Filter for this dataset
@@ -67,14 +68,14 @@ def gcs_dataset_info_files(dataset_dir):
   return filenames
 
 
-def is_dataset_on_gcs(dataset_name):
+def is_dataset_on_gcs(dataset_name: str) -> bool:
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
   dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
   return len(gcs_files(prefix_filter=dir_name)) > 2
 
 
 def download_gcs_dataset(
-    dataset_name, local_dataset_dir, max_simultaneous_downloads=50):
+    dataset_name: str, local_dataset_dir: str, max_simultaneous_downloads=50: int) -> None:
   """Downloads prepared GCS dataset to local dataset directory."""
   prefix = posixpath.join(GCS_DATASETS_DIR, dataset_name)
   gcs_paths_to_dl = gcs_files(prefix)
