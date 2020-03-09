@@ -56,6 +56,13 @@ class KaggleTest(testing.TestCase):
         with self.assertRaises(subprocess.CalledProcessError):
           _ = downloader.competition_files
 
+  def test_kaggle_type(self):
+    downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+    self.assertEqual(downloader._kaggle_type.download_cmd, "competitions")
+
+    downloader = kaggle.KaggleCompetitionDownloader("author/dataset")
+    self.assertEqual(downloader._kaggle_type.download_cmd, "datasets")
+
 
 if __name__ == "__main__":
   testing.test_main()
