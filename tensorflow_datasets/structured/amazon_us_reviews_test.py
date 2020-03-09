@@ -16,10 +16,8 @@
 # Lint as: python3
 """Tests for amazon_us_reviews dataset module."""
 
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.structured import amazon_us_reviews
-
 
 class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = amazon_us_reviews.AmazonUSReviews
