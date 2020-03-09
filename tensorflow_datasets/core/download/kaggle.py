@@ -60,6 +60,12 @@ _KAGGLE_TYPES = {
       extra_flag="")
 }
 
+def get_type(competition_name):
+
+  return  _KAGGLE_TYPES['dataset'] if "/" in competition_name \
+          else _KAGGLE_TYPES['competition']
+
+
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle://"
@@ -67,13 +73,7 @@ class KaggleFile(object):
   def __init__(self, competition_name, filename):
     self._competition_name = competition_name
     self._filename = filename
-    self.type = KaggleFile.get_type(competition_name)
-
-  @staticmethod
-  def get_type(competition_name):
-
-    return  _KAGGLE_TYPES['dataset'] if "/" in competition_name \
-          else _KAGGLE_TYPES['competition']
+    self.type = get_type(competition_name)
 
   @property
   def competition(self):
@@ -120,7 +120,7 @@ class KaggleCompetitionDownloader(object):
 
   def __init__(self, competition_name):
     self._competition_name = competition_name
-    self._kaggle_type = KaggleFile.get_type(self._competition_name)
+    self._kaggle_type = get_type(self._competition_name)
 
   @utils.memoized_property
   def competition_files(self):
