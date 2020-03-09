@@ -29,6 +29,7 @@ from absl.testing import parameterized
 import numpy as np
 import tensorflow.compat.v2 as tf
 
+# from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -138,14 +139,13 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
   SKIP_CHECKSUMS = False
-  URLS = []
-  CHECKSUMS_PATH = None 
   
   @classmethod
   def setUpClass(cls):
     tf.compat.v1.enable_eager_execution()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
+    cls._download_urls = []
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
       raise AssertionError(
@@ -219,7 +219,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEqual(self.builder.name, info.name)
 
   def _get_dl_extract_result(self, url):
-    self.URLS.append(url)
+    self._download_urls.append(url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
@@ -233,12 +233,6 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       return self._get_dl_extract_result(url)
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_DOWNLOAD_RESULT)
-
-  def _get_checksums_filepath(self):
-    if self.CHECKSUMS_PATH is None:
-      dir_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../url_checksums"))
-      return os.path.join(dir_path, self.builder.name + ".txt")
-    return self.CHECKSUMS_PATH
 
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(  # pylint: disable=not-callable
@@ -270,19 +264,19 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
           self._download_and_prepare_as_dataset(builder)
     else:
       self._download_and_prepare_as_dataset(self.builder)
-
     if not self.SKIP_CHECKSUMS:
       with self._subTest("url_checksums"):
         self._test_checksums()
 
   def _test_checksums(self):
     urls = []
-    filepath = self._get_checksums_filepath()
-    with tf.io.gfile.GFile(filepath, "rb") as f:
+    filepath = os.path.join(download.checksums._CHECKSUM_DIRS[0], self.builder.name + ".txt")
+    if not tf.io.gfile.exists(filepath):
+      raise AssertionError("The urls checksums file does not exist")
+    with tf.io.gfile.GFile(filepath, "r") as f:
       for line in f.readlines():
-        urls.append(line.split()[0].decode("utf-8"))
-
-    self.assertEqual(set(self.URLS), set(urls))
+        urls.append(line.split()[0])
+    self.assertEqual(set(self._download_urls), set(urls), "The urls checksums don't match")
 
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
