@@ -56,9 +56,9 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "file_name": tfds.features.Text(),
-            'question_answer': tfds.features.Sequence({
-                'question': tfds.features.Text(),
-                'answer': tfds.features.Text(),
+            "question_answer": tfds.features.Sequence({
+                "question": tfds.features.Text(),
+                "answer": tfds.features.Text(),
             }),
             "objects": tfds.features.Sequence({
                 "color": tfds.features.ClassLabel(names=["gray", "blue",
