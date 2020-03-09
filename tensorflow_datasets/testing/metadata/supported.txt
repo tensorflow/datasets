@@ -299,6 +299,7 @@ food101/1.0.0
 food101/2.0.0
 forest_fires/0.0.1
 gap/0.1.0
+german_credit_numeric/1.0.0
 gigaword/1.2.0
 glue/ax/1.0.0
 glue/cola/1.0.0

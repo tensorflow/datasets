@@ -47,8 +47,9 @@ FeaturesDict({
     'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 

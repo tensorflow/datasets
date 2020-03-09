@@ -19,7 +19,7 @@
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
 ## super_glue/boolq (default config)

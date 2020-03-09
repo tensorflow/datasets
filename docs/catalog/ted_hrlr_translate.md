@@ -57,8 +57,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('az', 'en')`
 
 ## ted_hrlr_translate/aztr_to_en
@@ -80,8 +81,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('az_tr', 'en')`
 
 ## ted_hrlr_translate/be_to_en
@@ -103,8 +105,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('be', 'en')`
 
 ## ted_hrlr_translate/beru_to_en
@@ -126,8 +129,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('be_ru', 'en')`
 
 ## ted_hrlr_translate/es_to_pt
@@ -149,8 +153,9 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('es', 'pt')`
 
 ## ted_hrlr_translate/fr_to_pt
@@ -172,8 +177,9 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fr', 'pt')`
 
 ## ted_hrlr_translate/gl_to_en
@@ -195,8 +201,9 @@ Translation({
     'gl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('gl', 'en')`
 
 ## ted_hrlr_translate/glpt_to_en
@@ -218,8 +225,9 @@ Translation({
     'gl_pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('gl_pt', 'en')`
 
 ## ted_hrlr_translate/he_to_pt
@@ -241,8 +249,9 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('he', 'pt')`
 
 ## ted_hrlr_translate/it_to_pt
@@ -264,8 +273,9 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('it', 'pt')`
 
 ## ted_hrlr_translate/pt_to_en
@@ -287,8 +297,9 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('pt', 'en')`
 
 ## ted_hrlr_translate/ru_to_en
@@ -310,8 +321,9 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`
 
 ## ted_hrlr_translate/ru_to_pt
@@ -333,8 +345,9 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'pt')`
 
 ## ted_hrlr_translate/tr_to_en
@@ -358,5 +371,5 @@ Translation({
 ```
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('tr', 'en')`

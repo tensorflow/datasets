@@ -84,8 +84,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('cs', 'en')`
 
 ## wmt18_translate/de-en
@@ -99,8 +100,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
 
 ## wmt18_translate/et-en
@@ -114,8 +116,9 @@ Translation({
     'et': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('et', 'en')`
 
 ## wmt18_translate/fi-en
@@ -129,8 +132,9 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fi', 'en')`
 
 ## wmt18_translate/kk-en
@@ -144,8 +148,9 @@ Translation({
     'kk': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('kk', 'en')`
 
 ## wmt18_translate/ru-en
@@ -159,8 +164,9 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`
 
 ## wmt18_translate/tr-en
@@ -174,8 +180,9 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('tr', 'en')`
 
 ## wmt18_translate/zh-en
@@ -191,5 +198,5 @@ Translation({
 ```
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('zh', 'en')`

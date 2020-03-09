@@ -53,8 +53,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'bg')`
 
 ## para_crawl/encs_plain_text
@@ -76,8 +77,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'cs')`
 
 ## para_crawl/enda_plain_text
@@ -99,8 +101,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'da')`
 
 ## para_crawl/ende_plain_text
@@ -122,8 +125,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'de')`
 
 ## para_crawl/enel_plain_text
@@ -145,8 +149,9 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'el')`
 
 ## para_crawl/enes_plain_text
@@ -168,8 +173,9 @@ Translation({
     'es': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'es')`
 
 ## para_crawl/enet_plain_text
@@ -191,8 +197,9 @@ Translation({
     'et': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'et')`
 
 ## para_crawl/enfi_plain_text
@@ -214,8 +221,9 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'fi')`
 
 ## para_crawl/enfr_plain_text
@@ -237,8 +245,9 @@ Translation({
     'fr': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'fr')`
 
 ## para_crawl/enga_plain_text
@@ -260,8 +269,9 @@ Translation({
     'ga': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'ga')`
 
 ## para_crawl/enhr_plain_text
@@ -283,8 +293,9 @@ Translation({
     'hr': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'hr')`
 
 ## para_crawl/enhu_plain_text
@@ -306,8 +317,9 @@ Translation({
     'hu': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'hu')`
 
 ## para_crawl/enit_plain_text
@@ -329,8 +341,9 @@ Translation({
     'it': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'it')`
 
 ## para_crawl/enlt_plain_text
@@ -352,8 +365,9 @@ Translation({
     'lt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'lt')`
 
 ## para_crawl/enlv_plain_text
@@ -375,8 +389,9 @@ Translation({
     'lv': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'lv')`
 
 ## para_crawl/enmt_plain_text
@@ -398,8 +413,9 @@ Translation({
     'mt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'mt')`
 
 ## para_crawl/ennl_plain_text
@@ -421,8 +437,9 @@ Translation({
     'nl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'nl')`
 
 ## para_crawl/enpl_plain_text
@@ -444,8 +461,9 @@ Translation({
     'pl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'pl')`
 
 ## para_crawl/enpt_plain_text
@@ -467,8 +485,9 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'pt')`
 
 ## para_crawl/enro_plain_text
@@ -490,8 +509,9 @@ Translation({
     'ro': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'ro')`
 
 ## para_crawl/ensk_plain_text
@@ -513,8 +533,9 @@ Translation({
     'sk': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'sk')`
 
 ## para_crawl/ensl_plain_text
@@ -536,8 +557,9 @@ Translation({
     'sl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'sl')`
 
 ## para_crawl/ensv_plain_text
@@ -561,5 +583,5 @@ Translation({
 ```
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'sv')`

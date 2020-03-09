@@ -196,6 +196,8 @@ toc:
     title: amazon_us_reviews
   - path: /datasets/catalog/forest_fires
     title: forest_fires
+  - path: /datasets/catalog/german_credit_numeric
+    title: german_credit_numeric
   - path: /datasets/catalog/higgs
     title: higgs
   - path: /datasets/catalog/iris

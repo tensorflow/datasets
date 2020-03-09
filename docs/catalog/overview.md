@@ -132,6 +132,7 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Structured`
     *   [`amazon_us_reviews`](amazon_us_reviews.md)
     *   [`forest_fires`](forest_fires.md)
+    *   [`german_credit_numeric`](german_credit_numeric.md)
     *   [`higgs`](higgs.md)
     *   [`iris`](iris.md)
     *   [`rock_you`](rock_you.md)

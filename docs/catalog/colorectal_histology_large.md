@@ -40,8 +40,9 @@ FeaturesDict({
     'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
 })
 ```
+
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
