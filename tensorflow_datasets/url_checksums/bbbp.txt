@@ -1,0 +1,1 @@
+https://s3-us-west-1.amazonaws.com/deepchem.io/datasets/molnet_publish/bbbp.zip 46174 757619fda8a615c825544defdc5282c7af9e2de7e857024b9eea0ea35f623328
