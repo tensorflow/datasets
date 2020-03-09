@@ -76,9 +76,9 @@ All datasets are implemented as subclasses of `tfds.core.DatasetBuilder`. TFDS
 has two entry points:
 
 *   `tfds.builder`: Returns the `tfds.core.DatasetBuilder` instance, giving
-     control over `builder.download_and_prepate()` and
+     control over `builder.download_and_prepare()` and
      `builder.as_dataset()`.
-*   `tfds.load`: Convenience wrapper which hides the `download_and_prepate` and
+*   `tfds.load`: Convenience wrapper which hides the `download_and_prepare` and
     `as_dataset` calls, and directly returns the `tf.data.Dataset`.
 
 ```python
