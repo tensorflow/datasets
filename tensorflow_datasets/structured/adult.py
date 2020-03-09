@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 Varan Singh Rohila.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 import csv
 
-# TODO(adult): BibTeX citation
 _CITATION = """\
   @misc{Dua:2019 ,
 author = "Dua, Dheeru and Graff, Casey",
@@ -37,7 +36,6 @@ institution = "University of California, Irvine, School of Information and Compu
 }
 """
 
-# TODO(adult):
 _DESCRIPTION = """\
 The dataset contains various information of adults.
 The purpose of the dataset is to predict whether the 
@@ -97,7 +95,7 @@ class Adult(tfds.core.GeneratorBasedBuilder):
   """UCI Adult Dataset"""
 
   VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+      "0.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(

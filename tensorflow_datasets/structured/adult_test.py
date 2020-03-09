@@ -9,7 +9,6 @@ from tensorflow_datasets.structured import adult
 
 
 class AdultTest(testing.DatasetBuilderTestCase):
-  # TODO(adult):
   DATASET_CLASS = adult.Adult
   SPLITS = {
       "train": 10,  # Number of fake train example
