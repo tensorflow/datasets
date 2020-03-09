@@ -354,7 +354,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
     def _maybe_get_page():
       """Generate a (url, {features}) page."""
       if not url and url is not None:
-        counter_inc_fn("page-filitered-nourl")
+        counter_inc_fn("page-filtered-nourl")
       if not content and content is not None:
         counter_inc_fn("page-filtered-nocontent")
       if not content_type and content_type is not None:
