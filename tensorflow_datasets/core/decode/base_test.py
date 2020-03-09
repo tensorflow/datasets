@@ -26,7 +26,7 @@ from tensorflow_datasets.core import decode as decode_lib
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 randint = np.random.randint
 

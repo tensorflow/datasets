@@ -26,7 +26,7 @@ import os
 from absl.testing import absltest
 import six
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing

@@ -611,7 +611,6 @@ fail if your dataset splits overlap.
 do not create the data using material from the original dataset.
 
 ```python
-import tensorflow as tf
 from tensorflow_datasets import my_dataset
 import tensorflow_datasets.testing as tfds_test
 

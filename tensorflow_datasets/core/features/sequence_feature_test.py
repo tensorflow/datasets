@@ -24,7 +24,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as feature_lib
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):

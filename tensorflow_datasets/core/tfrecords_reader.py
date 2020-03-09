@@ -74,7 +74,7 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   # Explictly use DatasetV1 for backward compatibility:
   # * isinstance(ds, tf.data.Dataset)
   # * ds.make_one_shot_iterator()
-  ds = tf.compat.v1.data.TFRecordDataset(
+  ds = tf.data.TFRecordDataset(
       filename,
       buffer_size=_BUFFER_SIZE,
       num_parallel_reads=1,

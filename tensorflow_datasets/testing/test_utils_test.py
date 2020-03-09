@@ -24,7 +24,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class RunInGraphAndEagerTest(test_case.TestCase):

@@ -34,7 +34,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):

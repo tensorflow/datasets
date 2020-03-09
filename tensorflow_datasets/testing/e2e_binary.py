@@ -25,7 +25,7 @@ from absl import app
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 def main(argv):

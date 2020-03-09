@@ -32,7 +32,7 @@ from tensorflow_datasets.image import imagenet  # pylint: disable=unused-import,
 from tensorflow_datasets.text import lm1b  # pylint: disable=unused-import,g-bad-import-order
 from tensorflow_datasets.image import mnist  # pylint: disable=unused-import,g-bad-import-order
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class MockingTest(test_case.TestCase):

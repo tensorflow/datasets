@@ -125,7 +125,7 @@ def image_as_moving_sequence(
   import tensorflow.compat.v2 as tf
   import tensorflow_datasets as tfds
   from tensorflow_datasets.video import moving_sequence
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
 
   def animate(sequence):
     import numpy as np
@@ -145,7 +145,7 @@ def image_as_moving_sequence(
     plt.close()
 
 
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
   mnist_ds = tfds.load("mnist", split=tfds.Split.TRAIN, as_supervised=True,
                        shuffle_files=True)
   mnist_ds = mnist_ds.repeat().shuffle(1024)

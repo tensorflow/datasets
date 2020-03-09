@@ -31,7 +31,7 @@ from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):

@@ -31,7 +31,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",

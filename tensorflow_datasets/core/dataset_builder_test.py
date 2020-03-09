@@ -36,7 +36,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
