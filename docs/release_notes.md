@@ -2,6 +2,11 @@
 
 ## Nightly
 
+### New datasets
+
+*   Image:
+    [fruits360](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#fruits360)
+
 ### Features
 
 *   Add `in_memory` option to cache small dataset in RAM.
