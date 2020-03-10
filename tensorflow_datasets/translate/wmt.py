@@ -722,7 +722,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            num_shards=10 if split == tfds.Split.TRAIN else 1,
             gen_kwargs={"split_subsets": split_subsets,
                         "extraction_map": extraction_map})
         for split, split_subsets in self.subsets.items()

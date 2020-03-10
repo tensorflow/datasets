@@ -69,7 +69,8 @@ class So2satConfig(tfds.core.BuilderConfig):
 
     v2 = tfds.core.Version(
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-    super(So2satConfig, self).__init__(version=v2, **kwargs)
+    super(So2satConfig, self).__init__(
+        version=v2, **kwargs)
     self.selection = selection
 
 
