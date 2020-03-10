@@ -27,8 +27,6 @@ import tensorflow_datasets.public_api as tfds
 class ImportTestingTest(tf.test.TestCase):
 
   def test_testing_imported(self):
-
-    # pylint: disable=unreachable
     self.assertIsNotNone(tfds.testing)
 
 
