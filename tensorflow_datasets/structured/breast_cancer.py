@@ -62,27 +62,27 @@ is benign or malignant. The attribute information is as follows:
 def convert_to_int(number):
   return -1 if number == "?" else np.int8(number)
 
-COLUMNS = ['clump_thickness', 'uniformity_of_cell_size', 
-		   'uniformity_of_cell_shape', 'marginal_adhesion', 
-		   'single_epithelial_cell_size', 'bare_nuclei', 'bland_chromatin', 
-		   'normal_nucleoli', 'mitoses']
+COLUMNS = ["clump_thickness", "uniformity_of_cell_size", 
+		   "uniformity_of_cell_shape", "marginal_adhesion", 
+		   "single_epithelial_cell_size", "bare_nuclei", "bland_chromatin", 
+		   "normal_nucleoli", "mitoses"]
 
 FEATURES = collections.OrderedDict([
-    ('clump_thickness', tf.int8),
-    ('uniformity_of_cell_size', tf.int8),
-    ('uniformity_of_cell_shape', tf.int8),
-    ('marginal_adhesion', tf.int8),
-    ('single_epithelial_cell_size', tf.int8),
-    ('bare_nuclei', tf.int8),
-    ('bland_chromatin', tf.int8),
-    ('normal_nucleoli', tf.int8),
-    ('mitoses', tf.int8)
+    ("clump_thickness", tf.int8),
+    ("uniformity_of_cell_size", tf.int8),
+    ("uniformity_of_cell_shape", tf.int8),
+    ("marginal_adhesion", tf.int8),
+    ("single_epithelial_cell_size", tf.int8),
+    ("bare_nuclei", tf.int8),
+    ("bland_chromatin", tf.int8),
+    ("normal_nucleoli", tf.int8),
+    ("mitoses", tf.int8)
 ])
 
 class BreastCancer(tfds.core.GeneratorBasedBuilder):
   """Breast Cancer Wisconsin dataset."""
 
-  VERSION = tfds.core.Version('0.0.1')
+  VERSION = tfds.core.Version("0.0.1")
   
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -90,7 +90,7 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-             'features': {name: dtype for name, dtype in FEATURES.items()},
+             "features": {name: dtype for name, dtype in FEATURES.items()},
              "label": tfds.features.ClassLabel(num_classes=2),
         }),
         supervised_keys=("features", "label"),
@@ -101,7 +101,7 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     bcwd_file = dl_manager.download(BCWD_URL)
     all_lines = tf.io.gfile.GFile(bcwd_file).read().split("\n")
-    records = [l.split(',')[1:] for l in all_lines if l]  
+    records = [l.split(",")[1:] for l in all_lines if l]  
 
     # Specify the splits
     return [
@@ -116,8 +116,8 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
       label = 0 if label == 2 else 1
       dict_values = dict(zip(COLUMNS, map(lambda x: x.strip(), row[:-1])))
       yield i, {
-	    "label": label,
-	    "features": {
-	      name: convert_to_int(value) for name, value in dict_values.items()
-	    }
+	      "label": label,
+	      "features": {
+	        name: convert_to_int(value) for name, value in dict_values.items()
+	       }
 	  }
