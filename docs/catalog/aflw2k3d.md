@@ -45,7 +45,6 @@ FeaturesDict({
     'landmarks_68_3d_z': Tensor(shape=(68, 1), dtype=tf.float32),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
