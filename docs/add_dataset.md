@@ -66,17 +66,33 @@ generate on a single machine. See the
 ### Use the default template
 
 If you want to
-[contribute to our repo](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)
-and add a new dataset, the following script will help you get started by
-generating the required python files,...
-To use it, clone the `tfds` repository and run the following command:
+[contribute to our repository](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)
+and add a new dataset, the following instructions will help you to generate 
+the required python files.
+
+Clone or download the [Tensorflow Datasets](https://github.com/tensorflow/datasets)
+repository.
+
+```
+git clone https://github.com/tensorflow/datasets.git
+```
+
+Browse to the directory where all the files of this repository are located 
+and run the following command to install the current snapshot of the repository 
+in development mode.
+
+```
+pip install -e .
+```
+
+The following command will generate all the required files needed for adding 
+a new dataset.
 
 ```
 python tensorflow_datasets/scripts/create_new_dataset.py \
   --dataset my_dataset \
   --type image  # text, audio, translation,...
 ```
-
 
 Then search for `TODO(my_dataset)` in the generated files to do the
 modifications.
