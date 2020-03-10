@@ -16,10 +16,6 @@
 # Lint as: python3
 """Tests for py_utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import hashlib
 import os
 from tensorflow_datasets import testing

@@ -16,10 +16,6 @@
 # Lint as: python3
 # coding=utf-8
 """TextEncoders convert between text and integers."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from __future__ import unicode_literals
 
 import abc
@@ -39,10 +35,6 @@ def _re_compile(pattern):
 NUM_BYTES = 2**8
 ALPHANUM_REGEX = _re_compile(r"\W+")
 ALL_REGEX = _re_compile(r"(\W+)")
-
-
-
-
 class TextEncoderConfig(object):
   """Configuration for `tfds.features.Text`."""
 

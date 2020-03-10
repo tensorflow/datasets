@@ -17,10 +17,6 @@
 """Wrapper around tqdm.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import contextlib
 
 from tqdm import auto as tqdm_lib

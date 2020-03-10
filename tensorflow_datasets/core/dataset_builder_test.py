@@ -16,10 +16,6 @@
 # Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl.testing import absltest
@@ -584,10 +580,6 @@ class DatasetBuilderReadTest(testing.TestCase):
         shuffle_files=True,
         read_config=read_config_lib.ReadConfig(),
     ))
-
-
-
-
 class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
   """Dataset containing nested sequences."""
 

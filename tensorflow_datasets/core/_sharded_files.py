@@ -22,10 +22,6 @@ This logic is shared between:
  sharding needs.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 
 def get_read_instructions(from_, to, filenames, shard_lengths,
                           shardref_name="filename"):

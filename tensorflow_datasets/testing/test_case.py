@@ -16,10 +16,6 @@
 # Lint as: python3
 """Base TestCase to use test_data."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import contextlib
 import os
 import tempfile
@@ -28,11 +24,7 @@ from absl import logging
 from absl.testing import absltest
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.utils import gcs_utils
-
-
-
-GCS_ACCESS_FNS = {
+from tensorflow_datasets.core.utils import gcs_utilsGCS_ACCESS_FNS = {
     "original_info": gcs_utils.gcs_dataset_info_files,
     "dummy_info": lambda _: [],
     "original_datasets": gcs_utils.is_dataset_on_gcs,

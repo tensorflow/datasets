@@ -18,10 +18,6 @@
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
@@ -69,10 +65,6 @@ def add_checksums_dir(checksums_dir):
 
 def _list_dir(path):
   return tf.io.gfile.listdir(path)
-
-
-
-
 @utils.memoize()
 def _checksum_paths():
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
@@ -107,10 +99,6 @@ def _get_path(dataset_name):
 
 def _read_file(path):
   return tf.io.gfile.GFile(path).read()
-
-
-
-
 def _get_sizes_checksums(checksums_path):
   """Returns {URL: (size, checksum)}s stored within file at given path."""
   checksums_file = _read_file(checksums_path).split('\n')

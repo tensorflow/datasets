@@ -21,10 +21,6 @@ Frederik Ebert, Chelsea Finn, Alex X. Lee, and Sergey Levine.
 https://arxiv.org/abs/1710.05268
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl import logging

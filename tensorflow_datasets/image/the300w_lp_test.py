@@ -29,10 +29,6 @@
 # limitations under the License.
 """Tests for 300W-LP dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import the300w_lp
 

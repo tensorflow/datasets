@@ -16,10 +16,6 @@
 # Lint as: python3
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils

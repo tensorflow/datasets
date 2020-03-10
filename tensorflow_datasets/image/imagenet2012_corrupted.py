@@ -17,11 +17,7 @@
 """Corrupted ImageNet2012 dataset.
 
 Apply common corruptions to the images in ImageNet2012 dataset.
-"""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from absl import logging
+"""from absl import logging
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.image import corruptions

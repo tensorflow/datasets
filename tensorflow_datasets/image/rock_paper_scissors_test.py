@@ -16,10 +16,6 @@
 # Lint as: python3
 """Tests for Rock, Paper, Scissors data module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.image import rock_paper_scissors
 import tensorflow_datasets.testing as tfds_test
 

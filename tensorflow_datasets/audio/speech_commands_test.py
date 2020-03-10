@@ -14,11 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""TODO(speech_commands): Add a description here."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Nsynth Dataset Builder Test"""
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.audio import speech_commands

@@ -16,10 +16,6 @@
 # Lint as: python3
 """Utilities for generating the C4 dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import functools
 import gzip
 import hashlib
@@ -76,10 +72,6 @@ def _load_sentence_tokenizer():
   with threading.Lock():
     nltk.download("punkt")
     return nltk.data.load("nltk:tokenizers/punkt/english.pickle")
-
-
-
-
 def _get_sentences(text):
   global _SENTENCE_TOKENIZER
   if not _SENTENCE_TOKENIZER:

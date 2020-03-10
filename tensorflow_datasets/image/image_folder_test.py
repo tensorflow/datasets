@@ -16,10 +16,6 @@
 # Lint as: python3
 """Test for ImageLabelFolder."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import functools
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import registered

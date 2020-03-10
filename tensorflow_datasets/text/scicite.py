@@ -16,10 +16,6 @@
 # Lint as: python3
 """TODO(scicite): Add a description here."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
 import os
 

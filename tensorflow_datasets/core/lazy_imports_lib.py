@@ -16,10 +16,6 @@
 # Lint as: python3
 """Lazy imports for heavy dependencies."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import importlib
 
 from tensorflow_datasets.core.utils import py_utils as utils

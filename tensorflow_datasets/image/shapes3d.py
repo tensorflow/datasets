@@ -16,10 +16,6 @@
 # Lint as: python3
 """Shapes3D dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import h5py
 import numpy as np
 from six import moves

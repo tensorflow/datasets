@@ -16,10 +16,6 @@
 # Lint as: python3
 """PatchCamelyon images dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import h5py
 import tensorflow_datasets.public_api as tfds
 

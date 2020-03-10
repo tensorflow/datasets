@@ -16,10 +16,6 @@
 # Lint as: python3
 """Sequence feature."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import numpy as np
 
 from tensorflow_datasets.core import utils
