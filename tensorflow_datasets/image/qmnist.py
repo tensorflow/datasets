@@ -105,7 +105,6 @@ class Qmnist(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=qmnist_files["train_data"],
@@ -113,7 +112,6 @@ class Qmnist(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
                 data_path=qmnist_files["test_data"],
