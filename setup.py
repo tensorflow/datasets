@@ -1,3 +1,4 @@
+# Lint as: python3
 """tensorflow/datasets is a library of datasets ready to use with TensorFlow.
 
 tensorflow/datasets is a library of public datasets ready to use with

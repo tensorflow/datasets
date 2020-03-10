@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
 from __future__ import absolute_import
@@ -260,8 +261,10 @@ class DatasetBuilderTest(testing.TestCase):
 
         self.assertEqual(20, len(train_data))
         self.assertEqual(10, len(test_data))
-        self.assertEqual([incr + el for el in range(30)],
-                         sorted(train_data + test_data))
+        self.assertCountEqual(
+            [incr + el for el in range(30)],
+            train_data + test_data
+        )
 
   def test_read_config(self):
     is_called = []

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.testing.mocking."""
 
 from __future__ import absolute_import
@@ -41,8 +42,8 @@ class MockingTest(test_case.TestCase):
     with mocking.mock_data():
       ds = registered.load('imagenet2012', split='train')
       for ex in ds.take(10):
-        self.assertEqual(
-            sorted(ex.keys()), ['file_name', 'image', 'label'])
+        self.assertCountEqual(
+            list(ex.keys()), ['file_name', 'image', 'label'])
         ex['image'].shape.assert_is_compatible_with((None, None, 3))
 
   def test_mocking_lm1b(self):
