@@ -280,3 +280,10 @@ ${display_builder(builder, all_sections)}
 % else:
 ${display_all_builders(config_builders)}
 % endif
+
+
+*   **Figure**:
+
+![]('https://github.com/tensorflow/datasets/raw/master/tensorflow_datasets/examples/'${builder.info.name}'.png')
+
+
