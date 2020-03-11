@@ -1,22 +1,24 @@
 
 """ Generate random images that compress better.
     By replacing the larger images with more compressable equivalents. """
-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 import os
 import tempfile
 import zipfile
 import tarfile
-from PIL import Image
+import PIL.Image
 import numpy as np
-from absl import app
-from absl import flags
+import absl.app
+import absl.flags
 
 
-FLAGS = flags.FLAGS
+FLAGS = absl.flags.FLAGS
 
-flags.DEFINE_string("dir_path",
-                    "testing/test_data/fake_examples",
-                    "path to the directory which contains files")
+absl.flags.DEFINE_string("dir_path",
+                         "data/fake_examples/",
+                         "path to the directory which contains files")
 
 def image_process(filepath):
     """ Generate random images and remove noise of the
@@ -26,16 +28,16 @@ def image_process(filepath):
            filepath: path of the images to get processed
 
     """
-    image = np.array(Image.open(filepath))
+    image = np.array(PIL.Image.open(filepath))
     grey = int(hash(filepath) % 255)
     image = np.ones_like(image)*grey
-    image = Image.fromarray(image)
+    image = PIL.Image.fromarray(image)
     image = image.convert('RGB')
     image.save(filepath)
 
 
 
-def rewrite_zip(_dir, path):
+def rewrite_zip(root_dir, zip_filepath):
     """ Rewrite the older .zip files into new better compressed one
 
             Args:
@@ -44,23 +46,23 @@ def rewrite_zip(_dir, path):
 
     """
     # creating a temporary file to store images
-    with tempfile.TemporaryDirectory(dir=_dir) as temp:
+    with tempfile.TemporaryDirectory(dir=root_dir) as temp_dir:
 
         # Extraction of compressed .zip file
-        with zipfile.ZipFile(path, 'r') as _zp:
-            _zp.extractall(path=temp)
+        with zipfile.ZipFile(zip_filepath, 'r') as zip_file:
+            zip_file.extractall(path=temp_dir)
 
-        process_dir(temp)  # Image Processing
+        process_dir(temp_dir)  # Image Processing
 
         # Compressed the .zip file again
-        with zipfile.ZipFile(path, 'w') as _zp:
-            for _file_dir, _, files in os.walk(temp):
-                for _file in files:
-                    file_path = os.path.join(_file_dir, _file)
-                    _zp.write(file_path)
+        with zipfile.ZipFile(zip_filepath, 'w') as zip_file:
+            for file_dir, _, files in os.walk(temp_dir):
+                for file in files:
+                    file_path = os.path.join(file_dir, file)
+                    zip_file.write(file_path)
 
 
-def rewrite_tar(_dir, path):
+def rewrite_tar(root_dir, tar_filepath):
     """ Rewrite the older .tar file into new better compressed one.
         Compression formats supports by this method (.tar.gz, .tgz, .tar.bz2)
 
@@ -70,34 +72,24 @@ def rewrite_tar(_dir, path):
 
     """
     # Create a tempfile to store the images contain noise
-    with tempfile.TemporaryDirectory(dir=_dir) as temp:
+    with tempfile.TemporaryDirectory(dir=root_dir) as temp_dir:
 
         #Checking the extension of file to be extract
-        ext_list = ["gz", "tgz", "bz2"]
-        read_ext = path.split('.')[-1]
-        write_ext = path.split('.')[-1]
-        if read_ext in ext_list:
-            read_ext = "r:" + read_ext
-            write_ext = "w:" + write_ext
-        else:
-            read_ext = "r"
-            write_ext = "w"
 
+        extension = tar_filepath.split('.')[-1]
         # Extraction of .tar file
-        with tarfile.open(path, read_ext) as tar:
-            tar.extractall(path=temp)
+        with tarfile.open(tar_filepath, 'r:'+extension) as tar:
+            tar.extractall(path=temp_dir)
         # Image Process to decrease the size
-        process_dir(temp)
+        process_dir(temp_dir)
 
         # Converting into tarfile again to decrease the space taken by the file-
 
-        with tarfile.open(path, write_ext) as tar:
-            for _file_dir, _, files in os.walk(temp):
-                for _file in files:
-                    file_path = os.path.join(_file_dir, _file)
+        with tarfile.open(tar_filepath, 'w:'+extension) as tar:
+            for file_dir, _, files in os.walk(temp_dir):
+                for file in files:
+                    file_path = os.path.join(file_dir, file)
                     tar.add(file_path, recursive=False)
-
-
 
 def process_dir(dir_path):
     """ This method process the whole directory which contains the
@@ -108,19 +100,18 @@ def process_dir(dir_path):
 
     """
     img_ext_list = ["jpg", "jpeg", "png"]
-    for _dir, _, _files in os.walk(dir_path):
+    for root_dir, _, _files in os.walk(dir_path):
         for file in _files:
-            path = os.path.join(_dir, file)
-            _name = os.path.basename(file).split('.')[-1]
-            _name = _name.lower()
-            if _name in img_ext_list:
+            path = os.path.join(root_dir, file)
+            img_ext = os.path.basename(file).split('.')[-1].lower()
+            if img_ext in img_ext_list:
                 image_process(path)
 
             elif zipfile.is_zipfile(path):
-                rewrite_zip(_dir, path)
+                rewrite_zip(root_dir, path)
 
             elif tarfile.is_tarfile(path):
-                rewrite_tar(_dir, path)
+                rewrite_tar(root_dir, path)
 
 def main(unused_argv):
     """ This method calls the process_dir method to start
@@ -129,4 +120,4 @@ def main(unused_argv):
 
 
 if __name__ == "__main__":
-    app.run(main)
+    absl.app.run(main)

@@ -1,0 +1,10 @@
+1 001.Black_footed_Albatross/Black_Footed_Albatross_0046_18.jpg
+2 001.Black_footed_Albatross/Black_Footed_Albatross_0009_34.jpg
+3 001.Black_footed_Albatross/Black_Footed_Albatross_0002_55.jpg
+4 001.Black_footed_Albatross/Black_Footed_Albatross_0074_59.jpg
+5 002.Laysan_Albatross/Laysan_Albatross_0002_1027.jpg
+6 002.Laysan_Albatross/Laysan_Albatross_0003_1033.jpg
+7 002.Laysan_Albatross/Laysan_Albatross_0082_524.jpg
+8 003.Sooty_Albatross/Sooty_Albatross_0038_1065.jpg
+9 003.Sooty_Albatross/Sooty_Albatross_0031_1066.jpg
+10 003.Sooty_Albatross/Sooty_Albatross_0001_1071.jpg

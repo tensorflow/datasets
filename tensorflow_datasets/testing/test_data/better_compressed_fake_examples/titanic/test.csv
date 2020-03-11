@@ -1,0 +1,6 @@
+"pclass","survived","name","sex","age","sibsp","parch","ticket","fare","cabin","embarked","boat","body","home.dest"
+1,1,"McDonald Alan Mickey","male",23,2,3,"B 456",115.32,"B5","S","4",?,?
+1,1,"Blue John M","male",35,0,0,"A 1",2314.98,"A5","C","5",9,"Unicorn Land"
+1,0,"Connor Sarah","female",27,1,0,"689",140.87,"Z1","S","1",2,"Westeros"
+2,1,"Stark Friday","female",34,5,2,"C 897",7845.99,"C1","C","2",?,"Kings Landing"
+3,0,"Potts Alice","female",24,0,8,"3211",120.47,"B9","?","4",?,"Titan"

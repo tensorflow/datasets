@@ -1,0 +1,8 @@
+6
+lefteye_x lefteye_y righteye_x righteye_y nose_x nose_y leftmouth_x leftmouth_y rightmouth_x rightmouth_y
+000001.jpg 69  109  106  113   77  142   73  152  108  154
+000002.jpg 69  110  107  112   81  135   70  151  108  153
+000003.jpg 76  112  104  106  108  128   74  156   98  158
+000004.jpg 72  113  108  108  101  138   71  155  101  151
+000005.jpg 66  114  112  112   86  119   71  147  104  150
+000006.jpg 71  111  106  110   94  131   74  154  102  153
