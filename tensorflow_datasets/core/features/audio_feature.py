@@ -21,6 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
@@ -47,14 +48,19 @@ class Audio(feature.Tensor):
     self._shape = shape
     super(Audio, self).__init__(shape=shape, dtype=tf.int64)
 
-  def encode_example(self, audio_or_path_or_fobj):
-    audio = audio_or_path_or_fobj
-    if isinstance(audio, (np.ndarray, list)):
-      return audio
+  def _encode_file(self, fobj, file_format):
+    audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
+        fobj, format=file_format)
+    return super(Audio, self).encode_example(
+        np.array(audio_segment.get_array_of_samples()).astype(np.int64))
 
-    with tf.io.gfile.GFile(audio, "rb") as audio_f:
-      file_format = self._file_format or audio.split(".")[-1]
-      audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
-          audio_f, format=file_format)
-      return super(Audio, self).encode_example(
-          np.array(audio_segment.get_array_of_samples()).astype(np.int64))
+  def encode_example(self, audio_or_path_or_fobj):
+    if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
+      return audio_or_path_or_fobj
+    elif isinstance(audio_or_path_or_fobj, six.string_types):
+      filename = audio_or_path_or_fobj
+      file_format = self._file_format or filename.split(".")[-1]
+      with tf.io.gfile.GFile(filename, "rb") as audio_f:
+        return self._encode_file(audio_f, file_format)
+    else:
+      return self._encode_file(audio_or_path_or_fobj, self._file_format)
