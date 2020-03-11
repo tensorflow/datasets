@@ -224,7 +224,7 @@ all_sections = [
     Section(get_splits, display_splits),
     Section(get_features, display_features),
     Section(get_supervised, display_supervised),
-    Section(get_citation, display_citation),
+    Section(get_citation, display_citation)
 ]
 
 %>
@@ -284,6 +284,6 @@ ${display_all_builders(config_builders)}
 
 *   **Figure**:
 
-![]('https://github.com/tensorflow/datasets/raw/master/tensorflow_datasets/examples/'${builder.info.name}'.png')
+![]('https://github.com/tensorflow/datasets/raw/master/tensorflow_datasets/examples/${builder.info.name}.png')
 
 
