@@ -57,9 +57,9 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
   def _caltech_birds_info(self):
     return CaltechBirdsInfo(
         name=self.name,
-        images_url="https://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz",
-        split_url="https://www.vision.caltech.edu/visipedia-data/CUB-200/lists.tgz",
-        annotations_url="https://www.vision.caltech.edu/visipedia-data/CUB-200/annotations.tgz",
+        images_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz",
+        split_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/lists.tgz",
+        annotations_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/annotations.tgz",
     )
 
   def _info(self):
