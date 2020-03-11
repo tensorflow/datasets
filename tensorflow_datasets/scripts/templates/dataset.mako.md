@@ -283,6 +283,7 @@ ${display_all_builders(config_builders)}
 
 %if builder.info.name:
 *   **Figure**:
+
 ![](https://github.com/vvkio/datasets/raw/master/tensorflow_datasets/examples/${builder.info.name}.png)
 %endif
 
