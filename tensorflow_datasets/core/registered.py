@@ -376,6 +376,8 @@ def _cast_to_pod(val):
       return float(val)
     except ValueError:
       return tf.compat.as_text(val)
+def _get_all_versions(version_list):
+  return set(str(v) for v in version_list)
 
 def iter_dataset_full_names():
   """Yield all supported datasets full_names."""
