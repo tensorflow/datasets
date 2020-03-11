@@ -16,7 +16,8 @@ def generate_docs_with_visualization(ds_name):
 
     dst_dir = tfds.core.get_tfds_path('examples/')
 
-    with open(os.path.join(dst_dir, f'{ds_name}.md'), "a+") as f:
+    with open(os.path.join(dst_dir, f'{ds_name}.md'), "w") as f:
+
         doc_builder = document_datasets.document_single_builder(builder)
         f.write(doc_builder)
 

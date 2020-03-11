@@ -281,9 +281,8 @@ ${display_builder(builder, all_sections)}
 ${display_all_builders(config_builders)}
 % endif
 
-
+%if builder.info.name:
 *   **Figure**:
-
 ![](https://github.com/vvkio/datasets/raw/master/tensorflow_datasets/examples/${builder.info.name}.png)
-
+%endif
 
