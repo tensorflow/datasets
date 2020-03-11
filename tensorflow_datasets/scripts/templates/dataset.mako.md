@@ -284,6 +284,6 @@ ${display_all_builders(config_builders)}
 
 *   **Figure**:
 
-![]('https://github.com/tensorflow/datasets/raw/master/tensorflow_datasets/examples/${builder.info.name}.png')
+![]('https://github.com/vvkio/datasets/raw/master/tensorflow_datasets/examples/${builder.info.name}.png')
 
 
