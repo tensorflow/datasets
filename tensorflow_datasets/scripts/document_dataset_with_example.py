@@ -4,7 +4,7 @@ import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts import generate_visualization
 from tensorflow_datasets.scripts import document_datasets
 
-def generate_visualization(ds_name):
+def generate_docs_with_visualization(ds_name):
     # DatasetBuilder
     builder = tfds.builder(ds_name)
 
@@ -12,7 +12,7 @@ def generate_visualization(ds_name):
     builder.download_and_prepare()
 
     # Construct a tf.data.Dataset
-    ds = beans_builder.as_dataset(split='train')
+    ds = builder.as_dataset(split='train')
 
     dst_dir = tfds.core.get_tfds_path('examples/')
 
@@ -20,6 +20,3 @@ def generate_visualization(ds_name):
         doc_builder = document_datasets.document_single_builder(builder)
         f.write(doc_builder)
 
-ds_name = 'beans'
-
-generate_visualization(ds_name)
