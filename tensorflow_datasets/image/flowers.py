@@ -33,7 +33,7 @@ year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 """
 
-_URL = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz"
+_URL = "http://download.tensorflow.org/example_images/flower_photos.tgz"
 
 
 class TFFlowers(tfds.core.GeneratorBasedBuilder):
