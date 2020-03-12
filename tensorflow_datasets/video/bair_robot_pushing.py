@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Berkeley (BAIR) robot pushing dataset.
 
 Self-Supervised Visual Planning with Temporal Skip Connections
@@ -109,7 +110,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {   # pylint: disable=
+          frame_feature = {   # pylint: disable=g-complex-comprehension
               out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
