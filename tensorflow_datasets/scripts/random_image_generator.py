@@ -98,7 +98,8 @@ def process_dir(dir_path):
       img_ext = os.path.basename(file).split('.')[-1].lower()
       if img_ext in img_ext_list:
         image_process(path)
-
+      elif path.endswith('.npz'):
+        continue
       elif zipfile.is_zipfile(path):
         rewrite_zip(root_dir, path)
 
