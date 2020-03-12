@@ -388,8 +388,14 @@ class DownloadManager(object):
               self._manual_dir, self._manual_dir_instructions))
     return self._manual_dir
 
+  
+if sys.version_info[0] > 2:
+
+  def _wait_on_promise(p):
+    return p.get()
 
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
-  return all_promises
+  res = utils.map_nested(_wait_on_promise, all_promises)
+  return res
