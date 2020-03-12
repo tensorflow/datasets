@@ -84,7 +84,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
     self.height = height
 
 
-class Robonet(tfds.core.GeneratorBasedBuilder):
+class Robonet(tfds.core.BeamBasedBuilder):
   """RoboNet: Large-Scale Multi-Robot Learning."""
 
   BUILDER_CONFIGS = [
@@ -177,17 +177,17 @@ class Robonet(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  def _generate_examples(self, filedir):
+  def _build_pcollection(self, pipeline, filedir):
+    """Generate examples as dicts."""
+    beam = tfds.core.lazy_imports.apache_beam
     h5py = tfds.core.lazy_imports.h5py
-    filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
-    with tempfile.TemporaryDirectory() as tmpdirname:
-      for filename in filenames:
+
+    def _process_example(filename):
+      """Converts one video from hdf5 format."""
+      with tempfile.TemporaryDirectory() as tmpdirname:
         hd5_path = filename
         with h5py.File(hd5_path) as hf:
           video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
-          video_path = os.path.join(tmpdirname, 'video.mp4')
-          with tf.io.gfile.GFile(video_path, 'wb') as f:
-            f.write(video_bytes)
           states = hf['env']['state'][:].astype(np.float32)
           states = np.pad(
               states, ((0, 0), (0, STATES_DIM-states.shape[1])), 'constant')
@@ -196,11 +196,17 @@ class Robonet(tfds.core.GeneratorBasedBuilder):
               actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
 
         features = {
-            'video': video_path,
+            'video': video_bytes,
             'actions': actions,
             'states': states,
         }
+        return os.path.basename(filename), features
 
-        yield os.path.basename(filename), features
+    filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
+    return (
+        pipeline
+        | beam.Create(filenames)
+        | beam.Map(_process_example)
+    )
 
 
