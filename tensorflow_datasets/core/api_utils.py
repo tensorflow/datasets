@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """API utilities."""
 
 from __future__ import absolute_import
@@ -86,5 +87,5 @@ def getargspec(fn):
   if six.PY3:
     spec = inspect.getfullargspec(fn)
   else:
-    spec = inspect.getargspec(fn)
+    spec = inspect.getargspec(fn)  # pylint: disable=deprecated-method
   return spec

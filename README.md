@@ -6,15 +6,24 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
 
 * [List of datasets](https://www.tensorflow.org/datasets/catalog/overview)
-* [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
-* Guides
-  * [Overview](https://www.tensorflow.org/datasets/overview)
-  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+* Getting started:
+  * [Introduction](https://www.tensorflow.org/datasets/overview) ([Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb))
+  * [End-to-end example with Keras](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/keras_example.ipynb)
+* Features & performances:
   * [Using splits and slicing API](https://www.tensorflow.org/datasets/splits)
+  * [Performance advice](https://www.tensorflow.org/datasets/performances)
+  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+  * [Feature decoding](https://www.tensorflow.org/datasets/decode)
+  * [Store your dataset on GCS](https://www.tensorflow.org/datasets/gcs)
+* Add your dataset:
   * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
-  * [Add a huge dataset (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+  * [Add a huge dataset with Beam (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 
+Note: [`tf.data`](https://www.tensorflow.org/guide/data) is a builtin library in
+TensorFlow which builds efficient data pipelines.
+[TFDS](https://www.tensorflow.org/datasets) (this library) uses `tf.data` to
+build an input pipeline when you load a dataset.
 
 **Table of Contents**
 
@@ -49,16 +58,13 @@ import tensorflow as tf
 
 # Here we assume Eager mode is enabled (TF2), but tfds also works in Graph mode.
 
-# See available datasets
-print(tfds.list_builders())
-
 # Construct a tf.data.Dataset
-ds_train = tfds.load(name="mnist", split="train", shuffle_files=True)
+ds_train = tfds.load('mnist', split='train', shuffle_files=True)
 
 # Build your input pipeline
 ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
 for features in ds_train.take(1):
-  image, label = features["image"], features["label"]
+  image, label = features['image'], features['label']
 ```
 
 Try it interactively in a
@@ -70,9 +76,9 @@ All datasets are implemented as subclasses of `tfds.core.DatasetBuilder`. TFDS
 has two entry points:
 
 *   `tfds.builder`: Returns the `tfds.core.DatasetBuilder` instance, giving
-     control over `builder.download_and_prepate()` and
+     control over `builder.download_and_prepare()` and
      `builder.as_dataset()`.
-*   `tfds.load`: Convenience wrapper which hides the `download_and_prepate` and
+*   `tfds.load`: Convenience wrapper which hides the `download_and_prepare` and
     `as_dataset` calls, and directly returns the `tf.data.Dataset`.
 
 ```python

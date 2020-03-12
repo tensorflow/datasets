@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Feature connector.
 
 FeatureConnector is a way of abstracting what data is returned by the

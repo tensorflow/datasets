@@ -28,7 +28,7 @@ and collected by the Makerere AI research lab.
 *   **Dataset size**: `171.63 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 *   **Splits**:
 
 Split        | Examples
@@ -46,7 +46,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 

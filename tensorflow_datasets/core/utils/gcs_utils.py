@@ -13,12 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Utilities for accessing TFDS GCS buckets."""
 
+import concurrent.futures
 import posixpath
 from xml.etree import ElementTree
 
-import concurrent.futures
 import requests
 import tensorflow.compat.v2 as tf
 

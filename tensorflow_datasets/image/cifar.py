@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CIFAR datasets."""
 
 from __future__ import absolute_import
@@ -44,13 +45,7 @@ _CITATION = """\
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.1", experiments={tfds.core.Experiment.METADATA: True}
-      ),
-  ]
+  VERSION = tfds.core.Version("3.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -136,13 +131,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.1", experiments={tfds.core.Experiment.METADATA: True}
-      ),
-  ]
+  VERSION = tfds.core.Version("3.0.1")
 
   @property
   def _cifar_info(self):

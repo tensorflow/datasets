@@ -196,6 +196,8 @@ toc:
     title: amazon_us_reviews
   - path: /datasets/catalog/forest_fires
     title: forest_fires
+  - path: /datasets/catalog/german_credit_numeric
+    title: german_credit_numeric
   - path: /datasets/catalog/higgs
     title: higgs
   - path: /datasets/catalog/iris
@@ -318,6 +320,8 @@ toc:
     title: bair_robot_pushing_small
   - path: /datasets/catalog/moving_mnist
     title: moving_mnist
+  - path: /datasets/catalog/robonet
+    title: robonet
   - path: /datasets/catalog/starcraft_video
     title: starcraft_video
   - path: /datasets/catalog/ucf101

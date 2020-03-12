@@ -49,12 +49,12 @@ in order to guarantee reproducible results:
     You can download the images from
     https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
     Please look at the source file (cbis_ddsm.py) to see the instructions
-    on how to conver them into png (using dcmj2pnm).
+    on how to convert them into png (using dcmj2pnm).
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

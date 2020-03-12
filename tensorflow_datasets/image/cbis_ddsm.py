@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CBIS-DDSM mammography dataset."""
 
 from __future__ import absolute_import
@@ -136,7 +137,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   You can download the images from
   https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
   Please look at the source file (cbis_ddsm.py) to see the instructions
-  on how to conver them into png (using dcmj2pnm).
+  on how to convert them into png (using dcmj2pnm).
   """
 
   BUILDER_CONFIGS = [

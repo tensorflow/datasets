@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for bounding_boxes."""
 
 from __future__ import absolute_import
@@ -23,7 +24,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class BBoxFeatureTest(testing.FeatureExpectationsTestCase):

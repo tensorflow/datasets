@@ -66,7 +66,7 @@ Split   | Examples
 'train' | 79,740
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('documents', 'title')`
 
 ## reddit_tifu/long
@@ -79,5 +79,5 @@ Split   | Examples
 'train' | 42,139
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('documents', 'tldr')`

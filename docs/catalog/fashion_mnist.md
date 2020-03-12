@@ -21,13 +21,12 @@ set of 60,000 examples and a test set of 10,000 examples. Each example is a
 *   **Source code**:
     [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 *   **Versions**:
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`3.0.1`** (default): No release notes.
 *   **Download size**: `29.45 MiB`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `36.42 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -44,7 +43,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 
