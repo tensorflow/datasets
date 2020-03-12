@@ -27,7 +27,7 @@ def image_process(filepath):
   filepath: path of the images to get processed
   """
   image = np.array(PIL.Image.open(filepath))
-  if image.dtype != 'bool':
+  if image.dtype != np.bool:
     grey = int(hash(filepath) % 255)
     image = np.ones_like(image)*grey
     image = PIL.Image.fromarray(image)
