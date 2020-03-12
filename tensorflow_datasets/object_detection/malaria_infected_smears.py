@@ -15,10 +15,6 @@
 
 """Malaria Infected Human Blood Smears Dataset"""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow_datasets.public_api as tfds
 import tensorflow.compat.v2 as tf
 import json
@@ -141,9 +137,3 @@ class MalariaInfectedSmears(tfds.core.GeneratorBasedBuilder):
           "pathname":image_path,
           "objects":objects,
         }
-
-  
-
-
-  
-
