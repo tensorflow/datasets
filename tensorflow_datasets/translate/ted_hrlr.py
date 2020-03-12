@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """TED talk high/low-resource paired language data set from Qi, et al. 2018."""
 
 from __future__ import absolute_import

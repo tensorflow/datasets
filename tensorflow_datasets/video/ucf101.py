@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """UCF-101 dataset from https://www.crcv.ucf.edu/data/UCF101.php."""
 
 from __future__ import absolute_import
