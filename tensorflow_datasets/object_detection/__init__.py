@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.object_detection.coco import Coco
 from tensorflow_datasets.object_detection.kitti import Kitti
+from tensorflow_datasets.object_detection.malaria_infected_smears import MalariaInfectedSmears 
 from tensorflow_datasets.object_detection.open_images import OpenImagesV4
 from tensorflow_datasets.object_detection.voc import Voc
 from tensorflow_datasets.object_detection.wider_face import WiderFace
