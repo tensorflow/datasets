@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """So2SAT remote sensing dataset."""
 
 from __future__ import absolute_import
@@ -68,7 +69,10 @@ class So2satConfig(tfds.core.BuilderConfig):
 
     v2 = tfds.core.Version(
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-    super(So2satConfig, self).__init__(version=v2, **kwargs)
+    v001 = tfds.core.Version(
+        '0.0.1', experiments={tfds.core.Experiment.S3: False})
+    super(So2satConfig, self).__init__(
+        version=v2, supported_versions=[v001], **kwargs)
     self.selection = selection
 
 

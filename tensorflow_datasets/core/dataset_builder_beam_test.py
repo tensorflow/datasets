@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
 from __future__ import absolute_import
@@ -34,7 +35,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):

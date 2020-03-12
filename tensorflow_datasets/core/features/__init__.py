@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """`tfds.features.FeatureConnector` API defining feature types."""
 
 from tensorflow_datasets.core.features import text

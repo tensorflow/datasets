@@ -85,7 +85,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('cs', 'en')`
 
 ## wmt14_translate/de-en
@@ -109,7 +109,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
 
 ## wmt14_translate/fr-en
@@ -133,7 +133,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fr', 'en')`
 
 ## wmt14_translate/hi-en
@@ -157,7 +157,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('hi', 'en')`
 
 ## wmt14_translate/ru-en
@@ -182,5 +182,5 @@ Translation({
 ```
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`

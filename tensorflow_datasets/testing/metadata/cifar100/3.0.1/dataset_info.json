@@ -1,0 +1,127 @@
+{
+  "citation": "@TECHREPORT{Krizhevsky09learningmultiple,\n    author = {Alex Krizhevsky},\n    title = {Learning multiple layers of features from tiny images},\n    institution = {},\n    year = {2009}\n}\n",
+  "description": "This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a \"fine\" label (the class to which it belongs) and a \"coarse\" label (the superclass to which it belongs).",
+  "downloadSize": "168513733",
+  "location": {
+    "urls": [
+      "https://www.cs.toronto.edu/~kriz/cifar.html"
+    ]
+  },
+  "name": "cifar100",
+  "schema": {
+    "feature": [
+      {
+        "name": "coarse_label",
+        "type": "INT"
+      },
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            },
+            {
+              "size": "32"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "22891198",
+      "numShards": "1",
+      "shardLengths": [
+        "10000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "coarse_label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 19.0
+            }
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 99.0
+            }
+          }
+        ],
+        "numExamples": "10000"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "114184082",
+      "numShards": "1",
+      "shardLengths": [
+        "50000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "coarse_label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 19.0
+            }
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 99.0
+            }
+          }
+        ],
+        "numExamples": "50000"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "3.0.1"
+}

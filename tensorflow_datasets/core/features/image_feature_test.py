@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.features.image_feature."""
 
 from __future__ import absolute_import
@@ -27,7 +28,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 randint = np.random.randint

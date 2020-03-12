@@ -85,7 +85,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('cs', 'en')`
 
 ## wmt17_translate/de-en
@@ -109,7 +109,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
 
 ## wmt17_translate/fi-en
@@ -133,7 +133,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fi', 'en')`
 
 ## wmt17_translate/lv-en
@@ -157,7 +157,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('lv', 'en')`
 
 ## wmt17_translate/ru-en
@@ -181,7 +181,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`
 
 ## wmt17_translate/tr-en
@@ -205,7 +205,7 @@ Translation({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('tr', 'en')`
 
 ## wmt17_translate/zh-en
@@ -230,5 +230,5 @@ Translation({
 ```
 
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('zh', 'en')`

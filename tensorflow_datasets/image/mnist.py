@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """MNIST, Fashion MNIST, KMNIST and EMNIST."""
 
 from __future__ import absolute_import
@@ -95,13 +96,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.1", experiments={tfds.core.Experiment.METADATA: True}
-      ),
-  ]
+  VERSION = tfds.core.Version("3.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(

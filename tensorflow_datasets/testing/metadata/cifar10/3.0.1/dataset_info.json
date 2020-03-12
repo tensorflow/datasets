@@ -1,0 +1,105 @@
+{
+  "citation": "@TECHREPORT{Krizhevsky09learningmultiple,\n    author = {Alex Krizhevsky},\n    title = {Learning multiple layers of features from tiny images},\n    institution = {},\n    year = {2009}\n}\n",
+  "description": "The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.",
+  "downloadSize": "170052171",
+  "location": {
+    "urls": [
+      "https://www.cs.toronto.edu/~kriz/cifar.html"
+    ]
+  },
+  "name": "cifar10",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            },
+            {
+              "size": "32"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "22912469",
+      "numShards": "1",
+      "shardLengths": [
+        "10000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "10000"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "114550776",
+      "numShards": "1",
+      "shardLengths": [
+        "50000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "50000"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "3.0.1"
+}

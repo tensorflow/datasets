@@ -34,7 +34,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('lr', 'hr')`
 *   **Citation**:
 

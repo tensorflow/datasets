@@ -150,7 +150,7 @@ ${builder.info.features}
 
 <%def name="display_supervised(builder)">\
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `${str(builder.info.supervised_keys)}`
 </%def>
 

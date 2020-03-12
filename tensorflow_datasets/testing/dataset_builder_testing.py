@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
 from __future__ import absolute_import
@@ -140,7 +141,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @classmethod
   def setUpClass(cls):
-    tf.compat.v1.enable_eager_execution()
+    tf.enable_v2_behavior()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
     # Check class has the right attributes
@@ -350,35 +351,46 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 def checksum(example):
   """Computes the md5 for a given example."""
 
-  def _bytes_flatten(element):
+  def _bytes_flatten(flat_str, element):
     """Recursively flatten an element to its byte representation."""
-    ret = "".encode("utf-8")
     if isinstance(element, numbers.Number):
       # In python3, bytes(-3) is not allowed (or large numbers),
       # so convert to str to avoid problems.
       element = str(element)
     if isinstance(element, dict):
       for k, v in sorted(element.items()):
-        ret += k.encode("utf-8")
-        ret += _bytes_flatten(v)
+        flat_str.append(k)
+        _bytes_flatten(flat_str, v)
     elif isinstance(element, str):
       if hasattr(element, "decode"):
         # Python2 considers bytes to be str, but are almost always latin-1
         # encoded bytes here. Extra step needed to avoid DecodeError.
         element = element.decode("latin-1")
-      element = element.encode("utf-8")
-      ret += element
+      flat_str.append(element)
     elif isinstance(element,
                     (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
-      ret += str(element.to_list()).encode("utf-8")
+      flat_str.append(str(element.to_list()))
     elif isinstance(element, np.ndarray):
-      ret += element.tobytes()
+      # tf.Tensor() returns np.array of dtype object, which don't work
+      # with x.to_bytes(). So instead convert numpy into list.
+      if element.dtype.type is np.object_:
+        flat_str.append(str(tuple(element.shape)))
+        flat_str.append(str(list(element.ravel())))
+      else:
+        flat_str.append(element.tobytes())
     else:
-      ret += bytes(element)
-    return ret
+      flat_str.append(bytes(element))
+    return flat_str
+
+  flat_str = _bytes_flatten([], example)
+  flat_bytes = [
+      s.encode("utf-8") if not isinstance(s, bytes) else s
+      for s in flat_str
+  ]
+  flat_bytes = b"".join(flat_bytes)
 
   hash_ = hashlib.md5()
-  hash_.update(_bytes_flatten(example))
+  hash_.update(flat_bytes)
   return hash_.hexdigest()
 
 

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """AbstractReasoning dataset test."""
 from tensorflow_datasets.image import abstract_reasoning
 import tensorflow_datasets.testing as tfds_test
