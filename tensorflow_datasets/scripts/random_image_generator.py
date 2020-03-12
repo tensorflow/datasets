@@ -27,12 +27,13 @@ def image_process(filepath):
   filepath: path of the images to get processed
   """
   image = np.array(PIL.Image.open(filepath))
-  grey = int(hash(filepath) % 255)
-  image = np.ones_like(image)*grey
-  image = PIL.Image.fromarray(image)
-  if image.mode == 'RGBA':
-    image = image.convert('RGB')
-  image.save(filepath)
+  if image.dtype != 'bool':
+    grey = int(hash(filepath) % 255)
+    image = np.ones_like(image)*grey
+    image = PIL.Image.fromarray(image)
+    if image.mode == 'RGBA':
+      image = image.convert('RGB')
+    image.save(filepath)
 
 
 
