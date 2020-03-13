@@ -5,6 +5,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 import os
+import sys
 import tempfile
 import tarfile
 import zipfile
@@ -17,7 +18,8 @@ import absl.flags
 FLAGS = absl.flags.FLAGS
 
 absl.flags.DEFINE_string("dir_path",
-                         "data/fake_examples",
+                         "datasets\tensorflow_datasets\
+                         testing\test_data\fake_examples",
                          "path to the directory which contains files")
 
 def image_process(filepath):
@@ -26,6 +28,7 @@ def image_process(filepath):
   Args:
   filepath: path of the images to get processed
   """
+  original_image_size = sys.getsizeof(filepath)
   image = np.array(PIL.Image.open(filepath))
   if image.dtype != np.bool:
     grey = int(hash(filepath) % 255)
@@ -34,6 +37,9 @@ def image_process(filepath):
     if image.mode == 'RGBA':
       image = image.convert('RGB')
     image.save(filepath)
+    compressed_image_size = sys.getsizeof(filepath)
+    if compressed_image_size > original_image_size:
+      image.save(filepath, 'png')
 
 
 
