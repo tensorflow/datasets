@@ -20,12 +20,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import Type, TypeVar
+
 import importlib
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
 
-def _try_import(module_name):
+T = TypeVar('T', bound='LazyImporter')
+
+def _try_import(module_name: str) -> object:
   """Try importing a module, with an informative error message on failure."""
   try:
     mod = importlib.import_module(module_name)
@@ -48,57 +52,57 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def apache_beam(cls):
+  def apache_beam(cls: Type[T]) -> object:
     return _try_import("apache_beam")
 
   @utils.classproperty
   @classmethod
-  def crepe(cls):
+  def crepe(cls: Type[T]) -> object:
     return _try_import("crepe")
 
   @utils.classproperty
   @classmethod
-  def cv2(cls):
+  def cv2(cls: Type[T]) -> object:
     return _try_import("cv2")  # pylint: disable=unreachable
 
   @utils.classproperty
   @classmethod
-  def h5py(cls):
+  def h5py(cls: Type[T]) -> object:
     return _try_import("h5py")
 
   @utils.classproperty
   @classmethod
-  def langdetect(cls):
+  def langdetect(cls: Type[T]) -> object:
     return _try_import("langdetect")
 
   @utils.classproperty
   @classmethod
-  def librosa(cls):
+  def librosa(cls: Type[T]) -> object:
     return _try_import("librosa")
 
   @utils.classproperty
   @classmethod
-  def matplotlib(cls):
+  def matplotlib(cls: Type[T]) -> object:
     return _try_import("matplotlib")
 
   @utils.classproperty
   @classmethod
-  def mwparserfromhell(cls):
+  def mwparserfromhell(cls: Type[T]) -> object:
     return _try_import("mwparserfromhell")
 
   @utils.classproperty
   @classmethod
-  def nltk(cls):
+  def nltk(cls: Type[T]) -> object:
     return _try_import("nltk")
 
   @utils.classproperty
   @classmethod
-  def pandas(cls):
+  def pandas(cls: Type[T]) -> object:
     return _try_import("pandas")
 
   @utils.classproperty
   @classmethod
-  def PIL_Image(cls):  # pylint: disable=invalid-name
+  def PIL_Image(cls: Type[T]) -> object:  # pylint: disable=invalid-name
     # TiffImagePlugin need to be activated explicitly on some systems
     # https://github.com/python-pillow/Pillow/blob/5.4.x/src/PIL/Image.py#L407
     _try_import("PIL.TiffImagePlugin")
@@ -106,24 +110,24 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def pretty_midi(cls):
+  def pretty_midi(cls: Type[T]) -> object:
     return _try_import("pretty_midi")
 
   @utils.classproperty
   @classmethod
-  def pydub(cls):
+  def pydub(cls: Type[T]) -> object:
     return _try_import("pydub")
 
   @utils.classproperty
   @classmethod
-  def scipy(cls):
+  def scipy(cls: Type[T]) -> object:
     _try_import("scipy.io")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 
   @utils.classproperty
   @classmethod
-  def skimage(cls):
+  def skimage(cls: Type[T]) -> object:
     _try_import("skimage.color")
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
@@ -131,23 +135,23 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def tensorflow_io(cls):
+  def tensorflow_io(cls: Type[T]) -> object:
     return _try_import("tensorflow_io")
 
   @utils.classproperty
   @classmethod
-  def tldextract(cls):
+  def tldextract(cls: Type[T]) -> object:
     return _try_import("tldextract")
 
   @utils.classproperty
   @classmethod
-  def os(cls):
+  def os(cls: Type[T]) -> object:
     """For testing purposes only."""
     return _try_import("os")
 
   @utils.classproperty
   @classmethod
-  def test_foo(cls):
+  def test_foo(cls: Type[T]) -> object:
     """For testing purposes only."""
     return _try_import("test_foo")
 
