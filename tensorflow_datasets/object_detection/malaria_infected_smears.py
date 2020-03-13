@@ -15,10 +15,11 @@
 
 """Malaria Infected Human Blood Smears Dataset"""
 
-import tensorflow_datasets.public_api as tfds
-import tensorflow.compat.v2 as tf
 import json
 import os
+import tensorflow.compat.v2 as tf
+import tensorflow_datasets.public_api as tfds
+
 
 _CITATION = """\
 @misc{BBBC041v1,
@@ -42,13 +43,13 @@ hospital, indicating stage of development or marked as difficult.
 
 _URL = "https://data.broadinstitute.org/bbbc/BBBC041/malaria.zip"
 _LABELS = (
-  'red blood cell',
-  'leukocyte',
-  'gametocyte',
-  'ring',
-  'trophozoite',
-  'schizont',
-  'difficult',
+    'red blood cell',
+    'leukocyte',
+    'gametocyte',
+    'ring',
+    'trophozoite',
+    'schizont',
+    'difficult',
 )
 
 def _generate_example_objects(data_dict):
@@ -59,22 +60,22 @@ def _generate_example_objects(data_dict):
   objects = data_dict['objects']
 
   for obj in objects:
-      ymin = obj['bounding_box']['minimum']['r']
-      xmin = obj['bounding_box']['minimum']['c']
+    ymin = obj['bounding_box']['minimum']['r']
+    xmin = obj['bounding_box']['minimum']['c']
 
-      ymax = obj['bounding_box']['maximum']['r']
-      xmax = obj['bounding_box']['maximum']['c']
+    ymax = obj['bounding_box']['maximum']['r']
+    xmax = obj['bounding_box']['maximum']['c']
 
-      label = obj['category']
+    label = obj['category']
 
-      bbox = tfds.features.BBox(
+    bbox = tfds.features.BBox(
         ymin / height, xmin / width, ymax / height, xmax / width
-      )
+    )
 
-      yield {
+    yield {
         "bbox": bbox,
         "label": label,
-      }
+    }
 
 class MalariaInfectedSmears(tfds.core.GeneratorBasedBuilder):
   """Malaria Infected Human Blood Smears Dataset"""
@@ -91,8 +92,8 @@ class MalariaInfectedSmears(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "pathname": tfds.features.Text(),
             "objects": tfds.features.Sequence({
-              "bbox": tfds.features.BBoxFeature(),
-              "label": tfds.features.ClassLabel(names=_LABELS)
+                "bbox": tfds.features.BBoxFeature(),
+                "label": tfds.features.ClassLabel(names=_LABELS)
             })
         }),
         # Homepage of the dataset for documentation
@@ -109,15 +110,15 @@ class MalariaInfectedSmears(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-              "path": path,
-              "data": "training.json"
+                "path": path,
+                "data": "training.json"
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-              "path": path,
-              "data": "test.json"
+                "path": path,
+                "data": "test.json"
             },
         ),
     ]
@@ -133,7 +134,7 @@ class MalariaInfectedSmears(tfds.core.GeneratorBasedBuilder):
         objects = list(_generate_example_objects(val))
 
         yield i, {
-          "image":image,
-          "pathname":image_path,
-          "objects":objects,
+            "image": image,
+            "pathname": image_path,
+            "objects": objects,
         }
