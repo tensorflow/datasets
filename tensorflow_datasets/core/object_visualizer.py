@@ -103,11 +103,13 @@ def build(ds_info, ds, **kwargs):
 
     image_key = image_keys[0]
 
+  # Infer the sequence keys since BBox are wrapped inside them
   sequence_keys = [
       k for k, feature in ds_info.features.items()
       if isinstance(feature, features_lib.Sequence)
   ]
 
+  # Infer the BBox keys in the sequence feature connectors
   bbox_keys = []
   for key in sequence_keys:
     if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
@@ -119,11 +121,14 @@ def build(ds_info, ds, **kwargs):
         sequence_key = key
         break
 
+  # Infer the label keys in the sequence feature connector (BBox Labels)
   label_keys = [
       k for k, feature in ds_info.features[sequence_key].items()
       if isinstance(feature, features_lib.ClassLabel)
   ]
 
+  # Taking first label key since some datasets have multiple label keys
+  # for BBoxes as in voc dataset
   label_key = label_keys[0] if len(label_keys) > 0 else None
   if not label_key:
     logging.info("Was not able to auto-infer label.")
