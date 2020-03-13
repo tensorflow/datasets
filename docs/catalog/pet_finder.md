@@ -39,24 +39,24 @@ Split   | Examples
 FeaturesDict({
     'PetID': Text(shape=(), dtype=tf.string),
     'attributes': FeaturesDict({
-        'Age': Tensor(shape=(), dtype=tf.int64),
-        'Breed1': Tensor(shape=(), dtype=tf.int64),
-        'Breed2': Tensor(shape=(), dtype=tf.int64),
-        'Color1': Tensor(shape=(), dtype=tf.int64),
-        'Color2': Tensor(shape=(), dtype=tf.int64),
-        'Color3': Tensor(shape=(), dtype=tf.int64),
-        'Dewormed': Tensor(shape=(), dtype=tf.int64),
-        'Fee': Tensor(shape=(), dtype=tf.int64),
-        'FurLength': Tensor(shape=(), dtype=tf.int64),
-        'Gender': Tensor(shape=(), dtype=tf.int64),
-        'Health': Tensor(shape=(), dtype=tf.int64),
-        'MaturitySize': Tensor(shape=(), dtype=tf.int64),
-        'Quantity': Tensor(shape=(), dtype=tf.int64),
-        'State': Tensor(shape=(), dtype=tf.int64),
-        'Sterilized': Tensor(shape=(), dtype=tf.int64),
-        'Type': Tensor(shape=(), dtype=tf.int64),
-        'Vaccinated': Tensor(shape=(), dtype=tf.int64),
-        'VideoAmt': Tensor(shape=(), dtype=tf.int64),
+        'Age': tf.int64,
+        'Breed1': tf.int64,
+        'Breed2': tf.int64,
+        'Color1': tf.int64,
+        'Color2': tf.int64,
+        'Color3': tf.int64,
+        'Dewormed': tf.int64,
+        'Fee': tf.int64,
+        'FurLength': tf.int64,
+        'Gender': tf.int64,
+        'Health': tf.int64,
+        'MaturitySize': tf.int64,
+        'Quantity': tf.int64,
+        'State': tf.int64,
+        'Sterilized': tf.int64,
+        'Type': tf.int64,
+        'Vaccinated': tf.int64,
+        'VideoAmt': tf.int64,
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
@@ -64,7 +64,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('attributes', 'label')`
 *   **Citation**:
 

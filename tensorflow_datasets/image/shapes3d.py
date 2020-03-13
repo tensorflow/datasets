@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Shapes3D dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
 
 import h5py
 import numpy as np
@@ -157,8 +157,6 @@ def _load_data(filepath):
     # and not the class labels.
     values_array = np.array(h5dataset["labels"])
   return image_array, values_array
-
-
 
 
 def _discretize(a):

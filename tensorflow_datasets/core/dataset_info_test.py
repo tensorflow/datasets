@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_info."""
 
 from __future__ import absolute_import
@@ -31,13 +32,13 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
-                         "mnist", "3.0.0")
+                         "mnist", "3.0.1")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
-                                   "dataset_info", "mnist_unlabeled", "3.0.0")
+                                   "dataset_info", "mnist_unlabeled", "3.0.1")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
@@ -310,7 +311,7 @@ class DatasetInfoTest(testing.TestCase):
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='mnist',
-    version=3.0.0,
+    version=3.0.1,
     description='The MNIST database of handwritten digits.',
     homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     features=FeaturesDict({

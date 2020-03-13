@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """To write records into sharded tfrecord files."""
 from __future__ import absolute_import
 from __future__ import division
@@ -231,7 +232,7 @@ class Writer(object):
 
 # Make a long out of int. Necessary for Beam on Py2.
 if six.PY2:
-  _long_for_py2 = long  # pylint: disable=invalid-name
+  _long_for_py2 = long  # pylint: disable=invalid-name,undefined-variable
 else:
   _long_for_py2 = lambda int_val: int_val
 

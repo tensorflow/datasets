@@ -27,7 +27,6 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.2`: No release notes.
 *   **Download size**: `216.34 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -51,7 +50,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

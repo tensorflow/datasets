@@ -12,7 +12,7 @@
 
 # `abstract_reasoning`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
@@ -36,7 +36,6 @@ a particular matrix.
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.2`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
@@ -63,13 +62,13 @@ FeaturesDict({
     'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'meta_target': Tensor(shape=(12,), dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=(4, 12), dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

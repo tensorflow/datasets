@@ -20,25 +20,12 @@ Sinhala-English.
 *   **Source code**:
     [`tfds.translate.flores.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
 *   **Versions**:
-    *   **`1.0.0`** (default): New split API
+    *   **`1.1.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.3`: No release notes.
-*   **Download size**: `984.65 KiB`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `1.47 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-*   **Features**:
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ne': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('ne', 'en')`
+    Yes
 *   **Citation**:
 
 ```
@@ -56,6 +43,7 @@ Translation({
 
 *   **Config description**: Translation dataset from ne to en, uses encoder
     plain_text.
+*   **Dataset size**: `1.89 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -63,13 +51,39 @@ Split        | Examples
 'test'       | 2,835
 'validation' | 2,559
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ne': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('ne', 'en')`
+
 ## flores/sien_plain_text
 
 *   **Config description**: Translation dataset from si to en, uses encoder
     plain_text.
+*   **Dataset size**: `2.05 MiB`
 *   **Splits**:
 
 Split        | Examples
 :----------- | -------:
 'test'       | 2,766
 'validation' | 2,898
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'si': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('si', 'en')`

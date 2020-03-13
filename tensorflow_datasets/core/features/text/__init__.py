@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Text utilities.
 
 `tfds` includes a set of `TextEncoder`s as well as a `Tokenizer` to enable

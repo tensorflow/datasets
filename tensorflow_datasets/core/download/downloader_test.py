@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for downloader."""
 
 from __future__ import absolute_import
@@ -128,8 +129,19 @@ class DownloaderTest(testing.TestCase):
   def test_kaggle_api(self):
     fname = 'a.csv'
     with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
-      promise = self.downloader.download('kaggle://some-competition/a.csv',
-                                         self.tmp_dir)
+      # Testing Competition Downloader
+      promise = self.downloader.download(
+          'kaggle://competition/some-competition/a.csv',
+          self.tmp_dir)
+      _, dl_size = promise.get()
+      self.assertEqual(dl_size, len(fname))
+      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
+        self.assertEqual(fname, f.read())
+
+      # Testing Dataset Downloader
+      promise = self.downloader.download(
+          'kaggle://dataset/some-author/some-dataset/a.csv',
+          self.tmp_dir)
       _, dl_size = promise.get()
       self.assertEqual(dl_size, len(fname))
       with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:

@@ -1,12 +1,13 @@
 {
-  "citation": "@article{lecun2010mnist,\n  title={MNIST handwritten digit database},\n  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},\n  journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},\n  volume={2},\n  year={2010}\n}\n",
-  "description": "The MNIST database of handwritten digits.",
+  "citation": "  @online{clanuwat2018deep,\n  author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},\n  title        = {Deep Learning for Classical Japanese Literature},\n  date         = {2018-12-03},\n  year         = {2018},\n  eprintclass  = {cs.CV},\n  eprinttype   = {arXiv},\n  eprint       = {cs.CV/1812.01718},\n}\n",
+  "description": "Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale, 70,000 images), provided in the original MNIST format as well as a NumPy format. Since MNIST restricts us to 10 classes, we chose one character to represent each of the 10 rows of Hiragana when creating Kuzushiji-MNIST.",
+  "downloadSize": "21240888",
   "location": {
     "urls": [
-      "https://storage.googleapis.com/cvdf-datasets/mnist/"
+      "http://codh.rois.ac.jp/kmnist/index.html.en"
     ]
   },
-  "name": "mnist",
+  "name": "kmnist",
   "schema": {
     "feature": [
       {
@@ -32,22 +33,21 @@
       }
     ]
   },
-  "downloadSize": "2000",
   "splits": [
     {
       "name": "test",
+      "numBytes": "4765343",
       "numShards": "1",
       "shardLengths": [
-        "20"
+        "10000"
       ],
-      "numBytes": "11594722",
       "statistics": {
         "features": [
           {
             "name": "image",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "20"
+                "numNonMissing": "10000"
               },
               "max": 255.0
             }
@@ -56,20 +56,21 @@
             "name": "label",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "20"
+                "numNonMissing": "10000"
               },
               "max": 9.0
             }
           }
         ],
-        "numExamples": "20"
+        "numExamples": "10000"
       }
     },
     {
       "name": "train",
+      "numBytes": "28541739",
       "numShards": "1",
       "shardLengths": [
-        "20"
+        "60000"
       ],
       "statistics": {
         "features": [
@@ -77,7 +78,7 @@
             "name": "image",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "20"
+                "numNonMissing": "60000"
               },
               "max": 255.0
             }
@@ -86,13 +87,13 @@
             "name": "label",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "20"
+                "numNonMissing": "60000"
               },
               "max": 9.0
             }
           }
         ],
-        "numExamples": "20"
+        "numExamples": "60000"
       }
     }
   ],
@@ -100,8 +101,5 @@
     "input": "image",
     "output": "label"
   },
-  "version": "3.0.0",
-  "redistributionInfo": {
-    "license": "test license"
-  }
+  "version": "3.0.1"
 }

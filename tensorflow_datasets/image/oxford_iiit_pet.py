@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Oxford-IIIT pet dataset."""
 
 import os
@@ -37,8 +38,6 @@ _CITATION = """\
   year         = "2012",
 }
 """
-
-_NUM_SHARDS = 1
 
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 

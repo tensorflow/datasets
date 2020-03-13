@@ -10,7 +10,7 @@
 </div>
 # `celeb_a_hq`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
@@ -26,7 +26,6 @@ WARNING: This dataset currently requires you to prepare images on your own.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
@@ -45,16 +44,8 @@ Split   | Examples
 :------ | -------:
 'train' | 30,000
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
@@ -80,43 +71,131 @@ FeaturesDict({
 ## celeb_a_hq/1024 (default config)
 
 *   **Config description**: CelebaHQ images in 1024 x 1024 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/512
 
 *   **Config description**: CelebaHQ images in 512 x 512 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(512, 512, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/256
 
 *   **Config description**: CelebaHQ images in 256 x 256 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/128
 
 *   **Config description**: CelebaHQ images in 128 x 128 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/64
 
 *   **Config description**: CelebaHQ images in 64 x 64 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/32
 
 *   **Config description**: CelebaHQ images in 32 x 32 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/16
 
 *   **Config description**: CelebaHQ images in 16 x 16 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/8
 
 *   **Config description**: CelebaHQ images in 8 x 8 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/4
 
 *   **Config description**: CelebaHQ images in 4 x 4 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/2
 
 *   **Config description**: CelebaHQ images in 2 x 2 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## celeb_a_hq/1
 
 *   **Config description**: CelebaHQ images in 1 x 1 resolution
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+})
+```

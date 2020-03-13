@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Street View House Numbers (SVHN) Dataset, cropped version.
 """
 
@@ -77,7 +78,6 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(
                 filepath=output_files["test"],
             )),

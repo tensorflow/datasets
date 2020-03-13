@@ -19,6 +19,9 @@ modeling. This has almost one billion words in the training data.
     [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 *   **Source code**:
     [`tfds.text.lm1b.Lm1b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/lm1b.py)
+*   **Versions**:
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 *   **Download size**: `1.67 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -31,15 +34,8 @@ Split   | Examples
 'test'  | 306,688
 'train' | 30,301,028
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'text')`
 *   **Citation**:
 
@@ -68,34 +64,46 @@ FeaturesDict({
 ## lm1b/plain_text (default config)
 
 *   **Config description**: Plain text
-*   **Versions**:
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## lm1b/bytes
 
 *   **Config description**: Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
-*   **Versions**:
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
 
 ## lm1b/subwords8k
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
     vocab size
-*   **Versions**:
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.0.2`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
+})
+```
 
 ## lm1b/subwords32k
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
     32k vocab size
-*   **Versions**:
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.0.2`: No release notes.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
+})
+```

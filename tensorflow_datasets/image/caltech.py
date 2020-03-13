@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Caltech images dataset."""
 
 from __future__ import absolute_import
@@ -51,10 +52,6 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "1.1.0", experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -76,14 +73,12 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=5,
             gen_kwargs={
                 "images_dir_path": path,
                 "is_train_split": True,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=5,
             gen_kwargs={
                 "images_dir_path": path,
                 "is_train_split": False,

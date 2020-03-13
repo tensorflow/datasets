@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -53,10 +54,6 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
     self.assertEqual(dict(label_frequncies),
                      {'test': {'Archery': 1, 'Nunchucks': 1},
                       'train': {'Archery': 1, 'Nunchucks': 2}})
-
-
-class Ucf101S3Test(Ucf101Test):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

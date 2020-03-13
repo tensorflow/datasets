@@ -53,24 +53,24 @@ FeaturesDict({
         'real': Tensor(shape=(None,), dtype=tf.float32),
     }),
     'dtce': Tensor(shape=(None,), dtype=tf.float32),
-    'f0_hz': Tensor(shape=(), dtype=tf.float32),
-    'final_angle': Tensor(shape=(), dtype=tf.float32),
-    'final_radius': Tensor(shape=(), dtype=tf.float32),
-    'focus_cm': Tensor(shape=(), dtype=tf.float32),
-    'harmonic': Tensor(shape=(), dtype=tf.bool),
-    'height': Tensor(shape=(), dtype=tf.uint32),
-    'initial_angle': Tensor(shape=(), dtype=tf.float32),
-    'initial_radius': Tensor(shape=(), dtype=tf.float32),
-    'probe': Tensor(shape=(), dtype=tf.string),
-    'scanner': Tensor(shape=(), dtype=tf.string),
-    'target': Tensor(shape=(), dtype=tf.string),
-    'timestamp_id': Tensor(shape=(), dtype=tf.uint32),
-    'voltage': Tensor(shape=(), dtype=tf.float32),
-    'width': Tensor(shape=(), dtype=tf.uint32),
+    'f0_hz': tf.float32,
+    'final_angle': tf.float32,
+    'final_radius': tf.float32,
+    'focus_cm': tf.float32,
+    'harmonic': tf.bool,
+    'height': tf.uint32,
+    'initial_angle': tf.float32,
+    'initial_radius': tf.float32,
+    'probe': tf.string,
+    'scanner': tf.string,
+    'target': tf.string,
+    'timestamp_id': tf.uint32,
+    'voltage': tf.float32,
+    'width': tf.uint32,
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('das/dB', 'dtce')`
 *   **Citation**:
 

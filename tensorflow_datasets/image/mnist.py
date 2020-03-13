@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """MNIST, Fashion MNIST, KMNIST and EMNIST."""
 
 from __future__ import absolute_import
@@ -94,10 +95,6 @@ _EMNIST_CITATION = """\
 class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
-
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
@@ -234,10 +231,6 @@ class EMNISTConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             "3.0.0",
             "New split API (https://tensorflow.org/datasets/splits)"),
-        supported_versions=[
-            tfds.core.Version(
-                "1.0.1", experiments={tfds.core.Experiment.S3: False}),
-        ],
         **kwargs)
     self.class_number = class_number
     self.train_examples = train_examples
@@ -344,7 +337,6 @@ class EMNIST(MNIST):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs=dict(
                 num_examples=self.builder_config.train_examples,
                 data_path=extracted["train_data"],
@@ -352,7 +344,6 @@ class EMNIST(MNIST):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(
                 num_examples=self.builder_config.test_examples,
                 data_path=extracted["test_data"],

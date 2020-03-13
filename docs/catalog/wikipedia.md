@@ -23,9 +23,6 @@ cleaning to strip markdown and unwanted sections (references, etc.).
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.4`: No release notes.
-    *   `0.0.3`: No release notes.
-*   **Download size**: `44.09 KiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -39,7 +36,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
@@ -54,6 +51,7 @@ FeaturesDict({
 ## wikipedia/20190301.aa (default config)
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20190301 dump.
+*   **Download size**: `44.09 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -63,6 +61,7 @@ Split   | Examples
 ## wikipedia/20190301.ab
 
 *   **Config description**: Wikipedia dataset for ab, parsed from 20190301 dump.
+*   **Download size**: `1.31 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -73,6 +72,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ace, parsed from 20190301
     dump.
+*   **Download size**: `2.66 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -83,6 +83,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ady, parsed from 20190301
     dump.
+*   **Download size**: `349.43 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -92,6 +93,7 @@ Split   | Examples
 ## wikipedia/20190301.af
 
 *   **Config description**: Wikipedia dataset for af, parsed from 20190301 dump.
+*   **Download size**: `84.13 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -101,6 +103,7 @@ Split   | Examples
 ## wikipedia/20190301.ak
 
 *   **Config description**: Wikipedia dataset for ak, parsed from 20190301 dump.
+*   **Download size**: `377.84 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -111,6 +114,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for als, parsed from 20190301
     dump.
+*   **Download size**: `46.90 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -120,6 +124,7 @@ Split   | Examples
 ## wikipedia/20190301.am
 
 *   **Config description**: Wikipedia dataset for am, parsed from 20190301 dump.
+*   **Download size**: `6.54 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -129,6 +134,7 @@ Split   | Examples
 ## wikipedia/20190301.an
 
 *   **Config description**: Wikipedia dataset for an, parsed from 20190301 dump.
+*   **Download size**: `31.39 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -139,6 +145,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ang, parsed from 20190301
     dump.
+*   **Download size**: `3.77 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -148,6 +155,7 @@ Split   | Examples
 ## wikipedia/20190301.ar
 
 *   **Config description**: Wikipedia dataset for ar, parsed from 20190301 dump.
+*   **Download size**: `805.82 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -158,6 +166,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for arc, parsed from 20190301
     dump.
+*   **Download size**: `952.49 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -168,6 +177,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for arz, parsed from 20190301
     dump.
+*   **Download size**: `20.32 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -177,6 +187,7 @@ Split   | Examples
 ## wikipedia/20190301.as
 
 *   **Config description**: Wikipedia dataset for as, parsed from 20190301 dump.
+*   **Download size**: `19.06 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -187,6 +198,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ast, parsed from 20190301
     dump.
+*   **Download size**: `216.68 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -197,6 +209,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for atj, parsed from 20190301
     dump.
+*   **Download size**: `467.05 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -206,6 +219,7 @@ Split   | Examples
 ## wikipedia/20190301.av
 
 *   **Config description**: Wikipedia dataset for av, parsed from 20190301 dump.
+*   **Download size**: `3.61 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -215,6 +229,7 @@ Split   | Examples
 ## wikipedia/20190301.ay
 
 *   **Config description**: Wikipedia dataset for ay, parsed from 20190301 dump.
+*   **Download size**: `2.06 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -224,6 +239,7 @@ Split   | Examples
 ## wikipedia/20190301.az
 
 *   **Config description**: Wikipedia dataset for az, parsed from 20190301 dump.
+*   **Download size**: `163.04 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -234,6 +250,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for azb, parsed from 20190301
     dump.
+*   **Download size**: `50.59 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -243,6 +260,7 @@ Split   | Examples
 ## wikipedia/20190301.ba
 
 *   **Config description**: Wikipedia dataset for ba, parsed from 20190301 dump.
+*   **Download size**: `55.04 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -253,6 +271,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bar, parsed from 20190301
     dump.
+*   **Download size**: `30.14 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -263,6 +282,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bat-smg, parsed from 20190301
     dump.
+*   **Download size**: `4.61 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -273,6 +293,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20190301
     dump.
+*   **Download size**: `6.18 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -282,6 +303,7 @@ Split   | Examples
 ## wikipedia/20190301.be
 
 *   **Config description**: Wikipedia dataset for be, parsed from 20190301 dump.
+*   **Download size**: `192.23 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -292,6 +314,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for be-x-old, parsed from 20190301
     dump.
+*   **Download size**: `74.77 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -301,6 +324,7 @@ Split   | Examples
 ## wikipedia/20190301.bg
 
 *   **Config description**: Wikipedia dataset for bg, parsed from 20190301 dump.
+*   **Download size**: `326.20 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -310,6 +334,7 @@ Split   | Examples
 ## wikipedia/20190301.bh
 
 *   **Config description**: Wikipedia dataset for bh, parsed from 20190301 dump.
+*   **Download size**: `13.28 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -319,6 +344,7 @@ Split   | Examples
 ## wikipedia/20190301.bi
 
 *   **Config description**: Wikipedia dataset for bi, parsed from 20190301 dump.
+*   **Download size**: `424.88 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -329,6 +355,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bjn, parsed from 20190301
     dump.
+*   **Download size**: `2.09 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -338,6 +365,7 @@ Split   | Examples
 ## wikipedia/20190301.bm
 
 *   **Config description**: Wikipedia dataset for bm, parsed from 20190301 dump.
+*   **Download size**: `447.98 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -347,6 +375,7 @@ Split   | Examples
 ## wikipedia/20190301.bn
 
 *   **Config description**: Wikipedia dataset for bn, parsed from 20190301 dump.
+*   **Download size**: `145.04 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -356,6 +385,7 @@ Split   | Examples
 ## wikipedia/20190301.bo
 
 *   **Config description**: Wikipedia dataset for bo, parsed from 20190301 dump.
+*   **Download size**: `12.41 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -366,6 +396,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bpy, parsed from 20190301
     dump.
+*   **Download size**: `5.05 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -375,6 +406,7 @@ Split   | Examples
 ## wikipedia/20190301.br
 
 *   **Config description**: Wikipedia dataset for br, parsed from 20190301 dump.
+*   **Download size**: `49.14 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -384,6 +416,7 @@ Split   | Examples
 ## wikipedia/20190301.bs
 
 *   **Config description**: Wikipedia dataset for bs, parsed from 20190301 dump.
+*   **Download size**: `103.26 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -394,6 +427,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bug, parsed from 20190301
     dump.
+*   **Download size**: `1.76 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -404,6 +438,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for bxr, parsed from 20190301
     dump.
+*   **Download size**: `3.21 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -413,6 +448,7 @@ Split   | Examples
 ## wikipedia/20190301.ca
 
 *   **Config description**: Wikipedia dataset for ca, parsed from 20190301 dump.
+*   **Download size**: `849.65 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -423,6 +459,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20190301
     dump.
+*   **Download size**: `1.84 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -433,6 +470,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for cdo, parsed from 20190301
     dump.
+*   **Download size**: `3.22 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -442,6 +480,7 @@ Split   | Examples
 ## wikipedia/20190301.ce
 
 *   **Config description**: Wikipedia dataset for ce, parsed from 20190301 dump.
+*   **Download size**: `43.89 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -452,6 +491,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ceb, parsed from 20190301
     dump.
+*   **Download size**: `1.79 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -461,6 +501,7 @@ Split   | Examples
 ## wikipedia/20190301.ch
 
 *   **Config description**: Wikipedia dataset for ch, parsed from 20190301 dump.
+*   **Download size**: `684.97 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -471,6 +512,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for cho, parsed from 20190301
     dump.
+*   **Download size**: `25.99 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -481,6 +523,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for chr, parsed from 20190301
     dump.
+*   **Download size**: `651.25 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -491,6 +534,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for chy, parsed from 20190301
     dump.
+*   **Download size**: `325.90 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -501,6 +545,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ckb, parsed from 20190301
     dump.
+*   **Download size**: `22.16 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -510,6 +555,7 @@ Split   | Examples
 ## wikipedia/20190301.co
 
 *   **Config description**: Wikipedia dataset for co, parsed from 20190301 dump.
+*   **Download size**: `3.38 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -519,6 +565,7 @@ Split   | Examples
 ## wikipedia/20190301.cr
 
 *   **Config description**: Wikipedia dataset for cr, parsed from 20190301 dump.
+*   **Download size**: `259.71 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -529,6 +576,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for crh, parsed from 20190301
     dump.
+*   **Download size**: `4.01 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -538,6 +586,7 @@ Split   | Examples
 ## wikipedia/20190301.cs
 
 *   **Config description**: Wikipedia dataset for cs, parsed from 20190301 dump.
+*   **Download size**: `759.21 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -548,6 +597,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for csb, parsed from 20190301
     dump.
+*   **Download size**: `2.03 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -557,6 +607,7 @@ Split   | Examples
 ## wikipedia/20190301.cu
 
 *   **Config description**: Wikipedia dataset for cu, parsed from 20190301 dump.
+*   **Download size**: `631.49 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -566,6 +617,7 @@ Split   | Examples
 ## wikipedia/20190301.cv
 
 *   **Config description**: Wikipedia dataset for cv, parsed from 20190301 dump.
+*   **Download size**: `22.23 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -575,6 +627,7 @@ Split   | Examples
 ## wikipedia/20190301.cy
 
 *   **Config description**: Wikipedia dataset for cy, parsed from 20190301 dump.
+*   **Download size**: `64.37 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -584,6 +637,7 @@ Split   | Examples
 ## wikipedia/20190301.da
 
 *   **Config description**: Wikipedia dataset for da, parsed from 20190301 dump.
+*   **Download size**: `323.53 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -593,6 +647,7 @@ Split   | Examples
 ## wikipedia/20190301.de
 
 *   **Config description**: Wikipedia dataset for de, parsed from 20190301 dump.
+*   **Download size**: `4.97 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -603,6 +658,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for din, parsed from 20190301
     dump.
+*   **Download size**: `457.06 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -613,6 +669,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for diq, parsed from 20190301
     dump.
+*   **Download size**: `7.24 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -623,6 +680,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for dsb, parsed from 20190301
     dump.
+*   **Download size**: `3.54 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -633,6 +691,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for dty, parsed from 20190301
     dump.
+*   **Download size**: `4.95 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -642,6 +701,7 @@ Split   | Examples
 ## wikipedia/20190301.dv
 
 *   **Config description**: Wikipedia dataset for dv, parsed from 20190301 dump.
+*   **Download size**: `4.24 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -651,6 +711,7 @@ Split   | Examples
 ## wikipedia/20190301.dz
 
 *   **Config description**: Wikipedia dataset for dz, parsed from 20190301 dump.
+*   **Download size**: `360.01 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -660,6 +721,7 @@ Split   | Examples
 ## wikipedia/20190301.ee
 
 *   **Config description**: Wikipedia dataset for ee, parsed from 20190301 dump.
+*   **Download size**: `434.14 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -669,6 +731,7 @@ Split   | Examples
 ## wikipedia/20190301.el
 
 *   **Config description**: Wikipedia dataset for el, parsed from 20190301 dump.
+*   **Download size**: `324.40 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -679,6 +742,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for eml, parsed from 20190301
     dump.
+*   **Download size**: `7.72 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -688,6 +752,7 @@ Split   | Examples
 ## wikipedia/20190301.en
 
 *   **Config description**: Wikipedia dataset for en, parsed from 20190301 dump.
+*   **Download size**: `15.72 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -697,6 +762,7 @@ Split   | Examples
 ## wikipedia/20190301.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20190301 dump.
+*   **Download size**: `245.73 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -706,6 +772,7 @@ Split   | Examples
 ## wikipedia/20190301.es
 
 *   **Config description**: Wikipedia dataset for es, parsed from 20190301 dump.
+*   **Download size**: `2.93 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -715,6 +782,7 @@ Split   | Examples
 ## wikipedia/20190301.et
 
 *   **Config description**: Wikipedia dataset for et, parsed from 20190301 dump.
+*   **Download size**: `196.03 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -724,6 +792,7 @@ Split   | Examples
 ## wikipedia/20190301.eu
 
 *   **Config description**: Wikipedia dataset for eu, parsed from 20190301 dump.
+*   **Download size**: `180.35 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -734,6 +803,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ext, parsed from 20190301
     dump.
+*   **Download size**: `2.40 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -743,6 +813,7 @@ Split   | Examples
 ## wikipedia/20190301.fa
 
 *   **Config description**: Wikipedia dataset for fa, parsed from 20190301 dump.
+*   **Download size**: `693.84 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -752,6 +823,7 @@ Split   | Examples
 ## wikipedia/20190301.ff
 
 *   **Config description**: Wikipedia dataset for ff, parsed from 20190301 dump.
+*   **Download size**: `387.75 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -761,6 +833,7 @@ Split   | Examples
 ## wikipedia/20190301.fi
 
 *   **Config description**: Wikipedia dataset for fi, parsed from 20190301 dump.
+*   **Download size**: `656.44 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -771,6 +844,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20190301
     dump.
+*   **Download size**: `2.00 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -780,6 +854,7 @@ Split   | Examples
 ## wikipedia/20190301.fj
 
 *   **Config description**: Wikipedia dataset for fj, parsed from 20190301 dump.
+*   **Download size**: `262.98 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -789,6 +864,7 @@ Split   | Examples
 ## wikipedia/20190301.fo
 
 *   **Config description**: Wikipedia dataset for fo, parsed from 20190301 dump.
+*   **Download size**: `13.67 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -798,6 +874,7 @@ Split   | Examples
 ## wikipedia/20190301.fr
 
 *   **Config description**: Wikipedia dataset for fr, parsed from 20190301 dump.
+*   **Download size**: `4.14 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -808,6 +885,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for frp, parsed from 20190301
     dump.
+*   **Download size**: `2.03 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -818,6 +896,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for frr, parsed from 20190301
     dump.
+*   **Download size**: `7.88 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -828,6 +907,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for fur, parsed from 20190301
     dump.
+*   **Download size**: `2.29 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -837,6 +917,7 @@ Split   | Examples
 ## wikipedia/20190301.fy
 
 *   **Config description**: Wikipedia dataset for fy, parsed from 20190301 dump.
+*   **Download size**: `45.52 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -846,6 +927,7 @@ Split   | Examples
 ## wikipedia/20190301.ga
 
 *   **Config description**: Wikipedia dataset for ga, parsed from 20190301 dump.
+*   **Download size**: `24.78 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -856,6 +938,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for gag, parsed from 20190301
     dump.
+*   **Download size**: `2.04 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -866,6 +949,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for gan, parsed from 20190301
     dump.
+*   **Download size**: `3.82 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -875,6 +959,7 @@ Split   | Examples
 ## wikipedia/20190301.gd
 
 *   **Config description**: Wikipedia dataset for gd, parsed from 20190301 dump.
+*   **Download size**: `8.51 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -884,6 +969,7 @@ Split   | Examples
 ## wikipedia/20190301.gl
 
 *   **Config description**: Wikipedia dataset for gl, parsed from 20190301 dump.
+*   **Download size**: `235.07 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -894,6 +980,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for glk, parsed from 20190301
     dump.
+*   **Download size**: `1.91 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -903,6 +990,7 @@ Split   | Examples
 ## wikipedia/20190301.gn
 
 *   **Config description**: Wikipedia dataset for gn, parsed from 20190301 dump.
+*   **Download size**: `3.37 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -913,6 +1001,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for gom, parsed from 20190301
     dump.
+*   **Download size**: `6.07 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -923,6 +1012,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for gor, parsed from 20190301
     dump.
+*   **Download size**: `1.28 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -933,6 +1023,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for got, parsed from 20190301
     dump.
+*   **Download size**: `604.10 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -942,6 +1033,7 @@ Split   | Examples
 ## wikipedia/20190301.gu
 
 *   **Config description**: Wikipedia dataset for gu, parsed from 20190301 dump.
+*   **Download size**: `27.23 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -951,6 +1043,7 @@ Split   | Examples
 ## wikipedia/20190301.gv
 
 *   **Config description**: Wikipedia dataset for gv, parsed from 20190301 dump.
+*   **Download size**: `5.32 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -960,6 +1053,7 @@ Split   | Examples
 ## wikipedia/20190301.ha
 
 *   **Config description**: Wikipedia dataset for ha, parsed from 20190301 dump.
+*   **Download size**: `1.62 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -970,6 +1064,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for hak, parsed from 20190301
     dump.
+*   **Download size**: `3.28 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -980,6 +1075,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for haw, parsed from 20190301
     dump.
+*   **Download size**: `1017.76 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -989,6 +1085,7 @@ Split   | Examples
 ## wikipedia/20190301.he
 
 *   **Config description**: Wikipedia dataset for he, parsed from 20190301 dump.
+*   **Download size**: `572.30 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -998,6 +1095,7 @@ Split   | Examples
 ## wikipedia/20190301.hi
 
 *   **Config description**: Wikipedia dataset for hi, parsed from 20190301 dump.
+*   **Download size**: `137.86 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1008,6 +1106,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for hif, parsed from 20190301
     dump.
+*   **Download size**: `4.57 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1017,6 +1116,7 @@ Split   | Examples
 ## wikipedia/20190301.ho
 
 *   **Config description**: Wikipedia dataset for ho, parsed from 20190301 dump.
+*   **Download size**: `18.37 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1026,6 +1126,7 @@ Split   | Examples
 ## wikipedia/20190301.hr
 
 *   **Config description**: Wikipedia dataset for hr, parsed from 20190301 dump.
+*   **Download size**: `246.05 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1036,6 +1137,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for hsb, parsed from 20190301
     dump.
+*   **Download size**: `10.38 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1045,6 +1147,7 @@ Split   | Examples
 ## wikipedia/20190301.ht
 
 *   **Config description**: Wikipedia dataset for ht, parsed from 20190301 dump.
+*   **Download size**: `10.23 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1054,6 +1157,7 @@ Split   | Examples
 ## wikipedia/20190301.hu
 
 *   **Config description**: Wikipedia dataset for hu, parsed from 20190301 dump.
+*   **Download size**: `810.17 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1063,6 +1167,7 @@ Split   | Examples
 ## wikipedia/20190301.hy
 
 *   **Config description**: Wikipedia dataset for hy, parsed from 20190301 dump.
+*   **Download size**: `277.53 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1072,6 +1177,7 @@ Split   | Examples
 ## wikipedia/20190301.ia
 
 *   **Config description**: Wikipedia dataset for ia, parsed from 20190301 dump.
+*   **Download size**: `7.85 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1081,6 +1187,7 @@ Split   | Examples
 ## wikipedia/20190301.id
 
 *   **Config description**: Wikipedia dataset for id, parsed from 20190301 dump.
+*   **Download size**: `523.94 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1090,6 +1197,7 @@ Split   | Examples
 ## wikipedia/20190301.ie
 
 *   **Config description**: Wikipedia dataset for ie, parsed from 20190301 dump.
+*   **Download size**: `1.70 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1099,6 +1207,7 @@ Split   | Examples
 ## wikipedia/20190301.ig
 
 *   **Config description**: Wikipedia dataset for ig, parsed from 20190301 dump.
+*   **Download size**: `1.00 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1108,6 +1217,7 @@ Split   | Examples
 ## wikipedia/20190301.ii
 
 *   **Config description**: Wikipedia dataset for ii, parsed from 20190301 dump.
+*   **Download size**: `30.88 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1117,6 +1227,7 @@ Split   | Examples
 ## wikipedia/20190301.ik
 
 *   **Config description**: Wikipedia dataset for ik, parsed from 20190301 dump.
+*   **Download size**: `238.12 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1127,6 +1238,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ilo, parsed from 20190301
     dump.
+*   **Download size**: `15.22 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1137,6 +1249,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for inh, parsed from 20190301
     dump.
+*   **Download size**: `1.26 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1146,6 +1259,7 @@ Split   | Examples
 ## wikipedia/20190301.io
 
 *   **Config description**: Wikipedia dataset for io, parsed from 20190301 dump.
+*   **Download size**: `12.56 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1155,6 +1269,7 @@ Split   | Examples
 ## wikipedia/20190301.is
 
 *   **Config description**: Wikipedia dataset for is, parsed from 20190301 dump.
+*   **Download size**: `41.86 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1164,6 +1279,7 @@ Split   | Examples
 ## wikipedia/20190301.it
 
 *   **Config description**: Wikipedia dataset for it, parsed from 20190301 dump.
+*   **Download size**: `2.66 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1173,6 +1289,7 @@ Split   | Examples
 ## wikipedia/20190301.iu
 
 *   **Config description**: Wikipedia dataset for iu, parsed from 20190301 dump.
+*   **Download size**: `284.06 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1182,6 +1299,7 @@ Split   | Examples
 ## wikipedia/20190301.ja
 
 *   **Config description**: Wikipedia dataset for ja, parsed from 20190301 dump.
+*   **Download size**: `2.74 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1192,6 +1310,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for jam, parsed from 20190301
     dump.
+*   **Download size**: `895.29 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1202,6 +1321,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for jbo, parsed from 20190301
     dump.
+*   **Download size**: `1.06 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1211,6 +1331,7 @@ Split   | Examples
 ## wikipedia/20190301.jv
 
 *   **Config description**: Wikipedia dataset for jv, parsed from 20190301 dump.
+*   **Download size**: `39.32 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1220,6 +1341,7 @@ Split   | Examples
 ## wikipedia/20190301.ka
 
 *   **Config description**: Wikipedia dataset for ka, parsed from 20190301 dump.
+*   **Download size**: `131.78 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1230,6 +1352,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for kaa, parsed from 20190301
     dump.
+*   **Download size**: `1.35 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1240,6 +1363,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for kab, parsed from 20190301
     dump.
+*   **Download size**: `3.62 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1250,6 +1374,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for kbd, parsed from 20190301
     dump.
+*   **Download size**: `1.65 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1260,6 +1385,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for kbp, parsed from 20190301
     dump.
+*   **Download size**: `1.24 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1269,6 +1395,7 @@ Split   | Examples
 ## wikipedia/20190301.kg
 
 *   **Config description**: Wikipedia dataset for kg, parsed from 20190301 dump.
+*   **Download size**: `439.26 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1278,6 +1405,7 @@ Split   | Examples
 ## wikipedia/20190301.ki
 
 *   **Config description**: Wikipedia dataset for ki, parsed from 20190301 dump.
+*   **Download size**: `370.78 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1287,6 +1415,7 @@ Split   | Examples
 ## wikipedia/20190301.kj
 
 *   **Config description**: Wikipedia dataset for kj, parsed from 20190301 dump.
+*   **Download size**: `16.58 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1296,6 +1425,7 @@ Split   | Examples
 ## wikipedia/20190301.kk
 
 *   **Config description**: Wikipedia dataset for kk, parsed from 20190301 dump.
+*   **Download size**: `113.46 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1305,6 +1435,7 @@ Split   | Examples
 ## wikipedia/20190301.kl
 
 *   **Config description**: Wikipedia dataset for kl, parsed from 20190301 dump.
+*   **Download size**: `862.51 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1314,6 +1445,7 @@ Split   | Examples
 ## wikipedia/20190301.km
 
 *   **Config description**: Wikipedia dataset for km, parsed from 20190301 dump.
+*   **Download size**: `21.92 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1323,6 +1455,7 @@ Split   | Examples
 ## wikipedia/20190301.kn
 
 *   **Config description**: Wikipedia dataset for kn, parsed from 20190301 dump.
+*   **Download size**: `69.62 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1332,6 +1465,7 @@ Split   | Examples
 ## wikipedia/20190301.ko
 
 *   **Config description**: Wikipedia dataset for ko, parsed from 20190301 dump.
+*   **Download size**: `625.16 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1342,6 +1476,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for koi, parsed from 20190301
     dump.
+*   **Download size**: `2.12 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1352,6 +1487,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for krc, parsed from 20190301
     dump.
+*   **Download size**: `3.16 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1361,6 +1497,7 @@ Split   | Examples
 ## wikipedia/20190301.ks
 
 *   **Config description**: Wikipedia dataset for ks, parsed from 20190301 dump.
+*   **Download size**: `309.15 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1371,6 +1508,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ksh, parsed from 20190301
     dump.
+*   **Download size**: `3.07 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1380,6 +1518,7 @@ Split   | Examples
 ## wikipedia/20190301.ku
 
 *   **Config description**: Wikipedia dataset for ku, parsed from 20190301 dump.
+*   **Download size**: `17.09 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1389,6 +1528,7 @@ Split   | Examples
 ## wikipedia/20190301.kv
 
 *   **Config description**: Wikipedia dataset for kv, parsed from 20190301 dump.
+*   **Download size**: `3.36 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1398,6 +1538,7 @@ Split   | Examples
 ## wikipedia/20190301.kw
 
 *   **Config description**: Wikipedia dataset for kw, parsed from 20190301 dump.
+*   **Download size**: `1.71 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1407,6 +1548,7 @@ Split   | Examples
 ## wikipedia/20190301.ky
 
 *   **Config description**: Wikipedia dataset for ky, parsed from 20190301 dump.
+*   **Download size**: `33.13 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1416,6 +1558,7 @@ Split   | Examples
 ## wikipedia/20190301.la
 
 *   **Config description**: Wikipedia dataset for la, parsed from 20190301 dump.
+*   **Download size**: `82.72 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1426,6 +1569,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lad, parsed from 20190301
     dump.
+*   **Download size**: `3.39 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1435,6 +1579,7 @@ Split   | Examples
 ## wikipedia/20190301.lb
 
 *   **Config description**: Wikipedia dataset for lb, parsed from 20190301 dump.
+*   **Download size**: `45.70 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1445,6 +1590,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lbe, parsed from 20190301
     dump.
+*   **Download size**: `1.22 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1455,6 +1601,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lez, parsed from 20190301
     dump.
+*   **Download size**: `4.16 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1465,6 +1612,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lfn, parsed from 20190301
     dump.
+*   **Download size**: `2.81 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1474,6 +1622,7 @@ Split   | Examples
 ## wikipedia/20190301.lg
 
 *   **Config description**: Wikipedia dataset for lg, parsed from 20190301 dump.
+*   **Download size**: `1.58 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1483,6 +1632,7 @@ Split   | Examples
 ## wikipedia/20190301.li
 
 *   **Config description**: Wikipedia dataset for li, parsed from 20190301 dump.
+*   **Download size**: `13.86 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1493,6 +1643,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lij, parsed from 20190301
     dump.
+*   **Download size**: `2.73 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1503,6 +1654,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lmo, parsed from 20190301
     dump.
+*   **Download size**: `21.34 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1512,6 +1664,7 @@ Split   | Examples
 ## wikipedia/20190301.ln
 
 *   **Config description**: Wikipedia dataset for ln, parsed from 20190301 dump.
+*   **Download size**: `1.83 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1521,6 +1674,7 @@ Split   | Examples
 ## wikipedia/20190301.lo
 
 *   **Config description**: Wikipedia dataset for lo, parsed from 20190301 dump.
+*   **Download size**: `3.44 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1531,6 +1685,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for lrc, parsed from 20190301
     dump.
+*   **Download size**: `4.71 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1540,6 +1695,7 @@ Split   | Examples
 ## wikipedia/20190301.lt
 
 *   **Config description**: Wikipedia dataset for lt, parsed from 20190301 dump.
+*   **Download size**: `174.73 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1550,6 +1706,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for ltg, parsed from 20190301
     dump.
+*   **Download size**: `798.18 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1559,6 +1716,7 @@ Split   | Examples
 ## wikipedia/20190301.lv
 
 *   **Config description**: Wikipedia dataset for lv, parsed from 20190301 dump.
+*   **Download size**: `127.47 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1569,6 +1727,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mai, parsed from 20190301
     dump.
+*   **Download size**: `10.80 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1579,6 +1738,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for map-bms, parsed from 20190301
     dump.
+*   **Download size**: `4.49 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1589,6 +1749,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20190301
     dump.
+*   **Download size**: `1.04 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1598,6 +1759,7 @@ Split   | Examples
 ## wikipedia/20190301.mg
 
 *   **Config description**: Wikipedia dataset for mg, parsed from 20190301 dump.
+*   **Download size**: `25.64 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1607,6 +1769,7 @@ Split   | Examples
 ## wikipedia/20190301.mh
 
 *   **Config description**: Wikipedia dataset for mh, parsed from 20190301 dump.
+*   **Download size**: `27.71 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1617,6 +1780,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mhr, parsed from 20190301
     dump.
+*   **Download size**: `5.69 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1626,6 +1790,7 @@ Split   | Examples
 ## wikipedia/20190301.mi
 
 *   **Config description**: Wikipedia dataset for mi, parsed from 20190301 dump.
+*   **Download size**: `1.96 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1636,6 +1801,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for min, parsed from 20190301
     dump.
+*   **Download size**: `25.05 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1645,6 +1811,7 @@ Split   | Examples
 ## wikipedia/20190301.mk
 
 *   **Config description**: Wikipedia dataset for mk, parsed from 20190301 dump.
+*   **Download size**: `140.69 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1654,6 +1821,7 @@ Split   | Examples
 ## wikipedia/20190301.ml
 
 *   **Config description**: Wikipedia dataset for ml, parsed from 20190301 dump.
+*   **Download size**: `117.24 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1663,6 +1831,7 @@ Split   | Examples
 ## wikipedia/20190301.mn
 
 *   **Config description**: Wikipedia dataset for mn, parsed from 20190301 dump.
+*   **Download size**: `28.23 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1672,6 +1841,7 @@ Split   | Examples
 ## wikipedia/20190301.mr
 
 *   **Config description**: Wikipedia dataset for mr, parsed from 20190301 dump.
+*   **Download size**: `49.58 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1682,6 +1852,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mrj, parsed from 20190301
     dump.
+*   **Download size**: `3.01 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1691,6 +1862,7 @@ Split   | Examples
 ## wikipedia/20190301.ms
 
 *   **Config description**: Wikipedia dataset for ms, parsed from 20190301 dump.
+*   **Download size**: `205.79 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1700,6 +1872,7 @@ Split   | Examples
 ## wikipedia/20190301.mt
 
 *   **Config description**: Wikipedia dataset for mt, parsed from 20190301 dump.
+*   **Download size**: `8.21 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1710,6 +1883,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mus, parsed from 20190301
     dump.
+*   **Download size**: `14.20 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1720,6 +1894,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mwl, parsed from 20190301
     dump.
+*   **Download size**: `8.95 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1729,6 +1904,7 @@ Split   | Examples
 ## wikipedia/20190301.my
 
 *   **Config description**: Wikipedia dataset for my, parsed from 20190301 dump.
+*   **Download size**: `34.60 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1739,6 +1915,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for myv, parsed from 20190301
     dump.
+*   **Download size**: `7.79 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1749,6 +1926,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for mzn, parsed from 20190301
     dump.
+*   **Download size**: `6.47 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1758,6 +1936,7 @@ Split   | Examples
 ## wikipedia/20190301.na
 
 *   **Config description**: Wikipedia dataset for na, parsed from 20190301 dump.
+*   **Download size**: `480.57 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1768,6 +1947,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nah, parsed from 20190301
     dump.
+*   **Download size**: `4.30 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1778,6 +1958,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nap, parsed from 20190301
     dump.
+*   **Download size**: `5.55 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1788,6 +1969,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nds, parsed from 20190301
     dump.
+*   **Download size**: `33.28 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1798,6 +1980,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nds-nl, parsed from 20190301
     dump.
+*   **Download size**: `6.67 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1807,6 +1990,7 @@ Split   | Examples
 ## wikipedia/20190301.ne
 
 *   **Config description**: Wikipedia dataset for ne, parsed from 20190301 dump.
+*   **Download size**: `29.26 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1817,6 +2001,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for new, parsed from 20190301
     dump.
+*   **Download size**: `16.91 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1826,6 +2011,7 @@ Split   | Examples
 ## wikipedia/20190301.ng
 
 *   **Config description**: Wikipedia dataset for ng, parsed from 20190301 dump.
+*   **Download size**: `91.11 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1835,6 +2021,7 @@ Split   | Examples
 ## wikipedia/20190301.nl
 
 *   **Config description**: Wikipedia dataset for nl, parsed from 20190301 dump.
+*   **Download size**: `1.38 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1844,6 +2031,7 @@ Split   | Examples
 ## wikipedia/20190301.nn
 
 *   **Config description**: Wikipedia dataset for nn, parsed from 20190301 dump.
+*   **Download size**: `126.01 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1853,6 +2041,7 @@ Split   | Examples
 ## wikipedia/20190301.no
 
 *   **Config description**: Wikipedia dataset for no, parsed from 20190301 dump.
+*   **Download size**: `610.74 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1863,6 +2052,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nov, parsed from 20190301
     dump.
+*   **Download size**: `1.12 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1873,6 +2063,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nrm, parsed from 20190301
     dump.
+*   **Download size**: `1.56 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1883,6 +2074,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for nso, parsed from 20190301
     dump.
+*   **Download size**: `2.20 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1892,6 +2084,7 @@ Split   | Examples
 ## wikipedia/20190301.nv
 
 *   **Config description**: Wikipedia dataset for nv, parsed from 20190301 dump.
+*   **Download size**: `2.52 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1901,6 +2094,7 @@ Split   | Examples
 ## wikipedia/20190301.ny
 
 *   **Config description**: Wikipedia dataset for ny, parsed from 20190301 dump.
+*   **Download size**: `1.18 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1910,6 +2104,7 @@ Split   | Examples
 ## wikipedia/20190301.oc
 
 *   **Config description**: Wikipedia dataset for oc, parsed from 20190301 dump.
+*   **Download size**: `70.97 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1920,6 +2115,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for olo, parsed from 20190301
     dump.
+*   **Download size**: `1.55 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1929,6 +2125,7 @@ Split   | Examples
 ## wikipedia/20190301.om
 
 *   **Config description**: Wikipedia dataset for om, parsed from 20190301 dump.
+*   **Download size**: `1.06 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1938,6 +2135,7 @@ Split   | Examples
 ## wikipedia/20190301.or
 
 *   **Config description**: Wikipedia dataset for or, parsed from 20190301 dump.
+*   **Download size**: `24.90 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1947,6 +2145,7 @@ Split   | Examples
 ## wikipedia/20190301.os
 
 *   **Config description**: Wikipedia dataset for os, parsed from 20190301 dump.
+*   **Download size**: `7.31 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1956,6 +2155,7 @@ Split   | Examples
 ## wikipedia/20190301.pa
 
 *   **Config description**: Wikipedia dataset for pa, parsed from 20190301 dump.
+*   **Download size**: `40.39 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1966,6 +2166,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pag, parsed from 20190301
     dump.
+*   **Download size**: `1.29 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1976,6 +2177,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pam, parsed from 20190301
     dump.
+*   **Download size**: `8.17 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1986,6 +2188,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pap, parsed from 20190301
     dump.
+*   **Download size**: `1.33 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -1996,6 +2199,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pcd, parsed from 20190301
     dump.
+*   **Download size**: `4.14 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2006,6 +2210,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pdc, parsed from 20190301
     dump.
+*   **Download size**: `1.10 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2016,6 +2221,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pfl, parsed from 20190301
     dump.
+*   **Download size**: `3.22 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2025,6 +2231,7 @@ Split   | Examples
 ## wikipedia/20190301.pi
 
 *   **Config description**: Wikipedia dataset for pi, parsed from 20190301 dump.
+*   **Download size**: `586.77 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2035,6 +2242,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pih, parsed from 20190301
     dump.
+*   **Download size**: `654.11 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2044,6 +2252,7 @@ Split   | Examples
 ## wikipedia/20190301.pl
 
 *   **Config description**: Wikipedia dataset for pl, parsed from 20190301 dump.
+*   **Download size**: `1.76 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2054,6 +2263,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pms, parsed from 20190301
     dump.
+*   **Download size**: `13.42 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2064,6 +2274,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pnb, parsed from 20190301
     dump.
+*   **Download size**: `24.31 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2074,6 +2285,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for pnt, parsed from 20190301
     dump.
+*   **Download size**: `533.84 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2083,6 +2295,7 @@ Split   | Examples
 ## wikipedia/20190301.ps
 
 *   **Config description**: Wikipedia dataset for ps, parsed from 20190301 dump.
+*   **Download size**: `14.09 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2092,6 +2305,7 @@ Split   | Examples
 ## wikipedia/20190301.pt
 
 *   **Config description**: Wikipedia dataset for pt, parsed from 20190301 dump.
+*   **Download size**: `1.58 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2101,6 +2315,7 @@ Split   | Examples
 ## wikipedia/20190301.qu
 
 *   **Config description**: Wikipedia dataset for qu, parsed from 20190301 dump.
+*   **Download size**: `11.42 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2110,6 +2325,7 @@ Split   | Examples
 ## wikipedia/20190301.rm
 
 *   **Config description**: Wikipedia dataset for rm, parsed from 20190301 dump.
+*   **Download size**: `5.85 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2120,6 +2336,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for rmy, parsed from 20190301
     dump.
+*   **Download size**: `509.61 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2129,6 +2346,7 @@ Split   | Examples
 ## wikipedia/20190301.rn
 
 *   **Config description**: Wikipedia dataset for rn, parsed from 20190301 dump.
+*   **Download size**: `779.25 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2138,6 +2356,7 @@ Split   | Examples
 ## wikipedia/20190301.ro
 
 *   **Config description**: Wikipedia dataset for ro, parsed from 20190301 dump.
+*   **Download size**: `449.49 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2148,6 +2367,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for roa-rup, parsed from 20190301
     dump.
+*   **Download size**: `931.23 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2158,6 +2378,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for roa-tara, parsed from 20190301
     dump.
+*   **Download size**: `5.98 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2167,6 +2388,7 @@ Split   | Examples
 ## wikipedia/20190301.ru
 
 *   **Config description**: Wikipedia dataset for ru, parsed from 20190301 dump.
+*   **Download size**: `3.51 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2177,6 +2399,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for rue, parsed from 20190301
     dump.
+*   **Download size**: `4.11 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2186,6 +2409,7 @@ Split   | Examples
 ## wikipedia/20190301.rw
 
 *   **Config description**: Wikipedia dataset for rw, parsed from 20190301 dump.
+*   **Download size**: `904.81 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2195,6 +2419,7 @@ Split   | Examples
 ## wikipedia/20190301.sa
 
 *   **Config description**: Wikipedia dataset for sa, parsed from 20190301 dump.
+*   **Download size**: `14.29 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2205,6 +2430,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for sah, parsed from 20190301
     dump.
+*   **Download size**: `11.88 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2215,6 +2441,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for sat, parsed from 20190301
     dump.
+*   **Download size**: `2.36 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2224,6 +2451,7 @@ Split   | Examples
 ## wikipedia/20190301.sc
 
 *   **Config description**: Wikipedia dataset for sc, parsed from 20190301 dump.
+*   **Download size**: `4.39 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2234,6 +2462,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for scn, parsed from 20190301
     dump.
+*   **Download size**: `11.83 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2244,6 +2473,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for sco, parsed from 20190301
     dump.
+*   **Download size**: `57.80 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2253,6 +2483,7 @@ Split   | Examples
 ## wikipedia/20190301.sd
 
 *   **Config description**: Wikipedia dataset for sd, parsed from 20190301 dump.
+*   **Download size**: `12.62 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2262,6 +2493,7 @@ Split   | Examples
 ## wikipedia/20190301.se
 
 *   **Config description**: Wikipedia dataset for se, parsed from 20190301 dump.
+*   **Download size**: `3.30 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2271,6 +2503,7 @@ Split   | Examples
 ## wikipedia/20190301.sg
 
 *   **Config description**: Wikipedia dataset for sg, parsed from 20190301 dump.
+*   **Download size**: `286.02 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2280,6 +2513,7 @@ Split   | Examples
 ## wikipedia/20190301.sh
 
 *   **Config description**: Wikipedia dataset for sh, parsed from 20190301 dump.
+*   **Download size**: `406.72 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2289,6 +2523,7 @@ Split   | Examples
 ## wikipedia/20190301.si
 
 *   **Config description**: Wikipedia dataset for si, parsed from 20190301 dump.
+*   **Download size**: `36.84 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2299,6 +2534,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for simple, parsed from 20190301
     dump.
+*   **Download size**: `156.11 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2308,6 +2544,7 @@ Split   | Examples
 ## wikipedia/20190301.sk
 
 *   **Config description**: Wikipedia dataset for sk, parsed from 20190301 dump.
+*   **Download size**: `254.37 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2317,6 +2554,7 @@ Split   | Examples
 ## wikipedia/20190301.sl
 
 *   **Config description**: Wikipedia dataset for sl, parsed from 20190301 dump.
+*   **Download size**: `201.41 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2326,6 +2564,7 @@ Split   | Examples
 ## wikipedia/20190301.sm
 
 *   **Config description**: Wikipedia dataset for sm, parsed from 20190301 dump.
+*   **Download size**: `678.46 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2335,6 +2574,7 @@ Split   | Examples
 ## wikipedia/20190301.sn
 
 *   **Config description**: Wikipedia dataset for sn, parsed from 20190301 dump.
+*   **Download size**: `2.02 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2344,6 +2584,7 @@ Split   | Examples
 ## wikipedia/20190301.so
 
 *   **Config description**: Wikipedia dataset for so, parsed from 20190301 dump.
+*   **Download size**: `8.17 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2353,6 +2594,7 @@ Split   | Examples
 ## wikipedia/20190301.sq
 
 *   **Config description**: Wikipedia dataset for sq, parsed from 20190301 dump.
+*   **Download size**: `77.55 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2362,6 +2604,7 @@ Split   | Examples
 ## wikipedia/20190301.sr
 
 *   **Config description**: Wikipedia dataset for sr, parsed from 20190301 dump.
+*   **Download size**: `725.30 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2372,6 +2615,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for srn, parsed from 20190301
     dump.
+*   **Download size**: `634.21 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2381,6 +2625,7 @@ Split   | Examples
 ## wikipedia/20190301.ss
 
 *   **Config description**: Wikipedia dataset for ss, parsed from 20190301 dump.
+*   **Download size**: `737.58 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2390,6 +2635,7 @@ Split   | Examples
 ## wikipedia/20190301.st
 
 *   **Config description**: Wikipedia dataset for st, parsed from 20190301 dump.
+*   **Download size**: `482.27 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2400,6 +2646,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for stq, parsed from 20190301
     dump.
+*   **Download size**: `3.26 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2409,6 +2656,7 @@ Split   | Examples
 ## wikipedia/20190301.su
 
 *   **Config description**: Wikipedia dataset for su, parsed from 20190301 dump.
+*   **Download size**: `20.52 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2418,6 +2666,7 @@ Split   | Examples
 ## wikipedia/20190301.sv
 
 *   **Config description**: Wikipedia dataset for sv, parsed from 20190301 dump.
+*   **Download size**: `1.64 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2427,6 +2676,7 @@ Split   | Examples
 ## wikipedia/20190301.sw
 
 *   **Config description**: Wikipedia dataset for sw, parsed from 20190301 dump.
+*   **Download size**: `27.60 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2437,6 +2687,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for szl, parsed from 20190301
     dump.
+*   **Download size**: `4.06 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2446,6 +2697,7 @@ Split   | Examples
 ## wikipedia/20190301.ta
 
 *   **Config description**: Wikipedia dataset for ta, parsed from 20190301 dump.
+*   **Download size**: `141.07 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2456,6 +2708,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for tcy, parsed from 20190301
     dump.
+*   **Download size**: `2.33 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2465,6 +2718,7 @@ Split   | Examples
 ## wikipedia/20190301.te
 
 *   **Config description**: Wikipedia dataset for te, parsed from 20190301 dump.
+*   **Download size**: `113.16 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2475,6 +2729,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for tet, parsed from 20190301
     dump.
+*   **Download size**: `1.06 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2484,6 +2739,7 @@ Split   | Examples
 ## wikipedia/20190301.tg
 
 *   **Config description**: Wikipedia dataset for tg, parsed from 20190301 dump.
+*   **Download size**: `36.95 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2493,6 +2749,7 @@ Split   | Examples
 ## wikipedia/20190301.th
 
 *   **Config description**: Wikipedia dataset for th, parsed from 20190301 dump.
+*   **Download size**: `254.00 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2502,6 +2759,7 @@ Split   | Examples
 ## wikipedia/20190301.ti
 
 *   **Config description**: Wikipedia dataset for ti, parsed from 20190301 dump.
+*   **Download size**: `309.72 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2511,6 +2769,7 @@ Split   | Examples
 ## wikipedia/20190301.tk
 
 *   **Config description**: Wikipedia dataset for tk, parsed from 20190301 dump.
+*   **Download size**: `4.50 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2520,6 +2779,7 @@ Split   | Examples
 ## wikipedia/20190301.tl
 
 *   **Config description**: Wikipedia dataset for tl, parsed from 20190301 dump.
+*   **Download size**: `50.85 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2529,6 +2789,7 @@ Split   | Examples
 ## wikipedia/20190301.tn
 
 *   **Config description**: Wikipedia dataset for tn, parsed from 20190301 dump.
+*   **Download size**: `1.21 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2538,6 +2799,7 @@ Split   | Examples
 ## wikipedia/20190301.to
 
 *   **Config description**: Wikipedia dataset for to, parsed from 20190301 dump.
+*   **Download size**: `775.10 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2548,6 +2810,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for tpi, parsed from 20190301
     dump.
+*   **Download size**: `1.39 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2557,6 +2820,7 @@ Split   | Examples
 ## wikipedia/20190301.tr
 
 *   **Config description**: Wikipedia dataset for tr, parsed from 20190301 dump.
+*   **Download size**: `497.19 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2566,6 +2830,7 @@ Split   | Examples
 ## wikipedia/20190301.ts
 
 *   **Config description**: Wikipedia dataset for ts, parsed from 20190301 dump.
+*   **Download size**: `1.39 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2575,6 +2840,7 @@ Split   | Examples
 ## wikipedia/20190301.tt
 
 *   **Config description**: Wikipedia dataset for tt, parsed from 20190301 dump.
+*   **Download size**: `53.23 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2585,6 +2851,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for tum, parsed from 20190301
     dump.
+*   **Download size**: `309.58 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2594,6 +2861,7 @@ Split   | Examples
 ## wikipedia/20190301.tw
 
 *   **Config description**: Wikipedia dataset for tw, parsed from 20190301 dump.
+*   **Download size**: `345.96 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2603,6 +2871,7 @@ Split   | Examples
 ## wikipedia/20190301.ty
 
 *   **Config description**: Wikipedia dataset for ty, parsed from 20190301 dump.
+*   **Download size**: `485.56 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2613,6 +2882,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for tyv, parsed from 20190301
     dump.
+*   **Download size**: `2.60 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2623,6 +2893,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for udm, parsed from 20190301
     dump.
+*   **Download size**: `2.94 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2632,6 +2903,7 @@ Split   | Examples
 ## wikipedia/20190301.ug
 
 *   **Config description**: Wikipedia dataset for ug, parsed from 20190301 dump.
+*   **Download size**: `5.64 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2641,6 +2913,7 @@ Split   | Examples
 ## wikipedia/20190301.uk
 
 *   **Config description**: Wikipedia dataset for uk, parsed from 20190301 dump.
+*   **Download size**: `1.28 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2650,6 +2923,7 @@ Split   | Examples
 ## wikipedia/20190301.ur
 
 *   **Config description**: Wikipedia dataset for ur, parsed from 20190301 dump.
+*   **Download size**: `129.57 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2659,6 +2933,7 @@ Split   | Examples
 ## wikipedia/20190301.uz
 
 *   **Config description**: Wikipedia dataset for uz, parsed from 20190301 dump.
+*   **Download size**: `60.85 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2668,6 +2943,7 @@ Split   | Examples
 ## wikipedia/20190301.ve
 
 *   **Config description**: Wikipedia dataset for ve, parsed from 20190301 dump.
+*   **Download size**: `257.59 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2678,6 +2954,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for vec, parsed from 20190301
     dump.
+*   **Download size**: `10.65 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2688,6 +2965,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for vep, parsed from 20190301
     dump.
+*   **Download size**: `4.59 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2697,6 +2975,7 @@ Split   | Examples
 ## wikipedia/20190301.vi
 
 *   **Config description**: Wikipedia dataset for vi, parsed from 20190301 dump.
+*   **Download size**: `623.74 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2707,6 +2986,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for vls, parsed from 20190301
     dump.
+*   **Download size**: `6.58 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2716,6 +2996,7 @@ Split   | Examples
 ## wikipedia/20190301.vo
 
 *   **Config description**: Wikipedia dataset for vo, parsed from 20190301 dump.
+*   **Download size**: `23.80 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2725,6 +3006,7 @@ Split   | Examples
 ## wikipedia/20190301.wa
 
 *   **Config description**: Wikipedia dataset for wa, parsed from 20190301 dump.
+*   **Download size**: `8.75 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2735,6 +3017,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for war, parsed from 20190301
     dump.
+*   **Download size**: `256.72 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2744,6 +3027,7 @@ Split   | Examples
 ## wikipedia/20190301.wo
 
 *   **Config description**: Wikipedia dataset for wo, parsed from 20190301 dump.
+*   **Download size**: `1.54 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2754,6 +3038,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for wuu, parsed from 20190301
     dump.
+*   **Download size**: `9.08 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2764,6 +3049,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for xal, parsed from 20190301
     dump.
+*   **Download size**: `1.64 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2773,6 +3059,7 @@ Split   | Examples
 ## wikipedia/20190301.xh
 
 *   **Config description**: Wikipedia dataset for xh, parsed from 20190301 dump.
+*   **Download size**: `1.26 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2783,6 +3070,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for xmf, parsed from 20190301
     dump.
+*   **Download size**: `9.40 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2792,6 +3080,7 @@ Split   | Examples
 ## wikipedia/20190301.yi
 
 *   **Config description**: Wikipedia dataset for yi, parsed from 20190301 dump.
+*   **Download size**: `11.56 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2801,6 +3090,7 @@ Split   | Examples
 ## wikipedia/20190301.yo
 
 *   **Config description**: Wikipedia dataset for yo, parsed from 20190301 dump.
+*   **Download size**: `11.55 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2810,6 +3100,7 @@ Split   | Examples
 ## wikipedia/20190301.za
 
 *   **Config description**: Wikipedia dataset for za, parsed from 20190301 dump.
+*   **Download size**: `735.93 KiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2820,6 +3111,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for zea, parsed from 20190301
     dump.
+*   **Download size**: `2.47 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2829,6 +3121,7 @@ Split   | Examples
 ## wikipedia/20190301.zh
 
 *   **Config description**: Wikipedia dataset for zh, parsed from 20190301 dump.
+*   **Download size**: `1.71 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2839,6 +3132,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for zh-classical, parsed from
     20190301 dump.
+*   **Download size**: `13.37 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2849,6 +3143,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
     20190301 dump.
+*   **Download size**: `50.30 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2859,6 +3154,7 @@ Split   | Examples
 
 *   **Config description**: Wikipedia dataset for zh-yue, parsed from 20190301
     dump.
+*   **Download size**: `52.41 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -2868,6 +3164,7 @@ Split   | Examples
 ## wikipedia/20190301.zu
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20190301 dump.
+*   **Download size**: `1.50 MiB`
 *   **Splits**:
 
 Split   | Examples

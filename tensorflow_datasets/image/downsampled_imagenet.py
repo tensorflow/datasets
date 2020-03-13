@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Downsampled Imagenet dataset."""
 
 from __future__ import absolute_import
@@ -81,10 +82,6 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "2.0.0",
               "New split API (https://tensorflow.org/datasets/splits)"),
-          supported_versions=[
-              tfds.core.Version(
-                  "1.0.0", experiments={tfds.core.Experiment.S3: False}),
-          ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
   ]
@@ -115,13 +112,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(train_path),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(valid_path),
             }),

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CIFAR datasets."""
 
 from __future__ import absolute_import
@@ -44,12 +45,7 @@ _CITATION = """\
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.2",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
+  VERSION = tfds.core.Version("3.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -104,11 +100,9 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
     ]
 
@@ -137,12 +131,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.3.1",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
+  VERSION = tfds.core.Version("3.0.1")
 
   @property
   def _cifar_info(self):

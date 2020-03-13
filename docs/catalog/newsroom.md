@@ -10,7 +10,7 @@
 </div>
 # `newsroom`
 
-Warning: Manual download required. See instructions bellow.
+Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
@@ -56,12 +56,12 @@ Split        | Examples
 
 ```python
 FeaturesDict({
-    'compression': Tensor(shape=[], dtype=tf.float32),
+    'compression': tf.float32,
     'compression_bin': Text(shape=(), dtype=tf.string),
-    'coverage': Tensor(shape=[], dtype=tf.float32),
+    'coverage': tf.float32,
     'coverage_bin': Text(shape=(), dtype=tf.string),
     'date': Text(shape=(), dtype=tf.string),
-    'density': Tensor(shape=[], dtype=tf.float32),
+    'density': tf.float32,
     'density_bin': Text(shape=(), dtype=tf.string),
     'summary': Text(shape=(), dtype=tf.string),
     'text': Text(shape=(), dtype=tf.string),
@@ -70,7 +70,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'summary')`
 *   **Citation**:
 

@@ -13,9 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Audio datasets."""
 
 from tensorflow_datasets.audio.groove import Groove
 from tensorflow_datasets.audio.librispeech import Librispeech
 from tensorflow_datasets.audio.librispeech import LibrispeechConfig
+from tensorflow_datasets.audio.libritts import Libritts
+from tensorflow_datasets.audio.ljspeech import Ljspeech
 from tensorflow_datasets.audio.nsynth import Nsynth
+from tensorflow_datasets.audio.savee import Savee
+from tensorflow_datasets.audio.speech_commands import SpeechCommands

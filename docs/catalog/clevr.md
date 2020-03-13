@@ -23,7 +23,6 @@ reasoning each question requires.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `17.72 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -48,14 +47,14 @@ FeaturesDict({
         'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
         'material': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
         'pixel_coords': Tensor(shape=(3,), dtype=tf.float32),
-        'rotation': Tensor(shape=(), dtype=tf.float32),
+        'rotation': tf.float32,
         'shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
         'size': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     }),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

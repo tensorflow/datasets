@@ -37,7 +37,10 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Audio`
     *   [`groove`](groove.md)
     *   [`librispeech`](librispeech.md)
+    *   [`libritts`](libritts.md)
+    *   [`ljspeech`](ljspeech.md)
     *   [`nsynth`](nsynth.md)
+    *   [`speech_commands`](speech_commands.md)
 *   `Image`
     *   [`abstract_reasoning`](abstract_reasoning.md)
     *   [`aflw2k3d`](aflw2k3d.md)
@@ -128,6 +131,8 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`wider_face`](wider_face.md)
 *   `Structured`
     *   [`amazon_us_reviews`](amazon_us_reviews.md)
+    *   [`forest_fires`](forest_fires.md)
+    *   [`german_credit_numeric`](german_credit_numeric.md)
     *   [`higgs`](higgs.md)
     *   [`iris`](iris.md)
     *   [`rock_you`](rock_you.md)
@@ -189,6 +194,7 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Video`
     *   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
     *   [`moving_mnist`](moving_mnist.md)
+    *   [`robonet`](robonet.md)
     *   [`starcraft_video`](starcraft_video.md)
     *   [`ucf101`](ucf101.md)
 

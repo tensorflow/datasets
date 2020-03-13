@@ -13,22 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for checking that eager isn't enabled by default on importing tfds."""
+# Lint as: python3
+"""TODO(speech_commands): Add a description here."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow.compat.v2 as tf
-
-import tensorflow_datasets as tfds  # pylint: disable=unused-import
-
-
-class EagerNotEnabledByDefaultTest(tf.test.TestCase):
-
-  def test_eager_is_not_enabled_by_default(self):
-    self.assertFalse(tf.executing_eagerly())
+from tensorflow_datasets import testing
+from tensorflow_datasets.audio import speech_commands
 
 
-if __name__ == '__main__':
-  tf.test.main()
+class SpeechCommandsTest(testing.DatasetBuilderTestCase):
+  # TODO(speech_commands):
+  DATASET_CLASS = speech_commands.SpeechCommands
+  SPLITS = {
+      "train": 4,  # Number of fake train example
+      "validation": 3,  # Number of fake validation example
+      "test": 1,  # Number of fake test example
+  }
+
+  DL_EXTRACT_RESULT = ["train.tar.gz", "test.tar.gz"]
+
+
+if __name__ == "__main__":
+  testing.test_main()

@@ -24,7 +24,6 @@ missing values are replaced with -1, string missing values are replaced with
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `114.98 KiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -41,25 +40,25 @@ Split   | Examples
 ```python
 FeaturesDict({
     'features': FeaturesDict({
-        'age': Tensor(shape=(), dtype=tf.float32),
-        'boat': Tensor(shape=(), dtype=tf.string),
-        'body': Tensor(shape=(), dtype=tf.int32),
-        'cabin': Tensor(shape=(), dtype=tf.string),
+        'age': tf.float32,
+        'boat': tf.string,
+        'body': tf.int32,
+        'cabin': tf.string,
         'embarked': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-        'fare': Tensor(shape=(), dtype=tf.float32),
-        'home.dest': Tensor(shape=(), dtype=tf.string),
-        'name': Tensor(shape=(), dtype=tf.string),
-        'parch': Tensor(shape=(), dtype=tf.int32),
+        'fare': tf.float32,
+        'home.dest': tf.string,
+        'name': tf.string,
+        'parch': tf.int32,
         'pclass': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
         'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'sibsp': Tensor(shape=(), dtype=tf.int32),
-        'ticket': Tensor(shape=(), dtype=tf.string),
+        'sibsp': tf.int32,
+        'ticket': tf.string,
     }),
     'survived': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('features', 'survived')`
 *   **Citation**:
 

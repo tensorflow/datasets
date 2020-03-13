@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Chexpert."""
 
 import collections
@@ -75,10 +76,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You must register and agree to user agreement on the dataset page:
@@ -117,7 +114,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={
                 "imgs_path": path,  # Relative img path is provided in csv
                 "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME)
@@ -125,7 +121,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
             gen_kwargs={
                 "imgs_path": path,
                 "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME)

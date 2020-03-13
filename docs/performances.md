@@ -1,4 +1,4 @@
-# Performances tips
+# Performance tips
 
 This document provides TFDS-specific performance tips. Note that TFDS provides
 datasets as `tf.data.Dataset`s, so the advice from the
@@ -58,10 +58,9 @@ By default, TFDS auto-caches datasets which satisfy the following constraints:
 *   Total dataset size (all splits) is defined and < 250 MiB
 *   `shuffle_files` is disabled, or only a single shard is read
 
-It is possible to opt out of auto-caching by passing
-`read_config=tfds.ReadConfig(try_autocaching=False)` to `tfds.load`. Have a look
-at the dataset catalog documentation to see if a specific dataset will use
-auto-cache.
+It is possible to opt out of auto-caching by passing `try_autocaching=False` to
+`tfds.ReadConfig` in `tfds.load`. Have a look at the dataset catalog
+documentation to see if a specific dataset will use auto-cache.
 
 ### Loading the full data as a single Tensor
 

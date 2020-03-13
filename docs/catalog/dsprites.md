@@ -43,7 +43,6 @@ ensuring that all pixel outputs were different. No noise was added.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.1.0`: No release notes.
 *   **Download size**: `26.73 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -65,15 +64,15 @@ FeaturesDict({
     'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'label_x_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
     'label_y_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
-    'value_orientation': Tensor(shape=[], dtype=tf.float32),
-    'value_scale': Tensor(shape=[], dtype=tf.float32),
-    'value_shape': Tensor(shape=[], dtype=tf.float32),
-    'value_x_position': Tensor(shape=[], dtype=tf.float32),
-    'value_y_position': Tensor(shape=[], dtype=tf.float32),
+    'value_orientation': tf.float32,
+    'value_scale': tf.float32,
+    'value_shape': tf.float32,
+    'value_x_position': tf.float32,
+    'value_y_position': tf.float32,
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

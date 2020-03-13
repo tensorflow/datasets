@@ -51,7 +51,6 @@ URL: http://bigearth.net/
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.2`: No release notes.
 *   **Download size**: `65.22 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -63,29 +62,6 @@ Split   | Examples
 :------ | -------:
 'train' | 590,326
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(120, 120, 3), dtype=tf.uint8),
-    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
-    'metadata': FeaturesDict({
-        'acquisition_date': Text(shape=(), dtype=tf.string),
-        'coordinates': FeaturesDict({
-            'lrx': Tensor(shape=(), dtype=tf.int64),
-            'lry': Tensor(shape=(), dtype=tf.int64),
-            'ulx': Tensor(shape=(), dtype=tf.int64),
-            'uly': Tensor(shape=(), dtype=tf.int64),
-        }),
-        'projection': Text(shape=(), dtype=tf.string),
-        'tile_source': Text(shape=(), dtype=tf.string),
-    }),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('image', 'labels')`
 *   **Citation**:
 
 ```
@@ -101,7 +77,65 @@ FeaturesDict({
 ## bigearthnet/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
+*   **Features**:
+
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(120, 120, 3), dtype=tf.uint8),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'metadata': FeaturesDict({
+        'acquisition_date': Text(shape=(), dtype=tf.string),
+        'coordinates': FeaturesDict({
+            'lrx': tf.int64,
+            'lry': tf.int64,
+            'ulx': tf.int64,
+            'uly': tf.int64,
+        }),
+        'projection': Text(shape=(), dtype=tf.string),
+        'tile_source': Text(shape=(), dtype=tf.string),
+    }),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'labels')`
 
 ## bigearthnet/all
 
 *   **Config description**: 13 Sentinel-2 channels
+*   **Features**:
+
+```python
+FeaturesDict({
+    'B01': Tensor(shape=(20, 20), dtype=tf.float32),
+    'B02': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B03': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B04': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B05': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B06': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B07': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B08': Tensor(shape=(120, 120), dtype=tf.float32),
+    'B09': Tensor(shape=(20, 20), dtype=tf.float32),
+    'B11': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B12': Tensor(shape=(60, 60), dtype=tf.float32),
+    'B8A': Tensor(shape=(60, 60), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'metadata': FeaturesDict({
+        'acquisition_date': Text(shape=(), dtype=tf.string),
+        'coordinates': FeaturesDict({
+            'lrx': tf.int64,
+            'lry': tf.int64,
+            'ulx': tf.int64,
+            'uly': tf.int64,
+        }),
+        'projection': Text(shape=(), dtype=tf.string),
+        'tile_source': Text(shape=(), dtype=tf.string),
+    }),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`

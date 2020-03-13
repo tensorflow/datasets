@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """BigEarthNet remote sensing dataset of Sentinel-2 image patches."""
 
 from __future__ import absolute_import
@@ -115,14 +116,10 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    v002 = tfds.core.Version(
-        '0.0.2', experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare='845e4d0e1dfa73060ab2f6cfdf7ba342434e4def')
     v100 = tfds.core.Version(
         '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     super(BigearthnetConfig, self).__init__(
         version=v100,
-        supported_versions=[v002],
         **kwargs)
     self.selection = selection
 
