@@ -23,9 +23,19 @@ from __future__ import print_function
 
 from tensorflow_datasets.core.visualization import image_visualizer
 
+<<<<<<< HEAD:tensorflow_datasets/core/visualization/show_examples.py
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
 ]
+=======
+from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core.image_visualizer import ObjectVisulaizer, SupervisedVisualizer
+from tensorflow_datasets.core import object_visualizer
+
+_ALL_VISUALIZERS = [ObjectVisulaizer(), SupervisedVisualizer()]
+>>>>>>> removed functions; added classes:tensorflow_datasets/core/visualization.py
 
 
 def show_examples(ds_info, ds, **options_kwargs):
@@ -47,10 +57,21 @@ def show_examples(ds_info, ds, **options_kwargs):
     ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
       should not be batched. Examples will be consumed in order until
       (rows * cols) are read or the dataset is consumed.
+<<<<<<< HEAD:tensorflow_datasets/core/visualization/show_examples.py
     **options_kwargs: Additional display options, specific to the dataset type
       to visualize. Are forwarded to `tfds.visualization.Visualizer.show`.
       See the `tfds.visualization` for a list of available visualizers.
 
+=======
+    rows: `int`, number of rows of the display grid.
+    cols: `int`, number of columns of the display grid.
+    plot_scale: `float`, controls the plot size of the images. Keep this
+      value around 3 to get a good plot. High and low values may cause
+      the labels to get overlapped.
+    image_key: `string`, name of the feature that contains the image. If not
+       set, the system will try to auto-detect it.
+    bbox_label: `bool`, flag for bounding box labels. Default is True.
+>>>>>>> removed functions; added classes:tensorflow_datasets/core/visualization.py
   Returns:
     fig: The `matplotlib.Figure` object
   """

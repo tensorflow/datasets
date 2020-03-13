@@ -24,90 +24,52 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 
+class ImageVisualizer():
+  """Parent Class for support of Image based datasets"""
 
-def match(ds_info):
-  """Checks if dataset belongs to image dataset category"""
-  image_keys = [
-      k for k, feature in ds_info.features.items()
-      if isinstance(feature, features_lib.Image)
-  ]
+  def _extract_keys(self, ds_info, feature_type, secondary_key=None):
+    """Extracts keys from ds_info based on feature type"""
 
-  if not image_keys:
-    return False
-
-  sequence_keys = [
-      k for k, feature in ds_info.features.items()
-      if isinstance(feature, features_lib.Sequence)
-  ]
-
-  bbox_keys = []
-  for key in sequence_keys:
-    if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
-      bbox_keys = [
-          k for k, feature in ds_info.features[key].items()
-          if isinstance(feature, features_lib.BBoxFeature)
+    if secondary_key:
+      return [
+          k for k, feature in ds_info.features[secondary_key].items()
+          if isinstance(feature, feature_type)
       ]
 
-  if bbox_keys:
-    return False
-
-  return True
-
-def build(ds_info, ds, **kwargs):
-  """Builds the plot for visualization"""
-  rows = kwargs.setdefault('rows', 3)
-  cols = kwargs.setdefault('cols', 3)
-  plot_scale = kwargs.setdefault('plot_scale', 3)
-  image_key = kwargs.setdefault('image_key', None)
-  args = ['rows', 'cols', 'plot_scale', 'image_key']
-
-  for key in kwargs:
-    if key not in args:
-      raise TypeError(
-          "show_example() got an unexpected keyword argument '{}'".format(key)
-          )
-
-  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
-  if not image_key:
-    # Infer the image and label keys
-    image_keys = [
+    return [
         k for k, feature in ds_info.features.items()
-        if isinstance(feature, features_lib.Image)
+        if isinstance(feature, feature_type)
     ]
 
-    if len(image_keys) > 1:
-      raise ValueError(
-          "Multiple image features detected in the dataset. Using the first one. You can "
-          "use `image_key` argument to override. Images detected: %s" %
-          (",".join(image_keys)))
+  def _infer_image_key(self, ds_info, image_key):
+    """Infers image key from ds_info"""
 
-    image_key = image_keys[0]
+    if not image_key:
+      # Infer the image and label keys
+      image_keys = self._extract_keys(ds_info, features_lib.Image)
 
-  label_keys = [
-      k for k, feature in ds_info.features.items()
-      if isinstance(feature, features_lib.ClassLabel)
-  ]
+      if len(image_keys) > 1:
+        raise ValueError(
+            "Multiple image features detected in the dataset. "
+            "Using the first one. "
+            "use `image_key` argument to override. Images detected: %s" %
+            (",".join(image_keys)))
 
-  label_key = label_keys[0] if len(label_keys) == 1 else None
-  if not label_key:
-    logging.info("Was not able to auto-infer label.")
+      image_key = image_keys[0]
+    return image_key
 
-  num_examples = rows * cols
-  examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+  def _plot_image(self, plt, fig, example, rows, cols, idx, image_key):
+    """Plots the images on the figure."""
 
-  fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-  fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
-  for i, ex in enumerate(examples):
-    if not isinstance(ex, dict):
+    if not isinstance(example, dict):
       raise ValueError(
           "tfds.show_examples requires examples as `dict`, with the same "
           "structure as `ds_info.features`. It is currently not compatible "
-          "with `as_supervised=True`. Received: {}".format(type(ex)))
-    ax = fig.add_subplot(rows, cols, i+1)
+          "with `as_supervised=True`. Received: {}".format(type(example)))
+    ax = fig.add_subplot(rows, cols, idx+1)
 
     # Plot the image
-    image = ex[image_key]
+    image = example[image_key]
     if len(image.shape) != 3:
       raise ValueError(
           "Image dimension should be 3. tfds.show_examples does not support "
@@ -120,10 +82,137 @@ def build(ds_info, ds, **kwargs):
     plt.xticks([], [])
     plt.yticks([], [])
 
-    # Plot the label
-    if label_key:
-      label = ex[label_key]
-      label_str = ds_info.features[label_key].int2str(label)
-      plt.xlabel("{} ({})".format(label_str, label))
-  plt.show()
-  return fig
+    return ax
+
+class SupervisedVisualizer(ImageVisualizer):
+  """Class for Image, Label Datasets"""
+
+  def match(self, ds_info):
+    """Checks if dataset belongs to image dataset category"""
+    image_keys = self._extract_keys(ds_info, features_lib.Image)
+
+    if not image_keys:
+      return False
+
+    return True
+
+  def build(self, ds_info, ds, rows=3, cols=3, plot_scale=3, image_key=None):
+    """Builds the plot for visualization"""
+
+    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+
+    image_key = self._infer_image_key(ds_info, image_key)
+    label_keys = self._extract_keys(ds_info, features_lib.ClassLabel)
+
+    label_key = label_keys[0] if len(label_keys) == 1 else None
+    if not label_key:
+      logging.info("Was not able to auto-infer label.")
+
+    num_examples = rows * cols
+    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+    for i, ex in enumerate(examples):
+      _ = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
+
+      # Plot the label
+      if label_key:
+        label = ex[label_key]
+        label_str = ds_info.features[label_key].int2str(label)
+        plt.xlabel("{} ({})".format(label_str, label))
+    plt.show()
+    return fig
+
+
+class ObjectVisulaizer(ImageVisualizer):
+  """Class for Object Detection Datasets"""
+
+  def _draw_text(self, ax, xy, txt, size=14):
+    """Draws text on the top-left corner of the bounding box"""
+    ax.text(*xy, txt, verticalalignment='top', \
+            color='white', fontsize=size, weight="normal", \
+            bbox=dict(facecolor='black', alpha=0.7, pad=0.3))
+
+  def _draw_rectangle(self, ax, bbox):
+    """Draws the bounding box"""
+    patches = lazy_imports_lib.lazy_imports.matplotlib.patches
+    ax.add_patch(patches.Rectangle(bbox[:2], \
+                *bbox[-2:], fill=False, \
+                edgecolor='red', lw=0.7))
+
+  def _bb_hw(self, bbox, height, width):
+    """converts bounding box to height and width"""
+    return [bbox[1]*width, bbox[0]*height, \
+            (bbox[3]*width)-(bbox[1]*width)+1, \
+            (bbox[2]*height)-(bbox[0]*height)+1]
+
+  def match(self, ds_info):
+    """Checks if dataset belongs to object detection category"""
+    image_keys = self._extract_keys(ds_info, features_lib.Image)
+
+    if not image_keys:
+      return False
+
+    sequence_keys = self._extract_keys(ds_info, features_lib.Sequence)
+
+    bbox_keys = []
+    for key in sequence_keys:
+      if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
+        bbox_keys = self._extract_keys(ds_info, features_lib.BBoxFeature, key)
+
+    if bbox_keys:
+      return True
+
+    return False
+
+  def build(self, ds_info, ds, rows=3, cols=3, plot_scale=3, image_key=None, bbox_label=True):
+    """Builds the plot for visualization"""
+
+    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+
+    image_key = self._infer_image_key(ds_info, image_key)
+
+    sequence_keys = self._extract_keys(ds_info, features_lib.Sequence)
+    # Infer the BBox keys in the sequence feature connectors
+    bbox_keys = []
+    for key in sequence_keys:
+      if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
+        bbox_keys = self._extract_keys(ds_info, features_lib.BBoxFeature, key)
+        if len(bbox_keys) > 0:
+          sequence_key = key
+          break
+
+    # Infer the label keys in the sequence feature connector (BBox Labels)
+    label_keys = self._extract_keys(ds_info, features_lib.ClassLabel, sequence_key)
+
+    # Taking first label key since some datasets have multiple label keys
+    # for BBoxes as in voc dataset
+    label_key = label_keys[0] if len(label_keys) > 0 else None
+    if not label_key:
+      logging.info("Was not able to auto-infer label.")
+    bbox_key = bbox_keys[0] if len(bbox_keys) > 0 else None
+
+    num_examples = rows * cols
+    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+    for i, ex in enumerate(examples):
+      ax = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
+      image = ex[image_key]
+
+      bboxes = ex[sequence_key][bbox_key]
+      height = image.shape[0]
+      width = image.shape[1]
+      font_size = int((11./3.) * plot_scale)
+
+      # Plot the label and bounding boxes
+      for idx, box in enumerate(bboxes):
+        bbox = self._bb_hw(box, height, width)
+        self._draw_rectangle(ax, bbox)
+        if label_key and bbox_label:
+          text = ds_info.features[sequence_key][label_key].int2str(ex[sequence_key][label_key][idx])
+          self._draw_text(ax, bbox[:2], text, size=font_size)
+    plt.show()
+    return fig
