@@ -299,6 +299,7 @@ food101/1.0.0
 food101/2.0.0
 forest_fires/0.0.1
 gap/0.1.0
+geirhos_conflict_stimuli/1.0.0
 german_credit_numeric/1.0.0
 gigaword/1.2.0
 glue/ax/1.0.0
@@ -440,6 +441,7 @@ librispeech/plain_text/1.1.0
 librispeech/subwords32k/1.1.0
 librispeech/subwords8k/1.1.0
 librispeech_lm/0.1.0
+libritts/1.0.1
 ljspeech/1.1.0
 lm1b/bytes/1.0.0
 lm1b/plain_text/1.0.0
@@ -604,7 +606,10 @@ quickdraw_bitmap/3.0.0
 reddit_tifu/long/1.1.0
 reddit_tifu/short/1.1.0
 resisc45/3.0.0
+robonet/robonet_128/3.0.0
 robonet/robonet_64/3.0.0
+robonet/robonet_sample_128/3.0.0
+robonet/robonet_sample_64/3.0.0
 rock_paper_scissors/3.0.0
 rock_you/0.1.0
 scan/addprim_jump/1.0.0

@@ -29,16 +29,23 @@ The main differences from the LibriSpeech corpus are listed below:
 *   **Source code**:
     [`tfds.audio.libritts.Libritts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/libritts.py)
 *   **Versions**:
-    *   **`1.0.0`** (default): No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+    *   **`1.0.1`** (default): No release notes.
+*   **Download size**: `78.42 GiB`
+*   **Dataset size**: `271.41 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split            | Examples
+:--------------- | -------:
+'dev_clean'      | 5,736
+'dev_other'      | 4,613
+'test_clean'     | 4,837
+'test_other'     | 5,120
+'train_clean100' | 33,236
+'train_clean360' | 116,500
+'train_other500' | 205,044
 
 *   **Features**:
 

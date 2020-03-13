@@ -1,0 +1,16 @@
+airplane
+bear
+bicycle
+bird
+boat
+bottle
+car
+cat
+chair
+clock
+dog
+elephant
+keyboard
+knife
+oven
+truck
