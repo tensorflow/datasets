@@ -58,8 +58,16 @@ class ImageVisualizer():
       image_key = image_keys[0]
     return image_key
 
+  def _init_plot(self, rows, cols, plot_scale):
+    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+
+    return fig, plt
+
   def _plot_image(self, plt, fig, example, rows, cols, idx, image_key):
-    """Plots the images on the figure."""
+    """Plots the image on the figure."""
 
     if not isinstance(example, dict):
       raise ValueError(
@@ -99,8 +107,6 @@ class SupervisedVisualizer(ImageVisualizer):
   def build(self, ds_info, ds, rows=3, cols=3, plot_scale=3, image_key=None):
     """Builds the plot for visualization"""
 
-    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
     image_key = self._infer_image_key(ds_info, image_key)
     label_keys = self._extract_keys(ds_info, features_lib.ClassLabel)
 
@@ -111,8 +117,7 @@ class SupervisedVisualizer(ImageVisualizer):
     num_examples = rows * cols
     examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
 
-    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+    fig, plt = self._init_plot(rows, cols, plot_scale)
     for i, ex in enumerate(examples):
       _ = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
 
@@ -166,14 +171,13 @@ class ObjectVisulaizer(ImageVisualizer):
 
     return False
 
-  def build(self, ds_info, ds, rows=3, cols=3, plot_scale=3, image_key=None, bbox_label=True):
+  def build(self, ds_info, ds, rows=3, cols=3,
+            plot_scale=3, image_key=None, bbox_label=True):
     """Builds the plot for visualization"""
 
-    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
     image_key = self._infer_image_key(ds_info, image_key)
-
     sequence_keys = self._extract_keys(ds_info, features_lib.Sequence)
+
     # Infer the BBox keys in the sequence feature connectors
     bbox_keys = []
     for key in sequence_keys:
@@ -184,7 +188,8 @@ class ObjectVisulaizer(ImageVisualizer):
           break
 
     # Infer the label keys in the sequence feature connector (BBox Labels)
-    label_keys = self._extract_keys(ds_info, features_lib.ClassLabel, sequence_key)
+    label_keys = self._extract_keys(ds_info, features_lib.ClassLabel,
+                                    sequence_key)
 
     # Taking first label key since some datasets have multiple label keys
     # for BBoxes as in voc dataset
@@ -196,8 +201,7 @@ class ObjectVisulaizer(ImageVisualizer):
     num_examples = rows * cols
     examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
 
-    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+    fig, plt = self._init_plot(rows, cols, plot_scale)
     for i, ex in enumerate(examples):
       ax = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
       image = ex[image_key]
