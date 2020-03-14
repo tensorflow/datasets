@@ -19,12 +19,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import numpy as np
+import csv
 import collections
+import numpy as np
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
-import csv
 
 _CITATION = """\
   @misc{Dua:2019 ,
@@ -69,23 +69,86 @@ def convert_to_int(d):
 def convert_to_string(d):
   return d
 
-COLUMNS = ["age", "work_class", "final_weight", "education", "education_num", "marital_status", "occupation", "relationship", "race", "sex", "capital_gain", "capital_loss", "hours_per_week", "native_country"]
+COLUMNS = [
+    "age", "work_class", "final_weight", "education", "education_num", \
+    "marital_status", "occupation", "relationship", "race", "sex", \
+    "capital_gain", "capital_loss", "hours_per_week", "native_country"
+]
+
+_WORK_CLASS_LABELS = [
+    "State-gov", "Self-emp-not-inc", "Private", "Federal-gov", "Local-gov",\
+    "Self-emp-inc", "Without-pay", "Never-worked", "?"
+]
+
+_EDUCATION_LABELS = [
+    "Bachelors", "HS-grad", "11th", "Masters", "9th", "Some-college", \
+    "Assoc-acdm", "Assoc-voc", "7th-8th", "Doctorate", "Prof-school", \
+    "5th-6th", "10th", "1st-4th", "Preschool", "12th"
+]
+
+_MARITAL_LABELS = [
+    "Never-married", "Married-civ-spouse", "Divorced", "Married-spouse-absent",\
+    "Separated", "Married-AF-spouse", "Widowed"
+]
+
+_OCCUPATION_LABELS = [
+    "Adm-clerical", "Exec-managerial", "Handlers-cleaners", "Prof-specialty", \
+    "Other-service", "Sales", "Craft-repair", "Transport-moving", \
+    "Farming-fishing", "Machine-op-inspct", "Tech-support", "Protective-serv", \
+    "Armed-Forces", "Priv-house-serv", "?"
+]
+
+_RELATION_LABELS = [
+    "Not-in-family", "Husband", "Wife", "Own-child", "Unmarried", \
+    "Other-relative"
+]
+
+_RACE_LABELS = [
+    "White", "Black", "Asian-Pac-Islander", "Amer-Indian-Eskimo", \
+    "Other"
+]
+
+_COUNTRY_LABELS = [
+    "United-States", "Cuba", "Jamaica", "India", "Mexico", "South", \
+    "Puerto-Rico", "Honduras", "England", "Canada", "Germany", "Iran", \
+    "Philippines", "Italy", "Poland", "Columbia", "Cambodia", "Thailand", \
+    "Ecuador", "Laos", "Taiwan", "Haiti", "Portugal", "Dominican-Republic", \
+    "El-Salvador", "France", "Guatemala", "China", "Japan", "Yugoslavia", \
+    "Peru", "Outlying-US(Guam-USVI-etc)", "Scotland", "Trinadad&Tobago", \
+    "Greece", "Nicaragua", "Vietnam", "Hong", "Ireland", "Hungary", \
+    "Holand-Netherlands", "?"
+]
 
 FEATURE_DICT = collections.OrderedDict([
-  ("age", (tf.int32, convert_to_int)),
-  ("work_class", (tfds.features.ClassLabel(names=["State-gov", "Self-emp-not-inc", "Private", "Federal-gov","Local-gov", "Self-emp-inc", "Without-pay", "Never-worked", "?"]), convert_to_string)),
-  ("final_weight", (tf.int32, convert_to_int)),
-  ("education", (tfds.features.ClassLabel(names=["Bachelors", "HS-grad", "11th", "Masters", "9th", "Some-college", "Assoc-acdm", "Assoc-voc", "7th-8th", "Doctorate", "Prof-school", "5th-6th", "10th", "1st-4th", "Preschool", "12th"]), convert_to_string)),
-  ("education_num", (tf.int32, convert_to_int)),
-  ("marital_status", (tfds.features.ClassLabel(names=["Never-married", "Married-civ-spouse", "Divorced", "Married-spouse-absent", "Separated", "Married-AF-spouse", "Widowed"]), convert_to_string)),
-  ("occupation", (tfds.features.ClassLabel(names=["Adm-clerical", "Exec-managerial", "Handlers-cleaners", "Prof-specialty", "Other-service", "Sales", "Craft-repair", "Transport-moving", "Farming-fishing", "Machine-op-inspct", "Tech-support", "Protective-serv", "Armed-Forces", "Priv-house-serv", "?"]), convert_to_string)),
-  ("relationship", (tfds.features.ClassLabel(names=["Not-in-family", "Husband", "Wife", "Own-child", "Unmarried","Other-relative"]), convert_to_string)),
-  ("race", (tfds.features.ClassLabel(names=["White", "Black", "Asian-Pac-Islander", "Amer-Indian-Eskimo","Other"]), convert_to_string)),
-  ("sex", (tfds.features.ClassLabel(names=["Male", "Female"]), convert_to_string)),
-  ("capital_gain", (tf.int32, convert_to_int)),
-  ("capital_loss", (tf.int32, convert_to_int)),
-  ("hours_per_week", (tf.int32, convert_to_int)),
-  ("native_country", (tfds.features.ClassLabel(names=["United-States", "Cuba", "Jamaica", "India", "Mexico", "South", "Puerto-Rico", "Honduras", "England", "Canada", "Germany", "Iran", "Philippines", "Italy", "Poland", "Columbia", "Cambodia", "Thailand", "Ecuador", "Laos", "Taiwan", "Haiti", "Portugal", "Dominican-Republic", "El-Salvador", "France", "Guatemala", "China", "Japan", "Yugoslavia", "Peru", "Outlying-US(Guam-USVI-etc)", "Scotland", "Trinadad&Tobago", "Greece", "Nicaragua", "Vietnam", "Hong", "Ireland", "Hungary", "Holand-Netherlands", "?"]), convert_to_string))
+    ("age", (tf.int32, convert_to_int)),
+    ("work_class", (tfds.features.ClassLabel(names=_WORK_CLASS_LABELS),
+                    convert_to_string)),
+
+    ("final_weight", (tf.int32, convert_to_int)),
+    ("education", (tfds.features.ClassLabel(names=_EDUCATION_LABELS),
+                   convert_to_string)),
+
+    ("education_num", (tf.int32, convert_to_int)),
+    ("marital_status", (tfds.features.ClassLabel(names=_MARITAL_LABELS),
+                        convert_to_string)),
+
+    ("occupation", (tfds.features.ClassLabel(names=_OCCUPATION_LABELS),
+                    convert_to_string)),
+
+    ("relationship", (tfds.features.ClassLabel(names=_RELATION_LABELS),
+                      convert_to_string)),
+
+    ("race", (tfds.features.ClassLabel(names=_RACE_LABELS),
+              convert_to_string)),
+
+    ("sex", (tfds.features.ClassLabel(names=["Male", "Female"]),
+             convert_to_string)),
+
+    ("capital_gain", (tf.int32, convert_to_int)),
+    ("capital_loss", (tf.int32, convert_to_int)),
+    ("hours_per_week", (tf.int32, convert_to_int)),
+    ("native_country", (tfds.features.ClassLabel(names=_COUNTRY_LABELS),
+                        convert_to_string))
 ])
 
 _URL_TRAIN = "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data"
@@ -102,8 +165,10 @@ class Adult(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-          "prediction": tfds.features.ClassLabel(names=["<=50K", ">50K"]),
-          "features": {name: dtype for name, (dtype,func) in FEATURE_DICT.items()}
+            "prediction": tfds.features.ClassLabel(names=["<=50K", ">50K"]),
+            "features": {
+                name: dtype for name, (dtype, func) in FEATURE_DICT.items()
+            }
         }),
 
         supervised_keys=("features", "prediction"),
@@ -114,8 +179,8 @@ class Adult(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     files = dl_manager.download({
-      "train_data": _URL_TRAIN,
-      "test_data": _URL_TEST
+        "train_data": _URL_TRAIN,
+        "test_data": _URL_TEST
     })
 
     return [
@@ -124,8 +189,8 @@ class Adult(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"file_path": files["train_data"]},
         ),
         tfds.core.SplitGenerator(
-          name=tfds.Split.TEST,
-          gen_kwargs={"file_path": files["test_data"]}
+            name=tfds.Split.TEST,
+            gen_kwargs={"file_path": files["test_data"]}
         )
     ]
 
@@ -143,11 +208,9 @@ class Adult(tfds.core.GeneratorBasedBuilder):
           prediction_val = row[-1].split('.')[0].strip()
           rec = dict(zip(COLUMNS, map(lambda x: x.strip(), row[:-1])))
           yield i, {
-            "prediction": prediction_val,
-            "features": {
-              name: FEATURE_DICT[name][1](value) for name, value in rec.items()
-            }
+              "prediction": prediction_val,
+              "features": {
+                  name: FEATURE_DICT[name][1](value) for name, \
+                        value in rec.items()
+              }
           }
-
-
-
