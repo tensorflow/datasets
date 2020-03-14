@@ -1,5 +1,3 @@
-25, Private, 226802, 11th, 7, Never-married, Machine-op-inspct, Own-child, Black, Male, 0, 0, 40, United-States, <=50K.
-38, Private, 89814, HS-grad, 9, Married-civ-spouse, Farming-fishing, Husband, White, Male, 0, 0, 50, United-States, <=50K.
-28, Local-gov, 336951, Assoc-acdm, 12, Married-civ-spouse, Protective-serv, Husband, White, Male, 0, 0, 40, United-States, >50K.
-44, Private, 160323, Some-college, 10, Married-civ-spouse, Machine-op-inspct, Husband, Black, Male, 7688, 0, 40, United-States, >50K.
-18, ?, 103497, Some-college, 10, Never-married, ?, Own-child, White, Female, 0, 0, 30, United-States, <=50K.
+112, Local-gov, 105, Masters, 554, Married-civ-spouse, Priv-house-serv, Unmarried, Asian-Pac-Islander, Male, 821, 68, 373, South, >50K
+209, State-gov, 958, 5th-6th, 201, Separated, Transport-moving, Husband, White, Female, 36, 635, 466, Honduras, <=50K
+778, Never-worked, 68, 11th, 253, Never-married, Adm-clerical, Husband, Black, Male, 600, 171, 780, United-States, >50K

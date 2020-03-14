@@ -1,10 +1,5 @@
-43, Private, 187728, Some-college, 10, Married-civ-spouse, Prof-specialty, Wife, White, Female, 0, 1887, 50, United-States, >50K
-58, Self-emp-not-inc, 321171, HS-grad, 9, Married-civ-spouse, Handlers-cleaners, Husband, White, Male, 0, 0, 40, United-States, <=50K
-66, Private, 127921, HS-grad, 9, Never-married, Transport-moving, Not-in-family, White, Male, 2050, 0, 55, United-States, <=50K
-41, Private, 206565, Some-college, 10, Never-married, Craft-repair, Not-in-family, Black, Male, 0, 0, 45, United-States, <=50K
-26, Private, 224563, Bachelors, 13, Never-married, Adm-clerical, Not-in-family, White, Male, 0, 0, 40, United-States, <=50K
-47, Private, 178686, Assoc-voc, 11, Never-married, Other-service, Not-in-family, White, Male, 0, 0, 40, United-States, <=50K
-55, Local-gov, 98545, 10th, 6, Married-civ-spouse, Adm-clerical, Husband, White, Male, 0, 0, 40, United-States, <=50K
-53, Private, 242606, HS-grad, 9, Married-civ-spouse, Transport-moving, Husband, White, Male, 0, 0, 40, United-States, <=50K
-17, Private, 270942, 5th-6th, 3, Never-married, Other-service, Other-relative, White, Male, 0, 0, 48, Mexico, <=50K
-30, Private, 94235, HS-grad, 9, Never-married, Craft-repair, Other-relative, White, Male, 0, 0, 40, United-States, <=50K
+247, Without-pay, 532, Assoc-voc, 914, Married-AF-spouse, Farming-fishing, Husband, Other, Female, 711, 383, 480, Vietnam, >50K
+112, Local-gov, 387, Doctorate, 339, Never-married, Farming-fishing, Other-relative, Amer-Indian-Eskimo, Male, 400, 422, 978, Taiwan, <=50K
+947, Without-pay, 75, 10th, 173, Married-spouse-absent, Priv-house-serv, Husband, Other, Male, 983, 697, 22, Columbia, <=50K
+932, Self-emp-not-inc, 61, 11th, 29, Married-spouse-absent, Craft-repair, Wife, Amer-Indian-Eskimo, Male, 552, 902, 819, Hong, >50K
+57, Private, 747, 11th, 738, Married-spouse-absent, Protective-serv, Husband, Asian-Pac-Islander, Female, 456, 10, 303, Cuba, <=50K
