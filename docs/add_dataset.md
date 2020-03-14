@@ -84,6 +84,10 @@ in development mode.
 ```
 pip install -e .
 ```
+or directly run the `setup.py` file.
+```
+python setup.py develop
+```
 
 The following command will generate all the required files needed for adding 
 a new dataset.
