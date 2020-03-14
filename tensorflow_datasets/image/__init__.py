@@ -98,3 +98,4 @@ from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.vgg_face2 import VggFace2
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
+from tensorflow_datasets.image.duke_ultranet import DukeUltranet  # TODO(duke_ultranet) Sort alphabetically
