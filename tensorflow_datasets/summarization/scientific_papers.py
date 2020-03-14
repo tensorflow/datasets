@@ -16,9 +16,6 @@
 # Lint as: python3
 """Scientific Papers Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -57,9 +54,9 @@ _SUMMARY = "abstract"
 
 _URLS = {
     "arxiv":
-        "https://drive.google.com/uc?export=download&id=1K2kDBTNXS2ikx9xKmi2Fy0Wsc5u_Lls0",
+        "https://drive.google.com/uc?id=1b3rmCSIoh6VhD4HKWjI4HOW-cSwcwbeC&export=download",
     "pubmed":
-        "https://drive.google.com/uc?export=download&id=1Sa3kip8IE0J1SkMivlgOwq1jBgOnzeny",
+        "https://drive.google.com/uc?id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja&export=download",
 }
 
 
