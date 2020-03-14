@@ -145,7 +145,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     tf.compat.v1.enable_eager_execution()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
-    cls._download_urls = []
+    cls._download_urls = set()
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
       raise AssertionError(
@@ -219,7 +219,21 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEqual(self.builder.name, info.name)
 
   def _get_dl_extract_result(self, url):
-    self._download_urls.append(url)
+
+    def add_url(url_or_urls):
+      # url_or_urls: url or `list`/`dict` of urls to download and extract. 
+      # Each url can be a `str` or `tfds.download.Resource`.
+      if isinstance(url_or_urls, dict):
+        for _, v in url_or_urls.items():
+          add_url(v)
+      elif isinstance(url_or_urls, list):
+        map(add_url, url_or_urls)
+      elif isinstance(url_or_urls, download.resource.Resource):
+        self._download_urls.add(url_or_urls.url)
+      else:
+        self._download_urls.add(url_or_urls)
+
+    add_url(url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
@@ -264,19 +278,23 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
           self._download_and_prepare_as_dataset(builder)
     else:
       self._download_and_prepare_as_dataset(self.builder)
+
     if not self.SKIP_CHECKSUMS:
       with self._subTest("url_checksums"):
         self._test_checksums()
 
   def _test_checksums(self):
     urls = []
-    filepath = os.path.join(download.checksums._CHECKSUM_DIRS[0], self.builder.name + ".txt")
-    if not tf.io.gfile.exists(filepath):
-      raise AssertionError("The urls checksums file does not exist")
-    with tf.io.gfile.GFile(filepath, "r") as f:
-      for line in f.readlines():
-        urls.append(line.split()[0])
-    self.assertEqual(set(self._download_urls), set(urls), "The urls checksums don't match")
+    # how to get the path to the checksum file corresponding to the testcase.
+    filepath = os.path.join(download.checksums._get_path(os.path.basename(self.example_dir)))
+    if tf.io.gfile.exists(filepath):
+      with tf.io.gfile.GFile(filepath, "r") as f:
+        for line in f.readlines():
+          urls.append(line.split()[0])
+    else:
+      raise AssertionError("url checksums file not found at %s" % filepath)
+
+    self.assertTrue(self._download_urls.issubset(set(urls)), "url checksums don't match.")
 
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
