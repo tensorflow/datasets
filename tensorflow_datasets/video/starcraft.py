@@ -16,9 +16,6 @@
 # Lint as: python3
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from absl import logging
 import tensorflow.compat.v2 as tf
@@ -56,8 +53,7 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
-            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"), **kwargs)
     self.map_name = map_name
     self.resolution = resolution
     self.size_in_gb = size_in_gb
@@ -141,6 +137,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Generate Splits."""
     url = DATA_URL_DIR + "%s_%dx%d_png/" % (self.builder_config.map_name,
                                             self.builder_config.resolution,
                                             self.builder_config.resolution)
@@ -201,6 +198,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return video_frames
 
   def _generate_examples(self, files):
+    """Yields Examples."""
     logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
       ds = tf.data.TFRecordDataset(sorted(files))
