@@ -16,9 +16,6 @@
 # Lint as: python3
 """Tests for LibrispeechLm dataset builder."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import librispeech_lm
@@ -34,4 +31,3 @@ class LibrispeechLmTest(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-
