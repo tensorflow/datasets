@@ -66,17 +66,8 @@ get the files.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-})
-```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
@@ -92,17 +83,55 @@ FeaturesDict({
 ## cityscapes/semantic_segmentation (default config)
 
 *   **Config description**: Cityscapes semantic segmentation dataset.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```
 
 ## cityscapes/semantic_segmentation_extra
 
 *   **Config description**: Cityscapes semantic segmentation dataset with
     train_extra split and coarse labels.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```
 
 ## cityscapes/stereo_disparity
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+})
+```
 
 ## cityscapes/stereo_disparity_extra
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset
     with train_extra split.
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+})
+```

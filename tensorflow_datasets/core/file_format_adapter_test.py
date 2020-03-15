@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.file_format_adapter."""
 
 from __future__ import absolute_import
@@ -31,7 +32,7 @@ from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
@@ -95,7 +96,7 @@ class FileFormatAdapterTest(testing.TestCase):
           self.assertLess(x, max_val)
           els.append(x)
         if test_range:
-          self.assertEqual(list(range(min_val, max_val)), sorted(els))
+          self.assertCountEqual(list(range(min_val, max_val)), els)
 
       validate_dataset(train_dataset, 0, 30)
       validate_dataset(valid_dataset, 0, 30)

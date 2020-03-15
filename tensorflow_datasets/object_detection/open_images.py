@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Open images datasets.
 
 https://storage.googleapis.com/openimages/web/index.html
@@ -165,19 +166,13 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       OpenImagesV4Config(
           name='original',
-          supported_versions=[tfds.core.Version(
-              '0.2.0', experiments={tfds.core.Experiment.S3: False})],
           description='Images at their original resolution and quality.'),
       OpenImagesV4Config(
           name='300k',
-          supported_versions=[tfds.core.Version(
-              '0.2.1', experiments={tfds.core.Experiment.S3: False})],
           description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
           target_pixels=300000),
       OpenImagesV4Config(
           name='200k',
-          supported_versions=[tfds.core.Version(
-              '0.2.1', experiments={tfds.core.Experiment.S3: False})],
           description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
           target_pixels=200000)
   ]
@@ -249,7 +244,6 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=512,
             gen_kwargs=dict(archive_paths=paths['train_images'],
                             objects_getter=train_objects,
                             bboxes_getter=train_bbox,
@@ -257,14 +251,12 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=36,
             gen_kwargs=dict(archive_paths=[paths['test_images']],
                             objects_getter=test_objects,
                             bboxes_getter=test_bbox),
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=12,
             gen_kwargs=dict(archive_paths=[paths['validation_images']],
                             objects_getter=validation_objects,
                             bboxes_getter=validation_bbox),

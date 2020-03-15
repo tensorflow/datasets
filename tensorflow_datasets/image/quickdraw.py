@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """QuickDraw dataset."""
 
 from __future__ import absolute_import
@@ -58,10 +59,6 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   """
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
@@ -93,7 +90,6 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=25,
             gen_kwargs={
                 "file_paths": file_paths,
             })

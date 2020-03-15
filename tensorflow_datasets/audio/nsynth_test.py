@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Nsynth Dataset Builder test."""
 from tensorflow_datasets.audio import nsynth
 import tensorflow_datasets.testing as tfds_test
@@ -20,7 +21,6 @@ import tensorflow_datasets.testing as tfds_test
 
 class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = nsynth.Nsynth
-  VERSION = "experimental_latest"
   # Make test run faster by using fewer output shards.
   nsynth._SPLIT_SHARDS = {"train": 1, "valid": 1, "test": 1,}
   BUILDER_CONFIG_NAMES_TO_TEST = ["full"]

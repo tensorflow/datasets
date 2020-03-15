@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Test for cassava leaf dataset."""
 
 
@@ -27,7 +28,6 @@ class CassavaTest(testing.DatasetBuilderTestCase):
       "test": 5,
       "validation": 5,
   }
-
 
 if __name__ == "__main__":
   testing.test_main()

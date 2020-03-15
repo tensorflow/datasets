@@ -25,10 +25,10 @@ the Kitti homepage.
 *   **Source code**:
     [`tfds.object_detection.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
 *   **Versions**:
-    *   **`3.1.0`** (default): No release notes.
-    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.2.0`** (default): Devkit updated.
+    *   `3.1.0`: No release notes.
 *   **Download size**: `11.71 GiB`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.27 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
@@ -59,7 +59,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

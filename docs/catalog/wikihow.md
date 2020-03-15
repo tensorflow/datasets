@@ -47,17 +47,8 @@ clean up extra commas.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'headline')`
 *   **Citation**:
 
@@ -84,6 +75,16 @@ Split        | Examples
 'train'      | 157,252
 'validation' | 5,599
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'headline': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
+})
+```
+
 ## wikihow/sep
 
 *   **Config description**: use each paragraph and its summary.
@@ -94,3 +95,15 @@ Split        | Examples
 'test'       | 37,800
 'train'      | 1,060,732
 'validation' | 37,932
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'headline': Text(shape=(), dtype=tf.string),
+    'overview': Text(shape=(), dtype=tf.string),
+    'sectionLabel': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
+})
+```

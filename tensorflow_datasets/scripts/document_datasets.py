@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Script to document datasets.
 
 To test:
@@ -25,10 +26,10 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+from concurrent import futures
 import os
 
 from absl import app
-from concurrent import futures
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds

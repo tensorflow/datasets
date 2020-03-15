@@ -22,7 +22,6 @@ lighting. All images have an associated ground truth annotation of breed.
     [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
 *   **Versions**:
     *   **`3.1.0`** (default): Added species and labels, new split API.
-    *   `1.2.0`: No release notes.
 *   **Download size**: `801.24 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -47,7 +46,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 

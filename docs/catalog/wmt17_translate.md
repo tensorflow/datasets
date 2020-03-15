@@ -38,8 +38,6 @@ builder = tfds.builder("wmt_translate", config=config)
     [`tfds.translate.wmt17.Wmt17Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt17.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-    *   `0.0.3`: No release notes.
-*   **Download size**: `1.66 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
@@ -50,17 +48,6 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('cs', 'en')`
 *   **Citation**:
 
 ```
@@ -80,6 +67,7 @@ Translation({
 ## wmt17_translate/cs-en (default config)
 
 *   **Config description**: WMT 2017 cs-en translation task dataset.
+*   **Download size**: `1.66 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -88,9 +76,22 @@ Split        | Examples
 'train'      | 15,851,649
 'validation' | 2,999
 
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('cs', 'en')`
+
 ## wmt17_translate/de-en
 
 *   **Config description**: WMT 2017 de-en translation task dataset.
+*   **Download size**: `1.81 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -99,9 +100,22 @@ Split        | Examples
 'train'      | 5,906,184
 'validation' | 2,999
 
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('de', 'en')`
+
 ## wmt17_translate/fi-en
 
 *   **Config description**: WMT 2017 fi-en translation task dataset.
+*   **Download size**: `414.10 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -110,9 +124,22 @@ Split        | Examples
 'train'      | 2,656,542
 'validation' | 6,000
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('fi', 'en')`
+
 ## wmt17_translate/lv-en
 
 *   **Config description**: WMT 2017 lv-en translation task dataset.
+*   **Download size**: `161.69 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -121,9 +148,22 @@ Split        | Examples
 'train'      | 3,567,528
 'validation' | 2,003
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'lv': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('lv', 'en')`
+
 ## wmt17_translate/ru-en
 
 *   **Config description**: WMT 2017 ru-en translation task dataset.
+*   **Download size**: `3.34 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -132,9 +172,22 @@ Split        | Examples
 'train'      | 25,782,720
 'validation' | 2,998
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('ru', 'en')`
+
 ## wmt17_translate/tr-en
 
 *   **Config description**: WMT 2017 tr-en translation task dataset.
+*   **Download size**: `59.32 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -143,9 +196,22 @@ Split        | Examples
 'train'      | 205,756
 'validation' | 3,000
 
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('tr', 'en')`
+
 ## wmt17_translate/zh-en
 
 *   **Config description**: WMT 2017 zh-en translation task dataset.
+*   **Download size**: `2.16 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -153,3 +219,16 @@ Split        | Examples
 'test'       | 2,001
 'train'      | 25,136,609
 'validation' | 2,002
+
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'zh': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('zh', 'en')`

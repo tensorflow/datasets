@@ -30,7 +30,6 @@ computer vision tasks: face attribute recognition, face detection, and landmark
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.3.0`: No release notes.
 *   **Download size**: `1.38 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -106,7 +105,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

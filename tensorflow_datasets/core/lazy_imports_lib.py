@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Lazy imports for heavy dependencies."""
 
 from __future__ import absolute_import
@@ -59,6 +60,11 @@ class LazyImporter(object):
   @classmethod
   def cv2(cls):
     return _try_import("cv2")  # pylint: disable=unreachable
+
+  @utils.classproperty
+  @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
 
   @utils.classproperty
   @classmethod

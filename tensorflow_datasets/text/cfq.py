@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CFQ (Compositional Freebase Question) dataset."""
 
 from __future__ import absolute_import
@@ -22,14 +23,18 @@ from __future__ import print_function
 import json
 import os
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
-@inproceedings{Lake2018GeneralizationWS,
+@inproceedings{Keysers2020,
   title={Measuring Compositional Generalization: A Comprehensive Method on
          Realistic Data},
-  author={Daniel Keysers, et al.},
+  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and
+          Hylke Buisman and Daniel Furrer and Sergii Kashubin and
+          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and
+          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and
+          Olivier Bousquet},
   booktitle={ICLR},
   year={2020},
   url={https://arxiv.org/abs/1912.09713.pdf},

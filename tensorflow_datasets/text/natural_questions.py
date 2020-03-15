@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Natural Questions: A Benchmark for Question Answering Research."""
 
 from __future__ import absolute_import
@@ -126,7 +127,6 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=8,
             gen_kwargs={'filepaths': files['validation']},
         ),
     ]

@@ -62,7 +62,7 @@ require:
 
 * Subclassing
 [`tfds.testing.TestCase`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py)
-* Calling `tf.compat.v1.enable_eager_execution()` at the top-level just after
+* Calling `tf.enable_v2_behavior()` at the top-level just after
   the imports. This is to enable testing against TF 2.0.
 * Using the `@tfds.testing.run_in_graph_and_eager_modes()` decorator for all
   functionality that touches TF ops. To evaluate Tensor values in a way that

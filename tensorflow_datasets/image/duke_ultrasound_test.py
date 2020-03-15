@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """DAS beamformed phantom images and paired clinical post-processed images test."""
 
 from __future__ import absolute_import

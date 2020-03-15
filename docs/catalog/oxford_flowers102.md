@@ -30,7 +30,6 @@ training set and validation set each consist of 10 images per class (totalling
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.0.1`: No release notes.
 *   **Download size**: `336.76 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -54,7 +53,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 

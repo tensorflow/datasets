@@ -38,7 +38,6 @@ builder = tfds.builder("wmt_translate", config=config)
     [`tfds.translate.wmt18.Wmt18Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt18.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
-    *   `0.0.3`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
@@ -55,17 +54,6 @@ builder = tfds.builder("wmt_translate", config=config)
 Split | Examples
 :---- | -------:
 
-*   **Features**:
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('cs', 'en')`
 *   **Citation**:
 
 ```
@@ -88,31 +76,120 @@ Translation({
 ## wmt18_translate/cs-en (default config)
 
 *   **Config description**: WMT 2018 cs-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('cs', 'en')`
 
 ## wmt18_translate/de-en
 
 *   **Config description**: WMT 2018 de-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('de', 'en')`
 
 ## wmt18_translate/et-en
 
 *   **Config description**: WMT 2018 et-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'et': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('et', 'en')`
 
 ## wmt18_translate/fi-en
 
 *   **Config description**: WMT 2018 fi-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('fi', 'en')`
 
 ## wmt18_translate/kk-en
 
 *   **Config description**: WMT 2018 kk-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'kk': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('kk', 'en')`
 
 ## wmt18_translate/ru-en
 
 *   **Config description**: WMT 2018 ru-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('ru', 'en')`
 
 ## wmt18_translate/tr-en
 
 *   **Config description**: WMT 2018 tr-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
+})
+```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('tr', 'en')`
 
 ## wmt18_translate/zh-en
 
 *   **Config description**: WMT 2018 zh-en translation task dataset.
+*   **Features**:
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'zh': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('zh', 'en')`

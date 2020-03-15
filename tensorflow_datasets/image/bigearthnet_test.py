@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for Bigearthnet data loading."""
 
 from __future__ import absolute_import
@@ -25,7 +26,6 @@ from tensorflow_datasets.image import bigearthnet
 
 class BigearthnetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = bigearthnet.Bigearthnet
-  VERSION = "experimental_latest"
   SPLITS = {
       "train": 1,
   }

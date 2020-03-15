@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for caltech_birds dataset module."""
 
 from tensorflow_datasets.image import caltech_birds

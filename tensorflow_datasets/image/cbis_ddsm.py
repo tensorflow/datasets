@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CBIS-DDSM mammography dataset."""
 
 from __future__ import absolute_import
@@ -138,14 +139,12 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   You can download the images from
   https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
   Please look at the source file (cbis_ddsm.py) to see the instructions
-  on how to conver them into png (using dcmj2pnm).
+  on how to convert them into png (using dcmj2pnm).
   """
 
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',
-          supported_versions=[tfds.core.Version(
-              '0.2.0', experiments={tfds.core.Experiment.S3: False})],
           description=('Patches containing both calsification and mass cases, '
                        'plus pathces with no abnormalities. Designed as a '
                        'traditional 5-class classification task.'),
@@ -153,14 +152,10 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           patch_size=(224, 224)),
       CuratedBreastImagingDDSMConfig(
           name='original-calc',
-          supported_versions=[tfds.core.Version(
-              '0.1.0', experiments={tfds.core.Experiment.S3: False})],
           description=('Original images of the calcification cases compressed '
                        'in lossless PNG.')),
       CuratedBreastImagingDDSMConfig(
           name='original-mass',
-          supported_versions=[tfds.core.Version(
-              '0.1.0', experiments={tfds.core.Experiment.S3: False})],
           description=('Original images of the mass cases compressed in '
                        'lossless PNG.')),
   ]
@@ -282,7 +277,6 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 'generate_fn': self._generate_examples_original,
                 'patients_data': patients_data,
@@ -291,7 +285,6 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'generate_fn': self._generate_examples_original,
                 'patients_data': patients_data,

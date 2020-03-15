@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 r"""Generate sun397-like files, smaller and with random data.
 
 """
@@ -22,7 +23,6 @@ from __future__ import division
 from __future__ import print_function
 
 import io
-import md5
 import os
 import random
 import tarfile
@@ -30,6 +30,7 @@ import tempfile
 
 from absl import app
 from absl import flags
+import md5
 
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils

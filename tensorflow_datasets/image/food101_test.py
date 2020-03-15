@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Test for food101 dataset."""
+
 
 from tensorflow_datasets.image import food101
 import tensorflow_datasets.testing as tfds_test

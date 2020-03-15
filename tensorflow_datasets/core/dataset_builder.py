@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """DatasetBuilder base class."""
 
 from __future__ import absolute_import
@@ -1121,7 +1122,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     # This allows for global preprocessing in beam.
     split_generators_kwargs = {}
     split_generators_arg_names = (
-        inspect.getargspec(self._split_generators).args if six.PY2 else
+        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method
         inspect.signature(self._split_generators).parameters.keys())
     if "pipeline" in split_generators_arg_names:
       split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]

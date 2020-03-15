@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """So2SAT remote sensing dataset."""
 
 
@@ -124,7 +125,6 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=20,
             gen_kwargs={
                 'path': paths['train'],
                 'selection': self.builder_config.selection,
@@ -132,7 +132,6 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=5,
             gen_kwargs={
                 'path': paths['val'],
                 'selection': self.builder_config.selection,
