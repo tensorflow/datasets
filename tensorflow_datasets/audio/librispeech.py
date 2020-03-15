@@ -161,6 +161,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         ])
 
   def _read_metadata_file(self, path, field_names):
+    """Returns metadata in standard format."""
     metadata = {}
     with tf.io.gfile.GFile(path) as f:
       for line in f:
@@ -173,6 +174,8 @@ class Librispeech(tfds.core.BeamBasedBuilder):
     return metadata
 
   def _split_generators(self, dl_manager):
+    """Returns splits."""
+
     extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
     # Generate vocabulary from training data if SubwordTextEncoder configured.
     all_train_dirs = [

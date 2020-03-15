@@ -25,6 +25,8 @@ from tensorflow_datasets.audio import librispeech
 
 
 class LibrispeechTest(testing.DatasetBuilderTestCase):
+  """Tests for librispeech dataset module."""
+
   DATASET_CLASS = librispeech.Librispeech
   BUILDER_CONFIG_NAMES_TO_TEST = ["plain_text", "subwords8k"]
   SPLITS = {
