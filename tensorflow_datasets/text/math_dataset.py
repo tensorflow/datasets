@@ -16,9 +16,6 @@
 # Lint as: python3
 """Mathematics database."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 from absl import logging
@@ -224,6 +221,7 @@ class MathDataset(tfds.core.GeneratorBasedBuilder):
     )
 
   def _read_data_from_all_categories(self, directory, config, categories):
+    """Read Data from all categories of dataset used for generate examples"""
     lines = []
     for category in categories:
       data_file = os.path.join(directory, _DATASET_VERSION, category, config)
