@@ -16,9 +16,6 @@
 # Lint as: python3
 """Tests for wikipedia dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import wikipedia
@@ -26,6 +23,7 @@ from tensorflow_datasets.text import wikipedia
 
 
 class WikipediaTest(testing.DatasetBuilderTestCase):
+  """Create testing.DatasetBuilderTestCase for Test"""
   DATASET_CLASS = wikipedia.Wikipedia
   BUILDER_CONFIG_NAMES_TO_TEST = ["20190301.en"]
 
