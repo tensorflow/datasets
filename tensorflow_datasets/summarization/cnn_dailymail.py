@@ -14,10 +14,9 @@
 # limitations under the License.
 
 # Lint as: python3
+
 """CNN/DailyMail Summarization dataset, non-anonymized version."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 import hashlib
 import os
 from absl import logging
@@ -78,14 +77,6 @@ _DL_URLS = {
 
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
-_SUPPORTED_VERSIONS = [
-    # Same data as 0.0.2
-    tfds.core.Version('1.0.0',
-                      'New split API (https://tensorflow.org/datasets/splits)'),
-    # Having the model predict newline separators makes it easier to evaluate
-    # using summary-level ROUGE.
-    tfds.core.Version('2.0.0', 'Separate target sentences with newline.')
-]
 
 # Using cased version.
 _DEFAULT_VERSION = tfds.core.Version('3.0.0', 'Using cased version.')
@@ -212,12 +203,11 @@ def _get_art_abs(story_file, tfds_version):
   for line in lines:
     if not line:
       continue  # empty line
-    elif line.startswith('@highlight'):
+    if line.startswith('@highlight'):
       next_is_highlight = True
-    elif next_is_highlight:
+    if next_is_highlight:
       highlights.append(line)
-    else:
-      article_lines.append(line)
+    article_lines.append(line)
 
   # Make article into a single string
   article = ' '.join(article_lines)
@@ -277,6 +267,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
       yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
 
   def _split_generators(self, dl_manager):
+    """Generate Splits."""
     dl_paths = dl_manager.download_and_extract(_DL_URLS)
     train_files = _subset_filenames(dl_paths, tfds.Split.TRAIN)
     # Generate shared vocabulary
