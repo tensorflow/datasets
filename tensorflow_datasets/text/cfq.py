@@ -16,9 +16,6 @@
 # Lint as: python3
 """CFQ (Compositional Freebase Question) dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -131,7 +128,7 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
     samples_path = os.path.join(base_directory, 'dataset.json')
     splits_path = os.path.join(base_directory, splits_file)
     with tf.io.gfile.GFile(samples_path) as samples_file:
-      with tf.io.gfile.GFile(splits_path) as splits_file:
+      with tf.io.gfile.GFile(splits_path) as splits_file:  # pylint: disable=redefined-argument-from-local
         logging.info('Reading json from %s into memory...', samples_path)
         samples = json.load(samples_file)
         logging.info('Loaded json data from %s.', samples_path)
