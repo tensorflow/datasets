@@ -16,9 +16,6 @@
 # Lint as: python3
 """The Multi-Genre NLI Corpus."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -69,8 +66,7 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
     """
     super(MultiNLIConfig, self).__init__(
         version=tfds.core.Version(
-            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"), **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -112,7 +108,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
       yield " ".join([ex["premise"], ex["hypothesis"]])
 
   def _split_generators(self, dl_manager):
-
+    """Generate Splits."""
     downloaded_dir = dl_manager.download_and_extract(
         "http://storage.googleapis.com/tfds-data/downloads/multi_nli/"
         "multinli_1.0.zip")
@@ -138,6 +134,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"filepath": train_path}),
         tfds.core.SplitGenerator(
             name="validation_matched",
+            num_shards=1,
             gen_kwargs={"filepath": matched_validation_path}),
         tfds.core.SplitGenerator(
             name="validation_mismatched",
