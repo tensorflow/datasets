@@ -13,12 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Facebook Low Resource (FLoRes) machine translation benchmark dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 
@@ -78,8 +74,12 @@ class FloresConfig(tfds.core.BuilderConfig):
         name=name,
         description=description,
         version=tfds.core.Version(
-            "1.1.0",
+            "1.0.0",
             "New split API (https://tensorflow.org/datasets/splits)"),
+        supported_versions=[
+            tfds.core.Version(
+                "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -126,6 +126,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
+    """Generate Splits"""
     dl_dir = dl_manager.download_and_extract(_DATA_URL)
 
     source, target = self.builder_config.language_pair
