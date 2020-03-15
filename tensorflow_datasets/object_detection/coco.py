@@ -71,7 +71,7 @@ Split = collections.namedtuple(
     'Split', ['name', 'images', 'annotations', 'annotation_type'])
 
 
-class AnnotationType(object):
+class AnnotationType:
   """Enum of the annotation format types.
 
   Splits are annotated with different formats.
@@ -177,7 +177,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-
+    """Provides Dataset info."""
     features = {
         # Images can have variable shape
         'image': tfds.features.Image(encoding_format='jpeg'),
@@ -421,7 +421,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     )
 
 
-class CocoAnnotation(object):
+class CocoAnnotation:
   """Coco annotation helper class."""
 
   def __init__(self, annotation_path):
