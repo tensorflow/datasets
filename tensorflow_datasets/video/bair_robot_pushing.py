@@ -52,9 +52,6 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})
-  ]
 
   def _info(self):
     """Create Dataset Info."""
@@ -83,13 +80,11 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "train"),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=4,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "test"),
             }),
