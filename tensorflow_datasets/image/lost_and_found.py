@@ -15,9 +15,6 @@
 
 """Lost and Found Road Hazard Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from os import path
 import re
@@ -132,6 +129,7 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Dataset info."""
     possible_features = {
         'image_left':
             tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png'),

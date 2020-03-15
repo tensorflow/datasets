@@ -15,9 +15,6 @@
 
 """Tests for binarized_mnist dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import binarized_mnist
@@ -34,9 +31,9 @@ class MNISTTest(testing.DatasetBuilderTestCase):
       "test": 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_data": binarized_mnist._TRAIN_DATA_FILENAME,
-      "validation_data": binarized_mnist._VALID_DATA_FILENAME,
-      "test_data": binarized_mnist._TEST_DATA_FILENAME,
+      "train_data": binarized_mnist._TRAIN_DATA_FILENAME, # pylint: disable=W0212
+      "validation_data": binarized_mnist._VALID_DATA_FILENAME, # pylint: disable=W0212
+      "test_data": binarized_mnist._TEST_DATA_FILENAME, # pylint: disable=W0212
   }
 
 if __name__ == "__main__":

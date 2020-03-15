@@ -15,10 +15,6 @@
 
 """Describable Textures Dataset (DTD)."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
@@ -92,6 +88,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_path, split_name):
+    """Yields examples of dtd images and labels."""
     with tf.io.gfile.GFile(
         os.path.join(data_path, "dtd", "labels", split_name + ".txt"),
         "r") as split_file:

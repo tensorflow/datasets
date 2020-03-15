@@ -13,11 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""TODO(oxford_102_flowers): Add a description here."""
+"""Test for oxford_102_flowers."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import oxford_flowers102
@@ -40,4 +37,3 @@ class OxfordFlowers102Test(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-

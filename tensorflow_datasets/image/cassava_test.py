@@ -15,9 +15,6 @@
 
 """Test for cassava leaf dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import cassava
@@ -32,9 +29,5 @@ class CassavaTest(testing.DatasetBuilderTestCase):
   }
 
 
-class CassavaS3Test(CassavaTest):
-  VERSION = "experimental_latest"
-
 if __name__ == "__main__":
   testing.test_main()
-

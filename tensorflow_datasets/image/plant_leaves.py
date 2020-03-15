@@ -15,9 +15,6 @@
 
 """Healhy and unhealthy plant leaves dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import re
@@ -134,7 +131,7 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, image_files):
     """Yields examples."""
-    label_map = {pattern: label for pattern, label in _LABEL_MAPPING}
+    label_map = {pattern: label for pattern, label in _LABEL_MAPPING} # pylint: disable=R1721
     regexp = re.compile(r"^(\d\d\d\d)_.*\.JPG$")
     # Assigns labels to images based on label mapping.
     for original_fname, fpath in image_files.items():

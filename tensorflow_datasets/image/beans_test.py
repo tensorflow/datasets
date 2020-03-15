@@ -40,4 +40,3 @@ class BeansS3Test(BeansTest):
 
 if __name__ == '__main__':
   tfds_test.test_main()
-

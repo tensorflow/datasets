@@ -16,9 +16,6 @@
 """https://www.kaggle.com/c/diabetic-retinopathy-detection/data.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import csv
 import io
@@ -212,10 +209,9 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             filepath=filepath,
             target_pixels=self.builder_config.target_pixels,
             crop_to_radius=True)
-      else:
-        return _resize_image_if_necessary(
-            image_fobj=image_fobj,
-            target_pixels=self.builder_config.target_pixels)
+      return _resize_image_if_necessary(
+          image_fobj=image_fobj,
+          target_pixels=self.builder_config.target_pixels)
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):

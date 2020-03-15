@@ -15,15 +15,13 @@
 
 """Test for the PlantLeaves dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import plantae_k
 
 
 class PlantaeKTest(testing.DatasetBuilderTestCase):
+  """ Create testing.DatasetBuilderTestCase for tests."""
   DATASET_CLASS = plantae_k.PlantaeK
   # See note below about the +1
   SPLITS = {"train": 16 + 1}

@@ -113,6 +113,7 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     downloads = _DEFAULT_SPLITS.copy()
     downloads.update(_DATA_URL)
     dl_paths = dl_manager.download_and_extract(downloads)
@@ -140,6 +141,7 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
     return splits
 
   def _generate_examples(self, datapath, csvpath):
+    """Yields examples."""
     with tf.io.gfile.GFile(csvpath) as f:
       reader = csv.DictReader(f)
       for row in reader:

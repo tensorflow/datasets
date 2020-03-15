@@ -15,6 +15,8 @@
 
 """Image datasets."""
 
+# pylint: disable=c0103
+
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.arc import ARC
@@ -81,7 +83,6 @@ from tensorflow_datasets.image.places365_small import Places365Small
 from tensorflow_datasets.image.plant_leaves import PlantLeaves
 from tensorflow_datasets.image.plant_village import PlantVillage
 from tensorflow_datasets.image.plantae_k import PlantaeK
-from tensorflow_datasets.image.qmnist import Qmnist
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
@@ -97,4 +98,3 @@ from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.vgg_face2 import VggFace2
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
- 

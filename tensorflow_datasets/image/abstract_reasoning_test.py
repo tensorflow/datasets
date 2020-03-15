@@ -14,11 +14,13 @@
 # limitations under the License.
 
 """AbstractReasoning dataset test."""
+
 from tensorflow_datasets.image import abstract_reasoning
 import tensorflow_datasets.testing as tfds_test
 
 
 class AbstractReasoningTest(tfds_test.DatasetBuilderTestCase):
+  """ Create testing.DatasetBuilderTestCase for tests."""
   DATASET_CLASS = abstract_reasoning.AbstractReasoning
   VERSION = "experimental_latest"
   SPLITS = {"train": 5, "validation": 5, "test": 5}

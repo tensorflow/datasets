@@ -15,9 +15,6 @@
 
 """Eurosat remote sensing benchmarking dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import os
@@ -99,6 +96,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """ Returns Dataset Info."""
     if self.builder_config.selection == 'rgb':
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[64, 64, 3]),

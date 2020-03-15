@@ -15,9 +15,6 @@
 
 """Cassava leaf dataset with images of health and diseased leaves."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -106,4 +103,3 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
             "label": label,
         }
         yield fname, record
-

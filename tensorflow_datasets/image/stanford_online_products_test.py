@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Test for Stanford online Products Dataset."""
+
 from tensorflow_datasets.image import stanford_online_products
 import tensorflow_datasets.testing as tfds_test
 

@@ -13,9 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Tests for CARS196 dataset module."""
+
 from tensorflow_datasets.image import cars196
 import tensorflow_datasets.testing as tfds_test
 

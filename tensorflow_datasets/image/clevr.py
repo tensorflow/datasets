@@ -104,6 +104,7 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
     return splits
 
   def _generate_examples(self, images_dir_path, scenes_description_file):
+    """Yields Examples"""
     image_paths = sorted([os.path.join(images_dir_path, filename)
                           for filename in tf.io.gfile.listdir(images_dir_path)])
 

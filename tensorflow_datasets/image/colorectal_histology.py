@@ -15,9 +15,6 @@
 
 """Texture tiles from colorectal cancer histology."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import numpy as np
@@ -96,6 +93,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     folder = dl_manager.download_and_extract(_TILES_DL_URL)
     return [
         tfds.core.SplitGenerator(
@@ -106,6 +104,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, root_dir):
+    """Yields examples."""
     root_dir = os.path.join(root_dir, _TILES_SUBDIR)
     for i, class_name in enumerate(_CLASS_NAMES):
       class_dir = os.path.join(root_dir, _class_subdir(i, class_name))
@@ -144,6 +143,7 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     folder = dl_manager.download_and_extract(_LARGE_DL_URL)
     return [
         tfds.core.SplitGenerator(
@@ -154,6 +154,7 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, folder):
+    """Yields examples."""
     folder = os.path.join(folder, _LARGE_SUBDIR)
     for fn in tf.io.gfile.listdir(folder):
       image = _load_tif(os.path.join(folder, fn))

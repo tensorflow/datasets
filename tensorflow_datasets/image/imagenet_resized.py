@@ -19,9 +19,6 @@ This is not to be confused with `downsampled_imagenet` which is a unsupervised
 dataset used for generative modeling.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import itertools
@@ -96,6 +93,7 @@ class ImagenetResized(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     size = self.builder_config.size
 
     if size in [8, 16, 32]:

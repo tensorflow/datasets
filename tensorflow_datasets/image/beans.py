@@ -96,4 +96,3 @@ class Beans(tfds.core.GeneratorBasedBuilder):
           "label": label,
       }
       yield fname, record
-

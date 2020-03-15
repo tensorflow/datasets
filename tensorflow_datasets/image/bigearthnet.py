@@ -15,9 +15,6 @@
 
 """BigEarthNet remote sensing dataset of Sentinel-2 image patches."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import json
@@ -142,6 +139,7 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
+    """ Create Dataset Info."""
     metadata_dict = tfds.features.FeaturesDict({
         'acquisition_date': tfds.features.Text(),
         'coordinates': {

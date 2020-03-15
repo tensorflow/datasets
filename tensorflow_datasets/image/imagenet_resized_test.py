@@ -13,15 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Tests for Imagenet_resized."""
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import imagenet_resized
 
 
 class ImagenetResizedTest(testing.DatasetBuilderTestCase):
+  """ Create testing.DatasetBuilderTestCase for tests."""
   BUILDER_CONFIG_NAMES_TO_TEST = [
       "8x8",
   ]

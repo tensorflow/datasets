@@ -169,7 +169,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    # Enable features as necessary
+    """Create Dataset Info."""
     features = {}
     features['image_id'] = tfds.features.Text()
     features['image_left'] = tfds.features.Image(
@@ -196,6 +196,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Split Generators."""
     paths = {}
     for split, (zip_file, _) in self.builder_config.zip_root.items():
       paths[split] = os.path.join(dl_manager.manual_dir, zip_file)
@@ -249,6 +250,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     return splits
 
   def _generate_examples(self, **paths):
+    """Yields Examples."""
     left_imgs_root = paths['images_left']
     for city_id in tf.io.gfile.listdir(left_imgs_root):
       paths_city_root = {feat_dir: os.path.join(path, city_id)

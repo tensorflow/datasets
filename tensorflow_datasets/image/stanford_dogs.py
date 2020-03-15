@@ -14,9 +14,7 @@
 # limitations under the License.
 
 """Stanford dogs dataset."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 
 import collections
 import os
@@ -93,7 +91,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
-
+    """Create Splits"""
     images_path = dl_manager.download(_IMAGES_URL)
     split_path, annotation_path = dl_manager.download_and_extract(
         [_SPLIT_URL, _ANNOTATIONS_URL])
@@ -116,7 +114,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
       if "train" in fname:
         train_list, train_mat_arr = parse_mat_file(full_file_name)
-        label_names = set([  # Set to remove duplicates
+        label_names = set([  # Set to remove duplicates      # pylint: disable=R1718
             element.split("/")[-2].lower()  # Extract path/label/img.jpg
             for element in train_mat_arr["file_list"]
         ])
