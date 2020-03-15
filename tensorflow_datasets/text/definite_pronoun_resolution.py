@@ -16,9 +16,6 @@
 # Lint as: python3
 """The Definite Pronoun Resolution Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -94,6 +91,7 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, filepath):
+    """Yields Examples."""
     with tf.io.gfile.GFile(filepath) as f:
       line_num = -1
       while True:
