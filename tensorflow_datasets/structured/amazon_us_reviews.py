@@ -13,12 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Amazon Customer Reviews Dataset --- US REVIEWS DATASET."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import csv
@@ -114,7 +110,8 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
           name=config_name,
           description="A dataset consisting of reviews of Amazon " +
           config_name +
-          " products in US marketplace. Each product has its own version as specified with it.",
+          " products in US marketplace. Each product has"
+          " its own version as specified with it.",
           version="0.1.0",
           data=config_name,
       ) for config_name in _DATA_OPTIONS
