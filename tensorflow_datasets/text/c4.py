@@ -16,9 +16,6 @@
 # Lint as: python3
 """C4 dataset based on Common Crawl."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -133,21 +130,25 @@ class C4(tfds.core.BeamBasedBuilder):
       C4Config(
           language="en",
           clean=False,
-          description="Disables all cleaning (deduplication, removal based on bad words, "
+          description="Disables all cleaning"
+          " (deduplication, removal based on bad words, "
           "etc.)"),
       C4Config(
           language="en",
           realnewslike=True,
-          description="Filters from the default config to only include content from the "
+          description="Filters from the default config to only"
+          " include content from the "
           "domains used in the 'RealNews' dataset (Zellers et al., 2019)."),
       C4Config(
           language="en",
           webtextlike=True,
-          description="Filters from the default config to only include content from the "
+          description="Filters from the default config to"
+          " only include content from the "
           "URLs in OpenWebText (https://github.com/jcpeterson/openwebtext)."),
   ]
 
   def _info(self):
+    """Create Dataset Info"""
     features = {
         "text": tfds.features.Text(),
         "url": tfds.features.Text(),
@@ -168,6 +169,7 @@ class C4(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager, pipeline):
+    """Generate Splits"""
     dl_manager.download_checksums(_CHECKSUMS_URL)
 
     # We will automatically down the default CC version(s), but others need to
@@ -303,8 +305,8 @@ class C4(tfds.core.BeamBasedBuilder):
 
     return page_content
 
-  def _build_pcollection(
-      self, unused_pipeline, split, page_content, hashed_url_predicate):
+  def _build_pcollection(  # pylint: disable=missing-function-docstring
+      self, unused_pipeline, split, page_content, hashed_url_predicate):  # pylint: disable=unused-argument
     beam = tfds.core.lazy_imports.apache_beam
 
     def _emit_examples(el):
