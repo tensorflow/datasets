@@ -16,15 +16,13 @@
 # Lint as: python3
 """Tests for WMT translate dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.translate import wmt19
 
 
 class TranslateDeEnWmt19Test(testing.DatasetBuilderTestCase):
+  """Create testing.DatasetBuilderTestCase for de-en test"""
   DATASET_CLASS = wmt19.Wmt19Translate
   BUILDER_CONFIG_NAMES_TO_TEST = ["de-en"]
   OVERLAPPING_SPLITS = ["validation"]
@@ -46,6 +44,7 @@ class TranslateDeEnWmt19Test(testing.DatasetBuilderTestCase):
 
 
 class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
+  """Create testing.DatasetBuilderTestCase for cs-en test"""
   DATASET_CLASS = wmt19.Wmt19Translate
   BUILDER_CONFIG_NAMES_TO_TEST = ["cs-en"]
   OVERLAPPING_SPLITS = ["validation"]
@@ -64,6 +63,7 @@ class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
       "train": 13,
       "validation": 2,
   }
+
 
 if __name__ == "__main__":
   testing.test_main()
