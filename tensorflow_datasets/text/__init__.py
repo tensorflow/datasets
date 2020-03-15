@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Text datasets."""
 
+# pylint: disable=invalid-name
 from tensorflow_datasets.text.c4 import C4
 from tensorflow_datasets.text.cfq import CFQ
 from tensorflow_datasets.text.civil_comments import CivilComments
@@ -46,4 +46,3 @@ from tensorflow_datasets.text.trivia_qa import TriviaQA
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
-
