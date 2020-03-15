@@ -16,9 +16,6 @@
 # Lint as: python3
 """The SuperGLUE benchmark."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -433,6 +430,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Create Dataset Info"""
     features = {
         feature: tfds.features.Text()
         for feature in self.builder_config.features
@@ -477,6 +475,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Generate Splits"""
     dl_dir = dl_manager.download_and_extract(self.builder_config.data_url) or ""
     task_name = _get_task_name_from_data_url(self.builder_config.data_url)
     dl_dir = os.path.join(dl_dir, task_name)
@@ -513,6 +512,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_file, split):
+    """Yields Examples."""
     with tf.io.gfile.GFile(data_file) as f:
       for line in f:
         row = json.loads(line)
@@ -607,13 +607,12 @@ def _cast_label(label):
   """Converts the label into the appropriate string version."""
   if isinstance(label, six.string_types):
     return label
-  elif isinstance(label, bool):
+  if isinstance(label, bool):
     return "True" if label else "False"
-  elif isinstance(label, six.integer_types):
+  if isinstance(label, six.integer_types):
     assert label in (0, 1)
     return str(label)
-  else:
-    raise ValueError("Invalid label format.")
+  raise ValueError("Invalid label format.")
 
 
 def _get_record_entities(passage):

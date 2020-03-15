@@ -16,15 +16,13 @@
 # Lint as: python3
 """Tests for Qa4mre dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import qa4mre
 
 
 class Qa4mreMainTest(testing.DatasetBuilderTestCase):
+  """Create testing.DatasetBuilderTestCase for test"""
   DATASET_CLASS = qa4mre.Qa4mre
 
   DL_EXTRACT_RESULT = {

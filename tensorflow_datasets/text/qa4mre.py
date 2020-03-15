@@ -16,8 +16,6 @@
 # Lint as: python3
 """QA4MRE (CLEF 2011/2012/2013): a reading comprehension dataset."""
 
-from __future__ import division
-from __future__ import print_function
 
 import os
 import xml.etree.ElementTree as ET
@@ -73,10 +71,12 @@ PATHS = {
     '2012': {
         '_TRACKS': ('main', 'alzheimers'),
         '_PATH_TMPL_MAIN_GS':
-            '2012/Main_Task/Training_Data/Goldstandard/Used_in_Evaluation/QA4MRE-2012-{}_GS.xml',
+            '2012/Main_Task/Training_Data/Goldstandard/'
+            'Used_in_Evaluation/QA4MRE-2012-{}_GS.xml',
         '_LANGUAGES_MAIN': ('AR', 'BG', 'DE', 'EN', 'ES', 'IT', 'RO'),
         '_PATH_ALZHEIMER':
-            '2012/Pilot_Tasks/Biomedical_About_Alzheimer/Training_Data/Goldstandard/QA4MRE-2012_BIOMEDICAL_GS.xml',
+            '2012/Pilot_Tasks/Biomedical_About_Alzheimer/'
+            'Training_Data/Goldstandard/QA4MRE-2012_BIOMEDICAL_GS.xml',
     },
     '2013': {
         '_TRACKS': ('main', 'alzheimers', 'entrance_exam'),
@@ -84,9 +84,11 @@ PATHS = {
             '2013/Main_Task/Training_Data/Goldstandard/QA4MRE-2013-{}_GS.xml',
         '_LANGUAGES_MAIN': ('AR', 'BG', 'EN', 'ES', 'RO'),
         '_PATH_ALZHEIMER':
-            '2013/Biomedical_About_Alzheimer/Training_Data/Goldstandard/QA4MRE-2013_BIO_GS-RUN.xml',
+            '2013/Biomedical_About_Alzheimer/Training_Data/'
+            'Goldstandard/QA4MRE-2013_BIO_GS-RUN.xml',
         '_PATH_ENTRANCE_EXAM':
-            '2013/Entrance_Exams/Training_Data/Goldstandard/qa4mre-exam-test-withanswer.xml',
+            '2013/Entrance_Exams/Training_Data/Goldstandard/'
+            'qa4mre-exam-test-withanswer.xml',
     }
 }
 

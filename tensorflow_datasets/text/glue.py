@@ -411,6 +411,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Create Dataset Info"""
     features = {
         text_feature: tfds.features.Text()
         for text_feature in six.iterkeys(self.builder_config.text_features)
@@ -430,6 +431,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Generate Splits."""
     if self.builder_config.name == "ax":
       data_file = dl_manager.download(self.builder_config.data_url)
       return [
@@ -470,36 +472,36 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           _mnli_split_generator(
               "test_mismatched", data_dir, "test", matched=False)
       ]
-    elif self.builder_config.name == "mnli_matched":
+    if self.builder_config.name == "mnli_matched":
       return [
           _mnli_split_generator("validation", data_dir, "dev", matched=True),
           _mnli_split_generator("test", data_dir, "test", matched=True)
       ]
-    elif self.builder_config.name == "mnli_mismatched":
+    if self.builder_config.name == "mnli_mismatched":
       return [
           _mnli_split_generator("validation", data_dir, "dev", matched=False),
           _mnli_split_generator("test", data_dir, "test", matched=False)
       ]
-    else:
-      return [
-          train_split,
-          tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
-              gen_kwargs={
-                  "data_file": os.path.join(data_dir or "", "dev.tsv"),
-                  "split": "dev",
-                  "mrpc_files": mrpc_files,
-              }),
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
-              gen_kwargs={
-                  "data_file": os.path.join(data_dir or "", "test.tsv"),
-                  "split": "test",
-                  "mrpc_files": mrpc_files,
-              }),
-      ]
+    return [
+        train_split,
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                "data_file": os.path.join(data_dir or "", "dev.tsv"),
+                "split": "dev",
+                "mrpc_files": mrpc_files,
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs={
+                "data_file": os.path.join(data_dir or "", "test.tsv"),
+                "split": "test",
+                "mrpc_files": mrpc_files,
+            }),
+    ]
 
   def _generate_examples(self, data_file, split, mrpc_files=None):
+    """Yields Examples."""
     if self.builder_config.name == "mrpc":
       # We have to prepare the MRPC dataset from the original sources ourselves.
       examples = self._generate_example_mrpc_files(
@@ -550,6 +552,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             yield example["idx"], example
 
   def _generate_example_mrpc_files(self, mrpc_files, split):
+    """Yields Examples of mrpc files."""
     if split == "test":
       with tf.io.gfile.GFile(mrpc_files["test"]) as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)

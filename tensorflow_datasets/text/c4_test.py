@@ -16,10 +16,6 @@
 # Lint as: python3
 """Tests for c4 dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import six
 
 from tensorflow_datasets import testing
@@ -27,9 +23,11 @@ from tensorflow_datasets.text import c4
 
 
 class C4Test(testing.DatasetBuilderTestCase):
+  """Create testing.DatasetBuilderTestCase fro Test"""
   DATASET_CLASS = c4.C4
+  VERSION = "experimental_latest"
   # 10k shards take make the test too slow.
-  c4._DEFAULT_NUM_SHARDS = 1
+  c4._DEFAULT_NUM_SHARDS = 1 # pylint: disable=protected-access
   # GzipFile + GFile and TextIOWrapper are broken for py2.
   BUILDER_CONFIG_NAMES_TO_TEST = ["en"] if six.PY3 else []
 
