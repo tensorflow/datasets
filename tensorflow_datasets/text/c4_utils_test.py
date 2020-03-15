@@ -16,13 +16,10 @@
 # Lint as: python3
 """Tests for c4_utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import os
-
+import apache_beam.testing.util as beam_testing_util
 import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
@@ -58,7 +55,7 @@ def _get_counters():
 
 
 class C4UtilsTest(testing.TestCase):
-
+  """Class for creating test of c4 data"""
   def run_clean_page(self, features, badwords=None):
     counters, counter_inc_fn = _get_counters()
     results = list(
@@ -87,6 +84,7 @@ class C4UtilsTest(testing.TestCase):
         }, dict(counters))
 
   def test_clean_page_toofewsentences(self):
+    """Function for clean page with few sentences."""
     text_with_toofewsentences = """This first line has one sentence.
 This line looks like it has three sentences...but it's actually just 1."""
     clean_en, counters = self.run_clean_page({
@@ -102,6 +100,7 @@ This line looks like it has three sentences...but it's actually just 1."""
     }, dict(counters))
 
   def test_clean_page_squigglybracket(self):
+    """Function for clean page with some codes."""
     text_that_is_actually_code = """This page starts out with some text.
 Everything looks good at first, since these are sentences.
 But then, all of a sudden, there's a bunch of code like the next block.
@@ -119,6 +118,7 @@ fn foo(a) { bar = a + 10; }."""
     }, dict(counters))
 
   def test_clean_page_loremipsum(self):
+    """Function for clean page with loremipsum."""
     lorem_ipsum_text = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
@@ -133,6 +133,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
     self.assertEqual({"filtered-page-loremipsum": 1}, dict(counters))
 
   def test_clean_page_badwords(self):
+    """Function for clean page with badwords."""
     padding_text = """This page starts out with some text.
 Everything looks good at first, since these are sentences.
 But then, all of a sudden, there's a badword... or not?
@@ -184,6 +185,7 @@ But then, all of a sudden, there's a badword... or not?
       self.assertEqual(expected_counter, dict(counters))
 
   def test_clean_page_citations(self):
+    """Function for clean page with citations."""
     text = """This page has some text.
 Some lines don't end with punctuation
 And some of these lines end with citations.[3]
@@ -207,6 +209,7 @@ Or have requested citations. Or the option to edit."""
     self.assertEqual(expected_counters, dict(counters))
 
   def test_clean_page_policy(self):
+    """Function for clean page with policy terms."""
     text = """This page has with some text. So, that's good!
 But at the end it has some polciy lines.
 This line mentions the Terms of Use.
@@ -232,7 +235,7 @@ This line should be okay."""
     self.assertEqual(expected_counters, dict(counters))
 
   def test_remove_duplicate_text(self):
-    import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
+    """Function for clean page with duplicate text."""
     beam = lazy_imports.apache_beam
     input_urls_and_text = [
         ("url/1-0",
