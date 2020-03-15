@@ -16,9 +16,6 @@
 # Lint as: python3
 """The Language Model 1 Billion dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -80,8 +77,7 @@ class Lm1bConfig(tfds.core.BuilderConfig):
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
             "1.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
+            "New split API (https://tensorflow.org/datasets/splits)"), **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -145,6 +141,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
+    """Generate Splits"""
     lm1b_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
 
     train_files = _train_data_filenames(lm1b_path)
