@@ -14,10 +14,9 @@
 # limitations under the License.
 
 # Lint as: python3
+
 """Tests for tensorflow_datasets.text.cnn_dailymail."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 
 import tempfile
 
@@ -43,6 +42,7 @@ highlight Three
 
 
 class CnnDailymailTest(testing.DatasetBuilderTestCase):
+  """ Create testing.DatasetBuilderTestCase for Test"""
   DATASET_CLASS = cnn_dailymail.CnnDailymail
   SPLITS = {'train': 3, 'validation': 2, 'test': 2}
   DL_EXTRACT_RESULT = {
@@ -54,10 +54,11 @@ class CnnDailymailTest(testing.DatasetBuilderTestCase):
   }
 
   def test_get_art_abs(self):
+    """Generate some article text"""
     with tempfile.NamedTemporaryFile(delete=True) as f:
       f.write(_STORY_FILE)
       f.flush()
-      article, abstract = cnn_dailymail._get_art_abs(f.name,
+      article, abstract = cnn_dailymail._get_art_abs(f.name,  # pylint: disable=protected-access
                                                      tfds.core.Version('1.0.0'))
       self.assertEqual('Some article. This is some article text.', article)
       # This is a bit weird, but the original code at
@@ -66,7 +67,7 @@ class CnnDailymailTest(testing.DatasetBuilderTestCase):
       self.assertEqual('highlight text . Highlight two . highlight Three .',
                        abstract)
 
-      article, abstract = cnn_dailymail._get_art_abs(f.name,
+      article, abstract = cnn_dailymail._get_art_abs(f.name,  # pylint: disable=protected-access
                                                      tfds.core.Version('2.0.0'))
       self.assertEqual('highlight text .\nHighlight two .\nhighlight Three .',
                        abstract)
