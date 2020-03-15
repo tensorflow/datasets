@@ -16,9 +16,6 @@
 # Lint as: python3
 """Librispeech language modeling dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
 
@@ -72,7 +69,7 @@ class LibrispeechLm(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files_iter):
     """Yields examples."""
     # The archive contains a single file.
-    _, f = next(files_iter)
+    _, f = next(files_iter)  # pylint: disable=stop-iteration-return
     for key, line in enumerate(f):
       text = line.strip()
       if text:  # Skip empty lines.
