@@ -24,29 +24,72 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 
+# Utility functions
+def _extract_keys(ds_info, feature_type, secondary_key=None):
+  """Extracts keys from ds_info based on feature type"""
+
+  if secondary_key:
+    return [
+        k for k, feature in ds_info.features[secondary_key].items()
+        if isinstance(feature, feature_type)
+    ]
+
+  return [
+      k for k, feature in ds_info.features.items()
+      if isinstance(feature, feature_type)
+  ]
+
+def _draw_text(ax, xy, txt, size=14):
+  """Draws text on the top-left corner of the bounding box"""
+  ax.text(*xy, txt, verticalalignment='top', \
+          color='white', fontsize=size, weight="normal", \
+          bbox=dict(facecolor='black', alpha=0.7, pad=0.3))
+
+def _draw_rectangle(ax, bbox):
+  """Draws the bounding box"""
+  patches = lazy_imports_lib.lazy_imports.matplotlib.patches
+  ax.add_patch(patches.Rectangle(bbox[:2], \
+              *bbox[-2:], fill=False, \
+              edgecolor='red', lw=0.7))
+
+def _bb_hw(bbox, height, width):
+  """converts bounding box to height and width"""
+  return [bbox[1]*width, bbox[0]*height, \
+          (bbox[3]*width)-(bbox[1]*width)+1, \
+          (bbox[2]*height)-(bbox[0]*height)+1]
+
+# Visualizer classes
 class ImageVisualizer():
   """Parent Class for support of Image based datasets"""
 
-  def _extract_keys(self, ds_info, feature_type, secondary_key=None):
-    """Extracts keys from ds_info based on feature type"""
+  def build(self, ds_info, ds, rows=3, cols=3, plot_scale=3, image_key=None):
+    """Builds the plot for visualization"""
 
-    if secondary_key:
-      return [
-          k for k, feature in ds_info.features[secondary_key].items()
-          if isinstance(feature, feature_type)
-      ]
+    self.plot_scale = plot_scale
+    image_key = self._infer_image_key(ds_info, image_key)
+    object_dict = self._infer_object_keys(ds_info)
 
-    return [
-        k for k, feature in ds_info.features.items()
-        if isinstance(feature, feature_type)
-    ]
+    num_examples = rows * cols
+    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+
+    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+
+    for i, ex in enumerate(examples):
+      ax = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
+      plt, ax = self._plot_objects(plt, ax, ds_info, ex, \
+                                  image_key, **object_dict)
+
+    plt.show()
+    return fig
 
   def _infer_image_key(self, ds_info, image_key):
     """Infers image key from ds_info"""
 
     if not image_key:
       # Infer the image and label keys
-      image_keys = self._extract_keys(ds_info, features_lib.Image)
+      image_keys = _extract_keys(ds_info, features_lib.Image)
 
       if len(image_keys) > 1:
         raise ValueError(
@@ -57,14 +100,6 @@ class ImageVisualizer():
 
       image_key = image_keys[0]
     return image_key
-
-  def _init_plot(self, rows, cols, plot_scale):
-    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
-    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
-
-    return fig, plt
 
   def _plot_image(self, plt, fig, example, rows, cols, idx, image_key):
     """Plots the image on the figure."""
@@ -95,101 +130,56 @@ class ImageVisualizer():
 class SupervisedVisualizer(ImageVisualizer):
   """Class for Image, Label Datasets"""
 
-  def match(self, ds_info):
-    """Checks if dataset belongs to image dataset category"""
-    image_keys = self._extract_keys(ds_info, features_lib.Image)
-
-    if not image_keys:
-      return False
-
-    return True
-
-  def build(self, ds_info, ds, rows=3, cols=3, plot_scale=3, image_key=None):
-    """Builds the plot for visualization"""
-
-    image_key = self._infer_image_key(ds_info, image_key)
-    label_keys = self._extract_keys(ds_info, features_lib.ClassLabel)
+  def _infer_object_keys(self, ds_info):
+    """Infers object keys to be passed to _plot_objects()"""
+    label_keys = _extract_keys(ds_info, features_lib.ClassLabel)
 
     label_key = label_keys[0] if len(label_keys) == 1 else None
     if not label_key:
       logging.info("Was not able to auto-infer label.")
 
-    num_examples = rows * cols
-    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+    # pass keys to the _plot_objects function
+    return {
+        'label_key': label_key
+    }
 
-    fig, plt = self._init_plot(rows, cols, plot_scale)
-    for i, ex in enumerate(examples):
-      _ = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
+  def _plot_objects(self, plt, ax, ds_info, example, image_key, label_key):
+    """Plots objects for a single example"""
+    # Plot the label
+    if label_key:
+      label = example[label_key]
+      label_str = ds_info.features[label_key].int2str(label)
+      plt.xlabel("{} ({})".format(label_str, label))
 
-      # Plot the label
-      if label_key:
-        label = ex[label_key]
-        label_str = ds_info.features[label_key].int2str(label)
-        plt.xlabel("{} ({})".format(label_str, label))
-    plt.show()
-    return fig
+    return plt, ax
 
+  def match(self, ds_info):
+    """Checks if dataset belongs to image dataset category"""
+    image_keys = _extract_keys(ds_info, features_lib.Image)
+
+    if not image_keys:
+      return False
+    return True
 
 class ObjectVisulaizer(ImageVisualizer):
   """Class for Object Detection Datasets"""
 
-  def _draw_text(self, ax, xy, txt, size=14):
-    """Draws text on the top-left corner of the bounding box"""
-    ax.text(*xy, txt, verticalalignment='top', \
-            color='white', fontsize=size, weight="normal", \
-            bbox=dict(facecolor='black', alpha=0.7, pad=0.3))
-
-  def _draw_rectangle(self, ax, bbox):
-    """Draws the bounding box"""
-    patches = lazy_imports_lib.lazy_imports.matplotlib.patches
-    ax.add_patch(patches.Rectangle(bbox[:2], \
-                *bbox[-2:], fill=False, \
-                edgecolor='red', lw=0.7))
-
-  def _bb_hw(self, bbox, height, width):
-    """converts bounding box to height and width"""
-    return [bbox[1]*width, bbox[0]*height, \
-            (bbox[3]*width)-(bbox[1]*width)+1, \
-            (bbox[2]*height)-(bbox[0]*height)+1]
-
-  def match(self, ds_info):
-    """Checks if dataset belongs to object detection category"""
-    image_keys = self._extract_keys(ds_info, features_lib.Image)
-
-    if not image_keys:
-      return False
-
-    sequence_keys = self._extract_keys(ds_info, features_lib.Sequence)
-
-    bbox_keys = []
-    for key in sequence_keys:
-      if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
-        bbox_keys = self._extract_keys(ds_info, features_lib.BBoxFeature, key)
-
-    if bbox_keys:
-      return True
-
-    return False
-
-  def build(self, ds_info, ds, rows=3, cols=3,
-            plot_scale=3, image_key=None, bbox_label=True):
-    """Builds the plot for visualization"""
-
-    image_key = self._infer_image_key(ds_info, image_key)
-    sequence_keys = self._extract_keys(ds_info, features_lib.Sequence)
+  def _infer_object_keys(self, ds_info):
+    """Infers object keys to be passed to _plot_objects()"""
+    sequence_keys = _extract_keys(ds_info, features_lib.Sequence)
 
     # Infer the BBox keys in the sequence feature connectors
     bbox_keys = []
     for key in sequence_keys:
       if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
-        bbox_keys = self._extract_keys(ds_info, features_lib.BBoxFeature, key)
+        bbox_keys = _extract_keys(ds_info, features_lib.BBoxFeature, key)
         if len(bbox_keys) > 0:
           sequence_key = key
           break
 
     # Infer the label keys in the sequence feature connector (BBox Labels)
-    label_keys = self._extract_keys(ds_info, features_lib.ClassLabel,
-                                    sequence_key)
+    label_keys = _extract_keys(ds_info, features_lib.ClassLabel,
+                               sequence_key)
 
     # Taking first label key since some datasets have multiple label keys
     # for BBoxes as in voc dataset
@@ -198,25 +188,48 @@ class ObjectVisulaizer(ImageVisualizer):
       logging.info("Was not able to auto-infer label.")
     bbox_key = bbox_keys[0] if len(bbox_keys) > 0 else None
 
-    num_examples = rows * cols
-    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+    return {
+        'label_key': label_key,
+        'bbox_key': bbox_key,
+        'sequence_key': sequence_key
+    }
 
-    fig, plt = self._init_plot(rows, cols, plot_scale)
-    for i, ex in enumerate(examples):
-      ax = self._plot_image(plt, fig, ex, rows, cols, i, image_key)
-      image = ex[image_key]
+  def _plot_objects(self, plt, ax, ds_info, example, image_key, label_key, \
+                    bbox_key, sequence_key):
+    """Plots objects for a single example"""
+    image = example[image_key]
 
-      bboxes = ex[sequence_key][bbox_key]
-      height = image.shape[0]
-      width = image.shape[1]
-      font_size = int((11./3.) * plot_scale)
+    bboxes = example[sequence_key][bbox_key]
+    height = image.shape[0]
+    width = image.shape[1]
+    font_size = int((11./3.) * self.plot_scale)
 
-      # Plot the label and bounding boxes
-      for idx, box in enumerate(bboxes):
-        bbox = self._bb_hw(box, height, width)
-        self._draw_rectangle(ax, bbox)
-        if label_key and bbox_label:
-          text = ds_info.features[sequence_key][label_key].int2str(ex[sequence_key][label_key][idx])
-          self._draw_text(ax, bbox[:2], text, size=font_size)
-    plt.show()
-    return fig
+    # Plot the label and bounding boxes
+    for idx, box in enumerate(bboxes):
+      bbox = _bb_hw(box, height, width)
+      _draw_rectangle(ax, bbox)
+      if label_key:
+        text = ds_info.features[sequence_key][label_key]\
+              .int2str(example[sequence_key][label_key][idx])
+        _draw_text(ax, bbox[:2], text, size=font_size)
+
+    return plt, ax
+
+  def match(self, ds_info):
+    """Checks if dataset belongs to object detection category"""
+    image_keys = _extract_keys(ds_info, features_lib.Image)
+
+    if not image_keys:
+      return False
+
+    sequence_keys = _extract_keys(ds_info, features_lib.Sequence)
+
+    bbox_keys = []
+    for key in sequence_keys:
+      if isinstance(ds_info.features[key].feature, features_lib.FeaturesDict):
+        bbox_keys = _extract_keys(ds_info, features_lib.BBoxFeature, key)
+
+    if bbox_keys:
+      return True
+
+    return False
