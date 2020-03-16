@@ -70,8 +70,11 @@ def show_examples(ds_info, ds, **options_kwargs):
       the labels to get overlapped.
     image_key: `string`, name of the feature that contains the image. If not
        set, the system will try to auto-detect it.
+<<<<<<< HEAD:tensorflow_datasets/core/visualization/show_examples.py
     bbox_label: `bool`, flag for bounding box labels. Default is True.
 >>>>>>> removed functions; added classes:tensorflow_datasets/core/visualization.py
+=======
+>>>>>>> minor changes:tensorflow_datasets/core/visualization.py
   Returns:
     fig: The `matplotlib.Figure` object
   """
