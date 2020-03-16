@@ -30,4 +30,3 @@ def generate_visualization(ds_name):
     print('Saved '+ ds_name + '.png' + 'to' + path_dir)
   except RuntimeError:
     print('The selected dataset is not supported')
-
