@@ -153,6 +153,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`wikihow`](wikihow.md)
     *   [`xsum`](xsum.md)
 *   `Text`
+    *   [`blimp`](blimp.md)
     *   [`c4`](c4.md)
     *   [`cfq`](cfq.md)
     *   [`civil_comments`](civil_comments.md)

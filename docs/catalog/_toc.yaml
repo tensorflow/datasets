@@ -238,6 +238,8 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
+  - path: /datasets/catalog/blimp
+    title: blimp
   - path: /datasets/catalog/c4
     title: c4 (manual)
   - path: /datasets/catalog/cfq
