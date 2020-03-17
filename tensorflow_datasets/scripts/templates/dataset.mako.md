@@ -281,9 +281,36 @@ ${display_builder(builder, all_sections)}
 ${display_all_builders(config_builders)}
 % endif
 
-%if builder.info.name:
-*   **Figure**:
+<%!
+  import requests
+  
+  def build_path_with_dataset_name(ds_name):
+    github_path = "https://github.com/vvkio/datasets/raw/master/tensorflow_datasets/examples/" + ds_name + ".png"
+    return github_path
+  
+  def example_exists(path):
+    r = requests.head(path)
+    return r.status_code == 302 
+%>
 
-![](https://github.com/vvkio/datasets/raw/master/tensorflow_datasets/examples/${builder.info.name}.png)
-%endif
+<%def name="example_exists(path)">
+    ${path}
+</%def>
+
+<%def name="build_path_with_dataset_name(ds_name)">
+     ${ds_name}
+</%def>
+
+${example_exists((build_path_with_dataset_name("beans")))}
+
+% if example_exists((build_path_with_dataset_name(builder.info.name))):
+* Figure
+ 
+ ![](${build_path_with_dataset_name(builder.info.name)}) 
+ 
+% else:
+ * Figure:
+    
+        No Example available 
+% endif
 
