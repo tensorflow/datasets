@@ -27,10 +27,10 @@ Example usage: data = tfds.load('cfq/mcd1') * **Homepage**:
 [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
 * **Source code**:
 [`tfds.text.cfq.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)
-* **Versions**: * **`1.0.0`** (default): No release notes. * **Download size**:
-`255.20 MiB` * **Dataset size**: `Unknown size` * **Auto-cached**
+* **Versions**: * **`1.0.1`** (default): No release notes. * **Download size**:
+`255.20 MiB` * **Auto-cached**
 ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-No * **Features**:
+Yes * **Features**:
 
 ```python
 FeaturesDict({
@@ -60,6 +60,7 @@ FeaturesDict({
 
 ## cfq/mcd1 (default config)
 
+*   **Dataset size**: `44.15 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -69,6 +70,7 @@ Split   | Examples
 
 ## cfq/mcd2
 
+*   **Dataset size**: `45.94 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -78,6 +80,7 @@ Split   | Examples
 
 ## cfq/mcd3
 
+*   **Dataset size**: `44.82 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -87,6 +90,7 @@ Split   | Examples
 
 ## cfq/question_complexity_split
 
+*   **Dataset size**: `46.98 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -96,6 +100,7 @@ Split   | Examples
 
 ## cfq/question_pattern_split
 
+*   **Dataset size**: `47.53 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -105,6 +110,7 @@ Split   | Examples
 
 ## cfq/query_complexity_split
 
+*   **Dataset size**: `47.13 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -114,6 +120,7 @@ Split   | Examples
 
 ## cfq/query_pattern_split
 
+*   **Dataset size**: `47.21 MiB`
 *   **Splits**:
 
 Split   | Examples
@@ -123,6 +130,7 @@ Split   | Examples
 
 ## cfq/random_split
 
+*   **Dataset size**: `47.58 MiB`
 *   **Splits**:
 
 Split   | Examples
