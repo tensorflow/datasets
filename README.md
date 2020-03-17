@@ -30,10 +30,10 @@ build an input pipeline when you load a dataset.
 * [Installation](#installation)
 * [Usage](#usage)
 * [`DatasetBuilder`](#datasetbuilder)
-* [NumPy usage](#numpy-usage-with-tfdsas-numpy)
+* [NumPy usage with `tfds.as_numpy`](#numpy-usage-with-tfdsasnumpy)
 * [Citation](#citation)
 * [Want a certain dataset?](#want-a-certain-dataset)
-* [Disclaimers](#disclaimers)
+* [*Disclaimers*](#disclaimers)
 
 ### Installation
 
@@ -123,7 +123,7 @@ tfds.core.DatasetInfo(
         @article{lecun2010mnist,
           title={MNIST handwritten digit database},
           author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-          journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+          journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},
           volume={2},
           year={2010}
         }
