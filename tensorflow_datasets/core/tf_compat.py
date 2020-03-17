@@ -93,8 +93,9 @@ def _patch_for_tf1_13(tf):
     from tensorflow.python.data.ops import dataset_ops
     tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
   if not hasattr(tf.autograph.experimental, "do_not_convert"):
+    import tensorflow as tf1
     tf.autograph.experimental.do_not_convert = (
-        tf.contrib.autograph.do_not_convert)
+        tf1.contrib.autograph.do_not_convert)
 
 
 def is_dataset(ds):
