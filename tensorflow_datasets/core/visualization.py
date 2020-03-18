@@ -77,16 +77,16 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
     # If does not have image items - Check for audio items 
 
     if not image_keys:
-       audio_keys = [
+        print(features_lib.Audio)
+        audio_keys = [
         k for k, feature in ds_info.features.items()
         if isinstance(feature,features_lib.Audio)]
-
+        print(audio_keys)
 
     if not audio_keys: 
       raise ValueError(
           "Visualisation not supported for dataset `{}`. Was not able to "
-          "auto-infer image.".format(ds_info.name))
-
+          "auto-infer image.".format(ds_info.name)
    
     if len(audio_keys) > 1:
         raise ValueError("Audio keys generated as {}".format(audio_keys))
