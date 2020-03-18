@@ -69,61 +69,61 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
 
   if not image_key:
     # Infer the image and label keys
-    image_keys = [
-        k for k, feature in ds_info.features.items()
-        if isinstance(feature, features_lib.Image)
-        ]
-        if len(image_keys) > 1:
-        raise ValueError(
-            "Multiple image features detected in the dataset. Using the first one. You can "
-            "use `image_key` argument to override. Images detected: %s" %
-            (",".join(image_keys)))
+#     image_keys = [
+#         k for k, feature in ds_info.features.items()
+#         if isinstance(feature, features_lib.Image)
+#         ]
+#         if len(image_keys) > 1:
+#         raise ValueError(
+#             "Multiple image features detected in the dataset. Using the first one. You can "
+#             "use `image_key` argument to override. Images detected: %s" %
+#             (",".join(image_keys)))
 
-      image_key = image_keys[0]
+#       image_key = image_keys[0]
 
-      label_keys = [
-          k for k, feature in ds_info.features.items()
-          if isinstance(feature, features_lib.ClassLabel)
-      ]
+#       label_keys = [
+#           k for k, feature in ds_info.features.items()
+#           if isinstance(feature, features_lib.ClassLabel)
+#       ]
 
-      label_key = label_keys[0] if len(label_keys) == 1 else None
-      if not label_key:
-        logging.info("Was not able to auto-infer label.")
+#       label_key = label_keys[0] if len(label_keys) == 1 else None
+#       if not label_key:
+#         logging.info("Was not able to auto-infer label.")
 
-      num_examples = rows * cols
-      examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+#       num_examples = rows * cols
+#       examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
 
-      fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-      fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
-      for i, ex in enumerate(examples):
-        if not isinstance(ex, dict):
-          raise ValueError(
-              "tfds.show_examples requires examples as `dict`, with the same "
-              "structure as `ds_info.features`. It is currently not compatible "
-              "with `as_supervised=True`. Received: {}".format(type(ex)))
-        ax = fig.add_subplot(rows, cols, i+1)
+#       fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+#       fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+#       for i, ex in enumerate(examples):
+#         if not isinstance(ex, dict):
+#           raise ValueError(
+#               "tfds.show_examples requires examples as `dict`, with the same "
+#               "structure as `ds_info.features`. It is currently not compatible "
+#               "with `as_supervised=True`. Received: {}".format(type(ex)))
+#         ax = fig.add_subplot(rows, cols, i+1)
 
-        # Plot the image
-        image = ex[image_key]
-        if len(image.shape) != 3:
-          raise ValueError(
-              "Image dimension should be 3. tfds.show_examples does not support "
-              "batched examples or video.")
-        _, _, c = image.shape
-        if c == 1:
-          image = image.reshape(image.shape[:2])
-        ax.imshow(image, cmap="gray")
-        ax.grid(False)
-        plt.xticks([], [])
-        plt.yticks([], [])
+#         # Plot the image
+#         image = ex[image_key]
+#         if len(image.shape) != 3:
+#           raise ValueError(
+#               "Image dimension should be 3. tfds.show_examples does not support "
+#               "batched examples or video.")
+#         _, _, c = image.shape
+#         if c == 1:
+#           image = image.reshape(image.shape[:2])
+#         ax.imshow(image, cmap="gray")
+#         ax.grid(False)
+#         plt.xticks([], [])
+#         plt.yticks([], [])
 
-        # Plot the label
-        if label_key:
-          label = ex[label_key]
-          label_str = ds_info.features[label_key].int2str(label)
-          plt.xlabel("{} ({})".format(label_str, label))
-      plt.show()
-      return fig
+#         # Plot the label
+#         if label_key:
+#           label = ex[label_key]
+#           label_str = ds_info.features[label_key].int2str(label)
+#           plt.xlabel("{} ({})".format(label_str, label))
+#       plt.show()
+#       return fig
     # If does not have image items - Check for audio items 
 
     if not image_keys:
