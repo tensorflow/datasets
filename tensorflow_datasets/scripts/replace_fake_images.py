@@ -83,8 +83,7 @@ def rewrite_zip(root_dir, zip_filepath):
       zip_file.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
-    zip_filepath = zip_filepath.split('.')[0] # Remove extension
-    shutil.make_archive(zip_filepath, 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
+    shutil.make_archive(zip_filepath[:-4], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
     # The extraction target in the above line can be changed to gztar for additional compression 
 
 def rewrite_tar(root_dir, tar_filepath):
@@ -103,12 +102,15 @@ def rewrite_tar(root_dir, tar_filepath):
     if tar_filepath.lower().endswith('gz'):
       extension = ':gz'
       shutil_extension = 'gztar'
+      extension_removal_index = 7 # Hardcode number of indices to be skipped from the end to obtain filename. This is hard-coded as filenames containing "." might exist and thus filepath.split(".") would give an incorrect result.
     elif tar_filepath.lower().endswith('bz2'):
       extension = ':bz2'
       shutil_extension = 'bztar'
+      extension_removal_index = 7
     else:
       extension = ''
       shutil_extension = 'tar'
+      extension_removal_index = 4
 
     # Extraction of .tar file
     with tarfile.open(tar_filepath, 'r' + extension) as tar:
@@ -116,8 +118,7 @@ def rewrite_tar(root_dir, tar_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
     
-    tar_filepath = tar_filepath.split('.')[0] # Remove extension
-    shutil.make_archive(tar_filepath, shutil_extension, temp_dir) # Copies the directory structure of the extracted tar file and stores it back gztar
+    shutil.make_archive(tar_filepath[:-extension_removal_index], shutil_extension, temp_dir) # Copies the directory structure of the extracted tar file and stores it back gztar
 
 
 def rewrite_dir(fake_dir):
