@@ -88,8 +88,8 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
           "Visualisation not supported for dataset `{}`. Was not able to "
           "auto-infer image.".format(ds_info.name)
    
-    if len(audio_keys) > 1:
-        raise ValueError("Audio keys generated as {}".format(audio_keys))
+#     if len(audio_keys) > 1:
+#         raise ValueError("Audio keys generated as {}".format(audio_keys))
 
           
           
