@@ -131,8 +131,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, split_type="neutral", **kwargs):
+  def __init__(self, *, split_type="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
     Args:

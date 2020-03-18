@@ -123,7 +123,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
       class_dir_path = os.path.join(data_dir_path, shape_class_name)
       for image_name in tf.io.gfile.listdir(class_dir_path):
         image = os.path.join(class_dir_path, image_name)
-        texture_class_name = re.search("-([a-z]+)", image_name).group(1)
+        texture_class_name = re.search("-([a-z]+)", image_name).group(1)  # pytype: disable=attribute-error
         yield image_name, {
             "image": image,
             "file_name": image_name,

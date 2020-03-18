@@ -91,8 +91,8 @@ _MNLI_BASE_KWARGS = dict(
 class GlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for GLUE."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                text_features,
                label_column,
                data_url,

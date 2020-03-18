@@ -173,9 +173,9 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
       if not res or "/".join(fname.split("/")[-2:]) not in file_names:
         continue
       matches = res.groups()
-      label_name = matches[-2].lower()
+      label_name = matches[-2].lower()  # pytype: disable=attribute-error
       label_key = int(matches[-3]) - 1
-      file_name = matches[-1].split(".")[0]
+      file_name = matches[-1].split(".")[0]  # pytype: disable=attribute-error
       segmentation_mask = annotations[file_name][1]
 
       height, width = segmentation_mask.shape
@@ -263,7 +263,7 @@ class CaltechBirds2011(CaltechBirds2010):
         idx, img_name = line1.split()
         res = _NAME_RE.match(img_name)
         matches = res.groups()
-        attributes[matches[-1].split(".")[0]].append(line2.split()[1:])
+        attributes[matches[-1].split(".")[0]].append(line2.split()[1:])  # pytype: disable=attribute-error
         if img_idx == idx:
           if int(val) == 1:
             train_list.append(img_name)

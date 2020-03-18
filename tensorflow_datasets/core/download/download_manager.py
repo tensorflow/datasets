@@ -29,7 +29,6 @@ import promise
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
@@ -145,8 +144,8 @@ class DownloadManager(object):
   ...), you can pass a `tfds.download.Resource` as argument.
   """
 
-  @api_utils.disallow_positional_args
   def __init__(self,
+               *,
                download_dir,
                extract_dir=None,
                manual_dir=None,

@@ -15,7 +15,7 @@
 
 # Lint as: python3
 """Public API of the proto package."""
-# pylint: disable=g-import-not-at-top
+# pylint: disable=g-import-not-at-top,g-importing-member
 
 
 def _get():

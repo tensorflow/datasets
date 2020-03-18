@@ -244,5 +244,5 @@ def _transpose_dict_list(dict_list):
   # 3. Extract each individual elements
   return [
       utils.map_nested(lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
-      for i in range(length['value'])
+      for i in range(length['value'])  # pytype: disable=wrong-arg-types
   ]

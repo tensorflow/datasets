@@ -57,8 +57,7 @@ _DATA_URL = 'https://storage.googleapis.com/cfq_dataset/cfq.tar.gz'
 class CFQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CFQ splits."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, name, directory='splits', **kwargs):
+  def __init__(self, *, name, directory='splits', **kwargs):
     """BuilderConfig for CFQ.
 
     Args:

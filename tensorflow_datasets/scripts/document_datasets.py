@@ -118,7 +118,7 @@ def make_module_to_builder_dict(datasets=None):
     current_mod_ctr = module_to_builder
     for mod in modules:
       current_mod_ctr = current_mod_ctr[mod]
-    current_mod_ctr.append(builder)
+    current_mod_ctr.append(builder)  # pytype: disable=attribute-error
 
   module_to_builder = module_to_builder["tensorflow_datasets"]
   return module_to_builder

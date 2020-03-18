@@ -24,7 +24,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.features import feature
 
@@ -32,8 +31,7 @@ from tensorflow_datasets.core.features import feature
 class Audio(feature.Tensor):
   """`FeatureConnector` for audio, encoded as raw integer wave form."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, file_format=None, shape=(None,)):
+  def __init__(self, *, file_format=None, shape=(None,)):
     """Constructs the connector.
 
     Args:

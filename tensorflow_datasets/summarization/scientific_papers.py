@@ -66,8 +66,7 @@ _URLS = {
 class ScientificPapersConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Scientific Papers."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, filename=None, **kwargs):
+  def __init__(self, *, filename=None, **kwargs):
     """BuilderConfig for Wikihow.
 
     Args:

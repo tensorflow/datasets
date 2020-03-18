@@ -62,8 +62,7 @@ _DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
 class CycleGANConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CycleGAN."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a CycleGANConfig.
 
     Args:

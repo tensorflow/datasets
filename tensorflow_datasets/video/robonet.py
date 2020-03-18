@@ -61,8 +61,8 @@ _CITATION = """\
 class RobonetConfig(tfds.core.BuilderConfig):
   """"Configuration for RoboNet video rescaling."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, sample_dataset=False, width=None, height=None, **kwargs):
+  def __init__(
+      self, *, sample_dataset=False, width=None, height=None, **kwargs):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with three separate splits. You can specify which split

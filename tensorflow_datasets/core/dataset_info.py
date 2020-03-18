@@ -47,14 +47,13 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.proto import json_format
+from tensorflow_datasets.core.proto import json_format  # pylint: disable=g-importing-member
 from tensorflow_datasets.core.utils import gcs_utils
 
 from tensorflow_metadata.proto.v0 import schema_pb2
@@ -93,8 +92,8 @@ class DatasetInfo(object):
   builder.download_and_prepare()`).
   """
 
-  @api_utils.disallow_positional_args
   def __init__(self,
+               *,
                builder,
                description=None,
                features=None,

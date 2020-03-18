@@ -886,7 +886,7 @@ def _parse_tmx(path):
       utf_f = codecs.getreader("utf-8")(f)
     else:
       utf_f = f
-    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
         yield line_id, {
             _get_tuv_lang(tuv):
@@ -940,7 +940,7 @@ def _parse_czeng(*paths, **kwargs):
     with tf.io.gfile.GFile(filter_path) as f:
       bad_blocks = {
           blk for blk in re.search(
-              r"qw{([\s\d]*)}", f.read()).groups()[0].split()
+              r"qw{([\s\d]*)}", f.read()).groups()[0].split()  # pytype: disable=attribute-error
       }
     logging.info(
         "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
