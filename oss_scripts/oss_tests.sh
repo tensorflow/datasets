@@ -27,6 +27,9 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 # * Lsun tests is disabled because the tensorflow_io used in open-source
 #   is linked to static libraries compiled again specific TF version, which
 #   makes test fails with linking error (libtensorflow_io_golang.so).
+# * Wmt19 is failing during tarfile extraction due to:
+#   https://bugs.python.org/issue39430
+#   TODO(tfds): Restore test with new Python release.
 # * test_utils.py is not a test file
 # * build_docs_test: See b/142892342
 pytest \
@@ -34,6 +37,7 @@ pytest \
   --disable-warnings \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
+  --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/scripts/build_docs_test.py"
 set_status
