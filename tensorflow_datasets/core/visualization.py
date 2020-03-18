@@ -124,11 +124,11 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
     
         
   ## IMAGE VISUALIZATION 
-  if len(image_keys) > 1:
-    raise ValueError(
-        "Multiple image features detected in the dataset. Using the first one. You can "
-        "use `image_key` argument to override. Images detected: %s" %
-        (",".join(image_keys)))
+#   if len(image_keys) > 1:
+#     raise ValueError(
+#         "Multiple image features detected in the dataset. Using the first one. You can "
+#         "use `image_key` argument to override. Images detected: %s" %
+#         (",".join(image_keys)))
 
   image_key = image_keys[0]
 
