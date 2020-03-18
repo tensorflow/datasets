@@ -25,6 +25,8 @@ from __future__ import print_function
 import distutils.version
 import types
 
+from absl import logging
+
 # Which patch function was called
 # For debug only, not to be depended upon.
 # Will be set to one of:
@@ -76,9 +78,34 @@ def _patch_tf(tf):
   v_1_13 = distutils.version.LooseVersion("1.13.0")
   v_2 = distutils.version.LooseVersion("2.0.0")
   tf_version = distutils.version.LooseVersion(tf.__version__)
+
+  _patch_dataset_v2(tf)
   if v_1_13 <= tf_version < v_2:
     TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
+
+
+def _patch_dataset_v2(tf):
+  """Patch tf.data.Dataset v2 to restore `make_one_shot_iterator`."""
+
+  def make_one_shot_iterator(self):
+    logging.warning(
+        "Deprecation warning: `tf.data.Dataset.make_one_shot_iterator` is "
+        "deprecated. It will be removed after April 10, 2020. "
+        "Please use `tf.compat.v1.data.make_one_shot_iterator(ds)` instead.")
+    return tf.compat.v1.data.make_one_shot_iterator(self)
+
+  def make_initializable_iterator(self):
+    logging.warning(
+        "Deprecation warning: `tf.data.Dataset.make_initializable_iterator` is "
+        "deprecated. It will be removed after April 10, 2020. "
+        "Please use `tf.compat.v1.data.make_initializable_iterator(ds)` "
+        "instead.")
+    return tf.compat.v1.data.make_initializable_iterator(self)
+
+  tf.compat.v2.data.Dataset.make_one_shot_iterator = make_one_shot_iterator
+  tf.compat.v2.data.Dataset.make_initializable_iterator = (
+      make_initializable_iterator)
 
 
 def _patch_for_tf1_13(tf):

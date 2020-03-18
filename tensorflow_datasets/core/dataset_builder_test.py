@@ -539,11 +539,11 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   def test_is_dataset_v1(self):
     # For backward compatibility, ensure that the returned dataset object
-    # is a tf.data.DatasetV1 object.
+    # has make_one_shot_iterator methods.
     with tf.Graph().as_default():
       ds = self.builder.as_dataset(split="train")
+      ds.make_one_shot_iterator()
       ds.make_initializable_iterator()
-      self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
 
   def test_autocache(self):
     # All the following should cache
