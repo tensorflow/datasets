@@ -31,6 +31,7 @@ from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
@@ -68,7 +69,8 @@ class BuilderConfig(object):
   `BuilderConfig` and add their own properties.
   """
 
-  def __init__(self, *, name, version=None, supported_versions=None,
+  @api_utils.disallow_positional_args
+  def __init__(self, name, version=None, supported_versions=None,
                description=None):
     self._name = name
     self._version = version
@@ -98,10 +100,8 @@ class BuilderConfig(object):
         version=self.version or "None")
 
 
-RegisteredDataset = registered.RegisteredDataset
-
-
-class DatasetBuilder(metaclass=RegisteredDataset):  # pytype: disable=ignored-abstractmethod
+@six.add_metaclass(registered.RegisteredDataset)
+class DatasetBuilder(object):
   """Abstract base class for all datasets.
 
   `DatasetBuilder` has 3 key methods:
@@ -164,7 +164,8 @@ class DatasetBuilder(metaclass=RegisteredDataset):  # pytype: disable=ignored-ab
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
 
-  def __init__(self, *, data_dir=None, config=None, version=None):
+  @api_utils.disallow_positional_args
+  def __init__(self, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -265,7 +266,8 @@ class DatasetBuilder(metaclass=RegisteredDataset):  # pytype: disable=ignored-ab
           "the restored dataset.")
     return self._info()
 
-  def download_and_prepare(self, *, download_dir=None, download_config=None):
+  @api_utils.disallow_positional_args
+  def download_and_prepare(self, download_dir=None, download_config=None):
     """Downloads and prepares dataset for reading.
 
     Args:
@@ -362,8 +364,8 @@ class DatasetBuilder(metaclass=RegisteredDataset):  # pytype: disable=ignored-ab
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
+  @api_utils.disallow_positional_args
   def as_dataset(self,
-                 *,
                  split=None,
                  batch_size=None,
                  shuffle_files=False,
@@ -820,7 +822,7 @@ class DatasetBuilder(metaclass=RegisteredDataset):  # pytype: disable=ignored-ab
     return config_dict
 
 
-class FileAdapterBuilder(DatasetBuilder):  # pytype: disable=ignored-abstractmethod
+class FileAdapterBuilder(DatasetBuilder):
   """Base class for datasets with data generation based on file adapter.
 
   `FileFormatAdapter`s are defined in
@@ -1026,7 +1028,7 @@ class FileAdapterBuilder(DatasetBuilder):  # pytype: disable=ignored-abstractmet
         )
 
 
-class GeneratorBasedBuilder(FileAdapterBuilder):  # pytype: disable=ignored-abstractmethod
+class GeneratorBasedBuilder(FileAdapterBuilder):
   """Base class for datasets with data generation based on dict generators.
 
   `GeneratorBasedBuilder` is a convenience class that abstracts away much
@@ -1107,7 +1109,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):  # pytype: disable=ignored-abst
     split_generator.split_info.num_bytes = total_size
 
 
-class BeamBasedBuilder(FileAdapterBuilder):  # pytype: disable=ignored-abstractmethod
+class BeamBasedBuilder(FileAdapterBuilder):
   """Beam based Builder."""
 
   def __init__(self, *args, **kwargs):

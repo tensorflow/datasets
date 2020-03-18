@@ -58,7 +58,8 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 class MultiNLIConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MultiNLI."""
 
-  def __init__(self, *, text_encoder_config=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for MultiNLI.
 
     Args:

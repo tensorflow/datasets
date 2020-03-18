@@ -91,7 +91,8 @@ _DL_URLS = {
 class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AmazonUSReviews."""
 
-  def __init__(self, *, data=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, data=None, **kwargs):
     """Constructs a AmazonUSReviewsConfig.
 
     Args:

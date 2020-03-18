@@ -96,7 +96,8 @@ _INFO_FILE = "dumpstatus.json"
 class WikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wikipedia."""
 
-  def __init__(self, *, language=None, date=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, language=None, date=None, **kwargs):
     """BuilderConfig for Wikipedia.
 
     Args:
@@ -195,7 +196,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         if six.PY3:
           # Workaround due to:
           # https://github.com/tensorflow/tensorflow/issues/33563
-          utf_f = codecs.getreader("utf-8")(f)  # pytype: disable=wrong-arg-types
+          utf_f = codecs.getreader("utf-8")(f)
         else:
           utf_f = f
 

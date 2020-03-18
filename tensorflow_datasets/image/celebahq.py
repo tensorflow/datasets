@@ -50,7 +50,8 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  def __init__(self, *, resolution, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
     Args:

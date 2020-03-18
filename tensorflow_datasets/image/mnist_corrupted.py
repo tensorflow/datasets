@@ -76,7 +76,8 @@ _TEST_LABELS_FILENAME = 'test_labels.npy'
 class MNISTCorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MNISTcorrupted."""
 
-  def __init__(self, *, corruption_type, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, corruption_type, **kwargs):
     """Constructor.
 
     Args:

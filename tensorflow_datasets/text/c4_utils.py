@@ -374,7 +374,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
         })
       return None
 
-    for line in io.TextIOWrapper(g, encoding="utf-8"):  # pytype: disable=wrong-arg-types
+    for line in io.TextIOWrapper(g, encoding="utf-8"):
       line = line.strip()
       if not line:
         continue
@@ -403,7 +403,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
       if line.startswith(_METADATA_PREFIXES):
         continue
 
-      content.append(line)  # pytype: disable=attribute-error
+      content.append(line)
 
     page = _maybe_get_page()
     if page:

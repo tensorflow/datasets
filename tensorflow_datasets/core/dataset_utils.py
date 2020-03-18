@@ -25,6 +25,7 @@ import itertools
 
 import numpy as np
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 
@@ -177,7 +178,8 @@ def _graph_dataset_iterator(ds_iter, graph=None):
         break
 
 
-def as_numpy(dataset, *, graph=None):
+@api_utils.disallow_positional_args(allowed=["dataset"])
+def as_numpy(dataset, graph=None):
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
   `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s

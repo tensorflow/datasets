@@ -105,7 +105,8 @@ EXTRA_CORRUPTIONS = [
 class Cifar10CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Cifar10Corrupted."""
 
-  def __init__(self, *, corruption_type, severity, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, corruption_type, severity, **kwargs):
     """Constructor.
 
     Args:

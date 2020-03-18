@@ -21,9 +21,7 @@
 from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
-# pylint: disable=g-import-not-at-top,g-importing-member
-
-from tensorflow_datasets.core.api_utils import disallow_positional_args
+from tensorflow_datasets.core.api_utils import disallow_positional_args  # pylint:disable=g-import-not-at-top
 
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig

@@ -219,7 +219,8 @@ class KMNIST(MNIST):
 class EMNISTConfig(tfds.core.BuilderConfig):
   """BuilderConfig for EMNIST CONFIG."""
 
-  def __init__(self, *, class_number, train_examples, test_examples, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, class_number, train_examples, test_examples, **kwargs):
     """BuilderConfig for EMNIST class number.
 
     Args:

@@ -70,7 +70,8 @@ def _normalize_bbox(raw_bbox, img_path):
 class FlicConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLIC."""
 
-  def __init__(self, *, data, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, data, **kwargs):
     """Constructs a FlicConfig."""
     if data not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)

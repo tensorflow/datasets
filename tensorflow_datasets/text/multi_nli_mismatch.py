@@ -60,7 +60,8 @@ ROOT_URL = "http://storage.googleapis.com/tfds-data/downloads/multi_nli/multinli
 class MultiNLIMismatchConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MultiNLI Mismatch."""
 
-  def __init__(self, *, text_encoder_config=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for MultiNLI Mismatch.
 
     Args:

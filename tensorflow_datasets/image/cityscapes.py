@@ -20,6 +20,7 @@ import os
 import re
 
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = '''\
@@ -70,7 +71,8 @@ class CityscapesConfig(tfds.core.BuilderConfig):
           enables coarse grain segmentations, if segmentation labels are used.
   """
 
-  def __init__(self, *, right_images=False, segmentation_labels=True,
+  @api_utils.disallow_positional_args
+  def __init__(self, right_images=False, segmentation_labels=True,
                disparity_maps=False, train_extra_split=False, **kwargs):
     super(CityscapesConfig, self).__init__(version='1.0.0', **kwargs)
 

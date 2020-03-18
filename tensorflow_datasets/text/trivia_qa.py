@@ -83,7 +83,8 @@ def _wiki_evidence_dir(tmp_dir):
 class TriviaQAConfig(tfds.core.BuilderConfig):
   """BuilderConfig for TriviaQA."""
 
-  def __init__(self, *, unfiltered=False, exclude_context=False, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, unfiltered=False, exclude_context=False, **kwargs):
     """BuilderConfig for TriviaQA.
 
     Args:

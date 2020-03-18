@@ -52,7 +52,8 @@ _CITATION = """\
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
   """Config for StarcraftVideo dataset."""
 
-  def __init__(self, *, map_name, resolution, size_in_gb, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
             "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),

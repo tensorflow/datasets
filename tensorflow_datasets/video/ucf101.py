@@ -55,7 +55,8 @@ _LABELS_FNAME = 'video/ucf101_labels.txt'
 class Ucf101Config(tfds.core.BuilderConfig):
   """"Configuration for UCF101 split and possible video rescaling."""
 
-  def __init__(self, *, split_number, width=None, height=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, split_number, width=None, height=None, **kwargs):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with three separate splits. You can specify which split

@@ -76,7 +76,8 @@ _CPC_DESCRIPTION = {
 class BigPatentConfig(tfds.core.BuilderConfig):
   """BuilderConfig for BigPatent."""
 
-  def __init__(self, *, cpc_codes=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, cpc_codes=None, **kwargs):
     """BuilderConfig for Wikihow.
 
     Args:

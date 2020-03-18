@@ -52,7 +52,8 @@ _DATA_URL = 'https://github.com/brendenlake/SCAN/archive/master.zip'
 class ScanConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SCAN."""
 
-  def __init__(self, *, name, directory=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, name, directory=None, **kwargs):
     """BuilderConfig for SCAN.
 
     Args:

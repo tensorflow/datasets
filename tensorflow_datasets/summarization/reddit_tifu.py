@@ -62,7 +62,8 @@ _ADDITIONAL_FEATURES = ["ups", "num_comments", "score", "upvote_ratio"]
 class RedditTifuConfig(tfds.core.BuilderConfig):
   """BuilderConfig for RedditTifu."""
 
-  def __init__(self, *, summary_key=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, summary_key=None, **kwargs):
     """BuilderConfig for RedditTifu.
 
     Args:

@@ -89,7 +89,8 @@ _CROP_PADDING = 32
 class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Imagenet2012Corrupted."""
 
-  def __init__(self, *, corruption_type=None, severity=1, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, corruption_type=None, severity=1, **kwargs):
     """BuilderConfig for Imagenet2012Corrupted.
 
     Args:
