@@ -83,37 +83,37 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
         if isinstance(feature,features_lib.Audio)]
         print(audio_keys)
         
-          audio_samples=[]
-          if(ds_info.name == 'ljspeech'):
-            key = 'speech'
-          else:
-            key = 'audio'
+        audio_samples=[]
+        if(ds_info.name == 'ljspeech'):
+          key = 'speech'
+        else:
+          key = 'audio'
 
-          samplerate = 16000
-          ctr = 0
-          for features in ds:
-              ctr+=100
-              audio_samples.append(features[key].numpy())
-          to_gen=[]
-          for _ in range(2):
-            value = randint(0, len(audio_samples))
-            to_gen.append(audio_samples[value])
-          ctr=0
-          for audio in to_gen:
-            ctr+=1
-            name = '/content/audio' + str(ctr) + '.wav'
-            write(name,samplerate,audio)
-            IPython.display.display(IPython.display.Audio(name)) 
-            print(name)
+        samplerate = 16000
+        ctr = 0
+        for features in ds:
+            ctr+=100
+            audio_samples.append(features[key].numpy())
+        to_gen=[]
+        for _ in range(2):
+          value = randint(0, len(audio_samples))
+          to_gen.append(audio_samples[value])
+        ctr=0
+        for audio in to_gen:
+          ctr+=1
+          name = '/content/audio' + str(ctr) + '.wav'
+          write(name,samplerate,audio)
+          IPython.display.display(IPython.display.Audio(name)) 
+          print(name)
 
-          fig,a =  plt.subplots(2,2)
+        fig,a =  plt.subplots(2,2)
 
-          a[0][0].plot(to_gen[0])
-          a[0][1].plot(to_gen[1])
-          a[1][0].plot(to_gen[0])
-          a[1][1].plot(to_gen[1])
+        a[0][0].plot(to_gen[0])
+        a[0][1].plot(to_gen[1])
+        a[1][0].plot(to_gen[0])
+        a[1][1].plot(to_gen[1])
 
-          return fig
+        return fig
 
 
     if not audio_keys: 
