@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for definite_pronoun_resolution dataset module."""
 
 from __future__ import absolute_import
@@ -33,10 +34,6 @@ class DefinitePronounResolutionTest(testing.DatasetBuilderTestCase):
       "test": 3,
       "train": 4,
   }
-
-
-class DefinitePronounResolutionS3Test(DefinitePronounResolutionTest):
-  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Splits related API."""
 
 from __future__ import absolute_import
@@ -40,6 +41,12 @@ class SplitInfo(object):
     if self.shard_lengths:
       return sum(int(sl) for sl in self.shard_lengths)
     return int(self.statistics.num_examples)
+
+  @property
+  def num_shards(self):
+    if self.shard_lengths:
+      return len(self.shard_lengths)
+    return self._ProtoCls__proto.num_shards
 
   def __repr__(self):
     num_examples = self.num_examples or "unknown"
@@ -432,8 +439,6 @@ class Split(object):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
-  * `ALL`: Special value, never defined by a dataset, but corresponding to all
-    defined splits of a dataset merged together.
 
   Note: All splits, including compositions inherit from `tfds.core.SplitBase`
 
@@ -445,8 +450,6 @@ class Split(object):
   TRAIN = NamedSplit("train")
   TEST = NamedSplit("test")
   VALIDATION = NamedSplit("validation")
-  # All is a special Split which correspond to all split merged together
-  ALL = NamedSplitAll()
 
   def __new__(cls, name):
     """Create a custom split with tfds.Split('custom_name')."""

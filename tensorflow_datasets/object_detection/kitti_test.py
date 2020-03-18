@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests the data loading for Kitti."""
 
 from __future__ import absolute_import
@@ -35,10 +36,6 @@ class KittiTest(testing.DatasetBuilderTestCase):
       "annotations": "data_object_label_2.zip",
       "devkit": "devkit_object.zip",
   }
-
-
-class KittiTestExperimental(KittiTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

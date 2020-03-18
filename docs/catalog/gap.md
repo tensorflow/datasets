@@ -41,20 +41,20 @@ Split        | Examples
 ```python
 FeaturesDict({
     'A': Text(shape=(), dtype=tf.string),
-    'A-coref': Tensor(shape=(), dtype=tf.bool),
-    'A-offset': Tensor(shape=(), dtype=tf.int32),
+    'A-coref': tf.bool,
+    'A-offset': tf.int32,
     'B': Text(shape=(), dtype=tf.string),
-    'B-coref': Tensor(shape=(), dtype=tf.bool),
-    'B-offset': Tensor(shape=(), dtype=tf.int32),
+    'B-coref': tf.bool,
+    'B-offset': tf.int32,
     'ID': Text(shape=(), dtype=tf.string),
     'Pronoun': Text(shape=(), dtype=tf.string),
-    'Pronoun-offset': Tensor(shape=(), dtype=tf.int32),
+    'Pronoun-offset': tf.int32,
     'Text': Text(shape=(), dtype=tf.string),
     'URL': Text(shape=(), dtype=tf.string),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

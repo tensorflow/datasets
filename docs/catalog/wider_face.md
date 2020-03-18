@@ -49,19 +49,19 @@ Split        | Examples
 FeaturesDict({
     'faces': Sequence({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'blur': Tensor(shape=(), dtype=tf.uint8),
-        'expression': Tensor(shape=(), dtype=tf.bool),
-        'illumination': Tensor(shape=(), dtype=tf.bool),
-        'invalid': Tensor(shape=(), dtype=tf.bool),
-        'occlusion': Tensor(shape=(), dtype=tf.uint8),
-        'pose': Tensor(shape=(), dtype=tf.bool),
+        'blur': tf.uint8,
+        'expression': tf.bool,
+        'illumination': tf.bool,
+        'invalid': tf.bool,
+        'occlusion': tf.uint8,
+        'pose': tf.bool,
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

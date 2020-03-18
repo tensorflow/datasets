@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.tfrecords_reader."""
 
 from __future__ import absolute_import
@@ -26,7 +27,7 @@ import os
 from absl.testing import absltest
 import six
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing

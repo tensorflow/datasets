@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for colorectal_histology dataset module."""
 
 from __future__ import absolute_import
@@ -34,20 +35,11 @@ class ColorectalHistologyTest(testing.DatasetBuilderTestCase):
   }
 
 
-class ColorectalHistologyS3Test(ColorectalHistologyTest):
-  VERSION = "experimental_latest"
-
-
 class ColorectalHistologyLargeTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = colorectal_histology.ColorectalHistologyLarge
   SPLITS = {
       "test": 1,
   }
-
-
-class ColorectalHistologyLargeS3Test(ColorectalHistologyLargeTest):
-  VERSION = "experimental_latest"
-
 
 if __name__ == "__main__":
   testing.test_main()

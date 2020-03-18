@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CFQ (Compositional Freebase Question) dataset."""
 
 from __future__ import absolute_import
@@ -21,15 +22,20 @@ from __future__ import print_function
 
 import json
 import os
+import re
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
-@inproceedings{Lake2018GeneralizationWS,
+@inproceedings{Keysers2020,
   title={Measuring Compositional Generalization: A Comprehensive Method on
          Realistic Data},
-  author={Daniel Keysers, et al.},
+  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and
+          Hylke Buisman and Daniel Furrer and Sergii Kashubin and
+          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and
+          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and
+          Olivier Bousquet},
   booktitle={ICLR},
   year={2020},
   url={https://arxiv.org/abs/1912.09713.pdf},
@@ -63,7 +69,7 @@ class CFQConfig(tfds.core.BuilderConfig):
     # Version history:
     super(CFQConfig, self).__init__(
         name=name,
-        version=tfds.core.Version('1.0.0'),
+        version=tfds.core.Version('1.0.1'),
         description=_DESCRIPTION,
         **kwargs)
     self.split_file = os.path.join(directory, name + '.json')
@@ -71,6 +77,8 @@ class CFQConfig(tfds.core.BuilderConfig):
 
 _QUESTION = 'question'
 _QUERY = 'query'
+_QUESTION_FIELD = 'questionPatternModEntities'
+_QUERY_FIELD = 'sparqlPatternModEntities'
 
 
 class CFQ(tfds.core.GeneratorBasedBuilder):
@@ -121,6 +129,21 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
             })
     ]
 
+  def _scrub_json(self, content):
+    """Reduce JSON by filtering out only the fields of interest."""
+    # Loading of json data with the standard Python library is very inefficient:
+    # For the 4GB dataset file it requires more than 40GB of RAM and takes 3min.
+    # There are more efficient libraries but in order to avoid additional
+    # dependencies we use a simple (perhaps somewhat brittle) regexp to reduce
+    # the content to only what is needed. This takes 1min to execute but
+    # afterwards loading requires only 500MB or RAM and is done in 2s.
+    regex = re.compile(r'("%s":\s*"[^"]*").*?("%s":\s*"[^"]*")' %
+                       (_QUESTION_FIELD, _QUERY_FIELD), re.DOTALL)
+    return '[' + ','.join([
+        '{' + m.group(1) + ',' + m.group(2) + '}'
+        for m in regex.finditer(content)
+    ]) + ']'
+
   def _generate_examples(self, base_directory, splits_file, split_id):
     """Yields examples."""
     samples_path = os.path.join(base_directory, 'dataset.json')
@@ -128,10 +151,13 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(samples_path) as samples_file:
       with tf.io.gfile.GFile(splits_path) as splits_file:
         logging.info('Reading json from %s into memory...', samples_path)
-        samples = json.load(samples_file)
+        samples = json.loads(self._scrub_json(samples_file.read()))
+        logging.info('%d samples loaded', len(samples))
         logging.info('Loaded json data from %s.', samples_path)
         splits = json.load(splits_file)
         for idx in splits[split_id]:
           sample = samples[idx]
-          yield idx, {_QUESTION: sample['questionPatternModEntities'],
-                      _QUERY: sample['sparqlPatternModEntities']}
+          yield idx, {
+              _QUESTION: sample[_QUESTION_FIELD],
+              _QUERY: sample[_QUERY_FIELD]
+          }

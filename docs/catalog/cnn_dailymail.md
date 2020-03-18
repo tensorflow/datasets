@@ -24,29 +24,22 @@ each highlight, which is the target summary
     [`tfds.summarization.cnn_dailymail.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/cnn_dailymail.py)
 *   **Versions**:
     *   **`3.0.0`** (default): Using cased version.
-    *   `0.0.2`: No release notes.
     *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   `2.0.0`: Separate target sentences with newline.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `558.32 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split        | Examples
+:----------- | -------:
+'test'       | 11,490
+'train'      | 287,113
+'validation' | 13,368
 
-*   **Features**:
-
-```python
-FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string),
-    'highlights': Text(shape=(), dtype=tf.string),
-})
-```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'highlights')`
 *   **Citation**:
 
@@ -79,13 +72,40 @@ FeaturesDict({
 ## cnn_dailymail/plain_text (default config)
 
 *   **Config description**: Plain text
+*   **Dataset size**: `1.27 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'article': Text(shape=(), dtype=tf.string),
+    'highlights': Text(shape=(), dtype=tf.string),
+})
+```
 
 ## cnn_dailymail/bytes
 
 *   **Config description**: Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
+*   **Dataset size**: `1.28 GiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
 
 ## cnn_dailymail/subwords32k
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
     32k vocab size
+*   **Dataset size**: `490.99 MiB`
+*   **Features**:
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32908>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32908>),
+})
+```

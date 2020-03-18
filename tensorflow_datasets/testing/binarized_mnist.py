@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 r"""Generate Binarized MNIST-like files, smaller and with random data.
 
 """

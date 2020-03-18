@@ -1,0 +1,222 @@
+{
+  "citation": "@misc{ljspeech17,\n  author       = {Keith Ito},\n  title        = {The LJ Speech Dataset},\n  howpublished = {\\url{https://keithito.com/LJ-Speech-Dataset/}},\n  year         = 2017\n}\n",
+  "description": "This is a public domain speech dataset consisting of 13,100 short audio clips of\na single speaker reading passages from 7 non-fiction books. A transcription is\nprovided for each clip. Clips vary in length from 1 to 10 seconds and have a\ntotal length of approximately 24 hours.\n\nThe texts were published between 1884 and 1964, and are in the public domain.\nThe audio was recorded in 2016-17 by the LibriVox project and is also in the\npublic domain.\n",
+  "downloadSize": "2748572632",
+  "location": {
+    "urls": [
+      "https://keithito.com/LJ-Speech-Dataset/"
+    ]
+  },
+  "name": "ljspeech",
+  "schema": {
+    "feature": [
+      {
+        "name": "id",
+        "type": "BYTES"
+      },
+      {
+        "name": "speech",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "text",
+        "type": "BYTES"
+      },
+      {
+        "name": "text_normalized",
+        "type": "BYTES"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "11520729928",
+      "numShards": "1",
+      "shardLengths": [
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102",
+        "102",
+        "103",
+        "102"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "13100"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "name": "speech",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13100"
+              },
+              "max": 32738.0,
+              "min": -32754.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "13100"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "13100"
+              }
+            },
+            "name": "text_normalized",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "13100"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text_normalized",
+    "output": "speech"
+  },
+  "version": "1.1.0"
+}

@@ -25,30 +25,12 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
-*   **Download size**: `3.11 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Features**:
-
-```python
-FeaturesDict({
-    'bpm': Tensor(shape=(), dtype=tf.int32),
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': Tensor(shape=(), dtype=tf.string),
-    'midi': Tensor(shape=(), dtype=tf.string),
-    'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': Tensor(shape=(), dtype=tf.string),
-    }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
@@ -64,6 +46,7 @@ FeaturesDict({
 ## groove/full-midionly (default config)
 
 *   **Config description**: Groove dataset without audio, unsplit.
+*   **Download size**: `3.11 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -72,9 +55,27 @@ Split        | Examples
 'train'      | 897
 'validation' | 124
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'bpm': tf.int32,
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': tf.string,
+    'midi': tf.string,
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': tf.string,
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
 ## groove/full-16000hz
 
 *   **Config description**: Groove dataset with audio, unsplit.
+*   **Download size**: `4.76 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -83,10 +84,29 @@ Split        | Examples
 'train'      | 846
 'validation' | 120
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(None,), dtype=tf.float32),
+    'bpm': tf.int32,
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': tf.string,
+    'midi': tf.string,
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': tf.string,
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
 ## groove/2bar-midionly
 
 *   **Config description**: Groove dataset without audio, split into 2-bar
     chunks.
+*   **Download size**: `3.11 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -95,9 +115,27 @@ Split        | Examples
 'train'      | 18,163
 'validation' | 2,252
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'bpm': tf.int32,
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': tf.string,
+    'midi': tf.string,
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': tf.string,
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
 ## groove/2bar-16000hz
 
 *   **Config description**: Groove dataset with audio, split into 2-bar chunks.
+*   **Download size**: `4.76 GiB`
 *   **Splits**:
 
 Split        | Examples
@@ -106,10 +144,29 @@ Split        | Examples
 'train'      | 14,390
 'validation' | 2,034
 
+*   **Features**:
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(None,), dtype=tf.float32),
+    'bpm': tf.int32,
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': tf.string,
+    'midi': tf.string,
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': tf.string,
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
 ## groove/4bar-midionly
 
 *   **Config description**: Groove dataset without audio, split into 4-bar
     chunks.
+*   **Download size**: `3.11 MiB`
 *   **Splits**:
 
 Split        | Examples
@@ -117,3 +174,20 @@ Split        | Examples
 'test'       | 2,033
 'train'      | 17,261
 'validation' | 2,121
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'bpm': tf.int32,
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': tf.string,
+    'midi': tf.string,
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': tf.string,
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```

@@ -28,7 +28,6 @@ set aside 20% (1016 images) of the data for testing.
     [`tfds.image.flic.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
-*   **Download size**: `286.35 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -44,17 +43,17 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'currframe': Tensor(shape=(), dtype=tf.float64),
+    'currframe': tf.float64,
     'image': Image(shape=(480, 720, 3), dtype=tf.uint8),
     'moviename': Text(shape=(), dtype=tf.string),
-    'poselet_hit_idx': Sequence(Tensor(shape=(), dtype=tf.uint16)),
+    'poselet_hit_idx': Sequence(tf.uint16),
     'torsobox': BBoxFeature(shape=(4,), dtype=tf.float32),
-    'xcoords': Sequence(Tensor(shape=(), dtype=tf.float64)),
-    'ycoords': Sequence(Tensor(shape=(), dtype=tf.float64)),
+    'xcoords': Sequence(tf.float64),
+    'ycoords': Sequence(tf.float64),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
@@ -70,8 +69,10 @@ FeaturesDict({
 ## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.
+*   **Download size**: `286.35 MiB`
 
 ## flic/full
 
 *   **Config description**: Uses 20928 examples, a superset of FLIC consisting
     of more difficult examples.
+*   **Download size**: `1.10 GiB`

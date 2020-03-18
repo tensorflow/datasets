@@ -13,12 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Async download API with checksum verification. No business logic."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import concurrent.futures
 import contextlib
 import hashlib
 import io
@@ -27,7 +29,6 @@ import re
 import ssl
 import sys
 from absl import logging
-import concurrent.futures
 import promise
 import requests
 from requests.utils import extract_zipped_paths
@@ -113,6 +114,7 @@ class _Downloader(object):
     kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
     downloader = self.kaggle_downloader(kaggle_file.competition)
     filepath = downloader.download_file(kaggle_file.filename, destination_path)
+
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer()
     with tf.io.gfile.GFile(filepath, 'rb') as f:

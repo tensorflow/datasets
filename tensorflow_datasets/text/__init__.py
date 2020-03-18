@@ -13,8 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Text datasets."""
 
+from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.c4 import C4
 from tensorflow_datasets.text.cfq import CFQ
 from tensorflow_datasets.text.civil_comments import CivilComments

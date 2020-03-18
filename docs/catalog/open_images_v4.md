@@ -27,6 +27,9 @@ classes.
     [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 *   **Source code**:
     [`tfds.object_detection.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 *   **Download size**: `565.11 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -46,30 +49,30 @@ Split        | Examples
 FeaturesDict({
     'bobjects': Sequence({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'is_depiction': tf.int8,
+        'is_group_of': tf.int8,
+        'is_inside': tf.int8,
+        'is_occluded': tf.int8,
+        'is_truncated': tf.int8,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string),
     'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'confidence': tf.int32,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'confidence': tf.int32,
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 
@@ -125,25 +128,13 @@ FeaturesDict({
 ## open_images_v4/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.0`: No release notes.
 
 ## open_images_v4/300k
 
 *   **Config description**: Images have roughly 300,000 pixels, at 72 JPEG
     quality.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.1`: No release notes.
 
 ## open_images_v4/200k
 
 *   **Config description**: Images have roughly 200,000 pixels, at 72 JPEG
     quality.
-*   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-    *   `0.2.1`: No release notes.

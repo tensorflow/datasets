@@ -13,18 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Utilities for accessing TFDS GCS buckets."""
 
+import concurrent.futures
 import posixpath
 from xml.etree import ElementTree
 
-import concurrent.futures
 import requests
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 
-GCS_URL = "http://storage.googleapis.com"
+GCS_URL = "https://storage.googleapis.com"
 
 # for dataset_info/
 GCS_BUCKET = posixpath.join(GCS_URL, "tfds-data")

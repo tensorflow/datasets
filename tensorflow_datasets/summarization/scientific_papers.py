@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Scientific Papers Dataset."""
 
 from __future__ import absolute_import
@@ -56,9 +57,9 @@ _SUMMARY = "abstract"
 
 _URLS = {
     "arxiv":
-        "https://drive.google.com/uc?export=download&id=1K2kDBTNXS2ikx9xKmi2Fy0Wsc5u_Lls0",
+        "https://drive.google.com/uc?id=1b3rmCSIoh6VhD4HKWjI4HOW-cSwcwbeC&export=download",
     "pubmed":
-        "https://drive.google.com/uc?export=download&id=1Sa3kip8IE0J1SkMivlgOwq1jBgOnzeny",
+        "https://drive.google.com/uc?id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja&export=download",
 }
 
 
@@ -75,7 +76,7 @@ class ScientificPapersConfig(tfds.core.BuilderConfig):
     """
     # 1.1.0 remove sentence breaker <S> and </S> in summary.
     super(ScientificPapersConfig, self).__init__(
-        version=tfds.core.Version("1.1.0"), **kwargs)
+        version=tfds.core.Version("1.1.1"), **kwargs)
     self.filename = filename
 
 

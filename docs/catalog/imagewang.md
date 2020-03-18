@@ -37,10 +37,6 @@ consists of the Imagenette dataset {size} variant.
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
-*   **Dataset size**: `1.97 GiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 *   **Splits**:
 
 Split        | Examples
@@ -57,7 +53,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 
@@ -71,6 +67,21 @@ FeaturesDict({
 
 ## imagewang/full-size (default config)
 
+*   **Dataset size**: `1.97 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 ## imagewang/320px
 
+*   **Dataset size**: `460.81 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 ## imagewang/160px
+
+*   **Dataset size**: `140.40 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes

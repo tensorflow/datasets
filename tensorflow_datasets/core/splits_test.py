@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for the Split API."""
 
 from __future__ import absolute_import
@@ -83,6 +84,24 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
   def values(self, split):
     return [int(v["value"]) for v in
             tfds.as_numpy(self.as_dataset(split=split))]
+
+
+class SplitDictTest(testing.TestCase):
+
+  def test_num_shards(self):
+    sd = splits.SplitDict("ds_name")
+    sd.add(tfds.core.SplitInfo(name="train", shard_lengths=[1, 2, 3]))
+    self.assertEqual(sd["train"].num_shards, 3)
+
+    # When both values are set, shard_lengths has priority.
+    sd = splits.SplitDict("ds_name")
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=3, shard_lengths=[1,]))
+    self.assertEqual(sd["train"].num_shards, 1)
+
+    # With legacy mode, use legacy value
+    sd = splits.SplitDict("ds_name")
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=3))
+    self.assertEqual(sd["train"].num_shards, 3)
 
 
 class SplitsUnitTest(testing.TestCase):
@@ -262,10 +281,7 @@ class SplitsUnitTest(testing.TestCase):
     self.assertEqual(tfds.Split.TEST, tfds.Split.TEST)
     self.assertEqual(tfds.Split.TEST, "test")
     self.assertEqual("test", tfds.Split.TEST)
-    self.assertEqual(tfds.Split.ALL, "all")
 
-    self.assertNotEqual(tfds.Split.ALL, "test")
-    self.assertNotEqual(tfds.Split.ALL, test)
     self.assertNotEqual(train, test)
     self.assertNotEqual(train, train.subsplit(tfds.percent[:50]))
     self.assertNotEqual(train.subsplit(tfds.percent[:50]), train)
@@ -381,15 +397,6 @@ class SplitsIntegrationTest(testing.TestCase):
     cls._builder = DummyDataset(data_dir=testing.make_tmp_dir())
     cls._builder.download_and_prepare()
 
-  def test_split_all(self):
-    split = tfds.Split.ALL
-    all_values = self._builder.values(split=split)
-
-    self.assertEqual(
-        list(sorted(all_values)),
-        list(sorted(RANGE_TRAIN + RANGE_TEST + RANGE_VAL)),
-    )
-
   def test_split_merge(self):
     split = tfds.Split.TRAIN + tfds.Split.TEST
     all_values = self._builder.values(split=split)
@@ -480,10 +487,6 @@ class SplitsIntegrationTest(testing.TestCase):
 
     with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
       split = test + test
-      self._builder.values(split=split)
-
-    with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
-      split = test + tfds.Split.ALL
       self._builder.values(split=split)
 
     with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):

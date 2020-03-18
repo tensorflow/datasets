@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """https://www.kaggle.com/c/diabetic-retinopathy-detection/data.
 """
 
@@ -50,11 +51,10 @@ _BTGRAHAM_DESCRIPTION_PATTERN = (
 class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
   """BuilderConfig for DiabeticRetinopathyDetection."""
 
-  def __init__(self, old_version, target_pixels=None, **kwargs):
+  def __init__(self, target_pixels=None, **kwargs):
     """BuilderConfig for DiabeticRetinopathyDetection.
 
     Args:
-      old_version: str old_version.
       target_pixels: If given, rescale the images so that the total number of
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
@@ -63,10 +63,6 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             "3.0.0",
             "New split API (https://tensorflow.org/datasets/splits)"),
-        supported_versions=[
-            tfds.core.Version(
-                old_version, experiments={tfds.core.Experiment.S3: False}),
-        ],
         **kwargs)
     self._target_pixels = target_pixels
 
@@ -89,21 +85,17 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       DiabeticRetinopathyDetectionConfig(
           name="original",
-          old_version="2.0.0",
           description="Images at their original resolution and quality."),
       DiabeticRetinopathyDetectionConfig(
           name="1M",
-          old_version="2.1.0",
           description="Images have roughly 1,000,000 pixels, at 72 quality.",
           target_pixels=1000000),
       DiabeticRetinopathyDetectionConfig(
           name="250K",
-          old_version="2.1.0",
           description="Images have roughly 250,000 pixels, at 72 quality.",
           target_pixels=250000),
       DiabeticRetinopathyDetectionConfig(
           name="btgraham-300",
-          old_version="1.0.0",
           description=_BTGRAHAM_DESCRIPTION_PATTERN.format(300),
           target_pixels=300),
   ]
@@ -135,14 +127,12 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name="sample",  # 10 images, to do quicktests using dataset.
-            num_shards=1,
             gen_kwargs={
                 "images_dir_path": os.path.join(path, "sample"),
             },
         ),
         tfds.core.SplitGenerator(
             name="train",
-            num_shards=100,
             gen_kwargs={
                 "images_dir_path": os.path.join(path, "train"),
                 "csv_path": os.path.join(path, "trainLabels.csv"),
@@ -153,7 +143,6 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name="validation",
-            num_shards=100,
             gen_kwargs={
                 "images_dir_path": os.path.join(path, "test"),
                 "csv_path": test_labels_path,
@@ -164,7 +153,6 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name="test",
-            num_shards=100,
             gen_kwargs={
                 "images_dir_path": os.path.join(path, "test"),
                 "csv_path": test_labels_path,

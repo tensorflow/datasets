@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Oxford 102 Category Flower Dataset."""
 
 from __future__ import absolute_import
@@ -53,10 +54,6 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("0.0.1",
-                        experiments={tfds.core.Experiment.S3: False})
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -94,15 +91,12 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs=dict(split_name="trnid", **gen_kwargs)),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(split_name="tstid", **gen_kwargs)),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=dict(split_name="valid", **gen_kwargs)),
     ]
 

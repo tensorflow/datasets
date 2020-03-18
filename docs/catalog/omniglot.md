@@ -22,7 +22,6 @@ handwritten characters from 50 different alphabets.
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `17.95 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -42,13 +41,13 @@ Split    | Examples
 ```python
 FeaturesDict({
     'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
-    'alphabet_char_id': Tensor(shape=(), dtype=tf.int64),
+    'alphabet_char_id': tf.int64,
     'image': Image(shape=(105, 105, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 *   **Citation**:
 

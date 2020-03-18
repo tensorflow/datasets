@@ -35,17 +35,14 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
 ```python
 FeaturesDict({
     'documents': Text(shape=(), dtype=tf.string),
-    'num_comments': Tensor(shape=[], dtype=tf.float32),
-    'score': Tensor(shape=[], dtype=tf.float32),
+    'num_comments': tf.float32,
+    'score': tf.float32,
     'title': Text(shape=(), dtype=tf.string),
     'tldr': Text(shape=(), dtype=tf.string),
-    'ups': Tensor(shape=[], dtype=tf.float32),
-    'upvote_ratio': Tensor(shape=[], dtype=tf.float32),
+    'ups': tf.float32,
+    'upvote_ratio': tf.float32,
 })
 ```
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `('documents', 'title')`
 *   **Citation**:
 
 ```
@@ -68,6 +65,10 @@ Split   | Examples
 :------ | -------:
 'train' | 79,740
 
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('documents', 'title')`
+
 ## reddit_tifu/long
 
 *   **Config description**: Using TLDR as summary.
@@ -76,3 +77,7 @@ Split   | Examples
 Split   | Examples
 :------ | -------:
 'train' | 42,139
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('documents', 'tldr')`

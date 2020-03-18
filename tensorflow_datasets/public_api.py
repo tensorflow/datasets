@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Public API of tfds, without the registered dataset."""
 
 # pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
@@ -20,6 +21,7 @@ from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
@@ -60,14 +62,3 @@ __all__ = [
     "show_examples",
     "__version__",
 ]
-
-
-def _import_testing():
-  try:
-    from tensorflow_datasets import testing  # pylint: disable=redefined-outer-name
-    return testing
-  except:
-    raise   # pylint: disable=unreachable
-
-
-testing = _import_testing()

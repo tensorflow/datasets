@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """PatchCamelyon images dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
 
 import h5py
 import tensorflow_datasets.public_api as tfds
@@ -49,10 +49,6 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version('0.1.0',
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -84,15 +80,12 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(split='test', paths=paths)),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs=dict(split='train', paths=paths)),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=dict(split='valid', paths=paths)),
     ]
 

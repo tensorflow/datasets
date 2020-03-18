@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Cats vs Dogs dataset.
 """
 
@@ -54,10 +55,6 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "4.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.1",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -71,8 +68,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
         supervised_keys=("image", "label"),
         homepage=
         "https://www.microsoft.com/en-us/download/details.aspx?id=54765",
-        citation=_CITATION
-        )
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download(_URL)
@@ -81,7 +78,6 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=20,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(path),
             }),

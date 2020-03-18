@@ -42,17 +42,17 @@ Split   | Examples
 FeaturesDict({
     'task_id': Text(shape=(), dtype=tf.string),
     'test': Sequence({
-        'input': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
-        'output': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
+        'input': Sequence(Sequence(tf.int32)),
+        'output': Sequence(Sequence(tf.int32)),
     }),
     'train': Sequence({
-        'input': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
-        'output': Sequence(Sequence(Tensor(shape=(), dtype=tf.int32))),
+        'input': Sequence(Sequence(tf.int32)),
+        'output': Sequence(Sequence(tf.int32)),
     }),
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

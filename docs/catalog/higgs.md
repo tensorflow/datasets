@@ -28,7 +28,6 @@ networks are presented in the original paper.
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `1.0.0`: No release notes.
 *   **Download size**: `2.62 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -44,39 +43,39 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'class_label': Tensor(shape=(), dtype=tf.float32),
-    'jet_1_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_1_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_1_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_1_pt': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_2_pt': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_3_pt': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_b-tag': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_eta': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_phi': Tensor(shape=(), dtype=tf.float64),
-    'jet_4_pt': Tensor(shape=(), dtype=tf.float64),
-    'lepton_eta': Tensor(shape=(), dtype=tf.float64),
-    'lepton_pT': Tensor(shape=(), dtype=tf.float64),
-    'lepton_phi': Tensor(shape=(), dtype=tf.float64),
-    'm_bb': Tensor(shape=(), dtype=tf.float64),
-    'm_jj': Tensor(shape=(), dtype=tf.float64),
-    'm_jjj': Tensor(shape=(), dtype=tf.float64),
-    'm_jlv': Tensor(shape=(), dtype=tf.float64),
-    'm_lv': Tensor(shape=(), dtype=tf.float64),
-    'm_wbb': Tensor(shape=(), dtype=tf.float64),
-    'm_wwbb': Tensor(shape=(), dtype=tf.float64),
-    'missing_energy_magnitude': Tensor(shape=(), dtype=tf.float64),
-    'missing_energy_phi': Tensor(shape=(), dtype=tf.float64),
+    'class_label': tf.float32,
+    'jet_1_b-tag': tf.float64,
+    'jet_1_eta': tf.float64,
+    'jet_1_phi': tf.float64,
+    'jet_1_pt': tf.float64,
+    'jet_2_b-tag': tf.float64,
+    'jet_2_eta': tf.float64,
+    'jet_2_phi': tf.float64,
+    'jet_2_pt': tf.float64,
+    'jet_3_b-tag': tf.float64,
+    'jet_3_eta': tf.float64,
+    'jet_3_phi': tf.float64,
+    'jet_3_pt': tf.float64,
+    'jet_4_b-tag': tf.float64,
+    'jet_4_eta': tf.float64,
+    'jet_4_phi': tf.float64,
+    'jet_4_pt': tf.float64,
+    'lepton_eta': tf.float64,
+    'lepton_pT': tf.float64,
+    'lepton_phi': tf.float64,
+    'm_bb': tf.float64,
+    'm_jj': tf.float64,
+    'm_jjj': tf.float64,
+    'm_jlv': tf.float64,
+    'm_lv': tf.float64,
+    'm_wbb': tf.float64,
+    'm_wwbb': tf.float64,
+    'missing_energy_magnitude': tf.float64,
+    'missing_energy_phi': tf.float64,
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

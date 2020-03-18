@@ -13,11 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Version info."""
 
 # We follow Semantic Versioning (https://semver.org/)
 _MAJOR_VERSION = '2'
-_MINOR_VERSION = '0'
+_MINOR_VERSION = '1'
 _PATCH_VERSION = '0'
 
 __version__ = '.'.join([

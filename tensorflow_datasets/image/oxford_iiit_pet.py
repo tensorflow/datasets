@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Oxford-IIIT pet dataset."""
 
 import os
@@ -38,8 +39,6 @@ _CITATION = """\
 }
 """
 
-_NUM_SHARDS = 1
-
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
 _LABEL_CLASSES = [
@@ -61,10 +60,6 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("3.1.0",
                               "Added species and labels, new split API.")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "1.2.0", experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -102,7 +97,6 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     # Setup train and test splits
     train_split = tfds.core.SplitGenerator(
         name="train",
-        num_shards=_NUM_SHARDS,
         gen_kwargs={
             "images_dir_path": images_path_dir,
             "annotations_dir_path": annotations_path_dir,
@@ -112,7 +106,6 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         )
     test_split = tfds.core.SplitGenerator(
         name="test",
-        num_shards=_NUM_SHARDS,
         gen_kwargs={
             "images_dir_path": images_path_dir,
             "annotations_dir_path": annotations_path_dir,

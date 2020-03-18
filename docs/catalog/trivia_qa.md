@@ -62,7 +62,7 @@ FeaturesDict({
     'search_results': Sequence({
         'description': Text(shape=(), dtype=tf.string),
         'filename': Text(shape=(), dtype=tf.string),
-        'rank': Tensor(shape=(), dtype=tf.int32),
+        'rank': tf.int32,
         'search_context': Text(shape=(), dtype=tf.string),
         'title': Text(shape=(), dtype=tf.string),
         'url': Text(shape=(), dtype=tf.string),
@@ -70,7 +70,7 @@ FeaturesDict({
 })
 ```
 *   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 *   **Citation**:
 

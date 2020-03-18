@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for Kaggle API."""
 
 from __future__ import absolute_import
@@ -55,6 +56,13 @@ class KaggleTest(testing.TestCase):
         downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
         with self.assertRaises(subprocess.CalledProcessError):
           _ = downloader.competition_files
+
+  def test_kaggle_type(self):
+    downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+    self.assertEqual(downloader._kaggle_type.download_cmd, "competitions")
+
+    downloader = kaggle.KaggleCompetitionDownloader("author/dataset")
+    self.assertEqual(downloader._kaggle_type.download_cmd, "datasets")
 
 
 if __name__ == "__main__":
