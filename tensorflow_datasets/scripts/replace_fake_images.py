@@ -52,7 +52,7 @@ def rewrite_image(filepath):
   image = np.array(PIL.Image.open(filepath))
 
   # Filter unsuported images
-  if PIL.Image.open(filepath) == 'RGBA' or image.dtype == np.bool:
+  if PIL.Image.open(filepath).mode == 'RGBA' or image.dtype == np.bool:
     return
 
   # The color is a deterministic function of the relative filepath.
