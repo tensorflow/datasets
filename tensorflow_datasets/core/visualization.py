@@ -73,10 +73,22 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
     ]
 
     if not image_keys:
-      raise ValueError(
-          "Visualisation not supported for dataset `{}`. Was not able to "
-          "auto-infer image.".format(ds_info.name))
+       audio_keys = [
+        k for k, feature in ds_info.features.items()]
+        if isinstance(feature,features_lib.audio)
 
+        if len(audio_keys) > 1:
+        raise ValueError("Audio keys generated as {}".format(audio_keys))
+
+        if not audio keys : 
+          raise ValueError(
+              "Visualisation not supported for dataset `{}`. Was not able to "
+              "auto-infer image.".format(ds_info.name))
+
+          
+          
+
+    ## IMAGE VISUALIZATION 
     if len(image_keys) > 1:
       raise ValueError(
           "Multiple image features detected in the dataset. Using the first one. You can "
