@@ -28,7 +28,6 @@ from absl import flags
 from absl import logging
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import gcs_utils
@@ -176,8 +175,8 @@ def builder(name, **builder_init_kwargs):
     raise
 
 
-@api_utils.disallow_positional_args(allowed=["name"])
 def load(name,
+         *,
          split=None,
          data_dir=None,
          batch_size=None,

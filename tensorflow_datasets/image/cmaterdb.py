@@ -93,15 +93,6 @@ CMATERdb is the pattern recognition database repository created at the 'Center f
 class CmaterdbConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CMATERdb Config."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, **kwargs):
-    """BuilderConfig for CMATERdb examples.
-
-    Args:
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(CmaterdbConfig, self).__init__(**kwargs)
-
 
 class Cmaterdb(tfds.core.GeneratorBasedBuilder):
   """CMATERdb dataset."""

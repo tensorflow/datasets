@@ -53,8 +53,7 @@ _DOWNLOAD_URL = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 class IMDBReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for IMDBReviews."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, *, text_encoder_config=None, **kwargs):
     """BuilderConfig for IMDBReviews.
 
     Args:

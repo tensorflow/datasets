@@ -62,8 +62,7 @@ _VALID_LANGUAGE_PAIRS = (
 class TedHrlrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for TED talk data comparing high/low resource languages."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, language_pair=(None, None), **kwargs):
+  def __init__(self, *, language_pair=(None, None), **kwargs):
     """BuilderConfig for TED talk data comparing high/low resource languages.
 
     The first language in `language_pair` should either be a 2-letter coded

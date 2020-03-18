@@ -153,7 +153,7 @@ def iter_tar(arch_f, stream=False):
     for member in tar:
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
-        path = _normpath(member.path)
+        path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
           continue
         yield [path, extract_file]

@@ -52,15 +52,6 @@ from the corresponding reading passage, or the question might be unanswerable.
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, **kwargs):
-    """BuilderConfig for SQUAD.
-
-    Args:
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(SquadConfig, self).__init__(**kwargs)
-
 
 class Squad(tfds.core.GeneratorBasedBuilder):
   """SQUAD: The Stanford Question Answering Dataset. Version 1.1."""

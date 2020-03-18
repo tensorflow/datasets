@@ -186,7 +186,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     os_patcher.start()
     self.patchers.append(os_patcher)
 
-    mock_builtins = __builtins__.copy()
+    mock_builtins = __builtins__.copy()  # pytype: disable=module-attr
     mock_builtins["open"] = absltest.mock.Mock(side_effect=err)
     open_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)

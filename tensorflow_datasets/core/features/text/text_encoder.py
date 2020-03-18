@@ -33,7 +33,7 @@ from tensorflow_datasets.core.utils import py_utils
 
 
 def _re_compile(pattern):
-  return re.compile(pattern, flags=re.UNICODE)
+  return re.compile(pattern, flags=re.UNICODE)  # pytype: disable=wrong-keyword-args
 
 
 NUM_BYTES = 2**8

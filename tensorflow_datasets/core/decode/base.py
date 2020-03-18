@@ -26,7 +26,6 @@ import functools
 
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.utils import py_utils
 
 
@@ -56,8 +55,7 @@ class Decoder(object):
   def __init__(self):
     self.feature = None
 
-  @api_utils.disallow_positional_args
-  def setup(self, feature):
+  def setup(self, *, feature):
     """Transformation contructor.
 
     The initialization of decode object is deferred because the objects only

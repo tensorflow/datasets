@@ -94,8 +94,7 @@ _DEFAULT_VERSION = tfds.core.Version('3.0.0', 'Using cased version.')
 class CnnDailymailConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CnnDailymail."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, *, text_encoder_config=None, **kwargs):
     """BuilderConfig for CnnDailymail.
 
     Args:

@@ -31,7 +31,6 @@ import attr
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import _sharded_files
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
@@ -328,7 +327,7 @@ class Reader(object):
 @attr.s(frozen=True)
 class _AbsoluteInstruction(object):
   """A machine friendly slice: defined absolute positive boundaries."""
-  splitname = attr.ib()  # type: Text
+  splitname = attr.ib()  # Text
   from_ = attr.ib()  # uint (starting index).
   to = attr.ib()  # uint (ending index).
 
@@ -336,7 +335,7 @@ class _AbsoluteInstruction(object):
 @attr.s(frozen=True)
 class _RelativeInstruction(object):
   """Represents a single parsed slicing instruction, can use % and negatives."""
-  splitname = attr.ib()  # type: Text
+  splitname = attr.ib()  # Text
   from_ = attr.ib()  # int (starting index) or None if no lower boundary.
   to = attr.ib()  # int (ending index) or None if no upper boundary.
   unit = attr.ib(validator=attr.validators.in_(['%', 'abs']))  # str
@@ -461,8 +460,7 @@ class ReadInstruction(object):
     result._init(relative_instructions)  # pylint: disable=protected-access
     return result
 
-  @api_utils.disallow_positional_args(allowed=['split_name'])
-  def __init__(self, split_name, rounding='closest', from_=None, to=None,
+  def __init__(self, split_name, *, rounding='closest', from_=None, to=None,
                unit=None):
     """Initialize ReadInstruction.
 

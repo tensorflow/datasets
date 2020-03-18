@@ -67,8 +67,7 @@ _HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
 class Lm1bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Lm1b."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, *, text_encoder_config=None, **kwargs):
     """BuilderConfig for Lm1b.
 
     Args:

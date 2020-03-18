@@ -27,7 +27,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
 
@@ -85,8 +84,7 @@ class Image(feature.FeatureConnector):
     ```
   """
 
-  @api_utils.disallow_positional_args
-  def __init__(self, shape=None, dtype=None, encoding_format=None):
+  def __init__(self, *, shape=None, dtype=None, encoding_format=None):
     """Construct the connector.
 
     Args:

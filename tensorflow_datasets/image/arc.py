@@ -50,8 +50,7 @@ _BASE_URL = "https://github.com/fchollet/ARC/"
 class ARCConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ARC."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, version, commit, **kwargs):
+  def __init__(self, *, version, commit, **kwargs):
     """BuilderConfig for ARC.
 
     Args:

@@ -63,8 +63,7 @@ _DATA_OPTIONS = ["v4", "v6"]
 class Cifar10_1Config(tfds.core.BuilderConfig):  # pylint: disable=invalid-name
   """BuilderConfig for Cifar-10.1."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a Cifar10_1Config.
 
     Args:
