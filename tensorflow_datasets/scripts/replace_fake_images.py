@@ -36,6 +36,9 @@ import absl.app
 import absl.flags
 import numpy as np
 import PIL.Image
+import shutil # New import
+import os # New import
+
 
 FLAGS = absl.flags.FLAGS
 
@@ -49,10 +52,10 @@ def rewrite_image(filepath):
   Args:
     filepath: path of the images to get processed
   """
-  image = np.array(PIL.Image.open(filepath))
-
+  image_content = PIL.Image.open(filepath)
+  image = np.array(image_content)
   # Filter unsuported images
-  if image.mode == 'RGBA' or image.dtype == np.bool:
+  if image_content.mode == 'RGBA' or image.dtype == np.bool:
     return
 
   # The color is a deterministic function of the relative filepath.
@@ -63,7 +66,7 @@ def rewrite_image(filepath):
 
   image = np.ones_like(image) * color
   image = PIL.Image.fromarray(image)
-  image.save(filepath)
+  image.save(filepath, optimize=True)
 
 
 def rewrite_zip(root_dir, zip_filepath):
@@ -80,14 +83,9 @@ def rewrite_zip(root_dir, zip_filepath):
       zip_file.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
-
-    # Compressed the .zip file again
-    with zipfile.ZipFile(zip_filepath, 'w') as zip_file:
-      for file_dir, _, files in os.walk(temp_dir):
-        for file in files:
-          file_path = os.path.join(file_dir, file)
-          zip_file.write(file_path)
-
+    
+    shutil.make_archive(zip_filepath[:-4], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
+    # The extraction target in the above line can be changed to gztar for additional compression 
 
 def rewrite_tar(root_dir, tar_filepath):
   """Rewrite the older .tar file into new better compressed one.
@@ -114,10 +112,10 @@ def rewrite_tar(root_dir, tar_filepath):
       tar.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
-
-    # Converting into tarfile again to decrease the space taken by the file-
-    with tarfile.open(tar_filepath, 'w' + extension) as tar:
-      tar.add(temp_dir, recursive=True)
+    
+    os.remove(tar_filepath) # Remove original tar file as dupicates with the extension tar.gz will be created
+    
+    shutil.make_archive(tar_filepath[:-4], 'gztar', temp_dir) # Copies the directory structure of the extracted tar file and stores it back gztar
 
 
 def rewrite_dir(fake_dir):
