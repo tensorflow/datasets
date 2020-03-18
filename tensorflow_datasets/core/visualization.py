@@ -20,6 +20,8 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+from random import randint
+  
 
 from absl import logging
 
@@ -71,18 +73,20 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
         k for k, feature in ds_info.features.items()
         if isinstance(feature, features_lib.Image)
     ]
+    
+    # If does not have image items - Check for audio items 
 
     if not image_keys:
        audio_keys = [
         k for k, feature in ds_info.features.items()
-        if isinstance(feature,features_lib.audio)]
+        if isinstance(feature,features_lib.Audio)]
 
 
-        if not audio keys : 
-          raise ValueError(
-              "Visualisation not supported for dataset `{}`. Was not able to "
-              "auto-infer image.".format(ds_info.name))
- 
+    if not audio_keys: 
+      raise ValueError(
+          "Visualisation not supported for dataset `{}`. Was not able to "
+          "auto-infer image.".format(ds_info.name))
+
    
     if len(audio_keys) > 1:
         raise ValueError("Audio keys generated as {}".format(audio_keys))
