@@ -88,20 +88,47 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
           "Visualisation not supported for dataset `{}`. Was not able to "
           "auto-infer image.".format(ds_info.name)
    
-#     if len(audio_keys) > 1:
-#         raise ValueError("Audio keys generated as {}".format(audio_keys))
+  if len(audio_keys) > 1:
+      audio_samples=[]
+      if(ds_info.name == 'ljspeech'):
+        key = 'speech'
+      else:
+        key = 'audio'
 
-          
-          
+      samplerate = 16000
+      ctr = 0
+      for features in ds:
+          ctr+=100
+          audio_samples.append(features[key].numpy())
+      to_gen=[]
+      for _ in range(2):
+        value = randint(0, len(audio_samples))
+        to_gen.append(audio_samples[value])
+      ctr=0
+      for audio in to_gen:
+        ctr+=1
+        name = '/content/audio' + str(ctr) + '.wav'
+        write(name,samplerate,audio)
+        IPython.display.display(IPython.display.Audio(name)) 
+        print(name)
 
-    ## IMAGE VISUALIZATION 
-    if len(image_keys) > 1:
-      raise ValueError(
-          "Multiple image features detected in the dataset. Using the first one. You can "
-          "use `image_key` argument to override. Images detected: %s" %
-          (",".join(image_keys)))
+      fig,a =  plt.subplots(2,2)
 
-    image_key = image_keys[0]
+      a[0][0].plot(to_gen[0])
+      a[0][1].plot(to_gen[1])
+      a[1][0].plot(to_gen[0])
+      a[1][1].plot(to_gen[1])
+
+      return fig
+        
+  ## IMAGE VISUALIZATION 
+  if len(image_keys) > 1:
+    raise ValueError(
+        "Multiple image features detected in the dataset. Using the first one. You can "
+        "use `image_key` argument to override. Images detected: %s" %
+        (",".join(image_keys)))
+
+  image_key = image_keys[0]
 
   label_keys = [
       k for k, feature in ds_info.features.items()
@@ -114,7 +141,7 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
 
   num_examples = rows * cols
   examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-
+        
   fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
   fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
   for i, ex in enumerate(examples):
