@@ -82,7 +82,7 @@ def rewrite_zip(root_dir, zip_filepath):
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
     # Compressed the .zip file again
-    with zipfile.ZipFile(zip_filepath, 'w') as zip_file:
+    with zipfile.ZipFile(zip_filepath, 'w',compression=zipfile.ZIP_DEFLATED) as zip_file:
       for file_dir, _, files in os.walk(temp_dir):
         for file in files:
           file_path = os.path.join(file_dir, file)
