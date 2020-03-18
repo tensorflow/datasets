@@ -104,10 +104,9 @@ def rewrite_tar(root_dir, tar_filepath):
     # Checking the extension of file to be extract
     if tar_filepath.lower().endswith('gz'):
       extension = ':gz'
-    elif tar_filepath.lower().endswith('bz2'):
+    if tar_filepath.lower().endswith('bz2'):
       extension = ':bz2'
-    else:
-      extension = ''
+    extension = ''
 
     # Extraction of .tar file
     with tarfile.open(tar_filepath, 'r' + extension) as tar:
@@ -116,8 +115,8 @@ def rewrite_tar(root_dir, tar_filepath):
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
     # Converting into tarfile again to decrease the space taken by the file-
-    with tarfile.open(tar_filepath, 'w' + extension) as tar:
-      tar.add(temp_dir, recursive=True)
+    with tarfile.open(tar_filepath, 'w:gz') as tar:
+      tar.add(temp_dir, recursive=True,arcname=os.path.basename(temp_dir))
 
 
 def rewrite_dir(fake_dir):
@@ -134,11 +133,11 @@ def rewrite_dir(fake_dir):
       img_ext = os.path.basename(file).split('.')[-1].lower()
       if img_ext in img_ext_list:
         rewrite_image(path)
-      elif path.endswith('.npz'):  # Filter `.npz` files
+      if path.endswith('.npz'):  # Filter `.npz` files
         continue
-      elif zipfile.is_zipfile(path):
+      if zipfile.is_zipfile(path):
         rewrite_zip(root_dir, path)
-      elif tarfile.is_tarfile(path):
+      if tarfile.is_tarfile(path):
         rewrite_tar(root_dir, path)
 
 
