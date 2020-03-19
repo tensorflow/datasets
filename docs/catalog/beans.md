@@ -10,31 +10,31 @@
 </div>
 # `beans`
 
+
 *   **Description**:
 
 Beans is a dataset of images of beans taken in the field using smartphone
 cameras. It consists of 3 classes: 2 disease classes and the healthy class.
-Diseases depicted include Angular Leaf Spot and Bean Rust. Data was annotated by
-experts from the National Crops Resources Research Institute (NaCRRI) in Uganda
-and collected by the Makerere AI research lab.
+Diseases depicted include Angular Leaf Spot and Bean Rust. Data was annotated
+by experts from the National Crops Resources Research Institute (NaCRRI) in
+Uganda and collected by the Makerere AI research lab.
 
-*   **Homepage**:
-    [https://github.com/AI-Lab-Makerere/ibean/](https://github.com/AI-Lab-Makerere/ibean/)
+*   **Homepage**: [https://github.com/AI-Lab-Makerere/ibean/](https://github.com/AI-Lab-Makerere/ibean/)
 *   **Source code**:
     [`tfds.image.beans.Beans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/beans.py)
 *   **Versions**:
-    *   **`0.1.0`** (default): No release notes.
-*   **Download size**: `Unknown size`
+    * **`0.1.0`** (default): No release notes.
+*   **Download size**: `171.69 MiB`
 *   **Dataset size**: `171.63 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes (test, validation), Only when `shuffle_files=False` (train)
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 128
-'train'      | 1,034
+Split  | Examples
+:----- | -------:
+'test' | 128
+'train' | 1,034
 'validation' | 133
 
 *   **Features**:
@@ -59,3 +59,14 @@ FeaturesDict({
     url="https://github.com/AI-Lab-Makerere/ibean/"
 }
 ```
+
+
+
+
+
+
+
+
+* Figure
+ 
+ ![](https://github.com/vvkio/datasets/raw/master/tensorflow_datasets/examples/beans.png)

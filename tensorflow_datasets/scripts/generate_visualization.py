@@ -54,7 +54,8 @@ def optimize_image(ds_name):
   non_transparent_image = image.convert('RGB')
 
   optimized_image_file_name = ds_name + '.jpg'
-  optimized_image_file_path = os.path.join(images_folder_path, optimized_image_file_name)
+  optimized_image_file_path = os.path.join(images_folder_path,
+                                           optimized_image_file_name)
   non_transparent_image.save(optimized_image_file_path)
 
 def main(_):
@@ -62,4 +63,3 @@ def main(_):
 
 if __name__ == "__main__":
   app.run(main)
-
