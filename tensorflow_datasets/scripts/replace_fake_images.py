@@ -36,9 +36,7 @@ import absl.app
 import absl.flags
 import numpy as np
 import PIL.Image
-import shutil # New import
-import os # New import
-
+import shutil
 
 FLAGS = absl.flags.FLAGS
 
@@ -83,8 +81,8 @@ def rewrite_zip(root_dir, zip_filepath):
       zip_file.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
-    shutil.make_archive(zip_filepath[:-4], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
-    # The extraction target in the above line can be changed to gztar for additional compression 
+    if zip_filepath.lower().endswith('zip'):
+        shutil.make_archive(zip_filepath[:-len('.zip')], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
 
 def rewrite_tar(root_dir, tar_filepath):
   """Rewrite the older .tar file into new better compressed one.
@@ -99,18 +97,26 @@ def rewrite_tar(root_dir, tar_filepath):
   # Create a tempfile to store the images contain noise
   with tempfile.TemporaryDirectory(dir=root_dir) as temp_dir:
     # Checking the extension of file to be extract
-    if tar_filepath.lower().endswith('gz'):
+    tar_filepath_lowercase = tar_filepath.lower()
+    if tar_filepath_lowercase.endswith('gz'):
       extension = ':gz'
       shutil_extension = 'gztar'
-      extension_removal_index = 7 # Hardcode number of indices to be skipped from the end to obtain filename. This is hard-coded as filenames containing "." might exist and thus filepath.split(".") would give an incorrect result.
-    elif tar_filepath.lower().endswith('bz2'):
+      if tar_filepath_lowercase.endswith('tgz'):
+          extension_removal_index = len('.tgz') # Obtain file name from filepath. Hardcoded indices are used as filenames may contain periods
+      else:
+          extension_removal_index = len('.tar.gz')
+    elif tar_filepath_lowercase.endswith('bz2'):
       extension = ':bz2'
       shutil_extension = 'bztar'
-      extension_removal_index = 7
+      extension_removal_index = len('.tar.bz2')
+    elif tar_filepath_lowercase.endswith('xz'):
+      extension = ':xz'
+      shutil_extension = 'xztar'
+      extension_removal_index = len('.tar.xz')
     else:
       extension = ''
       shutil_extension = 'tar'
-      extension_removal_index = 4
+      extension_removal_index = -tar_filepath.find('.tar')
 
     # Extraction of .tar file
     with tarfile.open(tar_filepath, 'r' + extension) as tar:
@@ -118,7 +124,7 @@ def rewrite_tar(root_dir, tar_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
     
-    shutil.make_archive(tar_filepath[:-extension_removal_index], shutil_extension, temp_dir) # Copies the directory structure of the extracted tar file and stores it back gztar
+    shutil.make_archive(tar_filepath[:-extension_removal_index], shutil_extension, temp_dir) # Copies the directory structure of the extracted tar file and stores it back in the desired format
 
 
 def rewrite_dir(fake_dir):
