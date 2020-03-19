@@ -31,12 +31,12 @@ import os
 import tarfile
 import tempfile
 import zipfile
+import shutil
 
 import absl.app
 import absl.flags
 import numpy as np
 import PIL.Image
-import shutil
 
 FLAGS = absl.flags.FLAGS
 
@@ -82,7 +82,7 @@ def rewrite_zip(root_dir, zip_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
     if zip_filepath.lower().endswith('zip'):
-        shutil.make_archive(zip_filepath[:-len('.zip')], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
+      shutil.make_archive(zip_filepath[:-len('.zip')], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
 
 def rewrite_tar(root_dir, tar_filepath):
   """Rewrite the older .tar file into new better compressed one.
@@ -102,9 +102,9 @@ def rewrite_tar(root_dir, tar_filepath):
       extension = ':gz'
       shutil_extension = 'gztar'
       if tar_filepath_lowercase.endswith('tgz'):
-          extension_removal_index = len('.tgz') # Obtain file name from filepath. Hardcoded indices are used as filenames may contain periods
+        extension_removal_index = len('.tgz') # Obtain file name from filepath. Hardcoded indices are used as filenames may contain periods
       else:
-          extension_removal_index = len('.tar.gz')
+        extension_removal_index = len('.tar.gz')
     elif tar_filepath_lowercase.endswith('bz2'):
       extension = ':bz2'
       shutil_extension = 'bztar'
@@ -123,7 +123,6 @@ def rewrite_tar(root_dir, tar_filepath):
       tar.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
-    
     shutil.make_archive(tar_filepath[:-extension_removal_index], shutil_extension, temp_dir) # Copies the directory structure of the extracted tar file and stores it back in the desired format
 
 
