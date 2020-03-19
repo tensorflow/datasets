@@ -1,6 +1,7 @@
 {
   "citation": "\n",
   "description": "Imagenette is a subset of 10 easily classified classes from the Imagenet\ndataset. It was originally prepared by Jeremy Howard of FastAI. The objective\nbehind putting together a small version of the Imagenet dataset was mainly\nbecause running new ideas/algorithms/experiments on the whole Imagenet take a\nlot of time.\n\nThis version of the dataset allows researchers/practitioners to quickly try out\nideas and share with others. The dataset comes in three variants:\n\n  * Full size\n  * 320 px\n  * 160 px\nThis dataset consists of the Imagenette dataset {size} variant.\n",
+  "downloadSize": "1556914727",
   "location": {
     "urls": [
       "https://github.com/fastai/imagenette"
@@ -36,24 +37,25 @@
   "splits": [
     {
       "name": "train",
+      "numBytes": "1105127322",
       "numShards": "1",
       "shardLengths": [
-        "806",
-        "806",
-        "806",
-        "806",
-        "805",
-        "806",
-        "806",
-        "806",
-        "806",
-        "806",
-        "806",
-        "805",
-        "806",
-        "806",
-        "806",
-        "806"
+        "592",
+        "592",
+        "591",
+        "592",
+        "592",
+        "592",
+        "592",
+        "591",
+        "592",
+        "592",
+        "592",
+        "592",
+        "592",
+        "591",
+        "592",
+        "592"
       ],
       "statistics": {
         "features": [
@@ -61,7 +63,7 @@
             "name": "image",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "12894"
+                "numNonMissing": "9469"
               },
               "max": 255.0
             }
@@ -70,20 +72,24 @@
             "name": "label",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "12894"
+                "numNonMissing": "9469"
               },
               "max": 9.0
             }
           }
         ],
-        "numExamples": "12894"
+        "numExamples": "9469"
       }
     },
     {
       "name": "validation",
+      "numBytes": "464119410",
       "numShards": "1",
       "shardLengths": [
-        "500"
+        "981",
+        "981",
+        "982",
+        "981"
       ],
       "statistics": {
         "features": [
@@ -91,7 +97,7 @@
             "name": "image",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "500"
+                "numNonMissing": "3925"
               },
               "max": 255.0
             }
@@ -100,13 +106,13 @@
             "name": "label",
             "numStats": {
               "commonStats": {
-                "numNonMissing": "500"
+                "numNonMissing": "3925"
               },
               "max": 9.0
             }
           }
         ],
-        "numExamples": "500"
+        "numExamples": "3925"
       }
     }
   ],
