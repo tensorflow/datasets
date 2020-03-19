@@ -23,7 +23,6 @@ from __future__ import print_function
 # pylint: disable=g-import-not-at-top,g-direct-tensorflow-import
 
 import distutils.version
-import types
 
 from absl import logging
 
@@ -46,7 +45,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     inadequate.
   """
   try:
-    import tensorflow.compat.v2 as tf
+    import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
   except ImportError:
     # Print more informative error message, then reraise.
     print("\n\nFailed to import TensorFlow. Please note that TensorFlow is not "
@@ -58,13 +57,13 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     raise
 
   tf_version = distutils.version.LooseVersion(tf.__version__)
-  v_1_13 = distutils.version.LooseVersion("1.13.0")
-  if tf_version < v_1_13:
+  v_1_15 = distutils.version.LooseVersion("1.15.0")
+  if tf_version < v_1_15:
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
         "version >= {required}; Detected an installation of version {present}. "
         "Please upgrade TensorFlow to proceed.".format(
-            required="1.13.0",
+            required="1.15.0",
             present=tf.__version__))
   _patch_tf(tf)
 
@@ -75,14 +74,8 @@ def _patch_tf(tf):
   if TF_PATCH:
     return
 
-  v_1_13 = distutils.version.LooseVersion("1.13.0")
-  v_2 = distutils.version.LooseVersion("2.0.0")
-  tf_version = distutils.version.LooseVersion(tf.__version__)
-
   _patch_dataset_v2(tf)
-  if v_1_13 <= tf_version < v_2:
-    TF_PATCH = "tf1_13"
-    _patch_for_tf1_13(tf)
+  TF_PATCH = "tf_data"
 
 
 def _patch_dataset_v2(tf):
@@ -103,38 +96,12 @@ def _patch_dataset_v2(tf):
         "instead.")
     return tf.compat.v1.data.make_initializable_iterator(self)
 
-  tf.compat.v2.data.Dataset.make_one_shot_iterator = make_one_shot_iterator
-  tf.compat.v2.data.Dataset.make_initializable_iterator = (
+  tf.data.Dataset.make_one_shot_iterator = make_one_shot_iterator
+  tf.data.Dataset.make_initializable_iterator = (
       make_initializable_iterator)
-
-
-def _patch_for_tf1_13(tf):
-  """Monkey patch tf 1.13 so tfds can use it."""
-  if not hasattr(tf.io.gfile, "GFile"):
-    tf.io.gfile.GFile = tf.gfile.GFile
-  if not hasattr(tf, "nest"):
-    tf.nest = tf.contrib.framework.nest
-  if not hasattr(tf.compat, "v2"):
-    tf.compat.v2 = types.ModuleType("tf.compat.v2")
-    tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")
-    from tensorflow.python.data.ops import dataset_ops
-    tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
-  if not hasattr(tf.autograph.experimental, "do_not_convert"):
-    tf.autograph.experimental.do_not_convert = (
-        tf.contrib.autograph.do_not_convert)
 
 
 def is_dataset(ds):
   """Whether ds is a Dataset. Compatible across TF versions."""
-  import tensorflow.compat.v2 as tf
-  from tensorflow_datasets.core.utils import py_utils
-  dataset_types = [tf.data.Dataset]
-  v1_ds = py_utils.rgetattr(tf, "compat.v1.data.Dataset", None)
-  v2_ds = py_utils.rgetattr(tf, "compat.v2.data.Dataset", None)
-  if v1_ds is not None:
-    dataset_types.append(v1_ds)
-  if v2_ds is not None:
-    dataset_types.append(v2_ds)
-  return isinstance(ds, tuple(dataset_types))
-
-
+  import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
+  return isinstance(ds, (tf.data.Dataset, tf.compat.v1.data.Dataset))
