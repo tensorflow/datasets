@@ -10,12 +10,14 @@ Typical usage example:
   generate_visualization(ds_name)
 
 """
+
 import os
 import tensorflow_datasets as tfds
 from PIL import Image
+from absl import app
 import matplotlib.pyplot
 
-FIG_DIR = ('examples/')
+FIG_DIR = ('../docs/catalog/images/examples/')
 
 def generate_visualization(ds_name):
   """
@@ -27,12 +29,13 @@ def generate_visualization(ds_name):
     path_dir = tfds.core.get_tfds_path(FIG_DIR)
     print(path_dir)
     fig = tfds.show_examples(ds_info, ds, plot_scale=2)
-    fname = path_dir + ds_name + '.png'
-    fig.savefig(fname=fname)
+    suffix = '.png'
+    fpath = os.path.join(path_dir, ds_name + suffix)
+    fig.savefig(fname=fpath)
 
     # Optimizing figures
     optimize_image(ds_name)
-    os.remove(fname)
+    os.remove(fpath)
 
   except RuntimeError:
     print('The selected dataset is not supported')
@@ -42,9 +45,21 @@ def optimize_image(ds_name):
   Optimizing image size by removing transparency
   """
 
-  figure_path = tfds.core.get_tfds_path(FIG_DIR)
-  file_path = figure_path+ ds_name +".png"
-  print(file_path)
-  image = Image.open(file_path)
+  images_folder_path = tfds.core.get_tfds_path(FIG_DIR)
+  image_file_name = ds_name + '.png'
+
+  image_path = os.path.join(images_folder_path, image_file_name)
+  print(image_path)
+  image = Image.open(image_path)
   non_transparent_image = image.convert('RGB')
-  non_transparent_image.save(figure_path+'beans.jpg')
+
+  optimized_image_file_name = ds_name + '.jpg'
+  optimized_image_file_path = os.path.join(images_folder_path, optimized_image_file_name)
+  non_transparent_image.save(optimized_image_file_path)
+
+def main(_):
+  generate_visualization('beans')
+
+if __name__ == "__main__":
+  app.run(main)
+
