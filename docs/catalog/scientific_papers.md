@@ -25,12 +25,17 @@ seperated by "/n".
 *   **Source code**:
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 *   **Versions**:
-    *   **`1.1.0`** (default): No release notes.
-*   **Download size**: `4.20 GiB`
+    *   **`1.1.1`** (default): No release notes.
+*   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Features**:
 
 ```python
@@ -63,21 +68,7 @@ FeaturesDict({
 ## scientific_papers/arxiv (default config)
 
 *   **Config description**: Documents from ArXiv repository.
-*   **Splits**:
-
-Split        | Examples
-:----------- | -------:
-'test'       | 6,440
-'train'      | 203,037
-'validation' | 6,436
 
 ## scientific_papers/pubmed
 
 *   **Config description**: Documents from PubMed repository.
-*   **Splits**:
-
-Split        | Examples
-:----------- | -------:
-'test'       | 6,658
-'train'      | 119,924
-'validation' | 6,633

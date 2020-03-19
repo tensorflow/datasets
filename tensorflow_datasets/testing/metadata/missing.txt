@@ -12,10 +12,11 @@ dummy_dataset_shared_generator/2.0.0
 dummy_mnist/1.0.0
 image_label_folder/2.0.0
 savee/1.0.0
-so2sat/all/0.0.1
+scientific_papers/arxiv/1.1.1
+scientific_papers/pubmed/1.1.1
 so2sat/all/2.0.0
-so2sat/rgb/0.0.1
 so2sat/rgb/2.0.0
+waymo_open_dataset/0.1.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0

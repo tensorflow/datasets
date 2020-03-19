@@ -130,6 +130,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`kitti`](kitti.md)
     *   [`open_images_v4`](open_images_v4.md)
     *   [`voc`](voc.md)
+    *   [`waymo_open_dataset`](waymo_open_dataset.md)
     *   [`wider_face`](wider_face.md)
 *   `Structured`
     *   [`amazon_us_reviews`](amazon_us_reviews.md)
