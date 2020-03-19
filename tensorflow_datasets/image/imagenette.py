@@ -12,25 +12,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # Lint as: python3
+
 """Imagenette: a subset of 10 easily classified classes from Imagenet.
 
 (tench, English springer, cassette player, chain saw, church, French horn,
 garbage truck, gas pump, golf ball, parachute)
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-# TODO(imagenette): BibTeX citation
 _CITATION = """
+@misc{imagenette,
+  author    = "Jeremy Howard",
+  title     = "imagenette",
+  url       = "https://github.com/fastai/imagenette/"
+}
 """
 
 _DESCRIPTION = """\
@@ -50,13 +50,13 @@ This dataset consists of the Imagenette dataset {size} variant.
 """
 
 _LABELS_FNAME = "image/imagenette_labels.txt"
-_URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas"
+_URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas/"
 _SIZES = ["full-size", "320px", "160px"]
 
 _SIZE_TO_DIRNAME = {
-    "full-size": "imagenette",
-    "320px": "imagenette-320",
-    "160px": "imagenette-160"
+    "full-size": "imagenette2",
+    "320px": "imagenette2-320",
+    "160px": "imagenette2-160"
 }
 
 
@@ -84,6 +84,7 @@ class Imagenette(tfds.core.GeneratorBasedBuilder):
   """A smaller subset of 10 easily classified classes from Imagenet."""
 
   VERSION = tfds.core.Version("0.1.0")
+ 
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
@@ -105,7 +106,7 @@ class Imagenette(tfds.core.GeneratorBasedBuilder):
     size = self.builder_config.size
     if size in _SIZES:
       size_str = "" if size == "full-size" else "-" + size[:-2]
-      url = os.path.join(_URL_PREFIX, "imagenette%s.tgz" % size_str)
+      url = os.path.join(_URL_PREFIX, "imagenette2%s.tgz" % size_str)
       path = dl_manager.download_and_extract(url)
       train_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "train")
       val_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "val")
