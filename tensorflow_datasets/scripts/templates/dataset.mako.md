@@ -301,8 +301,6 @@ ${display_all_builders(config_builders)}
      ${ds_name}
 </%def>
 
-${example_exists((build_path_with_dataset_name("beans")))}
-
 % if example_exists((build_path_with_dataset_name(builder.info.name))):
 * Figure
  
@@ -310,7 +308,6 @@ ${example_exists((build_path_with_dataset_name("beans")))}
  
 % else:
  * Figure:
-    
         No Example available 
 % endif
 
