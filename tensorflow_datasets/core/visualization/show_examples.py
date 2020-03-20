@@ -26,6 +26,7 @@ from __future__ import division
 from __future__ import print_function
 
 <<<<<<< HEAD:tensorflow_datasets/core/visualization/show_examples.py
+<<<<<<< HEAD:tensorflow_datasets/core/visualization/show_examples.py
 from tensorflow_datasets.core.visualization import image_visualizer
 
 <<<<<<< HEAD:tensorflow_datasets/core/visualization/show_examples.py
@@ -47,6 +48,8 @@ _ALL_VISUALIZERS = [ObjectVisulaizer(), SupervisedVisualizer()]
 #from tensorflow_datasets.core import dataset_utils
 #from tensorflow_datasets.core import features as features_lib
 #from tensorflow_datasets.core import lazy_imports_lib
+=======
+>>>>>>> removed useless comments:tensorflow_datasets/core/visualization.py
 from tensorflow_datasets.core import image_visualizer
 
 _ALL_VISUALIZERS = [
