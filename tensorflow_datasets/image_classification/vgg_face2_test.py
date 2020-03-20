@@ -31,6 +31,13 @@ class VggFace2Test(testing.DatasetBuilderTestCase):
       "test": 5,  # Number of fake test example
   }
 
+  @mock.patch("matplotlib.pyplot.figure")
+  def test_show_examples_object_detection(self, mock_fig):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyObjectDetection(data_dir=tmp_dir)
+    builder.download_and_prepare()
+    ds = builder.as_dataset(split="train")
+    visualization.show_examples(builder.info, ds)
 
 if __name__ == "__main__":
   testing.test_main()

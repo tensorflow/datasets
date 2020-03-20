@@ -422,6 +422,52 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
           "label": i % 10,
       }
 
+class DummyObjectDetection(dataset_builder.GeneratorBasedBuilder):
+  """Test DatasetBuilder."""
+
+  VERSION = utils.Version("1.0.0")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            "image": features.Image(shape=(100, 100, 3)),
+            "objects": features.Sequence({
+                "bbox": features.BBoxFeature(),
+                "label": features.ClassLabel(num_classes=20)
+            }),
+        }),
+        description="Object detection dataset description."
+    )
+
+  def _split_generators(self, dl_manager):
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            gen_kwargs=dict()),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            gen_kwargs=dict()),
+    ]
+
+  def _generate_examples(self):
+    for i in range(20):
+      objects = []
+      for j in range(4):
+        objects.append({
+            "bbox": features.BBox(
+                np.random.uniform(high=0.5),
+                np.random.uniform(high=0.5),
+                np.random.uniform(low=0.5),
+                np.random.uniform(low=0.5)
+            ),
+            "label": (i+j) % 20
+        })
+      yield i, {
+          "image": np.ones((100, 100, 3), dtype=np.uint8),
+          "objects": objects
+      }
+
 
 def test_main():
   """Entrypoint for tests."""
@@ -508,4 +554,3 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
-
