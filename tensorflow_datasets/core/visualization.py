@@ -68,59 +68,18 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
   plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
   if not image_key:
-#   Infer the image and label keys
+    #Infer the image and label keys
     image_keys = [
         k for k, feature in ds_info.features.items()
         if isinstance(feature, features_lib.Image)
         ]
-    if not image_key:
-      ##Check if instance of audio item 
-      audio_keys = [
-      k for k, feature in ds_info.features.items()
-      if isinstance(feature,features_lib.Audio)]
-
-      if not audio_keys: 
-        raise ValueError(
-          "Visualisation not supported for dataset `{}`. Was not able to "
-          "auto-infer the audio.".format(ds_info.name))
-
-      audio_samples=[]
-      if(ds_info.name == 'ljspeech'):
-        key = 'speech'
-      else:
-        key = 'audio'
-
-      samplerate = 16000
-      for features in ds:
-          audio_samples.append(features[key].numpy())
-      to_gen=[]
-      for _ in range(2):
-        value = randint(0, len(audio_samples))
-        to_gen.append(audio_samples[value])
-      ctr=0
-      for audio in to_gen:
-        ctr+=1
-        name = '/content/audio' + str(ctr) + '.wav'
-        write(name,samplerate,audio)
-        IPython.display.display(IPython.display.Audio(name)) 
-        print(name)
-
-      fig,a =  plt.subplots(2,2)
-
-      a[0][0].plot(to_gen[0])
-      a[0][1].plot(to_gen[1])
-      a[1][0].plot(to_gen[0])
-      a[1][1].plot(to_gen[1])
-      plt.show()
-
-      return fig
-
-
+  #If image_keys has been populated by image item instances 
+  if image_keys:
     if len(image_keys) > 1:
-    raise ValueError(
-        "Multiple image features detected in the dataset. Using the first one. You can "
-        "use `image_key` argument to override. Images detected: %s" %
-        (",".join(image_keys)))
+      raise ValueError(
+          "Multiple image features detected in the dataset. Using the first one. You can "
+          "use `image_key` argument to override. Images detected: %s" %
+          (",".join(image_keys)))
 
     image_key = image_keys[0]
 
@@ -168,3 +127,47 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
       plt.show()
       return fig
     
+    # if not image item instances 
+    if not image_key:
+      ##Check if instance of audio item 
+      audio_keys = [
+      k for k, feature in ds_info.features.items()
+      if isinstance(feature,features_lib.Audio)]
+
+      if not audio_keys: 
+        raise ValueError(
+          "Visualisation not supported for dataset `{}`. Was not able to "
+          "auto-infer the audio.".format(ds_info.name))
+
+      audio_samples=[]
+      if(ds_info.name == 'ljspeech'):
+        key = 'speech'
+      else:
+        key = 'audio'
+
+      samplerate = 16000
+      for features in ds:
+          audio_samples.append(features[key].numpy())
+      to_gen=[]
+      for _ in range(2):
+        value = randint(0, len(audio_samples))
+        to_gen.append(audio_samples[value])
+      ctr=0
+      for audio in to_gen:
+        ctr+=1
+        name = '/content/audio' + str(ctr) + '.wav'
+        write(name,samplerate,audio)
+        IPython.display.display(IPython.display.Audio(name)) 
+        print(name)
+
+      fig,a =  plt.subplots(2,2)
+
+      a[0][0].plot(to_gen[0])
+      a[0][1].plot(to_gen[1])
+      a[1][0].plot(to_gen[0])
+      a[1][1].plot(to_gen[1])
+      plt.show()
+
+      return fig
+
+   
