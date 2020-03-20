@@ -21,6 +21,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from random import randint
+from pydub import AudioSegment
 import IPython
 from scipy.io.wavfile import write
 import numpy as np  
@@ -141,23 +142,28 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
     for features in ds:
         audio_samples.append(features[key].numpy())
     to_gen=[]
-    for _ in range(2):
+    for _ in range(4):
       value = randint(0, len(audio_samples))
       to_gen.append(audio_samples[value])
-    ctr=0
+    
+    t1 = 0
+    t2 = 20 * 1000 # taking only uptill the first 20 ms of the audio 
+    
     for audio in to_gen:
-      ctr+=1
-      name = '/content/audio' + str(ctr) + '.wav'
+      name = '/content/audio.wav'
       write(name,samplerate,audio)
-      IPython.display.display(IPython.display.Audio(name)) 
-      print(name)
+      newAudio = AudioSegment.from_wav(name)
+      newAudio = newAudio[t1:t2]
+      newAudio.export('trimmed_audio.wav', format="wav") 
+      IPython.display.display(IPython.display.Audio('trimmed_audio.wav')) 
+
 
     fig,a =  plt.subplots(2,2)
 
     a[0][0].plot(to_gen[0])
     a[0][1].plot(to_gen[1])
-    a[1][0].plot(to_gen[0])
-    a[1][1].plot(to_gen[1])
+    a[1][0].plot(to_gen[2])
+    a[1][1].plot(to_gen[3])
     plt.show()
 
     return fig
