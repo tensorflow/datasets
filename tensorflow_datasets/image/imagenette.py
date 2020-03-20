@@ -29,8 +29,12 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-# TODO(imagenette): BibTeX citation
 _CITATION = """
+@misc{imagenette,
+  author    = "Jeremy Howard",
+  title     = "imagenette",
+  url       = "https://github.com/fastai/imagenette/"
+}
 """
 
 _DESCRIPTION = """\
@@ -46,44 +50,46 @@ ideas and share with others. The dataset comes in three variants:
   * Full size
   * 320 px
   * 160 px
-This dataset consists of the Imagenette dataset {size} variant.
+
+Note: The v2 config correspond to the new 70/30 train/valid split (released
+in Dec 6 2019).
 """
 
 _LABELS_FNAME = "image/imagenette_labels.txt"
-_URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas"
-_SIZES = ["full-size", "320px", "160px"]
-
-_SIZE_TO_DIRNAME = {
-    "full-size": "imagenette",
-    "320px": "imagenette-320",
-    "160px": "imagenette-160"
-}
+_URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas/"
 
 
 class ImagenetteConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Imagenette."""
 
-  def __init__(self, size, **kwargs):
+  def __init__(self, size, base, **kwargs):
     super(ImagenetteConfig, self).__init__(
-        version=tfds.core.Version("0.1.0"), **kwargs)
-    self.size = size
+        # `320px-v2`,...
+        name=size + ("-v2" if base == "imagenette2" else ""),
+        description="{} variant.".format(size),
+        version=tfds.core.Version("0.1.0"),
+        **kwargs)
+    # e.g. `imagenette2-320.tgz`
+    self.dirname = base + {
+        "full-size": "",
+        "320px": "-320",
+        "160px": "-160",
+    }[size]
 
 
 def _make_builder_configs():
   configs = []
-  for size in _SIZES:
-    configs.append(
-        ImagenetteConfig(
-            name=size,
-            size=size,
-            description=_DESCRIPTION.format(size=size)))
+  for base in ["imagenette2", "imagenette"]:
+    for size in ["full-size", "320px", "160px"]:
+      configs.append(ImagenetteConfig(base=base, size=size))
   return configs
 
 
 class Imagenette(tfds.core.GeneratorBasedBuilder):
   """A smaller subset of 10 easily classified classes from Imagenet."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
+
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
@@ -102,15 +108,11 @@ class Imagenette(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    size = self.builder_config.size
-    if size in _SIZES:
-      size_str = "" if size == "full-size" else "-" + size[:-2]
-      url = os.path.join(_URL_PREFIX, "imagenette%s.tgz" % size_str)
-      path = dl_manager.download_and_extract(url)
-      train_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "train")
-      val_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "val")
-    else:
-      raise ValueError("Size not implemented!")
+    dirname = self.builder_config.dirname
+    url = _URL_PREFIX + "{}.tgz".format(dirname)
+    path = dl_manager.download_and_extract(url)
+    train_path = os.path.join(path, dirname, "train")
+    val_path = os.path.join(path, dirname, "val")
 
     return [
         tfds.core.SplitGenerator(
