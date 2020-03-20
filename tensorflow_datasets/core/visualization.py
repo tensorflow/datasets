@@ -82,7 +82,7 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
       if not audio_keys: 
         raise ValueError(
           "Visualisation not supported for dataset `{}`. Was not able to "
-          "auto-infer the audio.".format(ds_info.name)
+          "auto-infer the audio.".format(ds_info.name))
 
       audio_samples=[]
       if(ds_info.name == 'ljspeech'):
