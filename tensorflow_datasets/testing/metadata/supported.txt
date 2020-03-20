@@ -618,7 +618,7 @@ open_images_v4/200k/2.0.0
 open_images_v4/300k/2.0.0
 open_images_v4/original/2.0.0
 opinosis/1.0.0
-oxford_flowers102/2.0.0
+oxford_flowers102/2.1.0
 oxford_iiit_pet/3.1.0
 para_crawl/enbg_plain_text/1.0.0
 para_crawl/encs_plain_text/1.0.0
@@ -693,8 +693,6 @@ scan/template_opposite_right/1.0.0
 scan/template_right/1.0.0
 scene_parse150/1.0.0
 scicite/1.0.0
-scientific_papers/arxiv/1.1.0
-scientific_papers/pubmed/1.1.0
 shapes3d/2.0.0
 smallnorb/2.0.0
 snli/plain_text/1.0.0

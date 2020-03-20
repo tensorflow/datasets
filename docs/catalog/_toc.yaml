@@ -188,10 +188,14 @@ toc:
     title: coco
   - path: /datasets/catalog/kitti
     title: kitti
+  - path: /datasets/catalog/open_images_challenge2019_detection
+    title: open_images_challenge2019_detection
   - path: /datasets/catalog/open_images_v4
     title: open_images_v4
   - path: /datasets/catalog/voc
     title: voc
+  - path: /datasets/catalog/waymo_open_dataset
+    title: waymo_open_dataset
   - path: /datasets/catalog/wider_face
     title: wider_face
   title: Object_detection

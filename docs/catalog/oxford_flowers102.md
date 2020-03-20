@@ -28,10 +28,9 @@ training set and validation set each consist of 10 images per class (totalling
 *   **Source code**:
     [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
 *   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.1.0`** (default): Added label names
 *   **Download size**: `336.76 MiB`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `331.34 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
