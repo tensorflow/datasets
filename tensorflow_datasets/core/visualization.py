@@ -21,6 +21,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from random import randint
+import pydub
 from pydub import AudioSegment
 import IPython
 from scipy.io.wavfile import write
