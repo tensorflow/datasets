@@ -68,110 +68,103 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
   plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
   if not image_key:
-#    Infer the image and label keys
+#   Infer the image and label keys
     image_keys = [
         k for k, feature in ds_info.features.items()
         if isinstance(feature, features_lib.Image)
         ]
-#         if len(image_keys) > 1:
-#         raise ValueError(
-#             "Multiple image features detected in the dataset. Using the first one. You can "
-#             "use `image_key` argument to override. Images detected: %s" %
-#             (",".join(image_keys)))
+    if not image_key:
+      ##Check if instance of audio item 
+      audio_keys = [
+      k for k, feature in ds_info.features.items()
+      if isinstance(feature,features_lib.Audio)]
 
-#       image_key = image_keys[0]
+      if not audio_keys: 
+      raise ValueError(
+        "Visualisation not supported for dataset `{}`. Was not able to "
+        "auto-infer the audio.".format(ds_info.name)
 
-#       label_keys = [
-#           k for k, feature in ds_info.features.items()
-#           if isinstance(feature, features_lib.ClassLabel)
-#       ]
+      audio_samples=[]
+      if(ds_info.name == 'ljspeech'):
+        key = 'speech'
+      else:
+        key = 'audio'
 
-#       label_key = label_keys[0] if len(label_keys) == 1 else None
-#       if not label_key:
-#         logging.info("Was not able to auto-infer label.")
+      samplerate = 16000
+      for features in ds:
+          audio_samples.append(features[key].numpy())
+      to_gen=[]
+      for _ in range(2):
+        value = randint(0, len(audio_samples))
+        to_gen.append(audio_samples[value])
+      ctr=0
+      for audio in to_gen:
+        ctr+=1
+        name = '/content/audio' + str(ctr) + '.wav'
+        write(name,samplerate,audio)
+        IPython.display.display(IPython.display.Audio(name)) 
+        print(name)
 
-#       num_examples = rows * cols
-#       examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+      fig,a =  plt.subplots(2,2)
 
-#       fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-#       fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
-#       for i, ex in enumerate(examples):
-#         if not isinstance(ex, dict):
-#           raise ValueError(
-#               "tfds.show_examples requires examples as `dict`, with the same "
-#               "structure as `ds_info.features`. It is currently not compatible "
-#               "with `as_supervised=True`. Received: {}".format(type(ex)))
-#         ax = fig.add_subplot(rows, cols, i+1)
+      a[0][0].plot(to_gen[0])
+      a[0][1].plot(to_gen[1])
+      a[1][0].plot(to_gen[0])
+      a[1][1].plot(to_gen[1])
+      plt.show()
 
-#         # Plot the image
-#         image = ex[image_key]
-#         if len(image.shape) != 3:
-#           raise ValueError(
-#               "Image dimension should be 3. tfds.show_examples does not support "
-#               "batched examples or video.")
-#         _, _, c = image.shape
-#         if c == 1:
-#           image = image.reshape(image.shape[:2])
-#         ax.imshow(image, cmap="gray")
-#         ax.grid(False)
-#         plt.xticks([], [])
-#         plt.yticks([], [])
+      return fig
 
-#         # Plot the label
-#         if label_key:
-#           label = ex[label_key]
-#           label_str = ds_info.features[label_key].int2str(label)
-#           plt.xlabel("{} ({})".format(label_str, label))
-#       plt.show()
-#       return fig
-    # If does not have image items - Check for audio items 
 
-    if not image_keys:
-        print(features_lib.Audio)
-        audio_keys = [
+    if len(image_keys) > 1:
+    raise ValueError(
+        "Multiple image features detected in the dataset. Using the first one. You can "
+        "use `image_key` argument to override. Images detected: %s" %
+        (",".join(image_keys)))
+
+    image_key = image_keys[0]
+
+    label_keys = [
         k for k, feature in ds_info.features.items()
-        if isinstance(feature,features_lib.Audio)]
-        print(audio_keys)
-        
-        audio_samples=[]
-        if(ds_info.name == 'ljspeech'):
-          key = 'speech'
-        else:
-          key = 'audio'
+        if isinstance(feature, features_lib.ClassLabel)
+    ]
 
-        samplerate = 16000
-        ctr = 0
-        for features in ds:
-            ctr+=100
-            audio_samples.append(features[key].numpy())
-        to_gen=[]
-        for _ in range(2):
-          value = randint(0, len(audio_samples))
-          to_gen.append(audio_samples[value])
-        ctr=0
-        for audio in to_gen:
-          ctr+=1
-          name = '/content/audio' + str(ctr) + '.wav'
-          write(name,samplerate,audio)
-          IPython.display.display(IPython.display.Audio(name)) 
-          print(name)
+    label_key = label_keys[0] if len(label_keys) == 1 else None
+    if not label_key:
+      logging.info("Was not able to auto-infer label.")
 
-        fig,a =  plt.subplots(2,2)
+    num_examples = rows * cols
+    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
 
-        a[0][0].plot(to_gen[0])
-        a[0][1].plot(to_gen[1])
-        a[1][0].plot(to_gen[0])
-        a[1][1].plot(to_gen[1])
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+    for i, ex in enumerate(examples):
+      if not isinstance(ex, dict):
+        raise ValueError(
+            "tfds.show_examples requires examples as `dict`, with the same "
+            "structure as `ds_info.features`. It is currently not compatible "
+            "with `as_supervised=True`. Received: {}".format(type(ex)))
+      ax = fig.add_subplot(rows, cols, i+1)
 
-        return fig
+      # Plot the image
+      image = ex[image_key]
+      if len(image.shape) != 3:
+        raise ValueError(
+            "Image dimension should be 3. tfds.show_examples does not support "
+            "batched examples or video.")
+      _, _, c = image.shape
+      if c == 1:
+        image = image.reshape(image.shape[:2])
+      ax.imshow(image, cmap="gray")
+      ax.grid(False)
+      plt.xticks([], [])
+      plt.yticks([], [])
 
-
-#     if not audio_keys: 
-#       raise ValueError(
-#           "Visualisation not supported for dataset `{}`. Was not able to "
-#           "auto-infer image.".format(ds_info.name)
-   
+        # Plot the label
+        if label_key:
+          label = ex[label_key]
+          label_str = ds_info.features[label_key].int2str(label)
+          plt.xlabel("{} ({})".format(label_str, label))
+      plt.show()
+      return fig
     
-        
-  ## IMAGE VISUALIZATION 
-
