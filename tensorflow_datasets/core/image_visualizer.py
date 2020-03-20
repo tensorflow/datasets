@@ -60,13 +60,11 @@ def _extract_nested_keys(features, feature_list):
     f_slice = feature_list[i:(i+2)]
     top_level_keys = _extract_keys(temp_fdt, f_slice[0])
 
-    print(top_level_keys)
     mid_level_keys = []
     for key in top_level_keys:
       if isinstance(temp_fdt[key].feature, features_lib.FeaturesDict):
         mid_level_keys = _extract_keys(temp_fdt[key], f_slice[1])
         if len(mid_level_keys) > 0:
-          print(mid_level_keys)
           if i == 0:
             out.append(key)
           out.append(mid_level_keys[0])
@@ -235,7 +233,6 @@ class ObjectVisulaizer(ImageVisualizer):
     if not image_keys:
       return False
 
-    print(ds_info.features)
     if _extract_nested_keys(
         features=ds_info.features,
         feature_list=[features_lib.Sequence, features_lib.BBoxFeature]
