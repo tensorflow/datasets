@@ -115,7 +115,7 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, image_dir_path):
     """Yields examples."""
     image_files = glob.glob(
-        pattern=os.path.join(image_dir_path, "[!Code]*[!_Flip]/[!_]*.jpg"))
+        os.path.join(image_dir_path, "[!Code]*[!_Flip]/[!_]*.jpg"))
     label_files = [s.replace("jpg", "mat") for s in image_files]
     landmark_files = [
         s.replace("300W_LP", "300W_LP/landmarks").replace(".jpg", "_pts.mat")
