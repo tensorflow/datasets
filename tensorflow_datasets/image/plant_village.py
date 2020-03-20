@@ -22,6 +22,7 @@ from __future__ import print_function
 
 import os
 
+import glob
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -139,7 +140,7 @@ class PlantVillage(tfds.core.GeneratorBasedBuilder):
       glob_path = os.path.join(
           datapath, "Plant_leave_diseases_dataset_without_augmentation",
           fuzzy_label, "*.[jJ][pP][gG]")
-      for fpath in tf.io.gfile.glob(glob_path):
+      for fpath in glob.iglob(glob_path):
         fname = os.path.basename(fpath)
         record = {
             "image": fpath,
