@@ -1,0 +1,13 @@
+ImageID,Source,LabelName,Confidence,XMin,XMax,YMin,YMax,IsOccluded,IsTruncated,IsGroupOf,IsDepiction,IsInside
+00,verification,1,1,0.2,0.4,0.4,0.8,0,0,1,1,0
+02,verification,2,1,0.2,0.4,0.4,0.8,,0,0,1,1,0
+05,crowdsource-verification,4,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+05,crowdsource-verification,1,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+06,verification,4,1,0.2,0.4,0.4,0.8,0,1,0,1,0
+07,crowdsource-verification,6,1,0.2,0.4,0.4,0.8,0,0,1,1,0
+13,verification,3,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+14,crowdsource-verification,2,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+15,crowdsource-verification,1,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+15,crowdsource-verification,2,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+16,crowdsource-verification,6,1,0.2,0.4,0.4,0.8,0,0,0,1,0
+17,verification,5,1,0.2,0.4,0.4,0.8,0,0,0,1,0
