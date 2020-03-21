@@ -32,11 +32,13 @@ import tarfile
 import tempfile
 import zipfile
 import shutil
+from builtins import open as bltn_open
 
 import absl.app
 import absl.flags
 import numpy as np
 import PIL.Image
+
 
 FLAGS = absl.flags.FLAGS
 
@@ -81,6 +83,8 @@ def rewrite_zip(root_dir, zip_filepath):
       zip_file.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
+
+    os.chdir(root_dir) # Change directory to a legitimate file address, this is done so that directory not found error is not encountered because of rewrite_tar()
     if zip_filepath.lower().endswith('zip'):
       shutil.make_archive(zip_filepath[:-len('.zip')], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
 
@@ -95,35 +99,61 @@ def rewrite_tar(root_dir, tar_filepath):
 
   """
   # Create a tempfile to store the images contain noise
-  with tempfile.TemporaryDirectory(dir=root_dir) as temp_dir:
+  with tempfile.TemporaryDirectory(dir=root_dir, suffix='fake') as temp_dir:
     # Checking the extension of file to be extract
     tar_filepath_lowercase = tar_filepath.lower()
     if tar_filepath_lowercase.endswith('gz'):
       extension = ':gz'
-      shutil_extension = 'gztar'
-      if tar_filepath_lowercase.endswith('tgz'):
-        extension_removal_index = len('.tgz') # Obtain file name from filepath. Hardcoded indices are used as filenames may contain periods
-      else:
-        extension_removal_index = len('.tar.gz')
     elif tar_filepath_lowercase.endswith('bz2'):
       extension = ':bz2'
-      shutil_extension = 'bztar'
-      extension_removal_index = len('.tar.bz2')
     elif tar_filepath_lowercase.endswith('xz'):
       extension = ':xz'
-      shutil_extension = 'xztar'
-      extension_removal_index = len('.tar.xz')
     else:
       extension = ''
-      shutil_extension = 'tar'
-      extension_removal_index = -tar_filepath.find('.tar')
 
     # Extraction of .tar file
     with tarfile.open(tar_filepath, 'r' + extension) as tar:
       tar.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
-    shutil.make_archive(tar_filepath[:-extension_removal_index], shutil_extension, temp_dir) # Copies the directory structure of the extracted tar file and stores it back in the desired format
+
+    os.chdir(temp_dir) # Change to temporary directory so that temp directory name does not affect original filenames
+    with tarfile.open(tar_filepath, 'w' + extension) as tar:
+      tar_add(tar, '.', recursive=True) # Call custom recursive tar add operation
+
+
+def tar_add(tar_file, name, arcname=None, recursive=True):
+  """Perform addition of files to tarfile.
+  This method replicates tarfile.add() and solves the issue of
+  unnecessary filepaths like ., ./ and ./folder/.. being added to tarinfo.
+
+  Args:
+    tarfile: pass open tarfile object to which files need to be added
+    name: Add the file `name' to the archive.
+    `name' may be any type of file (directory, fifo, symbolic link, etc.)
+    arcname: If given, `arcname' specifies an
+    alternative name for the file in the archive.
+    recursive: Option to specify if directories
+    need to be added recursively.
+    Directories are added recursively by default.
+  """
+  if arcname is None:
+    arcname = name
+  tarinfo = tar_file.gettarinfo(name, arcname)
+  if tarinfo.isreg():
+    with bltn_open(name, "rb") as f:
+      # Filewise addition into tarball
+      tar_file.addfile(tarinfo, f)
+  elif tarinfo.isdir():
+    if tarinfo.isfile(): # Only files should be added to tarinfo and not directories
+      tar_file.addfile(tarinfo)
+    if recursive:
+      for f in sorted(os.listdir(name)):
+        if name == os.curdir: # Remove redundant current directory address ',' from name
+          name = ''
+        arcname = name # Since arcname=None always, any changes to any changes to name should affect arcname
+        tar_add(tar_file, os.path.join(name, f), os.path.join(arcname, f),
+                recursive) # Recursive call to add all existing files to tarball
 
 
 def rewrite_dir(fake_dir):
