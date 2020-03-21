@@ -25,13 +25,10 @@ from __future__ import print_function
 import distutils.version
 
 from absl import logging
+import six
 
-# Which patch function was called
-# For debug only, not to be depended upon.
-# Will be set to one of:
-# * tf1_13
-# * tf2
-TF_PATCH = ""
+
+_ensure_tf_install_called = False
 
 
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
@@ -44,6 +41,12 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     ImportError: if either tensorflow is not importable or its version is
     inadequate.
   """
+  # Only check the first time.
+  global _ensure_tf_install_called
+  if _ensure_tf_install_called:
+    return
+  _ensure_tf_install_called = True
+
   try:
     import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
   except ImportError:
@@ -65,17 +68,12 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
         "Please upgrade TensorFlow to proceed.".format(
             required="1.15.0",
             present=tf.__version__))
-  _patch_tf(tf)
-
-
-def _patch_tf(tf):
-  """Patch TF to maintain compatibility across versions."""
-  global TF_PATCH
-  if TF_PATCH:
-    return
 
   _patch_dataset_v2(tf)
-  TF_PATCH = "tf_data"
+
+  if six.PY2:
+    logging.warning("TFDS is going to drop Python 2 support. Please "
+                    "update to Python 3.")
 
 
 def _patch_dataset_v2(tf):
