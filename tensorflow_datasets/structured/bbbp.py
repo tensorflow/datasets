@@ -13,13 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """BBBP(Blood-brain barrier penetration) dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import collections
 import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -37,13 +33,13 @@ pages = {1686-1697},
 year = {2012},
 doi = {10.1021/ci300124c},
     note ={PMID: 22612593},
-URL = { 
+URL = {
         https://doi.org/10.1021/ci300124c
-    
+
 },
-eprint = { 
+eprint = {
         https://doi.org/10.1021/ci300124c
-    
+
 }
 }
 """
@@ -54,8 +50,8 @@ the modeling and prediction of the barrier permeability. As a membrane separatin
 circulating blood and brain extracellular fluid, the blood-brain barrier blocks
 most drugs, hormones and neurotransmitters. Thus penetration of the barrier forms
 a long-standing issue in development of drugs targeting central nervous system.
-This dataset includes binary labels for over 2000 compounds on their permeability 
-properties. 
+This dataset includes binary labels for over 2000 compounds on their permeability
+properties.
 
 The data file contains a csv table, in which columns below are used:
      "name" - Name of the compound
@@ -64,51 +60,55 @@ The data file contains a csv table, in which columns below are used:
 
 """
 
-FEATURES = collections.OrderedDict([
-    ('name', tf.string),
-    ('p_np',  tfds.features.ClassLabel(num_classes = 2))
-])
-	
-	
+FEATURES = tfds.features.FeaturesDict({
+    'name': tf.string,
+    'p_np': tfds.features.ClassLabel(num_classes=2)
+})
+
+
 class BBBP(tfds.core.GeneratorBasedBuilder):
-    """BBBP dataset."""
-    NUM_CLASSES = 3
-    VERSION = tfds.core.Version('0.0.1')
+  """BBBP dataset."""
+  NUM_CLASSES = 3
+  VERSION = tfds.core.Version('0.0.1')
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description=_DESCRIPTION,
-            # tfds.features.FeatureConnectors
-            features=tfds.features.FeaturesDict({
-	            'smiles': tf.string,
-	            'features': {name: dtype for name, dtype in FEATURES.items()}
-	        }),
-            supervised_keys=("features", "smiles"),
-            homepage="http://moleculenet.ai/datasets-1",
-            citation=_CITATION,
-        )
+  def _info(self):
+    """This contains the general information about the dataset"""
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            'smiles': tf.string,
+            'features': FEATURES
+        }),
+        supervised_keys=("features", "smiles"),
+        homepage="http://moleculenet.ai/datasets-1",
+        citation=_CITATION,
+    )
 
-    def _split_generators(self, dl_manager):
-        bbbp_path = dl_manager.download_and_extract(BBBP_URL)
-        csv_path = os.path.join(bbbp_path, "BBBP.csv")
-        all_lines = tf.io.gfile.GFile(csv_path).read().split("\n")[1:-1]
-        all_lines = [','.join(line.split(',')[1:])[:-1].replace('"','') for line in all_lines]
-		
+  def _split_generators(self, dl_manager):
+    """Generate Splits"""
+    bbbp_path = dl_manager.download_and_extract(BBBP_URL)
+    csv_path = os.path.join(bbbp_path, "BBBP.csv")
+    all_lines = tf.io.gfile.GFile(csv_path).read().split("\n")[1:-1]
+    all_lines = [','.join(line.split(',')[1:])[:-1].replace('"', '')
+                 for line in all_lines]
+
         # Specify the splits
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                gen_kwargs={
-                    "records": all_lines,
-                }),
-        ]
-
-    def _generate_examples(self, records):
-        for i, row in enumerate(records):
-            elems = row.split(",")
-            features = {'name': ','.join(elems[:-2]), 'p_np': elems[-2]}
-            yield i, {
-                "features": features,
-                "smiles": elems[-1],
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
+                "records": all_lines,
             }
+        ),
+    ]
+
+  def _generate_examples(self, records):
+    """Generate examples given the extracted records"""
+    for i, row in enumerate(records):
+      elems = row.split(",")
+      features = {'name': ','.join(elems[:-2]), 'p_np': elems[-2]}
+      yield i, {
+          "features": features,
+          "smiles": elems[-1],
+      }
