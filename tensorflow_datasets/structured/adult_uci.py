@@ -15,11 +15,7 @@
 
 # Lint as: python3
 
-"""Amazon Customer Reviews Dataset --- US REVIEWS DATASET."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Adult UCI Dataset"""
 
 # gfile cannot be imported directly `from tensorflow.io import gfile`
 import tensorflow.compat.v2 as tf
