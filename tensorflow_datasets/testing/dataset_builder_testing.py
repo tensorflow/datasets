@@ -29,7 +29,7 @@ from absl.testing import parameterized
 import numpy as np
 import tensorflow.compat.v2 as tf
 
-# from tensorflow_datasets.core.download import checksums
+from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -218,22 +218,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEqual(self.builder.name, info.name)
 
+  def _add_url(self, url_or_urls):
+    if isinstance(url_or_urls, download.resource.Resource):
+      self._download_urls.add(url_or_urls.url)
+    else:
+      self._download_urls.add(url_or_urls)
+
   def _get_dl_extract_result(self, url):
-
-    def add_url(url_or_urls):
-      # url_or_urls: url or `list`/`dict` of urls to download and extract. 
-      # Each url can be a `str` or `tfds.download.Resource`.
-      if isinstance(url_or_urls, dict):
-        for _, v in url_or_urls.items():
-          add_url(v)
-      elif isinstance(url_or_urls, list):
-        map(add_url, url_or_urls)
-      elif isinstance(url_or_urls, download.resource.Resource):
-        self._download_urls.add(url_or_urls.url)
-      else:
-        self._download_urls.add(url_or_urls)
-
-    add_url(url)
+    tf.nest.map_structure(self._add_url, url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
@@ -241,6 +233,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _get_dl_download_result(self, url):
+    tf.nest.map_structure(self._add_url, url)
     if self.DL_DOWNLOAD_RESULT is None:
       # This is only to be backwards compatible with old approach.
       # In the future it will be replaced with using self.example_dir.
@@ -284,13 +277,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         self._test_checksums()
 
   def _test_checksums(self):
-    urls = []
-    # how to get the path to the checksum file corresponding to the testcase.
-    filepath = os.path.join(download.checksums._get_path(os.path.basename(self.example_dir)))
+    filepath = os.path.join(checksums._get_path(self.builder.name))
     if tf.io.gfile.exists(filepath):
-      with tf.io.gfile.GFile(filepath, "r") as f:
-        for line in f.readlines():
-          urls.append(line.split()[0])
+      sizes_checksums = checksums._get_sizes_checksums(filepath)
+      urls = sizes_checksums.keys()
     else:
       raise AssertionError("url checksums file not found at %s" % filepath)
 
