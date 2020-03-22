@@ -31,7 +31,6 @@ import os
 import tarfile
 import tempfile
 import zipfile
-import shutil
 
 import absl.app
 import absl.flags
@@ -83,8 +82,16 @@ def rewrite_zip(root_dir, zip_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
+        # Compress the .zip file again
     if zip_filepath.lower().endswith('zip'):
-      shutil.make_archive(zip_filepath[:-len('.zip')], 'zip', temp_dir) #Copies the directory structure of the extracted file ans stores it back as zip
+      with zipfile.ZipFile(zip_filepath, 'w',
+                           compression=zipfile.ZIP_DEFLATED) as zip_file:
+        for file_dir, _, files in os.walk(temp_dir):
+          for file in files:
+            file_path = os.path.join(file_dir, file)
+            zip_file.write(file_path,
+                           arcname=os.path.relpath(file_path, temp_dir))
+
 
 def rewrite_tar(root_dir, tar_filepath):
   """Rewrite the older .tar file into new better compressed one.
@@ -115,6 +122,7 @@ def rewrite_tar(root_dir, tar_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
+    # Convert back into tar file
     with tarfile.open(tar_filepath, 'w' + extension) as tar:
       tar.add(temp_dir, arcname='', recursive=True)
 
