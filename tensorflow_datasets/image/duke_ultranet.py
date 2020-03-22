@@ -302,7 +302,7 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                     name=tfds.Split.TRAIN,
                     num_shards=len(_FILES),
                     gen_kwargs={
-                        'files': _FILES[:1]
+                        'files': _FILES
                     }
             )
         ]
