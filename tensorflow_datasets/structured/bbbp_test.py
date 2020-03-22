@@ -14,11 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Tests for tensorflow_datasets.structured.iris."""
+"""Tests for tensorflow_datasets.structured.bbbp"""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.structured import bbbp
 
