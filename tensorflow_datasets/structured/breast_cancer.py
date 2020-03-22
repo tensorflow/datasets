@@ -16,7 +16,6 @@
 # Lint as: python3
 """Breast Cancer Wisconsin dataset."""
 
-import collections
 import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -66,17 +65,17 @@ COLUMNS = ["clump_thickness", "uniformity_of_cell_size",
            "normal_nucleoli", "mitoses"]
 
 
-FEATURES = collections.OrderedDict([
-    ("clump_thickness", tf.int8),
-    ("uniformity_of_cell_size", tf.int8),
-    ("uniformity_of_cell_shape", tf.int8),
-    ("marginal_adhesion", tf.int8),
-    ("single_epithelial_cell_size", tf.int8),
-    ("bare_nuclei", tf.int8),
-    ("bland_chromatin", tf.int8),
-    ("normal_nucleoli", tf.int8),
-    ("mitoses", tf.int8)
-])
+FEATURES = tfds.features.FeaturesDict({
+    "clump_thickness": tf.int8,
+    "uniformity_of_cell_size": tf.int8,
+    "uniformity_of_cell_shape": tf.int8,
+    "marginal_adhesion": tf.int8,
+    "single_epithelial_cell_size": tf.int8,
+    "bare_nuclei": tf.int8,
+    "bland_chromatin": tf.int8,
+    "normal_nucleoli": tf.int8,
+    "mitoses": tf.int8
+})
 
 
 class BreastCancer(tfds.core.GeneratorBasedBuilder):
@@ -87,10 +86,9 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            "features": FEATURES.items(),
-            "label": tfds.features.ClassLabel(num_classes=2),
+            "features": FEATURES,
+            "label": tfds.features.ClassLabel(names=['Benign', 'Malignant'])
         }),
         supervised_keys=("features", "label"),
         homepage="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)",
@@ -98,9 +96,10 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Generate Splits"""
     bcwd_file = dl_manager.download(BCWD_URL)
     all_lines = tf.io.gfile.GFile(bcwd_file).read().split("\n")
-    records = [l.split(",")[1:] for l in all_lines if l]
+    records = [l.split(",") for l in all_lines if l]
 
     # Specify the splits
     return [
@@ -112,6 +111,8 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, records):
     for i, row in enumerate(records):
       label = row[-1]
+      #the 0 label represents 2 in the original dataset(benign) & 1 represents
+	 # 4(malignant)
       label = 0 if label == 2 else 1
       dict_values = dict(zip(COLUMNS, map(lambda x: x.strip(), row[:-1])))
       yield i, {
