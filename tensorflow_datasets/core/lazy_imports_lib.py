@@ -119,6 +119,7 @@ class LazyImporter(object):
   def scipy(cls):
     _try_import("scipy.io")
     _try_import("scipy.ndimage")
+    _try_import("scipy.signal")
     return _try_import("scipy")
 
   @utils.classproperty

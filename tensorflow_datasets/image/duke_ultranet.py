@@ -7,8 +7,6 @@ from __future__ import print_function
 import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
-from scipy import signal
-import h5py
 import logging
 
 # TODO(duke_ultranet): BibTeX citation
@@ -19,7 +17,8 @@ _CITATION = """
 _DESCRIPTION = {
     'channel': '',
     'dynamic_rx_beamformed': '''
-        Processing script
+        ```
+        # Processing script
         
         DATASET_NAME=duke_ultranet/dynamic_rx_beamformed
         GCP_PROJECT=duke-ultrasound
@@ -30,11 +29,12 @@ _DESCRIPTION = {
           --datasets=$DATASET_NAME \
           --data_dir=$GCS_BUCKET/tensorflow_datasets \
           --beam_pipeline_options=\
-        "runner=DataflowRunner,project=$GCP_PROJECT,job_name=duke-ultranet-dynamic-rx-beamformed-gen,"\
+        "runner=DataflowRunner,project=$GCP_PROJECT,job_name=tfds-duke-ultranet,"\
         "staging_location=$GCS_BUCKET/binaries,temp_location=$GCS_BUCKET/temp,"\
         "requirements_file=/tmp/beam_requirements.txt,region=us-east1,"\
-        "autoscaling_algorithm=NONE,num_workers=10,"\
-        "machine_type=n1-highmem-16,experiments=shuffle_mode=service"
+        "autoscaling_algorithm=NONE,num_workers=20,"\
+        "machine_type=n1-highmem-16,experiments=shuffle_mode=service,disk_size_gb=500"
+        ```
     ''',
     'b_mode': ''
 }
@@ -76,6 +76,8 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
 
     @staticmethod
     def get_rf_hdf5(filepath, i):
+        h5py = tfds.core.lazy_imports.h5py
+        
         with h5py.File(tf.io.gfile.GFile(filepath, 'rb'), mode='r') as f:
             nowall = f.get('rf_nowall')[()]
             wall = f.get('rf_wall')[()]
@@ -300,14 +302,16 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                     name=tfds.Split.TRAIN,
                     num_shards=len(_FILES),
                     gen_kwargs={
-                        'files': _FILES
+                        'files': _FILES[:1]
                     }
             )
         ]
 
     def _build_pcollection(self, pipeline, files):
         beam = tfds.core.lazy_imports.apache_beam
-
+        h5py = tfds.core.lazy_imports.h5py
+        signal = tfds.core.lazy_imports.scipy.signal
+        
         filepaths_rf = []
         for file_num in files:
             for i in range(1,len(_TX_POS)+1):
@@ -436,7 +440,7 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 }
 
             if self.builder_config.name is 'b_mode':
-                on_mask = tf.cast(common['probe']['element_on_mask'][..., None], tf.float16)
+                on_mask = tf.cast(common['probe']['element_on_mask'][..., None], tf.float32)
                 env = tf.abs(self.tf_hilbert(tf.reduce_sum(nowall*on_mask, axis=1), axis=-1))
                 env = env/tf.reduce_max(env)
                 nowall = self.tf_db(env)
@@ -446,8 +450,8 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 wall = self.tf_db(env)
 
                 varying = {
-                    'without_wall': nowall,
-                    'with_wall': wall
+                    'without_wall': tf.cast(nowall, tf.float16),
+                    'with_wall': tf.cast(wall, tf.float16)
                 }
             m.close()
 
