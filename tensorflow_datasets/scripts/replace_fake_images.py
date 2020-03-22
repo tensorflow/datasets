@@ -116,9 +116,8 @@ def rewrite_tar(root_dir, tar_filepath):
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
     with tarfile.open(tar_filepath, 'w' + extension) as tar:
-      for filename in os.listdir(temp_dir):
-        tar.add(os.path.join(temp_dir, filename), arcname=filename,
-                recursive=True)
+      tar.add(temp_dir, arcname='', recursive=True)
+
 
 def rewrite_dir(fake_dir):
   """Process the whole directory which contains the compressed files.
