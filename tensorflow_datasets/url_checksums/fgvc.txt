@@ -1,0 +1,1 @@
+http://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/archives/fgvc-aircraft-2013b.tar.gz 2770575360 d5f68b1b81d6d7831eb9d5c5517074176b5dfbce6bcb43dc14ed1c66a87b8d75
