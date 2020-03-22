@@ -111,8 +111,8 @@ class BreastCancer(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, records):
     for i, row in enumerate(records):
       label = row[-1]
-      #the 0 label represents 2 in the original dataset(benign) & 1 represents
-	 # 4(malignant)
+      #the 0 label represents 2 in the original dataset(benig & 1 represents
+      # 4(malignant)
       label = 0 if label == 2 else 1
       dict_values = dict(zip(COLUMNS, map(lambda x: x.strip(), row[:-1])))
       yield i, {
