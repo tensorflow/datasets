@@ -84,7 +84,7 @@ Check that:
     - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
     - dataset you want to use is updated in current pip package that you are using.
-    - Try tfds-nightly using pip install tfds-nightly.
+    - Try tfds-nightly using pip install tfds-nightly or clone tfds repo.
 """
 
 
