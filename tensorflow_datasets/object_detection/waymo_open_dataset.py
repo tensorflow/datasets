@@ -23,7 +23,6 @@ import io
 import os
 from absl import logging
 import tensorflow.compat.v2 as tf
-import tensorflow_datasets.proto.waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -157,6 +156,7 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
 def _generate_images_and_annotations(tf_record_file):
   """Yields the images and annotations from a given file."""
   # Go through all frames
+  open_dataset = tfds.core.lazy_imports.waymo_open_dataset_pb
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
   for data in dataset:
     frame = open_dataset.Frame()

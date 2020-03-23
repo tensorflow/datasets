@@ -151,5 +151,11 @@ class LazyImporter(object):
     """For testing purposes only."""
     return _try_import("test_foo")
 
+  @utils.classproperty
+  @classmethod
+  def waymo_open_dataset_pb(cls):
+    """Protobuf with waymo open dataset."""
+    return _try_import("tensorflow_datasets.proto.waymo_dataset_pb2")
+
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
