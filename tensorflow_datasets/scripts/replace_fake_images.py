@@ -37,6 +37,7 @@ import absl.flags
 import numpy as np
 import PIL.Image
 
+
 FLAGS = absl.flags.FLAGS
 
 absl.flags.DEFINE_string(
@@ -49,10 +50,10 @@ def rewrite_image(filepath):
   Args:
     filepath: path of the images to get processed
   """
-  image = np.array(PIL.Image.open(filepath))
-
+  image_content = PIL.Image.open(filepath)
+  image = np.array(image_content)
   # Filter unsuported images
-  if image.mode == 'RGBA' or image.dtype == np.bool:
+  if image_content.mode == 'RGBA' or image.dtype == np.bool:
     return
 
   # The color is a deterministic function of the relative filepath.
@@ -63,7 +64,7 @@ def rewrite_image(filepath):
 
   image = np.ones_like(image) * color
   image = PIL.Image.fromarray(image)
-  image.save(filepath)
+  image.save(filepath, optimize=True)
 
 
 def rewrite_zip(root_dir, zip_filepath):
@@ -81,12 +82,18 @@ def rewrite_zip(root_dir, zip_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
-    # Compressed the .zip file again
-    with zipfile.ZipFile(zip_filepath, 'w') as zip_file:
+    # Compress the .zip file again
+    with zipfile.ZipFile(
+        zip_filepath,
+        'w',
+        compression=zipfile.ZIP_DEFLATED,
+        # TODO(tfds): Python 3.7 Add `compresslevel=zlib.Z_BEST_COMPRESSION,`
+    ) as zip_file:
       for file_dir, _, files in os.walk(temp_dir):
         for file in files:
           file_path = os.path.join(file_dir, file)
-          zip_file.write(file_path)
+          zip_file.write(file_path,
+                         arcname=os.path.relpath(file_path, temp_dir))
 
 
 def rewrite_tar(root_dir, tar_filepath):
@@ -100,12 +107,15 @@ def rewrite_tar(root_dir, tar_filepath):
 
   """
   # Create a tempfile to store the images contain noise
-  with tempfile.TemporaryDirectory(dir=root_dir) as temp_dir:
+  with tempfile.TemporaryDirectory(dir=root_dir, suffix='fake') as temp_dir:
     # Checking the extension of file to be extract
-    if tar_filepath.lower().endswith('gz'):
+    tar_filepath_lowercase = tar_filepath.lower()
+    if tar_filepath_lowercase.endswith('gz'):
       extension = ':gz'
-    elif tar_filepath.lower().endswith('bz2'):
+    elif tar_filepath_lowercase.endswith('bz2'):
       extension = ':bz2'
+    elif tar_filepath_lowercase.endswith('xz'):
+      extension = ':xz'
     else:
       extension = ''
 
@@ -115,9 +125,9 @@ def rewrite_tar(root_dir, tar_filepath):
 
     rewrite_dir(temp_dir)  # Recursivelly compress the archive content
 
-    # Converting into tarfile again to decrease the space taken by the file-
+    # Convert back into tar file
     with tarfile.open(tar_filepath, 'w' + extension) as tar:
-      tar.add(temp_dir, recursive=True)
+      tar.add(temp_dir, arcname='', recursive=True)
 
 
 def rewrite_dir(fake_dir):
