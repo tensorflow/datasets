@@ -277,14 +277,15 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         self._test_checksums()
 
   def _test_checksums(self):
-    filepath = os.path.join(checksums._get_path(self.builder.name))
-    if tf.io.gfile.exists(filepath):
+    if self._download_urls:
+      filepath = os.path.join(checksums._get_path(self.builder.name))
+      if not tf.io.gfile.exists(filepath):
+        raise AssertionError("url checksums file not found at %s" % filepath)
+
       sizes_checksums = checksums._get_sizes_checksums(filepath)
       urls = sizes_checksums.keys()
-    else:
-      raise AssertionError("url checksums file not found at %s" % filepath)
-
-    self.assertTrue(self._download_urls.issubset(set(urls)), "url checksums don't match.")
+      
+      self.assertTrue(self._download_urls.issubset(set(urls)), "url checksums don't match.")
 
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
