@@ -12,8 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 # Lint as: python3
+
 """Lazy imports for heavy dependencies."""
 
 from __future__ import absolute_import
@@ -63,11 +63,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def h5py(cls):
-    return _try_import("h5py")
-
-  @utils.classproperty
-  @classmethod
   def langdetect(cls):
     return _try_import("langdetect")
 
@@ -79,6 +74,7 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def matplotlib(cls):
+    _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
 
   @utils.classproperty
