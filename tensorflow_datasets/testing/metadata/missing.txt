@@ -11,8 +11,6 @@ dummy_dataset_shared_generator/1.0.0
 dummy_dataset_shared_generator/2.0.0
 dummy_mnist/1.0.0
 image_label_folder/2.0.0
-open_images_challenge2019_detection/200k/1.0.0
-open_images_challenge2019_detection/300k/1.0.0
 savee/1.0.0
 scientific_papers/arxiv/1.1.1
 scientific_papers/pubmed/1.1.1

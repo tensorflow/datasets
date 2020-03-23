@@ -2,6 +2,8 @@ toc:
 - path: /datasets/catalog/overview
   title: Overview
 - section:
+  - path: /datasets/catalog/crema_d
+    title: crema_d
   - path: /datasets/catalog/groove
     title: groove
   - path: /datasets/catalog/librispeech

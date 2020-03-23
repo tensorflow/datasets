@@ -12,29 +12,21 @@ nightly package `tfds-nightly`.
 ## Usage
 
 ```python
-# See all registered datasets
-tfds.list_builders()
+# Build the `tf.data.Dataset` pipeline.
+ds, info = tfds.load('cifar10', split='train', shuffle_files=True, with_info=True)
+ds = ds.shuffle(info.splits['train'].num_examples)
+ds = ds.batch(32)
 
-# Load a given dataset by name, along with the DatasetInfo
-data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['train'], data['test']
-assert isinstance(train_data, tf.data.Dataset)
-assert info.features['label'].num_classes == 10
-assert info.splits['train'].num_examples == 60000
-
-# You can also access a builder directly
-builder = tfds.builder("mnist")
-assert builder.info.splits['train'].num_examples == 60000
-builder.download_and_prepare()
-datasets = builder.as_dataset()
-
-# If you need NumPy arrays
-np_datasets = tfds.as_numpy(datasets)
+# `tfds.as_numpy` converts `tf.Tensor` -> `np.array`
+for ex in tfds.as_numpy(ds):
+  # `int2str` returns the human readable label ('dog', 'car',...)
+  print(info.features['label'].int2str(ex['label']))
 ```
 
 ## All Datasets
 
 *   `Audio`
+    *   [`crema_d`](crema_d.md)
     *   [`groove`](groove.md)
     *   [`librispeech`](librispeech.md)
     *   [`libritts`](libritts.md)

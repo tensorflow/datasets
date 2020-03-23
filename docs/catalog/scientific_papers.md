@@ -26,6 +26,7 @@ seperated by "/n".
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 *   **Versions**:
     *   **`1.1.1`** (default): No release notes.
+    *   `1.1.0`: No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
