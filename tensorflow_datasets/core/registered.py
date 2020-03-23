@@ -83,6 +83,7 @@ Check that:
     - dataset class defines all base class abstract methods
     - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
+    - dataset you want to use is updated in current pip package that you are using.
 """
 
 
