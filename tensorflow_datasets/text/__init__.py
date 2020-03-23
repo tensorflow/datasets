@@ -44,6 +44,7 @@ from tensorflow_datasets.text.squad import Squad
 from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trivia_qa import TriviaQA
+from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
