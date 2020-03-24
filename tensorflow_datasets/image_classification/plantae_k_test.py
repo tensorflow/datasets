@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import plantae_k
+from tensorflow_datasets.image_classification import plantae_k
 
 
 class PlantaeKTest(testing.DatasetBuilderTestCase):

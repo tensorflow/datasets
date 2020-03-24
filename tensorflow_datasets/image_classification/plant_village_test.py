@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import plant_village
+from tensorflow_datasets.image_classification import plant_village
 
 
 class PlantVillageTest(testing.DatasetBuilderTestCase):

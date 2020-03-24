@@ -16,7 +16,7 @@
 # Lint as: python3
 """Tests for Beans dataset."""
 
-from tensorflow_datasets.image import beans
+from tensorflow_datasets.image_classification import beans
 import tensorflow_datasets.testing as tfds_test
 
 beans._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access

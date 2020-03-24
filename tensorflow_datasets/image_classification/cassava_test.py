@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import cassava
+from tensorflow_datasets.image_classification import cassava
 
 
 class CassavaTest(testing.DatasetBuilderTestCase):

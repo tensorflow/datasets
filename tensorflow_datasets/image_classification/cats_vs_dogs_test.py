@@ -20,7 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import cats_vs_dogs
+from tensorflow_datasets.image_classification import cats_vs_dogs
 
 cats_vs_dogs._NUM_CORRUPT_IMAGES = 0  # pylint: disable=protected-access
 

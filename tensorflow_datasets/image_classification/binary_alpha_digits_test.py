@@ -17,7 +17,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets.image import binary_alpha_digits
+from tensorflow_datasets.image_classification import binary_alpha_digits
 import tensorflow_datasets.testing as tfds_test
 
 

@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import imagenet
+from tensorflow_datasets.image_classification import imagenet
 
 
 imagenet.Imagenet2012.PNG_IMAGES = ["n01440764_1.JPEG"]

@@ -16,7 +16,7 @@
 # Lint as: python3
 """Smallnorb dataset test."""
 
-from tensorflow_datasets.image import smallnorb
+from tensorflow_datasets.image_classification import smallnorb
 import tensorflow_datasets.testing as tfds_test
 
 

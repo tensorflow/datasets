@@ -20,7 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import cifar
+from tensorflow_datasets.image_classification import cifar
 
 
 # testing/cifar.py generates fake input data

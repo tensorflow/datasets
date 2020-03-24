@@ -22,7 +22,7 @@ from __future__ import print_function
 
 import six
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import imagenet2012_corrupted
+from tensorflow_datasets.image_classification import imagenet2012_corrupted
 
 
 class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):

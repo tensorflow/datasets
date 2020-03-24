@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import oxford_flowers102
+from tensorflow_datasets.image_classification import oxford_flowers102
 
 
 class OxfordFlowers102Test(testing.DatasetBuilderTestCase):

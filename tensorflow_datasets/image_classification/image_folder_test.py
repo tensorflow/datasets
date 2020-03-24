@@ -23,7 +23,7 @@ from __future__ import print_function
 import functools
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.image import image_folder
+from tensorflow_datasets.image_classification import image_folder
 
 
 class ImageLabelFolderTest(testing.DatasetBuilderTestCase):

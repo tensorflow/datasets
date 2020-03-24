@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import vgg_face2
+from tensorflow_datasets.image_classification import vgg_face2
 
 
 class VggFace2Test(testing.DatasetBuilderTestCase):

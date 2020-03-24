@@ -20,7 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.image import rock_paper_scissors
+from tensorflow_datasets.image_classification import rock_paper_scissors
 import tensorflow_datasets.testing as tfds_test
 
 rock_paper_scissors._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access

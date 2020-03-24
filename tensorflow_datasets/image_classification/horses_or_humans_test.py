@@ -20,7 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.image import horses_or_humans
+from tensorflow_datasets.image_classification import horses_or_humans
 import tensorflow_datasets.testing as tfds_test
 
 horses_or_humans._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access

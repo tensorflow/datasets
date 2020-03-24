@@ -15,7 +15,7 @@
 
 # Lint as: python3
 """dSprites dataset test."""
-from tensorflow_datasets.image import dsprites
+from tensorflow_datasets.image_classification import dsprites
 import tensorflow_datasets.testing as tfds_test
 
 

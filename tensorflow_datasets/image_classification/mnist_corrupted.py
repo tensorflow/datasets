@@ -29,7 +29,7 @@ import os
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.image import mnist
+from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\

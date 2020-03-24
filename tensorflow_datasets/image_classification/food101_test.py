@@ -17,7 +17,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets.image import food101
+from tensorflow_datasets.image_classification import food101
 import tensorflow_datasets.testing as tfds_test
 
 

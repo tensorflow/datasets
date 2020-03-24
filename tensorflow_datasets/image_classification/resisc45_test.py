@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import resisc45
+from tensorflow_datasets.image_classification import resisc45
 
 
 class Resisc45Test(testing.DatasetBuilderTestCase):

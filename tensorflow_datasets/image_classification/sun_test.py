@@ -23,7 +23,7 @@ from __future__ import print_function
 import os
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import sun
+from tensorflow_datasets.image_classification import sun
 
 _EXAMPLE_DIR = os.path.join(
     os.path.normpath(os.path.dirname(__file__) + '/../'), 'testing',

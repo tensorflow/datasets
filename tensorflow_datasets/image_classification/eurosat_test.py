@@ -22,7 +22,7 @@ from __future__ import print_function
 
 import six
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import eurosat
+from tensorflow_datasets.image_classification import eurosat
 
 
 class EurosatTest(testing.DatasetBuilderTestCase):

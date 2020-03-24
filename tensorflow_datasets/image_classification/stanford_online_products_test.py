@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-from tensorflow_datasets.image import stanford_online_products
+from tensorflow_datasets.image_classification import stanford_online_products
 import tensorflow_datasets.testing as tfds_test
 
 
