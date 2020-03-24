@@ -287,7 +287,7 @@ class DatasetBuilder(object):
       return
 
     if self.version.tfds_version_to_prepare:
-      available_to_prepare = ", ".join(str(v) for v in self.versions
+      available_to_prepare = ", ".join(str(v) for v in [self.canonical_version] + [max(self.versions)]
                                        if not v.tfds_version_to_prepare)
       raise AssertionError(
           "The version of the dataset you are trying to use ({}:{}) can only "
