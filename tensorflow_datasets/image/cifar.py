@@ -46,6 +46,11 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
   VERSION = tfds.core.Version("3.0.1")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "3.0.2", experiments={tfds.core.Experiment.METADATA: True}
+      ),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -54,6 +59,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
                      "images in 10 classes, with 6000 images per class. There "
                      "are 50000 training images and 10000 test images."),
         features=tfds.features.FeaturesDict({
+            "id": tfds.features.Text(),
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
@@ -100,19 +106,26 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
+            gen_kwargs={
+                "split_prefix": "train_",
+                "filepaths": gen_filenames(cifar_info.train_files)
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
+            gen_kwargs={
+                "split_prefix": "test_",
+                "filepaths": gen_filenames(cifar_info.test_files)
+            }),
     ]
 
-  def _generate_examples(self, filepaths):
+  def _generate_examples(self, split_prefix, filepaths):
     """Generate CIFAR examples as dicts.
 
     Shared across CIFAR-{10, 100}. Uses self._cifar_info as
     configuration.
 
     Args:
+      split_prefix (str): Prefix that identifies the split (e.g. "tr" or "te").
       filepaths (list[str]): The files to use to generate the data.
 
     Yields:
@@ -123,6 +136,10 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     for path in filepaths:
       for labels, np_image in _load_data(path, len(label_keys)):
         record = dict(zip(label_keys, labels))
+        # Note: "id" is only provided for the user convenience. To shuffle the
+        # dataset we use `index`, so that the sharding is compatible with
+        # earlier versions.
+        record["id"] = "{}{:05d}".format(split_prefix, index)
         record["image"] = np_image
         yield index, record
         index += 1
@@ -132,6 +149,11 @@ class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
   VERSION = tfds.core.Version("3.0.1")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "3.0.2", experiments={tfds.core.Experiment.METADATA: True}
+      ),
+  ]
 
   @property
   def _cifar_info(self):
@@ -156,6 +178,7 @@ class Cifar100(Cifar10):
                      "(the class to which it belongs) and a \"coarse\" label "
                      "(the superclass to which it belongs)."),
         features=tfds.features.FeaturesDict({
+            "id": tfds.features.Text(),
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=100),
             "coarse_label": tfds.features.ClassLabel(num_classes=20),
