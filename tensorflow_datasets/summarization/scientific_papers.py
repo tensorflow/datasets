@@ -110,7 +110,7 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract(_URLS)
     path = os.path.join(dl_paths[self.builder_config.name],
-                        self.builder_config.name + "-release")
+                        self.builder_config.name + "-dataset")
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
