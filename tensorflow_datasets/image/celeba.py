@@ -98,7 +98,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
   VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+      "2.1.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -119,30 +119,34 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    extracted_dirs = dl_manager.download_and_extract({
+    extracted_dirs = dl_manager.download({
         "img_align_celeba": IMG_ALIGNED_DATA,
         "list_eval_partition": EVAL_LIST,
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,
     })
+    
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "file_id": 0,
                 "extracted_dirs": extracted_dirs,
+                "downloaded_images": dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "file_id": 1,
                 "extracted_dirs": extracted_dirs,
+                "downloaded_images": dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "file_id": 2,
                 "extracted_dirs": extracted_dirs,
+                "downloaded_images": dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
             })
     ]
 
@@ -173,10 +177,10 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
-  def _generate_examples(self, file_id, extracted_dirs):
+  def _generate_examples(self, file_id, extracted_dirs, downloaded_images):
     """Yields examples."""
-    filedir = os.path.join(extracted_dirs["img_align_celeba"],
-                           "img_align_celeba")
+
+    images = sorted(list(downloaded_images))
     img_list_path = extracted_dirs["list_eval_partition"]
     landmarks_path = extracted_dirs["landmarks_celeba"]
     attr_path = extracted_dirs["list_attr_celeba"]
@@ -192,10 +196,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     landmarks = self._process_celeba_config_file(landmarks_path)
 
     for file_name in sorted(files):
-      path = os.path.join(filedir, file_name)
-
       record = {
-          "image": path,
+          "image": images[int(file_name.split('.')[0])][1],
           "landmarks": {
               k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
           },
