@@ -16,10 +16,6 @@
 # Lint as: python3
 """FGVC Aircraft Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import tensorflow_datasets.public_api as tfds
 
@@ -162,6 +158,7 @@ class FGVC(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, split, extracted_dirs):
     """Yields examples."""
+    print(extracted_dirs)
     filenames = open(os.path.join(extracted_dirs,
                                   'images_{}.txt'.format(split))).readlines()
     filenames = [filename.strip() + '.jpg' for filename in filenames]
