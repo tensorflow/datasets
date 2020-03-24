@@ -105,14 +105,14 @@ VARIANTS = ['707-320', '727-200', '737-200', '737-300', '737-400', '737-500',
             'Saab 340', 'Spitfire', 'Tornado', 'Tu-134', 'Tu-154', 'Yak-42']
 
 FEATURES_DICT = {
-        'image': tfds.features.Image(encoding_format='jpeg'),
-        'image_predictions': tfds.features.Sequence({
-            'bbox': tfds.features.BBoxFeature(),
-            'family': tfds.features.ClassLabel(names=FAMILIES),
-            'manufacturer': tfds.features.ClassLabel(names=MANUFACTURERS),
-            'variant': tfds.features.ClassLabel(names=VARIANTS)
-            })
-        }
+    'image': tfds.features.Image(encoding_format='jpeg'),
+    'image_predictions': tfds.features.Sequence({
+        'bbox': tfds.features.BBoxFeature(),
+        'family': tfds.features.ClassLabel(names=FAMILIES),
+        'manufacturer': tfds.features.ClassLabel(names=MANUFACTURERS),
+        'variant': tfds.features.ClassLabel(names=VARIANTS)
+        })
+    }
 
 
 class FGVC(tfds.core.GeneratorBasedBuilder):
@@ -158,7 +158,6 @@ class FGVC(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, split, extracted_dirs):
     """Yields examples."""
-    print(extracted_dirs)
     filenames = open(os.path.join(extracted_dirs,
                                   'images_{}.txt'.format(split))).readlines()
     filenames = [filename.strip() + '.jpg' for filename in filenames]
