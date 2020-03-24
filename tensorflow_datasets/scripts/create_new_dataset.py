@@ -44,6 +44,7 @@ FLAGS = flags.FLAGS
 _DATASET_TYPE = [
     'audio',
     'image',
+    'image_classification',
     'object_detection',
     'structured',
     'summarization',
