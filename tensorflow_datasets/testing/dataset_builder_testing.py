@@ -36,6 +36,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.testing import test_utils
 
@@ -114,6 +115,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     * MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
       disable checks preventing usage of `os` or builtin functions instead of
       recommended `tf.io.gfile` API.
+    * SKIP_CHECKSUMS: Checks that the urls called by `dl_manager.download`
+      are registered.
 
   This test case will check for the following:
 
@@ -138,12 +141,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
+  SKIP_CHECKSUMS = False
 
   @classmethod
   def setUpClass(cls):
     tf.enable_v2_behavior()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
+    cls._download_urls = set()
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
       raise AssertionError(
@@ -216,7 +221,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEqual(self.builder.name, info.name)
 
+  def _add_url(self, url_or_urls):
+    if isinstance(url_or_urls, download.resource.Resource):
+      self._download_urls.add(url_or_urls.url)
+    else:
+      self._download_urls.add(url_or_urls)
+
   def _get_dl_extract_result(self, url):
+    tf.nest.map_structure(self._add_url, url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
@@ -224,6 +236,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _get_dl_download_result(self, url):
+    tf.nest.map_structure(self._add_url, url)
     if self.DL_DOWNLOAD_RESULT is None:
       # This is only to be backwards compatible with old approach.
       # In the future it will be replaced with using self.example_dir.
@@ -262,6 +275,34 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     else:
       self._download_and_prepare_as_dataset(self.builder)
 
+    if not self.SKIP_CHECKSUMS:
+      with self._subTest("url_checksums"):
+        self._test_checksums()
+
+  def _test_checksums(self):
+    # If no call to `dl_manager.download`, then no need to check url presence.
+    if not self._download_urls:
+      return
+
+    err_msg = ("If you are developping outside TFDS and want to opt-out, "
+               "please add `SKIP_CHECKSUMS = True` to the "
+               "`DatasetBuilderTestCase`")
+
+    with utils.try_reraise(suffix=err_msg):
+      filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
+      sizes_checksums = checksums._get_sizes_checksums(filepath)  # pylint: disable=protected-access
+      urls = sizes_checksums.keys()
+
+    missing_urls = self._download_urls - set(urls)
+    self.assertEmpty(
+        missing_urls,
+        "Some urls checksums are missing at: {} "
+        "Did you forgot to record checksums with `--register_checksums` ? "
+        "See instructions at: "
+        "https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally"
+        "\n{}".format(filepath, err_msg)
+    )
+
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
     # set.
@@ -280,7 +321,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
-        import apache_beam as beam   # pylint: disable=g-import-not-at-top
+        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         # For Beam datasets, set-up the runner config
         beam_runner = None
         beam_options = beam.options.pipeline_options.PipelineOptions()
