@@ -131,7 +131,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.train".format(
@@ -141,7 +140,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.dev".format(
@@ -151,7 +149,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.test".format(
