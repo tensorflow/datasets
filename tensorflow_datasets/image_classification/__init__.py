@@ -31,10 +31,8 @@ from tensorflow_datasets.image_classification.cifar import Cifar100
 from tensorflow_datasets.image_classification.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image_classification.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image_classification.citrus import CitrusLeaves
-from tensorflow_datasets.image_classification.cityscapes import Cityscapes
 from tensorflow_datasets.image_classification.clevr import CLEVR
 from tensorflow_datasets.image_classification.cmaterdb import Cmaterdb
-from tensorflow_datasets.image_classification.coil100 import Coil100
 from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistologyLarge
 from tensorflow_datasets.image_classification.cycle_gan import CycleGAN

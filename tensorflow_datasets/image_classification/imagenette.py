@@ -55,7 +55,7 @@ Note: The v2 config correspond to the new 70/30 train/valid split (released
 in Dec 6 2019).
 """
 
-_LABELS_FNAME = "image/imagenette_labels.txt"
+_LABELS_FNAME = "image_classification/imagenette_labels.txt"
 _URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas/"
 
 

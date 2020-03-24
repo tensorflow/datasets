@@ -28,7 +28,7 @@ import tensorflow_datasets.public_api as tfds
 _QUICKDRAW_IMAGE_SIZE = 28
 _QUICKDRAW_IMAGE_SHAPE = (_QUICKDRAW_IMAGE_SIZE, _QUICKDRAW_IMAGE_SIZE, 1)
 _QUICKDRAW_BASE_URL = "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap"  # pylint: disable=line-too-long
-_QUICKDRAW_LABELS_FNAME = "image/quickdraw_labels.txt"
+_QUICKDRAW_LABELS_FNAME = "image_classification/quickdraw_labels.txt"
 
 _CITATION = """\
 @article{DBLP:journals/corr/HaE17,

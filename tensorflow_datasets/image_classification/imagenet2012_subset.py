@@ -24,7 +24,7 @@ import io
 import os
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.image.imagenet import Imagenet2012
+from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 import tensorflow_datasets.public_api as tfds
 
 

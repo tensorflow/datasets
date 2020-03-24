@@ -210,7 +210,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
-        os.path.join("image", "sun397_labels.txt"))
+        os.path.join("image_classification", "sun397_labels.txt"))
     return tfds.core.DatasetInfo(
         builder=self,
         description=_SUN397_DESCRIPTION,
