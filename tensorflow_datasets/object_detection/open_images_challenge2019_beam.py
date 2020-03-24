@@ -55,12 +55,6 @@ class ProcessImageFn(beam.DoFn):
     self._jpeg_quality = [int(cv2.IMWRITE_JPEG_QUALITY), jpeg_quality]
     self._images_failed = Metrics.counter(self.__class__, "images_failed")
 
-  def __getstate__(self):
-    return (self._target_pixels, self._jpeg_quality, self._images_failed)
-
-  def __setstate__(self, state):
-    self._target_pixels, self._jpeg_quality, self._images_failed = state
-
   def process(self, element):
     filename, content = element
     try:
@@ -97,22 +91,12 @@ class CreateDetectionExampleFn(beam.DoFn):
     self._box_labels_filepath = box_labels_filepath
     self._hierarchy_filepath = hierarchy_filepath
     self._classes_filepath = classes_filepath
-    self._load_info_from_files()
-
-  def __getstate__(self):
-    return (self._image_labels_filepath, self._box_labels_filepath,
-            self._hierarchy_filepath, self._classes_filepath)
-
-  def __setstate__(self, state):
-    (self._image_labels_filepath, self._box_labels_filepath,
-     self._hierarchy_filepath, self._classes_filepath) = state
-    self._load_info_from_files()
-
-  def _load_info_from_files(self):
     self._image2labels = None
     self._image2boxes = None
     self._hierarchy = None
     self._mid2int = None
+
+  def start(self):
     if self._image_labels_filepath:
       self._image2labels = load_image_level_labels(self._image_labels_filepath)
     if self._box_labels_filepath:
