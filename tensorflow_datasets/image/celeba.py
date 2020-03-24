@@ -26,7 +26,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
 import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -125,28 +124,31 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,
     })
-    
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "file_id": 0,
                 "extracted_dirs": extracted_dirs,
-                "downloaded_images": dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
+                "downloaded_images": \
+                dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "file_id": 1,
                 "extracted_dirs": extracted_dirs,
-                "downloaded_images": dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
+                "downloaded_images": \
+                dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "file_id": 2,
                 "extracted_dirs": extracted_dirs,
-                "downloaded_images": dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
+                "downloaded_images": \
+                dl_manager.iter_archive(extracted_dirs["img_align_celeba"]),
             })
     ]
 
@@ -199,7 +201,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       record = {
           "image": images[int(file_name.split('.')[0])][1],
           "landmarks": {
-              k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
+              k: v for k, v in zip(landmarks[0], landmarks[1][file_name]) # pylint: disable=r1721
           },
           "attributes": {
               # atributes value are either 1 or -1, so convert to bool
