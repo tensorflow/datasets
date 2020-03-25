@@ -63,8 +63,9 @@ _CITATION = """\
 
 class DeeplesionConfig(tfds.core.BuilderConfig):
   """BuilderConfig for DeeplesionConfig."""
-  def __init__(self, name = None, thickness = None, **kwargs):
+  def __init__(self, name=None, thickness=None, **kwargs):
     super(DeeplesionConfig, self).__init__(name = name, version=tfds.core.Version('1.0.0'), **kwargs)
+    self.name = name
     self.thickness = thickness
 
 
@@ -526,7 +527,7 @@ class AnnParser():
       normal_ann = self._create_ann_for_normals(self._annTrain)
       self._annTrain = self._annTrain.append(normal_ann)
 
-    return self._annTrain
+    return self._annTrain.sample(frac=1, random_state=42)
 
   @property
   def annVal(self):
@@ -536,7 +537,7 @@ class AnnParser():
       normal_ann = self._create_ann_for_normals(self._annVal)
       self._annVal = self._annVal.append(normal_ann)
 
-    return self._annVal
+    return self._annVal.sample(frac=1, random_state=42)
 
   @property
   def annTest(self):
@@ -546,7 +547,7 @@ class AnnParser():
       normal_ann = self._create_ann_for_normals(self._annTest)
       self._annTest = self._annTest.append(normal_ann)
 
-    return self._annTest
+    return self._annTest.sample(frac=1, random_state=42)
 
 
   def _ann_parser(self):
@@ -574,6 +575,15 @@ class AnnParser():
       df_t.fillna(-1, inplace=True)
       df_t.Patient_gender.replace(['M', 'F'], [1, 0], inplace=True)
       
+      mask=df_t.apply(lambda x: x['Image_size'].split(", ")[0]=='512', axis=1)
+      df_t=df_t[mask] # filter out Image_size != 512
+      df_t=df_t[df_t.Possibly_noisy==0] # filter out possibly noisy image
+      df_t=df_t[df_t.Spacing_mm_px_>"0.6"] #  filter out spacing mm/pixel < 0.6
+      space=df_t.Spacing_mm_px_.apply(lambda x:float(x.split(", ")[2]))
+      df_t['z_space']=space
+      df_t=df_t[(df_t.z_space<=6)&(df_t.z_space>=1)]
+      df_t.drop(columns=['z_space'], inplace=True)
+
       # group and aggregate
       concat = lambda a: ", ".join(a) # rules for aggregation
       d = {'Bounding_boxes': concat,
@@ -592,8 +602,10 @@ class AnnParser():
       }
       df_new = df_t.groupby('File_name', as_index=False).aggregate(d).reindex(columns=df_t.columns)
 
+      df_new = df_new.drop_duplicates("File_name")
       # append new column label
       df_new['Label'] = 1
+      
       
       # split
       self._annTrain = df_new[df_new['Train_Val_Test']==1]
@@ -633,31 +645,32 @@ class AnnParser():
       slice_idxs = [x for x in range(s_range[0], s_range[1]+1)] # collect all valid idxs within the boundaries (includsively)
       key_idx = int(ks_idx)
       valid_idxs_pool = list(filter(lambda x: True if abs(x-key_idx) > offset_z else False, slice_idxs))
-      normal_idx = -1
-      if valid_idxs_pool:
-        normal_idx = random.choice(valid_idxs_pool)
-      else:
-        continue
+#       normal_idx = -1
+#       if valid_idxs_pool:
+#         normal_idx = random.choice(valid_idxs_pool)
+#       else:
+#         continue
 
       # create a record for the normal scan
-      normal = {
-        'File_name':FileNameUtils(file_name).get_fname(normal_idx), 
-        'Bounding_boxes':None, 
-        'Image_size':size,
-        'Key_slice_index':ks_idx, 
-        'Measurement_coordinates':None, 
-        'Lesion_diameters_Pixel_':None,
-        'Normalized_lesion_location':None, 
-        'Possibly_noisy':p_noisy, 
-        'Slice_range':slice_range,
-        'Spacing_mm_px_':spacing, 
-        'DICOM_windows':dicom_windows, 
-        'Patient_gender':p_gender,
-        'Patient_age':p_age,
-        'Train_Val_Test':sp,
-        'Label':0
-      }
-      normal_scans_ann.append(normal)
+      for normal_idx in valid_idxs_pool:
+        normal = {
+          'File_name':FileNameUtils(file_name).get_fname(normal_idx), 
+          'Bounding_boxes':None, 
+          'Image_size':size,
+          'Key_slice_index':ks_idx, 
+          'Measurement_coordinates':None, 
+          'Lesion_diameters_Pixel_':None,
+          'Normalized_lesion_location':None, 
+          'Possibly_noisy':p_noisy, 
+          'Slice_range':slice_range,
+          'Spacing_mm_px_':spacing, 
+          'DICOM_windows':dicom_windows, 
+          'Patient_gender':p_gender,
+          'Patient_age':p_age,
+          'Train_Val_Test':sp,
+          'Label':0
+        }
+        normal_scans_ann.append(normal)
     
     # create a new Dataframe of normals
     pd = tfds.core.lazy_imports.pandas
@@ -678,4 +691,8 @@ class AnnParser():
                                       'Train_Val_Test',
                                       'Label'
                                       ])
-    return normal_ann
+    normal_ann = normal_ann.drop_duplicates("File_name")
+    mask=normal_ann["File_name"].isin(ann["File_name"])
+    normal_ann = normal_ann[~mask]
+	
+    return normal_ann.sample(n=len(ann), random_state=42)
