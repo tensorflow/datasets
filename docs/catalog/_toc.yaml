@@ -114,6 +114,8 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
   - path: /datasets/catalog/imagenette
@@ -296,6 +298,8 @@ toc:
     title: tiny_shakespeare
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
+  - path: /datasets/catalog/wiki40b
+    title: wiki40b
   - path: /datasets/catalog/wikipedia
     title: wikipedia
   - path: /datasets/catalog/xnli
