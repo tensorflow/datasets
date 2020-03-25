@@ -78,7 +78,7 @@ _LABEL_MAPPING = [
     ("0021", "Lemon (P10) diseased"),
     ("0022", "Chinar (P11) diseased"),
 ]
-_URLS_FNAME = "image/plant_leaves_urls.txt"
+_URLS_FNAME = "image_classification/plant_leaves_urls.txt"
 _MAX_DOWNLOAD_RETRY = 10
 
 
@@ -98,7 +98,7 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "image/filename": tfds.features.Text(),
+            "image_classification/filename": tfds.features.Text(),
             "label": tfds.features.ClassLabel(names=labels)
         }),
         supervised_keys=("image", "label"),
@@ -144,7 +144,7 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
         label = label_map[match.group(1)]
         record = {
             "image": fpath,
-            "image/filename": original_fname,
+            "image_classification/filename": original_fname,
             "label": label,
         }
         yield original_fname, record

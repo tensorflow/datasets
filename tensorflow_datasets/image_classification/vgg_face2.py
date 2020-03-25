@@ -44,7 +44,7 @@ average of 362 images for each subject.
 """
 
 
-_LABELS_FNAME = 'image/vgg_face2_labels.txt'
+_LABELS_FNAME = 'image_classification/vgg_face2_labels.txt'
 
 
 class VggFace2(tfds.core.GeneratorBasedBuilder):

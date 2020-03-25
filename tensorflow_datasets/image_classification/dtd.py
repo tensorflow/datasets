@@ -54,7 +54,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
-        os.path.join("image", "dtd_key_attributes.txt"))
+        os.path.join("image_classification", "dtd_key_attributes.txt"))
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,

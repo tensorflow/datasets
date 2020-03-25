@@ -57,7 +57,7 @@ _CLASSES = [
     "airplane", "bear", "bicycle", "bird", "boat", "bottle", "car", "cat",
     "chair", "clock", "dog", "elephant", "keyboard", "knife", "oven", "truck"
 ]
-_IMAGENET_LABELS_FNAME = "image/imagenet2012_labels.txt"
+_IMAGENET_LABELS_FNAME = "image_classification/imagenet2012_labels.txt"
 
 
 class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):

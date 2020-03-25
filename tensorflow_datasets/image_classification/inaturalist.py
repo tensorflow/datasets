@@ -68,10 +68,10 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join("image", "inaturalist_labels.txt"))),
+                    os.path.join("image_classification", "inaturalist_labels.txt"))),
             "supercategory": tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join("image", "inaturalist_supercategories.txt"))),
+                    os.path.join("image_classification", "inaturalist_supercategories.txt"))),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/visipedia/inat_comp/tree/master/2017",

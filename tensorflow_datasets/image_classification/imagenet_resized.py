@@ -51,7 +51,7 @@ Additionally, the original authors 1 index there labels which we convert to
 0 indexed by subtracting one.
 """
 
-_LABELS_FNAME = 'image/imagenet_resized_labels.txt'
+_LABELS_FNAME = 'image_classification/imagenet_resized_labels.txt'
 _URL_PREFIX = 'http://www.image-net.org/image/downsample/'
 
 

@@ -36,7 +36,7 @@ _DESCRIPTION = (
     " intense colors and sometimes wrong labels. All images were rescaled to "
     "have a maximum side length of 512 pixels.")
 
-_LABELS_FNAME = "image/food-101_classes.txt"
+_LABELS_FNAME = "image_classification/food-101_classes.txt"
 
 _CITATION = """\
  @inproceedings{bossard14,

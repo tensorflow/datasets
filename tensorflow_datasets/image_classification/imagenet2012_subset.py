@@ -62,7 +62,7 @@ _CITATION = '''\
 '''
 
 # pylint: disable=line-too-long
-_LABELS_FNAME = 'image/imagenet2012_labels.txt'
+_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 SUBSET2FILES = {
     '1pct': 'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/1percent.txt',
     '10pct': 'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/10percent.txt'

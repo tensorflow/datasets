@@ -57,12 +57,12 @@ pages={211-252}
 }
 '''
 
-_LABELS_FNAME = 'image/imagenet2012_labels.txt'
+_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 
 # This file contains the validation labels, in the alphabetic order of
 # corresponding image names (and not in the order they have been added to the
 # tar file).
-_VALIDATION_LABELS_FNAME = 'image/imagenet2012_validation_labels.txt'
+_VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
 
 
 # From https://github.com/cytsai/ilsvrc-cmyk-image-list

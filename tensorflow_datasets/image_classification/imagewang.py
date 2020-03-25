@@ -59,7 +59,7 @@ _DESCRIPTION_SHORT = """\
 Imagewang contains Imagenette and Imagewoof combined.
 """
 
-_LABELS_FNAME = "image/imagewang_labels.txt"
+_LABELS_FNAME = "image_classification/imagewang_labels.txt"
 _URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas"
 _SIZES = ["full-size", "320px", "160px"]
 

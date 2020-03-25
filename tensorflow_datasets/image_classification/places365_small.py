@@ -39,7 +39,7 @@ _DESCRIPTION = (
     " images per category in the validation set and 900 images per category in"
     " the testing set.")
 
-_LABELS_FNAME = "image/categories_places365.txt"
+_LABELS_FNAME = "image_classification/categories_places365.txt"
 
 _CITATION = """\
 

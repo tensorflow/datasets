@@ -205,11 +205,11 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'calc_type':
             tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join('image', 'cbis_ddsm_calc_types.txt'))),
+                    os.path.join('image_classification', 'cbis_ddsm_calc_types.txt'))),
         'calc_distribution':
             tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join('image', 'cbis_ddsm_calc_distributions.txt'))),
+                    os.path.join('image_classification', 'cbis_ddsm_calc_distributions.txt'))),
     })
     features['abnormalities'] = tfds.features.Sequence(
         tfds.features.FeaturesDict(features['abnormalities']))
@@ -221,11 +221,11 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'mass_shape':
             tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join('image', 'cbis_ddsm_mass_shapes.txt'))),
+                    os.path.join('image_classification', 'cbis_ddsm_mass_shapes.txt'))),
         'mass_margins':
             tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join('image', 'cbis_ddsm_mass_margins.txt'))),
+                    os.path.join('image_classification', 'cbis_ddsm_mass_margins.txt'))),
     })
     features['abnormalities'] = tfds.features.Sequence(
         tfds.features.FeaturesDict(features['abnormalities']))
@@ -239,7 +239,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'label':
             tfds.features.ClassLabel(
                 names_file=tfds.core.get_tfds_path(
-                    os.path.join('image', 'cbis_ddsm_patch_labels.txt'))),
+                    os.path.join('image_classification', 'cbis_ddsm_patch_labels.txt'))),
     })
 
   def _split_generators(self, dl_manager):

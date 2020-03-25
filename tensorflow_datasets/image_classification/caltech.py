@@ -41,7 +41,7 @@ Images are of variable sizes, with typical edge lengths of 200-300 pixels.
 This version contains image-level labels only. The original dataset also
 contains bounding boxes.
 """
-_LABELS_FNAME = "image/caltech101_labels.txt"
+_LABELS_FNAME = "image_classification/caltech101_labels.txt"
 _URL = "http://www.vision.caltech.edu/Image_Datasets/Caltech101/"
 _IMAGES_FNAME = "101_ObjectCategories.tar.gz"
 _TRAIN_POINTS_PER_CLASS = 30
@@ -61,7 +61,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names_file=names_file),
-            "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
+            "image_classification/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
         homepage=_URL,
@@ -133,7 +133,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
               record = {
                   "image": image_path,
                   "label": d.lower(),
-                  "image/file_name": image_file,
+                  "image_classification/file_name": image_file,
               }
               yield "%s/%s" % (d, image_file), record
     # Resets the seeds to their previous states.

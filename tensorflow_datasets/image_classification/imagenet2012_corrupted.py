@@ -47,12 +47,12 @@ _CITATION = """\
 }
 """
 
-_LABELS_FNAME = 'image/imagenet2012_labels.txt'
+_LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 
 # This file contains the validation labels, in the alphabetic order of
 # corresponding image names (and not in the order they have been added to the
 # tar file).
-_VALIDATION_LABELS_FNAME = 'image/imagenet2012_validation_labels.txt'
+_VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
 
 _FROST_FILEBASE = 'https://raw.githubusercontent.com/hendrycks/robustness/master/ImageNet-C/imagenet_c/imagenet_c/frost/'
 _FROST_FILENAMES = [
