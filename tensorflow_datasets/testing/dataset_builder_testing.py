@@ -148,7 +148,6 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     tf.enable_v2_behavior()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
-    cls._download_urls = set()
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
       raise AssertionError(
@@ -170,6 +169,15 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
+
+    # Track the urls which are downloaded to validate the checksums
+    # The `dl_manager.download` and `dl_manager.download_and_extract` are
+    # patched to record the urls in `_download_urls`.
+    # Calling `dl_manager.download_checksums` stop the url
+    # registration (as checksums are stored remotelly)
+    # `_test_checksums` validates the recorded urls.
+    self._download_urls = set()
+    self._stop_record_download = False
 
   def tearDown(self):
     super(DatasetBuilderTestCase, self).tearDown()
@@ -222,6 +230,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEqual(self.builder.name, info.name)
 
   def _add_url(self, url_or_urls):
+    if self._stop_record_download:
+      # Stop record the checksums if dl_manager.download_checksums has been
+      # called (as checksums may be stored remotelly)
+      return
     if isinstance(url_or_urls, download.resource.Resource):
       self._download_urls.add(url_or_urls.url)
     else:
@@ -243,6 +255,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       return self._get_dl_extract_result(url)
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_DOWNLOAD_RESULT)
+
+  def _download_checksums(self, url):
+    self._stop_record_download = True
 
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(  # pylint: disable=not-callable
@@ -317,7 +332,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_download_result,
-        download_checksums=lambda *_: None,
+        download_checksums=self._download_checksums,
         manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
