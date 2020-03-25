@@ -302,7 +302,7 @@ class DatasetBuilder(object):
     # if not raises error as tfds not supports older versions of datasets.
     new_versions = [str(v) for v in [self.canonical_version] + [max(self.versions)]]
     if str(self._version) not in new_versions:
-      # if canonical and maximum versions are same then sugeest only one version
+      # if canonical and maximum versions are same then suggest only one version
       if max(self.versions) != self.canonical_version:
         raise AssertionError(
             "The version of the dataset you are trying to use ({}:{}) cannot"
