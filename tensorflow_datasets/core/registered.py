@@ -109,7 +109,7 @@ class DatasetNotFoundError(ValueError):
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
 
-  def __new__(cls, cls_name, bases, class_dict):
+  def __new__(cls, cls_name, bases, class_dict): # pylint: disable= C0204, W0221
     name = naming.camelcase_to_snakecase(cls_name)
     class_dict["name"] = name
     builder_cls = super(RegisteredDataset, cls).__new__(  # pylint: disable=too-many-function-args
@@ -164,7 +164,8 @@ def builder(name, **builder_init_kwargs):
     DatasetNotFoundError: if `name` is unrecognized.
   """
   name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  builder_kwargs.update(builder_init_kwargs)
+  builder_kwargs.update( \
+    (k, v) for k, v in builder_init_kwargs.items() if v is not None)
   if name in _ABSTRACT_DATASET_REGISTRY:
     raise DatasetNotFoundError(name, is_abstract=True)
   if name in _IN_DEVELOPMENT_REGISTRY:
@@ -293,7 +294,8 @@ def load(name,
   # pylint: enable=line-too-long
 
   name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  name_builder_kwargs.update(builder_kwargs or {})
+  name_builder_kwargs.update( \
+    (k, v) for k, v in (builder_kwargs or {}).items() if v is not None)
   builder_kwargs = name_builder_kwargs
 
   # Set data_dir
