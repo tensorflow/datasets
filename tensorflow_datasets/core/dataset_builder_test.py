@@ -324,6 +324,18 @@ class DatasetBuilderTest(testing.TestCase):
     self.assertIsNotNone(builder)
     with self.assertRaisesWithPredicateMatch(AssertionError, expected):
       builder.download_and_prepare()
+      
+  def test_with_old_versions(self):
+    expected = (
+        "The version of the dataset you are trying to use"
+        " (dummy_dataset_shared_generator:0.0.8) cannot be"
+        " generated as this version is too older to use."
+        " Please  use another new availble version of the dataset"
+        " (new availble version: ['1.0.0', '2.0.0'])")
+    builder = DummyDatasetSharedGenerator(version="0.0.8")
+    self.assertIsNotNone(builder)
+    with self.assertRaisesWithPredicateMatch(AssertionError, expected):
+      builder.download_and_prepare()
 
   def test_invalid_split_dataset(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
