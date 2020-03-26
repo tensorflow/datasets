@@ -13,3 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+"""Public API of the proto package."""
+# pylint: disable=g-import-not-at-top,g-importing-member, import-outside-toplevel
+
+
+def _get():
+  from tensorflow_datasets.proto import waymo_dataset_generated_pb2 as waymo_dataset_pb2_
+  return waymo_dataset_pb2_
+
+
+waymo_dataset_pb2 = _get()  # pylint: disable=invalid-name
+del _get
+
