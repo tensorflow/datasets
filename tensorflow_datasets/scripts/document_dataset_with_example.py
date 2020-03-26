@@ -18,7 +18,7 @@ import tensorflow_datasets as tfds
 from absl import app
 from tensorflow_datasets.scripts import document_datasets
 
-FIG_DIR = ('../docs/catalog/')
+FIG_DIR = '../docs/catalog/'
 
 def generate_docs_with_visualization(ds_name):
   """
