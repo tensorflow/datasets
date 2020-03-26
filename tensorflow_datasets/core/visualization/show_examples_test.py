@@ -14,27 +14,33 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Tests for tensorflow_datasets.core.visualization."""
+"""Tests for `tensorflow_datasets.core.visualization.show_examples`."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
 import mock
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visualization
 
+# Import for registration
+from tensorflow_datasets.image import imagenet  # pylint: disable=unused-import,g-bad-import-order
 
-class VisualizationTest(testing.TestCase):
 
-  @mock.patch("matplotlib.pyplot.figure")
+class ShowExamplesTest(testing.TestCase):
+
+  @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples(self, mock_fig):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-    builder.download_and_prepare()
-    ds = builder.as_dataset(split="train")
-    visualization.show_examples(builder.info, ds)
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = registered.load(
+          'imagenet2012', split='train', with_info=True)
+    visualization.show_examples(ds_info, ds)
+
+  # TODO(tfds): Should add test when there isn't enough examples (ds.take(3))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   testing.test_main()

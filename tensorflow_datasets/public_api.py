@@ -27,6 +27,7 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
+from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -60,5 +61,6 @@ __all__ = [
     "disable_progress_bar",
     "is_dataset_on_gcs",
     "show_examples",
+    "visualization",
     "__version__",
 ]
