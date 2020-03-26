@@ -315,11 +315,11 @@ class DatasetBuilderTest(testing.TestCase):
 
   def test_non_preparable_version(self, *unused_mocks):
     expected = (
-        "The version of the dataset you are trying to use ("
-        "dummy_dataset_shared_generator:0.0.7) can only be generated using TFDS"
-        " code synced @ v1.0.0 or earlier. Either sync to that version of TFDS "
-        "to first prepare the data or use another version of the dataset "
-        "(available for `download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
+        "The version of the dataset you are trying to use"
+        " (dummy_dataset_shared_generator:0.0.7) cannot be"
+        " generated as this version is too older version to use."
+        " Please use another new availble version of the dataset"
+        " (available for `download_and_prepare`:{'2.0.0', '1.0.0'}).")
     builder = DummyDatasetSharedGenerator(version="0.0.7")
     self.assertIsNotNone(builder)
     with self.assertRaisesWithPredicateMatch(AssertionError, expected):
@@ -328,11 +328,12 @@ class DatasetBuilderTest(testing.TestCase):
   def test_with_old_versions(self):
     expected = (
         "The version of the dataset you are trying to use"
-        " (dummy_dataset_shared_generator:0.0.8) cannot be"
-        " generated as this version is too older to use."
-        " Please  use another new availble version of the dataset"
-        " (new availble version: ['1.0.0', '2.0.0'])")
-    builder = DummyDatasetSharedGenerator(version="0.0.8")
+        " (dummy_mnist:0.0.8) cannot be generated as this"
+        " version is too older version to use. Please use"
+        " another new availble version of the dataset"
+        " (available for `download_and_prepare`:{'2.0.0', '1.0.0'}).")
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(version="0.0.8",data_dir=tmp_dir)
     self.assertIsNotNone(builder)
     with self.assertRaisesWithPredicateMatch(AssertionError, expected):
       builder.download_and_prepare()
