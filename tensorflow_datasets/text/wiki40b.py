@@ -42,7 +42,7 @@ http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
 Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 """
 
-_URL = "https://www.tensorflow.org/datasets/catalog/wiki40b"
+_URL = "https://research.google/pubs/pub49029/"
 
 _DATA_DIRECTORY = "/bigstore/tfds-data/downloads/wiki40b/tfrecord_prod"
 
