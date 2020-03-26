@@ -16,6 +16,7 @@ imagenet2012_subset/1pct/5.0.0
 savee/1.0.0
 so2sat/all/2.0.0
 so2sat/rgb/2.0.0
+tedlium/1.0.0
 waymo_open_dataset/0.1.0
 wiki40b/Wiki40B.ar/1.0.0
 wiki40b/Wiki40B.bg/1.0.0

@@ -35,6 +35,7 @@ for ex in tfds.as_numpy(ds):
 *   [`nsynth`](nsynth.md)
 *   [`savee`](savee.md)
 *   [`speech_commands`](speech_commands.md)
+*   [`tedlium`](tedlium.md)
 
     ### `Image`
 
