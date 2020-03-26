@@ -197,14 +197,16 @@ def main(_):
     if len(builders) > 1:
       raise ValueError(
           "--builder_config_id can only be used when building a single dataset")
-    builder = builders[list(builders.keys())[0]]
+    name, builder = list(builders.items())[0]
     if not builder.BUILDER_CONFIGS:
       raise ValueError(
           "--builder_config_id can only be used with datasets with configs")
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
+    # Pass the original `name`. `builder.name` strips of configs and 
+    # version number
     builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config, **version_kwarg)
+        name, data_dir=FLAGS.data_dir, config=config, **version_kwarg)
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -212,8 +214,10 @@ def main(_):
         # If builder has multiple configs, and no particular config was
         # requested, then compute all.
         for config in builder.BUILDER_CONFIGS:
+          # Pass the original `name`. `builder.name` strips of configs 
+          # and version number
           builder_for_config = tfds.builder(
-              builder.name,
+              name,
               data_dir=FLAGS.data_dir,
               config=config,
               **version_kwarg)
