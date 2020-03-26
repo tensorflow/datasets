@@ -14,15 +14,25 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Audio datasets."""
+"""Tests for tedlium dataset module."""
 
-from tensorflow_datasets.audio.crema_d import CremaD
-from tensorflow_datasets.audio.groove import Groove
-from tensorflow_datasets.audio.librispeech import Librispeech
-from tensorflow_datasets.audio.librispeech import LibrispeechConfig
-from tensorflow_datasets.audio.libritts import Libritts
-from tensorflow_datasets.audio.ljspeech import Ljspeech
-from tensorflow_datasets.audio.nsynth import Nsynth
-from tensorflow_datasets.audio.savee import Savee
-from tensorflow_datasets.audio.speech_commands import SpeechCommands
-from tensorflow_datasets.audio.tedlium import Tedlium
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.audio import tedlium
+import tensorflow_datasets.public_api as tfds
+
+
+class TedliumTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = tedlium.Tedlium
+  SPLITS = {
+      tfds.Split.TRAIN: 4,
+      tfds.Split.TEST: 1,
+      tfds.Split.VALIDATION: 1,
+  }
+
+
+if __name__ == "__main__":
+  testing.test_main()
