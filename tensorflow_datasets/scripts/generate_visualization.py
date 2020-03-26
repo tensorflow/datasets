@@ -12,12 +12,12 @@ Typical usage example:
 """
 
 import os
-import tensorflow_datasets as tfds
 from PIL import Image
 from absl import app
 import matplotlib.pyplot
+import tensorflow_datasets as tfds
 
-FIG_DIR = '../docs/catalog/images/examples/'
+FIG_DIR = '../docs/catalog/images/'
 
 def generate_visualization(ds_name):
   """
