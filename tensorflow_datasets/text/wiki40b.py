@@ -138,8 +138,8 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
       text = example.features.feature[
           "text"].bytes_list.value[0].decode("utf-8")
 
-      yield wikidata_id, {"wikidata_id": wikidata_id,
-                          "text": text,}
+      # wikidata_id could be duplicated with different texts.
+      yield wikidata_id + text, {"wikidata_id": wikidata_id, "text": text,}
 
     return (
         pipeline
