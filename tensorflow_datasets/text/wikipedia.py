@@ -116,7 +116,7 @@ class WikipediaConfig(tfds.core.BuilderConfig):
 
 
 _VERSION = tfds.core.Version(
-    "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
 
 class Wikipedia(tfds.core.BeamBasedBuilder):
@@ -127,7 +127,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
           language=lang,
-          date="20190301",
+          date="20200301",
       ) for lang in WIKIPEDIA_LANGUAGES
   ]
 
