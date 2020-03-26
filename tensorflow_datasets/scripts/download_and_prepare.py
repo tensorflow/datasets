@@ -180,8 +180,11 @@ def main(_):
   logging.info("Running download_and_prepare for datasets:\n%s",
                "\n".join(datasets_to_build))
   logging.info('Version: "%s"', version)
+  kwargs = {"data_dir": FLAGS.data_dir}
+  if version is not None:
+    kwargs.update(("version", version))
   builders = {
-      name: tfds.builder(name, data_dir=FLAGS.data_dir, version=version)
+      name: tfds.builder(name, **kwargs)
       for name in datasets_to_build
   }
 
@@ -196,8 +199,8 @@ def main(_):
           "--builder_config_id can only be used with datasets with configs")
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
-    builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config, version=version)
+    kwargs.update({("config", config)})
+    builder_for_config = tfds.builder(builder.name, **kwargs)
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -205,9 +208,8 @@ def main(_):
         # If builder has multiple configs, and no particular config was
         # requested, then compute all.
         for config in builder.BUILDER_CONFIGS:
-          builder_for_config = tfds.builder(
-              builder.name, data_dir=FLAGS.data_dir, config=config,
-              version=version)
+          kwargs.update({("config", config)})
+          builder_for_config = tfds.builder(name, **kwargs)
           download_and_prepare(builder_for_config)
       else:
         # If there is a slash in the name, then user requested a specific
