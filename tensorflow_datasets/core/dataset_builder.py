@@ -286,39 +286,19 @@ class DatasetBuilder(object):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
-    if self.version.tfds_version_to_prepare:
-      available_to_prepare = ", ".join(str(v) for v in self.versions
-                                       if not v.tfds_version_to_prepare)
-      raise AssertionError(
-          "The version of the dataset you are trying to use ({}:{}) can only "
-          "be generated using TFDS code synced @ {} or earlier. Either sync to "
-          "that version of TFDS to first prepare the data or use another "
-          "version of the dataset (available for `download_and_prepare`: "
-          "{}).".format(
-              self.name, self.version, self.version.tfds_version_to_prepare,
-              available_to_prepare))
-
     # Check if requested version is canonical version or max(self.versions)
+    # Also check for tfds_version_to_prepare.
     # if not raises error as tfds not supports older versions of datasets.
-    new_versions = [str(v) for v in [self.canonical_version] + [max(self.versions)]]
-    if str(self._version) not in new_versions:
-      # if canonical and maximum versions are same then suggest only one version
-      if max(self.versions) != self.canonical_version:
-        raise AssertionError(
-            "The version of the dataset you are trying to use ({}:{}) cannot"
-            " be generated as this version is too older version to use. Please "
-            " use another new availble version of the dataset"
-            " (available for `download_and_prepare`: "
-            "{}).".format(
-                self.name, self.version, new_versions))
-      else:
-        raise AssertionError(
-            "The version of the dataset you are trying to use ({}:{}) cannot"
-            " be generated as this version is too older version to use. Please "
-            " use another new availble version of the dataset"
-            " (available for `download_and_prepare`: "
-            "{}).".format(
-                self.name, self.version, new_versions[0]))
+    new_versions = set(str(v) for v in [self.canonical_version] + [max(self.versions)]
+                        if not v.tfds_version_to_prepare)
+    msg = ("The version of the dataset you are trying to use ({}:{}) cannot"
+           " be generated as this version is too older version to use. Please"
+           " use another new availble version of the dataset"
+           " (available for `download_and_prepare`:{}).")
+    if (str(self._version) not in new_versions) or (self.version.tfds_version_to_prepare):
+      raise AssertionError(msg.format(
+           self.name, self.version, new_versions))
+      
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
     # it will always be reloaded and data_dir will be set at construction.
