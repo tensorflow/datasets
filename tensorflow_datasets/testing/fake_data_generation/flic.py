@@ -93,7 +93,7 @@ def _generate_mat(data, train_fname, test_fname):
   scipy.io.savemat(dirname, data)
 
 
-def main(unused_argv):
+def main(_):
   _generate_image("small", "images", "example_movie00000001.jpg")
   _generate_image("small", "images", "example_movie00000002.jpg")
   _generate_mat("small", "example_movie00000001.jpg",

@@ -14,6 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
+# pylint: disable = missing-class-docstring, missing-function-docstring
 """Tests for tensorflow_datasets.core.test_utils."""
 
 from __future__ import absolute_import
@@ -57,14 +58,14 @@ class RunInGraphAndEagerTest(test_case.TestCase):
 
     class ExampleTest(test_case.TestCase):
 
-      def runTest(self):
+      def runTest(self): # pylint: disable = invalid-name
         pass
 
-      def setUp(self):
+      def setUp(self): # pylint: disable = invalid-name
         modes.append("setup_" + mode_name())
 
       @test_utils.run_in_graph_and_eager_modes
-      def testBody(self):
+      def testBody(self): # pylint: disable = invalid-name
         modes.append("run_" + mode_name())
 
     e = ExampleTest()

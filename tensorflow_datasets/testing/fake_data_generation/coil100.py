@@ -53,7 +53,7 @@ def create_images(label):
 
 def main(argv):
   del argv
-  label = [x for x in range(0, 25, 5)]
+  label = list(range(0, 25, 5))
   create_images(label)
 
 

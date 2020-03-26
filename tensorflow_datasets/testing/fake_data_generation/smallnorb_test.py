@@ -29,6 +29,7 @@ from tensorflow_datasets.testing.fake_data_generation import smallnorb as smalln
 
 
 class SmallnorbTest(parameterized.TestCase):
+  """A class for testing Smallnorb dataset"""
 
   @parameterized.named_parameters(
       ("uint8", np.array([[1, 2, 3], [1, 2, 3]], dtype=np.dtype("|u1"))),

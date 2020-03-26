@@ -256,7 +256,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_DOWNLOAD_RESULT)
 
-  def _download_checksums(self, url):
+  def _download_checksums(self, _):
     self._stop_record_download = True
 
   def _make_builder(self, config=None):
@@ -267,6 +267,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    """Test download and prepare function on fake testing dataset"""
     # If configs specified, ensure they are all valid
     if self.BUILDER_CONFIG_NAMES_TO_TEST:
       for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
@@ -295,7 +296,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         self._test_checksums()
 
   def _test_checksums(self):
-    # If no call to `dl_manager.download`, then no need to check url presence.
+    """If no call to `dl_manager.download`, then no need to check url presence"""
     if not self._download_urls:
       return
 
@@ -312,13 +313,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEmpty(
         missing_urls,
         "Some urls checksums are missing at: {} "
-        "Did you forgot to record checksums with `--register_checksums` ? "
+        "Did you forget to record checksums with `--register_checksums` ? "
         "See instructions at: "
         "https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally"
         "\n{}".format(filepath, err_msg)
     )
 
   def _download_and_prepare_as_dataset(self, builder):
+    """A utility function"""
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
     # set.
 
@@ -367,7 +369,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       with self._subTest("as_dataset"):
         self._assertAsDataset(builder_reloaded)
 
-  def _assertAsDataset(self, builder):
+  def _assertAsDataset(self, builder): # pylint: disable = invalid-name, missing-function-docstring
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
       ds = builder.as_dataset(split=split_name)
@@ -392,7 +394,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
            "have the same objects in those splits? If yes, add one one of "
            "them to OVERLAPPING_SPLITS class attribute.") % (split1, split2))
 
-  def _assertNumSamples(self, builder):
+  def _assertNumSamples(self, builder): # pylint: disable = invalid-name
     for split_name, expected_num_examples in self.SPLITS.items():
       self.assertEqual(
           builder.info.splits[split_name].num_examples,

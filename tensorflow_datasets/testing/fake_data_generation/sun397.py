@@ -28,9 +28,9 @@ import random
 import tarfile
 import tempfile
 
+import md5
 from absl import app
 from absl import flags
-import md5
 
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils

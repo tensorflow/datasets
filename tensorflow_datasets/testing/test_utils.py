@@ -73,7 +73,7 @@ def fake_examples_dir():
   return os.path.join(os.path.dirname(__file__), "test_data", "fake_examples")
 
 
-class FeatureExpectationItem(object):
+class FeatureExpectationItem():
   """Test item of a FeatureExpectation."""
 
   def __init__(
@@ -111,7 +111,7 @@ class SubTestCase(test_case.TestCase):
     cls._sub_test_stack = []
 
   @contextlib.contextmanager
-  def _subTest(self, test_str):
+  def _subTest(self, test_str): # pylint: disable = invalid-name, missing-function-docstring
     sub_test_not_implemented = True
     if sub_test_not_implemented:
       yield
@@ -122,7 +122,7 @@ class SubTestCase(test_case.TestCase):
         yield
       self._sub_test_stack.pop()
 
-  def assertAllEqualNested(self, d1, d2):
+  def assertAllEqualNested(self, d1, d2): # pylint: disable = invalid-name
     """Same as assertAllEqual but compatible with nested dict."""
     if isinstance(d1, dict):
       # assertAllEqual do not works well with dictionaries so assert
@@ -213,7 +213,7 @@ def run_in_graph_and_eager_modes(func=None,
   return decorator
 
 
-class RaggedConstant(object):
+class RaggedConstant():
   """Container of tf.ragged.constant values.
 
   This simple wrapper forward the arguments to delay the RaggedTensor
@@ -233,7 +233,7 @@ class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
   @run_in_graph_and_eager_modes()
-  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
+  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None): # pylint: disable = invalid-name
     """Test the given feature against the predicates."""
 
     # Check the shape/dtype
@@ -264,7 +264,7 @@ class FeatureExpectationsTestCase(SubTestCase):
             dtype=dtype,
         )
 
-  def assertFeatureTest(self, fdict, test, feature, shape, dtype):
+  def assertFeatureTest(self, fdict, test, feature, shape, dtype): # pylint: disable = invalid-name
     """Test that encode=>decoding of a value works correctly."""
     # test feature.encode_example can be pickled and unpickled for beam.
     dill.loads(dill.dumps(feature.encode_example))
@@ -385,7 +385,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
             gen_kwargs={"range_": range(20, 30)}),
     ]
 
-  def _generate_examples(self, range_):
+  def _generate_examples(self, range_): # pylint: disable = arguments-differ
     for i in range_:
       yield i, {"x": i}
 
@@ -415,7 +415,7 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
             gen_kwargs=dict()),
     ]
 
-  def _generate_examples(self):
+  def _generate_examples(self): # pylint: disable = arguments-differ
     for i in range(20):
       yield i, {
           "image": np.ones((28, 28, 1), dtype=np.uint8),
@@ -479,9 +479,8 @@ def mock_kaggle_api(filenames=None, err_msg=None):
     def check_output(command_args):
       if command_args[2] == "files":
         return files_call(command_args)
-      else:
-        assert command_args[2] == "download"
-        return dl_call(command_args)
+      assert command_args[2] == "download"
+      return dl_call(command_args)
 
     return check_output
 
@@ -490,7 +489,7 @@ def mock_kaggle_api(filenames=None, err_msg=None):
     yield
 
 
-class DummySerializer(object):
+class DummySerializer():
   """To mock example_serializer.ExampleSerializer."""
 
   def __init__(self, specs):
@@ -500,7 +499,7 @@ class DummySerializer(object):
     return bytes(example)
 
 
-class DummyParser(object):
+class DummyParser():
   """To mock example_parser.ExampleParser."""
 
   def __init__(self, specs):
@@ -508,4 +507,3 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
-
