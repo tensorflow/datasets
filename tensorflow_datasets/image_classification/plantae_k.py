@@ -89,7 +89,7 @@ class PlantaeK(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "image_classification/filename": tfds.features.Text(),
+            "image/filename": tfds.features.Text(),
             "label": tfds.features.ClassLabel(names=labels)
         }),
         supervised_keys=("image", "label"),
@@ -135,7 +135,7 @@ class PlantaeK(tfds.core.GeneratorBasedBuilder):
         label = label_map[match.group(1)]
         record = {
             "image": fpath,
-            "image_classification/filename": original_fname,
+            "image/filename": original_fname,
             "label": label,
         }
         yield original_fname, record

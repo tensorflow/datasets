@@ -61,7 +61,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names_file=names_file),
-            "image_classification/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
+            "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
         homepage=_URL,
@@ -133,7 +133,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
               record = {
                   "image": image_path,
                   "label": d.lower(),
-                  "image_classification/file_name": image_file,
+                  "image/file_name": image_file,
               }
               yield "%s/%s" % (d, image_file), record
     # Resets the seeds to their previous states.
