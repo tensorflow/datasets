@@ -149,6 +149,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Generate Splits"""
     def _base_url(lang):
       return _BASE_URL_TMPL.format(
           lang=lang.replace("-", "_"), date=self._builder_config.date)
@@ -203,7 +204,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         # To clear root, to free-up more memory than just `elem.clear()`.
         context = etree.iterparse(utf_f, events=("end",))
         context = iter(context)
-        unused_event, root = next(context)
+        unused_event, root = next(context) # pylint: disable=stop-iteration-return
         for unused_event, elem in context:
           if not elem.tag.endswith("page"):
             continue
