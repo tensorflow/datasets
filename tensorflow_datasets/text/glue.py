@@ -253,7 +253,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       GlueConfig(
           name="mnli",
           description=textwrap.dedent("""\
-            The Multi-Genre Natural Language Inference Corpusn is a crowdsourced
+            The Multi-Genre Natural Language Inference Corpus is a crowdsourced
             collection of sentence pairs with textual entailment annotations. Given a premise sentence
             and a hypothesis sentence, the task is to predict whether the premise entails the hypothesis
             (entailment), contradicts the hypothesis (contradiction), or neither (neutral). The premise sentences are
