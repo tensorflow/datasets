@@ -17,7 +17,7 @@ from PIL import Image
 from absl import app
 import matplotlib.pyplot
 
-FIG_DIR = ('../docs/catalog/images/examples/')
+FIG_DIR = '../docs/catalog/images/examples/'
 
 def generate_visualization(ds_name):
   """
