@@ -31,7 +31,7 @@ from tensorflow_datasets.scripts import document_datasets
 
 
 class BuildDocsTest(absltest.TestCase):
-
+  """Test for document_datasets module"""
   def setUp(self):
     super(BuildDocsTest, self).setUp()
     self.workdir = tempfile.mkdtemp()
@@ -40,6 +40,7 @@ class BuildDocsTest(absltest.TestCase):
     os.makedirs(self.workdir)
 
   def test_api_gen(self):
+    """Test API generation"""
     build_docs.build_api_docs(
         output_dir=self.workdir,
         code_url_prefix="",
