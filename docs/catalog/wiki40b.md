@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="wiki40b" />
   <meta itemprop="description" content="&#10;Clean-up text for 40+ Wikipedia languages editions of pages&#10;correspond to entities. The datasets have train/dev/test splits per language.&#10;The dataset is cleaned up by page filtering to remove disambiguation pages,&#10;redirect pages, deleted pages, and non-entity pages. Each example contains the&#10;wikidata id of the entity, and the full Wikipedia article after page processing&#10;that removes non-content sections and structured objects.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wiki40b&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wiki40b" />
   <meta itemprop="sameAs" content="https://www.tensorflow.org/datasets/catalog/wiki40b" />
   <meta itemprop="citation" content="&#10;" />
 </div>
-
 # `wiki40b`
 
 *   **Description**:
@@ -45,7 +43,6 @@ FeaturesDict({
     'wikidata_id': Text(shape=(), dtype=tf.string),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`

@@ -14,8 +14,6 @@ image_label_folder/2.0.0
 imagenet2012_subset/10pct/5.0.0
 imagenet2012_subset/1pct/5.0.0
 savee/1.0.0
-scientific_papers/arxiv/1.1.1
-scientific_papers/pubmed/1.1.1
 so2sat/all/2.0.0
 so2sat/rgb/2.0.0
 waymo_open_dataset/0.1.0
