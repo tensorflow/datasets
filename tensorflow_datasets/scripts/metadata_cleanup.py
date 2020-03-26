@@ -24,7 +24,6 @@ for meta_dir in meta_dirs:
 
 number_of_meta_removed = 0
 for i in range(0,len(paths)):
-    
     if paths[i] not in registered_versions:
         number_of_meta_removed+=1
         shutil.rmtree(os.path.join(os.pardir, "testing/metadata",paths[i]))
