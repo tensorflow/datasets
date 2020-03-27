@@ -1,0 +1,1 @@
+https://s3.amazonaws.com/fast-ai-imageclas/imagewoof2.tgz 1343482285 d6f2ffc7b95663f7701b94cea32db1683b9a50dd389382c7cca024e840af0379
