@@ -129,11 +129,9 @@ class Groove(tfds.core.GeneratorBasedBuilder):
             "primary": tfds.features.ClassLabel(names=_PRIMARY_STYLES),
             "secondary": tf.string,
         },
-        "midi": tf.string
+        "midi": tf.string,
+        'audio': tfds.features.Audio(file_format='wav')
     }
-    if self.builder_config.include_audio:
-      features_dict["audio"] = tfds.features.Audio(
-          shape=[None], file_format='wav')
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
