@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ _METADATA_PREFIXES = ("WARC", "CONTENT-", "Content-")
 # Filters
 _MIN_WORDS_PER_LINE = 5
 _MIN_NUM_SENTENCES = 3
+_MAX_WORD_LENGTH = 1000
 _END_MARKS = (".", "?", "!", "\"")
 _ELLIPSIS = "..."
 _POLICY_SUBSTRINGS = [
@@ -57,6 +58,15 @@ def get_counter_inc_fn(namespace):
     tfds.core.lazy_imports.apache_beam.metrics.Metrics.counter(
         namespace, counter).inc(amt)
   return counter_inc_fn
+
+
+def get_hashed_url_filter_fn(predicate_fn):
+  def filter_fn(el):
+    url, _ = el
+    val = int(
+        hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16)
+    return predicate_fn(val)
+  return filter_fn
 
 
 def _load_sentence_tokenizer():
@@ -134,7 +144,8 @@ def clean_page(url_and_features,
                badwords_regex=None,
                counter_inc_fn=None,
                min_words_per_line=_MIN_WORDS_PER_LINE,
-               min_num_sentences=_MIN_NUM_SENTENCES):
+               min_num_sentences=_MIN_NUM_SENTENCES,
+               max_word_length=_MAX_WORD_LENGTH):
   """Cleans a CommonCrawl page, yielding nothing if it should be skipped.
 
   Cleaning removes lines with no end marks or with too few words. After line
@@ -152,6 +163,8 @@ def clean_page(url_and_features,
       removed.
     min_num_sentences: int, the minimum number of sentences a page needs to not
       be skipped.
+    max_word_length: int, the maximum number of characters allowed in a word.
+      Lines containing a word with too many characters are removed.
   Yields:
     The url and cleaned text for the page.
   """
@@ -165,8 +178,17 @@ def clean_page(url_and_features,
   valid_lines = []
   num_sentences = 0
 
+  def line_has_too_long_word(line):
+    for word in line.split():
+      if len(word) > max_word_length:
+        return True
+    return False
+
   for line in lines:
     line = line.strip()
+    if line_has_too_long_word(line):
+      counter_inc_fn("lines-with-too-long-word")
+      continue
     line = citation_regex.sub("", line)
     if not line.endswith(_END_MARKS) or line.endswith(_ELLIPSIS):
       counter_inc_fn("lines-no-endmark")
@@ -177,7 +199,7 @@ def clean_page(url_and_features,
     line_lower = line.lower()
     # Remove documents which contain lorem ipsum
     if "lorem ipsum" in line_lower:
-      counter_inc_fn("filtered-url-loremipsum")
+      counter_inc_fn("filtered-page-loremipsum")
       return
     # Remove "javascript must be enabled" notices
     if "javascript" in line_lower:
@@ -185,7 +207,7 @@ def clean_page(url_and_features,
       continue
     # Remove docs which probably contain javascript code
     if "{" in line:
-      counter_inc_fn("filtered-url-squigglybracket")
+      counter_inc_fn("filtered-page-squigglybracket")
       return
     # Remove policy lines
     if any(p in line_lower for p in _POLICY_SUBSTRINGS):
@@ -195,14 +217,14 @@ def clean_page(url_and_features,
     if badwords_regex:
       badwords_found = badwords_regex.search(line_lower)
       if badwords_found is not None:
-        counter_inc_fn("filtered-url-badword")
+        counter_inc_fn("filtered-page-badword")
         return
     num_sentences += len(_get_sentences(line))
     valid_lines.append(line)
     counter_inc_fn("lines-valid")
 
   if num_sentences < min_num_sentences:
-    counter_inc_fn("filtered-url-toofewsentences")
+    counter_inc_fn("filtered-page-toofewsentences")
     return
   counter_inc_fn("emitted-clean-pages")
   features["text"] = "\n".join(valid_lines).strip()
@@ -223,20 +245,21 @@ def _emit_url_to_lines(page):
     yield _hash_line(line), url
 
 
-def _emit_line_to_urls(el, counter_inc_fn, skip_n=1):
-  """Emits (hashed) line to all but `skip_n` urls."""
+def _emit_line_to_urls(el, counter_inc_fn):
+  """Emits (hashed) line to all but one url."""
   line, urls = el
+  # Materialize urls as a list.
+  urls = list(urls)
   # Hash urls and sort to have a consistent, but unbiased, selection when the
   # same urls exist for multiple lines.
-  sorted_urls = sorted(
+  skip_url = min(
       urls,
       key=lambda x: hashlib.md5(tf.compat.as_text(x).encode("utf-8")).
       hexdigest())
-  del sorted_urls[:skip_n]
-  if sorted_urls:
-    counter_inc_fn("emitted-lines-duplicate")
-    for url in sorted_urls:
+  for url in urls:
+    if url != skip_url:
       yield url, line
+  counter_inc_fn("emitted-line-duplicate", amt=len(urls)-1)
 
 
 def _remove_lines_from_text(
@@ -272,11 +295,14 @@ def _remove_lines_from_text(
   text = features["text"]
   lines_to_remove = set(join_values["lines"])
   new_lines = []
+  hashed_lines = set()
   for line in text.split("\n"):
-    if _hash_line(line) in lines_to_remove:
+    hashed_line = _hash_line(line)
+    if hashed_line in lines_to_remove:
       counter_inc_fn("filtered-lines-duplicate")
-    else:
+    elif hashed_line not in hashed_lines:
       new_lines.append(line)
+      hashed_lines.add(hashed_line)
   new_text = "\n".join(new_lines)
   if len(_get_sentences(new_text)) < min_num_sentences:
     counter_inc_fn("filtered-doc-toofewsentences")
@@ -328,7 +354,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
     def _maybe_get_page():
       """Generate a (url, {features}) page."""
       if not url and url is not None:
-        counter_inc_fn("page-filitered-nourl")
+        counter_inc_fn("page-filtered-nourl")
       if not content and content is not None:
         counter_inc_fn("page-filtered-nocontent")
       if not content_type and content_type is not None:
@@ -398,11 +424,11 @@ def dedupe_urls(el):
 
 
 def is_valid_length(el, max_length=1.9e5):
-  """Returns False iff page's content is too long."""
+  """Returns False iff page's text is too long."""
   counter_inc_fn = get_counter_inc_fn("is-valid-length")
-  _, content = el
-  if len(content) > max_length:
-    counter_inc_fn("filtered-url-contenttoolong")
+  _, page = el
+  if len(page["text"]) > max_length:
+    counter_inc_fn("filtered-page-contenttoolong")
     return False
   counter_inc_fn("valid-length")
   return True

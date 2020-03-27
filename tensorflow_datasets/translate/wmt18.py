@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """WMT18: Translate dataset."""
 
 import tensorflow_datasets.public_api as tfds
@@ -46,18 +47,13 @@ class Wmt18Translate(wmt.WmtTranslate):
 
   # Version history:
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.3: Initial version.
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
           description="WMT 2018 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version=tfds.core.Version(
-              "0.0.3", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version("1.0.0"),
-          ],
+          version=tfds.core.Version("1.0.0"),
       ) for l1, l2 in _LANGUAGE_PAIRS
   ]
 

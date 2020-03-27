@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Video feature."""
 from __future__ import absolute_import
 from __future__ import division
@@ -169,6 +170,12 @@ class Video(sequence_feature.Sequence):
           os.unlink(video_temp_path)
       else:
         encoded_video = self._ffmpeg_decode(video_or_path_or_fobj)
+    elif isinstance(video_or_path_or_fobj, bytes):
+      with tempfile.TemporaryDirectory() as tmpdirname:
+        video_temp_path = os.path.join(tmpdirname, 'video')
+        with tf.io.gfile.GFile(video_temp_path, 'wb') as f:
+          f.write(video_or_path_or_fobj)
+        encoded_video = self._ffmpeg_decode(video_temp_path)
     elif hasattr(video_or_path_or_fobj, 'read'):
       encoded_video = self._ffmpeg_decode(video_or_path_or_fobj)
     else:

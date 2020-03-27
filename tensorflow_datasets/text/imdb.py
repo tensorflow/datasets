@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """IMDB movie reviews dataset."""
 
 from __future__ import absolute_import
@@ -64,12 +65,8 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
     """
     super(IMDBReviewsConfig, self).__init__(
         version=tfds.core.Version(
-            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
-        ],
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -137,17 +134,14 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "train")}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "test")}),
         tfds.core.SplitGenerator(
             name=tfds.Split("unsupervised"),
-            num_shards=20,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "train"),
                         "labeled": False}),

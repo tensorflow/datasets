@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Access registered datasets."""
 
 from __future__ import absolute_import
@@ -78,6 +79,8 @@ The builder name string must be of the following format:
 
 _DATASET_NOT_FOUND_ERR = """\
 Check that:
+    - if dataset was added recently, it may only be available
+      in `tfds-nightly`
     - the dataset name is spelled correctly
     - dataset class defines all base class abstract methods
     - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
@@ -106,11 +109,11 @@ class DatasetNotFoundError(ValueError):
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
 
-  def __new__(mcs, cls_name, bases, class_dict):
+  def __new__(cls, cls_name, bases, class_dict):
     name = naming.camelcase_to_snakecase(cls_name)
     class_dict["name"] = name
-    cls = super(RegisteredDataset, mcs).__new__(
-        mcs, cls_name, bases, class_dict)
+    builder_cls = super(RegisteredDataset, cls).__new__(  # pylint: disable=too-many-function-args
+        cls, cls_name, bases, class_dict)
 
     if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
       pass
@@ -123,13 +126,13 @@ class RegisteredDataset(abc.ABCMeta):
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
-    if inspect.isabstract(cls):
-      _ABSTRACT_DATASET_REGISTRY[name] = cls
+    if inspect.isabstract(builder_cls):
+      _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
     elif class_dict.get("IN_DEVELOPMENT"):
-      _IN_DEVELOPMENT_REGISTRY[name] = cls
+      _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
     else:
-      _DATASET_REGISTRY[name] = cls
-    return cls
+      _DATASET_REGISTRY[name] = builder_cls
+    return builder_cls
 
 
 def list_builders():

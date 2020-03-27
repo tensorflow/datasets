@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """dSprites dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
 
 import h5py
 import numpy as np
@@ -69,12 +69,8 @@ while ensuring that all pixel outputs were different. No noise was added.
 class Dsprites(tfds.core.GeneratorBasedBuilder):
   """dSprites data set."""
 
-  VERSION = tfds.core.Version("0.1.0",
-                              experiments={tfds.core.Experiment.S3: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-  ]
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -115,7 +111,6 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs=dict(filepath=filepath)),
     ]
 
@@ -156,5 +151,3 @@ def _load_data(filepath):
     class_array = np.array(h5dataset["latents"]["classes"])
     values_array = np.array(h5dataset["latents"]["values"])
   return image_array, class_array, values_array
-
-

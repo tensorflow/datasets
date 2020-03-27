@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 # coding=utf-8
 """Tests for tensorflow_datasets.core.features.feature.
 
@@ -22,12 +23,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import textwrap
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class AnInputConnector(features_lib.FeatureConnector):
@@ -206,7 +208,16 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         'label': features_lib.Sequence(label),
     })
 
-    self.assertEqual(repr(feature_dict), FEATURE_STR)
+    self.assertEqual(
+        repr(feature_dict),
+        textwrap.dedent("""\
+        FeaturesDict({
+            'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
+            'metadata': Sequence({
+                'frame': Image(shape=(32, 32, 3), dtype=tf.uint8),
+            }),
+        })"""),
+    )
 
   def test_feature_save_load_metadata_slashes(self):
     with testing.tmp_dir() as data_dir:
@@ -216,14 +227,6 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
       })
       fd.save_metadata(data_dir)
       fd.load_metadata(data_dir)
-
-
-FEATURE_STR = """FeaturesDict({
-    'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
-    'metadata': Sequence({
-        'frame': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    }),
-})"""
 
 
 class FeatureTensorTest(testing.FeatureExpectationsTestCase):
@@ -393,6 +396,39 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
                 raise_msg='Expected binary or unicode string, got 123',
             ),
         ],
+    )
+
+  def test_repr_tensor(self):
+
+    # Top level Tensor is printed expanded
+    self.assertEqual(
+        repr(features_lib.Tensor(shape=(), dtype=tf.int32)),
+        'Tensor(shape=(), dtype=tf.int32)',
+    )
+
+    # Sequences colapse tensor repr
+    self.assertEqual(
+        repr(features_lib.Sequence(tf.int32)),
+        'Sequence(tf.int32)',
+    )
+
+    class ChildTensor(features_lib.Tensor):
+      pass
+
+    self.assertEqual(
+        repr(features_lib.FeaturesDict({
+            'colapsed': features_lib.Tensor(shape=(), dtype=tf.int32),
+            # Tensor with defined shape are printed expanded
+            'noncolapsed': features_lib.Tensor(shape=(1,), dtype=tf.int32),
+            # Tensor inherited are expanded
+            'child': ChildTensor(shape=(), dtype=tf.int32),
+        })),
+        textwrap.dedent("""\
+        FeaturesDict({
+            'child': ChildTensor(shape=(), dtype=tf.int32),
+            'colapsed': tf.int32,
+            'noncolapsed': Tensor(shape=(1,), dtype=tf.int32),
+        })"""),
     )
 
 

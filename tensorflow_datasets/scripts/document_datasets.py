@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Script to document datasets.
 
 To test:
@@ -25,10 +26,10 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+from concurrent import futures
 import os
 
 from absl import app
-from concurrent import futures
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
 from __future__ import absolute_import
@@ -36,7 +37,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
@@ -98,7 +99,7 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
   def _split_generators(self, _):
     return [
         splits_lib.SplitGenerator(
-            name=splits_lib.Split.ALL,  # Error: ALL cannot be used as Split key
+            name="all",  # Error: ALL cannot be used as Split key
         )
     ]
 
@@ -146,7 +147,7 @@ class DatasetBuilderTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
-    from tensorflow_datasets.image import mnist  # pylint:disable=g-import-not-at-top
+    from tensorflow_datasets.image_classification import mnist  # pylint:disable=import-outside-toplevel,g-import-not-at-top
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with absltest.mock.patch.object(
           mnist.MNIST, "_download_and_prepare",
@@ -163,12 +164,12 @@ class DatasetBuilderTest(testing.TestCase):
               data_dir=tmp_dir,
               with_info=True)
       self.assertSetEqual(
-          set(["dataset_info.json", "image.image.json",
-               "mnist-test.counts.txt-00000-of-00001",
+          set(["dataset_info.json",
+               "image.image.json",
                "mnist-test.tfrecord-00000-of-00001",
-               "mnist-train.counts.txt-00000-of-00001"] +
-              ["mnist-train.tfrecord-0000%d-of-00010" % i for i in range(10)]),
-          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/1.0.0"))))
+               "mnist-train.tfrecord-00000-of-00001",
+              ]),
+          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.1"))))
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
 
@@ -260,8 +261,10 @@ class DatasetBuilderTest(testing.TestCase):
 
         self.assertEqual(20, len(train_data))
         self.assertEqual(10, len(test_data))
-        self.assertEqual([incr + el for el in range(30)],
-                         sorted(train_data + test_data))
+        self.assertCountEqual(
+            [incr + el for el in range(30)],
+            train_data + test_data
+        )
 
   def test_read_config(self):
     is_called = []
@@ -324,7 +327,8 @@ class DatasetBuilderTest(testing.TestCase):
 
   def test_invalid_split_dataset(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      with self.assertRaisesWithPredicateMatch(ValueError, "ALL is a special"):
+      with self.assertRaisesWithPredicateMatch(
+          ValueError, "`all` is a special"):
         # Raise error during .download_and_prepare()
         registered.load(
             name="invalid_split_dataset",
@@ -350,7 +354,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
     def load_mnist_dataset_info(self):
       mnist_info_path = os.path.join(
           utils.tfds_dir(),
-          "testing/test_data/dataset_info/mnist/1.0.0",
+          "testing/test_data/dataset_info/mnist/3.0.1",
       )
       mnist_info_path = os.path.normpath(mnist_info_path)
       self.read_from_directory(mnist_info_path)
@@ -535,11 +539,59 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   def test_is_dataset_v1(self):
     # For backward compatibility, ensure that the returned dataset object
-    # is a tf.data.DatasetV1 object.
+    # has make_one_shot_iterator methods.
     with tf.Graph().as_default():
       ds = self.builder.as_dataset(split="train")
+      ds.make_one_shot_iterator()
       ds.make_initializable_iterator()
-      self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
+
+  def test_autocache(self):
+    # All the following should cache
+
+    # Default should cache as dataset is small and has a single shard
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
+    # Multiple shards should cache when shuffling is disabled
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train+test",
+        shuffle_files=False,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
+    # Multiple shards should cache when re-shuffling is disabled
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train+test",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(
+            shuffle_reshuffle_each_iteration=False),
+    ))
+
+    # Sub-split API can cache if only a single shard is selected.
+    self.assertTrue(self.builder._should_cache_ds(
+        split="train+test[:0]",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(),
+    ))
+
+    # All the following should NOT cache
+
+    # Default should not cache if try_autocache is disabled
+    self.assertFalse(self.builder._should_cache_ds(
+        split="train",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(try_autocache=False),
+    ))
+
+    # Multiple shards should not cache when shuffling is enabled
+    self.assertFalse(self.builder._should_cache_ds(
+        split="train+test",
+        shuffle_files=True,
+        read_config=read_config_lib.ReadConfig(),
+    ))
 
 
 

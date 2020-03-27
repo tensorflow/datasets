@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.tfrecords_reader."""
 
 from __future__ import absolute_import
@@ -26,6 +27,8 @@ import os
 from absl.testing import absltest
 import six
 
+import tensorflow.compat.v2 as tf
+
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import example_parser
@@ -33,6 +36,10 @@ from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+
+
+# Skip the cardinality test for backward compatibility with TF <= 2.1.
+_SKIP_CARDINALITY_TEST = not hasattr(tf.data.experimental, 'assert_cardinality')
 
 
 class GetDatasetFilesTest(testing.TestCase):
@@ -44,8 +51,14 @@ class GetDatasetFilesTest(testing.TestCase):
   PATH_PATTERN = '/foo/bar/mnist-train.tfrecord-0000%d-of-00005'
 
   def _get_files(self, instruction):
-    return tfrecords_reader._get_dataset_files(
-        'mnist', '/foo/bar', instruction, self.NAME2SHARD_LENGTHS)
+    file_instructions = tfrecords_reader._make_file_instructions_from_absolutes(
+        name='mnist',
+        name2shard_lengths=self.NAME2SHARD_LENGTHS,
+        absolute_instructions=[instruction],
+    )
+    for fi in file_instructions.file_instructions:
+      fi['filename'] = os.path.join('/foo/bar', fi['filename'])
+    return file_instructions.file_instructions
 
   def test_no_skip_no_take(self):
     instruction = tfrecords_reader._AbsoluteInstruction('train', None, None)
@@ -111,11 +124,11 @@ class GetDatasetFilesTest(testing.TestCase):
     self.assertEqual(files, [])
 
   def test_missing_shard_lengths(self):
-    instruction = tfrecords_reader._AbsoluteInstruction('train', None, None)
-    with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'S3 tfrecords_reader cannot be used'):
-      tfrecords_reader._get_dataset_files(
-          'mnist', '/foo/bar', instruction, {'train': None})
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Shard empty.'):
+      split_info = [
+          splits.SplitInfo(name='train', shard_lengths=[]),
+      ]
+      tfrecords_reader.make_file_instructions('mnist', split_info, 'train')
 
 
 class ReadInstructionTest(testing.TestCase):
@@ -141,8 +154,8 @@ class ReadInstructionTest(testing.TestCase):
     ri = tfrecords_reader.ReadInstruction.from_spec(spec)
     return self.check_from_ri(ri, expected)
 
-  def assertRaises(self, spec, msg):
-    with self.assertRaisesWithPredicateMatch(AssertionError, msg):
+  def assertRaises(self, spec, msg, exc_cls=AssertionError):
+    with self.assertRaisesWithPredicateMatch(exc_cls, msg):
       ri = tfrecords_reader.ReadInstruction.from_spec(spec)
       ri.to_absolute(self.splits)
 
@@ -238,7 +251,8 @@ class ReadInstructionTest(testing.TestCase):
                       'Unrecognized instruction format: validation[:250%:2]')
     # Unexisting split:
     self.assertRaises('imaginary',
-                      'Requested split "imaginary" does not exist')
+                      'Unknown split "imaginary"',
+                      exc_cls=ValueError)
     # Invalid boundaries abs:
     self.assertRaises('validation[:31]',
                       'incompatible with 30 examples')
@@ -301,11 +315,21 @@ class ReaderTest(testing.TestCase):
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijkl'])
 
+    if not _SKIP_CARDINALITY_TEST:
+      # Check that the cardinality is correctly set.
+      self.assertEqual(
+          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
+
   def test_overlap(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
     ds = self.reader.read('mnist', 'train+train[:2]', self.SPLIT_INFOS)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijklab'])
+
+    if not _SKIP_CARDINALITY_TEST:
+      # Check that the cardinality is correctly set.
+      self.assertEqual(
+          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_complex(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -313,6 +337,11 @@ class ReaderTest(testing.TestCase):
     ds = self.reader.read('mnist', 'train[1:-1]+test[:-50%]', self.SPLIT_INFOS)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'bcdefghijkmno'])
+
+    if not _SKIP_CARDINALITY_TEST:
+      # Check that the cardinality is correctly set.
+      self.assertEqual(
+          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_shuffle_files(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -376,6 +405,16 @@ class ReaderTest(testing.TestCase):
         [b'a', b'b', b'c', b'd', b'e', b'f', b'j', b'k', b'l'],
         [b'a', b'b', b'c', b'd', b'e', b'f', b'g', b'h', b'i']])
 
+  def test_read_files(self):
+    self._write_tfrecord('train', 4, 'abcdefghijkl')
+    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    ds = self.reader.read_files(
+        [{'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
+         {'filename': fname_pattern % 3, 'skip': 1, 'take': 1}],
+        read_config=read_config_lib.ReadConfig(),
+        shuffle_files=False)
+    read_data = list(tfds.as_numpy(ds))
+    self.assertEqual(read_data, [six.b(l) for l in 'defk'])
 
 if __name__ == '__main__':
   testing.test_main()

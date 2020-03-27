@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Some python utils function and classes.
 
 """
@@ -58,7 +59,7 @@ def is_notebook():
   """Returns True if running in a notebook (Colab, Jupyter) environement."""
   # Inspired from the tfdm autonotebook code
   try:
-    from IPython import get_ipython  # pylint: disable=g-import-not-at-top
+    from IPython import get_ipython  # pylint: disable=import-outside-toplevel,g-import-not-at-top
     if "IPKernelApp" not in get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except

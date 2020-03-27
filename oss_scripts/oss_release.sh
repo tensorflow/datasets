@@ -28,14 +28,11 @@ git clone https://github.com/tensorflow/datasets.git
 cd datasets
 git checkout $GIT_COMMIT_ID
 
-setup_env tfds_py2 python2.7
-
 echo "Building source distribution"
-python setup.py sdist $SETUP_ARGS
 
 # Build the wheels
-python setup.py bdist_wheel $SETUP_ARGS
 setup_env tfds_py3 python3.6
+python setup.py sdist $SETUP_ARGS
 python setup.py bdist_wheel $SETUP_ARGS
 
 # Publish to PyPI

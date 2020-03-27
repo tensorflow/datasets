@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Public API of tfds, without the registered dataset."""
 
 # pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
@@ -20,11 +21,13 @@ from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
+from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -58,16 +61,6 @@ __all__ = [
     "disable_progress_bar",
     "is_dataset_on_gcs",
     "show_examples",
+    "visualization",
     "__version__",
 ]
-
-
-def _import_testing():
-  try:
-    from tensorflow_datasets import testing  # pylint: disable=redefined-outer-name
-    return testing
-  except:
-    raise   # pylint: disable=unreachable
-
-
-testing = _import_testing()

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Utilities for dealing with tf.data.Dataset."""
 
 from __future__ import absolute_import
@@ -52,7 +53,7 @@ def build_dataset(instruction_dicts,
   # First case: All examples are taken (No value skipped)
   if _no_examples_skipped(instruction_dicts):
     # Only use the filenames as instruction
-    instruction_ds = tf.compat.v1.data.Dataset.from_tensor_slices([
+    instruction_ds = tf.data.Dataset.from_tensor_slices([
         d["filepath"] for d in instruction_dicts
     ])
     build_ds_from_instruction = dataset_from_file_fn
@@ -106,7 +107,7 @@ def _build_instruction_ds(instructions):
       k: np.array(vals, dtype=np.int64) if k == "mask_offset" else list(vals)
       for k, vals in utils.zip_dict(*instructions)
   }
-  return tf.compat.v1.data.Dataset.from_tensor_slices(tensor_inputs)
+  return tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
 
 def _build_mask_ds(mask, mask_offset):
@@ -122,7 +123,7 @@ def _build_mask_ds(mask, mask_offset):
     mask_ds: `tf.data.Dataset`, a dataset returning False for examples to skip
       and True for examples to keep.
   """
-  mask_ds = tf.compat.v1.data.Dataset.from_tensor_slices(mask)
+  mask_ds = tf.data.Dataset.from_tensor_slices(mask)
   mask_ds = mask_ds.repeat()
   mask_ds = mask_ds.skip(mask_offset)
   return mask_ds
@@ -190,6 +191,16 @@ def as_numpy(dataset, graph=None):
   are left as-is for the user to deal with them (e.g. using `to_list()`).
   In TF 1 (i.e. graph mode), `tf.RaggedTensor`s are returned as
   `tf.ragged.RaggedTensorValue`s.
+
+  Example:
+
+  ```
+  ds = tfds.load(name="mnist", split="train")
+  ds_numpy = tfds.as_numpy(ds)  # Convert `tf.data.Dataset` to Python generator
+  for ex in ds_numpy:
+    # `{'image': np.array(shape=(28, 28, 1)), 'labels': np.array(shape=())}`
+    print(ex)
+  ```
 
   Args:
     dataset: a possibly nested structure of `tf.data.Dataset`s and/or

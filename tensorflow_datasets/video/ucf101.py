@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """UCF-101 dataset from https://www.crcv.ucf.edu/data/UCF101.php."""
 
 from __future__ import absolute_import
@@ -80,11 +81,7 @@ class Ucf101Config(tfds.core.BuilderConfig):
 
 
 _VERSION = tfds.core.Version(
-    '1.0.0', experiments={tfds.core.Experiment.S3: False})
-_SUPPORTED_VERSIONS = [
-    tfds.core.Version(
-        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
-]
+    '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
 
 
 class Ucf101(tfds.core.GeneratorBasedBuilder):
@@ -102,7 +99,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=256,
           split_number=1,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_1',
@@ -111,7 +107,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=None,
           split_number=1,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_2',
@@ -120,7 +115,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=None,
           split_number=2,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_3',
@@ -129,7 +123,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           height=None,
           split_number=3,
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
       ),
   ]
 
@@ -172,7 +165,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 'videos_dir': downloaded_urls['videos'],
                 'splits_dir': downloaded_urls['splits'],
@@ -181,7 +173,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={
                 'videos_dir': downloaded_urls['videos'],
                 'splits_dir': downloaded_urls['splits'],

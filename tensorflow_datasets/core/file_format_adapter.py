@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """`tfds.file_adapter.FileFormatAdapter`s for GeneratorBasedBuilder.
 
 FileFormatAdapters implement methods to write and read data from a
@@ -144,7 +145,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     )
 
   def dataset_from_filename(self, filename):
-    dataset = tf.compat.v1.data.TFRecordDataset(
+    dataset = tf.data.TFRecordDataset(
         filename, buffer_size=int(16 * 1e6))
     return dataset.map(self._parser.parse_example,
                        num_parallel_calls=tf.data.experimental.AUTOTUNE)

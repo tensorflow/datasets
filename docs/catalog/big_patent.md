@@ -3,12 +3,14 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="big_patent" />
-  <meta itemprop="description" content="&#10;BIGPATENT, consisting of 1.3 million records of U.S. patent documents&#10;along with human written abstractive summaries.&#10;Each US patent application is filed under a Cooperative Patent Classification&#10;(CPC) code. There are nine such classification categories:&#10;A (Human Necessities), B (Performing Operations; Transporting),&#10;C (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),&#10;F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),&#10;G (Physics), H (Electricity), and&#10;Y (General tagging of new or cross-sectional technology)&#10;&#10;There are two features:&#10;  - description: detailed description of patent.&#10;  - summary: Patent abastract.&#10;&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('big_patent', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="&#10;BIGPATENT, consisting of 1.3 million records of U.S. patent documents&#10;along with human written abstractive summaries.&#10;Each US patent application is filed under a Cooperative Patent Classification&#10;(CPC) code. There are nine such classification categories:&#10;A (Human Necessities), B (Performing Operations; Transporting),&#10;C (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),&#10;F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),&#10;G (Physics), H (Electricity), and&#10;Y (General tagging of new or cross-sectional technology)&#10;&#10;There are two features:&#10;  - description: detailed description of patent.&#10;  - summary: Patent abastract.&#10;&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;big_patent&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/big_patent" />
   <meta itemprop="sameAs" content="https://evasharma.github.io/bigpatent/" />
   <meta itemprop="citation" content="&#10;@misc{sharma2019bigpatent,&#10;    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},&#10;    author={Eva Sharma and Chen Li and Lu Wang},&#10;    year={2019},&#10;    eprint={1906.03741},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
 # `big_patent`
+
+*   **Description**:
 
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with
 human written abstractive summaries. Each US patent application is filed under a
@@ -21,361 +23,27 @@ categories: A (Human Necessities), B (Performing Operations; Transporting), C
 There are two features: - description: detailed description of patent. -
 summary: Patent abastract.
 
-*   URL:
+*   **Homepage**:
     [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.summarization.big_patent.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
+*   **Versions**:
+    *   **`2.0.0`** (default): Updated to cased raw strings.
+    *   `1.0.0`: No release notes.
+*   **Download size**: `Unknown size`
+*   **Features**:
 
-`big_patent` is configured with `tfds.summarization.big_patent.BigPatentConfig`
-and has the following configurations predefined (defaults to the first one):
-
-*   `all` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under all categories.
-
-*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)a: Human Necessities
-
-*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)b: Performing Operations; Transporting
-
-*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)c: Chemistry; Metallurgy
-
-*   `d` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)d: Textiles; Paper
-
-*   `e` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)e: Fixed Constructions
-
-*   `f` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons;
-    Blasting
-
-*   `g` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)g: Physics
-
-*   `h` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)h: Electricity
-
-*   `y` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)y: General tagging of new or cross-sectional technology
-
-## `big_patent/all`
-Patents under all categories.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,341,362
-TRAIN      | 1,207,222
-TEST       | 67,072
-VALIDATION | 67,068
-
-### Features
 ```python
 FeaturesDict({
     'abstract': Text(shape=(), dtype=tf.string),
     'description': Text(shape=(), dtype=tf.string),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('description', 'abstract')`
+*   **Citation**:
 
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/a`
-Patents under Cooperative Patent Classification (CPC)a: Human Necessities
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 193,483
-TRAIN      | 174,134
-TEST       | 9,675
-VALIDATION | 9,674
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/b`
-
-Patents under Cooperative Patent Classification (CPC)b: Performing Operations;
-Transporting
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 179,467
-TRAIN      | 161,520
-TEST       | 8,974
-VALIDATION | 8,973
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/c`
-Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 112,269
-TRAIN      | 101,042
-TEST       | 5,614
-VALIDATION | 5,613
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/d`
-Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 11,294
-TRAIN      | 10,164
-TEST       | 565
-VALIDATION | 565
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/e`
-Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 38,271
-TRAIN      | 34,443
-TEST       | 1,914
-VALIDATION | 1,914
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/f`
-
-Patents under Cooperative Patent Classification (CPC)f: Mechanical Engineering;
-Lightning; Heating; Weapons; Blasting
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 95,076
-TRAIN      | 85,568
-TEST       | 4,754
-VALIDATION | 4,754
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/g`
-Patents under Cooperative Patent Classification (CPC)g: Physics
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 287,706
-TRAIN      | 258,935
-TEST       | 14,386
-VALIDATION | 14,385
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/h`
-Patents under Cooperative Patent Classification (CPC)h: Electricity
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 285,577
-TRAIN      | 257,019
-TEST       | 14,279
-VALIDATION | 14,279
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/y`
-
-Patents under Cooperative Patent Classification (CPC)y: General tagging of new
-or cross-sectional technology
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 138,219
-TRAIN      | 124,397
-TEST       | 6,911
-VALIDATION | 6,911
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## Citation
 ```
 @misc{sharma2019bigpatent,
     title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},
@@ -387,4 +55,161 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+## big_patent/all (default config)
+
+*   **Config description**: Patents under all categories.
+*   **Dataset size**: `24.22 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 67,072
+'train'      | 1,207,222
+'validation' | 67,068
+
+## big_patent/a
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)a: Human Necessities
+*   **Dataset size**: `3.45 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 9,675
+'train'      | 174,134
+'validation' | 9,674
+
+## big_patent/b
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)b: Performing Operations; Transporting
+*   **Dataset size**: `2.67 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 8,974
+'train'      | 161,520
+'validation' | 8,973
+
+## big_patent/c
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)c: Chemistry; Metallurgy
+*   **Dataset size**: `2.74 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 5,614
+'train'      | 101,042
+'validation' | 5,613
+
+## big_patent/d
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)d: Textiles; Paper
+*   **Dataset size**: `170.08 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 565
+'train'      | 10,164
+'validation' | 565
+
+## big_patent/e
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)e: Fixed Constructions
+*   **Dataset size**: `568.03 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 1,914
+'train'      | 34,443
+'validation' | 1,914
+
+## big_patent/f
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons; Blasting
+*   **Dataset size**: `1.35 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 4,754
+'train'      | 85,568
+'validation' | 4,754
+
+## big_patent/g
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)g: Physics
+*   **Dataset size**: `5.78 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 14,386
+'train'      | 258,935
+'validation' | 14,385
+
+## big_patent/h
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)h: Electricity
+*   **Dataset size**: `5.17 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 14,279
+'train'      | 257,019
+'validation' | 14,279
+
+## big_patent/y
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)y: General tagging of new or cross-sectional technology
+*   **Dataset size**: `2.35 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 6,911
+'train'      | 124,397
+'validation' | 6,911

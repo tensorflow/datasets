@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for wikipedia dataset module."""
 
 from __future__ import absolute_import
@@ -26,7 +27,6 @@ from tensorflow_datasets.text import wikipedia
 
 class WikipediaTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wikipedia.Wikipedia
-  VERSION = "experimental_latest"
   BUILDER_CONFIG_NAMES_TO_TEST = ["20190301.en"]
 
   DL_EXTRACT_RESULT = {
@@ -37,6 +37,7 @@ class WikipediaTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 4,
   }
+  SKIP_CHECKSUMS = True  # TODO(tfds): Update checksums
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.file_format_adapter."""
 
 from __future__ import absolute_import
@@ -31,7 +32,7 @@ from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
@@ -83,7 +84,7 @@ class FileFormatAdapterTest(testing.TestCase):
       valid_dataset = builder.as_dataset(split=splits.Split.VALIDATION)
       test_dataset = builder.as_dataset(split=splits.Split.TEST)
 
-      self.assertIsInstance(train_dataset, tf.compat.v1.data.Dataset)
+      self.assertIsInstance(train_dataset, tf.data.Dataset)
 
       def validate_dataset(dataset, min_val, max_val, test_range=False):
         els = []
@@ -95,7 +96,7 @@ class FileFormatAdapterTest(testing.TestCase):
           self.assertLess(x, max_val)
           els.append(x)
         if test_range:
-          self.assertEqual(list(range(min_val, max_val)), sorted(els))
+          self.assertCountEqual(list(range(min_val, max_val)), els)
 
       validate_dataset(train_dataset, 0, 30)
       validate_dataset(valid_dataset, 0, 30)

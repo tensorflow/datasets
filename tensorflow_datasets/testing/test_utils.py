@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Test utilities."""
 
 from __future__ import absolute_import
@@ -153,7 +154,7 @@ def run_in_graph_and_eager_modes(func=None,
   For example, consider the following unittest:
 
   ```python
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
 
   class SomeTest(testing.TestCase):
 
@@ -401,6 +402,7 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
             "image": features.Image(shape=(28, 28, 1)),
             "label": features.ClassLabel(num_classes=10),
         }),
+        description="Mnist description.",
     )
 
   def _split_generators(self, dl_manager):
@@ -423,7 +425,7 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
 
 def test_main():
   """Entrypoint for tests."""
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
   tf.test.main()
 
 

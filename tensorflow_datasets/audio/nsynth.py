@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """NSynth Dataset."""
 
 from __future__ import absolute_import
@@ -123,8 +124,13 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("f0_and_loudness")
     v230 = tfds.core.Version(
         "2.3.0", "New `loudness_db` feature in decibels (unormalized).")
+    v231 = tfds.core.Version(
+        "2.3.1", "F0 computed with normalization fix in CREPE.")
     super(NsynthConfig, self).__init__(
-        name=".".join(name_parts), version=v230, **kwargs)
+        name=".".join(name_parts),
+        version=v231,
+        supported_versions=[v230],
+        **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
 
@@ -178,7 +184,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         features=tfds.features.FeaturesDict(features),
         homepage="https://g.co/magenta/nsynth-dataset",
         citation=_CITATION,
-        metadata=tfds.core.BeamMetadataDict(),
+        metadata=tfds.core.BeamMetadataDict(sample_rate=_AUDIO_RATE,),
     )
 
   def _split_generators(self, dl_manager):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,15 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Version utils."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import enum
 import re
 
-import enum
 import six
 
 _VERSION_TMPL = (
@@ -54,6 +55,10 @@ class Experiment(enum.Enum):
   # New Shuffling, sharding and slicing mechanism.
   S3 = 2
 
+  # Experiment to update the dataset metadata files without making the
+  # new dataset version the default.
+  METADATA = 3
+
 
 class Version(object):
   """Dataset version MAJOR.MINOR.PATCH."""
@@ -61,6 +66,7 @@ class Version(object):
   _DEFAULT_EXPERIMENTS = {
       Experiment.DUMMY: False,
       Experiment.S3: True,
+      Experiment.METADATA: False,
   }
 
   def __init__(self, version_str, description=None, experiments=None,
@@ -76,6 +82,9 @@ class Version(object):
         dataset, but that TFDS at version {tfds_version_to_prepare} should be
         used instead.
     """
+    if description is not None and not isinstance(description, str):
+      raise TypeError(
+          "Description should be a string. Got {}".format(description))
     self.description = description
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
     self.tfds_version_to_prepare = tfds_version_to_prepare

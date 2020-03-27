@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CLEVR dataset."""
 
 import json
@@ -39,8 +40,6 @@ _CITATION = """\
 }
 """
 
-_NUM_SHARDS = 128
-
 _BASE_URL = "https://cs.stanford.edu/people/jcjohns/clevr/"
 _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 
@@ -48,12 +47,8 @@ _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 class CLEVR(tfds.core.GeneratorBasedBuilder):
   """CLEVR dataset."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-  ]
+  VERSION = tfds.core.Version(
+      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -93,7 +88,6 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
       name_map = {"train": "train", "val": "validation", "test": "test"}
       splits.append(tfds.core.SplitGenerator(
           name=name_map[split_name],
-          num_shards=_NUM_SHARDS,
           gen_kwargs={
               "images_dir_path": os.path.join(images_path_dir, split_name),
               "scenes_description_file": os.path.join(

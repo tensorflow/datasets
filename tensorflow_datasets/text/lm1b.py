@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The Language Model 1 Billion dataset."""
 
 from __future__ import absolute_import
@@ -67,11 +68,10 @@ class Lm1bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Lm1b."""
 
   @tfds.core.disallow_positional_args
-  def __init__(self, version=None, text_encoder_config=None, **kwargs):
+  def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for Lm1b.
 
     Args:
-      version (string): version as string.
       text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
         for the `tfds.features.text.TextEncoder` used for the Lm1b `"text"`
         feature.
@@ -79,12 +79,8 @@ class Lm1bConfig(tfds.core.BuilderConfig):
     """
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
-            version, experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
-        ],
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -103,12 +99,10 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       Lm1bConfig(
           name="plain_text",
-          version="0.0.1",
           description="Plain text",
       ),
       Lm1bConfig(
           name="bytes",
-          version="0.0.1",
           description=("Uses byte-level text encoding with "
                        "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -116,7 +110,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords8k",
-          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -125,7 +118,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords32k",
-          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -165,11 +157,9 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={"files": train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=50,
             gen_kwargs={"files": test_files}),
     ]
 

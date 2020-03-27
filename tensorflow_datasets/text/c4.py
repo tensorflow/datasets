@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,19 +47,11 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version(
-    "1.1.0", experiments={tfds.core.Experiment.S3: False},
-    tfds_version_to_prepare="42f5bf89efcfd2cd165c2511b22be49cb1a50856")
+_VERSION = tfds.core.Version("2.3.0", "Deduplicate lines within a page.")
 
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-    tfds.core.Version(
-        "1.0.1", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
-    tfds.core.Version(
-        "1.0.0", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
+    tfds.core.Version("2.2.1", "Update dataset_info.json"),
+    tfds.core.Version("2.2.0"),
 ]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
@@ -91,7 +83,8 @@ class C4Config(tfds.core.BuilderConfig):
     """BuilderConfig for C4.
 
     Args:
-      language: string, the language code.
+      language: string, the language code, or "all" to disable language
+        filtering.
       cc_versions: tuple(string), a collection of versions of Common Crawl to
         use as the raw source text. Set to None to use defaults.
       clean: bool, whether to clean the dataset for badwords, duplications, etc.
@@ -174,7 +167,7 @@ class C4(tfds.core.BeamBasedBuilder):
         "https://github.com/google-research/text-to-text-transfer-transformer#datasets",
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager, pipeline):
     dl_manager.download_checksums(_CHECKSUMS_URL)
 
     # We will automatically down the default CC version(s), but others need to
@@ -223,15 +216,28 @@ class C4(tfds.core.BeamBasedBuilder):
           len(wet_files), cc_version)
       file_paths["wet_files"].extend(wet_files)
 
+    page_content_pcollection = self._get_page_content(pipeline, file_paths)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"file_paths": file_paths},
-        )
+            gen_kwargs=dict(
+                split="train",
+                page_content=page_content_pcollection,
+                hashed_url_predicate=lambda x: x % 1000 != 0  # 99.9%
+            ),
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs=dict(
+                split="validation",
+                page_content=page_content_pcollection,
+                hashed_url_predicate=lambda x: x % 1000 == 0  # 0.01%
+            ),
+        ),
     ]
 
-  def _build_pcollection(self, pipeline, file_paths):
-    """Build PCollection of examples in the raw (text) form."""
+  def _get_page_content(self, pipeline, file_paths):
+    """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
 
     # Parse WET files and filter by length.
@@ -289,16 +295,20 @@ class C4(tfds.core.BeamBasedBuilder):
           | "clean_pages" >> beam.FlatMap(c4_utils.get_clean_page_fn(badwords)))
       page_content = c4_utils.remove_duplicate_text(page_content)
 
-    # Filter out non-English pages. We do this after cleaning since it may
-    # change the predominate language.
-    page_content |= beam.Filter(
-        c4_utils.is_language, language=self.builder_config.lang)
+    # Optionally filter out non-`language` pages. We do this after cleaning
+    # since it may change the predominate language.
+    if self.builder_config.lang != "all":
+      page_content |= beam.Filter(
+          c4_utils.is_language, language=self.builder_config.lang)
 
-    # Emit final examples.
-    # Output: {"url": url, "text": text, "content-type": content-type,\
-    #          "content-length": content-length, "timestamp": timestamp}
+    return page_content
+
+  def _build_pcollection(
+      self, unused_pipeline, split, page_content, hashed_url_predicate):
+    beam = tfds.core.lazy_imports.apache_beam
+
     def _emit_examples(el):
-      c4_utils.get_counter_inc_fn("emit-examples")("emitted")
+      c4_utils.get_counter_inc_fn(split)("examples")
       _, features = el
       return features["url"], {
           "url": features["url"],
@@ -307,5 +317,7 @@ class C4(tfds.core.BeamBasedBuilder):
           "content-length": features["content-length"],
           "timestamp": features["timestamp"]
       }
-
-    return page_content | beam.Map(_emit_examples)
+    return (page_content
+            | beam.Filter(
+                c4_utils.get_hashed_url_filter_fn(hashed_url_predicate))
+            | beam.Map(_emit_examples))
