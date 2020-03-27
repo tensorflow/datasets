@@ -4,8 +4,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import h5py
 import os
+
+import h5py
 import numpy as np
 import tensorflow.compat.v2 as tf
 
@@ -78,10 +79,10 @@ class NyuDepthV2(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, root_dir):
     """Yields examples."""
-    for dir in tf.io.gfile.listdir(root_dir):
-      for file_name in tf.io.gfile.listdir(os.path.join(root_dir, dir)):
-        with h5py.File(os.path.join(root_dir, dir, file_name), 'r') as file:
-          yield dir + '_' + file_name, {
-              'image': np.transpose(file["rgb"], (1, 2, 0)),
-              'depth': file['depth'][:].astype('float16')
+    for directory in tf.io.gfile.listdir(root_dir):
+      for file_name in tf.io.gfile.listdir(os.path.join(root_dir, directory)):
+        with h5py.File(os.path.join(root_dir, directory, file_name), 'r') as f:
+          yield directory + '_' + file_name, {
+              'image': np.transpose(f["rgb"], (1, 2, 0)),
+              'depth': f['depth'][:].astype('float16')
           }
