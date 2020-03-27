@@ -75,6 +75,7 @@ from tensorflow_datasets.image.mnist import FashionMNIST
 from tensorflow_datasets.image.mnist import KMNIST
 from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.mnist_corrupted import MNISTCorrupted
+from tensorflow_datasets.image.mura import Mura
 from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
