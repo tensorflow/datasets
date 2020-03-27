@@ -15,10 +15,13 @@ from tensorflow_datasets.core.visualization import visualizer
 
 class AudioGridVisualizer(visualizer.Visualizer): 
   def match(self, ds_info):
-     audio_keys = visualizer.extract_keys(ds_info.features, features_lib.Audio)
+     audio_keys = [
+            k for k, feature in ds_info.features.items()
+            if isinstance(feature, features_lib.Audio)
+     ]
     if audio_keys:
-      return true 
-    return false
+      return True 
+    return False
       
 
   def show(
