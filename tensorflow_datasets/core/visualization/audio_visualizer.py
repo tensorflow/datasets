@@ -11,18 +11,15 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
 
-import numpy as np 
 import IPython.display
+import random
 
 class AudioGridVisualizer(visualizer.Visualizer): 
   def match(self, ds_info):
-    audio_keys = [
-           k for k, feature in ds_info.features.items()
-           if isinstance(feature, features_lib.Audio)
-    ]
-    if audio_keys:
-      return True 
-    return False
+     audio_keys = visualizer.extract_keys(ds_info.features, features_lib.Audio)
+     if audio_keys:
+       return True 
+     return False
 
   def show(
       self,
