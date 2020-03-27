@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """Visualizer utils."""
-
+from tensorflow_datasets.core.visualization.audio_visualizer import AudioGridVisualizer
 from tensorflow_datasets.core.visualization.image_visualizer import ImageGridVisualizer
 from tensorflow_datasets.core.visualization.show_examples import show_examples
 from tensorflow_datasets.core.visualization.visualizer import Visualizer
