@@ -56,7 +56,7 @@ def delete_metadata_dirs(metadata_dir):
 
 
 def removeEmptyFolders(path, removeRoot=True):
-    '''This function checks & remove if there is any directory
+    '''This function recursively checks & remove if there is any directory
        which completely empty after process of removing.
     '''
     if not os.path.isdir(path):
