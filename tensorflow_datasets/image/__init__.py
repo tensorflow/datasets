@@ -69,6 +69,7 @@ from tensorflow_datasets.image.inaturalist import INaturalist2017
 from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.mini_imagenet import MiniImagenet
 from tensorflow_datasets.image.malaria import Malaria
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
