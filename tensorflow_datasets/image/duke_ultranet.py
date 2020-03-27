@@ -58,7 +58,7 @@ _CHANNELS = 180
 class DukeUltranet(tfds.core.BeamBasedBuilder):
     """TODO(duke_ultranet): Short description of my dataset."""
 
-    VERSION = tfds.core.Version('0.2.1')
+    VERSION = tfds.core.Version('0.2.2')
     BUILDER_CONFIGS = [
         tfds.core.BuilderConfig(
             version=VERSION,
@@ -139,14 +139,15 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
         '''
         x_max = x_max - 1
         valid_x = (x > x_min) & (x < x_max)
+
         x = tf.clip_by_value(x, x_min, x_max)
         x_floor = tf.cast(tf.math.floor(x), tf.int32)
         x_ceil = tf.cast(tf.math.ceil(x), tf.int32)
 
         y_floor = tf.gather(y, x_floor, axis=-1, batch_dims=2)
         y_ceil = tf.gather(y, x_ceil, axis=-1, batch_dims=2)
-        delta = (y_ceil - y_floor)*(tf.cast(x_ceil, y.dtype) - x)
-        out = y + delta
+
+        out = y_floor + (y_ceil - y_floor)*(x - tf.cast(x_floor, y.dtype))
         out = out * tf.cast(valid_x, y.dtype)
         return out
     
@@ -303,7 +304,6 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
         return [
             tfds.core.SplitGenerator(
                     name=tfds.Split.TRAIN,
-                    num_shards=len(_FILES),
                     gen_kwargs={
                         'files': _FILES
                     }
