@@ -3,8 +3,6 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-import numpy as np 
-import IPython.display
 
 from absl import logging
 
@@ -13,16 +11,18 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
 
+import numpy as np 
+import IPython.display
+
 class AudioGridVisualizer(visualizer.Visualizer): 
   def match(self, ds_info):
-     audio_keys = [
-            k for k, feature in ds_info.features.items()
-            if isinstance(feature, features_lib.Audio)
-     ]
+    audio_keys = [
+           k for k, feature in ds_info.features.items()
+           if isinstance(feature, features_lib.Audio)
+    ]
     if audio_keys:
       return True 
     return False
-      
 
   def show(
       self,
