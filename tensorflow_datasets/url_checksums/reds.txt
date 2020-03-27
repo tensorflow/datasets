@@ -1,0 +1,14 @@
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/test_blur.zip 3336293908 9df15f6231b68ae9fee012acbbe687498a8a8a22fc9cead867ba1056588f9a85
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/test_blur_bicubic.zip 289235022 c797215a4a0e96f917241b6ad2033649f4d98d32f8b3ab42be3062bb997f8c81
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/test_blur_comp.zip 2598551329 aa51f0acfe949b09a475915c99d6fb3acea734f69cf45e6fbee28730eea240ba
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/test_sharp_bicubic.zip 318544684 b2895fc8a54efd1207a52233c4501bc2b9e89f207bd9ede5225ac923b552f568
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/train_blur.zip 28287365503 415c360c0d71d2d89af099b3c64e76bca7e1d8317750f8e056e02ebaab957bb8
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/train_blur_bicubic.zip 2416495641 457171a9beafa8c5afd7ebb12e9dc9b5248da596027ef078f1a61d42d1d339e8
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/train_blur_comp.zip 22775753809 cd78437b5505bd445955a24ae2cf00187540ca3a6f405e2113cadebdb4666493
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/train_sharp.zip 34261573976 620294c1c3f23ed26c5ea228633770469c0b28e57d31eb41dc77deb401c6681b
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/train_sharp_bicubic.zip 2652551733 ff20eac3c20cd401d1380f9c36830f726d9fba6e926f247c99895eb82c7bebfe
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/val_blur.zip 3541630366 23bf86ec4c0ac836ad286507484825a68dd903f3834ceef49fb16f2070c57b77
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/val_blur_bicubic.zip 300309402 66b7ce8e2a4fda18773daf1329be9a01d6b8cbfc88f4f345b81ef1a0727c5d37
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/val_blur_comp.zip 2806159829 9b5bfb5d60d47a9b5dec0a87f945f3d69a40a9aaeb9daa018fd4a40b1e4829b7
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/val_sharp.zip 4273865704 53f6ce4791ed3cfca747ff8982ba29b6e8b7cc1927eed742458f45ed93a1a279
+https://cv.snu.ac.kr/~snah/Deblur/dataset/REDS/val_sharp_bicubic.zip 330490885 f8d89c1f3b5f15d972352b2243f5860c3ec7ca7a1222cf5026ac9f4a50442ada
