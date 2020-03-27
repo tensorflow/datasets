@@ -55,6 +55,7 @@ from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.eurosat import Eurosat
 from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.flowers import TFFlowers
+from tensorflow_datasets.image.flying_chairs import FlyingChairs
 from tensorflow_datasets.image.food101 import Food101
 from tensorflow_datasets.image.geirhos_conflict_stimuli import GeirhosConflictStimuli
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans

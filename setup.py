@@ -117,6 +117,7 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'eurosat': ['scikit-image',],
+    'flying_chairs': ['Pillow'],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative

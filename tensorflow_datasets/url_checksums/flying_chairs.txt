@@ -1,0 +1,4 @@
+http://lmb.informatik.uni-freiburg.de/data/FlyingChairs/FlyingChairs.zip 32892488308 9d675f7d1a01efe43eda1e9ecb12f4d5fae10447d3e1953b2a435a573670f43e
+https://lmb.informatik.uni-freiburg.de/data/FlyingChairs/FlyingChairs.zip 32892488308 9d675f7d1a01efe43eda1e9ecb12f4d5fae10447d3e1953b2a435a573670f43e
+http://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs/FlyingChairs_train_val.txt 45744 9ae5000eb2caba66b4eb7464a88874330d62105fc29eb94a95f66dff91ba581e
+https://lmb.informatik.uni-freiburg.de/resources/datasets/FlyingChairs/FlyingChairs_train_val.txt 45744 9ae5000eb2caba66b4eb7464a88874330d62105fc29eb94a95f66dff91ba581e
