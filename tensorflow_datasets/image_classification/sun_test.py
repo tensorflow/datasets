@@ -25,8 +25,7 @@ import os
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import sun
 
-_EXAMPLE_DIR = os.path.join('testing',
-    'test_data', 'fake_examples', 'sun397')
+_EXAMPLE_DIR = os.path.join('testing', 'test_data', 'fake_examples', 'sun397')
 
 # PATH to fake data
 sun._SUN397_SPLIT_FILES = { # pylint: disable=protected-access
