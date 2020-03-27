@@ -22,6 +22,7 @@ from tensorflow_datasets.core.visualization.visualizer import Visualizer
 
 __all__ = [
     "ImageGridVisualizer",
+    "AudioGridVisualizer",
     "show_examples",
     "Visualizer",
 ]
