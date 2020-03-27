@@ -21,10 +21,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from tensorflow_datasets.core.visualization import audio_visualizer
 from tensorflow_datasets.core.visualization import image_visualizer
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
+    audio_visualizer.AudioGridVisualizer(),
 ]
 
 
