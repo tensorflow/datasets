@@ -147,6 +147,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
+    """Returns Dataset info."""
     features = {
         "id":
             tf.string,
