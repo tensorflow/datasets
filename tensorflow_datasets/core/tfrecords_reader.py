@@ -463,7 +463,7 @@ class ReadInstruction(object):
 
   @api_utils.disallow_positional_args(allowed=['split_name'])
   def __init__(self, split_name, rounding='closest', from_=None, to=None,
-               unit=None):
+               unit="%"):
     """Initialize ReadInstruction.
 
     Args:
