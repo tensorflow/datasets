@@ -70,6 +70,7 @@ from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.malaria import Malaria
+from tensorflow_datasets.image.malaria_bbbc import MalariaBbbc
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
 from tensorflow_datasets.image.mnist import KMNIST
