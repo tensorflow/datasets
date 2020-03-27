@@ -31,7 +31,8 @@ import os
 from absl import app
 from absl import flags
 
-# gfile cannot be imported directly `from tensorflow.io import gfile`
+# gfile cannot be imported directly
+# `from tensorflow.io import gfile`
 import tensorflow.compat.v2 as tf
 gfile = tf.io.gfile
 del tf
@@ -44,6 +45,7 @@ FLAGS = flags.FLAGS
 _DATASET_TYPE = [
     'audio',
     'image',
+    'image_classification',
     'object_detection',
     'structured',
     'summarization',
