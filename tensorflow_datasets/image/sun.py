@@ -16,9 +16,6 @@
 # Lint as: python3
 """SUN (Scene UNderstanding) datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import os
@@ -223,6 +220,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
         citation=_SUN397_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Create Splits"""
     paths = dl_manager.download_and_extract({
         "images": tfds.download.Resource(
             url=_SUN397_URL + "SUN397.tar.gz",
@@ -258,22 +256,22 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
                   archive=dl_manager.iter_archive(images),
                   subset_images=subset_images["va"])),
       ]
-    else:
-      subset_images = self._get_partition_subsets_images(paths["partitions"])
-      return [
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
-              gen_kwargs=dict(
-                  archive=dl_manager.iter_archive(images),
-                  subset_images=subset_images["tr"])),
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
-              gen_kwargs=dict(
-                  archive=dl_manager.iter_archive(images),
-                  subset_images=subset_images["te"])),
-      ]
+    subset_images = self._get_partition_subsets_images(paths["partitions"])
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs=dict(
+                archive=dl_manager.iter_archive(images),
+                subset_images=subset_images["tr"])),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs=dict(
+                archive=dl_manager.iter_archive(images),
+                subset_images=subset_images["te"])),
+    ]
 
   def _generate_examples(self, archive, subset_images):
+    """ Yields Examples"""
     prefix_len = len("SUN397")
     with tf.Graph().as_default():
       with utils.nogpu_session() as sess:
@@ -303,7 +301,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
     return splits_sets
 
   def _get_partition_subsets_images(self, partitions_dir):
-    # Get the ID of all images in the dataset.
+    """Get the ID of all images in the dataset."""
     all_images = set()
     for split_images in self._get_tfds_subsets_images().values():
       all_images.update(split_images)
@@ -322,4 +320,4 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _load_image_set_from_file(self, filepath):
     with tf.io.gfile.GFile(filepath, mode="r") as f:
-      return set([line.strip() for line in f])
+      return set([line.strip() for line in f])   # pylint: disable=R1718

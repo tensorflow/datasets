@@ -16,9 +16,6 @@
 # Lint as: python3
 """Caltech birds dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import os
@@ -82,7 +79,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators."""
     download_path = dl_manager.download([
         self._caltech_birds_info.split_url,
         self._caltech_birds_info.annotations_url,

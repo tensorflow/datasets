@@ -16,9 +16,7 @@
 # Lint as: python3
 """Dataset class for Cars196 Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 import os
 import six.moves.urllib as urllib
 import tensorflow.compat.v2 as tf
@@ -183,8 +181,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name='train',
             gen_kwargs={
-                'split_name':
-                    'train',
+                'split_name': 'train',
                 'data_dir_path':
                     os.path.join(output_files['train'], 'cars_train'),
                 'data_annotations_path':
@@ -196,8 +193,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name='test',
             gen_kwargs={
-                'split_name':
-                    'test',
+                'split_name': 'test',
                 'data_dir_path':
                     os.path.join(output_files['test'], 'cars_test'),
                 'data_annotations_path': output_files['test_annos'],
@@ -205,12 +201,12 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
         ),
     ]
 
-  def _generate_examples(self, split_name, data_dir_path,
+  def _generate_examples(self, data_dir_path,
                          data_annotations_path):
     """Generate training and testing samples."""
 
-    image_dict = self.returnImageDict(data_dir_path)
-    bbox_dict = self.returnBbox(data_annotations_path, image_dict)
+    image_dict = self._return_image_dict(data_dir_path)
+    bbox_dict = self._return_bbox(data_annotations_path, image_dict)
     with tf.io.gfile.GFile(data_annotations_path, 'rb') as f:
       mat = tfds.core.lazy_imports.scipy.io.loadmat(f)
     for example in mat['annotations'][0]:
@@ -224,13 +220,14 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
           'bbox': bbox,
       }
 
-  def returnImageDict(self, path):
+  def _return_image_dict(self, path):
     return {
         filename.split('.')[0]: os.path.join(path, filename)
         for filename in tf.io.gfile.listdir(path)
     }
 
-  def returnBbox(self, filename, image_dict):
+  def _return_bbox(self, filename, image_dict):
+    """ Returns dict contains Bounding Box Coordinates."""
     bbox_dict = {}
     with tf.io.gfile.GFile(filename, 'rb') as f:
       data = tfds.core.lazy_imports.scipy.io.loadmat(f)

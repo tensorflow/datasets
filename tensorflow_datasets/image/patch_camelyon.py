@@ -16,9 +16,6 @@
 # Lint as: python3
 """PatchCamelyon images dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import h5py
 import tensorflow_datasets.public_api as tfds
@@ -67,6 +64,7 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     base_url = 'https://zenodo.org/record/2546921/files/'
     resources = {
         'test_x': base_url + 'camelyonpatch_level_2_split_test_x.h5.gz',

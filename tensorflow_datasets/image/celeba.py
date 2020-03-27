@@ -22,9 +22,6 @@ Deep Learning Face Attributes in the Wild
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import tensorflow.compat.v2 as tf
@@ -197,7 +194,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       record = {
           "image": path,
           "landmarks": {
-              k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
+              k: v for k, v in zip(landmarks[0], landmarks[1][file_name]) # pylint: disable=r1721
+
           },
           "attributes": {
               # atributes value are either 1 or -1, so convert to bool

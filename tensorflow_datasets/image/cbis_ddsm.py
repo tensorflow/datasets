@@ -115,7 +115,9 @@ _PATHOLOGY_LABELS = (
 _ASSESSMENT_NUM_CLASSES = 6  # Original range: [0, 5]
 _SUBTELTY_NUM_CLASSES = 6  # Original range: [0, 5]
 _DCIM_REGEX = re.compile(
-    r'^.*/(?P<study>1.3.6.1.4.1.9590.100.1.2.[0-9.]+)/(?P<series>1.3.6.1.4.1.9590.100.1.2.[0-9.]+)/(?P<instance>.+).dcm$'
+    (r'^.*/(?P<study>1.3.6.1.4.1.9590.100.1.2.[0-9.]+)'
+     r'/(?P<series>1.3.6.1.4.1.9590.100.1.2.[0-9.]+)'
+     r'/(?P<instance>.+).dcm$')
 )
 
 
@@ -159,6 +161,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Create Dataset Info"""
     features_fn_map = {
         'original-calc': self._get_features_original_calc,
         'original-mass': self._get_features_original_mass,
@@ -177,6 +180,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _get_features_original_base(self):
+    """Returns features of data"""
     return {
         'id': tfds.features.Text(),
         'breast': tfds.features.ClassLabel(names=_BREAST_LABELS),
@@ -200,6 +204,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     }
 
   def _get_features_original_calc(self):
+    """Returns tfds.features.FeaturesDict of features"""
     features = self._get_features_original_base()
     features['abnormalities'].update({
         'calc_type':
@@ -216,6 +221,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     return tfds.features.FeaturesDict(features)
 
   def _get_features_original_mass(self):
+    """Returns tfds.features.FeaturesDict of features"""
     features = self._get_features_original_base()
     features['abnormalities'].update({
         'mass_shape':
@@ -243,7 +249,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     })
 
   def _split_generators(self, dl_manager):
-    if self.builder_config.name in ['original-calc', 'original-mass']:
+    """Generate Splits"""
+    if self.builder_config.name in ['original-calc', 'original-mass']: # pylint: disable=R1705
       return self._split_generators_original(dl_manager)
     elif self.builder_config.name == 'patches':
       return self._split_generators_patches(dl_manager)
@@ -252,7 +259,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           self.builder_config.name))
 
   def _split_generators_original(self, dl_manager):
-    if self.builder_config.name == 'original-calc':
+    """Generate Splits orignal"""
+    if self.builder_config.name == 'original-calc': # pylint: disable=R1705
       test_url = _CALC_TEST_CSV_URL
       train_url = _CALC_TRAIN_CSV_URL
     elif self.builder_config.name == 'original-mass':
@@ -286,6 +294,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _split_generators_patches(self, dl_manager):
+    """Generate Splits patches"""
     resources_urls = {
         'calc-test': _CALC_TEST_CSV_URL,
         'calc-train': _CALC_TRAIN_CSV_URL,
@@ -358,12 +367,11 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     return generate_fn(**kwargs)
 
   def _generate_examples_original(self, patients_data, yield_from_train_csv):
-
+    """Yields examples from orignal."""
     def _include_example_in_split(example):
       if yield_from_train_csv:
         return example['csv_key'] == 'train'
-      else:
-        return example['csv_key'] == 'test'
+      return example['csv_key'] == 'test'
 
     for _, patient_examples in sorted(patients_data.items()):
       for _, example in sorted(patient_examples.items()):
@@ -388,6 +396,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
                                  patch_size=(224, 224),
                                  num_positive_patches_per_abnormality=10,
                                  num_background_patches_per_image=10):
+    """Yields examples from patches."""
     # Set random seed so that we always get the same patches in each split.
     np.random.seed(0x12345 + len(patients_data))
 

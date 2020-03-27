@@ -16,9 +16,6 @@
 # Lint as: python3
 """So2SAT remote sensing dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import h5py
 import numpy as np
@@ -88,6 +85,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Define the dataset info."""
     if self.builder_config.selection == 'rgb':
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[32, 32, 3]),
@@ -144,7 +142,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
       sen1 = fid['sen1']
       sen2 = fid['sen2']
       label = fid['label']
-      for i in range(len(sen1)):
+      for i in range(len(sen1)):  # pylint: disable=c0200
         if selection == 'rgb':
           record = {
               'image': _create_rgb(sen2[i]),

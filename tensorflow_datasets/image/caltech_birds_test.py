@@ -14,16 +14,14 @@
 # limitations under the License.
 
 # Lint as: python3
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Tests for caltech_birds dataset module."""
 
 from tensorflow_datasets.image import caltech_birds
 import tensorflow_datasets.testing as tfds_test
 
 
 class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
-
+  """ Create testing.DatasetBuilderTestCase for tests."""
   DATASET_CLASS = caltech_birds.CaltechBirds2010
 
   SPLITS = {  # No. of train and test samples
@@ -35,7 +33,7 @@ class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
 
 
 class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
-
+  """ Create testing.DatasetBuilderTestCase for tests."""
   DATASET_CLASS = caltech_birds.CaltechBirds2011
 
   SPLITS = {  # No. of train and test samples

@@ -36,4 +36,3 @@ class BeansTest(tfds_test.DatasetBuilderTestCase):
 
 if __name__ == '__main__':
   tfds_test.test_main()
-

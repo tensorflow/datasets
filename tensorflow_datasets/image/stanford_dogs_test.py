@@ -14,15 +14,14 @@
 # limitations under the License.
 
 # Lint as: python3
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Test for the Stanford Dogs dataset."""
 
 from tensorflow_datasets.image import stanford_dogs
 import tensorflow_datasets.testing as tfds_test
 
 
 class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
+  """Create tfds_test.DatasetBuilderTestCase for test"""
 
   DATASET_CLASS = stanford_dogs.StanfordDogs
 

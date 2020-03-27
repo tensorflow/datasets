@@ -16,16 +16,13 @@
 # Lint as: python3
 """Tests for camelyon_patch.py."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import patch_camelyon
 
 
 class PatchCamelyonTest(testing.DatasetBuilderTestCase):
-
+  """ Create testing.DatasetBuilderTestCase for tests."""
   DATASET_CLASS = patch_camelyon.PatchCamelyon
 
   SPLITS = {

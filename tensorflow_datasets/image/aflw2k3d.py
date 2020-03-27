@@ -16,9 +16,6 @@
 # Lint as: python3
 """AFLW2000-3D Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import numpy as np
@@ -80,6 +77,7 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     extracted_path = dl_manager.download_and_extract(
         "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/Database/AFLW2000-3D.zip"
     )
@@ -92,6 +90,7 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, image_dir_path):
+    """Generates images given the image directory path."""
     image_files = tf.io.gfile.glob(
         pattern=os.path.join(image_dir_path, "image0*.jpg"))
     label_files = [s.replace("jpg", "mat") for s in image_files]

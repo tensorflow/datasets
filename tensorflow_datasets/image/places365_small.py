@@ -16,9 +16,7 @@
 # Lint as: python3
 """Dataset class for Places365-Standard small(256x256) dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 import csv
 import os
 import six.moves.urllib as urllib
@@ -73,6 +71,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     output_archives = dl_manager.download({
         "train": urllib.parse.urljoin(_BASE_URL, _TRAIN_URL),
         "test": urllib.parse.urljoin(_BASE_URL, _TEST_URL),
@@ -126,6 +125,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive, path_prefix, split_name,
                          annotation_path):
+    """Generates images and labels given the image directory path."""
     with tf.io.gfile.GFile(annotation_path) as f:
       if split_name == "test":
         # test split doesn't have labels assigned.

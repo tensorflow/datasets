@@ -14,6 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
+"""Test for Stanford online Products Dataset."""
+
 from tensorflow_datasets.image import stanford_online_products
 import tensorflow_datasets.testing as tfds_test
 

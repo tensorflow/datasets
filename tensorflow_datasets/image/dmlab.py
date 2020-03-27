@@ -15,9 +15,7 @@
 
 # Lint as: python3
 """Dmlab dataset."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 
 import io
 
@@ -72,6 +70,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
 
     return [
@@ -116,6 +115,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
     return parse_single
 
   def _generate_examples(self, images_dir_path, split_name):
+    """Yields examples of dmlab images and labels."""
     path_glob = os.path.join(images_dir_path,
                              "dmlab-{}.tfrecord*".format(split_name))
     files = tf.io.gfile.glob(path_glob)

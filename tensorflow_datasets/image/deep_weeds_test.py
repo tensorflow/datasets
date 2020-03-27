@@ -14,9 +14,9 @@
 # limitations under the License.
 
 # Lint as: python3
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Test for Deep Weeds Dataset"""
+
+
 from tensorflow_datasets.image import deep_weeds
 import tensorflow_datasets.testing as tfds_test
 

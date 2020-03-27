@@ -109,6 +109,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Create Splits"""
     if self.builder_config.name == 'imagenet12':
       devkit_path, images_archive = dl_manager.download_and_extract([
           _URL_PREFIX_VGG + 'decathlon-1.0-devkit.tar.gz',

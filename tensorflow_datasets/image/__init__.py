@@ -16,6 +16,8 @@
 # Lint as: python3
 """Image datasets."""
 
+# pylint: disable=c0103
+
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.arc import ARC

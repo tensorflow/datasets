@@ -16,15 +16,13 @@
 # Lint as: python3
 """Tests for Caltech data loading."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import caltech
 
 
 class Caltech101Test(testing.DatasetBuilderTestCase):
-
+  """ Create testing.DatasetBuilderTestCase for tests."""
   DATASET_CLASS = caltech.Caltech101
 
   SPLITS = {
@@ -32,9 +30,9 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
       'test': 3,
   }
 
-  def setUp(self):
-    super(Caltech101Test, self).setUp()
-    caltech._TRAIN_POINTS_PER_CLASS = 1
+  def SetUp(self):
+    super(Caltech101Test, self).SetUp()
+    caltech._TRAIN_POINTS_PER_CLASS = 1 # pylint: disable=W0212
 
 
 if __name__ == '__main__':

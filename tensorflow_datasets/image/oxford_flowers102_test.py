@@ -14,11 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""TODO(oxford_102_flowers): Add a description here."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Test for oxford_102_flowers."""
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import oxford_flowers102
@@ -41,4 +37,3 @@ class OxfordFlowers102Test(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-

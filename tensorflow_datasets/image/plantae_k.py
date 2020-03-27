@@ -16,9 +16,6 @@
 # Lint as: python3
 """Healhy and unhealthy plant leaves dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import re
@@ -126,7 +123,7 @@ class PlantaeK(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, image_files):
     """Yields examples."""
-    label_map = {pattern: label for pattern, label in _LABEL_MAPPING}
+    label_map = {pattern: label for pattern, label in _LABEL_MAPPING} # pylint: disable=R1721
     regexp = re.compile(r"^(\w+[-_][dh])\d+\.JPG$")
     # Assigns labels to images based on label mapping.
     for original_fname, fpath in image_files.items():

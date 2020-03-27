@@ -16,9 +16,6 @@
 # Lint as: python3
 """Imagenet datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import os
@@ -142,6 +139,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
     # We don't import the original test split, as it doesn't include labels.
