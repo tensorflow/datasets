@@ -125,7 +125,7 @@ Example:
 
 ```py
 # Records 0 (included) to 99 (excluded).
-tfds.load("mnist", split="test[:99%]", rounding="pct1_dropremainder")
+tfds.load("mnist", split=tfds.core.ReadInstruction('test',to=99, rounding="pct1_dropremainder", unit = "%"))
 ```
 
 ### Reproducibility
