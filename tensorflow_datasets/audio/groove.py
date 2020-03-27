@@ -132,8 +132,8 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         "midi": tf.string
     }
     if self.builder_config.include_audio:
-      features_dict["audio"] = tfds.features.Tensor(
-          shape=[None], dtype=tf.float32)
+      features_dict["audio"] = tfds.features.Audio(
+          shape=[None], file_format='wav')
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
