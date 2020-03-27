@@ -171,7 +171,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 'filedir': os.path.join(files, 'hdf5'),
             }),

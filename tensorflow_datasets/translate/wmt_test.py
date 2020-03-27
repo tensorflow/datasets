@@ -80,6 +80,10 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
       "validation": 4,
   }
 
+  # Wmt itself do not define checksums. Checksums are contained in individual
+  # `wmt16.txt`, `wmt17.txt`,... files.
+  SKIP_CHECKSUMS = True
+
   def test_gzip_reading(self):
     results = [
         x for _, x in wmt._parse_parallel_sentences(

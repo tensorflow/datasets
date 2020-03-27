@@ -189,8 +189,8 @@ cfq/query_pattern_split/1.0.1
 cfq/question_complexity_split/1.0.1
 cfq/question_pattern_split/1.0.1
 cfq/random_split/1.0.1
-cifar10/3.0.1
-cifar100/3.0.1
+cifar10/3.0.2
+cifar100/3.0.2
 cifar10_1/v4/1.0.0
 cifar10_1/v6/1.0.0
 cifar10_corrupted/brightness_1/1.0.0
@@ -310,6 +310,7 @@ coil100/1.0.0
 colorectal_histology/2.0.0
 colorectal_histology_large/2.0.0
 cos_e/0.0.1
+crema_d/1.0.0
 curated_breast_imaging_ddsm/original-calc/2.0.0
 curated_breast_imaging_ddsm/original-mass/2.0.0
 curated_breast_imaging_ddsm/patches/2.0.0
@@ -489,8 +490,11 @@ imagenet_resized/16x16/0.1.0
 imagenet_resized/32x32/0.1.0
 imagenet_resized/64x64/0.1.0
 imagenet_resized/8x8/0.1.0
+imagenette/160px-v2/0.1.0
 imagenette/160px/0.1.0
+imagenette/320px-v2/0.1.0
 imagenette/320px/0.1.0
+imagenette/full-size-v2/0.1.0
 imagenette/full-size/0.1.0
 imagewang/160px/2.0.0
 imagewang/320px/2.0.0
@@ -614,11 +618,13 @@ nsynth/full/2.3.0
 nsynth/gansynth_subset.f0_and_loudness/2.3.0
 nsynth/gansynth_subset/2.3.0
 omniglot/3.0.0
+open_images_challenge2019_detection/200k/1.0.0
+open_images_challenge2019_detection/300k/1.0.0
 open_images_v4/200k/2.0.0
 open_images_v4/300k/2.0.0
 open_images_v4/original/2.0.0
 opinosis/1.0.0
-oxford_flowers102/2.0.0
+oxford_flowers102/2.1.0
 oxford_iiit_pet/3.1.0
 para_crawl/enbg_plain_text/1.0.0
 para_crawl/encs_plain_text/1.0.0
@@ -694,7 +700,9 @@ scan/template_right/1.0.0
 scene_parse150/1.0.0
 scicite/1.0.0
 scientific_papers/arxiv/1.1.0
+scientific_papers/arxiv/1.1.1
 scientific_papers/pubmed/1.1.0
+scientific_papers/pubmed/1.1.1
 shapes3d/2.0.0
 smallnorb/2.0.0
 snli/plain_text/1.0.0

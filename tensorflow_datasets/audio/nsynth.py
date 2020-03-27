@@ -124,8 +124,13 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("f0_and_loudness")
     v230 = tfds.core.Version(
         "2.3.0", "New `loudness_db` feature in decibels (unormalized).")
+    v231 = tfds.core.Version(
+        "2.3.1", "F0 computed with normalization fix in CREPE.")
     super(NsynthConfig, self).__init__(
-        name=".".join(name_parts), version=v230, **kwargs)
+        name=".".join(name_parts),
+        version=v231,
+        supported_versions=[v230],
+        **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
 

@@ -532,7 +532,7 @@ class DatasetBuilder(object):
         # Use padded_batch so that features with unknown shape are supported.
         ds = ds.padded_batch(
             full_bs, tf.compat.v1.data.get_output_shapes(ds))
-        ds = tf.compat.v1.data.Dataset.from_tensor_slices(
+        ds = tf.data.Dataset.from_tensor_slices(
             next(dataset_utils.as_numpy(ds)))
     else:
       ds = self._as_dataset(

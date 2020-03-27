@@ -199,7 +199,7 @@ def _read_files(
   parallel_reads = read_config.interleave_parallel_reads
   block_length = read_config.interleave_block_length
 
-  instruction_ds = tf.compat.v1.data.Dataset.from_tensor_slices(tensor_inputs)
+  instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
