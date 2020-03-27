@@ -395,8 +395,8 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
 
   VERSION = utils.Version("1.0.0")
   SUPPORTED_VERSIONS = [
-      "2.0.0",
-      "0.0.8",
+      utils.Version("2.0.0"),
+      utils.Version("0.0.8"),
   ]
 
   def _info(self):
