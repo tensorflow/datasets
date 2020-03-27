@@ -25,26 +25,18 @@ import os
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import sun
 
-_EXAMPLE_DIR = os.path.join(
-    os.path.normpath(os.path.dirname(__file__) + '/../'), 'testing',
+_EXAMPLE_DIR = os.path.join('testing',
     'test_data', 'fake_examples', 'sun397')
 
-
-class TestableSun397(sun.Sun397):
-
-  def __init__(self, **kwargs):
-    tfds_split_files = {
+# PATH to fake data
+sun._SUN397_SPLIT_FILES = { # pylint: disable=protected-access
         'tr': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_tr.txt'),
         'te': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_te.txt'),
         'va': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_va.txt'),
     }
-    super(TestableSun397, self).__init__(
-        tfds_split_files=tfds_split_files, **kwargs)
-
 
 class Sun397StandardPartitionTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = TestableSun397
-  EXAMPLE_DIR = _EXAMPLE_DIR
+  DATASET_CLASS = sun.Sun397
   BUILDER_CONFIG_NAMES_TO_TEST = ['standard-part1-120k']
   SPLITS = {
       'train': 4,
@@ -52,8 +44,7 @@ class Sun397StandardPartitionTest(testing.DatasetBuilderTestCase):
   }
 
 class Sun397TfdsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = TestableSun397
-  EXAMPLE_DIR = _EXAMPLE_DIR
+  DATASET_CLASS = sun.Sun397
   BUILDER_CONFIG_NAMES_TO_TEST = ['tfds']
   SPLITS = {
       'train': 4,

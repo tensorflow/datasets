@@ -66,6 +66,12 @@ _SUN397_IGNORE_IMAGES = [
     "SUN397/c/church/outdoor/sun_bhenjvsvrtumjuri.jpg",
 ]
 
+_SUN397_SPLIT_FILES = {
+    "tr": "image_classification/sun397_tfds_tr.txt",
+    "te": "image_classification/sun397_tfds_te.txt",
+    "va": "image_classification/sun397_tfds_va.txt",
+}
+
 _SUN397_BUILDER_CONFIG_DESCRIPTION_PATTERN = (
     "Train and test splits from the official partition number %d. "
     "Images are resized to have at most %s pixels, and compressed with 72 JPEG "
@@ -189,24 +195,11 @@ def _generate_builder_configs():
   return builder_configs
 
 
+
 class Sun397(tfds.core.GeneratorBasedBuilder):
   """Sun397 Scene Recognition Benchmark."""
 
   BUILDER_CONFIGS = _generate_builder_configs()
-
-  def __init__(self, tfds_split_files=None, **kwargs):
-    super(Sun397, self).__init__(**kwargs)
-    # Note: Only used for tests, since the data is fake.
-    if not tfds_split_files:
-      tfds_split_files = {
-          "tr": "sun397_tfds_tr.txt",
-          "te": "sun397_tfds_te.txt",
-          "va": "sun397_tfds_va.txt",
-      }
-      for split, filename in tfds_split_files.items():
-        tfds_split_files[split] = tfds.core.get_tfds_path(
-            os.path.join("image", filename))
-    self._tfds_split_files = tfds_split_files
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -298,7 +291,9 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _get_tfds_subsets_images(self):
     splits_sets = {}
-    for split, filepath in self._tfds_split_files.items():
+    tfds_split_files = { \
+      k: tfds.core.get_tfds_path(v) for k, v in _SUN397_SPLIT_FILES.items()}
+    for split, filepath in tfds_split_files.items():
       splits_sets[split] = self._load_image_set_from_file(filepath)
     return splits_sets
 
