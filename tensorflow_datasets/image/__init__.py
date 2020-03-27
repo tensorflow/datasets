@@ -40,6 +40,7 @@ from tensorflow_datasets.image.citrus import CitrusLeaves
 from tensorflow_datasets.image.cityscapes import Cityscapes
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.cmaterdb import Cmaterdb
+from tensorflow_datasets.image.coco_captions import CocoCaptions
 from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
