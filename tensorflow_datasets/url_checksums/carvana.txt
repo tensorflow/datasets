@@ -1,0 +1,9 @@
+kaggle://carvana-image-masking-challenge/29bb3ece3180_11.jpg 109920 23e473f7d4aac81292ae9720a42ba75323201a5557b668b22ad824b2bcee0a3a
+kaggle://carvana-image-masking-challenge/metadata.csv.zip 83109 85d62bbcd8e2b05e8b1921d6cb9e7fc30280961d1ca2360150f33d2c33800a31
+kaggle://carvana-image-masking-challenge/sample_submission.csv.zip 206457 3e0fb0e43f65dbfc1f5ce9031bff8ea22736995e5aa815547533f77db0bc0c7e
+kaggle://carvana-image-masking-challenge/test.zip 8328838743 aa239196937f7b31c1121e1e2fb0cd5f6645c52f58ebb6739fd3be2d6b4ecde3
+kaggle://carvana-image-masking-challenge/test_hq.zip 16588751874 1925380468a8c42b90ebb62cce3fedc068b126ca29c789933df824fe3d190f6f
+kaggle://carvana-image-masking-challenge/train.zip 424233528 dcb524b44ad0e70af0d89d6d41384ca9a5f483456717b2ba4591eefcdffbc80e
+kaggle://carvana-image-masking-challenge/train_hq.zip 843301716 96ef74e3e4c2ab9404a0ea3cff672a9f5b1a1ed7eec4a0b3035c941ee2388358
+kaggle://carvana-image-masking-challenge/train_masks.csv.zip 16001807 de18974479e0e6dbad4f9384364256687d53cda5627a4622d48f25d9440e92cb
+kaggle://carvana-image-masking-challenge/train_masks.zip 30537860 01b6748a4fd68757e381bfa3ae77ddfba4a62521cc3ea8f31c5842591bc2fc2d

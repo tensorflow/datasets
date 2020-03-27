@@ -26,6 +26,7 @@ from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image.cars196 import Cars196
+from tensorflow_datasets.image.carvana import Carvana
 from tensorflow_datasets.image.cassava import Cassava
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
@@ -99,3 +100,4 @@ from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.vgg_face2 import VggFace2
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
+
