@@ -4,31 +4,27 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+
+import random
+import IPython.display
+
 from absl import logging
 
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
+plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
-import IPython.display
-import random
-
-class AudioGridVisualizer(visualizer.Visualizer): 
+class AudioGridVisualizer(visualizer.Visualizer):
   def match(self, ds_info):
-     audio_keys = visualizer.extract_keys(ds_info.features, features_lib.Audio)
-     if audio_keys:
-       return True 
-     return False
+    audio_keys = visualizer.extract_keys(ds_info.features, features_lib.Audio)
+    return len(audio_keys) > 0
 
   def show(
       self,
       ds_info,
       ds,
-      rows=3,
-      cols=3,
-      plot_scale=3.,
-      image_key=None,
   ):
     """Display the dataset.
 
@@ -50,17 +46,17 @@ class AudioGridVisualizer(visualizer.Visualizer):
 
     samplerate = 16000
     for features in ds:
-        audio_samples.append(features[key].numpy())
+      audio_samples.append(features[key].numpy())
     to_gen = []
     for _ in range(4):
-      value = randint(0, len(audio_samples))
+      value = random.randint(0, len(audio_samples))
       to_gen.append(audio_samples[value])
 
     t1 = 0
     t2 = 100 * 1000
     for audio in to_gen:
       newAudio = audio[t1:t2]
-      IPython.display.Audio(newAudio,rate=samplerate) 
+      IPython.display.Audio(newAudio, rate=samplerate) 
 
     fig, a = plt.subplots(2, 2)
 
