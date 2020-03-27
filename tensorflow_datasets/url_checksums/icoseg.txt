@@ -1,0 +1,1 @@
+http://chenlab.ece.cornell.edu/projects/touch-coseg/CMU_Cornell_iCoseg_dataset.zip 93724253 902b13c6bdcb17b351a659f4d5821960ea6e995e3b5bf0397132a042301816cd
