@@ -1,20 +1,25 @@
 # Lint as: python3
-"""Script to Cleanup Metadata directory.
+"""Removes all dataset versions from metadata directory which are not 
+   present in registered versions of TFDS.
 
 To test:
-Goto tensorflow_datasets/scripts and run python metadata_cleanup.py
+Goto tensorflow_datasets/scripts
 
+Args : dry_run : If given, it traverse and finds all
+                 versions which are to be removed without
+                 actually removing them.
+                 
+             r : If given it removes all unmatched dataset versions 
+                 from metadata directory.
 ```
 cd tensorflow_datasets/scripts
-python metadata_cleanup.py
-```
-It delete all metadata directory versions 
-which are not present in registered versions of 
-datasets. Also it further check in last if there
-is any empty folder remaining after remove all useless
-versions from meatdata directory
-"""
 
+For check not delete : python metadata_cleanup.py --dry_run
+For delete not check : python metadata_cleaup.py --r
+For both delete & check : python metadata_cleanup.py --dry_run --r
+```
+"""
+from absl import flags
 from absl import app
 import os
 import re
@@ -22,6 +27,12 @@ import shutil
 import tensorflow as tf
 from tensorflow_datasets.core import registered
 
+
+FLAGS = flags.FLAGS
+flags.DEFINE_boolean('dry_run', False, "Shows all versions\
+                      which are not registered")
+flags.DEFINE_boolean('r', False, "Removes unmatched\
+                      dataset versions from metadata")
 
 __metadata_path = os.path.join(os.pardir, "testing/metadata")
 
@@ -39,12 +50,17 @@ def _extract_metadata_versions(metadata_dir):
     return _meta_paths
 
 def _delete_metadata_dirs(metadata_dir):
-    '''Remove metadata directories not present in registered versions '''
+    '''Remove metadata versions not present in registered versions '''
     _registered_path = set(i for i in registered.iter_dataset_full_names())
     _meta_paths= _extract_metadata_versions(metadata_dir)
     for extra_full_name in sorted(_meta_paths-_registered_path):
-        tf.io.gfile.rmtree(os.path.join(metadata_dir, extra_full_name))
-
+        if FLAGS.dry_run:
+            print(extra_full_name)
+        if FLAGS.r:
+            tf.io.gfile.rmtree(os.path.join(metadata_dir, extra_full_name))
+    # delete directories which is completely empty after process.
+    _remove_empty_folders(__metadata_path)
+            
 
 def _remove_empty_folders(path, removeRoot=True):
     '''
@@ -67,13 +83,17 @@ def _remove_empty_folders(path, removeRoot=True):
     if len(files) == 0 and removeRoot:
         os.rmdir(path)
 
-def main(_):
+def main(unused_argv):
+    """This method calls the _delete_metadata_dirs &
+        _remove_empty_folders method to start the process
+    """
+    del unused_argv
+    if FLAGS.dry_run:
+        print("\n These are the versions to be removed"
+              " from metadata directory: \n")
     # delete metadata versions not present in register version.
     _delete_metadata_dirs(__metadata_path) 
-    # delete directories which is completely empty after process.
-    _remove_empty_folders(__metadata_path)
 
 
-if __name__ == "__main__":
-  app.run(main)
-  
+if __name__ == "__main__":  
+    app.run(main)
