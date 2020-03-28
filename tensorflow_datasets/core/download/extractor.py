@@ -180,7 +180,7 @@ def iter_zip(arch_f):
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
-      if extract_file:  # File with data (not directory):
+      if not member.is_dir():  # File with data (not directory):
         path = _normpath(member.filename)
         if not path:
           continue
