@@ -5,7 +5,8 @@
 To test:
 Goto tensorflow_datasets/scripts
 
-Args : dry_run : If given, it traverse and finds all
+Args:
+       dry_run : If given, it traverse and finds all
                  versions which are to be removed without
                  actually removing them.
 
@@ -35,10 +36,12 @@ flags.DEFINE_boolean('r', False, "Removes unmatched\
 __metadata_path = os.path.join(os.pardir, "testing/metadata")
 
 def _extract_metadata_versions(metadata_dir):
-    """
-       Get all metadata direcotry versions paths,
+    """Get all metadata direcotry versions paths,
        It only extract the paths like 'dataset_name/version'
        or 'dataset_name/config/versions' in metadata dir
+
+    Args:
+        metadata_dir : Path to metadat directory (testing/metadata) 
     """
     _meta_paths = set()
     for root, dirs, files in tf.io.gfile.walk(metadata_dir):
@@ -48,7 +51,11 @@ def _extract_metadata_versions(metadata_dir):
     return _meta_paths
 
 def _delete_metadata_dirs(metadata_dir):
-    """Remove metadata versions not present in registered versions """
+    """Remove metadata versions not present in registered versions.
+    
+    Args:
+        metadata_dir : Path to metadat directory (testing/metadata) 
+    """
     _registered_path = set(versions for versions in registered.iter_dataset_full_names())
     _meta_paths= _extract_metadata_versions(metadata_dir)
     for extra_full_name in sorted(_meta_paths-_registered_path):
@@ -61,10 +68,12 @@ def _delete_metadata_dirs(metadata_dir):
             
 
 def _remove_empty_folders(path, removeRoot=True):
-    """
-       This function checks & remove recursively,
+    """This function checks & remove recursively,
        if there is any directory which completely
        empty after delete all useless metadata versions.
+
+    Args:
+        path : Path to metadat directory (testing/metadata) 
     """
     if not tf.io.gfile.isdir(path):
         return
@@ -82,9 +91,7 @@ def _remove_empty_folders(path, removeRoot=True):
         tf.io.gfile.rmtree(path)
 
 def main(unused_argv):
-    """This method calls the _delete_metadata_dirs &
-        _remove_empty_folders method to start the process
-    """
+    """Main script."""
     del unused_argv
     if FLAGS.dry_run:
         print("\n These are the versions to be removed"
