@@ -22,8 +22,6 @@ For both delete & check : python metadata_cleanup.py --dry_run --r
 from absl import flags
 from absl import app
 import os
-import re
-import shutil
 import tensorflow as tf
 from tensorflow_datasets.core import registered
 
