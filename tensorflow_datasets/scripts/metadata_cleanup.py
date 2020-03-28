@@ -82,8 +82,8 @@ def _remove_empty_folders(path, removeRoot=True):
         os.rmdir(path)
 
 def main(unused_argv):
-    """This method calls the _delete_metadata_dirs &
-        _remove_empty_folders method to start the process
+    """This method calls the _delete_metadata_dirs
+       method to start the process.
     """
     del unused_argv
     if FLAGS.dry_run:
