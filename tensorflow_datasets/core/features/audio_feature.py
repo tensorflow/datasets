@@ -33,19 +33,23 @@ class Audio(feature.Tensor):
   """`FeatureConnector` for audio, encoded as raw integer wave form."""
 
   @api_utils.disallow_positional_args
-  def __init__(self, file_format=None, shape=(None,)):
+  def __init__(self, file_format=None, shape=(None,), sample_rate=None):
     """Constructs the connector.
 
     Args:
       file_format: `str`, the audio file format. Can be any format ffmpeg
         understands. If `None`, will attempt to infer from the file extension.
       shape: `tuple`, shape of the data.
+      sample_rate: `int`, additional metadata exposed to the user through
+        `info.features['audio'].sample_rate`. This value isn't used neither in
+        encoding nor decoding.
     """
     self._file_format = file_format
     if len(shape) != 1:
       raise TypeError(
           "Audio feature currently only supports 1-D values, got %s." % shape)
     self._shape = shape
+    self._sample_rate = sample_rate
     super(Audio, self).__init__(shape=shape, dtype=tf.int64)
 
   def _encode_file(self, fobj, file_format):
@@ -64,3 +68,8 @@ class Audio(feature.Tensor):
         return self._encode_file(audio_f, file_format)
     else:
       return self._encode_file(audio_or_path_or_fobj, self._file_format)
+
+  @property
+  def sample_rate(self):
+    """Returns the `sample_rate` metadata associated with the dataset."""
+    return self._sample_rate

@@ -107,6 +107,9 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
           ],
       )
 
+  def test_sample_rate_property(self):
+    self.assertEqual(features.Audio(sample_rate=1600).sample_rate, 1600)
+
 
 if __name__ == "__main__":
   testing.test_main()
