@@ -317,7 +317,7 @@ class DownloadManager(object):
       return _map_promise(self._download, url_or_urls)
 
   def iter_archive(self, resource):
-    """Returns iterator over files within archive.
+    """Returns iterator over non-directory files within archive.
 
     **Important Note**: caller should read files as they are yielded.
     Reading out of order is slow.

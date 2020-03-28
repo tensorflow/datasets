@@ -199,5 +199,15 @@ _EXTRACT_METHODS = {
 
 
 def iter_archive(path, method):
-  """Yields (path_in_archive, f_obj) for archive at path using `tfds.download.ExtractMethod`."""  # pylint: disable=line-too-long
+  """
+  Yields (path_within_archive, file_obj) tuple for all non-directory files
+  in a archive given path using `tfds.download.ExtractMethod`.
+
+  Args:
+    path: Path to archive.
+    method: Extraction method.
+
+  Returns:
+      Generator yielding tuple (path_within_archive, file_obj).
+  """
   return _EXTRACT_METHODS[method](path)
