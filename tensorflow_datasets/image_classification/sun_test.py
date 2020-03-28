@@ -30,31 +30,36 @@ _EXAMPLE_DIR = os.path.join(
     'test_data', 'fake_examples', 'sun397')
 
 
-class TestableSun397(sun.Sun397):
+# Could use functools.partialmethod in Python3
+original_init = sun.Sun397.__init__
 
-  def __init__(self, **kwargs):
-    tfds_split_files = {
-        'tr': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_tr.txt'),
-        'te': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_te.txt'),
-        'va': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_va.txt'),
-    }
-    super(TestableSun397, self).__init__(
-        tfds_split_files=tfds_split_files, **kwargs)
+
+def new_init(self, tfds_split_files=None, **kwargs):
+  assert tfds_split_files is None
+  original_init(self, tfds_split_files={
+      'tr': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_tr.txt'),
+      'te': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_te.txt'),
+      'va': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_va.txt'),
+  }, **kwargs)
+
+
+# Patch init to add init arguments without changing the class.__name__ and
+# registration reguired to find the checksum file.
+sun.Sun397.__init__ = new_init
 
 
 class Sun397StandardPartitionTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = TestableSun397
+  DATASET_CLASS = sun.Sun397
   EXAMPLE_DIR = _EXAMPLE_DIR
   BUILDER_CONFIG_NAMES_TO_TEST = ['standard-part1-120k']
   SPLITS = {
       'train': 4,
       'test': 3,
   }
-  SKIP_CHECKSUMS = True  # TODO(tfds): Update checksums
 
 
 class Sun397TfdsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = TestableSun397
+  DATASET_CLASS = sun.Sun397
   EXAMPLE_DIR = _EXAMPLE_DIR
   BUILDER_CONFIG_NAMES_TO_TEST = ['tfds']
   SPLITS = {
@@ -62,8 +67,6 @@ class Sun397TfdsTest(testing.DatasetBuilderTestCase):
       'test': 2,
       'validation': 2,
   }
-  SKIP_CHECKSUMS = True  # TODO(tfds): Update checksums
-
 
 if __name__ == '__main__':
   testing.test_main()
