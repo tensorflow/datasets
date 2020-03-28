@@ -298,6 +298,32 @@ class DatasetBuilder(object):
               self.name, self.version, self.version.tfds_version_to_prepare,
               available_to_prepare))
 
+    # Only `cls.VERSION` or `experimental_latest` versions can be generated.
+    # Otherwise, users may accidentally generate an old version using the
+    # code from newer versions.
+    installable_versions = {
+        str(v) for v in (self.canonical_version, max(self.versions))
+    }
+    if str(self.version) not in installable_versions:
+      msg = (
+          "The version of the dataset you are trying to use ({}) is too "
+          "old for this version of TFDS so cannot be generated."
+      ).format(self.info.full_name)
+      if self.version.tfds_version_to_prepare:
+        msg += (
+            "{} can only be generated using TFDS code synced @ {} or earlier "
+            "Either sync to that version of TFDS to first prepare the data or "
+            "use another version of the dataset. "
+        ).format(self.version, self.version.tfds_version_to_prepare)
+      else:
+        msg += (
+            "Either sync to a previous version of TFDS to first prepare the "
+            "data or use another version of the dataset. "
+        )
+      msg += "Available for `download_and_prepare`: {}".format(
+          list(sorted(installable_versions)))
+      raise ValueError(msg)
+
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
     # it will always be reloaded and data_dir will be set at construction.
