@@ -8,7 +8,7 @@ Goto tensorflow_datasets/scripts
 Args : dry_run : If given, it traverse and finds all
                  versions which are to be removed without
                  actually removing them.
-                 
+
              r : If given it removes all unmatched dataset versions 
                  from metadata directory.
 ```
@@ -41,7 +41,7 @@ def _extract_metadata_versions(metadata_dir):
        or 'dataset_name/config/versions' in metadata dir
     '''
     _meta_paths = set()
-    for root, dirs, files in os.walk(metadata_dir):
+    for root, dirs, files in tf.io.gfile.walk(metadata_dir):
         for fileName in files:
             _meta_paths.add(os.path.join(root[len(metadata_dir)+1:]))
     _meta_paths.remove('')
@@ -66,24 +66,24 @@ def _remove_empty_folders(path, removeRoot=True):
        if there is any directory which completely
        empty after delete all useless metadata versions.
     '''
-    if not os.path.isdir(path):
+    if not tf.io.gfile.isdir(path):
         return
     # remove empty subfolders
-    files = os.listdir(path)
+    files = tf.io.gfile.listdir(path)
     if len(files):
         for f in files:
             fullpath = os.path.join(path, f)
-            if os.path.isdir(fullpath):
+            if tf.io.gfile.isdir(fullpath):
                 _remove_empty_folders(fullpath)
 
     # if folder empty, delete it
-    files = os.listdir(path)
+    files = tf.io.gfile.listdir(path)
     if len(files) == 0 and removeRoot:
-        os.rmdir(path)
+        tf.io.gfile.rmtree(path)
 
 def main(unused_argv):
-    """This method calls the _delete_metadata_dirs
-       method to start the process.
+    """This method calls the _delete_metadata_dirs &
+        _remove_empty_folders method to start the process
     """
     del unused_argv
     if FLAGS.dry_run:
