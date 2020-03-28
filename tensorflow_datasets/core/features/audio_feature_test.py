@@ -52,6 +52,20 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def test_numpy_array_float(self):
+    np_audio = self.create_np_audio().astype(np.float32)
+    self.assertFeature(
+        feature=features.Audio(dtype=tf.float32),
+        shape=(None,),
+        dtype=tf.float32,
+        tests=[
+            testing.FeatureExpectationItem(
+                value=np_audio,
+                expected=np_audio,
+            ),
+        ],
+    )
+
   def write_wave_file(self, np_audio, path):
     audio = pydub.AudioSegment.empty().set_sample_width(2)
     # See documentation for _spawn usage:

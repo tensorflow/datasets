@@ -33,13 +33,20 @@ class Audio(feature.Tensor):
   """`FeatureConnector` for audio, encoded as raw integer wave form."""
 
   @api_utils.disallow_positional_args
-  def __init__(self, file_format=None, shape=(None,), sample_rate=None):
+  def __init__(
+      self,
+      file_format=None,
+      shape=(None,),
+      dtype=tf.int64,
+      sample_rate=None,
+  ):
     """Constructs the connector.
 
     Args:
       file_format: `str`, the audio file format. Can be any format ffmpeg
         understands. If `None`, will attempt to infer from the file extension.
       shape: `tuple`, shape of the data.
+      dtype: The dtype of the data.
       sample_rate: `int`, additional metadata exposed to the user through
         `info.features['audio'].sample_rate`. This value isn't used neither in
         encoding nor decoding.
@@ -50,13 +57,14 @@ class Audio(feature.Tensor):
           "Audio feature currently only supports 1-D values, got %s." % shape)
     self._shape = shape
     self._sample_rate = sample_rate
-    super(Audio, self).__init__(shape=shape, dtype=tf.int64)
+    super(Audio, self).__init__(shape=shape, dtype=dtype)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
         fobj, format=file_format)
+    np_dtype = np.dtype(self.dtype.as_numpy_dtype)
     return super(Audio, self).encode_example(
-        np.array(audio_segment.get_array_of_samples()).astype(np.int64))
+        np.array(audio_segment.get_array_of_samples()).astype(np_dtype))
 
   def encode_example(self, audio_or_path_or_fobj):
     if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
