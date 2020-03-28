@@ -35,11 +35,11 @@ flags.DEFINE_boolean('r', False, "Removes unmatched\
 __metadata_path = os.path.join(os.pardir, "testing/metadata")
 
 def _extract_metadata_versions(metadata_dir):
-    '''
+    """
        Get all metadata direcotry versions paths,
        It only extract the paths like 'dataset_name/version'
        or 'dataset_name/config/versions' in metadata dir
-    '''
+    """
     _meta_paths = set()
     for root, dirs, files in tf.io.gfile.walk(metadata_dir):
         for fileName in files:
@@ -48,8 +48,8 @@ def _extract_metadata_versions(metadata_dir):
     return _meta_paths
 
 def _delete_metadata_dirs(metadata_dir):
-    '''Remove metadata versions not present in registered versions '''
-    _registered_path = set(i for i in registered.iter_dataset_full_names())
+    """Remove metadata versions not present in registered versions """
+    _registered_path = set(versions for versions in registered.iter_dataset_full_names())
     _meta_paths= _extract_metadata_versions(metadata_dir)
     for extra_full_name in sorted(_meta_paths-_registered_path):
         if FLAGS.dry_run:
@@ -61,11 +61,11 @@ def _delete_metadata_dirs(metadata_dir):
             
 
 def _remove_empty_folders(path, removeRoot=True):
-    '''
+    """
        This function checks & remove recursively,
        if there is any directory which completely
        empty after delete all useless metadata versions.
-    '''
+    """
     if not tf.io.gfile.isdir(path):
         return
     # remove empty subfolders
