@@ -423,27 +423,30 @@ class ReadInstruction(object):
   ```
   # The following lines are equivalent:
   ds = tfds.load('mnist', split='test[:33%]')
-  ds = tfds.load('mnist', split=ReadInstruction.from_spec('test[:33%]'))
-  ds = tfds.load('mnist', split=ReadInstruction('test', to=33, unit='%'))
-  ds = tfds.load('mnist', split=ReadInstruction(
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
+      'test[:33%]'))
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
+      'test', to=33, unit='%'))
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
       'test', from_=0, to=33, unit='%'))
 
   # The following lines are equivalent:
   ds = tfds.load('mnist', split='test[:33%]+train[1:-1]')
-  ds = tfds.load('mnist', split=ReadInstruction.from_spec(
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
       'test[:33%]+train[1:-1]'))
   ds = tfds.load('mnist', split=(
-      ReadInstruction.('test', to=33, unit='%') +
-      ReadInstruction.('train', from_=1, to=-1, unit='abs')))
+      tfds.core.ReadInstruction.('test', to=33, unit='%') +
+      tfds.core.ReadInstruction.('train', from_=1, to=-1, unit='abs')))
 
   # 10-fold validation:
   tests = tfds.load(
       'mnist',
-      [ReadInstruction('train', from_=k, to=k+10, unit='%')
+      [tfds.core.ReadInstruction('train', from_=k, to=k+10, unit='%')
        for k in range(0, 100, 10)])
   trains = tfds.load(
       'mnist',
-      [RI('train', to=k, unit='%') + RI('train', from_=k+10, unit='%')
+      [tfds.core.ReadInstruction('train', to=k, unit='%') +
+       tfds.core.ReadInstruction('train', from_=k+10, unit='%')
        for k in range(0, 100, 10)])
   ```
 
@@ -462,8 +465,14 @@ class ReadInstruction(object):
     return result
 
   @api_utils.disallow_positional_args(allowed=['split_name'])
-  def __init__(self, split_name, rounding='closest', from_=None, to=None,
-               unit=None):
+  def __init__(
+      self,
+      split_name,
+      rounding='closest',
+      from_=None,
+      to=None,
+      unit=None,
+  ):
     """Initialize ReadInstruction.
 
     Args:
@@ -487,6 +496,10 @@ class ReadInstruction(object):
         '%': to set the slicing unit as percents of the split size.
         'abs': to set the slicing unit as absolute numbers.
     """
+    # Unit is optional only if the full dataset is read, otherwise, will
+    # `_RelativeInstruction` validator will fail.
+    if from_ is None and to is None and unit is None:
+      unit = '%'
     # This constructor is not always called. See factory method
     # `_read_instruction_from_relative_instructions`. Common init instructions
     # MUST be placed in the _init method.
