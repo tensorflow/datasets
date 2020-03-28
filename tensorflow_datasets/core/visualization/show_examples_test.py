@@ -31,12 +31,19 @@ from tensorflow_datasets.image_classification import imagenet  # pylint: disable
 
 
 class ShowExamplesTest(testing.TestCase):
-
+  """ Test for show_examples() method"""
   @mock.patch('matplotlib.pyplot.figure')
-  def test_show_examples(self, mock_fig):
+  def test_show_examples(self, _):
     with testing.mock_data(num_examples=20):
       ds, ds_info = registered.load(
           'imagenet2012', split='train', with_info=True)
+    visualization.show_examples(ds_info, ds)
+
+  @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_supervised(self, _):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = registered.load(
+          'imagenet2012', split='train', with_info=True, as_supervised=True)
     visualization.show_examples(ds_info, ds)
 
   # TODO(tfds): Should add test when there isn't enough examples (ds.take(3))

@@ -78,6 +78,13 @@ def _add_image(ax, image):
   plt.xticks([], [])
   plt.yticks([], [])
 
+def _infer_ds_property(ds):  # TODO: batched
+  ex = list(dataset_utils.as_numpy(ds.take(1)))[0]
+  if isinstance(ex, tuple):
+    return "supervised"
+  if isinstance(ex, dict):
+    return "normal"
+  raise ValueError("No Visualization support for this type datasets")
 
 class ImageGridVisualizer(visualizer.Visualizer):
   """Visualizer for supervised image datasets."""
@@ -88,7 +95,7 @@ class ImageGridVisualizer(visualizer.Visualizer):
     image_keys = visualizer.extract_keys(ds_info.features, features_lib.Image)
     return len(image_keys) >= 1
 
-  def show(
+  def show(# pylint: disable=arguments-differ
       self,
       ds_info,
       ds,
@@ -128,23 +135,29 @@ class ImageGridVisualizer(visualizer.Visualizer):
     label_key = label_keys[0] if len(label_keys) == 1 else None
     if not label_key:
       logging.info('Was not able to auto-infer label.')
+    ds_prop = _infer_ds_property(ds)
 
-    # Single image display
-    def make_cell_fn(ax, ex):
+    def make_cell_fn_normal(ax, ex):
       plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
-      if not isinstance(ex, dict):
-        raise ValueError(
-            '{} requires examples as `dict`, with the same '
-            'structure as `ds_info.features`. It is currently not compatible '
-            'with `as_supervised=True`. Received: {}'.format(
-                type(self).__name__, type(ex)))
-
       _add_image(ax, ex[image_key])
       if label_key:
         label = ex[label_key]
         label_str = ds_info.features[label_key].int2str(label)
         plt.xlabel('{} ({})'.format(label_str, label))
 
-    # Print the grid
-    fig = _make_grid(make_cell_fn, ds, rows, cols, plot_scale)
+    def make_cell_fn_supervised(ax, ex):
+      plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+      _add_image(ax, ex[0])
+      if label_key:
+        label = ex[1]
+        label_str = ds_info.features[label_key].int2str(label)
+        plt.xlabel('{} ({})'.format(label_str, label))
+
+    # Single image display
+    make_cell_fn = ({
+        "normal": make_cell_fn_normal,
+        "supervised": make_cell_fn_supervised,
+        # "batched" : "_make_cell_fn_batched",
+    })
+
+    _ = _make_grid(make_cell_fn[ds_prop], ds, rows, cols, plot_scale)
