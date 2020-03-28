@@ -5,8 +5,6 @@ from __future__ import division
 from __future__ import print_function
 
 
-import random
-import IPython.display
 
 from absl import logging
 
@@ -14,7 +12,6 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
-plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
 class AudioGridVisualizer(visualizer.Visualizer):
   def match(self, ds_info):
@@ -25,6 +22,10 @@ class AudioGridVisualizer(visualizer.Visualizer):
       self,
       ds_info,
       ds,
+      rows=2,
+      cols=2,
+      plot_scale=3.,
+      image_key=None,
   ):
     """Display the dataset.
 
@@ -41,6 +42,11 @@ class AudioGridVisualizer(visualizer.Visualizer):
         image_key: `string`, name of the feature that contains the image. If not
           set, the system will try to auto-detect it.
       """
+    import random
+    import IPython.display
+    if not image_key:
+      audio_keys = visualizer.extract_keys(ds_info.features, features_lib.Audio)
+      
     key = audio_keys[0]
     audio_samples = []
 
@@ -51,13 +57,14 @@ class AudioGridVisualizer(visualizer.Visualizer):
     for _ in range(4):
       value = random.randint(0, len(audio_samples))
       to_gen.append(audio_samples[value])
-
+    
     t1 = 0
     t2 = 100 * 1000
     for audio in to_gen:
       newAudio = audio[t1:t2]
       IPython.display.Audio(newAudio, rate=samplerate) 
-
+      
+    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
     fig, a = plt.subplots(2, 2)
 
     a[0][0].plot(to_gen[0])
