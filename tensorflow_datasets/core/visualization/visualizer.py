@@ -25,6 +25,8 @@ import abc
 
 import six
 
+from tensorflow_datasets.core import features as features_lib
+
 
 def extract_keys(feature_dict, feature_cls):
   """Extracts keys from features dict based on feature type.
@@ -37,6 +39,39 @@ def extract_keys(feature_dict, feature_cls):
     List of extracted keys matching the class.
   """
   return [k for k, f in feature_dict.items() if isinstance(f, feature_cls)]
+
+def extract_nested_keys(features, feature_list):
+  """Extracts nested feature keys in features dict.
+  Args:
+    features: `tfds.features.FeaturesDict` from which extract keys
+    feature_list: List of `tfds.features.FeatureConnector` class to search.
+  Returns:
+    List of extracted keys containing a new key for each nested
+    `tfds.features.FeatureDict`, including the top-level one.
+  """
+  out = []
+  temp_fdt = features
+
+  for i in range(len(feature_list)):
+    if i > (len(feature_list) - 2):
+      break
+    f_slice = feature_list[i:(i+2)]
+    top_level_keys = extract_keys(temp_fdt, f_slice[0])
+
+    mid_level_keys = []
+    for key in top_level_keys:
+      if isinstance(temp_fdt[key].feature, features_lib.FeaturesDict):
+        mid_level_keys = extract_keys(temp_fdt[key], f_slice[1])
+        if len(mid_level_keys) > 0:
+          if i == 0:
+            out.append(key)
+          out.append(mid_level_keys[0])
+          new_key = key
+          break
+    if len(mid_level_keys) == 0:
+      return False
+    temp_fdt = temp_fdt[new_key]
+  return out
 
 
 @six.add_metaclass(abc.ABCMeta)
