@@ -78,7 +78,7 @@ def _add_image(ax, image):
   plt.xticks([], [])
   plt.yticks([], [])
 
-def _infer_ds_property(ds):  # TODO: batched
+def _infer_ds_property(ds):  # TODO: batched, multiple_images
   ex = list(dataset_utils.as_numpy(ds.take(1)))[0]
   if isinstance(ex, tuple):
     return "supervised"
@@ -95,7 +95,7 @@ class ImageGridVisualizer(visualizer.Visualizer):
     image_keys = visualizer.extract_keys(ds_info.features, features_lib.Image)
     return len(image_keys) >= 1
 
-  def show(# pylint: disable=arguments-differ
+  def show( # pylint: disable=arguments-differ
       self,
       ds_info,
       ds,
@@ -137,8 +137,9 @@ class ImageGridVisualizer(visualizer.Visualizer):
       logging.info('Was not able to auto-infer label.')
     ds_prop = _infer_ds_property(ds)
 
+    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+
     def make_cell_fn_normal(ax, ex):
-      plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
       _add_image(ax, ex[image_key])
       if label_key:
         label = ex[label_key]
@@ -146,7 +147,6 @@ class ImageGridVisualizer(visualizer.Visualizer):
         plt.xlabel('{} ({})'.format(label_str, label))
 
     def make_cell_fn_supervised(ax, ex):
-      plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
       _add_image(ax, ex[0])
       if label_key:
         label = ex[1]
@@ -154,10 +154,11 @@ class ImageGridVisualizer(visualizer.Visualizer):
         plt.xlabel('{} ({})'.format(label_str, label))
 
     # Single image display
-    make_cell_fn = ({
+    make_cell_fn = { # TODO: batched, multiple_images
         "normal": make_cell_fn_normal,
         "supervised": make_cell_fn_supervised,
-        # "batched" : "_make_cell_fn_batched",
-    })
+        # "batched" : make_cell_fn_batched,
+        # "multiple_image_keys": make_cell_fn_multliple_keys
+    }
 
     _ = _make_grid(make_cell_fn[ds_prop], ds, rows, cols, plot_scale)
