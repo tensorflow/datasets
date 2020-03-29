@@ -57,6 +57,8 @@ import tensorflow_datasets as tfds
 import tensorflow as tf
 
 # Here we assume Eager mode is enabled (TF2), but tfds also works in Graph mode.
+#If implementing a data set for the first time, use the below command line.
+# python -m tensorflow_datasets.scripts.download_and_prepare --registrer_checksums=True --datasets='dataset_name'
 
 # Construct a tf.data.Dataset
 ds_train = tfds.load('mnist', split='train', shuffle_files=True)
