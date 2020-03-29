@@ -90,7 +90,7 @@ the following methods:
 *   `_download_and_prepare`: to download and serialize the source data to disk
 *   `_as_dataset`: to produce a `tf.data.Dataset` from the serialized data
 
-Most datasets subclass `tfds.core.GeneratorBasedBuilder`, which is a subclass of
+Most datasets are defined as subclass `tfds.core.GeneratorBasedBuilder`, which is a subclass of
 `tfds.core.DatasetBuilder` that simplifies defining a dataset. It works well for
 datasets that can be generated on a single machine. Its subclasses implement:
 
