@@ -11,7 +11,7 @@ isn't already added.
     *   [DatasetBuilder](#datasetbuilder)
     *   [my_dataset.py](#my_datasetpy)
 *   [Specifying `DatasetInfo`](#specifying-datasetinfo)
-    *   [`FeatureConnector`s](#featureconnectors)
+    *   [`FeatureConnectors`](#featureconnectors)
 *   [Downloading and extracting source data](#downloading-and-extracting-source-data)
     *   [Manual download and extraction](#manual-download-and-extraction)
 *   [Specifying dataset splits](#specifying-dataset-splits)
