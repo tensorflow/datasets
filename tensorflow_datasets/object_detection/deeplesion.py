@@ -69,30 +69,25 @@ class DeeplesionConfig(tfds.core.BuilderConfig):
           self).__init__(name=name,
                          version=tfds.core.Version('1.0.0'),
                          **kwargs)
-    self._thickness = thickness
-
-    @property
-    def thickness(self):
-      if not self._thickness:
-        self._thickness = 5
-      return self._thickness
+    self.thickness = thickness
 
 
 class Deeplesion(tfds.core.GeneratorBasedBuilder):
   """DeepLesion dataset builder."""
   BUILDER_CONFIGS = [
-      DeeplesionConfig(
-          name='abnormal',
-          description=_DESCRIPTION,
-      ),
-      DeeplesionConfig(
-          name='normal',
-          description=_DESCRIPTION,
-      ),
-      DeeplesionConfig(
-          name='volume',
-          description=_DESCRIPTION,
-      ),
+    DeeplesionConfig(
+      name='abnormal',
+      description=_DESCRIPTION,
+    ),
+    DeeplesionConfig(
+      name='normal',
+      description=_DESCRIPTION,
+    ),
+    DeeplesionConfig(
+      name='volume',
+      description=_DESCRIPTION,
+      thickness=5
+    ),
   ]
 
   def _info(self):
