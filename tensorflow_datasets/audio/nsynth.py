@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """NSynth Dataset."""
 
 from __future__ import absolute_import
@@ -38,18 +39,17 @@ Full NSynth Dataset is split into train, valid, and test sets, with no
 instruments overlapping between the train set and the valid/test sets.
 """
 
-
 _GANSYNTH_DESCRIPTION = """\
 NSynth Dataset limited to acoustic instruments in the MIDI pitch interval
 [24, 84]. Uses alternate splits that have overlap in instruments (but not exact
-notes) between the train set and valid/test sets. This variant was originally 
+notes) between the train set and valid/test sets. This variant was originally
 introduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 """
 
 _F0_AND_LOUDNESS_ADDENDUM = """\
 This version additionally contains estimates for F0 using CREPE
-(Kim et al., 2018) and A-weighted perceptual loudness. Both signals are provided
-at a frame rate of 250Hz.
+(Kim et al., 2018) and A-weighted perceptual loudness in decibels. Both signals
+are provided at a frame rate of 250Hz.
 """
 
 # From http://proceedings.mlr.press/v70/engel17a.html
@@ -75,22 +75,19 @@ _NUM_SECS = 4
 _AUDIO_RATE = 16000  # 16 kHz
 _F0_AND_LOUDNESS_RATE = 250  # 250 Hz
 _CREPE_FRAME_SIZE = 1024
+_LD_N_FFT = 2048
+_LD_RANGE = 120.0
+_REF_DB = 20.7  # White noise, amplitude=1.0, n_fft=2048
 
 _INSTRUMENT_FAMILIES = [
     "bass", "brass", "flute", "guitar", "keyboard", "mallet", "organ", "reed",
-    "string", "synth_lead", "vocal"]
+    "string", "synth_lead", "vocal"
+]
 _INSTRUMENT_SOURCES = ["acoustic", "electronic", "synthetic"]
 _QUALITIES = [
-    "bright",
-    "dark",
-    "distortion",
-    "fast_decay",
-    "long_release",
-    "multiphonic",
-    "nonlinear_env",
-    "percussive",
-    "reverb",
-    "tempo-synced"]
+    "bright", "dark", "distortion", "fast_decay", "long_release", "multiphonic",
+    "nonlinear_env", "percussive", "reverb", "tempo-synced"
+]
 
 _BASE_DOWNLOAD_PATH = "http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-"
 
@@ -125,14 +122,16 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("full")
     if estimate_f0_and_loudness:
       name_parts.append("f0_and_loudness")
-    v120 = tfds.core.Version(
-        "1.2.0", experiments={tfds.core.Experiment.S3: False})
-    v220 = tfds.core.Version(
-        "2.2.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v230 = tfds.core.Version(
+        "2.3.0", "New `loudness_db` feature in decibels (unormalized).")
+    v231 = tfds.core.Version(
+        "2.3.1", "F0 computed with normalization fix in CREPE.")
+    v232 = tfds.core.Version(
+        "2.3.2", "Use Audio feature.")
     super(NsynthConfig, self).__init__(
         name=".".join(name_parts),
-        version=v120,
-        supported_versions=[v220],
+        version=v232,
+        supported_versions=[v231, v230],
         **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
@@ -142,9 +141,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
   """A large-scale and high-quality dataset of annotated musical notes."""
   BUILDER_CONFIGS = [
       NsynthConfig(description=_FULL_DESCRIPTION),
-      NsynthConfig(
-          gansynth_subset=True,
-          description=_GANSYNTH_DESCRIPTION),
+      NsynthConfig(gansynth_subset=True, description=_GANSYNTH_DESCRIPTION),
       NsynthConfig(
           gansynth_subset=True,
           estimate_f0_and_loudness=True,
@@ -156,8 +153,11 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         "id":
             tf.string,
         "audio":
-            tfds.features.Tensor(
-                shape=(_AUDIO_RATE * _NUM_SECS,), dtype=tf.float32),
+            tfds.features.Audio(
+                shape=(_AUDIO_RATE * _NUM_SECS,),
+                dtype=tf.float32,
+                sample_rate=_AUDIO_RATE,
+            ),
         "pitch":
             tfds.features.ClassLabel(num_classes=128),
         "velocity":
@@ -181,8 +181,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
               tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32)
       }
       features["loudness"] = {
-          "db":
-              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32)
+          "db": tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32)
       }
     return tfds.core.DatasetInfo(
         builder=self,
@@ -190,7 +189,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         features=tfds.features.FeaturesDict(features),
         homepage="https://g.co/magenta/nsynth-dataset",
         citation=_CITATION,
-        metadata=tfds.core.BeamMetadataDict(),
+        metadata=tfds.core.BeamMetadataDict(sample_rate=_AUDIO_RATE,),
     )
 
   def _split_generators(self, dl_manager):
@@ -204,8 +203,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
     dl_urls["instrument_labels"] = (
         _BASE_DOWNLOAD_PATH + "instrument_labels.txt")
     if self.builder_config.gansynth_subset:
-      dl_urls["gansynth_splits"] = (
-          _BASE_DOWNLOAD_PATH + "gansynth_splits.csv")
+      dl_urls["gansynth_splits"] = (_BASE_DOWNLOAD_PATH + "gansynth_splits.csv")
     dl_paths = dl_manager.download_and_extract(dl_urls)
 
     with tf.io.gfile.GFile(dl_paths["instrument_labels"]) as f:
@@ -242,8 +240,9 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       beam.metrics.Metrics.counter(split, "base-examples").inc()
       features = ex.features.feature
       id_ = features["note_str"].bytes_list.value[0]
-      return  id_, {
-          "id": id_,
+      return id_, {
+          "id":
+              id_,
           "audio":
               np.array(features["audio"].float_list.value, dtype=np.float32),
           "pitch":
@@ -281,6 +280,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
 
       audio = ex["audio"]
 
+      # Copied from magenta/ddsp/spectral_ops.py
       # Pad end so that `num_frames = _NUM_SECS * _F0_AND_LOUDNESS_RATE`.
       hop_size = _AUDIO_RATE / _F0_AND_LOUDNESS_RATE
       n_samples = len(audio)
@@ -289,12 +289,13 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       n_padding = (n_samples_padded - n_samples)
       assert n_padding % 1 == 0
       audio = np.pad(audio, (0, int(n_padding)), mode="constant")
+      crepe_step_size = 1000 / _F0_AND_LOUDNESS_RATE  # milliseconds
 
       _, f0_hz, f0_confidence, _ = tfds.core.lazy_imports.crepe.predict(
           audio,
           sr=_AUDIO_RATE,
           viterbi=True,
-          step_size=1000/_F0_AND_LOUDNESS_RATE,
+          step_size=crepe_step_size,
           center=False,
           verbose=0)
       f0_midi = tfds.core.lazy_imports.librosa.core.hz_to_midi(f0_hz)
@@ -310,50 +311,49 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       }
       return id_, ex
 
-    def _calc_loudness(audio, n_fft=2048, top_db=200.0, pmin=1e-20):
-      """Perceptual loudness in tf, following librosa implementation."""
+    def _calc_loudness(id_ex):
+      """Compute loudness, add to example (ref is white noise, amplitude=1)."""
+      id_, ex = id_ex
+      beam.metrics.Metrics.counter(split, "compute-loudness").inc()
+
+      audio = ex["audio"]
+
+      # Copied from magenta/ddsp/spectral_ops.py
+      # Get magnitudes.
+      hop_size = int(_AUDIO_RATE // _F0_AND_LOUDNESS_RATE)
+
+      # Add padding to the end
+      n_samples_initial = int(audio.shape[-1])
+      n_frames = int(np.ceil(n_samples_initial / hop_size))
+      n_samples_final = (n_frames - 1) * hop_size + _LD_N_FFT
+      pad = n_samples_final - n_samples_initial
+      audio = np.pad(audio, ((0, pad),), "constant")
+
       librosa = tfds.core.lazy_imports.librosa
-      log10 = lambda x: tf.math.log(x) / tf.math.log(10.0)
+      spectra = librosa.stft(
+          audio, n_fft=_LD_N_FFT, hop_length=hop_size, center=False).T
 
-      spectra = tf.signal.stft(
-          signals=audio,
-          frame_length=n_fft,
-          frame_step=int(_AUDIO_RATE // _F0_AND_LOUDNESS_RATE),
-          fft_length=n_fft,
-          pad_end=True)
+      # Compute power
+      amplitude = np.abs(spectra)
+      amin = 1e-20  # Avoid log(0) instabilities.
+      power_db = np.log10(np.maximum(amin, amplitude))
+      power_db *= 20.0
 
-      power = tf.abs(spectra)**2.0
-      power_db = 10.0 * log10(tf.maximum(pmin, power))
-      power_db = tf.maximum(power_db, tf.reduce_max(power_db) - top_db)
+      # Perceptual weighting.
+      frequencies = librosa.fft_frequencies(sr=_AUDIO_RATE, n_fft=_LD_N_FFT)
+      a_weighting = librosa.A_weighting(frequencies)[np.newaxis, :]
+      loudness = power_db + a_weighting
 
-      fft_frequencies = librosa.fft_frequencies(n_fft=n_fft)
-      a_weighting = librosa.A_weighting(fft_frequencies)
+      # Set dynamic range.
+      loudness -= _REF_DB
+      loudness = np.maximum(loudness, -_LD_RANGE)
 
-      loudness = power_db + a_weighting[tf.newaxis, :]
-      loudness = tf.reduce_mean(loudness, axis=-1)
-      return loudness
+      # Average over frequency bins.
+      mean_loudness_db = np.mean(loudness, axis=-1)
 
-    class _ComputeLoudnessFn(beam.DoFn):
-      """Computes loudness, re-using the TF graph."""
-
-      def start_bundle(self):
-        self._calc_loudness = tf.function(
-            _calc_loudness,
-            input_signature=[tf.TensorSpec(
-                shape=[_NUM_SECS * _AUDIO_RATE], dtype=tf.float32)])
-        self._sess = None if tf.executing_eagerly() else tf.Session()
-
-      def process(self, id_ex):
-        """Compute loudness and add to example."""
-        id_, ex = id_ex
-        beam.metrics.Metrics.counter(split, "compute-loudness").inc()
-        mean_loudness_db = self._calc_loudness(ex["audio"])
-        if self._sess:
-          mean_loudness_db = self._sess.run(mean_loudness_db)
-
-        ex = dict(ex)
-        ex["loudness"] = {"db": mean_loudness_db}
-        yield id_, ex
+      ex = dict(ex)
+      ex["loudness"] = {"db": mean_loudness_db.astype(np.float32)}
+      return id_, ex
 
     examples = (
         pipeline
@@ -367,20 +367,6 @@ class Nsynth(tfds.core.BeamBasedBuilder):
           examples
           | beam.Reshuffle()
           | beam.Map(_estimate_f0)
-          | beam.ParDo(_ComputeLoudnessFn()))
-      if split == tfds.Split.TRAIN:
-        # Output mean and variance of loudness for TRAIN split.
-        loudness = examples | beam.Map(
-            lambda id_ex: np.mean(id_ex[1]["loudness"]["db"]))
-        loudness_mean = (
-            loudness
-            | "loudness_mean" >> beam.combiners.Mean.Globally())
-        loudness_variance = (
-            loudness
-            | beam.Map(lambda ld, ld_mean: (ld - ld_mean)**2,
-                       ld_mean=beam.pvalue.AsSingleton(loudness_mean))
-            | "loudness_variance" >> beam.combiners.Mean.Globally())
-        self.info.metadata["loudness_db_mean"] = loudness_mean
-        self.info.metadata["loudness_db_variance"] = loudness_variance
+          | beam.Map(_calc_loudness))
 
     return examples

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.shuffle."""
 
 from __future__ import absolute_import
@@ -125,8 +126,7 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
     self.assertEqual(next(iterator), b'a')
-    with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'Two records share the same hashed key!'):
+    with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 
 

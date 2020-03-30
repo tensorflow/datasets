@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 r"""Generate the minimal source code for a new dataset.
 
 python -m tensorflow_datasets.scripts.create_new_dataset \
@@ -30,7 +31,8 @@ import os
 from absl import app
 from absl import flags
 
-# gfile cannot be imported directly `from tensorflow.io import gfile`
+# gfile cannot be imported directly
+# `from tensorflow.io import gfile`
 import tensorflow.compat.v2 as tf
 gfile = tf.io.gfile
 del tf
@@ -43,6 +45,7 @@ FLAGS = flags.FLAGS
 _DATASET_TYPE = [
     'audio',
     'image',
+    'image_classification',
     'object_detection',
     'structured',
     'summarization',

@@ -13,16 +13,15 @@ then
   echo "Using installed ffmpeg"
 else
   echo "Installing ffmpeg"
-  sudo add-apt-repository -y ppa:mc3man/trusty-media
+  sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
   sudo apt-get update -qq
   sudo apt-get install -qq -y ffmpeg
 fi
 
-install_tf "$TF_VERSION"
+# Required for opencv2
+sudo apt-get install -qq -y libsm6
 
-# Beam requires Python header files for Python3 during YAML compilation
-# This shouldn't be needed for Python2
-sudo apt-get install -qq -y libpython${PY_VERSION}-dev
+install_tf "$TF_VERSION"
 
 # Make sure we have the latest version of numpy - avoid problems we were
 # seeing with Python 3
@@ -32,7 +31,7 @@ pip install -q -U numpy
 # data load
 pip install -e .
 python -c "import tensorflow_datasets as tfds"
-python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split=tfds.Split.TRAIN)"
+python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')"
 
 # Then install the test dependencies
 pip install -e .[tests]

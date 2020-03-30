@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 Standalone script to generate specific dataset(s). This can be
@@ -175,12 +176,19 @@ def main(_):
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())
   datasets_to_build -= set(FLAGS.exclude_datasets.split(","))
-  version = "experimental_latest" if FLAGS.experimental_latest_version else None
-  logging.info("Running download_and_prepare for datasets:\n%s",
+
+  # Only pass the version kwargs when required. Otherwise, `version=None`
+  # overwrite the version parsed from the name.
+  # `tfds.builder('my_dataset:1.2.0', version=None)`
+  if FLAGS.experimental_latest_version:
+    version_kwarg = {"version": "experimental_latest"}
+  else:
+    version_kwarg = {}
+
+  logging.info("Running download_and_prepare for dataset(s):\n%s",
                "\n".join(datasets_to_build))
-  logging.info('Version: "%s"', version)
   builders = {
-      name: tfds.builder(name, data_dir=FLAGS.data_dir, version=version)
+      name: tfds.builder(name, data_dir=FLAGS.data_dir, **version_kwarg)
       for name in datasets_to_build
   }
 
@@ -196,7 +204,7 @@ def main(_):
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
     builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config, version=version)
+        builder.name, data_dir=FLAGS.data_dir, config=config, **version_kwarg)
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -205,8 +213,10 @@ def main(_):
         # requested, then compute all.
         for config in builder.BUILDER_CONFIGS:
           builder_for_config = tfds.builder(
-              builder.name, data_dir=FLAGS.data_dir, config=config,
-              version=version)
+              builder.name,
+              data_dir=FLAGS.data_dir,
+              config=config,
+              **version_kwarg)
           download_and_prepare(builder_for_config)
       else:
         # If there is a slash in the name, then user requested a specific
@@ -215,5 +225,5 @@ def main(_):
 
 
 if __name__ == "__main__":
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
   app.run(main)

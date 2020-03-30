@@ -2,10 +2,24 @@ toc:
 - path: /datasets/catalog/overview
   title: Overview
 - section:
+  - path: /datasets/catalog/crema_d
+    title: crema_d
   - path: /datasets/catalog/groove
     title: groove
+  - path: /datasets/catalog/librispeech
+    title: librispeech
+  - path: /datasets/catalog/libritts
+    title: libritts
+  - path: /datasets/catalog/ljspeech
+    title: ljspeech
   - path: /datasets/catalog/nsynth
     title: nsynth
+  - path: /datasets/catalog/savee
+    title: savee (manual)
+  - path: /datasets/catalog/speech_commands
+    title: speech_commands
+  - path: /datasets/catalog/tedlium
+    title: tedlium
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -14,6 +28,8 @@ toc:
     title: aflw2k3d
   - path: /datasets/catalog/arc
     title: arc
+  - path: /datasets/catalog/beans
+    title: beans
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binarized_mnist
@@ -66,6 +82,8 @@ toc:
     title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
     title: diabetic_retinopathy_detection (manual)
+  - path: /datasets/catalog/div2k
+    title: div2k
   - path: /datasets/catalog/dmlab
     title: dmlab
   - path: /datasets/catalog/downsampled_imagenet
@@ -82,8 +100,12 @@ toc:
     title: eurosat
   - path: /datasets/catalog/fashion_mnist
     title: fashion_mnist
+  - path: /datasets/catalog/flic
+    title: flic
   - path: /datasets/catalog/food101
     title: food101
+  - path: /datasets/catalog/geirhos_conflict_stimuli
+    title: geirhos_conflict_stimuli
   - path: /datasets/catalog/horses_or_humans
     title: horses_or_humans
   - path: /datasets/catalog/i_naturalist2017
@@ -94,10 +116,14 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_subset
+    title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
   - path: /datasets/catalog/imagenette
     title: imagenette
+  - path: /datasets/catalog/imagewang
+    title: imagewang
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
@@ -158,6 +184,8 @@ toc:
     title: the300w_lp
   - path: /datasets/catalog/uc_merced
     title: uc_merced
+  - path: /datasets/catalog/vgg_face2
+    title: vgg_face2 (manual)
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
   title: Image
@@ -166,16 +194,24 @@ toc:
     title: coco
   - path: /datasets/catalog/kitti
     title: kitti
+  - path: /datasets/catalog/open_images_challenge2019_detection
+    title: open_images_challenge2019_detection
   - path: /datasets/catalog/open_images_v4
     title: open_images_v4
   - path: /datasets/catalog/voc
     title: voc
+  - path: /datasets/catalog/waymo_open_dataset
+    title: waymo_open_dataset
   - path: /datasets/catalog/wider_face
     title: wider_face
   title: Object_detection
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
+  - path: /datasets/catalog/forest_fires
+    title: forest_fires
+  - path: /datasets/catalog/german_credit_numeric
+    title: german_credit_numeric
   - path: /datasets/catalog/higgs
     title: higgs
   - path: /datasets/catalog/iris
@@ -200,6 +236,8 @@ toc:
     title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/opinosis
+    title: opinosis
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
   - path: /datasets/catalog/scientific_papers
@@ -210,12 +248,20 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
+  - path: /datasets/catalog/blimp
+    title: blimp
   - path: /datasets/catalog/c4
     title: c4 (manual)
+  - path: /datasets/catalog/cfq
+    title: cfq
   - path: /datasets/catalog/civil_comments
     title: civil_comments
+  - path: /datasets/catalog/cos_e
+    title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/eraser_multi_rc
+    title: eraser_multi_rc
   - path: /datasets/catalog/esnli
     title: esnli
   - path: /datasets/catalog/gap
@@ -224,14 +270,24 @@ toc:
     title: glue
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
+  - path: /datasets/catalog/librispeech_lm
+    title: librispeech_lm
   - path: /datasets/catalog/lm1b
     title: lm1b
   - path: /datasets/catalog/math_dataset
     title: math_dataset
+  - path: /datasets/catalog/movie_rationales
+    title: movie_rationales
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/qa4mre
+    title: qa4mre
+  - path: /datasets/catalog/scan
+    title: scan
   - path: /datasets/catalog/scicite
     title: scicite
   - path: /datasets/catalog/snli
@@ -240,12 +296,18 @@ toc:
     title: squad
   - path: /datasets/catalog/super_glue
     title: super_glue
+  - path: /datasets/catalog/tiny_shakespeare
+    title: tiny_shakespeare
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
+  - path: /datasets/catalog/wiki40b
+    title: wiki40b
   - path: /datasets/catalog/wikipedia
     title: wikipedia
   - path: /datasets/catalog/xnli
     title: xnli
+  - path: /datasets/catalog/yelp_polarity_reviews
+    title: yelp_polarity_reviews
   title: Text
 - section:
   - path: /datasets/catalog/flores
@@ -276,6 +338,8 @@ toc:
     title: bair_robot_pushing_small
   - path: /datasets/catalog/moving_mnist
     title: moving_mnist
+  - path: /datasets/catalog/robonet
+    title: robonet
   - path: /datasets/catalog/starcraft_video
     title: starcraft_video
   - path: /datasets/catalog/ucf101

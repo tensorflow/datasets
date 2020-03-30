@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Methods to retrieve and store size/checksums associated to URLs.
 
 """
@@ -91,16 +92,14 @@ def _get_path(dataset_name):
   path = _checksum_paths().get(dataset_name, None)
   if path:
     return path
-  filename = os.path.basename(path)
   msg = (
-      'No checksums file `{}` could be find for dataset {}. Please '
+      'No checksums file could be find for dataset {}. Please '
       'create one in one of:\n{}'
       'If you are developing your own dataset outsite tfds, you can register '
       'your own checksums_dir with `tfds.download.add_checksums_dir('
       'checksum_dir)` or pass it to the download_and_prepare script with '
       '`--checksum_dir=`'
   ).format(
-      filename,
       dataset_name,
       ''.join(['* {}\n'.format(c) for c in _CHECKSUM_DIRS]))
   raise AssertionError(msg)

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Kitti dataset."""
 
 from __future__ import absolute_import
@@ -72,10 +73,9 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.1.0")
+  VERSION = tfds.core.Version("3.2.0", "Devkit updated.")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("3.1.0"),
   ]
 
   def _info(self):
@@ -104,9 +104,9 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     filenames = {
-        "images": os.path.join(_DATA_URL, _IMAGES_FNAME),
-        "annotations": os.path.join(_DATA_URL, _LABELS_FNAME),
-        "devkit": os.path.join(_DATA_URL, _DEVKIT_FNAME),
+        "images": _DATA_URL + "/" + _IMAGES_FNAME,
+        "annotations": _DATA_URL + "/" + _LABELS_FNAME,
+        "devkit": _DATA_URL + "/" + _DEVKIT_FNAME,
     }
     files = dl_manager.download(filenames)
     train_images, validation_images, test_images = _build_splits(

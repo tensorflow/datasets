@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
 from __future__ import absolute_import
@@ -35,6 +36,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.testing import test_utils
 
@@ -113,6 +115,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     * MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
       disable checks preventing usage of `os` or builtin functions instead of
       recommended `tf.io.gfile` API.
+    * SKIP_CHECKSUMS: Checks that the urls called by `dl_manager.download`
+      are registered.
 
   This test case will check for the following:
 
@@ -137,10 +141,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
+  SKIP_CHECKSUMS = False
 
   @classmethod
   def setUpClass(cls):
-    tf.compat.v1.enable_eager_execution()
+    tf.enable_v2_behavior()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
     # Check class has the right attributes
@@ -164,6 +169,15 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
+
+    # Track the urls which are downloaded to validate the checksums
+    # The `dl_manager.download` and `dl_manager.download_and_extract` are
+    # patched to record the urls in `_download_urls`.
+    # Calling `dl_manager.download_checksums` stop the url
+    # registration (as checksums are stored remotelly)
+    # `_test_checksums` validates the recorded urls.
+    self._download_urls = set()
+    self._stop_record_download = False
 
   def tearDown(self):
     super(DatasetBuilderTestCase, self).tearDown()
@@ -208,14 +222,26 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     is_registered = self.builder.name in registered.list_builders()
     exceptions = self.builder.IN_DEVELOPMENT
     self.assertTrue(is_registered or exceptions,
-                    "Dataset was not registered and is not `IN_DEVELOPMENT`.")
+                    "Dataset {} was not registered and is "
+                    "not `IN_DEVELOPMENT`.".format(self.builder.name))
 
   def test_info(self):
     info = self.builder.info
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEqual(self.builder.name, info.name)
 
+  def _add_url(self, url_or_urls):
+    if self._stop_record_download:
+      # Stop record the checksums if dl_manager.download_checksums has been
+      # called (as checksums may be stored remotelly)
+      return
+    if isinstance(url_or_urls, download.resource.Resource):
+      self._download_urls.add(url_or_urls.url)
+    else:
+      self._download_urls.add(url_or_urls)
+
   def _get_dl_extract_result(self, url):
+    tf.nest.map_structure(self._add_url, url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
@@ -223,12 +249,16 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _get_dl_download_result(self, url):
+    tf.nest.map_structure(self._add_url, url)
     if self.DL_DOWNLOAD_RESULT is None:
       # This is only to be backwards compatible with old approach.
       # In the future it will be replaced with using self.example_dir.
       return self._get_dl_extract_result(url)
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_DOWNLOAD_RESULT)
+
+  def _download_checksums(self, url):
+    self._stop_record_download = True
 
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(  # pylint: disable=not-callable
@@ -261,6 +291,34 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     else:
       self._download_and_prepare_as_dataset(self.builder)
 
+    if not self.SKIP_CHECKSUMS:
+      with self._subTest("url_checksums"):
+        self._test_checksums()
+
+  def _test_checksums(self):
+    # If no call to `dl_manager.download`, then no need to check url presence.
+    if not self._download_urls:
+      return
+
+    err_msg = ("If you are developping outside TFDS and want to opt-out, "
+               "please add `SKIP_CHECKSUMS = True` to the "
+               "`DatasetBuilderTestCase`")
+
+    with utils.try_reraise(suffix=err_msg):
+      filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
+      sizes_checksums = checksums._get_sizes_checksums(filepath)  # pylint: disable=protected-access
+      urls = sizes_checksums.keys()
+
+    missing_urls = self._download_urls - set(urls)
+    self.assertEmpty(
+        missing_urls,
+        "Some urls checksums are missing at: {} "
+        "Did you forgot to record checksums with `--register_checksums` ? "
+        "See instructions at: "
+        "https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally"
+        "\n{}".format(filepath, err_msg)
+    )
+
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
     # set.
@@ -275,11 +333,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_download_result,
-        download_checksums=lambda *_: None,
+        download_checksums=self._download_checksums,
         manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
-        import apache_beam as beam   # pylint: disable=g-import-not-at-top
+        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         # For Beam datasets, set-up the runner config
         beam_runner = None
         beam_options = beam.options.pipeline_options.PipelineOptions()
@@ -350,35 +408,46 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 def checksum(example):
   """Computes the md5 for a given example."""
 
-  def _bytes_flatten(element):
+  def _bytes_flatten(flat_str, element):
     """Recursively flatten an element to its byte representation."""
-    ret = "".encode("utf-8")
     if isinstance(element, numbers.Number):
       # In python3, bytes(-3) is not allowed (or large numbers),
       # so convert to str to avoid problems.
       element = str(element)
     if isinstance(element, dict):
       for k, v in sorted(element.items()):
-        ret += k.encode("utf-8")
-        ret += _bytes_flatten(v)
+        flat_str.append(k)
+        _bytes_flatten(flat_str, v)
     elif isinstance(element, str):
       if hasattr(element, "decode"):
         # Python2 considers bytes to be str, but are almost always latin-1
         # encoded bytes here. Extra step needed to avoid DecodeError.
         element = element.decode("latin-1")
-      element = element.encode("utf-8")
-      ret += element
+      flat_str.append(element)
     elif isinstance(element,
                     (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
-      ret += str(element.to_list()).encode("utf-8")
+      flat_str.append(str(element.to_list()))
     elif isinstance(element, np.ndarray):
-      ret += element.tobytes()
+      # tf.Tensor() returns np.array of dtype object, which don't work
+      # with x.to_bytes(). So instead convert numpy into list.
+      if element.dtype.type is np.object_:
+        flat_str.append(str(tuple(element.shape)))
+        flat_str.append(str(list(element.ravel())))
+      else:
+        flat_str.append(element.tobytes())
     else:
-      ret += bytes(element)
-    return ret
+      flat_str.append(bytes(element))
+    return flat_str
+
+  flat_str = _bytes_flatten([], example)
+  flat_bytes = [
+      s.encode("utf-8") if not isinstance(s, bytes) else s
+      for s in flat_str
+  ]
+  flat_bytes = b"".join(flat_bytes)
 
   hash_ = hashlib.md5()
-  hash_.update(_bytes_flatten(example))
+  hash_.update(flat_bytes)
   return hash_.hexdigest()
 
 

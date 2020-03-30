@@ -22,8 +22,9 @@ reproducibility: loading a given dataset at a fixed version yields the same
 data. More specifically:
 
  - If `PATCH` version is incremented, data as read by the client is the same,
- although data might be serialized differently on disk. For any given slice, the
- slicing API returns the same set of records.
+ although data might be serialized differently on disk, or the metadata might
+ have changed. For any given slice, the slicing API returns the same set of
+ records.
  - If `MINOR` version is incremented, existing data as read by the client is the
  same, but there is additional data (features in each record). For any given
  slice, the  slicing API returns the same set of records.
@@ -147,7 +148,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
       OpenImagesV4Config(
           name='original',
           version=tfds.core.Version('0.2.0'),
-          supported_version=[
+          supported_versions=[
             tfds.core.Version('1.0.0', "Major change in data"),
           ],
           description='Images at their original resolution and quality.'),

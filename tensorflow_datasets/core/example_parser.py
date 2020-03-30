@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """To deserialize bytes (Example) to tf.Example."""
 
 from __future__ import absolute_import
@@ -158,7 +159,7 @@ def _to_tf_example_spec(tensor_info):
   elif tensor_info.sequence_rank > 1:  # RaggedTensor
     # Decoding here should match encoding from `_add_ragged_fields` in
     # `example_serializer.py`
-    tf_specs = {
+    tf_specs = {  # pylint: disable=g-complex-comprehension
         "ragged_row_lengths_{}".format(k): tf.io.FixedLenSequenceFeature(  # pylint: disable=g-complex-comprehension
             shape=(),
             dtype=tf.int64,

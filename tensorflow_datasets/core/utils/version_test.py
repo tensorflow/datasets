@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.utils.version."""
 
 from __future__ import absolute_import
@@ -83,37 +84,45 @@ class VersionTest(testing.TestCase):
     v1 = version.Version('1.2.3')
     v2 = version.Version('1.2.3')
     v3 = '1.2.3'
+    # pylint: disable=g-generic-assert
     self.assertTrue(v1 == v2)
     self.assertTrue(v1 <= v2)
     self.assertTrue(v1 >= v2)
     self.assertTrue(v1 == v3)
     self.assertTrue(v1 <= v3)
     self.assertTrue(v1 >= v3)
+    # pylint: enable=g-generic-assert
 
   def test_neq(self):
     v1 = version.Version('1.2.3')
     v2 = version.Version('1.2.4')
     v3 = '1.2.4'
+    # pylint: disable=g-generic-assert
     self.assertTrue(v1 != v2)
     self.assertTrue(v1 != v3)
+    # pylint: enable=g-generic-assert
 
   def test_less(self):
     v1 = version.Version('1.2.3')
     v2 = version.Version('1.2.4')
     v3 = '1.2.4'
+    # pylint: disable=g-generic-assert
     self.assertTrue(v1 < v2)
     self.assertTrue(v1 <= v2)
     self.assertTrue(v1 < v3)
     self.assertTrue(v1 <= v3)
+    # pylint: enable=g-generic-assert
 
   def test_sup(self):
     v1 = version.Version('1.2.3')
     v2 = version.Version('1.2.4')
     v3 = '1.2.4'
+    # pylint: disable=g-generic-assert
     self.assertTrue(v2 > v1)
     self.assertTrue(v2 >= v1)
     self.assertTrue(v3 > v1)
     self.assertTrue(v3 >= v1)
+    # pylint: enable=g-generic-assert
 
   def test_experiment_default(self):
     v = version.Version('1.2.3')

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.tfrecords_writer."""
 
 from __future__ import absolute_import
@@ -25,6 +26,7 @@ from absl.testing import absltest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import tfrecords_writer
@@ -130,6 +132,9 @@ def _read_records(path):
 
 class WriterTest(testing.TestCase):
 
+  EMPTY_SPLIT_ERROR = 'No examples were yielded.'
+  TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
+
   @absltest.mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)
   def _write(self, to_write, path, salt=''):
@@ -149,19 +154,22 @@ class WriterTest(testing.TestCase):
         (3, b'c'),
         (4, b'd'), (5, b'e'),
         (6, b'f'),
-        (7, b'g'), (8, b'h'),
+        (7, b'g'), (8, b'hi'),
     ]
     with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                                     return_value=5):
-      shards_length = self._write(to_write, path)
+      shards_length, total_size = self._write(to_write, path)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     self.assertEqual(written_files,
                      ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
-        [b'f', b'g'], [b'd'], [b'a', b'b'], [b'h'], [b'e', b'c'],
+        [b'f', b'g'], [b'd'], [b'a', b'b'], [b'hi'], [b'e', b'c'],
     ])
 
+  @absltest.mock.patch.object(
+      example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
@@ -171,8 +179,28 @@ class WriterTest(testing.TestCase):
           AssertionError, 'Two records share the same hashed key!'):
         self._write(to_write, path)
 
+  def test_empty_split(self):
+    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    to_write = []
+    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
+                                    return_value=1):
+      with self.assertRaisesWithPredicateMatch(
+          AssertionError, self.EMPTY_SPLIT_ERROR):
+        self._write(to_write, path)
+
+  def test_too_small_split(self):
+    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    to_write = [(1, b'a')]
+    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
+                                    return_value=2):
+      with self.assertRaisesWithPredicateMatch(
+          AssertionError, self.TOO_SMALL_SPLIT_ERROR):
+        self._write(to_write, path)
+
 
 class TfrecordsWriterBeamTest(WriterTest):
+
+  EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
 
   @absltest.mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)

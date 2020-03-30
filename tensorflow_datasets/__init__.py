@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 # pylint: disable=line-too-long
 """`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use with TensorFlow.
 
@@ -50,6 +51,7 @@ tf_compat.ensure_tf_install()
 # pylint: disable=g-import-not-at-top
 from tensorflow_datasets import audio
 from tensorflow_datasets import image
+from tensorflow_datasets import image_classification
 from tensorflow_datasets import object_detection
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization

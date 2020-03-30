@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,14 +13,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
+"""Test of `document_datasets.py`."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.scripts import document_datasets
 
 DummyMnist = testing.DummyMnist
+
+
+class DummyMnistConfigs(DummyMnist):
+  """Builder with config and manual instructions."""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """Some manual instructions."""
+  BUILDER_CONFIGS = [
+      dataset_builder.BuilderConfig(
+          name="config_name",
+          version=utils.Version("0.0.1"),
+          description="Config description.",
+      ),
+  ]
 
 
 class DocumentDatasetsTest(testing.TestCase):
@@ -50,6 +66,16 @@ class DocumentDatasetsTest(testing.TestCase):
         'content="https://www.tensorflow.org'
         '/datasets/catalog/%s" />' % self.builder.name, schema_str)
 
+  def test_with_config(self):
+    """Test that builder with configs are correctly generated."""
+    with testing.tmp_dir() as tmp_dir:
+      builder = DummyMnistConfigs(data_dir=tmp_dir)
+      builder.download_and_prepare()
+    doc_str = document_datasets.document_single_builder(builder)
+
+    self.assertIn("Some manual instructions.", doc_str)
+    self.assertIn("Mnist description.", doc_str)  # Shared description.
+    self.assertIn("Config description.", doc_str)  # Config-specific description
 
 if __name__ == "__main__":
   testing.test_main()

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ This line looks like it has three sentences...but it's actually just 1."""
     self.assertEqual(None, clean_en)
     self.assertEqual({
         "lines-valid": 2,
-        "filtered-url-toofewsentences": 1
+        "filtered-page-toofewsentences": 1
     }, dict(counters))
 
   def test_clean_page_squigglybracket(self):
@@ -114,7 +114,7 @@ fn foo(a) { bar = a + 10; }."""
     })
     self.assertEqual(None, clean_en)
     self.assertEqual({
-        "filtered-url-squigglybracket": 1,
+        "filtered-page-squigglybracket": 1,
         "lines-valid": 3
     }, dict(counters))
 
@@ -130,7 +130,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
         "timestamp": FAKE_TIMESTAMP
     })
     self.assertEqual(None, clean_en)
-    self.assertEqual({"filtered-url-loremipsum": 1}, dict(counters))
+    self.assertEqual({"filtered-page-loremipsum": 1}, dict(counters))
 
   def test_clean_page_badwords(self):
     padding_text = """This page starts out with some text.
@@ -155,15 +155,15 @@ But then, all of a sudden, there's a badword... or not?
         },
         {
             "lines-valid": 3,
-            "filtered-url-badword": 1
+            "filtered-page-badword": 1
         },
         {
             "lines-valid": 3,
-            "filtered-url-badword": 1
+            "filtered-page-badword": 1
         },
         {
             "lines-valid": 3,
-            "filtered-url-badword": 1
+            "filtered-page-badword": 1
         },
     ]
     for final_sentence, output_should_be_none, expected_counter in zip(
@@ -237,7 +237,11 @@ This line should be okay."""
     input_urls_and_text = [
         ("url/1-0",
          "This is a duplicated line.\nThis is a unique line.\n"
-         "This one comes first and so it stays."),
+         "This one comes first and so it stays.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "Here is a sentence between the duplicates.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "this One is Duplicate WITHIN the page so the others are removed. "),
         ("url/2-1",
          "This is 2nd unique line.\nThis one comes second so it is removed "
          "even though the capitalizaiton is different.\n"
@@ -254,7 +258,9 @@ This line should be okay."""
     expected_urls_and_text = [
         ("url/1-0",
          "This is a duplicated line.\nThis is a unique line.\n"
-         "This one comes first and so it stays."),
+         "This one comes first and so it stays.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "Here is a sentence between the duplicates."),
         ("url/3-4",
          "This is a 3rd unique line.\n"
          "This one comes third and so it is removed. But the page stays "
@@ -284,7 +290,7 @@ This line should be okay."""
         {
             "wet-file": 1,
             "page-emitted": 2,
-            "page-filitered-nourl": 1,
+            "page-filtered-nourl": 1,
         }, dict(counters))
 
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Sequence feature."""
 
 from __future__ import absolute_import
@@ -201,7 +202,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature."""
-    inner_feature_repr = repr(self._feature)
+    inner_feature_repr = feature_lib.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]

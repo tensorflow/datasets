@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
 from __future__ import absolute_import
@@ -55,9 +56,7 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
-            "0.1.2", experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[tfds.core.Version(
-            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")],
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
         **kwargs)
     self.map_name = map_name
     self.resolution = resolution
@@ -158,7 +157,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "files": [
                     download for name, download in downloaded_urls.items()
@@ -167,11 +165,9 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={"files": [downloaded_urls["test"]]}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={"files": [downloaded_urls["valid"]]}),
     ]
 

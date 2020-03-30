@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,9 @@ class ReadConfig(object):
       Note that when `shuffle_files` is True and no seed is defined,
       experimental_deterministic will be set to False internally,
       unless it is defined here.
+    try_autocache: If True (default) and the dataset satisfy the right
+      conditions (dataset small enough, files not shuffled,...) the dataset
+      will be cached during the first iteration (through `ds = ds.cache()`).
     shuffle_seed: `tf.int64`, seeds forwarded to `tf.data.Dataset.shuffle` when
       `shuffle_files=True`.
     shuffle_reshuffle_each_iteration: `bool`, forwarded to
@@ -53,6 +56,7 @@ class ReadConfig(object):
   """
   # General tf.data.Dataset parametters
   options = attr.ib(factory=tf.data.Options)
+  try_autocache = attr.ib(default=True)
   # tf.data.Dataset.shuffle parameters
   shuffle_seed = attr.ib(default=None)
   shuffle_reshuffle_each_iteration = attr.ib(default=None)

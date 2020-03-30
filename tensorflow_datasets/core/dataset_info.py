@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """DatasetInfo records the information we know about a dataset.
 
 This includes things that we know about the dataset statically, i.e.:
@@ -87,9 +88,9 @@ class DatasetInfo(object):
   See the constructor arguments and properties for a full list.
 
   Note: Not all fields are known on construction and may be updated later
-  by `compute_dynamic_properties`. For example, the number of examples in each
-  split is typically updated during data generation (i.e. on calling
-  `builder.download_and_prepare()`).
+  by `compute_dynamic_properties`. For example: the min and max values of a
+  feature is typically updated during data generation (i.e. on calling
+  builder.download_and_prepare()`).
   """
 
   @api_utils.disallow_positional_args
@@ -151,7 +152,7 @@ class DatasetInfo(object):
             "the top-level. Got {}".format(features))
       features._set_top_level()  # pylint: disable=protected-access
     self._features = features
-    self._splits = splits_lib.SplitDict()
+    self._splits = splits_lib.SplitDict(self._builder.name)
     if supervised_keys is not None:
       assert isinstance(supervised_keys, tuple)
       assert len(supervised_keys) == 2
@@ -204,12 +205,24 @@ class DatasetInfo(object):
     return self.as_proto.citation
 
   @property
-  def size_in_bytes(self):
-    return self.as_proto.size_in_bytes
+  def data_dir(self):
+    return self._builder.data_dir
 
-  @size_in_bytes.setter
-  def size_in_bytes(self, size):
-    self.as_proto.size_in_bytes = size
+  @property
+  def dataset_size(self):
+    """Generated dataset files size, in bytes."""
+    # For old datasets, maybe empty.
+    return sum(split.num_bytes for split in self.splits.values())
+
+  @property
+  def download_size(self):
+    """Downloaded files size, in bytes."""
+    # Fallback to deprecated `size_in_bytes` if `download_size` is empty.
+    return self.as_proto.download_size or self.as_proto.size_in_bytes
+
+  @download_size.setter
+  def download_size(self, size):
+    self.as_proto.download_size = size
 
   @property
   def features(self):
@@ -356,7 +369,8 @@ class DatasetInfo(object):
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
-    self._set_splits(splits_lib.SplitDict.from_proto(parsed_proto.splits))
+    split_dict = splits_lib.SplitDict.from_proto(self.name, parsed_proto.splits)
+    self._set_splits(split_dict)
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
@@ -660,8 +674,8 @@ class MetadataDict(Metadata, dict):
 class BeamMetadataDict(MetadataDict):
   """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
 
-  def __init__(self):
-    super(BeamMetadataDict, self).__init__()
+  def __init__(self, *args, **kwargs):
+    super(BeamMetadataDict, self).__init__(*args, **kwargs)
     self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
 
   def _temp_filepath(self, key):

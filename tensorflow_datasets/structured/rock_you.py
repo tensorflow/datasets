@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The rockyou dataset."""
 
 from __future__ import absolute_import
@@ -56,7 +57,6 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name="train",
-            num_shards=1,
             gen_kwargs={
                 "path": dl_path,
             },

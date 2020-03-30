@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """DatasetBuilder base class."""
 
 from __future__ import absolute_import
@@ -21,6 +22,7 @@ from __future__ import print_function
 
 import abc
 import functools
+import inspect
 import itertools
 import os
 import sys
@@ -296,6 +298,32 @@ class DatasetBuilder(object):
               self.name, self.version, self.version.tfds_version_to_prepare,
               available_to_prepare))
 
+    # Only `cls.VERSION` or `experimental_latest` versions can be generated.
+    # Otherwise, users may accidentally generate an old version using the
+    # code from newer versions.
+    installable_versions = {
+        str(v) for v in (self.canonical_version, max(self.versions))
+    }
+    if str(self.version) not in installable_versions:
+      msg = (
+          "The version of the dataset you are trying to use ({}) is too "
+          "old for this version of TFDS so cannot be generated."
+      ).format(self.info.full_name)
+      if self.version.tfds_version_to_prepare:
+        msg += (
+            "{} can only be generated using TFDS code synced @ {} or earlier "
+            "Either sync to that version of TFDS to first prepare the data or "
+            "use another version of the dataset. "
+        ).format(self.version, self.version.tfds_version_to_prepare)
+      else:
+        msg += (
+            "Either sync to a previous version of TFDS to first prepare the "
+            "data or use another version of the dataset. "
+        )
+      msg += "Available for `download_and_prepare`: {}".format(
+          list(sorted(installable_versions)))
+      raise ValueError(msg)
+
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
     # it will always be reloaded and data_dir will be set at construction.
@@ -308,9 +336,15 @@ class DatasetBuilder(object):
 
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
-        self.info.size_in_bytes, directory=self._data_dir_root):
-      raise IOError("Not enough disk space. Needed: %s" %
-                    units.size_str(self.info.size_in_bytes))
+        self.info.dataset_size + self.info.download_size,
+        directory=self._data_dir_root):
+      raise IOError(
+          "Not enough disk space. Needed: {} (download: {}, generated: {})"
+          .format(
+              units.size_str(self.info.dataset_size + self.info.download_size),
+              units.size_str(self.info.download_size),
+              units.size_str(self.info.dataset_size),
+          ))
     self._log_download_bytes()
 
     dl_manager = self._make_download_manager(
@@ -337,10 +371,13 @@ class DatasetBuilder(object):
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
 
+          splits = list(self.info.splits.values())
+          statistics_already_computed = bool(
+              splits and splits[0].statistics.num_examples)
           # Update DatasetInfo metadata by computing statistics from the data.
           if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
               download_config.compute_stats == download.ComputeStatsMode.AUTO
-              and bool(self.info.splits.total_num_examples)
+              and statistics_already_computed
              ):
             logging.info(
                 "Skipping computing stats for mode %s.",
@@ -348,7 +385,7 @@ class DatasetBuilder(object):
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
-          self.info.size_in_bytes = dl_manager.downloaded_size
+          self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
@@ -489,29 +526,20 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
-    # If the dataset is small, load it in memory
-    dataset_shape_is_fully_defined = (
-        dataset_utils.features_shape_is_fully_defined(self.info.features))
-    in_memory_default = False
-    # TODO(tfds): Consider default in_memory=True for small datasets with
-    # fully-defined shape.
-    # Expose and use the actual data size on disk and rm the manual
-    # name guards. size_in_bytes is the download size, which is misleading,
-    # particularly for datasets that use manual_dir as well as some downloads
-    # (wmt and diabetic_retinopathy_detection).
-    # in_memory_default = (
-    #     self.info.size_in_bytes and
-    #     self.info.size_in_bytes <= 1e9 and
-    #     not self.name.startswith("wmt") and
-    #     not self.name.startswith("diabetic") and
-    #     dataset_shape_is_fully_defined)
-    in_memory = in_memory_default if in_memory is None else in_memory
-
     # Build base dataset
     if in_memory and not wants_full_dataset:
+      # TODO(tfds): Remove once users have been migrated
+
+      # If the dataset is small, load it in memory
+      logging.warning(
+          "`in_memory` if deprecated and will be removed in a future version. "
+          "Please use `ds = ds.cache()` instead.")
+
       # TODO(tfds): Enable in_memory without padding features. May be able
       # to do by using a requested version of tf.data.Dataset.cache that can
       # persist a cache beyond iterator instances.
+      dataset_shape_is_fully_defined = (
+          dataset_utils.features_shape_is_fully_defined(self.info.features))
       if not dataset_shape_is_fully_defined:
         logging.warning("Called in_memory=True on a dataset that does not "
                         "have fully defined shapes. Note that features with "
@@ -539,6 +567,13 @@ class DatasetBuilder(object):
           decoders=decoders,
           read_config=read_config,
       )
+      # Auto-cache small datasets which are small enough to fit in memory.
+      if self._should_cache_ds(
+          split=split,
+          shuffle_files=shuffle_files,
+          read_config=read_config
+      ):
+        ds = ds.cache()
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
@@ -572,6 +607,48 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(ds)
     return ds
+
+  def _should_cache_ds(self, split, shuffle_files, read_config):
+    """Returns True if TFDS should auto-cache the dataset."""
+    # The user can explicitly opt-out from auto-caching
+    if not read_config.try_autocache:
+      return False
+
+    # Skip datasets with unknown size.
+    # Even by using heuristic with `download_size` and
+    # `MANUAL_DOWNLOAD_INSTRUCTIONS`, it wouldn't catch datasets which hardcode
+    # the non-processed data-dir, nor DatasetBuilder not based on tf-record.
+    if not self.info.dataset_size:
+      return False
+
+    # Do not cache big datasets
+    # Instead of using the global size, we could infer the requested bytes:
+    # `self.info.splits[split].num_bytes`
+    # The info is available for full splits, and could be approximated
+    # for subsplits `train[:50%]`.
+    # However if the user is creating multiple small splits from a big
+    # dataset, those could adds up and fill up the entire RAM.
+    # 250 MiB is arbitrary picked. For comparison, Cifar10 is about 150 MiB.
+    if self.info.dataset_size > 250 * units.MiB:
+      return False
+
+    # Do not support old-split API.
+    if not self.version.implements(utils.Experiment.S3):
+      return False
+
+    # We do not want to cache data which has more than one shards when
+    # shuffling is enabled, as this would effectivelly disable shuffling.
+    # An exception is for single shard (as shuffling is a no-op).
+    # Another exception is if reshuffle is disabled (shuffling already cached)
+    num_shards = len(self.info.splits[split].file_instructions)
+    if (shuffle_files and
+        # Shuffling only matter when reshuffle is True or None (default)
+        read_config.shuffle_reshuffle_each_iteration is not False and  # pylint: disable=g-bool-id-comparison
+        num_shards > 1):
+      return False
+
+    # If the dataset satisfy all the right conditions, activate autocaching.
+    return True
 
   def _relative_data_dir(self, with_version=True):
     """Relative path of this dataset in data_dir."""
@@ -636,13 +713,15 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
-    size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
-        "Downloading and preparing dataset %s (%s) to %s..." %
-        (self.name, size_text, self._data_dir),
-        attrs=["bold"])
-    # TODO(tfds): Should try to estimate the available free disk space (if
-    # possible) and raise an error if not.
+        "Downloading and preparing dataset {} (download: {}, generated: {}, "
+        "total: {}) to {}...".format(
+            self.info.full_name,
+            units.size_str(self.info.download_size),
+            units.size_str(self.info.dataset_size),
+            units.size_str(self.info.download_size + self.info.dataset_size),
+            self._data_dir,
+        ), attrs=["bold"])
 
   @abc.abstractmethod
   def _info(self):
@@ -850,16 +929,24 @@ class FileAdapterBuilder(DatasetBuilder):
     """
     raise NotImplementedError()
 
+  def _make_split_generators_kwargs(self, prepare_split_kwargs):
+    """Get kwargs for `self._split_generators()` from `prepare_split_kwargs`."""
+    del prepare_split_kwargs
+    return {}
+
   def _download_and_prepare(self, dl_manager, **prepare_split_kwargs):
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
 
     # Generating data for all splits
-    split_dict = splits_lib.SplitDict()
-    for split_generator in self._split_generators(dl_manager):
-      if splits_lib.Split.ALL == split_generator.split_info.name:
+    split_dict = splits_lib.SplitDict(dataset_name=self.name)
+    split_generators_kwargs = self._make_split_generators_kwargs(
+        prepare_split_kwargs)
+    for split_generator in self._split_generators(
+        dl_manager, **split_generators_kwargs):
+      if str(split_generator.split_info.name).lower() == "all":
         raise ValueError(
-            "tfds.Split.ALL is a special split keyword corresponding to the "
+            "`all` is a special split keyword corresponding to the "
             "union of all splits, so cannot be used as key in "
             "._split_generator()."
         )
@@ -992,10 +1079,20 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     disk.
 
     Args:
-      **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
+      **kwargs: `dict`, Arguments forwarded from the SplitGenerator.gen_kwargs
 
     Yields:
-      example: (`dict<str feature_name, feature_value>`), a feature dictionary
+      key: `str` or `int`, a unique deterministic example identification key.
+        * Unique: An error will be raised if two examples are yield with the
+          same key.
+        * Deterministic: When generating the dataset twice, the same example
+          should have the same key.
+        Good keys can be the image id, or line number if examples are extracted
+        from a text file.
+        The key will be hashed and sorted to shuffle examples deterministically,
+        such as generating the dataset multiple times keep examples in the
+        same order.
+      example: `dict<str feature_name, feature_value>`, a feature dictionary
         ready to be encoded and written to disk. The example will be
         encoded with `self.info.features.encode_example({...})`.
     """
@@ -1033,8 +1130,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
                                   total=split_info.num_examples, leave=False):
       example = self.info.features.encode_example(record)
       writer.write(key, example)
-    shard_lengths = writer.finalize()
+    shard_lengths, total_size = writer.finalize()
     split_generator.split_info.shard_lengths.extend(shard_lengths)
+    split_generator.split_info.num_bytes = total_size
 
 
 class BeamBasedBuilder(FileAdapterBuilder):
@@ -1043,6 +1141,18 @@ class BeamBasedBuilder(FileAdapterBuilder):
   def __init__(self, *args, **kwargs):
     super(BeamBasedBuilder, self).__init__(*args, **kwargs)
     self._beam_writers = {}  # {split: beam_writer} mapping.
+
+  def _make_split_generators_kwargs(self, prepare_split_kwargs):
+    # Pass `pipeline` into `_split_generators()` from `prepare_split_kwargs` if
+    # it's in the call signature of `_split_generators()`.
+    # This allows for global preprocessing in beam.
+    split_generators_kwargs = {}
+    split_generators_arg_names = (
+        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method
+        inspect.signature(self._split_generators).parameters.keys())
+    if "pipeline" in split_generators_arg_names:
+      split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]
+    return split_generators_kwargs
 
   @abc.abstractmethod
   def _build_pcollection(self, pipeline, **kwargs):
@@ -1114,10 +1224,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
     split_dict = self.info.splits
     for split_name, beam_writer in self._beam_writers.items():
       logging.info("Retrieving shard lengths for %s...", split_name)
-      shard_lengths = beam_writer.finalize()
+      shard_lengths, total_size = beam_writer.finalize()
       split_info = split_dict[split_name]
       split_info.shard_lengths.extend(shard_lengths)
       split_info.num_shards = len(shard_lengths)
+      split_info.num_bytes = total_size
     logging.info("Updating split info...")
     self.info.update_splits_if_different(split_dict)
 

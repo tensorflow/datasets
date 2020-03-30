@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.lazy_imports."""
 
 from __future__ import absolute_import
@@ -46,6 +47,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "tldextract",
   )
   def test_import(self, module_name):
+    if module_name == "nltk" and six.PY2:  # sklearn do not support Python2
+      return
     # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
     if module_name == "skimage" and six.PY3:
       return

@@ -1,0 +1,5 @@
+# Should ignore comments.
+    knife =    [n03041632]
+    keyboard = [n03085013,
+                n04505470]
+
