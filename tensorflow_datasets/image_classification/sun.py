@@ -205,7 +205,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
       }
       for split, filename in tfds_split_files.items():
         tfds_split_files[split] = tfds.core.get_tfds_path(
-            os.path.join("image", filename))
+            os.path.join("image_classification", filename))
     self._tfds_split_files = tfds_split_files
 
   def _info(self):
