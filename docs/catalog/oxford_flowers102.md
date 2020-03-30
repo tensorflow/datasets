@@ -26,7 +26,7 @@ training set and validation set each consist of 10 images per class (totalling
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 *   **Source code**:
-    [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
+    [`tfds.image_classification.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_flowers102.py)
 *   **Versions**:
     *   **`2.1.0`** (default): Added label names
 *   **Download size**: `336.76 MiB`

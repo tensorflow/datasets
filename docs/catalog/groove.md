@@ -23,12 +23,8 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 *   **Source code**:
     [`tfds.audio.groove.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
 *   **Versions**:
-    *   **`2.0.0`** (default): New split API
+    *   **`2.0.1`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-*   **Dataset size**: `Unknown size`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -47,6 +43,10 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Config description**: Groove dataset without audio, unsplit.
 *   **Download size**: `3.11 MiB`
+*   **Dataset size**: `5.22 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split        | Examples
@@ -76,6 +76,10 @@ FeaturesDict({
 
 *   **Config description**: Groove dataset with audio, unsplit.
 *   **Download size**: `4.76 GiB`
+*   **Dataset size**: `2.33 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -88,7 +92,7 @@ Split        | Examples
 
 ```python
 FeaturesDict({
-    'audio': Tensor(shape=(None,), dtype=tf.float32),
+    'audio': Audio(shape=(None,), dtype=tf.float32),
     'bpm': tf.int32,
     'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
     'id': tf.string,
@@ -107,6 +111,10 @@ FeaturesDict({
 *   **Config description**: Groove dataset without audio, split into 2-bar
     chunks.
 *   **Download size**: `3.11 MiB`
+*   **Dataset size**: `19.59 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split        | Examples
@@ -136,6 +144,10 @@ FeaturesDict({
 
 *   **Config description**: Groove dataset with audio, split into 2-bar chunks.
 *   **Download size**: `4.76 GiB`
+*   **Dataset size**: `4.61 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 *   **Splits**:
 
 Split        | Examples
@@ -148,7 +160,7 @@ Split        | Examples
 
 ```python
 FeaturesDict({
-    'audio': Tensor(shape=(None,), dtype=tf.float32),
+    'audio': Audio(shape=(None,), dtype=tf.float32),
     'bpm': tf.int32,
     'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
     'id': tf.string,
@@ -167,6 +179,10 @@ FeaturesDict({
 *   **Config description**: Groove dataset without audio, split into 4-bar
     chunks.
 *   **Download size**: `3.11 MiB`
+*   **Dataset size**: `27.32 MiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Splits**:
 
 Split        | Examples

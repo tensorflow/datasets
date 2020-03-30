@@ -22,7 +22,7 @@ Imagenet, trainable on a single GPU.
 *   **Homepage**:
     [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 *   **Source code**:
-    [`tfds.image.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/patch_camelyon.py)
+    [`tfds.image_classification.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/patch_camelyon.py)
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

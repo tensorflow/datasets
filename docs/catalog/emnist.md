@@ -23,7 +23,7 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 *   **Homepage**:
     [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 *   **Source code**:
-    [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+    [`tfds.image_classification.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

@@ -23,7 +23,7 @@ randomness is fixed so that regeneration is deterministic.
 *   **Homepage**:
     [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
 *   **Source code**:
-    [`tfds.image.imagenet2012_corrupted.Imagenet2012Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet2012_corrupted.py)
+    [`tfds.image_classification.imagenet2012_corrupted.Imagenet2012Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_corrupted.py)
 *   **Versions**:
     *   **`3.1.0`** (default): No release notes.
 *   **Download size**: `1.98 MiB`

@@ -18,7 +18,7 @@ handwritten characters from 50 different alphabets.
 *   **Homepage**:
     [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 *   **Source code**:
-    [`tfds.image.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/omniglot.py)
+    [`tfds.image_classification.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/omniglot.py)
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

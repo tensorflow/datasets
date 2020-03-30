@@ -22,7 +22,7 @@ boxes.
 *   **Homepage**:
     [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
 *   **Source code**:
-    [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
+    [`tfds.image_classification.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech.py)
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

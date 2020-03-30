@@ -20,7 +20,7 @@ dataset. Annotations include bounding boxes, segmentation labels.
 *   **Homepage**:
     [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 *   **Source code**:
-    [`tfds.image.caltech_birds.CaltechBirds2011`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech_birds.py)
+    [`tfds.image_classification.caltech_birds.CaltechBirds2011`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech_birds.py)
 *   **Versions**:
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `1.11 GiB`

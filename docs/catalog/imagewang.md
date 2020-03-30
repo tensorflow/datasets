@@ -33,7 +33,7 @@ consists of the Imagenette dataset {size} variant.
 *   **Homepage**:
     [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 *   **Source code**:
-    [`tfds.image.imagewang.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagewang.py)
+    [`tfds.image_classification.imagewang.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagewang.py)
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
