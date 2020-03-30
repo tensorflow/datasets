@@ -25,10 +25,12 @@ from tensorflow_datasets.object_detection import deeplesion
 
 class DeeplesionTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = deeplesion.Deeplesion
+  BUILDER_CONFIG_NAMES_TO_TEST = ["abnormal"]
+
   SPLITS = {
-      "train": 5,
+      "train": 2,
       "validation": 5,
-      "test":5,
+      "test":2,
   }
   DL_EXTRACT_RESULT = {
       "zipfile01": "zipfile01.zip",  # Relative to fake_examples/my_dataset dir.
