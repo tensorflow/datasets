@@ -36,6 +36,7 @@ for ex in tfds.as_numpy(ds):
 *   [`savee`](savee.md)
 *   [`speech_commands`](speech_commands.md)
 *   [`tedlium`](tedlium.md)
+*   [`voxceleb`](voxceleb.md)
 
     ### `Image`
 
@@ -194,6 +195,8 @@ for ex in tfds.as_numpy(ds):
 *   [`stanford_dogs`](stanford_dogs.md)
 
 *   [`stanford_online_products`](stanford_online_products.md)
+
+*   [`stl10`](stl10.md)
 
 *   [`sun397`](sun397.md)
 
