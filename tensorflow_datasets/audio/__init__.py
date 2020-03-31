@@ -26,3 +26,4 @@ from tensorflow_datasets.audio.nsynth import Nsynth
 from tensorflow_datasets.audio.savee import Savee
 from tensorflow_datasets.audio.speech_commands import SpeechCommands
 from tensorflow_datasets.audio.tedlium import Tedlium
+from tensorflow_datasets.audio.voxceleb import Voxceleb
