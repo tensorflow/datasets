@@ -51,6 +51,11 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
       '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -67,6 +72,7 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     base_url = 'https://zenodo.org/record/2546921/files/'
     resources = {
         'test_x': base_url + 'camelyonpatch_level_2_split_test_x.h5.gz',

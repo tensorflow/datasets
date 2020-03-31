@@ -54,6 +54,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Return info of Dataset"""
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
@@ -69,6 +70,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
         )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(os.path.join(_URL, _IMAGES_FNAME))
     return [
         tfds.core.SplitGenerator(

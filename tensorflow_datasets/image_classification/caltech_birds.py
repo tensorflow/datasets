@@ -64,7 +64,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
     )
 
   def _info(self):
-
+    """Return info of Dataset"""
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -82,7 +82,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators."""
     download_path = dl_manager.download([
         self._caltech_birds_info.split_url,
         self._caltech_birds_info.annotations_url,

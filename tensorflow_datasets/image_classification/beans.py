@@ -52,6 +52,7 @@ class Beans(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
+    """Returns info of dataset"""
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -65,6 +66,7 @@ class Beans(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     train_path, val_path, test_path = dl_manager.download(
         [_TRAIN_URL, _VALIDATION_URL, _TEST_URL])
 
@@ -97,4 +99,3 @@ class Beans(tfds.core.GeneratorBasedBuilder):
           "label": label,
       }
       yield fname, record
-

@@ -47,6 +47,11 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=(
@@ -63,7 +68,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators."""
     output_files = dl_manager.download({
         "train": urllib.parse.urljoin(URL, "train_32x32.mat"),
         "test": urllib.parse.urljoin(URL, "test_32x32.mat"),

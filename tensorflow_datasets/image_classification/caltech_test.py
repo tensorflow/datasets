@@ -24,7 +24,7 @@ from tensorflow_datasets.image_classification import caltech
 
 
 class Caltech101Test(testing.DatasetBuilderTestCase):
-
+  """Class for tesing the Caltech 101 dataset."""
   DATASET_CLASS = caltech.Caltech101
 
   SPLITS = {
@@ -32,9 +32,9 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
       'test': 3,
   }
 
-  def setUp(self):
+  def setUp(self): # pylint: disable=invalid-name
     super(Caltech101Test, self).setUp()
-    caltech._TRAIN_POINTS_PER_CLASS = 1
+    caltech._TRAIN_POINTS_PER_CLASS = 1 # pylint: disable=protected-access
 
 
 if __name__ == '__main__':

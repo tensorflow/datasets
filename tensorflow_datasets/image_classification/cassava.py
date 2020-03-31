@@ -56,6 +56,7 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
+    """Return Dataset info"""
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -107,4 +108,3 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
             "label": label,
         }
         yield fname, record
-

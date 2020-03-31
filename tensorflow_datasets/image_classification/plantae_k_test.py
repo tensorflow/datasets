@@ -25,6 +25,7 @@ from tensorflow_datasets.image_classification import plantae_k
 
 
 class PlantaeKTest(testing.DatasetBuilderTestCase):
+  """Class for tesing the PlantaeK dataset."""
   DATASET_CLASS = plantae_k.PlantaeK
   # See note below about the +1
   SPLITS = {"train": 16 + 1}

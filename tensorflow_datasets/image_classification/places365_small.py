@@ -60,6 +60,11 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
@@ -73,6 +78,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     output_archives = dl_manager.download({
         "train": urllib.parse.urljoin(_BASE_URL, _TRAIN_URL),
         "test": urllib.parse.urljoin(_BASE_URL, _TEST_URL),
@@ -126,6 +132,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive, path_prefix, split_name,
                          annotation_path):
+    """Yields examples."""
     with tf.io.gfile.GFile(annotation_path) as f:
       if split_name == "test":
         # test split doesn't have labels assigned.

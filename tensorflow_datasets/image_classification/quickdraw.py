@@ -61,6 +61,11 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
@@ -79,6 +84,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     # The QuickDraw bitmap repository is structured as one .npy file per label.
     labels = self.info.features["label"].names
     urls = {label: "{}/{}.npy".format(_QUICKDRAW_BASE_URL, label)

@@ -48,6 +48,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("3.0.2")
 
   def _info(self):
+    """Return Dataset info"""
     return tfds.core.DatasetInfo(
         builder=self,
         description=("The CIFAR-10 dataset consists of 60000 32x32 colour "

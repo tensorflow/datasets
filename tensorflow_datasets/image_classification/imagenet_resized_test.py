@@ -14,6 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
+"""Tests for Imagenet resized datasets."""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -23,6 +25,7 @@ from tensorflow_datasets.image_classification import imagenet_resized
 
 
 class ImagenetResizedTest(testing.DatasetBuilderTestCase):
+  """Class for tesing the Imagenet resized dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = [
       "8x8",
   ]

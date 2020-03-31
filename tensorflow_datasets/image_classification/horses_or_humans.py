@@ -50,6 +50,11 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description="A large set of images of horses and humans.",
@@ -64,6 +69,7 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
         )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     train_path, test_path = dl_manager.download([_TRAIN_URL, _TEST_URL])
 
     return [

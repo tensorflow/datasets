@@ -101,6 +101,11 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description="A large set of high-resolution retina images taken under "
@@ -116,6 +121,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     # TODO(pierrot): implement download using kaggle API.
     # TODO(pierrot): implement extraction of multiple files archives.
     path = dl_manager.manual_dir
@@ -200,10 +206,9 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             filepath=filepath,
             target_pixels=self.builder_config.target_pixels,
             crop_to_radius=True)
-      else:
-        return _resize_image_if_necessary(
-            image_fobj=image_fobj,
-            target_pixels=self.builder_config.target_pixels)
+      return _resize_image_if_necessary(
+          image_fobj=image_fobj,
+          target_pixels=self.builder_config.target_pixels)
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):

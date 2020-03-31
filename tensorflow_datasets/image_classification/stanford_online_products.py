@@ -43,6 +43,11 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         description=("Stanford Online Products Dataset"),
         builder=self,
@@ -60,6 +65,7 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
         }))
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_LINK)
     folder_path = os.path.join(dl_path, "Stanford_Online_Products")
     return [  # pylint:disable=g-complex-comprehension

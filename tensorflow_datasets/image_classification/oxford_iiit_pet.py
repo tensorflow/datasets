@@ -62,6 +62,11 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
                               "Added species and labels, new split API.")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -118,6 +123,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, images_dir_path, annotations_dir_path,
                          images_list_file):
+    """Yields examples."""
     with tf.io.gfile.GFile(images_list_file, "r") as images_list:
       for line in images_list:
         image_name, label, species, _ = line.strip().split(" ")

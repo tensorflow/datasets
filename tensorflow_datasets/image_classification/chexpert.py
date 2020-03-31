@@ -86,6 +86,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
   """
 
   def _info(self):
+    """Return Dataset info"""
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,

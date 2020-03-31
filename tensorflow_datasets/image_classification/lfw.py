@@ -46,6 +46,11 @@ class LFW(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=("""Labeled Faces in the Wild:
@@ -61,6 +66,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
     path = os.path.join(path, "lfw")
 

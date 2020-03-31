@@ -97,6 +97,7 @@ class ImagenetResized(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     size = self.builder_config.size
 
     if size in [8, 16, 32]:

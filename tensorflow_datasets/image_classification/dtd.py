@@ -53,6 +53,11 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     names_file = tfds.core.get_tfds_path(
         os.path.join("image_classification", "dtd_key_attributes.txt"))
     return tfds.core.DatasetInfo(
@@ -67,6 +72,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     # Note: The file extension is .tar.gz, but it is actually a .tar file.
     data_path = dl_manager.download_and_extract(
         tfds.download.Resource(
@@ -86,6 +92,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_path, split_name):
+    """Yields examples."""
     with tf.io.gfile.GFile(
         os.path.join(data_path, "dtd", "labels", split_name + ".txt"),
         "r") as split_file:
