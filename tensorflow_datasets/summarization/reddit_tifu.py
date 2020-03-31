@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Reddit TIFU Dataset."""
+"""Reddit TIFU dataset using tifu or tldr from subreddit tifu."""
 
 from __future__ import absolute_import
 from __future__ import division
