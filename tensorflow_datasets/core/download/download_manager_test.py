@@ -23,6 +23,7 @@ from __future__ import print_function
 import hashlib
 import json
 import os
+import pickle
 import re
 import tempfile
 import threading
@@ -325,6 +326,9 @@ class DownloadManagerTest(testing.TestCase):
       manager.download(a.url)
     self.assertEqual(0, self.extractor_extract.call_count)
 
+  def test_pickle(self):
+    dl_manager = self._get_manager()
+    pickle.loads(pickle.dumps(dl_manager))
 
 if __name__ == '__main__':
   testing.test_main()
