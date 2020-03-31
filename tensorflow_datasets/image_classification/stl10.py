@@ -59,15 +59,12 @@ class Stl10(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=(96, 96, 3)),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        # Homepage of the dataset for documentation
         homepage="http://ai.stanford.edu/~acoates/stl10/",
         citation=_CITATION,
     )
