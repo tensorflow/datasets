@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Healhy and unhealthy plant leaves dataset."""
+"""Healthy and unhealthy plant leaves dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -78,7 +78,7 @@ class DownloadRetryLimitReachedError(Exception):
 
 
 class PlantaeK(tfds.core.GeneratorBasedBuilder):
-  """Healhy and unhealthy plant leaves dataset."""
+  """Healthy and unhealthy plant leaves dataset."""
 
   VERSION = tfds.core.Version("0.1.0")
 
