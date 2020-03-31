@@ -138,7 +138,6 @@ DATASET_EXTRAS = {
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'deeplesion': ['pandas'],
     'lsun': ['tensorflow-io'],
-    'deeplesion': ['pandas'],
 }
 
 
