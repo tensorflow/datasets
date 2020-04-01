@@ -81,6 +81,7 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def matplotlib(cls) -> ModuleType("matplotlib"):
+    _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
 
   @utils.classproperty

@@ -19,7 +19,7 @@ Generic image classification dataset.
 *   **Homepage**:
     [https://www.tensorflow.org/datasets/catalog/image_label_folder](https://www.tensorflow.org/datasets/catalog/image_label_folder)
 *   **Source code**:
-    [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py)
+    [`tfds.image_classification.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/image_folder.py)
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

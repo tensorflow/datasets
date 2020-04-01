@@ -30,7 +30,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import mnist
+from tensorflow_datasets.image_classification import mnist
 
 tf.enable_v2_behavior()
 

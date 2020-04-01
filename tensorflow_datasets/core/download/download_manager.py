@@ -180,13 +180,38 @@ class DownloadManager(object):
     tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download
     self._force_extraction = force_extraction
-    self._extractor = extractor.get_extractor()
-    self._downloader = downloader.get_downloader()
     self._register_checksums = register_checksums
     # All known URLs: {url: (size, checksum)}
     self._sizes_checksums = checksums.get_all_sizes_checksums()
     # To record what is being used: {url: (size, checksum)}
     self._recorded_sizes_checksums = {}
+    # These attributes are lazy-initialized since they must be cleared when this
+    # object is pickled for Beam. They are then recreated on each worker.
+    self.__downloader = None
+    self.__extractor = None
+
+  def __getstate__(self):
+    """Remove un-pickleable attributes and return the state."""
+    if self._register_checksums:
+      raise ValueError(
+          '`register_checksums` must be disabled in a parallelized '
+          'DownloadManager.')
+    state = self.__dict__.copy()
+    state['_DownloadManager__downloader'] = None
+    state['_DownloadManager__extractor'] = None
+    return state
+
+  @property
+  def _downloader(self):
+    if not self.__downloader:
+      self.__downloader = downloader.get_downloader()
+    return self.__downloader
+
+  @property
+  def _extractor(self):
+    if not self.__extractor:
+      self.__extractor = extractor.get_extractor()
+    return self.__extractor
 
   @property
   def downloaded_size(self):
@@ -196,6 +221,11 @@ class DownloadManager(object):
   def _get_final_dl_path(self, url, sha256):
     return os.path.join(self._download_dir,
                         resource_lib.get_dl_fname(url, sha256))
+
+  @property
+  def register_checksums(self):
+    """Returns whether checksums are being computed and recorded to file."""
+    return self._register_checksums
 
   @util.build_synchronize_decorator()
   def _record_sizes_checksums(self):

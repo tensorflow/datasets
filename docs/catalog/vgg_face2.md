@@ -26,7 +26,7 @@ subject.
 *   **Homepage**:
     [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
 *   **Source code**:
-    [`tfds.image.vgg_face2.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/vgg_face2.py)
+    [`tfds.image_classification.vgg_face2.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/vgg_face2.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`

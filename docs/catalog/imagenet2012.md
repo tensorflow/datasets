@@ -28,7 +28,7 @@ include splits for the training and validation sets here.
 
 *   **Homepage**: [http://image-net.org/](http://image-net.org/)
 *   **Source code**:
-    [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
+    [`tfds.image_classification.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet.py)
 *   **Versions**:
     *   **`5.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

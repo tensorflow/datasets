@@ -265,8 +265,8 @@ the correct citation for each contained dataset.
 
 ## glue/mnli
 
-*   **Config description**: The Multi-Genre Natural Language Inference Corpusn
-    is a crowdsourced collection of sentence pairs with textual entailment
+*   **Config description**: The Multi-Genre Natural Language Inference Corpus is
+    a crowdsourced collection of sentence pairs with textual entailment
     annotations. Given a premise sentence and a hypothesis sentence, the task is
     to predict whether the premise entails the hypothesis (entailment),
     contradicts the hypothesis (contradiction), or neither (neutral). The

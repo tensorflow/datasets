@@ -124,8 +124,15 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("f0_and_loudness")
     v230 = tfds.core.Version(
         "2.3.0", "New `loudness_db` feature in decibels (unormalized).")
+    v231 = tfds.core.Version(
+        "2.3.1", "F0 computed with normalization fix in CREPE.")
+    v232 = tfds.core.Version(
+        "2.3.2", "Use Audio feature.")
     super(NsynthConfig, self).__init__(
-        name=".".join(name_parts), version=v230, **kwargs)
+        name=".".join(name_parts),
+        version=v232,
+        supported_versions=[v231, v230],
+        **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
 
@@ -146,8 +153,11 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         "id":
             tf.string,
         "audio":
-            tfds.features.Tensor(
-                shape=(_AUDIO_RATE * _NUM_SECS,), dtype=tf.float32),
+            tfds.features.Audio(
+                shape=(_AUDIO_RATE * _NUM_SECS,),
+                dtype=tf.float32,
+                sample_rate=_AUDIO_RATE,
+            ),
         "pitch":
             tfds.features.ClassLabel(num_classes=128),
         "velocity":

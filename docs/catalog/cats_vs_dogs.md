@@ -18,7 +18,7 @@ dropped.
 *   **Homepage**:
     [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 *   **Source code**:
-    [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
+    [`tfds.image_classification.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cats_vs_dogs.py)
 *   **Versions**:
     *   **`4.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

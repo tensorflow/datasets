@@ -24,7 +24,7 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 *   **Source code**:
-    [`tfds.image.dtd.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dtd.py)
+    [`tfds.image_classification.dtd.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dtd.py)
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

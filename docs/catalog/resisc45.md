@@ -22,7 +22,7 @@ images in each class.
 *   **Homepage**:
     [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 *   **Source code**:
-    [`tfds.image.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/resisc45.py)
+    [`tfds.image_classification.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/resisc45.py)
 *   **Versions**:
     *   **`3.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`

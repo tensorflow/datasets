@@ -53,7 +53,7 @@ def build_dataset(instruction_dicts,
   # First case: All examples are taken (No value skipped)
   if _no_examples_skipped(instruction_dicts):
     # Only use the filenames as instruction
-    instruction_ds = tf.compat.v1.data.Dataset.from_tensor_slices([
+    instruction_ds = tf.data.Dataset.from_tensor_slices([
         d["filepath"] for d in instruction_dicts
     ])
     build_ds_from_instruction = dataset_from_file_fn
@@ -107,7 +107,7 @@ def _build_instruction_ds(instructions):
       k: np.array(vals, dtype=np.int64) if k == "mask_offset" else list(vals)
       for k, vals in utils.zip_dict(*instructions)
   }
-  return tf.compat.v1.data.Dataset.from_tensor_slices(tensor_inputs)
+  return tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
 
 def _build_mask_ds(mask, mask_offset):
@@ -123,7 +123,7 @@ def _build_mask_ds(mask, mask_offset):
     mask_ds: `tf.data.Dataset`, a dataset returning False for examples to skip
       and True for examples to keep.
   """
-  mask_ds = tf.compat.v1.data.Dataset.from_tensor_slices(mask)
+  mask_ds = tf.data.Dataset.from_tensor_slices(mask)
   mask_ds = mask_ds.repeat()
   mask_ds = mask_ds.skip(mask_offset)
   return mask_ds

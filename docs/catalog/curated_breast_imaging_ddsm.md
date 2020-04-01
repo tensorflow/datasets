@@ -38,7 +38,7 @@ in order to guarantee reproducible results:
 *   **Homepage**:
     [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
 *   **Source code**:
-    [`tfds.image.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cbis_ddsm.py)
+    [`tfds.image_classification.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cbis_ddsm.py)
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

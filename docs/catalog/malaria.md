@@ -19,7 +19,7 @@ segmented cells.
 *   **Homepage**:
     [https://lhncbc.nlm.nih.gov/publication/pub9932](https://lhncbc.nlm.nih.gov/publication/pub9932)
 *   **Source code**:
-    [`tfds.image.malaria.Malaria`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/malaria.py)
+    [`tfds.image_classification.malaria.Malaria`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/malaria.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `337.08 MiB`

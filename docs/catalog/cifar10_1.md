@@ -24,7 +24,7 @@ v4 and v6.
 *   **Homepage**:
     [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
 *   **Source code**:
-    [`tfds.image.cifar10_1.Cifar10_1`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar10_1.py)
+    [`tfds.image_classification.cifar10_1.Cifar10_1`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cifar10_1.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Dataset size**: `Unknown size`

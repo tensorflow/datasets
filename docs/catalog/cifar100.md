@@ -21,11 +21,11 @@ superclass to which it belongs).
 *   **Homepage**:
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 *   **Source code**:
-    [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
+    [`tfds.image_classification.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cifar.py)
 *   **Versions**:
-    *   **`3.0.1`** (default): No release notes.
+    *   **`3.0.2`** (default): No release notes.
 *   **Download size**: `160.71 MiB`
-*   **Dataset size**: `130.73 MiB`
+*   **Dataset size**: `132.03 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
@@ -41,6 +41,7 @@ Split   | Examples
 ```python
 FeaturesDict({
     'coarse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+    'id': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
 })

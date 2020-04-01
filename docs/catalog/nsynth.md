@@ -24,9 +24,9 @@ heuristic algorithms: Source, Family, and Qualities.
 *   **Source code**:
     [`tfds.audio.nsynth.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
 *   **Versions**:
-    *   **`2.3.0`** (default): New `loudness_db` feature in decibels
-        (unormalized).
-*   **Dataset size**: `Unknown size`
+    *   **`2.3.2`** (default): Use Audio feature.
+    *   `2.3.1`: F0 computed with normalization fix in CREPE.
+    *   `2.3.0`: New `loudness_db` feature in decibels (unormalized).
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
@@ -59,6 +59,7 @@ heuristic algorithms: Source, Family, and Qualities.
     test sets, with no instruments overlapping between the train set and the
     valid/test sets.
 *   **Download size**: `73.07 GiB`
+*   **Dataset size**: `73.09 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -71,7 +72,7 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'audio': Audio(shape=(64000,), dtype=tf.float32),
     'id': tf.string,
     'instrument': FeaturesDict({
         'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
@@ -103,6 +104,7 @@ FeaturesDict({
     This variant was originally introduced in the ICLR 2019 GANSynth paper
     (https://arxiv.org/abs/1902.08710).
 *   **Download size**: `73.08 GiB`
+*   **Dataset size**: `20.73 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -115,7 +117,7 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'audio': Audio(shape=(64000,), dtype=tf.float32),
     'id': tf.string,
     'instrument': FeaturesDict({
         'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
@@ -149,6 +151,7 @@ FeaturesDict({
     estimates for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual
     loudness in decibels. Both signals are provided at a frame rate of 250Hz.
 *   **Download size**: `73.08 GiB`
+*   **Dataset size**: `22.03 GiB`
 *   **Splits**:
 
 Split   | Examples
@@ -161,7 +164,7 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'audio': Audio(shape=(64000,), dtype=tf.float32),
     'f0': FeaturesDict({
         'confidence': Tensor(shape=(1000,), dtype=tf.float32),
         'hz': Tensor(shape=(1000,), dtype=tf.float32),

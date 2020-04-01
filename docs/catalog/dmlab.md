@@ -23,7 +23,7 @@ respectively.
 *   **Homepage**:
     [https://github.com/google-research/task_adaptation](https://github.com/google-research/task_adaptation)
 *   **Source code**:
-    [`tfds.image.dmlab.Dmlab`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dmlab.py)
+    [`tfds.image_classification.dmlab.Dmlab`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dmlab.py)
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
 *   **Download size**: `2.81 GiB`

@@ -19,7 +19,7 @@ the corrupted Cifar10 test images uploaded by the original authors.
 *   **Homepage**:
     [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 *   **Source code**:
-    [`tfds.image.cifar10_corrupted.Cifar10Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar10_corrupted.py)
+    [`tfds.image_classification.cifar10_corrupted.Cifar10Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cifar10_corrupted.py)
 *   **Versions**:
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

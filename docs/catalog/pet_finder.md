@@ -18,7 +18,7 @@ specific class)
 *   **Homepage**:
     [https://www.kaggle.com/c/petfinder-adoption-prediction/data](https://www.kaggle.com/c/petfinder-adoption-prediction/data)
 *   **Source code**:
-    [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
+    [`tfds.image_classification.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/pet_finder.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `1.94 GiB`

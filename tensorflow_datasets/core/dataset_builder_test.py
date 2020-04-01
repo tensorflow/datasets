@@ -147,7 +147,7 @@ class DatasetBuilderTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
-    from tensorflow_datasets.image import mnist  # pylint:disable=g-import-not-at-top
+    from tensorflow_datasets.image_classification import mnist  # pylint:disable=import-outside-toplevel,g-import-not-at-top
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with absltest.mock.patch.object(
           mnist.MNIST, "_download_and_prepare",
@@ -313,16 +313,39 @@ class DatasetBuilderTest(testing.TestCase):
     older_builder = DummyDatasetSharedGenerator(version="0.0.*")
     self.assertEqual(str(older_builder.info.version), "0.0.9")
 
-  def test_non_preparable_version(self, *unused_mocks):
-    expected = (
-        "The version of the dataset you are trying to use ("
-        "dummy_dataset_shared_generator:0.0.7) can only be generated using TFDS"
-        " code synced @ v1.0.0 or earlier. Either sync to that version of TFDS "
-        "to first prepare the data or use another version of the dataset "
-        "(available for `download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
-    builder = DummyDatasetSharedGenerator(version="0.0.7")
-    self.assertIsNotNone(builder)
-    with self.assertRaisesWithPredicateMatch(AssertionError, expected):
+  def test_generate_old_versions(self):
+
+    class MultiVersionDataset(dataset_builder.GeneratorBasedBuilder):
+
+      VERSION = utils.Version("1.0.0")
+      SUPPORTED_VERSIONS = [
+          utils.Version("2.0.0"),
+          utils.Version("1.9.0"),  # Cannot be generated
+          utils.Version("0.0.8"),  # Cannot be generated
+      ]
+
+      def _info(self):
+        return dataset_info.DatasetInfo(builder=self)
+
+      def _split_generators(self, dl_manager):
+        return []
+
+      def _generate_examples(self):
+        yield "", {}
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = MultiVersionDataset(version="0.0.8", data_dir=tmp_dir)
+      with self.assertRaisesWithPredicateMatch(ValueError, "0.0.8) is too old"):
+        builder.download_and_prepare()
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = MultiVersionDataset(version="1.9.0", data_dir=tmp_dir)
+      with self.assertRaisesWithPredicateMatch(ValueError, "1.9.0) is too old"):
+        builder.download_and_prepare()
+
+    # `experimental_latest` version can be installed
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = MultiVersionDataset(version="2.0.0", data_dir=tmp_dir)
       builder.download_and_prepare()
 
   def test_invalid_split_dataset(self):
@@ -539,11 +562,11 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   def test_is_dataset_v1(self):
     # For backward compatibility, ensure that the returned dataset object
-    # is a tf.data.DatasetV1 object.
+    # has make_one_shot_iterator methods.
     with tf.Graph().as_default():
       ds = self.builder.as_dataset(split="train")
+      ds.make_one_shot_iterator()
       ds.make_initializable_iterator()
-      self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
 
   def test_autocache(self):
     # All the following should cache

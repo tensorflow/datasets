@@ -1,0 +1,250 @@
+{
+  "citation": "\n@inproceedings{groove2019,\n    Author = {Jon Gillick and Adam Roberts and Jesse Engel and Douglas Eck and David Bamman},\n    Title = {Learning to Groove with Inverse Sequence Transformations},\n    Booktitle\t= {International Conference on Machine Learning (ICML)}\n    Year = {2019},\n}\n",
+  "description": "The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and\n(synthesized) audio of human-performed, tempo-aligned expressive drumming\ncaptured on a Roland TD-11 V-Drum electronic drum kit.\n",
+  "downloadSize": "3260318",
+  "location": {
+    "urls": [
+      "https://g.co/magenta/groove-dataset"
+    ]
+  },
+  "name": "groove",
+  "schema": {
+    "feature": [
+      {
+        "name": "bpm",
+        "type": "INT"
+      },
+      {
+        "name": "drummer",
+        "type": "INT"
+      },
+      {
+        "name": "id",
+        "type": "BYTES"
+      },
+      {
+        "name": "midi",
+        "type": "BYTES"
+      },
+      {
+        "name": "style"
+      },
+      {
+        "name": "time_signature",
+        "type": "INT"
+      },
+      {
+        "name": "type",
+        "type": "INT"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "553553",
+      "numShards": "1",
+      "shardLengths": [
+        "129"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bpm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "129"
+              },
+              "max": 190.0,
+              "min": 60.0
+            }
+          },
+          {
+            "name": "drummer",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "129"
+              },
+              "max": 8.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "129"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "129"
+              }
+            },
+            "name": "midi",
+            "type": "BYTES"
+          },
+          {
+            "name": "time_signature",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "129"
+              },
+              "max": 1.0,
+              "min": 1.0
+            }
+          },
+          {
+            "name": "type",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "129"
+              },
+              "max": 1.0
+            }
+          }
+        ],
+        "numExamples": "129"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "4395729",
+      "numShards": "1",
+      "shardLengths": [
+        "897"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bpm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "897"
+              },
+              "max": 290.0,
+              "min": 50.0
+            }
+          },
+          {
+            "name": "drummer",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "897"
+              },
+              "max": 9.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "897"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "897"
+              }
+            },
+            "name": "midi",
+            "type": "BYTES"
+          },
+          {
+            "name": "time_signature",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "897"
+              },
+              "max": 4.0
+            }
+          },
+          {
+            "name": "type",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "897"
+              },
+              "max": 1.0
+            }
+          }
+        ],
+        "numExamples": "897"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "528294",
+      "numShards": "1",
+      "shardLengths": [
+        "124"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bpm",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "124"
+              },
+              "max": 184.0,
+              "min": 67.0
+            }
+          },
+          {
+            "name": "drummer",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "124"
+              },
+              "max": 8.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "124"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "124"
+              }
+            },
+            "name": "midi",
+            "type": "BYTES"
+          },
+          {
+            "name": "time_signature",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "124"
+              },
+              "max": 4.0
+            }
+          },
+          {
+            "name": "type",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "124"
+              },
+              "max": 1.0
+            }
+          }
+        ],
+        "numExamples": "124"
+      }
+    }
+  ],
+  "version": "2.0.1"
+}

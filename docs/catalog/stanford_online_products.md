@@ -17,7 +17,7 @@ Stanford Online Products Dataset
 *   **Homepage**:
     [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
 *   **Source code**:
-    [`tfds.image.stanford_online_products.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_online_products.py)
+    [`tfds.image_classification.stanford_online_products.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stanford_online_products.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `2.87 GiB`
