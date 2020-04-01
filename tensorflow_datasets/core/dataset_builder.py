@@ -391,14 +391,15 @@ class DatasetBuilder(object):
     self._log_download_done()
 
   @api_utils.disallow_positional_args
-  def as_dataset(self,
-                 split=None,
-                 batch_size=None,
-                 shuffle_files=False,
-                 decoders=None,
-                 read_config=None,
-                 as_supervised=False,
-                 in_memory=None):
+  def as_dataset(
+      self,
+      split=None,
+      batch_size=None,
+      shuffle_files=False,
+      decoders=None,
+      read_config=None,
+      as_supervised=False,
+  ):
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
@@ -468,10 +469,6 @@ class DatasetBuilder(object):
         `builder.info.supervised_keys`. If `False`, the default,
         the returned `tf.data.Dataset` will have a dictionary with all the
         features.
-      in_memory: `bool`, if `True`, loads the dataset in memory which
-        increases iteration speeds. Note that if `True` and the dataset has
-        unknown dimensions, the features will be padded to the maximum
-        size across the dataset.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -504,7 +501,6 @@ class DatasetBuilder(object):
         decoders=decoders,
         read_config=read_config,
         as_supervised=as_supervised,
-        in_memory=in_memory,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
@@ -517,7 +513,7 @@ class DatasetBuilder(object):
       decoders,
       read_config,
       as_supervised,
-      in_memory):
+  ):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -527,53 +523,19 @@ class DatasetBuilder(object):
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
     # Build base dataset
-    if in_memory and not wants_full_dataset:
-      # TODO(tfds): Remove once users have been migrated
-
-      # If the dataset is small, load it in memory
-      logging.warning(
-          "`in_memory` if deprecated and will be removed in a future version. "
-          "Please use `ds = ds.cache()` instead.")
-
-      # TODO(tfds): Enable in_memory without padding features. May be able
-      # to do by using a requested version of tf.data.Dataset.cache that can
-      # persist a cache beyond iterator instances.
-      dataset_shape_is_fully_defined = (
-          dataset_utils.features_shape_is_fully_defined(self.info.features))
-      if not dataset_shape_is_fully_defined:
-        logging.warning("Called in_memory=True on a dataset that does not "
-                        "have fully defined shapes. Note that features with "
-                        "variable length dimensions will be 0-padded to "
-                        "the maximum length across the dataset.")
-      full_bs = self.info.splits.total_num_examples or sys.maxsize
-      # If using in_memory, escape all device contexts so we can load the data
-      # with a local Session.
-      with tf.device(None):
-        ds = self._as_dataset(
-            split=split,
-            shuffle_files=shuffle_files,
-            decoders=decoders,
-            read_config=read_config,
-        )
-        # Use padded_batch so that features with unknown shape are supported.
-        ds = ds.padded_batch(
-            full_bs, tf.compat.v1.data.get_output_shapes(ds))
-        ds = tf.data.Dataset.from_tensor_slices(
-            next(dataset_utils.as_numpy(ds)))
-    else:
-      ds = self._as_dataset(
-          split=split,
-          shuffle_files=shuffle_files,
-          decoders=decoders,
-          read_config=read_config,
-      )
-      # Auto-cache small datasets which are small enough to fit in memory.
-      if self._should_cache_ds(
-          split=split,
-          shuffle_files=shuffle_files,
-          read_config=read_config
-      ):
-        ds = ds.cache()
+    ds = self._as_dataset(
+        split=split,
+        shuffle_files=shuffle_files,
+        decoders=decoders,
+        read_config=read_config,
+    )
+    # Auto-cache small datasets which are small enough to fit in memory.
+    if self._should_cache_ds(
+        split=split,
+        shuffle_files=shuffle_files,
+        read_config=read_config
+    ):
+      ds = ds.cache()
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
