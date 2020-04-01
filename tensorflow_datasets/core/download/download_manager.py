@@ -222,6 +222,11 @@ class DownloadManager(object):
     return os.path.join(self._download_dir,
                         resource_lib.get_dl_fname(url, sha256))
 
+  @property
+  def register_checksums(self):
+    """Returns whether checksums are being computed and recorded to file."""
+    return self._register_checksums
+
   @util.build_synchronize_decorator()
   def _record_sizes_checksums(self):
     """Store in file when recorded size/checksum of downloaded files."""
