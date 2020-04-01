@@ -27,13 +27,19 @@ import itertools
 import os
 import sys
 
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sized, Tuple, Union  # pylint: disable=line-too-long
+
+import termcolor
+
 from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import lazy_imports_lib
@@ -47,7 +53,11 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-import termcolor
+if typing.TYPE_CHECKING:
+  try:
+    import apache_beam as beam
+  except ImportError:
+    beam = Any
 
 
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
@@ -61,8 +71,16 @@ GCS bucket (recommended if you're running on GCP), you can instead set
 data_dir=gs://tfds-data/datasets.
 """
 
+class _Nested(metaclass=type):
+  """Nested Structure for Splits."""
 
-class BuilderConfig(object):
+  def __getitem__(self, T):
+    return Union[T, List[Any], Tuple[Any], Dict[str, Any]]
+
+Nested = _Nested()  # pylint: disable=invalid-name
+SplitType = Union[str, splits_lib.SplitBase]  # pylint: disable=invalid-name
+
+class BuilderConfig(object):  # pylint: disable=useless-object-inheritance
   """Base class for `DatasetBuilder` data configuration.
 
   DatasetBuilder subclasses with data configuration options should subclass
@@ -70,30 +88,33 @@ class BuilderConfig(object):
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, name, version=None, supported_versions=None,
-               description=None):
-    self._name = name
-    self._version = version
-    self._supported_versions = supported_versions or []
-    self._description = description
+  def __init__(self,
+               name: str,
+               version: Optional[str] = None,
+               supported_versions: Optional[List[str]] = None,
+               description: Optional[str] = None):
+    self._name: str = name
+    self._version: Optional[str] = version
+    self._supported_versions: List[str] = supported_versions or []
+    self._description: Optional[str] = description
 
   @property
-  def name(self):
+  def name(self) -> str:
     return self._name
 
   @property
-  def version(self):
+  def version(self) -> str:
     return self._version
 
   @property
-  def supported_versions(self):
+  def supported_versions(self) -> List[str]:
     return self._supported_versions
 
   @property
-  def description(self):
+  def description(self) -> str:
     return self._description
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     return "<{cls_name} name={name}, version={version}>".format(
         cls_name=type(self).__name__,
         name=self.name,
@@ -101,7 +122,7 @@ class BuilderConfig(object):
 
 
 @six.add_metaclass(registered.RegisteredDataset)
-class DatasetBuilder(object):
+class DatasetBuilder(object):  # pylint: disable=useless-object-inheritance
   """Abstract base class for all datasets.
 
   `DatasetBuilder` has 3 key methods:
@@ -163,9 +184,11 @@ class DatasetBuilder(object):
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
-
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None, version=None):
+  def __init__(self,
+               data_dir: Optional[str] = None,
+               config: Optional[BuilderConfig] = None,
+               version: Optional[str] = None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -183,19 +206,20 @@ class DatasetBuilder(object):
         are doing, as the version could be broken.
     """
     # For pickling:
-    self._original_state = dict(data_dir=data_dir, config=config,
-                                version=version)
+    self._original_state: Dict[Any, Any] = dict(data_dir=data_dir,
+                                                config=config,
+                                                version=version)
     # To do the work:
-    self._builder_config = self._create_builder_config(config)
+    self._builder_config: BuilderConfig = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
           "DatasetBuilder {} does not have a defined version. Please add a "
           "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
-    self._version = self._pick_version(version)
-    self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
-    self._data_dir = self._build_data_dir()
+    self._version: utils.Version = self._pick_version(version)
+    self._data_dir_root: str = os.path.expanduser(data_dir or constants.DATA_DIR)
+    self._data_dir: str = self._build_data_dir()
     if tf.io.gfile.exists(self._data_dir):
       logging.info("Overwrite dataset info from restored data version.")
       self.info.read_from_directory(self._data_dir)
@@ -203,35 +227,33 @@ class DatasetBuilder(object):
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
-  def __getstate__(self):
+  def __getstate__(self) -> Dict[str, Any]:
     return self._original_state
 
-  def __setstate__(self, state):
+  def __setstate__(self, state: Dict[str, Any]):
     self.__init__(**state)
 
   @utils.memoized_property
-  def canonical_version(self):
+  def canonical_version(self) -> str:
     if self._builder_config:
       return self._builder_config.version
-    else:
-      return self.VERSION
+    return self.VERSION
 
   @utils.memoized_property
-  def supported_versions(self):
+  def supported_versions(self) -> List[utils.Version]:
     if self._builder_config:
       return self._builder_config.supported_versions
-    else:
-      return self.SUPPORTED_VERSIONS
+    return self.SUPPORTED_VERSIONS
 
   @utils.memoized_property
-  def versions(self):
+  def versions(self) -> List[utils.Version]:
     """Versions (canonical + availables), in preference order."""
     return [
         utils.Version(v) if isinstance(v, six.string_types) else v
         for v in [self.canonical_version] + self.supported_versions
     ]
 
-  def _pick_version(self, requested_version):
+  def _pick_version(self, requested_version: str) -> utils.Version:
     """Returns utils.Version instance, or raise AssertionError."""
     if requested_version == "experimental_latest":
       return max(self.versions)
@@ -244,15 +266,15 @@ class DatasetBuilder(object):
     raise AssertionError(msg)
 
   @property
-  def version(self):
+  def version(self) -> utils.Version:
     return self._version
 
   @property
-  def data_dir(self):
+  def data_dir(self) -> str:
     return self._data_dir
 
   @utils.memoized_property
-  def info(self):
+  def info(self) -> dataset_info.DatasetInfo:
     """`tfds.core.DatasetInfo` for this builder."""
     # Ensure .info hasn't been called before versioning is set-up
     # Otherwise, backward compatibility cannot be guaranteed as some code will
@@ -267,7 +289,10 @@ class DatasetBuilder(object):
     return self._info()
 
   @api_utils.disallow_positional_args
-  def download_and_prepare(self, download_dir=None, download_config=None):
+  def download_and_prepare(
+      self,
+      download_dir: Optional[str] = None,
+      download_config: Optional[download.DownloadConfig] = None) -> None:
     """Downloads and prepares dataset for reading.
 
     Args:
@@ -282,7 +307,8 @@ class DatasetBuilder(object):
 
     download_config = download_config or download.DownloadConfig()
     data_exists = tf.io.gfile.exists(self._data_dir)
-    if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
+    if (data_exists and
+        download_config.download_mode == REUSE_DATASET_IF_EXISTS):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
@@ -392,13 +418,13 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
-                 split=None,
-                 batch_size=None,
-                 shuffle_files=False,
-                 decoders=None,
-                 read_config=None,
-                 as_supervised=False,
-                 in_memory=None):
+                 split: Optional[Nested[SplitType]] = None,
+                 batch_size: Optional[int] = None,
+                 shuffle_files: Optional[bool] = False,
+                 decoders: Optional[Nested[decode.Decoder]] = None,
+                 read_config: Optional[read_config_lib.ReadConfig] = None,
+                 as_supervised: bool = False,
+                 in_memory: Optional[bool] = None) -> Nested[tf.data.Dataset]:
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
@@ -511,13 +537,13 @@ class DatasetBuilder(object):
 
   def _build_single_dataset(
       self,
-      split,
-      shuffle_files,
-      batch_size,
-      decoders,
-      read_config,
-      as_supervised,
-      in_memory):
+      split: Nested[SplitType],
+      shuffle_files: bool,
+      batch_size: Optional[int],
+      decoders: Optional[Nested[decode.Decoder]],
+      read_config: read_config_lib.ReadConfig,
+      as_supervised: bool,
+      in_memory: bool) -> Nested[tf.data.Dataset]:
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -608,7 +634,10 @@ class DatasetBuilder(object):
       return tf.data.experimental.get_single_element(ds)
     return ds
 
-  def _should_cache_ds(self, split, shuffle_files, read_config):
+  def _should_cache_ds(self,
+                       split: splits_lib.SplitBase,
+                       shuffle_files: bool,
+                       read_config: read_config_lib.ReadConfig) -> bool:
     """Returns True if TFDS should auto-cache the dataset."""
     # The user can explicitly opt-out from auto-caching
     if not read_config.try_autocache:
@@ -643,14 +672,14 @@ class DatasetBuilder(object):
     num_shards = len(self.info.splits[split].file_instructions)
     if (shuffle_files and
         # Shuffling only matter when reshuffle is True or None (default)
-        read_config.shuffle_reshuffle_each_iteration is not False and  # pylint: disable=g-bool-id-comparison
-        num_shards > 1):
+        read_config.shuffle_reshuffle_each_iteration is not False and
+        num_shards > 1):  # pylint: disable=g-bool-id-comparison
       return False
 
     # If the dataset satisfy all the right conditions, activate autocaching.
     return True
 
-  def _relative_data_dir(self, with_version=True):
+  def _relative_data_dir(self, with_version: bool = True) -> str:
     """Relative path of this dataset in data_dir."""
     builder_data_dir = self.name
     builder_config = self._builder_config
@@ -663,14 +692,14 @@ class DatasetBuilder(object):
     version_data_dir = os.path.join(builder_data_dir, str(version))
     return version_data_dir
 
-  def _build_data_dir(self):
+  def _build_data_dir(self) -> str:
     """Return the data directory for the current version."""
     builder_data_dir = os.path.join(
         self._data_dir_root, self._relative_data_dir(with_version=False))
     version_data_dir = os.path.join(
         self._data_dir_root, self._relative_data_dir(with_version=True))
 
-    def _other_versions_on_disk():
+    def _other_versions_on_disk() -> List[Tuple[Any, Any]]:
       """Returns previous versions on disk."""
       if not tf.io.gfile.exists(builder_data_dir):
         return []
@@ -701,7 +730,7 @@ class DatasetBuilder(object):
 
     return version_data_dir
 
-  def _log_download_done(self):
+  def _log_download_done(self) -> None:
     msg = ("Dataset {name} downloaded and prepared to {data_dir}. "
            "Subsequent calls will reuse this data.").format(
                name=self.name,
@@ -709,7 +738,7 @@ class DatasetBuilder(object):
            )
     termcolor.cprint(msg, attrs=["bold"])
 
-  def _log_download_bytes(self):
+  def _log_download_bytes(self) -> None:
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
@@ -736,7 +765,10 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager, download_config=None):
+  def _download_and_prepare(
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: Optional[download.DownloadConfig] = None) -> None:
     """Downloads and prepares dataset for reading.
 
     This is the internal implementation to overwrite called when user calls
@@ -752,7 +784,11 @@ class DatasetBuilder(object):
 
   @abc.abstractmethod
   def _as_dataset(
-      self, split, decoders=None, read_config=None, shuffle_files=False):
+      self,
+      split: Nested[SplitType],
+      decoders: Optional[Nested[decode.Decoder]] = None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
+      shuffle_files: bool = False) -> None:
     """Constructs a `tf.data.Dataset`.
 
     This is the internal implementation to overwrite called when user calls
@@ -772,7 +808,10 @@ class DatasetBuilder(object):
     """
     raise NotImplementedError
 
-  def _make_download_manager(self, download_dir, download_config):
+  def _make_download_manager(
+      self,
+      download_dir: str,
+      download_config: download.DownloadConfig) -> download.DownloadManager:
     """Creates a new download manager object."""
     download_dir = download_dir or os.path.join(self._data_dir_root,
                                                 "downloads")
@@ -799,11 +838,13 @@ class DatasetBuilder(object):
     )
 
   @property
-  def builder_config(self):
+  def builder_config(self) -> BuilderConfig:
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
-  def _create_builder_config(self, builder_config):
+  def _create_builder_config(self,
+                             builder_config: BuilderConfig
+                             ) -> Optional[BuilderConfig]:
     """Create and validate BuilderConfig object."""
     if builder_config is None and self.BUILDER_CONFIGS:
       builder_config = self.BUILDER_CONFIGS[0]
@@ -838,7 +879,7 @@ class DatasetBuilder(object):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def builder_configs(cls):
+  def builder_configs(cls) -> Dict[str, BuilderConfig]:
     """Pre-defined list of configurations for this builder class."""
     config_dict = {config.name: config for config in cls.BUILDER_CONFIGS}
     if len(config_dict) != len(cls.BUILDER_CONFIGS):
@@ -855,13 +896,15 @@ class FileAdapterBuilder(DatasetBuilder):
   `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
   feature dictionaries yielded by example generators. See the class docstrings.
   """
+  _version: utils.Version
+  _data_dir: str
 
   @utils.memoized_property
   def _example_specs(self):
     return self.info.features.get_serialized_info()
 
   @utils.memoized_property
-  def _file_format_adapter(self):
+  def _file_format_adapter(self) -> file_format_adapter.TFRecordExampleAdapter:
     # Load the format adapter (TF-Record,...)
     # The file_format_adapter module will eventually be replaced by
     # tfrecords_{reader,writer} modules.
@@ -869,11 +912,14 @@ class FileAdapterBuilder(DatasetBuilder):
     return file_adapter_cls(self._example_specs)
 
   @property
-  def _tfrecords_reader(self):
+  def _tfrecords_reader(self) -> tfrecords_reader.Reader:
     return tfrecords_reader.Reader(self._data_dir, self._example_specs)
 
   @abc.abstractmethod
-  def _split_generators(self, dl_manager):
+  def _split_generators(
+      self,
+      dl_manager: download.DownloadManager
+      ) -> List[splits_lib.SplitGenerator]:
     """Specify feature dictionary generators and dataset splits.
 
     This function returns a list of `SplitGenerator`s defining how to generate
@@ -919,7 +965,9 @@ class FileAdapterBuilder(DatasetBuilder):
     raise NotImplementedError()
 
   @abc.abstractmethod
-  def _prepare_split(self, split_generator, **kwargs):
+  def _prepare_split(self,
+                     split_generator: splits_lib.SplitGenerator,
+                     **kwargs: Any) -> None:
     """Generate the examples and record them on disk.
 
     Args:
@@ -929,12 +977,19 @@ class FileAdapterBuilder(DatasetBuilder):
     """
     raise NotImplementedError()
 
-  def _make_split_generators_kwargs(self, prepare_split_kwargs):
+  def _make_split_generators_kwargs(
+      self,
+      prepare_split_kwargs: Any
+      ) -> Mapping[str, Iterable]:
     """Get kwargs for `self._split_generators()` from `prepare_split_kwargs`."""
     del prepare_split_kwargs
     return {}
 
-  def _download_and_prepare(self, dl_manager, **prepare_split_kwargs):
+  # pylint: disable=arguments-differ
+  def _download_and_prepare(
+      self,
+      dl_manager: download.DownloadManager,
+      **prepare_split_kwargs: Any) -> None:
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
 
@@ -959,13 +1014,14 @@ class FileAdapterBuilder(DatasetBuilder):
 
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
+  # pylint: enable=arguments-differ
 
   def _as_dataset(
       self,
-      split=splits_lib.Split.TRAIN,
-      decoders=None,
-      read_config=None,
-      shuffle_files=False):
+      split: Nested[SplitType] = splits_lib.Split.TRAIN,
+      decoders: Optional[Nested[decode.Decoder]] = None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
+      shuffle_files: bool = False) -> Nested[tf.data.Dataset]:
 
     if self.version.implements(utils.Experiment.S3):
       ds = self._tfrecords_reader.read(
@@ -998,7 +1054,10 @@ class FileAdapterBuilder(DatasetBuilder):
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
 
-  def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
+  def _slice_split_info_to_instruction_dicts(
+      self,
+      list_sliced_split_info: List[splits_lib.SplitInfo]
+      ) -> List[Dict[str, Any]]:
     """Return the list of files and reading mask of the files to read."""
     instruction_dicts = []
     for sliced_split_info in list_sliced_split_info:
@@ -1031,7 +1090,8 @@ class FileAdapterBuilder(DatasetBuilder):
         })
     return instruction_dicts
 
-  def _build_split_filenames(self, split_info):
+  def _build_split_filenames(self,
+                             split_info: splits_lib.SplitInfo) -> List[str]:
     """Construct the split filenames associated with the split info.
 
     The filenames correspond to the pre-processed datasets files present in
@@ -1067,9 +1127,11 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
   `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
   feature dictionaries yielded by example generators. See the class docstrings.
   """
+  _version: utils.Version
+  _data_dir: str
 
   @abc.abstractmethod
-  def _generate_examples(self, **kwargs):
+  def _generate_examples(self, **kwargs: Any) -> Iterable:
     """Default function generating examples for each `SplitGenerator`.
 
     This function preprocess the examples from the raw data to the preprocessed
@@ -1098,14 +1160,19 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager, download_config):
+  def _download_and_prepare(  # pylint: disable=arguments-differ
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: download.DownloadConfig) -> None:
     # Extract max_examples_per_split and forward it to _prepare_split
     super(GeneratorBasedBuilder, self)._download_and_prepare(
         dl_manager=dl_manager,
         max_examples_per_split=download_config.max_examples_per_split,
     )
 
-  def _prepare_split_legacy(self, generator, split_info):
+  def _prepare_split_legacy(self,
+                            generator: Iterable[tf.tuple],
+                            split_info: splits_lib.SplitInfo) -> None:
     # TODO(pierrot): delete function once S3 has been fully rolled-out.
     # For builders having both S3 and non S3 versions: drop key if any yielded.
     generator = (ex[1] if isinstance(ex, tuple) else ex for ex in generator)
@@ -1113,7 +1180,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     output_files = self._build_split_filenames(split_info)
     self._file_format_adapter.write_from_generator(generator, output_files)
 
-  def _prepare_split(self, split_generator, max_examples_per_split):
+  def _prepare_split(self,  # pylint: disable=arguments-differ
+                     split_generator: splits_lib.SplitGenerator,
+                     max_examples_per_split: int) -> None:
     generator = self._generate_examples(**split_generator.gen_kwargs)
     split_info = split_generator.split_info
     if max_examples_per_split is not None:
@@ -1133,16 +1202,20 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     shard_lengths, total_size = writer.finalize()
     split_generator.split_info.shard_lengths.extend(shard_lengths)
     split_generator.split_info.num_bytes = total_size
+    return None  # To avoid pylint error
 
 
 class BeamBasedBuilder(FileAdapterBuilder):
   """Beam based Builder."""
+  _data_dir: str
 
-  def __init__(self, *args, **kwargs):
+  def __init__(self, *args: Any, **kwargs: Any) -> None:
     super(BeamBasedBuilder, self).__init__(*args, **kwargs)
     self._beam_writers = {}  # {split: beam_writer} mapping.
 
-  def _make_split_generators_kwargs(self, prepare_split_kwargs):
+  def _make_split_generators_kwargs(
+      self,
+      prepare_split_kwargs: Any) -> Any:
     # Pass `pipeline` into `_split_generators()` from `prepare_split_kwargs` if
     # it's in the call signature of `_split_generators()`.
     # This allows for global preprocessing in beam.
@@ -1155,7 +1228,9 @@ class BeamBasedBuilder(FileAdapterBuilder):
     return split_generators_kwargs
 
   @abc.abstractmethod
-  def _build_pcollection(self, pipeline, **kwargs):
+  def _build_pcollection(self,
+                         pipeline: "beam.Pipeline",
+                         **kwargs: Any) -> None:
     """Build the beam pipeline examples for each `SplitGenerator`.
 
     This function extracts examples from the raw data with parallel transforms
@@ -1189,9 +1264,12 @@ class BeamBasedBuilder(FileAdapterBuilder):
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager, download_config):
+  def _download_and_prepare(  # pylint: disable=arguments-differ
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: download.DownloadConfig) -> None:
     # Create the Beam pipeline and forward it to _prepare_split
-    beam = lazy_imports_lib.lazy_imports.apache_beam
+    beam = lazy_imports_lib.lazy_imports.apache_beam  # pylint: disable=redefined-outer-name
 
     if not download_config.beam_runner and not download_config.beam_options:
       raise ValueError(
@@ -1232,8 +1310,10 @@ class BeamBasedBuilder(FileAdapterBuilder):
     logging.info("Updating split info...")
     self.info.update_splits_if_different(split_dict)
 
-  def _prepare_split(self, split_generator, pipeline):
-    beam = lazy_imports_lib.lazy_imports.apache_beam
+  def _prepare_split(self,
+                     split_generator: splits_lib.SplitGenerator,
+                     pipeline: "beam.Pipeline") -> None:
+    beam = lazy_imports_lib.lazy_imports.apache_beam  # pylint: disable=redefined-outer-name
 
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
