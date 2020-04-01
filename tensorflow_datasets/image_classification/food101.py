@@ -56,19 +56,23 @@ class Food101(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version(
           "1.0.0",
           tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55"),
+      tfds.core.Version("2.1.0"),
   ]
 
   def _info(self):
     """Define Dataset Info."""
 
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    features_dict = {
+        "image": tfds.features.Image(),
+        "label": tfds.features.ClassLabel(names_file=names_file),
+    }
+    if self.version > "2.0.0":
+      features_dict["id"] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(names_file=names_file),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
         homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
         citation=_CITATION)
@@ -105,7 +109,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
     for label, images in data.items():
       for image_name in images:
         image = os.path.join(image_dir_path, image_name + ".jpg")
-        yield image_name, {
-            "image": image,
-            "label": label,
-        }
+        features = {"image": image, "label": label}
+        if self.version > "2.0.0":
+          features["id"] = image_name
+        yield image_name, features

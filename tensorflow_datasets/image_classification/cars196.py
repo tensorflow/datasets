@@ -154,17 +154,23 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
   """Car Images dataset."""
 
   VERSION = tfds.core.Version('2.0.0')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('2.1.0'),
+  ]
 
   def _info(self):
     """Define the dataset info."""
+    features_dict = {
+        'image': tfds.features.Image(),
+        'label': tfds.features.ClassLabel(names=_NAMES),
+        'bbox': tfds.features.BBoxFeature(),
+    }
+    if self.version > '2.0.0':
+      features_dict['id'] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),
-        features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(),
-            'label': tfds.features.ClassLabel(names=_NAMES),
-            'bbox': tfds.features.BBoxFeature(),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=('image', 'label'),
         homepage='https://ai.stanford.edu/~jkrause/cars/car_dataset.html',
         citation=_CITATION)
@@ -218,11 +224,14 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       label = _NAMES[example[4].item() - 1]
       image = image_dict[image_name]
       bbox = bbox_dict[image_name]
-      yield image_name, {
+      features = {
           'label': label,
           'image': image,
           'bbox': bbox,
       }
+      if self.version > '2.0.0':
+        features['id'] = image_name
+      yield image_name, features
 
   def returnImageDict(self, path):
     return {

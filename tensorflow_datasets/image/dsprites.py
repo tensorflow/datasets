@@ -71,35 +71,30 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.1.0"),
+  ]
 
   def _info(self):
+    features_dict = {
+        "image": tfds.features.Image(shape=(64, 64, 1)),
+        "label_shape": tfds.features.ClassLabel(num_classes=3),
+        "label_scale": tfds.features.ClassLabel(num_classes=6),
+        "label_orientation": tfds.features.ClassLabel(num_classes=40),
+        "label_x_position": tfds.features.ClassLabel(num_classes=32),
+        "label_y_position": tfds.features.ClassLabel(num_classes=32),
+        "value_shape": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_scale": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_orientation": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_x_position": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_y_position": tfds.features.Tensor(shape=[], dtype=tf.float32),
+    }
+    if self.version > "2.0.0":
+      features_dict["id"] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=(64, 64, 1)),
-            "label_shape":
-                tfds.features.ClassLabel(num_classes=3),
-            "label_scale":
-                tfds.features.ClassLabel(num_classes=6),
-            "label_orientation":
-                tfds.features.ClassLabel(num_classes=40),
-            "label_x_position":
-                tfds.features.ClassLabel(num_classes=32),
-            "label_y_position":
-                tfds.features.ClassLabel(num_classes=32),
-            "value_shape":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_scale":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_orientation":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_x_position":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_y_position":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         homepage="https://github.com/deepmind/dsprites-dataset",
         citation=_CITATION,
     )
@@ -141,6 +136,8 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
           value_orientation=values[3],
           value_x_position=values[4],
           value_y_position=values[5])
+      if self.version > "2.0.0":
+        record["id"] = "{:06d}".format(i)
       yield i, record
 
 
