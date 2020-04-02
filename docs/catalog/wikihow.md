@@ -41,7 +41,7 @@ clean up extra commas.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/wikihow/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
     Please download both wikihowAll.csv and wikihowSep.csv.
 *   **Auto-cached**
