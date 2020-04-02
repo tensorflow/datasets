@@ -100,7 +100,6 @@ class DatasetInfo(object):
                features=None,
                supervised_keys=None,
                homepage=None,
-               urls=None,
                citation=None,
                metadata=None,
                redistribution_info=None):
@@ -119,7 +118,6 @@ class DatasetInfo(object):
         with `as_supervised=True`, the `tf.data.Dataset` object will yield
         the (input, target) defined here.
       homepage: `str`, optional, the homepage for this dataset.
-      urls: DEPRECATED, use `homepage` instead.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
@@ -139,9 +137,6 @@ class DatasetInfo(object):
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
 
-    if urls:  # TODO(epot):Delete field once every user have been migrated
-      raise ValueError("`urls=` field is deprecated. Please use "
-                       "`homepage='{}'` instead.".format(urls[0]))
     if homepage:
       self._info_proto.location.urls[:] = [homepage]
 
