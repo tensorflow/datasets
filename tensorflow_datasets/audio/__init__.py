@@ -17,6 +17,7 @@
 """Audio datasets."""
 
 from tensorflow_datasets.audio.crema_d import CremaD
+from tensorflow_datasets.audio.dementiabank import Dementiabank
 from tensorflow_datasets.audio.groove import Groove
 from tensorflow_datasets.audio.librispeech import Librispeech
 from tensorflow_datasets.audio.librispeech import LibrispeechConfig
