@@ -167,6 +167,7 @@ caltech101/3.0.0
 caltech_birds2010/0.1.0
 caltech_birds2011/0.1.0
 cars196/2.0.0
+cars196/2.1.0
 cassava/0.1.0
 cats_vs_dogs/4.0.0
 celeb_a/2.0.0
@@ -346,6 +347,7 @@ dmlab/2.0.0
 downsampled_imagenet/32x32/2.0.0
 downsampled_imagenet/64x64/2.0.0
 dsprites/2.0.0
+dsprites/2.1.0
 dtd/3.0.0
 duke_ultrasound/1.0.0
 emnist/balanced/3.0.0
@@ -365,6 +367,7 @@ flores/neen_plain_text/1.1.0
 flores/sien_plain_text/1.1.0
 food101/1.0.0
 food101/2.0.0
+food101/2.1.0
 forest_fires/0.0.1
 gap/0.1.0
 geirhos_conflict_stimuli/1.0.0
@@ -715,6 +718,7 @@ scientific_papers/pubmed/1.1.0
 scientific_papers/pubmed/1.1.1
 shapes3d/2.0.0
 smallnorb/2.0.0
+smallnorb/2.1.0
 snli/plain_text/1.0.0
 speech_commands/0.0.2
 squad/plain_text/1.0.0
@@ -752,6 +756,7 @@ super_glue/wic/1.0.2
 super_glue/wsc.fixed/1.0.2
 super_glue/wsc/1.0.2
 svhn_cropped/3.0.0
+svhn_cropped/3.1.0
 ted_hrlr_translate/az_to_en/1.0.0
 ted_hrlr_translate/aztr_to_en/1.0.0
 ted_hrlr_translate/be_to_en/1.0.0

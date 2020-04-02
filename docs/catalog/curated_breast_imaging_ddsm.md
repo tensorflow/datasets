@@ -45,7 +45,7 @@ in order to guarantee reproducible results:
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/curated_breast_imaging_ddsm/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     You can download the images from
     https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
     Please look at the source file (cbis_ddsm.py) to see the instructions

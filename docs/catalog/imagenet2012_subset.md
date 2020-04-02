@@ -33,7 +33,7 @@ been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
     *   **`5.0.0`** (default): No release notes.
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/imagenet2012_subset/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
     You need to register on http://www.image-net.org/download-images in order

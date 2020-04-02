@@ -28,6 +28,7 @@ for ex in tfds.as_numpy(ds):
 ### `Audio`
 
 *   [`crema_d`](crema_d.md)
+*   [`dementiabank`](dementiabank.md)
 *   [`groove`](groove.md)
 *   [`librispeech`](librispeech.md)
 *   [`libritts`](libritts.md)

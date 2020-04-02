@@ -30,7 +30,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/celeb_a_hq/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain multiple tar files with images (data2x2.tar,
     data4x4.tar .. data1024x1024.tar).
     Detailed instructions are here:

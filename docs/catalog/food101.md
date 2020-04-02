@@ -26,6 +26,7 @@ of 512 pixels.
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
     *   `1.0.0`: No release notes.
+    *   `2.1.0`: No release notes.
 *   **Download size**: `4.65 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

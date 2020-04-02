@@ -4,6 +4,7 @@ cityscapes/semantic_segmentation/1.0.0
 cityscapes/semantic_segmentation_extra/1.0.0
 cityscapes/stereo_disparity/1.0.0
 cityscapes/stereo_disparity_extra/1.0.0
+dementiabank/1.0.0
 dummy_dataset_shared_generator/0.0.7
 dummy_dataset_shared_generator/0.0.8
 dummy_dataset_shared_generator/0.0.9

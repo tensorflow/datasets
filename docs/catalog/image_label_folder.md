@@ -27,7 +27,7 @@ Generic image classification dataset.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/image_label_folder/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     This is a 'template' dataset.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
