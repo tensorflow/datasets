@@ -31,7 +31,7 @@ locally.
 the dataset config you want to generate or it will default to generate all
 existing configs. For example, for
 [wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia), use
-`--dataset=wikipedia/20190301.en` instead of `--dataset=wikipedia`.
+`--dataset=wikipedia/20200301.en` instead of `--dataset=wikipedia`.
 
 ### On Google Cloud Dataflow
 
