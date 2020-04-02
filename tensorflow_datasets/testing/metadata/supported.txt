@@ -684,6 +684,7 @@ qa4mre/2013.main.EN/0.1.0
 qa4mre/2013.main.ES/0.1.0
 qa4mre/2013.main.RO/0.1.0
 quickdraw_bitmap/3.0.0
+reddit/1.0.0
 reddit_tifu/long/1.1.0
 reddit_tifu/short/1.1.0
 resisc45/3.0.0
@@ -727,6 +728,7 @@ starcraft_video/move_unit_to_border_128/1.0.0
 starcraft_video/move_unit_to_border_64/1.0.0
 starcraft_video/road_trip_with_medivac_128/1.0.0
 starcraft_video/road_trip_with_medivac_64/1.0.0
+stl10/1.0.0
 sun397/standard-part1-120k/4.0.0
 sun397/standard-part10-120k/4.0.0
 sun397/standard-part2-120k/4.0.0
@@ -792,6 +794,7 @@ visual_domain_decathlon/ucf101/1.1.0
 visual_domain_decathlon/vgg-flowers/1.1.0
 voc/2007/4.0.0
 voc/2012/4.0.0
+voxceleb/1.1.0
 waymo_open_dataset/0.1.0
 wider_face/0.1.0
 wiki40b/Wiki40B.ar/1.1.0

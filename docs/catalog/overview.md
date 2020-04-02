@@ -260,6 +260,8 @@ for ex in tfds.as_numpy(ds):
 
 *   [`opinosis`](opinosis.md)
 
+*   [`reddit`](reddit.md)
+
 *   [`reddit_tifu`](reddit_tifu.md)
 
 *   [`scientific_papers`](scientific_papers.md)

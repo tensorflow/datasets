@@ -13,8 +13,6 @@ dummy_mnist/1.0.0
 image_label_folder/2.0.0
 so2sat/all/2.0.0
 so2sat/rgb/2.0.0
-stl10/1.0.0
-voxceleb/1.1.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0
