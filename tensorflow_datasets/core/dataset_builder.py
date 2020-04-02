@@ -745,7 +745,6 @@ class DatasetBuilder(object):
     if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
       manual_dir = (
           download_config.manual_dir or os.path.join(download_dir, "manual"))
-      manual_dir = os.path.join(manual_dir, self.name)
     else:
       manual_dir = None
 
