@@ -61,7 +61,7 @@ address = "Colorado Springs, CO",
 _IMAGES_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar"
 _SPLIT_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/lists.tar"
 _ANNOTATIONS_URL = "http://vision.stanford.edu/aditya86/ImageNetDogs/annotation.tar"
-_NAME_RE = re.compile(r"([\w-]*/)*([\w]*.jpg)$")
+_NAME_RE = re.compile(r"([\w-]*[/\\])*([\w]*.jpg)$")
 
 
 class StanfordDogs(tfds.core.GeneratorBasedBuilder):
@@ -106,7 +106,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
       with tf.io.gfile.GFile(file_name, "rb") as f:
         parsed_mat_arr = scipy.io.loadmat(f, squeeze_me=True)
       file_list = [
-          element.split("/")[-1] for element in parsed_mat_arr["file_list"]
+          os.path.split(element)[-1] for element in parsed_mat_arr["file_list"]
       ]
 
       return file_list, parsed_mat_arr
@@ -118,7 +118,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
       if "train" in fname:
         train_list, train_mat_arr = parse_mat_file(full_file_name)
         label_names = set([  # Set to remove duplicates
-            element.split("/")[-2].lower()  # Extract path/label/img.jpg
+            os.path.split(element)[-2].lower()  # Extract path/label/img.jpg
             for element in train_mat_arr["file_list"]
         ])
       elif "test" in fname:
@@ -166,7 +166,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
     for fname, fobj in archive:
       res = _NAME_RE.match(fname)
-      if not res or (fname.split("/")[-1] not in file_names):
+      if not res or (os.path.split(fname)[-1] not in file_names):
         continue
 
       label = res.group(1)[:-1].lower()
