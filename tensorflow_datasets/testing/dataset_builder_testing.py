@@ -313,7 +313,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEmpty(
         missing_urls,
         "Some urls checksums are missing at: {} "
-        "Did you forgot to record checksums with `--register_checksums` ? "
+        "Did you forget to record checksums with `--register_checksums` ? "
         "See instructions at: "
         "https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally"
         "\n{}".format(filepath, err_msg)
