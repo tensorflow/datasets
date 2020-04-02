@@ -70,6 +70,14 @@ class ExtractorTest(testing.TestCase):
     with self.assertRaises(ValueError):
       self.extractor.extract('from/path', NO_EXTRACT, 'to/path')
 
+  def _test_iter_archive(self, method, archive_name, expected_file):
+    from_path = os.path.join(self.test_data, 'archives', archive_name)
+    archive = extractor.iter_archive(from_path, method)
+    for fname, _ in archive:
+      # fname should always be a path to a file inside archive
+      self.assertEqual(os.path.basename(fname), expected_file,
+       "iter_archive() yields file(s) other than %s" % expected_file)
+
   def _test_extract(self, method, archive_name, expected_files):
     from_path = os.path.join(self.test_data, 'archives', archive_name)
     self.extractor.extract(from_path, method, self.to_path).get()
@@ -81,26 +89,31 @@ class ExtractorTest(testing.TestCase):
     self._test_extract(
         ZIP, 'arch1.zip',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_iter_archive(ZIP, 'data.zip', '6pixels.png')
 
   def test_tar(self):
     self._test_extract(
         TAR, 'arch1.tar',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_iter_archive(TAR, 'data.tar', '6pixels.png')
 
   def test_targz(self):
     self._test_extract(
         TAR_GZ, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_iter_archive(TAR_GZ, 'data.tar.gz', '6pixels.png')
 
   def test_tar_stream(self):
     self._test_extract(
         TAR_STREAM, 'arch1.tar',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_iter_archive(TAR_STREAM, 'data.tar', '6pixels.png')
 
   def test_targz_stream(self):
     self._test_extract(
         TAR_GZ_STREAM, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_iter_archive(TAR_GZ_STREAM, 'data.tar.gz', '6pixels.png')
 
   def test_gzip(self):
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
