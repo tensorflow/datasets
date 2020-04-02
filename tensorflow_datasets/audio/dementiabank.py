@@ -122,8 +122,10 @@ class Dementiabank(tfds.core.GeneratorBasedBuilder):
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = textwrap.dedent("""
   manual dir should contain 2 folders with mp3 files:
+
   * {}
   * {}
+
   Which were downloaded from https://media.talkbank.org/dementia/English/Pitt/
   This dataset requires registration for downloading.
   """.format(_CONTROL_FOLDER, _DEMENTIA_FOLDER))
