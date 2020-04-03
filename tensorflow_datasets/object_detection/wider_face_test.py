@@ -28,9 +28,9 @@ import tensorflow_datasets.public_api as tfds
 class WiderFaceTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wider_face.WiderFace
   SPLITS = {
-      tfds.Split.TRAIN: 3,
-      tfds.Split.VALIDATION: 3,
-      tfds.Split.TEST: 3,
+      tfds.Split.TRAIN: 1,
+      tfds.Split.VALIDATION: 1,
+      tfds.Split.TEST: 1,
   }
   DL_EXTRACT_RESULT = {
       'wider_train': 'wider_train',
