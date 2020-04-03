@@ -176,15 +176,17 @@ def iter_bzip2(arch_f):
 
 
 def iter_zip(arch_f):
+  """Iterate over zip archive."""
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
-      if extract_file:  # File with data (not directory):
-        path = _normpath(member.filename)
-        if not path:
-          continue
-        yield [path, extract_file]
+      if member.is_dir():  # Filter directories
+        continue
+      path = _normpath(member.filename)
+      if not path:
+        continue
+      yield [path, extract_file]
 
 
 _EXTRACT_METHODS = {
@@ -199,5 +201,13 @@ _EXTRACT_METHODS = {
 
 
 def iter_archive(path, method):
-  """Yields (path_in_archive, f_obj) for archive at path using `tfds.download.ExtractMethod`."""  # pylint: disable=line-too-long
+  """Iterate over an archive.
+
+  Args:
+    path: `str`, archive path
+    method: `tfds.download.ExtractMethod`, extraction method
+
+  Returns:
+    An iterator of `(path_in_archive, f_obj)`
+  """
   return _EXTRACT_METHODS[method](path)
