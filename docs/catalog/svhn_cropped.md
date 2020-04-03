@@ -19,10 +19,11 @@ cropped to 32x32.
 *   **Homepage**:
     [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 *   **Source code**:
-    [`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py)
+    [`tfds.image_classification.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/svhn.py)
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+    *   `3.1.0`: No release notes.
 *   **Download size**: `1.47 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

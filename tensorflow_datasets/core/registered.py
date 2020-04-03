@@ -183,7 +183,6 @@ def load(name,
          split=None,
          data_dir=None,
          batch_size=None,
-         in_memory=None,
          shuffle_files=False,
          download=True,
          as_supervised=False,
@@ -242,10 +241,6 @@ def load(name,
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
-    in_memory: `bool`, if `True`, loads the dataset in memory which
-      increases iteration speeds. Note that if `True` and the dataset has
-      unknown dimensions, the features will be padded to the maximum
-      size across the dataset.
     shuffle_files: `bool`, whether to shuffle the input files.
       Defaults to `False`.
     download: `bool` (optional), whether to call
@@ -314,7 +309,6 @@ def load(name,
   as_dataset_kwargs.setdefault("as_supervised", as_supervised)
   as_dataset_kwargs.setdefault("batch_size", batch_size)
   as_dataset_kwargs.setdefault("decoders", decoders)
-  as_dataset_kwargs.setdefault("in_memory", in_memory)
   as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
   as_dataset_kwargs.setdefault("read_config", read_config)
 

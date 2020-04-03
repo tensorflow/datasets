@@ -126,7 +126,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "speech":
-                tfds.features.Audio(),
+                tfds.features.Audio(sample_rate=16000),
             "text":
                 tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),

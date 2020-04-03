@@ -35,7 +35,7 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/xsum/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     Detailed download instructions (which require running a custom script) are
     here:
     https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts

@@ -198,10 +198,10 @@ def _split_generators(self, dl_manager):
 
 ### Manual download and extraction
 
-For source data that cannot be automatically downloaded (for
-example, it may require a login), the user will manually download the source
-data and place it in `manual_dir`, which you can access with
-`dl_manager.manual_dir` (defaults to `~/tensorflow_datasets/manual/my_dataset`).
+For source data that cannot be automatically downloaded (for example, it may
+require a login), the user will manually download the source data and place it
+in `manual_dir`, which you can access with `dl_manager.manual_dir` (defaults to
+`~/tensorflow_datasets/manual/`).
 
 ## Specifying dataset splits
 

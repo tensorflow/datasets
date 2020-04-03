@@ -65,8 +65,7 @@ class DownloadConfig(object):
       extract_dir: `str`, directory where extracted files are stored.
         Defaults to "<download_dir>/extracted".
       manual_dir: `str`, read-only directory where manually downloaded/extracted
-        data is stored. Defaults to
-        "<download_dir>/manual".
+        data is stored. Defaults to `<download_dir>/manual`.
       download_mode: `tfds.GenerateMode`, how to deal with downloads or data
         that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
         reuse both downloads and data if it already exists.
@@ -180,13 +179,38 @@ class DownloadManager(object):
     tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download
     self._force_extraction = force_extraction
-    self._extractor = extractor.get_extractor()
-    self._downloader = downloader.get_downloader()
     self._register_checksums = register_checksums
     # All known URLs: {url: (size, checksum)}
     self._sizes_checksums = checksums.get_all_sizes_checksums()
     # To record what is being used: {url: (size, checksum)}
     self._recorded_sizes_checksums = {}
+    # These attributes are lazy-initialized since they must be cleared when this
+    # object is pickled for Beam. They are then recreated on each worker.
+    self.__downloader = None
+    self.__extractor = None
+
+  def __getstate__(self):
+    """Remove un-pickleable attributes and return the state."""
+    if self._register_checksums:
+      raise ValueError(
+          '`register_checksums` must be disabled in a parallelized '
+          'DownloadManager.')
+    state = self.__dict__.copy()
+    state['_DownloadManager__downloader'] = None
+    state['_DownloadManager__extractor'] = None
+    return state
+
+  @property
+  def _downloader(self):
+    if not self.__downloader:
+      self.__downloader = downloader.get_downloader()
+    return self.__downloader
+
+  @property
+  def _extractor(self):
+    if not self.__extractor:
+      self.__extractor = extractor.get_extractor()
+    return self.__extractor
 
   @property
   def downloaded_size(self):
@@ -196,6 +220,11 @@ class DownloadManager(object):
   def _get_final_dl_path(self, url, sha256):
     return os.path.join(self._download_dir,
                         resource_lib.get_dl_fname(url, sha256))
+
+  @property
+  def register_checksums(self):
+    """Returns whether checksums are being computed and recorded to file."""
+    return self._register_checksums
 
   @util.build_synchronize_decorator()
   def _record_sizes_checksums(self):
@@ -381,10 +410,12 @@ class DownloadManager(object):
       raise AssertionError(
           'Manual directory was enabled. '
           'Did you set MANUAL_DOWNLOAD_INSTRUCTIONS in your dataset?')
-    if not tf.io.gfile.exists(self._manual_dir):
+    if (not tf.io.gfile.exists(self._manual_dir) or
+        not list(tf.io.gfile.listdir(self._manual_dir))):
       raise AssertionError(
-          'Manual directory {} does not exist. Create it and download/extract '
-          'dataset artifacts in there. Additional instructions: {}'.format(
+          'Manual directory {} does not exist or is empty. Create it and '
+          'download/extract dataset artifacts in there. Additional '
+          'instructions: {}'.format(
               self._manual_dir, self._manual_dir_instructions))
     return self._manual_dir
 

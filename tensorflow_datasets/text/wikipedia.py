@@ -127,6 +127,14 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
           language=lang,
+          date="20200301",
+      ) for lang in WIKIPEDIA_LANGUAGES
+  ] + [
+      # Old versions files do not exists anymore but config are kept as
+      # previously generated datasets can still be read.
+      WikipediaConfig(  # pylint:disable=g-complex-comprehension
+          version=_VERSION,
+          language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
   ]

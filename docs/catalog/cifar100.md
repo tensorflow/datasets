@@ -21,7 +21,7 @@ superclass to which it belongs).
 *   **Homepage**:
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 *   **Source code**:
-    [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
+    [`tfds.image_classification.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cifar.py)
 *   **Versions**:
     *   **`3.0.2`** (default): No release notes.
 *   **Download size**: `160.71 MiB`

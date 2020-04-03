@@ -26,10 +26,11 @@ and 5).
 *   **Homepage**:
     [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 *   **Source code**:
-    [`tfds.image.smallnorb.Smallnorb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/smallnorb.py)
+    [`tfds.image_classification.smallnorb.Smallnorb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/smallnorb.py)
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+    *   `2.1.0`: No release notes.
 *   **Download size**: `250.60 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

@@ -28,7 +28,7 @@ http://creativecommons.org/licenses/by/4.0
 *   **Homepage**:
     [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
 *   **Source code**:
-    [`tfds.image.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/so2sat.py)
+    [`tfds.image_classification.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/so2sat.py)
 *   **Versions**:
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)

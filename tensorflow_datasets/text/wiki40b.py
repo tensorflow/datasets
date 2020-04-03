@@ -71,7 +71,7 @@ class Wiki40bConfig(tfds.core.BuilderConfig):
     self.language = language
 
 
-_VERSION = tfds.core.Version("1.0.0")
+_VERSION = tfds.core.Version("1.1.0")
 
 
 class Wiki40b(tfds.core.BeamBasedBuilder):
@@ -92,6 +92,8 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
             "wikidata_id":
                 tfds.features.Text(),
             "text":
+                tfds.features.Text(),
+            "version_id":
                 tfds.features.Text(),
         }),
         supervised_keys=None,
@@ -137,9 +139,13 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
           "wikidata_id"].bytes_list.value[0].decode("utf-8")
       text = example.features.feature[
           "text"].bytes_list.value[0].decode("utf-8")
+      version_id = example.features.feature[
+          "version_id"].bytes_list.value[0].decode("utf-8")
 
       # wikidata_id could be duplicated with different texts.
-      yield wikidata_id + text, {"wikidata_id": wikidata_id, "text": text,}
+      yield wikidata_id + text, {"wikidata_id": wikidata_id,
+                                 "text": text,
+                                 "version_id": version_id,}
 
     return (
         pipeline

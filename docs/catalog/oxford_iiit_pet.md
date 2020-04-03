@@ -19,7 +19,7 @@ lighting. All images have an associated ground truth annotation of breed.
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 *   **Source code**:
-    [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
+    [`tfds.image_classification.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_iiit_pet.py)
 *   **Versions**:
     *   **`3.1.0`** (default): Added species and labels, new split API.
 *   **Download size**: `801.24 MiB`

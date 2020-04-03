@@ -29,7 +29,7 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import colorectal_histology
+from tensorflow_datasets.image_classification import colorectal_histology
 
 flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")

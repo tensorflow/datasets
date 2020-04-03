@@ -23,7 +23,7 @@ CBSD having 72% of the images.
 *   **Homepage**:
     [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
 *   **Source code**:
-    [`tfds.image.cassava.Cassava`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cassava.py)
+    [`tfds.image_classification.cassava.Cassava`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cassava.py)
 *   **Versions**:
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `1.26 GiB`

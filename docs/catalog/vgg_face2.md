@@ -26,14 +26,14 @@ subject.
 *   **Homepage**:
     [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
 *   **Source code**:
-    [`tfds.image.vgg_face2.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/vgg_face2.py)
+    [`tfds.image_classification.vgg_face2.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/vgg_face2.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/vgg_face2/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain two files: vggface2_test.tar.gz and
     vggface2_train.tar.gz.
     You need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in

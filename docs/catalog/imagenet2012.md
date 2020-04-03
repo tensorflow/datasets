@@ -28,7 +28,7 @@ include splits for the training and validation sets here.
 
 *   **Homepage**: [http://image-net.org/](http://image-net.org/)
 *   **Source code**:
-    [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
+    [`tfds.image_classification.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet.py)
 *   **Versions**:
     *   **`5.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
@@ -36,7 +36,7 @@ include splits for the training and validation sets here.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/imagenet2012/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
     You need to register on http://www.image-net.org/download-images in order

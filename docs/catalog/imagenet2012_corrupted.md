@@ -23,14 +23,14 @@ randomness is fixed so that regeneration is deterministic.
 *   **Homepage**:
     [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
 *   **Source code**:
-    [`tfds.image.imagenet2012_corrupted.Imagenet2012Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet2012_corrupted.py)
+    [`tfds.image_classification.imagenet2012_corrupted.Imagenet2012Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_corrupted.py)
 *   **Versions**:
     *   **`3.1.0`** (default): No release notes.
 *   **Download size**: `1.98 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/imagenet2012_corrupted/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
     You need to register on http://www.image-net.org/download-images in order

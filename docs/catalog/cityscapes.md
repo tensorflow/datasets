@@ -52,7 +52,7 @@ get the files.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/cityscapes/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     You have to download files from https://www.cityscapes-dataset.com/login/
     (This dataset requires registration).
     For basic config (semantic_segmentation) you must download

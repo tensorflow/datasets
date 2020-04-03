@@ -34,7 +34,8 @@ class GcsUtilsTest(testing.TestCase):
 
   def test_mnist(self):
     with self.gcs_access():
-      mnist = tfds.image.MNIST(data_dir="gs://tfds-data/datasets")
+      mnist = tfds.image_classification.MNIST(
+          data_dir="gs://tfds-data/datasets")
       example = next(tfds.as_numpy(mnist.as_dataset(split="train").take(1)))
     _ = example["image"], example["label"]
 

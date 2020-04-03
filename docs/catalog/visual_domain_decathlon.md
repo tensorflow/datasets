@@ -26,7 +26,7 @@ the competition.
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 *   **Source code**:
-    [`tfds.image.visual_domain_decathlon.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/visual_domain_decathlon.py)
+    [`tfds.image_classification.visual_domain_decathlon.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/visual_domain_decathlon.py)
 *   **Versions**:
     *   **`1.1.0`** (default): No release notes.
 *   **Dataset size**: `Unknown size`

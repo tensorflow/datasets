@@ -26,7 +26,7 @@ http://creativecommons.org/licenses/by/4.0
 *   **Homepage**:
     [https://data.mendeley.com/datasets/3f83gxmv57/2](https://data.mendeley.com/datasets/3f83gxmv57/2)
 *   **Source code**:
-    [`tfds.image.citrus.CitrusLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/citrus.py)
+    [`tfds.image_classification.citrus.CitrusLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/citrus.py)
 *   **Versions**:
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `63.87 MiB`

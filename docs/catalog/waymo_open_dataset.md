@@ -22,14 +22,16 @@ for non-commercial use.
 *   **Versions**:
     *   **`0.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `34.73 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split        | Examples
+:----------- | -------:
+'train'      | 14,884
+'validation' | 4,954
 
 *   **Features**:
 

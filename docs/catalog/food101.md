@@ -22,10 +22,11 @@ of 512 pixels.
 *   **Homepage**:
     [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
 *   **Source code**:
-    [`tfds.image.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/food101.py)
+    [`tfds.image_classification.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/food101.py)
 *   **Versions**:
     *   **`2.0.0`** (default): No release notes.
     *   `1.0.0`: No release notes.
+    *   `2.1.0`: No release notes.
 *   **Download size**: `4.65 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

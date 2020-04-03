@@ -222,7 +222,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     is_registered = self.builder.name in registered.list_builders()
     exceptions = self.builder.IN_DEVELOPMENT
     self.assertTrue(is_registered or exceptions,
-                    "Dataset was not registered and is not `IN_DEVELOPMENT`.")
+                    "Dataset {} was not registered and is "
+                    "not `IN_DEVELOPMENT`.".format(self.builder.name))
 
   def test_info(self):
     info = self.builder.info
@@ -312,7 +313,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertEmpty(
         missing_urls,
         "Some urls checksums are missing at: {} "
-        "Did you forgot to record checksums with `--register_checksums` ? "
+        "Did you forget to record checksums with `--register_checksums` ? "
         "See instructions at: "
         "https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally"
         "\n{}".format(filepath, err_msg)

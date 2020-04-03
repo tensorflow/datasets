@@ -61,7 +61,7 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "id": tf.string,
-            "speech": tfds.features.Audio(),
+            "speech": tfds.features.Audio(sample_rate=22050),
             "text": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
         }),

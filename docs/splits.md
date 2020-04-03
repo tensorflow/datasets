@@ -119,13 +119,20 @@ tfds.load("mnist", split="test[49%:50%]")
 
 Alternatively, the user can use the rounding `pct1_dropremainder`, so specified
 percentage boundaries are treated as multiples of 1%. This option should be used
-when consistency is needed (eg: `len(5%) == 5 * len(1%)`).
+when consistency is needed (eg: `len(5%) == 5 * len(1%)`). This means the last
+examples may be truncated if `info.split[split_name].num_examples % 100 != 0`.
 
 Example:
 
 ```py
 # Records 0 (included) to 99 (excluded).
-tfds.load("mnist", split="test[:99%]", rounding="pct1_dropremainder")
+split = tfds.core.ReadInstruction(
+    'test',
+    to=99,
+    rounding='pct1_dropremainder',
+    unit = '%',
+)
+tfds.load("mnist", split=split)
 ```
 
 ### Reproducibility

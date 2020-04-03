@@ -62,7 +62,7 @@ class Tedlium(tfds.core.BeamBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "speech":
-                tfds.features.Audio(),
+                tfds.features.Audio(sample_rate=16000),
             "text":
                 tfds.features.Text(),
             "speaker_id":

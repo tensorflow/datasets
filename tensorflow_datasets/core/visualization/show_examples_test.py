@@ -27,7 +27,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visualization
 
 # Import for registration
-from tensorflow_datasets.image import imagenet  # pylint: disable=unused-import,g-bad-import-order
+from tensorflow_datasets.image_classification import imagenet  # pylint: disable=unused-import,g-bad-import-order
 
 
 class ShowExamplesTest(testing.TestCase):

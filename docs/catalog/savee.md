@@ -29,10 +29,10 @@ and test set consists of samples from 1 speaker, respectively.
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `259.15 MiB`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/savee/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain the file AudioData.zip. This file should be under
     Data/Zip/AudioData.zip in the dataset folder provided upon registration.
     You need to register at
@@ -40,11 +40,14 @@ and test set consists of samples from 1 speaker, respectively.
     order to get the link to download the dataset.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split        | Examples
+:----------- | -------:
+'test'       | 120
+'train'      | 240
+'validation' | 120
 
 *   **Features**:
 

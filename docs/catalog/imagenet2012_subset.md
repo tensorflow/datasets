@@ -28,26 +28,19 @@ been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
 
 *   **Homepage**: [http://image-net.org/](http://image-net.org/)
 *   **Source code**:
-    [`tfds.image.imagenet2012_subset.Imagenet2012Subset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet2012_subset.py)
+    [`tfds.image_classification.imagenet2012_subset.Imagenet2012Subset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_subset.py)
 *   **Versions**:
     *   **`5.0.0`** (default): No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/imagenet2012_subset/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
     You need to register on http://www.image-net.org/download-images in order
     to get the link to download the dataset.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
+    No
 *   **Features**:
 
 ```python
@@ -84,7 +77,23 @@ FeaturesDict({
 ## imagenet2012_subset/1pct (default config)
 
 *   **Config description**: 1pct of total ImageNet training set.
+*   **Download size**: `254.22 KiB`
+*   **Dataset size**: `7.61 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 12,811
+'validation' | 50,000
 
 ## imagenet2012_subset/10pct
 
 *   **Config description**: 10pct of total ImageNet training set.
+*   **Download size**: `2.48 MiB`
+*   **Dataset size**: `19.91 GiB`
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'train'      | 128,116
+'validation' | 50,000

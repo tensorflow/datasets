@@ -20,7 +20,7 @@ conditions.
 *   **Homepage**:
     [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 *   **Source code**:
-    [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
+    [`tfds.image_classification.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/diabetic_retinopathy_detection.py)
 *   **Versions**:
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
@@ -28,7 +28,7 @@ conditions.
 *   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/diabetic_retinopathy_detection/`):<br/>
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
     You have to download this dataset from Kaggle.
     https://www.kaggle.com/c/diabetic-retinopathy-detection/data
     After downloading, unpack the test.zip file into test/ directory in manual_dir

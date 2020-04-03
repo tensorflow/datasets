@@ -78,7 +78,8 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            'audio': tfds.features.Audio(file_format='wav'),
+            'audio': tfds.features.Audio(
+                file_format='wav', sample_rate=SAMPLE_RATE),
             'label': tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
         }),
         supervised_keys=('audio', 'label'),

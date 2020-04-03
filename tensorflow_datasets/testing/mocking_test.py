@@ -29,9 +29,11 @@ from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
 # Import for registration
-from tensorflow_datasets.image import imagenet  # pylint: disable=unused-import,g-bad-import-order
-from tensorflow_datasets.text import lm1b  # pylint: disable=unused-import,g-bad-import-order
-from tensorflow_datasets.image import mnist  # pylint: disable=unused-import,g-bad-import-order
+# pylint: disable=g-bad-import-order,unused-import
+from tensorflow_datasets.image_classification import imagenet
+from tensorflow_datasets.image_classification import mnist
+from tensorflow_datasets.text import lm1b
+# pylint: enable=g-bad-import-order,unused-import
 
 tf.enable_v2_behavior()
 

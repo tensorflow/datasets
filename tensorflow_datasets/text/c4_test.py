@@ -34,8 +34,12 @@ class C4Test(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["en"] if six.PY3 else []
 
   DL_EXTRACT_RESULT = {
-      "wet_urls": ["wet_urls.txt"],
+      "wet_path_urls": ["wet_urls.txt"],
       "wet_files": ["cc_0.warc.wet.gz", "cc_1.warc.wet.gz"],
+      "https://commoncrawl.s3.amazonaws.com/cc_0.warc.wet.gz":
+          "cc_0.warc.wet.gz",
+      "https://commoncrawl.s3.amazonaws.com/cc_1.warc.wet.gz":
+          "cc_1.warc.wet.gz",
       "badwords": "badwords.txt",
   }
   SPLITS = {

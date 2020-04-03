@@ -28,6 +28,7 @@ for ex in tfds.as_numpy(ds):
 ### `Audio`
 
 *   [`crema_d`](crema_d.md)
+*   [`dementiabank`](dementiabank.md)
 *   [`groove`](groove.md)
 *   [`librispeech`](librispeech.md)
 *   [`libritts`](libritts.md)
@@ -36,6 +37,7 @@ for ex in tfds.as_numpy(ds):
 *   [`savee`](savee.md)
 *   [`speech_commands`](speech_commands.md)
 *   [`tedlium`](tedlium.md)
+*   [`voxceleb`](voxceleb.md)
 
     ### `Image`
 
@@ -45,11 +47,43 @@ for ex in tfds.as_numpy(ds):
 
 *   [`arc`](arc.md)
 
+*   [`binarized_mnist`](binarized_mnist.md)
+
+*   [`celeb_a`](celeb_a.md)
+
+*   [`celeb_a_hq`](celeb_a_hq.md)
+
+*   [`cityscapes`](cityscapes.md)
+
+*   [`clevr`](clevr.md)
+
+*   [`coil100`](coil100.md)
+
+*   [`div2k`](div2k.md)
+
+*   [`downsampled_imagenet`](downsampled_imagenet.md)
+
+*   [`dsprites`](dsprites.md)
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
+
+*   [`flic`](flic.md)
+
+*   [`lost_and_found`](lost_and_found.md)
+
+*   [`lsun`](lsun.md)
+
+*   [`scene_parse150`](scene_parse150.md)
+
+*   [`shapes3d`](shapes3d.md)
+
+*   [`the300w_lp`](the300w_lp.md)
+
+    ### `Image_classification`
+
 *   [`beans`](beans.md)
 
 *   [`bigearthnet`](bigearthnet.md)
-
-*   [`binarized_mnist`](binarized_mnist.md)
 
 *   [`binary_alpha_digits`](binary_alpha_digits.md)
 
@@ -65,10 +99,6 @@ for ex in tfds.as_numpy(ds):
 
 *   [`cats_vs_dogs`](cats_vs_dogs.md)
 
-*   [`celeb_a`](celeb_a.md)
-
-*   [`celeb_a_hq`](celeb_a_hq.md)
-
 *   [`cifar10`](cifar10.md)
 
 *   [`cifar100`](cifar100.md)
@@ -79,13 +109,7 @@ for ex in tfds.as_numpy(ds):
 
 *   [`citrus_leaves`](citrus_leaves.md)
 
-*   [`cityscapes`](cityscapes.md)
-
-*   [`clevr`](clevr.md)
-
 *   [`cmaterdb`](cmaterdb.md)
-
-*   [`coil100`](coil100.md)
 
 *   [`colorectal_histology`](colorectal_histology.md)
 
@@ -99,25 +123,15 @@ for ex in tfds.as_numpy(ds):
 
 *   [`diabetic_retinopathy_detection`](diabetic_retinopathy_detection.md)
 
-*   [`div2k`](div2k.md)
-
 *   [`dmlab`](dmlab.md)
 
-*   [`downsampled_imagenet`](downsampled_imagenet.md)
-
-*   [`dsprites`](dsprites.md)
-
 *   [`dtd`](dtd.md)
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 *   [`emnist`](emnist.md)
 
 *   [`eurosat`](eurosat.md)
 
 *   [`fashion_mnist`](fashion_mnist.md)
-
-*   [`flic`](flic.md)
 
 *   [`food101`](food101.md)
 
@@ -144,10 +158,6 @@ for ex in tfds.as_numpy(ds):
 *   [`kmnist`](kmnist.md)
 
 *   [`lfw`](lfw.md)
-
-*   [`lost_and_found`](lost_and_found.md)
-
-*   [`lsun`](lsun.md)
 
 *   [`malaria`](malaria.md)
 
@@ -179,10 +189,6 @@ for ex in tfds.as_numpy(ds):
 
 *   [`rock_paper_scissors`](rock_paper_scissors.md)
 
-*   [`scene_parse150`](scene_parse150.md)
-
-*   [`shapes3d`](shapes3d.md)
-
 *   [`smallnorb`](smallnorb.md)
 
 *   [`so2sat`](so2sat.md)
@@ -191,13 +197,13 @@ for ex in tfds.as_numpy(ds):
 
 *   [`stanford_online_products`](stanford_online_products.md)
 
+*   [`stl10`](stl10.md)
+
 *   [`sun397`](sun397.md)
 
 *   [`svhn_cropped`](svhn_cropped.md)
 
 *   [`tf_flowers`](tf_flowers.md)
-
-*   [`the300w_lp`](the300w_lp.md)
 
 *   [`uc_merced`](uc_merced.md)
 
@@ -254,6 +260,8 @@ for ex in tfds.as_numpy(ds):
 *   [`newsroom`](newsroom.md)
 
 *   [`opinosis`](opinosis.md)
+
+*   [`reddit`](reddit.md)
 
 *   [`reddit_tifu`](reddit_tifu.md)
 

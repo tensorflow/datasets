@@ -27,7 +27,7 @@ https://data.mendeley.com/datasets/tywbtsjrjv/1
 *   **Homepage**:
     [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
 *   **Source code**:
-    [`tfds.image.plant_village.PlantVillage`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/plant_village.py)
+    [`tfds.image_classification.plant_village.PlantVillage`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_village.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `827.82 MiB`
