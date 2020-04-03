@@ -1,6 +1,7 @@
 book_path: /datasets/_book.yaml
 project_path: /datasets/_project.yaml
-description: <!--no description-->
+description: A library of useful extra functionality for TensorFlow 2.0 maintained by SIG-addons
+ with community contributions that conform to well-established API patterns.
 landing_page:
   custom_css_path: /site-assets/css/style.css
   rows:
