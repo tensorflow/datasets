@@ -410,10 +410,12 @@ class DownloadManager(object):
       raise AssertionError(
           'Manual directory was enabled. '
           'Did you set MANUAL_DOWNLOAD_INSTRUCTIONS in your dataset?')
-    if not tf.io.gfile.exists(self._manual_dir):
+    if (not tf.io.gfile.exists(self._manual_dir) or
+        not list(tf.io.gfile.listdir(self._manual_dir))):
       raise AssertionError(
-          'Manual directory {} does not exist. Create it and download/extract '
-          'dataset artifacts in there. Additional instructions: {}'.format(
+          'Manual directory {} does not exist or is empty. Create it and '
+          'download/extract dataset artifacts in there. Additional '
+          'instructions: {}'.format(
               self._manual_dir, self._manual_dir_instructions))
     return self._manual_dir
 

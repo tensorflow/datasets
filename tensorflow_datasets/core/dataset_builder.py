@@ -753,7 +753,7 @@ class DatasetBuilder(object):
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
-        manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
+        manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         register_checksums=download_config.register_checksums,

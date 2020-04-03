@@ -131,10 +131,11 @@ class DatasetInfo(object):
 
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=builder.name,
-        description=description,
+        description=utils.dedent(description),
         version=str(builder._version),  # pylint: disable=protected-access
-        citation=citation,
+        citation=utils.dedent(citation),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
+            license=utils.dedent(redistribution_info.pop("license")),
             **redistribution_info) if redistribution_info else None)
 
     if homepage:
