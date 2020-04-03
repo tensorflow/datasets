@@ -170,7 +170,6 @@ cars196/2.0.0
 cars196/2.1.0
 cassava/0.1.0
 cats_vs_dogs/4.0.0
-celeb_a/2.0.0
 celeb_a_hq/1/2.0.0
 celeb_a_hq/1024/2.0.0
 celeb_a_hq/128/2.0.0

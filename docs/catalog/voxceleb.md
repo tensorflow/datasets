@@ -4,10 +4,10 @@
   </div>
 
   <meta itemprop="name" content="voxceleb" />
-  <meta itemprop="description" content="&#10;An large scale dataset for speaker identification. This data is collected from&#10;over 1,251 speakers, with over 150k samples in total.&#10;This release contains the audio part of the voxceleb1.1 dataset.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;voxceleb&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="An large scale dataset for speaker identification. This data is collected from&#10;over 1,251 speakers, with over 150k samples in total.&#10;This release contains the audio part of the voxceleb1.1 dataset.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;voxceleb&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/voxceleb" />
   <meta itemprop="sameAs" content="http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html" />
-  <meta itemprop="citation" content="&#10;@InProceedings{Nagrani17,&#10;    author       = &quot;Nagrani, A. and Chung, J.~S. and Zisserman, A.&quot;,&#10; title        = &quot;VoxCeleb: a large-scale speaker identification dataset&quot;,&#10; booktitle    = &quot;INTERSPEECH&quot;,&#10;    year         = &quot;2017&quot;,&#10;}&#10;" />
+  <meta itemprop="citation" content="@InProceedings{Nagrani17,&#10; author       = &quot;Nagrani, A. and Chung, J.~S. and Zisserman, A.&quot;,&#10; title        = &quot;VoxCeleb: a large-scale speaker identification dataset&quot;,&#10; booktitle    = &quot;INTERSPEECH&quot;,&#10;    year         = &quot;2017&quot;,&#10;}" />
 </div>
 
 # `voxceleb`
