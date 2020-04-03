@@ -26,9 +26,9 @@ from tensorflow_datasets.object_detection import open_images
 class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = open_images.OpenImagesV4
   SPLITS = {  # Expected number of examples on each split.
-      'train': 512,
-      'test': 36,
-      'validation': 12,
+      'train': 112,
+      'test': 9,
+      'validation': 3,
   }
   DL_EXTRACT_RESULT = {
       'train_images': ['s3-tar_train_sha1_%s.tar' % i
