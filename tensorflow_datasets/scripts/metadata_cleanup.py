@@ -6,15 +6,15 @@ To test:
 Goto tensorflow_datasets/scripts
 
 Args:
-dry_run : If given, it traverse and finds all
+    dry_run: If given, it traverse and finds all
          versions which are to be removed without
          actually removing them. If not given
          removes from metadata dir.
 ```
 cd tensorflow_datasets/scripts
 
-For check not Remove : python metadata_cleanup.py --dry_run
-For Remove : python metadata_cleanup.py.
+For check not Remove: python metadata_cleanup.py --dry_run
+For Remove: python metadata_cleanup.py.
 ```
 """
 import os
@@ -56,7 +56,7 @@ def _delete_metadata_dirs(metadata_dir):
      if --dry_run was not given else traverse and show dir to remove.
 
   Args:
-      metadata_dir : Path to metadat directory (testing/metadata).
+      metadata_dir: Path to metadat directory (testing/metadata).
   """
   registered_path = set(registered.iter_dataset_full_names())
   meta_paths = _extract_metadata_versions(metadata_dir)
