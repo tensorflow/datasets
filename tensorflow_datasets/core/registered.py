@@ -396,3 +396,14 @@ def iter_dataset_full_names():
       for v in _get_all_versions(
           [builder_cls.VERSION] + builder_cls.SUPPORTED_VERSIONS):
         yield os.path.join(builder_name, v)
+
+def is_full_name(path_string):
+  '''Return True only if path_string matches correct
+     version paths pattern like :
+     register.is_full_name('ds/config/1.0.2') -> True
+     register.is_full_name('ds/1.0.2') -> True
+     register.is_full_name('ds_with_number123/1.0.2') -> True'''
+  NAME_RE = re.compile(r"([\w-]*[/|\\])*([\w]*[0-9]\.[0-9]\.[0-9])$")
+  res = NAME_RE.match(path_string)
+  if res:
+    return True
