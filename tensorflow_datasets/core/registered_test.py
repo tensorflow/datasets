@@ -205,6 +205,13 @@ class RegisteredTest(testing.TestCase):
       class DuplicateBuilder(object):
         pass
 
+  def test_is_full_name(self):
+    """ Test for is_full_name"""
+
+    true_path= "abstract_reasoning\\attr.rel.pairs\\1.0.0"
+    false_path= "abstract_reasoning\\attr.rel.pairs\\1.0"
+    self.assertTrue(registered.is_full_name(true_path))
+    self.assertFalse(registered.is_full_name(false_path))
 
 if __name__ == "__main__":
   testing.test_main()

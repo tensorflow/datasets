@@ -418,9 +418,10 @@ def is_full_name(path_string):
   Args:
       path string to matched with correct pattern.
 
-  Return: 
+  Return:
       bool (True/False).
   """
+  path_string = re.sub('[a-z]\.', '_', path_string)
   NAME_RE = re.compile(r"([\w-]*[/|\\])*([\w]*[0-9]\.[0-9]\.[0-9])$")
   res = NAME_RE.match(path_string)
   if res:

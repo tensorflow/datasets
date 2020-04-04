@@ -46,7 +46,7 @@ def _extract_metadata_versions(metadata_dir):
   meta_paths = set()
   for root, dirs, files in tf.io.gfile.walk(metadata_dir): # pylint: disable=unused-variable
     path_string = root[len(metadata_dir) + 1:]
-    if registered.is_full_name(path_string):
+    if registered.is_full_name(path_string[:]):
       meta_paths.add(path_string)
   return meta_paths
 
