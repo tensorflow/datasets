@@ -83,7 +83,6 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     file_paths = dl_manager.download(_SPLIT_DOWNLOAD_URL)
-    print(file_paths)
 
     return [
         tfds.core.SplitGenerator(
@@ -104,7 +103,6 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(file_path) as f:
       examples = json.load(f)
       for i, ex in enumerate(examples):
-        print(_target_to_answers(ex['targetValue']))
         yield i, {
             'url': ex['url'],
             'question': ex['utterance'],
