@@ -14,7 +14,7 @@ dry_run : If given, it traverse and finds all
 cd tensorflow_datasets/scripts
 
 For check not Remove : python metadata_cleanup.py --dry_run
-For Remove : python metadata_cleanup.py
+For Remove : python metadata_cleanup.py.
 ```
 """
 import os
@@ -32,24 +32,30 @@ metadata_path = os.path.join(os.pardir, "testing/metadata")
 
 
 def _extract_metadata_versions(metadata_dir):
-  """Get all metadata direcotry versions paths,
+  """Get all metadata direcotry versions paths.
+  
   It only extract the paths like 'dataset_name/version'
-  or 'dataset_name/config/versions' in metadata dir
+  or 'dataset_name/config/versions' in metadata dir.
 
   Args:
-  metadata_dir : Path to metadat directory (testing/metadata)
+  metadata_dir: Path to metadat directory (testing/metadata).
+
+  Returns: Set of correctly formated metadata paths.
   """
   meta_paths = set()
   for root, dirs, files in tf.io.gfile.walk(metadata_dir): # pylint: disable=unused-variable
-    if registered.is_full_name(root[len(metadata_dir) + 1:]):
-      meta_paths.add(root[len(metadata_dir) + 1:])
+    path_string = root[len(metadata_dir) + 1:]
+    if registered.is_full_name(path_string):
+      meta_paths.add(path_string)
   return meta_paths
 
 
 def _delete_metadata_dirs(metadata_dir):
   """Remove metadata versions not present in registered versions
+     if --dry_run was not given else traverse and show dir to remove.
+     
   Args:
-    metadata_dir : Path to metadat directory (testing/metadata)
+    metadata_dir : Path to metadat directory (testing/metadata).
   """
   registered_path = set(registered.iter_dataset_full_names())
   meta_paths = _extract_metadata_versions(metadata_dir)
