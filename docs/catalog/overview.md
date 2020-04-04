@@ -325,6 +325,8 @@ for ex in tfds.as_numpy(ds):
 
 *   [`trivia_qa`](trivia_qa.md)
 
+*   [`web_questions`](web_questions.md)
+
 *   [`wiki40b`](wiki40b.md)
 
 *   [`wikipedia`](wikipedia.md)

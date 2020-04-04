@@ -310,6 +310,8 @@ toc:
     title: tiny_shakespeare
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
+  - path: /datasets/catalog/web_questions
+    title: web_questions
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikipedia

@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="blimp" />
   <meta itemprop="description" content="BLiMP is a challenge set for evaluating what language models (LMs) know about&#10;major grammatical phenomena in English. BLiMP consists of 67 sub-datasets, each&#10;containing 1000 minimal pairs isolating specific contrasts in syntax,&#10;morphology, or semantics. The data is automatically generated according to&#10;expert-crafted grammars.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;blimp&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/blimp" />
   <meta itemprop="sameAs" content="https://github.com/alexwarstadt/blimp/tree/master/" />
   <meta itemprop="citation" content="@article{warstadt2019blimp,&#10;  title={BLiMP: A Benchmark of Linguistic Minimal Pairs for English},&#10;  author={Warstadt, Alex and Parrish, Alicia and Liu, Haokun and Mohananey, Anhad and Peng, Wei, and Wang, Sheng-Fu and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1912.00582},&#10;  year={2019}&#10;}" />
 </div>
-
 # `blimp`
 
 *   **Description**:
