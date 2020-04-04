@@ -38,9 +38,10 @@ def _extract_metadata_versions(metadata_dir):
   or 'dataset_name/config/versions' in metadata dir.
 
   Args:
-  metadata_dir: Path to metadat directory (testing/metadata).
+      metadata_dir: Path to metadat directory (testing/metadata).
 
-  Returns: Set of correctly formated metadata paths.
+  Returns:
+      Set of correctly formated metadata paths.
   """
   meta_paths = set()
   for root, dirs, files in tf.io.gfile.walk(metadata_dir): # pylint: disable=unused-variable
@@ -53,9 +54,9 @@ def _extract_metadata_versions(metadata_dir):
 def _delete_metadata_dirs(metadata_dir):
   """Remove metadata versions not present in registered versions
      if --dry_run was not given else traverse and show dir to remove.
-     
+
   Args:
-    metadata_dir : Path to metadat directory (testing/metadata).
+      metadata_dir : Path to metadat directory (testing/metadata).
   """
   registered_path = set(registered.iter_dataset_full_names())
   meta_paths = _extract_metadata_versions(metadata_dir)

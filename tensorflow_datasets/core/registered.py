@@ -384,9 +384,11 @@ def _cast_to_pod(val):
 def _get_all_versions(version_list):
   """Return set of registered versions.
 
-  Args: Versions list.
+  Args:
+      Versions list.
 
-  Returns: Set of all versions list.
+  Returns:
+      Set of all versions list.
   """
   return set(str(v) for v in version_list)
 
@@ -413,9 +415,11 @@ def is_full_name(path_string):
   register.is_full_name('ds/1.0.2') -> True
   register.is_full_name('ds_with_number123/1.0.2') -> True
 
-  Args: path string to matched with correct pattern.
+  Args:
+      path string to matched with correct pattern.
 
-  Return: bool (True/False).
+  Return: 
+      bool (True/False).
   """
   NAME_RE = re.compile(r"([\w-]*[/|\\])*([\w]*[0-9]\.[0-9]\.[0-9])$")
   res = NAME_RE.match(path_string)
