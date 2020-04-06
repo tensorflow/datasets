@@ -46,7 +46,6 @@ class C4Test(testing.DatasetBuilderTestCase):
       "train": 1,
       "validation": 1,
   }
-  SKIP_CHECKSUMS = True  # TODO(tfds): Update checksums
 
 
 class C4NoCleanTest(C4Test):
