@@ -49,7 +49,7 @@ NUM_CLASSES = 1252
 class Voxceleb(tfds.core.GeneratorBasedBuilder):
   """The VoxCeleb dataset for speaker identification."""
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.1.1')
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   manual_dir should contain the file vox_dev_wav.zip. The instructions for
@@ -62,9 +62,9 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=16000),
-            'speaker_id': tfds.features.ClassLabel(num_classes=NUM_CLASSES),
+            'label': tfds.features.ClassLabel(num_classes=NUM_CLASSES),
         }),
-        supervised_keys=('audio', 'speaker_id'),
+        supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,
         citation=_CITATION,
     )
@@ -116,7 +116,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
         continue
       speaker, _, _ = file_name[:-len('.wav')].split('/')
       speaker_id = int(speaker[3:])
-      example = {'audio': full_name, 'speaker_id': speaker_id}
+      example = {'audio': full_name, 'label': speaker_id}
       yield file_name, example
 
   def _calculate_splits(self, iden_splits_path):
