@@ -43,6 +43,10 @@ FLAGS = absl.flags.FLAGS
 absl.flags.DEFINE_string(
     'fake_dir', None, 'path to the directory which contains files')
 
+# Some dataset generation rely on the image content, so we cannot compress
+# those.
+SKIP_DATASETS = ['curated_breast_imaging_ddsm']
+
 
 def rewrite_image(filepath):
   """Replace the image by an new one with smaller size (uniform color).
@@ -136,15 +140,19 @@ def rewrite_dir(fake_dir):
   Args:
     fake_dir: path of the directory which contains all compression files
   """
-  img_ext_list = ['jpg', 'jpeg', 'png']
+  img_ext_list = ['.jpg', '.jpeg', '.png']
 
   for root_dir, _, files in os.walk(fake_dir):
+    if any(skip_ds in root_dir for skip_ds in SKIP_DATASETS):
+      print(f'Skipping {root_dir}')
+      continue
+    print(f'Processing {root_dir}')
     for file in files:
       path = os.path.join(root_dir, file)
-      img_ext = os.path.basename(file).split('.')[-1].lower()
-      if img_ext in img_ext_list:
+      file_ext = os.path.splitext(file)[-1].lower()
+      if file_ext in img_ext_list:
         rewrite_image(path)
-      elif path.endswith('.npz'):  # Filter `.npz` files
+      elif file_ext == '.npz':  # Filter `.npz` files
         continue
       elif zipfile.is_zipfile(path):
         rewrite_zip(root_dir, path)
