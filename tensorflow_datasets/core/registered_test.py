@@ -126,7 +126,6 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(None, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
-    self.assertIsNone(builder.as_dataset_kwargs.pop("in_memory"))
     self.assertIsNone(builder.as_dataset_kwargs.pop("read_config"))
     self.assertFalse(builder.as_dataset_kwargs.pop("shuffle_files"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
@@ -204,6 +203,18 @@ class RegisteredTest(testing.TestCase):
       @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
       class DuplicateBuilder(object):
         pass
+
+  def test_is_full_name(self):
+    """Test for `is_full_name`."""
+    self.assertFalse(registered.is_full_name("ds/config/1.0.2/other"))
+    self.assertFalse(registered.is_full_name("ds/config/1.0.2/"))
+    self.assertFalse(registered.is_full_name("ds/config/1.2"))
+    self.assertFalse(registered.is_full_name("ds/config"))
+    self.assertFalse(registered.is_full_name("ds/1.2.*"))
+
+    self.assertTrue(registered.is_full_name("ds/config/1.0.2"))
+    self.assertTrue(registered.is_full_name("ds/1.0.2"))
+    self.assertTrue(registered.is_full_name("ds_with_number123/1.0.2"))
 
 
 if __name__ == "__main__":

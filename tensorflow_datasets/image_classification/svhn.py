@@ -45,6 +45,9 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.1.0"),
+  ]
 
   def _info(self):
     """Returns basic information of dataset.
@@ -52,16 +55,19 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     Returns:
       tfds.core.DatasetInfo.
     """
+    features_dict = {
+        "image": tfds.features.Image(shape=(32, 32, 3)),
+        "label": tfds.features.ClassLabel(num_classes=10),
+    }
+    if self.version > "3.0.0":
+      features_dict["id"] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         description=(
             "The Street View House Numbers (SVHN) Dataset is an image digit "
             "recognition dataset of over 600,000 digit images coming from "
             "real world data. Images are cropped to 32x32."),
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=(32, 32, 3)),
-            "label": tfds.features.ClassLabel(num_classes=10),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
         homepage=URL,
         citation=_CITATION,
@@ -79,24 +85,28 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs=dict(
+                split_prefix="train_",
                 filepath=output_files["train"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
+                split_prefix="test_",
                 filepath=output_files["test"],
             )),
         tfds.core.SplitGenerator(
             name="extra",
             gen_kwargs=dict(
+                split_prefix="extra_",
                 filepath=output_files["extra"],
             )),
     ]
 
-  def _generate_examples(self, filepath):
+  def _generate_examples(self, split_prefix, filepath):
     """Generate examples as dicts.
 
     Args:
+      split_prefix: `str` prefix that identifies the split.
       filepath: `str` path of the file to process.
 
     Yields:
@@ -117,6 +127,8 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
           "image": image,
           "label": label % 10,  # digit 0 is saved as 0 (instead of 10)
       }
+      if self.version > "3.0.0":
+        record["id"] = "{}{:06d}".format(split_prefix, i)
       yield i, record
 
 # TODO(tfds): Add the SvhnFull dataset

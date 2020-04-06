@@ -56,6 +56,9 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.1.0"),
+  ]
 
   def _info(self):
     """Returns basic information of dataset.
@@ -63,28 +66,34 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
     Returns:
       tfds.core.DatasetInfo.
     """
+    features_dict = {
+        "image":
+            tfds.features.Image(shape=(96, 96, 1)),
+        "image2":
+            tfds.features.Image(shape=(96, 96, 1)),
+        "label_category":
+            tfds.features.ClassLabel(names=[
+                "four-legged animals",
+                "human figures",
+                "airplanes",
+                "trucks",
+                "cars",
+            ]),
+        "instance":
+            tfds.features.ClassLabel(num_classes=10),
+        "label_elevation":
+            tfds.features.ClassLabel(num_classes=9),
+        "label_azimuth":
+            tfds.features.ClassLabel(num_classes=18),
+        "label_lighting":
+            tfds.features.ClassLabel(num_classes=6),
+    }
+    if self.version > "2.0.0":
+      features_dict["id"] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=(96, 96, 1)),
-            "image2":
-                tfds.features.Image(shape=(96, 96, 1)),
-            "label_category":
-                tfds.features.ClassLabel(names=[
-                    "four-legged animals", "human figures", "airplanes",
-                    "trucks", "cars",
-                ]),
-            "instance":
-                tfds.features.ClassLabel(num_classes=10),
-            "label_elevation":
-                tfds.features.ClassLabel(num_classes=9),
-            "label_azimuth":
-                tfds.features.ClassLabel(num_classes=18),
-            "label_lighting":
-                tfds.features.ClassLabel(num_classes=6),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         homepage="https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/",
         citation=_CITATION,
         supervised_keys=("image", "label_category"),
@@ -107,21 +116,24 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs=dict(
+                split_prefix="train_",
                 dat_path=files["training_dat"],
                 cat_path=files["training_cat"],
                 info_path=files["training_info"])),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
+                split_prefix="test_",
                 dat_path=files["testing_dat"],
                 cat_path=files["testing_cat"],
                 info_path=files["testing_info"])),
     ]
 
-  def _generate_examples(self, dat_path, cat_path, info_path):
+  def _generate_examples(self, split_prefix, dat_path, cat_path, info_path):
     """Generate examples for the Smallnorb dataset.
 
     Args:
+      split_prefix: Prefix that identifies the split.
       dat_path: Path to dat file of the chunk.
       cat_path: Path to cat file of the chunk.
       info_path: Path to info file of the chunk.
@@ -142,6 +154,8 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
           "label_azimuth": info_vec[2],
           "label_lighting": info_vec[3],
       }
+      if self.version > "2.0.0":
+        record["id"] = "{}{:05d}".format(split_prefix, i)
       yield i, record
 
 

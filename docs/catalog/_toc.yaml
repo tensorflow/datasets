@@ -4,6 +4,8 @@ toc:
 - section:
   - path: /datasets/catalog/crema_d
     title: crema_d
+  - path: /datasets/catalog/dementiabank
+    title: dementiabank (manual)
   - path: /datasets/catalog/groove
     title: groove
   - path: /datasets/catalog/librispeech
@@ -20,6 +22,8 @@ toc:
     title: speech_commands
   - path: /datasets/catalog/tedlium
     title: tedlium
+  - path: /datasets/catalog/voxceleb
+    title: voxceleb (manual)
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -178,6 +182,8 @@ toc:
     title: stanford_dogs
   - path: /datasets/catalog/stanford_online_products
     title: stanford_online_products
+  - path: /datasets/catalog/stl10
+    title: stl10
   - path: /datasets/catalog/sun397
     title: sun397
   - path: /datasets/catalog/svhn_cropped
@@ -240,6 +246,8 @@ toc:
     title: newsroom (manual)
   - path: /datasets/catalog/opinosis
     title: opinosis
+  - path: /datasets/catalog/reddit
+    title: reddit
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
   - path: /datasets/catalog/scientific_papers

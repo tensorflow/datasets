@@ -91,6 +91,18 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid'):
       labels.int2str(10)
 
+  def test_empty(self):
+    # Encoding should works if num_classes=0
+    labels = features.ClassLabel(num_classes=0)
+    self.assertEqual(0, labels.num_classes)
+    self.assertEqual(0, len(labels.names))
+    self.assertEqual(-1, labels.encode_example(-1))
+
+    labels = features.ClassLabel(names=[])
+    self.assertEqual(0, labels.num_classes)
+    self.assertEqual(0, len(labels.names))
+    self.assertEqual(-1, labels.encode_example(-1))
+
   def test_str_classes(self):
     labels = features.ClassLabel(names=[
         'label3',

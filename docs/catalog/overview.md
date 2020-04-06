@@ -28,6 +28,7 @@ for ex in tfds.as_numpy(ds):
 ### `Audio`
 
 *   [`crema_d`](crema_d.md)
+*   [`dementiabank`](dementiabank.md)
 *   [`groove`](groove.md)
 *   [`librispeech`](librispeech.md)
 *   [`libritts`](libritts.md)
@@ -36,6 +37,7 @@ for ex in tfds.as_numpy(ds):
 *   [`savee`](savee.md)
 *   [`speech_commands`](speech_commands.md)
 *   [`tedlium`](tedlium.md)
+*   [`voxceleb`](voxceleb.md)
 
     ### `Image`
 
@@ -195,6 +197,8 @@ for ex in tfds.as_numpy(ds):
 
 *   [`stanford_online_products`](stanford_online_products.md)
 
+*   [`stl10`](stl10.md)
+
 *   [`sun397`](sun397.md)
 
 *   [`svhn_cropped`](svhn_cropped.md)
@@ -256,6 +260,8 @@ for ex in tfds.as_numpy(ds):
 *   [`newsroom`](newsroom.md)
 
 *   [`opinosis`](opinosis.md)
+
+*   [`reddit`](reddit.md)
 
 *   [`reddit_tifu`](reddit_tifu.md)
 

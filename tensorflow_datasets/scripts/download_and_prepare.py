@@ -82,6 +82,11 @@ flags.DEFINE_string(
 flags.DEFINE_string("checksums_dir", None,
                     "For external datasets, specify the location of the "
                     "dataset checksums.")
+
+flags.DEFINE_boolean(
+    "add_name_to_manual_dir", False, "If true, append the dataset name to the "
+    "`manual_dir`")
+
 default_compute_stats = tfds.download.ComputeStatsMode.AUTO
 flags.DEFINE_enum(
     "compute_stats",
@@ -139,6 +144,9 @@ def download_and_prepare(builder):
     dl_config.compute_stats = tfds.download.ComputeStatsMode.SKIP
     dl_config.beam_options = beam.options.pipeline_options.PipelineOptions(
         flags=["--%s" % opt for opt in FLAGS.beam_pipeline_options])
+
+  if FLAGS.add_name_to_manual_dir:
+    dl_config.manual_dir = os.path.join(dl_config.manual_dir, builder.name)
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,

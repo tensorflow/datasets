@@ -498,24 +498,6 @@ class DatasetBuilderReadTest(testing.TestCase):
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
   @testing.run_in_graph_and_eager_modes()
-  def test_in_memory(self):
-    train_data = dataset_utils.as_numpy(
-        self.builder.as_dataset(split="train", in_memory=True))
-    train_data = [el for el in train_data]
-    self.assertEqual(20, len(train_data))
-
-  def test_in_memory_with_device_ctx(self):
-    # Smoke test to ensure that the inner as_numpy call does not fail when under
-    # an explicit device context.
-    # Only testing in graph mode. Eager mode would actually require job:foo to
-    # exist in the cluster.
-    with tf.Graph().as_default():
-      # Testing it works even if a default Session is active
-      with tf.compat.v1.Session() as _:
-        with tf.device("/job:foo"):
-          self.builder.as_dataset(split="train", in_memory=True)
-
-  @testing.run_in_graph_and_eager_modes()
   def test_all_splits(self):
     splits = dataset_utils.as_numpy(
         self.builder.as_dataset(batch_size=-1))

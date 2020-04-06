@@ -27,7 +27,6 @@ from __future__ import print_function
 
 import collections
 from concurrent import futures
-import os
 
 from absl import app
 import mako.lookup
@@ -59,13 +58,6 @@ def get_mako_template(tmpl_name):
   with tf.io.gfile.GFile(tmpl_path, "r") as tmpl_f:
     tmpl_content = tmpl_f.read()
   return mako.lookup.Template(tmpl_content, default_filters=["str", "trim"])
-
-
-def cls_url(module_file):
-  if module_file.endswith("pyc"):
-    module_file = module_file[:-1]
-  path = os.path.relpath(module_file, py_utils.tfds_dir())
-  return os.path.join(BASE_URL, path)
 
 
 def document_single_builder(builder):
@@ -152,7 +144,7 @@ def dataset_docs_str(datasets=None):
     builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
                      builder_doc)
                     for (builder, builder_doc) in zip(builders, builder_docs)]
-    section_docs[section.capitalize()] = builder_docs
+    section_docs[section] = builder_docs
   tmpl = get_mako_template("catalog_overview")
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]

@@ -1,8 +1,0 @@
-tumor
-stroma
-complex
-lympho
-debris
-mucosa
-adipose
-empty
