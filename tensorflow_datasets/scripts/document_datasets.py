@@ -152,7 +152,7 @@ def dataset_docs_str(datasets=None):
     builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
                      builder_doc)
                     for (builder, builder_doc) in zip(builders, builder_docs)]
-    section_docs[section.capitalize()] = builder_docs
+    section_docs[section] = builder_docs
   tmpl = get_mako_template("catalog_overview")
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]
