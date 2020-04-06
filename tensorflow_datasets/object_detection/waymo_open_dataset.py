@@ -34,11 +34,20 @@ _CITATION = """
 }
 """
 
-_DESCRIPTION = (
-    "The Waymo Open Dataset is comprised of high resolution sensor data "
-    "collected by Waymo self-driving cars in a wide variety of conditions. "
-    "This data is licensed for non-commercial use."
-)
+_DESCRIPTION = """\
+The Waymo Open Dataset is comprised of high resolution sensor data
+collected by Waymo self-driving cars in a wide variety of conditions.
+This data is licensed for non-commercial use.
+
+WARNING: this dataset requires additional authorization and registration.
+Please look at tfds documentation for accessing GCS, and
+afterwards, please register via https://waymo.com/open/licensing/
+
+This dataset is also available in pre-processed format, making it faster
+to load, if you select the correct data_dir:
+tfds.load('waymo_open_dataset', \
+data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
+"""
 
 _HOMEPAGE_URL = "http://www.waymo.com/open/"
 _OBJECT_LABELS = [
