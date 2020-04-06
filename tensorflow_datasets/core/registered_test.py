@@ -204,6 +204,18 @@ class RegisteredTest(testing.TestCase):
       class DuplicateBuilder(object):
         pass
 
+  def test_is_full_name(self):
+    """Test for `is_full_name`."""
+    self.assertFalse(registered.is_full_name("ds/config/1.0.2/other"))
+    self.assertFalse(registered.is_full_name("ds/config/1.0.2/"))
+    self.assertFalse(registered.is_full_name("ds/config/1.2"))
+    self.assertFalse(registered.is_full_name("ds/config"))
+    self.assertFalse(registered.is_full_name("ds/1.2.*"))
+
+    self.assertTrue(registered.is_full_name("ds/config/1.0.2"))
+    self.assertTrue(registered.is_full_name("ds/1.0.2"))
+    self.assertTrue(registered.is_full_name("ds_with_number123/1.0.2"))
+
 
 if __name__ == "__main__":
   testing.test_main()

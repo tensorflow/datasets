@@ -22,6 +22,7 @@ from __future__ import print_function
 
 import abc
 import inspect
+import os
 import re
 
 from absl import flags
@@ -86,6 +87,24 @@ Check that:
     - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
 """
+
+
+# Regex matching 'dataset/config:1.*.*/arg=123'
+_NAME_REG = re.compile(
+    r"^"
+    r"(?P<dataset_name>\w+)"
+    r"(/(?P<config>[\w\-\.]+))?"
+    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
+    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
+    r"$")
+
+
+# Regex matching 'dataset/config/1.3.0'
+_FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
+    ds_name=r"\w+",
+    config_name=r"[\w\-\.]+",
+    version=r"[0-9]+\.[0-9]+\.[0-9]+",
+))
 
 
 class DatasetNotFoundError(ValueError):
@@ -318,17 +337,6 @@ def load(name,
   return ds
 
 
-_VERSION_RE = r""
-
-_NAME_REG = re.compile(
-    r"^"
-    r"(?P<dataset_name>\w+)"
-    r"(/(?P<config>[\w\-\.]+))?"
-    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
-    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
-    r"$")
-
-
 def _dataset_name_and_kwargs_from_name_str(name_str):
   """Extract kwargs from name str."""
   res = _NAME_REG.match(name_str)
@@ -373,3 +381,49 @@ def _cast_to_pod(val):
       return float(val)
     except ValueError:
       return tf.compat.as_text(val)
+
+
+def _get_all_versions(version_list):
+  return set(str(v) for v in version_list)
+
+
+def _iter_full_names(predicate_fn=None):
+  """Yield all registered datasets full_names (see `list_full_names`)."""
+  for builder_name, builder_cls in _DATASET_REGISTRY.items():
+    # Only keep requested datasets
+    if predicate_fn is not None and not predicate_fn(builder_cls):
+      continue
+    if builder_cls.BUILDER_CONFIGS:
+      for config in builder_cls.BUILDER_CONFIGS:
+        for v in _get_all_versions(
+            [config.version] + config.supported_versions):
+          yield os.path.join(builder_name, config.name, v)
+    else:
+      for v in _get_all_versions(
+          [builder_cls.VERSION] + builder_cls.SUPPORTED_VERSIONS):
+        yield os.path.join(builder_name, v)
+
+
+def list_full_names(predicate_fn=None):
+  """Yield all registered datasets full_names.
+
+  Args:
+    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
+      returns the dataset names which satisfy the predicate.
+
+  Returns:
+    The list of all registered dataset full names.
+  """
+  return sorted(_iter_full_names(predicate_fn=predicate_fn))
+
+
+def is_full_name(full_name):
+  """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
+
+  Args:
+    full_name: String to check.
+
+  Returns:
+    `bool`.
+  """
+  return _FULL_NAME_REG.match(full_name)
