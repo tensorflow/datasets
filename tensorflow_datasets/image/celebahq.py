@@ -68,20 +68,20 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         version=v2,
         **kwargs)
     self.resolution = resolution
-    self.file_name = "data%dx%d.tar" % (resolution, resolution)
-
+    self.file_name = "data%dx%d" % (resolution, resolution)
+    self.extensions = ['.tar', '.zip', '.tar.gz', '.tgz']
 
 class CelebAHq(tfds.core.GeneratorBasedBuilder):
   """Celeba_HQ Dataset."""
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
-  manual_dir should contain multiple tar files with images (data2x2.tar,
-  data4x4.tar .. data1024x1024.tar).
+  manual_dir should contain the following compressed files with images.
+  (data2x2.zip, data4x4.tar .. data1024x1024.tar.gz).
   Detailed instructions are here:
   https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
   """
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
 
   BUILDER_CONFIGS = [
       CelebaHQConfig(resolution=1024),
@@ -116,19 +116,20 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    image_tar_file = os.path.join(dl_manager.manual_dir,
-                                  self.builder_config.file_name)
-    if not tf.io.gfile.exists(image_tar_file):
-      # The current celebahq generation code depends on a concrete version of
-      # pillow library and cannot be easily ported into tfds.
-      msg = "You must download the dataset files manually and place them in: "
-      msg += dl_manager.manual_dir
-      msg += " as .tar files. See testing/test_data/fake_examples/celeb_a_hq "
+    file_names = ([
+        os.path.join(dl_manager.manual_dir, self.builder_config.file_name + ext)
+        for ext in self.builder_config.extensions])
+    image_file = list(filter(tf.io.gfile.exists, file_names))
+    if not image_file:
+      msg = ("You must manually download the compressed dataset files with any"
+             " of the following extensions {} and place them in: {}.\n"
+             "See testing/test_data/fake_examples/celeb_a_hq"
+             .format(self.builder_config.extensions, dl_manager.manual_dir))
       raise AssertionError(msg)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
+            gen_kwargs={"archive": dl_manager.iter_archive(image_file[0])},
         )
     ]
 

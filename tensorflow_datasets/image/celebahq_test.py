@@ -26,7 +26,7 @@ import tensorflow_datasets.testing as tfds_test
 
 class CelebAHQTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = celebahq.CelebAHq
-  BUILDER_CONFIG_NAMES_TO_TEST = ["512"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["128"]
 
   SPLITS = {
       "train": 3,
