@@ -116,6 +116,7 @@ DATASET_EXTRAS = {
     'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
+    'common_voice': ['pydub'],  # and ffmpeg installed
     'eurosat': ['scikit-image',],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [

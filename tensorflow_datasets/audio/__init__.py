@@ -16,6 +16,8 @@
 # Lint as: python3
 """Audio datasets."""
 
+from tensorflow_datasets.audio.commonvoice import CommonVoice
+from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig
 from tensorflow_datasets.audio.crema_d import CremaD
 from tensorflow_datasets.audio.dementiabank import Dementiabank
 from tensorflow_datasets.audio.groove import Groove
