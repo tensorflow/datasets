@@ -137,7 +137,7 @@ class DatasetNotFoundError(ValueError):
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
 
-  def __new__(cls, cls_name, bases, class_dict):
+  def __new__(cls, cls_name, bases, class_dict): # pylint: disable = bad-mcs-classmethod-argument, arguments-differ
     name = naming.camelcase_to_snakecase(cls_name)
     class_dict["name"] = name
     builder_cls = super(RegisteredDataset, cls).__new__(  # pylint: disable=too-many-function-args
