@@ -130,7 +130,7 @@ class skip_registeration():
 
   def __enter__(self):
     self.SKIP_REGISTRATION = True
-    return SKIP_REGISTRATION
+    return self.SKIP_REGISTRATION
 
   def __exit__(self, *args):
     self.SKIP_REGISTRATION = False
