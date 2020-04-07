@@ -45,6 +45,8 @@ __all__ = [
     "load",
 ]
 
+SKIP_REGISTRATION = False
+
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
 
@@ -124,6 +126,14 @@ class DatasetNotFoundError(ValueError):
                       "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
     ValueError.__init__(self, error_string)
 
+class skip_registeration():
+
+  def __enter__(self):
+    self.SKIP_REGISTRATION = True
+    return SKIP_REGISTRATION
+
+  def __exit__(self, *args):
+    self.SKIP_REGISTRATION = False
 
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
@@ -144,15 +154,14 @@ class RegisteredDataset(abc.ABCMeta):
     elif name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
-
-    if inspect.isabstract(builder_cls):
-      _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
-    elif class_dict.get("IN_DEVELOPMENT"):
-      _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
-    else:
-      _DATASET_REGISTRY[name] = builder_cls
+    if not SKIP_REGISTRATION:
+      if inspect.isabstract(builder_cls):
+        _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
+      elif class_dict.get("IN_DEVELOPMENT"):
+        _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
+      else:
+        _DATASET_REGISTRY[name] = builder_cls
     return builder_cls
-
 
 def list_builders():
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
@@ -421,9 +430,11 @@ def is_full_name(full_name):
   """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
 
   Args:
-    full_name: String to check.
 
   Returns:
+    full_name: String to check.
     `bool`.
   """
   return _FULL_NAME_REG.match(full_name)
+
+
