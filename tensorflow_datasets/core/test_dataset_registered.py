@@ -24,10 +24,11 @@ import tensorflow_datasets as tfds
 
 _testing_dataset = ["dummy_mnist", "dummy_dataset_shared_generator"]
 
-class listBuilderTest():
+class listBuilderTest(tfds.testing.TestCase):
+
   def test_list_builder(self):
     for dataset in _testing_dataset:
       self.assertNotIn(dataset, tfds.list_builders())
           
 if __name__ == "__main__":
-  listBuilderTest()
+  tfds.testing.test_main()
