@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-from contextlib import contextmanager
+import contextlib
 import inspect
 import os
 import re
@@ -109,12 +109,14 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
 
 _skip_reg = False
 
-@contextmanager
+@contextlib.contextmanager
 def skip_registration():
   global _skip_reg
-  _skip_reg = True
-  yield
-  _skip_reg = False
+  try:
+    _skip_reg = True
+    yield
+  finally:
+    _skip_reg = False
 
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""

@@ -20,19 +20,18 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets import testing
-from tensorflow_datasets import list_builders
+import tensorflow_datasets as tfds
 
 _TEST_DATASETS = set(["dummy_mnist", "dummy_dataset_shared_generator"])
 
-class ListBuilderTest(testing.TestCase):
+class ListBuilderTest(tfds.testing.TestCase):
 
   def test_list_builder(self):
-    registered_datasets = set(list_builders())
+    registered_datasets = set(tfds.list_builders())
     self.assertEmpty(_TEST_DATASETS.intersection(registered_datasets),
                      "List of Registered datasets should not contain {}"
                      .format(_TEST_DATASETS)
                     )
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()
