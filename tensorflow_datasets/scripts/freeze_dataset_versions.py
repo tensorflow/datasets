@@ -23,24 +23,28 @@ python tensorflow_datasets/scripts/freeze_dataset_version.py
 ```
 """
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import os
-import json
 
 from absl import app
 
 import tensorflow.compat.v2 as tf
+import tensorflow_datasets as tfds
+
 gfile = tf.io.gfile
 del tf
 
-import tensorflow_datasets as tfds\
-
-_STABLE_VERSIONS_FILEPATH = os.path.join(tfds.core.utils.tfds_dir(), 
+_STABLE_VERSIONS_FILEPATH = os.path.join(tfds.core.utils.tfds_dir(), \
     "../docs/stable_versions.txt")
 
 def main(_):
   registered_names = tfds.core.registered.list_full_names()
   with gfile.GFile(_STABLE_VERSIONS_FILEPATH, "w") as file:
-    json.dump(registered_names, file)
+    for dataset in registered_names:
+      file.write("%s\n" % dataset)
 
 if __name__ == '__main__':
   app.run(main)
