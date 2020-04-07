@@ -20,16 +20,14 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets import testing
-from tensorflow_datasets import list_builders
+import tensorflow_datasets as tfds
 
 _testing_dataset = ["dummy_mnist", "dummy_dataset_shared_generator"]
 
-class listBuilderTest(testing.TestCase):
-
+class listBuilderTest():
   def test_list_builder(self):
     for dataset in _testing_dataset:
-      self.assertNotIn(dataset, list_builders())
+      self.assertNotIn(dataset, tfds.list_builders())
           
 if __name__ == "__main__":
-  testing.test_main()
+  listBuilderTest()
