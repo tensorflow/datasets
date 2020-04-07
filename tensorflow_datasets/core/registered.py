@@ -21,6 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import contextlib
 import inspect
 import os
 import re
@@ -107,6 +108,20 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
 ))
 
 
+_skip_registration = False
+
+
+@contextlib.contextmanager
+def skip_registration():
+  """Context manager within which dataset builders are not registered."""
+  global _skip_registration
+  try:
+    _skip_registration = True
+    yield
+  finally:
+    _skip_registration = False
+
+
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
 
@@ -145,7 +160,9 @@ class RegisteredDataset(abc.ABCMeta):
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
-    if inspect.isabstract(builder_cls):
+    if _skip_registration:
+      pass  # Skip dataset registration within the contextmanager
+    elif inspect.isabstract(builder_cls):
       _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
     elif class_dict.get("IN_DEVELOPMENT"):
       _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
