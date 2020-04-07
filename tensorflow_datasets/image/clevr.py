@@ -48,33 +48,38 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
   """CLEVR dataset."""
 
   VERSION = tfds.core.Version("3.1.0", "Add question/answer text.")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0"),
+  ]
 
   def _info(self):
+    features = {
+        "image": tfds.features.Image(),
+        "file_name": tfds.features.Text(),
+        "objects": tfds.features.Sequence({
+            "color": tfds.features.ClassLabel(names=["gray", "blue",
+                                                     "brown", "yellow",
+                                                     "red", "green",
+                                                     "purple", "cyan"]),
+            "material": tfds.features.ClassLabel(names=["rubber", "metal"]),
+            "shape": tfds.features.ClassLabel(names=["cube", "sphere",
+                                                     "cylinder"]),
+            "size": tfds.features.ClassLabel(names=["small", "large"]),
+            "rotation": tfds.features.Tensor(shape=(), dtype=tf.float32),
+            "3d_coords": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+            "pixel_coords": tfds.features.Tensor(shape=(3,),
+                                                 dtype=tf.float32),
+        })
+    }
+    if self.version > "3.0.0":
+      features["question_answer"] = tfds.features.Sequence({
+          "question": tfds.features.Text(),
+          "answer": tfds.features.Text(),
+      })
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "file_name": tfds.features.Text(),
-            "question_answer": tfds.features.Sequence({
-                "question": tfds.features.Text(),
-                "answer": tfds.features.Text(),
-            }),
-            "objects": tfds.features.Sequence({
-                "color": tfds.features.ClassLabel(names=["gray", "blue",
-                                                         "brown", "yellow",
-                                                         "red", "green",
-                                                         "purple", "cyan"]),
-                "material": tfds.features.ClassLabel(names=["rubber", "metal"]),
-                "shape": tfds.features.ClassLabel(names=["cube", "sphere",
-                                                         "cylinder"]),
-                "size": tfds.features.ClassLabel(names=["small", "large"]),
-                "rotation": tfds.features.Tensor(shape=(), dtype=tf.float32),
-                "3d_coords": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-                "pixel_coords": tfds.features.Tensor(shape=(3,),
-                                                     dtype=tf.float32),
-            })
-        }),
+        features=tfds.features.FeaturesDict(features),
         homepage=_BASE_URL,
         citation=_CITATION,
     )
