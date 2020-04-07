@@ -46,8 +46,6 @@ __all__ = [
     "load",
 ]
 
-
-
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
 
@@ -431,9 +429,9 @@ def is_full_name(full_name):
   """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
 
   Args:
+     full_name: String to check.
 
   Returns:
-    full_name: String to check.
     `bool`.
   """
   return _FULL_NAME_REG.match(full_name)
