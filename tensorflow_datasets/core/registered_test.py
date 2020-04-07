@@ -216,9 +216,14 @@ class RegisteredTest(testing.TestCase):
     self.assertTrue(registered.is_full_name("ds/1.0.2"))
     self.assertTrue(registered.is_full_name("ds_with_number123/1.0.2"))
 
-  def test_skip_regiteration(self):
-    name = "dummy_mnist"
-    with registered.skip_registeration():
+  def test_skip_regitration(self):
+      with registered.skip_registration():
+        @six.add_metaclass(registered.RegisteredDataset)
+        class DummyDataset(object):
+          pass
+
+      name = "dummy_dataset"
+      self.assertEqual(name, DummyDataset.name)
       self.assertNotIn(name, registered.list_builders())
 
 if __name__ == "__main__":

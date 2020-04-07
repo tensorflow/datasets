@@ -107,14 +107,14 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
     version=r"[0-9]+\.[0-9]+\.[0-9]+",
 ))
 
-SKIP_REGISTRATION = False
+_SKIP_REGISTRATION = False
 
 @contextmanager
-def skip_registeration():
-  global SKIP_REGISTRATION
-  SKIP_REGISTRATION = True
+def skip_registration():
+  global _SKIP_REGISTRATION
+  _SKIP_REGISTRATION = True
   yield
-  SKIP_REGISTRATION = False
+  _SKIP_REGISTRATION = False
 
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
@@ -153,7 +153,7 @@ class RegisteredDataset(abc.ABCMeta):
     elif name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
-    if not SKIP_REGISTRATION:
+    if not _SKIP_REGISTRATION:
       if inspect.isabstract(builder_cls):
         _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
       elif class_dict.get("IN_DEVELOPMENT"):
@@ -161,6 +161,7 @@ class RegisteredDataset(abc.ABCMeta):
       else:
         _DATASET_REGISTRY[name] = builder_cls
     return builder_cls
+
 
 def list_builders():
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
@@ -429,11 +430,9 @@ def is_full_name(full_name):
   """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
 
   Args:
-     full_name: String to check.
+    full_name: String to check.
 
   Returns:
     `bool`.
   """
   return _FULL_NAME_REG.match(full_name)
-
-
