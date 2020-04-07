@@ -107,14 +107,14 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
     version=r"[0-9]+\.[0-9]+\.[0-9]+",
 ))
 
-_skip_reg = True
+_skip_reg = False
 
 @contextmanager
-def skip_registeration():
+def skip_registration():
   global _skip_reg
-  _skip_reg = False
-  yield
   _skip_reg = True
+  yield
+  _skip_reg = False
 
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
@@ -153,7 +153,7 @@ class RegisteredDataset(abc.ABCMeta):
     elif name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
-    if _skip_reg:
+    if not _skip_reg:
       if inspect.isabstract(builder_cls):
         _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
       elif class_dict.get("IN_DEVELOPMENT"):

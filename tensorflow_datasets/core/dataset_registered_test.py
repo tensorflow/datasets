@@ -23,16 +23,15 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets import list_builders
 
+_TEST_DATASETS = set(["dummy_mnist", "dummy_dataset_shared_generator"])
 
 class ListBuilderTest(testing.TestCase):
 
-  _datasets = set(["dummy_mnist", "dummy_dataset_shared_generator"])
-
   def test_list_builder(self):
-    registered_names = set(list_builders())
-    self.assertEmpty(self._datasets.intersection(registered_names),
+    registered_datasets = set(list_builders())
+    self.assertEmpty(_TEST_DATASETS.intersection(registered_datasets),
                      "List of Registered datasets should not contain {}"
-                     .format(self._datasets)
+                     .format(_TEST_DATASETS)
                     )
 
 if __name__ == "__main__":
