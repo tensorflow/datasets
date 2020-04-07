@@ -106,24 +106,24 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
 
 class DatasetBuilderTest(testing.TestCase):
 
-  @testing.run_in_graph_and_eager_modes()
-  def test_load(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      dataset = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
-          download=True,
-          split=splits_lib.Split.TRAIN)
-      data = list(dataset_utils.as_numpy(dataset))
-      self.assertEqual(20, len(data))
-      self.assertLess(data[0]["x"], 30)
+  # @testing.run_in_graph_and_eager_modes()
+  # def test_load(self):
+  #   with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+  #     dataset = registered.load(
+  #         name="dummy_dataset_shared_generator",
+  #         data_dir=tmp_dir,
+  #         download=True,
+  #         split=splits_lib.Split.TRAIN)
+  #     data = list(dataset_utils.as_numpy(dataset))
+  #     self.assertEqual(20, len(data))
+  #     self.assertLess(data[0]["x"], 30)
 
   @testing.run_in_graph_and_eager_modes()
   def test_determinism(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      ds = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
+      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+      builder.download_and_prepare()
+      ds = builder.as_dataset(
           split=splits_lib.Split.TRAIN,
           shuffle_files=False)
       ds_values = list(dataset_utils.as_numpy(ds))
@@ -176,9 +176,9 @@ class DatasetBuilderTest(testing.TestCase):
   @testing.run_in_graph_and_eager_modes()
   def test_multi_split(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      ds_train, ds_test = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
+      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+      builder.download_and_prepare()
+      ds_train, ds_test = builder.as_dataset(
           split=["train", "test"],
           shuffle_files=False)
 
@@ -277,9 +277,9 @@ class DatasetBuilderTest(testing.TestCase):
           experimental_interleave_sort_fn=interleave_sort,
       )
       read_config.options.experimental_stats.prefix = "tfds_prefix"
-      ds = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
+      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+      builder.download_and_prepare()
+      ds = builder.as_dataset(
           split="train",
           read_config=read_config,
           shuffle_files=True,

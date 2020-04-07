@@ -220,11 +220,11 @@ class RegisteredTest(testing.TestCase):
     """Test `skip_registration()` on a fake dataset"""
     with registered.skip_registration():
       @six.add_metaclass(registered.RegisteredDataset) # pylint: disable=function-redefined
-      class DummyDataset(object):
+      class DummyTestRegDataset(object):
         pass
 
-    name = "dummy_dataset"
-    self.assertEqual(name, DummyDataset.name)
+    name = "dummy_test_reg_dataset"
+    self.assertEqual(name, DummyTestRegDataset.name)
     self.assertNotIn(name, registered.list_builders(),
                       "List of Registered datasets should not contain {}"
                       .format(name))
