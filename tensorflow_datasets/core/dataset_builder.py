@@ -1156,10 +1156,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
 
     if not download_config.beam_runner and not download_config.beam_options:
       raise ValueError(
-          "Trying to generate a dataset using Apache Beam, yet no Beam Runner "
-          "or PipelineOptions() has been provided. Please pass a "
-          "tfds.download.DownloadConfig(beam_runner=...) object to the "
-          "builder.download_and_prepare(download_config=...) method"
+          "The dataset you're trying to generate is using Apache Beam. Beam"
+          "datasets are usually very large and should be generated separately."
+          "Please have a look at"
+          "https://www.tensorflow.org/datasets/beam_datasets#generating_a_beam_dataset"
+          "for instructions."
       )
 
     beam_options = (download_config.beam_options or

@@ -136,7 +136,7 @@ class BeamBasedBuilderTest(testing.TestCase):
   def test_download_prepare_raise(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyBeamDataset(data_dir=tmp_dir)
-      with self.assertRaisesWithPredicateMatch(ValueError, "no Beam Runner"):
+      with self.assertRaisesWithPredicateMatch(ValueError, "using Apache Beam"):
         builder.download_and_prepare()
 
   def _assertBeamGeneration(self, dl_config, dataset_cls, dataset_name):
