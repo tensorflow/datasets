@@ -154,7 +154,6 @@ class RegisteredDataset(abc.ABCMeta):
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
     if _skip_reg:
-      print(name)
       if inspect.isabstract(builder_cls):
         _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
       elif class_dict.get("IN_DEVELOPMENT"):
