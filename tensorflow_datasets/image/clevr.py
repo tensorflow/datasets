@@ -122,9 +122,10 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
       questions_json = json.load(f)
     questions = collections.defaultdict(list)
     for q in questions_json["questions"]:
+      ans = q["answer"] if q["split"] != "test" else ""
       questions[q["image_filename"]].append({
           "question": q["question"],
-          "answer": q["answer"],
+          "answer": ans,
       })
 
     if tf.io.gfile.exists(scenes_description_file):
