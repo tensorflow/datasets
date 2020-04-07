@@ -98,6 +98,9 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "2.0.1", "New split API (https://tensorflow.org/datasets/splits)")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
