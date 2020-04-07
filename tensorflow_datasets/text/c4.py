@@ -31,7 +31,7 @@ from tensorflow_datasets.text import c4_utils
 _DESCRIPTION = """\
 A colossal, cleaned version of Common Crawl's web crawl corpus.
 
-Based on Common Crawl dataset: "https://commoncrawl.org"
+Based on Common Crawl dataset: https://commoncrawl.org
 
 Due to the overhead of cleaning the dataset, it is recommend you prepare it with
 a distributed service like Cloud Dataflow. More info at
