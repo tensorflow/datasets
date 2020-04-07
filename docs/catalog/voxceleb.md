@@ -25,9 +25,9 @@ audio part of the voxceleb1.1 dataset.
 *   **Source code**:
     [`tfds.audio.voxceleb.Voxceleb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxceleb.py)
 *   **Versions**:
-    *   **`1.1.0`** (default): No release notes.
-*   **Download size**: `4.68 MiB`
-*   **Dataset size**: `107.97 GiB`
+    *   **`1.1.1`** (default): No release notes.
+*   **Download size**: `Unknown size`
+*   **Dataset size**: `Unknown size`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -35,26 +35,24 @@ audio part of the voxceleb1.1 dataset.
     downloading this file are found in http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html. This dataset requires registration.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,972
-'train'      | 134,000
-'validation' | 6,670
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
 ```python
 FeaturesDict({
     'audio': Audio(shape=(None,), dtype=tf.int64),
-    'speaker_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=1252),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1252),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('audio', 'speaker_id')`
+    `('audio', 'label')`
 *   **Citation**:
 
 ```

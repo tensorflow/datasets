@@ -4,7 +4,7 @@
   </div>
 
   <meta itemprop="name" content="waymo_open_dataset" />
-  <meta itemprop="description" content="The Waymo Open Dataset is comprised of high resolution sensor data collected by Waymo self-driving cars in a wide variety of conditions. This data is licensed for non-commercial use.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;waymo_open_dataset&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The Waymo Open Dataset is comprised of high resolution sensor data&#10;collected by Waymo self-driving cars in a wide variety of conditions.&#10;This data is licensed for non-commercial use.&#10;&#10;WARNING: this dataset requires additional authorization and registration.&#10;Please look at tfds documentation for accessing GCS, and&#10;afterwards, please register via https://waymo.com/open/licensing/&#10;&#10;This dataset is also available in pre-processed format, making it faster&#10;to load, if you select the correct data_dir:&#10;tfds.load(&#x27;waymo_open_dataset&#x27;, data_dir=&#x27;gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets&#x27;)&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;waymo_open_dataset&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/waymo_open_dataset" />
   <meta itemprop="sameAs" content="http://www.waymo.com/open/" />
   <meta itemprop="citation" content="@misc{waymo_open_dataset,&#10;  title = {Waymo Open Dataset: An autonomous driving dataset},&#10;  website = {url{https://www.waymo.com/open}},&#10;  year = {2020}&#10;}" />
@@ -17,6 +17,14 @@
 The Waymo Open Dataset is comprised of high resolution sensor data collected by
 Waymo self-driving cars in a wide variety of conditions. This data is licensed
 for non-commercial use.
+
+WARNING: this dataset requires additional authorization and registration. Please
+look at tfds documentation for accessing GCS, and afterwards, please register
+via https://waymo.com/open/licensing/
+
+This dataset is also available in pre-processed format, making it faster to
+load, if you select the correct data_dir: tfds.load('waymo_open_dataset',
+data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
 
 *   **Homepage**: [http://www.waymo.com/open/](http://www.waymo.com/open/)
 *   **Source code**:

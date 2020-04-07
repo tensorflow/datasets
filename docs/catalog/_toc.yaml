@@ -2,6 +2,8 @@ toc:
 - path: /datasets/catalog/overview
   title: Overview
 - section:
+  - path: /datasets/catalog/common_voice
+    title: common_voice
   - path: /datasets/catalog/crema_d
     title: crema_d
   - path: /datasets/catalog/dementiabank
@@ -196,7 +198,7 @@ toc:
     title: vgg_face2 (manual)
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
-  title: Image_classification
+  title: Image classification
 - section:
   - path: /datasets/catalog/coco
     title: coco
@@ -212,7 +214,7 @@ toc:
     title: waymo_open_dataset
   - path: /datasets/catalog/wider_face
     title: wider_face
-  title: Object_detection
+  title: Object detection
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
@@ -310,6 +312,8 @@ toc:
     title: tiny_shakespeare
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
+  - path: /datasets/catalog/web_questions
+    title: web_questions
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikipedia
