@@ -16,11 +16,12 @@
 # Lint as: python3
 r"""Update list of all available datasets.
 
-Instructions:
+Use the following command to run the script
 
 ```
-python tensorflow_datasets/scripts/freeze_dataset_version.py
+python -m tensorflow_datasets.scripts.freeze_dataset_version
 ```
+
 """
 
 from __future__ import absolute_import
@@ -37,12 +38,12 @@ import tensorflow_datasets as tfds
 gfile = tf.io.gfile
 del tf
 
-_STABLE_VERSIONS_FILEPATH = os.path.join(tfds.core.utils.tfds_dir(), \
-    "../docs/stable_versions.txt")
+STABLE_VERSIONS_FILEPATH = os.path.join(tfds.core.utils.tfds_dir(),
+                                        "../docs/stable_versions.txt")
 
 def main(_):
   registered_names = tfds.core.registered.list_full_names()
-  with gfile.GFile(_STABLE_VERSIONS_FILEPATH, "w") as file:
+  with gfile.GFile(STABLE_VERSIONS_FILEPATH, "w") as file:
     for dataset in registered_names:
       file.write("%s\n" % dataset)
 
