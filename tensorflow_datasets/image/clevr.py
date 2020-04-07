@@ -124,7 +124,7 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
     for q in questions_json["questions"]:
       questions[q["image_filename"]].append({
           "question": q["question"],
-          "answer": q["answer"],
+          "answer": q.get("answer", ""),  # Test set do not have answer.
       })
 
     if tf.io.gfile.exists(scenes_description_file):
