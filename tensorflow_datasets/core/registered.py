@@ -28,7 +28,7 @@ import re
 from absl import flags
 from absl import logging
 import tensorflow.compat.v2 as tf
-
+import contextlib
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
@@ -107,9 +107,8 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
 ))
 
 _skip_registration = False
-contextmanager = lazy_imports_lib.lazy_imports.contextlib
 
-@contextmanager
+@contextlib.contextmanager
 def skip_registration():
   global _skip_registration
   try:
