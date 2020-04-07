@@ -21,7 +21,8 @@ from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
-from tensorflow_datasets import testing
+with core.registered.skip_registeration():
+    from tensorflow_datasets import testing
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
