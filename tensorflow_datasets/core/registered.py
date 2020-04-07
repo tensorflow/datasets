@@ -27,6 +27,7 @@ import re
 
 from absl import flags
 from absl import logging
+from contextlib import contextmanager
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
@@ -45,7 +46,7 @@ __all__ = [
     "load",
 ]
 
-SKIP_REGISTRATION = False
+
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
@@ -108,6 +109,14 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
     version=r"[0-9]+\.[0-9]+\.[0-9]+",
 ))
 
+SKIP_REGISTRATION = False
+
+@contextmanager
+def skip_registeration():
+  global SKIP_REGISTRATION
+  SKIP_REGISTRATION = True
+  yield
+  SKIP_REGISTRATION = False
 
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
@@ -126,14 +135,6 @@ class DatasetNotFoundError(ValueError):
                       "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
     ValueError.__init__(self, error_string)
 
-class skip_registeration():
-
-  def __enter__(self):
-    self.SKIP_REGISTRATION = True
-    return self.SKIP_REGISTRATION
-
-  def __exit__(self, *args):
-    self.SKIP_REGISTRATION = False
 
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
