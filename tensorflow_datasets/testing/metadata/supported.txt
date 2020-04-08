@@ -170,6 +170,7 @@ cars196/2.0.0
 cars196/2.1.0
 cassava/0.1.0
 cats_vs_dogs/4.0.0
+celeb_a/2.0.0
 celeb_a/2.0.1
 celeb_a_hq/1/2.0.0
 celeb_a_hq/1024/2.0.0
@@ -291,6 +292,7 @@ cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/1.0.0
 citrus_leaves/0.1.0
 civil_comments/0.9.0
+clevr/3.0.0
 cmaterdb/bangla/1.0.0
 cmaterdb/devanagari/1.0.0
 cmaterdb/telugu/1.0.0
@@ -799,6 +801,7 @@ visual_domain_decathlon/ucf101/1.1.0
 visual_domain_decathlon/vgg-flowers/1.1.0
 voc/2007/4.0.0
 voc/2012/4.0.0
+voxceleb/1.1.1
 waymo_open_dataset/0.1.0
 web_questions/1.0.0
 wider_face/0.1.0
