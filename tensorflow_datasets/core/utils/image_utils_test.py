@@ -24,7 +24,7 @@ import os
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import image_utils
 
 # pylint: disable=bad-whitespace
@@ -46,7 +46,7 @@ SIX_PIXELS_JPEG = [
 # pylint: enable=bad-whitespace
 
 
-class ImageUtilsTest(testing.TestCase):
+class ImageUtilsTest(tfds.testing.TestCase):
 
   def _get_image(self, name):
     path = os.path.join(self.test_data, name)
@@ -81,4 +81,4 @@ class ImageUtilsTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

@@ -21,15 +21,13 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import tf_utils
 
-tf.enable_v2_behavior()
 
+class TfUtilsTest(tfds.testing.TestCase):
 
-class TfUtilsTest(testing.TestCase):
-
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_graph_runner(self):
     graph_runner = tf_utils.TFGraphRunner()
 
@@ -58,4 +56,4 @@ class TfUtilsTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

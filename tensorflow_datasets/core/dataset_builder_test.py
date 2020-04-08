@@ -27,7 +27,7 @@ from absl.testing import absltest
 import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -38,9 +38,8 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-tf.enable_v2_behavior()
 
-DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
+DummyDatasetSharedGenerator = tfds.testing.DummyDatasetSharedGenerator
 
 
 class DummyBuilderConfig(dataset_builder.BuilderConfig):
@@ -105,7 +104,7 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
     ]
 
 
-class DatasetBuilderTest(testing.TestCase):
+class DatasetBuilderTest(tfds.testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -114,9 +113,13 @@ class DatasetBuilderTest(testing.TestCase):
         data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
     cls.builder.download_and_prepare()
 
+<<<<<<< HEAD
   @testing.run_in_graph_and_eager_modes()
+=======
+  @tfds.testing.run_in_graph_and_eager_modes()
+>>>>>>> 0292d9d4... update tests to use tfds.testing in tfds/core
   def test_load(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       dataset = registered.load(
           name="dummy_dataset_with_configs",
           data_dir=tmp_dir,
@@ -126,7 +129,7 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_determinism(self):
     ds = self.builder.as_dataset(
         split=splits_lib.Split.TRAIN, shuffle_files=False)
@@ -149,10 +152,10 @@ class DatasetBuilderTest(testing.TestCase):
          2],
     )
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
     from tensorflow_datasets.image_classification import mnist  # pylint:disable=import-outside-toplevel,g-import-not-at-top
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with absltest.mock.patch.object(
           mnist.MNIST, "_download_and_prepare",
           side_effect=NotImplementedError):
@@ -177,7 +180,7 @@ class DatasetBuilderTest(testing.TestCase):
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_multi_split(self):
     ds_train, ds_test = self.builder.as_dataset(
         split=["train", "test"],
@@ -190,7 +193,11 @@ class DatasetBuilderTest(testing.TestCase):
     self.assertEqual(10, len(data))
 
   def test_build_data_dir(self):
+<<<<<<< HEAD
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+=======
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+>>>>>>> 0292d9d4... update tests to use tfds.testing in tfds/core
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       self.assertEqual(str(builder.info.version), "1.0.0")
       builder_data_dir = os.path.join(tmp_dir, builder.name)
@@ -206,7 +213,7 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertEqual(builder._build_data_dir(), version_dir)
 
   def test_get_data_dir_with_config(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       config_name = "plus1"
       builder = DummyDatasetWithConfigs(config=config_name, data_dir=tmp_dir)
 
@@ -217,7 +224,7 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertEqual(builder._build_data_dir(), version_data_dir)
 
   def test_config_construction(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       self.assertSetEqual(
           set(["plus1", "plus2"]),
           set(DummyDatasetWithConfigs.builder_configs.keys()))
@@ -229,9 +236,9 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertIs(builder.builder_config,
                     DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_with_configs(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder1 = DummyDatasetWithConfigs(config="plus1", data_dir=tmp_dir)
       builder2 = DummyDatasetWithConfigs(config="plus2", data_dir=tmp_dir)
       # Test that builder.builder_config is the correct config
@@ -330,23 +337,23 @@ class DatasetBuilderTest(testing.TestCase):
       def _generate_examples(self):
         yield "", {}
 
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = MultiVersionDataset(version="0.0.8", data_dir=tmp_dir)
       with self.assertRaisesWithPredicateMatch(ValueError, "0.0.8) is too old"):
         builder.download_and_prepare()
 
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = MultiVersionDataset(version="1.9.0", data_dir=tmp_dir)
       with self.assertRaisesWithPredicateMatch(ValueError, "1.9.0) is too old"):
         builder.download_and_prepare()
 
     # `experimental_latest` version can be installed
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = MultiVersionDataset(version="2.0.0", data_dir=tmp_dir)
       builder.download_and_prepare()
 
   def test_invalid_split_dataset(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with self.assertRaisesWithPredicateMatch(
           ValueError, "`all` is a special"):
         # Raise error during .download_and_prepare()
@@ -356,17 +363,17 @@ class DatasetBuilderTest(testing.TestCase):
         )
 
 
-class BuilderPickleTest(testing.TestCase):
+class BuilderPickleTest(tfds.testing.TestCase):
 
   def test_load_dump(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = tfds.testing.DummyMnist(data_dir=tmp_dir)
     builder2 = dill.loads(dill.dumps(builder))
     self.assertEqual(builder.name, builder2.name)
     self.assertEqual(builder.version, builder2.version)
 
 
-class BuilderRestoreGcsTest(testing.TestCase):
+class BuilderRestoreGcsTest(tfds.testing.TestCase):
 
   def setUp(self):
     super(BuilderRestoreGcsTest, self).setUp()
@@ -395,8 +402,8 @@ class BuilderRestoreGcsTest(testing.TestCase):
     self.addCleanup(patcher.stop)
 
   def test_stats_restored_from_gcs(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = tfds.testing.DummyMnist(data_dir=tmp_dir)
       self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
@@ -407,9 +414,9 @@ class BuilderRestoreGcsTest(testing.TestCase):
       self.assertFalse(self.compute_dynamic_property.called)
 
   def test_stats_not_restored_gcs_overwritten(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder = tfds.testing.DummyMnist(data_dir=tmp_dir)
       self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
@@ -424,8 +431,8 @@ class BuilderRestoreGcsTest(testing.TestCase):
     # By disabling the patch, and because DummyMnist is not on GCS, we can
     # simulate a new dataset starting from scratch
     self.patch_gcs.stop()
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = tfds.testing.DummyMnist(data_dir=tmp_dir)
       # No dataset_info restored, so stats are empty
       self.assertEqual(builder.info.splits.total_num_examples, 0)
       self.assertFalse(self.compute_dynamic_property.called)
@@ -442,9 +449,9 @@ class BuilderRestoreGcsTest(testing.TestCase):
     # By disabling the patch, and because DummyMnist is not on GCS, we can
     # simulate a new dataset starting from scratch
     self.patch_gcs.stop()
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder = tfds.testing.DummyMnist(data_dir=tmp_dir)
       self.assertEqual(builder.info.splits, {})
       self.assertFalse(self.compute_dynamic_property.called)
 
@@ -461,9 +468,9 @@ class BuilderRestoreGcsTest(testing.TestCase):
   def test_force_stats(self):
     # Test when stats already exists but compute_stats='force'
 
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder = tfds.testing.DummyMnist(data_dir=tmp_dir)
       self.assertEqual(builder.info.splits.total_num_examples, 40)
       self.assertFalse(self.compute_dynamic_property.called)
 
@@ -476,25 +483,25 @@ class BuilderRestoreGcsTest(testing.TestCase):
       self.assertTrue(self.compute_dynamic_property.called)
 
 
-class DatasetBuilderReadTest(testing.TestCase):
+class DatasetBuilderReadTest(tfds.testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderReadTest, cls).setUpClass()
-    cls._tfds_tmp_dir = testing.make_tmp_dir()
+    cls._tfds_tmp_dir = tfds.testing.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
 
   @classmethod
   def tearDownClass(cls):
     super(DatasetBuilderReadTest, cls).tearDownClass()
-    testing.rm_tmp_dir(cls._tfds_tmp_dir)
+    tfds.testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
     super(DatasetBuilderReadTest, self).setUp()
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_all_splits(self):
     splits = dataset_utils.as_numpy(
         self.builder.as_dataset(batch_size=-1))
@@ -511,7 +518,7 @@ class DatasetBuilderReadTest(testing.TestCase):
     self.assertEqual(10, len(test_data))
     self.assertEqual(sum(range(30)), int(train_data.sum() + test_data.sum()))
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_with_batch_size(self):
     items = list(dataset_utils.as_numpy(self.builder.as_dataset(
         split="train+test", batch_size=10)))
@@ -533,7 +540,7 @@ class DatasetBuilderReadTest(testing.TestCase):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
     self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_supervised_keys(self):
     x, _ = dataset_utils.as_numpy(self.builder.as_dataset(
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
@@ -639,12 +646,12 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
       yield i, {"frames": {"coordinates": ex}}
 
 
-class NestedSequenceBuilderTest(testing.TestCase):
+class NestedSequenceBuilderTest(tfds.testing.TestCase):
   """Test of the NestedSequenceBuilder."""
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_nested_sequence(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       ds_train, ds_info = registered.load(
           name="nested_sequence_builder",
           data_dir=tmp_dir,
@@ -682,4 +689,4 @@ class NestedSequenceBuilderTest(testing.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

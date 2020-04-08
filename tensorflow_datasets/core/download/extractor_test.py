@@ -24,7 +24,7 @@ import os
 
 from absl.testing import absltest
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
 
@@ -43,7 +43,7 @@ def _read(path):
     return f.read()
 
 
-class ExtractorTest(testing.TestCase):
+class ExtractorTest(tfds.testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -135,4 +135,4 @@ class ExtractorTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

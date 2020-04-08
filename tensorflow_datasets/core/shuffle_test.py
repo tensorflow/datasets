@@ -23,7 +23,7 @@ from __future__ import print_function
 import collections
 
 from absl.testing.absltest import mock
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import shuffle
 
 _ITEMS = [
@@ -65,7 +65,7 @@ _ORDERED_ITEMS_SPLIT2 = [
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
 
 
-class GetShardTest(testing.TestCase):
+class GetShardTest(tfds.testing.TestCase):
 
   @mock.patch.object(shuffle, 'HKEY_SIZE', 10)  # 1024 keys.
   def test_order(self):
@@ -83,7 +83,7 @@ class GetShardTest(testing.TestCase):
     self.assertEqual(len(set(counts.values())), 2)
 
 
-class ShuffleTest(testing.TestCase):
+class ShuffleTest(tfds.testing.TestCase):
 
   def _test_items(self, salt, expected_order):
     shuffler = shuffle.Shuffler(self.get_temp_dir(), salt)
@@ -131,4 +131,4 @@ class ShuffleTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

@@ -22,11 +22,10 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.features.text import text_encoder
 
-tf.enable_v2_behavior()
 
 DE_HELLO = "hallo "
 EN_HELLO = "hello "
@@ -39,7 +38,7 @@ FR_B = tf.compat.as_bytes("fr")
 ZH_B = tf.compat.as_bytes("zh")
 
 
-class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
+class TranslationFeatureTest(tfds.testing.FeatureExpectationsTestCase):
 
   def test_translation(self):
     self.assertFeature(
@@ -47,7 +46,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
         shape={"en": (), "zh": ()},
         dtype={"en": tf.string, "zh": tf.string},
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"en": EN_HELLO, "zh": ZH_HELLO},
                 expected={"en": tf.compat.as_bytes(EN_HELLO),
                           "zh": tf.compat.as_bytes(ZH_HELLO)}
@@ -64,7 +63,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
         shape={"en": (None,), "zh": (None,)},
         dtype={"en": tf.int64, "zh": tf.int64},
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"en": EN_HELLO, "zh": ZH_HELLO},
                 expected={
                     # Incremented for pad
@@ -85,7 +84,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
         shape={"en": (None,), "zh": (None,)},
         dtype={"en": tf.int64, "zh": tf.int64},
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"en": EN_HELLO, "zh": ZH_HELLO},
                 expected={
                     "en": [1],
@@ -97,7 +96,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
 
 
 class TranslationVariableLanguagesFeatureTest(
-    testing.FeatureExpectationsTestCase):
+    tfds.testing.FeatureExpectationsTestCase):
 
   def test_translation_variable_languages_nolist(self):
     self.assertFeature(
@@ -105,20 +104,20 @@ class TranslationVariableLanguagesFeatureTest(
         shape={"language": (None,), "translation": (None,)},
         dtype={"language": tf.string, "translation": tf.string},
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"en": EN_HELLO, "zh": ZH_HELLO},
                 expected={"language": [EN_B, ZH_B],
                           "translation": [tf.compat.as_bytes(EN_HELLO),
                                           tf.compat.as_bytes(ZH_HELLO)]}
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"fr": FR_HELLO, "de": DE_HELLO, "zh": ZH_HELLO},
                 expected={"language": [DE_B, FR_B, ZH_B],
                           "translation": [tf.compat.as_bytes(DE_HELLO),
                                           tf.compat.as_bytes(FR_HELLO),
                                           tf.compat.as_bytes(ZH_HELLO)]}
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"fr": [FR_HELLO, FR_HELLO[0:-1]],
                        "en": EN_HELLO},
                 expected={"language": [EN_B, FR_B, FR_B],
@@ -136,13 +135,13 @@ class TranslationVariableLanguagesFeatureTest(
         shape={"language": (None,), "translation": (None,)},
         dtype={"language": tf.string, "translation": tf.string},
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"en": EN_HELLO, "zh": ZH_HELLO},
                 expected={"language": [EN_B, ZH_B],
                           "translation": [tf.compat.as_bytes(EN_HELLO),
                                           tf.compat.as_bytes(ZH_HELLO)]}
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={"fr": FR_HELLO, "de": DE_HELLO, "zh": ZH_HELLO},
                 raise_cls=ValueError,
                 raise_msg="Some languages in example (fr) are not in valid set "
@@ -152,4 +151,4 @@ class TranslationVariableLanguagesFeatureTest(
     )
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

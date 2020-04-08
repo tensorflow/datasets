@@ -25,7 +25,7 @@ import os
 import apache_beam as beam
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -33,9 +33,6 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
-
-
-tf.enable_v2_behavior()
 
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
@@ -131,16 +128,16 @@ class FaultyS3DummyBeamDataset(DummyBeamDataset):
   VERSION = utils.Version("1.0.0")
 
 
-class BeamBasedBuilderTest(testing.TestCase):
+class BeamBasedBuilderTest(tfds.testing.TestCase):
 
   def test_download_prepare_raise(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyBeamDataset(data_dir=tmp_dir)
       with self.assertRaisesWithPredicateMatch(ValueError, "using Apache Beam"):
         builder.download_and_prepare()
 
   def _assertBeamGeneration(self, dl_config, dataset_cls, dataset_name):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = dataset_cls(data_dir=tmp_dir)
       builder.download_and_prepare(download_config=dl_config)
 
@@ -217,4 +214,4 @@ class BeamBasedBuilderTest(testing.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

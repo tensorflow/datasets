@@ -25,17 +25,15 @@ import os
 from absl.testing import parameterized
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features as features_lib
-
-tf.enable_v2_behavior()
 
 
 randint = np.random.randint
 
 
 class ImageFeatureTest(
-    testing.FeatureExpectationsTestCase, parameterized.TestCase):
+    tfds.testing.FeatureExpectationsTestCase, parameterized.TestCase):
 
   @parameterized.parameters(tf.uint8, tf.uint16)
   def test_images(self, dtype):
@@ -57,34 +55,34 @@ class ImageFeatureTest(
         dtype=dtype,
         tests=[
             # Numpy array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=img,
                 expected=img,
             ),
             # File path
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=img_file_path,
                 expected=img_file_expected_content,
             ),
             # 'img' shape can be dynamic
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=img_other_shape,
                 expected=img_other_shape,
             ),
             # Invalid type
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128, 3), dtype=np.uint32),
                 raise_cls=ValueError,
                 raise_msg='dtype should be',
             ),
             # Invalid number of dimensions
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128), dtype=np_dtype),
                 raise_cls=ValueError,
                 raise_msg='must have the same rank',
             ),
             # Invalid number of channels
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128, 1), dtype=np_dtype),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
@@ -102,12 +100,12 @@ class ImageFeatureTest(
         shape=(32, 64, 3),
         dtype=tf.uint8,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=img_shaped,
                 expected=img_shaped,
             ),
             # 'img_shaped' shape should be static
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=randint(256, size=(31, 64, 3), dtype=np.uint8),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
@@ -117,4 +115,4 @@ class ImageFeatureTest(
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

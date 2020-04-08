@@ -67,4 +67,4 @@ class GetReadInstructionsTest(testing.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

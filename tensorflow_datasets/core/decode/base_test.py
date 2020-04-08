@@ -22,7 +22,7 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import decode as decode_lib
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
@@ -32,7 +32,7 @@ tf.enable_v2_behavior()
 randint = np.random.randint
 
 
-class BaseDecodeTest(testing.FeatureExpectationsTestCase):
+class BaseDecodeTest(tfds.testing.FeatureExpectationsTestCase):
 
   def test_image_custom_decode(self):
 
@@ -70,19 +70,19 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
         shape=(30, 60, 3),
         dtype=tf.uint8,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=img_shaped,
                 expected=img_cropped,
                 shape=(13, 10, 3),  # Shape is cropped
                 decoders=DecodeCrop(),
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=img_shaped,
                 expected=img_cropped,
                 shape=(13, 10, 3),  # Shape is cropped
                 decoders=decode_crop(),  # pylint: disable=no-value-for-parameter
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=image_path,
                 expected=serialized_img,
                 shape=(),
@@ -104,7 +104,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
         shape=(None, 30, 60, 3),
         dtype=tf.uint8,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=[image_path] * 15,  # 15 frames of video
                 expected=[serialized_img] * 15,  # Non-decoded image
                 shape=(15,),
@@ -130,7 +130,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
             'label': tf.int64,
         },
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 decoders={
                     'image': decode_lib.SkipDecoding(),
                 },
@@ -156,4 +156,4 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

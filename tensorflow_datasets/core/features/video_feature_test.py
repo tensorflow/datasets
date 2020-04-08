@@ -24,13 +24,11 @@ import json
 import os.path
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features
 
-tf.enable_v2_behavior()
 
-
-class VideoFeatureTest(testing.FeatureExpectationsTestCase):
+class VideoFeatureTest(tfds.testing.FeatureExpectationsTestCase):
 
   @property
   def _test_data_path(self):
@@ -44,7 +42,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(None, 64, 64, 3),
         dtype=tf.uint8,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np_video,
                 expected=np_video,
             ),
@@ -68,7 +66,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
         dtype=tf.uint8,
         tests=[
             # Numpy array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=frames_paths,
                 expected=video,
             ),
@@ -86,7 +84,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(5, 4, 2, 3),
         dtype=tf.uint8,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=video_path,
                 expected=video_array,
             ),
@@ -98,7 +96,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(5, 4, 2, 3),
         dtype=tf.uint8,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=video_path,
                 expected=video_array,
             ),
@@ -118,7 +116,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
           shape=(5, 4, 2, 3),
           dtype=tf.uint8,
           tests=[
-              testing.FeatureExpectationItem(
+              tfds.testing.FeatureExpectationItem(
                   value=video_fp,
                   expected=video_array,
               ),
@@ -127,4 +125,4 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

@@ -22,14 +22,12 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.features.text import text_encoder
 
-tf.enable_v2_behavior()
 
-
-class TextFeatureTest(testing.FeatureExpectationsTestCase):
+class TextFeatureTest(tfds.testing.FeatureExpectationsTestCase):
 
   def test_text(self):
     nonunicode_text = 'hello world'
@@ -41,17 +39,17 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
         dtype=tf.string,
         tests=[
             # Non-unicode
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=nonunicode_text,
                 expected=tf.compat.as_bytes(nonunicode_text),
             ),
             # Unicode
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=unicode_text,
                 expected=tf.compat.as_bytes(unicode_text),
             ),
             # Empty string
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value='',
                 expected=tf.compat.as_bytes(''),
             ),
@@ -67,12 +65,12 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.int64,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=unicode_text,
                 expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]],
             ),
             # Empty string
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value='',
                 expected=[],
             ),
@@ -91,7 +89,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
     ids = text_f.str2ints(text)
     self.assertEqual(1, ids[0])
 
-    with testing.tmp_dir(self.get_temp_dir()) as data_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as data_dir:
       feature_name = 'dummy'
       text_f.save_metadata(data_dir, feature_name)
 
@@ -101,4 +99,4 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

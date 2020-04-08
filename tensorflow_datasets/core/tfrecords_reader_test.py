@@ -30,7 +30,7 @@ import six
 import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets as tfds
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfd
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
@@ -42,7 +42,7 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 _SKIP_CARDINALITY_TEST = not hasattr(tf.data.experimental, 'assert_cardinality')
 
 
-class GetDatasetFilesTest(testing.TestCase):
+class GetDatasetFilesTest(tfd.testing.TestCase):
 
   NAME2SHARD_LENGTHS = {
       'train': [3, 2, 3, 2, 3],  # 13 examples.
@@ -131,7 +131,7 @@ class GetDatasetFilesTest(testing.TestCase):
       tfrecords_reader.make_file_instructions('mnist', split_info, 'train')
 
 
-class ReadInstructionTest(testing.TestCase):
+class ReadInstructionTest(tfd.testing.TestCase):
 
   def setUp(self):
     super(ReadInstructionTest, self).setUp()
@@ -269,7 +269,7 @@ class ReadInstructionTest(testing.TestCase):
       ri.to_absolute(self.splits)
 
 
-class ReaderTest(testing.TestCase):
+class ReaderTest(tfd.testing.TestCase):
 
   SPLIT_INFOS = [
       splits.SplitInfo(name='train', shard_lengths=[2, 3, 2, 3, 2]),  # 12 ex.
@@ -279,7 +279,7 @@ class ReaderTest(testing.TestCase):
   def setUp(self):
     super(ReaderTest, self).setUp()
     with absltest.mock.patch.object(example_parser,
-                                    'ExampleParser', testing.DummyParser):
+                                    'ExampleParser', tfd.testing.DummyParser):
       self.reader = tfrecords_reader.Reader(self.tmp_dir, 'some_spec')
       self.reader.read = functools.partial(
           self.reader.read,
@@ -417,4 +417,4 @@ class ReaderTest(testing.TestCase):
     self.assertEqual(read_data, [six.b(l) for l in 'defk'])
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfd.testing.test_main()

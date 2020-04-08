@@ -19,11 +19,11 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import version
 
 
-class VersionTest(testing.TestCase):
+class VersionTest(tfds.testing.TestCase):
 
   def test_str_to_version(self):
     self.assertEqual(version._str_to_version('1.2.3'), (1, 2, 3))
@@ -134,4 +134,4 @@ class VersionTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()
