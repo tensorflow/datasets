@@ -113,11 +113,8 @@ class DatasetBuilderTest(tfds.testing.TestCase):
         data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
     cls.builder.download_and_prepare()
 
-<<<<<<< HEAD
-  @testing.run_in_graph_and_eager_modes()
-=======
+    
   @tfds.testing.run_in_graph_and_eager_modes()
->>>>>>> 0292d9d4... update tests to use tfds.testing in tfds/core
   def test_load(self):
     with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       dataset = registered.load(
@@ -193,11 +190,7 @@ class DatasetBuilderTest(tfds.testing.TestCase):
     self.assertEqual(10, len(data))
 
   def test_build_data_dir(self):
-<<<<<<< HEAD
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-=======
     with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
->>>>>>> 0292d9d4... update tests to use tfds.testing in tfds/core
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       self.assertEqual(str(builder.info.version), "1.0.0")
       builder_data_dir = os.path.join(tmp_dir, builder.name)
