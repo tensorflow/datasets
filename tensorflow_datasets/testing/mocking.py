@@ -101,7 +101,7 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
           'You should copy the real metadata files, so that the dataset '
           'can be loaded properly, or set the data_dir kwarg of'
           'tfds.testing.mock_tfds(data_dir=...).'
-          ''.format(self._data_dir)  # pylint: disable=protected-access
+          ''.format(self._data_dir, n=self.name)  # pylint: disable=protected-access
       )
 
   def mock_as_dataset(self, *args, **kwargs):
