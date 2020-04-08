@@ -5,9 +5,49 @@ from __future__ import print_function
 
 import random
 
+from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
+
+def _make_audio_grid(ds, samplerate, rows, cols, plot_scale):
+  """Plot the waveforms and IPython objects of some samples of the argument audio dataset
+
+  Args:
+    ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize.
+    samplerate : Inferred samplerate of the dataset.
+    rows: `int`, number of rows of the display grid.
+    cols: `int`, number of columns of the display grid.
+    plot_scale: `float`, controls the plot size of the images. Keep this
+      value around 3 to get a good plot. High and low values may cause
+      the labels to get overlapped.
+
+  Returns:
+    fig: Waveform figure to display. IPython objects are not returned. 
+  """
+  
+  import IPython.display as ipd
+  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+ 
+  num_examples = rows * cols
+  examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+
+  fig = plt.figure(figsize=(plot_scale * cols, plot_scale * rows))
+  fig.subplots_adjust(hspace=1 / plot_scale, wspace=1 / plot_scale)
+  
+  t1 = 0
+  t2 = 100 * 1000
+
+  for i, ex in enumerate(examples):
+    ax = fig.add_subplot(rows, cols, i+1)
+    ax.plot(ex[key])
+    audio = ex['audio']
+    newAudio = audio[t1:t2]
+    ipd.display(ipd.Audio(newAudio, rate=samplerate))
+
+
+  plt.show()
+  return fig
 
 
 class AudioGridVisualizer(visualizer.Visualizer):
@@ -31,39 +71,26 @@ class AudioGridVisualizer(visualizer.Visualizer):
       Args:
         ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
         ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize.
-        rows: `int`, number of rows of the display grid : Default is 2.Does not
-        support user defined input as of now.
-        cols: `int`, number of columns of the display grid : Default is 2.Does
-        not support user defined input as of now.
-        plot_scale: `float`, controls the plot size of the images. Not used for
-        audio grid plots.
+        rows: `int`, number of rows of the display grid : Default is 2.
+        cols: `int`, number of columns of the display grid : Default is 2.
+        plot_scale: `float`, controls the plot size of the images. Keep this
+        value around 3 to get a good plot. High and low values may cause
+        the labels to get overlapped.
         audio_key: `string`, name of the feature that contains the audio. If not
           set, the system will try to auto-detect it.
       """
-    import IPython.display as ipd
+    
+    
     if not audio_key:
       #Auto inferring the audio key
       audio_keys = visualizer.extract_keys(ds_info.features, features_lib.Audio)
     key = audio_keys[0]
-    audio_samples = []
-
-    samplerate = 16000
-    for features in ds:
-      audio_samples.append(features[key].numpy())
-    to_gen = []
-    for _ in range(4):
-      value = random.randint(0, len(audio_samples))
-      to_gen.append(audio_samples[value])
-    t1 = 0
-    t2 = 100 * 1000
-    for audio in to_gen:
-      audio = audio[t1:t2]
-      ipd.display(ipd.Audio(audio, rate=samplerate))
-    plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-    fig, a = plt.subplots(2, 2)
-    a[0][0].plot(to_gen[0])
-    a[0][1].plot(to_gen[1])
-    a[1][0].plot(to_gen[2])
-    a[1][1].plot(to_gen[3])
-    plt.show()
-    return fig
+    
+    # Identifying the sample rate  If None - 16000KHz is used as default
+    samplerate = ds_info.features[key].sample_rate
+    if not samplerate:
+      samplerate = 16000
+      
+    fig = _make_audio_grid(ds, samplerate, rows, cols, plot_scale)
+      
+      
