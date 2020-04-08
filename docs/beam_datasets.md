@@ -51,7 +51,8 @@ variables using the actual values for your GCP/GCS setup and the dataset you
 want to generate:
 
 ```sh
-DATASET_NAME=<dataset>/<dataset-config>
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
 GCP_PROJECT=my-project-id
 GCS_BUCKET=gs://my-gcs-bucket
 ```
@@ -67,7 +68,7 @@ Finally, you can launch the job using the command below:
 
 ```sh
 python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=$DATASET_NAME \
+  --datasets=$DATASET_NAME/$DATASET_CONFIG \
   --data_dir=$GCS_BUCKET/tensorflow_datasets \
   --beam_pipeline_options=\
 "runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\
