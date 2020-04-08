@@ -49,7 +49,7 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
   Usage (automated):
 
   ```
-  with mock_data(num_examples=5):
+  with tfds.testing.mock_data(num_examples=5):
     ds = tfds.load('some_dataset', split='train')
 
     for ex in ds:  # ds will yield randomly generated examples.
