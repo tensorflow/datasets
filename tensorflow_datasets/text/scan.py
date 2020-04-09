@@ -57,8 +57,16 @@ compositional learning and zero-shot generalization.
 Most splits are described at https://github.com/brendenlake/SCAN. For the MCD
 splits please see https://arxiv.org/abs/1912.09713.pdf.
 
-Example usage:
+Basic usage:
 data = tfds.load('scan/length')
+
+More advanced example:
+from tensorflow_datasets.text import scan
+data = tfds.load(
+    'scan',
+    builder_kwargs=dict(
+        config=scan.ScanConfig(
+            name='simple_p8', directory='simple_split/size_variations')))
 """
 
 _DATA_URL = 'https://github.com/brendenlake/SCAN/archive/master.zip'
@@ -67,26 +75,38 @@ _MCD_SPLITS_URL = (
 
 
 class ScanConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for SCAN."""
+  """BuilderConfig for SCAN.
+
+  Splits can be read in two formats:
+  1) As a pair of train and test files where each file contains one example
+     input and output per line.
+  2) With a 'splitfile' which contains for each split the indices into the full
+     (unsplit) dataset.
+  """
 
   @tfds.core.disallow_positional_args
-  def __init__(self, name, directory=None, **kwargs):
+  def __init__(self, name, directory=None, splitfile=None, **kwargs):
     """BuilderConfig for SCAN.
 
     Args:
       name: Unique name of the split.
-      directory: Which subdirectory to read the split from.
+      directory: Which subdirectory to read the data files from.
+      splitfile: If set the samples are read from the original archive
+        (tasks.txt) but the splits are created using this index file.
       **kwargs: keyword arguments forwarded to super.
     """
     # Version history:
     super(ScanConfig, self).__init__(
         name=name,
-        version=tfds.core.Version('1.1.0'),
+        version=tfds.core.Version('1.1.1'),
         description=_DESCRIPTION,
         **kwargs)
+    self.splitfile = splitfile
     if 'mcd' in name:
-      directory = ''
-    if directory is None:
+      self.splitfile = name + '.json'
+    if self.splitfile and directory is None:
+      self.directory = ''
+    elif directory is None:
       self.directory = name + '_split'
     else:
       self.directory = directory
@@ -141,12 +161,15 @@ class Scan(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(data_dir, 'SCAN-master',
                             self.builder_config.directory)
     split = self.builder_config.name
+    splitfile = self.builder_config.splitfile
     if 'mcd' in split:
       split_dir = dl_manager.download_and_extract(_MCD_SPLITS_URL)
       split_dir = os.path.join(split_dir, 'scan-splits')
+      splitfile = os.path.join(split_dir, splitfile)
+    if splitfile:
       kwargs = {
           'datapath': os.path.join(data_dir, 'tasks.txt'),
-          'splitpath': os.path.join(split_dir, split + '.json')
+          'splitpath': splitfile
       }
       train_kwargs = kwargs.copy()
       train_kwargs['splitname'] = 'train'
