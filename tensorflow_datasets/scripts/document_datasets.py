@@ -27,12 +27,24 @@ from __future__ import print_function
 
 import collections
 from concurrent import futures
+import os
+import re
 
 from absl import app
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import py_utils
+
+# Regex matching 'dataset/config/1.3.0'
+_FULL_NAME_REG = re.compile(
+    r"^"
+    r"(?P<ds_name>\w+)"
+    r"(/(?P<config>[\w\-\.]+))?"
+    r"(/(?P<version>(\d+|\*)(\.(\d+|\*)){2}))"
+    r"$")
+
+_TFDS_NIGHTLY_DATASETS = None
 
 WORKER_COUNT_DATASETS = 200
 WORKER_COUNT_CONFIGS = 50
@@ -63,6 +75,7 @@ def get_mako_template(tmpl_name):
 def document_single_builder(builder):
   """Doc string for a single builder, with or without configs."""
   print("Document builder %s..." % builder.name)
+  _TFDS_NIGHTLY_DATASETS = _get_nightly_datasets()
   get_config_builder = lambda config: tfds.builder(builder.name, config=config)
   config_builders = []
   if builder.builder_configs:
@@ -73,6 +86,7 @@ def document_single_builder(builder):
   out_str = tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
+      nightly_ds = _TFDS_NIGHTLY_DATASETS[builder.name],
   ).strip()
   schema_org_tmpl = get_mako_template("schema_org")
   schema_org_out_str = schema_org_tmpl.render_unicode(
@@ -115,6 +129,25 @@ def make_module_to_builder_dict(datasets=None):
   module_to_builder = module_to_builder["tensorflow_datasets"]
   return module_to_builder
 
+def _get_nightly_datasets():
+  """Read stable_versions.txt and organized the new datasets in nested dicts."""
+  version_path = os.path.join(tfds.core.utils.tfds_dir(),
+                              'stable_versions.txt')
+  with tf.io.gfile.GFile(version_path, 'r') as f:
+    stable_version_datasets = f.read().splitlines() 
+  registered_names = tfds.core.registered.list_full_names()
+  nightly_datasets = set(registered_names) - set(stable_version_datasets)
+  
+  datasets = collections.defaultdict(lambda: collections.defaultdict(set))
+  for name in nightly_datasets:
+    res = _FULL_NAME_REG.match(name)
+    ds_name = res.group("ds_name")
+    config = res.group("config")
+    version = res.group("version")
+    datasets[ds_name]["version"].add(version)
+    datasets[ds_name]["config"].add(config)
+
+  return datasets
 
 def dataset_docs_str(datasets=None):
   """Create dataset documentation string for given datasets.

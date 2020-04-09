@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-r"""Dump the list of all registered datasets/config/version in a `.txt` file.
+r"""Generate doc for datasets.
 
 Instructions:
 
@@ -40,7 +40,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 
-DATASET_TO_TESTS = ['waymo_open_dataset'] 
+DATASET_TO_TESTS = ['scientific_papers', 'waymo_open_dataset'] 
 
 def version_doc(ds_name):
   builder = tfds.builder(ds_name)

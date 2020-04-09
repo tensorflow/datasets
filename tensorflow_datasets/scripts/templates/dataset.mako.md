@@ -47,7 +47,8 @@ def list_versions(builder):
       version_name = '**`{}`** (default)'.format(str(v))
     else:
       version_name = '`{}`'.format(str(v))
-    yield '{}: {}'.format(version_name, v.description or 'No release notes.')
+    nightly = '(tfds-nightly)' if str(v) in nightly_ds["version"] else ''
+    yield '{} {}: {}'.format(nightly, version_name, v.description or 'No release notes.')
 %>\
 *   **Versions**:
 % for version_str in list_versions(builder):
@@ -258,8 +259,9 @@ ${display_builder(next(iter(builders)), common_sections)}
 % for i, builder in enumerate(builders):
 <%
 header_suffix = '(default config)' if i == 0 else ''
+nightly = '(tfds-nightly)' if builder.builder_config.name in nightly_ds["config"] else ''
 %>\
-${'##'} ${builder.name}/${builder.builder_config.name} ${header_suffix}
+${'##'} ${nightly} ${builder.name}/${builder.builder_config.name} ${header_suffix}
 
 ${display_builder(builder, unique_sections)}
 % endfor
@@ -268,6 +270,10 @@ ${display_builder(builder, unique_sections)}
 ## --------------------------- Main page ---------------------------
 
 ${'#'} `${builder.name}`
+
+% if nightly_ds:
+Note: This dataset is available only in our nightly package `tfds-nightly`.
+% endif
 
 %if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
 Warning: Manual download required. See instructions below.

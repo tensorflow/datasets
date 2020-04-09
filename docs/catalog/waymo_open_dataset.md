@@ -10,25 +10,28 @@
 </div>
 # `waymo_open_dataset`
 
+Note: This dataset is available only in our nightly package `tfds-nightly`.
+
+
 *   **Description**:
 
-The Waymo Open Dataset is comprised of high resolution sensor data collected by
-Waymo self-driving cars in a wide variety of conditions. This data is licensed
-for non-commercial use.
+The Waymo Open Dataset is comprised of high resolution sensor data
+collected by Waymo self-driving cars in a wide variety of conditions.
+This data is licensed for non-commercial use.
 
-WARNING: this dataset requires additional authorization and registration. Please
-look at tfds documentation for accessing GCS, and afterwards, please register
-via https://waymo.com/open/licensing/
+WARNING: this dataset requires additional authorization and registration.
+Please look at tfds documentation for accessing GCS, and
+afterwards, please register via https://waymo.com/open/licensing/
 
-This dataset is also available in pre-processed format, making it faster to
-load, if you select the correct data_dir: tfds.load('waymo_open_dataset',
-data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
+This dataset is also available in pre-processed format, making it faster
+to load, if you select the correct data_dir:
+tfds.load('waymo_open_dataset', data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
 
 *   **Homepage**: [http://www.waymo.com/open/](http://www.waymo.com/open/)
 *   **Source code**:
     [`tfds.object_detection.waymo_open_dataset.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
 *   **Versions**:
-    *   **`0.1.0`** (default): No release notes.
+    * (tfds-nightly) **`0.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `34.73 GiB`
 *   **Auto-cached**
@@ -36,9 +39,9 @@ data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
     No
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 14,884
+Split  | Examples
+:----- | -------:
+'train' | 14,884
 'validation' | 4,954
 
 *   **Features**:

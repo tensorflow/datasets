@@ -10,23 +10,27 @@
 </div>
 # `scientific_papers`
 
+Note: This dataset is available only in our nightly package `tfds-nightly`.
+
+
+
+
 *   **Description**:
 
 Scientific papers datasets contains two sets of long and structured documents.
 The datasets are obtained from ArXiv and PubMed OpenAccess repositories.
 
-Both "arxiv" and "pubmed" have two features: - article: the body of the
-document, pagragraphs seperated by "/n". - abstract: the abstract of the
-document, pagragraphs seperated by "/n". - section_names: titles of sections,
-seperated by "/n".
+Both "arxiv" and "pubmed" have two features:
+  - article: the body of the document, pagragraphs seperated by "/n".
+  - abstract: the abstract of the document, pagragraphs seperated by "/n".
+  - section_names: titles of sections, seperated by "/n".
 
-*   **Homepage**:
-    [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
+*   **Homepage**: [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 *   **Source code**:
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 *   **Versions**:
-    *   **`1.1.1`** (default): No release notes.
-    *   `1.1.0`: No release notes.
+    * (tfds-nightly) **`1.1.1`** (default): No release notes.
+    * `1.1.0`: No release notes.
 *   **Download size**: `4.20 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -60,26 +64,28 @@ FeaturesDict({
 }
 ```
 
-## scientific_papers/arxiv (default config)
+
+## (tfds-nightly) scientific_papers/arxiv (default config)
 
 *   **Config description**: Documents from ArXiv repository.
 *   **Dataset size**: `7.07 GiB`
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,440
-'train'      | 203,037
+Split  | Examples
+:----- | -------:
+'test' | 6,440
+'train' | 203,037
 'validation' | 6,436
 
-## scientific_papers/pubmed
+
+## (tfds-nightly) scientific_papers/pubmed 
 
 *   **Config description**: Documents from PubMed repository.
 *   **Dataset size**: `2.34 GiB`
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,658
-'train'      | 119,924
+Split  | Examples
+:----- | -------:
+'test' | 6,658
+'train' | 119,924
 'validation' | 6,633
