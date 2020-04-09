@@ -19,6 +19,7 @@ from __future__ import print_function
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
+from tensorflow_datasets.core import utils
 import numpy as np
 import os
 import io
@@ -299,21 +300,21 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "archive": archiveUtils,
-                "split": annParser.annTrain,
+                "split": annParser.ann['train'],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "archive": archiveUtils,
-                "split": annParser.annVal,
+                "split": annParser.ann['validation'],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "archive": archiveUtils,
-                "split": annParser.annTest,
+                "split": annParser.ann['test'],
             },
         ),
     ]
@@ -395,18 +396,15 @@ class ArchiveUtils():
 
   Attributes:
     path: `dict`, paths of archives
-    _lut: `dict`, hash table to lookup file path in archives
+    lookup_table: `dict`, hash table to lookup file path in archives
   """
   def __init__(self, path):
     """Inits ArchiveUtils with paths of archives"""
     self.path = path
-    self._lut = None
 
-  @property
-  def lut(self):
-    if not self._lut:
-      self._build_lut()
-    return self._lut
+  @utils.memoized_property
+  def lookup_table(self):
+    return self._build_lut()
 
   def extract_image(self, fileName):
     """Returns a file object according to the fileName
@@ -418,10 +416,10 @@ class ArchiveUtils():
       a file object of the fileName
     """
     fileNameUtil = FileNameUtils(fileName)
-    archive = self.lut[fileNameUtil.seriesFolder]
-    with ZipFile(archive, 'r') as zip:
+    archive = tf.io.gfile.GFile(self.lookup_table[fileNameUtil.seriesFolder], 'rb')
+    with ZipFile(archive, 'r') as zipfile:
       fpath = os.path.join('Images_png', fileNameUtil.filePath)
-      fObj = io.BytesIO(zip.read(fpath))
+      fObj = io.BytesIO(zipfile.read(fpath))
     return fObj
 
   def extract_images(self, fileNames):
@@ -430,19 +428,20 @@ class ArchiveUtils():
     fObj = []
     for fname in fileNames:
       fObj.append(self.extract_image(fname))
-    return fObj
+    return [self.extract_image(fname) for fname in fileNames]
 
   def _build_lut(self):
     """create a hash table to lookup path of an archive using seriesFolder.
     """
     lut = {}
     for k, v in self.path.items():  # k:v, <zipfile#>:<path of the zipfile>
-      with ZipFile(v, 'r') as zip:
-        for name in zip.namelist(
-        ):  # name, "Image_pngs/<seriesFolder>/<xxx>.png"
+      archive = tf.io.gfile.GFile(v, 'rb')
+      with ZipFile(archive, 'r') as zipfile:
+        for name in zipfile.namelist():  
+          # name has a format as "Image_pngs/<seriesFolder>/<xxx>.png"
           seriesFolder = name.split('/')[1]
           lut[seriesFolder] = v
-    self._lut = lut
+    return lut
 
 
 class FileNameUtils():
@@ -450,49 +449,31 @@ class FileNameUtils():
 
   Attributes:
     fileName: `str`, "<seriesFolder>_<%03d>.png"
-    _seriesFolder: `str`, "<seriesFolder>"
-    _sliceIdx: `int`, d
-    _sliceFileName: `str`, "<%03d>.png"
-    _filePath: `str`, "<seriesFolder>/<%03d>.png"
+    seriesFolder: `str`, "<seriesFolder>"
+    sliceIdx: `int`, d
+    sliceFileName: `str`, "<%03d>.png"
+    filePath: `str`, "<seriesFolder>/<%03d>.png"
   """
   def __init__(self, fileName):
     """Inits with a fileName"""
     self.fileName = fileName
-    self._seriesFolder = None
-    self._sliceIdx = None
-    self._sliceFileName = None
-    self._filePath = None
 
-  @property
+  @utils.memoized_property
   def seriesFolder(self):
-    if not self._seriesFolder:
-      self._parse_fname()
-    return self._seriesFolder
+    return '_'.join(self.fileName.split('_')[:-1])
 
-  @property
+  @utils.memoized_property
   def sliceIdx(self):
-    if not self._sliceIdx:
-      self._parse_fname()
-    return self._sliceIdx
+    return int(self.fileName.split('_')[-1][:-4])
 
-  @property
+  @utils.memoized_property
   def sliceFileName(self):
-    if not self._sliceFileName:
-      self._sliceFileName = '%03d.png' % self.sliceIdx
-    return self._sliceFileName
+    return '%03d.png' % self.sliceIdx
 
-  @property
+  @utils.memoized_property
   def filePath(self):
-    if not self._filePath:
-      self._filePath = os.path.join(self.seriesFolder,
-                                    self.sliceFileName)
-    return self._filePath
+    return os.path.join(self.seriesFolder, self.sliceFileName)
 
-  def _parse_fname(self):
-    """Parses fileName into _seriesFolder and _sliceIdx
-    """
-    self._sliceIdx = int(self.fileName.split('_')[-1][:-4])
-    self._seriesFolder = '_'.join(self.fileName.split('_')[:-1])
 
   def get_fname(self, sliceIdx):
     """Returns a fileName in annotated format
@@ -524,58 +505,26 @@ class AnnParser():
   Attributes:
     ann_path: `str`, path of the annotation file
     config: `tfds.core.BuilderConfig`, builder_config
-    _annTrain: `pandas.Dataframe`, annotations of train split
-    _annVal: `pandas.Dataframe`, annotations of validation split
-    _annTest: `pandas.Dataframe`, annotations of test split
+    ann: `dict`, <split>:`pandas.Dataframe`, parsed annotation
   """
   def __init__(self, ann_path, config=None):
     """Inits with path of the annotation file
     """
     self.ann_path = ann_path
     self.config = config
-    self._annTrain = None
-    self._annVal = None
-    self._annTest = None
-
-  @property
-  def annTrain(self):
-    if self._annTrain is None:
-      self._ann_parser()
+  
+  @utils.memoized_property
+  def ann(self):
+    _ann = self._ann_parser()
     if self.config.name == 'normal':
-      normal_ann = self._create_ann_for_normals(self._annTrain)
-      ann = normal_ann
-    else:
-      ann = self._annTrain
-
-    return ann.sample(frac=1, random_state=42)
-
-  @property
-  def annVal(self):
-    if self._annVal is None:
-      self._ann_parser()
-    if self.config.name == 'normal':
-      normal_ann = self._create_ann_for_normals(self._annVal)
-      ann = normal_ann
-    else:
-      ann = self._annVal
-
-    return ann.sample(frac=1, random_state=42)
-
-  @property
-  def annTest(self):
-    if self._annTest is None:
-      self._ann_parser()
-    if self.config.name == 'normal':
-      normal_ann = self._create_ann_for_normals(self._annTest)
-      ann = normal_ann
-    else:
-      ann = self._annTest
-
-    return ann.sample(frac=1, random_state=42)
-
+      _ann = {'train': self._create_ann_for_normals(_ann['train']),
+              'validation': self._create_ann_for_normals(_ann['validation']),
+              'test': self._create_ann_for_normals(_ann['test']),
+             }
+    return _ann
 
   def _ann_parser(self):
-    """Generates annotions of three splits
+    """Returns annotions of three splits
 
       cleanup the annotations,
       group the annotations by File_name,
@@ -635,9 +584,10 @@ class AnnParser():
       df_new = df_new.drop_duplicates("File_name")
 
       # split
-      self._annTrain = df_new[df_new['Train_Val_Test'] == 1]
-      self._annVal = df_new[df_new['Train_Val_Test'] == 2]
-      self._annTest = df_new[df_new['Train_Val_Test'] == 3]
+      return {'train': df_new[df_new['Train_Val_Test'] == 1],
+              'validation': df_new[df_new['Train_Val_Test'] == 2],
+              'test': df_new[df_new['Train_Val_Test'] == 3]
+             }
 
   def _create_ann_for_normals(self, ann):
     """Returns new created dataframe of normal scans
@@ -783,11 +733,5 @@ def _format_values(val, n, e_type):
   Returns
     a list of tuples of e_type values
   """
-  def _divide_chunks(l, n):
-    """Yield successive n-sized chunks from l.
-    """
-    for i in range(0, len(l), n):
-      yield tuple(l[i:i + n])
-
   lst = [e_type(float(x)) for x in val.split(',')]
-  return list(_divide_chunks(lst, n))
+  return [lst[i:i+n] for i in range(0, len(lst), n)]
