@@ -42,17 +42,15 @@ flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
 
 DATASET_TO_TESTS = ['scientific_papers', 'waymo_open_dataset'] 
 
-def version_doc(ds_name):
-  builder = tfds.builder(ds_name)
+def main(_):
   version_path = os.path.join(FLAGS.tfds_dir, 'stable_versions.txt')
   catalog_dir = tfds.core.get_tfds_path('../docs/catalog/')
-  with tf.io.gfile.GFile(os.path.join(catalog_dir, ds_name + ".md"), 'w') as f:
-    doc_builder = document_single_builder(builder)
-    f.write(doc_builder)
 
-def main(_):
-  for name in DATASET_TO_TESTS:
-    version_doc(name)
+  for ds_name in DATASET_TO_TESTS:
+    builder = tfds.builder(ds_name)
+    with tf.io.gfile.GFile(os.path.join(catalog_dir, ds_name + ".md"), 'w') as f:
+      doc_builder = document_single_builder(builder)
+      f.write(doc_builder)
 
 if __name__ == '__main__':
   app.run(main)
