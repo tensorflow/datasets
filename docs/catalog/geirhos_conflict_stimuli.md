@@ -3,10 +3,10 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="geirhos_conflict_stimuli" />
-  <meta itemprop="description" content="Shape/texture conflict stimuli from &quot;ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness.&quot;&#10;&#10;Note that, although the dataset source contains images with matching shape and&#10;texture and we include them here, they are ignored for most evaluations in the&#10;original paper.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;geirhos_conflict_stimuli&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Shape/texture conflict stimuli from &quot;ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness.&quot;&#10;&#10;Note that, although the dataset source contains images with matching shape and&#10;texture and we include them here, they are ignored for most evaluations in the&#10;original paper.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;geirhos_conflict_stimuli&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/geirhos_conflict_stimuli" />
   <meta itemprop="sameAs" content="https://github.com/rgeirhos/texture-vs-shape" />
-  <meta itemprop="citation" content="@inproceedings{&#10;  geirhos2018imagenettrained,&#10;  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape&#10;         bias improves accuracy and robustness.},&#10;  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and&#10;          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},&#10;  booktitle={International Conference on Learning Representations},&#10;  year={2019},&#10;  url={https://openreview.net/forum?id=Bygh9j09KX},&#10;}&#10;" />
+  <meta itemprop="citation" content="@inproceedings{&#10;  geirhos2018imagenettrained,&#10;  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape&#10;         bias improves accuracy and robustness.},&#10;  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and&#10;          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},&#10;  booktitle={International Conference on Learning Representations},&#10;  year={2019},&#10;  url={https://openreview.net/forum?id=Bygh9j09KX},&#10;}" />
 </div>
 # `geirhos_conflict_stimuli`
 
@@ -22,7 +22,7 @@ original paper.
 *   **Homepage**:
     [https://github.com/rgeirhos/texture-vs-shape](https://github.com/rgeirhos/texture-vs-shape)
 *   **Source code**:
-    [`tfds.image.geirhos_conflict_stimuli.GeirhosConflictStimuli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/geirhos_conflict_stimuli.py)
+    [`tfds.image_classification.geirhos_conflict_stimuli.GeirhosConflictStimuli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/geirhos_conflict_stimuli.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `153.96 MiB`

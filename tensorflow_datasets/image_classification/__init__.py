@@ -75,6 +75,7 @@ from tensorflow_datasets.image_classification.smallnorb import Smallnorb
 from tensorflow_datasets.image_classification.so2sat import So2sat
 from tensorflow_datasets.image_classification.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image_classification.stanford_online_products import StanfordOnlineProducts
+from tensorflow_datasets.image_classification.stl10 import Stl10
 from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced

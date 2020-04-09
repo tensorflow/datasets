@@ -6,7 +6,7 @@
   <meta itemprop="description" content="The MNIST database of handwritten digits.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;mnist&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/mnist" />
   <meta itemprop="sameAs" content="http://yann.lecun.com/exdb/mnist/" />
-  <meta itemprop="citation" content="@article{lecun2010mnist,&#10;  title={MNIST handwritten digit database},&#10;  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},&#10;  journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},&#10;  volume={2},&#10;  year={2010}&#10;}&#10;" />
+  <meta itemprop="citation" content="@article{lecun2010mnist,&#10;  title={MNIST handwritten digit database},&#10;  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},&#10;  journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},&#10;  volume={2},&#10;  year={2010}&#10;}" />
 </div>
 # `mnist`
 
@@ -17,7 +17,7 @@ The MNIST database of handwritten digits.
 *   **Homepage**:
     [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 *   **Source code**:
-    [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+    [`tfds.image_classification.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
 *   **Versions**:
     *   **`3.0.1`** (default): No release notes.
 *   **Download size**: `11.06 MiB`

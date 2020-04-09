@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
 import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -33,6 +34,19 @@ _CITATION = """
   year={2018},
   url={https://arxiv.org/pdf/1711.00350.pdf},
 }
+@inproceedings{Keysers2020,
+  title={Measuring Compositional Generalization: A Comprehensive Method on
+         Realistic Data},
+  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and
+          Hylke Buisman and Daniel Furrer and Sergii Kashubin and
+          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and
+          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and
+          Olivier Bousquet},
+  note={Additional citation for MCD splits},
+  booktitle={ICLR},
+  year={2020},
+  url={https://arxiv.org/abs/1912.09713.pdf},
+}
 """
 
 _DESCRIPTION = """SCAN tasks with various splits.
@@ -40,13 +54,16 @@ _DESCRIPTION = """SCAN tasks with various splits.
 SCAN is a set of simple language-driven navigation tasks for studying
 compositional learning and zero-shot generalization.
 
-See https://github.com/brendenlake/SCAN for a description of the splits.
+Most splits are described at https://github.com/brendenlake/SCAN. For the MCD
+splits please see https://arxiv.org/abs/1912.09713.pdf.
 
 Example usage:
 data = tfds.load('scan/length')
 """
 
 _DATA_URL = 'https://github.com/brendenlake/SCAN/archive/master.zip'
+_MCD_SPLITS_URL = (
+    'https://storage.googleapis.com/cfq_dataset/scan-splits.tar.gz')
 
 
 class ScanConfig(tfds.core.BuilderConfig):
@@ -64,9 +81,11 @@ class ScanConfig(tfds.core.BuilderConfig):
     # Version history:
     super(ScanConfig, self).__init__(
         name=name,
-        version=tfds.core.Version('1.0.0'),
+        version=tfds.core.Version('1.1.0'),
         description=_DESCRIPTION,
         **kwargs)
+    if 'mcd' in name:
+      directory = ''
     if directory is None:
       self.directory = name + '_split'
     else:
@@ -93,6 +112,9 @@ class Scan(tfds.core.GeneratorBasedBuilder):
       ScanConfig(name='template_jump_around_right', directory='template_split'),
       ScanConfig(name='template_opposite_right', directory='template_split'),
       ScanConfig(name='template_right', directory='template_split'),
+      ScanConfig(name='mcd1'),
+      ScanConfig(name='mcd2'),
+      ScanConfig(name='mcd3'),
   ]
 
   def _info(self):
@@ -119,27 +141,47 @@ class Scan(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(data_dir, 'SCAN-master',
                             self.builder_config.directory)
     split = self.builder_config.name
+    if 'mcd' in split:
+      split_dir = dl_manager.download_and_extract(_MCD_SPLITS_URL)
+      split_dir = os.path.join(split_dir, 'scan-splits')
+      kwargs = {
+          'datapath': os.path.join(data_dir, 'tasks.txt'),
+          'splitpath': os.path.join(split_dir, split + '.json')
+      }
+      train_kwargs = kwargs.copy()
+      train_kwargs['splitname'] = 'train'
+      test_kwargs = kwargs.copy()
+      test_kwargs['splitname'] = 'test'
+    else:
+      train_kwargs = {
+          'datapath': os.path.join(data_dir, 'tasks_train_' + split + '.txt')
+      }
+      test_kwargs = {
+          'datapath': os.path.join(data_dir, 'tasks_test_' + split + '.txt')
+      }
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'filepath':
-                    os.path.join(data_dir, 'tasks_train_' + split + '.txt')
-            }),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                'filepath':
-                    os.path.join(data_dir, 'tasks_test_' + split + '.txt')
-            })
+            name=tfds.Split.TRAIN, gen_kwargs=train_kwargs),
+        tfds.core.SplitGenerator(name=tfds.Split.TEST, gen_kwargs=test_kwargs)
     ]
 
-  def _generate_examples(self, filepath):
-    """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as infile:
+  def _read_examples(self, datapath):
+    with tf.io.gfile.GFile(datapath) as infile:
       for i, line in enumerate(infile):
         if not line.startswith('IN: '):
           continue
         # Chop the prefix and split string between input and output
         commands, actions = line[len('IN: '):].strip().split(' OUT: ', 1)
         yield i, {_COMMANDS: commands, _ACTIONS: actions}
+
+  def _generate_examples(self, datapath, splitpath=None, splitname=None):
+    """Yields examples."""
+    if splitpath:
+      all_samples = list(self._read_examples(datapath))
+      with tf.io.gfile.GFile(splitpath) as infile:
+        split = json.load(infile)
+      for idx in split[splitname + 'Idxs']:
+        yield all_samples[idx]
+    else:
+      for example in self._read_examples(datapath):
+        yield example

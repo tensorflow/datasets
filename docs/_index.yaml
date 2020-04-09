@@ -1,6 +1,7 @@
 book_path: /datasets/_book.yaml
 project_path: /datasets/_project.yaml
-description: <!--no description-->
+description: A collection of datasets ready to use with TensorFlow or other Python ML frameworks,
+ such as Jax, enabling easy-to-use and high-performance input pipelines.
 landing_page:
   custom_css_path: /site-assets/css/style.css
   rows:

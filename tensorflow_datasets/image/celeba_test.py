@@ -33,7 +33,7 @@ class CelebATest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = {
-      "img_align_celeba": "",  # Code looks into 'img_align_celeba' subdir.
+      "img_align_celeba": "img_align_celeba.zip",
       "list_eval_partition": "list_eval_partition.txt",
       "list_attr_celeba": "list_attr_celeba.txt",
       "landmarks_celeba": "list_landmarks_align_celeba.txt",

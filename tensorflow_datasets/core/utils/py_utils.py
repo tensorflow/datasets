@@ -28,6 +28,7 @@ import io
 import itertools
 import os
 import sys
+import textwrap
 import uuid
 
 import six
@@ -190,6 +191,11 @@ def flatten_nest_dict(d):
     else:
       flat_dict[k] = v
   return flat_dict
+
+
+def dedent(text):
+  """Wrapper around `textwrap.dedent` which also `strip()` and handle `None`."""
+  return textwrap.dedent(text).strip() if text else text
 
 
 def pack_as_nest_dict(flat_d, nest_d):

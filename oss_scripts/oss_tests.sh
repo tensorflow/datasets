@@ -23,7 +23,7 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 
 # Run Tests
 # Ignores:
-# * Nsynth is run is isolation due to dependency conflict (crepe)
+# * Nsynth is run in isolation due to dependency conflict (crepe)
 # * Lsun tests is disabled because the tensorflow_io used in open-source
 #   is linked to static libraries compiled again specific TF version, which
 #   makes test fails with linking error (libtensorflow_io_golang.so).

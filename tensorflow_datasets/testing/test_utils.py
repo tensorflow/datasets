@@ -154,11 +154,9 @@ def run_in_graph_and_eager_modes(func=None,
   For example, consider the following unittest:
 
   ```python
-  tf.enable_v2_behavior()
+  class SomeTest(tfds.testing.TestCase):
 
-  class SomeTest(testing.TestCase):
-
-    @testing.run_in_graph_and_eager_modes
+    @tfds.testing.run_in_graph_and_eager_modes
     def test_foo(self):
       x = tf.constant([1, 2])
       y = tf.constant([3, 4])
@@ -166,7 +164,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    testing.test_main()
+    tfds.testing.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with

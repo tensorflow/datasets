@@ -117,8 +117,8 @@ def build_autocached_info(builder):
 % if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/${builder.info.name}/`):<br/>
-    ${builder.MANUAL_DOWNLOAD_INSTRUCTIONS}
+    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+    ${py_utils.dedent(builder.MANUAL_DOWNLOAD_INSTRUCTIONS)}
 % endif
 </%def>
 

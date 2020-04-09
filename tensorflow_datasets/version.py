@@ -14,7 +14,14 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Version info."""
+"""Version info (development version).
+
+All users importing TFDS from `tfds-nightly` or synced to head will see
+the `-nightly` suffix.
+
+This file is replaced by `version_stable.py` for stable releases
+(`tensorflow-datasets`) on PyPI.
+"""
 
 # We follow Semantic Versioning (https://semver.org/)
 _MAJOR_VERSION = '2'
@@ -25,4 +32,4 @@ __version__ = '.'.join([
     _MAJOR_VERSION,
     _MINOR_VERSION,
     _PATCH_VERSION,
-])
+]) + '-nightly'

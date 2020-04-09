@@ -97,8 +97,8 @@ def _get_path(dataset_name):
       'create one in one of:\n{}'
       'If you are developing your own dataset outsite tfds, you can register '
       'your own checksums_dir with `tfds.download.add_checksums_dir('
-      'checksum_dir)` or pass it to the download_and_prepare script with '
-      '`--checksum_dir=`'
+      'checksums_dir)` or pass it to the download_and_prepare script with '
+      '`--checksums_dir=`'
   ).format(
       dataset_name,
       ''.join(['* {}\n'.format(c) for c in _CHECKSUM_DIRS]))

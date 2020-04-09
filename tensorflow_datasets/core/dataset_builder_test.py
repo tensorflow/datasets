@@ -21,6 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import tempfile
 
 from absl.testing import absltest
 import dill
@@ -106,11 +107,18 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
 
 class DatasetBuilderTest(testing.TestCase):
 
+  @classmethod
+  def setUpClass(cls):
+    super(DatasetBuilderTest, cls).setUpClass()
+    cls.builder = DummyDatasetSharedGenerator(
+        data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
+    cls.builder.download_and_prepare()
+
   @testing.run_in_graph_and_eager_modes()
   def test_load(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       dataset = registered.load(
-          name="dummy_dataset_shared_generator",
+          name="dummy_dataset_with_configs",
           data_dir=tmp_dir,
           download=True,
           split=splits_lib.Split.TRAIN)
@@ -120,30 +128,26 @@ class DatasetBuilderTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_determinism(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      ds = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
-          split=splits_lib.Split.TRAIN,
-          shuffle_files=False)
-      ds_values = list(dataset_utils.as_numpy(ds))
+    ds = self.builder.as_dataset(
+        split=splits_lib.Split.TRAIN, shuffle_files=False)
+    ds_values = list(dataset_utils.as_numpy(ds))
 
-      # Ensure determinism. If this test fail, this mean that numpy random
-      # module isn't always determinist (maybe between version, architecture,
-      # ...), and so our datasets aren't guaranteed either.
-      l = list(range(20))
-      np.random.RandomState(42).shuffle(l)
-      self.assertEqual(l, [
-          0, 17, 15, 1, 8, 5, 11, 3, 18, 16, 13, 2, 9, 19, 4, 12, 7, 10, 14, 6
-      ])
+    # Ensure determinism. If this test fail, this mean that numpy random
+    # module isn't always determinist (maybe between version, architecture,
+    # ...), and so our datasets aren't guaranteed either.
+    l = list(range(20))
+    np.random.RandomState(42).shuffle(l)
+    self.assertEqual(l, [
+        0, 17, 15, 1, 8, 5, 11, 3, 18, 16, 13, 2, 9, 19, 4, 12, 7, 10, 14, 6
+    ])
 
-      # Ensure determinism. If this test fails, this mean the dataset are not
-      # deterministically generated.
-      self.assertEqual(
-          [e["x"] for e in ds_values],
-          [6, 16, 19, 12, 14, 18, 5, 13, 15, 4, 10, 17, 0, 8, 3, 1, 9, 7, 11,
-           2],
-      )
+    # Ensure determinism. If this test fails, this mean the dataset are not
+    # deterministically generated.
+    self.assertEqual(
+        [e["x"] for e in ds_values],
+        [6, 16, 19, 12, 14, 18, 5, 13, 15, 4, 10, 17, 0, 8, 3, 1, 9, 7, 11,
+         2],
+    )
 
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
@@ -175,21 +179,17 @@ class DatasetBuilderTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_multi_split(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      ds_train, ds_test = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
-          split=["train", "test"],
-          shuffle_files=False)
+    ds_train, ds_test = self.builder.as_dataset(
+        split=["train", "test"],
+        shuffle_files=False)
 
-      data = list(dataset_utils.as_numpy(ds_train))
-      self.assertEqual(20, len(data))
+    data = list(dataset_utils.as_numpy(ds_train))
+    self.assertEqual(20, len(data))
 
-      data = list(dataset_utils.as_numpy(ds_test))
-      self.assertEqual(10, len(data))
+    data = list(dataset_utils.as_numpy(ds_test))
+    self.assertEqual(10, len(data))
 
   def test_build_data_dir(self):
-    # Test that the dataset loads the data_dir for the builder's version
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       self.assertEqual(str(builder.info.version), "1.0.0")
@@ -272,24 +272,21 @@ class DatasetBuilderTest(testing.TestCase):
       is_called.append(True)
       return lists
 
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      read_config = read_config_lib.ReadConfig(
-          experimental_interleave_sort_fn=interleave_sort,
-      )
-      read_config.options.experimental_stats.prefix = "tfds_prefix"
-      ds = registered.load(
-          name="dummy_dataset_shared_generator",
-          data_dir=tmp_dir,
-          split="train",
-          read_config=read_config,
-          shuffle_files=True,
-      )
+    read_config = read_config_lib.ReadConfig(
+        experimental_interleave_sort_fn=interleave_sort,
+    )
+    read_config.options.experimental_stats.prefix = "tfds_prefix"
+    ds = self.builder.as_dataset(
+        split="train",
+        read_config=read_config,
+        shuffle_files=True,
+    )
 
-      # Check that the ReadConfig options are properly set
-      self.assertEqual(ds.options().experimental_stats.prefix, "tfds_prefix")
+    # Check that the ReadConfig options are properly set
+    self.assertEqual(ds.options().experimental_stats.prefix, "tfds_prefix")
 
-      # The instruction function should have been called
-      self.assertEqual(is_called, [True])
+    # The instruction function should have been called
+    self.assertEqual(is_called, [True])
 
   def test_with_supported_version(self):
     DummyDatasetWithConfigs(config="plus1", version="0.0.1")
@@ -496,24 +493,6 @@ class DatasetBuilderReadTest(testing.TestCase):
   def setUp(self):
     super(DatasetBuilderReadTest, self).setUp()
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-
-  @testing.run_in_graph_and_eager_modes()
-  def test_in_memory(self):
-    train_data = dataset_utils.as_numpy(
-        self.builder.as_dataset(split="train", in_memory=True))
-    train_data = [el for el in train_data]
-    self.assertEqual(20, len(train_data))
-
-  def test_in_memory_with_device_ctx(self):
-    # Smoke test to ensure that the inner as_numpy call does not fail when under
-    # an explicit device context.
-    # Only testing in graph mode. Eager mode would actually require job:foo to
-    # exist in the cluster.
-    with tf.Graph().as_default():
-      # Testing it works even if a default Session is active
-      with tf.compat.v1.Session() as _:
-        with tf.device("/job:foo"):
-          self.builder.as_dataset(split="train", in_memory=True)
 
   @testing.run_in_graph_and_eager_modes()
   def test_all_splits(self):

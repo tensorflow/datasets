@@ -21,7 +21,9 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import contextlib
 import inspect
+import os
 import re
 
 from absl import flags
@@ -88,6 +90,38 @@ Check that:
 """
 
 
+# Regex matching 'dataset/config:1.*.*/arg=123'
+_NAME_REG = re.compile(
+    r"^"
+    r"(?P<dataset_name>\w+)"
+    r"(/(?P<config>[\w\-\.]+))?"
+    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
+    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
+    r"$")
+
+
+# Regex matching 'dataset/config/1.3.0'
+_FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
+    ds_name=r"\w+",
+    config_name=r"[\w\-\.]+",
+    version=r"[0-9]+\.[0-9]+\.[0-9]+",
+))
+
+
+_skip_registration = False
+
+
+@contextlib.contextmanager
+def skip_registration():
+  """Context manager within which dataset builders are not registered."""
+  global _skip_registration
+  try:
+    _skip_registration = True
+    yield
+  finally:
+    _skip_registration = False
+
+
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
 
@@ -126,7 +160,9 @@ class RegisteredDataset(abc.ABCMeta):
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
-    if inspect.isabstract(builder_cls):
+    if _skip_registration:
+      pass  # Skip dataset registration within the contextmanager
+    elif inspect.isabstract(builder_cls):
       _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
     elif class_dict.get("IN_DEVELOPMENT"):
       _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
@@ -183,7 +219,6 @@ def load(name,
          split=None,
          data_dir=None,
          batch_size=None,
-         in_memory=None,
          shuffle_files=False,
          download=True,
          as_supervised=False,
@@ -242,10 +277,6 @@ def load(name,
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
-    in_memory: `bool`, if `True`, loads the dataset in memory which
-      increases iteration speeds. Note that if `True` and the dataset has
-      unknown dimensions, the features will be padded to the maximum
-      size across the dataset.
     shuffle_files: `bool`, whether to shuffle the input files.
       Defaults to `False`.
     download: `bool` (optional), whether to call
@@ -314,7 +345,6 @@ def load(name,
   as_dataset_kwargs.setdefault("as_supervised", as_supervised)
   as_dataset_kwargs.setdefault("batch_size", batch_size)
   as_dataset_kwargs.setdefault("decoders", decoders)
-  as_dataset_kwargs.setdefault("in_memory", in_memory)
   as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
   as_dataset_kwargs.setdefault("read_config", read_config)
 
@@ -322,17 +352,6 @@ def load(name,
   if with_info:
     return ds, dbuilder.info
   return ds
-
-
-_VERSION_RE = r""
-
-_NAME_REG = re.compile(
-    r"^"
-    r"(?P<dataset_name>\w+)"
-    r"(/(?P<config>[\w\-\.]+))?"
-    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
-    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
-    r"$")
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):
@@ -379,3 +398,49 @@ def _cast_to_pod(val):
       return float(val)
     except ValueError:
       return tf.compat.as_text(val)
+
+
+def _get_all_versions(version_list):
+  return set(str(v) for v in version_list)
+
+
+def _iter_full_names(predicate_fn=None):
+  """Yield all registered datasets full_names (see `list_full_names`)."""
+  for builder_name, builder_cls in _DATASET_REGISTRY.items():
+    # Only keep requested datasets
+    if predicate_fn is not None and not predicate_fn(builder_cls):
+      continue
+    if builder_cls.BUILDER_CONFIGS:
+      for config in builder_cls.BUILDER_CONFIGS:
+        for v in _get_all_versions(
+            [config.version] + config.supported_versions):
+          yield os.path.join(builder_name, config.name, v)
+    else:
+      for v in _get_all_versions(
+          [builder_cls.VERSION] + builder_cls.SUPPORTED_VERSIONS):
+        yield os.path.join(builder_name, v)
+
+
+def list_full_names(predicate_fn=None):
+  """Yield all registered datasets full_names.
+
+  Args:
+    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
+      returns the dataset names which satisfy the predicate.
+
+  Returns:
+    The list of all registered dataset full names.
+  """
+  return sorted(_iter_full_names(predicate_fn=predicate_fn))
+
+
+def is_full_name(full_name):
+  """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
+
+  Args:
+    full_name: String to check.
+
+  Returns:
+    `bool`.
+  """
+  return _FULL_NAME_REG.match(full_name)
