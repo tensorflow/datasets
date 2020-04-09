@@ -413,7 +413,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           if abnormality['pathology'].startswith('MALIGNANT'):
             benign_or_malignant = 'MALIGNANT'
           else:
-            benign_or_malignant = 'BENING'
+            benign_or_malignant = 'BENIGN'
           if abnormality['type'] == 'calc':
             label = benign_or_malignant + '_CALCIFICATION'
           elif abnormality['type'] == 'mass':
