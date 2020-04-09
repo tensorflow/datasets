@@ -40,16 +40,16 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 
-DATASET_TO_TESTS = ['scientific_papers', 'waymo_open_dataset'] 
+DATASET_TO_TESTS = ['scientific_papers', 'waymo_open_dataset']
 
 def main(_):
-  version_path = os.path.join(FLAGS.tfds_dir, 'stable_versions.txt')
   catalog_dir = tfds.core.get_tfds_path('../docs/catalog/')
 
   for ds_name in DATASET_TO_TESTS:
     builder = tfds.builder(ds_name)
-    with tf.io.gfile.GFile(os.path.join(catalog_dir, ds_name + ".md"), 'w') as f:
-      doc_builder = document_single_builder(builder)
+    doc_builder = document_single_builder(builder)
+    dataset_doc_path = os.path.join(catalog_dir, ds_name + ".md")
+    with tf.io.gfile.GFile(dataset_doc_path, 'w') as f:
       f.write(doc_builder)
 
 if __name__ == '__main__':
