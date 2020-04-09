@@ -430,8 +430,9 @@ class ArchiveUtils():
       fObj.append(self.extract_image(fname))
     return [self.extract_image(fname) for fname in fileNames]
 
+  @utils.memoize()
   def _build_lut(self):
-    """create a hash table to lookup path of an archive using seriesFolder.
+    """Returns a hash table to lookup path of an archive using seriesFolder.
     """
     lut = {}
     for k, v in self.path.items():  # k:v, <zipfile#>:<path of the zipfile>
