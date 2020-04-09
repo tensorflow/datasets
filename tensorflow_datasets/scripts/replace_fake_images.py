@@ -20,7 +20,7 @@ This allow to reduce size of the images in the `fake_data/` directory.
 
 Instructions:
 
-python replace_fake_images.py \
+python -m tensorflow_datasets.scripts.replace_fake_images \
   --fake_dir=/path/to/tensorflow_datasets/testing/test_data/fake_examples
 
 

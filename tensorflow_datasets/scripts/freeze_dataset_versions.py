@@ -19,7 +19,7 @@ r"""Dump the list of all registered datasets/config/version in a `.txt` file.
 Instructions:
 
 ```
-python tensorflow_datasets/scripts/freeze_dataset_version.py
+python -m tensorflow_datasets.scripts.freeze_dataset_version
 ```
 
 
