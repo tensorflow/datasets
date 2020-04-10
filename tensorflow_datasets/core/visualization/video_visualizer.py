@@ -40,6 +40,8 @@ def _display_gif(gif_fn, ds, num_examples, width, height):
       should not be batched. Examples will be consumed in order until
       (rows * cols) are read or the dataset is consumed.
     num_examples: Number of examples to display from video dataset.
+    width: width of frame for display GIF.
+    height: height of frame for display GIF.
   """
   examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
   for i, ex in enumerate(examples):
@@ -51,7 +53,11 @@ def _display_gif(gif_fn, ds, num_examples, width, height):
 
 
 def _write_video_gif(video, fps):
-  """Process the Video and write it as GIF."""
+  """Process the Video and write it as GIF.
+  Args:
+    video: numpy array of video as image sequence.
+    fps: frame per second for display GIF. Default to 10.
+  """
   ImageSequenceClip = lazy_imports_lib.lazy_imports.moviepy.editor.ImageSequenceClip
 
   if len(video.shape) != 4:
@@ -98,13 +104,6 @@ class VideoGridVisualizer(visualizer.Visualizer):
       video_keys = visualizer.extract_keys(ds_info.features, features_lib.Video)
       video_key = video_keys[0]
 
-    # Optionally extract the label key
-    label_keys = visualizer.extract_keys(
-        ds_info.features, features_lib.ClassLabel)
-    label_key = label_keys[0] if len(label_keys) == 1 else None
-    if not label_key:
-      logging.info('Was not able to auto-infer label.')
-
     def make_cell_fn(ex):
       if not isinstance(ex, dict):
         raise ValueError(
@@ -114,10 +113,5 @@ class VideoGridVisualizer(visualizer.Visualizer):
                 type(self).__name__, type(ex)))
 
       _write_video_gif(ex[video_key], fps)
-      if label_key:
-        label = ex[label_key]
-        label_str = ds_info.features[label_key].int2str(label)
-        #plt.xlabel('{} ({})'.format(label_str, label))
-
     # Display GIF
-    _display_gif(make_cell_fn, ds, num_examples, width, height)  
+    _display_gif(make_cell_fn, ds, num_examples, width, height)

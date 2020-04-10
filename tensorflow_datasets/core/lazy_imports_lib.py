@@ -50,13 +50,6 @@ class LazyImporter(object):
   @classmethod
   def apache_beam(cls):
     return _try_import("apache_beam")
-  
-  @utils.classproperty
-  @classmethod
-  def moviepy(cls):
-    """For testing purposes only."""
-    _try_import("moviepy.editor")
-    return _try_import("moviepy")
 
   @utils.classproperty
   @classmethod
@@ -88,6 +81,13 @@ class LazyImporter(object):
   def matplotlib(cls):
     _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
+
+  @utils.classproperty
+  @classmethod
+  def moviepy(cls):
+    """For testing purposes only."""
+    _try_import("moviepy.editor")
+    return _try_import("moviepy")
 
   @utils.classproperty
   @classmethod
