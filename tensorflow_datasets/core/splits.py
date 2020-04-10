@@ -24,6 +24,7 @@ import abc
 import collections
 import operator
 
+from absl import logging
 import six
 from six.moves import range  # pylint: disable=redefined-builtin
 
@@ -654,10 +655,13 @@ class SplitGenerator(object):
       name: `str`, name of the Split for which the generator will
         create the examples.
       num_shards: `int`, number of shards between which the generated examples
-        will be written.
+        will be written. DEPRECATED: This argument is currently ignored and
+        will be removed in a future version.
       gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
         of the builder.
     """
     self.name = name
     self.gen_kwargs = gen_kwargs or {}
+    if num_shards != 1:
+      logging.warning("`num_shards` is deprecated and will be removed.")
     self.split_info = SplitInfo(name=str(name), num_shards=num_shards)
