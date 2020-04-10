@@ -619,6 +619,8 @@ class WmtConfig(tfds.core.BuilderConfig):
 class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """WMT translation dataset."""
 
+  VERSION = tfds.core.Version("1.0.0")
+
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Some of the wmt configs here, require a manual download.
   Please look into wmt.py to see the exact path (and file name) that has to
