@@ -50,6 +50,13 @@ class LazyImporter(object):
   @classmethod
   def apache_beam(cls):
     return _try_import("apache_beam")
+  
+  @utils.classproperty
+  @classmethod
+  def moviepy(cls):
+    """For testing purposes only."""
+    _try_import("moviepy.editor")
+    return _try_import("moviepy")
 
   @utils.classproperty
   @classmethod
@@ -91,6 +98,12 @@ class LazyImporter(object):
   @classmethod
   def nltk(cls):
     return _try_import("nltk")
+
+  @utils.classproperty
+  @classmethod
+  def os(cls):
+    """For testing purposes only."""
+    return _try_import("os")
 
   @utils.classproperty
   @classmethod
@@ -139,12 +152,6 @@ class LazyImporter(object):
   @classmethod
   def tldextract(cls):
     return _try_import("tldextract")
-
-  @utils.classproperty
-  @classmethod
-  def os(cls):
-    """For testing purposes only."""
-    return _try_import("os")
 
   @utils.classproperty
   @classmethod

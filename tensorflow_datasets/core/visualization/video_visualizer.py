@@ -21,45 +21,47 @@ from __future__ import division
 from __future__ import print_function
 
 from absl import logging
+from IPython.display import display,Image
 
+import tensorflow as tf
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
 
-def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
 
-  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+def _display_gif(gif_fn, ds, num_examples, width, height):
+  """Display Video as GIF.
 
-  num_examples = rows * cols
+  Args:
+    plot_single_ex_fn: Function with fill a single cell of the grid, with
+      signature `fn(ax: matplotlib.axes.Axes, ex: Nested[np.array]) -> None`
+    ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
+      should not be batched. Examples will be consumed in order until
+      (rows * cols) are read or the dataset is consumed.
+    num_examples: Number of examples to display from video dataset.
+  """
   examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-
-  fig = plt.figure(figsize=(plot_scale * cols, plot_scale * rows))
-  fig.subplots_adjust(hspace=1 / plot_scale, wspace=1 / plot_scale)
-
   for i, ex in enumerate(examples):
-    ax = fig.add_subplot(rows, cols, i+1)
-    plot_single_ex_fn(ax, ex)
+    gif_fn(ex)
+    with open('sample.gif','rb') as f:
+      display(Image(data=f.read(),format="png",width=width,height=height))
 
-  plt.show()
-  return fig
+  tf.io.gfile.remove("sample.gif")
 
-def _add_video(ax, video):
-  """Add the Video to the given `matplotlib.axes.Axes`."""
-  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+
+def _write_video_gif(video, fps):
+  """Process the Video and write it as GIF."""
+  ImageSequenceClip = lazy_imports_lib.lazy_imports.moviepy.editor.ImageSequenceClip
 
   if len(video.shape) != 4:
     raise ValueError(
         'Video dimension should be 4.')
-  f,_, _, c = video.shape
-  print(video.shape)
-  if c == 1:
-    video = video.reshape(video.shape[:3])
-  for i in range(f):
-    ax.imshow(video[i], cmap='gray')
-    ax.grid(False)
-    plt.xticks([], [])
-    plt.yticks([], [])
+  _,_, _, c = video.shape
+  # Write GIF using imageio & moviepy
+  clip = ImageSequenceClip(list(video), fps=fps)
+  clip.write_gif("sample.gif", fps=fps, verbose=False, progress_bar=False)
+
 
 class VideoGridVisualizer(visualizer.Visualizer):
   """Visualizer for video datasets."""
@@ -70,15 +72,15 @@ class VideoGridVisualizer(visualizer.Visualizer):
     video_keys = visualizer.extract_keys(ds_info.features, features_lib.Video)
     return len(video_keys) > 0
 
-
   def show(
       self,
       ds_info,
       ds,
-      rows=3,
-      cols=3,
-      plot_scale=3.,
+      num_examples=5,
       video_key=None,
+      width=150,
+      height=150,
+      fps=10,
   ):
     """Display the dataset.
 
@@ -87,11 +89,7 @@ class VideoGridVisualizer(visualizer.Visualizer):
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
         should not be batched. Examples will be consumed in order until
         (rows * cols) are read or the dataset is consumed.
-      rows: `int`, number of rows of the display grid.
-      cols: `int`, number of columns of the display grid.
-      plot_scale: `float`, controls the plot size of the images. Keep this
-        value around 3 to get a good plot. High and low values may cause
-        the labels to get overlapped.
+      num_examples: Number of examples to display from video dataset. Default is 5
       video_key: `string`, name of the feature that contains the video. If not
          set, the system will try to auto-detect it.
     """
@@ -107,9 +105,7 @@ class VideoGridVisualizer(visualizer.Visualizer):
     if not label_key:
       logging.info('Was not able to auto-infer label.')
 
-    def make_cell_fn(ax, ex):
-      plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
+    def make_cell_fn(ex):
       if not isinstance(ex, dict):
         raise ValueError(
             '{} requires examples as `dict`, with the same '
@@ -117,12 +113,11 @@ class VideoGridVisualizer(visualizer.Visualizer):
             'with `as_supervised=True`. Received: {}'.format(
                 type(self).__name__, type(ex)))
 
-      _add_video(ax, ex[video_key])
+      _write_video_gif(ex[video_key], fps)
       if label_key:
         label = ex[label_key]
         label_str = ds_info.features[label_key].int2str(label)
-        plt.xlabel('{} ({})'.format(label_str, label))
+        #plt.xlabel('{} ({})'.format(label_str, label))
 
-    # Print the grid
-    fig = _make_grid(make_cell_fn, ds, rows, cols, plot_scale)  
-
+    # Display GIF
+    _display_gif(make_cell_fn, ds, num_examples, width, height)  
