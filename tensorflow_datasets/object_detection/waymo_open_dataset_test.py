@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""TODO(waymo_open_dataset): Add a description here."""
+# Lint as: python3
+"""Test for waymo_open_dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -37,4 +38,3 @@ class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-
