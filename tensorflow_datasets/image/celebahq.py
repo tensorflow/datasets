@@ -15,6 +15,7 @@
 
 # Lint as: python3
 """Celeba-HQ dataset."""
+
 import os
 
 import tensorflow.compat.v2 as tf

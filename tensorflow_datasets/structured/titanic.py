@@ -14,8 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Titanic dataset.
-"""
+"""Titanic dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
