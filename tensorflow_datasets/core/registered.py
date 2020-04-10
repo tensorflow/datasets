@@ -401,7 +401,9 @@ def _cast_to_pod(val):
 
 
 def _get_all_versions(version_list):
-  return set(str(v) for v in version_list)
+  # Datasets which do not have version (version has `None` value) 
+  # defined are not supposed to be instanciated.
+  return {str(v) for v in version_list if v}
 
 
 def _iter_full_names(predicate_fn=None):
