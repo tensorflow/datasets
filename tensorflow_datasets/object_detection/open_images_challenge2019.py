@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Datasets of the Open Images Challange 2019.
 
 https://storage.googleapis.com/openimages/web/challenge2019.html
