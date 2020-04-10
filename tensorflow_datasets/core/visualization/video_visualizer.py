@@ -63,7 +63,6 @@ def _write_video_gif(video, fps):
   if len(video.shape) != 4:
     raise ValueError(
         'Video dimension should be 4.')
-  _,_, _, c = video.shape
   # Write GIF using imageio & moviepy
   clip = ImageSequenceClip(list(video), fps=fps)
   clip.write_gif("sample.gif", fps=fps, verbose=False, progress_bar=False)
