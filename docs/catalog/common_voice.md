@@ -10,16 +10,20 @@
 </div>
 # `common_voice`
 
+Note: This dataset is available only in our nightly package `tfds-nightly`.
+
+
+
+
 *   **Description**:
 
 Mozilla Common Voice Dataset
 
-*   **Homepage**:
-    [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
+*   **Homepage**: [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
 *   **Source code**:
     [`tfds.audio.commonvoice.CommonVoice`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/commonvoice.py)
 *   **Versions**:
-    *   **`1.0.0`** (default): No release notes.
+    * (tfds-nightly) **`1.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -27,14 +31,15 @@ Mozilla Common Voice Dataset
     Unknown
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split  | Examples
+:----- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-## common_voice/en (default config)
+
+## (tfds-nightly) common_voice/en (default config)
 
 *   **Config description**: Language Code: en
 *   **Features**:
@@ -52,7 +57,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/de
+## (tfds-nightly) common_voice/de 
 
 *   **Config description**: Language Code: de
 *   **Features**:
@@ -70,7 +75,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/fr
+## (tfds-nightly) common_voice/fr 
 
 *   **Config description**: Language Code: fr
 *   **Features**:
@@ -88,7 +93,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/cy
+## (tfds-nightly) common_voice/cy 
 
 *   **Config description**: Language Code: cy
 *   **Features**:
@@ -106,7 +111,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/br
+## (tfds-nightly) common_voice/br 
 
 *   **Config description**: Language Code: br
 *   **Features**:
@@ -124,7 +129,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/cv
+## (tfds-nightly) common_voice/cv 
 
 *   **Config description**: Language Code: cv
 *   **Features**:
@@ -142,7 +147,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/tr
+## (tfds-nightly) common_voice/tr 
 
 *   **Config description**: Language Code: tr
 *   **Features**:
@@ -160,7 +165,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/tt
+## (tfds-nightly) common_voice/tt 
 
 *   **Config description**: Language Code: tt
 *   **Features**:
@@ -178,7 +183,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/ky
+## (tfds-nightly) common_voice/ky 
 
 *   **Config description**: Language Code: ky
 *   **Features**:
@@ -196,7 +201,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/ga-IE
+## (tfds-nightly) common_voice/ga-IE 
 
 *   **Config description**: Language Code: ga-IE
 *   **Features**:
@@ -214,7 +219,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/kab
+## (tfds-nightly) common_voice/kab 
 
 *   **Config description**: Language Code: kab
 *   **Features**:
@@ -232,7 +237,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/ca
+## (tfds-nightly) common_voice/ca 
 
 *   **Config description**: Language Code: ca
 *   **Features**:
@@ -250,7 +255,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/zh-TW
+## (tfds-nightly) common_voice/zh-TW 
 
 *   **Config description**: Language Code: zh-TW
 *   **Features**:
@@ -268,7 +273,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/sl
+## (tfds-nightly) common_voice/sl 
 
 *   **Config description**: Language Code: sl
 *   **Features**:
@@ -286,7 +291,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/it
+## (tfds-nightly) common_voice/it 
 
 *   **Config description**: Language Code: it
 *   **Features**:
@@ -304,7 +309,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/nl
+## (tfds-nightly) common_voice/nl 
 
 *   **Config description**: Language Code: nl
 *   **Features**:
@@ -322,7 +327,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/cnh
+## (tfds-nightly) common_voice/cnh 
 
 *   **Config description**: Language Code: cnh
 *   **Features**:
@@ -340,7 +345,7 @@ FeaturesDict({
 })
 ```
 
-## common_voice/eo
+## (tfds-nightly) common_voice/eo 
 
 *   **Config description**: Language Code: eo
 *   **Features**:

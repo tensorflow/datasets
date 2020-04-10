@@ -65,7 +65,7 @@ FeaturesDict({
 ```
 
 
-## (tfds-nightly) scientific_papers/arxiv (default config)
+##  scientific_papers/arxiv (default config)
 
 *   **Config description**: Documents from ArXiv repository.
 *   **Dataset size**: `7.07 GiB`
@@ -78,7 +78,7 @@ Split  | Examples
 'validation' | 6,436
 
 
-## (tfds-nightly) scientific_papers/pubmed 
+##  scientific_papers/pubmed 
 
 *   **Config description**: Documents from PubMed repository.
 *   **Dataset size**: `2.34 GiB`

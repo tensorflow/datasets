@@ -57,22 +57,41 @@ def _get_nightly_datasets():
   """Read stable_versions.txt and organized the new datasets in nested dicts."""
   version_path = os.path.join(tfds.core.utils.tfds_dir(), 'stable_versions.txt')
   with tf.io.gfile.GFile(version_path, 'r') as f:
-    stable_version_datasets = f.read().splitlines()
+    stable_versions = f.read().splitlines()
 
-  registered_names = tfds.core.registered.list_full_names()
-  nightly_datasets = set(registered_names) - set(stable_version_datasets)
+  def to_dict(ds):
+    # Convert to a dict to hold ds_name -> property -> [properties]
+    ds_dict = collections.defaultdict(lambda: collections.defaultdict(set))
+    for name in ds:
+      res = _FULL_NAME_REG.match(name)
+      if res:
+        ds_name = res.group("ds_name")
+        config = res.group("config")
+        version = res.group("version")
+        ds_dict[ds_name]["version"].add(version)
+        ds_dict[ds_name]["config"].add(config)
 
-  datasets = collections.defaultdict(lambda: collections.defaultdict(set))
+    return ds_dict
 
-  for name in nightly_datasets:
-    res = _FULL_NAME_REG.match(name)
-    ds_name = res.group("ds_name")
-    config = res.group("config")
-    version = res.group("version")
-    datasets[ds_name]["version"].add(version)
-    datasets[ds_name]["config"].add(config)
+  registered_ds = to_dict(tfds.core.registered.list_full_names())
+  stable_version_ds = to_dict(stable_versions)
+  nightly_ds = to_dict([])
 
-  return datasets
+  # Get all new key, items
+  for k in registered_ds:
+    if k in stable_version_ds:
+      for prop in registered_ds[k]:
+        nightly_ds[k][prop] = registered_ds[k][prop] - stable_version_ds[k][prop]
+    else:
+      nightly_ds[k] = registered_ds[k]
+
+  # for k in nightly_ds:
+  #   if nightly_ds[k]["config"]:
+  #     print(k)
+  #     print(nightly_ds[k]["config"])
+  #     input()
+    
+  return nightly_ds
 
 _TFDS_NIGHTLY_DATASETS = _get_nightly_datasets()
 

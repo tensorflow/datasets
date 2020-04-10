@@ -40,7 +40,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 
-DATASET_TO_TESTS = ['scientific_papers', 'waymo_open_dataset']
+DATASET_TO_TESTS = ['scientific_papers', 'waymo_open_dataset', 'common_voice']
 
 def main(_):
   catalog_dir = tfds.core.get_tfds_path('../docs/catalog/')
