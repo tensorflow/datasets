@@ -98,6 +98,9 @@ class VideoGridVisualizer(visualizer.Visualizer):
       num_examples: Number of examples to display from video dataset. Default is 5
       video_key: `string`, name of the feature that contains the video. If not
          set, the system will try to auto-detect it.
+      width: width of frame for display GIF.
+      height: height of frame for display GIF.
+      fps: frame per second for display GIF. Default to 10.
     """
     # Extract the video key automatically.
     if not video_key:
