@@ -401,7 +401,9 @@ def _cast_to_pod(val):
 
 
 def _get_all_versions(version_list):
-  return set(str(v) for v in version_list)
+  # Filter datasets which do not have a version (version is `None`) as they
+  # should not be instantiated directly (e.g wmt_translate)
+  return {str(v) for v in version_list if v}
 
 
 def _iter_full_names(predicate_fn=None):

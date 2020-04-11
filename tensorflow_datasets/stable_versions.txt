@@ -1522,7 +1522,6 @@ wmt19_translate/lt-en/1.0.0
 wmt19_translate/ru-en/1.0.0
 wmt19_translate/zh-en/1.0.0
 wmt_t2t_translate/de-en/1.0.0
-wmt_translate/None
 xnli/plain_text/1.0.0
 xsum/1.0.0
 xsum/1.1.0
