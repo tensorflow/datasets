@@ -22,6 +22,7 @@ from __future__ import division
 from __future__ import print_function
 
 import contextlib
+import functools
 import os
 import random
 
@@ -30,6 +31,7 @@ import numpy as np
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import utils
 
 
 @contextlib.contextmanager
@@ -104,18 +106,34 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
           ''.format(self._data_dir, n=self.name)  # pylint: disable=protected-access
       )
 
-  def mock_as_dataset(self, *args, **kwargs):
+  def mock_as_dataset(self, split, decoders=None, **kwargs):
     """Function which overwrite builder._as_dataset."""
-    del args
+    del split
     del kwargs
+
+    features = self.info.features
+    # `from_generator` takes a callable with signature () -> iterable
+    # Recreating a new generator each time ensure that all pipelines are
+    # using the same examples
+    def generator():
+      for ex in RandomFakeGenerator(builder=self, num_examples=num_examples):
+        if decoders:
+          ex = features.encode_example(ex)
+        yield ex
+
+    def get_dtype():
+      if decoders:
+        return utils.map_nested(lambda t: t.dtype, features.get_serialized_info())
+      return features.dtype
+
     ds = tf.data.Dataset.from_generator(
-        # `from_generator` takes a callable with signature () -> iterable
-        # Recreating a new generator each time ensure that all pipelines are
-        # using the same examples
-        lambda: RandomFakeGenerator(builder=self, num_examples=num_examples),
-        output_types=self.info.features.dtype,
-        output_shapes=self.info.features.shape,
+        generator,
+        output_types=get_dtype(),
+        output_shapes=features.shape if not decoders else None,
     )
+    if decoders:
+      decode_fn = functools.partial(features.decode_example, decoders=decoders)
+      ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
 
   if not as_dataset_fn:
@@ -160,17 +178,16 @@ class RandomFakeGenerator(object):
     else:
       max_value = 255
 
+    dtype = tensor_info.dtype
     # Generate some random values, depending on the dtype
-    if tensor_info.dtype.is_integer:
-      return self._rgn.randint(0, max_value, shape)
-    elif tensor_info.dtype.is_floating:
-      return self._rgn.random_sample(shape)
-    elif tensor_info.dtype == tf.string:
+    if dtype.is_integer:
+      return self._rgn.randint(0, max_value, shape).astype(dtype.as_numpy_dtype)
+    if dtype.is_floating:
+      return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
+    if dtype == tf.string:
       return ''.join(
           random.choice(' abcdefghij') for _ in range(random.randint(10, 20)))
-    else:
-      raise ValueError('Fake generation not supported for {}'.format(
-          tensor_info.dtype))
+    raise ValueError('Fake generation not supported for {}'.format(dtype))
 
   def _generate_example(self):
     """Generate the next example."""
