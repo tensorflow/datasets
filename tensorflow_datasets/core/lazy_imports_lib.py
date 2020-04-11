@@ -84,13 +84,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def moviepy(cls):
-    """For testing purposes only."""
-    _try_import("moviepy.editor")
-    return _try_import("moviepy")
-
-  @utils.classproperty
-  @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
 
