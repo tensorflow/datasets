@@ -21,11 +21,10 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow_datasets as tfds
-from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import gcs_utils
 
 
-class GcsUtilsTest(testing.TestCase):
+class GcsUtilsTest(tfds.testing.TestCase):
 
   def is_dataset_accessible(self):
     # Re-enable GCS access. TestCase disables it.
@@ -41,4 +40,4 @@ class GcsUtilsTest(testing.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

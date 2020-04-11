@@ -26,10 +26,8 @@ from __future__ import print_function
 import textwrap
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features as features_lib
-
-tf.enable_v2_behavior()
 
 
 class AnInputConnector(features_lib.FeatureConnector):
@@ -72,7 +70,7 @@ class AnOutputConnector(features_lib.FeatureConnector):
     return tfexample_data / 10.0
 
 
-class FeatureDictTest(testing.FeatureExpectationsTestCase):
+class FeatureDictTest(tfds.testing.FeatureExpectationsTestCase):
 
   def test_tensor_info(self):
 
@@ -147,7 +145,7 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         },
         tests=[
             # Np array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={
                     'input': 1,
                     'output': -1,
@@ -220,7 +218,7 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
     )
 
   def test_feature_save_load_metadata_slashes(self):
-    with testing.tmp_dir() as data_dir:
+    with tfds.testing.tmp_dir() as data_dir:
       fd = features_lib.FeaturesDict({
           'image/frame': features_lib.Image(shape=(32, 32, 3)),
           'image/label': features_lib.ClassLabel(num_classes=2),
@@ -229,7 +227,7 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
       fd.load_metadata(data_dir)
 
 
-class FeatureTensorTest(testing.FeatureExpectationsTestCase):
+class FeatureTensorTest(tfds.testing.FeatureExpectationsTestCase):
 
   def test_shape_static(self):
 
@@ -245,23 +243,23 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
         shape=(2, 3),
         tests=[
             # Np array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np_input,
                 expected=np_input,
             ),
             # Python array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=array_input,
                 expected=array_input,
             ),
             # Invalid dtype
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np.random.randint(256, size=(2, 3)),
                 raise_cls=ValueError,
                 raise_msg='int64 do not match',
             ),
             # Invalid shape
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np.random.rand(2, 4).astype(np.float32),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
@@ -279,16 +277,16 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
         dtype=tf.int32,
         shape=(None, 3, 2),
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np_input_dynamic_1,
                 expected=np_input_dynamic_1,
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np_input_dynamic_2,
                 expected=np_input_dynamic_2,
             ),
             # Invalid shape
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=
                 np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
@@ -304,19 +302,19 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
         dtype=tf.bool,
         shape=(),
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np.array(True),
                 expected=True,
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np.array(False),
                 expected=False,
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=True,
                 expected=True,
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=False,
                 expected=False,
             ),
@@ -330,11 +328,11 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
         dtype=tf.bool,
         shape=(3,),
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np.array([True, True, False]),
                 expected=[True, True, False],
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=[True, False, True],
                 expected=[True, False, True],
             ),
@@ -351,22 +349,22 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
         dtype=tf.string,
         tests=[
             # Non-unicode
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=nonunicode_text,
                 expected=tf.compat.as_bytes(nonunicode_text),
             ),
             # Unicode
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=unicode_text,
                 expected=tf.compat.as_bytes(unicode_text),
             ),
             # Empty string
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value='',
                 expected=b'',
             ),
             # Trailing zeros
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=b'abc\x00\x00',
                 expected=b'abc\x00\x00',
             ),
@@ -378,19 +376,19 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
         shape=(2, 1),
         dtype=tf.string,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=[[nonunicode_text], [unicode_text]],
                 expected=[
                     [tf.compat.as_bytes(nonunicode_text)],
                     [tf.compat.as_bytes(unicode_text)],
                 ],
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=[nonunicode_text, unicode_text],  # Wrong shape
                 raise_cls=ValueError,
                 raise_msg='(2,) and (2, 1) must have the same rank',
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=[['some text'], [123]],  # Wrong dtype
                 raise_cls=TypeError,
                 raise_msg='Expected binary or unicode string, got 123',
@@ -433,4 +431,4 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

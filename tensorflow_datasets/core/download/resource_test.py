@@ -19,7 +19,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.download import resource
 
 NO_EXTRACT = resource.ExtractMethod.NO_EXTRACT
@@ -30,7 +30,7 @@ ZIP = resource.ExtractMethod.ZIP
 BZIP2 = resource.ExtractMethod.BZIP2
 
 
-class GuessExtractMethodTest(testing.TestCase):
+class GuessExtractMethodTest(tfds.testing.TestCase):
 
   def test_(self):
     for fname, expected_result in [
@@ -47,7 +47,7 @@ class GuessExtractMethodTest(testing.TestCase):
           fname, res, expected_result))
 
 
-class DlDirNameTest(testing.TestCase):
+class DlDirNameTest(tfds.testing.TestCase):
   urls = '''\
 http://data.statmt.org/wmt17/translation-task/dev.tgz
 http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz
@@ -88,4 +88,4 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

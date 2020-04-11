@@ -22,12 +22,12 @@ from __future__ import print_function
 
 import hashlib
 import os
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import py_utils
 
 
-class PyUtilsTest(testing.TestCase):
+class PyUtilsTest(tfds.testing.TestCase):
 
   def test_is_notebook(self):
     self.assertFalse(py_utils.is_notebook())
@@ -187,7 +187,7 @@ class PyUtilsTest(testing.TestCase):
     self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
 
 
-class ReadChecksumDigestTest(testing.TestCase):
+class ReadChecksumDigestTest(tfds.testing.TestCase):
 
   def test_digest(self):
     digest, size = py_utils.read_checksum_digest(
@@ -198,7 +198,7 @@ class ReadChecksumDigestTest(testing.TestCase):
     self.assertEqual(102, size)
 
 
-class GetClassPathUrlTest(testing.TestCase):
+class GetClassPathUrlTest(tfds.testing.TestCase):
 
   def test_get_class_path(self):
     cls_path = py_utils.get_class_path(py_utils.NonMutableDict)
@@ -216,4 +216,4 @@ class GetClassPathUrlTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

@@ -24,7 +24,7 @@ import os
 
 from absl.testing import absltest
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
@@ -33,7 +33,7 @@ from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core.tfrecords_writer import _ShardSpec
 
 
-class GetShardSpecsTest(testing.TestCase):
+class GetShardSpecsTest(tfds.testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
   # by _sharded_files_test.py.
 
@@ -78,7 +78,7 @@ class GetShardSpecsTest(testing.TestCase):
     ])
 
 
-class GetNumberShardsTest(testing.TestCase):
+class GetNumberShardsTest(tfds.testing.TestCase):
 
   def test_imagenet_train(self):
     size = 137<<30  # 137 GiB
@@ -130,13 +130,13 @@ def _read_records(path):
   return fnames, all_recs
 
 
-class WriterTest(testing.TestCase):
+class WriterTest(tfds.testing.TestCase):
 
   EMPTY_SPLIT_ERROR = 'No examples were yielded.'
   TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
 
   @absltest.mock.patch.object(
-      example_serializer, 'ExampleSerializer', testing.DummySerializer)
+      example_serializer, 'ExampleSerializer', tfds.testing.DummySerializer)
   def _write(self, to_write, path, salt=''):
     writer = tfrecords_writer.Writer('some spec', path, hash_salt=salt)
     for key, record in to_write:
@@ -169,7 +169,7 @@ class WriterTest(testing.TestCase):
     ])
 
   @absltest.mock.patch.object(
-      example_parser, 'ExampleParser', testing.DummyParser)
+      example_parser, 'ExampleParser', tfds.testing.DummyParser)
   def test_write_duplicated_keys(self):
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
@@ -203,7 +203,7 @@ class TfrecordsWriterBeamTest(WriterTest):
   EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
 
   @absltest.mock.patch.object(
-      example_serializer, 'ExampleSerializer', testing.DummySerializer)
+      example_serializer, 'ExampleSerializer', tfds.testing.DummySerializer)
   def _write(self, to_write, path, salt=''):
     beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = tfrecords_writer.BeamWriter('some spec', path, salt)
@@ -222,4 +222,4 @@ class TfrecordsWriterBeamTest(WriterTest):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

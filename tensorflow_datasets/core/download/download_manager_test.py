@@ -31,7 +31,7 @@ import threading
 from absl.testing import absltest
 import promise
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -77,7 +77,7 @@ class Artifact(object):
     self.dl_tmp_dirname = resource_lib.get_dl_dirname(url)
 
 
-class DownloadManagerTest(testing.TestCase):
+class DownloadManagerTest(tfds.testing.TestCase):
 
   def _add_file(self, path, content='', mode='w'):
     """Returns open file handle."""
@@ -331,4 +331,4 @@ class DownloadManagerTest(testing.TestCase):
     pickle.loads(pickle.dumps(dl_manager))
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

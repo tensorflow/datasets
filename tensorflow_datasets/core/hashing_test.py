@@ -20,11 +20,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import hashing
 
 
-class HashingTest(testing.TestCase):
+class HashingTest(tfds.testing.TestCase):
 
   def test_ints(self):
     hasher = hashing.Hasher(salt='')
@@ -40,4 +40,4 @@ class HashingTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

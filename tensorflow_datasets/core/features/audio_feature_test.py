@@ -26,13 +26,11 @@ import tempfile
 import numpy as np
 import pydub
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features
 
-tf.enable_v2_behavior()
 
-
-class AudioFeatureTest(testing.FeatureExpectationsTestCase):
+class AudioFeatureTest(tfds.testing.FeatureExpectationsTestCase):
 
   def create_np_audio(self):
     return np.random.randint(-2**10, 2**10, size=(10,), dtype=np.int64)
@@ -45,7 +43,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.int64,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np_audio,
                 expected=np_audio,
             ),
@@ -59,7 +57,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.float32,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=np_audio,
                 expected=np_audio,
             ),
@@ -84,7 +82,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.int64,
         tests=[
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=tmp_file,
                 expected=np_audio,
             ),
@@ -114,7 +112,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
           shape=(None,),
           dtype=tf.int64,
           tests=[
-              testing.FeatureExpectationItem(
+              tfds.testing.FeatureExpectationItem(
                   value=file_obj,
                   expected=np_audio,
               ),
@@ -126,4 +124,4 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

@@ -22,7 +22,7 @@ from __future__ import print_function
 
 import mock
 
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visualization
 
@@ -30,11 +30,11 @@ from tensorflow_datasets.core import visualization
 from tensorflow_datasets.image_classification import imagenet  # pylint: disable=unused-import,g-bad-import-order
 
 
-class ShowExamplesTest(testing.TestCase):
+class ShowExamplesTest(tfds.testing.TestCase):
 
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples(self, mock_fig):
-    with testing.mock_data(num_examples=20):
+    with tfds.testing.mock_data(num_examples=20):
       ds, ds_info = registered.load(
           'imagenet2012', split='train', with_info=True)
     visualization.show_examples(ds_info, ds)
@@ -43,4 +43,4 @@ class ShowExamplesTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

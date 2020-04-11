@@ -22,7 +22,7 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -31,8 +31,6 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
-
-tf.enable_v2_behavior()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
@@ -74,10 +72,10 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
     )
 
 
-class FileFormatAdapterTest(testing.TestCase):
+class FileFormatAdapterTest(tfds.testing.TestCase):
 
   def _test_generator_based_builder(self, builder_cls):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = builder_cls(data_dir=tmp_dir)
       builder.download_and_prepare()
       train_dataset = builder.as_dataset(split=splits.Split.TRAIN)
@@ -106,7 +104,7 @@ class FileFormatAdapterTest(testing.TestCase):
     self._test_generator_based_builder(DummyTFRecordBuilder)
 
 
-class TFRecordUtilsTest(testing.SubTestCase):
+class TFRecordUtilsTest(tfds.testing.SubTestCase):
 
   def test_dict_to_example(self):
     example = example_serializer._dict_to_tf_example({
@@ -170,7 +168,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
         },
         tests=[
             # Raw values
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={
                     "str": "",
                     "int": 1,
@@ -195,7 +193,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
                 },
             ),
             # Test numpy array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={
                     "str": np.zeros(2, dtype=np.uint8).tobytes(),
                     "int": np.array(1),
@@ -219,17 +217,17 @@ class TFRecordUtilsTest(testing.SubTestCase):
                         float_list=tf.train.FloatList(value=[2.0, 3.0])),
                 },
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=dict(default_dict, float=[[2.0], [3.0]]),  # Wrong shape
                 raise_cls=ValueError,
                 raise_msg="Shapes (2, 1) and (1, 2) are incompatible",
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=dict(default_dict, bool=True),  # Wrong shape
                 raise_cls=ValueError,
                 raise_msg="Shapes () and (1,) must have the same rank",
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=dict(default_dict, str=123),  # Wrong dtype
                 raise_cls=ValueError,
                 raise_msg="Could not convert to bytes",
@@ -254,7 +252,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
         },
         tests=[
             # Raw values
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={
                     "a": {
                         "b": [],
@@ -274,7 +272,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
                         int64_list=tf.train.Int64List(value=[1, 2, 3, 4])),
                 },
             ),
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value={
                     "a": {
                         "b": ["abc\n", "", "def  "],
@@ -321,7 +319,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
     with self.assertRaisesWithPredicateMatch(raise_cls, raise_msg):
       adapter._parser._build_feature_specs()
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def assertFeature(self, specs, serialized_info, tests):
     """Test the TFRecordExampleAdapter encoding."""
 
@@ -407,4 +405,4 @@ def _parse_example(serialized, parse_function):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

@@ -26,13 +26,12 @@ import tempfile
 import numpy as np
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image_classification import mnist
 
-tf.enable_v2_behavior()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
@@ -42,7 +41,7 @@ _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
-DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
+DummyDatasetSharedGenerator = tfds.testing.DummyDatasetSharedGenerator
 
 
 class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
@@ -68,18 +67,18 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
       }
 
 
-class DatasetInfoTest(testing.TestCase):
+class DatasetInfoTest(tfds.testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(DatasetInfoTest, cls).setUpClass()
-    cls._tfds_tmp_dir = testing.make_tmp_dir()
+    cls._tfds_tmp_dir = tfds.testing.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
     super(DatasetInfoTest, cls).tearDownClass()
-    testing.rm_tmp_dir(cls._tfds_tmp_dir)
+    tfds.testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_undefined_dir(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
@@ -140,7 +139,7 @@ class DatasetInfoTest(testing.TestCase):
       existing_json = json.load(f)
 
     # Now write to a temp directory.
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       info.write_to_directory(tmp_dir)
 
       # Read the newly written json file into a string.
@@ -181,7 +180,7 @@ class DatasetInfoTest(testing.TestCase):
         "url2": "some other checksum",
     }
 
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # Save it
       info.write_to_directory(tmp_dir)
 
@@ -190,7 +189,7 @@ class DatasetInfoTest(testing.TestCase):
       restored_info.read_from_directory(tmp_dir)
       self.assertEqual(info.as_proto, restored_info.as_proto)
 
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # Save it
       info.write_to_directory(tmp_dir)
 
@@ -249,9 +248,9 @@ class DatasetInfoTest(testing.TestCase):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_statistics_generation(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -264,9 +263,9 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_statistics_generation_variable_sizes(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -279,7 +278,7 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(3, schema_feature.shape.dim[2].size)
 
   def test_metadata(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds.testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
       # Metadata should have been created
@@ -337,4 +336,4 @@ INFO_STR = """tfds.core.DatasetInfo(
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

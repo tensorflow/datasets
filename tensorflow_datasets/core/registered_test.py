@@ -23,7 +23,7 @@ from __future__ import print_function
 import abc
 import mock
 import six
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.utils import py_utils
@@ -59,7 +59,7 @@ class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
   IN_DEVELOPMENT = True
 
 
-class RegisteredTest(testing.TestCase):
+class RegisteredTest(tfds.testing.TestCase):
 
   def test_registered(self):
     name = "empty_dataset_builder"
@@ -230,4 +230,4 @@ class RegisteredTest(testing.TestCase):
     self.assertNotIn(name, registered.list_builders())
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

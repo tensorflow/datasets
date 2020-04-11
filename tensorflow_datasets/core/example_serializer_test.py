@@ -23,13 +23,13 @@ from __future__ import print_function
 import numpy as np
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import py_utils
 
 
-class ExampleSerializerTest(testing.SubTestCase):
+class ExampleSerializerTest(tfds.testing.SubTestCase):
 
   def assertRaggedFieldEqual(self, dict1, dict2):
     self.assertIsInstance(dict1, dict)
@@ -203,4 +203,4 @@ class ExampleSerializerTest(testing.SubTestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

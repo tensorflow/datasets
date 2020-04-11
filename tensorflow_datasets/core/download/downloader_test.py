@@ -27,7 +27,7 @@ import tempfile
 
 from absl.testing import absltest
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
 
@@ -49,7 +49,7 @@ class _FakeResponse(object):
       yield line
 
 
-class DownloaderTest(testing.TestCase):
+class DownloaderTest(tfds.testing.TestCase):
 
   def setUp(self):
     super(DownloaderTest, self).setUp()
@@ -128,7 +128,7 @@ class DownloaderTest(testing.TestCase):
 
   def test_kaggle_api(self):
     fname = 'a.csv'
-    with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
+    with tfds.testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
       # Testing Competition Downloader
       promise = self.downloader.download(
           'kaggle://competition/some-competition/a.csv',
@@ -201,7 +201,7 @@ class DownloaderTest(testing.TestCase):
       method.assert_not_called()
 
 
-class GetFilenameTest(testing.TestCase):
+class GetFilenameTest(tfds.testing.TestCase):
 
   def test_no_headers(self):
     resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
@@ -219,4 +219,4 @@ class GetFilenameTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

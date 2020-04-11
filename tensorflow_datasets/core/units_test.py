@@ -19,11 +19,11 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import units
 
 
-class UnitsTest(testing.TestCase):
+class UnitsTest(tfds.testing.TestCase):
 
   def test_none(self):
     self.assertEqual("Unknown size", units.size_str(None))
@@ -40,4 +40,4 @@ class UnitsTest(testing.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

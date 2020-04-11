@@ -21,12 +21,12 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.features import top_level_feature
 
 
-class FeaturesManagerTest(testing.TestCase):
+class FeaturesManagerTest(tfds.testing.TestCase):
 
   def test_sequence_rank(self):
 
@@ -135,4 +135,4 @@ class FeaturesManagerTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

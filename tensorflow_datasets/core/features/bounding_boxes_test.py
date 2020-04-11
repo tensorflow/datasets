@@ -21,13 +21,13 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import features
 
 tf.enable_v2_behavior()
 
 
-class BBoxFeatureTest(testing.FeatureExpectationsTestCase):
+class BBoxFeatureTest(tfds.testing.FeatureExpectationsTestCase):
 
   def test_feature(self):
 
@@ -37,7 +37,7 @@ class BBoxFeatureTest(testing.FeatureExpectationsTestCase):
         dtype=tf.float32,
         tests=[
             # Numpy array
-            testing.FeatureExpectationItem(
+            tfds.testing.FeatureExpectationItem(
                 value=features.BBox(
                     ymin=0.0,
                     xmin=0.25,
@@ -51,4 +51,4 @@ class BBoxFeatureTest(testing.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

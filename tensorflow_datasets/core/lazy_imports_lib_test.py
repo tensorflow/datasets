@@ -23,10 +23,9 @@ from __future__ import print_function
 from absl.testing import parameterized
 import six
 import tensorflow_datasets as tfds
-from tensorflow_datasets import testing
 
 
-class LazyImportsTest(testing.TestCase, parameterized.TestCase):
+class LazyImportsTest(tfds.testing.TestCase, parameterized.TestCase):
 
   # The following deps are not in the test list because the datasets that
   # require them need to have their tests run in isolation:
@@ -60,4 +59,4 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

@@ -22,26 +22,24 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_utils
-
-tf.enable_v2_behavior()
 
 
 def _create_dataset(rng):
   return tf.data.Dataset.from_tensor_slices(list(rng))
 
 
-class DatasetAsNumPyTest(testing.TestCase):
+class DatasetAsNumPyTest(tfds.testing.TestCase):
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_singleton_tensor(self):
     t = tf.random.normal((10, 10))
     np_t = dataset_utils.as_numpy(t)
     self.assertEqual((10, 10), np_t.shape)
     self.assertEqual(np.float32, np_t.dtype)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_nested_tensors(self):
     t1 = tf.random.normal((10, 10))
     t2 = tf.random.normal((10, 20))
@@ -61,7 +59,7 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertEqual((10, 20), np_t2.shape)
     self.assertEqual(np.float32, np_t2.dtype)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_singleton_dataset(self):
     ds = _create_dataset(range(10))
     np_ds = dataset_utils.as_numpy(ds)
@@ -74,7 +72,7 @@ class DatasetAsNumPyTest(testing.TestCase):
       np_ds = dataset_utils.as_numpy(ds, graph=g)
       self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_singleton_dataset_with_nested_elements(self):
     ds = _create_dataset(range(10))
     ds = ds.map(lambda el: {"a": el, "b": el + 1, "c": (el + 2, el + 3)})
@@ -85,7 +83,7 @@ class DatasetAsNumPyTest(testing.TestCase):
       self.assertEqual(i + 2, el["c"][0])
       self.assertEqual(i + 3, el["c"][1])
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_sequential_access(self):
     ds1 = _create_dataset(range(10))
     ds2 = _create_dataset(range(10, 20))
@@ -96,7 +94,7 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds1)])
     self.assertEqual(list(range(10, 20)), [int(el) for el in list(np_ds2)])
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_simultaneous_access(self):
     ds1 = _create_dataset(range(10))
     ds2 = _create_dataset(range(10, 20))
@@ -107,7 +105,7 @@ class DatasetAsNumPyTest(testing.TestCase):
     for i1, i2 in zip(np_ds1, np_ds2):
       self.assertEqual(i2, int(i1) + 10)
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_nested_elements(self):
     ds1 = _create_dataset(range(10))
     ds1 = ds1.map(lambda el: {"a": el, "b": el + 1, "c": (el + 2, el + 3)})
@@ -123,7 +121,7 @@ class DatasetAsNumPyTest(testing.TestCase):
       self.assertEqual(i + 2, el1["c"][0])
       self.assertEqual(i + 3, el1["c"][1])
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_tensors_match(self):
     t = tf.random.uniform(
         shape=(50, 3),
@@ -136,7 +134,7 @@ class DatasetAsNumPyTest(testing.TestCase):
     # and target may not match
     self.assertAllEqual(ds["a"], ds["b"])
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_ragged_tensors(self):
     rt = tf.ragged.constant([
         [1, 2, 3],
@@ -157,7 +155,7 @@ class DatasetAsNumPyTest(testing.TestCase):
         [4, 5],
     ]))
 
-  @testing.run_in_graph_and_eager_modes()
+  @tfds.testing.run_in_graph_and_eager_modes()
   def test_ragged_tensors_ds(self):
     def _gen_ragged_tensors():
       # Yield the (flat_values, rowids)
@@ -181,7 +179,7 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertAllEqual(rt2, [[4], [5, 6]])
 
 
-class DatasetOffsetTest(testing.TestCase):
+class DatasetOffsetTest(tfds.testing.TestCase):
   """Test that the offset functions are working properly."""
 
   def test_build_mask_ds(self):
@@ -237,4 +235,4 @@ class DatasetOffsetTest(testing.TestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()
