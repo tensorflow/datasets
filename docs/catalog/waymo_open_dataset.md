@@ -31,7 +31,7 @@ tfds.load('waymo_open_dataset', data_dir='gs://waymo_open_dataset_v_1_0_0_indivi
 *   **Source code**:
     [`tfds.object_detection.waymo_open_dataset.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
 *   **Versions**:
-    * (tfds-nightly) **`0.1.0`** (default): No release notes.
+    * <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> **`0.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `34.73 GiB`
 *   **Auto-cached**

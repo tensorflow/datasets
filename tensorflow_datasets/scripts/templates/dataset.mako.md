@@ -47,8 +47,10 @@ def list_versions(builder):
       version_name = '**`{}`** (default)'.format(str(v))
     else:
       version_name = '`{}`'.format(str(v))
-    nightly = '(tfds-nightly)' if str(v) in nightly_ds["version"] else ''
-    yield '{} {}: {}'.format(nightly, version_name, v.description or 'No release notes.')
+    nightly = ''
+    if str(v) in nightly_ds["version"]:
+      nightly = '<span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> '
+    yield '{}{}: {}'.format(nightly, version_name, v.description or 'No release notes.')
 %>\
 *   **Versions**:
 % for version_str in list_versions(builder):
@@ -259,7 +261,9 @@ ${display_builder(next(iter(builders)), common_sections)}
 % for i, builder in enumerate(builders):
 <%
 header_suffix = '(default config)' if i == 0 else ''
-nightly = '(tfds-nightly)' if builder.builder_config.name in nightly_ds["config"] else ''
+nightly = ''
+if builder.builder_config.name in nightly_ds["config"]:
+  nightly = '<span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span>'
 %>\
 ${'##'} ${nightly} ${builder.name}/${builder.builder_config.name} ${header_suffix}
 

@@ -30,7 +30,7 @@ Both "arxiv" and "pubmed" have two features:
 *   **Source code**:
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 *   **Versions**:
-    * (tfds-nightly) **`1.1.1`** (default): No release notes.
+    * <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> **`1.1.1`** (default): No release notes.
     * `1.1.0`: No release notes.
 *   **Download size**: `4.20 GiB`
 *   **Auto-cached**
