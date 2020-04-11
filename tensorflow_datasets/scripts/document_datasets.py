@@ -60,16 +60,19 @@ def _get_nightly_datasets():
     stable_versions = f.read().splitlines()
 
   def to_dict(ds):
-    # Convert to a dict to hold ds_name -> property -> [properties]
+    # Convert to a dict to hold ds_name -> property -> {properties}
     ds_dict = collections.defaultdict(lambda: collections.defaultdict(set))
     for name in ds:
       res = _FULL_NAME_REG.match(name)
-      if res:
-        ds_name = res.group("ds_name")
-        config = res.group("config")
-        version = res.group("version")
-        ds_dict[ds_name]["version"].add(version)
-        ds_dict[ds_name]["config"].add(config)
+      if not res:
+        raise ValueError("Parsing builder name string {} failed."
+            "The builder name string must be of the following format:"
+            "dataset_name[/config_name]/version".format(name))
+      ds_name = res.group("ds_name")
+      config = res.group("config")
+      version = res.group("version")
+      ds_dict[ds_name]["version"].add(version)
+      ds_dict[ds_name]["config"].add(config)
 
     return ds_dict
 
@@ -85,12 +88,6 @@ def _get_nightly_datasets():
     else:
       nightly_ds[k] = registered_ds[k]
 
-  # for k in nightly_ds:
-  #   if nightly_ds[k]["config"]:
-  #     print(k)
-  #     print(nightly_ds[k]["config"])
-  #     input()
-    
   return nightly_ds
 
 _TFDS_NIGHTLY_DATASETS = _get_nightly_datasets()

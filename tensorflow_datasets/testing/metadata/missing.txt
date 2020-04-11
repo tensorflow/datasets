@@ -4,7 +4,6 @@ cityscapes/semantic_segmentation/1.0.0
 cityscapes/semantic_segmentation_extra/1.0.0
 cityscapes/stereo_disparity/1.0.0
 cityscapes/stereo_disparity_extra/1.0.0
-clevr/3.1.0
 common_voice/br/1.0.0
 common_voice/ca/1.0.0
 common_voice/cnh/1.0.0
@@ -24,6 +23,9 @@ common_voice/tr/1.0.0
 common_voice/tt/1.0.0
 common_voice/zh-TW/1.0.0
 image_label_folder/2.0.0
+scan/mcd1/1.1.0
+scan/mcd2/1.1.0
+scan/mcd3/1.1.0
 so2sat/all/2.0.0
 so2sat/rgb/2.0.0
 wmt18_translate/cs-en/1.0.0

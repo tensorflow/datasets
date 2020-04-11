@@ -1997,7 +1997,6 @@ wmt19_translate/zh-en/0.0.3
 wmt19_translate/zh-en/1.0.0
 wmt_t2t_translate/de-en/0.0.1
 wmt_t2t_translate/de-en/1.0.0
-wmt_translate/None
 xnli/plain_text/0.0.1
 xnli/plain_text/1.0.0
 xsum/1.0.0
