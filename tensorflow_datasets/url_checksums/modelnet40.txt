@@ -1,0 +1,1 @@
+https://shapenet.cs.stanford.edu/media/modelnet40_ply_hdf5_2048.zip 435212151 07670e237db72ece0f723b9abb571534c9ad655a6456b389646587dc72bb8bae

@@ -538,6 +538,7 @@ class Tensor(FeatureConnector):
     """See base class for details."""
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
     if not isinstance(example_data, np.ndarray):
+      print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$', example_data)
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
     if example_data.dtype != np_dtype:

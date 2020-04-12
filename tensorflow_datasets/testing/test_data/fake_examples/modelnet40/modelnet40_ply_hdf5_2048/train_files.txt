@@ -1,0 +1,3 @@
+data/modelnet40_ply_hdf5_2048/ply_data_train0.h5
+data/modelnet40_ply_hdf5_2048/ply_data_train1.h5
+data/modelnet40_ply_hdf5_2048/ply_data_train2.h5
