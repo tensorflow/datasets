@@ -57,6 +57,13 @@ _CITATION = """\
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-01766},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
+
+@misc{zisheng_liang_2020_3749392,
+  author    = {Zisheng Liang and Ouwen Huang},
+  title     = {TensorFlow Datasets DeepLesion: Tools for Processing NIH DeepLesion Dataset},
+  year      = {2020}
+  doi       = {10.5281/zenodo.3749392}
+}
 """
 
 
