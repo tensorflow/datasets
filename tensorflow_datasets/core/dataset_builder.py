@@ -33,7 +33,6 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import lazy_imports_lib
@@ -594,10 +593,6 @@ class DatasetBuilder(object):
     if self.info.dataset_size > 250 * units.MiB:
       return False
 
-    # Do not support old-split API.
-    if not self.version.implements(utils.Experiment.S3):
-      return False
-
     # We do not want to cache data which has more than one shards when
     # shuffling is enabled, as this would effectivelly disable shuffling.
     # An exception is for single shard (as shuffling is a no-op).
@@ -927,33 +922,13 @@ class FileAdapterBuilder(DatasetBuilder):
       decoders=None,
       read_config=None,
       shuffle_files=False):
-
-    if self.version.implements(utils.Experiment.S3):
-      ds = self._tfrecords_reader.read(
-          name=self.name,
-          instructions=split,
-          split_infos=self.info.splits.values(),
-          read_config=read_config,
-          shuffle_files=shuffle_files,
-      )
-    else:
-      # Resolve all the named split tree by real ones
-      read_instruction = split.get_read_instruction(self.info.splits)
-      # Extract the list of SlicedSplitInfo objects containing the splits
-      # to use and their associated slice
-      list_sliced_split_info = read_instruction.get_list_sliced_split_info()
-      # Resolve the SlicedSplitInfo objects into a list of
-      # {'filepath': 'path/to/data-00032-00100', 'mask': [True, False, ...]}
-      instruction_dicts = self._slice_split_info_to_instruction_dicts(
-          list_sliced_split_info)
-
-      # Load the dataset
-      ds = dataset_utils.build_dataset(
-          instruction_dicts=instruction_dicts,
-          dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
-          shuffle_files=shuffle_files,
-      )
-
+    ds = self._tfrecords_reader.read(
+        name=self.name,
+        instructions=split,
+        split_infos=self.info.splits.values(),
+        read_config=read_config,
+        shuffle_files=shuffle_files,
+    )
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -1066,14 +1041,6 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
     )
 
-  def _prepare_split_legacy(self, generator, split_info):
-    # TODO(pierrot): delete function once S3 has been fully rolled-out.
-    # For builders having both S3 and non S3 versions: drop key if any yielded.
-    generator = (ex[1] if isinstance(ex, tuple) else ex for ex in generator)
-    generator = (self.info.features.encode_example(ex) for ex in generator)
-    output_files = self._build_split_filenames(split_info)
-    self._file_format_adapter.write_from_generator(generator, output_files)
-
   def _prepare_split(self, split_generator, max_examples_per_split):
     generator = self._generate_examples(**split_generator.gen_kwargs)
     split_info = split_generator.split_info
@@ -1081,8 +1048,6 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
       logging.warning("Splits capped at %s examples max.",
                       max_examples_per_split)
       generator = itertools.islice(generator, max_examples_per_split)
-    if not self.version.implements(utils.Experiment.S3):
-      return self._prepare_split_legacy(generator, split_info)
     fname = "{}-{}.tfrecord".format(self.name, split_generator.name)
     fpath = os.path.join(self._data_dir, fname)
     writer = tfrecords_writer.Writer(self._example_specs, fpath,

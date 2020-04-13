@@ -112,8 +112,8 @@ first. For example:
 class MNIST(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", "S3: tensorflow.org/datasets/splits",
-                        experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("2.0.0", "EXP1: Opt-in for experiment 1",
+                        experiments={tfds.core.Experiment.EXP1: True}),
   ]
 ```
 
@@ -124,9 +124,9 @@ definition would then look like:
 ```py
 class MNIST(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+                              experiments={tfds.core.Experiment.EXP1: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", "S3: tensorflow.org/datasets/splits"),
+      tfds.core.Version("2.0.0", "EXP1: Opt-in for experiment 1"),
   ]
 ```
 
