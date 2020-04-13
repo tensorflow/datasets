@@ -63,6 +63,13 @@ workers:
 ```sh
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
+If dataset is recently updated to `tfds`. To avoid conflict
+between the tfds version installed in the workers and the one installed in master
+job, it is good to use `tfds-nightly` instead:
+
+```sh
+echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
+```
 
 Finally, you can launch the job using the command below:
 
