@@ -126,6 +126,7 @@ class CityscapesConfig(tfds.core.BuilderConfig):
 class Cityscapes(tfds.core.GeneratorBasedBuilder):
   """Base class for Cityscapes datasets."""
 
+
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You have to download files from https://www.cityscapes-dataset.com/login/
   (This dataset requires registration).
