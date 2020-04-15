@@ -92,8 +92,13 @@ class _Extractor(object):
         path = tf.compat.as_text(path)
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
-      msg = 'Error while extracting %s to %s (file: %s) : %s' % (
-          from_path, to_path, path, err)
+      msg = (
+        'Error while extracting %s to %s (file: %s) : %s\n'
+        ' If you are on windows and extraction path name is too long'
+        ' this error maybe occurs when user forgot to disable path length' 
+        ' limit in python, to disable it look here : '
+        ' https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
+      ) % (from_path, to_path, path, err)
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
