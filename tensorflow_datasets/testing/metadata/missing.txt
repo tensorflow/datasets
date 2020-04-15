@@ -36,4 +36,3 @@ wmt18_translate/kk-en/1.0.0
 wmt18_translate/ru-en/1.0.0
 wmt18_translate/tr-en/1.0.0
 wmt18_translate/zh-en/1.0.0
-wmt_translate/None
