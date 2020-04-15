@@ -48,7 +48,6 @@ for ex in tfds.as_numpy(ds):
 *   [`binarized_mnist`](binarized_mnist.md)
 *   [`celeb_a`](celeb_a.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
-*   [`cityscapes`](cityscapes.md)
 *   [`clevr`](clevr.md)
 *   [`coil100`](coil100.md)
 *   [`div2k`](div2k.md)
