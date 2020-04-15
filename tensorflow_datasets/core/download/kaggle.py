@@ -23,6 +23,7 @@ from __future__ import print_function
 import collections
 import os
 import subprocess as sp
+import zipfile
 
 from absl import logging
 import tensorflow.compat.v2 as tf
@@ -168,7 +169,14 @@ class KaggleCompetitionDownloader(object):
     if self._kaggle_type.extra_flag:
       command.append(self._kaggle_type.extra_flag)
     _run_kaggle_command(command, self._competition_name)
-    return os.path.join(output_dir, fname)
+    # kaggle silently compresses some files to '.zip` files.
+    fpath = os.path.join(output_dir, fname + '.zip')
+    if not fname.endswith('.zip') and tf.io.gfile.exists(fpath):
+      with tf.io.gfile.GFile(fpath, 'rb') as fobj:
+        z = zipfile.ZipFile(fobj)
+        z.extractall(output_dir)
+      tf.io.gfile.remove(fpath)
+    return os.path.join(output_dir, fname) 
 
 
 def _run_kaggle_command(command_args, competition_name):
