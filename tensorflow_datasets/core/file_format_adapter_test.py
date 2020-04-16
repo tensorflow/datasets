@@ -23,87 +23,13 @@ from __future__ import print_function
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
-from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
 tf.enable_v2_behavior()
-
-
-class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
-
-  VERSION = utils.Version("0.0.0", experiments={utils.Experiment.S3: False})
-
-  def _split_generators(self, dl_manager):
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            num_shards=2,
-            gen_kwargs={"range_": range(20)}),
-        splits.SplitGenerator(
-            name=splits.Split.VALIDATION,
-            num_shards=1,
-            gen_kwargs={"range_": range(20, 30)}),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            num_shards=1,
-            gen_kwargs={"range_": range(30, 40)}),
-    ]
-
-  def _generate_examples(self, range_):
-    for i in range_:
-      yield {
-          "x": i,
-          "y": np.array([-i]).astype(np.int64)[0],
-          "z": tf.compat.as_text(str(i))
-      }
-
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        builder=self,
-        features=features.FeaturesDict({
-            "x": tf.int64,
-            "y": tf.int64,
-            "z": tf.string,
-        }),
-    )
-
-
-class FileFormatAdapterTest(testing.TestCase):
-
-  def _test_generator_based_builder(self, builder_cls):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = builder_cls(data_dir=tmp_dir)
-      builder.download_and_prepare()
-      train_dataset = builder.as_dataset(split=splits.Split.TRAIN)
-      valid_dataset = builder.as_dataset(split=splits.Split.VALIDATION)
-      test_dataset = builder.as_dataset(split=splits.Split.TEST)
-
-      self.assertIsInstance(train_dataset, tf.data.Dataset)
-
-      def validate_dataset(dataset, min_val, max_val, test_range=False):
-        els = []
-        for el in dataset:
-          x, y, z = el["x"].numpy(), el["y"].numpy(), el["z"].numpy()
-          self.assertEqual(-x, y)
-          self.assertEqual(x, int(z))
-          self.assertGreaterEqual(x, min_val)
-          self.assertLess(x, max_val)
-          els.append(x)
-        if test_range:
-          self.assertCountEqual(list(range(min_val, max_val)), els)
-
-      validate_dataset(train_dataset, 0, 30)
-      validate_dataset(valid_dataset, 0, 30)
-      validate_dataset(test_dataset, 30, 40, True)
-
-  def test_tfrecords(self):
-    self._test_generator_based_builder(DummyTFRecordBuilder)
 
 
 class TFRecordUtilsTest(testing.SubTestCase):

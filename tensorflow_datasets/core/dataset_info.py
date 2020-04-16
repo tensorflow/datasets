@@ -358,6 +358,7 @@ class DatasetInfo(object):
     if not dataset_info_dir:
       raise ValueError(
           "Calling read_from_directory with undefined dataset_info_dir.")
+    logging.info("Load dataset info from %s", dataset_info_dir)
 
     json_filename = self._dataset_info_path(dataset_info_dir)
 
@@ -425,7 +426,8 @@ class DatasetInfo(object):
     data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
       return
-    logging.info("Loading info from GCS for %s", self.full_name)
+    logging.info("Load pre-computed DatasetInfo (eg: splits, num examples,...) "
+                 "from GCS: %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
       gcs_utils.download_gcs_file(fname, out_fname)

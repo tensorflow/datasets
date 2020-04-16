@@ -23,6 +23,8 @@ tf_compat.ensure_tf_install()
 
 from tensorflow_datasets.core.api_utils import disallow_positional_args  # pylint:disable=g-import-not-at-top
 
+from tensorflow_datasets.core.constants import add_data_dir
+
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
@@ -50,16 +52,17 @@ from tensorflow_datasets.core.utils import Version
 
 
 __all__ = [
-    "lazy_imports",
+    "add_data_dir",
     "BeamBasedBuilder",
     "BeamMetadataDict",
     "BuilderConfig",
     "DatasetBuilder",
+    "DatasetInfo",
     "disallow_positional_args",
     "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",
-    "DatasetInfo",
+    "lazy_imports",
     "NamedSplit",
     "Metadata",
     "MetadataDict",
