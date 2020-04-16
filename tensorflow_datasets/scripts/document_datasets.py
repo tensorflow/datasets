@@ -34,6 +34,7 @@ from absl import app
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import py_utils
 
 WORKER_COUNT_DATASETS = 200
@@ -45,52 +46,75 @@ BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datase
 # TODO(tfds): Document image_label_folder datasets in a separate section
 BUILDER_BLACKLIST = ["wmt_translate"]
 
-# Regex matching 'dataset/config/1.3.0'
-_FULL_NAME_REG = re.compile(
-    r"^"
-    r"(?P<ds_name>\w+)"
-    r"(/(?P<config>[\w\-\.]+))?"
-    r"(/(?P<version>(\d+|\*)(\.(\d+|\*)){2}))"
-    r"$")
+def make_full_name_to_ds_dict(ds):
+  # Convert to a dict to hold ds_name -> config_name -> {versions}
+  ds_dict = collections.defaultdict(lambda: collections.defaultdict(set))
+  for name in ds:
+    if not registered.is_full_name(name):
+      raise ValueError("Parsing builder name string {} failed."
+          "The builder name string must be of the following format:"
+          "dataset_name[/config_name]/version".format(name))
+    props = name.split('/')
+    ds_name = props[0]
+    version = props[-1]
+    config = props[1] if len(props) == 3 else ""
+    ds_dict[ds_name][config].add(version)
+  return ds_dict
 
-def _get_nightly_datasets():
+
+@py_utils.memoize()
+def get_nightly_datasets():
   """Read stable_versions.txt and organized the new datasets in nested dicts."""
   version_path = os.path.join(tfds.core.utils.tfds_dir(), 'stable_versions.txt')
   with tf.io.gfile.GFile(version_path, 'r') as f:
     stable_versions = f.read().splitlines()
 
-  def to_dict(ds):
-    # Convert to a dict to hold ds_name -> property -> {properties}
-    ds_dict = collections.defaultdict(lambda: collections.defaultdict(set))
-    for name in ds:
-      res = _FULL_NAME_REG.match(name)
-      if not res:
-        raise ValueError("Parsing builder name string {} failed."
-            "The builder name string must be of the following format:"
-            "dataset_name[/config_name]/version".format(name))
-      ds_name = res.group("ds_name")
-      config = res.group("config")
-      version = res.group("version")
-      ds_dict[ds_name]["version"].add(version)
-      ds_dict[ds_name]["config"].add(config)
-
-    return ds_dict
-
-  registered_ds = to_dict(tfds.core.registered.list_full_names())
-  stable_version_ds = to_dict(stable_versions)
-  nightly_ds = to_dict([])
-
-  # Get all new key, items
-  for k in registered_ds:
-    if k in stable_version_ds:
-      for prop in registered_ds[k]:
-        nightly_ds[k][prop] = registered_ds[k][prop] - stable_version_ds[k][prop]
+  registered_ds = make_full_name_to_ds_dict(registered.list_full_names())
+  stable_version_ds = make_full_name_to_ds_dict(stable_versions)
+  nightly_ds = collections.defaultdict(
+      lambda: collections.defaultdict(
+          lambda: collections.defaultdict(bool)))
+  # # Get all new ds, items
+  for ds in registered_ds:
+    if ds in stable_version_ds:
+      for config in registered_ds[ds]:
+        if config in stable_version_ds[ds]:
+          for version in registered_ds[ds][config]:
+            if version in stable_version_ds[ds][config]:
+              nightly_ds[ds][config][version] = False
+            else:
+              nightly_ds[ds][config][version] = True
+        else:
+          nightly_ds[ds][config] = True
     else:
-      nightly_ds[k] = registered_ds[k]
-
+      nightly_ds[ds] = True
   return nightly_ds
 
-_TFDS_NIGHTLY_DATASETS = _get_nightly_datasets()
+
+class NightlyUtil(object):
+
+  def __init__(self):
+    self._nightly_ds = get_nightly_datasets()
+
+  @staticmethod
+  def _is_true(var):
+    if var is True:
+      return True
+    return False
+
+  def is_builder_nightly(self, builder):
+      return self._is_true(self._nightly_ds.get(builder))
+
+  def is_config_nightly(self, builder, config):
+    if not self.is_builder_nightly(builder):
+      return self._is_true(self._nightly_ds[builder].get(config))
+    return False
+
+  def is_version_nightly(self, builder, config, version):
+    if not self.is_config_nightly(builder):
+      return self._is_true(self._nightly_ds[builder][config].get(config))
+    return False
+
 
 @py_utils.memoize()
 def get_mako_template(tmpl_name):
@@ -121,7 +145,7 @@ def document_single_builder(builder):
   out_str = tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
-      nightly_ds=_TFDS_NIGHTLY_DATASETS[builder.name],
+      nightly_ds=NightlyUtil(),
   ).strip()
   schema_org_tmpl = get_mako_template("schema_org")
   schema_org_out_str = schema_org_tmpl.render_unicode(
@@ -163,6 +187,7 @@ def make_module_to_builder_dict(datasets=None):
 
   module_to_builder = module_to_builder["tensorflow_datasets"]
   return module_to_builder
+
 
 def dataset_docs_str(datasets=None):
   """Create dataset documentation string for given datasets.
