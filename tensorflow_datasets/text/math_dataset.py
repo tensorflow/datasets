@@ -46,10 +46,12 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 (Saxton, Grefenstette, Hill, Kohli).
 
 Example usage:
+```
 train_examples, val_examples = tfds.load(
     'math_dataset/arithmetic__mul',
     split=['train', 'test'],
     as_supervised=True)
+```
 """
 
 _DATA_URL = "https://storage.googleapis.com/mathematics-dataset/mathematics_dataset-v1.0.tar.gz"
