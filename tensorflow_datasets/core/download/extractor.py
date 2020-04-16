@@ -90,10 +90,19 @@ class _Extractor(object):
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
-        _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
+        dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
+        _copy(handle, dst_path)
     except BaseException as err:
-      msg = 'Error while extracting %s to %s (file: %s) : %s' % (
+      msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
           from_path, to_path, path, err)
+      # Check if running on windows
+      if os.name == 'nt' and len(dst_path) > 250:
+        msg += (
+            '\n'
+            'On windows, path lengths greater than 260 characters may '
+            'result in an error. See the doc to remove the limiration: '
+            'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
+        )
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
