@@ -37,8 +37,7 @@ from tensorflow_datasets.core.dataset_info import MetadataDict
 
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
-from tensorflow_datasets.core.splits import NamedSplit
-from tensorflow_datasets.core.splits import SplitBase
+from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
@@ -49,6 +48,10 @@ from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
+
+NamedSplit = Split  # TODO(epot): Remove once users are migrated.
+SplitBase = Split
+del Split  # Is accessed through `tfds.Split`
 
 
 __all__ = [
@@ -63,13 +66,13 @@ __all__ = [
     "GeneratorBasedBuilder",
     "get_tfds_path",
     "lazy_imports",
-    "NamedSplit",
     "Metadata",
     "MetadataDict",
     "ReadInstruction",
-    "SplitBase",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
     "Version",
+    "SplitBase",
+    "NamedSplit",
 ]

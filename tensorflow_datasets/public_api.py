@@ -32,7 +32,6 @@ from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
 from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
-from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
@@ -58,7 +57,6 @@ __all__ = [
     "builder",
     "list_builders",
     "load",
-    "percent",
     "ReadConfig",
     "Split",
     "testing",

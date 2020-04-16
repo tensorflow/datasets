@@ -523,7 +523,7 @@ class ReadInstruction(object):
     Returns:
       ReadInstruction instance.
     """
-    spec = str(spec)  # Need to convert to str in case of NamedSplit instance.
+    spec = str(spec)  # Need to convert to str in case of `Split` instance.
     subs = _ADDITION_SEP_RE.split(spec)
     if not subs:
       raise AssertionError('No instructions could be built out of %s' % spec)

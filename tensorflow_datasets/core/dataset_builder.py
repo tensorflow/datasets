@@ -512,9 +512,6 @@ class DatasetBuilder(object):
       as_supervised,
   ):
     """as_dataset for a single split."""
-    if isinstance(split, six.string_types):
-      split = splits_lib.Split(split)
-
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
@@ -964,39 +961,6 @@ class FileAdapterBuilder(DatasetBuilder):
         self.info.features.decode_example, decoders=decoders)
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
-
-  def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
-    """Return the list of files and reading mask of the files to read."""
-    instruction_dicts = []
-    for sliced_split_info in list_sliced_split_info:
-      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
-
-      # Compute filenames from the given split
-      filepaths = list(sorted(self._build_split_filenames(
-          sliced_split_info.split_info)))
-
-      # Compute the offsets
-      if sliced_split_info.split_info.num_examples:
-        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
-            sliced_split_info.split_info.num_shards,
-            sliced_split_info.split_info.num_examples,
-        )
-        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
-      else:
-        logging.warning(
-            "Statistics not present in the dataset. TFDS is not able to load "
-            "the total number of examples, so using the subsplit API may not "
-            "provide precise subsplits."
-        )
-        mask_offsets = [0] * len(filepaths)
-
-      for filepath, mask_offset in zip(filepaths, mask_offsets):
-        instruction_dicts.append({
-            "filepath": filepath,
-            "mask": mask,
-            "mask_offset": mask_offset,
-        })
-    return instruction_dicts
 
   def _build_split_filenames(self, split_info):
     """Construct the split filenames associated with the split info.
