@@ -27,6 +27,7 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
 
+plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
 def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
   """Plot each individual example in a grid.
@@ -46,8 +47,7 @@ def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
   Returns:
     fig: Figure to display.
   """
-  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
+  
   num_examples = rows * cols
   examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
 
@@ -64,7 +64,6 @@ def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
 
 def _add_image(ax, image):
   """Add the image to the given `matplotlib.axes.Axes`."""
-  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
   if len(image.shape) != 3:
     raise ValueError(
@@ -131,8 +130,7 @@ class ImageGridVisualizer(visualizer.Visualizer):
 
     # Single image display
     def make_cell_fn(ax, ex):
-      plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
-
+      
       if not isinstance(ex, dict):
         raise ValueError(
             '{} requires examples as `dict`, with the same '
