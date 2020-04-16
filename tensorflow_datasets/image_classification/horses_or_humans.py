@@ -40,7 +40,7 @@ _TEST_URL = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/val
 _IMAGE_SIZE = 300
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
-_NAME_RE = re.compile(r"^(humans|horses)/[\w-]*\.png$")
+_NAME_RE = re.compile(r"^(humans|horses)(/|\\)[\w-]*\.png$")
 
 
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
