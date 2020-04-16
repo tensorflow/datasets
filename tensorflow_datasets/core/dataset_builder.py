@@ -34,7 +34,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
@@ -349,7 +348,7 @@ class DatasetBuilder(object):
         download_config=download_config)
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
-    with file_format_adapter.incomplete_dir(self._data_dir) as tmp_data_dir:
+    with utils.incomplete_dir(self._data_dir) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
@@ -833,24 +832,11 @@ def _list_all_version_dirs(root_dir):
 
 
 class FileAdapterBuilder(DatasetBuilder):
-  """Base class for datasets with data generation based on file adapter.
-
-  `FileFormatAdapter`s are defined in
-  `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
-  feature dictionaries yielded by example generators. See the class docstrings.
-  """
+  """Base class for datasets with data generation based on file adapter."""
 
   @utils.memoized_property
   def _example_specs(self):
     return self.info.features.get_serialized_info()
-
-  @utils.memoized_property
-  def _file_format_adapter(self):
-    # Load the format adapter (TF-Record,...)
-    # The file_format_adapter module will eventually be replaced by
-    # tfrecords_{reader,writer} modules.
-    file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
-    return file_adapter_cls(self._example_specs)
 
   @property
   def _tfrecords_reader(self):
@@ -962,28 +948,6 @@ class FileAdapterBuilder(DatasetBuilder):
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
 
-  def _build_split_filenames(self, split_info):
-    """Construct the split filenames associated with the split info.
-
-    The filenames correspond to the pre-processed datasets files present in
-    the root directory of the dataset.
-
-    Args:
-      split_info: (SplitInfo) needed split.
-
-    Returns:
-      filenames: (list[str]) The list of filenames path corresponding to the
-        split info object
-    """
-
-    return naming.filepaths_for_dataset_split(
-        dataset_name=self.name,
-        split=split_info.name,
-        num_shards=split_info.num_shards,
-        data_dir=self._data_dir,
-        filetype_suffix=self._file_format_adapter.filetype_suffix,
-        )
-
 
 class GeneratorBasedBuilder(FileAdapterBuilder):
   """Base class for datasets with data generation based on dict generators.
@@ -991,12 +955,8 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
   `GeneratorBasedBuilder` is a convenience class that abstracts away much
   of the data writing and reading of `DatasetBuilder`. It expects subclasses to
   implement generators of feature dictionaries across the dataset splits
-  (`_split_generators`) and to specify a file type
-  (`_file_format_adapter`). See the method docstrings for details.
+  `_split_generators`. See the method docstrings for details.
 
-  `FileFormatAdapter`s are defined in
-  `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
-  feature dictionaries yielded by example generators. See the class docstrings.
   """
 
   @abc.abstractmethod

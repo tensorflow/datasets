@@ -24,7 +24,6 @@ from tensorflow_datasets import core
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.dataset_utils import as_numpy
@@ -51,7 +50,6 @@ __all__ = [
     "decode",
     "download",
     "features",
-    "file_adapter",
     "units",
     "GenerateMode",
     "builder",

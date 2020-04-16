@@ -27,6 +27,8 @@ import hashlib
 import io
 import itertools
 import os
+import random
+import string
 import sys
 import textwrap
 import uuid
@@ -288,6 +290,26 @@ def as_proto_cls(proto_cls):
     })
     return decorator_cls
   return decorator
+
+
+def _get_incomplete_path(filename):
+  """Returns a temporary filename based on filename."""
+  random_suffix = "".join(
+      random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+  return filename + ".incomplete" + random_suffix
+
+
+@contextlib.contextmanager
+def incomplete_dir(dirname):
+  """Create temporary dir for dirname and rename on exit."""
+  tmp_dir = _get_incomplete_path(dirname)
+  tf.io.gfile.makedirs(tmp_dir)
+  try:
+    yield tmp_dir
+    tf.io.gfile.rename(tmp_dir, dirname)
+  finally:
+    if tf.io.gfile.exists(tmp_dir):
+      tf.io.gfile.rmtree(tmp_dir)
 
 
 def tfds_dir():
