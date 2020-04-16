@@ -59,7 +59,6 @@ def _default_options():
   """Returns optimization options to given dataset."""
   options = tf.data.Options()
   options.experimental_threading.max_intra_op_parallelism = 1
-  options.experimental_threading.private_threadpool_size = 16
   options.experimental_optimization.apply_default_optimizations = True
   options.experimental_optimization.map_fusion = True
   options.experimental_optimization.map_parallelization = True
