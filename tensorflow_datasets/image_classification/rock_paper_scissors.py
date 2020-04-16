@@ -40,7 +40,7 @@ _TEST_URL = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/rps
 _IMAGE_SIZE = 300
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
-_NAME_RE = re.compile(r"^(rps|rps-test-set)/(rock|paper|scissors)/[\w-]*\.png$")
+_NAME_RE = re.compile(r"^(rps|rps-test-set)(/|\\)(rock|paper|scissors)(/|\\)[\w-]*\.png$")
 
 
 class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
@@ -93,7 +93,7 @@ class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
       res = _NAME_RE.match(fname)
       if not res:  # if anything other than .png; skip
         continue
-      label = res.group(2).lower()
+      label = res.group(3).lower()
       record = {
           "image": fobj,
           "label": label,
