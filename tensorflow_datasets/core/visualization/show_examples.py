@@ -56,8 +56,8 @@ def show_examples(ds_info, ds, **options_kwargs):
   """
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):
-      visualizer.show(ds_info, ds, **options_kwargs)
-      break
+      fig = visualizer.show(ds_info, ds, **options_kwargs)
+      return fig
   else:
     raise ValueError(
         "Visualisation not supported for dataset `{}`".format(ds_info.name)
