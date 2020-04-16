@@ -69,34 +69,9 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
             required="1.15.0",
             present=tf.__version__))
 
-  _patch_dataset_v2(tf)
-
   if six.PY2:
     logging.warning("TFDS is going to drop Python 2 support. Please "
                     "update to Python 3.")
-
-
-def _patch_dataset_v2(tf):
-  """Patch tf.data.Dataset v2 to restore `make_one_shot_iterator`."""
-
-  def make_one_shot_iterator(self):
-    logging.warning(
-        "Deprecation warning: `tf.data.Dataset.make_one_shot_iterator` is "
-        "deprecated. It will be removed after April 10, 2020. "
-        "Please use `tf.compat.v1.data.make_one_shot_iterator(ds)` instead.")
-    return tf.compat.v1.data.make_one_shot_iterator(self)
-
-  def make_initializable_iterator(self):
-    logging.warning(
-        "Deprecation warning: `tf.data.Dataset.make_initializable_iterator` is "
-        "deprecated. It will be removed after April 10, 2020. "
-        "Please use `tf.compat.v1.data.make_initializable_iterator(ds)` "
-        "instead.")
-    return tf.compat.v1.data.make_initializable_iterator(self)
-
-  tf.data.Dataset.make_one_shot_iterator = make_one_shot_iterator
-  tf.data.Dataset.make_initializable_iterator = (
-      make_initializable_iterator)
 
 
 def is_dataset(ds):
