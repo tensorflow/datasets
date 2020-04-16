@@ -14,6 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
+"""Test for the Cars196 dataset."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -22,6 +23,7 @@ import tensorflow_datasets.testing as tfds_test
 
 
 class Cars196Test(tfds_test.DatasetBuilderTestCase):
+  """Class for tesing the Cars196 dataset."""
   DATASET_CLASS = cars196.Cars196
   SPLITS = {'train': 2, 'test': 2}
 

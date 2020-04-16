@@ -57,6 +57,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       "4.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Return Dataset info"""
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -72,6 +73,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.download(_URL)
 
     # There is no predefined train/val/test split for this dataset.

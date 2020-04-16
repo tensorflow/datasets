@@ -61,6 +61,11 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     features_dict = {
         "image":
             tfds.features.Image(shape=(96, 96, 1)),

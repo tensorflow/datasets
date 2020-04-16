@@ -14,6 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
+"""Tests for deep_weeds dataset module."""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

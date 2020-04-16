@@ -25,7 +25,6 @@ from tensorflow_datasets.image_classification import patch_camelyon
 
 
 class PatchCamelyonTest(testing.DatasetBuilderTestCase):
-
   DATASET_CLASS = patch_camelyon.PatchCamelyon
 
   SPLITS = {

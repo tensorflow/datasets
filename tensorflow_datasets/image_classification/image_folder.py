@@ -87,6 +87,11 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
     super(ImageLabelFolder, self).__init__(**kwargs)
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     if not self._data_dir:
       logging.warning(
           "ImageLabelFolder.info is only complete once the data has been "

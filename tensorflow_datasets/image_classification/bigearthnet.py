@@ -139,6 +139,7 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
+    """Returns info of dataset"""
     metadata_dict = tfds.features.FeaturesDict({
         'acquisition_date': tfds.features.Text(),
         'coordinates': {

@@ -71,7 +71,11 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.2.0")
 
   def _info(self):
+    """Returns basic information of dataset.
 
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -94,7 +98,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators."""
     images_path = dl_manager.download(_IMAGES_URL)
     split_path, annotation_path = dl_manager.download_and_extract(
         [_SPLIT_URL, _ANNOTATIONS_URL])
@@ -117,10 +121,10 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
       if "train" in fname:
         train_list, train_mat_arr = parse_mat_file(full_file_name)
-        label_names = set([  # Set to remove duplicates
+        label_names = {  # Set to remove duplicates
             os.path.split(element)[-2].lower()  # Extract path/label/img.jpg
             for element in train_mat_arr["file_list"]
-        ])
+        }
       elif "test" in fname:
         test_list, _ = parse_mat_file(full_file_name)
 

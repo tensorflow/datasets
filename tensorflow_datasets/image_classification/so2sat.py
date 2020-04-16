@@ -88,6 +88,11 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     if self.builder_config.selection == 'rgb':
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[32, 32, 3]),
@@ -144,7 +149,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
       sen1 = fid['sen1']
       sen2 = fid['sen2']
       label = fid['label']
-      for i in range(len(sen1)):
+      for i, s in enumerate(sen1):
         if selection == 'rgb':
           record = {
               'image': _create_rgb(sen2[i]),
@@ -153,7 +158,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
           }
         elif selection == 'all':
           record = {
-              'sentinel1': sen1[i].astype(np.float32),
+              'sentinel1': s.astype(np.float32),
               'sentinel2': sen2[i].astype(np.float32),
               'label': np.argmax(label[i]).astype(int),
               'sample_id': i,

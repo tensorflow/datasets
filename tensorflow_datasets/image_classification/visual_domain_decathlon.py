@@ -93,6 +93,11 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = _get_builder_configs()
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     num_classes = self.builder_config.num_classes
     return tfds.core.DatasetInfo(
         builder=self,
@@ -109,6 +114,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     if self.builder_config.name == 'imagenet12':
       devkit_path, images_archive = dl_manager.download_and_extract([
           _URL_PREFIX_VGG + 'decathlon-1.0-devkit.tar.gz',

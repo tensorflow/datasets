@@ -81,6 +81,7 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     output_files = dl_manager.download_and_extract({
         "trainval_images":
             tfds.download.Resource(

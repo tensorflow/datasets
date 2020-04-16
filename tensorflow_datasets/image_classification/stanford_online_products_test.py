@@ -14,11 +14,13 @@
 # limitations under the License.
 
 # Lint as: python3
+"""Test for the Stanford Online Products dataset."""
 from tensorflow_datasets.image_classification import stanford_online_products
 import tensorflow_datasets.testing as tfds_test
 
 
 class StanfordOnlineProductsTest(tfds_test.DatasetBuilderTestCase):
+  """Class for tesing the Stanford Online Products dataset."""
   DATASET_CLASS = stanford_online_products.StanfordOnlineProducts
   SPLITS = {"train": 3, "test": 3}
 

@@ -83,6 +83,11 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
       "2.1.0", "Added label names")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,

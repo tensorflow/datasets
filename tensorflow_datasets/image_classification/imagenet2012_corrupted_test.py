@@ -26,6 +26,7 @@ from tensorflow_datasets.image_classification import imagenet2012_corrupted
 
 
 class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
+  """Class for tesing the Imagenet2012 Corrupted dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = [  # pylint: disable=g-long-ternary
       "gaussian_noise_1", "shot_noise_2", "impulse_noise_3", "defocus_blur_4",
       "glass_blur_5", "motion_blur_1", "zoom_blur_2", "snow_3", "frost_4",

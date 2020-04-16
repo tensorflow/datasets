@@ -44,6 +44,11 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
       "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description="A large set of images of flowers",
@@ -58,6 +63,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
         )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
 
     # There is no predefined train/val/test split for this dataset.

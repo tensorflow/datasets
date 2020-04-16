@@ -100,6 +100,11 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     if self.builder_config.selection == 'rgb':
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[64, 64, 3]),

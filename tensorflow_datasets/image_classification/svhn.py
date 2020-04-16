@@ -50,6 +50,11 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     features_dict = {
         "image": tfds.features.Image(shape=(32, 32, 3)),
         "label": tfds.features.ClassLabel(num_classes=10),
@@ -69,7 +74,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators."""
     output_files = dl_manager.download({
         "train": urllib.parse.urljoin(URL, "train_32x32.mat"),
         "test": urllib.parse.urljoin(URL, "test_32x32.mat"),

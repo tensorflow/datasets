@@ -36,6 +36,11 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     return tfds.core.DatasetInfo(
         builder=self,
         description=(r"""
@@ -72,6 +77,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
 
     return [
@@ -116,6 +122,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
     return parse_single
 
   def _generate_examples(self, images_dir_path, split_name):
+    """Yields examples."""
     path_glob = os.path.join(images_dir_path,
                              "dmlab-{}.tfrecord*".format(split_name))
     files = tf.io.gfile.glob(path_glob)

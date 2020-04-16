@@ -92,6 +92,11 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     labels = list(zip(*_LABEL_MAPPING))[1]
     return tfds.core.DatasetInfo(
         builder=self,
@@ -135,7 +140,7 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, image_files):
     """Yields examples."""
-    label_map = {pattern: label for pattern, label in _LABEL_MAPPING}
+    label_map = dict(_LABEL_MAPPING)
     regexp = re.compile(r"^(\d\d\d\d)_.*\.JPG$")
     # Assigns labels to images based on label mapping.
     for original_fname, fpath in image_files.items():

@@ -108,6 +108,11 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """
 
   def _info(self):
+    """Returns basic information of dataset.
+
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
@@ -142,6 +147,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
     # We don't import the original test split, as it doesn't include labels.
