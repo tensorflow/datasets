@@ -31,3 +31,30 @@ GCS_DATA_DIR = "gs://tfds-data/datasets"
 INCOMPLETE_SUFFIX = ".incomplete"
 
 
+_registered_data_dir = set()
+
+
+def add_data_dir(data_dir):
+  """Registers a new default `data_dir` to search for datasets.
+
+  When a `tfds.core.DatasetBuilder` is created with `data_dir=None`, TFDS
+  will look in all registered `data_dir` (including the default one) to
+  load existing datasets.
+
+  * An error is raised if a dataset can be loaded from more than 1 registered
+    data_dir.
+  * This only affects reading datasets. Generation always uses the
+    `data_dir` kwargs when specified or `tfds.core.constant.DATA_DIR` otherwise.
+
+  Args:
+    data_dir: New data_dir to register.
+  """
+  _registered_data_dir.add(data_dir)
+
+
+def list_data_dirs():
+  """Return the list of all registered `data_dir`."""
+  all_data_dirs = _registered_data_dir | {DATA_DIR}
+  return sorted(os.path.expanduser(d) for d in all_data_dirs)
+
+
