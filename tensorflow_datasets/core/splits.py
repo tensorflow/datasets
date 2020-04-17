@@ -58,6 +58,11 @@ class SplitInfo(object):
     )
     return instructions.file_instructions
 
+  @property
+  def filenames(self):
+    """Returns the list of filenames."""
+    return sorted(f["filename"] for f in self.file_instructions)
+
 
 class SubSplitInfo(object):
   """Wrapper around a sub split info.
@@ -88,6 +93,11 @@ class SubSplitInfo(object):
   def file_instructions(self):
     """Returns the list of dict(filename, take, skip)."""
     return self._file_instructions.file_instructions
+
+  @property
+  def filenames(self):
+    """Returns the list of filenames."""
+    return sorted(f["filename"] for f in self.file_instructions)
 
 
 # TODO(epot): `: tfds.Split` type should be `Union[str, Split]`

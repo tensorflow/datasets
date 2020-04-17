@@ -168,6 +168,14 @@ class SplitsTest(testing.TestCase):
         "take": -1,
     }])
 
+  def test_sub_split_filenames(self):
+    self.assertEqual(self._builder.info.splits["train"].filenames, [
+        "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+    ])
+    self.assertEqual(self._builder.info.splits["train[75%:]"].filenames, [
+        "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+    ])
+
   def test_sub_split_wrong_key(self):
     with self.assertRaisesWithPredicateMatch(
         ValueError, "Unknown split \"unknown\""):
