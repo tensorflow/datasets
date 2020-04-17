@@ -189,7 +189,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
       # The train splits contain not only the filename, but also a digit
       # encoding the label separated by a space, which we ignore.
       label_and_path = label_and_path.strip().split(' ')[0]
-      label, path = label_and_path.split('/')
+      label, path = os.path.split(label_and_path)
       # Fix an inconsistency between the names in the list and in the zip file.
       path = path.replace('HandStandPushups', 'HandstandPushups')
       video_path = os.path.join(videos_dir, 'UCF101', path)

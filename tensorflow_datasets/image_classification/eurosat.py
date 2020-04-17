@@ -144,7 +144,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, path, selection):
     """Yields examples."""
     for filename in tf.io.gfile.glob(os.path.join(path, '*', '*')):
-      label = filename.split('/')[-1].split('_')[0]
+      label = os.path.split(filename)[-1].split('_')[0]
       if selection == 'rgb':
         record = {
             'image': filename,
