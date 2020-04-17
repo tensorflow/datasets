@@ -68,8 +68,7 @@ _KAGGLE_TYPES = {
 def _get_kaggle_type(competition_name):
   if "/" in competition_name:
     return _KAGGLE_TYPES["dataset"]
-  else:
-    return _KAGGLE_TYPES["competition"]
+  return _KAGGLE_TYPES["competition"]
 
 
 class KaggleFile(object):
@@ -172,14 +171,14 @@ class KaggleCompetitionDownloader(object):
       command.append(self._kaggle_type.extra_flag)
     _run_kaggle_command(command, self._competition_name)
     # kaggle silently compresses some files to '.zip` files.
-    # TODO(tfds): use --unzip once supported by kaggle 
+    # TODO(tfds): use --unzip once supported by kaggle
     # (https://github.com/Kaggle/kaggle-api/issues/9)
     fpath = os.path.join(output_dir, fname + '.zip')
     if zipfile.is_zipfile(fpath):
       e = extractor.get_extractor()
       with e.tqdm():
         e.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
-    return os.path.join(output_dir, fname) 
+    return os.path.join(output_dir, fname)
 
 
 def _run_kaggle_command(command_args, competition_name):
