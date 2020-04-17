@@ -46,7 +46,7 @@ Title = {{Caltech-UCSD Birds 200}},
 Year = {2010}
 }
 """
-_NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)/(\w*.jpg)$")
+_NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)(?:/|\\)(\w*.jpg)$")
 
 
 class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
