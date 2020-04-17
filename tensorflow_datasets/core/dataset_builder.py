@@ -55,8 +55,8 @@ REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
 GCS_HOSTED_MSG = """\
 Dataset %s is hosted on GCS. It will automatically be downloaded to your
 local data directory. If you'd instead prefer to read directly from our public
-GCS bucket (recommended if you're running on GCP), you can instead set
-data_dir=gs://tfds-data/datasets.
+GCS bucket (recommended if you're running on GCP), you can instead pass
+`try_gcs=True` to `tfds.load` or set `data_dir=gs://tfds-data/datasets`.
 """
 
 
