@@ -179,8 +179,6 @@ class Writer(object):
 
   The number of shards is computed automatically.
 
-  This class is a replacement for file_format_adapter.TFRecordExampleAdapter,
-  which will eventually be deleted.
   """
 
   def __init__(self, example_specs, path, hash_salt):

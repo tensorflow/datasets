@@ -380,8 +380,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
-      if not builder.version.implements(utils.Experiment.S3):
-        self.assertLen(examples, expected_examples_number)
+      self.assertLen(examples, expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
         split_to_checksums.items(), 2):
       if (split1 in self.OVERLAPPING_SPLITS or

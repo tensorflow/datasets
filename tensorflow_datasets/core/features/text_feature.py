@@ -24,6 +24,7 @@ from __future__ import print_function
 
 import os
 
+from absl import logging
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core.features import feature
@@ -55,6 +56,13 @@ class Text(feature.Tensor):
     self._encoder_config = encoder_config
 
     has_encoder = bool(encoder or self._encoder_cls)
+    if has_encoder:
+      logging.warning(
+          "TFDS datasets with text encoding are deprecated and will be removed "
+          "in a future version. Instead, you should use the plain text version "
+          "and tokenize the text using `tensorflow_text` (See: "
+          "https://www.tensorflow.org/tutorials/tensorflow_text/intro#tfdata_example)"
+      )
     super(Text, self).__init__(
         shape=(None,) if has_encoder else (),
         dtype=tf.int64 if has_encoder else tf.string,
@@ -103,8 +111,6 @@ class Text(feature.Tensor):
   def encode_example(self, example_data):
     if self.encoder:
       example_data = self.encoder.encode(example_data)
-    else:
-      example_data = example_data
     return super(Text, self).encode_example(example_data)
 
   def save_metadata(self, data_dir, feature_name):

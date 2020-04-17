@@ -59,10 +59,14 @@ function test_notebook() {
   set_status
 }
 
-for notebook in $NOTEBOOKS
-do
-  test_notebook $notebook
-done
+# Skip notebook tests for TF 1.15 as the notebook assumes eager by default.
+if [[ "$TF_VERSION" != "1.15.0" ]]
+then
+  for notebook in $NOTEBOOKS
+  do
+    test_notebook $notebook
+  done
+fi
 
 # Run NSynth, in a contained enviornement
 function test_isolation_nsynth() {

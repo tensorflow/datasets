@@ -38,6 +38,7 @@ from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
 from tensorflow_datasets.text.natural_questions import NaturalQuestions
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.scan import Scan
+from tensorflow_datasets.text.scan import ScanConfig
 from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad import Squad

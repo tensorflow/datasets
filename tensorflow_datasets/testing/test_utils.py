@@ -35,8 +35,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_case
@@ -325,31 +326,29 @@ def features_encode_decode(features_dict, example, decoders):
   # Encode example
   encoded_example = features_dict.encode_example(example)
 
-  with tmp_dir() as tmp_dir_:
-    tmp_filename = os.path.join(tmp_dir_, "tmp.tfrecord")
+  # Serialize/deserialize the example
+  serializer = example_serializer.ExampleSerializer(
+      features_dict.get_serialized_info())
+  parser = example_parser.ExampleParser(
+      features_dict.get_serialized_info())
 
-    # Read/write the file
-    file_adapter = file_format_adapter.TFRecordExampleAdapter(
-        features_dict.get_serialized_info())
-    file_adapter.write_from_generator(
-        generator=[encoded_example],
-        output_files=[tmp_filename],
-    )
-    ds = file_adapter.dataset_from_filename(tmp_filename)
+  serialized_example = serializer.serialize_example(encoded_example)
+  ds = tf.data.Dataset.from_tensors(serialized_example)
+  ds = ds.map(parser.parse_example)
 
-    # Decode the example
-    decode_fn = functools.partial(
-        features_dict.decode_example,
-        decoders=decoders,
-    )
-    ds = ds.map(decode_fn)
+  # Decode the example
+  decode_fn = functools.partial(
+      features_dict.decode_example,
+      decoders=decoders,
+  )
+  ds = ds.map(decode_fn)
 
-    if tf.executing_eagerly():
-      out_tensor = next(iter(ds))
-    else:
-      out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
-    out_numpy = dataset_utils.as_numpy(out_tensor)
-    return out_tensor, out_numpy
+  if tf.executing_eagerly():
+    out_tensor = next(iter(ds))
+  else:
+    out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
+  out_numpy = dataset_utils.as_numpy(out_tensor)
+  return out_tensor, out_numpy
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
