@@ -20,8 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl import logging
-
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
@@ -206,20 +204,15 @@ class SplitGenerator(object):
   of usage.
   """
 
-  def __init__(self, name, num_shards=1, gen_kwargs=None):
+  def __init__(self, name, gen_kwargs=None):
     """Constructs a `SplitGenerator`.
 
     Args:
       name: `str`, name of the Split for which the generator will
         create the examples.
-      num_shards: `int`, number of shards between which the generated examples
-        will be written. DEPRECATED: This argument is currently ignored and
-        will be removed in a future version.
       gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
         of the builder.
     """
     self.name = name
     self.gen_kwargs = gen_kwargs or {}
-    if num_shards != 1:
-      logging.warning("`num_shards` is deprecated and will be removed.")
-    self.split_info = SplitInfo(name=str(name), num_shards=num_shards)
+    self.split_info = SplitInfo(name=str(name))
