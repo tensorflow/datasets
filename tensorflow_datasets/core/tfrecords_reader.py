@@ -55,17 +55,6 @@ $
 _ADDITION_SEP_RE = re.compile(r'\s*\+\s*')
 
 
-def _default_options():
-  """Returns optimization options to given dataset."""
-  options = tf.data.Options()
-  options.experimental_threading.max_intra_op_parallelism = 1
-  options.experimental_threading.private_threadpool_size = 16
-  options.experimental_optimization.apply_default_optimizations = True
-  options.experimental_optimization.map_fusion = True
-  options.experimental_optimization.map_parallelization = True
-  return options
-
-
 def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   """Returns a tf.data.Dataset instance from given (filename, skip, take)."""
   filename, skip, take = (filename_skip_take['filename'],
@@ -223,9 +212,6 @@ def _read_files(
   if num_examples and hasattr(tf.data.experimental, 'assert_cardinality'):
     ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
 
-  # TODO(tfds): Should merge the default options with read_config to allow users
-  # to overwrite the default options.
-  ds = ds.with_options(_default_options())  # Default performance options
   ds = ds.with_options(read_config.options)  # Additional users options
 
   # TODO(pierrot): `parse_example` uses
