@@ -28,6 +28,8 @@ import zipfile
 from absl import logging
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core.download import extractor
+from tensorflow_datasets.core.download import resource
 from tensorflow_datasets.core import utils
 
 _ERR_MSG = """\
@@ -170,12 +172,13 @@ class KaggleCompetitionDownloader(object):
       command.append(self._kaggle_type.extra_flag)
     _run_kaggle_command(command, self._competition_name)
     # kaggle silently compresses some files to '.zip` files.
+    # TODO(tfds): use --unzip once supported by kaggle 
+    # (https://github.com/Kaggle/kaggle-api/issues/9)
     fpath = os.path.join(output_dir, fname + '.zip')
-    if not fname.endswith('.zip') and tf.io.gfile.exists(fpath):
-      with tf.io.gfile.GFile(fpath, 'rb') as fobj:
-        z = zipfile.ZipFile(fobj)
-        z.extractall(output_dir)
-      tf.io.gfile.remove(fpath)
+    if zipfile.is_zipfile(fpath):
+      e = extractor.get_extractor()
+      with e.tqdm():
+        e.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
     return os.path.join(output_dir, fname) 
 
 
