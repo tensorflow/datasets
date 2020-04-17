@@ -91,7 +91,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
         "r") as split_file:
       for line in split_file:
         fname = line.strip()
-        label = fname.split("/")[0]
+        label = os.path.split(fname)[0]
         record = {
             "file_name": fname,
             "image": os.path.join(data_path, "dtd", "images", fname),
