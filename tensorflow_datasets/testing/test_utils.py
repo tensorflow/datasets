@@ -327,10 +327,9 @@ def features_encode_decode(features_dict, example, decoders):
   encoded_example = features_dict.encode_example(example)
 
   # Serialize/deserialize the example
-  serializer = example_serializer.ExampleSerializer(
-      features_dict.get_serialized_info())
-  parser = example_parser.ExampleParser(
-      features_dict.get_serialized_info())
+  specs = features_dict.get_serialized_info()
+  serializer = example_serializer.ExampleSerializer(specs)
+  parser = example_parser.ExampleParser(specs)
 
   serialized_example = serializer.serialize_example(encoded_example)
   ds = tf.data.Dataset.from_tensors(serialized_example)
