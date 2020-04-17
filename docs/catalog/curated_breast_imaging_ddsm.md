@@ -102,7 +102,9 @@ in order to guarantee reproducible results:
 *   **Config description**: Patches containing both calsification and mass
     cases, plus pathces with no abnormalities. Designed as a traditional 5-class
     classification task.
+
 *   **Download size**: `2.01 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -125,7 +127,9 @@ FeaturesDict({
 
 *   **Config description**: Original images of the calcification cases
     compressed in lossless PNG.
+
 *   **Download size**: `1.06 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -158,7 +162,9 @@ FeaturesDict({
 
 *   **Config description**: Original images of the mass cases compressed in
     lossless PNG.
+
 *   **Download size**: `966.57 KiB`
+
 *   **Splits**:
 
 Split   | Examples

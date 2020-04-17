@@ -72,7 +72,9 @@ FeaturesDict({
     top 25 TinyImages keywords for each class, which led to a slight class
     imbalance. The largest difference is that ships make up only 8% of the test
     set instead of 10%. v4 contains 2,021 images.
+
 *   **Download size**: `5.93 MiB`
+
 *   **Splits**:
 
 Split  | Examples
@@ -85,7 +87,9 @@ Split  | Examples
     allocation that is exactly class balanced. This version of the dataset
     corresponds to the results in Appendix D of our paper. v6 contains 2,000
     images.
+
 *   **Download size**: `5.87 MiB`
+
 *   **Splits**:
 
 Split  | Examples

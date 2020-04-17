@@ -61,7 +61,9 @@ builder = tfds.builder("wmt_translate", config=config)
 ## wmt19_translate/cs-en (default config)
 
 *   **Config description**: WMT 2019 cs-en translation task dataset.
+
 *   **Download size**: `1.88 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -84,7 +86,9 @@ Translation({
 ## wmt19_translate/de-en
 
 *   **Config description**: WMT 2019 de-en translation task dataset.
+
 *   **Download size**: `9.71 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -107,7 +111,9 @@ Translation({
 ## wmt19_translate/fi-en
 
 *   **Config description**: WMT 2019 fi-en translation task dataset.
+
 *   **Download size**: `959.46 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -130,7 +136,9 @@ Translation({
 ## wmt19_translate/gu-en
 
 *   **Config description**: WMT 2019 gu-en translation task dataset.
+
 *   **Download size**: `37.03 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -153,7 +161,9 @@ Translation({
 ## wmt19_translate/kk-en
 
 *   **Config description**: WMT 2019 kk-en translation task dataset.
+
 *   **Download size**: `39.58 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -176,7 +186,9 @@ Translation({
 ## wmt19_translate/lt-en
 
 *   **Config description**: WMT 2019 lt-en translation task dataset.
+
 *   **Download size**: `392.20 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -199,7 +211,9 @@ Translation({
 ## wmt19_translate/ru-en
 
 *   **Config description**: WMT 2019 ru-en translation task dataset.
+
 *   **Download size**: `3.86 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -222,7 +236,9 @@ Translation({
 ## wmt19_translate/zh-en
 
 *   **Config description**: WMT 2019 zh-en translation task dataset.
+
 *   **Download size**: `2.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -245,7 +261,9 @@ Translation({
 ## wmt19_translate/fr-de
 
 *   **Config description**: WMT 2019 fr-de translation task dataset.
+
 *   **Download size**: `722.20 MiB`
+
 *   **Splits**:
 
 Split        | Examples

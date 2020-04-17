@@ -50,6 +50,7 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 ## emnist/byclass (default config)
 
 *   **Config description**: EMNIST ByClass
+
 *   **Splits**:
 
 Split   | Examples
@@ -69,6 +70,7 @@ FeaturesDict({
 ## emnist/bymerge
 
 *   **Config description**: EMNIST ByMerge
+
 *   **Splits**:
 
 Split   | Examples
@@ -88,6 +90,7 @@ FeaturesDict({
 ## emnist/balanced
 
 *   **Config description**: EMNIST Balanced
+
 *   **Splits**:
 
 Split   | Examples
@@ -107,6 +110,7 @@ FeaturesDict({
 ## emnist/letters
 
 *   **Config description**: EMNIST Letters
+
 *   **Splits**:
 
 Split   | Examples
@@ -126,6 +130,7 @@ FeaturesDict({
 ## emnist/digits
 
 *   **Config description**: EMNIST Digits
+
 *   **Splits**:
 
 Split   | Examples
@@ -145,6 +150,7 @@ FeaturesDict({
 ## emnist/mnist
 
 *   **Config description**: EMNIST MNIST
+
 *   **Splits**:
 
 Split   | Examples

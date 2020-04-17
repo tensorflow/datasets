@@ -17,17 +17,25 @@ include human-annotated natural language explanations of the entailment
 relations.
 
 *   **Config description**: Plain text import of e-SNLI
+
 *   **Homepage**:
     [https://github.com/OanaMariaCamburu/e-SNLI](https://github.com/OanaMariaCamburu/e-SNLI)
+
 *   **Source code**:
     [`tfds.text.esnli.Esnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/esnli.py)
+
 *   **Versions**:
+
     *   **`0.0.2`** (default): No release notes.
+
 *   **Download size**: `195.04 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

@@ -18,17 +18,25 @@ both humans and artificially intelligent systems that aim at emulating a
 human-like form of general fluid intelligence.
 
 *   **Config description**: ARC commit bd9e2c9 from 2019-12-06
+
 *   **Homepage**:
     [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
+
 *   **Source code**:
     [`tfds.image.arc.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `465.07 KiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split   | Examples

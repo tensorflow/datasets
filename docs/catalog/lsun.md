@@ -58,7 +58,9 @@ FeaturesDict({
 ## lsun/classroom (default config)
 
 *   **Config description**: Images of category classroom
+
 *   **Download size**: `3.06 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -69,7 +71,9 @@ Split        | Examples
 ## lsun/bedroom
 
 *   **Config description**: Images of category bedroom
+
 *   **Download size**: `42.77 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -80,7 +84,9 @@ Split        | Examples
 ## lsun/bridge
 
 *   **Config description**: Images of category bridge
+
 *   **Download size**: `15.35 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -91,7 +97,9 @@ Split        | Examples
 ## lsun/church_outdoor
 
 *   **Config description**: Images of category church_outdoor
+
 *   **Download size**: `2.29 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -102,7 +110,9 @@ Split        | Examples
 ## lsun/conference_room
 
 *   **Config description**: Images of category conference_room
+
 *   **Download size**: `3.78 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -113,7 +123,9 @@ Split        | Examples
 ## lsun/dining_room
 
 *   **Config description**: Images of category dining_room
+
 *   **Download size**: `10.80 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -124,7 +136,9 @@ Split        | Examples
 ## lsun/kitchen
 
 *   **Config description**: Images of category kitchen
+
 *   **Download size**: `33.34 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -135,7 +149,9 @@ Split        | Examples
 ## lsun/living_room
 
 *   **Config description**: Images of category living_room
+
 *   **Download size**: `21.23 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -146,7 +162,9 @@ Split        | Examples
 ## lsun/restaurant
 
 *   **Config description**: Images of category restaurant
+
 *   **Download size**: `12.57 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -157,7 +175,9 @@ Split        | Examples
 ## lsun/tower
 
 *   **Config description**: Images of category tower
+
 *   **Download size**: `11.19 GiB`
+
 *   **Splits**:
 
 Split        | Examples

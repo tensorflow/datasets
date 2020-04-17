@@ -42,11 +42,15 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 ## groove/full-midionly (default config)
 
 *   **Config description**: Groove dataset without audio, unsplit.
+
 *   **Download size**: `3.11 MiB`
+
 *   **Dataset size**: `5.22 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples
@@ -75,11 +79,15 @@ FeaturesDict({
 ## groove/full-16000hz
 
 *   **Config description**: Groove dataset with audio, unsplit.
+
 *   **Download size**: `4.76 GiB`
+
 *   **Dataset size**: `2.33 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -110,11 +118,15 @@ FeaturesDict({
 
 *   **Config description**: Groove dataset without audio, split into 2-bar
     chunks.
+
 *   **Download size**: `3.11 MiB`
+
 *   **Dataset size**: `19.59 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples
@@ -143,11 +155,15 @@ FeaturesDict({
 ## groove/2bar-16000hz
 
 *   **Config description**: Groove dataset with audio, split into 2-bar chunks.
+
 *   **Download size**: `4.76 GiB`
+
 *   **Dataset size**: `4.61 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -178,11 +194,15 @@ FeaturesDict({
 
 *   **Config description**: Groove dataset without audio, split into 4-bar
     chunks.
+
 *   **Download size**: `3.11 MiB`
+
 *   **Dataset size**: `27.32 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples

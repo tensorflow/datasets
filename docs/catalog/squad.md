@@ -18,18 +18,26 @@ where the answer to every question is a segment of text, or span, from the
 corresponding reading passage, or the question might be unanswerable.
 
 *   **Config description**: Plain text
+
 *   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
+
 *   **Source code**:
     [`tfds.text.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/squad.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `33.51 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

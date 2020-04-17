@@ -58,8 +58,11 @@ heuristic algorithms: Source, Family, and Qualities.
 *   **Config description**: Full NSynth Dataset is split into train, valid, and
     test sets, with no instruments overlapping between the train set and the
     valid/test sets.
+
 *   **Download size**: `73.07 GiB`
+
 *   **Dataset size**: `73.09 GiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -103,8 +106,11 @@ FeaturesDict({
     instruments (but not exact notes) between the train set and valid/test sets.
     This variant was originally introduced in the ICLR 2019 GANSynth paper
     (https://arxiv.org/abs/1902.08710).
+
 *   **Download size**: `73.08 GiB`
+
 *   **Dataset size**: `20.73 GiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -150,8 +156,11 @@ FeaturesDict({
     (https://arxiv.org/abs/1902.08710). This version additionally contains
     estimates for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual
     loudness in decibels. Both signals are provided at a frame rate of 250Hz.
+
 *   **Download size**: `73.08 GiB`
+
 *   **Dataset size**: `22.03 GiB`
+
 *   **Splits**:
 
 Split   | Examples

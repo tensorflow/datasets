@@ -54,7 +54,9 @@ Split   | Examples
 ## eurosat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
+
 *   **Download size**: `89.91 MiB`
+
 *   **Features**:
 
 ```python
@@ -71,7 +73,9 @@ FeaturesDict({
 ## eurosat/all
 
 *   **Config description**: 13 Sentinel-2 channels
+
 *   **Download size**: `1.93 GiB`
+
 *   **Features**:
 
 ```python

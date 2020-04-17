@@ -58,7 +58,9 @@ Split   | Examples
 ## lost_and_found/semantic_segmentation (default config)
 
 *   **Config description**: Lost and Found semantic segmentation dataset.
+
 *   **Download size**: `5.44 GiB`
+
 *   **Features**:
 
 ```python
@@ -72,7 +74,9 @@ FeaturesDict({
 ## lost_and_found/stereo_disparity
 
 *   **Config description**: Lost and Found stereo images and disparity maps.
+
 *   **Download size**: `12.16 GiB`
+
 *   **Features**:
 
 ```python
@@ -87,7 +91,9 @@ FeaturesDict({
 ## lost_and_found/full
 
 *   **Config description**: Full Lost and Found dataset.
+
 *   **Download size**: `12.19 GiB`
+
 *   **Features**:
 
 ```python
@@ -104,7 +110,9 @@ FeaturesDict({
 ## lost_and_found/full_16bit
 
 *   **Config description**: Full Lost and Found dataset.
+
 *   **Download size**: `34.90 GiB`
+
 *   **Features**:
 
 ```python

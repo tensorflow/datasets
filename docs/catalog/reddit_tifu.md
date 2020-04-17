@@ -59,6 +59,7 @@ FeaturesDict({
 ## reddit_tifu/short (default config)
 
 *   **Config description**: Using title as summary.
+
 *   **Splits**:
 
 Split   | Examples
@@ -72,6 +73,7 @@ Split   | Examples
 ## reddit_tifu/long
 
 *   **Config description**: Using TLDR as summary.
+
 *   **Splits**:
 
 Split   | Examples

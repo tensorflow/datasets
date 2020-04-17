@@ -35,9 +35,12 @@ evaluating, and analyzing natural language understanding systems.
     English acceptability judgments drawn from books and journal articles on
     linguistic theory. Each example is a sequence of words annotated with
     whether it is a grammatical English sentence.
+
 *   **Homepage**:
     [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
+
 *   **Download size**: `368.14 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -81,9 +84,12 @@ the correct citation for each contained dataset.
     sentences from movie reviews and human annotations of their sentiment. The
     task is to predict the sentiment of a given sentence. We use the two-way
     (positive/negative) class split, and use only sentence-level labels.
+
 *   **Homepage**:
     [https://nlp.stanford.edu/sentiment/index.html](https://nlp.stanford.edu/sentiment/index.html)
+
 *   **Download size**: `7.09 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -128,9 +134,12 @@ the correct citation for each contained dataset.
     Brockett, 2005) is a corpus of sentence pairs automatically extracted from
     online news sources, with human annotations for whether the sentences in the
     pair are semantically equivalent.
+
 *   **Homepage**:
     [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
+
 *   **Download size**: `1.43 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -174,9 +183,12 @@ the correct citation for each contained dataset.
 *   **Config description**: The Quora Question Pairs2 dataset is a collection of
     question pairs from the community question-answering website Quora. The task
     is to determine whether a pair of questions are semantically equivalent.
+
 *   **Homepage**:
     [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
+
 *   **Download size**: `57.73 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -222,9 +234,12 @@ the correct citation for each contained dataset.
     al., 2017) is a collection of sentence pairs drawn from news headlines,
     video and image captions, and natural language inference data. Each pair is
     human-annotated with a similarity score from 1 to 5.
+
 *   **Homepage**:
     [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
+
 *   **Download size**: `784.05 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -276,9 +291,12 @@ the correct citation for each contained dataset.
     evaluate on both the matched (in-domain) and mismatched (cross-domain)
     section. We also use and recommend the SNLI corpus as 550k examples of
     auxiliary training data.
+
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
+
 *   **Download size**: `298.29 MiB`
+
 *   **Splits**:
 
 Split                   | Examples
@@ -340,9 +358,12 @@ the correct citation for each contained dataset.
 
 *   **Config description**: The mismatched validation and test splits from MNLI.
     See the "mnli" BuilderConfig for additional information.
+
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
+
 *   **Download size**: `298.29 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -401,9 +422,12 @@ the correct citation for each contained dataset.
 
 *   **Config description**: The matched validation and test splits from MNLI.
     See the "mnli" BuilderConfig for additional information.
+
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
+
 *   **Download size**: `298.29 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -472,9 +496,12 @@ the correct citation for each contained dataset.
     that the model select the exact answer, but also removes the simplifying
     assumptions that the answer is always present in the input and that lexical
     overlap is a reliable cue.
+
 *   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
+
 *   **Download size**: `10.14 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -522,9 +549,12 @@ the correct citation for each contained dataset.
     are constructed based on news and Wikipedia text. We convert all datasets to
     a two-class split, where for three-class datasets we collapse neutral and
     contradiction into not entailment, for consistency.
+
 *   **Homepage**:
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
+
 *   **Download size**: `680.81 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -611,9 +641,12 @@ the correct citation for each contained dataset.
     a systematic correspondence between a model's score on this task and its
     score on the unconverted original task. We call converted dataset WNLI
     (Winograd NLI).
+
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
 *   **Download size**: `28.32 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -659,9 +692,12 @@ the correct citation for each contained dataset.
     phenomena. This dataset evaluates sentence understanding through Natural
     Language Inference (NLI) problems. Use a model trained on MulitNLI to
     produce predictions for this dataset.
+
 *   **Homepage**:
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
+
 *   **Download size**: `217.05 KiB`
+
 *   **Splits**:
 
 Split  | Examples

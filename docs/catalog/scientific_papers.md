@@ -70,7 +70,9 @@ FeaturesDict({
 ## scientific_papers/arxiv (default config)
 
 *   **Config description**: Documents from ArXiv repository.
+
 *   **Dataset size**: `7.07 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -82,7 +84,9 @@ Split        | Examples
 ## scientific_papers/pubmed
 
 *   **Config description**: Documents from PubMed repository.
+
 *   **Dataset size**: `2.34 GiB`
+
 *   **Splits**:
 
 Split        | Examples

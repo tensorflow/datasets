@@ -33,23 +33,32 @@ builder = tfds.builder("wmt_translate", config=config)
 ```
 
 *   **Config description**: WMT T2T EnDe translation task dataset.
+
 *   **Homepage**:
     [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
+
 *   **Source code**:
     [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `1.61 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
     Some of the wmt configs here, require a manual download.
     Please look into wmt.py to see the exact path (and file name) that has to
     be downloaded.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

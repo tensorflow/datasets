@@ -57,7 +57,9 @@ Split            | Examples
 ## librispeech/plain_text (default config)
 
 *   **Config description**: Transcriptions are in plain text.
+
 *   **Dataset size**: `304.47 GiB`
+
 *   **Features**:
 
 ```python
@@ -73,7 +75,9 @@ FeaturesDict({
 ## librispeech/subwords8k
 
 *   **Config description**: Transcriptions use the SubwordTextEncoder
+
 *   **Dataset size**: `304.44 GiB`
+
 *   **Features**:
 
 ```python
@@ -89,7 +93,9 @@ FeaturesDict({
 ## librispeech/subwords32k
 
 *   **Config description**: Transcriptions use the SubwordTextEncoder
+
 *   **Dataset size**: `304.44 GiB`
+
 *   **Features**:
 
 ```python
