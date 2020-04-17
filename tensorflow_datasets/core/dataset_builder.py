@@ -442,7 +442,7 @@ class DatasetBuilder(object):
     ```
 
     Args:
-      split: `tfds.core.SplitBase`, which subset(s) of the data to read. If None
+      split: `tfds.Split`, which subset(s) of the data to read. If None
         (default), returns all splits in a dict
         `<key: tfds.Split, value: tf.data.Dataset>`.
       batch_size: `int`, batch size. Note that variable-length features will
