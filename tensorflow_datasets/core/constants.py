@@ -15,6 +15,11 @@
 
 # Lint as: python3
 """Default values for some parameters of the API when no values are passed."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 # IMPORTANT: when changing values here, update docstrings.
 
 import os

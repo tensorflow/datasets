@@ -59,7 +59,7 @@ class MovingSequenceTest(tf.test.TestCase):
       subimage = full_image[i:i+h, j:j+w]
       n_true = tf.reduce_sum(subimage)
       # allow for pixel rounding errors in each dimension
-      self.assertTrue(self.evaluate(n_true) >= (h-1)*(w-1))
+      self.assertGreaterEqual(self.evaluate(n_true), (h-1)*(w-1))
 
 
 if __name__ == '__main__':

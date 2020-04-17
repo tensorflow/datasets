@@ -16,10 +16,6 @@
 # Lint as: python3
 """Smoke Test for docs generation."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import shutil
 import tempfile
