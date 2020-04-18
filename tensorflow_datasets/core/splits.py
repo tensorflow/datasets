@@ -50,7 +50,35 @@ class SplitInfo(object):
 
   @property
   def file_instructions(self):
-    """Returns the list of dict(filename, take, skip)."""
+    """Returns the list of dict(filename, take, skip).
+
+    This allows for creating your own `tf.data.Dataset` using the low-level
+    TFDS values.
+
+    Example:
+
+    ```
+    file_instructions = info.splits['train[75%:]'].file_instructions
+    instruction_ds = tf.data.Dataset.from_generator(
+        lambda: file_instructions,
+        output_types={
+            'filename': tf.string,
+            'take': tf.int64,
+            'skip': tf.int64,
+        },
+    )
+    ds = instruction_ds.interleave(
+        lambda f: tf.data.TFRecordDataset(
+            f['filename']).skip(f['skip']).take(f['take'])
+    )
+    ```
+
+    When `skip=0` and `take=-1`, the full shard will be read, so the `ds.skip`
+    and `ds.take` could be skipped.
+
+    Returns:
+      A `dict(filename, take, skip)`
+    """
     # `self._dataset_name` is assigned in `SplitDict.add()`.
     instructions = tfrecords_reader.make_file_instructions(
         name=self._dataset_name,
