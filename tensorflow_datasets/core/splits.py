@@ -20,6 +20,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import typing
+from typing import Union
+
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
@@ -125,6 +128,11 @@ class Split(str):
 Split.TRAIN = Split("train")
 Split.TEST = Split("test")
 Split.VALIDATION = Split("validation")
+
+if typing.TYPE_CHECKING:
+  # For type checking, `tfds.Split` is an alias for `str` with additional
+  # `.TRAIN`, `.TEST`,... attributes. All strings are valid split type.
+  Split = Union[Split, str]
 
 
 class SplitDict(utils.NonMutableDict):
