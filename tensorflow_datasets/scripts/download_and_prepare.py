@@ -23,6 +23,7 @@ By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
 
 Instructions:
+
 ```
 python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=cifar10
