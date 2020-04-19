@@ -306,7 +306,13 @@ def incomplete_dir(dirname):
   tf.io.gfile.makedirs(tmp_dir)
   try:
     yield tmp_dir
-    tf.io.gfile.rename(tmp_dir, dirname)
+    renamed = False
+    while not renamed:
+        try:
+          tf.io.gfile.rename(tmp_dir, dirname)
+          renamed = True
+        except:
+            pass
   finally:
     if tf.io.gfile.exists(tmp_dir):
       tf.io.gfile.rmtree(tmp_dir)
