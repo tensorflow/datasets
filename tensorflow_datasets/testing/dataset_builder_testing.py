@@ -40,19 +40,23 @@ from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.testing import test_utils
 
+# `os` module does not have the following Functions in Windows (Only Unix).
+NON_NT_FORBIDDEN_OS_FUNCTIONS = (
+    "chown",
+    "mknod",
+    "pathconf",
+    "statvfs",
+)
 
 # `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
     "chmod",
-    "chown",
     "link",
     "listdir",
     "lstat",
     "makedirs",
     "mkdir",
-    "mknod",
     "open",
-    "pathconf",
     "readlink",
     "remove",
     "removedirs",
@@ -60,7 +64,6 @@ FORBIDDEN_OS_FUNCTIONS = (
     "renames",
     "rmdir",
     "stat",
-    "statvfs",
     "symlink",
     "unlink",
     "walk",
@@ -194,6 +197,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     mock_os = absltest.mock.Mock(os, path=mock_os_path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
+    if os.name != 'nt':
+      for fop in NON_NT_FORBIDDEN_OS_FUNCTIONS:
+        getattr(mock_os, fop).side_effect = err
     os_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
     os_patcher.start()
