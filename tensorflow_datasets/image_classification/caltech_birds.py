@@ -46,7 +46,7 @@ Title = {{Caltech-UCSD Birds 200}},
 Year = {2010}
 }
 """
-_NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)(?:/|\\)(\w*.jpg)$")
+_NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)/(\w*.jpg)$")
 
 
 class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
@@ -166,6 +166,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
     """
 
     for fname, fobj in archive:
+      fname = fname.replace("\\", "/")
       res = _NAME_RE.match(fname)
 
       # Checking if filename is present in respective train/test list

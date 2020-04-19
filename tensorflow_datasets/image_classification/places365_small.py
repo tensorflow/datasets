@@ -139,6 +139,6 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
       # for test and validation do not have a leading "/", so we chop
       # differently.
       chop = len(path_prefix) if split_name == "train" else len(path_prefix) + 1
-      key = fname[chop:]
+      key = fname[chop:].replace("\\", "/")
       class_id = file_to_class[key]
       yield fname, {"image": fobj, "label": class_id}

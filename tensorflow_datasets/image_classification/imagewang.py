@@ -111,7 +111,7 @@ class Imagewang(tfds.core.GeneratorBasedBuilder):
     size = self.builder_config.size
     if size in _SIZES:
       size_str = "" if size == "full-size" else "-" + size[:-2]
-      url = os.path.join(_URL_PREFIX, "imagewang%s.tgz" % size_str)
+      url = ('/').join([_URL_PREFIX, "imagewang%s.tgz" % size_str])
       path = dl_manager.download_and_extract(url)
       train_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "train")
       val_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "val")

@@ -104,6 +104,7 @@ class VggFace2(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, archive):
     """Yields examples."""
     for fname, fobj in archive:
+      fname = fname.replace("\\", "/")
       if fname.startswith('train/'):
         file_name = fname[len('train/'):]
       else:

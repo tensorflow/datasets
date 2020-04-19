@@ -156,6 +156,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
         split=split)
     for image_fname, image_fobj in tfds.download.iter_archive(
         path=images_archive, method=tfds.download.ExtractMethod.TAR_STREAM):
+      image_fname = image_fname.replace("\\", "/")
       if image_fname in filename_to_label:
         label = filename_to_label[image_fname]
         example = {

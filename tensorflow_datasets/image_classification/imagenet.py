@@ -135,7 +135,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     """
     labels_path = tfds.core.get_tfds_path(_VALIDATION_LABELS_FNAME)
     with tf.io.gfile.GFile(labels_path) as labels_f:
-      labels = labels_f.read().strip().split('\n')
+      labels = labels_f.read().splitlines()  # remove trailing `\r` in Windows
     with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
       tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
       images = sorted(tar.getnames())
