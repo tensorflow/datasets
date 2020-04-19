@@ -20,6 +20,8 @@ from __future__ import division
 from __future__ import print_function
 
 from absl import logging
+import os
+
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -113,18 +115,17 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepaths": "%s/train/%s_examples-*" % (_DATA_DIRECTORY,
-                                                         lang)},
+                "filepaths": os.path.join(_DATA_DIRECTORY, "train", "%s_examples-*" % lang)},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepaths": "%s/dev/%s_examples-*" % (_DATA_DIRECTORY,
-                                                               lang)},
+            gen_kwargs={
+                "filepaths": os.path.join(_DATA_DIRECTORY, "dev", "%s_examples-*" % lang)}
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"filepaths": "%s/test/%s_examples-*" % (_DATA_DIRECTORY,
-                                                                lang)},
+            gen_kwargs={
+                "filepaths": os.path.join(_DATA_DIRECTORY, "test", "%s_examples-*" % lang)}
         ),
     ]
 

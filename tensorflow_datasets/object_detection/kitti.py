@@ -156,6 +156,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
 
     all_annotations = dict()
     for fpath, fobj in annotations:
+      fpath = fpath.replace("\\", "/")
       prefix, ext = os.path.splitext(fpath)
       if ext != ".txt":
         continue
@@ -166,6 +167,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       all_annotations[int(prefix[-6:])] = _parse_kitti_annotations(fobj)
 
     for fpath, fobj in images:
+      fpath = fpath.replace("\\", "/")
       prefix, ext = os.path.splitext(fpath)
       if ext != ".png":
         continue
@@ -257,13 +259,14 @@ def _build_splits(devkit):
   mapping_line_ids = None
   mapping_lines = None
   for fpath, fobj in devkit:
+    fpath = fpath.replace("\\", "/")
     if fpath == "mapping/train_rand.txt":
       # Converts 1-based line index to 0-based line index.
       mapping_line_ids = [
           int(x.strip()) - 1 for x in fobj.read().decode("utf-8").split(",")
       ]
     if fpath == "mapping/train_mapping.txt":
-      mapping_lines = fobj.readlines()
+      mapping_lines = fobj.read().splitlines()
       mapping_lines = [x.decode("utf-8") for x in mapping_lines]
 
   assert mapping_line_ids

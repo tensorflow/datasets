@@ -106,7 +106,8 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
             'probe': tfds.features.Tensor(shape=(), dtype=tf.string),
             'scanner': tfds.features.Tensor(shape=(), dtype=tf.string),
             'target': tfds.features.Tensor(shape=(), dtype=tf.string),
-            'timestamp_id': tfds.features.Tensor(shape=(), dtype=tf.uint32),
+            # Use tf.uint64 to prevent possible overflow on windows `sys.maxsize`
+            'timestamp_id': tfds.features.Tensor(shape=(), dtype=tf.uint64),
             'harmonic': tfds.features.Tensor(shape=(), dtype=tf.bool)
         }),
         supervised_keys=('das/dB', 'dtce'),

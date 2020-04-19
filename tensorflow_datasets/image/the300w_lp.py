@@ -21,6 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import glob
 import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -113,8 +114,19 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, image_dir_path):
     """Yields examples."""
-    image_files = tf.io.gfile.glob(
-        pattern=os.path.join(image_dir_path, "[!Code]*[!_Flip]/[!_]*.jpg"))
+    # PS C: \Users\VIJAY\Desktop\GitHub_Repos\datasets > conda list tensorflow
+    # packages in environment at C:\ProgramData\Miniconda3:
+    #
+    # Name                    Version                   Build  Channel
+    # tensorflow                2.1.0           eigen_py37hd727fc0_0
+    # tensorflow-base           2.1.0           eigen_py37h49b2757_0
+    # tensorflow-datasets       3.0.0-nightly             dev_0 < develop >
+    # tensorflow-estimator      2.1.0              pyhd54b08b_0
+    # tensorflow-io             0.12.0                   pypi_0    pypi
+    # tensorflow-metadata       0.21.2                   pypi_0    pypi
+    # PS C: \Users\VIJAY\Desktop\GitHub_Repos\datasets >
+    image_files = glob.glob(
+        os.path.join(image_dir_path, "[!Code]*[!_Flip]/[!_]*.jpg"))
     label_files = [s.replace("jpg", "mat") for s in image_files]
     landmark_files = [
         s.replace("300W_LP", "300W_LP/landmarks").replace(".jpg", "_pts.mat")

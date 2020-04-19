@@ -22,6 +22,9 @@ from __future__ import print_function
 
 import json
 import os
+import posixpath
+from six.moves import urllib
+
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -172,7 +175,8 @@ class Blimp(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     cfg = self.builder_config
     download_urls = {
-        cfg.name: os.path.join(_DOWNLOAD_URL, 'data', cfg.name + '.jsonl')
+        cfg.name: urllib.parse.urljoin(
+            _DOWNLOAD_URL, posixpath.join('data', cfg.name + '.jsonl'))
     }
 
     downloaded_files = dl_manager.download_and_extract(download_urls)
