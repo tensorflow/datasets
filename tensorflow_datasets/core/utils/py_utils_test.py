@@ -184,7 +184,8 @@ class PyUtilsTest(testing.TestCase):
 
   def test_tfds_dir(self):
     """Test the proper suffix only, since the prefix can vary."""
-    self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
+    self.assertTrue(os.path.basename(py_utils.tfds_dir())
+                    == 'tensorflow_datasets')
 
 
 class ReadChecksumDigestTest(testing.TestCase):

@@ -48,7 +48,7 @@ class GetDatasetFilesTest(testing.TestCase):
       'train': [3, 2, 3, 2, 3],  # 13 examples.
   }
 
-  PATH_PATTERN = '/foo/bar/mnist-train.tfrecord-0000%d-of-00005'
+  PATH_PATTERN = os.path.join('foo', 'bar', 'mnist-train.tfrecord-0000%d-of-00005')
 
   def _get_files(self, instruction):
     file_instructions = tfrecords_reader._make_file_instructions_from_absolutes(
@@ -57,7 +57,7 @@ class GetDatasetFilesTest(testing.TestCase):
         absolute_instructions=[instruction],
     )
     for fi in file_instructions.file_instructions:
-      fi['filename'] = os.path.join('/foo/bar', fi['filename'])
+      fi['filename'] = os.path.join('foo', 'bar', fi['filename'])
     return file_instructions.file_instructions
 
   def test_no_skip_no_take(self):
