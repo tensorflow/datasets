@@ -165,6 +165,31 @@ ${builder.info.citation}
 % endif
 </%def>
 
+<%def name="display_figure(builder)">\
+<%
+  import requests
+  import os
+
+  config_name = os.path.split(builder.info.full_name)[-2]
+  ds_name_config = config_name.replace("\\", "/").replace("/", "_")
+
+  def dataset_examples_paths(ds_name):
+    github_path = "https://" + "github.com/Eshan-Agarwal/datasets/blob/patch-58/docs/catalog/images/" + ds_name + ".jpg"
+    return github_path
+
+  def example_exists(path):
+    res = requests.get(path)
+    return res.status_code==200
+%>\
+*   **Figure**:
+% if example_exists((dataset_examples_paths(ds_name_config))):
+    ![](${dataset_examples_paths(ds_name_config)}) 
+% else:
+    No Example available for ${os.path.split(builder.info.full_name)[-2]}.
+
+% endif
+</%def>
+
 <%
 
 Section = collections.namedtuple('Section', 'get_signature, make')
@@ -212,6 +237,9 @@ def get_supervised(builder):
 def get_citation(builder):
   return builder.info.citation
 
+def get_figure(builder):
+  return builder.info.full_name
+
 all_sections = [
     Section(get_description, display_description),
     Section(get_config_description, display_config_description),
@@ -226,6 +254,7 @@ all_sections = [
     Section(get_features, display_features),
     Section(get_supervised, display_supervised),
     Section(get_citation, display_citation),
+    Section(get_figure, display_figure),
 ]
 
 %>
@@ -280,28 +309,4 @@ ${display_builder(builder, all_sections)}
 <%doc>Second case: Builder configs.</%doc>\
 % else:
 ${display_all_builders(config_builders)}
-% endif
-
-<%!
-  import requests
-  def dataset_examples_paths(ds_name):
-    github_path = "https://github.com/Eshan-Agarwal/datasets/tree/patch-60/docs/catalog/images/" + ds_name + ".jpg"
-    return github_path
-  def example_exists(path):
-    r = requests.head(path)
-    return r.is_redirect
-%>
-
-<%def name="example_exists(path)">
-    ${path}
-</%def>
-<%def name="dataset_examples_paths(ds_name)">
-     ${ds_name}
-</%def>
-% if example_exists((dataset_examples_paths(builder.info.name))):
-* Figure:
-        ![](${dataset_examples_paths(builder.info.name)}) 
-% else:
- * Figure:
-        No Example available for this dataset.
 % endif
