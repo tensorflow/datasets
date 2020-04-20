@@ -87,6 +87,7 @@ class _Extractor(object):
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     path = None
+    dst_path = "" # Define variables before accessing in them try/except   
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)

@@ -42,6 +42,10 @@ def _read(path):
   with tf.io.gfile.GFile(path, 'rb') as f:
     return f.read()
 
+def _read_csv(path):
+  # Remove trailing '\r' in Windows
+  with tf.io.gfile.GFile(path, 'rb') as f:
+    return f.read().replace(b'\r', bytes('', encoding='utf8'))
 
 class ExtractorTest(testing.TestCase):
 
@@ -53,7 +57,7 @@ class ExtractorTest(testing.TestCase):
     with tf.io.gfile.GFile(f1_path, 'rb') as f1_f:
       cls.f1_content = f1_f.read()
     with tf.io.gfile.GFile(f2_path, 'rb') as f2_f:
-      cls.f2_content = f2_f.read()
+      cls.f2_content = f2_f.read().replace(b'\r', bytes('', encoding='utf8'))
 
   def setUp(self):
     super(ExtractorTest, self).setUp()
@@ -113,13 +117,13 @@ class ExtractorTest(testing.TestCase):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
     self.extractor.extract(from_path, GZIP, self.to_path).get()
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
-    self.assertEqual(_read(self.to_path), _read(foo_csv_path))
+    self.assertEqual(_read(self.to_path), _read_csv(foo_csv_path))
 
   def test_bzip2(self):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.bz2')
     self.extractor.extract(from_path, BZIP2, self.to_path).get()
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
-    self.assertEqual(_read(self.to_path), _read(foo_csv_path))
+    self.assertEqual(_read(self.to_path), _read_csv(foo_csv_path))
 
   def test_absolute_path(self):
     # There is a file with absolute path (ignored) + a file named "foo".
