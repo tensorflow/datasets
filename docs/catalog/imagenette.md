@@ -60,13 +60,10 @@ FeaturesDict({
 *   **Config description**: full-size variant.
 
 *   **Download size**: `1.45 GiB`
-
 *   **Dataset size**: `1.46 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split        | Examples
@@ -79,13 +76,10 @@ Split        | Examples
 *   **Config description**: 320px variant.
 
 *   **Download size**: `325.73 MiB`
-
 *   **Dataset size**: `332.71 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split        | Examples
@@ -98,13 +92,10 @@ Split        | Examples
 *   **Config description**: 160px variant.
 
 *   **Download size**: `94.36 MiB`
-
 *   **Dataset size**: `102.10 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split        | Examples
@@ -117,13 +108,10 @@ Split        | Examples
 *   **Config description**: full-size variant.
 
 *   **Download size**: `1.45 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split        | Examples
@@ -136,13 +124,10 @@ Split        | Examples
 *   **Config description**: 320px variant.
 
 *   **Download size**: `325.48 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split        | Examples
@@ -155,13 +140,10 @@ Split        | Examples
 *   **Config description**: 160px variant.
 
 *   **Download size**: `94.18 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split        | Examples

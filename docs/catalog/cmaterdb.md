@@ -97,7 +97,6 @@ FeaturesDict({
 *   **Config description**: CMATERdb Bangla Numerals
 
 *   **Download size**: `573.81 KiB`
-
 *   **Splits**:
 
 Split   | Examples
@@ -110,7 +109,6 @@ Split   | Examples
 *   **Config description**: CMATERdb Devangari Numerals
 
 *   **Download size**: `275.29 KiB`
-
 *   **Splits**:
 
 Split   | Examples
@@ -123,7 +121,6 @@ Split   | Examples
 *   **Config description**: CMATERdb Telugu Numerals
 
 *   **Download size**: `283.90 KiB`
-
 *   **Splits**:
 
 Split   | Examples

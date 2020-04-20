@@ -74,7 +74,6 @@ Split        | Examples
 *   **Config description**: Plain text
 
 *   **Dataset size**: `1.27 GiB`
-
 *   **Features**:
 
 ```python

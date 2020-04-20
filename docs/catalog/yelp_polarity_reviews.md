@@ -77,11 +77,9 @@ Split   | Examples
 *   **Config description**: Plain text
 
 *   **Dataset size**: `435.14 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Features**:
 
 ```python

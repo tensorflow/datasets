@@ -60,11 +60,9 @@ FeaturesDict({
 *   **Config description**: Patents under all categories.
 
 *   **Dataset size**: `24.22 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split        | Examples
@@ -139,7 +137,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 

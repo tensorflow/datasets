@@ -69,7 +69,6 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Config description**: WMT 2017 cs-en translation task dataset.
 
 *   **Download size**: `1.66 GiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -95,7 +94,6 @@ Translation({
 *   **Config description**: WMT 2017 de-en translation task dataset.
 
 *   **Download size**: `1.81 GiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -121,7 +119,6 @@ Translation({
 *   **Config description**: WMT 2017 fi-en translation task dataset.
 
 *   **Download size**: `414.10 MiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -147,7 +144,6 @@ Translation({
 *   **Config description**: WMT 2017 lv-en translation task dataset.
 
 *   **Download size**: `161.69 MiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -173,7 +169,6 @@ Translation({
 *   **Config description**: WMT 2017 ru-en translation task dataset.
 
 *   **Download size**: `3.34 GiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -199,7 +194,6 @@ Translation({
 *   **Config description**: WMT 2017 tr-en translation task dataset.
 
 *   **Download size**: `59.32 MiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -225,7 +219,6 @@ Translation({
 *   **Config description**: WMT 2017 zh-en translation task dataset.
 
 *   **Download size**: `2.16 GiB`
-
 *   **Splits**:
 
 Split        | Examples

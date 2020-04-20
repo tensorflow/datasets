@@ -65,7 +65,6 @@ Split        | Examples
 *   **Config description**: Brawl map with 64x64 resolution.
 
 *   **Download size**: `6.40 GiB`
-
 *   **Features**:
 
 ```python
@@ -79,7 +78,6 @@ FeaturesDict({
 *   **Config description**: Brawl map with 128x128 resolution.
 
 *   **Download size**: `20.76 GiB`
-
 *   **Features**:
 
 ```python
@@ -93,7 +91,6 @@ FeaturesDict({
 *   **Config description**: CollectMineralShards map with 64x64 resolution.
 
 *   **Download size**: `7.83 GiB`
-
 *   **Features**:
 
 ```python
@@ -107,7 +104,6 @@ FeaturesDict({
 *   **Config description**: CollectMineralShards map with 128x128 resolution.
 
 *   **Download size**: `24.83 GiB`
-
 *   **Features**:
 
 ```python
@@ -121,7 +117,6 @@ FeaturesDict({
 *   **Config description**: MoveUnitToBorder map with 64x64 resolution.
 
 *   **Download size**: `1.77 GiB`
-
 *   **Features**:
 
 ```python
@@ -135,7 +130,6 @@ FeaturesDict({
 *   **Config description**: MoveUnitToBorder map with 128x128 resolution.
 
 *   **Download size**: `5.75 GiB`
-
 *   **Features**:
 
 ```python
@@ -149,7 +143,6 @@ FeaturesDict({
 *   **Config description**: RoadTripWithMedivac map with 64x64 resolution.
 
 *   **Download size**: `2.48 GiB`
-
 *   **Features**:
 
 ```python
@@ -163,7 +156,6 @@ FeaturesDict({
 *   **Config description**: RoadTripWithMedivac map with 128x128 resolution.
 
 *   **Download size**: `7.80 GiB`
-
 *   **Features**:
 
 ```python

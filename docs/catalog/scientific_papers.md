@@ -72,7 +72,6 @@ FeaturesDict({
 *   **Config description**: Documents from ArXiv repository.
 
 *   **Dataset size**: `7.07 GiB`
-
 *   **Splits**:
 
 Split        | Examples
@@ -86,7 +85,6 @@ Split        | Examples
 *   **Config description**: Documents from PubMed repository.
 
 *   **Dataset size**: `2.34 GiB`
-
 *   **Splits**:
 
 Split        | Examples

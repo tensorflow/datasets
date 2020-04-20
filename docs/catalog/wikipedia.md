@@ -49,13 +49,10 @@ FeaturesDict({
 *   **Config description**: Wikipedia dataset for aa, parsed from 20200301 dump.
 
 *   **Download size**: `44.96 KiB`
-
 *   **Dataset size**: `3.46 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -67,13 +64,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ab, parsed from 20200301 dump.
 
 *   **Download size**: `1.74 MiB`
-
 *   **Dataset size**: `2.79 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -123,13 +117,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for af, parsed from 20200301 dump.
 
 *   **Download size**: `99.17 MiB`
-
 *   **Dataset size**: `179.95 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -141,13 +132,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ak, parsed from 20200301 dump.
 
 *   **Download size**: `462.66 KiB`
-
 *   **Dataset size**: `247.24 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -178,13 +166,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for am, parsed from 20200301 dump.
 
 *   **Download size**: `6.82 MiB`
-
 *   **Dataset size**: `16.64 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -196,13 +181,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for an, parsed from 20200301 dump.
 
 *   **Download size**: `32.94 MiB`
-
 *   **Dataset size**: `46.63 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -233,13 +215,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ar, parsed from 20200301 dump.
 
 *   **Download size**: `1.08 GiB`
-
 *   **Dataset size**: `2.09 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -289,13 +268,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for as, parsed from 20200301 dump.
 
 *   **Download size**: `21.48 MiB`
-
 *   **Dataset size**: `40.49 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -345,13 +321,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for av, parsed from 20200301 dump.
 
 *   **Download size**: `4.47 MiB`
-
 *   **Dataset size**: `3.23 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -363,13 +336,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ay, parsed from 20200301 dump.
 
 *   **Download size**: `2.19 MiB`
-
 *   **Dataset size**: `4.04 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -381,13 +351,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for az, parsed from 20200301 dump.
 
 *   **Download size**: `181.30 MiB`
-
 *   **Dataset size**: `317.17 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -418,13 +385,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ba, parsed from 20200301 dump.
 
 *   **Download size**: `64.46 MiB`
-
 *   **Dataset size**: `181.18 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -493,13 +457,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for be, parsed from 20200301 dump.
 
 *   **Download size**: `208.69 MiB`
-
 *   **Dataset size**: `433.16 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -530,13 +491,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bg, parsed from 20200301 dump.
 
 *   **Download size**: `344.69 MiB`
-
 *   **Dataset size**: `866.33 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -548,13 +506,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bh, parsed from 20200301 dump.
 
 *   **Download size**: `13.79 MiB`
-
 *   **Dataset size**: `10.36 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -566,13 +521,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bi, parsed from 20200301 dump.
 
 *   **Download size**: `444.50 KiB`
-
 *   **Dataset size**: `298.56 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -603,13 +555,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bm, parsed from 20200301 dump.
 
 *   **Download size**: `464.48 KiB`
-
 *   **Dataset size**: `351.32 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -621,13 +570,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bn, parsed from 20200301 dump.
 
 *   **Download size**: `183.92 MiB`
-
 *   **Dataset size**: `482.94 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -639,13 +585,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bo, parsed from 20200301 dump.
 
 *   **Download size**: `13.17 MiB`
-
 *   **Dataset size**: `116.42 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -676,13 +619,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for br, parsed from 20200301 dump.
 
 *   **Download size**: `50.39 MiB`
-
 *   **Dataset size**: `72.08 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -694,13 +634,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bs, parsed from 20200301 dump.
 
 *   **Download size**: `110.31 MiB`
-
 *   **Dataset size**: `150.33 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -750,13 +687,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ca, parsed from 20200301 dump.
 
 *   **Download size**: `899.00 MiB`
-
 *   **Dataset size**: `1.50 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -806,13 +740,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ce, parsed from 20200301 dump.
 
 *   **Download size**: `49.70 MiB`
-
 *   **Dataset size**: `254.09 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -843,13 +774,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ch, parsed from 20200301 dump.
 
 *   **Download size**: `707.12 KiB`
-
 *   **Dataset size**: `167.80 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -937,13 +865,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for co, parsed from 20200301 dump.
 
 *   **Download size**: `3.54 MiB`
-
 *   **Dataset size**: `5.85 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -955,13 +880,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cr, parsed from 20200301 dump.
 
 *   **Download size**: `271.60 KiB`
-
 *   **Dataset size**: `31.60 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -992,13 +914,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cs, parsed from 20200301 dump.
 
 *   **Download size**: `825.14 MiB`
-
 *   **Dataset size**: `1.15 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1029,13 +948,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cu, parsed from 20200301 dump.
 
 *   **Download size**: `665.69 KiB`
-
 *   **Dataset size**: `672.01 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1047,13 +963,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cv, parsed from 20200301 dump.
 
 *   **Download size**: `23.37 MiB`
-
 *   **Dataset size**: `59.96 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1065,13 +978,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cy, parsed from 20200301 dump.
 
 *   **Download size**: `69.14 MiB`
-
 *   **Dataset size**: `100.36 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1083,13 +993,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for da, parsed from 20200301 dump.
 
 *   **Download size**: `341.55 MiB`
-
 *   **Dataset size**: `457.15 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1101,13 +1008,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for de, parsed from 20200301 dump.
 
 *   **Download size**: `5.32 GiB`
-
 *   **Dataset size**: `7.52 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1195,13 +1099,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for dv, parsed from 20200301 dump.
 
 *   **Download size**: `4.35 MiB`
-
 *   **Dataset size**: `12.40 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1213,13 +1114,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for dz, parsed from 20200301 dump.
 
 *   **Download size**: `377.61 KiB`
-
 *   **Dataset size**: `799.74 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1231,13 +1129,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ee, parsed from 20200301 dump.
 
 *   **Download size**: `460.80 KiB`
-
 *   **Dataset size**: `207.60 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1249,13 +1144,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for el, parsed from 20200301 dump.
 
 *   **Download size**: `359.36 MiB`
-
 *   **Dataset size**: `937.56 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1286,13 +1178,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for en, parsed from 20200301 dump.
 
 *   **Download size**: `16.73 GiB`
-
 *   **Dataset size**: `17.05 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1304,13 +1193,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for eo, parsed from 20200301 dump.
 
 *   **Download size**: `264.90 MiB`
-
 *   **Dataset size**: `405.95 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1322,13 +1208,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for es, parsed from 20200301 dump.
 
 *   **Download size**: `3.16 GiB`
-
 *   **Dataset size**: `4.58 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1340,13 +1223,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for et, parsed from 20200301 dump.
 
 *   **Download size**: `211.83 MiB`
-
 *   **Dataset size**: `352.11 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1358,13 +1238,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for eu, parsed from 20200301 dump.
 
 *   **Download size**: `195.51 MiB`
-
 *   **Dataset size**: `386.22 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1395,13 +1272,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fa, parsed from 20200301 dump.
 
 *   **Download size**: `769.97 MiB`
-
 *   **Dataset size**: `1.33 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1413,13 +1287,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ff, parsed from 20200301 dump.
 
 *   **Download size**: `417.26 KiB`
-
 *   **Dataset size**: `280.51 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1431,13 +1302,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fi, parsed from 20200301 dump.
 
 *   **Download size**: `703.73 MiB`
-
 *   **Dataset size**: `923.20 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1468,13 +1336,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fj, parsed from 20200301 dump.
 
 *   **Download size**: `400.67 KiB`
-
 *   **Dataset size**: `278.31 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1486,13 +1351,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fo, parsed from 20200301 dump.
 
 *   **Download size**: `14.07 MiB`
-
 *   **Dataset size**: `13.50 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1504,13 +1366,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fr, parsed from 20200301 dump.
 
 *   **Download size**: `4.46 GiB`
-
 *   **Dataset size**: `6.00 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1579,13 +1438,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fy, parsed from 20200301 dump.
 
 *   **Download size**: `49.88 MiB`
-
 *   **Dataset size**: `94.24 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1597,13 +1453,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ga, parsed from 20200301 dump.
 
 *   **Download size**: `27.12 MiB`
-
 *   **Dataset size**: `43.30 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1653,13 +1506,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gd, parsed from 20200301 dump.
 
 *   **Download size**: `8.72 MiB`
-
 *   **Dataset size**: `12.45 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1671,13 +1521,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gl, parsed from 20200301 dump.
 
 *   **Download size**: `254.09 MiB`
-
 *   **Dataset size**: `376.97 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1708,13 +1555,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gn, parsed from 20200301 dump.
 
 *   **Download size**: `3.50 MiB`
-
 *   **Dataset size**: `5.27 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1783,13 +1627,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gu, parsed from 20200301 dump.
 
 *   **Download size**: `28.55 MiB`
-
 *   **Dataset size**: `106.99 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1801,13 +1642,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gv, parsed from 20200301 dump.
 
 *   **Download size**: `5.36 MiB`
-
 *   **Dataset size**: `4.38 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1819,13 +1657,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ha, parsed from 20200301 dump.
 
 *   **Download size**: `2.54 MiB`
-
 *   **Dataset size**: `3.01 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1875,13 +1710,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for he, parsed from 20200301 dump.
 
 *   **Download size**: `626.91 MiB`
-
 *   **Dataset size**: `1.36 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1893,13 +1725,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hi, parsed from 20200301 dump.
 
 *   **Download size**: `151.17 MiB`
-
 *   **Dataset size**: `520.31 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1930,13 +1759,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ho, parsed from 20200301 dump.
 
 *   **Download size**: `19.24 KiB`
-
 *   **Dataset size**: `3.27 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -1948,13 +1774,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hr, parsed from 20200301 dump.
 
 *   **Download size**: `261.83 MiB`
-
 *   **Dataset size**: `389.49 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -1985,13 +1808,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ht, parsed from 20200301 dump.
 
 *   **Download size**: `13.19 MiB`
-
 *   **Dataset size**: `38.84 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2003,13 +1823,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hu, parsed from 20200301 dump.
 
 *   **Download size**: `863.44 MiB`
-
 *   **Dataset size**: `1.19 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2021,13 +1838,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hy, parsed from 20200301 dump.
 
 *   **Download size**: `309.20 MiB`
-
 *   **Dataset size**: `846.57 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2039,13 +1853,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ia, parsed from 20200301 dump.
 
 *   **Download size**: `8.64 MiB`
-
 *   **Dataset size**: `11.52 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2057,13 +1868,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for id, parsed from 20200301 dump.
 
 *   **Download size**: `595.70 MiB`
-
 *   **Dataset size**: `809.23 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2075,13 +1883,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ie, parsed from 20200301 dump.
 
 *   **Download size**: `1.85 MiB`
-
 *   **Dataset size**: `2.82 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2093,13 +1898,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ig, parsed from 20200301 dump.
 
 *   **Download size**: `1.13 MiB`
-
 *   **Dataset size**: `1.18 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2111,13 +1913,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ii, parsed from 20200301 dump.
 
 *   **Download size**: `31.73 KiB`
-
 *   **Dataset size**: `8.31 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2129,13 +1928,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ik, parsed from 20200301 dump.
 
 *   **Download size**: `251.48 KiB`
-
 *   **Dataset size**: `94.27 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2185,13 +1981,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for io, parsed from 20200301 dump.
 
 *   **Download size**: `13.17 MiB`
-
 *   **Dataset size**: `29.29 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2203,13 +1996,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for is, parsed from 20200301 dump.
 
 *   **Download size**: `44.88 MiB`
-
 *   **Dataset size**: `70.66 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2221,13 +2011,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for it, parsed from 20200301 dump.
 
 *   **Download size**: `2.85 GiB`
-
 *   **Dataset size**: `3.72 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2239,13 +2026,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for iu, parsed from 20200301 dump.
 
 *   **Download size**: `292.01 KiB`
-
 *   **Dataset size**: `153.39 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2257,13 +2041,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ja, parsed from 20200301 dump.
 
 *   **Download size**: `2.95 GiB`
-
 *   **Dataset size**: `5.33 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2313,13 +2094,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for jv, parsed from 20200301 dump.
 
 *   **Download size**: `42.41 MiB`
-
 *   **Dataset size**: `54.26 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2331,13 +2109,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ka, parsed from 20200301 dump.
 
 *   **Download size**: `142.65 MiB`
-
 *   **Dataset size**: `480.54 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2425,13 +2200,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kg, parsed from 20200301 dump.
 
 *   **Download size**: `452.75 KiB`
-
 *   **Dataset size**: `255.06 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2443,13 +2215,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ki, parsed from 20200301 dump.
 
 *   **Download size**: `377.70 KiB`
-
 *   **Dataset size**: `310.31 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2461,13 +2230,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kj, parsed from 20200301 dump.
 
 *   **Download size**: `17.46 KiB`
-
 *   **Dataset size**: `4.93 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2479,13 +2245,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kk, parsed from 20200301 dump.
 
 *   **Download size**: `116.81 MiB`
-
 *   **Dataset size**: `417.74 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2497,13 +2260,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kl, parsed from 20200301 dump.
 
 *   **Download size**: `874.37 KiB`
-
 *   **Dataset size**: `574.59 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2515,13 +2275,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for km, parsed from 20200301 dump.
 
 *   **Download size**: `23.63 MiB`
-
 *   **Dataset size**: `132.41 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -2533,13 +2290,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kn, parsed from 20200301 dump.
 
 *   **Download size**: `73.08 MiB`
-
 *   **Dataset size**: `323.92 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2551,13 +2305,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ko, parsed from 20200301 dump.
 
 *   **Download size**: `685.64 MiB`
-
 *   **Dataset size**: `1.02 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2607,13 +2358,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ks, parsed from 20200301 dump.
 
 *   **Download size**: `331.45 KiB`
-
 *   **Dataset size**: `153.64 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2644,13 +2392,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ku, parsed from 20200301 dump.
 
 *   **Download size**: `18.20 MiB`
-
 *   **Dataset size**: `24.55 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2662,13 +2407,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kv, parsed from 20200301 dump.
 
 *   **Download size**: `3.46 MiB`
-
 *   **Dataset size**: `8.16 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2680,13 +2422,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kw, parsed from 20200301 dump.
 
 *   **Download size**: `1.92 MiB`
-
 *   **Dataset size**: `1.76 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2698,13 +2437,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ky, parsed from 20200301 dump.
 
 *   **Download size**: `33.38 MiB`
-
 *   **Dataset size**: `146.62 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -2716,13 +2452,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for la, parsed from 20200301 dump.
 
 *   **Download size**: `85.88 MiB`
-
 *   **Dataset size**: `123.90 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2753,13 +2486,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lb, parsed from 20200301 dump.
 
 *   **Download size**: `47.48 MiB`
-
 *   **Dataset size**: `75.73 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2828,13 +2558,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lg, parsed from 20200301 dump.
 
 *   **Download size**: `1.59 MiB`
-
 *   **Dataset size**: `3.69 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2846,13 +2573,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for li, parsed from 20200301 dump.
 
 *   **Download size**: `14.58 MiB`
-
 *   **Dataset size**: `25.08 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2902,13 +2626,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ln, parsed from 20200301 dump.
 
 *   **Download size**: `1.89 MiB`
-
 *   **Dataset size**: `1.67 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2920,13 +2641,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lo, parsed from 20200301 dump.
 
 *   **Download size**: `4.24 MiB`
-
 *   **Dataset size**: `11.47 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -2957,13 +2675,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lt, parsed from 20200301 dump.
 
 *   **Download size**: `182.22 MiB`
-
 *   **Dataset size**: `286.61 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -2994,13 +2709,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lv, parsed from 20200301 dump.
 
 *   **Download size**: `137.56 MiB`
-
 *   **Dataset size**: `170.66 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -3069,13 +2781,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mg, parsed from 20200301 dump.
 
 *   **Download size**: `26.66 MiB`
-
 *   **Dataset size**: `61.98 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3087,13 +2796,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mh, parsed from 20200301 dump.
 
 *   **Download size**: `28.59 KiB`
-
 *   **Dataset size**: `11.04 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3124,13 +2830,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mi, parsed from 20200301 dump.
 
 *   **Download size**: `1.99 MiB`
-
 *   **Dataset size**: `3.50 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3161,13 +2864,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mk, parsed from 20200301 dump.
 
 *   **Download size**: `152.75 MiB`
-
 *   **Dataset size**: `432.82 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -3179,13 +2879,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ml, parsed from 20200301 dump.
 
 *   **Download size**: `130.77 MiB`
-
 *   **Dataset size**: `340.30 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -3197,13 +2894,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mn, parsed from 20200301 dump.
 
 *   **Download size**: `30.40 MiB`
-
 *   **Dataset size**: `71.21 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3215,13 +2909,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mr, parsed from 20200301 dump.
 
 *   **Download size**: `53.71 MiB`
-
 *   **Dataset size**: `149.28 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -3252,13 +2943,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ms, parsed from 20200301 dump.
 
 *   **Download size**: `228.62 MiB`
-
 *   **Dataset size**: `318.42 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -3270,13 +2958,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mt, parsed from 20200301 dump.
 
 *   **Download size**: `8.53 MiB`
-
 *   **Dataset size**: `12.70 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3326,13 +3011,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for my, parsed from 20200301 dump.
 
 *   **Download size**: `37.69 MiB`
-
 *   **Dataset size**: `177.44 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -3382,13 +3064,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for na, parsed from 20200301 dump.
 
 *   **Download size**: `495.83 KiB`
-
 *   **Dataset size**: `334.74 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3476,13 +3155,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ne, parsed from 20200301 dump.
 
 *   **Download size**: `32.89 MiB`
-
 *   **Dataset size**: `86.01 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3513,13 +3189,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ng, parsed from 20200301 dump.
 
 *   **Download size**: `91.98 KiB`
-
 *   **Dataset size**: `66.12 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3531,13 +3204,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for nl, parsed from 20200301 dump.
 
 *   **Download size**: `1.45 GiB`
-
 *   **Dataset size**: `2.13 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -3549,13 +3219,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for nn, parsed from 20200301 dump.
 
 *   **Download size**: `132.55 MiB`
-
 *   **Dataset size**: `200.31 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -3567,13 +3234,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for no, parsed from 20200301 dump.
 
 *   **Download size**: `619.74 MiB`
-
 *   **Dataset size**: `861.07 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -3642,13 +3306,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for nv, parsed from 20200301 dump.
 
 *   **Download size**: `3.48 MiB`
-
 *   **Dataset size**: `8.00 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3660,13 +3321,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ny, parsed from 20200301 dump.
 
 *   **Download size**: `1.29 MiB`
-
 *   **Dataset size**: `752.91 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3678,13 +3336,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for oc, parsed from 20200301 dump.
 
 *   **Download size**: `73.98 MiB`
-
 *   **Dataset size**: `110.92 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3715,13 +3370,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for om, parsed from 20200301 dump.
 
 *   **Download size**: `1.10 MiB`
-
 *   **Dataset size**: `1.59 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3733,13 +3385,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for or, parsed from 20200301 dump.
 
 *   **Download size**: `26.72 MiB`
-
 *   **Dataset size**: `55.44 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3751,13 +3400,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for os, parsed from 20200301 dump.
 
 *   **Download size**: `7.76 MiB`
-
 *   **Dataset size**: `9.04 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3769,13 +3415,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pa, parsed from 20200301 dump.
 
 *   **Download size**: `45.93 MiB`
-
 *   **Dataset size**: `118.68 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3901,13 +3544,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pi, parsed from 20200301 dump.
 
 *   **Download size**: `606.15 KiB`
-
 *   **Dataset size**: `2.03 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -3938,13 +3578,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pl, parsed from 20200301 dump.
 
 *   **Download size**: `1.87 GiB`
-
 *   **Dataset size**: `2.35 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4013,13 +3650,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ps, parsed from 20200301 dump.
 
 *   **Download size**: `16.28 MiB`
-
 *   **Dataset size**: `36.91 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4031,13 +3665,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pt, parsed from 20200301 dump.
 
 *   **Download size**: `1.69 GiB`
-
 *   **Dataset size**: `2.13 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4049,13 +3680,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for qu, parsed from 20200301 dump.
 
 *   **Download size**: `11.85 MiB`
-
 *   **Dataset size**: `15.12 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4067,13 +3695,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for rm, parsed from 20200301 dump.
 
 *   **Download size**: `6.50 MiB`
-
 *   **Dataset size**: `15.51 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4104,13 +3729,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for rn, parsed from 20200301 dump.
 
 *   **Download size**: `796.83 KiB`
-
 *   **Dataset size**: `347.72 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4122,13 +3744,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ro, parsed from 20200301 dump.
 
 *   **Download size**: `478.19 MiB`
-
 *   **Dataset size**: `661.55 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4178,13 +3797,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ru, parsed from 20200301 dump.
 
 *   **Download size**: `3.77 GiB`
-
 *   **Dataset size**: `7.62 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4215,13 +3831,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for rw, parsed from 20200301 dump.
 
 *   **Download size**: `908.39 KiB`
-
 *   **Dataset size**: `977.34 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4233,13 +3846,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sa, parsed from 20200301 dump.
 
 *   **Download size**: `14.82 MiB`
-
 *   **Dataset size**: `56.70 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4289,13 +3899,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sc, parsed from 20200301 dump.
 
 *   **Download size**: `5.01 MiB`
-
 *   **Dataset size**: `7.90 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4345,13 +3952,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sd, parsed from 20200301 dump.
 
 *   **Download size**: `15.68 MiB`
-
 *   **Dataset size**: `28.68 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4363,13 +3967,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for se, parsed from 20200301 dump.
 
 *   **Download size**: `3.66 MiB`
-
 *   **Dataset size**: `3.20 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4381,13 +3982,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sg, parsed from 20200301 dump.
 
 *   **Download size**: `299.28 KiB`
-
 *   **Dataset size**: `95.17 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4399,13 +3997,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sh, parsed from 20200301 dump.
 
 *   **Download size**: `412.87 MiB`
-
 *   **Dataset size**: `814.81 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4417,13 +4012,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for si, parsed from 20200301 dump.
 
 *   **Download size**: `38.91 MiB`
-
 *   **Dataset size**: `106.82 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4454,13 +4046,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sk, parsed from 20200301 dump.
 
 *   **Download size**: `265.58 MiB`
-
 *   **Dataset size**: `345.16 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4472,13 +4061,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sl, parsed from 20200301 dump.
 
 *   **Download size**: `214.19 MiB`
-
 *   **Dataset size**: `341.62 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4490,13 +4076,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sm, parsed from 20200301 dump.
 
 *   **Download size**: `723.35 KiB`
-
 *   **Dataset size**: `677.25 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4508,13 +4091,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sn, parsed from 20200301 dump.
 
 *   **Download size**: `2.43 MiB`
-
 *   **Dataset size**: `3.66 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4526,13 +4106,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for so, parsed from 20200301 dump.
 
 *   **Download size**: `8.45 MiB`
-
 *   **Dataset size**: `9.53 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4544,13 +4121,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sq, parsed from 20200301 dump.
 
 *   **Download size**: `83.93 MiB`
-
 *   **Dataset size**: `140.82 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -4562,13 +4136,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sr, parsed from 20200301 dump.
 
 *   **Download size**: `778.54 MiB`
-
 *   **Dataset size**: `1.51 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4599,13 +4170,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ss, parsed from 20200301 dump.
 
 *   **Download size**: `795.23 KiB`
-
 *   **Dataset size**: `469.17 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4617,13 +4185,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for st, parsed from 20200301 dump.
 
 *   **Download size**: `558.97 KiB`
-
 *   **Dataset size**: `332.01 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4654,13 +4219,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for su, parsed from 20200301 dump.
 
 *   **Download size**: `24.10 MiB`
-
 *   **Dataset size**: `39.52 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4672,13 +4234,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sv, parsed from 20200301 dump.
 
 *   **Download size**: `1.68 GiB`
-
 *   **Dataset size**: `2.93 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4690,13 +4249,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sw, parsed from 20200301 dump.
 
 *   **Download size**: `30.67 MiB`
-
 *   **Dataset size**: `48.36 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4727,13 +4283,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ta, parsed from 20200301 dump.
 
 *   **Download size**: `154.80 MiB`
-
 *   **Dataset size**: `604.28 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4764,13 +4317,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for te, parsed from 20200301 dump.
 
 *   **Download size**: `102.37 MiB`
-
 *   **Dataset size**: `556.43 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4801,13 +4351,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tg, parsed from 20200301 dump.
 
 *   **Download size**: `39.93 MiB`
-
 *   **Dataset size**: `106.84 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4819,13 +4366,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for th, parsed from 20200301 dump.
 
 *   **Download size**: `271.37 MiB`
-
 *   **Dataset size**: `789.74 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4837,13 +4381,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ti, parsed from 20200301 dump.
 
 *   **Download size**: `365.94 KiB`
-
 *   **Dataset size**: `369.20 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4855,13 +4396,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tk, parsed from 20200301 dump.
 
 *   **Download size**: `4.61 MiB`
-
 *   **Dataset size**: `9.94 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4873,13 +4411,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tl, parsed from 20200301 dump.
 
 *   **Download size**: `54.88 MiB`
-
 *   **Dataset size**: `61.05 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4891,13 +4426,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tn, parsed from 20200301 dump.
 
 *   **Download size**: `1.40 MiB`
-
 *   **Dataset size**: `1.45 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4909,13 +4441,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for to, parsed from 20200301 dump.
 
 *   **Download size**: `797.75 KiB`
-
 *   **Dataset size**: `911.82 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4946,13 +4475,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tr, parsed from 20200301 dump.
 
 *   **Download size**: `534.01 MiB`
-
 *   **Dataset size**: `662.27 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -4964,13 +4490,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ts, parsed from 20200301 dump.
 
 *   **Download size**: `1.43 MiB`
-
 *   **Dataset size**: `701.00 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -4982,13 +4505,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tt, parsed from 20200301 dump.
 
 *   **Download size**: `58.06 MiB`
-
 *   **Dataset size**: `134.13 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -5019,13 +4539,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tw, parsed from 20200301 dump.
 
 *   **Download size**: `413.61 KiB`
-
 *   **Dataset size**: `290.86 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5037,13 +4554,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ty, parsed from 20200301 dump.
 
 *   **Download size**: `502.60 KiB`
-
 *   **Dataset size**: `249.88 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5093,13 +4607,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ug, parsed from 20200301 dump.
 
 *   **Download size**: `5.94 MiB`
-
 *   **Dataset size**: `27.87 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5111,13 +4622,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for uk, parsed from 20200301 dump.
 
 *   **Download size**: `1.45 GiB`
-
 *   **Dataset size**: `3.35 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5129,13 +4637,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ur, parsed from 20200301 dump.
 
 *   **Download size**: `143.42 MiB`
-
 *   **Dataset size**: `222.05 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
-
 *   **Splits**:
 
 Split   | Examples
@@ -5147,13 +4652,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for uz, parsed from 20200301 dump.
 
 *   **Download size**: `62.85 MiB`
-
 *   **Dataset size**: `94.39 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5165,13 +4667,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ve, parsed from 20200301 dump.
 
 *   **Download size**: `278.29 KiB`
-
 *   **Dataset size**: `210.46 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5221,13 +4720,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for vi, parsed from 20200301 dump.
 
 *   **Download size**: `708.12 MiB`
-
 *   **Dataset size**: `1.22 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5258,13 +4754,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for vo, parsed from 20200301 dump.
 
 *   **Download size**: `24.16 MiB`
-
 *   **Dataset size**: `80.36 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5276,13 +4769,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for wa, parsed from 20200301 dump.
 
 *   **Download size**: `9.23 MiB`
-
 *   **Dataset size**: `14.37 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5313,13 +4803,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for wo, parsed from 20200301 dump.
 
 *   **Download size**: `1.84 MiB`
-
 *   **Dataset size**: `3.06 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5369,13 +4856,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for xh, parsed from 20200301 dump.
 
 *   **Download size**: `1.38 MiB`
-
 *   **Dataset size**: `1.65 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5406,13 +4890,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for yi, parsed from 20200301 dump.
 
 *   **Download size**: `12.02 MiB`
-
 *   **Dataset size**: `32.21 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5424,13 +4905,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for yo, parsed from 20200301 dump.
 
 *   **Download size**: `12.32 MiB`
-
 *   **Dataset size**: `10.02 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5442,13 +4920,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for za, parsed from 20200301 dump.
 
 *   **Download size**: `772.04 KiB`
-
 *   **Dataset size**: `708.21 KiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5479,13 +4954,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for zh, parsed from 20200301 dump.
 
 *   **Download size**: `1.87 GiB`
-
 *   **Dataset size**: `1.94 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5554,13 +5026,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for zu, parsed from 20200301 dump.
 
 *   **Download size**: `1.81 MiB`
-
 *   **Dataset size**: `1.28 MiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-
 *   **Splits**:
 
 Split   | Examples
@@ -5572,13 +5041,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for aa, parsed from 20190301 dump.
 
 *   **Download size**: `44.09 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5590,13 +5056,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ab, parsed from 20190301 dump.
 
 *   **Download size**: `1.31 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5646,13 +5109,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for af, parsed from 20190301 dump.
 
 *   **Download size**: `84.13 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5664,13 +5124,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ak, parsed from 20190301 dump.
 
 *   **Download size**: `377.84 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5701,13 +5158,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for am, parsed from 20190301 dump.
 
 *   **Download size**: `6.54 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5719,13 +5173,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for an, parsed from 20190301 dump.
 
 *   **Download size**: `31.39 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5756,13 +5207,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ar, parsed from 20190301 dump.
 
 *   **Download size**: `805.82 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5812,13 +5260,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for as, parsed from 20190301 dump.
 
 *   **Download size**: `19.06 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5868,13 +5313,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for av, parsed from 20190301 dump.
 
 *   **Download size**: `3.61 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5886,13 +5328,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ay, parsed from 20190301 dump.
 
 *   **Download size**: `2.06 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5904,13 +5343,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for az, parsed from 20190301 dump.
 
 *   **Download size**: `163.04 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -5941,13 +5377,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ba, parsed from 20190301 dump.
 
 *   **Download size**: `55.04 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6016,13 +5449,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for be, parsed from 20190301 dump.
 
 *   **Download size**: `192.23 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6053,13 +5483,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bg, parsed from 20190301 dump.
 
 *   **Download size**: `326.20 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6071,13 +5498,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bh, parsed from 20190301 dump.
 
 *   **Download size**: `13.28 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6089,13 +5513,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bi, parsed from 20190301 dump.
 
 *   **Download size**: `424.88 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6126,13 +5547,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bm, parsed from 20190301 dump.
 
 *   **Download size**: `447.98 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6144,13 +5562,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bn, parsed from 20190301 dump.
 
 *   **Download size**: `145.04 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6162,13 +5577,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bo, parsed from 20190301 dump.
 
 *   **Download size**: `12.41 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6199,13 +5611,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for br, parsed from 20190301 dump.
 
 *   **Download size**: `49.14 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6217,13 +5626,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for bs, parsed from 20190301 dump.
 
 *   **Download size**: `103.26 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6273,13 +5679,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ca, parsed from 20190301 dump.
 
 *   **Download size**: `849.65 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6329,13 +5732,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ce, parsed from 20190301 dump.
 
 *   **Download size**: `43.89 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6366,13 +5766,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ch, parsed from 20190301 dump.
 
 *   **Download size**: `684.97 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6460,13 +5857,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for co, parsed from 20190301 dump.
 
 *   **Download size**: `3.38 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6478,13 +5872,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cr, parsed from 20190301 dump.
 
 *   **Download size**: `259.71 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6515,13 +5906,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cs, parsed from 20190301 dump.
 
 *   **Download size**: `759.21 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6552,13 +5940,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cu, parsed from 20190301 dump.
 
 *   **Download size**: `631.49 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6570,13 +5955,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cv, parsed from 20190301 dump.
 
 *   **Download size**: `22.23 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6588,13 +5970,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for cy, parsed from 20190301 dump.
 
 *   **Download size**: `64.37 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6606,13 +5985,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for da, parsed from 20190301 dump.
 
 *   **Download size**: `323.53 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6624,13 +6000,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for de, parsed from 20190301 dump.
 
 *   **Download size**: `4.97 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6718,13 +6091,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for dv, parsed from 20190301 dump.
 
 *   **Download size**: `4.24 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6736,13 +6106,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for dz, parsed from 20190301 dump.
 
 *   **Download size**: `360.01 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6754,13 +6121,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ee, parsed from 20190301 dump.
 
 *   **Download size**: `434.14 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6772,13 +6136,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for el, parsed from 20190301 dump.
 
 *   **Download size**: `324.40 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6809,13 +6170,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for en, parsed from 20190301 dump.
 
 *   **Download size**: `15.72 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6827,13 +6185,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for eo, parsed from 20190301 dump.
 
 *   **Download size**: `245.73 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6845,13 +6200,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for es, parsed from 20190301 dump.
 
 *   **Download size**: `2.93 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6863,13 +6215,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for et, parsed from 20190301 dump.
 
 *   **Download size**: `196.03 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6881,13 +6230,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for eu, parsed from 20190301 dump.
 
 *   **Download size**: `180.35 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6918,13 +6264,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fa, parsed from 20190301 dump.
 
 *   **Download size**: `693.84 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6936,13 +6279,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ff, parsed from 20190301 dump.
 
 *   **Download size**: `387.75 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6954,13 +6294,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fi, parsed from 20190301 dump.
 
 *   **Download size**: `656.44 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -6991,13 +6328,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fj, parsed from 20190301 dump.
 
 *   **Download size**: `262.98 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7009,13 +6343,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fo, parsed from 20190301 dump.
 
 *   **Download size**: `13.67 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7027,13 +6358,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fr, parsed from 20190301 dump.
 
 *   **Download size**: `4.14 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7102,13 +6430,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for fy, parsed from 20190301 dump.
 
 *   **Download size**: `45.52 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7120,13 +6445,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ga, parsed from 20190301 dump.
 
 *   **Download size**: `24.78 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7176,13 +6498,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gd, parsed from 20190301 dump.
 
 *   **Download size**: `8.51 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7194,13 +6513,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gl, parsed from 20190301 dump.
 
 *   **Download size**: `235.07 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7231,13 +6547,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gn, parsed from 20190301 dump.
 
 *   **Download size**: `3.37 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7306,13 +6619,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gu, parsed from 20190301 dump.
 
 *   **Download size**: `27.23 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7324,13 +6634,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for gv, parsed from 20190301 dump.
 
 *   **Download size**: `5.32 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7342,13 +6649,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ha, parsed from 20190301 dump.
 
 *   **Download size**: `1.62 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7398,13 +6702,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for he, parsed from 20190301 dump.
 
 *   **Download size**: `572.30 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7416,13 +6717,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hi, parsed from 20190301 dump.
 
 *   **Download size**: `137.86 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7453,13 +6751,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ho, parsed from 20190301 dump.
 
 *   **Download size**: `18.37 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7471,13 +6766,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hr, parsed from 20190301 dump.
 
 *   **Download size**: `246.05 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7508,13 +6800,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ht, parsed from 20190301 dump.
 
 *   **Download size**: `10.23 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7526,13 +6815,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hu, parsed from 20190301 dump.
 
 *   **Download size**: `810.17 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7544,13 +6830,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for hy, parsed from 20190301 dump.
 
 *   **Download size**: `277.53 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7562,13 +6845,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ia, parsed from 20190301 dump.
 
 *   **Download size**: `7.85 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7580,13 +6860,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for id, parsed from 20190301 dump.
 
 *   **Download size**: `523.94 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7598,13 +6875,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ie, parsed from 20190301 dump.
 
 *   **Download size**: `1.70 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7616,13 +6890,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ig, parsed from 20190301 dump.
 
 *   **Download size**: `1.00 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7634,13 +6905,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ii, parsed from 20190301 dump.
 
 *   **Download size**: `30.88 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7652,13 +6920,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ik, parsed from 20190301 dump.
 
 *   **Download size**: `238.12 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7708,13 +6973,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for io, parsed from 20190301 dump.
 
 *   **Download size**: `12.56 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7726,13 +6988,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for is, parsed from 20190301 dump.
 
 *   **Download size**: `41.86 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7744,13 +7003,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for it, parsed from 20190301 dump.
 
 *   **Download size**: `2.66 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7762,13 +7018,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for iu, parsed from 20190301 dump.
 
 *   **Download size**: `284.06 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7780,13 +7033,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ja, parsed from 20190301 dump.
 
 *   **Download size**: `2.74 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7836,13 +7086,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for jv, parsed from 20190301 dump.
 
 *   **Download size**: `39.32 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7854,13 +7101,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ka, parsed from 20190301 dump.
 
 *   **Download size**: `131.78 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7948,13 +7192,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kg, parsed from 20190301 dump.
 
 *   **Download size**: `439.26 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7966,13 +7207,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ki, parsed from 20190301 dump.
 
 *   **Download size**: `370.78 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -7984,13 +7222,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kj, parsed from 20190301 dump.
 
 *   **Download size**: `16.58 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8002,13 +7237,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kk, parsed from 20190301 dump.
 
 *   **Download size**: `113.46 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8020,13 +7252,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kl, parsed from 20190301 dump.
 
 *   **Download size**: `862.51 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8038,13 +7267,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for km, parsed from 20190301 dump.
 
 *   **Download size**: `21.92 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8056,13 +7282,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kn, parsed from 20190301 dump.
 
 *   **Download size**: `69.62 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8074,13 +7297,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ko, parsed from 20190301 dump.
 
 *   **Download size**: `625.16 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8130,13 +7350,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ks, parsed from 20190301 dump.
 
 *   **Download size**: `309.15 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8167,13 +7384,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ku, parsed from 20190301 dump.
 
 *   **Download size**: `17.09 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8185,13 +7399,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kv, parsed from 20190301 dump.
 
 *   **Download size**: `3.36 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8203,13 +7414,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for kw, parsed from 20190301 dump.
 
 *   **Download size**: `1.71 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8221,13 +7429,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ky, parsed from 20190301 dump.
 
 *   **Download size**: `33.13 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8239,13 +7444,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for la, parsed from 20190301 dump.
 
 *   **Download size**: `82.72 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8276,13 +7478,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lb, parsed from 20190301 dump.
 
 *   **Download size**: `45.70 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8351,13 +7550,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lg, parsed from 20190301 dump.
 
 *   **Download size**: `1.58 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8369,13 +7565,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for li, parsed from 20190301 dump.
 
 *   **Download size**: `13.86 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8425,13 +7618,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ln, parsed from 20190301 dump.
 
 *   **Download size**: `1.83 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8443,13 +7633,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lo, parsed from 20190301 dump.
 
 *   **Download size**: `3.44 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8480,13 +7667,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lt, parsed from 20190301 dump.
 
 *   **Download size**: `174.73 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8517,13 +7701,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for lv, parsed from 20190301 dump.
 
 *   **Download size**: `127.47 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8592,13 +7773,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mg, parsed from 20190301 dump.
 
 *   **Download size**: `25.64 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8610,13 +7788,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mh, parsed from 20190301 dump.
 
 *   **Download size**: `27.71 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8647,13 +7822,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mi, parsed from 20190301 dump.
 
 *   **Download size**: `1.96 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8684,13 +7856,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mk, parsed from 20190301 dump.
 
 *   **Download size**: `140.69 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8702,13 +7871,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ml, parsed from 20190301 dump.
 
 *   **Download size**: `117.24 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8720,13 +7886,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mn, parsed from 20190301 dump.
 
 *   **Download size**: `28.23 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8738,13 +7901,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mr, parsed from 20190301 dump.
 
 *   **Download size**: `49.58 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8775,13 +7935,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ms, parsed from 20190301 dump.
 
 *   **Download size**: `205.79 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8793,13 +7950,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for mt, parsed from 20190301 dump.
 
 *   **Download size**: `8.21 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8849,13 +8003,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for my, parsed from 20190301 dump.
 
 *   **Download size**: `34.60 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8905,13 +8056,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for na, parsed from 20190301 dump.
 
 *   **Download size**: `480.57 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -8999,13 +8147,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ne, parsed from 20190301 dump.
 
 *   **Download size**: `29.26 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9036,13 +8181,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ng, parsed from 20190301 dump.
 
 *   **Download size**: `91.11 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9054,13 +8196,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for nl, parsed from 20190301 dump.
 
 *   **Download size**: `1.38 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9072,13 +8211,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for nn, parsed from 20190301 dump.
 
 *   **Download size**: `126.01 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9090,13 +8226,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for no, parsed from 20190301 dump.
 
 *   **Download size**: `610.74 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9165,13 +8298,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for nv, parsed from 20190301 dump.
 
 *   **Download size**: `2.52 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9183,13 +8313,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ny, parsed from 20190301 dump.
 
 *   **Download size**: `1.18 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9201,13 +8328,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for oc, parsed from 20190301 dump.
 
 *   **Download size**: `70.97 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9238,13 +8362,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for om, parsed from 20190301 dump.
 
 *   **Download size**: `1.06 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9256,13 +8377,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for or, parsed from 20190301 dump.
 
 *   **Download size**: `24.90 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9274,13 +8392,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for os, parsed from 20190301 dump.
 
 *   **Download size**: `7.31 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9292,13 +8407,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pa, parsed from 20190301 dump.
 
 *   **Download size**: `40.39 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9424,13 +8536,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pi, parsed from 20190301 dump.
 
 *   **Download size**: `586.77 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9461,13 +8570,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pl, parsed from 20190301 dump.
 
 *   **Download size**: `1.76 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9536,13 +8642,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ps, parsed from 20190301 dump.
 
 *   **Download size**: `14.09 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9554,13 +8657,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for pt, parsed from 20190301 dump.
 
 *   **Download size**: `1.58 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9572,13 +8672,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for qu, parsed from 20190301 dump.
 
 *   **Download size**: `11.42 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9590,13 +8687,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for rm, parsed from 20190301 dump.
 
 *   **Download size**: `5.85 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9627,13 +8721,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for rn, parsed from 20190301 dump.
 
 *   **Download size**: `779.25 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9645,13 +8736,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ro, parsed from 20190301 dump.
 
 *   **Download size**: `449.49 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9701,13 +8789,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ru, parsed from 20190301 dump.
 
 *   **Download size**: `3.51 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9738,13 +8823,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for rw, parsed from 20190301 dump.
 
 *   **Download size**: `904.81 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9756,13 +8838,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sa, parsed from 20190301 dump.
 
 *   **Download size**: `14.29 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9812,13 +8891,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sc, parsed from 20190301 dump.
 
 *   **Download size**: `4.39 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9868,13 +8944,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sd, parsed from 20190301 dump.
 
 *   **Download size**: `12.62 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9886,13 +8959,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for se, parsed from 20190301 dump.
 
 *   **Download size**: `3.30 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9904,13 +8974,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sg, parsed from 20190301 dump.
 
 *   **Download size**: `286.02 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9922,13 +8989,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sh, parsed from 20190301 dump.
 
 *   **Download size**: `406.72 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9940,13 +9004,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for si, parsed from 20190301 dump.
 
 *   **Download size**: `36.84 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9977,13 +9038,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sk, parsed from 20190301 dump.
 
 *   **Download size**: `254.37 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -9995,13 +9053,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sl, parsed from 20190301 dump.
 
 *   **Download size**: `201.41 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10013,13 +9068,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sm, parsed from 20190301 dump.
 
 *   **Download size**: `678.46 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10031,13 +9083,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sn, parsed from 20190301 dump.
 
 *   **Download size**: `2.02 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10049,13 +9098,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for so, parsed from 20190301 dump.
 
 *   **Download size**: `8.17 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10067,13 +9113,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sq, parsed from 20190301 dump.
 
 *   **Download size**: `77.55 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10085,13 +9128,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sr, parsed from 20190301 dump.
 
 *   **Download size**: `725.30 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10122,13 +9162,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ss, parsed from 20190301 dump.
 
 *   **Download size**: `737.58 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10140,13 +9177,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for st, parsed from 20190301 dump.
 
 *   **Download size**: `482.27 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10177,13 +9211,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for su, parsed from 20190301 dump.
 
 *   **Download size**: `20.52 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10195,13 +9226,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sv, parsed from 20190301 dump.
 
 *   **Download size**: `1.64 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10213,13 +9241,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for sw, parsed from 20190301 dump.
 
 *   **Download size**: `27.60 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10250,13 +9275,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ta, parsed from 20190301 dump.
 
 *   **Download size**: `141.07 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10287,13 +9309,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for te, parsed from 20190301 dump.
 
 *   **Download size**: `113.16 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10324,13 +9343,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tg, parsed from 20190301 dump.
 
 *   **Download size**: `36.95 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10342,13 +9358,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for th, parsed from 20190301 dump.
 
 *   **Download size**: `254.00 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10360,13 +9373,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ti, parsed from 20190301 dump.
 
 *   **Download size**: `309.72 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10378,13 +9388,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tk, parsed from 20190301 dump.
 
 *   **Download size**: `4.50 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10396,13 +9403,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tl, parsed from 20190301 dump.
 
 *   **Download size**: `50.85 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10414,13 +9418,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tn, parsed from 20190301 dump.
 
 *   **Download size**: `1.21 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10432,13 +9433,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for to, parsed from 20190301 dump.
 
 *   **Download size**: `775.10 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10469,13 +9467,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tr, parsed from 20190301 dump.
 
 *   **Download size**: `497.19 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10487,13 +9482,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ts, parsed from 20190301 dump.
 
 *   **Download size**: `1.39 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10505,13 +9497,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tt, parsed from 20190301 dump.
 
 *   **Download size**: `53.23 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10542,13 +9531,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for tw, parsed from 20190301 dump.
 
 *   **Download size**: `345.96 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10560,13 +9546,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ty, parsed from 20190301 dump.
 
 *   **Download size**: `485.56 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10616,13 +9599,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ug, parsed from 20190301 dump.
 
 *   **Download size**: `5.64 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10634,13 +9614,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for uk, parsed from 20190301 dump.
 
 *   **Download size**: `1.28 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10652,13 +9629,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ur, parsed from 20190301 dump.
 
 *   **Download size**: `129.57 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10670,13 +9644,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for uz, parsed from 20190301 dump.
 
 *   **Download size**: `60.85 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10688,13 +9659,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for ve, parsed from 20190301 dump.
 
 *   **Download size**: `257.59 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10744,13 +9712,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for vi, parsed from 20190301 dump.
 
 *   **Download size**: `623.74 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10781,13 +9746,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for vo, parsed from 20190301 dump.
 
 *   **Download size**: `23.80 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10799,13 +9761,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for wa, parsed from 20190301 dump.
 
 *   **Download size**: `8.75 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10836,13 +9795,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for wo, parsed from 20190301 dump.
 
 *   **Download size**: `1.54 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10892,13 +9848,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for xh, parsed from 20190301 dump.
 
 *   **Download size**: `1.26 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10929,13 +9882,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for yi, parsed from 20190301 dump.
 
 *   **Download size**: `11.56 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10947,13 +9897,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for yo, parsed from 20190301 dump.
 
 *   **Download size**: `11.55 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -10965,13 +9912,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for za, parsed from 20190301 dump.
 
 *   **Download size**: `735.93 KiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -11002,13 +9946,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for zh, parsed from 20190301 dump.
 
 *   **Download size**: `1.71 GiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples
@@ -11077,13 +10018,10 @@ Split   | Examples
 *   **Config description**: Wikipedia dataset for zu, parsed from 20190301 dump.
 
 *   **Download size**: `1.50 MiB`
-
 *   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples

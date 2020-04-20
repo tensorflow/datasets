@@ -59,7 +59,6 @@ Split            | Examples
 *   **Config description**: Transcriptions are in plain text.
 
 *   **Dataset size**: `304.47 GiB`
-
 *   **Features**:
 
 ```python
@@ -77,7 +76,6 @@ FeaturesDict({
 *   **Config description**: Transcriptions use the SubwordTextEncoder
 
 *   **Dataset size**: `304.44 GiB`
-
 *   **Features**:
 
 ```python
@@ -95,7 +93,6 @@ FeaturesDict({
 *   **Config description**: Transcriptions use the SubwordTextEncoder
 
 *   **Dataset size**: `304.44 GiB`
-
 *   **Features**:
 
 ```python
