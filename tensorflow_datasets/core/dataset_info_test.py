@@ -89,8 +89,12 @@ class DatasetInfoTest(testing.TestCase):
 
   def test_non_existent_dir(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
+    if os.name is 'nt':
+      err = "The system cannot find the path specified"
+    else:
+      err = "No such file or dir" 
     with self.assertRaisesWithPredicateMatch(
-        tf.errors.NotFoundError, "No such file or dir"):
+        tf.errors.NotFoundError, err):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
   def test_reading(self):
