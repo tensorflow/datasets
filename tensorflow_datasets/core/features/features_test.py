@@ -256,7 +256,8 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
             ),
             # Invalid dtype
             testing.FeatureExpectationItem(
-                value=np.random.randint(256, size=(2, 3)),
+                # Windows defualts to `int32`
+                value=np.random.randint(256, size=(2, 3)).astype(np.int64),
                 raise_cls=ValueError,
                 raise_msg='int64 do not match',
             ),
