@@ -87,6 +87,7 @@ class _Extractor(object):
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     path = None
+    dst_path = None  # To avoid undefined variable if exception is raised
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
@@ -96,7 +97,7 @@ class _Extractor(object):
       msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
           from_path, to_path, path, err)
       # Check if running on windows
-      if os.name == 'nt' and len(dst_path) > 250:
+      if os.name == 'nt' and dst_path and len(dst_path) > 250:
         msg += (
             '\n'
             'On windows, path lengths greater than 260 characters may '
