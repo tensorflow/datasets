@@ -27,6 +27,7 @@ import tensorflow_datasets.public_api as tfds
 
 class TedliumTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = tedlium.Tedlium
+  BUILDER_CONFIG_NAMES_TO_TEST = ["release1"]
   SPLITS = {
       tfds.Split.TRAIN: 4,
       tfds.Split.TEST: 1,

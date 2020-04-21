@@ -28,38 +28,88 @@ import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
-_DESCRIPTION = """\
-The TED-LIUM corpus is English-language TED talks, with transcriptions, sampled
-at 16kHz. It contains about 118 hours of speech.
 
-This is the TED-LIUM corpus release 1,
-licensed under Creative Commons BY-NC-ND 3.0
-(http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
-"""
+class TedliumReleaseConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for a release of the TED-LIUM dataset."""
 
-_CITATION = """\
-@inproceedings{rousseau2012tedlium,
-  title={TED-LIUM: an Automatic Speech Recognition dedicated corpus.},
-  author={Rousseau, Anthony and Del{\\'e}glise, Paul and Est{\\`e}ve, Yannick},
-  booktitle={Conference on Language Resources and Evaluation (LREC)},
-  pages={125--129},
-  year={2012}
-}
-"""
+  @tfds.core.disallow_positional_args
+  def __init__(self, url, download_url, data_path, citation, **kwargs):
+    super(TedliumReleaseConfig, self).__init__(**kwargs)
+    self.url = url
+    self.download_url = download_url
+    # Relative path to the data within the extracted tarball.
+    self.data_path = data_path
+    self.citation = citation
 
-_URL = "https://www.openslr.org/7/"
-_DL_URL = "http://www.openslr.org/resources/7/TEDLIUM_release1.tar.gz"
+
+def _make_builder_configs():
+  """Creates builder configs for all supported Tedlium dataset releases."""
+  release1 = TedliumReleaseConfig(
+      name="release1",
+      version=tfds.core.Version("1.0.1"),
+      description="""\
+        The TED-LIUM corpus is English-language TED talks, with transcriptions,
+        sampled at 16kHz. It contains about 118 hours of speech.
+
+        This is the TED-LIUM corpus release 1,
+        licensed under Creative Commons BY-NC-ND 3.0
+        (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
+        """,
+      citation="""\
+        @inproceedings{rousseau2012tedlium,
+          title={TED-LIUM: an Automatic Speech Recognition dedicated corpus},
+          author={Rousseau, Anthony and Del{\\'e}glise, Paul and Est{\\`e}ve, Yannick},
+          booktitle={Conference on Language Resources and Evaluation (LREC)},
+          pages={125--129},
+          year={2012}
+        }
+        """,
+      url="https://www.openslr.org/7/",
+      download_url="http://www.openslr.org/resources/7/TEDLIUM_release1.tar.gz",
+      data_path="TEDLIUM_release1")
+
+  release2 = TedliumReleaseConfig(
+      name="release2",
+      version=tfds.core.Version("1.0.1"),
+      description="""\
+        This is the TED-LIUM corpus release 2,
+        licensed under Creative Commons BY-NC-ND 3.0
+        (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
+
+        All talks and text are property of TED Conferences LLC.
+
+        The TED-LIUM corpus was made from audio talks and their transcriptions
+        available on the TED website. We have prepared and filtered these data
+        in order to train acoustic models to participate to the International
+        Workshop on Spoken Language Translation 2011 (the LIUM English/French
+        SLT system reached the first rank in the SLT task).
+
+        Contains 1495 talks and transcripts.
+        """,
+      citation="""\
+        @inproceedings{rousseau2014tedlium2,
+          title={Enhancing the {TED-LIUM} Corpus with Selected Data for Language Modeling and More {TED} Talks},
+          author={Rousseau, Anthony and Del{\\'e}glise, Paul and Est{\\`e}ve, Yannick},
+          booktitle={Conference on Language Resources and Evaluation (LREC)},
+          year={2014}
+        }
+        """,
+      url="https://www.openslr.org/19/",
+      download_url="http://www.openslr.org/resources/19/TEDLIUM_release2.tar.gz",
+      data_path="TEDLIUM_release2")
+
+  return [release1, release2]
 
 
 class Tedlium(tfds.core.BeamBasedBuilder):
-  """TED-LIUM dataset release 1."""
+  """TED-LIUM speech recognition dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION,
+        description=self.builder_config.description,
         features=tfds.features.FeaturesDict({
             "speech":
                 tfds.features.Audio(sample_rate=16000),
@@ -73,14 +123,15 @@ class Tedlium(tfds.core.BeamBasedBuilder):
                 tf.string,
         }),
         supervised_keys=("speech", "text"),
-        homepage="https://www.openslr.org/7/",
-        citation=_CITATION,
+        homepage=self.builder_config.url,
+        citation=self.builder_config.citation,
         metadata=tfds.core.MetadataDict(sample_rate=16000,),
     )
 
   def _split_generators(self, dl_manager):
-    extracted_dir = dl_manager.download_and_extract(_DL_URL)
-    base_dir = os.path.join(extracted_dir, "TEDLIUM_release1")
+    extracted_dir = dl_manager.download_and_extract(
+        self.builder_config.download_url)
+    base_dir = os.path.join(extracted_dir, self.builder_config.data_path)
     splits = []
     for split, dir_name in [(tfds.Split.TRAIN, "train"),
                             (tfds.Split.VALIDATION, "dev"),
@@ -124,7 +175,8 @@ def _generate_examples_from_stm_file(stm_path):
 
 
 def _maybe_trim_suffix(transcript):
-  # stm files for the train split contain a key (enclosed in parens) at the end.
+  # stm files for the TEDLIUM release 1 train split contain a key (enclosed in
+  # parens) at the end.
   splits = transcript.rsplit(" ", 1)
   transcript = splits[0]
   if len(splits) > 1:
@@ -135,6 +187,7 @@ def _maybe_trim_suffix(transcript):
 
 
 def _parse_gender(label_str):
+  """Parse gender string from STM "<label>" field."""
   gender = re.split(",|_", label_str)[-1][:-1]
   # Fix inconsistencies in the data.
   if not gender:
