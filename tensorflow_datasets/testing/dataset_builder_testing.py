@@ -337,8 +337,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
-        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         # For Beam datasets, set-up the runner config
+        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         beam_runner = None
         beam_options = beam.options.pipeline_options.PipelineOptions()
       else:
