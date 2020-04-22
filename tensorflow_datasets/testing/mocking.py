@@ -124,8 +124,10 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
   if not data_dir:
     data_dir = os.path.join(os.path.dirname(__file__), 'metadata')
 
-  download_and_prepare_path = 'tensorflow_datasets.core.dataset_builder.DatasetBuilder.download_and_prepare'
-  as_dataset_path = 'tensorflow_datasets.core.dataset_builder.FileAdapterBuilder._as_dataset'
+  download_and_prepare_path = \
+  'tensorflow_datasets.core.dataset_builder.DatasetBuilder.download_and_prepare'
+  as_dataset_path = \
+    'tensorflow_datasets.core.dataset_builder.FileAdapterBuilder._as_dataset'
   data_dir_path = 'tensorflow_datasets.core.constants.DATA_DIR'
 
   with absltest.mock.patch(as_dataset_path, as_dataset_fn), \
@@ -135,7 +137,7 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
     yield
 
 
-class RandomFakeGenerator(object):
+class RandomFakeGenerator():
   """Generator of fake examples randomly and deterministically generated."""
 
   def __init__(self, builder, num_examples, seed=0):
@@ -163,14 +165,13 @@ class RandomFakeGenerator(object):
     # Generate some random values, depending on the dtype
     if tensor_info.dtype.is_integer:
       return self._rgn.randint(0, max_value, shape)
-    elif tensor_info.dtype.is_floating:
+    if tensor_info.dtype.is_floating:
       return self._rgn.random_sample(shape)
-    elif tensor_info.dtype == tf.string:
+    if tensor_info.dtype == tf.string:
       return ''.join(
           random.choice(' abcdefghij') for _ in range(random.randint(10, 20)))
-    else:
-      raise ValueError('Fake generation not supported for {}'.format(
-          tensor_info.dtype))
+    raise ValueError('Fake generation not supported for {}'.format(
+        tensor_info.dtype))
 
   def _generate_example(self):
     """Generate the next example."""

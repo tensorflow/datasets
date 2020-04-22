@@ -48,7 +48,7 @@ class TestCase(tf.test.TestCase):
   """
 
   @classmethod
-  def setUpClass(cls):
+  def setUpClass(cls): # pylint: disable = invalid-name
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
     # Test must not communicate with GCS.
@@ -65,12 +65,12 @@ class TestCase(tf.test.TestCase):
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
     gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
-  def setUp(self):
+  def setUp(self): # pylint: disable = invalid-name
     super(TestCase, self).setUp()
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
-  def assertRaisesWithPredicateMatch(self, err_type, predicate):
+  def assertRaisesWithPredicateMatch(self, err_type, predicate): # pylint: disable = invalid-name
     if isinstance(predicate, six.string_types):
       predicate_fct = lambda err: predicate in str(err)
     else:
@@ -79,7 +79,8 @@ class TestCase(tf.test.TestCase):
         err_type, predicate_fct)
 
   @contextlib.contextmanager
-  def assertLogs(self, text, level="info"):
+  def assertLogs(self, text, level="info"): # pylint: disable = invalid-name
+    """Log text messages with their level information"""
     with absltest.mock.patch.object(logging, level) as mock_log:
       yield
       concat_logs = ""

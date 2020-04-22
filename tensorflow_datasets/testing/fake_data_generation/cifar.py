@@ -58,8 +58,8 @@ def dump(output_dir, fname, images, labels):
   path = os.path.join(output_dir, fname)
   print("Writing %s..." % path)
   with open(path, "wb") as out_file:
-    for image, labels in zip(images, labels):
-      out_file.write(labels.tobytes())
+    for image, label in zip(images, labels):
+      out_file.write(label.tobytes())
       out_file.write(image.tobytes())
 
 

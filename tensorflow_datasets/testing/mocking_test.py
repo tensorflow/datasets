@@ -39,7 +39,7 @@ tf.enable_v2_behavior()
 
 
 class MockingTest(test_case.TestCase):
-
+  """A class for testing tensorflow_datasets.testing.mocking"""
   def test_mocking_imagenet(self):
     with mocking.mock_data():
       ds = registered.load('imagenet2012', split='train')
@@ -55,7 +55,7 @@ class MockingTest(test_case.TestCase):
         self.assertEqual(ex['text'].dtype, tf.int64)
         ex['text'].shape.assert_is_compatible_with((None,))
 
-  def test_custom_as_dataset(self):
+  def test_custom_as_dataset(self):  # pylint: disable = missing-function-docstring
     def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
       return tf.data.Dataset.from_generator(
           lambda: ({  # pylint: disable=g-long-lambda

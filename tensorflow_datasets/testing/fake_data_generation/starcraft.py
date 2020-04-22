@@ -30,9 +30,9 @@ from __future__ import print_function
 from absl import app
 from absl import flags
 import numpy as np
-import png
 import six
 import tensorflow.compat.v2 as tf
+import png
 
 FLAGS = flags.FLAGS
 

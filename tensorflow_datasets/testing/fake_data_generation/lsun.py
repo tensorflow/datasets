@@ -35,8 +35,8 @@ from __future__ import print_function
 
 from absl import app
 from absl import flags
-import lmdb
 import tensorflow.compat.v2 as tf
+import lmdb
 
 FLAGS = flags.FLAGS
 
