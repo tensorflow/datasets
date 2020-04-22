@@ -4,7 +4,7 @@
 Displayed in https://www.tensorflow.org/datasets/catalog/.
 
 """
-
+import os
 import collections
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import py_utils
@@ -167,26 +167,14 @@ ${builder.info.citation}
 
 <%def name="display_figure(builder)">\
 <%
-  import requests
-  import os
-
-  config_name = os.path.split(builder.info.full_name)[-2]
-  ds_name_config = config_name.replace("\\", "/").replace("/", "_")
-
-  def dataset_examples_paths(ds_name):
-    github_path = "https://" + "github.com/Eshan-Agarwal/datasets/blob/patch-58/docs/catalog/images/" + ds_name + ".jpg"
-    return github_path
-
-  def example_exists(path):
-    res = requests.get(path)
-    return res.status_code==200
+  ds_name_config = os.path.split(builder.info.full_name)[-2].replace("/", "-")
+  fig_path = os.path.join("images",ds_name_config+".png")
 %>\
 *   **Figure**:
-% if example_exists((dataset_examples_paths(ds_name_config))):
-    ![](${dataset_examples_paths(ds_name_config)}) 
+% if dataset_figure:
+    ![](${fig_path}) 
 % else:
-    No Example available for ${os.path.split(builder.info.full_name)[-2]}.
-
+    No Example available for ${builder.name}.
 % endif
 </%def>
 
@@ -238,7 +226,7 @@ def get_citation(builder):
   return builder.info.citation
 
 def get_figure(builder):
-  return builder.info.full_name
+  return builder.info.full_name if dataset_figure else None
 
 all_sections = [
     Section(get_description, display_description),
