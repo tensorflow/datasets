@@ -777,6 +777,7 @@ ted_hrlr_translate/tr_to_en/1.0.0
 ted_multi_translate/plain_text/1.0.0
 tedlium/release1/1.0.1
 tedlium/release2/1.0.1
+tedlium/release3/1.0.1
 tf_flowers/3.0.0
 the300w_lp/1.0.0
 tiny_shakespeare/1.0.0
