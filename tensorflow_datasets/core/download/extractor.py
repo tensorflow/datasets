@@ -29,6 +29,7 @@ import tarfile
 import uuid
 import zipfile
 
+from absl import logging
 import promise
 import six
 import tensorflow.compat.v2 as tf
@@ -161,6 +162,10 @@ def iter_tar(arch_f, stream=False):
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
     for member in tar:
+      if stream and (member.islnk() or member.issym()):
+        # Links cannot be dereferenced in stream mode.
+        logging.warning('Skipping link during extraction: %s', member.name)
+        continue
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)
