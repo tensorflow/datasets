@@ -22,7 +22,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import tensorflow.compat.v2 as tf
+
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -58,14 +58,14 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
         )
 
   def _split_generators(self, dl_manager):
-    path = dl_manager.download_and_extract(_URL)
+    path = dl_manager.download(_URL)
 
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "images_dir_path": path
+                "images_dir_path": dl_manager.iter_archive(path)
             }),
     ]
 
@@ -78,18 +78,9 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
     Yields:
       The image path and its corresponding label.
     """
-    parent_dir = tf.io.gfile.listdir(images_dir_path)[0]
-    walk_dir = os.path.join(images_dir_path, parent_dir)
-    dirs = tf.io.gfile.listdir(walk_dir)
-
-    for d in dirs:
-      if tf.io.gfile.isdir(os.path.join(walk_dir, d)):
-        for full_path, _, fname in tf.io.gfile.walk(os.path.join(walk_dir, d)):
-          for image_file in fname:
-            if image_file.endswith(".jpg"):
-              image_path = os.path.join(full_path, image_file)
-              record = {
-                  "image": image_path,
-                  "label": d.lower(),
-              }
-              yield "%s/%s" % (d, image_file), record
+    for fname, fobj in images_dir_path:
+      if fname.endswith(".jpg"):
+        image_dir, image_file = os.path.split(fname)
+        d = os.path.basename(image_dir)
+        record = {"image": fobj, "label": d.lower()}
+        yield "%s/%s" % (d, image_file), record
