@@ -22,6 +22,7 @@ from __future__ import division
 from __future__ import print_function
 
 import contextlib
+import functools
 import os
 import random
 
@@ -104,18 +105,31 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
           ''.format(self._data_dir, n=self.name)  # pylint: disable=protected-access
       )
 
-  def mock_as_dataset(self, *args, **kwargs):
+  def mock_as_dataset(self, split, decoders=None, **kwargs):
     """Function which overwrite builder._as_dataset."""
-    del args
+    del split
     del kwargs
+
+    if decoders is None:
+      generator_cls = RandomFakeGenerator
+      specs = self.info.features.get_tensor_info()
+      decode_fn = lambda ex: ex  # identity
+    else:
+      # If a decoder is passed, encode/decode the examples.
+      generator_cls = EncodedRandomFakeGenerator
+      specs = self.info.features.get_serialized_info()
+      decode_fn = functools.partial(
+          self.info.features.decode_example, decoders=decoders)
+
     ds = tf.data.Dataset.from_generator(
         # `from_generator` takes a callable with signature () -> iterable
         # Recreating a new generator each time ensure that all pipelines are
         # using the same examples
-        lambda: RandomFakeGenerator(builder=self, num_examples=num_examples),
-        output_types=self.info.features.dtype,
-        output_shapes=self.info.features.shape,
+        lambda: generator_cls(builder=self, num_examples=num_examples),
+        output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
+        output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
+    ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
 
   if not as_dataset_fn:
@@ -140,6 +154,7 @@ class RandomFakeGenerator(object):
 
   def __init__(self, builder, num_examples, seed=0):
     self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
+    self._py_rng = random.Random(seed)
     self._builder = builder
     self._num_examples = num_examples
 
@@ -160,17 +175,19 @@ class RandomFakeGenerator(object):
     else:
       max_value = 255
 
+    # We cast the data to make sure `encode_example` don't raise errors
+    dtype = tensor_info.dtype
     # Generate some random values, depending on the dtype
-    if tensor_info.dtype.is_integer:
-      return self._rgn.randint(0, max_value, shape)
-    elif tensor_info.dtype.is_floating:
-      return self._rgn.random_sample(shape)
-    elif tensor_info.dtype == tf.string:
+    if dtype.is_integer:
+      return self._rgn.randint(0, max_value, shape).astype(dtype.as_numpy_dtype)
+    elif dtype.is_floating:
+      return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
+    elif dtype == tf.string:
       return ''.join(
-          random.choice(' abcdefghij') for _ in range(random.randint(10, 20)))
-    else:
-      raise ValueError('Fake generation not supported for {}'.format(
-          tensor_info.dtype))
+          self._py_rng.choice(' abcdefghij')
+          for _ in range(self._py_rng.randint(10, 20))
+      )
+    raise ValueError('Fake generation not supported for {}'.format(dtype))
 
   def _generate_example(self):
     """Generate the next example."""
@@ -187,3 +204,12 @@ class RandomFakeGenerator(object):
     """Yields all fake examples."""
     for _ in range(self._num_examples):
       yield self._generate_example()
+
+
+class EncodedRandomFakeGenerator(RandomFakeGenerator):
+  """Generator of fake encoded examples."""
+
+  def __iter__(self):
+    """Yields all fake examples."""
+    for ex in super(EncodedRandomFakeGenerator, self).__iter__():
+      yield self._builder.info.features.encode_example(ex)

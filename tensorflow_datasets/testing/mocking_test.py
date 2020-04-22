@@ -23,6 +23,7 @@ from __future__ import print_function
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.testing import mocking
 from tensorflow_datasets.testing import test_case
@@ -43,14 +44,38 @@ class MockingTest(test_case.TestCase):
   def test_mocking_imagenet(self):
     with mocking.mock_data():
       ds = registered.load('imagenet2012', split='train')
+      self.assertEqual(ds.element_spec, {
+          'file_name': tf.TensorSpec(shape=(), dtype=tf.string),
+          'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
+          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+      })
+      list(ds.take(3))  # Iteration should work
+
+  def test_mocking_imagenet_decoders(self):
+    with mocking.mock_data():
+      ds, ds_info = registered.load(
+          'imagenet2012',
+          split='train',
+          decoders={'image': decode.SkipDecoding()},
+          with_info=True,
+      )
+      self.assertEqual(ds.element_spec, {
+          'file_name': tf.TensorSpec(shape=(), dtype=tf.string),
+          'image': tf.TensorSpec(shape=(), dtype=tf.string),  # Encoded images
+          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+      })
       for ex in ds.take(10):
-        self.assertCountEqual(
-            list(ex.keys()), ['file_name', 'image', 'label'])
-        ex['image'].shape.assert_is_compatible_with((None, None, 3))
+        # Image decoding should works
+        image = ds_info.features['image'].decode_example(ex['image'])
+        image.shape.assert_is_compatible_with((None, None, 3))
+        self.assertEqual(image.dtype, tf.uint8)
 
   def test_mocking_lm1b(self):
     with mocking.mock_data():
       ds = registered.load('lm1b/bytes', split='train')
+      self.assertEqual(ds.element_spec, {
+          'text': tf.TensorSpec(shape=(None,), dtype=tf.int64),
+      })
       for ex in ds.take(10):
         self.assertEqual(ex['text'].dtype, tf.int64)
         ex['text'].shape.assert_is_compatible_with((None,))
@@ -73,6 +98,10 @@ class MockingTest(test_case.TestCase):
   def test_max_values(self):
     with mocking.mock_data(num_examples=50):
       ds = registered.load('mnist', split='train')
+      self.assertEqual(ds.element_spec, {
+          'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+      })
       for ex in ds.take(50):
         self.assertLessEqual(tf.math.reduce_max(ex['label']).numpy(), 10)
       self.assertEqual(  # Test determinism
