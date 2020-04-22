@@ -8,9 +8,9 @@
   <meta itemprop="sameAs" content="http://www.waymo.com/open/" />
   <meta itemprop="citation" content="@misc{waymo_open_dataset,&#10;  title = {Waymo Open Dataset: An autonomous driving dataset},&#10;  website = {url{https://www.waymo.com/open}},&#10;  year = {2020}&#10;}" />
 </div>
-# `waymo_open_dataset`
+# `waymo_open_dataset `
 
-Note: This dataset is available only in our nightly package `tfds-nightly`.
+
 
 
 *   **Description**:
@@ -31,7 +31,7 @@ tfds.load('waymo_open_dataset', data_dir='gs://waymo_open_dataset_v_1_0_0_indivi
 *   **Source code**:
     [`tfds.object_detection.waymo_open_dataset.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
 *   **Versions**:
-    * <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> **`0.1.0`** (default): No release notes.
+    * **`0.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `34.73 GiB`
 *   **Auto-cached**

@@ -8,9 +8,9 @@
   <meta itemprop="sameAs" content="https://github.com/armancohan/long-summarization" />
   <meta itemprop="citation" content="@article{Cohan_2018,&#10;   title={A Discourse-Aware Attention Model for Abstractive Summarization of&#10;            Long Documents},&#10;   url={http://dx.doi.org/10.18653/v1/n18-2097},&#10;   DOI={10.18653/v1/n18-2097},&#10;   journal={Proceedings of the 2018 Conference of the North American Chapter of&#10;          the Association for Computational Linguistics: Human Language&#10;          Technologies, Volume 2 (Short Papers)},&#10;   publisher={Association for Computational Linguistics},&#10;   author={Cohan, Arman and Dernoncourt, Franck and Kim, Doo Soon and Bui, Trung and Kim, Seokhwan and Chang, Walter and Goharian, Nazli},&#10;   year={2018}&#10;}" />
 </div>
-# `scientific_papers`
+# `scientific_papers `
 
-Note: This dataset is available only in our nightly package `tfds-nightly`.
+
 
 
 
@@ -30,7 +30,7 @@ Both "arxiv" and "pubmed" have two features:
 *   **Source code**:
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 *   **Versions**:
-    * <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> **`1.1.1`** (default): No release notes.
+    * **`1.1.1`** (default): No release notes.
     * `1.1.0`: No release notes.
 *   **Download size**: `4.20 GiB`
 *   **Auto-cached**
@@ -66,7 +66,7 @@ FeaturesDict({
 ```
 
 
-##  scientific_papers/arxiv (default config)
+## scientific_papers/arxiv (default config) 
 
 *   **Config description**: Documents from ArXiv repository.
 *   **Dataset size**: `7.07 GiB`
@@ -79,7 +79,7 @@ Split  | Examples
 'validation' | 6,436
 
 
-##  scientific_papers/pubmed 
+## scientific_papers/pubmed  
 
 *   **Config description**: Documents from PubMed repository.
 *   **Dataset size**: `2.34 GiB`

@@ -28,7 +28,6 @@ from __future__ import print_function
 import collections
 from concurrent import futures
 import os
-import re
 
 from absl import app
 import mako.lookup
@@ -46,6 +45,13 @@ BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datase
 # TODO(tfds): Document image_label_folder datasets in a separate section
 BUILDER_BLACKLIST = ["wmt_translate"]
 
+def _get_ds_properties(builder_full_name):
+  props = builder_full_name.split('/')
+  ds_name = props[0]
+  version = props[-1]
+  config = props[1] if len(props) == 3 else ""
+  return ds_name, config, version
+
 def make_full_name_to_ds_dict(ds):
   # Convert to a dict to hold ds_name -> config_name -> {versions}
   ds_dict = collections.defaultdict(lambda: collections.defaultdict(set))
@@ -54,16 +60,13 @@ def make_full_name_to_ds_dict(ds):
       raise ValueError("Parsing builder name string {} failed."
           "The builder name string must be of the following format:"
           "dataset_name[/config_name]/version".format(name))
-    props = name.split('/')
-    ds_name = props[0]
-    version = props[-1]
-    config = props[1] if len(props) == 3 else ""
+    ds_name, config, version = _get_ds_properties(name)
     ds_dict[ds_name][config].add(version)
   return ds_dict
 
 
 @py_utils.memoize()
-def get_nightly_datasets():
+def get_datasets_nightly_properties():
   """Read stable_versions.txt and organized the new datasets in nested dicts."""
   version_path = os.path.join(tfds.core.utils.tfds_dir(), 'stable_versions.txt')
   with tf.io.gfile.GFile(version_path, 'r') as f:
@@ -81,12 +84,16 @@ def get_nightly_datasets():
         if config in stable_version_ds[ds]:
           for version in registered_ds[ds][config]:
             if version in stable_version_ds[ds][config]:
+              # Old version for old dataset, config pair
               nightly_ds[ds][config][version] = False
             else:
+              # New version for old dataset, config pair
               nightly_ds[ds][config][version] = True
         else:
+          # New config for old dataset
           nightly_ds[ds][config] = True
     else:
+      # New dataset
       nightly_ds[ds] = True
   return nightly_ds
 
@@ -94,27 +101,27 @@ def get_nightly_datasets():
 class NightlyUtil(object):
 
   def __init__(self):
-    self._nightly_ds = get_nightly_datasets()
+    self.ds_nightly_props = get_datasets_nightly_properties()
 
-  @staticmethod
-  def _is_true(var):
-    if var is True:
-      return True
-    return False
+  # TODO: Remove recursion
 
   def is_builder_nightly(self, builder):
-      return self._is_true(self._nightly_ds.get(builder))
+      return self.ds_nightly_props.get(builder.name) is True
 
-  def is_config_nightly(self, builder, config):
+  def is_config_nightly(self, builder):
+    ds_name, config, _ = _get_ds_properties(builder.info.full_name)
     if not self.is_builder_nightly(builder):
-      return self._is_true(self._nightly_ds[builder].get(config))
+      return self.ds_nightly_props[ds_name].get(config) is True
     return False
 
-  def is_version_nightly(self, builder, config, version):
+  def is_version_nightly(self, builder):
+    ds_name, config, version = _get_ds_properties(builder.info.full_name)
     if not self.is_config_nightly(builder):
-      return self._is_true(self._nightly_ds[builder][config].get(config))
+      return self.ds_nightly_props[ds_name][config].get(version) is True
     return False
 
+  def updated_in_nightly(self, builder):
+    return False # TODO
 
 @py_utils.memoize()
 def get_mako_template(tmpl_name):

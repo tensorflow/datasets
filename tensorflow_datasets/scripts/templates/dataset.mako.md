@@ -47,8 +47,8 @@ def list_versions(builder):
       version_name = '**`{}`** (default)'.format(str(v))
     else:
       version_name = '`{}`'.format(str(v))
-    nightly = nightly_icon if str(v) not in [1]  else ''
-    yield '{}{}: {}'.format(nightly, version_name, v.description or 'No release notes.')
+    nightly = nightly_icon if nightly_ds.is_version_nightly(builder) else ''
+    yield '{}{}: {}'.format(version_name, nightly, v.description or 'No release notes.')
 %>\
 *   **Versions**:
 % for version_str in list_versions(builder):
@@ -259,11 +259,9 @@ ${display_builder(next(iter(builders)), common_sections)}
 % for i, builder in enumerate(builders):
 <%
 header_suffix = '(default config)' if i == 0 else ''
-nightly = '' 
-if nightly_ds.is_config_nightly(builder.name, builder.builder_config.name):
-  nightly = nightly_icon
+nightly = nightly_icon if nightly_ds.is_config_nightly(builder) else ''
 %>\
-${'##'} ${nightly} ${builder.name}/${builder.builder_config.name} ${header_suffix}
+${'##'} ${builder.name}/${builder.builder_config.name} ${header_suffix} ${nightly}
 
 ${display_builder(builder, unique_sections)}
 % endfor
@@ -281,12 +279,18 @@ nightly_icon = ('<span class="material-icons" '
 updated_in_nightly_msg = ("This dataset has been updated in nightly. "
   "The new versions and config marked with {} are only " 
   "available in the `tfds-nightly` package".format(nightly_icon))
+
+nightly_builder = nightly_icon if nightly_ds.is_builder_nightly(builder) else ''
 %>
 
-${'#'} `${builder.name}`
+${'#'} `${builder.name} ${nightly_builder}`
 
-% if nightly_ds.is_builder_nightly(builder.name):
+% if nightly_builder:
 ${nightly_ds_msg}
+% endif
+
+% if nightly_ds.updated_in_nightly(builder):
+${updated_in_nightly_msg}
 % endif
 
 %if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
