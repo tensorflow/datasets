@@ -20,7 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import h5py
 import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -140,7 +139,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path, selection):
     """Yields examples."""
-    with h5py.File(path, 'r') as fid:
+    with tfds.core.lazy_imports.h5py.File(path, 'r') as fid:
       sen1 = fid['sen1']
       sen2 = fid['sen2']
       label = fid['label']

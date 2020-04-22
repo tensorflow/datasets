@@ -20,7 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import h5py
 import numpy as np
 from six import moves
 import tensorflow.compat.v2 as tf
@@ -143,7 +142,7 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
 
 def _load_data(filepath):
   """Loads the images, latent classes, and latent values into Numpy arrays."""
-  with h5py.File(filepath, "r") as h5dataset:
+  with tfds.core.lazy_imports.h5py.File(filepath, "r") as h5dataset:
     image_array = np.array(h5dataset["imgs"])
     class_array = np.array(h5dataset["latents"]["classes"])
     values_array = np.array(h5dataset["latents"]["values"])

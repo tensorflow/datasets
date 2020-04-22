@@ -20,7 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import h5py
 import numpy as np
 from six import moves
 import tensorflow.compat.v2 as tf
@@ -151,7 +150,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
 
 def _load_data(filepath):
   """Loads the images and latent values into Numpy arrays."""
-  with h5py.File(filepath, "r") as h5dataset:
+  with tfds.core.lazy_imports.h5py.File(filepath, "r") as h5dataset:
     image_array = np.array(h5dataset["images"])
     # The 'label' data set in the hdf5 file actually contains the float values
     # and not the class labels.
