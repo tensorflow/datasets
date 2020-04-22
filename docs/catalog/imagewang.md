@@ -10,44 +10,42 @@
 </div>
 # `imagewang`
 
+
+
+
 *   **Description**:
 
-Imagewang contains Imagenette and Imagewoof combined Image网 (pronounced
-"Imagewang"; 网 means "net" in Chinese) contains Imagenette and Imagewoof
-combined, but with some twists that make it into a tricky semi-supervised
-unbalanced classification problem:
+Imagewang contains Imagenette and Imagewoof combined
+Image网 (pronounced "Imagewang"; 网 means "net" in Chinese) contains Imagenette
+and Imagewoof combined, but with some twists that make it into a tricky
+semi-supervised unbalanced classification problem:
 
-*   The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);
-    there are no Imagenette images in the validation set (they're all in the
-    training set)
-*   Only 10% of Imagewoof images are in the training set!
-*   The remaining are in the unsup ("unsupervised") directory, and you can not
-    use their labels in training!
-*   It's even hard to type and hard to say!
+* The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);
+  there are no Imagenette images in the validation set (they're all in the
+  training set)
+* Only 10% of Imagewoof images are in the training set!
+* The remaining are in the unsup ("unsupervised") directory, and you can not
+  use their labels in training!
+* It's even hard to type and hard to say!
 
-The dataset comes in three variants: * Full size * 320 px * 160 px This dataset
-consists of the Imagenette dataset {size} variant.
+The dataset comes in three variants:
+  * Full size
+  * 320 px
+  * 160 px
+This dataset consists of the Imagenette dataset {size} variant.
 
-*   **Config description**: Imagewang contains Imagenette and Imagewoof
-    combined.
+*   **Config description**: Imagewang contains Imagenette and Imagewoof combined.
 
-*   **Homepage**:
-    [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
-
+*   **Homepage**: [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 *   **Source code**:
     [`tfds.image_classification.imagewang.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagewang.py)
-
 *   **Versions**:
-
-    *   **`2.0.0`** (default): No release notes.
-
-*   **Download size**: `Unknown size`
-
+    * **`2.0.0`** (default): No release notes.
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 14,669
+Split  | Examples
+:----- | -------:
+'train' | 14,669
 'validation' | 3,929
 
 *   **Features**:
@@ -71,23 +69,33 @@ FeaturesDict({
 }
 ```
 
+
 ## imagewang/full-size (default config)
 
+*   **Download size**: `2.70 GiB`
 *   **Dataset size**: `1.97 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+*   **Figure**:
+    ![](images/imagewang-full-size.png) 
 
-## imagewang/320px
+## imagewang/320px 
 
+*   **Download size**: `638.80 MiB`
 *   **Dataset size**: `460.81 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+*   **Figure**:
+    ![](images/imagewang-320px.png) 
 
-## imagewang/160px
+## imagewang/160px 
 
+*   **Download size**: `182.63 MiB`
 *   **Dataset size**: `140.40 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+*   **Figure**:
+    ![](images/imagewang-160px.png)

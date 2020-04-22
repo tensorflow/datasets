@@ -23,40 +23,82 @@ Args:
 
 import os
 from absl import app
+from absl import flags
+from concurrent import futures
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import registered
 
+WORKER_COUNT_DATASETS = 200
+
+FLAGS = flags.FLAGS
 FIG_DIR = os.path.join('..', 'docs', 'catalog', 'images')
-FULL_PATH = tfds.core.get_tfds_path(FIG_DIR)
+flags.DEFINE_string('dst_dir', tfds.core.get_tfds_path(FIG_DIR),
+                    'Path to tensorflow_datasets/docs/catalog/images')
 
-def generate_vizz(data_name):
-    """Save the generated figures for the dataset
+def generate_single_visualization(data_name):
+    """Save the generated figures for the dataset in dst_dir.
+
     Args:
-      data_name: name of the dataset
+      data_name: name of the dataset with or without config for which
+      generate figure.
     """
+    print("Generating examples %s..." % data_name)
+    builder = tfds.builder(data_name)
+    split = list(builder.info.splits.keys())[0]
+    data, data_info = tfds.load(data_name, split=split, with_info=True)
+
+    if not tf.io.gfile.exists(FLAGS.dst_dir):
+        tf.io.gfile.mkdir(FLAGS.dst_dir)
+    suffix = data_name.replace("/", "-")
+    data_path = os.path.join(FLAGS.dst_dir, suffix+ ".png")
     try:
-        print("Generating examples...")
-        builder = tfds.builder(data_name)
-        builder.download_and_prepare()
-        split = list(builder.info.splits.keys())[0]
-        data, data_info = tfds.load(data_name, split=split, with_info=True)
         figure = tfds.show_examples(data_info, data)
-        suffix = data_name.replace("\\", "/").replace("/", "_")
-        data_path = os.path.join(FULL_PATH, suffix+ ".jpg")
-
-        if not tf.io.gfile.exists(FULL_PATH):
-            tf.io.gfile.mkdir(FULL_PATH)
-        figure.savefig(data_path, optimize=True, quality=70)
-
+        figure.savefig(data_path)
     except ValueError:
-        config_name = os.path.split(data_info.full_name)[-2]
-        print("Visualisation not supported for dataset `{}`".format(config_name))
+        print("Visualisation not supported for dataset `{}`".format(data_name))
 
+
+def get_config_names(datasets=None):
+    """List all dataset names with or without config.
+
+    Args:
+        datasets: list of datasets for which to generate figures.
+              If None, then all available datasets will be used.
+
+    Returns:
+        List of dataset names with or without config.
+    """
+    dataset_config_list = []
+    if not datasets:
+        dataset_config_list = [x for x in registered.list_config_names()]
+        return dataset_config_list
+    else:
+        for data_name in datasets:
+          builder = tfds.builder(data_name)
+          if builder.BUILDER_CONFIGS:
+            for config in builder.BUILDER_CONFIGS:
+                dataset_config_list.append(os.path.join(builder.name, config.name))
+          else:
+              dataset_config_list.append(builder.name)
+    return dataset_config_list
+
+
+def generate_visualization(datasets=None):
+    """Generate Visualization for datasets.
+
+    Args:
+        datasets: list of datasets for which to generate figures.
+              If None, then all available datasets will be used.
+    """
+    dataset_config_list = get_config_names(datasets)
+    with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
+        builder_examples = tpool.map(generate_single_visualization, dataset_config_list)
 
 def main(_):
     """Main script."""
-    generate_vizz([data_name])
+    generate_visualization()
 
 if __name__ == "__main__":
     app.run(main)

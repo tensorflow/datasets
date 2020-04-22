@@ -23,6 +23,7 @@ python -m tensorflow_datasets.scripts.document_datasets
 
 import collections
 from concurrent import futures
+import os
 
 from absl import app
 import mako.lookup
@@ -39,6 +40,16 @@ BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datase
 # TODO(tfds): Document image_label_folder datasets in a separate section
 BUILDER_BLACKLIST = ["wmt_translate"]
 
+# Path to tensorflow_datasets/docs/catalog/images
+FIG_DIR = os.path.join('..', 'docs', 'catalog', 'images')
+DATASET_FIGURE_PATH = tfds.core.get_tfds_path(FIG_DIR)
+
+
+def _visualization_exists(builder):
+    """Returns True if visualization for given dataset exists."""
+    ds_name_config = os.path.split(builder.info.full_name)[-2].replace("/", "-")
+    figure_path = os.path.join(DATASET_FIGURE_PATH, ds_name_config + ".png")
+    return tf.io.gfile.exists(figure_path)
 
 @py_utils.memoize()
 def get_mako_template(tmpl_name):
@@ -69,6 +80,7 @@ def document_single_builder(builder):
   out_str = tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
+      dataset_figure=_visualization_exists(builder),
   ).strip()
   schema_org_tmpl = get_mako_template("schema_org")
   schema_org_out_str = schema_org_tmpl.render_unicode(

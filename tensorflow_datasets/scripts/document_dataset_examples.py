@@ -31,14 +31,12 @@ from absl import flags
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts import document_datasets
-from tensorflow_datasets.scripts.generate_visualization import generate_vizz
+from tensorflow_datasets.scripts.generate_visualization import generate_visualization
 
-FLAGS = flags.FLAGS
-flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
-
+doc_dir = os.path.join("..", "docs", "catalog")
+doc_full_path = tfds.core.get_tfds_path(doc_dir)
 # Datasets you want to test the script on.
-DATASET_TO_TESTS = ['cats_vs_dogs', 'mnist', 'groove', 'emnist', 'imagewang', 'flic']
+DATASET_TO_TESTS = ['cats_vs_dogs', 'groove', 'imagewang', 'flic']
 
 def doc_examples(data_name, path):
     """Write dataset documents with figures."""
@@ -47,26 +45,10 @@ def doc_examples(data_name, path):
         doc_builder = document_datasets.document_single_builder(builder)
         file.write(doc_builder)
 
-def dataset_configs_list():
-    """Returns list of datasets with configs."""
-    data_name_configs = []
-    for data_name in DATASET_TO_TESTS:
-        builder = tfds.builder(data_name)
-        if builder.BUILDER_CONFIGS:
-            for config in builder.BUILDER_CONFIGS:
-                data_name_configs.append(os.path.join(builder.name, config.name))
-        else:
-            data_name_configs.append(builder.name)
-    return data_name_configs
-
 def main(_):
     """Main script."""
-    doc_dir = os.path.join("..", "docs", "catalog")
-    doc_full_path = os.path.join(FLAGS.tfds_dir, doc_dir)
-    data_name_configs = dataset_configs_list()
     # Generate examples/figures for datasets.
-    for data_name_config in data_name_configs:
-        generate_vizz(data_name_config)
+    generate_visualization(DATASET_TO_TESTS)
     # Document datasets with generated figures.
     for data_name in DATASET_TO_TESTS:
         doc_examples(data_name, doc_full_path)

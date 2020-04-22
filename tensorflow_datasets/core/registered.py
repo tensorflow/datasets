@@ -446,3 +446,17 @@ def is_full_name(full_name):
     `bool`.
   """
   return _FULL_NAME_REG.match(full_name)
+
+def list_config_names(predicate_fn = None):
+  """Lists all registered `dataset/config` and `dataset` names.
+
+  Args:
+    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
+    returns the dataset names with or without config which satisfy the predicate.
+
+  Returns:
+    The list of all registered `dataset/config` and `dataset` names.
+  """
+  # Strip the version from the full names
+  config_names = {n.rsplit('/', maxsplit=1)[0] for n in tfds.core.registered.list_full_names(predicate_fn)}
+  return sorted(config_names)

@@ -10,27 +10,25 @@
 </div>
 # `cats_vs_dogs`
 
+
 *   **Description**:
 
-A large set of images of cats and dogs.There are 1738 corrupted images that are
-dropped.
+A large set of images of cats and dogs.There are 1738 corrupted images that are dropped.
 
-*   **Homepage**:
-    [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
+*   **Homepage**: [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 *   **Source code**:
     [`tfds.image_classification.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cats_vs_dogs.py)
 *   **Versions**:
-    *   **`4.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    * **`4.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 *   **Download size**: `786.68 MiB`
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `689.64 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
+Split  | Examples
+:----- | -------:
 'train' | 23,262
 
 *   **Features**:
@@ -59,3 +57,5 @@ url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-tha
 edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
 }
 ```
+*   **Figure**:
+    ![](images/cats_vs_dogs.png)

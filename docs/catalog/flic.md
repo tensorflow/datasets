@@ -10,6 +10,9 @@
 </div>
 # `flic`
 
+
+
+
 *   **Description**:
 
 From the paper: We collected a 5003 image dataset automatically from popular
@@ -22,21 +25,20 @@ was taken in each image to be robust to outlier annotation. Finally, images were
 rejected manually by us if the person was occluded or severely non-frontal. We
 set aside 20% (1016 images) of the data for testing.
 
-*   **Homepage**:
-    [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
+*   **Homepage**: [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
 *   **Source code**:
     [`tfds.image.flic.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
 *   **Versions**:
-    *   **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): No release notes.
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,016
+Split  | Examples
+:----- | -------:
+'test' | 1,016
 'train' | 3,987
 
 *   **Features**:
@@ -66,15 +68,19 @@ FeaturesDict({
   }
 ```
 
+
 ## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.
 
 *   **Download size**: `286.35 MiB`
+*   **Figure**:
+    ![](images/flic-small.png) 
 
-## flic/full
+## flic/full 
 
-*   **Config description**: Uses 20928 examples, a superset of FLIC consisting
-    of more difficult examples.
+*   **Config description**: Uses 20928 examples, a superset of FLIC consisting of more difficult examples.
 
 *   **Download size**: `1.10 GiB`
+*   **Figure**:
+    ![](images/flic-full.png)

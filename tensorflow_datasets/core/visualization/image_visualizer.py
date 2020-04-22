@@ -148,3 +148,4 @@ class ImageGridVisualizer(visualizer.Visualizer):
 
     # Print the grid
     fig = _make_grid(make_cell_fn, ds, rows, cols, plot_scale)
+    return fig
