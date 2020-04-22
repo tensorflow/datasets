@@ -134,11 +134,12 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         file_to_class = {x[0]: int(x[1]) for x in csv.reader(f, delimiter=" ")}
 
     for fname, fobj in archive:
+      fname = fname.replace("\\", "/")
       assert fname.startswith(path_prefix)
       # The filenames in annotations for train start with "/" while the names
       # for test and validation do not have a leading "/", so we chop
       # differently.
       chop = len(path_prefix) if split_name == "train" else len(path_prefix) + 1
-      key = fname[chop:].replace("\\", "/")
+      key = fname[chop:]
       class_id = file_to_class[key]
       yield fname, {"image": fobj, "label": class_id}

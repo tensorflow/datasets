@@ -22,7 +22,6 @@ from __future__ import print_function
 
 import io
 import json
-import os
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -237,8 +236,9 @@ def _read_archive(archive_path, selection):
   read_band_files = 0
   for fpath, fobj in tfds.core.download.extractor.iter_tar_stream(
       archive_path):
+    fpath = fpath.replace("\\", "/")
     read_band_files += 1
-    patch_name, fname = os.path.split(fpath)
+    _, patch_name, fname = fpath.split('/')
     if fname.endswith('_labels_metadata.json'):
       example['metadata'] = fobj.read()
     elif fname.endswith('.tif'):

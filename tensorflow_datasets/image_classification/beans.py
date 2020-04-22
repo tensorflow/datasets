@@ -20,8 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
-
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -95,9 +93,10 @@ class Beans(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, archive):
     """Yields examples."""
     for fname, fobj in archive:
+      fname = fname.replace("\\", "/")
       if not fname.endswith(".jpg"):
         continue
-      label = os.path.split(fname)[-2]
+      label = fname.split("/")[-2]
       record = {
           "image": fobj,
           "label": label,
