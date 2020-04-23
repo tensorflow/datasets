@@ -625,6 +625,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   be downloaded.
   """
 
+  BUILDER_CONFIGS = []  # No config by default
+
   def __init__(self, *args, **kwargs):
     if type(self) == WmtTranslate and "config" not in kwargs:   # pylint: disable=unidiomatic-typecheck
       raise ValueError(
