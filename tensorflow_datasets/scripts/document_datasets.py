@@ -106,7 +106,7 @@ class NightlyUtil(object):
   # TODO: Remove recursion
 
   def is_builder_nightly(self, builder):
-      return self.ds_nightly_props.get(builder.name) is True
+    return self.ds_nightly_props.get(builder.name) is True
 
   def is_config_nightly(self, builder):
     ds_name, config, _ = _get_ds_properties(builder.info.full_name)

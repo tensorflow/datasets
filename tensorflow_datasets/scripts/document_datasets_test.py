@@ -19,12 +19,70 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
+import mock
+
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.scripts import document_datasets
 
 DummyMnist = testing.DummyMnist
+
+
+_DS_FULL_NAMES = [
+    'ds1/c1/1.0.0',
+    'ds1/c1/2.0.0',
+    'ds1/c2/2.0.0',
+    'ds2/1.0.0',
+    'ds2/2.0.0',
+]
+
+_DS_FULL_NAMES_DICT = {
+    'ds1': {
+        'c1': {'1.0.0', '2.0.0'},
+        'c2': {'2.0.0'},
+    },
+    'ds2': {
+        '': {'1.0.0', '2.0.0'}
+    }
+}
+
+_DATASET_NIGHTLY_PROPS = {
+    'dummy_mnist': {'': {'1.0.0': False}},
+    'dummy_mnist_configs': {'config_name': {'0.0.1': False}},
+    'dummy_new_ds': True,
+    'dummy_new_config': {'new_config': True},
+    'dummy_new_version': {'old_config': {'3.0.0': True}}
+}
+
+document_datasets.get_datasets_nightly_properties = mock.Mock(
+    return_value=_DATASET_NIGHTLY_PROPS)
+
+
+class DummyNewDs(DummyMnist):
+  pass
+
+
+class DummyNewConfig(DummyMnist):
+  BUILDER_CONFIGS = [
+      dataset_builder.BuilderConfig(
+          name="new_config",
+          version=utils.Version("1.0.0"),
+          description="Config description.",
+      ),
+  ]
+
+
+class DummyNewVersion(DummyMnist):
+  BUILDER_CONFIGS = [
+      dataset_builder.BuilderConfig(
+          name="old_config",
+          version=utils.Version("3.0.0"),
+          description="Config description.",
+      ),
+  ]
 
 
 class DummyMnistConfigs(DummyMnist):
@@ -45,6 +103,7 @@ class DocumentDatasetsTest(testing.TestCase):
   def setUpClass(cls):
     super(DocumentDatasetsTest, cls).setUpClass()
     cls._tfds_tmp_dir = testing.make_tmp_dir()
+    cls._nightly_ds = document_datasets.NightlyUtil()
     builder = DummyMnist(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
 
@@ -76,6 +135,54 @@ class DocumentDatasetsTest(testing.TestCase):
     self.assertIn("Some manual instructions.", doc_str)
     self.assertIn("Mnist description.", doc_str)  # Shared description.
     self.assertIn("Config description.", doc_str)  # Config-specific description
+
+  def test_func(self):
+    ds_collection = document_datasets.make_full_name_to_ds_dict(_DS_FULL_NAMES)
+    ds_dict = {k: dict(v) for k, v in ds_collection.items()}
+    self.assertDictEqual(
+        _DS_FULL_NAMES_DICT,
+        ds_dict,
+        "Function make_full_name_to_ds_dict() does not work as expected.")
+
+  def test_old_ds(self):
+    self.assertFalse(self._nightly_ds.is_builder_nightly(self.builder),
+                     "DummyMnist is a old dataset")
+
+  def test_new_nightly_ds(self):
+    with testing.tmp_dir() as tmp_dir:
+      builder = DummyNewDs(data_dir=tmp_dir)
+      builder.download_and_prepare()
+    self.assertTrue(self._nightly_ds.is_builder_nightly(builder),
+                     "DummyNewDs is a new dataset")
+    
+  # def test_ds_updated_in_nightly(self):
+  #   ds_updated = {
+  #     DummyMnist: False,
+  #     DummyNewDs: True,
+  #     DummyNewConfig: True,
+  #     DummyNewVersion: True,
+  #     DummyMnistConfigs: False,
+  #   }
+  #   for ds, updated in ds_updated.items():
+  #     with testing.tmp_dir() as tmp_dir:
+  #       builder = ds(data_dir=tmp_dir)
+  #       builder.download_and_prepare()
+  #     self.assertEqual(updated, self._nightly_ds.updated_in_nightly(builder))
+
+  def test_new_config_in_nightly(self):
+    with testing.tmp_dir() as tmp_dir:
+      builder = DummyNewConfig(data_dir=tmp_dir)
+      builder.download_and_prepare()
+    self.assertTrue(self._nightly_ds.is_config_nightly(builder),
+                     "DummyNewConfig has a new config dataset")
+
+  def test_new_version_in_nightly(self):
+    with testing.tmp_dir() as tmp_dir:
+      builder = DummyNewVersion(data_dir=tmp_dir)
+      builder.download_and_prepare()
+    self.assertTrue(self._nightly_ds.is_version_nightly(builder),
+                     "DummyNewVersion has a new config dataset")
+
 
 if __name__ == "__main__":
   testing.test_main()
