@@ -49,9 +49,11 @@ semi-supervised unbalanced classification problem:
 * It's even hard to type and hard to say!
 
 The dataset comes in three variants:
+
   * Full size
   * 320 px
   * 160 px
+
 This dataset consists of the Imagenette dataset {size} variant.
 """
 
