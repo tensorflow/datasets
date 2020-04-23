@@ -112,7 +112,7 @@ class NightlyUtil(object):
 
   def is_version_nightly(self, builder):
     ds_name, config, version = _get_ds_properties(builder.info.full_name)
-    if not self.is_config_nightly(builder):
+    if not (self.is_builder_nightly(builder) or self.is_config_nightly(builder)):
       return self.ds_nightly_props[ds_name][config].get(version) is True
     return False
 

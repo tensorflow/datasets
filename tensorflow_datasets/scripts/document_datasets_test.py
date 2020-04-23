@@ -133,7 +133,7 @@ class DocumentDatasetsTest(testing.TestCase):
     self.assertIn("Mnist description.", doc_str)  # Shared description.
     self.assertIn("Config description.", doc_str)  # Config-specific description
 
-  def test_func(self):
+  def test_full_name_to_ds_dict(self):
     ds_collection = document_datasets.make_full_name_to_ds_dict(_DS_FULL_NAMES)
     ds_dict = {k: dict(v) for k, v in ds_collection.items()}
     self.assertDictEqual(
@@ -144,6 +144,8 @@ class DocumentDatasetsTest(testing.TestCase):
   def test_old_ds(self):
     self.assertFalse(self._nightly_ds.is_builder_nightly(self.builder),
                      "DummyMnist is a old dataset")
+    doc_str = document_datasets.document_single_builder(self.builder)
+    self.assertNotIn("tfds-nightly", doc_str)
 
   def test_new_nightly_ds(self):
     with testing.tmp_dir() as tmp_dir:
@@ -151,6 +153,12 @@ class DocumentDatasetsTest(testing.TestCase):
       builder.download_and_prepare()
     self.assertTrue(self._nightly_ds.is_builder_nightly(builder),
                      "DummyNewDs is a new dataset")
+    self.assertFalse(self._nightly_ds.is_config_nightly(builder),
+                     "No need to add a extra nightly icon")
+    self.assertFalse(self._nightly_ds.is_config_nightly(builder),
+                     "No need to add a extra nightly icon")                
+    doc_str = document_datasets.document_single_builder(builder)
+    self.assertIn("tfds-nightly", doc_str)
     
   # def test_ds_updated_in_nightly(self):
   #   ds_updated = {
@@ -170,13 +178,21 @@ class DocumentDatasetsTest(testing.TestCase):
     with testing.tmp_dir() as tmp_dir:
       builder = DummyNewConfig(data_dir=tmp_dir)
       builder.download_and_prepare()
+    self.assertFalse(self._nightly_ds.is_builder_nightly(builder),
+                     "No need to add a extra nightly icon")
     self.assertTrue(self._nightly_ds.is_config_nightly(builder),
                      "DummyNewConfig has a new config dataset")
+    self.assertFalse(self._nightly_ds.is_version_nightly(builder),
+                     "No need to add a extra nightly icon")
 
   def test_new_version_in_nightly(self):
     with testing.tmp_dir() as tmp_dir:
       builder = DummyNewVersion(data_dir=tmp_dir)
       builder.download_and_prepare()
+    self.assertFalse(self._nightly_ds.is_builder_nightly(builder),
+                     "No need to add a extra nightly icon")
+    self.assertFalse(self._nightly_ds.is_config_nightly(builder),
+                     "No need to add a extra nightly icon")
     self.assertTrue(self._nightly_ds.is_version_nightly(builder),
                      "DummyNewVersion has a new config dataset")
 
