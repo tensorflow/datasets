@@ -67,6 +67,7 @@ builder = tfds.builder("wmt_translate", config=config)
 ## wmt15_translate/cs-en (default config)
 
 *   **Config description**: WMT 2015 cs-en translation task dataset.
+
 *   **Download size**: `1.62 GiB`
 *   **Splits**:
 
@@ -91,6 +92,7 @@ Translation({
 ## wmt15_translate/de-en
 
 *   **Config description**: WMT 2015 de-en translation task dataset.
+
 *   **Download size**: `1.62 GiB`
 *   **Splits**:
 
@@ -115,6 +117,7 @@ Translation({
 ## wmt15_translate/fi-en
 
 *   **Config description**: WMT 2015 fi-en translation task dataset.
+
 *   **Download size**: `260.51 MiB`
 *   **Splits**:
 
@@ -139,6 +142,7 @@ Translation({
 ## wmt15_translate/fr-en
 
 *   **Config description**: WMT 2015 fr-en translation task dataset.
+
 *   **Download size**: `6.24 GiB`
 *   **Splits**:
 
@@ -163,6 +167,7 @@ Translation({
 ## wmt15_translate/ru-en
 
 *   **Config description**: WMT 2015 ru-en translation task dataset.
+
 *   **Download size**: `1.02 GiB`
 *   **Splits**:
 
@@ -188,7 +193,9 @@ Translation({
 
 *   **Config description**: WMT 2015 cs-en translation task dataset with subword
     encoding.
+
 *   **Download size**: `1.62 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -213,7 +220,9 @@ Translation({
 
 *   **Config description**: WMT 2015 de-en translation task dataset with subword
     encoding.
+
 *   **Download size**: `1.62 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -238,7 +247,9 @@ Translation({
 
 *   **Config description**: WMT 2015 fi-en translation task dataset with subword
     encoding.
+
 *   **Download size**: `260.51 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -263,7 +274,9 @@ Translation({
 
 *   **Config description**: WMT 2015 fr-en translation task dataset with subword
     encoding.
+
 *   **Download size**: `6.24 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -288,7 +301,9 @@ Translation({
 
 *   **Config description**: WMT 2015 ru-en translation task dataset with subword
     encoding.
+
 *   **Download size**: `1.02 GiB`
+
 *   **Splits**:
 
 Split        | Examples

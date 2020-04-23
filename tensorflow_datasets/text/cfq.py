@@ -48,6 +48,7 @@ The CFQ dataset (and it's splits) for measuring compositional generalization.
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
 Example usage:
+
 ```
 data = tfds.load('cfq/mcd1')
 ```

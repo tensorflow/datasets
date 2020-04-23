@@ -51,6 +51,7 @@ from 113 unique camera viewpoints.
 ## robonet/robonet_sample_64 (default config)
 
 *   **Config description**: 64x64 RoboNet Sample.
+
 *   **Download size**: `119.80 MiB`
 *   **Dataset size**: `183.01 MiB`
 *   **Auto-cached**
@@ -75,6 +76,7 @@ FeaturesDict({
 ## robonet/robonet_sample_128
 
 *   **Config description**: 128x128 RoboNet Sample.
+
 *   **Download size**: `119.80 MiB`
 *   **Dataset size**: `638.95 MiB`
 *   **Auto-cached**
@@ -99,6 +101,7 @@ FeaturesDict({
 ## robonet/robonet_64
 
 *   **Config description**: 64x64 RoboNet.
+
 *   **Download size**: `119.80 MiB`
 *   **Dataset size**: `183.01 MiB`
 *   **Auto-cached**
@@ -123,6 +126,7 @@ FeaturesDict({
 ## robonet/robonet_128
 
 *   **Config description**: 128x128 RoboNet.
+
 *   **Download size**: `36.20 GiB`
 *   **Dataset size**: `144.90 GiB`
 *   **Auto-cached**

@@ -77,6 +77,7 @@ FeaturesDict({
 ## imagenet2012_subset/1pct (default config)
 
 *   **Config description**: 1pct of total ImageNet training set.
+
 *   **Download size**: `254.22 KiB`
 *   **Dataset size**: `7.61 GiB`
 *   **Splits**:
@@ -89,6 +90,7 @@ Split        | Examples
 ## imagenet2012_subset/10pct
 
 *   **Config description**: 10pct of total ImageNet training set.
+
 *   **Download size**: `2.48 MiB`
 *   **Dataset size**: `19.91 GiB`
 *   **Splits**:

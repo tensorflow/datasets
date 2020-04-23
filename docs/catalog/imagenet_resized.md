@@ -74,7 +74,10 @@ original
 and the
 [labels used by this dataset](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image_classification/imagenet_resized_labels.txt).
 Additionally, the original authors 1 index there labels which we convert to 0
-indexed by subtracting one. * **Download size**: `237.11 MiB` * **Features**:
+indexed by subtracting one.
+
+*   **Download size**: `237.11 MiB`
+*   **Features**:
 
 ```python
 FeaturesDict({
@@ -116,7 +119,10 @@ original
 and the
 [labels used by this dataset](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image_classification/imagenet_resized_labels.txt).
 Additionally, the original authors 1 index there labels which we convert to 0
-indexed by subtracting one. * **Download size**: `923.34 MiB` * **Features**:
+indexed by subtracting one.
+
+*   **Download size**: `923.34 MiB`
+*   **Features**:
 
 ```python
 FeaturesDict({
@@ -158,7 +164,10 @@ original
 and the
 [labels used by this dataset](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image_classification/imagenet_resized_labels.txt).
 Additionally, the original authors 1 index there labels which we convert to 0
-indexed by subtracting one. * **Download size**: `3.46 GiB` * **Features**:
+indexed by subtracting one.
+
+*   **Download size**: `3.46 GiB`
+*   **Features**:
 
 ```python
 FeaturesDict({
@@ -200,7 +209,10 @@ original
 and the
 [labels used by this dataset](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image_classification/imagenet_resized_labels.txt).
 Additionally, the original authors 1 index there labels which we convert to 0
-indexed by subtracting one. * **Download size**: `13.13 GiB` * **Features**:
+indexed by subtracting one.
+
+*   **Download size**: `13.13 GiB`
+*   **Features**:
 
 ```python
 FeaturesDict({

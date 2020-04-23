@@ -16,6 +16,10 @@
 # Lint as: python3
 """Utilities for accessing TFDS GCS buckets."""
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import concurrent.futures
 import posixpath
 from xml.etree import ElementTree

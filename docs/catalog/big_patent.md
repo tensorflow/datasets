@@ -58,6 +58,7 @@ FeaturesDict({
 ## big_patent/all (default config)
 
 *   **Config description**: Patents under all categories.
+
 *   **Dataset size**: `24.22 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -74,10 +75,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)a: Human Necessities
+
 *   **Dataset size**: `3.45 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -90,10 +94,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)b: Performing Operations; Transporting
+
 *   **Dataset size**: `2.67 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -106,10 +113,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)c: Chemistry; Metallurgy
+
 *   **Dataset size**: `2.74 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -122,10 +132,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)d: Textiles; Paper
+
 *   **Dataset size**: `170.08 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes (validation, test), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -138,10 +151,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)e: Fixed Constructions
+
 *   **Dataset size**: `568.03 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -154,10 +170,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons; Blasting
+
 *   **Dataset size**: `1.35 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -170,10 +189,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)g: Physics
+
 *   **Dataset size**: `5.78 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -186,10 +208,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)h: Electricity
+
 *   **Dataset size**: `5.17 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -202,10 +227,13 @@ Split        | Examples
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)y: General tagging of new or cross-sectional technology
+
 *   **Dataset size**: `2.35 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

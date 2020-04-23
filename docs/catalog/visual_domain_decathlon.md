@@ -51,7 +51,9 @@ the competition.
 
 *   **Config description**: Data based on "Aircraft", with images resized
     isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -74,7 +76,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "CIFAR-100", with images resized
     isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -97,7 +101,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "Daimler Pedestrian Classification",
     with images resized isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -120,7 +126,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "Describable Textures", with images
     resized isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -143,7 +151,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "German Traffic Signs", with images
     resized isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -166,7 +176,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "Imagenet", with images resized
     isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `6.40 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -189,7 +201,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "Omniglot", with images resized
     isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -212,7 +226,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "Street View House Numbers", with
     images resized isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -235,7 +251,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "UCF101 Dynamic Images", with images
     resized isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -258,7 +276,9 @@ FeaturesDict({
 
 *   **Config description**: Data based on "VGG-Flowers", with images resized
     isotropically to have a shorter size of 72 pixels.
+
 *   **Download size**: `1.04 GiB`
+
 *   **Splits**:
 
 Split        | Examples

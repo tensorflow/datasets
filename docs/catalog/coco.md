@@ -64,13 +64,16 @@ defines 200 classes but only uses 133.
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding
     boxes " and labels for the 2014 version. Note:
+
     *   Some images from the train and validation sets don't have annotations.
     *   Coco 2014 and 2017 uses the same images, but different train/val/test
         splits
     *   The test split don't have any annotations (only images).
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
+
 *   **Download size**: `37.57 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -112,13 +115,16 @@ defines 200 classes but only uses 133.
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding
     boxes " and labels for the 2017 version. Note:
+
     *   Some images from the train and validation sets don't have annotations.
     *   Coco 2014 and 2017 uses the same images, but different train/val/test
         splits
     *   The test split don't have any annotations (only images).
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
+
 *   **Download size**: `25.20 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -159,13 +165,16 @@ defines 200 classes but only uses 133.
 *   **Config description**: COCO is a large-scale object detection,
     segmentation, and captioning dataset. This version contains images, bounding
     boxes " and labels for the 2017 version. Note:
+
     *   Some images from the train and validation sets don't have annotations.
     *   Coco 2014 and 2017 uses the same images, but different train/val/test
         splits
     *   The test split don't have any annotations (only images).
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
+
 *   **Download size**: `19.57 GiB`
+
 *   **Splits**:
 
 Split        | Examples

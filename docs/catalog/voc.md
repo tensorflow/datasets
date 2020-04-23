@@ -65,9 +65,12 @@ contain annotations.
     predict the bounding box and label of each individual object. WARNING: As
     per the official dataset, the test set of VOC2012 does not contain
     annotations.
+
 *   **Homepage**:
     [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
+
 *   **Download size**: `868.85 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -109,9 +112,12 @@ contain annotations.
     predict the bounding box and label of each individual object. WARNING: As
     per the official dataset, the test set of VOC2012 does not contain
     annotations.
+
 *   **Homepage**:
     [http://host.robots.ox.ac.uk/pascal/VOC/voc2012/](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/)
+
 *   **Download size**: `3.59 GiB`
+
 *   **Splits**:
 
 Split        | Examples

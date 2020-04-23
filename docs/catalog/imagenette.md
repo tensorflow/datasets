@@ -58,6 +58,7 @@ FeaturesDict({
 ## imagenette/full-size-v2 (default config)
 
 *   **Config description**: full-size variant.
+
 *   **Download size**: `1.45 GiB`
 *   **Dataset size**: `1.46 GiB`
 *   **Auto-cached**
@@ -73,6 +74,7 @@ Split        | Examples
 ## imagenette/320px-v2
 
 *   **Config description**: 320px variant.
+
 *   **Download size**: `325.73 MiB`
 *   **Dataset size**: `332.71 MiB`
 *   **Auto-cached**
@@ -88,6 +90,7 @@ Split        | Examples
 ## imagenette/160px-v2
 
 *   **Config description**: 160px variant.
+
 *   **Download size**: `94.36 MiB`
 *   **Dataset size**: `102.10 MiB`
 *   **Auto-cached**
@@ -103,6 +106,7 @@ Split        | Examples
 ## imagenette/full-size
 
 *   **Config description**: full-size variant.
+
 *   **Download size**: `1.45 GiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -118,6 +122,7 @@ Split        | Examples
 ## imagenette/320px
 
 *   **Config description**: 320px variant.
+
 *   **Download size**: `325.48 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -133,6 +138,7 @@ Split        | Examples
 ## imagenette/160px
 
 *   **Config description**: 160px variant.
+
 *   **Download size**: `94.18 MiB`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**

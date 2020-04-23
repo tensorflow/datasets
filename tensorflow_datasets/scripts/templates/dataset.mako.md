@@ -27,6 +27,7 @@ ${builder.info.description}
 <%def name="display_config_description(builder)">\
 % if builder.builder_config:
 *   **Config description**: ${builder.builder_config.description}
+
 % endif
 </%def>
 

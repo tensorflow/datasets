@@ -21,10 +21,6 @@ python -m tensorflow_datasets.scripts.document_datasets
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 from concurrent import futures
 import os

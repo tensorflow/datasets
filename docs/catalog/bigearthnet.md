@@ -77,6 +77,7 @@ Split   | Examples
 ## bigearthnet/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
+
 *   **Features**:
 
 ```python
@@ -104,6 +105,7 @@ FeaturesDict({
 ## bigearthnet/all
 
 *   **Config description**: 13 Sentinel-2 channels
+
 *   **Features**:
 
 ```python

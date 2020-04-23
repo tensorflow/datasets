@@ -71,10 +71,12 @@ FeaturesDict({
 
 *   **Config description**: A dataset consisting of Train and Validation images
     of 32x32 resolution.
+
 *   **Download size**: `3.98 GiB`
 
 ## downsampled_imagenet/64x64
 
 *   **Config description**: A dataset consisting of Train and Validation images
     of 64x64 resolution.
+
 *   **Download size**: `11.73 GiB`

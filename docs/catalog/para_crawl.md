@@ -38,7 +38,9 @@ Web-Scale Parallel Corpora for Official European Languages.
 
 *   **Config description**: Translation dataset from English to bg, uses encoder
     plain_text.
+
 *   **Download size**: `98.94 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -61,7 +63,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to cs, uses encoder
     plain_text.
+
 *   **Download size**: `187.31 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -84,7 +88,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to da, uses encoder
     plain_text.
+
 *   **Download size**: `174.34 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -107,7 +113,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to de, uses encoder
     plain_text.
+
 *   **Download size**: `1.22 GiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -130,7 +138,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to el, uses encoder
     plain_text.
+
 *   **Download size**: `184.59 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -153,7 +163,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to es, uses encoder
     plain_text.
+
 *   **Download size**: `1.82 GiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -176,7 +188,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to et, uses encoder
     plain_text.
+
 *   **Download size**: `66.91 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -199,7 +213,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to fi, uses encoder
     plain_text.
+
 *   **Download size**: `151.83 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -222,7 +238,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to fr, uses encoder
     plain_text.
+
 *   **Download size**: `2.63 GiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -245,7 +263,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to ga, uses encoder
     plain_text.
+
 *   **Download size**: `28.03 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -268,7 +288,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to hr, uses encoder
     plain_text.
+
 *   **Download size**: `80.97 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -291,7 +313,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to hu, uses encoder
     plain_text.
+
 *   **Download size**: `114.24 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -314,7 +338,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to it, uses encoder
     plain_text.
+
 *   **Download size**: `1017.30 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -337,7 +363,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to lt, uses encoder
     plain_text.
+
 *   **Download size**: `63.28 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -360,7 +388,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to lv, uses encoder
     plain_text.
+
 *   **Download size**: `45.17 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -383,7 +413,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to mt, uses encoder
     plain_text.
+
 *   **Download size**: `18.15 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -406,7 +438,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to nl, uses encoder
     plain_text.
+
 *   **Download size**: `400.63 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -429,7 +463,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to pl, uses encoder
     plain_text.
+
 *   **Download size**: `257.90 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -452,7 +488,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to pt, uses encoder
     plain_text.
+
 *   **Download size**: `608.62 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -475,7 +513,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to ro, uses encoder
     plain_text.
+
 *   **Download size**: `153.24 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -498,7 +538,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to sk, uses encoder
     plain_text.
+
 *   **Download size**: `96.61 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -521,7 +563,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to sl, uses encoder
     plain_text.
+
 *   **Download size**: `62.02 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -544,7 +588,9 @@ Translation({
 
 *   **Config description**: Translation dataset from English to sv, uses encoder
     plain_text.
+
 *   **Download size**: `262.76 MiB`
+
 *   **Splits**:
 
 Split   | Examples

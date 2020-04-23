@@ -76,7 +76,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
       **kwargs: Passed on to the constructor of `BuilderConfig`.
     """
     super(RobonetConfig, self).__init__(
-        version=tfds.core.Version('3.0.0'), **kwargs)
+        version=tfds.core.Version('4.0.0'), **kwargs)
     if (width is None) ^ (height is None):
       raise ValueError('Either both dimensions should be set, or none of them')
     self.sample_dataset = sample_dataset
@@ -95,7 +95,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
           width=64,
           height=64,
       ),
-
       RobonetConfig(
           name='robonet_sample_128',
           description='128x128 RoboNet Sample.',
@@ -103,7 +102,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
           width=128,
           height=128,
       ),
-
       RobonetConfig(
           name='robonet_64',
           description='64x64 RoboNet.',
@@ -111,7 +109,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
           width=64,
           height=64,
       ),
-
       RobonetConfig(
           name='robonet_128',
           description='128x128 RoboNet.',

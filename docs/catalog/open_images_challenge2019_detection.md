@@ -71,10 +71,12 @@ FeaturesDict({
 
 *   **Config description**: Images have at most 200,000 pixels, at 72 JPEG
     quality.
+
 *   **Dataset size**: `59.40 GiB`
 
 ## open_images_challenge2019_detection/300k
 
 *   **Config description**: Images have at most 300,000 pixels, at 72 JPEG
     quality.
+
 *   **Dataset size**: `80.44 GiB`

@@ -69,10 +69,12 @@ FeaturesDict({
 ## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.
+
 *   **Download size**: `286.35 MiB`
 
 ## flic/full
 
 *   **Config description**: Uses 20928 examples, a superset of FLIC consisting
     of more difficult examples.
+
 *   **Download size**: `1.10 GiB`

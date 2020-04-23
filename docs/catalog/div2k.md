@@ -52,6 +52,7 @@ year = {2019}
 ## div2k/bicubic_x2 (default config)
 
 *   **Config description**: Uses bicubic_x2 data.
+
 *   **Download size**: `4.68 GiB`
 *   **Splits**:
 
@@ -63,6 +64,7 @@ Split        | Examples
 ## div2k/bicubic_x3
 
 *   **Config description**: Uses bicubic_x3 data.
+
 *   **Download size**: `4.16 GiB`
 *   **Splits**:
 
@@ -74,6 +76,7 @@ Split        | Examples
 ## div2k/bicubic_x4
 
 *   **Config description**: Uses bicubic_x4 data.
+
 *   **Download size**: `3.97 GiB`
 *   **Splits**:
 
@@ -85,6 +88,7 @@ Split        | Examples
 ## div2k/bicubic_x8
 
 *   **Config description**: Uses bicubic_x8 data.
+
 *   **Download size**: `3.78 GiB`
 *   **Splits**:
 
@@ -96,6 +100,7 @@ Split        | Examples
 ## div2k/unknown_x2
 
 *   **Config description**: Uses unknown_x2 data.
+
 *   **Download size**: `4.48 GiB`
 *   **Splits**:
 
@@ -107,6 +112,7 @@ Split        | Examples
 ## div2k/unknown_x3
 
 *   **Config description**: Uses unknown_x3 data.
+
 *   **Download size**: `4.10 GiB`
 *   **Splits**:
 
@@ -118,6 +124,7 @@ Split        | Examples
 ## div2k/unknown_x4
 
 *   **Config description**: Uses unknown_x4 data.
+
 *   **Download size**: `3.93 GiB`
 *   **Splits**:
 
@@ -129,6 +136,7 @@ Split        | Examples
 ## div2k/realistic_mild_x4
 
 *   **Config description**: Uses realistic_mild_x4 data.
+
 *   **Download size**: `4.00 GiB`
 *   **Splits**:
 
@@ -140,6 +148,7 @@ Split        | Examples
 ## div2k/realistic_difficult_x4
 
 *   **Config description**: Uses realistic_difficult_x4 data.
+
 *   **Download size**: `3.98 GiB`
 *   **Splits**:
 
@@ -151,6 +160,7 @@ Split        | Examples
 ## div2k/realistic_wild_x4
 
 *   **Config description**: Uses realistic_wild_x4 data.
+
 *   **Download size**: `4.74 GiB`
 *   **Splits**:
 

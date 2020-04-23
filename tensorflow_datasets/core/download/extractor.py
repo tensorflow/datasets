@@ -29,6 +29,7 @@ import tarfile
 import uuid
 import zipfile
 
+from absl import logging
 import promise
 import six
 import tensorflow.compat.v2 as tf
@@ -87,13 +88,23 @@ class _Extractor(object):
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     path = None
+    dst_path = None  # To avoid undefined variable if exception is raised
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
-        _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
+        dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
+        _copy(handle, dst_path)
     except BaseException as err:
-      msg = 'Error while extracting %s to %s (file: %s) : %s' % (
+      msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
           from_path, to_path, path, err)
+      # Check if running on windows
+      if os.name == 'nt' and dst_path and len(dst_path) > 250:
+        msg += (
+            '\n'
+            'On windows, path lengths greater than 260 characters may '
+            'result in an error. See the doc to remove the limiration: '
+            'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
+        )
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
@@ -151,6 +162,10 @@ def iter_tar(arch_f, stream=False):
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
     for member in tar:
+      if stream and (member.islnk() or member.issym()):
+        # Links cannot be dereferenced in stream mode.
+        logging.warning('Skipping link during extraction: %s', member.name)
+        continue
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)

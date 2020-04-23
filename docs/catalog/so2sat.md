@@ -45,6 +45,7 @@ Split | Examples
 ## so2sat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
+
 *   **Features**:
 
 ```python
@@ -61,6 +62,7 @@ FeaturesDict({
 ## so2sat/all
 
 *   **Config description**: 8 Sentinel-1 and 10 Sentinel-2 channels
+
 *   **Features**:
 
 ```python

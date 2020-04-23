@@ -41,6 +41,7 @@ where one is high resource and the other is low resource.
 ## ted_hrlr_translate/az_to_en (default config)
 
 *   **Config description**: Translation dataset from az to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -64,6 +65,7 @@ Translation({
 ## ted_hrlr_translate/aztr_to_en
 
 *   **Config description**: Translation dataset from az_tr to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -87,6 +89,7 @@ Translation({
 ## ted_hrlr_translate/be_to_en
 
 *   **Config description**: Translation dataset from be to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -110,6 +113,7 @@ Translation({
 ## ted_hrlr_translate/beru_to_en
 
 *   **Config description**: Translation dataset from be_ru to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -133,6 +137,7 @@ Translation({
 ## ted_hrlr_translate/es_to_pt
 
 *   **Config description**: Translation dataset from es to pt in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -156,6 +161,7 @@ Translation({
 ## ted_hrlr_translate/fr_to_pt
 
 *   **Config description**: Translation dataset from fr to pt in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -179,6 +185,7 @@ Translation({
 ## ted_hrlr_translate/gl_to_en
 
 *   **Config description**: Translation dataset from gl to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -202,6 +209,7 @@ Translation({
 ## ted_hrlr_translate/glpt_to_en
 
 *   **Config description**: Translation dataset from gl_pt to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -225,6 +233,7 @@ Translation({
 ## ted_hrlr_translate/he_to_pt
 
 *   **Config description**: Translation dataset from he to pt in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -248,6 +257,7 @@ Translation({
 ## ted_hrlr_translate/it_to_pt
 
 *   **Config description**: Translation dataset from it to pt in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -271,6 +281,7 @@ Translation({
 ## ted_hrlr_translate/pt_to_en
 
 *   **Config description**: Translation dataset from pt to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -294,6 +305,7 @@ Translation({
 ## ted_hrlr_translate/ru_to_en
 
 *   **Config description**: Translation dataset from ru to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -317,6 +329,7 @@ Translation({
 ## ted_hrlr_translate/ru_to_pt
 
 *   **Config description**: Translation dataset from ru to pt in plain text.
+
 *   **Splits**:
 
 Split        | Examples
@@ -340,6 +353,7 @@ Translation({
 ## ted_hrlr_translate/tr_to_en
 
 *   **Config description**: Translation dataset from tr to en in plain text.
+
 *   **Splits**:
 
 Split        | Examples
