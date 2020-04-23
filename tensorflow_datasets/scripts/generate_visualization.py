@@ -30,7 +30,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import registered
 
-WORKER_COUNT_DATASETS = 2
+WORKER_COUNT_DATASETS = 10
 
 FLAGS = flags.FLAGS
 FIG_DIR = os.path.join('..', 'docs', 'catalog', 'images')
