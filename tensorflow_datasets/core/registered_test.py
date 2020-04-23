@@ -110,6 +110,11 @@ class RegisteredTest(testing.TestCase):
                 "config": "conf1-attr", "data_dir": "bar"}
     self.assertEqual(expected, builder.kwargs)
 
+  def test_builder_camel_case(self):
+    fullname = "EmptyDatasetBuilder"
+    builder = registered.builder(fullname)
+    self.assertIsInstance(builder, EmptyDatasetBuilder)
+
   def test_load(self):
     name = "empty_dataset_builder/k1=1"
     data_dir = "foo"

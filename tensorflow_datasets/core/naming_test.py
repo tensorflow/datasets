@@ -46,6 +46,8 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
   )
   def test_snake_to_camelcase(self, camel, snake):
     self.assertEqual(naming.snake_to_camelcase(snake), camel)
+    # camelcase_to_snakecase is a no-op if the name is already snake_case.
+    self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
   def test_sharded_filenames(self):
     prefix = "/tmp/foo"

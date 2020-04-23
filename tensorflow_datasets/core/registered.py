@@ -360,6 +360,8 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
   if not res:
     raise ValueError(_NAME_STR_ERR.format(name_str))
   name = res.group("dataset_name")
+  # Normalize the name to accept CamelCase
+  name = naming.camelcase_to_snakecase(name)
   kwargs = _kwargs_str_to_kwargs(res.group("kwargs"))
   try:
     for attr in ["config", "version"]:
