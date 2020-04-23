@@ -29,6 +29,7 @@ from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
+from tensorflow_datasets.core.registered import builder_cls
 from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import Split
@@ -53,6 +54,7 @@ __all__ = [
     "units",
     "GenerateMode",
     "builder",
+    "builder_cls",
     "list_builders",
     "load",
     "ReadConfig",
