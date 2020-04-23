@@ -47,6 +47,9 @@ def doc_examples(data_name, path):
 
 def main(_):
     """Main script."""
+    # Generate dataset as it is assumed to be generated.
+    for data_name in DATASET_TO_TESTS:
+        tfds.load(data_name)
     # Generate examples/figures for datasets.
     generate_visualization(DATASET_TO_TESTS)
     # Document datasets with generated figures.

@@ -458,5 +458,5 @@ def list_config_names(predicate_fn = None):
     The list of all registered `dataset/config` and `dataset` names.
   """
   # Strip the version from the full names
-  config_names = {n.rsplit('/', maxsplit=1)[0] for n in tfds.core.registered.list_full_names(predicate_fn)}
+  config_names = {n.rsplit('/', maxsplit=1)[0] for n in list_full_names(predicate_fn)}
   return sorted(config_names)

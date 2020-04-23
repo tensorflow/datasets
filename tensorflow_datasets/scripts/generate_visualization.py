@@ -30,7 +30,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import registered
 
-WORKER_COUNT_DATASETS = 200
+WORKER_COUNT_DATASETS = 2
 
 FLAGS = flags.FLAGS
 FIG_DIR = os.path.join('..', 'docs', 'catalog', 'images')
@@ -45,14 +45,17 @@ def generate_single_visualization(data_name):
       generate figure.
     """
     print("Generating examples %s..." % data_name)
+    suffix = data_name.replace("/", "-")
+    data_path = os.path.join(FLAGS.dst_dir, suffix+ ".png")
+    # If the image already exists, skip the image generation
+    if tf.io.gfile.exists(data_path):
+        return  
     builder = tfds.builder(data_name)
     split = list(builder.info.splits.keys())[0]
     data, data_info = tfds.load(data_name, split=split, with_info=True)
 
     if not tf.io.gfile.exists(FLAGS.dst_dir):
         tf.io.gfile.mkdir(FLAGS.dst_dir)
-    suffix = data_name.replace("/", "-")
-    data_path = os.path.join(FLAGS.dst_dir, suffix+ ".png")
     try:
         figure = tfds.show_examples(data_info, data)
         figure.savefig(data_path)
@@ -72,8 +75,7 @@ def get_config_names(datasets=None):
     """
     dataset_config_list = []
     if not datasets:
-        dataset_config_list = [x for x in registered.list_config_names()]
-        return dataset_config_list
+        return registered.list_config_names()
     else:
         for data_name in datasets:
           builder = tfds.builder(data_name)
