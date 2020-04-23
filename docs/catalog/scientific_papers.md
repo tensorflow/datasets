@@ -8,12 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/armancohan/long-summarization" />
   <meta itemprop="citation" content="@article{Cohan_2018,&#10;   title={A Discourse-Aware Attention Model for Abstractive Summarization of&#10;            Long Documents},&#10;   url={http://dx.doi.org/10.18653/v1/n18-2097},&#10;   DOI={10.18653/v1/n18-2097},&#10;   journal={Proceedings of the 2018 Conference of the North American Chapter of&#10;          the Association for Computational Linguistics: Human Language&#10;          Technologies, Volume 2 (Short Papers)},&#10;   publisher={Association for Computational Linguistics},&#10;   author={Cohan, Arman and Dernoncourt, Franck and Kim, Doo Soon and Bui, Trung and Kim, Seokhwan and Chang, Walter and Goharian, Nazli},&#10;   year={2018}&#10;}" />
 </div>
-# `scientific_papers `
-
-
-
-
-
+# `scientific_papers`
 
 *   **Description**:
 
@@ -22,20 +17,27 @@ The datasets are obtained from ArXiv and PubMed OpenAccess repositories.
 
 Both "arxiv" and "pubmed" have two features:
 
-  - article: the body of the document, pagragraphs seperated by "/n".
-  - abstract: the abstract of the document, pagragraphs seperated by "/n".
-  - section_names: titles of sections, seperated by "/n".
+-   article: the body of the document, pagragraphs seperated by "/n".
+-   abstract: the abstract of the document, pagragraphs seperated by "/n".
+-   section_names: titles of sections, seperated by "/n".
 
-*   **Homepage**: [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
+*   **Homepage**:
+    [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
+
 *   **Source code**:
     [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
+
 *   **Versions**:
-    * **`1.1.1`** (default): No release notes.
-    * `1.1.0`: No release notes.
+
+    *   **`1.1.1`** (default): No release notes.
+    *   `1.1.0`: No release notes.
+
 *   **Download size**: `4.20 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Features**:
 
 ```python
@@ -65,28 +67,28 @@ FeaturesDict({
 }
 ```
 
-
-## scientific_papers/arxiv (default config) 
+## scientific_papers/arxiv (default config)
 
 *   **Config description**: Documents from ArXiv repository.
+
 *   **Dataset size**: `7.07 GiB`
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 6,440
-'train' | 203,037
+Split        | Examples
+:----------- | -------:
+'test'       | 6,440
+'train'      | 203,037
 'validation' | 6,436
 
-
-## scientific_papers/pubmed  
+## scientific_papers/pubmed
 
 *   **Config description**: Documents from PubMed repository.
+
 *   **Dataset size**: `2.34 GiB`
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 6,658
-'train' | 119,924
+Split        | Examples
+:----------- | -------:
+'test'       | 6,658
+'train'      | 119,924
 'validation' | 6,633

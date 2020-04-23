@@ -10,20 +10,16 @@
 </div>
 # `common_voice`
 
-Note: This dataset is available only in our nightly package `tfds-nightly`.
-
-
-
-
 *   **Description**:
 
 Mozilla Common Voice Dataset
 
-*   **Homepage**: [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
+*   **Homepage**:
+    [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
 *   **Source code**:
     [`tfds.audio.commonvoice.CommonVoice`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/commonvoice.py)
 *   **Versions**:
-    * <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -31,17 +27,17 @@ Mozilla Common Voice Dataset
     Unknown
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/en (default config)
+## common_voice/en (default config)
 
 *   **Config description**: Language Code: en
+
 *   **Features**:
 
 ```python
@@ -57,9 +53,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/de 
+## common_voice/de
 
 *   **Config description**: Language Code: de
+
 *   **Features**:
 
 ```python
@@ -75,9 +72,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/fr 
+## common_voice/fr
 
 *   **Config description**: Language Code: fr
+
 *   **Features**:
 
 ```python
@@ -93,9 +91,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/cy 
+## common_voice/cy
 
 *   **Config description**: Language Code: cy
+
 *   **Features**:
 
 ```python
@@ -111,9 +110,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/br 
+## common_voice/br
 
 *   **Config description**: Language Code: br
+
 *   **Features**:
 
 ```python
@@ -129,9 +129,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/cv 
+## common_voice/cv
 
 *   **Config description**: Language Code: cv
+
 *   **Features**:
 
 ```python
@@ -147,9 +148,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/tr 
+## common_voice/tr
 
 *   **Config description**: Language Code: tr
+
 *   **Features**:
 
 ```python
@@ -165,9 +167,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/tt 
+## common_voice/tt
 
 *   **Config description**: Language Code: tt
+
 *   **Features**:
 
 ```python
@@ -183,9 +186,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/ky 
+## common_voice/ky
 
 *   **Config description**: Language Code: ky
+
 *   **Features**:
 
 ```python
@@ -201,9 +205,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/ga-IE 
+## common_voice/ga-IE
 
 *   **Config description**: Language Code: ga-IE
+
 *   **Features**:
 
 ```python
@@ -219,9 +224,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/kab 
+## common_voice/kab
 
 *   **Config description**: Language Code: kab
+
 *   **Features**:
 
 ```python
@@ -237,9 +243,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/ca 
+## common_voice/ca
 
 *   **Config description**: Language Code: ca
+
 *   **Features**:
 
 ```python
@@ -255,9 +262,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/zh-TW 
+## common_voice/zh-TW
 
 *   **Config description**: Language Code: zh-TW
+
 *   **Features**:
 
 ```python
@@ -273,9 +281,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/sl 
+## common_voice/sl
 
 *   **Config description**: Language Code: sl
+
 *   **Features**:
 
 ```python
@@ -291,9 +300,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/it 
+## common_voice/it
 
 *   **Config description**: Language Code: it
+
 *   **Features**:
 
 ```python
@@ -309,9 +319,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/nl 
+## common_voice/nl
 
 *   **Config description**: Language Code: nl
+
 *   **Features**:
 
 ```python
@@ -327,9 +338,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/cnh 
+## common_voice/cnh
 
 *   **Config description**: Language Code: cnh
+
 *   **Features**:
 
 ```python
@@ -345,9 +357,10 @@ FeaturesDict({
 })
 ```
 
-## <span class="material-icons" title="Available only in tfds-nightly package">nights_stay</span> common_voice/eo 
+## common_voice/eo
 
 *   **Config description**: Language Code: eo
+
 *   **Features**:
 
 ```python
