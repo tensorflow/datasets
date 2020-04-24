@@ -24,22 +24,20 @@ from __future__ import print_function
 from tensorflow_datasets.core.visualization import image_visualizer
 
 _ALL_VISUALIZERS = [
+    image_visualizer.ObjectGridVisualizer(),
     image_visualizer.ImageGridVisualizer(),
 ]
 
 
 def show_examples(ds_info, ds, **options_kwargs):
   """Visualize images (and labels) from an image classification dataset.
-
   This function is for interactive use (Colab, Jupyter). It displays and return
   a plot of (rows*columns) images from a tf.data.Dataset.
-
   Usage:
   ```python
   ds, ds_info = tfds.load('cifar10', split='train', with_info=True)
   fig = tfds.show_examples(ds_info, ds)
   ```
-
   Args:
     ds_info: The dataset info object to which extract the label and features
       info. Available either through `tfds.load('mnist', with_info=True)` or
@@ -50,7 +48,6 @@ def show_examples(ds_info, ds, **options_kwargs):
     **options_kwargs: Additional display options, specific to the dataset type
       to visualize. Are forwarded to `tfds.visualization.Visualizer.show`.
       See the `tfds.visualization` for a list of available visualizers.
-
   Returns:
     fig: The `matplotlib.Figure` object
   """

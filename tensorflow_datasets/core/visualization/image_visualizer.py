@@ -78,6 +78,41 @@ def _add_image(ax, image):
   plt.xticks([], [])
   plt.yticks([], [])
 
+def _draw_text(ax, xy, txt, size=14):
+  """Draws text on the top-left corner of the bounding box.
+  Args:
+    ax: axis, `axes.SubplotBase` subclass of `matplotlib.Axes`.
+    xy: [x, y], List of coordinates of the text, usually
+      top-left corner of bbox.
+    txt: `str`, string to be displayed.
+  """
+  ax.text(*xy, txt, verticalalignment='top', \
+          color='white', fontsize=size, weight="normal", \
+          bbox=dict(facecolor='black', alpha=0.7, pad=0.3))
+
+def _draw_rectangle(ax, bbox):
+  """Draws the bounding box.
+  Args:
+    ax: `axes.SubplotBase` subclass of `matplotlib.Axes`.
+    bbox: List of coordinates of bbox in format, [x, y, width, height].
+  """
+  patches = lazy_imports_lib.lazy_imports.matplotlib.patches
+  ax.add_patch(patches.Rectangle(bbox[:2], \
+              *bbox[-2:], fill=False, \
+              edgecolor='red', lw=0.7))
+
+def _bb_hw(bbox, height, width):
+  """converts bounding box to height and width.
+  Args:
+    bbox: `tfds.features.BBox`, normalized coordinates of bbox in format
+      [ymin, xmin, ymax, xmax].
+    height: `int`, height of the image.
+    width: `int`, width of the image.
+  """
+  return [bbox[1]*width, bbox[0]*height, \
+          (bbox[3]*width)-(bbox[1]*width), \
+          (bbox[2]*height)-(bbox[0]*height)]
+
 
 class ImageGridVisualizer(visualizer.Visualizer):
   """Visualizer for supervised image datasets."""
@@ -146,5 +181,105 @@ class ImageGridVisualizer(visualizer.Visualizer):
         label_str = ds_info.features[label_key].int2str(label)
         plt.xlabel('{} ({})'.format(label_str, label))
 
+    # Print the grid
+    fig = _make_grid(make_cell_fn, ds, rows, cols, plot_scale)
+
+class ObjectGridVisualizer(visualizer.Visualizer):
+  """Visualizer for supervised image datasets."""
+
+  def match(self, ds_info):
+    """See base class."""
+    image_keys = visualizer.extract_keys(ds_info.features, features_lib.Image)
+    if not image_keys:
+      return False
+
+    if visualizer.extract_nested_keys(
+        features=ds_info.features,
+        feature_list=[features_lib.Sequence, features_lib.BBoxFeature]
+    ):
+      return True
+
+    return False
+
+  def show(
+      self,
+      ds_info,
+      ds,
+      rows=3,
+      cols=3,
+      plot_scale=3.,
+      image_key=None,
+      bbox_label=True
+  ):
+    """Display the dataset.
+
+    Args:
+      ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
+      ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
+        should not be batched. Examples will be consumed in order until
+        (rows * cols) are read or the dataset is consumed.
+      rows: `int`, number of rows of the display grid.
+      cols: `int`, number of columns of the display grid.
+      plot_scale: `float`, controls the plot size of the images. Keep this
+        value around 3 to get a good plot. High and low values may cause
+        the labels to get overlapped.
+      image_key: `string`, name of the feature that contains the image. If not
+         set, the system will try to auto-detect it.
+      bbox_label: `bool`, flag to display bbox labels.
+    """
+    # Extract the image key
+    if not image_key:
+      image_keys = visualizer.extract_keys(ds_info.features, features_lib.Image)
+      if len(image_keys) > 1:
+        raise ValueError(
+            'Multiple image features detected in the dataset. '
+            'Use `image_key` argument to override. Images detected: {}'.format(
+                image_keys))
+      image_key = image_keys[0]
+
+    # extract label and bbox keys
+    sequence_key, bbox_key = visualizer.extract_nested_keys(
+        features=ds_info.features,
+        feature_list=[features_lib.Sequence, features_lib.BBoxFeature]
+    )
+
+    # Infer the label keys in the sequence feature connector (BBox Labels)
+    label_keys = visualizer.extract_keys(ds_info.features[sequence_key],
+                                         features_lib.ClassLabel)
+
+    # Taking first label key since some datasets have multiple label keys
+    # for BBoxes as in voc dataset
+    label_key = label_keys[0] if len(label_keys) > 0 else None
+    if not label_key:
+      logging.info("Was not able to auto-infer label.")
+
+    # Single image display
+    def make_cell_fn(ax, ex):
+      plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
+
+      if not isinstance(ex, dict):
+        raise ValueError(
+            '{} requires examples as `dict`, with the same '
+            'structure as `ds_info.features`. It is currently not compatible '
+            'with `as_supervised=True`. Received: {}'.format(
+                type(self).__name__, type(ex)))
+
+      _add_image(ax, ex[image_key])
+      image = ex[image_key]
+
+      bboxes = ex[sequence_key][bbox_key]
+      height = image.shape[0]
+      width = image.shape[1]
+      font_size = int((11./3.) * plot_scale)
+
+      # Plot the label and bounding boxes
+      for idx, box in enumerate(bboxes):
+        bbox = _bb_hw(box, height, width)
+        _draw_rectangle(ax, bbox)
+        if label_key and bbox_label:
+          text = ds_info.features[sequence_key][label_key]\
+                .int2str(ex[sequence_key][label_key][idx])
+          _draw_text(ax, bbox[:2], text, size=font_size)
+    
     # Print the grid
     fig = _make_grid(make_cell_fn, ds, rows, cols, plot_scale)
