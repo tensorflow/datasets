@@ -58,6 +58,12 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
+  def test_lazy_import(self):
+    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
+      with tfds.core.lazy_imports.lazy_imports():
+        import some_module
+
+      some_module.some_function()
 
 if __name__ == "__main__":
   testing.test_main()

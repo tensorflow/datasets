@@ -20,10 +20,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import importlib
+import sys
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
+_ERR_MSG = ("Failed importing {name}. This likely means that the dataset "
+            "requires additional dependencies that have to be "
+            "manually installed (usually with `pip install {name}`). See "
+            "setup.py extras_require.")
 
 def _try_import(module_name):
   """Try importing a module, with an informative error message on failure."""
@@ -31,11 +37,18 @@ def _try_import(module_name):
     mod = importlib.import_module(module_name)
     return mod
   except ImportError:
-    err_msg = ("Failed importing {name}. This likely means that the dataset "
-               "requires additional dependencies that have to be "
-               "manually installed (usually with `pip install {name}`). See "
-               "setup.py extras_require.").format(name=module_name)
+    err_msg = _ERR_MSG.format(name=module_name)
     utils.reraise(suffix=err_msg)
+
+
+class Fakemodule(object):
+
+  def __init__(self, module_name):
+    self.module_name = module_name
+
+  def __getattr__(self, _):
+    err_msg = _ERR_MSG.format(name=self.module_name)
+    raise ImportError(err_msg)
 
 
 class LazyImporter(object):
@@ -45,6 +58,14 @@ class LazyImporter(object):
   the default installation to remain lean, those heavy dependencies are
   lazily imported here.
   """
+  @staticmethod
+  @contextlib.contextmanager
+  def lazy_imports():
+    try:
+      yield
+    except ImportError as err:
+      sys.modules[err.name] = Fakemodule(err.name)
+      # err.name = _try_import(err.name)
 
   @utils.classproperty
   @classmethod
