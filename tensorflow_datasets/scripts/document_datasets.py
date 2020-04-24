@@ -23,6 +23,7 @@ python -m tensorflow_datasets.scripts.document_datasets
 
 import collections
 from concurrent import futures
+import os
 
 from absl import app
 import mako.lookup
@@ -33,11 +34,28 @@ from tensorflow_datasets.core.utils import py_utils
 WORKER_COUNT_DATASETS = 200
 WORKER_COUNT_CONFIGS = 50
 
-BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets"
+BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets'
 
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
 # TODO(tfds): Document image_label_folder datasets in a separate section
-BUILDER_BLACKLIST = ["wmt_translate"]
+BUILDER_BLACKLIST = ['wmt_translate']
+
+
+class VisualizationDocUtil(object):
+  """Small util which generate the path/urls for the visualizations."""
+  # Url used to display images
+  BASE_PATH = 'gs://tfds-data/visualization/'
+  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/'
+
+  def _get_name(self, builder):
+    return builder.info.full_name.replace('/', '-') + '.png'
+
+  def get_url(self, builder):
+    return self.BASE_URL + self._get_name(builder)
+
+  def has_visualization(self, builder):
+    filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
+    return tf.io.gfile.exists(filepath)
 
 
 @py_utils.memoize()
@@ -50,32 +68,33 @@ def get_mako_template(tmpl_name):
   Returns:
     mako 'Template' instance that can be rendered.
   """
-  tmpl_path = py_utils.get_tfds_path("scripts/templates/%s.mako.md" % tmpl_name)
-  with tf.io.gfile.GFile(tmpl_path, "r") as tmpl_f:
+  tmpl_path = py_utils.get_tfds_path('scripts/templates/%s.mako.md' % tmpl_name)
+  with tf.io.gfile.GFile(tmpl_path, 'r') as tmpl_f:
     tmpl_content = tmpl_f.read()
-  return mako.lookup.Template(tmpl_content, default_filters=["str", "trim"])
+  return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
 
 
 def document_single_builder(builder):
   """Doc string for a single builder, with or without configs."""
-  print("Document builder %s..." % builder.name)
+  print('Document builder %s...' % builder.name)
   get_config_builder = lambda config: tfds.builder(builder.name, config=config)
   config_builders = []
   if builder.builder_configs:
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_CONFIGS) as tpool:
       config_builders = list(
           tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
-  tmpl = get_mako_template("dataset")
+  tmpl = get_mako_template('dataset')
   out_str = tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
+      visu_doc_util=VisualizationDocUtil(),
   ).strip()
-  schema_org_tmpl = get_mako_template("schema_org")
+  schema_org_tmpl = get_mako_template('schema_org')
   schema_org_out_str = schema_org_tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
   ).strip()
-  out_str = schema_org_out_str + "\n" + out_str
+  out_str = schema_org_out_str + '\n' + out_str
   return out_str
 
 
@@ -92,15 +111,15 @@ def make_module_to_builder_dict(datasets=None):
     datasets = [
         name for name in tfds.list_builders() if name not in BUILDER_BLACKLIST
     ]
-  print("Creating the vanilla builders for %s datasets..." % len(datasets))
+  print('Creating the vanilla builders for %s datasets...' % len(datasets))
   with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
     builders = tpool.map(tfds.builder, datasets)
-  print("Vanilla builders built, constructing module_to_builder dict...")
+  print('Vanilla builders built, constructing module_to_builder dict...')
 
   for builder in builders:
     module_name = builder.__class__.__module__
-    modules = module_name.split(".")
-    if "testing" in modules:
+    modules = module_name.split('.')
+    if 'testing' in modules:
       continue
 
     current_mod_ctr = module_to_builder
@@ -108,7 +127,7 @@ def make_module_to_builder_dict(datasets=None):
       current_mod_ctr = current_mod_ctr[mod]
     current_mod_ctr.append(builder)
 
-  module_to_builder = module_to_builder["tensorflow_datasets"]
+  module_to_builder = module_to_builder['tensorflow_datasets']
   return module_to_builder
 
 
@@ -126,7 +145,7 @@ def dataset_docs_str(datasets=None):
     (in the MarkDown format))
   """
 
-  print("Retrieving the list of builders...")
+  print('Retrieving the list of builders...')
   module_to_builder = make_module_to_builder_dict(datasets)
   sections = sorted(list(module_to_builder.keys()))
   section_docs = collections.defaultdict(list)
@@ -134,14 +153,14 @@ def dataset_docs_str(datasets=None):
   for section in sections:
     builders = tf.nest.flatten(module_to_builder[section])
     builders = sorted(builders, key=lambda b: b.name)
-    unused_ = get_mako_template("dataset")  # To warm cache.
+    unused_ = get_mako_template('dataset')  # To warm cache.
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
       builder_docs = tpool.map(document_single_builder, builders)
     builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
                      builder_doc)
                     for (builder, builder_doc) in zip(builders, builder_docs)]
     section_docs[section] = builder_docs
-  tmpl = get_mako_template("catalog_overview")
+  tmpl = get_mako_template('catalog_overview')
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]
 
@@ -150,5 +169,5 @@ def main(_):
   print(dataset_docs_str())
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   app.run(main)

@@ -45,10 +45,15 @@ class DocumentDatasetsTest(testing.TestCase):
     builder = DummyMnist(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
 
+    # Patch the visualization util (to avoid GCS access during test)
+    cls._old_path = document_datasets.VisualizationDocUtil.BASE_PATH
+    document_datasets.VisualizationDocUtil.BASE_PATH = cls._tfds_tmp_dir
+
   @classmethod
   def tearDownClass(cls):
     super(DocumentDatasetsTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
+    document_datasets.VisualizationDocUtil.BASE_PATH = cls._old_path
 
   def setUp(self):
     super(DocumentDatasetsTest, self).setUp()

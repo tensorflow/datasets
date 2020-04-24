@@ -165,6 +165,18 @@ ${builder.info.citation}
 % endif
 </%def>
 
+<%def name="display_figure(builder)">\
+*   **Visualization ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:\
+% if visu_doc_util.has_visualization(builder):
+
+
+<img src="${visu_doc_util.get_url(builder)}" alt="Visualization" width="500px">
+
+% else:
+ Not supported.
+% endif
+</%def>
+
 <%
 
 Section = collections.namedtuple('Section', 'get_signature, make')
@@ -212,6 +224,13 @@ def get_supervised(builder):
 def get_citation(builder):
   return builder.info.citation
 
+def get_figure(builder):
+  if visu_doc_util.has_visualization(builder):
+    return builder.info.full_name
+  else:
+    return None  # Fuse the sections together if no configs are available
+
+
 all_sections = [
     Section(get_description, display_description),
     Section(get_config_description, display_config_description),
@@ -226,6 +245,7 @@ all_sections = [
     Section(get_features, display_features),
     Section(get_supervised, display_supervised),
     Section(get_citation, display_citation),
+    Section(get_figure, display_figure),
 ]
 
 %>
