@@ -23,8 +23,9 @@ from __future__ import print_function
 import abc
 import contextlib
 import inspect
-import os
+import posixpath
 import re
+from typing import Any, Callable, Iterable, Iterator, List, Optional, Type
 
 from absl import flags
 from absl import logging
@@ -35,6 +36,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import version
 
 
 FLAGS = flags.FLAGS
@@ -45,6 +47,13 @@ __all__ = [
     "builder",
     "load",
 ]
+
+
+# Cannot use real typing due to circular dependencies. Could this be fixed ?
+DatasetBuilder = Any
+
+PredicateFn = Callable[[Type[DatasetBuilder]], bool]
+
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
@@ -423,43 +432,94 @@ def _cast_to_pod(val):
       return tf.compat.as_text(val)
 
 
-def _get_all_versions(version_list):
+def _get_all_versions(
+    current_version: version.Version,
+    extra_versions: Iterable[version.Version],
+    current_version_only: bool,
+) -> Iterable[str]:
+  """Returns the list of all current versions."""
+  # Merge current version with all extra versions
+  version_list = [current_version]
+  if current_version_only:
+    version_list.extend(extra_versions)
   # Filter datasets which do not have a version (version is `None`) as they
   # should not be instantiated directly (e.g wmt_translate)
   return {str(v) for v in version_list if v}
 
 
-def _iter_full_names(predicate_fn=None):
+def _iter_single_full_names(
+    builder_name: str,
+    builder_cls: Type[DatasetBuilder],  # pylint: disable=redefined-outer-name
+    current_version_only: bool,
+) -> Iterator[str]:
+  """Iterate over a single builder full names."""
+  if builder_cls.BUILDER_CONFIGS:
+    for config in builder_cls.BUILDER_CONFIGS:
+      for v in _get_all_versions(
+          config.version,
+          config.supported_versions,
+          current_version_only=current_version_only,
+      ):
+        yield posixpath.join(builder_name, config.name, v)
+  else:
+    for v in _get_all_versions(
+        builder_cls.VERSION,
+        builder_cls.SUPPORTED_VERSIONS,
+        current_version_only=current_version_only
+    ):
+      yield posixpath.join(builder_name, v)
+
+
+def _iter_full_names(
+    predicate_fn: Optional[PredicateFn],
+    current_version_only: bool,
+) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
   for builder_name, builder_cls in _DATASET_REGISTRY.items():  # pylint: disable=redefined-outer-name
     # Only keep requested datasets
     if predicate_fn is not None and not predicate_fn(builder_cls):
       continue
-    if builder_cls.BUILDER_CONFIGS:
-      for config in builder_cls.BUILDER_CONFIGS:
-        for v in _get_all_versions(
-            [config.version] + config.supported_versions):
-          yield os.path.join(builder_name, config.name, v)
-    else:
-      for v in _get_all_versions(
-          [builder_cls.VERSION] + builder_cls.SUPPORTED_VERSIONS):
-        yield os.path.join(builder_name, v)
+    for full_name in _iter_single_full_names(
+        builder_name,
+        builder_cls,
+        current_version_only=current_version_only,
+    ):
+      yield full_name
 
 
-def list_full_names(predicate_fn=None):
-  """Yield all registered datasets full_names.
+def list_full_names(
+    predicate_fn: Optional[PredicateFn] = None,
+    current_version_only: bool = False,
+) -> List[str]:
+  """Lists all registered datasets full_names.
 
   Args:
     predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
       returns the dataset names which satisfy the predicate.
+    current_version_only: If True, only returns the current version.
 
   Returns:
     The list of all registered dataset full names.
   """
-  return sorted(_iter_full_names(predicate_fn=predicate_fn))
+  return sorted(_iter_full_names(
+      predicate_fn=predicate_fn,
+      current_version_only=current_version_only,
+  ))
 
 
-def is_full_name(full_name):
+def single_full_names(
+    builder_name: str,
+    current_version_only: bool = True,
+) -> List[str]:
+  """Returns the list `['ds/c0/v0',...]` or `['ds/v']` for a single builder."""
+  return sorted(_iter_single_full_names(
+      builder_name,
+      _DATASET_REGISTRY[builder_name],
+      current_version_only=current_version_only,
+  ))
+
+
+def is_full_name(full_name: str) -> bool:
   """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
 
   Args:
@@ -468,4 +528,4 @@ def is_full_name(full_name):
   Returns:
     `bool`.
   """
-  return _FULL_NAME_REG.match(full_name)
+  return bool(_FULL_NAME_REG.match(full_name))
