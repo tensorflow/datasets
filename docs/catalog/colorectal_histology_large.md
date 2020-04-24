@@ -56,3 +56,8 @@ FeaturesDict({
   publisher={Nature Publishing Group}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/colorectal_histology_large-2.0.0.png" alt="Visualization" width="500px">

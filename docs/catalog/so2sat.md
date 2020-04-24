@@ -42,6 +42,10 @@ http://creativecommons.org/licenses/by/4.0
 Split | Examples
 :---- | -------:
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## so2sat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels

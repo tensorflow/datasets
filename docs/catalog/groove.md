@@ -39,6 +39,10 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## groove/full-midionly (default config)
 
 *   **Config description**: Groove dataset without audio, unsplit.

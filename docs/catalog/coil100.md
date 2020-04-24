@@ -60,3 +60,8 @@ FeaturesDict({
   publisher={Technical report CUCS-005-96}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/coil100-1.0.0.png" alt="Visualization" width="500px">

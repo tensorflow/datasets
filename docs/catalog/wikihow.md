@@ -63,6 +63,10 @@ clean up extra commas.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## wikihow/all (default config)
 
 *   **Config description**: Use the concatenation of all paragraphs as the

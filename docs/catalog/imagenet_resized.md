@@ -86,6 +86,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-8x8-0.1.0.png" alt="Visualization" width="500px">
+
 ## imagenet_resized/16x16
 
 *   **Description**:
@@ -130,6 +135,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-16x16-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenet_resized/32x32
 
@@ -176,6 +186,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-32x32-0.1.0.png" alt="Visualization" width="500px">
+
 ## imagenet_resized/64x64
 
 *   **Description**:
@@ -220,3 +235,7 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

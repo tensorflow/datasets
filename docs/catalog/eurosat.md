@@ -65,9 +65,14 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/eurosat-rgb-2.0.0.png" alt="Visualization" width="500px">
 
 ## eurosat/all
 
@@ -87,3 +92,6 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('sentinel2', 'label')`
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

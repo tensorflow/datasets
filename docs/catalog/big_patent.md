@@ -55,6 +55,10 @@ FeaturesDict({
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## big_patent/all (default config)
 
 *   **Config description**: Patents under all categories.
@@ -137,7 +141,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 

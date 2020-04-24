@@ -72,3 +72,8 @@ address = "Colorado Springs, CO",
         YEAR = {2009},
         BIBSOURCE = "http://www.image-net.org/papers/imagenet_cvpr09.bib"}
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/stanford_dogs-0.2.0.png" alt="Visualization" width="500px">

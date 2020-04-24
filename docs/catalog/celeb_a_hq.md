@@ -81,6 +81,10 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## celeb_a_hq/512
 
 *   **Config description**: CelebaHQ images in 512 x 512 resolution
@@ -93,6 +97,11 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-512-2.0.0.png" alt="Visualization" width="500px">
 
 ## celeb_a_hq/256
 
@@ -107,6 +116,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-256-2.0.0.png" alt="Visualization" width="500px">
+
 ## celeb_a_hq/128
 
 *   **Config description**: CelebaHQ images in 128 x 128 resolution
@@ -119,6 +133,11 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-128-2.0.0.png" alt="Visualization" width="500px">
 
 ## celeb_a_hq/64
 
@@ -133,6 +152,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-64-2.0.0.png" alt="Visualization" width="500px">
+
 ## celeb_a_hq/32
 
 *   **Config description**: CelebaHQ images in 32 x 32 resolution
@@ -145,6 +169,10 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## celeb_a_hq/16
 
@@ -159,6 +187,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-16-2.0.0.png" alt="Visualization" width="500px">
+
 ## celeb_a_hq/8
 
 *   **Config description**: CelebaHQ images in 8 x 8 resolution
@@ -171,6 +204,11 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-8-2.0.0.png" alt="Visualization" width="500px">
 
 ## celeb_a_hq/4
 
@@ -185,6 +223,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-4-2.0.0.png" alt="Visualization" width="500px">
+
 ## celeb_a_hq/2
 
 *   **Config description**: CelebaHQ images in 2 x 2 resolution
@@ -198,6 +241,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-2-2.0.0.png" alt="Visualization" width="500px">
+
 ## celeb_a_hq/1
 
 *   **Config description**: CelebaHQ images in 1 x 1 resolution
@@ -210,3 +258,8 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-1-2.0.0.png" alt="Visualization" width="500px">

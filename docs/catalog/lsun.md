@@ -67,6 +67,11 @@ Split        | Examples
 'train'      | 168,103
 'validation' | 300
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-classroom-3.0.0.png" alt="Visualization" width="500px">
+
 ## lsun/bedroom
 
 *   **Config description**: Images of category bedroom
@@ -78,6 +83,11 @@ Split        | Examples
 :----------- | --------:
 'train'      | 3,033,042
 'validation' | 300
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-bedroom-3.0.0.png" alt="Visualization" width="500px">
 
 ## lsun/bridge
 
@@ -91,6 +101,11 @@ Split        | Examples
 'train'      | 818,687
 'validation' | 300
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-bridge-3.0.0.png" alt="Visualization" width="500px">
+
 ## lsun/church_outdoor
 
 *   **Config description**: Images of category church_outdoor
@@ -102,6 +117,11 @@ Split        | Examples
 :----------- | -------:
 'train'      | 126,227
 'validation' | 300
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-church_outdoor-3.0.0.png" alt="Visualization" width="500px">
 
 ## lsun/conference_room
 
@@ -115,6 +135,11 @@ Split        | Examples
 'train'      | 229,069
 'validation' | 300
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-conference_room-3.0.0.png" alt="Visualization" width="500px">
+
 ## lsun/dining_room
 
 *   **Config description**: Images of category dining_room
@@ -126,6 +151,11 @@ Split        | Examples
 :----------- | -------:
 'train'      | 657,571
 'validation' | 300
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-dining_room-3.0.0.png" alt="Visualization" width="500px">
 
 ## lsun/kitchen
 
@@ -139,6 +169,11 @@ Split        | Examples
 'train'      | 2,212,277
 'validation' | 300
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-kitchen-3.0.0.png" alt="Visualization" width="500px">
+
 ## lsun/living_room
 
 *   **Config description**: Images of category living_room
@@ -150,6 +185,11 @@ Split        | Examples
 :----------- | --------:
 'train'      | 1,315,802
 'validation' | 300
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-living_room-3.0.0.png" alt="Visualization" width="500px">
 
 ## lsun/restaurant
 
@@ -163,6 +203,11 @@ Split        | Examples
 'train'      | 626,331
 'validation' | 300
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-restaurant-3.0.0.png" alt="Visualization" width="500px">
+
 ## lsun/tower
 
 *   **Config description**: Images of category tower
@@ -174,3 +219,8 @@ Split        | Examples
 :----------- | -------:
 'train'      | 708,264
 'validation' | 300
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/lsun-tower-3.0.0.png" alt="Visualization" width="500px">

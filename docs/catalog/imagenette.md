@@ -71,6 +71,11 @@ Split        | Examples
 'train'      | 9,469
 'validation' | 3,925
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-v2-0.1.0.png" alt="Visualization" width="500px">
+
 ## imagenette/320px-v2
 
 *   **Config description**: 320px variant.
@@ -86,6 +91,10 @@ Split        | Examples
 :----------- | -------:
 'train'      | 9,469
 'validation' | 3,925
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## imagenette/160px-v2
 
@@ -103,6 +112,10 @@ Split        | Examples
 'train'      | 9,469
 'validation' | 3,925
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## imagenette/full-size
 
 *   **Config description**: full-size variant.
@@ -118,6 +131,11 @@ Split        | Examples
 :----------- | -------:
 'train'      | 12,894
 'validation' | 500
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenette/320px
 
@@ -135,6 +153,11 @@ Split        | Examples
 'train'      | 12,894
 'validation' | 500
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-320px-0.1.0.png" alt="Visualization" width="500px">
+
 ## imagenette/160px
 
 *   **Config description**: 160px variant.
@@ -150,3 +173,7 @@ Split        | Examples
 :----------- | -------:
 'train'      | 12,894
 'validation' | 500
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

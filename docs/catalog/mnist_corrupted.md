@@ -61,62 +61,134 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: identity
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## mnist_corrupted/shot_noise
 
 *   **Config description**: Corruption method: shot_noise
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-shot_noise-1.0.0.png" alt="Visualization" width="500px">
 
 ## mnist_corrupted/impulse_noise
 
 *   **Config description**: Corruption method: impulse_noise
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-impulse_noise-1.0.0.png" alt="Visualization" width="500px">
+
 ## mnist_corrupted/glass_blur
 
 *   **Config description**: Corruption method: glass_blur
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-glass_blur-1.0.0.png" alt="Visualization" width="500px">
 
 ## mnist_corrupted/motion_blur
 
 *   **Config description**: Corruption method: motion_blur
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## mnist_corrupted/shear
 
 *   **Config description**: Corruption method: shear
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## mnist_corrupted/scale
 
 *   **Config description**: Corruption method: scale
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-scale-1.0.0.png" alt="Visualization" width="500px">
+
 ## mnist_corrupted/rotate
 
 *   **Config description**: Corruption method: rotate
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-rotate-1.0.0.png" alt="Visualization" width="500px">
 
 ## mnist_corrupted/brightness
 
 *   **Config description**: Corruption method: brightness
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## mnist_corrupted/translate
 
 *   **Config description**: Corruption method: translate
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## mnist_corrupted/stripe
 
 *   **Config description**: Corruption method: stripe
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## mnist_corrupted/fog
 
 *   **Config description**: Corruption method: fog
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## mnist_corrupted/spatter
 
 *   **Config description**: Corruption method: spatter
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-spatter-1.0.0.png" alt="Visualization" width="500px">
+
 ## mnist_corrupted/dotted_line
 
 *   **Config description**: Corruption method: dotted_line
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-dotted_line-1.0.0.png" alt="Visualization" width="500px">
 
 ## mnist_corrupted/zigzag
 
 *   **Config description**: Corruption method: zigzag
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-zigzag-1.0.0.png" alt="Visualization" width="500px">
+
 ## mnist_corrupted/canny_edges
 
 *   **Config description**: Corruption method: canny_edges
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

@@ -28,7 +28,7 @@ and collected by the Makerere AI research lab.
 *   **Dataset size**: `171.63 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 *   **Splits**:
 
 Split        | Examples
@@ -59,3 +59,8 @@ FeaturesDict({
     url="https://github.com/AI-Lab-Makerere/ibean/"
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/beans-0.1.0.png" alt="Visualization" width="500px">

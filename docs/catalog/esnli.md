@@ -74,4 +74,8 @@ url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-n
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## esnli/plain_text (default config)

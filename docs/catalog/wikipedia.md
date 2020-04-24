@@ -44,6 +44,10 @@ FeaturesDict({
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## wikipedia/20200301.aa (default config)
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20200301 dump.

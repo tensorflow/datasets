@@ -69,3 +69,8 @@ FeaturesDict({
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/aflw2k3d-1.0.0.png" alt="Visualization" width="500px">

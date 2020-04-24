@@ -74,13 +74,28 @@ FeaturesDict({
 
 *   **Config description**: Images at their original resolution and quality.
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/diabetic_retinopathy_detection-original-3.0.0.png" alt="Visualization" width="500px">
+
 ## diabetic_retinopathy_detection/1M
 
 *   **Config description**: Images have roughly 1,000,000 pixels, at 72 quality.
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/diabetic_retinopathy_detection-1M-3.0.0.png" alt="Visualization" width="500px">
+
 ## diabetic_retinopathy_detection/250K
 
 *   **Config description**: Images have roughly 250,000 pixels, at 72 quality.
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/diabetic_retinopathy_detection-250K-3.0.0.png" alt="Visualization" width="500px">
 
 ## diabetic_retinopathy_detection/btgraham-300
 
@@ -88,3 +103,8 @@ FeaturesDict({
     Kaggle competition did in 2015: first they are resized so that the radius of
     an eyeball is 300 pixels, then they are cropped to 90% of the radius, and
     finally they are encoded with 72 JPEG quality.
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/diabetic_retinopathy_detection-btgraham-300-3.0.0.png" alt="Visualization" width="500px">

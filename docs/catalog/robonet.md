@@ -48,6 +48,10 @@ from 113 unique camera viewpoints.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## robonet/robonet_sample_64 (default config)
 
 *   **Config description**: 64x64 RoboNet Sample.
@@ -103,13 +107,10 @@ FeaturesDict({
 *   **Config description**: 64x64 RoboNet.
 
 *   **Download size**: `36.20 GiB`
-
 *   **Dataset size**: `41.36 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples

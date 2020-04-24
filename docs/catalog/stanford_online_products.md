@@ -55,3 +55,8 @@ FeaturesDict({
  year      = {2016}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/stanford_online_products-1.0.0.png" alt="Visualization" width="500px">

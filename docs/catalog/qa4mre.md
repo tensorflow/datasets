@@ -78,6 +78,10 @@ isbn="978-3-642-40802-1"
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## qa4mre/2011.main.DE (default config)
 
 *   **Config description**: QA4MRE dataset was created for the CLEF

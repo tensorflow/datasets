@@ -65,3 +65,8 @@ FeaturesDict({
   url={https://openreview.net/forum?id=Bygh9j09KX},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/geirhos_conflict_stimuli-1.0.0.png" alt="Visualization" width="500px">

@@ -58,3 +58,8 @@ title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
 year = {2011}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/svhn_cropped-3.0.0.png" alt="Visualization" width="500px">

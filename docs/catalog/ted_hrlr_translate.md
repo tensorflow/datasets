@@ -38,6 +38,10 @@ where one is high resource and the other is low resource.
   }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## ted_hrlr_translate/az_to_en (default config)
 
 *   **Config description**: Translation dataset from az to en in plain text.

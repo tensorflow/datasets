@@ -129,12 +129,27 @@ FeaturesDict({
 
 *   **Config description**: Images at their original resolution and quality.
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/open_images_v4-original-2.0.0.png" alt="Visualization" width="500px">
+
 ## open_images_v4/300k
 
 *   **Config description**: Images have roughly 300,000 pixels, at 72 JPEG
     quality.
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/open_images_v4-300k-2.0.0.png" alt="Visualization" width="500px">
+
 ## open_images_v4/200k
 
 *   **Config description**: Images have roughly 200,000 pixels, at 72 JPEG
     quality.
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/open_images_v4-200k-2.0.0.png" alt="Visualization" width="500px">

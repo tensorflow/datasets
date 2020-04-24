@@ -100,6 +100,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/coco-2014-1.1.0.png" alt="Visualization" width="500px">
+
 ## coco/2017
 
 *   **Description**:
@@ -149,6 +154,11 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/coco-2017-1.1.0.png" alt="Visualization" width="500px">
 
 ## coco/2017_panoptic
 
@@ -200,3 +210,7 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

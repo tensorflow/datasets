@@ -59,3 +59,8 @@ url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-tha
 edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cats_vs_dogs-4.0.0.png" alt="Visualization" width="500px">
