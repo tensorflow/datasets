@@ -24,8 +24,6 @@ import importlib
 import types
 import sys
 
-# sys.path.append("fake_pata")
-
 from tensorflow_datasets.core.utils import py_utils as utils
 
 _ERR_MSG = ("Failed importing {name}. This likely means that the dataset "
@@ -67,22 +65,10 @@ def _try_import(module_name):
 
 
 class Fakemodule(types.ModuleType):
-
-  def __getattr__(self, _):
+  def __getattribute__(self, _):
     err_msg = _ERR_MSG.format(name=self.module_name)
     raise ImportError(err_msg)
 
-# class MyFinder:
-#   def find_module(self, name, _):
-#     # mod = None
-#     # try:
-#       # mod = sys.modules[name] 
-#     # except:
-#       # mod = Fakemodule(name)
-#       # sys.modules[name] = Fakemodule(name)
-#       # mod = _try_import(name)
-#     # return mod
-#     return Fakemodule(name)
 
 class LazyImporter(object):
   """Lazy importer for heavy dependencies.
@@ -92,32 +78,27 @@ class LazyImporter(object):
   lazily imported here.
   """
 
-  PATH_TRIGGER = 'NoisyImportFinder_PATH_TRIGGER'
+  PATH_TRIGGER = 'FAKE_PATH_TRIGGER'
 
   def __init__(self, path_entry=None):
-    # if path_entry != self.PATH_TRIGGER:
-    #   raise ImportError
     return
 
   def find_module(self, fullname, path=None):
-    # input("hellp")
     if fullname in _ALLOWED_LAZY_DEPS:
       print("Found")
-      # return importlib.find_loaderFakemodule(fullname) TODO
+      # return importlib.find_loader(something) # TODO: Implement this
+    else:
+      err_msg = _ERR_MSG.format(name=fullname)
+      raise ImportError(err_msg)
     return None
 
   def __enter__(self):
-    print("Enter")
-    # sys.path.append(".")
-    # print(sys.path_hooks)
     return self
 
   def __exit__(self, type_, value, traceback):
     if isinstance(value, ImportError):
-      # sys.modules[value.name] = Fakemodule(value.name)
-      print(value.name + " nahi mila")
-      return True
-    print("Mil gaya")
+      err_msg = _ERR_MSG.format(name=value.name)
+      raise ImportError(err_msg)
     return
 
   @utils.classproperty
@@ -229,5 +210,5 @@ class LazyImporter(object):
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
 sys.path_hooks.append(LazyImporter)
-sys.path.append("NoisyImportFinder_PATH_TRIGGER")
+sys.path.append("FAKE_PATH_TRIGGER")
 
