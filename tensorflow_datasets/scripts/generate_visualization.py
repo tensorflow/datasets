@@ -143,7 +143,7 @@ def generate_visualization(
   generate_fn = functools.partial(
       _generate_single_visualization, dst_dir=dst_dir)
   logging.info(f'Generate figures for {len(full_names)} builders')
-  with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
+  with futures.ProcessPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
     tpool.map(generate_fn, full_names)
 
 
