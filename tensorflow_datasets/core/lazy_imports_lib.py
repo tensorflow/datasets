@@ -20,9 +20,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import contextlib
 import importlib
+import types
 import sys
+
+# sys.path.append("fake_pata")
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
@@ -30,6 +32,29 @@ _ERR_MSG = ("Failed importing {name}. This likely means that the dataset "
             "requires additional dependencies that have to be "
             "manually installed (usually with `pip install {name}`). See "
             "setup.py extras_require.")
+
+_ALLOWED_LAZY_DEPS = [
+    "apache_beam",
+    "crepe",
+    "cv2",
+    "h5py",
+    "langdetect",
+    "librosa",
+    "matplotlib",
+    "mwparserfromhell",
+    "nltk",
+    "pandas",
+    "PIL_Image",
+    "pretty_midi",
+    "pydub",
+    "scipy",
+    "skimage",
+    "tensorflow_io",
+    "tldextract",
+    "os",
+    # "test_foo",
+]
+
 
 def _try_import(module_name):
   """Try importing a module, with an informative error message on failure."""
@@ -41,15 +66,23 @@ def _try_import(module_name):
     utils.reraise(suffix=err_msg)
 
 
-class Fakemodule(object):
-
-  def __init__(self, module_name):
-    self.module_name = module_name
+class Fakemodule(types.ModuleType):
 
   def __getattr__(self, _):
     err_msg = _ERR_MSG.format(name=self.module_name)
     raise ImportError(err_msg)
 
+# class MyFinder:
+#   def find_module(self, name, _):
+#     # mod = None
+#     # try:
+#       # mod = sys.modules[name] 
+#     # except:
+#       # mod = Fakemodule(name)
+#       # sys.modules[name] = Fakemodule(name)
+#       # mod = _try_import(name)
+#     # return mod
+#     return Fakemodule(name)
 
 class LazyImporter(object):
   """Lazy importer for heavy dependencies.
@@ -58,14 +91,34 @@ class LazyImporter(object):
   the default installation to remain lean, those heavy dependencies are
   lazily imported here.
   """
-  @staticmethod
-  @contextlib.contextmanager
-  def lazy_imports():
-    try:
-      yield
-    except ImportError as err:
-      sys.modules[err.name] = Fakemodule(err.name)
-      # err.name = _try_import(err.name)
+
+  PATH_TRIGGER = 'NoisyImportFinder_PATH_TRIGGER'
+
+  def __init__(self, path_entry=None):
+    # if path_entry != self.PATH_TRIGGER:
+    #   raise ImportError
+    return
+
+  def find_module(self, fullname, path=None):
+    # input("hellp")
+    if fullname in _ALLOWED_LAZY_DEPS:
+      print("Found")
+      # return importlib.find_loaderFakemodule(fullname) TODO
+    return None
+
+  def __enter__(self):
+    print("Enter")
+    # sys.path.append(".")
+    # print(sys.path_hooks)
+    return self
+
+  def __exit__(self, type_, value, traceback):
+    if isinstance(value, ImportError):
+      # sys.modules[value.name] = Fakemodule(value.name)
+      print(value.name + " nahi mila")
+      return True
+    print("Mil gaya")
+    return
 
   @utils.classproperty
   @classmethod
@@ -175,3 +228,6 @@ class LazyImporter(object):
 
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
+sys.path_hooks.append(LazyImporter)
+sys.path.append("NoisyImportFinder_PATH_TRIGGER")
+
