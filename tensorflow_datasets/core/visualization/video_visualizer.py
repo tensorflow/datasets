@@ -16,15 +16,12 @@
 # Lint as: python3
 """Video visualizer."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from absl import logging
 from IPython import display
 from PIL import Image
 import numpy as np
-
+import os
+import ipywidgets as widgets
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -33,9 +30,48 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer
 
+# Temp dir to store GIF's.
+_TEMP_DIR = 'temp_images'
+
+def get_image(g_name):
+    """Returns the image from a path.
+    
+    Args:
+      g_name: name of gif file stored in temprory directory.
+    
+    Return:
+      List of images read as binary
+    """
+    file = os.path.join(_TEMP_DIR,g_name)
+    image = open(file,'rb').read()
+    return image
+
+def display_gif_grid(width, height, rows, cols):
+    """Display GIF's store in temp dir in grids.
+    
+    Args:
+      width: width of frame for display GIF.Default to 150.
+      height: height of frame for display GIF.Default to 150.
+      rows: Number of rows of grid to display GIF of video dataset. Default is 3.
+      cols: Number of cols of grid to display GIF of video dataset. Default is 3. 
+    """
+    grid_gap = max(height,width)*2/10
+    files  = os.listdir(_TEMP_DIR)
+    images = [get_image(x) for x in files]
+    children = [widgets.Image(value = img, height=height, width=width) for img in images]
+    # layout for grid
+    box_layout = widgets.Layout(     
+        grid_template_columns=("200px ")*cols,
+        grid_template_rows=("200px ")*rows,
+        grid_gap= str(grid_gap)+'px'
+    )
+    # Create the widget to display GIF's
+    tab = widgets.GridBox(children = children, layout=box_layout)
+    display.display(tab)
+
 
 def _display_gif(gif_fn, ds:tf.data.Dataset,
-                 num_examples:int, width:int,
+                 rows:int, cols:int, width:int,
                  height:int) -> None:
   """Display Video as GIF.
 
@@ -48,20 +84,19 @@ def _display_gif(gif_fn, ds:tf.data.Dataset,
     width: width of frame for display GIF.
     height: height of frame for display GIF.
   """
-  examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+  examples = list(dataset_utils.as_numpy(ds.take(rows*cols)))
   for i, ex in enumerate(examples):
-    gif_fn(ex)
-    with open('sample.gif','rb') as f:
-      display.display(display.Image(data=f.read(),format="png",
-                                    width=width,height=height))
-    tf.io.gfile.remove("sample.gif")
+    gif_fn(ex, i)
+  display_gif_grid(width, height, rows, cols)
+  tf.io.gfile.rmtree("temp_images")
 
 
-def _write_video_gif(video:np.ndarray, fps:int) -> None:
+def _write_video_gif(video:np.ndarray, fps:int, rows:int, cols:int, index:int) -> None:
   """Process the Video and write it as GIF.
   Args:
     video: numpy array of video as image sequence.
     fps: frame per second for display GIF. Default to 10.
+    index: index of image.
   """
   if len(video.shape) != 4:
     raise ValueError(
@@ -69,11 +104,14 @@ def _write_video_gif(video:np.ndarray, fps:int) -> None:
   _,_,_,c = video.shape
   if(c==1):
     video = video.reshape(video.shape[:3])
+  # make temp dir to save all GIF's
+  if not tf.io.gfile.exists("temp_images"):
+      tf.io.gfile.mkdir("temp_images")
 
   # Write GIF using PIL
   video_seq = [Image.fromarray(v_frame).quantize() for v_frame in video]
-  video_seq[0].save("sample.gif", save_all=True, append_images=video_seq[1:]\
-                    ,loop=0,duration=int((1000)/fps))
+  video_seq[0].save("temp_images/sample_"+str(index)+".gif", save_all=True,\
+             append_images=video_seq[1:], loop=0, duration=int((1000)/fps))
 
 
 class VideoGridVisualizer(visualizer.Visualizer):
@@ -95,7 +133,8 @@ class VideoGridVisualizer(visualizer.Visualizer):
       self,
       ds_info:tfds.core.DatasetInfo,
       ds:tf.data.Dataset,
-      num_examples:int=5,
+      rows:int=3,
+      cols:int=3,
       video_key:str=None,
       width:int=150,
       height:int=150,
@@ -108,7 +147,8 @@ class VideoGridVisualizer(visualizer.Visualizer):
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
         should not be batched. Examples will be consumed in order until
         (rows * cols) are read or the dataset is consumed.
-      num_examples: Number of examples to display from video dataset. Default is 5
+      rows: Number of rows of grid to display GIF of video dataset. Default is 3.
+      cols: Number of cols of grid to display GIF of video dataset. Default is 3.
       video_key: `string`, name of the feature that contains the video. If not
          set, the system will try to auto-detect it.
       width: width of frame for display GIF.Default to 150.
@@ -120,7 +160,7 @@ class VideoGridVisualizer(visualizer.Visualizer):
       video_keys = visualizer.extract_keys(ds_info.features, features_lib.Video)
       video_key = video_keys[0]
 
-    def make_cell_fn(ex:np.ndarray) -> None:
+    def make_cell_fn(ex:np.ndarray, index:int) -> None:
       if not isinstance(ex, dict):
         raise ValueError(
             '{} requires examples as `dict`, with the same '
@@ -128,6 +168,6 @@ class VideoGridVisualizer(visualizer.Visualizer):
             'with `as_supervised=True`. Received: {}'.format(
                 type(self).__name__, type(ex)))
 
-      _write_video_gif(ex[video_key], fps)
+      _write_video_gif(ex[video_key], fps, rows, cols, index)
     # Display GIF
-    _display_gif(make_cell_fn, ds, num_examples, width, height)
+    _display_gif(make_cell_fn, ds, rows, cols, width, height)
