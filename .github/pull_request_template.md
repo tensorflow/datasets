@@ -16,5 +16,7 @@
 * [ ] Properly cite in `BibTeX` format
 * [ ] Add passing test(s)
 * [ ] Add test data
+* [ ] Use `lazy_imports` to access external dependencies (if applicable)
+* [ ] Update `setup.py`, `LazyImporter`, and `LazyImportsTest` with dependencies (if applicable)
 * [ ] Add data generation script (if applicable)
 * [ ] Lint code
