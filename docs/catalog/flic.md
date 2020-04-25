@@ -72,9 +72,19 @@ FeaturesDict({
 
 *   **Download size**: `286.35 MiB`
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/flic-small-2.0.0.png" alt="Visualization" width="500px">
+
 ## flic/full
 
 *   **Config description**: Uses 20928 examples, a superset of FLIC consisting
     of more difficult examples.
 
 *   **Download size**: `1.10 GiB`
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/flic-full-2.0.0.png" alt="Visualization" width="500px">

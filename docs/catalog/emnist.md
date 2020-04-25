@@ -67,6 +67,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/emnist-byclass-3.0.0.png" alt="Visualization" width="500px">
+
 ## emnist/bymerge
 
 *   **Config description**: EMNIST ByMerge
@@ -86,6 +91,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/emnist-bymerge-3.0.0.png" alt="Visualization" width="500px">
 
 ## emnist/balanced
 
@@ -107,6 +117,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/emnist-balanced-3.0.0.png" alt="Visualization" width="500px">
+
 ## emnist/letters
 
 *   **Config description**: EMNIST Letters
@@ -126,6 +141,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/emnist-letters-3.0.0.png" alt="Visualization" width="500px">
 
 ## emnist/digits
 
@@ -147,6 +167,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/emnist-digits-3.0.0.png" alt="Visualization" width="500px">
+
 ## emnist/mnist
 
 *   **Config description**: EMNIST MNIST
@@ -166,3 +191,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/emnist-mnist-3.0.0.png" alt="Visualization" width="500px">

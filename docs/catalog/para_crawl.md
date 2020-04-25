@@ -34,6 +34,10 @@ Web-Scale Parallel Corpora for Official European Languages.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## para_crawl/enbg_plain_text (default config)
 
 *   **Config description**: Translation dataset from English to bg, uses encoder

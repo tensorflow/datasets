@@ -80,6 +80,11 @@ Split    | Examples
 'trainA' | 995
 'trainB' | 1,019
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-apple2orange-2.0.0.png" alt="Visualization" width="500px">
+
 ## cycle_gan/summer2winter_yosemite
 
 *   **Download size**: `126.50 MiB`
@@ -91,6 +96,11 @@ Split    | Examples
 'testB'  | 238
 'trainA' | 1,231
 'trainB' | 962
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-summer2winter_yosemite-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/horse2zebra
 
@@ -104,6 +114,11 @@ Split    | Examples
 'trainA' | 1,067
 'trainB' | 1,334
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-horse2zebra-2.0.0.png" alt="Visualization" width="500px">
+
 ## cycle_gan/monet2photo
 
 *   **Download size**: `291.09 MiB`
@@ -115,6 +130,11 @@ Split    | Examples
 'testB'  | 751
 'trainA' | 1,072
 'trainB' | 6,287
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-monet2photo-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/cezanne2photo
 
@@ -128,6 +148,11 @@ Split    | Examples
 'trainA' | 525
 'trainB' | 6,287
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-cezanne2photo-2.0.0.png" alt="Visualization" width="500px">
+
 ## cycle_gan/ukiyoe2photo
 
 *   **Download size**: `279.38 MiB`
@@ -139,6 +164,11 @@ Split    | Examples
 'testB'  | 751
 'trainA' | 562
 'trainB' | 6,287
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-ukiyoe2photo-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/vangogh2photo
 
@@ -152,6 +182,11 @@ Split    | Examples
 'trainA' | 400
 'trainB' | 6,287
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-vangogh2photo-2.0.0.png" alt="Visualization" width="500px">
+
 ## cycle_gan/maps
 
 *   **Download size**: `1.38 GiB`
@@ -163,6 +198,11 @@ Split    | Examples
 'testB'  | 1,098
 'trainA' | 1,096
 'trainB' | 1,096
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-maps-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/cityscapes
 
@@ -176,6 +216,11 @@ Split    | Examples
 'trainA' | 2,975
 'trainB' | 2,975
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-cityscapes-2.0.0.png" alt="Visualization" width="500px">
+
 ## cycle_gan/facades
 
 *   **Download size**: `33.51 MiB`
@@ -188,6 +233,11 @@ Split    | Examples
 'trainA' | 400
 'trainB' | 400
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-facades-2.0.0.png" alt="Visualization" width="500px">
+
 ## cycle_gan/iphone2dslr_flower
 
 *   **Download size**: `324.22 MiB`
@@ -199,3 +249,8 @@ Split    | Examples
 'testB'  | 480
 'trainA' | 1,812
 'trainB' | 3,325
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-iphone2dslr_flower-2.0.0.png" alt="Visualization" width="500px">

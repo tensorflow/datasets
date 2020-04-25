@@ -88,6 +88,11 @@ Split        | Examples
     howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/voc-2007-4.0.0.png" alt="Visualization" width="500px">
+
 ## voc/2012
 
 *   **Description**:
@@ -134,3 +139,8 @@ Split        | Examples
     title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults",
     howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/voc-2012-4.0.0.png" alt="Visualization" width="500px">

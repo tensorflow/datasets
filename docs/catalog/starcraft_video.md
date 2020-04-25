@@ -60,6 +60,10 @@ Split        | Examples
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## starcraft_video/brawl_64 (default config)
 
 *   **Config description**: Brawl map with 64x64 resolution.

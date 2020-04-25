@@ -63,3 +63,7 @@ FeaturesDict({
   url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

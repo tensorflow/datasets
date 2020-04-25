@@ -62,3 +62,8 @@ FeaturesDict({
   year={2019}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/plantae_k-0.1.0.png" alt="Visualization" width="500px">

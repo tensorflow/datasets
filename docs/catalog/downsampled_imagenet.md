@@ -74,9 +74,19 @@ FeaturesDict({
 
 *   **Download size**: `3.98 GiB`
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/downsampled_imagenet-32x32-2.0.0.png" alt="Visualization" width="500px">
+
 ## downsampled_imagenet/64x64
 
 *   **Config description**: A dataset consisting of Train and Validation images
     of 64x64 resolution.
 
 *   **Download size**: `11.73 GiB`
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/downsampled_imagenet-64x64-2.0.0.png" alt="Visualization" width="500px">

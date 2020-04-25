@@ -49,6 +49,10 @@ year = {2019}
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## div2k/bicubic_x2 (default config)
 
 *   **Config description**: Uses bicubic_x2 data.

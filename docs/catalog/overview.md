@@ -161,6 +161,7 @@ for ex in tfds.as_numpy(ds):
 *   [`opinosis`](opinosis.md)
 *   [`reddit`](reddit.md)
 *   [`reddit_tifu`](reddit_tifu.md)
+*   [`samsum`](samsum.md)
 *   [`scientific_papers`](scientific_papers.md)
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)

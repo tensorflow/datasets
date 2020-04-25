@@ -64,6 +64,10 @@ builder = tfds.builder("wmt_translate", config=config)
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## wmt14_translate/cs-en (default config)
 
 *   **Config description**: WMT 2014 cs-en translation task dataset.

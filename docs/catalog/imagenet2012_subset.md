@@ -87,6 +87,11 @@ Split        | Examples
 'train'      | 12,811
 'validation' | 50,000
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_subset-1pct-5.0.0.png" alt="Visualization" width="500px">
+
 ## imagenet2012_subset/10pct
 
 *   **Config description**: 10pct of total ImageNet training set.
@@ -99,3 +104,7 @@ Split        | Examples
 :----------- | -------:
 'train'      | 128,116
 'validation' | 50,000
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

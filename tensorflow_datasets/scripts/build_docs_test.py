@@ -35,6 +35,9 @@ class BuildDocsTest(absltest.TestCase):
       shutil.rmtree(self.workdir)
     os.makedirs(self.workdir)
 
+    # Set a dummy dir for the visualizer.
+    document_datasets.VisualizationDocUtil.BASE_PATH = self.workdir
+
   def test_api_gen(self):
     build_docs.build_api_docs(
         output_dir=self.workdir,

@@ -104,6 +104,11 @@ Split   | Examples
 'test'  | 1,000
 'train' | 5,000
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cmaterdb-bangla-1.0.0.png" alt="Visualization" width="500px">
+
 ## cmaterdb/devanagari
 
 *   **Config description**: CMATERdb Devangari Numerals
@@ -116,6 +121,11 @@ Split   | Examples
 'test'  | 500
 'train' | 2,500
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cmaterdb-devanagari-1.0.0.png" alt="Visualization" width="500px">
+
 ## cmaterdb/telugu
 
 *   **Config description**: CMATERdb Telugu Numerals
@@ -127,3 +137,8 @@ Split   | Examples
 :------ | -------:
 'test'  | 500
 'train' | 2,500
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cmaterdb-telugu-1.0.0.png" alt="Visualization" width="500px">

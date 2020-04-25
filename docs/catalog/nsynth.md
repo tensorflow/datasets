@@ -53,6 +53,10 @@ heuristic algorithms: Source, Family, and Qualities.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## nsynth/full (default config)
 
 *   **Config description**: Full NSynth Dataset is split into train, valid, and

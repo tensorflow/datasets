@@ -55,6 +55,10 @@ FeaturesDict({
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## big_patent/all (default config)
 
 *   **Config description**: Patents under all categories.

@@ -72,6 +72,10 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## visual_domain_decathlon/cifar100
 
 *   **Config description**: Data based on "CIFAR-100", with images resized
@@ -96,6 +100,11 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-cifar100-1.1.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/daimlerpedcls
 
@@ -122,6 +131,10 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## visual_domain_decathlon/dtd
 
 *   **Config description**: Data based on "Describable Textures", with images
@@ -146,6 +159,10 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## visual_domain_decathlon/gtsrb
 
@@ -172,6 +189,10 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## visual_domain_decathlon/imagenet12
 
 *   **Config description**: Data based on "Imagenet", with images resized
@@ -196,6 +217,11 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-imagenet12-1.1.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/omniglot
 
@@ -222,6 +248,10 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## visual_domain_decathlon/svhn
 
 *   **Config description**: Data based on "Street View House Numbers", with
@@ -246,6 +276,11 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-svhn-1.1.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/ucf101
 
@@ -272,6 +307,10 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## visual_domain_decathlon/vgg-flowers
 
 *   **Config description**: Data based on "VGG-Flowers", with images resized
@@ -296,3 +335,8 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-vgg-flowers-1.1.0.png" alt="Visualization" width="500px">

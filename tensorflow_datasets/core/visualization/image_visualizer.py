@@ -44,7 +44,7 @@ def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
       the labels to get overlapped.
 
   Returns:
-    fig: Figure to display.
+    fig: The `matplotlib.Figure` object.
   """
   plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
@@ -111,6 +111,9 @@ class ImageGridVisualizer(visualizer.Visualizer):
         the labels to get overlapped.
       image_key: `string`, name of the feature that contains the image. If not
          set, the system will try to auto-detect it.
+
+    Returns:
+      fig: The pyplot figure.
     """
     # Extract the image key
     if not image_key:
@@ -146,5 +149,6 @@ class ImageGridVisualizer(visualizer.Visualizer):
         label_str = ds_info.features[label_key].int2str(label)
         plt.xlabel('{} ({})'.format(label_str, label))
 
-    # Print the grid
+    # Returns the grid.
     fig = _make_grid(make_cell_fn, ds, rows, cols, plot_scale)
+    return fig

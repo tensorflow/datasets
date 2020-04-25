@@ -123,6 +123,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/curated_breast_imaging_ddsm-patches-2.0.0.png" alt="Visualization" width="500px">
+
 ## curated_breast_imaging_ddsm/original-calc
 
 *   **Config description**: Original images of the calcification cases
@@ -158,6 +163,11 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/curated_breast_imaging_ddsm-original-calc-2.0.0.png" alt="Visualization" width="500px">
+
 ## curated_breast_imaging_ddsm/original-mass
 
 *   **Config description**: Original images of the mass cases compressed in
@@ -192,3 +202,8 @@ FeaturesDict({
     'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/curated_breast_imaging_ddsm-original-mass-2.0.0.png" alt="Visualization" width="500px">

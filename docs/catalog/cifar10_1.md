@@ -81,6 +81,11 @@ Split  | Examples
 :----- | -------:
 'test' | 2,021
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cifar10_1-v4-1.0.0.png" alt="Visualization" width="500px">
+
 ## cifar10_1/v6
 
 *   **Config description**: It is derived from a slightly improved keyword
@@ -95,3 +100,8 @@ Split  | Examples
 Split  | Examples
 :----- | -------:
 'test' | 2,000
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/cifar10_1-v6-1.0.0.png" alt="Visualization" width="500px">
