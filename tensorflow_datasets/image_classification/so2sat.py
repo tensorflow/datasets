@@ -50,8 +50,8 @@ _LABELS = [
 
 _DATA_OPTIONS = ['rgb', 'all']
 
-# Maximal value observed for the optical channels of Sentinel-2 in this dataset.
-_OPTICAL_MAX_VALUE = 2.8
+# Calibration for the optical RGB channels of Sentinel-2 in this dataset.
+_OPTICAL_CALIBRATION_FACTOR = 3.5 * 255.0
 
 
 class So2satConfig(tfds.core.BuilderConfig):
@@ -69,7 +69,11 @@ class So2satConfig(tfds.core.BuilderConfig):
 
     v2 = tfds.core.Version(
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-    super(So2satConfig, self).__init__(version=v2, **kwargs)
+    v2_1 = tfds.core.Version(
+        '2.1.0', 'Using updated optical channels calibration factor.')
+    super(So2satConfig, self).__init__(version=v2_1,
+                                       supported_versions=[v2],
+                                       **kwargs)
     self.selection = selection
 
 
@@ -162,5 +166,5 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
 
 
 def _create_rgb(sen2_bands):
-  return np.clip(sen2_bands[..., [2, 1, 0]] / _OPTICAL_MAX_VALUE * 255.0, 0,
+  return np.clip(sen2_bands[..., [2, 1, 0]] * _OPTICAL_CALIBRATION_FACTOR, 0,
                  255).astype(np.uint8)
