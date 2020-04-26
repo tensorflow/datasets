@@ -68,12 +68,17 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     pandas.__name__
     matplotlib.__name__
 
-  # def test_lazy_import_context_manager(self):  # TODO
-  #   with tfds.core.lazy_imports():
-  #     import fake_module
+  def test_lazy_import_context_manager(self):  # TODO
+    with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
+      with tfds.core.lazy_imports():
+        import fake_module
 
-  #   with self.assertRaisesWithPredicateMatch(ImportError, "local"):
-  #     fake_module.some_function()
+    with tfds.core.lazy_imports():
+      import langdetect
+    
+    # TODO
+    # with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
+    #   langdetect.__name__
 
 
 if __name__ == "__main__":

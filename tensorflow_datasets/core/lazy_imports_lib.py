@@ -21,8 +21,9 @@ from __future__ import division
 from __future__ import print_function
 
 import importlib
-import types
 import sys
+import types
+import imp
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
@@ -31,6 +32,8 @@ _ERR_MSG = ("Failed importing {name}. This likely means that the dataset "
             "manually installed (usually with `pip install {name}`). See "
             "setup.py extras_require.")
 
+# `lazy_imports` currently only allow the following external dependencies to
+# be used during dataset generation. 
 _ALLOWED_LAZY_DEPS = [
     "apache_beam",
     "crepe",
@@ -64,7 +67,8 @@ def _try_import(module_name):
     utils.reraise(suffix=err_msg)
 
 
-class Fakemodule(types.ModuleType):
+class FakeModule(types.ModuleType):
+  """Create a fake module and raise ImportError whenever a attribute is accessed""" 
   def __getattribute__(self, _):
     err_msg = _ERR_MSG.format(name=self.module_name)
     raise ImportError(err_msg)
@@ -84,20 +88,27 @@ class LazyImporter(object):
     return
 
   def find_module(self, fullname, path=None):
+    # Accept if fullname is present in _ALLOWED_LAZY_DEPS 
     if fullname in _ALLOWED_LAZY_DEPS:
-      print("Found")
-      # return importlib.find_loader(something) # TODO: Implement this
-    else:
-      err_msg = _ERR_MSG.format(name=fullname)
-      raise ImportError(err_msg)
+      return self
     return None
+
+  def load_module(self,fullname):
+    if fullname not in sys.modules:
+      mod = imp.new_module(fullname) # TODO: Give FakeModule(fullname) instead
+      mod.__loader__ = self
+      sys.modules[fullname] = mod
+    return sys.modules[fullname]
 
   def __enter__(self):
     return self
 
   def __exit__(self, type_, value, traceback):
     if isinstance(value, ImportError):
-      err_msg = _ERR_MSG.format(name=value.name)
+      err_msg = ("Unknown import {name}. Currently lazy_imports does not "
+                 "support {name} module. If you believe this is correct, "
+                 "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
+                 "`tfds/core/lazy_imports_lib.py`".format(name=value.name))
       raise ImportError(err_msg)
     return
 
