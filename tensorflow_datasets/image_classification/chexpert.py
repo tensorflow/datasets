@@ -23,6 +23,7 @@ from __future__ import print_function
 import collections
 import csv
 import os
+import enum
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -74,12 +75,31 @@ _LABELS = collections.OrderedDict({
     "": "unmentioned",
 })
 
+ALLOWED_IMAGE_TYPES = ["frontal", "lateral", "frontal_lateral"]
+
+class ChexpertConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for 'Chexpert'.
+
+    Args:
+      image_type (string): Can be one of ["frontal", "lateral", "frontal_lateral"] and is used
+        to determine what images to load.
+  """
+
+  def __init__(self,
+               image_type=False,
+               **kwargs):
+    version = tfds.core.Version(
+            "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    super(ChexpertConfig, self).__init__(version=version, 
+                                         **kwargs)
+
+    if image_type not in ALLOWED_IMAGE_TYPES:
+      ValueError("Invalid image type: %s" % image_type)
+
+    self.image_type = image_type
 
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
-
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You must register and agree to user agreement on the dataset page:
@@ -88,6 +108,24 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
   manual_dir. It should contain subdirectories: train/ and valid/ with images
   and also train.csv and valid.csv files.
   """
+
+  BUILDER_CONFIGS = [
+      ChexpertConfig(
+          name='full',
+          description='Full Chexpert dataset.',
+          image_type="frontal_lateral",
+      ),
+      ChexpertConfig(
+          name='frontal',
+          description='Frontal images only Chexpert dataset.',
+          image_type="frontal",
+      ),
+      ChexpertConfig(
+          name='lateral',
+          description='Lateral images only Chexpert dataset.',
+          image_type="lateral",
+      ),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -140,6 +178,10 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
       label_keys = reader.fieldnames[5:]
       data = []
       for row in reader:
+        # Skip unwanted image types
+        if row['Frontal/Lateral'].lower() not in self.builder_config.image_type:
+          continue
+
         # Get image based on indicated path in csv
         name = row["Path"]
         labels = [_LABELS[row[key]] for key in label_keys]
