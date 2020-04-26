@@ -14,26 +14,32 @@
 # limitations under the License.
 
 # Lint as: python3
+"""Utilities for beam wrapper."""
 
+import types
 
 _MSG = ("Failed importing {name}. Please install {name}."
                   " Using pip install {name}")
 
-
-class DoFn(object):
-   def __call__(self, *args, **kwargs):
-       return None
+class Empty(object):
+    """Empty class for beam API."""
+    def __call__(self, *args, **kwargs):
+        return None
   
-class Pipeline(object):
-  def __call__(self, *args, **kwargs):
-       return None
 
-
-class DummyBeam(object):
+class DummyBeam(types.ModuleType):
+    """Dummy class.
+    Raise:
+      ImportError, when calling beam API and apache_beam was not installed.
+    """
+    DoFn = Empty
+    Pipeline = Empty
 
     def __init__(self):
       self.module_name = "apache_beam"
-      
-    def __getattr__(self, _):
-      err_msg = _MSG.format(name=self.module_name)
-      raise ImportError(err_msg)
+
+    def __getattribute__(self,_):
+       if getattr(DummyBeam, _, None) is Empty:
+           _name= super().__getattribute__('module_name')
+           err_msg = _MSG.format(name=_name)
+           raise ImportError(err_msg)
