@@ -68,9 +68,13 @@ def _try_import(module_name):
 
 
 class FakeModule(types.ModuleType):
-  """Create a fake module and raise ImportError whenever a attribute is accessed""" 
-  def __getattribute__(self, _):
-    err_msg = _ERR_MSG.format(name=self.module_name)
+  """Create a fake module and raise ImportError whenever a attribute is accessed"""
+  def __init__(self, name):
+    self.__path__ = None
+    super(FakeModule, self).__init__(name)
+
+  def __getattr__(self, attr):
+    err_msg = _ERR_MSG.format(name=self.__name__)
     raise ImportError(err_msg)
 
 
@@ -95,8 +99,9 @@ class LazyImporter(object):
 
   def load_module(self,fullname):
     if fullname not in sys.modules:
-      mod = imp.new_module(fullname) # TODO: Give FakeModule(fullname) instead
+      mod = FakeModule(fullname)
       mod.__loader__ = self
+      mod.__path__ == []
       sys.modules[fullname] = mod
     return sys.modules[fullname]
 

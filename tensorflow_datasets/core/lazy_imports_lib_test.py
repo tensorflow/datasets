@@ -75,10 +75,9 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
     with tfds.core.lazy_imports():
       import langdetect
-    
-    # TODO
-    # with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-    #   langdetect.__name__
+
+    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
+      langdetect.some_function()
 
 
 if __name__ == "__main__":
