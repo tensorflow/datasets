@@ -23,7 +23,6 @@ from __future__ import print_function
 import collections
 import csv
 import os
-import enum
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -81,16 +80,16 @@ class ChexpertConfig(tfds.core.BuilderConfig):
   """BuilderConfig for 'Chexpert'.
 
     Args:
-      image_type (string): Can be one of ["frontal", "lateral", "frontal_lateral"] and is used
-        to determine what images to load.
+      image_type (string): Can be one of ["frontal", "lateral",
+        "frontal_lateral"] and is used to determine what images to load.
   """
 
   def __init__(self,
                image_type=False,
                **kwargs):
     version = tfds.core.Version(
-            "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-    super(ChexpertConfig, self).__init__(version=version, 
+        "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    super(ChexpertConfig, self).__init__(version=version,
                                          **kwargs)
 
     if image_type not in ALLOWED_IMAGE_TYPES:
