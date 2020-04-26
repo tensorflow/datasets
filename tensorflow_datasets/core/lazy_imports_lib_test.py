@@ -20,9 +20,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import sys
 from absl.testing import parameterized
 import six
-import sys
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
@@ -60,15 +60,16 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
+  # pylint: disable=import-outside-toplevel
   def test_lazy_import_context_manager(self):
     with tfds.core.lazy_imports():
-      import pandas
-      import matplotlib
-    
-    pandas.__name__
-    matplotlib.__name__
+      import pandas # pylint: disable=unused-import
+      import matplotlib # pylint: disable=unused-import
 
-  def test_lazy_import_context_manager(self):  # TODO
+    self.assertIn("pandas", sys.modules)
+    self.assertIn("matplotlib", sys.modules)
+
+  def test_lazy_import_context_manager_errors(self):  # TODO
     with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
       with tfds.core.lazy_imports():
         import fake_module
@@ -78,6 +79,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       langdetect.some_function()
+  # pylint: enable=import-outside-toplevel
 
 
 if __name__ == "__main__":

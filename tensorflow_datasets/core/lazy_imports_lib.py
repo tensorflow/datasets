@@ -23,7 +23,6 @@ from __future__ import print_function
 import importlib
 import sys
 import types
-import imp
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
@@ -33,7 +32,7 @@ _ERR_MSG = ("Failed importing {name}. This likely means that the dataset "
             "setup.py extras_require.")
 
 # `lazy_imports` currently only allow the following external dependencies to
-# be used during dataset generation. 
+# be used during dataset generation.
 _ALLOWED_LAZY_DEPS = [
     "apache_beam",
     "crepe",
@@ -68,7 +67,7 @@ def _try_import(module_name):
 
 
 class FakeModule(types.ModuleType):
-  """Create a fake module and raise ImportError whenever a attribute is accessed"""
+  """A fake module which raise ImportError whenever an unknown attribute is accessed"""
   def __init__(self, name):
     self.__path__ = None
     super(FakeModule, self).__init__(name)
@@ -88,34 +87,35 @@ class LazyImporter(object):
 
   PATH_TRIGGER = 'FAKE_PATH_TRIGGER'
 
-  def __init__(self, path_entry=None):
+  def __init__(self, _=None):
     return
 
-  def find_module(self, fullname, path=None):
-    # Accept if fullname is present in _ALLOWED_LAZY_DEPS 
+  def find_module(self, fullname):
+    # Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None
     if fullname in _ALLOWED_LAZY_DEPS:
       return self
     return None
 
-  def load_module(self,fullname):
+  def load_module(self, fullname):
+    """Load a `FakeModule` if the requested module is not present in sys.modules"""
     if fullname not in sys.modules:
       mod = FakeModule(fullname)
       mod.__loader__ = self
-      mod.__path__ == []
+      mod.__path__ = []
       sys.modules[fullname] = mod
     return sys.modules[fullname]
 
   def __enter__(self):
     return self
 
-  def __exit__(self, type_, value, traceback):
+  def __exit__(self, type_, value, _):
+    # Raise ImportError for modules not present in `_ALLOWED_LAZY_DEPS`
     if isinstance(value, ImportError):
       err_msg = ("Unknown import {name}. Currently lazy_imports does not "
                  "support {name} module. If you believe this is correct, "
                  "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
                  "`tfds/core/lazy_imports_lib.py`".format(name=value.name))
       raise ImportError(err_msg)
-    return
 
   @utils.classproperty
   @classmethod
@@ -227,4 +227,3 @@ class LazyImporter(object):
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
 sys.path_hooks.append(LazyImporter)
 sys.path.append("FAKE_PATH_TRIGGER")
-
