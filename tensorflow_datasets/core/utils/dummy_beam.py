@@ -19,15 +19,14 @@
 import types
 
 _MSG = ("Failed importing {name}. Please install {name}."
-                  " Using pip install {name}")
+        " Using pip install {name}")
 
-class Empty(object):
+class Empty(): # pylint: disable=too-few-public-methods
     """Empty class for beam API."""
     def __call__(self, *args, **kwargs):
         return None
-  
 
-class DummyBeam(types.ModuleType):
+class DummyBeam(types.ModuleType): # pylint: disable=too-few-public-methods
     """Dummy class.
     Raise:
       ImportError, when calling beam API and apache_beam was not installed.
@@ -36,10 +35,10 @@ class DummyBeam(types.ModuleType):
     Pipeline = Empty
 
     def __init__(self):
-      self.module_name = "apache_beam"
+        self.module_name = "apache_beam"
 
-    def __getattribute__(self,_):
-       if getattr(DummyBeam, _, None) is Empty:
-           _name= super().__getattribute__('module_name')
-           err_msg = _MSG.format(name=_name)
-           raise ImportError(err_msg)
+    def __getattribute__(self, _):
+        if getattr(DummyBeam, _, None) is Empty:
+            _name = super().__getattribute__('module_name')
+            err_msg = _MSG.format(name=_name)
+            raise ImportError(err_msg)
