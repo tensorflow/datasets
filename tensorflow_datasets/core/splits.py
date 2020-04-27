@@ -116,7 +116,7 @@ class SubSplitInfo(object):
   @property
   def num_examples(self):
     """Returns the number of example in the subsplit."""
-    return self._file_instructions.num_examples
+    return sum(self._file_instructions.num_examples_per_shard)
 
   @property
   def file_instructions(self):

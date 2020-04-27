@@ -411,8 +411,13 @@ class ReaderTest(testing.TestCase):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
     fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
     ds = self.reader.read_files(
-        [{'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
-         {'filename': fname_pattern % 3, 'skip': 1, 'take': 1}],
+        tfrecords_reader.FileInstructions(
+            file_instructions=[
+                {'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
+                {'filename': fname_pattern % 3, 'skip': 1, 'take': 1},
+            ],
+            num_examples_per_shard=None,
+        ),
         read_config=read_config_lib.ReadConfig(),
         shuffle_files=False)
     read_data = list(tfds.as_numpy(ds))
