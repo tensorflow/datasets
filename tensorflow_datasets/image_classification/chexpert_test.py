@@ -26,10 +26,9 @@ from tensorflow_datasets.image_classification import chexpert
 
 class ChexpertTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = chexpert.Chexpert
-  BUILDER_CONFIG_NAMES_TO_TEST = ['lateral', 'frontal']
   SPLITS = {
-      "train": 1,
-      "validation": 1,
+      "train": 2,
+      "validation": 2,
   }
 
 
