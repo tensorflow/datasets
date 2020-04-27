@@ -25,4 +25,3 @@ def _get():
 
 waymo_dataset_pb2 = _get()  # pylint: disable=invalid-name
 del _get
-

@@ -33,8 +33,8 @@ import tensorflow.compat.v2 as tf
 gfile = tf.io.gfile
 del tf
 
-from tensorflow_datasets.core import naming  # pylint: disable=g-import-not-at-top
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import naming  # pylint: disable=wrong-import-position
+from tensorflow_datasets.core.utils import py_utils # pylint: disable=wrong-import-position
 
 FLAGS = flags.FLAGS
 

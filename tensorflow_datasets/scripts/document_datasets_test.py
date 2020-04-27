@@ -24,7 +24,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.scripts import document_datasets
 
-DummyMnist = testing.DummyMnist
+DummyMnist = testing.DummyMnist # pylint: disable = invalid-name
 
 
 class DummyNewDs(DummyMnist):
@@ -62,9 +62,9 @@ class DummyMnistConfigs(DummyMnist):
 
 
 class DocumentDatasetsTest(testing.TestCase):
-
+  """Test for document_datasets module"""
   @classmethod
-  def setUpClass(cls):
+  def setUpClass(cls): # pylint: disable = invalid-name
     super(DocumentDatasetsTest, cls).setUpClass()
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     builder = DummyMnist(data_dir=cls._tfds_tmp_dir)
@@ -75,12 +75,12 @@ class DocumentDatasetsTest(testing.TestCase):
     document_datasets.VisualizationDocUtil.BASE_PATH = cls._tfds_tmp_dir
 
   @classmethod
-  def tearDownClass(cls):
+  def tearDownClass(cls): # pylint: disable = invalid-name
     super(DocumentDatasetsTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
     document_datasets.VisualizationDocUtil.BASE_PATH = cls._old_path
 
-  def setUp(self):
+  def setUp(self): # pylint: disable = invalid-name
     super(DocumentDatasetsTest, self).setUp()
     self.builder = DummyMnist(data_dir=self._tfds_tmp_dir)
 

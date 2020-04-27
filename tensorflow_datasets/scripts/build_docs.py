@@ -20,11 +20,12 @@ import os
 from absl import app
 from absl import flags
 
+import yaml
+
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
 from tensorflow_docs.api_generator import generate_lib
-import yaml
 
 FLAGS = flags.FLAGS
 
@@ -82,7 +83,7 @@ def build_api_docs(output_dir, code_url_prefix, search_hints, site_path):
     yaml.dump(redirect_content, f, default_flow_style=False)
 
 
-def main(unused_argv):
+def main(_):
   build_api_docs(FLAGS.output_dir, FLAGS.code_url_prefix, FLAGS.search_hints,
                  FLAGS.site_path)
 
