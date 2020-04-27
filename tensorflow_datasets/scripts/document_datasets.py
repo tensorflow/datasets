@@ -24,12 +24,12 @@ python -m tensorflow_datasets.scripts.document_datasets
 import collections
 from concurrent import futures
 import os
+from typing import Dict, List, Tuple, Union, Set
 
 from absl import app
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core.utils import py_utils
 
 WORKER_COUNT_DATASETS = 200
 WORKER_COUNT_CONFIGS = 50
@@ -39,6 +39,15 @@ BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/tensorflow_datase
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
 # TODO(tfds): Document image_label_folder datasets in a separate section
 BUILDER_BLACKLIST = ['wmt_translate']
+
+
+# Dict of `full_names_dict['dataset']['config']['version']`
+FullNamesDict = Dict[str, Dict[str, Set[str]]]
+# Same as `FullNamesDict`, but contains `True` for nightly datasets:
+# * New dataset: nightly_dict['dataset'] is True
+# * New config: nightly_dict['dataset']['config'] is True
+# * New version: nightly_dict['dataset']['config']['version'] is True
+NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
 
 
 class VisualizationDocUtil(object):
@@ -63,7 +72,125 @@ class VisualizationDocUtil(object):
     return tf.io.gfile.exists(filepath)
 
 
-@py_utils.memoize()
+def _split_full_name(full_name: str) -> Tuple[str, str, str]:
+  """Extracts the `(ds name, config, version)` from the full_name."""
+  if not tfds.core.registered.is_full_name(full_name):
+    raise ValueError(
+        f'Parsing builder name string {full_name} failed.'
+        'The builder name string must be of the following format:'
+        '`dataset_name[/config_name]/version`')
+  ds_name, *optional_config, version = full_name.split('/')
+  assert len(optional_config) <= 1
+  config = next(iter(optional_config)) if optional_config else ''
+  return ds_name, config, version
+
+
+def _full_names_to_dict(full_names: List[str]) -> FullNamesDict:
+  """Creates the dict `d['dataset']['config']['version']`."""
+  full_names_dict = collections.defaultdict(
+      lambda: collections.defaultdict(set))
+  for full_name in full_names:
+    ds_name, config, version = _split_full_name(full_name)
+    full_names_dict[ds_name][config].add(version)
+  return full_names_dict
+
+
+def _build_nightly_dict(
+    registered_ds: FullNamesDict,
+    stable_version_ds: FullNamesDict,
+) -> NightlyDict:
+  """Computes the nightly dict from the registered and stable dict."""
+  nightly_ds = collections.defaultdict(
+      lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
+          lambda: collections.defaultdict(bool)))
+  for dataset in registered_ds:
+    if dataset in stable_version_ds:
+      for config in registered_ds[dataset]:
+        if config in stable_version_ds[dataset]:
+          for version in registered_ds[dataset][config]:
+            if version in stable_version_ds[dataset][config]:
+              # (dataset, config, version) already exists
+              # We add it to the nightly dict to make sure the
+              # key exists
+              nightly_ds[dataset][config][version] = False
+            else:
+              # New version only present in tfds-nightly
+              nightly_ds[dataset][config][version] = True
+        else:
+          # New config only present in tfds-nightly
+          nightly_ds[dataset][config] = True
+    else:
+      # New dataset only present in tfds-nightly
+      nightly_ds[dataset] = True
+  return nightly_ds
+
+
+@tfds.core.utils.memoize()
+def _load_nightly_dict() -> NightlyDict:
+  """Loads (and caches) the nightly dict."""
+  version_path = tfds.core.utils.get_tfds_path('stable_versions.txt')
+  with tf.io.gfile.GFile(version_path, 'r') as f:
+    stable_versions = f.read().splitlines()
+
+  # Build the `full_names_dict['dataset']['config']['version']` for both
+  # nightly and stable version
+  registered_ds = _full_names_to_dict(
+      tfds.core.registered.list_full_names())
+  stable_version_ds = _full_names_to_dict(stable_versions)
+
+  # Nightly versions are `registered - stable`
+  return _build_nightly_dict(registered_ds, stable_version_ds)
+
+
+class NightlyDocUtil(object):
+  """Small util to format the doc."""
+
+  def __init__(self):
+    self._nightly_dict: NightlyDict = _load_nightly_dict()
+
+  def is_builder_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
+    """Returns `True` if the builder is new."""
+    return self._nightly_dict[builder.name] is True  # pylint: disable=g-bool-id-comparison
+
+  def is_config_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
+    """Returns `True` if the config is new."""
+    ds_name, config, _ = _split_full_name(builder.info.full_name)
+    if self.is_builder_nightly(builder):
+      return False
+    return self._nightly_dict[ds_name][config] is True  # pylint: disable=g-bool-id-comparison
+
+  def is_version_nightly(
+      self,
+      builder: tfds.core.DatasetBuilder,
+      version: str,
+  ) -> bool:
+    """Returns `True` if the version is new."""
+    ds_name, config, _ = _split_full_name(builder.info.full_name)
+    if self.is_builder_nightly(builder) or self.is_config_nightly(builder):
+      return False
+    return self._nightly_dict[ds_name][config][version] is True  # pylint: disable=g-bool-id-comparison
+
+  def has_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
+    """Returns True if any of the builder/config/version is new."""
+    def reduce(value):
+      if isinstance(value, bool):
+        return value
+      elif isinstance(value, dict):
+        return any(reduce(x) for x in value.values())
+      else:
+        raise AssertionError(f'Invalid nightly_dict value: {value}')
+
+    return reduce(self._nightly_dict[builder.name])
+
+  @property
+  def icon(self) -> str:
+    """Returns the nightly icon."""
+    return (
+        '<span class="material-icons" '
+        'title="Available only in the tfds-nightly package">nights_stay</span>')
+
+
+@tfds.core.utils.memoize()
 def get_mako_template(tmpl_name):
   """Returns mako.lookup.Template object to use to render documentation.
 
@@ -73,7 +200,8 @@ def get_mako_template(tmpl_name):
   Returns:
     mako 'Template' instance that can be rendered.
   """
-  tmpl_path = py_utils.get_tfds_path('scripts/templates/%s.mako.md' % tmpl_name)
+  tmpl_path = tfds.core.utils.get_tfds_path(
+      'scripts/templates/%s.mako.md' % tmpl_name)
   with tf.io.gfile.GFile(tmpl_path, 'r') as tmpl_f:
     tmpl_content = tmpl_f.read()
   return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
@@ -94,6 +222,7 @@ def document_single_builder(builder):
       builder=builder,
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
+      nightly_doc_util=NightlyDocUtil(),
   ).strip()
   schema_org_tmpl = get_mako_template('schema_org')
   schema_org_out_str = schema_org_tmpl.render_unicode(
