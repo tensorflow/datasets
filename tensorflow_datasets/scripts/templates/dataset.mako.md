@@ -170,7 +170,7 @@ ${builder.info.citation}
 % if visu_doc_util.has_visualization(builder):
 
 
-<img src="${visu_doc_util.get_url(builder)}" alt="Visualization" width="500px">
+${visu_doc_util.get_html_tag(builder)}
 
 % else:
  Not supported.

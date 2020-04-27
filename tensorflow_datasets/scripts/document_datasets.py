@@ -53,6 +53,11 @@ class VisualizationDocUtil(object):
   def get_url(self, builder):
     return self.BASE_URL + self._get_name(builder)
 
+  def get_html_tag(self, builder: tfds.core.DatasetBuilder) -> str:
+    """Returns the <img> html tag."""
+    url = self.get_url(builder)
+    return f'<img src="{url}" alt="Visualization" width="500px">'
+
   def has_visualization(self, builder):
     filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
     return tf.io.gfile.exists(filepath)
@@ -84,15 +89,17 @@ def document_single_builder(builder):
       config_builders = list(
           tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
   tmpl = get_mako_template('dataset')
+  visu_doc_util = VisualizationDocUtil()
   out_str = tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
-      visu_doc_util=VisualizationDocUtil(),
+      visu_doc_util=visu_doc_util,
   ).strip()
   schema_org_tmpl = get_mako_template('schema_org')
   schema_org_out_str = schema_org_tmpl.render_unicode(
       builder=builder,
       config_builders=config_builders,
+      visu_doc_util=visu_doc_util,
   ).strip()
   out_str = schema_org_out_str + '\n' + out_str
   return out_str
