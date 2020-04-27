@@ -60,7 +60,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   # pylint: disable=import-outside-toplevel, protected-access, unused-import
   def test_lazy_import_context_manager(self):
-    with tfds.core.lazy_imports.lazy_importer():
+    with tfds.core.try_import():
       import pandas
       import matplotlib.pyplot as plt
 
@@ -80,11 +80,11 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   def test_lazy_import_context_manager_errors(self):
     with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
-      with tfds.core.lazy_imports.lazy_importer():
+      with tfds.core.try_import():
         import fake_module
 
     tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.append("new_module")
-    with tfds.core.lazy_imports.lazy_importer():
+    with tfds.core.try_import():
       import new_module
 
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):

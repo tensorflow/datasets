@@ -91,11 +91,8 @@ class LazyImporterHook(object):
   # Each path_hook is called with one argument, the path item.
   # It must raise ImportError if it is unable to handle the path item,
   # and return an importer object if it can handle the path item
-  PATH = "FAKE_PATH_TRIGGER"
-
-  def __init__(self, path):
-    if path is not self.PATH:
-      raise ImportError()
+  def __init__(self, _):
+    return
 
   def find_module(self, fullname):
     # Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None
@@ -108,9 +105,32 @@ class LazyImporterHook(object):
     if fullname not in sys.modules:
       mod = FakeModule(fullname)
       mod.__loader__ = self
-      mod.__path__ = []
       sys.modules[fullname] = mod
     return sys.modules[fullname]
+
+
+@contextlib.contextmanager
+def try_import():
+  """Context Manager for lazy_imports.
+
+  Fake Module is created if the lazy import is not present in `sys.modules`.
+  A fake module is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
+  """
+  try:
+    # `LazyImporterHook` will be called with the following path as argument
+    sys.path_hooks.append(LazyImporterHook)
+    sys.path.append("FAKE_PATH")
+    yield
+  except ImportError as err:
+    err_msg = ("Unknown import {name}. Currently lazy_imports does not "
+                "support {name} module. If you believe this is correct, "
+                "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
+                "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
+    utils.reraise(suffix=err_msg)
+  finally:
+    sys.path_hooks.remove(LazyImporterHook)
+    sys.path.remove("FAKE_PATH")
+
 
 class LazyImporter(object):
   """Lazy importer for heavy dependencies.
@@ -119,28 +139,6 @@ class LazyImporter(object):
   the default installation to remain lean, those heavy dependencies are
   lazily imported here.
   """
-
-  @staticmethod
-  @contextlib.contextmanager
-  def lazy_importer():
-    """Context Manager for lazy_imports.
-
-    Fake Module is created if the lazy import is not present in `sys.modules`.
-    A fake module is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
-    """
-    try:
-      sys.path_hooks.append(LazyImporterHook)
-      sys.path.append(LazyImporterHook.PATH)
-      yield
-    except ImportError as err:
-      err_msg = ("Unknown import {name}. Currently lazy_imports does not "
-                 "support {name} module. If you believe this is correct, "
-                 "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
-                 "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
-      utils.reraise(suffix=err_msg)
-    finally:
-      sys.path_hooks.remove(LazyImporterHook)
-      sys.path.remove(LazyImporterHook.PATH)
 
   @utils.classproperty
   @classmethod
