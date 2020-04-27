@@ -10,6 +10,11 @@
 </div>
 # `robonet`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 RoboNet contains over 15 million video frames of robot-object interaction, taken
@@ -29,7 +34,9 @@ from 113 unique camera viewpoints.
 
 *   **Versions**:
 
-    *   **`4.0.0`** (default): No release notes.
+    *   **`4.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="deep_weeds" />
-  <meta itemprop="description" content="The DeepWeeds dataset consists of 17,509 images capturing eight different weed species native to Australia in situ with neighbouring flora.The selected weed species are local to pastoral grasslands across the state of Queensland.The images were collected from weed infestations at the following sites across Queensland: &quot;Black River&quot;, &quot;Charters Towers&quot;,  &quot;Cluden&quot;, &quot;Douglas&quot;, &quot;Hervey Range&quot;, &quot;Kelso&quot;, &quot;McKinlay&quot; and &quot;Paluma&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;deep_weeds&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The DeepWeeds dataset consists of 17,509 images capturing eight different weed species native to Australia in situ with neighbouring flora.The selected weed species are local to pastoral grasslands across the state of Queensland.The images were collected from weed infestations at the following sites across Queensland: &quot;Black River&quot;, &quot;Charters Towers&quot;,  &quot;Cluden&quot;, &quot;Douglas&quot;, &quot;Hervey Range&quot;, &quot;Kelso&quot;, &quot;McKinlay&quot; and &quot;Paluma&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;deep_weeds&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/deep_weeds-2.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/deep_weeds" />
   <meta itemprop="sameAs" content="https://github.com/AlexOlsen/DeepWeeds" />
   <meta itemprop="citation" content="@article{DeepWeeds2019,&#10;  author = {Alex Olsen and&#10;    Dmitry A. Konovalov and&#10;    Bronson Philippa and&#10;    Peter Ridd and&#10;    Jake C. Wood and&#10;    Jamie Johns and&#10;    Wesley Banks and&#10;    Benjamin Girgenti and&#10;    Owen Kenny and&#10;    James Whinney and&#10;    Brendan Calvert and&#10;    Mostafa {Rahimi Azghadi} and&#10;    Ronald D. White},&#10;  title = {{DeepWeeds: A Multiclass Weed Species Image Dataset for Deep Learning}},&#10;  journal = {Scientific Reports},&#10;  year = 2019,&#10;  number = 2058,&#10;  month = 2,&#10;  volume = 9,&#10;  issue = 1,&#10;  day = 14,&#10;  url = &quot;https://doi.org/10.1038/s41598-018-38343-3&quot;,&#10;  doi = &quot;10.1038/s41598-018-38343-3&quot;&#10;}" />
 </div>
+
 # `deep_weeds`
 
 *   **Description**:
@@ -45,6 +47,7 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=9),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
@@ -80,4 +83,5 @@ FeaturesDict({
 
 *   **Visualization
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
-    Not supported.
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/deep_weeds-2.0.0.png" alt="Visualization" width="500px">

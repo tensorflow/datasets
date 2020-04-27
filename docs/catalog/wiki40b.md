@@ -35,6 +35,7 @@ FeaturesDict({
     'wikidata_id': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -360,7 +361,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -394,7 +395,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -476,7 +477,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -558,7 +559,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -608,7 +609,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -626,7 +627,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 

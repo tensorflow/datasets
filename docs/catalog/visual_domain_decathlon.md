@@ -191,7 +191,8 @@ FeaturesDict({
 
 *   **Visualization
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
-    Not supported.
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-gtsrb-1.1.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/imagenet12
 
@@ -250,7 +251,8 @@ FeaturesDict({
 
 *   **Visualization
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
-    Not supported.
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-omniglot-1.1.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/svhn
 
@@ -309,7 +311,8 @@ FeaturesDict({
 
 *   **Visualization
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
-    Not supported.
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-ucf101-1.1.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/vgg-flowers
 

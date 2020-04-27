@@ -10,6 +10,11 @@
 </div>
 # `so2sat`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 So2Sat LCZ42 is a dataset consisting of co-registered synthetic aperture radar
@@ -30,8 +35,10 @@ http://creativecommons.org/licenses/by/4.0
 *   **Source code**:
     [`tfds.image_classification.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/so2sat.py)
 *   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Using updated optical channels calibration factor.
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -59,6 +66,7 @@ FeaturesDict({
     'sample_id': tf.int64,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`

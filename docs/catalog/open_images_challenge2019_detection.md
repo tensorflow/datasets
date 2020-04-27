@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="open_images_challenge2019_detection" />
-  <meta itemprop="description" content="Open Images is a collaborative release of ~9 million images annotated with&#10;image-level labels, object bounding boxes, object segmentation masks, and&#10;visual relationships. This uniquely large and diverse dataset is designed to&#10;spur state of the art advances in analyzing and understanding images.&#10;&#10;&#10;This contains the data from thee Object Detection track of the competition.&#10;The goal in this track is to predict a tight bounding box around all object&#10;instances of 500 classes.&#10;&#10;The images are annotated with positive image-level labels, indicating certain&#10;object classes are present, and with negative image-level labels, indicating&#10;certain classes are absent. In the competition, all other unannotated classes&#10;are excluded from evaluation in that image. For each positive image-level label&#10;in an image, every instance of that object class in the image was annotated.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;open_images_challenge2019_detection&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Open Images is a collaborative release of ~9 million images annotated with&#10;image-level labels, object bounding boxes, object segmentation masks, and&#10;visual relationships. This uniquely large and diverse dataset is designed to&#10;spur state of the art advances in analyzing and understanding images.&#10;&#10;&#10;This contains the data from thee Object Detection track of the competition.&#10;The goal in this track is to predict a tight bounding box around all object&#10;instances of 500 classes.&#10;&#10;The images are annotated with positive image-level labels, indicating certain&#10;object classes are present, and with negative image-level labels, indicating&#10;certain classes are absent. In the competition, all other unannotated classes&#10;are excluded from evaluation in that image. For each positive image-level label&#10;in an image, every instance of that object class in the image was annotated.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;open_images_challenge2019_detection&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/open_images_challenge2019_detection-200k-1.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/open_images_challenge2019_detection" />
   <meta itemprop="sameAs" content="https://storage.googleapis.com/openimages/web/challenge2019.html" />
   <meta itemprop="citation" content="" />
 </div>
+
 # `open_images_challenge2019_detection`
 
 *   **Description**:
@@ -67,9 +69,6 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
-    Not supported.
 
 ## open_images_challenge2019_detection/200k (default config)
 
@@ -78,9 +77,19 @@ FeaturesDict({
 
 *   **Dataset size**: `59.40 GiB`
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/open_images_challenge2019_detection-200k-1.0.0.png" alt="Visualization" width="500px">
+
 ## open_images_challenge2019_detection/300k
 
 *   **Config description**: Images have at most 300,000 pixels, at 72 JPEG
     quality.
 
 *   **Dataset size**: `80.44 GiB`
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/open_images_challenge2019_detection-300k-1.0.0.png" alt="Visualization" width="500px">

@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="i_naturalist2017" />
-  <meta itemprop="description" content="This dataset contains a total of 5,089 categories, across 579,184 training&#10;images and 95,986 validation images. For the training set, the distribution of&#10;images per category follows the observation frequency of that category by the&#10;iNaturalist community.&#10;&#10;Although the original dataset contains some images with bounding boxes,&#10;currently, only image-level annotations are provided (single label/image).&#10;In addition, the organizers have not published the test labels, so we only&#10;provide the test images (label = -1).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;i_naturalist2017&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This dataset contains a total of 5,089 categories, across 579,184 training&#10;images and 95,986 validation images. For the training set, the distribution of&#10;images per category follows the observation frequency of that category by the&#10;iNaturalist community.&#10;&#10;Although the original dataset contains some images with bounding boxes,&#10;currently, only image-level annotations are provided (single label/image).&#10;In addition, the organizers have not published the test labels, so we only&#10;provide the test images (label = -1).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;i_naturalist2017&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/i_naturalist2017-0.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/i_naturalist2017" />
   <meta itemprop="sameAs" content="https://github.com/visipedia/inat_comp/tree/master/2017" />
   <meta itemprop="citation" content="@InProceedings{Horn_2018_CVPR,&#10;author = {&#10;Van Horn, Grant and Mac Aodha, Oisin and Song, Yang and Cui, Yin and Sun, Chen&#10;and Shepard, Alex and Adam, Hartwig and Perona, Pietro and Belongie, Serge},&#10;title = {The INaturalist Species Classification and Detection Dataset},&#10;booktitle = {&#10;The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;month = {June},&#10;year = {2018}&#10;}" />
 </div>
+
 # `i_naturalist2017`
 
 *   **Description**:
@@ -51,6 +53,7 @@ FeaturesDict({
     'supercategory': ClassLabel(shape=(), dtype=tf.int64, num_classes=13),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`

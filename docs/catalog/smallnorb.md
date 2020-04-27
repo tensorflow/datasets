@@ -56,6 +56,7 @@ FeaturesDict({
     'label_lighting': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label_category')`
