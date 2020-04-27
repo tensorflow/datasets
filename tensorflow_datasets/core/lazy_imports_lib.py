@@ -82,21 +82,20 @@ class FakeModule(types.ModuleType):
 class LazyImporterHook(object):
   """Finder and Loader for modules in `_ALLOWED_LAZY_DEPS`"""
   # https://www.python.org/dev/peps/pep-0302/#specification-part-2-registering-hooks
-  # Each path_hook is called with one argument, the path item. 
-  # It must raise ImportError if it is unable to handle the path item, 
+  # Each path_hook is called with one argument, the path item.
+  # It must raise ImportError if it is unable to handle the path item,
   # and return an importer object if it can handle the path item
   PATH = "FAKE_PATH_TRIGGER"
 
   def __init__(self, path):
     if path is not self.PATH:
       raise ImportError()
-    return
 
   def find_module(self, fullname):
     # Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None
     if fullname in _ALLOWED_LAZY_DEPS:
       return self
-    return
+    return None
 
   def load_module(self, fullname):
     """Load a `FakeModule` if the requested module is not present in sys.modules"""
@@ -119,7 +118,7 @@ class LazyImporter(object):
   @contextlib.contextmanager
   def lazy_importer():
     """Context Manager for lazy_imports.
-    
+
     Fake Module is created if the lazy import is not present in `sys.modules`.
     A fake module is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
     """
@@ -242,5 +241,6 @@ class LazyImporter(object):
   def test_foo(cls):
     """For testing purposes only."""
     return _try_import("test_foo")
+
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name

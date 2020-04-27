@@ -20,10 +20,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import sys
 from absl.testing import parameterized
 import six
-
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
@@ -60,7 +58,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
-  # pylint: disable=import-outside-toplevel
+  # pylint: disable=import-outside-toplevel, protected-access, unused-import
   def test_lazy_import_context_manager(self):
     with tfds.core.lazy_imports.lazy_importer():
       import pandas
@@ -69,14 +67,15 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     self.assertTrue(hasattr(pandas, "read_csv"))
     self.assertTrue(hasattr(plt, "figure"))
 
-  def test_without_context_manager(self):
+  def test_import_without_context_manager(self):
     import nltk
     self.assertTrue(hasattr(nltk, 'tokenize'))
 
     tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.append("valid_module")
-    with self.assertRaisesWithPredicateMatch(ImportError, "No module named 'valid_module'"):
+    with self.assertRaisesWithPredicateMatch(ImportError,
+                                             "No module named 'valid_module'"):
       import valid_module
-    
+
     tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.remove("valid_module")
 
   def test_lazy_import_context_manager_errors(self):
@@ -90,9 +89,9 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       new_module.some_function()
-    
+
     tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.remove("new_module")
-  # pylint: enable=import-outside-toplevel
+  # pylint: enable=import-outside-toplevel, protected-access, unused-import
 
 
 if __name__ == "__main__":
