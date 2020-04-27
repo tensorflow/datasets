@@ -62,23 +62,36 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   # pylint: disable=import-outside-toplevel
   def test_lazy_import_context_manager(self):
-    with tfds.core.lazy_imports():
-      import pandas # pylint: disable=unused-import
-      import matplotlib # pylint: disable=unused-import
+    with tfds.core.lazy_imports.lazy_importer():
+      import pandas
+      import matplotlib.pyplot as plt
 
-    self.assertIn("pandas", sys.modules)
-    self.assertIn("matplotlib", sys.modules)
+    self.assertTrue(hasattr(pandas, "read_csv"))
+    self.assertTrue(hasattr(plt, "figure"))
 
-  def test_lazy_import_context_manager_errors(self):  # TODO
+  def test_without_context_manager(self):
+    import nltk
+    self.assertTrue(hasattr(nltk, 'tokenize'))
+
+    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.append("valid_module")
+    with self.assertRaisesWithPredicateMatch(ImportError, "No module named 'valid_module'"):
+      import valid_module
+    
+    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.remove("valid_module")
+
+  def test_lazy_import_context_manager_errors(self):
     with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
-      with tfds.core.lazy_imports():
+      with tfds.core.lazy_imports.lazy_importer():
         import fake_module
 
-    with tfds.core.lazy_imports():
-      import langdetect
+    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.append("new_module")
+    with tfds.core.lazy_imports.lazy_importer():
+      import new_module
 
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-      langdetect.some_function()
+      new_module.some_function()
+    
+    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.remove("new_module")
   # pylint: enable=import-outside-toplevel
 
 

@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import importlib
 import sys
 import types
@@ -41,6 +42,7 @@ _ALLOWED_LAZY_DEPS = [
     "langdetect",
     "librosa",
     "matplotlib",
+    "matplotlib.pyplot",
     "mwparserfromhell",
     "nltk",
     "pandas",
@@ -77,24 +79,24 @@ class FakeModule(types.ModuleType):
     raise ImportError(err_msg)
 
 
-class LazyImporter(object):
-  """Lazy importer for heavy dependencies.
+class LazyImporterHook(object):
+  """Finder and Loader for modules in `_ALLOWED_LAZY_DEPS`"""
+  # https://www.python.org/dev/peps/pep-0302/#specification-part-2-registering-hooks
+  # Each path_hook is called with one argument, the path item. 
+  # It must raise ImportError if it is unable to handle the path item, 
+  # and return an importer object if it can handle the path item
+  PATH = "FAKE_PATH_TRIGGER"
 
-  Some datasets require heavy dependencies for data generation. To allow for
-  the default installation to remain lean, those heavy dependencies are
-  lazily imported here.
-  """
-
-  PATH_TRIGGER = 'FAKE_PATH_TRIGGER'
-
-  def __init__(self, _=None):
+  def __init__(self, path):
+    if path is not self.PATH:
+      raise ImportError()
     return
 
   def find_module(self, fullname):
     # Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None
     if fullname in _ALLOWED_LAZY_DEPS:
       return self
-    return None
+    return
 
   def load_module(self, fullname):
     """Load a `FakeModule` if the requested module is not present in sys.modules"""
@@ -105,17 +107,35 @@ class LazyImporter(object):
       sys.modules[fullname] = mod
     return sys.modules[fullname]
 
-  def __enter__(self):
-    return self
+class LazyImporter(object):
+  """Lazy importer for heavy dependencies.
 
-  def __exit__(self, type_, value, _):
-    # Raise ImportError for modules not present in `_ALLOWED_LAZY_DEPS`
-    if isinstance(value, ImportError):
+  Some datasets require heavy dependencies for data generation. To allow for
+  the default installation to remain lean, those heavy dependencies are
+  lazily imported here.
+  """
+
+  @staticmethod
+  @contextlib.contextmanager
+  def lazy_importer():
+    """Context Manager for lazy_imports.
+    
+    Fake Module is created if the lazy import is not present in `sys.modules`.
+    A fake module is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
+    """
+    try:
+      sys.path_hooks.append(LazyImporterHook)
+      sys.path.append(LazyImporterHook.PATH)
+      yield
+    except ImportError as err:
       err_msg = ("Unknown import {name}. Currently lazy_imports does not "
                  "support {name} module. If you believe this is correct, "
                  "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
-                 "`tfds/core/lazy_imports_lib.py`".format(name=value.name))
-      raise ImportError(err_msg)
+                 "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
+      utils.reraise(suffix=err_msg)
+    finally:
+      sys.path_hooks.remove(LazyImporterHook)
+      sys.path.remove(LazyImporterHook.PATH)
 
   @utils.classproperty
   @classmethod
@@ -223,7 +243,4 @@ class LazyImporter(object):
     """For testing purposes only."""
     return _try_import("test_foo")
 
-
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
-sys.path_hooks.append(LazyImporter)
-sys.path.append("FAKE_PATH_TRIGGER")
