@@ -34,6 +34,7 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 # * build_docs_test: See b/142892342
 pytest \
   -n auto \
+  --dist=loadscope \
   --disable-warnings \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
