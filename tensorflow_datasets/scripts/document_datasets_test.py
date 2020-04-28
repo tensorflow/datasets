@@ -19,12 +19,10 @@
 # import collections
 import mock
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import utils
+import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts import document_datasets
 
-DummyMnist = testing.DummyMnist
+DummyMnist = tfds.testing.DummyMnist
 
 
 class DummyNewDs(DummyMnist):
@@ -33,16 +31,16 @@ class DummyNewDs(DummyMnist):
 
 class DummyNewConfig(DummyMnist):
   BUILDER_CONFIGS = [
-      dataset_builder.BuilderConfig(
+      tfds.core.BuilderConfig(
           name='new_config',
-          version=utils.Version('1.0.0'),
+          version=tfds.core.Version('1.0.0'),
           description='Config description.',
       ),
-      dataset_builder.BuilderConfig(
+      tfds.core.BuilderConfig(
           name='old_config',
-          version=utils.Version('2.0.0'),
+          version=tfds.core.Version('2.0.0'),
           supported_versions=[
-              utils.Version('1.0.0'),
+              tfds.core.Version('1.0.0'),
           ],
           description='Config description.',
       ),
@@ -53,20 +51,20 @@ class DummyMnistConfigs(DummyMnist):
   """Builder with config and manual instructions."""
   MANUAL_DOWNLOAD_INSTRUCTIONS = """Some manual instructions."""
   BUILDER_CONFIGS = [
-      dataset_builder.BuilderConfig(
+      tfds.core.BuilderConfig(
           name='config_name',
-          version=utils.Version('0.0.1'),
+          version=tfds.core.Version('0.0.1'),
           description='Config description.',
       ),
   ]
 
 
-class DocumentDatasetsTest(testing.TestCase):
+class DocumentDatasetsTest(tfds.testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(DocumentDatasetsTest, cls).setUpClass()
-    cls._tfds_tmp_dir = testing.make_tmp_dir()
+    cls._tfds_tmp_dir = tfds.testing.make_tmp_dir()
     builder = DummyMnist(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
 
@@ -74,17 +72,30 @@ class DocumentDatasetsTest(testing.TestCase):
     cls._old_path = document_datasets.VisualizationDocUtil.BASE_PATH
     document_datasets.VisualizationDocUtil.BASE_PATH = cls._tfds_tmp_dir
 
+    # Patch the register
+    # `pytest` do not execute the tests in isolation.
+    # All tests seems to be imported before execution, which leak the
+    # registration. Datasets from `register_test.py` are registered when
+    # `document_dataset_test.py` is executed.
+    # As `_load_nightly_dict` load the full register, we patch it
+    # to avoid invalid dataset errors.
+    # Context: https://github.com/tensorflow/datasets/issues/1960
+    cls._patch_register = mock.patch.object(
+        tfds.core.registered, 'list_full_names', return_value=[])
+    cls._patch_register.start()
+
   @classmethod
   def tearDownClass(cls):
     super(DocumentDatasetsTest, cls).tearDownClass()
-    testing.rm_tmp_dir(cls._tfds_tmp_dir)
+    tfds.testing.rm_tmp_dir(cls._tfds_tmp_dir)
     document_datasets.VisualizationDocUtil.BASE_PATH = cls._old_path
+
+    cls._patch_register.stop()
 
   def setUp(self):
     super(DocumentDatasetsTest, self).setUp()
     self.builder = DummyMnist(data_dir=self._tfds_tmp_dir)
 
-  @testing.run_in_graph_and_eager_modes()
   def test_schema_org(self):
     schema_str = document_datasets.document_single_builder(self.builder)
     self.assertIn('http://schema.org/Dataset', schema_str)
@@ -95,7 +106,7 @@ class DocumentDatasetsTest(testing.TestCase):
 
   def test_with_config(self):
     """Test that builder with configs are correctly generated."""
-    with testing.tmp_dir() as tmp_dir:
+    with tfds.testing.tmp_dir() as tmp_dir:
       builder = DummyMnistConfigs(data_dir=tmp_dir)
       builder.download_and_prepare()
     doc_str = document_datasets.document_single_builder(builder)
@@ -105,7 +116,7 @@ class DocumentDatasetsTest(testing.TestCase):
     self.assertIn('Config description.', doc_str)  # Config-specific description
 
 
-class DocumentNightlyDatasetsTest(testing.TestCase):
+class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
 
   def test_full_names_to_dict(self):
     full_names_dict = document_datasets._full_names_to_dict([
@@ -220,4 +231,4 @@ class DocumentNightlyDatasetsTest(testing.TestCase):
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()
