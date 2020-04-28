@@ -21,12 +21,15 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
+import mock
 import six
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
 
 class LazyImportsTest(testing.TestCase, parameterized.TestCase):
+
+
 
   # The following deps are not in the test list because the datasets that
   # require them need to have their tests run in isolation:
@@ -58,7 +61,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
-  # pylint: disable=import-outside-toplevel, protected-access, unused-import
+  # pylint: disable=import-outside-toplevel, unused-import
   def test_lazy_import_context_manager(self):
     with tfds.core.try_import():
       import pandas
@@ -71,27 +74,25 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     import nltk
     self.assertTrue(hasattr(nltk, 'tokenize'))
 
-    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.append("valid_module")
-    with self.assertRaisesWithPredicateMatch(ImportError,
-                                             "No module named 'valid_module'"):
-      import valid_module
-
-    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.remove("valid_module")
+    get_deps = "tensorflow_datasets.core.lazy_imports_lib._ALLOWED_LAZY_DEPS"
+    with mock.patch(get_deps, ["valid_module"]):
+      with self.assertRaisesWithPredicateMatch(ImportError, "valid_module"):
+        import valid_module
 
   def test_lazy_import_context_manager_errors(self):
     with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
       with tfds.core.try_import():
         import fake_module
 
-    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.append("new_module")
-    with tfds.core.try_import():
-      import new_module
+    get_deps = "tensorflow_datasets.core.lazy_imports_lib._ALLOWED_LAZY_DEPS"
+    with mock.patch(get_deps, ["new_module"]):
+      with tfds.core.try_import():
+        import new_module
 
-    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-      new_module.some_function()
+      with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
+        new_module.some_function()
 
-    tfds.core.lazy_imports_lib._ALLOWED_LAZY_DEPS.remove("new_module")
-  # pylint: enable=import-outside-toplevel, protected-access, unused-import
+  # pylint: enable=import-outside-toplevel, unused-import
 
 
 if __name__ == "__main__":
