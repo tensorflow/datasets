@@ -84,17 +84,11 @@ class FakeModule(types.ModuleType):
     raise ImportError(err_msg)
 
 
-class LazyImporterHook(object):
+class CustomImporter(object):
   """Finder and Loader for modules in `_ALLOWED_LAZY_DEPS`"""
-  # https://www.python.org/dev/peps/pep-0302/#specification-part-2-registering-hooks
-  # Each path_hook is called with one argument, the path item.
-  # It must raise ImportError if it is unable to handle the path item,
-  # and return an importer object if it can handle the path item
-  def __init__(self, _):
-    return
 
-  def find_module(self, fullname):
-    # Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None
+  def find_module(self, fullname, _):
+    """Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None"""
     if fullname in _ALLOWED_LAZY_DEPS:
       return self
     return None
@@ -116,9 +110,7 @@ def try_import():
   It is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
   """
   try:
-    # `LazyImporterHook` will be called with the following path as argument
-    sys.path_hooks.append(LazyImporterHook)
-    sys.path.append("FAKE_PATH")
+    sys.meta_path.append(CustomImporter())
     yield
   except ImportError as err:
     err_msg = ("Unknown import {name}. Currently lazy_imports does not "
@@ -127,8 +119,7 @@ def try_import():
                "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
     utils.reraise(suffix=err_msg)
   finally:
-    sys.path_hooks.remove(LazyImporterHook)
-    sys.path.remove("FAKE_PATH")
+    sys.meta_path.pop()
 
 
 class LazyImporter(object):
