@@ -28,17 +28,22 @@ from tensorflow_datasets.core import visualization
 
 # Import for registration
 from tensorflow_datasets.image_classification import imagenet  # pylint: disable=unused-import,g-bad-import-order
-
+from tensorflow_datasets.audio import crema_d
+from tensorflow_datasets.core.visualization import image_visualizer
 
 class ShowExamplesTest(testing.TestCase):
-
   @mock.patch('matplotlib.pyplot.figure')
-  def test_show_examples(self, mock_fig):
+  @mock.patch('audio_visualizer.AudioGridVisualizer')
+  def test_show_examples(self,mock_fig):
     with testing.mock_data(num_examples=20):
       ds, ds_info = registered.load(
           'imagenet2012', split='train', with_info=True)
-    visualization.show_examples(ds_info, ds)
-
+      visualization.show_examples(ds_info, ds)
+      
+      ds, ds_info = registered.load(
+          'crema_d', split='validation', with_info=True)
+      visualization.show_examples(ds_info, ds)
+  
   # TODO(tfds): Should add test when there isn't enough examples (ds.take(3))
 
 
