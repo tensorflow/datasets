@@ -23,7 +23,7 @@ import numpy as np
 import ipywidgets as widgets
 
 import tensorflow as tf
-import tensorflow_datasets as tfds
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.visualization import visualizer
@@ -115,10 +115,10 @@ def _write_video_gif(video: np.ndarray, fps: int, index: int) -> None:
 class VideoGridVisualizer(visualizer.Visualizer):
     """Visualizer for video datasets."""
 
-    def match(self, ds_info: tfds.core.DatasetInfo) -> bool: # pylint: disable=no-self-use
+    def match(self, ds_info: dataset_info.DatasetInfo) -> bool: # pylint: disable=no-self-use
         """See base class.
         Args:
-          ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
+          ds_info: `dataset_info.DatasetInfo` object of the dataset to visualize.
 
         Returns:
           bool: True if the visualizer can be applied to the dataset.
@@ -129,7 +129,7 @@ class VideoGridVisualizer(visualizer.Visualizer):
 
     def show( # pylint: disable=too-many-arguments
             self,
-            ds_info: tfds.core.DatasetInfo,
+            ds_info: dataset_info.DatasetInfo,
             ds: tf.data.Dataset,
             rows: int = 3,
             cols: int = 3,
@@ -141,7 +141,7 @@ class VideoGridVisualizer(visualizer.Visualizer):
         """Display the dataset.
 
         Args:
-          ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
+          ds_info: `dataset_info.DatasetInfo` object of the dataset to visualize.
           ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
             should not be batched. Examples will be consumed in order until
             (rows * cols) are read or the dataset is consumed.
