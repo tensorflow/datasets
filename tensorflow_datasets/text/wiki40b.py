@@ -24,6 +24,12 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
+@inproceedings{49029,
+title = {Wiki-40B: Multilingual Language Model Dataset},
+author = {Mandy Guo and Zihang Dai and Denny Vrandecic and Rami Al-Rfou},
+year = {2020},
+booktitle	= {LREC 2020}
+}
 """
 
 _DESCRIPTION = """
