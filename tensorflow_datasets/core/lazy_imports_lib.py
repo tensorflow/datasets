@@ -46,7 +46,7 @@ _ALLOWED_LAZY_DEPS = [
     "mwparserfromhell",
     "nltk",
     "pandas",
-    "PIL_Image",
+    "PIL.Image",
     "PIL.TiffImagePlugin",
     "pretty_midi",
     "pydub",
@@ -60,7 +60,6 @@ _ALLOWED_LAZY_DEPS = [
     "tensorflow_io",
     "tldextract",
     "os",
-    # "test_foo",
 ]
 
 
@@ -113,8 +112,8 @@ class LazyImporterHook(object):
 def try_import():
   """Context Manager for lazy_imports.
 
-  Fake Module is created if the lazy import is not present in `sys.modules`.
-  A fake module is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
+  A fake module is created if the lazy import is not present in `sys.modules`.
+  It is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
   """
   try:
     # `LazyImporterHook` will be called with the following path as argument
@@ -123,9 +122,9 @@ def try_import():
     yield
   except ImportError as err:
     err_msg = ("Unknown import {name}. Currently lazy_imports does not "
-                "support {name} module. If you believe this is correct, "
-                "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
-                "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
+               "support {name} module. If you believe this is correct, "
+               "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
+               "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
     utils.reraise(suffix=err_msg)
   finally:
     sys.path_hooks.remove(LazyImporterHook)
