@@ -14,11 +14,12 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Script which generates datasets figures."""
+r"""Script which generates datasets figures.
+"""
 
-from concurrent import futures
 import functools
 import itertools
+import multiprocessing
 import os
 import tempfile
 import traceback
@@ -56,7 +57,7 @@ def _log_exception(fn):
   def decorated(*args, **kwargs):
     try:
       return fn(*args, **kwargs)
-    except:
+    except Exception:  # pylint: disable=broad-except
       err_str = traceback.format_exc()
       logging.error(f'Exception occured for {args}, {kwargs}:\n' + err_str)
       raise
@@ -93,7 +94,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   if not tf.io.gfile.exists(dst_dir):
     tf.io.gfile.makedirs(dst_dir)
   try:
-    figure = tfds.show_examples(builder.info, ds)
+    figure = tfds.show_examples(ds, builder.info)
   except Exception:  # pylint: disable=broad-except
     logging.info(f'Visualisation not supported for dataset `{full_name}`')
     return
@@ -143,7 +144,7 @@ def generate_visualization(
   generate_fn = functools.partial(
       _generate_single_visualization, dst_dir=dst_dir)
   logging.info(f'Generate figures for {len(full_names)} builders')
-  with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
+  with multiprocessing.Pool(WORKER_COUNT_DATASETS) as tpool:
     tpool.map(generate_fn, full_names)
 
 

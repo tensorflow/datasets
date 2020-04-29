@@ -58,6 +58,7 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
@@ -83,3 +84,7 @@ FeaturesDict({
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

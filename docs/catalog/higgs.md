@@ -74,6 +74,7 @@ FeaturesDict({
     'missing_energy_phi': tf.float64,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -95,3 +96,7 @@ FeaturesDict({
       SLACcitation   = "%%CITATION = ARXIV:1402.4735;%%"
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

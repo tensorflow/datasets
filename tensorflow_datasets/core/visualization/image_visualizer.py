@@ -20,8 +20,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl import logging
+from typing import Optional
 
+from absl import logging
+import tensorflow.compat.v2 as tf
+
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
@@ -82,7 +86,7 @@ def _add_image(ax, image):
 class ImageGridVisualizer(visualizer.Visualizer):
   """Visualizer for supervised image datasets."""
 
-  def match(self, ds_info):
+  def match(self, ds_info: dataset_info.DatasetInfo) -> bool:
     """See base class."""
     # Supervised required a single image key
     image_keys = visualizer.extract_keys(ds_info.features, features_lib.Image)
@@ -90,20 +94,20 @@ class ImageGridVisualizer(visualizer.Visualizer):
 
   def show(
       self,
-      ds_info,
-      ds,
-      rows=3,
-      cols=3,
-      plot_scale=3.,
-      image_key=None,
+      ds: tf.data.Dataset,
+      ds_info: dataset_info.DatasetInfo,
+      rows: int = 3,
+      cols: int = 3,
+      plot_scale: float = 3.,
+      image_key: Optional[str] = None,
   ):
     """Display the dataset.
 
     Args:
-      ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
         should not be batched. Examples will be consumed in order until
         (rows * cols) are read or the dataset is consumed.
+      ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       rows: `int`, number of rows of the display grid.
       cols: `int`, number of columns of the display grid.
       plot_scale: `float`, controls the plot size of the images. Keep this

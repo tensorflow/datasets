@@ -64,6 +64,10 @@ builder = tfds.builder("wmt_translate", config=config)
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## wmt16_translate/cs-en (default config)
 
 *   **Config description**: WMT 2016 cs-en translation task dataset.
@@ -85,6 +89,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('cs', 'en')`
@@ -110,6 +115,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
@@ -135,6 +141,7 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fi', 'en')`
@@ -160,6 +167,7 @@ Translation({
     'ro': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ro', 'en')`
@@ -185,6 +193,7 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`

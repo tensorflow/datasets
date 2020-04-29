@@ -27,7 +27,7 @@ from tensorflow_datasets.image_classification import chexpert
 class ChexpertTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = chexpert.Chexpert
   SPLITS = {
-      "train": 1,
+      "train": 2,
       "validation": 1,
   }
 

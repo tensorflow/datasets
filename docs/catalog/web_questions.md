@@ -44,6 +44,7 @@ FeaturesDict({
     'url': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -65,3 +66,7 @@ FeaturesDict({
     pages = "1533--1544",
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

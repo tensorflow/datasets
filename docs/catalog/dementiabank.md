@@ -56,6 +56,7 @@ FeaturesDict({
     'speaker_id': tf.string,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
@@ -69,3 +70,7 @@ FeaturesDict({
   year={2005}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

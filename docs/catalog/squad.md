@@ -59,6 +59,7 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -77,5 +78,9 @@ archivePrefix = {arXiv},
        eprint = {1606.05250},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## squad/plain_text (default config)

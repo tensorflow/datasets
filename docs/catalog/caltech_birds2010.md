@@ -47,6 +47,7 @@ FeaturesDict({
     'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
@@ -61,3 +62,7 @@ Title = {{Caltech-UCSD Birds 200}},
 Year = {2010}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

@@ -69,6 +69,7 @@ FeaturesDict({
     }),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -87,6 +88,10 @@ archivePrefix = {arXiv},
        eprint = {1705.03551},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## trivia_qa/rc (default config)
 

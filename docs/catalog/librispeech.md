@@ -54,6 +54,10 @@ Split            | Examples
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## librispeech/plain_text (default config)
 
 *   **Config description**: Transcriptions are in plain text.

@@ -51,6 +51,7 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
@@ -70,3 +71,7 @@ FeaturesDict({
     url = {https://arxiv.org/abs/1804.03209},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

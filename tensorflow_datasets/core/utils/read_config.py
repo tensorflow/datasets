@@ -21,14 +21,50 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from absl import logging
 import attr
 
 import tensorflow.compat.v2 as tf
 
 
+_OLD = 'interleave_parallel_reads'
+_NEW = 'interleave_cycle_length'
+_WARNING_MSG = (
+    '`{}` argument of `tfds.ReadConfig` is '
+    'deprecated and will be removed in a future version. Please use '
+    '`{}` instead.').format(_OLD, _NEW)
+
+
 # TODO(tfds): Use dataclasses once Py2 support is dropped
 @attr.s
-class ReadConfig(object):
+class _ReadConfig(object):
+  """Configures input reading pipeline."""
+  # General tf.data.Dataset parametters
+  options = attr.ib(factory=tf.data.Options)
+  try_autocache = attr.ib(default=True)
+  # tf.data.Dataset.shuffle parameters
+  shuffle_seed = attr.ib(default=None)
+  shuffle_reshuffle_each_iteration = attr.ib(default=None)
+  # Interleave parameters
+  # Both parallel_reads and block_length have empirically been tested to give
+  # good results on imagenet.
+  # This values might be changes in the future, with more performance test runs.
+  interleave_cycle_length = attr.ib(default=16)
+  interleave_block_length = attr.ib(default=16)
+  experimental_interleave_sort_fn = attr.ib(default=None)
+
+  @property
+  def interleave_parallel_reads(self):
+    logging.warning(_WARNING_MSG)
+    return self.interleave_cycle_length
+
+  @interleave_parallel_reads.setter
+  def interleave_parallel_reads(self, value):
+    logging.warning(_WARNING_MSG)
+    self.interleave_cycle_length = value
+
+
+class ReadConfig(_ReadConfig):
   """Configures input reading pipeline.
 
   Attributes:
@@ -44,7 +80,7 @@ class ReadConfig(object):
       `shuffle_files=True`.
     shuffle_reshuffle_each_iteration: `bool`, forwarded to
       `tf.data.Dataset.shuffle` when `shuffle_files=True`.
-    interleave_parallel_reads: `int`, forwarded to `tf.data.Dataset.interleave`.
+    interleave_cycle_length: `int`, forwarded to `tf.data.Dataset.interleave`.
       Default to 16.
     interleave_block_length: `int`, forwarded to `tf.data.Dataset.interleave`.
       Default to 16.
@@ -54,16 +90,11 @@ class ReadConfig(object):
       to read. This can be used to sort/shuffle the shards to read in
       a custom order, instead of relying on `shuffle_files=True`.
   """
-  # General tf.data.Dataset parametters
-  options = attr.ib(factory=tf.data.Options)
-  try_autocache = attr.ib(default=True)
-  # tf.data.Dataset.shuffle parameters
-  shuffle_seed = attr.ib(default=None)
-  shuffle_reshuffle_each_iteration = attr.ib(default=None)
-  # Interleave parameters
-  # Both parallel_reads and block_length have empirically been tested to give
-  # good results on imagenet.
-  # This values might be changes in the future, with more performance test runs.
-  interleave_parallel_reads = attr.ib(default=16)
-  interleave_block_length = attr.ib(default=16)
-  experimental_interleave_sort_fn = attr.ib(default=None)
+
+  def __init__(self, **kwargs):
+    if _OLD in kwargs:
+      if _NEW in kwargs:
+        raise ValueError('Cannot set both {} and {}'.format(_OLD, _NEW))
+      logging.warning(_WARNING_MSG)
+      kwargs[_OLD] = kwargs.pop(_NEW)
+    super(ReadConfig, self).__init__(**kwargs)

@@ -10,6 +10,11 @@
 </div>
 # `robonet`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 RoboNet contains over 15 million video frames of robot-object interaction, taken
@@ -29,7 +34,9 @@ from 113 unique camera viewpoints.
 
 *   **Versions**:
 
-    *   **`4.0.0`** (default): No release notes.
+    *   **`4.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -47,6 +54,10 @@ from 113 unique camera viewpoints.
   year={2019}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## robonet/robonet_sample_64 (default config)
 
@@ -103,13 +114,10 @@ FeaturesDict({
 *   **Config description**: 64x64 RoboNet.
 
 *   **Download size**: `36.20 GiB`
-
 *   **Dataset size**: `41.36 GiB`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-
 *   **Splits**:
 
 Split   | Examples

@@ -78,8 +78,7 @@ _LABELS = collections.OrderedDict({
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.1.0")
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You must register and agree to user agreement on the dataset page:
@@ -98,6 +97,8 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.Sequence(
                 tfds.features.ClassLabel(names=_LABELS.values())),
+            "image_view": tfds.features.ClassLabel(names=[
+                "frontal", "lateral"]),
         }),
         supervised_keys=("image", "label"),
         homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
@@ -138,17 +139,14 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
       reader = csv.DictReader(csv_f)
       # Get keys for each label from csv
       label_keys = reader.fieldnames[5:]
-      data = []
       for row in reader:
         # Get image based on indicated path in csv
         name = row["Path"]
         labels = [_LABELS[row[key]] for key in label_keys]
-        data.append((name, labels))
-
-    for name, labels in data:
-      record = {
-          "name": name,
-          "image": os.path.join(imgs_path, name),
-          "label": labels
-      }
-      yield name, record
+        image_view = row["Frontal/Lateral"].lower()
+        yield name, {
+            "name": name,
+            "image": os.path.join(imgs_path, name),
+            "label": labels,
+            "image_view": image_view,
+        }

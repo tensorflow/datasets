@@ -31,6 +31,7 @@ import random
 import string
 import sys
 import textwrap
+from typing import Iterator, TypeVar
 import uuid
 
 import six
@@ -40,9 +41,9 @@ from tensorflow_datasets.core import constants
 
 # pylint: disable=g-import-not-at-top
 try:  # Use shutil on Python 3.3+
-  from shutil import disk_usage  # pylint: disable=g-importing-member
+  from shutil import disk_usage  # pytype: disable=import-error  # pylint: disable=g-importing-member
 except ImportError:
-  from psutil import disk_usage  # pylint: disable=g-importing-member
+  from psutil import disk_usage  # pytype: disable=import-error  # pylint: disable=g-importing-member
 if sys.version_info[0] > 2:
   import functools
 else:
@@ -58,11 +59,14 @@ else:
 memoize = functools.lru_cache
 
 
+T = TypeVar("T")
+
+
 def is_notebook():
   """Returns True if running in a notebook (Colab, Jupyter) environement."""
   # Inspired from the tfdm autonotebook code
   try:
-    from IPython import get_ipython  # pylint: disable=import-outside-toplevel,g-import-not-at-top
+    from IPython import get_ipython    # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
     if "IPKernelApp" not in get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except
@@ -74,10 +78,12 @@ def is_notebook():
 @contextlib.contextmanager
 def temporary_assignment(obj, attr, value):
   """Temporarily assign obj.attr to value."""
-  original = getattr(obj, attr, None)
+  original = getattr(obj, attr)
   setattr(obj, attr, value)
-  yield
-  setattr(obj, attr, original)
+  try:
+    yield
+  finally:
+    setattr(obj, attr, original)
 
 
 def zip_dict(*dicts):
@@ -119,7 +125,7 @@ class classproperty(property):  # pylint: disable=invalid-name
   """Descriptor to be used as decorator for @classmethods."""
 
   def __get__(self, obj, objtype=None):
-    return self.fget.__get__(None, objtype)()
+    return self.fget.__get__(None, objtype)()  # pytype: disable=attribute-error
 
 
 class memoized_property(property):  # pylint: disable=invalid-name
@@ -129,12 +135,12 @@ class memoized_property(property):  # pylint: disable=invalid-name
     # See https://docs.python.org/3/howto/descriptor.html#properties
     if obj is None:
       return self
-    if self.fget is None:
+    if self.fget is None:  # pytype: disable=attribute-error
       raise AttributeError("unreadable attribute")
-    attr = "__cached_" + self.fget.__name__
+    attr = "__cached_" + self.fget.__name__  # pytype: disable=attribute-error
     cached = getattr(obj, attr, None)
     if cached is None:
-      cached = self.fget(obj)
+      cached = self.fget(obj)  # pytype: disable=attribute-error
       setattr(obj, attr, cached)
     return cached
 
@@ -218,6 +224,12 @@ def pack_as_nest_dict(flat_d, nest_d):
         "Flat dict strucure do not match the nested dict. Extra keys: "
         "{}".format(list(flat_d.keys())))
   return nest_out_d
+
+
+@contextlib.contextmanager
+def nullcontext(enter_result: T = None) -> Iterator[T]:
+  """Backport of `contextlib.nullcontext`."""
+  yield enter_result
 
 
 def as_proto_cls(proto_cls):

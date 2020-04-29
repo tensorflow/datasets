@@ -42,6 +42,7 @@ FeaturesDict({
     'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -64,3 +65,7 @@ FeaturesDict({
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

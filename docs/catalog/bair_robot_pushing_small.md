@@ -45,6 +45,7 @@ Sequence({
     'image_main': Image(shape=(64, 64, 3), dtype=tf.uint8),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -58,3 +59,7 @@ Sequence({
   Eprint = {arXiv:1710.05268},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

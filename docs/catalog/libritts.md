@@ -59,6 +59,7 @@ FeaturesDict({
     'text_original': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
@@ -74,3 +75,7 @@ FeaturesDict({
   doi = {10.21437/Interspeech.2019-2441},
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

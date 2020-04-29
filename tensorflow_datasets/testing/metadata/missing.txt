@@ -23,8 +23,8 @@ samsum/1.0.0
 scan/mcd1/1.1.1
 scan/mcd2/1.1.1
 scan/mcd3/1.1.1
-so2sat/all/2.0.0
-so2sat/rgb/2.0.0
+so2sat/all/2.1.0
+so2sat/rgb/2.1.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0

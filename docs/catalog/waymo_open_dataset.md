@@ -86,6 +86,7 @@ FeaturesDict({
     'timestamp_micros': tf.int64,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -98,3 +99,7 @@ FeaturesDict({
   year = {2020}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

@@ -49,6 +49,7 @@ FeaturesDict({
     'topic_name': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -77,6 +78,10 @@ abstract="This paper describes the methodology for testing the performance of Ma
 isbn="978-3-642-40802-1"
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## qa4mre/2011.main.DE (default config)
 

@@ -39,6 +39,10 @@ Sinhala-English.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## flores/neen_plain_text (default config)
 
 *   **Config description**: Translation dataset from ne to en, uses encoder
@@ -61,6 +65,7 @@ Translation({
     'ne': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ne', 'en')`

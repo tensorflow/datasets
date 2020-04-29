@@ -20,7 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import h5py
 import numpy as np
 from six import moves
 import tensorflow.compat.v2 as tf
@@ -121,7 +120,11 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
     # Simultaneously iterating through the different data sets in the hdf5
     # file is >100x slower and the data set is small (26.7MB). Hence, we first
     # load everything into memory before yielding the samples.
-    image_array, class_array, values_array = _load_data(filepath)
+    with tfds.core.lazy_imports.h5py.File(filepath, "r") as h5dataset:
+      image_array = np.array(h5dataset["imgs"])
+      class_array = np.array(h5dataset["latents"]["classes"])
+      values_array = np.array(h5dataset["latents"]["values"])
+
     for i, (image, classes, values) in enumerate(moves.zip(
         image_array, class_array, values_array)):
       record = dict(
@@ -139,12 +142,3 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
       if self.version > "2.0.0":
         record["id"] = "{:06d}".format(i)
       yield i, record
-
-
-def _load_data(filepath):
-  """Loads the images, latent classes, and latent values into Numpy arrays."""
-  with h5py.File(filepath, "r") as h5dataset:
-    image_array = np.array(h5dataset["imgs"])
-    class_array = np.array(h5dataset["latents"]["classes"])
-    values_array = np.array(h5dataset["latents"]["values"])
-  return image_array, class_array, values_array
