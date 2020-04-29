@@ -59,7 +59,6 @@ _ALLOWED_LAZY_DEPS = [
     "skimage.external.tifffile",
     "tensorflow_io",
     "tldextract",
-    "os",
 ]
 
 
