@@ -196,7 +196,7 @@ def _read_files(
       for k, vals in utils.zip_dict(*files)
   }
 
-  parallel_reads = read_config.interleave_parallel_reads
+  cycle_length = read_config.interleave_cycle_length
   block_length = read_config.interleave_block_length
 
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
@@ -212,7 +212,7 @@ def _read_files(
   ds = instruction_ds.interleave(
       functools.partial(_get_dataset_from_filename,
                         do_skip=do_skip, do_take=do_take),
-      cycle_length=parallel_reads,
+      cycle_length=cycle_length,
       block_length=block_length,
       num_parallel_calls=tf.data.experimental.AUTOTUNE,
   )
