@@ -93,7 +93,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   if not tf.io.gfile.exists(dst_dir):
     tf.io.gfile.makedirs(dst_dir)
   try:
-    figure = tfds.show_examples(builder.info, ds)
+    figure = tfds.show_examples(ds, builder.info)
   except Exception:  # pylint: disable=broad-except
     logging.info(f'Visualisation not supported for dataset `{full_name}`')
     return
