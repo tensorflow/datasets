@@ -17,11 +17,13 @@
 
 from tensorflow_datasets.core.visualization.image_visualizer import ImageGridVisualizer
 from tensorflow_datasets.core.visualization.show_examples import show_examples
+from tensorflow_datasets.core.visualization.video_visualizer import VideoGridVisualizer
 from tensorflow_datasets.core.visualization.visualizer import Visualizer
 
 
 __all__ = [
     "ImageGridVisualizer",
     "show_examples",
+    "VideoGridVisualizer",
     "Visualizer",
 ]

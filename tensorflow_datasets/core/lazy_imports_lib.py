@@ -94,6 +94,12 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def os(cls):
+    """For testing purposes only."""
+    return _try_import("os")
+
+  @utils.classproperty
+  @classmethod
   def pandas(cls):
     return _try_import("pandas")
 
@@ -139,12 +145,6 @@ class LazyImporter(object):
   @classmethod
   def tldextract(cls):
     return _try_import("tldextract")
-
-  @utils.classproperty
-  @classmethod
-  def os(cls):
-    """For testing purposes only."""
-    return _try_import("os")
 
   @utils.classproperty
   @classmethod

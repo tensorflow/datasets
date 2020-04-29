@@ -28,6 +28,7 @@ from tensorflow_datasets.core import visualization
 
 # Import for registration
 from tensorflow_datasets.image_classification import imagenet  # pylint: disable=unused-import,g-bad-import-order
+from tensorflow_datasets.video import moving_mnist
 
 
 class ShowExamplesTest(testing.TestCase):
@@ -35,9 +36,14 @@ class ShowExamplesTest(testing.TestCase):
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples(self, mock_fig):
     with testing.mock_data(num_examples=20):
-      ds, ds_info = registered.load(
+      ds_image, ds_info_image = registered.load(
           'imagenet2012', split='train', with_info=True)
-    visualization.show_examples(ds_info, ds)
+    visualization.show_examples(ds_info_image, ds_image)
+
+    with testing.mock_data(num_examples=20):
+          ds_video, ds_info_video = registered.load(
+              'moving_mnist', split='test', with_info=True)
+    visualization.show_examples(ds_info_video, ds_video)
 
   # TODO(tfds): Should add test when there isn't enough examples (ds.take(3))
 

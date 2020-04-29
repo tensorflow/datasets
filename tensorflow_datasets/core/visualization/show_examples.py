@@ -22,9 +22,11 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.core.visualization import image_visualizer
+from tensorflow_datasets.core.visualization import video_visualizer
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
+    video_visualizer.VideoGridVisualizer(),
 ]
 
 

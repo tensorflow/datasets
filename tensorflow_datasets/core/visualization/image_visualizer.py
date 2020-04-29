@@ -69,7 +69,7 @@ def _add_image(ax, image):
   if len(image.shape) != 3:
     raise ValueError(
         'Image dimension should be 3. tfds.show_examples does not support '
-        'batched examples or video.')
+        'batched examples.')
   _, _, c = image.shape
   if c == 1:
     image = image.reshape(image.shape[:2])
