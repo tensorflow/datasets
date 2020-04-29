@@ -27,6 +27,14 @@ import attr
 import tensorflow.compat.v2 as tf
 
 
+_OLD = 'interleave_parallel_reads'
+_NEW = 'interleave_cycle_length'
+_WARNING_MSG = (
+    '`{}` argument of `tfds.ReadConfig` is '
+    'deprecated and will be removed in a future version. Please use '
+    '`{}` instead.').format(_OLD, _NEW)
+
+
 # TODO(tfds): Use dataclasses once Py2 support is dropped
 @attr.s
 class _ReadConfig(object):
@@ -44,6 +52,16 @@ class _ReadConfig(object):
   interleave_cycle_length = attr.ib(default=16)
   interleave_block_length = attr.ib(default=16)
   experimental_interleave_sort_fn = attr.ib(default=None)
+
+  @property
+  def interleave_parallel_reads(self):
+    logging.warning(_WARNING_MSG)
+    return self.interleave_cycle_length
+
+  @interleave_parallel_reads.setter
+  def interleave_parallel_reads(self, value):
+    logging.warning(_WARNING_MSG)
+    self.interleave_cycle_length = value
 
 
 class ReadConfig(_ReadConfig):
@@ -74,14 +92,9 @@ class ReadConfig(_ReadConfig):
   """
 
   def __init__(self, **kwargs):
-    old = 'interleave_parallel_reads'
-    new = 'interleave_cycle_length'
-    if old in kwargs:
-      if new in kwargs:
-        raise ValueError('Cannot set both {} and {}'.format(old, new))
-      logging.warning(
-          '`%s` argument of `tfds.ReadConfig` is '
-          'deprecated and will be removed in a future version. Please use '
-          '`%s` instead.', old, new)
-      kwargs[old] = kwargs.pop(new)
+    if _OLD in kwargs:
+      if _NEW in kwargs:
+        raise ValueError('Cannot set both {} and {}'.format(_OLD, _NEW))
+      logging.warning(_WARNING_MSG)
+      kwargs[_OLD] = kwargs.pop(_NEW)
     super(ReadConfig, self).__init__(**kwargs)
