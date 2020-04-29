@@ -29,7 +29,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import tempfile
 import textwrap
 
 import numpy as np
@@ -176,27 +175,25 @@ class Robonet(tfds.core.BeamBasedBuilder):
   def _build_pcollection(self, pipeline, filedir):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    h5py = tfds.core.lazy_imports.h5py
 
     def _process_example(filename):
       """Converts one video from hdf5 format."""
-      with tempfile.TemporaryDirectory() as tmpdirname:
-        hd5_path = filename
-        with h5py.File(hd5_path) as hf:
-          video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
-          states = hf['env']['state'][:].astype(np.float32)
-          states = np.pad(
-              states, ((0, 0), (0, STATES_DIM-states.shape[1])), 'constant')
-          actions = hf['policy']['actions'][:].astype(np.float32)
-          actions = np.pad(
-              actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
+      h5py = tfds.core.lazy_imports.h5py
+      with h5py.File(filename) as hf:
+        video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
+        states = hf['env']['state'][:].astype(np.float32)
+        states = np.pad(
+            states, ((0, 0), (0, STATES_DIM-states.shape[1])), 'constant')
+        actions = hf['policy']['actions'][:].astype(np.float32)
+        actions = np.pad(
+            actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
 
-        features = {
-            'video': video_bytes,
-            'actions': actions,
-            'states': states,
-        }
-        return os.path.basename(filename), features
+      features = {
+          'video': video_bytes,
+          'actions': actions,
+          'states': states,
+      }
+      return os.path.basename(filename), features
 
     filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
     return (
@@ -204,5 +201,3 @@ class Robonet(tfds.core.BeamBasedBuilder):
         | beam.Create(filenames)
         | beam.Map(_process_example)
     )
-
-
