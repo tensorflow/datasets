@@ -148,9 +148,16 @@ class NightlyDocUtil(object):
   def __init__(self):
     self._nightly_dict: NightlyDict = _load_nightly_dict()
 
-  def is_builder_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
+  def is_builder_nightly(
+      self,
+      builder: Union[tfds.core.DatasetBuilder, str],
+  ) -> bool:
     """Returns `True` if the builder is new."""
-    return self._nightly_dict[builder.name] is True  # pylint: disable=g-bool-id-comparison
+    if isinstance(builder, tfds.core.DatasetBuilder):
+      builder_name = builder.name
+    else:
+      builder_name = builder
+    return self._nightly_dict[builder_name] is True  # pylint: disable=g-bool-id-comparison
 
   def is_config_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
     """Returns `True` if the config is new."""
@@ -182,12 +189,9 @@ class NightlyDocUtil(object):
 
     return reduce(self._nightly_dict[builder.name])
 
-  @property
-  def icon(self) -> str:
-    """Returns the nightly icon."""
-    return (
-        '<span class="material-icons" '
-        'title="Available only in the tfds-nightly package">nights_stay</span>')
+  icon = (
+      '<span class="material-icons" '
+      'title="Available only in the tfds-nightly package">nights_stay</span>')
 
 
 @tfds.core.utils.memoize()
@@ -261,7 +265,7 @@ def make_module_to_builder_dict(datasets=None):
     current_mod_ctr = module_to_builder
     for mod in modules:
       current_mod_ctr = current_mod_ctr[mod]
-    current_mod_ctr.append(builder)
+    current_mod_ctr.append(builder)  # pytype: disable=attribute-error
 
   module_to_builder = module_to_builder['tensorflow_datasets']
   return module_to_builder
