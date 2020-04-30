@@ -20,12 +20,14 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from types import ModuleType
+
 import importlib
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
 
-def _try_import(module_name):
+def _try_import(module_name: str) -> ModuleType:
   """Try importing a module, with an informative error message on failure."""
   try:
     mod = importlib.import_module(module_name)
@@ -48,58 +50,58 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def apache_beam(cls):
+  def apache_beam(cls) -> ModuleType("apache_beam"):
     return _try_import("apache_beam")
 
   @utils.classproperty
   @classmethod
-  def crepe(cls):
+  def crepe(cls) -> ModuleType("crepe"):
     return _try_import("crepe")
 
   @utils.classproperty
   @classmethod
-  def cv2(cls):
+  def cv2(cls) -> ModuleType("cv2"):
     return _try_import("cv2")  # pylint: disable=unreachable
 
   @utils.classproperty
   @classmethod
-  def h5py(cls):
+  def h5py(cls) -> ModuleType("h5py"):
     return _try_import("h5py")
 
   @utils.classproperty
   @classmethod
-  def langdetect(cls):
+  def langdetect(cls) -> ModuleType("langdetect"):
     return _try_import("langdetect")
 
   @utils.classproperty
   @classmethod
-  def librosa(cls):
+  def librosa(cls) -> ModuleType("librosa"):
     return _try_import("librosa")
 
   @utils.classproperty
   @classmethod
-  def matplotlib(cls):
+  def matplotlib(cls) -> ModuleType("matplotlib"):
     _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
 
   @utils.classproperty
   @classmethod
-  def mwparserfromhell(cls):
+  def mwparserfromhell(cls) -> ModuleType("mwparserfromhell"):
     return _try_import("mwparserfromhell")
 
   @utils.classproperty
   @classmethod
-  def nltk(cls):
+  def nltk(cls) -> ModuleType("nltk"):
     return _try_import("nltk")
 
   @utils.classproperty
   @classmethod
-  def pandas(cls):
+  def pandas(cls) -> ModuleType("pandas"):
     return _try_import("pandas")
 
   @utils.classproperty
   @classmethod
-  def PIL_Image(cls):  # pylint: disable=invalid-name
+  def PIL_Image(cls) -> ModuleType("PIL.Image"):  # pylint: disable=invalid-name
     # TiffImagePlugin need to be activated explicitly on some systems
     # https://github.com/python-pillow/Pillow/blob/5.4.x/src/PIL/Image.py#L407
     _try_import("PIL.TiffImagePlugin")
@@ -107,24 +109,24 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def pretty_midi(cls):
+  def pretty_midi(cls) -> ModuleType("pretty_midi"):
     return _try_import("pretty_midi")
 
   @utils.classproperty
   @classmethod
-  def pydub(cls):
+  def pydub(cls) -> ModuleType("pydub"):
     return _try_import("pydub")
 
   @utils.classproperty
   @classmethod
-  def scipy(cls):
+  def scipy(cls) -> ModuleType("scipy"):
     _try_import("scipy.io")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 
   @utils.classproperty
   @classmethod
-  def skimage(cls):
+  def skimage(cls) -> ModuleType("skimage"):
     _try_import("skimage.color")
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
@@ -132,23 +134,23 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def tensorflow_io(cls):
+  def tensorflow_io(cls) -> ModuleType("tensorflow_io"):
     return _try_import("tensorflow_io")
 
   @utils.classproperty
   @classmethod
-  def tldextract(cls):
+  def tldextract(cls) -> ModuleType("tldextract"):
     return _try_import("tldextract")
 
   @utils.classproperty
   @classmethod
-  def os(cls):
+  def os(cls) -> ModuleType("os"):
     """For testing purposes only."""
     return _try_import("os")
 
   @utils.classproperty
   @classmethod
-  def test_foo(cls):
+  def test_foo(cls) -> ModuleType("test_foo"):
     """For testing purposes only."""
     return _try_import("test_foo")
 
