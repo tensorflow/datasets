@@ -113,7 +113,7 @@ class Imagenet2012Subset(Imagenet2012):
     if isinstance(subset_file, list):  # it will only be a list during testing,
       subset_file = subset_file[0]     # where the first entry is 1percent.txt.
     with tf.io.gfile.GFile(subset_file) as fp:
-      subset = set(fp.read().split('\n'))
+      subset = set(fp.read().splitlines())  # remove trailing `\r` in Windows
 
     return [
         tfds.core.SplitGenerator(
