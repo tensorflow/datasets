@@ -1,6 +1,6 @@
 ---
-name: Documentation Issue
-about: Use this template for documentation related issues
+name: Documentation
+about: Documentation related issues
 title: ''
 labels: documentation
 assignees: ''
