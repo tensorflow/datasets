@@ -4,6 +4,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
 [![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
+[![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 
 * [List of datasets](https://www.tensorflow.org/datasets/catalog/overview)
 * Getting started:
@@ -30,7 +31,7 @@ build an input pipeline when you load a dataset.
 * [Installation](#installation)
 * [Usage](#usage)
 * [`DatasetBuilder`](#datasetbuilder)
-* [NumPy usage with `tfds.as_numpy`](#numpy-usage-with-tfdsasnumpy)
+* [NumPy usage with `tfds.as_numpy`](#numpy-usage-with-tfdsas_numpy)
 * [Citation](#citation)
 * [Want a certain dataset?](#want-a-certain-dataset)
 * [*Disclaimers*](#disclaimers)
@@ -40,7 +41,7 @@ build an input pipeline when you load a dataset.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.5+ to be installed.
+# Requires TF 1.15+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:
@@ -103,31 +104,30 @@ print(info)
 
 This will print the dataset info content:
 
-```
+```python
 tfds.core.DatasetInfo(
     name='mnist',
-    version=1.0.0,
+    version=3.0.1,
     description='The MNIST database of handwritten digits.',
     homepage='http://yann.lecun.com/exdb/mnist/',
     features=FeaturesDict({
         'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
-    },
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    }),
     total_num_examples=70000,
     splits={
-        'test': <tfds.core.SplitInfo num_examples=10000>,
-        'train': <tfds.core.SplitInfo num_examples=60000>
+        'test': 10000,
+        'train': 60000,
     },
     supervised_keys=('image', 'label'),
-    citation='"""
-        @article{lecun2010mnist,
-          title={MNIST handwritten digit database},
-          author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-          journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},
-          volume={2},
-          year={2010}
-        }
-    """',
+    citation="""@article{lecun2010mnist,
+      title={MNIST handwritten digit database},
+      author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+      journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},
+      volume={2},
+      year={2010}
+    }""",
+    redistribution_info=,
 )
 ```
 
@@ -208,4 +208,5 @@ by adding a thumbs-up reaction to the issue.
 *If you're interested in learning more about responsible AI practices, including*
 *fairness, please see Google AI's [Responsible AI Practices](https://ai.google/education/responsible-ai-practices).*
 
-*`tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.*
+*`tensorflow/datasets` is Apache 2.0 licensed. See the
+[`LICENSE`](LICENSE) file.*
