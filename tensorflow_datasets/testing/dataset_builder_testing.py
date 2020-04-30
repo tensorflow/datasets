@@ -188,7 +188,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     """Raises error if forbidden os functions are called instead of gfile."""
     err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead. "
                          "This makes code compatible with more filesystems.")
+    sep = os.path.sep
     mock_os_path = absltest.mock.Mock(os.path, wraps=os.path)
+    mock_os_path.sep = sep
     for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
       getattr(mock_os_path, fop).side_effect = err
     mock_os = absltest.mock.Mock(os, path=mock_os_path)

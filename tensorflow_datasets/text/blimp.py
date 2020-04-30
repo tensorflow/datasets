@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import json
-import os
+
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -43,7 +43,7 @@ expert-crafted grammars.
 """
 
 _PROJECT_URL = 'https://github.com/alexwarstadt/blimp/tree/master/'
-_DOWNLOAD_URL = 'https://raw.githubusercontent.com/alexwarstadt/blimp/master/'
+_DOWNLOAD_URL = 'https://raw.githubusercontent.com/alexwarstadt/blimp/master'
 
 
 class BlimpConfig(tfds.core.BuilderConfig):
@@ -172,7 +172,7 @@ class Blimp(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     cfg = self.builder_config
     download_urls = {
-        cfg.name: os.path.join(_DOWNLOAD_URL, 'data', cfg.name + '.jsonl')
+        cfg.name: '/'.join([_DOWNLOAD_URL, 'data', cfg.name + '.jsonl'])
     }
 
     downloaded_files = dl_manager.download_and_extract(download_urls)
