@@ -20,9 +20,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from builtins import __import__ as original_import_fun
+import builtins
 import contextlib
 import importlib
-import sys
 import types
 
 from tensorflow_datasets.core.utils import py_utils as utils
@@ -75,7 +76,6 @@ def _try_import(module_name):
 class FakeModule(types.ModuleType):
   """A fake module which raise ImportError whenever an unknown attribute is accessed"""
   def __init__(self, name):
-    self.__path__ = None
     super(FakeModule, self).__init__(name)
 
   def __getattr__(self, attr):
@@ -83,22 +83,13 @@ class FakeModule(types.ModuleType):
     raise ImportError(err_msg)
 
 
-class CustomImporter(object):
-  """Finder and Loader for modules in `_ALLOWED_LAZY_DEPS`"""
-
-  def find_module(self, fullname, _):
-    """Accept if fullname is present in `_ALLOWED_LAZY_DEPS`, else return None"""
-    if fullname in _ALLOWED_LAZY_DEPS:
-      return self
-    return None
-
-  def load_module(self, fullname):
-    """Load a `FakeModule` if the requested module is not present in sys.modules"""
-    if fullname not in sys.modules:
-      mod = FakeModule(fullname)
-      mod.__loader__ = self
-      sys.modules[fullname] = mod
-    return sys.modules[fullname]
+def _custom_import(name, *args, **kwargs):
+  try:
+    return original_import_fun(name, *args, **kwargs)
+  except ImportError:
+    if name in _ALLOWED_LAZY_DEPS:
+      return FakeModule(name)
+    raise ImportError
 
 
 @contextlib.contextmanager
@@ -109,16 +100,14 @@ def try_import():
   It is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
   """
   try:
-    sys.meta_path.append(CustomImporter())
-    yield
+    with utils.temporary_assignment(builtins, "__import__", _custom_import):
+      yield
   except ImportError as err:
     err_msg = ("Unknown import {name}. Currently lazy_imports does not "
                "support {name} module. If you believe this is correct, "
                "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
                "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
     utils.reraise(suffix=err_msg)
-  finally:
-    sys.meta_path.pop()
 
 
 class LazyImporter(object):

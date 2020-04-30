@@ -36,7 +36,6 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   @parameterized.parameters(
       "cv2",
       "langdetect",
-      "matplotlib",
       "mwparserfromhell",
       "nltk",
       "os",
@@ -63,10 +62,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   def test_lazy_import_context_manager(self):
     with tfds.core.try_import():
       import pandas
-      import matplotlib.pyplot as plt
 
     self.assertTrue(hasattr(pandas, "read_csv"))
-    self.assertTrue(hasattr(plt, "figure"))
 
   def test_import_without_context_manager(self):
     import nltk
@@ -89,6 +86,17 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
       with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
         new_module.some_function()
+
+  def test_nested_imports(self):
+    with tfds.core.try_import():
+      import matplotlib
+
+    self.assertFalse(hasattr(matplotlib, "pyplot"))
+
+    with tfds.core.try_import():
+      import matplotlib.pyplot
+
+    self.assertTrue(hasattr(matplotlib, "pyplot"))
 
   # pylint: enable=import-outside-toplevel, unused-import
 
