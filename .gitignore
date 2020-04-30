@@ -21,6 +21,3 @@ dist/
 
 # PyCharm
 .idea
-
-# VS Code folders
-.vscode/
