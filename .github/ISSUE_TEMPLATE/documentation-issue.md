@@ -7,26 +7,12 @@ assignees: ''
 
 ---
 
-**URL(s) with the issue**
-
-Please provide a link to the documentation entry, for example:
-
 **Description of issue**
 
-A clear and concise description of what the problem is.
-
-Ex. Dataset download link not working or update dataset citation.
-
-**Describe the solution you'd like**
-
-A clear and concise description of what you want to happen.
-
-**Additional context**
-
-Add any other context about the issue.
+Describe what the problem is. Please include URL(s) if possible.
 
 **Submit a pull request?**
 
-Are you planning to also submit a pull request to fix the issue?
+If the issue is trivial to fix (e.g. typo), it may be easier to directly send us a PR without opening an issue first.
 
-See our contributor guide: [CONTRIBUTING.md](CONTRIBUTING.md).
+Please note our catalog and API are automatically generated from the implementation. For example, if you see a typo in [celeb_a.md](https://www.tensorflow.org/datasets/catalog/celeb_a), modifications have to be done in [`tensorflow_datasets/image/celeba.py`](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image/celeba.py).
