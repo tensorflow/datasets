@@ -42,7 +42,9 @@ correspond to entities. The datasets have train/dev/test splits per language.
 The dataset is cleaned up by page filtering to remove disambiguation pages,
 redirect pages, deleted pages, and non-entity pages. Each example contains the
 wikidata id of the entity, and the full Wikipedia article after page processing
-that removes non-content sections and structured objects.
+that removes non-content sections and structured objects. The language models
+trained on this corpus - including 41 monolingual models, and 2 multilingual
+models - can be found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 """
 
 _LICENSE = """
@@ -81,7 +83,7 @@ class Wiki40bConfig(tfds.core.BuilderConfig):
     self.language = language
 
 
-_VERSION = tfds.core.Version("1.1.0")
+_VERSION = tfds.core.Version("1.2.0")
 
 
 class Wiki40b(tfds.core.BeamBasedBuilder):
