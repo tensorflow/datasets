@@ -36,6 +36,7 @@ pytest \
   -n auto \
   --disable-warnings \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+  --ignore="tensorflow_datasets/core/dataset_builder_notfdv_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \

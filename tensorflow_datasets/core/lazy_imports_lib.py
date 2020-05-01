@@ -132,6 +132,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def tensorflow_data_validation(cls):
+    return _try_import("tensorflow_data_validation")
+
+  @utils.classproperty
+  @classmethod
   def tensorflow_io(cls):
     return _try_import("tensorflow_io")
 

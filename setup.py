@@ -50,7 +50,7 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
-    'tensorflow-metadata',
+    'tensorflow-metadata>=0.15,<0.16',
     'termcolor',
     'tqdm',
     'wrapt',
@@ -65,11 +65,11 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
-    'apache-beam',
     'jupyter',
     'mako',
     'pytest',
     'pytest-xdist',
+    'tensorflow-data-validation>=0.15,<0.16',
     # Python 2 backports
     'mock;python_version<"3"',
     # TODO(b/142892342): Re-enable
@@ -154,10 +154,11 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 
 
 EXTRAS_REQUIRE = {
-    'apache-beam': ['apache-beam'],
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.15.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
+    'tensorflow-data-validation': ['tensorflow-data-validation>=0.15,<0.16'],
+
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
     'tests': TESTS_REQUIRE + all_dataset_extras,
