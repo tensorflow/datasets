@@ -77,13 +77,13 @@ class Wiki40bConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(Wiki40bConfig, self).__init__(
-        name="Wiki40B.{0}".format(language),
-        description="Wiki40B dataset for {0}.".format(language),
+        name=language,
+        description="Wiki40B dataset for {}.".format(language),
         **kwargs)
     self.language = language
 
 
-_VERSION = tfds.core.Version("1.2.0")
+_VERSION = tfds.core.Version("1.3.0")
 
 
 class Wiki40b(tfds.core.BeamBasedBuilder):

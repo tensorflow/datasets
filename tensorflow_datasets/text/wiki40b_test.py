@@ -42,7 +42,7 @@ class Wiki40bTest(testing.DatasetBuilderTestCase):
     wiki40b._DATA_DIRECTORY = _EXAMPLE_DIR
 
   DATASET_CLASS = wiki40b.Wiki40b
-  BUILDER_CONFIG_NAMES_TO_TEST = ["Wiki40B.en"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
 
   SPLITS = {
       "train": 3,
