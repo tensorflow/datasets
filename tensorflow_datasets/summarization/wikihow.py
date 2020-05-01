@@ -14,11 +14,9 @@
 # limitations under the License.
 
 # Lint as: python3
+
 """WikiHow Datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import csv
 import os
@@ -170,7 +168,7 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     with tf.io.gfile.GFile(path) as f:
       reader = csv.reader(f)
-      headers = next(reader)
+      headers = next(reader)  # pylint: disable=stop-iteration-return
       if self.builder_config.name == "all" and headers != [
           "headline", "title", "text"
       ]:
@@ -210,5 +208,4 @@ def _filter_and_clean(abstract, article):
     # remove extra commas in articles
     article = re.sub(r"[.]+[\n]+[,]", ".\n", article)
     return abstract, article
-  else:
-    return "", ""
+  return "", ""

@@ -14,7 +14,10 @@
 # limitations under the License.
 
 # Lint as: python3
+
 """Text datasets."""
+
+# pylint: disable=c0103
 
 from tensorflow_datasets.summarization.aeslc import Aeslc
 from tensorflow_datasets.summarization.big_patent import BigPatent
