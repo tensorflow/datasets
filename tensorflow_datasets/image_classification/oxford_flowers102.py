@@ -79,8 +79,7 @@ The test set consists of the remaining 6149 images (minimum 20 per class).
 class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
   """Oxford 102 category flower dataset."""
 
-  VERSION = tfds.core.Version(
-      "2.1.0", "Added label names")
+  VERSION = tfds.core.Version("2.1.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
