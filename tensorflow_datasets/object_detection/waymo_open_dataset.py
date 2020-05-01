@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The Waymo Open Dataset. See waymo.com/open."""
 
 from __future__ import absolute_import
@@ -61,7 +62,6 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
 
   VERSION = tfds.core.Version("0.1.0")
   _CLOUD_BUCKET = "gs://waymo_open_dataset_v_1_0_0_individual_files/"
-
 
   def _info(self):
 

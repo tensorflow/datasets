@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Datasets of the Open Images Challange 2019.
 
 https://storage.googleapis.com/openimages/web/challenge2019.html
@@ -175,7 +176,7 @@ class OpenImagesChallenge2019Detection(_OpenImagesChallenge2019):
     # "imports only at the top" rule), so that beam is only required during the
     # generation of the dataset, and not to use the dataset itself (once built).
     # See: https://www.tensorflow.org/datasets/beam_datasets.
-    import tensorflow_datasets.object_detection.open_images_challenge2019_beam as oi_beam  # pylint: disable=g-import-not-at-top
+    import tensorflow_datasets.object_detection.open_images_challenge2019_beam as oi_beam  # pylint: disable=g-import-not-at-top,import-outside-toplevel
 
     if split == "test":
       # Note: annotations are not available for the test split.

@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """Tests for Cityscapes dataset module."""
 
 from __future__ import absolute_import
