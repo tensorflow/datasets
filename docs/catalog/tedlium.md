@@ -10,11 +10,6 @@
 </div>
 # `tedlium`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Source code**:
     [`tfds.audio.tedlium.Tedlium`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/tedlium.py)
 *   **Versions**:
@@ -41,7 +36,7 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
     Not supported.
 
-## tedlium/release1 (default config)<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## tedlium/release1 (default config)
 
 *   **Description**:
 
@@ -85,7 +80,7 @@ Split        | Examples
 }
 ```
 
-## tedlium/release2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## tedlium/release2
 
 *   **Description**:
 
@@ -141,7 +136,7 @@ Split        | Examples
 }
 ```
 
-## tedlium/release3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## tedlium/release3
 
 *   **Description**:
 

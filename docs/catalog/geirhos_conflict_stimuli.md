@@ -48,7 +48,6 @@ FeaturesDict({
     'texture_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
 })
 ```
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'shape_label')`

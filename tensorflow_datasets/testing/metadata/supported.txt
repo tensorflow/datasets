@@ -322,7 +322,6 @@ dmlab/2.0.0
 downsampled_imagenet/32x32/2.0.0
 downsampled_imagenet/64x64/2.0.0
 dsprites/2.0.0
-dtd/3.0.0
 duke_ultrasound/1.0.0
 emnist/balanced/3.0.0
 emnist/byclass/3.0.0
@@ -599,7 +598,6 @@ open_images_v4/200k/2.0.0
 open_images_v4/300k/2.0.0
 open_images_v4/original/2.0.0
 opinosis/1.0.0
-oxford_flowers102/2.1.0
 oxford_iiit_pet/3.1.0
 para_crawl/enbg_plain_text/1.0.0
 para_crawl/encs_plain_text/1.0.0
@@ -735,7 +733,7 @@ ted_multi_translate/plain_text/1.0.0
 tedlium/release1/1.0.1
 tedlium/release2/1.0.1
 tedlium/release3/1.0.1
-tf_flowers/3.0.0
+tf_flowers/3.0.1
 the300w_lp/1.0.0
 tiny_shakespeare/1.0.0
 titanic/2.0.0
