@@ -26,6 +26,7 @@ import contextlib
 import hashlib
 import io
 import itertools
+import logging
 import os
 import random
 import string
@@ -66,8 +67,8 @@ def is_notebook():
   """Returns True if running in a notebook (Colab, Jupyter) environement."""
   # Inspired from the tfdm autonotebook code
   try:
-    from IPython import get_ipython    # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
-    if "IPKernelApp" not in get_ipython().config:
+    import IPython  # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
+    if "IPKernelApp" not in IPython.get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except
     return False
@@ -91,6 +92,18 @@ def zip_dict(*dicts):
   for key in set(itertools.chain(*dicts)):  # set merge all keys
     # Will raise KeyError if the dict don't have the same keys
     yield key, tuple(d[key] for d in dicts)
+
+
+@contextlib.contextmanager
+def disable_logging():
+  """Temporarily disable the logging."""
+  logger = logging.getLogger()
+  logger_disabled = logger.disabled
+  logger.disabled = True
+  try:
+    yield
+  finally:
+    logger.disabled = logger_disabled
 
 
 class NonMutableDict(dict):
