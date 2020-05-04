@@ -350,7 +350,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         beam_options = None
 
       download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.FORCE,
+          compute_stats=download.ComputeStatsMode.SKIP,
           beam_runner=beam_runner,
           beam_options=beam_options,
       )
