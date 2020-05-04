@@ -46,12 +46,12 @@ _POSITIONAL_ARG_ERR_MSG = (
 # `@typing.overload` to define both signatures.
 @typing.overload
 def disallow_positional_args(
-    wrapped: None,
-    allowed: Optional[List[str]],
+    wrapped: None = ...,
+    allowed: Optional[List[str]] = ...,
 ) -> Callable[[Fn], Fn]:
   ...
 @typing.overload
-def disallow_positional_args(wrapped: Fn, allowed: None) -> Fn:  # pylint: disable=g-wrong-blank-lines
+def disallow_positional_args(wrapped: Fn, allowed: None = ...) -> Fn:  # pylint: disable=g-wrong-blank-lines
   ...
 def disallow_positional_args(wrapped=None, allowed=None):  # pylint: disable=g-wrong-blank-lines
   """Requires function to be called using keyword arguments."""
