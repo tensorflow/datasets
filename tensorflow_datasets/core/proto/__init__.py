@@ -18,6 +18,4 @@
 
 from tensorflow_datasets.core.proto import dataset_info_generated_pb2 as dataset_info_pb2  # pylint: disable=line-too-long
 
-from google.protobuf import json_format
-
 SplitInfo = dataset_info_pb2.SplitInfo

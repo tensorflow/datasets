@@ -169,7 +169,7 @@ def _generate_images_and_annotations(tf_record_file):
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
   for data in dataset:
     frame = open_dataset.Frame()
-    frame.ParseFromString(bytearray(data.numpy()))
+    frame.ParseFromString(bytearray(data.numpy()))  # pytype: disable=wrong-arg-types
 
     image_and_annotation = {
         "context": {

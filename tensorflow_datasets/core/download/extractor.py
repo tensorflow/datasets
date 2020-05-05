@@ -168,7 +168,7 @@ def iter_tar(arch_f, stream=False):
         continue
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
-        path = _normpath(member.path)
+        path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
           continue
         yield [path, extract_file]
@@ -196,7 +196,7 @@ def iter_zip(arch_f):
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
-      if member.is_dir():  # Filter directories
+      if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
         continue
       path = _normpath(member.filename)
       if not path:

@@ -147,7 +147,7 @@ def _get_mapping_files():
   train_rand = np.random.permutation(range(1, NUM_IMAGES + 1))  # 1-based index
   fobj_rand = tempfile.NamedTemporaryFile(
       delete=False, mode="wb", suffix=".txt")
-  fobj_rand.write(",".join([str(x) for x in train_rand]))
+  fobj_rand.write(",".join([str(x) for x in train_rand]))  # pytype: disable=wrong-arg-types
   fobj_rand.close()
 
   # Mapping file.
@@ -157,7 +157,7 @@ def _get_mapping_files():
   vid_ids = list(range(NUM_VIDEOS)) * (NUM_IMAGES // NUM_VIDEOS)
   for vid in vid_ids:
     row = "2011_09_26 2011_09_26_drive_00{:02d}_sync 0000000123".format(vid)
-    fobj_map.write(row + "\n")
+    fobj_map.write(row + "\n")  # pytype: disable=wrong-arg-types
   fobj_map.close()
 
   return fobj_rand.name, fobj_map.name

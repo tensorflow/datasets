@@ -185,7 +185,7 @@ def get_dl_fname(url, checksum):
   Returns:
     string of 90 chars max.
   """
-  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
+  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))  # pytype: disable=wrong-arg-types
   checksum = tf.compat.as_text(checksum)[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return '%s%s%s' % (name, checksum, extension)

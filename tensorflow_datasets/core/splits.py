@@ -34,9 +34,9 @@ class SplitInfo(object):
 
   @property
   def num_examples(self):
-    if self.shard_lengths:
-      return sum(int(sl) for sl in self.shard_lengths)
-    return int(self.statistics.num_examples)
+    if self.shard_lengths:  # pytype: disable=attribute-error
+      return sum(int(sl) for sl in self.shard_lengths)  # pytype: disable=attribute-error
+    return int(self.statistics.num_examples)  # pytype: disable=attribute-error
 
   @property
   def num_shards(self):
@@ -150,7 +150,7 @@ class Split(str):
   """
 
   def __repr__(self):
-    return "{}({})".format(type(self).__name__, super(Split, self).__repr__())
+    return "{}({})".format(type(self).__name__, super(Split, self).__repr__())  # pytype: disable=wrong-arg-types
 
 
 Split.TRAIN = Split("train")

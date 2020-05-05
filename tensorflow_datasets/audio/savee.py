@@ -196,7 +196,7 @@ class Savee(tfds.core.GeneratorBasedBuilder):
     for fname in file_names:
       folder, wavname = os.path.split(fname)
       _, speaker_id = os.path.split(folder)
-      label_abbrev = re.match('^([a-zA-Z]+)', wavname).group(1)
+      label_abbrev = re.match('^([a-zA-Z]+)', wavname).group(1)  # pytype: disable=attribute-error
       label = LABEL_MAP[label_abbrev]
       key = '{}_{}'.format(speaker_id, wavname.split('.')[0])
       yield key, {'audio': fname, 'label': label, 'speaker_id': speaker_id}

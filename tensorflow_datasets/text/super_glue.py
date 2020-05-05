@@ -584,10 +584,10 @@ def _fix_wst(ex):
       return
 
     if "theyscold" in text:
-      ex["text"].replace("theyscold", "they scold")
+      ex["text"].replace("theyscold", "they scold")  # pytype: disable=attribute-error
       ex["span2_index"] = 10
     # Make sure case of the first words match.
-    first_word = ex["text"].split()[index]
+    first_word = ex["text"].split()[index]  # pytype: disable=attribute-error
     if first_word[0].islower():
       text = text[0].lower() + text[1:]
     else:

@@ -369,7 +369,7 @@ class DatasetBuilder(object):
 
           # Skip statistics computation if tfdv isn't present
           try:
-            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import
+            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
             skip_stats_computation = False
           except ImportError:
             skip_stats_computation = True
@@ -1037,7 +1037,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     # This allows for global preprocessing in beam.
     split_generators_kwargs = {}
     split_generators_arg_names = (
-        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method
+        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method  # pytype: disable=wrong-arg-types
         inspect.signature(self._split_generators).parameters.keys())
     if "pipeline" in split_generators_arg_names:
       split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]

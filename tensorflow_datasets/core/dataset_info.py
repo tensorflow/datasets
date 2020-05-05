@@ -52,8 +52,9 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.proto import json_format
 from tensorflow_datasets.core.utils import gcs_utils
+
+from google.protobuf import json_format
 
 
 # Name of the file to output the DatasetInfo protobuf object.
