@@ -29,10 +29,11 @@ from tensorflow_datasets.translate import wmt
 
 
 class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
-
+  """Create testing.DatasetBuilderTestCase for de-en test"""
   @classmethod
-  def setUpClass(cls):
-    super(TranslateWmtCustomConfigTest, cls).setUpClass()
+  def setup_class(cls):
+    """Create configs """
+    super(TranslateWmtCustomConfigTest, cls).setup_class()
 
     config = wmt.WmtConfig(
         name="small",
@@ -47,8 +48,8 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
     wmt.WmtTranslate.BUILDER_CONFIGS = [config]
 
   @classmethod
-  def tearDownClass(cls):
-    super(TranslateWmtCustomConfigTest, cls).tearDownClass()
+  def teardown_class(cls):
+    super(TranslateWmtCustomConfigTest, cls).teardown_class()
     wmt.WmtTranslate.BUILDER_CONFIGS.pop()
 
   DATASET_CLASS = wmt.WmtTranslate
@@ -85,8 +86,9 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
   SKIP_CHECKSUMS = True
 
   def test_gzip_reading(self):
+    """Testing gzip Reading"""
     results = [
-        x for _, x in wmt._parse_parallel_sentences(
+        x for _, x in wmt._parse_parallel_sentences(  # pylint: disable=protected-access
             os.path.join(self.example_dir, "first.cs.gz"),
             os.path.join(self.example_dir, "second.en.txt"))
     ]

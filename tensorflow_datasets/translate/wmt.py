@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """WMT: Translate dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import codecs
 import functools
@@ -60,7 +55,7 @@ CWMT_SUBSET_NAMES = [
 ]
 
 
-class SubDataset(object):
+class SubDataset(object):  # pylint: disable=R0205
   """Class to keep track of information on a sub-dataset of WMT."""
 
   def __init__(self, name, target, sources, url, path, manual_dl_files=None):
@@ -102,12 +97,11 @@ class SubDataset(object):
     def _format_string(s):
       if "{0}" in s and "{1}" and "{src}" in s:
         return s.format(*sorted([src, self.target]), src=src)
-      elif "{0}" in s and "{1}" in s:
+      if "{0}" in s and "{1}" in s:
         return s.format(*sorted([src, self.target]))
-      elif "{src}" in s:
+      if "{src}" in s:
         return s.format(src=src)
-      else:
-        return s
+      return s
     return [_format_string(s) for s in strings]
 
   def get_url(self, src):
@@ -675,6 +669,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
+    """Generate Splits"""
     source, _ = self.builder_config.language_pair
 
     def _check_manual_files(ds):
@@ -938,7 +933,7 @@ def _parse_czeng(*paths, **kwargs):
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with tf.io.gfile.GFile(filter_path) as f:
       bad_blocks = {
-          blk for blk in re.search(
+          blk for blk in re.search(  # pylint: disable=R1721
               r"qw{([\s\d]*)}", f.read()).groups()[0].split()
       }
     logging.info(
