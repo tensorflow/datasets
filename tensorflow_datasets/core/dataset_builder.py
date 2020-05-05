@@ -450,9 +450,10 @@ class DatasetBuilder(object):
     ```
 
     Args:
-      split: `tfds.Split`, which subset(s) of the data to read. If None
-        (default), returns all splits in a dict
-        `<key: tfds.Split, value: tf.data.Dataset>`.
+      split: Which split of the data to load (e.g. `'train'`, `'test'`
+        `['train', 'test']`, `'train[80%:]'`,...). See our
+        [split API guide](https://www.tensorflow.org/datasets/splits).
+        If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size` is set. Users that want more custom behavior
         should use `batch_size=None` and use the `tf.data` API to construct a

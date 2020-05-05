@@ -299,9 +299,10 @@ def load(name,
       (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
       use the `"zoo"` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
-    split: `tfds.Split` or `str`, which split of the data to load. If None,
-      will return a `dict` with all splits (typically `tfds.Split.TRAIN` and
-      `tfds.Split.TEST`).
+    split: Which split of the data to load (e.g. `'train'`, `'test'`
+      `['train', 'test']`, `'train[80%:]'`,...). See our
+      [split API guide](https://www.tensorflow.org/datasets/splits).
+      If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
     batch_size: `int`, if set, add a batch dimension to examples. Note that
