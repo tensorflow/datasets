@@ -1,0 +1,1751 @@
+{
+  "citation": "@InProceedings{Nilsback08,\n   author = \"Nilsback, M-E. and Zisserman, A.\",\n   title = \"Automated Flower Classification over a Large Number of Classes\",\n   booktitle = \"Proceedings of the Indian Conference on Computer Vision, Graphics and Image Processing\",\n   year = \"2008\",\n   month = \"Dec\"\n}",
+  "description": "The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring\nin the United Kingdom. Each class consists of between 40 and 258 images. The images have\nlarge scale, pose and light variations. In addition, there are categories that have large\nvariations within the category and several very similar categories.\n\nThe dataset is divided into a training set, a validation set and a test set.\nThe training set and validation set each consist of 10 images per class (totalling 1020 images each).\nThe test set consists of the remaining 6149 images (minimum 20 per class).",
+  "downloadSize": "344878000",
+  "location": {
+    "urls": [
+      "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/"
+    ]
+  },
+  "name": "oxford_flowers102",
+  "schema": {
+    "feature": [
+      {
+        "domain": "file_name",
+        "name": "file_name",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "name": "image",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "file_name",
+        "value": [
+          "image_08133.jpg",
+          "image_08138.jpg",
+          "image_08157.jpg",
+          "image_08173.jpg",
+          "image_08174.jpg",
+          "image_08176.jpg",
+          "image_08179.jpg",
+          "image_08182.jpg",
+          "image_08185.jpg",
+          "image_08187.jpg"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "260784877",
+      "shardLengths": [
+        "3074",
+        "3075"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "file_name"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 15.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6149",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6149"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "image_08189.jpg",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "image_08188.jpg",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "image_08186.jpg",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "image_08184.jpg",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "image_08183.jpg",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "image_08181.jpg",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "image_08180.jpg",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "image_08178.jpg",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "image_08172.jpg",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "image_08171.jpg",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "image_08189.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08188.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08186.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08184.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08183.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08181.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08180.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08178.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08172.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08171.jpg"
+                }
+              ],
+              "unique": "6149"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "image"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 42333.945,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6149",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6149"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "__BYTES_VALUE__",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "1",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 2.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                }
+              ],
+              "unique": "6147"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6149",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 614.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6149"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 10.1,
+                      "sampleCount": 388.0019
+                    },
+                    {
+                      "highValue": 20.2,
+                      "lowValue": 10.1,
+                      "sampleCount": 388.00190000000003
+                    },
+                    {
+                      "highValue": 30.299999999999997,
+                      "lowValue": 20.2,
+                      "sampleCount": 394.1509
+                    },
+                    {
+                      "highValue": 40.4,
+                      "lowValue": 30.299999999999997,
+                      "sampleCount": 449.4919
+                    },
+                    {
+                      "highValue": 50.5,
+                      "lowValue": 40.4,
+                      "sampleCount": 855.3258999999999
+                    },
+                    {
+                      "highValue": 60.599999999999994,
+                      "lowValue": 50.5,
+                      "sampleCount": 621.6638999999999
+                    },
+                    {
+                      "highValue": 70.7,
+                      "lowValue": 60.599999999999994,
+                      "sampleCount": 418.74690000000004
+                    },
+                    {
+                      "highValue": 80.8,
+                      "lowValue": 70.7,
+                      "sampleCount": 1187.3719
+                    },
+                    {
+                      "highValue": 90.89999999999999,
+                      "lowValue": 80.8,
+                      "sampleCount": 812.2829
+                    },
+                    {
+                      "highValue": 101.0,
+                      "lowValue": 90.89999999999999,
+                      "sampleCount": 633.9619
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "highValue": 16.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 33.0,
+                      "lowValue": 16.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 44.0,
+                      "lowValue": 33.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 50.0,
+                      "lowValue": 44.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 60.0,
+                      "lowValue": 50.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 72.0,
+                      "lowValue": 60.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 76.0,
+                      "lowValue": 72.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 83.0,
+                      "lowValue": 76.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 91.0,
+                      "lowValue": 83.0,
+                      "sampleCount": 614.9
+                    },
+                    {
+                      "highValue": 101.0,
+                      "lowValue": 91.0,
+                      "sampleCount": 614.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 101.0,
+              "mean": 57.81362823223289,
+              "median": 60.0,
+              "numZeros": "20",
+              "stdDev": 26.889661542349568
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "6149"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "43474584",
+      "shardLengths": [
+        "1020"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "file_name"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 15.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "1020",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "1020"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "image_08177.jpg",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "image_08175.jpg",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "image_08167.jpg",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "image_08166.jpg",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "image_08165.jpg",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "image_08164.jpg",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "image_08161.jpg",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "image_08154.jpg",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "image_08148.jpg",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "image_08135.jpg",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "image_08177.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08175.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08167.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08166.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08165.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08164.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08161.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08154.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08148.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08135.jpg"
+                }
+              ],
+              "unique": "1020"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "image"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 42545.156,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "1020",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "1020"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "__BYTES_VALUE__",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                }
+              ],
+              "unique": "1020"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "1020",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "1020"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 10.1,
+                      "sampleCount": 109.242
+                    },
+                    {
+                      "highValue": 20.2,
+                      "lowValue": 10.1,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 30.299999999999997,
+                      "lowValue": 20.2,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 40.4,
+                      "lowValue": 30.299999999999997,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 50.5,
+                      "lowValue": 40.4,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 60.599999999999994,
+                      "lowValue": 50.5,
+                      "sampleCount": 101.08200000000001
+                    },
+                    {
+                      "highValue": 70.7,
+                      "lowValue": 60.599999999999994,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 80.8,
+                      "lowValue": 70.7,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 90.89999999999999,
+                      "lowValue": 80.8,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 101.0,
+                      "lowValue": 90.89999999999999,
+                      "sampleCount": 109.242
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "highValue": 10.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 20.0,
+                      "lowValue": 10.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 30.0,
+                      "lowValue": 20.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 40.0,
+                      "lowValue": 30.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 51.0,
+                      "lowValue": 40.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 61.0,
+                      "lowValue": 51.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 71.0,
+                      "lowValue": 61.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 81.0,
+                      "lowValue": 71.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 91.0,
+                      "lowValue": 81.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 101.0,
+                      "lowValue": 91.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 101.0,
+              "mean": 50.5,
+              "median": 51.0,
+              "numZeros": "10",
+              "stdDev": 29.443448620476957
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "1020"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "43180278",
+      "shardLengths": [
+        "1020"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "file_name"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 15.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "1020",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "1020"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "image_08187.jpg",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "image_08185.jpg",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "image_08182.jpg",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "image_08179.jpg",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "image_08176.jpg",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "image_08174.jpg",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "image_08173.jpg",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "image_08157.jpg",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "image_08138.jpg",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "image_08133.jpg",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "image_08187.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08185.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08182.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08179.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08176.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08174.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08173.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08157.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08138.jpg"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "image_08133.jpg"
+                }
+              ],
+              "unique": "1020"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "image"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 42256.625,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "1020",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "1020"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "__BYTES_VALUE__",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "__BYTES_VALUE__",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "__BYTES_VALUE__"
+                }
+              ],
+              "unique": "1020"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "1020",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "1020"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 10.1,
+                      "sampleCount": 109.242
+                    },
+                    {
+                      "highValue": 20.2,
+                      "lowValue": 10.1,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 30.299999999999997,
+                      "lowValue": 20.2,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 40.4,
+                      "lowValue": 30.299999999999997,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 50.5,
+                      "lowValue": 40.4,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 60.599999999999994,
+                      "lowValue": 50.5,
+                      "sampleCount": 101.08200000000001
+                    },
+                    {
+                      "highValue": 70.7,
+                      "lowValue": 60.599999999999994,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 80.8,
+                      "lowValue": 70.7,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 90.89999999999999,
+                      "lowValue": 80.8,
+                      "sampleCount": 100.06200000000001
+                    },
+                    {
+                      "highValue": 101.0,
+                      "lowValue": 90.89999999999999,
+                      "sampleCount": 109.242
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "highValue": 10.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 20.0,
+                      "lowValue": 10.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 30.0,
+                      "lowValue": 20.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 40.0,
+                      "lowValue": 30.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 51.0,
+                      "lowValue": 40.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 61.0,
+                      "lowValue": 51.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 71.0,
+                      "lowValue": 61.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 81.0,
+                      "lowValue": 71.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 91.0,
+                      "lowValue": 81.0,
+                      "sampleCount": 102.0
+                    },
+                    {
+                      "highValue": 101.0,
+                      "lowValue": 91.0,
+                      "sampleCount": 102.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 101.0,
+              "mean": 50.5,
+              "median": 51.0,
+              "numZeros": "10",
+              "stdDev": 29.443448620476957
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "1020"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "2.1.1"
+}

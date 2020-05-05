@@ -10,6 +10,11 @@
 </div>
 # `oxford_iiit_pet`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
@@ -21,18 +26,18 @@ lighting. All images have an associated ground truth annotation of breed.
 *   **Source code**:
     [`tfds.image_classification.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_iiit_pet.py)
 *   **Versions**:
-    *   **`3.1.0`** (default): Added species and labels, new split API.
-*   **Download size**: `801.24 MiB`
+    *   **`3.2.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
+*   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 3,669
-'train' | 3,680
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
