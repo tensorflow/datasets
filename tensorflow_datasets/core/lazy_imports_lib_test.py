@@ -29,6 +29,8 @@ from tensorflow_datasets import testing
 
 class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
+  _LAZY_DEPS = "tensorflow_datasets.core.lazy_imports_lib._ALLOWED_LAZY_DEPS"
+
   # The following deps are not in the test list because the datasets that
   # require them need to have their tests run in isolation:
   # * crepe (NSynth)
@@ -59,7 +61,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       _ = tfds.core.lazy_imports.test_foo
 
   # pylint: disable=import-outside-toplevel, unused-import
-  def test_lazy_import_context_manager(self):
+  def test_try_import_context_manager(self):
     with tfds.core.try_import():
       import pandas
 
@@ -69,18 +71,16 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     import nltk
     self.assertTrue(hasattr(nltk, 'tokenize'))
 
-    get_deps = "tensorflow_datasets.core.lazy_imports_lib._ALLOWED_LAZY_DEPS"
-    with mock.patch(get_deps, ["valid_module"]):
+    with mock.patch(self._LAZY_DEPS, ["valid_module"]):
       with self.assertRaisesWithPredicateMatch(ImportError, "valid_module"):
         import valid_module
 
-  def test_lazy_import_context_manager_errors(self):
+  def test_try_import_context_manager_errors(self):
     with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
       with tfds.core.try_import():
         import fake_module
 
-    get_deps = "tensorflow_datasets.core.lazy_imports_lib._ALLOWED_LAZY_DEPS"
-    with mock.patch(get_deps, ["new_module"]):
+    with mock.patch(self._LAZY_DEPS, ["new_module"]):
       with tfds.core.try_import():
         import new_module
 
@@ -97,6 +97,15 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       import matplotlib.pyplot
 
     self.assertTrue(hasattr(matplotlib, "pyplot"))
+
+  def test_dummy_nested_imports(self):
+    with self.assertRaisesWithPredicateMatch(ImportError, "dummy_module_y"):
+      import dummy_module_x
+
+    with mock.patch(self._LAZY_DEPS, ["dummy_module_x, dummy_module_y"]):
+      with self.assertRaisesWithPredicateMatch(ImportError, "dummy_module_y"):
+        with tfds.core.try_import():
+          import dummy_module_x
 
   # pylint: enable=import-outside-toplevel, unused-import
 

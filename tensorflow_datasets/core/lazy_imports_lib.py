@@ -20,7 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from builtins import __import__ as original_import_fun
 import builtins
 import contextlib
 import importlib
@@ -62,6 +61,7 @@ _ALLOWED_LAZY_DEPS = [
     "tldextract",
 ]
 
+_original_import_fun = builtins.__import__
 
 def _try_import(module_name):
   """Try importing a module, with an informative error message on failure."""
@@ -75,8 +75,6 @@ def _try_import(module_name):
 
 class FakeModule(types.ModuleType):
   """A fake module which raise ImportError whenever an unknown attribute is accessed"""
-  def __init__(self, name):
-    super(FakeModule, self).__init__(name)
 
   def __getattr__(self, attr):
     err_msg = _ERR_MSG.format(name=self.__name__)
@@ -85,11 +83,11 @@ class FakeModule(types.ModuleType):
 
 def _custom_import(name, *args, **kwargs):
   try:
-    return original_import_fun(name, *args, **kwargs)
+    return _original_import_fun(name, *args, **kwargs)
   except ImportError:
     if name in _ALLOWED_LAZY_DEPS:
       return FakeModule(name)
-    raise ImportError
+    raise
 
 
 @contextlib.contextmanager
@@ -99,15 +97,17 @@ def try_import():
   A fake module is created if the lazy import is not present in `sys.modules`.
   It is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
   """
-  try:
-    with utils.temporary_assignment(builtins, "__import__", _custom_import):
+  global _original_import_fun
+  _original_import_fun = builtins.__import__
+  with utils.temporary_assignment(builtins, "__import__", _custom_import):
+    try:
       yield
-  except ImportError as err:
-    err_msg = ("Unknown import {name}. Currently lazy_imports does not "
-               "support {name} module. If you believe this is correct, "
-               "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
-               "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
-    utils.reraise(suffix=err_msg)
+    except ImportError as err:
+      err_msg = ("Unknown import {name}. Currently lazy_imports does not "
+                 "support {name} module. If you believe this is correct, "
+                 "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
+                 "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
+      utils.reraise(suffix=err_msg)
 
 
 class LazyImporter(object):
