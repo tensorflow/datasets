@@ -62,7 +62,9 @@ flags.DEFINE_string("exclude_datasets", "",
 flags.DEFINE_multi_string(
     "module_import", None,
     "Modules to import. Use this when your DatasetBuilder is defined outside "
-    "of tensorflow_datasets so that it is registered.")
+    "of tensorflow_datasets so that it is registered. Multiple imports can "
+    "be passed by calling the flag multiple times, or using coma separated "
+    "values.")
 flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
@@ -159,7 +161,8 @@ def download_and_prepare(builder):
 
 def import_modules(modules):
   for module in modules:
-    importlib.import_module(module)
+    for m in module.split(","):  # Allow to pass imports as coma separated vals.
+      importlib.import_module(m)
 
 
 def main(_):
