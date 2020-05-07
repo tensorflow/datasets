@@ -66,6 +66,9 @@ data = tfds.load(
     [`tfds.text.scan.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
 *   **Versions**:
     *   **`1.1.1`** (default): No release notes.
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 *   **Features**:
 
 ```python
@@ -111,9 +114,6 @@ FeaturesDict({
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.47 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -125,9 +125,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.53 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -139,9 +136,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.58 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -153,9 +147,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `3.20 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -167,9 +158,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `3.51 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -181,9 +169,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `3.84 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -195,9 +180,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.17 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -209,9 +191,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.47 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -223,9 +202,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.17 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -237,9 +213,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.17 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -251,9 +224,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.22 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -265,9 +235,6 @@ Split   | Examples
 
 *   **Download size**: `17.82 MiB`
 *   **Dataset size**: `4.26 MiB`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
 *   **Splits**:
 
 Split   | Examples
@@ -277,36 +244,33 @@ Split   | Examples
 
 ## scan/mcd1
 
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Download size**: `17.89 MiB`
+*   **Dataset size**: `1.89 MiB`
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split   | Examples
+:------ | -------:
+'test'  | 1,045
+'train' | 8,365
 
 ## scan/mcd2
 
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Download size**: `17.89 MiB`
+*   **Dataset size**: `1.84 MiB`
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split   | Examples
+:------ | -------:
+'test'  | 1,045
+'train' | 8,365
 
 ## scan/mcd3
 
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Download size**: `17.89 MiB`
+*   **Dataset size**: `1.87 MiB`
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split   | Examples
+:------ | -------:
+'test'  | 1,045
+'train' | 8,365

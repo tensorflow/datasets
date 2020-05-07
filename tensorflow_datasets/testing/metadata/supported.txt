@@ -600,6 +600,7 @@ open_images_v4/300k/2.0.0
 open_images_v4/original/2.0.0
 opinosis/1.0.0
 oxford_flowers102/2.1.1
+oxford_iiit_pet/3.2.0
 para_crawl/enbg_plain_text/1.0.0
 para_crawl/encs_plain_text/1.0.0
 para_crawl/enda_plain_text/1.0.0
@@ -668,6 +669,9 @@ scan/filler_num1/1.1.1
 scan/filler_num2/1.1.1
 scan/filler_num3/1.1.1
 scan/length/1.1.1
+scan/mcd1/1.1.1
+scan/mcd2/1.1.1
+scan/mcd3/1.1.1
 scan/simple/1.1.1
 scan/template_around_right/1.1.1
 scan/template_jump_around_right/1.1.1
@@ -748,6 +752,16 @@ ucf101/ucf101_1_256/2.0.0
 ucf101/ucf101_2/2.0.0
 ucf101/ucf101_3/2.0.0
 vgg_face2/1.0.0
+visual_domain_decathlon/aircraft/1.2.0
+visual_domain_decathlon/cifar100/1.2.0
+visual_domain_decathlon/daimlerpedcls/1.2.0
+visual_domain_decathlon/dtd/1.2.0
+visual_domain_decathlon/gtsrb/1.2.0
+visual_domain_decathlon/imagenet12/1.2.0
+visual_domain_decathlon/omniglot/1.2.0
+visual_domain_decathlon/svhn/1.2.0
+visual_domain_decathlon/ucf101/1.2.0
+visual_domain_decathlon/vgg-flowers/1.2.0
 voc/2007/4.0.0
 voc/2012/4.0.0
 voxceleb/1.1.1

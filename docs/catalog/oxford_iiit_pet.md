@@ -29,15 +29,17 @@ lighting. All images have an associated ground truth annotation of breed.
     *   **`3.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `773.52 MiB`
+*   **Dataset size**: `774.69 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split   | Examples
+:------ | -------:
+'test'  | 3,669
+'train' | 3,680
 
 *   **Features**:
 

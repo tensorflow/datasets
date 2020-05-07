@@ -4,7 +4,7 @@
   </div>
 
   <meta itemprop="name" content="visual_domain_decathlon" />
-  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of&#10;the PASCAL in Detail Workshop Challenge (CVPR 2017).&#10;The goal of this challenge is to solve simultaneously ten image classification&#10;problems representative of very different visual domains.&#10;&#10;Some of the datasets included here are also available as separate datasets in&#10;TFDS. However, notice that images were preprocessed for the Visual Domain&#10;Decathlon (resized isotropically to have a shorter size of 72 pixels) and&#10;might have different train/validation/test splits. Here we use the official&#10;splits for the competition.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;visual_domain_decathlon&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of&#10;the PASCAL in Detail Workshop Challenge (CVPR 2017).&#10;The goal of this challenge is to solve simultaneously ten image classification&#10;problems representative of very different visual domains.&#10;&#10;Some of the datasets included here are also available as separate datasets in&#10;TFDS. However, notice that images were preprocessed for the Visual Domain&#10;Decathlon (resized isotropically to have a shorter size of 72 pixels) and&#10;might have different train/validation/test splits. Here we use the official&#10;splits for the competition.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;visual_domain_decathlon&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-aircraft-1.2.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/visual_domain_decathlon" />
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/decathlon/" />
   <meta itemprop="citation" content="@ONLINE{hakanbilensylvestrerebuffitomasjakab2017,&#10;    author = &quot;Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab&quot;,&#10;    title  = &quot;Visual Domain Decathlon&quot;,&#10;    year   = &quot;2017&quot;,&#10;    url    = &quot;https://www.robots.ox.ac.uk/~vgg/decathlon/&quot;&#10;}" />
@@ -38,16 +38,6 @@ the competition.
     *   **`1.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
@@ -62,15 +52,28 @@ Split | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
-    Not supported.
 
 ## visual_domain_decathlon/aircraft (default config)
 
 *   **Config description**: Data based on "Aircraft", with images resized
     isotropically to have a shorter size of 72 pixels.
 
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `20.96 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 3,333
+'train'      | 3,334
+'validation' | 3,333
+
 *   **Features**:
 
 ```python
@@ -80,12 +83,33 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-aircraft-1.2.0.png" alt="Visualization" width="500px">
 
 ## visual_domain_decathlon/cifar100
 
 *   **Config description**: Data based on "CIFAR-100", with images resized
     isotropically to have a shorter size of 72 pixels.
 
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `119.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 10,000
+'train'      | 40,000
+'validation' | 10,000
+
 *   **Features**:
 
 ```python
@@ -96,10 +120,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-cifar100-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/daimlerpedcls
 
 *   **Config description**: Data based on "Daimler Pedestrian Classification",
     with images resized isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `68.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 19,600
+'train'      | 23,520
+'validation' | 5,880
 
 *   **Features**:
 
@@ -111,10 +156,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-daimlerpedcls-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/dtd
 
 *   **Config description**: Data based on "Describable Textures", with images
     resized isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `13.30 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 1,880
+'train'      | 1,880
+'validation' | 1,880
 
 *   **Features**:
 
@@ -126,10 +192,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-dtd-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/gtsrb
 
 *   **Config description**: Data based on "German Traffic Signs", with images
     resized isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `80.58 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 12,630
+'train'      | 31,367
+'validation' | 7,842
 
 *   **Features**:
 
@@ -141,10 +228,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-gtsrb-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/imagenet12
 
 *   **Config description**: Data based on "Imagenet", with images resized
     isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `6.11 GiB`
+
+*   **Dataset size**: `5.24 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | --------:
+'test'       | 48,238
+'train'      | 1,232,167
+'validation' | 49,000
 
 *   **Features**:
 
@@ -156,10 +264,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-imagenet12-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/omniglot
 
 *   **Config description**: Data based on "Omniglot", with images resized
     isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `41.46 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 8,115
+'train'      | 17,853
+'validation' | 6,492
 
 *   **Features**:
 
@@ -171,10 +300,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-omniglot-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/svhn
 
 *   **Config description**: Data based on "Street View House Numbers", with
     images resized isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `135.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 26,032
+'train'      | 47,217
+'validation' | 26,040
 
 *   **Features**:
 
@@ -186,10 +336,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-svhn-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/ucf101
 
 *   **Config description**: Data based on "UCF101 Dynamic Images", with images
     resized isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `19.73 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 3,783
+'train'      | 7,585
+'validation' | 1,952
 
 *   **Features**:
 
@@ -201,10 +372,31 @@ FeaturesDict({
 })
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-ucf101-1.2.0.png" alt="Visualization" width="500px">
+
 ## visual_domain_decathlon/vgg-flowers
 
 *   **Config description**: Data based on "VGG-Flowers", with images resized
     isotropically to have a shorter size of 72 pixels.
+
+*   **Download size**: `409.94 MiB`
+
+*   **Dataset size**: `20.87 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 6,149
+'train'      | 1,020
+'validation' | 1,020
 
 *   **Features**:
 
@@ -215,3 +407,8 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-vgg-flowers-1.2.0.png" alt="Visualization" width="500px">
