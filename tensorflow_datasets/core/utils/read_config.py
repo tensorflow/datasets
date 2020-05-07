@@ -51,6 +51,7 @@ class _ReadConfig(object):
   # This values might be changes in the future, with more performance test runs.
   interleave_cycle_length = attr.ib(default=16)
   interleave_block_length = attr.ib(default=16)
+  input_context = attr.ib(default=None)
   experimental_interleave_sort_fn = attr.ib(default=None)
 
   @property
@@ -84,6 +85,17 @@ class ReadConfig(_ReadConfig):
       Default to 16.
     interleave_block_length: `int`, forwarded to `tf.data.Dataset.interleave`.
       Default to 16.
+    input_context: `tf.distribute.InputContext`, if set, each worker
+      will read a different set of file. For more info, see the
+      [distribute_datasets_from_function
+      documentation](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#experimental_distribute_datasets_from_function).
+      Note:
+
+      * Each workers will always read the same subset of files. `shuffle_files`
+        only shuffle files within each worker.
+      * If `info.splits[split].num_shards < input_context.num_input_pipelines`,
+        an error will be raised, as some workers would be empty.
+
     experimental_interleave_sort_fn: Function with signature
       `List[FileDict] -> List[FileDict]`, which takes the list of
       `dict(file: str, take: int, skip: int)` and returns the modified version

@@ -197,6 +197,25 @@ def _read_files(
 
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
+  # On distributed environement, we can shard per-file if a
+  # `tf.distribute.InputContext` object is provided (e.g. from
+  # `experimental_distribute_datasets_from_function`)
+  if (read_config.input_context and
+      read_config.input_context.num_input_pipelines > 1):
+    if len(files) < read_config.input_context.num_input_pipelines:
+      raise ValueError(
+          'Cannot shard the pipeline with given `input_context`.'
+          '`num_shards={}` but `num_input_pipelines={}`. '
+          'This means that some workers won\'t read any data. '
+          'To shard the data, you may want to use the subsplit API '
+          'instead: https://www.tensorflow.org/datasets/splits'.format(
+              len(files), read_config.input_context.num_input_pipelines)
+      )
+    instruction_ds = instruction_ds.shard(
+        num_shards=read_config.input_context.num_input_pipelines,
+        index=read_config.input_context.input_pipeline_id,
+    )
+
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
     instruction_ds = instruction_ds.shuffle(
@@ -217,6 +236,7 @@ def _read_files(
   # the information to the tf.data.Dataset object.
   # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
   if (num_examples_per_shard and
+      not read_config.input_context and  # TODO(epot): Restore cardinality
       hasattr(tf.data.experimental, 'assert_cardinality')):
     # TODO(b/154963426): Replace by per-shard cardinality.
     cardinality = sum(num_examples_per_shard)
