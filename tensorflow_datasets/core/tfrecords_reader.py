@@ -450,8 +450,8 @@ class ReadInstruction(object):
   ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
       'test[:33%]+train[1:-1]'))
   ds = tfds.load('mnist', split=(
-      tfds.core.ReadInstruction.('test', to=33, unit='%') +
-      tfds.core.ReadInstruction.('train', from_=1, to=-1, unit='abs')))
+      tfds.core.ReadInstruction('test', to=33, unit='%') +
+      tfds.core.ReadInstruction('train', from_=1, to=-1, unit='abs')))
 
   # 10-fold validation:
   tests = tfds.load(
