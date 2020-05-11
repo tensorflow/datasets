@@ -60,6 +60,11 @@ GCS bucket (recommended if you're running on GCP), you can instead pass
 """
 
 
+# Some tests are still running under Python 2, so internally we still whitelist
+# Py2 temporary.
+_is_py2_download_and_prepare_disabled = True
+
+
 class BuilderConfig(object):
   """Base class for `DatasetBuilder` data configuration.
 
@@ -281,6 +286,13 @@ class DatasetBuilder(object):
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
+
+    # Disable `download_and_prepare` (internally, we are still
+    # allowing Py2 for the `dataset_builder_tests.py` & cie
+    if _is_py2_download_and_prepare_disabled and six.PY2:
+      raise NotImplementedError(
+          "TFDS has droped `builder.download_and_prepare` support for "
+          "Python 2. Please update you code to Python 3.")
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(str(v) for v in self.versions

@@ -21,6 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
 import tensorflow_datasets.public_api as tfds
@@ -130,6 +131,7 @@ class SplitsTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(SplitsTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._builder = testing.DummyDatasetSharedGenerator(
         data_dir=testing.make_tmp_dir())
     cls._builder.download_and_prepare()

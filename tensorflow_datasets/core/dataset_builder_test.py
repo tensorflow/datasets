@@ -111,6 +111,7 @@ class DatasetBuilderTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls.builder = DummyDatasetSharedGenerator(
         data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
     cls.builder.download_and_prepare()
@@ -471,6 +472,16 @@ class BuilderPickleTest(testing.TestCase):
 
 class BuilderRestoreGcsTest(testing.TestCase):
 
+  @classmethod
+  def setUpClass(cls):
+    super(BuilderRestoreGcsTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
+
+  @classmethod
+  def tearDownClass(cls):
+    dataset_builder._is_py2_download_and_prepare_disabled = True
+    super(BuilderRestoreGcsTest, cls).tearDownClass()
+
   def setUp(self):
     super(BuilderRestoreGcsTest, self).setUp()
 
@@ -584,6 +595,7 @@ class DatasetBuilderReadTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderReadTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
@@ -591,6 +603,7 @@ class DatasetBuilderReadTest(testing.TestCase):
   @classmethod
   def tearDownClass(cls):
     super(DatasetBuilderReadTest, cls).tearDownClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = True
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
@@ -736,6 +749,16 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
 
 class NestedSequenceBuilderTest(testing.TestCase):
   """Test of the NestedSequenceBuilder."""
+
+  @classmethod
+  def setUpClass(cls):
+    super(NestedSequenceBuilderTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
+
+  @classmethod
+  def tearDownClass(cls):
+    dataset_builder._is_py2_download_and_prepare_disabled = True
+    super(NestedSequenceBuilderTest, cls).tearDownClass()
 
   @testing.run_in_graph_and_eager_modes()
   def test_nested_sequence(self):
