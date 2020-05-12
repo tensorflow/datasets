@@ -35,7 +35,6 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
-from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.utils import py_utils
 
 # Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
@@ -216,7 +215,7 @@ def _read_info(info_path) -> Json:
 
 
 # TODO(pierrot): one lock per info path instead of locking everything.
-synchronize_decorator = util.build_synchronize_decorator()
+synchronize_decorator = py_utils.build_synchronize_decorator()
 
 
 def rename_info_file(

@@ -40,7 +40,6 @@ from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.download import kaggle
-from tensorflow_datasets.core.download import util as download_util
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
@@ -56,7 +55,7 @@ def _get_filename(response: requests.Response) -> str:
     match = re.findall('filename="(.+?)"', content_disposition)
     if match:
       return match[0]
-  return download_util.get_file_name(response.url)
+  return utils.basename_from_url(response.url)
 
 
 class DownloadError(Exception):

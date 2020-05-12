@@ -32,10 +32,12 @@ import random
 import string
 import sys
 import textwrap
-from typing import Iterator, TypeVar
+import threading
+from typing import Any, Callable, Iterator, TypeVar
 import uuid
 
 import six
+from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
 
@@ -61,6 +63,8 @@ memoize = functools.lru_cache
 
 
 T = TypeVar("T")
+
+Fn = TypeVar("Fn", bound=Callable[..., Any])
 
 
 def is_notebook():
@@ -430,3 +434,40 @@ def get_class_url(cls):
   module_path, unused_class_name = cls_path.rsplit(".", 1)
   module_path = module_path.replace(".", "/")
   return constants.SRC_BASE_URL + module_path + ".py"
+
+
+def build_synchronize_decorator() -> Callable[[Fn], Fn]:
+  """Returns a decorator which prevents concurrent calls to functions.
+
+  Usage:
+    synchronized = build_synchronize_decorator()
+
+    @synchronized
+    def read_value():
+      ...
+
+    @synchronized
+    def write_value(x):
+      ...
+
+  Returns:
+    make_threadsafe (fct): The decorator which lock all functions to which it
+      is applied under a same lock
+  """
+  lock = threading.Lock()
+
+  def lock_decorator(fn: Fn) -> Fn:
+
+    @functools.wraps(fn)
+    def lock_decorated(*args, **kwargs):
+      with lock:
+        return fn(*args, **kwargs)
+
+    return lock_decorated
+
+  return lock_decorator
+
+
+def basename_from_url(url: str) -> str:
+  """Returns file name of file at given url."""
+  return os.path.basename(urllib.parse.urlparse(url).path) or "unknown_name"
