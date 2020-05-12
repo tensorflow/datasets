@@ -47,6 +47,12 @@ The CFQ dataset (and it's splits) for measuring compositional generalization.
 
 See https://arxiv.org/abs/1912.09713.pdf for background.
 
+A note about the validation set: Since it has the same distribution as the test
+set and we are interested in measuring the compositional generalization of a
+*model* with respect to an *unknown* test distribution we suggest that any
+tuning should be done on a subset of the train set only (see section 5.1 of the
+paper).
+
 Example usage:
 
 ```
@@ -72,7 +78,7 @@ class CFQConfig(tfds.core.BuilderConfig):
     # Version history:
     super(CFQConfig, self).__init__(
         name=name,
-        version=tfds.core.Version('1.0.1'),
+        version=tfds.core.Version('1.1.0'),
         description=_DESCRIPTION,
         **kwargs)
     self.split_file = os.path.join(directory, name + '.json')
@@ -122,6 +128,13 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
                 'base_directory': data_dir,
                 'splits_file': self.builder_config.split_file,
                 'split_id': 'trainIdxs'
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                'base_directory': data_dir,
+                'splits_file': self.builder_config.split_file,
+                'split_id': 'devIdxs'
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
