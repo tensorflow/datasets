@@ -26,6 +26,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+
 import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -131,7 +133,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     # Load all images in memory (~1 GiB)
     # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
     all_images = {
-        k.split("/")[-1]: img for k, img in
+        os.path.split(k)[-1]: img for k, img in
         dl_manager.iter_archive(downloaded_dirs["img_align_celeba"])
     }
 

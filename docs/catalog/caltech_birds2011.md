@@ -61,3 +61,7 @@ Title = {{Caltech-UCSD Birds 200}},
 Year = {2010}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.

@@ -34,13 +34,13 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 }
 """
 
-_TRAIN_URL = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip"
-_TEST_URL = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/validation-horse-or-human.zip"
+_TRAIN_URL = "https://storage.googleapis.com/download.tensorflow.org/data/horse-or-human.zip"
+_TEST_URL = "https://storage.googleapis.com/download.tensorflow.org/data/validation-horse-or-human.zip"
 
 _IMAGE_SIZE = 300
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
-_NAME_RE = re.compile(r"^(humans|horses)/[\w-]*\.png$")
+_NAME_RE = re.compile(r"^(humans|horses)(?:/|\\)[\w-]*\.png$")
 
 
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):

@@ -17,17 +17,25 @@ include human-annotated natural language explanations of the entailment
 relations.
 
 *   **Config description**: Plain text import of e-SNLI
+
 *   **Homepage**:
     [https://github.com/OanaMariaCamburu/e-SNLI](https://github.com/OanaMariaCamburu/e-SNLI)
+
 *   **Source code**:
     [`tfds.text.esnli.Esnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/esnli.py)
+
 *   **Versions**:
+
     *   **`0.0.2`** (default): No release notes.
+
 *   **Download size**: `195.04 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -65,5 +73,9 @@ publisher = {Curran Associates, Inc.},
 url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## esnli/plain_text (default config)

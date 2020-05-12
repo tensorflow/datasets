@@ -88,6 +88,10 @@ archivePrefix = {arXiv},
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## trivia_qa/rc (default config)
 
 *   **Config description**: Question-answer pairs where all documents for a

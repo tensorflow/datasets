@@ -38,6 +38,13 @@ class HashingTest(testing.TestCase):
     res = hasher.hash_key('foo')
     self.assertEqual(res, 229609063533823256041787889330700985560)
 
+  def test_backslash(self):
+    hasher = hashing.Hasher(salt='')
+    res2 = hasher.hash_key('x/y')
+    res1 = hasher.hash_key('x\\y')
+    self.assertEqual(res1, res2)
+    self.assertEqual(res1, 122546703782554533059483853573887619473)
+
 
 if __name__ == '__main__':
   testing.test_main()

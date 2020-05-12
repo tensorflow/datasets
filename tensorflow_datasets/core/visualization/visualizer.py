@@ -22,8 +22,12 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+from typing import Any
 
 import six
+import tensorflow.compat.v2 as tf
+
+from tensorflow_datasets.core import dataset_info
 
 
 def extract_keys(feature_dict, feature_cls):
@@ -44,7 +48,7 @@ class Visualizer(object):
   """Visualizer."""
 
   @abc.abstractmethod
-  def match(self, ds_info):
+  def match(self, ds_info: dataset_info.DatasetInfo) -> bool:
     """Returns whether the visualizer is compatible with the dataset.
 
     Args:
@@ -55,14 +59,19 @@ class Visualizer(object):
     """
 
   @abc.abstractmethod
-  def show(self, ds_info, ds, **options_kwargs):
+  def show(
+      self,
+      ds: tf.data.Dataset,
+      ds_info: dataset_info.DatasetInfo,
+      **options_kwargs: Any
+  ):
     """Display the dataset.
 
     Args:
-      ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
         should not be batched. Examples will be consumed in order until
         (rows * cols) are read or the dataset is consumed.
+      ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       **options_kwargs: Additional display options, specific to the dataset type
         to visualize. See the `tfds.visualization` for a list of available
         visualizers.

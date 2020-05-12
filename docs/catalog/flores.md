@@ -39,11 +39,17 @@ Sinhala-English.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## flores/neen_plain_text (default config)
 
 *   **Config description**: Translation dataset from ne to en, uses encoder
     plain_text.
+
 *   **Dataset size**: `1.89 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -67,7 +73,9 @@ Translation({
 
 *   **Config description**: Translation dataset from si to en, uses encoder
     plain_text.
+
 *   **Dataset size**: `2.05 MiB`
+
 *   **Splits**:
 
 Split        | Examples

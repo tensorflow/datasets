@@ -29,7 +29,7 @@ from 113 unique camera viewpoints.
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default): No release notes.
+    *   **`4.0.0`** (default): No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -48,9 +48,14 @@ from 113 unique camera viewpoints.
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## robonet/robonet_sample_64 (default config)
 
 *   **Config description**: 64x64 RoboNet Sample.
+
 *   **Download size**: `119.80 MiB`
 *   **Dataset size**: `183.01 MiB`
 *   **Auto-cached**
@@ -75,6 +80,7 @@ FeaturesDict({
 ## robonet/robonet_sample_128
 
 *   **Config description**: 128x128 RoboNet Sample.
+
 *   **Download size**: `119.80 MiB`
 *   **Dataset size**: `638.95 MiB`
 *   **Auto-cached**
@@ -99,16 +105,17 @@ FeaturesDict({
 ## robonet/robonet_64
 
 *   **Config description**: 64x64 RoboNet.
-*   **Download size**: `119.80 MiB`
-*   **Dataset size**: `183.01 MiB`
+
+*   **Download size**: `36.20 GiB`
+*   **Dataset size**: `41.36 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
+    No
 *   **Splits**:
 
 Split   | Examples
 :------ | -------:
-'train' | 700
+'train' | 162,417
 
 *   **Features**:
 
@@ -123,6 +130,7 @@ FeaturesDict({
 ## robonet/robonet_128
 
 *   **Config description**: 128x128 RoboNet.
+
 *   **Download size**: `36.20 GiB`
 *   **Dataset size**: `144.90 GiB`
 *   **Auto-cached**

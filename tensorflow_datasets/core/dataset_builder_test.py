@@ -28,6 +28,7 @@ import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -110,6 +111,7 @@ class DatasetBuilderTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls.builder = DummyDatasetSharedGenerator(
         data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
     cls.builder.download_and_prepare()
@@ -203,7 +205,7 @@ class DatasetBuilderTest(testing.TestCase):
       tf.io.gfile.makedirs(os.path.join(builder_data_dir, "0.1.0"))
 
       # The builder's version dir is chosen
-      self.assertEqual(builder._build_data_dir(), version_dir)
+      self.assertEqual(builder._build_data_dir(tmp_dir)[1], version_dir)
 
   def test_get_data_dir_with_config(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -214,7 +216,7 @@ class DatasetBuilderTest(testing.TestCase):
       version_data_dir = os.path.join(builder_data_dir, "0.0.1")
 
       tf.io.gfile.makedirs(version_data_dir)
-      self.assertEqual(builder._build_data_dir(), version_data_dir)
+      self.assertEqual(builder._build_data_dir(tmp_dir)[1], version_data_dir)
 
   def test_config_construction(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -356,6 +358,108 @@ class DatasetBuilderTest(testing.TestCase):
         )
 
 
+class DatasetBuilderMultiDirTest(testing.TestCase):
+  """Tests for multi-dir."""
+
+  @classmethod
+  def setUpClass(cls):
+    super(DatasetBuilderMultiDirTest, cls).setUpClass()
+    cls.builder = DummyDatasetSharedGenerator()
+    cls.version_dir = os.path.normpath(cls.builder.info.full_name)
+
+  def setUp(self):
+    super(DatasetBuilderMultiDirTest, self).setUp()
+    # Sanity check to make sure that no dir is registered
+    self.assertEmpty(constants._registered_data_dir)
+    # Create a new temp dir
+    self.other_data_dir = os.path.join(self.get_temp_dir(), "other_dir")
+    # Overwrite the default data_dir (as files get created)
+    self._original_data_dir = constants.DATA_DIR
+    constants.DATA_DIR = os.path.join(self.get_temp_dir(), "default_dir")
+    self.default_data_dir = constants.DATA_DIR
+
+  def tearDown(self):
+    super(DatasetBuilderMultiDirTest, self).tearDown()
+    # Restore to the default `_registered_data_dir`
+    constants._registered_data_dir = set()
+    # Clear-up existing dirs
+    if tf.io.gfile.exists(self.other_data_dir):
+      tf.io.gfile.rmtree(self.other_data_dir)
+    if tf.io.gfile.exists(self.default_data_dir):
+      tf.io.gfile.rmtree(self.default_data_dir)
+    # Restore the orgininal data dir
+    constants.DATA_DIR = self._original_data_dir
+
+  def assertBuildDataDir(self, build_data_dir_out, root_dir):
+    data_dir_root, data_dir = build_data_dir_out
+    self.assertEqual(data_dir_root, root_dir)
+    self.assertEqual(data_dir, os.path.join(root_dir, self.version_dir))
+
+  def test_default(self):
+    # No data_dir is passed
+    # -> use default path is used.
+    self.assertBuildDataDir(
+        self.builder._build_data_dir(None), self.default_data_dir)
+
+  def test_explicitly_passed(self):
+    # When a dir is explictly passed, use it.
+    self.assertBuildDataDir(
+        self.builder._build_data_dir(self.other_data_dir), self.other_data_dir)
+
+  def test_default_multi_dir(self):
+    # No data_dir is passed
+    # Multiple data_dirs are registered
+    # -> use default path
+    constants.add_data_dir(self.other_data_dir)
+    self.assertBuildDataDir(
+        self.builder._build_data_dir(None), self.default_data_dir)
+
+  def test_default_multi_dir_old_version_exists(self):
+    # No data_dir is passed
+    # Multiple data_dirs are registered
+    # Data dir contains old versions
+    # -> use default path
+    constants.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(os.path.join(
+        self.other_data_dir, "dummy_dataset_shared_generator", "0.1.0"))
+    tf.io.gfile.makedirs(os.path.join(
+        self.other_data_dir, "dummy_dataset_shared_generator", "0.2.0"))
+    self.assertBuildDataDir(
+        self.builder._build_data_dir(None), self.default_data_dir)
+
+  def test_default_multi_dir_version_exists(self):
+    # No data_dir is passed
+    # Multiple data_dirs are registered
+    # Data found
+    # -> Re-load existing data
+    constants.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(os.path.join(
+        self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    self.assertBuildDataDir(
+        self.builder._build_data_dir(None), self.other_data_dir)
+
+  def test_default_multi_dir_duplicate(self):
+    # If two data dirs contains the dataset, raise an error...
+    constants.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(os.path.join(
+        self.default_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    tf.io.gfile.makedirs(os.path.join(
+        self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    with self.assertRaisesRegex(ValueError, "found in more than one directory"):
+      self.builder._build_data_dir(None)
+
+  def test_expicit_multi_dir(self):
+    # If two data dirs contains the same version
+    # Data dir is explicitly passed
+    constants.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(os.path.join(
+        self.default_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    tf.io.gfile.makedirs(os.path.join(
+        self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    self.assertBuildDataDir(
+        self.builder._build_data_dir(self.other_data_dir), self.other_data_dir)
+
+
 class BuilderPickleTest(testing.TestCase):
 
   def test_load_dump(self):
@@ -367,6 +471,16 @@ class BuilderPickleTest(testing.TestCase):
 
 
 class BuilderRestoreGcsTest(testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super(BuilderRestoreGcsTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
+
+  @classmethod
+  def tearDownClass(cls):
+    dataset_builder._is_py2_download_and_prepare_disabled = True
+    super(BuilderRestoreGcsTest, cls).tearDownClass()
 
   def setUp(self):
     super(BuilderRestoreGcsTest, self).setUp()
@@ -481,6 +595,7 @@ class DatasetBuilderReadTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderReadTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
@@ -488,6 +603,7 @@ class DatasetBuilderReadTest(testing.TestCase):
   @classmethod
   def tearDownClass(cls):
     super(DatasetBuilderReadTest, cls).tearDownClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = True
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
@@ -538,14 +654,6 @@ class DatasetBuilderReadTest(testing.TestCase):
     x, _ = dataset_utils.as_numpy(self.builder.as_dataset(
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
     self.assertEqual(x.shape[0], 20)
-
-  def test_is_dataset_v1(self):
-    # For backward compatibility, ensure that the returned dataset object
-    # has make_one_shot_iterator methods.
-    with tf.Graph().as_default():
-      ds = self.builder.as_dataset(split="train")
-      ds.make_one_shot_iterator()
-      ds.make_initializable_iterator()
 
   def test_autocache(self):
     # All the following should cache
@@ -641,6 +749,16 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
 
 class NestedSequenceBuilderTest(testing.TestCase):
   """Test of the NestedSequenceBuilder."""
+
+  @classmethod
+  def setUpClass(cls):
+    super(NestedSequenceBuilderTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
+
+  @classmethod
+  def tearDownClass(cls):
+    dataset_builder._is_py2_download_and_prepare_disabled = True
+    super(NestedSequenceBuilderTest, cls).tearDownClass()
 
   @testing.run_in_graph_and_eager_modes()
   def test_nested_sequence(self):

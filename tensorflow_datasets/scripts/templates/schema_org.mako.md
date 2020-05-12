@@ -19,14 +19,14 @@ def escape(val):
   return val
 %>
 <%
-description = """{description}
+description = f"""{builder.info.description}
 
 To use this dataset:
 
 ```python
 import tensorflow_datasets as tfds
 
-ds = tfds.load('{name}', split='train')
+ds = tfds.load('{builder.info.name}', split='train')
 for ex in ds.take(4):
   print(ex)
 ```
@@ -34,10 +34,10 @@ for ex in ds.take(4):
 See [the guide](https://www.tensorflow.org/datasets/overview) for more
 informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).
 
-""".format(
-    description=builder.info.description,
-    name=builder.info.name,
-)
+"""
+
+if visu_doc_util.has_visualization(builder):
+  description += visu_doc_util.get_html_tag(builder) + '\n\n'
 
 %>
 

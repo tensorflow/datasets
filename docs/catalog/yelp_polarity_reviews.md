@@ -72,9 +72,14 @@ Split   | Examples
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## yelp_polarity_reviews/plain_text (default config)
 
 *   **Config description**: Plain text
+
 *   **Dataset size**: `435.14 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -92,10 +97,13 @@ FeaturesDict({
 
 *   **Config description**: Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
+
 *   **Dataset size**: `435.14 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Features**:
 
 ```python
@@ -109,10 +117,13 @@ FeaturesDict({
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
     vocab size
+
 *   **Dataset size**: `182.89 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Features**:
 
 ```python
@@ -126,10 +137,13 @@ FeaturesDict({
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
     32k vocab size
+
 *   **Dataset size**: `173.65 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes (test), Only when `shuffle_files=False` (train)
+
 *   **Features**:
 
 ```python

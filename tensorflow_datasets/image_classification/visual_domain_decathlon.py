@@ -61,7 +61,7 @@ class VisualDomainDecathlonConfig(tfds.core.BuilderConfig):
   def __init__(self, num_classes, **kwargs):
     self.num_classes = num_classes
     if 'version' not in kwargs:
-      kwargs['version'] = tfds.core.Version('1.1.0')
+      kwargs['version'] = tfds.core.Version('1.2.0')
     super(VisualDomainDecathlonConfig, self).__init__(**kwargs)
 
 
@@ -156,6 +156,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
         split=split)
     for image_fname, image_fobj in tfds.download.iter_archive(
         path=images_archive, method=tfds.download.ExtractMethod.TAR_STREAM):
+      image_fname = image_fname.replace('\\', '/')  # For windows compatibility
       if image_fname in filename_to_label:
         label = filename_to_label[image_fname]
         example = {

@@ -16,10 +16,6 @@
 # Lint as: python3
 """Smoke Test for docs generation."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import shutil
 import tempfile
@@ -38,6 +34,9 @@ class BuildDocsTest(absltest.TestCase):
     if os.path.exists(self.workdir):
       shutil.rmtree(self.workdir)
     os.makedirs(self.workdir)
+
+    # Set a dummy dir for the visualizer.
+    document_datasets.VisualizationDocUtil.BASE_PATH = self.workdir
 
   def test_api_gen(self):
     build_docs.build_api_docs(

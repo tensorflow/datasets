@@ -24,18 +24,26 @@ more than once in the sentence, its first occurrence is the one to be resolved.
 
 *   **Config description**: Plain text import of the Definite Pronoun Resolution
     Dataset.
+
 *   **Homepage**:
     [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+
 *   **Source code**:
     [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `222.12 KiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split   | Examples
@@ -68,5 +76,9 @@ FeaturesDict({
   organization={Association for Computational Linguistics}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## definite_pronoun_resolution/plain_text (default config)

@@ -18,18 +18,26 @@ incomplete translations will be filtered out.
 
 *   **Config description**: Plain text import of multilingual TED talk
     translations
+
 *   **Homepage**:
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
 *   **Source code**:
     [`tfds.translate.ted_multi.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `335.91 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -68,5 +76,9 @@ FeaturesDict({
   url       = {http://www.aclweb.org/anthology/N18-2084}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## ted_multi_translate/plain_text (default config)

@@ -78,6 +78,10 @@ isbn="978-3-642-40802-1"
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## qa4mre/2011.main.DE (default config)
 
 *   **Config description**: QA4MRE dataset was created for the CLEF
@@ -89,7 +93,9 @@ isbn="978-3-642-40802-1"
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for DE language in 2011 year.
+
 *   **Dataset size**: `1.69 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -107,7 +113,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for EN language in 2011 year.
+
 *   **Dataset size**: `1.52 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -125,7 +133,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for ES language in 2011 year.
+
 *   **Dataset size**: `1.64 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -143,7 +153,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for IT language in 2011 year.
+
 *   **Dataset size**: `1.61 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -161,7 +173,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for RO language in 2011 year.
+
 *   **Dataset size**: `1.68 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -179,7 +193,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for AR language in 2012 year.
+
 *   **Dataset size**: `2.62 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -197,7 +213,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for BG language in 2012 year.
+
 *   **Dataset size**: `3.33 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -215,7 +233,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for DE language in 2012 year.
+
 *   **Dataset size**: `2.02 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -233,7 +253,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for EN language in 2012 year.
+
 *   **Dataset size**: `1.71 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -251,7 +273,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for ES language in 2012 year.
+
 *   **Dataset size**: `1.99 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -269,7 +293,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for IT language in 2012 year.
+
 *   **Dataset size**: `2.01 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -287,7 +313,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for RO language in 2012 year.
+
 *   **Dataset size**: `2.01 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -305,7 +333,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the alzheimers
     track for EN language in 2012 year.
+
 *   **Dataset size**: `1.57 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -323,7 +353,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for AR language in 2013 year.
+
 *   **Dataset size**: `4.04 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -341,7 +373,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for BG language in 2013 year.
+
 *   **Dataset size**: `5.21 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -359,7 +393,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for EN language in 2013 year.
+
 *   **Dataset size**: `2.81 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -377,7 +413,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for ES language in 2013 year.
+
 *   **Dataset size**: `3.35 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -395,7 +433,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the main track
     for RO language in 2013 year.
+
 *   **Dataset size**: `3.26 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -413,7 +453,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the alzheimers
     track for EN language in 2013 year.
+
 *   **Dataset size**: `2.50 MiB`
+
 *   **Splits**:
 
 Split   | Examples
@@ -431,7 +473,9 @@ Split   | Examples
     documents are available for two pilot studies: one on alzheimers data, and
     the other on entrance exams data. This configuration includes the
     entrance_exam track for EN language in 2013 year.
+
 *   **Dataset size**: `186.01 KiB`
+
 *   **Splits**:
 
 Split   | Examples

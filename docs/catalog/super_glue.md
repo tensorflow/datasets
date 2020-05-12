@@ -21,6 +21,9 @@
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## super_glue/boolq (default config)
 
@@ -42,9 +45,12 @@ containing the answer. Following the original work, we evaluate with accuracy.
     users of the Google search engine, and afterwards paired with a paragraph
     from a Wikipedia article containing the answer. Following the original work,
     we evaluate with accuracy.
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
+
 *   **Download size**: `3.93 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -115,9 +121,12 @@ for multi-class F1 we compute the unweighted average of the F1 per class.
     inter-annotator agreement above 0.85. The data is imbalanced (relatively
     fewer neutral examples), so we evaluate using accuracy and F1, where for
     multi-class F1 we compute the unweighted average of the F1 per class.
+
 *   **Homepage**:
     [https://github.com/mcdm/CommitmentBank](https://github.com/mcdm/CommitmentBank)
+
 *   **Download size**: `73.71 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -187,9 +196,12 @@ accuracy.
     instance types for the model. All examples are handcrafted and focus on
     topics from online blogs and a photography-related encyclopedia. Following
     the recommendation of the authors, we evaluate using accuracy.
+
 *   **Homepage**:
     [http://people.ict.usc.edu/~gordon/copa.html](http://people.ict.usc.edu/~gordon/copa.html)
+
 *   **Download size**: `42.96 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -264,8 +276,11 @@ domains including news, fiction, and historical text.
     format more closely matches the API of other SuperGLUE tasks than span-based
     extractive QA does. The paragraphs are drawn from seven domains including
     news, fiction, and historical text.
+
 *   **Homepage**: [https://cogcomp.org/multirc/](https://cogcomp.org/multirc/)
+
 *   **Download size**: `1.06 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -335,9 +350,12 @@ all mentions) token-level F1 and exact match (EM).
     of which are considered correct. Articles are drawn from CNN and Daily Mail.
     Following the original work, we evaluate with max (over all mentions)
     token-level F1 and exact match (EM).
+
 *   **Homepage**:
     [https://sheng-z.github.io/ReCoRD-explorer/](https://sheng-z.github.io/ReCoRD-explorer/)
+
 *   **Download size**: `49.36 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -416,9 +434,12 @@ and we expect the remaining gap to be difficult to close.
     the time of writing. Given the eight point gap with respect to human
     performance, however, the task is not yet solved by machines, and we expect
     the remaining gap to be difficult to close.
+
 *   **Homepage**:
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
+
 *   **Download size**: `733.32 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -507,9 +528,12 @@ evaluate using accuracy.
     sentences. Sentences are drawn from WordNet (Miller, 1995), VerbNet
     (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
     using accuracy.
+
 *   **Homepage**:
     [https://pilehvar.github.io/wic/](https://pilehvar.github.io/wic/)
+
 *   **Download size**: `386.93 KiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -631,10 +655,12 @@ However, the validation and test sets come from different domains, with the
 validation set consisting of ambiguous examples such that changing one non-noun
 phrase word will change the coreference dependencies in the sentence. The test
 set consists only of more straightforward examples, with a high number of noun
-phrases (and thus more choices for the model), but low to no ambiguity. *
-**Homepage**:
-[https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-* **Download size**: `31.98 KiB` * **Splits**:
+phrases (and thus more choices for the model), but low to no ambiguity.
+
+*   **Homepage**:
+    [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+*   **Download size**: `31.98 KiB`
+*   **Splits**:
 
 Split        | Examples
 :----------- | -------:
@@ -752,9 +778,12 @@ set consists only of more straightforward examples, with a high number of noun
 phrases (and thus more choices for the model), but low to no ambiguity.
 
 This version fixes issues where the spans are not actually substrings of the
-text. * **Homepage**:
-[https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-* **Download size**: `31.98 KiB` * **Splits**:
+text.
+
+*   **Homepage**:
+    [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+*   **Download size**: `31.98 KiB`
+*   **Splits**:
 
 Split        | Examples
 :----------- | -------:
@@ -831,9 +860,12 @@ used for the RTE task.
     collapse contradiction and neutral into a single not_entailment label, and
     request that submissions include predictions on the resulting set from the
     model used for the RTE task.
+
 *   **Homepage**:
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
+
 *   **Download size**: `33.15 KiB`
+
 *   **Splits**:
 
 Split  | Examples
@@ -903,9 +935,12 @@ demonstrate the presence of gender bias in a system, but not prove its absence.
     high positive predictive value and low negative predictive value; that is,
     they may demonstrate the presence of gender bias in a system, but not prove
     its absence.
+
 *   **Homepage**:
     [https://github.com/rudinger/winogender-schemas](https://github.com/rudinger/winogender-schemas)
+
 *   **Download size**: `10.17 KiB`
+
 *   **Splits**:
 
 Split  | Examples

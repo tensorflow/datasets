@@ -30,8 +30,9 @@ http://creativecommons.org/licenses/by/4.0
 *   **Source code**:
     [`tfds.image_classification.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/so2sat.py)
 *   **Versions**:
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.1.0`** (default): Using updated optical channels calibration
+        factor.
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 *   **Download size**: `Unknown size`
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
@@ -42,9 +43,14 @@ http://creativecommons.org/licenses/by/4.0
 Split | Examples
 :---- | -------:
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## so2sat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
+
 *   **Features**:
 
 ```python
@@ -61,6 +67,7 @@ FeaturesDict({
 ## so2sat/all
 
 *   **Config description**: 8 Sentinel-1 and 10 Sentinel-2 channels
+
 *   **Features**:
 
 ```python

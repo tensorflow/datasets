@@ -27,6 +27,7 @@ ${builder.info.description}
 <%def name="display_config_description(builder)">\
 % if builder.builder_config:
 *   **Config description**: ${builder.builder_config.description}
+
 % endif
 </%def>
 
@@ -47,7 +48,12 @@ def list_versions(builder):
       version_name = '**`{}`** (default)'.format(str(v))
     else:
       version_name = '`{}`'.format(str(v))
-    yield '{}: {}'.format(version_name, v.description or 'No release notes.')
+    if nightly_doc_util.is_version_nightly(builder, str(v)):
+      nightly_str = ' ' + nightly_doc_util.icon
+    else:
+      nightly_str = ''
+    yield '{}{}: {}'.format(
+        version_name, nightly_str, v.description or 'No release notes.')
 %>\
 *   **Versions**:
 % for version_str in list_versions(builder):
@@ -164,6 +170,18 @@ ${builder.info.citation}
 % endif
 </%def>
 
+<%def name="display_figure(builder)">\
+*   **Visualization ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:\
+% if visu_doc_util.has_visualization(builder):
+
+
+${visu_doc_util.get_html_tag(builder)}
+
+% else:
+ Not supported.
+% endif
+</%def>
+
 <%
 
 Section = collections.namedtuple('Section', 'get_signature, make')
@@ -211,6 +229,13 @@ def get_supervised(builder):
 def get_citation(builder):
   return builder.info.citation
 
+def get_figure(builder):
+  if visu_doc_util.has_visualization(builder):
+    return builder.info.full_name
+  else:
+    return None  # Fuse the sections together if no configs are available
+
+
 all_sections = [
     Section(get_description, display_description),
     Section(get_config_description, display_config_description),
@@ -225,6 +250,7 @@ all_sections = [
     Section(get_features, display_features),
     Section(get_supervised, display_supervised),
     Section(get_citation, display_citation),
+    Section(get_figure, display_figure),
 ]
 
 %>
@@ -258,8 +284,12 @@ ${display_builder(next(iter(builders)), common_sections)}
 % for i, builder in enumerate(builders):
 <%
 header_suffix = '(default config)' if i == 0 else ''
+if nightly_doc_util.is_config_nightly(builder):
+  nightly_str = ' ' + nightly_doc_util.icon
+else:
+  nightly_str = ''
 %>\
-${'##'} ${builder.name}/${builder.builder_config.name} ${header_suffix}
+${'##'} ${builder.name}/${builder.builder_config.name} ${header_suffix}${nightly_str}
 
 ${display_builder(builder, unique_sections)}
 % endfor
@@ -269,10 +299,20 @@ ${display_builder(builder, unique_sections)}
 
 ${'#'} `${builder.name}`
 
+% if nightly_doc_util.is_builder_nightly(builder):
+Note: This dataset was added recently and is only available in our
+`tfds-nightly` package  ${nightly_doc_util.icon}.
+
+% elif nightly_doc_util.has_nightly(builder):
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with ${nightly_doc_util.icon} are only available
+in the `tfds-nightly` package.
+
+% endif
 %if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
 Warning: Manual download required. See instructions below.
-%endif
 
+%endif
 <%doc>First case: Single builder.</%doc>\
 % if not builder.builder_config:
 ${display_builder(builder, all_sections)}

@@ -35,7 +35,7 @@ def main(argv):
   print(mnist, info)
   mnist_train = tfds.load('mnist', split='train')
   print(mnist_train)
-  mnist_subsplit = tfds.Split.TRAIN.subsplit(tfds.percent[:10])
+  mnist_subsplit = tfds.Split.TRAIN.subsplit(tfds.percent[:10])  # pytype: disable=module-attr
   mnist_train2 = tfds.load('mnist', split=mnist_subsplit)
   print(mnist_train2)
   for i, unused_row in enumerate(mnist_train2):

@@ -30,7 +30,7 @@ import tempfile
 
 from absl import app
 from absl import flags
-import md5
+import md5  # pytype: disable=import-error
 
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils

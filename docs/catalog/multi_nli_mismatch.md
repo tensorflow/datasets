@@ -20,17 +20,25 @@ generalization evaluation. The corpus served as the basis for the shared task of
 the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
 *   **Config description**: Plain text
+
 *   **Homepage**:
     [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
+
 *   **Source code**:
     [`tfds.text.multi_nli_mismatch.MultiNLIMismatch`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli_mismatch.py)
+
 *   **Versions**:
+
     *   **`0.0.1`** (default): No release notes.
+
 *   **Download size**: `216.34 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -71,5 +79,9 @@ FeaturesDict({
   url = "http://aclweb.org/anthology/N18-1101"
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## multi_nli_mismatch/plain_text (default config)

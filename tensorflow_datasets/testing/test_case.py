@@ -31,7 +31,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import gcs_utils
 
 
-
 GCS_ACCESS_FNS = {
     "original_info": gcs_utils.gcs_dataset_info_files,
     "dummy_info": lambda _: [],

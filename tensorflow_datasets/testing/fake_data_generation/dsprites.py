@@ -84,7 +84,7 @@ def _create_fake_samples():
     classes.append(rs.randint(num_factors, size=(NUM_IMAGES), dtype=np.int64))
     values.append(rs.choice(factor_values, size=(NUM_IMAGES)))
 
-  return images, classes.T, values.T
+  return images, classes.T, values.T  # pytype: disable=attribute-error
 
 
 def _generate():

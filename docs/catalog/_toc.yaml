@@ -40,8 +40,6 @@ toc:
     title: celeb_a
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
-  - path: /datasets/catalog/cityscapes
-    title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/coil100
@@ -252,6 +250,8 @@ toc:
     title: reddit
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
+  - path: /datasets/catalog/samsum
+    title: samsum (manual)
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
   - path: /datasets/catalog/wikihow

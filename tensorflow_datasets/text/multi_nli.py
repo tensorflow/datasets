@@ -114,8 +114,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
 
     downloaded_dir = dl_manager.download_and_extract(
-        "http://storage.googleapis.com/tfds-data/downloads/multi_nli/"
-        "multinli_1.0.zip")
+        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip")
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
     matched_validation_path = os.path.join(mnli_path,

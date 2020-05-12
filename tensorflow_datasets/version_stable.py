@@ -20,7 +20,7 @@ This file overwrites `version.py` for stable releases.
 """
 
 # We follow Semantic Versioning (https://semver.org/)
-_MAJOR_VERSION = '2'
+_MAJOR_VERSION = '3'
 _MINOR_VERSION = '1'
 _PATCH_VERSION = '0'
 

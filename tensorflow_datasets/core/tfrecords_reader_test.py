@@ -48,7 +48,8 @@ class GetDatasetFilesTest(testing.TestCase):
       'train': [3, 2, 3, 2, 3],  # 13 examples.
   }
 
-  PATH_PATTERN = '/foo/bar/mnist-train.tfrecord-0000%d-of-00005'
+  PATH_PATTERN = os.path.normpath(
+      '/foo/bar/mnist-train.tfrecord-0000%d-of-00005')
 
   def _get_files(self, instruction):
     file_instructions = tfrecords_reader._make_file_instructions_from_absolutes(
@@ -57,7 +58,8 @@ class GetDatasetFilesTest(testing.TestCase):
         absolute_instructions=[instruction],
     )
     for fi in file_instructions.file_instructions:
-      fi['filename'] = os.path.join('/foo/bar', fi['filename'])
+      fi['filename'] = os.path.normpath(
+          os.path.join('/foo/bar', fi['filename']))
     return file_instructions.file_instructions
 
   def test_no_skip_no_take(self):
@@ -271,11 +273,6 @@ class ReadInstructionTest(testing.TestCase):
 
 class ReaderTest(testing.TestCase):
 
-  SPLIT_INFOS = [
-      splits.SplitInfo(name='train', shard_lengths=[2, 3, 2, 3, 2]),  # 12 ex.
-      splits.SplitInfo(name='test', shard_lengths=[2, 3, 2]),  # 7 ex.
-  ]
-
   def setUp(self):
     super(ReaderTest, self).setUp()
     with absltest.mock.patch.object(example_parser,
@@ -298,20 +295,21 @@ class ReaderTest(testing.TestCase):
     for shard_spec in shard_specs:
       tfrecords_writer._write_tfrecord_from_shard_spec(
           shard_spec, lambda unused_i: iter(serialized_records))
-
-  def _write_tfrecords(self):
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
-    self._write_tfrecord('test', 3, 'mnopqrs')
+    return splits.SplitInfo(
+        name=split_name,
+        shard_lengths=[int(s.examples_number) for s in shard_specs],
+    )
 
   def test_nodata_instruction(self):
     # Given instruction corresponds to no data.
     with self.assertRaisesWithPredicateMatch(AssertionError,
                                              'corresponds to no data!'):
-      self.reader.read('mnist', 'train[0:0]', self.SPLIT_INFOS)
+      train_info = splits.SplitInfo(name='train', shard_lengths=[2, 3, 2, 3, 2])
+      self.reader.read('mnist', 'train[0:0]', [train_info])
 
   def test_noskip_notake(self):
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
-    ds = self.reader.read('mnist', 'train', self.SPLIT_INFOS)
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    ds = self.reader.read('mnist', 'train', [train_info])
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijkl'])
 
@@ -321,8 +319,8 @@ class ReaderTest(testing.TestCase):
           tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_overlap(self):
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
-    ds = self.reader.read('mnist', 'train+train[:2]', self.SPLIT_INFOS)
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    ds = self.reader.read('mnist', 'train+train[:2]', [train_info])
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijklab'])
 
@@ -332,9 +330,14 @@ class ReaderTest(testing.TestCase):
           tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_complex(self):
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
-    self._write_tfrecord('test', 3, 'mnopqrs')
-    ds = self.reader.read('mnist', 'train[1:-1]+test[:-50%]', self.SPLIT_INFOS)
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    test_info = self._write_tfrecord('test', 3, 'mnopqrs')
+    self.assertEqual(train_info.name, 'train')
+    self.assertEqual(test_info.name, 'test')
+    self.assertEqual(train_info.shard_lengths, [2, 3, 2, 3, 2])  # 12 ex.
+    self.assertEqual(test_info.shard_lengths, [2, 3, 2])  # 7 ex.
+    split_info = [train_info, test_info]
+    ds = self.reader.read('mnist', 'train[1:-1]+test[:-50%]', split_info)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'bcdefghijkmno'])
 
@@ -344,8 +347,8 @@ class ReaderTest(testing.TestCase):
           tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_shuffle_files(self):
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
-    ds = self.reader.read('mnist', 'train', self.SPLIT_INFOS,
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    ds = self.reader.read('mnist', 'train', [train_info],
                           shuffle_files=True)
     shards = [  # The shards of the dataset:
         [b'a', b'b'],
@@ -366,13 +369,12 @@ class ReaderTest(testing.TestCase):
     self.assertGreater(len(set(read_data)), 10)
 
   def test_shuffle_deterministic(self):
-
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
+    split_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     read_config = read_config_lib.ReadConfig(
         shuffle_seed=123,
     )
     ds = self.reader.read(
-        'mnist', 'train', self.SPLIT_INFOS,
+        'mnist', 'train', [split_info],
         read_config=read_config,
         shuffle_files=True)
     ds_values = list(tfds.as_numpy(ds))
@@ -383,16 +385,16 @@ class ReaderTest(testing.TestCase):
     ])
 
   def test_4fold(self):
-    self._write_tfrecord('train', 5, 'abcdefghijkl')
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     instructions = [
         tfrecords_reader.ReadInstruction('train', from_=k, to=k+25, unit='%')
         for k in range(0, 100, 25)]
-    tests = self.reader.read('mnist', instructions, self.SPLIT_INFOS)
+    tests = self.reader.read('mnist', instructions, [train_info])
     instructions = [
         (tfrecords_reader.ReadInstruction('train', to=k, unit='%') +
          tfrecords_reader.ReadInstruction('train', from_=k+25, unit='%'))
         for k in range(0, 100, 25)]
-    trains = self.reader.read('mnist', instructions, self.SPLIT_INFOS)
+    trains = self.reader.read('mnist', instructions, [train_info])
     read_tests = [list(r) for r in tfds.as_numpy(tests)]
     read_trains = [list(r) for r in tfds.as_numpy(trains)]
     self.assertEqual(read_tests, [[b'a', b'b', b'c'],
@@ -409,12 +411,57 @@ class ReaderTest(testing.TestCase):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
     fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
     ds = self.reader.read_files(
-        [{'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
-         {'filename': fname_pattern % 3, 'skip': 1, 'take': 1}],
+        tfrecords_reader.FileInstructions(
+            file_instructions=[
+                {'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
+                {'filename': fname_pattern % 3, 'skip': 1, 'take': 1},
+            ],
+            num_examples_per_shard=None,
+        ),
         read_config=read_config_lib.ReadConfig(),
         shuffle_files=False)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'defk'])
+
+  def test_input_context(self):
+    split_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    self.assertEqual(split_info.shard_lengths, [2, 3, 2, 3, 2])
+
+    print(split_info.shard_lengths)
+
+    def read(num_workers, index):
+      return list(tfds.as_numpy(self.reader.read(
+          'mnist',
+          'train',
+          split_infos=[split_info],
+          read_config=read_config_lib.ReadConfig(
+              input_context=tf.distribute.InputContext(
+                  num_input_pipelines=num_workers,
+                  input_pipeline_id=index,
+              ),
+          ),
+          # Workers should read a deterministic subset of the examples, even
+          # if examples within one worker may be shuffled.
+          shuffle_files=True,
+      )))
+
+    def _b(bytes_str):
+      if six.PY2:
+        return list(bytes_str)
+      # Convert to List[bytes] (rather than List[int])
+      return [bytes([b]) for b in bytes_str]
+
+    # Read all the data (single pipeline)
+    self.assertCountEqual(read(num_workers=1, index=0), _b(b'abcdefghijkl'))
+    # Read part of the data (workers should not overlapp)
+    self.assertCountEqual(read(num_workers=3, index=0), _b(b'abhij'))  # 0, 3
+    self.assertCountEqual(read(num_workers=3, index=1), _b(b'cdekl'))  # 1, 4
+    self.assertEqual(read(num_workers=3, index=2), _b(b'fg'))  # Shards 2
+    # If num_workers == num_shards, then a single shard is read
+    self.assertEqual(read(num_workers=5, index=1), _b(b'cde'))  # Shard 1
+    # If num_workers > num_shards, raise error
+    with self.assertRaisesRegexp(ValueError, 'Cannot shard the pipeline'):
+      read(num_workers=6, index=0)
 
 if __name__ == '__main__':
   testing.test_main()

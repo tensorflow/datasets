@@ -34,13 +34,15 @@ url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 }
 """
 
-_TRAIN_URL = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/rps.zip"
-_TEST_URL = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/rps-test-set.zip"
+_TRAIN_URL = "https://storage.googleapis.com/download.tensorflow.org/data/rps.zip"
+_TEST_URL = "https://storage.googleapis.com/download.tensorflow.org/data/rps-test-set.zip"
 
 _IMAGE_SIZE = 300
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
-_NAME_RE = re.compile(r"^(rps|rps-test-set)/(rock|paper|scissors)/[\w-]*\.png$")
+_NAME_RE = re.compile(
+    r"^(rps|rps-test-set)(?:/|\\)(rock|paper|scissors)(?:/|\\)[\w-]*\.png$"
+)
 
 
 class RockPaperScissors(tfds.core.GeneratorBasedBuilder):

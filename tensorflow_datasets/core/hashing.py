@@ -59,6 +59,10 @@ import tensorflow.compat.v2 as tf
 def _to_bytes(data):
   if not isinstance(data, (six.string_types, bytes)):
     data = str(data)
+  elif isinstance(data, str):
+    # For windows compatibility, we normalize the key in case a
+    # filepath is passed as key ('path\\to\\file' -> 'path/to/file')
+    data = data.replace('\\', '/')
   return tf.compat.as_bytes(data)
 
 

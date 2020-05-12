@@ -49,8 +49,7 @@ _DATA_URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.g
 class Dtd(tfds.core.GeneratorBasedBuilder):
   """Describable Textures Dataset (DTD)."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.1")
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -91,7 +90,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
         "r") as split_file:
       for line in split_file:
         fname = line.strip()
-        label = fname.split("/")[0]
+        label = os.path.split(fname)[0]
         record = {
             "file_name": fname,
             "image": os.path.join(data_path, "dtd", "images", fname),

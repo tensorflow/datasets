@@ -23,6 +23,7 @@ By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
 
 Instructions:
+
 ```
 python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=cifar10
@@ -34,10 +35,6 @@ containing your `DatasetBuilder` definition imported.
 
 
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import importlib
 import os
@@ -65,7 +62,9 @@ flags.DEFINE_string("exclude_datasets", "",
 flags.DEFINE_multi_string(
     "module_import", None,
     "Modules to import. Use this when your DatasetBuilder is defined outside "
-    "of tensorflow_datasets so that it is registered.")
+    "of tensorflow_datasets so that it is registered. Multiple imports can "
+    "be passed by calling the flag multiple times, or using coma separated "
+    "values.")
 flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
@@ -108,6 +107,9 @@ flags.DEFINE_list(
 # Development flags
 flags.DEFINE_boolean("register_checksums", False,
                      "If True, store size and checksum of downloaded files.")
+flags.DEFINE_boolean(
+    "force_checksums_validation",
+    False, "If True, raise an error if the checksums are not found.")
 
 # Debug flags
 flags.DEFINE_boolean("debug", False,
@@ -128,6 +130,7 @@ def download_config():
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
       register_checksums=FLAGS.register_checksums,
+      force_checksums_validation=FLAGS.force_checksums_validation,
   )
 
 
@@ -162,7 +165,8 @@ def download_and_prepare(builder):
 
 def import_modules(modules):
   for module in modules:
-    importlib.import_module(module)
+    for m in module.split(","):  # Allow to pass imports as coma separated vals.
+      importlib.import_module(m)
 
 
 def main(_):

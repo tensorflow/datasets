@@ -69,9 +69,14 @@ Split        | Examples
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## cnn_dailymail/plain_text (default config)
 
 *   **Config description**: Plain text
+
 *   **Dataset size**: `1.27 GiB`
 *   **Features**:
 
@@ -86,7 +91,9 @@ FeaturesDict({
 
 *   **Config description**: Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
+
 *   **Dataset size**: `1.28 GiB`
+
 *   **Features**:
 
 ```python
@@ -100,7 +107,9 @@ FeaturesDict({
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
     32k vocab size
+
 *   **Dataset size**: `490.99 MiB`
+
 *   **Features**:
 
 ```python

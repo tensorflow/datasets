@@ -16,6 +16,10 @@
 # Lint as: python3
 """Cityscapes Datasets."""
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import os
 import re
 
@@ -125,6 +129,7 @@ class CityscapesConfig(tfds.core.BuilderConfig):
 
 class Cityscapes(tfds.core.GeneratorBasedBuilder):
   """Base class for Cityscapes datasets."""
+
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You have to download files from https://www.cityscapes-dataset.com/login/

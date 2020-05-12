@@ -74,8 +74,8 @@ def _generate_jpeg(example_id, height, width):
 def _generate_annotation(example_id, height, width):
   """Generate a fake annotation XML for the given example id."""
   # pylint: disable=protected-access
-  label_names = tfds.features.ClassLabel(names=voc._VOC2007_LABELS).names
-  pose_names = tfds.features.ClassLabel(names=voc._VOC2007_POSES).names
+  label_names = tfds.features.ClassLabel(names=voc._VOC2007_LABELS).names  # pytype: disable=module-attr
+  pose_names = tfds.features.ClassLabel(names=voc._VOC2007_POSES).names  # pytype: disable=module-attr
   # pylint: enable=protected-access
   annotation = "<annotation>\n"
   annotation += "<size>\n"

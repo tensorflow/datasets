@@ -28,8 +28,9 @@ class CFQTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cfq.CFQ
   BUILDER_CONFIG_NAMES_TO_TEST = ["mcd1"]
   SPLITS = {
-      "train": 3,  # Number of fake train example
+      "train": 2,  # Number of fake train example
       "test": 1,  # Number of fake test example
+      "validation": 1,  # Number of fake validation example
   }
 
 

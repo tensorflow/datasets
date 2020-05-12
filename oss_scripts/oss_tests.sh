@@ -36,6 +36,7 @@ pytest \
   -n auto \
   --disable-warnings \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+  --ignore="tensorflow_datasets/core/dataset_builder_notfdv_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
@@ -59,10 +60,14 @@ function test_notebook() {
   set_status
 }
 
-for notebook in $NOTEBOOKS
-do
-  test_notebook $notebook
-done
+# Skip notebook tests for TF 1.15 as the notebook assumes eager by default.
+if [[ "$TF_VERSION" != "1.15.0" ]]
+then
+  for notebook in $NOTEBOOKS
+  do
+    test_notebook $notebook
+  done
+fi
 
 # Run NSynth, in a contained enviornement
 function test_isolation_nsynth() {

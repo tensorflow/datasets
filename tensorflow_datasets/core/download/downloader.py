@@ -28,6 +28,8 @@ import os
 import re
 import ssl
 import sys
+from typing import Any, Iterator
+
 from absl import logging
 import promise
 import requests
@@ -36,6 +38,7 @@ from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import util as download_util
 
@@ -43,11 +46,11 @@ _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
 
 @utils.memoize()
-def get_downloader(*args, **kwargs):
+def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
-def _get_filename(response):
+def _get_filename(response: requests.Response) -> str:
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
     match = re.findall('filename="(.+?)"', content_disposition)
@@ -66,7 +69,7 @@ class _Downloader(object):
   Do not instantiate this class directly. Instead, call `get_downloader()`.
   """
 
-  def __init__(self, max_simultaneous_downloads=50, checksumer=None):
+  def __init__(self, max_simultaneous_downloads: int = 50, checksumer=None):
     """Init _Downloader instance.
 
     Args:
@@ -80,11 +83,12 @@ class _Downloader(object):
     self._pbar_dl_size = None
 
   @utils.memoize()
-  def kaggle_downloader(self, competition_name):
+  def kaggle_downloader(
+      self, competition_name: str) -> kaggle.KaggleCompetitionDownloader:
     return kaggle.KaggleCompetitionDownloader(competition_name)
 
   @contextlib.contextmanager
-  def tqdm(self):
+  def tqdm(self) -> Iterator[None]:
     """Add a progression bar for the current download."""
     async_tqdm = utils.async_tqdm
     with async_tqdm(total=0, desc='Dl Completed...', unit=' url') as pbar_url:
@@ -93,7 +97,7 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url, destination_path):
+  def download(self, url: str, destination_path: str):
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
@@ -123,7 +127,10 @@ class _Downloader(object):
         if not block:
           break
         checksum.update(block)
-    return checksum.hexdigest(), dl_size
+    return checksums_lib.UrlInfo(
+        checksum=checksum.hexdigest(),
+        size=dl_size,
+    )
 
   def _get_drive_url(self, url, session):
     """Returns url, possibly with confirmation token."""
@@ -137,14 +144,16 @@ class _Downloader(object):
     # No token found, let's try with original URL:
     return url
 
-  def _sync_file_copy(self, filepath, destination_path):
+  def _sync_file_copy(
+      self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
     out_path = os.path.join(destination_path, os.path.basename(filepath))
     tf.io.gfile.copy(filepath, out_path)
     hexdigest, size = utils.read_checksum_digest(
         out_path, checksum_cls=self._checksumer)
-    return hexdigest, size
+    return checksums_lib.UrlInfo(checksum=hexdigest, size=size)
 
-  def _sync_download(self, url, destination_path):
+  def _sync_download(
+      self, url: str, destination_path: str) -> checksums_lib.UrlInfo:
     """Synchronous version of `download` method.
 
     Args:
@@ -191,7 +200,7 @@ class _Downloader(object):
 
     ca_verify = {
         'urllib':
-            ssl._create_unverified_context()  # pylint: disable=W0212
+            ssl._create_unverified_context()  # pylint: disable=protected-access
             if not ca_bundle else ssl.create_default_context(capath=ca_bundle),
         'requests':
             False if not ca_bundle else ca_bundle
@@ -260,4 +269,4 @@ class _Downloader(object):
         checksum.update(block)
         file_.write(block)
     self._pbar_url.update(1)
-    return checksum.hexdigest(), size
+    return checksums_lib.UrlInfo(checksum=checksum.hexdigest(), size=size)

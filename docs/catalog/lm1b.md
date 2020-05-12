@@ -61,9 +61,14 @@ Split   | Examples
 }
 ```
 
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
 ## lm1b/plain_text (default config)
 
 *   **Config description**: Plain text
+
 *   **Features**:
 
 ```python
@@ -76,6 +81,7 @@ FeaturesDict({
 
 *   **Config description**: Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
+
 *   **Features**:
 
 ```python
@@ -88,6 +94,7 @@ FeaturesDict({
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
     vocab size
+
 *   **Features**:
 
 ```python
@@ -100,6 +107,7 @@ FeaturesDict({
 
 *   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
     32k vocab size
+
 *   **Features**:
 
 ```python

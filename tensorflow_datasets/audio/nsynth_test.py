@@ -15,6 +15,11 @@
 
 # Lint as: python3
 """Nsynth Dataset Builder test."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from tensorflow_datasets.audio import nsynth
 import tensorflow_datasets.testing as tfds_test
 

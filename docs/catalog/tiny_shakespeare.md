@@ -70,3 +70,7 @@ FeaturesDict({
   howpublished={\url{https://github.com/karpathy/char-rnn}}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
