@@ -220,9 +220,10 @@ class DownloadManager(object):
   def __getstate__(self):
     """Remove un-pickleable attributes and return the state."""
     if self._register_checksums:
-      raise ValueError(
+      # Currently, checksums registration from Beam not supported.
+      raise NotImplementedError(
           '`register_checksums` must be disabled in a parallelized '
-          'DownloadManager.')
+          'DownloadManager. Please open a PR if you would like this feature.')
     state = self.__dict__.copy()
     state['_DownloadManager__downloader'] = None
     state['_DownloadManager__extractor'] = None
@@ -263,8 +264,10 @@ class DownloadManager(object):
   def _handle_download_result(self, resource, tmp_dir_path, url_info):
     """Store dled file to definitive place, write INFO file, return path."""
     fnames = tf.io.gfile.listdir(tmp_dir_path)
-    if len(fnames) > 1:
-      raise AssertionError('More than one file in %s.' % tmp_dir_path)
+    if len(fnames) != 1:
+      raise ValueError(
+          'Download not found for url {} in: {}. Found {} files, but expected '
+          '1.'.format(resource.url, tmp_dir_path, len(fnames)))
     original_fname = fnames[0]
     tmp_path = os.path.join(tmp_dir_path, original_fname)
     self._recorded_url_infos[resource.url] = url_info
