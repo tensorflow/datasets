@@ -23,7 +23,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-from typing import Dict, Iterable, List
+from typing import Any, Dict, Iterable, List
 
 import tensorflow.compat.v2 as tf
 
@@ -49,6 +49,14 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
   def __init__(self, size: int, checksum: str):
     self.size = size
     self.checksum = checksum
+
+  def asdict(self) -> Dict[str, Any]:
+    """Returns the dict representation of the dataclass."""
+    # TODO(tfds): Replace by `dataclasses.asdict(self)`
+    return {
+        'size': self.size,
+        'checksum': self.checksum,
+    }
 
   def __eq__(self, other) -> bool:
     return (

@@ -57,6 +57,8 @@ class Artifact(object):
     )
     self.file_name = resource_lib.get_dl_fname(url, self.url_info.checksum)
     self.file_path = f'/dl_dir/{self.file_name}'
+    self.url_name = resource_lib.get_dl_fname(url, _sha256(url))
+    self.url_path = f'/dl_dir/{self.url_name}'
 
 
 class DownloadManagerTest(testing.TestCase):
@@ -331,6 +333,134 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[a.url] = a.url_info
     with self.assertRaisesRegex(ValueError, 'Missing checksums url'):
       dl_manager.download(a.url)
+
+  def test_download_cached(self):
+    """Tests that the URL is downloaded only once."""
+    a = Artifact('x')
+    self.dl_results[a.url] = a.url_info
+
+    # Download the URL
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
+    self.assertEqual(dl_manager.download(a.url), a.url_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    self.assertCountEqual(self.fs.files, [a.url_path, a.url_path + '.INFO'])
+
+    # Reuse downloaded cache
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
+    self.assertEqual(dl_manager.download(a.url), a.url_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    self.assertCountEqual(self.fs.files, [a.url_path, a.url_path + '.INFO'])
+
+    # Reuse downloaded cache, even if url_info is present
+    dl_manager = self._get_manager(
+        register_checksums=False,
+        url_infos={a.url: a.url_info},
+    )
+    self.assertEqual(dl_manager.download(a.url), a.url_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    self.assertCountEqual(self.fs.files, [a.url_path, a.url_path + '.INFO'])
+
+    # Reuse downloaded cache and register the checksums
+    dl_manager = self._get_manager(
+        register_checksums=True,  # <<< Register checksums !!!
+    )
+    self.assertEqual(dl_manager.download(a.url), a.file_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    # The files have been renamed `url_path` -> `file_path`
+    self.assertCountEqual(self.fs.files, [a.file_path, a.file_path + '.INFO'])
+
+    # After checksums have been registered, `file_path` is used
+    dl_manager = self._get_manager(
+        register_checksums=False,
+        url_infos={a.url: a.url_info},
+    )
+    self.assertEqual(dl_manager.download(a.url), a.file_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    self.assertCountEqual(self.fs.files, [a.file_path, a.file_path + '.INFO'])
+
+    # Registering checksums twice still reuse the cached `file_path`
+    dl_manager = self._get_manager(
+        register_checksums=True,  # <<< Re-register checksums...
+        url_infos={a.url: a.url_info},  # ...but checksums already known
+    )
+    self.assertEqual(dl_manager.download(a.url), a.file_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])  # Still one download
+    self.assertCountEqual(self.fs.files, [a.file_path, a.file_path + '.INFO'])
+
+    # Checksums unknown, so `file_path` unknown, re-downloading
+    dl_manager = self._get_manager(
+        register_checksums=False,
+    )
+    self.assertEqual(dl_manager.download(a.url), a.url_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url, a.url])  # Re-download!!
+    self.assertCountEqual(self.fs.files, [
+        a.url_path,
+        a.url_path + '.INFO',
+        a.file_path,  # `file_path` still exists from previous download
+        a.file_path + '.INFO',
+    ])
+
+  def test_download_cached_checksums_error(self):
+    """Tests that the download is cached, even if record_checksums fails."""
+    a = Artifact('x')
+    self.dl_results[a.url] = a.url_info
+
+    class StoreChecksumsError(Exception):
+      pass
+
+    dl_manager = self._get_manager(
+        register_checksums=True,
+    )
+    with absltest.mock.patch.object(
+        checksums_lib, 'store_checksums', side_effect=StoreChecksumsError()):
+      with self.assertRaises(StoreChecksumsError):
+        dl_manager.download(a.url)
+    # Even after failure, the file was properly downloaded
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    self.assertCountEqual(self.fs.files, [a.url_path, a.url_path + '.INFO'])
+
+    # When the user retry, it should suceed without redownloading the file
+    dl_manager = self._get_manager(
+        register_checksums=True,
+    )
+    self.assertEqual(dl_manager.download(a.url), a.file_path)
+    self.assertCountEqual(self.downloaded_urls, [a.url])
+    # The files have been renamed `url_path` -> `file_path`
+    self.assertCountEqual(self.fs.files, [a.file_path, a.file_path + '.INFO'])
+
+  def test_download_url_info_in_info_file_missmatch(self):
+    """Tests failure when downloaded checksums and `.INFO` mismatch."""
+
+    a = Artifact('x')
+    self.dl_results[a.url] = a.url_info
+
+    # Download the url once
+    dl_manager = self._get_manager(register_checksums=False)
+    dl_manager.download(a.url)
+
+    # The second time, download the url with a different checksum
+    self.dl_results[a.url] = checksums_lib.UrlInfo(
+        size=a.url_info.size,
+        checksum=_sha256('Other content'),
+    )
+    dl_manager = self._get_manager(
+        register_checksums=False,
+        force_download=True,
+    )
+    with self.assertRaisesRegexp(ValueError, 'contains a different checksum'):
+      dl_manager.download(a.url)
+
+    # If the url is re-downloaded with the same hash, no error is raised
+    self.dl_results[a.url] = a.url_info
+    dl_manager = self._get_manager(
+        register_checksums=False,
+        force_download=True,
+    )
+    dl_manager.download(a.url)
 
 
 if __name__ == '__main__':
