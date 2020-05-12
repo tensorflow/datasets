@@ -107,6 +107,9 @@ flags.DEFINE_list(
 # Development flags
 flags.DEFINE_boolean("register_checksums", False,
                      "If True, store size and checksum of downloaded files.")
+flags.DEFINE_boolean(
+    "force_checksums_validation",
+    False, "If True, raise an error if the checksums are not found.")
 
 # Debug flags
 flags.DEFINE_boolean("debug", False,
@@ -127,6 +130,7 @@ def download_config():
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
       register_checksums=FLAGS.register_checksums,
+      force_checksums_validation=FLAGS.force_checksums_validation,
   )
 
 

@@ -191,7 +191,7 @@ class _Downloader(object):
 
     ca_verify = {
         'urllib':
-            ssl._create_unverified_context()  # pylint: disable=W0212
+            ssl._create_unverified_context()  # pylint: disable=protected-access
             if not ca_bundle else ssl.create_default_context(capath=ca_bundle),
         'requests':
             False if not ca_bundle else ca_bundle

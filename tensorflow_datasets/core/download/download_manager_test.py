@@ -57,6 +57,12 @@ def _get_promise_on_event(result=None, error=None):
   return event, promise.Promise(callback)
 
 
+def _get_result(result):
+  event, promise_result = _get_promise_on_event(result)
+  event.set()
+  return promise_result
+
+
 def _sha256(str_):
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
@@ -89,6 +95,7 @@ class DownloadManagerTest(testing.TestCase):
     return temp_f
 
   def setUp(self):
+    super(DownloadManagerTest, self).setUp()
     self.addCleanup(absltest.mock.patch.stopall)
     self.existing_paths = []
     self.made_dirs = []
@@ -124,15 +131,22 @@ class DownloadManagerTest(testing.TestCase):
     absltest.mock.patch.object(checksums_lib, 'store_checksums').start()
 
   def tearDown(self):
+    super(DownloadManagerTest, self).tearDown()
     self.gfile_patch.stop()
 
   def _write_info(self, path, info):
     content = json.dumps(info, sort_keys=True)
     self._add_file(path, content)
 
-  def _get_manager(self, force_download=False, force_extraction=False,
-                   checksums=None, dl_dir='/dl_dir',
-                   extract_dir='/extract_dir'):
+  def _get_manager(
+      self,
+      force_download=False,
+      force_extraction=False,
+      checksums=None,
+      dl_dir='/dl_dir',
+      extract_dir='/extract_dir',
+      **kwargs
+  ):
     manager = dm.DownloadManager(
         dataset_name='mnist',
         download_dir=dl_dir,
@@ -140,7 +154,8 @@ class DownloadManagerTest(testing.TestCase):
         manual_dir='/manual_dir',
         force_download=force_download,
         force_extraction=force_extraction,
-        )
+        **kwargs
+    )
     if checksums:
       manager._sizes_checksums = checksums
     download = absltest.mock.patch.object(
@@ -317,8 +332,7 @@ class DownloadManagerTest(testing.TestCase):
   def test_wrong_checksum(self):
     a = Artifact('a.tar.gz')
     sha_b = _sha256('content of another file')
-    dl_a, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
-    dl_a.set()
+    self.dl_results[a.url] = _get_result(a.checksum_size)
     manager = self._get_manager(checksums={
         a.url: (a.size, sha_b),
     })
@@ -329,6 +343,18 @@ class DownloadManagerTest(testing.TestCase):
   def test_pickle(self):
     dl_manager = self._get_manager()
     pickle.loads(pickle.dumps(dl_manager))
+
+  def test_force_checksums_validation(self):
+    """Tests for download manager with checksums."""
+    dl_manager = self._get_manager(
+        force_checksums_validation=True,
+    )
+
+    a = Artifact('x')
+    self.dl_results[a.url] = _get_result(a.checksum_size)
+    with self.assertRaisesRegex(ValueError, 'Missing checksums url'):
+      dl_manager.download(a.url)
+
 
 if __name__ == '__main__':
   testing.test_main()
