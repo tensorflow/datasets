@@ -18,26 +18,22 @@
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import io
 import os
 
 import tensorflow.compat.v2 as tf
-
 from tensorflow_datasets.core import utils
+from typing import Any, List, Optional, Dict, Tuple
 
+_ROOT_DIR: str = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
 
-_ROOT_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
-
-_CHECKSUM_DIRS = [
+_CHECKSUM_DIRS: List[str] = [
     os.path.join(_ROOT_DIR, 'url_checksums'),
 ]
-_CHECKSUM_SUFFIX = '.txt'
+_CHECKSUM_SUFFIX: str = '.txt'
 
 
-def add_checksums_dir(checksums_dir):
+def add_checksums_dir(checksums_dir: str) -> Optional[List[str]]:
   """Registers a new checksums dir.
 
   This function allow external datasets not present in the tfds repository to
@@ -67,16 +63,16 @@ def add_checksums_dir(checksums_dir):
   _CHECKSUM_DIRS.append(checksums_dir)
 
 
-def _list_dir(path):
+def _list_dir(path: str) -> List[str]:
   return tf.io.gfile.listdir(path)
 
 
 
 
 @utils.memoize()
-def _checksum_paths():
+def _checksum_paths() -> Dict[str, str]:
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
-  dataset2path = {}
+  dataset2path: Dict[str, str] = {}
   for dir_path in _CHECKSUM_DIRS:
     for fname in _list_dir(dir_path):
       if not fname.endswith(_CHECKSUM_SUFFIX):
@@ -87,9 +83,9 @@ def _checksum_paths():
   return dataset2path
 
 
-def _get_path(dataset_name):
+def _get_path(dataset_name: str) -> str:
   """Returns path to where checksums are stored for a given dataset."""
-  path = _checksum_paths().get(dataset_name, None)
+  path: Optional[str] = _checksum_paths().get(dataset_name, None)
   if path:
     return path
   msg = (
@@ -105,21 +101,21 @@ def _get_path(dataset_name):
   raise AssertionError(msg)
 
 
-def _read_file(path):
+def _read_file(path: str) -> str:
   return tf.io.gfile.GFile(path).read()
 
 
 
 
-def _get_sizes_checksums(checksums_path):
+def _get_sizes_checksums(checksums_path: str) -> Dict[str, Tuple[int, str]]:
   """Returns {URL: (size, checksum)}s stored within file at given path."""
-  checksums_file = _read_file(checksums_path).split('\n')
+  checksums_file: List[str] = _read_file(checksums_path).split('\n')
   return parse_sizes_checksums(checksums_file)
 
 
-def parse_sizes_checksums(checksums_file):
+def parse_sizes_checksums(checksums_file: List[str]) -> Dict[str, Tuple[int, str]]:
   """Returns {URL: (size, checksum)}s stored within given file."""
-  checksums = {}
+  checksums: Dict[int, Tuple[str, str]] = {}
   for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
@@ -131,9 +127,9 @@ def parse_sizes_checksums(checksums_file):
 
 
 @utils.memoize()
-def get_all_sizes_checksums():
+def get_all_sizes_checksums() -> Dict[str, Tuple[int, Any]]:
   """Returns dict associating URL to (size, sha256)."""
-  sizes_checksums = {}
+  sizes_checksums: Dict[str, Tuple[str, Any]] = {}
   for path in _checksum_paths().values():
     data = _get_sizes_checksums(path)
     for url, size_checksum in data.items():
@@ -145,7 +141,7 @@ def get_all_sizes_checksums():
   return sizes_checksums
 
 
-def store_checksums(dataset_name, sizes_checksums):
+def store_checksums(dataset_name: str, sizes_checksums: Dict[str, Tuple[str, Any]]) -> Optional[io.TextIOBase]:
   """Store given checksums and sizes for specific dataset.
 
   Content of file is never disgarded, only updated. This is to ensure that if
@@ -162,9 +158,9 @@ def store_checksums(dataset_name, sizes_checksums):
     dataset_name: string.
     sizes_checksums: dict, {url: (size_in_bytes, checksum)}.
   """
-  path = _get_path(dataset_name)
-  original_data = _get_sizes_checksums(path)
-  new_data = original_data.copy()
+  path: str = _get_path(dataset_name)
+  original_data: Dict[str, Tuple[int, str]] = _get_sizes_checksums(path)
+  new_data: Dict[str, Tuple[int, str]] = original_data.copy()
   new_data.update(sizes_checksums)
   if original_data == new_data:
     return
