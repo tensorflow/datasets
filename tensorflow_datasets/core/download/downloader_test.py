@@ -89,8 +89,8 @@ class DownloaderTest(testing.TestCase):
 
   def test_ok(self):
     promise = self.downloader.download(self.url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
+    url_info = promise.get()
+    self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
@@ -98,8 +98,8 @@ class DownloaderTest(testing.TestCase):
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
+    url_info = promise.get()
+    self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
@@ -133,8 +133,8 @@ class DownloaderTest(testing.TestCase):
       promise = self.downloader.download(
           'kaggle://competition/some-competition/a.csv',
           self.tmp_dir)
-      _, dl_size = promise.get()
-      self.assertEqual(dl_size, len(fname))
+      url_info = promise.get()
+      self.assertEqual(url_info.size, len(fname))
       with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
         self.assertEqual(fname, f.read())
 
@@ -142,16 +142,16 @@ class DownloaderTest(testing.TestCase):
       promise = self.downloader.download(
           'kaggle://dataset/some-author/some-dataset/a.csv',
           self.tmp_dir)
-      _, dl_size = promise.get()
-      self.assertEqual(dl_size, len(fname))
+      url_info = promise.get()
+      self.assertEqual(url_info.size, len(fname))
       with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
         self.assertEqual(fname, f.read())
 
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
+    url_info = promise.get()
+    self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))

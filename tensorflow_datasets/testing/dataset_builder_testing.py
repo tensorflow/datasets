@@ -310,10 +310,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
     with utils.try_reraise(suffix=err_msg):
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
-      sizes_checksums = checksums._get_sizes_checksums(filepath)  # pylint: disable=protected-access
-      urls = sizes_checksums.keys()
+      url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
 
-    missing_urls = self._download_urls - set(urls)
+    missing_urls = self._download_urls - set(url_infos.keys())
     self.assertEmpty(
         missing_urls,
         "Some urls checksums are missing at: {} "

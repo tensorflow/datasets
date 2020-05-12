@@ -77,8 +77,7 @@ class Artifact(object):
     self.content = content
     self.size = len(content)
     self.sha = _sha256(content)
-    self.size_checksum = (self.size, self.sha)
-    self.checksum_size = (self.sha, self.size)
+    self.url_info = checksums_lib.UrlInfo(size=self.size, checksum=self.sha)
     self.dl_fname = resource_lib.get_dl_fname(url, self.sha)
     self.dl_tmp_dirname = resource_lib.get_dl_dirname(url)
 
@@ -142,7 +141,7 @@ class DownloadManagerTest(testing.TestCase):
       self,
       force_download=False,
       force_extraction=False,
-      checksums=None,
+      url_infos=None,
       dl_dir='/dl_dir',
       extract_dir='/extract_dir',
       **kwargs
@@ -156,8 +155,8 @@ class DownloadManagerTest(testing.TestCase):
         force_extraction=force_extraction,
         **kwargs
     )
-    if checksums:
-      manager._sizes_checksums = checksums
+    if url_infos:
+      manager._url_infos = url_infos
     download = absltest.mock.patch.object(
         manager._downloader,
         'download',
@@ -184,10 +183,11 @@ class DownloadManagerTest(testing.TestCase):
         # INFO file of c has been deleted:
         ('/dl_dir/%s' % c.dl_fname, c.content),
     ]]
-    dl_b, self.dl_results[b.url] = _get_promise_on_event(b.checksum_size)
-    dl_c, self.dl_results[c.url] = _get_promise_on_event(c.checksum_size)
-    manager = self._get_manager(checksums=dict(
-        (art.url, art.size_checksum) for art in (a, b, c)))
+    dl_b, self.dl_results[b.url] = _get_promise_on_event(b.url_info)
+    dl_c, self.dl_results[c.url] = _get_promise_on_event(c.url_info)
+    manager = self._get_manager(url_infos={
+        art.url: art.url_info for art in (a, b, c)
+    })
     dl_b.set()
     dl_c.set()
     downloads = manager.download(urls)
@@ -242,17 +242,17 @@ class DownloadManagerTest(testing.TestCase):
   def test_download_and_extract(self):
     a, b = Artifact('a.zip'), Artifact('b')
     self.file_names[a.dl_tmp_dirname] = 'a.zip'
-    dl_a, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
-    dl_b, self.dl_results[b.url] = _get_promise_on_event(b.checksum_size)
+    dl_a, self.dl_results[a.url] = _get_promise_on_event(a.url_info)
+    dl_b, self.dl_results[b.url] = _get_promise_on_event(b.url_info)
     ext_a, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
         _get_promise_on_event('/extract_dir/ZIP.%s' % a.dl_fname))
     # url_b doesn't need any extraction.
     for event in [dl_a, dl_b, ext_a]:
       event.set()
     # Result is the same after caching:
-    manager = self._get_manager(checksums={
-        a.url: a.size_checksum,
-        b.url: b.size_checksum,
+    manager = self._get_manager(url_infos={
+        a.url: a.url_info,
+        b.url: b.url_info,
     })
     res = manager.download_and_extract({'a': a.url, 'b': b.url})
     expected = {
@@ -266,13 +266,13 @@ class DownloadManagerTest(testing.TestCase):
     # not from URL.
     a = Artifact('a', url='http://a?key=1234')
     self.file_names[a.dl_tmp_dirname] = 'a.zip'
-    dl, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
+    dl, self.dl_results[a.url] = _get_promise_on_event(a.url_info)
     ext, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
         _get_promise_on_event('/extract_dir/ZIP.%s' % a.dl_fname))
     dl.set()
     ext.set()
-    manager = self._get_manager(checksums={
-        a.url: a.size_checksum,
+    manager = self._get_manager(url_infos={
+        a.url: a.url_info,
     })
     res = manager.download_and_extract({'a': a.url})
     expected = {
@@ -291,8 +291,8 @@ class DownloadManagerTest(testing.TestCase):
     ext_a, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
         _get_promise_on_event('/extract_dir/ZIP.%s' % a.dl_fname))
     ext_a.set()
-    manager = self._get_manager(checksums={
-        a.url: a.size_checksum,
+    manager = self._get_manager(url_infos={
+        a.url: a.url_info,
     })
     res = manager.download_and_extract(a.url)
     expected = '/extract_dir/ZIP.%s' % a.dl_fname
@@ -306,15 +306,15 @@ class DownloadManagerTest(testing.TestCase):
     self.file_names[a.dl_tmp_dirname] = 'b.tar.gz'
     self._write_info('/dl_dir/%s.INFO' % a.dl_fname,
                      {'original_fname': 'b.tar.gz'})
-    dl_a, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
+    dl_a, self.dl_results[a.url] = _get_promise_on_event(a.url_info)
     ext_a, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
         _get_promise_on_event('/extract_dir/TAR_GZ.%s' % a.dl_fname))
     dl_a.set()
     ext_a.set()
     manager = self._get_manager(
         force_download=True, force_extraction=True,
-        checksums={
-            a.url: a.size_checksum,
+        url_infos={
+            a.url: a.url_info,
         })
     res = manager.download_and_extract(a.url)
     expected = '/extract_dir/TAR_GZ.%s' % a.dl_fname
@@ -332,9 +332,9 @@ class DownloadManagerTest(testing.TestCase):
   def test_wrong_checksum(self):
     a = Artifact('a.tar.gz')
     sha_b = _sha256('content of another file')
-    self.dl_results[a.url] = _get_result(a.checksum_size)
-    manager = self._get_manager(checksums={
-        a.url: (a.size, sha_b),
+    self.dl_results[a.url] = _get_result(a.url_info)
+    manager = self._get_manager(url_infos={
+        a.url: checksums_lib.UrlInfo(size=a.size, checksum=sha_b),
     })
     with self.assertRaises(dm.NonMatchingChecksumError):
       manager.download(a.url)
@@ -351,7 +351,7 @@ class DownloadManagerTest(testing.TestCase):
     )
 
     a = Artifact('x')
-    self.dl_results[a.url] = _get_result(a.checksum_size)
+    self.dl_results[a.url] = _get_result(a.url_info)
     with self.assertRaisesRegex(ValueError, 'Missing checksums url'):
       dl_manager.download(a.url)
 
