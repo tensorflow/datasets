@@ -81,7 +81,7 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     filepath = dl_manager.download('http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data')
-    all_lines = tf.io.gfile.GFile(filepath).read().split("\n")
+    all_lines = tf.io.gfile.GFile(filepath).read().splitlines()
     records = [l for l in all_lines if ('?' not in l) and l]
     # There is no predefined train/val/test split for this dataset.
     return [
