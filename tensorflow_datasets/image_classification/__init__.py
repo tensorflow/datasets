@@ -59,6 +59,7 @@ from tensorflow_datasets.image_classification.mnist import FashionMNIST
 from tensorflow_datasets.image_classification.mnist import KMNIST
 from tensorflow_datasets.image_classification.mnist import MNIST
 from tensorflow_datasets.image_classification.mnist_corrupted import MNISTCorrupted
+from tensorflow_datasets.image_classification.nih_chest_xray import NihChestXray
 from tensorflow_datasets.image_classification.omniglot import Omniglot
 from tensorflow_datasets.image_classification.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
@@ -81,4 +82,3 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image_classification.nih_chest_xray import NihChestXray  # TODO(nih_chest_xray) Sort alphabetically
