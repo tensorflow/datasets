@@ -22,18 +22,15 @@ from __future__ import print_function
 
 import concurrent.futures
 import contextlib
+import functools
 import hashlib
 import io
 import os
 import re
-import ssl
-import sys
-from typing import Any, Iterator
-
-from absl import logging
+from typing import Any, ContextManager, Iterable, Iterator, Tuple, Union
 import promise
 import requests
-from requests.utils import extract_zipped_paths
+
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import units
@@ -44,12 +41,16 @@ from tensorflow_datasets.core.download import kaggle
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
 
+# Response interface. Has `.url` and `.headers` attribute
+Response = Union[requests.Response, urllib.response.addinfourl]
+
+
 @utils.memoize()
 def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
-def _get_filename(response: requests.Response) -> str:
+def _get_filename(response: Response) -> str:
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
     match = re.findall('filename="(.+?)"', content_disposition)
@@ -77,7 +78,7 @@ class _Downloader(object):
     """
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_simultaneous_downloads)
-    self._checksumer = checksumer or hashlib.sha256
+    self._checksumer_cls = checksumer or hashlib.sha256
     self._pbar_url = None
     self._pbar_dl_size = None
 
@@ -119,7 +120,7 @@ class _Downloader(object):
     filepath = downloader.download_file(kaggle_file.filename, destination_path)
 
     dl_size = tf.io.gfile.stat(filepath).length
-    checksum = self._checksumer()
+    checksum = self._checksumer_cls()
     with tf.io.gfile.GFile(filepath, 'rb') as f:
       while True:
         block = f.read(io.DEFAULT_BUFFER_SIZE)
@@ -131,83 +132,38 @@ class _Downloader(object):
         size=dl_size,
     )
 
-  def _get_drive_url(self, url, session):
-    """Returns url, possibly with confirmation token."""
-    response = session.get(url, stream=True)
-    if response.status_code != 200:
-      raise DownloadError(
-          'Failed to get url %s. HTTP code: %d.' % (url, response.status_code))
-    for k, v in response.cookies.items():
-      if k.startswith('download_warning'):
-        return url + '&confirm=' + v  # v is the confirm token
-    # No token found, let's try with original URL:
-    return url
-
   def _sync_file_copy(
       self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
     out_path = os.path.join(destination_path, os.path.basename(filepath))
     tf.io.gfile.copy(filepath, out_path)
     hexdigest, size = utils.read_checksum_digest(
-        out_path, checksum_cls=self._checksumer)
+        out_path, checksum_cls=self._checksumer_cls)
     return checksums_lib.UrlInfo(checksum=hexdigest, size=size)
 
   def _sync_download(
       self, url: str, destination_path: str) -> checksums_lib.UrlInfo:
     """Synchronous version of `download` method.
 
+    To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
+    `REQUESTS_CA_BUNDLE`,... environement variables can be exported, as
+    described in:
+    https://requests.readthedocs.io/en/master/user/advanced/#proxies
+
     Args:
       url: url to download
       destination_path: path where to write it
+
     Returns:
       None
 
     Raises:
       DownloadError: when download fails.
-
-    Environment Variables:
-        TFDS_HTTP_PROXY  : Configure Proxy Servers for HTTP Requests
-        TFDS_HTTPS_PROXY : Configure Proxy Servers for HTTPS Requests
-        TFDS_FTP_PROXY   : Configure Proxy Servers for FTP Requests
-        TFDS_CA_BUNDLE   : Configure Custom Client Side SSL Certificates
-                           (If REQUESTS_CA_BUNDLE is set, it would use that
-                           path)
-
-      Note: FTPS Custom Certificate verification doesn't work for python version
-      <= 2.7.8
     """
-    proxies = {
-        'http': os.environ.get('TFDS_HTTP_PROXY', None),
-        'https': os.environ.get('TFDS_HTTPS_PROXY', None),
-        'ftp': os.environ.get('TFDS_FTP_PROXY', None)
-    }
-    ca_bundle = os.environ.get('TFDS_CA_BUNDLE', None)
-    if not ca_bundle:
-      ca_bundle = os.environ.get('REQUESTS_CA_BUNDLE', None)
-    if ca_bundle:
-      ca_bundle = extract_zipped_paths(ca_bundle)
-    if not hasattr(ssl, '_create_unverified_context'):
-      # disable ftp ssl bypassing for python version <= 2.7.8
-      def disabled_py2_log_fn(*args, **kwargs):
-        del args, kwargs
-        return logging.info('SSL bypassing not available for python '
-                            'version <= 2.7.8 current version: %s '
-                            'Protocols affected: FTPS',
-                            sys.version.split(' ')[0])
-
-      ssl.__dict__['_create_unverified_context'] = disabled_py2_log_fn
-      ssl.__dict__['create_default_context'] = disabled_py2_log_fn
-
-    ca_verify = {
-        'urllib':
-            ssl._create_unverified_context()  # pylint: disable=protected-access
-            if not ca_bundle else ssl.create_default_context(capath=ca_bundle),
-        'requests':
-            False if not ca_bundle else ca_bundle
-    }
-
     if kaggle.KaggleFile.is_kaggle_url(url):
-      if proxies['http']:
-        os.environ['KAGGLE_PROXY'] = proxies['http']
+      # Forward the request proxy to Kaggle tool
+      # See: https://github.com/Kaggle/kaggle-api
+      if 'HTTP_PROXY' in os.environ:
+        os.environ['KAGGLE_PROXY'] = os.environ['HTTP_PROXY']
       return self._sync_kaggle_download(url, destination_path)
 
     try:
@@ -218,54 +174,79 @@ class _Downloader(object):
     except tf.errors.UnimplementedError:
       pass
 
-    session = requests.Session()
-    session.proxies = proxies
-    session.verify = ca_verify['requests']
-    if _DRIVE_URL.match(url):
-      url = self._get_drive_url(url, session)
-    use_urllib = url.startswith('ftp')
-    if use_urllib:
-      if proxies['ftp']:
-        proxy = urllib.request.ProxyHandler({'ftp': proxies['ftp']})
-        opener = urllib.request.build_opener(proxy)
-        urllib.request.install_opener(opener)   # pylint: disable=too-many-function-args
-      request = urllib.request.Request(url)
+    with _open_url(url) as (response, iter_content):
+      fname = _get_filename(response)
+      path = os.path.join(destination_path, fname)
+      size = 0
 
-      # disable ssl context check for FTPS for python version <= 2.7.8
-      if ca_verify['urllib'] is None:
-        response = urllib.request.urlopen(request)
-      else:
-        response = urllib.request.urlopen(request, context=ca_verify['urllib'])
-    else:
-      response = session.get(url, stream=True)
-      if response.status_code != 200:
-        raise DownloadError('Failed to get url %s. HTTP code: %d.' %
-                            (url, response.status_code))
-    fname = _get_filename(response)
-    path = os.path.join(destination_path, fname)
-    size = 0
+      # Initialize the download size progress bar
+      size_mb = 0
+      unit_mb = units.MiB
+      total_size = int(response.headers.get('Content-length', 0)) // unit_mb
+      self._pbar_dl_size.update_total(total_size)
+      with tf.io.gfile.GFile(path, 'wb') as file_:
+        checksum = self._checksumer_cls()
+        for block in iter_content:
+          size += len(block)
+          checksum.update(block)
+          file_.write(block)
 
-    size_mb = 0
-    unit_mb = units.MiB
-    self._pbar_dl_size.update_total(
-        int(response.headers.get('Content-length', 0)) // unit_mb)
-    with tf.io.gfile.GFile(path, 'wb') as file_:
-      checksum = self._checksumer()
-      if use_urllib:
-        iterator = iter(lambda: response.read(io.DEFAULT_BUFFER_SIZE), b'')
-      else:
-        iterator = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
-
-      for block in iterator:
-        size += len(block)
-
-        # Update the progress bar
-        size_mb += len(block)
-        if size_mb > unit_mb:
-          self._pbar_dl_size.update(size_mb // unit_mb)
-          size_mb %= unit_mb
-
-        checksum.update(block)
-        file_.write(block)
+          # Update the download size progress bar
+          size_mb += len(block)
+          if size_mb > unit_mb:
+            self._pbar_dl_size.update(size_mb // unit_mb)
+            size_mb %= unit_mb
     self._pbar_url.update(1)
     return checksums_lib.UrlInfo(checksum=checksum.hexdigest(), size=size)
+
+
+def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
+  """Context manager to open an url.
+
+  Args:
+    url: The url to open
+
+  Returns:
+    response: The url response with `.url` and `.header` attributes.
+    iter_content: A `bytes` iterator which yield the content.
+  """
+  # Download FTP urls with `urllib`, otherwise use `requests`
+  open_fn = _open_with_urllib if url.startswith('ftp') else _open_with_requests
+  return open_fn(url)
+
+
+@contextlib.contextmanager
+def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  with requests.Session() as session:
+    if _DRIVE_URL.match(url):
+      url = _get_drive_url(url, session)
+    with session.get(url, stream=True) as response:
+      _assert_status(response)
+      yield (response, response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE))
+
+
+@contextlib.contextmanager
+def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
+    yield (
+        response,
+        iter(functools.partial(response.read, io.DEFAULT_BUFFER_SIZE), b''),
+    )
+
+
+def _get_drive_url(url: str, session: requests.Session) -> str:
+  """Returns url, possibly with confirmation token."""
+  with session.get(url, stream=True) as response:
+    _assert_status(response)
+    for k, v in response.cookies.items():
+      if k.startswith('download_warning'):
+        return url + '&confirm=' + v  # v is the confirm token
+  # No token found, let's try with original URL:
+  return url
+
+
+def _assert_status(response: requests.Response) -> None:
+  """Ensure the URL response is 200."""
+  if response.status_code != 200:
+    raise DownloadError('Failed to get url {}. HTTP code: {}.'.format(
+        response.url, response.status_code))
