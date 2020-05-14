@@ -62,32 +62,76 @@ data = tfds.load('cfq/mcd1')
 
 _DATA_URL = 'https://storage.googleapis.com/cfq_dataset/cfq.tar.gz'
 
+_RANDOM_SEEDS = [
+    '4_0', '4_42', '4.5_0', '4.5_45', '5_50', '5_50', '5.5_0', '5.5_55', '6_0'
+]
+
 
 class CFQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CFQ splits."""
 
   @tfds.core.disallow_positional_args
-  def __init__(self, name, directory='splits', **kwargs):
+  def __init__(self,
+               name=None,
+               directory=None,
+               compound_divergence=None,
+               random_seed=None,
+               **kwargs):
     """BuilderConfig for CFQ.
+
+    Can be constucted in two ways:
+    1. With directory and name in which case these determine the split file.
+    2. With compound_divergence (and optionally random_seed).
 
     Args:
       name: Unique name of the split.
       directory: Which subdirectory to read the split from.
+      compound_divergence: The desired compound divergence.
+      random_seed: The random seed. Can be either the specific random-seeds used
+        to generate the split as string or an index in the range [1, 9].
       **kwargs: keyword arguments forwarded to super.
     """
-    # Version history:
+    if compound_divergence is not None:
+      if random_seed is None:
+        random_seed_index = 1
+        random_seed = _RANDOM_SEEDS[0]
+      elif random_seed in range(0, 10):
+        random_seed_index = random_seed
+        random_seed = _RANDOM_SEEDS[random_seed - 1]
+      elif random_seed in _RANDOM_SEEDS:
+        random_seed_index = _RANDOM_SEEDS.index(random_seed)
+      else:
+        raise ValueError('Invalid random seed: %s' % random_seed)
+      directory = 'splits/all_divergence_splits'
+      split_name = 'divergence_split_s0.4_d%s_r%s' % (compound_divergence,
+                                                      random_seed)
+      name = 'cd%s_r%s' % (compound_divergence, random_seed_index)
+    else:
+      directory = 'splits'
+      split_name = name
     super(CFQConfig, self).__init__(
         name=name,
-        version=tfds.core.Version('1.1.0'),
+        version=tfds.core.Version('1.2.0'),
         description=_DESCRIPTION,
         **kwargs)
-    self.split_file = os.path.join(directory, name + '.json')
+    self.split_file = os.path.join(directory, split_name + '.json')
 
 
 _QUESTION = 'question'
 _QUERY = 'query'
 _QUESTION_FIELD = 'questionPatternModEntities'
 _QUERY_FIELD = 'sparqlPatternModEntities'
+
+
+def _generate_compound_divergence_builder_configs():
+  """Generate configs for different compound divergences and random seeds."""
+  configs = []
+  for compound_divergence in [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 1]:
+    for random_seed in range(1, 10):
+      configs.append(
+          CFQConfig(
+              compound_divergence=compound_divergence, random_seed=random_seed))
+  return configs
 
 
 class CFQ(tfds.core.GeneratorBasedBuilder):
@@ -102,7 +146,7 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
       CFQConfig(name='query_complexity_split'),
       CFQConfig(name='query_pattern_split'),
       CFQConfig(name='random_split'),
-  ]
+  ] + _generate_compound_divergence_builder_configs()
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -153,8 +197,9 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
     # dependencies we use a simple (perhaps somewhat brittle) regexp to reduce
     # the content to only what is needed. This takes 1min to execute but
     # afterwards loading requires only 500MB or RAM and is done in 2s.
-    regex = re.compile(r'("%s":\s*"[^"]*").*?("%s":\s*"[^"]*")' %
-                       (_QUESTION_FIELD, _QUERY_FIELD), re.DOTALL)
+    regex = re.compile(
+        r'("%s":\s*"[^"]*").*?("%s":\s*"[^"]*")' %
+        (_QUESTION_FIELD, _QUERY_FIELD), re.DOTALL)
     return '[' + ','.join([
         '{' + m.group(1) + ',' + m.group(2) + '}'
         for m in regex.finditer(content)
