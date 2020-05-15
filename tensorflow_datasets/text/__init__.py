@@ -51,6 +51,7 @@ from tensorflow_datasets.text.trivia_qa import TriviaQA
 from tensorflow_datasets.text.web_questions import WebQuestions
 from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wikipedia import Wikipedia
+from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
 
