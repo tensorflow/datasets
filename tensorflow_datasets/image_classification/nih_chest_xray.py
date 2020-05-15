@@ -106,26 +106,50 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
     annParser = AnnParser(ann_path, train_val_list, test_list)
 
     return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "archive": archiveUtils,
-                "split": annParser.ann['train'],
-            },
-        ),
-       tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "archive": archiveUtils,
-                "split": annParser.ann['test'],
-            },
-        ),
+      tfds.core.SplitGenerator(
+          name=tfds.Split.TRAIN,
+          gen_kwargs={
+              "archive": archiveUtils,
+              "split": annParser.ann['train'],
+          },
+      ),
+      tfds.core.SplitGenerator(
+          name=tfds.Split.TEST,
+          gen_kwargs={
+              "archive": archiveUtils,
+              "split": annParser.ann['test'],
+          },
+      ),
     ]
 
-  def _generate_examples(self):
-    """Yields examples."""
-    # TODO(nih_chest_xray): Yields (key, example) tuples from the dataset
-    yield 'key', {}
+  def _generate_examples(self, archive, split):
+    """Yields examples
+    Args:
+      archive: `ArchiveUtils`, read image(s) from archives using filename(s)
+      split: `pandas.DataFrame`, each row contains an annotation of an image
+    Yields:
+      example key and data
+    """
+    for idx, value in enumerate(split.values):
+      # collect annotations
+      file_name, labels, follow_up, patient_id, patient_age, patient_gender, view_position, im_w, im_h, spacing_x, spacing_y = value
+
+      # build example
+      record = {
+        "image/name": file_name,
+        "image": archive.extract_image(file_name),
+        "labels": labels.split('|'),
+        "follow_up": follow_up,
+        "patient_id": patient_id,
+        "patient_age": patient_age,
+        "patient_gender": patient_gender,
+        "view_position": view_position,
+        "original_image_width": im_w,
+        "original_image_height": im_h,
+        "original_image_pixel_spacing_x": spacing_x,
+        "original_image_pixel_spacing_y": spacing_y,
+      }
+      yield idx, record
 
 
 class ArchiveUtils():
