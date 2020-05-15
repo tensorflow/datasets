@@ -222,7 +222,7 @@ class AnnParser():
     pd = tfds.core.lazy_imports.pandas
     with tf.io.gfile.GFile(self.ann_path) as csv_f:
       # read file
-      df = pd.read_csv(csv_f)
+      df = pd.read_csv(csv_f, error_bad_lines=False)
 
       # split
       return {'train_val': df[df['Image Index'].isin(self.train_val_list)],
