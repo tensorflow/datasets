@@ -48,7 +48,7 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
           "patient_gender":
           tfds.features.Text(),
           "view_position":
-          tfds.features.Test(),
+          tfds.features.Text(),
           "original_image_width":
           tfds.features.Tensor(shape=(), dtype=tf.int32),
           "original_image_height":
