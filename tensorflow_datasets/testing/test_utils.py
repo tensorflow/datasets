@@ -26,6 +26,7 @@ import io
 import os
 import subprocess
 import tempfile
+from typing import Iterator
 
 from absl.testing import absltest
 
@@ -103,6 +104,20 @@ class MockFs(object):
 
   def __init__(self):
     self.files = {}
+    self._cm = None
+
+  def __enter__(self):
+    self._cm = self.contextmanager()
+    return self._cm.__enter__()
+
+  def __exit__(self, exc_type, exc_value, traceback):
+    return self._cm.__exit__(exc_type, exc_value, traceback)
+
+  @contextlib.contextmanager
+  def contextmanager(self) -> Iterator['MockFs']:
+    """Open the file."""
+    with self.mock():
+      yield self
 
   def add_file(self, path, content=None) -> None:
     content = 'Content of {}'.format(path) if content is None else content
@@ -117,11 +132,22 @@ class MockFs(object):
 
   @contextlib.contextmanager
   def _open(self, path, mode='r'):
-    if mode == 'w':
+    """Patch `tf.io.gfile.GFile`."""
+    if mode.startswith('w'):
       self.add_file(path, '')
-    with io.StringIO(self.files[path]) as f:
+    is_binary = 'b' in mode
+
+    content = self.files[path]
+    if is_binary:
+      fobj = io.BytesIO(content.encode('utf-8'))
+    else:
+      fobj = io.StringIO(content)
+
+    with fobj as f:
       yield f
-      self.files[path] = f.getvalue()  # Update the content
+      new_content = f.getvalue()  # Update the content
+
+    self.files[path] = new_content.decode('utf-8') if is_binary else new_content  # pytype: disable=attribute-error
 
   def _rename(self, from_, to, overwrite=False):
     if not overwrite and to in self.files:
@@ -131,7 +157,7 @@ class MockFs(object):
     self.files[to] = self.files.pop(from_)
 
   def mock(self):
-    return  absltest.mock.patch.object(
+    return absltest.mock.patch.object(
         tf.io,
         'gfile',
         exists=lambda path: path in self.files,
