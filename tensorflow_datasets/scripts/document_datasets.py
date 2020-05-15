@@ -14,10 +14,9 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Script to document datasets.
+"""Util to generate the dataset documentation content.
 
-To test:
-python -m tensorflow_datasets.scripts.document_datasets
+Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 
 """
 
@@ -26,7 +25,6 @@ from concurrent import futures
 import os
 from typing import Dict, List, Tuple, Union, Set
 
-from absl import app
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
@@ -303,11 +301,3 @@ def dataset_docs_str(datasets=None):
   tmpl = get_mako_template('catalog_overview')
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]
-
-
-def main(_):
-  print(dataset_docs_str())
-
-
-if __name__ == '__main__':
-  app.run(main)
