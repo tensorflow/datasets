@@ -50,9 +50,11 @@ This is the TED-LIUM corpus release 1, licensed under Creative Commons BY-NC-ND
     with transcriptions, sampled at 16kHz. It contains about 118 hours of
     speech.
 
-        This is the TED-LIUM corpus release 1,
-        licensed under Creative Commons BY-NC-ND 3.0
-        (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
+    ```
+    This is the TED-LIUM corpus release 1,
+    licensed under Creative Commons BY-NC-ND 3.0
+    (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
+    ```
 
 *   **Homepage**: [https://www.openslr.org/7/](https://www.openslr.org/7/)
 
@@ -101,15 +103,17 @@ Contains 1495 talks and transcripts.
     under Creative Commons BY-NC-ND 3.0
     (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
 
-        All talks and text are property of TED Conferences LLC.
+    ```
+    All talks and text are property of TED Conferences LLC.
 
-        The TED-LIUM corpus was made from audio talks and their transcriptions
-        available on the TED website. We have prepared and filtered these data
-        in order to train acoustic models to participate to the International
-        Workshop on Spoken Language Translation 2011 (the LIUM English/French
-        SLT system reached the first rank in the SLT task).
+    The TED-LIUM corpus was made from audio talks and their transcriptions
+    available on the TED website. We have prepared and filtered these data
+    in order to train acoustic models to participate to the International
+    Workshop on Spoken Language Translation 2011 (the LIUM English/French
+    SLT system reached the first rank in the SLT task).
 
-        Contains 1495 talks and transcripts.
+    Contains 1495 talks and transcripts.
+    ```
 
 *   **Homepage**: [https://www.openslr.org/19/](https://www.openslr.org/19/)
 
@@ -170,32 +174,34 @@ especially designed for experiments on speaker adaptation.
 *   **Config description**: This is the TED-LIUM corpus release 3, licensed
     under Creative Commons BY-NC-ND 3.0.
 
-        All talks and text are property of TED Conferences LLC.
+    ```
+    All talks and text are property of TED Conferences LLC.
 
-        This new TED-LIUM release was made through a collaboration between the
-        Ubiqus company and the LIUM (University of Le Mans, France)
+    This new TED-LIUM release was made through a collaboration between the
+    Ubiqus company and the LIUM (University of Le Mans, France)
 
-        Contents:
+    Contents:
 
-        - 2351 audio talks in NIST sphere format (SPH), including talks from
-          TED-LIUM 2: be careful, same talks but not same audio files (only
-          these audio file must be used with the TED-LIUM 3 STM files)
-        - 452 hours of audio
-        - 2351 aligned automatic transcripts in STM format
-        - TEDLIUM 2 dev and test data: 19 TED talks in SPH format with
-          corresponding manual transcriptions (cf. 'legacy' distribution below).
-        - Dictionary with pronunciations (159848 entries), same file as the one
-          included in TED-LIUM 2
-        - Selected monolingual data for language modeling from WMT12 publicly
-          available corpora: these files come from the TED-LIUM 2 release, but
-          have been modified to get a tokenization more relevant for English
-          language
+    - 2351 audio talks in NIST sphere format (SPH), including talks from
+      TED-LIUM 2: be careful, same talks but not same audio files (only
+      these audio file must be used with the TED-LIUM 3 STM files)
+    - 452 hours of audio
+    - 2351 aligned automatic transcripts in STM format
+    - TEDLIUM 2 dev and test data: 19 TED talks in SPH format with
+      corresponding manual transcriptions (cf. 'legacy' distribution below).
+    - Dictionary with pronunciations (159848 entries), same file as the one
+      included in TED-LIUM 2
+    - Selected monolingual data for language modeling from WMT12 publicly
+      available corpora: these files come from the TED-LIUM 2 release, but
+      have been modified to get a tokenization more relevant for English
+      language
 
-        Two corpus distributions:
-        - the legacy one, on which the dev and test datasets are the same as in
-          TED-LIUM 2 (and TED-LIUM 1).
-        - the 'speaker adaptation' one, especially designed for experiments on
-          speaker adaptation.
+    Two corpus distributions:
+    - the legacy one, on which the dev and test datasets are the same as in
+      TED-LIUM 2 (and TED-LIUM 1).
+    - the 'speaker adaptation' one, especially designed for experiments on
+      speaker adaptation.
+    ```
 
 *   **Homepage**: [https://www.openslr.org/51/](https://www.openslr.org/51/)
 

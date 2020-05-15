@@ -39,6 +39,8 @@ for ex in tfds.as_numpy(ds):
 *   [`speech_commands`](speech_commands.md)
 *   [`tedlium`](tedlium.md)
 *   [`voxceleb`](voxceleb.md)
+*   [`voxforge`](voxforge.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Image`
 
@@ -168,6 +170,8 @@ for ex in tfds.as_numpy(ds):
 
 ### `Text`
 
+*   [`anli`](anli.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`blimp`](blimp.md)
 *   [`c4`](c4.md)
 *   [`cfq`](cfq.md)

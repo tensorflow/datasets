@@ -371,9 +371,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for da.
 
 *   **Dataset size**: `240.51 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -403,9 +405,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for et.
 
 *   **Dataset size**: `184.07 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -483,9 +487,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for hr.
 
 *   **Dataset size**: `235.58 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -563,9 +569,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ms.
 
 *   **Dataset size**: `142.49 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -611,9 +619,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for sk.
 
 *   **Dataset size**: `170.20 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -627,9 +637,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for sl.
 
 *   **Dataset size**: `157.38 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
