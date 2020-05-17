@@ -22,7 +22,7 @@ import tempfile
 
 from absl.testing import absltest
 
-from tensorflow_datasets.scripts import build_docs
+from tensorflow_datasets.scripts import build_api_docs
 from tensorflow_datasets.scripts import document_datasets
 
 
@@ -39,7 +39,7 @@ class BuildDocsTest(absltest.TestCase):
     document_datasets.VisualizationDocUtil.BASE_PATH = self.workdir
 
   def test_api_gen(self):
-    build_docs.build_api_docs(
+    build_api_docs.execute(
         output_dir=self.workdir,
         code_url_prefix="",
         search_hints=True,

@@ -44,8 +44,8 @@ flags.DEFINE_string("site_path", "datasets/api_docs/python",
 MOVES = [("tfds/features/text.md", "tfds/features/text_lib.md")]
 
 
-def build_api_docs(output_dir, code_url_prefix, search_hints, site_path):
-  """Build api docs for tensorflow_datasets."""
+def execute(output_dir, code_url_prefix, search_hints, site_path):
+  """Builds API docs for tensorflow_datasets."""
   # Internally, tfds.testing defaults to None. Fill it in here so that we get
   # documentation.
   tfds.testing = testing
@@ -83,8 +83,8 @@ def build_api_docs(output_dir, code_url_prefix, search_hints, site_path):
 
 
 def main(unused_argv):
-  build_api_docs(FLAGS.output_dir, FLAGS.code_url_prefix, FLAGS.search_hints,
-                 FLAGS.site_path)
+  execute(FLAGS.output_dir, FLAGS.code_url_prefix, FLAGS.search_hints,
+          FLAGS.site_path)
 
 
 if __name__ == "__main__":
