@@ -110,7 +110,7 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
           name=tfds.Split.TRAIN,
           gen_kwargs={
               "archive": archiveUtils,
-              "split": annParser.ann['train'],
+              "split": annParser.ann['train_val'],
           },
       ),
       tfds.core.SplitGenerator(
