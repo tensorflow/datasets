@@ -79,9 +79,9 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
       'zipfile10': 'https://nihcc.box.com/shared/static/l6nilvfa9cg3s28tqv1qc1olm3gnz54p.gz',
       'zipfile11': 'https://nihcc.box.com/shared/static/hhq8fkdgvcari67vfhs7ppg2w6ni4jze.gz',
       'zipfile12': 'https://nihcc.box.com/shared/static/ioqwiy20ihqwyr8pf4c24eazhh281pbu.gz',
-      'data_entry_2017': 'https://github.com/jason-zl190/host_of_open_access_files/blob/master/nih_chest_xray/Data_Entry_2017_v2020.csv',
-      'train_val_list': 'https://github.com/jason-zl190/host_of_open_access_files/blob/master/nih_chest_xray/train_val_list.txt',
-      'test_list': 'https://github.com/jason-zl190/host_of_open_access_files/blob/master/nih_chest_xray/test_list.txt',
+      'data_entry_2017': 'https://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/Data_Entry_2017_v2020.csv',
+      'train_val_list': 'https://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/train_val_list.txt',
+      'test_list': 'https://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/test_list.txt',
     }
 
     # download all resources
@@ -222,7 +222,7 @@ class AnnParser():
     pd = tfds.core.lazy_imports.pandas
     with tf.io.gfile.GFile(self.ann_path) as csv_f:
       # read file
-      df = pd.read_csv(csv_f, error_bad_lines=False)
+      df = pd.read_csv(csv_f, sep=',')
 
       # split
       return {'train_val': df[df['Image Index'].isin(self.train_val_list)],
