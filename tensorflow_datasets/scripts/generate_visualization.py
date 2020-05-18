@@ -43,7 +43,7 @@ flags.DEFINE_string(
     'datasets', None,
     'Comma separated list of datasets to generates. None for all datasets.')
 flags.DEFINE_string(
-    'dst_dir', 'gs://tfds-data/visualization/',
+    'dst_dir', tfds.core.gcs_path('visualization'),
     'Destination dir to save the images.')
 
 
