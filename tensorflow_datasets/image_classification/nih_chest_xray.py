@@ -7,7 +7,7 @@ from __future__ import print_function
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 from tensorflow_datasets.core import utils
-from zipfile import ZipFile
+import tarfile
 import os
 import io
 
@@ -173,8 +173,8 @@ class ArchiveUtils():
     Returns:
       a file object of the fileName
     """
-    archive = tf.io.gfile.GFile(self.lookup_table[fileName], 'rb')
-    with ZipFile(archive, 'r') as zipfile:
+    archive = self.lookup_table[fileName]
+    with tarfile.open(archive, 'r:gz') as zipfile:
       fpath = os.path.join('images', fileName)
       fObj = io.BytesIO(zipfile.read(fpath))
     return fObj
@@ -185,11 +185,11 @@ class ArchiveUtils():
     """
     lut = {}
     for k, v in self.path.items():  # k:v, <zipfile#>:<path of the zipfile>
-      archive = tf.io.gfile.GFile(v, 'rb')
-      with ZipFile(archive, 'r') as zipfile:
-        for name in zipfile.namelist():  
+      archive = v
+      with tarfile.open(archive, 'r:gz') as tar:
+        for tarinfo in tar:  
           # name has a format as "images/fileName"
-          fileName = name.split('/')[1]
+          fileName = tarinfo.name.split('/')[1]
           lut[fileName] = v
     return lut
 
