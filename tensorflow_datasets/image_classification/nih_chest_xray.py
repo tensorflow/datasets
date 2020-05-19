@@ -174,9 +174,10 @@ class ArchiveUtils():
       a file object of the fileName
     """
     archive = self.lookup_table[fileName]
-    with tarfile.open(archive, 'r:gz') as zipfile:
+    with tarfile.open(archive, 'r:gz') as tar:
       fpath = os.path.join('images', fileName)
-      fObj = io.BytesIO(zipfile.read(fpath))
+      f = tar.extractfile(fpath)
+      fObj = io.BytesIO(f.read())
     return fObj
 
   @utils.memoize()
@@ -189,7 +190,9 @@ class ArchiveUtils():
       with tarfile.open(archive, 'r:gz') as tar:
         for tarinfo in tar:  
           # name has a format as "images/fileName"
-          fileName = tarinfo.name.split('/')[1]
+          name = tarinfo.name.split('/')
+          if len(name) == 2:
+            fileName = name[1]
           lut[fileName] = v
     return lut
 
