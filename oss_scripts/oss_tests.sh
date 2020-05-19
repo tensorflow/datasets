@@ -6,6 +6,8 @@ source ./oss_scripts/utils.sh
 
 : "${TF_VERSION:?}"
 
+pip freeze  # Display the list of modules/versions for debugging
+
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.
 STATUS=0
