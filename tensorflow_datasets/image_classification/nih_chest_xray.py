@@ -102,21 +102,21 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(test_list_path, 'r') as f:
       test_list = f.read().splitlines()
  
-    archiveUtils = LookupUtils(paths)
+    lookupUtils = LookupUtils(paths)
     annParser = AnnParser(ann_path, train_val_list, test_list)
 
     return [
       tfds.core.SplitGenerator(
           name=tfds.Split.TRAIN,
           gen_kwargs={
-              "archive": archiveUtils,
+              "lut": lookupUtils,
               "split": annParser.ann['train_val'],
           },
       ),
       tfds.core.SplitGenerator(
           name=tfds.Split.TEST,
           gen_kwargs={
-              "archive": archiveUtils,
+              "lut": lookupUtils,
               "split": annParser.ann['test'],
           },
       ),
