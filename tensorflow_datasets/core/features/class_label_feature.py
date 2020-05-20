@@ -13,7 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """ClassLabel feature."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import os
 import six
@@ -52,17 +57,19 @@ class ClassLabel(feature.Tensor):
     self._int2str = None
 
     # The label is explicitly set as undefined (no label defined)
-    if not sum(bool(a) for a in (num_classes, names, names_file)):
+    if all(a is None for a in (num_classes, names, names_file)):
       return
 
-    if sum(bool(a) for a in (num_classes, names, names_file)) != 1:
+    if sum(a is not None for a in (num_classes, names, names_file)) != 1:
       raise ValueError(
           "Only a single argument of ClassLabel() should be provided.")
 
-    if num_classes:
+    if num_classes is not None:
       self._num_classes = num_classes
+    elif names is not None:
+      self.names = names
     else:
-      self.names = names or _load_names_from_file(names_file)
+      self.names = _load_names_from_file(names_file)
 
   @property
   def num_classes(self):

@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Util import."""
 
 # pylint: disable=wildcard-import
+from tensorflow_datasets.core.utils.gcs_utils import gcs_path
 from tensorflow_datasets.core.utils.image_utils import *
 from tensorflow_datasets.core.utils.py_utils import *
 from tensorflow_datasets.core.utils.tf_utils import *

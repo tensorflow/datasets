@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Methods to retrieve and store size/checksums associated to URLs.
 
 """
@@ -22,6 +23,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+from typing import Any, Dict, Iterable, List
 
 import tensorflow.compat.v2 as tf
 
@@ -36,7 +38,42 @@ _CHECKSUM_DIRS = [
 _CHECKSUM_SUFFIX = '.txt'
 
 
-def add_checksums_dir(checksums_dir):
+class UrlInfo(object):  # TODO(tfds): Use dataclasses
+  """Small wrapper around the url metadata (checksum, size).
+
+  Attributes:
+    size: Download size of the file
+    checksum: Checksum of the file
+  """
+
+  def __init__(self, size: int, checksum: str):
+    self.size = size
+    self.checksum = checksum
+
+  def asdict(self) -> Dict[str, Any]:
+    """Returns the dict representation of the dataclass."""
+    # TODO(tfds): Replace by `dataclasses.asdict(self)`
+    return {
+        'size': self.size,
+        'checksum': self.checksum,
+    }
+
+  def __eq__(self, other) -> bool:
+    return (
+        type(self) == type(other) and  # pylint: disable=unidiomatic-typecheck
+        self.size == other.size and
+        self.checksum == other.checksum
+    )
+
+  def __ne__(self, other) -> bool:  # Required in Py2
+    return not self == other
+
+  def __repr__(self) -> str:
+    return '{}(size={}, checksum={})'.format(
+        type(self).__name__, self.size, self.checksum)
+
+
+def add_checksums_dir(checksums_dir: str) -> None:
   """Registers a new checksums dir.
 
   This function allow external datasets not present in the tfds repository to
@@ -66,14 +103,14 @@ def add_checksums_dir(checksums_dir):
   _CHECKSUM_DIRS.append(checksums_dir)
 
 
-def _list_dir(path):
+def _list_dir(path: str) -> List[str]:
   return tf.io.gfile.listdir(path)
 
 
 
 
 @utils.memoize()
-def _checksum_paths():
+def _checksum_paths() -> Dict[str, str]:
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
@@ -86,67 +123,60 @@ def _checksum_paths():
   return dataset2path
 
 
-def _get_path(dataset_name):
+def _get_path(dataset_name: str) -> str:
   """Returns path to where checksums are stored for a given dataset."""
   path = _checksum_paths().get(dataset_name, None)
   if path:
     return path
-  filename = os.path.basename(path)
   msg = (
-      'No checksums file `{}` could be find for dataset {}. Please '
+      'No checksums file could be find for dataset {}. Please '
       'create one in one of:\n{}'
       'If you are developing your own dataset outsite tfds, you can register '
       'your own checksums_dir with `tfds.download.add_checksums_dir('
-      'checksum_dir)` or pass it to the download_and_prepare script with '
-      '`--checksum_dir=`'
+      'checksums_dir)` or pass it to the download_and_prepare script with '
+      '`--checksums_dir=`'
   ).format(
-      filename,
       dataset_name,
       ''.join(['* {}\n'.format(c) for c in _CHECKSUM_DIRS]))
   raise AssertionError(msg)
 
 
-def _read_file(path):
-  return tf.io.gfile.GFile(path).read()
-
-
-
-
-def _get_sizes_checksums(checksums_path):
+def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
   """Returns {URL: (size, checksum)}s stored within file at given path."""
-  checksums_file = _read_file(checksums_path).split('\n')
-  return parse_sizes_checksums(checksums_file)
+  with tf.io.gfile.GFile(checksums_path) as f:
+    content = f.read()
+  return parse_url_infos(content.splitlines())
 
 
-def parse_sizes_checksums(checksums_file):
+def parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
   """Returns {URL: (size, checksum)}s stored within given file."""
-  checksums = {}
+  url_infos = {}
   for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
       continue
     # URL might have spaces inside, but size and checksum will not.
     url, size, checksum = line.rsplit(' ', 2)
-    checksums[url] = (int(size), checksum)
-  return checksums
+    url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
+  return url_infos
 
 
 @utils.memoize()
-def get_all_sizes_checksums():
+def get_all_url_infos() -> Dict[str, UrlInfo]:
   """Returns dict associating URL to (size, sha256)."""
-  sizes_checksums = {}
+  url_infos = {}
   for path in _checksum_paths().values():
-    data = _get_sizes_checksums(path)
-    for url, size_checksum in data.items():
-      if (url in sizes_checksums and
-          sizes_checksums[url] != size_checksum):
+    dataset_url_infos = _get_url_infos(path)
+    for url, url_info in dataset_url_infos.items():
+      if url_infos.get(url, url_info) != url_info:
         raise AssertionError(
-            'URL %s is registered with 2+ distinct size/checksum tuples.' % url)
-    sizes_checksums.update(data)
-  return sizes_checksums
+            'URL {} is registered with 2+ distinct size/checksum tuples. '
+            '{} vs {}'.format(url, url_info, url_infos[url]))
+    url_infos.update(dataset_url_infos)
+  return url_infos
 
 
-def store_checksums(dataset_name, sizes_checksums):
+def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
   """Store given checksums and sizes for specific dataset.
 
   Content of file is never disgarded, only updated. This is to ensure that if
@@ -161,14 +191,14 @@ def store_checksums(dataset_name, sizes_checksums):
 
   Args:
     dataset_name: string.
-    sizes_checksums: dict, {url: (size_in_bytes, checksum)}.
+    url_infos: dict, {url: (size_in_bytes, checksum)}.
   """
   path = _get_path(dataset_name)
-  original_data = _get_sizes_checksums(path)
+  original_data = _get_url_infos(path)
   new_data = original_data.copy()
-  new_data.update(sizes_checksums)
+  new_data.update(url_infos)
   if original_data == new_data:
     return
   with tf.io.gfile.GFile(path, 'w') as f:
-    for url, (size, checksum) in sorted(new_data.items()):
-      f.write('%s %s %s\n' % (url, size, checksum))
+    for url, url_info in sorted(new_data.items()):
+      f.write('{} {} {}\n'.format(url, url_info.size, url_info.checksum))

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The Multi-Genre NLI Corpus."""
 
 from __future__ import absolute_import
@@ -69,10 +70,6 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
     super(MultiNLIConfig, self).__init__(
         version=tfds.core.Version(
             "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-        supported_versions=[
-            tfds.core.Version(
-                "0.0.2", experiments={tfds.core.Experiment.S3: False}),
-        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -117,8 +114,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
 
     downloaded_dir = dl_manager.download_and_extract(
-        "http://storage.googleapis.com/tfds-data/downloads/multi_nli/"
-        "multinli_1.0.zip")
+        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip")
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
     matched_validation_path = os.path.join(mnli_path,
@@ -138,15 +134,12 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={"filepath": train_path}),
         tfds.core.SplitGenerator(
             name="validation_matched",
-            num_shards=1,
             gen_kwargs={"filepath": matched_validation_path}),
         tfds.core.SplitGenerator(
             name="validation_mismatched",
-            num_shards=1,
             gen_kwargs={"filepath": mismatched_validation_path}),
     ]
 

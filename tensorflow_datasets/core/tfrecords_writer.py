@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """To write records into sharded tfrecord files."""
 from __future__ import absolute_import
 from __future__ import division
@@ -178,8 +179,6 @@ class Writer(object):
 
   The number of shards is computed automatically.
 
-  This class is a replacement for file_format_adapter.TFRecordExampleAdapter,
-  which will eventually be deleted.
   """
 
   def __init__(self, example_specs, path, hash_salt):
@@ -226,12 +225,12 @@ class Writer(object):
     shard_lengths = [int(spec.examples_number) for spec in shard_specs]
     logging.info("Done writing %s. Shard lengths: %s",
                  self._path, shard_lengths)
-    return shard_lengths
+    return shard_lengths, self._shuffler.size
 
 
 # Make a long out of int. Necessary for Beam on Py2.
 if six.PY2:
-  _long_for_py2 = long  # pylint: disable=invalid-name
+  _long_for_py2 = long  # pylint: disable=invalid-name,undefined-variable
 else:
   _long_for_py2 = lambda int_val: int_val
 
@@ -260,11 +259,11 @@ class BeamWriter(object):
     self._original_state = dict(example_specs=example_specs, path=path,
                                 hash_salt=hash_salt)
     self._path = path
-    self._shards_length_path = "%s.shard_lengths.json" % path
+    self._split_info_path = "%s.split_info.json" % path
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._example_specs = example_specs
     self._hasher = hashing.Hasher(hash_salt)
-    self._shard_lengths = None
+    self._split_info = None
 
   def __getstate__(self):
     return self._original_state
@@ -321,8 +320,13 @@ class BeamWriter(object):
                       for i in range(max(bucket2length.keys()) + 1)]
     shard_specs = _get_shard_specs(
         total_num_examples, total_size, bucket_lengths, self._path)
-    with tf.io.gfile.GFile(self._shards_length_path, "w") as json_f:
-      json_f.write(str([shard.examples_number for shard in shard_specs]))
+    with tf.io.gfile.GFile(self._split_info_path, "w") as json_f:
+      json_f.write(json.dumps(
+          {
+              "total_size": total_size,
+              "shard_lengths": [
+                  int(shard.examples_number) for shard in shard_specs]
+          }))
     for shard_spec in shard_specs:
       for instruction in shard_spec.reading_instructions:
         bucketid = instruction["bucket_index"]
@@ -389,10 +393,9 @@ class BeamWriter(object):
         | "WriteFinalShards" >> beam.Map(self._write_final_shard))
 
   def finalize(self):
-    """Deletes tmp directory and returns shard_lengths."""
-    if self._shard_lengths is None:
-      with tf.io.gfile.GFile(self._shards_length_path, "r") as json_f:
-        self._shard_lengths = [int(length)
-                               for length in json.loads(json_f.read())]
-      tf.io.gfile.remove(self._shards_length_path)
-    return self._shard_lengths
+    """Deletes tmp directory and returns shard_lengths and total_size."""
+    if self._split_info is None:
+      with tf.io.gfile.GFile(self._split_info_path, "r") as json_f:
+        self._split_info = json.loads(json_f.read())
+      tf.io.gfile.remove(self._split_info_path)
+    return self._split_info["shard_lengths"], self._split_info["total_size"]

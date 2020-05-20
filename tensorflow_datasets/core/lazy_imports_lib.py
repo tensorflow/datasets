@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Lazy imports for heavy dependencies."""
 
 from __future__ import absolute_import
@@ -62,6 +63,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
+
+  @utils.classproperty
+  @classmethod
   def langdetect(cls):
     return _try_import("langdetect")
 
@@ -73,6 +79,7 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def matplotlib(cls):
+    _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
 
   @utils.classproperty
@@ -122,6 +129,11 @@ class LazyImporter(object):
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
+
+  @utils.classproperty
+  @classmethod
+  def tensorflow_data_validation(cls):
+    return _try_import("tensorflow_data_validation")
 
   @utils.classproperty
   @classmethod

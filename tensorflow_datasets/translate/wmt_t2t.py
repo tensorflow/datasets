@@ -13,7 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The WMT EnDe Translate dataset used by the Tensor2Tensor library."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
@@ -44,10 +49,6 @@ class WmtT2tTranslate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=("de", "en"),
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          ]
       )
   ]
 

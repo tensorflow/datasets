@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.import_testing."""
 
 from __future__ import absolute_import
@@ -26,8 +27,6 @@ import tensorflow_datasets.public_api as tfds
 class ImportTestingTest(tf.test.TestCase):
 
   def test_testing_imported(self):
-
-    # pylint: disable=unreachable
     self.assertIsNotNone(tfds.testing)
 
 

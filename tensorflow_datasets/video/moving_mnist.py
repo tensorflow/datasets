@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """MovingMNIST."""
 
 from __future__ import absolute_import
@@ -57,9 +58,6 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("0.1.0", experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -82,7 +80,6 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=5,
             gen_kwargs=dict(data_path=data_path)),
     ]
 
@@ -99,5 +96,5 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
       images = np.load(fp)
     images = np.transpose(images, (1, 0, 2, 3))
     images = np.expand_dims(images, axis=-1)
-    for sequence in images:
-      yield dict(image_sequence=sequence)
+    for i, sequence in enumerate(images):
+      yield i, dict(image_sequence=sequence)

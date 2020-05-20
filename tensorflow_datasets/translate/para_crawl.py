@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
 
 from __future__ import absolute_import
@@ -118,17 +119,13 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
 
   # Version history:
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.1.0: Initial versio.
+  # 0.1.0: Initial version.
   BUILDER_CONFIGS = [
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
           target_language=target_language,
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-          ],
       )
       for target_language in _target_languages()
   ]
@@ -156,8 +153,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
 
     # Return the single split of the data.
     return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, num_shards=10, gen_kwargs=data_file)
+        tfds.core.SplitGenerator(name=tfds.Split.TRAIN, gen_kwargs=data_file)
     ]
 
   def _generate_examples(self, data_file):

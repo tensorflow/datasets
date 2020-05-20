@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The Multi-Genre NLI Corpus."""
 
 from __future__ import absolute_import
@@ -53,7 +54,7 @@ distinctive cross-genre generalization evaluation. The corpus served as the
 basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 """
 
-ROOT_URL = "http://storage.googleapis.com/tfds-data/downloads/multi_nli/multinli_1.0.zip"
+ROOT_URL = "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip"
 
 
 class MultiNLIMismatchConfig(tfds.core.BuilderConfig):

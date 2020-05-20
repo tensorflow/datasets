@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.features.class_label_feature."""
 
 from __future__ import absolute_import
@@ -23,7 +24,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
@@ -89,6 +90,18 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
       labels.str2int('10')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid'):
       labels.int2str(10)
+
+  def test_empty(self):
+    # Encoding should works if num_classes=0
+    labels = features.ClassLabel(num_classes=0)
+    self.assertEqual(0, labels.num_classes)
+    self.assertEqual(0, len(labels.names))
+    self.assertEqual(-1, labels.encode_example(-1))
+
+    labels = features.ClassLabel(names=[])
+    self.assertEqual(0, labels.num_classes)
+    self.assertEqual(0, len(labels.names))
+    self.assertEqual(-1, labels.encode_example(-1))
 
   def test_str_classes(self):
     labels = features.ClassLabel(names=[

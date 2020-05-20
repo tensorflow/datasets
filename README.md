@@ -4,26 +4,37 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
 [![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
+[![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 
 * [List of datasets](https://www.tensorflow.org/datasets/catalog/overview)
-* [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
-* Guides
-  * [Overview](https://www.tensorflow.org/datasets/overview)
-  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+* Getting started:
+  * [Introduction](https://www.tensorflow.org/datasets/overview) ([Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb))
+  * [End-to-end example with Keras](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/keras_example.ipynb)
+* Features & performances:
   * [Using splits and slicing API](https://www.tensorflow.org/datasets/splits)
+  * [Performance advice](https://www.tensorflow.org/datasets/performances)
+  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+  * [Feature decoding](https://www.tensorflow.org/datasets/decode)
+  * [Store your dataset on GCS](https://www.tensorflow.org/datasets/gcs)
+* Add your dataset:
   * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
-  * [Add a huge dataset (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+  * [Add a huge dataset with Beam (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 
+Note: [`tf.data`](https://www.tensorflow.org/guide/data) is a builtin library in
+TensorFlow which builds efficient data pipelines.
+[TFDS](https://www.tensorflow.org/datasets) (this library) uses `tf.data` to
+build an input pipeline when you load a dataset.
 
 **Table of Contents**
 
 * [Installation](#installation)
 * [Usage](#usage)
 * [`DatasetBuilder`](#datasetbuilder)
-* [NumPy usage](#numpy-usage-with-tfdsas-numpy)
+* [NumPy usage with `tfds.as_numpy`](#numpy-usage-with-tfdsas_numpy)
+* [Citation](#citation)
 * [Want a certain dataset?](#want-a-certain-dataset)
-* [Disclaimers](#disclaimers)
+* [*Disclaimers*](#disclaimers)
 
 ### Installation
 
@@ -48,16 +59,13 @@ import tensorflow as tf
 
 # Here we assume Eager mode is enabled (TF2), but tfds also works in Graph mode.
 
-# See available datasets
-print(tfds.list_builders())
-
 # Construct a tf.data.Dataset
-ds_train = tfds.load(name="mnist", split="train", shuffle_files=True)
+ds_train = tfds.load('mnist', split='train', shuffle_files=True)
 
 # Build your input pipeline
 ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
 for features in ds_train.take(1):
-  image, label = features["image"], features["label"]
+  image, label = features['image'], features['label']
 ```
 
 Try it interactively in a
@@ -65,13 +73,14 @@ Try it interactively in a
 
 ### `DatasetBuilder`
 
-All datasets are implemented as subclasses of
-[`DatasetBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetBuilder.md)
-and
-[`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load.md)
-is a thin convenience wrapper.
-[`DatasetInfo`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo.md)
-documents the dataset.
+All datasets are implemented as subclasses of `tfds.core.DatasetBuilder`. TFDS
+has two entry points:
+
+*   `tfds.builder`: Returns the `tfds.core.DatasetBuilder` instance, giving
+     control over `builder.download_and_prepare()` and
+     `builder.as_dataset()`.
+*   `tfds.load`: Convenience wrapper which hides the `download_and_prepare` and
+    `as_dataset` calls, and directly returns the `tf.data.Dataset`.
 
 ```python
 import tensorflow_datasets as tfds
@@ -95,31 +104,30 @@ print(info)
 
 This will print the dataset info content:
 
-```
+```python
 tfds.core.DatasetInfo(
     name='mnist',
-    version=1.0.0,
+    version=3.0.1,
     description='The MNIST database of handwritten digits.',
     homepage='http://yann.lecun.com/exdb/mnist/',
     features=FeaturesDict({
         'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
-    },
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    }),
     total_num_examples=70000,
     splits={
-        'test': <tfds.core.SplitInfo num_examples=10000>,
-        'train': <tfds.core.SplitInfo num_examples=60000>
+        'test': 10000,
+        'train': 60000,
     },
     supervised_keys=('image', 'label'),
-    citation='"""
-        @article{lecun2010mnist,
-          title={MNIST handwritten digit database},
-          author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-          journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-          volume={2},
-          year={2010}
-        }
-    """',
+    citation="""@article{lecun2010mnist,
+      title={MNIST handwritten digit database},
+      author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+      journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},
+      volume={2},
+      year={2010}
+    }""",
+    redistribution_info=,
 )
 ```
 
@@ -137,9 +145,7 @@ info.features['label'].str2int('cat')  # 0
 ### NumPy Usage with `tfds.as_numpy`
 
 As a convenience for users that want simple NumPy arrays in their programs, you
-can use
-[`tfds.as_numpy`](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_numpy.md)
-to return a generator that yields NumPy array
+can use `tfds.as_numpy` to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.
@@ -161,6 +167,18 @@ numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.
+
+### Citation
+
+Please include the following citation when using `tensorflow-datasets` for a
+paper, in addition to any citation specific to the used datasets.
+
+```
+@misc{TFDS,
+  title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
+  howpublished = {\url{https://www.tensorflow.org/datasets}},
+}
+```
 
 ## Want a certain dataset?
 
@@ -190,4 +208,5 @@ by adding a thumbs-up reaction to the issue.
 *If you're interested in learning more about responsible AI practices, including*
 *fairness, please see Google AI's [Responsible AI Practices](https://ai.google/education/responsible-ai-practices).*
 
-*`tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.*
+*`tensorflow/datasets` is Apache 2.0 licensed. See the
+[`LICENSE`](LICENSE) file.*

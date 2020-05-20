@@ -1,0 +1,105 @@
+{
+  "citation": "@article{DBLP:journals/corr/abs-1708-07747,\n  author    = {Han Xiao and\n               Kashif Rasul and\n               Roland Vollgraf},\n  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning\n               Algorithms},\n  journal   = {CoRR},\n  volume    = {abs/1708.07747},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1708.07747},\n  archivePrefix = {arXiv},\n  eprint    = {1708.07747},\n  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n",
+  "description": "Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.",
+  "downloadSize": "30878645",
+  "location": {
+    "urls": [
+      "https://github.com/zalandoresearch/fashion-mnist"
+    ]
+  },
+  "name": "fashion_mnist",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "28"
+            },
+            {
+              "size": "28"
+            },
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "5470824",
+      "numShards": "1",
+      "shardLengths": [
+        "10000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "10000"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "32717636",
+      "numShards": "1",
+      "shardLengths": [
+        "60000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "60000"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "3.0.1"
+}

@@ -3,12 +3,14 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="xnli" />
-  <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated&#10;into a 14 different languages (some low-ish resource). As with MNLI, the goal is&#10;to predict textual entailment (does sentence A imply/contradict/neither sentence&#10;B) and is a classification task (given two sentences, predict one of three&#10;labels).&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;xnli&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated&#10;into a 14 different languages (some low-ish resource). As with MNLI, the goal is&#10;to predict textual entailment (does sentence A imply/contradict/neither sentence&#10;B) and is a classification task (given two sentences, predict one of three&#10;labels).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;xnli&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xnli" />
   <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/xnli/" />
   <meta itemprop="citation" content="@InProceedings{conneau2018xnli,&#10;  author = &quot;Conneau, Alexis&#10;                 and Rinott, Ruty&#10;                 and Lample, Guillaume&#10;                 and Williams, Adina&#10;                 and Bowman, Samuel R.&#10;                 and Schwenk, Holger&#10;                 and Stoyanov, Veselin&quot;,&#10;  title = &quot;XNLI: Evaluating Cross-lingual Sentence Representations&quot;,&#10;  booktitle = &quot;Proceedings of the 2018 Conference on Empirical Methods&#10;               in Natural Language Processing&quot;,&#10;  year = &quot;2018&quot;,&#10;  publisher = &quot;Association for Computational Linguistics&quot;,&#10;  location = &quot;Brussels, Belgium&quot;,&#10;}" />
 </div>
 # `xnli`
+
+*   **Description**:
 
 XNLI is a subset of a few thousand examples from MNLI which has been translated
 into a 14 different languages (some low-ish resource). As with MNLI, the goal is
@@ -16,34 +18,36 @@ to predict textual entailment (does sentence A imply/contradict/neither sentence
 B) and is a classification task (given two sentences, predict one of three
 labels).
 
-*   URL:
+*   **Config description**: Plain text import of XNLI
+
+*   **Homepage**:
     [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
-*   `DatasetBuilder`:
+
+*   **Source code**:
     [`tfds.text.xnli.Xnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xnli.py)
 
-`xnli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
-following configurations predefined (defaults to the first one):
+*   **Versions**:
 
-*   `plain_text` (`v1.0.0`) (`Size: 17.04 MiB`): Plain text import of XNLI
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
-## `xnli/plain_text`
-Plain text import of XNLI
+*   **Download size**: `17.04 MiB`
 
-Versions:
+*   **Dataset size**: `Unknown size`
 
-*   **`1.0.0`** (default): New split API
-    (https://tensorflow.org/datasets/splits)
-*   `0.0.1`: None
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-### Statistics
+*   **Splits**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 7,500
-TEST       | 5,010
-VALIDATION | 2,490
+Split        | Examples
+:----------- | -------:
+'test'       | 5,010
+'validation' | 2,490
 
-### Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'hypothesis': TranslationVariableLanguages({
@@ -70,12 +74,11 @@ FeaturesDict({
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
+*   **Citation**:
 
-### Homepage
-
-*   [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
-
-## Citation
 ```
 @InProceedings{conneau2018xnli,
   author = "Conneau, Alexis
@@ -94,4 +97,8 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
+
+## xnli/plain_text (default config)

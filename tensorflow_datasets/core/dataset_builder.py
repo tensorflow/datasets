@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """DatasetBuilder base class."""
 
 from __future__ import absolute_import
@@ -32,9 +33,7 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
@@ -56,9 +55,14 @@ REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
 GCS_HOSTED_MSG = """\
 Dataset %s is hosted on GCS. It will automatically be downloaded to your
 local data directory. If you'd instead prefer to read directly from our public
-GCS bucket (recommended if you're running on GCP), you can instead set
-data_dir=gs://tfds-data/datasets.
+GCS bucket (recommended if you're running on GCP), you can instead pass
+`try_gcs=True` to `tfds.load` or set `data_dir=gs://tfds-data/datasets`.
 """
+
+
+# Some tests are still running under Python 2, so internally we still whitelist
+# Py2 temporary.
+_is_py2_download_and_prepare_disabled = True
 
 
 class BuilderConfig(object):
@@ -193,13 +197,11 @@ class DatasetBuilder(object):
           "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
     self._version = self._pick_version(version)
-    self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
-    self._data_dir = self._build_data_dir()
+    # Compute the base directory (for download) and dataset/version directory.
+    self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)
     if tf.io.gfile.exists(self._data_dir):
-      logging.info("Overwrite dataset info from restored data version.")
       self.info.read_from_directory(self._data_dir)
     else:  # Use the code version (do not restore data)
-      logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
   def __getstate__(self):
@@ -285,6 +287,13 @@ class DatasetBuilder(object):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
+    # Disable `download_and_prepare` (internally, we are still
+    # allowing Py2 for the `dataset_builder_tests.py` & cie
+    if _is_py2_download_and_prepare_disabled and six.PY2:
+      raise NotImplementedError(
+          "TFDS has droped `builder.download_and_prepare` support for "
+          "Python 2. Please update you code to Python 3.")
+
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(str(v) for v in self.versions
                                        if not v.tfds_version_to_prepare)
@@ -296,6 +305,32 @@ class DatasetBuilder(object):
           "{}).".format(
               self.name, self.version, self.version.tfds_version_to_prepare,
               available_to_prepare))
+
+    # Only `cls.VERSION` or `experimental_latest` versions can be generated.
+    # Otherwise, users may accidentally generate an old version using the
+    # code from newer versions.
+    installable_versions = {
+        str(v) for v in (self.canonical_version, max(self.versions))
+    }
+    if str(self.version) not in installable_versions:
+      msg = (
+          "The version of the dataset you are trying to use ({}) is too "
+          "old for this version of TFDS so cannot be generated."
+      ).format(self.info.full_name)
+      if self.version.tfds_version_to_prepare:
+        msg += (
+            "{} can only be generated using TFDS code synced @ {} or earlier "
+            "Either sync to that version of TFDS to first prepare the data or "
+            "use another version of the dataset. "
+        ).format(self.version, self.version.tfds_version_to_prepare)
+      else:
+        msg += (
+            "Either sync to a previous version of TFDS to first prepare the "
+            "data or use another version of the dataset. "
+        )
+      msg += "Available for `download_and_prepare`: {}".format(
+          list(sorted(installable_versions)))
+      raise ValueError(msg)
 
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
@@ -309,9 +344,15 @@ class DatasetBuilder(object):
 
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
-        self.info.size_in_bytes, directory=self._data_dir_root):
-      raise IOError("Not enough disk space. Needed: %s" %
-                    units.size_str(self.info.size_in_bytes))
+        self.info.dataset_size + self.info.download_size,
+        directory=self._data_dir_root):
+      raise IOError(
+          "Not enough disk space. Needed: {} (download: {}, generated: {})"
+          .format(
+              units.size_str(self.info.dataset_size + self.info.download_size),
+              units.size_str(self.info.download_size),
+              units.size_str(self.info.dataset_size),
+          ))
     self._log_download_bytes()
 
     dl_manager = self._make_download_manager(
@@ -319,7 +360,7 @@ class DatasetBuilder(object):
         download_config=download_config)
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
-    with file_format_adapter.incomplete_dir(self._data_dir) as tmp_data_dir:
+    with utils.incomplete_dir(self._data_dir) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
@@ -338,11 +379,19 @@ class DatasetBuilder(object):
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
 
+          # Skip statistics computation if tfdv isn't present
+          try:
+            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
+            skip_stats_computation = False
+          except ImportError:
+            skip_stats_computation = True
+
           splits = list(self.info.splits.values())
           statistics_already_computed = bool(
               splits and splits[0].statistics.num_examples)
           # Update DatasetInfo metadata by computing statistics from the data.
-          if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+          if (skip_stats_computation or
+              download_config.compute_stats == download.ComputeStatsMode.SKIP or
               download_config.compute_stats == download.ComputeStatsMode.AUTO
               and statistics_already_computed
              ):
@@ -352,20 +401,21 @@ class DatasetBuilder(object):
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
-          self.info.size_in_bytes = dl_manager.downloaded_size
+          self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
   @api_utils.disallow_positional_args
-  def as_dataset(self,
-                 split=None,
-                 batch_size=None,
-                 shuffle_files=False,
-                 decoders=None,
-                 read_config=None,
-                 as_supervised=False,
-                 in_memory=None):
+  def as_dataset(
+      self,
+      split=None,
+      batch_size=None,
+      shuffle_files=False,
+      decoders=None,
+      read_config=None,
+      as_supervised=False,
+  ):
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
@@ -412,9 +462,10 @@ class DatasetBuilder(object):
     ```
 
     Args:
-      split: `tfds.core.SplitBase`, which subset(s) of the data to read. If None
-        (default), returns all splits in a dict
-        `<key: tfds.Split, value: tf.data.Dataset>`.
+      split: Which split of the data to load (e.g. `'train'`, `'test'`
+        `['train', 'test']`, `'train[80%:]'`,...). See our
+        [split API guide](https://www.tensorflow.org/datasets/splits).
+        If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size` is set. Users that want more custom behavior
         should use `batch_size=None` and use the `tf.data` API to construct a
@@ -435,10 +486,6 @@ class DatasetBuilder(object):
         `builder.info.supervised_keys`. If `False`, the default,
         the returned `tf.data.Dataset` will have a dictionary with all the
         features.
-      in_memory: `bool`, if `True`, loads the dataset in memory which
-        increases iteration speeds. Note that if `True` and the dataset has
-        unknown dimensions, the features will be padded to the maximum
-        size across the dataset.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -471,7 +518,6 @@ class DatasetBuilder(object):
         decoders=decoders,
         read_config=read_config,
         as_supervised=as_supervised,
-        in_memory=in_memory,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
@@ -484,65 +530,26 @@ class DatasetBuilder(object):
       decoders,
       read_config,
       as_supervised,
-      in_memory):
+  ):
     """as_dataset for a single split."""
-    if isinstance(split, six.string_types):
-      split = splits_lib.Split(split)
-
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
-    # If the dataset is small, load it in memory
-    dataset_shape_is_fully_defined = (
-        dataset_utils.features_shape_is_fully_defined(self.info.features))
-    in_memory_default = False
-    # TODO(tfds): Consider default in_memory=True for small datasets with
-    # fully-defined shape.
-    # Expose and use the actual data size on disk and rm the manual
-    # name guards. size_in_bytes is the download size, which is misleading,
-    # particularly for datasets that use manual_dir as well as some downloads
-    # (wmt and diabetic_retinopathy_detection).
-    # in_memory_default = (
-    #     self.info.size_in_bytes and
-    #     self.info.size_in_bytes <= 1e9 and
-    #     not self.name.startswith("wmt") and
-    #     not self.name.startswith("diabetic") and
-    #     dataset_shape_is_fully_defined)
-    in_memory = in_memory_default if in_memory is None else in_memory
-
     # Build base dataset
-    if in_memory and not wants_full_dataset:
-      # TODO(tfds): Enable in_memory without padding features. May be able
-      # to do by using a requested version of tf.data.Dataset.cache that can
-      # persist a cache beyond iterator instances.
-      if not dataset_shape_is_fully_defined:
-        logging.warning("Called in_memory=True on a dataset that does not "
-                        "have fully defined shapes. Note that features with "
-                        "variable length dimensions will be 0-padded to "
-                        "the maximum length across the dataset.")
-      full_bs = self.info.splits.total_num_examples or sys.maxsize
-      # If using in_memory, escape all device contexts so we can load the data
-      # with a local Session.
-      with tf.device(None):
-        ds = self._as_dataset(
-            split=split,
-            shuffle_files=shuffle_files,
-            decoders=decoders,
-            read_config=read_config,
-        )
-        # Use padded_batch so that features with unknown shape are supported.
-        ds = ds.padded_batch(
-            full_bs, tf.compat.v1.data.get_output_shapes(ds))
-        ds = tf.compat.v1.data.Dataset.from_tensor_slices(
-            next(dataset_utils.as_numpy(ds)))
-    else:
-      ds = self._as_dataset(
-          split=split,
-          shuffle_files=shuffle_files,
-          decoders=decoders,
-          read_config=read_config,
-      )
+    ds = self._as_dataset(
+        split=split,
+        shuffle_files=shuffle_files,
+        decoders=decoders,
+        read_config=read_config,
+    )
+    # Auto-cache small datasets which are small enough to fit in memory.
+    if self._should_cache_ds(
+        split=split,
+        shuffle_files=shuffle_files,
+        read_config=read_config
+    ):
+      ds = ds.cache()
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
@@ -577,6 +584,44 @@ class DatasetBuilder(object):
       return tf.data.experimental.get_single_element(ds)
     return ds
 
+  def _should_cache_ds(self, split, shuffle_files, read_config):
+    """Returns True if TFDS should auto-cache the dataset."""
+    # The user can explicitly opt-out from auto-caching
+    if not read_config.try_autocache:
+      return False
+
+    # Skip datasets with unknown size.
+    # Even by using heuristic with `download_size` and
+    # `MANUAL_DOWNLOAD_INSTRUCTIONS`, it wouldn't catch datasets which hardcode
+    # the non-processed data-dir, nor DatasetBuilder not based on tf-record.
+    if not self.info.dataset_size:
+      return False
+
+    # Do not cache big datasets
+    # Instead of using the global size, we could infer the requested bytes:
+    # `self.info.splits[split].num_bytes`
+    # The info is available for full splits, and could be approximated
+    # for subsplits `train[:50%]`.
+    # However if the user is creating multiple small splits from a big
+    # dataset, those could adds up and fill up the entire RAM.
+    # 250 MiB is arbitrary picked. For comparison, Cifar10 is about 150 MiB.
+    if self.info.dataset_size > 250 * units.MiB:
+      return False
+
+    # We do not want to cache data which has more than one shards when
+    # shuffling is enabled, as this would effectivelly disable shuffling.
+    # An exception is for single shard (as shuffling is a no-op).
+    # Another exception is if reshuffle is disabled (shuffling already cached)
+    num_shards = len(self.info.splits[split].file_instructions)
+    if (shuffle_files and
+        # Shuffling only matter when reshuffle is True or None (default)
+        read_config.shuffle_reshuffle_each_iteration is not False and  # pylint: disable=g-bool-id-comparison
+        num_shards > 1):
+      return False
+
+    # If the dataset satisfy all the right conditions, activate autocaching.
+    return True
+
   def _relative_data_dir(self, with_version=True):
     """Relative path of this dataset in data_dir."""
     builder_data_dir = self.name
@@ -586,47 +631,62 @@ class DatasetBuilder(object):
     if not with_version:
       return builder_data_dir
 
-    version = self._version
-    version_data_dir = os.path.join(builder_data_dir, str(version))
+    version_data_dir = os.path.join(builder_data_dir, str(self._version))
     return version_data_dir
 
-  def _build_data_dir(self):
-    """Return the data directory for the current version."""
-    builder_data_dir = os.path.join(
-        self._data_dir_root, self._relative_data_dir(with_version=False))
-    version_data_dir = os.path.join(
-        self._data_dir_root, self._relative_data_dir(with_version=True))
+  def _build_data_dir(self, given_data_dir):
+    """Return the data directory for the current version.
 
-    def _other_versions_on_disk():
-      """Returns previous versions on disk."""
-      if not tf.io.gfile.exists(builder_data_dir):
-        return []
+    Args:
+      given_data_dir: `Optional[str]`, root `data_dir` passed as
+        `__init__` argument.
 
-      version_dirnames = []
-      for dir_name in tf.io.gfile.listdir(builder_data_dir):
-        try:
-          version_dirnames.append((utils.Version(dir_name), dir_name))
-        except ValueError:  # Invalid version (ex: incomplete data dir)
-          pass
-      version_dirnames.sort(reverse=True)
-      return version_dirnames
+    Returns:
+      data_dir_root: `str`, The root dir containing all datasets, downloads,...
+      data_dir: `str`, The version data_dir
+        (e.g. `<data_dir_root>/<ds_name>/<config>/<version>`)
+    """
+    builder_dir = self._relative_data_dir(with_version=False)
+    version_dir = self._relative_data_dir(with_version=True)
 
-    # Check and warn if other versions exist on disk
-    version_dirs = _other_versions_on_disk()
-    if version_dirs:
-      other_version = version_dirs[0][0]
-      if other_version != self._version:
-        warn_msg = (
-            "Found a different version {other_version} of dataset {name} in "
-            "data_dir {data_dir}. Using currently defined version "
-            "{cur_version}.".format(
-                other_version=str(other_version),
-                name=self.name,
-                data_dir=self._data_dir_root,
-                cur_version=str(self._version)))
-        logging.warning(warn_msg)
+    # If the data dir is explicitly given, no need to search everywhere.
+    if given_data_dir:
+      default_data_dir = os.path.expanduser(given_data_dir)
+      all_data_dirs = [default_data_dir]
+    else:
+      default_data_dir = os.path.expanduser(constants.DATA_DIR)
+      all_data_dirs = constants.list_data_dirs()
 
-    return version_data_dir
+    all_version_dirs = set()
+    requested_version_dirs = {}
+    for data_dir_root in all_data_dirs:
+      # List all existing versions
+      all_version_dirs.update(
+          _list_all_version_dirs(os.path.join(data_dir_root, builder_dir)))
+      # Check for existance of the requested dir
+      requested_version_dir = os.path.join(data_dir_root, version_dir)
+      if requested_version_dir in all_version_dirs:
+        requested_version_dirs[data_dir_root] = requested_version_dir
+
+    if len(requested_version_dirs) > 1:
+      raise ValueError(
+          "Dataset was found in more than one directory: {}. Please resolve "
+          "the ambiguity by explicitly specifying `data_dir=`."
+          "".format(requested_version_dirs))
+    elif len(requested_version_dirs) == 1:  # The dataset is found once
+      return next(iter(requested_version_dirs.items()))
+
+    # No dataset found, use default directory
+    data_dir = os.path.join(default_data_dir, version_dir)
+    if all_version_dirs:
+      logging.warning(
+          "Found a different version of the requested dataset:\n"
+          "%s\n"
+          "Using %s instead.",
+          "\n".join(sorted(all_version_dirs)),
+          data_dir
+      )
+    return default_data_dir, data_dir
 
   def _log_download_done(self):
     msg = ("Dataset {name} downloaded and prepared to {data_dir}. "
@@ -640,13 +700,15 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
-    size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
-        "Downloading and preparing dataset %s (%s) to %s..." %
-        (self.name, size_text, self._data_dir),
-        attrs=["bold"])
-    # TODO(tfds): Should try to estimate the available free disk space (if
-    # possible) and raise an error if not.
+        "Downloading and preparing dataset {} (download: {}, generated: {}, "
+        "total: {}) to {}...".format(
+            self.info.full_name,
+            units.size_str(self.info.download_size),
+            units.size_str(self.info.dataset_size),
+            units.size_str(self.info.download_size + self.info.dataset_size),
+            self._data_dir,
+        ), attrs=["bold"])
 
   @abc.abstractmethod
   def _info(self):
@@ -708,7 +770,6 @@ class DatasetBuilder(object):
     if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
       manual_dir = (
           download_config.manual_dir or os.path.join(download_dir, "manual"))
-      manual_dir = os.path.join(manual_dir, self.name)
     else:
       manual_dir = None
 
@@ -717,9 +778,10 @@ class DatasetBuilder(object):
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
-        manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
+        manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
+        force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
     )
 
@@ -773,25 +835,30 @@ class DatasetBuilder(object):
     return config_dict
 
 
-class FileAdapterBuilder(DatasetBuilder):
-  """Base class for datasets with data generation based on file adapter.
+def _list_all_version_dirs(root_dir):
+  """Lists all dataset versions present on disk."""
+  if not tf.io.gfile.exists(root_dir):
+    return []
 
-  `FileFormatAdapter`s are defined in
-  `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
-  feature dictionaries yielded by example generators. See the class docstrings.
-  """
+  def _is_version_valid(version):
+    try:
+      return utils.Version(version) and True
+    except ValueError:  # Invalid version (ex: incomplete data dir)
+      return False
+
+  return [  # Return all version dirs
+      os.path.join(root_dir, version)
+      for version in tf.io.gfile.listdir(root_dir)
+      if _is_version_valid(version)
+  ]
+
+
+class FileAdapterBuilder(DatasetBuilder):
+  """Base class for datasets with data generation based on file adapter."""
 
   @utils.memoized_property
   def _example_specs(self):
     return self.info.features.get_serialized_info()
-
-  @utils.memoized_property
-  def _file_format_adapter(self):
-    # Load the format adapter (TF-Record,...)
-    # The file_format_adapter module will eventually be replaced by
-    # tfrecords_{reader,writer} modules.
-    file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
-    return file_adapter_cls(self._example_specs)
 
   @property
   def _tfrecords_reader(self):
@@ -864,14 +931,14 @@ class FileAdapterBuilder(DatasetBuilder):
       tf.io.gfile.makedirs(self._data_dir)
 
     # Generating data for all splits
-    split_dict = splits_lib.SplitDict()
+    split_dict = splits_lib.SplitDict(dataset_name=self.name)
     split_generators_kwargs = self._make_split_generators_kwargs(
         prepare_split_kwargs)
     for split_generator in self._split_generators(
         dl_manager, **split_generators_kwargs):
-      if splits_lib.Split.ALL == split_generator.split_info.name:
+      if str(split_generator.split_info.name).lower() == "all":
         raise ValueError(
-            "tfds.Split.ALL is a special split keyword corresponding to the "
+            "`all` is a special split keyword corresponding to the "
             "union of all splits, so cannot be used as key in "
             "._split_generator()."
         )
@@ -891,92 +958,17 @@ class FileAdapterBuilder(DatasetBuilder):
       decoders=None,
       read_config=None,
       shuffle_files=False):
-
-    if self.version.implements(utils.Experiment.S3):
-      ds = self._tfrecords_reader.read(
-          name=self.name,
-          instructions=split,
-          split_infos=self.info.splits.values(),
-          read_config=read_config,
-          shuffle_files=shuffle_files,
-      )
-    else:
-      # Resolve all the named split tree by real ones
-      read_instruction = split.get_read_instruction(self.info.splits)
-      # Extract the list of SlicedSplitInfo objects containing the splits
-      # to use and their associated slice
-      list_sliced_split_info = read_instruction.get_list_sliced_split_info()
-      # Resolve the SlicedSplitInfo objects into a list of
-      # {'filepath': 'path/to/data-00032-00100', 'mask': [True, False, ...]}
-      instruction_dicts = self._slice_split_info_to_instruction_dicts(
-          list_sliced_split_info)
-
-      # Load the dataset
-      ds = dataset_utils.build_dataset(
-          instruction_dicts=instruction_dicts,
-          dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
-          shuffle_files=shuffle_files,
-      )
-
+    ds = self._tfrecords_reader.read(
+        name=self.name,
+        instructions=split,
+        split_infos=self.info.splits.values(),
+        read_config=read_config,
+        shuffle_files=shuffle_files,
+    )
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
-
-  def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
-    """Return the list of files and reading mask of the files to read."""
-    instruction_dicts = []
-    for sliced_split_info in list_sliced_split_info:
-      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
-
-      # Compute filenames from the given split
-      filepaths = list(sorted(self._build_split_filenames(
-          sliced_split_info.split_info)))
-
-      # Compute the offsets
-      if sliced_split_info.split_info.num_examples:
-        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
-            sliced_split_info.split_info.num_shards,
-            sliced_split_info.split_info.num_examples,
-        )
-        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
-      else:
-        logging.warning(
-            "Statistics not present in the dataset. TFDS is not able to load "
-            "the total number of examples, so using the subsplit API may not "
-            "provide precise subsplits."
-        )
-        mask_offsets = [0] * len(filepaths)
-
-      for filepath, mask_offset in zip(filepaths, mask_offsets):
-        instruction_dicts.append({
-            "filepath": filepath,
-            "mask": mask,
-            "mask_offset": mask_offset,
-        })
-    return instruction_dicts
-
-  def _build_split_filenames(self, split_info):
-    """Construct the split filenames associated with the split info.
-
-    The filenames correspond to the pre-processed datasets files present in
-    the root directory of the dataset.
-
-    Args:
-      split_info: (SplitInfo) needed split.
-
-    Returns:
-      filenames: (list[str]) The list of filenames path corresponding to the
-        split info object
-    """
-
-    return naming.filepaths_for_dataset_split(
-        dataset_name=self.name,
-        split=split_info.name,
-        num_shards=split_info.num_shards,
-        data_dir=self._data_dir,
-        filetype_suffix=self._file_format_adapter.filetype_suffix,
-        )
 
 
 class GeneratorBasedBuilder(FileAdapterBuilder):
@@ -985,12 +977,8 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
   `GeneratorBasedBuilder` is a convenience class that abstracts away much
   of the data writing and reading of `DatasetBuilder`. It expects subclasses to
   implement generators of feature dictionaries across the dataset splits
-  (`_split_generators`) and to specify a file type
-  (`_file_format_adapter`). See the method docstrings for details.
+  `_split_generators`. See the method docstrings for details.
 
-  `FileFormatAdapter`s are defined in
-  `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
-  feature dictionaries yielded by example generators. See the class docstrings.
   """
 
   @abc.abstractmethod
@@ -1030,14 +1018,6 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
     )
 
-  def _prepare_split_legacy(self, generator, split_info):
-    # TODO(pierrot): delete function once S3 has been fully rolled-out.
-    # For builders having both S3 and non S3 versions: drop key if any yielded.
-    generator = (ex[1] if isinstance(ex, tuple) else ex for ex in generator)
-    generator = (self.info.features.encode_example(ex) for ex in generator)
-    output_files = self._build_split_filenames(split_info)
-    self._file_format_adapter.write_from_generator(generator, output_files)
-
   def _prepare_split(self, split_generator, max_examples_per_split):
     generator = self._generate_examples(**split_generator.gen_kwargs)
     split_info = split_generator.split_info
@@ -1045,8 +1025,6 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
       logging.warning("Splits capped at %s examples max.",
                       max_examples_per_split)
       generator = itertools.islice(generator, max_examples_per_split)
-    if not self.version.implements(utils.Experiment.S3):
-      return self._prepare_split_legacy(generator, split_info)
     fname = "{}-{}.tfrecord".format(self.name, split_generator.name)
     fpath = os.path.join(self._data_dir, fname)
     writer = tfrecords_writer.Writer(self._example_specs, fpath,
@@ -1055,8 +1033,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
                                   total=split_info.num_examples, leave=False):
       example = self.info.features.encode_example(record)
       writer.write(key, example)
-    shard_lengths = writer.finalize()
+    shard_lengths, total_size = writer.finalize()
     split_generator.split_info.shard_lengths.extend(shard_lengths)
+    split_generator.split_info.num_bytes = total_size
 
 
 class BeamBasedBuilder(FileAdapterBuilder):
@@ -1072,7 +1051,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     # This allows for global preprocessing in beam.
     split_generators_kwargs = {}
     split_generators_arg_names = (
-        inspect.getargspec(self._split_generators).args if six.PY2 else
+        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method  # pytype: disable=wrong-arg-types
         inspect.signature(self._split_generators).parameters.keys())
     if "pipeline" in split_generators_arg_names:
       split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]
@@ -1119,10 +1098,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
 
     if not download_config.beam_runner and not download_config.beam_options:
       raise ValueError(
-          "Trying to generate a dataset using Apache Beam, yet no Beam Runner "
-          "or PipelineOptions() has been provided. Please pass a "
-          "tfds.download.DownloadConfig(beam_runner=...) object to the "
-          "builder.download_and_prepare(download_config=...) method"
+          "The dataset you're trying to generate is using Apache Beam. Beam"
+          "datasets are usually very large and should be generated separately."
+          "Please have a look at"
+          "https://www.tensorflow.org/datasets/beam_datasets#generating_a_beam_dataset"
+          "for instructions."
       )
 
     beam_options = (download_config.beam_options or
@@ -1148,10 +1128,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
     split_dict = self.info.splits
     for split_name, beam_writer in self._beam_writers.items():
       logging.info("Retrieving shard lengths for %s...", split_name)
-      shard_lengths = beam_writer.finalize()
+      shard_lengths, total_size = beam_writer.finalize()
       split_info = split_dict[split_name]
       split_info.shard_lengths.extend(shard_lengths)
       split_info.num_shards = len(shard_lengths)
+      split_info.num_bytes = total_size
     logging.info("Updating split info...")
     self.info.update_splits_if_different(split_dict)
 

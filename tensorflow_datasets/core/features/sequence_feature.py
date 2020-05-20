@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Sequence feature."""
 
 from __future__ import absolute_import
@@ -201,7 +202,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature."""
-    inner_feature_repr = repr(self._feature)
+    inner_feature_repr = feature_lib.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
@@ -243,5 +244,5 @@ def _transpose_dict_list(dict_list):
   # 3. Extract each individual elements
   return [
       utils.map_nested(lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
-      for i in range(length['value'])
+      for i in range(length['value'])  # pytype: disable=wrong-arg-types
   ]

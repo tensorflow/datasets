@@ -1,3 +1,4 @@
+# Lint as: python3
 """tensorflow/datasets is a library of datasets ready to use with TensorFlow.
 
 tensorflow/datasets is a library of public datasets ready to use with
@@ -49,7 +50,7 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
-    'tensorflow-metadata',
+    'tensorflow-metadata>=0.15,<0.16',
     'termcolor',
     'tqdm',
     'wrapt',
@@ -64,11 +65,11 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
-    'apache-beam',
     'jupyter',
     'mako',
     'pytest',
     'pytest-xdist',
+    'tensorflow-data-validation>=0.15,<0.16',
     # Python 2 backports
     'mock;python_version<"3"',
     # TODO(b/142892342): Re-enable
@@ -77,32 +78,33 @@ TESTS_REQUIRE = [
 
 # Static files needed by datasets.
 DATASET_FILES = [
-    'image/caltech101_labels.txt',
-    'image/categories_places365.txt',
-    'image/cbis_ddsm_calc_distributions.txt',
-    'image/cbis_ddsm_calc_types.txt',
-    'image/cbis_ddsm_mass_margins.txt',
-    'image/cbis_ddsm_mass_shapes.txt',
-    'image/cbis_ddsm_patch_labels.txt',
-    'image/dtd_key_attributes.txt',
-    'image/food-101_classes.txt',
-    'image/imagenet_resized_labels.txt',
-    'image/imagenet2012_labels.txt',
-    'image/imagenet2012_validation_labels.txt',
-    'image/imagenette_labels.txt',
-    'image/inaturalist_labels.txt',
-    'image/inaturalist_supercategories.txt',
-    'image/open_images_classes_all.txt',
-    'image/open_images_classes_boxable.txt',
-    'image/open_images_classes_trainable.txt',
-    'image/plant_leaves_urls.txt',
-    'image/plantae_k_urls.txt',
-    'image/quickdraw_labels.txt',
-    'image/sun397_labels.txt',
-    'image/sun397_tfds_te.txt',
-    'image/sun397_tfds_tr.txt',
-    'image/sun397_tfds_va.txt',
-    'image/vgg_face2_labels.txt',
+    'image_classification/caltech101_labels.txt',
+    'image_classification/categories_places365.txt',
+    'image_classification/cbis_ddsm_calc_distributions.txt',
+    'image_classification/cbis_ddsm_calc_types.txt',
+    'image_classification/cbis_ddsm_mass_margins.txt',
+    'image_classification/cbis_ddsm_mass_shapes.txt',
+    'image_classification/cbis_ddsm_patch_labels.txt',
+    'image_classification/dtd_key_attributes.txt',
+    'image_classification/food-101_classes.txt',
+    'image_classification/imagenet_resized_labels.txt',
+    'image_classification/imagenet2012_labels.txt',
+    'image_classification/imagenet2012_validation_labels.txt',
+    'image_classification/imagenette_labels.txt',
+    'image_classification/imagewang_labels.txt',
+    'image_classification/inaturalist_labels.txt',
+    'image_classification/inaturalist_supercategories.txt',
+    'image_classification/plant_leaves_urls.txt',
+    'image_classification/plantae_k_urls.txt',
+    'image_classification/quickdraw_labels.txt',
+    'image_classification/sun397_labels.txt',
+    'image_classification/sun397_tfds_te.txt',
+    'image_classification/sun397_tfds_tr.txt',
+    'image_classification/sun397_tfds_va.txt',
+    'image_classification/vgg_face2_labels.txt',
+    'object_detection/open_images_classes_all.txt',
+    'object_detection/open_images_classes_boxable.txt',
+    'object_detection/open_images_classes_trainable.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
@@ -115,6 +117,7 @@ DATASET_EXTRAS = {
     'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
+    'common_voice': ['pydub'],  # and ffmpeg installed
     'eurosat': ['scikit-image',],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
@@ -127,8 +130,9 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
-    'nsynth': ['crepe>=0.0.9', 'librosa', 'scikit-learn==0.20.3'],
+    'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
+    'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'duke_ultrasound': ['scipy'],
@@ -151,10 +155,11 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 
 
 EXTRAS_REQUIRE = {
-    'apache-beam': ['apache-beam'],
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.15.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
+    'tensorflow-data-validation': ['tensorflow-data-validation>=0.15,<0.16'],
+
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
     'tests': TESTS_REQUIRE + all_dataset_extras,
@@ -168,7 +173,7 @@ setup(
     long_description='\n'.join(DOCLINES[2:]),
     author='Google Inc.',
     author_email='packages@tensorflow.org',
-    url='http://github.com/tensorflow/datasets',
+    url='https://github.com/tensorflow/datasets',
     download_url='https://github.com/tensorflow/datasets/tags',
     license='Apache 2.0',
     packages=find_packages(),

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """WMT: Translate dataset."""
 
 from __future__ import absolute_import
@@ -721,7 +722,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            num_shards=10 if split == tfds.Split.TRAIN else 1,
             gen_kwargs={"split_subsets": split_subsets,
                         "extraction_map": extraction_map})
         for split, split_subsets in self.subsets.items()
@@ -797,7 +797,7 @@ def _parse_parallel_sentences(f1, f2):
     if split_path[-1] == "gz":
       lang = split_path[-2]
       with tf.io.gfile.GFile(path, "rb") as f, gzip.GzipFile(fileobj=f) as g:
-        return g.read().decode("utf-8").split("\n"), lang
+        return g.read().decode("utf-8").splitlines(), lang
 
     if split_path[-1] == "txt":
       # CWMT
@@ -806,7 +806,7 @@ def _parse_parallel_sentences(f1, f2):
     else:
       lang = split_path[-1]
     with tf.io.gfile.GFile(path) as f:
-      return f.read().split("\n"), lang
+      return f.read().splitlines(), lang
 
   def _parse_sgm(path):
     """Returns sentences from a single SGML file."""
@@ -853,9 +853,9 @@ def _parse_parallel_sentences(f1, f2):
 
 def _parse_frde_bitext(fr_path, de_path):
   with tf.io.gfile.GFile(fr_path) as f:
-    fr_sentences = f.read().split("\n")
+    fr_sentences = f.read().splitlines()
   with tf.io.gfile.GFile(de_path) as f:
-    de_sentences = f.read().split("\n")
+    de_sentences = f.read().splitlines()
   assert len(fr_sentences) == len(de_sentences), (
       "Sizes do not match: %d vs %d for %s vs %s." % (
           len(fr_sentences), len(de_sentences), fr_path, de_path))
@@ -885,7 +885,7 @@ def _parse_tmx(path):
       utf_f = codecs.getreader("utf-8")(f)
     else:
       utf_f = f
-    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
         yield line_id, {
             _get_tuv_lang(tuv):
@@ -937,10 +937,8 @@ def _parse_czeng(*paths, **kwargs):
   if filter_path:
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with tf.io.gfile.GFile(filter_path) as f:
-      bad_blocks = {
-          blk for blk in re.search(
-              r"qw{([\s\d]*)}", f.read()).groups()[0].split()
-      }
+      bad_blocks = set(
+          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
     logging.info(
         "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
         len(bad_blocks))

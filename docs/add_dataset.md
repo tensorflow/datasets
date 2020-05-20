@@ -83,28 +83,23 @@ modifications.
 
 ### `DatasetBuilder`
 
-Each dataset is defined as a subclass of
-[`tfds.core.DatasetBuilder`](api_docs/python/tfds/core/DatasetBuilder.md)
-implementing the following methods:
+Each dataset is defined as a subclass of `tfds.core.DatasetBuilder` implementing
+the following methods:
 
-* `_info`: builds the
-  [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) object
-  describing the dataset
-* `_download_and_prepare`: to download and serialize the source data to disk
-* `_as_dataset`: to produce a `tf.data.Dataset` from the serialized data
+*   `_info`: builds the `tfds.core.DatasetInfo` object describing the dataset
+*   `_download_and_prepare`: to download and serialize the source data to disk
+*   `_as_dataset`: to produce a `tf.data.Dataset` from the serialized data
 
-Most datasets subclass
-[`tfds.core.GeneratorBasedBuilder`](api_docs/python/tfds/core/GeneratorBasedBuilder.md),
-which is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a
-dataset. It works well for datasets that can be generated on a single machine.
-Its subclasses implement:
+Most datasets are defined as subclass `tfds.core.GeneratorBasedBuilder`, which
+is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a dataset.
+It works well for datasets that can be generated on a single machine. Its
+subclasses implement:
 
-* `_info`: builds the
-  [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) object
-  describing the dataset
-* `_split_generators`: downloads the source data and defines the dataset splits
-* `_generate_examples`: yields `(key, example)` tuples in the dataset from the
-  source data
+*   `_info`: builds the `tfds.core.DatasetInfo` object describing the dataset
+*   `_split_generators`: downloads the source data and defines the dataset
+    splits
+*   `_generate_examples`: yields `(key, example)` tuples in the dataset from the
+    source data
 
 This guide will use `GeneratorBasedBuilder`.
 
@@ -144,8 +139,7 @@ For an explanation of what the version is, please read
 
 ## Specifying `DatasetInfo`
 
-[`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) describes the
-dataset.
+`tfds.core.DatasetInfo` describes the dataset.
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -178,20 +172,17 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 ### `FeatureConnector`s
 
 Each feature is specified in `DatasetInfo` as a
-[`tfds.features.FeatureConnector`](api_docs/python/tfds/features.md).
-`FeatureConnector`s document each feature, provide shape and type checks, and
-abstract away serialization to and from disk. There are many feature types
-already defined and you can also
+`tfds.features.FeatureConnector`. `FeatureConnector`s document each feature,
+provide shape and type checks, and abstract away serialization to and from disk.
+There are many feature types already defined and you can also
 [add a new one](#create-your-own-featureconnector).
 
 If you've implemented the test harness, `test_info` should now pass.
 
 ## Downloading and extracting source data
 
-Most datasets need to download data from the web. All downloads and
-extractions must go through the
-[`tfds.download.DownloadManager`](api_docs/python/tfds/download/DownloadManager.md).
-`DownloadManager` currently
+Most datasets need to download data from the web. All downloads and extractions
+must go through the `tfds.download.DownloadManager`. `DownloadManager` currently
 supports extracting `.zip`, `.gz`, and `.tar` files.
 
 For example, one can both download and extract URLs with `download_and_extract`:
@@ -208,18 +199,20 @@ def _split_generators(self, dl_manager):
 
 ### Manual download and extraction
 
-For source data that cannot be automatically downloaded (for
-example, it may require a login), the user will manually download the source
-data and place it in `manual_dir`, which you can access with
-`dl_manager.manual_dir` (defaults to `~/tensorflow_datasets/manual/my_dataset`).
+For source data that cannot be automatically downloaded (for example, it may
+require a login), the user will manually download the source data and place it
+in `manual_dir`, which you can access with `dl_manager.manual_dir` (defaults to
+`~/tensorflow_datasets/manual/`).
 
 ## Specifying dataset splits
 
 If the dataset comes with pre-defined splits (for example, MNIST has train and
-test splits), keep those splits in the `DatasetBuilder`. If this is your own
-data and you can decide your own splits, we suggest using a split of
-`(TRAIN:80%, VALIDATION: 10%, TEST: 10%)`. Users can always get subsplits
-through [`tfds.Split.subsplit`](splits.md#subsplit).
+test splits), keep those splits in the `DatasetBuilder`. If the dataset does not
+have predefined splits, `DatasetBuilder` should only specify a single
+`tfds.Split.TRAIN` split. Users can dynamically create their own subsplits
+with the
+[subsplit API](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+(e.g. `split='train[80%:]'`).
 
 ```python
   def _split_generators(self, dl_manager):
@@ -359,8 +352,7 @@ Heavy configuration affects how the data is written to disk. For example, for
 text datasets, different `TextEncoder`s and vocabularies affect the token ids
 that are written to disk.
 
-Heavy configuration is done through
-[`tfds.core.BuilderConfig`s](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/BuilderConfig.md):
+Heavy configuration is done through `tfds.core.BuilderConfig`s:
 
 1. Define your own configuration object as a subclass of
    `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
@@ -390,18 +382,17 @@ based on the member variables.
 
 ## Create your own `FeatureConnector`
 
-Note that most datasets will find the [current set of
-`tfds.features.FeatureConnector`s](api_docs/python/tfds/features.md)
-sufficient, but sometimes a new one may need to be defined.
+Note that most datasets will find the current set of
+`tfds.features.FeatureConnector`s sufficient, but sometimes a new one may need
+to be defined.
 
 Note: If you need a new `FeatureConnector` not present in the default set and
 are planning to submit it to `tensorflow/datasets`, please open a
 [new issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
 on GitHub with your proposal.
 
-[`tfds.features.FeatureConnector`s](api_docs/python/tfds/features/FeatureConnector.md)
-in `DatasetInfo` correspond to the elements returned in the
-`tf.data.Dataset` object. For instance, with:
+`tfds.features.FeatureConnector`s in `DatasetInfo` correspond to the elements
+returned in the `tf.data.Dataset` object. For instance, with:
 
 ```
 tfds.DatasetInfo(features=tfds.features.FeatureDict({
@@ -458,11 +449,8 @@ and implement the abstract methods:
     is to inherit from `tfds.features.FeaturesDict` and use the `super()`
     methods to automatically encode/decode the sub-connectors.
 
-Have a look at
-[`tfds.features.FeatureConnector`](api_docs/python/tfds/features/FeatureConnector.md)
-for more details and the
-[features package](api_docs/python/tfds/features.md)
-for more examples.
+Have a look at `tfds.features.FeatureConnector` for more details and the
+`tfds.features` package for more examples.
 
 ## Adding the dataset to `tensorflow/datasets`
 
@@ -542,7 +530,7 @@ except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
 Most importantly, use
-[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh)
+[`./oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh)
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
@@ -612,7 +600,7 @@ The test data should be put in
 under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
 script
-([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/fake_data_generation/cifar.py)).
 
 If you're using automation to generate the test data, please include that script
 in [`testing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing).
@@ -624,7 +612,6 @@ fail if your dataset splits overlap.
 do not create the data using material from the original dataset.
 
 ```python
-import tensorflow as tf
 from tensorflow_datasets import my_dataset
 import tensorflow_datasets.testing as tfds_test
 

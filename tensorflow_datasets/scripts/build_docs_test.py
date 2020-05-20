@@ -13,11 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Smoke Test for docs generation."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import shutil
@@ -25,7 +22,7 @@ import tempfile
 
 from absl.testing import absltest
 
-from tensorflow_datasets.scripts import build_docs
+from tensorflow_datasets.scripts import build_api_docs
 from tensorflow_datasets.scripts import document_datasets
 
 
@@ -38,8 +35,11 @@ class BuildDocsTest(absltest.TestCase):
       shutil.rmtree(self.workdir)
     os.makedirs(self.workdir)
 
+    # Set a dummy dir for the visualizer.
+    document_datasets.VisualizationDocUtil.BASE_PATH = self.workdir
+
   def test_api_gen(self):
-    build_docs.build_api_docs(
+    build_api_docs.execute(
         output_dir=self.workdir,
         code_url_prefix="",
         search_hints=True,

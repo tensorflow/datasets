@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Wikipedia dataset containing cleaned articles of all languages."""
 
 from __future__ import absolute_import
@@ -34,7 +35,6 @@ if six.PY3:
 else:
   # py2's built-in bz2 package does not support reading from file objects.
   import bz2file as bz2  # pylint:disable=g-import-not-at-top
-
 
 _CITATION = """\
 @ONLINE {wikidump,
@@ -118,15 +118,6 @@ class WikipediaConfig(tfds.core.BuilderConfig):
 _VERSION = tfds.core.Version(
     "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
-_SUPPORTED_VERSIONS = [
-    tfds.core.Version(
-        "0.0.4", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="f567c68af2e9ea39fe866ada8c92aef3b6dba613"),
-    tfds.core.Version(
-        "0.0.3", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="ec93f3121369716b5d0a3b076d9e080602959b2a"),
-]
-
 
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
@@ -135,7 +126,14 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
-          supported_versions=_SUPPORTED_VERSIONS,
+          language=lang,
+          date="20200301",
+      ) for lang in WIKIPEDIA_LANGUAGES
+  ] + [
+      # Old versions files do not exists anymore but config are kept as
+      # previously generated datasets can still be read.
+      WikipediaConfig(  # pylint:disable=g-complex-comprehension
+          version=_VERSION,
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -206,7 +204,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         if six.PY3:
           # Workaround due to:
           # https://github.com/tensorflow/tensorflow/issues/33563
-          utf_f = codecs.getreader("utf-8")(f)
+          utf_f = codecs.getreader("utf-8")(f)  # pytype: disable=wrong-arg-types
         else:
           utf_f = f
 
@@ -278,7 +276,7 @@ def _parse_and_clean_wikicode(raw_content):
   re_rm_wikilink = re.compile(
       "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE)
   def rm_wikilink(obj):
-    return bool(re_rm_wikilink.match(six.text_type(obj.title)))
+    return bool(re_rm_wikilink.match(six.text_type(obj.title)))  # pytype: disable=wrong-arg-types
   def rm_tag(obj):
     return six.text_type(obj.tag) in {"ref", "table"}
   def rm_template(obj):

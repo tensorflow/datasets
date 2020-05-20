@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Mathematics database."""
 
 from __future__ import absolute_import
@@ -21,7 +22,7 @@ from __future__ import print_function
 
 import os
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -45,10 +46,13 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 (Saxton, Grefenstette, Hill, Kohli).
 
 Example usage:
+
+```
 train_examples, val_examples = tfds.load(
     'math_dataset/arithmetic__mul',
     split=['train', 'test'],
     as_supervised=True)
+```
 """
 
 _DATA_URL = "https://storage.googleapis.com/mathematics-dataset/mathematics_dataset-v1.0.tar.gz"

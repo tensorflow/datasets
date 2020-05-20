@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for wikipedia dataset module."""
 
 from __future__ import absolute_import
@@ -23,12 +24,13 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.text import wikipedia
 
 
-
 class WikipediaTest(testing.DatasetBuilderTestCase):
+  """Test Wikipedia Dataset generation on fake dataset."""
   DATASET_CLASS = wikipedia.Wikipedia
-  VERSION = "experimental_latest"
-  BUILDER_CONFIG_NAMES_TO_TEST = ["20190301.en"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["20200301.en"]
 
+  # url_checksums are read from `dumpstatus.json`
+  # Modify dumpstatus.json if `date` is not `20200301`
   DL_EXTRACT_RESULT = {
       "info": "dumpstatus.json",
       "xml": ["enwiki_fake.xml.bz2", "enwiki_fake2.xml.bz2"]

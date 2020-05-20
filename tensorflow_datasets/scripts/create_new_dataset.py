@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 r"""Generate the minimal source code for a new dataset.
 
 python -m tensorflow_datasets.scripts.create_new_dataset \
@@ -21,16 +22,13 @@ python -m tensorflow_datasets.scripts.create_new_dataset \
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl import app
 from absl import flags
 
-# gfile cannot be imported directly `from tensorflow.io import gfile`
+# gfile cannot be imported directly
+# `from tensorflow.io import gfile`
 import tensorflow.compat.v2 as tf
 gfile = tf.io.gfile
 del tf
@@ -43,6 +41,7 @@ FLAGS = flags.FLAGS
 _DATASET_TYPE = [
     'audio',
     'image',
+    'image_classification',
     'object_detection',
     'structured',
     'summarization',
@@ -57,7 +56,7 @@ flags.DEFINE_enum('type', None, _DATASET_TYPE, 'Dataset type')
 
 
 _HEADER = """\
-\"""{TODO}: Add a description here.\"""
+\"""{dataset_name} dataset.\"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -66,11 +65,12 @@ from __future__ import print_function
 """
 
 _DATASET_DEFAULT_IMPORTS = """\
-import tensorflow_datasets.public_api as tfds\n
+import tensorflow_datasets.public_api as tfds
+
 """
 
 _DATASET_TEST_DEFAULTS_IMPORTS = """\
-from tensorflow_datasets import testing
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.{dataset_type} import {dataset_name}
 
 """
@@ -135,7 +135,7 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
 
 _DATASET_TEST_DEFAULTS = """\
 
-class {dataset_cls}Test(testing.DatasetBuilderTestCase):
+class {dataset_cls}Test(tfds.testing.DatasetBuilderTestCase):
   # {TODO}:
   DATASET_CLASS = {dataset_name}.{dataset_cls}
   SPLITS = {{
@@ -151,7 +151,7 @@ class {dataset_cls}Test(testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()
 
 """
 

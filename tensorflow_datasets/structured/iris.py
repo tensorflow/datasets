@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Iris dataset."""
 
 from __future__ import absolute_import
@@ -49,10 +50,6 @@ class Iris(tfds.core.GeneratorBasedBuilder):
   NUM_CLASSES = 3
   VERSION = tfds.core.Version(
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0",
-                        experiments={tfds.core.Experiment.S3: False}),
-  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -74,14 +71,13 @@ class Iris(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     iris_file = dl_manager.download(IRIS_URL)
-    all_lines = tf.io.gfile.GFile(iris_file).read().split("\n")
+    all_lines = tf.io.gfile.GFile(iris_file).read().splitlines()
     records = [l for l in all_lines if l]  # get rid of empty lines
 
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={"records": records}),
     ]
 

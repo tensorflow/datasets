@@ -3,12 +3,14 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="celeb_a" />
-  <meta itemprop="description" content="CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including&#10; - 10,177 number of identities,&#10; - 202,599 number of face images, and&#10; - 5 landmark locations, 40 binary attributes annotations per image.&#10;&#10;The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;celeb_a&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including&#10; - 10,177 number of identities,&#10; - 202,599 number of face images, and&#10; - 5 landmark locations, 40 binary attributes annotations per image.&#10;&#10;The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;celeb_a&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/celeb_a-2.0.1.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/celeb_a" />
   <meta itemprop="sameAs" content="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html" />
-  <meta itemprop="citation" content="@inproceedings{conf/iccv/LiuLWT15,&#10;  added-at = {2018-10-09T00:00:00.000+0200},&#10;  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},&#10;  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},&#10;  booktitle = {ICCV},&#10;  crossref = {conf/iccv/2015},&#10;  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},&#10;  interhash = {3f735aaa11957e73914bbe2ca9d5e702},&#10;  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},&#10;  isbn = {978-1-4673-8391-2},&#10;  keywords = {dblp},&#10;  pages = {3730-3738},&#10;  publisher = {IEEE Computer Society},&#10;  timestamp = {2018-10-11T11:43:28.000+0200},&#10;  title = {Deep Learning Face Attributes in the Wild.},&#10;  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},&#10;  year = 2015&#10;}&#10;" />
+  <meta itemprop="citation" content="@inproceedings{conf/iccv/LiuLWT15,&#10;  added-at = {2018-10-09T00:00:00.000+0200},&#10;  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},&#10;  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},&#10;  booktitle = {ICCV},&#10;  crossref = {conf/iccv/2015},&#10;  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},&#10;  interhash = {3f735aaa11957e73914bbe2ca9d5e702},&#10;  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},&#10;  isbn = {978-1-4673-8391-2},&#10;  keywords = {dblp},&#10;  pages = {3730-3738},&#10;  publisher = {IEEE Computer Society},&#10;  timestamp = {2018-10-11T11:43:28.000+0200},&#10;  title = {Deep Learning Face Attributes in the Wild.},&#10;  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},&#10;  year = 2015&#10;}" />
 </div>
 # `celeb_a`
+
+*   **Description**:
 
 CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset
 with more than 200K celebrity images, each with 40 attribute annotations. The
@@ -21,94 +23,93 @@ The dataset can be employed as the training and test sets for the following
 computer vision tasks: face attribute recognition, face detection, and landmark
 (or facial part) localization.
 
-*   URL:
+*   **Homepage**:
     [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
-*   `DatasetBuilder`:
+*   **Source code**:
     [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
-*   Version: `v2.0.0`
-*   Versions:
-
-    *   **`2.0.0`** (default): New split API
+*   **Versions**:
+    *   **`2.0.1`** (default): New split API
         (https://tensorflow.org/datasets/splits)
-    *   `0.3.0`: None
+    *   `2.0.0`: No release notes.
+*   **Download size**: `1.38 GiB`
+*   **Dataset size**: `1.62 GiB`
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+*   **Splits**:
 
-*   Size: `1.38 GiB`
+Split        | Examples
+:----------- | -------:
+'test'       | 19,962
+'train'      | 162,770
+'validation' | 19,867
 
-## Features
+*   **Features**:
+
 ```python
 FeaturesDict({
     'attributes': FeaturesDict({
-        '5_o_Clock_Shadow': Tensor(shape=(), dtype=tf.bool),
-        'Arched_Eyebrows': Tensor(shape=(), dtype=tf.bool),
-        'Attractive': Tensor(shape=(), dtype=tf.bool),
-        'Bags_Under_Eyes': Tensor(shape=(), dtype=tf.bool),
-        'Bald': Tensor(shape=(), dtype=tf.bool),
-        'Bangs': Tensor(shape=(), dtype=tf.bool),
-        'Big_Lips': Tensor(shape=(), dtype=tf.bool),
-        'Big_Nose': Tensor(shape=(), dtype=tf.bool),
-        'Black_Hair': Tensor(shape=(), dtype=tf.bool),
-        'Blond_Hair': Tensor(shape=(), dtype=tf.bool),
-        'Blurry': Tensor(shape=(), dtype=tf.bool),
-        'Brown_Hair': Tensor(shape=(), dtype=tf.bool),
-        'Bushy_Eyebrows': Tensor(shape=(), dtype=tf.bool),
-        'Chubby': Tensor(shape=(), dtype=tf.bool),
-        'Double_Chin': Tensor(shape=(), dtype=tf.bool),
-        'Eyeglasses': Tensor(shape=(), dtype=tf.bool),
-        'Goatee': Tensor(shape=(), dtype=tf.bool),
-        'Gray_Hair': Tensor(shape=(), dtype=tf.bool),
-        'Heavy_Makeup': Tensor(shape=(), dtype=tf.bool),
-        'High_Cheekbones': Tensor(shape=(), dtype=tf.bool),
-        'Male': Tensor(shape=(), dtype=tf.bool),
-        'Mouth_Slightly_Open': Tensor(shape=(), dtype=tf.bool),
-        'Mustache': Tensor(shape=(), dtype=tf.bool),
-        'Narrow_Eyes': Tensor(shape=(), dtype=tf.bool),
-        'No_Beard': Tensor(shape=(), dtype=tf.bool),
-        'Oval_Face': Tensor(shape=(), dtype=tf.bool),
-        'Pale_Skin': Tensor(shape=(), dtype=tf.bool),
-        'Pointy_Nose': Tensor(shape=(), dtype=tf.bool),
-        'Receding_Hairline': Tensor(shape=(), dtype=tf.bool),
-        'Rosy_Cheeks': Tensor(shape=(), dtype=tf.bool),
-        'Sideburns': Tensor(shape=(), dtype=tf.bool),
-        'Smiling': Tensor(shape=(), dtype=tf.bool),
-        'Straight_Hair': Tensor(shape=(), dtype=tf.bool),
-        'Wavy_Hair': Tensor(shape=(), dtype=tf.bool),
-        'Wearing_Earrings': Tensor(shape=(), dtype=tf.bool),
-        'Wearing_Hat': Tensor(shape=(), dtype=tf.bool),
-        'Wearing_Lipstick': Tensor(shape=(), dtype=tf.bool),
-        'Wearing_Necklace': Tensor(shape=(), dtype=tf.bool),
-        'Wearing_Necktie': Tensor(shape=(), dtype=tf.bool),
-        'Young': Tensor(shape=(), dtype=tf.bool),
+        '5_o_Clock_Shadow': tf.bool,
+        'Arched_Eyebrows': tf.bool,
+        'Attractive': tf.bool,
+        'Bags_Under_Eyes': tf.bool,
+        'Bald': tf.bool,
+        'Bangs': tf.bool,
+        'Big_Lips': tf.bool,
+        'Big_Nose': tf.bool,
+        'Black_Hair': tf.bool,
+        'Blond_Hair': tf.bool,
+        'Blurry': tf.bool,
+        'Brown_Hair': tf.bool,
+        'Bushy_Eyebrows': tf.bool,
+        'Chubby': tf.bool,
+        'Double_Chin': tf.bool,
+        'Eyeglasses': tf.bool,
+        'Goatee': tf.bool,
+        'Gray_Hair': tf.bool,
+        'Heavy_Makeup': tf.bool,
+        'High_Cheekbones': tf.bool,
+        'Male': tf.bool,
+        'Mouth_Slightly_Open': tf.bool,
+        'Mustache': tf.bool,
+        'Narrow_Eyes': tf.bool,
+        'No_Beard': tf.bool,
+        'Oval_Face': tf.bool,
+        'Pale_Skin': tf.bool,
+        'Pointy_Nose': tf.bool,
+        'Receding_Hairline': tf.bool,
+        'Rosy_Cheeks': tf.bool,
+        'Sideburns': tf.bool,
+        'Smiling': tf.bool,
+        'Straight_Hair': tf.bool,
+        'Wavy_Hair': tf.bool,
+        'Wearing_Earrings': tf.bool,
+        'Wearing_Hat': tf.bool,
+        'Wearing_Lipstick': tf.bool,
+        'Wearing_Necklace': tf.bool,
+        'Wearing_Necktie': tf.bool,
+        'Young': tf.bool,
     }),
     'image': Image(shape=(218, 178, 3), dtype=tf.uint8),
     'landmarks': FeaturesDict({
-        'lefteye_x': Tensor(shape=(), dtype=tf.int64),
-        'lefteye_y': Tensor(shape=(), dtype=tf.int64),
-        'leftmouth_x': Tensor(shape=(), dtype=tf.int64),
-        'leftmouth_y': Tensor(shape=(), dtype=tf.int64),
-        'nose_x': Tensor(shape=(), dtype=tf.int64),
-        'nose_y': Tensor(shape=(), dtype=tf.int64),
-        'righteye_x': Tensor(shape=(), dtype=tf.int64),
-        'righteye_y': Tensor(shape=(), dtype=tf.int64),
-        'rightmouth_x': Tensor(shape=(), dtype=tf.int64),
-        'rightmouth_y': Tensor(shape=(), dtype=tf.int64),
+        'lefteye_x': tf.int64,
+        'lefteye_y': tf.int64,
+        'leftmouth_x': tf.int64,
+        'leftmouth_y': tf.int64,
+        'nose_x': tf.int64,
+        'nose_y': tf.int64,
+        'righteye_x': tf.int64,
+        'righteye_y': tf.int64,
+        'rightmouth_x': tf.int64,
+        'rightmouth_y': tf.int64,
     }),
 })
 ```
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
+*   **Citation**:
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 202,599
-TRAIN      | 162,770
-TEST       | 19,962
-VALIDATION | 19,867
-
-## Homepage
-
-*   [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
-
-## Citation
 ```
 @inproceedings{conf/iccv/LiuLWT15,
   added-at = {2018-10-09T00:00:00.000+0200},
@@ -130,4 +131,7 @@ VALIDATION | 19,867
 }
 ```
 
---------------------------------------------------------------------------------
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a-2.0.1.png" alt="Visualization" width="500px">

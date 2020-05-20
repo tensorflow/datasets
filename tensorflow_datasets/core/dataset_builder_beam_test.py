@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
 from __future__ import absolute_import
@@ -34,7 +35,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
@@ -132,10 +133,20 @@ class FaultyS3DummyBeamDataset(DummyBeamDataset):
 
 class BeamBasedBuilderTest(testing.TestCase):
 
+  @classmethod
+  def setUpClass(cls):
+    super(BeamBasedBuilderTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
+
+  @classmethod
+  def tearDownClass(cls):
+    dataset_builder._is_py2_download_and_prepare_disabled = True
+    super(BeamBasedBuilderTest, cls).tearDownClass()
+
   def test_download_prepare_raise(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyBeamDataset(data_dir=tmp_dir)
-      with self.assertRaisesWithPredicateMatch(ValueError, "no Beam Runner"):
+      with self.assertRaisesWithPredicateMatch(ValueError, "using Apache Beam"):
         builder.download_and_prepare()
 
   def _assertBeamGeneration(self, dl_config, dataset_cls, dataset_name):

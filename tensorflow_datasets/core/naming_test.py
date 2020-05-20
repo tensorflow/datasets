@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests tensorflow_datasets.core.naming."""
 
 from __future__ import absolute_import
@@ -45,6 +46,8 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
   )
   def test_snake_to_camelcase(self, camel, snake):
     self.assertEqual(naming.snake_to_camelcase(snake), camel)
+    # camelcase_to_snakecase is a no-op if the name is already snake_case.
+    self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
   def test_sharded_filenames(self):
     prefix = "/tmp/foo"
@@ -63,6 +66,15 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
   def test_filename_prefix_for_split(self, prefix, expected):
     split = splits.Split.TRAIN
     self.assertEqual(expected, naming.filename_prefix_for_split(prefix, split))
+
+  def test_filenames_for_dataset_split(self):
+    self.assertEqual([
+        "foo-train-00000-of-00002",
+        "foo-train-00001-of-00002",
+    ], naming.filenames_for_dataset_split(
+        dataset_name="foo",
+        split=splits.Split.TRAIN,
+        num_shards=2))
 
   def test_filepaths_for_dataset_split(self):
     self.assertEqual([

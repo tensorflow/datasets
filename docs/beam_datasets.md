@@ -31,7 +31,7 @@ locally.
 the dataset config you want to generate or it will default to generate all
 existing configs. For example, for
 [wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia), use
-`--dataset=wikipedia/20190301.en` instead of `--dataset=wikipedia`.
+`--dataset=wikipedia/20200301.en` instead of `--dataset=wikipedia`.
 
 ### On Google Cloud Dataflow
 
@@ -43,7 +43,7 @@ of distributed computation, first follow the
 Once your environment is set up, you can run the `download_and_prepare` script
 using a data directory on [GCS](https://cloud.google.com/storage/) and
 specifying the
-[required options](http://cloud/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
+[required options](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
 for the `--beam_pipeline_options` flag.
 
 To make it easier to launch the script, it's helpful to define the following
@@ -51,7 +51,8 @@ variables using the actual values for your GCP/GCS setup and the dataset you
 want to generate:
 
 ```sh
-DATASET_NAME=<dataset>/<dataset-config>
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
 GCP_PROJECT=my-project-id
 GCS_BUCKET=gs://my-gcs-bucket
 ```
@@ -63,11 +64,18 @@ workers:
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
+If you're using `tfds-nightly`, make sure to to echo from `tfds-nightly` in case
+the dataset has been updated since the last release.
+
+```sh
+echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
+```
+
 Finally, you can launch the job using the command below:
 
 ```sh
 python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=$DATASET_NAME \
+  --datasets=$DATASET_NAME/$DATASET_CONFIG \
   --data_dir=$GCS_BUCKET/tensorflow_datasets \
   --beam_pipeline_options=\
 "runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\

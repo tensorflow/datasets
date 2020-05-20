@@ -23,10 +23,6 @@ sudo apt-get install -qq -y libsm6
 
 install_tf "$TF_VERSION"
 
-# Beam requires Python header files for Python3 during YAML compilation
-# This shouldn't be needed for Python2
-sudo apt-get install -qq -y libpython${PY_VERSION}-dev
-
 # Make sure we have the latest version of numpy - avoid problems we were
 # seeing with Python 3
 pip install -q -U numpy
@@ -34,8 +30,17 @@ pip install -q -U numpy
 # First ensure that the base dependencies are sufficient for a full import and
 # data load
 pip install -e .
+
 python -c "import tensorflow_datasets as tfds"
-python -c "import tensorflow_datasets as tfds; tfds.load('mnist:3.*.*', split='train')"
+python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')"
 
 # Then install the test dependencies
 pip install -e .[tests]
+
+if [[ "$TF_VERSION" == "tf-nightly" ]]
+then
+  # `tensorflow` is automatically installed with `tensorflow-data-validation`
+  # so uninstall `tensorflow` to avoid conflicts with `tf-nightly`
+  pip uninstall -y tensorflow
+  pip install tf-nightly --upgrade --force-reinstall
+fi

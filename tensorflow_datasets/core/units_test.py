@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.units."""
 
 from __future__ import absolute_import
@@ -25,7 +26,7 @@ from tensorflow_datasets.core import units
 class UnitsTest(testing.TestCase):
 
   def test_none(self):
-    self.assertEqual("?? GiB", units.size_str(None))
+    self.assertEqual("Unknown size", units.size_str(None))
 
   def test_normal_sizes(self):
     self.assertEqual("1.50 PiB", units.size_str(1.5 * units.PiB))

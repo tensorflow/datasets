@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""MS Coco Dataset.
-"""
+# Lint as: python3
+"""MS Coco Dataset."""
 
 from __future__ import absolute_import
 from __future__ import division

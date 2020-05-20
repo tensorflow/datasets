@@ -13,7 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Celeba-HQ dataset."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import os
 
 import tensorflow.compat.v2 as tf
@@ -60,14 +66,11 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
     """
     v2 = tfds.core.Version(
         "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-    v01 = tfds.core.Version(
-        "0.1.0", experiments={tfds.core.Experiment.S3: False})
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
         version=v2,
-        supported_versions=[v01],
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -130,7 +133,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
         )
     ]

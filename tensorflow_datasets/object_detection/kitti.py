@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Kitti dataset."""
 
 from __future__ import absolute_import
@@ -72,10 +73,9 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.1.0")
+  VERSION = tfds.core.Version("3.2.0", "Devkit updated.")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("3.1.0"),
   ]
 
   def _info(self):
@@ -104,9 +104,9 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     filenames = {
-        "images": os.path.join(_DATA_URL, _IMAGES_FNAME),
-        "annotations": os.path.join(_DATA_URL, _LABELS_FNAME),
-        "devkit": os.path.join(_DATA_URL, _DEVKIT_FNAME),
+        "images": _DATA_URL + "/" + _IMAGES_FNAME,
+        "annotations": _DATA_URL + "/" + _LABELS_FNAME,
+        "devkit": _DATA_URL + "/" + _DEVKIT_FNAME,
     }
     files = dl_manager.download(filenames)
     train_images, validation_images, test_images = _build_splits(
@@ -159,7 +159,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       prefix, ext = os.path.splitext(fpath)
       if ext != ".txt":
         continue
-      if prefix.split("/")[0] != subdir:
+      if prefix.split(os.path.sep)[0] != subdir:
         continue
 
       # Key is the datapoint id. E.g. training/label_2/label_000016 -> 16.
@@ -169,7 +169,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       prefix, ext = os.path.splitext(fpath)
       if ext != ".png":
         continue
-      if prefix.split("/")[0] != subdir:
+      if prefix.split(os.path.sep)[0] != subdir:
         continue
       image_id = int(prefix[-6:])
       if image_id not in image_ids:
@@ -257,13 +257,13 @@ def _build_splits(devkit):
   mapping_line_ids = None
   mapping_lines = None
   for fpath, fobj in devkit:
-    if fpath == "mapping/train_rand.txt":
+    if fpath == os.path.join("mapping", "train_rand.txt"):
       # Converts 1-based line index to 0-based line index.
       mapping_line_ids = [
           int(x.strip()) - 1 for x in fobj.read().decode("utf-8").split(",")
       ]
-    if fpath == "mapping/train_mapping.txt":
-      mapping_lines = fobj.readlines()
+    elif fpath == os.path.join("mapping", "train_mapping.txt"):
+      mapping_lines = fobj.read().splitlines()
       mapping_lines = [x.decode("utf-8") for x in mapping_lines]
 
   assert mapping_line_ids

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for multinli dataset module."""
 
 from __future__ import absolute_import
@@ -31,10 +32,6 @@ class MultiNLITest(testing.DatasetBuilderTestCase):
       "validation_matched": 2,
       "validation_mismatched": 1,
   }
-
-
-class MultiNLIS3Test(MultiNLITest):
-  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Access registered datasets."""
 
 from __future__ import absolute_import
@@ -20,8 +21,11 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import contextlib
 import inspect
+import posixpath
 import re
+from typing import Any, Callable, Iterable, Iterator, List, Optional, Type
 
 from absl import flags
 from absl import logging
@@ -32,6 +36,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import version
 
 
 FLAGS = flags.FLAGS
@@ -42,6 +47,13 @@ __all__ = [
     "builder",
     "load",
 ]
+
+
+# Cannot use real typing due to circular dependencies. Could this be fixed ?
+DatasetBuilder = Any
+
+PredicateFn = Callable[[Type[DatasetBuilder]], bool]
+
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
@@ -78,11 +90,45 @@ The builder name string must be of the following format:
 
 _DATASET_NOT_FOUND_ERR = """\
 Check that:
+    - if dataset was added recently, it may only be available
+      in `tfds-nightly`
     - the dataset name is spelled correctly
     - dataset class defines all base class abstract methods
     - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
 """
+
+
+# Regex matching 'dataset/config:1.*.*/arg=123'
+_NAME_REG = re.compile(
+    r"^"
+    r"(?P<dataset_name>\w+)"
+    r"(/(?P<config>[\w\-\.]+))?"
+    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
+    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
+    r"$")
+
+
+# Regex matching 'dataset/config/1.3.0'
+_FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
+    ds_name=r"\w+",
+    config_name=r"[\w\-\.]+",
+    version=r"[0-9]+\.[0-9]+\.[0-9]+",
+))
+
+
+_skip_registration = False
+
+
+@contextlib.contextmanager
+def skip_registration():
+  """Context manager within which dataset builders are not registered."""
+  global _skip_registration
+  try:
+    _skip_registration = True
+    yield
+  finally:
+    _skip_registration = False
 
 
 class DatasetNotFoundError(ValueError):
@@ -106,11 +152,11 @@ class DatasetNotFoundError(ValueError):
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
 
-  def __new__(mcs, cls_name, bases, class_dict):
+  def __new__(cls, cls_name, bases, class_dict):
     name = naming.camelcase_to_snakecase(cls_name)
     class_dict["name"] = name
-    cls = super(RegisteredDataset, mcs).__new__(
-        mcs, cls_name, bases, class_dict)
+    builder_cls = super(RegisteredDataset, cls).__new__(  # pylint: disable=too-many-function-args,redefined-outer-name
+        cls, cls_name, bases, class_dict)
 
     if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
       pass
@@ -123,13 +169,15 @@ class RegisteredDataset(abc.ABCMeta):
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
-    if inspect.isabstract(cls):
-      _ABSTRACT_DATASET_REGISTRY[name] = cls
+    if _skip_registration:
+      pass  # Skip dataset registration within the contextmanager
+    elif inspect.isabstract(builder_cls):
+      _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
     elif class_dict.get("IN_DEVELOPMENT"):
-      _IN_DEVELOPMENT_REGISTRY[name] = cls
+      _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
     else:
-      _DATASET_REGISTRY[name] = cls
-    return cls
+      _DATASET_REGISTRY[name] = builder_cls
+    return builder_cls
 
 
 def list_builders():
@@ -137,18 +185,47 @@ def list_builders():
   return sorted(list(_DATASET_REGISTRY))
 
 
+def builder_cls(name: str):
+  """Fetches a `tfds.core.DatasetBuilder` class by string name.
+
+  Args:
+    name: `str`, the registered name of the `DatasetBuilder` (the class name
+      as camel or snake case: `MyDataset` or `my_dataset`).
+
+  Returns:
+    A `tfds.core.DatasetBuilder` class.
+
+  Raises:
+    DatasetNotFoundError: if `name` is unrecognized.
+  """
+  name, kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  if kwargs:
+    raise ValueError(
+        "`builder_cls` only accept the `dataset_name` without config, "
+        "version or arguments. Got: name='{}', kwargs={}".format(name, kwargs))
+
+  if name in _ABSTRACT_DATASET_REGISTRY:
+    raise DatasetNotFoundError(name, is_abstract=True)
+  if name in _IN_DEVELOPMENT_REGISTRY:
+    raise DatasetNotFoundError(name, in_development=True)
+  if name not in _DATASET_REGISTRY:
+    raise DatasetNotFoundError(name)
+  return _DATASET_REGISTRY[name]
+
+
 def builder(name, **builder_init_kwargs):
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
-    name: `str`, the registered name of the `DatasetBuilder` (the snake case
-      version of the class name). This can be either `"dataset_name"` or
-      `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+    name: `str`, the registered name of the `DatasetBuilder` (the class name
+      as camel or snake case: `MyDataset` or `my_dataset`).
+      This can be either `'dataset_name'` or
+      `'dataset_name/config_name'` for datasets with `BuilderConfig`s.
       As a convenience, this string may contain comma-separated keyword
-      arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+      arguments for the builder. For example `'foo_bar/a=True,b=3'` would use
       the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
-      (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
-      use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+      (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'` to
+      use the `'zoo'` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
     **builder_init_kwargs: `dict` of keyword arguments passed to the
       `DatasetBuilder`. These will override keyword arguments passed in `name`,
@@ -162,17 +239,9 @@ def builder(name, **builder_init_kwargs):
   """
   name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   builder_kwargs.update(builder_init_kwargs)
-  if name in _ABSTRACT_DATASET_REGISTRY:
-    raise DatasetNotFoundError(name, is_abstract=True)
-  if name in _IN_DEVELOPMENT_REGISTRY:
-    raise DatasetNotFoundError(name, in_development=True)
-  if name not in _DATASET_REGISTRY:
-    raise DatasetNotFoundError(name)
-  try:
-    return _DATASET_REGISTRY[name](**builder_kwargs)
-  except BaseException:
-    logging.error("Failed to construct dataset %s", name)
-    raise
+  with py_utils.try_reraise(
+      prefix="Failed to construct dataset {}".format(name)):
+    return builder_cls(name)(**builder_kwargs)
 
 
 @api_utils.disallow_positional_args(allowed=["name"])
@@ -180,7 +249,6 @@ def load(name,
          split=None,
          data_dir=None,
          batch_size=None,
-         in_memory=None,
          shuffle_files=False,
          download=True,
          as_supervised=False,
@@ -231,18 +299,15 @@ def load(name,
       (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
       use the `"zoo"` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
-    split: `tfds.Split` or `str`, which split of the data to load. If None,
-      will return a `dict` with all splits (typically `tfds.Split.TRAIN` and
-      `tfds.Split.TEST`).
+    split: Which split of the data to load (e.g. `'train'`, `'test'`
+      `['train', 'test']`, `'train[80%:]'`,...). See our
+      [split API guide](https://www.tensorflow.org/datasets/splits).
+      If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
-    in_memory: `bool`, if `True`, loads the dataset in memory which
-      increases iteration speeds. Note that if `True` and the dataset has
-      unknown dimensions, the features will be padded to the maximum
-      size across the dataset.
     shuffle_files: `bool`, whether to shuffle the input files.
       Defaults to `False`.
     download: `bool` (optional), whether to call
@@ -295,7 +360,7 @@ def load(name,
 
   # Set data_dir
   if try_gcs and gcs_utils.is_dataset_on_gcs(name):
-    data_dir = constants.GCS_DATA_DIR
+    data_dir = gcs_utils.gcs_path("datasets")
   elif data_dir is None:
     data_dir = constants.DATA_DIR
 
@@ -311,7 +376,6 @@ def load(name,
   as_dataset_kwargs.setdefault("as_supervised", as_supervised)
   as_dataset_kwargs.setdefault("batch_size", batch_size)
   as_dataset_kwargs.setdefault("decoders", decoders)
-  as_dataset_kwargs.setdefault("in_memory", in_memory)
   as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
   as_dataset_kwargs.setdefault("read_config", read_config)
 
@@ -321,23 +385,14 @@ def load(name,
   return ds
 
 
-_VERSION_RE = r""
-
-_NAME_REG = re.compile(
-    r"^"
-    r"(?P<dataset_name>\w+)"
-    r"(/(?P<config>[\w\-\.]+))?"
-    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
-    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
-    r"$")
-
-
 def _dataset_name_and_kwargs_from_name_str(name_str):
   """Extract kwargs from name str."""
   res = _NAME_REG.match(name_str)
   if not res:
     raise ValueError(_NAME_STR_ERR.format(name_str))
   name = res.group("dataset_name")
+  # Normalize the name to accept CamelCase
+  name = naming.camelcase_to_snakecase(name)
   kwargs = _kwargs_str_to_kwargs(res.group("kwargs"))
   try:
     for attr in ["config", "version"]:
@@ -376,3 +431,102 @@ def _cast_to_pod(val):
       return float(val)
     except ValueError:
       return tf.compat.as_text(val)
+
+
+def _get_all_versions(
+    current_version: version.Version,
+    extra_versions: Iterable[version.Version],
+    current_version_only: bool,
+) -> Iterable[str]:
+  """Returns the list of all current versions."""
+  # Merge current version with all extra versions
+  version_list = [current_version]
+  if current_version_only:
+    version_list.extend(extra_versions)
+  # Filter datasets which do not have a version (version is `None`) as they
+  # should not be instantiated directly (e.g wmt_translate)
+  return {str(v) for v in version_list if v}
+
+
+def _iter_single_full_names(
+    builder_name: str,
+    builder_cls: Type[DatasetBuilder],  # pylint: disable=redefined-outer-name
+    current_version_only: bool,
+) -> Iterator[str]:
+  """Iterate over a single builder full names."""
+  if builder_cls.BUILDER_CONFIGS:
+    for config in builder_cls.BUILDER_CONFIGS:
+      for v in _get_all_versions(
+          config.version,
+          config.supported_versions,
+          current_version_only=current_version_only,
+      ):
+        yield posixpath.join(builder_name, config.name, v)
+  else:
+    for v in _get_all_versions(
+        builder_cls.VERSION,
+        builder_cls.SUPPORTED_VERSIONS,
+        current_version_only=current_version_only
+    ):
+      yield posixpath.join(builder_name, v)
+
+
+def _iter_full_names(
+    predicate_fn: Optional[PredicateFn],
+    current_version_only: bool,
+) -> Iterator[str]:
+  """Yield all registered datasets full_names (see `list_full_names`)."""
+  for builder_name, builder_cls in _DATASET_REGISTRY.items():  # pylint: disable=redefined-outer-name
+    # Only keep requested datasets
+    if predicate_fn is not None and not predicate_fn(builder_cls):
+      continue
+    for full_name in _iter_single_full_names(
+        builder_name,
+        builder_cls,
+        current_version_only=current_version_only,
+    ):
+      yield full_name
+
+
+def list_full_names(
+    predicate_fn: Optional[PredicateFn] = None,
+    current_version_only: bool = False,
+) -> List[str]:
+  """Lists all registered datasets full_names.
+
+  Args:
+    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
+      returns the dataset names which satisfy the predicate.
+    current_version_only: If True, only returns the current version.
+
+  Returns:
+    The list of all registered dataset full names.
+  """
+  return sorted(_iter_full_names(
+      predicate_fn=predicate_fn,
+      current_version_only=current_version_only,
+  ))
+
+
+def single_full_names(
+    builder_name: str,
+    current_version_only: bool = True,
+) -> List[str]:
+  """Returns the list `['ds/c0/v0',...]` or `['ds/v']` for a single builder."""
+  return sorted(_iter_single_full_names(
+      builder_name,
+      _DATASET_REGISTRY[builder_name],
+      current_version_only=current_version_only,
+  ))
+
+
+def is_full_name(full_name: str) -> bool:
+  """Returns whether the string pattern match `ds/config/1.2.3` or `ds/1.2.3`.
+
+  Args:
+    full_name: String to check.
+
+  Returns:
+    `bool`.
+  """
+  return bool(_FULL_NAME_REG.match(full_name))

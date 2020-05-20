@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Stable hashing function using md5.
 
 Note that the properties we are looking at here are:
@@ -58,6 +59,10 @@ import tensorflow.compat.v2 as tf
 def _to_bytes(data):
   if not isinstance(data, (six.string_types, bytes)):
     data = str(data)
+  elif isinstance(data, str):
+    # For windows compatibility, we normalize the key in case a
+    # filepath is passed as key ('path\\to\\file' -> 'path/to/file')
+    data = data.replace('\\', '/')
   return tf.compat.as_bytes(data)
 
 

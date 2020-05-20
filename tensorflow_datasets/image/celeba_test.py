@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.image.celeba."""
 
 from __future__ import absolute_import
@@ -32,7 +33,7 @@ class CelebATest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = {
-      "img_align_celeba": "",  # Code looks into 'img_align_celeba' subdir.
+      "img_align_celeba": "img_align_celeba.zip",
       "list_eval_partition": "list_eval_partition.txt",
       "list_attr_celeba": "list_attr_celeba.txt",
       "landmarks_celeba": "list_landmarks_align_celeba.txt",

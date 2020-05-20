@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 # -*- coding: utf-8 -*-
 """Tests for WMT translate dataset module."""
 
@@ -78,6 +79,10 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
       "train": 2,
       "validation": 4,
   }
+
+  # Wmt itself do not define checksums. Checksums are contained in individual
+  # `wmt16.txt`, `wmt17.txt`,... files.
+  SKIP_CHECKSUMS = True
 
   def test_gzip_reading(self):
     results = [

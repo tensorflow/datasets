@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 # coding=utf-8
 """TextEncoders convert between text and integers."""
 
@@ -32,7 +33,7 @@ from tensorflow_datasets.core.utils import py_utils
 
 
 def _re_compile(pattern):
-  return re.compile(pattern, flags=re.UNICODE)
+  return re.compile(pattern, flags=re.UNICODE)  # pytype: disable=wrong-keyword-args
 
 
 NUM_BYTES = 2**8
@@ -444,7 +445,7 @@ def pad_decr(ids):
   while not ids[idx]:
     idx -= 1
   if idx == -1:
-    ids = ids
+    ids = ids  # pylint: disable=self-assigning-variable
   else:
     ids = ids[:idx + 1]
   return [i - 1 for i in ids]

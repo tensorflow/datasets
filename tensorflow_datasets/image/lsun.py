@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """LSUN dataset.
 
 Large scene understanding dataset.
@@ -78,9 +79,6 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "3.0.0",
               "New split API (https://tensorflow.org/datasets/splits)"),
-          supported_versions=[
-              tfds.core.Version("0.1.1", {tfds.core.Experiment.S3: False}),
-          ],
       ) for category in _CATEGORIES
   ]
 
@@ -104,14 +102,12 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=40,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["train"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "train")
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["val"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "val")

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Translation feature that supports multiple languages."""
 
 from __future__ import absolute_import
@@ -25,7 +26,7 @@ from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
 try:
   # This fallback applies for all versions of Python before 3.3
-  import collections.abc as collections_abc  # pylint:disable=g-import-not-at-top
+  import collections.abc as collections_abc  # pylint:disable=g-import-not-at-top  # pytype: disable=module-attr
 except ImportError:
   import collections as collections_abc  # pylint:disable=g-import-not-at-top
 

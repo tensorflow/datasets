@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Utilities for file names."""
 
 from __future__ import absolute_import
@@ -67,11 +68,21 @@ def filepattern_for_dataset_split(dataset_name, split, data_dir,
   return "%s*" % filepath
 
 
-def filepaths_for_dataset_split(dataset_name, split, num_shards, data_dir,
-                                filetype_suffix=None):
+def filenames_for_dataset_split(
+    dataset_name, split, num_shards, filetype_suffix=None):
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += ".%s" % filetype_suffix
-  filenames = sharded_filenames(prefix, num_shards)
+  return sharded_filenames(prefix, num_shards)
+
+
+def filepaths_for_dataset_split(dataset_name, split, num_shards, data_dir,
+                                filetype_suffix=None):
+  filenames = filenames_for_dataset_split(
+      dataset_name=dataset_name,
+      split=split,
+      num_shards=num_shards,
+      filetype_suffix=filetype_suffix,
+  )
   filepaths = [os.path.join(data_dir, fname) for fname in filenames]
   return filepaths

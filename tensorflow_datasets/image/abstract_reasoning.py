@@ -13,11 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """AbstractReasoning data set."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
 import os
 import random
 import numpy as np
@@ -140,14 +142,10 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
         "attrs.pairs", "attrs.shape.color", "attrs.line.type",].
       **kwargs: keyword arguments forwarded to super.
     """
-    v002 = tfds.core.Version(
-        "0.0.2", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="845e4d0e1dfa73060ab2f6cfdf7ba342434e4def")
     v100 = tfds.core.Version(
         "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(AbstractReasoningConfig, self).__init__(
         version=v100,
-        supported_versions=[v002],
         **kwargs)
     self.split_type = split_type
 
@@ -251,7 +249,6 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
 
     split_type = self.builder_config.split_type
     filename = os.path.join(folder, "{}.tar.gz".format(split_type))
-
 
     def _extract_data(inputs):
       """Extracts files from the tar archives."""

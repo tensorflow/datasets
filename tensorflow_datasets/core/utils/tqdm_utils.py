@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Wrapper around tqdm.
 """
 
@@ -21,6 +22,7 @@ from __future__ import division
 from __future__ import print_function
 
 import contextlib
+import os
 
 from tqdm import auto as tqdm_lib
 
@@ -47,6 +49,11 @@ class EmptyTqdm(object):
     return
 
 _active = True
+# Disable progression bar when TFDS is executed inside TF kokoro documentation
+# infrastructure. Otherwise it creates visual artifacts in the notebook output
+# of the documentation pages.
+if 'TF_DOCS_INFRA_KOKORO' in os.environ:
+  _active = False
 
 
 def tqdm(*args, **kwargs):

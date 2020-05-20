@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Classes to specify download or extraction information."""
 
 from __future__ import absolute_import
@@ -21,19 +22,23 @@ from __future__ import print_function
 
 import base64
 import codecs
+import enum
 import hashlib
 import itertools
 import json
 import os
 import re
+from typing import Any
 
-import enum
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core.download import util
+from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.utils import py_utils
+
+# Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
+Json = Any
 
 
 _hex_codec = codecs.getdecoder('hex_codec')
@@ -184,7 +189,7 @@ def get_dl_fname(url, checksum):
   Returns:
     string of 90 chars max.
   """
-  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
+  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))  # pytype: disable=wrong-arg-types
   checksum = tf.compat.as_text(checksum)[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return '%s%s%s' % (name, checksum, extension)
@@ -201,7 +206,7 @@ def _get_info_path(path):
   return '%s.INFO' % path
 
 
-def _read_info(info_path):
+def _read_info(info_path) -> Json:
   """Returns info dict or None."""
   if not tf.io.gfile.exists(info_path):
     return None
@@ -210,8 +215,31 @@ def _read_info(info_path):
 
 
 # TODO(pierrot): one lock per info path instead of locking everything.
-@util.build_synchronize_decorator()
-def write_info_file(resource, path, dataset_name, original_fname):
+synchronize_decorator = py_utils.build_synchronize_decorator()
+
+
+def rename_info_file(
+    src_path: str,
+    dst_path: str,
+    overwrite: bool = False,
+) -> None:
+  tf.io.gfile.rename(
+      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite)
+
+
+@synchronize_decorator
+def read_info_file(info_path: str) -> Json:
+  return _read_info(_get_info_path(info_path))
+
+
+@synchronize_decorator
+def write_info_file(
+    resource: 'Resource',
+    path: str,
+    dataset_name: str,
+    original_fname: str,
+    url_info: checksums_lib.UrlInfo,
+) -> None:
   """Write the INFO file next to local file.
 
   Although the method is synchronized, there is still a risk two processes
@@ -223,19 +251,30 @@ def write_info_file(resource, path, dataset_name, original_fname):
     path: path of downloaded file.
     dataset_name: data used to dl the file.
     original_fname: name of file as downloaded.
+    url_info: checksums/size info of the url
   """
+  url_info_dict = url_info.asdict()
   info_path = _get_info_path(path)
   info = _read_info(info_path) or {}
   urls = set(info.get('urls', []) + [resource.url])
   dataset_names = info.get('dataset_names', [])
   if dataset_name:
     dataset_names.append(dataset_name)
-  if 'original_fname' in info and info['original_fname'] != original_fname:
-    raise AssertionError(
-        '`original_fname` "%s" stored in %s does NOT match "%s".' % (
+  if info.get('original_fname', original_fname) != original_fname:
+    raise ValueError(
+        '`original_fname` "{}" stored in {} does NOT match "{}".'.format(
             info['original_fname'], info_path, original_fname))
-  info = dict(urls=list(urls), dataset_names=list(set(dataset_names)),
-              original_fname=original_fname)
+  if info.get('url_info', url_info_dict) != url_info_dict:
+    raise ValueError(
+        'File info {} contains a different checksum that the downloaded one: '
+        'Stored: {}; Expected: {}'.format(
+            info_path, info['url_info'], url_info_dict))
+  info = dict(
+      urls=list(urls),
+      dataset_names=list(set(dataset_names)),
+      original_fname=original_fname,
+      url_info=url_info_dict,
+  )
   with py_utils.atomic_write(info_path, 'w') as info_f:
     json.dump(info, info_f, sort_keys=True)
 

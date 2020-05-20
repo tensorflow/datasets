@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """CNN/DailyMail Summarization dataset, non-anonymized version."""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -78,7 +80,6 @@ _DL_URLS = {
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version('0.0.2', experiments={tfds.core.Experiment.S3: False}),
     # Same data as 0.0.2
     tfds.core.Version('1.0.0',
                       'New split API (https://tensorflow.org/datasets/splits)'),
@@ -291,17 +292,14 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={'files': train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
             gen_kwargs={
                 'files': _subset_filenames(dl_paths, tfds.Split.VALIDATION)
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)})
     ]
 

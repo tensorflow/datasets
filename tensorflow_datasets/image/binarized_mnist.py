@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """BinarizedMNIST."""
 
 from __future__ import absolute_import
@@ -22,7 +23,7 @@ from __future__ import print_function
 import numpy as np
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.image import mnist
+from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -78,19 +79,16 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs=dict(
                 data_path=files["train_data"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=dict(
                 data_path=files["validation_data"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict(
                 data_path=files["test_data"],
             )),

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """TED talk high/low-resource paired language data set from Qi, et al. 2018."""
 
 from __future__ import absolute_import
@@ -107,10 +108,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "1.0.0",
               "New split API (https://tensorflow.org/datasets/splits)"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          ]) for pair in _VALID_LANGUAGE_PAIRS
+      ) for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):
@@ -133,7 +131,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.train".format(
@@ -143,7 +140,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.dev".format(
@@ -153,7 +149,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.test".format(

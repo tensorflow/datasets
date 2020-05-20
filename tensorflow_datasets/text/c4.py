@@ -31,7 +31,10 @@ from tensorflow_datasets.text import c4_utils
 _DESCRIPTION = """\
 A colossal, cleaned version of Common Crawl's web crawl corpus.
 
-Based on Common Crawl dataset: "https://commoncrawl.org"
+Based on Common Crawl dataset: https://commoncrawl.org
+
+To generate this dataset, please follow
+[the instructions from t5](https://github.com/google-research/text-to-text-transfer-transformer#c4).
 
 Due to the overhead of cleaning the dataset, it is recommend you prepare it with
 a distributed service like Cloud Dataflow. More info at
@@ -47,18 +50,11 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version("2.2.0")
+_VERSION = tfds.core.Version("2.3.0", "Deduplicate lines within a page.")
 
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version(
-        "1.1.0", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="42f5bf89efcfd2cd165c2511b22be49cb1a50856"),
-    tfds.core.Version(
-        "1.0.1", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
-    tfds.core.Version(
-        "1.0.0", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
+    tfds.core.Version("2.2.1", "Update dataset_info.json"),
+    tfds.core.Version("2.2.0"),
 ]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
@@ -90,7 +86,8 @@ class C4Config(tfds.core.BuilderConfig):
     """BuilderConfig for C4.
 
     Args:
-      language: string, the language code.
+      language: string, the language code, or "all" to disable language
+        filtering.
       cc_versions: tuple(string), a collection of versions of Common Crawl to
         use as the raw source text. Set to None to use defaults.
       clean: bool, whether to clean the dataset for badwords, duplications, etc.
@@ -183,7 +180,7 @@ class C4(tfds.core.BeamBasedBuilder):
     manual_cc_versions = cc_versions - set(_DEFAULT_CC_VERSIONS)
 
     files_to_download = {}
-    files_to_download["wet_urls"] = [
+    files_to_download["wet_path_urls"] = [
         _WET_PATH_URL.format(cc_version=cc_version)
         for cc_version in auto_cc_versions]
     if self.builder_config.clean:
@@ -204,10 +201,16 @@ class C4(tfds.core.BeamBasedBuilder):
       file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)
 
     wet_urls = []
-    for wet_urls_path in file_paths["wet_urls"]:
-      with tf.io.gfile.GFile(wet_urls_path) as f:
+    for wet_path_url in file_paths["wet_path_urls"]:
+      with tf.io.gfile.GFile(wet_path_url) as f:
         wet_urls.extend(["%s/%s" % (_DOWNLOAD_HOST, l.strip()) for l in f])
-    file_paths.update(dl_manager.download({"wet_files": wet_urls}))
+    if dl_manager.register_checksums:
+      # Download locally to register checksums.
+      file_paths.update(dl_manager.download({"wet_files": wet_urls}))
+    else:
+      # Download on the beam workers.
+      file_paths["wet_urls"] = wet_urls
+      file_paths["wet_files"] = []
 
     for cc_version in manual_cc_versions:
       cc_dir = os.path.join(dl_manager.manual_dir, cc_version)
@@ -222,7 +225,8 @@ class C4(tfds.core.BeamBasedBuilder):
           len(wet_files), cc_version)
       file_paths["wet_files"].extend(wet_files)
 
-    page_content_pcollection = self._get_page_content(pipeline, file_paths)
+    page_content_pcollection = self._get_page_content(
+        pipeline, file_paths, dl_manager)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -242,15 +246,26 @@ class C4(tfds.core.BeamBasedBuilder):
         ),
     ]
 
-  def _get_page_content(self, pipeline, file_paths):
+  def _get_page_content(self, pipeline, file_paths, dl_manager):
     """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
+
+    wet_file_paths = (
+        pipeline |
+        "create_wet_files" >> beam.Create(file_paths["wet_files"]))
+    if "wet_urls" in file_paths:
+      def download_url(url, downloader):
+        return downloader.download({url: url})[url]
+      dl_wet_file_paths = (
+          pipeline
+          | "create_wet_urls" >> beam.Create(file_paths["wet_urls"])
+          | beam.Map(download_url, downloader=dl_manager))
+      wet_file_paths = (wet_file_paths, dl_wet_file_paths) | beam.Flatten()
 
     # Parse WET files and filter by length.
     # Output: url, text
     page_content = (
-        pipeline
-        | beam.Create(file_paths["wet_files"])
+        wet_file_paths
         | beam.FlatMap(c4_utils.split_wet_file)
         | beam.Filter(c4_utils.is_valid_length))
 
@@ -301,10 +316,11 @@ class C4(tfds.core.BeamBasedBuilder):
           | "clean_pages" >> beam.FlatMap(c4_utils.get_clean_page_fn(badwords)))
       page_content = c4_utils.remove_duplicate_text(page_content)
 
-    # Filter out non-English pages. We do this after cleaning since it may
-    # change the predominate language.
-    page_content |= beam.Filter(
-        c4_utils.is_language, language=self.builder_config.lang)
+    # Optionally filter out non-`language` pages. We do this after cleaning
+    # since it may change the predominate language.
+    if self.builder_config.lang != "all":
+      page_content |= beam.Filter(
+          c4_utils.is_language, language=self.builder_config.lang)
 
     return page_content
 

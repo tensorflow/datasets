@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """GCS utils test."""
 
 from __future__ import absolute_import
@@ -33,7 +34,8 @@ class GcsUtilsTest(testing.TestCase):
 
   def test_mnist(self):
     with self.gcs_access():
-      mnist = tfds.image.MNIST(data_dir="gs://tfds-data/datasets")
+      mnist = tfds.image_classification.MNIST(
+          data_dir="gs://tfds-data/datasets")
       example = next(tfds.as_numpy(mnist.as_dataset(split="train").take(1)))
     _ = example["image"], example["label"]
 

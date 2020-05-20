@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for py_utils."""
 
 from __future__ import absolute_import
@@ -183,7 +184,8 @@ class PyUtilsTest(testing.TestCase):
 
   def test_tfds_dir(self):
     """Test the proper suffix only, since the prefix can vary."""
-    self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
+    self.assertEqual(
+        os.path.basename(py_utils.tfds_dir()), 'tensorflow_datasets')
 
 
 class ReadChecksumDigestTest(testing.TestCase):

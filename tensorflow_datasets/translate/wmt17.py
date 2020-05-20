@@ -13,7 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """WMT17: Translate dataset."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
@@ -48,10 +53,6 @@ class Wmt17Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.3", experiments={tfds.core.Experiment.S3: False}),
-          ],
       ) for l1, l2 in _LANGUAGE_PAIRS
   ]
 

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for c4 dataset module."""
 
 from __future__ import absolute_import
@@ -27,15 +28,18 @@ from tensorflow_datasets.text import c4
 
 class C4Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = c4.C4
-  VERSION = "experimental_latest"
   # 10k shards take make the test too slow.
   c4._DEFAULT_NUM_SHARDS = 1
   # GzipFile + GFile and TextIOWrapper are broken for py2.
   BUILDER_CONFIG_NAMES_TO_TEST = ["en"] if six.PY3 else []
 
   DL_EXTRACT_RESULT = {
-      "wet_urls": ["wet_urls.txt"],
+      "wet_path_urls": ["wet_urls.txt"],
       "wet_files": ["cc_0.warc.wet.gz", "cc_1.warc.wet.gz"],
+      "https://commoncrawl.s3.amazonaws.com/cc_0.warc.wet.gz":
+          "cc_0.warc.wet.gz",
+      "https://commoncrawl.s3.amazonaws.com/cc_1.warc.wet.gz":
+          "cc_1.warc.wet.gz",
       "badwords": "badwords.txt",
   }
   SPLITS = {
