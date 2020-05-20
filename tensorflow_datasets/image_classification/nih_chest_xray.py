@@ -85,14 +85,14 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
     }
 
     # download all resources
-    archive_paths = dl_manager.download(links)
+    paths = dl_manager.download_and_extract(links)
     # get ann_file
-    ann_path = archive_paths['data_entry_2017']
-    train_val_list_path = archive_paths['train_val_list']
-    test_list_path = archive_paths['test_list']
-    del archive_paths['data_entry_2017']
-    del archive_paths['train_val_list']
-    del archive_paths['test_list']
+    ann_path = paths['data_entry_2017']
+    train_val_list_path = paths['train_val_list']
+    test_list_path = paths['test_list']
+    del paths['data_entry_2017']
+    del paths['train_val_list']
+    del paths['test_list']
 
     # create two helper instances:
     # `archiveUtils` to read images from archives
@@ -102,7 +102,7 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(test_list_path, 'r') as f:
       test_list = f.read().splitlines()
  
-    archiveUtils = ArchiveUtils(archive_paths)
+    archiveUtils = LookupUtils(paths)
     annParser = AnnParser(ann_path, train_val_list, test_list)
 
     return [
@@ -122,10 +122,10 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
       ),
     ]
 
-  def _generate_examples(self, archive, split):
+  def _generate_examples(self, lut, split):
     """Yields examples
     Args:
-      archive: `ArchiveUtils`, read image(s) from archives using filename(s)
+      lut: `LookupUtils`, utils to search image path using filename(s)
       split: `pandas.DataFrame`, each row contains an annotation of an image
     Yields:
       example key and data
@@ -137,7 +137,7 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
       # build example
       record = {
         "image/name": file_name,
-        "image": archive.extract_image(file_name),
+        "image": lut.lookup_table[file_name],
         "labels": labels.split('|'),
         "follow_up": follow_up,
         "patient_id": patient_id,
@@ -152,48 +152,29 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
       yield idx, record
 
 
-class ArchiveUtils():
-  """Helper class to read image(s) from archives
+class LookupUtils():
+  """Helper class to read image(s)
   Attributes:
-    path: `dict`, paths of archives
+    paths: `dict`, paths of files
     lookup_table: `dict`, hash table to lookup file path in archives
   """
-  def __init__(self, path):
+  def __init__(self, paths):
     """Inits ArchiveUtils with paths of archives"""
-    self.path = path
+    self.paths = paths
 
   @utils.memoized_property
   def lookup_table(self):
     return self._build_lut()
 
-  def extract_image(self, fileName):
-    """Returns a file object according to the fileName
-    Args:
-      fileName: `str`, a fileName from the annotation file
-    Returns:
-      a file object of the fileName
-    """
-    archive = self.lookup_table[fileName]
-    with tarfile.open(archive, 'r:gz') as tar:
-      fpath = os.path.join('images', fileName)
-      f = tar.extractfile(fpath)
-      fObj = io.BytesIO(f.read())
-    return fObj
-
   @utils.memoize()
   def _build_lut(self):
-    """Returns a hash table to lookup path of an archive using fileName.
+    """Returns a hash table to lookup full path of a file using fileName.
     """
     lut = {}
-    for k, v in self.path.items():  # k:v, <zipfile#>:<path of the zipfile>
-      archive = v
-      with tarfile.open(archive, 'r:gz') as tar:
-        for tarinfo in tar:  
-          # name has a format as "images/fileName"
-          name = tarinfo.name.split('/')
-          if len(name) == 2:
-            fileName = name[1]
-          lut[fileName] = v
+    for k, v in self.paths.items():  # k:v, <zipfile#>:<path of the extracted archive>
+      for _, _, filenames in tf.io.gfile.walk(v):
+        for fileName in filenames:
+          lut[fileName] = os.path.join(v, 'images', fileName)
     return lut
 
 
