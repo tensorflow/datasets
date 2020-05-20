@@ -276,6 +276,9 @@ toc:
     title: civil_comments
   - path: /datasets/catalog/cos_e
     title: cos_e
+  - path: /datasets/catalog/cosmos_qa
+    status: nightly
+    title: cosmos_qa
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/eraser_multi_rc
@@ -294,6 +297,9 @@ toc:
     title: lm1b
   - path: /datasets/catalog/math_dataset
     title: math_dataset
+  - path: /datasets/catalog/mctaco
+    status: nightly
+    title: mctaco
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
   - path: /datasets/catalog/multi_nli
@@ -324,6 +330,9 @@ toc:
     title: wiki40b
   - path: /datasets/catalog/wikipedia
     title: wikipedia
+  - path: /datasets/catalog/winogrande
+    status: nightly
+    title: winogrande
   - path: /datasets/catalog/xnli
     title: xnli
   - path: /datasets/catalog/yelp_polarity_reviews
