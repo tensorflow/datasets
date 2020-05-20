@@ -93,7 +93,7 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
     del paths['test_list']
 
     # create two helper instances:
-    # `archiveUtils` to read images from archives
+    # `lookupUtils` to lookup image full path by fileName
     # `annParser` to parse the annotation file `data_entry_2017.csv`
     with tf.io.gfile.GFile(train_val_list_path, 'r') as f:
       train_val_list = f.read().splitlines()
