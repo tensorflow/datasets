@@ -5,7 +5,7 @@ from __future__ import print_function
 import os
 from tensorflow_datasets import testing
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.image import affnist
+from tensorflow_datasets.image_classification import affnist
 
 class AffnistTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = affnist.Affnist

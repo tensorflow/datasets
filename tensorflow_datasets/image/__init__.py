@@ -17,7 +17,6 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
-from tensorflow_datasets.image.affnist import Affnist
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.arc import ARC
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
