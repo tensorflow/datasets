@@ -108,5 +108,5 @@ class ReadConfig(_ReadConfig):
       if _NEW in kwargs:
         raise ValueError('Cannot set both {} and {}'.format(_OLD, _NEW))
       logging.warning(_WARNING_MSG)
-      kwargs[_OLD] = kwargs.pop(_NEW)
+      kwargs[_NEW] = kwargs.pop(_OLD)
     super(ReadConfig, self).__init__(**kwargs)
