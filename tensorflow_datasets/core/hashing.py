@@ -50,13 +50,15 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import Union
+
 import hashlib
 
 import six
 import tensorflow.compat.v2 as tf
 
 
-def _to_bytes(data):
+def _to_bytes(data: str) -> bytes:
   if not isinstance(data, (six.string_types, bytes)):
     data = str(data)
   elif isinstance(data, str):
@@ -69,10 +71,10 @@ def _to_bytes(data):
 class Hasher(object):
   """Hasher: to initialize a md5 with salt."""
 
-  def __init__(self, salt):
-    self._md5 = hashlib.md5(_to_bytes(salt))
+  def __init__(self, salt: str) -> None:
+    self._md5: hashlib.md5 = hashlib.md5(_to_bytes(salt))
 
-  def hash_key(self, key):
+  def hash_key(self, key: Union[bytes, str]) -> int:
     """Returns 128 bits hash of given key.
 
     Args:
