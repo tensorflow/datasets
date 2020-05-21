@@ -1,4 +1,4 @@
-ttps://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/Data_Entry_2017_v2020.csv 9003499 dc1d2df67fdc1c5a7601d48699cda2b13dc2c4841488b4183dcf04884dbaca11
+https://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/Data_Entry_2017_v2020.csv 9003499 dc1d2df67fdc1c5a7601d48699cda2b13dc2c4841488b4183dcf04884dbaca11
 https://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/test_list.txt 435131 38ca5ef7f756092946f57c1a59faca882ed589a1ab1f72590b45dc06c6d5e1cc
 https://github.com/jason-zl190/host_of_open_access_files/raw/master/nih_chest_xray/train_val_list.txt 1470907 61fbe896321c1c1c8b75f3e4f3a08e4fef6486d95ef8a667c31d4d60dca6cb81
 https://nihcc.box.com/shared/static/0aowwzs5lhjrceb3qp67ahp0rd1l1etg.gz 3838903983 1ca953ec37fe9c132ec49743f9651b707884c6c76e6e3a33853940c13372a385
