@@ -22,6 +22,10 @@ function set_status() {
 
 PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 
+if [[ "$TF_VERSION" == "1.15.3" ]]
+then
+  EXTRA_IGNORE="--ignore=tensorflow_datasets/core/utils/gcs_utils_test.py"
+fi
 
 # Run Tests
 # Ignores:
@@ -36,7 +40,7 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 # * build_docs_test: See b/142892342
 pytest \
   -n auto \
-  --disable-warnings \
+  --disable-warnings $EXTRA_IGNORE \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
   --ignore="tensorflow_datasets/core/dataset_builder_notfdv_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
@@ -63,7 +67,7 @@ function test_notebook() {
 }
 
 # Skip notebook tests for TF 1.15 as the notebook assumes eager by default.
-if [[ "$TF_VERSION" != "1.15.0" ]]
+if [[ "$TF_VERSION" != "1.15.3" ]]
 then
   for notebook in $NOTEBOOKS
   do
