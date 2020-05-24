@@ -100,7 +100,7 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
       raise ValueError(
           'TFDS has been mocked, but metadata files were not found in {}. '
           'You should copy the real metadata files, so that the dataset '
-          'can be loaded properly, or set the data_dir kwarg of'
+          'can be loaded properly, or set the data_dir kwarg of '
           'tfds.testing.mock_tfds(data_dir=...).'
           ''.format(self._data_dir, n=self.name)  # pylint: disable=protected-access
       )
