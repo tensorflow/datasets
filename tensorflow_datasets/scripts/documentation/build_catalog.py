@@ -27,7 +27,7 @@ import dataclasses
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from tensorflow_datasets.scripts import document_datasets
+from tensorflow_datasets.scripts.documentation import document_datasets
 import yaml
 
 

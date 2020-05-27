@@ -22,8 +22,7 @@ import tempfile
 
 from absl.testing import absltest
 
-from tensorflow_datasets.scripts import build_api_docs
-from tensorflow_datasets.scripts import document_datasets
+from tensorflow_datasets.scripts.documentation import build_api_docs
 
 
 class BuildDocsTest(absltest.TestCase):
@@ -34,9 +33,6 @@ class BuildDocsTest(absltest.TestCase):
     if os.path.exists(self.workdir):
       shutil.rmtree(self.workdir)
     os.makedirs(self.workdir)
-
-    # Set a dummy dir for the visualizer.
-    document_datasets.VisualizationDocUtil.BASE_PATH = self.workdir
 
   def test_api_gen(self):
     build_api_docs.execute(
@@ -49,9 +45,6 @@ class BuildDocsTest(absltest.TestCase):
     with open(os.path.join(self.workdir, "tfds.md")) as f:
       content = f.read()
     self.assertIn("__init__.py", content)
-
-  def test_document_datasets(self):
-    document_datasets.dataset_docs_str(datasets=["mnist", "cifar10"])
 
 
 if __name__ == "__main__":

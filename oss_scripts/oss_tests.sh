@@ -46,7 +46,7 @@ pytest \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
-  --ignore="tensorflow_datasets/scripts/build_docs_test.py"
+  --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 set_status
 
 # Test notebooks in isolated environments

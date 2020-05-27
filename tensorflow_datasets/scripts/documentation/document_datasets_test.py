@@ -20,7 +20,7 @@
 import mock
 
 import tensorflow_datasets as tfds
-from tensorflow_datasets.scripts import document_datasets
+from tensorflow_datasets.scripts.documentation import document_datasets
 
 DummyMnist = tfds.testing.DummyMnist
 
@@ -95,6 +95,9 @@ class DocumentDatasetsTest(tfds.testing.TestCase):
   def setUp(self):
     super(DocumentDatasetsTest, self).setUp()
     self.builder = DummyMnist(data_dir=self._tfds_tmp_dir)
+
+  def test_document_datasets(self):
+    document_datasets.dataset_docs_str(datasets=['mnist', 'cifar10'])
 
   def test_schema_org(self):
     schema_str = document_datasets.document_single_builder(self.builder)

@@ -37,7 +37,7 @@ ${builder.info.description}
 
 <%def name="display_source(builder)">\
 *   **Source code**:
-    [`${py_utils.get_class_path(builder)}`](${py_utils.get_class_url(builder)})
+    [`${tfds.core.utils.get_class_path(builder)}`](${tfds.core.utils.get_class_url(builder)})
 </%def>
 
 <%def name="display_versions(builder)">\
@@ -124,7 +124,7 @@ def build_autocached_info(builder):
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
-    ${py_utils.dedent(builder.MANUAL_DOWNLOAD_INSTRUCTIONS)}
+    ${tfds.core.utils.dedent(builder.MANUAL_DOWNLOAD_INSTRUCTIONS)}
 % endif
 </%def>
 
