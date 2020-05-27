@@ -247,6 +247,9 @@ toc:
     title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/opinion_abstracts
+    status: nightly
+    title: opinion_abstracts
   - path: /datasets/catalog/opinosis
     title: opinosis
   - path: /datasets/catalog/reddit

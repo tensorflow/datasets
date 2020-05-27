@@ -161,6 +161,8 @@ for ex in tfds.as_numpy(ds):
 *   [`gigaword`](gigaword.md)
 *   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
+*   [`opinion_abstracts`](opinion_abstracts.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`opinosis`](opinosis.md)
 *   [`reddit`](reddit.md)
 *   [`reddit_tifu`](reddit_tifu.md)
