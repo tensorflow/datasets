@@ -28,15 +28,17 @@ Kinect.
     [`tfds.image.nyu_depth_v2.NyuDepthV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/nyu_depth_v2.py)
 *   **Versions**:
     *   **`0.0.1`** (default): No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `31.92 GiB`
+*   **Dataset size**: `74.03 GiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split        | Examples
+:----------- | -------:
+'train'      | 47,584
+'validation' | 654
 
 *   **Features**:
 
