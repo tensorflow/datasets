@@ -23,20 +23,12 @@ from __future__ import print_function
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import pg19
 
-
 class Pg19Test(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = pg19.Pg19
   SPLITS = {
-      "train": 3,       # Number of fake train example
-      "test": 1,        # Number of fake test example
-      "validation": 1   # Number of fake validation example
-  }
-
-  DL_EXTRACT_RESULT = {
-      "metadata": "metadata.csv",
-      "train": ["121122.txt", "121222.txt", "121322.txt"],
-      "val": ["121422.txt"],
-      "test": ["121522.txt"]
+      "train": 28602,   # Number of fake train example
+      "test": 100,      # Number of fake test example
+      "validation": 50  # Number of fake validation example
   }
 
 if __name__ == "__main__":

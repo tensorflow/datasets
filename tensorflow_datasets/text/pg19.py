@@ -14,17 +14,15 @@
 # limitations under the License.
 
 # Lint as: python3
-
 """PG-19 language modeling dataset"""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text import pg19_utils
-
 
 _CITATION = """
 @article{raecompressive2019,
@@ -51,16 +49,7 @@ stored in metadata.csv which contains
 (book_id, short_book_title, publication_date, book_link).
 """
 
-_METADATA_URL = 'https://storage.googleapis.com/deepmind-gutenberg/metadata.csv'
-_TRAIN_DATA = pg19_utils.get_all_files_name('train')
-_TEST_DATA = pg19_utils.get_all_files_name('test')
-_VALIDATION_DATA = pg19_utils.get_all_files_name('validation')
-_DOWNLOAD_URLS = {
-    'metadata': _METADATA_URL,
-    'train': pg19_utils.get_urls(_TRAIN_DATA)[:100],
-    'test': pg19_utils.get_urls(_TEST_DATA),
-    'val': pg19_utils.get_urls(_VALIDATION_DATA)
-}
+_DATA_DIR = 'gs://deepmind-gutenberg'
 
 class Pg19(tfds.core.GeneratorBasedBuilder):
   """This dataset contains the PG-19 language modeling benchmark"""
@@ -86,78 +75,50 @@ class Pg19(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
+    del dl_manager
 
-    dl_dir = dl_manager.download(_DOWNLOAD_URLS)
-    metadata = tf.io.gfile.GFile(dl_dir['metadata']).read().splitlines()
     metadata_dict = dict()
+    metadata_path = os.path.join(_DATA_DIR, "metadata.csv")
+    metadata = tf.io.gfile.GFile(metadata_path).read().splitlines()
+
     for row in metadata:
       row_split = row.split(',')
       # book_id: [book_title, publication_date, book_link]
       metadata_dict[int(row_split[0])] = row_split[1:]
 
-    def _get_filename(url):
-      return int(url.split('/')[-1].rstrip(".txt"))
-
-    train_filenames = list(map(_get_filename, _DOWNLOAD_URLS['train']))
-    test_filenames = list(map(_get_filename, _DOWNLOAD_URLS['test']))
-    val_filenames = list(map(_get_filename, _DOWNLOAD_URLS['val']))
-    print(train_filenames)
-    train_metadata = [(file, metadata_dict[file]) for file in train_filenames]
-    test_metadata = [(file, metadata_dict[file]) for file in test_filenames]
-    val_metadata = [(file, metadata_dict[file]) for file in val_filenames]
-
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "metadata": train_metadata,
-                "filepaths": dl_dir['train']},
+                "metadata": metadata_dict,
+                "filepath": os.path.join(_DATA_DIR, "train")},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "metadata": val_metadata,
-                "filepaths": dl_dir['val']},
+                "metadata": metadata_dict,
+                "filepath": os.path.join(_DATA_DIR, "validation")},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "metadata": test_metadata,
-                "filepaths": dl_dir['test']},
+                "metadata": metadata_dict,
+                "filepath": os.path.join(_DATA_DIR, "test")},
         ),
     ]
 
-  def _generate_examples(self, filepaths, metadata):
+  def _generate_examples(self, filepath, metadata):
     """Yields examples."""
-
-    def _get_file_name(filename):
-     # Return book_id from filename
-      for name in filename.split('/'):
-        if name.startswith('deepmind'):
-          file = name.split('_')[2]
-          book_id = ''
-          for i in file:
-            if not i.isdigit():
-              return book_id[:5]
-            book_id += i
-          return book_id[:5]
-      return '10005'
-
-
-    for index, file in enumerate(filepaths):
-      # book_id = _get_file_name(file)
-      book_id = metadata[index][0]
-      print("<-----CHARLES----->", file)
-      book_data = metadata[index][1]
-      print(book_data)
-      # book_data = metadata[int(book_id)]
-
-      with tf.io.gfile.GFile(file, 'r') as f:
+    for index, file in enumerate(tf.io.gfile.listdir(filepath)):
+      book_id = int(file.rstrip('.txt'))
+      book_data = metadata[book_id]
+      path = os.path.join(filepath, file)
+      with tf.io.gfile.GFile(path, 'r') as f:
         text = f.read().strip()
         yield index, {
             "book_text": text,
             "book_id": book_id,
             "book_title": book_data[0],
             "publication_date": book_data[1],
-            "book_link": book_data[2]
+            "book_link": book_data[2],
             }
