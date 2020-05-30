@@ -91,7 +91,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
+            "image": tfds.features.Image(encoding_format="jpeg"),
         }),
         supervised_keys=None,
         homepage="http://image-net.org/small/download.php",

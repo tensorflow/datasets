@@ -30,7 +30,7 @@ project_name = 'tensorflow-datasets'
 version_path = os.path.join(
     os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
-from version import __version__  # pylint: disable=g-import-not-at-top
+from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
 if nightly:
   project_name = 'tfds-nightly'
@@ -178,7 +178,7 @@ setup(
     packages=find_packages(),
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
-            'scripts/templates/*',
+            'scripts/documentation/templates/*',
         ],
     },
     scripts=[],

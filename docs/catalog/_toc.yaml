@@ -61,6 +61,9 @@ toc:
     title: lost_and_found
   - path: /datasets/catalog/lsun
     title: lsun
+  - path: /datasets/catalog/nyu_depth_v2
+    status: nightly
+    title: nyu_depth_v2
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   - path: /datasets/catalog/shapes3d
@@ -247,6 +250,9 @@ toc:
     title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/opinion_abstracts
+    status: nightly
+    title: opinion_abstracts
   - path: /datasets/catalog/opinosis
     title: opinosis
   - path: /datasets/catalog/reddit

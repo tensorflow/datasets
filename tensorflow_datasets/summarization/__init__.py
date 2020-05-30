@@ -24,6 +24,7 @@ from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymailConfig
 from tensorflow_datasets.summarization.gigaword import Gigaword
 from tensorflow_datasets.summarization.multi_news import MultiNews
 from tensorflow_datasets.summarization.newsroom import Newsroom
+from tensorflow_datasets.summarization.opinion_abstracts import OpinionAbstracts
 from tensorflow_datasets.summarization.opinosis import Opinosis
 from tensorflow_datasets.summarization.reddit import Reddit
 from tensorflow_datasets.summarization.reddit_tifu import RedditTifu

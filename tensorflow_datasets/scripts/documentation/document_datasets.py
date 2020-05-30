@@ -203,7 +203,7 @@ def get_mako_template(tmpl_name):
     mako 'Template' instance that can be rendered.
   """
   tmpl_path = tfds.core.utils.get_tfds_path(
-      'scripts/templates/%s.mako.md' % tmpl_name)
+      'scripts/documentation/templates/%s.mako.md' % tmpl_name)
   with tf.io.gfile.GFile(tmpl_path, 'r') as tmpl_f:
     tmpl_content = tmpl_f.read()
   return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
