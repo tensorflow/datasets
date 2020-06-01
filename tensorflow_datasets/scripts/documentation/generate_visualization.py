@@ -85,10 +85,14 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   # Load the dataset.
   builder_name, _, version = full_name.rpartition('/')
   builder = tfds.builder(f'{builder_name}:{version}')
-  if 'train' in builder.info.splits:
+  split_names = list(builder.info.splits.keys())
+  if not split_names:
+    logging.info(f'Dataset `{full_name}` not generated.')
+    return
+  elif 'train' in split_names:
     split = 'train'
   else:
-    split = list(builder.info.splits.keys())[0]
+    split = split_names[0]
   ds = builder.as_dataset(split=split, shuffle_files=False)
 
   if not tf.io.gfile.exists(dst_dir):
