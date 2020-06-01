@@ -40,6 +40,7 @@ from tensorflow_datasets.text.movie_rationales import MovieRationales
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
 from tensorflow_datasets.text.natural_questions import NaturalQuestions
+from tensorflow_datasets.text.pg19 import Pg19
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scan import ScanConfig
@@ -55,4 +56,3 @@ from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
-
