@@ -33,7 +33,7 @@ import string
 import sys
 import textwrap
 import threading
-from typing import Any, Callable, Iterator, TypeVar
+from typing import Any, Callable, Iterator, List, TypeVar
 import uuid
 
 import six
@@ -479,3 +479,14 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
 def basename_from_url(url: str) -> str:
   """Returns file name of file at given url."""
   return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
+
+
+def list_info_files(dir_path: str) -> List[str]:
+  """Returns name of info files within dir_path."""
+  # TODO(tfds): Is there a better filtering scheme which would be more
+  # resistant to future modifications (ex: tfrecord => other format)
+  return [
+      fname for fname in tf.io.gfile.listdir(dir_path)
+      if '.tfrecord' not in fname and
+      not tf.io.gfile.isdir(os.path.join(dir_path, fname))
+  ]
