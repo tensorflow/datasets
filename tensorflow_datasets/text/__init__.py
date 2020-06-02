@@ -31,6 +31,7 @@ from tensorflow_datasets.text.gap import Gap
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
+from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
 from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig

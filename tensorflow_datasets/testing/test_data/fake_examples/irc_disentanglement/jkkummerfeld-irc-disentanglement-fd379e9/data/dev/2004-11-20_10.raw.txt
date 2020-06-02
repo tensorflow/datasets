@@ -1,0 +1,6 @@
+[04:20] <xxx> how do you install apps on ubuntu?
+=== zzz has joined #ubuntu
+[04:20] <yyy> xxx: just run `sudo apt-get install <YOU_PACKAGE>`
+[04:20] <xxx> thanks!
+[04:20] <yyy> xxx: you're welcome
+=== ddd has left #ubuntu
