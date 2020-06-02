@@ -199,6 +199,8 @@ for ex in tfds.as_numpy(ds):
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
 *   [`natural_questions`](natural_questions.md)
+*   [`pg19`](pg19.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`qa4mre`](qa4mre.md)
 *   [`scan`](scan.md)
 *   [`scicite`](scicite.md)
