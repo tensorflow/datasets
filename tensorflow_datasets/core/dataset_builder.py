@@ -1110,8 +1110,11 @@ class BeamBasedBuilder(FileAdapterBuilder):
     # Beam type checking assumes transforms multiple outputs are of same type,
     # which is not our case. Plus it doesn't handle correctly all types, so we
     # are better without it.
-    beam_options.view_as(
-        beam.options.pipeline_options.TypeOptions).pipeline_type_check = False
+    type_options = beam_options.view_as(
+        beam.options.pipeline_options.TypeOptions
+    )
+    type_options.pipeline_type_check = False
+    type_options.runtime_type_check = False
     # Use a single pipeline for all splits
     with beam.Pipeline(
         runner=download_config.beam_runner,
