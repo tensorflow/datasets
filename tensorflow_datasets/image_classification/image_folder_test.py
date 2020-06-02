@@ -20,30 +20,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import functools
-from tensorflow_datasets import testing
-from tensorflow_datasets.core import registered
 from tensorflow_datasets.image_classification import image_folder
 
-
-class ImageLabelFolderTest(testing.DatasetBuilderTestCase):
-  """Test for ImageLabelFolder."""
-  DATASET_CLASS = functools.partial(
-      image_folder.ImageLabelFolder, dataset_name="image_folder_data")
-  # The above construct forces us to disable those checks:
-  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
-  SPLITS = {
-      "train": 2,  # Number of examples.
-      "test": 6,
-  }
-
-  def test_info(self):
-    pass
-
-  def test_registered(self):
-    self.assertIn("image_label_folder", registered.list_builders(),
-                  "Dataset was not registered.")
-
-
 if __name__ == "__main__":
-  testing.test_main()
+
+  # TODO: Update tests
+  builder = image_folder.ImageLabelFolder("my_ds")
+  ds = builder.as_dataset()
