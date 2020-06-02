@@ -26,6 +26,7 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
+from tensorflow_datasets.core.custom_dataset import ImageLabelFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -54,6 +55,7 @@ __all__ = [
     "features",
     "units",
     "GenerateMode",
+    "ImageLabelFolder",
     "builder",
     "builder_cls",
     "list_builders",

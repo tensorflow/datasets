@@ -25,32 +25,27 @@ import os
 
 from absl import logging
 import tensorflow.compat.v2 as tf
-import tensorflow_datasets.public_api as tfds
 
 
-SUPPORTED_IMAGE_FORMAT = (".jpg", ".jpeg", ".png")
-DATA_DIR = os.path.join('~', 'tensorflow_datasets')
-AUTOTUNE = tf.data.experimental.AUTOTUNE
+_SUPPORTED_IMAGE_FORMAT = ('.jpg', '.jpeg', '.png')
+_AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 
 class ImageLabelFolder():
 
-  def __init__(self, dataset_name, data_dir=None):
-    self._name = dataset_name
-    self._data_dir = data_dir or os.path.expanduser(
-      os.path.join(DATA_DIR, dataset_name))
-
+  def __init__(self, data_dir):
+    self._data_dir = os.path.expanduser(data_dir)
     # dict[split_name][label_name] = list(img_paths)
     self._split_label_images = self._get_split_label_images()
 
   def _get_split_label_images(self):
-    split_names = list_folders(self.data_dir)
+    split_names = _list_folders(self.data_dir)
     split_label_images = {}
     for split_name in split_names:
       split_dir = os.path.join(self.data_dir, split_name)
       split_label_images[split_name] = {
-          label_name: list_imgs(os.path.join(split_dir, label_name))	
-          for label_name in list_folders(split_dir)	
+          label_name: _list_imgs(os.path.join(split_dir, label_name))	
+          for label_name in _list_folders(split_dir)	
       }
     return split_label_images
 
@@ -58,16 +53,12 @@ class ImageLabelFolder():
   def data_dir(self):
     return self._data_dir
 
-  @property
-  def name(self):
-    return self._name
-
   def as_dataset(self, split=None):
     if split:
       return self._as_dataset(split)
     return {
           split_name: self._as_dataset(split_name)
-          for split_name in list_folders(self.data_dir)
+          for split_name in _list_folders(self.data_dir)
       }
 
   def _as_dataset(self, split_name):
@@ -76,28 +67,28 @@ class ImageLabelFolder():
 
     imgs = [img for l in self._split_label_images[split_name].values() for img in l]
     list_ds = tf.data.Dataset.list_files(imgs)
-    labeled_ds = list_ds.map(process_path, num_parallel_calls=AUTOTUNE)
+    labeled_ds = list_ds.map(_process_path, num_parallel_calls=_AUTOTUNE)
     return labeled_ds
 
-def decode_img(img):
+def _decode_img(img):
   img = tf.image.decode_jpeg(img, channels=3)
-  return tf.image.convert_image_dtype(img, tf.float32)
+  return tf.image.convert_image_dtype(img, tf.uint8)
 
-def process_path(file_path):
+def _process_path(file_path):
   label = tf.strings.split(file_path, os.path.sep)[-2]
   img = tf.io.read_file(file_path)
-  img = decode_img(img)
+  img = _decode_img(img)
   return img, label
 
-def list_folders(root_dir):
+def _list_folders(root_dir):
   return [
       f for f in tf.io.gfile.listdir(root_dir)
       if tf.io.gfile.isdir(os.path.join(root_dir, f))
   ]
 
-def list_imgs(root_dir):
+def _list_imgs(root_dir):
   return [
       os.path.join(root_dir, f)
       for f in tf.io.gfile.listdir(root_dir)
-      if any(f.lower().endswith(ext) for ext in SUPPORTED_IMAGE_FORMAT)
+      if any(f.lower().endswith(ext) for ext in _SUPPORTED_IMAGE_FORMAT)
   ]

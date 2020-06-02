@@ -13,17 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
-"""Test for ImageLabelFolder."""
+"""Visualizer utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+from tensorflow_datasets.core.custom_dataset.image_folder import ImageLabelFolder
 
-from tensorflow_datasets.image_classification import image_folder
-
-if __name__ == "__main__":
-
-  # TODO: Update tests
-  builder = image_folder.ImageLabelFolder("my_ds")
-  ds = builder.as_dataset()
+__all__ = [
+    "ImageLabelFolder",
+]
