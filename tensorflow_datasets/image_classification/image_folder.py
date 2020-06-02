@@ -29,38 +29,65 @@ import tensorflow_datasets.public_api as tfds
 
 
 SUPPORTED_IMAGE_FORMAT = (".jpg", ".jpeg", ".png")
+DATA_DIR = os.path.join('~', 'tensorflow_datasets')
+AUTOTUNE = tf.data.experimental.AUTOTUNE
 
-class ImageLabelFolder(tfds.core.DatasetBuilder):
 
-  MANUAL_DOWNLOAD_INSTRUCTIONS = "This is a 'template' dataset."
+class ImageLabelFolder():
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  def __init__(self, dataset_name, data_dir=None):
+    self._name = dataset_name
+    self._data_dir = data_dir or os.path.expanduser(
+      os.path.join(DATA_DIR, dataset_name))
 
-  def __init__(self, dataset_name="image_label_folder", **kwargs):
-    self.name = dataset_name
-    super(ImageLabelFolder, self).__init__(**kwargs)
+    # dict[split_name][label_name] = list(img_paths)
+    self._split_label_images = self._get_split_label_images()
 
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description="Generic image classification dataset.",
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(num_classes=None),
-        }),
-        supervised_keys=("image", "label"),
-    )
+  def _get_split_label_images(self):
+    split_names = list_folders(self.data_dir)
+    split_label_images = {}
+    for split_name in split_names:
+      split_dir = os.path.join(self.data_dir, split_name)
+      split_label_images[split_name] = {
+          label_name: list_imgs(os.path.join(split_dir, label_name))	
+          for label_name in list_folders(split_dir)	
+      }
+    return split_label_images
 
-  def _download_and_prepare(self, dl_manager, **kwargs):
-    split_names = list_folders(dl_manager.manual_dir)
-    split_dict = tfds.core.SplitDict(dataset_name=self.name)
-    # TODO: Update splits according to directory structure
+  @property
+  def data_dir(self):
+    return self._data_dir
 
-  def _as_dataset(self, split, **kwargs):
-    # TODO: Make dataset
-    # ds = tf.data.Dataset.list_files() or tf.data.Dataset.from_generator()
-    return ds
+  @property
+  def name(self):
+    return self._name
+
+  def as_dataset(self, split=None):
+    if split:
+      return self._as_dataset(split)
+    return {
+          split_name: self._as_dataset(split_name)
+          for split_name in list_folders(self.data_dir)
+      }
+
+  def _as_dataset(self, split_name):
+    if split_name not in self._split_label_images.keys():
+      raise ValueError("Split name {} not present in {}".format(split_name, self._split_label_images.keys()))
+
+    imgs = [img for l in self._split_label_images[split_name].values() for img in l]
+    list_ds = tf.data.Dataset.list_files(imgs)
+    labeled_ds = list_ds.map(process_path, num_parallel_calls=AUTOTUNE)
+    return labeled_ds
+
+def decode_img(img):
+  img = tf.image.decode_jpeg(img, channels=3)
+  return tf.image.convert_image_dtype(img, tf.float32)
+
+def process_path(file_path):
+  label = tf.strings.split(file_path, os.path.sep)[-2]
+  img = tf.io.read_file(file_path)
+  img = decode_img(img)
+  return img, label
 
 def list_folders(root_dir):
   return [
