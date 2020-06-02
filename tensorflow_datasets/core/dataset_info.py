@@ -477,6 +477,9 @@ def _populate_shape(shape_or_dict, prefix, schema_features):
 def get_dataset_feature_statistics(builder, split):
   """Calculate statistics for the specified split."""
   tfdv = lazy_imports_lib.lazy_imports.tensorflow_data_validation
+  beam = lazy_imports_lib.lazy_imports.apache_beam
+  beam_options = beam.options.pipeline_options
+
   # TODO(epot): Avoid hardcoding file format.
   filetype_suffix = "tfrecord"
   if filetype_suffix not in ["tfrecord", "csv"]:
@@ -488,12 +491,24 @@ def get_dataset_feature_statistics(builder, split):
   # (default is 1000).
   stats_options = tfdv.StatsOptions(num_top_values=10,
                                     num_rank_histogram_buckets=10)
+
+  # Disable type checking for apache_beam
+  pipeline_options = beam_options.PipelineOptions()
+  type_options = pipeline_options.view_as(beam_options.TypeOptions)
+  type_options.pipeline_type_check = False
+
   if filetype_suffix == "csv":
     statistics = tfdv.generate_statistics_from_csv(
-        filepattern, stats_options=stats_options)
+        filepattern,
+        stats_options=stats_options,
+        pipeline_options=pipeline_options,
+    )
   else:
     statistics = tfdv.generate_statistics_from_tfrecord(
-        filepattern, stats_options=stats_options)
+        filepattern,
+        stats_options=stats_options,
+        pipeline_options=pipeline_options,
+    )
   schema = tfdv.infer_schema(statistics)
   schema_features = {feature.name: feature for feature in schema.feature}
   # Override shape in the schema.
