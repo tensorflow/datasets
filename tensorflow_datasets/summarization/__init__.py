@@ -21,6 +21,7 @@ from tensorflow_datasets.summarization.big_patent import BigPatent
 from tensorflow_datasets.summarization.billsum import Billsum
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymailConfig
+from tensorflow_datasets.summarization.covid19sum import Covid19sum
 from tensorflow_datasets.summarization.gigaword import Gigaword
 from tensorflow_datasets.summarization.multi_news import MultiNews
 from tensorflow_datasets.summarization.newsroom import Newsroom
