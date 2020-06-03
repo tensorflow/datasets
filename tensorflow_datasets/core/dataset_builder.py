@@ -292,7 +292,7 @@ class DatasetBuilder(object):
     if _is_py2_download_and_prepare_disabled and six.PY2:
       raise NotImplementedError(
           "TFDS has droped `builder.download_and_prepare` support for "
-          "Python 2. Please update you code to Python 3.")
+          "Python 2. Please update your code to Python 3.")
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(str(v) for v in self.versions
