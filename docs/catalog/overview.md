@@ -160,6 +160,8 @@ for ex in tfds.as_numpy(ds):
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 *   [`cnn_dailymail`](cnn_dailymail.md)
+*   [`covid19sum`](covid19sum.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`gigaword`](gigaword.md)
 *   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
@@ -190,6 +192,8 @@ for ex in tfds.as_numpy(ds):
 *   [`gap`](gap.md)
 *   [`glue`](glue.md)
 *   [`imdb_reviews`](imdb_reviews.md)
+*   [`irc_disentanglement`](irc_disentanglement.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`librispeech_lm`](librispeech_lm.md)
 *   [`lm1b`](lm1b.md)
 *   [`math_dataset`](math_dataset.md)

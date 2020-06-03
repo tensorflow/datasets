@@ -244,6 +244,9 @@ toc:
     title: billsum
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
+  - path: /datasets/catalog/covid19sum
+    status: nightly
+    title: covid19sum (manual)
   - path: /datasets/catalog/gigaword
     title: gigaword
   - path: /datasets/catalog/multi_news
@@ -297,6 +300,9 @@ toc:
     title: glue
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
+  - path: /datasets/catalog/irc_disentanglement
+    status: nightly
+    title: irc_disentanglement
   - path: /datasets/catalog/librispeech_lm
     title: librispeech_lm
   - path: /datasets/catalog/lm1b
