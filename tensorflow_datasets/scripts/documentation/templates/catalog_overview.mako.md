@@ -22,7 +22,8 @@ ds = ds.batch(32)
 # `tfds.as_numpy` converts `tf.Tensor` -> `np.array`
 for ex in tfds.as_numpy(ds):
   # `int2str` returns the human readable label ('dog', 'car',...)
-  print(info.features['label'].int2str(ex['label']))
+  for label in ex['label']:
+    print(info.features['label'].int2str(label))
 ```
 
 ## `##` starts a line comment for mako, so we have to come up with following
