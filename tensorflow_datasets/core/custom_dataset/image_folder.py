@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""FileFolder datasets."""
+"""Image FileFolder datasets."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -25,48 +25,85 @@ import os
 
 from absl import logging
 import tensorflow.compat.v2 as tf
-
+from tensorflow_datasets import core
 
 _SUPPORTED_IMAGE_FORMAT = ('.jpg', '.jpeg', '.png')
 _AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 
-class ImageLabelFolder():
+class ImageLabelFolder(core.DatasetBuilder):
+
+  VERSION = core.Version(
+    "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def __init__(self, data_dir):
     self._data_dir = os.path.expanduser(data_dir)
+
     # dict[split_name][label_name] = list(img_paths)
-    self._split_label_images = self._get_split_label_images()
+    self._split_label_images, self._labels = self._get_split_label_images()
+    self._splits_info = core.SplitDict(self.name)
+
+    # Calculate splits for DatasetInfo
+    self._splits = {
+        split_name: self._get_split_size(split_name)
+        for split_name in self._split_label_images
+    }
+
+    self._split_dict = core.SplitDict(self.name)
+    for split_name, size in self._splits.items():
+      self._split_dict.add(
+        core.SplitInfo(name=split_name, shard_lengths=[size])) # is this correct?
+
+    super(ImageLabelFolder, self).__init__(
+        data_dir=data_dir, version=str(self.VERSION), config=None)
+
+    # _data_dir should not change to DATA_DIR/Version
+    self._data_dir = os.path.expanduser(data_dir)
 
   def _get_split_label_images(self):
     split_names = _list_folders(self.data_dir)
-    split_label_images = {}
+    split_label_images = dict()
+    labels = set()
     for split_name in split_names:
       split_dir = os.path.join(self.data_dir, split_name)
       split_label_images[split_name] = {
           label_name: _list_imgs(os.path.join(split_dir, label_name))	
           for label_name in _list_folders(split_dir)	
       }
-    return split_label_images
+      labels.update(split_label_images[split_name].keys())
+    return split_label_images, labels
 
-  @property
-  def data_dir(self):
-    return self._data_dir
+  def _get_split_size(self, split_name):
+    return sum(len(l) for l in self._split_label_images[split_name].values())
 
-  def as_dataset(self, split=None):
-    if split:
-      return self._as_dataset(split)
-    return {
-          split_name: self._as_dataset(split_name)
-          for split_name in _list_folders(self.data_dir)
-      }
+  def _info(self):
+    ds_info = core.DatasetInfo(
+        builder=self,
+        description="Generic image classification dataset.",
+        # Generic features before the data is generated
+        features=core.features.FeaturesDict({
+            "image": core.features.Image(), # TODO: Image shape
+            "label": core.features.ClassLabel(names=list(self._labels)),
+        }),
+        supervised_keys=("image", "label"),
+    )
+    ds_info.update_splits_if_different(self._split_dict)
+    return ds_info
 
-  def _as_dataset(self, split_name):
-    if split_name not in self._split_label_images.keys():
-      raise ValueError("Split name {} not present in {}".format(split_name, self._split_label_images.keys()))
+  def _download_and_prepare(self, **kwargs):
+    raise Exception("No need to call download and prepare")
 
-    imgs = [img for l in self._split_label_images[split_name].values() for img in l]
+  def download_and_prepare(self, **kwargs):
+    raise Exception("No need to call download and prepare")
+
+  def _as_dataset(self, split, shuffle_files=False, ** kwargs):
+    if split not in self._split_label_images.keys():
+      raise ValueError("Split name {} not present in {}".format(split, self._split_label_images.keys()))
+
+    imgs = [img for l in self._split_label_images[split].values() for img in l]
     list_ds = tf.data.Dataset.list_files(imgs)
+    if shuffle_files:
+      list_ds = list_ds.shuffle(len(imgs))
     labeled_ds = list_ds.map(_process_path, num_parallel_calls=_AUTOTUNE)
     return labeled_ds
 
