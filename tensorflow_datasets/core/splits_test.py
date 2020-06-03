@@ -21,8 +21,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core.utils import shard_utils
 import tensorflow_datasets.public_api as tfds
 
 RANGE_TRAIN = list(range(0, 2000))
@@ -130,6 +132,7 @@ class SplitsTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(SplitsTest, cls).setUpClass()
+    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._builder = testing.DummyDatasetSharedGenerator(
         data_dir=testing.make_tmp_dir())
     cls._builder.download_and_prepare()
@@ -152,21 +155,29 @@ class SplitsTest(testing.TestCase):
 
   def test_sub_split_file_instructions(self):
     fi = self._builder.info.splits["train[75%:]"].file_instructions
-    self.assertEqual(fi, [{
-        "filename":
-            "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
-        "skip": 15,
-        "take": -1,
-    }])
+    self.assertEqual(fi, [shard_utils.FileInstruction(
+        filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+        skip=15,
+        take=-1,
+        num_examples=5,
+    )])
 
   def test_split_file_instructions(self):
     fi = self._builder.info.splits["train"].file_instructions
-    self.assertEqual(fi, [{
-        "filename":
-            "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
-        "skip": 0,
-        "take": -1,
-    }])
+    self.assertEqual(fi, [shard_utils.FileInstruction(
+        filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+        skip=0,
+        take=-1,
+        num_examples=20,
+    )])
+
+  def test_sub_split_filenames(self):
+    self.assertEqual(self._builder.info.splits["train"].filenames, [
+        "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+    ])
+    self.assertEqual(self._builder.info.splits["train[75%:]"].filenames, [
+        "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+    ])
 
   def test_sub_split_wrong_key(self):
     with self.assertRaisesWithPredicateMatch(

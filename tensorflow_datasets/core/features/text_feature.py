@@ -123,7 +123,7 @@ class Text(feature.Tensor):
     fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
     encoder_cls = self._encoder_cls
     if encoder_cls:
-      self._encoder = encoder_cls.load_from_file(fname_prefix)
+      self._encoder = encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
       return
 
     # Error checking: ensure there are no metadata files

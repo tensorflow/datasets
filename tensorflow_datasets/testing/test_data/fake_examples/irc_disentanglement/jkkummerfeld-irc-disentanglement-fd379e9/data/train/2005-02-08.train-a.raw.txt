@@ -1,0 +1,5 @@
+[11:59] <xxx> yyy: message from xxx to yyy
+=== zzz has joined #ubuntu
+[00:00] <yyy> replies to xxx
+[00:01] <zzz> disagrees
+[00:01] <zzz> replies to yyy

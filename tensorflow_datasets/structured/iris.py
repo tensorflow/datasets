@@ -71,7 +71,7 @@ class Iris(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     iris_file = dl_manager.download(IRIS_URL)
-    all_lines = tf.io.gfile.GFile(iris_file).read().split("\n")
+    all_lines = tf.io.gfile.GFile(iris_file).read().splitlines()
     records = [l for l in all_lines if l]  # get rid of empty lines
 
     # Specify the splits

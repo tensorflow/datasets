@@ -279,7 +279,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
       with utils.nogpu_session() as sess:
         for filepath, fobj in archive:
           # Note: all files in the tar.gz are in SUN397/...
-          filename = filepath[prefix_len:]
+          filename = filepath[prefix_len:].replace("\\", "/")  # For windows
           if filename in subset_images:
             # Example:
             # From filename: /c/car_interior/backseat/sun_aenygxwhhmjtisnf.jpg

@@ -204,7 +204,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         if six.PY3:
           # Workaround due to:
           # https://github.com/tensorflow/tensorflow/issues/33563
-          utf_f = codecs.getreader("utf-8")(f)
+          utf_f = codecs.getreader("utf-8")(f)  # pytype: disable=wrong-arg-types
         else:
           utf_f = f
 
@@ -276,7 +276,7 @@ def _parse_and_clean_wikicode(raw_content):
   re_rm_wikilink = re.compile(
       "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE)
   def rm_wikilink(obj):
-    return bool(re_rm_wikilink.match(six.text_type(obj.title)))
+    return bool(re_rm_wikilink.match(six.text_type(obj.title)))  # pytype: disable=wrong-arg-types
   def rm_tag(obj):
     return six.text_type(obj.tag) in {"ref", "table"}
   def rm_template(obj):

@@ -30,8 +30,17 @@ pip install -q -U numpy
 # First ensure that the base dependencies are sufficient for a full import and
 # data load
 pip install -e .
+
 python -c "import tensorflow_datasets as tfds"
 python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')"
 
 # Then install the test dependencies
 pip install -e .[tests]
+
+if [[ "$TF_VERSION" == "tf-nightly" ]]
+then
+  # `tensorflow` is automatically installed with `tensorflow-data-validation`
+  # so uninstall `tensorflow` to avoid conflicts with `tf-nightly`
+  pip uninstall -y tensorflow
+  pip install tf-nightly --upgrade --force-reinstall
+fi

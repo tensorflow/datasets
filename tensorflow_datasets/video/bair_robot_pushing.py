@@ -127,7 +127,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
 
           # Decode images (from encoded string)
           for key in ("image_main", "image_aux1"):
-            img = frame_feature[key].bytes_list.value[0]
+            img = frame_feature[key].bytes_list.value[0]  # pytype: disable=attribute-error
             img = np.frombuffer(img, dtype=np.uint8)
             img = np.reshape(img, IMG_SHAPE)
             frame_feature[key] = img

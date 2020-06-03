@@ -188,18 +188,22 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     """Raises error if forbidden os functions are called instead of gfile."""
     err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead. "
                          "This makes code compatible with more filesystems.")
+    sep = os.path.sep
     mock_os_path = absltest.mock.Mock(os.path, wraps=os.path)
+    mock_os_path.sep = sep
     for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
       getattr(mock_os_path, fop).side_effect = err
     mock_os = absltest.mock.Mock(os, path=mock_os_path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
+      if os.name == "nt" and not hasattr(os, fop):
+        continue  # Not all `os` functions are available on Windows (ex: chmod).
       getattr(mock_os, fop).side_effect = err
     os_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
     os_patcher.start()
     self.patchers.append(os_patcher)
 
-    mock_builtins = __builtins__.copy()
+    mock_builtins = __builtins__.copy()  # pytype: disable=module-attr
     mock_builtins["open"] = absltest.mock.Mock(side_effect=err)
     open_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
@@ -306,10 +310,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
     with utils.try_reraise(suffix=err_msg):
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
-      sizes_checksums = checksums._get_sizes_checksums(filepath)  # pylint: disable=protected-access
-      urls = sizes_checksums.keys()
+      url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
 
-    missing_urls = self._download_urls - set(urls)
+    missing_urls = self._download_urls - set(url_infos.keys())
     self.assertEmpty(
         missing_urls,
         "Some urls checksums are missing at: {} "
@@ -337,8 +340,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
-        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         # For Beam datasets, set-up the runner config
+        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         beam_runner = None
         beam_options = beam.options.pipeline_options.PipelineOptions()
       else:
@@ -346,7 +349,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         beam_options = None
 
       download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.FORCE,
+          compute_stats=download.ComputeStatsMode.SKIP,
           beam_runner=beam_runner,
           beam_options=beam_options,
       )

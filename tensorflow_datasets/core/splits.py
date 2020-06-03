@@ -20,11 +20,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl import logging
+import typing
+from typing import List, Union
 
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import shard_utils
 
 
 @utils.as_proto_cls(proto.SplitInfo)
@@ -32,31 +34,63 @@ class SplitInfo(object):
   """Wraps `proto.SplitInfo` with an additional property."""
 
   @property
-  def num_examples(self):
-    if self.shard_lengths:
-      return sum(int(sl) for sl in self.shard_lengths)
-    return int(self.statistics.num_examples)
+  def num_examples(self) -> int:
+    if self.shard_lengths:  # pytype: disable=attribute-error
+      return sum(int(sl) for sl in self.shard_lengths)  # pytype: disable=attribute-error
+    return int(self.statistics.num_examples)  # pytype: disable=attribute-error
 
   @property
-  def num_shards(self):
+  def num_shards(self) -> int:
     if self.shard_lengths:
       return len(self.shard_lengths)
     return self._ProtoCls__proto.num_shards
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     num_examples = self.num_examples or "unknown"
     return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)
 
   @property
-  def file_instructions(self):
-    """Returns the list of dict(filename, take, skip)."""
+  def file_instructions(self) -> List[shard_utils.FileInstruction]:
+    """Returns the list of dict(filename, take, skip).
+
+    This allows for creating your own `tf.data.Dataset` using the low-level
+    TFDS values.
+
+    Example:
+
+    ```
+    file_instructions = info.splits['train[75%:]'].file_instructions
+    instruction_ds = tf.data.Dataset.from_generator(
+        lambda: file_instructions,
+        output_types={
+            'filename': tf.string,
+            'take': tf.int64,
+            'skip': tf.int64,
+        },
+    )
+    ds = instruction_ds.interleave(
+        lambda f: tf.data.TFRecordDataset(
+            f['filename']).skip(f['skip']).take(f['take'])
+    )
+    ```
+
+    When `skip=0` and `take=-1`, the full shard will be read, so the `ds.skip`
+    and `ds.take` could be skipped.
+
+    Returns:
+      A `dict(filename, take, skip)`
+    """
     # `self._dataset_name` is assigned in `SplitDict.add()`.
-    instructions = tfrecords_reader.make_file_instructions(
+    return tfrecords_reader.make_file_instructions(
         name=self._dataset_name,
         split_infos=[self],
         instruction=str(self.name),
     )
-    return instructions.file_instructions
+
+  @property
+  def filenames(self) -> List[str]:
+    """Returns the list of filenames."""
+    return sorted(f.filename for f in self.file_instructions)
 
 
 class SubSplitInfo(object):
@@ -71,23 +105,28 @@ class SubSplitInfo(object):
 
   """
 
-  def __init__(self, file_instructions):
+  def __init__(self, file_instructions: List[shard_utils.FileInstruction]):
     """Constructor.
 
     Args:
-      file_instructions: FileInstructions
+      file_instructions: List[FileInstruction]
     """
     self._file_instructions = file_instructions
 
   @property
-  def num_examples(self):
+  def num_examples(self) -> int:
     """Returns the number of example in the subsplit."""
-    return self._file_instructions.num_examples
+    return sum(f.num_examples for f in self._file_instructions)
 
   @property
-  def file_instructions(self):
+  def file_instructions(self) -> List[shard_utils.FileInstruction]:
     """Returns the list of dict(filename, take, skip)."""
-    return self._file_instructions.file_instructions
+    return self._file_instructions
+
+  @property
+  def filenames(self) -> List[str]:
+    """Returns the list of filenames."""
+    return sorted(f.filename for f in self.file_instructions)
 
 
 # TODO(epot): `: tfds.Split` type should be `Union[str, Split]`
@@ -110,13 +149,18 @@ class Split(str):
   for more information.
   """
 
-  def __repr__(self):
-    return "{}({})".format(type(self).__name__, super(Split, self).__repr__())
+  def __repr__(self) -> str:
+    return "{}({})".format(type(self).__name__, super(Split, self).__repr__())  # pytype: disable=wrong-arg-types
 
 
 Split.TRAIN = Split("train")
 Split.TEST = Split("test")
 Split.VALIDATION = Split("validation")
+
+if typing.TYPE_CHECKING:
+  # For type checking, `tfds.Split` is an alias for `str` with additional
+  # `.TRAIN`, `.TEST`,... attributes. All strings are valid split type.
+  Split = Union[Split, str]
 
 
 class SplitDict(utils.NonMutableDict):
@@ -196,20 +240,15 @@ class SplitGenerator(object):
   of usage.
   """
 
-  def __init__(self, name, num_shards=1, gen_kwargs=None):
+  def __init__(self, name, gen_kwargs=None):
     """Constructs a `SplitGenerator`.
 
     Args:
       name: `str`, name of the Split for which the generator will
         create the examples.
-      num_shards: `int`, number of shards between which the generated examples
-        will be written. DEPRECATED: This argument is currently ignored and
-        will be removed in a future version.
       gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
         of the builder.
     """
     self.name = name
     self.gen_kwargs = gen_kwargs or {}
-    if num_shards != 1:
-      logging.warning("`num_shards` is deprecated and will be removed.")
-    self.split_info = SplitInfo(name=str(name), num_shards=num_shards)
+    self.split_info = SplitInfo(name=str(name))

@@ -30,7 +30,7 @@ from absl import app
 from absl import flags
 
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import imagenet
+from tensorflow_datasets.image import imagenet  # pytype: disable=import-error
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 

@@ -30,6 +30,7 @@ class TFFlowersTest(testing.DatasetBuilderTestCase):
       'train': 5
   }
 
+  DL_DOWNLOAD_RESULT = 'flower_photos.tgz'
 
 if __name__ == '__main__':
   testing.test_main()

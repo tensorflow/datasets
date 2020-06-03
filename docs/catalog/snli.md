@@ -20,18 +20,26 @@ entailment, contradiction, and neutral, supporting the task of natural language
 inference (NLI), also known as recognizing textual entailment (RTE).
 
 *   **Config description**: Plain text import of SNLI
+
 *   **Homepage**:
     [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
+
 *   **Source code**:
     [`tfds.text.snli.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `90.17 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -49,6 +57,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -63,5 +72,9 @@ FeaturesDict({
     Year = {2015}
 }
 ```
+
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## snli/plain_text (default config)

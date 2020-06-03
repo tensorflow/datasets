@@ -29,7 +29,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import tempfile
 import textwrap
 
 import numpy as np
@@ -76,7 +75,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
       **kwargs: Passed on to the constructor of `BuilderConfig`.
     """
     super(RobonetConfig, self).__init__(
-        version=tfds.core.Version('3.0.0'), **kwargs)
+        version=tfds.core.Version('4.0.0'), **kwargs)
     if (width is None) ^ (height is None):
       raise ValueError('Either both dimensions should be set, or none of them')
     self.sample_dataset = sample_dataset
@@ -95,7 +94,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
           width=64,
           height=64,
       ),
-
       RobonetConfig(
           name='robonet_sample_128',
           description='128x128 RoboNet Sample.',
@@ -103,7 +101,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
           width=128,
           height=128,
       ),
-
       RobonetConfig(
           name='robonet_64',
           description='64x64 RoboNet.',
@@ -111,7 +108,6 @@ class Robonet(tfds.core.BeamBasedBuilder):
           width=64,
           height=64,
       ),
-
       RobonetConfig(
           name='robonet_128',
           description='128x128 RoboNet.',
@@ -179,27 +175,25 @@ class Robonet(tfds.core.BeamBasedBuilder):
   def _build_pcollection(self, pipeline, filedir):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    h5py = tfds.core.lazy_imports.h5py
 
     def _process_example(filename):
       """Converts one video from hdf5 format."""
-      with tempfile.TemporaryDirectory() as tmpdirname:
-        hd5_path = filename
-        with h5py.File(hd5_path) as hf:
-          video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
-          states = hf['env']['state'][:].astype(np.float32)
-          states = np.pad(
-              states, ((0, 0), (0, STATES_DIM-states.shape[1])), 'constant')
-          actions = hf['policy']['actions'][:].astype(np.float32)
-          actions = np.pad(
-              actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
+      h5py = tfds.core.lazy_imports.h5py
+      with h5py.File(filename) as hf:
+        video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
+        states = hf['env']['state'][:].astype(np.float32)
+        states = np.pad(
+            states, ((0, 0), (0, STATES_DIM-states.shape[1])), 'constant')
+        actions = hf['policy']['actions'][:].astype(np.float32)
+        actions = np.pad(
+            actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
 
-        features = {
-            'video': video_bytes,
-            'actions': actions,
-            'states': states,
-        }
-        return os.path.basename(filename), features
+      features = {
+          'video': video_bytes,
+          'actions': actions,
+          'states': states,
+      }
+      return os.path.basename(filename), features
 
     filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
     return (
@@ -207,5 +201,3 @@ class Robonet(tfds.core.BeamBasedBuilder):
         | beam.Create(filenames)
         | beam.Map(_process_example)
     )
-
-

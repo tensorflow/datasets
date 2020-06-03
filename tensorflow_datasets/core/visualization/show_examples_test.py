@@ -37,9 +37,17 @@ class ShowExamplesTest(testing.TestCase):
     with testing.mock_data(num_examples=20):
       ds, ds_info = registered.load(
           'imagenet2012', split='train', with_info=True)
-    visualization.show_examples(ds_info, ds)
+    visualization.show_examples(ds, ds_info)
 
   # TODO(tfds): Should add test when there isn't enough examples (ds.take(3))
+
+
+class ShowStatisticsTest(testing.TestCase):
+
+  def test_show_examples(self):
+    with testing.mock_data():
+      builder = registered.builder('imagenet2012')
+      visualization.show_statistics(builder.info)
 
 
 if __name__ == '__main__':

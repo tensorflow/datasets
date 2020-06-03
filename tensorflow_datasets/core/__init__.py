@@ -46,12 +46,9 @@ from tensorflow_datasets.core.splits import SubSplitInfo
 from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 
 from tensorflow_datasets.core.utils import Experiment
+from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
-
-NamedSplit = Split  # TODO(epot): Remove once users are migrated.
-SplitBase = Split
-del Split  # Is accessed through `tfds.Split`
 
 
 __all__ = [
@@ -65,6 +62,7 @@ __all__ = [
     "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",
+    "gcs_path",
     "lazy_imports",
     "Metadata",
     "MetadataDict",
@@ -73,6 +71,4 @@ __all__ = [
     "SplitGenerator",
     "SplitInfo",
     "Version",
-    "SplitBase",
-    "NamedSplit",
 ]

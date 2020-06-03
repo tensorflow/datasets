@@ -64,6 +64,13 @@ workers:
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
+If you're using `tfds-nightly`, make sure to to echo from `tfds-nightly` in case
+the dataset has been updated since the last release.
+
+```sh
+echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
+```
+
 Finally, you can launch the job using the command below:
 
 ```sh

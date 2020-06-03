@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="common_voice" />
   <meta itemprop="description" content="Mozilla Common Voice Dataset&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;common_voice&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/common_voice" />
   <meta itemprop="sameAs" content="https://voice.mozilla.org/en/datasets" />
   <meta itemprop="citation" content="" />
 </div>
+
 # `common_voice`
 
 *   **Description**:
@@ -33,10 +35,14 @@ Split | Examples
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+*   **Visualization
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+    Not supported.
 
 ## common_voice/en (default config)
 
 *   **Config description**: Language Code: en
+
 *   **Features**:
 
 ```python
@@ -55,6 +61,7 @@ FeaturesDict({
 ## common_voice/de
 
 *   **Config description**: Language Code: de
+
 *   **Features**:
 
 ```python
@@ -73,6 +80,7 @@ FeaturesDict({
 ## common_voice/fr
 
 *   **Config description**: Language Code: fr
+
 *   **Features**:
 
 ```python
@@ -91,6 +99,7 @@ FeaturesDict({
 ## common_voice/cy
 
 *   **Config description**: Language Code: cy
+
 *   **Features**:
 
 ```python
@@ -109,6 +118,7 @@ FeaturesDict({
 ## common_voice/br
 
 *   **Config description**: Language Code: br
+
 *   **Features**:
 
 ```python
@@ -127,6 +137,7 @@ FeaturesDict({
 ## common_voice/cv
 
 *   **Config description**: Language Code: cv
+
 *   **Features**:
 
 ```python
@@ -145,6 +156,7 @@ FeaturesDict({
 ## common_voice/tr
 
 *   **Config description**: Language Code: tr
+
 *   **Features**:
 
 ```python
@@ -163,6 +175,7 @@ FeaturesDict({
 ## common_voice/tt
 
 *   **Config description**: Language Code: tt
+
 *   **Features**:
 
 ```python
@@ -181,6 +194,7 @@ FeaturesDict({
 ## common_voice/ky
 
 *   **Config description**: Language Code: ky
+
 *   **Features**:
 
 ```python
@@ -199,6 +213,7 @@ FeaturesDict({
 ## common_voice/ga-IE
 
 *   **Config description**: Language Code: ga-IE
+
 *   **Features**:
 
 ```python
@@ -217,6 +232,7 @@ FeaturesDict({
 ## common_voice/kab
 
 *   **Config description**: Language Code: kab
+
 *   **Features**:
 
 ```python
@@ -235,6 +251,7 @@ FeaturesDict({
 ## common_voice/ca
 
 *   **Config description**: Language Code: ca
+
 *   **Features**:
 
 ```python
@@ -253,6 +270,7 @@ FeaturesDict({
 ## common_voice/zh-TW
 
 *   **Config description**: Language Code: zh-TW
+
 *   **Features**:
 
 ```python
@@ -271,6 +289,7 @@ FeaturesDict({
 ## common_voice/sl
 
 *   **Config description**: Language Code: sl
+
 *   **Features**:
 
 ```python
@@ -289,6 +308,7 @@ FeaturesDict({
 ## common_voice/it
 
 *   **Config description**: Language Code: it
+
 *   **Features**:
 
 ```python
@@ -307,6 +327,7 @@ FeaturesDict({
 ## common_voice/nl
 
 *   **Config description**: Language Code: nl
+
 *   **Features**:
 
 ```python
@@ -325,6 +346,7 @@ FeaturesDict({
 ## common_voice/cnh
 
 *   **Config description**: Language Code: cnh
+
 *   **Features**:
 
 ```python
@@ -343,6 +365,7 @@ FeaturesDict({
 ## common_voice/eo
 
 *   **Config description**: Language Code: eo
+
 *   **Features**:
 
 ```python

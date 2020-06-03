@@ -58,21 +58,19 @@ class ExampleSerializer(object):
     return example.SerializeToString()
 
 
-def _dict_to_tf_example(example_dict, tensor_info_dict=None):
+def _dict_to_tf_example(example_dict, tensor_info_dict):
   """Builds tf.train.Example from (string -> int/float/str list) dictionary.
 
   Args:
     example_dict: `dict`, dict of values, tensor,...
-    tensor_info_dict: `dict` of `tfds.feature.TensorInfo` If given, perform
-      additional checks on the example dict (check dtype, shape, number of
-      fields...)
+    tensor_info_dict: `dict` of `tfds.feature.TensorInfo`
 
   Returns:
     example_proto: `tf.train.Example`, the encoded example proto.
   """
   def run_with_reraise(fn, k, example_data, tensor_info):
     with utils.try_reraise(
-        "Error while serializing feature {} ({}): ".format(k, tensor_info)):
+        "Error while serializing feature `{}`: `{}`: ".format(k, tensor_info)):
       return fn(example_data, tensor_info)
 
   if tensor_info_dict:
@@ -128,38 +126,15 @@ def _item_to_np_array(item, dtype, shape):
   return item
 
 
-def _item_to_tf_feature(item, tensor_info=None):
+def _item_to_tf_feature(item, tensor_info):
   """Single item to a tf.train.Feature."""
-  v = item
-  # TODO(epot): tensor_info is only None for file_format_adapter tests.
-  # tensor_info could be made required to cleanup some of the following code,
-  # for instance by re-using _item_to_np_array.
-  if not tensor_info and isinstance(v, (list, tuple)) and not v:
-    raise ValueError(
-        "Received an empty list value, so is unable to infer the "
-        "feature type to record. To support empty value, the corresponding "
-        "FeatureConnector should return a numpy array with the correct dtype "
-        "instead of a Python list."
-    )
-
-  # Handle strings/bytes first
-  is_string = _is_string(v)
-
-  if tensor_info:
-    np_dtype = np.dtype(tensor_info.dtype.as_numpy_dtype)
-  elif is_string:
-    np_dtype = object  # Avoid truncating trailing '\x00' when converting to np
-  else:
-    np_dtype = None
-
-  v = np.array(v, dtype=np_dtype)
+  v = _item_to_np_array(item, shape=tensor_info.shape, dtype=tensor_info.dtype)
 
   # Check that the shape is expected
-  if tensor_info:
-    utils.assert_shape_match(v.shape, tensor_info.shape)
-    if tensor_info.dtype == tf.string and not is_string:
-      raise ValueError(
-          "Unsuported value: {}\nCould not convert to bytes list.".format(item))
+  utils.assert_shape_match(v.shape, tensor_info.shape)
+  if tensor_info.dtype == tf.string and not _is_string(v):
+    raise ValueError(
+        "Unsuported value: {}\nCould not convert to bytes list.".format(item))
 
   # Convert boolean to integer (tf.train.Example does not support bool)
   if v.dtype == np.bool_:
@@ -170,7 +145,7 @@ def _item_to_tf_feature(item, tensor_info=None):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
   elif np.issubdtype(v.dtype, np.floating):
     return tf.train.Feature(float_list=tf.train.FloatList(value=v))
-  elif is_string:
+  elif tensor_info.dtype == tf.string:
     v = [tf.compat.as_bytes(x) for x in v]
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
   else:

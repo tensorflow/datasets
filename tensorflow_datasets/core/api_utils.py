@@ -22,6 +22,8 @@ from __future__ import print_function
 
 import functools
 import inspect
+import typing
+from typing import Any, Callable, List, Optional, TypeVar
 
 import six
 import wrapt
@@ -30,6 +32,8 @@ __all__ = [
     "disallow_positional_args"
 ]
 
+Fn = TypeVar("Fn", bound=Callable[..., Any])
+
 REQUIRED_ARG = object()
 _POSITIONAL_ARG_ERR_MSG = (
     "Please use keyword arguments and not positional arguments. This enables "
@@ -37,13 +41,25 @@ _POSITIONAL_ARG_ERR_MSG = (
     "Positional arguments passed to fn %s: %s.")
 
 
-def disallow_positional_args(wrapped=None, allowed=None):
+# `disallow_positional_args` can be applied as a decorator `@decorator` or
+# as a decorator factory `@decorator(**options)`, so we're using
+# `@typing.overload` to define both signatures.
+@typing.overload
+def disallow_positional_args(
+    wrapped: None = ...,
+    allowed: Optional[List[str]] = ...,
+) -> Callable[[Fn], Fn]:
+  ...
+@typing.overload
+def disallow_positional_args(wrapped: Fn, allowed: None = ...) -> Fn:  # pylint: disable=g-wrong-blank-lines
+  ...
+def disallow_positional_args(wrapped=None, allowed=None):  # pylint: disable=g-wrong-blank-lines
   """Requires function to be called using keyword arguments."""
   # See
   # https://wrapt.readthedocs.io/en/latest/decorators.html#decorators-with-optional-arguments
   # for decorator pattern.
   if wrapped is None:
-    return functools.partial(disallow_positional_args, allowed=allowed)
+    return functools.partial(disallow_positional_args, allowed=allowed)  # pytype: disable=bad-return-type
 
   @wrapt.decorator
   def disallow_positional_args_dec(fn, instance, args, kwargs):

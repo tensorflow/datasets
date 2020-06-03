@@ -113,7 +113,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(),
+            'image': tfds.features.Image(encoding_format='jpeg'),
             'label': tfds.features.ClassLabel(names_file=names_file),
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
@@ -135,7 +135,8 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     """
     labels_path = tfds.core.get_tfds_path(_VALIDATION_LABELS_FNAME)
     with tf.io.gfile.GFile(labels_path) as labels_f:
-      labels = labels_f.read().strip().split('\n')
+      # `splitlines` to remove trailing `\r` in Windows
+      labels = labels_f.read().strip().splitlines()
     with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
       tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
       images = sorted(tar.getnames())

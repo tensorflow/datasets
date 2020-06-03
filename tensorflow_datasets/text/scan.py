@@ -58,11 +58,13 @@ Most splits are described at https://github.com/brendenlake/SCAN. For the MCD
 splits please see https://arxiv.org/abs/1912.09713.pdf.
 
 Basic usage:
+
 ```
 data = tfds.load('scan/length')
 ```
 
 More advanced example:
+
 ```
 data = tfds.load(
     'scan',
@@ -81,6 +83,7 @@ class ScanConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SCAN.
 
   Splits can be read in two formats:
+
   1) As a pair of train and test files where each file contains one example
      input and output per line.
   2) With a 'splitfile' which contains for each split the indices into the full

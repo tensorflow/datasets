@@ -55,9 +55,14 @@ REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
 GCS_HOSTED_MSG = """\
 Dataset %s is hosted on GCS. It will automatically be downloaded to your
 local data directory. If you'd instead prefer to read directly from our public
-GCS bucket (recommended if you're running on GCP), you can instead set
-data_dir=gs://tfds-data/datasets.
+GCS bucket (recommended if you're running on GCP), you can instead pass
+`try_gcs=True` to `tfds.load` or set `data_dir=gs://tfds-data/datasets`.
 """
+
+
+# Some tests are still running under Python 2, so internally we still whitelist
+# Py2 temporary.
+_is_py2_download_and_prepare_disabled = True
 
 
 class BuilderConfig(object):
@@ -282,6 +287,13 @@ class DatasetBuilder(object):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
+    # Disable `download_and_prepare` (internally, we are still
+    # allowing Py2 for the `dataset_builder_tests.py` & cie
+    if _is_py2_download_and_prepare_disabled and six.PY2:
+      raise NotImplementedError(
+          "TFDS has droped `builder.download_and_prepare` support for "
+          "Python 2. Please update you code to Python 3.")
+
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(str(v) for v in self.versions
                                        if not v.tfds_version_to_prepare)
@@ -367,11 +379,19 @@ class DatasetBuilder(object):
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
 
+          # Skip statistics computation if tfdv isn't present
+          try:
+            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
+            skip_stats_computation = False
+          except ImportError:
+            skip_stats_computation = True
+
           splits = list(self.info.splits.values())
           statistics_already_computed = bool(
               splits and splits[0].statistics.num_examples)
           # Update DatasetInfo metadata by computing statistics from the data.
-          if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+          if (skip_stats_computation or
+              download_config.compute_stats == download.ComputeStatsMode.SKIP or
               download_config.compute_stats == download.ComputeStatsMode.AUTO
               and statistics_already_computed
              ):
@@ -442,9 +462,10 @@ class DatasetBuilder(object):
     ```
 
     Args:
-      split: `tfds.core.SplitBase`, which subset(s) of the data to read. If None
-        (default), returns all splits in a dict
-        `<key: tfds.Split, value: tf.data.Dataset>`.
+      split: Which split of the data to load (e.g. `'train'`, `'test'`
+        `['train', 'test']`, `'train[80%:]'`,...). See our
+        [split API guide](https://www.tensorflow.org/datasets/splits).
+        If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size` is set. Users that want more custom behavior
         should use `batch_size=None` and use the `tf.data` API to construct a
@@ -760,6 +781,7 @@ class DatasetBuilder(object):
         manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
+        force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
     )
 
@@ -1029,7 +1051,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     # This allows for global preprocessing in beam.
     split_generators_kwargs = {}
     split_generators_arg_names = (
-        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method
+        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method  # pytype: disable=wrong-arg-types
         inspect.signature(self._split_generators).parameters.keys())
     if "pipeline" in split_generators_arg_names:
       split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]

@@ -14,8 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""MS Coco Dataset.
-"""
+"""MS Coco Dataset."""
 
 from __future__ import absolute_import
 from __future__ import division

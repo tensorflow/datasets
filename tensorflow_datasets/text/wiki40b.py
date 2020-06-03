@@ -13,17 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Wiki40B: A clean Wikipedia dataset for 40+ languages."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+
 from absl import logging
+
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
+@inproceedings{49029,
+title = {Wiki-40B: Multilingual Language Model Dataset},
+author = {Mandy Guo and Zihang Dai and Denny Vrandecic and Rami Al-Rfou},
+year = {2020},
+booktitle	= {LREC 2020}
+}
 """
 
 _DESCRIPTION = """
@@ -32,7 +42,9 @@ correspond to entities. The datasets have train/dev/test splits per language.
 The dataset is cleaned up by page filtering to remove disambiguation pages,
 redirect pages, deleted pages, and non-entity pages. Each example contains the
 wikidata id of the entity, and the full Wikipedia article after page processing
-that removes non-content sections and structured objects.
+that removes non-content sections and structured objects. The language models
+trained on this corpus - including 41 monolingual models, and 2 multilingual
+models - can be found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 """
 
 _LICENSE = """
@@ -44,7 +56,7 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 _URL = "https://research.google/pubs/pub49029/"
 
-_DATA_DIRECTORY = "gs://tfds-data/downloads/wiki40b/tfrecord_prod"
+_DATA_DIRECTORY = tfds.core.gcs_path("downloads/wiki40b/tfrecord_prod")
 
 WIKIPEDIA_LANGUAGES = [
     "en", "ar", "zh-cn", "zh-tw", "nl", "fr", "de", "it", "ja", "ko", "pl",
@@ -65,13 +77,13 @@ class Wiki40bConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(Wiki40bConfig, self).__init__(
-        name="Wiki40B.{0}".format(language),
-        description="Wiki40B dataset for {0}.".format(language),
+        name=language,
+        description="Wiki40B dataset for {}.".format(language),
         **kwargs)
     self.language = language
 
 
-_VERSION = tfds.core.Version("1.1.0")
+_VERSION = tfds.core.Version("1.3.0")
 
 
 class Wiki40b(tfds.core.BeamBasedBuilder):
@@ -113,18 +125,20 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepaths": "%s/train/%s_examples-*" % (_DATA_DIRECTORY,
-                                                         lang)},
+                "filepaths": os.path.join(
+                    _DATA_DIRECTORY, "train", "{}_examples-*".format(lang))},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepaths": "%s/dev/%s_examples-*" % (_DATA_DIRECTORY,
-                                                               lang)},
+            gen_kwargs={
+                "filepaths": os.path.join(
+                    _DATA_DIRECTORY, "dev", "{}_examples-*".format(lang))}
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"filepaths": "%s/test/%s_examples-*" % (_DATA_DIRECTORY,
-                                                                lang)},
+            gen_kwargs={
+                "filepaths": os.path.join(
+                    _DATA_DIRECTORY, "test", "{}_examples-*".format(lang))}
         ),
     ]
 

@@ -29,6 +29,7 @@ from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
+from tensorflow_datasets.core.registered import builder_cls
 from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import Split
@@ -36,6 +37,7 @@ from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
 from tensorflow_datasets.core.visualization import show_examples
+from tensorflow_datasets.core.visualization import show_statistics
 from tensorflow_datasets.version import __version__
 
 with core.registered.skip_registration():
@@ -53,6 +55,7 @@ __all__ = [
     "units",
     "GenerateMode",
     "builder",
+    "builder_cls",
     "list_builders",
     "load",
     "ReadConfig",
@@ -61,6 +64,7 @@ __all__ = [
     "disable_progress_bar",
     "is_dataset_on_gcs",
     "show_examples",
+    "show_statistics",
     "visualization",
     "__version__",
 ]

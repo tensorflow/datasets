@@ -28,6 +28,7 @@ from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
 from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
 from tensorflow_datasets.testing.test_utils import make_tmp_dir
 from tensorflow_datasets.testing.test_utils import mock_kaggle_api
+from tensorflow_datasets.testing.test_utils import MockFs
 from tensorflow_datasets.testing.test_utils import RaggedConstant
 from tensorflow_datasets.testing.test_utils import rm_tmp_dir
 from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
@@ -51,5 +52,6 @@ __all__ = [
     "make_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
     "mock_kaggle_api",
     "mock_data",
+    "MockFs",
     "rm_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
 ]

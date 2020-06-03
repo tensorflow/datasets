@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""TODO(blimp): Add a description here."""
+# Lint as: python3
+"""Test for blimp dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
