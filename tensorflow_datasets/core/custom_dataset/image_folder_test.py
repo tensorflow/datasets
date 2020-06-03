@@ -25,6 +25,6 @@ import tensorflow_datasets.public_api as tfds
 if __name__ == "__main__":
 
   # TODO: Update tests
-  path = "~/tensorflow_datasets/image_folder_ds"
+  path = "~/tensorflow_datasets/image_folder_data"
   builder = tfds.ImageLabelFolder(path)
   ds = builder.as_dataset()
