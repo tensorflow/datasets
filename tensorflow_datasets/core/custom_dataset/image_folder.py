@@ -1,7 +1,7 @@
 # coding=utf-8
 # Copyright 2020 The TensorFlow Datasets Authors.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the 'License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -33,99 +33,107 @@ _AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 class ImageLabelFolder(core.DatasetBuilder):
 
-  VERSION = core.Version(
-    "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = core.Version('2.0.0')
 
-  def __init__(self, data_dir):
-    self._data_dir = os.path.expanduser(data_dir)
+  def __init__(self, root_dir):    
+    self._version = str(self.VERSION)
+    self._root_dir = os.path.expanduser(root_dir)
 
     # dict[split_name][label_name] = list(img_paths)
-    self._split_label_images, self._labels = self._get_split_label_images()
-    self._splits_info = core.SplitDict(self.name)
+    self._split_label_images, labels = _get_split_label_images(self._root_dir)
 
+    self._ds_info = core.DatasetInfo(
+        builder=self,
+        description='Generic image classification dataset.',
+        features=core.features.FeaturesDict({
+            'image': core.features.Image(),
+            'label': core.features.ClassLabel(names=list(labels)),
+        }),
+        supervised_keys=('image', 'label'),
+    )
+
+    super(ImageLabelFolder, self).__init__(
+        data_dir=self._root_dir, version=self._version, config=None)
+    
     # Calculate splits for DatasetInfo
-    self._splits = {
-        split_name: self._get_split_size(split_name)
+    splits = {
+        split_name: sum(len(l)
+                        for l in self._split_label_images[split_name].values())
         for split_name in self._split_label_images
     }
 
-    self._split_dict = core.SplitDict(self.name)
-    for split_name, size in self._splits.items():
-      self._split_dict.add(
-        core.SplitInfo(name=split_name, shard_lengths=[size])) # is this correct?
+    split_dict = core.SplitDict(self.name)
+    for split_name, size in splits.items():
+      split_dict.add(
+          core.SplitInfo(name=split_name, shard_lengths=[size]))
 
-    super(ImageLabelFolder, self).__init__(
-        data_dir=data_dir, version=str(self.VERSION), config=None)
+    self._ds_info.update_splits_if_different(split_dict)
 
-    # _data_dir should not change to DATA_DIR/Version
-    self._data_dir = os.path.expanduser(data_dir)
-
-  def _get_split_label_images(self):
-    split_names = _list_folders(self.data_dir)
-    split_label_images = dict()
-    labels = set()
-    for split_name in split_names:
-      split_dir = os.path.join(self.data_dir, split_name)
-      split_label_images[split_name] = {
-          label_name: _list_imgs(os.path.join(split_dir, label_name))	
-          for label_name in _list_folders(split_dir)	
-      }
-      labels.update(split_label_images[split_name].keys())
-    return split_label_images, labels
-
-  def _get_split_size(self, split_name):
-    return sum(len(l) for l in self._split_label_images[split_name].values())
+    # Reset `_data_dir` as it should not change to DATA_DIR/Version
+    self._data_dir = self._root_dir
 
   def _info(self):
-    ds_info = core.DatasetInfo(
-        builder=self,
-        description="Generic image classification dataset.",
-        # Generic features before the data is generated
-        features=core.features.FeaturesDict({
-            "image": core.features.Image(), # TODO: Image shape
-            "label": core.features.ClassLabel(names=list(self._labels)),
-        }),
-        supervised_keys=("image", "label"),
-    )
-    ds_info.update_splits_if_different(self._split_dict)
-    return ds_info
+    return self._ds_info
 
   def _download_and_prepare(self, **kwargs):
-    raise Exception("No need to call download and prepare")
+    pass
 
   def download_and_prepare(self, **kwargs):
-    raise Exception("No need to call download and prepare")
+    pass
 
-  def _as_dataset(self, split, shuffle_files=False, ** kwargs):
-    if split not in self._split_label_images.keys():
-      raise ValueError("Split name {} not present in {}".format(split, self._split_label_images.keys()))
+  def _process_ds(self, image_paths):
+    for path in image_paths:
+      path = path.decode()
+      label = path.split(os.path.sep)[-2]
+      img = tf.io.read_file(path)
+      img = _decode_img(img)
+      yield {'image': img, 'label': self.info.features['label'].str2int(label)}
+
+  def _as_dataset(self, split, shuffle_files=False, **kwargs):
+    if split not in self.info.splits.keys():
+      raise ValueError('Split name {} not present in {}'.format(split, self._split_label_images.keys()))
 
     imgs = [img for l in self._split_label_images[split].values() for img in l]
-    list_ds = tf.data.Dataset.list_files(imgs)
+    ds = tf.data.Dataset.from_generator(
+      self._process_ds,
+      output_shapes=self.info.features.shape,
+      output_types=self.info.features.dtype,
+      args=[imgs])
+    
     if shuffle_files:
-      list_ds = list_ds.shuffle(len(imgs))
-    labeled_ds = list_ds.map(_process_path, num_parallel_calls=_AUTOTUNE)
-    return labeled_ds
+      ds = ds.shuffle(len(imgs))
+    return ds
+
+
+def _get_split_label_images(root_dir):
+  split_names = _list_folders(root_dir)
+  split_label_images = dict()
+  labels = set()
+  for split_name in split_names:
+    split_dir = os.path.join(root_dir, split_name)
+    split_label_images[split_name] = {
+        label_name: _list_imgs(os.path.join(split_dir, label_name))
+        for label_name in _list_folders(split_dir)
+    }
+    labels.update(split_label_images[split_name].keys())
+  return split_label_images, labels
+
 
 def _decode_img(img):
   img = tf.image.decode_jpeg(img, channels=3)
   return tf.image.convert_image_dtype(img, tf.uint8)
 
-def _process_path(file_path):
-  label = tf.strings.split(file_path, os.path.sep)[-2]
-  img = tf.io.read_file(file_path)
-  img = _decode_img(img)
-  return img, label
 
 def _list_folders(root_dir):
-  return [
+  return sorted(
       f for f in tf.io.gfile.listdir(root_dir)
       if tf.io.gfile.isdir(os.path.join(root_dir, f))
-  ]
+  )
+
 
 def _list_imgs(root_dir):
-  return [
+  return sorted(
       os.path.join(root_dir, f)
       for f in tf.io.gfile.listdir(root_dir)
       if any(f.lower().endswith(ext) for ext in _SUPPORTED_IMAGE_FORMAT)
-  ]
+  )
