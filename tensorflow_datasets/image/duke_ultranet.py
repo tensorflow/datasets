@@ -14,6 +14,8 @@ _CITATION = """
 """
 
 # TODO(duke_ultranet):
+# Be sure to run pip install apache-beam==2.19.0
+# and pip uninstall typing
 _DESCRIPTION = {
     'channel': '',
     'dynamic_rx_beamformed': '''
