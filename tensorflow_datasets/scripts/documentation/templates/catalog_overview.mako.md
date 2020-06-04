@@ -13,16 +13,12 @@ nightly package `tfds-nightly`.
 ## trick to output double '#' for markdown. Same for backslashes.
 ${"##"} Usage
 
-```python
-# Build the `tf.data.Dataset` pipeline.
-ds, info = tfds.load('cifar10', split='train', shuffle_files=True, with_info=True)
-ds = ds.shuffle(info.splits['train'].num_examples)
-ds = ds.batch(32)
+See our [getting-started guide](https://www.tensorflow.org/datasets/overview)
+for a quick introduction.
 
-# `tfds.as_numpy` converts `tf.Tensor` -> `np.array`
-for ex in tfds.as_numpy(ds):
-  # `int2str` returns the human readable label ('dog', 'car',...)
-  print(info.features['label'].int2str(ex['label']))
+```python
+for ex in tfds.load('cifar10', split='train'):
+  ...
 ```
 
 ## `##` starts a line comment for mako, so we have to come up with following
