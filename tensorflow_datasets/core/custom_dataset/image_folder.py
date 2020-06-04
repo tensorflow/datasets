@@ -14,28 +14,53 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Image FileFolder datasets."""
+"""Image Classification Folder datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import itertools
 import os
+from typing import Dict, List, Tuple, Set
 
-from absl import logging
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import core
 
+# Dict of `split_label_images['split']['Label']` = `List['images']`
+SplitLabelImageDict = Dict[str, Dict[str, List[str]]]
+
 _SUPPORTED_IMAGE_FORMAT = ('.jpg', '.jpeg', '.png')
-_AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 
 class ImageLabelFolder(core.DatasetBuilder):
+  """Generic image classification dataset created from manual directory.
+
+  The data directory should have the following structure:
+
+  ```
+  path/to/manual_dir/<dataset_name>/
+    split_name/  # Ex: 'train'
+      label1/  # Ex: 'airplane' or '0015'
+        xxx.png
+        xxy.png
+        xxz.png
+      label2/
+        xxx.png
+        xxy.png
+        xxz.png
+    split_name/  # Ex: 'test'
+      ...
+  ```
+
+  To use it:
+
+  ```
+  builder = tfds.ImageLabelFolder(root_dir='path/to/manual_dir/')
+  print(builder.info)  # Splits, num examples,... automatically calculated
+  ds = builder.as_dataset(split='split_name', shuffle_files=True)
+  ```
+
+  """
 
   VERSION = core.Version('2.0.0')
 
-  def __init__(self, root_dir):    
+  def __init__(self, root_dir):
     self._version = str(self.VERSION)
     self._root_dir = os.path.expanduser(root_dir)
 
@@ -47,14 +72,14 @@ class ImageLabelFolder(core.DatasetBuilder):
         description='Generic image classification dataset.',
         features=core.features.FeaturesDict({
             'image': core.features.Image(),
-            'label': core.features.ClassLabel(names=list(labels)),
+            'label': core.features.ClassLabel(names=sorted(list(labels))),
         }),
         supervised_keys=('image', 'label'),
     )
 
     super(ImageLabelFolder, self).__init__(
         data_dir=self._root_dir, version=self._version, config=None)
-    
+
     # Calculate splits for DatasetInfo
     splits = {
         split_name: sum(len(l)
@@ -82,30 +107,39 @@ class ImageLabelFolder(core.DatasetBuilder):
     pass
 
   def _process_ds(self, image_paths):
+    """Yield image and label"""
     for path in image_paths:
       path = path.decode()
       label = path.split(os.path.sep)[-2]
       img = tf.io.read_file(path)
-      img = _decode_img(img)
+      img = tf.image.decode_jpeg(img, channels=3)
+      img = tf.image.convert_image_dtype(img, tf.uint8)
       yield {'image': img, 'label': self.info.features['label'].str2int(label)}
 
   def _as_dataset(self, split, shuffle_files=False, **kwargs):
+    """Generate dataset for given split"""
+    del kwargs
     if split not in self.info.splits.keys():
-      raise ValueError('Split name {} not present in {}'.format(split, self._split_label_images.keys()))
+      raise ValueError('Split name {} not present in {}'
+                       .format(split, self._split_label_images.keys()))
 
-    imgs = [img for l in self._split_label_images[split].values() for img in l]
+    imgs = sorted(
+        img for l in self._split_label_images[split].values() for img in l)
     ds = tf.data.Dataset.from_generator(
-      self._process_ds,
-      output_shapes=self.info.features.shape,
-      output_types=self.info.features.dtype,
-      args=[imgs])
-    
+        self._process_ds,
+        output_shapes=self.info.features.shape,
+        output_types=self.info.features.dtype,
+        args=[imgs])
+
     if shuffle_files:
       ds = ds.shuffle(len(imgs))
     return ds
 
 
-def _get_split_label_images(root_dir):
+def _get_split_label_images(
+    root_dir: str,
+) -> Tuple[SplitLabelImageDict, Set[str]]:
+  """Extract all label names and associated images"""
   split_names = _list_folders(root_dir)
   split_label_images = dict()
   labels = set()
@@ -119,21 +153,16 @@ def _get_split_label_images(root_dir):
   return split_label_images, labels
 
 
-def _decode_img(img):
-  img = tf.image.decode_jpeg(img, channels=3)
-  return tf.image.convert_image_dtype(img, tf.uint8)
-
-
-def _list_folders(root_dir):
-  return sorted(
+def _list_folders(root_dir: str) -> List[str]:
+  return [
       f for f in tf.io.gfile.listdir(root_dir)
       if tf.io.gfile.isdir(os.path.join(root_dir, f))
-  )
+  ]
 
 
-def _list_imgs(root_dir):
-  return sorted(
+def _list_imgs(root_dir: str) -> List[str]:
+  return [
       os.path.join(root_dir, f)
       for f in tf.io.gfile.listdir(root_dir)
       if any(f.lower().endswith(ext) for ext in _SUPPORTED_IMAGE_FORMAT)
-  )
+  ]
