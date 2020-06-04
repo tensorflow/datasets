@@ -28,7 +28,7 @@ original_init = tfds.ImageLabelFolder.__init__
 
 def new_init(self, root_dir=None, **kwargs):
   assert root_dir is None
-
+  del kwargs
   root_dir = os.path.join(
       tfds.core.utils.tfds_dir(), 'testing',
       'test_data', 'fake_examples', 'image_label_folder')

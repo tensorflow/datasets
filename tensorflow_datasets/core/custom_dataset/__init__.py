@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Visualizer utils."""
+"""Custom Datasets APIs"""
 
 from tensorflow_datasets.core.custom_dataset.image_folder import ImageLabelFolder
 
