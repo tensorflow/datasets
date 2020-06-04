@@ -24,7 +24,7 @@ _DESCRIPTION = {
         GCP_PROJECT=duke-ultrasound
         GCS_BUCKET=gs://duke-research-us
         
-        echo "git+git://github.com/ouwen/datasets@master" > /tmp/beam_requirements.txt
+        echo "git+git://github.com/ouwen/datasets@tfds" > /tmp/beam_requirements.txt
         python3 -m tensorflow_datasets.scripts.download_and_prepare \
           --datasets=$DATASET_NAME \
           --data_dir=$GCS_BUCKET/tensorflow_datasets \
@@ -36,7 +36,26 @@ _DESCRIPTION = {
         "machine_type=n1-highmem-16,experiments=shuffle_mode=service,disk_size_gb=500"
         ```
     ''',
-    'b_mode': ''
+    'b_mode': '''
+        ```
+        # Processing script
+        
+        DATASET_NAME=duke_ultranet/b_mode
+        GCP_PROJECT=duke-ultrasound
+        GCS_BUCKET=gs://duke-research-us
+        
+        echo "git+git://github.com/ouwen/datasets@tfds" > /tmp/beam_requirements.txt
+        python3 -m tensorflow_datasets.scripts.download_and_prepare \
+          --datasets=$DATASET_NAME \
+          --data_dir=$GCS_BUCKET/tensorflow_datasets \
+          --beam_pipeline_options=\
+        "runner=DataflowRunner,project=$GCP_PROJECT,job_name=tfds-duke-ultranet-bmode,"\
+        "staging_location=$q/binaries,temp_location=$GCS_BUCKET/temp,"\
+        "requirements_file=/tmp/beam_requirements.txt,region=us-east1,"\
+        "autoscaling_algorithm=NONE,num_workers=20,"\
+        "machine_type=n1-highmem-16,experiments=shuffle_mode=service,disk_size_gb=500"
+        ```
+    '''
 }
 
 _HOMEPAGE = """
@@ -326,6 +345,7 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
             try:
                 data = DukeUltranet.get_rf_hdf5(filepath, i)
             except Exception as e:
+                logging.error(e)
                 logging.error(filepath)
                 beam.metrics.Metrics.counter('results', "download-error").inc()
                 return
