@@ -20,11 +20,36 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+
 import tensorflow_datasets.public_api as tfds
 
-if __name__ == "__main__":
+original_init = tfds.ImageLabelFolder.__init__
 
-  # TODO: Update tests
-  path = "~/tensorflow_datasets/image_folder_data"
-  builder = tfds.ImageLabelFolder(path)
-  ds = builder.as_dataset()
+def new_init(self, root_dir=None, **kwargs):
+  assert root_dir is None
+
+  root_dir = os.path.join(
+      tfds.core.utils.tfds_dir(), 'testing',
+      'test_data', 'fake_examples', 'image_label_folder')
+  original_init(self, root_dir=root_dir)
+
+tfds.ImageLabelFolder.__init__ = new_init
+
+class ImageLabelFolderTest(tfds.testing.DatasetBuilderTestCase):
+  """Test for ImageLabelFolder."""
+
+  DATASET_CLASS = tfds.ImageLabelFolder
+
+  SPLITS = {
+      "train": 2,  # Number of examples.
+      "test": 6,
+  }
+
+  def test_registered(self):
+    self.assertNotIn("image_label_folder", tfds.list_builders(),
+                     "This dataset should not be registered.")
+
+
+if __name__ == "__main__":
+  tfds.testing.test_main()
