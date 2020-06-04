@@ -17,7 +17,27 @@ _CITATION = """
 # Be sure to run pip install apache-beam==2.19.0
 # and pip uninstall typing
 _DESCRIPTION = {
-    'channel': '',
+    'channel': '''
+        ```
+        # Processing script
+        
+        DATASET_NAME=duke_ultranet/channel
+        GCP_PROJECT=duke-ultrasound
+        GCS_BUCKET=gs://duke-research-us
+        
+        echo "git+git://github.com/ouwen/datasets@tfds" > /tmp/beam_requirements.txt
+        python3 -m tensorflow_datasets.scripts.download_and_prepare \
+          --datasets=$DATASET_NAME \
+          --data_dir=$GCS_BUCKET/tensorflow_datasets \
+          --beam_pipeline_options=\
+        "runner=DataflowRunner,project=$GCP_PROJECT,job_name=tfds-duke-ultranet,"\
+        "staging_location=$GCS_BUCKET/binaries,temp_location=$GCS_BUCKET/temp,"\
+        "requirements_file=/tmp/beam_requirements.txt,region=us-east1,"\
+        "autoscaling_algorithm=NONE,num_workers=20,"\
+        "machine_type=n1-highmem-16,experiments=shuffle_mode=service,disk_size_gb=500"
+        ```
+    
+    ''',
     'dynamic_rx_beamformed': '''
         ```
         # Processing script
@@ -55,7 +75,7 @@ _DESCRIPTION = {
         "staging_location=$q/binaries,temp_location=$GCS_BUCKET/temp,"\
         "requirements_file=/tmp/beam_requirements.txt,region=us-east1,"\
         "autoscaling_algorithm=NONE,num_workers=20,"\
-        "machine_type=n1-highmem-16,experiments=shuffle_mode=service,disk_size_gb=500"
+        "machine_type=n1-standard-16,experiments=shuffle_mode=service,disk_size_gb=50"
         ```
     '''
 }
