@@ -109,7 +109,9 @@ class RunInGraphAndEagerTest(test_case.TestCase):
       self.assertEqual(
           tf.io.gfile.listdir('/path/to'), tf.io.gfile.listdir('/path/to/'))
       self.assertEqual(
-          tf.io.gfile.listdir('/path/to'), ['file2', 'file1_moved'])
+          tf.io.gfile.listdir('/path/to'), ['file1_moved', 'file2'])
+      self.assertEqual(
+          tf.io.gfile.listdir('/path'), ['to'])
 
       # Test `MockFs.files`
       self.assertEqual(fs.files, {

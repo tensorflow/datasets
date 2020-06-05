@@ -124,11 +124,11 @@ class MockFs(object):
     self.files[path] = content
 
   def _list_directory(self, path):
-    return [
-        os.path.basename(p)
+    return sorted(list({
+        os.path.relpath(p, path).split(os.path.sep)[0]
         for p in self.files
-        if p.startswith(path.rstrip('/') + '/')  # Make sure path is a `dir/`
-    ]
+        if p.startswith(path.rstrip(os.path.sep) + os.path.sep)  # Make sure path is a `dir/`
+    }))
 
   @contextlib.contextmanager
   def _open(self, path, mode='r'):
