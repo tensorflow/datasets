@@ -44,8 +44,7 @@ with core.registered.skip_registration():
   # We import testing namespace but without registering the tests datasets
   # (e.g. DummyMnist,...).
   from tensorflow_datasets import testing
-  # TODO: Comment
-  from tensorflow_datasets.core.custom_dataset import ImageLabelFolder
+  from tensorflow_datasets.core.custom_dataset import ImageFolder
 
 
 __all__ = [
@@ -56,7 +55,7 @@ __all__ = [
     "features",
     "units",
     "GenerateMode",
-    "ImageLabelFolder",
+    "ImageFolder",
     "builder",
     "builder_cls",
     "list_builders",

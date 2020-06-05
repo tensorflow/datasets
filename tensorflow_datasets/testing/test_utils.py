@@ -596,4 +596,3 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
-

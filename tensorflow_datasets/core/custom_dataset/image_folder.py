@@ -1,7 +1,7 @@
 # coding=utf-8
 # Copyright 2020 The TensorFlow Datasets Authors.
 #
-# Licensed under the Apache License, Version 2.0 (the 'License");
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -28,7 +28,7 @@ SplitLabelImageDict = Dict[str, Dict[str, List[str]]]
 _SUPPORTED_IMAGE_FORMAT = ('.jpg', '.jpeg', '.png')
 
 
-class ImageLabelFolder(core.DatasetBuilder):
+class ImageFolder(core.DatasetBuilder):
   """Generic image classification dataset created from manual directory.
 
   The data directory should have the following structure:
@@ -51,9 +51,10 @@ class ImageLabelFolder(core.DatasetBuilder):
   To use it:
 
   ```
-  builder = tfds.ImageLabelFolder(root_dir='path/to/manual_dir/')
-  print(builder.info)  # Splits, num examples,... automatically calculated
+  builder = tfds.ImageFolder(root_dir='path/to/manual_dir/')
+  print(builder.info)  # Splits, num examples,... are automatically calculated
   ds = builder.as_dataset(split='split_name', shuffle_files=True)
+  tfds.show_examples(ds, builder.info)
   ```
 
   """
@@ -61,50 +62,47 @@ class ImageLabelFolder(core.DatasetBuilder):
   VERSION = core.Version('2.0.0')
 
   def __init__(self, root_dir):
-    self._version = str(self.VERSION)
-    self._root_dir = os.path.expanduser(root_dir)
+    root_dir = os.path.expanduser(root_dir)
+    super(ImageFolder, self).__init__(
+        data_dir=root_dir, version=str(self.VERSION), config=None)
+
+    # Reset `_data_dir` as it should not change to DATA_DIR/Version
+    self._data_dir = root_dir
 
     # dict[split_name][label_name] = list(img_paths)
-    self._split_label_images, labels = _get_split_label_images(self._root_dir)
+    self._split_label_images, labels = _get_split_label_images(root_dir)
 
-    self._ds_info = core.DatasetInfo(
-        builder=self,
-        description='Generic image classification dataset.',
-        features=core.features.FeaturesDict({
-            'image': core.features.Image(),
-            'label': core.features.ClassLabel(names=sorted(list(labels))),
-        }),
-        supervised_keys=('image', 'label'),
-    )
+    # Calculate and update DatasetInfo labels
+    self.info.features['label'].names = labels
 
-    super(ImageLabelFolder, self).__init__(
-        data_dir=self._root_dir, version=self._version, config=None)
-
-    # Calculate splits for DatasetInfo
+    # Calculate and update DatasetInfo splits
     splits = {
         split_name: sum(len(l)
                         for l in self._split_label_images[split_name].values())
         for split_name in self._split_label_images
     }
-
     split_dict = core.SplitDict(self.name)
     for split_name, size in splits.items():
       split_dict.add(
           core.SplitInfo(name=split_name, shard_lengths=[size]))
-
-    self._ds_info.update_splits_if_different(split_dict)
-
-    # Reset `_data_dir` as it should not change to DATA_DIR/Version
-    self._data_dir = self._root_dir
+    self.info.update_splits_if_different(split_dict)
 
   def _info(self):
-    return self._ds_info
+    return core.DatasetInfo(
+        builder=self,
+        description='Generic image classification dataset.',
+        features=core.features.FeaturesDict({
+            'image': core.features.Image(),
+            'label': core.features.ClassLabel(),
+        }),
+        supervised_keys=('image', 'label'),
+    )
 
   def _download_and_prepare(self, **kwargs):
-    pass
+    raise Exception('No need to call download_and_prepare function.')
 
   def download_and_prepare(self, **kwargs):
-    pass
+    raise Exception('No need to call download_and_prepare function.')
 
   def _process_ds(self, image_paths):
     """Yield image and label"""
