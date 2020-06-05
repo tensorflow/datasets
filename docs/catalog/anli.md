@@ -27,16 +27,10 @@ iterative, adversarial human-and-model-in-the-loop procedure.
     [`tfds.text.anli.Anli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/anli.py)
 *   **Versions**:
     *   **`0.1.0`** (default): No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `17.76 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
+    Yes
 *   **Features**:
 
 ```python
@@ -75,10 +69,40 @@ FeaturesDict({
 
 *   **Config description**: Round One
 
+*   **Dataset size**: `9.04 MiB`
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 1,000
+'train'      | 16,946
+'validation' | 1,000
+
 ## anli/r2
 
 *   **Config description**: Round Two
 
+*   **Dataset size**: `22.39 MiB`
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 1,000
+'train'      | 45,460
+'validation' | 1,000
+
 ## anli/r3
 
 *   **Config description**: Round Three
+
+*   **Dataset size**: `47.03 MiB`
+
+*   **Splits**:
+
+Split        | Examples
+:----------- | -------:
+'test'       | 1,200
+'train'      | 100,459
+'validation' | 1,200

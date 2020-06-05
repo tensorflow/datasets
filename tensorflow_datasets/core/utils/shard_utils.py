@@ -26,9 +26,47 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from typing import List, Sequence
 
-def get_read_instructions(from_, to, filenames, shard_lengths,
-                          shardref_name="filename"):
+import attr
+
+
+@attr.s(frozen=True)
+class FileInstruction(object):  # TODO(epot): Uses dataclasses instead
+  """Instruction to read a single shard/file.
+
+  Attributes:
+    filename: The filenames contains the relative path, not absolute.
+    skip: Indicates which example read in the shard (`ds.skip().take()`). `None`
+      if no skipping
+    take: Indicates how many examples to read (`None` to read all)
+    num_examples: `int`, The total number of examples
+  """
+  filename = attr.ib()
+  skip = attr.ib()
+  take = attr.ib()
+  num_examples = attr.ib()
+
+  def asdict(self):
+    return {
+        'filename': self.filename,
+        'skip': self.skip,
+        'take': self.take,
+        'num_examples': self.num_examples,
+    }
+
+  def replace(self, **kwargs):
+    new_attrs = self.asdict()
+    new_attrs.update(kwargs)
+    return type(self)(**new_attrs)
+
+
+def get_file_instructions(
+    from_: int,
+    to: int,
+    filenames: Sequence[str],
+    shard_lengths: Sequence[int],
+) -> List[FileInstruction]:
   """Returns a list of files (+skip/take) to read [from_:to] items from shards.
 
   Args:
@@ -37,15 +75,13 @@ def get_read_instructions(from_, to, filenames, shard_lengths,
     filenames: list of strings or ints, the filenames of the shards. Not really
       used, but to place in result.
     shard_lengths: the number of elements in every shard.
-    shardref_name: string, defaults to "filename". How to name the field holding
-      the shard-reference in result dict.
 
   Returns:
     list of dict(filename, skip, take).
   """
   index_start = 0  # Beginning (included) of moving window.
   index_end = 0  # End (excluded) of moving window.
-  files = []
+  file_instructions = []
   for filename, length in zip(filenames, shard_lengths):
     if not length:
       continue  # Empty shard - can happen with temporary buckets.
@@ -55,6 +91,11 @@ def get_read_instructions(from_, to, filenames, shard_lengths,
       take = to - index_start - skip if to < index_end else -1
       if take == 0:
         continue
-      files.append({shardref_name: filename, "skip": skip, "take": take})
+      file_instructions.append(FileInstruction(
+          filename=filename,
+          skip=skip,
+          take=take,
+          num_examples=length - skip if take == -1 else take,
+      ))
     index_start += length
-  return files
+  return file_instructions

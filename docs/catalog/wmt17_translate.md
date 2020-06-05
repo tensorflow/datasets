@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="wmt17_translate" />
   <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wmt17_translate&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wmt17_translate" />
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt17/translation-task.html" />
   <meta itemprop="citation" content="@InProceedings{bojar-EtAl:2017:WMT1,&#10;  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huang, Shujian  and  Huck, Matthias  and  Koehn, Philipp  and  Liu, Qun  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Rubino, Raphael  and  Specia, Lucia  and  Turchi, Marco},&#10;  title     = {Findings of the 2017 Conference on Machine Translation (WMT17)},&#10;  booktitle = {Proceedings of the Second Conference on Machine Translation, Volume 2: Shared Task Papers},&#10;  month     = {September},&#10;  year      = {2017},&#10;  address   = {Copenhagen, Denmark},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {169--214},&#10;  url       = {http://www.aclweb.org/anthology/W17-4717}&#10;}" />
 </div>
+
 # `wmt17_translate`
 
 Warning: Manual download required. See instructions below.
@@ -73,6 +75,7 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Config description**: WMT 2017 cs-en translation task dataset.
 
 *   **Download size**: `1.66 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -89,6 +92,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('cs', 'en')`
@@ -98,6 +102,7 @@ Translation({
 *   **Config description**: WMT 2017 de-en translation task dataset.
 
 *   **Download size**: `1.81 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -114,6 +119,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
@@ -123,6 +129,7 @@ Translation({
 *   **Config description**: WMT 2017 fi-en translation task dataset.
 
 *   **Download size**: `414.10 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -139,6 +146,7 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fi', 'en')`
@@ -148,6 +156,7 @@ Translation({
 *   **Config description**: WMT 2017 lv-en translation task dataset.
 
 *   **Download size**: `161.69 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -164,6 +173,7 @@ Translation({
     'lv': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('lv', 'en')`
@@ -173,6 +183,7 @@ Translation({
 *   **Config description**: WMT 2017 ru-en translation task dataset.
 
 *   **Download size**: `3.34 GiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -189,6 +200,7 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`
@@ -198,6 +210,7 @@ Translation({
 *   **Config description**: WMT 2017 tr-en translation task dataset.
 
 *   **Download size**: `59.32 MiB`
+
 *   **Splits**:
 
 Split        | Examples
@@ -214,6 +227,7 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('tr', 'en')`
@@ -223,6 +237,7 @@ Translation({
 *   **Config description**: WMT 2017 zh-en translation task dataset.
 
 *   **Download size**: `2.16 GiB`
+
 *   **Splits**:
 
 Split        | Examples

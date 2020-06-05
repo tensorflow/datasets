@@ -24,17 +24,22 @@ import itertools
 import json
 import os
 
+from typing import Any, Iterable, List, Tuple
+
 from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import shard_utils
+
+# TODO(tfds): Should be `TreeDict[FeatureValue]`
+Example = Any
 
 MIN_SHARD_SIZE = 64<<20  # 64 MiB
 MAX_SHARD_SIZE = 1024<<20  # 2 GiB
@@ -57,10 +62,8 @@ _ShardSpec = collections.namedtuple("_ShardSpec", [
     "path",
     # Number of examples in shard
     "examples_number",
-    # Reading instructions. Eg:
-    # [dict(shard_index=1, skip=2, take=-1),
-    #  dict(shard_index=2, skip=0, take=3)]
-    "reading_instructions",
+    # Reading instructions (List[FileInstruction]).
+    "file_instructions",
 ])
 
 
@@ -76,7 +79,12 @@ def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   raise AssertionError(msg)
 
 
-def _get_shard_specs(num_examples, total_size, bucket_lengths, path):
+def _get_shard_specs(
+    num_examples: int,
+    total_size: int,
+    bucket_lengths: List[int],
+    path: str,
+) -> List[_ShardSpec]:
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
   Args:
@@ -88,32 +96,41 @@ def _get_shard_specs(num_examples, total_size, bucket_lengths, path):
   num_shards = _get_number_shards(total_size, num_examples)
   shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
   shard_specs = []
-  bucket_indexes = list(range(len(bucket_lengths)))
+  bucket_indexes = [str(i) for i in range(len(bucket_lengths))]
   from_ = 0
   for shard_index, to in enumerate(shard_boundaries):
-    instructions = _sharded_files.get_read_instructions(
-        from_, to, bucket_indexes, bucket_lengths, shardref_name="bucket_index")
+    # Read the bucket indexes
+    file_instructions = shard_utils.get_file_instructions(
+        from_, to, bucket_indexes, bucket_lengths)
     shard_specs.append(_ShardSpec(
         shard_index=shard_index,
         path="%s-%05d-of-%05d" % (path, shard_index, num_shards),
         examples_number=to-from_,
-        reading_instructions=instructions,
-        ))
+        file_instructions=file_instructions,
+    ))
     from_ = to
   return shard_specs
 
 
-def _get_shard_boundaries(num_examples, number_of_shards):
+def _get_shard_boundaries(
+    num_examples: int,
+    number_of_shards: int,
+) -> List[int]:
   if num_examples == 0:
     raise AssertionError("No examples were yielded.")
   if num_examples < number_of_shards:
     raise AssertionError("num_examples ({}) < number_of_shards ({})".format(
         num_examples, number_of_shards))
-  return [round(num_examples * (float(i)/number_of_shards))
-          for i in range(1, number_of_shards+1)]
+  return [
+      int(round(num_examples * (float(i)/number_of_shards)))
+      for i in range(1, number_of_shards+1)
+  ]
 
 
-def _write_tfrecord(path, iterator):
+def _write_tfrecord(
+    path: str,
+    iterator: Iterable[bytes],
+):
   """Write single (non sharded) TFrecord file from iterator."""
   with tf.io.TFRecordWriter(path) as writer:
     for serialized_example in iterator:
@@ -121,24 +138,10 @@ def _write_tfrecord(path, iterator):
     writer.flush()
 
 
-def _write_tfrecord_from_shard_spec(shard_spec, get):
-  """Write tfrecord shard given shard_spec and buckets to read data from.
-
-  Args:
-    shard_spec: _ShardSpec, the spec for shard to write.
-    get: callable taking the shard index (of bucket) and returning iterator over
-      its elements.
-  """
-  iterators = []
-  for instruction in shard_spec.reading_instructions:
-    iterator = get(instruction["bucket_index"])
-    skip, take = instruction["skip"], instruction["take"]
-    stop = skip+take if take > 0 else None
-    iterators.append(itertools.islice(iterator, skip, stop))
-  _write_tfrecord(shard_spec.path, itertools.chain(*iterators))
-
-
-def _get_number_shards(total_size, num_examples):
+def _get_number_shards(
+    total_size: int,
+    num_examples: int,
+) -> int:
   """Returns number of shards for num_examples of total_size in bytes.
 
   Each shard should be at least 128MB.
@@ -271,7 +274,10 @@ class BeamWriter(object):
   def __setstate__(self, state):
     self.__init__(**state)
 
-  def _serialize_shard(self, key_example):
+  def _serialize_shard(
+      self,
+      key_example: Tuple[hashing.HashKey, Example],
+  ) -> Tuple[int, Tuple[int, bytes]]:
     """Returns (shard#, (hkey, serialized_example))."""
     key, example = key_example
     serialized_example = self._serializer.serialize_example(example)
@@ -328,12 +334,12 @@ class BeamWriter(object):
                   int(shard.examples_number) for shard in shard_specs]
           }))
     for shard_spec in shard_specs:
-      for instruction in shard_spec.reading_instructions:
-        bucketid = instruction["bucket_index"]
-        from_ = instruction["skip"]
-        take = instruction["take"]
+      for instruction in shard_spec.file_instructions:
+        bucketid = int(instruction.filename)
+        from_ = instruction.skip
+        take = instruction.take
         to = from_ + take if take >= 0 else None
-        yield (_long_for_py2(bucketid), (shard_spec.path, from_, to))
+        yield (bucketid, (shard_spec.path, from_, to))
 
   def _emits_examples_per_shard(self, bucketid_data):
     """Split examples of a bucket given list of instructions applying to it."""

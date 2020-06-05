@@ -21,11 +21,12 @@ from __future__ import division
 from __future__ import print_function
 
 import typing
-from typing import Union
+from typing import List, Union
 
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import shard_utils
 
 
 @utils.as_proto_cls(proto.SplitInfo)
@@ -33,23 +34,23 @@ class SplitInfo(object):
   """Wraps `proto.SplitInfo` with an additional property."""
 
   @property
-  def num_examples(self):
+  def num_examples(self) -> int:
     if self.shard_lengths:  # pytype: disable=attribute-error
       return sum(int(sl) for sl in self.shard_lengths)  # pytype: disable=attribute-error
     return int(self.statistics.num_examples)  # pytype: disable=attribute-error
 
   @property
-  def num_shards(self):
+  def num_shards(self) -> int:
     if self.shard_lengths:
       return len(self.shard_lengths)
     return self._ProtoCls__proto.num_shards
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     num_examples = self.num_examples or "unknown"
     return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)
 
   @property
-  def file_instructions(self):
+  def file_instructions(self) -> List[shard_utils.FileInstruction]:
     """Returns the list of dict(filename, take, skip).
 
     This allows for creating your own `tf.data.Dataset` using the low-level
@@ -80,17 +81,16 @@ class SplitInfo(object):
       A `dict(filename, take, skip)`
     """
     # `self._dataset_name` is assigned in `SplitDict.add()`.
-    instructions = tfrecords_reader.make_file_instructions(
+    return tfrecords_reader.make_file_instructions(
         name=self._dataset_name,
         split_infos=[self],
         instruction=str(self.name),
     )
-    return instructions.file_instructions
 
   @property
-  def filenames(self):
+  def filenames(self) -> List[str]:
     """Returns the list of filenames."""
-    return sorted(f["filename"] for f in self.file_instructions)
+    return sorted(f.filename for f in self.file_instructions)
 
 
 class SubSplitInfo(object):
@@ -105,28 +105,28 @@ class SubSplitInfo(object):
 
   """
 
-  def __init__(self, file_instructions):
+  def __init__(self, file_instructions: List[shard_utils.FileInstruction]):
     """Constructor.
 
     Args:
-      file_instructions: FileInstructions
+      file_instructions: List[FileInstruction]
     """
     self._file_instructions = file_instructions
 
   @property
-  def num_examples(self):
+  def num_examples(self) -> int:
     """Returns the number of example in the subsplit."""
-    return sum(self._file_instructions.num_examples_per_shard)
+    return sum(f.num_examples for f in self._file_instructions)
 
   @property
-  def file_instructions(self):
+  def file_instructions(self) -> List[shard_utils.FileInstruction]:
     """Returns the list of dict(filename, take, skip)."""
-    return self._file_instructions.file_instructions
+    return self._file_instructions
 
   @property
-  def filenames(self):
+  def filenames(self) -> List[str]:
     """Returns the list of filenames."""
-    return sorted(f["filename"] for f in self.file_instructions)
+    return sorted(f.filename for f in self.file_instructions)
 
 
 # TODO(epot): `: tfds.Split` type should be `Union[str, Split]`
@@ -149,7 +149,7 @@ class Split(str):
   for more information.
   """
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     return "{}({})".format(type(self).__name__, super(Split, self).__repr__())  # pytype: disable=wrong-arg-types
 
 
