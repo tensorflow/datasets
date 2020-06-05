@@ -14,42 +14,102 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Test for ImageLabelFolder."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Test for ImageFolder."""
 
 import os
 
 import tensorflow_datasets.public_api as tfds
 
-original_init = tfds.ImageLabelFolder.__init__
+_EXAMPLE_DIR = os.path.join(
+      tfds.testing.test_utils.fake_examples_dir(), 'image_folder_data')
+
+original_init = tfds.ImageFolder.__init__
 
 def new_init(self, root_dir=None, **kwargs):
   assert root_dir is None
   del kwargs
-  root_dir = os.path.join(
-      tfds.core.utils.tfds_dir(), 'testing',
-      'test_data', 'fake_examples', 'image_label_folder')
+  root_dir = _EXAMPLE_DIR
   original_init(self, root_dir=root_dir)
 
-tfds.ImageLabelFolder.__init__ = new_init
 
-class ImageLabelFolderTest(tfds.testing.DatasetBuilderTestCase):
-  """Test for ImageLabelFolder."""
+def download_and_prepare(self, **kwargs): # pylint:disable = unused-argument
+  pass
 
-  DATASET_CLASS = tfds.ImageLabelFolder
 
+class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
+  """Test for ImageFolder."""
+
+  DATASET_CLASS = tfds.ImageFolder
   SPLITS = {
-      "train": 2,  # Number of examples.
-      "test": 6,
+      'train': 2,
+      'test': 6,
   }
+  EXAMPLE_DIR = _EXAMPLE_DIR
+  
+  @classmethod
+  def setUpClass(cls): # pylint:disable = invalid-name
+    super(ImageFolderTest, cls).setUpClass()
+    cls.DATASET_CLASS.__init__ = new_init
+    cls.DATASET_CLASS.download_and_prepare = download_and_prepare
 
   def test_registered(self):
-    self.assertNotIn("image_label_folder", tfds.list_builders(),
-                     "This dataset should not be registered.")
+    self.assertEqual('image_folder', self.builder.name)
+    self.assertNotIn(self.builder.name, tfds.list_builders(),
+                     'This dataset should not be registered.')
 
+class ImageFolderFunctionTest(tfds.testing.TestCase):
+  """Tests for ImageFolder functions"""
 
-if __name__ == "__main__":
+  def test_get_split_label_images(self):
+    images = [
+        'root_dir/train/label1/img1.png',
+        'root_dir/train/label2/img1.png',
+        'root_dir/train/label2/img2.png',
+        'root_dir/train/label3/img1.png',
+        'root_dir/train/label3/img2.png',
+        'root_dir/train/label3/img3.png',
+
+        'root_dir/val/label1/img1.png',
+        'root_dir/val/label2/img2.png',
+
+        'root_dir/test/label1/img1.png',
+        'root_dir/test/label2/img1.png',
+    ]
+
+    labels = {
+        'label1',
+        'label2',
+        'label3',
+    }
+
+    split_label_img = {
+        'train': {
+            'label1': ['root_dir/train/label1/img1.png'],
+            'label2': ['root_dir/train/label2/img1.png',
+                       'root_dir/train/label2/img2.png'],
+            'label3': ['root_dir/train/label3/img1.png',
+                       'root_dir/train/label3/img2.png',
+                       'root_dir/train/label3/img3.png'],
+        },
+        'val': {
+            'label1': ['root_dir/val/label1/img1.png'],
+            'label2': ['root_dir/val/label2/img2.png'],
+        },
+        'test': {
+            'label1': ['root_dir/test/label1/img1.png'],
+            'label2': ['root_dir/test/label2/img1.png'],
+        }
+    }
+    func = tfds.core.custom_dataset.image_folder._get_split_label_images # pylint: disable = protected-access
+
+    fs = tfds.testing.MockFs()
+    with fs.mock():
+      for file in images:
+        fs.add_file(file)
+
+      out1, out2 = func('root_dir')
+      self.assertEqual(split_label_img, out1)
+      self.assertEqual(labels, out2)
+
+if __name__ == '__main__':
   tfds.testing.test_main()
