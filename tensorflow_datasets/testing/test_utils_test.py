@@ -84,6 +84,7 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     fs = test_utils.MockFs()
     with fs.mock():
       fs.add_file('/path/to/file1', 'Content of file 1')
+      fs.add_file('/path/file.txt', 'Content of file.txt')
 
       # Test `tf.io.gfile.exists`
       self.assertTrue(tf.io.gfile.exists('/path/to/file1'))
@@ -106,15 +107,17 @@ class RunInGraphAndEagerTest(test_case.TestCase):
       self.assertEqual(fs.files['/path/to/file1_moved'], 'Content of file 1')
 
       # Test `tf.io.gfile.listdir`
-      self.assertEqual(
+      self.assertCountEqual(
           tf.io.gfile.listdir('/path/to'), tf.io.gfile.listdir('/path/to/'))
-      self.assertEqual(
-          tf.io.gfile.listdir('/path/to'), ['file2', 'file1_moved'])
+      self.assertCountEqual(
+          tf.io.gfile.listdir('/path/to'), ['file1_moved', 'file2'])
+      self.assertCountEqual(tf.io.gfile.listdir('/path'), ['file.txt', 'to'])
 
       # Test `MockFs.files`
       self.assertEqual(fs.files, {
           '/path/to/file2': 'Content of file 2 (new)',
           '/path/to/file1_moved': 'Content of file 1',
+          '/path/file.txt': 'Content of file.txt',
       })
 
 if __name__ == '__main__':

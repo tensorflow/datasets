@@ -124,11 +124,12 @@ class MockFs(object):
     self.files[path] = content
 
   def _list_directory(self, path):
-    return [
-        os.path.basename(p)
-        for p in self.files
-        if p.startswith(path.rstrip('/') + '/')  # Make sure path is a `dir/`
-    ]
+    path = path.rstrip(os.path.sep) + os.path.sep  # Make sure path is a `dir/`
+    return list({
+        # Extract `path/<dirname>/...` -> `<dirname>`
+        os.path.relpath(p, path).split(os.path.sep)[0]
+        for p in self.files if p.startswith(path)
+    })
 
   @contextlib.contextmanager
   def _open(self, path, mode='r'):
@@ -208,15 +209,11 @@ class SubTestCase(test_case.TestCase):
 
   @contextlib.contextmanager
   def _subTest(self, test_str):
-    sub_test_not_implemented = True
-    if sub_test_not_implemented:
+    self._sub_test_stack.append(test_str)
+    sub_test_str = '/'.join(self._sub_test_stack)
+    with self.subTest(sub_test_str):
       yield
-    else:
-      self._sub_test_stack.append(test_str)
-      sub_test_str = '/'.join(self._sub_test_stack)
-      with self.subTest(sub_test_str):
-        yield
-      self._sub_test_stack.pop()
+    self._sub_test_stack.pop()
 
   def assertAllEqualNested(self, d1, d2):
     """Same as assertAllEqual but compatible with nested dict."""
