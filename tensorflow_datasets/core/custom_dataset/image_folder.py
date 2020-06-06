@@ -61,7 +61,8 @@ class ImageFolder(core.DatasetBuilder):
 
   VERSION = core.Version('2.0.0')
 
-  def __init__(self, root_dir):
+  def __init__(self, root_dir, **kwargs):
+    del kwargs
     root_dir = os.path.expanduser(root_dir)
     super(ImageFolder, self).__init__(
         data_dir=root_dir, version=str(self.VERSION), config=None)
@@ -94,25 +95,41 @@ class ImageFolder(core.DatasetBuilder):
         features=core.features.FeaturesDict({
             'image': core.features.Image(),
             'label': core.features.ClassLabel(),
+            'image/filename': core.features.Text(),
         }),
         supervised_keys=('image', 'label'),
     )
 
   def _download_and_prepare(self, **kwargs):
-    raise Exception('No need to call download_and_prepare function.')
+    raise NotImplementedError('No need to call download_and_prepare function.')
 
   def download_and_prepare(self, **kwargs):
-    raise Exception('No need to call download_and_prepare function.')
+    raise NotImplementedError('No need to call download_and_prepare function.')
 
-  def _process_ds(self, image_paths):
-    """Yield image and label"""
-    for path in image_paths:
-      path = path.decode()
-      label = path.split(os.path.sep)[-2]
-      img = tf.io.read_file(path)
-      img = tf.image.decode_jpeg(img, channels=3)
-      img = tf.image.convert_image_dtype(img, tf.uint8)
-      yield {'image': img, 'label': self.info.features['label'].str2int(label)}
+  def _map_fn(self, path):
+    image_path = tf.strings.split(path, os.path.sep)[-3:]
+    img = tf.io.read_file(path)
+    img = tf.image.decode_jpeg(img, channels=3)
+    img = tf.image.convert_image_dtype(img, tf.uint8)
+    label = image_path[1].numpy()
+    return [
+        img,
+        self.info.features['label'].str2int(label),
+        tf.strings.reduce_join(image_path)
+    ]
+
+  def _process_ds(self, path):
+    output = tf.py_function(self._map_fn,
+                            inp=[path],
+                            Tout=list(self.info.features.dtype.values()))
+    output = {
+        'image': output[0],
+        'label': output[1],
+        'image/filename': output[2],
+    }
+    for key, value in output.items():
+      value.set_shape(self.info.features.shape[key])
+    return output
 
   def _as_dataset(self, split, shuffle_files=False, **kwargs):
     """Generate dataset for given split"""
@@ -123,12 +140,10 @@ class ImageFolder(core.DatasetBuilder):
 
     imgs = sorted(
         img for l in self._split_label_images[split].values() for img in l)
-    ds = tf.data.Dataset.from_generator(
-        self._process_ds,
-        output_shapes=self.info.features.shape,
-        output_types=self.info.features.dtype,
-        args=[imgs])
 
+    ds = tf.data.Dataset.list_files(imgs)
+    ds = ds.map(self._process_ds,
+                num_parallel_calls=tf.data.experimental.AUTOTUNE)
     if shuffle_files:
       ds = ds.shuffle(len(imgs))
     return ds
