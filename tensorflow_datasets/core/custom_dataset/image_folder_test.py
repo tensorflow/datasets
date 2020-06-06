@@ -16,24 +16,11 @@
 # Lint as: python3
 """Test for ImageFolder."""
 
+import functools
 import os
+import mock
 
 import tensorflow_datasets.public_api as tfds
-
-_EXAMPLE_DIR = os.path.join(
-      tfds.testing.test_utils.fake_examples_dir(), 'image_folder_data')
-
-original_init = tfds.ImageFolder.__init__
-
-def new_init(self, root_dir=None, **kwargs):
-  assert root_dir is None
-  del kwargs
-  root_dir = _EXAMPLE_DIR
-  original_init(self, root_dir=root_dir)
-
-
-def download_and_prepare(self, **kwargs): # pylint:disable = unused-argument
-  pass
 
 
 class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
@@ -44,13 +31,16 @@ class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
       'train': 2,
       'test': 6,
   }
-  EXAMPLE_DIR = _EXAMPLE_DIR
-  
+  EXAMPLE_DIR = os.path.join(
+      tfds.testing.test_utils.fake_examples_dir(), 'image_folder_data')
+  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
+
   @classmethod
   def setUpClass(cls): # pylint:disable = invalid-name
     super(ImageFolderTest, cls).setUpClass()
-    cls.DATASET_CLASS.__init__ = new_init
-    cls.DATASET_CLASS.download_and_prepare = download_and_prepare
+    cls.DATASET_CLASS.download_and_prepare = mock.Mock(return_value=None)
+    cls.DATASET_CLASS = functools.partial(tfds.ImageFolder,
+                                          root_dir=cls.EXAMPLE_DIR)
 
   def test_registered(self):
     self.assertEqual('image_folder', self.builder.name)
@@ -60,7 +50,7 @@ class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
 class ImageFolderFunctionTest(tfds.testing.TestCase):
   """Tests for ImageFolder functions"""
 
-  def test_get_split_label_images(self):
+  def test_properties(self):
     images = [
         'root_dir/train/label1/img1.png',
         'root_dir/train/label2/img1.png',
@@ -74,12 +64,20 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
 
         'root_dir/test/label1/img1.png',
         'root_dir/test/label2/img1.png',
+        'root_dir/test/label4/img1.png',
     ]
+
+    splits_info = {
+        'train': 6,
+        'val': 2,
+        'test': 3,
+    }
 
     labels = {
         'label1',
         'label2',
         'label3',
+        'label4',
     }
 
     split_label_img = {
@@ -98,18 +96,27 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
         'test': {
             'label1': ['root_dir/test/label1/img1.png'],
             'label2': ['root_dir/test/label2/img1.png'],
+            'label4': ['root_dir/test/label4/img1.png'],
         }
     }
-    func = tfds.core.custom_dataset.image_folder._get_split_label_images # pylint: disable = protected-access
 
+
+    split_img = tfds.core.custom_dataset.image_folder._get_split_label_images
     fs = tfds.testing.MockFs()
     with fs.mock():
       for file in images:
         fs.add_file(file)
 
-      out1, out2 = func('root_dir')
-      self.assertEqual(split_label_img, out1)
+      out1, out2 = split_img('root_dir')
+      self.assertCountEqual(split_label_img, out1)
       self.assertEqual(labels, out2)
+
+      builder = tfds.ImageFolder('root_dir')
+      for split in builder.info.splits.keys():
+        self.assertEqual(builder.info.splits[split].num_examples,
+                         splits_info[split])
+
+      self.assertCountEqual(builder.info.features['label'].names, labels)
 
 if __name__ == '__main__':
   tfds.testing.test_main()
