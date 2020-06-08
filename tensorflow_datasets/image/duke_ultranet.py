@@ -38,6 +38,7 @@ _DESCRIPTION = {
         ```
     
     ''',
+    'iq_channel': '',
     'dynamic_rx_beamformed': '''
         ```
         # Processing script
@@ -58,6 +59,7 @@ _DESCRIPTION = {
         "machine_type=n1-highmem-16,experiments=shuffle_mode=service,disk_size_gb=500"
         ```
     ''',
+    'iq_dynamic_rx_beamformed': '',
     'b_mode': '''
         ```
         # Processing script
@@ -108,8 +110,18 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
         ),
         tfds.core.BuilderConfig(
             version=VERSION,
+            name="iq_channel",
+            description="IQ Raw channel data from simulated transducers."
+        ),
+        tfds.core.BuilderConfig(
+            version=VERSION,
             name="dynamic_rx_beamformed",
             description="Dynamic recieve beamformed data windowed to target of interest."
+        ),
+        tfds.core.BuilderConfig(
+            version=VERSION,
+            name="iq_dynamic_rx_beamformed",
+            description="IQ Dynamic recieve beamformed data windowed to target of interest."
         ),
         tfds.core.BuilderConfig(
             version=VERSION,
@@ -307,7 +319,24 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 homepage=_HOMEPAGE,
                 citation=_CITATION
             )
-
+        
+        if self.builder_config.name is 'iq_channel':
+            return tfds.core.DatasetInfo(
+                builder=self,
+                description=_DESCRIPTION['iq_channel'],
+                features=tfds.features.FeaturesDict({
+                    'data': {
+                        'without_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,351), dtype=tf.complex64),
+                        'with_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,351), dtype=tf.complex64),
+                        'cmap': tfds.features.Tensor(shape=(1247, 1091), dtype=tf.float64),
+                    },
+                    'params': common
+                }),
+                supervised_keys=('data/with_wall', 'data/without_wall'),
+                homepage=_HOMEPAGE,
+                citation=_CITATION
+            )
+        
         if self.builder_config.name is 'dynamic_rx_beamformed':
             return tfds.core.DatasetInfo(
                 builder=self,
@@ -316,6 +345,22 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                     'data': {
                         'without_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,3117), dtype=tf.float32),
                         'with_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,3117), dtype=tf.float32)
+                    },
+                    'params': common
+                }),
+                supervised_keys=('data/with_wall', 'data/without_wall'),
+                homepage=_HOMEPAGE,
+                citation=_CITATION
+            )
+        
+        if self.builder_config.name is 'iq_dynamic_rx_beamformed':
+            return tfds.core.DatasetInfo(
+                builder=self,
+                description=_DESCRIPTION['iq_dynamic_rx_beamformed'],
+                features=tfds.features.FeaturesDict({
+                    'data': {
+                        'without_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,156), dtype=tf.complex64),
+                        'with_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,156), dtype=tf.complex64)
                     },
                     'params': common
                 }),
@@ -468,8 +513,15 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                     'without_wall': nowall,
                     'with_wall': wall
                 }
+                
+            if self.builder_config.name is 'iq_channel':
+                varying = {
+                    'cmap': np.squeeze(m.get('field_maps/cmap')[()]),
+                    'without_wall': self.tf_hilbert(nowall, axis=-1)[..., ::20],
+                    'with_wall': self.tf_hilbert(wall, axis=-1)[..., ::20]
+                }
 
-            if self.builder_config.name is 'dynamic_rx_beamformed' or self.builder_config.name is 'b_mode':
+            if self.builder_config.name is 'dynamic_rx_beamformed' or self.builder_config.name is 'b_mode' or self.builder_config.name is 'iq_dynamic_rx_beamformed':
                 s = self.beamform_dynamic_rx(nowall.shape, 
                                              common['probe']['tx_positions'], 
                                              common['probe']['rx_positions'], 
@@ -478,6 +530,10 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 s = tf.cast(s, tf.float32)
                 nowall = self.apply_delays(s, nowall)[..., 3117:6234]
                 wall = self.apply_delays(s, wall)[..., 3117:6234]
+                
+                if self.builder_config.name is 'iq_dynamic_rx_beamformed':
+                    nowall = self.tf_hilbert(nowall, axis=-1)[..., ::20]
+                    wall = self.tf_hilbert(wall, axis=-1)[..., ::20]
 
                 varying = {
                     'without_wall': nowall,
