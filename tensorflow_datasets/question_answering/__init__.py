@@ -14,27 +14,11 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Tests for web_questions dataset module."""
+"""Question answering datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-from tensorflow_datasets import testing
-from tensorflow_datasets.text import web_questions
-
-
-class TriviaqaTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = web_questions.WebQuestions
-  DL_EXTRACT_RESULT = {
-      "train": "train.json",
-      "test": "test.json",
-  }
-  SPLITS = {
-      "train": 2,
-      "test": 1,
-  }
-
-
-if __name__ == "__main__":
-  testing.test_main()
+from tensorflow_datasets.question_answering.cosmos_qa import CosmosQA
+from tensorflow_datasets.question_answering.mctaco import Mctaco
+from tensorflow_datasets.question_answering.natural_questions import NaturalQuestions
+from tensorflow_datasets.question_answering.squad import Squad
+from tensorflow_datasets.question_answering.trivia_qa import TriviaQA
+from tensorflow_datasets.question_answering.web_questions import WebQuestions

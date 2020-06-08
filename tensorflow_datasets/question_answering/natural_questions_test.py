@@ -14,28 +14,26 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Tests for cosmos qa dataset module."""
+"""Tests for natural_questions dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import cosmos_qa
+from tensorflow_datasets.question_answering import natural_questions
 
 
-class CosmosQATest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = cosmos_qa.CosmosQA
+class NaturalQuestionsTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = natural_questions.NaturalQuestions
+  SPLITS = {
+      "train": 3,
+      "validation": 2,
+  }
 
   DL_EXTRACT_RESULT = {
-      "train": "train.csv",
-      "validation": "valid.csv",
-      "test": "test.jsonl",
-  }
-  SPLITS = {
-      "train": 2,
-      "validation": 3,
-      "test": 3,
+      "train": ["nq-train-00.jsonl.gz", "nq-train-01.jsonl.gz"],
+      "validation": ["nq-dev-00.jsonl.gz"],
   }
 
 

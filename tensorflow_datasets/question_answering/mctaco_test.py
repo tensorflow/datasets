@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import mctaco
+from tensorflow_datasets.question_answering import mctaco
 
 
 class MctacoTest(testing.DatasetBuilderTestCase):

@@ -14,26 +14,26 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Tests for natural_questions dataset module."""
+"""Tests for triviaqa dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import natural_questions
+from tensorflow_datasets.question_answering import trivia_qa
 
 
-class NaturalQuestionsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = natural_questions.NaturalQuestions
-  SPLITS = {
-      "train": 3,
-      "validation": 2,
-  }
-
+class TriviaqaTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = trivia_qa.TriviaQA
   DL_EXTRACT_RESULT = {
-      "train": ["nq-train-00.jsonl.gz", "nq-train-01.jsonl.gz"],
-      "validation": ["nq-dev-00.jsonl.gz"],
+      "rc": "",
+      "unfiltered": "",
+  }
+  SPLITS = {
+      "train": 2,
+      "test": 1,
+      "validation": 1,
   }
 
 

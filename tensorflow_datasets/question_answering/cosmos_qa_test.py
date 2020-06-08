@@ -14,26 +14,28 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Tests for triviaqa dataset module."""
+"""Tests for cosmos qa dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import trivia_qa
+from tensorflow_datasets.question_answering import cosmos_qa
 
 
-class TriviaqaTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = trivia_qa.TriviaQA
+class CosmosQATest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = cosmos_qa.CosmosQA
+
   DL_EXTRACT_RESULT = {
-      "rc": "",
-      "unfiltered": "",
+      "train": "train.csv",
+      "validation": "valid.csv",
+      "test": "test.jsonl",
   }
   SPLITS = {
       "train": 2,
-      "test": 1,
-      "validation": 1,
+      "validation": 3,
+      "test": 3,
   }
 
 
