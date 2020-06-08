@@ -326,8 +326,10 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 description=_DESCRIPTION['iq_channel'],
                 features=tfds.features.FeaturesDict({
                     'data': {
-                        'without_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,351), dtype=tf.complex64),
-                        'with_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,351), dtype=tf.complex64),
+                        'without_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
+                        'with_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
+                        'without_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
+                        'with_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
                         'cmap': tfds.features.Tensor(shape=(1247, 1091), dtype=tf.float64),
                     },
                     'params': common
@@ -359,8 +361,10 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 description=_DESCRIPTION['iq_dynamic_rx_beamformed'],
                 features=tfds.features.FeaturesDict({
                     'data': {
-                        'without_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,156), dtype=tf.complex64),
-                        'with_wall': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,156), dtype=tf.complex64)
+                        'without_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
+                        'with_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
+                        'without_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
+                        'with_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32)
                     },
                     'params': common
                 }),
@@ -515,10 +519,15 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 }
                 
             if self.builder_config.name is 'iq_channel':
+                nowall = self.tf_hilbert(nowall[..., 2], axis=-1)[..., ::5]
+                wall = self.tf_hilbert(wall[..., 2], axis=-1)[..., ::5]
+                
                 varying = {
                     'cmap': np.squeeze(m.get('field_maps/cmap')[()]),
-                    'without_wall': self.tf_hilbert(nowall, axis=-1)[..., ::20],
-                    'with_wall': self.tf_hilbert(wall, axis=-1)[..., ::20]
+                    'without_wall_real': tf.math.real(nowall),
+                    'without_wall_imag': tf.math.imag(nowall),
+                    'with_wall_real': tf.math.real(wall),
+                    'with_wall_imag': tf.math.imag(wall)
                 }
 
             if self.builder_config.name is 'dynamic_rx_beamformed' or self.builder_config.name is 'b_mode' or self.builder_config.name is 'iq_dynamic_rx_beamformed':
@@ -532,12 +541,14 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 wall = self.apply_delays(s, wall)[..., 3117:6234]
                 
                 if self.builder_config.name is 'iq_dynamic_rx_beamformed':
-                    nowall = self.tf_hilbert(nowall, axis=-1)[..., ::20]
-                    wall = self.tf_hilbert(wall, axis=-1)[..., ::20]
+                    nowall = self.tf_hilbert(nowall, axis=-1)[..., ::10]
+                    wall = self.tf_hilbert(wall, axis=-1)[..., ::10]
 
                 varying = {
-                    'without_wall': nowall,
-                    'with_wall': wall
+                    'without_wall_real': tf.math.real(nowall),
+                    'without_wall_imag': tf.math.imag(nowall),
+                    'with_wall_real': tf.math.real(wall),
+                    'with_wall_imag': tf.math.imag(wall)
                 }
 
             if self.builder_config.name is 'b_mode':
