@@ -61,8 +61,7 @@ class ImageFolder(core.DatasetBuilder):
 
   VERSION = core.Version('2.0.0')
 
-  def __init__(self, root_dir, **kwargs):
-    del kwargs
+  def __init__(self, root_dir):
     root_dir = os.path.expanduser(root_dir)
     super(ImageFolder, self).__init__(
         data_dir=root_dir, version=str(self.VERSION), config=None)
@@ -135,7 +134,7 @@ class ImageFolder(core.DatasetBuilder):
 
     labels = list(map(
         lambda path: self.info.features['label'].str2int(path.split(os.path.sep)[-2]),
-                                                         img_paths))
+        img_paths))
 
     ds = tf.data.Dataset.from_tensor_slices((img_paths, labels))
     if shuffle_files:
