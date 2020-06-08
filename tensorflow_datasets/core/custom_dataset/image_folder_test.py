@@ -16,11 +16,20 @@
 # Lint as: python3
 """Test for ImageFolder."""
 
-import functools
 import os
 import mock
 
 import tensorflow_datasets.public_api as tfds
+
+_EXAMPLE_DIR = os.path.join(
+    tfds.testing.test_utils.fake_examples_dir(), 'image_folder_data')
+
+original_init = tfds.ImageFolder.__init__
+
+def new_init(self, root_dir=None, **kwargs):
+  assert root_dir is None
+  del kwargs
+  original_init(self, root_dir=_EXAMPLE_DIR)
 
 
 class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
@@ -31,16 +40,14 @@ class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
       'train': 2,
       'test': 6,
   }
-  EXAMPLE_DIR = os.path.join(
-      tfds.testing.test_utils.fake_examples_dir(), 'image_folder_data')
+  EXAMPLE_DIR = _EXAMPLE_DIR
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
 
   @classmethod
   def setUpClass(cls): # pylint:disable = invalid-name
     super(ImageFolderTest, cls).setUpClass()
+    cls.DATASET_CLASS.__init__ = new_init
     cls.DATASET_CLASS.download_and_prepare = mock.Mock(return_value=None)
-    cls.DATASET_CLASS = functools.partial(tfds.ImageFolder,
-                                          root_dir=cls.EXAMPLE_DIR)
 
   def test_registered(self):
     self.assertEqual('image_folder', self.builder.name)
