@@ -73,12 +73,12 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
         'test': 3,
     }
 
-    labels = {
+    labels = [
         'label1',
         'label2',
         'label3',
         'label4',
-    }
+    ]
 
     split_label_img = {
         'train': {
@@ -109,14 +109,14 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
 
       out1, out2 = split_img('root_dir')
       self.assertCountEqual(split_label_img, out1)
-      self.assertEqual(labels, out2)
+      self.assertCountEqual(labels, out2)
 
       builder = tfds.ImageFolder('root_dir')
       for split in builder.info.splits.keys():
         self.assertEqual(builder.info.splits[split].num_examples,
                          splits_info[split])
 
-      self.assertCountEqual(builder.info.features['label'].names, labels)
+      self.assertEqual(builder.info.features['label'].names, labels)
 
 if __name__ == '__main__':
   tfds.testing.test_main()

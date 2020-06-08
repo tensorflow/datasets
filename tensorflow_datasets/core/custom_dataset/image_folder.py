@@ -74,7 +74,7 @@ class ImageFolder(core.DatasetBuilder):
     self._split_label_images, labels = _get_split_label_images(root_dir)
 
     # Calculate and update DatasetInfo labels
-    self.info.features['label'].names = labels
+    self.info.features['label'].names = sorted(list(labels))
 
     # Calculate and update DatasetInfo splits
     splits = {
@@ -106,46 +106,42 @@ class ImageFolder(core.DatasetBuilder):
   def download_and_prepare(self, **kwargs):
     raise NotImplementedError('No need to call download_and_prepare function.')
 
-  def _map_fn(self, path):
+  def _process_ds(self, path, label):
     image_path = tf.strings.split(path, os.path.sep)[-3:]
     img = tf.io.read_file(path)
     img = tf.image.decode_jpeg(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.uint8)
-    label = image_path[1].numpy()
-    return [
-        img,
-        self.info.features['label'].str2int(label),
-        tf.strings.reduce_join(image_path)
-    ]
-
-  def _process_ds(self, path):
-    output = tf.py_function(self._map_fn,
-                            inp=[path],
-                            Tout=list(self.info.features.dtype.values()))
-    output = {
-        'image': output[0],
-        'label': output[1],
-        'image/filename': output[2],
+    return {
+        'image': img,
+        'label': tf.cast(label, tf.int64),
+        'image/filename': tf.strings.reduce_join(image_path)
     }
-    for key, value in output.items():
-      value.set_shape(self.info.features.shape[key])
-    return output
 
-  def _as_dataset(self, split, shuffle_files=False, **kwargs):
+  def _as_dataset(
+      self,
+      split,
+      shuffle_files=False,
+      decoders=None,
+      read_config=None):
     """Generate dataset for given split"""
-    del kwargs
+    del decoders
+    del read_config
     if split not in self.info.splits.keys():
       raise ValueError('Split name {} not present in {}'
                        .format(split, self._split_label_images.keys()))
 
-    imgs = sorted(
+    img_paths = sorted(
         img for l in self._split_label_images[split].values() for img in l)
 
-    ds = tf.data.Dataset.list_files(imgs)
+    labels = list(map(
+        lambda path: self.info.features['label'].str2int(path.split(os.path.sep)[-2]),
+                                                         img_paths))
+
+    ds = tf.data.Dataset.from_tensor_slices((img_paths, labels))
+    if shuffle_files:
+      ds = ds.shuffle(len(img_paths))
     ds = ds.map(self._process_ds,
                 num_parallel_calls=tf.data.experimental.AUTOTUNE)
-    if shuffle_files:
-      ds = ds.shuffle(len(imgs))
     return ds
 
 
