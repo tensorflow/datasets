@@ -99,21 +99,20 @@ class ImageFolder(core.DatasetBuilder):
         supervised_keys=('image', 'label'),
     )
 
-  def _download_and_prepare(self, **kwargs):
+  def _download_and_prepare(_):
     raise NotImplementedError('No need to call download_and_prepare function.')
 
-  def download_and_prepare(self, **kwargs):
+  def download_and_prepare(_):
     raise NotImplementedError('No need to call download_and_prepare function.')
 
   def _process_ds(self, path, label):
-    image_path = tf.strings.split(path, os.path.sep)[-3:]
     img = tf.io.read_file(path)
     img = tf.image.decode_jpeg(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.uint8)
     return {
         'image': img,
         'label': tf.cast(label, tf.int64),
-        'image/filename': tf.strings.reduce_join(image_path)
+        'image/filename': path
     }
 
   def _as_dataset(
@@ -125,18 +124,20 @@ class ImageFolder(core.DatasetBuilder):
     """Generate dataset for given split"""
     del decoders
     del read_config
+    # if(decoders or read_config):
+    #   raise NotImplementedError(
+    #       '`decoders` and `read_config` args are not supported with {}'.format(type(self).__name__))
     if split not in self.info.splits.keys():
       raise ValueError('Split name {} not present in {}'
                        .format(split, self._split_label_images.keys()))
 
-    img_paths = sorted(
-        img for l in self._split_label_images[split].values() for img in l)
+    label_imgs = sorted(
+        (self.info.features['label'].str2int(k), img)
+        for k, v in self._split_label_images[split].items() for img in v)
 
-    labels = list(map(
-        lambda path: self.info.features['label'].str2int(path.split(os.path.sep)[-2]),
-        img_paths))
+    labels, img_paths = zip(*label_imgs)
 
-    ds = tf.data.Dataset.from_tensor_slices((img_paths, labels))
+    ds = tf.data.Dataset.from_tensor_slices((list(img_paths), list(labels)))
     if shuffle_files:
       ds = ds.shuffle(len(img_paths))
     ds = ds.map(self._process_ds,
