@@ -12,16 +12,12 @@ nightly package `tfds-nightly`.
 
 ## Usage
 
-```python
-# Build the `tf.data.Dataset` pipeline.
-ds, info = tfds.load('cifar10', split='train', shuffle_files=True, with_info=True)
-ds = ds.shuffle(info.splits['train'].num_examples)
-ds = ds.batch(32)
+See our [getting-started guide](https://www.tensorflow.org/datasets/overview)
+for a quick introduction.
 
-# `tfds.as_numpy` converts `tf.Tensor` -> `np.array`
-for ex in tfds.as_numpy(ds):
-  # `int2str` returns the human readable label ('dog', 'car',...)
-  print(info.features['label'].int2str(ex['label']))
+```python
+for ex in tfds.load('cifar10', split='train'):
+  ...
 ```
 
 ## All Datasets
@@ -144,6 +140,17 @@ for ex in tfds.as_numpy(ds):
 *   [`waymo_open_dataset`](waymo_open_dataset.md)
 *   [`wider_face`](wider_face.md)
 
+### `Question answering`
+
+*   [`cosmos_qa`](cosmos_qa.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`mctaco`](mctaco.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`natural_questions`](natural_questions.md)
+*   [`squad`](squad.md)
+*   [`trivia_qa`](trivia_qa.md)
+*   [`web_questions`](web_questions.md)
+
 ### `Structured`
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
@@ -184,8 +191,6 @@ for ex in tfds.as_numpy(ds):
 *   [`cfq`](cfq.md)
 *   [`civil_comments`](civil_comments.md)
 *   [`cos_e`](cos_e.md)
-*   [`cosmos_qa`](cosmos_qa.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
@@ -197,23 +202,17 @@ for ex in tfds.as_numpy(ds):
 *   [`librispeech_lm`](librispeech_lm.md)
 *   [`lm1b`](lm1b.md)
 *   [`math_dataset`](math_dataset.md)
-*   [`mctaco`](mctaco.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`movie_rationales`](movie_rationales.md)
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
-*   [`natural_questions`](natural_questions.md)
 *   [`pg19`](pg19.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`qa4mre`](qa4mre.md)
 *   [`scan`](scan.md)
 *   [`scicite`](scicite.md)
 *   [`snli`](snli.md)
-*   [`squad`](squad.md)
 *   [`super_glue`](super_glue.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
-*   [`trivia_qa`](trivia_qa.md)
-*   [`web_questions`](web_questions.md)
 *   [`wiki40b`](wiki40b.md)
 *   [`wikipedia`](wikipedia.md)
 *   [`winogrande`](winogrande.md)

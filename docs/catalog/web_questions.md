@@ -22,7 +22,7 @@ the web (at least in 2013).
 *   **Homepage**:
     [https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a](https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a)
 *   **Source code**:
-    [`tfds.text.web_questions.WebQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/web_questions.py)
+    [`tfds.question_answering.web_questions.WebQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/web_questions.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `1.21 MiB`

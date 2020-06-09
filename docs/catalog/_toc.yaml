@@ -220,6 +220,22 @@ toc:
     title: wider_face
   title: Object detection
 - section:
+  - path: /datasets/catalog/cosmos_qa
+    status: nightly
+    title: cosmos_qa
+  - path: /datasets/catalog/mctaco
+    status: nightly
+    title: mctaco
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/squad
+    title: squad
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
+  - path: /datasets/catalog/web_questions
+    title: web_questions
+  title: Question answering
+- section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/forest_fires
@@ -285,9 +301,6 @@ toc:
     title: civil_comments
   - path: /datasets/catalog/cos_e
     title: cos_e
-  - path: /datasets/catalog/cosmos_qa
-    status: nightly
-    title: cosmos_qa
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/eraser_multi_rc
@@ -309,17 +322,12 @@ toc:
     title: lm1b
   - path: /datasets/catalog/math_dataset
     title: math_dataset
-  - path: /datasets/catalog/mctaco
-    status: nightly
-    title: mctaco
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
-  - path: /datasets/catalog/natural_questions
-    title: natural_questions
   - path: /datasets/catalog/pg19
     status: nightly
     title: pg19
@@ -331,16 +339,10 @@ toc:
     title: scicite
   - path: /datasets/catalog/snli
     title: snli
-  - path: /datasets/catalog/squad
-    title: squad
   - path: /datasets/catalog/super_glue
     title: super_glue
   - path: /datasets/catalog/tiny_shakespeare
     title: tiny_shakespeare
-  - path: /datasets/catalog/trivia_qa
-    title: trivia_qa
-  - path: /datasets/catalog/web_questions
-    title: web_questions
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikipedia

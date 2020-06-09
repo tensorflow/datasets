@@ -28,7 +28,7 @@ context.
 *   **Homepage**:
     [https://wilburone.github.io/cosmos/](https://wilburone.github.io/cosmos/)
 *   **Source code**:
-    [`tfds.text.cosmos_qa.CosmosQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cosmos_qa.py)
+    [`tfds.question_answering.cosmos_qa.CosmosQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/cosmos_qa.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `23.27 MiB`

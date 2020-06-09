@@ -23,7 +23,7 @@ answering the questions.
 *   **Homepage**:
     [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 *   **Source code**:
-    [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
+    [`tfds.question_answering.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/trivia_qa.py)
 *   **Versions**:
     *   **`1.1.0`** (default): No release notes.
 *   **Download size**: `Unknown size`

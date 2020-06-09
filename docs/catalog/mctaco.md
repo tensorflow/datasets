@@ -34,7 +34,7 @@ class of reasoning problems.
 *   **Homepage**:
     [https://github.com/CogComp/MCTACO](https://github.com/CogComp/MCTACO)
 *   **Source code**:
-    [`tfds.text.mctaco.Mctaco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/mctaco.py)
+    [`tfds.question_answering.mctaco.Mctaco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/mctaco.py)
 *   **Versions**:
     *   **`1.0.0`** (default): No release notes.
 *   **Download size**: `2.27 MiB`
