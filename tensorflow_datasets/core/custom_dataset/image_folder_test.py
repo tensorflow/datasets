@@ -25,6 +25,8 @@ _EXAMPLE_DIR = os.path.join(
     tfds.testing.test_utils.fake_examples_dir(), 'image_folder_data')
 
 original_init = tfds.ImageFolder.__init__
+original_download_and_prepare = tfds.ImageFolder.download_and_prepare
+
 
 def new_init(self, root_dir=None, **kwargs):
   assert root_dir is None
@@ -41,13 +43,17 @@ class ImageFolderTest(tfds.testing.DatasetBuilderTestCase):
       'test': 6,
   }
   EXAMPLE_DIR = _EXAMPLE_DIR
-  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
 
   @classmethod
   def setUpClass(cls): # pylint:disable = invalid-name
     super(ImageFolderTest, cls).setUpClass()
     cls.DATASET_CLASS.__init__ = new_init
     cls.DATASET_CLASS.download_and_prepare = mock.Mock(return_value=None)
+
+  @classmethod
+  def tearDownClass(cls):
+    cls.DATASET_CLASS.__init__ = original_init
+    cls.DATASET_CLASS.download_and_prepare = original_download_and_prepare
 
   def test_registered(self):
     self.assertEqual('image_folder', self.builder.name)
@@ -118,7 +124,7 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
       self.assertCountEqual(split_label_img, out1)
       self.assertCountEqual(labels, out2)
 
-      builder = tfds.ImageFolder('root_dir')
+      builder = tfds.ImageFolder(root_dir='root_dir')
       for split in builder.info.splits.keys():
         self.assertEqual(builder.info.splits[split].num_examples,
                          splits_info[split])
