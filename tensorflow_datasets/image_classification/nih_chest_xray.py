@@ -4,23 +4,65 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow_datasets.public_api as tfds
-import tensorflow as tf
-from tensorflow_datasets.core import utils
 import os
+import tensorflow as tf
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.core import utils
 
 
 _CITATION = """\
-@InProceedings{wang2017chestxray,author = {Wang, Xiaosong and Peng, Yifan and Lu, Le and Lu, Zhiyong and Bagheri, Mohammadhadi and Summers, Ronald},title = {ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases},booktitle = {2017 IEEE Conference on Computer Vision and Pattern Recognition(CVPR)},pages = {3462--3471},year = {2017}}
+@InProceedings{wang2017chestxray,
+  author    = {Wang, Xiaosong and Peng, Yifan and Lu, Le and Lu, Zhiyong and Bagheri, Mohammadhadi and Summers, Ronald},
+  title     = {ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases},
+  booktitle = {2017 IEEE Conference on Computer Vision and Pattern Recognition(CVPR)},
+  pages     = {3462--3471},
+  year      = {2017}
+}
+
+@misc{zisheng_liang_2020_3887049,
+  author       = {Zisheng Liang and
+                  Ouwen Huang},
+  title        = {{TensorFlow Datasets NIH Chest X-rays: Tools for Processing NIH Chest X-rays}},
+  year         = 2020,
+  doi          = {10.5281/zenodo.3887049},
+}
 """
 
 _DESCRIPTION = """\
-ChestX-ray dataset comprises 112,120 frontal-view X-ray images of 30,805 unique patients with the text-mined fourteen disease image labels (where each image can have multi-labels), mined from the associated radiological reports using natural language processing. Fourteen common thoracic pathologies include Atelectasis, Consolidation, Infiltration, Pneumothorax, Edema, Emphysema, Fibrosis, Effusion, Pneumonia, Pleural_thickening, Cardiomegaly, Nodule, Mass and Hernia, which is an extension of the 8 common disease patterns listed in our CVPR2017 paper. Note that original radiology reports (associated with these chest x-ray studies) are not meant to be publicly shared for many reasons. The text-mined disease labels are expected to have accuracy >90%.Please find more details and benchmark performance of trained models based on 14 disease labels in our arxiv paper: 1705.02315
+The [NIH Chest X-rays dataset](https://nihcc.app.box.com/v/ChestXray-NIHCC) comprises 112,120 frontal-view X-ray images
+of 30,805 unique patients with the text-mined fourteen disease image labels (where each image can have multi-labels),
+mined from the associated radiological reports using natural language processing. Fourteen common thoracic pathologies
+include Atelectasis, Consolidation, Infiltration, Pneumothorax, Edema, Emphysema, Fibrosis, Effusion, Pneumonia,
+Pleural_thickening, Cardiomegaly, Nodule, Mass and Hernia, which is an extension of the 8 common disease patterns
+listed in our CVPR2017 paper. Note that original radiology reports (associated with these chest x-ray studies) are not
+meant to be publicly shared for many reasons. The text-mined disease labels are expected to have accuracy >90%.
+Please find more details and benchmark performance of trained models based on 14 disease labels in this arxiv paper: 1705.02315
+
+Contents:
+
+1. 112,120 frontal-view chest X-ray PNG images in 1024*1024 resolution (under images folder)
+2. Meta data for all images (Data_Entry_2017.csv): Image Index, Finding Labels, Follow-up #, Patient ID, Patient Age,
+  Patient Gender, View Position, Original Image Size and Original Image Pixel Spacing.
+3. Bounding boxes for ~1000 images (BBox_List_2017.csv):Image Index, Finding Label, Bbox[x, y, w, h]. [x y] are coordinates
+  of each box's topleft corner. [w h] represent the width and height of each box.4. Two data split files (train_val_list.txt
+  and test_list.txt) are provided. Images in the ChestX-ray dataset are divided into these two sets on the patient level.
+  All studies from the same patient will only appear in either training/validation or testing set.
+
+Data limitations:
+1. The image labels are NLP extracted so there could be some erroneous labels but the NLP labeling accuracy is estimated to be >90%.
+2. Very limited numbers of disease region bounding boxes (See BBoxlist2017.csv)
+3. Chest x-ray radiology reports are not anticipated to be publicly shared. Parties who use this public dataset are encouraged
+  to share their “updated” image labels and/or new bounding boxes in their own studied later, maybe through manual annotation
+
+[Kaggle](https://www.kaggle.com/) also host this data [here](https://www.kaggle.com/nih-chest-xrays/data). The host data
+has two modifications to original data.
+1. Original TAR archives were converted to ZIP archives to be compatible with the Kaggle platform
+2. CSV headers slightly modified to be more explicit in comma separation and also to allow fields to be self-explanatory
 """
 
 
 class NihChestXray(tfds.core.GeneratorBasedBuilder):
-  """(nih_chest_xray) dataset."""
+  """nih_chest_xray dataset."""
 
   VERSION = tfds.core.Version('0.1.0')
 
@@ -99,7 +141,7 @@ class NihChestXray(tfds.core.GeneratorBasedBuilder):
       train_val_list = f.read().splitlines()
     with tf.io.gfile.GFile(test_list_path, 'r') as f:
       test_list = f.read().splitlines()
- 
+
     lookupUtils = LookupUtils(paths)
     annParser = AnnParser(ann_path, train_val_list, test_list)
 
@@ -192,7 +234,7 @@ class AnnParser():
     self.config = config
     self.train_val_list = train_val_list
     self.test_list = test_list
-  
+
   @utils.memoized_property
   def ann(self):
     _ann = self._ann_parser()
