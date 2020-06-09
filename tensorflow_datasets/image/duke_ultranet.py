@@ -151,8 +151,8 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
         f0 = tf.cast(f0, tf.complex64)
 
         initial_downsampling = 2
-        t = tf.cast(tf.range(0, iq.shape[-1]), tf.complex64)*1/(fs/initial_downsampling)
         iq = DukeUltranet.tf_hilbert(x[..., ::initial_downsampling], axis=-1)
+        t = tf.cast(tf.range(0, iq.shape[-1]), tf.complex64)*1/(fs/initial_downsampling)
         iq = iq*tf.math.exp(-1j*2*np.pi*f0*t[None, None, :])
         return iq[..., ::5]
 
@@ -407,7 +407,7 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
             tfds.core.SplitGenerator(
                     name=tfds.Split.TRAIN,
                     gen_kwargs={
-                        'files': _FILES
+                        'files': _FILES[:2]
                     }
             )
         ]
