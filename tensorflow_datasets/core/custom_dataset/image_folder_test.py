@@ -26,6 +26,7 @@ _EXAMPLE_DIR = os.path.join(
 
 original_init = tfds.ImageFolder.__init__
 original_download_and_prepare = tfds.ImageFolder.download_and_prepare
+original_as_dataset = tfds.ImageFolder._as_dataset
 
 
 def new_init(self, root_dir=None, **kwargs):
