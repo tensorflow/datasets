@@ -145,6 +145,19 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
 
     @staticmethod
     @tf.function
+    def tf_demodulate(x, fs, f0, axis=-1):
+        '''Uses baseband IQ and decreases axial samples by factor of 10'''
+        fs = tf.cast(fs, tf.complex64)
+        f0 = tf.cast(f0, tf.complex64)
+
+        initial_downsampling = 2
+        t = tf.cast(tf.range(0, iq.shape[-1]), tf.complex64)*1/(fs/initial_downsampling)
+        iq = DukeUltranet.tf_hilbert(x[..., ::initial_downsampling], axis=-1)
+        iq = iq*tf.math.exp(-1j*2*np.pi*f0*t[None, None, :])
+        return iq[..., ::5]
+
+    @staticmethod
+    @tf.function
     def tf_hilbert(x, axis=-1):
         '''Performs 1d hilbert similar to scipy'''
 
@@ -156,8 +169,7 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
         x = tf.transpose(x, perm=axes)
 
         # Apply fft
-        x = tf.cast(x, dtype=tf.complex64)
-        Xf = tf.signal.fft(x)
+        Xf = tf.signal.rfft(x)
 
         # Create 2U 
         N = tf.shape(Xf)[-1]
@@ -327,8 +339,8 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 features=tfds.features.FeaturesDict({
                     'data': {
                         'without_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
-                        'with_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
                         'without_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
+                        'with_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
                         'with_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,702), dtype=tf.float32),
                         'cmap': tfds.features.Tensor(shape=(1247, 1091), dtype=tf.float64),
                     },
@@ -362,8 +374,8 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 features=tfds.features.FeaturesDict({
                     'data': {
                         'without_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
-                        'with_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
                         'without_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
+                        'with_wall_real': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32),
                         'with_wall_imag': tfds.features.Tensor(shape=(len(_TX_POS),_CHANNELS,312), dtype=tf.float32)
                     },
                     'params': common
@@ -496,6 +508,8 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
 
             a = common['probe']['a'].astype(np.float32)
             b = common['probe']['b'].astype(np.float32)
+            fs = common['fs'].astype(np.float32)
+            f0 = common['probe']['f0_hz'].astype(np.float32)
 
             rf = list(rf)
             ordering = np.array([r['i'] for r in rf])
@@ -517,11 +531,11 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                     'without_wall': nowall,
                     'with_wall': wall
                 }
-                
+
             if self.builder_config.name is 'iq_channel':
-                nowall = self.tf_hilbert(nowall[..., 2], axis=-1)[..., ::5]
-                wall = self.tf_hilbert(wall[..., 2], axis=-1)[..., ::5]
-                
+                nowall = self.tf_demodulate(nowall, fs, f0, axis=-1)
+                wall = self.tf_demodulate(wall, fs, f0, axis=-1)
+
                 varying = {
                     'cmap': np.squeeze(m.get('field_maps/cmap')[()]),
                     'without_wall_real': tf.math.real(nowall),
@@ -539,10 +553,10 @@ class DukeUltranet(tfds.core.BeamBasedBuilder):
                 s = tf.cast(s, tf.float32)
                 nowall = self.apply_delays(s, nowall)[..., 3117:6234]
                 wall = self.apply_delays(s, wall)[..., 3117:6234]
-                
+
                 if self.builder_config.name is 'iq_dynamic_rx_beamformed':
-                    nowall = self.tf_hilbert(nowall, axis=-1)[..., ::10]
-                    wall = self.tf_hilbert(wall, axis=-1)[..., ::10]
+                    nowall = self.tf_demodulate(nowall, fs, f0, axis=-1)
+                    wall = self.tf_demodulate(wall, fs, f0, axis=-1)
 
                 varying = {
                     'without_wall_real': tf.math.real(nowall),
