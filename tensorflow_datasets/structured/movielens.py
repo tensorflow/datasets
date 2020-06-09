@@ -1,3 +1,16 @@
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """movielens dataset."""
 
 from __future__ import absolute_import
@@ -6,6 +19,7 @@ from __future__ import print_function
 
 import csv
 import os
+import textwrap
 from typing import Any, Dict, Iterator, List, Optional, Tuple
 
 import tensorflow.compat.v2 as tf
@@ -33,8 +47,8 @@ keywords = {Datasets, recommendations, ratings, MovieLens}
 """
 
 _DESCRIPTION = """
-This dataset describes 5-star rating and free-text tagging activity
-from MovieLens, a movie recommendation service.
+This dataset describes 5-star rating from MovieLens,
+a movie recommendation service.
 Users were selected at random for inclusion.
 """
 
@@ -52,10 +66,10 @@ class MovieLensConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
 
     Raises:
-      ValueError: if data_option is not one of '_DATASET_OPTIONS'
+      ValueError: if data_option is not one of '_DATASET_OPTIONS'.
     """
     if data_option not in _DATASET_OPTIONS:
-      raise ValueError('data_option must be one of %s' % _DATASET_OPTIONS)
+      raise ValueError('data_option must be one of %s.' % _DATASET_OPTIONS)
     super(MovieLensConfig, self).__init__(**kwargs)
     self._data_option = data_option
 
@@ -70,34 +84,30 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       MovieLensConfig(
           name='20m',
-          description=(
-              'This dataset contains contains 20000263 ratings'
-              ' across 27278 movies.\n'
-              'These data were created by 138493 users between'
-              'January 09, 1995 and March 31, 2015.\n'
-              'This dataset was generated on October 17, 2016.'
-          ),
+          description=textwrap.dedent("""\
+              This dataset contains contains 20000263 ratings
+              across 27278 movies.
+              These data were created by 138493 users between
+              January 09, 1995 and March 31, 2015.
+              This dataset was generated on October 17, 2016."""),
           version='0.1.0',
           data_option='20m',
       ),
       MovieLensConfig(
           name='latest-small',
-          description=(
-              'This dataset contains 100836 ratings across 9742 movies\n'
-              'These data were created by 610 users between March 29, 1996'
-              ' and September 24, 2018.\n'
-              'This dataset was generated on September 26, 2018.'
-          ),
+          description=textwrap.dedent("""\
+              This dataset contains 100836 ratings across 9742 movies
+              These data were created by 610 users between March 29, 1996
+              and September 24, 2018.
+              This dataset was generated on September 26, 2018."""),
           version='0.1.0',
-          data_option='latest-small'
+          data_option='latest-small',
       ),
   ]
 
-  # TODO(movielens): Set up version.
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self) -> tfds.core.DatasetInfo:
-    # TODO(movielens): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -110,7 +120,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
                     'Comedy', 'Crime', 'Documentary', 'Drama', 'Fantasy',
                     'Film-Noir', 'Horror', 'Musical', 'Mystery', 'Romance',
                     'Sci-Fi', 'Thriller', 'War', 'Western',
-                    '(no genres listed)',
+                    '(no genres listed)', 'IMAX',
                 ])
             ),
             'user_id': tf.string,
@@ -128,9 +138,6 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
       dl_manager: tfds.download.DownloadManager
   ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
-    # TODO(movielens): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
     url = (
         'http://files.grouplens.org/datasets/movielens/'
         'ml-%s.zip' % self.builder_config.name
@@ -149,7 +156,6 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
       dir_path: Optional[str] = None
   ) -> Iterator[Tuple[Any, Dict[Any, Any]]]:
     """Yields examples."""
-    # TODO(movielens): Yields (key, example) tuples from the dataset
     movies_file_path = os.path.join(dir_path, 'movies.csv')
     ratings_file_path = os.path.join(dir_path, 'ratings.csv')
     movie_genre_map = {}
