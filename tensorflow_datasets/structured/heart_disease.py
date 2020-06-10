@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -59,6 +60,9 @@ Attribute by column index
 Dataset Homepage: http://archive.ics.uci.edu/ml/datasets/Heart+Disease
 """
 
+_DOWNLOAD_URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data'
+
+
 class HeartDisease(tfds.core.GeneratorBasedBuilder):
   """Heart disease dataset with 13 attributes."""
 
@@ -69,7 +73,22 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "features": tfds.features.Tensor(shape=(13,), dtype=tf.float32),
+            "features":
+                collections.OrderedDict([
+                    ("age", tf.int32),
+                    ("sex", tf.int32),
+                    ("cp", tf.int32),
+                    ("trestbps", tf.int32),
+                    ("chol", tf.int32),
+                    ("fbs", tf.int32),
+                    ("restecg", tf.int32),
+                    ("thalach", tf.int32),
+                    ("exang", tf.int32),
+                    ("oldpeak", tf.float32),
+                    ("slope", tf.int32),
+                    ("ca", tf.int32),
+                    ("thal", tf.int32)
+                    ]),
             "label": tfds.features.ClassLabel(names=['0', '1', '2', '3', '4'])
         }),
         supervised_keys=("features", "label"),
@@ -80,22 +99,34 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
 
-    filepath = dl_manager.download('http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data')
-    all_lines = tf.io.gfile.GFile(filepath).read().splitlines()
-    records = [l for l in all_lines if ('?' not in l) and l]
+    filepath = dl_manager.download(_DOWNLOAD_URL)
+
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"records": records}
+            gen_kwargs={"filepath": filepath}
             ),
         ]
 
-  def _generate_examples(self, records):
+  def _generate_examples(self, filepath):
     """Yields examples."""
-    for i, row in enumerate(records):
-      features = row.split(',')
-      yield i, {
-          "features": [float(feature) for feature in features[:-1]],
-          "label": features[-1]
-      }
+
+    feature_columns = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg",
+                       "thalach", "exang", "oldpeak", "slope", "ca", "thal"]
+
+    with tf.io.gfile.GFile(filepath) as f:
+      all_lines = f.read().splitlines()
+      records = [l for l in all_lines if ('?' not in l) and l]
+
+      for i, row in enumerate(records):
+        features = row.split(',')
+        label = int(features.pop())
+        # All features are int except feature_columns[9](float)
+        yield i, {
+            "features": {feature_columns[col]: int(float(value))
+                                               if col != 9 else float(value)
+                         for col, value in enumerate(features)
+                        },
+            "label": label
+            }

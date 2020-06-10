@@ -27,7 +27,7 @@ class HeartDiseaseTest(tfds.testing.DatasetBuilderTestCase):
   """test for heart disease dataset"""
   DATASET_CLASS = heart_disease.HeartDisease
   SPLITS = {
-      "train": 1,  # Number of fake train example
+      "train": 2,  # Number of fake train example
   }
   DL_EXTRACT_RESULT = 'processed.cleveland.data'
 
