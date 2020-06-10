@@ -51,4 +51,3 @@ from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
-from tensorflow_datasets.text.medical import Medical  # TODO(medical) Sort alphabetically

@@ -5,7 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text import medical
+from tensorflow_datasets.translate import medical
 
 
 class MedicalTest(tfds.testing.DatasetBuilderTestCase):
