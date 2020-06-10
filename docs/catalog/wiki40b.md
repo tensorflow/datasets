@@ -44,6 +44,7 @@ FeaturesDict({
     'wikidata_id': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -67,9 +68,11 @@ booktitle   = {LREC 2020}
 *   **Config description**: Wiki40B dataset for en.
 
 *   **Dataset size**: `9.91 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -83,9 +86,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ar.
 
 *   **Dataset size**: `833.20 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -99,9 +104,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for zh-cn.
 
 *   **Dataset size**: `985.53 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -115,9 +122,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for zh-tw.
 
 *   **Dataset size**: `986.45 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -131,9 +140,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for nl.
 
 *   **Dataset size**: `961.82 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -147,9 +158,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for fr.
 
 *   **Dataset size**: `3.37 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -163,9 +176,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for de.
 
 *   **Dataset size**: `4.78 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -179,9 +194,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for it.
 
 *   **Dataset size**: `2.00 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -195,9 +212,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ja.
 
 *   **Dataset size**: `2.19 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -211,9 +230,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ko.
 
 *   **Dataset size**: `453.98 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -227,9 +248,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for pl.
 
 *   **Dataset size**: `1.03 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -243,9 +266,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for pt.
 
 *   **Dataset size**: `1.08 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -259,9 +284,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ru.
 
 *   **Dataset size**: `4.13 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -275,9 +302,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for es.
 
 *   **Dataset size**: `2.70 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -291,9 +320,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for th.
 
 *   **Dataset size**: `326.29 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -307,9 +338,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for tr.
 
 *   **Dataset size**: `308.87 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -323,9 +356,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for bg.
 
 *   **Dataset size**: `433.20 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -339,9 +374,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ca.
 
 *   **Dataset size**: `753.00 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -355,9 +392,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for cs.
 
 *   **Dataset size**: `631.84 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -371,9 +410,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for da.
 
 *   **Dataset size**: `240.51 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -387,9 +428,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for el.
 
 *   **Dataset size**: `524.77 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -403,9 +446,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for et.
 
 *   **Dataset size**: `184.07 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -419,9 +464,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for fa.
 
 *   **Dataset size**: `482.55 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -435,9 +482,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for fi.
 
 *   **Dataset size**: `534.13 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -451,9 +500,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for he.
 
 *   **Dataset size**: `869.51 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -467,9 +518,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for hi.
 
 *   **Dataset size**: `277.56 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -483,9 +536,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for hr.
 
 *   **Dataset size**: `235.58 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -499,9 +554,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for hu.
 
 *   **Dataset size**: `634.25 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -515,9 +572,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for id.
 
 *   **Dataset size**: `334.06 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -531,9 +590,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for lt.
 
 *   **Dataset size**: `140.46 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples
@@ -547,9 +608,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for lv.
 
 *   **Dataset size**: `80.07 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples
@@ -563,9 +626,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ms.
 
 *   **Dataset size**: `142.49 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -579,9 +644,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for no.
 
 *   **Dataset size**: `382.03 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -595,9 +662,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for ro.
 
 *   **Dataset size**: `319.68 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -611,9 +680,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for sk.
 
 *   **Dataset size**: `170.20 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -627,9 +698,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for sl.
 
 *   **Dataset size**: `157.38 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples
@@ -643,9 +716,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for sr.
 
 *   **Dataset size**: `582.20 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -659,9 +734,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for sv.
 
 *   **Dataset size**: `613.62 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -675,9 +752,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for tl.
 
 *   **Dataset size**: `29.04 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples
@@ -691,9 +770,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for uk.
 
 *   **Dataset size**: `1.67 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -707,9 +788,11 @@ Split        | Examples
 *   **Config description**: Wiki40B dataset for vi.
 
 *   **Dataset size**: `497.70 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

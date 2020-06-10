@@ -1,0 +1,5 @@
+=== xxx has joined #ubuntu
+[12:59] <xxx> hi folks!
+=== ddd has joined #ubuntu
+[01:05] <yyy> hi xxx!
+[01:05] <zzz> welcome!

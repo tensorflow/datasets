@@ -360,7 +360,7 @@ def load(name,
 
   # Set data_dir
   if try_gcs and gcs_utils.is_dataset_on_gcs(name):
-    data_dir = constants.GCS_DATA_DIR
+    data_dir = gcs_utils.gcs_path("datasets")
   elif data_dir is None:
     data_dir = constants.DATA_DIR
 

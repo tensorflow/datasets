@@ -26,6 +26,9 @@ toc:
     title: tedlium
   - path: /datasets/catalog/voxceleb
     title: voxceleb (manual)
+  - path: /datasets/catalog/voxforge
+    status: nightly
+    title: voxforge (manual)
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -58,6 +61,9 @@ toc:
     title: lost_and_found
   - path: /datasets/catalog/lsun
     title: lsun
+  - path: /datasets/catalog/nyu_depth_v2
+    status: nightly
+    title: nyu_depth_v2
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   - path: /datasets/catalog/shapes3d
@@ -214,6 +220,22 @@ toc:
     title: wider_face
   title: Object detection
 - section:
+  - path: /datasets/catalog/cosmos_qa
+    status: nightly
+    title: cosmos_qa
+  - path: /datasets/catalog/mctaco
+    status: nightly
+    title: mctaco
+  - path: /datasets/catalog/natural_questions
+    title: natural_questions
+  - path: /datasets/catalog/squad
+    title: squad
+  - path: /datasets/catalog/trivia_qa
+    title: trivia_qa
+  - path: /datasets/catalog/web_questions
+    title: web_questions
+  title: Question answering
+- section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/forest_fires
@@ -238,12 +260,18 @@ toc:
     title: billsum
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
+  - path: /datasets/catalog/covid19sum
+    status: nightly
+    title: covid19sum (manual)
   - path: /datasets/catalog/gigaword
     title: gigaword
   - path: /datasets/catalog/multi_news
     title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
+  - path: /datasets/catalog/opinion_abstracts
+    status: nightly
+    title: opinion_abstracts
   - path: /datasets/catalog/opinosis
     title: opinosis
   - path: /datasets/catalog/reddit
@@ -260,6 +288,9 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
+  - path: /datasets/catalog/anli
+    status: nightly
+    title: anli
   - path: /datasets/catalog/blimp
     title: blimp
   - path: /datasets/catalog/c4
@@ -282,6 +313,9 @@ toc:
     title: glue
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
+  - path: /datasets/catalog/irc_disentanglement
+    status: nightly
+    title: irc_disentanglement
   - path: /datasets/catalog/librispeech_lm
     title: librispeech_lm
   - path: /datasets/catalog/lm1b
@@ -294,8 +328,9 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
-  - path: /datasets/catalog/natural_questions
-    title: natural_questions
+  - path: /datasets/catalog/pg19
+    status: nightly
+    title: pg19
   - path: /datasets/catalog/qa4mre
     title: qa4mre
   - path: /datasets/catalog/scan
@@ -304,20 +339,17 @@ toc:
     title: scicite
   - path: /datasets/catalog/snli
     title: snli
-  - path: /datasets/catalog/squad
-    title: squad
   - path: /datasets/catalog/super_glue
     title: super_glue
   - path: /datasets/catalog/tiny_shakespeare
     title: tiny_shakespeare
-  - path: /datasets/catalog/trivia_qa
-    title: trivia_qa
-  - path: /datasets/catalog/web_questions
-    title: web_questions
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikipedia
     title: wikipedia
+  - path: /datasets/catalog/winogrande
+    status: nightly
+    title: winogrande
   - path: /datasets/catalog/xnli
     title: xnli
   - path: /datasets/catalog/yelp_polarity_reviews

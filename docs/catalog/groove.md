@@ -48,10 +48,13 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 *   **Config description**: Groove dataset without audio, unsplit.
 
 *   **Download size**: `3.11 MiB`
+
 *   **Dataset size**: `5.22 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples
@@ -82,10 +85,13 @@ FeaturesDict({
 *   **Config description**: Groove dataset with audio, unsplit.
 
 *   **Download size**: `4.76 GiB`
+
 *   **Dataset size**: `2.33 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
@@ -155,10 +161,13 @@ FeaturesDict({
 *   **Config description**: Groove dataset with audio, split into 2-bar chunks.
 
 *   **Download size**: `4.76 GiB`
+
 *   **Dataset size**: `4.61 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

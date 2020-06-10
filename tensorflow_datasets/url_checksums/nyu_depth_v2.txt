@@ -1,0 +1,1 @@
+http://datasets.lids.mit.edu/fastdepth/data/nyudepthv2.tar.gz 34276493134 063b5762eeb3041614bf40722ea5cf805cb8ca052e56f3d1c63cfd229e7ff7b3

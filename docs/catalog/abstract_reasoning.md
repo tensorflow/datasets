@@ -67,6 +67,7 @@ FeaturesDict({
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`

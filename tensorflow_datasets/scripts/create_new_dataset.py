@@ -43,6 +43,7 @@ _DATASET_TYPE = [
     'image',
     'image_classification',
     'object_detection',
+    'question_answering',
     'structured',
     'summarization',
     'text',

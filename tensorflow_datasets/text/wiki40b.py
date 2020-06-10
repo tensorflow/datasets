@@ -56,7 +56,7 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 _URL = "https://research.google/pubs/pub49029/"
 
-_DATA_DIRECTORY = "gs://tfds-data/downloads/wiki40b/tfrecord_prod"
+_DATA_DIRECTORY = tfds.core.gcs_path("downloads/wiki40b/tfrecord_prod")
 
 WIKIPEDIA_LANGUAGES = [
     "en", "ar", "zh-cn", "zh-tw", "nl", "fr", "de", "it", "ja", "ko", "pl",

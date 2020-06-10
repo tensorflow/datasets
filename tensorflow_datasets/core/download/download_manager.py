@@ -254,7 +254,7 @@ class DownloadManager(object):
   @property
   def downloaded_size(self):
     """Returns the total size of downloaded files."""
-    return sum(size for size, sha256 in self._recorded_url_infos.values())
+    return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_final_dl_path(self, url, sha256):
     return os.path.join(self._download_dir,
@@ -265,7 +265,7 @@ class DownloadManager(object):
     """Returns whether checksums are being computed and recorded to file."""
     return self._register_checksums
 
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   def _record_url_infos(self):
     """Store in file when recorded size/checksum of downloaded files."""
     checksums.store_checksums(self._dataset_name,
@@ -421,7 +421,7 @@ class DownloadManager(object):
 
   # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download(self, resource: Union[str, resource_lib.Resource]):
     """Download resource, returns Promise->path to downloaded file.
@@ -484,7 +484,7 @@ class DownloadManager(object):
       )
     return self._downloader.download(url, download_dir_path).then(callback)
 
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   @utils.memoize()
   def _extract(self, resource):
     """Extract a single archive, returns Promise->path to extraction result."""
@@ -503,7 +503,7 @@ class DownloadManager(object):
       return promise.Promise.resolve(extract_path)
     return self._extractor.extract(path, extract_method, extract_path)
 
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download_extract(self, resource):
     """Download-extract `Resource` or url, returns Promise->path."""

@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="savee" />
   <meta itemprop="description" content="SAVEE (Surrey Audio-Visual Expressed Emotion) is an emotion recognition&#10;dataset. It consists of recordings from 4 male actors in 7 different emotions,&#10;480 British English utterances in total. The sentences were chosen from the&#10;standard TIMIT corpus and phonetically-balanced for each emotion.&#10;This release contains only the audio stream from the original audio-visual&#10;recording.&#10;The data is split so that the training set consists of 2 speakers, and both the&#10;validation and test set consists of samples from 1 speaker, respectively.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;savee&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/savee" />
   <meta itemprop="sameAs" content="http://kahlan.eps.surrey.ac.uk/savee/" />
   <meta itemprop="citation" content="@inproceedings{Vlasenko_combiningframe,&#10;author = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},&#10;year = {2007},&#10;month = {01},&#10;pages = {2249-2252},&#10;title = {Combining frame and turn-level information for robust recognition of emotions within speech},&#10;journal = {Proceedings of Interspeech}&#10;}" />
 </div>
+
 # `savee`
 
 Warning: Manual download required. See instructions below.
@@ -58,6 +60,7 @@ FeaturesDict({
     'speaker_id': tf.string,
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`

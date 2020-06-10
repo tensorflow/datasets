@@ -30,7 +30,7 @@ project_name = 'tensorflow-datasets'
 version_path = os.path.join(
     os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
-from version import __version__  # pylint: disable=g-import-not-at-top
+from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
 if nightly:
   project_name = 'tfds-nightly'
@@ -50,7 +50,7 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
-    'tensorflow-metadata>=0.15,<0.16',
+    'tensorflow-metadata',
     'termcolor',
     'tqdm',
     'wrapt',
@@ -69,7 +69,7 @@ TESTS_REQUIRE = [
     'mako',
     'pytest',
     'pytest-xdist',
-    'tensorflow-data-validation>=0.15,<0.16',
+    'tensorflow-data-validation',
     # Python 2 backports
     'mock;python_version<"3"',
     # TODO(b/142892342): Re-enable
@@ -157,7 +157,7 @@ EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.15.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
-    'tensorflow-data-validation': ['tensorflow-data-validation>=0.15,<0.16'],
+    'tensorflow-data-validation': ['tensorflow-data-validation'],
 
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
@@ -178,7 +178,7 @@ setup(
     packages=find_packages(),
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
-            'scripts/templates/*',
+            'scripts/documentation/templates/*',
         ],
     },
     scripts=[],

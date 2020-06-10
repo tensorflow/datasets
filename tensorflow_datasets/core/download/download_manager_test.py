@@ -186,6 +186,8 @@ class DownloadManagerTest(testing.TestCase):
     # A isn't downloaded as already cached
     # C is re-downloaded as incomplete
     self.assertCountEqual(self.downloaded_urls, {b.url, c.url})
+    self.assertEqual(  # Downloaded size include cached downloads
+        manager.downloaded_size, sum([art.url_info.size for art in (a, b, c)]))
 
   def test_extract(self):
     """One file already extracted, one file with NO_EXTRACT, one to extract."""

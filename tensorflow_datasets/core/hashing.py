@@ -51,9 +51,13 @@ from __future__ import division
 from __future__ import print_function
 
 import hashlib
+from typing import Union
 
 import six
 import tensorflow.compat.v2 as tf
+
+
+HashKey = Union[str, bytes, int]
 
 
 def _to_bytes(data):
@@ -72,7 +76,7 @@ class Hasher(object):
   def __init__(self, salt):
     self._md5 = hashlib.md5(_to_bytes(salt))
 
-  def hash_key(self, key):
+  def hash_key(self, key: HashKey) -> int:
     """Returns 128 bits hash of given key.
 
     Args:

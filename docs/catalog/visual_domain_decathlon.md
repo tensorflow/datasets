@@ -52,7 +52,6 @@ the competition.
 }
 ```
 
-
 ## visual_domain_decathlon/aircraft (default config)
 
 *   **Config description**: Data based on "Aircraft", with images resized

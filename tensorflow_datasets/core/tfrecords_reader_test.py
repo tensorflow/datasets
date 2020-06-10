@@ -36,10 +36,28 @@ from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import shard_utils
 
 
 # Skip the cardinality test for backward compatibility with TF <= 2.1.
 _SKIP_CARDINALITY_TEST = not hasattr(tf.data.experimental, 'assert_cardinality')
+
+
+def _write_tfrecord_from_shard_spec(shard_spec, get):
+  """Write tfrecord shard given shard_spec and buckets to read data from.
+
+  Args:
+    shard_spec: _ShardSpec, the spec for shard to write.
+    get: callable taking the shard index (of bucket) and returning iterator over
+      its elements.
+  """
+  iterators = []
+  for instruction in shard_spec.file_instructions:
+    iterator = get(int(instruction.filename))
+    skip, take = instruction.skip, instruction.take
+    stop = skip+take if take > 0 else None
+    iterators.append(itertools.islice(iterator, skip, stop))
+  tfrecords_writer._write_tfrecord(shard_spec.path, itertools.chain(*iterators))
 
 
 class GetDatasetFilesTest(testing.TestCase):
@@ -48,8 +66,7 @@ class GetDatasetFilesTest(testing.TestCase):
       'train': [3, 2, 3, 2, 3],  # 13 examples.
   }
 
-  PATH_PATTERN = os.path.normpath(
-      '/foo/bar/mnist-train.tfrecord-0000%d-of-00005')
+  PATH_PATTERN = 'mnist-train.tfrecord-0000%d-of-00005'
 
   def _get_files(self, instruction):
     file_instructions = tfrecords_reader._make_file_instructions_from_absolutes(
@@ -57,27 +74,30 @@ class GetDatasetFilesTest(testing.TestCase):
         name2shard_lengths=self.NAME2SHARD_LENGTHS,
         absolute_instructions=[instruction],
     )
-    for fi in file_instructions.file_instructions:
-      fi['filename'] = os.path.normpath(
-          os.path.join('/foo/bar', fi['filename']))
-    return file_instructions.file_instructions
+    return file_instructions
 
   def test_no_skip_no_take(self):
     instruction = tfrecords_reader._AbsoluteInstruction('train', None, None)
     files = self._get_files(instruction)
     self.assertEqual(files, [
-        {'skip': 0, 'take': -1, 'filename': self.PATH_PATTERN % i}
-        for i in range(5)])
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % i, skip=0, take=-1, num_examples=n)
+        for i, n in enumerate([3, 2, 3, 2, 3])
+    ])
 
   def test_skip(self):
     # One file is not taken, one file is partially taken.
     instruction = tfrecords_reader._AbsoluteInstruction('train', 4, None)
     files = self._get_files(instruction)
     self.assertEqual(files, [
-        {'skip': 1, 'take': -1, 'filename': self.PATH_PATTERN % 1},
-        {'skip': 0, 'take': -1, 'filename': self.PATH_PATTERN % 2},
-        {'skip': 0, 'take': -1, 'filename': self.PATH_PATTERN % 3},
-        {'skip': 0, 'take': -1, 'filename': self.PATH_PATTERN % 4},
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 1, skip=1, take=-1, num_examples=1),
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 2, skip=0, take=-1, num_examples=3),
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 3, skip=0, take=-1, num_examples=2),
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 4, skip=0, take=-1, num_examples=3),
     ])
 
   def test_take(self):
@@ -85,9 +105,12 @@ class GetDatasetFilesTest(testing.TestCase):
     instruction = tfrecords_reader._AbsoluteInstruction('train', None, 6)
     files = self._get_files(instruction)
     self.assertEqual(files, [
-        {'skip': 0, 'take': -1, 'filename': self.PATH_PATTERN % 0},
-        {'skip': 0, 'take': -1, 'filename': self.PATH_PATTERN % 1},
-        {'skip': 0, 'take': 1, 'filename': self.PATH_PATTERN % 2},
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 0, skip=0, take=-1, num_examples=3),
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 1, skip=0, take=-1, num_examples=2),
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 2, skip=0, take=1, num_examples=1),
     ])
 
   def test_skip_take1(self):
@@ -95,7 +118,8 @@ class GetDatasetFilesTest(testing.TestCase):
     instruction = tfrecords_reader._AbsoluteInstruction('train', 1, 2)
     files = self._get_files(instruction)
     self.assertEqual(files, [
-        {'skip': 1, 'take': 1, 'filename': self.PATH_PATTERN % 0},
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 0, skip=1, take=1, num_examples=1),
     ])
 
   def test_skip_take2(self):
@@ -103,8 +127,10 @@ class GetDatasetFilesTest(testing.TestCase):
     instruction = tfrecords_reader._AbsoluteInstruction('train', 7, 9)
     files = self._get_files(instruction)
     self.assertEqual(files, [
-        {'skip': 2, 'take': -1, 'filename': self.PATH_PATTERN % 2},
-        {'skip': 0, 'take': 1, 'filename': self.PATH_PATTERN % 3},
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 2, skip=2, take=-1, num_examples=1),
+        shard_utils.FileInstruction(
+            filename=self.PATH_PATTERN % 3, skip=0, take=1, num_examples=1),
     ])
 
   def test_touching_boundaries(self):
@@ -293,7 +319,7 @@ class ReaderTest(testing.TestCase):
           num_examples, 0, [num_examples], path)
     serialized_records = [six.b(rec) for rec in records]
     for shard_spec in shard_specs:
-      tfrecords_writer._write_tfrecord_from_shard_spec(
+      _write_tfrecord_from_shard_spec(
           shard_spec, lambda unused_i: iter(serialized_records))
     return splits.SplitInfo(
         name=split_name,
@@ -411,23 +437,21 @@ class ReaderTest(testing.TestCase):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
     fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
     ds = self.reader.read_files(
-        tfrecords_reader.FileInstructions(
-            file_instructions=[
-                {'filename': fname_pattern % 1, 'skip': 0, 'take': -1},
-                {'filename': fname_pattern % 3, 'skip': 1, 'take': 1},
-            ],
-            num_examples_per_shard=None,
-        ),
+        [
+            shard_utils.FileInstruction(
+                filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+            shard_utils.FileInstruction(
+                filename=fname_pattern % 3, skip=1, take=1, num_examples=1),
+        ],
         read_config=read_config_lib.ReadConfig(),
-        shuffle_files=False)
+        shuffle_files=False,
+    )
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'defk'])
 
   def test_input_context(self):
     split_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     self.assertEqual(split_info.shard_lengths, [2, 3, 2, 3, 2])
-
-    print(split_info.shard_lengths)
 
     def read(num_workers, index):
       return list(tfds.as_numpy(self.reader.read(

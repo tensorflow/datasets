@@ -113,7 +113,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(),
+            'image': tfds.features.Image(encoding_format='jpeg'),
             'label': tfds.features.ClassLabel(names_file=names_file),
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),

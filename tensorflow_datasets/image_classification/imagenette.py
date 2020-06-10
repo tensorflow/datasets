@@ -98,7 +98,7 @@ class Imagenette(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
+            "image": tfds.features.Image(encoding_format="jpeg"),
             "label": tfds.features.ClassLabel(names_file=names_file)
         }),
         supervised_keys=("image", "label"),
