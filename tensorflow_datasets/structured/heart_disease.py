@@ -60,7 +60,66 @@ Attribute by column index
 Dataset Homepage: http://archive.ics.uci.edu/ml/datasets/Heart+Disease
 """
 
+_SEX_DICT = collections.OrderedDict([
+    ("1.0", "male"), ("0.0", "female")
+])
+_CP_DICT = collections.OrderedDict([
+    ("1.0", "typical angina"), ("2.0", "atypical angina"),
+    ("3.0", "non-anginal pain"), ("4.0", "asymptomatic")
+])
+_SLOPE_DICT = collections.OrderedDict([
+    ("1.0", "upsloping"), ("2.0", "flat"), ("3.0", "downsloping")
+])
+_EXE_DICT = collections.OrderedDict([
+    ("0.0", "no"), ("1.0", "yes")
+])
+_FBS_DICT = collections.OrderedDict([
+    ("0.0", "false"), ("1.0", "true")
+])
+_THAL_DICT = collections.OrderedDict([
+    ("3.0", "normal"), ("6.0", "fixed defect"), ("7.0", "reversable defect")
+])
+
+_CP_NAMES = ['typical angina', 'atypical angina',
+             'non-anginal pain', 'asymptomatic']
+_SLOPE_NAMES = ['upsloping', 'flat', 'downsloping']
+_THAL_NAMES = ['normal', 'fixed defect', 'reversable defect']
+
 _DOWNLOAD_URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data'
+
+def convert_to_label(d, dictionary):
+  return dictionary[d]
+
+def convert_to_int(d):
+  return int(float(d))
+
+def convert_to_float(d):
+  return float(d)
+
+def return_same(d):
+  return d
+
+FEATURE_DICT = collections.OrderedDict([
+    ("age", (tf.int32, convert_to_int)),
+    ("sex", (tfds.features.ClassLabel(names=['female', 'male']),
+             lambda d: convert_to_label(d, _SEX_DICT))),
+    ("cp", (tfds.features.ClassLabel(names=_CP_NAMES),
+            lambda d: convert_to_label(d, _CP_DICT))),
+    ("trestbps", (tf.int32, convert_to_int)),
+    ("chol", (tf.int32, convert_to_int)),
+    ("fbs", (tfds.features.ClassLabel(names=['false', 'true']),
+             lambda d: convert_to_label(d, _FBS_DICT))),
+    ("restecg", (tf.int32, convert_to_int)),
+    ("thalach", (tf.int32, convert_to_int)),
+    ("exang", (tfds.features.ClassLabel(names=['no', 'yes']),
+               lambda d: convert_to_label(d, _EXE_DICT))),
+    ("oldpeak", (tf.float32, convert_to_float)),
+    ("slope", (tfds.features.ClassLabel(names=_SLOPE_NAMES),
+               lambda d: convert_to_label(d, _SLOPE_DICT))),
+    ("ca", (tf.int32, convert_to_int)),
+    ("thal", (tfds.features.ClassLabel(names=_THAL_NAMES),
+              lambda d: convert_to_label(d, _THAL_DICT)))
+])
 
 
 class HeartDisease(tfds.core.GeneratorBasedBuilder):
@@ -73,22 +132,8 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "features":
-                collections.OrderedDict([
-                    ("age", tf.int32),
-                    ("sex", tf.int32),
-                    ("cp", tf.int32),
-                    ("trestbps", tf.int32),
-                    ("chol", tf.int32),
-                    ("fbs", tf.int32),
-                    ("restecg", tf.int32),
-                    ("thalach", tf.int32),
-                    ("exang", tf.int32),
-                    ("oldpeak", tf.float32),
-                    ("slope", tf.int32),
-                    ("ca", tf.int32),
-                    ("thal", tf.int32)
-                    ]),
+            "features": {name: dtype
+                         for name, (dtype, func) in FEATURE_DICT.items()},
             "label": tfds.features.ClassLabel(names=['0', '1', '2', '3', '4'])
         }),
         supervised_keys=("features", "label"),
@@ -118,15 +163,14 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(filepath) as f:
       all_lines = f.read().splitlines()
       records = [l for l in all_lines if ('?' not in l) and l]
-
       for i, row in enumerate(records):
         features = row.split(',')
-        label = int(features.pop())
-        # All features are int except feature_columns[9](float)
+        label = features.pop()
         yield i, {
-            "features": {feature_columns[col]: int(float(value))
-                                               if col != 9 else float(value)
-                         for col, value in enumerate(features)
-                        },
-            "label": label
+            "features": {
+                feature_columns[col]:\
+                FEATURE_DICT[feature_columns[col]][1](value)
+                for col, value in enumerate(features)
+            },
+            "label": convert_to_int(label)
             }
