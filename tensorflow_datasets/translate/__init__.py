@@ -18,6 +18,7 @@
 
 from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
+from tensorflow_datasets.translate.law import Law
 from tensorflow_datasets.translate.para_crawl import ParaCrawl
 from tensorflow_datasets.translate.para_crawl import ParaCrawlConfig
 from tensorflow_datasets.translate.ted_hrlr import TedHrlrTranslate
@@ -30,4 +31,3 @@ from tensorflow_datasets.translate.wmt17 import Wmt17Translate
 from tensorflow_datasets.translate.wmt18 import Wmt18Translate
 from tensorflow_datasets.translate.wmt19 import Wmt19Translate
 from tensorflow_datasets.translate.wmt_t2t import WmtT2tTranslate
-from tensorflow_datasets.translate.law import Law  # TODO(law) Sort alphabetically

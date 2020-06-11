@@ -4,6 +4,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -20,49 +22,60 @@ A parallel corpus of legislative text of the European Union comprising selected 
 
 _LANGUAGES = ["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"]
 
-_DATA_URL = 
+_DATA_URL = "http://opus.nlpl.eu/download.php?f=JRC-Acquis/"
+
+class LawConfig(tfds.core.BuilderConfig):
+  @tfds.core.disallow_positional_args
+  def __init__(self, language_pair=(None, None), **kwargs):
+    name = "%s_%s" % (language_pair[0], language_pair[1])
+    super(LawConfig, self).__init__(name=name, description=name + " documents", **kwargs)
+    self.language_pair = language_pair
 
 
 class Law(tfds.core.GeneratorBasedBuilder):
-  """TODO(law): Short description of my dataset."""
+  language_pairs = []
+  for idx, l1 in enumerate(_LANGUAGES):
+    for l2 in _LANGUAGES[idx + 1:]:
+      language_pairs.append((l1, l2))
 
-  # TODO(law): Set up version.
-  VERSION = tfds.core.Version('0.1.0')
+  BUILDER_CONFIGS = [
+    LawConfig(language_pair=pair, version="0.1.0") for pair in language_pairs
+  ]
 
   def _info(self):
-    # TODO(law): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
-        features=tfds.features.FeaturesDict({
-            # These are the features of your dataset like images, labels ...
-        }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
-        supervised_keys=(),
-        # Homepage of the dataset for documentation
-        homepage='https://dataset-homepage/',
+        features=tfds.features.Translation(languages=self.builder_config.language_pair),
+        supervised_keys=self.builder_config.language_pair,
+        homepage='http://opus.nlpl.eu/JRC-Acquis.php',
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
-    # TODO(law): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
+    l1, l2 = self.builder_config.language_pair
+    file_ext = "%s-%s"%(l1, l2)
+
+    dl_dir = dl_manager.download_and_extract(os.path.join(_DATA_URL, "%s.txt.zip"%file_ext))
+
+    l1_file = os.path.join(dl_dir, "JRC-Acquis.%s.%s"%(file_ext, l1))
+    l2_file = os.path.join(dl_dir, "JRC-Acquis.%s.%s"%(file_ext, l2))
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            # These kwargs will be passed to _generate_examples
-            gen_kwargs={},
+            gen_kwargs={"l1_file": l1_file, "l2_file": l2_file},
         ),
     ]
 
-  def _generate_examples(self):
-    """Yields examples."""
-    # TODO(law): Yields (key, example) tuples from the dataset
-    yield 'key', {}
+  def _generate_examples(self, l1_file, l2_file):
+    with tf.io.gfile.GFile(l1_file) as f:
+      l1_sentences = f.read().split("\n")
+    with tf.io.gfile.GFile(l2_file) as f:
+      l2_sentences = f.read().split("\n")
 
+    l1, l2 = self.builder_config.language_pair
+    for idx, (source, target) in enumerate(zip(l1_sentences, l2_sentences)):
+      result = {l1: source, l2: target}
+      if all(result.values()):
+        yield idx, result
