@@ -11,9 +11,9 @@ from tensorflow_datasets.translate import medical
 class MedicalTest(tfds.testing.DatasetBuilderTestCase):
   # TODO(medical):
   DATASET_CLASS = medical.Medical
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en_to_de"]
   SPLITS = {
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 15,  # Number of fake train example
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
