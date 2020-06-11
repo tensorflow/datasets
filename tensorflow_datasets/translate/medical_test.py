@@ -9,7 +9,6 @@ from tensorflow_datasets.translate import medical
 
 
 class MedicalTest(tfds.testing.DatasetBuilderTestCase):
-  # TODO(medical):
   DATASET_CLASS = medical.Medical
   BUILDER_CONFIG_NAMES_TO_TEST = ["de_en"]
   SPLITS = {

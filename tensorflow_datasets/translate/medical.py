@@ -22,7 +22,7 @@ This is a parallel corpus made out of PDF documents from the European Medicines 
 
 _LANGUAGES = ["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"]
 
-_DATA_URL = "http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/de-en.txt.zip"
+_DATA_URL = "http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/"
 
 
 class MedicalConfig(tfds.core.BuilderConfig):
@@ -55,9 +55,10 @@ class Medical(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     l1, l2 = self.builder_config.language_pair
-    dl_dir = dl_manager.download_and_extract(_DATA_URL)
-
     file_ext = "%s-%s"%(l1, l2)
+
+    dl_dir = dl_manager.download_and_extract(os.path.join(_DATA_URL, "%s.txt.zip"%file_ext))
+    
     l1_file = os.path.join(dl_dir, "EMEA.%s.%s"%(file_ext, l1))
     l2_file = os.path.join(dl_dir, "EMEA.%s.%s"%(file_ext, l2))
 
