@@ -50,3 +50,4 @@ http://opus.nlpl.eu/download.php?f=JRC-Acquis/da-hu.txt.zip 34424289 e738d9d3552
 http://opus.nlpl.eu/download.php?f=JRC-Acquis/da-it.txt.zip 105875258 765664a19d49cf68868d14554a916dc90737b285343c71009c3822af377a69d0
 http://opus.nlpl.eu/download.php?f=JRC-Acquis/da-lt.txt.zip 59723917 7b8c245ebfc97d99e1bc95fd7e0709638d08ab3745c09a0e576a72ee8393dd3e
 http://opus.nlpl.eu/download.php?f=JRC-Acquis/da-lv.txt.zip 101276998 f9097b629a6a6ebea3acd454b990b4cb2ea7034297a9753fdc5b34ceb3452273
+http://opus.nlpl.eu/download.php?f=JRC-Acquis/de-en.txt.zip 49276963 33bc142d7f7009551036c8958393c3aacbaccb7f882bf231057018b6e1dbb42e
