@@ -11,7 +11,7 @@ from tensorflow_datasets.translate import medical
 class MedicalTest(tfds.testing.DatasetBuilderTestCase):
   # TODO(medical):
   DATASET_CLASS = medical.Medical
-  BUILDER_CONFIG_NAMES_TO_TEST = ["en_to_de"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["de_en"]
   SPLITS = {
       "train": 15,  # Number of fake train example
   }

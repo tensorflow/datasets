@@ -20,9 +20,7 @@ _DESCRIPTION = """
 This is a parallel corpus made out of PDF documents from the European Medicines Agency. 
 """
 
-_VALID_LANGUAGE_PAIRS = (
-    ("en", "de"),
-)
+_LANGUAGES = ["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"]
 
 _DATA_URL = "http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/de-en.txt.zip"
 
@@ -30,45 +28,38 @@ _DATA_URL = "http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/de-en.txt.zip"
 class MedicalConfig(tfds.core.BuilderConfig):
   @tfds.core.disallow_positional_args
   def __init__(self, language_pair=(None, None), **kwargs):
-    name = "%s_to_%s" % (language_pair[0], language_pair[1])
-    description = "description"
-    super(MedicalConfig, self).__init__(name=name, description=description, **kwargs)
+    name = "%s_%s" % (language_pair[0], language_pair[1])
+    super(MedicalConfig, self).__init__(name=name, description=name + " documents", **kwargs)
     self.language_pair = language_pair
 
 
 class Medical(tfds.core.GeneratorBasedBuilder):
-  """Parallel corpus made out of PDF documents from the European Medicines Agency. """
+  language_pairs = []
+  for idx, l1 in enumerate(_LANGUAGES):
+    for l2 in _LANGUAGES[idx + 1:]:
+      language_pairs.append((l1, l2))
 
   BUILDER_CONFIGS = [
-    MedicalConfig(language_pair=pair, version="0.1.0") for pair in _VALID_LANGUAGE_PAIRS
+    MedicalConfig(language_pair=pair, version="0.1.0") for pair in language_pairs
   ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.Translation(languages=self.builder_config.language_pair),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
         supervised_keys=self.builder_config.language_pair,
-        # Homepage of the dataset for documentation
         homepage='http://opus.nlpl.eu/EMEA.php',
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
-    # TODO(medical): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
-    source, target = self.builder_config.language_pair
+    l1, l2 = self.builder_config.language_pair
     dl_dir = dl_manager.download_and_extract(_DATA_URL)
 
-    l1_file = os.path.join(dl_dir, "EMEA.de-en.de")
-    l2_file = os.path.join(dl_dir, "EMEA.de-en.en")
+    file_ext = "%s-%s"%(l1, l2)
+    l1_file = os.path.join(dl_dir, "EMEA.%s.%s"%(file_ext, l1))
+    l2_file = os.path.join(dl_dir, "EMEA.%s.%s"%(file_ext, l2))
 
     return [
         tfds.core.SplitGenerator(
@@ -78,7 +69,6 @@ class Medical(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, l1_file, l2_file):
-    """Yields examples."""
     with tf.io.gfile.GFile(l1_file) as f:
       l1_sentences = f.read().split("\n")
     with tf.io.gfile.GFile(l2_file) as f:
