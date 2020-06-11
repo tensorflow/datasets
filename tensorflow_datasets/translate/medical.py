@@ -44,7 +44,6 @@ class Medical(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    print(self.builder_config.language_pair)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
@@ -74,22 +73,19 @@ class Medical(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            # These kwargs will be passed to _generate_examples
             gen_kwargs={"l1_file": l1_file, "l2_file": l2_file},
         ),
     ]
 
   def _generate_examples(self, l1_file, l2_file):
     """Yields examples."""
-    # TODO(medical): Yields (key, example) tuples from the dataset
     with tf.io.gfile.GFile(l1_file) as f:
       l1_sentences = f.read().split("\n")
-      print(l1_sentences[0:10])
     with tf.io.gfile.GFile(l2_file) as f:
       l2_sentences = f.read().split("\n")
 
     l1, l2 = self.builder_config.language_pair
     for idx, (source, target) in enumerate(zip(l1_sentences, l2_sentences)):
-      result = {l1: l1, l2: l2}
+      result = {l1: source, l2: target}
       if all(result.values()):
         yield idx, result
