@@ -20,7 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -60,67 +59,27 @@ Attribute by column index
 Dataset Homepage: http://archive.ics.uci.edu/ml/datasets/Heart+Disease
 """
 
-_SEX_DICT = collections.OrderedDict([
-    ("1.0", "male"), ("0.0", "female")
-])
-_CP_DICT = collections.OrderedDict([
-    ("1.0", "typical angina"), ("2.0", "atypical angina"),
-    ("3.0", "non-anginal pain"), ("4.0", "asymptomatic")
-])
-_SLOPE_DICT = collections.OrderedDict([
-    ("1.0", "upsloping"), ("2.0", "flat"), ("3.0", "downsloping")
-])
-_EXE_DICT = collections.OrderedDict([
-    ("0.0", "no"), ("1.0", "yes")
-])
-_FBS_DICT = collections.OrderedDict([
-    ("0.0", "false"), ("1.0", "true")
-])
-_THAL_DICT = collections.OrderedDict([
-    ("3.0", "normal"), ("6.0", "fixed defect"), ("7.0", "reversable defect")
-])
-
 _CP_NAMES = ['typical angina', 'atypical angina',
              'non-anginal pain', 'asymptomatic']
 _SLOPE_NAMES = ['upsloping', 'flat', 'downsloping']
-_THAL_NAMES = ['normal', 'fixed defect', 'reversable defect']
 
 _DOWNLOAD_URL = 'http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data'
 
-def convert_to_label(d, dictionary):
-  return dictionary[d]
-
-def convert_to_int(d):
-  return int(float(d))
-
-def convert_to_float(d):
-  return float(d)
-
-def return_same(d):
-  return d
-
-FEATURE_DICT = collections.OrderedDict([
-    ("age", (tf.int32, convert_to_int)),
-    ("sex", (tfds.features.ClassLabel(names=['female', 'male']),
-             lambda d: convert_to_label(d, _SEX_DICT))),
-    ("cp", (tfds.features.ClassLabel(names=_CP_NAMES),
-            lambda d: convert_to_label(d, _CP_DICT))),
-    ("trestbps", (tf.int32, convert_to_int)),
-    ("chol", (tf.int32, convert_to_int)),
-    ("fbs", (tfds.features.ClassLabel(names=['false', 'true']),
-             lambda d: convert_to_label(d, _FBS_DICT))),
-    ("restecg", (tf.int32, convert_to_int)),
-    ("thalach", (tf.int32, convert_to_int)),
-    ("exang", (tfds.features.ClassLabel(names=['no', 'yes']),
-               lambda d: convert_to_label(d, _EXE_DICT))),
-    ("oldpeak", (tf.float32, convert_to_float)),
-    ("slope", (tfds.features.ClassLabel(names=_SLOPE_NAMES),
-               lambda d: convert_to_label(d, _SLOPE_DICT))),
-    ("ca", (tf.int32, convert_to_int)),
-    ("thal", (tfds.features.ClassLabel(names=_THAL_NAMES),
-              lambda d: convert_to_label(d, _THAL_DICT)))
-])
-
+_FEATURE_DICT = {
+    "age": tf.int32,
+    "sex": tfds.features.ClassLabel(names=['female', 'male']),
+    "cp": tfds.features.ClassLabel(names=_CP_NAMES),
+    "trestbps": tf.int32,
+    "chol": tf.int32,
+    "fbs": tfds.features.ClassLabel(names=['false', 'true']),
+    "restecg": tf.int32,
+    "thalach": tf.int32,
+    "exang": tfds.features.ClassLabel(names=['no', 'yes']),
+    "oldpeak": tf.float32,
+    "slope": tfds.features.ClassLabel(names=_SLOPE_NAMES),
+    "ca": tf.int32,
+    "thal": tf.int32
+}
 
 class HeartDisease(tfds.core.GeneratorBasedBuilder):
   """Heart disease dataset with 13 attributes."""
@@ -132,8 +91,7 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "features": {name: dtype
-                         for name, (dtype, func) in FEATURE_DICT.items()},
+            "features": _FEATURE_DICT,
             "label": tfds.features.ClassLabel(names=['0', '1', '2', '3', '4'])
         }),
         supervised_keys=("features", "label"),
@@ -157,20 +115,29 @@ class HeartDisease(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, filepath):
     """Yields examples."""
 
-    feature_columns = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg",
-                       "thalach", "exang", "oldpeak", "slope", "ca", "thal"]
-
     with tf.io.gfile.GFile(filepath) as f:
-      all_lines = f.read().splitlines()
-      records = [l for l in all_lines if ('?' not in l) and l]
-      for i, row in enumerate(records):
-        features = row.split(',')
-        label = features.pop()
+      fieldnames = ["age", "sex", "cp", "trestbps", "chol", "fbs",
+                    "restecg", "thalach", "exang", "oldpeak", "slope",
+                    "ca", "thal", "label"]
+      lines = f.read().splitlines()
+      records = [line.replace('?', '-1') for line in lines]
+      for i, features in enumerate(records):
+        values = {k: float(v) for k, v in zip(fieldnames, features.split(','))}
         yield i, {
             "features": {
-                feature_columns[col]:\
-                FEATURE_DICT[feature_columns[col]][1](value)
-                for col, value in enumerate(features)
+                "age": int(values['age']),
+                "sex": int(values['sex']),
+                "cp": int(values['cp'])-1,
+                "trestbps": int(values['trestbps']),
+                "chol": int(values['chol']),
+                "fbs": int(values['fbs']),
+                "restecg": int(values['restecg']),
+                "thalach": int(values['thalach']),
+                "exang": int(values['exang']),
+                "oldpeak": values['oldpeak'],
+                "slope": int(values['slope'])-1,
+                "ca": int(values['ca']),
+                "thal": int(values['thal'])
             },
-            "label": convert_to_int(label)
-            }
+            "label": int(values['label'])
+        }
