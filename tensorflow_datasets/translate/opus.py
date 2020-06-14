@@ -69,6 +69,36 @@ DATASET_MAP = {ds.name: ds for ds in [
     url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
     languages=["de", "en", "es"],
     filename="Tanzil"
+  ),
+  SubDataset(
+    name="GNOME",
+    url="http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/",
+    languages=["de", "en", "es"],
+    filename="GNOME"
+  ),
+  SubDataset(
+    name="KDE4",
+    url="http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/",
+    languages=["de", "en", "es"],
+    filename="KDE4"
+  ),
+  SubDataset(
+    name="PHP",
+    url="http://opus.nlpl.eu/download.php?f=PHP/v1/moses/",
+    languages=["de", "en", "es"],
+    filename="PHP"
+  ),
+  SubDataset(
+    name="Ubuntu",
+    url="http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/",
+    languages=["de", "en", "es"],
+    filename="Ubuntu"
+  ),
+  SubDataset(
+    name="OpenOffice",
+    url="http://opus.nlpl.eu/download.php?f=OpenOffice/v3/moses/",
+    languages=["de", "en_GB", "es"],
+    filename="OpenOffice"
   )
 ]}
 

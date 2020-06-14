@@ -1,0 +1,15 @@
+Umfasst Gmail, Google Docs, Google+, YouTube und Picasa
+Ändern Ihrer eigenen Benutzerdaten
+Zur Änderung Ihrer eigenen Benutzerdaten ist eine Legitimierung erforderlich
+Benutzerkonten verwalten
+Zur Änderung von Benutzerdaten ist eine Legitimierung erforderlich
+Konfiguration des Anmeldebildschirms ändern
+Zur Änderung der Konfiguration des Anmeldebildschirms ist eine Legitimierung erforderlich
+Versionsinformationen ausgeben und beenden
+Existierende Instanz ersetzen
+Code zur Fehlerdiagnose aktivieren
+Stellt D-Bus-Schnittstellen zur Abfrage und Änderung von Informationen zu Benutzerkonten bereit.
+Verwendung:
+\t%s acl pfadname...
+\t%s -b acl dacl pfadname...
+\t%s -d dacl pfadname...
