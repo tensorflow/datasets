@@ -99,7 +99,7 @@ class Opus(tfds.core.GeneratorBasedBuilder):
 
     source, target = self.builder_config.language_pair
     filtered_subsets = []
-    for dataset in DATASET_MAP.items():
+    for dataset_name, dataset in DATASET_MAP.items():
       if (source, target) in dataset.language_pairs:
         filtered_subsets.append(dataset)
 
@@ -141,8 +141,8 @@ class Opus(tfds.core.GeneratorBasedBuilder):
       target_sentences = f.read().split("\n")
 
     source, target = self.builder_config.language_pair
-    for idx, (source, target) in enumerate(zip(source_sentences, target_sentences)):
-      result = {source: source, target: target}
+    for idx, (source_sentence, target_sentence) in enumerate(zip(source_sentences, target_sentences)):
+      result = {source: source_sentence, target: target_sentence}
       if all(result.values()):
         yield idx, result
 
