@@ -39,10 +39,16 @@ OPUS is a collection of translated texts from the web.
 _LANGUAGES = ["de", "en", "es"]
 
 class SubDataset(object):
-  def __init__(self, name, url, l1, l2):
+  def __init__(self, name, url, languages):
     self.name = name
     self.url = url
-    self.language_pair = (l1, l2)
+
+    language_pairs = []
+    for idx, source in enumerate(languages):
+      for target in languages[idx + 1:]:
+        language_pairs.append((source, target))
+
+    self.language_pairs = language_pairs
 
 DATASET_MAP = {ds.name: ds for ds in [
   SubDataset(
@@ -63,8 +69,9 @@ class OpusConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
+    description = name + " documents"
 
-    super(OpusConfig, self).__init__(name=name, description=name + " documents", **kwargs)
+    super(OpusConfig, self).__init__(name=name, description=description, **kwargs)
     self.language_pair = language_pair
     self.subsets = subsets
 
@@ -79,7 +86,6 @@ class Opus(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
     OpusConfig(
-      description="",
       version=tfds.core.Version('0.1.0'),
       language_pair=pair,
       subsets=["medical"]
