@@ -62,7 +62,13 @@ DATASET_MAP = {ds.name: ds for ds in [
     name="law",
     url="http://opus.nlpl.eu/download.php?f=JRC-Acquis/",
     languages=["de", "en", "es"],
-    filename="JRC-Acquis"
+    filename="JRC-Acquis" 
+  ),
+  SubDataset(
+    name="quran",
+    url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
+    languages=["de", "en", "es"],
+    filename="Tanzil"
   )
 ]}
 

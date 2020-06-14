@@ -16,13 +16,13 @@ class OpusTest(tfds.testing.DatasetBuilderTestCase):
   config = opus.OpusConfig(
     version=tfds.core.Version('0.1.0'),
     language_pair=("de", "en"),
-    subsets=["medical", "law"]
+    subsets=["quran"]
   )
   opus.Opus.BUILDER_CONFIGS = [config]
 
   DATASET_CLASS = opus.Opus
   SPLITS = {
-      "train": 30,
+      "train": 15,
   }
 
   SKIP_CHECKSUMS = True
