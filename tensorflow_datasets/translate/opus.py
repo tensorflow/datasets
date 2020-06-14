@@ -54,51 +54,75 @@ class SubDataset(object):
 DATASET_MAP = {ds.name: ds for ds in [
   SubDataset(
     name="medical", 
+    description="A parallel corpus made out of PDF documents from the European Medicines Agency.",
+    homepage="http://opus.nlpl.eu/EMEA.php",
     url="http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/",
     languages=["de", "en", "es"], 
     filename="EMEA"
   ),
   SubDataset(
     name="law",
+    description="A collection of legislative text of the European Union and currently comprises selected texts written between the 1950s and now.",
+    homepage="http://opus.nlpl.eu/JRC-Acquis.php",
     url="http://opus.nlpl.eu/download.php?f=JRC-Acquis/",
     languages=["de", "en", "es"],
     filename="JRC-Acquis" 
   ),
   SubDataset(
     name="quran",
+    description="A collection of Quran translations compiled by the Tanzil project.".
+    homepage="http://opus.nlpl.eu/Tanzil.php",
     url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
     languages=["de", "en", "es"],
     filename="Tanzil"
   ),
   SubDataset(
     name="GNOME",
+    description="A parallel corpus of GNOME localization files. Source: https://l10n.gnome.org",
+    homepage="http://opus.nlpl.eu/GNOME.php",
     url="http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/",
     languages=["de", "en", "es"],
     filename="GNOME"
   ),
   SubDataset(
     name="KDE4",
+    description="A parallel corpus of KDE4 localization files (v.2).",
+    homepage="http://opus.nlpl.eu/KDE4.php",
     url="http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/",
     languages=["de", "en", "es"],
     filename="KDE4"
   ),
   SubDataset(
     name="PHP",
+    description="A parallel corpus originally extracted from http://se.php.net/download-docs.php.",
+    homepage="http://opus.nlpl.eu/PHP.php",
     url="http://opus.nlpl.eu/download.php?f=PHP/v1/moses/",
     languages=["de", "en", "es"],
     filename="PHP"
   ),
   SubDataset(
     name="Ubuntu",
+    description="A parallel corpus of Ubuntu localization files. Source: https://translations.launchpad.net",
+    homepage="http://opus.nlpl.eu/Ubuntu.php",
     url="http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/",
     languages=["de", "en", "es"],
     filename="Ubuntu"
   ),
   SubDataset(
     name="OpenOffice",
+    description="A collection of documents from http://www.openoffice.org/.",
+    homepage="http://opus.nlpl.eu/OpenOffice.php",
     url="http://opus.nlpl.eu/download.php?f=OpenOffice/v3/moses/",
     languages=["de", "en_GB", "es"],
     filename="OpenOffice"
+  ),
+  SubDataset(
+    name="OpenSubtitles",
+    description="A new collection of translated movie subtitles from http://www.opensubtitles.org/",
+    homepage="http://opus.nlpl.eu/OpenSubtitles-v2018.php",
+    url="http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/",
+    languages=["de", "en", "es"],
+    filename="OpenSubtitles"
   )
 ]}
 
