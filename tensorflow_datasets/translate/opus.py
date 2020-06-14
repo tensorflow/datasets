@@ -112,29 +112,37 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     source, target = self.builder_config.language_pair
     file_ext = "%s-%s"%(source, target)
 
-    splits = []
+    subsets = []
+
     for item in self.subsets:
       dl_dir = dl_manager.download_and_extract(os.path.join(item.url, "%s.txt.zip"%file_ext))
+      subsets.append({
+        "name": item.name,
+        "source_file": os.path.join(dl_dir, "%s.%s.%s"%(item.filename, file_ext, source)),
+        "target_file": os.path.join(dl_dir, "%s.%s.%s"%(item.filename, file_ext, target))
+      })
 
-      splits.append( tfds.core.SplitGenerator(
+    return [
+      tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-              "source_file": os.path.join(dl_dir, "%s.%s.%s"%(item.filename, file_ext, source)),
-              "target_file": os.path.join(dl_dir, "%s.%s.%s"%(item.filename, file_ext, target))
-            },
-        ))
+            gen_kwargs={ "subsets": subsets }
+        )
+    ]
 
-    return splits
+  def _generate_examples(self, subsets):
+    for item in subsets:
+      source_file = item["source_file"]
+      target_file = item["target_file"]
 
-  def _generate_examples(self, source_file, target_file):
-    with tf.io.gfile.GFile(source_file) as f:
-      source_sentences = f.read().split("\n")
-    with tf.io.gfile.GFile(target_file) as f:
-      target_sentences = f.read().split("\n")
+      with tf.io.gfile.GFile(source_file) as f:
+        source_sentences = f.read().split("\n")
+      with tf.io.gfile.GFile(target_file) as f:
+        target_sentences = f.read().split("\n")
 
-    source, target = self.builder_config.language_pair
-    for idx, (source_sentence, target_sentence) in enumerate(zip(source_sentences, target_sentences)):
-      result = {source: source_sentence, target: target_sentence}
-      if all(result.values()):
-        yield idx, result
+      source, target = self.builder_config.language_pair
+      for idx, (source_sentence, target_sentence) in enumerate(zip(source_sentences, target_sentences)):
+        result = {source: source_sentence, target: target_sentence}
+        if all(result.values()):
+          key = "%s/%d"%(item["name"], idx)
+          yield key, result
 
