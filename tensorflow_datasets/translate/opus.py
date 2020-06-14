@@ -79,19 +79,6 @@ class Opus(tfds.core.GeneratorBasedBuilder):
   """OPUS is a collection of translated texts from the web.
   """
 
-  language_pairs = []
-  for idx, source in enumerate(_LANGUAGES):
-    for target in _LANGUAGES[idx + 1:]:
-      language_pairs.append((source, target))
-
-  BUILDER_CONFIGS = [
-    OpusConfig(
-      version=tfds.core.Version('0.1.0'),
-      language_pair=pair,
-      subsets=["medical"]
-    ) for pair in language_pairs
-  ]
-
   @property
   def subsets(self):
     # gets called for each builder config. 
