@@ -39,9 +39,10 @@ OPUS is a collection of translated texts from the web.
 _LANGUAGES = ["de", "en", "es"]
 
 class SubDataset(object):
-  def __init__(self, name, url, languages):
+  def __init__(self, name, url, languages, filename):
     self.name = name
     self.url = url
+    self.filename = filename
 
     language_pairs = []
     for idx, source in enumerate(languages):
@@ -53,8 +54,15 @@ class SubDataset(object):
 DATASET_MAP = {ds.name: ds for ds in [
   SubDataset(
     name="medical", 
+    url="http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/",
     languages=["de", "en", "es"], 
-    url="http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/"
+    filename="EMEA"
+  ),
+  SubDataset(
+    name="law",
+    url="http://opus.nlpl.eu/download.php?f=JRC-Acquis/",
+    languages=["de", "en", "es"],
+    filename="JRC-Acquis"
   )
 ]}
 
@@ -81,12 +89,10 @@ class Opus(tfds.core.GeneratorBasedBuilder):
 
   @property
   def subsets(self):
-    # gets called for each builder config. 
     # return only the datasets that exist for the language pair for each builder config
-
     source, target = self.builder_config.language_pair
     filtered_subsets = []
-    for dataset_name, dataset in DATASET_MAP.items():
+    for dataset in [DATASET_MAP[name] for name in self.builder_config.subsets]:
       if (source, target) in dataset.language_pairs:
         filtered_subsets.append(dataset)
 
@@ -110,12 +116,11 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     for item in self.subsets:
       dl_dir = dl_manager.download_and_extract(os.path.join(item.url, "%s.txt.zip"%file_ext))
 
-      # TODO: do not hard code "EMEA" - specific to medical.
       splits.append( tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-              "source_file": os.path.join(dl_dir, "EMEA.%s.%s"%(file_ext, source)),
-              "target_file": os.path.join(dl_dir, "EMEA.%s.%s"%(file_ext, target))
+              "source_file": os.path.join(dl_dir, "%s.%s.%s"%(item.filename, file_ext, source)),
+              "target_file": os.path.join(dl_dir, "%s.%s.%s"%(item.filename, file_ext, target))
             },
         ))
 
