@@ -53,7 +53,7 @@ a movie recommendation service.
 Users were selected at random for inclusion.
 """
 
-_DATASET_OPTIONS = ['20m', 'latest-small', '1m', '100k']
+_DATASET_OPTIONS = ['20m', '25m', 'latest-small', '1m', '100k']
 
 
 class MovieLensConfig(tfds.core.BuilderConfig):
@@ -90,9 +90,33 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               across 27278 movies.
               These data were created by 138493 users between
               January 09, 1995 and March 31, 2015.
+              Ratings are in half-star increments.
+              Each user has rated at least 20 movies.
+              This dataset does not contain demographic data.
+              The movies data and ratings data are joined on "movieId".
+              Genres are converted into sequences of labels.
+              "(no genres listed)" is considered a label itself.
               This dataset was generated on October 17, 2016."""),
           version='0.1.0',
           data_option='20m',
+      ),
+      MovieLensConfig(
+          name='25m',
+          description=textwrap.dedent("""\
+              This dataset contains 25000095 ratings across 62423 movies.
+              These data were created by 162541 users between January 09, 1995
+              and November 21, 2019.
+              Ratings are in half-star increments.
+              Each user has rated at least 20 movies.
+              This dataset is the latest stable version
+              of the MovieLens dataset.
+              This dataset does not include demographic data.
+              The movies data and ratings data are joined on "movieId".
+              Genres are converted into sequence of labels.
+              "(no genres listed)" is considered a label itself.
+              This dataset was generated on November 21, 2019."""),
+          version='0.1.0',
+          data_option='25m',
       ),
       MovieLensConfig(
           name='latest-small',
@@ -100,6 +124,15 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               This dataset contains 100836 ratings across 9742 movies
               These data were created by 610 users between March 29, 1996
               and September 24, 2018.
+              Ratings are in half-star increments.
+              Each user has rated at least 20 movies.
+              This dataset is the a subset of the full latest version
+              of the MovieLens dataset.
+              This dataset is changed and updated over time.
+              This dataset does not include demographic data.
+              The movies data and ratings data are joined on "movieId".
+              Genres are converted into sequence of labels.
+              "(no genres listed)" is considered a label itself.
               This dataset was generated on September 26, 2018."""),
           version='0.1.0',
           data_option='latest-small',
@@ -109,7 +142,17 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
               This dataset contains 1,000,209 anonymous ratings of
               approximately 3,900 movies made by 6,040 MovieLens users
-              who joined MovieLens in 2000."""),
+              who joined MovieLens in 2000.
+              Ratings are in whole-star increments.
+              Each user has rated at least 20 movies.
+              This dataset is the largest dataset that includes
+              demographic data.
+              The movies data and ratings data are joined on "MovieId".
+              The ratings data and users data are joined on "UserId".
+              Occupation labels standardized for "user_occupation_label" to
+              ensure consistency.
+              The original occupation strings are also preserved in
+              "user_occupation_strings"."""),
           version='0.1.0',
           data_option='1m',
       ),
@@ -117,7 +160,16 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
           name='100k',
           description=textwrap.dedent("""\
               This dataset contains 100,000 ratings (1-5) from 943 users
-              on 1682 movies."""),
+              on 1682 movies.
+              Ratings are in whole-star increments.
+              Each user has rated at least 20 movies.
+              This dataset is the oldest version of the MovieLens dataset.
+              The movies data and ratings data are joined on "movie id".
+              The ratings data and users data are joined on "user id".
+              Occupation labels standardized for "user_occupation_label" to
+              ensure consistency.
+              The original occupation strings are also preserved in
+              "user_occupation_strings"."""),
           version='0.1.0',
           data_option='100k',
       ),
@@ -140,7 +192,8 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
         ),
         'user_id': tf.string,
         'user_rating': tf.float32,
-        'timestamp': tf.float32,
+        # Using int64 since tfds currently does not support float64
+        'timestamp': tf.int64,
     }
     # Older versions of MovieLens have demographic features.
     if self.builder_config.name in ['1m', '100k']:
@@ -155,7 +208,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
           'technician/engineer', 'tradesman/craftsman', 'unemployed',
           'writer',
       ])
-      features_dict['raw_user_occupation'] = tf.string
+      features_dict['user_occupation_string'] = tf.string
       features_dict['user_zip_code'] = tf.string
     return tfds.core.DatasetInfo(
         builder=self,
@@ -190,7 +243,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
       dir_path: Optional[str] = None
   ) -> Iterator[Tuple[int, Dict[str, Any]]]:
     """Yields examples by calling the corresponding parsing function."""
-    if self.builder_config.name in ['20m', 'latest-small']:
+    if self.builder_config.name in ['20m', '25m', 'latest-small']:
       yield from _parse_current_format(dir_path)
     elif self.builder_config.name == '1m':
       yield from _parse_1m_format(dir_path)
@@ -200,7 +253,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
 def _parse_current_format(
     dir_path: str
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
-  """Parse the data in current format (20m and latest)."""
+  """Parse the data in current format (20m, 25m, and latest)."""
   movies_file_path = os.path.join(dir_path, 'movies.csv')
   ratings_file_path = os.path.join(dir_path, 'ratings.csv')
   movie_genre_map = {}
@@ -237,10 +290,11 @@ def _parse_1m_format(
     for line in movies_file:
       line = codecs.decode(line, encoding='ISO-8859-1')
       # Row format: <movie id>::<movie title>::<movie genres>.
-      movie_id, movie_title, movie_genre_str = line.strip().split('::')
+      movie_id, movie_title, movie_genres_str = line.strip().split('::')
       movie_title_map[movie_id] = movie_title
-      genre_list = movie_genre_str.split('|')
+      genre_list = movie_genres_str.split('|')
       # 1m dataset labels "Children" genre as "Children's".
+      # However "Children" and "Children's" should represent the same genre.
       for idx, genre in enumerate(genre_list):
         if genre == 'Children\'s':
           genre_list[idx] = 'Children'
@@ -257,25 +311,19 @@ def _parse_1m_format(
   user_info_map = {}
   with tf.io.gfile.GFile(users_file_path, mode='rb') as users_file:
     for line in users_file:
-      line = codecs.decode(line, encoding='ISO-8859-1')
-      (
-          user_id,
-          gender_str,
-          age,
-          occupation_index,
-          zip_code,
-      ) = line.strip().split('::')
-      raw_occupation = occupation_index_to_label[int(occupation_index)]
+      line = codecs.decode(line, encoding='ISO-8859-1').strip()
+      user_id, gender_str, age, occupation_index, zip_code = line.split('::')
+      occupation_str = occupation_index_to_label[int(occupation_index)]
       # Combine "K-12 student" and "college/grad student" labels.
-      if 'student' in raw_occupation:
+      if occupation_str in ['K-12 student', 'college/grad student']:
         occupation_label = 'student'
       else:
-        occupation_label = raw_occupation
+        occupation_label = occupation_str
       user_info_map[user_id] = {
           'gender': gender_str == 'M',
           'age': age,
           'occupation_label': occupation_label,
-          'raw_occupation': raw_occupation,
+          'occupation_str': occupation_str,
           'zip_code': zip_code,
       }
 
@@ -294,7 +342,7 @@ def _parse_1m_format(
           'user_gender': user_info['gender'],
           'user_age': user_info['age'],
           'user_occupation_label': user_info['occupation_label'],
-          'raw_user_occupation': user_info['raw_occupation'],
+          'user_occupation_string': user_info['occupation_str'],
           'user_zip_code': user_info['zip_code'],
       }
 
@@ -320,13 +368,11 @@ def _parse_100k_format(
       line = codecs.decode(line, encoding='ISO-8859-1')
       # Row format: <movie id>|<movie title>|<release date>|\
       # <IMDb URL>|<19 fields for each genre>|.
-      row_args = line.strip().split('|')
-      movie_id = row_args[0]
-      movie_title = row_args[1]
+      movie_id, movie_title, _, _, *genre_bools = line.strip().split('|')
       genre_list = []
-      for i in range(19):
-        if row_args[i + 4] == '1':
-          genre_list.append(all_genre_list[i])
+      for index, genre_indicator in enumerate(genre_bools):
+        if genre_indicator == '1':
+          genre_list.append(all_genre_list[index])
       movie_title_map[movie_id] = movie_title
       movie_genre_map[movie_id] = genre_list
 
@@ -357,19 +403,13 @@ def _parse_100k_format(
   user_info_map = {}
   with tf.io.gfile.GFile(users_file_path, mode='rb') as users_file:
     for line in users_file:
-      line = codecs.decode(line, encoding='ISO-8859-1')
-      (
-          user_id,
-          age,
-          gender_str,
-          raw_occupation,
-          zip_code,
-      ) = line.strip().split('|')
+      line = codecs.decode(line, encoding='ISO-8859-1').strip()
+      user_id, age, gender_str, occupation_str, zip_code = line.split('|')
       user_info_map[user_id] = {
           'gender': gender_str == 'M',
           'age': age,
-          'occupation_label': occupation_label_conversion_map[raw_occupation],
-          'raw_occupation': raw_occupation,
+          'occupation_label': occupation_label_conversion_map[occupation_str],
+          'occupation_str': occupation_str,
           'zip_code': zip_code,
       }
 
@@ -388,6 +428,6 @@ def _parse_100k_format(
           'user_gender': user_info['gender'],
           'user_age': user_info['age'],
           'user_occupation_label': user_info['occupation_label'],
-          'raw_user_occupation': user_info['raw_occupation'],
+          'user_occupation_string': user_info['occupation_str'],
           'user_zip_code': user_info['zip_code'],
       }
