@@ -36,8 +36,6 @@ _DESCRIPTION = """
 OPUS is a collection of translated texts from the web.
 """
 
-_LANGUAGES = ["de", "en", "es"]
-
 class SubDataset(object):
   def __init__(self, name, description, homepage, url, languages, filename):
     self.name = name
@@ -55,7 +53,7 @@ class SubDataset(object):
 
 DATASET_MAP = {ds.name: ds for ds in [
   SubDataset(
-    name="medical", 
+    name="EMEA", 
     description="A parallel corpus made out of PDF documents from the European Medicines Agency.",
     homepage="http://opus.nlpl.eu/EMEA.php",
     url="http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/",
@@ -63,7 +61,7 @@ DATASET_MAP = {ds.name: ds for ds in [
     filename="EMEA"
   ),
   SubDataset(
-    name="law",
+    name="JRC-Acquis",
     description="A collection of legislative text of the European Union and currently comprises selected texts written between the 1950s and now.",
     homepage="http://opus.nlpl.eu/JRC-Acquis.php",
     url="http://opus.nlpl.eu/download.php?f=JRC-Acquis/",
@@ -71,7 +69,7 @@ DATASET_MAP = {ds.name: ds for ds in [
     filename="JRC-Acquis" 
   ),
   SubDataset(
-    name="quran",
+    name="Tanzil",
     description="A collection of Quran translations compiled by the Tanzil project.",
     homepage="http://opus.nlpl.eu/Tanzil.php",
     url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
@@ -151,7 +149,7 @@ class Opus(tfds.core.GeneratorBasedBuilder):
 
   @property
   def subsets(self):
-    # return only the datasets that exist for the language pair for each builder config
+    # Return only the datasets that exist for the language pair.
     source, target = self.builder_config.language_pair
     filtered_subsets = []
     for dataset in [DATASET_MAP[name] for name in self.builder_config.subsets]:
