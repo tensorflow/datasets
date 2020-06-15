@@ -39,8 +39,10 @@ OPUS is a collection of translated texts from the web.
 _LANGUAGES = ["de", "en", "es"]
 
 class SubDataset(object):
-  def __init__(self, name, url, languages, filename):
+  def __init__(self, name, description, homepage, url, languages, filename):
     self.name = name
+    self.description = description
+    self.homepage = homepage
     self.url = url
     self.filename = filename
 
@@ -70,7 +72,7 @@ DATASET_MAP = {ds.name: ds for ds in [
   ),
   SubDataset(
     name="quran",
-    description="A collection of Quran translations compiled by the Tanzil project.".
+    description="A collection of Quran translations compiled by the Tanzil project.",
     homepage="http://opus.nlpl.eu/Tanzil.php",
     url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
     languages=["de", "en", "es"],
