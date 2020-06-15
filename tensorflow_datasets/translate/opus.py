@@ -164,7 +164,7 @@ class OpusConfig(tfds.core.BuilderConfig):
       subsets: `<list>(string)`, list of the subdatasets to use.
       **kwargs: keyword arguments forwarded to super.
     """
-    name = "%s-%s" % (language_pair[0], language_pair[1])
+    name = "%s-%s for %s" % (language_pair[0], language_pair[1], ', '.join(subsets))
     description = name + " documents"
 
     super(OpusConfig, self).__init__(
