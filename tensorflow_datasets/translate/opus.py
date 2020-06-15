@@ -20,6 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from absl import logging
 import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -34,10 +35,31 @@ _CITATION = """
 
 _DESCRIPTION = """
 OPUS is a collection of translated texts from the web.
+
+Create your own config to choose which data / language pair to load.
+
+```
+config = tfds.translate.opus.OpusConfig(
+    version=tfds.core.Version('0.1.0'),
+    language_pair=("de", "en"),
+    subsets=["GNOME", "EMEA"]
+)
+builder = tfds.builder("opus", config=config)
+```
 """
 
 class SubDataset(object):
   def __init__(self, name, description, homepage, url, languages, filename):
+    """Sub-dataset of OPUS.
+
+    Args:
+      name: `string`, a unique dataset identifier.
+      description: `string`, a description of the dataset.
+      homepage: `string`, homepage of the dataset.
+      url: `string`, download url for the dataset.
+      languages: `<list>(string)`, a list of supported languages.
+      filename: `string`, the prefix of the downloaded files. 
+    """
     self.name = name
     self.description = description
     self.homepage = homepage
@@ -127,25 +149,28 @@ DATASET_MAP = {ds.name: ds for ds in [
 ]}
 
 class OpusConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for Opus."""
+
   @tfds.core.disallow_positional_args
   def __init__(self, language_pair, subsets, **kwargs):
     """BuilderConfig for Opus.
 
     Args:
-      language_pair: pair of languages that will be used for translation. Should contain 2 letter coded strings (e.g. "en", "de")
-      subsets: list[str]. List of the subsets to use
+      language_pair: `(string, string)`, pair of languages that will be used for translation. 
+        Should contain 2 letter coded strings (e.g. "en", "de")
+      subsets: `<list>(string)`, list of the subdatasets to use.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
     description = name + " documents"
 
     super(OpusConfig, self).__init__(name=name, description=description, **kwargs)
+
     self.language_pair = language_pair
     self.subsets = subsets
 
 class Opus(tfds.core.GeneratorBasedBuilder):
-  """OPUS is a collection of translated texts from the web.
-  """
+  """OPUS is a collection of translated texts from the web."""
 
   @property
   def subsets(self):
@@ -159,11 +184,13 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     return filtered_subsets
 
   def _info(self):
+    src, target = self.builder_config.language_pair
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.Translation(languages=self.builder_config.language_pair),
-        supervised_keys=self.builder_config.language_pair,
+        features=tfds.features.Translation(
+            languages=self.builder_config.language_pair),
+        supervised_keys=(src, target),
         homepage='http://opus.nlpl.eu/',
         citation=_CITATION,
     )
@@ -173,7 +200,6 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     file_ext = "%s-%s"%(source, target)
 
     subsets = []
-
     for item in self.subsets:
       dl_dir = dl_manager.download_and_extract(os.path.join(item.url, "%s.txt.zip"%file_ext))
       subsets.append({
@@ -191,6 +217,7 @@ class Opus(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, subsets):
     for item in subsets:
+      logging.info("Generating examples from: %s", item["name"])
       source_file = item["source_file"]
       target_file = item["target_file"]
 
