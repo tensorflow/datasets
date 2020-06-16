@@ -51,9 +51,22 @@ _DESCRIPTION = """
 This dataset describes 5-star rating from MovieLens,
 a movie recommendation service.
 Users were selected at random for inclusion.
+There are 5 versions included: 25m, latest-small, 100k, 1m, 20m.
+In all datasets, the movies data and ratings data are joined on "movieId".
+The 25m dataset, latest-small dataset, and 1m dataset have the same schema
+and they do not include demographic data.
+The 25m dataset is the latest stable version of the MovieLens dataset.
+It is recommended for research purposes.
+The latest-small dataset is a small dataset with
+the same schema as 25m and 20m.
+It is updated overtime by GroupLens and its checksum might need updating.
+The 20m dataset is one of the most used MovieLens datasets in academic papers
+along with the 1m dataset.
+The 100k dataset and 1m dataset are the oldest MovieLens datasets.
+They both contain demographic data and have the same schema.
 """
 
-_DATASET_OPTIONS = ['20m', '25m', 'latest-small', '1m', '100k']
+_DATASET_OPTIONS = ['25m', 'latest-small', '100k', '1m', '20m']
 
 
 class MovieLensConfig(tfds.core.BuilderConfig):
@@ -83,23 +96,6 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
   """MovieLens rating dataset."""
 
   BUILDER_CONFIGS = [
-      MovieLensConfig(
-          name='20m',
-          description=textwrap.dedent("""\
-              This dataset contains contains 20000263 ratings
-              across 27278 movies.
-              These data were created by 138493 users between
-              January 09, 1995 and March 31, 2015.
-              Ratings are in half-star increments.
-              Each user has rated at least 20 movies.
-              This dataset does not contain demographic data.
-              The movies data and ratings data are joined on "movieId".
-              Genres are converted into sequences of labels.
-              "(no genres listed)" is considered a label itself.
-              This dataset was generated on October 17, 2016."""),
-          version='0.1.0',
-          data_option='20m',
-      ),
       MovieLensConfig(
           name='25m',
           description=textwrap.dedent("""\
@@ -138,6 +134,23 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
           data_option='latest-small',
       ),
       MovieLensConfig(
+          name='100k',
+          description=textwrap.dedent("""\
+              This dataset contains 100,000 ratings (1-5) from 943 users
+              on 1682 movies.
+              Ratings are in whole-star increments.
+              Each user has rated at least 20 movies.
+              This dataset is the oldest version of the MovieLens dataset.
+              The movies data and ratings data are joined on "movie id".
+              The ratings data and users data are joined on "user id".
+              Occupation labels standardized for "user_occupation_label" to
+              ensure consistency.
+              The original occupation strings are also preserved in
+              "user_occupation_strings"."""),
+          version='0.1.0',
+          data_option='100k',
+      ),
+      MovieLensConfig(
           name='1m',
           description=textwrap.dedent("""\
               This dataset contains 1,000,209 anonymous ratings of
@@ -157,21 +170,21 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
           data_option='1m',
       ),
       MovieLensConfig(
-          name='100k',
+          name='20m',
           description=textwrap.dedent("""\
-              This dataset contains 100,000 ratings (1-5) from 943 users
-              on 1682 movies.
-              Ratings are in whole-star increments.
+              This dataset contains contains 20000263 ratings
+              across 27278 movies.
+              These data were created by 138493 users between
+              January 09, 1995 and March 31, 2015.
+              Ratings are in half-star increments.
               Each user has rated at least 20 movies.
-              This dataset is the oldest version of the MovieLens dataset.
-              The movies data and ratings data are joined on "movie id".
-              The ratings data and users data are joined on "user id".
-              Occupation labels standardized for "user_occupation_label" to
-              ensure consistency.
-              The original occupation strings are also preserved in
-              "user_occupation_strings"."""),
+              This dataset does not contain demographic data.
+              The movies data and ratings data are joined on "movieId".
+              Genres are converted into sequences of labels.
+              "(no genres listed)" is considered a label itself.
+              This dataset was generated on October 17, 2016."""),
           version='0.1.0',
-          data_option='100k',
+          data_option='20m',
       ),
   ]
 
@@ -288,9 +301,9 @@ def _parse_1m_format(
   movie_title_map = {}
   with tf.io.gfile.GFile(movies_file_path, mode='rb') as movies_file:
     for line in movies_file:
-      line = codecs.decode(line, encoding='ISO-8859-1')
+      line = codecs.decode(line, encoding='ISO-8859-1').strip()
       # Row format: <movie id>::<movie title>::<movie genres>.
-      movie_id, movie_title, movie_genres_str = line.strip().split('::')
+      movie_id, movie_title, movie_genres_str = line.split('::')
       movie_title_map[movie_id] = movie_title
       genre_list = movie_genres_str.split('|')
       # 1m dataset labels "Children" genre as "Children's".
@@ -329,8 +342,8 @@ def _parse_1m_format(
 
   with tf.io.gfile.GFile(ratings_file_path, mode='rb') as ratings_file:
     for i, line in enumerate(ratings_file):
-      line = codecs.decode(line, encoding='ISO-8859-1')
-      user_id, movie_id, rating, timestamp = line.strip().split('::')
+      line = codecs.decode(line, encoding='ISO-8859-1').strip()
+      user_id, movie_id, rating, timestamp = line.split('::')
       user_info = user_info_map[user_id]
       yield i, {
           'movie_id': movie_id,
@@ -365,10 +378,10 @@ def _parse_100k_format(
   movie_title_map = {}
   with tf.io.gfile.GFile(movies_file_path, mode='rb') as movies_file:
     for line in movies_file:
-      line = codecs.decode(line, encoding='ISO-8859-1')
+      line = codecs.decode(line, encoding='ISO-8859-1').strip()
       # Row format: <movie id>|<movie title>|<release date>|\
       # <IMDb URL>|<19 fields for each genre>|.
-      movie_id, movie_title, _, _, *genre_bools = line.strip().split('|')
+      movie_id, movie_title, _, _, *genre_bools = line.split('|')
       genre_list = []
       for index, genre_indicator in enumerate(genre_bools):
         if genre_indicator == '1':
@@ -415,8 +428,8 @@ def _parse_100k_format(
 
   with tf.io.gfile.GFile(ratings_file_path, mode='rb') as ratings_file:
     for i, line in enumerate(ratings_file):
-      line = codecs.decode(line, encoding='ISO-8859-1')
-      user_id, movie_id, rating, timestamp = line.strip().split('\t')
+      line = codecs.decode(line, encoding='ISO-8859-1').strip()
+      user_id, movie_id, rating, timestamp = line.split('\t')
       user_info = user_info_map[user_id]
       yield i, {
           'movie_id': movie_id,
