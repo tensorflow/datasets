@@ -164,11 +164,13 @@ class OpusConfig(tfds.core.BuilderConfig):
       subsets: `<list>(string)`, list of the subdatasets to use.
       **kwargs: keyword arguments forwarded to super.
     """
-    name = "%s-%s for %s" % (language_pair[0], language_pair[1], ', '.join(subsets))
+    name = kwargs.get("name", "%s-%s for %s" % (
+        language_pair[0], language_pair[1], ', '.join(subsets)))
+
     description = name + " documents"
 
     super(OpusConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        description=description, **dict(kwargs, name=name))
 
     self.language_pair = language_pair
     self.subsets = subsets
@@ -176,20 +178,24 @@ class OpusConfig(tfds.core.BuilderConfig):
 class Opus(tfds.core.GeneratorBasedBuilder):
   """OPUS is a collection of translated texts from the web."""
 
+  """
+  The following configurations reproduce the evaluation tasks from "Six Challenges for Neural Machine Translation" by Philipp Koehn and Rebecca Knowles (2017) https://www.aclweb.org/anthology/W17-3204.pdf"""
+
   _KK_SUBSETS = [
-      ["EMEA"], 
-      ["JRC-Acquis"], 
-      ["Tanzil"], 
-      ["GNOME", "KDE4", "PHP", "Ubuntu", "OpenOffice"], 
-      ["OpenSubtitles"]
+      ("medical", ["EMEA"]),
+      ("law", ["JRC-Acquis"]),
+      ("koran", ["Tanzil"]),
+      ("IT", ["GNOME", "KDE4", "PHP", "Ubuntu", "OpenOffice"]),
+      ("subtitles", ["OpenSubtitles"])
   ]
 
   BUILDER_CONFIGS = [
       OpusConfig(
-        version=tfds.core.Version('0.1.0'),
-        language_pair=("de", "en"),
-        subsets=subsets
-      ) for subsets in _KK_SUBSETS
+          version=tfds.core.Version('0.1.0'),
+          language_pair=("de", "en"),
+          subsets=subsets,
+          name=name
+      ) for name, subsets in _KK_SUBSETS
   ]
 
   @property
