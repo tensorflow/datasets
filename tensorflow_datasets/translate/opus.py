@@ -145,7 +145,7 @@ DATASET_MAP = {ds.name: ds for ds in [
         name="OpenSubtitles",
         description="A new collection of translated movie subtitles from http://www.opensubtitles.org/",
         homepage="http://opus.nlpl.eu/OpenSubtitles-v2018.php",
-        url="http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/",
+        url="http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/",
         languages=["af", "ar", "bg", "bn", "br", "bs", "ca", "cs", "da", "de", "el", "en", "eo", "es", "et", "eu", "fa", "fi", "fr", "gl", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "ko", "lt", "lv", "mk", "ml", "ms", "nl", "no", "pl", "pt", "pt_br", "ro", "ru", "si", "sk", "sl", "sq", "sr", "sv", "ta", "te", "th", "tl", "tr", "uk", "ur", "vi", "ze_en", "ze_zh", "zh_cn", "zh_tw"],
         filename="OpenSubtitles"
     )
@@ -176,6 +176,22 @@ class OpusConfig(tfds.core.BuilderConfig):
 class Opus(tfds.core.GeneratorBasedBuilder):
   """OPUS is a collection of translated texts from the web."""
 
+  _KK_SUBSETS = [
+      ["EMEA"], 
+      ["JRC-Acquis"], 
+      ["Tanzil"], 
+      ["GNOME", "KDE4", "PHP", "Ubuntu", "OpenOffice"], 
+      ["OpenSubtitles"]
+  ]
+
+  BUILDER_CONFIGS = [
+      OpusConfig(
+        version=tfds.core.Version('0.1.0'),
+        language_pair=("de", "en"),
+        subsets=subsets
+      ) for subsets in _KK_SUBSETS
+  ]
+
   @property
   def subsets(self):
     # Return only the datasets that exist for the language pair.
@@ -191,7 +207,7 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     src, target = self.builder_config.language_pair
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION,
+        description=_DESCRIPTION + "\n" + self.builder_config.description,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair),
         supervised_keys=(src, target),
