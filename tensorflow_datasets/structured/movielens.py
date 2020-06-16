@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""movielens dataset."""
+"""MovieLens dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -59,7 +59,7 @@ The 25m dataset is the latest stable version of the MovieLens dataset.
 It is recommended for research purposes.
 The latest-small dataset is a small dataset with
 the same schema as 25m and 20m.
-It is updated overtime by GroupLens and its checksum might need updating.
+It is updated over time by GroupLens and its checksum might need updating.
 The 20m dataset is one of the most used MovieLens datasets in academic papers
 along with the 1m dataset.
 The 100k dataset and 1m dataset are the oldest MovieLens datasets.
@@ -69,34 +69,13 @@ They both contain demographic data and have the same schema.
 _DATASET_OPTIONS = ['25m', 'latest-small', '100k', '1m', '20m']
 
 
-class MovieLensConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for MovieLens dataset."""
-
-  def __init__(self, data_option: Optional[str] = None, **kwargs) -> None:
-    """Constructs a MovieLensConfig.
-
-    Args:
-      data_option: a string, one of '_DATASET_OPTIONS'.
-      **kwargs: keyword arguments forwarded to super.
-
-    Raises:
-      ValueError: if data_option is not one of '_DATASET_OPTIONS'.
-    """
-    if data_option not in _DATASET_OPTIONS:
-      raise ValueError('data_option must be one of %s.' % _DATASET_OPTIONS)
-    super(MovieLensConfig, self).__init__(**kwargs)
-    self._data_option = data_option
-
-  @property
-  def data_option(self) -> str:
-    return self._data_option
-
-
 class MovieLens(tfds.core.GeneratorBasedBuilder):
   """MovieLens rating dataset."""
 
+  # Using BuilderConfig directly since only the name field is needed for
+  # configuration.
   BUILDER_CONFIGS = [
-      MovieLensConfig(
+      tfds.core.BuilderConfig(
           name='25m',
           description=textwrap.dedent("""\
               This dataset contains 25000095 ratings across 62423 movies.
@@ -112,9 +91,8 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               "(no genres listed)" is considered a label itself.
               This dataset was generated on November 21, 2019."""),
           version='0.1.0',
-          data_option='25m',
       ),
-      MovieLensConfig(
+      tfds.core.BuilderConfig(
           name='latest-small',
           description=textwrap.dedent("""\
               This dataset contains 100836 ratings across 9742 movies
@@ -124,16 +102,16 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               Each user has rated at least 20 movies.
               This dataset is the a subset of the full latest version
               of the MovieLens dataset.
-              This dataset is changed and updated over time.
+              This dataset is changed and updated over time and the checksum
+              might need updating.
               This dataset does not include demographic data.
               The movies data and ratings data are joined on "movieId".
               Genres are converted into sequence of labels.
               "(no genres listed)" is considered a label itself.
               This dataset was generated on September 26, 2018."""),
           version='0.1.0',
-          data_option='latest-small',
       ),
-      MovieLensConfig(
+      tfds.core.BuilderConfig(
           name='100k',
           description=textwrap.dedent("""\
               This dataset contains 100,000 ratings (1-5) from 943 users
@@ -146,11 +124,10 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               Occupation labels standardized for "user_occupation_label" to
               ensure consistency.
               The original occupation strings are also preserved in
-              "user_occupation_strings"."""),
+              "user_occupation_string"."""),
           version='0.1.0',
-          data_option='100k',
       ),
-      MovieLensConfig(
+      tfds.core.BuilderConfig(
           name='1m',
           description=textwrap.dedent("""\
               This dataset contains 1,000,209 anonymous ratings of
@@ -162,14 +139,16 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               demographic data.
               The movies data and ratings data are joined on "MovieId".
               The ratings data and users data are joined on "UserId".
+              The age values are divided into ranges and the lowest
+              age value for each range is used in the data instead of
+              the actual values.
               Occupation labels standardized for "user_occupation_label" to
               ensure consistency.
               The original occupation strings are also preserved in
-              "user_occupation_strings"."""),
+              "user_occupation_string"."""),
           version='0.1.0',
-          data_option='1m',
       ),
-      MovieLensConfig(
+      tfds.core.BuilderConfig(
           name='20m',
           description=textwrap.dedent("""\
               This dataset contains contains 20000263 ratings
@@ -184,7 +163,6 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               "(no genres listed)" is considered a label itself.
               This dataset was generated on October 17, 2016."""),
           version='0.1.0',
-          data_option='20m',
       ),
   ]
 
@@ -205,7 +183,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
         ),
         'user_id': tf.string,
         'user_rating': tf.float32,
-        # Using int64 since tfds currently does not support float64
+        # Using int64 since tfds currently does not support float64.
         'timestamp': tf.int64,
     }
     # Older versions of MovieLens have demographic features.
@@ -213,13 +191,12 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
       features_dict['user_gender'] = tf.bool
       features_dict['user_age'] = tf.int32
       features_dict['user_occupation_label'] = tfds.features.ClassLabel(names=[
-          'academic/educator', 'artist', 'clerical/admin', 'entertainment',
-          'student', 'customer service', 'doctor/health care',
-          'executive/managerial', 'farmer', 'homemaker', 'lawyer',
-          'librarian', 'other/not specified', 'programmer', 'retired',
-          'sales/marketing', 'scientist', 'self-employed',
-          'technician/engineer', 'tradesman/craftsman', 'unemployed',
-          'writer',
+          'academic/educator', 'artist', 'clerical/admin',
+          'customer service', 'doctor/health care', 'entertainment',
+          'executive/managerial', 'farmer', 'homemaker', 'lawyer', 'librarian',
+          'other/not specified', 'programmer', 'retired', 'sales/marketing',
+          'scientist', 'self-employed', 'student', 'technician/engineer',
+          'tradesman/craftsman', 'unemployed', 'writer',
       ])
       features_dict['user_occupation_string'] = tf.string
       features_dict['user_zip_code'] = tf.string
@@ -228,7 +205,6 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=None,
-        # Homepage of the dataset for documentation
         homepage='https://grouplens.org/datasets/movielens/',
         citation=_CITATION,
     )
@@ -266,7 +242,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
 def _parse_current_format(
     dir_path: str
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
-  """Parse the data in current format (20m, 25m, and latest)."""
+  """Parse the data in current format (20m, 25m, and latest-small)."""
   movies_file_path = os.path.join(dir_path, 'movies.csv')
   ratings_file_path = os.path.join(dir_path, 'ratings.csv')
   movie_genre_map = {}
@@ -380,8 +356,8 @@ def _parse_100k_format(
     for line in movies_file:
       line = codecs.decode(line, encoding='ISO-8859-1').strip()
       # Row format: <movie id>|<movie title>|<release date>|\
-      # <IMDb URL>|<19 fields for each genre>|.
-      movie_id, movie_title, _, _, *genre_bools = line.split('|')
+      # <video release date>|<IMDb URL>|<19 fields for each genre>|.
+      movie_id, movie_title, _, _, _, *genre_bools = line.split('|')
       genre_list = []
       for index, genre_indicator in enumerate(genre_bools):
         if genre_indicator == '1':
