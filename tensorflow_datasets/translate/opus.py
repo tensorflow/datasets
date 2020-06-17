@@ -51,7 +51,7 @@ builder = tfds.builder("opus", config=config)
 class SubDataset():
   """Class to keep track of information on a sub-dataset of OPUS."""
 
-  def __init__(self, name, description, homepage, url, languages, filename):
+  def __init__(self, name, description, homepage, url, languages):
     """Sub-dataset of OPUS.
 
     Args:
@@ -60,13 +60,11 @@ class SubDataset():
       homepage: `string`, homepage of the dataset.
       url: `string`, download url for the dataset.
       languages: `<list>(string)`, a list of supported languages.
-      filename: `string`, the prefix of the downloaded files.
     """
     self.name = name
     self.description = description
     self.homepage = homepage
     self.url = url
-    self.filename = filename
 
     language_pairs = []
     for idx, source in enumerate(languages):
@@ -82,72 +80,63 @@ DATASET_MAP = {ds.name: ds for ds in [
         description="A parallel corpus made out of PDF documents from the European Medicines Agency.",
         homepage="http://opus.nlpl.eu/EMEA.php",
         url="http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/",
-        languages=["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"],
-        filename="EMEA"
+        languages=["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"]
     ),
     SubDataset(
         name="JRC-Acquis",
         description="A collection of legislative text of the European Union and currently comprises selected texts written between the 1950s and now.",
         homepage="http://opus.nlpl.eu/JRC-Acquis.php",
         url="http://opus.nlpl.eu/download.php?f=JRC-Acquis/",
-        languages=["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"],
-        filename="JRC-Acquis"
+        languages=["bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk", "sl", "sv"]
     ),
     SubDataset(
         name="Tanzil",
         description="A collection of Quran translations compiled by the Tanzil project.",
         homepage="http://opus.nlpl.eu/Tanzil.php",
         url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
-        languages=["am", "ar", "az", "bg", "bn", "bs", "cs", "de", "dv", "en", "es", "fa", "fr", "ha", "hi", "id", "it", "ja", "ko", "ku", "ml", "ms", "nl", "no", "pl", "pt", "ro", "ru", "sd", "so", "sq", "sv", "sw", "ta", "tg", "th", "tr", "tt", "ug", "ur", "uz", "zh"],
-        filename="Tanzil"
+        languages=["am", "ar", "az", "bg", "bn", "bs", "cs", "de", "dv", "en", "es", "fa", "fr", "ha", "hi", "id", "it", "ja", "ko", "ku", "ml", "ms", "nl", "no", "pl", "pt", "ro", "ru", "sd", "so", "sq", "sv", "sw", "ta", "tg", "th", "tr", "tt", "ug", "ur", "uz", "zh"]
     ),
     SubDataset(
         name="GNOME",
         description="A parallel corpus of GNOME localization files. Source: https://l10n.gnome.org",
         homepage="http://opus.nlpl.eu/GNOME.php",
         url="http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/",
-        languages=["af", "am", "an", "ang", "ar", "ar_TN", "ara", "as", "ast", "az", "az_IR", "bal", "be", "bem", "bg", "bg_BG", "bn", "bn_IN", "bo", "br", "brx", "bs", "ca", "cat", "crh", "cs", "csb", "cy", "da", "da_DK", "de", "de_CH", "dv", "dz", "el", "en", "en_AU", "en_CA", "en_GB", "en_NZ", "en_US", "en_ZA", "eo", "es", "es_AR", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_ES", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PE", "es_PR", "es_SV", "es_UY", "es_VE", "et", "eu", "fa", "fa_IR", "fi", "fo", "foo", "fr", "fur", "fy", "ga", "gd", "gl", "gn", "gr", "gu", "gv", "ha", "he", "hi", "hi_IN", "hr", "hu", "hy", "ia", "id", "ig", "io", "is", "it", "it_IT", "ja", "jbo", "ka", "kg", "kk", "km", "kn", "ko", "kr", "ks", "ku", "ky", "la", "lg", "li", "lo", "lt", "lv", "mai", "mg", "mi", "mk", "ml", "mn", "mr", "ms", "ms_MY", "mt", "mus", "my", "nb", "nb_NO", "nds", "ne", "nhn", "nl", "nn", "nn_NO", "no", "no_nb", "nqo", "nr", "nso", "oc", "or", "os", "pa", "pl", "ps", "pt", "pt_BR", "pt_PT", "quz", "ro", "ru", "rw", "si", "sk", "sl", "so", "sq", "sr", "sr_ME", "st", "sv", "sw", "szl", "ta", "te", "tg", "tg_TJ", "th", "tk", "tl", "tl_PH", "tmp", "tr", "tr_TR", "ts", "tt", "ug", "uk", "ur", "ur_PK", "uz", "vi", "vi_VN", "wa", "xh", "yi", "yo", "zh_CN", "zh_HK", "zh_TW", "zu"],
-        filename="GNOME"
+        languages=["af", "am", "an", "ang", "ar", "ar_TN", "ara", "as", "ast", "az", "az_IR", "bal", "be", "bem", "bg", "bg_BG", "bn", "bn_IN", "bo", "br", "brx", "bs", "ca", "cat", "crh", "cs", "csb", "cy", "da", "da_DK", "de", "de_CH", "dv", "dz", "el", "en", "en_AU", "en_CA", "en_GB", "en_NZ", "en_US", "en_ZA", "eo", "es", "es_AR", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_ES", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PE", "es_PR", "es_SV", "es_UY", "es_VE", "et", "eu", "fa", "fa_IR", "fi", "fo", "foo", "fr", "fur", "fy", "ga", "gd", "gl", "gn", "gr", "gu", "gv", "ha", "he", "hi", "hi_IN", "hr", "hu", "hy", "ia", "id", "ig", "io", "is", "it", "it_IT", "ja", "jbo", "ka", "kg", "kk", "km", "kn", "ko", "kr", "ks", "ku", "ky", "la", "lg", "li", "lo", "lt", "lv", "mai", "mg", "mi", "mk", "ml", "mn", "mr", "ms", "ms_MY", "mt", "mus", "my", "nb", "nb_NO", "nds", "ne", "nhn", "nl", "nn", "nn_NO", "no", "no_nb", "nqo", "nr", "nso", "oc", "or", "os", "pa", "pl", "ps", "pt", "pt_BR", "pt_PT", "quz", "ro", "ru", "rw", "si", "sk", "sl", "so", "sq", "sr", "sr_ME", "st", "sv", "sw", "szl", "ta", "te", "tg", "tg_TJ", "th", "tk", "tl", "tl_PH", "tmp", "tr", "tr_TR", "ts", "tt", "ug", "uk", "ur", "ur_PK", "uz", "vi", "vi_VN", "wa", "xh", "yi", "yo", "zh_CN", "zh_HK", "zh_TW", "zu"]
     ),
     SubDataset(
         name="KDE4",
         description="A parallel corpus of KDE4 localization files (v.2).",
         homepage="http://opus.nlpl.eu/KDE4.php",
         url="http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/",
-        languages=["af", "ar", "as", "ast", "be", "bg", "bn", "bn_IN", "br", "ca", "crh", "cs", "csb", "cy", "da", "de", "el", "en", "en_GB", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "gu", "ha", "he", "hi", "hne", "hr", "hsb", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "km", "kn", "ko", "ku", "lb", "lt", "lv", "mai", "mk", "ml", "mr", "ms", "mt", "nb", "nds", "ne", "nl", "nn", "nso", "oc", "or", "pa", "pl", "ps", "pt", "pt_BR", "ro", "ru", "rw", "se", "si", "sk", "sl", "sr", "sv", "ta", "te", "tg", "th", "tr", "uk", "uz", "vi", "wa", "xh", "zh_CN", "zh_HK", "zh_TW"],
-        filename="KDE4"
+        languages=["af", "ar", "as", "ast", "be", "bg", "bn", "bn_IN", "br", "ca", "crh", "cs", "csb", "cy", "da", "de", "el", "en", "en_GB", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "gu", "ha", "he", "hi", "hne", "hr", "hsb", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "km", "kn", "ko", "ku", "lb", "lt", "lv", "mai", "mk", "ml", "mr", "ms", "mt", "nb", "nds", "ne", "nl", "nn", "nso", "oc", "or", "pa", "pl", "ps", "pt", "pt_BR", "ro", "ru", "rw", "se", "si", "sk", "sl", "sr", "sv", "ta", "te", "tg", "th", "tr", "uk", "uz", "vi", "wa", "xh", "zh_CN", "zh_HK", "zh_TW"]
     ),
     SubDataset(
         name="PHP",
         description="A parallel corpus originally extracted from http://se.php.net/download-docs.php.",
         homepage="http://opus.nlpl.eu/PHP.php",
         url="http://opus.nlpl.eu/download.php?f=PHP/v1/moses/",
-        languages=["cs", "de", "en", "es", "fi", "fr", "he", "hu", "it", "ja", "ko", "nl", "pl", "pt_BR", "ro", "ru", "sk", "sl", "sv", "tr", "tw", "zh", "zh_TW"],
-        filename="PHP"
+        languages=["cs", "de", "en", "es", "fi", "fr", "he", "hu", "it", "ja", "ko", "nl", "pl", "pt_BR", "ro", "ru", "sk", "sl", "sv", "tr", "tw", "zh", "zh_TW"]
     ),
     SubDataset(
         name="Ubuntu",
         description="A parallel corpus of Ubuntu localization files. Source: https://translations.launchpad.net",
         homepage="http://opus.nlpl.eu/Ubuntu.php",
         url="http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/",
-        languages=["ace", "af", "ak", "am", "an", "ang", "ar", "ar_SY", "ary", "as", "ast", "az", "ba", "bal", "be", "bem", "ber", "bg", "bho", "bn", "bn_IN", "bo", "br", "brx", "bs", "bua", "byn", "ca", "ce", "ceb", "chr", "ckb", "co", "crh", "cs", "csb", "cv", "cy", "da", "de", "de_AT", "de_DE", "dsb", "dv", "dz", "el", "en", "en_AU", "en_CA", "en_GB", "en_NZ", "en_US", "eo", "es", "es_AR", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_ES", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PE", "es_PR", "es_SV", "es_UY", "es_VE", "et", "eu", "fa", "fa_AF", "ff", "fi", "fil", "fo", "fr", "fr_CA", "fr_FR", "frm", "frp", "fur", "fy", "ga", "gd", "gl", "gn", "grc", "gu", "guc", "gv", "ha", "haw", "he", "hi", "hil", "hne", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ig", "io", "is", "it", "iu", "ja", "jbo", "jv", "ka", "kab", "kg", "kk", "kl", "km", "kn", "ko", "kok", "ks", "ksh", "ku", "kw", "ky", "la", "lb", "lg", "li", "lij", "lld", "ln", "lo", "lt", "ltg", "lv", "mai", "mg", "mh", "mhr", "mi", "miq", "mk", "ml", "mn", "mo", "mr", "ms", "mt", "mus", "my", "nan", "nap", "nb", "nds", "ne", "nhn", "nl", "nl_NL", "nn", "no", "nso", "ny", "oc", "oj", "om", "or", "os", "pa", "pam", "pap", "pl", "pms", "pmy", "ps", "pt", "pt_BR", "pt_PT", "qu", "rm", "ro", "rom", "ru", "rw", "sa", "sc", "sco", "sd", "se", "shn", "shs", "si", "sk", "sl", "sm", "sml", "sn", "so", "son", "sq", "sr", "st", "sv", "sw", "syr", "szl", "ta", "ta_LK", "te", "tet", "tg", "th", "ti", "tk", "tl", "tlh", "tr", "trv", "ts", "tt", "ug", "uk", "ur", "uz", "ve", "vec", "vi", "wa", "wae", "wo", "xal", "xh", "yi", "yo", "zh", "zh_CN", "zh_HK", "zh_TW", "zu", "zza"],
-        filename="Ubuntu"
+        languages=["ace", "af", "ak", "am", "an", "ang", "ar", "ar_SY", "ary", "as", "ast", "az", "ba", "bal", "be", "bem", "ber", "bg", "bho", "bn", "bn_IN", "bo", "br", "brx", "bs", "bua", "byn", "ca", "ce", "ceb", "chr", "ckb", "co", "crh", "cs", "csb", "cv", "cy", "da", "de", "de_AT", "de_DE", "dsb", "dv", "dz", "el", "en", "en_AU", "en_CA", "en_GB", "en_NZ", "en_US", "eo", "es", "es_AR", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_ES", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PE", "es_PR", "es_SV", "es_UY", "es_VE", "et", "eu", "fa", "fa_AF", "ff", "fi", "fil", "fo", "fr", "fr_CA", "fr_FR", "frm", "frp", "fur", "fy", "ga", "gd", "gl", "gn", "grc", "gu", "guc", "gv", "ha", "haw", "he", "hi", "hil", "hne", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ig", "io", "is", "it", "iu", "ja", "jbo", "jv", "ka", "kab", "kg", "kk", "kl", "km", "kn", "ko", "kok", "ks", "ksh", "ku", "kw", "ky", "la", "lb", "lg", "li", "lij", "lld", "ln", "lo", "lt", "ltg", "lv", "mai", "mg", "mh", "mhr", "mi", "miq", "mk", "ml", "mn", "mo", "mr", "ms", "mt", "mus", "my", "nan", "nap", "nb", "nds", "ne", "nhn", "nl", "nl_NL", "nn", "no", "nso", "ny", "oc", "oj", "om", "or", "os", "pa", "pam", "pap", "pl", "pms", "pmy", "ps", "pt", "pt_BR", "pt_PT", "qu", "rm", "ro", "rom", "ru", "rw", "sa", "sc", "sco", "sd", "se", "shn", "shs", "si", "sk", "sl", "sm", "sml", "sn", "so", "son", "sq", "sr", "st", "sv", "sw", "syr", "szl", "ta", "ta_LK", "te", "tet", "tg", "th", "ti", "tk", "tl", "tlh", "tr", "trv", "ts", "tt", "ug", "uk", "ur", "uz", "ve", "vec", "vi", "wa", "wae", "wo", "xal", "xh", "yi", "yo", "zh", "zh_CN", "zh_HK", "zh_TW", "zu", "zza"]
     ),
     SubDataset(
         name="OpenOffice",
         description="A collection of documents from http://www.openoffice.org/.",
         homepage="http://opus.nlpl.eu/OpenOffice-v2.php",
         url="http://opus.nlpl.eu/download.php?f=OpenOffice/v2/moses/",
-        languages=["de", "en", "es", "fr", "jp", "sv"],
-        filename="OpenOffice"
+        languages=["de", "en", "es", "fr", "jp", "sv"]
     ),
     SubDataset(
         name="OpenSubtitles",
         description="A new collection of translated movie subtitles from http://www.opensubtitles.org/",
         homepage="http://opus.nlpl.eu/OpenSubtitles-v2018.php",
         url="http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/",
-        languages=["af", "ar", "bg", "bn", "br", "bs", "ca", "cs", "da", "de", "el", "en", "eo", "es", "et", "eu", "fa", "fi", "fr", "gl", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "ko", "lt", "lv", "mk", "ml", "ms", "nl", "no", "pl", "pt", "pt_br", "ro", "ru", "si", "sk", "sl", "sq", "sr", "sv", "ta", "te", "th", "tl", "tr", "uk", "ur", "vi", "ze_en", "ze_zh", "zh_cn", "zh_tw"],
-        filename="OpenSubtitles"
+        languages=["af", "ar", "bg", "bn", "br", "bs", "ca", "cs", "da", "de", "el", "en", "eo", "es", "et", "eu", "fa", "fi", "fr", "gl", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "ko", "lt", "lv", "mk", "ml", "ms", "nl", "no", "pl", "pt", "pt_br", "ro", "ru", "si", "sk", "sl", "sq", "sr", "sv", "ta", "te", "th", "tl", "tr", "uk", "ur", "vi", "ze_en", "ze_zh", "zh_cn", "zh_tw"]
     )
 ]}
 
@@ -230,9 +219,9 @@ class Opus(tfds.core.GeneratorBasedBuilder):
       dl_dir = dl_manager.download_and_extract(
           os.path.join(item.url, "%s.txt.zip"%file_ext))
       source_file = os.path.join(
-          dl_dir, "%s.%s.%s"%(item.filename, file_ext, source))
+          dl_dir, "%s.%s.%s"%(item.name, file_ext, source))
       target_file = os.path.join(
-          dl_dir, "%s.%s.%s"%(item.filename, file_ext, target))
+          dl_dir, "%s.%s.%s"%(item.name, file_ext, target))
       subsets.append({
           "name": item.name,
           "source_file": source_file,
