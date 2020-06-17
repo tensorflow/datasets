@@ -66,9 +66,10 @@ class SubDataset():
     self.homepage = homepage
     self.url = url
 
+    sorted_languages = sorted(languages)
     language_pairs = []
-    for idx, source in enumerate(sorted(languages)):
-      for target in languages[idx + 1:]:
+    for idx, source in enumerate(sorted_languages):
+      for target in sorted_languages[idx + 1:]:
         language_pairs.append((source, target))
 
     self.language_pairs = language_pairs
