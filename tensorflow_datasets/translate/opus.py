@@ -237,20 +237,22 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, subsets):
+    source, target = self.builder_config.language_pair
+
     for item in subsets:
       logging.info("Generating examples from: %s", item["name"])
       source_file = item["source_file"]
       target_file = item["target_file"]
 
-      with tf.io.gfile.GFile(source_file) as f:
-        source_sentences = f.read().splitlines()
-      with tf.io.gfile.GFile(target_file) as f:
-        target_sentences = f.read().splitlines()
-
-      source, target = self.builder_config.language_pair
-      sentence_pairs = zip(source_sentences, target_sentences)
-      for idx, (source_sent, target_sent) in enumerate(sentence_pairs):
+      gens = [_gen_line(source_file), _gen_line(target_file)]
+      for idx, (source_sent, target_sent) in enumerate(zip(*gens)):
         result = {source: source_sent, target: target_sent}
         if all(result.values()):
           key = "%s/%d"%(item["name"], idx)
           yield key, result
+
+def _gen_line(filename):
+  """Returns sentences from an OPUS data file."""
+  with tf.io.gfile.GFile(filename) as f:
+    for line in f:
+      yield line
