@@ -242,9 +242,9 @@ class Opus(tfds.core.GeneratorBasedBuilder):
       target_file = item["target_file"]
 
       with tf.io.gfile.GFile(source_file) as f:
-        source_sentences = f.read().split("\n")
+        source_sentences = f.read().splitlines()
       with tf.io.gfile.GFile(target_file) as f:
-        target_sentences = f.read().split("\n")
+        target_sentences = f.read().splitlines()
 
       source, target = self.builder_config.language_pair
       sentence_pairs = zip(source_sentences, target_sentences)
