@@ -20,7 +20,10 @@ from tensorflow_datasets.core import registered
 # Custom datasets cannot be instanciated through `tfds.load`
 with registered.skip_registration():
   from tensorflow_datasets.core.custom_dataset.image_folder import ImageFolder  # pylint: disable=g-import-not-at-top
+  from tensorflow_datasets.core.custom_dataset.translate_dataset import TranslateDataset
+
 
 __all__ = [
     "ImageFolder",
+    "TranslateDataset",
 ]
