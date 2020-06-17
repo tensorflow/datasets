@@ -67,7 +67,7 @@ class SubDataset():
     self.url = url
 
     language_pairs = []
-    for idx, source in enumerate(languages):
+    for idx, source in enumerate(sorted(languages)):
       for target in languages[idx + 1:]:
         language_pairs.append((source, target))
 
@@ -149,19 +149,20 @@ class OpusConfig(tfds.core.BuilderConfig):
 
     Args:
       language_pair: `(string, string)`, pair of languages used for translation.
-        Should contain 2 letter coded strings (e.g. "en", "de")
+        Should contain 2 letter coded strings (e.g. "de", "en")
       subsets: `<list>(string)`, list of the subdatasets to use.
       **kwargs: keyword arguments forwarded to super.
     """
+    sorted_language_pair = sorted(language_pair)
     name = kwargs.get("name", "%s-%s for %s" % (
-        language_pair[0], language_pair[1], ', '.join(subsets)))
+        sorted_language_pair[0], sorted_language_pair[1], ', '.join(subsets)))
 
     description = name + " documents"
 
     super(OpusConfig, self).__init__(
         description=description, **dict(kwargs, name=name))
 
-    self.language_pair = language_pair
+    self.language_pair = sorted_language_pair
     self.subsets = subsets
 
 class Opus(tfds.core.GeneratorBasedBuilder):
