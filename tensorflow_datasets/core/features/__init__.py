@@ -43,6 +43,8 @@ __all__ = [
     "FeaturesDict",
     "Tensor",
     "TensorInfo",
+    "Translation",
+    "TranslationVariableLanguages",
     "Sequence",
     "Image",
     "Text",
