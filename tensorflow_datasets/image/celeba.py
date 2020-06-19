@@ -92,6 +92,11 @@ CelebA has large diversities, large quantities, and rich annotations, including\
 The dataset can be employed as the training and test sets for the following \
 computer vision tasks: face attribute recognition, face detection, and landmark\
  (or facial part) localization.
+
+Note: CelebA dataset may contain potential bias. The fairness indicators
+[example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
+goes into detail about several considerations to keep in mind while using the
+CelebA dataset.
 """
 
 

@@ -28,10 +28,12 @@ from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
-@misc{waymo_open_dataset,
-  title = {Waymo Open Dataset: An autonomous driving dataset},
-  website = {url{https://www.waymo.com/open}},
-  year = {2020}
+@InProceedings{Sun_2020_CVPR,
+author = {Sun, Pei and Kretzschmar, Henrik and Dotiwalla, Xerxes and Chouard, Aurelien and Patnaik, Vijaysai and Tsui, Paul and Guo, James and Zhou, Yin and Chai, Yuning and Caine, Benjamin and Vasudevan, Vijay and Han, Wei and Ngiam, Jiquan and Zhao, Hang and Timofeev, Aleksei and Ettinger, Scott and Krivokon, Maxim and Gao, Amy and Joshi, Aditya and Zhang, Yu and Shlens, Jonathon and Chen, Zhifeng and Anguelov, Dragomir},
+title = {Scalability in Perception for Autonomous Driving: Waymo Open Dataset},
+booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
 }
 """
 
