@@ -6,6 +6,12 @@ source ./oss_scripts/utils.sh
 
 : "${TF_VERSION:?}"
 
+
+pyenv global 3.6.2
+which python
+python --version
+
+
 pip freeze  # Display the list of modules/versions for debugging
 
 # Instead of exiting on any failure with "set -e", we'll call set_status after
