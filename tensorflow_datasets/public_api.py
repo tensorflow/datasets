@@ -45,6 +45,7 @@ with core.registered.skip_registration():
   # We import testing namespace but without registering the tests datasets
   # (e.g. DummyMnist,...).
   from tensorflow_datasets import testing
+  from tensorflow_datasets.core.custom_dataset import TranslateDataset
 
 
 __all__ = [
@@ -66,6 +67,7 @@ __all__ = [
     "show_examples",
     "show_statistics",
     "testing",
+    "TranslateDataset",
     "units",
     "visualization",
     "__version__",
