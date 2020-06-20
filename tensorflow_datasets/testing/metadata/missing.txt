@@ -19,11 +19,6 @@ common_voice/tr/1.0.0
 common_voice/tt/1.0.0
 common_voice/zh-TW/1.0.0
 covid19sum/1.0.0
-opus/IT/0.1.0
-opus/koran/0.1.0
-opus/law/0.1.0
-opus/medical/0.1.0
-opus/subtitles/0.1.0
 reddit_disentanglement/1.0.0
 samsum/1.0.0
 so2sat/all/2.1.0

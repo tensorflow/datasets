@@ -681,6 +681,11 @@ openbookqa/0.1.0
 opinion_abstracts/idebate/1.0.0
 opinion_abstracts/rotten_tomatoes/1.0.0
 opinosis/1.0.0
+opus/IT/0.1.0
+opus/koran/0.1.0
+opus/law/0.1.0
+opus/medical/0.1.0
+opus/subtitles/0.1.0
 oxford_flowers102/2.1.1
 oxford_iiit_pet/3.2.0
 para_crawl/enbg_plain_text/1.0.0
