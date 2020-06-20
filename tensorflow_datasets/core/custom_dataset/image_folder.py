@@ -23,7 +23,7 @@ from __future__ import print_function
 import collections
 import os
 import random
-from typing import Dict, List, NoReturn, Tuple
+from typing import Dict, List, Tuple
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
@@ -108,12 +108,13 @@ class ImageFolder(dataset_builder.DatasetBuilder):
         supervised_keys=('image', 'label'),
     )
 
-  def _download_and_prepare(self, **kwargs) -> NoReturn:
+  # TODO(tfds): Should restore `-> NoReturn` annotatation for Python 3.6.2+
+  def _download_and_prepare(self, **kwargs):  # -> NoReturn:
     raise NotImplementedError(
         'No need to call download_and_prepare function for {}.'.format(
             type(self).__name__))
 
-  def download_and_prepare(self, **kwargs) -> NoReturn:
+  def download_and_prepare(self, **kwargs):  # -> NoReturn:
     return self._download_and_prepare()
 
   def _as_dataset(
