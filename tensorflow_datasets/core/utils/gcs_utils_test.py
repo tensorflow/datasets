@@ -39,6 +39,11 @@ class GcsUtilsTest(testing.TestCase):
       example = next(tfds.as_numpy(mnist.as_dataset(split="train").take(1)))
     _ = example["image"], example["label"]
 
+  def test_gcs_files(self):
+    url = 'https://storage.googleapis.com/tfds-data/?prefix=datasets/nsynth'
+    dataset = 'nsynth'
+    with self.gcs_access():
+      self.assertEqual(gcs_utils.download_gcs_dataset2(dataset, dataset), 14237)
 
 if __name__ == "__main__":
   testing.test_main()
