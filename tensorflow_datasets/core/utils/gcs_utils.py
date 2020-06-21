@@ -88,7 +88,7 @@ def get_next_marker(xml):
 @py_utils.memoize()
 def gcs_files(prefix_filter=None):
   """List all files in GCS bucket."""
-  top_level_xml_str = download_gcs_file("", prefix_filter=prefix_filter)
+  top_level_xml_str = download_gcs_file('', prefix_filter=prefix_filter)
   xml_root = ElementTree.fromstring(top_level_xml_str)
   filenames = [el[0].text for el in xml_root if el.tag.endswith('Contents')]
   is_truncated, next_marker = get_next_marker(xml_root)
