@@ -28,8 +28,7 @@ class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = waymo_open_dataset.WaymoOpenDataset
   SPLITS = {
       "train": 1,  # Number of fake train example
-      "validation": 1,  # Number of fake validation example
-      "test": 1,  # Number of fake test example
+      "validation": 1,  # Number of fake test example
   }
 
   def setUp(self):

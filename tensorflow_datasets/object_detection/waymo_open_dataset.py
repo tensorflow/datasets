@@ -28,10 +28,12 @@ from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
-@misc{waymo_open_dataset,
-  title = {Waymo Open Dataset: An autonomous driving dataset},
-  website = {url{https://www.waymo.com/open}},
-  year = {2020}
+@InProceedings{Sun_2020_CVPR,
+author = {Sun, Pei and Kretzschmar, Henrik and Dotiwalla, Xerxes and Chouard, Aurelien and Patnaik, Vijaysai and Tsui, Paul and Guo, James and Zhou, Yin and Chai, Yuning and Caine, Benjamin and Vasudevan, Vijay and Han, Wei and Ngiam, Jiquan and Zhao, Hang and Timofeev, Aleksei and Ettinger, Scott and Krivokon, Maxim and Gao, Amy and Joshi, Aditya and Zhang, Yu and Shlens, Jonathon and Chen, Zhifeng and Anguelov, Dragomir},
+title = {Scalability in Perception for Autonomous Driving: Waymo Open Dataset},
+booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
 }
 """
 
@@ -43,6 +45,11 @@ This data is licensed for non-commercial use.
 WARNING: this dataset requires additional authorization and registration.
 Please look at tfds documentation for accessing GCS, and
 afterwards, please register via https://waymo.com/open/licensing/
+
+This dataset is also available in pre-processed format, making it faster
+to load, if you select the correct data_dir:
+tfds.load('waymo_open_dataset', \
+data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
 """
 
 _HOMEPAGE_URL = "http://www.waymo.com/open/"
@@ -56,7 +63,7 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
   """Waymo Open Dataset."""
 
   VERSION = tfds.core.Version("0.1.0")
-  _CLOUD_BUCKET = "gs://waymo_open_dataset_v_1_2_0_individual_files/"
+  _CLOUD_BUCKET = "gs://waymo_open_dataset_v_1_0_0_individual_files/"
 
   def _info(self):
 
@@ -127,11 +134,6 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
         os.path.join(self._CLOUD_BUCKET, "validation/segment*camera*"))
     logging.info("Validation files: %s", validation_files)
 
-    # Testing set
-    test_files = tf.io.gfile.glob(
-        os.path.join(self._CLOUD_BUCKET, "testing/segment*camera*"))
-    logging.info("Testing files: %s", test_files)
-
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -144,14 +146,7 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "tf_record_files": validation_files,
-            }
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "tf_record_files": test_files,
-            }
-        ),
+            }),
     ]
 
   def _build_pcollection(self, pipeline, tf_record_files):
