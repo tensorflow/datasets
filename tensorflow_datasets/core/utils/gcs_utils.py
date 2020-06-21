@@ -75,6 +75,7 @@ def download_gcs_file(path, out_fname=None, prefix_filter=None, marker=None):
   else:
     return resp.content
 
+
 def get_next_marker(xml):
   """Returns is_truncated and next_marker from XML API Response"""
   namespace = re.match(r'{.*}', xml.tag)
@@ -93,7 +94,7 @@ def gcs_files(prefix_filter=None):
   is_truncated, next_marker = get_next_marker(xml_root)
 
   while is_truncated.text == 'true':
-    top_level_xml_str = download_gcs_file("", prefix_filter=prefix_filter,
+    top_level_xml_str = download_gcs_file('', prefix_filter=prefix_filter,
                                           marker=next_marker.text)
     xml_root = ElementTree.fromstring(top_level_xml_str)
     filenames.extend([el[0].text
