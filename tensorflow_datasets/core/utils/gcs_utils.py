@@ -61,7 +61,7 @@ def download_gcs_file(path, out_fname=None, prefix_filter=None, marker=None):
   """Download a file from GCS, optionally to a file."""
   url = posixpath.join(GCS_BUCKET, path)
   if prefix_filter:
-    url += '?prefix=%s' % prefix_filter
+    url += '?prefix={}'.format(prefix_filter)
   if marker:
     url += '&marker={}'.format(marker)
   stream = bool(out_fname)
@@ -75,14 +75,14 @@ def download_gcs_file(path, out_fname=None, prefix_filter=None, marker=None):
   else:
     return resp.content
 
-def get_marker(xml):
+def get_next_marker(xml):
   """Returns is_truncated and next_marker from XML API Response"""
-
   namespace = re.match(r'{.*}', xml.tag)
   namespace = namespace.group(0) if namespace else ''
   next_marker = xml.find(f"{namespace}NextMarker")
   is_truncated = xml.find(f"{namespace}IsTruncated")
   return is_truncated, next_marker
+
 
 @py_utils.memoize()
 def gcs_files(prefix_filter=None):
@@ -90,23 +90,16 @@ def gcs_files(prefix_filter=None):
   top_level_xml_str = download_gcs_file("", prefix_filter=prefix_filter)
   xml_root = ElementTree.fromstring(top_level_xml_str)
   filenames = [el[0].text for el in xml_root if el.tag.endswith('Contents')]
-  is_truncated, next_marker = get_marker(xml_root)
+  is_truncated, next_marker = get_next_marker(xml_root)
 
   while is_truncated.text == 'true':
-    top_level_xml_str = download_gcs_file("", prefix_filter=prefix_filter, marker=next_marker.text)
+    top_level_xml_str = download_gcs_file("", prefix_filter=prefix_filter,
+                                          marker=next_marker.text)
     xml_root = ElementTree.fromstring(top_level_xml_str)
-    filenames.extend([el[0].text for el in xml_root if el.tag.endswith('Contents')])
-    is_truncated, next_marker = get_marker(xml_root)
+    filenames.extend([el[0].text
+                      for el in xml_root if el.tag.endswith('Contents')])
+    is_truncated, next_marker = get_next_marker(xml_root)
   return filenames
-
-
-# @py_utils.memoize()
-# def gcs_files(prefix_filter=None):
-#   """List all files in GCS bucket."""
-#   top_level_xml_str = download_gcs_file('', prefix_filter=prefix_filter)
-#   xml_root = ElementTree.fromstring(top_level_xml_str)
-#   filenames = [el[0].text for el in xml_root if el.tag.endswith('Contents')]
-#   return filenames
 
 
 def gcs_dataset_info_files(dataset_dir):
@@ -122,19 +115,6 @@ def is_dataset_on_gcs(dataset_name):
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
   dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
   return len(gcs_files(prefix_filter=dir_name)) > 2
-
-def download_gcs_dataset2(
-    dataset_name, local_dataset_dir, max_simultaneous_downloads=50):
-  """Downloads prepared GCS dataset to local dataset directory."""
-  prefix = posixpath.join(GCS_DATASETS_DIR, dataset_name)
-  gcs_paths_to_dl = gcs_files(prefix)
-
-  # Filter out the diffs folder if present
-  filter_prefix = posixpath.join(prefix, 'diffs')
-  gcs_paths_to_dl = [p for p in gcs_paths_to_dl
-                     if not p.startswith(filter_prefix)]
-
-  return len(gcs_paths_to_dl)
 
 
 def download_gcs_dataset(
