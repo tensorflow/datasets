@@ -1,0 +1,2 @@
+http://yaroslavvb.com/upload/notMNIST/notMNIST_large.tar.gz 247336696 1e8261b75484b520dc76027f5c22af50fe608e3bb16277caec086eb928f9b61c
+http://yaroslavvb.com/upload/notMNIST/notMNIST_small.tar.gz 8458043 76b2ef7ccc56452964780569db37b279c9cbe1bf442c3b38be784752683b3cec
