@@ -119,29 +119,26 @@ class Image(feature.FeatureConnector):
   def set_dtype(self, dtype):
     """Update the dtype."""
     dtype = tf.as_dtype(dtype)
-    if self._encoding_format:
-      acceptable_dtypes = ACCEPTABLE_DTYPES[self._encoding_format]
-      if dtype not in acceptable_dtypes:
-        raise ValueError('Acceptable `dtype` for %s: %s (was %s)' % (
-            self._encoding_format, acceptable_dtypes, dtype))
+    acceptable_dtypes = ACCEPTABLE_DTYPES.get(self._encoding_format, None)
+    if acceptable_dtypes and dtype not in acceptable_dtypes:
+      raise ValueError('Acceptable `dtype` for %s: %s (was %s)' % (
+          self._encoding_format, acceptable_dtypes, dtype))
     self._dtype = dtype
 
   def set_encoding_format(self, encoding_format):
     """Update the encoding format."""
-    if encoding_format:
-      supported = ENCODE_FN.keys()
-      if encoding_format not in supported:
-        raise ValueError('`encoding_format` must be one of %s.' % supported)
-      self._encoding_format = encoding_format
+    supported = ENCODE_FN.keys()
+    if encoding_format and encoding_format not in supported:
+      raise ValueError('`encoding_format` must be one of %s.' % supported)
+    self._encoding_format = encoding_format
 
   def set_shape(self, shape):
     """Update the shape."""
     channels = shape[-1]
-    if self._encoding_format:
-      acceptable_channels = ACCEPTABLE_CHANNELS[self._encoding_format]
-      if channels not in acceptable_channels:
-        raise ValueError('Acceptable `channels` for %s: %s (was %s)' % (
-            self._encoding_format, acceptable_channels, channels))
+    acceptable_channels = ACCEPTABLE_CHANNELS.get(self._encoding_format, None)
+    if acceptable_channels and channels not in acceptable_channels:
+      raise ValueError('Acceptable `channels` for %s: %s (was %s)' % (
+          self._encoding_format, acceptable_channels, channels))
     self._shape = tuple(shape)
 
   def get_tensor_info(self):
@@ -178,7 +175,7 @@ class Image(feature.FeatureConnector):
         encoded_image = image_f.read()
     else:
       encoded_image = image_or_path_or_fobj.read()
-    _verify_encoding(self._encoding_format, encoded_image)
+    # TODO: Verify encoding format
     return encoded_image
 
   def decode_example(self, example):
@@ -210,9 +207,3 @@ class Image(feature.FeatureConnector):
 
 def _get_metadata_filepath(data_dir, feature_name):
   return os.path.join(data_dir, '{}.image.json'.format(feature_name))
-
-def _verify_encoding(encoding_format, encoded_image):
-  # TODO
-  # if encoding_format:
-  #   assert encoding_format == get_encoding(encoded_image)
-  pass 
