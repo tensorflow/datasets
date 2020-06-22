@@ -129,7 +129,6 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
-    'not_mnist': ['matplotlib'],
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed

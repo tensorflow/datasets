@@ -27,7 +27,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import pathlib
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.image_classification import mnist
 
@@ -55,6 +55,9 @@ _TEST_DATA_DIR = 'notMNIST_small'
 
 _IMAGE_SHAPE = 28
 _ASCII_OFFSET = 65
+
+_CORRUPTED_DIR = 'A'
+_CORRUPTED_FILE = 'RnJlaWdodERpc3BCb29rLnR0Zg==.png'
 
 
 class NotMnist(tfds.core.GeneratorBasedBuilder):
@@ -124,16 +127,15 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
         """
         for label in range(mnist.MNIST_NUM_CLASSES):
             label_dir = os.path.join(data_path, chr(label+_ASCII_OFFSET))
-            images = list(pathlib.Path(label_dir).glob('*.png'))
+            images = list(tf.io.gfile.glob(label_dir + '*.png'))
+            corrupted_image = os.path.join(data_path, _CORRUPTED_DIR, _CORRUPTED_FILE)
+            # Discard the 1 training example with the corrupted PNG header
+            if corrupted_image in images:
+                images.remove(corrupted_image)
             for image in images:
-                # Discard the 1 training example with the corrupted PNG header
-                try:
-                    data = tfds.core.lazy_imports.matplotlib.pyplot.imread(image)\
-                        .reshape(_IMAGE_SHAPE, _IMAGE_SHAPE, 1).astype('uint8')
-                    record = {
-                        "image": data,
-                        "label": label,
-                    }
-                    yield image, record
-                except ValueError as value_error:
-                    print(value_error)
+                data = tf.io.gfile.GFile(image, 'rb')
+                record = {
+                    "image": data,
+                    "label": label,
+                }
+                yield image, record
