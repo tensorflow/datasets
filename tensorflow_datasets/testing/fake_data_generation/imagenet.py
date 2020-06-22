@@ -22,6 +22,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
 import os
 import tarfile
 import tempfile
@@ -29,13 +30,17 @@ import tempfile
 from absl import app
 from absl import flags
 
+import tensorflow.compat.v1 as tf
+
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import imagenet  # pytype: disable=import-error
+from tensorflow_datasets.image_classification import imagenet  # pytype: disable=import-error
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
+flags.DEFINE_boolean('real', False,
+                     'Generate data for Imagenet2012Real.')
 FLAGS = flags.FLAGS
 
 TRAIN_SYNSET_NUMBER = 10
@@ -64,7 +69,7 @@ def _get_synset(synset_name):
 
 def _ilsvrc2012_output_dir():
   return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'imagenet2012')
+                      'imagenet2012' + ('_real' if FLAGS.real else ''))
 
 
 def _generate_train_archive():
@@ -87,16 +92,23 @@ def _generate_val_archive():
                              'ILSVRC2012_img_val.tar')
   tar = tarfile.open(output_path, mode='w')
   for i in range(1, VAL_IMAGES_NUMBER+1):
-    fname = 'ILSVRC2012_val_0000%03i.JPEG' % i
+    fname = 'ILSVRC2012_val_{:08}.JPEG'.format(i)
     jpeg = fake_data_utils.get_random_jpeg()
     tar.add(jpeg, arcname=fname)
   tar.close()
 
+  if FLAGS.real:
+    real_labels_path = os.path.join(_ilsvrc2012_output_dir(), 'real.json')
+    with open(real_labels_path, 'w') as f:
+      json.dump([[i, i + 1] for i in range(VAL_IMAGES_NUMBER)], f)
+
 
 def main(argv):
+  tf.disable_v2_behavior()
   if len(argv) > 1:
     raise app.UsageError('Too many command-line arguments.')
-  _generate_train_archive()
+  if not FLAGS.real:
+    _generate_train_archive()
   _generate_val_archive()
 
 
