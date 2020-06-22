@@ -26,9 +26,9 @@ from tensorflow_datasets.text import reddit_disentanglement
 class RedditDisentanglementTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = reddit_disentanglement.RedditDisentanglement
   SPLITS = {
-      "train": 8,  # Number of fake train example
-      "validation": 3,  # Number of fake validation example
-      "test": 3,  # Number of fake test example
+      "train": 2,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
+      "test": 1  # Number of fake test example
   }
 
 

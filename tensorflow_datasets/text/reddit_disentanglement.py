@@ -40,7 +40,9 @@ _DESCRIPTION = """
 This dataset contains ~3M messages from reddit.
 Every message is labeled with metadata. The task is to predict the id of its
 parent message in the corresponding thread.
+Each record contains a list of messages from one thread.
 Duplicated and broken records are removed from the dataset.
+
 
 Features are:
   - id - message id
@@ -52,6 +54,7 @@ Target:
   - parent_id - id of the parent message in the current thread
 """
 
+_THREAD_KEY = "thread"
 _MESSAGE_ID = "id"
 _MESSAGE_TEXT = "text"
 _MESSAGE_TIMESTAMP = "created_utc"
@@ -74,11 +77,9 @@ def _deduplicate(data):
   nonuniq_ids = set(id for id, count in cnt.items() if count > 1)
   nonuniq_data = [row for row in data if row["id"] in nonuniq_ids]
 
-  # Keep data chronological but make sure same id records are next to each other
-  # Important for itertools.groupby
-  nonuniq_data = sorted(nonuniq_data,
-                        key=lambda row: (row["created_utc"], row["id"]))
   unique_data = [row for row in data if row["id"] not in nonuniq_ids]
+  # Make sure same id records are next to each other for itertools.groupby
+  nonuniq_data = sorted(nonuniq_data, key=lambda row: row["id"])
   for _, same_id_data in itertools.groupby(nonuniq_data, lambda row: row["id"]):
     same_id_data = list(same_id_data)
     if all(same_id_data[0] == x for x in same_id_data):
@@ -91,13 +92,14 @@ def _deduplicate(data):
                          " data".format(non_deleted_same_id_data[0]["id"]))
       unique_data.append(non_deleted_same_id_data[0])
 
-  return unique_data
+  return sorted(unique_data,
+                key=lambda row: (row["link_id"], row["created_utc"]))
 
 
 class RedditDisentanglement(tfds.core.GeneratorBasedBuilder):
   """Reddit Disentanglement dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Download https://github.com/henghuiz/MaskedHierarchicalTransformer, decompress
   raw_data.zip and run generate_dataset.py with your reddit api credentials.
@@ -110,13 +112,15 @@ class RedditDisentanglement(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            _MESSAGE_ID: tfds.features.Text(),
-            _MESSAGE_TEXT: tfds.features.Text(),
-            _MESSAGE_TIMESTAMP: tfds.features.Text(),
-            _MESSAGE_AUTHOR: tfds.features.Text(),
-            _MESSAGE_LINK_ID: tfds.features.Text(),
-            _MESSAGE_PARENT_ID: tfds.features.Text(),
-        }),
+            _THREAD_KEY: tfds.features.Sequence(
+                tfds.features.FeaturesDict({
+                    _MESSAGE_ID: tfds.features.Text(),
+                    _MESSAGE_TEXT: tfds.features.Text(),
+                    _MESSAGE_TIMESTAMP: tfds.features.Text(),
+                    _MESSAGE_AUTHOR: tfds.features.Text(),
+                    _MESSAGE_LINK_ID: tfds.features.Text(),
+                    _MESSAGE_PARENT_ID: tfds.features.Text()
+                }))}),
         homepage="https://github.com/henghuiz/MaskedHierarchicalTransformer",
         citation=_CITATION,
     )
@@ -145,6 +149,9 @@ class RedditDisentanglement(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     data = list(_read_csv(path))
     data = _deduplicate(data)
-    for row in data:
-      row["text"] = row.pop("body")
-      yield row[_MESSAGE_ID], row
+    for link_id, one_topic_data in itertools.groupby(
+        data, lambda row: row["link_id"]):
+      one_topic_data = list(one_topic_data)
+      for row in one_topic_data:
+        row["text"] = row.pop("body")
+      yield link_id, {_THREAD_KEY: one_topic_data}
