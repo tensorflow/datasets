@@ -165,9 +165,11 @@ def parse_100k_ratings_data(
     movie_info_map[movie_example['movie_id']] = movie_example
 
   users_file_path = os.path.join(dir_path, 'u.user')
-  # A list of thresholds for bucketizing user age
+  # A list of thresholds for bucketizing user age.
   age_thresholds_list = [18, 25, 35, 45, 50, 56]
-  # A dictionary for converting 100K occupation labels to canonical labels.
+  # A dictionary for converting 100K occupation labels to standardized labels.
+  # These labels are consistent across the 100k and 1m datasets. Some labels are
+  # merged according to the labels in the 1m dataset.
   occupation_label_conversion_map = {
       'administrator': 'clerical/admin',
       'artist': 'artist',

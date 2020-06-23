@@ -386,17 +386,23 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
 
     if self.builder_config.table_option == 'movies':
       features_dict = {**movie_features_dict}
-    elif self.builder_config.format_version in ['1m', '100k']:
-      # Older versions of MovieLens have demographic features.
+    # For the other cases, self.builder_config.table_option == 'ratings'.
+    # Older versions of MovieLens (1m, 100k) have demographic features.
+    elif self.builder_config.format_version == '1m':
       features_dict = {
           **movie_features_dict,
           **rating_features_dict,
-          **demographic_features_dict
+          **demographic_features_dict,
       }
-      if self.builder_config.format_version == '100k':
-        # Only the 100k dataset contains exact user ages. The 1m dataset
-        # contains only bucketized age values.
-        features_dict['raw_user_age'] = tf.float32
+    elif self.builder_config.format_version == '100k':
+      # Only the 100k dataset contains exact user ages. The 1m dataset
+      # contains only bucketized age values.
+      features_dict = {
+          **movie_features_dict,
+          **rating_features_dict,
+          **demographic_features_dict,
+          'raw_user_age': tf.float32,
+      }
     else:
       features_dict = {**movie_features_dict, **rating_features_dict}
     return tfds.core.DatasetInfo(

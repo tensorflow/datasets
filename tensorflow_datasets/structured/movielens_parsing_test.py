@@ -19,10 +19,10 @@ import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured import movielens_parsing
 
 class MovieLensUtilsTest(tfds.testing.TestCase):
-  """Tests for helper functions in movielens_parsing"""
+  """Tests for helper functions in movielens_parsing."""
 
   def test_parse_current_movies_data(self):
-    """Test for parse_current_movies_data"""
+    """Test for parse_current_movies_data."""
     latest_small_path = os.path.join(
         tfds.testing.fake_examples_dir(),
         'movie_lens',
@@ -74,10 +74,10 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         }),
     ]
     parsed_example_list = list(movies_generator)
-    self.assertListEqual(expected_result, parsed_example_list)
+    self.assertEqual(expected_result, parsed_example_list)
 
   def test_parse_current_ratings_data(self):
-    """Test for parse_current_ratings_data"""
+    """Test for parse_current_ratings_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
         'movie_lens',
@@ -152,10 +152,10 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         }),
     ]
     parsed_example_list = list(movies_generator)
-    self.assertListEqual(expected_result, parsed_example_list)
+    self.assertEqual(expected_result, parsed_example_list)
 
   def test_parse_100k_movies_data(self):
-    """Test for parse_100k_movies_data"""
+    """Test for parse_100k_movies_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
         'movie_lens',
@@ -205,10 +205,10 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         }),
     ]
     parsed_example_list = list(movies_generator)
-    self.assertListEqual(expected_result, parsed_example_list)
+    self.assertEqual(expected_result, parsed_example_list)
 
   def test_parse_100k_ratings_data(self):
-    """Test for parse_100k_ratings_data"""
+    """Test for parse_100k_ratings_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
         'movie_lens',
@@ -330,10 +330,10 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         }),
     ]
     parsed_example_list = list(movies_generator)
-    self.assertListEqual(expected_result, parsed_example_list)
+    self.assertEqual(expected_result, parsed_example_list)
 
   def test_parse_1m_movies_data(self):
-    """Test for parse_1m_movies_data"""
+    """Test for parse_1m_movies_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
         'movie_lens',
@@ -383,10 +383,10 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         }),
     ]
     parsed_example_list = list(movies_generator)
-    self.assertListEqual(expected_result, parsed_example_list)
+    self.assertEqual(expected_result, parsed_example_list)
 
   def test_parse_1m_ratings_data(self):
-    """Test for parse_1m_ratings_data"""
+    """Test for parse_1m_ratings_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
         'movie_lens',
@@ -500,7 +500,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         }),
     ]
     parsed_example_list = list(movies_generator)
-    self.assertListEqual(expected_result, parsed_example_list)
+    self.assertEqual(expected_result, parsed_example_list)
 
 
 if __name__ == "__main__":
