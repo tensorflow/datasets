@@ -519,9 +519,18 @@ class DownloadManager(object):
 
     Note: This function requires Kaggle CLI tool.
       Read the following installation guide at https://www.kaggle.com/docs/api
-    
+
+    Usage:
+
+    ```
+    dl_manager = tfds.download.DownloadManager(download_dir='path/to/dir/')
+    public_dataset_name = 'fireballbyedimyrnmom/us-counties-covid-19-dataset'
+    data = dl_manager.download_kaggle_data(public_dataset_name)
+    ```
+
     Args:
-      name: Dataset name (`zillow/zecon`) or Competition name (`titanic`)
+      name: Competition name (`titanic`) or
+        Dataset name (`fireballbyedimyrnmom/us-counties-covid-19-dataset`)
 
     """
     with self._downloader.tqdm():
