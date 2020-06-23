@@ -96,6 +96,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2017`](i_naturalist2017.md)
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
+*   [`imagenet2012_real`](imagenet2012_real.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenette`](imagenette.md)
