@@ -103,8 +103,6 @@ class KaggleFile(object):
       # dataset_name, filename = filename.split("/", 1)
       competition_name = "%s/%s" % (competition_name, dataset_name)
     # return cls(competition_name, filename)
-    #   return competition_name
-    #   print('LMFAO:', cls(competition_name))
       return cls(competition_name)
 
   @staticmethod
