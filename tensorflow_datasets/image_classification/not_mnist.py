@@ -85,7 +85,8 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        """Return the train, test split of notMNIST.
+        """
+        Return the train, test split of notMNIST.
 
         Args:
           dl_manager: download manager object.
