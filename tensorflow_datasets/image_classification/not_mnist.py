@@ -119,11 +119,10 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
         Generate the notMNIST data.
 
         Args:
-            dl_manager: download manager object.
-            data_path: path to the location of extracted dataset
+            data_path: path to the location of extracted dataset.
 
         Returns:
-            record with image along with its associated label
+            record with image along with its associated label.
         """
         for label in range(mnist.MNIST_NUM_CLASSES):
             label_dir = os.path.join(data_path, chr(label+_ASCII_OFFSET))
