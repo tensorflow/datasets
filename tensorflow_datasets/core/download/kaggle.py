@@ -73,41 +73,50 @@ def _get_kaggle_type(competition_name):
 
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
-  _URL_PREFIX = "kaggle://"
+  # _URL_PREFIX = "kaggle://"
+  _URL_PREFIX = "kaggle.com"
 
-  def __init__(self, competition_name, filename):
+  # def __init__(self, competition_name, filename):
+  def __init__(self, competition_name):
     self._competition_name = competition_name
-    self._filename = filename
+    # self._filename = filename
     self.type = _get_kaggle_type(competition_name)
 
   @property
   def competition(self):
     return self._competition_name
 
-  @property
-  def filename(self):
-    return self._filename
+  # @property
+  # def filename(self):
+  #   return self._filename
 
   @classmethod
   def from_url(cls, url):
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
-    download_type, competition_name, filename = (
-        url[len(cls._URL_PREFIX):].split("/", 2))
+    kaggle_url = url[len(cls._URL_PREFIX)+1:]
+    competition_name, filename = (
+        kaggle_url.split("/", 2))
+    download_type = _get_kaggle_type(kaggle_url).prefix
     if download_type == "dataset":
-      dataset_name, filename = filename.split("/", 1)
+      dataset_name = filename
+      # dataset_name, filename = filename.split("/", 1)
       competition_name = "%s/%s" % (competition_name, dataset_name)
-    return cls(competition_name, filename)
+    # return cls(competition_name, filename)
+    #   return competition_name
+    #   print('LMFAO:', cls(competition_name))
+      return cls(competition_name)
 
   @staticmethod
   def is_kaggle_url(url):
     return url.startswith(KaggleFile._URL_PREFIX)
 
   def to_url(self):
-    return "%s%s/%s/%s" % (self._URL_PREFIX,
-                           self.type.prefix,
-                           self._competition_name,
-                           self._filename)
+    # return "%s%s/%s/%s" % (self._URL_PREFIX,
+    #                        self.type.prefix,
+    #                        self._competition_name,
+    #                        self._filename)
+    return "%s/%s" % (self._URL_PREFIX, self._competition_name)
 
 
 class KaggleCompetitionDownloader(object):
@@ -128,41 +137,43 @@ class KaggleCompetitionDownloader(object):
     self._competition_name = competition_name
     self._kaggle_type = _get_kaggle_type(self._competition_name)
 
-  @utils.memoized_property
-  def competition_files(self):
-    """List of competition files."""
-    command = [
-        "kaggle",
-        self._kaggle_type.download_cmd,
-        "files",
-        "-v",
-        self._competition_name,
-    ]
-    output = _run_kaggle_command(command, self._competition_name)
-    return sorted([
-        line.split(",")[0] for line in output.split("\n")[1:] if line
-    ])
+  # @utils.memoized_property
+  # def competition_files(self):
+  #   """List of competition files."""
+  #   command = [
+  #       "kaggle",
+  #       self._kaggle_type.download_cmd,
+  #       "files",
+  #       "-v",
+  #       self._competition_name,
+  #   ]
+  #   output = _run_kaggle_command(command, self._competition_name)
+  #   return sorted([
+  #       line.split(",")[0] for line in output.split("\n")[1:] if line
+  #   ])
+  #   return []
 
   @utils.memoized_property
   def competition_urls(self):
     """Returns 'kaggle://' urls."""
     return [
-        KaggleFile(self._competition_name, fname).to_url()
-        for fname in self.competition_files  # pylint: disable=not-an-iterable
+        KaggleFile(self._competition_name).to_url()
+        # KaggleFile(self._competition_name, fname).to_url()
+        # for fname in self.competition_files  # pylint: disable=not-an-iterable
     ]
 
   def download_file(self, fname, output_dir):
     """Downloads competition file to output_dir."""
-    if fname not in self.competition_files:  # pylint: disable=unsupported-membership-test
-      raise ValueError("%s is not one of the competition's "
-                       "files: %s" % (fname, self.competition_files))
+    # if fname not in self.competition_files:  # pylint: disable=unsupported-membership-test
+    #   raise ValueError("%s is not one of the competition's "
+    #                    "files: %s" % (fname, self.competition_files))
     command = [
         "kaggle",
         self._kaggle_type.download_cmd,
         "download",
-        "--file",
+        "-d",
         fname,
-        "--path",
+        "-p",
         output_dir,
         self._kaggle_type.dl_flag,
         self._competition_name
@@ -178,7 +189,8 @@ class KaggleCompetitionDownloader(object):
       e = extractor.get_extractor()
       with e.tqdm():
         e.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
-    return os.path.join(output_dir, fname)
+    # return os.path.join(output_dir, fname)
+    return output_dir
 
 
 def _run_kaggle_command(command_args, competition_name):

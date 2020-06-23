@@ -27,6 +27,7 @@ import hashlib
 import io
 import os
 import re
+import time
 from typing import Any, ContextManager, Iterable, Iterator, Tuple, Union
 import promise
 import requests
@@ -117,7 +118,7 @@ class _Downloader(object):
     """Download with Kaggle API."""
     kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
     downloader = self.kaggle_downloader(kaggle_file.competition)
-    filepath = downloader.download_file(kaggle_file.filename, destination_path)
+    filepath = downloader.download_file(kaggle_file.competition, destination_path)
 
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer_cls()

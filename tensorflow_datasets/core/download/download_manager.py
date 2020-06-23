@@ -519,9 +519,10 @@ class DownloadManager(object):
     with self._downloader.tqdm():
       kaggle_downloader = self._downloader.kaggle_downloader(competition_name)
       urls = kaggle_downloader.competition_urls
-      files = kaggle_downloader.competition_files
-      return _map_promise(self._download,
-                          dict((f, u) for (f, u) in zip(files, urls)))
+      # files = kaggle_downloader.competition_files
+      # return _map_promise(self._download,
+      #                     dict((f, u) for (f, u) in zip(files, urls)))
+      return _map_promise(self._download, urls)
 
   def download(self, url_or_urls):
     """Download given url(s).
