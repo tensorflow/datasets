@@ -514,10 +514,18 @@ class DownloadManager(object):
       return self._extract(resource)
     return self._download(resource).then(callback)
 
-  def download_kaggle_data(self, competition_name):
-    """Download data for a given Kaggle competition."""
+  def download_kaggle_data(self, name):
+    """Download data for a given Kaggle Dataset.
+
+    Note: This function requires Kaggle CLI tool.
+      Read the following installation guide at https://www.kaggle.com/docs/api
+    
+    Args:
+      name: Dataset name (`zillow/zecon`) or Competition name (`titanic`)
+
+    """
     with self._downloader.tqdm():
-      kaggle_downloader = self._downloader.kaggle_downloader(competition_name)
+      kaggle_downloader = self._downloader.kaggle_downloader(name)
       urls = kaggle_downloader.competition_urls
       files = kaggle_downloader.competition_files
       return _map_promise(self._download,
