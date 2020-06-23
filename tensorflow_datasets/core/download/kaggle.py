@@ -194,6 +194,9 @@ def _run_kaggle_command(command_args, competition_name):
       raise
     logging.error(_ERR_MSG, competition_name)
     raise
+  except FileNotFoundError as err:
+    raise FileNotFoundError(_ERR_MSG % competition_name +
+                            "\nOriginal exception: {}".format(err))
 
 
 def _log_command_output(output, error=False):
