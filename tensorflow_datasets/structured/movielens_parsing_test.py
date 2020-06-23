@@ -11,15 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for movielens_utils."""
+"""Tests for movielens_parsing."""
 
 import os
 
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured import movielens_utils
+from tensorflow_datasets.structured import movielens_parsing
 
 class MovieLensUtilsTest(tfds.testing.TestCase):
-  """Tests for helper functions in movielens_utils"""
+  """Tests for helper functions in movielens_parsing"""
 
   def test_parse_current_movies_data(self):
     """Test for parse_current_movies_data"""
@@ -28,7 +28,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'movie_lens',
         'ml-latest-small',
     )
-    movies_generator = movielens_utils.parse_current_movies_data(
+    movies_generator = movielens_parsing.parse_current_movies_data(
         latest_small_path
     )
     expected_result = [
@@ -83,7 +83,8 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'movie_lens',
         'ml-latest-small',
     )
-    movies_generator = movielens_utils.parse_current_ratings_data(fake_dir_path)
+    movies_generator = movielens_parsing.parse_current_ratings_data(
+        fake_dir_path)
     expected_result = [
         (0, {
             'movie_id': '5',
@@ -160,7 +161,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'movie_lens',
         'ml-100k',
     )
-    movies_generator = movielens_utils.parse_100k_movies_data(fake_dir_path)
+    movies_generator = movielens_parsing.parse_100k_movies_data(fake_dir_path)
     expected_result = [
         (0, {
             'movie_id': '1',
@@ -213,7 +214,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'movie_lens',
         'ml-100k',
     )
-    movies_generator = movielens_utils.parse_100k_ratings_data(fake_dir_path)
+    movies_generator = movielens_parsing.parse_100k_ratings_data(fake_dir_path)
     expected_result = [
         (0, {
             'movie_id': '1',
@@ -338,7 +339,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'movie_lens',
         'ml-1m',
     )
-    movies_generator = movielens_utils.parse_1m_movies_data(fake_dir_path)
+    movies_generator = movielens_parsing.parse_1m_movies_data(fake_dir_path)
     expected_result = [
         (0, {
             'movie_id': '1',
@@ -391,7 +392,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'movie_lens',
         'ml-1m',
     )
-    movies_generator = movielens_utils.parse_1m_ratings_data(fake_dir_path)
+    movies_generator = movielens_parsing.parse_1m_ratings_data(fake_dir_path)
     expected_result = [
         (0, {
             'movie_id': '1',
@@ -500,6 +501,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     ]
     parsed_example_list = list(movies_generator)
     self.assertListEqual(expected_result, parsed_example_list)
+
 
 if __name__ == "__main__":
   tfds.testing.test_main()

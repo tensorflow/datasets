@@ -19,7 +19,7 @@ from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured import movielens_utils
+from tensorflow_datasets.structured import movielens_parsing
 
 _CITATION = """
 @article{10.1145/2827872,
@@ -192,7 +192,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-25m.zip'
           ),
-          parsing_fn=movielens_utils.parse_current_ratings_data,
+          parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='25m-movies',
@@ -206,7 +206,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-25m.zip'
           ),
-          parsing_fn=movielens_utils.parse_current_movies_data,
+          parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
       # The latest-small dataset is changed over time. Its checksum might need
       # updating in the future.
@@ -229,7 +229,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-latest-small.zip'
           ),
-          parsing_fn=movielens_utils.parse_current_ratings_data,
+          parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='latest-small-movies',
@@ -243,7 +243,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-latest-small.zip'
           ),
-          parsing_fn=movielens_utils.parse_current_movies_data,
+          parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
       MovieLensConfig(
           name='100k-ratings',
@@ -262,7 +262,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-100k.zip'
           ),
-          parsing_fn=movielens_utils.parse_100k_ratings_data,
+          parsing_fn=movielens_parsing.parse_100k_ratings_data,
       ),
       MovieLensConfig(
           name='100k-movies',
@@ -276,7 +276,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-100k.zip'
           ),
-          parsing_fn=movielens_utils.parse_100k_movies_data,
+          parsing_fn=movielens_parsing.parse_100k_movies_data,
       ),
       MovieLensConfig(
           name='1m-ratings',
@@ -297,7 +297,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-1m.zip'
           ),
-          parsing_fn=movielens_utils.parse_1m_ratings_data,
+          parsing_fn=movielens_parsing.parse_1m_ratings_data,
       ),
       MovieLensConfig(
           name='1m-movies',
@@ -311,7 +311,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-1m.zip'
           ),
-          parsing_fn=movielens_utils.parse_1m_movies_data,
+          parsing_fn=movielens_parsing.parse_1m_movies_data,
       ),
       MovieLensConfig(
           name='20m-ratings',
@@ -329,7 +329,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-20m.zip'
           ),
-          parsing_fn=movielens_utils.parse_current_ratings_data,
+          parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='20m-movies',
@@ -343,7 +343,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-20m.zip'
           ),
-          parsing_fn=movielens_utils.parse_current_movies_data,
+          parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
   ]
 
