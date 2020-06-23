@@ -22,12 +22,8 @@ from __future__ import print_function
 
 import concurrent.futures
 import posixpath
-import re
-from typing import Optional
-from xml.etree import ElementTree
-
-import requests
 import tensorflow.compat.v2 as tf
+from typing import Optional
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tqdm_utils
@@ -57,50 +53,25 @@ def gcs_path(suffix: Optional[str] = None) -> str:
   return path
 
 
-def download_gcs_file(path, out_fname=None, prefix_filter=None, marker=None):
+def download_gcs_file(path, out_fname=None, prefix_filter=None):
   """Download a file from GCS, optionally to a file."""
-  url = posixpath.join(GCS_BUCKET, path)
+  url = posixpath.join(GCS_ROOT_DIR, path)
   if prefix_filter:
-    url += '?prefix={}'.format(prefix_filter)
-  if marker:
-    url += '&marker={}'.format(marker)
-  stream = bool(out_fname)
-  resp = requests.get(url, stream=stream)
-  if not resp.ok:
-    raise ValueError('GCS bucket inaccessible')
+    url = posixpath.join(url, prefix_filter)
   if out_fname:
-    with tf.io.gfile.GFile(out_fname, 'wb') as f:
-      for chunk in resp.iter_content(1024):
-        f.write(chunk)
+    dirpath, file = posixpath.split(out_fname)
+    if not tf.io.gfile.exists(dirpath):
+      tf.io.gfile.makedirs(dirpath)
+    tf.io.gfile.copy(url, out_fname, overwrite=True)
   else:
-    return resp.content
-
-
-def get_next_marker(xml):
-  """Returns is_truncated and next_marker from XML API Response"""
-  namespace = re.match(r'{.*}', xml.tag)
-  namespace = namespace.group(0) if namespace else ''
-  next_marker = xml.find(f"{namespace}NextMarker")
-  is_truncated = xml.find(f"{namespace}IsTruncated")
-  return is_truncated, next_marker
+    return [posixpath.join(prefix_filter, file) 
+            for file in tf.io.gfile.listdir(url)]
 
 
 @py_utils.memoize()
 def gcs_files(prefix_filter=None):
   """List all files in GCS bucket."""
-  top_level_xml_str = download_gcs_file('', prefix_filter=prefix_filter)
-  xml_root = ElementTree.fromstring(top_level_xml_str)
-  filenames = [el[0].text for el in xml_root if el.tag.endswith('Contents')]
-  is_truncated, next_marker = get_next_marker(xml_root)
-
-  while is_truncated.text == 'true':
-    top_level_xml_str = download_gcs_file('', prefix_filter=prefix_filter,
-                                          marker=next_marker.text)
-    xml_root = ElementTree.fromstring(top_level_xml_str)
-    filenames.extend([el[0].text
-                      for el in xml_root if el.tag.endswith('Contents')])
-    is_truncated, next_marker = get_next_marker(xml_root)
-  return filenames
+  return download_gcs_file('', prefix_filter=prefix_filter)
 
 
 def gcs_dataset_info_files(dataset_dir):
