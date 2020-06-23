@@ -84,7 +84,9 @@ in development mode.
 ```
 pip install -e .
 ```
+
 or directly run the `setup.py` file.
+
 ```
 python setup.py develop
 ```
@@ -565,6 +567,9 @@ for more information.
 ### 6. Send for review!
 
 Send the pull request for review.
+
+Note: You need not have to add the License text at the start of the document. 
+It will done automatically once your pull request is merged.
 
 When creating the pull request, fill in the areas for the name, issue reference,
 and GitHub Gist link. When using the checklist, replace each `[ ]` with `[x]` to
