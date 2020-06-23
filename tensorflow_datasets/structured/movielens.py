@@ -13,14 +13,13 @@
 # limitations under the License.
 """MovieLens dataset."""
 
-import csv
 import os
 import textwrap
-import codecs
-from typing import Any, Dict, Iterator, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.structured import movielens_utils
 
 _CITATION = """
 @article{10.1145/2827872,
@@ -79,17 +78,30 @@ parentheses
 - "timestamp": the timestamp of the ratings, represented in seconds since
 midnight Coordinated Universal Time (UTC) of January 1, 1970
 
-The "100k-ratings" and "1m-ratings" versions in addition includes the following
+The "100k-ratings" and "1m-ratings" versions in addition include the following
 demographic features.
 
 - "user_gender": gender of the user who made the rating; a true value
 corresponds to male
-- "user_age": age of the user who made the rating
+- "bucketized_user_age": bucketized age values of the user who made the rating,
+the values and the corresponding ranges are:
+  - 1: "Under 18"
+  - 18: "18-24"
+  - 25: "25-34"
+  - 35: "35-44"
+  - 45: "45-49"
+  - 50: "50-55"
+  - 56: "56+"
 - "user_occupation_label": the occupation of the user who made the rating
-represented by a label
-- "user_occupation_string": the occupation of the user who made the rating in
-the original string
+represented by an integer-encoded label; labels are preprocessed to be
+consistent across different versions
+- "user_occupation_text": the occupation of the user who made the rating in
+the original string; different versions can have different set of raw text
+labels
 - "user_zip_code": the zip code of the user who made the rating
+
+In addition, the "100k-ratings" dataset would also have a feature "raw_user_age"
+which is the exact ages of the users who made the rating
 
 Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 "movie_genres" features.
@@ -107,6 +119,10 @@ class MovieLensConfig(tfds.core.BuilderConfig):
       format_version: Optional[str] = None,
       table_option: Optional[str] = None,
       download_url: Optional[str] = None,
+      parsing_fn: Optional[Callable[
+          [str],
+          Iterator[Tuple[int, Dict[str, Any]]],
+      ]] = None,
       **kwargs
   ) -> None:
     """Constructs a MovieLensConfig.
@@ -117,6 +133,7 @@ class MovieLensConfig(tfds.core.BuilderConfig):
       table_option: a string to identify the table to expose, one of
           '_TABLE_OPTIONS'.
       download_url: a string url for downloading the dataset.
+      parsing_fn: a callable for parsing the data.
       **kwargs: keyword arguments forwarded to super.
 
     Raises:
@@ -131,6 +148,7 @@ class MovieLensConfig(tfds.core.BuilderConfig):
     self._format_version = format_version
     self._table_option = table_option
     self._download_url = download_url
+    self._parsing_fn = parsing_fn
 
   @property
   def format_version(self) -> str:
@@ -143,6 +161,13 @@ class MovieLensConfig(tfds.core.BuilderConfig):
   @property
   def download_url(self) -> str:
     return self._download_url
+
+  @property
+  def parsing_fn(self) -> Optional[Callable[
+      [str],
+      Iterator[Tuple[int, Dict[str, Any]]],
+  ]]:
+    return self._parsing_fn
 
 
 class MovieLens(tfds.core.GeneratorBasedBuilder):
@@ -167,6 +192,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-25m.zip'
           ),
+          parsing_fn=movielens_utils.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='25m-movies',
@@ -180,6 +206,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-25m.zip'
           ),
+          parsing_fn=movielens_utils.parse_current_movies_data,
       ),
       # The latest-small dataset is changed over time. Its checksum might need
       # updating in the future.
@@ -202,6 +229,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-latest-small.zip'
           ),
+          parsing_fn=movielens_utils.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='latest-small-movies',
@@ -215,6 +243,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-latest-small.zip'
           ),
+          parsing_fn=movielens_utils.parse_current_movies_data,
       ),
       MovieLensConfig(
           name='100k-ratings',
@@ -233,6 +262,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-100k.zip'
           ),
+          parsing_fn=movielens_utils.parse_100k_ratings_data,
       ),
       MovieLensConfig(
           name='100k-movies',
@@ -246,6 +276,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-100k.zip'
           ),
+          parsing_fn=movielens_utils.parse_100k_movies_data,
       ),
       MovieLensConfig(
           name='1m-ratings',
@@ -266,6 +297,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-1m.zip'
           ),
+          parsing_fn=movielens_utils.parse_1m_ratings_data,
       ),
       MovieLensConfig(
           name='1m-movies',
@@ -279,6 +311,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-1m.zip'
           ),
+          parsing_fn=movielens_utils.parse_1m_movies_data,
       ),
       MovieLensConfig(
           name='20m-ratings',
@@ -296,6 +329,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-20m.zip'
           ),
+          parsing_fn=movielens_utils.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='20m-movies',
@@ -309,6 +343,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
               'http://files.grouplens.org/datasets/movielens/'
               'ml-20m.zip'
           ),
+          parsing_fn=movielens_utils.parse_current_movies_data,
       ),
   ]
 
@@ -316,7 +351,7 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns DatasetInfo according to self.builder_config."""
-    features_dict = {
+    movie_features_dict = {
         'movie_id': tf.string,
         'movie_title': tf.string,
         'movie_genres': tfds.features.Sequence(
@@ -325,31 +360,45 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
                 'Crime', 'Documentary', 'Drama', 'Fantasy', 'Film-Noir',
                 'Horror', 'IMAX', 'Musical', 'Mystery', 'Romance', 'Sci-Fi',
                 'Thriller', 'Unknown', 'War', 'Western', '(no genres listed)',
-            ])
+            ]),
         ),
     }
-    if self.builder_config.table_option == 'ratings':
-      features_dict['user_id'] = tf.string
-      features_dict['user_rating'] = tf.float32
-      # Using int64 since tfds currently does not support float64.
-      features_dict['timestamp'] = tf.int64
+    rating_features_dict = {
+        'user_id': tf.string,
+        'user_rating': tf.float32,
+        # Using int64 since tfds currently does not support float64.
+        'timestamp': tf.int64,
+    }
+    demographic_features_dict = {
+        'user_gender': tf.bool,
+        'bucketized_user_age': tf.float32,
+        'user_occupation_label': tfds.features.ClassLabel(names=[
+            'academic/educator', 'artist', 'clerical/admin', 'customer service',
+            'doctor/health care', 'entertainment', 'executive/managerial',
+            'farmer', 'homemaker', 'lawyer', 'librarian', 'other/not specified',
+            'programmer', 'retired', 'sales/marketing', 'scientist',
+            'self-employed', 'student', 'technician/engineer',
+            'tradesman/craftsman', 'unemployed', 'writer',
+        ]),
+        'user_occupation_text': tf.string,
+        'user_zip_code': tf.string,
+    }
+
+    if self.builder_config.table_option == 'movies':
+      features_dict = {**movie_features_dict}
+    elif self.builder_config.format_version in ['1m', '100k']:
       # Older versions of MovieLens have demographic features.
-      if self.builder_config.format_version in ['100k', '1m']:
-        features_dict['user_gender'] = tf.bool
-        features_dict['user_age'] = tf.int32
-        features_dict['user_occupation_label'] = tfds.features.ClassLabel(
-            names=[
-                'academic/educator', 'artist', 'clerical/admin',
-                'customer service', 'doctor/health care', 'entertainment',
-                'executive/managerial', 'farmer', 'homemaker', 'lawyer',
-                'librarian', 'other/not specified', 'programmer', 'retired',
-                'sales/marketing', 'scientist', 'self-employed', 'student',
-                'technician/engineer', 'tradesman/craftsman', 'unemployed',
-                'writer',
-            ]
-        )
-        features_dict['user_occupation_string'] = tf.string
-        features_dict['user_zip_code'] = tf.string
+      features_dict = {
+          **movie_features_dict,
+          **rating_features_dict,
+          **demographic_features_dict
+      }
+      if self.builder_config.format_version == '100k':
+        # Only the 100k dataset contains exact user ages. The 1m dataset
+        # contains only bucketized age values.
+        features_dict['raw_user_age'] = tf.float32
+    else:
+      features_dict = {**movie_features_dict, **rating_features_dict}
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -365,240 +414,22 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
   ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
     extracted_path = dl_manager.download_and_extract(
-        self.builder_config.download_url
+        self.builder_config.download_url,
     )
     dir_path = os.path.join(
         extracted_path,
-        'ml-%s' % self.builder_config.format_version
+        'ml-%s' % self.builder_config.format_version,
     )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'dir_path': dir_path,
-                'table_option': self.builder_config.table_option,
-            },
+            gen_kwargs={'dir_path': dir_path},
         ),
     ]
 
   def _generate_examples(
       self,
-      dir_path: Optional[str] = None,
-      table_option: Optional[str] = None
+      dir_path: Optional[str] = None
   ) -> Iterator[Tuple[int, Dict[str, Any]]]:
     """Yields examples by calling the corresponding parsing function."""
-    if self.builder_config.format_version in ['20m', '25m', 'latest-small']:
-      yield from _parse_current_format(dir_path, table_option)
-    elif self.builder_config.format_version == '1m':
-      yield from _parse_1m_format(dir_path, table_option)
-    elif self.builder_config.format_version == '100k':
-      yield from _parse_100k_format(dir_path, table_option)
-
-def _parse_current_format(
-    dir_path: str,
-    table_option: str
-) -> Iterator[Tuple[int, Dict[str, Any]]]:
-  """Parses the data in current format (20m, 25m, and latest-small)."""
-  movies_file_path = os.path.join(dir_path, 'movies.csv')
-  movie_genre_map = {}
-  movie_title_map = {}
-  with tf.io.gfile.GFile(movies_file_path) as movies_file:
-    movies_reader = csv.DictReader(movies_file)
-    for row_num, row in enumerate(movies_reader):
-      if table_option == 'movies':
-        yield row_num, {
-            'movie_id': row['movieId'],
-            'movie_title': row['title'],
-            'movie_genres': row['genres'].split('|'),
-        }
-      else:
-        movie_title_map[row['movieId']] = row['title']
-        movie_genre_map[row['movieId']] = row['genres']
-
-  if table_option == 'ratings':
-    ratings_file_path = os.path.join(dir_path, 'ratings.csv')
-    with tf.io.gfile.GFile(ratings_file_path) as ratings_file:
-      ratings_reader = csv.DictReader(ratings_file)
-      for row_num, row in enumerate(ratings_reader):
-        yield row_num, {
-            'movie_id': row['movieId'],
-            'movie_title': movie_title_map[row['movieId']],
-            'movie_genres': movie_genre_map[row['movieId']].split('|'),
-            'user_id': row['userId'],
-            'user_rating': row['rating'],
-            'timestamp': row['timestamp'],
-        }
-
-def _parse_1m_format(
-    dir_path: str,
-    table_option: str
-) -> Iterator[Tuple[int, Dict[str, Any]]]:
-  """Parses the 1m data."""
-  movies_file_path = os.path.join(dir_path, 'movies.dat')
-  movie_genre_map = {}
-  movie_title_map = {}
-  with tf.io.gfile.GFile(movies_file_path, mode='rb') as movies_file:
-    for row_num, line in enumerate(movies_file):
-      line = codecs.decode(line, encoding='ISO-8859-1').strip()
-      # Row format: <movie id>::<movie title>::<movie genres>.
-      movie_id, movie_title, movie_genres_str = line.split('::')
-      genre_list = movie_genres_str.split('|')
-      # 1m dataset labels "Children" genre as "Children's".
-      # However "Children" and "Children's" should represent the same genre.
-      for idx, genre in enumerate(genre_list):
-        if genre == 'Children\'s':
-          genre_list[idx] = 'Children'
-      if table_option == 'movies':
-        yield row_num, {
-            'movie_id': movie_id,
-            'movie_title': movie_title,
-            'movie_genres': genre_list,
-        }
-      else:
-        movie_title_map[movie_id] = movie_title
-        movie_genre_map[movie_id] = genre_list
-
-  if table_option == 'ratings':
-    users_file_path = os.path.join(dir_path, 'users.dat')
-    # A list for converting occupation index to occupation string for 1M
-    # dataset.
-    occupation_index_to_label = [
-        'other/not specified', 'academic/educator', 'artist', 'clerical/admin',
-        'college/grad student', 'customer service', 'doctor/health care',
-        'executive/managerial', 'farmer', 'homemaker', 'K-12 student', 'lawyer',
-        'programmer', 'retired', 'sales/marketing', 'scientist',
-        'self-employed', 'technician/engineer', 'tradesman/craftsman',
-        'unemployed', 'writer',
-    ]
-    user_info_map = {}
-    with tf.io.gfile.GFile(users_file_path, mode='rb') as users_file:
-      for line in users_file:
-        line = codecs.decode(line, encoding='ISO-8859-1').strip()
-        user_id, gender_str, age, occupation_index, zip_code = line.split('::')
-        occupation_str = occupation_index_to_label[int(occupation_index)]
-        # Combine "K-12 student" and "college/grad student" labels.
-        if occupation_str in ['K-12 student', 'college/grad student']:
-          occupation_label = 'student'
-        else:
-          occupation_label = occupation_str
-        user_info_map[user_id] = {
-            'gender': gender_str == 'M',
-            'age': age,
-            'occupation_label': occupation_label,
-            'occupation_str': occupation_str,
-            'zip_code': zip_code,
-        }
-
-    ratings_file_path = os.path.join(dir_path, 'ratings.dat')
-    with tf.io.gfile.GFile(ratings_file_path, mode='rb') as ratings_file:
-      for row_num, line in enumerate(ratings_file):
-        line = codecs.decode(line, encoding='ISO-8859-1').strip()
-        user_id, movie_id, rating, timestamp = line.split('::')
-        user_info = user_info_map[user_id]
-        yield row_num, {
-            'movie_id': movie_id,
-            'movie_title': movie_title_map[movie_id],
-            'movie_genres': movie_genre_map[movie_id],
-            'user_id': user_id,
-            'user_rating': rating,
-            'timestamp': timestamp,
-            'user_gender': user_info['gender'],
-            'user_age': user_info['age'],
-            'user_occupation_label': user_info['occupation_label'],
-            'user_occupation_string': user_info['occupation_str'],
-            'user_zip_code': user_info['zip_code'],
-        }
-
-def _parse_100k_format(
-    dir_path: str,
-    table_option: str
-) -> Iterator[Tuple[int, Dict[str, Any]]]:
-  """Parses the 100k data."""
-  movies_file_path = os.path.join(dir_path, 'u.item')
-  # A list for converting genre index to genre label for 100K dataset.
-  # "Children's" changed to "Children" in the list for consistency.
-  all_genre_list = [
-      'Unknown', 'Action', 'Adventure', 'Animation', 'Children', 'Comedy',
-      'Crime', 'Documentary', 'Drama', 'Fantasy', 'Film-Noir', 'Horror',
-      'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Thriller', 'War', 'Western',
-  ]
-  movie_genre_map = {}
-  movie_title_map = {}
-  with tf.io.gfile.GFile(movies_file_path, mode='rb') as movies_file:
-    for row_num, line in enumerate(movies_file):
-      line = codecs.decode(line, encoding='ISO-8859-1').strip()
-      # Row format: <movie id>|<movie title>|<release date>|\
-      # <video release date>|<IMDb URL>|<19 fields for each genre>|.
-      movie_id, movie_title, _, _, _, *genre_bools = line.split('|')
-      genre_list = []
-      for index, genre_indicator in enumerate(genre_bools):
-        if genre_indicator == '1':
-          genre_list.append(all_genre_list[index])
-      if table_option == 'movies':
-        yield row_num, {
-            'movie_id': movie_id,
-            'movie_title': movie_title,
-            'movie_genres': genre_list,
-        }
-      else:
-        movie_title_map[movie_id] = movie_title
-        movie_genre_map[movie_id] = genre_list
-
-  if table_option == 'ratings':
-    users_file_path = os.path.join(dir_path, 'u.user')
-    # A dictionary for converting 100K occupation labels to canonical labels.
-    occupation_label_conversion_map = {
-        'administrator': 'clerical/admin',
-        'artist': 'artist',
-        'doctor': 'doctor/health care',
-        'educator': 'academic/educator',
-        'engineer': 'technician/engineer',
-        'entertainment': 'entertainment',
-        'executive': 'executive/managerial',
-        'healthcare': 'doctor/health care',
-        'homemaker': 'homemaker',
-        'lawyer': 'lawyer',
-        'librarian': 'librarian',
-        'marketing': 'sales/marketing',
-        'none': 'other/not specified',
-        'other': 'other/not specified',
-        'programmer': 'programmer',
-        'retired': 'retired',
-        'salesman': 'sales/marketing',
-        'scientist': 'scientist',
-        'student': 'student',
-        'technician': 'technician/engineer',
-        'writer': 'writer',
-    }
-    user_info_map = {}
-    with tf.io.gfile.GFile(users_file_path, mode='rb') as users_file:
-      for line in users_file:
-        line = codecs.decode(line, encoding='ISO-8859-1').strip()
-        user_id, age, gender_str, occupation_str, zip_code = line.split('|')
-        user_info_map[user_id] = {
-            'gender': gender_str == 'M',
-            'age': age,
-            'occupation_label': occupation_label_conversion_map[occupation_str],
-            'occupation_str': occupation_str,
-            'zip_code': zip_code,
-        }
-
-    ratings_file_path = os.path.join(dir_path, 'u.data')
-    with tf.io.gfile.GFile(ratings_file_path, mode='rb') as ratings_file:
-      for row_num, line in enumerate(ratings_file):
-        line = codecs.decode(line, encoding='ISO-8859-1').strip()
-        user_id, movie_id, rating, timestamp = line.split('\t')
-        user_info = user_info_map[user_id]
-        yield row_num, {
-            'movie_id': movie_id,
-            'movie_title': movie_title_map[movie_id],
-            'movie_genres': movie_genre_map[movie_id],
-            'user_id': user_id,
-            'user_rating': rating,
-            'timestamp': timestamp,
-            'user_gender': user_info['gender'],
-            'user_age': user_info['age'],
-            'user_occupation_label': user_info['occupation_label'],
-            'user_occupation_string': user_info['occupation_str'],
-            'user_zip_code': user_info['zip_code'],
-        }
+    yield from self.builder_config.parsing_fn(dir_path)
