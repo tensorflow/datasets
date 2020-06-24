@@ -156,7 +156,6 @@ class _Downloader:
     downloader = self.kaggle_downloader(kaggle_file.competition)
     filepath = downloader.download_file(
         kaggle_file.competition, destination_path)
-
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer_cls()
     file = tf.io.gfile.listdir(filepath)[0]
