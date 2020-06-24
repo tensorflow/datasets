@@ -1,0 +1,1066 @@
+{
+  "citation": "@inproceedings{wang-ling-2016-neural,\n    title = \"Neural Network-Based Abstract Generation for Opinions and Arguments\",\n    author = \"Wang, Lu  and\n      Ling, Wang\",\n    booktitle = \"Proceedings of the 2016 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies\",\n    month = jun,\n    year = \"2016\",\n    address = \"San Diego, California\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/N16-1007\",\n    doi = \"10.18653/v1/N16-1007\",\n    pages = \"47--57\",\n}",
+  "description": "There are two sub datasets:\n\n(1) RottenTomatoes: The movie critics and consensus crawled from\nhttp://rottentomatoes.com/. It has fields of \"_movie_name\", \"_movie_id\",\n\"_critics\", and \"_critic_consensus\".\n\n(2) IDebate: The arguments crawled from http://idebate.org/. It has fields of\n\"_debate_name\", \"_debate_id\", \"_claim\", \"_claim_id\", \"_argument_sentences\".",
+  "downloadSize": "21057086",
+  "location": {
+    "urls": [
+      "http://www.ccs.neu.edu/home/luwang/data.html"
+    ]
+  },
+  "name": "opinion_abstracts",
+  "schema": {
+    "feature": [
+      {
+        "domain": "_critic_consensus",
+        "name": "_critic_consensus",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_critics/key",
+        "name": "_critics/key",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_critics/value",
+        "name": "_critics/value",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "intDomain": {},
+        "name": "_movie_id",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_movie_name",
+        "name": "_movie_name",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "_critic_consensus",
+        "value": [
+          "You'll either find the The Last Kiss to be a phony bore or a refreshing take about young 20-somethings at the crossroads between their carefree lifestyle and responsibility. Zach Braff and the rest of the appealing cast make the case for the latter.",
+          "Young kids may find this London adventure fun, but older kids may find it too simplistic.",
+          "Your cranium may crave more substance, but your eyes will feast on the amazing action sequences.",
+          "Yul Brynner gives a memorable performance as a robotic cowboy in this amusing sci-fi/western hybrid.",
+          "Zac Efron gives it his all, but Charlie St. Cloud is too shallow and cloying to offer much more than eye candy for his fans.",
+          "Zack and Miri Make a Porno is a modest success for Kevin Smith, due in large part to the charm of Seth Rogen and Elizabeth Banks.",
+          "Zoe Saldana has the chops but she's taken out by erratic and sloppy filmmaking.",
+          "Zombie has improved as a filmmaker since \"House of 1000 Corpses\" and will please fans of the genre, but beware -- the horror is nasty, relentless, and sadistic.",
+          "Zookeeper smothers Kevin James's with a sodden script and a surfeit of jokes inappropriate for the young viewers who would be intrigued by its juvenile storyline.",
+          "Zorro can survive a lot of things, but it looks like he can't survive marriage."
+        ]
+      },
+      {
+        "name": "_critics/key",
+        "value": [
+          "9_90",
+          "9_91",
+          "9_92",
+          "9_93",
+          "9_94",
+          "9_95",
+          "9_96",
+          "9_97",
+          "9_98",
+          "9_99"
+        ]
+      },
+      {
+        "name": "_critics/value",
+        "value": [
+          ".",
+          "A masterpiece.",
+          "Click to read review",
+          "One of the best films of the year.",
+          "Parental Content Review",
+          "See website for more details.",
+          "click for full review",
+          "click to read full review",
+          "full review at Movies for the Masses",
+          "full review in Greek"
+        ]
+      },
+      {
+        "name": "_movie_name",
+        "value": [
+          "youve_got_mail",
+          "yu_gi_oh_the_movie",
+          "zathura",
+          "zatoichi_2003",
+          "zero_dark_thirty",
+          "zero_effect",
+          "zodiac",
+          "zombieland",
+          "zookeeper",
+          "zoolander"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "52537982",
+      "shardLengths": [
+        "3731"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "_critic_consensus"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 136.87778,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3731",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3731"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Zorro can survive a lot of things, but it looks like he can't survive marriage.",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Zookeeper smothers Kevin James's with a sodden script and a surfeit of jokes inappropriate for the young viewers who would be intrigued by its juvenile storyline.",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Zombie has improved as a filmmaker since \"House of 1000 Corpses\" and will please fans of the genre, but beware -- the horror is nasty, relentless, and sadistic.",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Zoe Saldana has the chops but she's taken out by erratic and sloppy filmmaking.",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Zack and Miri Make a Porno is a modest success for Kevin Smith, due in large part to the charm of Seth Rogen and Elizabeth Banks.",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Zac Efron gives it his all, but Charlie St. Cloud is too shallow and cloying to offer much more than eye candy for his fans.",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Yul Brynner gives a memorable performance as a robotic cowboy in this amusing sci-fi/western hybrid.",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Your cranium may crave more substance, but your eyes will feast on the amazing action sequences.",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Young kids may find this London adventure fun, but older kids may find it too simplistic.",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "You'll either find the The Last Kiss to be a phony bore or a refreshing take about young 20-somethings at the crossroads between their carefree lifestyle and responsibility. Zach Braff and the rest of the appealing cast make the case for the latter.",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "Zorro can survive a lot of things, but it looks like he can't survive marriage."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Zookeeper smothers Kevin James's with a sodden script and a surfeit of jokes inappropriate for the young viewers who would be intrigued by its juvenile storyline."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Zombie has improved as a filmmaker since \"House of 1000 Corpses\" and will please fans of the genre, but beware -- the horror is nasty, relentless, and sadistic."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Zoe Saldana has the chops but she's taken out by erratic and sloppy filmmaking."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Zack and Miri Make a Porno is a modest success for Kevin Smith, due in large part to the charm of Seth Rogen and Elizabeth Banks."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Zac Efron gives it his all, but Charlie St. Cloud is too shallow and cloying to offer much more than eye candy for his fans."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Yul Brynner gives a memorable performance as a robotic cowboy in this amusing sci-fi/western hybrid."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Your cranium may crave more substance, but your eyes will feast on the amazing action sequences."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Young kids may find this London adventure fun, but older kids may find it too simplistic."
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "You'll either find the The Last Kiss to be a phony bore or a refreshing take about young 20-somethings at the crossroads between their carefree lifestyle and responsibility. Zach Braff and the rest of the appealing cast make the case for the latter."
+                }
+              ],
+              "unique": "3731"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_critics/key"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 10.44101,
+              "commonStats": {
+                "avgNumValues": 99.7234,
+                "maxNumValues": "341",
+                "minNumValues": "6",
+                "numNonMissing": "3731",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 33.0,
+                      "lowValue": 6.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 43.0,
+                      "lowValue": 33.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 54.0,
+                      "lowValue": 43.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 67.0,
+                      "lowValue": 54.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 85.0,
+                      "lowValue": 67.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 107.0,
+                      "lowValue": 85.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 129.0,
+                      "lowValue": 107.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 154.0,
+                      "lowValue": 129.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 190.0,
+                      "lowValue": 154.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 341.0,
+                      "lowValue": 190.0,
+                      "sampleCount": 373.1
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "372068"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "9_99",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "9_98",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "9_97",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "9_96",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "9_95",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "9_94",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "9_93",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "9_92",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "9_91",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "9_90",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "9_99"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_98"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_97"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_96"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_95"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_94"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_93"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_92"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_91"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9_90"
+                }
+              ],
+              "unique": "372068"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_critics/value"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 123.476776,
+              "commonStats": {
+                "avgNumValues": 99.7234,
+                "maxNumValues": "341",
+                "minNumValues": "6",
+                "numNonMissing": "3731",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 33.0,
+                      "lowValue": 6.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 43.0,
+                      "lowValue": 33.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 54.0,
+                      "lowValue": 43.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 67.0,
+                      "lowValue": 54.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 85.0,
+                      "lowValue": 67.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 107.0,
+                      "lowValue": 85.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 129.0,
+                      "lowValue": 107.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 154.0,
+                      "lowValue": 129.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 190.0,
+                      "lowValue": 154.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 341.0,
+                      "lowValue": 190.0,
+                      "sampleCount": 373.1
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "372068"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Parental Content Review",
+                    "sampleCount": 186.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "full review at Movies for the Masses",
+                    "lowRank": "1",
+                    "sampleCount": 133.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "full review in Greek",
+                    "lowRank": "2",
+                    "sampleCount": 82.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": ".",
+                    "lowRank": "3",
+                    "sampleCount": 32.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "click for full review",
+                    "lowRank": "4",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "A masterpiece.",
+                    "lowRank": "5",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Click to read review",
+                    "lowRank": "6",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "One of the best films of the year.",
+                    "lowRank": "7",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "click to read full review",
+                    "lowRank": "8",
+                    "sampleCount": 13.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "See website for more details.",
+                    "lowRank": "9",
+                    "sampleCount": 12.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 186.0,
+                  "value": "Parental Content Review"
+                },
+                {
+                  "frequency": 133.0,
+                  "value": "full review at Movies for the Masses"
+                },
+                {
+                  "frequency": 82.0,
+                  "value": "full review in Greek"
+                },
+                {
+                  "frequency": 32.0,
+                  "value": "."
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "click for full review"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": "A masterpiece."
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "Click to read review"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "One of the best films of the year."
+                },
+                {
+                  "frequency": 13.0,
+                  "value": "click to read full review"
+                },
+                {
+                  "frequency": 12.0,
+                  "value": "See website for more details."
+                }
+              ],
+              "unique": "370731"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_movie_id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 6.9418387,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3731",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3731"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "9994",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "9992",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "9986",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "9980",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "9948",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "9930",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "9924",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "9917",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "9909",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "9898",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "9994"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9992"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9986"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9980"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9948"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9930"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9924"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9917"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9909"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "9898"
+                }
+              ],
+              "unique": "3731"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_movie_name"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.077995,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3731",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 373.1
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3731"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "zoolander",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "zookeeper",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "zombieland",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "zodiac",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "zero_effect",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "zero_dark_thirty",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "zatoichi_2003",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "zathura",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "yu_gi_oh_the_movie",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "youve_got_mail",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "zoolander"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zookeeper"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zombieland"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zodiac"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zero_effect"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zero_dark_thirty"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zatoichi_2003"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "zathura"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "yu_gi_oh_the_movie"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "youve_got_mail"
+                }
+              ],
+              "unique": "3731"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "3731"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "_critics",
+    "output": "_critic_consensus"
+  },
+  "version": "1.0.0"
+}

@@ -55,7 +55,7 @@ _DATA_DIR = 'gs://deepmind-gutenberg'
 class Pg19(tfds.core.GeneratorBasedBuilder):
   """This dataset contains the PG-19 language modeling benchmark."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
 
   def _info(self):
 

@@ -27,9 +27,9 @@ from tensorflow_datasets.text import irc_disentanglement
 class IrcDisentanglementTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = irc_disentanglement.IrcDisentanglement
   SPLITS = {
-      "train": 5,  # Number of fake train example
-      "validation": 6,  # Number of fake validation example
-      "test": 5,  # Number of fake test example
+      "train": 1,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
+      "test": 1,  # Number of fake test example
   }
 
 

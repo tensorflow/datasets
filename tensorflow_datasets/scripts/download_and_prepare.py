@@ -86,7 +86,7 @@ flags.DEFINE_boolean(
     "add_name_to_manual_dir", False, "If true, append the dataset name to the "
     "`manual_dir`")
 
-default_compute_stats = tfds.download.ComputeStatsMode.AUTO
+default_compute_stats = tfds.download.ComputeStatsMode.SKIP
 flags.DEFINE_enum(
     "compute_stats",
     default_compute_stats.value,

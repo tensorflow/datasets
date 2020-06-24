@@ -49,12 +49,14 @@ channel.
 
 Features include message id, message text and timestamp.
 Target is list of messages that current message replies to.
+Each record contains a list of messages from one day of IRC chat.
 """
 _DOWNLOAD_URL = \
     "https://github.com/jkkummerfeld/irc-disentanglement/zipball/fd379e9"
 _DOWNLOAD_ARCHIVE_SUBDIR = os.path.join(
     "jkkummerfeld-irc-disentanglement-fd379e9", "data")
 
+_IRC_DAY_KEY = "day"
 _MESSAGE_ID = "id"
 _MESSAGE_TEXT = "text"
 _MESSAGE_TIMESTAMP = "timestamp"
@@ -163,18 +165,21 @@ def _prepare_examples(texts_file_path, annot_file_path, day_str):
 class IrcDisentanglement(tfds.core.GeneratorBasedBuilder):
   """IRC Disentanglement dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self) -> tfds.core.DatasetInfo:
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            _MESSAGE_ID: tfds.features.Text(),
-            _MESSAGE_TEXT: tfds.features.Text(),
-            _MESSAGE_TIMESTAMP: tfds.features.Text(),
-            _MESSAGE_PARENTS_IDS: tfds.features.Sequence(tfds.features.Text()),
-        }),
+            _IRC_DAY_KEY: tfds.features.Sequence(
+                tfds.features.FeaturesDict({
+                    _MESSAGE_ID: tfds.features.Text(),
+                    _MESSAGE_TEXT: tfds.features.Text(),
+                    _MESSAGE_TIMESTAMP: tfds.features.Text(),
+                    _MESSAGE_PARENTS_IDS: tfds.features.Sequence(
+                        tfds.features.Text()),
+                }))}),
         homepage="https://jkk.name/irc-disentanglement",
         citation=_CITATION,
     )
@@ -211,5 +216,5 @@ class IrcDisentanglement(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, day_to_paths):
     """Yields examples."""
     for day, paths in day_to_paths.items():
-      for example in _prepare_examples(paths["text"], paths["annot"], day):
-        yield example[_MESSAGE_ID], example
+      yield day, {_IRC_DAY_KEY: list(
+          _prepare_examples(paths["text"], paths["annot"], day))}

@@ -38,8 +38,10 @@ from tensorflow_datasets.text.math_dataset import MathDataset
 from tensorflow_datasets.text.movie_rationales import MovieRationales
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
+from tensorflow_datasets.text.openbookqa import Openbookqa
 from tensorflow_datasets.text.pg19 import Pg19
 from tensorflow_datasets.text.qa4mre import Qa4mre
+from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglement
 from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scan import ScanConfig
 from tensorflow_datasets.text.scicite import Scicite
@@ -49,5 +51,6 @@ from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.winogrande import Winogrande
+from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews

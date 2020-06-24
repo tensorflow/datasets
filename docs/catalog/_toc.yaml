@@ -132,12 +132,13 @@ toc:
     title: horses_or_humans
   - path: /datasets/catalog/i_naturalist2017
     title: i_naturalist2017
-  - path: /datasets/catalog/image_label_folder
-    title: image_label_folder (manual)
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_real
+    status: nightly
+    title: imagenet2012_real (manual)
   - path: /datasets/catalog/imagenet2012_subset
     title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_resized
@@ -328,11 +329,17 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/openbookqa
+    status: nightly
+    title: openbookqa
   - path: /datasets/catalog/pg19
     status: nightly
     title: pg19
   - path: /datasets/catalog/qa4mre
     title: qa4mre
+  - path: /datasets/catalog/reddit_disentanglement
+    status: nightly
+    title: reddit_disentanglement (manual)
   - path: /datasets/catalog/scan
     title: scan
   - path: /datasets/catalog/scicite
@@ -350,6 +357,9 @@ toc:
   - path: /datasets/catalog/winogrande
     status: nightly
     title: winogrande
+  - path: /datasets/catalog/wordnet
+    status: nightly
+    title: wordnet
   - path: /datasets/catalog/xnli
     title: xnli
   - path: /datasets/catalog/yelp_polarity_reviews
@@ -358,6 +368,9 @@ toc:
 - section:
   - path: /datasets/catalog/flores
     title: flores
+  - path: /datasets/catalog/opus
+    status: nightly
+    title: opus
   - path: /datasets/catalog/para_crawl
     title: para_crawl
   - path: /datasets/catalog/ted_hrlr_translate
