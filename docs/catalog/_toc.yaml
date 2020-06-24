@@ -354,6 +354,9 @@ toc:
     title: wiki40b
   - path: /datasets/catalog/wikipedia
     title: wikipedia
+  - path: /datasets/catalog/wikipedia_toxicity_subtypes
+    status: nightly
+    title: wikipedia_toxicity_subtypes
   - path: /datasets/catalog/winogrande
     status: nightly
     title: winogrande

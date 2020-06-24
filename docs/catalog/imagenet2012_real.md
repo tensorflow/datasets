@@ -31,8 +31,8 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
     [`tfds.image_classification.imagenet2012_real.Imagenet2012Real`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_real.py)
 *   **Versions**:
     *   **`1.0.0`** (default): Initial release.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `379.37 KiB`
+*   **Dataset size**: `6.25 GiB`
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -41,11 +41,12 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
     to get the link to download the dataset.
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split        | Examples
+:----------- | -------:
+'validation' | 50,000
 
 *   **Features**:
 
