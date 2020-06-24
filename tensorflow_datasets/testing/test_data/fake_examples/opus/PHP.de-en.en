@@ -1,0 +1,15 @@
+PHP Manual
+Prev
+Appendix K.
+About the manual
+Next
+This manual is written in XML using the DocBook XML DTD, using DSSSL (Document Style and Semantics Specification Language) for formatting, and experimentally the XSLT (Extensible Stylesheet Language Transformations) for maintenance and formatting.
+Using XML as a source format gives us the ability to generate many output formats from the source files, while only maintaining one source document for all formats.
+The tools used for formatting HTML and TeX versions are Jade, written by James Clark and The Modular DocBook Stylesheets written by Norman Walsh.
+We use Microsoft HTML Help Workshop to generate the Windows HTML Help format of the manual, and of course PHP itself to do some additional conversions and formatting.
+You can download the manual in various languages and formats, including plain text, plain HTML, PDF, PalmPilot DOC, PalmPilot iSilo and Windows HTML Help, from http: / /www.php.net / docs.php.
+The manuals are updated automatically as the text is updated.
+You can find more information about downloading the XML source code of this documentation at http: / /cvs.php.net /.
+The documentation is stored in the phpdoc module.
+Prev
+Home

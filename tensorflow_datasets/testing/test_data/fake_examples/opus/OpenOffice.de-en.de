@@ -1,0 +1,15 @@
+Diagramme in $[officename]
+/text/schart/main0000.xhp
+Diagramme; Übersicht
+HowTos für Diagramme
+MW added one entry
+Arbeiten mit Diagrammen in %PRODUCTNAME
+Mit $[officename] lassen sich Daten grafisch in Diagrammen darstellen. Anhand der Diagramme können Sie optische Vergleiche zwischen verschiedenen Datenreihen anstellen und Trends erkennen.
+Diagramme können in Tabellendokumente, Textdokumente, Zeichnungen und Präsentationen eingefügt werden.
+Diagrammdaten
+Diagramme können auf folgenden Daten basieren:
+Tabellenwerte aus Calc-Zellbereichen
+Zellwerte aus einer Writer-Tabelle
+Werte, die Sie im Dialog &quot; Diagrammdatentabelle &quot; eingeben (Sie können diese Diagramme in Writer, Draw oder Impress erstellen und auch kopieren und in Calc einfügen)
+command line Insert - (Object -) Chart, moved here from deleted shared/01/04160100.xhp
+Erzeugt ein Diagramm im aktuellen Dokument.

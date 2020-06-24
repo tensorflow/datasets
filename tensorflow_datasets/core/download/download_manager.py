@@ -577,13 +577,14 @@ class DownloadManager:
 
     def download_kaggle_data(self, competition_name):
         """
-        Download data for a given Kaggle competition.
+        Download data for a given Kaggle competition/dataset.
 
         Args:
-            competition_name: Name of the kaggle competition/dataset.
+            competition_name: Name of the kaggle competition (`titanic`)
+                              or dataset (`zillow/zecon`).
 
         Returns:
-            The resolved promise after downloading data from each url.
+            The path to the downloaded files.
         """
         with self._downloader.tqdm():
             kaggle_downloader = self._downloader.kaggle_downloader(competition_name)

@@ -1,0 +1,9 @@
+http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/de-en.txt.zip 35952852 47c11eff604996cf6f1fe3aabb9c8e2dd650ff51d947c6d46a7b2247f47aab9b
+http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/de-en.txt.zip 739980 4012bda50da407c91d204cbf1d231bec3172e87d9352a3f8074f9dc7b3932a7f
+http://opus.nlpl.eu/download.php?f=JRC-Acquis/de-en.txt.zip 49276963 33bc142d7f7009551036c8958393c3aacbaccb7f882bf231057018b6e1dbb42e
+http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/de-en.txt.zip 7617104 b84a04507395bdb4d0fa8d501e8bd0f9bc1aeaa507f15ce28eaaf777b668ee12
+http://opus.nlpl.eu/download.php?f=OpenOffice/v2/moses/de-en.txt.zip 1346228 5e717670c624ff7caa49e439bde9bfeda7d524ad1114da069f152944efc0c1af
+http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/de-en.txt.zip 710557991 b1bdd09f3667a85ba9fd0688c8a943c710317e11e5f0f722b7f0f3f0bc38300c
+http://opus.nlpl.eu/download.php?f=PHP/v1/moses/de-en.txt.zip 738160 a1d772f025311686c57033277337bf46beb0e2fc04a628f9a6ae0c6567f58a4d
+http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/de-en.txt.zip 37139875 746c9bb6068e41f661d46547777975de3928f789223d3f7581b89d756ea2fd56
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/de-en.txt.zip 387915 41c0734cb6e9241362e145d2e2b9d8a953beacab5661a9c52600c63a5204b7da

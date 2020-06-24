@@ -26,6 +26,7 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
+from tensorflow_datasets.core.custom_dataset import ImageFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -47,24 +48,25 @@ with core.registered.skip_registration():
 
 
 __all__ = [
-    "core",
     "as_numpy",
-    "decode",
-    "download",
-    "features",
-    "units",
-    "GenerateMode",
+    "core",
     "builder",
     "builder_cls",
+    "decode",
+    "disable_progress_bar",
+    "download",
+    "features",
+    "GenerateMode",
+    "ImageFolder",
+    "is_dataset_on_gcs",
     "list_builders",
     "load",
     "ReadConfig",
     "Split",
-    "testing",
-    "disable_progress_bar",
-    "is_dataset_on_gcs",
     "show_examples",
     "show_statistics",
+    "testing",
+    "units",
     "visualization",
     "__version__",
 ]

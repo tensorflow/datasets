@@ -1,0 +1,1081 @@
+{
+  "citation": "@inproceedings{wang-ling-2016-neural,\n    title = \"Neural Network-Based Abstract Generation for Opinions and Arguments\",\n    author = \"Wang, Lu  and\n      Ling, Wang\",\n    booktitle = \"Proceedings of the 2016 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies\",\n    month = jun,\n    year = \"2016\",\n    address = \"San Diego, California\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/N16-1007\",\n    doi = \"10.18653/v1/N16-1007\",\n    pages = \"47--57\",\n}",
+  "description": "There are two sub datasets:\n\n(1) RottenTomatoes: The movie critics and consensus crawled from\nhttp://rottentomatoes.com/. It has fields of \"_movie_name\", \"_movie_id\",\n\"_critics\", and \"_critic_consensus\".\n\n(2) IDebate: The arguments crawled from http://idebate.org/. It has fields of\n\"_debate_name\", \"_debate_id\", \"_claim\", \"_claim_id\", \"_argument_sentences\".",
+  "downloadSize": "21057086",
+  "location": {
+    "urls": [
+      "http://www.ccs.neu.edu/home/luwang/data.html"
+    ]
+  },
+  "name": "opinion_abstracts",
+  "schema": {
+    "feature": [
+      {
+        "domain": "_argument_sentences/key",
+        "name": "_argument_sentences/key",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_argument_sentences/value",
+        "name": "_argument_sentences/value",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_claim",
+        "name": "_claim",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_claim_id",
+        "name": "_claim_id",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "_debate_name",
+        "name": "_debate_name",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "_argument_sentences/key",
+        "value": [
+          "75833_1_2",
+          "75833_1_3",
+          "75833_1_4",
+          "75833_1_5",
+          "75833_2_0",
+          "75833_2_1",
+          "75833_2_2",
+          "75833_2_3",
+          "75833_2_4",
+          "75833_2_5"
+        ]
+      },
+      {
+        "name": "_argument_sentences/value",
+        "value": [
+          "1 .",
+          "1997 .",
+          "2 .",
+          "2009 .",
+          "2010 .",
+          "Available :",
+          "BBC News .",
+          "The Economist .",
+          "United Nations .",
+          "Web ."
+        ]
+      },
+      {
+        "name": "_claim",
+        "value": [
+          "Custodial sentences make recidivism more likely",
+          "Flogging harms offenders less than imprisonment",
+          "Homework puts students off learning",
+          "Prison reform is politically unachievable",
+          "higher wages boost economic growth",
+          "killers must die to satisfy society",
+          "performers are at risk of exploitation",
+          "the minimum wage aids in the propagation of social justice and the fair treatment of workers",
+          "the minimum wage encourages people to join the workforce rather than pursuing income through illegal channels",
+          "the minimum wage provides a baseline minimum allowing people to embark freely in the pursuit of happiness"
+        ]
+      },
+      {
+        "name": "_claim_id",
+        "value": [
+          "73781_0",
+          "73781_1",
+          "73781_2",
+          "73781_3",
+          "74284_0",
+          "74284_1",
+          "74284_2",
+          "74973_3",
+          "75833_1",
+          "75833_2"
+        ]
+      },
+      {
+        "name": "_debate_name",
+        "value": [
+          "This House believes atheism is the only way",
+          "This House believes the European Union should adopt a single working language through which to operate.",
+          "This House calls for the increased use of referendums.",
+          "This House would ban child performers",
+          "This House would ban gambling",
+          "This House would ban homework",
+          "This House would ban professional cheerleading",
+          "This House would make lessons in a foreign language compulsory for school pupils",
+          "This House would remove United States military bases from Japan",
+          "This house supports home schooling"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "3306962",
+      "shardLengths": [
+        "2259"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "_argument_sentences/key"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 9.105594,
+              "commonStats": {
+                "avgNumValues": 7.6843734,
+                "maxNumValues": "42",
+                "minNumValues": "1",
+                "numNonMissing": "2259",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 5.0,
+                      "lowValue": 4.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 5.0,
+                      "lowValue": 5.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 6.0,
+                      "lowValue": 5.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 7.0,
+                      "lowValue": 6.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 8.0,
+                      "lowValue": 7.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 8.0,
+                      "lowValue": 8.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 10.0,
+                      "lowValue": 8.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 13.0,
+                      "lowValue": 10.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 42.0,
+                      "lowValue": 13.0,
+                      "sampleCount": 225.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "17359"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "75833_2_5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "75833_2_4",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "75833_2_3",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "75833_2_2",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "75833_2_1",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "75833_2_0",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "75833_1_5",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "75833_1_4",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "75833_1_3",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "75833_1_2",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2_5"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2_4"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2_3"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2_2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2_1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2_0"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_1_5"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_1_4"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_1_3"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_1_2"
+                }
+              ],
+              "unique": "17359"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_argument_sentences/value"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 141.56789,
+              "commonStats": {
+                "avgNumValues": 7.6843734,
+                "maxNumValues": "42",
+                "minNumValues": "1",
+                "numNonMissing": "2259",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 5.0,
+                      "lowValue": 4.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 5.0,
+                      "lowValue": 5.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 6.0,
+                      "lowValue": 5.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 7.0,
+                      "lowValue": 6.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 8.0,
+                      "lowValue": 7.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 8.0,
+                      "lowValue": 8.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 10.0,
+                      "lowValue": 8.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 13.0,
+                      "lowValue": 10.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 42.0,
+                      "lowValue": 13.0,
+                      "sampleCount": 225.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "17359"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "1 .",
+                    "sampleCount": 32.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "BBC News .",
+                    "lowRank": "1",
+                    "sampleCount": 13.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Web .",
+                    "lowRank": "2",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2 .",
+                    "lowRank": "3",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "United Nations .",
+                    "lowRank": "4",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2010 .",
+                    "lowRank": "5",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2009 .",
+                    "lowRank": "6",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "1997 .",
+                    "lowRank": "7",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "The Economist .",
+                    "lowRank": "8",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Available :",
+                    "lowRank": "9",
+                    "sampleCount": 5.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 32.0,
+                  "value": "1 ."
+                },
+                {
+                  "frequency": 13.0,
+                  "value": "BBC News ."
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "Web ."
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "2 ."
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "United Nations ."
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2010 ."
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2009 ."
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "1997 ."
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "The Economist ."
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "Available :"
+                }
+              ],
+              "unique": "16945"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_claim"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 70.905266,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2259",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2259"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Prison reform is politically unachievable",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Homework puts students off learning",
+                    "lowRank": "1",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Flogging harms offenders less than imprisonment",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Custodial sentences make recidivism more likely",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "the minimum wage provides a baseline minimum allowing people to embark freely in the pursuit of happiness",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "the minimum wage encourages people to join the workforce rather than pursuing income through illegal channels",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "the minimum wage aids in the propagation of social justice and the fair treatment of workers",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "performers are at risk of exploitation",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "killers must die to satisfy society",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "higher wages boost economic growth",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 2.0,
+                  "value": "Prison reform is politically unachievable"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Homework puts students off learning"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Flogging harms offenders less than imprisonment"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Custodial sentences make recidivism more likely"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "the minimum wage provides a baseline minimum allowing people to embark freely in the pursuit of happiness"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "the minimum wage encourages people to join the workforce rather than pursuing income through illegal channels"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "the minimum wage aids in the propagation of social justice and the fair treatment of workers"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "performers are at risk of exploitation"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "killers must die to satisfy society"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "higher wages boost economic growth"
+                }
+              ],
+              "unique": "2255"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_claim_id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 7.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2259",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2259"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "75833_2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "75833_1",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "74973_3",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "74284_2",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "74284_1",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "74284_0",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "73781_3",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "73781_2",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "73781_1",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "73781_0",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "75833_2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "75833_1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "74973_3"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "74284_2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "74284_1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "74284_0"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "73781_3"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "73781_2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "73781_1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "73781_0"
+                }
+              ],
+              "unique": "2259"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "_debate_name"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 65.31607,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2259",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 225.9
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2259"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "This House believes atheism is the only way",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "This house supports home schooling",
+                    "lowRank": "1",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "This House would remove United States military bases from Japan",
+                    "lowRank": "2",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "This House would make lessons in a foreign language compulsory for school pupils",
+                    "lowRank": "3",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "This House would ban professional cheerleading",
+                    "lowRank": "4",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "This House would ban homework",
+                    "lowRank": "5",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "This House would ban gambling",
+                    "lowRank": "6",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "This House would ban child performers",
+                    "lowRank": "7",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "This House calls for the increased use of referendums.",
+                    "lowRank": "8",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "This House believes the European Union should adopt a single working language through which to operate.",
+                    "lowRank": "9",
+                    "sampleCount": 6.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 7.0,
+                  "value": "This House believes atheism is the only way"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This house supports home schooling"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House would remove United States military bases from Japan"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House would make lessons in a foreign language compulsory for school pupils"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House would ban professional cheerleading"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House would ban homework"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House would ban gambling"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House would ban child performers"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House calls for the increased use of referendums."
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "This House believes the European Union should adopt a single working language through which to operate."
+                }
+              ],
+              "unique": "667"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "2259"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "_argument_sentences",
+    "output": "_claim"
+  },
+  "version": "1.0.0"
+}
