@@ -50,6 +50,7 @@ from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wikipedia import Wikipedia
+from tensorflow_datasets.text.wikipedia_toxicity_subtypes import WikipediaToxicitySubtypes
 from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.xnli import Xnli
