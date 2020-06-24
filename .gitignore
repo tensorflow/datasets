@@ -16,8 +16,14 @@ dist/
 # Tests
 .pytest_cache/
 
+# Type checking
+.pytype/
+
 # Other
 *.DS_Store
 
 # PyCharm
 .idea
+
+# Visual Studio Code
+.vscode
