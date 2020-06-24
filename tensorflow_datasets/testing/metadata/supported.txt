@@ -556,6 +556,7 @@ imdb_reviews/bytes/1.0.0
 imdb_reviews/plain_text/1.0.0
 imdb_reviews/subwords32k/1.0.0
 imdb_reviews/subwords8k/1.0.0
+irc_disentanglement/2.0.0
 iris/2.0.0
 kitti/3.2.0
 kmnist/3.0.1
