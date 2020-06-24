@@ -49,10 +49,12 @@ from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
+from tensorflow_datasets.core.utils.benchmark import benchmark
 
 
 __all__ = [
     "add_data_dir",
+    "benchmark",
     "BeamBasedBuilder",
     "BeamMetadataDict",
     "BuilderConfig",
