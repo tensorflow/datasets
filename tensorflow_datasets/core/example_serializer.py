@@ -180,7 +180,7 @@ def _add_ragged_fields(example_data, tensor_info):
   tensor_info = TensorInfo(shape=(None, None,), sequence_rank=2, ...)
   out = _add_ragged_fields(example_data, tensor_info)
   out == {
-      'ragged_flat_values': ([0, 1, 2, 3, 4, 5], TensorInfo(shape=(), ...)),
+      'ragged_flat_values': ([1, 2, 3, 4, 5], TensorInfo(shape=(), ...)),
       'ragged_row_length_0': ([3, 0, 2], TensorInfo(shape=(None,), ...))
   }
   ```
