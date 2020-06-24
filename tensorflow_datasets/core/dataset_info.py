@@ -427,7 +427,7 @@ class DatasetInfo(object):
                  "from GCS: %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      gcs_utils.download_gcs_file(fname, out_fname)
+      tf.io.gfile.copy(gcs_utils.gcs_path(fname), out_fname)
     self.read_from_directory(tmp_dir)
 
   def __repr__(self):
