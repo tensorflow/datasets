@@ -64,172 +64,172 @@ _KAGGLE_TYPES = {
 
 
 def _get_kaggle_type(competition_name):
-    """
-    Returns the kaggle type (competition/dataset).
+  """
+  Returns the kaggle type (competition/dataset).
 
-    Args:
-        competition_name: Name of the competition/dataset.
+  Args:
+      competition_name: Name of the competition/dataset.
 
-    Returns:
-        Kaggle type (competition/dataset).
-    """
-    if "/" in competition_name:
-        return _KAGGLE_TYPES["dataset"]
-    return _KAGGLE_TYPES["competition"]
+  Returns:
+      Kaggle type (competition/dataset).
+  """
+  if "/" in competition_name:
+    return _KAGGLE_TYPES["dataset"]
+  return _KAGGLE_TYPES["competition"]
 
 
 class KaggleFile:
+  """
+  Represents a Kaggle competition file.
+  """
+  _URL_PREFIX = "kaggle.com"
+
+  def __init__(self, competition_name):
+    self._competition_name = competition_name
+    self.type = _get_kaggle_type(competition_name)
+
+  @property
+  def competition(self):
     """
-    Represents a Kaggle competition file.
+    Returns the name of the competition/dataset.
+
+    Returns:
+        Name of the competition/dataset.
     """
-    _URL_PREFIX = "kaggle.com"
+    return self._competition_name
 
-    def __init__(self, competition_name):
-        self._competition_name = competition_name
-        self.type = _get_kaggle_type(competition_name)
+  @classmethod
+  def from_url(cls, url):
+    """
+    Returns the name of the competition/dataset from the url.
 
-    @property
-    def competition(self):
-        """
-        Returns the name of the competition/dataset.
+    Args:
+        url: Kaggle competition/dataset url.
 
-        Returns:
-            Name of the competition/dataset.
-        """
-        return self._competition_name
+    Returns:
+        Name of the competition/dataset.
 
-    @classmethod
-    def from_url(cls, url):
-        """
-        Returns the name of the competition/dataset from the url.
+    Raises:
+        TypeError: If the given url is not a kaggle url.
+    """
+    if not KaggleFile.is_kaggle_url(url):
+      raise TypeError("Not a valid kaggle URL")
+    kaggle_url = url[len(cls._URL_PREFIX)+1:]
+    competition_name, filename = (kaggle_url.split("/", 2))
+    download_type = _get_kaggle_type(kaggle_url).prefix
+    if download_type == "dataset":
+      dataset_name = filename
+      competition_name = "%s/%s" % (competition_name, dataset_name)
+    return cls(competition_name)
 
-        Args:
-            url: Kaggle competition/dataset url.
+  @staticmethod
+  def is_kaggle_url(url):
+    """
+    Returns a boolean value on whether or not the given url is a kaggle url.
 
-        Returns:
-            Name of the competition/dataset.
+    Args:
+        url: The kaggle competition/dataset url.
 
-        Raises:
-            TypeError: If the given url is not a kaggle url.
-        """
-        if not KaggleFile.is_kaggle_url(url):
-            raise TypeError("Not a valid kaggle URL")
-        kaggle_url = url[len(cls._URL_PREFIX)+1:]
-        competition_name, filename = (kaggle_url.split("/", 2))
-        download_type = _get_kaggle_type(kaggle_url).prefix
-        if download_type == "dataset":
-            dataset_name = filename
-            competition_name = "%s/%s" % (competition_name, dataset_name)
-        return cls(competition_name)
+    Returns:
+        The boolean value.
+    """
+    return url.startswith(KaggleFile._URL_PREFIX)
 
-    @staticmethod
-    def is_kaggle_url(url):
-        """
-        Returns a boolean value on whether or not the given url is a kaggle url.
+  def to_url(self):
+    """
+    Returns the url of the kaggle competition/dataset.
 
-        Args:
-            url: The kaggle competition/dataset url.
-
-        Returns:
-            The boolean value.
-        """
-        return url.startswith(KaggleFile._URL_PREFIX)
-
-    def to_url(self):
-        """
-        Returns the url of the kaggle competition/dataset.
-
-        Returns:
-            The kaggle competition/dataset url.
-        """
-        return "%s/%s" % (self._URL_PREFIX, self._competition_name)
+    Returns:
+        The kaggle competition/dataset url.
+    """
+    return "%s/%s" % (self._URL_PREFIX, self._competition_name)
 
 
 class KaggleCompetitionDownloader:
+  """
+  Downloader for a Kaggle competition.
+
+  Usage:
+  You can download with dataset or competition name like `zillow/zecon`
+  or `titanic`.
+
+  ```
+  downloader = KaggleCompetitionDownloader(competition_name)
+  for fname in downloader.competition_files:
+  downloader.download_file(fname, make_file_output_path(fname))
+  ```
+  """
+  def __init__(self, competition_name):
+    self._competition_name = competition_name
+    self._kaggle_type = _get_kaggle_type(self._competition_name)
+
+  @utils.memoized_property
+  def competition_urls(self):
     """
-    Downloader for a Kaggle competition.
+    Returns 'kaggle.com' urls.
 
-    Usage:
-    You can download with dataset or competition name like `zillow/zecon`
-    or `titanic`.
-
-    ```
-    downloader = KaggleCompetitionDownloader(competition_name)
-    for fname in downloader.competition_files:
-    downloader.download_file(fname, make_file_output_path(fname))
-    ```
+    Returns:
+        The url.
     """
-    def __init__(self, competition_name):
-        self._competition_name = competition_name
-        self._kaggle_type = _get_kaggle_type(self._competition_name)
+    return [KaggleFile(self._competition_name).to_url()]
 
-    @utils.memoized_property
-    def competition_urls(self):
-        """
-        Returns 'kaggle.com' urls.
+  def download_file(self, fname, output_dir):
+    """
+    Downloads competition file to output_dir.
 
-        Returns:
-            The url.
-        """
-        return [KaggleFile(self._competition_name).to_url()]
+    Args:
+        fname: Name of the file to be downloaded.
+        output_dir: Path where the file is to be downloaded.
 
-    def download_file(self, fname, output_dir):
-        """
-        Downloads competition file to output_dir.
-
-        Args:
-            fname: Name of the file to be downloaded.
-            output_dir: Path where the file is to be downloaded.
-
-        Returns:
-            Path to dir where the file was downloaded.
-        """
-        command = ["kaggle", self._kaggle_type.download_cmd, "download",
-                   self._kaggle_type.dl_flag, fname,
-                   "-p", output_dir]
-        _run_kaggle_command(command, self._competition_name)
-        fpath = os.path.join(output_dir, fname + ".zip")
-        if zipfile.is_zipfile(fpath):
-            ext = extractor.get_extractor()
-            with ext.tqdm():
-                ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
-        return output_dir
+    Returns:
+        Path to dir where the file was downloaded.
+    """
+    command = ["kaggle", self._kaggle_type.download_cmd, "download",
+               self._kaggle_type.dl_flag, fname,
+               "-p", output_dir]
+    _run_kaggle_command(command, self._competition_name)
+    fpath = os.path.join(output_dir, fname + ".zip")
+    if zipfile.is_zipfile(fpath):
+      ext = extractor.get_extractor()
+      with ext.tqdm():
+        ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
+    return output_dir
 
 
 def _run_kaggle_command(command_args, competition_name):
-    """
-    Run kaggle command with subprocess.
+  """
+  Run kaggle command with subprocess.
 
-    Args:
-        command_args: Arguments to the kaggle api.
-        competition_name: Name of the kaggle competition/dataset.
+  Args:
+      command_args: Arguments to the kaggle api.
+      competition_name: Name of the kaggle competition/dataset.
 
-    Returns:
-        output of the command.
+  Returns:
+      output of the command.
 
-    Raises:
-        CalledProcessError: If the command terminates with exit status 1.
-    """
-    try:
-        output = sp.check_output(command_args)
-        return tf.compat.as_text(output)
-    except sp.CalledProcessError as err:
-        output = err.output
-        _log_command_output(output, error=True)
-        if output.startswith(b"404"):
-            logging.error(_NOT_FOUND_ERR_MSG, competition_name)
-            raise
-        logging.error(_ERR_MSG, competition_name)
-        raise
+  Raises:
+      CalledProcessError: If the command terminates with exit status 1.
+  """
+  try:
+    output = sp.check_output(command_args)
+    return tf.compat.as_text(output)
+  except sp.CalledProcessError as err:
+    output = err.output
+    _log_command_output(output, error=True)
+    if output.startswith(b"404"):
+      logging.error(_NOT_FOUND_ERR_MSG, competition_name)
+      raise
+    logging.error(_ERR_MSG, competition_name)
+    raise
 
 
 def _log_command_output(output, error=False):
-    """
-    Logs the command output.
+  """
+  Logs the command output.
 
-    Args:
-        output: The output to be logged.
-        error: The errors to be logged (if any).
-    """
-    log = logging.error if error else logging.info
-    log("kaggle command output:\n%s", tf.compat.as_text(output))
+  Args:
+      output: The output to be logged.
+      error: The errors to be logged (if any).
+  """
+  log = logging.error if error else logging.info
+  log("kaggle command output:\n%s", tf.compat.as_text(output))
