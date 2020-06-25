@@ -122,7 +122,7 @@ class KaggleCompetitionDownloader(object):
   @utils.memoized_property
   def competition_urls(self):
     """Returns 'kaggle://' urls."""
-    return [KaggleFile(self._competition_name).to_url()]
+    return KaggleFile(self._competition_name).to_url()
 
   def download_file(self, fname, output_dir):
     """Downloads competition file to output_dir."""
