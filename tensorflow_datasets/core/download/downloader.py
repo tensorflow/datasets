@@ -30,8 +30,9 @@ import re
 from typing import Any, ContextManager, Iterable, Iterator, Tuple, Union
 import promise
 import requests
+
 from six.moves import urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
@@ -46,23 +47,10 @@ Response = Union[requests.Response, urllib.response.addinfourl]
 
 @utils.memoize()
 def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
-  """Returns the _Downloader object.
-
-  Returns:
-    _Downloader object.
-  """
   return _Downloader(*args, **kwargs)
 
 
 def _get_filename(response: Response) -> str:
-  """Returns the file name given the response:
-
-  Args:
-    response: The HTTP request response.
-
-  Returns:
-    The file name.
-  """
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
     match = re.findall('filename="(.+?)"', content_disposition)
@@ -72,11 +60,10 @@ def _get_filename(response: Response) -> str:
 
 
 class DownloadError(Exception):
-  """Exception class for download errors."""
   pass
 
 
-class _Downloader:
+class _Downloader(object):
   """Class providing async download API with checksum validation.
 
   Do not instantiate this class directly. Instead, call `get_downloader()`.
@@ -98,14 +85,6 @@ class _Downloader:
   @utils.memoize()
   def kaggle_downloader(
       self, competition_name: str) -> kaggle.KaggleCompetitionDownloader:
-    """Returns the kaggle downloader object.
-
-    Args:
-      competition_name: The kaggle competition/dataset name.
-
-    Returns:
-      The kaggle downloader object.
-    """
     return kaggle.KaggleCompetitionDownloader(competition_name)
 
   @contextlib.contextmanager
@@ -135,16 +114,11 @@ class _Downloader:
     return promise.Promise.resolve(future)
 
   def _sync_kaggle_download(self, kaggle_url, destination_path):
-    """Download with Kaggle API.
-
-    Args:
-      kaggle_url: The kaggle competition/dataset url to download.
-      destination_path: The path where the data is to be downloaded to.
-    """
+    """Download with Kaggle API."""
     kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
     downloader = self.kaggle_downloader(kaggle_file.competition)
     filepath = downloader.download_file(
-        kaggle_file.competition, destination_path)
+      kaggle_file.competition, destination_path)
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer_cls()
     file = tf.io.gfile.listdir(filepath)[0]
@@ -156,20 +130,11 @@ class _Downloader:
         checksum.update(block)
     return checksums_lib.UrlInfo(
         checksum=checksum.hexdigest(),
-        size=dl_size
+        size=dl_size,
     )
 
   def _sync_file_copy(
       self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
-    """Copy files from source to destination.
-
-    Args:
-      filepath: The source path.
-      destination_path: The destination path.
-
-    Returns:
-      Url checksum.
-    """
     out_path = os.path.join(destination_path, os.path.basename(filepath))
     tf.io.gfile.copy(filepath, out_path)
     hexdigest, size = utils.read_checksum_digest(
@@ -181,7 +146,7 @@ class _Downloader:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
-    `REQUESTS_CA_BUNDLE`,... environment variables can be exported, as
+    `REQUESTS_CA_BUNDLE`,... environement variables can be exported, as
     described in:
     https://requests.readthedocs.io/en/master/user/advanced/#proxies
 
@@ -253,14 +218,6 @@ def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
 
 @contextlib.contextmanager
 def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
-  """Open url using the requests package.
-
-  Args:
-    url: The url to be opened.
-
-  Returns:
-    Iterator[Tuple[Response, Iterable[bytes]]]
-  """
   with requests.Session() as session:
     if _DRIVE_URL.match(url):
       url = _get_drive_url(url, session)
@@ -271,15 +228,7 @@ def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
 
 @contextlib.contextmanager
 def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
-  """Open url using the urllib package.
-
-  Args:
-    url: The url to be opened.
-
-  Returns:
-    Iterator[Tuple[Response, Iterable[bytes]]]
-  """
-  with urllib.request.urlopen(url) as response:
+  with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
     yield (
         response,
         iter(functools.partial(response.read, io.DEFAULT_BUFFER_SIZE), b''),
@@ -287,33 +236,18 @@ def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
 
 
 def _get_drive_url(url: str, session: requests.Session) -> str:
-  """Returns url, possibly with confirmation token.
-
-  Args:
-    url: The url.
-    session: The requests Session object.
-
-  Returns:
-    The url.
-  """
+  """Returns url, possibly with confirmation token."""
   with session.get(url, stream=True) as response:
     _assert_status(response)
-    for key, val in response.cookies.items():
-      if key.startswith('download_warning'):
-        return url + '&confirm=' + val  # val is the confirm token
+    for k, v in response.cookies.items():
+      if k.startswith('download_warning'):
+        return url + '&confirm=' + v  # v is the confirm token
   # No token found, let's try with original URL:
   return url
 
 
 def _assert_status(response: requests.Response) -> None:
-  """Ensure the URL response is 200.
-
-  Args:
-    response: The requests Response object.
-
-  Raises:
-    DownloadError: If the response code is not 200.
-  """
+  """Ensure the URL response is 200."""
   if response.status_code != 200:
     raise DownloadError('Failed to get url {}. HTTP code: {}.'.format(
         response.url, response.status_code))
