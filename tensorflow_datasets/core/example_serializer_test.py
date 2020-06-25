@@ -201,6 +201,23 @@ class ExampleSerializerTest(testing.SubTestCase):
     ])
     self.assertEqual(out[1], tensor_info)
 
+  def test_item_to_tf_feature_incorrect_shape(self):
+    # Test shape check in _item_to_tf_feature raises ValueError.
+    example_item = [1, 2, 3, 4, 5]
+    tensor_info = feature_lib.TensorInfo(shape=(4,), dtype=tf.int64)
+    with self.assertRaises(ValueError):
+      example_serializer._item_to_tf_feature(example_item, tensor_info)
+
+  def test_item_to_tf_feature_string_check(self):
+    # Test string check in _item_to_tf_feature raises ValueError.
+    example_item = [1, 2, 3, 4, 5]
+    tensor_info = feature_lib.TensorInfo(shape=(5,), dtype=tf.string)
+    with self.assertRaisesRegex(
+        ValueError,
+        'Unsupported value: (.*)\nCould not convert to bytes list.',
+    ):
+      example_serializer._item_to_tf_feature(example_item, tensor_info)
+
 
 if __name__ == '__main__':
   testing.test_main()
