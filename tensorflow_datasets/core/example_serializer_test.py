@@ -218,6 +218,24 @@ class ExampleSerializerTest(testing.SubTestCase):
     ):
       example_serializer._item_to_tf_feature(example_item, tensor_info)
 
+  def test_dict_to_tf_example_error_reraise(self):
+    # Test error reraise in _dict_to_tf_example
+    example_data = {'input': [1, 2, 3]}
+    tensor_info = {
+        'input': feature_lib.TensorInfo(
+            shape=(2,),
+            dtype=tf.int64,
+        ),
+    }
+    with self.assertRaisesRegex(
+        ValueError,
+        (
+            'Error while serializing feature `input`:'
+            ' `TensorInfo\(shape=\(2,\), dtype=tf.int64\)`:(.*)'
+        ),
+    ):
+      example_serializer._dict_to_tf_example(example_data, tensor_info)
+
 
 if __name__ == '__main__':
   testing.test_main()
