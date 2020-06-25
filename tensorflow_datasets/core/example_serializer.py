@@ -69,10 +69,12 @@ def _dict_to_tf_example(example_dict, tensor_info_dict):
     example_proto: `tf.train.Example`, the encoded example proto.
   """
   def run_with_reraise(fn, k, example_data, tensor_info):
-    try:
-      return fn(example_data, tensor_info)
-    except Exception:
-      utils.reraise("Error while serializing feature `{}`: `{}`: ".format(k, tensor_info))
+     try:
+       return fn(example_data, tensor_info)
+     except Exception:
+       utils.reraise(
+           'Error while serializing feature `{}`: `{}`: '.format(k, tensor_info)
+       )
 
   if tensor_info_dict:
     # Add the RaggedTensor fields for the nested sequences
