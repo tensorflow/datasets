@@ -78,7 +78,9 @@ class DownloadError(Exception):
 
 class _Downloader:
   """Class providing async download API with checksum validation.
-  Do not instantiate this class directly. Instead, call `get_downloader()`."""
+
+  Do not instantiate this class directly. Instead, call `get_downloader()`.
+  """
 
   def __init__(self, max_simultaneous_downloads: int = 50, checksumer=None):
     """Init _Downloader instance.
@@ -118,20 +120,18 @@ class _Downloader:
 
   def download(self, url: str, destination_path: str):
     """Download url to given path.
+
     Returns Promise -> sha256 of downloaded file.
 
     Args:
       url: address of resource to download.
-      destination_path: `str`, path to directory where
-                        to download the resource.
+      destination_path: `str`, path to directory where to download the resource.
 
     Returns:
-      Promise obj -> (`str`, int): (downloaded object
-                                   checksum, size in bytes).
+      Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     self._pbar_url.update_total(1)
-    future = self._executor.submit(
-        self._sync_download, url, destination_path)
+    future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
   def _sync_kaggle_download(self, kaggle_url, destination_path):
@@ -156,11 +156,11 @@ class _Downloader:
         checksum.update(block)
     return checksums_lib.UrlInfo(
         checksum=checksum.hexdigest(),
-        size=dl_size)
+        size=dl_size
+    )
 
   def _sync_file_copy(
-      self, filepath: str,
-      destination_path: str) -> checksums_lib.UrlInfo:
+      self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
     """Copy files from source to destination.
 
     Args:
@@ -280,8 +280,10 @@ def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
     Iterator[Tuple[Response, Iterable[bytes]]]
   """
   with urllib.request.urlopen(url) as response:
-    yield (response,
-           iter(functools.partial(response.read, io.DEFAULT_BUFFER_SIZE), b''))
+    yield (
+        response,
+        iter(functools.partial(response.read, io.DEFAULT_BUFFER_SIZE), b''),
+    )
 
 
 def _get_drive_url(url: str, session: requests.Session) -> str:

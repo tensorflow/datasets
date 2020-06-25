@@ -52,14 +52,14 @@ KaggleType = collections.namedtuple(
     ["prefix", "download_cmd", "dl_flag"])
 
 _KAGGLE_TYPES = {
-    "competition": KaggleType(
-        prefix="competition",
-        download_cmd="competitions",
-        dl_flag="-c"),
     "dataset": KaggleType(
         prefix="dataset",
         download_cmd="datasets",
-        dl_flag="-d")
+        dl_flag="-d",),
+    "competition": KaggleType(
+        prefix="competition",
+        download_cmd="competitions",
+        dl_flag="-c",)
 }
 
 
@@ -148,9 +148,10 @@ class KaggleCompetitionDownloader:
   ```
   downloader = KaggleCompetitionDownloader(competition_name)
   for fname in downloader.competition_files:
-  downloader.download_file(fname, make_file_output_path(fname))
+    downloader.download_file(fname, make_file_output_path(fname))
   ```
   """
+
   def __init__(self, competition_name):
     self._competition_name = competition_name
     self._kaggle_type = _get_kaggle_type(self._competition_name)
@@ -174,9 +175,13 @@ class KaggleCompetitionDownloader:
     Returns:
       Path to dir where the file was downloaded.
     """
-    command = ["kaggle", self._kaggle_type.download_cmd, "download",
-               self._kaggle_type.dl_flag, fname,
-               "-p", output_dir]
+    command = ["kaggle",
+               self._kaggle_type.download_cmd,
+               "download",
+               self._kaggle_type.dl_flag,
+               fname,
+               "-p",
+               output_dir]
     _run_kaggle_command(command, self._competition_name)
     fpath = os.path.join(output_dir, fname + ".zip")
     if zipfile.is_zipfile(fpath):
