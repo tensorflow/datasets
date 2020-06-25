@@ -64,14 +64,13 @@ _KAGGLE_TYPES = {
 
 
 def _get_kaggle_type(competition_name):
-  """
-  Returns the kaggle type (competition/dataset).
+  """Returns the kaggle type (competition/dataset).
 
   Args:
-      competition_name: Name of the competition/dataset.
+    competition_name: Name of the competition/dataset.
 
   Returns:
-      Kaggle type (competition/dataset).
+    Kaggle type (competition/dataset).
   """
   if "/" in competition_name:
     return _KAGGLE_TYPES["dataset"]
@@ -79,9 +78,7 @@ def _get_kaggle_type(competition_name):
 
 
 class KaggleFile:
-  """
-  Represents a Kaggle competition file.
-  """
+  """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle.com"
 
   def __init__(self, competition_name):
@@ -90,27 +87,25 @@ class KaggleFile:
 
   @property
   def competition(self):
-    """
-    Returns the name of the competition/dataset.
+    """Returns the name of the competition/dataset.
 
     Returns:
-        Name of the competition/dataset.
+      Name of the competition/dataset.
     """
     return self._competition_name
 
   @classmethod
   def from_url(cls, url):
-    """
-    Returns the name of the competition/dataset from the url.
+    """Returns the name of the competition/dataset from the url.
 
     Args:
-        url: Kaggle competition/dataset url.
+      url: Kaggle competition/dataset url.
 
     Returns:
-        Name of the competition/dataset.
+      Name of the competition/dataset.
 
     Raises:
-        TypeError: If the given url is not a kaggle url.
+      TypeError: If the given url is not a kaggle url.
     """
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
@@ -124,30 +119,27 @@ class KaggleFile:
 
   @staticmethod
   def is_kaggle_url(url):
-    """
-    Returns a boolean value on whether or not the given url is a kaggle url.
+    """Returns a boolean value on whether or not the given url is a kaggle url.
 
     Args:
-        url: The kaggle competition/dataset url.
+      url: The kaggle competition/dataset url.
 
     Returns:
-        The boolean value.
+      The boolean value.
     """
     return url.startswith(KaggleFile._URL_PREFIX)
 
   def to_url(self):
-    """
-    Returns the url of the kaggle competition/dataset.
+    """Returns the url of the kaggle competition/dataset.
 
     Returns:
-        The kaggle competition/dataset url.
+      The kaggle competition/dataset url.
     """
     return "%s/%s" % (self._URL_PREFIX, self._competition_name)
 
 
 class KaggleCompetitionDownloader:
-  """
-  Downloader for a Kaggle competition.
+  """Downloader for a Kaggle competition.
 
   Usage:
   You can download with dataset or competition name like `zillow/zecon`
@@ -165,24 +157,22 @@ class KaggleCompetitionDownloader:
 
   @utils.memoized_property
   def competition_urls(self):
-    """
-    Returns 'kaggle.com' urls.
+    """Returns 'kaggle.com' urls.
 
     Returns:
-        The url.
+      The url.
     """
     return [KaggleFile(self._competition_name).to_url()]
 
   def download_file(self, fname, output_dir):
-    """
-    Downloads competition file to output_dir.
+    """Downloads competition file to output_dir.
 
     Args:
-        fname: Name of the file to be downloaded.
-        output_dir: Path where the file is to be downloaded.
+      fname: Name of the file to be downloaded.
+      output_dir: Path where the file is to be downloaded.
 
     Returns:
-        Path to dir where the file was downloaded.
+      Path to dir where the file was downloaded.
     """
     command = ["kaggle", self._kaggle_type.download_cmd, "download",
                self._kaggle_type.dl_flag, fname,
@@ -197,18 +187,17 @@ class KaggleCompetitionDownloader:
 
 
 def _run_kaggle_command(command_args, competition_name):
-  """
-  Run kaggle command with subprocess.
+  """Run kaggle command with subprocess.
 
   Args:
-      command_args: Arguments to the kaggle api.
-      competition_name: Name of the kaggle competition/dataset.
+    command_args: Arguments to the kaggle api.
+    competition_name: Name of the kaggle competition/dataset.
 
   Returns:
-      output of the command.
+    output of the command.
 
   Raises:
-      CalledProcessError: If the command terminates with exit status 1.
+    CalledProcessError: If the command terminates with exit status 1.
   """
   try:
     output = sp.check_output(command_args)
@@ -224,12 +213,11 @@ def _run_kaggle_command(command_args, competition_name):
 
 
 def _log_command_output(output, error=False):
-  """
-  Logs the command output.
+  """Logs the command output.
 
   Args:
-      output: The output to be logged.
-      error: The errors to be logged (if any).
+    output: The output to be logged.
+    error: The errors to be logged (if any).
   """
   log = logging.error if error else logging.info
   log("kaggle command output:\n%s", tf.compat.as_text(output))

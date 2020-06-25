@@ -66,8 +66,7 @@ class NonMatchingChecksumError(Exception):
 
 
 class DownloadConfig:
-  """
-  Configuration for `tfds.core.DatasetBuilder.download_and_prepare`.
+  """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`.
   """
 
   def __init__(
@@ -83,34 +82,33 @@ class DownloadConfig:
       beam_options=None,
       try_download_gcs=True,
   ):
-    """
-    Constructs a `DownloadConfig`.
+    """Constructs a `DownloadConfig`.
 
     Args:
-        extract_dir: `str`, directory where extracted files are stored.
-                     Defaults to "<download_dir>/extracted".
-        manual_dir: `str`, read-only directory where manually
-                    downloaded/extracted data is stored.
-                    Defaults to `<download_dir>/manual`.
-        download_mode: `tfds.GenerateMode`, how to deal with downloads or data
-                        that already exists. Defaults to
-                        `REUSE_DATASET_IF_EXISTS`, which will reuse both
-                        downloads and data if it already exists.
-        compute_stats: `tfds.download.ComputeStats`, whether to compute
-                        statistics over the generated data. Defaults to `AUTO`.
-        max_examples_per_split: `int`, optional max number of examples to write
-                                into each split (used for testing).
-        register_checksums: `bool`, defaults to False. If True, checksum
-                            of downloaded files are recorded.
-        force_checksums_validation: `bool`, defaults to False. If True, raises
-                                    an error if an URL do not have checksums.
-        beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
-                     based on Beam for the generation.
-        beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used
-                      for datasets based on Beam for the generation.
-        try_download_gcs: `bool`, defaults to True. If True, prepared dataset
-                          will be downloaded from GCS, when available. If False,
-                          dataset will be downloaded and prepared from scratch.
+      extract_dir: `str`, directory where extracted files are stored.
+                   Defaults to "<download_dir>/extracted".
+      manual_dir: `str`, read-only directory where manually
+                  downloaded/extracted data is stored.
+                  Defaults to `<download_dir>/manual`.
+      download_mode: `tfds.GenerateMode`, how to deal with downloads or data
+                      that already exists. Defaults to
+                      `REUSE_DATASET_IF_EXISTS`, which will reuse both
+                      downloads and data if it already exists.
+      compute_stats: `tfds.download.ComputeStats`, whether to compute
+                      statistics over the generated data. Defaults to `AUTO`.
+      max_examples_per_split: `int`, optional max number of examples to write
+                              into each split (used for testing).
+      register_checksums: `bool`, defaults to False. If True, checksum
+                          of downloaded files are recorded.
+      force_checksums_validation: `bool`, defaults to False. If True, raises
+                                  an error if an URL do not have checksums.
+      beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
+                   based on Beam for the generation.
+      beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used
+                    for datasets based on Beam for the generation.
+      try_download_gcs: `bool`, defaults to True. If True, prepared dataset
+                        will be downloaded from GCS, when available. If False,
+                        dataset will be downloaded and prepared from scratch.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -127,8 +125,7 @@ class DownloadConfig:
 
 
 class DownloadManager:
-  """
-  Manages the download and extraction of files, as well as caching.
+  """Manages the download and extraction of files, as well as caching.
 
   Downloaded files are cached under `download_dir`. The file name of downloaded
    files follows pattern "{sanitized_url}{content_checksum}.{ext}". Eg:
@@ -188,24 +185,23 @@ class DownloadManager:
       force_checksums_validation: bool = False,
       register_checksums: bool = False,
   ):
-    """
-    Download manager constructor.
+    """Download manager constructor.
 
     Args:
-        download_dir: Path to directory where downloads are stored.
-        extract_dir: Path to directory where artifacts are extracted.
-        manual_dir: Path to manually downloaded/extracted data directory.
-        manual_dir_instructions: Human readable instructions on how to prepare
-                                 contents of the manual_dir for this dataset.
-        dataset_name: Name of dataset this instance will be used
-                      for. If provided, downloads will contain
-                      which datasets they were used for.
-        force_download: If True, always [re]download.
-        force_extraction: If True, always [re]extract.
-        force_checksums_validation: If True, raises an error if an
-                                    URL do not have checksums.
-        register_checksums: If True, dl checksums aren't
-                            checked, but stored into file.
+      download_dir: Path to directory where downloads are stored.
+      extract_dir: Path to directory where artifacts are extracted.
+      manual_dir: Path to manually downloaded/extracted data directory.
+      manual_dir_instructions: Human readable instructions on how to prepare
+                               contents of the manual_dir for this dataset.
+      dataset_name: Name of dataset this instance will be used
+                    for. If provided, downloads will contain
+                    which datasets they were used for.
+      force_download: If True, always [re]download.
+      force_extraction: If True, always [re]extract.
+      force_checksums_validation: If True, raises an error if an
+                                  URL do not have checksums.
+      register_checksums: If True, dl checksums aren't
+                          checked, but stored into file.
     """
     self._dataset_name = dataset_name
     self._download_dir = os.path.expanduser(download_dir)
@@ -236,15 +232,14 @@ class DownloadManager:
     self._executor = concurrent.futures.ThreadPoolExecutor(1)
 
   def __getstate__(self):
-    """
-    Remove un-pickleable attributes and return the state.
+    """Remove un-pickleable attributes and return the state.
 
     Returns:
-        The state of the download manager.
+      The state of the download manager.
 
     Raises:
-        NotImplementedError: If the register_checksums flag is enabled
-                             in a parallelized download manager.
+      NotImplementedError: If the register_checksums flag is enabled
+                           in a parallelized download manager.
     """
     if self._register_checksums:
       # Currently, checksums registration from Beam not supported.
@@ -259,11 +254,10 @@ class DownloadManager:
 
   @property
   def _downloader(self):
-    """
-    Returns the downloader object.
+    """Returns the downloader object.
 
     Returns:
-        The downloader object.
+      The downloader object.
     """
     if not self.__downloader:
       self.__downloader = downloader.get_downloader()
@@ -271,11 +265,10 @@ class DownloadManager:
 
   @property
   def _extractor(self):
-    """
-    Returns the extractor object.
+    """Returns the extractor object.
 
     Returns:
-        The extractor object.
+      The extractor object.
     """
     if not self.__extractor:
       self.__extractor = extractor.get_extractor()
@@ -283,47 +276,42 @@ class DownloadManager:
 
   @property
   def downloaded_size(self):
-    """
-    Returns the total size of downloaded files.
+    """Returns the total size of downloaded files.
     """
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_final_dl_path(self, url, sha256):
-    """
-    Returns the final download path.
+    """Returns the final download path.
 
     Args:
-        url: The download url.
-        sha256: The sha256 hash hexdump.
+      url: The download url.
+      sha256: The sha256 hash hexdump.
 
     Returns:
-        The final download path.
+      The final download path.
     """
     return os.path.join(
         self._download_dir, resource_lib.get_dl_fname(url, sha256))
 
   @property
   def register_checksums(self):
-    """
-    Returns whether checksums are being computed and recorded to file.
+    """Returns whether checksums are being computed and recorded to file.
 
     Returns:
-        Whether or not the checksums are being computed and recorded to file.
+      Whether or not the checksums are being computed and recorded to file.
     """
     return self._register_checksums
 
   @utils.build_synchronize_decorator()
   def _record_url_infos(self):
-    """
-    Store in file when recorded size/checksum of downloaded files.
+    """Store in file when recorded size/checksum of downloaded files.
     """
     checksums.store_checksums(self._dataset_name, self._recorded_url_infos)
 
   def _handle_download_result(
       self, resource: resource_lib.Resource, tmp_dir_path: str,
       url_path: str, url_info: checksums.UrlInfo) -> str:
-    """
-    Post-processing of the downloaded file.
+    """Post-processing of the downloaded file.
 
     * Write `.INFO` file
     * Rename `tmp_dir/file.xyz` -> `url_path`
@@ -331,18 +319,18 @@ class DownloadManager:
     * Eventually rename `url_path` -> `file_path` when `record_checksums=True`
 
     Args:
-        resource: The url to download.
-        tmp_dir_path: Temporary dir where the file was downloaded.
-        url_path: Destination path.
-        url_info: File checksums, size, computed during download.
+      resource: The url to download.
+      tmp_dir_path: Temporary dir where the file was downloaded.
+      url_path: Destination path.
+      url_info: File checksums, size, computed during download.
 
     Returns:
-        dst_path: `url_path` (or `file_path` when `register_checksums=True`)
+      dst_path: `url_path` (or `file_path` when `register_checksums=True`)
 
     Raises:
-        ValueError: If the number of files found in the tmp dir is not 1.
-                    If the checksum was not registered.
-        NonMatchingChecksumError: If the checksums do not match.
+      ValueError: If the number of files found in the tmp dir is not 1.
+                  If the checksum was not registered.
+      NonMatchingChecksumError: If the checksums do not match.
     """
     # Extract the file name, path from the tmp_dir
     fnames = tf.io.gfile.listdir(tmp_dir_path)
@@ -389,17 +377,16 @@ class DownloadManager:
 
   def _save_url_info_and_rename(
       self, url: str, url_path: str, url_info: checksums.UrlInfo) -> str:
-    """
-    Saves the checksums on disk and renames `url_path` -> `file_path`.
+    """Saves the checksums on disk and renames `url_path` -> `file_path`.
     This function assumes the file has already be downloaded in `url_path`.
 
     Args:
-        url: Url downloaded
-        url_path: Path of the downloaded file.
-        url_info: Downloaded file information.
+      url: Url downloaded
+      url_path: Path of the downloaded file.
+      url_info: Downloaded file information.
 
     Returns:
-        file_path: The downloaded file after renaming.
+      file_path: The downloaded file after renaming.
     """
     # Record checksums/download size
     # As downloads are cached even without checksum, we could
@@ -415,8 +402,7 @@ class DownloadManager:
     return file_path
 
   def _find_existing_path(self, url: str, url_path: str) -> Optional[str]:
-    """
-    Returns the downloaded file path if it exists.
+    """Returns the downloaded file path if it exists.
 
     The file can be located in two different locations:
 
@@ -427,12 +413,12 @@ class DownloadManager:
     advance. Otherwise, `url_path` is used as fallback.
 
     Args:
-        url: Downloaded url
-        url_path: File path when the file checksums is unknown
+      url: Downloaded url
+      url_path: File path when the file checksums is unknown
 
     Returns:
-        existing_path: `file_path` or `url_path` if the file was already
-                       downloaded. `None` otherwise.
+      existing_path: `file_path` or `url_path` if the file was already
+                     downloaded. `None` otherwise.
     """
     existing_path = None
     # If download is forced, then have to re-download in all cases
@@ -454,14 +440,13 @@ class DownloadManager:
     return existing_path
 
   def download_checksums(self, checksums_url):
-    """
-    Downloads checksum file from the given URL and adds it to registry.
+    """Downloads checksum file from the given URL and adds it to registry.
 
     Args:
-        checksums_url: The checksum url.
+      checksums_url: The checksum url.
 
     Returns:
-        Updated url registry.
+      Updated url registry.
     """
     checksums_path = self.download(checksums_url)
     with tf.io.gfile.GFile(checksums_path) as file:
@@ -472,14 +457,13 @@ class DownloadManager:
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download(self, resource: Union[str, resource_lib.Resource]):
-    """
-    Download resource, returns Promise->path to downloaded file.
+    """Download resource, returns Promise->path to downloaded file.
 
     Args:
-        resource: The URL to download.
+      resource: The URL to download.
 
     Returns:
-        path: The path to the downloaded resource.
+      path: The path to the downloaded resource.
     """
     # Normalize the input
     if isinstance(resource, six.string_types):
@@ -538,14 +522,13 @@ class DownloadManager:
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _extract(self, resource):
-    """
-    Extract a single archive, returns Promise->path to extraction result.
+    """Extract a single archive, returns Promise->path to extraction result.
 
     Args:
-        resource: The path to the file to extract.
+      resource: The path to the file to extract.
 
     Return:
-        The resolved promise.
+      The resolved promise.
     """
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
@@ -565,14 +548,13 @@ class DownloadManager:
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download_extract(self, resource):
-    """
-    Download-extract `Resource` or url, returns Promise->path.
+    """Download-extract `Resource` or url, returns Promise->path.
 
     Args:
-        resource: The url to download data from.
+      resource: The url to download data from.
 
     Returns:
-        The resolved promise.
+      The resolved promise.
     """
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
@@ -583,14 +565,13 @@ class DownloadManager:
     return self._download(resource).then(callback)
 
   def download_kaggle_data(self, competition_name):
-    """
-    Download data for a given Kaggle competition.
+    """Download data for a given Kaggle competition.
 
     Args:
-        competition_name: Name of the kaggle competition/dataset.
+      competition_name: Name of the kaggle competition/dataset.
 
     Returns:
-        The resolved promise after downloading data from each url.
+      The resolved promise after downloading data from each url.
     """
     with self._downloader.tqdm():
       kaggle_downloader = self._downloader.kaggle_downloader(competition_name)
@@ -598,41 +579,38 @@ class DownloadManager:
       return _map_promise(self._download, urls)
 
   def download(self, url_or_urls):
-    """
-    Download given url(s).
+    """Download given url(s).
 
     Args:
-        url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-                     url can be a `str` or `tfds.download.Resource`.
+      url_or_urls: url or `list`/`dict` of urls to download and extract. Each
+                   url can be a `str` or `tfds.download.Resource`.
 
     Returns:
-        downloaded_path(s): `str`, The downloaded paths matching the given input
-                            url_or_urls.
+      downloaded_path(s): `str`, The downloaded paths matching the given input
+                          url_or_urls.
     """
     # Add progress bar to follow the download state
     with self._downloader.tqdm():
       return _map_promise(self._download, url_or_urls)
 
   def iter_archive(self, resource):
-    """
-    Returns iterator over files within archive.
+    """Returns iterator over files within archive.
 
     **Important Note**: caller should read files as they are yielded.
     Reading out of order is slow.
 
     Args:
-        resource: path to archive or `tfds.download.Resource`.
+      resource: path to archive or `tfds.download.Resource`.
 
     Returns:
-        Generator yielding tuple (path_within_archive, file_obj).
+      Generator yielding tuple (path_within_archive, file_obj).
     """
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
     return extractor.iter_archive(resource.path, resource.extract_method)
 
   def extract(self, path_or_paths):
-    """
-    Extract given path(s).
+    """Extract given path(s).
 
     Args:
       path_or_paths: path or `list`/`dict` of path of file to extract. Each
@@ -650,22 +628,21 @@ class DownloadManager:
       return _map_promise(self._extract, path_or_paths)
 
   def download_and_extract(self, url_or_urls):
-    """
-    Download and extract given url_or_urls.
+    """Download and extract given url_or_urls.
     Is roughly equivalent to:
     ```
     extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
     ```
 
     Args:
-        url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-                     url can be a `str` or `tfds.download.Resource`.
+      url_or_urls: url or `list`/`dict` of urls to download and extract. Each
+                   url can be a `str` or `tfds.download.Resource`.
 
     If not explicitly specified in `Resource`, the extraction method will
     automatically be deduced from downloaded file name.
 
     Returns:
-        extracted_path(s): `str`, extracted paths of given URL(s).
+      extracted_path(s): `str`, extracted paths of given URL(s).
     """
     # Add progress bar to follow the download state
     with self._downloader.tqdm():
@@ -678,10 +655,10 @@ class DownloadManager:
     Returns the directory containing the manually extracted data.
 
     Returns:
-        The path to the dir containing the manually extracted data.
+      The path to the dir containing the manually extracted data.
 
     Raises:
-        AssertionError: If the Manual directory does not exist or is empty
+      AssertionError: If the Manual directory does not exist or is empty
     """
     if not self._manual_dir:
       raise AssertionError(
@@ -702,15 +679,15 @@ def _read_url_info(url_path: str) -> checksums.UrlInfo:
   Loads the `UrlInfo` from the `.INFO` file.
 
   Args:
-      url_path: The path to the .INFO file.
+    url_path: The path to the .INFO file.
 
   Returns:
-      UrlInfo object.
+    UrlInfo object.
 
   Raises:
-      ValueError: If 'url_info' is not found in the .INFO file.
-                  This likely indicates the files were downloaded
-                  with a previous version of TFDS (<=3.1.0).
+    ValueError: If 'url_info' is not found in the .INFO file.
+                This likely indicates the files were downloaded
+                with a previous version of TFDS (<=3.1.0).
   """
   file_info = resource_lib.read_info_file(url_path)
   if 'url_info' not in file_info:
@@ -738,15 +715,14 @@ else:
 
 
 def _map_promise(map_fn, all_inputs):
-  """
-  Map the function into each element and resolve the promise.
+  """Map the function into each element and resolve the promise.
 
   Args:
-      map_fn: The function to be mapped into each element.
-      all_inputs: The elements the function is to be mapped into.
+    map_fn: The function to be mapped into each element.
+    all_inputs: The elements the function is to be mapped into.
 
   Returns:
-      The resolved promise.
+    The resolved promise.
   """
   all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
   res = utils.map_nested(_wait_on_promise, all_promises)
