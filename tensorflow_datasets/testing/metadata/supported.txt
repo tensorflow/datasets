@@ -537,6 +537,7 @@ imagenet2012_corrupted/zoom_blur_2/3.1.0
 imagenet2012_corrupted/zoom_blur_3/3.1.0
 imagenet2012_corrupted/zoom_blur_4/3.1.0
 imagenet2012_corrupted/zoom_blur_5/3.1.0
+imagenet2012_real/1.0.0
 imagenet2012_subset/10pct/5.0.0
 imagenet2012_subset/1pct/5.0.0
 imagenet_resized/16x16/0.1.0
@@ -1499,6 +1500,7 @@ wikipedia/20200301.zh-min-nan/1.0.0
 wikipedia/20200301.zh-yue/1.0.0
 wikipedia/20200301.zh/1.0.0
 wikipedia/20200301.zu/1.0.0
+wikipedia_toxicity_subtypes/0.1.0
 winogrande/1.1.0
 wmt14_translate/cs-en/1.0.0
 wmt14_translate/de-en/1.0.0
