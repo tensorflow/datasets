@@ -27,6 +27,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.custom_dataset import ImageFolder
+from tensorflow_datasets.core.custom_dataset import TranslateFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -66,6 +67,7 @@ __all__ = [
     "show_examples",
     "show_statistics",
     "testing",
+    "TranslateFolder",
     "units",
     "visualization",
     "__version__",
