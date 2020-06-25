@@ -44,15 +44,17 @@ details.
     [`tfds.text.wikipedia_toxicity_subtypes.WikipediaToxicitySubtypes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia_toxicity_subtypes.py)
 *   **Versions**:
     *   **`0.1.0`** (default): No release notes.
-*   **Download size**: `Unknown size`
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `36.85 MiB`
+*   **Dataset size**: `116.38 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split   | Examples
+:------ | -------:
+'test'  | 63,978
+'train' | 159,571
 
 *   **Features**:
 
