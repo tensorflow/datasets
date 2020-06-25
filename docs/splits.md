@@ -30,7 +30,7 @@ train_ds = tfds.load('mnist', split='train')
 # The full `train` split and the full `test` split as two distinct datasets.
 train_ds, test_ds = tfds.load('mnist', split=['train', 'test'])
 
-# The full `train` and `test` splits, concatenated together.
+# The full `train` and `test` splits, interleaved together.
 train_test_ds = tfds.load('mnist', split='train+test')
 
 # From record 10 (included) to record 20 (excluded) of `train` split.
@@ -69,7 +69,7 @@ train_ds, test_ds = tfds.load('mnist', split=[
     tfds.core.ReadInstruction('test'),
 ])
 
-# The full `train` and `test` splits, concatenated together.
+# The full `train` and `test` splits, interleaved together.
 ri = tfds.core.ReadInstruction('train') + tfds.core.ReadInstruction('test')
 train_test_ds = tfds.load('mnist', split=ri)
 
