@@ -219,7 +219,7 @@ class ExampleSerializerTest(testing.SubTestCase):
       example_serializer._item_to_tf_feature(example_item, tensor_info)
 
   def test_dict_to_tf_example_error_reraise(self):
-    # Test error reraise in _dict_to_tf_example
+    # Test error reraise in _dict_to_tf_example.
     example_data = {'input': [1, 2, 3]}
     tensor_info = {
         'input': feature_lib.TensorInfo(
@@ -229,15 +229,12 @@ class ExampleSerializerTest(testing.SubTestCase):
     }
     with self.assertRaisesRegex(
         ValueError,
-        (
-            '^Error while serializing feature `input`:'
-            ' `TensorInfo\(shape=\(2,\), dtype=tf.int64\)`:(.*)'
-        ),
+        '^Error while serializing feature `input`:',
     ):
       example_serializer._dict_to_tf_example(example_data, tensor_info)
 
   def test_dict_to_tf_example_flatten_nest_dict(self):
-    # Test that a KeyError from zip_dict in _dict_to_tf_example is not reraised
+    # Test that a KeyError from zip_dict in _dict_to_tf_example is not reraised.
     example_data = {'x': [1, 2, 3]}
     tensor_info = {
         'y': feature_lib.TensorInfo(
