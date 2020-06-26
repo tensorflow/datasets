@@ -43,9 +43,10 @@ details.
 *   **Source code**:
     [`tfds.text.wikipedia_toxicity_subtypes.WikipediaToxicitySubtypes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia_toxicity_subtypes.py)
 *   **Versions**:
-    *   **`0.1.0`** (default): No release notes.
+    *   **`0.2.0`** (default): Updated features for consistency with
+        CivilComments dataset.
 *   **Download size**: `36.85 MiB`
-*   **Dataset size**: `116.38 MiB`
+*   **Dataset size**: `118.09 MiB`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
@@ -60,13 +61,13 @@ Split   | Examples
 
 ```python
 FeaturesDict({
-    'identity_hate': tf.float32,
+    'identity_attack': tf.float32,
     'insult': tf.float32,
     'obscene': tf.float32,
-    'severe_toxic': tf.float32,
+    'severe_toxicity': tf.float32,
     'text': Text(shape=(), dtype=tf.string),
     'threat': tf.float32,
-    'toxic': tf.float32,
+    'toxicity': tf.float32,
 })
 ```
 
