@@ -229,7 +229,7 @@ class ExampleSerializerTest(testing.SubTestCase):
     }
     with self.assertRaisesRegex(
         ValueError,
-        '^Error while serializing feature `input`:',
+        '^Error while serializing feature `input`:(.*)',
     ):
       example_serializer._dict_to_tf_example(example_data, tensor_info)
 
