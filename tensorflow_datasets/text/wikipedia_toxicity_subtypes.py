@@ -82,7 +82,8 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
   https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more
   details.
   """
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.2.0', 'Updated features for consistency with '
+                              'CivilComments dataset.')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -90,12 +91,12 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'text': tfds.features.Text(),
-            'toxic': tf.float32,
-            'severe_toxic': tf.float32,
+            'toxicity': tf.float32,
+            'severe_toxicity': tf.float32,
             'obscene': tf.float32,
             'threat': tf.float32,
             'insult': tf.float32,
-            'identity_hate': tf.float32,
+            'identity_attack': tf.float32,
         }),
         supervised_keys=('text', 'toxicity'),
         homepage='https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data',
@@ -134,9 +135,9 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
       for row in reader:
         example = {}
         example['text'] = row['comment_text']
-        example['toxic'] = float(row['toxic'])
-        for label in [
-            'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate'
-        ]:
+        example['toxicity'] = float(row['toxic'])
+        example['severe_toxicity'] = float(row['severe_toxic'])
+        example['identity_attack'] = float(row['identity_hate'])
+        for label in ['obscene', 'threat', 'insult']:
           example[label] = float(row[label])
         yield row['id'], example
