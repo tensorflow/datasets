@@ -31,31 +31,37 @@ from tensorflow_datasets.core.download import kaggle
 class KaggleTest(testing.TestCase):
 
   def test_competition_download(self):
-    filenames = ["a", "b"]
-    with testing.mock_kaggle_api(filenames):
-      downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
-      self.assertEqual(downloader.competition_files, ["a", "b"])
+    competition = "digit-recognizer"
+    with testing.mock_kaggle_api(competition="digit-recognizer"):
+      downloader = kaggle.KaggleCompetitionDownloader(competition)
+      self.assertEqual(downloader.competition_url,
+                       "kaggle.com/digit-recognizer")
       with testing.tmp_dir() as tmp_dir:
-        for fname in downloader.competition_files:
-          out_path = downloader.download_file(fname, tmp_dir)
-          self.assertEqual(out_path, os.path.join(tmp_dir, fname))
-          with tf.io.gfile.GFile(out_path) as f:
-            self.assertEqual(fname, f.read())
+        out_path = downloader.download_competition(competition, tmp_dir)
+        self.assertEqual(out_path, tmp_dir)
+        with tf.io.gfile.GFile(os.path.join(out_path, competition)) as f:
+          self.assertEqual(competition, f.read())
 
   def test_competition_download_404(self):
-    with testing.mock_kaggle_api(err_msg="404 - Not found"):
+    competition = "digit-recognize"
+    with testing.mock_kaggle_api(competition=competition,
+                                 err_msg="404 - Not found"):
       with self.assertLogs(
           "spelled the competition name correctly", level="error"):
-        downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+        downloader = kaggle.KaggleCompetitionDownloader(competition)
         with self.assertRaises(subprocess.CalledProcessError):
-          _ = downloader.competition_files
+          with testing.tmp_dir() as tmp_dir:
+            _ = downloader.download_competition(competition, tmp_dir)
 
   def test_competition_download_error(self):
-    with testing.mock_kaggle_api(err_msg="Some error"):
+    competition = "digit-recognizer"
+    with testing.mock_kaggle_api(competition=competition,
+                                 err_msg="Some error"):
       with self.assertLogs("install the kaggle API", level="error"):
-        downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+        downloader = kaggle.KaggleCompetitionDownloader(competition)
         with self.assertRaises(subprocess.CalledProcessError):
-          _ = downloader.competition_files
+          with testing.tmp_dir() as tmp_dir:
+            _ = downloader.download_competition(competition, tmp_dir)
 
   def test_kaggle_type(self):
     downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")

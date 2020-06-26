@@ -122,25 +122,24 @@ class DownloaderTest(testing.TestCase):
       promise.get()
 
   def test_kaggle_api(self):
-    fname = 'a.csv'
-    with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
+    with testing.mock_kaggle_api(competition='some-competition'):
       # Testing Competition Downloader
       promise = self.downloader.download(
-          'kaggle://competition/some-competition/a.csv',
+          'kaggle://competition/some-competition',
           self.tmp_dir)
       url_info = promise.get()
-      self.assertEqual(url_info.size, len(fname))
-      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
-        self.assertEqual(fname, f.read())
+      self.assertEqual(url_info.size, len(self.response))
+      with tf.io.gfile.GFile(self.path, 'rb') as f:
+        self.assertEqual(self.response, f.read())
 
       # Testing Dataset Downloader
       promise = self.downloader.download(
-          'kaggle://dataset/some-author/some-dataset/a.csv',
+          'kaggle://dataset/some-author/some-dataset',
           self.tmp_dir)
       url_info = promise.get()
-      self.assertEqual(url_info.size, len(fname))
-      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
-        self.assertEqual(fname, f.read())
+      self.assertEqual(url_info.size, len(self.response))
+      with tf.io.gfile.GFile(self.path, 'rb') as f:
+        self.assertEqual(self.response, f.read())
 
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'

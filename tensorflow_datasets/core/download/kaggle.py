@@ -29,8 +29,6 @@ from absl import logging
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.download import extractor
-from tensorflow_datasets.core.download import resource
 
 _ERR_MSG = """\
 To download Kaggle data through TFDS, follow the instructions to install the \
@@ -86,12 +84,7 @@ class KaggleFile(object):
     if not KaggleFile.is_kaggle_url(url):
       raise TypeError("Not a valid kaggle URL")
     kaggle_url = url[len(cls._URL_PREFIX)+1:]
-    competition_name, filename = (kaggle_url.split("/", 2))
-    download_type = _get_kaggle_type(kaggle_url).prefix
-    if download_type == "dataset":
-      dataset_name = filename
-      competition_name = "%s/%s" % (competition_name, dataset_name)
-    return cls(competition_name)
+    return cls(kaggle_url)
 
   @staticmethod
   def is_kaggle_url(url):
@@ -110,8 +103,7 @@ class KaggleCompetitionDownloader(object):
 
   ```
   downloader = KaggleCompetitionDownloader(competition_name)
-  for fname in downloader.competition_files:
-    downloader.download_file(fname, make_file_output_path(fname))
+  downloader.download_competition(competition, make_file_output_path(fname))
   ```
   """
 
@@ -120,25 +112,26 @@ class KaggleCompetitionDownloader(object):
     self._kaggle_type = _get_kaggle_type(self._competition_name)
 
   @utils.memoized_property
-  def competition_urls(self):
-    """Returns 'kaggle://' urls."""
+  def competition_url(self):
+    """Returns 'kaggle.com' urls."""
     return KaggleFile(self._competition_name).to_url()
 
-  def download_file(self, fname, output_dir):
+  def download_competition(self, competition, output_dir):
     """Downloads competition file to output_dir."""
     command = ["kaggle",
                self._kaggle_type.download_cmd,
                "download",
                self._kaggle_type.dl_flag,
-               fname,
+               competition,
                "-p",
                output_dir]
     _run_kaggle_command(command, self._competition_name)
-    fpath = os.path.join(output_dir, fname + ".zip")
-    if zipfile.is_zipfile(fpath):
-      ext = extractor.get_extractor()
-      with ext.tqdm():
-        ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
+    downloads = tf.io.gfile.listdir(output_dir)
+    if len(downloads) != 1:
+      zipper = zipfile.ZipFile(os.path.join(output_dir, 'zipped.zip'))
+      for download in downloads:
+        zipper.write(os.path.join(output_dir, download))
+      zipper.close()
     return output_dir
 
 
