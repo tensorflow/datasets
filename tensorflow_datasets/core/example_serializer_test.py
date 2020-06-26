@@ -20,8 +20,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import re
-
 import numpy as np
 import tensorflow.compat.v2 as tf
 
@@ -229,12 +227,10 @@ class ExampleSerializerTest(testing.SubTestCase):
             dtype=tf.int64,
         ),
     }
-    error_regex_pattern = re.escape(
-        'Error while serializing feature `input`: `{}`: '.format(
-            tensor_info['input'],
-        ),
-    )
-    with self.assertRaisesRegex(ValueError, error_regex_pattern):
+    with self.assertRaisesRegex(
+        ValueError,
+        '^Error while serializing feature `input`:(.*)'
+    ):
       example_serializer._dict_to_tf_example(example_data, tensor_info)
 
   def test_dict_to_tf_example_flatten_nest_dict(self):
