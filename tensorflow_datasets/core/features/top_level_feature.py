@@ -21,7 +21,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import feature as feature_lib
 
 
@@ -37,24 +36,16 @@ class TopLevelFeature(feature_lib.FeatureConnector):
 
   def __init__(self, *args, **kwargs):
     """Constructor."""
-    self.__is_top_level = False
+    self._is_top_level = False
     super(TopLevelFeature, self).__init__(*args, **kwargs)
 
-  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
-  # disable it in methods that use them, to avoid the warning.
-  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
-  @tf.autograph.experimental.do_not_convert()
   def _set_top_level(self):
     """Indicates that the feature is top level.
 
     Internal function called by `DatasetInfo`.
     """
-    self.__is_top_level = True
+    self._is_top_level = True
 
-  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
-  # disable it in methods that use them, to avoid the warning.
-  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
-  @tf.autograph.experimental.do_not_convert()
   def decode_example(self, serialized_example, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.
@@ -71,7 +62,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
       example: Nested `dict` containing the decoded nested examples.
     """
     # pylint: enable=line-too-long
-    if not self.__is_top_level:
+    if not self._is_top_level:
       raise AssertionError(
           'Feature {} can only be decoded when defined as top-level '
           'feature, through info.features.decode_example()'.format(
