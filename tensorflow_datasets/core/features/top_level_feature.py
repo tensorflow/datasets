@@ -84,23 +84,23 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     flat_decoders = self._flatten(decoders)
 
     # Step 2: Apply the decoding
-    flatten_decoded = []
-    for (
-        feature,
-        example,
-        serialized_info,
-        decoder,
-    ) in zip(
-        flat_features,
-        flat_example,
-        flat_serialized_info,
-        flat_decoders):
-      flatten_decoded.append(_decode_feature(
-          feature=feature,
-          example=example,
-          serialized_info=serialized_info,
-          decoder=decoder,
-      ))
+    flatten_decoded = [
+        _decode_feature(
+            feature=feature,
+            example=example,
+            serialized_info=serialized_info,
+            decoder=decoder,
+        )
+        for (
+            feature,
+            example,
+            serialized_info,
+            decoder,
+        ) in zip(
+            flat_features,
+            flat_example,
+            flat_serialized_info,
+            flat_decoders)]
 
     # Step 3: Restore nesting [] => {}
     nested_decoded = self._nest(flatten_decoded)
