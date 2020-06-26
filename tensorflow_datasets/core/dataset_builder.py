@@ -72,6 +72,8 @@ class BuilderConfig(object):
   `BuilderConfig` and add their own properties.
   """
 
+  __slots__ = ["_name", "_version", "_supported_versions", "_description"]
+
   @api_utils.disallow_positional_args
   def __init__(self, name, version=None, supported_versions=None,
                description=None):
