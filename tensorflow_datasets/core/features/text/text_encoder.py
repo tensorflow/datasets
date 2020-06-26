@@ -29,7 +29,6 @@ import re
 
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.utils import py_utils
 
 
 def _re_compile(pattern):
@@ -101,7 +100,8 @@ class TextEncoder(object):
     """Store to file. Inverse of load_from_file."""
     raise NotImplementedError
 
-  @py_utils.abstractclassmethod
+  @classmethod
+  @abc.abstractmethod
   def load_from_file(cls, filename_prefix):  # pylint: disable=no-self-argument
     """Load from file. Inverse of save_to_file."""
     raise NotImplementedError
