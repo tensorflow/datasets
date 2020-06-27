@@ -1500,7 +1500,7 @@ wikipedia/20200301.zh-min-nan/1.0.0
 wikipedia/20200301.zh-yue/1.0.0
 wikipedia/20200301.zh/1.0.0
 wikipedia/20200301.zu/1.0.0
-wikipedia_toxicity_subtypes/0.1.0
+wikipedia_toxicity_subtypes/0.2.0
 winogrande/1.1.0
 wmt14_translate/cs-en/1.0.0
 wmt14_translate/de-en/1.0.0

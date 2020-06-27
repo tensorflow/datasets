@@ -1,0 +1,32 @@
+{
+  "citation": "@inproceedings{10.1145/3038912.3052591,\n  author = {Wulczyn, Ellery and Thain, Nithum and Dixon, Lucas},\n  title = {Ex Machina: Personal Attacks Seen at Scale},\n  year = {2017},\n  isbn = {9781450349130},\n  publisher = {International World Wide Web Conferences Steering Committee},\n  address = {Republic and Canton of Geneva, CHE},\n  url = {https://doi.org/10.1145/3038912.3052591},\n  doi = {10.1145/3038912.3052591},\n  booktitle = {Proceedings of the 26th International Conference on World Wide Web},\n  pages = {1391-1399},\n  numpages = {9},\n  keywords = {online discussions, wikipedia, online harassment},\n  location = {Perth, Australia},\n  series = {WWW '17}\n}",
+  "description": "This version of the Wikipedia Toxicity Subtypes dataset provides access to the\nprimary toxicity label, as well the five toxicity subtype labels annotated by\ncrowd workers. The toxicity and toxicity subtype labels are binary values\n(0 or 1) indicating whether the majority of annotators assigned that\nattributes to the comment text.\n\nThe comments in this dataset come from an archive of Wikipedia talk pages\ncomments. These have been annotated by Jigsaw for toxicity, as well as a variety\nof toxicity subtypes, including severe toxicity, obscenity, threatening\nlanguage, insulting language, and identity attacks. This dataset is a replica of\nthe data released for the Jigsaw Toxic Comment Classification Challenge on\nKaggle, with the training set unchanged, and the test dataset merged with the\ntest_labels released after the end of the competition. Test data not used for\nscoring has been dropped. This dataset is released under CC0, as is the\nunderlying comment text.\n\nSee the Kaggle documentation or\nhttps://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more\ndetails.",
+  "downloadSize": "38644519",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data"
+    ]
+  },
+  "name": "wikipedia_toxicity_subtypes",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "35192309",
+      "shardLengths": [
+        "63978"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "88629143",
+      "shardLengths": [
+        "159571"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text",
+    "output": "toxicity"
+  },
+  "version": "0.2.0"
+}
