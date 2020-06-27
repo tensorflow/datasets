@@ -63,29 +63,65 @@ _KAGGLE_TYPES = {
 }
 
 
-def _get_kaggle_type(competition_or_dataset):
+def _get_kaggle_type(competition_or_dataset: str) -> KaggleType:
+  """Returns the kaggle type (competition/dataset).
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+
+  Returns:
+    Kaggle type (competition/dataset).
+  """
   if "/" in competition_or_dataset:
     return _KAGGLE_TYPES["dataset"]
   return _KAGGLE_TYPES["competition"]
 
 
-def _kaggle_dir_name(competition_or_dataset):
-  """Returns name of dir where the dataset is to be downloaded."""
+def _kaggle_dir_name(competition_or_dataset: str) -> str:
+  """Returns path where the dataset is to be downloaded.
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+
+  Returns:
+    Path to the dir where the dataset is to be downloaded.
+  """
   return competition_or_dataset.replace("/", "_")
 
 
-def _get_kaggle_url(competition_or_dataset):
-  """Returns 'kaggle.com' urls."""
+def _get_kaggle_url(competition_or_dataset: str) -> str:
+  """Returns the 'kaggle.com' url of the kaggle competition/dataset.
+
+  Returns:
+    The kaggle competition/dataset url.
+  """
   return "%s/%s" % ("kaggle.com", competition_or_dataset)
 
 
-def _log_command_output(output, error=False):
+def _log_command_output(output: bytes, error: bool = False) -> None:
+  """Logs the command output.
+
+  Args:
+    output: Output to be logged.
+    error: Errors to be logged (if any).
+  """
   log = logging.error if error else logging.info
   log("kaggle command output:\n%s", tf.compat.as_text(output))
 
 
-def _run_kaggle_command(command_args, competition_or_dataset):
-  """Run kaggle command with subprocess."""
+def _run_kaggle_command(command_args: list, competition_or_dataset: str) -> str:
+  """Run kaggle command with subprocess.
+
+  Args:
+    command_args: Arguments to the kaggle api.
+    competition_or_dataset: Name of the kaggle competition/dataset.
+
+  Returns:
+    output of the command.
+
+  Raises:
+    CalledProcessError: If the command terminates with exit status 1.
+  """
   try:
     output = sp.check_output(command_args)
     return tf.compat.as_text(output)
@@ -102,8 +138,14 @@ def _run_kaggle_command(command_args, competition_or_dataset):
                             "\nOriginal exception: {}".format(err))
 
 
-def _download_competition_or_dataset(competition_or_dataset, output_dir):
-  """Downloads kaggle data to output_dir"""
+def _download_competition_or_dataset(competition_or_dataset: str,
+                                     output_dir: str) -> None:
+  """Downloads the data and extracts it if it was zipped by the kaggle api.
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+    output_dir: Path to the dir where the data is to be downloaded.
+  """
   kaggle_type = _get_kaggle_type(competition_or_dataset)
   command = ["kaggle",
              kaggle_type.download_cmd,
@@ -122,8 +164,16 @@ def _download_competition_or_dataset(competition_or_dataset, output_dir):
         ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
 
 
-def kaggle_download(competition_or_dataset, download_dir):
-  """Downloads competition file to output_dir."""
+def kaggle_download(competition_or_dataset: str, download_dir: str) -> str:
+  """Downloads the kaggle data to the output_dir.
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+    download_dir: Path to the TFDS downloads dir.
+
+  Returns:
+    Path to the dir where the kaggle data was downloaded.
+  """
   kaggle_dir = _kaggle_dir_name(competition_or_dataset)
   download_path = os.path.join(download_dir, kaggle_dir)
   # If the dataset has already been downloaded, return the path to it.

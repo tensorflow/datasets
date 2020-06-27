@@ -515,11 +515,11 @@ class DownloadManager(object):
       return self._extract(resource)
     return self._download(resource).then(callback)
 
-  def download_kaggle_data(self, competition_or_dataset: str):
+  def download_kaggle_data(self, competition_or_dataset: str) -> str:
     """Download data for a given Kaggle Dataset or competition.
 
-    Note: This function requires Kaggle CLI tool. Read the installation guide
-    at https://www.kaggle.com/docs/api.
+    Note: This function requires the Kaggle CLI tool.
+    Read the installation guide at https://www.kaggle.com/docs/api.
 
     Args:
       competition_or_dataset: Dataset name (`zillow/zecon`) or
