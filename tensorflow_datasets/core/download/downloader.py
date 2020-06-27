@@ -115,10 +115,9 @@ class _Downloader(object):
 
   def _sync_kaggle_download(self, kaggle_url, destination_path):
     """Download with Kaggle API."""
-    kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
-    downloader = self.kaggle_downloader(kaggle_file.competition)
-    filepath = downloader.download_competition(
-        kaggle_file.competition, destination_path)
+    downloader = self.kaggle_downloader(kaggle_url)
+    filepath = downloader.download_competition(kaggle_url,
+                                               destination_path)
     dl_size = tf.io.gfile.stat(filepath).length
     checksum = self._checksumer_cls()
     file = tf.io.gfile.listdir(filepath)[0]
@@ -160,7 +159,7 @@ class _Downloader(object):
     Raises:
       DownloadError: when download fails.
     """
-    if kaggle.KaggleFile.is_kaggle_url(url):
+    if kaggle.KaggleCompetitionDownloader.is_kaggle_url(url):
       # Forward the request proxy to Kaggle tool
       # See: https://github.com/Kaggle/kaggle-api
       if 'HTTP_PROXY' in os.environ:

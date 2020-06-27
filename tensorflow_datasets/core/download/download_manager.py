@@ -34,6 +34,7 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
@@ -514,22 +515,32 @@ class DownloadManager(object):
       return self._extract(resource)
     return self._download(resource).then(callback)
 
-  def download_kaggle_data(self, dataset_name: str):
+  def download_kaggle_data(self, competition: str):
     """Download data for a given Kaggle Dataset or competition.
 
     Note: This function requires Kaggle CLI tool. Read the installation guide
     at https://www.kaggle.com/docs/api.
 
     Args:
-      dataset_name: Dataset name (`zillow/zecon`) or competition name
-        (`titanic`)
+      competition: Dataset name (`zillow/zecon`) or competition name (`titanic`)
 
     Returns:
       The path to the downloaded files.
     """
-    with self._downloader.tqdm():
-      kaggle_downloader = self._downloader.kaggle_downloader(dataset_name)
-      return _map_promise(self._download, kaggle_downloader.competition_url)
+    kaggle_downloader = kaggle.KaggleCompetitionDownloader(competition)
+    download_path = os.path.join(self._download_dir,
+                                 kaggle_downloader.download_dir_name)
+    # If the dataset has already been downloaded, return the path to it.
+    if os.path.isdir(download_path):
+      logging.info('Dataset %s already downloaded: reusing %s.',
+                   competition, download_path)
+      return download_path
+    # Otherwise, download the dataset.
+    with utils.incomplete_dir(download_path) as tmp_data_dir:
+      logging.info('Downloading %s into %s...', competition, tmp_data_dir)
+      download_path = kaggle_downloader.download_competition(competition,
+                                                             tmp_data_dir)
+    return download_path
 
   def download(self, url_or_urls):
     """Download given url(s).
