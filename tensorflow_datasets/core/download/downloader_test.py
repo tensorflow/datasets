@@ -121,26 +121,6 @@ class DownloaderTest(testing.TestCase):
     with self.assertRaises(downloader.DownloadError):
       promise.get()
 
-  def test_kaggle_api(self):
-    with testing.mock_kaggle_api(competition='some-competition'):
-      # Testing Competition Downloader
-      promise = self.downloader.download(
-          'kaggle://competition/some-competition',
-          self.tmp_dir)
-      url_info = promise.get()
-      self.assertEqual(url_info.size, len(self.response))
-      with tf.io.gfile.GFile(self.path, 'rb') as f:
-        self.assertEqual(self.response, f.read())
-
-      # Testing Dataset Downloader
-      promise = self.downloader.download(
-          'kaggle://dataset/some-author/some-dataset',
-          self.tmp_dir)
-      url_info = promise.get()
-      self.assertEqual(url_info.size, len(self.response))
-      with tf.io.gfile.GFile(self.path, 'rb') as f:
-        self.assertEqual(self.response, f.read())
-
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)

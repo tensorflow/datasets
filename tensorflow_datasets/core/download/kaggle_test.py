@@ -33,11 +33,11 @@ class KaggleTest(testing.TestCase):
   def test_competition_download(self):
     competition = "digit-recognizer"
     with testing.mock_kaggle_api(competition="digit-recognizer"):
-      self.assertEqual(kaggle.get_kaggle_url(competition),
+      self.assertEqual(kaggle._get_kaggle_url(competition),
                        "kaggle.com/digit-recognizer")
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.kaggle_download(competition, tmp_dir)
-        kaggle_dir = kaggle.kaggle_dir_name(competition)
+        kaggle_dir = kaggle._kaggle_dir_name(competition)
         download_path = os.path.join(tmp_dir, kaggle_dir)
         self.assertEqual(out_path, download_path)
         with tf.io.gfile.GFile(os.path.join(out_path, competition)) as f:
@@ -63,9 +63,9 @@ class KaggleTest(testing.TestCase):
             _ = kaggle.kaggle_download(competition, tmp_dir)
 
   def test_kaggle_type(self):
-    self.assertEqual(kaggle.get_kaggle_type("digit-recognizer").download_cmd,
+    self.assertEqual(kaggle._get_kaggle_type("digit-recognizer").download_cmd,
                      "competitions")
-    self.assertEqual(kaggle.get_kaggle_type("author/dataset").download_cmd,
+    self.assertEqual(kaggle._get_kaggle_type("author/dataset").download_cmd,
                      "datasets")
 
 
