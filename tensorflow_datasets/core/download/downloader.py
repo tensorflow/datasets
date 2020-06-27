@@ -36,7 +36,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
-from tensorflow_datasets.core.download import kaggle
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
@@ -82,10 +81,6 @@ class _Downloader(object):
     self._pbar_url = None
     self._pbar_dl_size = None
 
-  @utils.memoize()
-  def kaggle_downloader(
-      self, competition_name: str) -> kaggle.KaggleCompetitionDownloader:
-    return kaggle.KaggleCompetitionDownloader(competition_name)
 
   @contextlib.contextmanager
   def tqdm(self) -> Iterator[None]:
@@ -113,24 +108,6 @@ class _Downloader(object):
     future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
-  def _sync_kaggle_download(self, kaggle_url, destination_path):
-    """Download with Kaggle API."""
-    downloader = self.kaggle_downloader(kaggle_url)
-    filepath = downloader.download_competition(kaggle_url,
-                                               destination_path)
-    dl_size = tf.io.gfile.stat(filepath).length
-    checksum = self._checksumer_cls()
-    file = tf.io.gfile.listdir(filepath)[0]
-    with tf.io.gfile.GFile(os.path.join(filepath, file), 'rb') as file_obj:
-      while True:
-        block = file_obj.read(io.DEFAULT_BUFFER_SIZE)
-        if not block:
-          break
-        checksum.update(block)
-    return checksums_lib.UrlInfo(
-        checksum=checksum.hexdigest(),
-        size=dl_size,
-    )
 
   def _sync_file_copy(
       self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
@@ -159,13 +136,6 @@ class _Downloader(object):
     Raises:
       DownloadError: when download fails.
     """
-    if kaggle.KaggleCompetitionDownloader.is_kaggle_url(url):
-      # Forward the request proxy to Kaggle tool
-      # See: https://github.com/Kaggle/kaggle-api
-      if 'HTTP_PROXY' in os.environ:
-        os.environ['KAGGLE_PROXY'] = os.environ['HTTP_PROXY']
-      return self._sync_kaggle_download(url, destination_path)
-
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
       # use requests (http) or urllib (ftp).

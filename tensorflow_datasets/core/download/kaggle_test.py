@@ -33,12 +33,13 @@ class KaggleTest(testing.TestCase):
   def test_competition_download(self):
     competition = "digit-recognizer"
     with testing.mock_kaggle_api(competition="digit-recognizer"):
-      downloader = kaggle.KaggleCompetitionDownloader(competition)
-      self.assertEqual(downloader.competition_url,
+      self.assertEqual(kaggle.get_kaggle_url(competition),
                        "kaggle.com/digit-recognizer")
       with testing.tmp_dir() as tmp_dir:
-        out_path = downloader.download_competition(competition, tmp_dir)
-        self.assertEqual(out_path, tmp_dir)
+        out_path = kaggle.kaggle_download(competition, tmp_dir)
+        kaggle_dir = kaggle.kaggle_dir_name(competition)
+        download_path = os.path.join(tmp_dir, kaggle_dir)
+        self.assertEqual(out_path, download_path)
         with tf.io.gfile.GFile(os.path.join(out_path, competition)) as f:
           self.assertEqual(competition, f.read())
 
@@ -46,29 +47,26 @@ class KaggleTest(testing.TestCase):
     competition = "digit-recognize"
     with testing.mock_kaggle_api(competition=competition,
                                  err_msg="404 - Not found"):
-      with self.assertLogs(
-          "spelled the competition name correctly", level="error"):
-        downloader = kaggle.KaggleCompetitionDownloader(competition)
+      with self.assertLogs("spelled the competition name correctly",
+                           level="error"):
         with self.assertRaises(subprocess.CalledProcessError):
           with testing.tmp_dir() as tmp_dir:
-            _ = downloader.download_competition(competition, tmp_dir)
+            _ = kaggle.kaggle_download(competition, tmp_dir)
 
   def test_competition_download_error(self):
     competition = "digit-recognizer"
     with testing.mock_kaggle_api(competition=competition,
                                  err_msg="Some error"):
       with self.assertLogs("install the kaggle API", level="error"):
-        downloader = kaggle.KaggleCompetitionDownloader(competition)
         with self.assertRaises(subprocess.CalledProcessError):
           with testing.tmp_dir() as tmp_dir:
-            _ = downloader.download_competition(competition, tmp_dir)
+            _ = kaggle.kaggle_download(competition, tmp_dir)
 
   def test_kaggle_type(self):
-    downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
-    self.assertEqual(downloader._kaggle_type.download_cmd, "competitions")
-
-    downloader = kaggle.KaggleCompetitionDownloader("author/dataset")
-    self.assertEqual(downloader._kaggle_type.download_cmd, "datasets")
+    self.assertEqual(kaggle.get_kaggle_type("digit-recognizer").download_cmd,
+                     "competitions")
+    self.assertEqual(kaggle.get_kaggle_type("author/dataset").download_cmd,
+                     "datasets")
 
 
 if __name__ == "__main__":

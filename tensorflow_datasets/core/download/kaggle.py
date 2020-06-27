@@ -63,78 +63,78 @@ _KAGGLE_TYPES = {
 }
 
 
-def _get_kaggle_type(competition_name):
-  if "/" in competition_name:
+def get_kaggle_type(competition_or_dataset):
+  if "/" in competition_or_dataset:
     return _KAGGLE_TYPES["dataset"]
   return _KAGGLE_TYPES["competition"]
 
 
-class KaggleCompetitionDownloader(object):
-  """Downloader for a Kaggle competition.
-
-  Usage:
-  You can download with dataset or competition name like `zillow/zecon`
-  or `titanic`.
-
-  ```
-  downloader = KaggleCompetitionDownloader(competition_name)
-  downloader.download_competition(competition, make_file_output_path(fname))
-  ```
-  """
-
-  def __init__(self, competition_name):
-    self._competition_name = competition_name
-    self._kaggle_type = _get_kaggle_type(self._competition_name)
-
-  @utils.memoized_property
-  def competition_url(self):
-    """Returns 'kaggle.com' urls."""
-    return "%s/%s" % ("kaggle.com", self._competition_name)
-
-  @utils.memoized_property
-  def download_dir_name(self):
-    """Returns name of dir where the dataset is to be downloaded."""
-    return self._competition_name.replace("/", "_")
-
-  @staticmethod
-  def is_kaggle_url(url):
-    return url.startswith("kaggle.com")
-
-  def download_competition(self, competition, output_dir):
-    """Downloads competition file to output_dir."""
-    command = ["kaggle",
-               self._kaggle_type.download_cmd,
-               "download",
-               self._kaggle_type.dl_flag,
-               competition,
-               "-p",
-               output_dir]
-    _run_kaggle_command(command, self._competition_name)
-    downloads = tf.io.gfile.listdir(output_dir)
-    for download in downloads:
-      fpath = os.path.join(output_dir, download)
-      if zipfile.is_zipfile(fpath):
-        ext = extractor.get_extractor()
-        with ext.tqdm():
-          ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
-    return output_dir
+def is_kaggle_url(url):
+  return url.startswith("kaggle.com")
 
 
-def _run_kaggle_command(command_args, competition_name):
+def kaggle_dir_name(competition_or_dataset):
+  """Returns name of dir where the dataset is to be downloaded."""
+  return competition_or_dataset.replace("/", "_")
+
+
+def get_kaggle_url(competition_or_dataset):
+  """Returns 'kaggle.com' urls."""
+  return "%s/%s" % ("kaggle.com", competition_or_dataset)
+
+
+def log_command_output(output, error=False):
+  log = logging.error if error else logging.info
+  log("kaggle command output:\n%s", tf.compat.as_text(output))
+
+
+def run_kaggle_command(command_args, competition_or_dataset):
   """Run kaggle command with subprocess."""
   try:
     output = sp.check_output(command_args)
     return tf.compat.as_text(output)
   except sp.CalledProcessError as err:
     output = err.output
-    _log_command_output(output, error=True)
+    log_command_output(output, error=True)
     if output.startswith(b"404"):
-      logging.error(_NOT_FOUND_ERR_MSG, competition_name)
+      logging.error(_NOT_FOUND_ERR_MSG, competition_or_dataset)
       raise
-    logging.error(_ERR_MSG, competition_name)
+    logging.error(_ERR_MSG, competition_or_dataset)
     raise
 
 
-def _log_command_output(output, error=False):
-  log = logging.error if error else logging.info
-  log("kaggle command output:\n%s", tf.compat.as_text(output))
+def download_kaggle_data(competition_or_dataset, output_dir):
+  """Downloads kaggle data to output_dir"""
+  kaggle_type = get_kaggle_type(competition_or_dataset)
+  command = ["kaggle",
+             kaggle_type.download_cmd,
+             "download",
+             kaggle_type.dl_flag,
+             competition_or_dataset,
+             "-p",
+             output_dir]
+  run_kaggle_command(command, competition_or_dataset)
+  downloads = tf.io.gfile.listdir(output_dir)
+  for download in downloads:
+    fpath = os.path.join(output_dir, download)
+    if zipfile.is_zipfile(fpath):
+      ext = extractor.get_extractor()
+      with ext.tqdm():
+        ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
+
+
+def kaggle_download(competition_or_dataset, download_dir):
+  """Downloads competition file to output_dir."""
+  kaggle_dir = kaggle_dir_name(competition_or_dataset)
+  download_path = os.path.join(download_dir, kaggle_dir)
+  # If the dataset has already been downloaded, return the path to it.
+  if os.path.isdir(download_path):
+    logging.info('Dataset %s already downloaded: reusing %s.',
+                 competition_or_dataset, download_path)
+    return download_path
+  # Otherwise, download the dataset.
+  with utils.incomplete_dir(download_path) as tmp_data_dir:
+    logging.info('Downloading %s into %s...', competition_or_dataset,
+                 tmp_data_dir)
+    download_kaggle_data(competition_or_dataset, tmp_data_dir)
+  return download_path
