@@ -22,6 +22,7 @@ from tensorflow_datasets.text.c4 import C4
 from tensorflow_datasets.text.cfq import CFQ
 from tensorflow_datasets.text.cfq import CFQConfig
 from tensorflow_datasets.text.civil_comments import CivilComments
+from tensorflow_datasets.text.clinc_oos import ClincOOS
 from tensorflow_datasets.text.cos_e import CosE
 from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
 from tensorflow_datasets.text.eraser_multi_rc import EraserMultiRc
