@@ -303,8 +303,9 @@ def load(name,
       `['train', 'test']`, `'train[80%:]'`,...). See our
       [split API guide](https://www.tensorflow.org/datasets/splits).
       If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`
-    data_dir: `str` (optional), directory to read/write data.
-      Defaults to "~/tensorflow_datasets".
+    data_dir: `str`, directory to read/write data. Defaults to the value of
+      the environment variable TFDS_DATA_DIR, if set, otherwise falls back to
+      "~/tensorflow_datasets".
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
