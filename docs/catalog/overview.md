@@ -4,9 +4,7 @@ file. -->
 
 # Datasets
 
-Note: The datasets documented here are from `HEAD` and so not all are available
-in the current `tensorflow-datasets` package. They are all accessible in our
-nightly package `tfds-nightly`.
+Note: The datasets marked with `nights-stay` are available only in the TFDS nightly package `tfds-nightly`.
 
 --------------------------------------------------------------------------------
 
