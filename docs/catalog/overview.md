@@ -4,7 +4,8 @@ file. -->
 
 # Datasets
 
-Note: The datasets marked with `nights-stay` are available only in the TFDS nightly package `tfds-nightly`.
+Note: The datasets marked with `nights-stay` are available only in the TFDS
+nightly package `tfds-nightly`.
 
 --------------------------------------------------------------------------------
 
