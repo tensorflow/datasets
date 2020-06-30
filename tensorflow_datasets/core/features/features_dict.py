@@ -29,6 +29,20 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 
 
+class _DictGetCounter(object):
+  """Wraps dict.get and counts successful key accesses."""
+
+  def __init__(self, d):
+    self.count = 0
+    self.wrapped_mapping = d
+
+  def get(self, key: str):
+    if self.wrapped_mapping and key in self.wrapped_mapping:
+      self.count += 1
+      return self.wrapped_mapping[key]
+    return None
+
+
 class FeaturesDict(top_level_feature.TopLevelFeature):
   """Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
@@ -177,18 +191,12 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
           'Error while flattening dict: FeaturesDict received a non dict item: '
           '{}'.format(x))
 
-    cache = {'counter': 0}  # Could use nonlocal in Python
-    def _get(k):
-      if x and k in x:
-        cache['counter'] += 1
-        return x[k]
-      return None
-
+    dict_counter = _DictGetCounter(x)
     out = []
     for k, f in sorted(self.items()):
-      out.extend(f._flatten(_get(k)))  # pylint: disable=protected-access
+      out.extend(f._flatten(dict_counter.get(k)))  # pylint: disable=protected-access
 
-    if x and cache['counter'] != len(x):
+    if x and dict_counter.count != len(x):
       raise ValueError(
           'Error while flattening dict: Not all dict items have been consumed, '
           'this means that the provided dict structure does not match the '
