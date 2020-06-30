@@ -62,6 +62,8 @@ class TFGraphRunner(object):
 
   """
 
+  __slots__ = ['_graph_run_cache']
+
   def __init__(self):
     """Constructor."""
     # Cache containing all compiled graph and opened session. Only used in

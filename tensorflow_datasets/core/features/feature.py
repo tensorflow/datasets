@@ -102,6 +102,8 @@ from tensorflow_datasets.core import utils
 class TensorInfo(object):
   """Structure containing info on the `tf.Tensor` shape/dtype."""
 
+  __slots__ = ['shape', 'dtype', 'default_value', 'sequence_rank']
+
   def __init__(self, shape, dtype, default_value=None, sequence_rank=None):
     """Constructor.
 
