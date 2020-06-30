@@ -90,8 +90,7 @@ def build_autocached_info(builder):
       assert not cache_shuffled and cache_unshuffled
       unshuffle_cached.add(split_name)
 
-
-  if not len(builder.info.splits):
+  if not len(builder.info.splits) or not builder.info.dataset_size:
     autocached_info = 'Unknown'
   elif len(always_cached) == len(builder.info.splits.keys()):
     autocached_info = 'Yes'  # All splits are auto-cached.
