@@ -4,9 +4,10 @@ file. -->
 
 # Datasets
 
-Note: The datasets documented here are from `HEAD` and so not all are available
-in the current `tensorflow-datasets` package. They are all accessible in our
-nightly package `tfds-nightly`.
+Note: Datasets marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+have been recently added and will be available in the next TFDS release. They
+are available now in the TFDS nightly package `tfds-nightly`.
 
 --------------------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ See our [getting-started guide](https://www.tensorflow.org/datasets/overview)
 for a quick introduction.
 
 ```python
-for ex in tfds.load('cifar10', split='train'):
+for ex in tfds.load('cifar10', split='train'):    
   ...
 ```
 
