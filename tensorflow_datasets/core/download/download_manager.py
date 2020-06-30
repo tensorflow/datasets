@@ -37,6 +37,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
+from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
 
@@ -514,25 +515,21 @@ class DownloadManager(object):
       return self._extract(resource)
     return self._download(resource).then(callback)
 
-  def download_kaggle_data(self, dataset_name: str):
+  def download_kaggle_data(self, competition_or_dataset: str) -> str:
     """Download data for a given Kaggle Dataset or competition.
 
-    Note: This function requires Kaggle CLI tool. Read the installation guide
-    at https://www.kaggle.com/docs/api.
+    Note: This function requires the Kaggle CLI tool.
+    Read the installation guide at https://www.kaggle.com/docs/api.
 
     Args:
-      dataset_name: Dataset name (`zillow/zecon`) or competition name
-        (`titanic`)
+      competition_or_dataset: Dataset name (`zillow/zecon`) or
+        competition name (`titanic`)
 
     Returns:
       The path to the downloaded files.
     """
-    with self._downloader.tqdm():
-      kaggle_downloader = self._downloader.kaggle_downloader(dataset_name)
-      urls = kaggle_downloader.competition_urls
-      files = kaggle_downloader.competition_files
-      return _map_promise(self._download,
-                          dict((f, u) for (f, u) in zip(files, urls)))
+    return kaggle.download_kaggle_data(
+        competition_or_dataset, self._download_dir)
 
   def download(self, url_or_urls):
     """Download given url(s).

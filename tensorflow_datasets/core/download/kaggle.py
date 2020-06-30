@@ -20,9 +20,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
 import os
-import subprocess as sp
+import subprocess
+import textwrap
+from typing import List
 import zipfile
 
 from absl import logging
@@ -32,173 +33,120 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource
 
-_ERR_MSG = """\
-To download Kaggle data through TFDS, follow the instructions to install the \
-kaggle API and get API credentials:
-https://github.com/Kaggle/kaggle-api#installation
 
-Additionally, you must join the competition through the Kaggle competition's \
-website:
-https://www.kaggle.com/c/%s
-"""
+def _get_kaggle_type(competition_or_dataset: str) -> str:
+  """Returns the kaggle type (competitions/datasets).
 
-_NOT_FOUND_ERR_MSG = """\
-Competition %s not found. Please ensure you have spelled the competition name \
-correctly.
-"""
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
 
-KaggleType = collections.namedtuple(
-    "KaggleType",
-    ["prefix", "download_cmd", "dl_flag", "extra_flag"])
-
-_KAGGLE_TYPES = {
-    "dataset": KaggleType(
-        prefix="dataset",
-        download_cmd="datasets",
-        dl_flag="-d",
-        extra_flag="--unzip"),
-    "competition": KaggleType(
-        prefix="competition",
-        download_cmd="competitions",
-        dl_flag="-c",
-        extra_flag="")
-}
-
-
-def _get_kaggle_type(competition_name):
-  if "/" in competition_name:
-    return _KAGGLE_TYPES["dataset"]
-  return _KAGGLE_TYPES["competition"]
-
-
-class KaggleFile(object):
-  """Represents a Kaggle competition file."""
-  _URL_PREFIX = "kaggle://"
-
-  def __init__(self, competition_name, filename):
-    self._competition_name = competition_name
-    self._filename = filename
-    self.type = _get_kaggle_type(competition_name)
-
-  @property
-  def competition(self):
-    return self._competition_name
-
-  @property
-  def filename(self):
-    return self._filename
-
-  @classmethod
-  def from_url(cls, url):
-    if not KaggleFile.is_kaggle_url(url):
-      raise TypeError("Not a valid kaggle URL")
-    download_type, competition_name, filename = (
-        url[len(cls._URL_PREFIX):].split("/", 2))
-    if download_type == "dataset":
-      dataset_name, filename = filename.split("/", 1)
-      competition_name = "%s/%s" % (competition_name, dataset_name)
-    return cls(competition_name, filename)
-
-  @staticmethod
-  def is_kaggle_url(url):
-    return url.startswith(KaggleFile._URL_PREFIX)
-
-  def to_url(self):
-    return "%s%s/%s/%s" % (self._URL_PREFIX,
-                           self.type.prefix,
-                           self._competition_name,
-                           self._filename)
-
-
-class KaggleCompetitionDownloader(object):
-  """Downloader for a Kaggle competition.
-
-  Usage:
-  You can download with dataset or competition name like `zillow/zecon`
-  or `titanic`.
-
-  ```
-  downloader = KaggleCompetitionDownloader(competition_name)
-  for fname in downloader.competition_files:
-    downloader.download_file(fname, make_file_output_path(fname))
-  ```
+  Returns:
+    Kaggle type (competitions/datasets).
   """
-
-  def __init__(self, competition_name):
-    self._competition_name = competition_name
-    self._kaggle_type = _get_kaggle_type(self._competition_name)
-
-  @utils.memoized_property
-  def competition_files(self):
-    """List of competition files."""
-    command = [
-        "kaggle",
-        self._kaggle_type.download_cmd,
-        "files",
-        "-v",
-        self._competition_name,
-    ]
-    output = _run_kaggle_command(command, self._competition_name)
-    return sorted([
-        line.split(",")[0] for line in output.split("\n")[1:] if line
-    ])
-
-  @utils.memoized_property
-  def competition_urls(self):
-    """Returns 'kaggle://' urls."""
-    return [
-        KaggleFile(self._competition_name, fname).to_url()
-        for fname in self.competition_files  # pylint: disable=not-an-iterable
-    ]
-
-  def download_file(self, fname, output_dir):
-    """Downloads competition file to output_dir."""
-    if fname not in self.competition_files:  # pylint: disable=unsupported-membership-test
-      raise ValueError("%s is not one of the competition's "
-                       "files: %s" % (fname, self.competition_files))
-    command = [
-        "kaggle",
-        self._kaggle_type.download_cmd,
-        "download",
-        "--file",
-        fname,
-        "--path",
-        output_dir,
-        self._kaggle_type.dl_flag,
-        self._competition_name
-    ]
-    if self._kaggle_type.extra_flag:
-      command.append(self._kaggle_type.extra_flag)
-    _run_kaggle_command(command, self._competition_name)
-    # kaggle silently compresses some files to '.zip` files.
-    # TODO(tfds): use --unzip once supported by kaggle
-    # (https://github.com/Kaggle/kaggle-api/issues/9)
-    fpath = os.path.join(output_dir, fname + ".zip")
-    if zipfile.is_zipfile(fpath):
-      e = extractor.get_extractor()
-      with e.tqdm():
-        e.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
-    return os.path.join(output_dir, fname)
+  # Dataset are `user/dataset_name`
+  return 'datasets' if '/' in competition_or_dataset else 'competitions'
 
 
-def _run_kaggle_command(command_args, competition_name):
-  """Run kaggle command with subprocess."""
+def _kaggle_dir_name(competition_or_dataset: str) -> str:
+  """Returns path where the dataset is to be downloaded.
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+
+  Returns:
+    Path to the dir where the dataset is to be downloaded.
+  """
+  return competition_or_dataset.replace('/', '_')
+
+
+def _run_command(command_args: List[str]) -> str:
+  """Run kaggle command with subprocess.
+
+  Args:
+    command_args: Arguments to the kaggle api.
+
+  Returns:
+    output of the command.
+
+  Raises:
+    CalledProcessError: If the command terminates with exit status 1.
+  """
+  command_str = ' '.join(command_args)
+  competition_or_dataset = command_args[-1]
   try:
-    output = sp.check_output(command_args)
-    return tf.compat.as_text(output)
-  except sp.CalledProcessError as err:
-    output = err.output
-    _log_command_output(output, error=True)
-    if output.startswith(b"404"):
-      logging.error(_NOT_FOUND_ERR_MSG, competition_name)
-      raise
-    logging.error(_ERR_MSG, competition_name)
-    raise
-  except FileNotFoundError as err:
-    raise FileNotFoundError(_ERR_MSG % competition_name +
-                            "\nOriginal exception: {}".format(err))
+    return subprocess.check_output(command_args, encoding='UTF-8')
+  except (subprocess.CalledProcessError, FileNotFoundError) as err:
+    if isinstance(err, subprocess.CalledProcessError) and '404' in err.output:
+      raise ValueError(textwrap.dedent("""\
+      Error for command: {}
+
+      Competition {} not found. Please ensure you have spelled the name
+      correctly.
+      """).format(command_str, competition_or_dataset))
+    else:
+      raise RuntimeError(textwrap.dedent("""\
+      Error for command: {}
+
+      To download Kaggle data through TFDS, follow the instructions to install
+      the kaggle API and get API credentials:
+      https://github.com/Kaggle/kaggle-api#installation
+
+      Additionally, you may have to join the competition through the Kaggle
+      website: https://www.kaggle.com/c/{}
+      """).format(command_str, competition_or_dataset))
 
 
-def _log_command_output(output, error=False):
-  log = logging.error if error else logging.info
-  log("kaggle command output:\n%s", tf.compat.as_text(output))
+def _download_competition_or_dataset(
+    competition_or_dataset: str, output_dir: str
+) -> None:
+  """Downloads the data and extracts it if it was zipped by the kaggle api.
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+    output_dir: Path to the dir where the data is to be downloaded.
+  """
+  _run_command([
+      'kaggle',
+      _get_kaggle_type(competition_or_dataset),
+      'download',
+      '--path',
+      output_dir,
+      competition_or_dataset,
+  ])
+  for download in tf.io.gfile.listdir(output_dir):
+    fpath = os.path.join(output_dir, download)
+    if zipfile.is_zipfile(fpath):
+      ext = extractor.get_extractor()
+      with ext.tqdm():
+        ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
+
+
+def download_kaggle_data(competition_or_dataset: str, download_dir: str) -> str:
+  """Downloads the kaggle data to the output_dir.
+
+  Args:
+    competition_or_dataset: Name of the kaggle competition/dataset.
+    download_dir: Path to the TFDS downloads dir.
+
+  Returns:
+    Path to the dir where the kaggle data was downloaded.
+  """
+  kaggle_dir = _kaggle_dir_name(competition_or_dataset)
+  download_path = os.path.join(download_dir, kaggle_dir)
+  # If the dataset has already been downloaded, return the path to it.
+  if os.path.isdir(download_path):
+    logging.info(
+        'Dataset %s already downloaded: reusing %s.',
+        competition_or_dataset,
+        download_path,
+    )
+    return download_path
+  # Otherwise, download the dataset.
+  with utils.incomplete_dir(download_path) as tmp_data_dir:
+    logging.info(
+        'Downloading %s into %s...',
+        competition_or_dataset,
+        tmp_data_dir,
+    )
+    _download_competition_or_dataset(competition_or_dataset, tmp_data_dir)
+  return download_path
