@@ -363,16 +363,6 @@ def atomic_write(path, mode):
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
 
 
-class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
-  """Decorate a method to mark it as an abstract @classmethod."""
-
-  __isabstractmethod__ = True
-
-  def __init__(self, fn):
-    fn.__isabstractmethod__ = True
-    super(abstractclassmethod, self).__init__(fn)
-
-
 def get_tfds_path(relative_path):
   """Returns absolute path to file given path relative to tfds root."""
   path = os.path.join(tfds_dir(), relative_path)
