@@ -300,6 +300,9 @@ toc:
     title: cfq
   - path: /datasets/catalog/civil_comments
     title: civil_comments
+  - path: /datasets/catalog/clinc_oos
+    status: nightly
+    title: clinc_oos
   - path: /datasets/catalog/cos_e
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
