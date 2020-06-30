@@ -58,6 +58,8 @@ By default, TFDS auto-caches datasets which satisfy the following constraints:
 *   Total dataset size (all splits) is defined and < 250 MiB
 *   `shuffle_files` is disabled, or only a single shard is read
 
+Datasets with unknown metadata are not auto-cached.
+
 It is possible to opt out of auto-caching by passing `try_autocaching=False` to
 `tfds.ReadConfig` in `tfds.load`. Have a look at the dataset catalog
 documentation to see if a specific dataset will use auto-cache.
