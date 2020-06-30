@@ -36,8 +36,13 @@ ${builder.info.description}
 </%def>
 
 <%def name="display_source(builder)">\
+<%
+path = tfds.core.utils.get_class_path(builder).split('.')
+del path[2]
+path = '.'.join(path)
+%>
 *   **Source code**:
-    [`${tfds.core.utils.get_class_path(builder)}`](${tfds.core.utils.get_class_url(builder)})
+    [`${path}`](${tfds.core.utils.get_class_url(builder)})
 </%def>
 
 <%def name="display_versions(builder)">\
