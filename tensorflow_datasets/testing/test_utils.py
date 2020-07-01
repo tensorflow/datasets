@@ -392,7 +392,7 @@ class FeatureExpectationsTestCase(SubTestCase):
 
         # Assert the returned type match the expected one
         with self._subTest('dtype'):
-          out_dtypes = utils.map_nested(lambda s: s.dtype, out_tensor)
+          out_dtypes = tf.nest.map_structure(lambda s: s.dtype, out_tensor)
           self.assertEqual(out_dtypes, test.dtype or feature.dtype)
         with self._subTest('shape'):
           # For shape, because (None, 3) match with (5, 3), we use
@@ -407,7 +407,7 @@ class FeatureExpectationsTestCase(SubTestCase):
         # Assert value
         with self._subTest('out_value'):
           # Eventually construct the tf.RaggedTensor
-          expected = utils.map_nested(
+          expected = tf.nest.map_structure(
               lambda t: t.build() if isinstance(t, RaggedConstant) else t,
               test.expected)
           self.assertAllEqualNested(out_numpy, expected)

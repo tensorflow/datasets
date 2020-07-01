@@ -249,8 +249,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
-    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
-                            self.DL_EXTRACT_RESULT)
+    return tf.nest.map_structure(
+        lambda fname: os.path.join(self.example_dir, fname),
+        self.DL_EXTRACT_RESULT,
+    )
 
   def _get_dl_download_result(self, url):
     tf.nest.map_structure(self._add_url, url)
@@ -258,8 +260,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       # This is only to be backwards compatible with old approach.
       # In the future it will be replaced with using self.example_dir.
       return self._get_dl_extract_result(url)
-    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
-                            self.DL_DOWNLOAD_RESULT)
+    return tf.nest.map_structure(
+        lambda fname: os.path.join(self.example_dir, fname),
+        self.DL_DOWNLOAD_RESULT,
+    )
 
   def _download_checksums(self, url):
     self._stop_record_download = True

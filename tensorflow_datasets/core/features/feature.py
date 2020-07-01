@@ -198,12 +198,12 @@ class FeatureConnector(object):
   @property
   def shape(self):
     """Return the shape (or dict of shape) of this FeatureConnector."""
-    return utils.map_nested(lambda t: t.shape, self.get_tensor_info())
+    return tf.nest.map_structure(lambda t: t.shape, self.get_tensor_info())
 
   @property
   def dtype(self):
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
-    return utils.map_nested(lambda t: t.dtype, self.get_tensor_info())
+    return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
   def get_serialized_info(self):
     """Return the shape/dtype of features after encoding (for the adapter).

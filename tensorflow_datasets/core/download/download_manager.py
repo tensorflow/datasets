@@ -23,7 +23,6 @@ from __future__ import print_function
 import concurrent.futures
 import hashlib
 import os
-import sys
 from typing import Optional, Union
 import uuid
 
@@ -632,29 +631,12 @@ def _read_url_info(url_path: str) -> checksums.UrlInfo:
   return checksums.UrlInfo(**file_info['url_info'])
 
 
-# ============================================================================
-# In Python 2.X, threading.Condition.wait() cannot be interrupted by SIGINT,
-# unless it's given a timeout. Here we artificially give a long timeout to
-# allow ctrl+C.
-# This code should be deleted once python2 is no longer supported.
-if sys.version_info[0] > 2:
-
-  def _wait_on_promise(p):
-    return p.get()
-
-else:
-
-  def _wait_on_promise(p):
-    while True:
-      result = p.get(sys.maxint)  # pylint: disable=g-deprecated-member-used
-      if p.is_fulfilled:
-        return result
-
-# ============================================================================
+def _wait_on_promise(p):
+  return p.get()
 
 
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
-  all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
-  res = utils.map_nested(_wait_on_promise, all_promises)
+  all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
+  res = tf.nest.map_structure(_wait_on_promise, all_promises)
   return res

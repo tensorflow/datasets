@@ -27,7 +27,6 @@ import functools
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core.utils import py_utils
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -75,7 +74,7 @@ class Decoder(object):
   def dtype(self):
     """Returns the `dtype` after decoding."""
     tensor_info = self.feature.get_tensor_info()
-    return py_utils.map_nested(lambda t: t.dtype, tensor_info)
+    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
 
   @abc.abstractmethod
   def decode_example(self, serialized_example):
@@ -124,7 +123,7 @@ class SkipDecoding(Decoder):
   @property
   def dtype(self):
     tensor_info = self.feature.get_serialized_info()
-    return py_utils.map_nested(lambda t: t.dtype, tensor_info)
+    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
 
   def decode_example(self, serialized_example):
     """Forward the serialized feature field."""
