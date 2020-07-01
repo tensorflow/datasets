@@ -18,15 +18,21 @@ Large scale images showing different objects from given categories like bedroom,
 tower etc.
 
 *   **Homepage**: [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
+
 *   **Source code**:
-    [`tfds.image.lsun.Lsun`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lsun.py)
+    [`tfds.image.Lsun`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lsun.py)
+
 *   **Versions**:
+
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Features**:
 
 ```python

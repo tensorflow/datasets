@@ -32,17 +32,24 @@ CelebA dataset.
 
 *   **Homepage**:
     [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
+
 *   **Source code**:
-    [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
+    [`tfds.image.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
+
 *   **Versions**:
+
     *   **`2.0.1`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `2.0.0`: No release notes.
+
 *   **Download size**: `1.38 GiB`
+
 *   **Dataset size**: `1.62 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

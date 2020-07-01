@@ -29,7 +29,7 @@ There are two features:
     [https://arxiv.org/src/1911.12237v2/anc](https://arxiv.org/src/1911.12237v2/anc)
 
 *   **Source code**:
-    [`tfds.summarization.samsum.Samsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/samsum.py)
+    [`tfds.summarization.Samsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/samsum.py)
 
 *   **Versions**:
 

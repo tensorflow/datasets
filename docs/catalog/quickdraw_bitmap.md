@@ -20,16 +20,23 @@ contains these drawings converted from vector format into 28x28 grayscale images
 
 *   **Homepage**:
     [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+
 *   **Source code**:
-    [`tfds.image_classification.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/quickdraw.py)
+    [`tfds.image_classification.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/quickdraw.py)
+
 *   **Versions**:
+
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `36.82 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

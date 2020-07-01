@@ -40,17 +40,24 @@ ensuring that all pixel outputs were different. No noise was added.
 
 *   **Homepage**:
     [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
+
 *   **Source code**:
-    [`tfds.image.dsprites.Dsprites`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dsprites.py)
+    [`tfds.image.Dsprites`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dsprites.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
     *   `2.1.0`: No release notes.
+
 *   **Download size**: `26.73 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

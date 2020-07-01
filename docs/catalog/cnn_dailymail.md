@@ -22,16 +22,22 @@ each highlight, which is the target summary
 
 *   **Homepage**:
     [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+
 *   **Source code**:
-    [`tfds.summarization.cnn_dailymail.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/cnn_dailymail.py)
+    [`tfds.summarization.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/cnn_dailymail.py)
+
 *   **Versions**:
+
     *   **`3.0.0`** (default): Using cased version.
     *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   `2.0.0`: Separate target sentences with newline.
+
 *   **Download size**: `558.32 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

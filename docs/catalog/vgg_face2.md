@@ -27,12 +27,18 @@ subject.
 
 *   **Homepage**:
     [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
+
 *   **Source code**:
-    [`tfds.image_classification.vgg_face2.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/vgg_face2.py)
+    [`tfds.image_classification.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/vgg_face2.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -40,9 +46,11 @@ subject.
     vggface2_train.tar.gz.
     You need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in
     order to get the link to download the dataset.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

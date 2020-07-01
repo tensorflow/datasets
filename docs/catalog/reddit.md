@@ -24,15 +24,22 @@ summary.
 
 *   **Homepage**:
     [https://github.com/webis-de/webis-tldr-17-corpus](https://github.com/webis-de/webis-tldr-17-corpus)
+
 *   **Source code**:
-    [`tfds.summarization.reddit.Reddit`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit.py)
+    [`tfds.summarization.Reddit`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `2.93 GiB`
+
 *   **Dataset size**: `18.09 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split   | Examples

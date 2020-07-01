@@ -27,7 +27,7 @@ from 113 unique camera viewpoints.
 *   **Homepage**: [https://www.robonet.wiki/](https://www.robonet.wiki/)
 
 *   **Source code**:
-    [`tfds.video.robonet.Robonet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/robonet.py)
+    [`tfds.video.Robonet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/robonet.py)
 
 *   **Versions**:
 

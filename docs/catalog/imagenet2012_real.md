@@ -27,21 +27,29 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
 
 *   **Homepage**:
     [https://github.com/google-research/reassessed-imagenet](https://github.com/google-research/reassessed-imagenet)
+
 *   **Source code**:
-    [`tfds.image_classification.imagenet2012_real.Imagenet2012Real`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_real.py)
+    [`tfds.image_classification.Imagenet2012Real`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_real.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): Initial release.
+
 *   **Download size**: `379.37 KiB`
+
 *   **Dataset size**: `6.25 GiB`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
     manual_dir should contain `ILSVRC2012_img_val.tar` file.
     You need to register on http://www.image-net.org/download-images in order
     to get the link to download the dataset.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

@@ -23,16 +23,23 @@ Imagenet, trainable on a single GPU.
 
 *   **Homepage**:
     [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
+
 *   **Source code**:
-    [`tfds.image_classification.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/patch_camelyon.py)
+    [`tfds.image_classification.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/patch_camelyon.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `7.48 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

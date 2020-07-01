@@ -23,15 +23,22 @@ title: trimmed title without tldr. - ups: upvotes. - score: score. -
 num_comments: number of comments. - upvote_ratio: upvote ratio.
 
 *   **Homepage**: [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
+
 *   **Source code**:
-    [`tfds.summarization.reddit_tifu.RedditTifu`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit_tifu.py)
+    [`tfds.summarization.RedditTifu`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit_tifu.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): No release notes.
+
 *   **Download size**: `639.54 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Features**:
 
 ```python

@@ -21,16 +21,23 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
 *   **Homepage**:
     [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
+
 *   **Source code**:
-    [`tfds.image_classification.cars196.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cars196.py)
+    [`tfds.image_classification.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cars196.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
     *   `2.1.0`: No release notes.
+
 *   **Download size**: `1.82 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

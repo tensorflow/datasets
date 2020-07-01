@@ -20,16 +20,23 @@ images uploaded by the original authors
 
 *   **Homepage**:
     [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
 *   **Source code**:
-    [`tfds.image_classification.mnist_corrupted.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist_corrupted.py)
+    [`tfds.image_classification.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist_corrupted.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `235.23 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

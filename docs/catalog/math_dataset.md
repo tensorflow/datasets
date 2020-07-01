@@ -52,15 +52,22 @@ train_examples, val_examples = tfds.load(
 
 *   **Homepage**:
     [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
 *   **Source code**:
-    [`tfds.text.math_dataset.MathDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_dataset.py)
+    [`tfds.text.MathDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_dataset.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `2.17 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

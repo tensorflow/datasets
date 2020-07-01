@@ -32,12 +32,18 @@ thread
 
 *   **Homepage**:
     [https://github.com/henghuiz/MaskedHierarchicalTransformer](https://github.com/henghuiz/MaskedHierarchicalTransformer)
+
 *   **Source code**:
-    [`tfds.text.reddit_disentanglement.RedditDisentanglement`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/reddit_disentanglement.py)
+    [`tfds.text.RedditDisentanglement`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/reddit_disentanglement.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -45,9 +51,11 @@ thread
     raw_data.zip and run generate_dataset.py with your reddit api credentials.
     Then put train.csv, val.csv and test.csv from the output directory into the
     manual folder.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Splits**:
 
 Split | Examples

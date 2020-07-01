@@ -22,13 +22,18 @@ expert-crafted grammars.
 
 *   **Homepage**:
     [https://github.com/alexwarstadt/blimp/tree/master/](https://github.com/alexwarstadt/blimp/tree/master/)
+
 *   **Source code**:
-    [`tfds.text.blimp.Blimp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/blimp.py)
+    [`tfds.text.Blimp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/blimp.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

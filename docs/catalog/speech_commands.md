@@ -28,15 +28,22 @@ for the validation set.
 
 *   **Homepage**:
     [https://arxiv.org/abs/1804.03209](https://arxiv.org/abs/1804.03209)
+
 *   **Source code**:
-    [`tfds.audio.speech_commands.SpeechCommands`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/speech_commands.py)
+    [`tfds.audio.SpeechCommands`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/speech_commands.py)
+
 *   **Versions**:
+
     *   **`0.0.2`** (default): No release notes.
+
 *   **Download size**: `2.37 GiB`
+
 *   **Dataset size**: `8.17 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

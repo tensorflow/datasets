@@ -18,16 +18,23 @@ Images of hands playing rock, paper, scissor game.
 
 *   **Homepage**:
     [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+
 *   **Source code**:
-    [`tfds.image_classification.rock_paper_scissors.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/rock_paper_scissors.py)
+    [`tfds.image_classification.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/rock_paper_scissors.py)
+
 *   **Versions**:
+
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `219.53 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

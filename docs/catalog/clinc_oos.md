@@ -31,15 +31,22 @@ task-driven dialog systems.
 
 *   **Homepage**:
     [https://github.com/clinc/oos-eval/](https://github.com/clinc/oos-eval/)
+
 *   **Source code**:
-    [`tfds.text.clinc_oos.ClincOOS`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/clinc_oos.py)
+    [`tfds.text.ClincOOS`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/clinc_oos.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `256.01 KiB`
+
 *   **Dataset size**: `3.40 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split            | Examples

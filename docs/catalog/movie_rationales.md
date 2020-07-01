@@ -19,15 +19,22 @@ reviews.
 
 *   **Homepage**:
     [http://www.cs.jhu.edu/~ozaidan/rationales/](http://www.cs.jhu.edu/~ozaidan/rationales/)
+
 *   **Source code**:
-    [`tfds.text.movie_rationales.MovieRationales`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/movie_rationales.py)
+    [`tfds.text.MovieRationales`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/movie_rationales.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `3.72 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

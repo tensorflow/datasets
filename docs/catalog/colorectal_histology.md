@@ -19,16 +19,23 @@ x 150 x 3 RGB image of one of 8 classes.
 
 *   **Homepage**:
     [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+
 *   **Source code**:
-    [`tfds.image_classification.colorectal_histology.ColorectalHistology`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/colorectal_histology.py)
+    [`tfds.image_classification.ColorectalHistology`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/colorectal_histology.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `246.14 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

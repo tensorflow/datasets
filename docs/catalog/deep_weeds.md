@@ -23,16 +23,23 @@ Range", "Kelso", "McKinlay" and "Paluma".
 
 *   **Homepage**:
     [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
+
 *   **Source code**:
-    [`tfds.image_classification.deep_weeds.DeepWeeds`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/deep_weeds.py)
+    [`tfds.image_classification.DeepWeeds`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/deep_weeds.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): Fixes wrong labels in V1.
     *   `1.0.0`: No release notes.
+
 *   **Download size**: `892.52 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

@@ -18,15 +18,22 @@ Language modeling resources to be used in conjunction with the LibriSpeech ASR
 corpus.
 
 *   **Homepage**: [http://www.openslr.org/11](http://www.openslr.org/11)
+
 *   **Source code**:
-    [`tfds.text.librispeech_lm.LibrispeechLm`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/librispeech_lm.py)
+    [`tfds.text.LibrispeechLm`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/librispeech_lm.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `1.40 GiB`
+
 *   **Dataset size**: `4.62 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split   | Examples

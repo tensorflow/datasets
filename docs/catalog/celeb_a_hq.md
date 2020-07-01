@@ -28,13 +28,19 @@ WARNING: This dataset currently requires you to prepare images on your own.
 
 *   **Homepage**:
     [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 *   **Source code**:
-    [`tfds.image.celebahq.CelebAHq`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celebahq.py)
+    [`tfds.image.CelebAHq`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celebahq.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -42,9 +48,11 @@ WARNING: This dataset currently requires you to prepare images on your own.
     data4x4.tar .. data1024x1024.tar).
     Detailed instructions are here:
     https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

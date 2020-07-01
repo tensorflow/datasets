@@ -29,17 +29,24 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Homepage**:
     [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+
 *   **Source code**:
-    [`tfds.image_classification.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/so2sat.py)
+    [`tfds.image_classification.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/so2sat.py)
+
 *   **Versions**:
+
     *   **`2.1.0`** (default): Using updated optical channels calibration
         factor.
     *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Splits**:
 
 Split | Examples

@@ -21,15 +21,22 @@ of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 
 *   **Homepage**:
     [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
+
 *   **Source code**:
-    [`tfds.image_classification.mnist.KMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+    [`tfds.image_classification.KMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+
 *   **Versions**:
+
     *   **`3.0.1`** (default): No release notes.
+
 *   **Download size**: `20.26 MiB`
+
 *   **Dataset size**: `31.76 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

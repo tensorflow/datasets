@@ -22,15 +22,22 @@ and collected by the Makerere AI research lab.
 
 *   **Homepage**:
     [https://github.com/AI-Lab-Makerere/ibean/](https://github.com/AI-Lab-Makerere/ibean/)
+
 *   **Source code**:
-    [`tfds.image_classification.beans.Beans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/beans.py)
+    [`tfds.image_classification.Beans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/beans.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `171.63 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split        | Examples

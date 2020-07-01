@@ -35,23 +35,32 @@ clean up extra commas.
 
 *   **Homepage**:
     [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
+
 *   **Source code**:
-    [`tfds.summarization.wikihow.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
+    [`tfds.summarization.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
+
 *   **Versions**:
+
     *   **`1.2.0`** (default): No release notes.
+
 *   **Download size**: `5.21 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
     Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
     Please download both wikihowAll.csv and wikihowSep.csv.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'headline')`
+
 *   **Citation**:
 
 ```

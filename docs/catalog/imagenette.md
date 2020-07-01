@@ -32,10 +32,14 @@ Dec 6 2019).
 
 *   **Homepage**:
     [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
+
 *   **Source code**:
-    [`tfds.image_classification.imagenette.Imagenette`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenette.py)
+    [`tfds.image_classification.Imagenette`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenette.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Features**:
 
 ```python
@@ -140,7 +144,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
@@ -164,7 +168,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
@@ -188,7 +192,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 

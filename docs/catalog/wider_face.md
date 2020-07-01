@@ -26,15 +26,22 @@ required to submit final prediction files, which we shall proceed to evaluate.
 
 *   **Homepage**:
     [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
+
 *   **Source code**:
-    [`tfds.object_detection.wider_face.WiderFace`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/wider_face.py)
+    [`tfds.object_detection.WiderFace`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/wider_face.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `3.42 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

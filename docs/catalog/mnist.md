@@ -18,15 +18,22 @@ The MNIST database of handwritten digits.
 
 *   **Homepage**:
     [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
+
 *   **Source code**:
-    [`tfds.image_classification.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+    [`tfds.image_classification.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+
 *   **Versions**:
+
     *   **`3.0.1`** (default): No release notes.
+
 *   **Download size**: `11.06 MiB`
+
 *   **Dataset size**: `21.00 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

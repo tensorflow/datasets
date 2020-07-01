@@ -25,7 +25,7 @@ human-like form of general fluid intelligence.
     [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
 
 *   **Source code**:
-    [`tfds.image.arc.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
+    [`tfds.image.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
 
 *   **Versions**:
 
@@ -37,7 +37,7 @@ human-like form of general fluid intelligence.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 

@@ -30,17 +30,24 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
+
 *   **Source code**:
-    [`tfds.image_classification.dtd.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dtd.py)
+    [`tfds.image_classification.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dtd.py)
+
 *   **Versions**:
+
     *   **`3.0.1`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
+
 *   **Download size**: `596.28 MiB`
+
 *   **Dataset size**: `603.00 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

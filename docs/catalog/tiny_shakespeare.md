@@ -35,15 +35,22 @@ d = d.batch(batch_size)
 
 *   **Homepage**:
     [https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt](https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt)
+
 *   **Source code**:
-    [`tfds.text.tiny_shakespeare.TinyShakespeare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/tiny_shakespeare.py)
+    [`tfds.text.TinyShakespeare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/tiny_shakespeare.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `1.06 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples

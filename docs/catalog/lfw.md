@@ -19,15 +19,22 @@ Unconstrained Environments
 
 *   **Homepage**:
     [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
+
 *   **Source code**:
-    [`tfds.image_classification.lfw.LFW`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/lfw.py)
+    [`tfds.image_classification.LFW`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/lfw.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `172.20 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

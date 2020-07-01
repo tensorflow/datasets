@@ -23,16 +23,23 @@ boxes.
 
 *   **Homepage**:
     [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
+
 *   **Source code**:
-    [`tfds.image_classification.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech.py)
+    [`tfds.image_classification.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech.py)
+
 *   **Versions**:
+
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `125.64 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

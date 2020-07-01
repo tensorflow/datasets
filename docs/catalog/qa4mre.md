@@ -24,14 +24,20 @@ alzheimers data, and the other on entrance exams data.
 
 *   **Homepage**:
     [http://nlp.uned.es/clef-qa/repository/pastCampaigns.php](http://nlp.uned.es/clef-qa/repository/pastCampaigns.php)
+
 *   **Source code**:
-    [`tfds.text.qa4mre.Qa4mre`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/qa4mre.py)
+    [`tfds.text.Qa4mre`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/qa4mre.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Features**:
 
 ```python

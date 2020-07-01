@@ -20,15 +20,22 @@ inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
 *   **Homepage**:
     [https://github.com/salesforce/cos-e](https://github.com/salesforce/cos-e)
+
 *   **Source code**:
-    [`tfds.text.cos_e.CosE`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cos_e.py)
+    [`tfds.text.CosE`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cos_e.py)
+
 *   **Versions**:
+
     *   **`0.0.1`** (default): No release notes.
+
 *   **Download size**: `6.23 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

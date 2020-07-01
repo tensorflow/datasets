@@ -27,7 +27,7 @@ Both "arxiv" and "pubmed" have two features:
     [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 
 *   **Source code**:
-    [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
+    [`tfds.summarization.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 
 *   **Versions**:
 

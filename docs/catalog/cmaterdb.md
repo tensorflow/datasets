@@ -28,14 +28,20 @@ research lab, Jadavpur University, India.
 
 *   **Homepage**:
     [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
+
 *   **Source code**:
-    [`tfds.image_classification.cmaterdb.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cmaterdb.py)
+    [`tfds.image_classification.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cmaterdb.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Features**:
 
 ```python

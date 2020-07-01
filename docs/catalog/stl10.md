@@ -25,15 +25,22 @@ a useful prior. All images were acquired from labeled examples on ImageNet.
 
 *   **Homepage**:
     [http://ai.stanford.edu/~acoates/stl10/](http://ai.stanford.edu/~acoates/stl10/)
+
 *   **Source code**:
-    [`tfds.image_classification.stl10.Stl10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stl10.py)
+    [`tfds.image_classification.Stl10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stl10.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `2.46 GiB`
+
 *   **Dataset size**: `1.86 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

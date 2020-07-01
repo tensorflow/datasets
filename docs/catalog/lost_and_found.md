@@ -28,14 +28,20 @@ http://www.6d-vision.com/laf_table.pdf
 
 *   **Homepage**:
     [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
+
 *   **Source code**:
-    [`tfds.image.lost_and_found.LostAndFound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lost_and_found.py)
+    [`tfds.image.LostAndFound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lost_and_found.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

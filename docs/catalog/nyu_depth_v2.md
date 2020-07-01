@@ -24,15 +24,22 @@ Kinect.
 
 *   **Homepage**:
     [https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
+
 *   **Source code**:
-    [`tfds.image.nyu_depth_v2.NyuDepthV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/nyu_depth_v2.py)
+    [`tfds.image.NyuDepthV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/nyu_depth_v2.py)
+
 *   **Versions**:
+
     *   **`0.0.1`** (default): No release notes.
+
 *   **Download size**: `31.92 GiB`
+
 *   **Dataset size**: `74.03 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

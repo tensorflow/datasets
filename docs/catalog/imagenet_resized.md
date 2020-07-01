@@ -14,14 +14,20 @@
 
 *   **Homepage**:
     [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
+
 *   **Source code**:
-    [`tfds.image_classification.imagenet_resized.ImagenetResized`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_resized.py)
+    [`tfds.image_classification.ImagenetResized`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_resized.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

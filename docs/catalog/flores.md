@@ -19,15 +19,21 @@ Sinhala-English.
 
 *   **Homepage**:
     [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
 *   **Source code**:
-    [`tfds.translate.flores.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
+    [`tfds.translate.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `1.47 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Citation**:
 
 ```

@@ -25,7 +25,7 @@ inference (NLI), also known as recognizing textual entailment (RTE).
     [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
 
 *   **Source code**:
-    [`tfds.text.snli.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
+    [`tfds.text.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
 
 *   **Versions**:
 
@@ -38,7 +38,7 @@ inference (NLI), also known as recognizing textual entailment (RTE).
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 

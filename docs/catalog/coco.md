@@ -13,17 +13,24 @@
 # `coco`
 
 *   **Homepage**: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+
 *   **Source code**:
-    [`tfds.object_detection.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/coco.py)
+    [`tfds.object_detection.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/coco.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```

@@ -20,16 +20,23 @@ reasoning each question requires.
 
 *   **Homepage**:
     [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
+
 *   **Source code**:
-    [`tfds.image.clevr.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
+    [`tfds.image.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
+
 *   **Versions**:
+
     *   **`3.1.0`** (default): Add question/answer text.
     *   `3.0.0`: No release notes.
+
 *   **Download size**: `17.72 GiB`
+
 *   **Dataset size**: `17.75 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

@@ -25,15 +25,22 @@ under Grant 5T32GM007171-44. A usage example is avalible
 
 *   **Homepage**:
     [https://github.com/ouwen/mimicknet](https://github.com/ouwen/mimicknet)
+
 *   **Source code**:
-    [`tfds.image.duke_ultrasound.DukeUltrasound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/duke_ultrasound.py)
+    [`tfds.image.DukeUltrasound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/duke_ultrasound.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `12.78 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

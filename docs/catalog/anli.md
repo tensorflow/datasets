@@ -23,14 +23,20 @@ iterative, adversarial human-and-model-in-the-loop procedure.
 
 *   **Homepage**:
     [https://github.com/facebookresearch/anli](https://github.com/facebookresearch/anli)
+
 *   **Source code**:
-    [`tfds.text.anli.Anli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/anli.py)
+    [`tfds.text.Anli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/anli.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `17.76 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Features**:
 
 ```python

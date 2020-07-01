@@ -27,12 +27,17 @@ summary: Patent abastract.
 
 *   **Homepage**:
     [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+
 *   **Source code**:
-    [`tfds.summarization.big_patent.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
+    [`tfds.summarization.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): Updated to cased raw strings.
     *   `1.0.0`: No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Features**:
 
 ```python
@@ -146,7 +151,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 

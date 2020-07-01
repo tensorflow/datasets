@@ -26,14 +26,20 @@ set aside 20% (1016 images) of the data for testing.
 
 *   **Homepage**:
     [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
+
 *   **Source code**:
-    [`tfds.image.flic.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
+    [`tfds.image.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

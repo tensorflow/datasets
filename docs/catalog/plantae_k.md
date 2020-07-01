@@ -27,15 +27,22 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Homepage**:
     [https://data.mendeley.com/datasets/t6j2h22jpx/1](https://data.mendeley.com/datasets/t6j2h22jpx/1)
+
 *   **Source code**:
-    [`tfds.image_classification.plantae_k.PlantaeK`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plantae_k.py)
+    [`tfds.image_classification.PlantaeK`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plantae_k.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `4.30 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

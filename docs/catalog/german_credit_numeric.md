@@ -21,15 +21,22 @@ quantities respectively.
 
 *   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)](https://archive.ics.uci.edu/ml/datasets/Statlog+\(German+Credit+Data\))
+
 *   **Source code**:
-    [`tfds.structured.german_credit_numeric.GermanCreditNumeric`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/german_credit_numeric.py)
+    [`tfds.structured.GermanCreditNumeric`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/german_credit_numeric.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `99.61 KiB`
+
 *   **Dataset size**: `58.61 KiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

@@ -25,15 +25,22 @@ public domain.
 
 *   **Homepage**:
     [https://keithito.com/LJ-Speech-Dataset/](https://keithito.com/LJ-Speech-Dataset/)
+
 *   **Source code**:
-    [`tfds.audio.ljspeech.Ljspeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/ljspeech.py)
+    [`tfds.audio.Ljspeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/ljspeech.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): No release notes.
+
 *   **Download size**: `2.56 GiB`
+
 *   **Dataset size**: `10.73 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split   | Examples

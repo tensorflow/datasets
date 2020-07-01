@@ -24,15 +24,22 @@ hardness of the dataset.
 
 *   **Homepage**:
     [http://winogrande.allenai.org/](http://winogrande.allenai.org/)
+
 *   **Source code**:
-    [`tfds.text.winogrande.Winogrande`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/winogrande.py)
+    [`tfds.text.Winogrande`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/winogrande.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): No release notes.
+
 *   **Download size**: `2.67 MiB`
+
 *   **Dataset size**: `9.97 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples

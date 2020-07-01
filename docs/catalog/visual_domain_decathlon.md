@@ -32,15 +32,20 @@ the competition.
 
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
 *   **Source code**:
-    [`tfds.image_classification.visual_domain_decathlon.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/visual_domain_decathlon.py)
+    [`tfds.image_classification.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/visual_domain_decathlon.py)
+
 *   **Versions**:
+
     *   **`1.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```

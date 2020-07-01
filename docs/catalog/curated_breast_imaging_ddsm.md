@@ -39,12 +39,17 @@ in order to guarantee reproducible results:
 
 *   **Homepage**:
     [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
+
 *   **Source code**:
-    [`tfds.image_classification.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cbis_ddsm.py)
+    [`tfds.image_classification.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cbis_ddsm.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -52,12 +57,15 @@ in order to guarantee reproducible results:
     https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
     Please look at the source file (cbis_ddsm.py) to see the instructions
     on how to convert them into png (using dcmj2pnm).
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```

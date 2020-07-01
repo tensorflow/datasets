@@ -20,15 +20,22 @@ Amazon.com.
 
 *   **Homepage**:
     [http://kavita-ganesan.com/opinosis/](http://kavita-ganesan.com/opinosis/)
+
 *   **Source code**:
-    [`tfds.summarization.opinosis.Opinosis`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinosis.py)
+    [`tfds.summarization.Opinosis`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinosis.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `739.65 KiB`
+
 *   **Dataset size**: `725.45 KiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

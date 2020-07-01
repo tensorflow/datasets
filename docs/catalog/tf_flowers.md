@@ -23,17 +23,24 @@ A large set of images of flowers
 
 *   **Homepage**:
     [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
+
 *   **Source code**:
-    [`tfds.image_classification.flowers.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/flowers.py)
+    [`tfds.image_classification.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/flowers.py)
+
 *   **Versions**:
+
     *   **`3.0.1`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
+
 *   **Download size**: `218.21 MiB`
+
 *   **Dataset size**: `221.83 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
+
 *   **Splits**:
 
 Split   | Examples

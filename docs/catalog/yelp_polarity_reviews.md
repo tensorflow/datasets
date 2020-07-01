@@ -42,11 +42,16 @@ escaped by a backslash followed with an "n" character, that is " ".
 
 *   **Homepage**:
     [https://course.fast.ai/datasets](https://course.fast.ai/datasets)
+
 *   **Source code**:
-    [`tfds.text.yelp_polarity.YelpPolarityReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/yelp_polarity.py)
+    [`tfds.text.YelpPolarityReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/yelp_polarity.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Splits**:
 
 Split   | Examples

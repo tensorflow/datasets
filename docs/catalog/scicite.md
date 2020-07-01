@@ -26,15 +26,22 @@ using the provided paper ids with the Semantic Scholar API
 
 *   **Homepage**:
     [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
+
 *   **Source code**:
-    [`tfds.text.scicite.Scicite`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scicite.py)
+    [`tfds.text.Scicite`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scicite.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `22.12 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

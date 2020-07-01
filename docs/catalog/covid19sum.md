@@ -33,12 +33,18 @@ authors, publish_time, journal, url.
 
 *   **Homepage**:
     [https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge)
+
 *   **Source code**:
-    [`tfds.summarization.covid19sum.Covid19sum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/covid19sum.py)
+    [`tfds.summarization.Covid19sum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/covid19sum.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -46,9 +52,11 @@ authors, publish_time, journal, url.
     `kaggle datasets download allen-institute-for-ai/CORD-19-research-challenge`
     Place the downloaded zip file in the manual folder
     (defaults to ~/tensorflow_datasets/manual/).
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Splits**:
 
 Split | Examples

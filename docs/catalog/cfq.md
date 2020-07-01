@@ -54,16 +54,22 @@ data = tfds.load('cfq/mcd1')
 
 *   **Homepage**:
     [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
+
 *   **Source code**:
-    [`tfds.text.cfq.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)
+    [`tfds.text.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)
+
 *   **Versions**:
+
     *   **`1.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
+
 *   **Download size**: `255.20 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Features**:
 
 ```python

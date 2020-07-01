@@ -23,15 +23,22 @@ original paper.
 
 *   **Homepage**:
     [https://github.com/rgeirhos/texture-vs-shape](https://github.com/rgeirhos/texture-vs-shape)
+
 *   **Source code**:
-    [`tfds.image_classification.geirhos_conflict_stimuli.GeirhosConflictStimuli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/geirhos_conflict_stimuli.py)
+    [`tfds.image_classification.GeirhosConflictStimuli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/geirhos_conflict_stimuli.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `153.96 MiB`
+
 *   **Dataset size**: `130.44 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (test)
+
 *   **Splits**:
 
 Split  | Examples

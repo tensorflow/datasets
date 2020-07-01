@@ -29,14 +29,20 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 
 *   **Homepage**:
     [http://www.ccs.neu.edu/home/luwang/data.html](http://www.ccs.neu.edu/home/luwang/data.html)
+
 *   **Source code**:
-    [`tfds.summarization.opinion_abstracts.OpinionAbstracts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinion_abstracts.py)
+    [`tfds.summarization.OpinionAbstracts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinion_abstracts.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `20.08 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Citation**:
 
 ```

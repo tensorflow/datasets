@@ -20,14 +20,20 @@ Daniel Povey. The data is derived from read audiobooks from the LibriVox
 project, and has been carefully segmented and aligned.87
 
 *   **Homepage**: [http://www.openslr.org/12](http://www.openslr.org/12)
+
 *   **Source code**:
-    [`tfds.audio.librispeech.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
+    [`tfds.audio.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): No release notes.
+
 *   **Download size**: `57.14 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split            | Examples

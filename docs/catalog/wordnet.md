@@ -25,14 +25,20 @@ lexical relations.
 
 *   **Homepage**:
     [https://wordnet.princeton.edu/](https://wordnet.princeton.edu/)
+
 *   **Source code**:
-    [`tfds.text.wordnet.Wordnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wordnet.py)
+    [`tfds.text.Wordnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wordnet.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `3.99 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Features**:
 
 ```python

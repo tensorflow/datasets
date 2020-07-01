@@ -26,15 +26,22 @@ anonymized crowd-worker ID.
 
 *   **Homepage**:
     [https://leaderboard.allenai.org/open_book_qa/submissions/get-started](https://leaderboard.allenai.org/open_book_qa/submissions/get-started)
+
 *   **Source code**:
-    [`tfds.text.openbookqa.Openbookqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/openbookqa.py)
+    [`tfds.text.Openbookqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/openbookqa.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `1.38 MiB`
+
 *   **Dataset size**: `2.40 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples

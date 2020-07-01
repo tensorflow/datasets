@@ -18,15 +18,22 @@ Mozilla Common Voice Dataset
 
 *   **Homepage**:
     [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
+
 *   **Source code**:
-    [`tfds.audio.commonvoice.CommonVoice`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/commonvoice.py)
+    [`tfds.audio.CommonVoice`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/commonvoice.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Splits**:
 
 Split | Examples

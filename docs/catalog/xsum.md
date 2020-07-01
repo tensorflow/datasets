@@ -28,13 +28,19 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 
 *   **Homepage**:
     [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
+
 *   **Source code**:
-    [`tfds.summarization.xsum.Xsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/xsum.py)
+    [`tfds.summarization.Xsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/xsum.py)
+
 *   **Versions**:
+
     *   **`1.1.0`** (default): No release notes.
     *   `1.0.0`: Dataset without cleaning.
+
 *   **Download size**: `2.59 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -42,9 +48,11 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
     here:
     https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
     Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the manual_dir.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

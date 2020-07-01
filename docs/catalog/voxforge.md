@@ -29,12 +29,18 @@ between train, validation and testing so that samples from each speaker belongs
 to exactly one split.
 
 *   **Homepage**: [http://www.voxforge.org/](http://www.voxforge.org/)
+
 *   **Source code**:
-    [`tfds.audio.voxforge.Voxforge`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxforge.py)
+    [`tfds.audio.Voxforge`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxforge.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -43,9 +49,11 @@ to exactly one split.
     wget -i voxforge_urls.txt -x
     Note that downloading and building the dataset locally requires ~100GB disk
     space (but only ~60GB will be used permanently).
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Splits**:
 
 Split | Examples

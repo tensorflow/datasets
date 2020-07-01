@@ -30,12 +30,18 @@ This dataset can be downloaded upon requests. Unzip all the contents
 "train.jsonl, dev.josnl, test.jsonl" to the tfds folder.
 
 *   **Homepage**: [https://summari.es](https://summari.es)
+
 *   **Source code**:
-    [`tfds.summarization.newsroom.Newsroom`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/newsroom.py)
+    [`tfds.summarization.Newsroom`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/newsroom.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -43,9 +49,11 @@ This dataset can be downloaded upon requests. Unzip all the contents
     The webpage requires registration.
     After downloading, please put dev.jsonl, test.jsonl and train.jsonl
     files in the manual_dir.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

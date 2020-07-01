@@ -13,13 +13,13 @@
 # `voc`
 
 *   **Source code**:
-    [`tfds.object_detection.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
+    [`tfds.object_detection.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
 *   **Versions**:
     *   **`4.0.0`** (default): No release notes.
 *   **Dataset size**: `Unknown size`
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 *   **Features**:
 
 ```python

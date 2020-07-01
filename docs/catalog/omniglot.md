@@ -19,16 +19,23 @@ handwritten characters from 50 different alphabets.
 
 *   **Homepage**:
     [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
+
 *   **Source code**:
-    [`tfds.image_classification.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/omniglot.py)
+    [`tfds.image_classification.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/omniglot.py)
+
 *   **Versions**:
+
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `17.95 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split    | Examples

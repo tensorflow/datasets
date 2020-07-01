@@ -23,12 +23,18 @@ of this dataset, without the text features.
 
 *   **Homepage**:
     [https://dementia.talkbank.org/](https://dementia.talkbank.org/)
+
 *   **Source code**:
-    [`tfds.audio.dementiabank.Dementiabank`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/dementiabank.py)
+    [`tfds.audio.Dementiabank`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/dementiabank.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `17.71 GiB`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>

@@ -26,15 +26,22 @@ locaization.
 
 *   **Homepage**:
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
+
 *   **Source code**:
-    [`tfds.image.the300w_lp.The300wLp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/the300w_lp.py)
+    [`tfds.image.The300wLp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/the300w_lp.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `2.63 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

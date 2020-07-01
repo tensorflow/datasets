@@ -25,17 +25,24 @@ lighting. All images have an associated ground truth annotation of breed.
 
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
+
 *   **Source code**:
-    [`tfds.image_classification.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_iiit_pet.py)
+    [`tfds.image_classification.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_iiit_pet.py)
+
 *   **Versions**:
+
     *   **`3.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
+
 *   **Download size**: `773.52 MiB`
+
 *   **Dataset size**: `774.69 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split   | Examples

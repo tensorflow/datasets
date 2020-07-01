@@ -13,7 +13,7 @@
 # `tedlium`
 
 *   **Source code**:
-    [`tfds.audio.tedlium.Tedlium`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/tedlium.py)
+    [`tfds.audio.Tedlium`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/tedlium.py)
 *   **Versions**:
     *   **`1.0.1`** (default): No release notes.
 *   **Auto-cached**

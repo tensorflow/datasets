@@ -22,15 +22,22 @@ justifying the classification
 
 *   **Homepage**:
     [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
+
 *   **Source code**:
-    [`tfds.text.eraser_multi_rc.EraserMultiRc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/eraser_multi_rc.py)
+    [`tfds.text.EraserMultiRc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/eraser_multi_rc.py)
+
 *   **Versions**:
+
     *   **`0.1.1`** (default): No release notes.
+
 *   **Download size**: `1.59 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

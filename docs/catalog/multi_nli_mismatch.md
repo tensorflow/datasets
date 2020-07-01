@@ -27,7 +27,7 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
     [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
 
 *   **Source code**:
-    [`tfds.text.multi_nli_mismatch.MultiNLIMismatch`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli_mismatch.py)
+    [`tfds.text.MultiNLIMismatch`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli_mismatch.py)
 
 *   **Versions**:
 
@@ -39,7 +39,7 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 

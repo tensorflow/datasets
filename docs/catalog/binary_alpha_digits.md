@@ -19,15 +19,22 @@ of each class.
 
 *   **Homepage**:
     [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
+
 *   **Source code**:
-    [`tfds.image_classification.binary_alpha_digits.BinaryAlphaDigits`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/binary_alpha_digits.py)
+    [`tfds.image_classification.BinaryAlphaDigits`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/binary_alpha_digits.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `519.83 KiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

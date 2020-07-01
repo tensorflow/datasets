@@ -27,15 +27,22 @@ load, if you select the correct data_dir: tfds.load('waymo_open_dataset',
 data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
 
 *   **Homepage**: [http://www.waymo.com/open/](http://www.waymo.com/open/)
+
 *   **Source code**:
-    [`tfds.object_detection.waymo_open_dataset.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
+    [`tfds.object_detection.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `34.73 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

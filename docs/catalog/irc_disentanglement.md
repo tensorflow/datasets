@@ -27,15 +27,22 @@ messages from one day of IRC chat.
 
 *   **Homepage**:
     [https://jkk.name/irc-disentanglement](https://jkk.name/irc-disentanglement)
+
 *   **Source code**:
-    [`tfds.text.irc_disentanglement.IrcDisentanglement`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/irc_disentanglement.py)
+    [`tfds.text.IrcDisentanglement`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/irc_disentanglement.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
+
 *   **Download size**: `113.53 MiB`
+
 *   **Dataset size**: `26.59 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split        | Examples

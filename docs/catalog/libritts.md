@@ -28,15 +28,22 @@ The main differences from the LibriSpeech corpus are listed below:
 5.  Utterances with significant background noise are excluded.
 
 *   **Homepage**: [http://www.openslr.org/60](http://www.openslr.org/60)
+
 *   **Source code**:
-    [`tfds.audio.libritts.Libritts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/libritts.py)
+    [`tfds.audio.Libritts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/libritts.py)
+
 *   **Versions**:
+
     *   **`1.0.1`** (default): No release notes.
+
 *   **Download size**: `78.42 GiB`
+
 *   **Dataset size**: `271.41 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split            | Examples

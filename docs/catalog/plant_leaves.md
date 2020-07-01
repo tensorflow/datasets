@@ -30,15 +30,22 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Homepage**:
     [https://data.mendeley.com/datasets/hb74ynkjcn/1](https://data.mendeley.com/datasets/hb74ynkjcn/1)
+
 *   **Source code**:
-    [`tfds.image_classification.plant_leaves.PlantLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_leaves.py)
+    [`tfds.image_classification.PlantLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_leaves.py)
+
 *   **Versions**:
+
     *   **`0.1.0`** (default): No release notes.
+
 *   **Download size**: `6.81 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

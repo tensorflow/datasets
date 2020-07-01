@@ -24,15 +24,22 @@ from each speaker belongs to exactly one split.
 
 *   **Homepage**:
     [https://github.com/CheyneyComputerScience/CREMA-D](https://github.com/CheyneyComputerScience/CREMA-D)
+
 *   **Source code**:
-    [`tfds.audio.crema_d.CremaD`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/crema_d.py)
+    [`tfds.audio.CremaD`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/crema_d.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `579.25 MiB`
+
 *   **Dataset size**: `1.65 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

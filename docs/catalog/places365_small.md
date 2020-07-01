@@ -19,15 +19,22 @@ categories,which are used to train the Places365 CNNs.There are 50 images per
 category in the validation set and 900 images per category in the testing set.
 
 *   **Homepage**: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
+
 *   **Source code**:
-    [`tfds.image_classification.places365_small.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/places365_small.py)
+    [`tfds.image_classification.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/places365_small.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
+
 *   **Download size**: `29.27 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

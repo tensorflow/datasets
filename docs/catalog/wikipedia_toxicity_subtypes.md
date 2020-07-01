@@ -40,16 +40,23 @@ details.
 
 *   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)
+
 *   **Source code**:
-    [`tfds.text.wikipedia_toxicity_subtypes.WikipediaToxicitySubtypes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia_toxicity_subtypes.py)
+    [`tfds.text.WikipediaToxicitySubtypes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia_toxicity_subtypes.py)
+
 *   **Versions**:
+
     *   **`0.2.0`** (default): Updated features for consistency with
         CivilComments dataset.
+
 *   **Download size**: `36.85 MiB`
+
 *   **Dataset size**: `118.09 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

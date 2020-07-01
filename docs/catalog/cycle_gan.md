@@ -24,7 +24,7 @@ horses/zebras, apple/orange,...)
     [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 *   **Source code**:
-    [`tfds.image_classification.cycle_gan.CycleGAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cycle_gan.py)
+    [`tfds.image_classification.CycleGAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cycle_gan.py)
 
 *   **Versions**:
 
@@ -35,7 +35,7 @@ horses/zebras, apple/orange,...)
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Features**:
 

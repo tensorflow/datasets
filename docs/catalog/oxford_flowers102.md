@@ -32,17 +32,24 @@ training set and validation set each consist of 10 images per class (totalling
 
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+
 *   **Source code**:
-    [`tfds.image_classification.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_flowers102.py)
+    [`tfds.image_classification.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_flowers102.py)
+
 *   **Versions**:
+
     *   **`2.1.1`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
+
 *   **Download size**: `328.90 MiB`
+
 *   **Dataset size**: `331.34 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

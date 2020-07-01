@@ -23,15 +23,22 @@ There are two features: - document: article. - summary: headline.
 
 *   **Homepage**:
     [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
+
 *   **Source code**:
-    [`tfds.summarization.gigaword.Gigaword`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/gigaword.py)
+    [`tfds.summarization.Gigaword`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/gigaword.py)
+
 *   **Versions**:
+
     *   **`1.2.0`** (default): No release notes.
+
 *   **Download size**: `551.61 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

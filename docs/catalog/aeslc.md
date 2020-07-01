@@ -21,15 +21,22 @@ subject text.
 
 *   **Homepage**:
     [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
+
 *   **Source code**:
-    [`tfds.summarization.aeslc.Aeslc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/aeslc.py)
+    [`tfds.summarization.Aeslc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/aeslc.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `11.10 MiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split        | Examples

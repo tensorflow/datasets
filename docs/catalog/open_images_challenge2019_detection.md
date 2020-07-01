@@ -31,14 +31,20 @@ in an image, every instance of that object class in the image was annotated.
 
 *   **Homepage**:
     [https://storage.googleapis.com/openimages/web/challenge2019.html](https://storage.googleapis.com/openimages/web/challenge2019.html)
+
 *   **Source code**:
-    [`tfds.object_detection.open_images_challenge2019.OpenImagesChallenge2019Detection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images_challenge2019.py)
+    [`tfds.object_detection.OpenImagesChallenge2019Detection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images_challenge2019.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `534.63 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

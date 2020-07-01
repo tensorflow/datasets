@@ -42,7 +42,7 @@ This dataset consists of the Imagenette dataset {size} variant.
     [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 *   **Source code**:
-    [`tfds.image_classification.imagewang.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagewang.py)
+    [`tfds.image_classification.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagewang.py)
 
 *   **Versions**:
 

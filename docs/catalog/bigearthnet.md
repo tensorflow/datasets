@@ -48,16 +48,23 @@ License: Community Data License Agreement - Permissive, Version 1.0.
 URL: http://bigearth.net/
 
 *   **Homepage**: [http://bigearth.net](http://bigearth.net)
+
 *   **Source code**:
-    [`tfds.image_classification.bigearthnet.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/bigearthnet.py)
+    [`tfds.image_classification.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/bigearthnet.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `65.22 GiB`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

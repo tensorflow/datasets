@@ -30,11 +30,16 @@ found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 
 *   **Homepage**:
     [https://research.google/pubs/pub49029/](https://research.google/pubs/pub49029/)
+
 *   **Source code**:
-    [`tfds.text.wiki40b.Wiki40b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wiki40b.py)
+    [`tfds.text.Wiki40b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wiki40b.py)
+
 *   **Versions**:
+
     *   **`1.3.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Features**:
 
 ```python
@@ -413,7 +418,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -449,7 +454,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -539,7 +544,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -629,7 +634,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -683,7 +688,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -701,7 +706,7 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 

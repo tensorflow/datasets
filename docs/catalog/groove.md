@@ -20,14 +20,19 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Homepage**:
     [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+
 *   **Source code**:
-    [`tfds.audio.groove.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+    [`tfds.audio.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+
 *   **Versions**:
+
     *   **`2.0.1`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```

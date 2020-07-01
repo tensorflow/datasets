@@ -24,16 +24,23 @@ the Kitti homepage.
 
 *   **Homepage**:
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
+
 *   **Source code**:
-    [`tfds.object_detection.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
+    [`tfds.object_detection.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
+
 *   **Versions**:
+
     *   **`3.2.0`** (default): Devkit updated.
     *   `3.1.0`: No release notes.
+
 *   **Download size**: `11.71 GiB`
+
 *   **Dataset size**: `5.27 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples

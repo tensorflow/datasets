@@ -55,15 +55,22 @@ For more information, read [Cortez and Morais, 2007].
 
 *   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/Forest+Fires](https://archive.ics.uci.edu/ml/datasets/Forest+Fires)
+
 *   **Source code**:
-    [`tfds.structured.forest_fires.ForestFires`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/forest_fires.py)
+    [`tfds.structured.ForestFires`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/forest_fires.py)
+
 *   **Versions**:
+
     *   **`0.0.1`** (default): No release notes.
+
 *   **Download size**: `24.88 KiB`
+
 *   **Dataset size**: `162.07 KiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

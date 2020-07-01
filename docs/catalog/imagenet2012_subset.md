@@ -29,10 +29,14 @@ This is supposed to be used as a benchmark for semi-supervised learning, and has
 been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
 
 *   **Homepage**: [http://image-net.org/](http://image-net.org/)
+
 *   **Source code**:
-    [`tfds.image_classification.imagenet2012_subset.Imagenet2012Subset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_subset.py)
+    [`tfds.image_classification.Imagenet2012Subset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_subset.py)
+
 *   **Versions**:
+
     *   **`5.0.0`** (default): No release notes.
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -40,9 +44,11 @@ been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
     ILSVRC2012_img_val.tar.
     You need to register on http://www.image-net.org/download-images in order
     to get the link to download the dataset.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Features**:
 
 ```python

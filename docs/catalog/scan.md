@@ -64,13 +64,18 @@ data = tfds.load(
 
 *   **Homepage**:
     [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
+
 *   **Source code**:
-    [`tfds.text.scan.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
+    [`tfds.text.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
+
 *   **Versions**:
+
     *   **`1.1.1`** (default): No release notes.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Features**:
 
 ```python

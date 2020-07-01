@@ -20,15 +20,22 @@ set of 60,000 examples and a test set of 10,000 examples. Each example is a
 
 *   **Homepage**:
     [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
+
 *   **Source code**:
-    [`tfds.image_classification.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+    [`tfds.image_classification.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+
 *   **Versions**:
+
     *   **`3.0.1`** (default): No release notes.
+
 *   **Download size**: `29.45 MiB`
+
 *   **Dataset size**: `36.42 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
 Split   | Examples

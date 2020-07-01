@@ -26,14 +26,20 @@ URL: https://github.com/phelber/eurosat
 
 *   **Homepage**:
     [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+
 *   **Source code**:
-    [`tfds.image_classification.eurosat.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/eurosat.py)
+    [`tfds.image_classification.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/eurosat.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
 Split   | Examples

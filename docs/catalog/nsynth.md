@@ -21,18 +21,24 @@ heuristic algorithms: Source, Family, and Qualities.
 
 *   **Homepage**:
     [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
+
 *   **Source code**:
-    [`tfds.audio.nsynth.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
+    [`tfds.audio.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
+
 *   **Versions**:
+
     *   **`2.3.2`** (default): Use Audio feature.
     *   `2.3.1`: F0 computed with normalization fix in CREPE.
     *   `2.3.0`: New `loudness_db` feature in decibels (unormalized).
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```

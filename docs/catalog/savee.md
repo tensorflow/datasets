@@ -26,12 +26,18 @@ and test set consists of samples from 1 speaker, respectively.
 
 *   **Homepage**:
     [http://kahlan.eps.surrey.ac.uk/savee/](http://kahlan.eps.surrey.ac.uk/savee/)
+
 *   **Source code**:
-    [`tfds.audio.savee.Savee`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/savee.py)
+    [`tfds.audio.Savee`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/savee.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `259.15 MiB`
+
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/manual/`):<br/>
@@ -40,9 +46,11 @@ and test set consists of samples from 1 speaker, respectively.
     You need to register at
     http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Register.html in
     order to get the link to download the dataset.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
 Split        | Examples
