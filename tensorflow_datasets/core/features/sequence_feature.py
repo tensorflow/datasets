@@ -22,6 +22,7 @@ from __future__ import print_function
 
 import numpy as np
 
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
@@ -110,13 +111,13 @@ class Sequence(top_level_feature.TopLevelFeature):
     """See base class for details."""
     # Add the additional length dimension to every shape
     tensor_info = self._feature.get_tensor_info()
-    return utils.map_nested(self._add_length_dim, tensor_info)
+    return tf.nest.map_structure(self._add_length_dim, tensor_info)
 
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
     tensor_info = self._feature.get_serialized_info()
-    return utils.map_nested(self._add_length_dim, tensor_info)
+    return tf.nest.map_structure(self._add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
@@ -137,7 +138,7 @@ class Sequence(top_level_feature.TopLevelFeature):
             dtype=serialized_info.dtype.as_numpy_dtype,
         )
 
-      return utils.map_nested(_build_empty_np, self.get_serialized_info())
+      return tf.nest.map_structure(_build_empty_np, self.get_serialized_info())
 
     # Encode each individual elements
     sequence_elements = [

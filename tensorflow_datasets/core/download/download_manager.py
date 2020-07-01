@@ -655,6 +655,6 @@ else:
 
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
-  all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
-  res = utils.map_nested(_wait_on_promise, all_promises)
+  all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
+  res = tf.nest.map_structure(_wait_on_promise, all_promises)
   return res
