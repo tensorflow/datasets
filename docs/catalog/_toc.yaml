@@ -247,6 +247,9 @@ toc:
     title: higgs
   - path: /datasets/catalog/iris
     title: iris
+  - path: /datasets/catalog/movie_lens
+    status: nightly
+    title: movie_lens
   - path: /datasets/catalog/rock_you
     title: rock_you
   - path: /datasets/catalog/titanic
