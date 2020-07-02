@@ -175,6 +175,7 @@ class DownloadManager(object):
       download_dir: str,
       extract_dir: Optional[str] = None,
       manual_dir: Optional[str] = None,
+      checksums_path: Optional[str] = None,
       manual_dir_instructions: Optional[str] = None,
       dataset_name: Optional[str] = None,
       force_download: bool = False,
@@ -188,6 +189,7 @@ class DownloadManager(object):
       download_dir: Path to directory where downloads are stored.
       extract_dir: Path to directory where artifacts are extracted.
       manual_dir: Path to manually downloaded/extracted data directory.
+      checksums_path: Path to the checksums file.
       manual_dir_instructions: Human readable instructions on how to
         prepare contents of the manual_dir for this dataset.
       dataset_name: Name of dataset this instance will be used for. If
@@ -204,6 +206,7 @@ class DownloadManager(object):
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
     self._manual_dir = manual_dir and os.path.expanduser(manual_dir)
+    self._checksums_path = checksums_path
     self._manual_dir_instructions = manual_dir_instructions
     tf.io.gfile.makedirs(self._download_dir)
     tf.io.gfile.makedirs(self._extract_dir)
@@ -336,6 +339,10 @@ class DownloadManager(object):
           url=resource.url, url_path=url_path, url_info=url_info)
     elif resource.url not in self._url_infos:
       if self._force_checksums_validation:
+        if tf.io.gfile.exists(self._checksums_path):
+          url_infos = checksums._get_url_infos(self._checksums_path)  # pylint: disable=protected-access
+          if url_info != url_infos.get(resource.url, None):
+            raise NonMatchingChecksumError(resource.url, tmp_path)
         raise ValueError(
             'Missing checksums url: {}, yet `force_checksums_validation=True`. '
             'Did you forgot to register checksums ?')

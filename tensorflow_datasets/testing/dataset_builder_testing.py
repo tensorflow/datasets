@@ -21,6 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import hashlib
+import inspect
 import itertools
 import numbers
 import os
@@ -308,8 +309,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                "please add `SKIP_CHECKSUMS = True` to the "
                "`DatasetBuilderTestCase`")
 
-    with utils.try_reraise(suffix=err_msg):
+    filepath = os.path.join(os.path.dirname(
+        inspect.getfile(self.DATASET_CLASS)), 'checksums.txt')
+    if not tf.io.gfile.exists(filepath):
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
+    with utils.try_reraise(suffix=err_msg):
       url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
 
     missing_urls = self._download_urls - set(url_infos.keys())
