@@ -32,6 +32,9 @@ from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.jsrt import Jsrt  # TODO(jsrt) Sort alphabetically
+from tensorflow_datasets.image.mimiciii_cxr import MimiciiiCxr  # TODO(mimiciii_cxr) Sort alphabetically
+from tensorflow_datasets.image.montgomery_xray import MontgomeryXray  # TODO(montgomery_xray) Sort alphabetically
 from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
@@ -101,4 +104,3 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.mimiciii_cxr import MimiciiiCxr  # TODO(mimiciii_cxr) Sort alphabetically
