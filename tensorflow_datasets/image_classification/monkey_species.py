@@ -74,19 +74,31 @@ n8   , aotus_nigriceps	    , black_headed_night_monkey, 133     , 27
 n9   , trachypithecus_johnii, nilgiri_langur           , 132     , 26
 """
 
-_DOWNLOAD_URL = 'slothkong/10-monkey-species'
+_DOWNLOAD_URL = "slothkong/10-monkey-species"
 _MONKEY_IMAGE_CHANNELS = 3
 _MONKEY_IMAGE_SHAPE = (None, None, _MONKEY_IMAGE_CHANNELS)
 _MONKEY_NUM_CLASSES = 10
 
-_TRAIN_DIR = 'training'
-_VALIDATION_DIR = 'validation'
+_TRAIN_DIR = "training"
+_VALIDATION_DIR = "validation"
 
+_MONKEY_SPECIES_MAP = {
+    "n0": {"latin": "alouatta_palliata", "common": "mantled_howler"},
+    "n1": {"latin": "erythrocebus_patas", "common": "patas_monkey"},
+    "n2": {"latin": "cacajao_calvus", "common": "bald_uakari"},
+    "n3": {"latin": "macaca_fuscata", "common": "japanese_macaque"},
+    "n4": {"latin": "cebuella_pygmea", "common": "pygmy_marmoset"},
+    "n5": {"latin": "cebus_capucinus", "common": "white_headed_capuchin"},
+    "n6": {"latin": "mico_argentatus", "common": "silvery_marmoset"},
+    "n7": {"latin": "saimiri_sciureus", "common": "common_squirrel_monkey"},
+    "n8": {"latin": "aotus_nigriceps", "common": "black_headed_night_monkey"},
+    "n9": {"latin": "trachypithecus_johnii", "common": "nilgiri_langur"}
+}
 
 class MonkeySpecies(tfds.core.GeneratorBasedBuilder):
   """10 Monkey Species dataset."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
     """
@@ -99,12 +111,14 @@ class MonkeySpecies(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
+            "latin_name": tfds.features.Text(),
+            "common_name": tfds.features.Text(),
             "image": tfds.features.Image(shape=_MONKEY_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(
                 num_classes=_MONKEY_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
-        homepage='https://www.kaggle.com/slothkong/10-monkey-species',
+        homepage="https://www.kaggle.com/slothkong/10-monkey-species",
         citation=_CITATION,
     )
 
@@ -143,11 +157,14 @@ class MonkeySpecies(tfds.core.GeneratorBasedBuilder):
       Record with image file object along with its associated label.
     """
     for label in range(_MONKEY_NUM_CLASSES):
-      label_dir = os.path.join(data_path, 'n' + str(label))
-      images = list(tf.io.gfile.glob(label_dir + '*.jpg'))
+      label_dir = "n" + str(label)
+      label_path = os.path.join(data_path, label_dir)
+      images = list(tf.io.gfile.glob(label_path + "*.jpg"))
       for image in images:
-        data = tf.io.gfile.GFile(image, 'rb')
+        data = tf.io.gfile.GFile(image, "rb")
         record = {
+            "latin_name": _MONKEY_SPECIES_MAP[label_dir]["latin"],
+            "common_name": _MONKEY_SPECIES_MAP[label_dir]["common"],
             "image": data,
             "label": label,
         }
