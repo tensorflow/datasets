@@ -31,6 +31,10 @@ class NotMnistTest(tfds.testing.DatasetBuilderTestCase):
       "train": 10,  # Number of fake train example
       "test": 10,  # Number of fake test example
   }
+  DL_EXTRACT_RESULT = {
+      "train_data": "",
+      "test_data": "",
+  }
 
 
 if __name__ == "__main__":
