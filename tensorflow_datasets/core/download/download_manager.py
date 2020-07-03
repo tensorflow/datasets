@@ -64,7 +64,7 @@ class NonMatchingChecksumError(Exception):
     Exception.__init__(self, msg)
 
 
-class DownloadConfig(object):
+class DownloadConfig:
   """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`."""
 
   def __init__(
@@ -120,7 +120,7 @@ class DownloadConfig(object):
     self.try_download_gcs = try_download_gcs
 
 
-class DownloadManager(object):
+class DownloadManager:
   """Manages the download and extraction of files, as well as caching.
 
   Downloaded files are cached under `download_dir`. The file name of downloaded
@@ -227,7 +227,15 @@ class DownloadManager(object):
     self._executor = concurrent.futures.ThreadPoolExecutor(1)
 
   def __getstate__(self):
-    """Remove un-pickleable attributes and return the state."""
+    """Remove un-pickleable attributes and return the state.
+
+    Returns:
+      The state of the download manager.
+
+    Raises:
+      NotImplementedError: If the register_checksums flag is enabled
+        in a parallelized download manager.
+    """
     if self._register_checksums:
       # Currently, checksums registration from Beam not supported.
       raise NotImplementedError(
@@ -241,12 +249,22 @@ class DownloadManager(object):
 
   @property
   def _downloader(self):
+    """Returns the downloader object.
+
+    Returns:
+      The downloader object.
+    """
     if not self.__downloader:
       self.__downloader = downloader.get_downloader()
     return self.__downloader
 
   @property
   def _extractor(self):
+    """Returns the extractor object.
+
+    Returns:
+      The extractor object.
+    """
     if not self.__extractor:
       self.__extractor = extractor.get_extractor()
     return self.__extractor
@@ -257,12 +275,25 @@ class DownloadManager(object):
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_final_dl_path(self, url, sha256):
+    """Returns the final download path.
+
+    Args:
+      url: The download url.
+      sha256: The sha256 hash hexdump.
+
+    Returns:
+      The final download path.
+    """
     return os.path.join(self._download_dir,
                         resource_lib.get_dl_fname(url, sha256))
 
   @property
   def register_checksums(self):
-    """Returns whether checksums are being computed and recorded to file."""
+    """Returns whether checksums are being computed and recorded to file.
+
+    Returns:
+      Whether or not the checksums are being computed and recorded to file.
+    """
     return self._register_checksums
 
   @utils.build_synchronize_decorator()
@@ -295,7 +326,9 @@ class DownloadManager(object):
       dst_path: `url_path` (or `file_path` when `register_checksums=True`)
 
     Raises:
-      NonMatchingChecksumError:
+      ValueError: If the number of files found in the tmp dir is not 1 and if
+        the checksum was not registered.
+      NonMatchingChecksumError: If the checksums do not match.
     """
     # Extract the file name, path from the tmp_dir
     fnames = tf.io.gfile.listdir(tmp_dir_path)
@@ -414,7 +447,14 @@ class DownloadManager(object):
     return existing_path
 
   def download_checksums(self, checksums_url):
-    """Downloads checksum file from the given URL and adds it to registry."""
+    """Downloads checksum file from the given URL and adds it to registry.
+
+    Args:
+      checksums_url: The checksum url.
+
+    Returns:
+      Updated url registry.
+    """
     checksums_path = self.download(checksums_url)
     with tf.io.gfile.GFile(checksums_path) as f:
       self._url_infos.update(checksums.parse_url_infos(f))
@@ -475,6 +515,7 @@ class DownloadManager(object):
         '%s.tmp.%s' % (resource_lib.get_dl_dirname(url), uuid.uuid4().hex))
     tf.io.gfile.makedirs(download_dir_path)
     logging.info('Downloading %s into %s...', url, download_dir_path)
+
     def callback(url_info):
       return self._handle_download_result(
           resource=resource,
@@ -487,7 +528,14 @@ class DownloadManager(object):
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _extract(self, resource):
-    """Extract a single archive, returns Promise->path to extraction result."""
+    """Extract a single archive, returns Promise->path to extraction result.
+
+    Args:
+      resource: The path to the file to extract.
+
+    Return:
+      The resolved promise.
+    """
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
     path = resource.path
@@ -506,9 +554,17 @@ class DownloadManager(object):
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download_extract(self, resource):
-    """Download-extract `Resource` or url, returns Promise->path."""
+    """Download-extract `Resource` or url, returns Promise->path.
+
+    Args:
+      resource: The url to download data from.
+
+    Returns:
+      The resolved promise.
+    """
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
+
     def callback(path):
       resource.path = path
       return self._extract(resource)
@@ -605,7 +661,14 @@ class DownloadManager(object):
 
   @property
   def manual_dir(self):
-    """Returns the directory containing the manually extracted data."""
+    """Returns the directory containing the manually extracted data.
+
+    Returns:
+      The path to the dir containing the manually extracted data.
+
+    Raises:
+      AssertionError: If the Manual directory does not exist or is empty
+    """
     if not self._manual_dir:
       raise AssertionError(
           'Manual directory was enabled. '
@@ -621,7 +684,19 @@ class DownloadManager(object):
 
 
 def _read_url_info(url_path: str) -> checksums.UrlInfo:
-  """Loads the `UrlInfo` from the `.INFO` file."""
+  """Loads the `UrlInfo` from the `.INFO` file.
+
+  Args:
+    url_path: The path to the .INFO file.
+
+  Returns:
+    UrlInfo object.
+
+  Raises:
+    ValueError: If 'url_info' is not found in the .INFO file.
+      This likely indicates the files were downloaded
+      with a previous version of TFDS (<=3.1.0).
+  """
   file_info = resource_lib.read_info_file(url_path)
   if 'url_info' not in file_info:
     raise ValueError(
@@ -636,7 +711,15 @@ def _wait_on_promise(p):
 
 
 def _map_promise(map_fn, all_inputs):
-  """Map the function into each element and resolve the promise."""
+  """Map the function into each element and resolve the promise.
+
+  Args:
+    map_fn: The function to be mapped into each element.
+    all_inputs: The elements the function is to be mapped into.
+
+  Returns:
+    The resolved promise.
+  """
   all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
   res = tf.nest.map_structure(_wait_on_promise, all_promises)
   return res
