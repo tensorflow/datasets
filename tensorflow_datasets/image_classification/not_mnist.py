@@ -70,8 +70,7 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    """
-    Returns basic information about the dataset.
+    """Returns basic information about the dataset.
 
     Returns:
       tfds.core.DatasetInfo.
@@ -80,19 +79,19 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
+            "name": tfds.features.Text(),
             "image": tfds.features.Image(shape=mnist.MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(
                 num_classes=mnist.MNIST_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
         homepage=
-        'http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html',
+        "http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html",
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    """
-    Return the train, test split of notMNIST.
+    """Return the train, test split of notMNIST.
 
     Args:
       dl_manager: download manager object.
@@ -123,8 +122,7 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_path):
-    """
-    Generate the notMNIST data.
+    """Generate the notMNIST data.
 
     Args:
         data_path: path to the location of extracted dataset.
@@ -133,16 +131,18 @@ class NotMnist(tfds.core.GeneratorBasedBuilder):
         record with image along with its associated label.
     """
     for label in range(mnist.MNIST_NUM_CLASSES):
-      label_dir = os.path.join(data_path, chr(label+_ASCII_OFFSET))
-      images = list(tf.io.gfile.glob(label_dir + '*.png'))
+      label_char = chr(label + _ASCII_OFFSET)
+      label_dir = os.path.join(data_path, label_char)
+      images = list(tf.io.gfile.glob(label_dir + "*.png"))
       corrupted_image = os.path.join(
           data_path, _CORRUPTED_DIR, _CORRUPTED_FILE)
       # Discard the 1 training example with the corrupted PNG header
       if corrupted_image in images:
         images.remove(corrupted_image)
       for image in images:
-        data = tf.io.gfile.GFile(image, 'rb')
+        data = tf.io.gfile.GFile(image, "rb")
         record = {
+            "name": label_char,
             "image": data,
             "label": label,
         }

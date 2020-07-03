@@ -25,9 +25,7 @@ from tensorflow_datasets.image_classification import not_mnist
 
 
 class NotMnistTest(tfds.testing.DatasetBuilderTestCase):
-  """
-  notMNIST tests
-  """
+  """notMNIST tests."""
   DATASET_CLASS = not_mnist.NotMnist
   SPLITS = {
       "train": 10,  # Number of fake train example
