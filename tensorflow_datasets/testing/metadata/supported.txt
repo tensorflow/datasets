@@ -663,6 +663,16 @@ mnist_corrupted/spatter/1.0.0
 mnist_corrupted/stripe/1.0.0
 mnist_corrupted/translate/1.0.0
 mnist_corrupted/zigzag/1.0.0
+movie_lens/100k-movies/0.1.0
+movie_lens/100k-ratings/0.1.0
+movie_lens/1m-movies/0.1.0
+movie_lens/1m-ratings/0.1.0
+movie_lens/20m-movies/0.1.0
+movie_lens/20m-ratings/0.1.0
+movie_lens/25m-movies/0.1.0
+movie_lens/25m-ratings/0.1.0
+movie_lens/latest-small-movies/0.1.0
+movie_lens/latest-small-ratings/0.1.0
 movie_rationales/0.1.0
 moving_mnist/1.0.0
 multi_news/1.0.0
