@@ -21,20 +21,28 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import Version
 from tensorflow_datasets.object_detection import waymo_open_dataset
 
 
 class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = waymo_open_dataset.WaymoOpenDataset
+  BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
-      "test": 1,  # Number of fake test example
   }
 
   def setUp(self):
     super(WaymoOpenDatasetTest, self).setUp()
-    self.builder._CLOUD_BUCKET = self.example_dir
+    waymo_open_dataset.WaymoOpenDataset.BUILDER_CONFIGS.extend([
+        waymo_open_dataset.WaymoOpenDatasetConfig(
+            cloud_bucket=self.example_dir,
+            name="test",
+            version=Version("0.1.0"),
+            description="Waymo Open Dataset test config",
+        ),
+    ])
 
 
 if __name__ == "__main__":

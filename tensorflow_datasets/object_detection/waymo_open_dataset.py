@@ -45,6 +45,13 @@ Please look at tfds documentation for accessing GCS, and
 afterwards, please register via https://waymo.com/open/licensing/
 """
 
+_V_1_0_DESCRIPTION = """
+This dataset is also available in pre-processed format, making it faster
+to load, if you select the correct data_dir:
+tfds.load('waymo_open_dataset', \
+data_dir='gs://waymo_open_dataset_v_1_0_0_individual_files/tensorflow_datasets')
+"""
+
 _HOMEPAGE_URL = "http://www.waymo.com/open/"
 _OBJECT_LABELS = [
     "TYPE_UNKNOWN", "TYPE_VEHICLE", "TYPE_PEDESTRIAN", "TYPE_SIGN",
@@ -52,11 +59,43 @@ _OBJECT_LABELS = [
 ]
 
 
+class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for Waymo Open Dataset Config."""
+
+  @tfds.core.disallow_positional_args
+  def __init__(self, cloud_bucket, **kwargs):
+    """BuilderConfig for Waymo Open Dataset examples.
+
+    Args:
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(WaymoOpenDatasetConfig, self).__init__(**kwargs)
+    self.cloud_bucket = cloud_bucket
+
+
 class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
   """Waymo Open Dataset."""
 
-  VERSION = tfds.core.Version("0.1.0")
-  _CLOUD_BUCKET = "gs://waymo_open_dataset_v_1_2_0_individual_files/"
+  BUILDER_CONFIGS = [
+      WaymoOpenDatasetConfig(
+          cloud_bucket="gs://waymo_open_dataset_v_1_0_0_individual_files/",
+          name="v_1_0",
+          version=tfds.core.Version("0.1.0"),
+          description="Waymo Open Dataset v1.0",
+      ),
+      WaymoOpenDatasetConfig(
+          cloud_bucket="gs://waymo_open_dataset_v_1_1_0_individual_files/",
+          name="v_1_1",
+          version=tfds.core.Version("0.1.0"),
+          description="Waymo Open Dataset v1.1",
+      ),
+      WaymoOpenDatasetConfig(
+          cloud_bucket="gs://waymo_open_dataset_v_1_2_0_individual_files/",
+          name="v_1_2",
+          version=tfds.core.Version("0.1.0"),
+          description="Waymo Open Dataset v1.2",
+      ),
+  ]
 
   def _info(self):
 
@@ -66,9 +105,13 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
         "bbox": tfds.features.BBoxFeature(),
     }
 
+    waymo_description = _DESCRIPTION
+    if self.builder_config.name == 'v_1_0':
+      waymo_description += _V_1_0_DESCRIPTION
+
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION,
+        description=waymo_description,
         features=tfds.features.FeaturesDict({
             "context": {
                 "name": tfds.features.Text()
@@ -118,24 +161,18 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     """Returns SplitGenerators."""
 
     # Training set
-    train_files = tf.io.gfile.glob(
-        os.path.join(self._CLOUD_BUCKET, "training/segment*camera*"))
+    train_files = tf.io.gfile.glob(os.path.join(
+        self.builder_config.cloud_bucket, "training/segment*camera*"))
     logging.info("Train files: %s", train_files)
 
     # Validation set
-    validation_files = tf.io.gfile.glob(
-        os.path.join(self._CLOUD_BUCKET, "validation/segment*camera*"))
+    validation_files = tf.io.gfile.glob(os.path.join(
+        self.builder_config.cloud_bucket, "validation/segment*camera*"))
     logging.info("Validation files: %s", validation_files)
 
-    # Testing set
-    test_files = tf.io.gfile.glob(
-        os.path.join(self._CLOUD_BUCKET, "testing/segment*camera*"))
-    logging.info("Testing files: %s", test_files)
-
-    return [
+    split_generators = [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 "tf_record_files": train_files,
             },
@@ -146,13 +183,24 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
                 "tf_record_files": validation_files,
             }
         ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "tf_record_files": test_files,
-            }
-        ),
     ]
+
+    # Testing set (Only available in Waymo Open Dataset v1.2)
+    if self.builder_config.name == 'v_1_2':
+      test_files = tf.io.gfile.glob(os.path.join(
+          self.builder_config.cloud_bucket, "testing/segment*camera*"))
+      logging.info("Testing files: %s", test_files)
+
+      split_generators.append(
+        tfds.core.SplitGenerator(
+          name=tfds.Split.TEST,
+          gen_kwargs={
+            "tf_record_files": test_files,
+          },
+        )
+      )
+
+    return split_generators
 
   def _build_pcollection(self, pipeline, tf_record_files):
     """Generate examples as dicts."""
