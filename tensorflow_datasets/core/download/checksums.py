@@ -38,7 +38,7 @@ _CHECKSUM_DIRS = [
 _CHECKSUM_SUFFIX = '.txt'
 
 
-class UrlInfo(object):  # TODO(tfds): Use dataclasses
+class UrlInfo:  # TODO(tfds): Use dataclasses
   """Small wrapper around the url metadata (checksum, size).
 
   Attributes:
@@ -51,7 +51,11 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
     self.checksum = checksum
 
   def asdict(self) -> Dict[str, Any]:
-    """Returns the dict representation of the dataclass."""
+    """Returns the dict representation of the dataclass.
+
+    Returns:
+      Dict representation of the dataclass.
+    """
     # TODO(tfds): Replace by `dataclasses.asdict(self)`
     return {
         'size': self.size,
@@ -59,6 +63,11 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
     }
 
   def __eq__(self, other) -> bool:
+    """Returns the boolean of whether the two UrlInfo objects are equal.
+
+    Returns:
+      Boolean of whether the two UrlInfo objects are equal.
+    """
     return (
         type(self) == type(other) and  # pylint: disable=unidiomatic-typecheck
         self.size == other.size and
@@ -66,9 +75,19 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
     )
 
   def __ne__(self, other) -> bool:  # Required in Py2
+    """Returns the boolean of whether the two UrlInfo objects are not equal.
+
+    Returns:
+      Boolean of whether the two UrlInfo objects are not equal.
+    """
     return not self == other
 
   def __repr__(self) -> str:
+    """Returns the representation of the UrlInfo object.
+
+    Return:
+      String representing the UrlInfo object.
+    """
     return '{}(size={}, checksum={})'.format(
         type(self).__name__, self.size, self.checksum)
 
@@ -104,14 +123,24 @@ def add_checksums_dir(checksums_dir: str) -> None:
 
 
 def _list_dir(path: str) -> List[str]:
+  """Returns a list of entries contained within the given directory.
+
+  Args:
+    path: Path to the directory.
+
+  Returns:
+    List of entries contained within the given directory.
+  """
   return tf.io.gfile.listdir(path)
-
-
 
 
 @utils.memoize()
 def _checksum_paths() -> Dict[str, str]:
-  """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
+  """Returns dict {'dataset_name': 'path/to/checksums/file'}.
+
+  Returns:
+    Returns the dict mapping dataset names and their corresponding checksums.
+  """
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
     for fname in _list_dir(dir_path):
@@ -124,7 +153,14 @@ def _checksum_paths() -> Dict[str, str]:
 
 
 def _get_path(dataset_name: str) -> str:
-  """Returns path to where checksums are stored for a given dataset."""
+  """Returns path to where checksums are stored for a given dataset.
+
+  Args:
+    dataset_name: Name of the dataset.
+
+  Returns:
+    Path to where the checksums for the given dataset are stored.
+  """
   path = _checksum_paths().get(dataset_name, None)
   if path:
     return path
@@ -142,14 +178,28 @@ def _get_path(dataset_name: str) -> str:
 
 
 def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within file at given path."""
+  """Returns {URL: (size, checksum)}s stored within file at given path.
+
+  Args:
+    checksums_path: Path to the checksums.
+
+  Returns:
+    Dict mapping the URLs to their corresponding UrlInfos.
+  """
   with tf.io.gfile.GFile(checksums_path) as f:
     content = f.read()
   return parse_url_infos(content.splitlines())
 
 
 def parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within given file."""
+  """Returns {URL: (size, checksum)}s stored within given file.
+
+  Args:
+    checksums_file: List of checksums.
+
+  Returns:
+    Dict mapping URLs to their corresponding UrlInfos.
+  """
   url_infos = {}
   for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
@@ -163,7 +213,11 @@ def parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
 
 @utils.memoize()
 def get_all_url_infos() -> Dict[str, UrlInfo]:
-  """Returns dict associating URL to (size, sha256)."""
+  """Returns dict associating URL to (size, sha256).
+
+  Returns:
+    Dict mapping URLs to their corresponding UrlInfos.
+  """
   url_infos = {}
   for path in _checksum_paths().values():
     dataset_url_infos = _get_url_infos(path)
