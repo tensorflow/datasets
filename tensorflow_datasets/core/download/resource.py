@@ -45,7 +45,14 @@ _hex_codec = codecs.getdecoder('hex_codec')
 
 
 def _decode_hex(hexstr):
-  """Returns binary digest, given str hex digest."""
+  """Returns binary digest, given str hex digest.
+
+  Args:
+    hexstr: Hex digest string to decode.
+
+  Returns:
+    Decoded binary digest.
+  """
   return _hex_codec(hexstr)[0]
 
 
@@ -96,7 +103,14 @@ _URL_COMMON_PARTS = [
 
 
 def _guess_extract_method(fname):
-  """Guess extraction method, given file name (or path)."""
+  """Guess extraction method, given file name (or path).
+
+  Args:
+    fname: File name or path to the file.
+
+  Returns:
+    Method to be used for extraction.
+  """
   for method, extensions in _EXTRACTION_METHOD_TO_EXTS:
     for ext in extensions:
       if fname.endswith(ext):
@@ -196,18 +210,39 @@ def get_dl_fname(url, checksum):
 
 
 def get_dl_dirname(url):
-  """Returns name of temp dir for given url."""
+  """Returns name of temp dir for given url.
+
+  Args:
+    url: URL to find the temp dir of.
+
+  Returns:
+    Name of the temp dir.
+  """
   checksum = hashlib.sha256(tf.compat.as_bytes(url)).hexdigest()
   return get_dl_fname(url, checksum)
 
 
 def _get_info_path(path):
-  """Returns path (`str`) of INFO file associated with resource at path."""
+  """Returns path (`str`) of INFO file associated with resource at path.
+
+  Args:
+    path: Path to the resource.
+
+  Returns:
+    Path to the .INFO file.
+  """
   return '%s.INFO' % path
 
 
 def _read_info(info_path) -> Json:
-  """Returns info dict or None."""
+  """Returns info dict or None.
+
+  Args:
+    info_path: Path to the .INFO file.
+
+  Returns:
+    .INFO file content.
+  """
   if not tf.io.gfile.exists(info_path):
     return None
   with tf.io.gfile.GFile(info_path) as info_f:
@@ -223,12 +258,27 @@ def rename_info_file(
     dst_path: str,
     overwrite: bool = False,
 ) -> None:
+  """Renames the .INFO file.
+
+  Args:
+    src_path: Path to the source resource.
+    dst_path: Path to the destination resource.
+    overwrite: Whether the dst .INFO file is to be occupied by an existing file.
+  """
   tf.io.gfile.rename(
       _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite)
 
 
 @synchronize_decorator
 def read_info_file(info_path: str) -> Json:
+  """Reads the .INFO file.
+
+  Args:
+    info_path: Path to the .INFO file.
+
+  Returns:
+    Content of the .INFO file.
+  """
   return _read_info(_get_info_path(info_path))
 
 
@@ -280,14 +330,21 @@ def write_info_file(
 
 
 def get_extract_method(path):
-  """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
+  """Returns `ExtractMethod` to use on resource at path. Cannot be None.
+
+  Args:
+    path: Path to the resource.
+
+  Returns:
+    The extraction method to be used.
+  """
   info_path = _get_info_path(path)
   info = _read_info(info_path)
   fname = info.get('original_fname', path) if info else path
   return _guess_extract_method(fname)
 
 
-class Resource(object):
+class Resource:
   """Represents a resource to download, extract, or both."""
 
   @api_utils.disallow_positional_args()
@@ -310,7 +367,14 @@ class Resource(object):
 
   @classmethod
   def exists_locally(cls, path):
-    """Returns whether the resource exists locally, at `resource.path`."""
+    """Returns whether the resource exists locally, at `resource.path`.
+
+    Args:
+      path: Path to the resource.
+
+    Returns:
+      Whether the resource exists locally.
+    """
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
     return (tf.io.gfile.exists(path) and
@@ -318,7 +382,11 @@ class Resource(object):
 
   @property
   def extract_method(self):
-    """Returns `ExtractMethod` to use on resource. Cannot be None."""
+    """Returns `ExtractMethod` to use on resource. Cannot be None.
+
+    Returns:
+      The extraction method to be used.
+    """
     if self._extract_method:
       return self._extract_method
     return get_extract_method(self.path)
