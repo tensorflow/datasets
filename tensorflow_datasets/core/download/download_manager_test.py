@@ -41,10 +41,18 @@ NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
 
 
 def _sha256(str_):
+  """Returns the SHA256 hexdump of the given string.
+  Args:
+    str_: String to compute the SHA256 hexdump of.
+
+  Returns:
+    SHA256 hexdump of the given string.
+  """
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
 
-class Artifact(object):
+class Artifact:
+  """Artifact class for tracking files used for testing."""
   # For testing only.
 
   def __init__(self, name, url=None):
@@ -86,6 +94,14 @@ class DownloadManagerTest(testing.TestCase):
     """`downloader.download` patch which creates the returns the path."""
 
     def _download(url, tmpdir_path):
+      """Download function of the DownloadManager.
+      Args:
+        url: URL to download from.
+        tmpdir_path: Path to the temporary directory.
+
+      Returns:
+        The resolved promise.
+      """
       self.downloaded_urls.append(url)  # Record downloader.download() calls
       # If the name isn't explicitly provided, then it is extracted from the
       # url.
@@ -112,6 +128,7 @@ class DownloadManagerTest(testing.TestCase):
         extractor._Extractor, 'extract', side_effect=_extract).start()
 
   def setUp(self):
+    """Sets up the DownloadManager for the tests."""
     super(DownloadManagerTest, self).setUp()
 
     # Input of the DownloadManager
@@ -135,6 +152,12 @@ class DownloadManagerTest(testing.TestCase):
     self.addCleanup(absltest.mock.patch.stopall)
 
   def _write_info(self, path, info):
+    """Writes the content to the .INFO file.
+
+    Args:
+      path: Path to the .INFO file.
+      info: Content to be written.
+    """
     content = json.dumps(info)
     self.fs.add_file(path, content)
 
@@ -146,6 +169,17 @@ class DownloadManagerTest(testing.TestCase):
       extract_dir='/extract_dir',
       **kwargs
   ):
+    """Returns the DownloadManager object.
+
+    Args:
+      register_checksums: Whether or not to register the checksums.
+      url_infos: UrlInfos for the URLs.
+      dl_dir: Path to the download directory.
+      extract_dir: Path to the extraction directory.
+
+    Returns:
+      DownloadManager object.
+    """
     manager = dm.DownloadManager(
         dataset_name='mnist',
         download_dir=dl_dir,
