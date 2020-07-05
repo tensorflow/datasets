@@ -21,18 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import Version
 from tensorflow_datasets.object_detection import waymo_open_dataset
-
-
-# waymo_open_dataset.WaymoOpenDataset.BUILDER_CONFIGS.extend([
-#     waymo_open_dataset.WaymoOpenDatasetConfig(
-#         cloud_bucket=None,
-#         name="test",
-#         version=Version("0.1.0"),
-#         description="Waymo Open Dataset test config",
-#     ),
-# ])
 
 
 class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
@@ -49,7 +38,6 @@ class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
     """Set up Waymo Open Dataset tests."""
     super(WaymoOpenDatasetTest, self).setUp()
     self.builder.builder_config.cloud_bucket = self.example_dir
-    # waymo_open_dataset.WaymoOpenDataset.BUILDER_CONFIGS.
 
 
 if __name__ == "__main__":
