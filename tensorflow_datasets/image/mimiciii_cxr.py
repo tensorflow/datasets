@@ -174,7 +174,7 @@ class MimiciiiCxr(tfds.core.BeamBasedBuilder):
             
             # Job Graph Too Large
             chexpert_df = pd.read_csv(tf.io.gfile.GFile(os.path.join(manual_dir, 'mimic-cxr-2.0.0-chexpert.csv'), 'r'))
-            negbio_df = pd.read_csv(tf.io.gfile.GFile(os.path.join(manual_dir, 'mimic-cxr-2.0.0-negbio.csv', 'r'))
+            negbio_df = pd.read_csv(tf.io.gfile.GFile(os.path.join(manual_dir, 'mimic-cxr-2.0.0-negbio.csv'), 'r'))
             chexpert_df = chexpert_df.fillna(99.0)
             negbio_df = negbio_df.fillna(99.0)
             
