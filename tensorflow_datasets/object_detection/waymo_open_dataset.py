@@ -67,6 +67,7 @@ class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
     """BuilderConfig for Waymo Open Dataset examples.
 
     Args:
+      cloud_bucket: Google Cloud bucket to download the dataset from.
       **kwargs: keyword arguments forwarded to super.
     """
     super(WaymoOpenDatasetConfig, self).__init__(**kwargs)
@@ -98,7 +99,11 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
+    """Returns basic information about the dataset.
 
+    Returns:
+      tfds.core.DatasetInfo.
+    """
     # Annotation descriptions are in the object development kit.
     annotations = {
         "type": tfds.features.ClassLabel(names=_OBJECT_LABELS),
@@ -106,8 +111,8 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     }
 
     waymo_description = _DESCRIPTION
-    if self.builder_config.name == 'v_1_0':
-      waymo_description += _V_1_0_DESCRIPTION
+    if self.builder_config.name == "v_1_0":
+      waymo_description += "\n" + _V_1_0_DESCRIPTION
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -158,7 +163,14 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
+    """Returns the SplitGenerators.
+
+    Args:
+      dl_manager: Download manager object.
+
+    Returns:
+      SplitGenerators.
+    """
 
     # Training set
     train_files = tf.io.gfile.glob(os.path.join(
@@ -192,18 +204,26 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
       logging.info("Testing files: %s", test_files)
 
       split_generators.append(
-        tfds.core.SplitGenerator(
-          name=tfds.Split.TEST,
-          gen_kwargs={
-            "tf_record_files": test_files,
-          },
-        )
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TEST,
+              gen_kwargs={
+                  "tf_record_files": test_files,
+              },
+          )
       )
 
     return split_generators
 
   def _build_pcollection(self, pipeline, tf_record_files):
-    """Generate examples as dicts."""
+    """Generate examples as dicts.
+
+    Args:
+      pipeline: Apache Beam pipeline.
+      tf_record_files: .tfrecord files.
+
+    Returns:
+      Dict of examples.
+    """
     beam = tfds.core.lazy_imports.apache_beam
 
     def _process_example(tf_record_file):
@@ -219,7 +239,14 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
 
 
 def _generate_images_and_annotations(tf_record_file):
-  """Yields the images and annotations from a given file."""
+  """Yields the images and annotations from a given file.
+
+  Args:
+    tf_record_file: .tfrecord files.
+
+  Yields:
+    Waymo images and annotations.
+  """
   # Go through all frames
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
   for data in dataset:
@@ -258,6 +285,16 @@ def _generate_images_and_annotations(tf_record_file):
 
 
 def _convert_labels(raw_labels, image_width, image_height):
+  """Convert labels to bounding boxes.
+
+  Args:
+    raw_labels: Raw label data.
+    image_width: Width of the Waymo images.
+    image_height: Height of the Waymo images.
+
+  Returns:
+    List of dicts with the label type and the corresponding bounding boxes.
+  """
   return [{  # pylint: disable=g-complex-comprehension
       "type": raw_label.type,
       "bbox": _build_bounding_box(raw_label.box, image_width, image_height)
@@ -265,7 +302,16 @@ def _convert_labels(raw_labels, image_width, image_height):
 
 
 def _build_bounding_box(open_dataset_box, image_width, image_height):
-  """Builds and returns TFDS bounding box."""
+  """Builds and returns TFDS bounding box.
+
+  Args:
+    open_dataset_box: Bounding box center x,y coordinates and its length, width.
+    image_width: Width of the Waymo images.
+    image_height: Height of the Waymo images.
+
+  Returns:
+    tfds.features.BBox.
+  """
 
   center_x = open_dataset_box.center_x
   center_y = open_dataset_box.center_y
