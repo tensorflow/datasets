@@ -23,31 +23,31 @@ from tensorflow_datasets.image_classification import cifar_corrupted
 
 class Cifar10CorruptedTest(testing.DatasetBuilderTestCase):
 
-    BUILDER_CONFIG_NAMES_TO_TEST = [
-        "elastic_1",
-        "elastic_4",
-        "elastic_5",
-    ]
+  BUILDER_CONFIG_NAMES_TO_TEST = [
+      "elastic_1",
+      "elastic_4",
+      "elastic_5",
+  ]
 
-    DATASET_CLASS = cifar_corrupted.Cifar10Corrupted
-    SPLITS = {
-        "test": 10,
-    }
+  DATASET_CLASS = cifar_corrupted.Cifar10Corrupted
+  SPLITS = {
+      "test": 10,
+  }
 
 
 class Cifar100CorruptedTest(testing.DatasetBuilderTestCase):
 
-    BUILDER_CONFIG_NAMES_TO_TEST = [
-        "elastic_1",
-        "elastic_4",
-        "elastic_5",
-    ]
+  BUILDER_CONFIG_NAMES_TO_TEST = [
+      "elastic_1",
+      "elastic_4",
+      "elastic_5",
+  ]
 
-    DATASET_CLASS = cifar_corrupted.Cifar100Corrupted
-    SPLITS = {
-        "test": 10,
-    }
+  DATASET_CLASS = cifar_corrupted.Cifar100Corrupted
+  SPLITS = {
+      "test": 10,
+  }
 
 
 if __name__ == "__main__":
-    testing.test_main()
+  testing.test_main()
