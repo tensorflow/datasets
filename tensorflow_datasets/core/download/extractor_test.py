@@ -59,7 +59,6 @@ class ExtractorTest(testing.TestCase):
       cls.f2_content = f2_f.read()
 
   def setUp(self):
-    """Set up the tests."""
     super(ExtractorTest, self).setUp()
     self.extractor = extractor.get_extractor()
     self.extractor._pbar_path = absltest.mock.MagicMock()

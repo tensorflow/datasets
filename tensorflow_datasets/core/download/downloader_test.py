@@ -68,7 +68,6 @@ class DownloaderTest(testing.TestCase):
   """Tests for downloader.py."""
 
   def setUp(self):
-    """Set up the tests."""
     super(DownloaderTest, self).setUp()
     self.addCleanup(absltest.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)

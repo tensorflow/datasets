@@ -130,7 +130,6 @@ class DownloadManagerTest(testing.TestCase):
         extractor._Extractor, 'extract', side_effect=_extract).start()
 
   def setUp(self):
-    """Sets up the DownloadManager for the tests."""
     super(DownloadManagerTest, self).setUp()
 
     # Input of the DownloadManager
@@ -292,7 +291,6 @@ class DownloadManagerTest(testing.TestCase):
     self.assertEqual(res, {
         'a': '/extract_dir/ZIP.%s' % a.file_name,
     })
-
 
   def test_download_and_extract_already_downloaded(self):
     a = Artifact('a')  # Extract can't be deduced from the url, but from .INFO
