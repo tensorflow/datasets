@@ -32,7 +32,7 @@ from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
 
 
-class _FakeResponse:
+class _FakeResponse(object):
   """URL response used for testing.
 
   Attributes:

@@ -64,7 +64,7 @@ class NonMatchingChecksumError(Exception):
     Exception.__init__(self, msg)
 
 
-class DownloadConfig:
+class DownloadConfig(object):
   """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`."""
 
   def __init__(
@@ -120,7 +120,7 @@ class DownloadConfig:
     self.try_download_gcs = try_download_gcs
 
 
-class DownloadManager:
+class DownloadManager(object):
   """Manages the download and extraction of files, as well as caching.
 
   Downloaded files are cached under `download_dir`. The file name of downloaded

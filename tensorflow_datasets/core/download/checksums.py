@@ -38,7 +38,7 @@ _CHECKSUM_DIRS = [
 _CHECKSUM_SUFFIX = '.txt'
 
 
-class UrlInfo:  # TODO(tfds): Use dataclasses
+class UrlInfo(object):  # TODO(tfds): Use dataclasses
   """Small wrapper around the url metadata (checksum, size).
 
   Attributes:

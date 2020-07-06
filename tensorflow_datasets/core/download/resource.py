@@ -344,7 +344,7 @@ def get_extract_method(path):
   return _guess_extract_method(fname)
 
 
-class Resource:
+class Resource(object):
   """Represents a resource to download, extract, or both."""
 
   @api_utils.disallow_positional_args()

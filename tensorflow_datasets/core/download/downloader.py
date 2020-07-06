@@ -76,7 +76,7 @@ class DownloadError(Exception):
   pass
 
 
-class _Downloader:
+class _Downloader(object):
   """Class providing async download API with checksum validation.
 
   Do not instantiate this class directly. Instead, call `get_downloader()`.

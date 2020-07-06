@@ -51,7 +51,7 @@ def _sha256(str_):
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
 
-class Artifact:
+class Artifact(object):
   """Artifact class for tracking files used for testing."""
   # For testing only.
 

@@ -63,7 +63,7 @@ class UnsafeArchiveError(Exception):
   """The archive is unsafe to unpack, e.g. absolute path."""
 
 
-class _Extractor:
+class _Extractor(object):
   """Singleton (use `get_extractor()` module fct) to extract archives.
 
   Attributes:
