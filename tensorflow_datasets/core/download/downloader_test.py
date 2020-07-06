@@ -52,11 +52,9 @@ class _FakeResponse(object):
     self.read = self.raw.read
 
   def __enter__(self):
-    """Enter method for the context manager."""
     return self
 
   def __exit__(self, *args):
-    """Exit method for the context manager."""
     return
 
   def iter_content(self, chunk_size):

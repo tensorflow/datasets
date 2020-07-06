@@ -249,22 +249,14 @@ class DownloadManager(object):
 
   @property
   def _downloader(self):
-    """Returns the downloader object.
-
-    Returns:
-      The downloader object.
-    """
+    """Returns the downloader object."""
     if not self.__downloader:
       self.__downloader = downloader.get_downloader()
     return self.__downloader
 
   @property
   def _extractor(self):
-    """Returns the extractor object.
-
-    Returns:
-      The extractor object.
-    """
+    """Returns the extractor object."""
     if not self.__extractor:
       self.__extractor = extractor.get_extractor()
     return self.__extractor
@@ -289,11 +281,7 @@ class DownloadManager(object):
 
   @property
   def register_checksums(self):
-    """Returns whether checksums are being computed and recorded to file.
-
-    Returns:
-      Whether or not the checksums are being computed and recorded to file.
-    """
+    """Returns whether checksums are being computed and recorded to file."""
     return self._register_checksums
 
   @utils.build_synchronize_decorator()

@@ -46,11 +46,7 @@ Response = Union[requests.Response, urllib.response.addinfourl]
 
 @utils.memoize()
 def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
-  """Returns the _Downloader object.
-
-  Returns:
-    _Downloader object.
-  """
+  """Returns the _Downloader object."""
   return _Downloader(*args, **kwargs)
 
 

@@ -47,11 +47,7 @@ else:
 
 @utils.memoize()
 def get_extractor(*args, **kwargs):
-  """Returns an _Extractor object.
-
-  Returns:
-    _Extractor object.
-  """
+  """Returns an _Extractor object."""
   return _Extractor(*args, **kwargs)
 
 
@@ -162,13 +158,7 @@ def _copy(src_file, dest_path):
 
 
 def _normpath(path):
-  """Returns the normalized path name.
-  Args:
-    path: Path to normalize.
-
-  Returns:
-    Normalized path name.
-  """
+  """Returns the normalized path name."""
   path = os.path.normpath(path)
   if (path.startswith('.')
       or os.path.isabs(path)

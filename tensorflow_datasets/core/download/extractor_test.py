@@ -39,14 +39,7 @@ TAR_GZ_STREAM = resource_lib.ExtractMethod.TAR_GZ_STREAM
 
 
 def _read(path):
-  """Read from the file.
-
-  Args:
-    path: Path to the file to read from.
-
-  Returns:
-    Content of the file.
-  """
+  """Read from the file."""
   with tf.io.gfile.GFile(path, 'rb') as f:
     return f.read()
 

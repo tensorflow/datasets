@@ -42,6 +42,7 @@ NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
 
 def _sha256(str_):
   """Returns the SHA256 hexdump of the given string.
+
   Args:
     str_: String to compute the SHA256 hexdump of.
 
@@ -95,6 +96,7 @@ class DownloadManagerTest(testing.TestCase):
 
     def _download(url, tmpdir_path):
       """Download function of the DownloadManager.
+
       Args:
         url: URL to download from.
         tmpdir_path: Path to the temporary directory.
