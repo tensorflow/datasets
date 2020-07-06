@@ -47,7 +47,7 @@ _BUFFER_SIZE = 8<<20  # 8 MiB per file.
 
 _SUB_SPEC_RE = re.compile(r'''
 ^
- (?P<split>\w+)
+ (?P<split>[\w-]+)
  (\[
   ((?P<from>-?\d+)
    (?P<from_pct>%)?)?

@@ -167,6 +167,7 @@ class ReadInstructionTest(testing.TestCase):
         'train': 200,
         'test': 101,
         'validation': 30,
+        'dev-train': 10
     }
 
   def check_from_ri(self, ri, expected):
@@ -239,6 +240,9 @@ class ReadInstructionTest(testing.TestCase):
     # Empty:
     # Slices resulting in empty datasets are valid with 'closest' rounding:
     self.check_from_spec('validation[:1%]', [('validation', None, 0)])
+
+    # Supports splits with '-' in name.
+    ri = self.check_from_spec('dev-train', [('dev-train', None, None)])
 
   def test_add(self):
     ri1 = tfrecords_reader.ReadInstruction.from_spec('train[10:20]')
