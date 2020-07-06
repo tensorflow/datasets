@@ -8,6 +8,9 @@ toc:
     title: crema_d
   - path: /datasets/catalog/dementiabank
     title: dementiabank (manual)
+  - path: /datasets/catalog/fuss
+    status: nightly
+    title: fuss
   - path: /datasets/catalog/groove
     title: groove
   - path: /datasets/catalog/librispeech
