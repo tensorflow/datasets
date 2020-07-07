@@ -51,18 +51,17 @@ impulse responses, and the original source audio.
 
     *   **`1.2.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split        | Examples
+:----------- | -------:
+'test'       | 1,000
+'train'      | 20,000
+'validation' | 1,000
 
 *   **Features**:
 
@@ -112,6 +111,14 @@ FeaturesDict({
 
 *   **Config description**: Default reverberated audio.
 
+*   **Download size**: `7.35 GiB`
+
+*   **Dataset size**: `43.20 GiB`
+
 ## fuss/unprocessed
 
 *   **Config description**: Unprocessed audio without additional reverberation.
+
+*   **Download size**: `8.28 GiB`
+
+*   **Dataset size**: `45.58 GiB`
