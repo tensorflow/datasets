@@ -419,6 +419,8 @@ flores/neen_plain_text/1.1.0
 flores/sien_plain_text/1.1.0
 food101/2.0.0
 forest_fires/0.0.1
+fuss/reverberant/1.2.0
+fuss/unprocessed/1.2.0
 gap/0.1.0
 geirhos_conflict_stimuli/1.0.0
 german_credit_numeric/1.0.0
