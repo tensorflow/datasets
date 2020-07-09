@@ -206,7 +206,6 @@ class DownloadManager(object):
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
     self._manual_dir = manual_dir and os.path.expanduser(manual_dir)
-    self._checksums_path = checksums_path
     self._manual_dir_instructions = manual_dir_instructions
     tf.io.gfile.makedirs(self._download_dir)
     tf.io.gfile.makedirs(self._extract_dir)
@@ -216,6 +215,11 @@ class DownloadManager(object):
     self._register_checksums = register_checksums
     # All known URLs: {url: (size, checksum)}
     self._url_infos = checksums.get_all_url_infos()
+
+    if tf.io.gfile.exists(checksums_path):
+      with tf.io.gfile.GFile(checksums_path) as f:
+        self._url_infos.update(checksums.parse_url_infos(f.read().splitlines()))
+
     # To record what is being used: {url: (size, checksum)}
     self._recorded_url_infos = {}
     # These attributes are lazy-initialized since they must be cleared when this
@@ -339,10 +343,6 @@ class DownloadManager(object):
           url=resource.url, url_path=url_path, url_info=url_info)
     elif resource.url not in self._url_infos:
       if self._force_checksums_validation:
-        if tf.io.gfile.exists(self._checksums_path):
-          url_infos = checksums._get_url_infos(self._checksums_path)  # pylint: disable=protected-access
-          if url_info != url_infos.get(resource.url, None):
-            raise NonMatchingChecksumError(resource.url, tmp_path)
         raise ValueError(
             'Missing checksums url: {}, yet `force_checksums_validation=True`. '
             'Did you forgot to register checksums ?')

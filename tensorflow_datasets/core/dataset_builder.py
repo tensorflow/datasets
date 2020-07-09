@@ -205,8 +205,6 @@ class DatasetBuilder(object):
     else:  # Use the code version (do not restore data)
       self.info.initialize_from_bucket()
 
-    self._code_dir = os.path.dirname(inspect.getfile(self.__class__))
-
   def __getstate__(self):
     return self._original_state
 
@@ -219,6 +217,12 @@ class DatasetBuilder(object):
       return self._builder_config.version
     else:
       return self.VERSION
+
+  @utils.classproperty
+  @classmethod
+  @utils.memoize()
+  def code_dir(cls):
+    return os.path.dirname(inspect.getfile(cls))
 
   @utils.memoized_property
   def supported_versions(self):
@@ -768,7 +772,7 @@ class DatasetBuilder(object):
                                                 "downloads")
     extract_dir = (download_config.extract_dir or
                    os.path.join(download_dir, "extracted"))
-    checksums_path = os.path.join(self._code_dir, "checksums.txt")
+    checksums_path = os.path.join(self.code_dir, "checksums.txt")
 
     # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
     if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
