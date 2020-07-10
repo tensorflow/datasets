@@ -69,8 +69,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
     This dataset need to be manually downloaded through kaggle api:
     `kaggle datasets download allen-institute-for-ai/CORD-19-research-challenge`
-    Place the downloaded zip file in the manual folder
-    (defaults to ~/tensorflow_datasets/manual/).
+    Place the downloaded zip file in the manual folder.
     """
 
   VERSION = tfds.core.Version("1.0.0")
