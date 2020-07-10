@@ -23,6 +23,8 @@ reddit_disentanglement/2.0.0
 samsum/1.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.1.0
+vctk/mic1/1.0.0
+vctk/mic2/1.0.0
 voxforge/1.0.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
