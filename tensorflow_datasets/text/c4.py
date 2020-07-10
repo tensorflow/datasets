@@ -241,7 +241,7 @@ class C4(tfds.core.BeamBasedBuilder):
             gen_kwargs=dict(
                 split="validation",
                 page_content=page_content_pcollection,
-                hashed_url_predicate=lambda x: x % 1000 == 0  # 0.01%
+                hashed_url_predicate=lambda x: x % 1000 == 0  # 00.1%
             ),
         ),
     ]
