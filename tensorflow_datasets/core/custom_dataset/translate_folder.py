@@ -40,7 +40,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
   The directory content should be as followed:
 
   ```
-  path/to/manual_dir/<dataset_name>/
+  path/to/my_data/
     lang1.train.txt
     lang2.train.txt
     lang1.test.txt
@@ -54,10 +54,12 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
   To use it:
 
   ```
-  builder = tfds.TranslateFolder(root_dir='path/to/manual_dir/')
+  builder = tfds.TranslateFolder(root_dir='path/to/my_data/')
   print(builder.info)  # Splits, num examples,... are automatically calculated
   ds = builder.as_dataset(split='train', shuffle_files=True)
   ```
+
+  Note: All examples from all splits are loaded in memory in `__init__`.
 
   """
 
