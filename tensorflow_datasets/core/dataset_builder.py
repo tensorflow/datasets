@@ -221,7 +221,8 @@ class DatasetBuilder(object):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_dir(cls):
+  def code_dir(cls) -> str:
+    """Returns the path to the directory where the Dataset class is located."""
     return os.path.dirname(inspect.getfile(cls))
 
   @utils.memoized_property

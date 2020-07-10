@@ -216,7 +216,7 @@ class DownloadManager(object):
     # All known URLs: {url: (size, checksum)}
     self._url_infos = checksums.get_all_url_infos()
 
-    if tf.io.gfile.exists(checksums_path):
+    if checksums_path and tf.io.gfile.exists(checksums_path):
       with tf.io.gfile.GFile(checksums_path) as f:
         self._url_infos.update(checksums.parse_url_infos(f.read().splitlines()))
 
