@@ -27,6 +27,9 @@ toc:
     title: speech_commands
   - path: /datasets/catalog/tedlium
     title: tedlium
+  - path: /datasets/catalog/vctk
+    status: nightly
+    title: vctk
   - path: /datasets/catalog/voxceleb
     title: voxceleb (manual)
   - path: /datasets/catalog/voxforge
