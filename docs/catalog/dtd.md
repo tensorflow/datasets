@@ -12,11 +12,6 @@
 
 # `dtd`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Describable Textures Dataset (DTD) is an evolving collection of textural
@@ -36,9 +31,7 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
 *   **Versions**:
 
-    *   **`3.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`3.0.1`** (default): No release notes.
 
 *   **Download size**: `596.28 MiB`
 

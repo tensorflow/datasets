@@ -12,11 +12,6 @@
 
 # `civil_comments`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -91,7 +86,7 @@ released under CC0, as is the underlying comment text.
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
     Not supported.
 
-## civil_comments/CivilComments (default config)<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilComments (default config)
 
 *   **Config description**: The CivilComments set here includes all the data,
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
@@ -122,7 +117,7 @@ FeaturesDict({
 })
 ```
 
-## civil_comments/CivilCommentsIdentities <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilCommentsIdentities
 
 *   **Config description**: The CivilCommentsIdentities set here includes an
     extended set of identity labels in addition to the basic seven labels.

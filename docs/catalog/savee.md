@@ -40,7 +40,7 @@ and test set consists of samples from 1 speaker, respectively.
 
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain the file AudioData.zip. This file should be under
     Data/Zip/AudioData.zip in the dataset folder provided upon registration.
     You need to register at

@@ -12,10 +12,6 @@
 
 # `nyu_depth_v2`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The NYU-Depth V2 data set is comprised of video sequences from a variety of

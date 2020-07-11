@@ -12,11 +12,6 @@
 
 # `cfq`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The CFQ dataset (and it's splits) for measuring compositional generalization.
@@ -60,9 +55,7 @@ data = tfds.load('cfq/mcd1')
 
 *   **Versions**:
 
-    *   **`1.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
 *   **Download size**: `255.20 MiB`
 
@@ -191,7 +184,7 @@ Split        | Examples
 'train'      | 95,744
 'validation' | 11,967
 
-## cfq/cd0_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r1
 
 *   **Dataset size**: `49.72 MiB`
 *   **Splits**:
@@ -202,7 +195,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r2
 
 *   **Dataset size**: `49.45 MiB`
 *   **Splits**:
@@ -213,7 +206,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r3
 
 *   **Dataset size**: `49.76 MiB`
 *   **Splits**:
@@ -224,7 +217,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r4
 
 *   **Dataset size**: `50.04 MiB`
 *   **Splits**:
@@ -235,7 +228,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r5
 
 *   **Dataset size**: `49.36 MiB`
 *   **Splits**:
@@ -246,7 +239,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r6
 
 *   **Dataset size**: `49.36 MiB`
 *   **Splits**:
@@ -257,7 +250,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r7
 
 *   **Dataset size**: `49.93 MiB`
 *   **Splits**:
@@ -268,7 +261,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r8
 
 *   **Dataset size**: `48.58 MiB`
 *   **Splits**:
@@ -279,7 +272,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0_r9
 
 *   **Dataset size**: `49.23 MiB`
 *   **Splits**:
@@ -290,7 +283,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r1
 
 *   **Dataset size**: `51.54 MiB`
 *   **Splits**:
@@ -301,7 +294,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r2
 
 *   **Dataset size**: `48.18 MiB`
 *   **Splits**:
@@ -312,7 +305,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r3
 
 *   **Dataset size**: `49.23 MiB`
 *   **Splits**:
@@ -323,7 +316,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r4
 
 *   **Dataset size**: `49.76 MiB`
 *   **Splits**:
@@ -334,7 +327,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r5
 
 *   **Dataset size**: `49.10 MiB`
 *   **Splits**:
@@ -345,7 +338,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r6
 
 *   **Dataset size**: `49.10 MiB`
 *   **Splits**:
@@ -356,7 +349,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r7
 
 *   **Dataset size**: `48.02 MiB`
 *   **Splits**:
@@ -367,7 +360,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r8
 
 *   **Dataset size**: `48.13 MiB`
 *   **Splits**:
@@ -378,7 +371,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.1_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.1_r9
 
 *   **Dataset size**: `48.44 MiB`
 *   **Splits**:
@@ -389,7 +382,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r1
 
 *   **Dataset size**: `50.90 MiB`
 *   **Splits**:
@@ -400,7 +393,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r2
 
 *   **Dataset size**: `49.12 MiB`
 *   **Splits**:
@@ -411,7 +404,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r3
 
 *   **Dataset size**: `50.68 MiB`
 *   **Splits**:
@@ -422,7 +415,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r4
 
 *   **Dataset size**: `52.61 MiB`
 *   **Splits**:
@@ -433,7 +426,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r5
 
 *   **Dataset size**: `50.63 MiB`
 *   **Splits**:
@@ -444,7 +437,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r6
 
 *   **Dataset size**: `50.63 MiB`
 *   **Splits**:
@@ -455,7 +448,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r7
 
 *   **Dataset size**: `52.39 MiB`
 *   **Splits**:
@@ -466,7 +459,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r8
 
 *   **Dataset size**: `50.53 MiB`
 *   **Splits**:
@@ -477,7 +470,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.2_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.2_r9
 
 *   **Dataset size**: `50.64 MiB`
 *   **Splits**:
@@ -488,7 +481,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r1
 
 *   **Dataset size**: `52.08 MiB`
 *   **Splits**:
@@ -499,7 +492,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r2
 
 *   **Dataset size**: `52.11 MiB`
 *   **Splits**:
@@ -510,7 +503,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r3
 
 *   **Dataset size**: `51.25 MiB`
 *   **Splits**:
@@ -521,7 +514,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r4
 
 *   **Dataset size**: `49.94 MiB`
 *   **Splits**:
@@ -532,7 +525,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r5
 
 *   **Dataset size**: `49.71 MiB`
 *   **Splits**:
@@ -543,7 +536,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r6
 
 *   **Dataset size**: `49.71 MiB`
 *   **Splits**:
@@ -554,7 +547,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r7
 
 *   **Dataset size**: `50.86 MiB`
 *   **Splits**:
@@ -565,7 +558,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r8
 
 *   **Dataset size**: `49.43 MiB`
 *   **Splits**:
@@ -576,7 +569,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.3_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.3_r9
 
 *   **Dataset size**: `50.32 MiB`
 *   **Splits**:
@@ -587,7 +580,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r1
 
 *   **Dataset size**: `48.52 MiB`
 *   **Splits**:
@@ -598,7 +591,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r2
 
 *   **Dataset size**: `47.40 MiB`
 *   **Splits**:
@@ -609,7 +602,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r3
 
 *   **Dataset size**: `49.18 MiB`
 *   **Splits**:
@@ -620,7 +613,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r4
 
 *   **Dataset size**: `47.86 MiB`
 *   **Splits**:
@@ -631,7 +624,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r5
 
 *   **Dataset size**: `49.01 MiB`
 *   **Splits**:
@@ -642,7 +635,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r6
 
 *   **Dataset size**: `49.01 MiB`
 *   **Splits**:
@@ -653,7 +646,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r7
 
 *   **Dataset size**: `51.70 MiB`
 *   **Splits**:
@@ -664,7 +657,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r8
 
 *   **Dataset size**: `50.94 MiB`
 *   **Splits**:
@@ -675,7 +668,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.4_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.4_r9
 
 *   **Dataset size**: `51.98 MiB`
 *   **Splits**:
@@ -686,7 +679,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r1
 
 *   **Dataset size**: `51.00 MiB`
 *   **Splits**:
@@ -697,7 +690,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r2
 
 *   **Dataset size**: `49.91 MiB`
 *   **Splits**:
@@ -708,7 +701,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r3
 
 *   **Dataset size**: `51.26 MiB`
 *   **Splits**:
@@ -719,7 +712,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r4
 
 *   **Dataset size**: `51.27 MiB`
 *   **Splits**:
@@ -730,7 +723,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r5
 
 *   **Dataset size**: `51.87 MiB`
 *   **Splits**:
@@ -741,7 +734,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r6
 
 *   **Dataset size**: `51.87 MiB`
 *   **Splits**:
@@ -752,7 +745,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r7
 
 *   **Dataset size**: `48.52 MiB`
 *   **Splits**:
@@ -763,7 +756,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r8
 
 *   **Dataset size**: `48.62 MiB`
 *   **Splits**:
@@ -774,7 +767,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.5_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.5_r9
 
 *   **Dataset size**: `48.48 MiB`
 *   **Splits**:
@@ -785,7 +778,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r1
 
 *   **Dataset size**: `49.32 MiB`
 *   **Splits**:
@@ -796,7 +789,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r2
 
 *   **Dataset size**: `49.36 MiB`
 *   **Splits**:
@@ -807,7 +800,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r3
 
 *   **Dataset size**: `49.85 MiB`
 *   **Splits**:
@@ -818,7 +811,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r4
 
 *   **Dataset size**: `50.07 MiB`
 *   **Splits**:
@@ -829,7 +822,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r5
 
 *   **Dataset size**: `49.86 MiB`
 *   **Splits**:
@@ -840,7 +833,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r6
 
 *   **Dataset size**: `49.86 MiB`
 *   **Splits**:
@@ -851,7 +844,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r7
 
 *   **Dataset size**: `49.42 MiB`
 *   **Splits**:
@@ -862,7 +855,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r8
 
 *   **Dataset size**: `48.52 MiB`
 *   **Splits**:
@@ -873,7 +866,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd0.6_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd0.6_r9
 
 *   **Dataset size**: `49.54 MiB`
 *   **Splits**:
@@ -884,7 +877,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r1
 
 *   **Dataset size**: `49.75 MiB`
 *   **Splits**:
@@ -895,7 +888,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r2 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r2
 
 *   **Dataset size**: `49.07 MiB`
 *   **Splits**:
@@ -906,7 +899,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r3 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r3
 
 *   **Dataset size**: `50.22 MiB`
 *   **Splits**:
@@ -917,7 +910,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r4 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r4
 
 *   **Dataset size**: `49.12 MiB`
 *   **Splits**:
@@ -928,7 +921,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r5
 
 *   **Dataset size**: `48.80 MiB`
 *   **Splits**:
@@ -939,7 +932,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r6 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r6
 
 *   **Dataset size**: `48.80 MiB`
 *   **Splits**:
@@ -950,7 +943,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r7 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r7
 
 *   **Dataset size**: `50.69 MiB`
 *   **Splits**:
@@ -961,7 +954,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r8 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r8
 
 *   **Dataset size**: `51.39 MiB`
 *   **Splits**:
@@ -972,7 +965,7 @@ Split        | Examples
 'train'      | 95,743
 'validation' | 11,968
 
-## cfq/cd1_r9 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cfq/cd1_r9
 
 *   **Dataset size**: `49.94 MiB`
 *   **Splits**:

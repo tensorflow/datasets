@@ -9,7 +9,6 @@ toc:
   - path: /datasets/catalog/dementiabank
     title: dementiabank (manual)
   - path: /datasets/catalog/fuss
-    status: nightly
     title: fuss
   - path: /datasets/catalog/groove
     title: groove
@@ -28,12 +27,10 @@ toc:
   - path: /datasets/catalog/tedlium
     title: tedlium
   - path: /datasets/catalog/vctk
-    status: nightly
     title: vctk
   - path: /datasets/catalog/voxceleb
     title: voxceleb (manual)
   - path: /datasets/catalog/voxforge
-    status: nightly
     title: voxforge (manual)
   title: Audio
 - section:
@@ -68,7 +65,6 @@ toc:
   - path: /datasets/catalog/lsun
     title: lsun
   - path: /datasets/catalog/nyu_depth_v2
-    status: nightly
     title: nyu_depth_v2
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
@@ -143,7 +139,6 @@ toc:
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet2012_real
-    status: nightly
     title: imagenet2012_real (manual)
   - path: /datasets/catalog/imagenet2012_subset
     title: imagenet2012_subset (manual)
@@ -228,10 +223,8 @@ toc:
   title: Object detection
 - section:
   - path: /datasets/catalog/cosmos_qa
-    status: nightly
     title: cosmos_qa
   - path: /datasets/catalog/mctaco
-    status: nightly
     title: mctaco
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -254,7 +247,6 @@ toc:
   - path: /datasets/catalog/iris
     title: iris
   - path: /datasets/catalog/movie_lens
-    status: nightly
     title: movie_lens
   - path: /datasets/catalog/rock_you
     title: rock_you
@@ -271,7 +263,6 @@ toc:
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
   - path: /datasets/catalog/covid19sum
-    status: nightly
     title: covid19sum (manual)
   - path: /datasets/catalog/gigaword
     title: gigaword
@@ -280,7 +271,6 @@ toc:
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
   - path: /datasets/catalog/opinion_abstracts
-    status: nightly
     title: opinion_abstracts
   - path: /datasets/catalog/opinosis
     title: opinosis
@@ -299,7 +289,6 @@ toc:
   title: Summarization
 - section:
   - path: /datasets/catalog/anli
-    status: nightly
     title: anli
   - path: /datasets/catalog/blimp
     title: blimp
@@ -310,7 +299,6 @@ toc:
   - path: /datasets/catalog/civil_comments
     title: civil_comments
   - path: /datasets/catalog/clinc_oos
-    status: nightly
     title: clinc_oos
   - path: /datasets/catalog/cos_e
     title: cos_e
@@ -327,7 +315,6 @@ toc:
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/irc_disentanglement
-    status: nightly
     title: irc_disentanglement
   - path: /datasets/catalog/librispeech_lm
     title: librispeech_lm
@@ -342,15 +329,12 @@ toc:
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
   - path: /datasets/catalog/openbookqa
-    status: nightly
     title: openbookqa
   - path: /datasets/catalog/pg19
-    status: nightly
     title: pg19
   - path: /datasets/catalog/qa4mre
     title: qa4mre
   - path: /datasets/catalog/reddit_disentanglement
-    status: nightly
     title: reddit_disentanglement (manual)
   - path: /datasets/catalog/scan
     title: scan
@@ -367,13 +351,10 @@ toc:
   - path: /datasets/catalog/wikipedia
     title: wikipedia
   - path: /datasets/catalog/wikipedia_toxicity_subtypes
-    status: nightly
     title: wikipedia_toxicity_subtypes
   - path: /datasets/catalog/winogrande
-    status: nightly
     title: winogrande
   - path: /datasets/catalog/wordnet
-    status: nightly
     title: wordnet
   - path: /datasets/catalog/xnli
     title: xnli
@@ -384,7 +365,6 @@ toc:
   - path: /datasets/catalog/flores
     title: flores
   - path: /datasets/catalog/opus
-    status: nightly
     title: opus
   - path: /datasets/catalog/para_crawl
     title: para_crawl

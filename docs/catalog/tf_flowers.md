@@ -12,11 +12,6 @@
 
 # `tf_flowers`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 A large set of images of flowers
@@ -29,9 +24,7 @@ A large set of images of flowers
 
 *   **Versions**:
 
-    *   **`3.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`3.0.1`** (default): No release notes.
 
 *   **Download size**: `218.21 MiB`
 

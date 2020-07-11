@@ -49,7 +49,7 @@ clean up extra commas.
 
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
     Please download both wikihowAll.csv and wikihowSep.csv.
 

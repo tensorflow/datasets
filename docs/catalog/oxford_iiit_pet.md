@@ -12,11 +12,6 @@
 
 # `oxford_iiit_pet`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
@@ -31,9 +26,7 @@ lighting. All images have an associated ground truth annotation of breed.
 
 *   **Versions**:
 
-    *   **`3.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`3.2.0`** (default): No release notes.
 
 *   **Download size**: `773.52 MiB`
 

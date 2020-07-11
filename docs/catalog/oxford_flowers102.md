@@ -12,11 +12,6 @@
 
 # `oxford_flowers102`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly
@@ -38,9 +33,7 @@ training set and validation set each consist of 10 images per class (totalling
 
 *   **Versions**:
 
-    *   **`2.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`2.1.1`** (default): No release notes.
 
 *   **Download size**: `328.90 MiB`
 

@@ -37,7 +37,7 @@ of this dataset, without the text features.
 
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual dir should contain 2 folders with mp3 files:
 
 *   dementia/English/Pitt/Control/cookie

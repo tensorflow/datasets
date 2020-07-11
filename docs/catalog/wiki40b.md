@@ -12,11 +12,6 @@
 
 # `wiki40b`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Clean-up text for 40+ Wikipedia languages editions of pages correspond to
@@ -68,7 +63,7 @@ booktitle   = {LREC 2020}
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
     Not supported.
 
-## wiki40b/en (default config)<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/en (default config)
 
 *   **Config description**: Wiki40B dataset for en.
 
@@ -86,7 +81,7 @@ Split        | Examples
 'train'      | 2,926,536
 'validation' | 163,597
 
-## wiki40b/ar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ar
 
 *   **Config description**: Wiki40B dataset for ar.
 
@@ -104,7 +99,7 @@ Split        | Examples
 'train'      | 220,885
 'validation' | 12,198
 
-## wiki40b/zh-cn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/zh-cn
 
 *   **Config description**: Wiki40B dataset for zh-cn.
 
@@ -122,7 +117,7 @@ Split        | Examples
 'train'      | 549,672
 'validation' | 30,299
 
-## wiki40b/zh-tw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/zh-tw
 
 *   **Config description**: Wiki40B dataset for zh-tw.
 
@@ -140,7 +135,7 @@ Split        | Examples
 'train'      | 552,031
 'validation' | 30,739
 
-## wiki40b/nl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/nl
 
 *   **Config description**: Wiki40B dataset for nl.
 
@@ -158,7 +153,7 @@ Split        | Examples
 'train'      | 447,555
 'validation' | 25,201
 
-## wiki40b/fr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/fr
 
 *   **Config description**: Wiki40B dataset for fr.
 
@@ -176,7 +171,7 @@ Split        | Examples
 'train'      | 1,227,206
 'validation' | 68,655
 
-## wiki40b/de <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/de
 
 *   **Config description**: Wiki40B dataset for de.
 
@@ -194,7 +189,7 @@ Split        | Examples
 'train'      | 1,554,910
 'validation' | 86,068
 
-## wiki40b/it <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/it
 
 *   **Config description**: Wiki40B dataset for it.
 
@@ -212,7 +207,7 @@ Split        | Examples
 'train'      | 732,609
 'validation' | 40,684
 
-## wiki40b/ja <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ja
 
 *   **Config description**: Wiki40B dataset for ja.
 
@@ -230,7 +225,7 @@ Split        | Examples
 'train'      | 745,392
 'validation' | 41,576
 
-## wiki40b/ko <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ko
 
 *   **Config description**: Wiki40B dataset for ko.
 
@@ -248,7 +243,7 @@ Split        | Examples
 'train'      | 194,977
 'validation' | 10,805
 
-## wiki40b/pl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/pl
 
 *   **Config description**: Wiki40B dataset for pl.
 
@@ -266,7 +261,7 @@ Split        | Examples
 'train'      | 505,191
 'validation' | 28,310
 
-## wiki40b/pt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/pt
 
 *   **Config description**: Wiki40B dataset for pt.
 
@@ -284,7 +279,7 @@ Split        | Examples
 'train'      | 406,507
 'validation' | 22,301
 
-## wiki40b/ru <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ru
 
 *   **Config description**: Wiki40B dataset for ru.
 
@@ -302,7 +297,7 @@ Split        | Examples
 'train'      | 926,037
 'validation' | 51,287
 
-## wiki40b/es <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/es
 
 *   **Config description**: Wiki40B dataset for es.
 
@@ -320,7 +315,7 @@ Split        | Examples
 'train'      | 872,541
 'validation' | 48,592
 
-## wiki40b/th <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/th
 
 *   **Config description**: Wiki40B dataset for th.
 
@@ -338,7 +333,7 @@ Split        | Examples
 'train'      | 56,798
 'validation' | 3,093
 
-## wiki40b/tr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/tr
 
 *   **Config description**: Wiki40B dataset for tr.
 
@@ -356,7 +351,7 @@ Split        | Examples
 'train'      | 142,576
 'validation' | 7,845
 
-## wiki40b/bg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/bg
 
 *   **Config description**: Wiki40B dataset for bg.
 
@@ -374,7 +369,7 @@ Split        | Examples
 'train'      | 130,670
 'validation' | 7,259
 
-## wiki40b/ca <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ca
 
 *   **Config description**: Wiki40B dataset for ca.
 
@@ -392,7 +387,7 @@ Split        | Examples
 'train'      | 277,313
 'validation' | 15,362
 
-## wiki40b/cs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/cs
 
 *   **Config description**: Wiki40B dataset for cs.
 
@@ -410,7 +405,7 @@ Split        | Examples
 'train'      | 235,971
 'validation' | 13,096
 
-## wiki40b/da <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/da
 
 *   **Config description**: Wiki40B dataset for da.
 
@@ -428,7 +423,7 @@ Split        | Examples
 'train'      | 109,486
 'validation' | 6,173
 
-## wiki40b/el <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/el
 
 *   **Config description**: Wiki40B dataset for el.
 
@@ -446,7 +441,7 @@ Split        | Examples
 'train'      | 93,596
 'validation' | 5,130
 
-## wiki40b/et <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/et
 
 *   **Config description**: Wiki40B dataset for et.
 
@@ -464,7 +459,7 @@ Split        | Examples
 'train'      | 114,464
 'validation' | 6,351
 
-## wiki40b/fa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/fa
 
 *   **Config description**: Wiki40B dataset for fa.
 
@@ -482,7 +477,7 @@ Split        | Examples
 'train'      | 203,145
 'validation' | 11,180
 
-## wiki40b/fi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/fi
 
 *   **Config description**: Wiki40B dataset for fi.
 
@@ -500,7 +495,7 @@ Split        | Examples
 'train'      | 255,822
 'validation' | 13,962
 
-## wiki40b/he <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/he
 
 *   **Config description**: Wiki40B dataset for he.
 
@@ -518,7 +513,7 @@ Split        | Examples
 'train'      | 165,359
 'validation' | 9,231
 
-## wiki40b/hi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/hi
 
 *   **Config description**: Wiki40B dataset for hi.
 
@@ -536,7 +531,7 @@ Split        | Examples
 'train'      | 45,737
 'validation' | 2,596
 
-## wiki40b/hr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/hr
 
 *   **Config description**: Wiki40B dataset for hr.
 
@@ -554,7 +549,7 @@ Split        | Examples
 'train'      | 103,857
 'validation' | 5,792
 
-## wiki40b/hu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/hu
 
 *   **Config description**: Wiki40B dataset for hu.
 
@@ -572,7 +567,7 @@ Split        | Examples
 'train'      | 273,248
 'validation' | 15,208
 
-## wiki40b/id <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/id
 
 *   **Config description**: Wiki40B dataset for id.
 
@@ -590,7 +585,7 @@ Split        | Examples
 'train'      | 156,255
 'validation' | 8,714
 
-## wiki40b/lt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/lt
 
 *   **Config description**: Wiki40B dataset for lt.
 
@@ -608,7 +603,7 @@ Split        | Examples
 'train'      | 84,854
 'validation' | 4,754
 
-## wiki40b/lv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/lv
 
 *   **Config description**: Wiki40B dataset for lv.
 
@@ -626,7 +621,7 @@ Split        | Examples
 'train'      | 33,064
 'validation' | 1,857
 
-## wiki40b/ms <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ms
 
 *   **Config description**: Wiki40B dataset for ms.
 
@@ -644,7 +639,7 @@ Split        | Examples
 'train'      | 97,509
 'validation' | 5,357
 
-## wiki40b/no <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/no
 
 *   **Config description**: Wiki40B dataset for no.
 
@@ -662,7 +657,7 @@ Split        | Examples
 'train'      | 190,588
 'validation' | 10,547
 
-## wiki40b/ro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/ro
 
 *   **Config description**: Wiki40B dataset for ro.
 
@@ -680,7 +675,7 @@ Split        | Examples
 'train'      | 139,615
 'validation' | 7,624
 
-## wiki40b/sk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/sk
 
 *   **Config description**: Wiki40B dataset for sk.
 
@@ -698,7 +693,7 @@ Split        | Examples
 'train'      | 103,095
 'validation' | 5,604
 
-## wiki40b/sl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/sl
 
 *   **Config description**: Wiki40B dataset for sl.
 
@@ -716,7 +711,7 @@ Split        | Examples
 'train'      | 60,927
 'validation' | 3,287
 
-## wiki40b/sr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/sr
 
 *   **Config description**: Wiki40B dataset for sr.
 
@@ -734,7 +729,7 @@ Split        | Examples
 'train'      | 327,313
 'validation' | 18,100
 
-## wiki40b/sv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/sv
 
 *   **Config description**: Wiki40B dataset for sv.
 
@@ -752,7 +747,7 @@ Split        | Examples
 'train'      | 400,742
 'validation' | 22,263
 
-## wiki40b/tl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/tl
 
 *   **Config description**: Wiki40B dataset for tl.
 
@@ -770,7 +765,7 @@ Split        | Examples
 'train'      | 25,940
 'validation' | 1,472
 
-## wiki40b/uk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/uk
 
 *   **Config description**: Wiki40B dataset for uk.
 
@@ -788,7 +783,7 @@ Split        | Examples
 'train'      | 477,618
 'validation' | 26,324
 
-## wiki40b/vi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wiki40b/vi
 
 *   **Config description**: Wiki40B dataset for vi.
 

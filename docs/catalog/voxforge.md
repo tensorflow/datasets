@@ -12,10 +12,6 @@
 
 # `voxforge`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -43,7 +39,7 @@ to exactly one split.
 
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     VoxForge requires manual download of the audio archives. The complete list of
     archives can be found in https://storage.googleapis.com/tfds-data/downloads/voxforge/voxforge_urls.txt. It can be downloaded using the following command:
     wget -i voxforge_urls.txt -x

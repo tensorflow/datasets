@@ -12,10 +12,6 @@
 
 # `reddit_disentanglement`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -46,7 +42,7 @@ thread
 
 *   **Manual download instructions**: This dataset requires you to download the
     source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Download https://github.com/henghuiz/MaskedHierarchicalTransformer, decompress
     raw_data.zip and run generate_dataset.py with your reddit api credentials.
     Then put train.csv, val.csv and test.csv from the output directory into the
