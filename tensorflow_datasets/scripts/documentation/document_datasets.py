@@ -28,6 +28,7 @@ from typing import Dict, List, Tuple, Union, Set
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.documentation.templates.dataset_doc_template import get_markdown_string
 
 WORKER_COUNT_DATASETS = 200
 WORKER_COUNT_CONFIGS = 50
@@ -180,10 +181,9 @@ class NightlyDocUtil(object):
     def reduce(value):
       if isinstance(value, bool):
         return value
-      elif isinstance(value, dict):
+      if isinstance(value, dict):
         return any(reduce(x) for x in value.values())
-      else:
-        raise AssertionError(f'Invalid nightly_dict value: {value}')
+      raise AssertionError(f'Invalid nightly_dict value: {value}')
 
     return reduce(self._nightly_dict[builder.name])
 
@@ -218,9 +218,8 @@ def document_single_builder(builder):
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_CONFIGS) as tpool:
       config_builders = list(
           tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
-  tmpl = get_mako_template('dataset')
   visu_doc_util = VisualizationDocUtil()
-  out_str = tmpl.render_unicode(
+  out_str = get_markdown_string(
       builder=builder,
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
