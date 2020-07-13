@@ -31,18 +31,11 @@ Note that the 'p315' text was lost due to a hard disk error.
 
     *   **`1.0.0`** (default): VCTK release 0.92.0.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `10.94 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -86,6 +79,14 @@ FeaturesDict({
           https://doi.org/10.7488/ds/1994
     ```
 
+*   **Dataset size**: `39.87 GiB`
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 44,455
+
 ## vctk/mic2
 
 *   **Config description**: Audio recorded using a small diaphragm condenser
@@ -95,3 +96,11 @@ FeaturesDict({
           Two speakers, p280 and p315 had technical issues of the audio
           recordings using MKH 800.
     ```
+
+*   **Dataset size**: `38.86 GiB`
+
+*   **Splits**:
+
+Split   | Examples
+:------ | -------:
+'train' | 43,873
