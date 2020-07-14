@@ -3,7 +3,6 @@
 Displayed in https://www.tensorflow.org/datasets/catalog/.
 
 """
-import collections
 import dataclasses
 import functools
 import textwrap
@@ -156,8 +155,8 @@ def display_manual(builder):
   if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
     return textwrap.dedent(
         f"""\
-        *   **Manual download instructions**: This dataset requires you to download the
-            source data manually into `download_config.manual_dir`
+        *   **Manual download instructions**: This dataset requires you to
+            download the source data manually into `download_config.manual_dir`
             (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
         """
     ) + textwrap.indent(tfds.core.utils.dedent(
@@ -330,7 +329,12 @@ def display_all_builders(nightly_doc_util, builders, all_sections):
 
 # --------------------------- Main page ---------------------------
 
-def display_builder_configs(builder, nightly_doc_util, config_builders, all_sections):
+def display_builder_configs(
+    builder,
+    nightly_doc_util,
+    config_builders,
+    all_sections
+):
   # First case: Single builder
   if not builder.builder_config:
     return display_builder(builder, all_sections)
@@ -349,9 +353,9 @@ def display_nightly_str(nightly_doc_util, builder):
   if nightly_doc_util.has_nightly(builder):
     return textwrap.dedent(
         f"""\
-        Note: This dataset has been updated since the last stable release. The new
-        versions and config marked with {nightly_doc_util.icon} are only available
-        in the `tfds-nightly` package.
+        Note: This dataset has been updated since the last stable release.
+        The new versions and config marked with {nightly_doc_util.icon}
+        are only available in the `tfds-nightly` package.
         """
     )
   return ""

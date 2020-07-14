@@ -28,7 +28,7 @@ from typing import Dict, List, Tuple, Union, Set
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
-from tensorflow_datasets.scripts.documentation.templates.dataset_doc_template import get_markdown_string
+from tensorflow_datasets.scripts.documentation.dataset_markdown_builder import get_markdown_string
 
 WORKER_COUNT_DATASETS = 200
 WORKER_COUNT_CONFIGS = 50
@@ -300,14 +300,3 @@ def dataset_docs_str(datasets=None):
   tmpl = get_mako_template('catalog_overview')
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]
-
-
-if __name__ == '__main__':
-  # datasets = ['mnist', 'imagenet2012', 'common_voice']
-  datasets = ['common_voice']
-  for ds in datasets:
-    builder = tfds.builder(ds)
-    content = document_single_builder(builder)
-    path = tfds.core.utils.get_tfds_path(f'../docs/catalog/{ds}.md')
-    with tf.io.gfile.GFile(path, 'w') as f:
-      f.write(content)
