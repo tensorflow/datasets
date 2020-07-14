@@ -170,6 +170,7 @@ class CMUKids(tfds.core.BeamBasedBuilder):
 def _join_short_audio(grouped_example):
 	key, examples = grouped_example
 	examples = list(examples)
+	logging.info(examples)
 	duration = 0.0
 	speech = np.array([])
 	i = 0
