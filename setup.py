@@ -196,4 +196,9 @@ setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     keywords='tensorflow machine learning datasets',
+    entry_points={
+        'console_scripts': [
+            'tfds = tensorflow_datasets.scripts.cli.main:main'
+        ],
+    }
 )
