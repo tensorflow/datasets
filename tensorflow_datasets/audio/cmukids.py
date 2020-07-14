@@ -170,13 +170,13 @@ class CMUKids(tfds.core.BeamBasedBuilder):
 def _join_short_audio(grouped_example):
 	key, examples = grouped_example
 	examples = list(examples)
-	logging.info(examples)
+	# logging.info(examples)
 	duration = 0.0
 	speech = np.array([])
 	i = 0
 	while i < len(examples) :
 		speech = np.concatenate((speech, examples[i]['speech']))
-		duration += examples[i]['speech']
+		duration += examples[i]['duration']
 		if duration > 5:
 			example = {"speaker_id": key,
 					   "speech": speech, "duration": duration}
