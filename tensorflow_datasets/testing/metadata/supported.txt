@@ -854,6 +854,8 @@ ucf101/ucf101_1/2.0.0
 ucf101/ucf101_1_256/2.0.0
 ucf101/ucf101_2/2.0.0
 ucf101/ucf101_3/2.0.0
+vctk/mic1/1.0.0
+vctk/mic2/1.0.0
 vgg_face2/1.0.0
 visual_domain_decathlon/aircraft/1.2.0
 visual_domain_decathlon/cifar100/1.2.0
@@ -868,7 +870,6 @@ visual_domain_decathlon/vgg-flowers/1.2.0
 voc/2007/4.0.0
 voc/2012/4.0.0
 voxceleb/1.1.1
-waymo_open_dataset/0.1.0
 web_questions/1.0.0
 wider_face/0.1.0
 wiki40b/ar/1.3.0
