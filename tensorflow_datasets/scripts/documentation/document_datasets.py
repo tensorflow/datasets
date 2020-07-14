@@ -290,7 +290,6 @@ def dataset_docs_str(datasets=None):
   for section in sections:
     builders = tf.nest.flatten(module_to_builder[section])
     builders = sorted(builders, key=lambda b: b.name)
-    unused_ = get_mako_template('dataset')  # To warm cache.
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
       builder_docs = tpool.map(document_single_builder, builders)
     builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,

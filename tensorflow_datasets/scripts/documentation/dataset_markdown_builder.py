@@ -25,7 +25,7 @@ def display_description(builder):
       *   **Description**:
 
       """
-  ) + tfds.core.utils.dedent(builder.info.description) + '\n'
+  ) + tfds.core.utils.dedent(builder.info.description) + "\n"
 
 
 def display_config_description(builder):
@@ -47,9 +47,9 @@ def display_homepage(builder):
 
 
 def display_source(builder):
-  class_path = tfds.core.utils.get_class_path(builder).split('.')
+  class_path = tfds.core.utils.get_class_path(builder).split(".")
   del class_path[-2]
-  class_path = '.'.join(class_path)
+  class_path = ".".join(class_path)
   return textwrap.dedent(
       f"""\
       *   **Source code**: [`{class_path}`]({tfds.core.utils.get_class_url(builder)})
@@ -61,18 +61,18 @@ def display_versions(nightly_doc_util, builder):
   def list_versions():
     for v in builder.versions:  # List all available versions (in default order)
       if v == builder.version:  # Highlight the default version
-        version_name = '**`{}`** (default)'.format(str(v))
+        version_name = "**`{}`** (default)".format(str(v))
       else:
-        version_name = '`{}`'.format(str(v))
+        version_name = "`{}`".format(str(v))
       if nightly_doc_util.is_version_nightly(builder, str(v)):
-        nightly_str = ' ' + nightly_doc_util.icon
+        nightly_str = " " + nightly_doc_util.icon
       else:
-        nightly_str = ''
-      yield '{}{}: {}'.format(
-          version_name, nightly_str, v.description or 'No release notes.')
+        nightly_str = ""
+      yield "{}{}: {}".format(
+          version_name, nightly_str, v.description or "No release notes.")
 
-  version_list = ('\n').join(
-      [f'    *   {version_str}' for version_str in list_versions()])
+  version_list = ("\n").join(
+      [f"    *   {version_str}" for version_str in list_versions()])
 
   return textwrap.dedent(
       f"""\
@@ -120,24 +120,24 @@ def build_autocached_info(builder):
       unshuffle_cached.add(split_name)
 
   if not len(builder.info.splits) or not builder.info.dataset_size:
-    autocached_info = 'Unknown'
+    autocached_info = "Unknown"
   elif len(always_cached) == len(builder.info.splits.keys()):
-    autocached_info = 'Yes'  # All splits are auto-cached.
+    autocached_info = "Yes"  # All splits are auto-cached.
   elif len(never_cached) == len(builder.info.splits.keys()):
-    autocached_info = 'No'  # Splits never auto-cached.
+    autocached_info = "No"  # Splits never auto-cached.
   else:  # Some splits cached, some not.
     autocached_info_parts = []
     if always_cached:
-      split_names_str = ', '.join(always_cached)
-      autocached_info_parts.append('Yes ({})'.format(split_names_str))
+      split_names_str = ", ".join(always_cached)
+      autocached_info_parts.append("Yes ({})".format(split_names_str))
     if never_cached:
-      split_names_str = ', '.join(never_cached)
-      autocached_info_parts.append('No ({})'.format(split_names_str))
+      split_names_str = ", ".join(never_cached)
+      autocached_info_parts.append("No ({})".format(split_names_str))
     if unshuffle_cached:
-      split_names_str = ', '.join(unshuffle_cached)
+      split_names_str = ", ".join(unshuffle_cached)
       autocached_info_parts.append(
-          'Only when `shuffle_files=False` ({})'.format(split_names_str))
-    autocached_info = ', '.join(autocached_info_parts)
+          "Only when `shuffle_files=False` ({})".format(split_names_str))
+    autocached_info = ", ".join(autocached_info_parts)
   return autocached_info
 
 
@@ -160,17 +160,17 @@ def display_manual(builder):
             (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
         """
     ) + textwrap.indent(tfds.core.utils.dedent(
-        builder.MANUAL_DOWNLOAD_INSTRUCTIONS), '    ') + '\n'
+        builder.MANUAL_DOWNLOAD_INSTRUCTIONS), "    ") + "\n"
   return ""
 
 
 def display_splits(builder):
   def get_num_examples(split_info):
     if split_info.num_examples:
-      return '{:,}'.format(split_info.num_examples)
-    return 'Not computed'
+      return "{:,}".format(split_info.num_examples)
+    return "Not computed"
 
-  splits_str = ('\n').join([
+  splits_str = ("\n").join([
       f"'{split_name}' | {get_num_examples(split_info)}"
       for split_name, split_info in sorted(builder.info.splits.items())
   ])
@@ -295,7 +295,7 @@ def get_figure(visu_doc_util, builder):
 # --------------------------- Single builder ---------------------------
 
 def display_builder(builder, sections):
-  return ('\n').join([section.make(builder)
+  return ("\n").join([section.make(builder)
                       for section in sections if section.make(builder)])
 
 
@@ -315,16 +315,16 @@ def display_all_builders(nightly_doc_util, builders, all_sections):
 
   unique_builder_str = []
   for i, builder in enumerate(builders):
-    header_suffix = ' (default config)' if i == 0 else ''
-    nightly_str = (' ' + nightly_doc_util.icon) \
-        if nightly_doc_util.is_config_nightly(builder) else ''
+    header_suffix = " (default config)" if i == 0 else ""
+    nightly_str = (" " + nightly_doc_util.icon) \
+        if nightly_doc_util.is_config_nightly(builder) else ""
     unique_builder_str.append(
-        f'## {builder.name}/{builder.builder_config.name}'
-        f'{header_suffix}{nightly_str}\n')
+        f"## {builder.name}/{builder.builder_config.name}"
+        f"{header_suffix}{nightly_str}\n")
     unique_builder_str.append(display_builder(builder, unique_sections))
-  unique_builder_str = ('\n').join(unique_builder_str)
+  unique_builder_str = ("\n").join(unique_builder_str)
 
-  return common_builder_str + '\n' + unique_builder_str
+  return common_builder_str + "\n" + unique_builder_str
 
 
 # --------------------------- Main page ---------------------------
@@ -409,4 +409,4 @@ def get_markdown_string(
                               config_builders, all_sections)
   ]
 
-  return ('\n').join([s for s in doc_str if s])
+  return ("\n").join([s for s in doc_str if s])
