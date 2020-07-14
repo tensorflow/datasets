@@ -54,7 +54,7 @@ a screen in order to be able to intervene when they are stuck or make
 an error.  In the past, the recognizer had been trained on samples of
 female speech.
 
-	The children range in age from 6 to 11 (see details below) and
+    The children range in age from 6 to 11 (see details below) and
 were in first through third grades (the 11-year-old was in 6th grade)
 at the time of recording.  There were 24 male and 52 female
 speakers.  Although the girls outnumber the boys, we feel that the
@@ -174,14 +174,16 @@ def _join_short_audio(grouped_example):
         speech = np.concatenate((speech, examples[i]['speech']))
         duration += examples[i]['speech']
         if duration > 5:
-            example = { "speaker_id": key, "speech": speech, "duration": duration }
+            example = {"speaker_id": key,
+                       "speech": speech, "duration": duration}
             yield key, example
             duration = 0.0
             speech = np.array([])
         i += 1
-	if duration > 5:
-		example = { "speaker_id": key, "speech": speech, "duration": duration }
-		yield key, example
+        if duration > 5:
+            example = {"speaker_id": key,
+                       "speech": speech, "duration": duration}
+            yield key, example
 
 
 def _generate_example(extract_path, file_name):
