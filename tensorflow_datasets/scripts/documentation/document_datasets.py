@@ -304,7 +304,7 @@ def dataset_docs_str(datasets=None):
 
 if __name__ == '__main__':
   # datasets = ['mnist', 'imagenet2012', 'common_voice']
-  datasets = ['mnist', 'imagenet2012']
+  datasets = ['common_voice']
   for ds in datasets:
     builder = tfds.builder(ds)
     content = document_single_builder(builder)

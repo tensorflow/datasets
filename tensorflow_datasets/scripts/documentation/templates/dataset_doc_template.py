@@ -3,11 +3,19 @@
 Displayed in https://www.tensorflow.org/datasets/catalog/.
 
 """
-import textwrap
 import collections
+import dataclasses
 import functools
+import textwrap
+from typing import Callable, List
 
 import tensorflow_datasets as tfds
+
+
+@dataclasses.dataclass
+class Section(object):
+  get_signature: Callable[[tfds.core.DatasetBuilder], str]
+  make: Callable[[tfds.core.DatasetBuilder], str]
 
 # --------------------------- Builder sections ---------------------------
 
@@ -211,7 +219,7 @@ def display_citation(builder):
 
 
 def display_figure(visu_doc_util, builder):
-  visu_str = "Not supported."
+  visu_str = "    Not supported."
   if visu_doc_util.has_visualization(builder):
     visu_str = visu_doc_util.get_html_tag(builder)
 
@@ -364,13 +372,11 @@ def display_dataset_heading(builder):
 
 
 def get_markdown_string(
-    builder,
-    config_builders,
+    builder: tfds.core.DatasetBuilder,
+    config_builders: List[tfds.core.DatasetBuilder],
     visu_doc_util,
     nightly_doc_util,
-):
-
-  Section = collections.namedtuple('Section', 'get_signature, make')
+) -> str:
 
   all_sections = [
       Section(get_description, display_description),
