@@ -142,6 +142,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Question answering`
 
+*   [`ai2_arc`](ai2_arc.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)
 *   [`natural_questions`](natural_questions.md)

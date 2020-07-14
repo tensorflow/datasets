@@ -222,6 +222,9 @@ toc:
     title: wider_face
   title: Object detection
 - section:
+  - path: /datasets/catalog/ai2_arc
+    status: nightly
+    title: ai2_arc
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
   - path: /datasets/catalog/mctaco
