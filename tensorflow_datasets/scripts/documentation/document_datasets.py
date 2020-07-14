@@ -224,7 +224,7 @@ def document_single_builder(builder):
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
       nightly_doc_util=NightlyDocUtil(),
-  ).strip()
+  )
   schema_org_tmpl = get_mako_template('schema_org')
   schema_org_out_str = schema_org_tmpl.render_unicode(
       builder=builder,
@@ -300,3 +300,14 @@ def dataset_docs_str(datasets=None):
   tmpl = get_mako_template('catalog_overview')
   catalog_overview = tmpl.render_unicode().lstrip()
   return [catalog_overview, section_docs]
+
+
+if __name__ == '__main__':
+  # datasets = ['mnist', 'imagenet2012', 'common_voice']
+  datasets = ['mnist', 'imagenet2012']
+  for ds in datasets:
+    builder = tfds.builder(ds)
+    content = document_single_builder(builder)
+    path = tfds.core.utils.get_tfds_path(f'../docs/catalog/{ds}.md')
+    with tf.io.gfile.GFile(path, 'w') as f:
+      f.write(content)

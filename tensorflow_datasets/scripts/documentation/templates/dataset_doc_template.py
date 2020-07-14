@@ -5,81 +5,91 @@ Displayed in https://www.tensorflow.org/datasets/catalog/.
 """
 import textwrap
 import collections
+import functools
+
 import tensorflow_datasets as tfds
-
-_NIGHTLY_DOC_UTIL = None
-_VISU_DOC_UTIL = None
-
 
 # --------------------------- Builder sections ---------------------------
 
 
 def display_description(builder):
-  return f"""\
-*   **Description**:
+  return textwrap.dedent(
+      f"""\
+      *   **Description**:
 
-{builder.info.description}
-"""
+      """
+  ) + tfds.core.utils.dedent(builder.info.description) + '\n'
 
 
 def display_config_description(builder):
   if builder.builder_config:
-    return f"""\
-*   **Config description**: {builder.builder_config.description}
-"""
+    return textwrap.dedent(
+        f"""\
+        *   **Config description**: {builder.builder_config.description}
+        """
+    )
   return ""
 
 
 def display_homepage(builder):
-  return f"""\
-*   **Homepage**: 
-    [{builder.info.homepage}]({builder.info.homepage})
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Homepage**: [{builder.info.homepage}]({builder.info.homepage})
+      """
+  )
 
 
 def display_source(builder):
   class_path = tfds.core.utils.get_class_path(builder).split('.')
   del class_path[-2]
   class_path = '.'.join(class_path)
-  return f"""\
-*   **Source code**:
-    [`{class_path}`]({tfds.core.utils.get_class_url(builder)})
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Source code**: [`{class_path}`]({tfds.core.utils.get_class_url(builder)})
+      """
+  )
 
 
-def display_versions(builder):
-  def list_versions(builder):
+def display_versions(nightly_doc_util, builder):
+  def list_versions():
     for v in builder.versions:  # List all available versions (in default order)
       if v == builder.version:  # Highlight the default version
         version_name = '**`{}`** (default)'.format(str(v))
       else:
         version_name = '`{}`'.format(str(v))
-      if _NIGHTLY_DOC_UTIL.is_version_nightly(builder, str(v)):
-        nightly_str = ' ' + _NIGHTLY_DOC_UTIL.icon
+      if nightly_doc_util.is_version_nightly(builder, str(v)):
+        nightly_str = ' ' + nightly_doc_util.icon
       else:
         nightly_str = ''
       yield '{}{}: {}'.format(
           version_name, nightly_str, v.description or 'No release notes.')
 
   version_list = ('\n').join(
-      [f'    *   {version_str}' for version_str in list_versions(builder)])
+      [f'    *   {version_str}' for version_str in list_versions()])
 
-  return f"""\
-*   **Versions**:
-{version_list}
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Versions**:
+
+      {version_list}
+      """
+  )
 
 
 def display_download_size(builder):
-  return f"""\
-*   **Download size**: `{tfds.units.size_str(builder.info.download_size)}`
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Download size**: `{tfds.units.size_str(builder.info.download_size)}`
+      """
+  )
 
 
 def display_dataset_size(builder):
-  return f"""\
-*   **Dataset size**: `{tfds.units.size_str(builder.info.dataset_size)}`
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Dataset size**: `{tfds.units.size_str(builder.info.dataset_size)}`
+      """
+  )
 
 
 def build_autocached_info(builder):
@@ -125,21 +135,25 @@ def build_autocached_info(builder):
 
 
 def display_autocache(builder):
-  return f"""\
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    {build_autocached_info(builder)}
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Auto-cached**
+          ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+          {build_autocached_info(builder)}
+      """
+  )
 
 
 def display_manual(builder):
   if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
-    return f"""\
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
-{textwrap.indent(tfds.core.utils.dedent(builder.MANUAL_DOWNLOAD_INSTRUCTIONS), '    ')}
-"""
+    return textwrap.dedent(
+        f"""\
+        *   **Manual download instructions**: This dataset requires you to download the
+            source data manually into `download_config.manual_dir`
+            (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+        """
+    ) + textwrap.indent(tfds.core.utils.dedent(
+        builder.MANUAL_DOWNLOAD_INSTRUCTIONS), '    ') + '\n'
   return ""
 
 
@@ -150,64 +164,65 @@ def display_splits(builder):
     return 'Not computed'
 
   splits_str = ('\n').join([
-      f'{split_name} | {get_num_examples(split_info)}'
+      f"'{split_name}' | {get_num_examples(split_info)}"
       for split_name, split_info in sorted(builder.info.splits.items())
   ])
 
-  return f"""\
-*   **Splits**:
+  return textwrap.dedent(
+      f"""\
+      *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-{splits_str}
-"""
+      Split  | Examples
+      :----- | -------:
+      """
+  ) + f"{splits_str}\n"
 
 
 def display_features(builder):
-  return f"""\
-*   **Features**:
+  return textwrap.dedent(
+      f"""\
+      *   **Features**:
 
-```python
-{builder.info.features}
-```
-"""
+      ```python
+      """
+  ) + str(builder.info.features) + "\n```\n"
 
 
 def display_supervised(builder):
-  return f"""\
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `{str(builder.info.supervised_keys)}`
-"""
+  return textwrap.dedent(
+      f"""\
+      *   **Supervised keys** (See
+          [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+          `{str(builder.info.supervised_keys)}`
+      """
+  )
 
 
 def display_citation(builder):
   if builder.info.citation:
-    return f"""\
-*   **Citation**:
+    return textwrap.dedent(
+        f"""\
+        *   **Citation**:
 
-```
-{builder.info.citation}
-```
-"""
+        ```
+        """
+    ) + tfds.core.utils.dedent(builder.info.citation) + "\n```\n"
   return ""
 
 
-def display_figure(builder):
+def display_figure(visu_doc_util, builder):
   visu_str = "Not supported."
-  if _VISU_DOC_UTIL.has_visualization(builder):
-    visu_str = _VISU_DOC_UTIL.get_html_tag(builder)
+  if visu_doc_util.has_visualization(builder):
+    visu_str = visu_doc_util.get_html_tag(builder)
 
-  return f"""\
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+  return textwrap.dedent(
+      f"""\
+      *   **Visualization
+          ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
 
-{visu_str}
-"""
-
-
-# Getter function returns a hashable signature of the section value
-# which allow to detect sections shared accross all builders.
+      {visu_str}
+      """
+  )
 
 
 def get_description(builder):
@@ -264,8 +279,8 @@ def get_citation(builder):
   return builder.info.citation
 
 
-def get_figure(builder):
-  if _VISU_DOC_UTIL.has_visualization(builder):
+def get_figure(visu_doc_util, builder):
+  if visu_doc_util.has_visualization(builder):
     return builder.info.full_name
   return None  # Fuse the sections together if no configs are available
 
@@ -279,7 +294,7 @@ def display_builder(builder, sections):
 
 # --------------------------- Builder configs ---------------------------
 
-def display_all_builders(builders, all_sections):
+def display_all_builders(nightly_doc_util, builders, all_sections):
   # For each fields, extract if the field is shared or unique accross builder.
   common_sections = []
   unique_sections = []
@@ -294,8 +309,8 @@ def display_all_builders(builders, all_sections):
   unique_builder_str = []
   for i, builder in enumerate(builders):
     header_suffix = ' (default config)' if i == 0 else ''
-    nightly_str = (' ' + _NIGHTLY_DOC_UTIL.icon) \
-        if _NIGHTLY_DOC_UTIL.is_config_nightly(builder) else ''
+    nightly_str = (' ' + nightly_doc_util.icon) \
+        if nightly_doc_util.is_config_nightly(builder) else ''
     unique_builder_str.append(
         f'## {builder.name}/{builder.builder_config.name}'
         f'{header_suffix}{nightly_str}\n')
@@ -307,39 +322,45 @@ def display_all_builders(builders, all_sections):
 
 # --------------------------- Main page ---------------------------
 
-def display_builder_configs(builder, config_builders, all_sections):
+def display_builder_configs(builder, nightly_doc_util, config_builders, all_sections):
   # First case: Single builder
   if not builder.builder_config:
     return display_builder(builder, all_sections)
   # Second case: Builder configs
-  return display_all_builders(config_builders, all_sections)
+  return display_all_builders(nightly_doc_util, config_builders, all_sections)
 
 
-def display_nightly_str(builder):
-  if _NIGHTLY_DOC_UTIL.is_builder_nightly(builder):
-    return f"""\
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  {_NIGHTLY_DOC_UTIL.icon}.
-"""
-  if _NIGHTLY_DOC_UTIL.has_nightly(builder):
-    return f"""\
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with {_NIGHTLY_DOC_UTIL.icon} are only available
-in the `tfds-nightly` package.
-"""
+def display_nightly_str(nightly_doc_util, builder):
+  if nightly_doc_util.is_builder_nightly(builder):
+    return textwrap.dedent(
+        f"""\
+        Note: This dataset was added recently and is only available in our
+        `tfds-nightly` package  {nightly_doc_util.icon}.
+        """
+    )
+  if nightly_doc_util.has_nightly(builder):
+    return textwrap.dedent(
+        f"""\
+        Note: This dataset has been updated since the last stable release. The new
+        versions and config marked with {nightly_doc_util.icon} are only available
+        in the `tfds-nightly` package.
+        """
+    )
   return ""
 
 
 def display_manual_instructions(builder):
   if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
-    return "Warning: Manual download required. See instructions below."
+    return "Warning: Manual download required. See instructions below.\n"
   return ""
 
 
 def display_dataset_heading(builder):
-  return f"""\
-# `{builder.name}`
-"""
+  return textwrap.dedent(
+      f"""
+      # `{builder.name}`
+      """
+  )
 
 
 def get_markdown_string(
@@ -348,10 +369,6 @@ def get_markdown_string(
     visu_doc_util,
     nightly_doc_util,
 ):
-  global _NIGHTLY_DOC_UTIL, _VISU_DOC_UTIL
-
-  _NIGHTLY_DOC_UTIL = nightly_doc_util
-  _VISU_DOC_UTIL = visu_doc_util
 
   Section = collections.namedtuple('Section', 'get_signature, make')
 
@@ -360,7 +377,8 @@ def get_markdown_string(
       Section(get_config_description, display_config_description),
       Section(get_homepage, display_homepage),
       Section(get_source, display_source),
-      Section(get_versions, display_versions),
+      Section(get_versions, functools.partial(
+          display_versions, nightly_doc_util)),
       Section(get_download_size, display_download_size),
       Section(get_dataset_size, display_dataset_size),
       Section(get_manual, display_manual),
@@ -369,14 +387,16 @@ def get_markdown_string(
       Section(get_features, display_features),
       Section(get_supervised, display_supervised),
       Section(get_citation, display_citation),
-      Section(get_figure, display_figure),
+      Section(functools.partial(get_figure, visu_doc_util),
+              functools.partial(display_figure, visu_doc_util)),
   ]
 
   doc_str = [
       display_dataset_heading(builder),
-      display_nightly_str(builder),
+      display_nightly_str(nightly_doc_util, builder),
       display_manual_instructions(builder),
-      display_builder_configs(builder, config_builders, all_sections)
+      display_builder_configs(builder, nightly_doc_util,
+                              config_builders, all_sections)
   ]
 
   return ('\n').join([s for s in doc_str if s])
