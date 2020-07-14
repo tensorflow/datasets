@@ -50,6 +50,7 @@ from tensorflow_datasets.image_classification.imagenet2012_real import Imagenet2
 from tensorflow_datasets.image_classification.imagenet2012_subset import Imagenet2012Subset
 from tensorflow_datasets.image_classification.imagenet_a import ImagenetA
 from tensorflow_datasets.image_classification.imagenet_resized import ImagenetResized
+from tensorflow_datasets.image_classification.imagenet_v2 import ImagenetV2
 from tensorflow_datasets.image_classification.imagenette import Imagenette
 from tensorflow_datasets.image_classification.imagewang import Imagewang
 from tensorflow_datasets.image_classification.inaturalist import INaturalist2017
