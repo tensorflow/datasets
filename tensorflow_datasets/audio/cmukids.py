@@ -171,9 +171,9 @@ class CMUKids(tfds.core.BeamBasedBuilder):
 				| beam.Reshuffle()
 				)
 
-def _use_unique_key(_, example):
+def _use_unique_key(_key, example):
 	key = example.pop("key")
-	yield (key, example)
+	yield key, example
 
 def _join_short_audio(grouped_example):
 	speaker, examples = grouped_example
