@@ -25,6 +25,7 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 import numpy as np
 import collections
+import logging
 
 _CITATION = """\
 {
@@ -149,7 +150,8 @@ class CMUKids(tfds.core.BeamBasedBuilder):
 	def _build_pcollection(self, pipeline, extract_path, file_names):
 		"""Generates examples as dicts."""
 		beam = tfds.core.lazy_imports.apache_beam
-
+		logging.info("EXTRACT_PATH", extract_path)
+		logging.info("FILE_NAMES", file_names)
 		too_short, long_enough = (pipeline
 								  | beam.Create([(extract_path, filename) for filename in file_names])
 								  | beam.FlatMapTuple(_generate_example)
@@ -167,10 +169,11 @@ class CMUKids(tfds.core.BeamBasedBuilder):
 
 def _join_short_audio(grouped_example):
 	key, examples = grouped_example
+	examples = list(examples)
 	duration = 0.0
 	speech = np.array([])
 	i = 0
-	while i < len(examples):
+	while i < len(examples) :
 		speech = np.concatenate((speech, examples[i]['speech']))
 		duration += examples[i]['speech']
 		if duration > 5:
