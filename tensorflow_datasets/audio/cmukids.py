@@ -157,48 +157,63 @@ class CMUKids(tfds.core.BeamBasedBuilder):
 								  | beam.FlatMapTuple(_generate_example)
 								  | beam.Partition(_separate_less_than_5_sec, 2)
 								  )
-		joined_short = (too_short
+		unique_key_joined_short = (too_short
 						| beam.GroupByKey()
 						| beam.FlatMap(_join_short_audio)
 						)
-		return ((joined_short, long_enough)
+		unique_key_long_enough = ( long_enough
+						| beam.FlatMapTuple(_use_unique_key)
+						)
+
+		return ((unique_key_joined_short, unique_key_long_enough)
 				| beam.Flatten()
+
 				| beam.Reshuffle()
 				)
 
+def _use_unique_key(_, example):
+	key = example.pop("key")
+	yield (key, example)
 
 def _join_short_audio(grouped_example):
-	key, examples = grouped_example
+	speaker, examples = grouped_example
 	examples = list(examples)
 	# logging.info(examples)
 	duration = 0.0
 	speech = np.array([])
+	key=""
 	i = 0
 	while i < len(examples) :
 		speech = np.concatenate((speech, examples[i]['speech']))
 		duration += examples[i]['duration']
+		key += examples[i]['key']
 		if duration > 5:
-			example = {"speaker_id": key,
-					   "speech": speech, "duration": duration}
+			example = {"speaker_id": speaker,
+					   "speech": speech,
+					   "duration": duration,
+					  }
 			yield key, example
 			duration = 0.0
 			speech = np.array([])
+			key = ""
 		i += 1
 		if duration > 5:
-			example = {"speaker_id": key,
-					   "speech": speech, "duration": duration}
+			example = {"speaker_id": speaker,
+					   "speech": speech,
+					   "duration": duration}
 			yield key, example
 
 
 def _generate_example(extract_path, file_name):
 	path_to_file = os.path.join(extract_path, file_name)
-	speaker_id = parse_speaker_id(file_name)
+	speaker_id, key = parse_speaker_and_key(file_name)
 	with tf.io.gfile.GFile(path_to_file, 'rb') as f:
 		header, content = get_header_content(f)
 	example = {
 		"speaker_id": speaker_id,
 		"speech": content,
-		"duration": len(content)/header['sample_rate']
+		"duration": len(content)/header['sample_rate'],
+		"key": key
 	}
 	yield speaker_id, example
 
@@ -208,11 +223,12 @@ def _separate_less_than_5_sec(element, num_partitions):
 	return 1 if example['duration'] >= 5 else 0
 
 
-def parse_speaker_id(filename):
+def parse_speaker_and_key(filename):
 	"""
 			speaker_id/signal/filename
 	"""
-	return filename.split("/")[0]
+	flist = filename.split("/")
+	return flist[0], flist[-1].split(".")[0]
 
 
 def parse_sph_header(fh):
