@@ -24,6 +24,7 @@ from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
 from tensorflow_datasets.image.cityscapes import Cityscapes
 from tensorflow_datasets.image.clevr import CLEVR
+from tensorflow_datasets.image.clic import CLIC
 from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.div2k import Div2k
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
