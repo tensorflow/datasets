@@ -24,9 +24,6 @@ samsum/1.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.1.0
 voxforge/1.0.0
-waymo_open_dataset/v1.0/0.2.0
-waymo_open_dataset/v1.1/0.2.0
-waymo_open_dataset/v1.2/0.2.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0

@@ -10,6 +10,8 @@ abstract_reasoning/interpolation/1.0.0
 abstract_reasoning/neutral/1.0.0
 aeslc/1.0.0
 aflw2k3d/1.0.0
+ai2_arc/ARC-Challenge/1.0.0
+ai2_arc/ARC-Easy/1.0.0
 amazon_us_reviews/Apparel_v1_00/0.1.0
 amazon_us_reviews/Automotive_v1_00/0.1.0
 amazon_us_reviews/Baby_v1_00/0.1.0
@@ -870,6 +872,9 @@ visual_domain_decathlon/vgg-flowers/1.2.0
 voc/2007/4.0.0
 voc/2012/4.0.0
 voxceleb/1.1.1
+waymo_open_dataset/v1.0/0.2.0
+waymo_open_dataset/v1.1/0.2.0
+waymo_open_dataset/v1.2/0.2.0
 web_questions/1.0.0
 wider_face/0.1.0
 wiki40b/ar/1.3.0
