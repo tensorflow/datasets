@@ -67,7 +67,7 @@ audio_datasets = ['common_voice', 'crema_d', 'dementiabank', 'fuss', 'groove',
                   'speech_commands', 'tedlium', 'vctk', 'voxceleb', 'voxforge']
 
 DATASETS_NAMES = {
-  'audio': [audio_datasets[1]],    # Will add full audio list
+  'audio': ['tedlium'],    # will add full audio_datasets list
   'image': ['abstract_reasoning'],
   'image_classification': ['binary_alpha_digits']
 }
@@ -75,8 +75,7 @@ DATASETS_NAMES = {
 def create_dirs(dataset_path: str) -> None:
   """Creates a new `my_dataset` directory"""
   if not tf.io.gfile.exists(dataset_path):
-    tf.io.gfile.makedirs(dataset_path)
-    tf.io.gfile.mkdir(os.path.join(dataset_path, 'fake_data'))
+    tf.io.gfile.makedirs(os.path.join(dataset_path, 'fake_data'))
 
 
 def copytree(src, dst):
