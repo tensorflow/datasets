@@ -62,9 +62,9 @@ def create_dirs(dataset_path: str) -> None:
     os.makedirs(os.path.join(dataset_path, 'fake_data'))
 
 
-def make_init_file(dataset_type, dataset_name, dataset_path) -> None:
+def make_init_file(dataset_type, dataset_name, dest_path) -> None:
   """Creates a new __init__.py. file"""
-  file_path = os.path.join(dataset_path, '__init__.py')
+  file_path = os.path.join(dest_path, '__init__.py')
   dataset_name_cls = naming.snake_to_camelcase(dataset_name)
   data = {'dataset_type': dataset_type,
           'dataset_name': dataset_name,
@@ -74,36 +74,41 @@ def make_init_file(dataset_type, dataset_name, dataset_path) -> None:
     f.write(_INIT_FILE.format(**data))
 
 
-def copy_checksum_file(src_checksum_path, dest_path) -> None:
+def copy_checksum_file(dataset_name, dest_path) -> None:
   """Copy checksum.txt file"""
+  src_checksum_path = f'{URL_CHECKSUM_DIR}/{dataset_name}.txt'
   if os.path.exists(src_checksum_path):
     shutil.copy(src_checksum_path,
                 os.path.join(dest_path, posixpath.basename(src_checksum_path)))
 
 
-def copy_make_data_file(src_fake_data_script_path, dest_path) -> None:
+def copy_make_data_file(dataset_name, dest_path) -> None:
   """Copy fake data genneration script file"""
+  src_fake_data_script_path = f'{FAKE_DATA_SCRIPT_DIR}/{dataset_name}.py'
   if os.path.exists(src_fake_data_script_path):
     shutil.copy(src_fake_data_script_path,
                 os.path.join(dest_path, 'make_fake_data.py'))
 
 
-def copy_fake_data_dir(src_fake_data_dir, dest_path) -> None:
+def copy_fake_data_dir(dataset_name, dest_path) -> None:
   """Copy fake data directory"""
+  src_fake_data_dir = os.path.join(FAKE_DATA_DIR, dataset_name)
   if os.path.exists(src_fake_data_dir):
     if os.path.exists(dest_path):
       shutil.rmtree(dest_path)
     shutil.copytree(src_fake_data_dir, os.path.join(dest_path, 'fake_data'))
 
 
-def copy_dataset_file(src_dataset_path, dest_path) -> None:
+def copy_dataset_file(dataset_dir, dataset_name, dest_path) -> None:
   """Copy my_dataset.py file"""
+  src_dataset_path = f'{dataset_dir}/{dataset_name}.py'
   shutil.copy(src_dataset_path,
               os.path.join(dest_path, posixpath.basename(src_dataset_path)))
 
 
-def copy_dataset_test_file(src_dataset_test_path, dest_path) -> None:
+def copy_dataset_test_file(dataset_dir, dataset_name, dest_path) -> None:
   """Copy my_dataset_test.py file"""
+  src_dataset_test_path = f'{dataset_dir}/{dataset_name}_test.py'
   shutil.copy(src_dataset_test_path,
               os.path.join(dest_path, posixpath.basename(src_dataset_test_path)))
 
@@ -113,26 +118,21 @@ def refactor_dataset(datasets: Dict[str, list]) -> None:
   for dataset_type, dataset_names in datasets.items():
     for dataset_name in dataset_names:
       # Dataset files path
-      fake_data_dir = os.path.join(FAKE_DATA_DIR, dataset_name)
-      fake_data_script_py = f'{FAKE_DATA_SCRIPT_DIR}/{dataset_name}.py'
-      dataset_dir = os.path.join(TFDS_DIR, dataset_type)
-      checksum_txt = f'{URL_CHECKSUM_DIR}/{dataset_name}.txt'
-      dataset_py = f'{dataset_dir}/{dataset_name}.py'
-      dataset_test_py = f'{dataset_dir}/{dataset_name}_test.py'
+      dataset_path = os.path.join(TFDS_DIR, dataset_type)
 
-      # Newly creted dataset path
+      # Refactored dataset path
       refactor_dataset_path = os.path.join(NEW_TFDS_DIR, dataset_type, dataset_name)
 
       # Create dirs
       create_dirs(refactor_dataset_path)
 
       # Copy all files and folders
-      copy_fake_data_dir(fake_data_dir, refactor_dataset_path)
+      copy_fake_data_dir(dataset_name, refactor_dataset_path)
       make_init_file(dataset_type, dataset_name, refactor_dataset_path)
-      copy_dataset_file(dataset_py, refactor_dataset_path)
-      copy_dataset_test_file(dataset_test_py, refactor_dataset_path)
-      copy_make_data_file(fake_data_script_py, refactor_dataset_path)
-      copy_checksum_file(checksum_txt, refactor_dataset_path)
+      copy_dataset_file(dataset_path, dataset_name, refactor_dataset_path)
+      copy_dataset_test_file(dataset_path, dataset_name, refactor_dataset_path)
+      copy_make_data_file(dataset_name, refactor_dataset_path)
+      copy_checksum_file(dataset_name, refactor_dataset_path)
 
       print('The refactored {} dataset generated at {}'.format(dataset_name, refactor_dataset_path))
 
