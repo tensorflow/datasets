@@ -98,7 +98,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
 *   [`imagenet2012_real`](imagenet2012_real.md)
 *   [`imagenet2012_subset`](imagenet2012_subset.md)
+*   [`imagenet_a`](imagenet_a.md)
 *   [`imagenet_resized`](imagenet_resized.md)
+*   [`imagenet_v2`](imagenet_v2.md)
 *   [`imagenette`](imagenette.md)
 *   [`imagewang`](imagewang.md)
 *   [`kmnist`](kmnist.md)
@@ -143,7 +145,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Question answering`
 
 *   [`ai2_arc`](ai2_arc.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)
 *   [`natural_questions`](natural_questions.md)

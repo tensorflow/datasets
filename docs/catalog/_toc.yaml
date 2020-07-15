@@ -142,8 +142,12 @@ toc:
     title: imagenet2012_real (manual)
   - path: /datasets/catalog/imagenet2012_subset
     title: imagenet2012_subset (manual)
+  - path: /datasets/catalog/imagenet_a
+    title: imagenet_a
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
+  - path: /datasets/catalog/imagenet_v2
+    title: imagenet_v2
   - path: /datasets/catalog/imagenette
     title: imagenette
   - path: /datasets/catalog/imagewang
@@ -223,7 +227,6 @@ toc:
   title: Object detection
 - section:
   - path: /datasets/catalog/ai2_arc
-    status: nightly
     title: ai2_arc
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa

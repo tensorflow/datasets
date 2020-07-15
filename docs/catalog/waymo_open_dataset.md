@@ -12,11 +12,6 @@
 
 # `waymo_open_dataset`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The Waymo Open Dataset is comprised of high resolution sensor data collected by
@@ -107,7 +102,7 @@ year = {2020}
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
     Not supported.
 
-## waymo_open_dataset/v1.2 (default config)<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## waymo_open_dataset/v1.2 (default config)
 
 *   **Config description**: Waymo Open Dataset v1.2
 
@@ -120,7 +115,7 @@ Split        | Examples
 'train'      | 158,081
 'validation' | 39,987
 
-## waymo_open_dataset/v1.1 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## waymo_open_dataset/v1.1
 
 *   **Config description**: Waymo Open Dataset v1.1
 
@@ -133,7 +128,7 @@ Split        | Examples
 'train'      | 158,081
 'validation' | 39,987
 
-## waymo_open_dataset/v1.0 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## waymo_open_dataset/v1.0
 
 *   **Config description**: Waymo Open Dataset v1.0 This dataset is also
     available in pre-processed format, making it faster to load, if you select
