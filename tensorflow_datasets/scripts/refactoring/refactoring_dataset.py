@@ -1,25 +1,8 @@
-# coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Lint as: python3
-
 from absl import app
 import os
 import posixpath
 import shutil
-import tensorflow as tf
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import naming
 from typing import Dict
 
@@ -67,30 +50,16 @@ audio_datasets = ['common_voice', 'crema_d', 'dementiabank', 'fuss', 'groove',
                   'speech_commands', 'tedlium', 'vctk', 'voxceleb', 'voxforge']
 
 DATASETS_NAMES = {
-  'audio': ['tedlium'],    # will add full audio_datasets list
-  'image': ['abstract_reasoning'],
+  'audio': ['tedlium', 'speech_commands'],    # will add full audio_datasets list
+  'image': ['arc', 'abstract_reasoning'],
   'image_classification': ['binary_alpha_digits']
 }
 
+
 def create_dirs(dataset_path: str) -> None:
   """Creates a new `my_dataset` directory"""
-  if not tf.io.gfile.exists(dataset_path):
-    tf.io.gfile.makedirs(os.path.join(dataset_path, 'fake_data'))
-
-
-def copytree(src, dst):
-  """Copy files and folders recursively"""
-  for item in tf.io.gfile.listdir(src):
-    s = os.path.join(src, item)
-    d = os.path.join(dst, item)
-    if tf.io.gfile.isdir(s):
-      if tf.io.gfile.exists(d):
-        tf.io.gfile.rmtree(d)
-      shutil.copytree(s, d)
-    else:
-      if tf.io.gfile.exists(d):
-        tf.io.gfile.remove(d)
-      tf.io.gfile.copy(s, d)
+  if not os.path.exists(dataset_path):
+    os.makedirs(os.path.join(dataset_path, 'fake_data'))
 
 
 def make_init_file(dataset_type, dataset_name, dataset_path) -> None:
@@ -101,44 +70,42 @@ def make_init_file(dataset_type, dataset_name, dataset_path) -> None:
           'dataset_name': dataset_name,
           'dataset_name_cls': dataset_name_cls}
 
-  with tf.io.gfile.GFile(file_path, 'w') as f:
+  with open(file_path, 'w') as f:
     f.write(_INIT_FILE.format(**data))
 
 
 def copy_checksum_file(src_checksum_path, dest_path) -> None:
   """Copy checksum.txt file"""
-  if tf.io.gfile.exists(src_checksum_path):
-    tf.io.gfile.copy(src_checksum_path,
-                     os.path.join(dest_path, posixpath.basename(src_checksum_path)),
-                     overwrite=True)
+  if os.path.exists(src_checksum_path):
+    shutil.copy(src_checksum_path,
+                os.path.join(dest_path, posixpath.basename(src_checksum_path)))
 
 
 def copy_make_data_file(src_fake_data_script_path, dest_path) -> None:
   """Copy fake data genneration script file"""
-  if tf.io.gfile.exists(src_fake_data_script_path):
-    tf.io.gfile.copy(src_fake_data_script_path,
-                     os.path.join(dest_path, 'make_fake_data.py'),
-                     overwrite=True)
+  if os.path.exists(src_fake_data_script_path):
+    shutil.copy(src_fake_data_script_path,
+                os.path.join(dest_path, 'make_fake_data.py'))
 
 
 def copy_fake_data_dir(src_fake_data_dir, dest_path) -> None:
   """Copy fake data directory"""
-  if tf.io.gfile.exists(src_fake_data_dir):
-    copytree(src_fake_data_dir, os.path.join(dest_path, 'fake_data'))
+  if os.path.exists(src_fake_data_dir):
+    if os.path.exists(dest_path):
+      shutil.rmtree(dest_path)
+    shutil.copytree(src_fake_data_dir, os.path.join(dest_path, 'fake_data'))
 
 
 def copy_dataset_file(src_dataset_path, dest_path) -> None:
   """Copy my_dataset.py file"""
-  tf.io.gfile.copy(src_dataset_path,
-                   os.path.join(dest_path, posixpath.basename(src_dataset_path)),
-                   overwrite=True)
+  shutil.copy(src_dataset_path,
+              os.path.join(dest_path, posixpath.basename(src_dataset_path)))
 
 
 def copy_dataset_test_file(src_dataset_test_path, dest_path) -> None:
   """Copy my_dataset_test.py file"""
-  tf.io.gfile.copy(src_dataset_test_path,
-                   os.path.join(dest_path, posixpath.basename(src_dataset_test_path)),
-                   overwrite=True)
+  shutil.copy(src_dataset_test_path,
+              os.path.join(dest_path, posixpath.basename(src_dataset_test_path)))
 
 
 def refactor_dataset(datasets: Dict[str, list]) -> None:
