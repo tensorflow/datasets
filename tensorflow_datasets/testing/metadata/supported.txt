@@ -546,10 +546,14 @@ imagenet2012_corrupted/zoom_blur_5/3.1.0
 imagenet2012_real/1.0.0
 imagenet2012_subset/10pct/5.0.0
 imagenet2012_subset/1pct/5.0.0
+imagenet_a/0.1.0
 imagenet_resized/16x16/0.1.0
 imagenet_resized/32x32/0.1.0
 imagenet_resized/64x64/0.1.0
 imagenet_resized/8x8/0.1.0
+imagenet_v2/matched-frequency/0.1.0
+imagenet_v2/threshold-0.7/0.1.0
+imagenet_v2/topimages/0.1.0
 imagenette/160px-v2/0.1.0
 imagenette/160px/0.1.0
 imagenette/320px-v2/0.1.0
