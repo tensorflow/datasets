@@ -48,6 +48,9 @@ toc:
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/clic
+    status: nightly
+    title: clic
   - path: /datasets/catalog/coil100
     title: coil100
   - path: /datasets/catalog/div2k
@@ -318,6 +321,9 @@ toc:
     title: gap
   - path: /datasets/catalog/glue
     title: glue
+  - path: /datasets/catalog/goemotions
+    status: nightly
+    title: goemotions
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/irc_disentanglement

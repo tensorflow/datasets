@@ -49,6 +49,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`celeb_a`](celeb_a.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`clevr`](clevr.md)
+*   [`clic`](clic.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`coil100`](coil100.md)
 *   [`div2k`](div2k.md)
 *   [`downsampled_imagenet`](downsampled_imagenet.md)
@@ -196,6 +198,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`esnli`](esnli.md)
 *   [`gap`](gap.md)
 *   [`glue`](glue.md)
+*   [`goemotions`](goemotions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
 *   [`librispeech_lm`](librispeech_lm.md)
