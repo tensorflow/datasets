@@ -42,6 +42,7 @@ _LABELS = ({
     99.0: "unmentioned",
 })
 
+
 class MimiciiiCxr(tfds.core.BeamBasedBuilder):
     '''
     DATASET_NAME=mimiciii_cxr
@@ -64,23 +65,31 @@ class MimiciiiCxr(tfds.core.BeamBasedBuilder):
     "machine_type=n1-standard-2,experiments=shuffle_mode=service,enable_streaming_engine"
     '''
     
-    VERSION = tfds.core.Version('0.1.0')
+    VERSION = tfds.core.Version('0.2.0')
+    SUPPORTED_VERSIONS = [ tfds.core.Version('0.1.0') ]
+    
+    BUILDER_CONFIGS = [
+        tfds.core.BuilderConfig(
+            name='512', version='0.2.0', supported_versions=None, description='512 image size.'
+        ),
+    ]
     MANUAL_DOWNLOAD_INSTRUCTIONS = """\
-    You must register and agree to user agreement on the dataset page:
-    https://physionet.org/content/mimic-cxr/2.0.0/
-    Afterwards, you have to download and put the mimic-cxr-2.0.0 directory in the
-    manual_dir. It should contain subdirectories: files/ with images
-    and also mimic-cxr-2.0.0-split.csv, mimic-cxr-2.0.0-negbio.csv,
-    mimic-cxr-2.0.0-chexpert.csv, and mimic-cxr-2.0.0-metadata.csv files.
-    These four files can be downloaded from https://physionet.org/content/mimic-cxr-jpg/
-    
-    Once the csv files are ready, they must be pre-processed to combine metadata information
-    with split information. This is performed via a group-by clause on study_id. Other fields
-    are aggregated via pipe a ("|") delimiter.  
-    
-    """
+        You must register and agree to user agreement on the dataset page:
+        https://physionet.org/content/mimic-cxr/2.0.0/
+        Afterwards, you have to download and put the mimic-cxr-2.0.0 directory in the
+        manual_dir. It should contain subdirectories: files/ with images
+        and also mimic-cxr-2.0.0-split.csv, mimic-cxr-2.0.0-negbio.csv,
+        mimic-cxr-2.0.0-chexpert.csv, and mimic-cxr-2.0.0-metadata.csv files.
+        These four files can be downloaded from https://physionet.org/content/mimic-cxr-jpg/
 
+        Once the csv files are ready, they must be pre-processed to combine metadata information
+        with split information. This is performed via a group-by clause on study_id. Other fields
+        are aggregated via pipe a ("|") delimiter.
+    """
+    
     def _info(self):
+        image_size = 512 if self.builder_config.name is '512' else 2048
+        
         return tfds.core.DatasetInfo(
                 builder=self,
                 description=_DESCRIPTION,
@@ -93,7 +102,7 @@ class MimiciiiCxr(tfds.core.BeamBasedBuilder):
                      "label_chexpert": tfds.features.Sequence(tfds.features.ClassLabel(names=list(_LABELS.values())), length=14),
                      "label_negbio": tfds.features.Sequence(tfds.features.ClassLabel(names=list(_LABELS.values())), length=14),
                      "image_sequence": tfds.features.Sequence({
-                         "image": tfds.features.Image(shape=(2048, 2048, 1), dtype=tf.uint16, encoding_format='png'),
+                         "image": tfds.features.Image(shape=(image_size, image_size, 1), dtype=tf.uint16, encoding_format='png'),
                          "dicom_id": tfds.features.Text(),
                          "rows": tfds.features.Tensor(shape=(), dtype=tf.int32),
                          "columns": tfds.features.Tensor(shape=(), dtype=tf.int32),
@@ -138,7 +147,8 @@ class MimiciiiCxr(tfds.core.BeamBasedBuilder):
         beam = tfds.core.lazy_imports.apache_beam
         pydicom = tfds.core.lazy_imports.pydicom
         pd = tfds.core.lazy_imports.pandas
-                
+        image_size = 512 if self.builder_config.name is '512' else 2048
+        
         def _right_size(row):
             data = row.split(",")
             return len(data)==11
@@ -170,6 +180,14 @@ class MimiciiiCxr(tfds.core.BeamBasedBuilder):
             return True
 
         def _process_example(row):
+            def fast_histogram_equalize(image):
+                '''histogram for integer based images'''
+                image = image - tf.reduce_min(image)
+                image = tf.cast(image, tf.int32)
+                histogram = tf.math.bincount(image)
+                cdf = tf.cast(tf.math.cumsum(histogram), tf.float32)
+                cdf = cdf/cdf[-1]
+                return tf.gather(params=cdf, indices=image)
             study_id, subject_id, split, dicom_id, performedProcedureStepDescription, ViewPosition, StudyDate, StudyTime, procedureCodeSequence_CodeMeaning, ViewCodeSequence_CodeMeaning, patientOrientationCodeSequence_CodeMeaning = row.split(",")
             
             # Job Graph Too Large
@@ -195,7 +213,8 @@ class MimiciiiCxr(tfds.core.BeamBasedBuilder):
                     ds = pydicom.dcmread(d)
                     image = tf.squeeze(tf.constant(ds.pixel_array))[..., None]
                     row, col, channel = image.shape
-                    images.append(tf.cast(tf.round(tf.image.resize_with_pad(image, 2048, 2048)), tf.uint16).numpy())
+                    image = fast_histogram_equalize(image)
+                    images.append(tf.cast(tf.round(tf.image.resize_with_pad(image, image_size, image_size)), tf.uint16).numpy())
                     rows.append(row)
                     columns.append(col)
 
