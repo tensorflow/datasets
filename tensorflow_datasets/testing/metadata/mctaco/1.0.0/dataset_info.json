@@ -1,0 +1,1946 @@
+{
+  "citation": "@inproceedings{ZKNR19,\n    author = {Ben Zhou, Daniel Khashabi, Qiang Ning and Dan Roth},\n    title = {\"Going on a vacation\" takes longer than \"Going for a walk\": A Study of Temporal Commonsense Understanding },\n    booktitle = {EMNLP},\n    year = {2019},\n}",
+  "description": "MC-TACO is a dataset of 13k question-answer pairs that require temporal\ncommonsense comprehension. The dataset contains five temporal properties:\n\n1. duration (how long an event takes)\n2. temporal ordering (typical order of events)\n3. typical time (when an event occurs)\n4. frequency (how often an event occurs)\n5. stationarity (whether a state is maintained for a very long time or indefinitely)\n\nWe hope that this dataset can promote the future exploration of this\n particular class of reasoning problems.",
+  "downloadSize": "2385137",
+  "location": {
+    "urls": [
+      "https://github.com/CogComp/MCTACO"
+    ]
+  },
+  "name": "mctaco",
+  "schema": {
+    "feature": [
+      {
+        "domain": "answer",
+        "name": "answer",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "question",
+        "name": "question",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "sentence",
+        "name": "sentence",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "name": "category",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "boolDomain": {},
+        "name": "label",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "answer",
+        "value": [
+          "every century",
+          "every day",
+          "every hour",
+          "every minute",
+          "every month",
+          "every second",
+          "no",
+          "once a hour",
+          "once a second",
+          "yes"
+        ]
+      },
+      {
+        "name": "question",
+        "value": [
+          "At what time do the wafers get placed on tracks?",
+          "At what time of day was Mary picking blueberries?",
+          "How long did it take Cathy Wallace to grow up?",
+          "How long did the meeting last?",
+          "How often do Max and Joey run?",
+          "How often do Oklahomans need lawyers?",
+          "How often do people need to take breaths?",
+          "How often is the spelling bee held?",
+          "What time did he start playing?",
+          "What time of the day does he start work?"
+        ]
+      },
+      {
+        "name": "sentence",
+        "value": [
+          "Charlie decides to rob the train with the help of imprisoned Don and con-artist Victor Braganza .",
+          "Growing up on a farm near St. Paul, L. Mark Bailey didn't dream of becoming a judge.",
+          "In this case he looks to his girlfriend , Violet .",
+          "Mr. Barco has refused U.S. troops or advisers but has accepted U.S. military aid.",
+          "Mzoudi studied in Dortmund, Bochum, and Muenster before moving to Hamburg in 1995.",
+          "One day, as Mary was picking the blueberries, she turned around to find that Max was not there.",
+          "Search \"Emiliano Malaquez\" and you'll find he's a master of the \"captured moment\" school of sculpture.",
+          "She explained that Frank 's father was an alcoholic and that his mother worked as a toll booth operator .",
+          "The 9/11 plotters eventually spent somewhere between $400,000 and $500,000 to plan and conduct their attack.",
+          "The Minangkabau custom of freely electing their leaders provided the model for rulership elections in modern federal Malaysia."
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "2380155",
+      "shardLengths": [
+        "9442"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "answer"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 15.70324,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "9442",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "9442"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "yes",
+                    "sampleCount": 118.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "no",
+                    "lowRank": "1",
+                    "sampleCount": 105.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "every century",
+                    "lowRank": "2",
+                    "sampleCount": 59.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "every minute",
+                    "lowRank": "3",
+                    "sampleCount": 58.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "every day",
+                    "lowRank": "4",
+                    "sampleCount": 55.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "once a second",
+                    "lowRank": "5",
+                    "sampleCount": 54.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "once a week",
+                    "lowRank": "6",
+                    "sampleCount": 51.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "every second",
+                    "lowRank": "7",
+                    "sampleCount": 48.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "once a century",
+                    "lowRank": "8",
+                    "sampleCount": 41.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "every hour",
+                    "lowRank": "9",
+                    "sampleCount": 40.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 118.0,
+                  "value": "yes"
+                },
+                {
+                  "frequency": 105.0,
+                  "value": "no"
+                },
+                {
+                  "frequency": 59.0,
+                  "value": "every century"
+                },
+                {
+                  "frequency": 58.0,
+                  "value": "every minute"
+                },
+                {
+                  "frequency": 55.0,
+                  "value": "every day"
+                },
+                {
+                  "frequency": 54.0,
+                  "value": "once a second"
+                },
+                {
+                  "frequency": 51.0,
+                  "value": "once a week"
+                },
+                {
+                  "frequency": 48.0,
+                  "value": "every second"
+                },
+                {
+                  "frequency": 41.0,
+                  "value": "once a century"
+                },
+                {
+                  "frequency": 40.0,
+                  "value": "every hour"
+                }
+              ],
+              "unique": "4900"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 43.532513,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "9442",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "9442"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "How often do you eat a meal?",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "How often do they drive to the library?",
+                    "lowRank": "1",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "How often did Portugal send out  expeditions?",
+                    "lowRank": "2",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "How long did the move take?",
+                    "lowRank": "3",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "How long are his shifts as a defense attorney?",
+                    "lowRank": "4",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "When did Alexander II die?",
+                    "lowRank": "5",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "How often would one family be able to do something like this?",
+                    "lowRank": "6",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "How often do you place pennies in vinegar?",
+                    "lowRank": "7",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "How much time did Jerry spend at the pier?",
+                    "lowRank": "8",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "How many years did Einstein work with Physics?",
+                    "lowRank": "9",
+                    "sampleCount": 18.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 19.0,
+                  "value": "How often do you eat a meal?"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "How often do they drive to the library?"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "How often did Portugal send out  expeditions?"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "How long did the move take?"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "How long are his shifts as a defense attorney?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "When did Alexander II die?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "How often would one family be able to do something like this?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "How often do you place pennies in vinegar?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "How much time did Jerry spend at the pier?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "How many years did Einstein work with Physics?"
+                }
+              ],
+              "unique": "1332"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "sentence"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 101.870476,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "9442",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "9442"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Not only did it create jobs, but it also created Lake Mead, the massive reservoir that today provides water to all of southern Nevada.",
+                    "sampleCount": 57.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Over the centuries, the living here has always been easy enough to attract a steady stream of immigrants.",
+                    "lowRank": "1",
+                    "sampleCount": 54.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "They then took a boat to Africa and Asia, where they went on a trip through the mountains.",
+                    "lowRank": "2",
+                    "sampleCount": 51.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "The fossils that are very distinct at certain times of Earths history are called index fossils.",
+                    "lowRank": "3",
+                    "sampleCount": 49.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "After wiping your feet on the mat you reach out to touch the brass knocker on the door.",
+                    "lowRank": "4",
+                    "sampleCount": 49.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Even though electronic espionage may cost U.S. firms billions of dollars a year, most aren't yet taking precautions, the experts said.",
+                    "lowRank": "5",
+                    "sampleCount": 46.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "The massive ice sheet, called a glacier, caused the features on the land you see today.",
+                    "lowRank": "6",
+                    "sampleCount": 45.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Once we arrive, the castle looked much bigger than we had imagined.",
+                    "lowRank": "7",
+                    "sampleCount": 45.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "If you have ever heard, \"Eat a good breakfast\", thats why.",
+                    "lowRank": "8",
+                    "sampleCount": 45.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "All the puppies at the dog pound need a loving home.",
+                    "lowRank": "9",
+                    "sampleCount": 45.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 57.0,
+                  "value": "Not only did it create jobs, but it also created Lake Mead, the massive reservoir that today provides water to all of southern Nevada."
+                },
+                {
+                  "frequency": 54.0,
+                  "value": "Over the centuries, the living here has always been easy enough to attract a steady stream of immigrants."
+                },
+                {
+                  "frequency": 51.0,
+                  "value": "They then took a boat to Africa and Asia, where they went on a trip through the mountains."
+                },
+                {
+                  "frequency": 49.0,
+                  "value": "The fossils that are very distinct at certain times of Earths history are called index fossils."
+                },
+                {
+                  "frequency": 49.0,
+                  "value": "After wiping your feet on the mat you reach out to touch the brass knocker on the door."
+                },
+                {
+                  "frequency": 46.0,
+                  "value": "Even though electronic espionage may cost U.S. firms billions of dollars a year, most aren't yet taking precautions, the experts said."
+                },
+                {
+                  "frequency": 45.0,
+                  "value": "The massive ice sheet, called a glacier, caused the features on the land you see today."
+                },
+                {
+                  "frequency": 45.0,
+                  "value": "Once we arrive, the castle looked much bigger than we had imagined."
+                },
+                {
+                  "frequency": 45.0,
+                  "value": "If you have ever heard, \"Eat a good breakfast\", thats why."
+                },
+                {
+                  "frequency": 45.0,
+                  "value": "All the puppies at the dog pound need a loving home."
+                }
+              ],
+              "unique": "355"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "9442",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "9442"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 0.4,
+                      "sampleCount": 1467.2868
+                    },
+                    {
+                      "highValue": 0.8,
+                      "lowValue": 0.4,
+                      "sampleCount": 3.7768
+                    },
+                    {
+                      "highValue": 1.2000000000000002,
+                      "lowValue": 0.8,
+                      "sampleCount": 3025.2167999999997
+                    },
+                    {
+                      "highValue": 1.6,
+                      "lowValue": 1.2000000000000002,
+                      "sampleCount": 3.7767999999999993
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 1.6,
+                      "sampleCount": 3.7767999999999993
+                    },
+                    {
+                      "highValue": 2.4000000000000004,
+                      "lowValue": 2.0,
+                      "sampleCount": 2505.9068
+                    },
+                    {
+                      "highValue": 2.8000000000000003,
+                      "lowValue": 2.4000000000000004,
+                      "sampleCount": 3.7767999999999993
+                    },
+                    {
+                      "highValue": 3.2,
+                      "lowValue": 2.8000000000000003,
+                      "sampleCount": 589.1808000000001
+                    },
+                    {
+                      "highValue": 3.6,
+                      "lowValue": 3.2,
+                      "sampleCount": 3.7767999999999993
+                    },
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 3.6,
+                      "sampleCount": 1835.5248000000001
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 3.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 4.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 4.0,
+              "mean": 1.819423850879051,
+              "median": 2.0,
+              "numZeros": "1468",
+              "stdDev": 1.3229404093152148
+            },
+            "path": {
+              "step": [
+                "category"
+              ]
+            }
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "9442",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "9442"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 0.1,
+                      "sampleCount": 6242.1062
+                    },
+                    {
+                      "highValue": 0.2,
+                      "lowValue": 0.1,
+                      "sampleCount": 0.9442
+                    },
+                    {
+                      "highValue": 0.30000000000000004,
+                      "lowValue": 0.2,
+                      "sampleCount": 0.9442000000000004
+                    },
+                    {
+                      "highValue": 0.4,
+                      "lowValue": 0.30000000000000004,
+                      "sampleCount": 0.9441999999999998
+                    },
+                    {
+                      "highValue": 0.5,
+                      "lowValue": 0.4,
+                      "sampleCount": 0.9441999999999998
+                    },
+                    {
+                      "highValue": 0.6000000000000001,
+                      "lowValue": 0.5,
+                      "sampleCount": 0.9442000000000008
+                    },
+                    {
+                      "highValue": 0.7000000000000001,
+                      "lowValue": 0.6000000000000001,
+                      "sampleCount": 0.9441999999999998
+                    },
+                    {
+                      "highValue": 0.8,
+                      "lowValue": 0.7000000000000001,
+                      "sampleCount": 0.9441999999999998
+                    },
+                    {
+                      "highValue": 0.9,
+                      "lowValue": 0.8,
+                      "sampleCount": 0.9441999999999998
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 0.9,
+                      "sampleCount": 3192.3402
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 944.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 1.0,
+              "mean": 0.33869942808726966,
+              "numZeros": "6244",
+              "stdDev": 0.4732674988847492
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "9442"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "951026",
+      "shardLengths": [
+        "3783"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "answer"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 15.8300295,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3783",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3783"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "yes",
+                    "sampleCount": 59.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "no",
+                    "lowRank": "1",
+                    "sampleCount": 47.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "every century",
+                    "lowRank": "2",
+                    "sampleCount": 40.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "once a second",
+                    "lowRank": "3",
+                    "sampleCount": 37.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "every minute",
+                    "lowRank": "4",
+                    "sampleCount": 37.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "every day",
+                    "lowRank": "5",
+                    "sampleCount": 33.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "once a hour",
+                    "lowRank": "6",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "every hour",
+                    "lowRank": "7",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "every second",
+                    "lowRank": "8",
+                    "sampleCount": 24.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "every month",
+                    "lowRank": "9",
+                    "sampleCount": 21.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 59.0,
+                  "value": "yes"
+                },
+                {
+                  "frequency": 47.0,
+                  "value": "no"
+                },
+                {
+                  "frequency": 40.0,
+                  "value": "every century"
+                },
+                {
+                  "frequency": 37.0,
+                  "value": "once a second"
+                },
+                {
+                  "frequency": 37.0,
+                  "value": "every minute"
+                },
+                {
+                  "frequency": 33.0,
+                  "value": "every day"
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "once a hour"
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "every hour"
+                },
+                {
+                  "frequency": 24.0,
+                  "value": "every second"
+                },
+                {
+                  "frequency": 21.0,
+                  "value": "every month"
+                }
+              ],
+              "unique": "2187"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 43.834522,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3783",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3783"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "How long did the meeting last?",
+                    "sampleCount": 22.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "How often do people need to take breaths?",
+                    "lowRank": "1",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "How often do Oklahomans need lawyers?",
+                    "lowRank": "2",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "What time of the day does he start work?",
+                    "lowRank": "3",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "At what time do the wafers get placed on tracks?",
+                    "lowRank": "4",
+                    "sampleCount": 18.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "What time did he start playing?",
+                    "lowRank": "5",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "How often is the spelling bee held?",
+                    "lowRank": "6",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "How often do Max and Joey run?",
+                    "lowRank": "7",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "How long did it take Cathy Wallace to grow up?",
+                    "lowRank": "8",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "At what time of day was Mary picking blueberries?",
+                    "lowRank": "9",
+                    "sampleCount": 17.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 22.0,
+                  "value": "How long did the meeting last?"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "How often do people need to take breaths?"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "How often do Oklahomans need lawyers?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "What time of the day does he start work?"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "At what time do the wafers get placed on tracks?"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": "What time did he start playing?"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": "How often is the spelling bee held?"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": "How often do Max and Joey run?"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": "How long did it take Cathy Wallace to grow up?"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": "At what time of day was Mary picking blueberries?"
+                }
+              ],
+              "unique": "560"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "sentence"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 100.81311,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3783",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3783"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Search \"Emiliano Malaquez\" and you'll find he's a master of the \"captured moment\" school of sculpture.",
+                    "sampleCount": 52.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "One day, as Mary was picking the blueberries, she turned around to find that Max was not there.",
+                    "lowRank": "1",
+                    "sampleCount": 47.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "The 9/11 plotters eventually spent somewhere between $400,000 and $500,000 to plan and conduct their attack.",
+                    "lowRank": "2",
+                    "sampleCount": 46.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Mzoudi studied in Dortmund, Bochum, and Muenster before moving to Hamburg in 1995.",
+                    "lowRank": "3",
+                    "sampleCount": 45.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "The Minangkabau custom of freely electing their leaders provided the model for rulership elections in modern federal Malaysia.",
+                    "lowRank": "4",
+                    "sampleCount": 44.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Mr. Barco has refused U.S. troops or advisers but has accepted U.S. military aid.",
+                    "lowRank": "5",
+                    "sampleCount": 44.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "In this case he looks to his girlfriend , Violet .",
+                    "lowRank": "6",
+                    "sampleCount": 43.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "She explained that Frank 's father was an alcoholic and that his mother worked as a toll booth operator .",
+                    "lowRank": "7",
+                    "sampleCount": 40.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Growing up on a farm near St. Paul, L. Mark Bailey didn't dream of becoming a judge.",
+                    "lowRank": "8",
+                    "sampleCount": 40.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Charlie decides to rob the train with the help of imprisoned Don and con-artist Victor Braganza .",
+                    "lowRank": "9",
+                    "sampleCount": 40.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 52.0,
+                  "value": "Search \"Emiliano Malaquez\" and you'll find he's a master of the \"captured moment\" school of sculpture."
+                },
+                {
+                  "frequency": 47.0,
+                  "value": "One day, as Mary was picking the blueberries, she turned around to find that Max was not there."
+                },
+                {
+                  "frequency": 46.0,
+                  "value": "The 9/11 plotters eventually spent somewhere between $400,000 and $500,000 to plan and conduct their attack."
+                },
+                {
+                  "frequency": 45.0,
+                  "value": "Mzoudi studied in Dortmund, Bochum, and Muenster before moving to Hamburg in 1995."
+                },
+                {
+                  "frequency": 44.0,
+                  "value": "The Minangkabau custom of freely electing their leaders provided the model for rulership elections in modern federal Malaysia."
+                },
+                {
+                  "frequency": 44.0,
+                  "value": "Mr. Barco has refused U.S. troops or advisers but has accepted U.S. military aid."
+                },
+                {
+                  "frequency": 43.0,
+                  "value": "In this case he looks to his girlfriend , Violet ."
+                },
+                {
+                  "frequency": 40.0,
+                  "value": "She explained that Frank 's father was an alcoholic and that his mother worked as a toll booth operator ."
+                },
+                {
+                  "frequency": 40.0,
+                  "value": "Growing up on a farm near St. Paul, L. Mark Bailey didn't dream of becoming a judge."
+                },
+                {
+                  "frequency": 40.0,
+                  "value": "Charlie decides to rob the train with the help of imprisoned Don and con-artist Victor Braganza ."
+                }
+              ],
+              "unique": "151"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3783",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3783"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 0.4,
+                      "sampleCount": 531.1332
+                    },
+                    {
+                      "highValue": 0.8,
+                      "lowValue": 0.4,
+                      "sampleCount": 1.5132
+                    },
+                    {
+                      "highValue": 1.2000000000000002,
+                      "lowValue": 0.8,
+                      "sampleCount": 1109.9322
+                    },
+                    {
+                      "highValue": 1.6,
+                      "lowValue": 1.2000000000000002,
+                      "sampleCount": 1.5131999999999997
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 1.6,
+                      "sampleCount": 1.5131999999999997
+                    },
+                    {
+                      "highValue": 2.4000000000000004,
+                      "lowValue": 2.0,
+                      "sampleCount": 1185.5922
+                    },
+                    {
+                      "highValue": 2.8000000000000003,
+                      "lowValue": 2.4000000000000004,
+                      "sampleCount": 1.5131999999999997
+                    },
+                    {
+                      "highValue": 3.2,
+                      "lowValue": 2.8000000000000003,
+                      "sampleCount": 270.10619999999994
+                    },
+                    {
+                      "highValue": 3.6,
+                      "lowValue": 3.2,
+                      "sampleCount": 1.5131999999999997
+                    },
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 3.6,
+                      "sampleCount": 678.6701999999999
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 3.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 4.0,
+                      "lowValue": 4.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 4.0,
+              "mean": 1.8559344435633096,
+              "median": 2.0,
+              "numZeros": "531",
+              "stdDev": 1.2742476927940918
+            },
+            "path": {
+              "step": [
+                "category"
+              ]
+            }
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3783",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3783"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 0.1,
+                      "sampleCount": 2553.9033
+                    },
+                    {
+                      "highValue": 0.2,
+                      "lowValue": 0.1,
+                      "sampleCount": 0.3783
+                    },
+                    {
+                      "highValue": 0.30000000000000004,
+                      "lowValue": 0.2,
+                      "sampleCount": 0.37830000000000014
+                    },
+                    {
+                      "highValue": 0.4,
+                      "lowValue": 0.30000000000000004,
+                      "sampleCount": 0.3782999999999999
+                    },
+                    {
+                      "highValue": 0.5,
+                      "lowValue": 0.4,
+                      "sampleCount": 0.3782999999999999
+                    },
+                    {
+                      "highValue": 0.6000000000000001,
+                      "lowValue": 0.5,
+                      "sampleCount": 0.3783000000000003
+                    },
+                    {
+                      "highValue": 0.7000000000000001,
+                      "lowValue": 0.6000000000000001,
+                      "sampleCount": 0.3782999999999999
+                    },
+                    {
+                      "highValue": 0.8,
+                      "lowValue": 0.7000000000000001,
+                      "sampleCount": 0.3782999999999999
+                    },
+                    {
+                      "highValue": 0.9,
+                      "lowValue": 0.8,
+                      "sampleCount": 0.3782999999999999
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 0.9,
+                      "sampleCount": 1226.0703
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 378.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 1.0,
+              "mean": 0.32487443827650014,
+              "numZeros": "2554",
+              "stdDev": 0.468327916775232
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "3783"
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

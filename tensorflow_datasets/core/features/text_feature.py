@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Text feature.
 
 """
@@ -23,14 +24,14 @@ from __future__ import print_function
 
 import os
 
-import numpy as np
-import tensorflow as tf
+from absl import logging
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.features import text as text_lib
 
 
-class Text(feature.FeatureConnector):
+class Text(feature.Tensor):
   """`FeatureConnector` for text, encoding to integers with a `TextEncoder`."""
 
   def __init__(self, encoder=None, encoder_config=None):
@@ -53,6 +54,19 @@ class Text(feature.FeatureConnector):
 
     self._encoder = encoder
     self._encoder_config = encoder_config
+
+    has_encoder = bool(encoder or self._encoder_cls)
+    if has_encoder:
+      logging.warning(
+          "TFDS datasets with text encoding are deprecated and will be removed "
+          "in a future version. Instead, you should use the plain text version "
+          "and tokenize the text using `tensorflow_text` (See: "
+          "https://www.tensorflow.org/tutorials/tensorflow_text/intro#tfdata_example)"
+      )
+    super(Text, self).__init__(
+        shape=(None,) if has_encoder else (),
+        dtype=tf.int64 if has_encoder else tf.string,
+    )
 
   @property
   def encoder(self):
@@ -94,22 +108,10 @@ class Text(feature.FeatureConnector):
           "Text.ints2str is not available because encoder hasn't been defined.")
     return self._encoder.decode(int_values)
 
-  def get_tensor_info(self):
-    if self.encoder:
-      return feature.TensorInfo(shape=(None,), dtype=tf.int64)
-    else:
-      return feature.TensorInfo(shape=(), dtype=tf.string)
-
   def encode_example(self, example_data):
     if self.encoder:
-      # Wrap inside an array to ensure dtype is correctly infered even for
-      # empty list
-      return np.array(self.encoder.encode(example_data), dtype=np.int64)
-    else:
-      return tf.compat.as_bytes(example_data)
-
-  def decode_example(self, tfexample_data):
-    return tfexample_data
+      example_data = self.encoder.encode(example_data)
+    return super(Text, self).encode_example(example_data)
 
   def save_metadata(self, data_dir, feature_name):
     fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
@@ -121,7 +123,7 @@ class Text(feature.FeatureConnector):
     fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
     encoder_cls = self._encoder_cls
     if encoder_cls:
-      self._encoder = encoder_cls.load_from_file(fname_prefix)
+      self._encoder = encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
       return
 
     # Error checking: ensure there are no metadata files
@@ -135,7 +137,17 @@ class Text(feature.FeatureConnector):
           "Files: %s" % (feature_name, feature_files))
 
   def maybe_build_from_corpus(self, corpus_generator, **kwargs):
-    """Call SubwordTextEncoder.build_from_corpus is encoder_cls is such."""
+    """Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
+
+    If `self.encoder` is `None` and `self._encoder_cls` is of type
+    `SubwordTextEncoder`, the method instantiates `self.encoder` as returned
+    by `SubwordTextEncoder.build_from_corpus()`.
+
+    Args:
+      corpus_generator: generator yielding `str`, from which
+        subwords will be constructed.
+      **kwargs: kwargs forwarded to `SubwordTextEncoder.build_from_corpus()`
+    """
     if self._encoder_cls is not text_lib.SubwordTextEncoder:
       return
     if self.encoder:
@@ -152,4 +164,6 @@ class Text(feature.FeatureConnector):
     return self._encoder_config and self._encoder_config.encoder_cls
 
   def _additional_repr_info(self):
+    if self.encoder is None:
+      return {}
     return {"encoder": repr(self.encoder)}

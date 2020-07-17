@@ -1,0 +1,2 @@
+/a/airfield/00001.jpg 0
+/b/bakery/shop/00002.jpg 1

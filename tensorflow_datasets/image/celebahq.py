@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Celeba-HQ dataset."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import os
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -43,6 +48,11 @@ _DESCRIPTION = """\
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
+Note: CelebAHQ dataset may contain potential bias. The fairness indicators
+[example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
+goes into detail about several considerations to keep in mind while using the
+CelebAHQ dataset.
+
 WARNING: This dataset currently requires you to prepare images on your own.
 """
 
@@ -50,7 +60,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
@@ -59,10 +69,13 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
+    v2 = tfds.core.Version(
+        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
+        version=v2,
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -71,20 +84,27 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
 class CelebAHq(tfds.core.GeneratorBasedBuilder):
   """Celeba_HQ Dataset."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  manual_dir should contain multiple tar files with images (data2x2.tar,
+  data4x4.tar .. data1024x1024.tar).
+  Detailed instructions are here:
+  https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
+  """
+
   VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [
-      CelebaHQConfig(resolution=1024, version="0.1.0"),
-      CelebaHQConfig(resolution=512, version="0.1.0"),
-      CelebaHQConfig(resolution=256, version="0.1.0"),
-      CelebaHQConfig(resolution=128, version="0.1.0"),
-      CelebaHQConfig(resolution=64, version="0.1.0"),
-      CelebaHQConfig(resolution=32, version="0.1.0"),
-      CelebaHQConfig(resolution=16, version="0.1.0"),
-      CelebaHQConfig(resolution=8, version="0.1.0"),
-      CelebaHQConfig(resolution=4, version="0.1.0"),
-      CelebaHQConfig(resolution=2, version="0.1.0"),
-      CelebaHQConfig(resolution=1, version="0.1.0"),
+      CelebaHQConfig(resolution=1024),
+      CelebaHQConfig(resolution=512),
+      CelebaHQConfig(resolution=256),
+      CelebaHQConfig(resolution=128),
+      CelebaHQConfig(resolution=64),
+      CelebaHQConfig(resolution=32),
+      CelebaHQConfig(resolution=16),
+      CelebaHQConfig(resolution=8),
+      CelebaHQConfig(resolution=4),
+      CelebaHQConfig(resolution=2),
+      CelebaHQConfig(resolution=1),
   ]
 
   def _info(self):
@@ -100,11 +120,12 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
             "image/filename":
                 tfds.features.Text(),
         },),
-        urls=["https://github.com/tkarras/progressive_growing_of_gans"],
+        homepage="https://github.com/tkarras/progressive_growing_of_gans",
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     image_tar_file = os.path.join(dl_manager.manual_dir,
                                   self.builder_config.file_name)
     if not tf.io.gfile.exists(image_tar_file):
@@ -117,11 +138,11 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
         )
     ]
 
   def _generate_examples(self, archive):
     for fname, fobj in archive:
-      yield {"image": fobj, "image/filename": fname}
+      record = {"image": fobj, "image/filename": fname}
+      yield fname, record

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,18 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for moving_sequence."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets import testing
 import tensorflow_datasets.video.moving_sequence as ms
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class MovingSequenceTest(tf.test.TestCase):
@@ -58,7 +59,7 @@ class MovingSequenceTest(tf.test.TestCase):
       subimage = full_image[i:i+h, j:j+w]
       n_true = tf.reduce_sum(subimage)
       # allow for pixel rounding errors in each dimension
-      self.assertTrue(self.evaluate(n_true) >= (h-1)*(w-1))
+      self.assertGreaterEqual(self.evaluate(n_true), (h-1)*(w-1))
 
 
 if __name__ == '__main__':

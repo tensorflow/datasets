@@ -1,0 +1,2 @@
+http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_img_val.tar 6744924160 c7e06a6c0baccf06d8dbeb6577d71efff84673a5dbdd50633ab44f8ea0456ae0
+https://raw.githubusercontent.com/google-research/reassessed-imagenet/master/real.json 388478 d83e9bff374c631aae8439eb064c7019acc56e1b3bc3f56b8380c2a710b0220b

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """TED talk high/low-resource paired language data set from Qi, et al. 2018."""
 
 from __future__ import absolute_import
@@ -21,8 +22,7 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -62,7 +62,7 @@ _VALID_LANGUAGE_PAIRS = (
 class TedHrlrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for TED talk data comparing high/low resource languages."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, language_pair=(None, None), **kwargs):
     """BuilderConfig for TED talk data comparing high/low resource languages.
 
@@ -103,8 +103,12 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk data set for comparing high and low resource languages."""
 
   BUILDER_CONFIGS = [
-      TedHrlrConfig(language_pair=pair, version="0.0.1")
-      for pair in _VALID_LANGUAGE_PAIRS
+      TedHrlrConfig(  # pylint: disable=g-complex-comprehension
+          language_pair=pair,
+          version=tfds.core.Version(
+              "1.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
+      ) for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):
@@ -113,7 +117,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair),
-        urls=["https://github.com/neulab/word-embeddings-for-nmt"],
+        homepage="https://github.com/neulab/word-embeddings-for-nmt",
         supervised_keys=self.builder_config.language_pair,
         citation=_CITATION,
     )
@@ -127,7 +131,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.train".format(
@@ -137,7 +140,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.dev".format(
@@ -147,7 +149,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
                     os.path.join(data_dir, "{}.test".format(
@@ -169,8 +170,9 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             source_sentences), len(target_sentences), source_file, target_file)
 
     source, target = self.builder_config.language_pair
-    for l1, l2 in zip(source_sentences, target_sentences):
+    for idx, (l1, l2) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result

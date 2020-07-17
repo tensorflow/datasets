@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for extractor."""
 
 from __future__ import absolute_import
@@ -22,7 +23,7 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -33,6 +34,8 @@ NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
 TAR = resource_lib.ExtractMethod.TAR
 TAR_GZ = resource_lib.ExtractMethod.TAR_GZ
 ZIP = resource_lib.ExtractMethod.ZIP
+TAR_STREAM = resource_lib.ExtractMethod.TAR_STREAM
+TAR_GZ_STREAM = resource_lib.ExtractMethod.TAR_GZ_STREAM
 
 
 def _read(path):
@@ -89,6 +92,16 @@ class ExtractorTest(testing.TestCase):
         TAR_GZ, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
+  def test_tar_stream(self):
+    self._test_extract(
+        TAR_STREAM, 'arch1.tar',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+
+  def test_targz_stream(self):
+    self._test_extract(
+        TAR_GZ_STREAM, 'arch1.tar.gz',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+
   def test_gzip(self):
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
     self.extractor.extract(from_path, GZIP, self.to_path).get()
@@ -109,11 +122,8 @@ class ExtractorTest(testing.TestCase):
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_absolute_path(self):
-    from_path = os.path.join(self.test_data, 'archives', 'absolute_path.tar')
-    promise = self.extractor.extract(from_path, TAR, self.to_path)
-    with self.assertRaisesWithPredicateMatch(
-        extractor.ExtractError, 'is not safe'):
-      promise.get()
+    # There is a file with absolute path (ignored) + a file named "foo".
+    self._test_extract(TAR, 'absolute_path.tar', {'foo': b'bar\n'})
 
   def test_wrong_method(self):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')

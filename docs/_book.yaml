@@ -11,18 +11,36 @@ upper_tabs:
   lower_tabs:
     # Subsite tabs
     other:
-    - name: Datasets
+    - name: Catalog
+      skip_translation: true
       contents:
-        - title: Datasets
-          path: /datasets/datasets
+      - include: /datasets/catalog/_toc.yaml
     - name: Guide
       contents:
-      - title: Overview
+      - heading: "Get started"
+      - title: Introduction
         path: /datasets/overview
-      - title: Splits
+      - title: End-to-end Keras example
+        path: /datasets/keras_example
+
+      - heading: "Features & performances"
+      - title: Splits and slicing API
         path: /datasets/splits
+      - title: Performance tips
+        path: /datasets/performances
+      - title: Feature decoding
+        path: /datasets/decode
+      - title: Versioning
+        path: /datasets/datasets_versioning
+      - title: Store your dataset on GCS
+        path: /datasets/gcs
+
+      - heading: "Add your dataset"
       - title: Add a dataset
         path: /datasets/add_dataset
+      - title: Add huge datasets (Apache Beam)
+        path: /datasets/beam_datasets
+
     - name: API
       skip_translation: true
       contents:

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Base TestCase to use test_data."""
 
 from __future__ import absolute_import
@@ -26,14 +27,15 @@ import tempfile
 from absl import logging
 from absl.testing import absltest
 import six
-import tensorflow as tf
-from tensorflow_datasets.core import dataset_info
-
+import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils import gcs_utils
 
 
 GCS_ACCESS_FNS = {
-    "original": dataset_info.gcs_dataset_files,
-    "dummy": lambda _: []
+    "original_info": gcs_utils.gcs_dataset_info_files,
+    "dummy_info": lambda _: [],
+    "original_datasets": gcs_utils.is_dataset_on_gcs,
+    "dummy_datasets": lambda _: False,
 }
 
 
@@ -49,15 +51,18 @@ class TestCase(tf.test.TestCase):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
     # Test must not communicate with GCS.
-    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
+    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
+    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
   @contextlib.contextmanager
   def gcs_access(self):
     # Restore GCS access
-    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["original"]
+    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["original_info"]
+    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["original_datasets"]
     yield
     # Revert access
-    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
+    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
+    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
   def setUp(self):
     super(TestCase, self).setUp()

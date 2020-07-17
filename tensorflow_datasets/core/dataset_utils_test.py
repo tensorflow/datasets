@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_utils."""
 
 from __future__ import absolute_import
@@ -20,11 +21,11 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 def _create_dataset(rng):
@@ -134,6 +135,105 @@ class DatasetAsNumPyTest(testing.TestCase):
     # sess.run() should be called a single time for all input. Otherwise input
     # and target may not match
     self.assertAllEqual(ds["a"], ds["b"])
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_ragged_tensors(self):
+    rt = tf.ragged.constant([
+        [1, 2, 3],
+        [],
+        [4, 5],
+    ])
+    rt = dataset_utils.as_numpy(rt)
+
+    if not tf.executing_eagerly():
+      # Output of `sess.run(rt)` is a `RaggedTensorValue` object
+      self.assertIsInstance(rt, tf.compat.v1.ragged.RaggedTensorValue)
+    else:
+      self.assertIsInstance(rt, tf.RaggedTensor)
+
+    self.assertAllEqual(rt, tf.ragged.constant([
+        [1, 2, 3],
+        [],
+        [4, 5],
+    ]))
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_ragged_tensors_ds(self):
+    def _gen_ragged_tensors():
+      # Yield the (flat_values, rowids)
+      yield ([0, 1, 2, 3], [0, 0, 0, 2])  # ex0
+      yield ([], [])  # ex1
+      yield ([4, 5, 6], [0, 1, 1])  # ex2
+    ds = tf.data.Dataset.from_generator(
+        _gen_ragged_tensors,
+        output_types=(tf.int64, tf.int64),
+        output_shapes=((None,), (None,))
+    )
+    ds = ds.map(tf.RaggedTensor.from_value_rowids)
+
+    rt0, rt1, rt2 = list(dataset_utils.as_numpy(ds))
+    self.assertAllEqual(rt0, [
+        [0, 1, 2],
+        [],
+        [3,],
+    ])
+    self.assertAllEqual(rt1, [])
+    self.assertAllEqual(rt2, [[4], [5, 6]])
+
+
+class DatasetOffsetTest(testing.TestCase):
+  """Test that the offset functions are working properly."""
+
+  def test_build_mask_ds(self):
+
+    mask = [True] * 15 + [False] * 85
+
+    # No offset
+    ds = dataset_utils._build_mask_ds(mask=mask, mask_offset=0)
+    mask_values = list(dataset_utils.as_numpy(ds.take(300)))
+    self.assertEqual(mask_values, mask * 3)
+
+    # Skip the first 30 elements (remainders from previous shard)
+    ds = dataset_utils._build_mask_ds(mask=mask, mask_offset=30)
+    mask_values = list(dataset_utils.as_numpy(ds.take(370)))
+    self.assertEqual(mask_values, mask[30:] + mask * 3)
+
+  def test_no_examples_skipped(self):
+
+    self.assertTrue(dataset_utils._no_examples_skipped([
+        {
+            "filepath": "some_path",
+            "mask_offset": 5,
+            "mask": [True] * 100,
+        },
+        {
+            "filepath": "some_path",
+            "mask_offset": 60,
+            "mask": [True] * 100,
+        },
+        {
+            "filepath": "some_path",
+            "mask_offset": 0,
+            "mask": [True] * 100,
+        },
+    ]))
+    self.assertFalse(dataset_utils._no_examples_skipped([
+        {
+            "filepath": "some_path",
+            "mask_offset": 5,
+            "mask": [True] * 100,
+        },
+        {
+            "filepath": "some_path",
+            "mask_offset": 60,
+            "mask": [True] * 99 + [False],  # Single example skipped here
+        },
+        {
+            "filepath": "some_path",
+            "mask_offset": 0,
+            "mask": [True] * 100,
+        },
+    ]))
 
 
 if __name__ == "__main__":

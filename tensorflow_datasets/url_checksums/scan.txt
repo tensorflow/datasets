@@ -1,0 +1,2 @@
+https://github.com/brendenlake/SCAN/archive/master.zip 18680912 ae9038488f880aedf9a5ed9e9693f22f0a3e33d6a4e3aa4d1e8006d9c038594a
+https://storage.googleapis.com/cfq_dataset/scan-splits.tar.gz 79199 e8fff9d88699abd1b88e8eeb44d199bc9706fb21dd9887c3a928dcb11f140785

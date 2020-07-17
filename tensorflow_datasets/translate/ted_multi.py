@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """TED talk multilingual data set."""
 from __future__ import absolute_import
 from __future__ import division
@@ -22,7 +23,7 @@ import csv
 import os
 import six
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -62,7 +63,9 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
-          version='0.0.3',
+          version=tfds.core.Version(
+              '1.0.0',
+              'New split API (https://tensorflow.org/datasets/splits)'),
           description='Plain text import of multilingual TED talk translations',
       )
   ]
@@ -78,7 +81,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             'talk_name':
                 tfds.features.Text(),
         }),
-        urls=['https://github.com/neulab/word-embeddings-for-nmt'],
+        homepage='https://github.com/neulab/word-embeddings-for-nmt',
         citation=_CITATION,
     )
 
@@ -88,18 +91,15 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_train.tsv')
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={'data_file': os.path.join(dl_dir,
                                                   'all_talks_dev.tsv')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_test.tsv')
             }),
@@ -109,11 +109,11 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(data_file) as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
-      for row in reader:
+      for idx, row in enumerate(reader):
         # Everything in the row except for 'talk_name' will be a translation.
         # Missing/incomplete translations will contain the string "__NULL__" or
         # "_ _ NULL _ _".
-        yield {
+        yield idx, {
             'translations': {
                 lang: text
                 for lang, text in six.iteritems(row)

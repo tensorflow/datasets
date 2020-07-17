@@ -3,7 +3,7 @@
 # Setup virtualenv
 # create_virtualenv my_new_env
 # or
-# create_virtualenv my_new_env python2.7
+# create_virtualenv my_new_env python3.6
 function create_virtualenv() {
   local env_name=$1
   local env_python=${2:-python3.6}
@@ -21,9 +21,6 @@ function install_tf() {
   if [[ "$version" == "tf-nightly"  ]]
   then
     pip install -q tf-nightly;
-  elif [[ "$version" == "tf2"  ]]
-  then
-    pip install -q "tf-nightly-2.0-preview"
   else
     pip install -q "tensorflow==$version"
   fi

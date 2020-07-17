@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """LSUN dataset.
 
 Large scene understanding dataset.
@@ -24,12 +25,11 @@ from __future__ import print_function
 
 import io
 import os
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
-LSUN_URL = "http://lsun.cs.princeton.edu/htbin/download.cgi?tag=latest&category=%s&set=%s"
-LSUN_DATA_FILENAME = "lsun-%s-%s.zip"
+LSUN_URL = "http://dl.yf.io/lsun/scenes/%s_%s_lmdb.zip"
 
 _CITATION = """\
 @article{journals/corr/YuZSSX15,
@@ -50,20 +50,36 @@ _CITATION = """\
 """
 
 
+# From http://dl.yf.io/lsun/categories.txt minus "test"
+_CATEGORIES = [
+    "classroom",
+    "bedroom",
+    "bridge",
+    "church_outdoor",
+    "conference_room",
+    "dining_room",
+    "kitchen",
+    "living_room",
+    "restaurant",
+    "tower",
+]
+
+
+def _make_lmdb_dataset(path):
+  return tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
+
+
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
   BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name="classroom",
-          description="Classroom images.",
-          version="0.1.1",
-      ),
-      tfds.core.BuilderConfig(
-          name="bedroom",
-          description="Bedroom images.",
-          version="0.1.1",
-      )
+      tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
+          name=category,
+          description="Images of category %s" % category,
+          version=tfds.core.Version(
+              "3.0.0",
+              "New split API (https://tensorflow.org/datasets/splits)"),
+      ) for category in _CATEGORIES
   ]
 
   def _info(self):
@@ -74,7 +90,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
         }),
-        urls=["https://www.yf.io/p/lsun"],
+        homepage="https://www.yf.io/p/lsun",
         citation=_CITATION,
     )
 
@@ -86,14 +102,12 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=40,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["train"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "train")
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["val"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "val")
@@ -102,7 +116,8 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extracted_dir, file_path):
     with tf.Graph().as_default():
-      dataset = tf.contrib.data.LMDBDataset(
-          os.path.join(extracted_dir, file_path, "data.mdb"))
-      for _, jpeg_image in tfds.as_numpy(dataset):
-        yield {"image": io.BytesIO(jpeg_image)}
+      path = os.path.join(extracted_dir, file_path, "data.mdb")
+      dataset = _make_lmdb_dataset(path)
+      for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
+        record = {"image": io.BytesIO(jpeg_image)}
+        yield i, record

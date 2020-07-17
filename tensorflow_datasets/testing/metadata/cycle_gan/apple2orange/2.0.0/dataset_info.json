@@ -1,0 +1,162 @@
+{
+  "description": "Dataset with images from 2 classes (see config name for information on the specific class)", 
+  "location": {
+    "urls": [
+      "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+    ]
+  }, 
+  "name": "cycle_gan", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "78456409", 
+  "splits": [
+    {
+      "name": "testA", 
+      "numShards": "1", 
+      "shardLengths": [
+        "266"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "266"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "266"
+              }
+            }
+          }
+        ], 
+        "numExamples": "266"
+      }
+    }, 
+    {
+      "name": "testB", 
+      "numShards": "1", 
+      "shardLengths": [
+        "248"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "248"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "248"
+              }, 
+              "max": 1.0, 
+              "min": 1.0
+            }
+          }
+        ], 
+        "numExamples": "248"
+      }
+    }, 
+    {
+      "name": "trainA", 
+      "numShards": "10", 
+      "shardLengths": [
+        "995"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "995"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "995"
+              }
+            }
+          }
+        ], 
+        "numExamples": "995"
+      }
+    }, 
+    {
+      "name": "trainB", 
+      "numShards": "10", 
+      "shardLengths": [
+        "1019"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1019"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1019"
+              }, 
+              "max": 1.0, 
+              "min": 1.0
+            }
+          }
+        ], 
+        "numExamples": "1019"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "2.0.0"
+}

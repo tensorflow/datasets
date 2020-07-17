@@ -1,0 +1,193 @@
+{
+  "citation": "@article{zhai2019visual,\n        title={The Visual Task Adaptation Benchmark},\n        author={Xiaohua Zhai and Joan Puigcerver and Alexander Kolesnikov and\n               Pierre Ruyssen and Carlos Riquelme and Mario Lucic and\n               Josip Djolonga and Andre Susano Pinto and Maxim Neumann and\n               Alexey Dosovitskiy and Lucas Beyer and Olivier Bachem and\n               Michael Tschannen and Marcin Michalski and Olivier Bousquet and\n               Sylvain Gelly and Neil Houlsby},\n                              year={2019},\n                              eprint={1910.04867},\n                              archivePrefix={arXiv},\n                              primaryClass={cs.CV},\n                              url = {https://arxiv.org/abs/1910.04867}\n                          }",
+  "description": "\n        The Dmlab dataset contains frames observed by the agent acting in the\n        DeepMind Lab environment, which are annotated by the distance between\n        the agent and various objects present in the environment. The goal is to\n        is to evaluate the ability of a visual model to reason about distances\n        from the visual input in 3D environments. The Dmlab dataset consists of\n        360x480 color images in 6 classes. The classes are\n        {close, far, very far} x {positive reward, negative reward}\n        respectively.",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/task_adaptation"
+    ]
+  },
+  "name": "dmlab",
+  "schema": {
+    "feature": [
+      {
+        "name": "filename",
+        "type": "BYTES"
+      },
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "360"
+            },
+            {
+              "size": "480"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "3017022789",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "2842",
+        "2842",
+        "2842",
+        "2842",
+        "2841",
+        "2842",
+        "2842",
+        "2842"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "22735"
+              }
+            },
+            "name": "filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "22735"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "22735"
+              },
+              "max": 5.0
+            }
+          }
+        ],
+        "numExamples": "22735"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4096",
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4096",
+        "4097",
+        "4097",
+        "4097",
+        "4097"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "65550"
+              }
+            },
+            "name": "filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "65550"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "65550"
+              },
+              "max": 5.0
+            }
+          }
+        ],
+        "numExamples": "65550"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "2828",
+        "2829",
+        "2829",
+        "2828",
+        "2828",
+        "2829",
+        "2829",
+        "2828"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "22628"
+              }
+            },
+            "name": "filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "22628"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "22628"
+              },
+              "max": 5.0
+            }
+          }
+        ],
+        "numExamples": "22628"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "2.0.0"
+}

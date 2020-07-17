@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Module to use to extract archives. No business logic."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import concurrent.futures
 import contextlib
 import gzip
 import io
@@ -27,10 +29,10 @@ import tarfile
 import uuid
 import zipfile
 
-import concurrent.futures
+from absl import logging
 import promise
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
@@ -85,11 +87,24 @@ class _Extractor(object):
     """Returns `to_path` once resource has been extracted there."""
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
+    path = None
+    dst_path = None  # To avoid undefined variable if exception is raised
     try:
       for path, handle in iter_archive(from_path, method):
-        _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
+        path = tf.compat.as_text(path)
+        dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
+        _copy(handle, dst_path)
     except BaseException as err:
-      msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)
+      msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
+          from_path, to_path, path, err)
+      # Check if running on windows
+      if os.name == 'nt' and dst_path and len(dst_path) > 250:
+        msg += (
+            '\n'
+            'On windows, path lengths greater than 260 characters may '
+            'result in an error. See the doc to remove the limiration: '
+            'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
+        )
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
@@ -113,9 +128,10 @@ def _copy(src_file, dest_path):
 
 def _normpath(path):
   path = os.path.normpath(path)
-  if path.startswith('.') or os.path.isabs(path):
-    raise UnsafeArchiveError('Archive at %s is not safe.' % path)
-  if path.endswith('~') or os.path.basename(path).startswith('.'):
+  if (path.startswith('.')
+      or os.path.isabs(path)
+      or path.endswith('~')
+      or os.path.basename(path).startswith('.')):
     return None
   return path
 
@@ -129,22 +145,37 @@ def _open_or_pass(path_or_fobj):
     yield path_or_fobj
 
 
-def iter_tar(arch_f, gz=False):
-  """Iter over tar archive, yielding (path, object-like) tuples."""
-  read_type = 'r:gz' if gz else 'r:'
+def iter_tar(arch_f, stream=False):
+  """Iter over tar archive, yielding (path, object-like) tuples.
+
+  Args:
+    arch_f: File object of the archive to iterate.
+    stream: If True, open the archive in stream mode which allows for faster
+      processing and less temporary disk consumption, but random access to the
+      file is not allowed.
+
+  Yields:
+    (filepath, extracted_fobj) for each file in the archive.
+  """
+  read_type = 'r' + ('|' if stream else ':') + '*'
+
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
-    for member in tar.getmembers():
+    for member in tar:
+      if stream and (member.islnk() or member.issym()):
+        # Links cannot be dereferenced in stream mode.
+        logging.warning('Skipping link during extraction: %s', member.name)
+        continue
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
-        path = _normpath(member.path)
+        path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
           continue
         yield [path, extract_file]
 
 
-def iter_tar_gz(arch_f):
-  return iter_tar(arch_f, gz=True)
+def iter_tar_stream(arch_f):
+  return iter_tar(arch_f, stream=True)
 
 
 def iter_gzip(arch_f):
@@ -160,26 +191,38 @@ def iter_bzip2(arch_f):
 
 
 def iter_zip(arch_f):
+  """Iterate over zip archive."""
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
-      if extract_file:  # File with data (not directory):
-        path = _normpath(member.filename)
-        if not path:
-          continue
-        yield [path, extract_file]
+      if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
+        continue
+      path = _normpath(member.filename)
+      if not path:
+        continue
+      yield [path, extract_file]
 
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.TAR: iter_tar,
-    resource_lib.ExtractMethod.TAR_GZ: iter_tar_gz,
-    resource_lib.ExtractMethod.GZIP: iter_gzip,
-    resource_lib.ExtractMethod.ZIP: iter_zip,
     resource_lib.ExtractMethod.BZIP2: iter_bzip2,
+    resource_lib.ExtractMethod.GZIP: iter_gzip,
+    resource_lib.ExtractMethod.TAR: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
+    resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
+    resource_lib.ExtractMethod.ZIP: iter_zip,
 }
 
 
 def iter_archive(path, method):
-  """Yields (path_in_archive, f_obj) for archive at path using `tfds.download.ExtractMethod`."""  # pylint: disable=line-too-long
+  """Iterate over an archive.
+
+  Args:
+    path: `str`, archive path
+    method: `tfds.download.ExtractMethod`, extraction method
+
+  Returns:
+    An iterator of `(path_in_archive, f_obj)`
+  """
   return _EXTRACT_METHODS[method](path)

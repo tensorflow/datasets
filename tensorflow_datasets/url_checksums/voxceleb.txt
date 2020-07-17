@@ -1,0 +1,1 @@
+http://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/iden_split.txt 4912512 3c1d792d4058861cd476a27cc942c824f7e9df812864115a7c2b12df97edfbbf

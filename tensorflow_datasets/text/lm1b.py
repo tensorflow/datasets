@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """The Language Model 1 Billion dataset."""
 
 from __future__ import absolute_import
@@ -22,8 +23,7 @@ from __future__ import print_function
 import os
 
 from absl import logging
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -67,7 +67,7 @@ _HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
 class Lm1bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Lm1b."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for Lm1b.
 
@@ -77,7 +77,11 @@ class Lm1bConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(Lm1bConfig, self).__init__(**kwargs)
+    super(Lm1bConfig, self).__init__(
+        version=tfds.core.Version(
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -95,12 +99,10 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       Lm1bConfig(
           name="plain_text",
-          version="0.0.1",
           description="Plain text",
       ),
       Lm1bConfig(
           name="bytes",
-          version="0.0.1",
           description=("Uses byte-level text encoding with "
                        "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -108,7 +110,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords8k",
-          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -117,7 +118,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords32k",
-          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -136,12 +136,12 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
                     encoder_config=self.builder_config.text_encoder_config),
         }),
         supervised_keys=("text", "text"),
-        urls=["http://www.statmt.org/lm-benchmark/"],
+        homepage="http://www.statmt.org/lm-benchmark/",
         citation=_CITATION,
     )
 
   def _vocab_text_gen(self, training_files):
-    for ex in self._generate_examples(training_files):
+    for _, ex in self._generate_examples(training_files):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -157,11 +157,9 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={"files": train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=50,
             gen_kwargs={"files": test_files}),
     ]
 
@@ -169,7 +167,8 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
       with tf.io.gfile.GFile(filepath) as f:
-        for line in f:
-          yield {
+
+        for idx, line in enumerate(f):
+          yield "%s_%d" % (os.path.basename(filepath), idx), {
               "text": line.strip(),
           }

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """MovingMNIST."""
 
 from __future__ import absolute_import
@@ -20,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.video.moving_sequence import image_as_moving_sequence  # pylint: disable=unused-import
 
@@ -55,7 +56,8 @@ for generating training/validation data from the MNIST dataset.
 class MovingMnist(tfds.core.GeneratorBasedBuilder):
   """MovingMnist."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version(
+      "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -65,7 +67,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
             "image_sequence": tfds.features.Video(
                 shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 
@@ -78,7 +80,6 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=5,
             gen_kwargs=dict(data_path=data_path)),
     ]
 
@@ -95,5 +96,5 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
       images = np.load(fp)
     images = np.transpose(images, (1, 0, 2, 3))
     images = np.expand_dims(images, axis=-1)
-    for sequence in images:
-      yield dict(image_sequence=sequence)
+    for i, sequence in enumerate(images):
+      yield i, dict(image_sequence=sequence)

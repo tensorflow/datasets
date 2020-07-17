@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """TensorFlow utils."""
 
 from __future__ import absolute_import
@@ -23,7 +24,7 @@ import collections
 import contextlib
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 
 # Struct containing a graph for the TFGraphRunner
@@ -60,6 +61,8 @@ class TFGraphRunner(object):
     output = graph_runner.run(tf.sigmoid, np.ones(shape=(5,)))
 
   """
+
+  __slots__ = ['_graph_run_cache']
 
   def __init__(self):
     """Constructor."""

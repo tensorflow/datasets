@@ -26,16 +26,20 @@ pushd $TMP_DIR
 echo "Cloning tensorflow/datasets and checking out commit $GIT_COMMIT_ID"
 git clone https://github.com/tensorflow/datasets.git
 cd datasets
+
+if [ "$GIT_COMMIT_ID" != "nightly" ]
+then
+  # For stable version, we overwrite `version.py` by `version_stable.py` to
+  # remove the `-nightly` suffix.
+  mv tensorflow_datasets/version_stable.py tensorflow_datasets/version.py
+fi
 git checkout $GIT_COMMIT_ID
 
-setup_env tfds_py2 python2.7
-
 echo "Building source distribution"
-python setup.py sdist $SETUP_ARGS
 
 # Build the wheels
-python setup.py bdist_wheel $SETUP_ARGS
 setup_env tfds_py3 python3.6
+python setup.py sdist $SETUP_ARGS
 python setup.py bdist_wheel $SETUP_ARGS
 
 # Publish to PyPI

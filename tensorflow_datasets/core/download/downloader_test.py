@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for downloader."""
 
 from __future__ import absolute_import
@@ -25,7 +26,7 @@ import os
 import tempfile
 
 from absl.testing import absltest
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -39,6 +40,14 @@ class _FakeResponse(object):
     self.cookies = cookies or {}
     self.headers = headers or {'Content-length': 12345}
     self.status_code = status_code
+    # For urllib codepath
+    self.read = self.raw.read
+
+  def __enter__(self):
+    return self
+
+  def __exit__(self, *args):
+    return
 
   def iter_content(self, chunk_size):
     del chunk_size
@@ -49,6 +58,7 @@ class _FakeResponse(object):
 class DownloaderTest(testing.TestCase):
 
   def setUp(self):
+    super(DownloaderTest, self).setUp()
     self.addCleanup(absltest.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
@@ -66,31 +76,26 @@ class DownloaderTest(testing.TestCase):
     ).start()
     self.downloader._pbar_url = absltest.mock.MagicMock()
     self.downloader._pbar_dl_size = absltest.mock.MagicMock()
-
-    def write_fake_ftp_result(_, filename):
-      with open(filename, 'wb') as result:
-        result.write(self.response)
-
     absltest.mock.patch.object(
         downloader.urllib.request,
-        'urlretrieve',
-        write_fake_ftp_result,
+        'urlopen',
+        lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
 
   def test_ok(self):
     promise = self.downloader.download(self.url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
-    with open(self.path, 'rb') as result:
+    url_info = promise.get()
+    self.assertEqual(url_info.checksum, self.resp_checksum)
+    with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
-    with open(self.path, 'rb') as result:
+    url_info = promise.get()
+    self.assertEqual(url_info.checksum, self.resp_checksum)
+    with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
@@ -116,22 +121,12 @@ class DownloaderTest(testing.TestCase):
     with self.assertRaises(downloader.DownloadError):
       promise.get()
 
-  def test_kaggle_api(self):
-    fname = 'a.csv'
-    with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
-      promise = self.downloader.download('kaggle://some-competition/a.csv',
-                                         self.tmp_dir)
-      _, dl_size = promise.get()
-      self.assertEqual(dl_size, len(fname))
-      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
-        self.assertEqual(fname, f.read())
-
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
-    with open(self.path, 'rb') as result:
+    url_info = promise.get()
+    self.assertEqual(url_info.checksum, self.resp_checksum)
+    with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
@@ -139,7 +134,7 @@ class DownloaderTest(testing.TestCase):
     error = downloader.urllib.error.URLError('Problem serving file.')
     absltest.mock.patch.object(
         downloader.urllib.request,
-        'urlretrieve',
+        'urlopen',
         side_effect=error,
     ).start()
     url = 'ftp://example.com/foo.tar.gz'

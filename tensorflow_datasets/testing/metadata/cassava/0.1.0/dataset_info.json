@@ -1,0 +1,177 @@
+{
+  "citation": "@misc{mwebaze2019icassava,\n    title={iCassava 2019Fine-Grained Visual Categorization Challenge},\n    author={Ernest Mwebaze and Timnit Gebru and Andrea Frome and Solomon Nsumba and Jeremy Tusubira},\n    year={2019},\n    eprint={1908.02900},\n    archivePrefix={arXiv},\n    primaryClass={cs.CV}\n}\n",
+  "description": "Cassava consists of leaf images for the cassava plant depicting healthy and\nfour (4) disease conditions; Cassava Mosaic Disease (CMD), Cassava Bacterial\nBlight (CBB), Cassava Greem Mite (CGM) and Cassava Brown Streak Disease (CBSD).\nDataset consists of a total of 9430 labelled images.\nThe 9430 labelled images are split into a training set (5656), a test set(1885)\nand a validation set (1889). The number of images per class are unbalanced with\nthe two disease classes CMD and CBSD having 72% of the images.\n",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/cassava-disease/overview"
+    ]
+  },
+  "name": "cassava",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "image/filename",
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "1354096203",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "471",
+        "471",
+        "472",
+        "471"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1885"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1885"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1885"
+              },
+              "max": 4.0
+            }
+          }
+        ],
+        "numExamples": "1885"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "5",
+      "shardLengths": [
+        "707",
+        "707",
+        "707",
+        "707",
+        "707",
+        "707",
+        "707",
+        "707"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5656"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5656"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5656"
+              },
+              "max": 4.0
+            }
+          }
+        ],
+        "numExamples": "5656"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "472",
+        "472",
+        "473",
+        "472"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1889"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1889"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1889"
+              },
+              "max": 4.0
+            }
+          }
+        ],
+        "numExamples": "1889"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

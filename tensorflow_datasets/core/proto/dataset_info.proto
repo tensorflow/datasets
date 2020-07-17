@@ -26,9 +26,15 @@ message SplitInfo {
 
   // The number of shards in this splits on-disk representation.
   int64 num_shards = 2;
+  // The number of examples in each shard.
+  repeated int64 shard_lengths = 4;
+  // The number of bytes in the split.
+  int64 num_bytes = 5;
 
   // The concrete statistics about this split.
   tensorflow.metadata.v0.DatasetFeatureStatistics statistics = 3;
+
+  // Next available: 6.
 }
 
 // This message indicates which feature in the dataset schema is the input and
@@ -55,8 +61,12 @@ message DatasetInfo {
   // A citation string if one exists for this dataset.
   string citation = 3;
 
+  // DEPRECATED
   // *Approximate* size in bytes of this dataset on disk.
-  int64 size_in_bytes = 4;
+  int64 size_in_bytes = 4 [deprecated=true];
+
+  // Size in bytes of downloaded files.
+  int64 download_size = 12;
 
   // Canonical location of the dataset.
   DatasetLocation location = 5;
@@ -77,5 +87,5 @@ message DatasetInfo {
 
   RedistributionInfo redistribution_info = 11;
 
-  // Next available: 12
+  // Next available: 13
 }

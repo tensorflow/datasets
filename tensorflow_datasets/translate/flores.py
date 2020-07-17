@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Facebook Low Resource (FLoRes) machine translation benchmark dataset."""
 
 from __future__ import absolute_import
@@ -21,8 +22,7 @@ from __future__ import print_function
 
 import collections
 
-import tensorflow as tf
-from tensorflow_datasets.core import api_utils
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -52,7 +52,7 @@ TranslateData = collections.namedtuple("TranslateData",
 class FloresConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLoRes."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self,
                text_encoder_config=None,
                language_pair=(None, None),
@@ -75,14 +75,19 @@ class FloresConfig(tfds.core.BuilderConfig):
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
     super(FloresConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        name=name,
+        description=description,
+        version=tfds.core.Version(
+            "1.1.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
     # Validate language pair.
     assert "en" in language_pair, (
         "Config language pair must contain `en`, got: %s",
-        self.builder_config.language_pair)
+        language_pair)
     source, target = language_pair
     non_en = source if target == "en" else target
     assert non_en in ["ne", "si"], (
@@ -97,11 +102,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       FloresConfig(
           language_pair=("ne", "en"),
-          version="0.0.3",
       ),
       FloresConfig(
           language_pair=("si", "en"),
-          version="0.0.3",
       ),
   ]
 
@@ -114,12 +117,12 @@ class Flores(tfds.core.GeneratorBasedBuilder):
             languages=self.builder_config.language_pair,
             encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=(source, target),
-        urls=["https://github.com/facebookresearch/flores/"],
+        homepage="https://github.com/facebookresearch/flores/",
         citation=_CITATION,
     )
 
   def _vocab_text_gen(self, files, language):
-    for ex in self._generate_examples(**files):
+    for _, ex in self._generate_examples(**files):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
@@ -148,11 +151,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=files["dev"]),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=files["devtest"]),
     ]
 
@@ -169,8 +170,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
             target_file)
 
     source, target = self.builder_config.language_pair
-    for l1, l2 in zip(source_sentences, target_sentences):
+    for idx, (l1, l2) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result

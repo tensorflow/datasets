@@ -4,9 +4,8 @@ Thanks for thinking about contributing to our library !
 
 
 ## Before you start
+
 * Please accept the [Contributor License Agreement](https://cla.developers.google.com) (see below)
-* [Ask here](https://github.com/tensorflow/datasets/issues/142) to be added to
-  the list of collaborators so that issues can be assigned to you.
 * Comment on the issue that you plan to work on so we can assign it to you and
   there isn't unnecessary duplication of work.
 * When you plan to work on something larger (for example, adding new
@@ -59,7 +58,7 @@ require:
 
 * Subclassing
 [`tfds.testing.TestCase`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py)
-* Calling `tf.compat.v1.enable_eager_execution()` at the top-level just after
+* Calling `tf.enable_v2_behavior()` at the top-level just after
   the imports. This is to enable testing against TF 2.0.
 * Using the `@tfds.testing.run_in_graph_and_eager_modes()` decorator for all
   functionality that touches TF ops. To evaluate Tensor values in a way that

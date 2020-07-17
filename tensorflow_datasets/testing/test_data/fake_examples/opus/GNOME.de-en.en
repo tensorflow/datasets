@@ -1,0 +1,15 @@
+Accerciser
+Give your application an accessibility workout
+Accerciser Accessibility Explorer
+The default plugin layout for the bottom panel
+The default plugin layout for the top panel
+A list of plugins that are disabled by default
+Highlight duration
+The duration of the highlight box when selecting accessible nodes
+Highlight border color
+The color and opacity of the highlight border.
+Highlight fill color
+The color and opacity of the highlight fill.
+API Browser
+Browse the various methods of the current accessible
+Hide private attributes

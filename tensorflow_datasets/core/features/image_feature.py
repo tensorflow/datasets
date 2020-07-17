@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Image feature."""
 
 from __future__ import absolute_import
@@ -24,7 +25,7 @@ import os
 
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
@@ -40,36 +41,52 @@ ACCEPTABLE_CHANNELS = {
     'jpeg': (0, 1, 3),
 }
 
+ACCEPTABLE_DTYPES = {
+    'png': [tf.uint8, tf.uint16],
+    'jpeg': [tf.uint8],
+}
+
 
 class Image(feature.FeatureConnector):
   """`FeatureConnector` for images.
 
-  Input: The image connector accepts as input:
-    * path to a {bmp,gif,jpeg,png} image.
-    * uint8 array representing an image.
+  During `_generate_examples`, the feature connector accept as input any of:
+
+    * `str`: path to a {bmp,gif,jpeg,png} image (ex: `/path/to/img.png`).
+    * `np.array`: 3d `np.uint8` array representing an image.
+    * A file object containing the png or jpeg encoded image string (ex:
+      `io.BytesIO(encoded_img_bytes)`)
 
   Output:
-    image: tf.Tensor of type tf.uint8 and shape [height, width, num_channels]
-    for BMP, JPEG, and PNG images and shape [num_frames, height, width, 3] for
+
+    `tf.Tensor` of type `tf.uint8` and shape `[height, width, num_channels]`
+    for BMP, JPEG, and PNG images and shape `[num_frames, height, width, 3]` for
     GIF images.
 
   Example:
-    * In the DatasetInfo object:
-      features=features.FeaturesDict({
-          'input': features.Image(),
-          'target': features.Image(shape=(None, None, 1),
+
+    * In the `tfds.core.DatasetInfo` object:
+
+    ```python
+    features=features.FeaturesDict({
+        'input': features.Image(),
+        'target': features.Image(shape=(None, None, 1),
                                    encoding_format='png'),
-      })
+    })
+    ```
 
     * During generation:
-      yield {
-          'input': 'path/to/img.jpg',
-          'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
-      }
+
+    ```python
+    yield {
+        'input': 'path/to/img.jpg',
+        'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
+    }
+    ```
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, shape=None, encoding_format=None):
+  def __init__(self, shape=None, dtype=None, encoding_format=None):
     """Construct the connector.
 
     Args:
@@ -79,6 +96,8 @@ class Image(feature.FeatureConnector):
         For other images: (height, width, channels). height and width can be
           None. See `tf.image.encode_*` for doc on channels parameter.
         Defaults to (None, None, 3).
+      dtype: tf.uint16 or tf.uint8 (default).
+        tf.uint16 can be used only with png encoding_format
       encoding_format: 'jpeg' or 'png' (default). Format to serialize np.ndarray
         images on disk.
         If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
@@ -89,10 +108,22 @@ class Image(feature.FeatureConnector):
     """
     self._encoding_format = None
     self._shape = None
+    self._runner = None
+    self._dtype = None
 
     # Set and validate values
     self.set_encoding_format(encoding_format or 'png')
     self.set_shape(shape or (None, None, 3))
+    self.set_dtype(dtype or tf.uint8)
+
+  def set_dtype(self, dtype):
+    """Update the dtype."""
+    dtype = tf.as_dtype(dtype)
+    acceptable_dtypes = ACCEPTABLE_DTYPES[self._encoding_format]
+    if dtype not in acceptable_dtypes:
+      raise ValueError('Acceptable `dtype` for %s: %s (was %s)' % (
+          self._encoding_format, acceptable_dtypes, dtype))
+    self._dtype = dtype
 
   def set_encoding_format(self, encoding_format):
     """Update the encoding format."""
@@ -112,25 +143,26 @@ class Image(feature.FeatureConnector):
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
-    return feature.TensorInfo(shape=self._shape, dtype=tf.uint8)
+    return feature.TensorInfo(shape=self._shape, dtype=self._dtype)
 
   def get_serialized_info(self):
     # Only store raw image (includes size).
-    return tf.io.FixedLenFeature(tuple(), tf.string)
-
-  @utils.memoized_property
-  def _runner(self):
-    # TODO(epot): Should clear the runner once every image has been encoded.
-    # TODO(epot): Better support for multi-shape image (instead of re-building
-    # a new graph every time)
-    return utils.TFGraphRunner()
+    return feature.TensorInfo(shape=(), dtype=tf.string)
 
   def _encode_image(self, np_image):
     """Returns np_image encoded as jpeg or png."""
-    if np_image.dtype != np.uint8:
-      raise ValueError('Image should be uint8. Detected: %s.' % np_image.dtype)
+    if not self._runner:
+      self._runner = utils.TFGraphRunner()
+    if np_image.dtype != self._dtype.as_numpy_dtype:
+      raise ValueError('Image dtype should be %s. Detected: %s.' % (
+          self._dtype.as_numpy_dtype, np_image.dtype))
     utils.assert_shape_match(np_image.shape, self._shape)
     return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
+
+  def __getstate__(self):
+    state = self.__dict__.copy()
+    state['_runner'] = None
+    return state
 
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""
@@ -146,7 +178,7 @@ class Image(feature.FeatureConnector):
   def decode_example(self, example):
     """Reconstruct the image from the tf example."""
     img = tf.image.decode_image(
-        example, channels=self._shape[-1], dtype=tf.uint8)
+        example, channels=self._shape[-1], dtype=self._dtype)
     img.set_shape(self._shape)
     return img
 

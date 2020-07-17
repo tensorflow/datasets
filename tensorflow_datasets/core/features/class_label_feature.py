@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """ClassLabel feature."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import os
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
 
 
-class ClassLabel(feature.FeatureConnector):
+class ClassLabel(feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
   @api_utils.disallow_positional_args
@@ -31,6 +36,7 @@ class ClassLabel(feature.FeatureConnector):
 
     There are 3 ways to define a ClassLabel, which correspond to the 3
     arguments:
+
      * `num_classes`: create 0 to (num_classes-1) labels
      * `names`: a list of label strings
      * `names_file`: a file containing the list of labels.
@@ -44,22 +50,26 @@ class ClassLabel(feature.FeatureConnector):
       names_file: `str`, path to a file with names for the integer
         classes, one per line.
     """
+    super(ClassLabel, self).__init__(shape=(), dtype=tf.int64)
+
     self._num_classes = None
     self._str2int = None
     self._int2str = None
 
     # The label is explicitly set as undefined (no label defined)
-    if not sum(bool(a) for a in (num_classes, names, names_file)):
+    if all(a is None for a in (num_classes, names, names_file)):
       return
 
-    if sum(bool(a) for a in (num_classes, names, names_file)) != 1:
+    if sum(a is not None for a in (num_classes, names, names_file)) != 1:
       raise ValueError(
           "Only a single argument of ClassLabel() should be provided.")
 
-    if num_classes:
+    if num_classes is not None:
       self._num_classes = num_classes
+    elif names is not None:
+      self.names = names
     else:
-      self.names = names or _load_names_from_file(names_file)
+      self.names = _load_names_from_file(names_file)
 
   @property
   def num_classes(self):
@@ -83,6 +93,9 @@ class ClassLabel(feature.FeatureConnector):
     # Set-up [new] names
     self._int2str = int2str
     self._str2int = {name: i for i, name in enumerate(self._int2str)}
+    if len(self._int2str) != len(self._str2int):
+      raise ValueError(
+          "Some label names are duplicated. Each label name should be unique.")
 
     # If num_classes has been defined, ensure that num_classes and names match
     num_classes = len(self._str2int)
@@ -125,9 +138,6 @@ class ClassLabel(feature.FeatureConnector):
       raise ValueError("Invalid integer class label %d" % int_value)
     return tf.compat.as_text(str(int_value))
 
-  def get_tensor_info(self):
-    return feature.TensorInfo(shape=(), dtype=tf.int64)
-
   def encode_example(self, example_data):
     if self._num_classes is None:
       raise ValueError(
@@ -144,9 +154,6 @@ class ClassLabel(feature.FeatureConnector):
       raise ValueError("Class label %d greater than configured num_classes %d" %
                        (example_data, self._num_classes))
     return example_data
-
-  def decode_example(self, tfexample_data):
-    return tf.reshape(tfexample_data, tuple())
 
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""

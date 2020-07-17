@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Titanic dataset.
-"""
+# Lint as: python3
+"""Titanic dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -23,7 +23,7 @@ from __future__ import print_function
 import collections
 import csv
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -97,8 +97,8 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
-
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version(
+      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -110,7 +110,7 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
                          for name, (dtype, func) in FEATURE_DICT.items()}
         }),
         supervised_keys=("features", "survived"),
-        urls=["https://www.openml.org/d/40945"],
+        homepage="https://www.openml.org/d/40945",
         citation=_CITATION
         )
 
@@ -121,7 +121,6 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "file_path": path
             }),
@@ -139,13 +138,12 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
 
     with tf.io.gfile.GFile(file_path) as f:
       raw_data = csv.DictReader(f)
-      for row in raw_data:
+      for i, row in enumerate(raw_data):
         survive_val = row.pop("survived")
-        yield {
+        yield i, {
             "survived": convert_to_label(survive_val, _SURVIVED_DICT),
             "features": {
                 name: FEATURE_DICT[name][1](value)
                 for name, value in row.items()
             }
         }
-

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """Tests for tensorflow_datasets.core.features.class_label_feature."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
@@ -90,6 +91,18 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid'):
       labels.int2str(10)
 
+  def test_empty(self):
+    # Encoding should works if num_classes=0
+    labels = features.ClassLabel(num_classes=0)
+    self.assertEqual(0, labels.num_classes)
+    self.assertEqual(0, len(labels.names))
+    self.assertEqual(-1, labels.encode_example(-1))
+
+    labels = features.ClassLabel(names=[])
+    self.assertEqual(0, labels.num_classes)
+    self.assertEqual(0, len(labels.names))
+    self.assertEqual(-1, labels.encode_example(-1))
+
   def test_str_classes(self):
     labels = features.ClassLabel(names=[
         'label3',
@@ -150,6 +163,12 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     with self.assertRaisesWithPredicateMatch(
         ValueError, 'number of names do not match the defined num_classes'):
       labels.names = ['label3', 'label1']
+
+  def test_duplicate_names(self):
+
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'label names are duplicated'):
+      features.ClassLabel(names=['label1', 'label1', 'label2'])
 
 
 if __name__ == '__main__':

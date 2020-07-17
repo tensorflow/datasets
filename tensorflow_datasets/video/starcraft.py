@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Lint as: python3
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
 from __future__ import absolute_import
@@ -20,9 +21,8 @@ from __future__ import division
 from __future__ import print_function
 
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"
@@ -50,10 +50,14 @@ _CITATION = """\
 
 
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
+  """Config for StarcraftVideo dataset."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
-    super(StarcraftVideoConfig, self).__init__(**kwargs)
+    super(StarcraftVideoConfig, self).__init__(
+        version=tfds.core.Version(
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+        **kwargs)
     self.map_name = map_name
     self.resolution = resolution
     self.size_in_gb = size_in_gb
@@ -67,7 +71,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="brawl_64",
           description="Brawl map with 64x64 resolution.",
           map_name="Brawl",
-          version="0.1.2",
           resolution=64,
           size_in_gb=6.3,
       ),
@@ -75,7 +78,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="brawl_128",
           description="Brawl map with 128x128 resolution.",
           map_name="Brawl",
-          version="0.1.2",
           resolution=128,
           size_in_gb=20.7,
       ),
@@ -83,7 +85,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="collect_mineral_shards_64",
           description="CollectMineralShards map with 64x64 resolution.",
           map_name="CollectMineralShards",
-          version="0.1.2",
           resolution=64,
           size_in_gb=6.3,
       ),
@@ -91,7 +92,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="collect_mineral_shards_128",
           description="CollectMineralShards map with 128x128 resolution.",
           map_name="CollectMineralShards",
-          version="0.1.2",
           resolution=128,
           size_in_gb=20.7,
       ),
@@ -99,7 +99,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="move_unit_to_border_64",
           description="MoveUnitToBorder map with 64x64 resolution.",
           map_name="MoveUnitToBorder",
-          version="0.1.2",
           resolution=64,
           size_in_gb=5.8,
       ),
@@ -107,7 +106,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="move_unit_to_border_128",
           description="MoveUnitToBorder map with 128x128 resolution.",
           map_name="MoveUnitToBorder",
-          version="0.1.2",
           resolution=128,
           size_in_gb=20.7,
       ),
@@ -115,7 +113,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="road_trip_with_medivac_64",
           description="RoadTripWithMedivac map with 64x64 resolution.",
           map_name="RoadTripWithMedivac",
-          version="0.1.2",
           resolution=64,
           size_in_gb=2.4,
       ),
@@ -123,7 +120,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="road_trip_with_medivac_128",
           description="RoadTripWithMedivac map with 128x128 resolution.",
           map_name="RoadTripWithMedivac",
-          version="0.1.2",
           resolution=128,
           size_in_gb=7.9,
       ),
@@ -140,7 +136,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description="This data set contains videos generated from Starcraft.",
         features=features,
-        urls=["https://storage.googleapis.com/scv_dataset/README.html"],
+        homepage="https://storage.googleapis.com/scv_dataset/README.html",
         citation=_CITATION,
     )
 
@@ -161,7 +157,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "files": [
                     download for name, download in downloaded_urls.items()
@@ -170,11 +165,9 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={"files": [downloaded_urls["test"]]}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={"files": [downloaded_urls["valid"]]}),
     ]
 
@@ -210,7 +203,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
-      ds = tf.data.TFRecordDataset(files)
+      ds = tf.data.TFRecordDataset(sorted(files))
       ds = ds.map(
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -218,9 +211,11 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())
         try:
+          i = 0
           while True:
             video = sess.run(iterator)
-            yield {"rgb_screen": video}
+            yield i, {"rgb_screen": video}
+            i += 1
 
         except tf.errors.OutOfRangeError:
           # End of file.

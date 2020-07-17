@@ -1,0 +1,2 @@
+https://zenodo.org/record/3743844/files/FUSS_ssdata.tar.gz 8892152218 7f51e4231661aa99150c51d42d3fad30a381a38416dba02c3b81fe217188d005
+https://zenodo.org/record/3743844/files/FUSS_ssdata_reverb.tar.gz 7890709248 474012562eb7539f8d90acb759584907119606ac396b588d4c99822b73a86b67

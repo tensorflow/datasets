@@ -1,0 +1,103 @@
+{
+  "citation": "@article{Das:2012:GAB:2161007.2161320,\n  author = {Das, Nibaran and Sarkar, Ram and Basu, Subhadip and Kundu, Mahantapas \n            and Nasipuri, Mita and Basu, Dipak Kumar},\n  title = {A Genetic Algorithm Based Region Sampling for Selection of Local Features \n          in Handwritten Digit Recognition Application},\n  journal = {Appl. Soft Comput.},\n  issue_date = {May, 2012},\n  volume = {12},\n  number = {5},\n  month = may,\n  year = {2012},\n  issn = {1568-4946},\n  pages = {1592--1606},\n  numpages = {15},\n  url = {http://dx.doi.org/10.1016/j.asoc.2011.11.030},\n  doi = {10.1016/j.asoc.2011.11.030},\n  acmid = {2161320},\n  publisher = {Elsevier Science Publishers B. V.},\n  address = {Amsterdam, The Netherlands, The Netherlands},\n  keywords = {Feature selection, Genetic algorithm, N-Quality consensus, \n  Optimal local regions, Region sampling, Variable sized local regions},\n}\n@article{Das:2012:SFC:2240301.2240421,\n  author = {Das, Nibaran and Reddy, Jagan Mohan and Sarkar, Ram and Basu, Subhadip and Kundu, \n            Mahantapas and Nasipuri, Mita and Basu, Dipak Kumar},\n  title = {A Statistical-topological Feature Combination for Recognition of Handwritten Numerals},\n  journal = {Appl. Soft Comput.},\n  issue_date = {August, 2012},\n  volume = {12},\n  number = {8},\n  month = aug,\n  year = {2012},\n  issn = {1568-4946},\n  pages = {2486--2495},\n  numpages = {10},\n  url = {http://dx.doi.org/10.1016/j.asoc.2012.03.039},\n  doi = {10.1016/j.asoc.2012.03.039},\n  acmid = {2240421},\n  publisher = {Elsevier Science Publishers B. V.},\n  address = {Amsterdam, The Netherlands, The Netherlands},\n  keywords = {Character recognition, Feature combination, MPCA, PCA, SVM, Statistical, Topological},\n}\n", 
+  "description": "This dataset contains images of -\n  Handwritten Bangla numerals - balanced dataset of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600 images per class(per digit). \n  Handwritten Devanagari numerals - balanced dataset of total 3000 Devanagari numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). \n  Handwritten Telugu numerals - balanced dataset of total 3000 Telugu numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). \n\nCMATERdb is the pattern recognition database repository created at the 'Center for Microprocessor Applications for Training Education and Research' (CMATER) research lab, Jadavpur University, India.\n", 
+  "location": {
+    "urls": [
+      "https://code.google.com/archive/p/cmaterdb/"
+    ]
+  }, 
+  "name": "cmaterdb", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "290710", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "500"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "500"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "500"
+              }, 
+              "max": 9.0
+            }
+          }
+        ], 
+        "numExamples": "500"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2500"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2500"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2500"
+              }, 
+              "max": 9.0
+            }
+          }
+        ], 
+        "numExamples": "2500"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

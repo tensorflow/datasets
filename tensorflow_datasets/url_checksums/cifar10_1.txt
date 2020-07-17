@@ -1,0 +1,4 @@
+https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_v4_data.npy?raw=true 6208640 5aaedc268df8f4cffca2ac0cf9e608ae1897a8cddb630c7a850a2ea8f6558e75
+https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_v4_labels.npy?raw=true 8212 1f9544300ded199539b6662364ce7fe6c2e1ea9f87408f06db4b1a6184cffb18
+https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_v6_data.npy?raw=true 6144128 2997188e5816f5bd545dc77771b6227828c28146049fcecf3fa10775474cacc6
+https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_v6_labels.npy?raw=true 8128 ae40beda001693674edc94d925ee8268cfe68905f8f9aff800c8dcdfcd6c9448

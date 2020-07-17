@@ -1,0 +1,136 @@
+{
+  "citation": " @inproceedings{bossard14,\n  title = {Food-101 -- Mining Discriminative Components with Random Forests},\n  author = {Bossard, Lukas and Guillaumin, Matthieu and Van Gool, Luc},\n  booktitle = {European Conference on Computer Vision},\n  year = {2014}\n}\n", 
+  "description": "This dataset consists of 101 food categories, with 101'000 images. For each class, 250 manually reviewed test images are provided as well as 750 training images. On purpose, the training images were not cleaned, and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels.", 
+  "location": {
+    "urls": [
+      "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
+    ]
+  }, 
+  "name": "food101", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "4996278331", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "4", 
+      "shardLengths": [
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1579", 
+        "1578", 
+        "1578", 
+        "1578", 
+        "1578"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "101000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "101000"
+              }, 
+              "max": 100.0
+            }
+          }
+        ], 
+        "numExamples": "101000"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}
