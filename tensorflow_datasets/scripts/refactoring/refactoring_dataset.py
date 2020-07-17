@@ -1,6 +1,8 @@
 from absl import app
+from dataclasses import dataclass
 import os
 import inspect
+import pathlib
 import posixpath
 import shutil
 import tensorflow_datasets as tfds
@@ -34,19 +36,19 @@ _INIT_FILE = """\
 from tensorflow_datasets.{dataset_type}.{dataset_name}.{dataset_name} import {dataset_name_cls}
 """
 
+
+@dataclass
 class BuilderInfo:
+  '''Dataset metadata
+  dataset_file: path to dataset file
+  dataset_name: name of the dataset
+  dataset_type: type of the dataset
+  dataset_path: path to dataset type directory
   '''
-  dataset_file: path
+  dataset_file: pathlib.Path
   dataset_name: str
   dataset_type: str
-  dataset_path: path
-  '''
-
-  def __init__(self, dataset_file, dataset_name, dataset_type, dataset_path):
-    self.dataset_file = dataset_file
-    self.dataset_name = dataset_name
-    self.dataset_type = dataset_type
-    self.dataset_path = dataset_path
+  dataset_path: pathlib.Path
 
 
 def create_dirs(dataset_path: str) -> None:
@@ -76,7 +78,7 @@ def copy_checksum_file(dataset_info, dest_path) -> None:
 
 
 def copy_make_data_file(dataset_info, dest_path) -> None:
-  """Copy fake data genneration script file"""
+  """Copy fake data generation script file"""
   src_fake_data_script_path = f'{FAKE_DATA_SCRIPT_DIR}/{dataset_info.dataset_name}.py'
   if os.path.exists(src_fake_data_script_path):
     shutil.copy(src_fake_data_script_path,
@@ -94,14 +96,14 @@ def copy_fake_data_dir(dataset_info, dest_path) -> None:
 
 def copy_dataset_file(dataset_info, dest_path) -> None:
   """Copy my_dataset.py file"""
-
   shutil.copy(dataset_info.dataset_file,
               os.path.join(dest_path, f'{dataset_info.dataset_name}.py'))
 
 
 def copy_dataset_test_file(dataset_info, dest_path) -> None:
   """Copy my_dataset_test.py file"""
-  src_dataset_test_path = f'{dataset_info.dataset_path}/{dataset_info.dataset_name}_test.py'
+  test_file = os.path.splitext(posixpath.basename(dataset_info.dataset_file))[0]
+  src_dataset_test_path = f'{dataset_info.dataset_path}/{test_file}_test.py'
   if os.path.exists(src_dataset_test_path):
     shutil.copy(src_dataset_test_path,
                 os.path.join(dest_path, f'{dataset_info.dataset_name}_test.py'))
@@ -109,25 +111,24 @@ def copy_dataset_test_file(dataset_info, dest_path) -> None:
 
 def extract_info(builder_cls: Type[tfds.core.DatasetBuilder]) -> BuilderInfo:
   """Extract dataset name, filepath, type, path from the DatasetBuilder class."""
-  dataset_file = os.path.relpath(inspect.getfile(builder_cls)) # i.e tensorflow_datasets/image/mnist.py
-  dataset_name = builder_cls.name                              # name of the dataset i.e mnist
-  dataset_type = dataset_file.split('/')[1]                    # type of the dataset i.e image
-  dataset_path = posixpath.split(dataset_file)[0]              # i.e tensorflow_datasets/image
+  dataset_file = os.path.relpath(inspect.getfile(builder_cls))  # i.e tensorflow_datasets/image/mnist.py
+  dataset_name = builder_cls.name                 # name of the dataset i.e mnist
+  dataset_type = dataset_file.split('/')[1]       # type of the dataset i.e image
+  dataset_path = posixpath.split(dataset_file)[0] # i.e tensorflow_datasets/image
   return BuilderInfo(dataset_file, dataset_name, dataset_type, dataset_path)
 
 
-def refactor_dataset(DATASET_LIST):
+def refactor_dataset(dataset_list):
   """Refactoring all dataset into one folder"""
-  for dataset in DATASET_LIST:
+  for dataset in dataset_list:
     builder_cls = tfds.builder_cls(dataset)
     dataset_info = extract_info(builder_cls)
-
     # Refactored dataset path
     refactor_dataset_path = os.path.join(NEW_TFDS_DIR,
                                          dataset_info.dataset_type,
                                          dataset_info.dataset_name)
 
-    create_dirs(refactor_dataset_path)   # create dirs
+    create_dirs(refactor_dataset_path)  # create dirs
 
     # Copy all files and folders
     copy_fake_data_dir(dataset_info, refactor_dataset_path)
@@ -136,7 +137,6 @@ def refactor_dataset(DATASET_LIST):
     copy_dataset_test_file(dataset_info, refactor_dataset_path)
     copy_make_data_file(dataset_info, refactor_dataset_path)
     copy_checksum_file(dataset_info, refactor_dataset_path)
-
     print('The refactored {} dataset generated at {}'.format(dataset_info.dataset_name, refactor_dataset_path))
 
 
