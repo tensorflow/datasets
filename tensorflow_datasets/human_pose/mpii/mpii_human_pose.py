@@ -38,14 +38,10 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
         "image": tfds.features.Image(encoding_format="jpeg"),
         "filename": tfds.features.Text(),
         # different joint attributes
-        "joints": tfds.features.Sequence(
-          tfds.features.Tensor(shape=(NUM_JOINTS, 2), dtype=tf.int64)),
-        "joint_visible": tfds.features.Sequence(
-          tfds.features.Tensor(shape=(NUM_JOINTS,), dtype=tf.bool)),
-        "joint_center": tfds.features.Sequence(
-          tfds.features.Tensor(shape=(2,), dtype=tf.int64)),
-        "joint_scale": tfds.features.Sequence(
-          tfds.features.Tensor(shape=(), dtype=tf.float32)),
+        "joints": tfds.features.Tensor(shape=(None, NUM_JOINTS, 2), dtype=tf.int64),
+        "joint_visible": tfds.features.Tensor(shape=(None, NUM_JOINTS,), dtype=tf.bool),
+        "center": tfds.features.Tensor(shape=(None, 2,), dtype=tf.int64),
+        "scale": tfds.features.Tensor(shape=(None,), dtype=tf.float32),
         # ymin, xmin, ymax, xmax
         # same order as BBoxFeature, but not scaled
         # everything else is in pixel coordinates, making a special exception
@@ -130,8 +126,8 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
           image=os.path.join(image_dir, filename),
           joints=joints,
           joint_visible=visible,
-          joint_center=coord_helper.centers,
-          joint_scale=coord_helper.scales.astype(np.float32),
+          center=coord_helper.centers,
+          scale=coord_helper.scales.astype(np.float32),
           head_box=head_box,
           filename=filename,
           activity=activity if train_data else -1,
