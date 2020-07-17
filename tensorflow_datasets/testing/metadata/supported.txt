@@ -351,6 +351,7 @@ citrus_leaves/0.1.0
 civil_comments/CivilComments/1.0.0
 civil_comments/CivilCommentsIdentities/1.0.0
 clevr/3.1.0
+clic/1.0.0
 clinc_oos/0.1.0
 cmaterdb/bangla/1.0.0
 cmaterdb/devanagari/1.0.0
@@ -439,6 +440,7 @@ glue/rte/1.0.0
 glue/sst2/1.0.0
 glue/stsb/1.0.0
 glue/wnli/1.0.0
+goemotions/0.1.0
 groove/2bar-16000hz/2.0.1
 groove/2bar-midionly/2.0.1
 groove/4bar-midionly/2.0.1
