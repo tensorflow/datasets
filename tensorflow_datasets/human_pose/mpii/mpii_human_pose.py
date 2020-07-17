@@ -28,7 +28,7 @@ MPII_CITATION = """\
 
 
 class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version(0, 0, 1)
+  VERSION = tfds.core.Version('0.0.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -37,12 +37,15 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
       features=tfds.features.FeaturesDict({
         "image": tfds.features.Image(encoding_format="jpeg"),
         "filename": tfds.features.Text(),
-        "targets": tfds.features.SequenceDict({
-          "joints": tfds.features.Tensor(shape=(NUM_JOINTS, 2), dtype=tf.int64),
-          "visible": tfds.features.Tensor(shape=(NUM_JOINTS,), dtype=tf.bool),
-          "center": tfds.features.Tensor(shape=(2,), dtype=tf.int64),
-          "scale": tfds.features.Tensor(shape=(), dtype=tf.float32),
-        }),
+        # different joint attributes
+        "joints": tfds.features.Sequence(
+          tfds.features.Tensor(shape=(NUM_JOINTS, 2), dtype=tf.int64)),
+        "joint_visible": tfds.features.Sequence(
+          tfds.features.Tensor(shape=(NUM_JOINTS,), dtype=tf.bool)),
+        "joint_center": tfds.features.Sequence(
+          tfds.features.Tensor(shape=(2,), dtype=tf.int64)),
+        "joint_scale": tfds.features.Sequence(
+          tfds.features.Tensor(shape=(), dtype=tf.float32)),
         # ymin, xmin, ymax, xmax
         # same order as BBoxFeature, but not scaled
         # everything else is in pixel coordinates, making a special exception
@@ -57,7 +60,7 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
             names_file=_LABELS_PATH % "category_names"),
         "youtube_id": tfds.features.Text(),
       }),
-      urls=["http://human-pose.mpi-inf.mpg.de/"],
+      homepage="http://human-pose.mpi-inf.mpg.de/",
       citation=MPII_CITATION)
 
   def _split_generators(self, dl_manager):
@@ -65,112 +68,76 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
       "images": "https://datasets.d2.mpi-inf.mpg.de/andriluka14cvpr/mpii_human_pose_v1.tar.gz",
       "annot": "https://datasets.d2.mpi-inf.mpg.de/andriluka14cvpr/mpii_human_pose_v1_u12_2.zip",
     })
+    extracted = dl_manager.extract(paths)
 
-    annot_dir = paths["annot"]
-    # don't extract images
-    annot_dir = dl_manager.extract(annot_dir)
+    annot_dir = extracted["annot"]
     if isinstance(annot_dir, dict):
       # tests return the original dict
-      annot_dir = annot_dir["annot"]
-
+      annot_dir = paths["annot"]["annot"]
     annot_path = os.path.join(
       annot_dir, "mpii_human_pose_v1_u12_2", "mpii_human_pose_v1_u12_1.mat")
-    images_gen = lambda: extractor.iter_tar_gz(paths["images"])
     annot = annot_utils.Annotations(annot_path)
-    annot_indices = {f: i for i, f in enumerate(annot.filenames)}
 
     return [
       tfds.core.SplitGenerator(
         name=tfds.Split.TRAIN,
-        num_shards=32,
         gen_kwargs=dict(
-          images_fn=images_gen,
+          image_dir=os.path.join(extracted["images"], "images"),
           annot=annot,
-          annot_indices=annot_indices,
-          generate_train_data=True,
+          train_data=True,
         )),
       tfds.core.SplitGenerator(
         name=tfds.Split.TEST,
-        num_shards=8,
         gen_kwargs=dict(
-          images_fn=images_gen,
+          image_dir=os.path.join(extracted["images"], "images"),
           annot=annot,
-          annot_indices=annot_indices,
-          generate_train_data=False,
+          train_data=False,
         )),
     ]
 
-  def _generate_examples(
-      self, images_fn, annot, annot_indices, generate_train_data):
-    logging.info(
-      "Iterating over %s examples. Progress bar for .tar.gz has issues, "
-      "so it may look like things have hanged. They probably haven't."
-      % ("train" if generate_train_data else "test"))
-    original_separated_indices = annot.original_separated_indices
-    video_indices = annot.video_indices
-    frame_secs = annot.frame_secs
-    activities = annot.activities
-    is_train = annot.is_train
-    video_indices = annot.video_indices
-    coord_helpers = annot.coord_helpers
-    filenames = annot.filenames
-    youtube_ids = annot.youtube_ids
+  def _generate_examples(self, image_dir, annot, train_data):
+    annot_indices = {f: i for i, f in enumerate(annot.filenames)}
 
-    if not generate_train_data:
-      # constant over all iterations
-      activity = -1
-      category = -1
-      frame_sec = -1
-      # could be shape (0, 4), but statistics have issues with completely empty
-      # structures
-      head_box = np.zeros((0, 4), dtype=np.int64)
-
-    for path, image in images_fn():
-      filename = path.split('/')[-1]
+    for filename in tf.io.gfile.listdir(image_dir):
       index = annot_indices[filename]
-      assert(filenames[index] == filename)
-      if is_train[index] != generate_train_data:
+      assert(annot.filenames[index] == filename)
+      if annot.is_train[index] != train_data:
         continue
-      coord_helper = coord_helpers[index]
 
-      video_index = video_indices[index]
-      youtube_id = "UNK" if video_index is None else youtube_ids[video_index]
+      video_index = annot.video_indices[index]
+      youtube_id = "UNK" if video_index is None else annot.youtube_ids[video_index]
 
-      center = coord_helper.centers
-      scale = coord_helper.scales.astype(np.float32)
+      coord_helper = annot.coord_helpers[index]
       separated_individuals = coord_helper.reindex(
-          original_separated_indices[index])
+          annot.original_separated_indices[index])
 
-      if generate_train_data:
-        # train data
+      if train_data:
         if coord_helper.is_pointless:
           continue
-        category, activity = activities[index]
+        category, activity = annot.activities[index]
         category = category or -1
         activity = activity or -1
         joints, visible = coord_helper.coordinates
-
-        frame_sec = frame_secs[index]
         head_box = coord_helper.head_boxes
       else:
         # test data
+        head_box = np.zeros((0, 4), dtype=np.int64)
         num_valid_people = coord_helper.num_valid_people
         joints = -np.ones((num_valid_people, NUM_JOINTS, 2), dtype=np.int64)
         visible = np.zeros((num_valid_people, NUM_JOINTS), dtype=np.bool)
 
-      yield dict(
-          image=image,
-          targets=dict(
-            joints=joints,
-            visible=visible,
-            center=center,
-            scale=scale,
-          ),
+      features = dict(
+          image=os.path.join(image_dir, filename),
+          joints=joints,
+          joint_visible=visible,
+          joint_center=coord_helper.centers,
+          joint_scale=coord_helper.scales.astype(np.float32),
           head_box=head_box,
           filename=filename,
-          activity=activity,
-          category=category,
-          frame_sec=frame_sec,
+          activity=activity if train_data else -1,
+          category=category if train_data else -1,
+          frame_sec=annot.frame_secs[index] if train_data else -1,
           youtube_id=youtube_id,
           separated_individuals=separated_individuals,
         )
+      yield index, features

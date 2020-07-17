@@ -142,7 +142,7 @@ class CoordHelper(object):
 class Annotations(object):
   def __init__(self, path):
     with tf.io.gfile.GFile(path, "rb") as fp:
-      self._annot = lazy_imports.scipy_io.loadmat(fp)['RELEASE']  # pylint: disable=no-member
+      self._annot = lazy_imports.scipy.io.loadmat(fp)['RELEASE']  # pylint: disable=no-member
 
     self._annolist = self._annot['annolist'][0][0][0]
     self._annorect = self._annolist['annorect']
