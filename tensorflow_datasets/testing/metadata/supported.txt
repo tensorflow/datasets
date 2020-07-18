@@ -146,10 +146,6 @@ blimp/wh_vs_that_no_gap/0.1.0
 blimp/wh_vs_that_no_gap_long_distance/0.1.0
 blimp/wh_vs_that_with_gap/0.1.0
 blimp/wh_vs_that_with_gap_long_distance/0.1.0
-c4/en.noclean/2.3.0
-c4/en.realnewslike/2.3.0
-c4/en.webtextlike/2.3.0
-c4/en/2.3.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
 caltech_birds2011/0.1.0
