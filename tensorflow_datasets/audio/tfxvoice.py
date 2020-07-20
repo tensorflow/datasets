@@ -182,7 +182,10 @@ def _generate_example(path_to_file, speaker_id):
 
 def _encode_audio(key, example):
 	SAMPLE_RATE = 16000
-	file_format = example['speech'].split(".")[-1]
+	if 'audiowebm' in example['speech']:
+		file_format = 'webm'
+	else:
+		file_format = example['speech'].split(".")[-1]
 	with tf.io.gfile.GFile(example['speech'], 'rb') as fobj:
 		audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
 			fobj, format=file_format)
