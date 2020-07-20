@@ -46,10 +46,10 @@ This dataset does *NOT* contain the data from the P-Frame challenge (YUV image
 frames).
 """
 
-CLIC_MOBILE_TRAIN = 'https://data.vision.ee.ethz.ch/cvl/clic/mobile_train.zip'
-CLIC_PROFESSIONAL_TRAIN = 'https://data.vision.ee.ethz.ch/cvl/clic/professional_train.zip'
-CLIC_MOBILE_VALIDATION = 'https://data.vision.ee.ethz.ch/cvl/clic/mobile_valid.zip'
-CLIC_PROFESSIONAL_VALIDATION = 'https://data.vision.ee.ethz.ch/cvl/clic/professional_valid.zip'
+CLIC_MOBILE_TRAIN = 'https://data.vision.ee.ethz.ch/cvl/clic/mobile_train_2020.zip'
+CLIC_PROFESSIONAL_TRAIN = 'https://data.vision.ee.ethz.ch/cvl/clic/professional_train_2020.zip'
+CLIC_MOBILE_VALIDATION = 'https://data.vision.ee.ethz.ch/cvl/clic/mobile_valid_2020.zip'
+CLIC_PROFESSIONAL_VALIDATION = 'https://data.vision.ee.ethz.ch/cvl/clic/professional_valid_2020.zip'
 CLIC_MOBILE_TEST = 'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Mobile_test.zip'
 CLIC_PROFESSIONAL_TEST = 'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Professional_test.zip'
 
