@@ -20,6 +20,7 @@ from tensorflow_datasets.audio.commonvoice import CommonVoice
 from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig
 from tensorflow_datasets.audio.crema_d import CremaD
 from tensorflow_datasets.audio.cmukids import CMUKids
+from tensorflow_datasets.audio.tfxvoice import TeachFxVoiceSamples
 from tensorflow_datasets.audio.dementiabank import Dementiabank
 from tensorflow_datasets.audio.fuss import Fuss
 from tensorflow_datasets.audio.groove import Groove

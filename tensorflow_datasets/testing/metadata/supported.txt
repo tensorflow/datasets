@@ -354,6 +354,7 @@ cmaterdb/bangla/1.0.0
 cmaterdb/devanagari/1.0.0
 cmaterdb/telugu/1.0.0
 cmukids/0.0.0
+tfxvoice/0.0.0
 cnn_dailymail/bytes/3.0.0
 cnn_dailymail/plain_text/3.0.0
 cnn_dailymail/subwords32k/3.0.0
