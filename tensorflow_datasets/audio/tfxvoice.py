@@ -52,7 +52,7 @@ SPLITS_URLS = {
 }
 
 
-class TeachFxVoiceSamples(tfds.core.BeamBasedBuilder):
+class TFXVoice(tfds.core.BeamBasedBuilder):
 	"""TeachFX Voice Samples dataset."""
 
 	VERSION = tfds.core.Version("0.0.0")
