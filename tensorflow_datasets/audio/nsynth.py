@@ -128,10 +128,14 @@ class NsynthConfig(tfds.core.BuilderConfig):
         "2.3.1", "F0 computed with normalization fix in CREPE.")
     v232 = tfds.core.Version(
         "2.3.2", "Use Audio feature.")
+    v233 = tfds.core.Version(
+        "2.3.3",
+        "F0 computed with fix in CREPE wave normalization "
+        "(https://github.com/marl/crepe/issues/49).")
     super(NsynthConfig, self).__init__(
         name=".".join(name_parts),
-        version=v232,
-        supported_versions=[v231, v230],
+        version=v233,
+        supported_versions=[v232, v231, v230],
         **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
