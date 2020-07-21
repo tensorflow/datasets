@@ -22,19 +22,14 @@ my_dataset/
 """
 
 import argparse
-import os
+import pathlib
 from typing import Dict
 
-import tensorflow as tf
 from tensorflow_datasets.core import naming
 
 
 _HEADER = """\
 \"""{dataset_name} dataset.\"""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 """
 
@@ -64,7 +59,7 @@ _DESCRIPTION = \"""
 _DATASET_DEFAULTS = """\
 
 class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
-  \"""{TODO}: Short description of my dataset.\"""
+  \"""DatasetBuilder for {dataset_name} dataset.\"""
 
   # {TODO}: Set up version.
   VERSION = tfds.core.Version('0.1.0')
@@ -136,8 +131,6 @@ _CHECKSUM_FILE = """\
 """
 
 _INIT_FILE = """\
-\"""{dataset_name} dataset.\"""
-
 from {dataset_name} import {dataset_cls}
 
 __all__ = [
@@ -157,62 +150,68 @@ if __name__ == "__main__":
 """
 
 
-def create_dataset_file(root_dir: str, data: Dict[str, str]) -> None:
+def create_dataset_file(root_dir: pathlib.Path, data: Dict[str, str]) -> None:
   """Create a new dataset from a template."""
-  file_path = os.path.join(root_dir, '{dataset_name}.py')
+  file_path = root_dir.joinpath(f'{data["dataset_name"]}.py')
   context = (
       _HEADER + _DATASET_DEFAULT_IMPORTS + _CITATION + _DESCRIPTION +
       _DATASET_DEFAULTS)
 
-  with tf.io.gfile.GFile(file_path.format(**data), 'w') as f:
+  with file_path.open('w') as f:
     f.write(context.format(**data))
 
 
-def add_the_init(root_dir: str, data: Dict[str, str]) -> None:
+def add_the_init(root_dir: pathlib.Path, data: Dict[str, str]) -> None:
   """Creates a new __init__.py. file"""
-  file_path = os.path.join(root_dir, '__init__.py')
+  file_path = root_dir.joinpath('__init__.py')
+  context = _HEADER + _INIT_FILE
 
-  with tf.io.gfile.GFile(file_path.format(**data), 'w') as f:
-    f.write(_INIT_FILE.format(**data))
-
-
-def create_dataset_test_file(root_dir: str, data: Dict[str, str]) -> None:
-  """Create the test file associated with the dataset."""
-  file_path = os.path.join(root_dir, '{dataset_name}_test.py')
-  context = (_HEADER + _DATASET_TEST_DEFAULTS_IMPORTS + _DATASET_TEST_DEFAULTS)
-
-  with tf.io.gfile.GFile(file_path.format(**data), 'w') as f:
+  with file_path.open('w') as f:
     f.write(context.format(**data))
 
 
-def create_fake_data(root_dir: str, data: Dict[str, str]) -> None:
-  fake_examples_dir = os.path.join(root_dir, 'fake_examples')
-  fake_examples_dir = fake_examples_dir.format(**data)
-  tf.io.gfile.makedirs(fake_examples_dir)
+def create_dataset_test_file(
+    root_dir: pathlib.Path,
+    data: Dict[str, str]
+) -> None:
+  """Create the test file associated with the dataset."""
+  file_path = root_dir.joinpath(f'{data["dataset_name"]}_test.py')
+  context = _HEADER + _DATASET_TEST_DEFAULTS_IMPORTS + _DATASET_TEST_DEFAULTS
 
-  fake_path = os.path.join(fake_examples_dir,
-                           'TODO-add_fake_data_in_this_directory.txt')
-  with tf.io.gfile.GFile(fake_path, 'w') as f:
+  with file_path.open('w') as f:
+    f.write(context.format(**data))
+
+
+def create_fake_data(root_dir: pathlib.Path, data: Dict[str, str]) -> None:
+  file_path = root_dir.joinpath(
+      'fake_examples', 'TODO-add_fake_data_in_this_directory.txt')
+
+  with file_path.open('w') as f:
     f.write('{TODO}: Add fake data in this directory'.format(**data))
 
 
-def create_fake_data_gen_file(root_dir: str, data: Dict[str, str]) -> None:
-  fake_data_generator = os.path.join(root_dir, 'fake_data_generator.py')
+def create_fake_data_gen_file(
+    root_dir: pathlib.Path,
+    data: Dict[str, str]
+) -> None:
+  file_path = root_dir.joinpath('fake_data_generator.py')
 
-  content = (_HEADER + _FAKE_DATA_GEN_FILE)
-  with tf.io.gfile.GFile(fake_data_generator.format(**data), 'w') as f:
-    f.write(content.format(**data))
+  context = _HEADER + _FAKE_DATA_GEN_FILE
+  with file_path.open('w') as f:
+    f.write(context.format(**data))
 
 
-def create_checksum_file(root_dir: str, data: Dict[str, str]) -> None:
-  checksum_path = os.path.join(root_dir, 'checksums.txt')
-  with tf.io.gfile.GFile(checksum_path.format(**data), 'w') as f:
+def create_checksum_file(root_dir: pathlib.Path, data: Dict[str, str]) -> None:
+  file_path = root_dir.joinpath('checksums.txt')
+
+  with file_path.open('w') as f:
     f.write(_CHECKSUM_FILE.format(**data))
 
 
-def create_single_dataset(ds_name: str) -> None:
-  root_dir = os.path.abspath(ds_name)
-  tf.io.gfile.makedirs(os.path.join(ds_name, 'fake_examples'))
+def create_new_datasets(args: argparse.Namespace) -> None:
+  ds_name = args.dataset_name
+  root_dir = args.dst_dir.expanduser().resolve().joinpath(ds_name)
+  root_dir.joinpath('fake_examples').mkdir(parents=True, exist_ok=True)
 
   data = dict(
       dataset_name=ds_name,
@@ -235,22 +234,25 @@ def create_single_dataset(ds_name: str) -> None:
       'for details.'.format(root_dir, ds_name))
 
 
-def create_new_datasets(args: argparse.Namespace) -> None:
-  for ds_name in args.dataset_name:
-    create_single_dataset(ds_name)
-
-
 def add_new_dataset_parser(subparsers: argparse._SubParsersAction) -> None:  # pylint:disable = protected-access
   """Add subparser for `new` command"""
   new_ds_parser = subparsers.add_parser(
-      'new', help='Generated new dataset(s) files')
+      'new', help='Generated new dataset files')
 
   new_ds_parser.add_argument(
       'dataset_name',
       type=str,
       action='store',
-      nargs='+',
       default=None,
-      help='Space seperated names of the datasets to be created'
+      help='Name of the dataset to be created'
+  )
+
+  new_ds_parser.add_argument(
+      '--dst_dir',
+      type=pathlib.Path,
+      action='store',
+      default=pathlib.Path.cwd(),
+      help=('Create new dataset directory at the given location.'
+            'Defaults to current directory.')
   )
   new_ds_parser.set_defaults(func=create_new_datasets)
