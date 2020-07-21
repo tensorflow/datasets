@@ -15,6 +15,7 @@ dist/
 
 # Tests
 .pytest_cache/
+.pytype/
 
 # Type checking
 .pytype/

@@ -20,20 +20,33 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import typing
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+
 import functools
 import itertools
 
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 
 
-def build_dataset(instruction_dicts,
-                  dataset_from_file_fn,
-                  shuffle_files=False,
-                  parallel_reads=64):
+class _Nested(metaclass=type):
+  """Nested Structure for Types."""
+
+  def __getitem__(self, t):
+    return Union[t, List[Any], Tuple[Any], Dict[str, Any]]
+
+Nested = _Nested()  # pylint: disable=invalid-name
+Instruction = Dict[str, Any]
+
+def build_dataset(instruction_dicts: List[Instruction],
+                  dataset_from_file_fn: Callable[[str], tf.data.Dataset],
+                  shuffle_files: bool = False,
+                  parallel_reads: int = 64) -> tf.data.Dataset:
   """Constructs a `tf.data.Dataset` from TFRecord files.
 
   Args:
@@ -77,12 +90,12 @@ def build_dataset(instruction_dicts,
   return ds
 
 
-def _no_examples_skipped(list_of_dict):
+def _no_examples_skipped(list_of_dict: List[Instruction]) -> bool:
   """Return True if no examples are skipped (mask are only True)."""
   return all(itertools.chain.from_iterable([d["mask"] for d in list_of_dict]))
 
 
-def _build_instruction_ds(instructions):
+def _build_instruction_ds(instructions: List[Instruction]) -> tf.data.Dataset:
   """Create a dataset containing individual instruction for each shard.
 
   Each instruction is a dict:
@@ -110,7 +123,7 @@ def _build_instruction_ds(instructions):
   return tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
 
-def _build_mask_ds(mask, mask_offset):
+def _build_mask_ds(mask: tf.Tensor, mask_offset: tf.Tensor) -> tf.data.Dataset:
   """Build the mask dataset to indicate which element to skip.
 
   Args:
@@ -129,7 +142,9 @@ def _build_mask_ds(mask, mask_offset):
   return mask_ds
 
 
-def _build_ds_from_instruction(instruction, ds_from_file_fn):
+def _build_ds_from_instruction(
+    instruction: Dict[str, tf.Tensor],
+    ds_from_file_fn: Callable[..., Any]) -> tf.data.Dataset:
   """Map an instruction to a real datasets for one particular shard.
 
   Args:
@@ -157,14 +172,15 @@ def _build_ds_from_instruction(instruction, ds_from_file_fn):
   return ds
 
 
-def _eager_dataset_iterator(dataset):
+def _eager_dataset_iterator(dataset: tf.data.Dataset):
   for item in dataset:
     flat = tf.nest.flatten(item)
     flat = [t if isinstance(t, tf.RaggedTensor) else t.numpy() for t in flat]
     yield tf.nest.pack_sequence_as(item, flat)
 
 
-def _graph_dataset_iterator(ds_iter, graph=None):
+def _graph_dataset_iterator(ds_iter: tf.compat.v1.Iterator,
+                            graph: Optional[tf.Graph] = None):
   """Constructs a Python generator from a tf.data.Iterator."""
   with utils.maybe_with_graph(graph, create_if_none=False):
     init = ds_iter.initializer
@@ -178,8 +194,19 @@ def _graph_dataset_iterator(ds_iter, graph=None):
         break
 
 
+@typing.overload
+def as_numpy(dataset: Nested[tf.Tensor],
+             graph: Optional[tf.Graph] = None) -> Nested[np.array]:
+  ...
+
+@typing.overload
+def as_numpy(dataset: Nested[tf.data.Dataset],
+             graph: Optional[tf.Graph] = None
+            ) -> Nested[Iterable[Nested[tf.Tensor]]]:
+  ...
+
 @api_utils.disallow_positional_args(allowed=["dataset"])
-def as_numpy(dataset, graph=None):
+def as_numpy(dataset, graph):
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
   `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
@@ -269,11 +296,12 @@ def as_numpy(dataset, graph=None):
   return tf.nest.pack_sequence_as(nested_ds, flat_np)
 
 
-def dataset_shape_is_fully_defined(ds):
+def dataset_shape_is_fully_defined(ds: tf.data.Dataset) -> bool:
   output_shapes = tf.compat.v1.data.get_output_shapes(ds)
   return all([ts.is_fully_defined() for ts in tf.nest.flatten(output_shapes)])
 
 
-def features_shape_is_fully_defined(features):
+def features_shape_is_fully_defined(
+    features: features_lib.FeatureConnector) -> bool:
   return all([tf.TensorShape(info.shape).is_fully_defined() for info in
               tf.nest.flatten(features.get_tensor_info())])
