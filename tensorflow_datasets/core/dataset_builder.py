@@ -24,6 +24,7 @@ import abc
 import functools
 import inspect
 import itertools
+import pathlib
 import os
 import sys
 
@@ -221,9 +222,10 @@ class DatasetBuilder(object):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_dir(cls) -> str:
-    """Returns the path to the directory where the Dataset class is located."""
-    return os.path.dirname(inspect.getfile(cls))
+  def code_path(cls) -> pathlib.PurePath:
+    """Returns the path to the file where the Dataset class is located."""
+    # input(str(pathlib.PurePath(inspect.getfile(cls))))
+    return pathlib.PurePath(inspect.getfile(cls))
 
   @utils.memoized_property
   def supported_versions(self):
@@ -773,8 +775,7 @@ class DatasetBuilder(object):
                                                 "downloads")
     extract_dir = (download_config.extract_dir or
                    os.path.join(download_dir, "extracted"))
-    checksums_path = os.path.join(self.code_dir, "checksums.txt")
-
+    checksums_path = str(self.code_path.parent.joinpath("checksums.txt"))
     # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
     if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
       manual_dir = (

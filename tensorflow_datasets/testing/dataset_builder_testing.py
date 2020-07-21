@@ -159,8 +159,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.builder = self._make_builder()
 
     # Determine the fake_examples directory.
-    self.example_dir = os.path.join(
-        test_utils.fake_examples_dir(), self.builder.name)
+    self.example_dir = str(
+        self.DATASET_CLASS.code_path.parent.joinpath('fake_examples'))
+    if not tf.io.gfile.exists(self.example_dir):
+      self.example_dir = os.path.join(
+          test_utils.fake_examples_dir(), self.builder.name)
     if self.EXAMPLE_DIR is not None:
       self.example_dir = self.EXAMPLE_DIR
 
@@ -308,7 +311,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                "please add `SKIP_CHECKSUMS = True` to the "
                "`DatasetBuilderTestCase`")
 
-    filepath = os.path.join(self.DATASET_CLASS.code_dir, 'checksums.txt')
+    filepath = str(self.DATASET_CLASS.code_path.parent.joinpath('checksums.txt'))
     if not tf.io.gfile.exists(filepath):
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
     with utils.try_reraise(suffix=err_msg):

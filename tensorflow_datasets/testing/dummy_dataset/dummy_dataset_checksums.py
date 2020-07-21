@@ -15,7 +15,10 @@ class DummyDatasetChecksums(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    url = "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz"
+    url = [
+        "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz",
+        "http://dummy.org/data.txt"
+    ]
     path = dl_manager.download(url)
 
     return [
