@@ -14,14 +14,27 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Structured datasets."""
+"""Radon dataset test."""
 
-from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
-from tensorflow_datasets.structured.forest_fires import ForestFires
-from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNumeric
-from tensorflow_datasets.structured.higgs import Higgs
-from tensorflow_datasets.structured.iris import Iris
-from tensorflow_datasets.structured.movielens import Movielens
-from tensorflow_datasets.structured.radon import Radon
-from tensorflow_datasets.structured.rock_you import RockYou
-from tensorflow_datasets.structured.titanic import Titanic
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.structured import radon
+
+
+class RadonTest(tfds.testing.DatasetBuilderTestCase):
+  DATASET_CLASS = radon.Radon
+  SPLITS = {
+      "train": 3,
+  }
+
+  DL_EXTRACT_RESULT = {
+      "file_path_srrs2": "srrs2.dat",
+      "file_path_cty": "cty.dat"
+  }
+
+
+if __name__ == "__main__":
+  tfds.testing.test_main()
