@@ -30,5 +30,25 @@ class ImagenetRTest(tfds.testing.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = 'imagenet-r.tar'
 
+  def _assertAsDataset(self, builder):
+    """Check the label distribution.
+    
+    This checks that labels get correctly converted between the synset ids
+    and integers.
+    
+    Args:
+      builder: The ImagenetR dataset builder.
+    """
+    super()._assertAsDataset(builder)
+    label_frequncies = collections.Counter()
+    label_feature = builder.info.features['label']
+    dataset = builder.as_dataset()
+    for features in dataset_utils.as_numpy(dataset['test']):
+      label_frequncies.update([label_feature.int2str(features['label'])])
+    self.assertEqual(dict(label_frequncies),
+                     {'n01443537': 2,
+                      'n01484850': 3,
+                      'n12267677': 5})
+
 if __name__ == '__main__':
   tfds.testing.test_main()
