@@ -12,7 +12,7 @@ import tensorflow_datasets as tfds
 
 
 @dataclasses.dataclass
-class Section(object):
+class Section():
   get_signature: Callable[[tfds.core.DatasetBuilder], str]
   make: Callable[[tfds.core.DatasetBuilder], str]
 
@@ -20,41 +20,34 @@ class Section(object):
 
 
 def display_description(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Description**:
-
-      """
-  ) + tfds.core.utils.dedent(builder.info.description) + "\n"
+  return f"""\
+    *   **Description**:
+    
+    {tfds.core.utils.indent(builder.info.description, '    ')}
+    """
 
 
 def display_config_description(builder):
   if builder.builder_config:
-    return textwrap.dedent(
-        f"""\
-        *   **Config description**: {builder.builder_config.description}
-        """
-    )
+    return f"""\
+      *   **Config description**: {tfds.core.utils.indent(builder.builder_config.description, '      ')}
+      """
   return ""
 
 
 def display_homepage(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Homepage**: [{builder.info.homepage}]({builder.info.homepage})
-      """
-  )
+  return f"""\
+    *   **Homepage**: [{builder.info.homepage}]({builder.info.homepage})
+    """
 
 
 def display_source(builder):
   class_path = tfds.core.utils.get_class_path(builder).split(".")
   del class_path[-2]
   class_path = ".".join(class_path)
-  return textwrap.dedent(
-      f"""\
-      *   **Source code**: [`{class_path}`]({tfds.core.utils.get_class_url(builder)})
-      """
-  )
+  return f"""\
+    *   **Source code**: [`{class_path}`]({tfds.core.utils.get_class_url(builder)})
+    """
 
 
 def display_versions(nightly_doc_util, builder):
@@ -74,29 +67,23 @@ def display_versions(nightly_doc_util, builder):
   version_list = ("\n").join(
       [f"    *   {version_str}" for version_str in list_versions()])
 
-  return textwrap.dedent(
-      f"""\
-      *   **Versions**:
+  return f"""\
+    *   **Versions**:
 
-      {version_list}
-      """
-  )
+    {version_list}
+    """
 
 
 def display_download_size(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Download size**: `{tfds.units.size_str(builder.info.download_size)}`
-      """
-  )
+  return f"""\
+    *   **Download size**: `{tfds.units.size_str(builder.info.download_size)}`
+    """
 
 
 def display_dataset_size(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Dataset size**: `{tfds.units.size_str(builder.info.dataset_size)}`
-      """
-  )
+  return f"""\
+    *   **Dataset size**: `{tfds.units.size_str(builder.info.dataset_size)}`
+    """
 
 
 def build_autocached_info(builder):
@@ -142,25 +129,21 @@ def build_autocached_info(builder):
 
 
 def display_autocache(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Auto-cached**
-          ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-          {build_autocached_info(builder)}
-      """
-  )
+  return f"""\
+    *   **Auto-cached**
+        ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+        {build_autocached_info(builder)}
+    """
 
 
 def display_manual(builder):
   if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
-    return textwrap.dedent(
-        f"""\
-        *   **Manual download instructions**: This dataset requires you to
-            download the source data manually into `download_config.manual_dir`
-            (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
-        """
-    ) + textwrap.indent(tfds.core.utils.dedent(
-        builder.MANUAL_DOWNLOAD_INSTRUCTIONS), "    ") + "\n"
+    return f"""\
+      *   **Manual download instructions**: This dataset requires you to
+          download the source data manually into `download_config.manual_dir`
+          (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+          {tfds.core.utils.indent(builder.MANUAL_DOWNLOAD_INSTRUCTIONS, '          ')}
+      """
   return ""
 
 
@@ -175,45 +158,42 @@ def display_splits(builder):
       for split_name, split_info in sorted(builder.info.splits.items())
   ])
 
-  return textwrap.dedent(
-      f"""\
-      *   **Splits**:
+  return f"""\
+    *   **Splits**:
 
-      Split  | Examples
-      :----- | -------:
-      """
-  ) + f"{splits_str}\n"
+    Split  | Examples
+    :----- | -------:
+    {tfds.core.utils.indent(splits_str, '    ')}
+    """
 
 
 def display_features(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Features**:
+  return f"""\
+    *   **Features**:
 
-      ```python
-      """
-  ) + str(builder.info.features) + "\n```\n"
+    ```python
+    {tfds.core.utils.indent(str(builder.info.features), '    ')}
+    ```
+    """
 
 
 def display_supervised(builder):
-  return textwrap.dedent(
-      f"""\
-      *   **Supervised keys** (See
-          [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-          `{str(builder.info.supervised_keys)}`
-      """
-  )
+  return f"""\
+    *   **Supervised keys** (See
+        [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+        `{str(builder.info.supervised_keys)}`
+    """
 
 
 def display_citation(builder):
   if builder.info.citation:
-    return textwrap.dedent(
-        f"""\
-        *   **Citation**:
-
-        ```
-        """
-    ) + tfds.core.utils.dedent(builder.info.citation) + "\n```\n"
+    return f"""\
+      *   **Citation**:
+      
+      ```
+      {tfds.core.utils.indent(builder.info.citation, '      ')}
+      ```
+      """
   return ""
 
 
@@ -222,14 +202,12 @@ def display_figure(visu_doc_util, builder):
   if visu_doc_util.has_visualization(builder):
     visu_str = visu_doc_util.get_html_tag(builder)
 
-  return textwrap.dedent(
-      f"""\
-      *   **Visualization
-          ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+  return f"""\
+    *   **Visualization
+        ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
 
-      {visu_str}
-      """
-  )
+    {visu_str}
+    """
 
 
 def get_description(builder):
@@ -295,7 +273,7 @@ def get_figure(visu_doc_util, builder):
 # --------------------------- Single builder ---------------------------
 
 def display_builder(builder, sections):
-  return ("\n").join([section.make(builder)
+  return ("\n").join([textwrap.dedent(section.make(builder))
                       for section in sections if section.make(builder)])
 
 
@@ -344,20 +322,16 @@ def display_builder_configs(
 
 def display_nightly_str(nightly_doc_util, builder):
   if nightly_doc_util.is_builder_nightly(builder):
-    return textwrap.dedent(
-        f"""\
-        Note: This dataset was added recently and is only available in our
-        `tfds-nightly` package  {nightly_doc_util.icon}.
-        """
-    )
+    return f"""\
+      Note: This dataset was added recently and is only available in our
+      `tfds-nightly` package  {nightly_doc_util.icon}.
+      """
   if nightly_doc_util.has_nightly(builder):
-    return textwrap.dedent(
-        f"""\
-        Note: This dataset has been updated since the last stable release.
-        The new versions and config marked with {nightly_doc_util.icon}
-        are only available in the `tfds-nightly` package.
-        """
-    )
+    return f"""\
+      Note: This dataset has been updated since the last stable release.
+      The new versions and config marked with {nightly_doc_util.icon}
+      are only available in the `tfds-nightly` package.
+      """
   return ""
 
 
