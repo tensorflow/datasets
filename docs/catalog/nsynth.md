@@ -12,6 +12,11 @@
 
 # `nsynth`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The NSynth Dataset is an audio dataset containing ~300k musical notes, each with
@@ -27,7 +32,11 @@ heuristic algorithms: Source, Family, and Qualities.
 
 *   **Versions**:
 
-    *   **`2.3.2`** (default): Use Audio feature.
+    *   **`2.3.3`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        F0 computed with fix in CREPE wave normalization
+        (https://github.com/marl/crepe/issues/49).
+    *   `2.3.2`: Use Audio feature.
     *   `2.3.1`: F0 computed with normalization fix in CREPE.
     *   `2.3.0`: New `loudness_db` feature in decibels (unormalized).
 
