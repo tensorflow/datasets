@@ -28,7 +28,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     """Test for parse_current_movies_data."""
     latest_small_path = os.path.join(
         tfds.testing.fake_examples_dir(),
-        'movie_lens',
+        'movielens',
         'ml-latest-small',
     )
     movies_generator = movielens_parsing.parse_current_movies_data(
@@ -83,7 +83,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     """Test for parse_current_ratings_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
-        'movie_lens',
+        'movielens',
         'ml-latest-small',
     )
     movies_generator = movielens_parsing.parse_current_ratings_data(
@@ -161,7 +161,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     """Test for parse_100k_movies_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
-        'movie_lens',
+        'movielens',
         'ml-100k',
     )
     movies_generator = movielens_parsing.parse_100k_movies_data(fake_dir_path)
@@ -214,7 +214,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     """Test for parse_100k_ratings_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
-        'movie_lens',
+        'movielens',
         'ml-100k',
     )
     movies_generator = movielens_parsing.parse_100k_ratings_data(fake_dir_path)
@@ -339,7 +339,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     """Test for parse_1m_movies_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
-        'movie_lens',
+        'movielens',
         'ml-1m',
     )
     movies_generator = movielens_parsing.parse_1m_movies_data(fake_dir_path)
@@ -392,7 +392,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
     """Test for parse_1m_ratings_data."""
     fake_dir_path = os.path.join(
         tfds.testing.fake_examples_dir(),
-        'movie_lens',
+        'movielens',
         'ml-1m',
     )
     movies_generator = movielens_parsing.parse_1m_ratings_data(fake_dir_path)
