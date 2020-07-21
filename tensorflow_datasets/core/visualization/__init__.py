@@ -15,6 +15,7 @@
 
 """Visualizer utils."""
 
+from tensorflow_datasets.core.visualization.as_dataframe import as_dataframe
 from tensorflow_datasets.core.visualization.image_visualizer import ImageGridVisualizer
 from tensorflow_datasets.core.visualization.show_examples import show_examples
 from tensorflow_datasets.core.visualization.show_examples import show_statistics
@@ -22,6 +23,7 @@ from tensorflow_datasets.core.visualization.visualizer import Visualizer
 
 
 __all__ = [
+    "as_dataframe",
     "ImageGridVisualizer",
     "show_examples",
     "Visualizer",
