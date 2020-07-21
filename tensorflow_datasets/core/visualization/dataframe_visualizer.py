@@ -34,7 +34,7 @@ class DataframeVisualizer(visualizer.Visualizer):
   def match(self, ds_info: dataset_info.DatasetInfo) -> bool:
     """See base class."""
     ds_type = visualizer.extract_dataset_type(ds_info.full_name)
-    return ds_type == 'text' or ds_type == 'structured'
+    return ds_type in ['text', 'structured']
 
   def show(
       self,
@@ -65,10 +65,10 @@ class DataframeVisualizer(visualizer.Visualizer):
     for i, ex in enumerate(examples):
       if not isinstance(ex, dict):
         raise ValueError(
-          '{} requires examples as `dict`, with the same '
-          'structure as `ds_info.features`. It is currently not compatible '
-          'with `as_supervised=True`. Received: {}'.format(
-            type(self).__name__, type(ex)))
+            '{} requires examples as `dict`, with the same '
+            'structure as `ds_info.features`. It is currently not compatible '
+            'with `as_supervised=True`. Received: {}'.format(
+                type(self).__name__, type(ex)))
       dataframe.loc[i] = [ex[feature] for feature in features]
 
     return dataframe

@@ -77,7 +77,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   """
   dst_type = visualizer.extract_dataset_type(full_name)
   # Whether or not a pandas dataframe is used for visualization
-  dataframe_viz = dst_type == 'text' or dst_type == 'structured'
+  dataframe_viz = dst_type in ['text', 'structured']
   if not dataframe_viz:
     dst_filename = full_name.replace('/', '-') + '.png'
   else:
