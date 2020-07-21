@@ -29,11 +29,13 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.visualization import image_visualizer
+from tensorflow_datasets.core.visualization import dataframe_visualizer
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
+    dataframe_visualizer.DataframeVisualizer(),
 ]
 
 
@@ -127,7 +129,7 @@ def show_statistics(
 
   if split not in ds_info.splits:
     raise ValueError(
-        'Invalid requested split: \'{}\'. Only {} are availables.'.format(
+        'Invalid requested split: \'{}\'. Only {} are available.'.format(
             split, list(ds_info.splits)))
 
   # Creates the statistics.

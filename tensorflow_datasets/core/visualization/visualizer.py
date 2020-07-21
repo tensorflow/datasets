@@ -21,13 +21,45 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+import inspect
+
 import abc
 from typing import Any
 
 import six
 import tensorflow.compat.v2 as tf
 
+import tensorflow_datasets as tfds
 from tensorflow_datasets.core import dataset_info
+
+
+def extract_dataset_type(full_name):
+  """Extracts the dataset type from the dataset info.
+
+  Args:
+    full_name: Dataset full name.
+
+  Returns:
+    Dataset type (audio, image, etc.).
+  """
+  ds_name = full_name.split('/')[0]
+  base_path = os.path.dirname(inspect.getsourcefile(tfds))
+  ds_path = tf.io.gfile.glob(base_path + '/*/' + ds_name + '.py')[0]
+  ds_type = os.path.basename(os.path.dirname(ds_path))
+  return ds_type
+
+
+def extract_all_keys(feature_dict):
+  """Extracts keys from features dict.
+
+  Args:
+    feature_dict: `tfds.features.FeaturesDict` from which extract keys.
+
+  Returns:
+    List of extracted keys.
+  """
+  return [k for k, f in feature_dict.items()]
 
 
 def extract_keys(feature_dict, feature_cls):
