@@ -33,7 +33,6 @@ import matplotlib.pyplot as plt
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core.visualization import visualizer
 
 
 WORKER_COUNT_DATASETS = 10
@@ -68,24 +67,18 @@ def _log_exception(fn):
 
 @_log_exception
 def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
-  """Save the generated visualization for the dataset in dst_dir.
+  """Save the generated figures for the dataset in dst_dir.
 
   Args:
     full_name: Name of the dataset to build `dataset`, `dataset/config`.
     dst_dir: Destination where the dataset will be saved (as
       `dataset-config-version`)
   """
-  dst_type = visualizer.extract_dataset_type(full_name)
-  # Whether or not a pandas dataframe is used for visualization
-  dataframe_viz = dst_type in ['text', 'structured']
-  if not dataframe_viz:
-    dst_filename = full_name.replace('/', '-') + '.png'
-  else:
-    dst_filename = full_name.replace('/', '-') + '.csv'
+  dst_filename = full_name.replace('/', '-') + '.png'
   dst_path = os.path.join(dst_dir, dst_filename)
   # If the image already exists, skip the image generation
   if tf.io.gfile.exists(dst_path):
-    logging.info(f'Skipping visualization for {full_name} (already exists)')
+    logging.info(f'Skiping visualization for {full_name} (already exists)')
     return
 
   logging.info(f'Generating visualization for {full_name}...')
@@ -105,8 +98,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   if not tf.io.gfile.exists(dst_dir):
     tf.io.gfile.makedirs(dst_dir)
   try:
-    # figure = tfds.show_examples(ds, builder.info)
-    visualization = tfds.show_examples(ds, builder.info)
+    figure = tfds.show_examples(ds, builder.info)
   except Exception:  # pylint: disable=broad-except
     logging.info(f'Visualisation not supported for dataset `{full_name}`')
     return
@@ -114,13 +106,9 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   # `savefig` do not support GCS, so first save the image locally.
   with tempfile.TemporaryDirectory() as tmp_dir:
     tmp_path = os.path.join(tmp_dir, dst_filename)
-    if not dataframe_viz:
-      visualization.savefig(tmp_path)
-    else:
-      visualization.to_csv(tmp_path, index=False)
+    figure.savefig(tmp_path)
     tf.io.gfile.copy(tmp_path, dst_path)
-  if not dataframe_viz:
-    plt.close(visualization)
+  plt.close(figure)
 
 
 def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
