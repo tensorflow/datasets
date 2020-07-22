@@ -46,9 +46,9 @@ _SPLIT_URL = os.path.join(
 	'teachfx')
 
 SPLITS_URLS = {
-    "train": os.path.join(_SPLIT_URL, "voice_sample_train.csv"),
-    "validation": os.path.join(_SPLIT_URL, "voice_sample_validation.csv"),
-    "test": os.path.join(_SPLIT_URL, "voice_sample_test.csv")
+    "train": os.path.join(_SPLIT_URL, "voice_sample_wav_train.csv"),
+    "validation": os.path.join(_SPLIT_URL, "voice_sample_wav_validation.csv"),
+    "test": os.path.join(_SPLIT_URL, "voice_sample_wav_test.csv")
 }
 
 
@@ -84,7 +84,7 @@ class TFXVoice(tfds.core.BeamBasedBuilder):
 			with tf.io.gfile.GFile(SPLIT_URL) as f:
 				reader = csv.DictReader(f)
 				split = list(
-				    map(lambda e: (os.path.join(BASEPATH, e['path']), e['speaker_id']), reader))
+				    map(lambda e: (e['wav_path'], e['speaker_id']), reader))
 			data_splits[SPLIT_NAME] = split
 		return data_splits
 
@@ -116,90 +116,69 @@ class TFXVoice(tfds.core.BeamBasedBuilder):
 	def _build_pcollection(self, pipeline, examples):
 		"""Generates examples as dicts."""
 		beam = tfds.core.lazy_imports.apache_beam
-		too_short, long_enough = (pipeline
-								  | beam.Create(examples)
-								  | beam.FlatMapTuple(_generate_example)
-								  | beam.FlatMapTuple(_encode_audio)
-								  | beam.Partition(_separate_less_than_5_sec, 2)
-								  )
-		unique_key_joined_short = (too_short
-						| beam.GroupByKey()
-						| beam.FlatMap(_join_short_audio)
-						)
-		unique_key_long_enough = (long_enough
-						| beam.FlatMapTuple(_use_unique_key)
-						)
-
-		return ((unique_key_joined_short, unique_key_long_enough)
-				| beam.Flatten()
+		return (pipeline
+				| beam.Create(examples)
+				| beam.FlatMapTuple(_generate_example)
 				| beam.Reshuffle()
 				)
 
-
-def _use_unique_key(_key, example):
-	key = example.pop("key")
-	yield key, example
-
-
-def _join_short_audio(grouped_example):
-	speaker, examples = grouped_example
-	examples = list(examples)
-	# logging.info(examples)
-	duration = 0.0
-	speech = np.array([])
-	key = ""
-	i = 0
-	while i < len(examples):
-		speech = np.concatenate((speech, examples[i]['speech']))
-		duration += examples[i]['duration']
-		key += examples[i]['key']
-		if duration > 5:
-			example = {"speaker_id": speaker,
-					   "speech": speech,
-					   "duration": duration,
-					  }
-			yield key, example
-			duration = 0.0
-			speech = np.array([])
-			key = ""
-		i += 1
-		if duration > 5:
-			example = {"speaker_id": speaker,
-					   "speech": speech,
-					   "duration": duration}
-			yield key, example
-
-
 def _generate_example(path_to_file, speaker_id):
-	key = hash(path_to_file)
-	example = {
-		"speaker_id": speaker_id,
-		"speech": path_to_file,
-		"key": key
-	}
-	yield speaker_id, example
+
+	def frame_generator(frame_duration_ms, audio, sample_rate):
+		"""Generates audio frames from PCM audio data.
+
+		Takes the desired frame duration in milliseconds, the PCM data, and
+		the sample rate.
+
+		Yields Frames of the requested duration.
+		"""
+		n = int(sample_rate * (frame_duration_ms / 1000.0) * 2)
+		offset = 0
+		while offset + n < len(audio):
+			yield audio[offset:offset + n]
+			offset += n
 
 
-def _encode_audio(key, example):
+	def vad_collector(sample_rate,
+					vad,
+					frames):
+		"""Filters out non-voiced audio frames.
+		"""
+		voiced_frames = []
+		for frame in frames:
+			is_speech = vad.is_speech(frame, sample_rate)
+			if is_speech:
+				voiced_frames += [frame]
+		return np.concatenate(voiced_frames)
+
 	SAMPLE_RATE = 16000
-	if 'audiowebm' in example['speech']:
-		file_format = 'webm'
-	else:
-		file_format = example['speech'].split(".")[-1]
-	with tf.io.gfile.GFile(example['speech'], 'rb') as fobj:
-		audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
-			fobj, format=file_format)
 	np_dtype = np.dtype(tf.int64.as_numpy_dtype)
+
+	with tf.io.gfile.GFile(path_to_file, 'rb') as fobj:
+		audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
+			fobj, format='wav')
 
 	speech = np.array(audio_segment.set_frame_rate(
 	    SAMPLE_RATE).get_array_of_samples()).astype(np_dtype)
+	vad = lazy_imports_lib.lazy_imports.webrtcvad.Vad(3) #aggressiveness = 3
+	frames = list(frame_generator(30, speech, SAMPLE_RATE))
+	voiced_audio = list(vad_collector(SAMPLE_RATE, vad, frames))
 
-	duration = len(speech) / SAMPLE_RATE
-	example['duration'] = duration
-	example['speech'] = speech
-	yield example['speaker_id'], example
+	#split into 5-10 sec chunks
+	indices = list(range(len(voiced_audio) + 1, 16000*5))
+	indices[-1] = len(voiced_audio)
+	for p in range(len(indices)-1):
+		i, j = indices[p], indices[p+1]
+		speech = np.array(voiced_audio[i: j]).astype(np_dtype)
+		duration = (j-i) / SAMPLE_RATE
 
-def _separate_less_than_5_sec(element, num_partitions):
-	key, example = element
-	return 1 if example['duration'] >= 5 else 0
+		example = {
+			'duration' : duration,
+			'speech' : speech,
+			'speaker_id' : speaker_id
+		}
+
+	yield path_to_file + '%i.%i'%(i, j) , example
+
+
 
