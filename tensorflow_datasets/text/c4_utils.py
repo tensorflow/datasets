@@ -274,8 +274,11 @@ def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
       new_lines.append(line)
       hashed_lines.add(hashed_line)
   new_text = "\n".join(new_lines)
+  if not new_text:
+    counter_inc_fn("filtered-deduped_page-empty")
+    return
   if min_num_sentences and len(_get_sentences(new_text)) < min_num_sentences:
-    counter_inc_fn("filtered-doc-toofewsentences")
+    counter_inc_fn("filtered-deduped_page-toofewsentences")
     return
   new_features = features.copy()
   new_features["text"] = new_text
