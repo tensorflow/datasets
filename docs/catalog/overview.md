@@ -137,6 +137,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Object detection`
 
 *   [`coco`](coco.md)
+*   [`coco_captions`](coco_captions.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`kitti`](kitti.md)
 *   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
 *   [`open_images_v4`](open_images_v4.md)
@@ -162,6 +164,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`higgs`](higgs.md)
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
+*   [`movielens`](movielens.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`radon`](radon.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
 
