@@ -165,7 +165,7 @@ def _generate_example(path_to_file, speaker_id):
 	voiced_audio = list(vad_collector(SAMPLE_RATE, vad, frames))
 	print("len audio", len(voiced_audio))
 	#split into 5-10 sec chunks
-	indices = list(range(len(voiced_audio) + 1, 16000*5))
+	indices = list(range(0, len(voiced_audio) + 1, 16000*5))
 	print("indices", indices)
 	indices[len(indices)-1] = len(voiced_audio)
 	for p in range(len(indices)-1):
