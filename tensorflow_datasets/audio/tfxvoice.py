@@ -163,7 +163,7 @@ def _generate_example(path_to_file, speaker_id):
 
 	aggressiveness = 3
 	while True:
-		vad = lazy_imports_lib.lazy_imports.webrtcvad.Vad(3) #aggressiveness = 3
+		vad = lazy_imports_lib.lazy_imports.webrtcvad.Vad(aggressiveness) #aggressiveness = 3
 		frames = list(frame_generator(30, speech, SAMPLE_RATE))
 		voiced_audio = list(vad_collector(SAMPLE_RATE, vad, frames))
 		if aggressiveness is 1:
