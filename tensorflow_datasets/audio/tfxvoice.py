@@ -190,14 +190,14 @@ def _generate_example(path_to_file, speaker_id):
 		i, j = indices[p], indices[p+1]
 		speech = np.array(voiced_audio[i: j]).astype(np_dtype)
 		duration = (j-i) / SAMPLE_RATE
+		if duration >= 5:
+			example = {
+				'duration' : duration,
+				'speech' : speech,
+				'speaker_id' : speaker_id
+			}
 
-		example = {
-			'duration' : duration,
-			'speech' : speech,
-			'speaker_id' : speaker_id
-		}
-
-	yield path_to_file + '%i.%i'%(i, j) , example
+			yield path_to_file + '%i.%i'%(i, j) , example
 
 
 
