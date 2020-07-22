@@ -153,7 +153,7 @@ def _generate_example(path_to_file, speaker_id):
 
 	SAMPLE_RATE = 16000
 	np_dtype = np.dtype(tf.int64.as_numpy_dtype)
-
+	print(path_to_file, speaker_id)
 	with tf.io.gfile.GFile(path_to_file, 'rb') as fobj:
 		audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
 			fobj, format='wav')
