@@ -90,6 +90,7 @@ from __future__ import print_function
 
 import abc
 import collections
+import json
 
 import numpy as np
 import six
@@ -204,6 +205,28 @@ class FeatureConnector(object):
   def dtype(self):
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
+
+  def save_config(self) -> str:
+    """Return the encode JSON string of this FeatureConnector"""
+    return json.dumps(str(self.get_serialized_info()))
+
+  @classmethod
+  def from_config(cls, path: str):
+    """Usage
+
+    features = FeatureConnector.from_config('path/to/feature_info.json')
+
+    Args:
+      path: `str`, path to the feature_info.json file 
+            (`~/tensorflow_datasets/mnist/3.1.0/feature_info.json`)
+
+    """
+    with tf.io.gfile.GFile(path) as f:
+      feature_json = json.loads(f.read())
+
+    # TODO: Parse feature_json -> features
+    # features = parse(feature_json)
+    # return features
 
   def get_serialized_info(self):
     """Return the shape/dtype of features after encoding (for the adapter).
