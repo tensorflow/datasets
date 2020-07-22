@@ -163,10 +163,11 @@ def _generate_example(path_to_file, speaker_id):
 	vad = lazy_imports_lib.lazy_imports.webrtcvad.Vad(3) #aggressiveness = 3
 	frames = list(frame_generator(30, speech, SAMPLE_RATE))
 	voiced_audio = list(vad_collector(SAMPLE_RATE, vad, frames))
-
+	print("len audio", len(voiced_audio))
 	#split into 5-10 sec chunks
 	indices = list(range(len(voiced_audio) + 1, 16000*5))
-	indices[-1] = len(voiced_audio)
+	print("indices", indices)
+	indices[len(indices)-1] = len(voiced_audio)
 	for p in range(len(indices)-1):
 		i, j = indices[p], indices[p+1]
 		speech = np.array(voiced_audio[i: j]).astype(np_dtype)
