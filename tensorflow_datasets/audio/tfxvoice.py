@@ -177,6 +177,12 @@ def _generate_example(path_to_file, speaker_id):
 	#split into 5-10 sec chunks
 	indices = list(range(0, len(voiced_audio) + 1, SAMPLE_RATE*5))
 	print("indices", indices)
+
+	if len(indices) < 2:
+		indices = [0, len(voiced_audio)]
+	else:
+		indices[-1] = len(voiced_audio)
+
 	for p in range(len(indices)-1):
 		i, j = indices[p], indices[p+1]
 		speech = np.array(voiced_audio[i: j]).astype(np_dtype)
