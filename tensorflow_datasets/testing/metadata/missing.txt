@@ -23,9 +23,6 @@ common_voice/tr/1.0.0
 common_voice/tt/1.0.0
 common_voice/zh-TW/1.0.0
 covid19sum/1.0.0
-nsynth/full/2.3.3
-nsynth/gansynth_subset.f0_and_loudness/2.3.3
-nsynth/gansynth_subset/2.3.3
 reddit_disentanglement/2.0.0
 samsum/1.0.0
 so2sat/all/2.1.0
