@@ -149,10 +149,10 @@ def _generate_example(path_to_file, speaker_id):
 			is_speech = vad.is_speech(frame, sample_rate)
 			if is_speech:
 				voiced_frames += [frame]
-		if len(voiced_frames) > 1:
+		if len(voiced_frames) > 0:
 			return np.concatenate(voiced_frames)
 		else:
-			return voiced_frames[0]
+			return np.array([])
 
 	SAMPLE_RATE = 16000
 	np_dtype = np.dtype(tf.int64.as_numpy_dtype)
