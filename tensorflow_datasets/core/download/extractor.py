@@ -102,7 +102,7 @@ class _Extractor(object):
         msg += (
             '\n'
             'On windows, path lengths greater than 260 characters may '
-            'result in an error. See the doc to remove the limiration: '
+            'result in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
       raise ExtractError(msg)
