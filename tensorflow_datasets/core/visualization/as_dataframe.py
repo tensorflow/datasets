@@ -28,11 +28,6 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core.visualization import dataframe_visualizer
 
 
-_ALL_VISUALIZERS = [
-    dataframe_visualizer.DataframeVisualizer(),
-]
-
-
 def as_dataframe(
     ds: tf.data.Dataset,
     ds_info: dataset_info.DatasetInfo,
@@ -63,16 +58,5 @@ def as_dataframe(
   Returns:
     dataframe: The `pandas.DataFrame` object
   """
-  if not isinstance(ds_info, dataset_info.DatasetInfo):  # Arguments inverted
-    # `absl.logging` does not appear on Colab by default, so uses print instead.
-    print('WARNING: For consistency with `tfds.load`, the `tfds.show_examples` '
-          'signature has been modified from (info, ds) to (ds, info).\n'
-          'The old signature is deprecated and will be removed. '
-          'Please change your call to `tfds.show_examples(ds, info)`')
-    ds, ds_info = ds_info, ds
-  for visualizer in _ALL_VISUALIZERS:
-    if visualizer.match(ds_info):
-      return visualizer.show(ds, ds_info, **options_kwargs)
-    raise ValueError(
-        'Visualisation not supported for dataset `{}`'.format(ds_info.name)
-    )
+  visualizer = dataframe_visualizer.DataframeVisualizer()
+  return visualizer.show(ds, ds_info, **options_kwargs)

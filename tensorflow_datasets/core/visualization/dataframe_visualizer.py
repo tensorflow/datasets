@@ -25,16 +25,37 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.visualization import visualizer
+
+
+def _filter_features(ds_info: tf.data.Dataset,
+                     all_features: list,
+                     filter_features: list
+                     ) -> list:
+  """Filter the feature types that are not supported.
+
+  Args:
+    ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
+    all_features: List of all feature keys in the dataset.
+    filter_features: List of feature types to remove from the dataframe.
+
+  Returns:
+    List of all feature keys that are supported by the dataframe.
+  """
+  for feature_type in filter_features:
+    keys = visualizer.extract_keys(ds_info.features, feature_type)
+    if isinstance(feature_type, features_lib.Tensor):
+      for tensor_key in keys:
+        if len(ds_info.features[tensor_key].shape) == 0:
+          keys.remove(tensor_key)
+    for key in keys:
+      all_features.remove(key)
+  return all_features
 
 
 class DataframeVisualizer(visualizer.Visualizer):
   """Visualizer for text and structured datasets."""
-
-  def match(self, ds_info: dataset_info.DatasetInfo) -> bool:
-    """See base class."""
-    ds_type = visualizer.extract_dataset_type(ds_info.full_name)
-    return ds_type in ['text', 'structured']
 
   def show(
       self,
@@ -54,8 +75,14 @@ class DataframeVisualizer(visualizer.Visualizer):
     Returns:
       df: The pandas dataframe.
     """
-    # Extract the keys
+    # Extract the features
     features = visualizer.extract_all_keys(ds_info.features)
+
+    # Filter feature types that are not supported
+    unsupported_features = [
+      features_lib.Audio, features_lib.Image, features_lib.Sequence,
+      features_lib.Tensor, features_lib.Video]
+    features = _filter_features(ds_info, features, unsupported_features)
 
     # Create the dataframe
     dataframe = lazy_imports_lib.lazy_imports.pandas.DataFrame(columns=features)
