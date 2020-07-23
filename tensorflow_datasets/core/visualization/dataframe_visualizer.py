@@ -57,6 +57,11 @@ def _filter_features(ds_info: tf.data.Dataset,
 class DataframeVisualizer(visualizer.Visualizer):
   """Visualizer for text and structured datasets."""
 
+  def match(self, ds_info: dataset_info.DatasetInfo) -> bool:
+    """See base class."""
+    return True
+
+
   def show(
       self,
       ds: tf.data.Dataset,
@@ -73,15 +78,16 @@ class DataframeVisualizer(visualizer.Visualizer):
       num_examples: `int`, number of rows in the pandas dataframe.
 
     Returns:
-      df: The pandas dataframe.
+      The pandas dataframe.
     """
     # Extract the features
     features = visualizer.extract_all_keys(ds_info.features)
 
     # Filter feature types that are not supported
     unsupported_features = [
-      features_lib.Audio, features_lib.Image, features_lib.Sequence,
-      features_lib.Tensor, features_lib.Video]
+        features_lib.Audio, features_lib.Image, features_lib.Sequence,
+        features_lib.Tensor, features_lib.Video
+    ]
     features = _filter_features(ds_info, features, unsupported_features)
 
     # Create the dataframe
