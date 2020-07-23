@@ -187,6 +187,7 @@ setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
+    python_requires='>=3.6',
     extras_require=EXTRAS_REQUIRE,
     classifiers=[
         'Development Status :: 4 - Beta',
