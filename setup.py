@@ -129,11 +129,8 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
-    # TODO(epot): Remove numba==0.48 once librosa 8.0 is out
     # See https://github.com/librosa/librosa/issues/1160
-    'nsynth': [
-        'crepe>=0.0.11', 'librosa', 'numba==0.48', 'scikit-learn==0.20.3'
-    ],
+    'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
