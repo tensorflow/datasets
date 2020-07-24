@@ -26,7 +26,7 @@ import inspect
 import itertools
 import os
 import sys
-from typing import Any
+from typing import Any, Optional
 
 from absl import logging
 import six
@@ -791,6 +791,7 @@ class DatasetBuilder(object):
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
+        checksums_path=_get_checksums_path(self),
         manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
@@ -982,6 +983,16 @@ class FileAdapterBuilder(DatasetBuilder):
         self.info.features.decode_example, decoders=decoders)
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
+
+
+def _get_checksums_path(builder: DatasetBuilder) -> Optional[str]:
+  """Returns the checksums path."""
+  checksums_path = builder.code_path.parent / "checksums.tsv"
+  if checksums_path.exists():
+    checksums_path = str(checksums_path)
+  else:
+    checksums_path = None
+  return checksums_path
 
 
 class GeneratorBasedBuilder(FileAdapterBuilder):

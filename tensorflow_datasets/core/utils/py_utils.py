@@ -369,6 +369,13 @@ def get_tfds_path(relative_path):
   return path
 
 
+def get_resource_path(path) -> str:
+  """Get the read-only resource path."""
+  # For compatibility with `zip` archives, we should replace this by a pathlike
+  # abstraction, which uses `importlib.resource.files()`
+  return str(path)
+
+
 def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   """Given a hash constructor, returns checksum digest and size of file."""
   checksum = checksum_cls()
