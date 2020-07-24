@@ -223,6 +223,11 @@ def dedent(text):
   return textwrap.dedent(text).strip() if text else text
 
 
+def indent(text: str, indent: str) -> str:  # pylint: disable=redefined-outer-name
+  text = dedent(text)
+  return text.replace('\n', '\n' + indent)
+
+
 def pack_as_nest_dict(flat_d, nest_d):
   """Pack a 1-lvl dict into a nested dict with same structure as `nest_d`."""
   nest_out_d = {}

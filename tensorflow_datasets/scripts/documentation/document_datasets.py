@@ -28,6 +28,7 @@ from typing import Dict, List, Tuple, Union, Set
 import mako.lookup
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 
 WORKER_COUNT_DATASETS = 200
 WORKER_COUNT_CONFIGS = 50
@@ -218,14 +219,13 @@ def document_single_builder(builder):
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_CONFIGS) as tpool:
       config_builders = list(
           tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
-  tmpl = get_mako_template('dataset')
   visu_doc_util = VisualizationDocUtil()
-  out_str = tmpl.render_unicode(
+  out_str = dataset_markdown_builder.get_markdown_string(
       builder=builder,
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
       nightly_doc_util=NightlyDocUtil(),
-  ).strip()
+  )
   schema_org_tmpl = get_mako_template('schema_org')
   schema_org_out_str = schema_org_tmpl.render_unicode(
       builder=builder,
@@ -291,7 +291,6 @@ def dataset_docs_str(datasets=None):
   for section in sections:
     builders = tf.nest.flatten(module_to_builder[section])
     builders = sorted(builders, key=lambda b: b.name)
-    unused_ = get_mako_template('dataset')  # To warm cache.
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
       builder_docs = tpool.map(document_single_builder, builders)
     builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
