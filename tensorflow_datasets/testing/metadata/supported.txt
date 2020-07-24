@@ -343,7 +343,7 @@ cifar10_corrupted/zoom_blur_2/1.0.0
 cifar10_corrupted/zoom_blur_3/1.0.0
 cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/1.0.0
-citrus_leaves/0.1.0
+citrus_leaves/0.1.1
 civil_comments/CivilComments/1.0.0
 civil_comments/CivilCommentsIdentities/1.0.0
 clevr/3.1.0
@@ -365,9 +365,6 @@ colorectal_histology_large/2.0.0
 cos_e/0.0.1
 cosmos_qa/1.0.0
 crema_d/1.0.0
-curated_breast_imaging_ddsm/original-calc/2.0.0
-curated_breast_imaging_ddsm/original-mass/2.0.0
-curated_breast_imaging_ddsm/patches/2.0.0
 cycle_gan/apple2orange/2.0.0
 cycle_gan/cezanne2photo/2.0.0
 cycle_gan/cityscapes/2.0.0

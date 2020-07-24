@@ -23,6 +23,9 @@ common_voice/tr/1.0.0
 common_voice/tt/1.0.0
 common_voice/zh-TW/1.0.0
 covid19sum/1.0.0
+curated_breast_imaging_ddsm/original-calc/2.0.1
+curated_breast_imaging_ddsm/original-mass/2.0.1
+curated_breast_imaging_ddsm/patches/2.0.1
 reddit_disentanglement/2.0.0
 samsum/1.0.0
 so2sat/all/2.1.0
