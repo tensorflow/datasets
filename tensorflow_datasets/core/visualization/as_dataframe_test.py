@@ -20,24 +20,35 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import mock
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visualization
 
 # Import for registration
 from tensorflow_datasets.text import anli  # pylint: disable=unused-import,g-bad-import-order
+from tensorflow_datasets.structured import higgs  # pylint: disable=unused-import,g-bad-import-order
+from tensorflow_datasets.image_classification import imagenet  # pylint: disable=unused-import,g-bad-import-order
 
 
 class AsDataframeTest(testing.TestCase):
 
-  @mock.patch('pandas.DataFrame')
-  def test_as_dataframe(self, mock_df):
+  def test_text_dataset(self):
     with testing.mock_data(num_examples=20):
       ds, ds_info = registered.load(
           'anli', split='train', with_info=True)
-    visualization.show_examples(ds, ds_info)
+    visualization.as_dataframe(ds, ds_info)
+
+  def test_structured_dataset(self):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = registered.load(
+          'higgs', split='train', with_info=True)
+    visualization.as_dataframe(ds, ds_info)
+
+  def test_image_dataset(self):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = registered.load(
+          'imagenet2012', split='train', with_info=True)
+    visualization.as_dataframe(ds, ds_info)
 
 
 if __name__ == '__main__':
