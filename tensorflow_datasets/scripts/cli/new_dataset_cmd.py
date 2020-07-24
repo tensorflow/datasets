@@ -25,7 +25,6 @@ import argparse
 import dataclasses
 import pathlib
 import textwrap
-from typing import Dict
 
 from tensorflow_datasets.core import naming
 
