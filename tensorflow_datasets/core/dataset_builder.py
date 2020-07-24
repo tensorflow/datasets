@@ -26,6 +26,7 @@ import inspect
 import itertools
 import os
 import sys
+from typing import Any
 
 from absl import logging
 import six
@@ -46,6 +47,11 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 import termcolor
+
+if six.PY3:
+  import pathlib  # pylint: disable=g-import-not-at-top
+else:
+  pathlib = Any
 
 
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
@@ -204,6 +210,12 @@ class DatasetBuilder(object):
       self.info.read_from_directory(self._data_dir)
     else:  # Use the code version (do not restore data)
       self.info.initialize_from_bucket()
+
+  @utils.classproperty
+  @classmethod
+  def code_path(cls) -> pathlib.Path:
+    """Returns the path to the file where the Dataset class is located."""
+    return pathlib.Path(inspect.getfile(cls))
 
   def __getstate__(self):
     return self._original_state
