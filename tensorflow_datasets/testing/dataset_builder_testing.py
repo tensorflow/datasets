@@ -234,7 +234,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     # all needed methods were implemented.
 
   def test_registered(self):
-    is_registered = self.builder.name in registered.list_builders()
+    all_builders = registered.list_builders(with_community_datasets=False)
+    is_registered = self.builder.name in all_builders
     exceptions = self.builder.IN_DEVELOPMENT
     self.assertTrue(is_registered or exceptions,
                     "Dataset {} was not registered and is "
