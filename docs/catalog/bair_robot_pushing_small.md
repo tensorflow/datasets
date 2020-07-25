@@ -39,10 +39,10 @@ including one training set (train) and two test sets of previously seen
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 256
-'train' | 43,264
+Split     | Examples
+:-------- | -------:
+`'test'`  | 256
+`'train'` | 43,264
 
 *   **Features**:
 
@@ -58,6 +58,7 @@ Sequence({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -69,6 +70,6 @@ Sequence({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

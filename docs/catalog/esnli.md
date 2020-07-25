@@ -40,11 +40,11 @@ relations.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,824
-'train'      | 549,367
-'validation' | 9,842
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,824
+`'train'`      | 549,367
+`'validation'` | 9,842
 
 *   **Features**:
 
@@ -62,6 +62,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -77,8 +78,8 @@ url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-n
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## esnli/plain_text (default config)

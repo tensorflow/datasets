@@ -40,15 +40,16 @@ each highlight, which is the target summary
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 11,490
-'train'      | 287,113
-'validation' | 13,368
+Split          | Examples
+:------------- | -------:
+`'test'`       | 11,490
+`'train'`      | 287,113
+`'validation'` | 13,368
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'highlights')`
+
 *   **Citation**:
 
 ```
@@ -77,8 +78,8 @@ Split        | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## cnn_dailymail/plain_text (default config)

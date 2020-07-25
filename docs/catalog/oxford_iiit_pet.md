@@ -38,10 +38,10 @@ lighting. All images have an associated ground truth annotation of breed.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 3,669
-'train' | 3,680
+Split     | Examples
+:-------- | -------:
+`'test'`  | 3,669
+`'train'` | 3,680
 
 *   **Features**:
 
@@ -58,6 +58,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -69,6 +70,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

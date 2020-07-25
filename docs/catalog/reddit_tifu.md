@@ -66,8 +66,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## reddit_tifu/short (default config)
@@ -76,9 +76,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 79,740
+Split     | Examples
+:-------- | -------:
+`'train'` | 79,740
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -90,9 +90,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 42,139
+Split     | Examples
+:-------- | -------:
+`'train'` | 42,139
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

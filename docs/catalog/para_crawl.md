@@ -42,8 +42,8 @@ Web-Scale Parallel Corpora for Official European Languages.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## para_crawl/enbg_plain_text (default config)
@@ -55,9 +55,9 @@ Web-Scale Parallel Corpora for Official European Languages.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,039,885
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,039,885
 
 *   **Features**:
 
@@ -81,9 +81,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,981,949
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,981,949
 
 *   **Features**:
 
@@ -107,9 +107,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,414,895
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,414,895
 
 *   **Features**:
 
@@ -133,9 +133,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 16,264,448
+Split     | Examples
+:-------- | ---------:
+`'train'` | 16,264,448
 
 *   **Features**:
 
@@ -159,9 +159,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,985,233
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,985,233
 
 *   **Features**:
 
@@ -185,9 +185,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 21,987,267
+Split     | Examples
+:-------- | ---------:
+`'train'` | 21,987,267
 
 *   **Features**:
 
@@ -211,9 +211,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 853,422
+Split     | Examples
+:-------- | -------:
+`'train'` | 853,422
 
 *   **Features**:
 
@@ -237,9 +237,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,156,069
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,156,069
 
 *   **Features**:
 
@@ -263,9 +263,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 31,374,161
+Split     | Examples
+:-------- | ---------:
+`'train'` | 31,374,161
 
 *   **Features**:
 
@@ -289,9 +289,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 357,399
+Split     | Examples
+:-------- | -------:
+`'train'` | 357,399
 
 *   **Features**:
 
@@ -315,9 +315,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,002,053
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,002,053
 
 *   **Features**:
 
@@ -341,9 +341,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,901,342
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,901,342
 
 *   **Features**:
 
@@ -367,9 +367,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 12,162,239
+Split     | Examples
+:-------- | ---------:
+`'train'` | 12,162,239
 
 *   **Features**:
 
@@ -393,9 +393,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 844,643
+Split     | Examples
+:-------- | -------:
+`'train'` | 844,643
 
 *   **Features**:
 
@@ -419,9 +419,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 553,060
+Split     | Examples
+:-------- | -------:
+`'train'` | 553,060
 
 *   **Features**:
 
@@ -445,9 +445,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 195,502
+Split     | Examples
+:-------- | -------:
+`'train'` | 195,502
 
 *   **Features**:
 
@@ -471,9 +471,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,659,268
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,659,268
 
 *   **Features**:
 
@@ -497,9 +497,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,503,276
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,503,276
 
 *   **Features**:
 
@@ -523,9 +523,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 8,141,940
+Split     | Examples
+:-------- | --------:
+`'train'` | 8,141,940
 
 *   **Features**:
 
@@ -549,9 +549,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,952,043
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,952,043
 
 *   **Features**:
 
@@ -575,9 +575,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,591,831
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,591,831
 
 *   **Features**:
 
@@ -601,9 +601,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 660,161
+Split     | Examples
+:-------- | -------:
+`'train'` | 660,161
 
 *   **Features**:
 
@@ -627,9 +627,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,476,729
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,476,729
 
 *   **Features**:
 

@@ -65,11 +65,11 @@ the competition.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,333
-'train'      | 3,334
-'validation' | 3,333
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,333
+`'train'`      | 3,334
+`'validation'` | 3,333
 
 *   **Features**:
 
@@ -81,8 +81,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-aircraft-1.2.0.png" alt="Visualization" width="500px">
 
@@ -101,11 +101,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,000
-'train'      | 40,000
-'validation' | 10,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,000
+`'train'`      | 40,000
+`'validation'` | 10,000
 
 *   **Features**:
 
@@ -117,8 +117,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-cifar100-1.2.0.png" alt="Visualization" width="500px">
 
@@ -137,11 +137,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 19,600
-'train'      | 23,520
-'validation' | 5,880
+Split          | Examples
+:------------- | -------:
+`'test'`       | 19,600
+`'train'`      | 23,520
+`'validation'` | 5,880
 
 *   **Features**:
 
@@ -153,8 +153,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-daimlerpedcls-1.2.0.png" alt="Visualization" width="500px">
 
@@ -173,11 +173,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,880
-'train'      | 1,880
-'validation' | 1,880
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,880
+`'train'`      | 1,880
+`'validation'` | 1,880
 
 *   **Features**:
 
@@ -189,8 +189,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-dtd-1.2.0.png" alt="Visualization" width="500px">
 
@@ -209,11 +209,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 12,630
-'train'      | 31,367
-'validation' | 7,842
+Split          | Examples
+:------------- | -------:
+`'test'`       | 12,630
+`'train'`      | 31,367
+`'validation'` | 7,842
 
 *   **Features**:
 
@@ -225,8 +225,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-gtsrb-1.2.0.png" alt="Visualization" width="500px">
 
@@ -245,11 +245,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 48,238
-'train'      | 1,232,167
-'validation' | 49,000
+Split          | Examples
+:------------- | --------:
+`'test'`       | 48,238
+`'train'`      | 1,232,167
+`'validation'` | 49,000
 
 *   **Features**:
 
@@ -261,8 +261,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-imagenet12-1.2.0.png" alt="Visualization" width="500px">
 
@@ -281,11 +281,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 8,115
-'train'      | 17,853
-'validation' | 6,492
+Split          | Examples
+:------------- | -------:
+`'test'`       | 8,115
+`'train'`      | 17,853
+`'validation'` | 6,492
 
 *   **Features**:
 
@@ -297,8 +297,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-omniglot-1.2.0.png" alt="Visualization" width="500px">
 
@@ -317,11 +317,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 26,032
-'train'      | 47,217
-'validation' | 26,040
+Split          | Examples
+:------------- | -------:
+`'test'`       | 26,032
+`'train'`      | 47,217
+`'validation'` | 26,040
 
 *   **Features**:
 
@@ -333,8 +333,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-svhn-1.2.0.png" alt="Visualization" width="500px">
 
@@ -353,11 +353,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,783
-'train'      | 7,585
-'validation' | 1,952
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,783
+`'train'`      | 7,585
+`'validation'` | 1,952
 
 *   **Features**:
 
@@ -369,8 +369,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-ucf101-1.2.0.png" alt="Visualization" width="500px">
 
@@ -389,11 +389,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,149
-'train'      | 1,020
-'validation' | 1,020
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,149
+`'train'`      | 1,020
+`'validation'` | 1,020
 
 *   **Features**:
 
@@ -405,7 +405,7 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/visual_domain_decathlon-vgg-flowers-1.2.0.png" alt="Visualization" width="500px">

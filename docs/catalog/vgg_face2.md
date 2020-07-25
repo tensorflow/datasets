@@ -39,8 +39,8 @@ subject.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain two files: vggface2_test.tar.gz and
     vggface2_train.tar.gz.
@@ -53,10 +53,10 @@ subject.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'test'  | 169,396
-'train' | 3,141,890
+Split     | Examples
+:-------- | --------:
+`'test'`  | 169,396
+`'train'` | 3,141,890
 
 *   **Features**:
 
@@ -71,6 +71,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -81,7 +82,7 @@ booktitle = "International Conference on Automatic Face and Gesture Recognition"
 year  = "2018"}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/vgg_face2-1.0.0.png" alt="Visualization" width="500px">

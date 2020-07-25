@@ -30,14 +30,15 @@
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'train'      | 1,281,167
-'validation' | 50,000
+Split          | Examples
+:------------- | --------:
+`'train'`      | 1,281,167
+`'validation'` | 50,000
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -85,6 +86,7 @@ Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
 *   **Download size**: `237.11 MiB`
+
 *   **Features**:
 
 ```python
@@ -94,8 +96,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-8x8-0.1.0.png" alt="Visualization" width="500px">
 
@@ -135,6 +137,7 @@ Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
 *   **Download size**: `923.34 MiB`
+
 *   **Features**:
 
 ```python
@@ -144,8 +147,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-16x16-0.1.0.png" alt="Visualization" width="500px">
 
@@ -185,6 +188,7 @@ Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
 *   **Download size**: `3.46 GiB`
+
 *   **Features**:
 
 ```python
@@ -194,8 +198,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-32x32-0.1.0.png" alt="Visualization" width="500px">
 
@@ -235,6 +239,7 @@ Additionally, the original authors 1 index there labels which we convert to 0
 indexed by subtracting one.
 
 *   **Download size**: `13.13 GiB`
+
 *   **Features**:
 
 ```python
@@ -244,7 +249,7 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_resized-64x64-0.1.0.png" alt="Visualization" width="500px">

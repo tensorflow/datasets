@@ -43,11 +43,11 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,880
-'train'      | 1,880
-'validation' | 1,880
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,880
+`'train'`      | 1,880
+`'validation'` | 1,880
 
 *   **Features**:
 
@@ -62,6 +62,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -72,7 +73,7 @@ Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Reco
 Year      = {2014}}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/dtd-3.0.1.png" alt="Visualization" width="500px">

@@ -48,8 +48,9 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## wordnet/WN18 (default config)
@@ -64,11 +65,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,000
-'train'      | 141,442
-'validation' | 5,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,000
+`'train'`      | 141,442
+`'validation'` | 5,000
 
 *   **Citation**:
 
@@ -112,11 +113,11 @@ url = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-mult
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,134
-'train'      | 86,835
-'validation' | 3,034
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,134
+`'train'`      | 86,835
+`'validation'` | 3,034
 
 *   **Citation**:
 

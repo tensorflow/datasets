@@ -46,11 +46,11 @@ for the validation set.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 4,890
-'train'      | 85,511
-'validation' | 10,102
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,890
+`'train'`      | 85,511
+`'validation'` | 10,102
 
 *   **Features**:
 
@@ -64,6 +64,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
+
 *   **Citation**:
 
 ```
@@ -81,6 +82,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

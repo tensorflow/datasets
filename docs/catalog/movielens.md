@@ -118,8 +118,8 @@ keywords = {Datasets, recommendations, ratings, MovieLens}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## movielens/25m-ratings (default config)
@@ -134,15 +134,18 @@ Each user has rated at least 20 movies. The ratings are in half-star increments.
 This dataset does not include demographic data.
 
 *   **Download size**: `249.84 MiB`
+
 *   **Dataset size**: `3.89 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 25,000,095
+Split     | Examples
+:-------- | ---------:
+`'train'` | 25,000,095
 
 *   **Features**:
 
@@ -172,9 +175,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 62,423
+Split     | Examples
+:-------- | -------:
+`'train'` | 62,423
 
 *   **Features**:
 
@@ -198,15 +201,18 @@ Each user has rated at least 20 movies. The ratings are in half-star increments.
 This dataset does not include demographic data.
 
 *   **Download size**: `955.28 KiB`
+
 *   **Dataset size**: `15.82 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 100,836
+Split     | Examples
+:-------- | -------:
+`'train'` | 100,836
 
 *   **Features**:
 
@@ -236,9 +242,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 9,742
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,742
 
 *   **Features**:
 
@@ -261,15 +267,18 @@ This dataset contains demographic data of users in addition to data on movies
 and ratings.
 
 *   **Download size**: `4.70 MiB`
+
 *   **Dataset size**: `32.41 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 100,000
+Split     | Examples
+:-------- | -------:
+`'train'` | 100,000
 
 *   **Features**:
 
@@ -305,9 +314,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 1,682
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,682
 
 *   **Features**:
 
@@ -331,15 +340,18 @@ demographic data, age values are divided into ranges and the lowest age value
 for each range is used in the data instead of the actual values.
 
 *   **Download size**: `5.64 MiB`
+
 *   **Dataset size**: `308.42 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,000,209
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,000,209
 
 *   **Features**:
 
@@ -374,9 +386,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 3,883
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,883
 
 *   **Features**:
 
@@ -398,15 +410,18 @@ Each user has rated at least 20 movies. Ratings are in half-star increments.
 This dataset does not contain demographic data.
 
 *   **Download size**: `189.50 MiB`
+
 *   **Dataset size**: `3.10 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 20,000,263
+Split     | Examples
+:-------- | ---------:
+`'train'` | 20,000,263
 
 *   **Features**:
 
@@ -436,9 +451,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 27,278
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,278
 
 *   **Features**:
 

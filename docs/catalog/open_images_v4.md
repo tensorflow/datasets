@@ -46,11 +46,11 @@ classes.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 125,436
-'train'      | 1,743,042
-'validation' | 41,620
+Split          | Examples
+:------------- | --------:
+`'test'`       | 125,436
+`'train'`      | 1,743,042
+`'validation'` | 41,620
 
 *   **Features**:
 
@@ -84,6 +84,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -139,8 +140,8 @@ FeaturesDict({
 
 *   **Config description**: Images at their original resolution and quality.
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/open_images_v4-original-2.0.0.png" alt="Visualization" width="500px">
 
@@ -149,8 +150,8 @@ FeaturesDict({
 *   **Config description**: Images have roughly 300,000 pixels, at 72 JPEG
     quality.
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/open_images_v4-300k-2.0.0.png" alt="Visualization" width="500px">
 
@@ -159,7 +160,7 @@ FeaturesDict({
 *   **Config description**: Images have roughly 200,000 pixels, at 72 JPEG
     quality.
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/open_images_v4-200k-2.0.0.png" alt="Visualization" width="500px">

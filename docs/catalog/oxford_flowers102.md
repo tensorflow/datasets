@@ -45,11 +45,11 @@ training set and validation set each consist of 10 images per class (totalling
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,149
-'train'      | 1,020
-'validation' | 1,020
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,149
+`'train'`      | 1,020
+`'validation'` | 1,020
 
 *   **Features**:
 
@@ -64,6 +64,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -76,7 +77,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/oxford_flowers102-2.1.1.png" alt="Visualization" width="500px">

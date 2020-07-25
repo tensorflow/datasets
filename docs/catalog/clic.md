@@ -47,11 +47,11 @@ frames).
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 428
-'train'      | 1,633
-'validation' | 102
+Split          | Examples
+:------------- | -------:
+`'test'`       | 428
+`'train'`      | 1,633
+`'validation'` | 102
 
 *   **Features**:
 
@@ -64,6 +64,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -77,7 +78,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/clic-1.0.0.png" alt="Visualization" width="500px">

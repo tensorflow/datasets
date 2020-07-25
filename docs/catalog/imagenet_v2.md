@@ -59,9 +59,9 @@ as a dictionary with the following keys:
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 10,000
+Split    | Examples
+:------- | -------:
+`'test'` | 10,000
 
 *   **Features**:
 
@@ -76,6 +76,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -91,26 +92,32 @@ FeaturesDict({
 ## imagenet_v2/matched-frequency (default config)
 
 *   **Download size**: `582.13 MiB`
+
 *   **Dataset size**: `576.77 MiB`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_v2-matched-frequency-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenet_v2/threshold-0.7
 
 *   **Download size**: `577.35 MiB`
+
 *   **Dataset size**: `571.98 MiB`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_v2-threshold-0.7-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenet_v2/topimages
 
 *   **Download size**: `578.26 MiB`
+
 *   **Dataset size**: `572.85 MiB`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet_v2-topimages-0.1.0.png" alt="Visualization" width="500px">

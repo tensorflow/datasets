@@ -41,9 +41,9 @@ Machine Learning models for password guessing and cracking.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 14,344,391
+Split     | Examples
+:-------- | ---------:
+`'train'` | 14,344,391
 
 *   **Features**:
 
@@ -56,6 +56,9 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Citation**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

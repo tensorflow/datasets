@@ -44,11 +44,11 @@ using the provided paper ids with the Semantic Scholar API
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,859
-'train'      | 8,194
-'validation' | 916
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,859
+`'train'`      | 8,194
+`'validation'` | 916
 
 *   **Features**:
 
@@ -74,6 +74,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('string', 'label')`
+
 *   **Citation**:
 
 ```
@@ -85,6 +86,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

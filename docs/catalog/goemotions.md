@@ -45,11 +45,11 @@ remorse, sadness, surprise.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,427
-'train'      | 43,410
-'validation' | 5,426
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,427
+`'train'`      | 43,410
+`'validation'` | 5,426
 
 *   **Features**:
 
@@ -90,6 +90,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -111,6 +112,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

@@ -37,10 +37,10 @@ Images of hands playing rock, paper, scissor game.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 372
-'train' | 2,520
+Split     | Examples
+:-------- | -------:
+`'test'`  | 372
+`'train'` | 2,520
 
 *   **Features**:
 
@@ -54,6 +54,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -66,7 +67,7 @@ url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/rock_paper_scissors-3.0.0.png" alt="Visualization" width="500px">

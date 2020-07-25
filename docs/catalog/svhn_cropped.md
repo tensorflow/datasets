@@ -40,11 +40,11 @@ cropped to 32x32.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'extra' | 531,131
-'test'  | 26,032
-'train' | 73,257
+Split     | Examples
+:-------- | -------:
+`'extra'` | 531,131
+`'test'`  | 26,032
+`'train'` | 73,257
 
 *   **Features**:
 
@@ -58,6 +58,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -69,7 +70,7 @@ year = {2011}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/svhn_cropped-3.0.0.png" alt="Visualization" width="500px">

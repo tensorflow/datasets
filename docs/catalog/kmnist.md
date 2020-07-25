@@ -39,10 +39,10 @@ of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 10,000
-'train' | 60,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 60,000
 
 *   **Features**:
 
@@ -56,6 +56,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -70,7 +71,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/kmnist-3.0.1.png" alt="Visualization" width="500px">

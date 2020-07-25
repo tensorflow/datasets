@@ -86,6 +86,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -98,8 +99,8 @@ year = {2020}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## waymo_open_dataset/v1.2 (default config)
@@ -110,10 +111,10 @@ year = {2020}
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 158,081
-'validation' | 39,987
+Split          | Examples
+:------------- | -------:
+`'train'`      | 158,081
+`'validation'` | 39,987
 
 ## waymo_open_dataset/v1.1
 
@@ -123,10 +124,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 158,081
-'validation' | 39,987
+Split          | Examples
+:------------- | -------:
+`'train'`      | 158,081
+`'validation'` | 39,987
 
 ## waymo_open_dataset/v1.0
 
@@ -139,9 +140,10 @@ tfds.load('waymo_open_dataset/v1.0', data_dir='gs://waymo_open_dataset_v_1_0_0_i
 ```
 
 *   **Dataset size**: `34.73 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 14,884
-'validation' | 4,954
+Split          | Examples
+:------------- | -------:
+`'train'`      | 14,884
+`'validation'` | 4,954

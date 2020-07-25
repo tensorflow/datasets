@@ -45,14 +45,14 @@ task-driven dialog systems.
 
 *   **Splits**:
 
-Split            | Examples
-:--------------- | -------:
-'test'           | 4,500
-'test_oos'       | 1,000
-'train'          | 15,000
-'train_oos'      | 100
-'validation'     | 3,000
-'validation_oos' | 100
+Split              | Examples
+:----------------- | -------:
+`'test'`           | 4,500
+`'test_oos'`       | 1,000
+`'train'`          | 15,000
+`'train_oos'`      | 100
+`'validation'`     | 3,000
+`'validation_oos'` | 100
 
 *   **Features**:
 
@@ -69,6 +69,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'intent')`
+
 *   **Citation**:
 
 ```
@@ -96,6 +97,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

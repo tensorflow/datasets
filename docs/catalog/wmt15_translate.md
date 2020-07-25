@@ -46,8 +46,8 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Some of the wmt configs here, require a manual download.
     Please look into wmt.py to see the exact path (and file name) that has to
@@ -73,8 +73,8 @@ builder = tfds.builder("wmt_translate", config=config)
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## wmt15_translate/cs-en (default config)
@@ -85,11 +85,11 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'test'       | 2,656
-'train'      | 15,793,126
-'validation' | 3,003
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 2,656
+`'train'`      | 15,793,126
+`'validation'` | 3,003
 
 *   **Features**:
 
@@ -112,11 +112,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 2,169
-'train'      | 4,522,998
-'validation' | 3,003
+Split          | Examples
+:------------- | --------:
+`'test'`       | 2,169
+`'train'`      | 4,522,998
+`'validation'` | 3,003
 
 *   **Features**:
 
@@ -139,11 +139,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 1,370
-'train'      | 2,073,394
-'validation' | 1,500
+Split          | Examples
+:------------- | --------:
+`'test'`       | 1,370
+`'train'`      | 2,073,394
+`'validation'` | 1,500
 
 *   **Features**:
 
@@ -166,11 +166,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'test'       | 1,500
-'train'      | 40,853,298
-'validation' | 4,503
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 1,500
+`'train'`      | 40,853,298
+`'validation'` | 4,503
 
 *   **Features**:
 
@@ -193,11 +193,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 2,818
-'train'      | 2,495,081
-'validation' | 3,003
+Split          | Examples
+:------------- | --------:
+`'test'`       | 2,818
+`'train'`      | 2,495,081
+`'validation'` | 3,003
 
 *   **Features**:
 
@@ -221,11 +221,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'test'       | 2,656
-'train'      | 15,793,126
-'validation' | 3,003
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 2,656
+`'train'`      | 15,793,126
+`'validation'` | 3,003
 
 *   **Features**:
 
@@ -249,11 +249,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 2,169
-'train'      | 4,522,998
-'validation' | 3,003
+Split          | Examples
+:------------- | --------:
+`'test'`       | 2,169
+`'train'`      | 4,522,998
+`'validation'` | 3,003
 
 *   **Features**:
 
@@ -277,11 +277,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 1,370
-'train'      | 2,073,394
-'validation' | 1,500
+Split          | Examples
+:------------- | --------:
+`'test'`       | 1,370
+`'train'`      | 2,073,394
+`'validation'` | 1,500
 
 *   **Features**:
 
@@ -305,11 +305,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'test'       | 1,500
-'train'      | 40,853,298
-'validation' | 4,503
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 1,500
+`'train'`      | 40,853,298
+`'validation'` | 4,503
 
 *   **Features**:
 
@@ -333,11 +333,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 2,818
-'train'      | 2,495,081
-'validation' | 3,003
+Split          | Examples
+:------------- | --------:
+`'test'`       | 2,818
+`'train'`      | 2,495,081
+`'validation'` | 3,003
 
 *   **Features**:
 

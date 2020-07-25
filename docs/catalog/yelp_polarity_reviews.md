@@ -54,14 +54,15 @@ escaped by a backslash followed with an "n" character, that is " ".
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 38,000
-'train' | 560,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 38,000
+`'train'` | 560,000
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'label')`
+
 *   **Citation**:
 
 ```
@@ -79,8 +80,8 @@ Split   | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## yelp_polarity_reviews/plain_text (default config)

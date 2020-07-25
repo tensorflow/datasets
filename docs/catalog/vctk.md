@@ -53,6 +53,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'speech')`
+
 *   **Citation**:
 
 ```
@@ -65,8 +66,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## vctk/mic1 (default config)
@@ -83,9 +84,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 44,455
+Split     | Examples
+:-------- | -------:
+`'train'` | 44,455
 
 ## vctk/mic2
 
@@ -101,6 +102,6 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 43,873
+Split     | Examples
+:-------- | -------:
+`'train'` | 43,873

@@ -36,19 +36,20 @@ project, and has been carefully segmented and aligned.87
 
 *   **Splits**:
 
-Split            | Examples
-:--------------- | -------:
-'dev_clean'      | 2,703
-'dev_other'      | 2,864
-'test_clean'     | 2,620
-'test_other'     | 2,939
-'train_clean100' | 28,539
-'train_clean360' | 104,014
-'train_other500' | 148,688
+Split              | Examples
+:----------------- | -------:
+`'dev_clean'`      | 2,703
+`'dev_other'`      | 2,864
+`'test_clean'`     | 2,620
+`'test_other'`     | 2,939
+`'train_clean100'` | 28,539
+`'train_clean360'` | 104,014
+`'train_other500'` | 148,688
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('speech', 'text')`
+
 *   **Citation**:
 
 ```
@@ -62,8 +63,8 @@ Split            | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## librispeech/plain_text (default config)

@@ -42,11 +42,11 @@ CBSD having 72% of the images.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,885
-'train'      | 5,656
-'validation' | 1,889
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,885
+`'train'`      | 5,656
+`'validation'` | 1,889
 
 *   **Features**:
 
@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -74,7 +75,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cassava-0.1.0.png" alt="Visualization" width="500px">

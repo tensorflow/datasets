@@ -39,10 +39,10 @@ images uploaded by the original authors
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 10,000
-'train' | 60,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 60,000
 
 *   **Features**:
 
@@ -56,6 +56,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -71,8 +72,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: identity
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-identity-1.0.0.png" alt="Visualization" width="500px">
 
@@ -80,8 +81,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: shot_noise
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-shot_noise-1.0.0.png" alt="Visualization" width="500px">
 
@@ -89,8 +90,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: impulse_noise
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-impulse_noise-1.0.0.png" alt="Visualization" width="500px">
 
@@ -98,8 +99,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: glass_blur
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-glass_blur-1.0.0.png" alt="Visualization" width="500px">
 
@@ -107,8 +108,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: motion_blur
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-motion_blur-1.0.0.png" alt="Visualization" width="500px">
 
@@ -116,8 +117,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: shear
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-shear-1.0.0.png" alt="Visualization" width="500px">
 
@@ -125,8 +126,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: scale
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-scale-1.0.0.png" alt="Visualization" width="500px">
 
@@ -134,8 +135,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: rotate
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-rotate-1.0.0.png" alt="Visualization" width="500px">
 
@@ -143,8 +144,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: brightness
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-brightness-1.0.0.png" alt="Visualization" width="500px">
 
@@ -152,8 +153,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: translate
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-translate-1.0.0.png" alt="Visualization" width="500px">
 
@@ -161,8 +162,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: stripe
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-stripe-1.0.0.png" alt="Visualization" width="500px">
 
@@ -170,8 +171,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: fog
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-fog-1.0.0.png" alt="Visualization" width="500px">
 
@@ -179,8 +180,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: spatter
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-spatter-1.0.0.png" alt="Visualization" width="500px">
 
@@ -188,8 +189,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: dotted_line
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-dotted_line-1.0.0.png" alt="Visualization" width="500px">
 
@@ -197,8 +198,8 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: zigzag
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-zigzag-1.0.0.png" alt="Visualization" width="500px">
 
@@ -206,7 +207,7 @@ FeaturesDict({
 
 *   **Config description**: Corruption method: canny_edges
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/mnist_corrupted-canny_edges-1.0.0.png" alt="Visualization" width="500px">

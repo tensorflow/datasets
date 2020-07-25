@@ -88,6 +88,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('commands', 'actions')`
+
 *   **Citation**:
 
 ```
@@ -114,171 +115,201 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## scan/simple (default config)
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.47 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 4,182
-'train' | 16,728
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,182
+`'train'` | 16,728
 
 ## scan/addprim_jump
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.53 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 7,706
-'train' | 14,670
+Split     | Examples
+:-------- | -------:
+`'test'`  | 7,706
+`'train'` | 14,670
 
 ## scan/addprim_turn_left
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.58 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,208
-'train' | 21,890
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,208
+`'train'` | 21,890
 
 ## scan/filler_num0
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `3.20 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,173
-'train' | 15,225
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,173
+`'train'` | 15,225
 
 ## scan/filler_num1
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `3.51 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,173
-'train' | 16,290
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,173
+`'train'` | 16,290
 
 ## scan/filler_num2
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `3.84 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,173
-'train' | 17,391
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,173
+`'train'` | 17,391
 
 ## scan/filler_num3
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.17 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,173
-'train' | 18,528
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,173
+`'train'` | 18,528
 
 ## scan/length
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.47 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 3,920
-'train' | 16,990
+Split     | Examples
+:-------- | -------:
+`'test'`  | 3,920
+`'train'` | 16,990
 
 ## scan/template_around_right
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.17 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 4,476
-'train' | 15,225
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,476
+`'train'` | 15,225
 
 ## scan/template_jump_around_right
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.17 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,173
-'train' | 18,528
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,173
+`'train'` | 18,528
 
 ## scan/template_opposite_right
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.22 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 4,476
-'train' | 15,225
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,476
+`'train'` | 15,225
 
 ## scan/template_right
 
 *   **Download size**: `17.82 MiB`
+
 *   **Dataset size**: `4.26 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 4,476
-'train' | 15,225
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,476
+`'train'` | 15,225
 
 ## scan/mcd1
 
 *   **Download size**: `17.89 MiB`
+
 *   **Dataset size**: `1.89 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,045
-'train' | 8,365
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,045
+`'train'` | 8,365
 
 ## scan/mcd2
 
 *   **Download size**: `17.89 MiB`
+
 *   **Dataset size**: `1.84 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,045
-'train' | 8,365
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,045
+`'train'` | 8,365
 
 ## scan/mcd3
 
 *   **Download size**: `17.89 MiB`
+
 *   **Dataset size**: `1.87 MiB`
+
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,045
-'train' | 8,365
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,045
+`'train'` | 8,365
