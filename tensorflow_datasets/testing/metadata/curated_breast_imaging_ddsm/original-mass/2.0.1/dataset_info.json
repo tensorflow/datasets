@@ -1,0 +1,74 @@
+{
+  "citation": "@misc{CBIS_DDSM_Citation,\n  doi = {10.7937/k9/tcia.2016.7o02s9cy},\n  url = {https://wiki.cancerimagingarchive.net/x/lZNXAQ},\n  author = {Sawyer-Lee,  Rebecca and Gimenez,  Francisco and Hoogi,  Assaf and Rubin,  Daniel},\n  title = {Curated Breast Imaging Subset of DDSM},\n  publisher = {The Cancer Imaging Archive},\n  year = {2016},\n}\n@article{TCIA_Citation,\n  author = {\n    K. Clark and B. Vendt and K. Smith and J. Freymann and J. Kirby and\n    P. Koppel and S. Moore and S. Phillips and D. Maffitt and M. Pringle and\n    L. Tarbox and F. Prior\n  },\n  title = {{The Cancer Imaging Archive (TCIA): Maintaining and Operating a\n  Public Information Repository}},\n  journal = {Journal of Digital Imaging},\n  volume = {26},\n  month = {December},\n  year = {2013},\n  pages = {1045-1057},\n}\n@article{DBLP:journals/corr/abs-1708-09427,\n  author    = {Li Shen},\n  title     = {End-to-end Training for Whole Image Breast Cancer Diagnosis using\n               An All Convolutional Design},\n  journal   = {CoRR},\n  volume    = {abs/1708.09427},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1708.09427},\n  archivePrefix = {arXiv},\n  eprint    = {1708.09427},\n  timestamp = {Mon, 13 Aug 2018 16:48:35 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-09427},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "description": "The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and\nstandardized version of the Digital Database for Screening Mammography (DDSM).\nThe DDSM is a database of 2,620 scanned film mammography studies.\nIt contains normal, benign, and malignant cases with verified pathology\ninformation.\n\nThe default config is made of patches extracted from the original mammograms,\nfollowing the description from http://arxiv.org/abs/1708.09427, in order to\nframe the task to solve in a traditional image classification setting.\n\nBecause special software and libraries are needed to download and read the\nimages contained in the dataset, TFDS assumes that the user has downloaded the\noriginal DCIM files and converted them to PNG.\n\nThe following commands (or equivalent) should be used to generate the PNG files,\nin order to guarantee reproducible results:\n\n```\n  find $DATASET_DCIM_DIR -name '*.dcm' | \\\n  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'\n```",
+  "downloadSize": "989765",
+  "location": {
+    "urls": [
+      "https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM"
+    ]
+  },
+  "name": "curated_breast_imaging_ddsm",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "1190041068",
+      "shardLengths": [
+        "22",
+        "22",
+        "21",
+        "22",
+        "22",
+        "21",
+        "22",
+        "22",
+        "22",
+        "22",
+        "21",
+        "22",
+        "22",
+        "21",
+        "22",
+        "22"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "3966828906",
+      "shardLengths": [
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36",
+        "37",
+        "36"
+      ]
+    }
+  ],
+  "version": "2.0.1"
+}

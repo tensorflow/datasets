@@ -365,6 +365,9 @@ colorectal_histology_large/2.0.0
 cos_e/0.0.1
 cosmos_qa/1.0.0
 crema_d/1.0.0
+curated_breast_imaging_ddsm/original-calc/2.0.1
+curated_breast_imaging_ddsm/original-mass/2.0.1
+curated_breast_imaging_ddsm/patches/2.0.1
 cycle_gan/apple2orange/2.0.0
 cycle_gan/cezanne2photo/2.0.0
 cycle_gan/cityscapes/2.0.0
@@ -743,7 +746,7 @@ pet_finder/1.0.0
 pg19/0.1.1
 places365_small/2.0.0
 plant_leaves/0.1.0
-plant_village/1.0.0
+plant_village/1.0.1
 plantae_k/0.1.0
 qa4mre/2011.main.DE/0.1.0
 qa4mre/2011.main.EN/0.1.0
