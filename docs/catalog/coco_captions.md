@@ -55,12 +55,12 @@ splits have caption annotations.
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-'restval' | 30,504
-'test'    | 5,000
-'train'   | 82,783
-'val'     | 5,000
+Split       | Examples
+:---------- | -------:
+`'restval'` | 30,504
+`'test'`    | 5,000
+`'train'`   | 82,783
+`'val'`     | 5,000
 
 *   **Features**:
 
@@ -86,6 +86,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -128,8 +129,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/coco_captions-2014-1.1.0.png" alt="Visualization" width="500px">
 

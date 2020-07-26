@@ -37,8 +37,8 @@ been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
 
     *   **`5.0.0`** (default): No release notes.
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
@@ -62,6 +62,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -93,13 +94,13 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 12,811
-'validation' | 50,000
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,811
+`'validation'` | 50,000
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_subset-1pct-5.0.0.png" alt="Visualization" width="500px">
 
@@ -113,12 +114,12 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 128,116
-'validation' | 50,000
+Split          | Examples
+:------------- | -------:
+`'train'`      | 128,116
+`'validation'` | 50,000
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_subset-10pct-5.0.0.png" alt="Visualization" width="500px">

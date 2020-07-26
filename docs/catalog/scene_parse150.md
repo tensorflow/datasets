@@ -39,10 +39,10 @@ evaluation platform for the algorithms of scene parsing.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 2,000
-'train' | 20,210
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 20,210
 
 *   **Features**:
 
@@ -56,6 +56,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'annotation')`
+
 *   **Citation**:
 
 ```
@@ -67,6 +68,6 @@ year={2017}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

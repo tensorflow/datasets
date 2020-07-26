@@ -20,18 +20,24 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Source code**:
     [`tfds.text.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## glue/cola (default config)
@@ -48,11 +54,11 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,063
-'train'      | 8,551
-'validation' | 1,043
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,063
+`'train'`      | 8,551
+`'validation'` | 1,043
 
 *   **Features**:
 
@@ -98,11 +104,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,821
-'train'      | 67,349
-'validation' | 872
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,821
+`'train'`      | 67,349
+`'validation'` | 872
 
 *   **Features**:
 
@@ -149,11 +155,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,725
-'train'      | 3,668
-'validation' | 408
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,725
+`'train'`      | 3,668
+`'validation'` | 408
 
 *   **Features**:
 
@@ -199,11 +205,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 390,965
-'train'      | 363,849
-'validation' | 40,430
+Split          | Examples
+:------------- | -------:
+`'test'`       | 390,965
+`'train'`      | 363,849
+`'validation'` | 40,430
 
 *   **Features**:
 
@@ -251,11 +257,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,379
-'train'      | 5,749
-'validation' | 1,500
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,379
+`'train'`      | 5,749
+`'validation'` | 1,500
 
 *   **Features**:
 
@@ -309,13 +315,13 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split                   | Examples
-:---------------------- | -------:
-'test_matched'          | 9,796
-'test_mismatched'       | 9,847
-'train'                 | 392,702
-'validation_matched'    | 9,815
-'validation_mismatched' | 9,832
+Split                     | Examples
+:------------------------ | -------:
+`'test_matched'`          | 9,796
+`'test_mismatched'`       | 9,847
+`'train'`                 | 392,702
+`'validation_matched'`    | 9,815
+`'validation_mismatched'` | 9,832
 
 *   **Features**:
 
@@ -377,10 +383,10 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,847
-'validation' | 9,832
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,847
+`'validation'` | 9,832
 
 *   **Features**:
 
@@ -442,10 +448,10 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,796
-'validation' | 9,815
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,796
+`'validation'` | 9,815
 
 *   **Features**:
 
@@ -517,11 +523,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,463
-'train'      | 104,743
-'validation' | 5,463
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,463
+`'train'`      | 104,743
+`'validation'` | 5,463
 
 *   **Features**:
 
@@ -571,11 +577,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,000
-'train'      | 2,490
-'validation' | 277
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,000
+`'train'`      | 2,490
+`'validation'` | 277
 
 *   **Features**:
 
@@ -664,11 +670,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 635
-'validation' | 71
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 635
+`'validation'` | 71
 
 *   **Features**:
 
@@ -716,9 +722,9 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 1,104
+Split    | Examples
+:------- | -------:
+`'test'` | 1,104
 
 *   **Features**:
 

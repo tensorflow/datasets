@@ -38,9 +38,9 @@ Amazon.com.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 51
+Split     | Examples
+:-------- | -------:
+`'train'` | 51
 
 *   **Features**:
 
@@ -54,6 +54,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('review_sents', 'summaries')`
+
 *   **Citation**:
 
 ```
@@ -67,6 +68,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

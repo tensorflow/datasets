@@ -52,9 +52,9 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 594
+Split     | Examples
+:-------- | -------:
+`'train'` | 594
 
 *   **Features**:
 
@@ -69,6 +69,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -85,7 +86,7 @@ and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/citrus_leaves-0.1.1.png" alt="Visualization" width="500px">

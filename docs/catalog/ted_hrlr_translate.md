@@ -47,8 +47,8 @@ where one is high resource and the other is low resource.
   }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## ted_hrlr_translate/az_to_en (default config)
@@ -57,11 +57,11 @@ where one is high resource and the other is low resource.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 903
-'train'      | 5,946
-'validation' | 671
+Split          | Examples
+:------------- | -------:
+`'test'`       | 903
+`'train'`      | 5,946
+`'validation'` | 671
 
 *   **Features**:
 
@@ -82,11 +82,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 903
-'train'      | 188,396
-'validation' | 671
+Split          | Examples
+:------------- | -------:
+`'test'`       | 903
+`'train'`      | 188,396
+`'validation'` | 671
 
 *   **Features**:
 
@@ -107,11 +107,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 664
-'train'      | 4,509
-'validation' | 248
+Split          | Examples
+:------------- | -------:
+`'test'`       | 664
+`'train'`      | 4,509
+`'validation'` | 248
 
 *   **Features**:
 
@@ -132,11 +132,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 664
-'train'      | 212,614
-'validation' | 248
+Split          | Examples
+:------------- | -------:
+`'test'`       | 664
+`'train'`      | 212,614
+`'validation'` | 248
 
 *   **Features**:
 
@@ -157,11 +157,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,763
-'train'      | 44,938
-'validation' | 1,016
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,763
+`'train'`      | 44,938
+`'validation'` | 1,016
 
 *   **Features**:
 
@@ -182,11 +182,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,494
-'train'      | 43,873
-'validation' | 1,131
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,494
+`'train'`      | 43,873
+`'validation'` | 1,131
 
 *   **Features**:
 
@@ -207,11 +207,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,007
-'train'      | 10,017
-'validation' | 682
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,007
+`'train'`      | 10,017
+`'validation'` | 682
 
 *   **Features**:
 
@@ -232,11 +232,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,007
-'train'      | 61,802
-'validation' | 682
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,007
+`'train'`      | 61,802
+`'validation'` | 682
 
 *   **Features**:
 
@@ -257,11 +257,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,623
-'train'      | 48,511
-'validation' | 1,145
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,623
+`'train'`      | 48,511
+`'validation'` | 1,145
 
 *   **Features**:
 
@@ -282,11 +282,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,669
-'train'      | 46,259
-'validation' | 1,162
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,669
+`'train'`      | 46,259
+`'validation'` | 1,162
 
 *   **Features**:
 
@@ -307,11 +307,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,803
-'train'      | 51,785
-'validation' | 1,193
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,803
+`'train'`      | 51,785
+`'validation'` | 1,193
 
 *   **Features**:
 
@@ -332,11 +332,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,476
-'train'      | 208,106
-'validation' | 4,805
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,476
+`'train'`      | 208,106
+`'validation'` | 4,805
 
 *   **Features**:
 
@@ -357,11 +357,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,588
-'train'      | 47,278
-'validation' | 1,184
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,588
+`'train'`      | 47,278
+`'validation'` | 1,184
 
 *   **Features**:
 
@@ -382,11 +382,11 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,029
-'train'      | 182,450
-'validation' | 4,045
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,029
+`'train'`      | 182,450
+`'validation'` | 4,045
 
 *   **Features**:
 

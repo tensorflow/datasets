@@ -43,10 +43,10 @@ of 512 pixels.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 75,750
-'validation' | 25,250
+Split          | Examples
+:------------- | -------:
+`'train'`      | 75,750
+`'validation'` | 25,250
 
 *   **Features**:
 
@@ -60,6 +60,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -71,7 +72,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/food101-2.0.0.png" alt="Visualization" width="500px">

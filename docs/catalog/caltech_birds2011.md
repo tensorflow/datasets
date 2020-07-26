@@ -39,10 +39,10 @@ dataset. Annotations include bounding boxes, segmentation labels.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 5,794
-'train' | 5,994
+Split     | Examples
+:-------- | -------:
+`'test'`  | 5,794
+`'train'` | 5,994
 
 *   **Features**:
 
@@ -60,6 +60,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -72,6 +73,6 @@ Year = {2010}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

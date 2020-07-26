@@ -43,10 +43,10 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 392,702
-'validation' | 10,000
+Split          | Examples
+:------------- | -------:
+`'train'`      | 392,702
+`'validation'` | 10,000
 
 *   **Features**:
 
@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -83,8 +84,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## multi_nli_mismatch/plain_text (default config)

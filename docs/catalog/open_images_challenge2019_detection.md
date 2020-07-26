@@ -47,11 +47,11 @@ in an image, every instance of that object class in the image was annotated.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 99,999
-'train'      | 1,743,042
-'validation' | 41,620
+Split          | Examples
+:------------- | --------:
+`'test'`       | 99,999
+`'train'`      | 1,743,042
+`'validation'` | 41,620
 
 *   **Features**:
 
@@ -76,6 +76,8 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Citation**:
+
 ## open_images_challenge2019_detection/200k (default config)
 
 *   **Config description**: Images have at most 200,000 pixels, at 72 JPEG
@@ -83,8 +85,8 @@ FeaturesDict({
 
 *   **Dataset size**: `59.40 GiB`
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/open_images_challenge2019_detection-200k-1.0.0.png" alt="Visualization" width="500px">
 
@@ -95,7 +97,7 @@ FeaturesDict({
 
 *   **Dataset size**: `80.44 GiB`
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/open_images_challenge2019_detection-300k-1.0.0.png" alt="Visualization" width="500px">

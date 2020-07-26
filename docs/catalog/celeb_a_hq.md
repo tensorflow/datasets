@@ -41,8 +41,8 @@ WARNING: This dataset currently requires you to prepare images on your own.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain multiple tar files with images (data2x2.tar,
     data4x4.tar .. data1024x1024.tar).
@@ -55,13 +55,14 @@ WARNING: This dataset currently requires you to prepare images on your own.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 30,000
+Split     | Examples
+:-------- | -------:
+`'train'` | 30,000
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -96,8 +97,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-1024-2.0.0.png" alt="Visualization" width="500px">
 
@@ -114,8 +115,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-512-2.0.0.png" alt="Visualization" width="500px">
 
@@ -132,8 +133,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-256-2.0.0.png" alt="Visualization" width="500px">
 
@@ -150,8 +151,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-128-2.0.0.png" alt="Visualization" width="500px">
 
@@ -168,8 +169,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-64-2.0.0.png" alt="Visualization" width="500px">
 
@@ -186,8 +187,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-32-2.0.0.png" alt="Visualization" width="500px">
 
@@ -204,8 +205,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-16-2.0.0.png" alt="Visualization" width="500px">
 
@@ -222,8 +223,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-8-2.0.0.png" alt="Visualization" width="500px">
 
@@ -240,8 +241,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-4-2.0.0.png" alt="Visualization" width="500px">
 
@@ -258,8 +259,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-2-2.0.0.png" alt="Visualization" width="500px">
 
@@ -276,7 +277,7 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a_hq-1-2.0.0.png" alt="Visualization" width="500px">

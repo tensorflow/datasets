@@ -42,11 +42,11 @@ Imagenet, trainable on a single GPU.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 32,768
-'train'      | 262,144
-'validation' | 32,768
+Split          | Examples
+:------------- | -------:
+`'test'`       | 32,768
+`'train'`      | 262,144
+`'validation'` | 32,768
 
 *   **Features**:
 
@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -74,7 +75,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/patch_camelyon-2.0.0.png" alt="Visualization" width="500px">

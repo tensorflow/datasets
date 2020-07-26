@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -87,8 +88,8 @@ isbn="978-3-642-40802-1"
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## qa4mre/2011.main.DE (default config)
@@ -107,9 +108,9 @@ isbn="978-3-642-40802-1"
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 120
+Split     | Examples
+:-------- | -------:
+`'train'` | 120
 
 ## qa4mre/2011.main.EN
 
@@ -127,9 +128,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 120
+Split     | Examples
+:-------- | -------:
+`'train'` | 120
 
 ## qa4mre/2011.main.ES
 
@@ -147,9 +148,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 120
+Split     | Examples
+:-------- | -------:
+`'train'` | 120
 
 ## qa4mre/2011.main.IT
 
@@ -167,9 +168,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 120
+Split     | Examples
+:-------- | -------:
+`'train'` | 120
 
 ## qa4mre/2011.main.RO
 
@@ -187,9 +188,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 120
+Split     | Examples
+:-------- | -------:
+`'train'` | 120
 
 ## qa4mre/2012.main.AR
 
@@ -207,9 +208,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.main.BG
 
@@ -227,9 +228,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.main.DE
 
@@ -247,9 +248,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.main.EN
 
@@ -267,9 +268,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.main.ES
 
@@ -287,9 +288,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.main.IT
 
@@ -307,9 +308,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.main.RO
 
@@ -327,9 +328,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 160
+Split     | Examples
+:-------- | -------:
+`'train'` | 160
 
 ## qa4mre/2012.alzheimers.EN
 
@@ -347,9 +348,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 40
+Split     | Examples
+:-------- | -------:
+`'train'` | 40
 
 ## qa4mre/2013.main.AR
 
@@ -367,9 +368,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 284
+Split     | Examples
+:-------- | -------:
+`'train'` | 284
 
 ## qa4mre/2013.main.BG
 
@@ -387,9 +388,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 284
+Split     | Examples
+:-------- | -------:
+`'train'` | 284
 
 ## qa4mre/2013.main.EN
 
@@ -407,9 +408,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 284
+Split     | Examples
+:-------- | -------:
+`'train'` | 284
 
 ## qa4mre/2013.main.ES
 
@@ -427,9 +428,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 284
+Split     | Examples
+:-------- | -------:
+`'train'` | 284
 
 ## qa4mre/2013.main.RO
 
@@ -447,9 +448,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 284
+Split     | Examples
+:-------- | -------:
+`'train'` | 284
 
 ## qa4mre/2013.alzheimers.EN
 
@@ -467,9 +468,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 40
+Split     | Examples
+:-------- | -------:
+`'train'` | 40
 
 ## qa4mre/2013.entrance_exam.EN
 
@@ -487,6 +488,6 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 46
+Split     | Examples
+:-------- | -------:
+`'train'` | 46

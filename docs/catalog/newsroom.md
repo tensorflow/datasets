@@ -42,8 +42,8 @@ This dataset can be downloaded upon requests. Unzip all the contents
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     You should download the dataset from https://summari.es/download/
     The webpage requires registration.
@@ -56,11 +56,11 @@ This dataset can be downloaded upon requests. Unzip all the contents
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 108,862
-'train'      | 995,041
-'validation' | 108,837
+Split          | Examples
+:------------- | -------:
+`'test'`       | 108,862
+`'train'`      | 995,041
+`'validation'` | 108,837
 
 *   **Features**:
 
@@ -83,6 +83,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'summary')`
+
 *   **Citation**:
 
 ```
@@ -99,6 +100,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

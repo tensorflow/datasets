@@ -41,10 +41,10 @@ NQ to be a more realistic and challenging task than prior QA datasets.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 307,373
-'validation' | 7,830
+Split          | Examples
+:------------- | -------:
+`'train'`      | 307,373
+`'validation'` | 7,830
 
 *   **Features**:
 
@@ -87,6 +87,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -98,6 +99,6 @@ journal = {Transactions of the Association of Computational Linguistics}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

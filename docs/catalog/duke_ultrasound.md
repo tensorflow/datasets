@@ -43,14 +43,14 @@ under Grant 5T32GM007171-44. A usage example is available
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'A'          | 1,362
-'B'          | 1,194
-'MARK'       | 420
-'test'       | 438
-'train'      | 2,556
-'validation' | 278
+Split          | Examples
+:------------- | -------:
+`'A'`          | 1,362
+`'B'`          | 1,194
+`'MARK'`       | 420
+`'test'`       | 438
+`'train'`      | 2,556
+`'validation'` | 278
 
 *   **Features**:
 
@@ -82,6 +82,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('das/dB', 'dtce')`
+
 *   **Citation**:
 
 ```
@@ -106,6 +107,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

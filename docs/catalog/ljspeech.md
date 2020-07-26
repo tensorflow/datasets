@@ -43,9 +43,9 @@ public domain.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 13,100
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,100
 
 *   **Features**:
 
@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
+
 *   **Citation**:
 
 ```
@@ -72,6 +73,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

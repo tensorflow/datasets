@@ -42,10 +42,10 @@ boxes.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 6,084
-'train' | 3,060
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,084
+`'train'` | 3,060
 
 *   **Features**:
 
@@ -60,6 +60,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -71,7 +72,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/caltech101-3.0.0.png" alt="Visualization" width="500px">

@@ -38,15 +38,15 @@ hardness of the dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,767
-'train_l'    | 10,234
-'train_m'    | 2,558
-'train_s'    | 640
-'train_xl'   | 40,398
-'train_xs'   | 160
-'validation' | 1,267
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,767
+`'train_l'`    | 10,234
+`'train_m'`    | 2,558
+`'train_s'`    | 640
+`'train_xl'`   | 40,398
+`'train_xs'`   | 160
+`'validation'` | 1,267
 
 *   **Features**:
 
@@ -62,6 +62,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -73,6 +74,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

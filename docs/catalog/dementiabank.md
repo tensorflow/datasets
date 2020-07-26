@@ -35,8 +35,8 @@ of this dataset, without the text features.
 
 *   **Dataset size**: `17.71 GiB`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual dir should contain 2 folders with mp3 files:
 
@@ -45,15 +45,19 @@ of this dataset, without the text features.
 *   dementia/English/Pitt/Dementia/cookie
 
 Which were downloaded from https://media.talkbank.org/dementia/English/Pitt/
-This dataset requires registration for downloading. * **Auto-cached**
-([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-No * **Splits**:
+This dataset requires registration for downloading.
 
-Split        | Examples
-:----------- | -------:
-'test'       | 102
-'train'      | 393
-'validation' | 57
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 102
+`'train'`      | 393
+`'validation'` | 57
 
 *   **Features**:
 
@@ -68,6 +72,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
+
 *   **Citation**:
 
 ```
@@ -79,6 +84,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

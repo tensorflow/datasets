@@ -42,9 +42,9 @@ While most images are 256x256 pixels, there are 44 images with different shape.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 2,100
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,100
 
 *   **Features**:
 
@@ -59,6 +59,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -70,7 +71,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/uc_merced-2.0.0.png" alt="Visualization" width="500px">

@@ -40,11 +40,11 @@ anonymized crowd-worker ID.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 500
-'train'      | 4,957
-'validation' | 500
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 4,957
+`'validation'` | 500
 
 *   **Features**:
 
@@ -68,6 +68,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('question', 'answerKey')`
+
 *   **Citation**:
 
 ```
@@ -79,6 +80,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

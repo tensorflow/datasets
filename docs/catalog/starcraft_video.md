@@ -35,15 +35,16 @@ This data set contains videos generated from Starcraft.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,000
-'train'      | 10,000
-'validation' | 2,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 10,000
+`'validation'` | 2,000
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -68,8 +69,8 @@ Split        | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## starcraft_video/brawl_64 (default config)

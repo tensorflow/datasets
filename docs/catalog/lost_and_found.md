@@ -44,14 +44,15 @@ http://www.6d-vision.com/laf_table.pdf
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,203
-'train' | 1,036
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,203
+`'train'` | 1,036
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -63,8 +64,8 @@ Split   | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## lost_and_found/semantic_segmentation (default config)

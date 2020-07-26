@@ -55,6 +55,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -67,8 +68,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## ai2_arc/ARC-Challenge (default config)
@@ -80,11 +81,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,172
-'train'      | 1,119
-'validation' | 299
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,172
+`'train'`      | 1,119
+`'validation'` | 299
 
 ## ai2_arc/ARC-Easy
 
@@ -94,8 +95,8 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,376
-'train'      | 2,251
-'validation' | 570
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,376
+`'train'`      | 2,251
+`'validation'` | 570

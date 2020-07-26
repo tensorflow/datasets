@@ -68,8 +68,8 @@ heuristic algorithms: Source, Family, and Qualities.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## nsynth/full (default config)
@@ -84,11 +84,11 @@ heuristic algorithms: Source, Family, and Qualities.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 4,096
-'train' | 289,205
-'valid' | 12,678
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,096
+`'train'` | 289,205
+`'valid'` | 12,678
 
 *   **Features**:
 
@@ -132,11 +132,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 8,518
-'train' | 60,788
-'valid' | 17,469
+Split     | Examples
+:-------- | -------:
+`'test'`  | 8,518
+`'train'` | 60,788
+`'valid'` | 17,469
 
 *   **Features**:
 
@@ -182,11 +182,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 8,518
-'train' | 60,788
-'valid' | 17,469
+Split     | Examples
+:-------- | -------:
+`'test'`  | 8,518
+`'train'` | 60,788
+`'valid'` | 17,469
 
 *   **Features**:
 

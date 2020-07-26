@@ -38,10 +38,10 @@ inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 9,741
-'validation' | 1,221
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,741
+`'validation'` | 1,221
 
 *   **Features**:
 
@@ -59,6 +59,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -74,6 +75,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

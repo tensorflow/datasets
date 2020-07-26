@@ -46,15 +46,15 @@ The main differences from the LibriSpeech corpus are listed below:
 
 *   **Splits**:
 
-Split            | Examples
-:--------------- | -------:
-'dev_clean'      | 5,736
-'dev_other'      | 4,613
-'test_clean'     | 4,837
-'test_other'     | 5,120
-'train_clean100' | 33,236
-'train_clean360' | 116,500
-'train_other500' | 205,044
+Split              | Examples
+:----------------- | -------:
+`'dev_clean'`      | 5,736
+`'dev_other'`      | 4,613
+`'test_clean'`     | 4,837
+`'test_other'`     | 5,120
+`'train_clean100'` | 33,236
+`'train_clean360'` | 116,500
+`'train_other500'` | 205,044
 
 *   **Features**:
 
@@ -72,6 +72,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
+
 *   **Citation**:
 
 ```
@@ -85,6 +86,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
