@@ -17,6 +17,7 @@
 """Structured datasets."""
 
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
+from tensorflow_datasets.structured.credit_card_fraud import CreditCardFraud
 from tensorflow_datasets.structured.forest_fires import ForestFires
 from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNumeric
 from tensorflow_datasets.structured.higgs import Higgs
@@ -25,4 +26,3 @@ from tensorflow_datasets.structured.movielens import Movielens
 from tensorflow_datasets.structured.radon import Radon
 from tensorflow_datasets.structured.rock_you import RockYou
 from tensorflow_datasets.structured.titanic import Titanic
-from tensorflow_datasets.structured.credit_card_fraud import CreditCardFraud  # TODO(credit_card_fraud) Sort alphabetically
