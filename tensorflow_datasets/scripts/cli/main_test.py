@@ -15,8 +15,17 @@
 
 """Tests for tensorflow_datasets.scripts.cli.main."""
 
+from unittest import mock
+
 from tensorflow_datasets.scripts.cli import main
 
 
 def test_main():
-  main.main(main._parse_flags(['', '--version']))
+
+  def _check_exit(status=0, message=None):
+    del message
+    assert status == 0  # Check argparse exit gracefully
+
+  # Argparse call `sys.exit(0)` when `--version` is passed.
+  with mock.patch('sys.exit', _check_exit):
+    main.main(main._parse_flags(['', '--version']))
