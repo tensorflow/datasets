@@ -36,10 +36,12 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
   SPLITS = {  # Expected number of examples on each split.
       "train": 100,
       "validation": 10,
+      "test": 5,
   }
   DL_EXTRACT_RESULT = [
       "ILSVRC2012_img_train.tar",
       "ILSVRC2012_img_val.tar",
+      "ILSVRC2012_img_test.tar",
   ]
 
 
