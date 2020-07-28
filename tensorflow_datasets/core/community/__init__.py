@@ -13,16 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
-"""Util import."""
+"""Community public API."""
 
-# pylint: disable=wildcard-import
-from tensorflow_datasets.core.utils.gcs_utils import gcs_path
-from tensorflow_datasets.core.utils.image_utils import *
-from tensorflow_datasets.core.utils.py_utils import *
-from tensorflow_datasets.core.utils.tf_utils import *
-from tensorflow_datasets.core.utils.tqdm_utils import *
-from tensorflow_datasets.core.utils.type_utils import *
-from tensorflow_datasets.core.utils.version import Experiment
-from tensorflow_datasets.core.utils.version import Version
-# pylint: enable=wildcard-import
+from tensorflow_datasets.core.community.dataset_spec import DatasetSource
+from tensorflow_datasets.core.community.dataset_spec import DatasetSpec
+from tensorflow_datasets.core.community.dataset_spec import GithubSource
+
+__all__ = [
+    'DatasetSource',
+    'DatasetSpec',
+    'GithubSource',
+]
