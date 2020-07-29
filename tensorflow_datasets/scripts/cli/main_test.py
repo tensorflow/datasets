@@ -17,6 +17,7 @@
 
 from unittest import mock
 
+from tensorflow_datasets import testing
 from tensorflow_datasets.scripts.cli import main
 
 
@@ -28,4 +29,8 @@ def test_main():
 
   # Argparse call `sys.exit(0)` when `--version` is passed.
   with mock.patch('sys.exit', _check_exit):
-    main.main(main._parse_flags(['', '--version']))
+    main._parse_flags(['', '--version'])
+
+  with testing.tmp_dir('temp_dir') as tmp_dir:
+    main.main(main._parse_flags(
+        ['', 'new', 'my_dataset', '--dst_dir', tmp_dir]))

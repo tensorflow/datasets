@@ -27,6 +27,7 @@ from absl import app
 from absl.flags import argparse_flags
 
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.scripts.cli import new_dataset_cmd
 
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
@@ -39,11 +40,17 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
       action='version',
       version='TensorFlow Datasets: ' + tfds.__version__
   )
+  subparsers = parser.add_subparsers(title='Commands',
+                                     help="List of all commands")
+
+  # Add subparsers
+  new_dataset_cmd.add_parser(subparsers)
+
   return parser.parse_args(argv[1:])
 
 
 def main(args: argparse.Namespace) -> None:
-  del args  # Unused for now
+  args.func(args)
 
 
 def launch_cli() -> None:

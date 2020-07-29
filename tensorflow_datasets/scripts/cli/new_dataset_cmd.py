@@ -230,7 +230,7 @@ def create_new_datasets(args: argparse.Namespace) -> None:
       'for details.'.format(root_dir, ds_name))
 
 
-def add_new_dataset_parser(subparsers: argparse._SubParsersAction) -> None:  # pylint:disable = protected-access
+def add_parser(subparsers: argparse._SubParsersAction) -> None:  # pylint:disable = protected-access
   """Add subparser for `new` command"""
   new_ds_parser = subparsers.add_parser(
       'new', help='Generated new dataset files')
