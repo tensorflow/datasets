@@ -413,8 +413,9 @@ class FeatureExpectationsTestCase(SubTestCase):
           self.assertAllEqualNested(out_numpy, expected)
 
         # Assert the HTML representation works
-        with self._subTest('repr'):
-          self._test_repr(feature, out_numpy)
+        if not test.decoders:
+          with self._subTest('repr'):
+            self._test_repr(feature, out_numpy)
 
   def _test_repr(
       self,
