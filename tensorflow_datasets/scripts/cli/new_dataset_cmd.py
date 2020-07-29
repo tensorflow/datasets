@@ -1,7 +1,6 @@
 r"""tfds CLI `new` command
 
-This command will generator files needed for adding a new dataset(s)
-to tfds.
+This command will generate files needed for adding a new dataset to tfds.
 
 Usage:
 
@@ -36,10 +35,9 @@ class Data():
   todo: str
 
 
-def create_dataset_file(root_dir: pathlib.Path, data: Data) -> None:
+def _create_dataset_file(root_dir: pathlib.Path, data: Data) -> None:
   """Create a new dataset from a template."""
-  file_path = root_dir.joinpath(f'{data.dataset_name}.py')
-
+  file_path = root_dir / f'{data.dataset_name}.py'
   context = textwrap.dedent(
       f"""\
       \"""{data.dataset_name} dataset.\"""
@@ -104,9 +102,9 @@ def create_dataset_file(root_dir: pathlib.Path, data: Data) -> None:
     f.write(context)
 
 
-def add_the_init(root_dir: pathlib.Path, data: Data) -> None:
+def _add_the_init(root_dir: pathlib.Path, data: Data) -> None:
   """Creates a new __init__.py. file"""
-  file_path = root_dir.joinpath('__init__.py')
+  file_path = root_dir / '__init__.py'
   context = textwrap.dedent(
       f"""\
       \"""{data.dataset_name} dataset.\"""
@@ -122,9 +120,9 @@ def add_the_init(root_dir: pathlib.Path, data: Data) -> None:
     f.write(context)
 
 
-def create_dataset_test_file(root_dir: pathlib.Path, data: Data) -> None:
+def _create_dataset_test_file(root_dir: pathlib.Path, data: Data) -> None:
   """Create the test file associated with the dataset."""
-  file_path = root_dir.joinpath(f'{data.dataset_name}_test.py')
+  file_path = root_dir / f'{data.dataset_name}_test.py'
 
   context = textwrap.dedent(
       f"""\
@@ -159,16 +157,16 @@ def create_dataset_test_file(root_dir: pathlib.Path, data: Data) -> None:
     f.write(context)
 
 
-def create_fake_data(root_dir: pathlib.Path, data: Data) -> None:
-  file_path = root_dir.joinpath(
-      'fake_examples', 'TODO-add_fake_data_in_this_directory.txt')
+def _create_fake_data(root_dir: pathlib.Path, data: Data) -> None:
+  file_path = (root_dir / 'fake_examples'
+               / 'TODO-add_fake_data_in_this_directory.txt')
 
   with file_path.open('w') as f:
     f.write(f'{data.todo}: Add fake data in this directory')
 
 
-def create_fake_data_gen_file(root_dir: pathlib.Path, data: Data) -> None:
-  file_path = root_dir.joinpath('fake_data_generator.py')
+def _create_fake_data_gen_file(root_dir: pathlib.Path, data: Data) -> None:
+  file_path = root_dir / 'fake_data_generator.py'
 
   context = textwrap.dedent(
       f"""\
@@ -190,8 +188,8 @@ def create_fake_data_gen_file(root_dir: pathlib.Path, data: Data) -> None:
     f.write(context)
 
 
-def create_checksum_file(root_dir: pathlib.Path, data: Data) -> None:
-  file_path = root_dir.joinpath('checksums.txt')
+def _create_checksum_file(root_dir: pathlib.Path, data: Data) -> None:
+  file_path = root_dir / 'checksums.txt'
 
   context = textwrap.dedent(
       f"""\
@@ -204,7 +202,7 @@ def create_checksum_file(root_dir: pathlib.Path, data: Data) -> None:
     f.write(context)
 
 
-def create_new_datasets(args: argparse.Namespace) -> None:
+def _create_new_dataset(args: argparse.Namespace) -> None:
   ds_name = args.dataset_name
   root_dir = args.dst_dir.expanduser().resolve().joinpath(ds_name)
   root_dir.joinpath('fake_examples').mkdir(parents=True, exist_ok=True)
@@ -215,12 +213,12 @@ def create_new_datasets(args: argparse.Namespace) -> None:
       f'TODO({ds_name})',
   )
 
-  create_dataset_file(root_dir, data)
-  add_the_init(root_dir, data)
-  create_dataset_test_file(root_dir, data)
-  create_fake_data(root_dir, data)
-  create_fake_data_gen_file(root_dir, data)
-  create_checksum_file(root_dir, data)
+  _create_dataset_file(root_dir, data)
+  _add_the_init(root_dir, data)
+  _create_dataset_test_file(root_dir, data)
+  _create_fake_data(root_dir, data)
+  _create_fake_data_gen_file(root_dir, data)
+  _create_checksum_file(root_dir, data)
 
   print(
       'Dataset generated in {}\n'
@@ -251,4 +249,4 @@ def add_parser(subparsers: argparse._SubParsersAction) -> None:  # pylint:disabl
       help=('Create new dataset directory at the given location.'
             'Defaults to current directory.')
   )
-  new_ds_parser.set_defaults(func=create_new_datasets)
+  new_ds_parser.set_defaults(func=_create_new_dataset)
