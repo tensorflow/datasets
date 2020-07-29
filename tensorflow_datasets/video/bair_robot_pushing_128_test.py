@@ -14,13 +14,24 @@
 # limitations under the License.
 
 # Lint as: python3
-"""Video datasets."""
+"""Tests for tensorflow_datasets.video.bair_robot_pushing_128."""
 
-from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
-from tensorflow_datasets.video.bair_robot_pushing_128 import BairRobotPushing
-from tensorflow_datasets.video.moving_mnist import MovingMnist
-from tensorflow_datasets.video.robonet import Robonet
-from tensorflow_datasets.video.starcraft import StarcraftVideo
-from tensorflow_datasets.video.starcraft import StarcraftVideoConfig
-from tensorflow_datasets.video.ucf101 import Ucf101
-from tensorflow_datasets.video.ucf101 import Ucf101Config
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.video import bair_robot_pushing_128
+
+
+class BairRobotPushing_128_Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = bair_robot_pushing_128.BairRobotPushing
+
+  SPLITS = {
+      "train": 1,
+      "test": 1,
+  }
+
+
+if __name__ == "__main__":
+  testing.test_main()
