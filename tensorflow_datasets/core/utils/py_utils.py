@@ -22,6 +22,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import base64
 import contextlib
 import hashlib
 import io
@@ -492,3 +493,10 @@ def list_info_files(dir_path: str) -> List[str]:
       if '.tfrecord' not in fname and
       not tf.io.gfile.isdir(os.path.join(dir_path, fname))
   ]
+
+
+def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
+  """Extracts the base64 string of an object by writing into a tmp buffer."""
+  buffer = io.BytesIO()
+  write_fn(buffer)
+  return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type
