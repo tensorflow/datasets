@@ -228,16 +228,14 @@ class Image(feature.FeatureConnector):
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
-    # assert value['type'] == type(cls).__name__
+  def from_json_content(cls, value) -> 'FeatureConnector':
     shape = tuple(value['shape'])
     dtype = tf.dtypes.as_dtype(np.dtype(value['dtype']))
     encoding_format = value['encoding_format']
     return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
 
-  def to_json(self):
+  def to_json_content(self):
     return {
-        'type': type(self).__name__,
         'shape': list(self._shape),
         'dtype': self._dtype.name,
         'encoding_format': self._encoding_format

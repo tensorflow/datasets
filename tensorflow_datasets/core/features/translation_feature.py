@@ -100,10 +100,10 @@ class Translation(features_dict.FeaturesDict):
 
   @classmethod
   def from_json(cls, value) -> 'FeatureConnector':
-    pass
+    pass  # TODO
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    pass  # TODO
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -199,8 +199,8 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
          "translation": translations})
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
-    pass
+  def from_json_content(cls, value) -> 'FeatureConnector':
+    pass  # TODO
 
-  def to_json(self):
-    return {'type': type(self).__name__}
+  def to_json_content(self):
+    pass  # TODO

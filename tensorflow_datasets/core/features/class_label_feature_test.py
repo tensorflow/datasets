@@ -173,10 +173,9 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
   def test_to_json(self):
     feature = features.ClassLabel(names=['label3', 'label1', 'label2'])
     self.assertDictEqual({
-        'type': 'ClassLabel',
         'num_classes': 3,
         'names': ['label3', 'label1', 'label2'],
-    }, feature.to_json())
+    }, feature.to_json_content())
 
 
 if __name__ == '__main__':

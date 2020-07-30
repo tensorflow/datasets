@@ -108,19 +108,25 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
         'content': {
             'a': {
                 'type': 'Tensor',
-                'shape': [4, 2],
-                'dtype': 'int32'
+                'content': {
+                    'shape': [4, 2],
+                    'dtype': 'int32'
+                }
             },
             'image': {
                 'type': 'Image',
-                'shape': [None, None, 3],
-                'dtype': 'uint8',
-                'encoding_format': 'png'
+                'content': {
+                    'shape': [None, None, 3],
+                    'dtype': 'uint8',
+                    'encoding_format': 'png'
+                }
             },
             'label': {
                 'type': 'ClassLabel',
-                'num_classes': 3,
-                'names': ['0', '1', '2']
+                'content': {
+                    'num_classes': 3,
+                    'names': ['0', '1', '2']
+                }
             }
         }
     }, feature.to_json())

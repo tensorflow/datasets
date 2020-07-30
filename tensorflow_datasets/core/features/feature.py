@@ -214,26 +214,25 @@ class FeatureConnector(object):
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
   @classmethod
+  def from_json_content(cls, value):
+    return cls(**value)
+
+  @classmethod
   def from_json(cls, value) -> 'FeatureConnector':
     """Return the FeatureConnector by decoding the JSON string."""
-    features = utils.NonMutableDict()
-
     assert value['type'] == 'FeaturesDict'
-    feature_dict_subclass = cls._REGISTERED_FEATURES.get(value['type'])
-    
-    for feature_label, feature in value['content'].items():
-      subclass = cls._REGISTERED_FEATURES.get(feature['type'])
-      if subclass is None:
-        raise ValueError(
-            f'Invalid feature {feature_label}: {feature}\n'
-            f'Supported: {list(cls._REGISTERED_FEATURES)}'
-        )
-      features.update({feature_label: subclass.from_json(feature)})
-    return feature_dict_subclass(features)
+    subclass = cls._REGISTERED_FEATURES.get(value['type'])
+    return subclass.from_json_content(value['content'])
+
+  def to_json_content(self):
+    return dict()
 
   def to_json(self):
     """Exports the FeatureConnector to Json."""
-    return {}
+    return {
+        'type': type(self).__name__,
+        'content': self.to_json_content(),
+    }
 
   def save_config(self, path: str) -> None:
     with tf.io.gfile.GFile(path, 'w') as f:
@@ -609,19 +608,17 @@ class Tensor(FeatureConnector):
     return example_data
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
-    # assert value['type'] == type(cls).__name__
+  def from_json_content(cls, value) -> 'FeatureConnector':
     shape = tuple(value['shape'])
     dtype = tf.dtypes.as_dtype(np.dtype(value['dtype']))
-    # input(cls(shape=shape, dtype=dtype))
     return cls(shape=shape, dtype=dtype)
 
-  def to_json(self):
+  def to_json_content(self):
     return {
-        'type': type(self).__name__,
         'shape': list(self._shape),
         'dtype': self._dtype.name,
     }
+
 
 def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.

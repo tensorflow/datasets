@@ -46,13 +46,6 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     self._is_top_level = True
 
-  @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
-    pass
-
-  def to_json(self):
-    return {}
-
   def decode_example(self, serialized_example, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.

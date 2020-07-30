@@ -182,12 +182,11 @@ class ClassLabel(feature.Tensor):
       return f"{ex} ({self.int2str(ex)})"
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value) -> 'FeatureConnector':
     pass
 
-  def to_json(self):
+  def to_json_content(self):
     return {
-        'type': type(self).__name__,
         'num_classes': self.num_classes,
         'names': self.names,
     }

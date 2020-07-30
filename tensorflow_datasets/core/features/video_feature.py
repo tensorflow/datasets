@@ -182,12 +182,11 @@ class Video(sequence_feature.Sequence):
     return super(Video, self).encode_example(encoded_video)
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value) -> 'FeatureConnector':
     pass
 
-  def to_json(self):
+  def to_json_content(self):
     return {
-        'type': type(self).__name__,
         'shape': list(self._shape),
         'encoding_format': self._encoding_format,
         'ffmpeg_extra_args': self._extra_ffmpeg_args

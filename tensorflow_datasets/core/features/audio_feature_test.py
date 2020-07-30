@@ -74,12 +74,11 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
         sample_rate=16000,
     )
     self.assertDictEqual({
-        'type': 'Audio',
         'file_format': 'wav',
         'shape': [None],
         'dtype': 'int64',
         'sample_rate': 16000,
-    }, feature.to_json())
+    }, feature.to_json_content())
 
   def write_wave_file(self, np_audio, path):
     audio = pydub.AudioSegment.empty().set_sample_width(2)

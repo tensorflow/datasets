@@ -82,11 +82,10 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
         ffmpeg_extra_args=('-vf', 'scale=100x200')
     )
     self.assertDictEqual({
-        'type': 'Video',
         'shape': [5, 4, 2, 3],
         'encoding_format': 'png',
         'ffmpeg_extra_args': ['-vf', 'scale=100x200']
-    }, feature.to_json())
+    }, feature.to_json_content())
 
   def test_video_ffmpeg(self):
     video_path = os.path.join(self._test_data_path, 'video.mkv')

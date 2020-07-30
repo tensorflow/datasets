@@ -58,13 +58,6 @@ class AnInputConnector(features_lib.FeatureConnector):
     # Merge the two values
     return tfexample_dict['a'] + tfexample_dict['b']
 
-  @classmethod
-  def from_json(cls, value):
-    return
-
-  def to_json(self):
-    return {}
-
 
 class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
@@ -77,13 +70,6 @@ class AnOutputConnector(features_lib.FeatureConnector):
 
   def decode_example(self, tfexample_data):
     return tfexample_data / 10.0
-
-  @classmethod
-  def from_json(cls, value):
-    return
-
-  def to_json(self):
-    return {}
 
 
 class FeatureDictTest(testing.FeatureExpectationsTestCase):
@@ -253,19 +239,25 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         'content': {
             'feature': {
                 'type': 'Tensor',
-                'shape': [],
-                'dtype': 'int64'
+                'content': {
+                    'shape': [],
+                    'dtype': 'int64'
+                }
             },
             'image': {
                 'type': 'Image',
-                'shape': [None, None, 3],
-                'dtype': 'uint8',
-                'encoding_format': 'png'
+                'content': {
+                    'shape': [None, None, 3],
+                    'dtype': 'uint8',
+                    'encoding_format': 'png'
+                }
             },
             'label': {
                 'type': 'ClassLabel',
-                'num_classes': 3,
-                'names': ['0', '1', '2']
+                'content': {
+                    'num_classes': 3,
+                    'names': ['0', '1', '2']
+                }
             }
         }
     }, feature.to_json())
@@ -277,18 +269,22 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
             "content": {
                 "x": {
                     "type": "Tensor",
-                    "shape": [],
-                    "dtype": "int64"
+                    "content": {
+                        "shape": [],
+                        "dtype": "int64"
+                    }
                 },
                 "image": {
                     "type": "Image",
-                    "shape": [
-                        null,
-                        null,
-                        3
-                    ],
-                    "dtype": "uint8",
-                    "encoding_format": "png"
+                    "content": {
+                        "shape": [
+                            null,
+                            null,
+                            3
+                        ],
+                        "dtype": "uint8",
+                        "encoding_format": "png"
+                    }
                 }
             }
         }

@@ -122,11 +122,10 @@ class ImageFeatureTest(
         encoding_format='jpeg'
     )
     self.assertDictEqual({
-        'type': 'Image',
         'shape': [32, 64, 3],
         'dtype': 'uint8',
         'encoding_format': 'jpeg'
-    }, feature.to_json())
+    }, feature.to_json_content())
 
 
 if __name__ == '__main__':

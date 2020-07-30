@@ -210,13 +210,12 @@ class Sequence(top_level_feature.TopLevelFeature):
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value) -> 'FeatureConnector':
     pass
 
-  def to_json(self):
+  def to_json_content(self):
     return {
-        'type': type(self).__name__,
-        'content': {k: v.to_json() for k, v in self.feature.items()}
+        k: v.to_json() for k, v in self.feature.items()
     }
 
 
