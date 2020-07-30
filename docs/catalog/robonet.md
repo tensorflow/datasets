@@ -50,8 +50,8 @@ from 113 unique camera viewpoints.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## robonet/robonet_sample_64 (default config)
@@ -68,9 +68,9 @@ from 113 unique camera viewpoints.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 700
+Split     | Examples
+:-------- | -------:
+`'train'` | 700
 
 *   **Features**:
 
@@ -96,9 +96,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 700
+Split     | Examples
+:-------- | -------:
+`'train'` | 700
 
 *   **Features**:
 
@@ -124,9 +124,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 162,417
+Split     | Examples
+:-------- | -------:
+`'train'` | 162,417
 
 *   **Features**:
 
@@ -152,9 +152,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 162,417
+Split     | Examples
+:-------- | -------:
+`'train'` | 162,417
 
 *   **Features**:
 

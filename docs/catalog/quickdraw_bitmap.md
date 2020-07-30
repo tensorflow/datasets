@@ -39,9 +39,9 @@ contains these drawings converted from vector format into 28x28 grayscale images
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 50,426,266
+Split     | Examples
+:-------- | ---------:
+`'train'` | 50,426,266
 
 *   **Features**:
 
@@ -55,6 +55,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -74,7 +75,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/quickdraw_bitmap-3.0.0.png" alt="Visualization" width="500px">

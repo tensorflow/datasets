@@ -38,9 +38,9 @@ dropped.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 23,262
+Split     | Examples
+:-------- | -------:
+`'train'` | 23,262
 
 *   **Features**:
 
@@ -55,6 +55,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -70,7 +71,7 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cats_vs_dogs-4.0.0.png" alt="Visualization" width="500px">

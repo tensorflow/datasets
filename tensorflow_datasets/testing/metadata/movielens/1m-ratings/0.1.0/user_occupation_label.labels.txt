@@ -1,0 +1,22 @@
+academic/educator
+artist
+clerical/admin
+customer service
+doctor/health care
+entertainment
+executive/managerial
+farmer
+homemaker
+lawyer
+librarian
+other/not specified
+programmer
+retired
+sales/marketing
+scientist
+self-employed
+student
+technician/engineer
+tradesman/craftsman
+unemployed
+writer

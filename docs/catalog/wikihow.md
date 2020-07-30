@@ -47,8 +47,8 @@ clean up extra commas.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
     Please download both wikihowAll.csv and wikihowSep.csv.
@@ -74,8 +74,8 @@ clean up extra commas.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## wikihow/all (default config)
@@ -85,11 +85,11 @@ clean up extra commas.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,577
-'train'      | 157,252
-'validation' | 5,599
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,577
+`'train'`      | 157,252
+`'validation'` | 5,599
 
 *   **Features**:
 
@@ -107,11 +107,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 37,800
-'train'      | 1,060,732
-'validation' | 37,932
+Split          | Examples
+:------------- | --------:
+`'test'`       | 37,800
+`'train'`      | 1,060,732
+`'validation'` | 37,932
 
 *   **Features**:
 

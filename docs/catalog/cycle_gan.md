@@ -49,6 +49,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -74,186 +75,197 @@ FeaturesDict({
 ## cycle_gan/apple2orange (default config)
 
 *   **Download size**: `74.82 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 266
-'testB'  | 248
-'trainA' | 995
-'trainB' | 1,019
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 266
+`'testB'`  | 248
+`'trainA'` | 995
+`'trainB'` | 1,019
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-apple2orange-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/summer2winter_yosemite
 
 *   **Download size**: `126.50 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 309
-'testB'  | 238
-'trainA' | 1,231
-'trainB' | 962
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 309
+`'testB'`  | 238
+`'trainA'` | 1,231
+`'trainB'` | 962
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-summer2winter_yosemite-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/horse2zebra
 
 *   **Download size**: `111.45 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 120
-'testB'  | 140
-'trainA' | 1,067
-'trainB' | 1,334
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 120
+`'testB'`  | 140
+`'trainA'` | 1,067
+`'trainB'` | 1,334
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-horse2zebra-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/monet2photo
 
 *   **Download size**: `291.09 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 121
-'testB'  | 751
-'trainA' | 1,072
-'trainB' | 6,287
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 121
+`'testB'`  | 751
+`'trainA'` | 1,072
+`'trainB'` | 6,287
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-monet2photo-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/cezanne2photo
 
 *   **Download size**: `266.92 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 58
-'testB'  | 751
-'trainA' | 525
-'trainB' | 6,287
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 58
+`'testB'`  | 751
+`'trainA'` | 525
+`'trainB'` | 6,287
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-cezanne2photo-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/ukiyoe2photo
 
 *   **Download size**: `279.38 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 263
-'testB'  | 751
-'trainA' | 562
-'trainB' | 6,287
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 263
+`'testB'`  | 751
+`'trainA'` | 562
+`'trainB'` | 6,287
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-ukiyoe2photo-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/vangogh2photo
 
 *   **Download size**: `292.39 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 400
-'testB'  | 751
-'trainA' | 400
-'trainB' | 6,287
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 400
+`'testB'`  | 751
+`'trainA'` | 400
+`'trainB'` | 6,287
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-vangogh2photo-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/maps
 
 *   **Download size**: `1.38 GiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 1,098
-'testB'  | 1,098
-'trainA' | 1,096
-'trainB' | 1,096
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 1,098
+`'testB'`  | 1,098
+`'trainA'` | 1,096
+`'trainB'` | 1,096
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-maps-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/cityscapes
 
 *   **Download size**: `266.65 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 500
-'testB'  | 500
-'trainA' | 2,975
-'trainB' | 2,975
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 500
+`'testB'`  | 500
+`'trainA'` | 2,975
+`'trainB'` | 2,975
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-cityscapes-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/facades
 
 *   **Download size**: `33.51 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 106
-'testB'  | 106
-'trainA' | 400
-'trainB' | 400
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 106
+`'testB'`  | 106
+`'trainA'` | 400
+`'trainB'` | 400
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-facades-2.0.0.png" alt="Visualization" width="500px">
 
 ## cycle_gan/iphone2dslr_flower
 
 *   **Download size**: `324.22 MiB`
+
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-'testA'  | 569
-'testB'  | 480
-'trainA' | 1,812
-'trainB' | 3,325
+Split      | Examples
+:--------- | -------:
+`'testA'`  | 569
+`'testB'`  | 480
+`'trainA'` | 1,812
+`'trainB'` | 3,325
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cycle_gan-iphone2dslr_flower-2.0.0.png" alt="Visualization" width="500px">

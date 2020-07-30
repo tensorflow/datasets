@@ -52,14 +52,14 @@ Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2
 License: http://creativecommons.org/licenses/by/4.0
 """
 
-_URL = "https://data.mendeley.com/datasets/3f83gxmv57/2/files/6f809085-8c29-49f7-afbc-f90854fd45dc/Citrus.zip"
+_URL = "https://data.mendeley.com/datasets/3f83gxmv57/2/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/Citrus.zip"
 _LEAVES_LABELS = ["Black spot", "canker", "greening", "healthy"]
 
 
 class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
   """Subset of the citrus dataset with just leaves."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(

@@ -14,12 +14,17 @@
 
 *   **Source code**:
     [`tfds.object_detection.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
+
 *   **Versions**:
+
     *   **`4.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Features**:
 
 ```python
@@ -74,11 +79,11 @@ contain annotations.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 4,952
-'train'      | 2,501
-'validation' | 2,510
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,952
+`'train'`      | 2,501
+`'validation'` | 2,510
 
 *   **Citation**:
 
@@ -89,8 +94,8 @@ Split        | Examples
     howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/voc-2007-4.0.0.png" alt="Visualization" width="500px">
 
@@ -126,11 +131,11 @@ contain annotations.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,991
-'train'      | 5,717
-'validation' | 5,823
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,991
+`'train'`      | 5,717
+`'validation'` | 5,823
 
 *   **Citation**:
 
@@ -141,7 +146,7 @@ Split        | Examples
     howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/voc-2012-4.0.0.png" alt="Visualization" width="500px">

@@ -52,6 +52,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -76,13 +77,13 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 9,469
-'validation' | 3,925
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
+`'validation'` | 3,925
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-v2-0.1.0.png" alt="Visualization" width="500px">
 
@@ -100,13 +101,13 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 9,469
-'validation' | 3,925
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
+`'validation'` | 3,925
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-320px-v2-0.1.0.png" alt="Visualization" width="500px">
 
@@ -124,13 +125,13 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 9,469
-'validation' | 3,925
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
+`'validation'` | 3,925
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-160px-v2-0.1.0.png" alt="Visualization" width="500px">
 
@@ -148,13 +149,13 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 12,894
-'validation' | 500
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,894
+`'validation'` | 500
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-0.1.0.png" alt="Visualization" width="500px">
 
@@ -172,13 +173,13 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 12,894
-'validation' | 500
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,894
+`'validation'` | 500
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-320px-0.1.0.png" alt="Visualization" width="500px">
 
@@ -196,12 +197,12 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 12,894
-'validation' | 500
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,894
+`'validation'` | 500
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-160px-0.1.0.png" alt="Visualization" width="500px">

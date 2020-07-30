@@ -85,12 +85,12 @@ defines 200 classes but only uses 133.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 40,775
-'test2015'   | 81,434
-'train'      | 82,783
-'validation' | 40,504
+Split          | Examples
+:------------- | -------:
+`'test'`       | 40,775
+`'test2015'`   | 81,434
+`'train'`      | 82,783
+`'validation'` | 40,504
 
 *   **Features**:
 
@@ -109,8 +109,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/coco-2014-1.1.0.png" alt="Visualization" width="500px">
 
@@ -141,11 +141,11 @@ defines 200 classes but only uses 133.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 40,670
-'train'      | 118,287
-'validation' | 5,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 40,670
+`'train'`      | 118,287
+`'validation'` | 5,000
 
 *   **Features**:
 
@@ -164,8 +164,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/coco-2017-1.1.0.png" alt="Visualization" width="500px">
 
@@ -196,10 +196,10 @@ defines 200 classes but only uses 133.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 118,287
-'validation' | 5,000
+Split          | Examples
+:------------- | -------:
+`'train'`      | 118,287
+`'validation'` | 5,000
 
 *   **Features**:
 
@@ -220,6 +220,6 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

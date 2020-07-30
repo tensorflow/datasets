@@ -40,10 +40,10 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 8,041
-'train' | 8,144
+Split     | Examples
+:-------- | -------:
+`'test'`  | 8,041
+`'train'` | 8,144
 
 *   **Features**:
 
@@ -58,6 +58,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -70,7 +71,7 @@ author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cars196-2.0.0.png" alt="Visualization" width="500px">

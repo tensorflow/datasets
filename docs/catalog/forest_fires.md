@@ -73,9 +73,9 @@ For more information, read [Cortez and Morais, 2007].
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 517
+Split     | Examples
+:-------- | -------:
+`'train'` | 517
 
 *   **Features**:
 
@@ -102,6 +102,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('area', 'features')`
+
 *   **Citation**:
 
 ```
@@ -120,6 +121,6 @@ institution = "University of California, Irvine, School of Information and Compu
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

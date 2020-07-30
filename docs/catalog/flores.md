@@ -47,8 +47,8 @@ Sinhala-English.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## flores/neen_plain_text (default config)
@@ -60,10 +60,10 @@ Sinhala-English.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,835
-'validation' | 2,559
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,835
+`'validation'` | 2,559
 
 *   **Features**:
 
@@ -87,10 +87,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,766
-'validation' | 2,898
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,766
+`'validation'` | 2,898
 
 *   **Features**:
 

@@ -14,17 +14,23 @@
 
 *   **Source code**:
     [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+
 *   **Versions**:
+
     *   **`1.0.2`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## super_glue/boolq (default config)
@@ -55,11 +61,11 @@ containing the answer. Following the original work, we evaluate with accuracy.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,245
-'train'      | 9,427
-'validation' | 3,270
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,245
+`'train'`      | 9,427
+`'validation'` | 3,270
 
 *   **Features**:
 
@@ -132,11 +138,11 @@ for multi-class F1 we compute the unweighted average of the F1 per class.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 250
-'train'      | 250
-'validation' | 56
+Split          | Examples
+:------------- | -------:
+`'test'`       | 250
+`'train'`      | 250
+`'validation'` | 56
 
 *   **Features**:
 
@@ -208,11 +214,11 @@ accuracy.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 500
-'train'      | 400
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 400
+`'validation'` | 100
 
 *   **Features**:
 
@@ -288,11 +294,11 @@ domains including news, fiction, and historical text.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,693
-'train'      | 27,243
-'validation' | 4,848
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,693
+`'train'`      | 27,243
+`'validation'` | 4,848
 
 *   **Features**:
 
@@ -364,11 +370,11 @@ all mentions) token-level F1 and exact match (EM).
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,000
-'train'      | 100,730
-'validation' | 10,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,000
+`'train'`      | 100,730
+`'validation'` | 10,000
 
 *   **Features**:
 
@@ -449,11 +455,11 @@ and we expect the remaining gap to be difficult to close.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,000
-'train'      | 2,490
-'validation' | 277
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,000
+`'train'`      | 2,490
+`'validation'` | 277
 
 *   **Features**:
 
@@ -544,11 +550,11 @@ evaluate using accuracy.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,400
-'train'      | 5,428
-'validation' | 638
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,400
+`'train'`      | 5,428
+`'validation'` | 638
 
 *   **Features**:
 
@@ -668,14 +674,16 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
 *   **Download size**: `31.98 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 554
-'validation' | 104
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 554
+`'validation'` | 104
 
 *   **Features**:
 
@@ -792,14 +800,16 @@ text.
 
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
 *   **Download size**: `31.98 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 554
-'validation' | 104
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 554
+`'validation'` | 104
 
 *   **Features**:
 
@@ -879,9 +889,9 @@ used for the RTE task.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 1,104
+Split    | Examples
+:------- | -------:
+`'test'` | 1,104
 
 *   **Features**:
 
@@ -955,9 +965,9 @@ demonstrate the presence of gender bias in a system, but not prove its absence.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 356
+Split    | Examples
+:------- | -------:
+`'test'` | 356
 
 *   **Features**:
 

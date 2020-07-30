@@ -82,8 +82,8 @@ released under CC0, as is the underlying comment text.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## civil_comments/CivilComments (default config)
@@ -96,11 +96,11 @@ released under CC0, as is the underlying comment text.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 97,320
-'train'      | 1,804,874
-'validation' | 97,320
+Split          | Examples
+:------------- | --------:
+`'test'`       | 97,320
+`'train'`      | 1,804,874
+`'validation'` | 97,320
 
 *   **Features**:
 
@@ -128,11 +128,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 21,577
-'train'      | 405,130
-'validation' | 21,293
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,577
+`'train'`      | 405,130
+`'validation'` | 21,293
 
 *   **Features**:
 

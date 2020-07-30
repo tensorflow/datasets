@@ -48,10 +48,10 @@ more than once in the sentence, its first occurrence is the one to be resolved.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 564
-'train' | 1,322
+Split     | Examples
+:-------- | -------:
+`'test'`  | 564
+`'train'` | 1,322
 
 *   **Features**:
 
@@ -67,6 +67,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('sentence', 'label')`
+
 *   **Citation**:
 
 ```
@@ -80,8 +81,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## definite_pronoun_resolution/plain_text (default config)

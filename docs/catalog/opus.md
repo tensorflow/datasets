@@ -33,6 +33,7 @@ Translation({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
+
 *   **Citation**:
 
 ```
@@ -43,8 +44,8 @@ Translation({
   year = {2012}}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## opus/medical (default config)
@@ -78,9 +79,9 @@ medical documents
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,108,752
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,108,752
 
 ## opus/law
 
@@ -113,9 +114,9 @@ law documents
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 719,372
+Split     | Examples
+:-------- | -------:
+`'train'` | 719,372
 
 ## opus/koran
 
@@ -148,9 +149,9 @@ koran documents
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 537,128
+Split     | Examples
+:-------- | -------:
+`'train'` | 537,128
 
 ## opus/IT
 
@@ -183,9 +184,9 @@ IT documents
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 347,817
+Split     | Examples
+:-------- | -------:
+`'train'` | 347,817
 
 ## opus/subtitles
 
@@ -218,6 +219,6 @@ subtitles documents
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 22,512,639
+Split     | Examples
+:-------- | ---------:
+`'train'` | 22,512,639

@@ -353,6 +353,18 @@ class FeatureConnector(object):
     """
     return tf.ragged.map_flat_values(self.decode_batch_example, tfexample_data)
 
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object."""
+    return repr(ex)
+
+  def repr_html_batch(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object (Sequence)."""
+    return repr(ex)
+
+  def repr_html_ragged(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object (Nested sequence)."""
+    return repr(ex)
+
   def _flatten(self, x):
     """Flatten the input dict into a list of values.
 

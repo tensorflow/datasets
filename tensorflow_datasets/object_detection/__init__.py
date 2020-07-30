@@ -17,6 +17,7 @@
 """Object detection datasets."""
 
 from tensorflow_datasets.object_detection.coco import Coco
+from tensorflow_datasets.object_detection.coco_captions import CocoCaptions
 from tensorflow_datasets.object_detection.kitti import Kitti
 from tensorflow_datasets.object_detection.open_images import OpenImagesV4
 from tensorflow_datasets.object_detection.open_images_challenge2019 import OpenImagesChallenge2019Detection

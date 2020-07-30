@@ -175,6 +175,7 @@ class DownloadManager(object):
       extract_dir: Optional[str] = None,
       manual_dir: Optional[str] = None,
       manual_dir_instructions: Optional[str] = None,
+      checksums_path: Optional[str] = None,
       dataset_name: Optional[str] = None,
       force_download: bool = False,
       force_extraction: bool = False,
@@ -189,6 +190,7 @@ class DownloadManager(object):
       manual_dir: Path to manually downloaded/extracted data directory.
       manual_dir_instructions: Human readable instructions on how to
         prepare contents of the manual_dir for this dataset.
+      checksums_path: Path to the checksums file.
       dataset_name: Name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
       force_download: If True, always [re]download.
@@ -210,8 +212,13 @@ class DownloadManager(object):
     self._force_extraction = force_extraction
     self._force_checksums_validation = force_checksums_validation
     self._register_checksums = register_checksums
+
     # All known URLs: {url: (size, checksum)}
     self._url_infos = checksums.get_all_url_infos()
+    if checksums_path:
+      with tf.io.gfile.GFile(checksums_path) as f:
+        self._url_infos.update(checksums.parse_url_infos(f.read().splitlines()))
+
     # To record what is being used: {url: (size, checksum)}
     self._recorded_url_infos = {}
     # These attributes are lazy-initialized since they must be cleared when this

@@ -1,0 +1,32 @@
+{
+  "citation": "@article{DBLP:journals/corr/HughesS15,\n  author    = {David P. Hughes and\n               Marcel Salath{'{e}}},\n  title     = {An open access repository of images on plant health to enable the\n               development of mobile disease diagnostics through machine\n               learning and crowdsourcing},\n  journal   = {CoRR},\n  volume    = {abs/1511.08060},\n  year      = {2015},\n  url       = {http://arxiv.org/abs/1511.08060},\n  archivePrefix = {arXiv},\n  eprint    = {1511.08060},\n  timestamp = {Mon, 13 Aug 2018 16:48:21 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/HughesS15},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "description": "The PlantVillage dataset consists of 54303 healthy and unhealthy leaf images\ndivided into 38 categories by species and disease.\n\nNOTE: The original dataset is not available from the original source\n(plantvillage.org), therefore we get the unaugmented dataset from a paper that\nused that dataset and republished it. Moreover, we dropped images with\nBackground_without_leaves label, because these were not present in the original\ndataset.\n\nOriginal paper URL: https://arxiv.org/abs/1511.08060\nDataset URL: https://data.mendeley.com/datasets/tywbtsjrjv/1",
+  "downloadSize": "868032562",
+  "location": {
+    "urls": [
+      "https://arxiv.org/abs/1511.08060"
+    ]
+  },
+  "name": "plant_village",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "854978392",
+      "shardLengths": [
+        "6788",
+        "6788",
+        "6788",
+        "6788",
+        "6787",
+        "6788",
+        "6788",
+        "6788"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "1.0.1"
+}

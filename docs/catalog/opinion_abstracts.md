@@ -57,8 +57,8 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## opinion_abstracts/rotten_tomatoes (default config)
@@ -69,9 +69,9 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 3,731
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,731
 
 *   **Features**:
 
@@ -99,9 +99,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 2,259
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,259
 
 *   **Features**:
 

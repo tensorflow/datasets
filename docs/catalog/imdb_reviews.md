@@ -40,15 +40,16 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-'test'         | 25,000
-'train'        | 25,000
-'unsupervised' | 50,000
+Split            | Examples
+:--------------- | -------:
+`'test'`         | 25,000
+`'train'`        | 25,000
+`'unsupervised'` | 50,000
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'label')`
+
 *   **Citation**:
 
 ```
@@ -65,8 +66,8 @@ Split          | Examples
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## imdb_reviews/plain_text (default config)

@@ -37,10 +37,10 @@ A large set of images of horses and humans.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 256
-'train' | 1,027
+Split     | Examples
+:-------- | -------:
+`'test'`  | 256
+`'train'` | 1,027
 
 *   **Features**:
 
@@ -54,6 +54,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -66,7 +67,7 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/horses_or_humans-3.0.0.png" alt="Visualization" width="500px">

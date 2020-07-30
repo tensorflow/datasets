@@ -22,6 +22,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import base64
 import contextlib
 import hashlib
 import io
@@ -223,6 +224,11 @@ def dedent(text):
   return textwrap.dedent(text).strip() if text else text
 
 
+def indent(text: str, indent: str) -> str:  # pylint: disable=redefined-outer-name
+  text = dedent(text)
+  return text.replace('\n', '\n' + indent)
+
+
 def pack_as_nest_dict(flat_d, nest_d):
   """Pack a 1-lvl dict into a nested dict with same structure as `nest_d`."""
   nest_out_d = {}
@@ -369,6 +375,13 @@ def get_tfds_path(relative_path):
   return path
 
 
+def get_resource_path(path) -> str:
+  """Get the read-only resource path."""
+  # For compatibility with `zip` archives, we should replace this by a pathlike
+  # abstraction, which uses `importlib.resource.files()`
+  return str(path)
+
+
 def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   """Given a hash constructor, returns checksum digest and size of file."""
   checksum = checksum_cls()
@@ -480,3 +493,10 @@ def list_info_files(dir_path: str) -> List[str]:
       if '.tfrecord' not in fname and
       not tf.io.gfile.isdir(os.path.join(dir_path, fname))
   ]
+
+
+def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
+  """Extracts the base64 string of an object by writing into a tmp buffer."""
+  buffer = io.BytesIO()
+  write_fn(buffer)
+  return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type

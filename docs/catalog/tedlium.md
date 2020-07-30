@@ -14,11 +14,15 @@
 
 *   **Source code**:
     [`tfds.audio.Tedlium`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/tedlium.py)
+
 *   **Versions**:
+
     *   **`1.0.1`** (default): No release notes.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Features**:
 
 ```python
@@ -34,8 +38,9 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('speech', 'text')`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## tedlium/release1 (default config)
@@ -66,11 +71,11 @@ This is the TED-LIUM corpus release 1, licensed under Creative Commons BY-NC-ND
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,469
-'train'      | 56,803
-'validation' | 591
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,469
+`'train'`      | 56,803
+`'validation'` | 591
 
 *   **Citation**:
 
@@ -125,11 +130,11 @@ Contains 1495 talks and transcripts.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,469
-'train'      | 92,973
-'validation' | 591
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,469
+`'train'`      | 92,973
+`'validation'` | 591
 
 *   **Citation**:
 
@@ -213,11 +218,11 @@ especially designed for experiments on speaker adaptation.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,469
-'train'      | 268,263
-'validation' | 591
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,469
+`'train'`      | 268,263
+`'validation'` | 591
 
 *   **Citation**:
 

@@ -42,10 +42,10 @@ corresponding reading passage, or the question might be unanswerable.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 87,599
-'validation' | 10,570
+Split          | Examples
+:------------- | -------:
+`'train'`      | 87,599
+`'validation'` | 10,570
 
 *   **Features**:
 
@@ -65,6 +65,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -81,8 +82,8 @@ archivePrefix = {arXiv},
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## squad/plain_text (default config)

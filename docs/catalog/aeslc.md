@@ -39,11 +39,11 @@ subject text.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,906
-'train'      | 14,436
-'validation' | 1,960
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,906
+`'train'`      | 14,436
+`'validation'` | 1,960
 
 *   **Features**:
 
@@ -57,6 +57,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('email_body', 'subject_line')`
+
 *   **Citation**:
 
 ```
@@ -70,6 +71,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

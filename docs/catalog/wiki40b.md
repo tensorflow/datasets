@@ -48,6 +48,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -59,8 +60,8 @@ booktitle   = {LREC 2020}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## wiki40b/en (default config)
@@ -75,11 +76,11 @@ booktitle   = {LREC 2020}
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 162,274
-'train'      | 2,926,536
-'validation' | 163,597
+Split          | Examples
+:------------- | --------:
+`'test'`       | 162,274
+`'train'`      | 2,926,536
+`'validation'` | 163,597
 
 ## wiki40b/ar
 
@@ -93,11 +94,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 12,271
-'train'      | 220,885
-'validation' | 12,198
+Split          | Examples
+:------------- | -------:
+`'test'`       | 12,271
+`'train'`      | 220,885
+`'validation'` | 12,198
 
 ## wiki40b/zh-cn
 
@@ -111,11 +112,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 30,355
-'train'      | 549,672
-'validation' | 30,299
+Split          | Examples
+:------------- | -------:
+`'test'`       | 30,355
+`'train'`      | 549,672
+`'validation'` | 30,299
 
 ## wiki40b/zh-tw
 
@@ -129,11 +130,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 30,670
-'train'      | 552,031
-'validation' | 30,739
+Split          | Examples
+:------------- | -------:
+`'test'`       | 30,670
+`'train'`      | 552,031
+`'validation'` | 30,739
 
 ## wiki40b/nl
 
@@ -147,11 +148,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 24,776
-'train'      | 447,555
-'validation' | 25,201
+Split          | Examples
+:------------- | -------:
+`'test'`       | 24,776
+`'train'`      | 447,555
+`'validation'` | 25,201
 
 ## wiki40b/fr
 
@@ -165,11 +166,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 68,004
-'train'      | 1,227,206
-'validation' | 68,655
+Split          | Examples
+:------------- | --------:
+`'test'`       | 68,004
+`'train'`      | 1,227,206
+`'validation'` | 68,655
 
 ## wiki40b/de
 
@@ -183,11 +184,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 86,594
-'train'      | 1,554,910
-'validation' | 86,068
+Split          | Examples
+:------------- | --------:
+`'test'`       | 86,594
+`'train'`      | 1,554,910
+`'validation'` | 86,068
 
 ## wiki40b/it
 
@@ -201,11 +202,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 40,443
-'train'      | 732,609
-'validation' | 40,684
+Split          | Examples
+:------------- | -------:
+`'test'`       | 40,443
+`'train'`      | 732,609
+`'validation'` | 40,684
 
 ## wiki40b/ja
 
@@ -219,11 +220,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 41,268
-'train'      | 745,392
-'validation' | 41,576
+Split          | Examples
+:------------- | -------:
+`'test'`       | 41,268
+`'train'`      | 745,392
+`'validation'` | 41,576
 
 ## wiki40b/ko
 
@@ -237,11 +238,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,802
-'train'      | 194,977
-'validation' | 10,805
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,802
+`'train'`      | 194,977
+`'validation'` | 10,805
 
 ## wiki40b/pl
 
@@ -255,11 +256,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 27,987
-'train'      | 505,191
-'validation' | 28,310
+Split          | Examples
+:------------- | -------:
+`'test'`       | 27,987
+`'train'`      | 505,191
+`'validation'` | 28,310
 
 ## wiki40b/pt
 
@@ -273,11 +274,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 22,693
-'train'      | 406,507
-'validation' | 22,301
+Split          | Examples
+:------------- | -------:
+`'test'`       | 22,693
+`'train'`      | 406,507
+`'validation'` | 22,301
 
 ## wiki40b/ru
 
@@ -291,11 +292,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 51,885
-'train'      | 926,037
-'validation' | 51,287
+Split          | Examples
+:------------- | -------:
+`'test'`       | 51,885
+`'train'`      | 926,037
+`'validation'` | 51,287
 
 ## wiki40b/es
 
@@ -309,11 +310,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 48,764
-'train'      | 872,541
-'validation' | 48,592
+Split          | Examples
+:------------- | -------:
+`'test'`       | 48,764
+`'train'`      | 872,541
+`'validation'` | 48,592
 
 ## wiki40b/th
 
@@ -327,11 +328,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,114
-'train'      | 56,798
-'validation' | 3,093
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,114
+`'train'`      | 56,798
+`'validation'` | 3,093
 
 ## wiki40b/tr
 
@@ -345,11 +346,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,890
-'train'      | 142,576
-'validation' | 7,845
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,890
+`'train'`      | 142,576
+`'validation'` | 7,845
 
 ## wiki40b/bg
 
@@ -363,11 +364,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,289
-'train'      | 130,670
-'validation' | 7,259
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,289
+`'train'`      | 130,670
+`'validation'` | 7,259
 
 ## wiki40b/ca
 
@@ -381,11 +382,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 15,568
-'train'      | 277,313
-'validation' | 15,362
+Split          | Examples
+:------------- | -------:
+`'test'`       | 15,568
+`'train'`      | 277,313
+`'validation'` | 15,362
 
 ## wiki40b/cs
 
@@ -399,11 +400,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 12,984
-'train'      | 235,971
-'validation' | 13,096
+Split          | Examples
+:------------- | -------:
+`'test'`       | 12,984
+`'train'`      | 235,971
+`'validation'` | 13,096
 
 ## wiki40b/da
 
@@ -413,15 +414,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,219
-'train'      | 109,486
-'validation' | 6,173
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,219
+`'train'`      | 109,486
+`'validation'` | 6,173
 
 ## wiki40b/el
 
@@ -435,11 +436,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,261
-'train'      | 93,596
-'validation' | 5,130
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,261
+`'train'`      | 93,596
+`'validation'` | 5,130
 
 ## wiki40b/et
 
@@ -449,15 +450,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,205
-'train'      | 114,464
-'validation' | 6,351
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,205
+`'train'`      | 114,464
+`'validation'` | 6,351
 
 ## wiki40b/fa
 
@@ -471,11 +472,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 11,262
-'train'      | 203,145
-'validation' | 11,180
+Split          | Examples
+:------------- | -------:
+`'test'`       | 11,262
+`'train'`      | 203,145
+`'validation'` | 11,180
 
 ## wiki40b/fi
 
@@ -489,11 +490,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 14,179
-'train'      | 255,822
-'validation' | 13,962
+Split          | Examples
+:------------- | -------:
+`'test'`       | 14,179
+`'train'`      | 255,822
+`'validation'` | 13,962
 
 ## wiki40b/he
 
@@ -507,11 +508,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,344
-'train'      | 165,359
-'validation' | 9,231
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,344
+`'train'`      | 165,359
+`'validation'` | 9,231
 
 ## wiki40b/hi
 
@@ -525,11 +526,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,643
-'train'      | 45,737
-'validation' | 2,596
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,643
+`'train'`      | 45,737
+`'validation'` | 2,596
 
 ## wiki40b/hr
 
@@ -539,15 +540,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,724
-'train'      | 103,857
-'validation' | 5,792
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,724
+`'train'`      | 103,857
+`'validation'` | 5,792
 
 ## wiki40b/hu
 
@@ -561,11 +562,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 15,258
-'train'      | 273,248
-'validation' | 15,208
+Split          | Examples
+:------------- | -------:
+`'test'`       | 15,258
+`'train'`      | 273,248
+`'validation'` | 15,208
 
 ## wiki40b/id
 
@@ -579,11 +580,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 8,598
-'train'      | 156,255
-'validation' | 8,714
+Split          | Examples
+:------------- | -------:
+`'test'`       | 8,598
+`'train'`      | 156,255
+`'validation'` | 8,714
 
 ## wiki40b/lt
 
@@ -597,11 +598,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 4,683
-'train'      | 84,854
-'validation' | 4,754
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,683
+`'train'`      | 84,854
+`'validation'` | 4,754
 
 ## wiki40b/lv
 
@@ -615,11 +616,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,932
-'train'      | 33,064
-'validation' | 1,857
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,932
+`'train'`      | 33,064
+`'validation'` | 1,857
 
 ## wiki40b/ms
 
@@ -629,15 +630,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,235
-'train'      | 97,509
-'validation' | 5,357
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,235
+`'train'`      | 97,509
+`'validation'` | 5,357
 
 ## wiki40b/no
 
@@ -651,11 +652,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,588
-'train'      | 190,588
-'validation' | 10,547
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,588
+`'train'`      | 190,588
+`'validation'` | 10,547
 
 ## wiki40b/ro
 
@@ -669,11 +670,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,870
-'train'      | 139,615
-'validation' | 7,624
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,870
+`'train'`      | 139,615
+`'validation'` | 7,624
 
 ## wiki40b/sk
 
@@ -683,15 +684,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,741
-'train'      | 103,095
-'validation' | 5,604
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,741
+`'train'`      | 103,095
+`'validation'` | 5,604
 
 ## wiki40b/sl
 
@@ -701,15 +702,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,341
-'train'      | 60,927
-'validation' | 3,287
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,341
+`'train'`      | 60,927
+`'validation'` | 3,287
 
 ## wiki40b/sr
 
@@ -723,11 +724,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 17,997
-'train'      | 327,313
-'validation' | 18,100
+Split          | Examples
+:------------- | -------:
+`'test'`       | 17,997
+`'train'`      | 327,313
+`'validation'` | 18,100
 
 ## wiki40b/sv
 
@@ -741,11 +742,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 22,291
-'train'      | 400,742
-'validation' | 22,263
+Split          | Examples
+:------------- | -------:
+`'test'`       | 22,291
+`'train'`      | 400,742
+`'validation'` | 22,263
 
 ## wiki40b/tl
 
@@ -759,11 +760,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,446
-'train'      | 25,940
-'validation' | 1,472
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,446
+`'train'`      | 25,940
+`'validation'` | 1,472
 
 ## wiki40b/uk
 
@@ -777,11 +778,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 26,581
-'train'      | 477,618
-'validation' | 26,324
+Split          | Examples
+:------------- | -------:
+`'test'`       | 26,581
+`'train'`      | 477,618
+`'validation'` | 26,324
 
 ## wiki40b/vi
 
@@ -795,8 +796,8 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,942
-'train'      | 146,255
-'validation' | 8,195
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,942
+`'train'`      | 146,255
+`'validation'` | 8,195

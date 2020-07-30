@@ -42,10 +42,10 @@ set aside 20% (1016 images) of the data for testing.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 1,016
-'train' | 3,987
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,016
+`'train'` | 3,987
 
 *   **Features**:
 
@@ -64,6 +64,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -81,8 +82,8 @@ FeaturesDict({
 
 *   **Download size**: `286.35 MiB`
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/flic-small-2.0.0.png" alt="Visualization" width="500px">
 
@@ -93,7 +94,7 @@ FeaturesDict({
 
 *   **Download size**: `1.10 GiB`
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/flic-full-2.0.0.png" alt="Visualization" width="500px">

@@ -37,6 +37,14 @@ if nightly:
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
   __version__ += 'dev%s' % datestring
+  entry_points = {
+      'console_scripts': [
+          'tfds = tensorflow_datasets.scripts.cli.main:launch_cli'
+      ],
+  }
+else:
+  entry_points = {}
+
 
 DOCLINES = __doc__.split('\n')
 
@@ -129,11 +137,8 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
-    # TODO(epot): Remove numba==0.48 once librosa 8.0 is out
     # See https://github.com/librosa/librosa/issues/1160
-    'nsynth': [
-        'crepe>=0.0.11', 'librosa', 'numba==0.48', 'scikit-learn==0.20.3'
-    ],
+    'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
@@ -187,6 +192,7 @@ setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
+    python_requires='>=3.6',
     extras_require=EXTRAS_REQUIRE,
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -196,4 +202,5 @@ setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     keywords='tensorflow machine learning datasets',
+    entry_points=entry_points,
 )

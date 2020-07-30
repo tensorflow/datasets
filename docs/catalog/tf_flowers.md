@@ -36,9 +36,9 @@ A large set of images of flowers
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 3,670
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,670
 
 *   **Features**:
 
@@ -52,6 +52,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -63,7 +64,7 @@ year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/tf_flowers-3.0.1.png" alt="Visualization" width="500px">

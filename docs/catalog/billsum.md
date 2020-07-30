@@ -41,11 +41,11 @@ summary.
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-'ca_test' | 1,237
-'test'    | 3,269
-'train'   | 18,949
+Split       | Examples
+:---------- | -------:
+`'ca_test'` | 1,237
+`'test'`    | 3,269
+`'train'`   | 18,949
 
 *   **Features**:
 
@@ -60,6 +60,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'summary')`
+
 *   **Citation**:
 
 ```
@@ -73,6 +74,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

@@ -40,11 +40,11 @@ justifying the classification
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 4,848
-'train'      | 24,029
-'validation' | 3,214
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,848
+`'train'`      | 24,029
+`'validation'` | 3,214
 
 *   **Features**:
 
@@ -60,6 +60,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -75,6 +76,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

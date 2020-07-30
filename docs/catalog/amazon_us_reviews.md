@@ -90,8 +90,11 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Citation**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## amazon_us_reviews/Wireless_v1_00 (default config)
@@ -104,9 +107,9 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 9,002,021
+Split     | Examples
+:-------- | --------:
+`'train'` | 9,002,021
 
 ## amazon_us_reviews/Watches_v1_00
 
@@ -118,9 +121,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 960,872
+Split     | Examples
+:-------- | -------:
+`'train'` | 960,872
 
 ## amazon_us_reviews/Video_Games_v1_00
 
@@ -132,9 +135,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,785,997
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,785,997
 
 ## amazon_us_reviews/Video_DVD_v1_00
 
@@ -146,9 +149,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,069,140
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,069,140
 
 ## amazon_us_reviews/Video_v1_00
 
@@ -160,9 +163,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 380,604
+Split     | Examples
+:-------- | -------:
+`'train'` | 380,604
 
 ## amazon_us_reviews/Toys_v1_00
 
@@ -174,9 +177,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 4,864,249
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,864,249
 
 ## amazon_us_reviews/Tools_v1_00
 
@@ -188,9 +191,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,741,100
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,741,100
 
 ## amazon_us_reviews/Sports_v1_00
 
@@ -202,9 +205,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 4,850,360
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,850,360
 
 ## amazon_us_reviews/Software_v1_00
 
@@ -216,9 +219,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 341,931
+Split     | Examples
+:-------- | -------:
+`'train'` | 341,931
 
 ## amazon_us_reviews/Shoes_v1_00
 
@@ -230,9 +233,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 4,366,916
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,366,916
 
 ## amazon_us_reviews/Pet_Products_v1_00
 
@@ -244,9 +247,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,643,619
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,643,619
 
 ## amazon_us_reviews/Personal_Care_Appliances_v1_00
 
@@ -258,9 +261,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 85,981
+Split     | Examples
+:-------- | -------:
+`'train'` | 85,981
 
 ## amazon_us_reviews/PC_v1_00
 
@@ -272,9 +275,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 6,908,554
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,908,554
 
 ## amazon_us_reviews/Outdoors_v1_00
 
@@ -286,9 +289,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,302,401
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,302,401
 
 ## amazon_us_reviews/Office_Products_v1_00
 
@@ -300,9 +303,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,642,434
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,642,434
 
 ## amazon_us_reviews/Musical_Instruments_v1_00
 
@@ -314,9 +317,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 904,765
+Split     | Examples
+:-------- | -------:
+`'train'` | 904,765
 
 ## amazon_us_reviews/Music_v1_00
 
@@ -328,9 +331,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 4,751,577
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,751,577
 
 ## amazon_us_reviews/Mobile_Electronics_v1_00
 
@@ -342,9 +345,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 104,975
+Split     | Examples
+:-------- | -------:
+`'train'` | 104,975
 
 ## amazon_us_reviews/Mobile_Apps_v1_00
 
@@ -356,9 +359,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,033,376
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,033,376
 
 ## amazon_us_reviews/Major_Appliances_v1_00
 
@@ -370,9 +373,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 96,901
+Split     | Examples
+:-------- | -------:
+`'train'` | 96,901
 
 ## amazon_us_reviews/Luggage_v1_00
 
@@ -384,9 +387,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 348,657
+Split     | Examples
+:-------- | -------:
+`'train'` | 348,657
 
 ## amazon_us_reviews/Lawn_and_Garden_v1_00
 
@@ -398,9 +401,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,557,288
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,557,288
 
 ## amazon_us_reviews/Kitchen_v1_00
 
@@ -412,9 +415,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 4,880,466
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,880,466
 
 ## amazon_us_reviews/Jewelry_v1_00
 
@@ -426,9 +429,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,767,753
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,767,753
 
 ## amazon_us_reviews/Home_Improvement_v1_00
 
@@ -440,9 +443,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,634,781
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,634,781
 
 ## amazon_us_reviews/Home_Entertainment_v1_00
 
@@ -454,9 +457,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 705,889
+Split     | Examples
+:-------- | -------:
+`'train'` | 705,889
 
 ## amazon_us_reviews/Home_v1_00
 
@@ -468,9 +471,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 6,221,559
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,221,559
 
 ## amazon_us_reviews/Health_Personal_Care_v1_00
 
@@ -482,9 +485,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,331,449
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,331,449
 
 ## amazon_us_reviews/Grocery_v1_00
 
@@ -496,9 +499,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,402,458
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,402,458
 
 ## amazon_us_reviews/Gift_Card_v1_00
 
@@ -510,9 +513,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 149,086
+Split     | Examples
+:-------- | -------:
+`'train'` | 149,086
 
 ## amazon_us_reviews/Furniture_v1_00
 
@@ -524,9 +527,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 792,113
+Split     | Examples
+:-------- | -------:
+`'train'` | 792,113
 
 ## amazon_us_reviews/Electronics_v1_00
 
@@ -538,9 +541,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,093,869
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,093,869
 
 ## amazon_us_reviews/Digital_Video_Games_v1_00
 
@@ -552,9 +555,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 145,431
+Split     | Examples
+:-------- | -------:
+`'train'` | 145,431
 
 ## amazon_us_reviews/Digital_Video_Download_v1_00
 
@@ -566,9 +569,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 4,057,147
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,057,147
 
 ## amazon_us_reviews/Digital_Software_v1_00
 
@@ -580,9 +583,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 102,084
+Split     | Examples
+:-------- | -------:
+`'train'` | 102,084
 
 ## amazon_us_reviews/Digital_Music_Purchase_v1_00
 
@@ -594,9 +597,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,688,884
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,688,884
 
 ## amazon_us_reviews/Digital_Ebook_Purchase_v1_00
 
@@ -608,9 +611,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 12,520,722
+Split     | Examples
+:-------- | ---------:
+`'train'` | 12,520,722
 
 ## amazon_us_reviews/Camera_v1_00
 
@@ -622,9 +625,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,801,974
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,801,974
 
 ## amazon_us_reviews/Books_v1_00
 
@@ -636,9 +639,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 10,319,090
+Split     | Examples
+:-------- | ---------:
+`'train'` | 10,319,090
 
 ## amazon_us_reviews/Beauty_v1_00
 
@@ -650,9 +653,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,115,666
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,115,666
 
 ## amazon_us_reviews/Baby_v1_00
 
@@ -664,9 +667,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,752,932
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,752,932
 
 ## amazon_us_reviews/Automotive_v1_00
 
@@ -678,9 +681,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,514,942
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,514,942
 
 ## amazon_us_reviews/Apparel_v1_00
 
@@ -692,9 +695,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,906,333
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,906,333
 
 ## amazon_us_reviews/Digital_Ebook_Purchase_v1_01
 
@@ -706,9 +709,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,101,693
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,101,693
 
 ## amazon_us_reviews/Books_v1_01
 
@@ -720,9 +723,9 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 6,106,719
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,106,719
 
 ## amazon_us_reviews/Books_v1_02
 
@@ -734,6 +737,6 @@ Split   | Examples
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,105,520
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,105,520

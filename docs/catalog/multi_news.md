@@ -41,11 +41,11 @@ token "|||||". - summary: news summary.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,622
-'train'      | 44,972
-'validation' | 5,622
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,622
+`'train'`      | 44,972
+`'validation'` | 5,622
 
 *   **Features**:
 
@@ -59,6 +59,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
+
 *   **Citation**:
 
 ```
@@ -72,6 +73,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

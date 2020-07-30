@@ -60,9 +60,9 @@ ensuring that all pixel outputs were different. No noise was added.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 737,280
+Split     | Examples
+:-------- | -------:
+`'train'` | 737,280
 
 *   **Features**:
 
@@ -85,6 +85,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -96,7 +97,7 @@ year = "2017",
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/dsprites-2.0.0.png" alt="Visualization" width="500px">

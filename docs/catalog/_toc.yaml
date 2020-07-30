@@ -215,6 +215,9 @@ toc:
 - section:
   - path: /datasets/catalog/coco
     title: coco
+  - path: /datasets/catalog/coco_captions
+    status: nightly
+    title: coco_captions
   - path: /datasets/catalog/kitti
     title: kitti
   - path: /datasets/catalog/open_images_challenge2019_detection
@@ -257,6 +260,12 @@ toc:
     title: iris
   - path: /datasets/catalog/movie_lens
     title: movie_lens
+  - path: /datasets/catalog/movielens
+    status: nightly
+    title: movielens
+  - path: /datasets/catalog/radon
+    status: nightly
+    title: radon
   - path: /datasets/catalog/rock_you
     title: rock_you
   - path: /datasets/catalog/titanic

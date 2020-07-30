@@ -4,7 +4,7 @@
   </div>
 
   <meta itemprop="name" content="ai2_arc" />
-  <meta itemprop="description" content="A new dataset of 7,787 genuine grade-school level, multiple-choice science &#10; questions, assembled to encourage research in advanced question-answering. &#10; The dataset is partitioned into a Challenge Set and an Easy Set, where the &#10; former contains only questions answered incorrectly by both a retrieval-based&#10; algorithm and a word co-occurrence algorithm. We are also including a corpus&#10; of over 14 million science sentences relevant to the task, and an &#10; implementation of three neural baseline models for this dataset.&#10; We pose ARC as a challenge to the community.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ai2_arc&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="A new dataset of 7,787 genuine grade-school level, multiple-choice science&#10;questions, assembled to encourage research in advanced question-answering.&#10;The dataset is partitioned into a Challenge Set and an Easy Set, where the&#10;former contains only questions answered incorrectly by both a retrieval-based&#10;algorithm and a word co-occurrence algorithm. We are also including a corpus&#10;of over 14 million science sentences relevant to the task, and an&#10;implementation of three neural baseline models for this dataset.&#10;We pose ARC as a challenge to the community.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ai2_arc&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ai2_arc" />
   <meta itemprop="sameAs" content="https://allenai.org/data/arc" />
   <meta itemprop="citation" content="@article{allenai:arc,&#10;      author    = {Peter Clark  and Isaac Cowhey and Oren Etzioni and Tushar Khot and&#10;                    Ashish Sabharwal and Carissa Schoenick and Oyvind Tafjord},&#10;      title     = {Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge},&#10;      journal   = {arXiv:1803.05457v1},&#10;      year      = {2018},&#10;}" />
@@ -30,7 +30,7 @@ community.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `649.30 MiB`
 
@@ -55,6 +55,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -67,8 +68,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## ai2_arc/ARC-Challenge (default config)
@@ -80,11 +81,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,172
-'train'      | 1,119
-'validation' | 299
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,172
+`'train'`      | 1,119
+`'validation'` | 299
 
 ## ai2_arc/ARC-Easy
 
@@ -94,8 +95,8 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,376
-'train'      | 2,251
-'validation' | 570
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,376
+`'train'`      | 2,251
+`'validation'` | 570
