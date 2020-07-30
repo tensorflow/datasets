@@ -227,6 +227,13 @@ class Image(feature.FeatureConnector):
     # Display HTML
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}
+
 
 def _postprocess_noop(img):
   return img

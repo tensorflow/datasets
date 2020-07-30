@@ -181,3 +181,10 @@ class Video(sequence_feature.Sequence):
     else:
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
+
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}

@@ -176,6 +176,19 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
         for feature_key, feature in self._feature_dict.items()
     }
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {
+        'type': type(self).__name__,
+        'content': {
+            feature_key: feature.to_json()
+            for feature_key, feature in self._feature_dict.items()
+        }
+    }
+
   def encode_example(self, example_dict):
     """See base class for details."""
     return {

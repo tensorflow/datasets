@@ -179,3 +179,10 @@ class Text(feature.Tensor):
     ex = html.escape(ex)
     ex = textwrap.shorten(ex, width=1000)  # Truncate long text
     return ex
+
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}

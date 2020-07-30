@@ -107,6 +107,13 @@ class Audio(feature.Tensor):
         ' controlsList="nodownload" />'
     )
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}
+
 
 def _save_wav(buff, data, rate) -> None:
   """Transform a numpy array to a PCM bytestring."""

@@ -91,6 +91,7 @@ from __future__ import print_function
 import abc
 import collections
 import json
+from typing import Dict
 
 import numpy as np
 import six
@@ -165,6 +166,12 @@ class FeatureConnector(object):
 
   """
 
+  _REGISTERED_FEATURES: Dict[str, 'FeatureConnector'] = utils.NonMutableDict()
+
+  def __init_subclass__(cls):
+    """Subclass features are automatically registered"""
+    cls._REGISTERED_FEATURES[cls.__name__] = cls
+
   @abc.abstractmethod
   def get_tensor_info(self):
     """Return the tf.Tensor dtype/shape of the feature.
@@ -206,12 +213,32 @@ class FeatureConnector(object):
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
-  def save_config(self) -> str:
-    """Return the encode JSON string of this FeatureConnector"""
-    return json.dumps(str(self.get_serialized_info()))
+  @classmethod
+  @abc.abstractmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    """Return the FeatureConnector by decoding the JSON string."""
+    feature_dict = {}
+    for feature_name, feature in value['content']:
+      subclass = cls._REGISTERED_FEATURES.get(feature_name)
+      if subclass is None:
+        raise ValueError(
+            f'Invalid feature name {feature_name} with feature: {feature}\n'
+            f'Supported: {list(cls._REGISTERED_FEATURES)}'
+        )
+      feature_dict.update(subclass.from_json(feature))
+    return feature_dict
+
+  @abc.abstractmethod
+  def to_json(self):
+    """Exports the FeatureConnector to Json."""
+    return {}
+
+  def save_config(self, path: str) -> None:
+    with tf.io.gfile.GFile(path, 'w') as f:
+      f.write(json.dumps(self.to_json(), indent=4))
 
   @classmethod
-  def from_config(cls, path: str):
+  def from_config(cls, path: str) -> 'FeatureConnector':
     """Usage
 
     features = FeatureConnector.from_config('path/to/feature_info.json')
@@ -222,11 +249,7 @@ class FeatureConnector(object):
 
     """
     with tf.io.gfile.GFile(path) as f:
-      feature_json = json.loads(f.read())
-
-    # TODO: Parse feature_json -> features
-    # features = parse(feature_json)
-    # return features
+      return FeatureConnector.from_json(json.loads(f.read()))
 
   def get_serialized_info(self):
     """Return the shape/dtype of features after encoding (for the adapter).
@@ -583,6 +606,12 @@ class Tensor(FeatureConnector):
     utils.assert_shape_match(example_data.shape, self._shape)
     return example_data
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}
 
 def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.

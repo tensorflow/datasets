@@ -209,6 +209,13 @@ class Sequence(top_level_feature.TopLevelFeature):
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}
+
 
 def _np_to_list(elem):
   """Returns list from list, tuple or ndarray."""
@@ -232,6 +239,7 @@ def _transpose_dict_list(dict_list):
   # 2. Extract the sequence length (and ensure the length is constant for all
   # elements)
   length = {'value': None}  # dict because `nonlocal` is Python3 only
+
   def update_length(elem):
     if length['value'] is None:
       length['value'] = len(elem)
@@ -244,6 +252,7 @@ def _transpose_dict_list(dict_list):
 
   # 3. Extract each individual elements
   return [
-      utils.map_nested(lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
+      utils.map_nested(
+          lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
       for i in range(length['value'])  # pytype: disable=wrong-arg-types
   ]

@@ -332,9 +332,7 @@ class DatasetInfo(object):
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
-
-      with tf.io.gfile.GFile(self._feature_info_path(dataset_info_dir), "w") as f:
-        f.write(self.features.save_config())
+      self.features.save_config(self._feature_info_path(dataset_info_dir))
 
     # Save any additional metadata
     if self.metadata is not None:
@@ -597,7 +595,6 @@ class BeamMetadataDict(MetadataDict):
       if key in self:
         raise ValueError("Already added PValue with key: %s" % key)
       logging.info("Lazily adding metadata item with Beam: %s", key)
-
       def _to_json(item_list):
         if len(item_list) != 1:
           raise ValueError(

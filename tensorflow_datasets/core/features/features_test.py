@@ -58,6 +58,13 @@ class AnInputConnector(features_lib.FeatureConnector):
     # Merge the two values
     return tfexample_dict['a'] + tfexample_dict['b']
 
+  @classmethod
+  def from_json(cls, value):
+    return
+
+  def to_json(self):
+    return {}
+
 
 class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
@@ -71,6 +78,12 @@ class AnOutputConnector(features_lib.FeatureConnector):
   def decode_example(self, tfexample_data):
     return tfexample_data / 10.0
 
+  @classmethod
+  def from_json(cls, value):
+    return
+
+  def to_json(self):
+    return {}
 
 class FeatureDictTest(testing.FeatureExpectationsTestCase):
 

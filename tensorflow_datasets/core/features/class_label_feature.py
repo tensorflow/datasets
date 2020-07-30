@@ -181,6 +181,13 @@ class ClassLabel(feature.Tensor):
     else:
       return f"{ex} ({self.int2str(ex)})"
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}
+
 
 def _get_names_filepath(data_dir, feature_name):
   return os.path.join(data_dir, "{}.labels.txt".format(feature_name))

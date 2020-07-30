@@ -81,3 +81,10 @@ class BBoxFeature(feature.Tensor):
     return super(BBoxFeature, self).encode_example(
         [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
     )
+
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {'type': type(self).__name__}

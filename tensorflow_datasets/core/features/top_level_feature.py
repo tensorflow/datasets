@@ -117,6 +117,13 @@ def _decode_feature(feature, example, serialized_info, decoder):
     # Use ragged tensor if the sequance rank is greater than one
     return decoder.decode_ragged_example(example)
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {}
+
 
 def _get_sequence_rank(serialized_info):
   """Return the number of sequence dimensions of the feature."""
