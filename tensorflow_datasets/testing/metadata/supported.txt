@@ -10,6 +10,7 @@ abstract_reasoning/interpolation/1.0.0
 abstract_reasoning/neutral/1.0.0
 aeslc/1.0.0
 aflw2k3d/1.0.0
+ag_news_subset/1.0.0
 ai2_arc/ARC-Challenge/1.0.0
 ai2_arc/ARC-Easy/1.0.0
 amazon_us_reviews/Apparel_v1_00/0.1.0
