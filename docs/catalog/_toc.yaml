@@ -306,6 +306,9 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
+  - path: /datasets/catalog/ag_news_subset
+    status: nightly
+    title: ag_news_subset
   - path: /datasets/catalog/anli
     title: anli
   - path: /datasets/catalog/blimp

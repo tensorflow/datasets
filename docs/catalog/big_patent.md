@@ -12,6 +12,11 @@
 
 # `big_patent`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with
@@ -33,10 +38,24 @@ summary: Patent abastract.
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): Updated to cased raw strings.
+    *   **`2.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix update to cased raw strings.
     *   `1.0.0`: No release notes.
+    *   `2.0.0`: No release notes.
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -72,187 +91,47 @@ FeaturesDict({
 
 *   **Config description**: Patents under all categories.
 
-*   **Dataset size**: `24.22 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'test'`       | 67,072
-`'train'`      | 1,207,222
-`'validation'` | 67,068
-
 ## big_patent/a
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)a: Human Necessities
-
-*   **Dataset size**: `3.45 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,675
-`'train'`      | 174,134
-`'validation'` | 9,674
 
 ## big_patent/b
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)b: Performing Operations; Transporting
 
-*   **Dataset size**: `2.67 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 8,974
-`'train'`      | 161,520
-`'validation'` | 8,973
-
 ## big_patent/c
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)c: Chemistry; Metallurgy
-
-*   **Dataset size**: `2.74 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 5,614
-`'train'`      | 101,042
-`'validation'` | 5,613
 
 ## big_patent/d
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)d: Textiles; Paper
 
-*   **Dataset size**: `170.08 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 565
-`'train'`      | 10,164
-`'validation'` | 565
-
 ## big_patent/e
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)e: Fixed Constructions
-
-*   **Dataset size**: `568.03 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,914
-`'train'`      | 34,443
-`'validation'` | 1,914
 
 ## big_patent/f
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons; Blasting
 
-*   **Dataset size**: `1.35 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 4,754
-`'train'`      | 85,568
-`'validation'` | 4,754
-
 ## big_patent/g
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)g: Physics
-
-*   **Dataset size**: `5.78 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 14,386
-`'train'`      | 258,935
-`'validation'` | 14,385
 
 ## big_patent/h
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)h: Electricity
 
-*   **Dataset size**: `5.17 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 14,279
-`'train'`      | 257,019
-`'validation'` | 14,279
-
 ## big_patent/y
 
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)y: General tagging of new or cross-sectional technology
-
-*   **Dataset size**: `2.35 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 6,911
-`'train'`      | 124,397
-`'validation'` | 6,911
