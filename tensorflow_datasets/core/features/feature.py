@@ -611,7 +611,11 @@ class Tensor(FeatureConnector):
     pass
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    return {
+        'type': type(self).__name__,
+        'shape': list(self._shape),
+        'dtype': self._dtype.name,
+    }
 
 def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.

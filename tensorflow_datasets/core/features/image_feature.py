@@ -232,7 +232,12 @@ class Image(feature.FeatureConnector):
     pass
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    return {
+        'type': type(self).__name__,
+        'shape': list(self._shape),
+        'dtype': self._dtype.name,
+        'encoding_format': self._encoding_format
+    }
 
 
 def _postprocess_noop(img):

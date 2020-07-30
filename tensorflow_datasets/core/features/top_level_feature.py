@@ -46,6 +46,13 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     self._is_top_level = True
 
+  @classmethod
+  def from_json(cls, value) -> 'FeatureConnector':
+    pass
+
+  def to_json(self):
+    return {}
+
   def decode_example(self, serialized_example, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.
@@ -116,13 +123,6 @@ def _decode_feature(feature, example, serialized_info, decoder):
   elif sequence_rank > 1:
     # Use ragged tensor if the sequance rank is greater than one
     return decoder.decode_ragged_example(example)
-
-  @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
-    pass
-
-  def to_json(self):
-    return {}
 
 
 def _get_sequence_rank(serialized_info):

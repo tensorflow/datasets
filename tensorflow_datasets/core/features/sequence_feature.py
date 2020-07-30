@@ -214,7 +214,10 @@ class Sequence(top_level_feature.TopLevelFeature):
     pass
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    return {
+        'type': type(self).__name__,
+        'content': {k: v.to_json() for k, v in self.feature.items()}
+    }
 
 
 def _np_to_list(elem):

@@ -112,7 +112,13 @@ class Audio(feature.Tensor):
     pass
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    return {
+        'type': type(self).__name__,
+        'file_format': self._file_format,
+        'shape': list(self._shape),
+        'dtype': self._dtype.name,
+        'sample_rate': self._sample_rate,
+    }
 
 
 def _save_wav(buff, data, rate) -> None:

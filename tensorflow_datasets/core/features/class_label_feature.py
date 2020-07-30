@@ -186,7 +186,11 @@ class ClassLabel(feature.Tensor):
     pass
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    return {
+        'type': type(self).__name__,
+        'num_classes': self.num_classes,
+        'names': self.names,
+    }
 
 
 def _get_names_filepath(data_dir, feature_name):

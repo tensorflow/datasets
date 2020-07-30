@@ -97,6 +97,34 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def test_to_json(self):
+    feature = feature_lib.Sequence({
+        'a': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
+        'image': feature_lib.Image(),
+        'label': feature_lib.ClassLabel(num_classes=3),
+    })
+    self.assertDictEqual({
+        'type': 'Sequence',
+        'content': {
+            'a': {
+                'type': 'Tensor',
+                'shape': [4, 2],
+                'dtype': 'int32'
+            },
+            'image': {
+                'type': 'Image',
+                'shape': [None, None, 3],
+                'dtype': 'uint8',
+                'encoding_format': 'png'
+            },
+            'label': {
+                'type': 'ClassLabel',
+                'num_classes': 3,
+                'names': ['0', '1', '2']
+            }
+        }
+    }, feature.to_json())
+
   def test_nested(self):
 
     self.assertFeature(

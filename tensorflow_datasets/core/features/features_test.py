@@ -241,6 +241,33 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
       fd.save_metadata(data_dir)
       fd.load_metadata(data_dir)
 
+  def test_to_json(self):
+    feature = features_lib.FeaturesDict({
+        'feature': tf.int64,
+        'image': features_lib.Image(),
+        'label': features_lib.ClassLabel(num_classes=3),
+    })
+    self.assertDictEqual({
+        'type': 'FeaturesDict',
+        'content': {
+            'feature': {
+                'type': 'Tensor',
+                'shape': [],
+                'dtype': 'int64'
+            },
+            'image': {
+                'type': 'Image',
+                'shape': [None, None, 3],
+                'dtype': 'uint8',
+                'encoding_format': 'png'
+            },
+            'label': {
+                'type': 'ClassLabel',
+                'num_classes': 3,
+                'names': ['0', '1', '2']
+            }
+        }
+    }, feature.to_json())
 
 class FeatureTensorTest(testing.FeatureExpectationsTestCase):
 

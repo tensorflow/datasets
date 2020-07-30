@@ -102,7 +102,7 @@ class Video(sequence_feature.Sequence):
     Raises:
       ValueError: If the shape is invalid
     """
-    shape = tuple(shape)
+    self._shape = tuple(shape)
     if len(shape) != 4:
       raise ValueError('Video shape should be of rank 4')
     self._encoding_format = encoding_format
@@ -115,7 +115,6 @@ class Video(sequence_feature.Sequence):
   @property
   def _ffmpeg_path(self):
     return 'ffmpeg'
-
 
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, six.string_types):
@@ -187,4 +186,9 @@ class Video(sequence_feature.Sequence):
     pass
 
   def to_json(self):
-    return {'type': type(self).__name__}
+    return {
+        'type': type(self).__name__,
+        'shape': list(self._shape),
+        'encoding_format': self._encoding_format,
+        'ffmpeg_extra_args': self._extra_ffmpeg_args
+    }
