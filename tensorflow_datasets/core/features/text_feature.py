@@ -22,7 +22,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import html
 import os
+import textwrap
 
 from absl import logging
 import tensorflow.compat.v2 as tf
@@ -167,3 +169,13 @@ class Text(feature.Tensor):
     if self.encoder is None:
       return {}
     return {"encoder": repr(self.encoder)}
+
+  def repr_html(self, ex: bytes) -> str:
+    """Text are decoded."""
+    if self.encoder is not None:
+      return repr(ex)
+
+    ex = ex.decode("utf-8")
+    ex = html.escape(ex)
+    ex = textwrap.shorten(ex, width=1000)  # Truncate long text
+    return ex
