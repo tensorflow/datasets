@@ -214,21 +214,23 @@ class FeatureConnector(object):
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
   @classmethod
-  @abc.abstractmethod
   def from_json(cls, value) -> 'FeatureConnector':
     """Return the FeatureConnector by decoding the JSON string."""
-    feature_dict = {}
-    for feature_name, feature in value['content']:
-      subclass = cls._REGISTERED_FEATURES.get(feature_name)
+    features = utils.NonMutableDict()
+
+    assert value['type'] == 'FeaturesDict'
+    feature_dict_subclass = cls._REGISTERED_FEATURES.get(value['type'])
+    
+    for feature_label, feature in value['content'].items():
+      subclass = cls._REGISTERED_FEATURES.get(feature['type'])
       if subclass is None:
         raise ValueError(
-            f'Invalid feature name {feature_name} with feature: {feature}\n'
+            f'Invalid feature {feature_label}: {feature}\n'
             f'Supported: {list(cls._REGISTERED_FEATURES)}'
         )
-      feature_dict.update(subclass.from_json(feature))
-    return feature_dict
+      features.update({feature_label: subclass.from_json(feature)})
+    return feature_dict_subclass(features)
 
-  @abc.abstractmethod
   def to_json(self):
     """Exports the FeatureConnector to Json."""
     return {}
@@ -608,7 +610,11 @@ class Tensor(FeatureConnector):
 
   @classmethod
   def from_json(cls, value) -> 'FeatureConnector':
-    pass
+    # assert value['type'] == type(cls).__name__
+    shape = tuple(value['shape'])
+    dtype = tf.dtypes.as_dtype(np.dtype(value['dtype']))
+    # input(cls(shape=shape, dtype=dtype))
+    return cls(shape=shape, dtype=dtype)
 
   def to_json(self):
     return {

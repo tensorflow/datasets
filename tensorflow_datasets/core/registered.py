@@ -185,7 +185,7 @@ def list_builders():
   return sorted(list(_DATASET_REGISTRY))
 
 
-def builder_cls(name: str, load_from_config: bool = False):
+def builder_cls(name: str):
   """Fetches a `tfds.core.DatasetBuilder` class by string name.
 
   Args:
@@ -204,8 +204,6 @@ def builder_cls(name: str, load_from_config: bool = False):
         "`builder_cls` only accept the `dataset_name` without config, "
         "version or arguments. Got: name='{}', kwargs={}".format(name, kwargs))
 
-  if load_from_config:
-    raise "To be Implemented"
   if name in _ABSTRACT_DATASET_REGISTRY:
     raise DatasetNotFoundError(name, is_abstract=True)
   if name in _IN_DEVELOPMENT_REGISTRY:
@@ -215,7 +213,7 @@ def builder_cls(name: str, load_from_config: bool = False):
   return _DATASET_REGISTRY[name]
 
 
-def builder(name, load_from_config=False, **builder_init_kwargs):
+def builder(name, **builder_init_kwargs):
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
@@ -242,8 +240,8 @@ def builder(name, load_from_config=False, **builder_init_kwargs):
   name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   builder_kwargs.update(builder_init_kwargs)
   with py_utils.try_reraise(
-          prefix="Failed to construct dataset {}".format(name)):
-    return builder_cls(name, load_from_config)(**builder_kwargs)
+      prefix="Failed to construct dataset {}".format(name)):
+    return builder_cls(name)(**builder_kwargs)
 
 
 @api_utils.disallow_positional_args(allowed=["name"])
@@ -260,8 +258,7 @@ def load(name,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
          as_dataset_kwargs=None,
-         try_gcs=False,
-         load_from_config=False):
+         try_gcs=False):
   # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
 
@@ -345,8 +342,6 @@ def load(name,
       `tfds.core.DatasetBuilder.as_dataset`.
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
       the public GCS bucket before building it locally.
-    load_from_config: `bool`, if True, tfds.load will try to load the dataset
-      without reading the code file.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
@@ -370,8 +365,7 @@ def load(name,
   elif data_dir is None:
     data_dir = constants.DATA_DIR
 
-  dbuilder = builder(name, load_from_config,
-                     data_dir=data_dir, **builder_kwargs)
+  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
     dbuilder.download_and_prepare(**download_and_prepare_kwargs)
@@ -411,8 +405,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
       kwargs[attr] = val
     return name, kwargs
   except:
-    logging.error(_NAME_STR_ERR.format(name_str)
-                  )   # pylint: disable=logging-format-interpolation
+    logging.error(_NAME_STR_ERR.format(name_str))   # pylint: disable=logging-format-interpolation
     raise
 
 

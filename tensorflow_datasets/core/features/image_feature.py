@@ -229,7 +229,11 @@ class Image(feature.FeatureConnector):
 
   @classmethod
   def from_json(cls, value) -> 'FeatureConnector':
-    pass
+    # assert value['type'] == type(cls).__name__
+    shape = tuple(value['shape'])
+    dtype = tf.dtypes.as_dtype(np.dtype(value['dtype']))
+    encoding_format = value['encoding_format']
+    return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
 
   def to_json(self):
     return {

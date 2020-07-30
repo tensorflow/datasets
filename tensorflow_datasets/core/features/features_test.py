@@ -85,6 +85,7 @@ class AnOutputConnector(features_lib.FeatureConnector):
   def to_json(self):
     return {}
 
+
 class FeatureDictTest(testing.FeatureExpectationsTestCase):
 
   def test_tensor_info(self):
@@ -269,6 +270,41 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         }
     }, feature.to_json())
 
+  def test_from_config(self):
+    content = textwrap.dedent("""\
+        {
+            "type": "FeaturesDict",
+            "content": {
+                "x": {
+                    "type": "Tensor",
+                    "shape": [],
+                    "dtype": "int64"
+                },
+                "image": {
+                    "type": "Image",
+                    "shape": [
+                        null,
+                        null,
+                        3
+                    ],
+                    "dtype": "uint8",
+                    "encoding_format": "png"
+                }
+            }
+        }
+        """)
+    with testing.MockFs() as fs:
+      fs.add_file("feature_info.json", content)
+
+      f1 = features_lib.FeatureConnector.from_config("feature_info.json")
+      f2 = features_lib.FeaturesDict({
+          "x": tf.int64,
+          "image": features_lib.Image(),
+      })
+
+      self.assertEqual(repr(f1), repr(f2))
+
+
 class FeatureTensorTest(testing.FeatureExpectationsTestCase):
 
   def test_shape_static(self):
@@ -330,8 +366,7 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
             ),
             # Invalid shape
             testing.FeatureExpectationItem(
-                value=
-                np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
+                value=np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),
