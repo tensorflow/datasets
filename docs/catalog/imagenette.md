@@ -4,7 +4,7 @@
   </div>
 
   <meta itemprop="name" content="imagenette" />
-  <meta itemprop="description" content="Imagenette is a subset of 10 easily classified classes from the Imagenet&#10;dataset. It was originally prepared by Jeremy Howard of FastAI. The objective&#10;behind putting together a small version of the Imagenet dataset was mainly&#10;because running new ideas/algorithms/experiments on the whole Imagenet take a&#10;lot of time.&#10;&#10;This version of the dataset allows researchers/practitioners to quickly try out&#10;ideas and share with others. The dataset comes in three variants:&#10;&#10;  * Full size&#10;  * 320 px&#10;  * 160 px&#10;&#10;Note: The v2 config correspond to the new 70/30 train/valid split (released&#10;in Dec 6 2019).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;imagenette&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-v2-0.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="Imagenette is a subset of 10 easily classified classes from the Imagenet&#10;dataset. It was originally prepared by Jeremy Howard of FastAI. The objective&#10;behind putting together a small version of the Imagenet dataset was mainly&#10;because running new ideas/algorithms/experiments on the whole Imagenet take a&#10;lot of time.&#10;&#10;This version of the dataset allows researchers/practitioners to quickly try out&#10;ideas and share with others. The dataset comes in three variants:&#10;&#10;  * Full size&#10;  * 320 px&#10;  * 160 px&#10;&#10;Note: The v2 config correspond to the new 70/30 train/valid split (released&#10;in Dec 6 2019).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;imagenette&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-full-size-v2-0.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/imagenette" />
   <meta itemprop="sameAs" content="https://github.com/fastai/imagenette" />
   <meta itemprop="citation" content="@misc{imagenette,&#10;  author    = &quot;Jeremy Howard&quot;,&#10;  title     = &quot;imagenette&quot;,&#10;  url       = &quot;https://github.com/fastai/imagenette/&quot;&#10;}" />
@@ -85,7 +85,7 @@ Split          | Examples
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-v2-0.1.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-full-size-v2-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenette/320px-v2
 
@@ -109,7 +109,7 @@ Split          | Examples
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-320px-v2-0.1.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-320px-v2-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenette/160px-v2
 
@@ -133,7 +133,7 @@ Split          | Examples
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-160px-v2-0.1.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-160px-v2-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenette/full-size
 
@@ -157,7 +157,7 @@ Split          | Examples
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-full-size-0.1.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-full-size-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenette/320px
 
@@ -181,7 +181,7 @@ Split          | Examples
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-320px-0.1.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-320px-0.1.0.png" alt="Visualization" width="500px">
 
 ## imagenette/160px
 
@@ -205,4 +205,4 @@ Split          | Examples
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/imagenette-160px-0.1.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-160px-0.1.0.png" alt="Visualization" width="500px">

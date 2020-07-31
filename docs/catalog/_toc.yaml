@@ -354,6 +354,9 @@ toc:
     title: multi_nli_mismatch
   - path: /datasets/catalog/openbookqa
     title: openbookqa
+  - path: /datasets/catalog/paws_wiki
+    status: nightly
+    title: paws_wiki
   - path: /datasets/catalog/pg19
     title: pg19
   - path: /datasets/catalog/qa4mre
