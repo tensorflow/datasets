@@ -21,12 +21,15 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
+import mock
 import six
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
 
 class LazyImportsTest(testing.TestCase, parameterized.TestCase):
+
+  _LAZY_DEPS = "tensorflow_datasets.core.lazy_imports_lib._ALLOWED_LAZY_DEPS"
 
   # The following deps are not in the test list because the datasets that
   # require them need to have their tests run in isolation:
@@ -35,7 +38,6 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   @parameterized.parameters(
       "cv2",
       "langdetect",
-      "matplotlib",
       "mwparserfromhell",
       "nltk",
       "os",
@@ -57,6 +59,55 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   def test_bad_import(self):
     with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
+
+  # pylint: disable=import-outside-toplevel, unused-import
+  def test_try_import_context_manager(self):
+    with tfds.core.try_import():
+      import pandas
+
+    self.assertTrue(hasattr(pandas, "read_csv"))
+
+  def test_import_without_context_manager(self):
+    import nltk
+    self.assertTrue(hasattr(nltk, 'tokenize'))
+
+    with mock.patch(self._LAZY_DEPS, ["valid_module"]):
+      with self.assertRaisesWithPredicateMatch(ImportError, "valid_module"):
+        import valid_module
+
+  def test_try_import_context_manager_errors(self):
+    with self.assertRaisesWithPredicateMatch(ImportError, "_ALLOWED_LAZY_DEPS"):
+      with tfds.core.try_import():
+        import fake_module
+
+    with mock.patch(self._LAZY_DEPS, ["new_module"]):
+      with tfds.core.try_import():
+        import new_module
+
+      with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
+        new_module.some_function()
+
+  def test_nested_imports(self):
+    with tfds.core.try_import():
+      import matplotlib
+
+    self.assertFalse(hasattr(matplotlib, "pyplot"))
+
+    with tfds.core.try_import():
+      import matplotlib.pyplot
+
+    self.assertTrue(hasattr(matplotlib, "pyplot"))
+
+  def test_dummy_nested_imports(self):
+    with self.assertRaisesWithPredicateMatch(ImportError, "dummy_module_y"):
+      import dummy_module_x
+
+    with mock.patch(self._LAZY_DEPS, ["dummy_module_x, dummy_module_y"]):
+      with self.assertRaisesWithPredicateMatch(ImportError, "dummy_module_y"):
+        with tfds.core.try_import():
+          import dummy_module_x
+
+  # pylint: enable=import-outside-toplevel, unused-import
 
 
 if __name__ == "__main__":

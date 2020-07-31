@@ -20,10 +20,48 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import builtins
+import contextlib
 import importlib
+import types
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
+_ERR_MSG = ("Failed importing {name}. This likely means that the dataset "
+            "requires additional dependencies that have to be "
+            "manually installed (usually with `pip install {name}`). See "
+            "setup.py extras_require.")
+
+# `lazy_imports` currently only allow the following external dependencies to
+# be used during dataset generation.
+_ALLOWED_LAZY_DEPS = [
+    "apache_beam",
+    "crepe",
+    "cv2",
+    "h5py",
+    "langdetect",
+    "librosa",
+    "matplotlib",
+    "matplotlib.pyplot",
+    "mwparserfromhell",
+    "nltk",
+    "pandas",
+    "PIL.Image",
+    "PIL.TiffImagePlugin",
+    "pretty_midi",
+    "pydub",
+    "scipy",
+    "scipy.io",
+    "scipy.ndimage",
+    "skimage",
+    "skimage.color",
+    "skimage.filters",
+    "skimage.external.tifffile",
+    "tensorflow_io",
+    "tldextract",
+]
+
+_original_import_fun = builtins.__import__
 
 def _try_import(module_name):
   """Try importing a module, with an informative error message on failure."""
@@ -31,11 +69,45 @@ def _try_import(module_name):
     mod = importlib.import_module(module_name)
     return mod
   except ImportError:
-    err_msg = ("Failed importing {name}. This likely means that the dataset "
-               "requires additional dependencies that have to be "
-               "manually installed (usually with `pip install {name}`). See "
-               "setup.py extras_require.").format(name=module_name)
+    err_msg = _ERR_MSG.format(name=module_name)
     utils.reraise(suffix=err_msg)
+
+
+class FakeModule(types.ModuleType):
+  """A fake module which raise ImportError whenever an unknown attribute is accessed"""
+
+  def __getattr__(self, attr):
+    err_msg = _ERR_MSG.format(name=self.__name__)
+    raise ImportError(err_msg)
+
+
+def _custom_import(name, *args, **kwargs):
+  try:
+    return _original_import_fun(name, *args, **kwargs)
+  except ImportError:
+    if name in _ALLOWED_LAZY_DEPS:
+      return FakeModule(name)
+    raise
+
+
+@contextlib.contextmanager
+def try_import():
+  """Context Manager for lazy_imports.
+
+  A fake module is created if the lazy import is not present in `sys.modules`.
+  It is created only if module_name is present in `_ALLOWED_LAZY_DEPS`.
+  """
+  global _original_import_fun
+  _original_import_fun = builtins.__import__
+  with utils.temporary_assignment(builtins, "__import__", _custom_import):
+    try:
+      yield
+    except ImportError as err:
+      err_msg = ("Unknown import {name}. Currently lazy_imports does not "
+                 "support {name} module. If you believe this is correct, "
+                 "please add it to the list of `_ALLOWED_LAZY_DEPS` in "
+                 "`tfds/core/lazy_imports_lib.py`".format(name=err.name))
+      utils.reraise(suffix=err_msg)
 
 
 class LazyImporter(object):
