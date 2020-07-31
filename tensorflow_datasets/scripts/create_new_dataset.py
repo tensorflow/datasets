@@ -59,10 +59,6 @@ flags.DEFINE_enum('type', None, _DATASET_TYPE, 'Dataset type')
 _HEADER = """\
 \"""{dataset_name} dataset.\"""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 """
 
 _DATASET_DEFAULT_IMPORTS = """\

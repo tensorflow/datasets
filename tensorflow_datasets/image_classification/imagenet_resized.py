@@ -20,10 +20,6 @@ This is not to be confused with `downsampled_imagenet` which is a unsupervised
 dataset used for generative modeling.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import io
 import itertools
 import numpy as np

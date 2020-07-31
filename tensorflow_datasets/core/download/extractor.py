@@ -16,10 +16,6 @@
 # Lint as: python3
 """Module to use to extract archives. No business logic."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import concurrent.futures
 import contextlib
 import gzip

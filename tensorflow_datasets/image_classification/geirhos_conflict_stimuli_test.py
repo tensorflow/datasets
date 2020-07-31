@@ -16,10 +16,6 @@
 # Lint as: python3
 """Tests for Geirhos conflict stimuli."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.image_classification import geirhos_conflict_stimuli
 import tensorflow_datasets.testing as tfds_test
 

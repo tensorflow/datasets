@@ -16,10 +16,6 @@
 # Lint as: python2, python3
 """Opinion Abstracts Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
 import os
 from typing import Any, Dict, Iterator, List, Text, Tuple

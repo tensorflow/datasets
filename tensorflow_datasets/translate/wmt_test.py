@@ -17,10 +17,6 @@
 # -*- coding: utf-8 -*-
 """Tests for WMT translate dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import six
 from tensorflow_datasets import testing

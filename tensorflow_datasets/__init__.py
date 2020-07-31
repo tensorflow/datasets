@@ -35,10 +35,6 @@ Documentation:
 * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import sys
 
 # pylint: disable=g-import-not-at-top

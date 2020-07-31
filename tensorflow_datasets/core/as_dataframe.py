@@ -17,10 +17,6 @@
 """As dataframe util.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import typing
 from typing import Callable, Dict, List, Optional, Tuple
 

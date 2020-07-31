@@ -15,10 +15,6 @@
 
 # Lint as: python3
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.image_classification import stanford_online_products
 import tensorflow_datasets.testing as tfds_test
 

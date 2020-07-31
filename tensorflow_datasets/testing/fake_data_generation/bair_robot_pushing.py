@@ -23,10 +23,6 @@ mkdir train/
 ./bair_robot_pushing  --output_file=test/traj_0_to_255.tfrecords
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from absl import app
 from absl import flags
 import numpy as np
