@@ -36,13 +36,6 @@ if nightly:
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
   __version__ += 'dev%s' % datestring
-  entry_points = {
-      'console_scripts': [
-          'tfds = tensorflow_datasets.scripts.cli.main:launch_cli'
-      ],
-  }
-else:
-  entry_points = {}
 
 
 DOCLINES = __doc__.split('\n')
@@ -204,5 +197,9 @@ setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     keywords='tensorflow machine learning datasets',
-    entry_points=entry_points,
+    entry_points={
+        'console_scripts': [
+            'tfds = tensorflow_datasets.scripts.cli.main:launch_cli'
+        ],
+    },
 )
