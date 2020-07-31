@@ -1,12 +1,29 @@
+# coding=utf-8
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Lint as: python3
+"""MPII Human Pose annotation format utils."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from collections import Sequence
 import six
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import lazy_imports
-from collections import Sequence
 
 
 class MappedSequence(Sequence):
@@ -21,25 +38,26 @@ class MappedSequence(Sequence):
     return self._map_fn(self._base[index])
 
 
-lazy_map = MappedSequence
+LazyMap = MappedSequence
 
 # Part info
 _parts = ['rank', 'rkne', 'rhip',
-         'lhip', 'lkne', 'lank',
-         'pelv', 'thrx', 'neck', 'head',
-         'rwri', 'relb', 'rsho',
-         'lsho', 'lelb', 'lwri']
+          'lhip', 'lkne', 'lank',
+          'pelv', 'thrx', 'neck', 'head',
+          'rwri', 'relb', 'rsho',
+          'lsho', 'lelb', 'lwri']
 _part_indices = {k: i for i, k in enumerate(_parts)}
 
 NUM_JOINTS = len(_parts)
-assert(NUM_JOINTS == 16)
+assert NUM_JOINTS == 16
 
 
 def _xy(part_info):
   return part_info['x'][0][0], part_info['y'][0][0]
 
 
-class CoordHelper(object):
+class CoordHelper():
+  """Helper class for annotation and image coordinates."""
   def __init__(self, annorect):
     self._annorect = annorect
     self.num_people = len(annorect[0]) if len(annorect) > 0 else 0
@@ -61,7 +79,7 @@ class CoordHelper(object):
           [x[self.valid], x[np.logical_not(self.valid)]], axis=0)
 
   def reindex(self, original_indices):
-    assert(len(original_indices.shape) == 1)
+    assert len(original_indices.shape) == 1
     x = np.zeros((self.num_people,), dtype=np.bool)
     x[original_indices] = True
     x = x[self.reorder_indices]
@@ -70,6 +88,7 @@ class CoordHelper(object):
 
   @property
   def scales(self):
+    """Skeleton scale."""
     scales = np.zeros((self.num_valid_people,), dtype=np.float32)
     if self.is_pointless:
       return scales
@@ -80,6 +99,7 @@ class CoordHelper(object):
 
   @property
   def centers(self):
+    """Center coordinates."""
     centers = np.zeros((self.num_valid_people, 2), dtype=np.int64)
     if self.is_pointless:
       return centers
@@ -92,6 +112,7 @@ class CoordHelper(object):
 
   @property
   def coordinates(self):
+    """Joint coordinates."""
     num_valid_people = self.num_valid_people
 
     xy = np.zeros((num_valid_people, NUM_JOINTS, 2), dtype=np.int64)
@@ -126,20 +147,22 @@ class CoordHelper(object):
 
   @property
   def head_boxes(self):
+    """Head bounding boxes."""
     if self.is_pointless:
       return np.zeros((self.num_people, 4), dtype=np.int64)
 
     coords = tuple(self._annorect[k][0] for k in ('y1', 'x1', 'y2', 'x2'))
 
-    all_coords = np.array([
-      [c[p][0][0] for c in coords] for p in range(self.num_people)],
-      dtype=np.int64)
+    all_coords = np.array(
+        [[c[p][0][0] for c in coords] for p in range(self.num_people)],
+        dtype=np.int64)
     valid_coords = all_coords[self.valid]
     invalid_coords = all_coords[np.logical_not(self.valid)]
     return np.concatenate([valid_coords, invalid_coords], axis=0)
 
 
-class Annotations(object):
+class Annotations():
+  """Helper class to load mpii annotation format."""
   def __init__(self, path):
     with tf.io.gfile.GFile(path, "rb") as fp:
       self._annot = lazy_imports.scipy.io.loadmat(fp)['RELEASE']  # pylint: disable=no-member
@@ -152,6 +175,7 @@ class Annotations(object):
 
   @property
   def num_examples(self):
+    """Number of annotations."""
     return self._num_examples
 
   @property
@@ -160,62 +184,68 @@ class Annotations(object):
       ind = ind[0]
       if ind.size == 0:
         return np.zeros((0,), dtype=np.int64)
-      else:
-        return np.squeeze(np.array(ind, dtype=np.int64), axis=1) - 1
+      return np.squeeze(np.array(ind, dtype=np.int64), axis=1) - 1
 
-    return lazy_map(
-      self._annot['single_person'][0][0], f)
+    return LazyMap(self._annot['single_person'][0][0], f)
 
   @property
   def video_indices(self):
+    """Map index->videos."""
     def f(vid):
       vid = np.squeeze(vid)
       return None if vid.size == 0 else vid - 1
 
-    return lazy_map(self._annolist['vididx'], f)
+    return LazyMap(self._annolist['vididx'], f)
 
   @property
   def frame_secs(self):
+    """Map index->time of frame."""
     def f(sec):
       sec = np.squeeze(sec)
       return None if sec.size == 0 else sec.astype(np.int64)
-    return lazy_map(self._annolist['frame_sec'], f)
+    return LazyMap(self._annolist['frame_sec'], f)
 
   @property
   def activities(self):
+    """Map index->(category, activity)."""
     def fn(act):
       a = act[0]
       names = a['cat_name'], a['act_name']
 
       cat_name, act_name = (
-        None if n is None or len(n) == 0 else n[0] for n in names)
+          None if n is None or len(n) == 0 else n[0] for n in names)
       # return act_name, cat_name
       return cat_name, act_name
-    return lazy_map(self._annot['act'][0][0], fn)
+    return LazyMap(self._annot['act'][0][0], fn)
 
   @property
   def filenames(self):
-    return lazy_map(self._annolist['image'], lambda v: v[0]['name'][0][0])
+    """Map index->filename."""
+    return LazyMap(self._annolist['image'], lambda v: v[0]['name'][0][0])
 
   @property
   def is_train(self):
+    """Map index->belongs to training data?"""
     return self._is_train
 
   @property
   def youtube_ids(self):
+    """Map index->youtube video id."""
     vl = self._annot['video_list'][0][0][0]
-    return lazy_map(vl, lambda x: x[0])
+    return LazyMap(vl, lambda x: x[0])
 
   @property
   def coord_helpers(self):
-    return lazy_map(self._annorect, CoordHelper)
+    """Map index->CoordHelper."""
+    return LazyMap(self._annorect, CoordHelper)
 
 
 def get_names_lists(annot):
+  """Names for categories and activities."""
   cat_names, act_names = zip(*annot.activities)
   act_names = [
-    (c, a) for (c, a) in zip(cat_names, act_names)
-    if c is not None and a is not None]
+      (c, a) for (c, a) in zip(cat_names, act_names)
+      if c is not None and a is not None]
   cat_names = set(cat_names)
   if None in cat_names:
     cat_names.remove(None)
@@ -223,6 +253,5 @@ def get_names_lists(annot):
 
   act_names = sorted(set(act_names), key=lambda a: '%s~%s' % a)
   act_names = [a[1] for a in act_names]
-  cat_names = sorted(set(cat_names))
-  cat_names = [c for c in cat_names]
+  cat_names = list(sorted(set(cat_names)))
   return cat_names, act_names

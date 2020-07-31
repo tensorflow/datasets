@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2020 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for mpii_human_pose dataset module."""
 
 from __future__ import absolute_import
@@ -24,8 +23,8 @@ from tensorflow_datasets.human_pose.mpii import MpiiHumanPose
 
 
 DL_EXTRACT_RESULT = {
-  "images": "images.tar.gz",
-  "annot": "annot",
+    "images": "images.tar.gz",
+    "annot": "annot",
 }
 
 SPLITS = {
@@ -39,8 +38,8 @@ class MpiiHumanPoseTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = DL_EXTRACT_RESULT
 
   SPLITS = SPLITS = {
-    "train": 1,
-    "test": 4,
+      "train": 1,
+      "test": 4,
   }
 
 

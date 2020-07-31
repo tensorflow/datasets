@@ -1,10 +1,27 @@
+# coding=utf-8
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Lint as: python3
+"""Utils for human skeleton annotations."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from tensorflow_datasets.core import utils
 
 
-class Skeleton(object):
+class Skeleton():
   """Class for aiding in data manipulation/augmentation and visualizations.
 
   Each skeleton is defined by a number of links, where each link is a
@@ -51,17 +68,17 @@ class Skeleton(object):
     for _, parent in self._links:
       if parent is not None and parent not in self._indices:
         raise ValueError(
-          "Every non-None parent must be present as a child "
-          "(possibly with `None` parent), '%s' is missing" % parent)
+            "Every non-None parent must be present as a child "
+            "(possibly with `None` parent), '%s' is missing" % parent)
     self._name = name
 
   def __repr__(self):
     return "<Skeleton: %s>" % (
-      self.num_joints if self._name is None else self._name)
+        self.num_joints if self._name is None else self._name)
 
   @property
   def num_joints(self):
-      return self._num_joints
+    return self._num_joints
 
   @utils.memoized_property
   def flip_left_right_indices(self):
