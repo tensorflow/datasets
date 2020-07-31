@@ -21,16 +21,20 @@ import contextlib
 import inspect
 import posixpath
 import re
-from typing import Any, Callable, Iterable, Iterator, List, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
 
 from absl import flags
 from absl import logging
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
 
 
@@ -43,6 +47,8 @@ __all__ = [
     "load",
 ]
 
+Tree = type_utils.Tree
+TreeDict = type_utils.TreeDict
 
 # Cannot use real typing due to circular dependencies. Could this be fixed ?
 DatasetBuilder = Any
@@ -175,12 +181,12 @@ class RegisteredDataset(abc.ABCMeta):
     return builder_cls
 
 
-def list_builders():
+def list_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   return sorted(list(_DATASET_REGISTRY))
 
 
-def builder_cls(name: str):
+def builder_cls(name: str) -> Type[DatasetBuilder]:
   """Fetches a `tfds.core.DatasetBuilder` class by string name.
 
   Args:
@@ -208,7 +214,7 @@ def builder_cls(name: str):
   return _DATASET_REGISTRY[name]
 
 
-def builder(name, **builder_init_kwargs):
+def builder(name: str, **builder_init_kwargs: Any) -> DatasetBuilder:
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
@@ -239,47 +245,58 @@ def builder(name, **builder_init_kwargs):
     return builder_cls(name)(**builder_kwargs)
 
 
-def load(name,
-         *,
-         split=None,
-         data_dir=None,
-         batch_size=None,
-         shuffle_files=False,
-         download=True,
-         as_supervised=False,
-         decoders=None,
-         read_config=None,
-         with_info=False,
-         builder_kwargs=None,
-         download_and_prepare_kwargs=None,
-         as_dataset_kwargs=None,
-         try_gcs=False):
+def load(
+    name: str,
+    *,
+    split: Optional[Tree[splits_lib.Split]] = None,
+    data_dir: Optional[str] = None,
+    batch_size: Optional[int] = None,
+    shuffle_files: bool = False,
+    download: bool = True,
+    as_supervised: bool = False,
+    decoders: Optional[TreeDict[decode.Decoder]] = None,
+    read_config: Optional[read_config_lib.ReadConfig] = None,
+    with_info: bool = False,
+    builder_kwargs: Optional[Dict[str, Any]] = None,
+    download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
+    as_dataset_kwargs: Optional[Dict[str, Any]] = None,
+    try_gcs: bool = False,
+):
   # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
 
-  If `split=None` (the default), returns all splits for the dataset. Otherwise,
-  returns the specified split.
+  `tfds.load` is a convenience method that:
 
-  `load` is a convenience method that fetches the `tfds.core.DatasetBuilder` by
-  string name, optionally calls `DatasetBuilder.download_and_prepare`
-  (if `download=True`), and then calls `DatasetBuilder.as_dataset`.
-  This is roughly equivalent to:
+  1. Fetch the `tfds.core.DatasetBuilder` by name:
 
-  ```
+  ```python
   builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
-  if download:
-    builder.download_and_prepare(**download_and_prepare_kwargs)
-  ds = builder.as_dataset(
-      split=split, as_supervised=as_supervised, **as_dataset_kwargs)
-  if with_info:
-    return ds, builder.info
-  return ds
   ```
+
+  2. Generate the data (when `download=True`):
+
+  ```python
+  builder.download_and_prepare(**download_and_prepare_kwargs)
+  ```
+
+  3. Load the `tf.data.Dataset` object:
+
+  ```python
+  ds = builder.as_dataset(
+      split=split,
+      as_supervised=as_supervised,
+      shuffle_files=shuffle_files,
+      read_config=read_config,
+      decoders=decoders,
+      **as_dataset_kwargs,
+  )
+  ```
+
+  See: https://www.tensorflow.org/datasets/overview#load_a_dataset for more
+  examples.
 
   If you'd like NumPy arrays instead of `tf.data.Dataset`s or `tf.Tensor`s,
   you can pass the return value to `tfds.as_numpy`.
-
-  Callers must pass arguments as keyword arguments.
 
   **Warning**: calling this function might potentially trigger the download
   of hundreds of GiB to disk. Refer to the `download` argument.

@@ -15,7 +15,8 @@
 
 """Typing annotation utils."""
 
-from typing import Dict, TypeVar, Union
+from typing import Dict, List, Tuple, TypeVar, Union
 
 T = TypeVar('T')
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
+Tree = Union[T, List['Tree'], Tuple['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
