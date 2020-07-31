@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """The ImageNet-v2 image classification dataset."""
 import os
 import tensorflow.compat.v2 as tf

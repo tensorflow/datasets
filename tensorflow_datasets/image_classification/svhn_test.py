@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for tfds.image.svhn."""
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import svhn

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Beans leaf dataset with images of diseased and health leaves."""
 
 import os

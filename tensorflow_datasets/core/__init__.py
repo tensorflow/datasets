@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """API to define datasets."""
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
 # needs to happen before anything else, since the imports below will try to

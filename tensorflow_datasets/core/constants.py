@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Default values for some parameters of the API when no values are passed."""
 
 # IMPORTANT: when changing values here, update docstrings.

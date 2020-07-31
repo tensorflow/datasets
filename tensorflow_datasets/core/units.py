@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Defines convenience constants/functions for converting various units."""
 
 # The constants below are used for conveniently defining memory quantities.

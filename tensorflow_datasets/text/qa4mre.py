@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """QA4MRE (CLEF 2011/2012/2013): a reading comprehension dataset."""
 
 import os

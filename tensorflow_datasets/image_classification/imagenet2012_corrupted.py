@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Corrupted ImageNet2012 dataset.
 
 Apply common corruptions to the images in ImageNet2012 dataset.

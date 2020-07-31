@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """DatasetInfo records the information we know about a dataset.
 
 This includes things that we know about the dataset statically, i.e.:

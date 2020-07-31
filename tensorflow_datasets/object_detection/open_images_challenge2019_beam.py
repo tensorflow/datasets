@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Classes and functions to generate the OI Challenge 2019 dataset using Apache Beam."""
 
 import collections

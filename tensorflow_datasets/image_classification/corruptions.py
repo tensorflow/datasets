@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Common corruptions to images.
 
 Define 15+4 common image corruptions: Gaussian noise, shot noise, impulse_noise,

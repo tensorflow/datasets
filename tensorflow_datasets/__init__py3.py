@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 # pylint: disable=line-too-long
 """`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use with TensorFlow.
 

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for imagenet2012_subset dataset module."""
 
 from tensorflow_datasets import testing

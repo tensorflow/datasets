@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Question answering datasets."""
 
 from tensorflow_datasets.question_answering.ai2_arc import Ai2Arc

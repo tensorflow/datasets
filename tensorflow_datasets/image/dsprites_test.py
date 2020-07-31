@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """dSprites dataset test."""
 
 from tensorflow_datasets.image import dsprites

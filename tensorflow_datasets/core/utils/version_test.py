@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for tensorflow_datasets.core.utils.version."""
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import version

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Util to generate the dataset documentation content.
 
 Used by tensorflow_datasets/scripts/documentation/build_catalog.py
