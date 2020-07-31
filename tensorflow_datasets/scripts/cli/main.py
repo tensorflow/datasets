@@ -28,6 +28,9 @@ from absl.flags import argparse_flags
 
 import tensorflow_datasets.public_api as tfds
 
+# Import commands
+from tensorflow_datasets.scripts.cli import new
+
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
@@ -39,11 +42,16 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
       action='version',
       version='TensorFlow Datasets: ' + tfds.__version__
   )
+  parser.set_defaults(subparser_fn=lambda _: parser.print_help())
+  # Register sub-commands
+  subparser = parser.add_subparsers(title='command')
+  new.register_subparser(subparser)
   return parser.parse_args(argv[1:])
 
 
 def main(args: argparse.Namespace) -> None:
-  del args  # Unused for now
+  # Launch the subcommand defined in the subparser (or default to print help)
+  args.subparser_fn(args)
 
 
 def launch_cli() -> None:

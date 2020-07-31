@@ -70,9 +70,9 @@ REQUIRED_PKGS = [
     'futures;python_version<"3"',
     # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
     'psutil;python_version<"3.3"',
-    # enum introduced in Python 3.4
+    # Standard library backports
     'enum34;python_version<"3.4"',
-    'dataclasses;python_version<"3.7"',
+    'dataclasses;python_version<"3.7"'
 ]
 
 TESTS_REQUIRE = [
