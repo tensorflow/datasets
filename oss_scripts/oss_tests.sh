@@ -75,22 +75,4 @@ then
   done
 fi
 
-# Run NSynth, in a contained enviornement
-function test_isolation_nsynth() {
-  create_virtualenv tfds_nsynth $PY_BIN
-  ./oss_scripts/oss_pip_install.sh
-  pip install -e .[nsynth]
-  pytest \
-    --disable-warnings \
-    "tensorflow_datasets/audio/nsynth_test.py"
-  set_status
-}
-
-if [[ "$TF_VERSION" == "tf-nightly" ]]
-then
-  echo "============= Testing Isolation ============="
-  test_isolation_nsynth
-  set_status
-fi
-
 exit $STATUS

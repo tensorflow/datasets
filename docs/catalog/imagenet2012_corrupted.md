@@ -36,8 +36,8 @@ randomness is fixed so that regeneration is deterministic.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
@@ -50,9 +50,9 @@ randomness is fixed so that regeneration is deterministic.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'validation' | 50,000
+Split          | Examples
+:------------- | -------:
+`'validation'` | 50,000
 
 *   **Features**:
 
@@ -67,6 +67,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -84,8 +85,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_noise, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_noise_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -93,8 +94,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_noise, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_noise_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -102,8 +103,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_noise, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_noise_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -111,8 +112,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_noise, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_noise_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -120,8 +121,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_noise, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_noise_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -129,8 +130,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = shot_noise, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-shot_noise_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -138,8 +139,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = shot_noise, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-shot_noise_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -147,8 +148,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = shot_noise, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-shot_noise_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -156,8 +157,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = shot_noise, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-shot_noise_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -165,8 +166,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = shot_noise, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-shot_noise_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -174,8 +175,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = impulse_noise, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-impulse_noise_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -183,8 +184,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = impulse_noise, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-impulse_noise_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -192,8 +193,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = impulse_noise, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-impulse_noise_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -201,8 +202,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = impulse_noise, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-impulse_noise_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -210,8 +211,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = impulse_noise, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-impulse_noise_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -219,8 +220,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = defocus_blur, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-defocus_blur_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -228,8 +229,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = defocus_blur, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-defocus_blur_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -237,8 +238,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = defocus_blur, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-defocus_blur_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -246,8 +247,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = defocus_blur, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-defocus_blur_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -255,8 +256,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = defocus_blur, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-defocus_blur_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -264,8 +265,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = glass_blur, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-glass_blur_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -273,8 +274,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = glass_blur, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-glass_blur_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -282,8 +283,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = glass_blur, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-glass_blur_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -291,8 +292,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = glass_blur, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-glass_blur_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -300,8 +301,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = glass_blur, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-glass_blur_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -309,8 +310,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = motion_blur, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-motion_blur_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -318,8 +319,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = motion_blur, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-motion_blur_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -327,8 +328,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = motion_blur, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-motion_blur_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -336,8 +337,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = motion_blur, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-motion_blur_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -345,8 +346,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = motion_blur, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-motion_blur_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -354,8 +355,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = zoom_blur, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-zoom_blur_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -363,8 +364,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = zoom_blur, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-zoom_blur_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -372,8 +373,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = zoom_blur, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-zoom_blur_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -381,8 +382,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = zoom_blur, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-zoom_blur_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -390,8 +391,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = zoom_blur, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-zoom_blur_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -399,8 +400,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = snow, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-snow_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -408,8 +409,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = snow, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-snow_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -417,8 +418,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = snow, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-snow_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -426,8 +427,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = snow, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-snow_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -435,8 +436,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = snow, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-snow_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -444,8 +445,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = frost, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-frost_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -453,8 +454,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = frost, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-frost_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -462,8 +463,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = frost, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-frost_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -471,8 +472,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = frost, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-frost_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -480,8 +481,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = frost, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-frost_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -489,8 +490,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = fog, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-fog_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -498,8 +499,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = fog, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-fog_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -507,8 +508,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = fog, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-fog_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -516,8 +517,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = fog, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-fog_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -525,8 +526,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = fog, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-fog_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -534,8 +535,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = brightness, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-brightness_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -543,8 +544,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = brightness, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-brightness_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -552,8 +553,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = brightness, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-brightness_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -561,8 +562,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = brightness, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-brightness_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -570,8 +571,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = brightness, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-brightness_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -579,8 +580,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = contrast, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-contrast_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -588,8 +589,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = contrast, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-contrast_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -597,8 +598,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = contrast, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-contrast_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -606,8 +607,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = contrast, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-contrast_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -615,8 +616,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = contrast, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-contrast_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -624,8 +625,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = elastic_transform, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-elastic_transform_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -633,8 +634,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = elastic_transform, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-elastic_transform_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -642,8 +643,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = elastic_transform, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-elastic_transform_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -651,8 +652,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = elastic_transform, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-elastic_transform_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -660,8 +661,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = elastic_transform, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-elastic_transform_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -669,8 +670,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = pixelate, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-pixelate_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -678,8 +679,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = pixelate, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-pixelate_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -687,8 +688,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = pixelate, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-pixelate_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -696,8 +697,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = pixelate, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-pixelate_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -705,8 +706,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = pixelate, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-pixelate_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -714,8 +715,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = jpeg_compression, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-jpeg_compression_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -723,8 +724,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = jpeg_compression, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-jpeg_compression_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -732,8 +733,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = jpeg_compression, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-jpeg_compression_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -741,8 +742,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = jpeg_compression, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-jpeg_compression_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -750,8 +751,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = jpeg_compression, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-jpeg_compression_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -759,8 +760,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_blur, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_blur_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -768,8 +769,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_blur, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_blur_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -777,8 +778,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_blur, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_blur_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -786,8 +787,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_blur, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_blur_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -795,8 +796,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = gaussian_blur, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-gaussian_blur_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -804,8 +805,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = saturate, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-saturate_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -813,8 +814,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = saturate, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-saturate_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -822,8 +823,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = saturate, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-saturate_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -831,8 +832,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = saturate, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-saturate_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -840,8 +841,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = saturate, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-saturate_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -849,8 +850,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = spatter, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-spatter_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -858,8 +859,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = spatter, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-spatter_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -867,8 +868,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = spatter, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-spatter_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -876,8 +877,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = spatter, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-spatter_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -885,8 +886,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = spatter, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-spatter_5-3.1.0.png" alt="Visualization" width="500px">
 
@@ -894,8 +895,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = speckle_noise, severity = 1
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-speckle_noise_1-3.1.0.png" alt="Visualization" width="500px">
 
@@ -903,8 +904,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = speckle_noise, severity = 2
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-speckle_noise_2-3.1.0.png" alt="Visualization" width="500px">
 
@@ -912,8 +913,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = speckle_noise, severity = 3
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-speckle_noise_3-3.1.0.png" alt="Visualization" width="500px">
 
@@ -921,8 +922,8 @@ FeaturesDict({
 
 *   **Config description**: corruption type = speckle_noise, severity = 4
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-speckle_noise_4-3.1.0.png" alt="Visualization" width="500px">
 
@@ -930,7 +931,7 @@ FeaturesDict({
 
 *   **Config description**: corruption type = speckle_noise, severity = 5
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_corrupted-speckle_noise_5-3.1.0.png" alt="Visualization" width="500px">

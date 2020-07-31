@@ -38,9 +38,9 @@ x 150 x 3 RGB image of one of 8 classes.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 5,000
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,000
 
 *   **Features**:
 
@@ -55,6 +55,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -69,7 +70,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/colorectal_histology-2.0.0.png" alt="Visualization" width="500px">

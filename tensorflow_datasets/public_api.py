@@ -21,13 +21,14 @@ from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
+from tensorflow_datasets.core import folder_dataset
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
-from tensorflow_datasets.core.custom_dataset import ImageFolder
-from tensorflow_datasets.core.custom_dataset import TranslateFolder
+from tensorflow_datasets.core.folder_dataset import ImageFolder
+from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -51,6 +52,7 @@ with core.registered.skip_registration():
 __all__ = [
     "as_numpy",
     "core",
+    "folder_dataset",
     "builder",
     "builder_cls",
     "decode",

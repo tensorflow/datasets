@@ -45,6 +45,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('lr', 'hr')`
+
 *   **Citation**:
 
 ```
@@ -58,8 +59,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## div2k/bicubic_x2 (default config)
@@ -70,10 +71,10 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/bicubic_x3
 
@@ -83,10 +84,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/bicubic_x4
 
@@ -96,10 +97,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/bicubic_x8
 
@@ -109,10 +110,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/unknown_x2
 
@@ -122,10 +123,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/unknown_x3
 
@@ -135,10 +136,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/unknown_x4
 
@@ -148,10 +149,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/realistic_mild_x4
 
@@ -161,10 +162,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/realistic_difficult_x4
 
@@ -174,10 +175,10 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/realistic_wild_x4
 
@@ -187,7 +188,7 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 3,200
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 3,200
+`'validation'` | 100

@@ -14,12 +14,12 @@
 # limitations under the License.
 
 # Lint as: python3
-r"""Removes metadatas which are not present in the registered versions of TFDS.
+r"""Removes metadata that are not present in the registered versions of TFDS.
 
 Instructions:
 
 ```
-python tensorflow_datasets/scripts/metadata_cleanup.py
+python -m tensorflow_datasets.scripts.metadata_cleanup
 ```
 
 
@@ -43,13 +43,13 @@ flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
 
 
 def _extract_metadata_versions(metadata_dir: str) -> List[str]:
-  """Get all metadata direcotry versions paths.
+  """Get all metadata directory versions paths.
 
-  It only extract the paths like 'dataset_name/version'
+  It only extracts the paths like 'dataset_name/version'
   or 'dataset_name/config/versions' in metadata dir.
 
   Args:
-    metadata_dir: Path to metadat directory (testing/metadata).
+    metadata_dir: Path to metadata directory (testing/metadata).
 
   Returns:
     Existing metadata full names.
@@ -63,7 +63,7 @@ def _extract_metadata_versions(metadata_dir: str) -> List[str]:
 
 
 def _delete_metadata_dirs(metadata_dir: str) -> None:
-  """Removes metadatas which are not present in the registered versions of TFDS.
+  """Removes metadata that are not present in the registered versions of TFDS.
 
   Args:
     metadata_dir: Path to metadata directory (testing/metadata).

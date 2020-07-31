@@ -35,8 +35,8 @@ images in each class.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Dataset can be downloaded from OneDrive:
     https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs
@@ -48,9 +48,9 @@ images in each class.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 31,500
+Split     | Examples
+:-------- | -------:
+`'train'` | 31,500
 
 *   **Features**:
 
@@ -65,6 +65,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -84,7 +85,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/resisc45-3.0.0.png" alt="Visualization" width="500px">

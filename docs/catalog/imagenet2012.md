@@ -42,8 +42,8 @@ include splits for the training and validation sets here.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
@@ -56,10 +56,10 @@ include splits for the training and validation sets here.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'train'      | 1,281,167
-'validation' | 50,000
+Split          | Examples
+:------------- | --------:
+`'train'`      | 1,281,167
+`'validation'` | 50,000
 
 *   **Features**:
 
@@ -74,6 +74,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -89,7 +90,7 @@ pages={211-252}
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012-5.0.0.png" alt="Visualization" width="500px">

@@ -41,9 +41,9 @@ original paper.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 1,280
+Split    | Examples
+:------- | -------:
+`'test'` | 1,280
 
 *   **Features**:
 
@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'shape_label')`
+
 *   **Citation**:
 
 ```
@@ -76,7 +77,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/geirhos_conflict_stimuli-1.0.0.png" alt="Visualization" width="500px">

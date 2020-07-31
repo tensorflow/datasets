@@ -52,11 +52,11 @@ CelebA dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 19,962
-'train'      | 162,770
-'validation' | 19,867
+Split          | Examples
+:------------- | -------:
+`'test'`       | 19,962
+`'train'`      | 162,770
+`'validation'` | 19,867
 
 *   **Features**:
 
@@ -123,6 +123,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -146,7 +147,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/celeb_a-2.0.1.png" alt="Visualization" width="500px">

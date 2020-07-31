@@ -39,10 +39,10 @@ the web (at least in 2013).
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 2,032
-'train' | 3,778
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,032
+`'train'` | 3,778
 
 *   **Features**:
 
@@ -57,6 +57,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -76,6 +77,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

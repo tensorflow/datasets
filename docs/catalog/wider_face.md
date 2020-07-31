@@ -44,11 +44,11 @@ required to submit final prediction files, which we shall proceed to evaluate.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 16,097
-'train'      | 12,880
-'validation' | 3,226
+Split          | Examples
+:------------- | -------:
+`'test'`       | 16,097
+`'train'`      | 12,880
+`'validation'` | 3,226
 
 *   **Features**:
 
@@ -71,6 +71,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -81,7 +82,7 @@ FeaturesDict({
     Year = {2016}}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/wider_face-0.1.0.png" alt="Visualization" width="500px">

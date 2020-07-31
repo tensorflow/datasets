@@ -37,8 +37,9 @@ GCS_DATASET_INFO_DIR = 'dataset_info'
 GCS_DATASETS_DIR = 'datasets'
 
 
-def is_gcs_disabled():
-  return os.name == 'nt'
+# TODO(tfds): On windows, gs:// isn't supported.
+# https://github.com/tensorflow/tensorflow/issues/38477
+_is_gcs_disabled = (os.name == 'nt')
 
 
 def gcs_path(suffix: Optional[str] = None) -> str:
@@ -61,7 +62,7 @@ def gcs_path(suffix: Optional[str] = None) -> str:
 def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   """List all files in the given GCS dir (`['dataset/1.0.0/file0', ...]`)."""
   root_dir = gcs_path(dir_name)
-  if is_gcs_disabled() or not tf.io.gfile.exists(root_dir):
+  if _is_gcs_disabled or not tf.io.gfile.exists(root_dir):
     return None
   return [posixpath.join(dir_name, f) for f in tf.io.gfile.listdir(root_dir)]
 
@@ -74,15 +75,15 @@ def gcs_dataset_info_files(dataset_dir: str) -> Optional[List[str]]:
 def is_dataset_on_gcs(dataset_name: str) -> bool:
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
   dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
-  return not is_gcs_disabled() and tf.io.gfile.exists(gcs_path(dir_name))
+  return not _is_gcs_disabled and tf.io.gfile.exists(gcs_path(dir_name))
 
 
-def download_gcs_dataset(dataset_name,
-                         local_dataset_dir,
-                         max_simultaneous_downloads=25):
+def download_gcs_dataset(
+    dataset_name, local_dataset_dir, max_simultaneous_downloads=25
+):
   """Downloads prepared GCS dataset to local dataset directory."""
-  if is_gcs_disabled():
-    raise AssertionError('Cannot download from GCS when is_gcs_disabled()')
+  if _is_gcs_disabled:
+    raise AssertionError('Cannot download from GCS when _is_gcs_disabled')
 
   prefix = posixpath.join(GCS_DATASETS_DIR, dataset_name)
   gcs_paths_to_dl = gcs_listdir(prefix)

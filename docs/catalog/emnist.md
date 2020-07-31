@@ -63,10 +63,10 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 116,323
-'train' | 697,932
+Split     | Examples
+:-------- | -------:
+`'test'`  | 116,323
+`'train'` | 697,932
 
 *   **Features**:
 
@@ -77,8 +77,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/emnist-byclass-3.0.0.png" alt="Visualization" width="500px">
 
@@ -88,10 +88,10 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 116,323
-'train' | 697,932
+Split     | Examples
+:-------- | -------:
+`'test'`  | 116,323
+`'train'` | 697,932
 
 *   **Features**:
 
@@ -102,8 +102,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/emnist-bymerge-3.0.0.png" alt="Visualization" width="500px">
 
@@ -113,10 +113,10 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 18,800
-'train' | 112,800
+Split     | Examples
+:-------- | -------:
+`'test'`  | 18,800
+`'train'` | 112,800
 
 *   **Features**:
 
@@ -127,8 +127,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/emnist-balanced-3.0.0.png" alt="Visualization" width="500px">
 
@@ -138,10 +138,10 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 14,800
-'train' | 88,800
+Split     | Examples
+:-------- | -------:
+`'test'`  | 14,800
+`'train'` | 88,800
 
 *   **Features**:
 
@@ -152,8 +152,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/emnist-letters-3.0.0.png" alt="Visualization" width="500px">
 
@@ -163,10 +163,10 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 40,000
-'train' | 240,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 40,000
+`'train'` | 240,000
 
 *   **Features**:
 
@@ -177,8 +177,8 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/emnist-digits-3.0.0.png" alt="Visualization" width="500px">
 
@@ -188,10 +188,10 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 10,000
-'train' | 60,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 60,000
 
 *   **Features**:
 
@@ -202,7 +202,7 @@ FeaturesDict({
 })
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/emnist-mnist-3.0.0.png" alt="Visualization" width="500px">

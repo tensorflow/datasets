@@ -45,6 +45,8 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     'dst_dir', tfds.core.gcs_path('visualization'),
     'Destination dir to save the images.')
+flags.DEFINE_boolean(
+    'overwrite', False, 'If True, overwrite the existing visualizations.')
 
 
 # pylint: disable=logging-format-interpolation,logging-not-lazy
@@ -77,7 +79,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   dst_filename = full_name.replace('/', '-') + '.png'
   dst_path = os.path.join(dst_dir, dst_filename)
   # If the image already exists, skip the image generation
-  if tf.io.gfile.exists(dst_path):
+  if not FLAGS.overwrite and tf.io.gfile.exists(dst_path):
     logging.info(f'Skiping visualization for {full_name} (already exists)')
     return
 
@@ -107,7 +109,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   with tempfile.TemporaryDirectory() as tmp_dir:
     tmp_path = os.path.join(tmp_dir, dst_filename)
     figure.savefig(tmp_path)
-    tf.io.gfile.copy(tmp_path, dst_path)
+    tf.io.gfile.copy(tmp_path, dst_path, overwrite=FLAGS.overwrite)
   plt.close(figure)
 
 

@@ -13,19 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Custom Datasets APIs."""
+"""Tests for tensorflow_datasets.scripts.cli.main."""
 
-from tensorflow_datasets.core import registered
+from unittest import mock
 
-# Custom datasets cannot be instanciated through `tfds.load`
-with registered.skip_registration():
-  # pylint: disable=g-import-not-at-top
-  from tensorflow_datasets.core.custom_dataset.image_folder import ImageFolder
-  from tensorflow_datasets.core.custom_dataset.translate_folder import TranslateFolder
-  # pylint: enable=g-import-not-at-top
+from tensorflow_datasets.scripts.cli import main
 
 
-__all__ = [
-    "ImageFolder",
-    "TranslateFolder",
-]
+def test_main():
+
+  def _check_exit(status=0, message=None):
+    del message
+    assert status == 0  # Check argparse exit gracefully
+
+  # Argparse call `sys.exit(0)` when `--version` is passed.
+  with mock.patch('sys.exit', _check_exit):
+    main.main(main._parse_flags(['', '--version']))

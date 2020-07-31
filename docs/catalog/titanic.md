@@ -40,9 +40,9 @@ missing values are replaced with -1, string missing values are replaced with
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 1,309
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,309
 
 *   **Features**:
 
@@ -70,6 +70,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('features', 'survived')`
+
 *   **Citation**:
 
 ```
@@ -82,6 +83,6 @@ url    = "https://www.openml.org/d/40945"
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

@@ -46,8 +46,8 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Some of the wmt configs here, require a manual download.
     Please look into wmt.py to see the exact path (and file name) that has to
@@ -67,8 +67,8 @@ builder = tfds.builder("wmt_translate", config=config)
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## wmt19_translate/cs-en (default config)
@@ -79,10 +79,10 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'train'      | 20,246,548
-'validation' | 2,983
+Split          | Examples
+:------------- | ---------:
+`'train'`      | 20,246,548
+`'validation'` | 2,983
 
 *   **Features**:
 
@@ -105,10 +105,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'train'      | 38,690,334
-'validation' | 2,998
+Split          | Examples
+:------------- | ---------:
+`'train'`      | 38,690,334
+`'validation'` | 2,998
 
 *   **Features**:
 
@@ -131,10 +131,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'train'      | 6,587,448
-'validation' | 3,000
+Split          | Examples
+:------------- | --------:
+`'train'`      | 6,587,448
+`'validation'` | 3,000
 
 *   **Features**:
 
@@ -157,10 +157,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 11,670
-'validation' | 1,998
+Split          | Examples
+:------------- | -------:
+`'train'`      | 11,670
+`'validation'` | 1,998
 
 *   **Features**:
 
@@ -183,10 +183,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 126,583
-'validation' | 2,066
+Split          | Examples
+:------------- | -------:
+`'train'`      | 126,583
+`'validation'` | 2,066
 
 *   **Features**:
 
@@ -209,10 +209,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'train'      | 2,344,893
-'validation' | 2,000
+Split          | Examples
+:------------- | --------:
+`'train'`      | 2,344,893
+`'validation'` | 2,000
 
 *   **Features**:
 
@@ -235,10 +235,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'train'      | 38,492,126
-'validation' | 3,000
+Split          | Examples
+:------------- | ---------:
+`'train'`      | 38,492,126
+`'validation'` | 3,000
 
 *   **Features**:
 
@@ -261,10 +261,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | ---------:
-'train'      | 25,986,436
-'validation' | 3,981
+Split          | Examples
+:------------- | ---------:
+`'train'`      | 25,986,436
+`'validation'` | 3,981
 
 *   **Features**:
 
@@ -287,10 +287,10 @@ Translation({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'train'      | 9,824,476
-'validation' | 1,512
+Split          | Examples
+:------------- | --------:
+`'train'`      | 9,824,476
+`'validation'` | 1,512
 
 *   **Features**:
 

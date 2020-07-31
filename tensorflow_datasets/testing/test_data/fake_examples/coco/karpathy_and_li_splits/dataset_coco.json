@@ -1,0 +1,67 @@
+{"images": [
+  {
+    "filename": "COCO_train2014_000000000001.jpg",
+    "split": "train",
+    "sentences": [
+       {"raw": "caption 1", "sentid": 1},
+       {"raw": "caption 2", "sentid": 2}
+     ]
+  },
+  {
+    "split": "train",
+    "filename": "COCO_train2014_000000000002.jpg",
+    "sentences": [
+       {"raw": "caption 3", "sentid": 3},
+       {"raw": "caption 4", "sentid": 4}
+     ]
+  },
+  {
+    "split": "train",
+    "filename": "COCO_train2014_000000000003.jpg",
+    "sentences": [
+       {"raw": "caption 5", "sentid": 5},
+       {"raw": "caption 6", "sentid": 6}
+     ]
+  },
+  {
+    "split": "train",
+    "filename": "COCO_train2014_000000000004.jpg",
+    "sentences": [
+       {"raw": "caption 7", "sentid": 7},
+       {"raw": "caption 8", "sentid": 8}
+     ]
+  },
+  {
+    "split": "train",
+    "filename": "COCO_train2014_000000000005.jpg",
+    "sentences": [
+       {"raw": "caption 9", "sentid": 9},
+       {"raw": "caption 10", "sentid": 10}
+     ]
+  },
+  {
+    "split": "val",
+    "filename": "COCO_val2014_000000000001.jpg",
+    "sentences": [
+       {"raw": "caption 11", "sentid": 11},
+       {"raw": "caption 12", "sentid": 12}
+     ]
+  },
+  {
+    "split": "restval",
+    "filename": "COCO_val2014_000000000002.jpg",
+    "sentences": [
+       {"raw": "caption 13", "sentid": 13},
+       {"raw": "caption 14", "sentid": 14}
+     ]
+  },
+  {
+    "split": "test",
+    "filename": "COCO_val2014_000000000002.jpg",
+    "sentences": [
+       {"raw": "caption 15", "sentid": 15},
+       {"raw": "caption 16", "sentid": 16}
+     ]
+  }
+]
+}

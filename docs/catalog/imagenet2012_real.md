@@ -35,8 +35,8 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
 
 *   **Dataset size**: `6.25 GiB`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain `ILSVRC2012_img_val.tar` file.
     You need to register on http://www.image-net.org/download-images in order
@@ -48,9 +48,9 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'validation' | 50,000
+Split          | Examples
+:------------- | -------:
+`'validation'` | 50,000
 
 *   **Features**:
 
@@ -66,6 +66,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'real_label')`
+
 *   **Citation**:
 
 ```
@@ -87,7 +88,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagenet2012_real-1.0.0.png" alt="Visualization" width="500px">

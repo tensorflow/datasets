@@ -158,13 +158,24 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.patchers = []
     self.builder = self._make_builder()
 
-    # Determine the fake_examples directory.
-    self.example_dir = os.path.join(
-        test_utils.fake_examples_dir(), self.builder.name)
+    example_dir = self.DATASET_CLASS.code_path.parent / "dummy_data"
     if self.EXAMPLE_DIR is not None:
       self.example_dir = self.EXAMPLE_DIR
+    elif example_dir.exists():
+      self.example_dir = str(example_dir)
+    else:
+      self.example_dir = os.path.join(
+          test_utils.fake_examples_dir(), self.builder.name)
 
     if not tf.io.gfile.exists(self.example_dir):
+      err_msg = (
+          "Dummy data not found in {}."
+          ""
+      ).format(self.example_dir)
+
+    if not tf.io.gfile.exists(self.example_dir):
+      # TODO(epot): Better documentation once datasets are migrated to the
+      # folder model.
       err_msg = "fake_examples dir %s not found." % self.example_dir
       raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
@@ -312,8 +323,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                "please add `SKIP_CHECKSUMS = True` to the "
                "`DatasetBuilderTestCase`")
 
-    with utils.try_reraise(suffix=err_msg):
+    filepath = self.DATASET_CLASS.code_path.parent / "checksums.tsv"
+    if filepath.exists():
+      filepath = str(filepath)
+    else:
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
+    with utils.try_reraise(suffix=err_msg):
       url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
 
     missing_urls = self._download_urls - set(url_infos.keys())

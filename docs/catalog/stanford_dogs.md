@@ -40,10 +40,10 @@ bounding box annotations are provided for all the 12,000 images.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 8,580
-'train' | 12,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 8,580
+`'train'` | 12,000
 
 *   **Features**:
 
@@ -61,6 +61,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -83,7 +84,7 @@ address = "Colorado Springs, CO",
         BIBSOURCE = "http://www.image-net.org/papers/imagenet_cvpr09.bib"}
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/stanford_dogs-0.2.0.png" alt="Visualization" width="500px">

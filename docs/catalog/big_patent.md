@@ -50,6 +50,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('description', 'abstract')`
+
 *   **Citation**:
 
 ```
@@ -63,8 +64,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## big_patent/all (default config)
@@ -79,11 +80,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 67,072
-'train'      | 1,207,222
-'validation' | 67,068
+Split          | Examples
+:------------- | --------:
+`'test'`       | 67,072
+`'train'`      | 1,207,222
+`'validation'` | 67,068
 
 ## big_patent/a
 
@@ -98,11 +99,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,675
-'train'      | 174,134
-'validation' | 9,674
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,675
+`'train'`      | 174,134
+`'validation'` | 9,674
 
 ## big_patent/b
 
@@ -117,11 +118,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 8,974
-'train'      | 161,520
-'validation' | 8,973
+Split          | Examples
+:------------- | -------:
+`'test'`       | 8,974
+`'train'`      | 161,520
+`'validation'` | 8,973
 
 ## big_patent/c
 
@@ -136,11 +137,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,614
-'train'      | 101,042
-'validation' | 5,613
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,614
+`'train'`      | 101,042
+`'validation'` | 5,613
 
 ## big_patent/d
 
@@ -151,15 +152,15 @@ Split        | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Yes (validation, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 565
-'train'      | 10,164
-'validation' | 565
+Split          | Examples
+:------------- | -------:
+`'test'`       | 565
+`'train'`      | 10,164
+`'validation'` | 565
 
 ## big_patent/e
 
@@ -174,11 +175,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,914
-'train'      | 34,443
-'validation' | 1,914
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,914
+`'train'`      | 34,443
+`'validation'` | 1,914
 
 ## big_patent/f
 
@@ -193,11 +194,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 4,754
-'train'      | 85,568
-'validation' | 4,754
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,754
+`'train'`      | 85,568
+`'validation'` | 4,754
 
 ## big_patent/g
 
@@ -212,11 +213,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 14,386
-'train'      | 258,935
-'validation' | 14,385
+Split          | Examples
+:------------- | -------:
+`'test'`       | 14,386
+`'train'`      | 258,935
+`'validation'` | 14,385
 
 ## big_patent/h
 
@@ -231,11 +232,11 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 14,279
-'train'      | 257,019
-'validation' | 14,279
+Split          | Examples
+:------------- | -------:
+`'test'`       | 14,279
+`'train'`      | 257,019
+`'validation'` | 14,279
 
 ## big_patent/y
 
@@ -250,8 +251,8 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,911
-'train'      | 124,397
-'validation' | 6,911
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,911
+`'train'`      | 124,397
+`'validation'` | 6,911

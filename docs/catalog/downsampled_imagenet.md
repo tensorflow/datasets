@@ -40,10 +40,10 @@ For resized ImageNet for supervised learning
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'train'      | 1,281,149
-'validation' | 49,999
+Split          | Examples
+:------------- | --------:
+`'train'`      | 1,281,149
+`'validation'` | 49,999
 
 *   **Features**:
 
@@ -56,6 +56,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -83,8 +84,8 @@ FeaturesDict({
 
 *   **Download size**: `3.98 GiB`
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/downsampled_imagenet-32x32-2.0.0.png" alt="Visualization" width="500px">
 
@@ -95,7 +96,7 @@ FeaturesDict({
 
 *   **Download size**: `11.73 GiB`
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/downsampled_imagenet-64x64-2.0.0.png" alt="Visualization" width="500px">

@@ -44,8 +44,8 @@ a particular matrix.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Data can be downloaded from
     https://console.cloud.google.com/storage/browser/ravens-matrices
@@ -57,11 +57,11 @@ a particular matrix.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 200,000
-'train'      | 1,200,000
-'validation' | 20,000
+Split          | Examples
+:------------- | --------:
+`'test'`       | 200,000
+`'train'`      | 1,200,000
+`'validation'` | 20,000
 
 *   **Features**:
 
@@ -79,6 +79,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -100,8 +101,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## abstract_reasoning/neutral (default config)

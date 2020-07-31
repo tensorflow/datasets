@@ -23,6 +23,7 @@ import os
 import textwrap
 from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
+from absl import logging
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured import movielens_parsing
@@ -176,7 +177,7 @@ class MovieLensConfig(tfds.core.BuilderConfig):
     return self._parsing_fn
 
 
-class MovieLens(tfds.core.GeneratorBasedBuilder):
+class Movielens(tfds.core.GeneratorBasedBuilder):
   """MovieLens rating dataset."""
 
   BUILDER_CONFIGS = [
@@ -444,3 +445,13 @@ class MovieLens(tfds.core.GeneratorBasedBuilder):
     """Yields examples by calling the corresponding parsing function."""
     for ex in self.builder_config.parsing_fn(dir_path):
       yield ex
+
+
+class MovieLens(Movielens):
+  """MovieLens rating dataset (deprecated handle version)."""
+
+  def __init__(self, **kwargs):
+    logging.warning(
+        'The handle "movie_lens" for the MovieLens dataset is deprecated. '
+        'Prefer using "movielens" instead.')
+    super(MovieLens, self).__init__(**kwargs)

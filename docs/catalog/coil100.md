@@ -41,9 +41,9 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 7,200
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,200
 
 *   **Features**:
 
@@ -58,6 +58,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -69,7 +70,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/coil100-1.0.0.png" alt="Visualization" width="500px">

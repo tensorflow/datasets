@@ -44,8 +44,8 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## groove/full-midionly (default config)
@@ -62,11 +62,11 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 129
-'train'      | 897
-'validation' | 124
+Split          | Examples
+:------------- | -------:
+`'test'`       | 129
+`'train'`      | 897
+`'validation'` | 124
 
 *   **Features**:
 
@@ -99,11 +99,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 124
-'train'      | 846
-'validation' | 120
+Split          | Examples
+:------------- | -------:
+`'test'`       | 124
+`'train'`      | 846
+`'validation'` | 120
 
 *   **Features**:
 
@@ -138,11 +138,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,204
-'train'      | 18,163
-'validation' | 2,252
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,204
+`'train'`      | 18,163
+`'validation'` | 2,252
 
 *   **Features**:
 
@@ -175,11 +175,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,873
-'train'      | 14,390
-'validation' | 2,034
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,873
+`'train'`      | 14,390
+`'validation'` | 2,034
 
 *   **Features**:
 
@@ -214,11 +214,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,033
-'train'      | 17,261
-'validation' | 2,121
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,033
+`'train'`      | 17,261
+`'validation'` | 2,121
 
 *   **Features**:
 

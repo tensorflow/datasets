@@ -49,6 +49,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -86,12 +87,12 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 2,021
+Split    | Examples
+:------- | -------:
+`'test'` | 2,021
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cifar10_1-v4-1.1.0.png" alt="Visualization" width="500px">
 
@@ -108,11 +109,11 @@ Split  | Examples
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 2,000
+Split    | Examples
+:------- | -------:
+`'test'` | 2,000
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cifar10_1-v6-1.1.0.png" alt="Visualization" width="500px">

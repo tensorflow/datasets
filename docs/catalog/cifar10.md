@@ -37,10 +37,10 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'test'  | 10,000
-'train' | 50,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 50,000
 
 *   **Features**:
 
@@ -55,6 +55,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -66,7 +67,7 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/cifar10-3.0.2.png" alt="Visualization" width="500px">

@@ -70,10 +70,10 @@ train_examples, val_examples = tfds.load(
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'test'  | 10,000
-'train' | 1,999,998
+Split     | Examples
+:-------- | --------:
+`'test'`  | 10,000
+`'train'` | 1,999,998
 
 *   **Features**:
 
@@ -87,6 +87,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('question', 'answer')`
+
 *   **Citation**:
 
 ```
@@ -98,8 +99,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## math_dataset/algebra__linear_1d (default config)

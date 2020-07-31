@@ -24,5 +24,6 @@ from tensorflow_datasets.core.visualization.visualizer import Visualizer
 __all__ = [
     "ImageGridVisualizer",
     "show_examples",
+    "show_statistics",
     "Visualizer",
 ]

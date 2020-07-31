@@ -41,8 +41,8 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Detailed download instructions (which require running a custom script) are
     here:
@@ -55,11 +55,11 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 11,301
-'train'      | 203,577
-'validation' | 11,305
+Split          | Examples
+:------------- | -------:
+`'test'`       | 11,301
+`'train'`      | 203,577
+`'validation'` | 11,305
 
 *   **Features**:
 
@@ -73,6 +73,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
+
 *   **Citation**:
 
 ```
@@ -85,6 +86,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

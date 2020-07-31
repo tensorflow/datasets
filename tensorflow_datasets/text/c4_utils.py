@@ -87,15 +87,6 @@ def _get_sentences(text):
   return list(_SENTENCE_TOKENIZER.tokenize(tf.compat.as_text(text)))
 
 
-def _get_sentences_by_line(text, lower=False):
-  sentences = []
-  for line in text.splitlines():
-    sentences.append([
-        s.lower() if lower else s for s in _get_sentences(line)
-    ])
-  return sentences
-
-
 def is_language(page, language, min_probability=0.99):
   """Returns True iff text is in `language` with at least `min_probability`."""
   unused_url, features = page
@@ -231,10 +222,8 @@ def clean_page(url_and_features,
   yield url, features
 
 
-def _hash_line(line):
-  m = hashlib.md5()
-  m.update(tf.compat.as_text(line).encode("utf-8").strip().lower())
-  return m.hexdigest()
+def _hash_text(text):
+  return hashlib.md5(tf.compat.as_text(text).encode("utf-8")).hexdigest()
 
 
 def _emit_url_to_lines(page):
@@ -242,36 +231,15 @@ def _emit_url_to_lines(page):
   url, features = page
   text = features["text"]
   for line in text.split("\n"):
-    yield _hash_line(line), url
+    yield _hash_text(line.strip().lower()), url
 
 
-def _emit_line_to_urls(el, counter_inc_fn):
-  """Emits (hashed) line to all but one url."""
-  line, urls = el
-  # Materialize urls as a list.
-  urls = list(urls)
-  # Hash urls and sort to have a consistent, but unbiased, selection when the
-  # same urls exist for multiple lines.
-  skip_url = min(
-      urls,
-      key=lambda x: hashlib.md5(tf.compat.as_text(x).encode("utf-8")).
-      hexdigest())
-  for url in urls:
-    if url != skip_url:
-      yield url, line
-  counter_inc_fn("emitted-line-duplicate", amt=len(urls)-1)
-
-
-def _remove_lines_from_text(
-    el, counter_inc_fn, min_num_sentences=_MIN_NUM_SENTENCES):
-  """Removes matching lines from the page.
+def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
+  """Removes all lines from the page that do not match the given set of hashes.
 
   Process the result of a join containing a single value for 'features' and zero
   or more values for 'lines'. Each value in 'lines' is a lower-cased, hashed
-  line.
-
-  If a line has fewer sentences than `max_window_size`, the full line is
-  compared for a match.
+  line that has been selected to keep.
 
   Args:
     el: `(string, {'features': features_dict, 'lines': [string]})`,
@@ -293,45 +261,56 @@ def _remove_lines_from_text(
       len(features), url)
   features = features[0]
   text = features["text"]
-  lines_to_remove = set(join_values["lines"])
+  lines_to_keep = set(join_values["lines"])
   new_lines = []
   hashed_lines = set()
   for line in text.split("\n"):
-    hashed_line = _hash_line(line)
-    if hashed_line in lines_to_remove:
-      counter_inc_fn("filtered-lines-duplicate")
-    elif hashed_line not in hashed_lines:
+    hashed_line = _hash_text(line.strip().lower())
+    if hashed_line not in lines_to_keep:
+      counter_inc_fn("filtered-lines-global_duplicate")
+    elif hashed_line in hashed_lines:
+      counter_inc_fn("filtered-lines-local_duplicate")
+    else:
       new_lines.append(line)
       hashed_lines.add(hashed_line)
   new_text = "\n".join(new_lines)
-  if len(_get_sentences(new_text)) < min_num_sentences:
-    counter_inc_fn("filtered-doc-toofewsentences")
+  if not new_text:
+    counter_inc_fn("filtered-deduped_page-empty")
+    return
+  if min_num_sentences and len(_get_sentences(new_text)) < min_num_sentences:
+    counter_inc_fn("filtered-deduped_page-toofewsentences")
     return
   new_features = features.copy()
   new_features["text"] = new_text
   yield (url, new_features)
 
 
-def remove_duplicate_text(pages):
+def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
   """Utility to remove duplicate lines across text documents."""
   # Output: url, lines
   beam = tfds.core.lazy_imports.apache_beam
-  counter_inc_fn = get_counter_inc_fn("dedupe-lines")
-  lines_to_remove = (
+
+  # Select a single URL for each line in the input pages.
+  # Hash before comparison to avoid biasing by domain.
+  # line, [url]
+  line_to_selected_url = (
       pages
       | beam.FlatMap(_emit_url_to_lines)
-      | "group_sentences" >> beam.GroupByKey()
-      | beam.FlatMap(_emit_line_to_urls, counter_inc_fn=counter_inc_fn))
+      | beam.combiners.Top.PerKey(1, key=_hash_text, reverse=True))
+  # url, line
+  lines_to_keep = line_to_selected_url | beam.Map(lambda x: (x[1][0], x[0]))
 
   # Output: url, text
-  final_docs = ({
-      "features": pages,
-      "lines": lines_to_remove
-  }
-                | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
-                | beam.FlatMap(
-                    _remove_lines_from_text,
-                    counter_inc_fn=counter_inc_fn))
+  final_docs = (
+      {
+          "features": pages,
+          "lines": lines_to_keep
+      }
+      | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
+      | beam.FlatMap(
+          _remove_lines_from_text,
+          counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
+          min_num_sentences=min_num_sentences))
 
   return final_docs
 

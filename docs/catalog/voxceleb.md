@@ -34,8 +34,8 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Dataset size**: `107.97 GiB`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain the file vox_dev_wav.zip. The instructions for
     downloading this file are found in http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html. This dataset requires registration.
@@ -46,11 +46,11 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,972
-'train'      | 134,000
-'validation' | 6,670
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,972
+`'train'`      | 134,000
+`'validation'` | 6,670
 
 *   **Features**:
 
@@ -64,6 +64,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
+
 *   **Citation**:
 
 ```
@@ -75,6 +76,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

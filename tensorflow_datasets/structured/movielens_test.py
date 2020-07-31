@@ -24,7 +24,7 @@ from tensorflow_datasets.structured import movielens
 
 
 class MovielensTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = movielens.MovieLens
+  DATASET_CLASS = movielens.Movielens
   SPLITS = {
       "train": 8,
   }

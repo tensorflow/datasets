@@ -52,10 +52,10 @@ This dataset consists of the Imagenette dataset {size} variant.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 14,669
-'validation' | 3,929
+Split          | Examples
+:------------- | -------:
+`'train'`      | 14,669
+`'validation'` | 3,929
 
 *   **Features**:
 
@@ -69,6 +69,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
 *   **Citation**:
 
 ```
@@ -82,32 +83,38 @@ FeaturesDict({
 ## imagewang/full-size (default config)
 
 *   **Dataset size**: `1.97 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagewang-full-size-2.0.0.png" alt="Visualization" width="500px">
 
 ## imagewang/320px
 
 *   **Dataset size**: `460.81 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagewang-320px-2.0.0.png" alt="Visualization" width="500px">
 
 ## imagewang/160px
 
 *   **Dataset size**: `140.40 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/imagewang-160px-2.0.0.png" alt="Visualization" width="500px">

@@ -53,6 +53,7 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'abstract')`
+
 *   **Citation**:
 
 ```
@@ -70,8 +71,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## scientific_papers/arxiv (default config)
@@ -82,11 +83,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,440
-'train'      | 203,037
-'validation' | 6,436
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,440
+`'train'`      | 203,037
+`'validation'` | 6,436
 
 ## scientific_papers/pubmed
 
@@ -96,8 +97,8 @@ Split        | Examples
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,658
-'train'      | 119,924
-'validation' | 6,633
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,658
+`'train'`      | 119,924
+`'validation'` | 6,633
