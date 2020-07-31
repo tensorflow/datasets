@@ -1,0 +1,1 @@
+https://zenodo.org/record/3555552/files/CIFAR-100-C.tar 2918473216 30ee6543a1bfd049fa33834b7c1ada301e7064b7fbe8fc38340eb8b62ced4b33
