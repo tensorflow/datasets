@@ -29,7 +29,8 @@ import string
 import sys
 import textwrap
 import threading
-from typing import Any, Callable, Iterator, List, TypeVar
+import types
+from typing import Any, Callable, Iterator, List, TypeVar, Union
 import uuid
 
 import six
@@ -39,6 +40,11 @@ from tensorflow_datasets.core import constants
 
 
 # pylint: disable=g-import-not-at-top
+if sys.version_info >= (3, 9):
+  import importlib.resources as importlib_resources
+else:
+  import importlib_resources
+
 try:  # Use shutil on Python 3.3+
   from shutil import disk_usage  # pytype: disable=import-error  # pylint: disable=g-importing-member
 except ImportError:
@@ -158,6 +164,13 @@ class memoized_property(property):  # pylint: disable=invalid-name
     return cached
 
 
+def resource_path(
+    package: Union[str, types.ModuleType]
+) -> importlib_resources.abc.Traversable:  # pytype: disable=module-attr
+  """Returns `importlib.resources.files`."""
+  return importlib_resources.files(package)  # pytype: disable=module-attr
+
+
 def map_nested(function, data_struct, dict_only=False, map_tuple=False):
   """Apply a function recursively to each element of a nested data struct."""
 
@@ -168,10 +181,10 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
         for k, v in data_struct.items()
     }
   elif not dict_only:
-    types = [list]
+    types_ = [list]
     if map_tuple:
-      types.append(tuple)
-    if isinstance(data_struct, tuple(types)):
+      types_.append(tuple)
+    if isinstance(data_struct, tuple(types_)):
       mapped = [map_nested(function, v, dict_only, map_tuple)
                 for v in data_struct]
       if isinstance(data_struct, list):

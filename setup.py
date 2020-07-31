@@ -51,7 +51,6 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
-    'importlib_resources',
     'tensorflow-metadata',
     'termcolor',
     'tqdm',
@@ -64,7 +63,8 @@ REQUIRED_PKGS = [
     'psutil;python_version<"3.3"',
     # Standard library backports
     'enum34;python_version<"3.4"',
-    'dataclasses;python_version<"3.7"'
+    'dataclasses;python_version<"3.7"',
+    'importlib_resources;python_version<"3.9"',
 ]
 
 TESTS_REQUIRE = [
