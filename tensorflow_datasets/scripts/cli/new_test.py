@@ -56,7 +56,9 @@ def test_new_outside_tfds(tmp_path: pathlib.Path):
 def test_new_in_tfds(tmp_path: pathlib.Path):
   """Test adding a new dataset in the TFDS repository."""
   tmp_path = tmp_path / 'tensorflow_datasets' / 'image'
+  print('BEFORE', tmp_path)
   _run_cli(f'new my_dataset --dir {str(tmp_path)}')
+  print('AFTER', tmp_path)
 
   filenames = [f.name for f in (tmp_path / 'my_dataset').iterdir()]
   assert sorted(filenames) == [

@@ -95,7 +95,19 @@ def _create_dataset_files(args: argparse.Namespace) -> None:
   ds_name = args.dataset_name
 
   # Creates the root directory
+  print('args.dir: ', args.dir)
+  print('ds_name: ', ds_name)
+  p = args.dir
+  print(p)
+  p = p.expanduser()
+  print(p)
+  p = p.resolve()
+  print(p)
+  p1 = p.joinpath('ds_name')
+  p0 = p / ds_name
+  print(p0, p1)
   root_dir = args.dir.expanduser().resolve() / ds_name
+  print('root_dir: ', root_dir)
   root_dir.mkdir(parents=True)
 
   # Whether the dataset is added in TFDS or in an external repository
