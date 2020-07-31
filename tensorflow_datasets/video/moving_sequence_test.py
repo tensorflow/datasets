@@ -16,9 +16,6 @@
 # Lint as: python3
 """Tests for moving_sequence."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
 
@@ -29,9 +26,10 @@ tf.enable_v2_behavior()
 
 
 class MovingSequenceTest(tf.test.TestCase):
-
+  """Moving Sequence Dataset Testing."""
   @testing.run_in_graph_and_eager_modes()
   def test_images_as_moving_sequence(self):
+    """Test Images for Moving Sequence Dataset."""
     h, w = (28, 28)
     sequence_length = 8
 

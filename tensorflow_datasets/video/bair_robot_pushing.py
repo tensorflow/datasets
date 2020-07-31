@@ -14,16 +14,13 @@
 # limitations under the License.
 
 # Lint as: python3
+
 """Berkeley (BAIR) robot pushing dataset.
 
 Self-Supervised Visual Planning with Temporal Skip Connections
 Frederik Ebert, Chelsea Finn, Alex X. Lee, and Sergey Levine.
 https://arxiv.org/abs/1710.05268
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -57,6 +54,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
       "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
 
   def _info(self):
+    """Create Dataset Info."""
     # The Bair dataset consist of a sequence of frames (video) with associated
     # metadata (action and position)
     features = tfds.features.Sequence({
@@ -93,6 +91,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, filedir):
+    """Generate Splits."""
     logging.info("Reading data from %s.", filedir)
     files = tf.io.gfile.listdir(filedir)
     logging.info("%d files found.", len(files))
@@ -110,7 +109,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {   # pylint: disable=g-complex-comprehension
+          frame_feature = {
               out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),

@@ -14,9 +14,8 @@
 # limitations under the License.
 
 # Lint as: python3
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Tests for UCF101 video dataset."""
+
 
 import collections
 
@@ -26,6 +25,7 @@ from tensorflow_datasets.video import ucf101
 
 
 class Ucf101Test(testing.DatasetBuilderTestCase):
+  """Create testing.DatasetBuilderTestCase for test."""
   DATASET_CLASS = ucf101.Ucf101
 
   SPLITS = {
@@ -40,9 +40,9 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['ucf101_1_256', 'ucf101_2']
 
-  def _assertAsDataset(self, builder):
+  def _assert_as_dataset(self, builder):
     """Check the label distribution for each split."""
-    super(Ucf101Test, self)._assertAsDataset(builder)
+    super(Ucf101Test, self)._assert_as_dataset(builder)
     label_frequncies = {}
     label_feature = builder.info.features['label']
     dataset = builder.as_dataset()
@@ -54,7 +54,6 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
     self.assertEqual(dict(label_frequncies),
                      {'test': {'Archery': 1, 'Nunchucks': 1},
                       'train': {'Archery': 1, 'Nunchucks': 2}})
-
 
 if __name__ == '__main__':
   testing.test_main()

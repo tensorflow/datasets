@@ -16,6 +16,8 @@
 # Lint as: python3
 """Video datasets."""
 
+# pylint: disable=c0103
+
 from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
 from tensorflow_datasets.video.moving_mnist import MovingMnist
 from tensorflow_datasets.video.robonet import Robonet

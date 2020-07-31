@@ -16,9 +16,6 @@
 # Lint as: python3
 """UCF-101 dataset from https://www.crcv.ucf.edu/data/UCF101.php."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -127,6 +124,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """ Create Dataset Info"""
     if self.builder_config.width is not None:
       if self.builder_config.height is None:
         raise ValueError('Provide either both height and width or none.')
@@ -182,6 +180,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, videos_dir, splits_dir, data_list):
+    """Yields Examples"""
     data_list_path_path = os.path.join(splits_dir, data_list)
     with tf.io.gfile.GFile(data_list_path_path, 'r') as data_list_file:
       labels_and_paths = data_list_file.readlines()
