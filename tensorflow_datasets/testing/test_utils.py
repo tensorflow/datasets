@@ -16,10 +16,6 @@
 # Lint as: python3
 """Test utilities."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import contextlib
 import functools
 import io
@@ -413,8 +409,9 @@ class FeatureExpectationsTestCase(SubTestCase):
           self.assertAllEqualNested(out_numpy, expected)
 
         # Assert the HTML representation works
-        with self._subTest('repr'):
-          self._test_repr(feature, out_numpy)
+        if not test.decoders:
+          with self._subTest('repr'):
+            self._test_repr(feature, out_numpy)
 
   def _test_repr(
       self,

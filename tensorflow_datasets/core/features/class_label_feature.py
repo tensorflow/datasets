@@ -16,10 +16,6 @@
 # Lint as: python3
 """ClassLabel feature."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import six
 import tensorflow.compat.v2 as tf
@@ -171,6 +167,15 @@ class ClassLabel(feature.Tensor):
 
   def _additional_repr_info(self):
     return {"num_classes": self.num_classes}
+
+  def repr_html(self, ex: int) -> str:
+    """Class labels are displayed with their name."""
+    if ex == -1:
+      return "-"
+    elif not self._int2str:
+      return str(ex)
+    else:
+      return f"{ex} ({self.int2str(ex)})"
 
 
 def _get_names_filepath(data_dir, feature_name):

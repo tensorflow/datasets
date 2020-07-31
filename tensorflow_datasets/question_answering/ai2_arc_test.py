@@ -15,10 +15,6 @@
 
 """Tests for the ai2_arc dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.question_answering import ai2_arc
 

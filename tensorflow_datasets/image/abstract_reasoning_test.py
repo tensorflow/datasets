@@ -16,10 +16,6 @@
 # Lint as: python3
 """AbstractReasoning dataset test."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.image import abstract_reasoning
 import tensorflow_datasets.testing as tfds_test
 

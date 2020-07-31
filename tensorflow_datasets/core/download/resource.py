@@ -16,10 +16,6 @@
 # Lint as: python3
 """Classes to specify download or extraction information."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import base64
 import codecs
 import enum

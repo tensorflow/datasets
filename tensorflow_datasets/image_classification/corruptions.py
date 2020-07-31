@@ -23,10 +23,6 @@ pixelate, jpeg compression, frost, snow, and motion blur.
 4 extra corruptions: gaussian blur, saturate, spatter, and speckle noise.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import io
 import subprocess
 import tempfile

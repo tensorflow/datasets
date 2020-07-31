@@ -16,10 +16,6 @@
 # Lint as: python3
 """Classes and functions to generate the OI Challenge 2019 dataset using Apache Beam."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import csv
 import io

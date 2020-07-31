@@ -16,10 +16,6 @@
 # Lint as: python3
 """Imagenet val. annotated by ReaL labels (https://arxiv.org/abs/2006.07159)."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
 import os
 import tarfile

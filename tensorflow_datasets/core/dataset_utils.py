@@ -16,10 +16,6 @@
 # Lint as: python3
 """Utilities for dealing with tf.data.Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import tf_compat

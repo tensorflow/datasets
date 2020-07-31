@@ -52,12 +52,14 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'dm-tree',
     'future',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
+    'importlib_resources',
     'tensorflow-metadata',
     'termcolor',
     'tqdm',
@@ -69,7 +71,8 @@ REQUIRED_PKGS = [
     # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
     'psutil;python_version<"3.3"',
     # enum introduced in Python 3.4
-    'enum34;python_version<"3.4"'
+    'enum34;python_version<"3.4"',
+    'dataclasses;python_version<"3.7"',
 ]
 
 TESTS_REQUIRE = [

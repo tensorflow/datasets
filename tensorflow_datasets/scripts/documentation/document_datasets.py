@@ -52,8 +52,8 @@ NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
 class VisualizationDocUtil(object):
   """Small util which generate the path/urls for the visualizations."""
   # Url used to display images
-  BASE_PATH = tfds.core.gcs_path('visualization/')
-  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/'
+  BASE_PATH = tfds.core.gcs_path('visualization/fig/')
+  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
 
   def _get_name(self, builder):
     return builder.info.full_name.replace('/', '-') + '.png'

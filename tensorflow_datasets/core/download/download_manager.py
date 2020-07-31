@@ -16,10 +16,6 @@
 # Lint as: python3
 """Download manager interface."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import concurrent.futures
 import hashlib
 import os
@@ -638,12 +634,8 @@ def _read_url_info(url_path: str) -> checksums.UrlInfo:
   return checksums.UrlInfo(**file_info['url_info'])
 
 
-def _wait_on_promise(p):
-  return p.get()
-
-
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
-  res = tf.nest.map_structure(_wait_on_promise, all_promises)
+  res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
   return res

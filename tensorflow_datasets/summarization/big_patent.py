@@ -16,14 +16,11 @@
 # Lint as: python3
 """BIGPATENT Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
 import os
 import re
 
+import importlib_resources
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -87,8 +84,10 @@ class BigPatentConfig(tfds.core.BuilderConfig):
     super(BigPatentConfig, self).__init__(
         # 1.0.0 lower cased tokenized words.
         # 2.0.0 cased raw strings.
-        version=tfds.core.Version("2.0.0", "Updated to cased raw strings."),
-        supported_versions=[tfds.core.Version("1.0.0")],
+        # 2.1.0 cased raw strings (fixed).
+        version=tfds.core.Version("2.1.0", "Fix update to cased raw strings."),
+        supported_versions=[tfds.core.Version("1.0.0"),
+                            tfds.core.Version("2.0.0")],
         **kwargs)
     self.cpc_codes = cpc_codes
 
@@ -189,7 +188,11 @@ _ENGLISH_WORDS = None
 def _get_english_words():
   global _ENGLISH_WORDS
   if not _ENGLISH_WORDS:
-    _ENGLISH_WORDS = frozenset(tfds.core.lazy_imports.nltk.corpus.words.words())
+    nltk = tfds.core.lazy_imports.nltk
+    resource_path = importlib_resources.files(nltk)
+    data_path = resource_path / "nltk_data/corpora/words/en"
+    _ENGLISH_WORDS = frozenset(
+        nltk.data.load(data_path, format="raw").decode("utf-8").split("\n"))
   return _ENGLISH_WORDS
 
 

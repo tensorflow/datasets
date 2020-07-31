@@ -15,10 +15,6 @@
 
 # Lint as: python3
 """Dataset class for Cars196 Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 import os
 import six.moves.urllib as urllib
 import tensorflow.compat.v2 as tf

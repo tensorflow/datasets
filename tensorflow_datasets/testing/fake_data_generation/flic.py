@@ -16,10 +16,6 @@
 # Lint as: python3
 """Generates FLIC like files with random data for testing."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl import app

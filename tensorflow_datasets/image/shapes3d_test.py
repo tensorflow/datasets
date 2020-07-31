@@ -16,10 +16,6 @@
 # Lint as: python3
 """Shapes3D dataset test."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.image import shapes3d
 import tensorflow_datasets.testing as tfds_test
 

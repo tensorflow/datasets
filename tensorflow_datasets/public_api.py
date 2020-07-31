@@ -27,6 +27,7 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
+from tensorflow_datasets.core.as_dataframe import as_dataframe
 from tensorflow_datasets.core.folder_dataset import ImageFolder
 from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
@@ -50,6 +51,7 @@ with core.registered.skip_registration():
 
 
 __all__ = [
+    "as_dataframe",
     "as_numpy",
     "core",
     "folder_dataset",
