@@ -28,8 +28,7 @@ import tensorflow_datasets.public_api as tfds
 class TedliumReleaseConfig(tfds.core.BuilderConfig):
   """BuilderConfig for a release of the TED-LIUM dataset."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, url, download_url, split_paths, citation, **kwargs):
+  def __init__(self, *, url, download_url, split_paths, citation, **kwargs):
     super(TedliumReleaseConfig,
           self).__init__(version=tfds.core.Version("1.0.1"), **kwargs)
     self.url = url

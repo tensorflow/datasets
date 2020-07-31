@@ -56,8 +56,7 @@ ROOT_URL = "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip"
 class MultiNLIMismatchConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MultiNLI Mismatch."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, *, text_encoder_config=None, **kwargs):
     """BuilderConfig for MultiNLI Mismatch.
 
     Args:

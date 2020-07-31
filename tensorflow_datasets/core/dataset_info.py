@@ -41,7 +41,6 @@ from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
@@ -86,8 +85,8 @@ class DatasetInfo(object):
   builder.download_and_prepare()`).
   """
 
-  @api_utils.disallow_positional_args
   def __init__(self,
+               *,
                builder,
                description=None,
                features=None,

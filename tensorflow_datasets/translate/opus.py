@@ -142,8 +142,7 @@ DATASET_MAP = {ds.name: ds for ds in [  # pylint:disable=g-complex-comprehension
 class OpusConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Opus."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, language_pair, subsets, **kwargs):
+  def __init__(self, *, language_pair, subsets, **kwargs):
     """BuilderConfig for Opus.
 
     Args:

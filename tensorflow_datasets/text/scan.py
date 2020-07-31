@@ -86,8 +86,7 @@ class ScanConfig(tfds.core.BuilderConfig):
      (unsplit) dataset.
   """
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, name, directory=None, splitfile=None, **kwargs):
+  def __init__(self, *, name, directory=None, splitfile=None, **kwargs):
     """BuilderConfig for SCAN.
 
     Args:

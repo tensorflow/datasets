@@ -572,8 +572,8 @@ _CZENG17_FILTER = SubDataset(
 class WmtConfig(tfds.core.BuilderConfig):
   """BuilderConfig for WMT."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                url=None,
                citation=None,
                description=None,

@@ -28,7 +28,6 @@ from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import lazy_imports_lib
@@ -74,8 +73,7 @@ class BuilderConfig(object):
   `BuilderConfig` and add their own properties.
   """
 
-  @api_utils.disallow_positional_args
-  def __init__(self, name, version=None, supported_versions=None,
+  def __init__(self, *, name, version=None, supported_versions=None,
                description=None):
     self._name = name
     self._version = version
@@ -169,8 +167,7 @@ class DatasetBuilder(object):
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
 
-  @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None, version=None):
+  def __init__(self, *, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -276,8 +273,7 @@ class DatasetBuilder(object):
           "the restored dataset.")
     return self._info()
 
-  @api_utils.disallow_positional_args
-  def download_and_prepare(self, download_dir=None, download_config=None):
+  def download_and_prepare(self, *, download_dir=None, download_config=None):
     """Downloads and prepares dataset for reading.
 
     Args:
@@ -415,10 +411,10 @@ class DatasetBuilder(object):
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
-  @api_utils.disallow_positional_args
   def as_dataset(
       self,
       split=None,
+      *,
       batch_size=None,
       shuffle_files=False,
       decoders=None,

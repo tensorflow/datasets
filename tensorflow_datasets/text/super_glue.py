@@ -281,8 +281,8 @@ _AXG_CITATION = """\
 class SuperGlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SuperGLUE."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                features,
                data_url,
                citation,

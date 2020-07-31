@@ -64,8 +64,9 @@ _OBJECT_LABELS = [
 class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Waymo Open Dataset Config."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, name, version_str, description, is_on_gcs=False, **kwargs):
+  def __init__(
+      self, *, name, version_str, description, is_on_gcs=False, **kwargs
+  ):
     """BuilderConfig for Waymo Open Dataset examples.
 
     Args:

@@ -64,8 +64,7 @@ WIKIPEDIA_LANGUAGES = [
 class Wiki40bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wiki40B."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, language=None, **kwargs):
+  def __init__(self, *, language=None, **kwargs):
     """BuilderConfig for Wiki40B.
 
     Args:

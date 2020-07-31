@@ -51,8 +51,7 @@ VERSION = tfds.core.Version("0.1.0")
 class AnliConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Anli."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, round_dir=None, **kwargs):
+  def __init__(self, *, round_dir=None, **kwargs):
     """BuilderConfig for Anli.
 
     Args:

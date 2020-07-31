@@ -19,15 +19,13 @@
 import os
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
 
 
 class ClassLabel(feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, num_classes=None, names=None, names_file=None):
+  def __init__(self, *, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
 
     There are 3 ways to define a ClassLabel, which correspond to the 3

@@ -29,7 +29,6 @@ from typing import Any
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.utils import py_utils
 
@@ -286,8 +285,8 @@ def get_extract_method(path):
 class Resource(object):
   """Represents a resource to download, extract, or both."""
 
-  @api_utils.disallow_positional_args()
   def __init__(self,
+               *,
                url=None,
                extract_method=None,
                path=None):

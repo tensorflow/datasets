@@ -72,8 +72,8 @@ _DEFAULT_WEBTEXTLIKE_CC_VERSIONS = (  # August 2018 - July 2019
 class C4Config(tfds.core.BuilderConfig):
   """BuilderConfig for C4 dataset."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                language,
                cc_versions=None,
                clean=True,

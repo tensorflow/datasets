@@ -66,8 +66,8 @@ _RANDOM_SEEDS = [
 class CFQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CFQ splits."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                name=None,
                directory=None,
                compound_divergence=None,

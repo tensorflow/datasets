@@ -91,7 +91,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 
 
@@ -524,8 +523,7 @@ class FeatureConnector(object):
 class Tensor(FeatureConnector):
   """`FeatureConnector` for generic data of arbitrary shape and type."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, shape, dtype):
+  def __init__(self, *, shape, dtype):
     """Construct a Tensor feature."""
     self._shape = tuple(shape)
     self._dtype = dtype

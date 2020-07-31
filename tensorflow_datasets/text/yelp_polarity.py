@@ -76,8 +76,7 @@ _DOWNLOAD_URL = "https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.t
 class YelpPolarityReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for YelpPolarityReviews."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, *, text_encoder_config=None, **kwargs):
     """BuilderConfig for YelpPolarityReviews.
 
     Args:
