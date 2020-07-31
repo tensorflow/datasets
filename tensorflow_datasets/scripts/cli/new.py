@@ -95,8 +95,12 @@ def _create_dataset_files(args: argparse.Namespace) -> None:
   ds_name = args.dataset_name
 
   # Creates the root directory
-  root_dir = args.dir.expanduser().resolve() / ds_name
+  root_dir = args.dir.expanduser() / ds_name
   root_dir.mkdir(parents=True)
+  # TODO(py3.7): Should be `dir.expanduser().resolve()` but `.resolve()` fails
+  # on some environements when the file doesn't exists.
+  # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
+  root_dir = root_dir.resolve()
 
   # Whether the dataset is added in TFDS or in an external repository
   in_tfds = 'tensorflow_datasets' in root_dir.parts
