@@ -453,7 +453,7 @@ def _get_all_versions(
   """Returns the list of all current versions."""
   # Merge current version with all extra versions
   version_list = [current_version]
-  if current_version_only:
+  if not current_version_only:
     version_list.extend(extra_versions)
   # Filter datasets which do not have a version (version is `None`) as they
   # should not be instantiated directly (e.g wmt_translate)
