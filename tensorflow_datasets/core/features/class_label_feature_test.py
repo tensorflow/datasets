@@ -170,12 +170,6 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
         ValueError, 'label names are duplicated'):
       features.ClassLabel(names=['label1', 'label1', 'label2'])
 
-  def test_to_json(self):
-    feature = features.ClassLabel(names=['label3', 'label1', 'label2'])
-    self.assertDictEqual({
-        'names': ['label3', 'label1', 'label2'],
-    }, feature.to_json_content())
-
 
 if __name__ == '__main__':
   testing.test_main()

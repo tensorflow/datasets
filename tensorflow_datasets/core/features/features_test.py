@@ -228,77 +228,6 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
       fd.save_metadata(data_dir)
       fd.load_metadata(data_dir)
 
-  def test_to_json(self):
-    feature = features_lib.FeaturesDict({
-        'feature': tf.int64,
-        'image': features_lib.Image(),
-        'label': features_lib.ClassLabel(num_classes=3),
-    })
-    self.assertDictEqual({
-        'type': 'FeaturesDict',
-        'content': {
-            'feature': {
-                'type': 'Tensor',
-                'content': {
-                    'shape': [],
-                    'dtype': 'int64'
-                }
-            },
-            'image': {
-                'type': 'Image',
-                'content': {
-                    'shape': [None, None, 3],
-                    'dtype': 'uint8',
-                    'encoding_format': 'png'
-                }
-            },
-            'label': {
-                'type': 'ClassLabel',
-                'content': {
-                    'names': ['0', '1', '2']
-                }
-            }
-        }
-    }, feature.to_json())
-
-  def test_from_config(self):
-    content = textwrap.dedent("""\
-        {
-            "type": "FeaturesDict",
-            "content": {
-                "x": {
-                    "type": "Tensor",
-                    "content": {
-                        "shape": [],
-                        "dtype": "int64"
-                    }
-                },
-                "image": {
-                    "type": "Image",
-                    "content": {
-                        "shape": [
-                            null,
-                            null,
-                            3
-                        ],
-                        "dtype": "uint8",
-                        "encoding_format": "png"
-                    }
-                }
-            }
-        }
-        """)
-    with testing.MockFs() as fs:
-      fs.add_file("feature_info.json", content)
-
-      f1 = features_lib.FeatureConnector.from_config("feature_info.json")
-      f2 = features_lib.FeaturesDict({
-          "x": tf.int64,
-          "image": features_lib.Image(),
-      })
-
-      self.assertEqual(repr(f1), repr(f2))
-
 
 class FeatureTensorTest(testing.FeatureExpectationsTestCase):
 
@@ -361,7 +290,8 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
             ),
             # Invalid shape
             testing.FeatureExpectationItem(
-                value=np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
+                value=
+                np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),

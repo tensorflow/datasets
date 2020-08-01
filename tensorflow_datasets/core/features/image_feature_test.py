@@ -35,7 +35,7 @@ randint = np.random.randint
 
 
 class ImageFeatureTest(
-        testing.FeatureExpectationsTestCase, parameterized.TestCase):
+    testing.FeatureExpectationsTestCase, parameterized.TestCase):
 
   @parameterized.parameters(tf.uint8, tf.uint16)
   def test_images(self, dtype):
@@ -114,18 +114,6 @@ class ImageFeatureTest(
             ),
         ],
     )
-
-  def test_to_json(self):
-    feature = features_lib.Image(
-        shape=(32, 64, 3),
-        dtype=np.uint8,
-        encoding_format='jpeg'
-    )
-    self.assertDictEqual({
-        'shape': [32, 64, 3],
-        'dtype': 'uint8',
-        'encoding_format': 'jpeg'
-    }, feature.to_json_content())
 
 
 if __name__ == '__main__':
