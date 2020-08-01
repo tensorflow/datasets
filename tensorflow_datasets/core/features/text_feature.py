@@ -182,7 +182,12 @@ class Text(feature.Tensor):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    pass  # TODO
+    # TODO: Fix this
+    return cls()
 
   def to_json_content(self):
-    pass  # TODO
+    # TODO: Fix this
+    return {
+        'encoder': self._encoder.to_json(),
+        'encoder_config': self._encoder_config.to_json(),
+    }

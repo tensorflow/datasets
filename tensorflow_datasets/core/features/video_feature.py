@@ -183,7 +183,10 @@ class Video(sequence_feature.Sequence):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    pass
+    shape = tuple(value['shape'])
+    encoding_format = value['encoding_format']
+    ffmpeg_extra_args = value['ffmpeg_extra_args']
+    return cls(shape=shape, encoding_format=encoding_format, ffmpeg_extra_args=ffmpeg_extra_args)
 
   def to_json_content(self):
     return {

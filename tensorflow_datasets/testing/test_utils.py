@@ -332,6 +332,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
       self.assertEqual(feature.dtype, dtype)
+    with self._subTest('feature_round_trip'):
+      self._assert_feature(feature)
 
     # Check the serialized features
     if serialized_info is not None:
@@ -354,6 +356,10 @@ class FeatureExpectationsTestCase(SubTestCase):
             shape=shape,
             dtype=dtype,
         )
+
+  def _assert_feature(self, feature):
+    new_feature = feature.from_json_content(feature.to_json_content())
+    self.assertEqual(repr(feature), repr(new_feature))
 
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
     """Test that encode=>decoding of a value works correctly."""

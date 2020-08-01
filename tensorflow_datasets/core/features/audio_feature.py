@@ -109,7 +109,14 @@ class Audio(feature.Tensor):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    pass
+    file_format = value['file_format']
+    shape = tuple(value['shape'])
+    dtype = tf.dtypes.as_dtype(value['dtype'])
+    sample_rate = value['sample_rate'],
+    return cls(file_format=file_format,
+               shape=shape,
+               dtype=dtype,
+               sample_rate=sample_rate)
 
   def to_json_content(self):
     return {

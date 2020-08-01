@@ -230,7 +230,7 @@ class Image(feature.FeatureConnector):
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
     shape = tuple(value['shape'])
-    dtype = tf.dtypes.as_dtype(np.dtype(value['dtype']))
+    dtype = tf.dtypes.as_dtype(value['dtype'])
     encoding_format = value['encoding_format']
     return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
 

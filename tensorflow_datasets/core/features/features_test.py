@@ -255,7 +255,6 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
             'label': {
                 'type': 'ClassLabel',
                 'content': {
-                    'num_classes': 3,
                     'names': ['0', '1', '2']
                 }
             }

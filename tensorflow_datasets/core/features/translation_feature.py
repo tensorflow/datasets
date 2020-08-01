@@ -98,12 +98,13 @@ class Translation(features_dict.FeaturesDict):
     """List of languages."""
     return sorted(self.keys())
 
-  @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
-    pass  # TODO
-
-  def to_json(self):
-    pass  # TODO
+  def to_json_content(self):
+    # TODO: Fix this
+    return {
+        'languages': self.languages,
+        'encoder': None,
+        'encoder_config': None,
+    }
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -198,9 +199,6 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
         {"language": languages,
          "translation": translations})
 
-  @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
-    pass  # TODO
-
   def to_json_content(self):
-    pass  # TODO
+    # TODO: Fix this
+    return {'languages': self.languages}

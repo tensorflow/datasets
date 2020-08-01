@@ -183,13 +183,10 @@ class ClassLabel(feature.Tensor):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    pass
+    return cls(names=value['names'])
 
   def to_json_content(self):
-    return {
-        'num_classes': self.num_classes,
-        'names': self.names,
-    }
+    return {'names': self.names}
 
 
 def _get_names_filepath(data_dir, feature_name):

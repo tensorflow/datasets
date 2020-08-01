@@ -610,7 +610,7 @@ class Tensor(FeatureConnector):
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
     shape = tuple(value['shape'])
-    dtype = tf.dtypes.as_dtype(np.dtype(value['dtype']))
+    dtype = tf.dtypes.as_dtype(value['dtype'])
     return cls(shape=shape, dtype=dtype)
 
   def to_json_content(self):
