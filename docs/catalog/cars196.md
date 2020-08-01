@@ -12,6 +12,11 @@
 
 # `cars196`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The Cars dataset contains 16,185 images of 196 classes of cars. The data is
@@ -28,7 +33,9 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 *   **Versions**:
 
     *   **`2.0.0`** (default): No release notes.
-    *   `2.1.0`: No release notes.
+    *   `2.1.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `1.82 GiB`
 

@@ -38,11 +38,13 @@ summary: Patent abastract.
 
 *   **Versions**:
 
-    *   **`2.1.0`** (default)
+    *   **`2.1.1`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Fix update to cased raw strings.
-    *   `1.0.0`: No release notes.
-    *   `2.0.0`: No release notes.
+    *   `1.0.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        lower cased tokenized words
+    *   `2.0.0`: Update to use cased raw strings
 
 *   **Download size**: `9.45 GiB`
 

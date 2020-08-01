@@ -12,6 +12,11 @@
 
 # `food101`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This dataset consists of 101 food categories, with 101'000 images. For each
@@ -30,8 +35,12 @@ of 512 pixels.
 *   **Versions**:
 
     *   **`2.0.0`** (default): No release notes.
-    *   `1.0.0`: No release notes.
-    *   `2.1.0`: No release notes.
+    *   `1.0.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
+    *   `2.1.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `4.65 GiB`
 

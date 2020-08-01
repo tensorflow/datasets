@@ -12,6 +12,11 @@
 
 # `clevr`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
@@ -27,7 +32,9 @@ reasoning each question requires.
 *   **Versions**:
 
     *   **`3.1.0`** (default): Add question/answer text.
-    *   `3.0.0`: No release notes.
+    *   `3.0.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `17.72 GiB`
 

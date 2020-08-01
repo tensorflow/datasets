@@ -12,6 +12,11 @@
 
 # `kitti`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Kitti contains a suite of vision tasks built using an autonomous driving
@@ -31,7 +36,9 @@ the Kitti homepage.
 *   **Versions**:
 
     *   **`3.2.0`** (default): Devkit updated.
-    *   `3.1.0`: No release notes.
+    *   `3.1.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `11.71 GiB`
 
