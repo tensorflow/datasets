@@ -211,15 +211,11 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    if isinstance(value, list):
-      assert len(value) == 1
-      subclass = cls._REGISTERED_FEATURES.get(value[0]['type'])
-      return cls(subclass.from_json_content(value[0]['content']))
+    if value.get('arg', None) == 'feature':
+      subclass = cls._REGISTERED_FEATURES.get(value['type'])
+      return cls(subclass.from_json_content(value['content']))
     features = dict()
     for feature_key, feature_value in value.items():
-      if feature_key == 'type' and feature_value == 'Tensor':
-        subclass = cls._REGISTERED_FEATURES.get(feature_value)
-        return cls(subclass)
       subclass = cls._REGISTERED_FEATURES.get(feature_value['type'])
       features.update(
           {feature_key: subclass.from_json_content(feature_value['content'])})
@@ -228,8 +224,9 @@ class Sequence(top_level_feature.TopLevelFeature):
   def to_json_content(self):
     if isinstance(self.feature, features_dict.FeaturesDict):
       return {k: v.to_json() for k, v in self.feature.items()}
-    return [self.feature.to_json()]
-
+    value = self.feature.to_json()
+    value['arg'] = 'feature'
+    return value
 
 def _np_to_list(elem):
   """Returns list from list, tuple or ndarray."""
