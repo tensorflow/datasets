@@ -48,6 +48,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def webrtcvad(cls):
+    return _try_import("webrtcvad")
+
+  @utils.classproperty
+  @classmethod
   def crepe(cls):
     return _try_import("crepe")
 
