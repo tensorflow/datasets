@@ -39,27 +39,27 @@ _CITATION = """
 """
 
 _DESCRIPTION = """
-Bacteria identification based on genomic sequences holds the promise of early 
-detection of diseases, but requires a model that can output low confidence 
-predictions on out-of-distribution (OOD) genomic sequences from new bacteria 
+Bacteria identification based on genomic sequences holds the promise of early
+detection of diseases, but requires a model that can output low confidence
+predictions on out-of-distribution (OOD) genomic sequences from new bacteria
 that were not present in the training data.
 
-We introduce a genomics dataset for OOD detection that allows other researchers 
-to benchmark progress on this important problem. New bacterial classes are 
-gradually discovered over the years. Grouping classes by years is a natural way 
-to mimic the in-distribution and OOD examples. 
+We introduce a genomics dataset for OOD detection that allows other researchers
+to benchmark progress on this important problem. New bacterial classes are
+gradually discovered over the years. Grouping classes by years is a natural way
+to mimic the in-distribution and OOD examples.
 
-The dataset contains genomic sequences sampled from 10 bacteria classes that 
-were discovered before the year 2011 as in-distribution classes, 60 bacteria 
-classes discovered between 2011-2016 as OOD for validation, and another 60 
-different bacteria classes discovered after 2016 as OOD for test, in total 130 
+The dataset contains genomic sequences sampled from 10 bacteria classes that
+were discovered before the year 2011 as in-distribution classes, 60 bacteria
+classes discovered between 2011-2016 as OOD for validation, and another 60
+different bacteria classes discovered after 2016 as OOD for test, in total 130
 bacteria classes. Note that training, validation, and test data are provided for
-the in-distribution classes, and validation and test data are proviede for OOD 
+the in-distribution classes, and validation and test data are proviede for OOD
 classes. By its nature, OOD data is not available at the training time.
 
-The genomic sequence is 250 long, composed by characters of {A, C, G, T}. The 
-sample size of each class is 100,000 in the training and 10,000 for the 
-validation and test sets. 
+The genomic sequence is 250 long, composed by characters of {A, C, G, T}. The
+sample size of each class is 100,000 in the training and 10,000 for the
+validation and test sets.
 
 For each example, the features include:
   seq: the input DNA sequence composed by {A, C, G, T}.
@@ -71,7 +71,7 @@ For each example, the features include:
 The details of the dataset can be found in the paper supplemental.
 """
 
-_DATA_URL = 'gs://tfds-data/downloads/genomics_ood/genomics_ood.zip'
+_DATA_URL = tfds.core.gcs_path('downloads/genomics_ood/genomics_ood.zip')
 
 _LABELS_IN = [
     'Bacillus', 'Burkholderia', 'Clostridium', 'Escherichia', 'Mycobacterium',
