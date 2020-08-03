@@ -54,15 +54,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   _DEV_FILE = "dev-v1.1.json"
   _TRAINING_FILE = "train-v1.1.json"
 
-  BUILDER_CONFIGS = [
-      SquadConfig(
-          name="plain_text",
-          version=tfds.core.Version(
-              "1.0.0",
-              "New split API (https://tensorflow.org/datasets/splits)"),
-          description="Plain text",
-      ),
-  ]
+  VERSION = tfds.core.Version("1.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(

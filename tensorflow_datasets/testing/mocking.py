@@ -165,8 +165,6 @@ class RandomFakeGenerator(object):
     ]
     if isinstance(feature, features_lib.ClassLabel):
       max_value = feature.num_classes
-    elif isinstance(feature, features_lib.Text) and feature.vocab_size:
-      max_value = feature.vocab_size
     else:
       max_value = 255
 

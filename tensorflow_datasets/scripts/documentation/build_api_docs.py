@@ -40,8 +40,6 @@ flags.DEFINE_bool("search_hints", True,
 flags.DEFINE_string("site_path", "datasets/api_docs/python",
                     "Path prefix in the _toc.yaml")
 
-MOVES = [("tfds/features/text.md", "tfds/features/text_lib.md")]
-
 
 def execute(output_dir, code_url_prefix, search_hints, site_path):
   """Builds API docs for tensorflow_datasets."""
@@ -58,25 +56,9 @@ def execute(output_dir, code_url_prefix, search_hints, site_path):
 
   doc_generator.build(output_dir)
 
-  new_redirects = []
-  for before, after in MOVES:
-    old_path = os.path.join(output_dir, before)
-    new_path = os.path.join(output_dir, after)
-    os.rename(old_path, new_path)
-
-    new_redirects.append({
-        "from":
-            os.path.join("/datasets/api_docs/python/",
-                         os.path.splitext(before)[0]),
-        "to":
-            os.path.join("/datasets/api_docs/python/",
-                         os.path.splitext(after)[0])
-    })
-
   redirect_path = os.path.join(output_dir, "_redirects.yaml")
   with open(redirect_path) as f:
     redirect_content = yaml.load(f)
-  redirect_content["redirects"].extend(new_redirects)
   with open(redirect_path, "w") as f:
     yaml.dump(redirect_content, f, default_flow_style=False)
 

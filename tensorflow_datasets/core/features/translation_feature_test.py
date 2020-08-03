@@ -19,7 +19,6 @@
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.features.text import text_encoder
 
 tf.enable_v2_behavior()
 
@@ -46,46 +45,6 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
                 value={"en": EN_HELLO, "zh": ZH_HELLO},
                 expected={"en": tf.compat.as_bytes(EN_HELLO),
                           "zh": tf.compat.as_bytes(ZH_HELLO)}
-            ),
-        ],
-    )
-
-  def test_translation_encoded(self):
-    # Unicode integer-encoded by byte
-    self.assertFeature(
-        feature=features.Translation(
-            languages=["en", "zh"],
-            encoder=text_encoder.ByteTextEncoder()),
-        shape={"en": (None,), "zh": (None,)},
-        dtype={"en": tf.int64, "zh": tf.int64},
-        tests=[
-            testing.FeatureExpectationItem(
-                value={"en": EN_HELLO, "zh": ZH_HELLO},
-                expected={
-                    # Incremented for pad
-                    "en": [i + 1 for i in [104, 101, 108, 108, 111, 32]],
-                    "zh": [i + 1 for i in [228, 189, 160, 229, 165, 189, 32]]
-                },
-            ),
-        ],
-    )
-
-  def test_translation_multiple_encoders(self):
-    # Unicode integer-encoded by byte
-    self.assertFeature(
-        feature=features.Translation(
-            languages=["en", "zh"],
-            encoder=[text_encoder.TokenTextEncoder(["hello", " "]),
-                     text_encoder.ByteTextEncoder()]),
-        shape={"en": (None,), "zh": (None,)},
-        dtype={"en": tf.int64, "zh": tf.int64},
-        tests=[
-            testing.FeatureExpectationItem(
-                value={"en": EN_HELLO, "zh": ZH_HELLO},
-                expected={
-                    "en": [1],
-                    "zh": [i + 1 for i in [228, 189, 160, 229, 165, 189, 32]]
-                },
             ),
         ],
     )

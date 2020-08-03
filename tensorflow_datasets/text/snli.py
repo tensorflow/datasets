@@ -43,15 +43,8 @@ _DATA_URL = 'https://nlp.stanford.edu/projects/snli/snli_1.0.zip'
 
 class Snli(tfds.core.GeneratorBasedBuilder):
   """The Stanford Natural Language Inference (SNLI) Corpus."""
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version(
-              '1.0.0',
-              'New split API (https://tensorflow.org/datasets/splits)'),
-          description='Plain text import of SNLI',
-      )
-  ]
+
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
