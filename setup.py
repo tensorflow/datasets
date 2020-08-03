@@ -122,6 +122,7 @@ DATASET_EXTRAS = {
     'aflw2k3d': ['scipy'],
     'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
+    'coco': ['pycocotools @ git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
     'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
