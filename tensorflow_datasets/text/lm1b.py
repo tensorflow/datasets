@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """The Language Model 1 Billion dataset."""
+
 import os
 
 from absl import logging
@@ -58,6 +59,27 @@ _HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
                                     "news.en.heldout-*")
 
 
+class Lm1bConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for Lm1b."""
+
+  def __init__(self, *, text_encoder_config=None, **kwargs):
+    """BuilderConfig for Lm1b.
+
+    Args:
+      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
+        for the `tfds.features.text.TextEncoder` used for the Lm1b `"text"`
+        feature.
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(Lm1bConfig, self).__init__(
+        version=tfds.core.Version(
+            "1.0.0",
+            "New split API (https://tensorflow.org/datasets/splits)"),
+        **kwargs)
+    self.text_encoder_config = (
+        text_encoder_config or tfds.features.text.TextEncoderConfig())
+
+
 def _train_data_filenames(tmp_dir):
   return tf.io.gfile.glob(os.path.join(tmp_dir, _TRAIN_FILE_FORMAT))
 
@@ -68,26 +90,64 @@ def _test_data_filenames(tmp_dir):
 
 class Lm1b(tfds.core.GeneratorBasedBuilder):
   """1 Billion Word Language Model Benchmark dataset."""
-
-  VERSION = tfds.core.Version("1.1.0")
+  BUILDER_CONFIGS = [
+      Lm1bConfig(
+          name="plain_text",
+          description="Plain text",
+      ),
+      Lm1bConfig(
+          name="bytes",
+          description=("Uses byte-level text encoding with "
+                       "`tfds.features.text.ByteTextEncoder`"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder=tfds.features.text.ByteTextEncoder()),
+      ),
+      Lm1bConfig(
+          name="subwords8k",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+                       "vocab size"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**13),
+      ),
+      Lm1bConfig(
+          name="subwords32k",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+                       "32k vocab size"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**15),
+      ),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "text": tfds.features.Text(),
+            "text":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
         }),
         supervised_keys=("text", "text"),
         homepage="http://www.statmt.org/lm-benchmark/",
         citation=_CITATION,
     )
 
+  def _vocab_text_gen(self, training_files):
+    for _, ex in self._generate_examples(training_files):
+      yield ex["text"]
+
   def _split_generators(self, dl_manager):
     lm1b_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
 
     train_files = _train_data_filenames(lm1b_path)
     test_files = _test_data_filenames(lm1b_path)
+
+    # Generate vocabulary from training data if SubwordTextEncoder configured
+    self.info.features["text"].maybe_build_from_corpus(
+        self._vocab_text_gen(train_files))
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
