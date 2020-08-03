@@ -82,7 +82,7 @@ class BigPatentConfig(tfds.core.BuilderConfig):
         # 1.0.0 lower cased tokenized words.
         # 2.0.0 cased raw strings.
         # 2.1.0 cased raw strings (fixed).
-        version=tfds.core.Version("2.1.1", "Fix update to cased raw strings."),
+        version=tfds.core.Version("2.1.2", "Fix update to cased raw strings."),
         supported_versions=[
             tfds.core.Version("1.0.0", "lower cased tokenized words"),
             tfds.core.Version("2.0.0", "Update to use cased raw strings")
