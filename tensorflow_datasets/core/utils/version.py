@@ -85,6 +85,9 @@ class Version(object):
   def __str__(self):
     return "{}.{}.{}".format(*self.tuple)
 
+  def __repr__(self) -> str:
+    return f"{type(self).__name__}(\'{str(self)}\')"
+
   @property
   def tuple(self):
     return self.major, self.minor, self.patch

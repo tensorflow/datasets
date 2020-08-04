@@ -35,6 +35,7 @@ class VersionTest(testing.TestCase):
     v = version.Version('1.3.534')
     self.assertEqual((v.major, v.minor, v.patch), (1, 3, 534))
     self.assertEqual(str(v), '1.3.534')
+    self.assertEqual(repr(v), "Version('1.3.534')")
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('1.3.-534')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
