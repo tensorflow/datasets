@@ -79,14 +79,14 @@ class YelpPolarityReviewsConfig(tfds.core.BuilderConfig):
     """BuilderConfig for YelpPolarityReviews.
 
     Args:
-        text_encoder_config: `tfds.features.text.TextEncoderConfig`,
-          configuration for the `tfds.features.text.TextEncoder` used for the
+        text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+          configuration for the `tfds.deprecated.text.TextEncoder` used for the
           Yelp `"text"` feature.
         **kwargs: keyword arguments forwarded to super.
     """
     super(YelpPolarityReviewsConfig, self).__init__(**kwargs)
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
@@ -101,26 +101,26 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
           name="bytes",
           version="0.1.0",
           description=("Uses byte-level text encoding with "
-                       "`tfds.features.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
+                       "`tfds.deprecated.text.ByteTextEncoder`"),
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder=tfds.deprecated.text.ByteTextEncoder()),
       ),
       YelpPolarityReviewsConfig(
           name="subwords8k",
           version="0.1.0",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               vocab_size=2**13),
       ),
       YelpPolarityReviewsConfig(
           name="subwords32k",
           version="0.1.0",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with "
                        "32k vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               vocab_size=2**15),
       ),
   ]

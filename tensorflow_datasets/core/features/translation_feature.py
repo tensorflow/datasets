@@ -68,12 +68,12 @@ class Translation(features_dict.FeaturesDict):
 
     Args:
       languages: `list<string>` Full list of languages codes.
-      encoder: `tfds.features.text.TextEncoder` or
-        list<tfds.features.text.TextEncoder> (optional), an encoder that can
+      encoder: `tfds.deprecated.text.TextEncoder` or
+        list<tfds.deprecated.text.TextEncoder> (optional), an encoder that can
         convert text to integer. One can be shared one per language provided. If
         None, the text will be utf-8 byte-encoded.
-      encoder_config: `tfds.features.text.TextEncoderConfig` or
-        `list<tfds.features.text.TextEncoderConfig>` (optional), needed
+      encoder_config: `tfds.deprecated.text.TextEncoderConfig` or
+        `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed
         if restoring from a file with `load_metadata`. One config can be shared
         or one per language can be provided.
     """

@@ -59,13 +59,14 @@ class MultiNLIMismatchConfig(tfds.core.BuilderConfig):
     """BuilderConfig for MultiNLI Mismatch.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        features feature.
       **kwargs: keyword arguments forwarded to super.
     """
     super(MultiNLIMismatchConfig, self).__init__(**kwargs)
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):

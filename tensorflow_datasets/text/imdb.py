@@ -52,9 +52,9 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
     """BuilderConfig for IMDBReviews.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the IMDB `"text"`
-        feature.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        IMDB `"text"` feature.
       **kwargs: keyword arguments forwarded to super.
     """
     super(IMDBReviewsConfig, self).__init__(
@@ -63,7 +63,7 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
             "New split API (https://tensorflow.org/datasets/splits)"),
         **kwargs)
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 class IMDBReviews(tfds.core.GeneratorBasedBuilder):
@@ -76,24 +76,24 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       IMDBReviewsConfig(
           name="bytes",
           description=("Uses byte-level text encoding with "
-                       "`tfds.features.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
+                       "`tfds.deprecated.text.ByteTextEncoder`"),
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder=tfds.deprecated.text.ByteTextEncoder()),
       ),
       IMDBReviewsConfig(
           name="subwords8k",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               vocab_size=2**13),
       ),
       IMDBReviewsConfig(
           name="subwords32k",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with "
                        "32k vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               vocab_size=2**15),
       ),
   ]

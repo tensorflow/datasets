@@ -35,9 +35,9 @@ class Text(feature.Tensor):
     """Constructs a Text FeatureConnector.
 
     Args:
-      encoder: `tfds.features.text.TextEncoder`, an encoder that can convert
+      encoder: `tfds.deprecated.text.TextEncoder`, an encoder that can convert
         text to integers. If None, the text will be utf-8 byte-encoded.
-      encoder_config: `tfds.features.text.TextEncoderConfig`, needed if
+      encoder_config: `tfds.deprecated.text.TextEncoderConfig`, needed if
         restoring from a file with `load_metadata`.
     """
     if encoder and encoder_config:

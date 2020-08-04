@@ -39,8 +39,9 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "password":
-                tfds.features.Text(encoder=tfds.features.text.ByteTextEncoder()
-                                  ),
+                tfds.features.Text(
+                    encoder=tfds.deprecated.text.ByteTextEncoder()
+                ),
         }),
         supervised_keys=None,
         homepage="https://wiki.skullsecurity.org/Passwords",

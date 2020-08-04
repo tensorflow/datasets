@@ -15,6 +15,8 @@
 
 """Public API of tfds, without the registered dataset."""
 
+import types
+
 # pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
 from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
@@ -48,11 +50,15 @@ with core.registered.skip_registration():
   # (e.g. DummyMnist,...).
   from tensorflow_datasets import testing
 
+deprecated = types.ModuleType("deprecated")
+deprecated.text = features.text
+
 
 __all__ = [
     "as_dataframe",
     "as_numpy",
     "core",
+    "deprecated",
     "folder_dataset",
     "builder",
     "builder_cls",

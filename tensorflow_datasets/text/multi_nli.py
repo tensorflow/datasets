@@ -57,8 +57,9 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
     """BuilderConfig for MultiNLI.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        features feature.
       **kwargs: keyword arguments forwarded to super.
     """
     super(MultiNLIConfig, self).__init__(
@@ -66,7 +67,7 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
             "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
         **kwargs)
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 class MultiNLI(tfds.core.GeneratorBasedBuilder):
