@@ -17,6 +17,10 @@
 
 from typing import Dict, List, Tuple, TypeVar, Union
 
+import tensorflow as tf
+
 T = TypeVar('T')
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
 Tree = Union[T, List['Tree'], Tuple['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
+
+Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
