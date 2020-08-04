@@ -38,7 +38,7 @@ summary: Patent abastract.
 
 *   **Versions**:
 
-    *   **`2.1.1`** (default)
+    *   **`2.1.2`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Fix update to cased raw strings.
     *   `1.0.0`
@@ -47,6 +47,10 @@ summary: Patent abastract.
     *   `2.0.0`: Update to use cased raw strings
 
 *   **Download size**: `9.45 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -82,11 +86,7 @@ FeaturesDict({
 
 *   **Config description**: Patents under all categories.
 
-*   **Dataset size**: `24.22 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `35.17 GiB`
 
 *   **Splits**:
 
@@ -101,11 +101,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)a: Human Necessities
 
-*   **Dataset size**: `3.45 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `5.16 GiB`
 
 *   **Splits**:
 
@@ -120,11 +116,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)b: Performing Operations; Transporting
 
-*   **Dataset size**: `2.67 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `4.06 GiB`
 
 *   **Splits**:
 
@@ -139,11 +131,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)c: Chemistry; Metallurgy
 
-*   **Dataset size**: `2.74 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `3.63 GiB`
 
 *   **Splits**:
 
@@ -158,11 +146,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)d: Textiles; Paper
 
-*   **Dataset size**: `170.08 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation, test), Only when `shuffle_files=False` (train)
+*   **Dataset size**: `255.56 MiB`
 
 *   **Splits**:
 
@@ -177,11 +161,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)e: Fixed Constructions
 
-*   **Dataset size**: `568.03 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `871.40 MiB`
 
 *   **Splits**:
 
@@ -196,11 +176,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons; Blasting
 
-*   **Dataset size**: `1.35 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `2.06 GiB`
 
 *   **Splits**:
 
@@ -215,11 +191,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)g: Physics
 
-*   **Dataset size**: `5.78 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `8.19 GiB`
 
 *   **Splits**:
 
@@ -234,11 +206,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)h: Electricity
 
-*   **Dataset size**: `5.17 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `7.50 GiB`
 
 *   **Splits**:
 
@@ -253,11 +221,7 @@ Split          | Examples
 *   **Config description**: Patents under Cooperative Patent Classification
     (CPC)y: General tagging of new or cross-sectional technology
 
-*   **Dataset size**: `2.35 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Dataset size**: `3.46 GiB`
 
 *   **Splits**:
 
