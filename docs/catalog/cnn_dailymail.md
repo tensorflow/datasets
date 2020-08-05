@@ -109,7 +109,7 @@ FeaturesDict({
 ## cnn_dailymail/bytes
 
 *   **Config description**: Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+    `tfds.deprecated.text.ByteTextEncoder`
 
 *   **Dataset size**: `1.28 GiB`
 
@@ -124,7 +124,7 @@ FeaturesDict({
 
 ## cnn_dailymail/subwords32k
 
-*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
+*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     32k vocab size
 
 *   **Dataset size**: `490.99 MiB`
