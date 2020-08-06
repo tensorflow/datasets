@@ -72,6 +72,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=[],
             ),
         ],
+        skip_feature_tests = True
     )
 
   def test_text_conversion(self):

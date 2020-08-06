@@ -82,18 +82,22 @@ class Translation(features_dict.FeaturesDict):
     self._encoder = encoder
     self._encoder_config = encoder_config
     if not isinstance(encoder, collections_abc.Iterable):
-      self._encoder = [self._encoder] * len(languages)
+      encoder = [encoder] * len(languages)
     if not isinstance(encoder_config, collections_abc.Iterable):
-      self._encoder_config = [self._encoder_config] * len(languages)
+      encoder_config = [encoder_config] * len(languages)
 
     super(Translation, self).__init__(
         {lang: text_feature.Text(enc, enc_conf) for lang, enc, enc_conf in zip(
-            languages, self._encoder, self._encoder_config)})
+            languages, encoder, encoder_config)})
 
   @property
   def languages(self):
     """List of languages."""
     return sorted(self.keys())
+
+  @classmethod
+  def from_json_content(cls, value) -> 'FeatureConnector':
+    return cls(**value)
 
   def to_json_content(self):
     if self._encoder or self._encoder_config:
@@ -197,6 +201,5 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
   def from_json_content(cls, values) -> 'FeatureConnector':
     return cls(**values)
 
-   
   def to_json_content(self):
     return {'languages': self._languages}

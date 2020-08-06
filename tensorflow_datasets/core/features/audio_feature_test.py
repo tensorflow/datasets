@@ -45,6 +45,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_audio,
             ),
         ],
+        _file_format=None,
+        sample_rate=None,
     )
 
   def test_numpy_array_float(self):
@@ -84,6 +86,8 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_audio,
             ),
         ],
+        _file_format="wav",
+        sample_rate=None,
     )
 
   def test_file_object(self):

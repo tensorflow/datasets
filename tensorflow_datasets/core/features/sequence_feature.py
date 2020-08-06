@@ -88,6 +88,7 @@ class Sequence(top_level_feature.TopLevelFeature):
     # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
+    self._kwargs = kwargs
     super(Sequence, self).__init__(**kwargs)
 
   @property
@@ -206,22 +207,28 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    if value.get('arg', None) == 'feature':
+    length = value.pop('length')
+    if value.get('arg_', None) == 'feature':
       subclass = cls._REGISTERED_FEATURES.get(value['type'])
-      return cls(subclass.from_json_content(value['content']))
+      return cls(subclass.from_json_content(value['content']), length)
     features = dict()
-    for feature_key, feature_value in value.items():
-      subclass = cls._REGISTERED_FEATURES.get(feature_value['type'])
-      features.update(
-          {feature_key: subclass.from_json_content(feature_value['content'])})
-    return cls(features)
+    kwargs = dict()
+    for key, value in value.items():
+      subclass = cls._REGISTERED_FEATURES.get(value['type'], None)
+      if subclass:
+        features.update(
+            {key: subclass.from_json_content(value['content'])})
+      else:
+        kwargs.update({key: value})
+    return cls(features, length, **kwargs)
 
   def to_json_content(self):
     if isinstance(self.feature, features_dict.FeaturesDict):
-      return {k: v.to_json() for k, v in self.feature.items()}
-    value = self.feature.to_json()
-    value['arg'] = 'feature'
-    return value
+      value = {k: v.to_json() for k, v in self.feature.items()}
+    else:
+      value = self.feature.to_json()
+      value['arg_'] = 'feature'
+    return {'length': self._length, ** value, **self._kwargs}
 
 def _np_to_list(elem):
   """Returns list from list, tuple or ndarray."""

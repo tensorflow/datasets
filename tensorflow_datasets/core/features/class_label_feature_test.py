@@ -48,7 +48,9 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
                 raise_cls=ValueError,
                 raise_msg='Invalid',
             ),
-        ]
+        ],
+        num_classes=10,
+        names=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
     )
 
   def test_labels(self):
@@ -70,7 +72,9 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
                 value='right',
                 expected=1,
             ),
-        ]
+        ],
+        num_classes=2,
+        names=['left', 'right'],
     )
 
   def test_num_classes(self):
