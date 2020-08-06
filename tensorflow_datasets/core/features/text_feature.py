@@ -176,13 +176,10 @@ class Text(feature.Tensor):
     return ex
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
-    # TODO: Fix this
+  def from_json_content(cls, _) -> 'FeatureConnector':
     return cls()
 
   def to_json_content(self):
-    # TODO: Fix this
-    return {
-        'encoder': self._encoder.to_json(),
-        'encoder_config': self._encoder_config.to_json(),
-    }
+    if self._encoder or self._encoder_config:
+      raise ValueError('Encoder and Encoder Config should None')
+    return dict()

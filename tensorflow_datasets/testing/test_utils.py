@@ -319,7 +319,7 @@ class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
   @run_in_graph_and_eager_modes()
-  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
+  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None, **kwargs):
     """Test the given feature against the predicates."""
 
     # Check the shape/dtype
@@ -327,8 +327,12 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
       self.assertEqual(feature.dtype, dtype)
-    with self._subTest('feature_round_trip'):
-      self._assert_feature(feature)
+    if kwargs:
+      with self._subTest('feature'):
+        self._assert_feature(feature, **kwargs)
+      with self._subTest('feature_roundtrip'):
+        new_feature = feature.from_json_content(feature.to_json_content())
+        self._assert_feature(new_feature, **kwargs)
 
     # Check the serialized features
     if serialized_info is not None:
@@ -352,9 +356,8 @@ class FeatureExpectationsTestCase(SubTestCase):
             dtype=dtype,
         )
 
-  def _assert_feature(self, feature):
-    new_feature = feature.from_json_content(feature.to_json_content())
-    self.assertEqual(repr(feature), repr(new_feature))
+  def _assert_feature(self, feature, **kwargs):
+    pass
 
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
     """Test that encode=>decoding of a value works correctly."""

@@ -79,14 +79,16 @@ class Translation(features_dict.FeaturesDict):
     """
     # If encoder and encoder_config aren't lists, use the same values for all
     # languages.
+    self._encoder = encoder
+    self._encoder_config = encoder_config
     if not isinstance(encoder, collections_abc.Iterable):
-      encoder = [encoder] * len(languages)
+      self._encoder = [self._encoder] * len(languages)
     if not isinstance(encoder_config, collections_abc.Iterable):
-      encoder_config = [encoder_config] * len(languages)
+      self._encoder_config = [self._encoder_config] * len(languages)
 
     super(Translation, self).__init__(
         {lang: text_feature.Text(enc, enc_conf) for lang, enc, enc_conf in zip(
-            languages, encoder, encoder_config)})
+            languages, self._encoder, self._encoder_config)})
 
   @property
   def languages(self):
@@ -94,12 +96,9 @@ class Translation(features_dict.FeaturesDict):
     return sorted(self.keys())
 
   def to_json_content(self):
-    # TODO: Fix this
-    return {
-        'languages': self.languages,
-        'encoder': None,
-        'encoder_config': None,
-    }
+    if self._encoder or self._encoder_config:
+      raise ValueError('Encoder and Encoder Config should None')
+    return {'languages': self.languages}
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -194,6 +193,10 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
         {"language": languages,
          "translation": translations})
 
+  @classmethod
+  def from_json_content(cls, values) -> 'FeatureConnector':
+    return cls(**values)
+
+   
   def to_json_content(self):
-    # TODO: Fix this
-    return {'languages': self.languages}
+    return {'languages': self._languages}

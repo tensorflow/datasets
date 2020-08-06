@@ -53,7 +53,6 @@ from google.protobuf import json_format
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
-FEATURE_INFO_FILENAME = "feature_info.json"
 LICENSE_FILENAME = "LICENSE"
 
 INFO_STR = """tfds.core.DatasetInfo(
@@ -279,9 +278,6 @@ class DatasetInfo(object):
   def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
-  def _feature_info_path(self, dataset_info_dir):
-    return os.path.join(dataset_info_dir, FEATURE_INFO_FILENAME)
-
   def compute_dynamic_properties(self):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
@@ -326,7 +322,6 @@ class DatasetInfo(object):
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
-      self.features.save_config(self._feature_info_path(dataset_info_dir))
 
     # Save any additional metadata
     if self.metadata is not None:
