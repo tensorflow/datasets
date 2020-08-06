@@ -61,6 +61,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 raise_msg='Input sequence length do not match',
             ),
         ],
+        _length=3
     )
 
   def test_label(self):
@@ -90,6 +91,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 expected={'label': []},
             ),
         ],
+        _length=None
     )
 
   def test_nested(self):

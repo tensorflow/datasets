@@ -378,11 +378,7 @@ class FeatureExpectationsTestCase(SubTestCase):
 
     if not skip_feature_tests:
       for key, value in kwargs.items():
-        if isinstance(value, features.FeatureConnector):
-          # When `value` is instance of `FeatureDict`, `Sequence`, etc.
-          self.assertEqual(str(getattr(feature, key)), str(value))
-        else:
-          self.assertEqual(getattr(feature, key), value)
+        self.assertEqual(getattr(feature, key), value)
 
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
     """Test that encode=>decoding of a value works correctly."""
