@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Imagenet datasets."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import os
@@ -128,10 +123,9 @@ PNG_IMAGES = ['n02105855_2933.JPEG']
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version(
-      '5.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+  VERSION = tfds.core.Version('5.1.0', 'Added test split.')
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('5.1.0'),
+      tfds.core.Version('5.0.0'),
   ]
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\

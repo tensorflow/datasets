@@ -13,25 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """ClassLabel feature."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
 
 
 class ClassLabel(feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, num_classes=None, names=None, names_file=None):
+  def __init__(self, *, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
 
     There are 3 ways to define a ClassLabel, which correspond to the 3

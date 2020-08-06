@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Download manager interface."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import concurrent.futures
 import hashlib
@@ -31,7 +26,6 @@ import promise
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
@@ -168,9 +162,9 @@ class DownloadManager(object):
   ...), you can pass a `tfds.download.Resource` as argument.
   """
 
-  @api_utils.disallow_positional_args
   def __init__(
       self,
+      *,
       download_dir: str,
       extract_dir: Optional[str] = None,
       manual_dir: Optional[str] = None,
@@ -638,12 +632,8 @@ def _read_url_info(url_path: str) -> checksums.UrlInfo:
   return checksums.UrlInfo(**file_info['url_info'])
 
 
-def _wait_on_promise(p):
-  return p.get()
-
-
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
-  res = tf.nest.map_structure(_wait_on_promise, all_promises)
+  res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
   return res

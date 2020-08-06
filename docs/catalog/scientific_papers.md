@@ -12,6 +12,11 @@
 
 # `scientific_papers`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Scientific papers datasets contains two sets of long and structured documents.
@@ -32,7 +37,9 @@ Both "arxiv" and "pubmed" have two features:
 *   **Versions**:
 
     *   **`1.1.1`** (default): No release notes.
-    *   `1.1.0`: No release notes.
+    *   `1.1.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `4.20 GiB`
 

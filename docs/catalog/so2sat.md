@@ -12,6 +12,11 @@
 
 # `so2sat`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 So2Sat LCZ42 is a dataset consisting of co-registered synthetic aperture radar
@@ -37,7 +42,9 @@ http://creativecommons.org/licenses/by/4.0
 
     *   **`2.1.0`** (default): Using updated optical channels calibration
         factor.
-    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   `2.0.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `Unknown size`
 

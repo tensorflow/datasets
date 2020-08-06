@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Stable hashing function using md5.
 
 Note that the properties we are looking at here are:
@@ -45,10 +44,6 @@ same hash (collision), a solution could be to append the key to its hash.
 The split name is being used as salt to avoid having the same keys in two splits
 result in same order.
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import hashlib
 from typing import Union

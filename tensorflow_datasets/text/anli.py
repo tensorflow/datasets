@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Commonsense Explanations (CoS-E) Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -55,8 +50,7 @@ VERSION = tfds.core.Version("0.1.0")
 class AnliConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Anli."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, round_dir=None, **kwargs):
+  def __init__(self, *, round_dir=None, **kwargs):
     """BuilderConfig for Anli.
 
     Args:

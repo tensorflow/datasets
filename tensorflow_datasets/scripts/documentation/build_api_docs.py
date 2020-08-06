@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """generates api_docs for tensorflow_datasets."""
 import os
 
@@ -62,6 +61,8 @@ def execute(output_dir, code_url_prefix, search_hints, site_path):
   new_redirects = []
   for before, after in MOVES:
     old_path = os.path.join(output_dir, before)
+    if not os.path.exists(old_path):
+      continue
     new_path = os.path.join(output_dir, after)
     os.rename(old_path, new_path)
 

@@ -160,6 +160,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`forest_fires`](forest_fires.md)
+*   [`genomics_ood`](genomics_ood.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`german_credit_numeric`](german_credit_numeric.md)
 *   [`higgs`](higgs.md)
 *   [`iris`](iris.md)
@@ -192,6 +194,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Text`
 
+*   [`ag_news_subset`](ag_news_subset.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`anli`](anli.md)
 *   [`blimp`](blimp.md)
 *   [`c4`](c4.md)
@@ -215,6 +219,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
 *   [`openbookqa`](openbookqa.md)
+*   [`paws_wiki`](paws_wiki.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`pg19`](pg19.md)
 *   [`qa4mre`](qa4mre.md)
 *   [`reddit_disentanglement`](reddit_disentanglement.md)

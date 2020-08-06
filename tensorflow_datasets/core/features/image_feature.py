@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Image feature."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -27,7 +22,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
@@ -86,8 +80,7 @@ class Image(feature.FeatureConnector):
     ```
   """
 
-  @api_utils.disallow_positional_args
-  def __init__(self, shape=None, dtype=None, encoding_format=None):
+  def __init__(self, *, shape=None, dtype=None, encoding_format=None):
     """Construct the connector.
 
     Args:

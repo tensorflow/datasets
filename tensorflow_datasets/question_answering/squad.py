@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """SQUAD: The Stanford Question Answering Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -51,15 +46,6 @@ from the corresponding reading passage, or the question might be unanswerable.
 
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
-
-  @tfds.core.disallow_positional_args
-  def __init__(self, **kwargs):
-    """BuilderConfig for SQUAD.
-
-    Args:
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(SquadConfig, self).__init__(**kwargs)
 
 
 class Squad(tfds.core.GeneratorBasedBuilder):

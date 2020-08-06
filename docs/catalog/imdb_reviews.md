@@ -86,7 +86,7 @@ FeaturesDict({
 ## imdb_reviews/bytes
 
 *   **Config description**: Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+    `tfds.deprecated.text.ByteTextEncoder`
 
 *   **Features**:
 
@@ -99,8 +99,8 @@ FeaturesDict({
 
 ## imdb_reviews/subwords8k
 
-*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with 8k
-    vocab size
+*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
+    8k vocab size
 
 *   **Features**:
 
@@ -113,7 +113,7 @@ FeaturesDict({
 
 ## imdb_reviews/subwords32k
 
-*   **Config description**: Uses `tfds.features.text.SubwordTextEncoder` with
+*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     32k vocab size
 
 *   **Features**:

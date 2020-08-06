@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """The ImageNet-v2 image classification dataset."""
 import os
 import tensorflow.compat.v2 as tf
@@ -66,8 +65,7 @@ _IMAGENET_LABELS_FILENAME = r'image_classification/imagenet2012_labels.txt'
 class ImagenetV2Config(tfds.core.BuilderConfig):
   """"Configuration specifying the variant to use."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, variant, **kwargs):
+  def __init__(self, *, variant, **kwargs):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes in three different variants. Please refer to the paper

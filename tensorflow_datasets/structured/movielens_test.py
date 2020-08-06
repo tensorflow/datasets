@@ -15,10 +15,6 @@
 
 """Test for MovieLens dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured import movielens
 

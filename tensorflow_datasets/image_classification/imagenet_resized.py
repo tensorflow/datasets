@@ -13,16 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Resized imagenet to 8x8, 16x16, 32x32.
 
 This is not to be confused with `downsampled_imagenet` which is a unsupervised
 dataset used for generative modeling.
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import io
 import itertools

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 r"""Replace all images in the fake directory by more compressed version.
 
 This allow to reduce size of the images in the `fake_data/` directory.

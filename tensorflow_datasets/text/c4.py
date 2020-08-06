@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """C4 dataset based on Common Crawl."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -76,8 +71,8 @@ _DEFAULT_WEBTEXTLIKE_CC_VERSIONS = (  # August 2018 - July 2019
 class C4Config(tfds.core.BuilderConfig):
   """BuilderConfig for C4 dataset."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                language,
                cc_versions=None,
                clean=True,

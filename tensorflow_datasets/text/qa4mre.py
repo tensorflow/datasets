@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """QA4MRE (CLEF 2011/2012/2013): a reading comprehension dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import xml.etree.ElementTree as ET
@@ -143,8 +138,7 @@ def _get_question(topic_id, topic_name, test_id, document_id, document_str,
 class Qa4mreConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Qa4mre."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, year, track='main', language='EN', **kwargs):
+  def __init__(self, *, year, track='main', language='EN', **kwargs):
     """BuilderConfig for Qa4Mre.
 
     Args:

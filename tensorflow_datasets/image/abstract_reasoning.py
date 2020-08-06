@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """AbstractReasoning data set."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import random
@@ -132,8 +127,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, split_type="neutral", **kwargs):
+  def __init__(self, *, split_type="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
     Args:

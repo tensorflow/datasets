@@ -13,11 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Structured datasets."""
 
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
 from tensorflow_datasets.structured.forest_fires import ForestFires
+from tensorflow_datasets.structured.genomics_ood import GenomicsOod
 from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNumeric
 from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.iris import Iris

@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Audio feature."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import struct
 import wave
@@ -27,7 +22,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
@@ -36,9 +30,9 @@ from tensorflow_datasets.core.features import feature
 class Audio(feature.Tensor):
   """`FeatureConnector` for audio, encoded as raw integer wave form."""
 
-  @api_utils.disallow_positional_args
   def __init__(
       self,
+      *,
       file_format=None,
       shape=(None,),
       dtype=tf.int64,

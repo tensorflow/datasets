@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """ARC dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -50,8 +45,7 @@ _BASE_URL = "https://github.com/fchollet/ARC/"
 class ARCConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ARC."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, version, commit, **kwargs):
+  def __init__(self, *, version, commit, **kwargs):
     """BuilderConfig for ARC.
 
     Args:

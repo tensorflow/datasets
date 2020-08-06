@@ -4,13 +4,18 @@
   </div>
 
   <meta itemprop="name" content="kitti" />
-  <meta itemprop="description" content="Kitti contains a suite of vision tasks built using an autonomous driving&#10;platform. The full benchmark contains many tasks such as stereo, optical flow,&#10;visual odometry, etc. This dataset contains the object detection dataset,&#10;including the monocular images and bounding boxes. The dataset contains 7481&#10;training images annotated with 3D bounding boxes. A full description of the&#10;annotations can be found in the readme of the object development kit readme on&#10;the Kitti homepage.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;kitti&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/kitti-3.2.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="Kitti contains a suite of vision tasks built using an autonomous driving&#10;platform. The full benchmark contains many tasks such as stereo, optical flow,&#10;visual odometry, etc. This dataset contains the object detection dataset,&#10;including the monocular images and bounding boxes. The dataset contains 7481&#10;training images annotated with 3D bounding boxes. A full description of the&#10;annotations can be found in the readme of the object development kit readme on&#10;the Kitti homepage.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;kitti&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/kitti-3.2.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/kitti" />
   <meta itemprop="sameAs" content="http://www.cvlibs.net/datasets/kitti/" />
   <meta itemprop="citation" content="@inproceedings{Geiger2012CVPR,&#10;  author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},&#10;  title = {Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite},&#10;  booktitle = {Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;  year = {2012}&#10;}" />
 </div>
 
 # `kitti`
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -31,7 +36,9 @@ the Kitti homepage.
 *   **Versions**:
 
     *   **`3.2.0`** (default): Devkit updated.
-    *   `3.1.0`: No release notes.
+    *   `3.1.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `11.71 GiB`
 
@@ -86,4 +93,4 @@ FeaturesDict({
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/kitti-3.2.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/kitti-3.2.0.png" alt="Visualization" width="500px">
