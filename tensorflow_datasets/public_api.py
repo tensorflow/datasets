@@ -38,6 +38,7 @@ from tensorflow_datasets.core.registered import builder_cls
 from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import Split
+from tensorflow_datasets.core.splits import subsplits
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
@@ -73,6 +74,7 @@ __all__ = [
     "load",
     "ReadConfig",
     "Split",
+    "subsplits",
     "show_examples",
     "show_statistics",
     "testing",

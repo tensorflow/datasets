@@ -183,6 +183,12 @@ class SplitsTest(testing.TestCase):
     self.assertEqual(repr(splits.Split.TRAIN), "Split('train')")
     self.assertIsInstance(splits.Split.TRAIN, splits.Split)
 
+  def test_subsplits_api(self):
+    self.assertEqual(['train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]'],
+                     splits.subsplits('train', 3))
+    self.assertEqual(['train[0%:25%]', 'train[25%:50%]', 'train[50%:75%]',
+                      'train[75%:100%]'], splits.subsplits('train', 4))
+
 
 if __name__ == "__main__":
   testing.test_main()

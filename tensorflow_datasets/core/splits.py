@@ -247,3 +247,12 @@ class SplitGenerator(object):
     self.name = name
     self.gen_kwargs = gen_kwargs or {}
     self.split_info = SplitInfo(name=str(name))
+
+def subsplits(
+    split_name: str,
+    num_subsplits: int,
+) -> List[str]:
+  assert num_subsplits > 0
+  partitions = [round(i*100/num_subsplits) for i in range(num_subsplits+1)]
+  return [f'{split_name}[{partitions[i]}%:{partitions[i+1]}%]'
+          for i in range(num_subsplits)]
