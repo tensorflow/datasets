@@ -26,6 +26,9 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.features import text as text_lib
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Text(feature.Tensor):
@@ -176,10 +179,11 @@ class Text(feature.Tensor):
     return ex
 
   @classmethod
-  def from_json_content(cls, _) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
+    del value  # Default values are used
     return cls()
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     if self._encoder or self._encoder_config:
       raise ValueError('Encoder and Encoder Config should None')
     return dict()

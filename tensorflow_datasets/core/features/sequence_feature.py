@@ -22,6 +22,9 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Sequence(top_level_feature.TopLevelFeature):
@@ -206,29 +209,19 @@ class Sequence(top_level_feature.TopLevelFeature):
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
-    length = value.pop('length')
-    if value.get('arg_', None) == 'feature':
-      subclass = cls._REGISTERED_FEATURES.get(value['type'])
-      return cls(subclass.from_json_content(value['content']), length)
-    features = dict()
-    kwargs = dict()
-    for key, value in value.items():
-      subclass = cls._REGISTERED_FEATURES.get(value['type'], None)
-      if subclass:
-        features.update(
-            {key: subclass.from_json_content(value['content'])})
-      else:
-        kwargs.update({key: value})
-    return cls(features, length, **kwargs)
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
+    return cls(
+        feature_lib.FeatureConnector.from_json(value['feature']),
+        value['length']
+    )
 
-  def to_json_content(self):
-    if isinstance(self.feature, features_dict.FeaturesDict):
-      value = {k: v.to_json() for k, v in self.feature.items()}
-    else:
-      value = self.feature.to_json()
-      value['arg_'] = 'feature'
-    return {'length': self._length, ** value, **self._kwargs}
+  def to_json_content(self) -> Json:
+    assert not self._kwargs, 'Json export/import should be updated'
+    return {
+        'length': self._length,
+        'feature': self.feature.to_json()
+    }
+
 
 def _np_to_list(elem):
   """Returns list from list, tuple or ndarray."""

@@ -173,11 +173,10 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   @classmethod
   def from_json_content(cls, value) -> 'FeatureConnector':
-    features = dict()
-    for feature_key, feature_value in value.items():
-      subclass = cls._REGISTERED_FEATURES.get(feature_value['type'])
-      features.update({feature_key: subclass.from_json_content(feature_value['content'])})
-    return cls(features)
+    return cls({
+        k: feature_lib.FeatureConnector.from_json(v)
+        for k, v in value.items()
+    })
 
   def to_json_content(self):
     return {

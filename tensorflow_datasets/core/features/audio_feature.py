@@ -25,7 +25,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
 
+Json = type_utils.Json
 
 class Audio(feature.Tensor):
   """`FeatureConnector` for audio, encoded as raw integer wave form."""
@@ -102,7 +104,7 @@ class Audio(feature.Tensor):
     )
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     file_format = value['file_format']
     shape = tuple(value['shape'])
     dtype = tf.dtypes.as_dtype(value['dtype'])
@@ -112,7 +114,7 @@ class Audio(feature.Tensor):
                dtype=dtype,
                sample_rate=sample_rate)
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return {
         'file_format': self._file_format,
         'shape': list(self._shape),

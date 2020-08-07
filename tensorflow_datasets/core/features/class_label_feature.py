@@ -19,7 +19,9 @@ import os
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
 
+Json = type_utils.Json
 
 class ClassLabel(feature.Tensor):
   """`FeatureConnector` for integer class labels."""
@@ -175,10 +177,10 @@ class ClassLabel(feature.Tensor):
       return f"{ex} ({self.int2str(ex)})"
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     return cls(names=value['names'])
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return {'names': self.names}
 
 

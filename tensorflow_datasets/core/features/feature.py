@@ -93,6 +93,9 @@ import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class TensorInfo(object):
@@ -208,20 +211,24 @@ class FeatureConnector(object):
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
   @classmethod
-  def from_json_content(cls, value):
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     return cls(**value)
 
   @classmethod
-  def from_json(cls, value) -> 'FeatureConnector':
+  def from_json(cls, value: Json) -> 'FeatureConnector':
     """Return the FeatureConnector by decoding the JSON string."""
-    assert value['type'] == 'FeaturesDict'
     subclass = cls._REGISTERED_FEATURES.get(value['type'])
+    if subclass is None:
+      raise ValueError(
+          f'Invalid FeatureConnector type: {value["type"]}\n'
+          f'Supported: {list(cls._REGISTERED_FEATURES)}'
+      )
     return subclass.from_json_content(value['content'])
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return dict()
 
-  def to_json(self):
+  def to_json(self) -> Json:
     """Exports the FeatureConnector to Json."""
     return {
         'type': type(self).__name__,
@@ -601,12 +608,12 @@ class Tensor(FeatureConnector):
     return example_data
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     shape = tuple(value['shape'])
     dtype = tf.dtypes.as_dtype(value['dtype'])
     return cls(shape=shape, dtype=dtype)
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return {
         'shape': list(self._shape),
         'dtype': self._dtype.name,

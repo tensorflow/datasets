@@ -77,7 +77,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
     self.write_wave_file(np_audio, tmp_file)
 
     self.assertFeature(
-        feature=features.Audio(file_format="wav"),
+        feature=features.Audio(file_format="wav", sample_rate=39),
         shape=(None,),
         dtype=tf.int64,
         tests=[
@@ -87,7 +87,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
             ),
         ],
         _file_format="wav",
-        sample_rate=None,
+        sample_rate=39,
     )
 
   def test_file_object(self):

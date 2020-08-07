@@ -23,6 +23,9 @@ import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Video(sequence_feature.Sequence):
@@ -98,7 +101,7 @@ class Video(sequence_feature.Sequence):
     Raises:
       ValueError: If the shape is invalid
     """
-    self._shape = tuple(shape)
+    shape = tuple(shape)
     if len(shape) != 4:
       raise ValueError('Video shape should be of rank 4')
     self._encoding_format = encoding_format
@@ -178,15 +181,15 @@ class Video(sequence_feature.Sequence):
     return super(Video, self).encode_example(encoded_video)
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     shape = tuple(value['shape'])
     encoding_format = value['encoding_format']
     ffmpeg_extra_args = value['ffmpeg_extra_args']
     return cls(shape=shape, encoding_format=encoding_format, ffmpeg_extra_args=ffmpeg_extra_args)
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return {
-        'shape': list(self._shape),
+        'shape': list(self.shape),
         'encoding_format': self._encoding_format,
         'ffmpeg_extra_args': self._extra_ffmpeg_args
     }

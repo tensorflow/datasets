@@ -19,11 +19,14 @@ import six
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.utils import type_utils
 try:
   # This fallback applies for all versions of Python before 3.3
   import collections.abc as collections_abc  # pylint:disable=g-import-not-at-top  # pytype: disable=module-attr
 except ImportError:
   import collections as collections_abc  # pylint:disable=g-import-not-at-top
+
+Json = type_utils.Json
 
 
 class Translation(features_dict.FeaturesDict):
@@ -96,10 +99,10 @@ class Translation(features_dict.FeaturesDict):
     return sorted(self.keys())
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     return cls(**value)
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     if self._encoder or self._encoder_config:
       raise ValueError('Encoder and Encoder Config should None')
     return {'languages': self.languages}
@@ -198,8 +201,8 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
          "translation": translations})
 
   @classmethod
-  def from_json_content(cls, values) -> 'FeatureConnector':
-    return cls(**values)
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
+    return cls(**value)
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return {'languages': self._languages}

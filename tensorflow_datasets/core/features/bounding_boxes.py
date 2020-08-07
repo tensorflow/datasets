@@ -20,7 +20,9 @@ import collections
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
 
+Json = type_utils.Json
 
 BBox = collections.namedtuple('BBox', 'ymin, xmin, ymax, xmax')
 
@@ -78,8 +80,9 @@ class BBoxFeature(feature.Tensor):
     )
 
   @classmethod
-  def from_json_content(cls, _) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
+    del value  # Default values are used
     return cls()
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return dict()
