@@ -246,6 +246,9 @@ toc:
     title: trivia_qa
   - path: /datasets/catalog/web_questions
     title: web_questions
+  - path: /datasets/catalog/xquad
+    status: nightly
+    title: xquad
   title: Question answering
 - section:
   - path: /datasets/catalog/amazon_us_reviews

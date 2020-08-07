@@ -155,6 +155,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`squad`](squad.md)
 *   [`trivia_qa`](trivia_qa.md)
 *   [`web_questions`](web_questions.md)
+*   [`xquad`](xquad.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Structured`
 
