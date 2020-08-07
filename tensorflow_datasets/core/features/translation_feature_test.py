@@ -48,7 +48,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
                           "zh": tf.compat.as_bytes(ZH_HELLO)}
             ),
         ],
-        languages=["en", "zh"]
+        test_attributes=dict(languages=["en", "zh"])
     )
 
   def test_translation_encoded(self):
@@ -147,7 +147,7 @@ class TranslationVariableLanguagesFeatureTest(
                           "(de, en, zh)",
             ),
         ],
-        languages=sorted(["en", "de", "zh"])
+        test_attributes=dict(languages=sorted(["en", "de", "zh"]))
     )
 
 if __name__ == "__main__":

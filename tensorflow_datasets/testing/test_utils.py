@@ -328,18 +328,18 @@ class FeatureExpectationsTestCase(SubTestCase):
       tests,
       serialized_info=None,
       skip_feature_tests=False,
-      **kwargs):
+      test_attributes=None):
     """Test the given feature against the predicates."""
 
     with self._subTest('feature'):
       self._assert_feature(feature, shape, dtype,
-                           serialized_info, skip_feature_tests, **kwargs)
+                           serialized_info, skip_feature_tests, test_attributes)
     # TODO(tfds): Remove this check after text encoders are removed
     if not skip_feature_tests:
       with self._subTest('feature_roundtrip'):
         new_feature = feature.from_json_content(feature.to_json_content())
         self._assert_feature(new_feature, shape, dtype,
-                             serialized_info, skip_feature_tests, **kwargs)
+                             serialized_info, skip_feature_tests, test_attributes)
 
     # Create the feature dict
     fdict = features.FeaturesDict({'inner': feature})
@@ -362,7 +362,7 @@ class FeatureExpectationsTestCase(SubTestCase):
       dtype,
       serialized_info=None,
       skip_feature_tests=False,
-      **kwargs):
+      test_attributes=None):
     with self._subTest('shape'):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
@@ -376,8 +376,8 @@ class FeatureExpectationsTestCase(SubTestCase):
             feature.get_serialized_info(),
         )
 
-    if not skip_feature_tests:
-      for key, value in kwargs.items():
+    if not skip_feature_tests and test_attributes:
+      for key, value in test_attributes.items():
         self.assertEqual(getattr(feature, key), value)
 
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
