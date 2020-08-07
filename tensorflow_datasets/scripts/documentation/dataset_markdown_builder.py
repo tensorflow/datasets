@@ -227,7 +227,7 @@ class ManualDatasetSection(Section):
         f"""
         This dataset requires you to
         download the source data manually into `download_config.manual_dir`
-        (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+        (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
         {tfds.core.utils.indent(manual_instructions, '        ')}
         """
     )
