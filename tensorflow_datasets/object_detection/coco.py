@@ -66,8 +66,8 @@ Note:
 
 
 Split = collections.namedtuple(
-    'Split', 
-    ['name', 'images', 'annotation_file', 'annotation_download', 
+    'Split',
+    ['name', 'images', 'annotation_file', 'annotation_download',
      'annotation_type'])
 
 
@@ -436,36 +436,36 @@ class Coco(tfds.core.GeneratorBasedBuilder):
       elif annotation_type == AnnotationType.POSE:
         # Each pose annotation is a dict:
         # {
-        #     'segmentation': [[345.28, 220.68, 348.17, 269.8, ...]], 
-        #     'num_keypoints': 13, 
+        #     'segmentation': [[345.28, 220.68, 348.17, 269.8, ...]],
+        #     'num_keypoints': 13,
         #     'keypoints': [0, 0, 0, 0, 0, 0, 381, 69, 2, 377, 67, 2, ...], (x y visibility)
         #     'dp_masks': [
         #        {
-        #             'counts': 'hb71o70000001O0jL2ZNOd18VNHh1=UNDh1...', 
+        #             'counts': 'hb71o70000001O0jL2ZNOd18VNHh1=UNDh1...',
         #             'size': [256, 256]
         #        },
         #        ...
         #      ],
-        #      'area': 86145.2971, 
-        #      'dp_I': [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, ...], 
-        #      'dp_x': [133.66580200195312, 61.39377212524414, 93.56140899658203, ...], 
-        #      'dp_U': [0.07984049618244171, 0.11004531383514404, 0.19391614198684692, ...], 
-        #      'image_id': 36, 
-        #      'dp_V': [0.34230515360832214, 0.6589370965957642, 0.5380166172981262, ...], 
+        #      'area': 86145.2971,
+        #      'dp_I': [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, ...],
+        #      'dp_x': [133.66580200195312, 61.39377212524414, 93.56140899658203, ...],
+        #      'dp_U': [0.07984049618244171, 0.11004531383514404, 0.19391614198684692, ...],
+        #      'image_id': 36,
+        #      'dp_V': [0.34230515360832214, 0.6589370965957642, 0.5380166172981262, ...],
         #      'bbox': [167.58, 162.89, 310.61, 465.19],
-        #      'category_id': 1, 
-        #      'dp_y': [96.58982849121094, 97.64864349365234, 116.95169067382812, ...], 
+        #      'category_id': 1,
+        #      'dp_y': [96.58982849121094, 97.64864349365234, 116.95169067382812, ...],
         #      'id': 453991
         # }
-        # 
-        # Documentation from 
+        #
+        # Documentation from
         # https://github.com/facebookresearch/DensePose/blob/master/challenge/2019_COCO_DensePose/data_format.md
         # DensePose annotations are stored in dp_* fields:
-        # 
+        #
         # Annotated masks:
         # dp_masks: RLE encoded dense masks. All part masks are of size 256x256. They correspond to
-        #           14 semantically meaningful parts of the body: Torso, Right Hand, Left Hand, 
-        #           Left Foot, Right Foot, Upper Leg Right, Upper Leg Left, Lower Leg Right, Lower 
+        #           14 semantically meaningful parts of the body: Torso, Right Hand, Left Hand,
+        #           Left Foot, Right Foot, Upper Leg Right, Upper Leg Left, Lower Leg Right, Lower
         #           Leg Left, Upper Arm Left, Upper Arm Right, Lower Arm Left, Lower Arm Right, Head;
         #
         # Annotated points:
@@ -473,9 +473,9 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         #             scaled such that the bounding box size is 256x256;
         # dp_I:       The patch index that indicates which of the 24 surface patches the point is
         #             on. Patches correspond to the body parts described above. Some body parts are
-        #             split into 2 patches: 1, 2 = Torso, 3 = Right Hand, 4 = Left Hand, 5 = Left 
-        #             Foot, 6 = Right Foot, 7, 9 = Upper Leg Right, 8, 10 = Upper Leg Left, 11, 
-        #             13 = Lower Leg Right, 12, 14 = Lower Leg Left, 15, 17 = Upper Arm Left, 
+        #             split into 2 patches: 1, 2 = Torso, 3 = Right Hand, 4 = Left Hand, 5 = Left
+        #             Foot, 6 = Right Foot, 7, 9 = Upper Leg Right, 8, 10 = Upper Leg Left, 11,
+        #             13 = Lower Leg Right, 12, 14 = Lower Leg Left, 15, 17 = Upper Arm Left,
         #             16, 18 = Upper Arm Right, 19, 21 = Lower Arm Left, 20, 22 = Lower Arm Right,
         #             23, 24 = Head;
         # dp_U, dp_V: Coordinates in the UV space. Each surface patch has a separate 2D parameterization.
@@ -494,7 +494,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
             for i, mask in enumerate(annotation['dp_masks']):
               if mask:  # sometimes masks are just empty
                 decoded_mask = maskUtils.decode(mask)
-                body_parts[decoded_mask > 0] == i + 1
+                body_parts[decoded_mask > 0] = i + 1
           else:
             body_parts = 255 * np.ones([256, 256, 1], dtype='uint8')
           additional_info['body_segmentation'] = body_parts
