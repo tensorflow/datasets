@@ -263,7 +263,8 @@ def load(
 ):
   # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
-  To load your own dataset, you are required to create a TFDS dataset. Please refer the [Add a dataset guide](https://www.tensorflow.org/datasets/add_dataset).
+  To load your own dataset, you are required to create a TFDS dataset.
+  Please refer the [Add a dataset guide](https://www.tensorflow.org/datasets/add_dataset).
   `tfds.load` is a convenience method that:
 
   1. Fetch the `tfds.core.DatasetBuilder` by name:
