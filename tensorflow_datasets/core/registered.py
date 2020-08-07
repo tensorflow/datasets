@@ -262,7 +262,7 @@ def load(
     try_gcs: bool = False,
 ):
   # pylint: disable=line-too-long
-  """Loads the named dataset into a `tf.data.Dataset`.
+  """Loads the named dataset from our [catalog](https://www.tensorflow.org/datasets/catalog/overview) into a `tf.data.Dataset`.
 
   `tfds.load` is a convenience method that:
 
