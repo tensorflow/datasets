@@ -1645,6 +1645,17 @@ wmt_t2t_translate/de-en/1.0.0
 wordnet/WN18/0.1.0
 wordnet/WN18RR/0.1.0
 xnli/plain_text/1.0.0
+xquad/ar/1.0.0
+xquad/de/1.0.0
+xquad/el/1.0.0
+xquad/en/1.0.0
+xquad/es/1.0.0
+xquad/hi/1.0.0
+xquad/ru/1.0.0
+xquad/th/1.0.0
+xquad/tr/1.0.0
+xquad/vi/1.0.0
+xquad/zh/1.0.0
 xsum/1.0.0
 xsum/1.1.0
 yelp_polarity_reviews/bytes/0.1.0
