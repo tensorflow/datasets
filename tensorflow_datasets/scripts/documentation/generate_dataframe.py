@@ -20,6 +20,7 @@ import functools
 import itertools
 import multiprocessing
 import os
+import imageio
 import tempfile
 import traceback
 from typing import List, Optional
@@ -27,9 +28,6 @@ from typing import List, Optional
 from absl import app
 from absl import flags
 from absl import logging
-
-import matplotlib.pyplot as plt
-from matplotlib.image import imsave
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -118,22 +116,34 @@ def _generate_single_dataframe(full_name: str, dst_dir: str) -> None:
       builder.info.features, features_lib.Video)
 
   def generate_audio_html(audio_key, audio_idx, audio_arr, audio_rate):
-    dst_audio_path = dst + '-' + audio_key + '-' + str(audio_idx) + '.wav'
-    lazy_imports_lib.lazy_imports.scipy.io.wavfile.write(
-        dst_audio_path, audio_rate, audio_arr)
+    dst_audio_filename = dst + '-' + audio_key + '-' + str(audio_idx) + '.wav'
+    dst_audio_path = os.path.join(dst_dir, dst_audio_filename)
+    with tempfile.TemporaryDirectory() as tmp_dir:
+      tmp_path = os.path.join(tmp_dir, dst_audio_filename)
+      lazy_imports_lib.lazy_imports.scipy.io.wavfile.write(
+          tmp_path, audio_rate, audio_arr)
+      tf.io.gfile.copy(tmp_path, dst_audio_path, overwrite=FLAGS.overwrite)
     return '<audio src="' + dst_audio_path + '" controls type="audio/wav" />'
 
   def generate_image_html(image_key, image_idx, image_arr):
-    dst_image_path = dst + '-' + image_key + '-' + str(image_idx) + '.png'
-    lazy_imports_lib.lazy_imports.matplotlib.image.imsave(
-        dst_image_path, image_arr)
+    dst_image_filename = dst + '-' + image_key + '-' + str(image_idx) + '.png'
+    dst_image_path = os.path.join(dst_dir, dst_image_filename)
+    with tempfile.TemporaryDirectory() as tmp_dir:
+      tmp_path = os.path.join(tmp_dir, dst_image_filename)
+      lazy_imports_lib.lazy_imports.matplotlib.image.imsave(
+          tmp_path, image_arr)
+      tf.io.gfile.copy(tmp_path, dst_image_path, overwrite=FLAGS.overwrite)
     return '<img src="' + dst_image_path + '" width="100" />'
 
-  def generate_video_html(video_key, video_idx, video_arr, audio_rate):
-    dst_audio_path = dst + '-' + audio_key + '-' + str(audio_idx) + '.wav'
-    lazy_imports_lib.lazy_imports.scipy.io.wavfile.write(
-        dst_audio_path, audio_rate, audio_arr)
-    return '<audio src="' + dst_audio_path + '" controls type="audio/wav" />'
+  def generate_video_html(video_key, video_idx, video_arr, video_fps):
+    dst_video_filename = dst + '-' + video_key + '-' + str(video_idx) + '.mp4'
+    dst_video_path = os.path.join(dst_dir, dst_video_filename)
+    with tempfile.TemporaryDirectory() as tmp_dir:
+      tmp_path = os.path.join(tmp_dir, dst_video_filename)
+      imageio.mimwrite(tmp_path, video_arr, fps=video_fps)
+      tf.io.gfile.copy(tmp_path, dst_video_path, overwrite=FLAGS.overwrite)
+    return '<video controls="controls" src="' +\
+           dst_video_path + '" type="video/mp4" />'
 
   for idx in range(df.shape[0]):
     for key in audio_keys:
@@ -141,18 +151,14 @@ def _generate_single_dataframe(full_name: str, dst_dir: str) -> None:
           key, idx, df[key][idx], builder.info.features[key].sample_rate)
     for key in image_keys:
       df[key][idx] = generate_image_html(key, idx, df[key][idx])
+    for key in video_keys:
+      df[key][idx] = generate_video_html(
+          key, idx, df[key][idx], builder.info.features[key].shape[0])
 
-
-
-
-
-
-  # `savefig` do not support GCS, so first save the image locally.
   with tempfile.TemporaryDirectory() as tmp_dir:
     tmp_path = os.path.join(tmp_dir, dst_filename)
-    figure.savefig(tmp_path)
+    df.to_html(tmp_path)
     tf.io.gfile.copy(tmp_path, dst_path, overwrite=FLAGS.overwrite)
-  plt.close(figure)
 
 
 def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
@@ -176,22 +182,22 @@ def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
     return builder_names
 
 
-def generate_visualization(
+def generate_dataframe(
     datasets: Optional[List[str]] = None,
     *,
     dst_dir: str,
 ) -> None:
-  """Generate Visualization for datasets.
+  """Generate dataframe HTML for datasets.
 
   Args:
-    datasets: List of all `dataset` names to generate. If None, visualization
+    datasets: List of all `dataset` names to generate. If None, dataframes
       for all available datasets will be generated.
-    dst_dir: Directory where saving the images.
+    dst_dir: Directory where the dataframe is saved.
   """
   full_names = _get_full_names(datasets)
   generate_fn = functools.partial(
-      _generate_single_visualization, dst_dir=dst_dir)
-  logging.info(f'Generate figures for {len(full_names)} builders')
+      _generate_single_dataframe, dst_dir=dst_dir)
+  logging.info(f'Generate dataframes for {len(full_names)} builders')
   with multiprocessing.Pool(WORKER_COUNT_DATASETS) as tpool:
     tpool.map(generate_fn, full_names)
 
@@ -199,7 +205,7 @@ def generate_visualization(
 def main(_):
   """Main script."""
   datasets = FLAGS.datasets.split(',') if FLAGS.datasets else None
-  generate_visualization(datasets, dst_dir=FLAGS.dst_dir)
+  generate_dataframe(datasets, dst_dir=FLAGS.dst_dir)
 
 
 if __name__ == '__main__':
