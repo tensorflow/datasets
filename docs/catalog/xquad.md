@@ -137,7 +137,7 @@ Split               | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (translate-dev, translate-test, test), Only when `shuffle_files=False`
+    Yes (test, translate-test, translate-dev), Only when `shuffle_files=False`
     (translate-train)
 
 *   **Splits**:
@@ -184,7 +184,7 @@ Split               | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (translate-dev, translate-test, test), Only when `shuffle_files=False`
+    Yes (test, translate-test, translate-dev), Only when `shuffle_files=False`
     (translate-train)
 
 *   **Splits**:
@@ -208,7 +208,7 @@ Split               | Examples
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (translate-dev, translate-test, test), Only when `shuffle_files=False`
+    Yes (test, translate-test, translate-dev), Only when `shuffle_files=False`
     (translate-train)
 
 *   **Splits**:
