@@ -246,7 +246,7 @@ class FeatureConnector(object):
     features = FeatureConnector.from_config('path/to/feature_info.json')
 
     Args:
-      path: `str`, path to the feature_info.json file 
+      path: `str`, path to the feature_info.json file
             (`~/tensorflow_datasets/mnist/3.1.0/feature_info.json`)
 
     """

@@ -22,6 +22,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class _DictGetCounter(object):
@@ -172,13 +175,13 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     }
 
   @classmethod
-  def from_json_content(cls, value) -> 'FeatureConnector':
+  def from_json_content(cls, value: Json) -> 'FeatureConnector':
     return cls({
         k: feature_lib.FeatureConnector.from_json(v)
         for k, v in value.items()
     })
 
-  def to_json_content(self):
+  def to_json_content(self) -> Json:
     return {
         feature_key: feature.to_json()
         for feature_key, feature in self._feature_dict.items()

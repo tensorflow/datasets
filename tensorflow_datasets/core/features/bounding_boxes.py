@@ -81,7 +81,7 @@ class BBoxFeature(feature.Tensor):
 
   @classmethod
   def from_json_content(cls, value: Json) -> 'FeatureConnector':
-    del value  # Default values are used
+    del value  # Unused
     return cls()
 
   def to_json_content(self) -> Json:

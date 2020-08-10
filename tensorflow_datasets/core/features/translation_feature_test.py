@@ -69,7 +69,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
                 },
             ),
         ],
-        skip_feature_tests = True
+        skip_feature_tests=True
     )
 
   def test_translation_multiple_encoders(self):

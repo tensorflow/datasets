@@ -91,7 +91,7 @@ class Sequence(top_level_feature.TopLevelFeature):
     # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
-    self._kwargs = kwargs
+    assert not kwargs, 'Json export/import should be updated'
     super(Sequence, self).__init__(**kwargs)
 
   @property
@@ -211,15 +211,14 @@ class Sequence(top_level_feature.TopLevelFeature):
   @classmethod
   def from_json_content(cls, value: Json) -> 'FeatureConnector':
     return cls(
-        feature_lib.FeatureConnector.from_json(value['feature']),
-        value['length']
+        feature=feature_lib.FeatureConnector.from_json(value['feature']),
+        length=value['length']
     )
 
   def to_json_content(self) -> Json:
-    assert not self._kwargs, 'Json export/import should be updated'
     return {
+        'feature': self.feature.to_json(),
         'length': self._length,
-        'feature': self.feature.to_json()
     }
 
 
