@@ -933,6 +933,7 @@ trivia_qa/rc.nocontext/1.1.0
 trivia_qa/rc/1.1.0
 trivia_qa/unfiltered.nocontext/1.1.0
 trivia_qa/unfiltered/1.1.0
+tydi_qa/goldp/1.0.0
 uc_merced/2.0.0
 ucf101/ucf101_1/2.0.0
 ucf101/ucf101_1_256/2.0.0
