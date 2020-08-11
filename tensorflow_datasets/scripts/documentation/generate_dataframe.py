@@ -17,12 +17,10 @@ r"""Script which generates datasets dataframes.
 """
 
 import functools
-import itertools
 import multiprocessing
 import os
 import imageio
 import tempfile
-import traceback
 from typing import List, Optional
 
 from absl import app
@@ -34,6 +32,7 @@ import tensorflow_datasets as tfds
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.visualization import visualizer
+from tensorflow_datasets.scripts.documentation import script_utils
 
 
 WORKER_COUNT_DATASETS = 10
@@ -50,25 +49,7 @@ flags.DEFINE_boolean(
     'overwrite', False, 'If True, overwrite the existing visualizations.')
 
 
-# pylint: disable=logging-format-interpolation,logging-not-lazy
-
-
-def _log_exception(fn):
-  """Logs the exceptions from a `ThreadPoolExecutor`."""
-
-  @functools.wraps(fn)
-  def decorated(*args, **kwargs):
-    try:
-      return fn(*args, **kwargs)
-    except Exception:  # pylint: disable=broad-except
-      err_str = traceback.format_exc()
-      logging.error(f'Exception occurred for {args}, {kwargs}:\n' + err_str)
-      raise
-
-  return decorated
-
-
-@_log_exception
+@script_utils.log_exception
 def _generate_single_dataframe(full_name: str, dst_dir: str) -> None:
   """Save the generated dataframe HTML for the dataset in dst_dir.
 
@@ -161,27 +142,6 @@ def _generate_single_dataframe(full_name: str, dst_dir: str) -> None:
     tf.io.gfile.copy(tmp_path, dst_path, overwrite=FLAGS.overwrite)
 
 
-def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
-  """List all builder names `ds/version` and `ds/config/version` to generate.
-
-  Args:
-    datasets: List of datasets from which get the builder names.
-
-  Returns:
-    builder_names: The builder names.
-  """
-  if datasets is None:
-    return tfds.core.registered.list_full_names(
-        current_version_only=True,
-    )
-  else:
-    builder_names = list(itertools.chain.from_iterable([
-        tfds.core.registered.single_full_names(builder_name)
-        for builder_name in datasets
-    ]))
-    return builder_names
-
-
 def generate_dataframe(
     datasets: Optional[List[str]] = None,
     *,
@@ -194,7 +154,7 @@ def generate_dataframe(
       for all available datasets will be generated.
     dst_dir: Directory where the dataframe is saved.
   """
-  full_names = _get_full_names(datasets)
+  full_names = script_utils.get_full_names(datasets)
   generate_fn = functools.partial(
       _generate_single_dataframe, dst_dir=dst_dir)
   logging.info(f'Generate dataframes for {len(full_names)} builders')

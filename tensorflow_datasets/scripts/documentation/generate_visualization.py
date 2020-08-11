@@ -17,11 +17,9 @@ r"""Script which generates datasets figures.
 """
 
 import functools
-import itertools
 import multiprocessing
 import os
 import tempfile
-import traceback
 from typing import List, Optional
 
 from absl import app
@@ -32,6 +30,7 @@ import matplotlib.pyplot as plt
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.documentation import script_utils
 
 
 WORKER_COUNT_DATASETS = 10
@@ -48,25 +47,7 @@ flags.DEFINE_boolean(
     'overwrite', False, 'If True, overwrite the existing visualizations.')
 
 
-# pylint: disable=logging-format-interpolation,logging-not-lazy
-
-
-def _log_exception(fn):
-  """Logs the exceptions from a `ThreadPoolExecutor`."""
-
-  @functools.wraps(fn)
-  def decorated(*args, **kwargs):
-    try:
-      return fn(*args, **kwargs)
-    except Exception:  # pylint: disable=broad-except
-      err_str = traceback.format_exc()
-      logging.error(f'Exception occured for {args}, {kwargs}:\n' + err_str)
-      raise
-
-  return decorated
-
-
-@_log_exception
+@script_utils.log_exception
 def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   """Save the generated figures for the dataset in dst_dir.
 
@@ -79,7 +60,7 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   dst_path = os.path.join(dst_dir, dst_filename)
   # If the image already exists, skip the image generation
   if not FLAGS.overwrite and tf.io.gfile.exists(dst_path):
-    logging.info(f'Skiping visualization for {full_name} (already exists)')
+    logging.info(f'Skipping visualization for {full_name} (already exists)')
     return
 
   logging.info(f'Generating visualization for {full_name}...')
@@ -112,27 +93,6 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   plt.close(figure)
 
 
-def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
-  """List all builder names `ds/version` and `ds/config/version` to generate.
-
-  Args:
-    datasets: List of datasets from which get the builder names.
-
-  Returns:
-    builder_names: The builder names.
-  """
-  if datasets is None:
-    return tfds.core.registered.list_full_names(
-        current_version_only=True,
-    )
-  else:
-    builder_names = list(itertools.chain.from_iterable([
-        tfds.core.registered.single_full_names(builder_name)
-        for builder_name in datasets
-    ]))
-    return builder_names
-
-
 def generate_visualization(
     datasets: Optional[List[str]] = None,
     *,
@@ -145,7 +105,7 @@ def generate_visualization(
       for all available datasets will be generated.
     dst_dir: Directory where saving the images.
   """
-  full_names = _get_full_names(datasets)
+  full_names = script_utils.get_full_names(datasets)
   generate_fn = functools.partial(
       _generate_single_visualization, dst_dir=dst_dir)
   logging.info(f'Generate figures for {len(full_names)} builders')
