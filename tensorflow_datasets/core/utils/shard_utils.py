@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Logic to read sharded files (tfrecord, buckets, ...).
 
 This logic is shared between:
@@ -21,10 +20,6 @@ This logic is shared between:
  - tfrecord_writer, to read sharded bucket files (temp files), based on final
  sharding needs.
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from typing import List, Sequence
 

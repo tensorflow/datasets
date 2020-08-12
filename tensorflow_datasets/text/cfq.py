@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """CFQ (Compositional Freebase Question) dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -70,8 +65,8 @@ _RANDOM_SEEDS = [
 class CFQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CFQ splits."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                name=None,
                directory=None,
                compound_divergence=None,

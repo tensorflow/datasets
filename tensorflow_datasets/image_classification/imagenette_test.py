@@ -13,16 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for imagenette: a subset of 10 easily classified classes from Imagenet.
 
  (tench, English springer, cassette player, chain saw, church,
 French horn, garbage truck, gas pump, golf ball, parachute).
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import imagenette

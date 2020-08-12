@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Defined Reader and ReadInstruction to read tfrecord files."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import functools
 import math
@@ -30,7 +25,6 @@ import attr
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
@@ -461,10 +455,10 @@ class ReadInstruction(object):
     result._init(relative_instructions)  # pylint: disable=protected-access
     return result
 
-  @api_utils.disallow_positional_args(allowed=['split_name'])
   def __init__(
       self,
       split_name,
+      *,
       rounding='closest',
       from_=None,
       to=None,

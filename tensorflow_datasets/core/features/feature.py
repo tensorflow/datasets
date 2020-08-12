@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Feature connector.
 
 FeatureConnector is a way of abstracting what data is returned by the
@@ -84,10 +83,6 @@ This file contains the following FeatureConnector:
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import abc
 import collections
 
@@ -95,7 +90,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 
 
@@ -353,6 +347,18 @@ class FeatureConnector(object):
     """
     return tf.ragged.map_flat_values(self.decode_batch_example, tfexample_data)
 
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object."""
+    return repr(ex)
+
+  def repr_html_batch(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object (Sequence)."""
+    return repr(ex)
+
+  def repr_html_ragged(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object (Nested sequence)."""
+    return repr(ex)
+
   def _flatten(self, x):
     """Flatten the input dict into a list of values.
 
@@ -516,8 +522,7 @@ class FeatureConnector(object):
 class Tensor(FeatureConnector):
   """`FeatureConnector` for generic data of arbitrary shape and type."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, shape, dtype):
+  def __init__(self, *, shape, dtype):
     """Construct a Tensor feature."""
     self._shape = tuple(shape)
     self._dtype = dtype

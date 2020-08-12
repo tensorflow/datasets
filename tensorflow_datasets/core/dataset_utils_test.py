@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for tensorflow_datasets.core.dataset_utils."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -66,13 +61,14 @@ class DatasetAsNumPyTest(testing.TestCase):
     ds = _create_dataset(range(10))
     np_ds = dataset_utils.as_numpy(ds)
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+    # Iterating twice on the dataset recreate the iterator.
+    self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
 
   def test_with_graph(self):
     with tf.Graph().as_default():
-      with tf.Graph().as_default() as g:
-        ds = _create_dataset(range(10))
-      np_ds = dataset_utils.as_numpy(ds, graph=g)
-      self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+      ds = _create_dataset(range(10))
+      np_ds = dataset_utils.as_numpy(ds)
+    self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
 
   @testing.run_in_graph_and_eager_modes()
   def test_singleton_dataset_with_nested_elements(self):

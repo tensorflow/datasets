@@ -1,0 +1,75 @@
+{
+  "citation": "@misc{sharma2019bigpatent,\n    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},\n    author={Eva Sharma and Chen Li and Lu Wang},\n    year={2019},\n    eprint={1906.03741},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "description": "BIGPATENT, consisting of 1.3 million records of U.S. patent documents\nalong with human written abstractive summaries.\nEach US patent application is filed under a Cooperative Patent Classification\n(CPC) code. There are nine such classification categories:\nA (Human Necessities), B (Performing Operations; Transporting),\nC (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),\nF (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),\nG (Physics), H (Electricity), and\nY (General tagging of new or cross-sectional technology)\n\nThere are two features:\n  - description: detailed description of patent.\n  - summary: Patent abastract.",
+  "downloadSize": "10142849928",
+  "location": {
+    "urls": [
+      "https://evasharma.github.io/bigpatent/"
+    ]
+  },
+  "name": "big_patent",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "186413894",
+      "numShards": "2",
+      "shardLengths": [
+        "4838",
+        "4837"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "3337440469",
+      "numShards": "32",
+      "shardLengths": [
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5442",
+        "5441",
+        "5442",
+        "5442",
+        "5441",
+        "5442"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "184541974",
+      "numShards": "2",
+      "shardLengths": [
+        "4837",
+        "4837"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "description",
+    "output": "abstract"
+  },
+  "version": "2.1.0"
+}

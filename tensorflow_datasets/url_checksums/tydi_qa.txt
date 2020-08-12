@@ -1,0 +1,3 @@
+https://storage.googleapis.com/tydiqa/v1.1/tydiqa-goldp-v1.1-dev.json 5617409 b286e0f34bc7f52259359989716f369b160565bd12ad8f3a3e311f9b0dbad1c0
+https://storage.googleapis.com/tydiqa/v1.1/tydiqa-goldp-v1.1-dev.tgz 1725055 5a415d019a345794c8a83191ecfe4a761eaab69dab79c3c9813d4379e1cc5519
+https://storage.googleapis.com/tydiqa/v1.1/tydiqa-goldp-v1.1-train.json 58004076 cefc8e09ff2548d9b10a678d3a6bbbe5bc036be543f92418819ea676c97be23b

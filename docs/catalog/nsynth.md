@@ -37,8 +37,12 @@ heuristic algorithms: Source, Family, and Qualities.
         F0 computed with fix in CREPE wave normalization
         (https://github.com/marl/crepe/issues/49).
     *   `2.3.2`: Use Audio feature.
-    *   `2.3.1`: F0 computed with normalization fix in CREPE.
-    *   `2.3.0`: New `loudness_db` feature in decibels (unormalized).
+    *   `2.3.1`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        F0 computed with normalization fix in CREPE.
+    *   `2.3.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        New `loudness_db` feature in decibels (unormalized).
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

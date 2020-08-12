@@ -15,10 +15,6 @@
 
 """Mozilla Common Voice Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import csv
 import os
@@ -73,8 +69,7 @@ _LANGUAGE_ACCENTS = collections.OrderedDict([
 class CommonVoiceConfig(tfds.core.BuilderConfig):
   """Configuration Class for Mozilla CommonVoice Dataset."""
 
-  @tfds.core.api_utils.disallow_positional_args
-  def __init__(self, language, accents=None, **kwargs):
+  def __init__(self, *, language, accents=None, **kwargs):
     """Constructs CommonVoiceConfig.
 
     Args:

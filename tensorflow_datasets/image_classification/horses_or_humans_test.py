@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for horses or humans data loading."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets.image_classification import horses_or_humans
 import tensorflow_datasets.testing as tfds_test

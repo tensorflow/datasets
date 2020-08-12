@@ -4,7 +4,7 @@
   </div>
 
   <meta itemprop="name" content="resisc45" />
-  <meta itemprop="description" content="RESISC45 dataset is a publicly available benchmark for Remote Sensing Image&#10;Scene Classification (RESISC), created by Northwestern Polytechnical University&#10;(NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700&#10;images in each class.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;resisc45&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/resisc45-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="RESISC45 dataset is a publicly available benchmark for Remote Sensing Image&#10;Scene Classification (RESISC), created by Northwestern Polytechnical University&#10;(NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700&#10;images in each class.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;resisc45&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/resisc45-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/resisc45" />
   <meta itemprop="sameAs" content="http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html" />
   <meta itemprop="citation" content="@article{Cheng_2017,&#10;   title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},&#10;   volume={105},&#10;   ISSN={1558-2256},&#10;   url={http://dx.doi.org/10.1109/JPROC.2017.2675998},&#10;   DOI={10.1109/jproc.2017.2675998},&#10;   number={10},&#10;   journal={Proceedings of the IEEE},&#10;   publisher={Institute of Electrical and Electronics Engineers (IEEE)},&#10;   author={Cheng, Gong and Han, Junwei and Lu, Xiaoqiang},&#10;   year={2017},&#10;   month={Oct},&#10;   pages={1865-1883}&#10;}" />
@@ -88,4 +88,4 @@ FeaturesDict({
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/resisc45-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/resisc45-3.0.0.png" alt="Visualization" width="500px">

@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """WMT15: Translate dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
@@ -62,8 +57,8 @@ class Wmt15Translate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               name="subwords8k",
               vocab_size=2**13),
           version=tfds.core.Version("1.0.0"),

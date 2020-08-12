@@ -7,10 +7,15 @@
   <meta itemprop="description" content="The NQ corpus contains questions from real users, and it requires QA systems to&#10;read and comprehend an entire Wikipedia article that may or may not contain the&#10;answer to the question. The inclusion of real user questions, and the&#10;requirement that solutions should read an entire page to find the answer, cause&#10;NQ to be a more realistic and challenging task than prior QA datasets.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;natural_questions&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/natural_questions" />
   <meta itemprop="sameAs" content="https://ai.google.com/research/NaturalQuestions/dataset" />
-  <meta itemprop="citation" content="@article{47761,&#10;title  = {Natural Questions: a Benchmark for Question Answering Research},&#10;author  = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},&#10;year   = {2019},&#10;journal   = {Transactions of the Association of Computational Linguistics}&#10;}" />
+  <meta itemprop="citation" content="@article{47761,&#10;title = {Natural Questions: a Benchmark for Question Answering Research},&#10;author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},&#10;year = {2019},&#10;journal = {Transactions of the Association of Computational Linguistics}&#10;}" />
 </div>
 
 # `natural_questions`
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -29,7 +34,9 @@ NQ to be a more realistic and challenging task than prior QA datasets.
 *   **Versions**:
 
     *   **`0.0.2`** (default): No release notes.
-    *   `0.0.1`: No release notes.
+    *   `0.0.1`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `Unknown size`
 
@@ -92,9 +99,9 @@ FeaturesDict({
 
 ```
 @article{47761,
-title   = {Natural Questions: a Benchmark for Question Answering Research},
-author  = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-year    = {2019},
+title = {Natural Questions: a Benchmark for Question Answering Research},
+author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+year = {2019},
 journal = {Transactions of the Association of Computational Linguistics}
 }
 ```

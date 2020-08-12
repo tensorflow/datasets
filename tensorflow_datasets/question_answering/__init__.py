@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Question answering datasets."""
 
 from tensorflow_datasets.question_answering.ai2_arc import Ai2Arc
@@ -22,4 +21,6 @@ from tensorflow_datasets.question_answering.mctaco import Mctaco
 from tensorflow_datasets.question_answering.natural_questions import NaturalQuestions
 from tensorflow_datasets.question_answering.squad import Squad
 from tensorflow_datasets.question_answering.trivia_qa import TriviaQA
+from tensorflow_datasets.question_answering.tydi_qa import TydiQA
 from tensorflow_datasets.question_answering.web_questions import WebQuestions
+from tensorflow_datasets.question_answering.xquad import Xquad

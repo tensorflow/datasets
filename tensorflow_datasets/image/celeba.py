@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """CelebA dataset.
 
 Large-scale CelebFaces Attributes (CelebA) Dataset
@@ -21,10 +20,6 @@ Large-scale CelebFaces Attributes (CelebA) Dataset
 Deep Learning Face Attributes in the Wild
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 

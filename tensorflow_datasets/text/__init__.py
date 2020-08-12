@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Text datasets."""
 
+from tensorflow_datasets.text.ag_news_subset import AGNewsSubset
 from tensorflow_datasets.text.anli import Anli
 from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.c4 import C4
@@ -41,6 +41,7 @@ from tensorflow_datasets.text.movie_rationales import MovieRationales
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
 from tensorflow_datasets.text.openbookqa import Openbookqa
+from tensorflow_datasets.text.paws_wiki import PawsWiki
 from tensorflow_datasets.text.pg19 import Pg19
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglement

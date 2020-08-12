@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """RoboNet dataset.
 
 RoboNet: Large-Scale Multi-Robot Learning
@@ -23,10 +22,6 @@ Karl Schmeckpeper, Siddharth Singh, Sergey Levine, Chelsea Finn
 
 https://www.robonet.wiki/
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import textwrap
@@ -60,8 +55,9 @@ _CITATION = """\
 class RobonetConfig(tfds.core.BuilderConfig):
   """"Configuration for RoboNet video rescaling."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, sample_dataset=False, width=None, height=None, **kwargs):
+  def __init__(
+      self, *, sample_dataset=False, width=None, height=None, **kwargs
+  ):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with three separate splits. You can specify which split

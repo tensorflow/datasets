@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """opus dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 from absl import logging
@@ -146,8 +141,7 @@ DATASET_MAP = {ds.name: ds for ds in [  # pylint:disable=g-complex-comprehension
 class OpusConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Opus."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, language_pair, subsets, **kwargs):
+  def __init__(self, *, language_pair, subsets, **kwargs):
     """BuilderConfig for Opus.
 
     Args:

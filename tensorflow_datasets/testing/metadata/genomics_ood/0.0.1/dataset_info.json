@@ -1,0 +1,57 @@
+{
+  "citation": "@inproceedings{ren2019likelihood,\n  title={Likelihood ratios for out-of-distribution detection},\n  author={Ren, Jie and\n  Liu, Peter J and\n  Fertig, Emily and\n  Snoek, Jasper and\n  Poplin, Ryan and\n  Depristo, Mark and\n  Dillon, Joshua and\n  Lakshminarayanan, Balaji},\n  booktitle={Advances in Neural Information Processing Systems},\n  pages={14707--14718},\n  year={2019}\n}",
+  "description": "Bacteria identification based on genomic sequences holds the promise of early\ndetection of diseases, but requires a model that can output low confidence\npredictions on out-of-distribution (OOD) genomic sequences from new bacteria\nthat were not present in the training data.\n\nWe introduce a genomics dataset for OOD detection that allows other researchers\nto benchmark progress on this important problem. New bacterial classes are\ngradually discovered over the years. Grouping classes by years is a natural way\nto mimic the in-distribution and OOD examples.\n\nThe dataset contains genomic sequences sampled from 10 bacteria classes that\nwere discovered before the year 2011 as in-distribution classes, 60 bacteria\nclasses discovered between 2011-2016 as OOD for validation, and another 60\ndifferent bacteria classes discovered after 2016 as OOD for test, in total 130\nbacteria classes. Note that training, validation, and test data are provided for\nthe in-distribution classes, and validation and test data are proviede for OOD\nclasses. By its nature, OOD data is not available at the training time.\n\nThe genomic sequence is 250 long, composed by characters of {A, C, G, T}. The\nsample size of each class is 100,000 in the training and 10,000 for the\nvalidation and test sets.\n\nFor each example, the features include:\n  seq: the input DNA sequence composed by {A, C, G, T}.\n  label: the name of the bacteria class.\n  seq_info: the source of the DNA sequence, i.e., the genome name, NCBI\n  accession number, and the position where it was sampled from.\n  domain: if the bacteria is in-distribution (in), or OOD (ood)\n\nThe details of the dataset can be found in the paper supplemental.",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/google-research/tree/master/genomics_ood"
+    ]
+  },
+  "name": "genomics_ood",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "41698676",
+      "shardLengths": [
+        "100000"
+      ]
+    },
+    {
+      "name": "test_ood",
+      "numBytes": "244341217",
+      "shardLengths": [
+        "300000",
+        "300000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "404669267",
+      "shardLengths": [
+        "250000",
+        "250000",
+        "250000",
+        "250000"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "40829756",
+      "shardLengths": [
+        "100000"
+      ]
+    },
+    {
+      "name": "validation_ood",
+      "numBytes": "240352507",
+      "shardLengths": [
+        "300000",
+        "300000"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "seq",
+    "output": "label"
+  },
+  "version": "0.0.1"
+}

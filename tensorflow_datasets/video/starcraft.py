@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from absl import logging
 import tensorflow.compat.v2 as tf
@@ -52,8 +47,7 @@ _CITATION = """\
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
   """Config for StarcraftVideo dataset."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, map_name, resolution, size_in_gb, **kwargs):
+  def __init__(self, *, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
             "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),

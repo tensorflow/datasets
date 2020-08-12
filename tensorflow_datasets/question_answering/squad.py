@@ -13,19 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """SQUAD: The Stanford Question Answering Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import json
 import os
 
-from absl import logging
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.question_answering import qa_utils
 
 _CITATION = """\
 @article{2016arXiv160605250R,
@@ -52,15 +45,6 @@ from the corresponding reading passage, or the question might be unanswerable.
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, **kwargs):
-    """BuilderConfig for SQUAD.
-
-    Args:
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(SquadConfig, self).__init__(**kwargs)
-
 
 class Squad(tfds.core.GeneratorBasedBuilder):
   """SQUAD: The Stanford Question Answering Dataset. Version 1.1."""
@@ -82,21 +66,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "id":
-                tf.string,
-            "title":
-                tfds.features.Text(),
-            "context":
-                tfds.features.Text(),
-            "question":
-                tfds.features.Text(),
-            "answers":
-                tfds.features.Sequence({
-                    "text": tfds.features.Text(),
-                    "answer_start": tf.int32,
-                }),
-        }),
+        features=qa_utils.SQUADLIKE_FEATURES,
         # No default supervised_keys (as we have to pass both question
         # and context as input).
         supervised_keys=None,
@@ -121,30 +91,4 @@ class Squad(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, filepath):
-    """This function returns the examples in the raw (text) form."""
-    logging.info("generating examples from = %s", filepath)
-    with tf.io.gfile.GFile(filepath) as f:
-      squad = json.load(f)
-      for article in squad["data"]:
-        title = article.get("title", "").strip()
-        for paragraph in article["paragraphs"]:
-          context = paragraph["context"].strip()
-          for qa in paragraph["qas"]:
-            question = qa["question"].strip()
-            id_ = qa["id"]
-
-            answer_starts = [answer["answer_start"] for answer in qa["answers"]]
-            answers = [answer["text"].strip() for answer in qa["answers"]]
-
-            # Features currently used are "context", "question", and "answers".
-            # Others are extracted here for the ease of future expansions.
-            yield id_, {
-                "title": title,
-                "context": context,
-                "question": question,
-                "id": id_,
-                "answers": {
-                    "answer_start": answer_starts,
-                    "text": answers,
-                },
-            }
+    return qa_utils.generate_squadlike_examples(filepath)

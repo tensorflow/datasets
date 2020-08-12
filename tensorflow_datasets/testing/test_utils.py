@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Test utilities."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import contextlib
 import functools
@@ -411,6 +406,34 @@ class FeatureExpectationsTestCase(SubTestCase):
               lambda t: t.build() if isinstance(t, RaggedConstant) else t,
               test.expected)
           self.assertAllEqualNested(out_numpy, expected)
+
+        # Assert the HTML representation works
+        if not test.decoders:
+          with self._subTest('repr'):
+            self._test_repr(feature, out_numpy)
+
+  def _test_repr(
+      self,
+      feature: features.FeatureConnector,
+      out_numpy: np.ndarray,
+  ) -> None:
+    """Test that the HTML repr works."""
+    # pylint: disable=protected-access
+    flat_example = feature._flatten(out_numpy)
+    flat_features = feature._flatten(feature)
+    flat_serialized_info = feature._flatten(feature.get_serialized_info())
+    # pylint: enable=protected-access
+    for ex, f, spec in zip(flat_example, flat_features, flat_serialized_info):
+      # Features with multi-data not supported
+      if isinstance(spec, dict):
+        continue
+      elif spec.sequence_rank == 0:
+        text = f.repr_html(ex)
+      elif spec.sequence_rank == 1:
+        text = f.repr_html_batch(ex)
+      elif spec.sequence_rank > 1:
+        text = f.repr_html_ragged(ex)
+      self.assertIsInstance(text, str)
 
 
 def features_encode_decode(features_dict, example, decoders):

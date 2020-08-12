@@ -13,14 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Corrupted ImageNet2012 dataset.
 
 Apply common corruptions to the images in ImageNet2012 dataset.
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from absl import logging
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -89,8 +85,7 @@ _CROP_PADDING = 32
 class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Imagenet2012Corrupted."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, corruption_type=None, severity=1, **kwargs):
+  def __init__(self, *, corruption_type=None, severity=1, **kwargs):
     """BuilderConfig for Imagenet2012Corrupted.
 
     Args:

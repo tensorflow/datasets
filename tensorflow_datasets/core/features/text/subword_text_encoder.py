@@ -13,15 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 # coding=utf-8
 """SubwordTextEncoder."""
 # This implementation is based on SubwordTextEncoder in Tensor2Tensor,
 # originally written by Noam Shazeer (GitHub: nshazeer).
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from __future__ import unicode_literals
 
 import collections
@@ -46,18 +41,18 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
 
   The vocabulary is "trained" on a corpus and all wordpieces are stored in a
   vocabulary file. To generate a vocabulary from a corpus, use
-  `tfds.features.text.SubwordTextEncoder.build_from_corpus`.
+  `tfds.deprecated.text.SubwordTextEncoder.build_from_corpus`.
 
   Typical usage:
 
   ```
   # Build
-  encoder = tfds.features.text.SubwordTextEncoder.build_from_corpus(
+  encoder = tfds.deprecated.text.SubwordTextEncoder.build_from_corpus(
       corpus_generator, target_vocab_size=2**15)
-  encoder.save_to_file(vocab_filename)
+  encoder.save_to_file(vocab_fname)
 
   # Load
-  encoder = tfds.features.text.SubwordTextEncoder.load_from_file(vocab_filename)
+  encoder = tfds.deprecated.text.SubwordTextEncoder.load_from_file(vocab_fname)
   ids = encoder.encode("hello world")
   text = encoder.decode([1, 2, 3, 4])
   ```
@@ -67,7 +62,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     r"""Constructs a SubwordTextEncoder from a vocabulary list.
 
     Note: To generate a vocabulary from a corpus, use
-    `tfds.features.text.SubwordTextEncoder.build_from_corpus`.
+    `tfds.deprecated.text.SubwordTextEncoder.build_from_corpus`.
 
     Args:
       vocab_list: `list<str>`, list of subwords for the vocabulary. Note that an

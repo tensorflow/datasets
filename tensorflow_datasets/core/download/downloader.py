@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Async download API with checksum verification. No business logic."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import concurrent.futures
 import contextlib

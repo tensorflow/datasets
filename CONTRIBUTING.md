@@ -26,6 +26,19 @@ You can help in multiple ways:
 * Verifying that Pull Requests from others are working correctly
   (especially the ones that add new datasets).
 
+## Setup
+
+If you want to
+[contribute to our repository](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md):
+
+Clone or download the [Tensorflow Datasets](https://github.com/tensorflow/datasets)
+repository and install the repo locally.
+
+```
+git clone https://github.com/tensorflow/datasets.git
+cd datasets/
+pip install -e .
+```
 
 ## Datasets
 

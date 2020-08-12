@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python2, python3
 """Opinion Abstracts Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -61,14 +56,16 @@ _URL = "http://www.ccs.neu.edu/home/luwang/datasets/opinion_abstracts.zip"
 class OpinionAbstractsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for OpinionAbstracts."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self,
-               filename: Text = None,
-               name_key: Text = None,
-               id_key: Text = None,
-               opinions_key: Text = None,
-               summary_key: Text = None,
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      filename: Text = None,
+      name_key: Text = None,
+      id_key: Text = None,
+      opinions_key: Text = None,
+      summary_key: Text = None,
+      **kwargs
+  ):
     """BuilderConfig for OpinionAbstracts."""
     super(OpinionAbstractsConfig, self).__init__(
         version=tfds.core.Version("1.0.0"), **kwargs)

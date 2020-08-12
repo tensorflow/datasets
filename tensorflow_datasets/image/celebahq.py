@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Celeba-HQ dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -60,8 +55,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, resolution, **kwargs):
+  def __init__(self, *, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
     Args:

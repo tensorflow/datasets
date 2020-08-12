@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning

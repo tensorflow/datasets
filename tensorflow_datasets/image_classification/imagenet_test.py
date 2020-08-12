@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for imagenet dataset module."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import imagenet
@@ -36,10 +31,12 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
   SPLITS = {  # Expected number of examples on each split.
       "train": 100,
       "validation": 10,
+      "test": 5,
   }
   DL_EXTRACT_RESULT = [
       "ILSVRC2012_img_train.tar",
       "ILSVRC2012_img_val.tar",
+      "ILSVRC2012_img_test.tar",
   ]
 
 

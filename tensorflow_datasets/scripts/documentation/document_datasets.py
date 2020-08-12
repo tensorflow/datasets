@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Util to generate the dataset documentation content.
 
 Used by tensorflow_datasets/scripts/documentation/build_catalog.py
@@ -52,8 +51,8 @@ NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
 class VisualizationDocUtil(object):
   """Small util which generate the path/urls for the visualizations."""
   # Url used to display images
-  BASE_PATH = tfds.core.gcs_path('visualization/')
-  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/'
+  BASE_PATH = tfds.core.gcs_path('visualization/fig/')
+  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
 
   def _get_name(self, builder):
     return builder.info.full_name.replace('/', '-') + '.png'
