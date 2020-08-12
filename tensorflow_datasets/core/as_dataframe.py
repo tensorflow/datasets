@@ -90,7 +90,7 @@ def _get_feature(
   sequence_rank = 0
 
   # Collapse the nested sequences
-  while isinstance(feature, features.Sequence):
+  while type(feature) == features.Sequence:
     sequence_rank += 1
     feature = feature.feature  # Extract inner feature
 

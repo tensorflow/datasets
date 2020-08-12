@@ -19,8 +19,12 @@ import os
 import subprocess
 import tempfile
 
+import numpy as np
+import imageio
 import six
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 
@@ -177,3 +181,41 @@ class Video(sequence_feature.Sequence):
     else:
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
+
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Video are displayed in the player."""
+    video = np.stack([_create_thumbnail(frame) for frame in ex], axis=0)
+
+    # Convert to base64
+    vid_str = utils.get_base64(lambda buff: imageio.mimwrite(
+        buff, video, format='.mp4', fps=video.shape[0]))
+
+    # Display HTML
+    return f'<video controls="controls" src="data:video/mp4;base64,{vid_str}" type="video/mp4" />'
+
+
+def _create_thumbnail(ex):
+  # Normalize video frames and resize
+  _, _, c = ex.shape
+  postprocess = _postprocess_noop
+  if c == 1:
+    ex = ex.squeeze(axis=-1)
+    mode = 'L'
+  elif ex.dtype == np.uint16:
+    mode = 'I;16'
+    postprocess = _postprocess_convert_rgb
+  else:
+    mode = None
+  img = lazy_imports_lib.lazy_imports.PIL_Image.fromarray(ex, mode=mode)
+  img = postprocess(img)
+  img.thumbnail((128, 128))  # Resize the frame
+  return np.array(img)
+
+
+
+def _postprocess_noop(img):
+  return img
+
+
+def _postprocess_convert_rgb(img):
+  return img.convert('RGB')
