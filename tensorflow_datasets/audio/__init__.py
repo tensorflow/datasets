@@ -32,3 +32,4 @@ from tensorflow_datasets.audio.tedlium import Tedlium
 from tensorflow_datasets.audio.vctk import Vctk
 from tensorflow_datasets.audio.voxceleb import Voxceleb
 from tensorflow_datasets.audio.voxforge import Voxforge
+from tensorflow_datasets.audio.yesno import YesNo
