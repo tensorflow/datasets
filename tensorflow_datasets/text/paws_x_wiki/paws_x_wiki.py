@@ -32,12 +32,12 @@ _DESCRIPTION = """
 This dataset contains 23,659 human translated PAWS evaluation pairs and
 296,406 machine translated training pairs in six typologically distinct languages:
 
-French,
-Spanish,
-German,
-Chinese,
-Japanese,
-and Korean.
+* French
+* Spanish
+* German
+* Chinese
+* Japanese
+* Korean
 
 For further details, see the accompanying paper:
 PAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification
