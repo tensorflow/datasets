@@ -18,6 +18,7 @@
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.arc import ARC
+from tensorflow_datasets.image.bccd import BCCD
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
