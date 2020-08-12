@@ -19,8 +19,6 @@ r"""Script which generates datasets dataframes.
 import functools
 import multiprocessing
 import os
-import imageio
-import tempfile
 from typing import List, Optional
 
 from absl import app
@@ -29,9 +27,6 @@ from absl import logging
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core.visualization import visualizer
 from tensorflow_datasets.scripts.documentation import script_utils
 
 
@@ -58,8 +53,7 @@ def _generate_single_dataframe(full_name: str, dst_dir: str) -> None:
     dst_dir: Destination where the dataset will be saved (as
       `dataset-config-version`)
   """
-  dst = full_name.replace('/', '-')
-  dst_filename = dst + '.html'
+  dst_filename = full_name.replace('/', '-') + '.html'
   dst_path = os.path.join(dst_dir, dst_filename)
   # If the html already exists, skip the html generation
   if not FLAGS.overwrite and tf.io.gfile.exists(dst_path):
@@ -88,58 +82,7 @@ def _generate_single_dataframe(full_name: str, dst_dir: str) -> None:
     logging.info(f'Dataframe not supported for dataset `{full_name}`')
     return
 
-  # Add audio, image, and video to html
-  audio_keys = visualizer.extract_keys(
-      builder.info.features, features_lib.Audio)
-  image_keys = visualizer.extract_keys(
-      builder.info.features, features_lib.Image)
-  video_keys = visualizer.extract_keys(
-      builder.info.features, features_lib.Video)
-
-  def generate_audio_html(audio_key, audio_idx, audio_arr, audio_rate):
-    dst_audio_filename = dst + '-' + audio_key + '-' + str(audio_idx) + '.wav'
-    dst_audio_path = os.path.join(dst_dir, dst_audio_filename)
-    with tempfile.TemporaryDirectory() as tmp_dir:
-      tmp_path = os.path.join(tmp_dir, dst_audio_filename)
-      lazy_imports_lib.lazy_imports.scipy.io.wavfile.write(
-          tmp_path, audio_rate, audio_arr)
-      tf.io.gfile.copy(tmp_path, dst_audio_path, overwrite=FLAGS.overwrite)
-    return '<audio src="' + dst_audio_path + '" controls type="audio/wav" />'
-
-  def generate_image_html(image_key, image_idx, image_arr):
-    dst_image_filename = dst + '-' + image_key + '-' + str(image_idx) + '.png'
-    dst_image_path = os.path.join(dst_dir, dst_image_filename)
-    with tempfile.TemporaryDirectory() as tmp_dir:
-      tmp_path = os.path.join(tmp_dir, dst_image_filename)
-      lazy_imports_lib.lazy_imports.matplotlib.image.imsave(
-          tmp_path, image_arr)
-      tf.io.gfile.copy(tmp_path, dst_image_path, overwrite=FLAGS.overwrite)
-    return '<img src="' + dst_image_path + '" width="100" />'
-
-  def generate_video_html(video_key, video_idx, video_arr, video_fps):
-    dst_video_filename = dst + '-' + video_key + '-' + str(video_idx) + '.mp4'
-    dst_video_path = os.path.join(dst_dir, dst_video_filename)
-    with tempfile.TemporaryDirectory() as tmp_dir:
-      tmp_path = os.path.join(tmp_dir, dst_video_filename)
-      imageio.mimwrite(tmp_path, video_arr, fps=video_fps)
-      tf.io.gfile.copy(tmp_path, dst_video_path, overwrite=FLAGS.overwrite)
-    return '<video controls="controls" src="' +\
-           dst_video_path + '" type="video/mp4" />'
-
-  for idx in range(df.shape[0]):
-    for key in audio_keys:
-      df[key][idx] = generate_audio_html(
-          key, idx, df[key][idx], builder.info.features[key].sample_rate)
-    for key in image_keys:
-      df[key][idx] = generate_image_html(key, idx, df[key][idx])
-    for key in video_keys:
-      df[key][idx] = generate_video_html(
-          key, idx, df[key][idx], builder.info.features[key].shape[0])
-
-  with tempfile.TemporaryDirectory() as tmp_dir:
-    tmp_path = os.path.join(tmp_dir, dst_filename)
-    df.to_html(tmp_path)
-    tf.io.gfile.copy(tmp_path, dst_path, overwrite=FLAGS.overwrite)
+  tf.io.write_file(dst_path, df._repr_html_())
 
 
 def generate_dataframe(
