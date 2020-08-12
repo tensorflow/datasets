@@ -191,7 +191,8 @@ class Video(sequence_feature.Sequence):
         buff, video, format='.mp4', fps=video.shape[0]))
 
     # Display HTML
-    return f'<video controls="controls" src="data:video/mp4;base64,{vid_str}" type="video/mp4" />'
+    return f'<video controls="controls" src="data:video/mp4;base64,' \
+           f'{vid_str}" type="video/mp4" />'
 
 
 def _create_thumbnail(ex):
