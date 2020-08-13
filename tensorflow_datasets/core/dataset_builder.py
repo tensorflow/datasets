@@ -19,6 +19,7 @@ import abc
 import functools
 import inspect
 import itertools
+import json
 import os
 import sys
 from typing import Any, Optional
@@ -164,7 +165,6 @@ class DatasetBuilder(object):
   # the list of files that should be present. It will be
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
-
 
   def __init__(self, *, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
@@ -383,32 +383,45 @@ class DatasetBuilder(object):
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
 
-          # Skip statistics computation if tfdv isn't present
-          try:
-            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
-            skip_stats_computation = False
-          except ImportError:
-            skip_stats_computation = True
-
-          splits = list(self.info.splits.values())
-          statistics_already_computed = bool(
-              splits and splits[0].statistics.num_examples)
-          # Update DatasetInfo metadata by computing statistics from the data.
-          if (skip_stats_computation or
-              download_config.compute_stats == download.ComputeStatsMode.SKIP or
-              download_config.compute_stats == download.ComputeStatsMode.AUTO
-              and statistics_already_computed
-             ):
-            logging.info(
-                "Skipping computing stats for mode %s.",
-                download_config.compute_stats)
-          else:  # Mode is forced or stats do not exists yet
-            logging.info("Computing statistics.")
-            self.info.compute_dynamic_properties()
           self.info.download_size = dl_manager.downloaded_size
-          # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
+
+  def generate_statistics(self, compute_stats=None):
+    """Generate statistics for Dataset
+
+    Args:
+      compute_stats: `tfds.download.ComputeStats`, whether to compute
+        statistics over the generated data. Defaults to `AUTO`.
+
+    Note: Requires `tensorflow_data_validation`.
+    """
+    compute_stats = download.ComputeStatsMode(compute_stats or
+                                              download.ComputeStatsMode.AUTO)
+
+    splits = list(self.info.splits.values())
+    statistics_already_computed = bool(
+        splits and splits[0].statistics.num_examples)
+
+    if (compute_stats == download.ComputeStatsMode.SKIP or
+        compute_stats == download.ComputeStatsMode.AUTO and
+        statistics_already_computed):
+      logging.info("Skipping computing stats for mode %s.", compute_stats)
+    else:
+      logging.info("Computing statistics.")
+      import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
+      self.info.compute_dynamic_properties()
+      # for self.info.splits.values()
+      statistics = {
+          "splits": [{
+              "name": split_name,
+              "statistics": split.statistics  # TODO: Save only neccessary fields 
+          } for split_name, split in self.info.splits.items()]
+      }
+      statistics_path = os.path.join(self._data_dir, "statistics.json")
+      with tf.io.gfile.GFile(statistics_path, "w") as f:
+        f.write(str(statistics)) # TODO: Fix this
+        # f.write(json.dumps(statistics, indent=4))
 
   def as_dataset(
       self,
