@@ -184,8 +184,8 @@ c4/en/2.2.1
 c4/en/2.3.0
 c4/en/2.3.1
 caltech101/3.0.0
-caltech_birds2010/0.1.0
-caltech_birds2011/0.1.0
+caltech_birds2010/0.1.1
+caltech_birds2011/0.1.1
 cars196/2.0.0
 cars196/2.1.0
 cassava/0.1.0
@@ -598,6 +598,7 @@ imagenet2012_real/1.0.0
 imagenet2012_subset/10pct/5.0.0
 imagenet2012_subset/1pct/5.0.0
 imagenet_a/0.1.0
+imagenet_r/0.1.0
 imagenet_resized/16x16/0.1.0
 imagenet_resized/32x32/0.1.0
 imagenet_resized/64x64/0.1.0
@@ -806,6 +807,13 @@ para_crawl/ensl_plain_text/1.0.0
 para_crawl/ensv_plain_text/1.0.0
 patch_camelyon/2.0.0
 paws_wiki/1.0.0
+paws_x_wiki/de/1.0.0
+paws_x_wiki/en/1.0.0
+paws_x_wiki/es/1.0.0
+paws_x_wiki/fr/1.0.0
+paws_x_wiki/ja/1.0.0
+paws_x_wiki/ko/1.0.0
+paws_x_wiki/zh/1.0.0
 pet_finder/1.0.0
 pg19/0.1.1
 places365_small/2.0.0
@@ -871,6 +879,7 @@ smallnorb/2.0.0
 smallnorb/2.1.0
 snli/plain_text/1.0.0
 speech_commands/0.0.2
+spoken_digit/1.0.9
 squad/plain_text/1.0.0
 stanford_dogs/0.2.0
 stanford_online_products/1.0.0
@@ -1663,3 +1672,4 @@ yelp_polarity_reviews/bytes/0.1.0
 yelp_polarity_reviews/plain_text/0.1.0
 yelp_polarity_reviews/subwords32k/0.1.0
 yelp_polarity_reviews/subwords8k/0.1.0
+yes_no/1.0.0
