@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # coding=utf-8
-"""Tests for tensorflow_datasets.core.features.text.subword_text_encoder."""
+"""Tests for tensorflow_datasets.core.deprecated.text.subword_text_encoder."""
 from __future__ import unicode_literals
 
 import os
@@ -22,8 +22,8 @@ import os
 from absl.testing import parameterized
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
-from tensorflow_datasets.core.features.text import subword_text_encoder
-from tensorflow_datasets.core.features.text import text_encoder
+from tensorflow_datasets.core.deprecated.text import subword_text_encoder
+from tensorflow_datasets.core.deprecated.text import text_encoder
 from tensorflow_datasets.core.utils import py_utils
 
 TEST_DATA_DIR = os.path.join(py_utils.tfds_dir(), 'testing', 'test_data')

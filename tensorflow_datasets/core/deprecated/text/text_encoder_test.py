@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # coding=utf-8
-"""Tests for tensorflow_datasets.core.features.text.text_encoder."""
+"""Tests for tensorflow_datasets.core.deprecated.text.text_encoder."""
 from __future__ import unicode_literals
 
 import os
@@ -22,7 +22,7 @@ import os
 from absl.testing import parameterized
 import numpy as np
 from tensorflow_datasets import testing
-from tensorflow_datasets.core.features.text import text_encoder
+from tensorflow_datasets.core.deprecated.text import text_encoder
 
 ZH_HELLO = '你好 '
 EN_HELLO = 'hello '
