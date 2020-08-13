@@ -183,16 +183,16 @@ class Video(sequence_feature.Sequence):
     return super(Video, self).encode_example(encoded_video)
 
   def repr_html(self, ex: np.ndarray) -> str:
-    """Video are displayed in the player."""
-    video = np.stack([_create_thumbnail(frame) for frame in ex], axis=0)
+    """Video are displayed as GIFs."""
+    gif = [_create_thumbnail(frame) for frame in ex]
 
     # Convert to base64
-    vid_str = utils.get_base64(lambda buff: imageio.mimwrite(
-        buff, video, format='.mp4', fps=video.shape[0]))
+    gif_str = utils.get_base64(
+        lambda buff: gif[0].save(buff, format='GIF', save_all=True,
+                                 append_images=gif[1:], duration=500, loop=0))
 
     # Display HTML
-    return f'<video controls="controls" src="data:video/mp4;base64,' \
-           f'{vid_str}" type="video/mp4" />'
+    return f'<img src="data:image/gif;base64,{gif_str}"  alt="Gif" />'
 
 
 def _create_thumbnail(ex):
@@ -210,7 +210,7 @@ def _create_thumbnail(ex):
   img = lazy_imports_lib.lazy_imports.PIL_Image.fromarray(ex, mode=mode)
   img = postprocess(img)
   img.thumbnail((128, 128))  # Resize the frame
-  return np.array(img)
+  return img
 
 
 
