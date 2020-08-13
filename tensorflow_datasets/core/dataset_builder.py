@@ -25,8 +25,10 @@ import sys
 from typing import Any, Optional
 
 from absl import logging
+from google.protobuf import json_format
 import six
 import tensorflow.compat.v2 as tf
+import termcolor
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import download
@@ -41,7 +43,6 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
-import termcolor
 
 if six.PY3:
   import pathlib  # pylint: disable=g-import-not-at-top
@@ -411,17 +412,16 @@ class DatasetBuilder(object):
       logging.info("Computing statistics.")
       import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
       self.info.compute_dynamic_properties()
-      # for self.info.splits.values()
       statistics = {
           "splits": [{
               "name": split_name,
-              "statistics": split.statistics  # TODO: Save only neccessary fields 
+              # TODO: Save only neccessary fields
+              "statistics": json_format.MessageToDict(split.statistics)
           } for split_name, split in self.info.splits.items()]
       }
       statistics_path = os.path.join(self._data_dir, "statistics.json")
       with tf.io.gfile.GFile(statistics_path, "w") as f:
-        f.write(str(statistics)) # TODO: Fix this
-        # f.write(json.dumps(statistics, indent=4))
+        f.write(json.dumps(statistics, indent=4))
 
   def as_dataset(
       self,
