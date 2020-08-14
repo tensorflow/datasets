@@ -19,8 +19,10 @@ import os
 import subprocess
 import tempfile
 
+import numpy as np
 import six
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 
@@ -112,7 +114,6 @@ class Video(sequence_feature.Sequence):
   def _ffmpeg_path(self):
     return 'ffmpeg'
 
-
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, six.string_types):
       ffmpeg_args = [self._ffmpeg_path, '-i', path_or_fobj]
@@ -177,3 +178,27 @@ class Video(sequence_feature.Sequence):
     else:
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
+
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Video are displayed as GIFs."""
+    # Use GIF as there is no easy way to generate a HTML5 compatible video
+    # without FFMPEG or other lib that the user is likelly to have on
+    # colab by default.
+    gif = [image_feature.create_thumbnail(frame) for frame in ex]
+
+    def write_buff(buff):
+      gif[0].save(
+          buff,
+          format='GIF',
+          save_all=True,
+          append_images=gif[1:],
+          # Could add a frame_rate kwargs in __init__ to customize this.
+          duration=41,  # 41ms / img ~= 24 img / sec
+          loop=0,
+      )
+
+    # Convert to base64
+    gif_str = utils.get_base64(write_buff)
+
+    # Display HTML
+    return f'<img src="data:image/gif;base64,{gif_str}"  alt="Gif" />'

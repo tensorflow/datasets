@@ -16,6 +16,7 @@
 """Question answering datasets."""
 
 from tensorflow_datasets.question_answering.ai2_arc import Ai2Arc
+from tensorflow_datasets.question_answering.ai2_arc_with_ir import Ai2ArcWithIR
 from tensorflow_datasets.question_answering.cosmos_qa import CosmosQA
 from tensorflow_datasets.question_answering.mctaco import Mctaco
 from tensorflow_datasets.question_answering.natural_questions import NaturalQuestions

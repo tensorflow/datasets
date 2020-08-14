@@ -197,28 +197,34 @@ class Image(feature.FeatureConnector):
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
-    PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
-
     # Normalize image and resize
-    _, _, c = ex.shape
-    postprocess = _postprocess_noop
-    if c == 1:
-      ex = ex.squeeze(axis=-1)
-      mode = 'L'
-    elif ex.dtype == np.uint16:
-      mode = 'I;16'
-      postprocess = _postprocess_convert_rgb
-    else:
-      mode = None
-    img = PIL_Image.fromarray(ex, mode=mode)
-    img = postprocess(img)
-    img.thumbnail((128, 128))  # Resize the image
+    img = create_thumbnail(ex)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
 
     # Display HTML
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
+
+
+def create_thumbnail(ex):
+  """Creates the image from the np.array input."""
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+
+  _, _, c = ex.shape
+  postprocess = _postprocess_noop
+  if c == 1:
+    ex = ex.squeeze(axis=-1)
+    mode = 'L'
+  elif ex.dtype == np.uint16:
+    mode = 'I;16'
+    postprocess = _postprocess_convert_rgb
+  else:
+    mode = None
+  img = PIL_Image.fromarray(ex, mode=mode)
+  img = postprocess(img)
+  img.thumbnail((128, 128))  # Resize the image in-place
+  return img
 
 
 def _postprocess_noop(img):

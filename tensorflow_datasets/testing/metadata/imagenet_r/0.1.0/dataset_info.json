@@ -1,0 +1,56 @@
+{
+  "citation": "@article{hendrycks2020many,\n  title={The Many Faces of Robustness: A Critical Analysis of Out-of-Distribution Generalization},\n  author={Dan Hendrycks and Steven Basart and Norman Mu and Saurav Kadavath and Frank Wang and Evan Dorundo and Rahul Desai and Tyler Zhu and Samyak Parajuli and Mike Guo and Dawn Song and Jacob Steinhardt and Justin Gilmer},\n  journal={arXiv preprint arXiv:2006.16241},\n  year={2020}\n}",
+  "description": "ImageNet-R is a set of images labelled with ImageNet labels that were obtained\nby collecting art, cartoons, deviantart, graffiti, embroidery, graphics,\norigami, paintings, patterns, plastic objects, plush objects, sculptures,\nsketches, tattoos, toys, and video game renditions of ImageNet classes.\nImageNet-R has renditions of 200 ImageNet classes resulting in 30,000 images.\nby collecting new data and keeping only those images that ResNet-50 models fail\nto correctly classify. For more details please refer to the paper.\n\nThe label space is the same as that of ImageNet2012. Each example is\nrepresented as a dictionary with the following keys:\n\n* 'image': The image, a (H, W, 3)-tensor.\n* 'label': An integer in the range [0, 1000).\n* 'file_name': A unique sting identifying the example within the dataset.",
+  "downloadSize": "2191079936",
+  "location": {
+    "urls": [
+      "https://github.com/hendrycks/imagenet-r"
+    ]
+  },
+  "name": "imagenet_r",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "2175557475",
+      "shardLengths": [
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

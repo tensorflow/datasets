@@ -1,0 +1,1 @@
+https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar 2191079936 18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52

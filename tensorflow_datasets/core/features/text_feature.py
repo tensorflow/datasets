@@ -24,8 +24,8 @@ import textwrap
 from absl import logging
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import feature
-from tensorflow_datasets.core.features import text as text_lib
 
 
 class Text(feature.Tensor):
