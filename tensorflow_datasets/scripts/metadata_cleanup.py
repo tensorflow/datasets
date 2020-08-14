@@ -56,7 +56,7 @@ def _extract_metadata_versions(metadata_dir: str) -> List[str]:
   existing_names = []
   for root, _, _ in tf.io.gfile.walk(metadata_dir):
     full_name = root[len(metadata_dir) + 1:]
-    if tfds.core.registered.is_full_name(full_name):
+    if tfds.core.load.is_full_name(full_name):
       existing_names.append(full_name)
   return existing_names
 
@@ -67,7 +67,7 @@ def _delete_metadata_dirs(metadata_dir: str) -> None:
   Args:
     metadata_dir: Path to metadata directory (testing/metadata).
   """
-  registered_names = set(tfds.core.registered.list_full_names())
+  registered_names = set(tfds.core.load.list_full_names())
   existing_names = set(_extract_metadata_versions(metadata_dir))
   for extra_full_name in sorted(existing_names - registered_names):
     path_to_delete = os.path.join(metadata_dir, extra_full_name)

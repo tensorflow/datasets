@@ -29,7 +29,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -114,7 +114,7 @@ class DatasetBuilderTest(testing.TestCase):
   @testing.run_in_graph_and_eager_modes()
   def test_load(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      dataset = registered.load(
+      dataset = load.load(
           name="dummy_dataset_with_configs",
           data_dir=tmp_dir,
           download=True,
@@ -155,12 +155,12 @@ class DatasetBuilderTest(testing.TestCase):
           side_effect=NotImplementedError):
         # Make sure the dataset cannot be generated.
         with self.assertRaises(NotImplementedError):
-          registered.load(
+          load.load(
               name="mnist",
               data_dir=tmp_dir)
         # Enable GCS access so that dataset will be loaded from GCS.
         with self.gcs_access():
-          _, info = registered.load(
+          _, info = load.load(
               name="mnist",
               data_dir=tmp_dir,
               with_info=True)
@@ -347,7 +347,7 @@ class DatasetBuilderTest(testing.TestCase):
       with self.assertRaisesWithPredicateMatch(
           ValueError, "`all` is a special"):
         # Raise error during .download_and_prepare()
-        registered.load(
+        load.load(
             name="invalid_split_dataset",
             data_dir=tmp_dir,
         )
@@ -758,7 +758,7 @@ class NestedSequenceBuilderTest(testing.TestCase):
   @testing.run_in_graph_and_eager_modes()
   def test_nested_sequence(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      ds_train, ds_info = registered.load(
+      ds_train, ds_info = load.load(
           name="nested_sequence_builder",
           data_dir=tmp_dir,
           split="train",

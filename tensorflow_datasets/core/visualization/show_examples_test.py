@@ -18,7 +18,7 @@
 import mock
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core import visualization
 
 # Import for registration
@@ -30,7 +30,7 @@ class ShowExamplesTest(testing.TestCase):
   @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples(self, mock_fig):
     with testing.mock_data(num_examples=20):
-      ds, ds_info = registered.load(
+      ds, ds_info = load.load(
           'imagenet2012', split='train', with_info=True)
     visualization.show_examples(ds, ds_info)
 
@@ -41,7 +41,7 @@ class ShowStatisticsTest(testing.TestCase):
 
   def test_show_examples(self):
     with testing.mock_data():
-      builder = registered.builder('imagenet2012')
+      builder = load.builder('imagenet2012')
       visualization.show_statistics(builder.info)
 
 
