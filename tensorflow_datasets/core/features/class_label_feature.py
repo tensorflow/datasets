@@ -19,6 +19,9 @@ import os
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class ClassLabel(feature.Tensor):
@@ -173,6 +176,16 @@ class ClassLabel(feature.Tensor):
       return str(ex)
     else:
       return f"{ex} ({self.int2str(ex)})"
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> "ClassLabel":
+    return cls(**value)
+
+  def to_json_content(self) -> Json:
+    if self._str2int is not None:
+      return {"names": self.names}
+    else:
+      return {"num_classes": self.num_classes}
 
 
 def _get_names_filepath(data_dir, feature_name):

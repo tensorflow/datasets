@@ -36,7 +36,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
     np_audio = self.create_np_audio()
 
     self.assertFeature(
-        feature=features.Audio(),
+        feature=features.Audio(sample_rate=1000),
         shape=(None,),
         dtype=tf.int64,
         tests=[
@@ -45,6 +45,10 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_audio,
             ),
         ],
+        test_attributes=dict(
+            _file_format=None,
+            sample_rate=1000,
+        )
     )
 
   def test_numpy_array_float(self):
@@ -84,6 +88,9 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_audio,
             ),
         ],
+        test_attributes=dict(
+            _file_format="wav",
+        )
     )
 
   def test_file_object(self):

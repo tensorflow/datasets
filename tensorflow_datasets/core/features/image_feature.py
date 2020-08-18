@@ -25,6 +25,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 ENCODE_FN = {
     'png': tf.image.encode_png,
@@ -205,6 +208,20 @@ class Image(feature.FeatureConnector):
 
     # Display HTML
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Image':
+    shape = tuple(value['shape'])
+    dtype = tf.dtypes.as_dtype(value['dtype'])
+    encoding_format = value['encoding_format']
+    return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
+
+  def to_json_content(self) -> Json:
+    return {
+        'shape': list(self._shape),
+        'dtype': self._dtype.name,
+        'encoding_format': self._encoding_format
+    }
 
 
 def create_thumbnail(ex):

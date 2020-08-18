@@ -275,6 +275,7 @@ def run_in_graph_and_eager_modes(func=None,
 
   def decorator(f):
     """Decorator for a method."""
+
     def decorated(self, *args, **kwargs):
       """Run the decorated test method."""
       if not tf.executing_eagerly():
@@ -319,22 +320,68 @@ class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
   @run_in_graph_and_eager_modes()
-  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
+  def assertFeature(
+      self,
+      feature,
+      shape,
+      dtype,
+      tests,
+      serialized_info=None,
+      skip_feature_tests=False,
+      test_attributes=None):
     """Test the given feature against the predicates."""
 
-    # Check the shape/dtype
+    with self._subTest('feature'):
+      self._assert_feature(
+          feature=feature,
+          shape=shape,
+          dtype=dtype,
+          tests=tests,
+          serialized_info=serialized_info,
+          skip_feature_tests=skip_feature_tests,
+          test_attributes=test_attributes,
+      )
+    # TODO(tfds): Remove `skip_feature_tests` after text encoders are removed
+    if not skip_feature_tests:
+      # Test the feature again to make sure that feature restored from config
+      # behave similarly.
+      with self._subTest('feature_roundtrip'):
+        new_feature = feature.from_json_content(feature.to_json_content())
+        self._assert_feature(
+            feature=new_feature,
+            shape=shape,
+            dtype=dtype,
+            tests=tests,
+            serialized_info=serialized_info,
+            skip_feature_tests=skip_feature_tests,
+            test_attributes=test_attributes,
+        )
+
+  def _assert_feature(
+      self,
+      feature,
+      shape,
+      dtype,
+      tests,
+      serialized_info=None,
+      skip_feature_tests=False,
+      test_attributes=None):
     with self._subTest('shape'):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
       self.assertEqual(feature.dtype, dtype)
 
     # Check the serialized features
-    if serialized_info is not None:
+    if serialized_info:
       with self._subTest('serialized_info'):
         self.assertEqual(
             serialized_info,
             feature.get_serialized_info(),
         )
+
+    if not skip_feature_tests and test_attributes:
+      for key, value in test_attributes.items():
+        self.assertEqual(getattr(feature, key), value)
 
     # Create the feature dict
     fdict = features.FeaturesDict({'inner': feature})
@@ -587,4 +634,3 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
-

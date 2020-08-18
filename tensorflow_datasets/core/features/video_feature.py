@@ -25,6 +25,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Video(sequence_feature.Sequence):
@@ -178,6 +181,20 @@ class Video(sequence_feature.Sequence):
     else:
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Video':
+    shape = tuple(value['shape'])
+    encoding_format = value['encoding_format']
+    ffmpeg_extra_args = value['ffmpeg_extra_args']
+    return cls(shape, encoding_format, ffmpeg_extra_args)
+
+  def to_json_content(self) -> Json:
+    return {
+        'shape': list(self.shape),
+        'encoding_format': self._encoding_format,
+        'ffmpeg_extra_args': self._extra_ffmpeg_args
+    }
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as GIFs."""
