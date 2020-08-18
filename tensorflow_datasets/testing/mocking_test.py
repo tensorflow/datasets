@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for tensorflow_datasets.testing.mocking."""
 
 import tensorflow.compat.v2 as tf
@@ -74,6 +73,25 @@ class MockingTest(test_case.TestCase):
       for ex in ds.take(10):
         self.assertEqual(ex['text'].dtype, tf.int64)
         ex['text'].shape.assert_is_compatible_with((None,))
+
+  def test_mocking_wider_face(self):
+    with mocking.mock_data():
+      ds = load.load('wider_face', split='train')
+      self.assertEqual(ds.element_spec, {
+          'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
+          'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
+          'faces': {
+              'bbox': tf.TensorSpec(shape=(None, 4), dtype=tf.float32),
+              'blur': tf.TensorSpec(shape=(None,), dtype=tf.uint8),
+              'expression': tf.TensorSpec(shape=(None,), dtype=tf.bool),
+              'illumination': tf.TensorSpec(shape=(None,), dtype=tf.bool),
+              'occlusion': tf.TensorSpec(shape=(None,), dtype=tf.uint8),
+              'pose': tf.TensorSpec(shape=(None,), dtype=tf.bool),
+              'invalid': tf.TensorSpec(shape=(None,), dtype=tf.bool),
+          }
+      })
+      for ex in ds.take(2):
+        self.assertEqual(ex['faces']['expression'].dtype, tf.bool)
 
   def test_custom_as_dataset(self):
     def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
