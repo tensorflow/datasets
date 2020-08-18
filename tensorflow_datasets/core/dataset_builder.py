@@ -569,7 +569,10 @@ class DatasetBuilder(object):
       ds = ds.map(lambda fs: (fs[input_f], fs[target_f]),
                   num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
-    ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
+    # If skip_prefetch is False, allow the pipeline
+    # to prefetch items
+    if not read_config.skip_prefetch:
+      ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 
     # If shuffling is True and seeds not set, allow pipeline to be
     # non-deterministic

@@ -48,6 +48,7 @@ class _ReadConfig(object):
   interleave_block_length = attr.ib(default=16)
   input_context = attr.ib(default=None)
   experimental_interleave_sort_fn = attr.ib(default=None)
+  skip_prefetch = attr.ib(default=False)
 
   @property
   def interleave_parallel_reads(self):
@@ -97,6 +98,13 @@ class ReadConfig(_ReadConfig):
       `dict(file: str, take: int, skip: int)` and returns the modified version
       to read. This can be used to sort/shuffle the shards to read in
       a custom order, instead of relying on `shuffle_files=True`.
+    skip_prefetch: If False (default), the dataset will prefetch its contents.
+      Most scenarios would require data prefetching for optimal training pipeline
+      performance (especially on accelerators) but this may be undesireable in certain 
+      scenarios where the user might want to `ds.map(map_fn)` with certain custom 
+      operations on the pipeline. In general, the performance of the pipeline 
+      may be hampered if `ds.prefetch` is not the last operation on the dataset. 
+      In such cases, this should be set to True.
   """
 
   def __init__(self, **kwargs):
