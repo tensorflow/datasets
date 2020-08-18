@@ -239,6 +239,3 @@ class RegisteredTest(testing.TestCase):
     name = "skip_registered_dataset"
     self.assertEqual(name, SkipRegisteredDataset.name)
     self.assertNotIn(name, load.list_builders())
-
-if __name__ == "__main__":
-  testing.test_main()
