@@ -16,8 +16,10 @@
 """Access registered datasets."""
 
 import abc
+import collections
 import contextlib
 import inspect
+from typing import Iterator
 
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import py_utils
@@ -33,13 +35,18 @@ _ABSTRACT_DATASET_REGISTRY = {}
 # <str snake_cased_name, in development DatasetBuilder subclass>
 _IN_DEVELOPMENT_REGISTRY = {}
 
+# Keep track of Dict[str (module name), List[DatasetBuilder]]
+# This is directly accessed by `tfds.community.builder_cls_from_module` when
+# importing community packages.
+_MODULE_TO_DATASETS = collections.defaultdict(list)
+
 
 
 _skip_registration = False
 
 
 @contextlib.contextmanager
-def skip_registration():
+def skip_registration() -> Iterator[None]:
   """Context manager within which dataset builders are not registered."""
   global _skip_registration
   try:
@@ -69,9 +76,18 @@ class RegisteredDataset(abc.ABCMeta):
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
+    is_abstract = inspect.isabstract(builder_cls)
+
+    # Capture all concrete datasets, including when skip registration is True.
+    # This ensure that `builder_cls_from_module` can load the datasets
+    # even when the module has been imported inside a `skip_registration`
+    # context.
+    if not is_abstract:
+      _MODULE_TO_DATASETS[builder_cls.__module__].append(builder_cls)
+
     if _skip_registration:
       pass  # Skip dataset registration within the contextmanager
-    elif inspect.isabstract(builder_cls):
+    elif is_abstract:
       _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
     elif class_dict.get("IN_DEVELOPMENT"):
       _IN_DEVELOPMENT_REGISTRY[name] = builder_cls

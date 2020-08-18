@@ -13,29 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for xquad dataset module."""
+"""gztan dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import xquad
+from tensorflow_datasets.audio.gtzan import gtzan
 
 
-class XquadTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = xquad.Xquad
-  BUILDER_CONFIG_NAMES_TO_TEST = ["ar"]
-
-  DL_EXTRACT_RESULT = {
-      "translate-train": "translate-train.json",
-      "translate-dev": "translate-dev.json",
-      "translate-test": "translate-test.json",
-      "test": "test.json",
-  }
-
+class GTZANTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = gtzan.GTZAN
   SPLITS = {
-      "translate-train": 3,
-      "translate-dev": 2,
-      "translate-test": 3,
-      "test": 1,
+      "train": 1,  # Number of fake train examples
   }
+  DL_EXTRACT_RESULT = {"genres": ""}
+
 
 if __name__ == "__main__":
   testing.test_main()
