@@ -1,0 +1,1 @@
+https://s3.us-south.cloud-object-storage.appdomain.cloud/dax-assets-dev/dax-double-pendulum-chaotic/2.0.1/double-pendulum-chaotic.tar.gz 594108225 4ca743b4b783094693d313ebedc2e8e53cf29821ee8b20abd99f8fb4c0866f8d
