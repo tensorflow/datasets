@@ -858,8 +858,8 @@ def _list_all_version_dirs(root_dir):
   ]
 
 
-class FileAdapterBuilder(DatasetBuilder):
-  """Base class for datasets with data generation based on file adapter."""
+class FileReaderBuilder(DatasetBuilder):  # pylint: disable = abstract-method
+  """Reader part for datasets with data generation based on file adapter """
 
   @utils.memoized_property
   def _example_specs(self):
@@ -868,6 +868,27 @@ class FileAdapterBuilder(DatasetBuilder):
   @property
   def _tfrecords_reader(self):
     return tfrecords_reader.Reader(self._data_dir, self._example_specs)
+
+  def _as_dataset(
+      self,
+      split=splits_lib.Split.TRAIN,
+      decoders=None,
+      read_config=None,
+      shuffle_files=False):
+    ds = self._tfrecords_reader.read(
+        name=self.name,
+        instructions=split,
+        split_infos=self.info.splits.values(),
+        read_config=read_config,
+        shuffle_files=shuffle_files,
+    )
+    decode_fn = functools.partial(
+        self.info.features.decode_example, decoders=decoders)
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    return ds
+
+class FileAdapterBuilder(FileReaderBuilder):
+  """Base class for datasets with data generation based on file adapter."""
 
   @abc.abstractmethod
   def _split_generators(self, dl_manager):
@@ -956,24 +977,6 @@ class FileAdapterBuilder(DatasetBuilder):
 
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
-
-  def _as_dataset(
-      self,
-      split=splits_lib.Split.TRAIN,
-      decoders=None,
-      read_config=None,
-      shuffle_files=False):
-    ds = self._tfrecords_reader.read(
-        name=self.name,
-        instructions=split,
-        split_infos=self.info.splits.values(),
-        read_config=read_config,
-        shuffle_files=shuffle_files,
-    )
-    decode_fn = functools.partial(
-        self.info.features.decode_example, decoders=decoders)
-    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-    return ds
 
 
 def _get_checksums_path(builder: DatasetBuilder) -> Optional[str]:

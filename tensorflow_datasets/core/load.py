@@ -15,11 +15,10 @@
 
 """Access registered datasets."""
 
-import functools
 import os
-import posixpath
 import re
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type
+import posixpath
 
 from absl import flags
 from absl import logging
@@ -31,8 +30,6 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import tfrecords_reader
-from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
@@ -116,7 +113,7 @@ class DatasetNotFoundError(ValueError):
     ValueError.__init__(self, error_string)
 
 
-class ConfigBuilder(dataset_builder.DatasetBuilder):
+class ConfigBuilder(dataset_builder.FileReaderBuilder):
 
   def __init__(self, *, name, data_dir=None, config=None, version):
     self.name = name
@@ -124,35 +121,13 @@ class ConfigBuilder(dataset_builder.DatasetBuilder):
     super(ConfigBuilder, self).__init__(
         data_dir=data_dir, config=config, version=version)
 
-  def _info(self):
+  def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(builder=self)
 
-  def _download_and_prepare(self, **kwargs):  # -> NoReturn:
+  def _download_and_prepare(self, **kwargs):
     raise NotImplementedError(
         'No need to call download_and_prepare function for {}.'.format(
             type(self).__name__))
-
-  @py_utils.memoized_property
-  def _example_specs(self):
-    return self.info.features.get_serialized_info()
-
-  @property
-  def _tfrecords_reader(self):
-    return tfrecords_reader.Reader(self._data_dir, self._example_specs)
-
-  def _as_dataset(self, split, decoders=None, read_config=None,
-                  shuffle_files=False):
-    ds = self._tfrecords_reader.read(
-        name=self.name,
-        instructions=split,
-        split_infos=self.info.splits.values(),
-        read_config=read_config,
-        shuffle_files=shuffle_files,
-    )
-    decode_fn = functools.partial(
-        self.info.features.decode_example, decoders=decoders)
-    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-    return ds
 
 
 def list_builders() -> List[str]:
@@ -221,6 +196,28 @@ def builder(
   with py_utils.try_reraise(
       prefix="Failed to construct dataset {}".format(name)):
     return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
+
+
+def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
+  """Returns Builder for the Dataset at for the given path.
+
+  Usage:
+
+  ```py
+
+  builder = tfds.core.builder_from_directory('path/to/my_dataset/config/1.0.0')
+  ds = builder.as_dataset(split='train')
+  ```
+
+  Args:
+    builder_dir: `str`, path to directory to read data.
+
+  Returns:
+    builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
+  """
+  parent_dir, ds_name, config, version = _get_builder_kwargs(builder_dir)
+  return ConfigBuilder(name=ds_name, data_dir=parent_dir, config=config,
+                       version=version)
 
 
 def load(
@@ -376,46 +373,30 @@ def load(
   return ds
 
 
-def load_from_directory(
-    name: str,
-    *,
-    split: Optional[Tree[splits_lib.Split]] = None,
-    data_dir: Optional[str] = None,
-    batch_size: Optional[int] = None,
-    shuffle_files: bool = False,
-    as_supervised: bool = False,
-    decoders: Optional[TreeDict[decode.Decoder]] = None,
-    read_config: Optional[read_config_lib.ReadConfig] = None,
-    with_info: bool = False,
-    builder_kwargs: Optional[Dict[str, Any]] = None,
-    as_dataset_kwargs: Optional[Dict[str, Any]] = None,
-):
+def _get_builder_kwargs(path: str) -> Tuple[str, str, Optional[str], str]:
+  """Return keyword argument for a given path
 
-  name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  name_builder_kwargs.update(builder_kwargs or {})
-  builder_kwargs = name_builder_kwargs
+  ```
+  _get_builder_kwargs('path/to/my_dataset/config/1.0.0') == (
+      'path/to', 'my_dataset', 'config', '1.0.0')
+  ```
 
-  if not builder_kwargs.get("version", None):
-    path = os.path.expanduser(
-        data_dir or os.path.join(constants.DATA_DIR, name))
-    if not tf.io.gfile.exists(path):
-      raise AssertionError(f"Dataset {name} not found at {path}.")
-    builder_kwargs["version"] = tf.io.gfile.listdir(path)[0]
+  Args:
+    path: `str`, Path to the Dataset version directory.
 
-  if not as_dataset_kwargs:
-    as_dataset_kwargs = dict()
-  as_dataset_kwargs.setdefault("split", split)
-  as_dataset_kwargs.setdefault("as_supervised", as_supervised)
-  as_dataset_kwargs.setdefault("batch_size", batch_size)
-  as_dataset_kwargs.setdefault("decoders", decoders)
-  as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
-  as_dataset_kwargs.setdefault("read_config", read_config)
+  Returns:
+    A tuple of ('path_to_parent_dir', 'dataset_name', 'config', 'version')
+  """
+  sep = os.sep
+  dirs = path.split(sep)
+  full_names = list_full_names()
 
-  dbuilder = ConfigBuilder(name=name, data_dir=data_dir, **builder_kwargs)  # pylint: disable = missing-kwoa
-  ds = dbuilder.as_dataset(**as_dataset_kwargs)
-  if with_info:
-    return ds, dbuilder.info
-  return ds
+  if len(dirs) > 2 and (sep).join(dirs[-3:]) in full_names:
+    return ((sep).join(dirs[:-3]), dirs[-3], dirs[-2], dirs[-1])
+  if len(dirs) > 1 and (sep).join(dirs[-2:]) in full_names:
+    return ((sep).join(dirs[:-2]), dirs[-2], None, dirs[-1])
+  raise ValueError("Path should be like `path/to/my_dataset/1.0.0`"
+                   " or `path/to/my_dataset/config/1.0.0`")
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):
@@ -437,7 +418,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
       kwargs[attr] = val
     return name, kwargs
   except:
-    logging.error(_NAME_STR_ERR.format(name_str))   # pylint: disable=logging-format-interpolation
+    logging.error(_NAME_STR_ERR.format(name_str))  # pylint: disable=logging-format-interpolation
     raise
 
 

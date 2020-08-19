@@ -239,3 +239,19 @@ class RegisteredTest(testing.TestCase):
     name = "skip_registered_dataset"
     self.assertEqual(name, SkipRegisteredDataset.name)
     self.assertNotIn(name, load.list_builders())
+
+  def test_get_builder_kwargs(self):
+    with mock.patch.object(
+        load, 'list_full_names',
+        return_value=["my_dataset/config/1.0.0", "my_dataset/1.0.0"]
+    ):
+      self.assertEqual(
+          ('path/to', 'my_dataset', 'config', '1.0.0'),
+          load._get_builder_kwargs('path/to/my_dataset/config/1.0.0'))
+      self.assertEqual(
+          ('path', 'my_dataset', None, '1.0.0'),
+          load._get_builder_kwargs('path/my_dataset/1.0.0'))
+
+
+if __name__ == "__main__":
+  testing.test_main()

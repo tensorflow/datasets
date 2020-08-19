@@ -40,12 +40,12 @@ from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
-from tensorflow_datasets.core.features import FeatureConnector
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
 
@@ -370,7 +370,7 @@ class DatasetInfo(object):
     if self.features:
       self.features.load_metadata(dataset_info_dir)
     elif tf.io.gfile.exists(self._feature_info_path(dataset_info_dir)):
-      self._features = FeatureConnector.from_config(
+      self._features = feature_lib.FeatureConnector.from_config(
           self._feature_info_path(dataset_info_dir))
       self.features._set_top_level()  # pylint: disable=protected-access
 
