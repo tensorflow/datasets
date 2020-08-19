@@ -36,6 +36,7 @@ from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
 from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
+from tensorflow_datasets.core.load import load_from_directory
 from tensorflow_datasets.core.splits import even_splits
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
@@ -69,6 +70,7 @@ __all__ = [
     "is_dataset_on_gcs",
     "list_builders",
     "load",
+    "load_from_directory",
     "ReadConfig",
     "Split",
     "show_examples",

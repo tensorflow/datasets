@@ -45,6 +45,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.features import FeatureConnector
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
 
@@ -53,6 +54,7 @@ from google.protobuf import json_format
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
+FEATURE_INFO_FILENAME = "features.json"
 LICENSE_FILENAME = "LICENSE"
 
 INFO_STR = """tfds.core.DatasetInfo(
@@ -278,6 +280,9 @@ class DatasetInfo(object):
   def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
+  def _feature_info_path(self, dataset_info_dir):
+    return os.path.join(dataset_info_dir, FEATURE_INFO_FILENAME)
+
   def compute_dynamic_properties(self):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
@@ -322,6 +327,7 @@ class DatasetInfo(object):
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
+      self.features.save_config(self._feature_info_path(dataset_info_dir))
 
     # Save any additional metadata
     if self.metadata is not None:
@@ -363,6 +369,10 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
+    elif tf.io.gfile.exists(self._feature_info_path(dataset_info_dir)):
+      self._features = FeatureConnector.from_config(
+          self._feature_info_path(dataset_info_dir))
+      self.features._set_top_level()  # pylint: disable=protected-access
 
     if self.metadata is not None:
       self.metadata.load_metadata(dataset_info_dir)

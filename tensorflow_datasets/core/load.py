@@ -15,6 +15,8 @@
 
 """Access registered datasets."""
 
+import functools
+import os
 import posixpath
 import re
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
@@ -25,15 +27,18 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils import version as version_lib
 
 
 FLAGS = flags.FLAGS
@@ -109,6 +114,45 @@ class DatasetNotFoundError(ValueError):
       error_string = ("Dataset %s not found. Available datasets:%s\n"
                       "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
     ValueError.__init__(self, error_string)
+
+
+class ConfigBuilder(dataset_builder.DatasetBuilder):
+
+  def __init__(self, *, name, data_dir=None, config=None, version):
+    self.name = name
+    self.VERSION = version_lib.Version(version)
+    super(ConfigBuilder, self).__init__(
+        data_dir=data_dir, config=config, version=version)
+
+  def _info(self):
+    return dataset_info.DatasetInfo(builder=self)
+
+  def _download_and_prepare(self, **kwargs):  # -> NoReturn:
+    raise NotImplementedError(
+        'No need to call download_and_prepare function for {}.'.format(
+            type(self).__name__))
+
+  @py_utils.memoized_property
+  def _example_specs(self):
+    return self.info.features.get_serialized_info()
+
+  @property
+  def _tfrecords_reader(self):
+    return tfrecords_reader.Reader(self._data_dir, self._example_specs)
+
+  def _as_dataset(self, split, decoders=None, read_config=None,
+                  shuffle_files=False):
+    ds = self._tfrecords_reader.read(
+        name=self.name,
+        instructions=split,
+        split_infos=self.info.splits.values(),
+        read_config=read_config,
+        shuffle_files=shuffle_files,
+    )
+    decode_fn = functools.partial(
+        self.info.features.decode_example, decoders=decoders)
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    return ds
 
 
 def list_builders() -> List[str]:
@@ -332,6 +376,48 @@ def load(
   return ds
 
 
+def load_from_directory(
+    name: str,
+    *,
+    split: Optional[Tree[splits_lib.Split]] = None,
+    data_dir: Optional[str] = None,
+    batch_size: Optional[int] = None,
+    shuffle_files: bool = False,
+    as_supervised: bool = False,
+    decoders: Optional[TreeDict[decode.Decoder]] = None,
+    read_config: Optional[read_config_lib.ReadConfig] = None,
+    with_info: bool = False,
+    builder_kwargs: Optional[Dict[str, Any]] = None,
+    as_dataset_kwargs: Optional[Dict[str, Any]] = None,
+):
+
+  name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  name_builder_kwargs.update(builder_kwargs or {})
+  builder_kwargs = name_builder_kwargs
+
+  if not builder_kwargs.get("version", None):
+    path = os.path.expanduser(
+        data_dir or os.path.join(constants.DATA_DIR, name))
+    if not tf.io.gfile.exists(path):
+      raise AssertionError(f"Dataset {name} not found at {path}.")
+    builder_kwargs["version"] = tf.io.gfile.listdir(path)[0]
+
+  if not as_dataset_kwargs:
+    as_dataset_kwargs = dict()
+  as_dataset_kwargs.setdefault("split", split)
+  as_dataset_kwargs.setdefault("as_supervised", as_supervised)
+  as_dataset_kwargs.setdefault("batch_size", batch_size)
+  as_dataset_kwargs.setdefault("decoders", decoders)
+  as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
+  as_dataset_kwargs.setdefault("read_config", read_config)
+
+  dbuilder = ConfigBuilder(name=name, data_dir=data_dir, **builder_kwargs)  # pylint: disable = missing-kwoa
+  ds = dbuilder.as_dataset(**as_dataset_kwargs)
+  if with_info:
+    return ds, dbuilder.info
+  return ds
+
+
 def _dataset_name_and_kwargs_from_name_str(name_str):
   """Extract kwargs from name str."""
   res = _NAME_REG.match(name_str)
@@ -381,8 +467,8 @@ def _cast_to_pod(val):
 
 
 def _get_all_versions(
-    current_version: version.Version,
-    extra_versions: Iterable[version.Version],
+    current_version: version_lib.Version,
+    extra_versions: Iterable[version_lib.Version],
     current_version_only: bool,
 ) -> Iterable[str]:
   """Returns the list of all current versions."""
