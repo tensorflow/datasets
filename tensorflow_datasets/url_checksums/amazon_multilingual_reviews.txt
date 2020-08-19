@@ -1,0 +1,6 @@
+https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_multilingual_DE_v1_00.tsv.gz 241896005 46662759876aac133212cb0bde18b95a9bb4e420834368534ad9a2cc5ee49290
+https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_multilingual_FR_v1_00.tsv.gz 70583516 cbf345a7e4a394e658df532c1e73dd0f5b34305a0dfc861f775f06d1ce028c43
+https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_multilingual_JP_v1_00.tsv.gz 94688992 453e567d689cf30827d60be9824c99ffbc76f955d09610ad3273e64b85b7221e
+https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_multilingual_UK_v1_00.tsv.gz 349370868 65f366841deb01a47444d7d0478bce8b64ac1fc47f7e4fd82be3148a8b6597f3
+https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_multilingual_US_v1_00.tsv.gz 1466965039 61768896360e1f6f47e4a74397ba02a7db14fcf8e169a2fa6638657b7b12d045
+
