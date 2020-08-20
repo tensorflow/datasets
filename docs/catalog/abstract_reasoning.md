@@ -31,29 +31,37 @@ a particular matrix.
 
 *   **Homepage**:
     [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
 *   **Source code**:
-    [`tfds.image.abstract_reasoning.AbstractReasoning`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/abstract_reasoning.py)
+    [`tfds.image.AbstractReasoning`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/abstract_reasoning.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Data can be downloaded from
     https://console.cloud.google.com/storage/browser/ravens-matrices
     Please put all the tar.gz files in manual_dir.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 200,000
-'train'      | 1,200,000
-'validation' | 20,000
+Split          | Examples
+:------------- | --------:
+`'test'`       | 200,000
+`'train'`      | 1,200,000
+`'validation'` | 20,000
 
 *   **Features**:
 
@@ -67,9 +75,11 @@ FeaturesDict({
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -91,8 +101,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## abstract_reasoning/neutral (default config)

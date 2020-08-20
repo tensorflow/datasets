@@ -1,0 +1,3 @@
+https://github.com/google-research/google-research/raw/master/goemotions/data/dev.tsv 439059 575489c079c9de1097062a01738f998590d6b7ead66dd1c9fd1d2ba01fd8bc62
+https://github.com/google-research/google-research/raw/master/goemotions/data/test.tsv 436706 0587b2dd8b27b97352adbfc3fb083d46005c8946657fdc2b1ca8b1cc7f1f8be4
+https://github.com/google-research/google-research/raw/master/goemotions/data/train.tsv 3519053 1c254a142be5c00e80d819b9ae1bbd36d94b2eeb8f4b1271846508d57e57d9c5

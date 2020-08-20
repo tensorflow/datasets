@@ -1,0 +1,22 @@
+<annotation>
+<folder>JPEGImages</folder>
+<filename>2.jpg</filename>
+<path>/home/pi/detection_dataset/JPEGImages/2.jpg</path><source>
+<database>Unknown</database>
+</source><size>
+<width>640</width>
+<height>480</height>
+</size>
+<object>
+  <name>RBC</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+    <xmin>17</xmin>
+    <ymin>62</ymin>
+    <xmax>218</xmax>
+    <ymax>357</ymax>
+  </bndbox>
+</object>
+</annotation>

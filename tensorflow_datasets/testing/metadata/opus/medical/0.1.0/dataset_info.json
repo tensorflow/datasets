@@ -1,0 +1,26 @@
+{
+  "citation": "@inproceedings{Tiedemann2012ParallelData,\n  author = {Tiedemann, J},\n  title = {Parallel Data, Tools and Interfaces in OPUS},\n  booktitle = {LREC}\n  year = {2012}}",
+  "description": "OPUS is a collection of translated texts from the web.\n\nCreate your own config to choose which data / language pair to load.\n\n```\nconfig = tfds.translate.opus.OpusConfig(\n    version=tfds.core.Version('0.1.0'),\n    language_pair=(\"de\", \"en\"),\n    subsets=[\"GNOME\", \"EMEA\"]\n)\nbuilder = tfds.builder(\"opus\", config=config)\n```\n\nmedical documents",
+  "downloadSize": "35952852",
+  "location": {
+    "urls": [
+      "http://opus.nlpl.eu/"
+    ]
+  },
+  "name": "opus",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "198021004",
+      "shardLengths": [
+        "554376",
+        "554376"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "de",
+    "output": "en"
+  },
+  "version": "0.1.0"
+}

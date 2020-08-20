@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for c4_utils."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import os
@@ -95,7 +90,7 @@ This line looks like it has three sentences...but it's actually just 1."""
         "content-length": FAKE_CONTENT_LENGTH,
         "timestamp": FAKE_TIMESTAMP
     })
-    self.assertEqual(None, clean_en)
+    self.assertIsNone(clean_en)
     self.assertEqual({
         "lines-valid": 2,
         "filtered-page-toofewsentences": 1
@@ -112,7 +107,7 @@ fn foo(a) { bar = a + 10; }."""
         "content-length": FAKE_CONTENT_LENGTH,
         "timestamp": FAKE_TIMESTAMP,
     })
-    self.assertEqual(None, clean_en)
+    self.assertIsNone(clean_en)
     self.assertEqual({
         "filtered-page-squigglybracket": 1,
         "lines-valid": 3
@@ -129,7 +124,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
         "content-length": FAKE_CONTENT_LENGTH,
         "timestamp": FAKE_TIMESTAMP
     })
-    self.assertEqual(None, clean_en)
+    self.assertIsNone(clean_en)
     self.assertEqual({"filtered-page-loremipsum": 1}, dict(counters))
 
   def test_clean_page_badwords(self):
@@ -178,7 +173,7 @@ But then, all of a sudden, there's a badword... or not?
           },
           badwords=["ass"])
       if output_should_be_none:
-        self.assertEqual(None, out)
+        self.assertIsNone(out)
       else:
         self.assertEqual(text, out["text"])
       self.assertEqual(expected_counter, dict(counters))

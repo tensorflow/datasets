@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """UC Merced: Small remote sensing dataset for land use classification."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import numpy as np
@@ -38,7 +33,9 @@ UC Merced is a 21 class land use remote sensing image dataset, with 100 images
 per class. The images were manually extracted from large images from the USGS
 National Map Urban Area Imagery collection for various urban areas around the
 country. The pixel resolution of this public domain imagery is 0.3 m.
-Each image measures 256x256 pixels."""
+
+While most images are 256x256 pixels, there are 44 images with different shape.
+"""
 
 _URL = "http://weegee.vision.ucmerced.edu/datasets/landuse.html"
 

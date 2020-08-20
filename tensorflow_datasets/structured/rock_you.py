@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """The rockyou dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -44,8 +39,9 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "password":
-                tfds.features.Text(encoder=tfds.features.text.ByteTextEncoder()
-                                  ),
+                tfds.features.Text(
+                    encoder=tfds.deprecated.text.ByteTextEncoder()
+                ),
         }),
         supervised_keys=None,
         homepage="https://wiki.skullsecurity.org/Passwords",

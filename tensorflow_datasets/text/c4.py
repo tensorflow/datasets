@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """C4 dataset based on Common Crawl."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -50,9 +45,10 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version("2.3.0", "Deduplicate lines within a page.")
+_VERSION = tfds.core.Version("2.3.1", "Hashing change.")
 
 _SUPPORTED_VERSIONS = [
+    tfds.core.Version("2.3.0", "Deduplicate lines within a page."),
     tfds.core.Version("2.2.1", "Update dataset_info.json"),
     tfds.core.Version("2.2.0"),
 ]
@@ -75,8 +71,8 @@ _DEFAULT_WEBTEXTLIKE_CC_VERSIONS = (  # August 2018 - July 2019
 class C4Config(tfds.core.BuilderConfig):
   """BuilderConfig for C4 dataset."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                language,
                cc_versions=None,
                clean=True,
@@ -241,7 +237,7 @@ class C4(tfds.core.BeamBasedBuilder):
             gen_kwargs=dict(
                 split="validation",
                 page_content=page_content_pcollection,
-                hashed_url_predicate=lambda x: x % 1000 == 0  # 0.01%
+                hashed_url_predicate=lambda x: x % 1000 == 0  # 00.1%
             ),
         ),
     ]

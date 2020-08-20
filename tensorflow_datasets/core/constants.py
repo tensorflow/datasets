@@ -13,27 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Default values for some parameters of the API when no values are passed."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 # IMPORTANT: when changing values here, update docstrings.
 
 import os
 
 # Github base URL
-SRC_BASE_URL = "https://github.com/tensorflow/datasets/tree/master/"
+SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 
 # Directory where to store processed datasets.
-DATA_DIR = os.path.join("~", "tensorflow_datasets")
-
-GCS_DATA_DIR = "gs://tfds-data/datasets"
+DATA_DIR = os.environ.get('TFDS_DATA_DIR',
+                          os.path.join('~', 'tensorflow_datasets'))
 
 # Suffix of files / directories which aren't finished downloading / extracting.
-INCOMPLETE_SUFFIX = ".incomplete"
+INCOMPLETE_SUFFIX = '.incomplete'
+
+# Note: GCS constants are defined in `core/utils/gcs_utils.py`
 
 
 _registered_data_dir = set()

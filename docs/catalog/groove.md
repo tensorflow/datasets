@@ -20,14 +20,19 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Homepage**:
     [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+
 *   **Source code**:
-    [`tfds.audio.groove.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+    [`tfds.audio.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+
 *   **Versions**:
+
     *   **`2.0.1`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
 *   **Citation**:
 
 ```
@@ -39,8 +44,8 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## groove/full-midionly (default config)
@@ -48,17 +53,20 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 *   **Config description**: Groove dataset without audio, unsplit.
 
 *   **Download size**: `3.11 MiB`
+
 *   **Dataset size**: `5.22 MiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 129
-'train'      | 897
-'validation' | 124
+Split          | Examples
+:------------- | -------:
+`'test'`       | 129
+`'train'`      | 897
+`'validation'` | 124
 
 *   **Features**:
 
@@ -82,17 +90,20 @@ FeaturesDict({
 *   **Config description**: Groove dataset with audio, unsplit.
 
 *   **Download size**: `4.76 GiB`
+
 *   **Dataset size**: `2.33 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 124
-'train'      | 846
-'validation' | 120
+Split          | Examples
+:------------- | -------:
+`'test'`       | 124
+`'train'`      | 846
+`'validation'` | 120
 
 *   **Features**:
 
@@ -127,11 +138,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,204
-'train'      | 18,163
-'validation' | 2,252
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,204
+`'train'`      | 18,163
+`'validation'` | 2,252
 
 *   **Features**:
 
@@ -155,17 +166,20 @@ FeaturesDict({
 *   **Config description**: Groove dataset with audio, split into 2-bar chunks.
 
 *   **Download size**: `4.76 GiB`
+
 *   **Dataset size**: `4.61 GiB`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,873
-'train'      | 14,390
-'validation' | 2,034
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,873
+`'train'`      | 14,390
+`'validation'` | 2,034
 
 *   **Features**:
 
@@ -200,11 +214,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 2,033
-'train'      | 17,261
-'validation' | 2,121
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,033
+`'train'`      | 17,261
+`'validation'` | 2,121
 
 *   **Features**:
 

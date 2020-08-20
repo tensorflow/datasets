@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="samsum" />
   <meta itemprop="description" content="SAMSum Corpus contains over 16k chat dialogues with manually annotated&#10;summaries.&#10;&#10;There are two features:&#10;&#10;  - dialogue: text of dialogue.&#10;  - summary: human written summary of the dialogue.&#10;  - id: id of a example.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;samsum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/samsum" />
   <meta itemprop="sameAs" content="https://arxiv.org/src/1911.12237v2/anc" />
   <meta itemprop="citation" content="@article{gliwa2019samsum,&#10;  title={SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization},&#10;  author={Gliwa, Bogdan and Mochol, Iwona and Biesek, Maciej and Wawer, Aleksander},&#10;  journal={arXiv preprint arXiv:1911.12237},&#10;  year={2019}&#10;}" />
 </div>
+
 # `samsum`
 
 Warning: Manual download required. See instructions below.
@@ -27,7 +29,7 @@ There are two features:
     [https://arxiv.org/src/1911.12237v2/anc](https://arxiv.org/src/1911.12237v2/anc)
 
 *   **Source code**:
-    [`tfds.summarization.samsum.Samsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/samsum.py)
+    [`tfds.summarization.Samsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/samsum.py)
 
 *   **Versions**:
 
@@ -37,9 +39,9 @@ There are two features:
 
 *   **Dataset size**: `Unknown size`
 
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Download https://arxiv.org/src/1911.12237v2/anc/corpus.7z, decompress and
     place train.json, val.json and test.json in the manual follder.
 
@@ -61,9 +63,11 @@ FeaturesDict({
     'summary': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('dialogue', 'summary')`
+
 *   **Citation**:
 
 ```
@@ -75,6 +79,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

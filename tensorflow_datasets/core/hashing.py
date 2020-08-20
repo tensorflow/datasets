@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Stable hashing function using md5.
 
 Note that the properties we are looking at here are:
@@ -46,14 +45,14 @@ The split name is being used as salt to avoid having the same keys in two splits
 result in same order.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import hashlib
+from typing import Union
 
 import six
 import tensorflow.compat.v2 as tf
+
+
+HashKey = Union[str, bytes, int]
 
 
 def _to_bytes(data):
@@ -72,7 +71,7 @@ class Hasher(object):
   def __init__(self, salt):
     self._md5 = hashlib.md5(_to_bytes(salt))
 
-  def hash_key(self, key):
+  def hash_key(self, key: HashKey) -> int:
     """Returns 128 bits hash of given key.
 
     Args:

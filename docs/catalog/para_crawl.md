@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="para_crawl" />
   <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;para_crawl&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
   <meta itemprop="citation" content="@misc {paracrawl,&#10;    title  = &quot;ParaCrawl&quot;,&#10;    year   = &quot;2018&quot;,&#10;    url    = &quot;http://paracrawl.eu/download.html.&quot;&#10;}" />
 </div>
+
 # `para_crawl`
 
 *   **Description**:
@@ -16,14 +18,20 @@ Web-Scale Parallel Corpora for Official European Languages.
 
 *   **Homepage**:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+
 *   **Source code**:
-    [`tfds.translate.para_crawl.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+    [`tfds.translate.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Citation**:
 
 ```
@@ -34,8 +42,8 @@ Web-Scale Parallel Corpora for Official European Languages.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## para_crawl/enbg_plain_text (default config)
@@ -47,9 +55,9 @@ Web-Scale Parallel Corpora for Official European Languages.
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,039,885
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,039,885
 
 *   **Features**:
 
@@ -59,6 +67,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'bg')`
@@ -72,9 +81,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,981,949
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,981,949
 
 *   **Features**:
 
@@ -84,6 +93,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'cs')`
@@ -97,9 +107,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,414,895
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,414,895
 
 *   **Features**:
 
@@ -109,6 +119,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'da')`
@@ -122,9 +133,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 16,264,448
+Split     | Examples
+:-------- | ---------:
+`'train'` | 16,264,448
 
 *   **Features**:
 
@@ -134,6 +145,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'de')`
@@ -147,9 +159,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,985,233
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,985,233
 
 *   **Features**:
 
@@ -159,6 +171,7 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'el')`
@@ -172,9 +185,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 21,987,267
+Split     | Examples
+:-------- | ---------:
+`'train'` | 21,987,267
 
 *   **Features**:
 
@@ -184,6 +197,7 @@ Translation({
     'es': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'es')`
@@ -197,9 +211,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 853,422
+Split     | Examples
+:-------- | -------:
+`'train'` | 853,422
 
 *   **Features**:
 
@@ -209,6 +223,7 @@ Translation({
     'et': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'et')`
@@ -222,9 +237,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 2,156,069
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,156,069
 
 *   **Features**:
 
@@ -234,6 +249,7 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'fi')`
@@ -247,9 +263,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 31,374,161
+Split     | Examples
+:-------- | ---------:
+`'train'` | 31,374,161
 
 *   **Features**:
 
@@ -259,6 +275,7 @@ Translation({
     'fr': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'fr')`
@@ -272,9 +289,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 357,399
+Split     | Examples
+:-------- | -------:
+`'train'` | 357,399
 
 *   **Features**:
 
@@ -284,6 +301,7 @@ Translation({
     'ga': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'ga')`
@@ -297,9 +315,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,002,053
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,002,053
 
 *   **Features**:
 
@@ -309,6 +327,7 @@ Translation({
     'hr': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'hr')`
@@ -322,9 +341,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,901,342
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,901,342
 
 *   **Features**:
 
@@ -334,6 +353,7 @@ Translation({
     'hu': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'hu')`
@@ -347,9 +367,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | ---------:
-'train' | 12,162,239
+Split     | Examples
+:-------- | ---------:
+`'train'` | 12,162,239
 
 *   **Features**:
 
@@ -359,6 +379,7 @@ Translation({
     'it': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'it')`
@@ -372,9 +393,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 844,643
+Split     | Examples
+:-------- | -------:
+`'train'` | 844,643
 
 *   **Features**:
 
@@ -384,6 +405,7 @@ Translation({
     'lt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'lt')`
@@ -397,9 +419,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 553,060
+Split     | Examples
+:-------- | -------:
+`'train'` | 553,060
 
 *   **Features**:
 
@@ -409,6 +431,7 @@ Translation({
     'lv': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'lv')`
@@ -422,9 +445,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 195,502
+Split     | Examples
+:-------- | -------:
+`'train'` | 195,502
 
 *   **Features**:
 
@@ -434,6 +457,7 @@ Translation({
     'mt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'mt')`
@@ -447,9 +471,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 5,659,268
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,659,268
 
 *   **Features**:
 
@@ -459,6 +483,7 @@ Translation({
     'nl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'nl')`
@@ -472,9 +497,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,503,276
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,503,276
 
 *   **Features**:
 
@@ -484,6 +509,7 @@ Translation({
     'pl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'pl')`
@@ -497,9 +523,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 8,141,940
+Split     | Examples
+:-------- | --------:
+`'train'` | 8,141,940
 
 *   **Features**:
 
@@ -509,6 +535,7 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'pt')`
@@ -522,9 +549,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,952,043
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,952,043
 
 *   **Features**:
 
@@ -534,6 +561,7 @@ Translation({
     'ro': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'ro')`
@@ -547,9 +575,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 1,591,831
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,591,831
 
 *   **Features**:
 
@@ -559,6 +587,7 @@ Translation({
     'sk': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'sk')`
@@ -572,9 +601,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | -------:
-'train' | 660,161
+Split     | Examples
+:-------- | -------:
+`'train'` | 660,161
 
 *   **Features**:
 
@@ -584,6 +613,7 @@ Translation({
     'sl': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('en', 'sl')`
@@ -597,9 +627,9 @@ Translation({
 
 *   **Splits**:
 
-Split   | Examples
-:------ | --------:
-'train' | 3,476,729
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,476,729
 
 *   **Features**:
 

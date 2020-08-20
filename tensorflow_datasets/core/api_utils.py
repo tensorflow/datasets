@@ -13,32 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """API utilities."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import functools
 import inspect
 import typing
 from typing import Any, Callable, List, Optional, TypeVar
 
+from absl import logging
 import six
 import wrapt
 
 __all__ = [
-    "disallow_positional_args"
+    'disallow_positional_args'
 ]
 
-Fn = TypeVar("Fn", bound=Callable[..., Any])
+Fn = TypeVar('Fn', bound=Callable[..., Any])
 
 REQUIRED_ARG = object()
 _POSITIONAL_ARG_ERR_MSG = (
-    "Please use keyword arguments and not positional arguments. This enables "
-    "more flexible API development. Thank you!\n"
-    "Positional arguments passed to fn %s: %s.")
+    'Please use keyword arguments and not positional arguments. This enables '
+    'more flexible API development. Thank you!\n'
+    'Positional arguments passed to fn %s: %s.')
 
 
 # `disallow_positional_args` can be applied as a decorator `@decorator` or
@@ -55,6 +51,11 @@ def disallow_positional_args(wrapped: Fn, allowed: None = ...) -> Fn:  # pylint:
   ...
 def disallow_positional_args(wrapped=None, allowed=None):  # pylint: disable=g-wrong-blank-lines
   """Requires function to be called using keyword arguments."""
+  logging.warning(
+      'disallow_positional_args is deprecated. Please use Python 3 '
+      '`def f(*, arg0, arg1):` instead.'
+  )
+
   # See
   # https://wrapt.readthedocs.io/en/latest/decorators.html#decorators-with-optional-arguments
   # for decorator pattern.
@@ -96,7 +97,7 @@ def _check_required(fn, kwargs):
   required_args = _required_args(fn)
   for arg in required_args:
     if arg not in kwargs:
-      raise ValueError("Argument %s is required." % arg)
+      raise ValueError('Argument %s is required.' % arg)
 
 
 def getargspec(fn):

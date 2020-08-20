@@ -1,0 +1,35 @@
+{
+  "citation": "@inproceedings{demszky-2020-goemotions,\n    title = \"{G}o{E}motions: A Dataset of Fine-Grained Emotions\",\n    author = \"Demszky, Dorottya  and\n      Movshovitz-Attias, Dana  and\n      Ko, Jeongwoo  and\n      Cowen, Alan  and\n      Nemade, Gaurav  and\n      Ravi, Sujith\",\n    booktitle = \"Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics\",\n    month = jul,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2020.acl-main.372\",\n    pages = \"4040--4054\",\n}",
+  "description": "The GoEmotions dataset contains 58k carefully curated Reddit comments labeled\nfor 27 emotion categories or Neutral. The emotion categories are admiration,\namusement, anger, annoyance, approval, caring, confusion, curiosity, desire,\ndisappointment, disapproval, disgust, embarrassment, excitement, fear,\ngratitude, grief, joy, love, nervousness, optimism, pride, realization, relief,\nremorse, sadness, surprise.",
+  "downloadSize": "4394818",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/google-research/tree/master/goemotions"
+    ]
+  },
+  "name": "goemotions",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "3379429",
+      "shardLengths": [
+        "5427"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "27057119",
+      "shardLengths": [
+        "43410"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "3381282",
+      "shardLengths": [
+        "5426"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

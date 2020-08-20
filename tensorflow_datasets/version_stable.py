@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Version info (stable version).
 
 This file overwrites `version.py` for stable releases.
@@ -21,8 +20,8 @@ This file overwrites `version.py` for stable releases.
 
 # We follow Semantic Versioning (https://semver.org/)
 _MAJOR_VERSION = '3'
-_MINOR_VERSION = '1'
-_PATCH_VERSION = '0'
+_MINOR_VERSION = '2'
+_PATCH_VERSION = '1'
 
 __version__ = '.'.join([
     _MAJOR_VERSION,

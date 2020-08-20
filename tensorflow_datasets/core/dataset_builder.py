@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """DatasetBuilder base class."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import abc
 import functools
@@ -26,12 +21,12 @@ import inspect
 import itertools
 import os
 import sys
+from typing import Any, Optional
 
 from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import lazy_imports_lib
@@ -46,6 +41,11 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 import termcolor
+
+if six.PY3:
+  import pathlib  # pylint: disable=g-import-not-at-top
+else:
+  pathlib = Any
 
 
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
@@ -72,8 +72,7 @@ class BuilderConfig(object):
   `BuilderConfig` and add their own properties.
   """
 
-  @api_utils.disallow_positional_args
-  def __init__(self, name, version=None, supported_versions=None,
+  def __init__(self, *, name, version=None, supported_versions=None,
                description=None):
     self._name = name
     self._version = version
@@ -167,14 +166,14 @@ class DatasetBuilder(object):
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
 
-  @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None, version=None):
+  def __init__(self, *, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
 
     Args:
-      data_dir: `str`, directory to read/write data. Defaults to
+      data_dir: `str`, directory to read/write data. Defaults to the value of
+        the environment variable TFDS_DATA_DIR, if set, otherwise falls back to
         "~/tensorflow_datasets".
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
@@ -203,6 +202,12 @@ class DatasetBuilder(object):
       self.info.read_from_directory(self._data_dir)
     else:  # Use the code version (do not restore data)
       self.info.initialize_from_bucket()
+
+  @utils.classproperty
+  @classmethod
+  def code_path(cls) -> pathlib.Path:
+    """Returns the path to the file where the Dataset class is located."""
+    return pathlib.Path(inspect.getfile(cls))
 
   def __getstate__(self):
     return self._original_state
@@ -267,8 +272,7 @@ class DatasetBuilder(object):
           "the restored dataset.")
     return self._info()
 
-  @api_utils.disallow_positional_args
-  def download_and_prepare(self, download_dir=None, download_config=None):
+  def download_and_prepare(self, *, download_dir=None, download_config=None):
     """Downloads and prepares dataset for reading.
 
     Args:
@@ -291,8 +295,8 @@ class DatasetBuilder(object):
     # allowing Py2 for the `dataset_builder_tests.py` & cie
     if _is_py2_download_and_prepare_disabled and six.PY2:
       raise NotImplementedError(
-          "TFDS has droped `builder.download_and_prepare` support for "
-          "Python 2. Please update you code to Python 3.")
+          "TFDS has dropped `builder.download_and_prepare` support for "
+          "Python 2. Please update your code to Python 3.")
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(str(v) for v in self.versions
@@ -406,10 +410,10 @@ class DatasetBuilder(object):
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
-  @api_utils.disallow_positional_args
   def as_dataset(
       self,
       split=None,
+      *,
       batch_size=None,
       shuffle_files=False,
       decoders=None,
@@ -778,6 +782,7 @@ class DatasetBuilder(object):
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
+        checksums_path=_get_checksums_path(self),
         manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
@@ -969,6 +974,16 @@ class FileAdapterBuilder(DatasetBuilder):
         self.info.features.decode_example, decoders=decoders)
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
+
+
+def _get_checksums_path(builder: DatasetBuilder) -> Optional[str]:
+  """Returns the checksums path."""
+  checksums_path = builder.code_path.parent / "checksums.tsv"
+  if checksums_path.exists():
+    checksums_path = str(checksums_path)
+  else:
+    checksums_path = None
+  return checksums_path
 
 
 class GeneratorBasedBuilder(FileAdapterBuilder):

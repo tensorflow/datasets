@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """API to define datasets."""
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
 # needs to happen before anything else, since the imports below will try to
@@ -46,12 +45,15 @@ from tensorflow_datasets.core.splits import SubSplitInfo
 from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 
 from tensorflow_datasets.core.utils import Experiment
+from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
+from tensorflow_datasets.core.utils.benchmark import benchmark
 
 
 __all__ = [
     "add_data_dir",
+    "benchmark",
     "BeamBasedBuilder",
     "BeamMetadataDict",
     "BuilderConfig",
@@ -61,6 +63,7 @@ __all__ = [
     "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",
+    "gcs_path",
     "lazy_imports",
     "Metadata",
     "MetadataDict",

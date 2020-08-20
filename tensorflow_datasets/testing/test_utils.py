@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Test utilities."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import contextlib
 import functools
@@ -26,6 +21,7 @@ import io
 import os
 import subprocess
 import tempfile
+from typing import Iterator
 
 from absl.testing import absltest
 
@@ -103,25 +99,51 @@ class MockFs(object):
 
   def __init__(self):
     self.files = {}
+    self._cm = None
+
+  def __enter__(self):
+    self._cm = self.contextmanager()
+    return self._cm.__enter__()
+
+  def __exit__(self, exc_type, exc_value, traceback):
+    return self._cm.__exit__(exc_type, exc_value, traceback)
+
+  @contextlib.contextmanager
+  def contextmanager(self) -> Iterator['MockFs']:
+    """Open the file."""
+    with self.mock():
+      yield self
 
   def add_file(self, path, content=None) -> None:
     content = 'Content of {}'.format(path) if content is None else content
     self.files[path] = content
 
   def _list_directory(self, path):
-    return [
-        os.path.basename(p)
-        for p in self.files
-        if p.startswith(path.rstrip('/') + '/')  # Make sure path is a `dir/`
-    ]
+    path = path.rstrip(os.path.sep) + os.path.sep  # Make sure path is a `dir/`
+    return list({
+        # Extract `path/<dirname>/...` -> `<dirname>`
+        os.path.relpath(p, path).split(os.path.sep)[0]
+        for p in self.files if p.startswith(path)
+    })
 
   @contextlib.contextmanager
   def _open(self, path, mode='r'):
-    if mode == 'w':
+    """Patch `tf.io.gfile.GFile`."""
+    if mode.startswith('w'):
       self.add_file(path, '')
-    with io.StringIO(self.files[path]) as f:
+    is_binary = 'b' in mode
+
+    content = self.files[path]
+    if is_binary:
+      fobj = io.BytesIO(content.encode('utf-8'))
+    else:
+      fobj = io.StringIO(content)
+
+    with fobj as f:
       yield f
-      self.files[path] = f.getvalue()  # Update the content
+      new_content = f.getvalue()  # Update the content
+
+    self.files[path] = new_content.decode('utf-8') if is_binary else new_content  # pytype: disable=attribute-error
 
   def _rename(self, from_, to, overwrite=False):
     if not overwrite and to in self.files:
@@ -131,7 +153,7 @@ class MockFs(object):
     self.files[to] = self.files.pop(from_)
 
   def mock(self):
-    return  absltest.mock.patch.object(
+    return absltest.mock.patch.object(
         tf.io,
         'gfile',
         exists=lambda path: path in self.files,
@@ -182,15 +204,11 @@ class SubTestCase(test_case.TestCase):
 
   @contextlib.contextmanager
   def _subTest(self, test_str):
-    sub_test_not_implemented = True
-    if sub_test_not_implemented:
+    self._sub_test_stack.append(test_str)
+    sub_test_str = '/'.join(self._sub_test_stack)
+    with self.subTest(sub_test_str):
       yield
-    else:
-      self._sub_test_stack.append(test_str)
-      sub_test_str = '/'.join(self._sub_test_stack)
-      with self.subTest(sub_test_str):
-        yield
-      self._sub_test_stack.pop()
+    self._sub_test_stack.pop()
 
   def assertAllEqualNested(self, d1, d2):
     """Same as assertAllEqual but compatible with nested dict."""
@@ -257,6 +275,7 @@ def run_in_graph_and_eager_modes(func=None,
 
   def decorator(f):
     """Decorator for a method."""
+
     def decorated(self, *args, **kwargs):
       """Run the decorated test method."""
       if not tf.executing_eagerly():
@@ -301,22 +320,68 @@ class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
   @run_in_graph_and_eager_modes()
-  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
+  def assertFeature(
+      self,
+      feature,
+      shape,
+      dtype,
+      tests,
+      serialized_info=None,
+      skip_feature_tests=False,
+      test_attributes=None):
     """Test the given feature against the predicates."""
 
-    # Check the shape/dtype
+    with self._subTest('feature'):
+      self._assert_feature(
+          feature=feature,
+          shape=shape,
+          dtype=dtype,
+          tests=tests,
+          serialized_info=serialized_info,
+          skip_feature_tests=skip_feature_tests,
+          test_attributes=test_attributes,
+      )
+    # TODO(tfds): Remove `skip_feature_tests` after text encoders are removed
+    if not skip_feature_tests:
+      # Test the feature again to make sure that feature restored from config
+      # behave similarly.
+      with self._subTest('feature_roundtrip'):
+        new_feature = feature.from_json_content(feature.to_json_content())
+        self._assert_feature(
+            feature=new_feature,
+            shape=shape,
+            dtype=dtype,
+            tests=tests,
+            serialized_info=serialized_info,
+            skip_feature_tests=skip_feature_tests,
+            test_attributes=test_attributes,
+        )
+
+  def _assert_feature(
+      self,
+      feature,
+      shape,
+      dtype,
+      tests,
+      serialized_info=None,
+      skip_feature_tests=False,
+      test_attributes=None):
     with self._subTest('shape'):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
       self.assertEqual(feature.dtype, dtype)
 
     # Check the serialized features
-    if serialized_info is not None:
+    if serialized_info:
       with self._subTest('serialized_info'):
         self.assertEqual(
             serialized_info,
             feature.get_serialized_info(),
         )
+
+    if not skip_feature_tests and test_attributes:
+      for key, value in test_attributes.items():
+        self.assertEqual(getattr(feature, key), value)
 
     # Create the feature dict
     fdict = features.FeaturesDict({'inner': feature})
@@ -369,7 +434,7 @@ class FeatureExpectationsTestCase(SubTestCase):
 
         # Assert the returned type match the expected one
         with self._subTest('dtype'):
-          out_dtypes = utils.map_nested(lambda s: s.dtype, out_tensor)
+          out_dtypes = tf.nest.map_structure(lambda s: s.dtype, out_tensor)
           self.assertEqual(out_dtypes, test.dtype or feature.dtype)
         with self._subTest('shape'):
           # For shape, because (None, 3) match with (5, 3), we use
@@ -384,10 +449,38 @@ class FeatureExpectationsTestCase(SubTestCase):
         # Assert value
         with self._subTest('out_value'):
           # Eventually construct the tf.RaggedTensor
-          expected = utils.map_nested(
+          expected = tf.nest.map_structure(
               lambda t: t.build() if isinstance(t, RaggedConstant) else t,
               test.expected)
           self.assertAllEqualNested(out_numpy, expected)
+
+        # Assert the HTML representation works
+        if not test.decoders:
+          with self._subTest('repr'):
+            self._test_repr(feature, out_numpy)
+
+  def _test_repr(
+      self,
+      feature: features.FeatureConnector,
+      out_numpy: np.ndarray,
+  ) -> None:
+    """Test that the HTML repr works."""
+    # pylint: disable=protected-access
+    flat_example = feature._flatten(out_numpy)
+    flat_features = feature._flatten(feature)
+    flat_serialized_info = feature._flatten(feature.get_serialized_info())
+    # pylint: enable=protected-access
+    for ex, f, spec in zip(flat_example, flat_features, flat_serialized_info):
+      # Features with multi-data not supported
+      if isinstance(spec, dict):
+        continue
+      elif spec.sequence_rank == 0:
+        text = f.repr_html(ex)
+      elif spec.sequence_rank == 1:
+        text = f.repr_html_batch(ex)
+      elif spec.sequence_rank > 1:
+        text = f.repr_html_ragged(ex)
+      self.assertIsInstance(text, str)
 
 
 def features_encode_decode(features_dict, example, decoders):
@@ -495,11 +588,10 @@ def test_main():
 
 
 @contextlib.contextmanager
-def mock_kaggle_api(filenames=None, err_msg=None):
+def mock_kaggle_api(err_msg=None):
   """Mock out the kaggle CLI.
 
   Args:
-    filenames: `list<str>`, names of the competition files.
     err_msg: `str`, if provided, the kaggle CLI will raise a CalledProcessError
       and this will be the command output.
 
@@ -507,51 +599,20 @@ def mock_kaggle_api(filenames=None, err_msg=None):
     None, context will have kaggle CLI mocked out.
   """
 
-  def make_mock_files_call(filenames, err_msg):
-    """Mock subprocess.check_output for files call."""
-
-    def check_output(command_args):
-      assert command_args[2] == 'files'
-      if err_msg:
-        raise subprocess.CalledProcessError(1, command_args,
-                                            tf.compat.as_bytes(err_msg))
-      return tf.compat.as_bytes(
-          '\n'.join(['name,size,creationDate'] +
-                    ['%s,34MB,None\n' % fname for fname in filenames]))
-
-    return check_output
-
-  def make_mock_download_call():
+  def check_output(command_args, encoding=None):
     """Mock subprocess.check_output for download call."""
+    assert encoding
+    assert command_args[2] == 'download'
+    competition_or_dataset = command_args[-1]
+    if err_msg:
+      raise subprocess.CalledProcessError(1, command_args, err_msg)
+    out_dir = command_args[command_args.index('--path') + 1]
+    fpath = os.path.join(out_dir, 'output.txt')
+    with tf.io.gfile.GFile(fpath, 'w') as f:
+      f.write(competition_or_dataset)
+    return 'Downloading {} to {}'.format(competition_or_dataset, fpath)
 
-    def check_output(command_args):
-      assert command_args[2] == 'download'
-      fname = command_args[command_args.index('--file') + 1]
-      out_dir = command_args[command_args.index('--path') + 1]
-      fpath = os.path.join(out_dir, fname)
-      with tf.io.gfile.GFile(fpath, 'w') as f:
-        f.write(fname)
-      return tf.compat.as_bytes('Downloading %s to %s' % (fname, fpath))
-
-    return check_output
-
-  def make_mock_check_output(filenames, err_msg):
-    """Mock subprocess.check_output for both calls."""
-
-    files_call = make_mock_files_call(filenames, err_msg)
-    dl_call = make_mock_download_call()
-
-    def check_output(command_args):
-      if command_args[2] == 'files':
-        return files_call(command_args)
-      else:
-        assert command_args[2] == 'download'
-        return dl_call(command_args)
-
-    return check_output
-
-  with absltest.mock.patch('subprocess.check_output',
-                           make_mock_check_output(filenames, err_msg)):
+  with absltest.mock.patch('subprocess.check_output', check_output):
     yield
 
 
@@ -573,4 +634,3 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
-

@@ -6,6 +6,8 @@ source ./oss_scripts/utils.sh
 
 : "${TF_VERSION:?}"
 
+pip freeze  # Display the list of modules/versions for debugging
+
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.
 STATUS=0
@@ -20,6 +22,10 @@ function set_status() {
 
 PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 
+if [[ "$TF_VERSION" == "1.15.3" ]]
+then
+  EXTRA_IGNORE="--ignore=tensorflow_datasets/core/utils/gcs_utils_test.py"
+fi
 
 # Run Tests
 # Ignores:
@@ -34,13 +40,13 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 # * build_docs_test: See b/142892342
 pytest \
   -n auto \
-  --disable-warnings \
+  --disable-warnings $EXTRA_IGNORE \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
   --ignore="tensorflow_datasets/core/dataset_builder_notfdv_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
-  --ignore="tensorflow_datasets/scripts/build_docs_test.py"
+  --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 set_status
 
 # Test notebooks in isolated environments
@@ -61,30 +67,12 @@ function test_notebook() {
 }
 
 # Skip notebook tests for TF 1.15 as the notebook assumes eager by default.
-if [[ "$TF_VERSION" != "1.15.0" ]]
+if [[ "$TF_VERSION" != "1.15.3" ]]
 then
   for notebook in $NOTEBOOKS
   do
     test_notebook $notebook
   done
-fi
-
-# Run NSynth, in a contained enviornement
-function test_isolation_nsynth() {
-  create_virtualenv tfds_nsynth $PY_BIN
-  ./oss_scripts/oss_pip_install.sh
-  pip install -e .[nsynth]
-  pytest \
-    --disable-warnings \
-    "tensorflow_datasets/audio/nsynth_test.py"
-  set_status
-}
-
-if [[ "$TF_VERSION" == "tf-nightly" ]]
-then
-  echo "============= Testing Isolation ============="
-  test_isolation_nsynth
-  set_status
 fi
 
 exit $STATUS

@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for downloader."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import hashlib
 import io
@@ -42,6 +37,12 @@ class _FakeResponse(object):
     self.status_code = status_code
     # For urllib codepath
     self.read = self.raw.read
+
+  def __enter__(self):
+    return self
+
+  def __exit__(self, *args):
+    return
 
   def iter_content(self, chunk_size):
     del chunk_size
@@ -75,17 +76,6 @@ class DownloaderTest(testing.TestCase):
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    if not hasattr(downloader.ssl, '_create_unverified_context'):
-      # To not throw error for python<=2.7.8 while mocking SSLContext functions
-      downloader.ssl.__dict__['_create_unverified_context'] = None
-      downloader.ssl.__dict__['create_default_context'] = None
-    # dummy ssl contexts returns for testing
-    absltest.mock.patch.object(
-        downloader.ssl,
-        '_create_unverified_context', lambda *a, **kw: 'skip_ssl').start()
-    absltest.mock.patch.object(
-        downloader.ssl,
-        'create_default_context', lambda *a, **kw: 'use_ssl').start()
 
   def test_ok(self):
     promise = self.downloader.download(self.url, self.tmp_dir)
@@ -126,27 +116,6 @@ class DownloaderTest(testing.TestCase):
     with self.assertRaises(downloader.DownloadError):
       promise.get()
 
-  def test_kaggle_api(self):
-    fname = 'a.csv'
-    with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
-      # Testing Competition Downloader
-      promise = self.downloader.download(
-          'kaggle://competition/some-competition/a.csv',
-          self.tmp_dir)
-      url_info = promise.get()
-      self.assertEqual(url_info.size, len(fname))
-      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
-        self.assertEqual(fname, f.read())
-
-      # Testing Dataset Downloader
-      promise = self.downloader.download(
-          'kaggle://dataset/some-author/some-dataset/a.csv',
-          self.tmp_dir)
-      url_info = promise.get()
-      self.assertEqual(url_info.size, len(fname))
-      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
-        self.assertEqual(fname, f.read())
-
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
@@ -167,38 +136,6 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(url, self.tmp_dir)
     with self.assertRaises(downloader.urllib.error.URLError):
       promise.get()
-
-  def test_ssl_mock(self):
-    # Testing ssl for ftp
-    absltest.mock.patch.dict(os.environ, {
-        'TFDS_CA_BUNDLE': '/path/to/dummy.pem'
-    }).start()
-    self.test_ftp_ssl('use_ssl')
-
-  def test_ftp_ssl(self, ssl_type='skip_ssl'):
-    absltest.mock.patch.object(
-        downloader.urllib.request,
-        'Request', lambda *a, **kw: 'dummy_request').start()
-
-    method = absltest.mock.patch.object(
-        downloader.urllib.request,
-        'urlopen',
-        return_value=_FakeResponse(self.url, self.response,
-                                   self.cookies)).start()
-    self.test_ftp()
-    method.assert_called_once_with('dummy_request', context=ssl_type)
-
-  def test_py2_ftp_ssl_mock(self):
-    ssl_mock_dict = downloader.ssl.__dict__.copy()
-    if ssl_mock_dict.get('_create_unverified_context', None):
-      ssl_mock_dict.pop('_create_unverified_context')
-    absltest.mock.patch.dict(
-        downloader.ssl.__dict__, ssl_mock_dict, clear=True).start()
-    method = absltest.mock.patch.object(
-        downloader.logging, 'info', return_value=None).start()
-    self.test_ftp()
-    with self.assertRaises(AssertionError):
-      method.assert_not_called()
 
 
 class GetFilenameTest(testing.TestCase):

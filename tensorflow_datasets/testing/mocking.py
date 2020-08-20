@@ -13,13 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Mock util for tfds.
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import contextlib
 import functools
@@ -100,7 +95,7 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
       raise ValueError(
           'TFDS has been mocked, but metadata files were not found in {}. '
           'You should copy the real metadata files, so that the dataset '
-          'can be loaded properly, or set the data_dir kwarg of'
+          'can be loaded properly, or set the data_dir kwarg of '
           'tfds.testing.mock_tfds(data_dir=...).'
           ''.format(self._data_dir, n=self.name)  # pylint: disable=protected-access
       )

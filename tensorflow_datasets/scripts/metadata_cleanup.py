@@ -13,13 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
-r"""Removes metadatas which are not present in the registered versions of TFDS.
+r"""Removes metadata that are not present in the registered versions of TFDS.
 
 Instructions:
 
 ```
-python tensorflow_datasets/scripts/metadata_cleanup.py
+python -m tensorflow_datasets.scripts.metadata_cleanup
 ```
 
 
@@ -43,13 +42,13 @@ flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
 
 
 def _extract_metadata_versions(metadata_dir: str) -> List[str]:
-  """Get all metadata direcotry versions paths.
+  """Get all metadata directory versions paths.
 
-  It only extract the paths like 'dataset_name/version'
+  It only extracts the paths like 'dataset_name/version'
   or 'dataset_name/config/versions' in metadata dir.
 
   Args:
-    metadata_dir: Path to metadat directory (testing/metadata).
+    metadata_dir: Path to metadata directory (testing/metadata).
 
   Returns:
     Existing metadata full names.
@@ -57,18 +56,18 @@ def _extract_metadata_versions(metadata_dir: str) -> List[str]:
   existing_names = []
   for root, _, _ in tf.io.gfile.walk(metadata_dir):
     full_name = root[len(metadata_dir) + 1:]
-    if tfds.core.registered.is_full_name(full_name):
+    if tfds.core.load.is_full_name(full_name):
       existing_names.append(full_name)
   return existing_names
 
 
 def _delete_metadata_dirs(metadata_dir: str) -> None:
-  """Removes metadatas which are not present in the registered versions of TFDS.
+  """Removes metadata that are not present in the registered versions of TFDS.
 
   Args:
     metadata_dir: Path to metadata directory (testing/metadata).
   """
-  registered_names = set(tfds.core.registered.list_full_names())
+  registered_names = set(tfds.core.load.list_full_names())
   existing_names = set(_extract_metadata_versions(metadata_dir))
   for extra_full_name in sorted(existing_names - registered_names):
     path_to_delete = os.path.join(metadata_dir, extra_full_name)

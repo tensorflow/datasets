@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """CelebA dataset.
 
 Large-scale CelebFaces Attributes (CelebA) Dataset
@@ -21,10 +20,6 @@ Large-scale CelebFaces Attributes (CelebA) Dataset
 Deep Learning Face Attributes in the Wild
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -92,6 +87,11 @@ CelebA has large diversities, large quantities, and rich annotations, including\
 The dataset can be employed as the training and test sets for the following \
 computer vision tasks: face attribute recognition, face detection, and landmark\
  (or facial part) localization.
+
+Note: CelebA dataset may contain potential bias. The fairness indicators
+[example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
+goes into detail about several considerations to keep in mind while using the
+CelebA dataset.
 """
 
 

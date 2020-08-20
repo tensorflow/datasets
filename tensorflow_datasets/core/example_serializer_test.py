@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for tensorflow_datasets.core.example_serializer."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -200,6 +195,37 @@ class ExampleSerializerTest(testing.SubTestCase):
         [4, 5],
     ])
     self.assertEqual(out[1], tensor_info)
+
+  def test_item_to_tf_feature_incorrect_shape(self):
+    # Test shape check in _item_to_tf_feature raises ValueError.
+    example_item = [1, 2, 3, 4, 5]
+    tensor_info = feature_lib.TensorInfo(shape=(4,), dtype=tf.int64)
+    with self.assertRaises(ValueError):
+      example_serializer._item_to_tf_feature(example_item, tensor_info)
+
+  def test_item_to_tf_feature_string_check(self):
+    # Test string check in _item_to_tf_feature raises ValueError.
+    example_item = [1, 2, 3, 4, 5]
+    tensor_info = feature_lib.TensorInfo(shape=(5,), dtype=tf.string)
+    with self.assertRaisesRegex(
+        ValueError,
+        'Unsupported value: (.*)\nCould not convert to bytes list.',
+    ):
+      example_serializer._item_to_tf_feature(example_item, tensor_info)
+
+  def test_dict_to_tf_example_error_reraise(self):
+    # Test error reraise in _dict_to_tf_example.
+    example_data = {'input': [1, 2, 3]}
+    tensor_info = {
+        'input': feature_lib.TensorInfo(
+            shape=(2,),
+            dtype=tf.int64,
+        ),
+    }
+    with self.assertRaisesRegex(
+        ValueError, 'Error while serializing feature `input`:'
+    ):
+      example_serializer._dict_to_tf_example(example_data, tensor_info)
 
 
 if __name__ == '__main__':

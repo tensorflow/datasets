@@ -1,0 +1,35 @@
+{
+  "citation": "@article{allenai:arc,\n      author    = {Peter Clark  and Isaac Cowhey and Oren Etzioni and Tushar Khot and\n                    Ashish Sabharwal and Carissa Schoenick and Oyvind Tafjord},\n      title     = {Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge},\n      journal   = {arXiv:1803.05457v1},\n      year      = {2018},\n}",
+  "description": "A new dataset of 7,787 genuine grade-school level, multiple-choice science \n questions, assembled to encourage research in advanced question-answering. \n The dataset is partitioned into a Challenge Set and an Easy Set, where the \n former contains only questions answered incorrectly by both a retrieval-based\n algorithm and a word co-occurrence algorithm. We are also including a corpus\n of over 14 million science sentences relevant to the task, and an \n implementation of three neural baseline models for this dataset.\n We pose ARC as a challenge to the community.",
+  "downloadSize": "680841265",
+  "location": {
+    "urls": [
+      "https://allenai.org/data/arc"
+    ]
+  },
+  "name": "ai2_arc",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "439191",
+      "shardLengths": [
+        "1172"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "410352",
+      "shardLengths": [
+        "1119"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "112923",
+      "shardLengths": [
+        "299"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

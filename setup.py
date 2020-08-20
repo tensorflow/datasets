@@ -1,4 +1,3 @@
-# Lint as: python3
 """tensorflow/datasets is a library of datasets ready to use with TensorFlow.
 
 tensorflow/datasets is a library of public datasets ready to use with
@@ -30,7 +29,7 @@ project_name = 'tensorflow-datasets'
 version_path = os.path.join(
     os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
-from version import __version__  # pylint: disable=g-import-not-at-top
+from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
 if nightly:
   project_name = 'tfds-nightly'
@@ -38,19 +37,21 @@ if nightly:
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
   __version__ += 'dev%s' % datestring
 
+
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
     'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'dm-tree',
     'future',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
-    'tensorflow-metadata>=0.15,<0.16',
+    'tensorflow-metadata',
     'termcolor',
     'tqdm',
     'wrapt',
@@ -60,8 +61,10 @@ REQUIRED_PKGS = [
     'futures;python_version<"3"',
     # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
     'psutil;python_version<"3.3"',
-    # enum introduced in Python 3.4
-    'enum34;python_version<"3.4"'
+    # Standard library backports
+    'enum34;python_version<"3.4"',
+    'dataclasses;python_version<"3.7"',
+    'importlib_resources;python_version<"3.9"',
 ]
 
 TESTS_REQUIRE = [
@@ -69,7 +72,7 @@ TESTS_REQUIRE = [
     'mako',
     'pytest',
     'pytest-xdist',
-    'tensorflow-data-validation>=0.15,<0.16',
+    'tensorflow-data-validation',
     # Python 2 backports
     'mock;python_version<"3"',
     # TODO(b/142892342): Re-enable
@@ -105,7 +108,6 @@ DATASET_FILES = [
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
-    'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
 
@@ -129,6 +131,7 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
+    # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
@@ -158,7 +161,7 @@ EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.15.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
-    'tensorflow-data-validation': ['tensorflow-data-validation>=0.15,<0.16'],
+    'tensorflow-data-validation': ['tensorflow-data-validation'],
 
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
@@ -179,11 +182,19 @@ setup(
     packages=find_packages(),
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
-            'scripts/templates/*',
+            'scripts/documentation/templates/*',
+            'url_checksums/*',
+            'checksums.tsv',
+        ],
+    },
+    exclude_package_data={
+        'tensorflow_datasets': [
+            'dummy_data/*',
         ],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
+    python_requires='>=3.6',
     extras_require=EXTRAS_REQUIRE,
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -193,4 +204,9 @@ setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     keywords='tensorflow machine learning datasets',
+    entry_points={
+        'console_scripts': [
+            'tfds = tensorflow_datasets.scripts.cli.main:launch_cli'
+        ],
+    },
 )

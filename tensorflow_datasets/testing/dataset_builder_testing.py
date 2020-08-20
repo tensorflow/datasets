@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import hashlib
 import itertools
@@ -34,7 +29,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import tf_utils
@@ -158,13 +153,24 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.patchers = []
     self.builder = self._make_builder()
 
-    # Determine the fake_examples directory.
-    self.example_dir = os.path.join(
-        test_utils.fake_examples_dir(), self.builder.name)
+    example_dir = self.DATASET_CLASS.code_path.parent / "dummy_data"
     if self.EXAMPLE_DIR is not None:
       self.example_dir = self.EXAMPLE_DIR
+    elif example_dir.exists():
+      self.example_dir = str(example_dir)
+    else:
+      self.example_dir = os.path.join(
+          test_utils.fake_examples_dir(), self.builder.name)
 
     if not tf.io.gfile.exists(self.example_dir):
+      err_msg = (
+          "Dummy data not found in {}."
+          ""
+      ).format(self.example_dir)
+
+    if not tf.io.gfile.exists(self.example_dir):
+      # TODO(epot): Better documentation once datasets are migrated to the
+      # folder model.
       err_msg = "fake_examples dir %s not found." % self.example_dir
       raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
@@ -223,7 +229,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     # all needed methods were implemented.
 
   def test_registered(self):
-    is_registered = self.builder.name in registered.list_builders()
+    is_registered = self.builder.name in load.list_builders()
     exceptions = self.builder.IN_DEVELOPMENT
     self.assertTrue(is_registered or exceptions,
                     "Dataset {} was not registered and is "
@@ -249,8 +255,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
-    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
-                            self.DL_EXTRACT_RESULT)
+    return tf.nest.map_structure(
+        lambda fname: os.path.join(self.example_dir, fname),
+        self.DL_EXTRACT_RESULT,
+    )
 
   def _get_dl_download_result(self, url):
     tf.nest.map_structure(self._add_url, url)
@@ -258,8 +266,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       # This is only to be backwards compatible with old approach.
       # In the future it will be replaced with using self.example_dir.
       return self._get_dl_extract_result(url)
-    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
-                            self.DL_DOWNLOAD_RESULT)
+    return tf.nest.map_structure(
+        lambda fname: os.path.join(self.example_dir, fname),
+        self.DL_DOWNLOAD_RESULT,
+    )
 
   def _download_checksums(self, url):
     self._stop_record_download = True
@@ -308,8 +318,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                "please add `SKIP_CHECKSUMS = True` to the "
                "`DatasetBuilderTestCase`")
 
-    with utils.try_reraise(suffix=err_msg):
+    filepath = self.DATASET_CLASS.code_path.parent / "checksums.tsv"
+    if filepath.exists():
+      filepath = str(filepath)
+    else:
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
+    with utils.try_reraise(suffix=err_msg):
       url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
 
     missing_urls = self._download_urls - set(url_infos.keys())

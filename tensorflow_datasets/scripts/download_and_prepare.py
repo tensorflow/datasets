@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 Standalone script to generate specific dataset(s). This can be
@@ -86,7 +85,7 @@ flags.DEFINE_boolean(
     "add_name_to_manual_dir", False, "If true, append the dataset name to the "
     "`manual_dir`")
 
-default_compute_stats = tfds.download.ComputeStatsMode.AUTO
+default_compute_stats = tfds.download.ComputeStatsMode.SKIP
 flags.DEFINE_enum(
     "compute_stats",
     default_compute_stats.value,

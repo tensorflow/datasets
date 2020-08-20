@@ -19,14 +19,20 @@ challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
 
 *   **Homepage**:
     [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
+
 *   **Source code**:
-    [`tfds.image.div2k.Div2k`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/div2k.py)
+    [`tfds.image.Div2k`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/div2k.py)
+
 *   **Versions**:
+
     *   **`2.0.0`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Features**:
 
 ```python
@@ -35,9 +41,11 @@ FeaturesDict({
     'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('lr', 'hr')`
+
 *   **Citation**:
 
 ```
@@ -51,8 +59,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## div2k/bicubic_x2 (default config)
@@ -60,117 +68,127 @@ FeaturesDict({
 *   **Config description**: Uses bicubic_x2 data.
 
 *   **Download size**: `4.68 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/bicubic_x3
 
 *   **Config description**: Uses bicubic_x3 data.
 
 *   **Download size**: `4.16 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/bicubic_x4
 
 *   **Config description**: Uses bicubic_x4 data.
 
 *   **Download size**: `3.97 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/bicubic_x8
 
 *   **Config description**: Uses bicubic_x8 data.
 
 *   **Download size**: `3.78 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/unknown_x2
 
 *   **Config description**: Uses unknown_x2 data.
 
 *   **Download size**: `4.48 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/unknown_x3
 
 *   **Config description**: Uses unknown_x3 data.
 
 *   **Download size**: `4.10 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/unknown_x4
 
 *   **Config description**: Uses unknown_x4 data.
 
 *   **Download size**: `3.93 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/realistic_mild_x4
 
 *   **Config description**: Uses realistic_mild_x4 data.
 
 *   **Download size**: `4.00 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/realistic_difficult_x4
 
 *   **Config description**: Uses realistic_difficult_x4 data.
 
 *   **Download size**: `3.98 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 800
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
+`'validation'` | 100
 
 ## div2k/realistic_wild_x4
 
 *   **Config description**: Uses realistic_wild_x4 data.
 
 *   **Download size**: `4.74 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'train'      | 3,200
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'train'`      | 3,200
+`'validation'` | 100

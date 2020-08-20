@@ -7,11 +7,7 @@ Thanks for thinking about contributing to our library !
 
 * Please accept the [Contributor License Agreement](https://cla.developers.google.com) (see below)
 * Comment on the issue that you plan to work on so we can assign it to you and
-  there isn't unnecessary duplication of work. If this is your first time
-  contributing, we'll send you an invitation on GitHub to be a contributor;
-  you must accept this invitation
-  [here](https://github.com/tensorflow/datasets/settings/collaboration)
-  before we can assign you the issue.
+  there isn't unnecessary duplication of work.
 * When you plan to work on something larger (for example, adding new
   `FeatureConnectors`), please respond on the issue (or create one if there
   isn't one) to explain your plan and give others a chance to discuss.
@@ -30,6 +26,19 @@ You can help in multiple ways:
 * Verifying that Pull Requests from others are working correctly
   (especially the ones that add new datasets).
 
+## Setup
+
+If you want to
+[contribute to our repository](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md):
+
+Clone or download the [Tensorflow Datasets](https://github.com/tensorflow/datasets)
+repository and install the repo locally.
+
+```
+git clone https://github.com/tensorflow/datasets.git
+cd datasets/
+pip install -e .
+```
 
 ## Datasets
 

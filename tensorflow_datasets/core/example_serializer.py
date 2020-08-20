@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """To serialize Dict or sequence to Example."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import numpy as np
@@ -69,9 +64,12 @@ def _dict_to_tf_example(example_dict, tensor_info_dict):
     example_proto: `tf.train.Example`, the encoded example proto.
   """
   def run_with_reraise(fn, k, example_data, tensor_info):
-    with utils.try_reraise(
-        "Error while serializing feature `{}`: `{}`: ".format(k, tensor_info)):
+    try:
       return fn(example_data, tensor_info)
+    except Exception:  # pylint: disable=broad-except
+      utils.reraise(
+          "Error while serializing feature `{}`: `{}`: ".format(k, tensor_info)
+      )
 
   if tensor_info_dict:
     # Add the RaggedTensor fields for the nested sequences
@@ -122,19 +120,13 @@ def _item_to_np_array(item, dtype, shape):
   utils.assert_shape_match(item.shape, shape)
   if dtype == tf.string and not _is_string(original_item):
     raise ValueError(
-        "Unsuported value: {}\nCould not convert to bytes list.".format(item))
+        "Unsupported value: {}\nCould not convert to bytes list.".format(item))
   return item
 
 
 def _item_to_tf_feature(item, tensor_info):
   """Single item to a tf.train.Feature."""
   v = _item_to_np_array(item, shape=tensor_info.shape, dtype=tensor_info.dtype)
-
-  # Check that the shape is expected
-  utils.assert_shape_match(v.shape, tensor_info.shape)
-  if tensor_info.dtype == tf.string and not _is_string(v):
-    raise ValueError(
-        "Unsuported value: {}\nCould not convert to bytes list.".format(item))
 
   # Convert boolean to integer (tf.train.Example does not support bool)
   if v.dtype == np.bool_:
@@ -150,7 +142,7 @@ def _item_to_tf_feature(item, tensor_info):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
   else:
     raise ValueError(
-        "Unsuported value: {}.\n"
+        "Unsupported value: {}.\n"
         "tf.train.Feature does not support type {}. "
         "This may indicate that one of the FeatureConnectors received an "
         "unsupported value as input.".format(repr(v), repr(type(v)))
@@ -180,7 +172,7 @@ def _add_ragged_fields(example_data, tensor_info):
   tensor_info = TensorInfo(shape=(None, None,), sequence_rank=2, ...)
   out = _add_ragged_fields(example_data, tensor_info)
   out == {
-      'ragged_flat_values': ([0, 1, 2, 3, 4, 5], TensorInfo(shape=(), ...)),
+      'ragged_flat_values': ([1, 2, 3, 4, 5], TensorInfo(shape=(), ...)),
       'ragged_row_length_0': ([3, 0, 2], TensorInfo(shape=(None,), ...))
   }
   ```

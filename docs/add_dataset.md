@@ -74,7 +74,7 @@ To use it, clone the `tfds` repository and run the following command:
 ```
 python tensorflow_datasets/scripts/create_new_dataset.py \
   --dataset my_dataset \
-  --type image  # text, audio, translation,...
+  --type image  # text, audio, translate,...
 ```
 
 

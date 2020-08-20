@@ -2,27 +2,35 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="super_glue" />
   <meta itemprop="description" content="SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after&#10;GLUE with a new set of more difficult language understanding tasks, improved&#10;resources, and a new public leaderboard.&#10;&#10;BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;super_glue&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/super_glue" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset." />
 </div>
+
 # `super_glue`
 
 *   **Source code**:
-    [`tfds.text.super_glue.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+    [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+
 *   **Versions**:
+
     *   **`1.0.2`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## super_glue/boolq (default config)
@@ -53,11 +61,11 @@ containing the answer. Following the original work, we evaluate with accuracy.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,245
-'train'      | 9,427
-'validation' | 3,270
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,245
+`'train'`      | 9,427
+`'validation'` | 3,270
 
 *   **Features**:
 
@@ -69,6 +77,7 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -129,11 +138,11 @@ for multi-class F1 we compute the unweighted average of the F1 per class.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 250
-'train'      | 250
-'validation' | 56
+Split          | Examples
+:------------- | -------:
+`'test'`       | 250
+`'train'`      | 250
+`'validation'` | 56
 
 *   **Features**:
 
@@ -145,6 +154,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -204,11 +214,11 @@ accuracy.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 500
-'train'      | 400
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 400
+`'validation'` | 100
 
 *   **Features**:
 
@@ -222,6 +232,7 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -283,11 +294,11 @@ domains including news, fiction, and historical text.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,693
-'train'      | 27,243
-'validation' | 4,848
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,693
+`'train'`      | 27,243
+`'validation'` | 4,848
 
 *   **Features**:
 
@@ -304,6 +315,7 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -358,11 +370,11 @@ all mentions) token-level F1 and exact match (EM).
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,000
-'train'      | 100,730
-'validation' | 10,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,000
+`'train'`      | 100,730
+`'validation'` | 10,000
 
 *   **Features**:
 
@@ -378,6 +390,7 @@ FeaturesDict({
     'query': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -442,11 +455,11 @@ and we expect the remaining gap to be difficult to close.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,000
-'train'      | 2,490
-'validation' | 277
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,000
+`'train'`      | 2,490
+`'validation'` | 277
 
 *   **Features**:
 
@@ -458,6 +471,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -536,11 +550,11 @@ evaluate using accuracy.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,400
-'train'      | 5,428
-'validation' | 638
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,400
+`'train'`      | 5,428
+`'validation'` | 638
 
 *   **Features**:
 
@@ -557,6 +571,7 @@ FeaturesDict({
     'word': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -659,14 +674,16 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
 *   **Download size**: `31.98 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 554
-'validation' | 104
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 554
+`'validation'` | 104
 
 *   **Features**:
 
@@ -681,6 +698,7 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -782,14 +800,16 @@ text.
 
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
 *   **Download size**: `31.98 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 554
-'validation' | 104
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 554
+`'validation'` | 104
 
 *   **Features**:
 
@@ -804,6 +824,7 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -868,9 +889,9 @@ used for the RTE task.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 1,104
+Split    | Examples
+:------- | -------:
+`'test'` | 1,104
 
 *   **Features**:
 
@@ -882,6 +903,7 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -943,9 +965,9 @@ demonstrate the presence of gender bias in a system, but not prove its absence.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 356
+Split    | Examples
+:------- | -------:
+`'test'` | 356
 
 *   **Features**:
 
@@ -957,6 +979,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```

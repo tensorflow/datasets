@@ -13,17 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.arc import ARC
+from tensorflow_datasets.image.bccd import BCCD
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
 from tensorflow_datasets.image.cityscapes import Cityscapes
 from tensorflow_datasets.image.clevr import CLEVR
+from tensorflow_datasets.image.clic import CLIC
 from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.div2k import Div2k
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
@@ -32,6 +33,7 @@ from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.the300w_lp import The300wLp
@@ -65,7 +67,6 @@ from tensorflow_datasets.image_classification.flowers import TFFlowers
 from tensorflow_datasets.image_classification.food101 import Food101
 from tensorflow_datasets.image_classification.geirhos_conflict_stimuli import GeirhosConflictStimuli
 from tensorflow_datasets.image_classification.horses_or_humans import HorsesOrHumans
-from tensorflow_datasets.image_classification.image_folder import ImageLabelFolder
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 from tensorflow_datasets.image_classification.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image_classification.imagenet2012_subset import Imagenet2012Subset

@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Module to use to extract archives. No business logic."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import concurrent.futures
 import contextlib
@@ -102,7 +97,7 @@ class _Extractor(object):
         msg += (
             '\n'
             'On windows, path lengths greater than 260 characters may '
-            'result in an error. See the doc to remove the limiration: '
+            'result in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
       raise ExtractError(msg)

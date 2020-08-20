@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import tensorflow.compat.v2 as tf
@@ -80,13 +75,15 @@ def _target_languages():
 class ParaCrawlConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ParaCrawl."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, target_language=None, **kwargs):
+  def __init__(
+      self, *, text_encoder_config=None, target_language=None, **kwargs
+  ):
     """BuilderConfig for ParaCrawl.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        features feature.
       target_language: Target language that will be used to translate to from
         English which is always the source language. It has to contain 2-letter
         coded strings. For example: "se", "hu".
@@ -108,7 +105,7 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
 
     # Store the attributes.
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
     self.target_language = target_language
     self.data_url = _BASE_DATA_URL_FORMAT_STR.format(
         target_lang=target_language)

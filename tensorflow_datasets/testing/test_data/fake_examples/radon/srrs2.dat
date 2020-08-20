@@ -1,0 +1,4 @@
+idnum, state, state2, stfips, zip, region, typebldg, floor, room, basement, windoor, rep, stratum, wave, starttm, stoptm, startdt, stopdt, activity, pcterr, adjwt, dupflag, zipflag, cntyfips, county
+1,AZ,AZ, 4,85920, 1,1,1,2,N, , 2, 1, 30,1100,1100,112987,120287,     0.3,     0.0,   136.060971,0,0,  1,APACHE
+2,AZ,AZ, 4,85920, 1,0,9,0, , , 1, 1,117,0600,0700,070788,071188,     0.6,    33.3,   128.784975,0,0,  1,APACHE
+3,AZ,AZ, 4,     , 1,1,1,3,N, , ., 1,  .,1145,1145,070788,070788,     0.5,     0.0,   150.245112,0,0,  1,APACHE

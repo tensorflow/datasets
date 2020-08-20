@@ -5,6 +5,19 @@ datasets as `tf.data.Dataset`s, so the advice from the
 [`tf.data` guide](https://www.tensorflow.org/guide/data_performance#optimize_performance)
 still applies.
 
+## Benchmark datasets
+
+Use `tfds.core.benchmark(ds)` to benchmark any `tf.data.Dataset` object. Make
+sure to use the `batch_size=` kwargs to normalize the results.
+
+```python
+ds = tfds.load('mnist', split='train').batch(32).prefetch()
+# Display some benchmark statistics
+tfds.core.benchmark(ds, batch_size=32)
+# Second iteration is much faster, due to auto-caching
+tfds.core.benchmark(ds, batch_size=32)
+```
+
 ## Small datasets (< GB)
 
 All TFDS datasets store the data on disk in the

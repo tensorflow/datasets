@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Text datasets."""
 
 from tensorflow_datasets.summarization.aeslc import Aeslc
@@ -21,9 +20,11 @@ from tensorflow_datasets.summarization.big_patent import BigPatent
 from tensorflow_datasets.summarization.billsum import Billsum
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymailConfig
+from tensorflow_datasets.summarization.covid19sum import Covid19sum
 from tensorflow_datasets.summarization.gigaword import Gigaword
 from tensorflow_datasets.summarization.multi_news import MultiNews
 from tensorflow_datasets.summarization.newsroom import Newsroom
+from tensorflow_datasets.summarization.opinion_abstracts import OpinionAbstracts
 from tensorflow_datasets.summarization.opinosis import Opinosis
 from tensorflow_datasets.summarization.reddit import Reddit
 from tensorflow_datasets.summarization.reddit_tifu import RedditTifu

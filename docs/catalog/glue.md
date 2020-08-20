@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="glue" />
   <meta itemprop="description" content="GLUE, the General Language Understanding Evaluation benchmark&#10;(https://gluebenchmark.com/) is a collection of resources for training,&#10;evaluating, and analyzing natural language understanding systems.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;glue&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/glue" />
   <meta itemprop="sameAs" content="https://nyu-mll.github.io/CoLA/" />
   <meta itemprop="citation" content="@article{warstadt2018neural,&#10;  title={Neural Network Acceptability Judgments},&#10;  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1805.12471},&#10;  year={2018}&#10;}&#10;@inproceedings{wang2019glue,&#10;  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},&#10;  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},&#10;  note={In the Proceedings of ICLR.},&#10;  year={2019}&#10;}&#10;&#10;Note that each GLUE dataset has its own citation. Please see the source to see&#10;the correct citation for each contained dataset." />
 </div>
+
 # `glue`
 
 *   **Description**:
@@ -17,19 +19,25 @@ GLUE, the General Language Understanding Evaluation benchmark
 evaluating, and analyzing natural language understanding systems.
 
 *   **Source code**:
-    [`tfds.text.glue.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
+    [`tfds.text.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## glue/cola (default config)
@@ -46,11 +54,11 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,063
-'train'      | 8,551
-'validation' | 1,043
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,063
+`'train'`      | 8,551
+`'validation'` | 1,043
 
 *   **Features**:
 
@@ -61,6 +69,7 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -95,11 +104,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,821
-'train'      | 67,349
-'validation' | 872
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,821
+`'train'`      | 67,349
+`'validation'` | 872
 
 *   **Features**:
 
@@ -110,6 +119,7 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -145,11 +155,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,725
-'train'      | 3,668
-'validation' | 408
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,725
+`'train'`      | 3,668
+`'validation'` | 408
 
 *   **Features**:
 
@@ -161,6 +171,7 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -194,11 +205,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 390,965
-'train'      | 363,849
-'validation' | 40,430
+Split          | Examples
+:------------- | -------:
+`'test'`       | 390,965
+`'train'`      | 363,849
+`'validation'` | 40,430
 
 *   **Features**:
 
@@ -210,6 +221,7 @@ FeaturesDict({
     'question2': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -245,11 +257,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,379
-'train'      | 5,749
-'validation' | 1,500
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,379
+`'train'`      | 5,749
+`'validation'` | 1,500
 
 *   **Features**:
 
@@ -261,6 +273,7 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -302,13 +315,13 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split                   | Examples
-:---------------------- | -------:
-'test_matched'          | 9,796
-'test_mismatched'       | 9,847
-'train'                 | 392,702
-'validation_matched'    | 9,815
-'validation_mismatched' | 9,832
+Split                     | Examples
+:------------------------ | -------:
+`'test_matched'`          | 9,796
+`'test_mismatched'`       | 9,847
+`'train'`                 | 392,702
+`'validation_matched'`    | 9,815
+`'validation_mismatched'` | 9,832
 
 *   **Features**:
 
@@ -320,6 +333,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -369,10 +383,10 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,847
-'validation' | 9,832
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,847
+`'validation'` | 9,832
 
 *   **Features**:
 
@@ -384,6 +398,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -433,10 +448,10 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,796
-'validation' | 9,815
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,796
+`'validation'` | 9,815
 
 *   **Features**:
 
@@ -448,6 +463,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -507,11 +523,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,463
-'train'      | 104,743
-'validation' | 5,463
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,463
+`'train'`      | 104,743
+`'validation'` | 5,463
 
 *   **Features**:
 
@@ -523,6 +539,7 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -560,11 +577,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,000
-'train'      | 2,490
-'validation' | 277
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,000
+`'train'`      | 2,490
+`'validation'` | 277
 
 *   **Features**:
 
@@ -576,6 +593,7 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -652,11 +670,11 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 635
-'validation' | 71
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 635
+`'validation'` | 71
 
 *   **Features**:
 
@@ -668,6 +686,7 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -703,9 +722,9 @@ the correct citation for each contained dataset.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 1,104
+Split    | Examples
+:------- | -------:
+`'test'` | 1,104
 
 *   **Features**:
 
@@ -717,6 +736,7 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```

@@ -1,0 +1,32 @@
+{
+  "citation": "@article{hendrycks2019nae,\n  title={Natural Adversarial Examples},\n  author={Dan Hendrycks and Kevin Zhao and Steven Basart and Jacob Steinhardt and Dawn Song},\n  journal={arXiv preprint arXiv:1907.07174},\n  year={2019}\n}",
+  "description": "ImageNet-A is a set of images labelled with ImageNet labels that were obtained\nby collecting new data and keeping only those images that ResNet-50 models fail\nto correctly classify. For more details please refer to the paper.\n\nThe label space is the same as that of ImageNet2012. Each example is\nrepresented as a dictionary with the following keys:\n\n* 'image': The image, a (H, W, 3)-tensor.\n* 'label': An integer in the range [0, 1000).\n* 'file_name': A unique sting identifying the example within the dataset.",
+  "downloadSize": "687552512",
+  "location": {
+    "urls": [
+      "https://github.com/hendrycks/natural-adv-examples"
+    ]
+  },
+  "name": "imagenet_a",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "682483516",
+      "shardLengths": [
+        "938",
+        "937",
+        "937",
+        "938",
+        "938",
+        "937",
+        "937",
+        "938"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

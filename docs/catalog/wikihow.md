@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="wikihow" />
   <meta itemprop="description" content="WikiHow is a new large-scale dataset using the online WikiHow&#10;(http://www.wikihow.com/) knowledge base.&#10;&#10;There are two features:&#10;  - text: wikihow answers texts.&#10;  - headline: bold lines as summary.&#10;&#10;There are two separate versions:&#10;  - all: consisting of the concatenation of all paragraphs as the articles and&#10;         the bold lines as the reference summaries.&#10;  - sep: consisting of each paragraph and its summary.&#10;&#10;Download &quot;wikihowAll.csv&quot; and &quot;wikihowSep.csv&quot; from&#10;https://github.com/mahnazkoupaee/WikiHow-Dataset and place them in manual folder&#10;https://www.tensorflow.org/datasets/api_docs/python/tfds/download/DownloadConfig.&#10;Train/validation/test splits are provided by the authors.&#10;Preprocessing is applied to remove short articles&#10;(abstract length &lt; 0.75 article length) and clean up extra commas.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wikihow&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wikihow" />
   <meta itemprop="sameAs" content="https://github.com/mahnazkoupaee/WikiHow-Dataset" />
   <meta itemprop="citation" content="@misc{koupaee2018wikihow,&#10;    title={WikiHow: A Large Scale Text Summarization Dataset},&#10;    author={Mahnaz Koupaee and William Yang Wang},&#10;    year={2018},&#10;    eprint={1810.09305},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `wikihow`
 
 Warning: Manual download required. See instructions below.
@@ -33,23 +35,32 @@ clean up extra commas.
 
 *   **Homepage**:
     [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
+
 *   **Source code**:
-    [`tfds.summarization.wikihow.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
+    [`tfds.summarization.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
+
 *   **Versions**:
+
     *   **`1.2.0`** (default): No release notes.
+
 *   **Download size**: `5.21 MiB`
+
 *   **Dataset size**: `Unknown size`
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
     Please download both wikihowAll.csv and wikihowSep.csv.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'headline')`
+
 *   **Citation**:
 
 ```
@@ -63,8 +74,8 @@ clean up extra commas.
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## wikihow/all (default config)
@@ -74,11 +85,11 @@ clean up extra commas.
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 5,577
-'train'      | 157,252
-'validation' | 5,599
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,577
+`'train'`      | 157,252
+`'validation'` | 5,599
 
 *   **Features**:
 
@@ -96,11 +107,11 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split        | Examples
-:----------- | --------:
-'test'       | 37,800
-'train'      | 1,060,732
-'validation' | 37,932
+Split          | Examples
+:------------- | --------:
+`'test'`       | 37,800
+`'train'`      | 1,060,732
+`'validation'` | 37,932
 
 *   **Features**:
 

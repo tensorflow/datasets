@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 r"""Dump the list of all registered datasets/config/version in a `.txt` file.
 
 Instructions:
@@ -41,7 +40,7 @@ flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
 
 def main(_):
   version_path = os.path.join(FLAGS.tfds_dir, 'stable_versions.txt')
-  registered_names = tfds.core.registered.list_full_names()
+  registered_names = tfds.core.load.list_full_names()
   with tf.io.gfile.GFile(version_path, 'w') as f:
     f.write('\n'.join(registered_names))
   print(f'{len(registered_names)} datasets versions written.')

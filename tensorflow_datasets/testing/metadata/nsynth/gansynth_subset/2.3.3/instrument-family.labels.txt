@@ -1,0 +1,11 @@
+bass
+brass
+flute
+guitar
+keyboard
+mallet
+organ
+reed
+string
+synth_lead
+vocal

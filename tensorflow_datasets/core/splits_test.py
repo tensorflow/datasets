@@ -13,17 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for the Split API."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core.utils import shard_utils
 import tensorflow_datasets.public_api as tfds
 
 RANGE_TRAIN = list(range(0, 2000))
@@ -154,21 +150,21 @@ class SplitsTest(testing.TestCase):
 
   def test_sub_split_file_instructions(self):
     fi = self._builder.info.splits["train[75%:]"].file_instructions
-    self.assertEqual(fi, [{
-        "filename":
-            "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
-        "skip": 15,
-        "take": -1,
-    }])
+    self.assertEqual(fi, [shard_utils.FileInstruction(
+        filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+        skip=15,
+        take=-1,
+        num_examples=5,
+    )])
 
   def test_split_file_instructions(self):
     fi = self._builder.info.splits["train"].file_instructions
-    self.assertEqual(fi, [{
-        "filename":
-            "dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
-        "skip": 0,
-        "take": -1,
-    }])
+    self.assertEqual(fi, [shard_utils.FileInstruction(
+        filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+        skip=0,
+        take=-1,
+        num_examples=20,
+    )])
 
   def test_sub_split_filenames(self):
     self.assertEqual(self._builder.info.splits["train"].filenames, [
@@ -186,6 +182,15 @@ class SplitsTest(testing.TestCase):
   def test_split_enum(self):
     self.assertEqual(repr(splits.Split.TRAIN), "Split('train')")
     self.assertIsInstance(splits.Split.TRAIN, splits.Split)
+
+  def test_even_splits(self):
+    self.assertEqual(
+        ["train[0%:33%]", "train[33%:67%]", "train[67%:100%]"],
+        splits.even_splits("train", n=3),
+    )
+    self.assertEqual([
+        "train[0%:25%]", "train[25%:50%]", "train[50%:75%]", "train[75%:100%]"
+    ], splits.even_splits("train", 4))
 
 
 if __name__ == "__main__":

@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """CBIS-DDSM mammography dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import csv
 import os
@@ -124,7 +119,7 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['version'] = tfds.core.Version(
-        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+        '2.0.1', 'New split API (https://tensorflow.org/datasets/splits)')
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
     self.patch_size = patch_size
@@ -413,7 +408,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           if abnormality['pathology'].startswith('MALIGNANT'):
             benign_or_malignant = 'MALIGNANT'
           else:
-            benign_or_malignant = 'BENING'
+            benign_or_malignant = 'BENIGN'
           if abnormality['type'] == 'calc':
             label = benign_or_malignant + '_CALCIFICATION'
           elif abnormality['type'] == 'mass':

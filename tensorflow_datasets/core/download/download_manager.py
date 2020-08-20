@@ -13,16 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Download manager interface."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import concurrent.futures
+import hashlib
 import os
-import sys
-from typing import Optional
+from typing import Optional, Union
 import uuid
 
 from absl import logging
@@ -30,11 +26,11 @@ import promise
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
+from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
 
@@ -166,13 +162,14 @@ class DownloadManager(object):
   ...), you can pass a `tfds.download.Resource` as argument.
   """
 
-  @api_utils.disallow_positional_args
   def __init__(
       self,
+      *,
       download_dir: str,
       extract_dir: Optional[str] = None,
       manual_dir: Optional[str] = None,
       manual_dir_instructions: Optional[str] = None,
+      checksums_path: Optional[str] = None,
       dataset_name: Optional[str] = None,
       force_download: bool = False,
       force_extraction: bool = False,
@@ -187,6 +184,7 @@ class DownloadManager(object):
       manual_dir: Path to manually downloaded/extracted data directory.
       manual_dir_instructions: Human readable instructions on how to
         prepare contents of the manual_dir for this dataset.
+      checksums_path: Path to the checksums file.
       dataset_name: Name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
       force_download: If True, always [re]download.
@@ -208,14 +206,26 @@ class DownloadManager(object):
     self._force_extraction = force_extraction
     self._force_checksums_validation = force_checksums_validation
     self._register_checksums = register_checksums
+
     # All known URLs: {url: (size, checksum)}
     self._url_infos = checksums.get_all_url_infos()
+    if checksums_path:
+      with tf.io.gfile.GFile(checksums_path) as f:
+        self._url_infos.update(checksums.parse_url_infos(f.read().splitlines()))
+
     # To record what is being used: {url: (size, checksum)}
     self._recorded_url_infos = {}
     # These attributes are lazy-initialized since they must be cleared when this
     # object is pickled for Beam. They are then recreated on each worker.
     self.__downloader = None
     self.__extractor = None
+    # Executor to avoid blocking other download/extractions when running I/O
+    # operations (reading/renaming download file).
+    # Only use a single thread as the read/ops are locked by the
+    # `build_synchronize_decorator`.
+    # Note: This thread is in additions of the download and extraction
+    # executors threads.
+    self._executor = concurrent.futures.ThreadPoolExecutor(1)
 
   def __getstate__(self):
     """Remove un-pickleable attributes and return the state."""
@@ -227,6 +237,7 @@ class DownloadManager(object):
     state = self.__dict__.copy()
     state['_DownloadManager__downloader'] = None
     state['_DownloadManager__extractor'] = None
+    state['_executor'] = None
     return state
 
   @property
@@ -244,7 +255,7 @@ class DownloadManager(object):
   @property
   def downloaded_size(self):
     """Returns the total size of downloaded files."""
-    return sum(size for size, sha256 in self._recorded_url_infos.values())
+    return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_final_dl_path(self, url, sha256):
     return os.path.join(self._download_dir,
@@ -255,40 +266,153 @@ class DownloadManager(object):
     """Returns whether checksums are being computed and recorded to file."""
     return self._register_checksums
 
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   def _record_url_infos(self):
     """Store in file when recorded size/checksum of downloaded files."""
     checksums.store_checksums(self._dataset_name,
                               self._recorded_url_infos)
 
-  def _handle_download_result(self, resource, tmp_dir_path, url_info):
-    """Store dled file to definitive place, write INFO file, return path."""
+  def _handle_download_result(
+      self,
+      resource: resource_lib.Resource,
+      tmp_dir_path: str,
+      url_path: str,
+      url_info: checksums.UrlInfo,
+  ) -> str:
+    """Post-processing of the downloaded file.
+
+    * Write `.INFO` file
+    * Rename `tmp_dir/file.xyz` -> `url_path`
+    * Validate/record checksums
+    * Eventually rename `url_path` -> `file_path` when `record_checksums=True`
+
+    Args:
+      resource: The url to download.
+      tmp_dir_path: Temporary dir where the file was downloaded.
+      url_path: Destination path.
+      url_info: File checksums, size, computed during download.
+
+    Returns:
+      dst_path: `url_path` (or `file_path` when `register_checksums=True`)
+
+    Raises:
+      NonMatchingChecksumError:
+    """
+    # Extract the file name, path from the tmp_dir
     fnames = tf.io.gfile.listdir(tmp_dir_path)
     if len(fnames) != 1:
       raise ValueError(
           'Download not found for url {} in: {}. Found {} files, but expected '
           '1.'.format(resource.url, tmp_dir_path, len(fnames)))
-    original_fname = fnames[0]
+    original_fname, = fnames  # Unpack list
     tmp_path = os.path.join(tmp_dir_path, original_fname)
+
+    # Write `.INFO` file and rename `tmp_dir/file.xyz` -> `url_path`
+    resource_lib.write_info_file(
+        resource=resource,
+        path=url_path,
+        dataset_name=self._dataset_name,
+        original_fname=original_fname,
+        url_info=url_info,
+    )
+    # Unconditionally overwrite because either file doesn't exist or
+    # FORCE_DOWNLOAD=true
+    tf.io.gfile.rename(tmp_path, url_path, overwrite=True)
+    tf.io.gfile.rmtree(tmp_dir_path)
+
+    # After this checkpoint, the url file is cached, so should never be
+    # downloaded again, even if there are error in registering checksums.
+
+    # Even if `_handle_download_result` is executed asyncronously, Python
+    # built-in ops are atomic in CPython (and Pypy), so it should be safe
+    # to update `_recorded_url_infos`.
     self._recorded_url_infos[resource.url] = url_info
+
+    # Validate the download checksum, or register checksums
+    dst_path = url_path
     if self._register_checksums:
-      self._record_url_infos()
+      # Change `dst_path` from `url_path` -> `file_path`
+      dst_path = self._save_url_info_and_rename(
+          url=resource.url, url_path=url_path, url_info=url_info)
     elif resource.url not in self._url_infos:
       if self._force_checksums_validation:
         raise ValueError(
-            'Missing checksums url: {}, yet `force_checksums_validation=True` .'
+            'Missing checksums url: {}, yet `force_checksums_validation=True`. '
             'Did you forgot to register checksums ?')
-      # Otherwise, do nothing
+      # Otherwise, missing checksums, do nothing
     elif url_info != self._url_infos.get(resource.url, None):
       raise NonMatchingChecksumError(resource.url, tmp_path)
-    download_path = self._get_final_dl_path(resource.url, url_info.checksum)
-    resource_lib.write_info_file(resource, download_path, self._dataset_name,
-                                 original_fname)
-    # Unconditionally overwrite because either file doesn't exist or
-    # FORCE_DOWNLOAD=true
-    tf.io.gfile.rename(tmp_path, download_path, overwrite=True)
-    tf.io.gfile.rmtree(tmp_dir_path)
-    return download_path
+
+    return dst_path
+
+  def _save_url_info_and_rename(
+      self,
+      url: str,
+      url_path: str,
+      url_info: checksums.UrlInfo,
+  ) -> str:
+    """Saves the checksums on disk and renames `url_path` -> `file_path`.
+
+    This function assume the file has already be downloaded in `url_path`.
+
+    Args:
+      url: Url downloaded
+      url_path: Path of the downloaded file.
+      url_info: Downloaded file information.
+
+    Returns:
+      file_path: The downloaded file after renaming.
+    """
+    # Record checksums/download size
+    # As downloads are cached even without checksum, we could
+    # avoid recording the checksums for each urls, and record them once
+    # globally at the end.
+    assert url in self._recorded_url_infos
+    self._record_url_infos()
+
+    # Rename (after checksum got saved succesfully)
+    file_path = self._get_final_dl_path(url, url_info.checksum)
+    tf.io.gfile.rename(url_path, file_path, overwrite=True)
+    resource_lib.rename_info_file(url_path, file_path, overwrite=True)
+    return file_path
+
+  def _find_existing_path(self, url: str, url_path: str) -> Optional[str]:
+    """Returns the downloaded file path if it exists.
+
+    The file can be located in two different locations:
+
+    * `file_path = f(url, hash(file))`
+    * `url_path = f(url, hash(url))`
+
+    `file_path` can only be computed if the file checksum is known in
+    advance. Otherwise, `url_path` is used as fallback.
+
+    Args:
+      url: Downloaded url
+      url_path: File path when the file checksums is unknown
+
+    Returns:
+      existing_path: `file_path` or `url_path` if the file was already
+        downloaded. `None` otherwise.
+    """
+    existing_path = None
+    # If download is forced, then have to re-download in all cases
+    if not self._force_download:
+      # File checksum is registered (`file_path` known)
+      if url in self._url_infos:
+        expected_file_checksum = self._url_infos[url].checksum
+        file_path = self._get_final_dl_path(url, expected_file_checksum)
+        if resource_lib.Resource.exists_locally(file_path):
+          existing_path = file_path
+          # Info restored from `checksums/dataset.txt` files.
+          self._recorded_url_infos[url] = self._url_infos[url]
+
+      # If `file_path` isn't found (or unknown), fall back to `url_path`
+      if not existing_path and resource_lib.Resource.exists_locally(url_path):
+        existing_path = url_path
+        # Info restored from `.INFO` file
+        self._recorded_url_infos[url] = _read_url_info(url_path)
+    return existing_path
 
   def download_checksums(self, checksums_url):
     """Downloads checksum file from the given URL and adds it to registry."""
@@ -296,23 +420,54 @@ class DownloadManager(object):
     with tf.io.gfile.GFile(checksums_path) as f:
       self._url_infos.update(checksums.parse_url_infos(f))
 
-  # synchronize and memoize decorators ensure same resource will only be
+  # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   @utils.memoize()
-  def _download(self, resource):
-    """Download resource, returns Promise->path to downloaded file."""
+  def _download(self, resource: Union[str, resource_lib.Resource]):
+    """Download resource, returns Promise->path to downloaded file.
+
+    Args:
+      resource: The URL to download.
+
+    Returns:
+      path: The path to the downloaded resource.
+    """
+    # Normalize the input
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
-    if url in self._url_infos:
-      expected_sha256 = self._url_infos[url].checksum
-      download_path = self._get_final_dl_path(url, expected_sha256)
-      if not self._force_download and resource.exists_locally(download_path):
-        logging.info('URL %s already downloaded: reusing %s.',
-                     url, download_path)
-        self._recorded_url_infos[url] = self._url_infos[url]
-        return promise.Promise.resolve(download_path)
+
+    # Compute the existing path if the file was previously downloaded
+    url_path = self._get_final_dl_path(
+        url, hashlib.sha256(url.encode('utf-8')).hexdigest())
+    existing_path = self._find_existing_path(url=url, url_path=url_path)
+
+    # If register checksums and file already downloaded, then:
+    # * Record the url_infos of the downloaded file
+    # * Rename the filename `url_path` -> `file_path`, and return it.
+    if self._register_checksums and existing_path == url_path:
+      logging.info(
+          'URL %s already downloaded: Recording checksums from %s.',
+          url,
+          existing_path,
+      )
+      future = self._executor.submit(
+          self._save_url_info_and_rename,
+          url=url,
+          url_path=url_path,
+          url_info=self._recorded_url_infos[url],
+      )
+      return promise.Promise.resolve(future)
+    # Otherwise, url_infos are either already registered, or will be registered
+    # in the `_handle_download_result` callback.
+
+    # If the file file already exists (`file_path` or `url_path`), return it.
+    if existing_path:
+      logging.info('URL %s already downloaded: reusing %s.', url, existing_path)
+      return promise.Promise.resolve(existing_path)
+
+    # Otherwise, download the file, and eventually computing the checksums.
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
@@ -321,12 +476,16 @@ class DownloadManager(object):
         '%s.tmp.%s' % (resource_lib.get_dl_dirname(url), uuid.uuid4().hex))
     tf.io.gfile.makedirs(download_dir_path)
     logging.info('Downloading %s into %s...', url, download_dir_path)
-
     def callback(url_info):
-      return self._handle_download_result(resource, download_dir_path, url_info)
+      return self._handle_download_result(
+          resource=resource,
+          tmp_dir_path=download_dir_path,
+          url_path=url_path,
+          url_info=url_info,
+      )
     return self._downloader.download(url, download_dir_path).then(callback)
 
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   @utils.memoize()
   def _extract(self, resource):
     """Extract a single archive, returns Promise->path to extraction result."""
@@ -345,7 +504,7 @@ class DownloadManager(object):
       return promise.Promise.resolve(extract_path)
     return self._extractor.extract(path, extract_method, extract_path)
 
-  @util.build_synchronize_decorator()
+  @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download_extract(self, resource):
     """Download-extract `Resource` or url, returns Promise->path."""
@@ -356,14 +515,21 @@ class DownloadManager(object):
       return self._extract(resource)
     return self._download(resource).then(callback)
 
-  def download_kaggle_data(self, competition_name):
-    """Download data for a given Kaggle competition."""
-    with self._downloader.tqdm():
-      kaggle_downloader = self._downloader.kaggle_downloader(competition_name)
-      urls = kaggle_downloader.competition_urls
-      files = kaggle_downloader.competition_files
-      return _map_promise(self._download,
-                          dict((f, u) for (f, u) in zip(files, urls)))
+  def download_kaggle_data(self, competition_or_dataset: str) -> str:
+    """Download data for a given Kaggle Dataset or competition.
+
+    Note: This function requires the Kaggle CLI tool.
+    Read the installation guide at https://www.kaggle.com/docs/api.
+
+    Args:
+      competition_or_dataset: Dataset name (`zillow/zecon`) or
+        competition name (`titanic`)
+
+    Returns:
+      The path to the downloaded files.
+    """
+    return kaggle.download_kaggle_data(
+        competition_or_dataset, self._download_dir)
 
   def download(self, url_or_urls):
     """Download given url(s).
@@ -455,29 +621,19 @@ class DownloadManager(object):
     return self._manual_dir
 
 
-# ============================================================================
-# In Python 2.X, threading.Condition.wait() cannot be interrupted by SIGINT,
-# unless it's given a timeout. Here we artificially give a long timeout to
-# allow ctrl+C.
-# This code should be deleted once python2 is no longer supported.
-if sys.version_info[0] > 2:
-
-  def _wait_on_promise(p):
-    return p.get()
-
-else:
-
-  def _wait_on_promise(p):
-    while True:
-      result = p.get(sys.maxint)  # pylint: disable=g-deprecated-member-used
-      if p.is_fulfilled:
-        return result
-
-# ============================================================================
+def _read_url_info(url_path: str) -> checksums.UrlInfo:
+  """Loads the `UrlInfo` from the `.INFO` file."""
+  file_info = resource_lib.read_info_file(url_path)
+  if 'url_info' not in file_info:
+    raise ValueError(
+        'Could not found `url_info` in {}. This likelly indicates that '
+        'the files where downloaded with a previous version of TFDS (<=3.1.0). '
+    )
+  return checksums.UrlInfo(**file_info['url_info'])
 
 
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
-  all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
-  res = utils.map_nested(_wait_on_promise, all_promises)
+  all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
+  res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
   return res

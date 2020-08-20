@@ -13,20 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Video feature."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import subprocess
 import tempfile
 
+import numpy as np
 import six
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Video(sequence_feature.Sequence):
@@ -116,7 +117,6 @@ class Video(sequence_feature.Sequence):
   def _ffmpeg_path(self):
     return 'ffmpeg'
 
-
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, six.string_types):
       ffmpeg_args = [self._ffmpeg_path, '-i', path_or_fobj]
@@ -181,3 +181,41 @@ class Video(sequence_feature.Sequence):
     else:
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Video':
+    shape = tuple(value['shape'])
+    encoding_format = value['encoding_format']
+    ffmpeg_extra_args = value['ffmpeg_extra_args']
+    return cls(shape, encoding_format, ffmpeg_extra_args)
+
+  def to_json_content(self) -> Json:
+    return {
+        'shape': list(self.shape),
+        'encoding_format': self._encoding_format,
+        'ffmpeg_extra_args': self._extra_ffmpeg_args
+    }
+
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Video are displayed as GIFs."""
+    # Use GIF as there is no easy way to generate a HTML5 compatible video
+    # without FFMPEG or other lib that the user is likelly to have on
+    # colab by default.
+    gif = [image_feature.create_thumbnail(frame) for frame in ex]
+
+    def write_buff(buff):
+      gif[0].save(
+          buff,
+          format='GIF',
+          save_all=True,
+          append_images=gif[1:],
+          # Could add a frame_rate kwargs in __init__ to customize this.
+          duration=41,  # 41ms / img ~= 24 img / sec
+          loop=0,
+      )
+
+    # Convert to base64
+    gif_str = utils.get_base64(write_buff)
+
+    # Display HTML
+    return f'<img src="data:image/gif;base64,{gif_str}"  alt="Gif" />'

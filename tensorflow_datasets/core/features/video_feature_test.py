@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for tensorflow_datasets.core.features.video_feature."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os.path
@@ -49,6 +44,10 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_video,
             ),
         ],
+        test_attributes=dict(
+            _encoding_format='png',
+            _extra_ffmpeg_args=[]
+        )
     )
 
   def test_video_concatenated_frames(self):

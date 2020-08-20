@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for tensorflow_datasets.core.features.sequence_feature."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -66,6 +61,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 raise_msg='Input sequence length do not match',
             ),
         ],
+        test_attributes=dict(_length=3)
     )
 
   def test_label(self):
@@ -95,6 +91,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 expected={'label': []},
             ),
         ],
+        test_attributes=dict(_length=None)
     )
 
   def test_nested(self):

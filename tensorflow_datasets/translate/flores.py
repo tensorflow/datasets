@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Facebook Low Resource (FLoRes) machine translation benchmark dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 
@@ -52,16 +47,17 @@ TranslateData = collections.namedtuple("TranslateData",
 class FloresConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLoRes."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                text_encoder_config=None,
                language_pair=(None, None),
                **kwargs):
     """BuilderConfig for FLoRes.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        features feature.
       language_pair: pair of languages that will be used for translation. Should
         contain 2-letter coded strings. First will be used at source and second
         as target in supervised mode. For example: ("se", "en").
@@ -82,7 +78,7 @@ class FloresConfig(tfds.core.BuilderConfig):
             "New split API (https://tensorflow.org/datasets/splits)"),
         **kwargs)
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
     # Validate language pair.
     assert "en" in language_pair, (

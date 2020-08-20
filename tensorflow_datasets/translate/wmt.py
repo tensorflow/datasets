@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """WMT: Translate dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import codecs
 import functools
@@ -576,8 +571,8 @@ _CZENG17_FILTER = SubDataset(
 class WmtConfig(tfds.core.BuilderConfig):
   """BuilderConfig for WMT."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                url=None,
                citation=None,
                description=None,
@@ -593,9 +588,9 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
-      text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
-        configuration for the `tfds.features.text.TextEncoder` used for the
-        `tfds.features.text.Translation` features.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig` (optional),
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        `tfds.deprecated.text.Translation` features.
       subsets: Dict[split, list[str]]. List of the subset to use for each of the
         split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.

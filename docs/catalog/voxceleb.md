@@ -22,27 +22,35 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html](http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html)
+
 *   **Source code**:
-    [`tfds.audio.voxceleb.Voxceleb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxceleb.py)
+    [`tfds.audio.Voxceleb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxceleb.py)
+
 *   **Versions**:
+
     *   **`1.1.1`** (default): No release notes.
+
 *   **Download size**: `4.68 MiB`
+
 *   **Dataset size**: `107.97 GiB`
-*   **Manual download instructions**: This dataset requires you to download the
-    source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/manual/`):<br/>
+
+*   **Manual download instructions**: This dataset requires you to
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
     manual_dir should contain the file vox_dev_wav.zip. The instructions for
     downloading this file are found in http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html. This dataset requires registration.
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 7,972
-'train'      | 134,000
-'validation' | 6,670
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,972
+`'train'`      | 134,000
+`'validation'` | 6,670
 
 *   **Features**:
 
@@ -52,9 +60,11 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1252),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
+
 *   **Citation**:
 
 ```
@@ -66,6 +76,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.

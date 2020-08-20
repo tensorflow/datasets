@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """The PlantVillage dataset of healthy and unhealthy leaves."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -58,7 +53,7 @@ Original paper URL: https://arxiv.org/abs/1511.08060
 Dataset URL: https://data.mendeley.com/datasets/tywbtsjrjv/1
 """
 
-_URL = "https://data.mendeley.com/datasets/tywbtsjrjv/1/files/127d0761-7c63-46f0-b08e-d0d9f7cad9da/Plant_leaf_diseases_dataset_without_augmentation.zip"
+_URL = "https://data.mendeley.com/datasets/tywbtsjrjv/1/files/d5652a28-c1d8-4b76-97f3-72fb80f94efc/Plant_leaf_diseases_dataset_without_augmentation.zip"
 _LABELS = [
     "Apple___Apple_scab",
     "Apple___Black_rot",
@@ -104,7 +99,7 @@ _LABELS = [
 class PlantVillage(tfds.core.GeneratorBasedBuilder):
   """The PlantVillage dataset of healthy and unhealthy leaves."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(

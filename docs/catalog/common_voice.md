@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="common_voice" />
   <meta itemprop="description" content="Mozilla Common Voice Dataset&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;common_voice&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/common_voice" />
   <meta itemprop="sameAs" content="https://voice.mozilla.org/en/datasets" />
   <meta itemprop="citation" content="" />
 </div>
+
 # `common_voice`
 
 *   **Description**:
@@ -16,15 +18,22 @@ Mozilla Common Voice Dataset
 
 *   **Homepage**:
     [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
+
 *   **Source code**:
-    [`tfds.audio.commonvoice.CommonVoice`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/commonvoice.py)
+    [`tfds.audio.CommonVoice`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/commonvoice.py)
+
 *   **Versions**:
+
     *   **`1.0.0`** (default): No release notes.
+
 *   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -33,8 +42,11 @@ Split | Examples
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+
+*   **Citation**:
+
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## common_voice/en (default config)

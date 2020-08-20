@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Caltech birds dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import os
@@ -52,15 +47,15 @@ _NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)/(\w*.jpg)$")
 class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
   """Caltech Birds 2010 dataset."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
 
   @property
   def _caltech_birds_info(self):
     return CaltechBirdsInfo(
         name=self.name,
-        images_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz",
-        split_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/lists.tgz",
-        annotations_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/annotations.tgz",
+        images_url="https://drive.google.com/uc?export=download&id=1GDr1OkoXdhaXWGA8S3MAq3a522Tak-nx",
+        split_url="https://drive.google.com/uc?export=download&id=1vZuZPqha0JjmwkdaS_XtYryE3Jf5Q1AC",
+        annotations_url="https://drive.google.com/uc?export=download&id=16NsbTpMs5L6hT4hUJAmpW2u7wH326WTR",
     )
 
   def _info(self):
@@ -207,15 +202,15 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 class CaltechBirds2011(CaltechBirds2010):
   """Caltech Birds 2011 dataset."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.1")
 
   @property
   def _caltech_birds_info(self):
     return CaltechBirdsInfo(
         name=self.name,
-        images_url="http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/CUB_200_2011.tgz",
+        images_url="https://drive.google.com/uc?export=download&id=1hbzc_P1FuxMkcabkgn9ZKinBwW683j45",
         split_url=None,
-        annotations_url="http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/segmentations.tgz"
+        annotations_url="https://drive.google.com/uc?export=download&id=1EamOKGLoTuZdtcVYbHMWNpkn3iAVj8TP"
     )
 
   def _info(self):

@@ -2,13 +2,20 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="scientific_papers" />
   <meta itemprop="description" content="Scientific papers datasets contains two sets of long and structured documents.&#10;The datasets are obtained from ArXiv and PubMed OpenAccess repositories.&#10;&#10;Both &quot;arxiv&quot; and &quot;pubmed&quot; have two features:&#10;&#10;  - article: the body of the document, pagragraphs seperated by &quot;/n&quot;.&#10;  - abstract: the abstract of the document, pagragraphs seperated by &quot;/n&quot;.&#10;  - section_names: titles of sections, seperated by &quot;/n&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;scientific_papers&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/scientific_papers" />
   <meta itemprop="sameAs" content="https://github.com/armancohan/long-summarization" />
   <meta itemprop="citation" content="@article{Cohan_2018,&#10;   title={A Discourse-Aware Attention Model for Abstractive Summarization of&#10;            Long Documents},&#10;   url={http://dx.doi.org/10.18653/v1/n18-2097},&#10;   DOI={10.18653/v1/n18-2097},&#10;   journal={Proceedings of the 2018 Conference of the North American Chapter of&#10;          the Association for Computational Linguistics: Human Language&#10;          Technologies, Volume 2 (Short Papers)},&#10;   publisher={Association for Computational Linguistics},&#10;   author={Cohan, Arman and Dernoncourt, Franck and Kim, Doo Soon and Bui, Trung and Kim, Seokhwan and Chang, Walter and Goharian, Nazli},&#10;   year={2018}&#10;}" />
 </div>
+
 # `scientific_papers`
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -25,12 +32,14 @@ Both "arxiv" and "pubmed" have two features:
     [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 
 *   **Source code**:
-    [`tfds.summarization.scientific_papers.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
+    [`tfds.summarization.ScientificPapers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/scientific_papers.py)
 
 *   **Versions**:
 
     *   **`1.1.1`** (default): No release notes.
-    *   `1.1.0`: No release notes.
+    *   `1.1.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `4.20 GiB`
 
@@ -47,9 +56,11 @@ FeaturesDict({
     'section_names': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'abstract')`
+
 *   **Citation**:
 
 ```
@@ -67,8 +78,8 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))**:
+*   **Visualization**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
 ## scientific_papers/arxiv (default config)
@@ -76,23 +87,25 @@ FeaturesDict({
 *   **Config description**: Documents from ArXiv repository.
 
 *   **Dataset size**: `7.07 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,440
-'train'      | 203,037
-'validation' | 6,436
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,440
+`'train'`      | 203,037
+`'validation'` | 6,436
 
 ## scientific_papers/pubmed
 
 *   **Config description**: Documents from PubMed repository.
 
 *   **Dataset size**: `2.34 GiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 6,658
-'train'      | 119,924
-'validation' | 6,633
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,658
+`'train'`      | 119,924
+`'validation'` | 6,633

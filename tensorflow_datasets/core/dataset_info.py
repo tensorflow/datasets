@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """DatasetInfo records the information we know about a dataset.
 
 This includes things that we know about the dataset statically, i.e.:
@@ -31,10 +30,6 @@ processed the dataset as well:
  - etc.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import abc
 import json
 import os
@@ -45,7 +40,6 @@ from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
@@ -90,8 +84,8 @@ class DatasetInfo(object):
   builder.download_and_prepare()`).
   """
 
-  @api_utils.disallow_positional_args
   def __init__(self,
+               *,
                builder,
                description=None,
                features=None,
@@ -427,7 +421,7 @@ class DatasetInfo(object):
                  "from GCS: %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      gcs_utils.download_gcs_file(fname, out_fname)
+      tf.io.gfile.copy(gcs_utils.gcs_path(fname), out_fname)
     self.read_from_directory(tmp_dir)
 
   def __repr__(self):

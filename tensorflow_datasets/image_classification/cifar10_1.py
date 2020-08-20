@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Cifar-10.1 dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -63,8 +58,7 @@ _DATA_OPTIONS = ["v4", "v6"]
 class Cifar10_1Config(tfds.core.BuilderConfig):  # pylint: disable=invalid-name
   """BuilderConfig for Cifar-10.1."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a Cifar10_1Config.
 
     Args:
@@ -90,7 +84,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
               "keywords for each class, which led to a slight class imbalance. The largest difference is that ships "
               "make up only 8% of the test set instead of 10%. v4 contains 2,021 images."
           ),
-          version=tfds.core.Version("1.0.0"),
+          version=tfds.core.Version("1.1.0"),
           data="v4",
       ),
       Cifar10_1Config(
@@ -98,7 +92,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
               "It is derived from a slightly improved keyword allocation that is exactly class balanced. This version "
               "of the dataset corresponds to the results in Appendix D of our paper. v6 contains 2,000 images."
           ),
-          version=tfds.core.Version("1.0.0"),
+          version=tfds.core.Version("1.1.0"),
           data="v6",
       )
   ]

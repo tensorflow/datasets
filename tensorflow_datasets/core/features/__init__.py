@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """`tfds.features.FeatureConnector` API defining feature types."""
 
-from tensorflow_datasets.core.features import text
+# TODO(tfds): Delete alias once all users have been migrated.
+from tensorflow_datasets.core.deprecated import text
 
 from tensorflow_datasets.core.features.audio_feature import Audio
 from tensorflow_datasets.core.features.bounding_boxes import BBox

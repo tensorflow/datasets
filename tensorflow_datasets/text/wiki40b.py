@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Wiki40B: A clean Wikipedia dataset for 40+ languages."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -56,7 +51,7 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 
 _URL = "https://research.google/pubs/pub49029/"
 
-_DATA_DIRECTORY = "gs://tfds-data/downloads/wiki40b/tfrecord_prod"
+_DATA_DIRECTORY = tfds.core.gcs_path("downloads/wiki40b/tfrecord_prod")
 
 WIKIPEDIA_LANGUAGES = [
     "en", "ar", "zh-cn", "zh-tw", "nl", "fr", "de", "it", "ja", "ko", "pl",
@@ -68,8 +63,7 @@ WIKIPEDIA_LANGUAGES = [
 class Wiki40bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wiki40B."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, language=None, **kwargs):
+  def __init__(self, *, language=None, **kwargs):
     """BuilderConfig for Wiki40B.
 
     Args:
