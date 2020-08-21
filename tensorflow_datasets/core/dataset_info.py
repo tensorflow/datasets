@@ -58,7 +58,6 @@ LICENSE_FILENAME = "LICENSE"
 INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
     version={version},
-    config_name={config_name},
     description='{description}',
     homepage='{homepage}',
     features={features},
@@ -182,10 +181,6 @@ class DatasetInfo(object):
   @property
   def version(self):
     return self._builder.version
-  
-  @property
-  def config_name(self):
-    return self.as_proto.config_name
 
   @property
   def homepage(self):
@@ -441,7 +436,6 @@ class DatasetInfo(object):
     return INFO_STR.format(
         name=self.name,
         version=self.version,
-        config_name=self.config_name,
         description=self.description,
         total_num_examples=self.splits.total_num_examples,
         features=features_pprint,
