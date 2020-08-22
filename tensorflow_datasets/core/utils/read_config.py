@@ -16,56 +16,26 @@
 """This module contains the reader config.
 """
 
-from absl import logging
-import attr
+from typing import Callable, Optional, Sequence
+
+import dataclasses
 
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils import shard_utils
 
 
-_OLD = 'interleave_parallel_reads'
-_NEW = 'interleave_cycle_length'
-_WARNING_MSG = (
-    '`{}` argument of `tfds.ReadConfig` is '
-    'deprecated and will be removed in a future version. Please use '
-    '`{}` instead.').format(_OLD, _NEW)
+InterleaveSortFn = Callable[
+    [Sequence[shard_utils.FileInstruction]],
+    Sequence[shard_utils.FileInstruction],
+]
 
 
-# TODO(tfds): Use dataclasses once Py2 support is dropped
-@attr.s
-class _ReadConfig(object):
-  """Configures input reading pipeline."""
-  # General tf.data.Dataset parametters
-  options = attr.ib(factory=tf.data.Options)
-  try_autocache = attr.ib(default=True)
-  # tf.data.Dataset.shuffle parameters
-  shuffle_seed = attr.ib(default=None)
-  shuffle_reshuffle_each_iteration = attr.ib(default=None)
-  # Interleave parameters
-  # Both parallel_reads and block_length have empirically been tested to give
-  # good results on imagenet.
-  # This values might be changes in the future, with more performance test runs.
-  interleave_cycle_length = attr.ib(default=16)
-  interleave_block_length = attr.ib(default=16)
-  input_context = attr.ib(default=None)
-  experimental_interleave_sort_fn = attr.ib(default=None)
-
-  @property
-  def interleave_parallel_reads(self):
-    logging.warning(_WARNING_MSG)
-    return self.interleave_cycle_length
-
-  @interleave_parallel_reads.setter
-  def interleave_parallel_reads(self, value):
-    logging.warning(_WARNING_MSG)
-    self.interleave_cycle_length = value
-
-
-class ReadConfig(_ReadConfig):
+@dataclasses.dataclass
+class ReadConfig:
   """Configures input reading pipeline.
 
   Attributes:
-    options: `tf.data.Options()`, dataset options. Those options are added to
-      the default values defined in `tfrecord_reader.py`.
+    options: `tf.data.Options()`, dataset options to use.
       Note that when `shuffle_files` is True and no seed is defined,
       experimental_deterministic will be set to False internally,
       unless it is defined here.
@@ -78,9 +48,7 @@ class ReadConfig(_ReadConfig):
       `tf.data.Dataset.shuffle` during file shuffling (which happens when
       `tfds.load(..., shuffle_files=True)`).
     interleave_cycle_length: `int`, forwarded to `tf.data.Dataset.interleave`.
-      Default to 16.
     interleave_block_length: `int`, forwarded to `tf.data.Dataset.interleave`.
-      Default to 16.
     input_context: `tf.distribute.InputContext`, if set, each worker
       will read a different set of file. For more info, see the
       [distribute_datasets_from_function
@@ -97,12 +65,20 @@ class ReadConfig(_ReadConfig):
       `dict(file: str, take: int, skip: int)` and returns the modified version
       to read. This can be used to sort/shuffle the shards to read in
       a custom order, instead of relying on `shuffle_files=True`.
+    skip_prefetch: If False (default), add a `ds.prefetch()` op at the end.
+      Might be set for performance optimization in some cases (e.g. if you're
+      already calling `ds.prefetch()` at the end of your pipeline)
   """
-
-  def __init__(self, **kwargs):
-    if _OLD in kwargs:
-      if _NEW in kwargs:
-        raise ValueError('Cannot set both {} and {}'.format(_OLD, _NEW))
-      logging.warning(_WARNING_MSG)
-      kwargs[_NEW] = kwargs.pop(_OLD)
-    super(ReadConfig, self).__init__(**kwargs)
+  # General tf.data.Dataset parametters
+  options: tf.data.Options = dataclasses.field(default_factory=tf.data.Options)
+  try_autocache: bool = True
+  # tf.data.Dataset.shuffle parameters
+  shuffle_seed: Optional[int] = None
+  shuffle_reshuffle_each_iteration: Optional[bool] = None
+  # Interleave parameters
+  # TODO(tfds): Switch interleave values to None
+  interleave_cycle_length: Optional[int] = 16
+  interleave_block_length: Optional[int] = 16
+  input_context: Optional[tf.distribute.InputContext] = None
+  experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
+  skip_prefetch: bool = False
