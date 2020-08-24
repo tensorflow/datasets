@@ -16,15 +16,31 @@
 """Tests for squad dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import squad
+from tensorflow_datasets.question_answering.squad import squad
 
 
-class SquadTest(testing.DatasetBuilderTestCase):
+class SquadV1Test(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["v1.1"]
   DATASET_CLASS = squad.Squad
 
   DL_EXTRACT_RESULT = {
       "train": "train-v1.1.json",
       "dev": "dev-v1.1.json",
+  }
+
+  SPLITS = {
+      "train": 3,
+      "validation": 2,
+  }
+
+
+class SquadV2Test(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["v2.0"]
+  DATASET_CLASS = squad.Squad
+
+  DL_EXTRACT_RESULT = {
+      "train": "train-v2.0.json",
+      "dev": "dev-v2.0.json",
   }
 
   SPLITS = {
