@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "data": [{
+    "source": "mctest",
+    "id": "3dr23u6we5exclen4th8uq9rb42tel",
+    "filename": "mc160.test.41",
+    "story": "Google started as a search engine company. It now offers more than 150 products. Main source of revenue is through Ads.",
+    "questions": [{
+        "input_text": "How many products that Google has currently?",
+        "turn_id": 1
+      }
+    ],
+    "answers": [{
+        "span_start": 44,
+        "span_end": 79,
+        "span_text": "It now offers more than 150 products",
+        "input_text": "150",
+        "turn_id": 1
+      }
+    ]
+  }]
+}
