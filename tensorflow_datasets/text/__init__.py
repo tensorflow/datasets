@@ -50,6 +50,7 @@ from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglemen
 from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scan import ScanConfig
 from tensorflow_datasets.text.scicite import Scicite
+from tensorflow_datasets.text.sentiment140 import Sentiment140
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
