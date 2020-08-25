@@ -15,9 +15,9 @@
 
 """Access registered datasets."""
 
+import posixpath
 import re
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
-import posixpath
 
 from absl import flags
 from absl import logging
@@ -351,7 +351,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
       kwargs[attr] = val
     return name, kwargs
   except:
-    logging.error(_NAME_STR_ERR.format(name_str))  # pylint: disable=logging-format-interpolation
+    logging.error(_NAME_STR_ERR.format(name_str))   # pylint: disable=logging-format-interpolation
     raise
 
 

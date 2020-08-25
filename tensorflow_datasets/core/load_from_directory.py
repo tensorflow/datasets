@@ -1,3 +1,5 @@
+"""Load Datasets without reading dataset generation code"""
+
 import os
 
 from tensorflow_datasets.core import dataset_builder
@@ -5,8 +7,9 @@ from tensorflow_datasets.core import dataset_info
 
 
 class ReadOnlyBuilder(dataset_builder.FileReaderBuilder):
+  """Reads Dataset from a directory"""
 
-  def __init__(self, data_dir):
+  def __init__(self, data_dir):  # pylint: disable=super-init-not-called
     self._data_dir = os.path.expanduser(data_dir)
     parsed_proto = dataset_info.read_from_json(
         os.path.join(self._data_dir, 'dataset_info.json'))
@@ -19,7 +22,7 @@ class ReadOnlyBuilder(dataset_builder.FileReaderBuilder):
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(builder=self)
 
-  def _download_and_prepare(self, **kwargs):
+  def _download_and_prepare(self, **kwargs):  # pylint: disable=arguments-differ
     pass
 
 
