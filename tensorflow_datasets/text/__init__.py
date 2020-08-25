@@ -53,6 +53,7 @@ from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
+from tensorflow_datasets.text.trec import Trec
 from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.wikipedia_toxicity_subtypes import WikipediaToxicitySubtypes
