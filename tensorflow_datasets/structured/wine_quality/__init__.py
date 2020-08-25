@@ -13,24 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for squad dataset module."""
+"""Wine Quality Dataset."""
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import squad
-
-
-class SquadTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = squad.Squad
-
-  DL_EXTRACT_RESULT = {
-      "train": "train-v1.1.json",
-      "dev": "dev-v1.1.json",
-  }
-
-  SPLITS = {
-      "train": 3,
-      "validation": 2,
-  }
-
-if __name__ == "__main__":
-  testing.test_main()
+from tensorflow_datasets.structured.wine_quality.wine_quality import WineQuality

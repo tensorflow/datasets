@@ -19,6 +19,11 @@ Instructions can be provided as either strings or `ReadInstruction`s. Strings
 are more compact and readable for simple cases, while `ReadInstruction`s provide
 more options and might be easier to use with variable slicing parameters.
 
+NOTE: Due to the shards being read in parallel, order isn't guaranteed to be
+consistent between sub-splits. In other words reading `test[0:100]` followed by
+`test[100:200]` may yield examples in a different order than reading
+`test[:200]`.
+
 ### Examples
 
 Examples using the string API:

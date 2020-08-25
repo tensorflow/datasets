@@ -46,16 +46,11 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
   """e-SNLI: Natural Language Inference with Natural Language Explanations corpus."""
 
   # Version History
+  # 0.1.0 Remove the BuilderConfig
   # 0.0.2 Added explanation_2, explanation_3 fields which exist in the dev/test
   # splits only.
   # 0.0.1 Initial version
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version('0.0.2'),
-          description='Plain text import of e-SNLI',
-      )
-  ]
+  VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(

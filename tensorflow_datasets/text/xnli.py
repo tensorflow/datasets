@@ -56,15 +56,8 @@ _LANGUAGES = ('ar', 'bg', 'de', 'el', 'en', 'es', 'fr', 'hi', 'ru', 'sw', 'th',
 
 class Xnli(tfds.core.GeneratorBasedBuilder):
   """XNLI: The Cross-Lingual NLI Corpus. Version 1.0."""
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version(
-              '1.0.0',
-              'New split API (https://tensorflow.org/datasets/splits)'),
-          description='Plain text import of XNLI',
-      )
-  ]
+
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(

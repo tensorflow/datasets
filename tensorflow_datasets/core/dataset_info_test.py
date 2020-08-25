@@ -130,7 +130,7 @@ class DatasetInfoTest(testing.TestCase):
     info.read_from_directory(_INFO_DIR_UNLABELED)
 
     # Assert supervised_keys has not been set
-    self.assertEqual(None, info.supervised_keys)
+    self.assertIsNone(None, info.supervised_keys)
 
   def test_writing(self):
     # First read in stuff.

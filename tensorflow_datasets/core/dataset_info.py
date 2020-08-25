@@ -126,6 +126,9 @@ class DatasetInfo(object):
         name=builder.name,
         description=utils.dedent(description),
         version=str(builder._version),  # pylint: disable=protected-access
+        config_name=(
+            builder.builder_config.name if builder.builder_config else None
+        ),
         citation=utils.dedent(citation),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             license=utils.dedent(redistribution_info.pop("license")),
