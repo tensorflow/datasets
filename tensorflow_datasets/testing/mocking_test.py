@@ -28,6 +28,7 @@ from tensorflow_datasets.testing import test_utils
 # pylint: disable=g-bad-import-order,unused-import
 from tensorflow_datasets.image_classification import imagenet
 from tensorflow_datasets.image_classification import mnist
+from tensorflow_datasets.object_detection import wider_face
 from tensorflow_datasets.text import lm1b
 # pylint: enable=g-bad-import-order,unused-import
 
@@ -74,6 +75,16 @@ class MockingTest(test_case.TestCase):
       for ex in ds.take(10):
         self.assertEqual(ex['text'].dtype, tf.int64)
         ex['text'].shape.assert_is_compatible_with((None,))
+
+  def test_mocking_wider_face(self):
+    with mocking.mock_data():
+      ds = load.load('wider_face', split='train')
+      self.assertEqual(
+          ds.element_spec['faces']['expression'],
+          tf.TensorSpec(shape=(None,), dtype=tf.bool),
+      )
+      for ex in ds.take(2):
+        self.assertEqual(ex['faces']['expression'].dtype, tf.bool)
 
   def test_custom_as_dataset(self):
     def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
