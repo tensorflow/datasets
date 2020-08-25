@@ -50,7 +50,7 @@ _CITATION = """\
 """
 
 
-class BairRobotPushing(tfds.core.GeneratorBasedBuilder):
+class BairRobotPushing128(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR."""
 
   VERSION = tfds.core.Version(

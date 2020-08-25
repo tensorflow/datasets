@@ -25,7 +25,7 @@ from tensorflow_datasets.video import bair_robot_pushing_128
 
 
 class BairRobotPushing128Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = bair_robot_pushing_128.BairRobotPushing
+  DATASET_CLASS = bair_robot_pushing_128.BairRobotPushing128
 
   SPLITS = {
       "train": 1,
