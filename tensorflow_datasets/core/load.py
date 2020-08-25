@@ -15,9 +15,8 @@
 
 """Access registered datasets."""
 
-import os
 import re
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
 import posixpath
 
 from absl import flags
@@ -26,7 +25,6 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
@@ -35,7 +33,7 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils import version as version_lib
+from tensorflow_datasets.core.utils import version
 
 
 FLAGS = flags.FLAGS
@@ -113,23 +111,6 @@ class DatasetNotFoundError(ValueError):
     ValueError.__init__(self, error_string)
 
 
-class ConfigBuilder(dataset_builder.FileReaderBuilder):
-
-  def __init__(self, *, name, data_dir=None, config=None, version):
-    self.name = name
-    self.VERSION = version_lib.Version(version)
-    super(ConfigBuilder, self).__init__(
-        data_dir=data_dir, config=config, version=version)
-
-  def _info(self) -> dataset_info.DatasetInfo:
-    return dataset_info.DatasetInfo(builder=self)
-
-  def _download_and_prepare(self, **kwargs):
-    raise NotImplementedError(
-        'No need to call download_and_prepare function for {}.'.format(
-            type(self).__name__))
-
-
 def list_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   return sorted(list(registered._DATASET_REGISTRY))  # pylint: disable=protected-access
@@ -196,28 +177,6 @@ def builder(
   with py_utils.try_reraise(
       prefix="Failed to construct dataset {}".format(name)):
     return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
-
-
-def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
-  """Returns Builder for the Dataset at for the given path.
-
-  Usage:
-
-  ```py
-
-  builder = tfds.core.builder_from_directory('path/to/my_dataset/config/1.0.0')
-  ds = builder.as_dataset(split='train')
-  ```
-
-  Args:
-    builder_dir: `str`, path to directory to read data.
-
-  Returns:
-    builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
-  """
-  parent_dir, ds_name, config, version = _get_builder_kwargs(builder_dir)
-  return ConfigBuilder(name=ds_name, data_dir=parent_dir, config=config,
-                       version=version)
 
 
 def load(
@@ -373,32 +332,6 @@ def load(
   return ds
 
 
-def _get_builder_kwargs(path: str) -> Tuple[str, str, Optional[str], str]:
-  """Return keyword argument for a given path
-
-  ```
-  _get_builder_kwargs('path/to/my_dataset/config/1.0.0') == (
-      'path/to', 'my_dataset', 'config', '1.0.0')
-  ```
-
-  Args:
-    path: `str`, Path to the Dataset version directory.
-
-  Returns:
-    A tuple of ('path_to_parent_dir', 'dataset_name', 'config', 'version')
-  """
-  sep = os.sep
-  dirs = path.split(sep)
-  full_names = list_full_names()
-
-  if len(dirs) > 2 and (sep).join(dirs[-3:]) in full_names:
-    return ((sep).join(dirs[:-3]), dirs[-3], dirs[-2], dirs[-1])
-  if len(dirs) > 1 and (sep).join(dirs[-2:]) in full_names:
-    return ((sep).join(dirs[:-2]), dirs[-2], None, dirs[-1])
-  raise ValueError("Path should be like `path/to/my_dataset/1.0.0`"
-                   " or `path/to/my_dataset/config/1.0.0`")
-
-
 def _dataset_name_and_kwargs_from_name_str(name_str):
   """Extract kwargs from name str."""
   res = _NAME_REG.match(name_str)
@@ -448,8 +381,8 @@ def _cast_to_pod(val):
 
 
 def _get_all_versions(
-    current_version: version_lib.Version,
-    extra_versions: Iterable[version_lib.Version],
+    current_version: version.Version,
+    extra_versions: Iterable[version.Version],
     current_version_only: bool,
 ) -> Iterable[str]:
   """Returns the list of all current versions."""
