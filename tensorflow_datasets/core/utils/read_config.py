@@ -30,7 +30,7 @@ InterleaveSortFn = Callable[
 ]
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(eq=False)
 class ReadConfig:
   """Configures input reading pipeline.
 
