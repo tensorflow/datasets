@@ -56,15 +56,7 @@ _LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
 class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk multilingual data set."""
 
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version(
-              '1.0.0',
-              'New split API (https://tensorflow.org/datasets/splits)'),
-          description='Plain text import of multilingual TED talk translations',
-      )
-  ]
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
