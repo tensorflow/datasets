@@ -152,11 +152,14 @@ class MockFs(object):
       raise FileNotFoundError('Cannot rename unknown file: {}'.format(from_))  # pytype: disable=name-error
     self.files[to] = self.files.pop(from_)
 
+  def _exists(self, path):
+    return any(map(lambda file: '..' in os.path.relpath(file, path), self.files))
+
   def mock(self):
     return absltest.mock.patch.object(
         tf.io,
         'gfile',
-        exists=lambda path: path in self.files,
+        exists=self._exists,
         makedirs=lambda _: None,
         # Used to get name of file as downloaded:
         listdir=self._list_directory,
