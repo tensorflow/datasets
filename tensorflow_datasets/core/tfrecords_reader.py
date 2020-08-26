@@ -409,6 +409,11 @@ def _rel_to_abs_instr(rel_instr, name2len):
 class ReadInstruction(object):
   """Reading instruction for a dataset.
 
+  Note: Due to the shards being read in parallel, order isn't guaranteed to be
+  consistent between sub-splits. In other words reading `test[0:100]` followed
+  by `test[100:200]` may yield examples in a different order than reading
+  `test[:200]`.
+
   Examples of usage:
 
   ```

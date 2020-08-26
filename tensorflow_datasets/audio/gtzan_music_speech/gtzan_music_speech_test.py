@@ -13,24 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for squad dataset module."""
+"""GTZAN Music Speech dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.question_answering import squad
+from tensorflow_datasets.audio.gtzan_music_speech import gtzan_music_speech
 
 
-class SquadTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = squad.Squad
-
-  DL_EXTRACT_RESULT = {
-      "train": "train-v1.1.json",
-      "dev": "dev-v1.1.json",
-  }
-
+class GTZANTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = gtzan_music_speech.GTZANMusicSpeech
   SPLITS = {
-      "train": 3,
-      "validation": 2,
+      "train": 1,  # Number of fake train examples
   }
+  DL_EXTRACT_RESULT = {"music_speech": ""}
+
 
 if __name__ == "__main__":
   testing.test_main()

@@ -17,9 +17,11 @@
 
 from tensorflow_datasets.question_answering.ai2_arc import Ai2Arc
 from tensorflow_datasets.question_answering.ai2_arc_with_ir import Ai2ArcWithIR
+from tensorflow_datasets.question_answering.coqa import Coqa
 from tensorflow_datasets.question_answering.cosmos_qa import CosmosQA
 from tensorflow_datasets.question_answering.mctaco import Mctaco
 from tensorflow_datasets.question_answering.natural_questions import NaturalQuestions
+from tensorflow_datasets.question_answering.qasc import Qasc
 from tensorflow_datasets.question_answering.squad import Squad
 from tensorflow_datasets.question_answering.trivia_qa import TriviaQA
 from tensorflow_datasets.question_answering.tydi_qa import TydiQA

@@ -72,7 +72,7 @@ class VisualizationDocUtil(object):
 
 def _split_full_name(full_name: str) -> Tuple[str, str, str]:
   """Extracts the `(ds name, config, version)` from the full_name."""
-  if not tfds.core.registered.is_full_name(full_name):
+  if not tfds.core.load.is_full_name(full_name):
     raise ValueError(
         f'Parsing builder name string {full_name} failed.'
         'The builder name string must be of the following format:'
@@ -133,7 +133,7 @@ def _load_nightly_dict() -> NightlyDict:
   # Build the `full_names_dict['dataset']['config']['version']` for both
   # nightly and stable version
   registered_ds = _full_names_to_dict(
-      tfds.core.registered.list_full_names())
+      tfds.core.load.list_full_names())
   stable_version_ds = _full_names_to_dict(stable_versions)
 
   # Nightly versions are `registered - stable`

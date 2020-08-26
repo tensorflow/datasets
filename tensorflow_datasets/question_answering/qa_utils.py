@@ -51,6 +51,8 @@ def generate_squadlike_examples(filepath):
       for paragraph in article["paragraphs"]:
         context = paragraph["context"].strip()
         for qa in paragraph["qas"]:
+          qa["title"] = title
+          qa["context"] = context
           id_ = qa["id"]
           if id_ in qas:
             qas[id_]["answers"].extend(qa["answers"])
@@ -58,15 +60,12 @@ def generate_squadlike_examples(filepath):
             qas[id_] = qa
 
     for id_, qa in qas.items():
-      question = qa["question"].strip()
       answer_starts = [answer["answer_start"] for answer in qa["answers"]]
       answers = [answer["text"].strip() for answer in qa["answers"]]
-      # Features currently used are "context", "question", and "answers".
-      # Others are extracted here for the ease of future expansions.
       yield id_, {
-          "title": title,
-          "context": context,
-          "question": question,
+          "title": qa["title"],
+          "context": qa["context"],
+          "question": qa["question"].strip(),
           "id": id_,
           "answers": {
               "answer_start": answer_starts,

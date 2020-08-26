@@ -44,6 +44,10 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_video,
             ),
         ],
+        test_attributes=dict(
+            _encoding_format='png',
+            _extra_ffmpeg_args=[]
+        )
     )
 
   def test_video_concatenated_frames(self):

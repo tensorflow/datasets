@@ -33,7 +33,7 @@ class XquadTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "translate-train": 3,
       "translate-dev": 2,
-      "translate-test": 2,
+      "translate-test": 3,
       "test": 1,
   }
 

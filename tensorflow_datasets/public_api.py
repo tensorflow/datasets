@@ -32,10 +32,11 @@ from tensorflow_datasets.core.folder_dataset import ImageFolder
 from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
-from tensorflow_datasets.core.registered import builder
-from tensorflow_datasets.core.registered import builder_cls
-from tensorflow_datasets.core.registered import list_builders
-from tensorflow_datasets.core.registered import load
+from tensorflow_datasets.core.load import builder
+from tensorflow_datasets.core.load import builder_cls
+from tensorflow_datasets.core.load import list_builders
+from tensorflow_datasets.core.load import load
+from tensorflow_datasets.core.splits import even_splits
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
@@ -61,6 +62,7 @@ __all__ = [
     "decode",
     "disable_progress_bar",
     "download",
+    "even_splits",
     "features",
     "GenerateMode",
     "ImageFolder",

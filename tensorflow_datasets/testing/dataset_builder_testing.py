@@ -29,7 +29,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import tf_utils
@@ -229,7 +229,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     # all needed methods were implemented.
 
   def test_registered(self):
-    is_registered = self.builder.name in registered.list_builders()
+    is_registered = self.builder.name in load.list_builders()
     exceptions = self.builder.IN_DEVELOPMENT
     self.assertTrue(is_registered or exceptions,
                     "Dataset {} was not registered and is "

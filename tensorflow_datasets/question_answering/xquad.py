@@ -66,8 +66,7 @@ class XquadConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(XquadConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"),
-        **kwargs)
+        version=tfds.core.Version("2.0.0"), **kwargs)
     self.language = language
 
 
@@ -132,5 +131,3 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     return qa_utils.generate_squadlike_examples(filepath)
-
-

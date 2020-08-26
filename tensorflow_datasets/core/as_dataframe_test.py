@@ -20,7 +20,7 @@ import pandas
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import as_dataframe
-from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import load
 
 # Import for registration
 # pylint: disable=unused-import,g-bad-import-order
@@ -31,7 +31,7 @@ from tensorflow_datasets.text import anli
 def _as_df(ds_name: str) -> pandas.DataFrame:
   """Loads the dataset as `pandas.DataFrame`."""
   with testing.mock_data(num_examples=3):
-    ds, ds_info = registered.load(ds_name, split='train', with_info=True)
+    ds, ds_info = load.load(ds_name, split='train', with_info=True)
   df = as_dataframe.as_dataframe(ds, ds_info)
   return df
 

@@ -25,7 +25,7 @@ corresponding reading passage, or the question might be unanswerable.
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 *   **Source code**:
-    [`tfds.question_answering.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/squad.py)
+    [`tfds.question_answering.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/squad/squad.py)
 
 *   **Versions**:
 
