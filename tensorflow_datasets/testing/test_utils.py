@@ -153,7 +153,7 @@ class MockFs(object):
     self.files[to] = self.files.pop(from_)
 
   def _exists(self, path):
-    return any(map(lambda file: '..' in os.path.relpath(file, path), self.files))
+    return any(map(lambda f: '..' not in os.path.relpath(f, path), self.files))
 
   def mock(self):
     return absltest.mock.patch.object(

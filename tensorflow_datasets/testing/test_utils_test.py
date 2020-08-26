@@ -83,6 +83,7 @@ class RunInGraphAndEagerTest(test_case.TestCase):
 
       # Test `tf.io.gfile.exists`
       self.assertTrue(tf.io.gfile.exists('/path/to/file1'))
+      self.assertTrue(tf.io.gfile.exists('/path/'))
       self.assertFalse(tf.io.gfile.exists('/path/to/file1_nonexisting'))
 
       # Test `tf.io.gfile.GFile` (write and read mode)
