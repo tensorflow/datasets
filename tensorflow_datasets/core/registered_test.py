@@ -239,3 +239,23 @@ class RegisteredTest(testing.TestCase):
     name = "skip_registered_dataset"
     self.assertEqual(name, SkipRegisteredDataset.name)
     self.assertNotIn(name, load.list_builders())
+
+  def test_skip_regitration(self):
+    """Test `skip_registration()`."""
+
+    with testing.MockFs() as fs:
+      fs.add_file("datasets/ds1/config/1.0.0/temp.txt")
+      fs.add_file("datasets/ds2/1.0.0/temp.txt")
+
+      self.assertEqual(load.find_builder("ds1/config:1.0.0", data_dir="datasets"),
+                       "datasets/ds1/config/1.0.0")
+      self.assertEqual(load.find_builder("ds2:1.0.0", data_dir="datasets"),
+                       "datasets/ds2/1.0.0")
+      self.assertEqual(load.find_builder("ds1", data_dir="datasets"),
+                       "datasets/ds1/config/1.0.0")
+      self.assertEqual(load.find_builder("ds2", data_dir="datasets"),
+                       "datasets/ds2/1.0.0")
+
+
+if __name__ == '__main__':
+  testing.test_main()

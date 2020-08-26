@@ -15,9 +15,10 @@
 
 """Access registered datasets."""
 
-import posixpath
+import os
 import re
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
+import posixpath
 
 from absl import flags
 from absl import logging
@@ -33,7 +34,7 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils import version as version_lib
 
 
 FLAGS = flags.FLAGS
@@ -177,6 +178,65 @@ def builder(
   with py_utils.try_reraise(
       prefix="Failed to construct dataset {}".format(name)):
     return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
+
+
+def find_builder(name: str, *, data_dir) -> Optional[str]:
+  """Returns the path to dataset files
+
+  Example:
+
+  ```py
+  path = find_builder_dir('ds/config:1.2.0', data_dir='~/tensorflow_datasets/')
+  asssert path == '~/tensorflow_datasets/ds/config/1.2.0'
+
+  # If the version is not specified, return the last available version
+  find_builder_dir('ds', data_dir='~/tensorflow_datasets/')
+  assert path == '~/tensorflow_datasets/my_dataset/config/1.2.0'
+  ```
+
+  """
+  ds_name, name_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+
+  base_dir = os.path.join(data_dir, ds_name)
+  config = name_kwargs.get("config", None)
+  version = name_kwargs.get("version", None)
+
+  if config and version:
+    builder_dir = os.path.join(base_dir, config, version)
+    if tf.io.gfile.exists(builder_dir):
+      return builder_dir
+
+  if version:
+    builder_dir = os.path.join(base_dir, version)
+    if tf.io.gfile.exists(builder_dir):
+      return builder_dir
+
+  config_version = _select_config_and_version(base_dir)
+  if config_version:
+    return os.path.join(base_dir, config_version)
+
+  version = _select_version(base_dir)
+  if version:
+    return os.path.join(base_dir, version)
+
+  return None
+
+def _select_config_and_version(data_dir) -> Optional[str]:
+  config = tf.io.gfile.listdir(data_dir)[0]  # TODO: Select default config
+  if config:
+    version = _select_version(os.path.join(data_dir, config))
+    if version:
+      return posixpath.join(config, version)
+  return None
+
+
+def _select_version(data_dir) -> Optional[str]:
+  version_regex = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
+  dirs = sorted(
+      [v for v in tf.io.gfile.listdir(data_dir) if version_regex.match(v)])
+  if dirs:
+    return dirs[-1]
+  return None
 
 
 def load(
@@ -381,8 +441,8 @@ def _cast_to_pod(val):
 
 
 def _get_all_versions(
-    current_version: version.Version,
-    extra_versions: Iterable[version.Version],
+    current_version: version_lib.Version,
+    extra_versions: Iterable[version_lib.Version],
     current_version_only: bool,
 ) -> Iterable[str]:
   """Returns the list of all current versions."""
