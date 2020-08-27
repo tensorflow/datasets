@@ -47,9 +47,12 @@ def gcs_path(suffix: Optional[str] = None) -> str:
   Returns:
     path: The GCS uri.
   """
-  path = GCS_ROOT_DIR
-  if suffix:
-    path = posixpath.join(path, suffix)
+  if not suffix:
+    path = GCS_ROOT_DIR
+  elif suffix.startswith('gs://'):  # Path is already a full path
+    path = suffix
+  else:
+    path = posixpath.join(GCS_ROOT_DIR, suffix)
   return path
 
 
