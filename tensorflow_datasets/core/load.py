@@ -180,7 +180,7 @@ def builder(
     return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
 
 
-def find_builder(name: str, *, data_dir) -> Optional[str]:
+def find_builder(name: str, *, data_dir: Optional[str] = None) -> Optional[str]:
   """Returns the path to dataset files
 
   Example:
@@ -197,7 +197,7 @@ def find_builder(name: str, *, data_dir) -> Optional[str]:
   """
   ds_name, name_kwargs = _dataset_name_and_kwargs_from_name_str(name)
 
-  base_dir = os.path.join(data_dir, ds_name)
+  base_dir = os.path.join(data_dir or constants.DATA_DIR, ds_name)
   config = name_kwargs.get("config", None)
   version = name_kwargs.get("version", None)
 
@@ -221,7 +221,7 @@ def find_builder(name: str, *, data_dir) -> Optional[str]:
 
   return None
 
-def _select_config_and_version(data_dir) -> Optional[str]:
+def _select_config_and_version(data_dir: str) -> Optional[str]:
   config = tf.io.gfile.listdir(data_dir)[0]  # TODO: Select default config
   if config:
     version = _select_version(os.path.join(data_dir, config))
@@ -230,7 +230,7 @@ def _select_config_and_version(data_dir) -> Optional[str]:
   return None
 
 
-def _select_version(data_dir) -> Optional[str]:
+def _select_version(data_dir: str) -> Optional[str]:
   version_regex = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
   dirs = sorted(
       [v for v in tf.io.gfile.listdir(data_dir) if version_regex.match(v)])
@@ -255,6 +255,7 @@ def load(
     download_and_prepare_kwargs: Optional[Dict[str, Any]] = None,
     as_dataset_kwargs: Optional[Dict[str, Any]] = None,
     try_gcs: bool = False,
+    load_generated_ds: bool = False,
 ):
   # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
@@ -348,6 +349,8 @@ def load(
       `tfds.core.DatasetBuilder.as_dataset`.
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
       the public GCS bucket before building it locally.
+    load_generated_ds: `bool`, if True, tfds.load will load the existing dataset
+      without reading the dataset generation code.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
@@ -360,6 +363,9 @@ def load(
       Split-specific information is available in `ds_info.splits`.
   """
   # pylint: enable=line-too-long
+  builder_dir = None
+  if load_generated_ds:
+    builder_dir = find_builder(name, data_dir=data_dir)
 
   name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   name_builder_kwargs.update(builder_kwargs or {})
@@ -371,7 +377,11 @@ def load(
   elif data_dir is None:
     data_dir = constants.DATA_DIR
 
-  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
+  if load_generated_ds and builder_dir:
+    dbuilder = builder_from_directory(builder_dir) # PR #2322
+  else:
+    dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
+
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
     dbuilder.download_and_prepare(**download_and_prepare_kwargs)
