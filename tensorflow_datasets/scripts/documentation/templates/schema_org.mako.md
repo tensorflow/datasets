@@ -39,6 +39,9 @@ informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).
 if visu_doc_util.has_visualization(builder):
   description += visu_doc_util.get_html_tag(builder) + '\n\n'
 
+if df_doc_util.has_visualization(builder):
+  description += df_doc_util.get_html_tag(builder) + '\n\n'
+
 %>
 
 <div itemscope itemtype="http://schema.org/Dataset">

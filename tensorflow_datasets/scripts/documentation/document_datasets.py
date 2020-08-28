@@ -70,6 +70,30 @@ class VisualizationDocUtil(object):
     return tf.io.gfile.exists(filepath)
 
 
+class DataframeDocUtil(object):
+  """Small util which generate the path/urls for the dataframes."""
+  # Url used to display dataframes
+  BASE_PATH = tfds.core.gcs_path('visualization/dataframe')
+  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
+
+  def _get_name(self, builder):
+    return builder.info.full_name.replace('/', '-') + '.html'
+
+  def get_url(self, builder):
+    return self.BASE_URL + self._get_name(builder)
+
+  def get_html_tag(self, builder: tfds.core.DatasetBuilder) -> str:
+    """Returns the html tag."""
+    url = self.get_url(builder)
+    with tf.io.gfile.GFile(url, 'r') as url_f:
+      url_content = url_f.read()
+    return url_content
+
+  def has_visualization(self, builder):
+    filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
+    return tf.io.gfile.exists(filepath)
+
+
 def _split_full_name(full_name: str) -> Tuple[str, str, str]:
   """Extracts the `(ds name, config, version)` from the full_name."""
   if not tfds.core.registered.is_full_name(full_name):
@@ -219,10 +243,12 @@ def document_single_builder(builder):
       config_builders = list(
           tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
   visu_doc_util = VisualizationDocUtil()
+  df_doc_util = DataframeDocUtil()
   out_str = dataset_markdown_builder.get_markdown_string(
       builder=builder,
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
+      df_doc_util=df_doc_util,
       nightly_doc_util=NightlyDocUtil(),
   )
   schema_org_tmpl = get_mako_template('schema_org')
@@ -230,6 +256,7 @@ def document_single_builder(builder):
       builder=builder,
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
+      df_doc_util=df_doc_util,
   ).strip()
   out_str = schema_org_out_str + '\n' + out_str
   return out_str
