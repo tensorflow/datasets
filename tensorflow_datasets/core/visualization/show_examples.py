@@ -69,6 +69,16 @@ def show_examples(
           'The old signature is deprecated and will be removed. '
           'Please change your call to `tfds.show_examples(ds, info)`')
     ds, ds_info = ds_info, ds
+
+  # Pack `as_supervised=True` datasets
+  if (
+      ds_info.supervised_keys
+      and isinstance(ds.element_spec, tuple)
+      and len(ds.element_spec) == 2
+  ):
+    x_key, y_key = ds_info.supervised_keys
+    ds = ds.map(lambda x, y: {x_key: x, y_key: y})
+
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):
       return visualizer.show(ds, ds_info, **options_kwargs)

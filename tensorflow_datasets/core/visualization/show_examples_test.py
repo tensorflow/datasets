@@ -31,10 +31,25 @@ class ShowExamplesTest(testing.TestCase):
   def test_show_examples(self, mock_fig):
     with testing.mock_data(num_examples=20):
       ds, ds_info = load.load(
-          'imagenet2012', split='train', with_info=True)
+          'imagenet2012', split='train', with_info=True
+      )
     visualization.show_examples(ds, ds_info)
 
-  # TODO(tfds): Should add test when there isn't enough examples (ds.take(3))
+  @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_supervised(self, _):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = load.load(
+          'imagenet2012', split='train', with_info=True, as_supervised=True
+      )
+    visualization.show_examples(ds, ds_info)
+
+  @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_missing_sample(self, _):
+    with testing.mock_data(num_examples=3):
+      ds, ds_info = load.load(
+          'imagenet2012', split='train', with_info=True
+      )
+    visualization.show_examples(ds.take(3), ds_info)
 
 
 class ShowStatisticsTest(testing.TestCase):
