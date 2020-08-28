@@ -28,7 +28,8 @@ def _is_dead_url(url: str) -> bool:
 
 def main(_):
   dead_urls = []
-  for url in tfds.core.download.checksums.get_all_url_infos():
+  for url in tfds.core.utils.tqdm(
+      tfds.core.download.checksums.get_all_url_infos()):
     if _is_dead_url(url):
       dead_urls.append(url)
 
