@@ -38,8 +38,8 @@ _INPUT_FILE_PATTERN = "gs://realm-data/realm-data/pretrain_corpus/wikipedia_anno
 class SalientSpanWikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SalientSpanWikipedia dataset."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                split_sentences,
                **kwargs):
     """BuilderConfig for SalientSpanWikipedia.
