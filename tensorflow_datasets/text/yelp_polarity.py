@@ -27,7 +27,7 @@ We provide a set of 560,000 highly polar yelp reviews for training, and 38,000 f
 ORIGIN
 The Yelp reviews dataset consists of reviews from Yelp. It is extracted
 from the Yelp Dataset Challenge 2015 data. For more information, please
-refer to http://www.yelp.com/dataset_challenge
+refer to http://www.yelp.com/dataset
 
 The Yelp reviews polarity dataset is constructed by
 Xiang Zhang (xiang.zhang@nyu.edu) from the above dataset.

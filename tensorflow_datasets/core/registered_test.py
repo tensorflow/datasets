@@ -19,6 +19,7 @@ import abc
 import mock
 import six
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.utils import py_utils
@@ -59,52 +60,52 @@ class RegisteredTest(testing.TestCase):
   def test_registered(self):
     name = "empty_dataset_builder"
     self.assertEqual(name, EmptyDatasetBuilder.name)
-    self.assertIsInstance(registered.builder(name), EmptyDatasetBuilder)
-    self.assertIn(name, registered.list_builders())
+    self.assertIsInstance(load.builder(name), EmptyDatasetBuilder)
+    self.assertIn(name, load.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
     with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
-      registered.builder(nonexistent)
+      load.builder(nonexistent)
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
-      registered.builder(nonexistent)
+      load.builder(nonexistent)
 
   def test_registered_cls(self):
     name = "empty_dataset_builder"
-    self.assertIs(registered.builder_cls(name), EmptyDatasetBuilder)
+    self.assertIs(load.builder_cls(name), EmptyDatasetBuilder)
 
     nonexistent = "nonexistent_foobar_dataset"
     with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
-      registered.builder_cls(nonexistent)
+      load.builder_cls(nonexistent)
 
     with self.assertRaisesWithPredicateMatch(
         ValueError, "`builder_cls` only accept the `dataset_name`"):
       name_with_kwargs = "empty_dataset_builder/config:1.0.0"
-      registered.builder_cls(name_with_kwargs)
+      load.builder_cls(name_with_kwargs)
 
   def test_abstract(self):
     name = "unregistered_builder"
     self.assertEqual(name, UnregisteredBuilder.name)
-    self.assertNotIn(name, registered.list_builders())
+    self.assertNotIn(name, load.list_builders())
 
     with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
-      registered.builder(name)
+      load.builder(name)
 
   def test_in_development(self):
     name = "in_development_dataset_builder"
     self.assertEqual(name, InDevelopmentDatasetBuilder.name)
-    self.assertNotIn(name, registered.list_builders())
+    self.assertNotIn(name, load.list_builders())
 
     with self.assertRaisesWithPredicateMatch(
         ValueError,
         ("Dataset %s is under active development and is not available yet."
         ) % name):
-      registered.builder(name)
+      load.builder(name)
 
   def test_builder_with_kwargs(self):
     name = "empty_dataset_builder"
     name_with_kwargs = name + "/k1=1,k2=1.,k3=foo,k4=True,k5=False"
-    builder = registered.builder(name_with_kwargs, data_dir="bar")
+    builder = load.builder(name_with_kwargs, data_dir="bar")
     expectations = [("k1", 1), ("k2", 1.), ("k3", u"foo"), ("k4", True),
                     ("k5", False)]
     for k, v in expectations:
@@ -113,14 +114,14 @@ class RegisteredTest(testing.TestCase):
 
   def test_builder_fullname(self):
     fullname = "empty_dataset_builder/conf1-attr:1.0.1/k1=1,k2=2"
-    builder = registered.builder(fullname, data_dir="bar")
+    builder = load.builder(fullname, data_dir="bar")
     expected = {"k1": 1, "k2": 2, "version": "1.0.1",
                 "config": "conf1-attr", "data_dir": "bar"}
     self.assertEqual(expected, builder.kwargs)
 
   def test_builder_camel_case(self):
     fullname = "EmptyDatasetBuilder"
-    builder = registered.builder(fullname)
+    builder = load.builder(fullname)
     self.assertIsInstance(builder, EmptyDatasetBuilder)
 
   def test_load(self):
@@ -129,14 +130,14 @@ class RegisteredTest(testing.TestCase):
     as_dataset_kwargs = dict(a=1, b=2)
 
     # EmptyDatasetBuilder returns self from as_dataset
-    builder = registered.load(
+    builder = load.load(
         name=name, split=splits.Split.TEST, data_dir=data_dir,
         download=False, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertFalse(builder.download_called)
     self.assertEqual(splits.Split.TEST,
                      builder.as_dataset_kwargs.pop("split"))
-    self.assertEqual(None, builder.as_dataset_kwargs.pop("batch_size"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
     self.assertIsNone(builder.as_dataset_kwargs.pop("read_config"))
@@ -144,7 +145,7 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
-    builder = registered.load(
+    builder = load.load(
         name, split=splits.Split.TRAIN, data_dir=data_dir,
         download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
@@ -152,11 +153,11 @@ class RegisteredTest(testing.TestCase):
 
     # Tests for different batch_size
     # By default batch_size=None
-    builder = registered.load(
+    builder = load.load(
         name=name, split=splits.Split.TEST, data_dir=data_dir)
-    self.assertEqual(None, builder.as_dataset_kwargs.pop("batch_size"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     # Setting batch_size=1
-    builder = registered.load(
+    builder = load.load(
         name=name, split=splits.Split.TEST, data_dir=data_dir,
         batch_size=1)
     self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
@@ -164,46 +165,43 @@ class RegisteredTest(testing.TestCase):
   def test_load_all_splits(self):
     name = "empty_dataset_builder"
     # EmptyDatasetBuilder returns self from as_dataset
-    builder = registered.load(name=name, data_dir="foo")
+    builder = load.load(name=name, data_dir="foo")
     self.assertTrue(builder.as_dataset_called)
-    self.assertEqual(None, builder.as_dataset_kwargs.pop("split"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("split"))
 
   def test_load_with_config(self):
     data_dir = "foo"
     name = "empty_dataset_builder/bar/k1=1"
     # EmptyDatasetBuilder returns self from as_dataset
-    builder = registered.load(name=name, split=splits.Split.TEST,
-                              data_dir=data_dir)
+    builder = load.load(name=name, split=splits.Split.TEST, data_dir=data_dir)
     expected = dict(data_dir=data_dir, k1=1, config="bar")
     self.assertEqual(expected, builder.kwargs)
 
     name = "empty_dataset_builder/bar"
-    builder = registered.load(name=name, split=splits.Split.TEST,
-                              data_dir=data_dir)
-    self.assertEqual(dict(data_dir=data_dir, config="bar"),
-                     builder.kwargs)
+    builder = load.load(name=name, split=splits.Split.TEST, data_dir=data_dir)
+    self.assertEqual(dict(data_dir=data_dir, config="bar"), builder.kwargs)
 
   def test_notebook_overwrite_dataset(self):
     """Redefining the same builder twice is possible on colab."""
 
     with mock.patch.object(py_utils, "is_notebook", lambda: True):
       name = "colab_builder"
-      self.assertNotIn(name, registered.list_builders())
+      self.assertNotIn(name, load.list_builders())
 
       @six.add_metaclass(registered.RegisteredDataset)
       class ColabBuilder(object):
         pass
 
-      self.assertIn(name, registered.list_builders())
-      self.assertIsInstance(registered.builder(name), ColabBuilder)
+      self.assertIn(name, load.list_builders())
+      self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
       @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
       class ColabBuilder(object):
         pass
 
-      self.assertIsInstance(registered.builder(name), ColabBuilder)
-      self.assertNotIsInstance(registered.builder(name), old_colab_class)
+      self.assertIsInstance(load.builder(name), ColabBuilder)
+      self.assertNotIsInstance(load.builder(name), old_colab_class)
 
   def test_duplicate_dataset(self):
     """Redefining the same builder twice should raises error."""
@@ -219,15 +217,15 @@ class RegisteredTest(testing.TestCase):
 
   def test_is_full_name(self):
     """Test for `is_full_name`."""
-    self.assertFalse(registered.is_full_name("ds/config/1.0.2/other"))
-    self.assertFalse(registered.is_full_name("ds/config/1.0.2/"))
-    self.assertFalse(registered.is_full_name("ds/config/1.2"))
-    self.assertFalse(registered.is_full_name("ds/config"))
-    self.assertFalse(registered.is_full_name("ds/1.2.*"))
+    self.assertFalse(load.is_full_name("ds/config/1.0.2/other"))
+    self.assertFalse(load.is_full_name("ds/config/1.0.2/"))
+    self.assertFalse(load.is_full_name("ds/config/1.2"))
+    self.assertFalse(load.is_full_name("ds/config"))
+    self.assertFalse(load.is_full_name("ds/1.2.*"))
 
-    self.assertTrue(registered.is_full_name("ds/config/1.0.2"))
-    self.assertTrue(registered.is_full_name("ds/1.0.2"))
-    self.assertTrue(registered.is_full_name("ds_with_number123/1.0.2"))
+    self.assertTrue(load.is_full_name("ds/config/1.0.2"))
+    self.assertTrue(load.is_full_name("ds/1.0.2"))
+    self.assertTrue(load.is_full_name("ds_with_number123/1.0.2"))
 
   def test_skip_regitration(self):
     """Test `skip_registration()`."""
@@ -240,7 +238,4 @@ class RegisteredTest(testing.TestCase):
 
     name = "skip_registered_dataset"
     self.assertEqual(name, SkipRegisteredDataset.name)
-    self.assertNotIn(name, registered.list_builders())
-
-if __name__ == "__main__":
-  testing.test_main()
+    self.assertNotIn(name, load.list_builders())

@@ -14,12 +14,12 @@
 # limitations under the License.
 
 # coding=utf-8
-"""Tests for tensorflow_datasets.core.features.text_feature."""
+"""Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.features.text import text_encoder
+from tensorflow_datasets.core.deprecated.text import text_encoder
 
 tf.enable_v2_behavior()
 
@@ -72,6 +72,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=[],
             ),
         ],
+        skip_feature_tests=True
     )
 
   def test_text_conversion(self):

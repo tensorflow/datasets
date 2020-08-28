@@ -83,8 +83,8 @@ class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
         description=description,
         **kwargs
     )
-    self.cloud_bucket = "gs://waymo_open_dataset_{}_individual_files/".format(
-        version_str
+    self.cloud_bucket = tfds.core.gcs_path(
+        f"gs://waymo_open_dataset_{version_str}_individual_files/"
     )
 
 

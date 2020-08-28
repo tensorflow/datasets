@@ -14,12 +14,12 @@
 # limitations under the License.
 
 # coding=utf-8
-"""Tests for tensorflow_datasets.core.features.text_feature."""
+"""Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.features.text import text_encoder
+from tensorflow_datasets.core.deprecated.text import text_encoder
 
 tf.enable_v2_behavior()
 
@@ -48,6 +48,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
                           "zh": tf.compat.as_bytes(ZH_HELLO)}
             ),
         ],
+        test_attributes=dict(languages=["en", "zh"])
     )
 
   def test_translation_encoded(self):
@@ -68,6 +69,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
                 },
             ),
         ],
+        skip_feature_tests=True
     )
 
   def test_translation_multiple_encoders(self):
@@ -88,6 +90,7 @@ class TranslationFeatureTest(testing.FeatureExpectationsTestCase):
                 },
             ),
         ],
+        skip_feature_tests=True
     )
 
 
@@ -144,6 +147,7 @@ class TranslationVariableLanguagesFeatureTest(
                           "(de, en, zh)",
             ),
         ],
+        test_attributes=dict(languages=sorted(["en", "de", "zh"]))
     )
 
 if __name__ == "__main__":

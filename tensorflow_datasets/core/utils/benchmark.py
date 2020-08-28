@@ -31,6 +31,7 @@ StatDict = Dict[str, Union[int, float]]
 
 def benchmark(
     ds: tf.data.Dataset,
+    *,
     num_iter: Optional[int] = None,
     batch_size: int = 1,
 ) -> Dict[str, StatDict]:
@@ -38,7 +39,7 @@ def benchmark(
 
   Usage:
 
-  ```
+  ```py
   ds = tfds.load('mnist', split='train').batch(32).prefetch()
   tfds.core.benchmark(ds, batch_size=32)
   ```
@@ -77,17 +78,17 @@ def benchmark(
         )
     )
 
-  logging.info('\n************ Summary ************\n')
+  print('\n************ Summary ************\n')
   num_examples = (i + 1) * batch_size
   return {
+      'first+last': _log_stats(
+          'First included', start_time, end_time, num_examples + batch_size
+      ),
       'first': _log_stats(
           'First only', start_time, first_batch_time, batch_size
       ),
       'last': _log_stats(
           'First excluded', first_batch_time, end_time, num_examples
-      ),
-      'first+last': _log_stats(
-          'First included', start_time, end_time, num_examples + batch_size
       ),
       'raw': {
           'start_time': start_time,
@@ -108,7 +109,7 @@ def _log_stats(
       'num_examples': num_examples,
       'avg': num_examples / total_time,
   }
-  logging.info(
+  print(
       'Examples/sec ({}) {avg:.2f} ex/sec (total: {num_examples} ex, '
       '{duration:.2f} sec)'.format(msg, **stats)
   )
