@@ -108,7 +108,6 @@ DATASET_FILES = [
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
-    'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
 
@@ -183,6 +182,13 @@ setup(
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
             'scripts/documentation/templates/*',
+            'url_checksums/*',
+            'checksums.tsv',
+        ],
+    },
+    exclude_package_data={
+        'tensorflow_datasets': [
+            'dummy_data/*',
         ],
     },
     scripts=[],
@@ -194,6 +200,8 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     keywords='tensorflow machine learning datasets',

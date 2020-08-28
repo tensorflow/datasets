@@ -85,6 +85,7 @@ class ImageFeatureTest(
                 raise_msg='are incompatible',
             ),
         ],
+        test_attributes=dict(_encoding_format='png')
     )
 
   def test_image_shaped(self):
@@ -108,6 +109,7 @@ class ImageFeatureTest(
                 raise_msg='are incompatible',
             ),
         ],
+        test_attributes=dict(_encoding_format='png')
     )
 
 

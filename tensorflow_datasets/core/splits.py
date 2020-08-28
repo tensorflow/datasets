@@ -247,3 +247,32 @@ class SplitGenerator(object):
     self.name = name
     self.gen_kwargs = gen_kwargs or {}
     self.split_info = SplitInfo(name=str(name))
+
+
+def even_splits(
+    split: str,
+    n: int,
+) -> List[str]:
+  """Generates a list of sub-splits of same size.
+
+  Example:
+
+  ```python
+  assert tfds.even_splits('train', n=3) == [
+      'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]
+  ]
+  ```
+
+  Args:
+    split: Split name (e.g. 'train', 'test',...)
+    n: Number of sub-splits to create
+
+  Returns:
+    The list of subsplits.
+  """
+  if n <= 0:
+    raise ValueError(f"n should be > 0. Got {n}")
+  partitions = [round(i * 100 / n) for i in range(n + 1)]
+  return [
+      f"{split}[{partitions[i]}%:{partitions[i+1]}%]" for i in range(n)
+  ]

@@ -93,6 +93,27 @@ def _generate_single_visualization(full_name: str, dst_dir: str) -> None:
   plt.close(figure)
 
 
+def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
+  """List all builder names `ds/version` and `ds/config/version` to generate.
+
+  Args:
+    datasets: List of datasets from which get the builder names.
+
+  Returns:
+    builder_names: The builder names.
+  """
+  if datasets is None:
+    return tfds.core.load.list_full_names(
+        current_version_only=True,
+    )
+  else:
+    builder_names = list(itertools.chain.from_iterable([
+        tfds.core.load.single_full_names(builder_name)
+        for builder_name in datasets
+    ]))
+    return builder_names
+
+
 def generate_visualization(
     datasets: Optional[List[str]] = None,
     *,

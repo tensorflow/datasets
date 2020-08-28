@@ -177,6 +177,8 @@ class RandomFakeGenerator(object):
       return self._rgn.randint(0, max_value, shape).astype(dtype.as_numpy_dtype)
     elif dtype.is_floating:
       return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
+    elif dtype.is_bool:
+      return (self._rgn.random_sample(shape) < .5).astype(dtype.as_numpy_dtype)
     elif dtype == tf.string:
       return ''.join(
           self._py_rng.choice(' abcdefghij')

@@ -90,9 +90,10 @@ def _get_feature(
   sequence_rank = 0
 
   # Collapse the nested sequences
-  while isinstance(feature, features.Sequence):
+  # Subclasses like `Video` shouldn't be recursed into.
+  while type(feature) == features.Sequence:  # pylint: disable=unidiomatic-typecheck
     sequence_rank += 1
-    feature = feature.feature  # Extract inner feature
+    feature = feature.feature  # Extract inner feature  # pytype: disable=attribute-error
 
   if path:  # Has level deeper, recurse
     feature = typing.cast(features.FeaturesDict, feature)

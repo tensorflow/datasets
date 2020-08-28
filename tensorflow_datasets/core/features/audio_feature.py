@@ -25,6 +25,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Audio(feature.Tensor):
@@ -100,6 +103,23 @@ class Audio(feature.Tensor):
         f'<audio controls src="data:audio/ogg;base64,{audio_str}" '
         ' controlsList="nodownload" />'
     )
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Audio':
+    return cls(
+        file_format=value['file_format'],
+        shape=tuple(value['shape']),
+        dtype=tf.dtypes.as_dtype(value['dtype']),
+        sample_rate=value['sample_rate'],
+    )
+
+  def to_json_content(self) -> Json:
+    return {
+        'file_format': self._file_format,
+        'shape': list(self._shape),
+        'dtype': self._dtype.name,
+        'sample_rate': self._sample_rate,
+    }
 
 
 def _save_wav(buff, data, rate) -> None:

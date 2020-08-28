@@ -24,8 +24,11 @@ import textwrap
 from absl import logging
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import feature
-from tensorflow_datasets.core.features import text as text_lib
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Text(feature.Tensor):
@@ -174,3 +177,13 @@ class Text(feature.Tensor):
     ex = html.escape(ex)
     ex = textwrap.shorten(ex, width=1000)  # Truncate long text
     return ex
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> "Text":
+    del value  # Unused
+    return cls()
+
+  def to_json_content(self) -> Json:
+    if self._encoder or self._encoder_config:
+      raise ValueError("Encoder and Encoder Config should None")
+    return dict()

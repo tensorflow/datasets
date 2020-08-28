@@ -91,23 +91,26 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
 
 
 def _create_dataset_files(args: argparse.Namespace) -> None:
-  """Creates the dataset directory template. Executed by `tfds new <name>`."""
-  ds_name = args.dataset_name
+  """Creates the dataset directory. Executed by `tfds new <name>`."""
+  create_dataset_files(dataset_name=args.dataset_name, dataset_dir=args.dir)
+
+
+def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
+  """Creates the dataset files."""
 
   # Creates the root directory
-  root_dir = args.dir.expanduser() / ds_name
-  root_dir.mkdir(parents=True)
+  dataset_dir = dataset_dir.expanduser() / dataset_name
+  dataset_dir.mkdir(parents=True)
   # TODO(py3.7): Should be `dir.expanduser().resolve()` but `.resolve()` fails
   # on some environements when the file doesn't exists.
   # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
-  root_dir = root_dir.resolve()
+  dataset_dir = dataset_dir.resolve()
 
-  # Whether the dataset is added in TFDS or in an external repository
-  in_tfds = 'tensorflow_datasets' in root_dir.parts
+  in_tfds = 'tensorflow_datasets' in dataset_dir.parts
 
-  info = DatasetInfo(name=ds_name, in_tfds=in_tfds, path=root_dir)
+  info = DatasetInfo(name=dataset_name, in_tfds=in_tfds, path=dataset_dir)
 
-  _create_dataset(info)
+  _create_dataset_file(info)
   _create_dataset_test(info)
   _create_init(info)
   _create_dummy_data(info)
@@ -122,7 +125,7 @@ def _create_dataset_files(args: argparse.Namespace) -> None:
   )
 
 
-def _create_dataset(info: DatasetInfo) -> None:
+def _create_dataset_file(info: DatasetInfo) -> None:
   """Create a new dataset from a template."""
   file_path = info.path / f'{info.name}.py'
 
