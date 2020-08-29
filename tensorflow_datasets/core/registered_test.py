@@ -25,6 +25,7 @@ import posixpath
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
@@ -249,47 +250,56 @@ class RegisteredTest(testing.TestCase):
   def test_find_builder_dir(self):
 
     with testing.MockFs() as fs:
-      fs.add_file("~/tensorflow_datasets/ds0/config/1.0.1/temp.txt")
-      fs.add_file("~/tensorflow_datasets/ds0/1.0.0/temp.txt")
-      fs.add_file("~/tensorflow_datasets/ds1/config/0.1.0/temp.txt")
-      fs.add_file("~/tensorflow_datasets/ds1/config/1.0.0/temp.txt")
-      fs.add_file("~/tensorflow_datasets/ds2/1.0.0/temp.txt")
-      fs.add_file("~/tensorflow_datasets/ds2/9.0.0/temp.txt")
-      fs.add_file("~/tensorflow_datasets/ds2/10.0.0/temp.txt")
+      fs.add_file("path/to/ds0/config/1.0.1/temp.txt")
+      fs.add_file("path/to/ds0/1.0.0/temp.txt")
+      fs.add_file("path/to/ds1/config/0.1.0/temp.txt")
+      fs.add_file("path/to/ds1/config/1.0.0/temp.txt")
+      fs.add_file("path/to/ds2/1.0.0/temp.txt")
+      fs.add_file("path/to/ds2/9.0.0/temp.txt")
+      fs.add_file("path/to/ds2/10.0.0/temp.txt")
 
       def mock_select_config_version(name: str, data_dir: str) -> Optional[str]:
         del name
         list_dir = sorted(tf.io.gfile.listdir(data_dir))
         if list_dir:
           config = list_dir[0]
-          version = load._select_version(os.path.join(data_dir, config))
+          version = load._select_version(os.path.join(data_dir, config))  # pylint: disable=protected-access
           if version:
             return posixpath.join(config, version)
         return None
 
       with mock.patch.object(load, '_select_config_and_version',
                              side_effect=mock_select_config_version):
-        self.assertEqual(load.find_builder_dir("ds0"),
-                         "~/tensorflow_datasets/ds0/1.0.0")
-        self.assertEqual(load.find_builder_dir("ds1/config:0.1.0"),
-                         "~/tensorflow_datasets/ds1/config/0.1.0")
-        self.assertEqual(load.find_builder_dir("ds1/config:1.0.0"),
-                         "~/tensorflow_datasets/ds1/config/1.0.0")
-        self.assertEqual(load.find_builder_dir("ds1/config"),
-                         "~/tensorflow_datasets/ds1/config/1.0.0")
-        self.assertEqual(load.find_builder_dir("ds2:1.0.0"),
-                         "~/tensorflow_datasets/ds2/1.0.0")
-        self.assertEqual(load.find_builder_dir("ds1"),
-                         "~/tensorflow_datasets/ds1/config/1.0.0")
-        self.assertEqual(load.find_builder_dir("ds2"),
-                         "~/tensorflow_datasets/ds2/10.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds0", data_dir="path/to"), "path/to/ds0/1.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds1/config:0.1.0", data_dir="path/to"), "path/to/ds1/config/0.1.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds1/config:1.0.0", data_dir="path/to"), "path/to/ds1/config/1.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds1/config", data_dir="path/to"), "path/to/ds1/config/1.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds2:1.0.0", data_dir="path/to"), "path/to/ds2/1.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds1", data_dir="path/to"), "path/to/ds1/config/1.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds2", data_dir="path/to"), "path/to/ds2/10.0.0")
 
-        self.assertEqual(load.find_builder_dir("ds0/config:1.0.0"), None)
-        self.assertEqual(load.find_builder_dir("ds/config:1.0.0"), None)
-        self.assertEqual(load.find_builder_dir("ds0/confi:1.0.0"), None)
-        self.assertEqual(load.find_builder_dir("ds2/config:1.0.0"), None)
-        self.assertEqual(load.find_builder_dir("ds1:1.0.0"), None)
-        self.assertEqual(load.find_builder_dir("ds0", data_dir="temp"), None)
+        self.assertEqual(load.find_builder_dir(
+            "ds0/config:1.0.0", data_dir="path/to"), None)
+        self.assertEqual(load.find_builder_dir(
+            "ds/config:1.0.0", data_dir="path/to"), None)
+        self.assertEqual(load.find_builder_dir(
+            "ds0/confi:1.0.0", data_dir="path/to"), None)
+        self.assertEqual(load.find_builder_dir(
+            "ds2/config:1.0.0", data_dir="path/to"), None)
+        self.assertEqual(load.find_builder_dir(
+            "ds1:1.0.0", data_dir="path/to"), None)
+        self.assertEqual(load.find_builder_dir("ds0"), None)
+
+        with mock.patch.object(constants, 'list_data_dirs',
+                               return_value=[constants.DATA_DIR, "path/to"]):
+          self.assertEqual(load.find_builder_dir("ds0"), "path/to/ds0/1.0.0")
 
 
 if __name__ == '__main__':

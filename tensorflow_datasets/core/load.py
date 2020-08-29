@@ -201,7 +201,13 @@ def find_builder_dir(
   """
   ds_name, name_kwargs = _dataset_name_and_kwargs_from_name_str(name)
 
-  base_dir = os.path.join(data_dir or constants.DATA_DIR, ds_name)
+  all_data_dirs = [data_dir] if data_dir else constants.list_data_dirs()
+  base_dir = next(filter(tf.io.gfile.exists,
+    map(lambda path: os.path.join(path, ds_name), all_data_dirs)), None)
+
+  if not base_dir:
+    return None
+
   config = name_kwargs.get("config", None)
   version = name_kwargs.get("version", None)
 
