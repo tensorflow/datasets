@@ -38,7 +38,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string("data_dir",constants.DATA_DIR,"Path to the data directory")
 
 def get_redundant_datasets(data_dir):
-    """
+    f"""
     Returns a tuple of installed datasets and rogue datasets
 
     Arguments:
@@ -68,7 +68,7 @@ def get_redundant_datasets(data_dir):
     return installed_datasets, rogue_datasets
 
 def main(_):
-    """
+    f"""
     Detects and deletes the old/non-existing versions of the datasets
     """
     #Get the latest dataset versions and configs alog with the locally installed datasets
@@ -82,30 +82,30 @@ def main(_):
             old_datasets.append(dataset)
 
     #User preview
-    print("The script will delete the following modifications to `{}`:\n \
-    Path indicated in bold will be kept, the other will be deleted.\n".format(FLAGS.data_dir))
+    print(f"The script will delete the following modifications to `{FLAGS.data_dir}`:")
+    print(f"Path indicated in bold will be kept, the other will be deleted.\n")
     for dataset in installed_datasets:
         if dataset in old_datasets:
-            print("{}\n".format(dataset))
+            print("f{dataset}\n")
         else:
             print(f"\033[1m{dataset}\033[0m")
 
     #Previewing the rogue datasets to user
-    print("\nThe script will also delete the following non-existing datasets: \n")
+    print(f"\nThe script will also delete the following non-existing datasets: \n")
     for dataset in rogue_datasets:
-        print("{}".format(dataset))
-    choice = str(input("\nDo you want to continue (Y/n): "))
+        print(f"{dataset}")
+    choice = str(input(f"\nDo you want to continue (Y/n): "))
 
     #Deleting the datasets on user's choice
     if choice in ("Y", "y" , ""):
         for dataset in old_datasets:
             path = os.path.join(FLAGS.data_dir,dataset)
             tf.io.gfile.rmtree(path)
-        print("All old/non-existing dataset version and configs successfully deleted")
+        print(f"All old/non-existing dataset version and configs successfully deleted")
         for dataset in rogue_datasets:
             path = os.path.join(FLAGS.data_dir,dataset)
             tf.io.gfile.rmtree(path)
-        print("All non-existant datasets removed")
+        print(f"All non-existant datasets removed")
 
 if __name__ == "__main__":
     app.run(main)
