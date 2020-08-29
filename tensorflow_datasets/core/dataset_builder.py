@@ -668,7 +668,7 @@ class DatasetBuilder(object):
     for data_dir_root in all_data_dirs:
       # List all existing versions
       all_version_dirs.update(
-          _list_all_version_dirs(os.path.join(data_dir_root, builder_dir)))
+          utils.list_all_version_dirs(os.path.join(data_dir_root, builder_dir)))
       # Check for existance of the requested dir
       requested_version_dir = os.path.join(data_dir_root, version_dir)
       if requested_version_dir in all_version_dirs:
@@ -840,24 +840,6 @@ class DatasetBuilder(object):
       raise ValueError(
           "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names)
     return config_dict
-
-
-def _list_all_version_dirs(root_dir):
-  """Lists all dataset versions present on disk."""
-  if not tf.io.gfile.exists(root_dir):
-    return []
-
-  def _is_version_valid(version):
-    try:
-      return utils.Version(version) and True
-    except ValueError:  # Invalid version (ex: incomplete data dir)
-      return False
-
-  return [  # Return all version dirs
-      os.path.join(root_dir, version)
-      for version in tf.io.gfile.listdir(root_dir)
-      if _is_version_valid(version)
-  ]
 
 
 class FileAdapterBuilder(DatasetBuilder):

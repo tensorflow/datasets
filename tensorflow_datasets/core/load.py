@@ -180,7 +180,11 @@ def builder(
     return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
 
 
-def find_builder(name: str, *, data_dir: Optional[str] = None) -> Optional[str]:
+def find_builder_dir(
+    name: str,
+    *,
+    data_dir: Optional[str] = None
+) -> Optional[str]:
   """Returns the path to dataset files
 
   Example:
@@ -203,15 +207,15 @@ def find_builder(name: str, *, data_dir: Optional[str] = None) -> Optional[str]:
 
   if config and version:
     builder_dir = os.path.join(base_dir, config, version)
-    if tf.io.gfile.exists(builder_dir):
-      return builder_dir
+    return builder_dir if tf.io.gfile.exists(builder_dir) else None
 
   if version:
+    if version == "experimental_latest":
+      version = _select_version(base_dir)
     builder_dir = os.path.join(base_dir, version)
-    if tf.io.gfile.exists(builder_dir):
-      return builder_dir
+    return builder_dir if tf.io.gfile.exists(builder_dir) else None
 
-  config_version = _select_config_and_version(base_dir)
+  config_version = _select_config_and_version(ds_name, base_dir)
   if config_version:
     return os.path.join(base_dir, config_version)
 
@@ -221,21 +225,22 @@ def find_builder(name: str, *, data_dir: Optional[str] = None) -> Optional[str]:
 
   return None
 
-def _select_config_and_version(data_dir: str) -> Optional[str]:
-  config = tf.io.gfile.listdir(data_dir)[0]  # TODO: Select default config
-  if config:
-    version = _select_version(os.path.join(data_dir, config))
-    if version:
-      return posixpath.join(config, version)
+def _select_config_and_version(name: str, data_dir: str) -> Optional[str]:
+  try:
+    config = builder_cls(name).BUILDER_CONFIGS[0].name
+  except:
+    return None
+  version = _select_version(os.path.join(data_dir, config))
+  if version:
+    return posixpath.join(config, version)
   return None
 
 
 def _select_version(data_dir: str) -> Optional[str]:
-  version_regex = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
-  dirs = sorted(
-      [v for v in tf.io.gfile.listdir(data_dir) if version_regex.match(v)])
+  dirs = sorted([version_lib.Version(os.path.basename(v))
+    for v in py_utils.list_all_version_dirs(data_dir)])
   if dirs:
-    return dirs[-1]
+    return str(dirs[-1])
   return None
 
 
@@ -365,7 +370,7 @@ def load(
   # pylint: enable=line-too-long
   builder_dir = None
   if load_generated_ds:
-    builder_dir = find_builder(name, data_dir=data_dir)
+    builder_dir = find_builder_dir(name, data_dir=data_dir)
 
   name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   name_builder_kwargs.update(builder_kwargs or {})

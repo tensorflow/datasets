@@ -37,6 +37,7 @@ import six
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils import version as version_lib
 
 
 # pylint: disable=g-import-not-at-top
@@ -508,3 +509,20 @@ def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
   buffer = io.BytesIO()
   write_fn(buffer)
   return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type
+
+def list_all_version_dirs(root_dir):
+  """Lists all dataset versions present on disk."""
+  if not tf.io.gfile.exists(root_dir):
+    return []
+
+  def _is_version_valid(version):
+    try:
+      return version_lib.Version(version) and True
+    except ValueError:  # Invalid version (ex: incomplete data dir)
+      return False
+
+  return [  # Return all version dirs
+      os.path.join(root_dir, version)
+      for version in tf.io.gfile.listdir(root_dir)
+      if _is_version_valid(version)
+  ]
