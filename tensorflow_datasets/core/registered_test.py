@@ -254,6 +254,7 @@ class RegisteredTest(testing.TestCase):
       fs.add_file("path/to/ds0/1.0.0/temp.txt")
       fs.add_file("path/to/ds1/config/0.1.0/temp.txt")
       fs.add_file("path/to/ds1/config/1.0.0/temp.txt")
+      fs.add_file("path/to/ds1/config1/1.0.0/temp.txt")
       fs.add_file("path/to/ds2/1.0.0/temp.txt")
       fs.add_file("path/to/ds2/9.0.0/temp.txt")
       fs.add_file("path/to/ds2/10.0.0/temp.txt")
@@ -273,17 +274,19 @@ class RegisteredTest(testing.TestCase):
         self.assertEqual(load.find_builder_dir(
             "ds0", data_dir="path/to"), "path/to/ds0/1.0.0")
         self.assertEqual(load.find_builder_dir(
+            "ds1", data_dir="path/to"), "path/to/ds1/config/1.0.0")
+        self.assertEqual(load.find_builder_dir(
+            "ds2", data_dir="path/to"), "path/to/ds2/10.0.0")
+        self.assertEqual(load.find_builder_dir(
             "ds1/config:0.1.0", data_dir="path/to"), "path/to/ds1/config/0.1.0")
         self.assertEqual(load.find_builder_dir(
             "ds1/config:1.0.0", data_dir="path/to"), "path/to/ds1/config/1.0.0")
         self.assertEqual(load.find_builder_dir(
             "ds1/config", data_dir="path/to"), "path/to/ds1/config/1.0.0")
         self.assertEqual(load.find_builder_dir(
+            "ds1/config1", data_dir="path/to"), "path/to/ds1/config1/1.0.0")
+        self.assertEqual(load.find_builder_dir(
             "ds2:1.0.0", data_dir="path/to"), "path/to/ds2/1.0.0")
-        self.assertEqual(load.find_builder_dir(
-            "ds1", data_dir="path/to"), "path/to/ds1/config/1.0.0")
-        self.assertEqual(load.find_builder_dir(
-            "ds2", data_dir="path/to"), "path/to/ds2/10.0.0")
 
         self.assertEqual(load.find_builder_dir(
             "ds0/config:1.0.0", data_dir="path/to"), None)
@@ -291,6 +294,8 @@ class RegisteredTest(testing.TestCase):
             "ds/config:1.0.0", data_dir="path/to"), None)
         self.assertEqual(load.find_builder_dir(
             "ds0/confi:1.0.0", data_dir="path/to"), None)
+        self.assertEqual(load.find_builder_dir(
+            "ds1/config2", data_dir="path/to"), None)
         self.assertEqual(load.find_builder_dir(
             "ds2/config:1.0.0", data_dir="path/to"), None)
         self.assertEqual(load.find_builder_dir(

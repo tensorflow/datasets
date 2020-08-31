@@ -190,20 +190,17 @@ def find_builder_dir(
   Example:
 
   ```py
-  path = find_builder_dir('ds/config:1.2.0', data_dir='~/tensorflow_datasets/')
+  path = find_builder_dir('ds/config:1.2.0')
   asssert path == '~/tensorflow_datasets/ds/config/1.2.0'
 
-  # If the version is not specified, return the last available version
-  find_builder_dir('ds', data_dir='~/tensorflow_datasets/')
-  assert path == '~/tensorflow_datasets/my_dataset/config/1.2.0'
   ```
 
   """
   ds_name, name_kwargs = _dataset_name_and_kwargs_from_name_str(name)
 
   all_data_dirs = [data_dir] if data_dir else constants.list_data_dirs()
-  base_dir = next(filter(tf.io.gfile.exists,
-    map(lambda path: os.path.join(path, ds_name), all_data_dirs)), None)
+  base_dir = next(filter(tf.io.gfile.exists, map(
+      lambda path: os.path.join(path, ds_name), all_data_dirs)), None)
 
   if not base_dir:
     return None
@@ -211,13 +208,15 @@ def find_builder_dir(
   config = name_kwargs.get("config", None)
   version = name_kwargs.get("version", None)
 
-  if config and version:
-    builder_dir = os.path.join(base_dir, config, version)
-    return builder_dir if tf.io.gfile.exists(builder_dir) else None
+  if config:
+    config_dir = os.path.join(base_dir, config)
+    version = version if version else _select_version(config_dir)
+    if version:
+      builder_dir = os.path.join(config_dir, version)
+      return builder_dir if tf.io.gfile.exists(builder_dir) else None
+    return None
 
   if version:
-    if version == "experimental_latest":
-      version = _select_version(base_dir)
     builder_dir = os.path.join(base_dir, version)
     return builder_dir if tf.io.gfile.exists(builder_dir) else None
 
@@ -232,9 +231,12 @@ def find_builder_dir(
   return None
 
 def _select_config_and_version(name: str, data_dir: str) -> Optional[str]:
+  """Returns default dataset config name"""
   try:
     config = builder_cls(name).BUILDER_CONFIGS[0].name
-  except:
+    if not tf.io.gfile.exists(os.path.join(data_dir, config)):
+      raise ValueError(f"Please specify the Dataset config name")
+  except ValueError:
     return None
   version = _select_version(os.path.join(data_dir, config))
   if version:
@@ -243,8 +245,9 @@ def _select_config_and_version(name: str, data_dir: str) -> Optional[str]:
 
 
 def _select_version(data_dir: str) -> Optional[str]:
+  """Returns last available version of a dataset"""
   dirs = sorted([version_lib.Version(os.path.basename(v))
-    for v in py_utils.list_all_version_dirs(data_dir)])
+                 for v in py_utils.list_all_version_dirs(data_dir)])
   if dirs:
     return str(dirs[-1])
   return None
