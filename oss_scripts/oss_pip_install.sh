@@ -23,6 +23,8 @@ sudo apt-get install -qq -y libsm6
 
 install_tf "$TF_VERSION"
 
+pip install -q "setuptools!=50.0" --force-reinstall
+
 # Make sure we have the latest version of numpy - avoid problems we were
 # seeing with Python 3
 pip install -q -U numpy

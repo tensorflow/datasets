@@ -6,7 +6,7 @@ set -e   # fail and exit on any command erroring
 source ./oss_scripts/utils.sh
 function setup_env() {
   create_virtualenv $1 $2
-  pip install -q --upgrade setuptools pip
+  pip install -q "setuptools!=50.0" --force-reinstall
   pip install -q wheel twine pyopenssl
 }
 
