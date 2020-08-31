@@ -212,6 +212,8 @@ def main(_):
     if not builder.BUILDER_CONFIGS:
       raise ValueError(
           "--builder_config_id can only be used with datasets with configs")
+    if FLAGS.builder_config_id >= len(builder.BUILDER_CONFIGS):
+      return
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
     builder_for_config = tfds.builder(
