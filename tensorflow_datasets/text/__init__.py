@@ -31,6 +31,7 @@ from tensorflow_datasets.text.esnli import Esnli
 from tensorflow_datasets.text.gap import Gap
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.goemotions import Goemotions
+from tensorflow_datasets.text.gpt3 import Gpt3
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
