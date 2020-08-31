@@ -17,9 +17,11 @@
 
 import abc
 import mock
+import os
 import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
+from tensorflow_datasets.core import load_from_directory
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.utils import py_utils
@@ -239,6 +241,18 @@ class RegisteredTest(testing.TestCase):
     name = "skip_registered_dataset"
     self.assertEqual(name, SkipRegisteredDataset.name)
     self.assertNotIn(name, load.list_builders())
+
+  def test_builder_from_directory(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder.download_and_prepare()
+
+      builder_dir = os.path.join(tmp_dir, builder.name, str(builder.version))
+      builder1 = load_from_directory.builder_from_directory(builder_dir)
+      self.assertEqual(builder.name, builder1.name)
+      self.assertEqual(builder1.VERSION, None)
+      self.assertEqual(builder.data_dir, builder1.data_dir)
+      self.assertEqual(str(builder.info), str(builder1.info))
 
 
 if __name__ == "__main__":
