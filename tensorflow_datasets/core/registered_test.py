@@ -16,15 +16,28 @@
 """Tests for tensorflow_datasets.core.registered."""
 
 import abc
-import mock
 import os
+import mock
 import six
+from absl.testing import parameterized
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import load_from_directory
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.utils import py_utils
+
+class DummyDatasetConfig(dataset_builder.BuilderConfig):
+
+  def __init__(self):
+    super(DummyDatasetConfig, self).__init__(
+        name="dummy_config", version="0.1.0", description="testing config")
+
+
+class DummyConfigMnist(testing.DummyMnist):
+
+  BUILDER_CONFIGS = [DummyDatasetConfig()]
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -57,7 +70,7 @@ class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
   IN_DEVELOPMENT = True
 
 
-class RegisteredTest(testing.TestCase):
+class RegisteredTest(testing.TestCase, parameterized.TestCase):
 
   def test_registered(self):
     name = "empty_dataset_builder"
@@ -242,16 +255,21 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(name, SkipRegisteredDataset.name)
     self.assertNotIn(name, load.list_builders())
 
-  def test_builder_from_directory(self):
+  @parameterized.parameters(
+      testing.DummyMnist,
+      DummyConfigMnist,
+  )
+  def test_builder_from_directory(self, ds_builder):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder = ds_builder(data_dir=tmp_dir)
       builder.download_and_prepare()
 
-      builder_dir = os.path.join(tmp_dir, builder.name, str(builder.version))
+      builder_dir = os.path.join(tmp_dir, builder.info.full_name)
       builder1 = load_from_directory.builder_from_directory(builder_dir)
       self.assertEqual(builder.name, builder1.name)
       self.assertEqual(builder1.VERSION, None)
       self.assertEqual(builder.data_dir, builder1.data_dir)
+      self.assertEqual(builder.info.full_name, builder1.info.full_name)
       self.assertEqual(str(builder.info), str(builder1.info))
 
 
