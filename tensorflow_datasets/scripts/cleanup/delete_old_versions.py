@@ -13,43 +13,55 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Script to detect all the versions of the various datasets and delete the old/non-existing ones
+r"""Script to detect all the versions of the various datasets
+    and delete the old/non-existing ones
 
-User is first given previews of all the versions of the datasets with the latest ones in bold
+User is first given previews of all the versions of the datasets
+    with the latest ones in bold
 
 Instructions:
 
-python -m tensorflow_datasets.scripts.delete_old_versions \
-  --data_dir=/path/to/data_dir/
+python -m tensorflow_datasets.scripts.delete_old_versions
+    --data_dir=/path/to/data_dir/ --skip_confirmation=False
 
 """
 
 import os
 from absl import flags
 from absl import app
+from termcolor import colored
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core.load import list_full_names
 
 import tensorflow as tf
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("data_dir",constants.DATA_DIR,"Path to the data directory")
+flags.DEFINE_string("data_dir",
+  constants.DATA_DIR,
+  "Path to the data directory")
+flags.DEFINE_boolean("skip_confirmation",
+  False,
+  "Whether to skip user confirmation or not")
 
-def get_redundant_datasets(data_dir):
-  f"""
+def get_datasets(data_dir, current_full_names):
+  """
   Returns a tuple of installed datasets and rogue datasets
 
   Arguments:
       data_dir : The path to the data directory
+      current_full_names : Names of the latest datasets supported in TFDS
 
   Returns:
-      installed_datasets, rogue_datasets : Tuple of installed and non-existing datasets
+      dirs_to_keep, dirs_to_del : \
+                        Tuple of datasets to keep and delete respectively
   """
+  #Making the paths in windows supported format
+  current_full_names = [os.path.normpath(name) for name in current_full_names]
+
   installed_datasets = []
   all_datasets = tfds.list_builders()
-  exclude = {"downloads","download","manual","extracted"}
+  exclude = {"downloads", "download", "manual", "extracted"}
 
   #Get all the non-existing datasets
   rogue_datasets = []
@@ -64,48 +76,55 @@ def get_redundant_datasets(data_dir):
     dirs[:] = [d for d in dirs if d not in exclude]
     dirs[:] = [d for d in dirs if d not in rogue_datasets]
     if dirs==[]:
-      installed_datasets.append(os.path.relpath(root,data_dir).replace("\\","/"))
-  return installed_datasets, rogue_datasets
+      installed_datasets.append(
+        os.path.normpath(os.path.relpath(root, data_dir)))
 
-def main(_):
-  f"""
+  #Determining which datasets to keep and delete
+  dirs_to_keep = []
+  dirs_to_delete = []
+  for dataset in installed_datasets:
+    if dataset not in current_full_names:
+      dirs_to_delete.append(dataset)
+    else:
+      dirs_to_keep.append(dataset)
+
+  dirs_to_delete = dirs_to_delete + rogue_datasets
+  return dirs_to_keep, dirs_to_delete
+
+def delete_old_versions(data_dir, skip_confirmation=False):
+  """
   Detects and deletes the old/non-existing versions of the datasets
   """
   #Get the latest dataset versions and configs alog with the locally installed datasets
-  latest_datasets = list_full_names(current_version_only=True)
-  installed_datasets, rogue_datasets = get_redundant_datasets(FLAGS.data_dir)
-  old_datasets = []
-
-  #Identify the old dataset version/configs
-  for dataset in installed_datasets:
-    if dataset not in latest_datasets:
-      old_datasets.append(dataset)
+  dirs_to_keep, dirs_to_delete = get_datasets(
+    data_dir,
+    current_full_names=tfds.core.load.list_full_names(
+      current_version_only=True
+      )
+    )
+  all_dirs = [
+    colored(d, attrs=['bold']) if d in dirs_to_keep else d
+    for d in sorted(dirs_to_keep + dirs_to_delete)]
 
   #User preview
-  print(f"The script will delete the following modifications to `{FLAGS.data_dir}`:")
-  print(f"Path indicated in bold will be kept, the other will be deleted.\n")
-  for dataset in installed_datasets:
-    if dataset in old_datasets:
-      print("f{dataset}\n")
-    else:
-      print(f"\033[1m{dataset}\033[0m")
+  print(f"The script will delete the following modifications to `{data_dir}`:")
+  print("Path indicated in bold will be kept, the other will be deleted.\n")
+  print("\n".join(all_dirs))
 
-  #Previewing the rogue datasets to user
-  print(f"\nThe script will also delete the following non-existing datasets: \n")
-  for dataset in rogue_datasets:
-    print(f"{dataset}")
-  choice = str(input(f"\nDo you want to continue (Y/n): "))
-
+  if skip_confirmation:
+    choice = ""
+  else:
+    choice = str(input("\nDo you want to continue (Y/n): "))
   #Deleting the datasets on user's choice
   if choice in ("Y", "y" , ""):
-    for dataset in old_datasets:
-      path = os.path.join(FLAGS.data_dir,dataset)
+    for dataset in dirs_to_delete:
+      path = os.path.join(data_dir, dataset)
       tf.io.gfile.rmtree(path)
-    print(f"All old/non-existing dataset version and configs successfully deleted")
-    for dataset in rogue_datasets:
-      path = os.path.join(FLAGS.data_dir,dataset)
-      tf.io.gfile.rmtree(path)
-    print(f"All non-existant datasets removed")
+    print("All old/non-existing dataset version and",
+      "configs successfully deleted")
+
+def main(_):
+  delete_old_versions(FLAGS.data_dir, FLAGS.skip_confirmation)
 
 if __name__ == "__main__":
   app.run(main)
