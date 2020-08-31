@@ -14,11 +14,14 @@
 # limitations under the License.
 
 """Test for delete_old_versions.py script"""
+import pathlib
 from tensorflow_datasets.scripts.cleanup import delete_old_versions
 import tensorflow_datasets.testing as tfds_test
-import pathlib
 
 def test_delete_script(tmp_path: pathlib.Path):
+  """Function for testing the delete script by taking some manual
+  examples and checking for the desired result"""
+
   for dataset_dir in [
     'dataset/config/1.0.0',
     'my_dataset/1.0.0',
@@ -30,7 +33,7 @@ def test_delete_script(tmp_path: pathlib.Path):
     'my_other_dataset/other_config/1.3.0',
     'old_dataset',
   ]:
-    tmp_path.joinpath(dataset_dir).touch(exist_ok)
+    tmp_path.joinpath(dataset_dir,'dataset_info.json').touch()
 
   dir_to_keep, dir_to_delete = delete_old_versions.get_datasets(
       data_dir=str(tmp_path),
