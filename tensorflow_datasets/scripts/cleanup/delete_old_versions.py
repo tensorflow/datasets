@@ -57,8 +57,11 @@ def get_datasets(data_dir, current_full_names):
                         Tuple of datasets to keep and delete respectively
   """
   #Making the paths in windows supported format
-  all_datasets = set([name.split("/")[0] for name in current_full_names])
   current_full_names = [os.path.normpath(name) for name in current_full_names]
+  all_datasets = {
+    name.split(os.path.sep)[0]
+    for name in current_full_names
+    }
 
   installed_datasets = []
   exclude = {"downloads", "download", "manual", "extracted"}
@@ -69,7 +72,7 @@ def get_datasets(data_dir, current_full_names):
     if dataset not in all_datasets:
       rogue_datasets.append(dataset)
 
-  #Removing other folders 
+  #Removing other folders
   for d in exclude:
     if d in rogue_datasets:
       rogue_datasets.remove(d)
