@@ -57,10 +57,10 @@ def get_datasets(data_dir, current_full_names):
                         Tuple of datasets to keep and delete respectively
   """
   #Making the paths in windows supported format
+  all_datasets = set([name.split("/")[0] for name in current_full_names])
   current_full_names = [os.path.normpath(name) for name in current_full_names]
 
   installed_datasets = []
-  all_datasets = tfds.list_builders()
   exclude = {"downloads", "download", "manual", "extracted"}
 
   #Get all the non-existing datasets
@@ -68,7 +68,11 @@ def get_datasets(data_dir, current_full_names):
   for dataset in tf.io.gfile.listdir(data_dir):
     if dataset not in all_datasets:
       rogue_datasets.append(dataset)
-  rogue_datasets.remove("downloads")
+
+  #Removing other folders 
+  for d in exclude:
+    if d in rogue_datasets:
+      rogue_datasets.remove(d)
 
   #Finding all installed datasets
   for root,dirs,_ in tf.io.gfile.walk(data_dir, topdown=True):

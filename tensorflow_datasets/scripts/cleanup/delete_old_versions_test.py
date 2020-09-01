@@ -15,10 +15,11 @@
 
 """Test for delete_old_versions.py script"""
 import pathlib
+import os
 from tensorflow_datasets.scripts.cleanup import delete_old_versions
 import tensorflow_datasets.testing as tfds_test
 
-def test_delete_script(tmp_path: pathlib.Path):
+def test_delete_script(tmp_path: pathlib.PurePath):
   """Function for testing the delete script by taking some manual
   examples and checking for the desired result"""
 
@@ -33,7 +34,7 @@ def test_delete_script(tmp_path: pathlib.Path):
     'my_other_dataset/other_config/1.3.0',
     'old_dataset',
   ]:
-    tmp_path.joinpath(dataset_dir,'dataset_info.json').touch()
+    tmp_path.joinpath(dataset_dir).mkdir(parents=True)
 
   dir_to_keep, dir_to_delete = delete_old_versions.get_datasets(
       data_dir=str(tmp_path),
@@ -42,22 +43,26 @@ def test_delete_script(tmp_path: pathlib.Path):
             'my_dataset/1.3.0',
             'my_other_dataset/config/1.3.0',
             'my_other_dataset/other_config/1.3.0',
-            'another_dataset/config/1.2.0'
+            'another_dataset/config/1.2.0',
             'another_dataset/other_config/1.1.0',
       ],
   )
-  assert dir_to_keep == [
+  assert dir_to_keep == [ os.path.normpath(name) for name in
+      [
       'dataset/config/1.0.0',
       'my_dataset/1.3.0',
       'my_other_dataset/config/1.3.0',
       'my_other_dataset/other_config/1.3.0',
+      ]
   ]
-  assert dir_to_delete == [
+  assert dir_to_delete == [ os.path.normpath(name) for name in
+      [
       'my_dataset/1.0.0',
       'my_dataset/1.2.0',
       'my_other_dataset/config/1.2.0',
       'my_other_dataset/other_config/1.2.0',
       'old_dataset',
+      ]
   ]
 
 if __name__ == "__main__":
