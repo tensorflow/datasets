@@ -33,6 +33,7 @@ fi
 # * Lsun tests is disabled because the tensorflow_io used in open-source
 #   is linked to static libraries compiled again specific TF version, which
 #   makes test fails with linking error (libtensorflow_io_golang.so).
+# * Imagenet2012Corrupted requires imagemagick binary.
 # * Wmt19 is failing during tarfile extraction due to:
 #   https://bugs.python.org/issue39430
 #   TODO(tfds): Restore test with new Python release.
@@ -44,6 +45,7 @@ pytest \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
   --ignore="tensorflow_datasets/core/dataset_builder_notfdv_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
+  --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
