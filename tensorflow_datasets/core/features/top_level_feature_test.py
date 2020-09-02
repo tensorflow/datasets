@@ -114,7 +114,6 @@ class FeaturesManagerTest(testing.TestCase):
             'c': tf.int32,
         },
     })
-    f._set_top_level()
 
     # Only top level can be decoded
     f.decode_example({
@@ -123,10 +122,6 @@ class FeaturesManagerTest(testing.TestCase):
             'c': 2,
         },
     })
-
-    with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'decoded when defined as top-level'):
-      f['b'].decode_example({'c': 1})
 
 
 if __name__ == '__main__':
