@@ -346,7 +346,9 @@ class FeatureExpectationsTestCase(SubTestCase):
       # Test the feature again to make sure that feature restored from config
       # behave similarly.
       with self._subTest('feature_roundtrip'):
-        new_feature = feature.from_json_content(feature.to_json_content())
+        with tmp_dir() as config_dir:
+          feature.save_config(config_dir)
+          new_feature = feature.from_config(config_dir)
         self._assert_feature(
             feature=new_feature,
             shape=shape,

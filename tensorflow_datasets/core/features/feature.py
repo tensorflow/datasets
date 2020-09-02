@@ -87,6 +87,7 @@ This file contains the following FeatureConnector:
 import abc
 import collections
 import json
+import os
 from typing import Dict, Type, TypeVar
 
 import numpy as np
@@ -293,17 +294,18 @@ class FeatureConnector(object):
     """
     return dict()
 
-  def save_config(self, path: str) -> None:
+  def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.
 
     Args:
-      path: `path/to/features.json`
+      root_dir: `path/to/dir` containing the `features.json`
     """
-    with tf.io.gfile.GFile(path, 'w') as f:
+    with tf.io.gfile.GFile(_make_config_path(root_dir), 'w') as f:
       f.write(json.dumps(self.to_json(), indent=4))
+    self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
-  def from_config(cls, path: str) -> 'FeatureConnector':
+  def from_config(cls, root_dir: str) -> 'FeatureConnector':
     """Reconstructs the FeatureConnector from the config file.
 
     Usage:
@@ -313,13 +315,15 @@ class FeatureConnector(object):
     ```
 
     Args:
-      path: path to the features.json file.
+      root_dir: Directory containing to the features.json file.
 
     Returns:
       The reconstructed feature instance.
     """
-    with tf.io.gfile.GFile(path) as f:
-      return FeatureConnector.from_json(json.loads(f.read()))
+    with tf.io.gfile.GFile(_make_config_path(root_dir)) as f:
+      feature = FeatureConnector.from_json(json.loads(f.read()))
+    feature.load_metadata(root_dir, feature_name=None)
+    return feature
 
   def get_serialized_info(self):
     """Return the shape/dtype of features after encoding (for the adapter).
@@ -686,6 +690,11 @@ class Tensor(FeatureConnector):
         'shape': list(self._shape),
         'dtype': self._dtype.name,
     }
+
+
+def _make_config_path(root_dir: str) -> str:
+  """Returns the path to the features config."""
+  return os.path.join(root_dir, 'features.json')
 
 
 def get_inner_feature_repr(feature):

@@ -182,10 +182,7 @@ class ClassLabel(feature.Tensor):
     return cls(**value)
 
   def to_json_content(self) -> Json:
-    if self._str2int is not None:
-      return {"names": self.names}
-    else:
-      return {"num_classes": self.num_classes}
+    return {"num_classes": self.num_classes}
 
 
 def _get_names_filepath(data_dir, feature_name):
