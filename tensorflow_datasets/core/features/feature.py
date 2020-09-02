@@ -475,15 +475,15 @@ class FeatureConnector(object):
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object."""
-    return repr(ex)
+    return _repr_html(ex)
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
-    return repr(ex)
+    return _repr_html(ex)
 
   def repr_html_ragged(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Nested sequence)."""
-    return repr(ex)
+    return _repr_html(ex)
 
   def _flatten(self, x):
     """Flatten the input dict into a list of values.
@@ -717,3 +717,12 @@ def get_inner_feature_repr(feature):
     return repr(feature.dtype)
   else:
     return repr(feature)
+
+
+def _repr_html(ex) -> str:
+  """Default HTML repr."""
+  if isinstance(ex, np.ndarray) and ex.size > 1:
+    # Do not print individual values for array as it is slow
+    # TODO(tfds): We could display a snippet, like the first/last tree items
+    return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
+  return repr(ex)
