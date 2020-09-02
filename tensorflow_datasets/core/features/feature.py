@@ -87,6 +87,7 @@ This file contains the following FeatureConnector:
 import abc
 import collections
 import json
+import os
 from typing import Dict, Type, TypeVar
 
 import numpy as np
@@ -293,17 +294,18 @@ class FeatureConnector(object):
     """
     return dict()
 
-  def save_config(self, path: str) -> None:
+  def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.
 
     Args:
-      path: `path/to/features.json`
+      root_dir: `path/to/dir` containing the `features.json`
     """
-    with tf.io.gfile.GFile(path, 'w') as f:
+    with tf.io.gfile.GFile(_make_config_path(root_dir), 'w') as f:
       f.write(json.dumps(self.to_json(), indent=4))
+    self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
-  def from_config(cls, path: str) -> 'FeatureConnector':
+  def from_config(cls, root_dir: str) -> 'FeatureConnector':
     """Reconstructs the FeatureConnector from the config file.
 
     Usage:
@@ -313,13 +315,15 @@ class FeatureConnector(object):
     ```
 
     Args:
-      path: path to the features.json file.
+      root_dir: Directory containing to the features.json file.
 
     Returns:
       The reconstructed feature instance.
     """
-    with tf.io.gfile.GFile(path) as f:
-      return FeatureConnector.from_json(json.loads(f.read()))
+    with tf.io.gfile.GFile(_make_config_path(root_dir)) as f:
+      feature = FeatureConnector.from_json(json.loads(f.read()))
+    feature.load_metadata(root_dir, feature_name=None)
+    return feature
 
   def get_serialized_info(self):
     """Return the shape/dtype of features after encoding (for the adapter).
@@ -471,15 +475,15 @@ class FeatureConnector(object):
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object."""
-    return repr(ex)
+    return _repr_html(ex)
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
-    return repr(ex)
+    return _repr_html(ex)
 
   def repr_html_ragged(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Nested sequence)."""
-    return repr(ex)
+    return _repr_html(ex)
 
   def _flatten(self, x):
     """Flatten the input dict into a list of values.
@@ -688,6 +692,11 @@ class Tensor(FeatureConnector):
     }
 
 
+def _make_config_path(root_dir: str) -> str:
+  """Returns the path to the features config."""
+  return os.path.join(root_dir, 'features.json')
+
+
 def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.
 
@@ -708,3 +717,12 @@ def get_inner_feature_repr(feature):
     return repr(feature.dtype)
   else:
     return repr(feature)
+
+
+def _repr_html(ex) -> str:
+  """Default HTML repr."""
+  if isinstance(ex, np.ndarray) and ex.size > 1:
+    # Do not print individual values for array as it is slow
+    # TODO(tfds): We could display a snippet, like the first/last tree items
+    return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
+  return repr(ex)

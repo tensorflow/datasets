@@ -17,7 +17,7 @@
 
 import abc
 import os
-import mock
+from unittest import mock
 import six
 from absl.testing import parameterized
 from tensorflow_datasets import testing

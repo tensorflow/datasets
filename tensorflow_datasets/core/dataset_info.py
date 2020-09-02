@@ -142,7 +142,6 @@ class DatasetInfo(object):
         raise ValueError(
             "DatasetInfo.features only supports FeaturesDict or Sequence at "
             "the top-level. Got {}".format(features))
-      features._set_top_level()  # pylint: disable=protected-access
     self._features = features
     self._splits = splits_lib.SplitDict(self._builder.name)
     if supervised_keys is not None:
@@ -330,7 +329,7 @@ class DatasetInfo(object):
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
-      self.features.save_config(self._feature_info_path(dataset_info_dir))
+      self.features.save_config(dataset_info_dir)
 
     # Save any additional metadata
     if self.metadata is not None:
@@ -374,8 +373,7 @@ class DatasetInfo(object):
       self.features.load_metadata(dataset_info_dir)
     elif tf.io.gfile.exists(self._feature_info_path(dataset_info_dir)):
       self._features = feature_lib.FeatureConnector.from_config(
-          self._feature_info_path(dataset_info_dir))
-      self.features._set_top_level()  # pylint: disable=protected-access
+          dataset_info_dir)
 
     if self.metadata is not None:
       self.metadata.load_metadata(dataset_info_dir)

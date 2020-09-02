@@ -23,23 +23,11 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   """Top-level `FeatureConnector` to manage decoding.
 
   Note that `FeatureConnector` which are declared as `TopLevelFeature` can be
-  nested. However, only the top-level feature can be decoded.
+  nested. However, only the top-level feature should be decoded.
 
   `TopLevelFeature` allows better control over the decoding, and
   eventually better support for augmentations.
   """
-
-  def __init__(self, *args, **kwargs):
-    """Constructor."""
-    self._is_top_level = False
-    super(TopLevelFeature, self).__init__(*args, **kwargs)
-
-  def _set_top_level(self):
-    """Indicates that the feature is top level.
-
-    Internal function called by `DatasetInfo`.
-    """
-    self._is_top_level = True
 
   def decode_example(self, serialized_example, decoders=None):
     # pylint: disable=line-too-long
@@ -56,13 +44,6 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     Returns:
       example: Nested `dict` containing the decoded nested examples.
     """
-    # pylint: enable=line-too-long
-    if not self._is_top_level:
-      raise AssertionError(
-          'Feature {} can only be decoded when defined as top-level '
-          'feature, through info.features.decode_example()'.format(
-              type(self).__name__))
-
     # Step 1: Flatten the nested dict => []
     flat_example = self._flatten(serialized_example)
     flat_features = self._flatten(self)

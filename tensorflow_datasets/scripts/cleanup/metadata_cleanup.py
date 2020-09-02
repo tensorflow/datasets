@@ -18,7 +18,7 @@ r"""Removes metadata that are not present in the registered versions of TFDS.
 Instructions:
 
 ```
-python -m tensorflow_datasets.scripts.metadata_cleanup
+python -m tensorflow_datasets.scripts.cleanup.metadata_cleanup
 ```
 
 

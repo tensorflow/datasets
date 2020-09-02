@@ -71,7 +71,7 @@ class RobonetConfig(tfds.core.BuilderConfig):
       **kwargs: Passed on to the constructor of `BuilderConfig`.
     """
     super(RobonetConfig, self).__init__(
-        version=tfds.core.Version('4.0.0'), **kwargs)
+        version=tfds.core.Version('4.0.1'), **kwargs)
     if (width is None) ^ (height is None):
       raise ValueError('Either both dimensions should be set, or none of them')
     self.sample_dataset = sample_dataset
@@ -137,7 +137,9 @@ class Robonet(tfds.core.BeamBasedBuilder):
             shape=(None, ACTIONS_DIM), dtype=tf.float32),
         # Robot states: float32, [None, STATE_DIM]
         'states': tfds.features.Tensor(
-            shape=(None, STATES_DIM), dtype=tf.float32)
+            shape=(None, STATES_DIM), dtype=tf.float32),
+        # Filename: Text
+        'filename': tfds.features.Text()
     })
 
     return tfds.core.DatasetInfo(
@@ -184,12 +186,14 @@ class Robonet(tfds.core.BeamBasedBuilder):
         actions = np.pad(
             actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
 
+      basename = os.path.basename(filename)
       features = {
           'video': video_bytes,
           'actions': actions,
           'states': states,
+          'filename': basename,
       }
-      return os.path.basename(filename), features
+      return basename, features
 
     filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
     return (

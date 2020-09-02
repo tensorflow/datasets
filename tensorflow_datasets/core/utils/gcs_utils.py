@@ -31,10 +31,19 @@ GCS_ROOT_DIR = 'gs://tfds-data'
 GCS_DATASET_INFO_DIR = 'dataset_info'
 GCS_DATASETS_DIR = 'datasets'
 
+_is_gcs_disabled = False
 
-# TODO(tfds): On windows, gs:// isn't supported.
-# https://github.com/tensorflow/tensorflow/issues/38477
-_is_gcs_disabled = (os.name == 'nt')
+
+def exists(path: str) -> bool:
+  """Checks if path exists. Returns False if issues occur connecting to GCS."""
+  try:
+    return tf.io.gfile.exists(path)
+  # * UnimplementedError: On windows, gs:// isn't supported.
+  # * FailedPreconditionError: Raised by TF
+  except (tf.errors.UnimplementedError, tf.errors.FailedPreconditionError):
+    # TODO(tfds): Investigate why windows, gs:// isn't supported.
+    # https://github.com/tensorflow/tensorflow/issues/38477
+    return False
 
 
 def gcs_path(suffix: Optional[str] = None) -> str:
@@ -47,9 +56,12 @@ def gcs_path(suffix: Optional[str] = None) -> str:
   Returns:
     path: The GCS uri.
   """
-  path = GCS_ROOT_DIR
-  if suffix:
-    path = posixpath.join(path, suffix)
+  if not suffix:
+    path = GCS_ROOT_DIR
+  elif suffix.startswith('gs://'):  # Path is already a full path
+    path = suffix
+  else:
+    path = posixpath.join(GCS_ROOT_DIR, suffix)
   return path
 
 
@@ -57,7 +69,7 @@ def gcs_path(suffix: Optional[str] = None) -> str:
 def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   """List all files in the given GCS dir (`['dataset/1.0.0/file0', ...]`)."""
   root_dir = gcs_path(dir_name)
-  if _is_gcs_disabled or not tf.io.gfile.exists(root_dir):
+  if _is_gcs_disabled or not exists(root_dir):
     return None
   return [posixpath.join(dir_name, f) for f in tf.io.gfile.listdir(root_dir)]
 
@@ -70,7 +82,7 @@ def gcs_dataset_info_files(dataset_dir: str) -> Optional[List[str]]:
 def is_dataset_on_gcs(dataset_name: str) -> bool:
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
   dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
-  return not _is_gcs_disabled and tf.io.gfile.exists(gcs_path(dir_name))
+  return not _is_gcs_disabled and exists(gcs_path(dir_name))
 
 
 def download_gcs_dataset(

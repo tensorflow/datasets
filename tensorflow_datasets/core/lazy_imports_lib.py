@@ -122,7 +122,10 @@ class LazyImporter(object):
   def skimage(cls):
     _try_import("skimage.color")
     _try_import("skimage.filters")
-    _try_import("skimage.external.tifffile")
+    try:
+      _try_import("skimage.external.tifffile")
+    except ImportError:
+      pass
     return _try_import("skimage")
 
   @utils.classproperty

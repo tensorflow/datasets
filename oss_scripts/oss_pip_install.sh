@@ -35,7 +35,7 @@ python -c "import tensorflow_datasets as tfds"
 python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')"
 
 # Then install the test dependencies
-pip install -e .[tests]
+pip install -e .[tests-all]
 
 if [[ "$TF_VERSION" == "tf-nightly" ]]
 then

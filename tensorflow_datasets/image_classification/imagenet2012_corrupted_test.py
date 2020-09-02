@@ -15,7 +15,6 @@
 
 """Tests for corrupted_imagenet."""
 
-import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import imagenet2012_corrupted
 
@@ -27,7 +26,7 @@ class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
       "fog_5", "brightness_1", "contrast_2", "elastic_transform_3",
       "pixelate_4", "jpeg_compression_5", "gaussian_blur_1", "saturate_2",
       "spatter_3", "speckle_noise_4"
-  ] if six.PY2 else []  # TODO(rsepassi): Re-enable Py3 test (b/129964829)
+  ]
 
   DATASET_CLASS = imagenet2012_corrupted.Imagenet2012Corrupted
   SPLITS = {  # Expected number of examples on the train/validation splits.

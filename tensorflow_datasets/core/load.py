@@ -291,7 +291,7 @@ def load(
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
-      `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `batch_size=-1`,
+      `dict<key: tfds.Split, value: tf.data.Dataset>`. If `batch_size=-1`,
       these will be full datasets as `tf.Tensor`s.
     ds_info: `tfds.core.DatasetInfo`, if `with_info` is True, then `tfds.load`
       will return a tuple `(ds, ds_info)` containing dataset information

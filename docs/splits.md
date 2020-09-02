@@ -107,6 +107,16 @@ trains_ds = tfds.load('mnist', [
     for k in range(0, 100, 10)])
 ```
 
+### `tfds.even_splits`
+
+`tfds.even_splits` generates a list of non-overlapping sub-splits of same size.
+
+```python
+assert tfds.even_splits('train', n=3) == [
+    'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
+]
+```
+
 ### Percentage slicing and rounding
 
 If a slice of a split is requested using the percent (`%`) unit, and the

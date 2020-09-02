@@ -588,13 +588,25 @@ def _read_image(filepath, image_size=None):
     return image
 
 
+def _find_contours(*args, **kwargs):
+  cv2 = tfds.core.lazy_imports.cv2
+  tuple_ = cv2.findContours(*args, **kwargs)
+  if len(tuple_) == 2:  # Recent opencv returns: (contours, hierachy)
+    return tuple_[0]
+  elif len(tuple_) == 3:  # Old opencv returns: (ret, contours, hierachy)
+    return tuple_[1]
+  else:
+    raise AssertionError('Unknown {}')
+
+
 def _get_breast_mask(image, min_breast_color_threshold=0.05):
   """Get the binary mask of the breast region of the image."""
   cv2 = tfds.core.lazy_imports.cv2
   threshold = int(image.max() * min_breast_color_threshold)
   _, image_binary = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
-  _, contours, _ = cv2.findContours(image_binary, cv2.RETR_LIST,
-                                    cv2.CHAIN_APPROX_SIMPLE)
+  contours = _find_contours(
+      image_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
+  )
   contours_areas = [cv2.contourArea(cont) for cont in contours]
   biggest_contour_idx = np.argmax(contours_areas)
   return cv2.drawContours(
@@ -604,8 +616,7 @@ def _get_breast_mask(image, min_breast_color_threshold=0.05):
 
 def _get_roi_from_mask(mask):
   cv2 = tfds.core.lazy_imports.cv2
-  _, contours, _ = cv2.findContours(mask, cv2.RETR_LIST,
-                                    cv2.CHAIN_APPROX_SIMPLE)
+  contours = _find_contours(mask, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
   contours_areas = [cv2.contourArea(cont) for cont in contours]
   biggest_contour_idx = np.argmax(contours_areas)
   return contours[biggest_contour_idx]
