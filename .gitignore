@@ -24,6 +24,3 @@ dist/
 
 # PyCharm
 .idea
-
-# Visual Studio Code
-.vscode

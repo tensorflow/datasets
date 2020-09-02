@@ -19,10 +19,11 @@
     },
     "python.formatting.provider": "yapf",
     "python.testing.pytestArgs": [
+        "tensorflow_datasets",
         "-vv",
         "--continue-on-collection-errors",
-        "--ignore=testing/test_utils.py",
-        "--ignore=scripts/documentation/build_api_docs_test.py"
+        "--ignore=tensorflow_datasets/testing/test_utils.py",
+        "--ignore=tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
     ],
     "files.watcherExclude": {
         "**/.git/**": true,
