@@ -16,7 +16,7 @@
 """Test of `document_datasets.py`."""
 
 # import collections
-import mock
+from unittest import mock
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import document_datasets

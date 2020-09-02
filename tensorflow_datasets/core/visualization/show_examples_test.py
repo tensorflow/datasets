@@ -15,7 +15,7 @@
 
 """Tests for `tensorflow_datasets.core.visualization.show_examples`."""
 
-import mock
+from unittest import mock
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load

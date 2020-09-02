@@ -19,12 +19,14 @@
 
 import base64
 import contextlib
+import functools
 import hashlib
 import io
 import itertools
 import logging
 import os
 import random
+import shutil
 import string
 import sys
 import textwrap
@@ -45,14 +47,6 @@ if sys.version_info >= (3, 9):
 else:
   import importlib_resources
 
-try:  # Use shutil on Python 3.3+
-  from shutil import disk_usage  # pytype: disable=import-error  # pylint: disable=g-importing-member
-except ImportError:
-  from psutil import disk_usage  # pytype: disable=import-error  # pylint: disable=g-importing-member
-if sys.version_info[0] > 2:
-  import functools
-else:
-  import functools32 as functools
 # pylint: enable=g-import-not-at-top
 
 
@@ -431,7 +425,7 @@ def rgetattr(obj, attr, *args):
 
 def has_sufficient_disk_space(needed_bytes, directory='.'):
   try:
-    free_bytes = disk_usage(os.path.abspath(directory)).free
+    free_bytes = shutil.disk_usage(os.path.abspath(directory)).free
   except OSError:
     return True
   return needed_bytes < free_bytes

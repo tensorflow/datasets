@@ -16,7 +16,7 @@
 """Tests for tensorflow_datasets.core.registered."""
 
 import abc
-import mock
+from unittest import mock
 import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load

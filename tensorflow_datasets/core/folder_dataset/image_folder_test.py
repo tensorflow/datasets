@@ -16,7 +16,7 @@
 """Test for ImageFolder."""
 
 import os
-import mock
+from unittest import mock
 
 from tensorflow_datasets.core.folder_dataset import image_folder
 import tensorflow_datasets.public_api as tfds

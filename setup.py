@@ -51,18 +51,12 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
+    'tensorflow',
     'tensorflow-metadata',
     'termcolor',
     'tqdm',
     'wrapt',
-    # Python 2 backports
-    'bz2file;python_version<"3"',
-    'functools32;python_version<"3"',
-    'futures;python_version<"3"',
-    # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
-    'psutil;python_version<"3.3"',
     # Standard library backports
-    'enum34;python_version<"3.4"',
     'dataclasses;python_version<"3.7"',
     'importlib_resources;python_version<"3.9"',
 ]
@@ -72,11 +66,20 @@ TESTS_REQUIRE = [
     'mako',
     'pytest',
     'pytest-xdist',
-    'tensorflow-data-validation',
-    # Python 2 backports
-    'mock;python_version<"3"',
+    # Lazy-deps required by core
+    'pandas',
+    'pydub',
+    'apache_beam',
+    # TFDV is only available for Python 3.6
+    'tensorflow-data-validation;python_version<"3.7"',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
+]
+
+# Additional deps for formatting
+DEV_REQUIRE = [
+    'pylint>=2.5.3',
+    'yapf',
 ]
 
 # Static files needed by datasets.
@@ -124,7 +127,7 @@ DATASET_EXTRAS = {
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
-        'opencv-python==3.4.0.14',
+        'opencv-python',
         'scikit-image',
         'scipy'
     ],
@@ -164,7 +167,8 @@ EXTRAS_REQUIRE = {
 
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
-    'tests': TESTS_REQUIRE + all_dataset_extras,
+    'tests-all': TESTS_REQUIRE + all_dataset_extras,
+    'dev': TESTS_REQUIRE + DEV_REQUIRE,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 

@@ -22,7 +22,7 @@ Our documentation contains:
 * The [API reference](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 
 ```python
-# !pip install tensorflow-datasets tensorflow
+# !pip install tensorflow-datasets
 import tensorflow_datasets as tfds
 import tensorflow as tf
 

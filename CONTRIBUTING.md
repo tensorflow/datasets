@@ -2,25 +2,22 @@
 
 Thanks for thinking about contributing to our library !
 
-
 ## Before you start
 
-* Please accept the [Contributor License Agreement](https://cla.developers.google.com) (see below)
-* Comment on the issue that you plan to work on so we can assign it to you and
-  there isn't unnecessary duplication of work.
-* When you plan to work on something larger (for example, adding new
-  `FeatureConnectors`), please respond on the issue (or create one if there
-  isn't one) to explain your plan and give others a chance to discuss.
-* If you're fixing some smaller issue - please check the list of
+* Comment on the issue that you plan to work on to avoid unnecessary
+  duplication of work.
+* For major updates (for example, adding new `FeatureConnectors`): please
+  respond on the issue (or create one if there isn't one) to explain your plan
+  and give others a chance to discuss.
+* For smaller issues - please check the list of
   [pending Pull Requests](https://github.com/tensorflow/datasets/pulls) to
   avoid unnecessary duplication.
-
 
 ## How you can help:
 
 You can help in multiple ways:
 
-* Adding new datasets and/or requested features (see the [issues](https://github.com/tensorflow/datasets/issues))
+* Helping us fixing [bugs and feature requests](https://github.com/tensorflow/datasets/issues?q=is%3Aopen+is%3Aissue)
 * Reproducing bugs reported by others: This helps us **a lot**.
 * Doing code reviews on the Pull Requests from the community.
 * Verifying that Pull Requests from others are working correctly
@@ -28,17 +25,44 @@ You can help in multiple ways:
 
 ## Setup
 
+### Cloning the repo
+
 If you want to
 [contribute to our repository](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md):
 
 Clone or download the [Tensorflow Datasets](https://github.com/tensorflow/datasets)
 repository and install the repo locally.
 
-```
+```sh
 git clone https://github.com/tensorflow/datasets.git
 cd datasets/
-pip install -e .
 ```
+
+Install the development dependencies:
+
+```sh
+pip install -e .  # Install minimal deps to use tensorflow_datasets
+pip install -e .[dev]  # Install all deps required for development
+```
+
+Note there is also a `pip3 install -e .[tests-all]` to install all
+dataset-specific deps.
+
+### Visual Studio Code
+
+When developing with [Visual Studio Code](https://code.visualstudio.com/),
+our repo comes with some [pre-defined settings](.vscode/settings.json) to
+help development (correct indentation, pylint,...).
+
+Note: enabling test discovery in VS Code may fails due to some VS Code
+bugs [#13301](https://github.com/microsoft/vscode-python/issues/13301) and
+[#6594](https://github.com/microsoft/vscode-python/issues/6594). To solve the
+issues, you can look at the test discovery logs:
+
+* If you are encountering some TensorFlow warning message, try
+  [this fix](https://github.com/microsoft/vscode-python/issues/6594#issuecomment-555680813).
+* If discovery fail due to missing import which should have been installed,
+  please send a PR to update the `dev` pip install.
 
 ## Datasets
 
