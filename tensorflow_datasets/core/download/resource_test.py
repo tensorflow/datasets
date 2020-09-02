@@ -26,8 +26,10 @@ BZIP2 = resource.ExtractMethod.BZIP2
 
 
 class GuessExtractMethodTest(testing.TestCase):
+  """Tests to guess the extraction method."""
 
   def test_(self):
+    """Test if the extraction method correspond to the respective file type."""
     for fname, expected_result in [
         ('bar.tar.gz', TAR_GZ),
         ('bar.gz', GZIP),
@@ -43,6 +45,8 @@ class GuessExtractMethodTest(testing.TestCase):
 
 
 class DlDirNameTest(testing.TestCase):
+  """Tests for the download directory."""
+
   urls = '''\
 http://data.statmt.org/wmt17/translation-task/dev.tgz
 http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz
@@ -77,6 +81,7 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 '''.split('\n')
 
   def test_(self):
+    """Test if the files downloaded correspond to the respective URLs."""
     for url, expected in zip(self.urls, self.expected):
       res = resource.get_dl_dirname(url)
       self.assertEqual(res, expected)

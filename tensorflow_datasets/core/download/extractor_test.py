@@ -34,14 +34,17 @@ TAR_GZ_STREAM = resource_lib.ExtractMethod.TAR_GZ_STREAM
 
 
 def _read(path):
+  """Read from the file."""
   with tf.io.gfile.GFile(path, 'rb') as f:
     return f.read()
 
 
 class ExtractorTest(testing.TestCase):
+  """Tests for extractor.py"""
 
   @classmethod
   def setUpClass(cls):
+    """Set up the class."""
     super(ExtractorTest, cls).setUpClass()
     f1_path = os.path.join(cls.test_data, '6pixels.png')
     f2_path = os.path.join(cls.test_data, 'foo.csv')
@@ -62,10 +65,18 @@ class ExtractorTest(testing.TestCase):
     self.result_path = os.path.join(self.to_path, '6pixels.png')
 
   def test_unknown_method(self):
+    """Test unknown extraction to raise ValueError."""
     with self.assertRaises(ValueError):
       self.extractor.extract('from/path', NO_EXTRACT, 'to/path')
 
   def _test_extract(self, method, archive_name, expected_files):
+    """Test extraction.
+
+    Args:
+      method: Extraction method.
+      archive_name: Name of the archived file to extract.
+      expected_files: Files expected to be extracted.
+    """
     from_path = os.path.join(self.test_data, 'archives', archive_name)
     self.extractor.extract(from_path, method, self.to_path).get()
     for name, content in expected_files.items():
@@ -73,37 +84,44 @@ class ExtractorTest(testing.TestCase):
       self.assertEqual(_read(path), content, 'File %s has bad content.' % path)
 
   def test_zip(self):
+    """Test extracting a .zip file."""
     self._test_extract(
         ZIP, 'arch1.zip',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_tar(self):
+    """Test extracting a .tar file."""
     self._test_extract(
         TAR, 'arch1.tar',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_targz(self):
+    """Test extracting a .tar.gz file."""
     self._test_extract(
         TAR_GZ, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_tar_stream(self):
+    """Test extracting a .tar file using the stream."""
     self._test_extract(
         TAR_STREAM, 'arch1.tar',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_targz_stream(self):
+    """Test extracting a .zip file using the stream."""
     self._test_extract(
         TAR_GZ_STREAM, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_gzip(self):
+    """Test extracting a .tar.gz archive."""
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
     self.extractor.extract(from_path, GZIP, self.to_path).get()
     arch1_path = os.path.join(self.test_data, 'archives', 'arch1.tar')
     self.assertEqual(_read(self.to_path), _read(arch1_path))
 
   def test_gzip2(self):
+    """Test extracting a .gz archive."""
     # Same as previous test, except it is not a .tar.gz, but a .gz.
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
     self.extractor.extract(from_path, GZIP, self.to_path).get()
@@ -111,16 +129,19 @@ class ExtractorTest(testing.TestCase):
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_bzip2(self):
+    """Test extracting a .bz2 archive."""
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.bz2')
     self.extractor.extract(from_path, BZIP2, self.to_path).get()
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_absolute_path(self):
+    """Test extracting using the absolute path."""
     # There is a file with absolute path (ignored) + a file named "foo".
     self._test_extract(TAR, 'absolute_path.tar', {'foo': b'bar\n'})
 
   def test_wrong_method(self):
+    """Test extracting file using a wrong extraction method."""
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
     promise = self.extractor.extract(from_path, ZIP, self.to_path)
     expected_msg = 'File is not a zip file'

@@ -41,10 +41,19 @@ Response = Union[requests.Response, urllib.response.addinfourl]
 
 @utils.memoize()
 def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
+  """Returns the _Downloader object."""
   return _Downloader(*args, **kwargs)
 
 
 def _get_filename(response: Response) -> str:
+  """Returns the file name given the response:
+
+  Args:
+    response: HTTP request response.
+
+  Returns:
+    File name.
+  """
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
     match = re.findall('filename="(.+?)"', content_disposition)
@@ -54,6 +63,7 @@ def _get_filename(response: Response) -> str:
 
 
 class DownloadError(Exception):
+  """Exception class for download errors."""
   pass
 
 
@@ -104,6 +114,15 @@ class _Downloader(object):
 
   def _sync_file_copy(
       self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
+    """Copy files from source to destination.
+
+    Args:
+      filepath: Source path.
+      destination_path: Destination path.
+
+    Returns:
+      Url checksum.
+    """
     out_path = os.path.join(destination_path, os.path.basename(filepath))
     tf.io.gfile.copy(filepath, out_path)
     hexdigest, size = utils.read_checksum_digest(
@@ -171,7 +190,7 @@ def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
 
   Returns:
     response: The url response with `.url` and `.header` attributes.
-    iter_content: A `bytes` iterator which yield the content.
+    iter_content: A `bytes` iterator which yields the content.
   """
   # Download FTP urls with `urllib`, otherwise use `requests`
   open_fn = _open_with_urllib if url.startswith('ftp') else _open_with_requests
@@ -180,6 +199,14 @@ def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
 
 @contextlib.contextmanager
 def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  """Open url using the requests package.
+
+  Args:
+    url: Url to open.
+
+  Returns:
+    Iterator[Tuple[Response, Iterable[bytes]]]
+  """
   with requests.Session() as session:
     if _DRIVE_URL.match(url):
       url = _get_drive_url(url, session)
@@ -190,6 +217,14 @@ def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
 
 @contextlib.contextmanager
 def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  """Open url using the urllib package.
+
+  Args:
+    url: Url to open.
+
+  Returns:
+    Iterator[Tuple[Response, Iterable[bytes]]]
+  """
   with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
     yield (
         response,
@@ -198,7 +233,15 @@ def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
 
 
 def _get_drive_url(url: str, session: requests.Session) -> str:
-  """Returns url, possibly with confirmation token."""
+  """Returns the drive url, possibly with confirmation token.
+
+  Args:
+    url: Drive url.
+    session: Requests Session object.
+
+  Returns:
+    Drive url.
+  """
   with session.get(url, stream=True) as response:
     _assert_status(response)
     for k, v in response.cookies.items():
@@ -209,7 +252,14 @@ def _get_drive_url(url: str, session: requests.Session) -> str:
 
 
 def _assert_status(response: requests.Response) -> None:
-  """Ensure the URL response is 200."""
+  """Ensure the URL response is 200.
+
+  Args:
+    response: Requests Response object.
+
+  Raises:
+    DownloadError: If the response code is not 200.
+  """
   if response.status_code != 200:
     raise DownloadError('Failed to get url {}. HTTP code: {}.'.format(
         response.url, response.status_code))

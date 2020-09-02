@@ -99,9 +99,15 @@ def add_checksums_dir(checksums_dir: str) -> None:
 
 
 def _list_dir(path: str) -> List[str]:
+  """Returns a list of entries contained within the given directory.
+
+  Args:
+    path: Path to the directory.
+
+  Returns:
+    List of entries contained within the given directory.
+  """
   return tf.io.gfile.listdir(path)
-
-
 
 
 @utils.memoize()
@@ -119,7 +125,14 @@ def _checksum_paths() -> Dict[str, str]:
 
 
 def _get_path(dataset_name: str) -> str:
-  """Returns path to where checksums are stored for a given dataset."""
+  """Returns path to where checksums are stored for a given dataset.
+
+  Args:
+    dataset_name: Name of the dataset.
+
+  Returns:
+    Path to where the checksums for the given dataset are stored.
+  """
   path = _checksum_paths().get(dataset_name, None)
   if path:
     return path
@@ -137,14 +150,28 @@ def _get_path(dataset_name: str) -> str:
 
 
 def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within file at given path."""
+  """Returns {URL: (size, checksum)}s stored within file at given path.
+
+  Args:
+    checksums_path: Path to the checksums.
+
+  Returns:
+    Dict mapping the URLs to their corresponding UrlInfos.
+  """
   with tf.io.gfile.GFile(checksums_path) as f:
     content = f.read()
   return parse_url_infos(content.splitlines())
 
 
 def parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within given file."""
+  """Returns {URL: (size, checksum)}s stored within given file.
+
+  Args:
+    checksums_file: List of checksums.
+
+  Returns:
+    Dict mapping URLs to their corresponding UrlInfos.
+  """
   url_infos = {}
   for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.

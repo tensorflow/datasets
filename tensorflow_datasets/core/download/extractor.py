@@ -42,6 +42,7 @@ else:
 
 @utils.memoize()
 def get_extractor(*args, **kwargs):
+  """Returns an _Extractor object."""
   return _Extractor(*args, **kwargs)
 
 
@@ -54,7 +55,11 @@ class UnsafeArchiveError(Exception):
 
 
 class _Extractor(object):
-  """Singleton (use `get_extractor()` module fct) to extract archives."""
+  """Singleton (use `get_extractor()` module fct) to extract archives.
+
+  Attributes:
+    max_workers: Max number of processes that are executed asynchronously.
+  """
 
   def __init__(self, max_workers=12):
     self._executor = concurrent.futures.ThreadPoolExecutor(
@@ -70,7 +75,16 @@ class _Extractor(object):
       yield
 
   def extract(self, path, extract_method, to_path):
-    """Returns `promise.Promise` => to_path."""
+    """Returns `promise.Promise` => to_path.
+
+    Args:
+      path: Path to the file to extract from.
+      extract_method: Extraction method.
+      to_path: Path to where the file is to be extracted.
+
+    Returns:
+      The resolved promise.
+    """
     self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
@@ -79,7 +93,19 @@ class _Extractor(object):
     return promise.Promise.resolve(future)
 
   def _sync_extract(self, from_path, method, to_path):
-    """Returns `to_path` once resource has been extracted there."""
+    """Returns `to_path` once resource has been extracted there.
+
+    Args:
+      from_path: The path to the file to be extracted.
+      method: Extraction method.
+      to_path: Path to where the file is to be extracted.
+
+    Returns:
+      Path to where the file was extracted.
+
+    Raise:
+      ExtractError: If path length > 260 on windows.
+    """
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     path = None
@@ -111,7 +137,12 @@ class _Extractor(object):
 
 
 def _copy(src_file, dest_path):
-  """Copy data read from src file obj to new file in dest_path."""
+  """Copy data read from src file obj to new file in dest_path.
+
+  Args:
+    src_file: Source file object.
+    dest_path: Path to copy the source file to.
+  """
   tf.io.gfile.makedirs(os.path.dirname(dest_path))
   with tf.io.gfile.GFile(dest_path, 'wb') as dest_file:
     while True:
@@ -122,6 +153,7 @@ def _copy(src_file, dest_path):
 
 
 def _normpath(path):
+  """Returns the normalized path name."""
   path = os.path.normpath(path)
   if (path.startswith('.')
       or os.path.isabs(path)
@@ -133,6 +165,14 @@ def _normpath(path):
 
 @contextlib.contextmanager
 def _open_or_pass(path_or_fobj):
+  """Yields the file object given the path or the file object.
+
+  Args:
+    path_or_fobj: Path to the file or the file object.
+
+  Yields:
+    File object.
+  """
   if isinstance(path_or_fobj, six.string_types):
     with tf.io.gfile.GFile(path_or_fobj, 'rb') as f_obj:
       yield f_obj
@@ -170,23 +210,54 @@ def iter_tar(arch_f, stream=False):
 
 
 def iter_tar_stream(arch_f):
+  """Iterates over the tar file object stream.
+
+  Args:
+    arch_f: File object of the archive to iterate.
+
+  Yields:
+    (filepath, extracted_fobj) for each file in the archive.
+  """
   return iter_tar(arch_f, stream=True)
 
 
 def iter_gzip(arch_f):
+  """Iterates over the zipped file using gzip.
+
+  Args:
+    arch_f: File object of the archive to iterate.
+
+  Yields:
+    GzipFile object.
+  """
   with _open_or_pass(arch_f) as fobj:
     gzip_ = gzip.GzipFile(fileobj=fobj)
     yield ('', gzip_)  # No inner file.
 
 
 def iter_bzip2(arch_f):
+  """Iterates over the zipped file using bz2.
+
+  Args:
+    arch_f: File object of the archive to iterate.
+
+  Yields:
+    BZ2File object.
+  """
   with _open_or_pass(arch_f) as fobj:
     bz2_ = bz2.BZ2File(filename=fobj)
     yield ('', bz2_)  # No inner file.
 
 
 def iter_zip(arch_f):
-  """Iterate over zip archive."""
+  """Iterate over zip archive.
+
+  Args:
+    arch_f: File object of the archive to iterate.
+
+  Yields:
+    (filepath, extracted_fobj) for each file in the archive.
+  """
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():

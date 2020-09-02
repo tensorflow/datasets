@@ -28,7 +28,15 @@ from tensorflow_datasets.core.download import resource as resource_lib
 
 
 class _FakeResponse(object):
+  """URL response used for testing.
 
+  Attributes:
+    url: URL response URL.
+    content: URL response content.
+    cookies: URL response cookies.
+    headers: URL response header.
+    status_code: URL response status code.
+  """
   def __init__(self, url, content, cookies=None, headers=None, status_code=200):
     self.url = url
     self.raw = io.BytesIO(content)
@@ -45,12 +53,14 @@ class _FakeResponse(object):
     return
 
   def iter_content(self, chunk_size):
+    """Iterate over the content of URL response."""
     del chunk_size
     for line in self.raw:
       yield line
 
 
 class DownloaderTest(testing.TestCase):
+  """Tests for downloader.py."""
 
   def setUp(self):
     super(DownloaderTest, self).setUp()
@@ -78,6 +88,7 @@ class DownloaderTest(testing.TestCase):
     ).start()
 
   def test_ok(self):
+    """Test download from URL."""
     promise = self.downloader.download(self.url, self.tmp_dir)
     url_info = promise.get()
     self.assertEqual(url_info.checksum, self.resp_checksum)
@@ -86,6 +97,7 @@ class DownloaderTest(testing.TestCase):
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive_no_cookies(self):
+    """Test download from Google Drive without cookies."""
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
     url_info = promise.get()
@@ -95,10 +107,12 @@ class DownloaderTest(testing.TestCase):
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive(self):
+    """Test download from Google Drive with cookies."""
     self.cookies = {'foo': 'bar', 'download_warning_a': 'token', 'a': 'b'}
     self.test_drive_no_cookies()
 
   def test_http_error(self):
+    """Test HTTP file serving error."""
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
     absltest.mock.patch.object(
         downloader.requests.Session, 'get', side_effect=error).start()
@@ -107,6 +121,7 @@ class DownloaderTest(testing.TestCase):
       promise.get()
 
   def test_bad_http_status(self):
+    """Test 404 HTTP status."""
     absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
@@ -117,6 +132,7 @@ class DownloaderTest(testing.TestCase):
       promise.get()
 
   def test_ftp(self):
+    """Test download over FTP."""
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
     url_info = promise.get()
@@ -126,6 +142,7 @@ class DownloaderTest(testing.TestCase):
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_ftp_error(self):
+    """Test download error over FTP."""
     error = downloader.urllib.error.URLError('Problem serving file.')
     absltest.mock.patch.object(
         downloader.urllib.request,
@@ -139,13 +156,16 @@ class DownloaderTest(testing.TestCase):
 
 
 class GetFilenameTest(testing.TestCase):
+  """Tests to obtain file names."""
 
   def test_no_headers(self):
+    """Test file name obtained from URL response."""
     resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
     res = downloader._get_filename(resp)
     self.assertEqual(res, 'baz.zip')
 
   def test_headers(self):
+    """Test file name obtained from URL response using headers."""
     cdisp = ('attachment;filename="hello.zip";'
              'filename*=UTF-8\'\'hello.zip')
     resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers={

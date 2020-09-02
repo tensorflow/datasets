@@ -23,8 +23,10 @@ from tensorflow_datasets.core.download import kaggle
 
 
 class KaggleTest(testing.TestCase):
+  """Tests for kaggle.py"""
 
   def test_competition_download(self):
+    """Test downloading a kaggle competition."""
     with testing.mock_kaggle_api():
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.download_kaggle_data('digit-recognizer', tmp_dir)
@@ -33,6 +35,7 @@ class KaggleTest(testing.TestCase):
           self.assertEqual('digit-recognizer', f.read())
 
   def test_dataset_download(self):
+    """Test downloading a kaggle dataset."""
     with testing.mock_kaggle_api():
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.download_kaggle_data('user/dataset', tmp_dir)
@@ -41,6 +44,7 @@ class KaggleTest(testing.TestCase):
           self.assertEqual('user/dataset', f.read())
 
   def test_competition_download_404(self):
+    """Test 404 - Not found error using non-existent kaggle competition name."""
     with testing.mock_kaggle_api(err_msg='404 - Not found'):
       with testing.tmp_dir() as tmp_dir:
         with self.assertRaisesRegex(
@@ -48,6 +52,7 @@ class KaggleTest(testing.TestCase):
           kaggle.download_kaggle_data('digit-recognize', tmp_dir)
 
   def test_kaggle_type(self):
+    """Test whether the determined kaggle types are correct."""
     self.assertEqual(
         kaggle._get_kaggle_type('digit-recognizer'), 'competitions'
     )
