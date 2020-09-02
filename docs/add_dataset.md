@@ -529,13 +529,12 @@ Follow the [PEP 8 Python style guide](https://www.python.org/dev/peps/pep-0008),
 except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
-Most importantly, use
-[`./oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh)
+Most importantly, use `pylint`
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
 ```sh
-./oss_scripts/lint.sh tensorflow_datasets/image
+pylint tensorflow_datasets/image
 ```
 
 See
