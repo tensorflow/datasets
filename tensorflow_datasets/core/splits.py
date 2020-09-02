@@ -259,7 +259,7 @@ def even_splits(
 
   ```python
   assert tfds.even_splits('train', n=3) == [
-      'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]
+      'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
   ]
   ```
 
