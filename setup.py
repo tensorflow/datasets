@@ -55,7 +55,6 @@ REQUIRED_PKGS = [
     'tensorflow-metadata',
     'termcolor',
     'tqdm',
-    'wrapt',
     # Standard library backports
     'dataclasses;python_version<"3.7"',
     'importlib_resources;python_version<"3.9"',

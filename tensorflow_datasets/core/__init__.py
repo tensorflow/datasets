@@ -20,7 +20,7 @@
 from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
-from tensorflow_datasets.core.api_utils import disallow_positional_args  # pylint:disable=g-import-not-at-top
+# pylint:disable=g-import-not-at-top
 
 from tensorflow_datasets.core.constants import add_data_dir
 
@@ -59,7 +59,6 @@ __all__ = [
     "BuilderConfig",
     "DatasetBuilder",
     "DatasetInfo",
-    "disallow_positional_args",
     "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",
