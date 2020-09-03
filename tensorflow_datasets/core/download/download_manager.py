@@ -18,7 +18,7 @@
 import concurrent.futures
 import hashlib
 import os
-from typing import Optional, Union
+from typing import Dict, Optional, Union
 import uuid
 
 from absl import logging
@@ -169,7 +169,7 @@ class DownloadManager(object):
       extract_dir: Optional[str] = None,
       manual_dir: Optional[str] = None,
       manual_dir_instructions: Optional[str] = None,
-      checksums_path: Optional[str] = None,
+      url_infos: Optional[Dict[str, checksums.UrlInfo]] = None,
       dataset_name: Optional[str] = None,
       force_download: bool = False,
       force_extraction: bool = False,
@@ -184,7 +184,7 @@ class DownloadManager(object):
       manual_dir: Path to manually downloaded/extracted data directory.
       manual_dir_instructions: Human readable instructions on how to
         prepare contents of the manual_dir for this dataset.
-      checksums_path: Path to the checksums file.
+      url_infos: Urls info for the checksums.
       dataset_name: Name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
       force_download: If True, always [re]download.
@@ -207,11 +207,10 @@ class DownloadManager(object):
     self._force_checksums_validation = force_checksums_validation
     self._register_checksums = register_checksums
 
-    # All known URLs: {url: (size, checksum)}
+    # All known URLs: {url: UrlInfo(size=, checksum=)}
     self._url_infos = checksums.get_all_url_infos()
-    if checksums_path:
-      with tf.io.gfile.GFile(checksums_path) as f:
-        self._url_infos.update(checksums.parse_url_infos(f.read().splitlines()))
+    if url_infos is not None:
+      self._url_infos.update(url_infos)
 
     # To record what is being used: {url: (size, checksum)}
     self._recorded_url_infos = {}
@@ -417,8 +416,7 @@ class DownloadManager(object):
   def download_checksums(self, checksums_url):
     """Downloads checksum file from the given URL and adds it to registry."""
     checksums_path = self.download(checksums_url)
-    with tf.io.gfile.GFile(checksums_path) as f:
-      self._url_infos.update(checksums.parse_url_infos(f))
+    self._url_infos.update(checksums.url_infos_from_path(checksums_path))
 
   # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.

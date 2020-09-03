@@ -140,10 +140,10 @@ def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
   """Returns {URL: (size, checksum)}s stored within file at given path."""
   with tf.io.gfile.GFile(checksums_path) as f:
     content = f.read()
-  return parse_url_infos(content.splitlines())
+  return _parse_url_infos(content.splitlines())
 
 
-def parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
+def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
   """Returns {URL: (size, checksum)}s stored within given file."""
   url_infos = {}
   for line in checksums_file:
@@ -154,6 +154,11 @@ def parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
     url, size, checksum = line.rsplit(' ', 2)
     url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
   return url_infos
+
+
+def url_infos_from_path(checksums_path: str) -> Dict[str, UrlInfo]:
+  with tf.io.gfile.GFile(checksums_path) as f:
+    return _parse_url_infos(f.read().splitlines())
 
 
 @utils.memoize()
