@@ -31,10 +31,9 @@ from absl import flags
 from absl import app
 from termcolor import colored
 
+import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import constants
-
-import tensorflow as tf
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string("data_dir",
@@ -73,15 +72,15 @@ def get_datasets(data_dir, current_full_names):
       rogue_datasets.append(dataset)
 
   #Removing other folders
-  for d in exclude:
-    if d in rogue_datasets:
-      rogue_datasets.remove(d)
+  for dataset in exclude:
+    if dataset in rogue_datasets:
+      rogue_datasets.remove(dataset)
 
   #Finding all installed datasets
   for root,dirs,_ in tf.io.gfile.walk(data_dir, topdown=True):
     #Excluding the downloads directory and the rogue datasets
-    dirs[:] = [d for d in dirs if d not in exclude]
-    dirs[:] = [d for d in dirs if d not in rogue_datasets]
+    dirs[:] = [dataset for dataset in dirs if dataset not in exclude]
+    dirs[:] = [dataset for dataset in dirs if dataset not in rogue_datasets]
     if dirs==[]:
       installed_datasets.append(
         os.path.normpath(os.path.relpath(root, data_dir)))
@@ -102,7 +101,7 @@ def delete_old_versions(data_dir, skip_confirmation=False):
   """
   Detects and deletes the old/non-existing versions of the datasets
   """
-  #Get the latest dataset versions and configs alog with the locally installed datasets
+  #Get the datasets to keep and to delete
   dirs_to_keep, dirs_to_delete = get_datasets(
     data_dir,
     current_full_names=tfds.core.load.list_full_names(
@@ -110,7 +109,7 @@ def delete_old_versions(data_dir, skip_confirmation=False):
       )
     )
   all_dirs = [
-    colored(d, attrs=['bold']) if d in dirs_to_keep else d
+    colored(d, attrs=["bold"]) if d in dirs_to_keep else d
     for d in sorted(dirs_to_keep + dirs_to_delete)]
 
   #User preview

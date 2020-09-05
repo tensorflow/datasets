@@ -24,44 +24,44 @@ def test_delete_script(tmp_path: pathlib.PurePath):
   examples and checking for the desired result"""
 
   for dataset_dir in [
-    'dataset/config/1.0.0',
-    'my_dataset/1.0.0',
-    'my_dataset/1.2.0',
-    'my_dataset/1.3.0',
-    'my_other_dataset/config/1.2.0',
-    'my_other_dataset/config/1.3.0',
-    'my_other_dataset/other_config/1.2.0',
-    'my_other_dataset/other_config/1.3.0',
-    'old_dataset',
+    "dataset/config/1.0.0",
+    "my_dataset/1.0.0",
+    "my_dataset/1.2.0",
+    "my_dataset/1.3.0",
+    "my_other_dataset/config/1.2.0",
+    "my_other_dataset/config/1.3.0",
+    "my_other_dataset/other_config/1.2.0",
+    "my_other_dataset/other_config/1.3.0",
+    "old_dataset",
   ]:
     tmp_path.joinpath(dataset_dir).mkdir(parents=True)
 
   dir_to_keep, dir_to_delete = delete_old_versions.get_datasets(
       data_dir=str(tmp_path),
       current_full_names=[
-            'dataset/config/1.0.0',
-            'my_dataset/1.3.0',
-            'my_other_dataset/config/1.3.0',
-            'my_other_dataset/other_config/1.3.0',
-            'another_dataset/config/1.2.0',
-            'another_dataset/other_config/1.1.0',
+            "dataset/config/1.0.0",
+            "my_dataset/1.3.0",
+            "my_other_dataset/config/1.3.0",
+            "my_other_dataset/other_config/1.3.0",
+            "another_dataset/config/1.2.0",
+            "another_dataset/other_config/1.1.0",
       ],
   )
   assert dir_to_keep == [ os.path.normpath(name) for name in
       [
-      'dataset/config/1.0.0',
-      'my_dataset/1.3.0',
-      'my_other_dataset/config/1.3.0',
-      'my_other_dataset/other_config/1.3.0',
+      "dataset/config/1.0.0",
+      "my_dataset/1.3.0",
+      "my_other_dataset/config/1.3.0",
+      "my_other_dataset/other_config/1.3.0",
       ]
   ]
   assert dir_to_delete == [ os.path.normpath(name) for name in
       [
-      'my_dataset/1.0.0',
-      'my_dataset/1.2.0',
-      'my_other_dataset/config/1.2.0',
-      'my_other_dataset/other_config/1.2.0',
-      'old_dataset',
+      "my_dataset/1.0.0",
+      "my_dataset/1.2.0",
+      "my_other_dataset/config/1.2.0",
+      "my_other_dataset/other_config/1.2.0",
+      "old_dataset",
       ]
   ]
 
