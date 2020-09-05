@@ -24,7 +24,8 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
+from tensorflow import compat
 
 import tensorflow_datasets.public_api as tfds
 
@@ -89,17 +90,17 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filedir):
     logging.info("Reading data from %s.", filedir)
-    files = tf.io.gfile.listdir(filedir)
+    files = compat.v2.io.gfile.listdir(filedir)
     logging.info("%d files found.", len(files))
 
     # For each file
-    for filename in sorted(tf.io.gfile.listdir(filedir)):
+    for filename in sorted(compat.v2.io.gfile.listdir(filedir)):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file
       for video_id, example_str in enumerate(
-          tf.compat.v1.io.tf_record_iterator(filepath)):
-        example = tf.train.SequenceExample.FromString(example_str)
+          compat.v1.io.tf_record_iterator(filepath)):
+        example = compat.v2.train.SequenceExample.FromString(example_str)
 
         # Merge all frames together
         all_frames = []
