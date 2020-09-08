@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+/!\ IF YOU WANT PEOPLE TO HELP YOU, PLEASE GIVE AS MUCH DETAIL AS POSSIBLE, INCLUDING THE FULL STACKTRACE AND CODE SNIPPET
+
 **Short description**
 Description of the bug.
 
