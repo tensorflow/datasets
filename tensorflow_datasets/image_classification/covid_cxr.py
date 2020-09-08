@@ -1,3 +1,18 @@
+  
+# coding=utf-8
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """covid_cxr dataset."""
 
 import tensorflow_datasets.public_api as tfds
@@ -15,10 +30,10 @@ _DESCRIPTION = """Dataset with radiography images belonging to three different c
                     
 """
 
-_TRAIN_URL = 'https://drive.google.com/uc?export=download&id=158PjWZiOZ-0ueDdtmMEn9eTsKCDb0Pbv'
+_TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
 _TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
 
-_IMAGE_SHAPE = (1024, 1024)
+_IMAGE_SHAPE = (512, 512, 3)
 
 class CovidCxr(tfds.core.GeneratorBasedBuilder):
   """TODO(covid_cxr): Short description of my dataset."""
@@ -34,7 +49,7 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=None, dtype=None, encoding_format='png'),
+            "image": tfds.features.Image(shape=_IMAGE_SHAPE, dtype='uint8', encoding_format='png'),
             "label": tfds.features.ClassLabel(
                 names=["COVID-19", "normal", "pneumonia"]),
             # These are the features of your dataset like images, labels ...
