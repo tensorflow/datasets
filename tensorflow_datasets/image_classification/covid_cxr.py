@@ -1,4 +1,3 @@
-  
 # coding=utf-8
 # Copyright 2020 The TensorFlow Datasets Authors.
 #
@@ -13,6 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 """covid_cxr dataset."""
 
 import tensorflow_datasets.public_api as tfds
