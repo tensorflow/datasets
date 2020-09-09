@@ -435,8 +435,11 @@ def _iter_full_names(
       yield full_name
 
 
+_DEFAULT_PREDICATE_FN = None
+
+
 def list_full_names(
-    predicate_fn: Optional[PredicateFn] = None,
+    predicate_fn: Optional[PredicateFn] = _DEFAULT_PREDICATE_FN,
     current_version_only: bool = False,
 ) -> List[str]:
   """Lists all registered datasets full_names.

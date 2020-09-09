@@ -15,9 +15,13 @@
 
 """Typing annotation utils."""
 
+import os
 from typing import Dict, List, Tuple, TypeVar, Union
 
 import tensorflow as tf
+
+# Accept both `str` and `pathlib.Path`-like
+PathLike = Union[str, os.PathLike]
 
 T = TypeVar('T')
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
