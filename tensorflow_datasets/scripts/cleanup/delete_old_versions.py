@@ -117,7 +117,7 @@ def _extract_dirs_to_delete(
     )
 
   # Compute the list of dirs to keep and delete.
-  all_files = set(tf.io.gfile.listdir(curr_dir))
+  all_files = set(tf.io.gfile.listdir(str(curr_dir)))
   all_dirs_to_keep = set(curr_tree)
   dirs_to_delete = all_files - all_dirs_to_keep - DIRS_TO_KEEP
   dirs_to_maybe_keep = all_files & all_dirs_to_keep
@@ -248,7 +248,7 @@ def delete_old_versions(
 
   for path in dirs_to_delete:
     print(f'Delete: {path}')
-    tf.io.gfile.rmtree(path)
+    tf.io.gfile.rmtree(str(path))
   print('Add directories have been deleted!')
 
 
