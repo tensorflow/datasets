@@ -44,6 +44,7 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
@@ -321,9 +322,9 @@ class DatasetInfo(object):
 
   def write_to_directory(self, dataset_info_dir):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
-    # Save the metadata from the features (vocabulary, labels,...)
+    # Save the features structure & metadata (vocabulary, labels,...)
     if self.features:
-      self.features.save_metadata(dataset_info_dir)
+      self.features.save_config(dataset_info_dir)
 
     # Save any additional metadata
     if self.metadata is not None:
@@ -365,7 +366,11 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
-
+    # For `ReadOnlyBuilder`, reconstruct the features from the config.
+    elif tf.io.gfile.exists(feature_lib.make_config_path(dataset_info_dir)):
+      self._features = feature_lib.FeatureConnector.from_config(
+          dataset_info_dir
+      )
     if self.metadata is not None:
       self.metadata.load_metadata(dataset_info_dir)
 

@@ -300,7 +300,7 @@ class FeatureConnector(object):
     Args:
       root_dir: `path/to/dir` containing the `features.json`
     """
-    with tf.io.gfile.GFile(_make_config_path(root_dir), 'w') as f:
+    with tf.io.gfile.GFile(make_config_path(root_dir), 'w') as f:
       f.write(json.dumps(self.to_json(), indent=4))
     self.save_metadata(root_dir, feature_name=None)
 
@@ -320,7 +320,7 @@ class FeatureConnector(object):
     Returns:
       The reconstructed feature instance.
     """
-    with tf.io.gfile.GFile(_make_config_path(root_dir)) as f:
+    with tf.io.gfile.GFile(make_config_path(root_dir)) as f:
       feature = FeatureConnector.from_json(json.loads(f.read()))
     feature.load_metadata(root_dir, feature_name=None)
     return feature
@@ -692,7 +692,7 @@ class Tensor(FeatureConnector):
     }
 
 
-def _make_config_path(root_dir: str) -> str:
+def make_config_path(root_dir: str) -> str:
   """Returns the path to the features config."""
   return os.path.join(root_dir, 'features.json')
 

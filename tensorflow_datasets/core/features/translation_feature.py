@@ -100,11 +100,20 @@ class Translation(features_dict.FeaturesDict):
 
   @classmethod
   def from_json_content(cls, value: Json) -> "Translation":
+    if "use_encoder" in value:
+      raise ValueError(
+          "TFDS does not support datasets with Encoder. Please use the plain "
+          "text version with `tensorflow_text`."
+      )
     return cls(**value)
 
   def to_json_content(self) -> Json:
     if self._encoder or self._encoder_config:
-      raise ValueError("Encoder and Encoder Config should None")
+      print(
+          "WARNING: TFDS encoder are deprecated and will be removed soon. "
+          "Please use `tensorflow_text` instead with the plain text dataset."
+      )
+      return {"languages": self.languages, "use_encoder": True}
     return {"languages": self.languages}
 
 

@@ -180,10 +180,20 @@ class Text(feature.Tensor):
 
   @classmethod
   def from_json_content(cls, value: Json) -> "Text":
+    if "use_encoder" in value:
+      raise ValueError(
+          "Deprecated encoder not supported. Please use the plain text version "
+          "with `tensorflow_text`."
+      )
     del value  # Unused
     return cls()
 
   def to_json_content(self) -> Json:
     if self._encoder or self._encoder_config:
-      raise ValueError("Encoder and Encoder Config should None")
+      logging.warning(
+          "Dataset is using deprecated text encoder API which will be removed "
+          "soon. Please use the plain_text version of the dataset and migrate "
+          "to `tensorflow_text`."
+      )
+      return dict(use_encoder=True)
     return dict()

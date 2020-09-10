@@ -181,11 +181,6 @@ class DatasetBuilder(registered.RegisteredDataset):
     # To do the work:
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
-    if not self._builder_config and not self.VERSION:
-      raise AssertionError(
-          "DatasetBuilder {} does not have a defined version. Please add a "
-          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
-              self.name))
     self._version = self._pick_version(version)
     # Compute the base directory (for download) and dataset/version directory.
     self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)
@@ -230,6 +225,12 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _pick_version(self, requested_version):
     """Returns utils.Version instance, or raise AssertionError."""
+    if not self._builder_config and not self.VERSION:
+      raise AssertionError(
+          "DatasetBuilder {} does not have a defined version. Please add a "
+          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
+              self.name))
+
     if requested_version == "experimental_latest":
       return max(self.versions)
     for version in self.versions:
@@ -868,8 +869,15 @@ def _list_all_version_dirs(root_dir):
   ]
 
 
-class FileAdapterBuilder(DatasetBuilder):
-  """Base class for datasets with data generation based on file adapter."""
+class FileReaderBuilder(DatasetBuilder):
+  """Base class for datasets reading files.
+
+  Subclasses are:
+
+   * `FileAdapterBuilder`: Can both generate and read generated dataset.
+   * `ReadOnlyBuilder`: Can only read pre-generated datasets.
+
+  """
 
   @utils.memoized_property
   def _example_specs(self):
@@ -878,6 +886,28 @@ class FileAdapterBuilder(DatasetBuilder):
   @property
   def _tfrecords_reader(self):
     return tfrecords_reader.Reader(self._data_dir, self._example_specs)
+
+  def _as_dataset(
+      self,
+      split=splits_lib.Split.TRAIN,
+      decoders=None,
+      read_config=None,
+      shuffle_files=False):
+    ds = self._tfrecords_reader.read(
+        name=self.name,
+        instructions=split,
+        split_infos=self.info.splits.values(),
+        read_config=read_config,
+        shuffle_files=shuffle_files,
+    )
+    decode_fn = functools.partial(
+        self.info.features.decode_example, decoders=decoders)
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    return ds
+
+
+class FileAdapterBuilder(FileReaderBuilder):
+  """Base class for datasets with data generation based on file adapter."""
 
   @abc.abstractmethod
   def _split_generators(self, dl_manager):
@@ -966,24 +996,6 @@ class FileAdapterBuilder(DatasetBuilder):
 
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
-
-  def _as_dataset(
-      self,
-      split=splits_lib.Split.TRAIN,
-      decoders=None,
-      read_config=None,
-      shuffle_files=False):
-    ds = self._tfrecords_reader.read(
-        name=self.name,
-        instructions=split,
-        split_infos=self.info.splits.values(),
-        read_config=read_config,
-        shuffle_files=shuffle_files,
-    )
-    decode_fn = functools.partial(
-        self.info.features.decode_example, decoders=decoders)
-    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-    return ds
 
 
 class GeneratorBasedBuilder(FileAdapterBuilder):
