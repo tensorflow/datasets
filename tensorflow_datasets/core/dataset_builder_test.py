@@ -17,6 +17,7 @@
 
 import os
 import tempfile
+from unittest import mock
 
 from absl.testing import absltest
 import dill
@@ -453,6 +454,22 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
         self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
     self.assertBuildDataDir(
         self.builder._build_data_dir(self.other_data_dir), self.other_data_dir)
+
+  def test_load_data_dir(self):
+    """Ensure that `tfds.load` also supports multiple data_dir."""
+    constants.add_data_dir(self.other_data_dir)
+
+    class MultiDirDataset(DummyDatasetSharedGenerator):  # pylint: disable=unused-variable
+      VERSION = utils.Version("1.2.0")
+
+    data_dir = os.path.join(
+        self.other_data_dir, "multi_dir_dataset", "1.2.0"
+    )
+    tf.io.gfile.makedirs(data_dir)
+
+    with mock.patch.object(dataset_info.DatasetInfo, "read_from_directory"):
+      _, info = load.load("multi_dir_dataset", split=[], with_info=True)
+    self.assertEqual(info.data_dir, data_dir)
 
 
 class BuilderPickleTest(testing.TestCase):

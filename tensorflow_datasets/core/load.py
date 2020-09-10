@@ -309,8 +309,6 @@ def load(
   # Set data_dir
   if try_gcs and gcs_utils.is_dataset_on_gcs(name):
     data_dir = gcs_utils.gcs_path("datasets")
-  elif data_dir is None:
-    data_dir = constants.DATA_DIR
 
   dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
   if download:

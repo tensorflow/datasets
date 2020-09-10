@@ -28,6 +28,7 @@ from tensorflow_datasets.core.utils import py_utils
 class EmptyDatasetBuilder(registered.RegisteredDataset):
 
   def __init__(self, **kwargs):
+    self.data_dir = "/some/path/to/dir"
     self.kwargs = kwargs
     self.download_called = False
     self.as_dataset_called = False
