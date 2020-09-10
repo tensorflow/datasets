@@ -52,8 +52,10 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
       resolution: Resolution of the image. Values supported: original, 480, 224
       **kwargs: keyword arguments forwarded to super.
     """
+    VERSION = tfds.core.Version('0.1.0')
+    
     super(CovidCxrConfig, self).__init__(
-        name="%s" % resolution,
+        name = "%s" % resolution,
         description = ("COVID-19 Chest X-ray images in %s x %s resolution" %
                      (resolution, resolution)),
         **kwargs)
