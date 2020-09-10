@@ -17,6 +17,7 @@
 
 import posixpath
 import re
+import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
 
 from absl import flags
@@ -142,7 +143,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     raise DatasetNotFoundError(name, in_development=True)
   if name not in registered._DATASET_REGISTRY:
     raise DatasetNotFoundError(name)
-  return registered._DATASET_REGISTRY[name]
+  return registered._DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
   # pylint: enable=protected-access
 
 
@@ -424,6 +425,7 @@ def _iter_full_names(
 ) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
   for builder_name, builder_cls in registered._DATASET_REGISTRY.items():  # pylint: disable=redefined-outer-name,protected-access
+    builder_cls = typing.cast(Type[dataset_builder.DatasetBuilder], builder_cls)
     # Only keep requested datasets
     if predicate_fn is not None and not predicate_fn(builder_cls):
       continue
@@ -466,7 +468,7 @@ def single_full_names(
   return sorted(_iter_single_full_names(
       builder_name,
       registered._DATASET_REGISTRY[builder_name],  # pylint: disable=protected-access
-      current_version_only=current_version_only,
+      current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
   ))
 
 

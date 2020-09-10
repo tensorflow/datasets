@@ -17,7 +17,7 @@
 
 import abc
 from unittest import mock
-import six
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
@@ -25,8 +25,7 @@ from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.utils import py_utils
 
 
-@six.add_metaclass(registered.RegisteredDataset)
-class EmptyDatasetBuilder(object):
+class EmptyDatasetBuilder(registered.RegisteredDataset):
 
   def __init__(self, **kwargs):
     self.kwargs = kwargs
@@ -188,16 +187,14 @@ class RegisteredTest(testing.TestCase):
       name = "colab_builder"
       self.assertNotIn(name, load.list_builders())
 
-      @six.add_metaclass(registered.RegisteredDataset)
-      class ColabBuilder(object):
+      class ColabBuilder(registered.RegisteredDataset):
         pass
 
       self.assertIn(name, load.list_builders())
       self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
-      @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
-      class ColabBuilder(object):
+      class ColabBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
         pass
 
       self.assertIsInstance(load.builder(name), ColabBuilder)
@@ -206,13 +203,11 @@ class RegisteredTest(testing.TestCase):
   def test_duplicate_dataset(self):
     """Redefining the same builder twice should raises error."""
 
-    @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=unused-variable
-    class DuplicateBuilder(object):
+    class DuplicateBuilder(registered.RegisteredDataset):  # pylint: disable=unused-variable
       pass
 
     with self.assertRaisesWithPredicateMatch(ValueError, "already registered"):
-      @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
-      class DuplicateBuilder(object):
+      class DuplicateBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
         pass
 
   def test_is_full_name(self):
@@ -227,15 +222,36 @@ class RegisteredTest(testing.TestCase):
     self.assertTrue(load.is_full_name("ds/1.0.2"))
     self.assertTrue(load.is_full_name("ds_with_number123/1.0.2"))
 
-  def test_skip_regitration(self):
-    """Test `skip_registration()`."""
 
-    with registered.skip_registration():
+def test_skip_regitration():
+  """Test `skip_registration()`."""
 
-      @six.add_metaclass(registered.RegisteredDataset)
-      class SkipRegisteredDataset(object):
-        pass
+  with registered.skip_registration():
 
-    name = "skip_registered_dataset"
-    self.assertEqual(name, SkipRegisteredDataset.name)
-    self.assertNotIn(name, load.list_builders())
+    class SkipRegisteredDataset(registered.RegisteredDataset):
+      pass
+
+  name = "skip_registered_dataset"
+  assert name == SkipRegisteredDataset.name
+  assert name not in load.list_builders()
+
+
+def test_skip_regitration_kwarg():
+  """Test `class Dataset(..., skip_registration=True)`."""
+
+  class SkipDataset(registered.RegisteredDataset, skip_registration=True):
+    pass
+
+  name = "skip_dataset"
+  assert name == SkipDataset.name
+  assert name not in load.list_builders()
+
+
+def test_custom_name():
+  """Tests that builder can have custom names."""
+
+  class SomeCustomNameBuilder(registered.RegisteredDataset):
+    name = "custom_name"
+
+  assert "custom_name" == SomeCustomNameBuilder.name
+  assert "custom_name" in load.list_builders()

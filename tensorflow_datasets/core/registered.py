@@ -19,7 +19,7 @@ import abc
 import collections
 import contextlib
 import inspect
-from typing import Iterator
+from typing import ClassVar, Iterator
 
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import py_utils
@@ -56,41 +56,57 @@ def skip_registration() -> Iterator[None]:
     _skip_registration = False
 
 
-class RegisteredDataset(abc.ABCMeta):
+class RegisteredDataset(abc.ABC):
   """Subclasses will be registered and given a `name` property."""
 
-  def __new__(cls, cls_name, bases, class_dict):
-    name = naming.camelcase_to_snakecase(cls_name)
-    class_dict["name"] = name
-    builder_cls = super(RegisteredDataset, cls).__new__(  # pylint: disable=too-many-function-args,redefined-outer-name
-        cls, cls_name, bases, class_dict)
+  # Name of the dataset, automatically filled.
+  name: ClassVar[str]
 
-    if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
-      pass
-    elif name in _DATASET_REGISTRY:
-      raise ValueError("Dataset with name %s already registered." % name)
-    elif name in _IN_DEVELOPMENT_REGISTRY:
-      raise ValueError(
-          "Dataset with name %s already registered as in development." % name)
-    elif name in _ABSTRACT_DATASET_REGISTRY:
-      raise ValueError(
-          "Dataset with name %s already registered as abstract." % name)
+  # Set to True for datasets that are under active development and should not
+  # be available through tfds.{load, builder} or documented in overview.md.
+  IN_DEVELOPMENT: ClassVar[bool] = False
 
-    is_abstract = inspect.isabstract(builder_cls)
+
+  def __init_subclass__(cls, skip_registration=False, **kwargs):  # pylint: disable=redefined-outer-name
+    super().__init_subclass__(**kwargs)
+
+    # Set the name if the dataset does not define it.
+    # Use __dict__ rather than getattr so subclasses are not affected.
+    if not cls.__dict__.get('name'):
+      cls.name = naming.camelcase_to_snakecase(cls.__name__)
+
+    is_abstract = inspect.isabstract(cls)
 
     # Capture all concrete datasets, including when skip registration is True.
     # This ensure that `builder_cls_from_module` can load the datasets
     # even when the module has been imported inside a `skip_registration`
     # context.
     if not is_abstract:
-      _MODULE_TO_DATASETS[builder_cls.__module__].append(builder_cls)
+      _MODULE_TO_DATASETS[cls.__module__].append(cls)
 
-    if _skip_registration:
-      pass  # Skip dataset registration within the contextmanager
-    elif is_abstract:
-      _ABSTRACT_DATASET_REGISTRY[name] = builder_cls
-    elif class_dict.get("IN_DEVELOPMENT"):
-      _IN_DEVELOPMENT_REGISTRY[name] = builder_cls
+    # Skip dataset registration within contextmanager, or if skip_registration
+    # is passed as meta argument.
+    if skip_registration or _skip_registration:
+      return
+
+    # Check for name collisions
+    if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
+      pass
+    elif cls.name in _DATASET_REGISTRY:
+      raise ValueError(f'Dataset with name {cls.name} already registered.')
+    elif cls.name in _IN_DEVELOPMENT_REGISTRY:
+      raise ValueError(
+          f'Dataset with name {cls.name} already registered as in development.'
+      )
+    elif cls.name in _ABSTRACT_DATASET_REGISTRY:
+      raise ValueError(
+          f'Dataset with name {cls.name} already registered as abstract.'
+      )
+
+    # Add the dataset to the registers
+    if is_abstract:
+      _ABSTRACT_DATASET_REGISTRY[cls.name] = cls
+    elif cls.IN_DEVELOPMENT:
+      _IN_DEVELOPMENT_REGISTRY[cls.name] = cls
     else:
-      _DATASET_REGISTRY[name] = builder_cls
-    return builder_cls
+      _DATASET_REGISTRY[cls.name] = cls
