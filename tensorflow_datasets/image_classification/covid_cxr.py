@@ -30,46 +30,84 @@ _DESCRIPTION = """Dataset with radiography images belonging to three different c
                     
 """
 
-_TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
-_TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
+# _TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
+# _TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
 
-_IMAGE_SHAPE = (512, 512, 3)
+_TEST_224_URL       = 'https://drive.google.com/uc?export=download&id=1ZzrVZlDSzzHew92lWF5VWoabXQXeeZh2'
+_TEST_480_URL       = 'https://drive.google.com/uc?export=download&id=1WDoHmfsrSGivArnZoLujUEbJBsFEnOid'
+_TEST_ORIGINAL_URL  = 'https://drive.google.com/uc?export=download&id=1Wq5fqLkzfDDv4iEF5MTyBAbp50Bz1RHl'
+
+_TRAIN_224_URL      = 'https://drive.google.com/uc?export=download&id=1LsC-a1Ig5sUmFbWFg2sus9XB-Ex8bkC_'
+_TRAIN_480_URL      = 'https://drive.google.com/uc?export=download&id=1slHH_yHdiiHc0q5OTL7txcG47HA-yjfQ'
+_TRAIN_ORIGINAL_URL = 'https://drive.google.com/uc?export=download&id=1FrxYfLLg1FDOUzvGyZBnVt5vwGAErjtN'
+
+# _IMAGE_SHAPE = (512, 512, 3)
+
+class CovidCxrConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for covid_cxr."""
+
+  def __init__(self, *, resolution, **kwargs):
+    """BuilderConfig for SQUAD.
+    Args:
+      resolution: Resolution of the image. Values supported: original, 480, 224
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(CovidCxrConfig, self).__init__(
+        name="%d" % resolution,
+        description=("COVID-19 Chest X-ray images in %d x %d resolution" %
+                     (resolution, resolution)),
+        **kwargs)
+    self.resolution = resolution
+#     self.file_name_train = "train_%d.zip" % (resolution)
+#     self.file_name_test = "test_%d.zip" % (resolution)
 
 class CovidCxr(tfds.core.GeneratorBasedBuilder):
-  """TODO(covid_cxr): Short description of my dataset."""
+  """TODO(covid_cxr): Chest X-ray images of COVID-19, normal, and pneumonia patients."""
 
-  # TODO(covid_cxr): Set up version.
   VERSION = tfds.core.Version('0.1.0')
+    
+  BUILDER_CONFIGS = [
+      CovidCxrConfig(resolution='original'),
+      CovidCxrConfig(resolution=480),
+      CovidCxrConfig(resolution=224),
+  ]
 
   def _info(self):
-    # TODO(covid_cxr): Specifies the tfds.core.DatasetInfo object
+    if self.builder_config.resolution == 'original':
+        shape_res = None
+    elif self.builder_config.resolution == 480:
+        shape_res = (self.builder_config.resolution, self.builder_config.resolution, 3)
+    elif self.builder_config.resolution == 224:
+        shape_res = (self.builder_config.resolution, self.builder_config.resolution, 3)
+        
     return tfds.core.DatasetInfo(
-        builder=self,
-        # This is the description that will appear on the datasets page.
-        description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_IMAGE_SHAPE, dtype='uint8', encoding_format='png'),
+        builder = self,
+        description = _DESCRIPTION,
+        
+        features = tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape = shape_res, 
+                                         dtype = 'uint8', 
+                                         encoding_format = 'png'),
+            
             "label": tfds.features.ClassLabel(
-                names=["COVID-19", "normal", "pneumonia"]),
-            # These are the features of your dataset like images, labels ...
+                names = ["COVID-19", "normal", "pneumonia"]),
         }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
-        supervised_keys=('image', 'label'),
-        # Homepage of the dataset for documentation
-        homepage='https://github.com/lindawangg/COVID-Net',
-        citation=_CITATION,
+
+        supervised_keys = ('image', 'label'),
+        
+        homepage = 'https://github.com/lindawangg/COVID-Net',
+        citation = _CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    # TODO(covid_cxr): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
     
-    train_path, test_path = dl_manager.download([_TRAIN_URL, _TEST_URL])
+    if self.builder_config.resolution == 'original':
+        train_path, test_path = dl_manager.download([_TRAIN_ORIGINAL_URL, _TEST_ORIGINAL_URL])
+    elif self.builder_config.resolution == 480:
+        train_path, test_path = dl_manager.download([_TRAIN_480_URL, _TEST_480_URL])
+    elif self.builder_config.resolution == 224:
+        train_path, test_path = dl_manager.download([_TRAIN_224_URL, _TEST_224_URL])
         
     return [
         tfds.core.SplitGenerator(
