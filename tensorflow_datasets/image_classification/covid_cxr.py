@@ -53,7 +53,7 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(CovidCxrConfig, self).__init__(
-#         name="%d" % resolution,
+        name="%s" % resolution,
         description = ("COVID-19 Chest X-ray images in %s x %s resolution" %
                      (resolution, resolution)),
         **kwargs)
