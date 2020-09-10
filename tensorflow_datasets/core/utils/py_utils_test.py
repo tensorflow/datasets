@@ -17,6 +17,8 @@
 
 import hashlib
 import os
+
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import py_utils
@@ -181,6 +183,39 @@ class PyUtilsTest(testing.TestCase):
     """Test the proper suffix only, since the prefix can vary."""
     self.assertEqual(
         os.path.basename(py_utils.tfds_dir()), 'tensorflow_datasets')
+
+  def test_reraise(self):
+
+    class CustomError(Exception):
+
+      def __init__(self, *args, **kwargs):  # pylint: disable=super-init-not-called
+        pass  # Do not call super() to ensure this would work with bad code.
+
+    with self.assertRaisesRegex(ValueError, 'Caught: '):
+      with py_utils.try_reraise('Caught: '):
+        raise ValueError
+
+    with self.assertRaisesRegex(ValueError, 'Caught: With message'):
+      with py_utils.try_reraise('Caught: '):
+        raise ValueError('With message')
+
+    with self.assertRaisesRegex(CustomError, 'Caught: 123'):
+      with py_utils.try_reraise('Caught: '):
+        raise CustomError(123)
+
+    with self.assertRaisesRegex(CustomError, "('Caught: ', 123, {})"):
+      with py_utils.try_reraise('Caught: '):
+        raise CustomError(123, {})
+
+    with self.assertRaisesRegex(Exception, 'Caught: '):
+      with py_utils.try_reraise('Caught: '):
+        ex = CustomError(123, {})
+        ex.args = 'Not a tuple'
+        raise ex
+
+    with self.assertRaisesRegex(RuntimeError, 'Caught: message'):
+      with py_utils.try_reraise('Caught: '):
+        raise tf.errors.FailedPreconditionError(None, None, 'message')
 
 
 class ReadChecksumDigestTest(testing.TestCase):

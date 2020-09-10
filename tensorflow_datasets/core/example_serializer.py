@@ -66,9 +66,9 @@ def _dict_to_tf_example(example_dict, tensor_info_dict):
   def run_with_reraise(fn, k, example_data, tensor_info):
     try:
       return fn(example_data, tensor_info)
-    except Exception:  # pylint: disable=broad-except
+    except Exception as e:  # pylint: disable=broad-except
       utils.reraise(
-          "Error while serializing feature `{}`: `{}`: ".format(k, tensor_info)
+          e, f"Error while serializing feature `{k}`: `{tensor_info}`: ",
       )
 
   if tensor_info_dict:

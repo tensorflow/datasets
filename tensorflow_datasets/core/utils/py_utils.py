@@ -32,10 +32,9 @@ import sys
 import textwrap
 import threading
 import types
-from typing import Any, Callable, Iterator, List, TypeVar, Union
+from typing import Any, Callable, Iterator, List, NoReturn, TypeVar, Union
 import uuid
 
-import six
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
@@ -398,22 +397,77 @@ def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   return checksum.hexdigest(), size
 
 
-def reraise(prefix=None, suffix=None):
+def reraise(
+    e: Exception,
+    prefix: str = None,
+    suffix: str = None,
+) -> NoReturn:
   """Reraise an exception with an additional message."""
-  exc_type, exc_value, exc_traceback = sys.exc_info()
   prefix = prefix or ''
   suffix = '\n' + suffix if suffix else ''
-  msg = prefix + str(exc_value) + suffix
-  six.reraise(exc_type, exc_type(msg), exc_traceback)
+
+  print('================')
+  print(f'Reraising exception {type(e)} {str(e)}')
+
+  # If unsure about modifying the function inplace, create a new exception
+  # and stack it in the chain.
+  if (
+      # Exceptions with custom error message
+      type(e).__str__ is not BaseException.__str__
+      # This should never happens unless the user plays with Exception
+      # internals
+      or not hasattr(e, 'args')
+      or not isinstance(e.args, tuple)
+  ):
+    print('Case 1')
+    msg = f'{prefix}{e}{suffix}'
+    # Could try to dynamically create a
+    # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
+    # carefull when nesting `reraise` as well as compatibility with external
+    # code.
+    # Special case ModuleNotFoundError, ImportError which can be re-raised
+    # with the same type.
+    if isinstance(e, ImportError):
+      exception = type(e)(msg)
+    else:
+      exception = RuntimeError(f'{type(e).__name__}: {msg}')
+    raise exception from e
+  # Otherwise, modify the exception in-place
+  elif len(e.args) <= 1:
+    print('Case 2')
+    exception_msg = e.args[0] if e.args else ''
+    e.args = (f'{prefix}{exception_msg}{suffix}',)
+    raise e from e  # pylint: disable=misplaced-bare-raise
+  # If there is more than 1 args, concatenate the message with other args
+  else:
+    print('Case 3')
+    e.args = tuple(
+        p for p in (prefix,) + e.args + (suffix,)
+        if not isinstance(p, str) or p
+    )
+    raise e from e  # pylint: disable=misplaced-bare-raise
 
 
 @contextlib.contextmanager
 def try_reraise(*args, **kwargs):
-  """Reraise an exception with an additional message."""
+  """Context manager which reraise exceptions with an additional message.
+
+  Contrary to `raise ... from ...` and `raise Exception().with_traceback(tb)`,
+  this function tries to modify the original exception, to avoid nested
+  `During handling of the above exception, another exception occurred:`
+  stacktraces.
+
+  Args:
+    *args: Prefix to add to the exception message
+    **kwargs: Prefix to add to the exception message
+
+  Yields:
+    None
+  """
   try:
     yield
-  except Exception:   # pylint: disable=broad-except
-    reraise(*args, **kwargs)
+  except Exception as e:  # pylint: disable=broad-except
+    reraise(e, *args, **kwargs)
 
 
 def rgetattr(obj, attr, *args):
