@@ -46,7 +46,7 @@ a particular matrix.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     Data can be downloaded from
     https://console.cloud.google.com/storage/browser/ravens-matrices
     Please put all the tar.gz files in manual_dir.

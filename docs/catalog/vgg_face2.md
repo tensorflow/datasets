@@ -41,7 +41,7 @@ subject.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     manual_dir should contain two files: vggface2_test.tar.gz and
     vggface2_train.tar.gz.
     You need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in

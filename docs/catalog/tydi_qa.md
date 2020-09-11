@@ -42,11 +42,11 @@ For now, only the Gold passage (GoldP) task is available in TFDS.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `62.32 MiB`
 
-*   **Dataset size**: `27.56 MiB`
+*   **Dataset size**: `65.22 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

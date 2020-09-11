@@ -36,7 +36,7 @@ conditions.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     You have to download this dataset from Kaggle.
     https://www.kaggle.com/c/diabetic-retinopathy-detection/data
     After downloading, unpack the test.zip file into test/ directory in manual_dir

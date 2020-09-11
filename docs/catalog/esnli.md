@@ -12,13 +12,16 @@
 
 # `esnli`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to
 include human-annotated natural language explanations of the entailment
 relations.
-
-*   **Config description**: Plain text import of e-SNLI
 
 *   **Homepage**:
     [https://github.com/OanaMariaCamburu/e-SNLI](https://github.com/OanaMariaCamburu/e-SNLI)
@@ -28,15 +31,15 @@ relations.
 
 *   **Versions**:
 
-    *   **`0.0.2`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `195.04 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `161.94 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -81,5 +84,3 @@ url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-n
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-## esnli/plain_text (default config)

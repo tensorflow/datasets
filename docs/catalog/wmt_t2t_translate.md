@@ -52,7 +52,7 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     Some of the wmt configs here, require a manual download.
     Please look into wmt.py to see the exact path (and file name) that has to
     be downloaded.

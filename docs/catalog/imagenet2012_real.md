@@ -37,7 +37,7 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     manual_dir should contain `ILSVRC2012_img_val.tar` file.
     You need to register on http://www.image-net.org/download-images in order
     to get the link to download the dataset.

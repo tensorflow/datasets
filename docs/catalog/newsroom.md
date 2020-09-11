@@ -44,7 +44,7 @@ This dataset can be downloaded upon requests. Unzip all the contents
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     You should download the dataset from https://summari.es/download/
     The webpage requires registration.
     After downloading, please put dev.jsonl, test.jsonl and train.jsonl

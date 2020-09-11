@@ -12,14 +12,16 @@
 
 # `ted_multi_translate`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Massively multilingual (60 language) data set derived from TED Talk transcripts.
 Each record consists of parallel arrays of language and text. Missing and
 incomplete translations will be filtered out.
-
-*   **Config description**: Plain text import of multilingual TED talk
-    translations
 
 *   **Homepage**:
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
@@ -29,16 +31,15 @@ incomplete translations will be filtered out.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `335.91 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `752.30 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -84,5 +85,3 @@ FeaturesDict({
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-## ted_multi_translate/plain_text (default config)

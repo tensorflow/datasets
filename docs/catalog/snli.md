@@ -12,14 +12,17 @@
 
 # `snli`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The SNLI corpus (version 1.0) is a collection of 570k human-written English
 sentence pairs manually labeled for balanced classification with the labels
 entailment, contradiction, and neutral, supporting the task of natural language
 inference (NLI), also known as recognizing textual entailment (RTE).
-
-*   **Config description**: Plain text import of SNLI
 
 *   **Homepage**:
     [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
@@ -29,16 +32,15 @@ inference (NLI), also known as recognizing textual entailment (RTE).
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `90.17 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `87.00 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -77,5 +79,3 @@ FeaturesDict({
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-## snli/plain_text (default config)

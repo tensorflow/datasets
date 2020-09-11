@@ -12,6 +12,11 @@
 
 # `robonet`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 RoboNet contains over 15 million video frames of robot-object interaction, taken
@@ -31,7 +36,9 @@ from 113 unique camera viewpoints.
 
 *   **Versions**:
 
-    *   **`4.0.0`** (default): No release notes.
+    *   **`4.0.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -60,7 +67,7 @@ from 113 unique camera viewpoints.
 
 *   **Download size**: `119.80 MiB`
 
-*   **Dataset size**: `183.01 MiB`
+*   **Dataset size**: `183.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -77,6 +84,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string),
     'states': Tensor(shape=(None, 5), dtype=tf.float32),
     'video': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -88,7 +96,7 @@ FeaturesDict({
 
 *   **Download size**: `119.80 MiB`
 
-*   **Dataset size**: `638.95 MiB`
+*   **Dataset size**: `638.98 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -105,6 +113,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string),
     'states': Tensor(shape=(None, 5), dtype=tf.float32),
     'video': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -116,7 +125,7 @@ FeaturesDict({
 
 *   **Download size**: `36.20 GiB`
 
-*   **Dataset size**: `41.36 GiB`
+*   **Dataset size**: `41.37 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -133,6 +142,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string),
     'states': Tensor(shape=(None, 5), dtype=tf.float32),
     'video': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -161,6 +171,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'actions': Tensor(shape=(None, 5), dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string),
     'states': Tensor(shape=(None, 5), dtype=tf.float32),
     'video': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })

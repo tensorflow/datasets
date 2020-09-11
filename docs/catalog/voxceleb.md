@@ -36,7 +36,7 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     manual_dir should contain the file vox_dev_wav.zip. The instructions for
     downloading this file are found in http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html. This dataset requires registration.
 

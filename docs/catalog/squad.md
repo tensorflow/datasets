@@ -12,6 +12,11 @@
 
 # `squad`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset,
@@ -19,48 +24,15 @@ consisting of questions posed by crowdworkers on a set of Wikipedia articles,
 where the answer to every question is a segment of text, or span, from the
 corresponding reading passage, or the question might be unanswerable.
 
-*   **Config description**: Plain text
-
 *   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 *   **Source code**:
-    [`tfds.question_answering.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/squad/squad.py)
+    [`tfds.question_answering.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/squad/squad.py)
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-
-*   **Download size**: `33.51 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 87,599
-`'validation'` | 10,570
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'answers': Sequence({
-        'answer_start': tf.int32,
-        'text': Text(shape=(), dtype=tf.string),
-    }),
-    'context': Text(shape=(), dtype=tf.string),
-    'id': tf.string,
-    'question': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -86,4 +58,75 @@ archivePrefix = {arXiv},
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-## squad/plain_text (default config)
+## squad/v1.1 (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Version 1.1.0 of SQUAD
+
+*   **Download size**: `33.51 MiB`
+
+*   **Dataset size**: `94.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 87,599
+`'validation'` | 10,570
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'answers': Sequence({
+        'answer_start': tf.int32,
+        'text': Text(shape=(), dtype=tf.string),
+    }),
+    'context': Text(shape=(), dtype=tf.string),
+    'id': tf.string,
+    'question': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
+})
+```
+
+## squad/v2.0 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Version 2.0.0 of SQUAD
+
+*   **Download size**: `44.34 MiB`
+
+*   **Dataset size**: `148.51 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (validation), Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 130,319
+`'validation'` | 11,873
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'answers': Sequence({
+        'answer_start': tf.int32,
+        'text': Text(shape=(), dtype=tf.string),
+    }),
+    'context': Text(shape=(), dtype=tf.string),
+    'id': tf.string,
+    'is_impossible': tf.bool,
+    'plausible_answers': Sequence({
+        'answer_start': tf.int32,
+        'text': Text(shape=(), dtype=tf.string),
+    }),
+    'question': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
+})
+```

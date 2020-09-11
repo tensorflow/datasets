@@ -43,7 +43,7 @@ authors, publish_time, journal, url.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     This dataset need to be manually downloaded through kaggle api:
     `kaggle datasets download allen-institute-for-ai/CORD-19-research-challenge`
     Place the downloaded zip file in the manual folder.

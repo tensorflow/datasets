@@ -12,6 +12,12 @@ toc:
     title: fuss
   - path: /datasets/catalog/groove
     title: groove
+  - path: /datasets/catalog/gtzan
+    status: nightly
+    title: gtzan
+  - path: /datasets/catalog/gtzan_music_speech
+    status: nightly
+    title: gtzan_music_speech
   - path: /datasets/catalog/librispeech
     title: librispeech
   - path: /datasets/catalog/libritts
@@ -24,6 +30,9 @@ toc:
     title: savee (manual)
   - path: /datasets/catalog/speech_commands
     title: speech_commands
+  - path: /datasets/catalog/spoken_digit
+    status: nightly
+    title: spoken_digit
   - path: /datasets/catalog/tedlium
     title: tedlium
   - path: /datasets/catalog/vctk
@@ -32,6 +41,9 @@ toc:
     title: voxceleb (manual)
   - path: /datasets/catalog/voxforge
     title: voxforge (manual)
+  - path: /datasets/catalog/yes_no
+    status: nightly
+    title: yes_no
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning
@@ -40,6 +52,9 @@ toc:
     title: aflw2k3d
   - path: /datasets/catalog/arc
     title: arc
+  - path: /datasets/catalog/bccd
+    status: nightly
+    title: bccd
   - path: /datasets/catalog/binarized_mnist
     title: binarized_mnist
   - path: /datasets/catalog/celeb_a
@@ -147,6 +162,9 @@ toc:
     title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_a
     title: imagenet_a
+  - path: /datasets/catalog/imagenet_r
+    status: nightly
+    title: imagenet_r
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
   - path: /datasets/catalog/imagenet_v2
@@ -234,12 +252,21 @@ toc:
 - section:
   - path: /datasets/catalog/ai2_arc
     title: ai2_arc
+  - path: /datasets/catalog/ai2_arc_with_ir
+    status: nightly
+    title: ai2_arc_with_ir
+  - path: /datasets/catalog/coqa
+    status: nightly
+    title: coqa
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
   - path: /datasets/catalog/mctaco
     title: mctaco
   - path: /datasets/catalog/natural_questions
     title: natural_questions
+  - path: /datasets/catalog/qasc
+    status: nightly
+    title: qasc
   - path: /datasets/catalog/squad
     title: squad
   - path: /datasets/catalog/trivia_qa
@@ -279,6 +306,9 @@ toc:
     title: rock_you
   - path: /datasets/catalog/titanic
     title: titanic
+  - path: /datasets/catalog/wine_quality
+    status: nightly
+    title: wine_quality
   title: Structured
 - section:
   - path: /datasets/catalog/aeslc
@@ -322,6 +352,9 @@ toc:
     title: anli
   - path: /datasets/catalog/blimp
     title: blimp
+  - path: /datasets/catalog/bool_q
+    status: nightly
+    title: bool_q
   - path: /datasets/catalog/c4
     title: c4 (manual)
   - path: /datasets/catalog/cfq
@@ -345,6 +378,9 @@ toc:
   - path: /datasets/catalog/goemotions
     status: nightly
     title: goemotions
+  - path: /datasets/catalog/gpt3
+    status: nightly
+    title: gpt3
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/irc_disentanglement
@@ -366,22 +402,34 @@ toc:
   - path: /datasets/catalog/paws_wiki
     status: nightly
     title: paws_wiki
+  - path: /datasets/catalog/paws_x_wiki
+    status: nightly
+    title: paws_x_wiki
   - path: /datasets/catalog/pg19
     title: pg19
   - path: /datasets/catalog/qa4mre
     title: qa4mre
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
+  - path: /datasets/catalog/salient_span_wikipedia
+    status: nightly
+    title: salient_span_wikipedia
   - path: /datasets/catalog/scan
     title: scan
   - path: /datasets/catalog/scicite
     title: scicite
+  - path: /datasets/catalog/sentiment140
+    status: nightly
+    title: sentiment140
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/super_glue
     title: super_glue
   - path: /datasets/catalog/tiny_shakespeare
     title: tiny_shakespeare
+  - path: /datasets/catalog/trec
+    status: nightly
+    title: trec
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikipedia

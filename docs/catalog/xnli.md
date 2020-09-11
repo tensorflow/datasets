@@ -12,6 +12,11 @@
 
 # `xnli`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 XNLI is a subset of a few thousand examples from MNLI which has been translated
@@ -19,8 +24,6 @@ into a 14 different languages (some low-ish resource). As with MNLI, the goal is
 to predict textual entailment (does sentence A imply/contradict/neither sentence
 B) and is a classification task (given two sentences, predict one of three
 labels).
-
-*   **Config description**: Plain text import of XNLI
 
 *   **Homepage**:
     [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
@@ -30,16 +33,15 @@ labels).
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `17.04 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `29.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -104,5 +106,3 @@ FeaturesDict({
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-## xnli/plain_text (default config)

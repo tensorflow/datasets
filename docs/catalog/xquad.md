@@ -40,7 +40,7 @@ to run XQuAD in the "translate-train" or "translate-test" settings.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Features**:
 
@@ -87,7 +87,7 @@ FeaturesDict({
 
 *   **Download size**: `420.97 MiB`
 
-*   **Dataset size**: `126.23 MiB`
+*   **Dataset size**: `134.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -110,7 +110,7 @@ Split               | Examples
 
 *   **Download size**: `127.04 MiB`
 
-*   **Dataset size**: `80.44 MiB`
+*   **Dataset size**: `98.75 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -133,11 +133,11 @@ Split               | Examples
 
 *   **Download size**: `499.40 MiB`
 
-*   **Dataset size**: `225.17 MiB`
+*   **Dataset size**: `157.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, translate-test, translate-dev), Only when `shuffle_files=False`
+    Yes (translate-dev, test, translate-test), Only when `shuffle_files=False`
     (translate-train)
 
 *   **Splits**:
@@ -157,7 +157,7 @@ Split               | Examples
 
 *   **Download size**: `138.41 MiB`
 
-*   **Dataset size**: `57.55 MiB`
+*   **Dataset size**: `104.91 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -180,11 +180,11 @@ Split               | Examples
 
 *   **Download size**: `472.23 MiB`
 
-*   **Dataset size**: `186.49 MiB`
+*   **Dataset size**: `207.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, translate-test, translate-dev), Only when `shuffle_files=False`
+    Yes (translate-dev, test, translate-test), Only when `shuffle_files=False`
     (translate-train)
 
 *   **Splits**:
@@ -204,11 +204,11 @@ Split               | Examples
 
 *   **Download size**: `513.80 MiB`
 
-*   **Dataset size**: `164.71 MiB`
+*   **Dataset size**: `159.33 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, translate-test, translate-dev), Only when `shuffle_files=False`
+    Yes (translate-dev, test, translate-test), Only when `shuffle_files=False`
     (translate-train)
 
 *   **Splits**:
@@ -228,11 +228,12 @@ Split               | Examples
 
 *   **Download size**: `461.54 MiB`
 
-*   **Dataset size**: `306.83 MiB`
+*   **Dataset size**: `199.52 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Yes (translate-dev, test, translate-test), Only when `shuffle_files=False`
+    (translate-train)
 
 *   **Splits**:
 
@@ -251,7 +252,7 @@ Split               | Examples
 
 *   **Download size**: `151.08 MiB`
 
-*   **Dataset size**: `109.93 MiB`
+*   **Dataset size**: `97.51 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -274,7 +275,7 @@ Split               | Examples
 
 *   **Download size**: `218.09 MiB`
 
-*   **Dataset size**: `84.57 MiB`
+*   **Dataset size**: `119.98 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -297,7 +298,7 @@ Split               | Examples
 
 *   **Download size**: `174.57 MiB`
 
-*   **Dataset size**: `50.71 MiB`
+*   **Dataset size**: `80.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -318,7 +319,7 @@ Split               | Examples
 
 *   **Download size**: `595.10 KiB`
 
-*   **Dataset size**: `873.86 KiB`
+*   **Dataset size**: `1.19 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

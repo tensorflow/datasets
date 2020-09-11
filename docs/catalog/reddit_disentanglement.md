@@ -42,7 +42,7 @@ thread
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     Download https://github.com/henghuiz/MaskedHierarchicalTransformer, decompress
     raw_data.zip and run generate_dataset.py with your reddit api credentials.
     Then put train.csv, val.csv and test.csv from the output directory into the

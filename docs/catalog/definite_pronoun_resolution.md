@@ -12,6 +12,11 @@
 
 # `definite_pronoun_resolution`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Composed by 30 students from one of the author's undergraduate classes. These
@@ -24,9 +29,6 @@ the target pronoun, the third line contains the two candidate antecedents, and
 the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 
-*   **Config description**: Plain text import of the Definite Pronoun Resolution
-    Dataset.
-
 *   **Homepage**:
     [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
@@ -35,16 +37,15 @@ more than once in the sentence, its first occurrence is the one to be resolved.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `222.12 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `334.22 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -84,5 +85,3 @@ FeaturesDict({
 *   **Visualization**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-## definite_pronoun_resolution/plain_text (default config)
