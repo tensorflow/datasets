@@ -406,9 +406,6 @@ def reraise(
   prefix = prefix or ''
   suffix = '\n' + suffix if suffix else ''
 
-  print('================')
-  print(f'Reraising exception {type(e)} {str(e)}')
-
   # If unsure about modifying the function inplace, create a new exception
   # and stack it in the chain.
   if (
@@ -419,7 +416,6 @@ def reraise(
       or not hasattr(e, 'args')
       or not isinstance(e.args, tuple)
   ):
-    print('Case 1')
     msg = f'{prefix}{e}{suffix}'
     # Could try to dynamically create a
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
@@ -434,18 +430,16 @@ def reraise(
     raise exception from e
   # Otherwise, modify the exception in-place
   elif len(e.args) <= 1:
-    print('Case 2')
     exception_msg = e.args[0] if e.args else ''
     e.args = (f'{prefix}{exception_msg}{suffix}',)
-    raise e from e  # pylint: disable=misplaced-bare-raise
+    raise  # pylint: disable=misplaced-bare-raise
   # If there is more than 1 args, concatenate the message with other args
   else:
-    print('Case 3')
     e.args = tuple(
         p for p in (prefix,) + e.args + (suffix,)
         if not isinstance(p, str) or p
     )
-    raise e from e  # pylint: disable=misplaced-bare-raise
+    raise  # pylint: disable=misplaced-bare-raise
 
 
 @contextlib.contextmanager
