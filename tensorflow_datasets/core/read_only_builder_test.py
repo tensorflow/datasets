@@ -21,6 +21,7 @@ import pytest
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import read_only_builder
 
@@ -54,8 +55,8 @@ def test_read_only_builder(
   assert builder.VERSION is None
 
   # Test that the dataset can be read
-  ds = builder.as_dataset(split='train').take(5).as_numpy_iterator()
-  origin_ds = builder.as_dataset(split='train').take(5).as_numpy_iterator()
+  ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
+  origin_ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
   assert [ex['label'] for ex in ds] == [ex['label'] for ex in origin_ds]
 
   builder.download_and_prepare()  # Should be a no-op
