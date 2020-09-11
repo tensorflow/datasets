@@ -21,6 +21,7 @@ dist/
 
 # Other
 *.DS_Store
+*.ipynb_checkpoints*
 
 # PyCharm
 .idea
