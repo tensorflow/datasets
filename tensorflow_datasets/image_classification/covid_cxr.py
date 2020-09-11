@@ -59,9 +59,9 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
     v2 = tfds.core.Version(
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     
-    super(CovidCxrConfig, self).__init__(version=v2, 
-                                name='%s' % resolution, 
-                                description='Covid-19 Chest X-ray images in %s x %s resolution' % (resolution, resolution),
+    super(CovidCxrConfig, self).__init__(version = v2, 
+                                resolution = resolution, 
+                                description = 'Covid-19 Chest X-ray images in %s x %s resolution' % (resolution, resolution),
                                 **kwargs)
     self.resolution = resolution
     
@@ -71,9 +71,9 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
     
   BUILDER_CONFIGS = [
-      CovidCxrConfig(resolution='original', name='original', description='Covid Chest X-ray original sizes'),
-      CovidCxrConfig(resolution=480, name='480', description='Covid Chest X-ray 480x480'),
-      CovidCxrConfig(resolution=224, name='224', description='Covid Chest X-ray 224x224'),
+      CovidCxrConfig(resolution='original'),
+      CovidCxrConfig(resolution=480),
+      CovidCxrConfig(resolution=224),
   ]
 
   def _info(self):
