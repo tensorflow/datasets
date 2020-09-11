@@ -47,7 +47,7 @@ _DATA_OPTIONS = ['original', 480, 224]
 class CovidCxrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for covid_cxr."""
 
-  def __init__(self, resolution = None, **kwargs):
+  def __init__(self, resolution, **kwargs):
     """BuilderConfig
     Args:
       resolution: Resolution of the image. Values supported: original, 480, 224
