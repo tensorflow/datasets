@@ -53,7 +53,7 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
       resolution: Resolution of the image. Values supported: original, 480, 224
       **kwargs: keyword arguments forwarded to super.
     """
-    if selection not in _DATA_OPTIONS:
+    if resolution not in _DATA_OPTIONS:
         raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
         
     v2 = tfds.core.Version(
