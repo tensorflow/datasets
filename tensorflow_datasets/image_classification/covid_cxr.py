@@ -71,9 +71,9 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
     
   BUILDER_CONFIGS = [
-      CovidCxrConfig(resolution='original'),
-      CovidCxrConfig(resolution=480),
-      CovidCxrConfig(resolution=224),
+      CovidCxrConfig(resolution='original', name='original', description='Covid Chest X-ray original sizes'),
+      CovidCxrConfig(resolution=480, name='480', description='Covid Chest X-ray 480x480'),
+      CovidCxrConfig(resolution=224, name='224', description='Covid Chest X-ray 224x224'),
   ]
 
   def _info(self):
