@@ -59,7 +59,9 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
     v2 = tfds.core.Version(
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     
-    super(CovidCxrConfig, self).__init__(version=v2, **kwargs)
+    super(CovidCxrConfig, self).__init__(version=v2, 
+                                         name='%s' % resolution, 
+                                         **kwargs)
     self.resolution = resolution
     
 class CovidCxr(tfds.core.GeneratorBasedBuilder):
