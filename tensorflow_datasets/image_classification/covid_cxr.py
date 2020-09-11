@@ -18,15 +18,16 @@
 import tensorflow_datasets.public_api as tfds
 import os
 
-# TODO(covid_cxr): BibTeX citation
-_CITATION = """Wang, Linda, et al. COVID-Net: A Tailored Deep Convolutional Neural Network ... 2020, arxiv.org/pdf/2003.09871.pdf. 
+_CITATION = """
+Wang, Linda, et al. COVID-Net: A Tailored Deep Convolutional Neural Network ... 2020, arxiv.org/pdf/2003.09871.pdf. 
 """
 
 # TODO(covid_cxr):
-_DESCRIPTION = """Dataset with radiography images belonging to three different classes 
-                    - normal
-                    - pneumonia
-                    - COVID - 19
+_DESCRIPTION = """
+Dataset with radiography images belonging to three different classes 
+    - normal
+    - pneumonia
+    - COVID - 19
                     
 """
 
@@ -41,27 +42,26 @@ _TRAIN_224_URL      = 'https://drive.google.com/uc?export=download&id=1LsC-a1Ig5
 _TRAIN_480_URL      = 'https://drive.google.com/uc?export=download&id=1slHH_yHdiiHc0q5OTL7txcG47HA-yjfQ'
 _TRAIN_ORIGINAL_URL = 'https://drive.google.com/uc?export=download&id=1FrxYfLLg1FDOUzvGyZBnVt5vwGAErjtN'
 
-# _IMAGE_SHAPE = (512, 512, 3)
+_DATA_OPTIONS = ['original', 480, 224]
 
 class CovidCxrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for covid_cxr."""
 
-  def __init__(self, *, resolution, **kwargs):
-    """BuilderConfig for SQUAD.
+  def __init__(self, resolution = None, **kwargs):
+    """BuilderConfig
     Args:
       resolution: Resolution of the image. Values supported: original, 480, 224
       **kwargs: keyword arguments forwarded to super.
     """
+    if selection not in _DATA_OPTIONS:
+        raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
+        
+    v2 = tfds.core.Version(
+        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     
-    super(CovidCxrConfig, self).__init__(version='0.1.0',
-        name = "%s" % resolution,
-        description = ("COVID-19 Chest X-ray images in %s x %s resolution" %
-                     (resolution, resolution)),
-        **kwargs)
+    super(CovidCxrConfig, self).__init__(version=v2, **kwargs)
     self.resolution = resolution
-#     self.file_name_train = "train_%d.zip" % (resolution)
-#     self.file_name_test = "test_%d.zip" % (resolution)
-
+    
 class CovidCxr(tfds.core.GeneratorBasedBuilder):
   """TODO(covid_cxr): Chest X-ray images of COVID-19, normal, and pneumonia patients."""
 
@@ -125,7 +125,7 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive):
     """Yields examples."""
-    # TODO(covid_cxr): Yields (key, example) tuples from the dataset
+
     for fname, fobj in archive:
             image_dir, image_file = os.path.split(fname)
             d = os.path.basename(image_dir)
