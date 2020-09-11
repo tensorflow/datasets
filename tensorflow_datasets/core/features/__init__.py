@@ -15,9 +15,6 @@
 
 """`tfds.features.FeatureConnector` API defining feature types."""
 
-# TODO(tfds): Delete alias once all users have been migrated.
-from tensorflow_datasets.core.deprecated import text
-
 from tensorflow_datasets.core.features.audio_feature import Audio
 from tensorflow_datasets.core.features.bounding_boxes import BBox
 from tensorflow_datasets.core.features.bounding_boxes import BBoxFeature
@@ -34,7 +31,6 @@ from tensorflow_datasets.core.features.translation_feature import TranslationVar
 from tensorflow_datasets.core.features.video_feature import Video
 
 __all__ = [
-    "text",
     "Audio",
     "BBox",
     "BBoxFeature",
