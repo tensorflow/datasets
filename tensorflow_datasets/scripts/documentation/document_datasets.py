@@ -22,7 +22,7 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 import collections
 from concurrent import futures
 import os
-from typing import Dict, List, Tuple, Union, Set
+from typing import Dict, List, Optional, Tuple, Union, Set
 
 import mako.lookup
 import tensorflow.compat.v2 as tf
@@ -235,15 +235,10 @@ def document_single_builder(builder):
   return out_str
 
 
-def make_module_to_builder_dict(datasets=None):
-  """Get all builders organized by module in nested dicts."""
-  # pylint: disable=g-long-lambda
-  # dict to hold tfds->image->mnist->[builders]
-  module_to_builder = collections.defaultdict(
-      lambda: collections.defaultdict(
-          lambda: collections.defaultdict(list)))
-  # pylint: enable=g-long-lambda
-
+def make_category_to_builders_dict(
+    datasets: Optional[List[str]] = None,
+) -> Dict[str, List[tfds.core.DatasetBuilder]]:
+  """Returns the `Dict[dataset_type, List[Builder]]`."""
   if not datasets:
     datasets = [
         name for name in tfds.list_builders() if name not in BUILDER_BLACKLIST
@@ -253,19 +248,22 @@ def make_module_to_builder_dict(datasets=None):
     builders = tpool.map(tfds.builder, datasets)
   print('Vanilla builders built, constructing module_to_builder dict...')
 
+  # Dict[dataset_type, List[Builder]]
+  category_to_builders = collections.defaultdict(list)
+
   for builder in builders:
-    module_name = builder.__class__.__module__
-    modules = module_name.split('.')
-    if 'testing' in modules:
+    module = type(builder).__module__
+    if not module.startswith('tensorflow_datasets.'):
+      raise AssertionError(f'Unexpected builder {type(builder)}: module')
+
+    module_parts = module.split('.')
+
+    if 'testing' in module_parts:
       continue
+    _, category, *_ = module_parts  # tfds.<category>.xyz
 
-    current_mod_ctr = module_to_builder
-    for mod in modules:
-      current_mod_ctr = current_mod_ctr[mod]
-    current_mod_ctr.append(builder)  # pytype: disable=attribute-error
-
-  module_to_builder = module_to_builder['tensorflow_datasets']
-  return module_to_builder
+    category_to_builders[category].append(builder)
+  return category_to_builders
 
 
 def dataset_docs_str(datasets=None):
@@ -283,18 +281,19 @@ def dataset_docs_str(datasets=None):
   """
 
   print('Retrieving the list of builders...')
-  module_to_builder = make_module_to_builder_dict(datasets)
-  sections = sorted(list(module_to_builder.keys()))
+  category_to_builders = make_category_to_builders_dict(datasets)
+  sections = sorted(list(category_to_builders.keys()))
   section_docs = collections.defaultdict(list)
 
   for section in sections:
-    builders = tf.nest.flatten(module_to_builder[section])
+    builders = category_to_builders[section]
     builders = sorted(builders, key=lambda b: b.name)
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
       builder_docs = tpool.map(document_single_builder, builders)
-    builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
-                     builder_doc)
-                    for (builder, builder_doc) in zip(builders, builder_docs)]
+    builder_docs = [
+        (builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS, builder_doc)
+        for (builder, builder_doc) in zip(builders, builder_docs)
+    ]
     section_docs[section] = builder_docs
   tmpl = get_mako_template('catalog_overview')
   catalog_overview = tmpl.render_unicode().lstrip()
