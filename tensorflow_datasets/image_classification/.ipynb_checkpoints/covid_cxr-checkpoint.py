@@ -60,7 +60,7 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
         '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     
     super(CovidCxrConfig, self).__init__(version = v2, 
-                                resolution = resolution, 
+                                name = '%s' % resolution, 
                                 description = 'Covid-19 Chest X-ray images in %s x %s resolution' % (resolution, resolution),
                                 **kwargs)
     self.resolution = resolution
