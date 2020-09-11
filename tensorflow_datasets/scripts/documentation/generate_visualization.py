@@ -22,6 +22,7 @@ import tempfile
 
 from absl import flags
 
+import matplotlib
 import matplotlib.pyplot as plt
 
 import tensorflow as tf
@@ -40,7 +41,7 @@ flags.DEFINE_boolean(
     'overwrite', False, 'If True, overwrite the existing visualizations.')
 
 
-def _save_fig(dst_path: str, figure: plt.figure.Figure) -> None:
+def _save_fig(dst_path: str, figure: matplotlib.figure.Figure) -> None:
   """Save the generated figures for the dataset in dst_dir."""
   # `savefig` do not support GCS, so first save the image locally.
   with tempfile.TemporaryDirectory() as tmp_dir:
