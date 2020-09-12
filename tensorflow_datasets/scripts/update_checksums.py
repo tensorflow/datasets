@@ -17,7 +17,7 @@
 
 import os
 from absl import app
-from typing import Any, Dict, Iterable, List
+from typing import List
 
 import tensorflow.compat.v2 as tf
 
@@ -76,7 +76,7 @@ def get_txt_checksums_paths() -> List[str]:
 def rewrite_checksums(paths : List[str]) -> None:
   """Update all .txt checksum files to use tabs instead of spaces"""
   for path in paths:
-    print("Processing file: {}".format(path))
+    print('Processing file: {}'.format(path))
     #Read the checksum file
     with tf.io.gfile.GFile(path) as f:
       content = f.read().splitlines()
@@ -99,10 +99,10 @@ def update_checksums() -> None:
   rewrite_checksums(paths)
   paths = get_tsv_checksums_paths()
   rewrite_checksums(paths)
-  print("\n\nAll checksums files have been successfully updated!")
+  print('\n\nAll checksums files have been successfully updated!')
 
 def main(_):
- update_checksums()
+  update_checksums()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   app.run(main)
