@@ -5,11 +5,14 @@ from tensorflow_datasets.image_classification import covid_cxr
 
 
 class CovidCxrTest(tfds.testing.DatasetBuilderTestCase):
+    
   # TODO(covid_cxr):
-  DATASET_CLASS = covid_cxr.CovidCxr
-  SPLITS = {
+
+    DATASET_CLASS = covid_cxr.CovidCxr
+    _CONFIG = covid_cxr.CovidCxrConfig
+    SPLITS = {
       "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "test": 3,  # Number of fake test example
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
@@ -17,6 +20,8 @@ class CovidCxrTest(tfds.testing.DatasetBuilderTestCase):
   # then the tests needs to provide the fake output paths relative to the
   # fake data directory
   # DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+    
+    DL_EXTRACT_RESULT = [_CONFIG]
 
 
 if __name__ == "__main__":

@@ -1,1 +1,0 @@
-TODO(covid_cxr): Add fake data in this directory
