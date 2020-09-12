@@ -1,0 +1,42 @@
+{
+  "citation": "@article{Artetxe:etal:2019,\n      author    = {Mikel Artetxe and Sebastian Ruder and Dani Yogatama},\n      title     = {On the cross-lingual transferability of monolingual representations},\n      journal   = {CoRR},\n      volume    = {abs/1910.11856},\n      year      = {2019},\n      archivePrefix = {arXiv},\n      eprint    = {1910.11856}\n}",
+  "description": "XQuAD (Cross-lingual Question Answering Dataset) is a benchmark dataset for evaluating cross-lingual question answering performance. The dataset consists of a subset of 240 paragraphs and 1190 question-answer pairs from the development set of SQuAD v1.1 (Rajpurkar et al., 2016) together with their professional translations into ten languages: Spanish, German, Greek, Russian, Turkish, Arabic, Vietnamese, Thai, Chinese, and Hindi. Consequently, the dataset is entirely parallel across 11 languages. To run XQuAD in the default zero-shot setting, use the SQuAD v1.1 training and validation data here: https://www.tensorflow.org/datasets/catalog/squad\n\nWe also include \"translate-train\", \"translate-dev\", and \"translate-test\" splits for each non-English language from XTREME (Hu et al., 2020). These can be used to run XQuAD in the \"translate-train\" or \"translate-test\" settings.",
+  "downloadSize": "228684233",
+  "location": {
+    "urls": [
+      "https://github.com/deepmind/xquad"
+    ]
+  },
+  "name": "xquad",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "1607930",
+      "shardLengths": [
+        "1190"
+      ]
+    },
+    {
+      "name": "translate-dev",
+      "numBytes": "14118848",
+      "shardLengths": [
+        "10555"
+      ]
+    },
+    {
+      "name": "translate-test",
+      "numBytes": "1202542",
+      "shardLengths": [
+        "1178"
+      ]
+    },
+    {
+      "name": "translate-train",
+      "numBytes": "108883400",
+      "shardLengths": [
+        "87187"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

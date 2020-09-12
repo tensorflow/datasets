@@ -1,0 +1,28 @@
+{
+  "citation": "@inproceedings{li-roth-2002-learning,\n    title = \"Learning Question Classifiers\",\n    author = \"Li, Xin  and\n      Roth, Dan\",\n    booktitle = \"{COLING} 2002: The 19th International Conference on Computational Linguistics\",\n    year = \"2002\",\n    url = \"https://www.aclweb.org/anthology/C02-1150\",\n}\n@inproceedings{hovy-etal-2001-toward,\n    title = \"Toward Semantics-Based Answer Pinpointing\",\n    author = \"Hovy, Eduard  and\n      Gerber, Laurie  and\n      Hermjakob, Ulf  and\n      Lin, Chin-Yew  and\n      Ravichandran, Deepak\",\n    booktitle = \"Proceedings of the First International Conference on Human Language Technology Research\",\n    year = \"2001\",\n    url = \"https://www.aclweb.org/anthology/H01-1069\",\n}",
+  "description": "The Text REtrieval Conference (TREC) Question Classification dataset contains 5500 labeled questions in training set and another 500 for test set. The dataset has 6 labels, 47 level-2 labels. Average length of each sentence is 10, vocabulary size of 8700.\nData are collected from four sources: 4,500 English questions published by USC (Hovy et al., 2001), about 500 manually constructed questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and also 500 questions from TREC 10 which serves as the test set.",
+  "downloadSize": "359212",
+  "location": {
+    "urls": [
+      "https://cogcomp.seas.upenn.edu/Data/QA/QC/"
+    ]
+  },
+  "name": "trec",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "47996",
+      "shardLengths": [
+        "500"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "604191",
+      "shardLengths": [
+        "5452"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

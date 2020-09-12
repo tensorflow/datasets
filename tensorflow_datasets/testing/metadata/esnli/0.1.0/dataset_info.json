@@ -1,0 +1,36 @@
+{
+  "citation": "@incollection{NIPS2018_8163,\ntitle = {e-SNLI: Natural Language Inference with Natural Language Explanations},\nauthor = {Camburu, Oana-Maria and Rockt\"{a}schel, Tim and Lukasiewicz, Thomas and Blunsom, Phil},\nbooktitle = {Advances in Neural Information Processing Systems 31},\neditor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},\npages = {9539--9549},\nyear = {2018},\npublisher = {Curran Associates, Inc.},\nurl = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf}\n}",
+  "description": "The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to\ninclude human-annotated natural language explanations of the entailment\nrelations.",
+  "downloadSize": "204516010",
+  "location": {
+    "urls": [
+      "https://github.com/OanaMariaCamburu/e-SNLI"
+    ]
+  },
+  "name": "esnli",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "4343163",
+      "shardLengths": [
+        "9824"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "161076206",
+      "shardLengths": [
+        "274684",
+        "274683"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "4382079",
+      "shardLengths": [
+        "9842"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

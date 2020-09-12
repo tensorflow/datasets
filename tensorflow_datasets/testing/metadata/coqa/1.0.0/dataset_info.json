@@ -1,0 +1,28 @@
+{
+  "citation": "@misc{reddy2018coqa,\n    title={CoQA: A Conversational Question Answering Challenge},\n    author={Siva Reddy and Danqi Chen and Christopher D. Manning},\n    year={2018},\n    eprint={1808.07042},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "description": "CoQA: A Conversational Question Answering Challenge",
+  "downloadSize": "58092681",
+  "location": {
+    "urls": [
+      "https://stanfordnlp.github.io/coqa/"
+    ]
+  },
+  "name": "coqa",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "1218861",
+      "shardLengths": [
+        "500"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "17946510",
+      "shardLengths": [
+        "7199"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

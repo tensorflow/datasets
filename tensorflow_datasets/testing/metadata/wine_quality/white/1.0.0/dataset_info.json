@@ -1,0 +1,25 @@
+{
+  "citation": "@ONLINE {cortezpaulo;cerdeiraantonio;almeidafernando;matostelmo;reisjose1999,\n    author = \"Cortez, Paulo; Cerdeira, Antonio; Almeida,Fernando;  Matos, Telmo;  Reis, Jose\",\n    title  = \"Modeling wine preferences by data mining from physicochemical properties.\",\n    year   = \"2009\",\n    url    = \"https://archive.ics.uci.edu/ml/datasets/wine+quality\"\n}",
+  "description": "Two datasets were created, using red and white wine samples.\nThe inputs include objective tests (e.g. PH values) and the output is based on sensory data\n(median of at least 3 evaluations made by wine experts).\nEach expert graded the wine quality\nbetween 0 (very bad) and 10 (very excellent).\nSeveral data mining methods were applied to model\nthese datasets under a regression approach. The support vector machine model achieved the\nbest results. Several metrics were computed: MAD, confusion matrix for a fixed error tolerance (T),\netc. Also, we plot the relative importances of the input variables (as measured by a sensitivity\nanalysis procedure).\n\nThe two datasets are related to red and white variants of the Portuguese \"Vinho Verde\" wine.\nFor more details, consult: http://www.vinhoverde.pt/en/ or the reference [Cortez et al., 2009].\nDue to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables\nare available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).\n\nNumber of Instances: red wine - 1599; white wine - 4898\n\nInput variables (based on physicochemical tests):\n\n1. fixed acidity\n2. volatile acidity\n3. citric acid\n4. residual sugar\n5. chlorides\n6. free sulfur dioxide\n7. total sulfur dioxide\n8. density\n9. pH\n10. sulphates\n11. alcohol\n\nOutput variable (based on sensory data):\n\n12. quality (score between 0 and 10)",
+  "downloadSize": "264426",
+  "location": {
+    "urls": [
+      "https://archive.ics.uci.edu/ml/datasets/wine+quality"
+    ]
+  },
+  "name": "wine_quality",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "1964098",
+      "shardLengths": [
+        "4898"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "features",
+    "output": "quality"
+  },
+  "version": "1.0.0"
+}

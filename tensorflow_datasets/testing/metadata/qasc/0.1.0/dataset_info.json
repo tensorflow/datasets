@@ -1,0 +1,35 @@
+{
+  "citation": "@article{allenai:qasc,\n      author    = {Tushar Khot and Peter Clark and Michal Guerquin and Peter Jansen and Ashish Sabharwal},\n      title     = {QASC: A Dataset for Question Answering via Sentence Composition},\n      journal   = {arXiv:1910.11473v2},\n      year      = {2020},\n}",
+  "description": "QASC is a question-answering dataset with a focus on sentence composition. It consists of 9,980 8-way multiple-choice\nquestions about grade school science (8,134 train, 926 dev, 920 test), and comes with a corpus of 17M sentences.",
+  "downloadSize": "1616514",
+  "location": {
+    "urls": [
+      "https://allenai.org/data/qasc"
+    ]
+  },
+  "name": "qasc",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "491050",
+      "shardLengths": [
+        "920"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "5781858",
+      "shardLengths": [
+        "8134"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "660629",
+      "shardLengths": [
+        "926"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}
