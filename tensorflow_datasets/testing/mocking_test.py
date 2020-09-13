@@ -119,6 +119,31 @@ class MockingTest(test_case.TestCase):
           [1, 9, 2, 5, 3],
       )
 
+  def test_mocking_policies(self):
+    with test_utils.tmp_dir() as tmp_dir:
+      # Testing Auto Mocking Policy
+      with mocking.mock_data(data_dir=tmp_dir):
+        ds = load.load('mnist', split='train')
+        self.assertEqual(ds.element_spec, {
+            'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+            'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+        })
+
+      # Testing Code-Only Mocking Policy
+      with mocking.mock_data(
+          data_dir=tmp_dir, policy=mocking.MockPolicy.CODE_ONLY):
+        ds = load.load('mnist', split='train')
+        self.assertEqual(ds.element_spec, {
+            'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+            'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+        })
+
+      # Testing Dir-Only Mocking Policy
+      with mocking.mock_data(
+          data_dir=tmp_dir, policy=mocking.MockPolicy.DIR_ONLY):
+        with self.assertRaisesWithPredicateMatch(
+            ValueError, 'TFDS has been mocked'):
+          ds = load.load('mnist', split='train')
 
 if __name__ == '__main__':
   test_utils.test_main()

@@ -12,14 +12,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Mock util for tfds.
 """
 
 import contextlib
+import enum
 import functools
 import os
 import random
+from typing import Callable, Optional
 
 from absl.testing import absltest
 import numpy as np
@@ -28,8 +29,28 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import features as features_lib
 
 
+class MockPolicy(enum.Enum):
+  """Strategy to use to mock the dataset.
+
+  Attributes:
+    AUTO: Try to load metadata (dataset_info.json,...) from `data_dir`,
+      otherwise fallback to `CODE_ONLY` mode
+    CODE_ONLY: Do not use data_dir, instead try to infer everything from the
+      code.
+    DIR_ONLY: Only use data_dir, raise error if data_dir not reachable
+  """
+  AUTO = enum.auto()
+  CODE_ONLY = enum.auto()
+  DIR_ONLY = enum.auto()
+
+
 @contextlib.contextmanager
-def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
+def mock_data(
+    num_examples: int = 1,
+    as_dataset_fn: Optional[Callable] = None,
+    data_dir: Optional[str] = None,
+    policy: MockPolicy = MockPolicy.AUTO,
+):
   """Mock tfds to generate random data.
 
   This function requires the true metadata files (dataset_info.json, label.txt,
@@ -91,7 +112,9 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
   def mock_download_and_prepare(self, *args, **kwargs):
     del args
     del kwargs
-    if not tf.io.gfile.exists(self._data_dir):  # pylint: disable=protected-access
+    if policy != MockPolicy.CODE_ONLY and not tf.io.gfile.exists(self._data_dir):  # pylint: disable=protected-access
+      if policy == MockPolicy.AUTO:
+        return
       raise ValueError(
           'TFDS has been mocked, but metadata files were not found in {}. '
           'You should copy the real metadata files, so that the dataset '
