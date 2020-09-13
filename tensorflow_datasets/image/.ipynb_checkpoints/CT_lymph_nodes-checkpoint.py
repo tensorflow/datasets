@@ -1,38 +1,11 @@
 """CT_lymph_nodes dataset."""
 
-import tensorflow_datasets as tfds
-import tensorflow as tf
-from tensorflow_datasets.core import utils
-import numpy as np
-import os
-import io
-import pydicom
+import tensorflow_datasets.public_api as tfds
 
-# BibTeX citation
+# TODO(CT_lymph_nodes): BibTeX citation
 _CITATION = """
-\@misc{CT_Lymph_Nodes_Citation,
-  doi = {10.1007/978-3-319-10404-1_65},
-  url = {https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes#12d41e510fe547b59000cd90afb8dbf2},
-  author = {Roth, Holger R., Lu, Le, Seff, Ari, Cherry, Kevin M., Hoffman, Joanne, Wang, Shijun, Liu, Jiamin, Turkbey, Evrim and Summers, Ronald M.},
-  title = {A New 2.5D Representation for Lymph Node Detection Using Random Sets of Deep Convolutional Neural Network Observations},
-  publisher = {Springer International Publishing},
-  year = {2014},
-}
-@article{TCIA_Citation,
-  author = {
-    K. Clark and B. Vendt and K. Smith and J. Freymann and J. Kirby and
-    P. Koppel and S. Moore and S. Phillips and D. Maffitt and M. Pringle and
-    L. Tarbox and F. Prior
-  },
-  title = {{The Cancer Imaging Archive (TCIA): Maintaining and Operating a
-  Public Information Repository}},
-  journal = {Journal of Digital Imaging},
-  volume = {26},
-  month = {December},
-  year = {2013},
-  pages = {1045-1057},
-}
 """
+
 # TODO(CT_lymph_nodes):
 _DESCRIPTION = """
 """
