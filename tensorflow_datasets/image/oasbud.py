@@ -3,14 +3,15 @@
 import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
+from scipy import signal
 
 _CITATION = """\
 @article {MP:MP12538,
-  author = {Piotrzkowska-Wróblewska, Hanna
-            and Dobruch-Sobczak, Katarzyna
-            and Byra, Michał
+  author = {Piotrzkowska-Wróblewska, Hanna \
+            and Dobruch-Sobczak, Katarzyna \
+            and Byra, Michał \
             and Nowicki, Andrzej},
-  title = {Open access database of raw ultrasonic signals acquired
+  title = {Open access database of raw ultrasonic signals acquired \
            from malignant and benign breast lesions},
   journal = {Medical Physics},
   issn = {2473-4209},
@@ -22,14 +23,14 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-The Open Access Series of Breast Ultrasonic Data contains 200 ultrasound scans
-(2 orthogonal scans each) of 52 malignant and 48 benign breast tumors, collected
-by the Department of Ultrasound at The Institute of Fundamental Technological Research
-of the Polish Academy of Sciences from patients at the Institute of Oncology (Warsaw).
-The scans are stored as rf data arrays of x by 510 (where x depends on scan depth), 
-and each scan includes a same-size mask that denotes the region-of-interest for the
-tumor. The tumors were ranked on the BI-RADS scale, which describes the probability
-of lesion malignancy, and classified as malignant or benign. The 100 dataset entries each
+The Open Access Series of Breast Ultrasonic Data contains 200 ultrasound scans \
+(2 orthogonal scans each) of 52 malignant and 48 benign breast tumors, collected \
+by the Department of Ultrasound at The Institute of Fundamental Technological Research \
+of the Polish Academy of Sciences from patients at the Institute of Oncology (Warsaw). \
+The scans are stored as rf data arrays of x by 510 (where x depends on scan depth) \ 
+and each scan includes a same-size mask that denotes the region-of-interest for the \
+tumor. The tumors were ranked on the BI-RADS scale, which describes the probability \
+of lesion malignancy, and classified as malignant or benign. The 100 dataset entries each \
 contain the two scans, two masks, BI-RADS ranking, and classification.
 """
 
@@ -55,6 +56,12 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
         description="Processed B mode image."
     )
   ]
+    
+  @staticmethod
+  def process_b_mode(scan):
+    envelope_image = np.abs(signal.hilbert(scan))
+    compress_image = 20 * np.log10(envelope_image/np.max(envelope_image))
+    return compress_image.astype('float32')
 
   def _info(self):
     # Create FeaturesDict according to builder config
@@ -105,16 +112,17 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     # data has 7 columns: ID, scan1, scan2, roi1, roi2, bi-rads, and label
     data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
-    for row in data:
-        key = str(row[0][0]) # unique patient ID
+    for index, row in enumerate(data):
+        # use ID_rownum as key - one patient has two tumors, so ID is not unique 
+        key = "{}_{}".format(row[0][0], index)
         if self.builder_config.name is "b_mode":
             example_dict = {
-                "bmode_1": process_b_mode(row[1]),
+                "bmode_1": Oasbud.process_b_mode(row[1]),
                 "mask_1": row[3],
-                "bmode_2": process_b_mode(row[2]),
+                "bmode_2": Oasbud.process_b_mode(row[2]),
                 "mask_2": row[4],
-                "bi-rads": str(row[5]),
-                "label": row[6][0],
+                "bi-rads": str(row[5][0]),
+                "label": row[6][0][0]
             }
         else:
             example_dict = {
@@ -122,13 +130,8 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
                 "mask_1": row[3],
                 "scan_2": row[2],
                 "mask_2": row[4],
-                "bi-rads": str(row[5]),
-                "label": row[6][0],
+                "bi-rads": str(row[5][0]),
+                "label": row[6][0][0]
             }
         yield key, example_dict
-    
-    def process_b_mode(scan):
-        scan = tf.cast(scan, 'float32')
-        envelope_image = np.abs(tfds.core.lazy_import.scipy.signal.hilbert(scan))
-        return 20 * np.log10(envelope_image/np.max(envelope_image))
 

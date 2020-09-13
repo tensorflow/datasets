@@ -11,6 +11,8 @@ class OasbudTest(tfds.testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 5  # Number of entries in fake .mat file
   }
+  
+  DL_EXTRACT_RESULT = 'oasbud_fake.mat'
 
 
 if __name__ == "__main__":
