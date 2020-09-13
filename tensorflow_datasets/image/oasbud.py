@@ -25,9 +25,11 @@ The Open Access Series of Breast Ultrasonic Data contains 200 ultrasound scans
 (2 orthogonal scans each) of 52 malignant and 48 benign breast tumors, collected
 by the Department of Ultrasound at The Institute of Fundamental Technological Research
 of the Polish Academy of Sciences from patients at the Institute of Oncology (Warsaw).
-The scans are stored as rf data, and each scan includes a same-size mask that denotes
-the region-of-interest for the tumor. The 100 tumors were ranked on the BI-RADS scale,
-which describes the probability of lesion malignancy, and classified as malignant or benign.
+The scans are stored as rf data arrays of x by 510 (where x depends on scan depth), 
+and each scan includes a same-size mask that denotes the region-of-interest for the
+tumor. The tumors were ranked on the BI-RADS scale, which describes the probability
+of lesion malignancy, and classified as malignant or benign. The 100 dataset entries each
+contain the two scans, two masks, BI-RADS ranking, and classification.
 """
 
 _DATA_URL = """https://zenodo.org/record/545928/files/OASBUD.mat?download=1"""
@@ -40,16 +42,15 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('0.1.0')
   
-  # Heavy configurations for dataset - raw rf and processed b-mode options
   BUILDER_CONFIGS = [
     tfds.core.BuilderConfig(
         version=VERSION,
-        name="raw_rf",
+        name="raw_rf", # unprocessed scan data
         description="Raw rf data from transducer."
     ),
     tfds.core.BuilderConfig(
         version=VERSION,
-        name="b_mode",
+        name="b_mode", # processed with hilbert transform and log compression
         description="Processed B mode image."
     )
   ]
@@ -88,7 +89,7 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     # Downloads the data, defines train split (all data)
-    extracted_path = dl_manager.download_and_extract(_DATA_URL)
+    extracted_path = dl_manager.download(_DATA_URL)
     
     return [
         tfds.core.SplitGenerator(
@@ -101,29 +102,28 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(data_path, "r") as f:
-        data = tfds.core.lazy_imports.scipy.io.loadmat(f)["data"][0]
-        for row in data:
-            key = row[0][0]
-            if self.builder_config.name is "b_mode":
-                example_dict = {
-                    "image_1": process_b_mode(row[1]),
-                    "mask_1": row[3],
-                    "image_2": process_b_mode(row[2]),
-                    "mask_2": row[4],
-                    "bi-rads": row[5],
-                    "label": row[6][0],
-                }
-            else:
-                example_dict = {
-                    "scan_1": row[1],
-                    "mask_1": row[3],
-                    "scan_2": row[2],
-                    "mask_2": row[4],
-                    "bi-rads": row[5],
-                    "label": row[6][0],
-                }
-            yield key, example_dict
+    data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
+    for row in data:
+        key = row[0][0]
+        if self.builder_config.name is "b_mode":
+            example_dict = {
+                "image_1": process_b_mode(row[1]),
+                "mask_1": row[3],
+                "image_2": process_b_mode(row[2]),
+                "mask_2": row[4],
+                "bi-rads": row[5],
+                "label": row[6][0],
+            }
+        else:
+            example_dict = {
+                "scan_1": row[1],
+                "mask_1": row[3],
+                "scan_2": row[2],
+                "mask_2": row[4],
+                "bi-rads": row[5],
+                "label": row[6][0],
+            }
+        yield key, example_dict
             
     def process_b_mode(scan):
         envelope_image = np.abs(tfds.core.lazy_import.scipy.signal.hilbert(scan))
