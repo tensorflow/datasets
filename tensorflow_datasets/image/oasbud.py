@@ -1,5 +1,6 @@
 """Raw rf ultrasound data of breast tumors, with segmentation masks and classifiers."""
 
+import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -61,18 +62,18 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name is "b_mode":
         config_features = tfds.features.FeaturesDict({
             "bmode_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
-            "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
+            "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
             "bmode_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
-            "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
+            "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
             "bi-rads": tfds.features.Text(),
             "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
         })
     else:
         config_features = tfds.features.FeaturesDict({
             "scan_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
+            "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
             "scan_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
+            "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
             "bi-rads": tfds.features.Text(),
             "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
         })
@@ -125,8 +126,9 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
                 "label": row[6][0],
             }
         yield key, example_dict
-            
+    
     def process_b_mode(scan):
+        scan = tf.cast(scan, 'float32')
         envelope_image = np.abs(tfds.core.lazy_import.scipy.signal.hilbert(scan))
         return 20 * np.log10(envelope_image/np.max(envelope_image))
 
