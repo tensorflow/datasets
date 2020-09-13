@@ -96,6 +96,20 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
         compress_im, self.image_dims)
     return compress_im.astype('float32')
 
+  def resize_mask(self, mask):
+    """Resize masks to same size as b_mode images
+
+    Args:
+      mask: numpy array of image segmentation mask
+
+    Returns:
+      numpy array of size image_dims
+    """
+    if self.image_dims is not None:
+      mask = tfds.core.lazy_imports.skimage.transform.resize(
+        mask, self.image_dims)
+    return mask
+
   def _info(self):
     """Returns DatasetInfo."""
     # Create FeaturesDict according to builder config
@@ -152,9 +166,9 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
       if self.builder_config.name == 'b_mode':
         example_dict = {
           "bmode_1": self.process_b_mode(row[1]),
-          "mask_1": row[3],
+          "mask_1": self.resize_mask(row[3]),
           "bmode_2": self.process_b_mode(row[2]),
-          "mask_2": row[4],
+          "mask_2": self.resize_mask(row[4]),
           "bi-rads": str(row[5][0]),
           "label": row[6][0][0]
         }
