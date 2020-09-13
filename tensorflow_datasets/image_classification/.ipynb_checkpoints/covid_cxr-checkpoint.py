@@ -19,7 +19,14 @@ import tensorflow_datasets.public_api as tfds
 import os
 
 _CITATION = """
-Wang, Linda, et al. COVID-Net: A Tailored Deep Convolutional Neural Network ... 2020, arxiv.org/pdf/2003.09871.pdf. 
+@misc{wang2020covidnet,
+    title={COVID-Net: A Tailored Deep Convolutional Neural Network Design for Detection of COVID-19 Cases from Chest Radiography Images},
+    author={Linda Wang, Zhong Qiu Lin and Alexander Wong},
+    year={2020},
+    eprint={2003.09871},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
 """
 
 # TODO(covid_cxr):
@@ -27,10 +34,8 @@ _DESCRIPTION = """
 Dataset with radiography images belonging to three different classes 
     - normal
     - pneumonia
-    - COVID - 19
-                    
+    - COVID - 19               
 """
-
 # _TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
 # _TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
 

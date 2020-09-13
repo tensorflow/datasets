@@ -19,18 +19,24 @@ import tensorflow_datasets.public_api as tfds
 import os
 
 _CITATION = """
-Wang, Linda, et al. COVID-Net: A Tailored Deep Convolutional Neural Network ... 2020, arxiv.org/pdf/2003.09871.pdf. 
+@misc{wang2020covidnet,
+    title={COVID-Net: A Tailored Deep Convolutional Neural Network Design for Detection of COVID-19 Cases from Chest Radiography Images},
+    author={Linda Wang, Zhong Qiu Lin and Alexander Wong},
+    year={2020},
+    eprint={2003.09871},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
 """
 
-# TODO(covid_cxr):
+
 _DESCRIPTION = """
 Dataset with radiography images belonging to three different classes 
-    - normal
-    - pneumonia
-    - COVID - 19               
+    - COVID - 19 -> 0 
+    - normal     -> 1
+    - pneumonia  -> 2             
 """
-# _TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
-# _TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
+
 
 _TEST_224_URL       = 'https://drive.google.com/uc?export=download&id=1ZzrVZlDSzzHew92lWF5VWoabXQXeeZh2'
 _TEST_480_URL       = 'https://drive.google.com/uc?export=download&id=1WDoHmfsrSGivArnZoLujUEbJBsFEnOid'
@@ -125,7 +131,16 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive):
-    """Yields examples."""
+    """Yields examples.
+  
+    Generate chest x-ray images and labels given the directory path.
+    
+    Args:
+      archive: object iterating the zip file.
+    Yields:
+      The image and its corresponding label.
+      
+    """
 
     for fname, fobj in archive:
             image_dir, image_file = os.path.split(fname)
