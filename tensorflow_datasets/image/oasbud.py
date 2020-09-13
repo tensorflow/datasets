@@ -108,7 +108,7 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     if self.image_dims:
       mask = tfds.core.lazy_imports.skimage.transform.resize(
         mask, self.image_dims)
-      return (mask > 0.5).astype('uint8') # recast to bits
+      return (mask > 0).astype('uint8') # recast to bits
     return mask # if no resizing needed
 
   def _info(self):
