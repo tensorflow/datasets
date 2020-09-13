@@ -60,12 +60,12 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     # Each patient has two scans, two masks, BIRAD id, and malignant classifier
     if self.builder_config.name is "b_mode":
         config_features = tfds.features.FeaturesDict({
-            "image_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
+            "bmode_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
             "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "image_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
+            "bmode_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
             "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "bi-rads": tfds.features.Tensor(shape=(), dtype=tf.string),
-            "label": tfds.features.Tensor(shape=(), dtype=tf.int8)
+            "bi-rads": tfds.features.Text(),
+            "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
         })
     else:
         config_features = tfds.features.FeaturesDict({
@@ -73,8 +73,8 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
             "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
             "scan_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
             "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "bi-rads": tfds.features.Tensor(shape=(), dtype=tf.string),
-            "label": tfds.features.Tensor(shape=(), dtype=tf.int8)
+            "bi-rads": tfds.features.Text(),
+            "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
         })
 
     return tfds.core.DatasetInfo(
@@ -102,14 +102,15 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_path):
     """Yields examples."""
+    # data has 7 columns: ID, scan1, scan2, roi1, roi2, bi-rads, and label
     data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
     for row in data:
-        key = row[0][0]
+        key = row[0][0] # unique patient ID
         if self.builder_config.name is "b_mode":
             example_dict = {
-                "image_1": process_b_mode(row[1]),
+                "bmode_1": process_b_mode(row[1]),
                 "mask_1": row[3],
-                "image_2": process_b_mode(row[2]),
+                "bmode_2": process_b_mode(row[2]),
                 "mask_2": row[4],
                 "bi-rads": row[5],
                 "label": row[6][0],
