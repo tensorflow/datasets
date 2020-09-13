@@ -69,9 +69,9 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     If image_dims is not specified, the returned images will be of different
     sizes based on the scan depth.
     """
-    super().__init__(**kwargs)
-    self.image_dims = image_dims
+    self.image_dims = image_dims if image_dims else ()
     self.db_threshold = db_threshold
+    super().__init__(**kwargs)
 
   def process_b_mode(self, scan):
     """Process raw rf scan into bmode image
@@ -91,7 +91,7 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     envelope_im = np.abs(signal.hilbert(scan))
     compress_im = 20 * np.log10(envelope_im/np.max(envelope_im))
     compress_im[compress_im < self.db_threshold] = self.db_threshold
-    if self.image_dims is not None:
+    if self.image_dims:
       compress_im = tfds.core.lazy_imports.skimage.transform.resize(
         compress_im, self.image_dims)
     return compress_im.astype('float32')
@@ -105,26 +105,31 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     Returns:
       numpy array of size image_dims
     """
-    if self.image_dims is not None:
+    if self.image_dims:
       mask = tfds.core.lazy_imports.skimage.transform.resize(
         mask, self.image_dims)
-    return mask
+      return (mask > 0.5).astype('uint8') # recast to bits
+    return mask # if no resizing needed
 
   def _info(self):
     """Returns DatasetInfo."""
     # Create FeaturesDict according to builder config
     # Each patient has two scans, two masks, BIRAD id, and malignant classifier
+    image_shape = (None, 510)
+    if self.image_dims:
+      image_shape = self.image_dims
     if self.builder_config.name == 'b_mode':
       config_features = tfds.features.FeaturesDict({
-          "bmode_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
-          "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
-          "bmode_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
-          "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
+          "bmode_1": tfds.features.Tensor(shape=image_shape, dtype=tf.float32),
+          "mask_1": tfds.features.Tensor(shape=image_shape, dtype=tf.uint8),
+          "bmode_2": tfds.features.Tensor(shape=image_shape, dtype=tf.float32),
+          "mask_2": tfds.features.Tensor(shape=image_shape, dtype=tf.uint8),
           "bi-rads": tfds.features.Text(),
           "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
       })
     else:
       config_features = tfds.features.FeaturesDict({
+          # all scans have shape x by 510, where x depends on scan depth
           "scan_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
           "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
           "scan_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
