@@ -22,16 +22,18 @@ _CITATION = """\
 }
 """
 
-_DESCRIPTION = """\
-The Open Access Series of Breast Ultrasonic Data contains 200 ultrasound scans \
-(2 orthogonal scans each) of 52 malignant and 48 benign breast tumors, collected \
-by the Department of Ultrasound at The Institute of Fundamental Technological Research \
-of the Polish Academy of Sciences from patients at the Institute of Oncology (Warsaw). \
-The scans are stored as rf data arrays of x by 510 (where x depends on scan depth) \ 
-and each scan includes a same-size mask that denotes the region-of-interest for the \
-tumor. The tumors were ranked on the BI-RADS scale, which describes the probability \
-of lesion malignancy, and classified as malignant or benign. The 100 dataset entries each \
-contain the two scans, two masks, BI-RADS ranking, and classification.
+_DESCRIPTION = """The Open Access Series of Breast Ultrasonic Data contains 200 \
+ultrasound scans (2 orthogonal scans each) of 52 malignant and 48 benign breast \
+tumors, collected by the Department of Ultrasound at The Institute of Fundamental \
+Technological Research of the Polish Academy of Sciences from patients at the \
+Institute of Oncology (Warsaw). The scans are stored as rf data arrays of x by 510 \
+(where x depends on scan depth) and each scan includes a same-size mask that denotes \
+the region-of-interest for the tumor. The tumors were ranked on the BI-RADS scale, \
+which describes the probability of lesion malignancy, and classified as malignant or \
+benign. The 100 dataset entries each contain the two scans, two masks, BI-RADS ranking, \
+and classification. The b_mode configuration processes the two scans into a B Mode \
+image using the hilbert transform, log compression, and dB thresholding method \
+suggested by the dataset authors.
 """
 
 _DATA_URL = """https://zenodo.org/record/545928/files/OASBUD.mat?download=1"""
@@ -52,17 +54,47 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     ),
     tfds.core.BuilderConfig(
         version=VERSION,
-        name="b_mode", # processed with hilbert transform and log compression
+        name="b_mode", # process with hilbert transform, log compression, dB threshold
         description="Processed B mode image."
     )
   ]
 
-  @staticmethod
-  def process_b_mode(scan):
-    """Performs hilbert transform and log compression to convert rf to bmode."""
-    envelope_image = np.abs(signal.hilbert(scan))
-    compress_image = 20 * np.log10(envelope_image/np.max(envelope_image))
-    return compress_image.astype('float32')
+  def __init__(self, image_dims=None, db_threshold=-50, **kwargs):
+    """ Initializes class and b_mode processing variables.
+
+    Args:
+        image_dims: 2D tuple of desired shape for output b_mode images.
+        db_threshold: negative integer to threshold scan values with
+
+    If image_dims is not specified, the returned images will be of different
+    sizes based on the scan depth.
+    """
+    super().__init__(**kwargs)
+    self.image_dims = image_dims
+    self.db_threshold = db_threshold
+
+  def process_b_mode(self, scan):
+    """Process raw rf scan into bmode image
+
+    Uses method defined by dataset authors in MATLAB: performs hilbert
+    transform, log compression, and dB thresholding. If resizing scans
+    is specified by a size in the constructor, bilinearly interpolates
+    image data into specified size.
+
+    Args:
+      scan: numpy array of the raw rf scan data
+
+    Returns:
+      bmode image array of the same shape as scan with dtype float32
+      If image_dims specified in constructor, output size will be image_dims
+    """
+    envelope_im = np.abs(signal.hilbert(scan))
+    compress_im = 20 * np.log10(envelope_im/np.max(envelope_im))
+    compress_im[compress_im < self.db_threshold] = self.db_threshold
+    if self.image_dims is not None:
+      compress_im = tfds.core.lazy_imports.skimage.transform.resize(
+        compress_im, self.image_dims)
+    return compress_im.astype('float32')
 
   def _info(self):
     """Returns DatasetInfo."""
@@ -115,13 +147,13 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     # data has 7 columns: ID, scan1, scan2, roi1, roi2, bi-rads, and label
     data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
     for index, row in enumerate(data):
-        # use ID_rownum as key - one patient has two tumors, so ID is not unique
+      # use ID_rownum as key - one patient has two tumors, so ID is not unique
       key = "{}_{}".format(row[0][0], index)
       if self.builder_config.name == 'b_mode':
         example_dict = {
-          "bmode_1": Oasbud.process_b_mode(row[1]),
+          "bmode_1": self.process_b_mode(row[1]),
           "mask_1": row[3],
-          "bmode_2": Oasbud.process_b_mode(row[2]),
+          "bmode_2": self.process_b_mode(row[2]),
           "mask_2": row[4],
           "bi-rads": str(row[5][0]),
           "label": row[6][0][0]

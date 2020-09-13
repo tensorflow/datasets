@@ -134,7 +134,7 @@ DATASET_EXTRAS = {
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
-    'oasbud': ['scipy'],
+    'oasbud': ['scipy', 'scikit-image'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
