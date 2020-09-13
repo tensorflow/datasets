@@ -1,9 +1,9 @@
 """Raw rf ultrasound data of breast tumors, with segmentation masks and classifiers."""
 
 import numpy as np
+from scipy import signal
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
-from scipy import signal
 
 _CITATION = """\
 @article {MP:MP12538,
@@ -43,7 +43,7 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
   """Raw rf ultrasound data of breast tumors, with segmentation masks and classifiers."""
 
   VERSION = tfds.core.Version('0.1.0')
-  
+
   BUILDER_CONFIGS = [
     tfds.core.BuilderConfig(
         version=VERSION,
@@ -56,34 +56,36 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
         description="Processed B mode image."
     )
   ]
-    
+
   @staticmethod
   def process_b_mode(scan):
+    """Performs hilbert transform and log compression to convert rf to bmode."""
     envelope_image = np.abs(signal.hilbert(scan))
     compress_image = 20 * np.log10(envelope_image/np.max(envelope_image))
     return compress_image.astype('float32')
 
   def _info(self):
+    """Returns DatasetInfo."""
     # Create FeaturesDict according to builder config
     # Each patient has two scans, two masks, BIRAD id, and malignant classifier
-    if self.builder_config.name is "b_mode":
-        config_features = tfds.features.FeaturesDict({
-            "bmode_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
-            "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
-            "bmode_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
-            "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
-            "bi-rads": tfds.features.Text(),
-            "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
-        })
+    if self.builder_config.name == 'b_mode':
+      config_features = tfds.features.FeaturesDict({
+          "bmode_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
+          "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
+          "bmode_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.float32),
+          "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
+          "bi-rads": tfds.features.Text(),
+          "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
+      })
     else:
-        config_features = tfds.features.FeaturesDict({
-            "scan_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
-            "scan_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-            "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
-            "bi-rads": tfds.features.Text(),
-            "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
-        })
+      config_features = tfds.features.FeaturesDict({
+          "scan_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
+          "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
+          "scan_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
+          "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
+          "bi-rads": tfds.features.Text(),
+          "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
+      })
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -98,7 +100,7 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Downloads the data, defines train split (all data)
     extracted_path = dl_manager.download(_DATA_URL)
-    
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -113,25 +115,24 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     # data has 7 columns: ID, scan1, scan2, roi1, roi2, bi-rads, and label
     data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
     for index, row in enumerate(data):
-        # use ID_rownum as key - one patient has two tumors, so ID is not unique 
-        key = "{}_{}".format(row[0][0], index)
-        if self.builder_config.name is "b_mode":
-            example_dict = {
-                "bmode_1": Oasbud.process_b_mode(row[1]),
-                "mask_1": row[3],
-                "bmode_2": Oasbud.process_b_mode(row[2]),
-                "mask_2": row[4],
-                "bi-rads": str(row[5][0]),
-                "label": row[6][0][0]
-            }
-        else:
-            example_dict = {
-                "scan_1": row[1],
-                "mask_1": row[3],
-                "scan_2": row[2],
-                "mask_2": row[4],
-                "bi-rads": str(row[5][0]),
-                "label": row[6][0][0]
-            }
-        yield key, example_dict
-
+        # use ID_rownum as key - one patient has two tumors, so ID is not unique
+      key = "{}_{}".format(row[0][0], index)
+      if self.builder_config.name == 'b_mode':
+        example_dict = {
+          "bmode_1": Oasbud.process_b_mode(row[1]),
+          "mask_1": row[3],
+          "bmode_2": Oasbud.process_b_mode(row[2]),
+          "mask_2": row[4],
+          "bi-rads": str(row[5][0]),
+          "label": row[6][0][0]
+        }
+      else:
+        example_dict = {
+          "scan_1": row[1],
+          "mask_1": row[3],
+          "scan_2": row[2],
+          "mask_2": row[4],
+          "bi-rads": str(row[5][0]),
+          "label": row[6][0][0]
+        }
+      yield key, example_dict
