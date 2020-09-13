@@ -106,14 +106,14 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     # data has 7 columns: ID, scan1, scan2, roi1, roi2, bi-rads, and label
     data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
     for row in data:
-        key = row[0][0] # unique patient ID
+        key = str(row[0][0]) # unique patient ID
         if self.builder_config.name is "b_mode":
             example_dict = {
                 "bmode_1": process_b_mode(row[1]),
                 "mask_1": row[3],
                 "bmode_2": process_b_mode(row[2]),
                 "mask_2": row[4],
-                "bi-rads": row[5],
+                "bi-rads": str(row[5]),
                 "label": row[6][0],
             }
         else:
@@ -122,7 +122,7 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
                 "mask_1": row[3],
                 "scan_2": row[2],
                 "mask_2": row[4],
-                "bi-rads": row[5],
+                "bi-rads": str(row[5]),
                 "label": row[6][0],
             }
         yield key, example_dict
