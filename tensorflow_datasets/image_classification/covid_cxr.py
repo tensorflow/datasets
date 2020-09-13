@@ -16,10 +16,11 @@ _CITATION = """
 
 
 _DESCRIPTION = """
-Dataset with radiography images belonging to three different classes 
-    - COVID - 19 -> 0 
-    - normal     -> 1
-    - pneumonia  -> 2             
+    This dataset contains....
+    
+    We have provided three builder configurations for the user to choose from. The 'original' config includes images in varying resolutions and in varying image formats. The 224 config has all images in 224X224 resolution and in the .png format. The 480 config has all the images in 480X480 resolution and in .png format. Both these resolutions were used by Wang et al. to build COVID-Net - a deep CNN for detecting COVID-19 cases from chest radiography images. 
+
+    The test set was created as per Wang et al.'s split. We have kept this consistent to faciliate comparison and encourage uniformity. Details and the code about the split can be found https://github.com/lindawangg/COVID-Net/blob/master/create_COVIDx.ipynb 
 """
 
 
@@ -31,7 +32,7 @@ _TRAIN_224_URL      = 'https://drive.google.com/uc?export=download&id=1LsC-a1Ig5
 _TRAIN_480_URL      = 'https://drive.google.com/uc?export=download&id=1slHH_yHdiiHc0q5OTL7txcG47HA-yjfQ'
 _TRAIN_ORIGINAL_URL = 'https://drive.google.com/uc?export=download&id=1FrxYfLLg1FDOUzvGyZBnVt5vwGAErjtN'
 
-_DATA_OPTIONS = ['original', 480, 224]
+_DATA_OPTIONS = ['original', 480, 224] #The 3 builder configurations
 
 class CovidCxrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for covid_cxr."""
@@ -55,7 +56,6 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
     self.resolution = resolution
     
 class CovidCxr(tfds.core.GeneratorBasedBuilder):
-  """TODO(covid_cxr): Chest X-ray images of COVID-19, normal, and pneumonia patients."""
 
   VERSION = tfds.core.Version('0.1.0')
     
@@ -83,10 +83,10 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
                                          encoding_format = 'png'),
             
             "label": tfds.features.ClassLabel(
-                names = ["COVID-19", "normal", "pneumonia"]),
+                names = ["COVID-19", "normal", "pneumonia"]), # 3 labels
         }),
 
-        supervised_keys = ('image', 'label'),
+        supervised_keys = ('image', 'label'), 
         
         homepage = 'https://github.com/lindawangg/COVID-Net',
         citation = _CITATION,

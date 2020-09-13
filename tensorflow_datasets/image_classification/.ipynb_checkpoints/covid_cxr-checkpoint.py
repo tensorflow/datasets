@@ -1,18 +1,3 @@
-# coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 """covid_cxr dataset."""
 
 import tensorflow_datasets.public_api as tfds
@@ -29,15 +14,15 @@ _CITATION = """
 }
 """
 
-# TODO(covid_cxr):
+
 _DESCRIPTION = """
-Dataset with radiography images belonging to three different classes 
-    - normal
-    - pneumonia
-    - COVID - 19               
+    This dataset contains....
+    
+    We have provided three builder configurations for the user to choose from. The 'original' config includes images in varying resolutions and in varying image formats. The 224 config has all images in 224X224 resolution and in the .png format. The 480 config has all the images in 480X480 resolution and in .png format. Both these resolutions were used by Wang et al. to build COVID-Net - a deep CNN for detecting COVID-19 cases from chest radiography images. 
+
+    The test set was created as per Wang et al.'s split. We have kept this consistent to faciliate comparison and encourage uniformity. Details and the code about the split can be found https://github.com/lindawangg/COVID-Net/blob/master/create_COVIDx.ipynb 
 """
-# _TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
-# _TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
+
 
 _TEST_224_URL       = 'https://drive.google.com/uc?export=download&id=1ZzrVZlDSzzHew92lWF5VWoabXQXeeZh2'
 _TEST_480_URL       = 'https://drive.google.com/uc?export=download&id=1WDoHmfsrSGivArnZoLujUEbJBsFEnOid'
@@ -47,7 +32,7 @@ _TRAIN_224_URL      = 'https://drive.google.com/uc?export=download&id=1LsC-a1Ig5
 _TRAIN_480_URL      = 'https://drive.google.com/uc?export=download&id=1slHH_yHdiiHc0q5OTL7txcG47HA-yjfQ'
 _TRAIN_ORIGINAL_URL = 'https://drive.google.com/uc?export=download&id=1FrxYfLLg1FDOUzvGyZBnVt5vwGAErjtN'
 
-_DATA_OPTIONS = ['original', 480, 224]
+_DATA_OPTIONS = ['original', 480, 224] #The 3 builder configurations
 
 class CovidCxrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for covid_cxr."""
@@ -71,7 +56,6 @@ class CovidCxrConfig(tfds.core.BuilderConfig):
     self.resolution = resolution
     
 class CovidCxr(tfds.core.GeneratorBasedBuilder):
-  """TODO(covid_cxr): Chest X-ray images of COVID-19, normal, and pneumonia patients."""
 
   VERSION = tfds.core.Version('0.1.0')
     
@@ -99,10 +83,10 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
                                          encoding_format = 'png'),
             
             "label": tfds.features.ClassLabel(
-                names = ["COVID-19", "normal", "pneumonia"]),
+                names = ["COVID-19", "normal", "pneumonia"]), # 3 labels
         }),
 
-        supervised_keys = ('image', 'label'),
+        supervised_keys = ('image', 'label'), 
         
         homepage = 'https://github.com/lindawangg/COVID-Net',
         citation = _CITATION,
@@ -132,7 +116,16 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive):
-    """Yields examples."""
+    """Yields examples.
+  
+    Generate chest x-ray images and labels given the directory path.
+    
+    Args:
+      archive: object iterating the zip file.
+    Yields:
+      The image and its corresponding label.
+      
+    """
 
     for fname, fobj in archive:
             image_dir, image_file = os.path.split(fname)
