@@ -59,81 +59,74 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     )
   ]
 
-  def __init__(self, image_dims=None, db_threshold=-50, **kwargs):
-    """ Initializes class and b_mode processing variables.
+  def __init__(self, db_threshold=-50, **kwargs):
+    """ Initializes class and b_mode processing variable.
 
     Args:
-        image_dims: 2D tuple of desired shape for output b_mode images.
         db_threshold: negative integer to threshold scan values with
-
-    If image_dims is not specified, the returned images will be of different
-    sizes based on the scan depth.
     """
-    self.image_dims = image_dims if image_dims else ()
-    self.db_threshold = db_threshold
     super().__init__(**kwargs)
+    self.db_threshold = db_threshold
 
   def process_b_mode(self, scan):
     """Process raw rf scan into bmode image
 
     Uses method defined by dataset authors in MATLAB: performs hilbert
-    transform, log compression, and dB thresholding. If resizing scans
-    is specified by a size in the constructor, bilinearly interpolates
-    image data into specified size.
+    transform, log compression, and dB thresholding.
 
     Args:
       scan: numpy array of the raw rf scan data
 
     Returns:
       bmode image array of the same shape as scan with dtype float32
-      If image_dims specified in constructor, output size will be image_dims
     """
     envelope_im = np.abs(signal.hilbert(scan))
     compress_im = 20 * np.log10(envelope_im/np.max(envelope_im))
     compress_im[compress_im < self.db_threshold] = self.db_threshold
-    if self.image_dims:
-      compress_im = tfds.core.lazy_imports.skimage.transform.resize(
-        compress_im, self.image_dims)
     return compress_im.astype('float32')
 
-  def resize_mask(self, mask):
-    """Resize masks to same size as b_mode images
+  def resize_images_and_masks(self, example, image_dims):
+    """Resize all images and masks to specified image_dims
 
     Args:
-      mask: numpy array of image segmentation mask
+      example: generated example, features dictionary
+      image_dims: desired size of images and masks
 
     Returns:
-      numpy array of size image_dims
+      example dictionary with images and masks resize to image_dims
     """
-    if self.image_dims:
-      mask = tfds.core.lazy_imports.skimage.transform.resize(
-        mask, self.image_dims)
-      return (mask > 0).astype('uint8') # recast to bits
-    return mask # if no resizing needed
+    example["bmode_1"] = tfds.core.lazy_imports.skimage.transform.resize(
+      example["bmode_1"], image_dims)
+    example["bmode_2"] = tfds.core.lazy_imports.skimage.transform.resize(
+      example["bmode_2"], image_dims)
+    mask1 = tfds.core.lazy_imports.skimage.transform.resize(
+      example["mask_1"], image_dims)
+    mask2 = tfds.core.lazy_imports.skimage.transform.resize(
+      example["mask_2"], image_dims)
+    example["mask_1"] = (mask1 > 0).astype('uint8') # recast to bits
+    example["mask_2"] = (mask2 > 0).astype('uint8')
+    return example
 
   def _info(self):
     """Returns DatasetInfo."""
     # Create FeaturesDict according to builder config
     # Each patient has two scans, two masks, BIRAD id, and malignant classifier
-    image_shape = (None, 510)
-    if self.image_dims:
-      image_shape = self.image_dims
+    shape = (None, 510) # all scans have shape x by 510, x depends on scan depth
     if self.builder_config.name == 'b_mode':
       config_features = tfds.features.FeaturesDict({
-          "bmode_1": tfds.features.Tensor(shape=image_shape, dtype=tf.float32),
-          "mask_1": tfds.features.Tensor(shape=image_shape, dtype=tf.uint8),
-          "bmode_2": tfds.features.Tensor(shape=image_shape, dtype=tf.float32),
-          "mask_2": tfds.features.Tensor(shape=image_shape, dtype=tf.uint8),
+          "bmode_1": tfds.features.Tensor(shape=shape, dtype=tf.float32),
+          "mask_1": tfds.features.Tensor(shape=shape, dtype=tf.uint8),
+          "bmode_2": tfds.features.Tensor(shape=shape, dtype=tf.float32),
+          "mask_2": tfds.features.Tensor(shape=shape, dtype=tf.uint8),
           "bi-rads": tfds.features.Text(),
           "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
       })
     else:
       config_features = tfds.features.FeaturesDict({
-          # all scans have shape x by 510, where x depends on scan depth
-          "scan_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-          "mask_1": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
-          "scan_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.int16),
-          "mask_2": tfds.features.Tensor(shape=(None, 510), dtype=tf.uint8),
+          "scan_1": tfds.features.Tensor(shape=shape, dtype=tf.int16),
+          "mask_1": tfds.features.Tensor(shape=shape, dtype=tf.uint8),
+          "scan_2": tfds.features.Tensor(shape=shape, dtype=tf.int16),
+          "mask_2": tfds.features.Tensor(shape=shape, dtype=tf.uint8),
           "bi-rads": tfds.features.Text(),
           "label": tfds.features.Tensor(shape=(), dtype=tf.uint8)
       })
@@ -165,15 +158,16 @@ class Oasbud(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     # data has 7 columns: ID, scan1, scan2, roi1, roi2, bi-rads, and label
     data = tfds.core.lazy_imports.scipy.io.loadmat(data_path)["data"][0]
+
     for index, row in enumerate(data):
       # use ID_rownum as key - one patient has two tumors, so ID is not unique
       key = "{}_{}".format(row[0][0], index)
       if self.builder_config.name == 'b_mode':
         example_dict = {
           "bmode_1": self.process_b_mode(row[1]),
-          "mask_1": self.resize_mask(row[3]),
+          "mask_1": row[3],
           "bmode_2": self.process_b_mode(row[2]),
-          "mask_2": self.resize_mask(row[4]),
+          "mask_2": row[4],
           "bi-rads": str(row[5][0]),
           "label": row[6][0][0]
         }
