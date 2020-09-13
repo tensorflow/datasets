@@ -27,10 +27,8 @@ _DESCRIPTION = """
 Dataset with radiography images belonging to three different classes 
     - normal
     - pneumonia
-    - COVID - 19
-                    
+    - COVID - 19               
 """
-
 # _TRAIN_URL = 'https://drive.google.com/uc?export=download&id=1FE57dEo6xKK9goxd8trERz_Y_vdP3GCX'
 # _TEST_URL = 'https://drive.google.com/uc?export=download&id=12sq9rO5nSgl-fmWD2KtHocU2xUyX38qP'
 
