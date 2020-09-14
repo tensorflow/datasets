@@ -86,7 +86,7 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager,dl_manager.manual_dir):
     """Returns SplitGenerators."""
     
     if not tf.io.gfile.exists(dl_manager.manual_dir):

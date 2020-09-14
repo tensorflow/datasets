@@ -44,11 +44,11 @@ abdominal lymph nodes in 86 patients. All images are of 512*512 pixel arrays.
 
 
 
-class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
+class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
   """This is a dataset containing CT images of lymph nodes from NIH"""
 
   #Set up version.
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('0.1.0')
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You can download the images from
@@ -72,11 +72,11 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
         'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.float16),
 
         ## Patient Age
-        'age'  : tf.features.Text(),
+        'age'  : tfds.features.Text(),
         ## Patient Sex
-        'sex'  : tf.features.Text(),
+        'sex'  : tfds.features.Text(),
         ## Body Part Examined
-        'body_part'  : tf.features.Text()
+        'body_part'  : tfds.features.Text()
         
             
         }),
@@ -86,7 +86,7 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager,dl_manager.manual_dir):
     """Returns SplitGenerators."""
     
     if not tf.io.gfile.exists(dl_manager.manual_dir):
@@ -114,7 +114,6 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
     """
     ## Each patient has his own folder of masks and images, and the patient id is the same in masks and images
     patients = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS'))
-    patients.sort()
     
 
     ## iterate over all masks folders
