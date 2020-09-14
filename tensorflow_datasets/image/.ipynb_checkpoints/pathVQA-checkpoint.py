@@ -18,95 +18,82 @@ _CITATION = """\
 
 # TODO(pathVQA):
 _DESCRIPTION = """\
-***TBD***
+The authors generated a pathology visual question answering (VQA) dataset by extracting images and captions from online pathology textbooks and online digital libraries. The dataset contains a total of 4,998 images and 32,799 question-answer pairs. 1670 images were generated from two pathology textbook Basic Pathology and Textbook of pathology, and the rest of images were generated from the PEIR digital library. About half of the images have a “yes/no” answer and the other half have a open-ended answer that include six types of information relevant to disease pathology: “what”, “where”, “when”, “whose”, “how”, and “how much/how many”. 
+
+This dataset aims to help create an “AI” board-certificated pathologist in the United States. By providing the answer-pairs that are highly similar to the American Board Pathology (ABP) test, this dataset will lead to a better understanding about computer-aided clinical decision making and contribute to pathologist education. The construction of “AI” pathologists could be a great potential for low-resource settings where medical training resources and medical professionals are scarcer than in the United States. 
 """
 
-
 class Pathvqa(tfds.core.GeneratorBasedBuilder):
-  """TODO(pathVQA): Short description of my dataset."""
+  """pathVQA dataset"""
 
-  # TODO(pathVQA): Set up version.
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    # TODO(pathVQA): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Tensor(shape = (None, None, 3), dtype = tf.uint8), 
-            "question": tfds.features.Text(),
-            "answer": tfds.features.Text(),
+            'image': tfds.features.Tensor(shape = (None, None, None), dtype = tf.uint8), 
+            'question':  tfds.features.Tensor(shape=(None,), dtype=tf.string),
+            'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
         }),
-#         supervised_keys=('image', 'question', 'answer'),
         supervised_keys=None,
         homepage='https://github.com/UCSD-AI4H/PathVQA',
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
-#     extracted_path = dl_manager.download_and_extract('https://storage.googleapis.com/bme590/roujia/pathVQARW')
-#     extracted_path = dl_manager.download_and_extract('www.dukelibraryrepo.com/bme590/roujia/pathVQARW.tar.gz')
     extracted_path = 'gs://bme590/roujia/pathVQARW'
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'images_dir': os.path.join(extracted_path, "train/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "train/", "labels.json")
+                'labels_dir': os.path.join(extracted_path, "train/", "label.json")
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'images_dir': os.path.join(extracted_path, "test/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "test/", "labels.json")
+                'labels_dir': os.path.join(extracted_path, "test/", "label.json")
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'images_dir': os.path.join(extracted_path, "val/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "val/", "labels.json")
+                'labels_dir': os.path.join(extracted_path, "val/", "label.json")
                        },
         ),
-#         tfds.core.SplitGenerator(
-#             name=tfds.Split.HOLDOUT,
-#             gen_kwargs={
-#                 'images_dir': os.path.join(extracted_path, "hold-out/", "pic"),
-#                 'labels_dir': os.path.join(extracted_path, "hold-out/", "labels.json")
-#             },
-#         ),
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
-    # tf.io.gfile.Open('gs://bme590/roujia/pathVQARW/train/labels.json')
-    # open('./labels.json')
     my_files = tf.io.gfile.listdir(images_dir)
     for file in my_files:
-        print(file)
         questions = []
         answers = []
-        with tf.io.gfile.GFile(labels_dir, 'r') as f:
+        with tf.io.gfile.GFile(labels_dir) as f:
             for line in f:
-                str = line[:-2]
+                string = line[:-2]
                 try:
-                    x = json.loads(str)
+                    x = json.loads(string)
                     if file == x['Images']: 
-                        questions.append(x['Questions'])
-                        answers.append(x['Answers'])
+                        questions.append(str(x['Questions']))
+                        answers.append(str(x['Answers']))
                     else:
                         continue
                 except: 
                     continue
-        image = tf.io.read_file(os.path.join(images_dir, file)) 
-        imageTensor = tf.io.decode_jpeg(image)
-        questionTensor = questions
-        answerTensor = answers
-    yield 'key', {
-        'image': imageTensor,
-        'question': questionTensor,
-        'answer': answerTensor, 
-    }
+        if file.endswith('jpg') and len(questions)>0:
+            image = tf.io.read_file(os.path.join(images_dir, file)) 
+            imageTensor = tf.io.decode_jpeg(image)
+#             print(questions) # for testing purpose. Will be removed
+#             print(answers) # for testing purpose. Will be removed
+            yield 'key', {
+                'image': imageTensor,
+                'question': tf.stack(questions),
+                'answer': tf.stack(answers), 
+            }
+        else: 
+            continue
