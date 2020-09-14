@@ -1,9 +1,7 @@
 """CT_Lymph_Nodes dataset."""
 
-import tensorflow_datasets as tfds
+import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
-from tensorflow_datasets.core import utils
-import numpy as np
 import os
 import io
 import pydicom
