@@ -18,9 +18,11 @@ _CITATION = """
 _DESCRIPTION = """
     This dataset contains....
     
-    We have provided three builder configurations for the user to choose from. The 'original' config includes images in varying resolutions and in varying image formats. The 224 config has all images in 224X224 resolution and in the .png format. The 480 config has all the images in 480X480 resolution and in .png format. Both these resolutions were used by Wang et al. to build COVID-Net - a deep CNN for detecting COVID-19 cases from chest radiography images. 
+    We have provided three builder configurations for the user to choose from. The 'original' config includes images in varying resolutions and in .png image format. The 224 config has all images in 224x224 resolution and in the .png format. The 480 config has all the images in 480x480 resolution and in .png format. Both these resolutions were used by Wang et al. to build COVID-Net - a deep CNN for detecting COVID-19 cases from chest radiography images. 
 
     The test set was created as per Wang et al.'s split. We have kept this consistent to faciliate comparison and encourage uniformity. Details and the code about the split can be found https://github.com/lindawangg/COVID-Net/blob/master/create_COVIDx.ipynb 
+    
+    The training set has 507 COVID-19, 7966 normal, and 5468 pneumonia images. The test set has 100 COVID-19, 885 normal, and 594 pneumonia images. These counts remain consistent along all resolution configurations.
 """
 
 
