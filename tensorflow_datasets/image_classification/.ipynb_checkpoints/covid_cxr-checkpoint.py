@@ -134,6 +134,5 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
         image_dir, image_file = os.path.split(fname)
         d = os.path.basename(image_dir)
         record = {"image": fobj, "label": d}
-        yield record
-#         yield "%s/%s" % (image_file, d), record
+        yield "%s/%s" % (image_file, d), record
 
