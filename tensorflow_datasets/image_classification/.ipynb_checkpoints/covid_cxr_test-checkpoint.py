@@ -1,51 +1,40 @@
 """covid_cxr dataset."""
 
 from tensorflow_datasets.image_classification import covid_cxr
-import tensorflow_datasets.testing as testing
+import tensorflow_datasets.testing as tfds_test
 
-class CovidCxrTest(testing.DatasetBuilderTestCase):
+class CovidCxr224Test(tfds_test.DatasetBuilderTestCase):
     
     DATASET_CLASS = covid_cxr.CovidCxr
- 
-    class CovidCxrOriginalTest(testing.DatasetBuilderTestCase):
+    BUILDER_CONFIG_NAMES_TO_TEST = [224]
+    
+    SPLITS = {"train": 3,
+              "test": 3,}   
+    
+    DL_EXTRACT_RESULT = {'train': 'train_224.zip', 
+                         'test': 'test_224.zip'}
+    
+class CovidCxr480Test(tfds_test.DatasetBuilderTestCase):
+    
+    DATASET_CLASS = covid_cxr.CovidCxr
+    BUILDER_CONFIG_NAMES_TO_TEST = [480]
+    
+    SPLITS = {"train": 3,
+              "test": 3,}   
+    
+    DL_EXTRACT_RESULT = {'train': 'train_480.zip', 
+                         'test': 'test_480.zip'}
 
-          BUILDER_CONFIG_NAMES_TO_TEST = ["original"]
-
-          SPLITS = {
-              "train": 3,
-              "test": 3,
-          }           
-            
-          DL_EXTRACT_RESULT = {'original/train.zip', 'original/test.zip'}
-
-'''
-    class CovidCxr224Test(testing.DatasetBuilderTestCase):
-          DATASET_CLASS = covid_cxr.CovidCxr
-          BUILDER_CONFIG_NAMES_TO_TEST = ["224"]
-          SPLITS = {
-              "train": 3,
-              "test": 3,
-          }
-            
-          DL_EXTRACT_RESULT = {
-                          "train": "224/train", 
-                          "test": "224/test"
-                                  }
-
-
-    class CovidCxr480Test(testing.DatasetBuilderTestCase):
-          DATASET_CLASS = covid_cxr.CovidCxr
-          BUILDER_CONFIG_NAMES_TO_TEST = ["480"]
-          SPLITS = {
-              "train": 3,
-              "test": 3,}
-            
-          DL_EXTRACT_RESULT = {
-                        "train": "480/train",  
-                        "test": "480/test"
-          }
-'''
-
+class CovidCxrOriginalTest(tfds_test.DatasetBuilderTestCase):
+    
+    DATASET_CLASS = covid_cxr.CovidCxr
+    BUILDER_CONFIG_NAMES_TO_TEST = ["original"]
+    
+    SPLITS = {"train": 3,
+              "test": 3,}   
+    
+    DL_EXTRACT_RESULT = {'train': 'train_original.zip', 
+                         'test': 'test_original.zip'}
+    
 if __name__ == "__main__":
-      testing.test_main()
-
+    tfds_test.test_main()
