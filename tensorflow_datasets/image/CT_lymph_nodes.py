@@ -44,7 +44,7 @@ abdominal lymph nodes in 86 patients. All images are of 512*512 pixel arrays.
 
 
 
-class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
+class CTLymphNodes(tfds.core.GeneratorBasedBuilder):
   """This is a dataset containing CT images of lymph nodes from NIH"""
 
   #Set up version.
