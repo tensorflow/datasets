@@ -18,9 +18,20 @@ _CITATION = """\
 
 # TODO(pathVQA):
 _DESCRIPTION = """\
-The authors generated a pathology visual question answering (VQA) dataset by extracting images and captions from online pathology textbooks and online digital libraries. The dataset contains a total of 4,998 images and 32,799 question-answer pairs. 1670 images were generated from two pathology textbook Basic Pathology and Textbook of pathology, and the rest of images were generated from the PEIR digital library. About half of the images have a “yes/no” answer and the other half have a open-ended answer that include six types of information relevant to disease pathology: “what”, “where”, “when”, “whose”, “how”, and “how much/how many”. 
+The authors generated a pathology visual question answering (VQA) dataset by extracting images 
+and captions from online pathology textbooks and online digital libraries. The dataset contains 
+a total of 4,998 images and 32,799 question-answer pairs. 1670 images were generated from two 
+pathology textbook Basic Pathology and Textbook of pathology, and the rest of images were 
+generated from the PEIR digital library. About half of the images have a “yes/no” answer and 
+the other half have a open-ended answer that include six types of information relevant to 
+disease pathology: “what”, “where”, “when”, “whose”, “how”, and “how much/how many”. 
 
-This dataset aims to help create an “AI” board-certificated pathologist in the United States. By providing the answer-pairs that are highly similar to the American Board Pathology (ABP) test, this dataset will lead to a better understanding about computer-aided clinical decision making and contribute to pathologist education. The construction of “AI” pathologists could be a great potential for low-resource settings where medical training resources and medical professionals are scarcer than in the United States. 
+This dataset aims to help create an “AI” board-certificated pathologist in the United States. 
+By providing the answer-pairs that are highly similar to the American Board Pathology (ABP) 
+test, this dataset will lead to a better understanding about computer-aided clinical 
+decision making and contribute to pathologist education. The construction of “AI” pathologists
+could be a great potential for low-resource settings where medical training resources and 
+medical professionals are scarcer than in the United States. 
 """
 
 class Pathvqa(tfds.core.GeneratorBasedBuilder):
