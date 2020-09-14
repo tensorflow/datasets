@@ -48,7 +48,7 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
   """This is a dataset containing CT images of lymph nodes from NIH"""
 
   #Set up version.
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('0.1.0')
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You can download the images from
@@ -114,7 +114,6 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
     """
     ## Each patient has his own folder of masks and images, and the patient id is the same in masks and images
     patients = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS'))
-    patients.sort()
     
 
     ## iterate over all masks folders
