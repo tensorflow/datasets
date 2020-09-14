@@ -85,7 +85,6 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
                                          encoding_format = 'png'),
             
             "label": tfds.features.ClassLabel(
-                num_classes = 3,
                 names = ["COVID-19", "normal", "pneumonia"]), # 3 labels
         }),
 
@@ -131,8 +130,8 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
     """
 
     for fname, fobj in archive:
-        image_dir, image_file = os.path.split(fname)
-        d = os.path.basename(image_dir)
-        record = {"image": fobj, "label": d}
-        yield "%s/%s" % (image_file, d), record
+            image_dir, image_file = os.path.split(fname)
+            d = os.path.basename(image_dir)
+            record = {"image": fobj, "label": d}
+            yield "%s/%s" % (image_file, d), record
 
