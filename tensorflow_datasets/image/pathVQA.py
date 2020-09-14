@@ -89,7 +89,7 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
                 string = line[:-2]
                 try:
                     x = json.loads(string)
-                    if file == x['Images']: 
+                    if x['Images'] in file: 
                         questions.append(str(x['Questions']))
                         answers.append(str(x['Answers']))
                     else:
@@ -99,8 +99,6 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         if file.endswith('jpg') and len(questions)>0:
             image = tf.io.read_file(os.path.join(images_dir, file)) 
             imageTensor = tf.io.decode_jpeg(image)
-#             print(questions) # for testing purpose. Will be removed
-#             print(answers) # for testing purpose. Will be removed
             yield 'key', {
                 'image': imageTensor,
                 'question': tf.stack(questions),
