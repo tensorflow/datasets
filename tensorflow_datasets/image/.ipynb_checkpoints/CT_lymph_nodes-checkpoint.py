@@ -69,7 +69,7 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
         #The CT image
         'image' : tfds.features.Tensor(shape=(512,512),dtype=tf.int16),
         ## The mask
-        'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.float64),
+        'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.float16),
 
         ## Patient Age
         'age'  : tf.features.Text(),
@@ -122,30 +122,33 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
     for patient_id in patients:
         try:
             mask = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id))
-            if mask[0].endswith('.nii.gz'):
-                file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,mask[0])
-                mask_lst.append((patient_id,nibabel.load(file_name)))
+            for file in mask:
+                if file.endswith('.nii.gz'):
+                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,mask[0])
+                    mask_lst.append((patient_id,nibabel.load(file_name)))
         except:
             pass
 
     ## iterate over all images folders
     for patient_id in patients:
         try:
-            mask_file = [item for item in mask_lst if item[0] == patient_id ][0][1]
+            mask_file = [item for item in mask_lst if item[0] == patient_id ][0][1].get_fdata()
             ## files are stored in sub-directories, so go into the sub-directory where stores the images
             first = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))[0]
             second = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first))[0]
             third = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second))
+            third.sort()
+            i = 0
             for file in third:
-                    i = 1
+                    
                     file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second,file)
                     if file_name.endswith('dcm'):
-                        key = patient_id+'_'+str(i)
+                        key = patient_id+'_'+str(i+1)
                         image_file = pydicom.read_file(file_name)
                         yield( key,
                         {
                             'image':image_file.pixel_array,
-                            'mask' : mask_file.get_fdata(),
+                            'mask' : mask_file[:,:,i],
                             'age' : image_file.PatientAge,
                             'sex' :image_file.PatientSex,
                             'body_part': image_file.BodyPartExamined
