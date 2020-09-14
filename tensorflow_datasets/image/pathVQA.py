@@ -4,6 +4,7 @@ import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 import json
 import os
+import random
 
 _CITATION = """\
 @misc{he2020pathvqa,
@@ -48,6 +49,7 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
             'question':  tfds.features.Tensor(shape=(None,), dtype=tf.string),
             'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
         }),
+#         supervised_keys=('image', 'question', 'answer'),
         supervised_keys=None,
         homepage='https://github.com/UCSD-AI4H/PathVQA',
         citation=_CITATION,
@@ -56,13 +58,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     extracted_path = 'gs://bme590/roujia/pathVQARW'
     return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "train/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "train/", "label.json")
-            },
-        ),
+#         tfds.core.SplitGenerator(
+#             name=tfds.Split.TRAIN,
+#             gen_kwargs={
+#                 'images_dir': os.path.join(extracted_path, "train/", "pic"),
+#                 'labels_dir': os.path.join(extracted_path, "train/", "label.json")
+#             },
+#         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
@@ -70,17 +72,29 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
                 'labels_dir': os.path.join(extracted_path, "test/", "label.json")
             },
         ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "val/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "val/", "label.json")
-                       },
-        ),
+#         tfds.core.SplitGenerator(
+#             name=tfds.Split.VALIDATION,
+#             gen_kwargs={
+#                 'images_dir': os.path.join(extracted_path, "val/", "pic"),
+#                 'labels_dir': os.path.join(extracted_path, "val/", "label.json")
+#                        },
+#         ),
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
     my_files = tf.io.gfile.listdir(images_dir)
+    
+    # N(json) + I(images)
+    # Loop Through Json
+    # Create Dictionary {[x['Images']] => [Questions]}
+    # End Loop
+    
+    # Loop through images
+    # Check your dictionary for all the questions for each image
+    # End Loop
+    
+    
+    # N*I
     for file in my_files:
         questions = []
         answers = []
@@ -99,7 +113,8 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         if file.endswith('jpg') and len(questions)>0:
             image = tf.io.read_file(os.path.join(images_dir, file)) 
             imageTensor = tf.io.decode_jpeg(image)
-            yield 'key', {
+            key = file + str(random.randint(0,100))
+            yield key, {
                 'image': imageTensor,
                 'question': tf.stack(questions),
                 'answer': tf.stack(answers), 
