@@ -72,11 +72,11 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
         'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.float16),
 
         ## Patient Age
-        'age'  : tf.features.Text(),
+        'age'  : tfds.features.Text(),
         ## Patient Sex
-        'sex'  : tf.features.Text(),
+        'sex'  : tfds.features.Text(),
         ## Body Part Examined
-        'body_part'  : tf.features.Text()
+        'body_part'  : tfds.features.Text()
         
             
         }),
