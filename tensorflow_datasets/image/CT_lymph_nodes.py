@@ -1,8 +1,7 @@
 """CT_Lymph_Nodes dataset."""
 
-import numpy as np
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
+import tensorflow.compat.v2 as tf
 import os
 import io
 import pydicom
@@ -12,7 +11,7 @@ import nibabel
 _CITATION = """
 \@misc{CT_Lymph_Nodes_Citation,
   doi = {10.1007/978-3-319-10404-1_65},
-  url = {https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes#12d41e510fe547b59000cd90afb8dbf2},
+  url = {https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes},
   author = {Roth, Holger R., Lu, Le, Seff, Ari, Cherry, Kevin M., Hoffman, Joanne, Wang, Shijun, Liu, Jiamin, Turkbey, Evrim and Summers, Ronald M.},
   title = {A New 2.5D Representation for Lymph Node Detection Using Random Sets of Deep Convolutional Neural Network Observations},
   publisher = {Springer International Publishing},
@@ -70,21 +69,20 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
         #The CT image
         'image' : tfds.features.Tensor(shape=(512,512),dtype=tf.int16),
         ## The mask
-        'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.int16),
-        ## Patient id
-        'id'   : tf.string,
+        'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.float64),
+
         ## Patient Age
-        'age'  : tf.string,
+        'age'  : tf.features.Text(),
         ## Patient Sex
-        'sex'  : tf.string,
+        'sex'  : tf.features.Text(),
         ## Body Part Examined
-        'body_part'  : tf.string
+        'body_part'  : tf.features.Text()
         
             
         }),
         supervised_keys=('image','mask'),
         # Homepage of the dataset for documentation
-        homepage='https://dataset-homepage/',
+        homepage='https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes',
         citation=_CITATION,
     )
 
@@ -103,7 +101,7 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "filepath": dl_manager.manual_dir
             }
-        ),    
+        )   
     ]
 
   def _generate_examples(self,filepath):
@@ -137,20 +135,23 @@ class CT_Lymph_Nodes(tfds.core.GeneratorBasedBuilder):
             ## files are stored in sub-directories, so go into the sub-directory where stores the images
             first = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))[0]
             second = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first))[0]
-            third = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second))[0]
-            file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second,third)
-            if file_name.endswith('dcm'):
-                image_file = pydicom.read_file(file_name)
-                yield file_name,
-                {
-                    'image':image_file.pixel_array,
-                    'mask' : mask_file.get_fdata(),
-                    'id' : image_file.PatientID,
-                    'age' : image_file.PatientAge,
-                    'sex' :image_file.PatientSex,
-                    'body_part': image_file.BodyPartExamined
+            third = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second))
+            for file in third:
+                    i = 1
+                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second,file)
+                    if file_name.endswith('dcm'):
+                        key = patient_id+'_'+str(i)
+                        image_file = pydicom.read_file(file_name)
+                        yield( key,
+                        {
+                            'image':image_file.pixel_array,
+                            'mask' : mask_file.get_fdata(),
+                            'age' : image_file.PatientAge,
+                            'sex' :image_file.PatientSex,
+                            'body_part': image_file.BodyPartExamined
 
-                }
+                        })
+                    i+=1
         except:
             pass
 
