@@ -80,14 +80,14 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
         description = _DESCRIPTION,
         
         features = tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape = shape_res, 
+            'image': tfds.features.Image(shape = shape_res, 
                                          dtype = 'uint8', 
                                          encoding_format = 'png'),
             
-            "label": tfds.features.ClassLabel(
-                names = ["COVID-19", "normal", "pneumonia"]), # 3 labels
+            'label': tfds.features.ClassLabel(
+                names = ["COVID-19", "normal", "pneumonia"]),
         }),
-
+        
         supervised_keys = ('image', 'label'), 
         
         homepage = 'https://github.com/lindawangg/COVID-Net',
@@ -132,6 +132,6 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
     for fname, fobj in archive:
             image_dir, image_file = os.path.split(fname)
             d = os.path.basename(image_dir)
-            record = {"image": fobj, "label": d}
+            record = {'image': fobj, 'label': d}
             yield "%s/%s" % (image_file, d), record
 
