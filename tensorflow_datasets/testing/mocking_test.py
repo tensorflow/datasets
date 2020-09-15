@@ -120,6 +120,16 @@ class MockingTest(test_case.TestCase):
       )
 
   def test_mocking_policies(self):
+    with mocking.mock_data():
+      ds = load.load('mnist', split='train')
+      self.assertEqual(ds.element_spec, {
+          'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+      })
+
+      with self.assertRaisesWithPredicateMatch(ValueError, 'Unknown split'):
+        ds = load.load('mnist', split='non_existent')
+
     with test_utils.tmp_dir() as tmp_dir:
       # Testing Auto Mocking Policy
       with mocking.mock_data(data_dir=tmp_dir):
@@ -130,8 +140,8 @@ class MockingTest(test_case.TestCase):
         })
 
       # Testing Code-Only Mocking Policy
-      with mocking.mock_data(
-          data_dir=tmp_dir, policy=mocking.MockPolicy.CODE_ONLY):
+      with mocking.mock_data(data_dir=tmp_dir,
+                             policy=mocking.MockPolicy.CODE_ONLY):
         ds = load.load('mnist', split='non_existent')
         self.assertEqual(ds.element_spec, {
             'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
@@ -139,18 +149,11 @@ class MockingTest(test_case.TestCase):
         })
 
       # Testing Dir-Only Mocking Policy
-      with mocking.mock_data(
-          data_dir=tmp_dir, policy=mocking.MockPolicy.DIR_ONLY):
+      with mocking.mock_data(data_dir=tmp_dir,
+                             policy=mocking.MockPolicy.DIR_ONLY):
         with self.assertRaisesWithPredicateMatch(
-            ValueError, 'TFDS has been mocked'):
+            ValueError, 'copy the real metadata files'):
           ds = load.load('mnist', split='train')
-
-      with self.assertRaisesWithPredicateMatch(ValueError, 'Unknown split'):
-        ds = load.load('mnist', split='non_existent')
-        self.assertEqual(ds.element_spec, {
-            'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
-            'label': tf.TensorSpec(shape=(), dtype=tf.int64),
-        })
 
 
 if __name__ == '__main__':

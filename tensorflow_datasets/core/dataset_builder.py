@@ -510,7 +510,6 @@ class DatasetBuilder(registered.RegisteredDataset):
     # pylint: enable=line-too-long
     logging.info("Constructing tf.data.Dataset for split %s, from %s",
                  split, self._data_dir)
-
     if not tf.io.gfile.exists(self._data_dir):
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "
