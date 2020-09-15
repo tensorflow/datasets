@@ -151,7 +151,10 @@ def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
     if not line or line.startswith('#'):
       continue
     # URL might have spaces inside, but size and checksum will not.
-    url, size, checksum = line.rsplit('\t', 2)
+    try:
+      url, size, checksum = line.rsplit('\t', 2)
+    except ValueError:
+      url, size, checksum = line.rsplit(' ', 2)
     url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
   return url_infos
 
