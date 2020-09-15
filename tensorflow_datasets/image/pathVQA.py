@@ -71,13 +71,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
                 'labels_dir': os.path.join(extracted_path, "test/", "label.json")
             },
         ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "val/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "val/", "label.json")
-                       },
-        ),
+#         tfds.core.SplitGenerator(
+#             name=tfds.Split.VALIDATION,
+#             gen_kwargs={
+#                 'images_dir': os.path.join(extracted_path, "val/", "pic"),
+#                 'labels_dir': os.path.join(extracted_path, "val/", "label.json")
+#                        },
+#         ),
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
