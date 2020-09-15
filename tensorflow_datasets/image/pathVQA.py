@@ -49,7 +49,6 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
             'question':  tfds.features.Tensor(shape=(None,), dtype=tf.string),
             'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
         }),
-#         supervised_keys=('image', 'question', 'answer'),
         supervised_keys=None,
         homepage='https://github.com/UCSD-AI4H/PathVQA',
         citation=_CITATION,
@@ -58,13 +57,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     extracted_path = 'gs://bme590/roujia/pathVQARW'
     return [
-#         tfds.core.SplitGenerator(
-#             name=tfds.Split.TRAIN,
-#             gen_kwargs={
-#                 'images_dir': os.path.join(extracted_path, "train/", "pic"),
-#                 'labels_dir': os.path.join(extracted_path, "train/", "label.json")
-#             },
-#         ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
+                'images_dir': os.path.join(extracted_path, "train/", "pic"),
+                'labels_dir': os.path.join(extracted_path, "train/", "label.json")
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
@@ -72,13 +71,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
                 'labels_dir': os.path.join(extracted_path, "test/", "label.json")
             },
         ),
-#         tfds.core.SplitGenerator(
-#             name=tfds.Split.VALIDATION,
-#             gen_kwargs={
-#                 'images_dir': os.path.join(extracted_path, "val/", "pic"),
-#                 'labels_dir': os.path.join(extracted_path, "val/", "label.json")
-#                        },
-#         ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                'images_dir': os.path.join(extracted_path, "val/", "pic"),
+                'labels_dir': os.path.join(extracted_path, "val/", "label.json")
+                       },
+        ),
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
