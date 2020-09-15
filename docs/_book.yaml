@@ -45,7 +45,7 @@ upper_tabs:
       skip_translation: true
       contents:
       - title: All Symbols
-        path: /datasets/api_docs/python/
-      - include: /datasets/api_docs/python/_toc.yaml
+        path: /datasets/api_docs/python/tfds/all_symbols
+      - include: /datasets/api_docs/python/tfds/_toc.yaml
 
 - include: /_upper_tabs_right.yaml
