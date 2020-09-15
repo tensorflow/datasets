@@ -20,11 +20,12 @@ from absl import app
 from typing import List
 
 import tensorflow.compat.v2 as tf
+import tensorflow_datasets as tfds
 
 _DATASET_TYPES = list(['audio',
                         'image',
-                        'image_claffication',
-                        'onject_detection',
+                        'image_classification',
+                        'object_detection',
                         'question_answering',
                         'structured',
                         'summarization',
@@ -42,24 +43,12 @@ _TSV_CHECKSUM_SUFFIX = '.tsv'
 def get_tsv_checksums_paths() -> List[str]:
   """Returns the paths of all the .tsv checksum files of folder datasets"""
   paths = list()
-  for dataset_type in _DATASET_TYPES:
-    #Check whether the dataset type folder exists
-    dataset_dir = os.path.join(_ROOT_DIR, dataset_type)
-    if tf.io.gfile.isdir(dataset_dir):
-
-      #Find the paths of all datasets in every type of dataset
-      dataset_paths = [os.path.join(dataset_dir, dir)
-                  for dir in tf.io.gfile.listdir(dataset_dir)
-                  if tf.io.gfile.isdir(os.path.join(dataset_dir, dir)) and
-                  dir!='_pycache_']
-
-      #Getting the path of eack checksum file for every dataset
-      for dataset_path in dataset_paths:
-        checksum_path = os.path.join(dataset_path, 'checksums.tsv')
-        if os.path.isfile(checksum_path):
-          paths.append(checksum_path)
-    else:
-      continue
+  datasets_list = tfds.list_builders()
+  for dataset in datasets_list:
+    path = os.path.join(tfds.builder_cls(dataset).code_path.parent,
+                        'checksums.tsv')
+    if os.path.isfile(path):
+      paths.append(path)
   return paths
 
 def get_txt_checksums_paths() -> List[str]:
@@ -76,7 +65,7 @@ def get_txt_checksums_paths() -> List[str]:
 def rewrite_checksums(paths : List[str]) -> None:
   """Update all .txt checksum files to use tabs instead of spaces"""
   for path in paths:
-    print('Processing file: {}'.format(path))
+    print(f'Processing file: {path}')
     #Read the checksum file
     with tf.io.gfile.GFile(path) as f:
       content = f.read().splitlines()
@@ -91,7 +80,7 @@ def rewrite_checksums(paths : List[str]) -> None:
       with tf.io.gfile.GFile(path, 'w') as f:
         for info in content:
           url, size, checksum = info
-          f.write('{}    {}    {}\n'.format(url, size, checksum))
+          f.write(f'{url}\t{size}\t{checksum}\n')
 
 
 def update_checksums() -> None:
