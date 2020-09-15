@@ -13,7 +13,74 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""`tfds.features.FeatureConnector` API defining feature types."""
+"""API defining dataset features (image, text, scalar,...).
+
+FeatureConnector is a way of abstracting what data is returned by the
+tensorflow/datasets builders from how they are encoded/decoded from file.
+
+## Using `tfds.features.FeatureConnector` in `tfds.core.GeneratorBasedBuilder`
+
+To implement a new dataset:
+
+* In `tfds.core.DatasetInfo`: Define the features structure:
+
+```py
+tfds.core.DatasetInfo(
+    features=tfds.features.FeaturesDict({
+        'input': tfds.features.Image(shape=(28, 28, 1)),
+        'target': tfds.features.ClassLabel(names=['no', 'yes']),
+        'extra_data': {
+            'label_id': tf.int64,
+            'language': tf.string,
+        }
+    })
+)
+```
+
+* In `tfds.core.GeneratorBasedBuilder._generate_examples`: Examples should be
+  yield to match the structure defined in `tfds.core.DatasetInfo`. Values
+  are automatically encoded.
+
+```py
+yield {
+    'input': '/path/to/img0.png',  # `np.array`, bytes file object also accepted
+    'target': 'yes',  # Converted to int id 1
+    'extra_data': {
+        'label_id': 43,
+        'language': 'en',
+    }
+}
+```
+
+* `tfds.load` will automatically returns `tf.data.Dataset` matching the `dict`
+  structure defined in `tfds.core.DatasetInfo`:
+
+```py
+ds = tfds.load(...)
+ds.element_spec == {
+    'input': tf.TensorSpec(shape=(28, 28, 1), tf.uint8),
+    'target': tf.TensorSpec(shape=(), tf.int64),
+    'extra_data': {
+        'label_id': tf.TensorSpec(shape=(), tf.int64),
+        'language': tf.TensorSpec(shape=(), tf.string),
+    },
+}
+```
+
+## Create your own `tfds.features.FeatureConnector`
+
+To create your own feature connector, you need to inherit from
+`tfds.features.FeatureConnector` and implement the abstract methods.
+
+* If your feature is a single tensor, it's best to inherit from
+  `tfds.feature.Tensor` and use `super()` when needed. See
+  `tfds.features.BBoxFeature` source code for an example.
+
+* If your feature is a container of multiple tensors, it's best to inherit from
+  `tfds.feature.FeaturesDict` and use the `super()` to automatically encode
+  sub-connectors.
+
+"""
 
 from tensorflow_datasets.core.features.audio_feature import Audio
 from tensorflow_datasets.core.features.bounding_boxes import BBox

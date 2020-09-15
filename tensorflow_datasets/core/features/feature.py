@@ -13,76 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Feature connector.
-
-FeatureConnector is a way of abstracting what data is returned by the
-tensorflow/datasets builders from how they are encoded/decoded from file.
-
-# Use FeatureConnector in `GeneratorBasedBuilder`
-
-1) In the _build_info() function, define the features as you would like them
-to be returned by the tf.data.Dataset() object.
-
-Ex:
-
-```py
-features=features.FeaturesDict({
-    'input': features.Image(),
-    'target': features.Text(encoder=SubWordEncoder()),
-    'extra_data': {
-        'label_id': tf.int64,
-        'language': tf.string,
-    }
-})
-```
-
-The tf.data.Dataset will return each examples as a dict:
-
-```py
-{
-    'input': tf.Tensor(shape=(batch, height, width, channel), tf.uint8),
-    'target': tf.Tensor(shape=(batch, sequence_length), tf.int64),
-    'extra_data': {
-        'label_id': tf.Tensor(shape=(batch,), tf.int64),
-        'language': tf.Tensor(shape=(batch,), tf.string),
-    }
-}
-```
-
-2) In the generator function, yield the examples to match what you have defined
-in the spec. The values will automatically be encoded.
-
-```py
-yield {
-    'input': np_image,
-    'target': 'This is some text',
-    'extra_data': {
-        'label_id': 43,
-        'language': 'en',
-    }
-}
-```
-
-# Create your own FeatureConnector
-
-To create your own feature connector, you need to inherit from FeatureConnector
-and implement the abstract methods.
-
-1. If your connector only contains one value, then the get_serialized_info,
-   get_tensor_info, encode_example, and decode_example can directly process
-   single value, without wrapping it in a dict.
-
-2. If your connector is a container of multiple sub-connectors, the easiest
-   way is to inherit from features.FeaturesDict and use the super() methods to
-   automatically encode/decode the sub-connectors.
-
-This file contains the following FeatureConnector:
-
- * FeatureConnector: The abstract base class defining the interface
- * FeaturesDict: Container of FeatureConnector
- * Tensor: Simple tensor value with static or dynamic shape
-
-"""
+"""Feature connector."""
 
 import abc
 import collections
