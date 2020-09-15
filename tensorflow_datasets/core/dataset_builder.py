@@ -510,13 +510,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     # pylint: enable=line-too-long
     logging.info("Constructing tf.data.Dataset for split %s, from %s",
                  split, self._data_dir)
-    # TODO: Fix or mock this function
-    # if not tf.io.gfile.exists(self._data_dir):
-    #   raise AssertionError(
-    #       ("Dataset %s: could not find data in %s. Please make sure to call "
-    #        "dataset_builder.download_and_prepare(), or pass download=True to "
-    #        "tfds.load() before trying to access the tf.data.Dataset object."
-    #       ) % (self.name, self._data_dir_root))
+
+    if not tf.io.gfile.exists(self._data_dir):
+      raise AssertionError(
+          ("Dataset %s: could not find data in %s. Please make sure to call "
+           "dataset_builder.download_and_prepare(), or pass download=True to "
+           "tfds.load() before trying to access the tf.data.Dataset object."
+          ) % (self.name, self._data_dir_root))
 
     # By default, return all splits
     if split is None:

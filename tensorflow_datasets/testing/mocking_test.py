@@ -132,7 +132,7 @@ class MockingTest(test_case.TestCase):
       # Testing Code-Only Mocking Policy
       with mocking.mock_data(
           data_dir=tmp_dir, policy=mocking.MockPolicy.CODE_ONLY):
-        ds = load.load('mnist', split='train')
+        ds = load.load('mnist', split='non_existent')
         self.assertEqual(ds.element_spec, {
             'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
             'label': tf.TensorSpec(shape=(), dtype=tf.int64),
@@ -144,6 +144,14 @@ class MockingTest(test_case.TestCase):
         with self.assertRaisesWithPredicateMatch(
             ValueError, 'TFDS has been mocked'):
           ds = load.load('mnist', split='train')
+
+      with self.assertRaisesWithPredicateMatch(ValueError, 'Unknown split'):
+        ds = load.load('mnist', split='non_existent')
+        self.assertEqual(ds.element_spec, {
+            'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+            'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+        })
+
 
 if __name__ == '__main__':
   test_utils.test_main()

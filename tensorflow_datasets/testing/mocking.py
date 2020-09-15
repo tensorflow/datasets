@@ -27,7 +27,10 @@ import numpy as np
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.testing import test_utils
 
+original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
 
 class MockPolicy(enum.Enum):
   """Strategy to use to mock the dataset.
@@ -47,7 +50,7 @@ class MockPolicy(enum.Enum):
 @contextlib.contextmanager
 def mock_data(
     num_examples: int = 1,
-    as_dataset_fn: Optional[Callable] = None,
+    as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
     data_dir: Optional[str] = None,
     policy: MockPolicy = MockPolicy.AUTO,
 ):
@@ -112,7 +115,8 @@ def mock_data(
   def mock_download_and_prepare(self, *args, **kwargs):
     del args
     del kwargs
-    if policy != MockPolicy.CODE_ONLY and not tf.io.gfile.exists(self._data_dir):  # pylint: disable=protected-access
+    if (policy != MockPolicy.CODE_ONLY and
+        not tf.io.gfile.exists(self._data_dir)):  # pylint: disable=protected-access
       if policy == MockPolicy.AUTO:
         return
       raise ValueError(
@@ -150,17 +154,26 @@ def mock_data(
     ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
 
+  def mock_as_dataset_wrapper(self, **kwargs):
+    with test_utils.MockFs() as fs:
+      if policy != MockPolicy.DIR_ONLY:
+        fs.add_file(os.path.join(self._data_dir, 'dataset_info.json'))  # pylint: disable=protected-access
+      return original_as_dataset_fn(self, **kwargs)
+
   if not as_dataset_fn:
     as_dataset_fn = mock_as_dataset
 
   if not data_dir:
     data_dir = os.path.join(os.path.dirname(__file__), 'metadata')
 
-  download_and_prepare_path = 'tensorflow_datasets.core.dataset_builder.DatasetBuilder.download_and_prepare'
-  as_dataset_path = 'tensorflow_datasets.core.dataset_builder.FileAdapterBuilder._as_dataset'
+  path = 'tensorflow_datasets.core.dataset_builder.'
+  download_and_prepare_path = path + 'DatasetBuilder.download_and_prepare'
+  as_dataset_path = path + 'DatasetBuilder.as_dataset'
+  _as_dataset_path = path + 'FileAdapterBuilder._as_dataset'  # pylint: disable=invalid-name
   data_dir_path = 'tensorflow_datasets.core.constants.DATA_DIR'
 
-  with absltest.mock.patch(as_dataset_path, as_dataset_fn), \
+  with absltest.mock.patch(_as_dataset_path, as_dataset_fn), \
+       absltest.mock.patch(as_dataset_path, mock_as_dataset_wrapper), \
        absltest.mock.patch(
            download_and_prepare_path, mock_download_and_prepare), \
        absltest.mock.patch(data_dir_path, data_dir):
