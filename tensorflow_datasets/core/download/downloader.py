@@ -47,7 +47,7 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
 def _get_filename(response: Response) -> str:
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
-    match = re.findall('filename="(.+?)"', content_disposition)
+    match = re.findall('[^=;\'"%]+\.[^=; \'"]+', content_disposition)
     if match:
       return match[0]
   return utils.basename_from_url(response.url)
