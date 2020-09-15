@@ -82,42 +82,47 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
-    my_files = tf.io.gfile.listdir(images_dir)
+    my_files = tf.io.gfile.listdir(images_dir)  
+    new_dict = {}
     
-    # N(json) + I(images)
-    # Loop Through Json
-    # Create Dictionary {[x['Images']] => [Questions]}
-    # End Loop
-    
-    # Loop through images
-    # Check your dictionary for all the questions for each image
-    # End Loop
-    
-    
-    # N*I
-    for file in my_files:
+    with tf.io.gfile.GFile(labels_dir) as f:
+        image_name = ''
         questions = []
         answers = []
-        with tf.io.gfile.GFile(labels_dir) as f:
-            for line in f:
-                string = line[:-2]
-                try:
-                    x = json.loads(string)
-                    if x['Images'] in file: 
-                        questions.append(str(x['Questions']))
-                        answers.append(str(x['Answers']))
-                    else:
-                        continue
-                except: 
-                    continue
-        if file.endswith('jpg') and len(questions)>0:
+        qa_dict = {}
+        for line in f:
+            string = line[:-2]
+            try:
+                x = json.loads(string)
+                temp_name = x.get('Images')
+                if '.jpg' not in temp_name:
+                    temp_name = temp_name + '.jpg'
+                if image_name == temp_name:
+                    questions.append(str(x.get('Questions')))
+                    answers.append(str(x.get('Answers')))
+                else:
+                    qa_dict.update({'Questions' : questions})
+                    qa_dict.update({'Answers' : answers})
+                    new_dict.update({image_name : qa_dict})
+                    image_name = temp_name
+                    questions = []
+                    answers = []
+                    qa_dict = {}
+            except: 
+                continue
+                
+    for file in my_files:
+        if file in new_dict:
             image = tf.io.read_file(os.path.join(images_dir, file)) 
             imageTensor = tf.io.decode_jpeg(image)
+            qa_dict = new_dict.get(file)
+            questionTensor = qa_dict.get('Questions')
+            answerTensor = qa_dict.get('Answers')
             key = file + str(random.randint(0,100))
             yield key, {
                 'image': imageTensor,
-                'question': tf.stack(questions),
-                'answer': tf.stack(answers), 
+                'question': tf.stack(questionTensor),
+                'answer': tf.stack(answerTensor), 
             }
         else: 
             continue
