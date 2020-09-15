@@ -243,9 +243,9 @@ class AutocacheSection(Section):
 
   def _build_autocached_info(self, builder):
     """Returns the auto-cache information string."""
-    always_cached = set()
-    never_cached = set()
-    unshuffle_cached = set()
+    always_cached = {}
+    never_cached = {}
+    unshuffle_cached = {}
     for split_name in sorted(builder.info.splits.keys()):
       split_name = str(split_name)
       cache_shuffled = builder._should_cache_ds(  # pylint: disable=protected-access
@@ -254,12 +254,12 @@ class AutocacheSection(Section):
           split_name, shuffle_files=False, read_config=tfds.ReadConfig())
 
       if all((cache_shuffled, cache_unshuffled)):
-        always_cached.add(split_name)
+        always_cached[split_name] = None
       elif not any((cache_shuffled, cache_unshuffled)):
-        never_cached.add(split_name)
+        never_cached[split_name] = None
       else:  # Dataset is only cached when shuffled_files is False
         assert not cache_shuffled and cache_unshuffled
-        unshuffle_cached.add(split_name)
+        unshuffle_cached[split_name] = None
 
     if not len(builder.info.splits) or not builder.info.dataset_size:  # pylint: disable=g-explicit-length-test
       autocached_info = 'Unknown'
