@@ -1,4 +1,4 @@
-"""CT_Lymph_Nodes dataset."""
+`"""CT_Lymph_Nodes dataset."""
 
 import tensorflow_datasets.public_api as tfds
 import tensorflow.compat.v2 as tf
@@ -69,7 +69,8 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
         #The CT image
         'image' : tfds.features.Tensor(shape=(512,512),dtype=tf.int16),
         ## The mask
-        'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.float16),
+            ## cast to int 16
+        'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.int16),
 
         ## Patient Age
         'age'  : tfds.features.Text(),
@@ -86,7 +87,7 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager,dl_manager.manual_dir):
+  def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     
     if not tf.io.gfile.exists(dl_manager.manual_dir):
@@ -101,10 +102,10 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "filepath": dl_manager.manual_dir
             }
-        )   
+        )
     ]
 
-  def _generate_examples(self,filepath):
+  def _generate_examples(self,filepath=None):
     """Yields examples for the CT lymph nodes dataset
     Args:
         filepath: path to the CT lymph nodes files
@@ -123,7 +124,7 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
             mask = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id))
             for file in mask:
                 if file.endswith('.nii.gz'):
-                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,mask[0])
+                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,file)
                     mask_lst.append((patient_id,nibabel.load(file_name)))
         except:
             pass
@@ -131,16 +132,13 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
     ## iterate over all images folders
     for patient_id in patients:
         try:
-            mask_file = [item for item in mask_lst if item[0] == patient_id ][0][1].get_fdata()
+            mask_file = [item for item in mask_lst if item[0] == patient_id ][0][1].get_fdata().astype('int16')
             ## files are stored in sub-directories, so go into the sub-directory where stores the images
-            first = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))[0]
-            second = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first))[0]
-            third = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second))
-            third.sort()
-            i = 0
-            for file in third:
+            image = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))
+            i=1
+            for file in image:
                     
-                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,first,second,file)
+                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
                     if file_name.endswith('dcm'):
                         key = patient_id+'_'+str(i+1)
                         image_file = pydicom.read_file(file_name)
@@ -156,5 +154,4 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
                     i+=1
         except:
             pass
-
     

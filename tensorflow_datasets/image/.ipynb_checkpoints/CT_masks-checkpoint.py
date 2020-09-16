@@ -1,17 +1,22 @@
-`"""CT_Lymph_Nodes dataset."""
+"""CT_masks dataset."""
 
 import tensorflow_datasets.public_api as tfds
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
+from tensorflow_datasets.core import utils
+import numpy as np
 import os
 import io
 import pydicom
 import nibabel 
 
+
+
+
 # BibTeX citation
 _CITATION = """
 \@misc{CT_Lymph_Nodes_Citation,
   doi = {10.1007/978-3-319-10404-1_65},
-  url = {https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes},
+  url = {https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes#12d41e510fe547b59000cd90afb8dbf2},
   author = {Roth, Holger R., Lu, Le, Seff, Ari, Cherry, Kevin M., Hoffman, Joanne, Wang, Shijun, Liu, Jiamin, Turkbey, Evrim and Summers, Ronald M.},
   title = {A New 2.5D Representation for Lymph Node Detection Using Random Sets of Deep Convolutional Neural Network Observations},
   publisher = {Springer International Publishing},
@@ -42,19 +47,17 @@ National Institutes of Health, Clinical Center. These 10,013 images consist of
 abdominal lymph nodes in 86 patients. All images are of 512*512 pixel arrays. 
 """
 
+# Download Link
+_masks_url = """https://wiki.cancerimagingarchive.net/download/attachments/19726546/MED_ABD_LYMPH_MASKS.zip?version=1&modificationDate=1449684916503&api=v2
+"""
 
-
-class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
+class CT_masks(tfds.core.GeneratorBasedBuilder):
   """This is a dataset containing CT images of lymph nodes from NIH"""
 
   #Set up version.
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('1.0.0')
 
-  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
-  You can download the images from
-  https://console.cloud.google.com/storage/browser/bme590/jingjing
-  Please put all files in manual_dir.
-  """
+  
   
 
   def _info(self):
@@ -65,43 +68,35 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
+            
+            # These are the features of your dataset like images, labels ...
+     
+        # If there's a common (input, target) tuple from the features,
+        # specify them here. They'll be used if as_supervised=True in
+        # builder.as_dataset.
         
-        #The CT image
-        'image' : tfds.features.Tensor(shape=(512,512),dtype=tf.int16),
+        
         ## The mask
-            ## cast to int 16
         'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.int16),
-
-        ## Patient Age
-        'age'  : tfds.features.Text(),
-        ## Patient Sex
-        'sex'  : tfds.features.Text(),
-        ## Body Part Examined
-        'body_part'  : tfds.features.Text()
-        
             
         }),
-        supervised_keys=('image','mask'),
+        # supervised_keys=('id','mask'),
         # Homepage of the dataset for documentation
-        homepage='https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes',
+        homepage='https://dataset-homepage/',
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     
-    if not tf.io.gfile.exists(dl_manager.manual_dir):
-        msg = "You must download the dataset files manually and place them in: "
-        msg += dl_manager.manual_dir
-        raise AssertionError(msg)
+    masks_path = dl_manager.download_and_extract(_masks_url)
         
     # There is no predefined train/val/test split for this dataset
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "filepath": dl_manager.manual_dir
-            }
+            # These kwargs will be passed to _generate_examples
+            gen_kwargs={'filepath':masks_path},
         )
     ]
 
@@ -115,43 +110,25 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
     """
     ## Each patient has his own folder of masks and images, and the patient id is the same in masks and images
     patients = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS'))
+    patients.sort()
     
 
     ## iterate over all masks folders
-    mask_lst = []
+    
     for patient_id in patients:
         try:
             mask = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id))
-            for file in mask:
-                if file.endswith('.nii.gz'):
-                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,file)
-                    mask_lst.append((patient_id,nibabel.load(file_name)))
-        except:
-            pass
-
-    ## iterate over all images folders
-    for patient_id in patients:
-        try:
-            mask_file = [item for item in mask_lst if item[0] == patient_id ][0][1].get_fdata().astype('int16')
-            ## files are stored in sub-directories, so go into the sub-directory where stores the images
-            image = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))
-            i=1
-            for file in image:
+            if mask[0].endswith('.nii.gz'):
+                file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,mask[0])
+                yield file_name,
+                {
                     
-                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
-                    if file_name.endswith('dcm'):
-                        key = patient_id+'_'+str(i+1)
-                        image_file = pydicom.read_file(file_name)
-                        yield( key,
-                        {
-                            'image':image_file.pixel_array,
-                            'mask' : mask_file[:,:,i],
-                            'age' : image_file.PatientAge,
-                            'sex' :image_file.PatientSex,
-                            'body_part': image_file.BodyPartExamined
-
-                        })
-                    i+=1
+                    'mask' : nibabel.load(file_name).get_fdata(),
+                    
+                }
         except:
             pass
+
+    
+
     
