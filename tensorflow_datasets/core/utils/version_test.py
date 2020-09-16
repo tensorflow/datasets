@@ -128,6 +128,17 @@ class VersionTest(testing.TestCase):
     v = version.Version('1.2.3', experiments={version.Experiment.DUMMY: True})
     self.assertTrue(v.implements(version.Experiment.DUMMY))
 
+  def test_hash(self):
+    self.assertIn(
+        version.Version('1.2.3'),
+        {version.Version('1.2.3'), version.Version('1.4.3')}
+    )
+
+    self.assertNotIn(
+        version.Version('1.2.3'),
+        {version.Version('1.1.3'), version.Version('1.4.3')}
+    )
+
 
 if __name__ == '__main__':
   testing.test_main()

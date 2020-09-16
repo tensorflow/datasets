@@ -17,8 +17,10 @@
 
 import enum
 import re
+from typing import List
 
 import six
+import tensorflow as tf
 
 _VERSION_TMPL = (
     r"^(?P<major>{v})"
@@ -124,6 +126,9 @@ class Version(object):
     other = self._validate_operand(other)
     return self.tuple >= other.tuple
 
+  def __hash__(self) -> int:
+    return hash(self.tuple)
+
   def match(self, other_version):
     """Returns True if other_version matches.
 
@@ -134,6 +139,14 @@ class Version(object):
     major, minor, patch = _str_to_version(other_version, allow_wildcard=True)
     return (major in [self.major, "*"] and minor in [self.minor, "*"]
             and patch in [self.patch, "*"])
+
+  @classmethod
+  def is_valid(cls, version: str) -> bool:
+    """Returns True if the version can be parsed."""
+    try:
+      return cls(version) and True
+    except ValueError:  # Invalid version (ex: incomplete data dir)
+      return False
 
 
 def _str_to_version(version_str, allow_wildcard=False):
@@ -150,3 +163,13 @@ def _str_to_version(version_str, allow_wildcard=False):
   return tuple(
       v if v == "*" else int(v)
       for v in [res.group("major"), res.group("minor"), res.group("patch")])
+
+
+def list_all_versions(root_dir: str) -> List[Version]:
+  """Lists all dataset versions present on disk, sorted."""
+  if not tf.io.gfile.exists(root_dir):
+    return []
+
+  return sorted(  # Return all versions
+      Version(v) for v in tf.io.gfile.listdir(root_dir) if Version.is_valid(v)
+  )
