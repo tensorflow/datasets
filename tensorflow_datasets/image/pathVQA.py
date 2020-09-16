@@ -57,13 +57,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     extracted_path = 'gs://bme590/roujia/pathVQARW'
     return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "train/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "train/", "label.json")
-            },
-        ),
+#         tfds.core.SplitGenerator(
+#             name=tfds.Split.TRAIN,
+#             gen_kwargs={
+#                 'images_dir': os.path.join(extracted_path, "train/", "pic"),
+#                 'labels_dir': os.path.join(extracted_path, "train/", "label.json")
+#             },
+#         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
