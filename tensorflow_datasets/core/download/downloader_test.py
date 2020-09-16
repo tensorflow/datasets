@@ -146,13 +146,17 @@ class GetFilenameTest(testing.TestCase):
     self.assertEqual(res, 'baz.zip')
 
   def test_headers(self):
-    cdisp = ('attachment;filename="hello.zip";'
-             'filename*=UTF-8\'\'hello.zip')
-    resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers={
-        'content-disposition': cdisp,
-    })
-    res = downloader._get_filename(resp)
-    self.assertEqual(res, 'hello.zip')
+    cdisps = [['attachment;filename*=UTF-8\'\'hello.zip','hello.zip'],
+             ['Attachment; filename=example.html','example.html'],
+             ['INLINE; FILENAME= "an example.html"','an example.html'],
+             ["attachment;filename*= UTF-8''%e2%82%ac%20rates.zip",'20rates.zip'],
+             ["attachment;filename='EURO rates';filename*=utf-8''%e2%82%ac%20rates",'baz.zip']]
+    for (cdisp,value) in cdisps:
+      resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers={
+          'content-disposition': cdisp,
+      })
+      res = downloader._get_filename(resp)
+      self.assertEqual(res, value)
 
 
 if __name__ == '__main__':
