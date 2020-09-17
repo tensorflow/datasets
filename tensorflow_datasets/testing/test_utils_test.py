@@ -15,8 +15,6 @@
 
 """Tests for tensorflow_datasets.core.test_utils."""
 
-import sys
-
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.testing import test_case
@@ -73,9 +71,6 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     self.assertEqual(modes[2:], ['setup_graph', 'run_graph'])
 
   def test_mock_fs(self):
-    if sys.version_info.major < 3:  # Disable test on Python2
-      return
-
     fs = test_utils.MockFs()
     with fs.mock():
       fs.add_file('/path/to/file1', 'Content of file 1')
@@ -89,6 +84,14 @@ class RunInGraphAndEagerTest(test_case.TestCase):
       self.assertFalse(tf.io.gfile.exists('/pat'))
       self.assertFalse(tf.io.gfile.exists('/path/to/file1_nonexisting'))
       self.assertFalse(tf.io.gfile.exists('/path/to_file1_nonexisting'))
+
+      # Test `tf.io.gfile.exists` (relative path)
+      fs.add_file('relative_path/to/file.txt', 'Content')
+      self.assertTrue(tf.io.gfile.exists('relative_path/to/file.txt'))
+      self.assertTrue(tf.io.gfile.exists('relative_path/to/'))
+      self.assertTrue(tf.io.gfile.exists('relative_path/to'))
+      self.assertTrue(tf.io.gfile.exists('relative_path'))
+      self.assertFalse(tf.io.gfile.exists('/relative_path/to'))
 
       # Test `tf.io.gfile.GFile` (write and read mode)
       with tf.io.gfile.GFile('/path/to/file2', 'w') as f:
@@ -118,7 +121,22 @@ class RunInGraphAndEagerTest(test_case.TestCase):
           '/path/to/file2': 'Content of file 2 (new)',
           '/path/to/file1_moved': 'Content of file 1',
           '/path/file.txt': 'Content of file.txt',
+          'relative_path/to/file.txt': 'Content',
       })
+
+  def test_mock_tf(self):
+    # pylint: disable=g-import-not-at-top,reimported
+    import tensorflow as tf_lib1
+    import tensorflow.compat.v2 as tf_lib2
+    # pylint: enable=g-import-not-at-top,reimported
+
+    def f():
+      pass
+
+    with test_utils.mock_tf('tf.io.gfile', exists=f):
+      # Both aliases should have been patched
+      self.assertIs(tf_lib1.io.gfile.exists, f)
+      self.assertIs(tf_lib2.io.gfile.exists, f)
 
 if __name__ == '__main__':
   test_utils.test_main()

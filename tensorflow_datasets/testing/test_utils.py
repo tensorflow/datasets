@@ -21,9 +21,8 @@ import io
 import os
 import subprocess
 import tempfile
-from typing import Iterator
-
-from absl.testing import absltest
+from typing import Any, Iterator
+from unittest import mock
 
 import dill
 import numpy as np
@@ -165,9 +164,8 @@ class MockFs(object):
     return False
 
   def mock(self):
-    return absltest.mock.patch.object(
-        tf.io,
-        'gfile',
+    return mock_tf(
+        'tf.io.gfile',
         exists=self._exists,
         makedirs=lambda _: None,
         # Used to get name of file as downloaded:
@@ -175,6 +173,41 @@ class MockFs(object):
         GFile=self._open,
         rename=self._rename,
     )
+
+
+@contextlib.contextmanager
+def mock_tf(symbol_name: str, **kwargs: Any) -> Iterator[None]:
+  """Patch TF API.
+
+  This function is similar to `mock.patch.object`, but patch both
+  `tf.Xyz` and `tf.compat.v2.Xyz`.
+
+  Args:
+    symbol_name: Symbol to patch (e.g. `tf.io.gfile`)
+    **kwargs: Arguments to forward to `mock.patch.object`
+
+  Yields:
+    None
+  """
+  # pylint: disable=g-import-not-at-top,reimported
+  import tensorflow as tf_lib1
+  import tensorflow.compat.v2 as tf_lib2
+  # pylint: enable=g-import-not-at-top,reimported
+
+  tf_symbol, *tf_submodules, symbol_name = symbol_name.split('.')
+  if tf_symbol != 'tf':
+    raise ValueError('Symbol name to patch should start by `tf`.')
+
+  with contextlib.ExitStack() as stack:
+    # Patch both `tf` and `tf.compat.v2`
+    for tf_lib in (tf_lib1, tf_lib2):
+      # Recursivelly load the submodules/subobjects (e.g. `tf.io.gfile`)
+      module = tf_lib
+      for submodule in tf_submodules:
+        module = getattr(module, submodule)
+      # Patch the module/object
+      stack.enter_context(mock.patch.object(module, symbol_name, **kwargs))
+    yield
 
 
 class FeatureExpectationItem(object):
@@ -625,7 +658,7 @@ def mock_kaggle_api(err_msg=None):
       f.write(competition_or_dataset)
     return 'Downloading {} to {}'.format(competition_or_dataset, fpath)
 
-  with absltest.mock.patch('subprocess.check_output', check_output):
+  with mock.patch('subprocess.check_output', check_output):
     yield
 
 

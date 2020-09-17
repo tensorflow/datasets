@@ -107,7 +107,7 @@ class DownloadManagerTest(testing.TestCase):
         extractor._Extractor, 'extract', side_effect=_extract).start()
 
   def setUp(self):
-    super(DownloadManagerTest, self).setUp()
+    super().setUp()
 
     # Input of the DownloadManager
     self.dl_results = {}
@@ -122,12 +122,16 @@ class DownloadManagerTest(testing.TestCase):
     self.fs = testing.MockFs()  # Dict file_path -> file_content
 
     # Start all mocks
-    self.fs.mock().start()
+    self.fs.__enter__()
     absltest.mock.patch.object(checksums_lib, 'store_checksums').start()
     self._make_downloader_mock().start()
     self._make_extractor_mock().start()
 
     self.addCleanup(absltest.mock.patch.stopall)
+
+  def tearDown(self):
+    super().tearDown()
+    self.fs.__exit__(None, None, None)
 
   def _write_info(self, path, info):
     content = json.dumps(info)
