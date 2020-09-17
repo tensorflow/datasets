@@ -102,3 +102,4 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
+from tensorflow_datasets.image.pancreas_ct import PancreasCt  # TODO(pancreas_ct) Sort alphabetically
