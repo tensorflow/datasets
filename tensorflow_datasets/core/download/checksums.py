@@ -150,8 +150,11 @@ def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
       continue
-    # URL might have spaces inside, but size and checksum will not.
-    url, size, checksum = line.rsplit(' ', 2)
+    try:
+      url, size, checksum = line.split('\t')
+    except ValueError:  # not enough values to unpack (legacy files)
+      # URL might have spaces inside, but size and checksum will not.
+      url, size, checksum = line.rsplit(' ', 2)
     url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
   return url_infos
 
@@ -201,4 +204,4 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
     return
   with tf.io.gfile.GFile(path, 'w') as f:
     for url, url_info in sorted(new_data.items()):
-      f.write('{} {} {}\n'.format(url, url_info.size, url_info.checksum))
+      f.write('{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum))
