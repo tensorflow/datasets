@@ -8,7 +8,7 @@ class PancreasCtTest(tfds.testing.DatasetBuilderTestCase):
   # TODO(pancreas_ct):
   DATASET_CLASS = pancreas_ct.PancreasCt
   SPLITS = {
-      "train": 10,  # Number of fake train example
+      "train": 5,  # Number of fake train example
   }
 
 if __name__ == "__main__":

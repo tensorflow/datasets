@@ -48,7 +48,6 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
             'mask' : tfds.features.Tensor(shape = (512,512), dtype = tf.bool)
         }),
         
-        supervised_keys=('image', 'mask'),
         # Homepage of the dataset for documentation
         homepage='https://wiki.cancerimagingarchive.net/display/Public/Pancreas-CT',
         citation=_CITATION,
