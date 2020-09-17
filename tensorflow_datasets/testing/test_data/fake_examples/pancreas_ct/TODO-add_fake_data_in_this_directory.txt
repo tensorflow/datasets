@@ -1,1 +1,0 @@
-TODO(pancreas_ct): Add fake data in this directory
