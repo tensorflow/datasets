@@ -1,3 +1,6 @@
-# TODO(covid_cxr): If your dataset downloads files, then the checksums will be
-# automatically added here when running the download_and_prepare script
-# with --register_checksums.
+https://drive.google.com/uc?export=download&id=1FrxYfLLg1FDOUzvGyZBnVt5vwGAErjtN 3093 657d064bb75e24c3d6f54857d9e0f3c9f850dbe34c481f2dd23c92e56ced3644
+https://drive.google.com/uc?export=download&id=1LsC-a1Ig5sUmFbWFg2sus9XB-Ex8bkC_ 344340273 7a00e29817797e27a058b32e8650c912578fdf08732554b942e11420f64d5f6a
+https://drive.google.com/uc?export=download&id=1WDoHmfsrSGivArnZoLujUEbJBsFEnOid 155549075 09ffb73b3446f9e595b69a9a44db30853dee63e8740c1a3959b3d5515cf0e765
+https://drive.google.com/uc?export=download&id=1Wq5fqLkzfDDv4iEF5MTyBAbp50Bz1RHl 788142944 5b358ebe3480e74c3ad7d1113e9a4a6ea4d93d80d896432067e7123ccf3a18e2
+https://drive.google.com/uc?export=download&id=1ZzrVZlDSzzHew92lWF5VWoabXQXeeZh2 39214700 4c19be0dfb407f3e57981ad58d167ec32dbccec7e9fbfc9d49a821409498e8e0
+https://drive.google.com/uc?export=download&id=1slHH_yHdiiHc0q5OTL7txcG47HA-yjfQ 1364286038 130fa28e6f79fb3ffc7183dd4b0b18f5ce3b26794c45fdf687b223ec7681321c
