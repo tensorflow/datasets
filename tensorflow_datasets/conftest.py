@@ -21,13 +21,28 @@ plugins (hooks and fixtures) common to all tests.
 See: https://docs.pytest.org/en/latest/writing_plugins.html
 
 """
+from typing import Iterator
 
 import pytest
 
 import tensorflow as tf
+from tensorflow_datasets import testing
+
+
+# Global setup/teardown
 
 
 @pytest.fixture(scope='session', autouse=True)
 def activate_eager():
   """Globally and automatically enable eager."""
   tf.compat.v1.enable_v2_behavior()
+
+
+# Fixtures globally available
+
+
+@pytest.fixture
+def mock_fs() -> Iterator[testing.MockFs]:
+  """Patch `tf.io.gfile` API into a virtual file system."""
+  with testing.MockFs() as fs:
+    yield fs

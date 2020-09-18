@@ -176,7 +176,7 @@ class MockFs(object):
 
 
 @contextlib.contextmanager
-def mock_tf(symbol_name: str, **kwargs: Any) -> Iterator[None]:
+def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
   """Patch TF API.
 
   This function is similar to `mock.patch.object`, but patch both
@@ -184,6 +184,7 @@ def mock_tf(symbol_name: str, **kwargs: Any) -> Iterator[None]:
 
   Args:
     symbol_name: Symbol to patch (e.g. `tf.io.gfile`)
+    *args: Arguments to forward to `mock.patch.object`
     **kwargs: Arguments to forward to `mock.patch.object`
 
   Yields:
@@ -206,7 +207,9 @@ def mock_tf(symbol_name: str, **kwargs: Any) -> Iterator[None]:
       for submodule in tf_submodules:
         module = getattr(module, submodule)
       # Patch the module/object
-      stack.enter_context(mock.patch.object(module, symbol_name, **kwargs))
+      stack.enter_context(
+          mock.patch.object(module, symbol_name, *args, **kwargs)
+      )
     yield
 
 
