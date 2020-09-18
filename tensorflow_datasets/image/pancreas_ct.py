@@ -78,8 +78,9 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
       for image_name in image_names: # Iterate over each folder to get each image
         image_file = pydicom.read_file(os.path.join(data_dir,
                      'Pancreas-CT/',folder,image_name)).pixel_array
-        mask_array = array_data[:,:,j] # Get the corresponding mask
-        key =  image_name + str(i) + str(j)
-        yield key, {'image': image_file, 'mask': mask_array}
+        if i != 26: #Skip malformed data
+          mask_array = array_data[:,:,j] # Get the corresponding mask
+          key =  image_name + str(i) + str(j)
+          yield key, {'image': image_file, 'mask': mask_array}
         j += 1
-    i+=1
+      i+=1
