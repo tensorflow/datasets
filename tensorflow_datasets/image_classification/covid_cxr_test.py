@@ -5,20 +5,24 @@ import tensorflow_datasets.testing as tfds_test
 
 class CovidCxr224Test(tfds_test.DatasetBuilderTestCase):
     DATASET_CLASS = covid_cxr.CovidCxr
-    BUILDER_CONFIG_NAMES_TO_TEST = [224]
+    BUILDER_CONFIG_NAMES_TO_TEST = ['224']
     
     SPLITS = {'train': 3,
               'test': 3,}   
+    
+    SKIP_CHECKSUMS = True
     
     DL_EXTRACT_RESULT = ['train_224.zip', 'test_224.zip']
         
 class CovidCxr480Test(tfds_test.DatasetBuilderTestCase):
     
     DATASET_CLASS = covid_cxr.CovidCxr
-    BUILDER_CONFIG_NAMES_TO_TEST = [480]
+    BUILDER_CONFIG_NAMES_TO_TEST = ['480']
     
     SPLITS = {"train": 3,
               "test": 3,}   
+    
+    SKIP_CHECKSUMS = True
     
     DL_EXTRACT_RESULT = {'train': 'train_480.zip', 
                          'test': 'test_480.zip'}
@@ -30,6 +34,8 @@ class CovidCxrOriginalTest(tfds_test.DatasetBuilderTestCase):
     
     SPLITS = {"train": 3,
               "test": 3,}   
+    
+    SKIP_CHECKSUMS = True
     
     DL_EXTRACT_RESULT = {'train': 'train_original.zip', 
                          'test': 'test_original.zip'}
