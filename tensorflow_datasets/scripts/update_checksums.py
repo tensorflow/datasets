@@ -35,7 +35,7 @@ _DATASET_TYPES = list(['audio',
 
 _ROOT_DIR = Path(__file__).parent.parent
 
-_TXT_CHECKSUM_DIR = Path.joinpath(_ROOT_DIR, 'url_checksums')
+_TXT_CHECKSUM_DIR = _ROOT_DIR / 'url_checksums'
 _TXT_CHECKSUM_SUFFIX = '.txt'
 _TSV_CHECKSUM_SUFFIX = '.tsv'
 
@@ -56,9 +56,9 @@ def get_txt_checksums_paths() -> List[str]:
   root directory"""
 
   #print(_TXT_CHECKSUM_DIR)
-  paths = list([Path.joinpath(_TXT_CHECKSUM_DIR, path)
-                for path in tf.io.gfile.listdir(_TXT_CHECKSUM_DIR)
-                if path.endswith(_TXT_CHECKSUM_SUFFIX)])
+  paths = [ _TXT_CHECKSUM_DIR / path
+            for path in tf.io.gfile.listdir(_TXT_CHECKSUM_DIR)
+            if path.endswith(_TXT_CHECKSUM_SUFFIX)]
   return paths
 
 
