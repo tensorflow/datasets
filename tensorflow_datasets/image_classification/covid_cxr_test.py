@@ -24,8 +24,7 @@ class CovidCxr480Test(tfds_test.DatasetBuilderTestCase):
     
     SKIP_CHECKSUMS = True
     
-    DL_EXTRACT_RESULT = {'train': 'train_480.zip', 
-                         'test': 'test_480.zip'}
+    DL_EXTRACT_RESULT = ['train_480.zip', 'test_480.zip']
 
 class CovidCxrOriginalTest(tfds_test.DatasetBuilderTestCase):
     
@@ -37,8 +36,7 @@ class CovidCxrOriginalTest(tfds_test.DatasetBuilderTestCase):
     
     SKIP_CHECKSUMS = True
     
-    DL_EXTRACT_RESULT = {'train': 'train_original.zip', 
-                         'test': 'test_original.zip'}
+    DL_EXTRACT_RESULT = ['train_original.zip', 'test_original.zip']
     
 if __name__ == "__main__":
     tfds_test.test_main()
