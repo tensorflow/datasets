@@ -15,9 +15,9 @@
 
 """Script to update all the checksums.tsv files with tabs instead of spaces"""
 
-import os
 from absl import app
 from typing import List
+from pathlib import Path
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
@@ -33,9 +33,9 @@ _DATASET_TYPES = list(['audio',
                         'translate',
                         'video'])
 
-_ROOT_DIR = os.path.normpath(os.path.dirname(os.path.dirname(__file__)))
+_ROOT_DIR = Path(__file__).parent.parent
 
-_TXT_CHECKSUM_DIR = os.path.join(_ROOT_DIR, 'url_checksums')
+_TXT_CHECKSUM_DIR = Path.joinpath(_ROOT_DIR, 'url_checksums')
 _TXT_CHECKSUM_SUFFIX = '.txt'
 _TSV_CHECKSUM_SUFFIX = '.tsv'
 
@@ -45,9 +45,9 @@ def get_tsv_checksums_paths() -> List[str]:
   paths = list()
   datasets_list = tfds.list_builders()
   for dataset in datasets_list:
-    path = os.path.join(tfds.builder_cls(dataset).code_path.parent,
+    path = Path.joinpath(tfds.builder_cls(dataset).code_path.parent,
                         'checksums.tsv')
-    if os.path.isfile(path):
+    if path.is_file():
       paths.append(path)
   return paths
 
@@ -56,7 +56,7 @@ def get_txt_checksums_paths() -> List[str]:
   root directory"""
 
   #print(_TXT_CHECKSUM_DIR)
-  paths = list([os.path.join(_TXT_CHECKSUM_DIR, path)
+  paths = list([Path.joinpath(_TXT_CHECKSUM_DIR, path)
                 for path in tf.io.gfile.listdir(_TXT_CHECKSUM_DIR)
                 if path.endswith(_TXT_CHECKSUM_SUFFIX)])
   return paths
