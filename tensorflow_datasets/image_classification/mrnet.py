@@ -76,6 +76,7 @@ class Mrnet(tfds.core.GeneratorBasedBuilder):
       msg = "You must download the dataset files manually and place them in: "
       msg += dl_manager.manual_dir
       msg += " as train, valid folders and a series of csv files."
+      msg += " See testing/test_data/fake_examples/mrnet."
       raise AssertionError(msg)
     return [
         tfds.core.SplitGenerator(
