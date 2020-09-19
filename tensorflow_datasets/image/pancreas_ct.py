@@ -36,7 +36,7 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
   "Pancreas CT Scan Dataset"
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
     Data can be downloaded from
-    gs://bme590/krinke/
+    https://storage.cloud.google.com/bme590/krinke
     Please put all files in manual_dir.
     """
 
