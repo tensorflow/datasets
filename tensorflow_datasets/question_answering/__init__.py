@@ -21,6 +21,7 @@ from tensorflow_datasets.question_answering.coqa import Coqa
 from tensorflow_datasets.question_answering.cosmos_qa import CosmosQA
 from tensorflow_datasets.question_answering.mctaco import Mctaco
 from tensorflow_datasets.question_answering.natural_questions import NaturalQuestions
+from tensorflow_datasets.question_answering.natural_questions_open import NaturalQuestionsOpen
 from tensorflow_datasets.question_answering.qasc import Qasc
 from tensorflow_datasets.question_answering.squad import Squad
 from tensorflow_datasets.question_answering.trivia_qa import TriviaQA

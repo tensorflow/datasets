@@ -1,0 +1,2 @@
+https://raw.githubusercontent.com/google-research-datasets/natural-questions/a7a113c9fdc2d9986d624bd43b8a18d6d5779eaa/nq_open/NQ-open.dev.jsonl 391316 f15567f38099f3615f5b8a685c0aef449c11ad90d3da3735e8d1b98115b40616
+https://raw.githubusercontent.com/google-research-datasets/natural-questions/a7a113c9fdc2d9986d624bd43b8a18d6d5779eaa/nq_open/NQ-open.train.jsonl 8522298 0c93aaf13b12f855628489665e4ef85ffb8573ad444646f11f4fabdc57a0aabf
