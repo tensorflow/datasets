@@ -5,7 +5,6 @@ import os
 import numpy as np
 import pandas as pd
 
-# TODO(mrnet): BibTeX citation
 _CITATION = """
 @article{10.1371/journal.pmed.1002699,
   Abstract = {Nicholas Bien and colleagues present an automated system for interpreting knee 
@@ -29,7 +28,6 @@ _CITATION = """
   Bdsk-Url-1 = {https://doi.org/10.1371/journal.pmed.1002699}}
 """
 
-# TODO(mrnet):
 _DESCRIPTION = """
 The MRNet dataset consists of 1,370 knee MRI exams performed at Stanford University Medical Center. 
 The dataset contains 1,104 (80.6%) abnormal exams, with 319 (23.3%) ACL tears and 508 (37.1%) meniscal tears; 
@@ -56,20 +54,15 @@ class Mrnet(tfds.core.GeneratorBasedBuilder):
   # TODO(mrnet): Set up version.
   VERSION = tfds.core.Version('0.1.0')
   def _info(self):
-    # TODO(mrnet): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
             'image': tfds.features.Tensor(shape=(256, 256, 1), dtype=tf.uint8),
             'label': tfds.features.ClassLabel(names=["abnormal", "ACL", "Meniscus", "normal", "Both_ACL_Meniscus"]),
         }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
         supervised_keys=('image', 'label'),
         # Homepage of the dataset for documentation
         homepage='https://stanfordmlgroup.github.io/competitions/mrnet/',
@@ -78,12 +71,12 @@ class Mrnet(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    # TODO(mrnet): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
-
     data_dir = dl_manager.manual_dir
-
+    if not tf.io.gfile.exists(data_dir):
+      msg = "You must download the dataset files manually and place them in: "
+      msg += dl_manager.manual_dir
+      msg += " as train, valid folders and a series of csv files."
+      raise AssertionError(msg)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -105,11 +98,16 @@ class Mrnet(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_dir=None, archive=None, label_path=None, process=None):
-    """Yields examples."""
-    # get_path(split, patient_number, (axial/coronal/saggital)):
-    #    return  path to .npy
-    # TODO(mrnet): Yields (key, example) tuples from the dataset
+    """Generate MRNet examples as dicts.
+    Args:
+      data_dir (str): The path of the downloaded and generated data.
+      archive (str): Path to the image data files
+      label_path (str): Path to the csv label files
+      process (str): Flag to decide the splits
 
+    Yields:
+      Generator yielding the next examples
+    """
     if process == 'train':
         abnormal_train = pd.read_csv(os.path.join(data_dir, "train-abnormal.csv"), names=["Patient_Number", "abnormal"])
         ACL_train = pd.read_csv(os.path.join(data_dir, "train-acl.csv"), names=["Patient_Number", "ACL"])
