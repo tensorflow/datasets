@@ -1,8 +1,6 @@
 """pancreas_ct dataset."""
 
 import os
-import pydicom
-import nibabel
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -77,14 +75,14 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
     image_folders.sort()
     i = 0
     for folder in image_folders: # Iterate over all of the folders containing image
-      mask = nibabel.load(os.path.join(data_dir, 'PancreasLabels/', mask_files[i])) # Load in one nii file containing many masks
+      mask = tfds.core.lazy_imports.nibabel.load(os.path.join(data_dir, 'PancreasLabels/', mask_files[i])) # Load in one nii file containing many masks
       j = 0
       image_names = tf.io.gfile.listdir(os.path.join(data_dir,
                     'Pancreas-CT/', folder))
       image_names.sort()
       array_data = mask.get_fdata().astype('bool') #Cast from float64
       for image_name in image_names: # Iterate over each folder to get each image
-        image_file = pydicom.read_file(os.path.join(data_dir,
+        image_file = tfds.core.lazy_imports.pydicom.read_file(os.path.join(data_dir,
                      'Pancreas-CT/',folder,image_name)).pixel_array
         if i != 26: #Skip malformed data
           mask_array = array_data[:,:,j] # Get the corresponding mask
