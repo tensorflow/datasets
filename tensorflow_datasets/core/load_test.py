@@ -135,3 +135,18 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
   )
   assert _find_builder_dir('my_dataset/broken_config') is None
   assert _find_builder_dir('my_dataset/unknown_config') is None
+
+def test_get_version_str(mock_fs: testing.MockFs):
+
+  mock_fs.add_file('/my_dataset/1.0.0')
+  mock_fs.add_file('/my_dataset/1.0.1')
+  mock_fs.add_file('/my_dataset/1.1.0')
+  mock_fs.add_file('/my_dataset/2.0.1')
+
+  get_version_str = functools.partial(load._get_version_str, '/my_dataset/')  # pylint: disable=protected-access
+
+  assert get_version_str(requested_version=None) == '2.0.1'
+  assert get_version_str(requested_version='1.*.*') == '1.1.0'
+  assert get_version_str(requested_version='*.*.*') == '2.0.1'
+  assert get_version_str(requested_version='1.3.*') is None
+  assert get_version_str(requested_version='2.3.5') is None

@@ -382,7 +382,7 @@ def find_builder_dir(
 
   # If version not given, extract the version
   if not version_str:
-    version_str = _get_last_version(builder_dir)
+    version_str = _get_version_str(builder_dir, requested_version=version_str)
 
   if not version_str:  # No version given nor found
     return None
@@ -413,13 +413,19 @@ def _get_default_config_name(name: str) -> Optional[str]:
   return None
 
 
-def _get_last_version(builder_dir: str) -> Optional[str]:
+def _get_version_str(
+    builder_dir: str,
+    *,
+    requested_version: Optional[str] = None,
+) -> Optional[str]:
   """Returns the last version found in the directory."""
   all_versions = version.list_all_versions(builder_dir)
-  if all_versions:
-    return str(all_versions[-1])  # Biggest version is the last one
-  else:
-    return None
+  for v in reversed(all_versions):
+    if not requested_version:
+      return str(v)  # Biggest version is the last one
+    if v.match(requested_version):
+      return str(v)  # Biggest version matching the `requested_version`
+  return None
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):
