@@ -101,8 +101,8 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "filepath": dl_manager.manual_dir
-            }
-        )
+            },
+        ),
     ]
 
   def _generate_examples(self,filepath=None):
@@ -117,41 +117,28 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
     patients = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS'))
     
 
-    ## iterate over all masks folders
-    mask_lst = []
+    ## iterate over all masks and images folders
     for patient_id in patients:
-        try:
-            mask = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id))
-            for file in mask:
-                if file.endswith('.nii.gz'):
-                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,file)
-                    mask_lst.append((patient_id,nibabel.load(file_name)))
-        except:
-            pass
-
-    ## iterate over all images folders
-    for patient_id in patients:
-        try:
-            mask_file = [item for item in mask_lst if item[0] == patient_id ][0][1].get_fdata().astype('int16')
-            ## files are stored in sub-directories, so go into the sub-directory where stores the images
-            image = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))
-            i=1
-            for file in image:
-                    
-                    file_name = os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
-                    if file_name.endswith('dcm'):
-                        key = patient_id+'_'+str(i+1)
-                        image_file = pydicom.read_file(file_name)
-                        yield( key,
-                        {
+    try:
+        mask = tfds.core.lazy_imports.nibabel.load(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id))
+        images = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGE',patient_id))
+        array_data = mask.get_fdata().astype('int16')
+        for file in images:
+            i = 1
+            image_file = tfds.core.lazy_imports.pydicom.read_file(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
+            if file_name.endswith('dcm'):
+                key = patient_id+'_'+str(i+1)
+                
+                yield( key,
+                    {
                             'image':image_file.pixel_array,
-                            'mask' : mask_file[:,:,i],
+                            'mask' : mask_file[:,:,i-1],
                             'age' : image_file.PatientAge,
                             'sex' :image_file.PatientSex,
                             'body_part': image_file.BodyPartExamined
 
-                        })
-                    i+=1
-        except:
-            pass
+                    })
+                i+=1
+    except:
+        pass
     
