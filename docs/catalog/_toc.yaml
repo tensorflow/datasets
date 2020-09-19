@@ -264,6 +264,9 @@ toc:
     title: mctaco
   - path: /datasets/catalog/natural_questions
     title: natural_questions
+  - path: /datasets/catalog/natural_questions_open
+    status: nightly
+    title: natural_questions_open
   - path: /datasets/catalog/qasc
     status: nightly
     title: qasc
