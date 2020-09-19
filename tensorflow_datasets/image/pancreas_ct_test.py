@@ -5,7 +5,6 @@ from tensorflow_datasets.image import pancreas_ct
 
 
 class PancreasCtTest(tfds.testing.DatasetBuilderTestCase):
-  # TODO(pancreas_ct):
   DATASET_CLASS = pancreas_ct.PancreasCt
   SPLITS = {
       "train": 5,  # Number of fake train example
