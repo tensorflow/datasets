@@ -28,6 +28,7 @@ The remaining 65 patients were selected by a radiologist from patients who neith
 Subjects' ages range from 18 to 76 years with a mean age of 46.8 ± 16.7. 
 The CT scans have resolutions of 512x512 pixels with varying pixel sizes and slice thickness between 1.5 − 2.5 mm, acquired on Philips and Siemens MDCT scanners (120 kVp tube voltage). 
 A medical student manually performed slice-by-slice segmentations of the pancreas as ground-truth and these were verified/modified by an experienced radiologist.
+This dataset consists of 81 of the 82 CT scans, for a total of 19123 image-mask pairs.
 """
 
 
