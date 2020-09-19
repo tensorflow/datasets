@@ -28,7 +28,7 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
   "Pancreas CT Scan Dataset"
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
     Data can be downloaded from
-    https://console.cloud.google.com/storage/browser/bme590/krinke
+    gs://bme590/krinke/
     Please put all files in manual_dir.
     """
 
@@ -52,7 +52,6 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     directory = dl_manager.manual_dir
-    
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
@@ -64,24 +63,24 @@ class PancreasCt(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_dir= None):
     """Yields examples."""
-    
     mask_files =  tf.io.gfile.listdir(os.path.join(data_dir,'PancreasLabels'))
     image_folders = tf.io.gfile.listdir(os.path.join(data_dir, 'Pancreas-CT'))
     mask_files.sort()
     image_folders.sort()
-    i = 0 
+    i = 0
     for folder in image_folders: # Iterate over all of the folders containing image
       mask = nibabel.load(os.path.join(data_dir, 'PancreasLabels/', mask_files[i])) # Load in one nii file containing many masks
       j = 0
-      image_names = tf.io.gfile.listdir(os.path.join(data_dir, 
-                                                     'Pancreas-CT/', folder)) 
+      image_names = tf.io.gfile.listdir(os.path.join(data_dir,
+                    'Pancreas-CT/', folder))
       image_names.sort()
       array_data = mask.get_fdata().astype('bool') #Cast from float64
       for image_name in image_names: # Iterate over each folder to get each image
         image_file = pydicom.read_file(os.path.join(data_dir,
-                                                    'Pancreas-CT/',folder,image_name)).pixel_array
-        mask_array = array_data[:,:,j] # Get the corresponding mask from the nii file
-        key =  image_name + str(i) + str(j)
-        yield key, {'image': image_file, 'mask': mask_array}
+                     'Pancreas-CT/',folder,image_name)).pixel_array
+        if i != 26: #Skip malformed data
+          mask_array = array_data[:,:,j] # Get the corresponding mask
+          key =  image_name + str(i) + str(j)
+          yield key, {'image': image_file, 'mask': mask_array}
         j += 1
-    i+=1
+      i+=1
