@@ -1,4 +1,5 @@
 """pancreas_ct dataset."""
+
 import os
 import pydicom
 import nibabel
@@ -8,7 +9,8 @@ import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
 @article{article,
-  author = {Clark, Kenneth and Vendt, Bruce and Smith, Kirk and Freymann, John and Kirby, Justin and Koppel, Paul and Moore, Stephen and Phillips, Stanley and Maffitt,     David and Pringle, Michael and Tarbox, Lawrence and Prior, F.},
+  author = {Clark, Kenneth and Vendt, Bruce and Smith, Kirk and Freymann, John and Kirby, Justin and Koppel, Paul and Moore, Stephen and Phillips, Stanley and Maffitt,
+            David and Pringle, Michael and Tarbox, Lawrence and Prior, F.},
   year = {2013},
   month = {07},
   pages = {},
@@ -20,7 +22,12 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-The National Institutes of Health Clinical Center performed 82 abdominal contrast enhanced 3D CT scans from 53 male and 27 female subjects. Seventeen of the subjects are healthy kidney donors scanned prior to nephrectomy.  The remaining 65 patients were selected by a radiologist from patients who neither had major abdominal pathologies nor pancreatic cancer lesions.  Subjects' ages range from 18 to 76 years with a mean age of 46.8 ± 16.7. The CT scans have resolutions of 512x512 pixels with varying pixel sizes and slice thickness between 1.5 − 2.5 mm, acquired on Philips and Siemens MDCT scanners (120 kVp tube voltage). A medical student manually performed slice-by-slice segmentations of the pancreas as ground-truth and these were verified/modified by an experienced radiologist.
+The National Institutes of Health Clinical Center performed 82 abdominal contrast enhanced 3D CT scans from 53 male and 27 female subjects. 
+Seventeen of the subjects are healthy kidney donors scanned prior to nephrectomy. 
+The remaining 65 patients were selected by a radiologist from patients who neither had major abdominal pathologies nor pancreatic cancer lesions. 
+Subjects' ages range from 18 to 76 years with a mean age of 46.8 ± 16.7. 
+The CT scans have resolutions of 512x512 pixels with varying pixel sizes and slice thickness between 1.5 − 2.5 mm, acquired on Philips and Siemens MDCT scanners (120 kVp tube voltage). 
+A medical student manually performed slice-by-slice segmentations of the pancreas as ground-truth and these were verified/modified by an experienced radiologist.
 """
 
 
