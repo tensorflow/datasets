@@ -97,8 +97,6 @@ class CovidCxr(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     
-#     dl_manager._register_checksums = True
-    
     if self.builder_config.resolution == 'original':
         train_path, test_path = dl_manager.download([_TRAIN_ORIGINAL_URL, _TEST_ORIGINAL_URL])
     elif self.builder_config.resolution == 480:
