@@ -62,7 +62,7 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
         
         kaggle_data = 'seesee/siim-train-test'
         data_dir = dl_manager.download_kaggle_data(kaggle_data)
-
+        print(data_dir)
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
