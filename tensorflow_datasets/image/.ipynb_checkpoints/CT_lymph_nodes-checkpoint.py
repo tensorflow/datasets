@@ -123,23 +123,23 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
                 mask_path = os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,patient_id+'_mask.nii.gz')
                 with tf.io.gfile.GFile(mask_path) as f:
                     mask_file = tfds.core.lazy_imports.nibabel.load(f.name).get_fdata().astype('int16')
-                images = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))
-                for file in images:
-                    file_name= os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
-                    if file_name.endswith('dcm'):
-                        with tf.io.gfile.GFile(file_name) as f:
-                            image_file = tfds.core.lazy_imports.pydicom.read_file(f.name)
-                        key = patient_id+'_'+str(i+1)
+                    images = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))
+                    for file in images:
+                        file_name= os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
+                        if file_name.endswith('dcm'):
+                            with tf.io.gfile.GFile(file_name) as f:
+                                image_file = tfds.core.lazy_imports.pydicom.read_file(f.name)
+                                key = patient_id+'_'+str(i+1)
 
-                        yield( key,
-                                {
-                                        'image':image_file.pixel_array,
-                                        'mask' : mask_file[:,:,i],
-                                        'age' : image_file.PatientAge,
-                                        'sex' :image_file.PatientSex,
-                                        'body_part': image_file.BodyPartExamined
+                                yield( key,
+                                        {
+                                                'image':image_file.pixel_array,
+                                                'mask' : mask_file[:,:,i],
+                                                'age' : image_file.PatientAge,
+                                                'sex' :image_file.PatientSex,
+                                                'body_part': image_file.BodyPartExamined
 
-                                })
-                        i+=1
+                                        })
+                                i+=1
 
 
