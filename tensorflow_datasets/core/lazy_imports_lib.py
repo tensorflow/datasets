@@ -161,4 +161,5 @@ class LazyImporter(object):
   @classmethod
   def pydicom(cls):
     return _try_import("pydicom")
+
 lazy_imports = LazyImporter  # pylint: disable=invalid-name

@@ -1,4 +1,4 @@
-`"""CT_Lymph_Nodes dataset."""
+"""CT_Lymph_Nodes dataset."""
 
 import tensorflow_datasets.public_api as tfds
 import tensorflow.compat.v2 as tf
@@ -119,26 +119,29 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
 
     ## iterate over all masks and images folders
     for patient_id in patients:
-    try:
-        mask = tfds.core.lazy_imports.nibabel.load(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id))
-        images = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGE',patient_id))
-        array_data = mask.get_fdata().astype('int16')
-        for file in images:
-            i = 1
-            image_file = tfds.core.lazy_imports.pydicom.read_file(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
-            if file_name.endswith('dcm'):
-                key = patient_id+'_'+str(i+1)
-                
-                yield( key,
-                    {
-                            'image':image_file.pixel_array,
-                            'mask' : mask_file[:,:,i-1],
-                            'age' : image_file.PatientAge,
-                            'sex' :image_file.PatientSex,
-                            'body_part': image_file.BodyPartExamined
+        i = 0
+        if patient_id.startswith('.'):
+            pass
+        else:
+            mask = tfds.core.lazy_imports.nibabel.load(os.path.join(filepath,'MED_ABD_LYMPH_MASKS',patient_id,patient_id+'_mask.nii.gz')).get_fdata().astype('int16')
+            images = tf.io.gfile.listdir(os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id))
+            for file in images:
 
-                    })
-                i+=1
-    except:
-        pass
+                    file_name= os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
+
+                    if file_name.endswith('dcm'):
+                        image_file = tfds.core.lazy_imports.pydicom.read_file(file_name)
+                        key = patient_id+'_'+str(i+1)
+
+                        yield( key,
+                            {
+                                    'image':image_file.pixel_array,
+                                    'mask' : mask[:,:,i],
+                                    'age' : image_file.PatientAge,
+                                    'sex' :image_file.PatientSex,
+                                    'body_part': image_file.BodyPartExamined
+
+                            })
+                        i+=1
+        
     
