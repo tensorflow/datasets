@@ -119,8 +119,8 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
                     for file in images:
                         file_name= os.path.join(filepath,'MED_ABD_LYMPH_IMAGES',patient_id,file)
                         if file_name.endswith('dcm'):
-                            with tf.io.gfile.GFile(file_name) as f:
-                                image_file = tfds.core.lazy_imports.pydicom.read_file(f.name)
+                            with tf.io.gfile.GFile(file_name) as i_f:
+                                image_file = tfds.core.lazy_imports.pydicom.read_file(i_f.name)
                                 key = patient_id+'_'+str(i+1)
 
                                 yield( key,
