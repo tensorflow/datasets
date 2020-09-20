@@ -45,7 +45,8 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Tensor(shape = (None, None, None), dtype = tf.uint8), 
+            'image': tfds.features.Tensor(shape = (None,), dtype = tf.uint8), 
+            'shape': tfds.features.Tensor(shape = (None,),  dtype=tf.int8), 
             'question':  tfds.features.Tensor(shape=(None,), dtype=tf.string),
             'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
         }),
@@ -57,13 +58,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     extracted_path = 'gs://bme590/roujia/pathVQARW'
     return [
-#         tfds.core.SplitGenerator(
-#             name=tfds.Split.TRAIN,
-#             gen_kwargs={
-#                 'images_dir': os.path.join(extracted_path, "train/", "pic"),
-#                 'labels_dir': os.path.join(extracted_path, "train/", "label.json")
-#             },
-#         ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
+                'images_dir': os.path.join(extracted_path, "train/", "pic"),
+                'labels_dir': os.path.join(extracted_path, "train/", "label.json")
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
@@ -71,13 +72,13 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
                 'labels_dir': os.path.join(extracted_path, "test/", "label.json")
             },
         ),
-#         tfds.core.SplitGenerator(
-#             name=tfds.Split.VALIDATION,
-#             gen_kwargs={
-#                 'images_dir': os.path.join(extracted_path, "val/", "pic"),
-#                 'labels_dir': os.path.join(extracted_path, "val/", "label.json")
-#                        },
-#         ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                'images_dir': os.path.join(extracted_path, "val/", "pic"),
+                'labels_dir': os.path.join(extracted_path, "val/", "label.json")
+                       },
+        ),
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
@@ -114,12 +115,15 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         if file in new_dict:
             image = tf.io.read_file(os.path.join(images_dir, file)) 
             imageTensor = tf.io.decode_jpeg(image)
+            shapeTensor = imageTensor.get_shape().as_list()
+            imageTensor = tf.reshape(imageTensor, [-1])
             qa_dict = new_dict.get(file)
             questionTensor = qa_dict.get('Questions')
             answerTensor = qa_dict.get('Answers')
             key = file + str(random.randint(0,100))
             yield key, {
                 'image': imageTensor,
+                'shape': tf.stack(shapeTensor),
                 'question': tf.stack(questionTensor),
                 'answer': tf.stack(answerTensor), 
             }
