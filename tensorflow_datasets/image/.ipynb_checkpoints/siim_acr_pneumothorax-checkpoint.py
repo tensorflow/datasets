@@ -10,7 +10,13 @@ import os
 
 # TODO(siim_acr_pneumothorax): BibTeX citation
 _CITATION = """
-"""
+@ONLINE {societyforimaginginformaticsinmedicine(siim)2019,
+    author = "Society for Imaging Informatics in Medicine (SIIM)",
+    title  = "SIIM-ACR Pneumothorax Segmentation",
+    month  = "aug",
+    year   = "2019",
+    url    = "https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/overview/description"
+}"""
 
 # TODO(siim_acr_pneumothorax):
 _DESCRIPTION = """
@@ -34,14 +40,6 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
 
     # TODO(siim_acr_pneumothorax): Set up version.
     VERSION = tfds.core.Version('0.1.0')
-    MANUAL_DOWNLOAD_INSTRUCTIONS = 'Just a test with part of the dataset'
-#     BUILDER_CONFIGS = [
-#         tfds.core.BuilderConfig(  # example from Duke ultranet
-#             version=VERSION,
-#             name="channel",
-#             description="Raw channel data from simulated transducers."
-#         )
-#     ]
 
     def _info(self):
         return tfds.core.DatasetInfo(
@@ -64,10 +62,10 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
         # dl_manager is a tfds.download.DownloadManager that can be 
         #  used to download and extract URLs 
         
-#         kaggle_data = 'seesee/siim-train-test'
-#         data_dir = dl_manager.download_kaggle_data(kaggle_data)
+        kaggle_data = 'seesee/siim-train-test'
+        data_dir = dl_manager.download_kaggle_data(kaggle_data)
         # Test with smaller dataset to debug
-        data_dir = dl_manager.manual_dir
+#         data_dir = dl_manager.manual_dir
         
 
         return [

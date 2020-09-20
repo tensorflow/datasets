@@ -8,8 +8,7 @@ class SiimAcrPneumothoraxTest(tfds.testing.DatasetBuilderTestCase):
   # TODO(siim_acr_pneumothorax):
   DATASET_CLASS = siim_acr_pneumothorax.SiimAcrPneumothorax
   SPLITS = {
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 10
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
