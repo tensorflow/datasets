@@ -71,14 +71,6 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
         ## The mask
             ## cast to int 16
         'mask' : tfds.features.Tensor(shape=(512,512),dtype = tf.int16),
-
-        ## Patient Age
-        'age'  : tfds.features.Text(),
-        ## Patient Sex
-        'sex'  : tfds.features.Text(),
-        ## Body Part Examined
-        'body_part'  : tfds.features.Text()
-        
             
         }),
         supervised_keys=('image','mask'),
@@ -135,9 +127,9 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
                                         {
                                                 'image':image_file.pixel_array,
                                                 'mask' : mask_file[:,:,i],
-                                                'age' : image_file.PatientAge,
-                                                'sex' :image_file.PatientSex,
-                                                'body_part': image_file.BodyPartExamined
+                                                #'age' : image_file.PatientAge,
+                                                #'sex' :image_file.PatientSex,
+                                                #'body_part': image_file.BodyPartExamined
 
                                         })
                                 i+=1
