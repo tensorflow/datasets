@@ -1,3 +1,0 @@
-# TODO(siim_acr_pneumothorax): If your dataset downloads files, then the checksums will be
-# automatically added here when running the download_and_prepare script
-# with --register_checksums.

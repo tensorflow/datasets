@@ -2,10 +2,8 @@
 
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
-# import glob
 import pandas as pd
 import numpy as np
-# import pydicom
 import os
 
 # TODO(siim_acr_pneumothorax): BibTeX citation
@@ -49,7 +47,7 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
                 "image": tfds.features.Tensor(shape=(1024, 1024, 1), dtype=tf.uint8),
                 "mask": tfds.features.Tensor(shape=(1024, 1024, 1), dtype=tf.bool)
             }),
-            supervised_keys=('image', 'mask'),
+#             supervised_keys=('image', 'mask'),
             homepage='https://www.kaggle.com/c/siim-acr-pneumothorax'
                      '-segmentation',
             citation=_CITATION,
@@ -64,9 +62,6 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
         
         kaggle_data = 'seesee/siim-train-test'
         data_dir = dl_manager.download_kaggle_data(kaggle_data)
-        # Test with smaller dataset to debug
-#         data_dir = dl_manager.manual_dir
-        
 
         return [
             tfds.core.SplitGenerator(
