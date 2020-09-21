@@ -159,8 +159,7 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
-    'tensorflow': ['tensorflow>=1.15.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
+    'tensorflow': ['tensorflow>=2.1'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
 
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh

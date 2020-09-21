@@ -19,9 +19,7 @@
 
 import distutils.version
 
-from absl import logging
-import six
-
+MIN_TF_VERSION = "2.1.0"
 
 _ensure_tf_install_called = False
 
@@ -55,18 +53,13 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     raise
 
   tf_version = distutils.version.LooseVersion(tf.__version__)
-  v_1_15 = distutils.version.LooseVersion("1.15.0")
-  if tf_version < v_1_15:
+  min_tf_version = distutils.version.LooseVersion(MIN_TF_VERSION)
+  if tf_version < min_tf_version:
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
-        "version >= {required}; Detected an installation of version {present}. "
-        "Please upgrade TensorFlow to proceed.".format(
-            required="1.15.0",
-            present=tf.__version__))
-
-  if six.PY2:
-    logging.warning("TFDS is going to drop Python 2 support. Please "
-                    "update to Python 3.")
+        f"version >= {MIN_TF_VERSION}; Detected an installation of version "
+        f"{tf.__version__}. Please upgrade TensorFlow to proceed."
+    )
 
 
 def is_dataset(ds):

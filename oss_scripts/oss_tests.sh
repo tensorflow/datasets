@@ -22,11 +22,6 @@ function set_status() {
 
 PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 
-if [[ "$TF_VERSION" == "1.15.3" ]]
-then
-  EXTRA_IGNORE="--ignore=tensorflow_datasets/core/utils/gcs_utils_test.py"
-fi
-
 # Run Tests
 # Ignores:
 # * Nsynth is run in isolation due to dependency conflict (crepe)
@@ -68,13 +63,9 @@ function test_notebook() {
   set_status
 }
 
-# Skip notebook tests for TF 1.15 as the notebook assumes eager by default.
-if [[ "$TF_VERSION" != "1.15.3" ]]
-then
-  for notebook in $NOTEBOOKS
-  do
-    test_notebook $notebook
-  done
-fi
+for notebook in $NOTEBOOKS
+do
+  test_notebook $notebook
+done
 
 exit $STATUS
