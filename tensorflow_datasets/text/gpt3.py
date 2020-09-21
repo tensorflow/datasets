@@ -94,9 +94,7 @@ class Gpt3(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerator."""
 
-    data = tfds.download.Resource(
-        url=_DATA_URL, extract_method=tfds.download.ExtractMethod.ZIP)
-    directory = dl_manager.download_and_extract(data)
+    directory = dl_manager.download_and_extract(_DATA_URL)
 
     return [
         tfds.core.SplitGenerator(
