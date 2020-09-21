@@ -25,7 +25,6 @@ from absl import flags
 from absl import logging
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import naming
@@ -380,9 +379,7 @@ def find_builder_dir(
   if config_name:
     builder_dir = os.path.join(builder_dir, config_name)
 
-  # If version not given, extract the version
-  if not version_str:
-    version_str = _get_version_str(builder_dir, requested_version=version_str)
+  version_str = _get_version_str(builder_dir, requested_version=version_str)
 
   if not version_str:  # No version given nor found
     return None
