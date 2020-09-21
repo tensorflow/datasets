@@ -14,7 +14,6 @@
 # limitations under the License.
 """pathVQA dataset."""
 
-# import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import pathVQA
 

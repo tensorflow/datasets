@@ -33,6 +33,10 @@ test, this dataset will lead to a better understanding about computer-aided clin
 decision making and contribute to pathologist education. The construction of “AI” pathologists
 could be a great potential for low-resource settings where medical training resources and 
 medical professionals are scarcer than in the United States. 
+
+The size of images is different case by case. The dataset will generate a 1D array of image
+and original image shape. The user can utilize the reshape_image function to recover images
+from 1D array. The questions and answers pair will be in format of lists. 
 """
 
 class Pathvqa(tfds.core.GeneratorBasedBuilder):
@@ -99,6 +103,7 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
+
     my_files = tf.io.gfile.listdir(images_dir)  
     new_dict = {}
     
