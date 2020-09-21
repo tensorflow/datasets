@@ -1,22 +1,20 @@
 """siim_acr_pneumothorax dataset."""
 
-import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 import pandas as pd
 import numpy as np
-import os
+import tensorflow_datasets.public_api as tfds
 
-# TODO(siim_acr_pneumothorax): BibTeX citation
 _CITATION = """
 @ONLINE {societyforimaginginformaticsinmedicine(siim)2019,
-    author = "Society for Imaging Informatics in Medicine (SIIM)",
-    title  = "SIIM-ACR Pneumothorax Segmentation",
-    month  = "aug",
-    year   = "2019",
-    url    = "https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/overview/description"
+author = "Society for Imaging Informatics in Medicine (SIIM)",
+title  = "SIIM-ACR Pneumothorax Segmentation",
+month  = "aug",
+year   = "2019",
+url    = "https://www.kaggle.com/c/siim-acr-pneumothorax"
+"-segmentation/overview/description"
 }"""
 
-# TODO(siim_acr_pneumothorax):
 _DESCRIPTION = """
 This dataset comes from the SIIM-ACR Pneumothorax Segmentation, 
 held by SIIM in 2019. It contains over 15,000 chest X-ray scans
@@ -34,124 +32,97 @@ RLE(run-length encoding) format.
 
 
 class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
-    """TODO(siim_acr_pneumothorax): Short description of my dataset."""
+  """Siim-Acr-Pneumothorax dataset, train images only"""
+  VERSION = tfds.core.Version('0.1.0')
 
-    # TODO(siim_acr_pneumothorax): Set up version.
-    VERSION = tfds.core.Version('0.1.0')
+  def _info(self):
+    return tfds.core.DatasetInfo(
+      builder=self,
+      description=_DESCRIPTION,
+      features=tfds.features.FeaturesDict({
+        "image": tfds.features.Tensor(shape=(1024, 1024, 1),
+                                      dtype=tf.uint8),
+        "mask": tfds.features.Tensor(shape=(1024, 1024, 1),
+                                     dtype=tf.bool)
+      }),
+      homepage='https://www.kaggle.com/c/siim-acr-pneumothorax'
+               '-segmentation',
+      citation=_CITATION,
+    )
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description=_DESCRIPTION,
-            features=tfds.features.FeaturesDict({
-                "image": tfds.features.Tensor(shape=(1024, 1024, 1), dtype=tf.uint8),
-                "mask": tfds.features.Tensor(shape=(1024, 1024, 1), dtype=tf.bool)
-            }),
-#             supervised_keys=('image', 'mask'),
-            homepage='https://www.kaggle.com/c/siim-acr-pneumothorax'
-                     '-segmentation',
-            citation=_CITATION,
-        )
+  def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
+    # Google bucket download link
+    google_bucket_url = 'https://storage.googleapis.com/bme590/jiacheng_lin' \
+                        '/siim-train-test.zip '
+    data_dir = dl_manager.download_and_extract(google_bucket_url)
+    #  Kaggle download link, not compatible with testing
+    #  kaggle_data = 'seesee/siim-train-test'
+    #  data_dir = dl_manager.download_kaggle_data(kaggle_data)
 
-    def _split_generators(self, dl_manager):
-        """Returns SplitGenerators."""
-        # TODO(siim_acr_pneumothorax): Downloads the data and defines the 
-        #  splits 
-        # dl_manager is a tfds.download.DownloadManager that can be 
-        #  used to download and extract URLs 
-        
-        kaggle_data = 'seesee/siim-train-test'
-        data_dir = dl_manager.download_kaggle_data(kaggle_data)
-        print(data_dir)
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                # This SIIM dataset only has labeled training images, 
-                # so leave this part as it is These kwargs will be passed to
-                # _generate_examples 
-                gen_kwargs={
-                    'data_dir': data_dir
-                },
-            ),
-        ]
+    return [
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TRAIN,
+        gen_kwargs={
+          'data_dir': data_dir
+        },
+      ),
+    ]
 
-    def _generate_examples(self, data_dir):
-        """Yields examples."""
-        # TODO(siim_acr_pneumothorax): Yields (key, example) tuples from the
-        #  dataset 
-        #  ... generator for the image and mask Try 
-        #  tfds.download.iter_archive 
-        dataset_dir = data_dir
-        train_glob = dataset_dir + '/siim/dicom-images-train/*/*/*.dcm'
-        train_fns = sorted(tfds.core.lazy_imports.glob.glob(train_glob))
-        df_full = pd.read_csv(dataset_dir + '/siim/train-rle.csv',
-                              index_col='ImageId') 
-        
-        im_height = 1024
-        im_width = 1024
-        
-        # Get images and masks
-        for n, _id in enumerate(train_fns):
-            dataset = tfds.core.lazy_imports.pydicom.read_file(_id)
-            image = np.expand_dims(dataset.pixel_array, axis=2)
-            try:
-                if '-1' in df_full.loc[_id.split('/')[-1][:-4],' EncodedPixels']:
-                    mask = np.zeros((im_height, im_width, 1))
-                else:
-                    if type(df_full.loc[_id.split('/')[-1][:-4],' EncodedPixels']) == str:
-                        mask = np.expand_dims(self.rle2mask(df_full.loc[_id.split('/')[-1][:-4],
-                                                                              ' EncodedPixels'], 
-                                                                  im_height, im_width), axis=2)
-                    else:
-                        mask = np.zeros((im_height, im_width, 1), dtype=np.bool)
-                        for x in df_full.loc[_id.split('/')[-1][:-4],' EncodedPixels']:
-                            mask =  mask + np.expand_dims(self.rle2mask(x, im_height, im_width), axis=2)
-            except KeyError:
-                mask = np.zeros((im_height, im_width, 1), dtype=np.bool)
-                # Assume missing masks are empty masks.
-            yield _id, {
-                'image': tf.convert_to_tensor(image),
-                'mask': tf.convert_to_tensor(mask)
-            }
+  def _generate_examples(self, data_dir):
+    """Yields examples."""
+    dataset_dir = data_dir
+    train_glob = dataset_dir + '/siim/dicom-images-train/*/*/*.dcm'
+    train_fns = sorted(tfds.core.lazy_imports.glob.glob(train_glob))
+    df_full = pd.read_csv(dataset_dir + '/siim/train-rle.csv',
+                          index_col='ImageId')
 
-    @staticmethod
-    def rle2mask(rle, width, height):
-        mask = np.zeros(width * height)
-        array = np.asarray([int(x) for x in rle.split()])
-        starts = array[0::2]
-        lengths = array[1::2]
+    im_height = 1024
+    im_width = 1024
 
-        current_position = 0
-        for index, start in enumerate(starts):
-            current_position += start
-            mask[current_position:current_position + lengths[index]] = 255
-            current_position += lengths[index]
+    # Get images and masks
+    for patient_id in train_fns:
+      dataset = tfds.core.lazy_imports.pydicom.read_file(patient_id)
+      image = np.expand_dims(dataset.pixel_array, axis=2)
+      try:
+        if '-1' in df_full.loc[
+          patient_id.split('/')[-1][:-4], ' EncodedPixels']:
+          mask = np.zeros((im_height, im_width, 1))
+        else:
+          if isinstance(df_full.loc[patient_id.split('/')[-1][:-4],
+                                    ' EncodedPixels'], str):
+            mask = np.expand_dims(
+              self.rle2mask(df_full.loc[patient_id.split('/')[-1][:-4],
+                                        ' EncodedPixels'],
+                            im_height, im_width), axis=2)
+          else:
+            mask = np.zeros((im_height, im_width, 1),
+                            dtype=np.bool)
+            for x in df_full.loc[
+              patient_id.split('/')[-1][:-4], ' EncodedPixels']:
+              mask = mask + np.expand_dims(
+                self.rle2mask(x, im_height, im_width), axis=2)
+      except KeyError:
+        # Assume missing masks are empty masks.
+        mask = np.zeros((im_height, im_width, 1), dtype=np.bool)
+      yield patient_id, {
+        'image': tf.convert_to_tensor(image),
+        'mask': tf.convert_to_tensor(mask)
+        # 'image': image,
+        # 'mask': mask
+      }
 
-        return mask.reshape(width, height)
-    
-    @staticmethod
-    def mask2rle(img, width, height):
-        lastColor = 0
-        currentPixel = 0
-        runStart = -1
-        runLength = 0
+  def rle2mask(self, rle, width, height):
+    """Translate rle string to mask array"""
+    mask = np.zeros(width * height)
+    array = np.asarray([int(x) for x in rle.split()])
+    starts = array[0::2]
+    lengths = array[1::2]
 
-        for x in range(width):
-            for y in range(height):
-                currentColor = img[x][y]
-                if currentColor != lastColor:
-                    if currentColor == 255:
-                        runStart = currentPixel
-                        runLength = 1
-                    else:
-                        rle.append(str(runStart))
-                        rle.append(str(runLength))
-                        runStart = -1
-                        runLength = 0
-                        currentPixel = 0
-                elif runStart > -1:
-                    runLength += 1
-                lastColor = currentColor
-                currentPixel += 1
+    current_position = 0
+    for index, start in enumerate(starts):
+      current_position += start
+      mask[current_position:current_position + lengths[index]] = 255
+      current_position += lengths[index]
 
-        return " ".join(rle)
+    return mask.reshape(width, height)
