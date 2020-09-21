@@ -22,7 +22,7 @@ import hashlib
 import io
 import os
 import re
-from typing import Any, ContextManager, Iterable, Iterator, Tuple, Union
+from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
 import promise
 import requests
 
@@ -44,12 +44,56 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
+def _filename_from_content_disposition(
+    content_disposition: str,
+) -> Optional[str]:
+  """Extract the filename from the content disposition.
+
+  Parse the content_definition as defined in:
+  https://tools.ietf.org/html/rfc2616
+
+  Note:
+
+   * If both encoded (`filename*=`) and ascii (filename=) name are defined,
+     the function returns the ascii name, as encoding might create issue on
+     some systems
+   * If only the encoded name is defined (e.g.
+     `filename*=UTF-8''%e2%82%ac.txt`), the function return None as this is
+     not yet supported.
+
+  Args:
+      content_disposition: String to parse.
+
+  Returns:
+      filename: The filename, or None if filename could not be parsed
+  """
+  match = re.findall(
+      # Regex (see unittests for examples):
+      # ` *` : Strip eventual whitespaces
+      # `['"]?` : Filename is optionally wrapped in quote
+      # `([^;\r\n"']+)` : Filename can be any symbol except those
+      # `;?` : Stop when encountering optional `;`
+      r"""filename= *['"]?([^;\r\n"']+)['"]? *;?""",
+      content_disposition,
+      flags=re.IGNORECASE,
+  )
+  if not match:
+    return None
+  elif len(match) != 1:
+    raise ValueError(
+        f'Error while parsing filename for: {content_disposition}\n'
+        f'Multiple filename detected: {list(match)}'
+    )
+  return match[0].rstrip()
+
+
 def _get_filename(response: Response) -> str:
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
-    match = re.findall('filename="(.+?)"', content_disposition)
-    if match:
-      return match[0]
+    filename = _filename_from_content_disposition(content_disposition)
+    if filename:
+      return filename
+  # Otherwise, fallback on extracting the name from the url.
   return utils.basename_from_url(response.url)
 
 

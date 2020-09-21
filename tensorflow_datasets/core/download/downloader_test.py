@@ -19,8 +19,10 @@ import hashlib
 import io
 import os
 import tempfile
+from typing import Optional
 
 from absl.testing import absltest
+import pytest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
@@ -138,22 +140,95 @@ class DownloaderTest(testing.TestCase):
       promise.get()
 
 
-class GetFilenameTest(testing.TestCase):
+# Gramar examples inspired from: https://tools.ietf.org/html/rfc6266#section-5
+_CONTENT_DISPOSITION_FILENAME_PAIRS = [
+    ("""attachment; filename=filename.txt""", 'filename.txt'),
+    # Should strip space
+    ("""attachment; filename=  filename.txt  """, 'filename.txt'),
+    ("""attachment; filename=  filename.txt  ;""", 'filename.txt'),
+    # If both encoded and ascii are present, only keep encoded
+    (
+        """attachment; filename="EURO rates"; filename*=utf-8''%e2%82%ac%20rates""",
+        'EURO rates',
+    ),
+    (
+        """attachment; filename=EURO rates; filename*=utf-8''%e2%82%ac%20rates""",
+        'EURO rates',
+    ),
+    (
+        """attachment; filename=EXAMPLE-Im ößä.dat; filename*=iso-8859-1''EXAMPLE-%20I%27m%20%F6%DF%E4.dat""",
+        'EXAMPLE-Im ößä.dat',
+    ),
+    (
+        """attachment;filename="hello.zip";filename*=UTF-8''hello.zip""",
+        'hello.zip',
+    ),
+    (
+        """attachment;filename=hello.zip;filename*=UTF-8''hello.zip""",
+        'hello.zip',
+    ),
+    # Should be case insensitive
+    ("""INLINE; FILENAME= "an example.html""", 'an example.html'),
+    ("""Attachment; filename=example.html""", 'example.html'),
+    # Only encoded not supported for now
+    ("""attachment; filename*=UTF-8''filename.txt""", None),
+    ("""attachment; filename*=iso-8859-1'en'%A3%20rates""", None),
+    # Multi-line also supported
+    (
+        """attachment;
+            filename="hello.zip";
+            filename*=UTF-8''hello.zip""",
+        'hello.zip',
+    ),
+    ("""attachment;filename*=UTF-8''hello.zip""", None),
+    (
+        """attachment;
+            filename*= UTF-8''%e2%82%ac%20rates.zip""",
+        None,
+    ),
+]
 
-  def test_no_headers(self):
-    resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
-    res = downloader._get_filename(resp)
-    self.assertEqual(res, 'baz.zip')
 
-  def test_headers(self):
-    cdisp = ('attachment;filename="hello.zip";'
-             'filename*=UTF-8\'\'hello.zip')
-    resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers={
-        'content-disposition': cdisp,
-    })
-    res = downloader._get_filename(resp)
-    self.assertEqual(res, 'hello.zip')
+@pytest.mark.parametrize(
+    ('content_disposition', 'filename'), _CONTENT_DISPOSITION_FILENAME_PAIRS
+)
+def test_filename_from_content_disposition(
+    content_disposition: str,
+    filename: Optional[str],
+):
+  get_filename = downloader._filename_from_content_disposition
+  assert get_filename(content_disposition) == filename
 
 
-if __name__ == '__main__':
-  testing.test_main()
+@pytest.mark.parametrize(
+    ('content_disposition', 'filename'),
+    [
+        (
+            # Filename should be parsed from the ascii name, not UTF-8
+            """attachment;filename="hello.zip";filename*=UTF-8''other.zip""",
+            'hello.zip'
+        ),
+        (
+            # If ascii filename can't be parsed, filename parsed from url
+            """attachment;filename*=UTF-8''other.zip""",
+            'baz.zip'
+        ),
+        (
+            # No headers, filename parsed from url
+            None,
+            'baz.zip'
+        ),
+    ],
+)
+def test_filename_from_headers(
+    content_disposition: Optional[str],
+    filename: Optional[str],
+):
+  if content_disposition:
+    headers = {
+        'content-disposition': content_disposition,
+    }
+  else:
+    headers = None
+  resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers=headers)
+  assert downloader._get_filename(resp), filename
