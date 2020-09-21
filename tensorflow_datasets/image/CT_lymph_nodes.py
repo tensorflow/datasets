@@ -1,6 +1,6 @@
 """CT_Lymph_Nodes dataset."""
 
-import tensorflow_datasets.public_api as tfds
+import tensorflow_datasets as tfds
 import tensorflow.compat.v2 as tf
 import os
 import io
