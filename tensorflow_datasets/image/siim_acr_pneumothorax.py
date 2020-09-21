@@ -105,11 +105,12 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
       except KeyError:
         # Assume missing masks are empty masks.
         mask = np.zeros((im_height, im_width, 1), dtype=np.bool)
+      mask = mask.astype(np.bool)
       yield patient_id, {
-        'image': tf.convert_to_tensor(image),
-        'mask': tf.convert_to_tensor(mask)
-        # 'image': image,
-        # 'mask': mask
+        #  'image': tf.convert_to_tensor(image),
+        #  'mask': tf.convert_to_tensor(mask)
+        'image': image,
+        'mask': mask
       }
 
   def rle2mask(self, rle, width, height):
