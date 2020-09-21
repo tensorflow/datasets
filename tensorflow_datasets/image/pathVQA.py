@@ -1,8 +1,8 @@
 """pathVQA dataset."""
 
-import json
 import os
-import random
+# import json
+# import random
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -131,7 +131,7 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
       for line in f:
         string = line[:-2]
         try:
-          x = json.loads(string)
+          x = tfds.core.lazy_imports.json.loads(string)
           temp_name = x.get('Images')
           if '.jpg' not in temp_name:
             temp_name = temp_name + '.jpg'
@@ -157,7 +157,7 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         qa_dict = new_dict.get(file)
         question_tensor = qa_dict.get('Questions')
         answer_tensor = qa_dict.get('Answers')
-        key = file + str(random.randint(0,100))
+        key = file + str(tfds.core.lazy_imports.random.randint(0,100))
         yield key, {
             'image': image_tensor_flat,
             'image_shape': shape_tensor,
