@@ -34,6 +34,7 @@ from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
+from tensorflow_datasets.image.pathVQA import Pathvqa
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.the300w_lp import The300wLp
@@ -102,4 +103,3 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.pathVQA import Pathvqa  # TODO(pathVQA) Sort alphabetically

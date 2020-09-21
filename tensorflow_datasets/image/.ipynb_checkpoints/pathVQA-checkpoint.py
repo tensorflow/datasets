@@ -5,6 +5,7 @@ import tensorflow as tf
 import json
 import os
 import random
+import numpy as np
 
 _CITATION = """\
 @misc{he2020pathvqa,
@@ -33,10 +34,19 @@ test, this dataset will lead to a better understanding about computer-aided clin
 decision making and contribute to pathologist education. The construction of “AI” pathologists
 could be a great potential for low-resource settings where medical training resources and 
 medical professionals are scarcer than in the United States. 
+
+The size of images is different case by case. The dataset will generate a 1D array of image
+and original image shape. The user can utilize the reshape_image function to recover images
+from 1D array. The questions and answers pair will be in format of lists. 
 """
 
 class Pathvqa(tfds.core.GeneratorBasedBuilder):
   """pathVQA dataset"""
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Please set your manual_dir at 'gs://bme590/roujia/pathVQARW'
+  in your tfds.download.DownloadConfig when using tfds.load
+  """
 
   VERSION = tfds.core.Version('0.1.0')
 
@@ -45,8 +55,9 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Tensor(shape = (None, None, None), dtype = tf.uint8), 
-            'question':  tfds.features.Tensor(shape=(None,), dtype=tf.string),
+            'image': tfds.features.Tensor(shape = (None,), dtype = tf.uint8), 
+            'image_shape': tfds.features.Tensor(shape = (None,),  dtype=tf.int32), 
+            'question': tfds.features.Tensor(shape=(None,), dtype=tf.string),
             'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
         }),
         supervised_keys=None,
@@ -54,8 +65,20 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
+  def reshape_image(self, example):
+        """Reshape the 1d images array based on image_shape
+        Args:
+          example: example generated from pathVQA, features dictionary
+        Returns:
+          updated image with orignal shape
+        """
+        imageArray = example["image"]
+        shapeArray = example["image_shape"]
+        image = tf.reshape(imageArray, shapeArray)
+        return image
+
   def _split_generators(self, dl_manager):
-    extracted_path = 'gs://bme590/roujia/pathVQARW'
+    extracted_path = dl_manager.manual_dir
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -81,6 +104,7 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
+
     my_files = tf.io.gfile.listdir(images_dir)  
     new_dict = {}
     
@@ -114,14 +138,17 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         if file in new_dict:
             image = tf.io.read_file(os.path.join(images_dir, file)) 
             imageTensor = tf.io.decode_jpeg(image)
+            shapeTensor = tf.shape(imageTensor)
+            imageTensorFlat = tf.reshape(imageTensor, [-1])
             qa_dict = new_dict.get(file)
             questionTensor = qa_dict.get('Questions')
             answerTensor = qa_dict.get('Answers')
             key = file + str(random.randint(0,100))
             yield key, {
-                'image': imageTensor,
-                'question': tf.stack(questionTensor),
-                'answer': tf.stack(answerTensor), 
+                'image': imageTensorFlat,
+                'image_shape': shapeTensor,
+                'question': questionTensor,
+                'answer': answerTensor, 
             }
         else: 
             continue
