@@ -54,7 +54,7 @@ class SiimAcrPneumothorax(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Google bucket download link
     google_bucket_url = 'https://storage.googleapis.com/bme590/jiacheng_lin' \
-                        '/siim-train-test.zip '
+                        '/siim-train-test.zip'
     data_dir = dl_manager.download_and_extract(google_bucket_url)
     #  Kaggle download link, not compatible with testing
     #  kaggle_data = 'seesee/siim-train-test'
