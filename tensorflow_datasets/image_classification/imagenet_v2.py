@@ -46,7 +46,7 @@ represented as a dictionary with the following keys:
 """
 
 # Note: Bump the version if the links change.
-_VERSION = tfds.core.Version('0.1.0')
+_VERSION = tfds.core.Version('1.0.0')
 _ROOT_URL = 'https://s3-us-west-2.amazonaws.com/imagenetv2public'
 _IMAGENET_V2_URLS = {
     'matched-frequency': _ROOT_URL + '/imagenetv2-matched-frequency.tar.gz',
@@ -54,9 +54,9 @@ _IMAGENET_V2_URLS = {
     'topimages': _ROOT_URL + '/imagenetv2-topimages.tar.gz',
 }
 _TAR_TOPDIR = {
-    'matched-frequency': 'imagenetv2-matched-frequency',
-    'threshold-0.7': 'imagenetv2-threshold0.7',
-    'topimages': 'imagenetv2-topimages',
+    'matched-frequency': 'imagenetv2-matched-frequency-format-val',
+    'threshold-0.7': 'imagenetv2-threshold-0.7-format-val',
+    'topimages': 'imagenetv2-top-images-format-val',
 }
 
 _IMAGENET_LABELS_FILENAME = r'image_classification/imagenet2012_labels.txt'
