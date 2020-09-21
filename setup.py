@@ -134,6 +134,7 @@ DATASET_EXTRAS = {
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
+    'ct_lymph_nodes':['pydicom', 'nibabel'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],

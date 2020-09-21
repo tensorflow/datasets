@@ -26,6 +26,7 @@ from tensorflow_datasets.image.cityscapes import Cityscapes
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.clic import CLIC
 from tensorflow_datasets.image.coil100 import Coil100
+from tensorflow_datasets.image.CT_lymph_nodes import CtLymphNodes
 from tensorflow_datasets.image.div2k import Div2k
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
@@ -102,4 +103,4 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.CT_lymph_nodes import CtLymphNodes  # TODO(CT_lymph_nodes) Sort alphabetically
+
