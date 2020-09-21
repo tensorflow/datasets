@@ -380,11 +380,10 @@ def find_builder_dir(
   if config_name:
     builder_dir = os.path.join(builder_dir, config_name)
 
-  # If version not given, extract the version
-  if not version_str:
-    version_str = _get_last_version(builder_dir)
+  # Extract the version
+  version_str = _get_version_str(builder_dir, requested_version=version_str)
 
-  if not version_str:  # No version given nor found
+  if not version_str:  # Version not given or found
     return None
 
   builder_dir = os.path.join(builder_dir, version_str)
@@ -413,13 +412,30 @@ def _get_default_config_name(name: str) -> Optional[str]:
   return None
 
 
-def _get_last_version(builder_dir: str) -> Optional[str]:
-  """Returns the last version found in the directory."""
+def _get_version_str(
+    builder_dir: str,
+    *,
+    requested_version: Optional[str] = None,
+) -> Optional[str]:
+  """Returns the version name found in the directory.
+
+  Args:
+    builder_dir: Directory containing the versions (`builder_dir/1.0.0/`,...)
+    requested_version: Optional version to search (e.g. `1.0.0`, `2.*.*`,...)
+
+  Returns:
+    version_str: The version directory name found in `builder_dir`.
+  """
   all_versions = version.list_all_versions(builder_dir)
-  if all_versions:
-    return str(all_versions[-1])  # Biggest version is the last one
-  else:
-    return None
+  # Version not given, using the last one.
+  if not requested_version and all_versions:
+    return str(all_versions[-1])
+  # Version given, return the biggest version matching `requested_version`
+  for v in reversed(all_versions):
+    if v.match(requested_version):
+      return str(v)
+  # Directory don't has version, or requested_version don't match
+  return None
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):

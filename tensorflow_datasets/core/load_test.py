@@ -135,3 +135,30 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
   )
   assert _find_builder_dir('my_dataset/broken_config') is None
   assert _find_builder_dir('my_dataset/unknown_config') is None
+
+
+def test_get_version_str(mock_fs: testing.MockFs):
+
+  mock_fs.add_file('path/to/ds/1.0.0/features.json')
+  mock_fs.add_file('path/to/ds/1.0.1/features.json')
+  mock_fs.add_file('path/to/ds/1.1.0/features.json')
+  mock_fs.add_file('path/to/ds/2.0.1/features.json')
+
+  get_version_str = functools.partial(load._get_version_str, 'path/to/ds/')  # pylint: disable=protected-access
+
+  # requested_version is None -> Returns last version
+  assert get_version_str(requested_version=None) == '2.0.1'
+  # Returns highest matching version
+  assert get_version_str(requested_version='1.*.*') == '1.1.0'
+  assert get_version_str(requested_version='*.*.*') == '2.0.1'
+  assert get_version_str(requested_version='1.0.0') == '1.0.0'
+  # No matching version found
+  assert get_version_str(requested_version='1.3.*') is None
+  assert get_version_str(requested_version='2.3.5') is None
+
+  assert _find_builder_dir('ds') == 'path/to/ds/2.0.1'
+  assert _find_builder_dir('ds:*.*.*') == 'path/to/ds/2.0.1'
+  assert _find_builder_dir('ds:1.*.*') == 'path/to/ds/1.1.0'
+  assert _find_builder_dir('ds:1.0.0') == 'path/to/ds/1.0.0'
+  assert _find_builder_dir('ds:1.3.*') is None
+  assert _find_builder_dir('ds:2.3.5') is None
