@@ -1,10 +1,10 @@
 """pathVQA dataset."""
 
-import tensorflow_datasets.public_api as tfds
-import tensorflow as tf
 import json
 import os
 import random
+import tensorflow as tf
+import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
 @misc{he2020pathvqa,
@@ -54,10 +54,14 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Tensor(shape = (None,), dtype = tf.uint8), 
-            'image_shape': tfds.features.Tensor(shape = (None,),  dtype=tf.int32), 
-            'question': tfds.features.Tensor(shape=(None,), dtype=tf.string),
-            'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
+            'image': tfds.features.Tensor(shape = (None,),
+                                          dtype = tf.uint8),
+            'image_shape': tfds.features.Tensor(shape = (None,),
+                                                dtype=tf.int32),
+            'question': tfds.features.Tensor(shape=(None,),
+                                             dtype=tf.string),
+            'answer': tfds.features.Tensor(shape=(None,),
+                                           dtype=tf.string),
         }),
         supervised_keys=None,
         homepage='https://github.com/UCSD-AI4H/PathVQA',
@@ -65,16 +69,16 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
     )
 
   def reshape_image(self, example):
-        """Reshape the 1d images array based on image_shape
-        Args:
-          example: example generated from pathVQA, features dictionary
-        Returns:
-          updated image with orignal shape
-        """
-        imageArray = example["image"]
-        shapeArray = example["image_shape"]
-        image = tf.reshape(imageArray, shapeArray)
-        return image
+    """Reshape the 1d images array based on image_shape
+    Args:
+      example: example generated from pathVQA, features dictionary
+    Returns:
+      updated image with orignal shape
+    """
+    image_array = example["image"]
+    shape_array = example["image_shape"]
+    image = tf.reshape(image_array, shape_array)
+    return image
 
   def _split_generators(self, dl_manager):
     extracted_path = dl_manager.manual_dir
@@ -82,72 +86,84 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "train/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "train/", "label.json")
+                'images_dir': os.path.join(extracted_path,
+                                           "train/", "pic"),
+                'labels_dir': os.path.join(extracted_path,
+                                           "train/", "label.json")
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "test/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "test/", "label.json")
+                'images_dir': os.path.join(extracted_path,
+                                           "test/", "pic"),
+                'labels_dir': os.path.join(extracted_path,
+                                           "test/", "label.json")
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'images_dir': os.path.join(extracted_path, "val/", "pic"),
-                'labels_dir': os.path.join(extracted_path, "val/", "label.json")
-                       },
+                'images_dir': os.path.join(extracted_path,
+                                           "val/", "pic"),
+                'labels_dir': os.path.join(extracted_path,
+                                           "val/", "label.json")
+            },
         ),
     ]
 
   def _generate_examples(self, images_dir = None, labels_dir = None):
-
-    my_files = tf.io.gfile.listdir(images_dir)  
+    """Generate examples for TFDS pathVQA
+    Args:
+      images_dir: directory of images
+      labels_dir: directory of labels
+    Returns:
+      a feature dictionary contains 1D image array, image shape,
+      list of questions, list of answers
+    """
+    my_files = tf.io.gfile.listdir(images_dir)
     new_dict = {}
-    
     with tf.io.gfile.GFile(labels_dir) as f:
-        image_name = ''
-        questions = []
-        answers = []
-        qa_dict = {}
-        for line in f:
-            string = line[:-2]
-            try:
-                x = json.loads(string)
-                temp_name = x.get('Images')
-                if '.jpg' not in temp_name:
-                    temp_name = temp_name + '.jpg'
-                if image_name == temp_name:
-                    questions.append(str(x.get('Questions')))
-                    answers.append(str(x.get('Answers')))
-                else:
-                    qa_dict.update({'Questions' : questions})
-                    qa_dict.update({'Answers' : answers})
-                    new_dict.update({image_name : qa_dict})
-                    image_name = temp_name
-                    questions = []
-                    answers = []
-                    qa_dict = {}
-            except: 
-                continue
-                
+      image_name = ''
+      questions = []
+      answers = []
+      qa_dict = {}
+      for line in f:
+        string = line[:-2]
+        try:
+          x = json.loads(string)
+          temp_name = x.get('Images')
+          if '.jpg' not in temp_name:
+            temp_name = temp_name + '.jpg'
+          if image_name == temp_name:
+            questions.append(str(x.get('Questions')))
+            answers.append(str(x.get('Answers')))
+          else:
+            qa_dict.update({'Questions' : questions})
+            qa_dict.update({'Answers' : answers})
+            new_dict.update({image_name : qa_dict})
+            image_name = temp_name
+            questions = []
+            answers = []
+            qa_dict = {}
+        except:
+          continue
     for file in my_files:
-        if file in new_dict:
-            image = tf.io.read_file(os.path.join(images_dir, file)) 
-            imageTensor = tf.io.decode_jpeg(image)
-            shapeTensor = tf.shape(imageTensor)
-            imageTensorFlat = tf.reshape(imageTensor, [-1])
-            qa_dict = new_dict.get(file)
-            questionTensor = qa_dict.get('Questions')
-            answerTensor = qa_dict.get('Answers')
-            key = file + str(random.randint(0,100))
-            yield key, {
-                'image': imageTensorFlat,
-                'image_shape': shapeTensor,
-                'question': questionTensor,
-                'answer': answerTensor, 
-            }
-        else: 
-            continue
+      if file in new_dict:
+        image = tf.io.read_file(os.path.join(images_dir, file))
+        image_tensor = tf.io.decode_jpeg(image)
+        shape_tensor = tf.shape(image_tensor)
+        image_tensor_flat = tf.reshape(image_tensor, [-1])
+        qa_dict = new_dict.get(file)
+        question_tensor = qa_dict.get('Questions')
+        answer_tensor = qa_dict.get('Answers')
+        key = file + str(random.randint(0,100))
+        yield key, {
+            'image': image_tensor_flat,
+            'image_shape': shape_tensor,
+            'question': question_tensor,
+            'answer': answer_tensor,
+        }
+      else:
+        continue
+        
