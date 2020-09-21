@@ -18,20 +18,15 @@
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import pathVQA
 
-
 class PathvqaTest(testing.DatasetBuilderTestCase):
+  OVERLAPPING_SPLITS = ["test", "validation"]
   DATASET_CLASS = pathVQA.Pathvqa
+
   SPLITS = {
-      "train": 4,
-      "test": 4,
+      "train": 3,
+      "test": 3,
+      "validation": 3,
   }
-
-  DL_EXTRACT_RESULT = {
-      "train": "train_data",
-      "test": "test_data",
-      "val": "val_data",
-  }
-
 
 if __name__ == "__main__":
   testing.test_main()

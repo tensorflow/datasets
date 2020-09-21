@@ -38,6 +38,11 @@ medical professionals are scarcer than in the United States.
 class Pathvqa(tfds.core.GeneratorBasedBuilder):
   """pathVQA dataset"""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Please set your manual_dir at 'gs://bme590/roujia/pathVQARW'
+  in your tfds.download.DownloadConfig when using tfds.load
+  """
+
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
@@ -46,8 +51,8 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Tensor(shape = (None,), dtype = tf.uint8), 
-            'shape': tfds.features.Tensor(shape = (None,),  dtype=tf.int8), 
-            'question':  tfds.features.Tensor(shape=(None,), dtype=tf.string),
+            'image_shape': tfds.features.Tensor(shape = (None,),  dtype=tf.int32), 
+            'question': tfds.features.Tensor(shape=(None,), dtype=tf.string),
             'answer': tfds.features.Tensor(shape=(None,), dtype=tf.string),
         }),
         supervised_keys=None,
@@ -55,8 +60,20 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
+  def reshape_image(self, example):
+        """Reshape the 1d images array based on image_shape
+        Args:
+          example: example generated from pathVQA, features dictionary
+        Returns:
+          updated image with orignal shape
+        """
+        imageArray = example["image"]
+        shapeArray = example["image_shape"]
+        image = tf.reshape(imageArray, shapeArray)
+        return image
+
   def _split_generators(self, dl_manager):
-    extracted_path = 'gs://bme590/roujia/pathVQARW'
+    extracted_path = dl_manager.manual_dir
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -115,17 +132,17 @@ class Pathvqa(tfds.core.GeneratorBasedBuilder):
         if file in new_dict:
             image = tf.io.read_file(os.path.join(images_dir, file)) 
             imageTensor = tf.io.decode_jpeg(image)
-            shapeTensor = imageTensor.get_shape().as_list()
-            imageTensor = tf.reshape(imageTensor, [-1])
+            shapeTensor = tf.shape(imageTensor)
+            imageTensorFlat = tf.reshape(imageTensor, [-1])
             qa_dict = new_dict.get(file)
             questionTensor = qa_dict.get('Questions')
             answerTensor = qa_dict.get('Answers')
             key = file + str(random.randint(0,100))
             yield key, {
-                'image': imageTensor,
-                'shape': tf.stack(shapeTensor),
-                'question': tf.stack(questionTensor),
-                'answer': tf.stack(answerTensor), 
+                'image': imageTensorFlat,
+                'image_shape': shapeTensor,
+                'question': questionTensor,
+                'answer': answerTensor, 
             }
         else: 
             continue
