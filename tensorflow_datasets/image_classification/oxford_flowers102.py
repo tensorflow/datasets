@@ -96,9 +96,7 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
     # Note, that the extension of archives is .tar.gz even though the actual
     # archives format is uncompressed tar.
     dl_paths = dl_manager.download_and_extract({
-        "images": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "102flowers.tgz"),
-            extract_method=tfds.download.ExtractMethod.TAR),
+        "images": os.path.join(_BASE_URL, "102flowers.tgz"),
         "labels": os.path.join(_BASE_URL, "imagelabels.mat"),
         "setid": os.path.join(_BASE_URL, "setid.mat"),
     })
