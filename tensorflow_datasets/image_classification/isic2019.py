@@ -65,6 +65,7 @@ The dataset currently has two configs,
     gives the eniter training dataset without, but the metadata is missing or incomplete in a few thousand entries. labels marked NA identify missing entries and is used across all fields 
 'complete_metadata':
     provides only the entries were the metadata is available for approximate age 'represented as a string of 5 year incriments', lesion location, and patient sex.
+'labels_only': ignores meta value information and only returns image names, images, and lesion ids
 
 repeated lesion id's are stored as a class variable under "lesion_id_family" to distinguish lesions from the same patient, and 'lesion_id' is used to represent the name of the given lesion. Entries missing a lesion id are assumed to be destinct entries, and not repeated. 
 """
