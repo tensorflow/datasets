@@ -46,7 +46,12 @@ represented as a dictionary with the following keys:
 """
 
 # Note: Bump the version if the links change.
-_VERSION = tfds.core.Version('1.0.0')
+
+_CONFIG_VERSION = {
+    'matched-frequency': tfds.core.Version('1.0.0'),
+    'threshold-0.7': tfds.core.Version('0.1.1'),
+    'topimages': tfds.core.Version('0.1.1'),
+}
 _ROOT_URL = 'https://s3-us-west-2.amazonaws.com/imagenetv2public'
 _IMAGENET_V2_URLS = {
     'matched-frequency': _ROOT_URL + '/imagenetv2-matched-frequency.tar.gz',
@@ -86,7 +91,7 @@ def _create_builder_configs():
   for variant in _IMAGENET_V2_URLS:
     yield ImagenetV2Config(variant=variant,
                            name=variant,
-                           version=_VERSION,
+                           version=_CONFIG_VERSION[variant],
                            description=_DESCRIPTION)
 
 
