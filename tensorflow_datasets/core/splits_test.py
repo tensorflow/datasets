@@ -191,6 +191,10 @@ class SplitsTest(testing.TestCase):
     self.assertEqual([
         "train[0%:25%]", "train[25%:50%]", "train[50%:75%]", "train[75%:100%]"
     ], splits.even_splits("train", 4))
+    with self.assertRaises(ValueError):
+      splits.even_splits("train", 0)
+    with self.assertRaises(ValueError):
+      splits.even_splits("train", 101)
 
 
 if __name__ == "__main__":

@@ -270,8 +270,8 @@ def even_splits(
   Returns:
     The list of subsplits.
   """
-  if n <= 0:
-    raise ValueError(f"n should be > 0. Got {n}")
+  if n <= 0 or n > 100:
+    raise ValueError(f"n should be > 0 and <= 100. Got {n}")
   partitions = [round(i * 100 / n) for i in range(n + 1)]
   return [
       f"{split}[{partitions[i]}%:{partitions[i+1]}%]" for i in range(n)
