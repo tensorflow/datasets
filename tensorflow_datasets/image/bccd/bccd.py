@@ -95,12 +95,7 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
     test_list = []
     val_list = []
 
-    dl_path = dl_manager.download_and_extract(
-        tfds.download.Resource(
-            url=_DOWNLOAD_URL,
-            # Specify extract method manually as filename reported by github.com
-            # misses the .zip extension so auto-detection doesn't work.
-            extract_method=tfds.download.ExtractMethod.ZIP))
+    dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     # Name of the extracted folder is 'BCCD_Dataset-1.0'
     extracted_dir_path = os.path.join(dl_path,
                                       "BCCD_Dataset-1.0")

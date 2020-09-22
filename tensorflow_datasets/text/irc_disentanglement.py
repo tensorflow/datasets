@@ -182,12 +182,7 @@ class IrcDisentanglement(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager
                        ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
-    base_dir = dl_manager.download_and_extract(
-        tfds.download.Resource(
-            url=_DOWNLOAD_URL,
-            # Specify extract method manually as filename reported by github.com
-            # misses the .zip extension so auto-detection doesn't work.
-            extract_method=tfds.download.ExtractMethod.ZIP))
+    base_dir = dl_manager.download_and_extract(_DOWNLOAD_URL)
     data_dir = os.path.join(base_dir, _DOWNLOAD_ARCHIVE_SUBDIR)
 
     return [
