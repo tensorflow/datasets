@@ -34,7 +34,7 @@ year={2010},
 volume={},
 number={},
 pages={3485-3492},
-keywords={computer vision;human factors;image classification;object recognition;visual databases;SUN database;large-scale scene recognition;abbey;zoo;scene categorization;computer vision;scene understanding research;scene category;object categorization;scene understanding database;state-of-the-art algorithms;human scene classification performance;finer-grained scene representation;Sun;Large-scale systems;Layout;Humans;Image databases;Computer vision;Anthropometry;Bridges;Legged locomotion;Spatial databases}, 
+keywords={computer vision;human factors;image classification;object recognition;visual databases;SUN database;large-scale scene recognition;abbey;zoo;scene categorization;computer vision;scene understanding research;scene category;object categorization;scene understanding database;state-of-the-art algorithms;human scene classification performance;finer-grained scene representation;Sun;Large-scale systems;Layout;Humans;Image databases;Computer vision;Anthropometry;Bridges;Legged locomotion;Spatial databases},
 doi={10.1109/CVPR.2010.5539970},
 ISSN={1063-6919},
 month={June},}
@@ -219,9 +219,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     paths = dl_manager.download_and_extract({
-        "images": tfds.download.Resource(
-            url=_SUN397_URL + "SUN397.tar.gz",
-            extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+        "images": _SUN397_URL + "SUN397.tar.gz",
         "partitions": _SUN397_URL + "download/Partitions.zip",
     })
     if not isinstance(paths, dict):
@@ -231,9 +229,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
           "images": os.path.join(paths, "SUN397.tar.gz"),
           "partitions": os.path.join(paths, "Partitions"),
       }
-    images = tfds.download.Resource(
-        path=paths["images"],
-        extract_method=tfds.download.ExtractMethod.TAR_GZ_STREAM)
+    images = paths["images"]
     if self.builder_config.name == "tfds":
       subset_images = self._get_tfds_subsets_images()
       return [
