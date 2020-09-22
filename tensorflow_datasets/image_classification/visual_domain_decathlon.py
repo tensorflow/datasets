@@ -107,9 +107,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name == 'imagenet12':
       devkit_path, images_archive = dl_manager.download_and_extract([
           _URL_PREFIX_VGG + 'decathlon-1.0-devkit.tar.gz',
-          tfds.download.Resource(
-              url=_URL_PREFIX_IMAGENET + 'decathlon-1.0-data-imagenet.tar',
-              extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+          _URL_PREFIX_IMAGENET + 'decathlon-1.0-data-imagenet.tar',
       ])
     else:
       devkit_path, data_path = dl_manager.download_and_extract([
