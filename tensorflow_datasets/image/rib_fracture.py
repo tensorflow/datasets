@@ -89,7 +89,7 @@ class RibFracture(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, image_path=None,mask_path=None):
     list_files1 = tf.io.gfile.listdir(image_path)
     list_files2 = tf.io.gfile.listdir(mask_path)
-    m = 0
+    n = 0
     for img_path,mas_path in zip(list_files1,list_files2):
 
         img = nib.load(image_path+"/"+img_path)
@@ -105,7 +105,7 @@ class RibFracture(tfds.core.GeneratorBasedBuilder):
 
         slices1 = new_img.transpose()
         slices2 = new_mask.transpose()
-        m = m + 1
+        n = n + 1
         for i in range(len(slices1)):
 
             image = slices1[i]
@@ -114,7 +114,7 @@ class RibFracture(tfds.core.GeneratorBasedBuilder):
             mask = slices2[i]
             mask = mask[..., None]
             j = i + 1
-            count = "Patient_{} Rib CT_{}".format(m, j)
+            count = "Patient_{} Rib CT_{}".format(n, j)
             imageTensor = np.array(image, dtype=np.int32)
             maskTensor = np.array(mask, dtype=np.int32)
 
