@@ -293,12 +293,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'mass-test': _MASS_TEST_CSV_URL,
         'mass-train': _MASS_TRAIN_CSV_URL
     }
-    resources = {
-        key: tfds.download.Resource(
-            url=url, extract_method=tfds.download.ExtractMethod.NO_EXTRACT)
-        for key, url in resources_urls.items()
-    }
-    resource_paths = dl_manager.download_and_extract(resources)
+    resource_paths = dl_manager.download_and_extract(resources_urls)
     patients_data = _load_csv_files(dl_manager.manual_dir, resource_paths)
 
     # Statistics about the resulting splits.

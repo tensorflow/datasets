@@ -144,12 +144,7 @@ def _make_builder_configs():
         }
         """,
       url="https://www.openslr.org/51/",
-      download_url=tfds.download.Resource(
-          url="http://www.openslr.org/resources/51/TEDLIUM_release-3.tgz",
-          # The blessed tarball linked above contains some invalid symlinks (for
-          # the speaker_adaptation splits) which TAR_STREAM conveniently skips
-          # over, avoiding exceptions on parts of the dataset we don't need.
-          extract_method=tfds.download.ExtractMethod.TAR_STREAM),
+      download_url= "http://www.openslr.org/resources/51/TEDLIUM_release-3.tgz",
       split_paths=[
           (tfds.Split.VALIDATION,
            os.path.join("TEDLIUM_release-3", "legacy", "dev")),
