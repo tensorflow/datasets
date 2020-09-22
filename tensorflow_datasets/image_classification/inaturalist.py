@@ -78,16 +78,11 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     output_files = dl_manager.download_and_extract({
         "trainval_images":
-            tfds.download.Resource(
-                url=urllib.parse.urljoin(_URL, "train_val_images.tar.gz"),
-                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+            urllib.parse.urljoin(_URL, "train_val_images.tar.gz"),
         "trainval_annos":
             urllib.parse.urljoin(_URL, "train_val2017.zip"),
         "test_images":
-            tfds.download.Resource(
-                url=urllib.parse.urljoin(_URL, "test2017.tar.gz"),
-                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-
+            urllib.parse.urljoin(_URL, "test2017.tar.gz"),
     })
     return [
         tfds.core.SplitGenerator(
