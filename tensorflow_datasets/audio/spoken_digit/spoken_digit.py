@@ -68,12 +68,7 @@ class SpokenDigit(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns Split Generators."""
-    dl_path = dl_manager.download_and_extract(
-        tfds.download.Resource(
-            url=_DOWNLOAD_URL,
-            # Specify extract method manually as filename reported by github.com
-            # misses the .tar extension so auto-detection doesn't work.
-            extract_method=tfds.download.ExtractMethod.TAR))
+    dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     extracted_dir_path = os.path.join(
         dl_path,
         "free-spoken-digit-dataset-1.0.9")
