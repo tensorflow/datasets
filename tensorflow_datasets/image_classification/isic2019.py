@@ -95,6 +95,10 @@ class Isic2019(tfds.core.GeneratorBasedBuilder):
             name='complete_metadata',
             description=_DESCRIPTION,
         ),
+        Isic2019Config(
+            name='labels_only',
+            description=_DESCRIPTION,
+        ),
     ]
     """TODO(ISIC_2019): Short description of my dataset."""
     # TODO(ISIC_2019): Set up version.
