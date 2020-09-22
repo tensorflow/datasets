@@ -105,7 +105,7 @@ class DownloadConfig(object):
     self.download_mode = util.GenerateMode(
         download_mode or util.GenerateMode.REUSE_DATASET_IF_EXISTS)
     self.compute_stats = util.ComputeStatsMode(
-        compute_stats or util.ComputeStatsMode.AUTO)
+        compute_stats or util.ComputeStatsMode.SKIP)
     self.max_examples_per_split = max_examples_per_split
     self.register_checksums = register_checksums
     self.force_checksums_validation = force_checksums_validation

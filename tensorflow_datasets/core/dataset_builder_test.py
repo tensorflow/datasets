@@ -539,7 +539,10 @@ class BuilderRestoreGcsTest(testing.TestCase):
       self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
-      dl_config = download.DownloadConfig(max_examples_per_split=5)
+      dl_config = download.DownloadConfig(
+          max_examples_per_split=5,
+          compute_stats=download.ComputeStatsMode.AUTO,
+      )
       builder.download_and_prepare(download_config=dl_config)
 
       # Statistics should have been recomputed (split different from the
@@ -556,7 +559,10 @@ class BuilderRestoreGcsTest(testing.TestCase):
       self.assertEqual(builder.info.splits.total_num_examples, 0)
       self.assertFalse(self.compute_dynamic_property.called)
 
-      builder.download_and_prepare()
+      dl_config = download.DownloadConfig(
+          compute_stats=download.ComputeStatsMode.AUTO,
+      )
+      builder.download_and_prepare(download_config=dl_config)
 
       # Statistics should have been recomputed
       self.assertTrue(self.compute_dynamic_property.called)

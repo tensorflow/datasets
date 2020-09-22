@@ -24,6 +24,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image_classification import mnist
@@ -259,7 +260,11 @@ class DatasetInfoTest(testing.TestCase):
   def test_statistics_generation(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare()
+      builder.download_and_prepare(
+          download_config=download.DownloadConfig(
+              compute_stats=download.ComputeStatsMode.AUTO,
+          ),
+      )
 
       # Overall
       self.assertEqual(30, builder.info.splits.total_num_examples)
@@ -306,7 +311,11 @@ class DatasetInfoTest(testing.TestCase):
   def test_schema_generation_variable_sizes(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare()
+      builder.download_and_prepare(
+          download_config=download.DownloadConfig(
+              compute_stats=download.ComputeStatsMode.AUTO,
+          ),
+      )
 
       expected_schema = text_format.Parse(
           """
