@@ -52,7 +52,9 @@ class CtLymphNodes(tfds.core.GeneratorBasedBuilder):
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You can download the images from
-  https://console.cloud.google.com/storage/browser/bme590/jingjing
+  https://wiki.cancerimagingarchive.net/display/Public/CT+Lymph+Nodes
+  download the masks from
+  https://wiki.cancerimagingarchive.net/download/attachments/19726546/MED_ABD_LYMPH_MASKS.zip?version=1&modificationDate=1449684916503&api=v2
   Please put all files in manual_dir.
   """
   
