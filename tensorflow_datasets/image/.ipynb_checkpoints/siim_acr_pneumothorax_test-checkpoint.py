@@ -6,7 +6,6 @@ from tensorflow_datasets.image import siim_acr_pneumothorax
 
 class SiimAcrPneumothoraxTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = siim_acr_pneumothorax.SiimAcrPneumothorax
-  SKIP_CHECKSUMS = True
   SPLITS = {
       "train": 3  # Number of fake train example
   }
