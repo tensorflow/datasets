@@ -187,26 +187,37 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
     test_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_test.tar')
-    if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
+    if not tf.io.gfile.exists(train_path) and not tf.io.gfile.exists(val_path):
       raise AssertionError(
           'ImageNet requires manual download of the data. Please download '
-          'the train and val set and place them into: {}, {}'.format(
+          'the train and/or val set and place them into: {}, {}'.format(
               train_path, val_path))
-    splits = [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'archive': dl_manager.iter_archive(train_path),
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                'archive': dl_manager.iter_archive(val_path),
-                'validation_labels': self._get_validation_labels(val_path),
-            },
-        ),
-    ]
+    splits = []
+    if not tf.io.gfile.exists(train_path):
+      logging.warning('ImageNet 2012 Challenge TRAIN split not found at %s. '
+                      'Please download this split. Proceeding with data '
+                      'generation anyways to retain backward compatibility.',
+                      train_path)
+    else:
+      splits.append(
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TRAIN,
+              gen_kwargs={
+                  'archive': dl_manager.iter_archive(train_path),
+              }))
+    if not tf.io.gfile.exists(val_path):
+      logging.warning('ImageNet 2012 Challenge VALIDATION split not found at %s. '
+                      'Please download this split. Proceeding with data '
+                      'generation anyways to retain backward compatibility.',
+                      val_path)
+    else:
+      splits.append(
+          tfds.core.SplitGenerator(
+              name=tfds.Split.VALIDATION,
+              gen_kwargs={
+                  'archive': dl_manager.iter_archive(val_path),
+                  'validation_labels': self._get_validation_labels(val_path),
+              }))
 
     if not tf.io.gfile.exists(test_path):
       logging.warning('ImageNet 2012 Challenge TEST split not found at %s. '
