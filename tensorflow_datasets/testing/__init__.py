@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
 from tensorflow_datasets.testing.mocking import mock_data
+from tensorflow_datasets.testing.mocking import MockPolicy
 from tensorflow_datasets.testing.test_case import TestCase
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyMnist

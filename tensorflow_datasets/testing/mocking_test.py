@@ -15,110 +15,177 @@
 
 """Tests for tensorflow_datasets.testing.mocking."""
 
+import functools
+
+import pytest
+
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import decode
-from tensorflow_datasets.core import load
-from tensorflow_datasets.testing import mocking
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
-
-# Import for registration
-# pylint: disable=g-bad-import-order,unused-import
-from tensorflow_datasets.image_classification import imagenet
-from tensorflow_datasets.image_classification import mnist
-from tensorflow_datasets.object_detection import wider_face
-from tensorflow_datasets.text import lm1b
-# pylint: enable=g-bad-import-order,unused-import
-
-tf.enable_v2_behavior()
+# Import the final API to:
+# * Register datasets
+# * Make sure `tfds.load`, `tfds.builder` aliases works correctly after patching
+import tensorflow_datasets as tfds
 
 
-class MockingTest(test_case.TestCase):
-
-  def test_mocking_imagenet(self):
-    with mocking.mock_data():
-      ds = load.load('imagenet2012', split='train')
-      self.assertEqual(ds.element_spec, {
-          'file_name': tf.TensorSpec(shape=(), dtype=tf.string),
-          'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
-          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
-      })
-      list(ds.take(3))  # Iteration should work
-
-  def test_mocking_imagenet_decoders(self):
-    with mocking.mock_data():
-      ds, ds_info = load.load(
-          'imagenet2012',
-          split='train',
-          decoders={'image': decode.SkipDecoding()},
-          with_info=True,
-      )
-      self.assertEqual(ds.element_spec, {
-          'file_name': tf.TensorSpec(shape=(), dtype=tf.string),
-          'image': tf.TensorSpec(shape=(), dtype=tf.string),  # Encoded images
-          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
-      })
-      for ex in ds.take(10):
-        # Image decoding should works
-        image = ds_info.features['image'].decode_example(ex['image'])
-        image.shape.assert_is_compatible_with((None, None, 3))
-        self.assertEqual(image.dtype, tf.uint8)
-
-  def test_mocking_lm1b(self):
-    with mocking.mock_data():
-      ds = load.load('lm1b/bytes', split='train')
-      self.assertEqual(ds.element_spec, {
-          'text': tf.TensorSpec(shape=(None,), dtype=tf.int64),
-      })
-      for ex in ds.take(10):
-        self.assertEqual(ex['text'].dtype, tf.int64)
-        ex['text'].shape.assert_is_compatible_with((None,))
-
-  def test_mocking_wider_face(self):
-    with mocking.mock_data():
-      ds = load.load('wider_face', split='train')
-      self.assertEqual(
-          ds.element_spec['faces']['expression'],
-          tf.TensorSpec(shape=(None,), dtype=tf.bool),
-      )
-      for ex in ds.take(2):
-        self.assertEqual(ex['faces']['expression'].dtype, tf.bool)
-
-  def test_custom_as_dataset(self):
-    def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
-      return tf.data.Dataset.from_generator(
-          lambda: ({  # pylint: disable=g-long-lambda
-              'text': t,
-          } for t in ['some sentence', 'some other sentence']),
-          output_types=self.info.features.dtype,
-          output_shapes=self.info.features.shape,
-      )
-
-    with mocking.mock_data(as_dataset_fn=_as_dataset):
-      ds = load.load('lm1b', split='train')
-      out = [ex['text'] for ex in dataset_utils.as_numpy(ds)]
-      self.assertEqual(out, [b'some sentence', b'some other sentence'])
-
-  def test_max_values(self):
-    with mocking.mock_data(num_examples=50):
-      ds = load.load('mnist', split='train')
-      self.assertEqual(ds.element_spec, {
-          'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
-          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
-      })
-      for ex in ds.take(50):
-        self.assertLessEqual(tf.math.reduce_max(ex['label']).numpy(), 10)
-      self.assertEqual(  # Test determinism
-          [ex['label'].numpy() for ex in ds.take(5)],
-          [1, 9, 2, 5, 3],
-      )
-      self.assertEqual(  # Iterating twice should yield the same samples
-          [ex['label'].numpy() for ex in ds.take(5)],
-          [1, 9, 2, 5, 3],
-      )
+# TODO(pytest): Rather than `request.param` magic, should use
+# `@pytest.mark.parametrize` once
+# https://github.com/pytest-dev/pytest/issues/3960 is fixed
+@pytest.fixture(
+    params=[
+        tfds.testing.MockPolicy.USE_FILES, tfds.testing.MockPolicy.USE_CODE
+    ],
+)
+def mock_data(request):
+  """Parametrized fixture to test both `USE_FILES` and `USE_CODE` policy."""
+  return functools.partial(tfds.testing.mock_data, policy=request.param)
 
 
-if __name__ == '__main__':
-  test_utils.test_main()
+# pylint: disable=redefined-outer-name
+
+
+@pytest.fixture
+def apply_mock_data(mock_data):
+  """Fixture which apply `tfds.testing.mock_data` to the test.
+
+  Test which uses this fixture will be executed twice, once with `USE_FILES` and
+  once with `USE_CODE`.
+
+  Args:
+    mock_data: `mock_data` fixture defined above.
+
+  Yields:
+    None
+  """
+  with mock_data():
+    yield
+
+
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_imagenet():
+  ds = tfds.load('imagenet2012', split='train')
+  assert ds.element_spec == {
+      'file_name': tf.TensorSpec(shape=(), dtype=tf.string),
+      'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
+      'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+  }
+  list(ds.take(3))  # Iteration should work
+
+
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_imagenet_decoders():
+  """Test with SkipDecoding."""
+  ds, ds_info = tfds.load(
+      'imagenet2012',
+      split='train',
+      decoders={'image': tfds.decode.SkipDecoding()},
+      with_info=True,
+  )
+  assert ds.element_spec == {
+      'file_name': tf.TensorSpec(shape=(), dtype=tf.string),
+      'image': tf.TensorSpec(shape=(), dtype=tf.string),  # Encoded images
+      'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+  }
+  for ex in ds.take(10):
+    # Image decoding should works
+    image = ds_info.features['image'].decode_example(ex['image'])
+    image.shape.assert_is_compatible_with((None, None, 3))
+    assert image.dtype == tf.uint8
+
+
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_lm1b():
+  ds = tfds.load('lm1b/bytes', split='train')
+  assert ds.element_spec == {
+      'text': tf.TensorSpec(shape=(None,), dtype=tf.int64),
+  }
+  for ex in ds.take(10):
+    assert ex['text'].dtype == tf.int64
+    ex['text'].shape.assert_is_compatible_with((None,))
+
+
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_wider_face():
+  ds = tfds.load('wider_face', split='train')
+  assert (
+      ds.element_spec['faces']['expression']
+      == tf.TensorSpec(shape=(None,), dtype=tf.bool)
+  )
+  for ex in ds.take(2):
+    assert ex['faces']['expression'].dtype == tf.bool
+
+
+def test_custom_as_dataset(mock_data):
+  def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
+    return tf.data.Dataset.from_generator(
+        lambda: ({  # pylint: disable=g-long-lambda
+            'text': t,
+        } for t in ['some sentence', 'some other sentence']),
+        output_types=self.info.features.dtype,
+        output_shapes=self.info.features.shape,
+    )
+
+  with mock_data(as_dataset_fn=_as_dataset):
+    ds = tfds.load('lm1b', split='train')
+    out = [ex['text'] for ex in tfds.as_numpy(ds)]
+    assert out == [b'some sentence', b'some other sentence']
+
+
+def test_max_values(mock_data):
+  with mock_data(num_examples=50):
+    ds = tfds.load('mnist', split='train')
+    assert ds.element_spec == {
+        'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+        'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+    }
+    for ex in ds.take(50):
+      assert tf.math.reduce_max(ex['label']).numpy() < 10
+    # Test determinism (iterating twice should yield the same samples)
+    assert [ex['label'].numpy() for ex in ds.take(5)] == [1, 9, 2, 5, 3]
+    assert [ex['label'].numpy() for ex in ds.take(5)] == [1, 9, 2, 5, 3]
+
+
+def test_mock_data_auto(tmp_path):
+  """Test `MockPolicy.AUTO` fallback to `USE_CODE`."""
+  # By default, mock data should load metadata when present.
+  with tfds.testing.mock_data():
+    builder = tfds.builder('mnist')
+    assert list(builder.info.splits.keys())  # Metadata should loaded.
+
+  # When mock data unknown, fallback to `USE_CODE` mode.
+  with tfds.testing.mock_data(data_dir=tmp_path):
+    builder = tfds.builder('mnist')
+    assert not list(builder.info.splits.keys())  # Metadata unknown.
+
+
+def test_mock_data_use_code():
+  """Test `MockPolicy.USE_CODE` specific behavior."""
+  with tfds.testing.mock_data(policy=tfds.testing.MockPolicy.USE_CODE):
+    builder = tfds.builder('mnist')
+    # Dynamic metadata should be unknown.
+    assert not list(builder.info.splits.keys())
+
+    # As splits are unknown, any split can be loaded.
+    ds = tfds.load('mnist', split='non_existent')
+    assert set(ds.element_spec.keys()) == {'image', 'label'}
+
+
+def test_mock_data_use_files(tmp_path):
+  """Test `MockPolicy.USE_FILES` specific behavior."""
+  with tfds.testing.mock_data(policy=tfds.testing.MockPolicy.USE_FILES):
+    builder = tfds.builder('mnist')
+    # Metadata should have been restored correctly.
+    assert list(builder.info.splits.keys()) == ['test', 'train']
+
+    # Unknown split should raise error
+    # Currently, this error is accidentally triggered by
+    # `info.splits[split].file_instructions` inside `_should_cache_ds`.
+    # We could make the check more explicit.
+    with pytest.raises(ValueError, match='Unknown split'):
+      tfds.load('mnist', split='non_existent')
+
+  with tfds.testing.mock_data(
+      policy=tfds.testing.MockPolicy.USE_FILES,
+      data_dir=tmp_path,
+  ):
+    with pytest.raises(ValueError, match='copy the real metadata files'):
+      tfds.load('mnist')
