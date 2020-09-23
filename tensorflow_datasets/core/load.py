@@ -180,7 +180,7 @@ def builder(
   name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   builder_kwargs.update(builder_init_kwargs)
   with py_utils.try_reraise(
-      prefix="Failed to construct dataset {}".format(name)):
+      prefix="Failed to construct dataset {}: ".format(name)):
     return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
 
 
