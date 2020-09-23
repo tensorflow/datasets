@@ -192,48 +192,30 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           'ImageNet requires manual download of the data. Please download '
           'the train and/or val set and place them into: {}, {}'.format(
               train_path, val_path))
-    splits = []
-    if not tf.io.gfile.exists(train_path):
-      logging.warning('ImageNet 2012 Challenge TRAIN split not found at %s. '
-                      'Please download this split. Proceeding with data '
-                      'generation anyways to retain backward compatibility.',
-                      train_path)
-    else:
-      splits.append(
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
-              gen_kwargs={
-                  'archive': dl_manager.iter_archive(train_path),
-              }))
-    if not tf.io.gfile.exists(val_path):
-      logging.warning('ImageNet 2012 Challenge VALIDATION split not found at %s. '
-                      'Please download this split. Proceeding with data '
-                      'generation anyways to retain backward compatibility.',
-                      val_path)
-    else:
-      splits.append(
-          tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
-              gen_kwargs={
-                  'archive': dl_manager.iter_archive(val_path),
-                  'validation_labels': self._get_validation_labels(val_path),
-              }))
-
-    if not tf.io.gfile.exists(test_path):
-      logging.warning('ImageNet 2012 Challenge TEST split not found at %s. '
-                      'Please download this split. Proceeding with data '
-                      'generation anyways to retain backward compatibility.',
-                      test_path)
-    else:
-      splits.append(
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
-              gen_kwargs={
-                  'archive': dl_manager.iter_archive(test_path),
-                  'labels_exist': False,
-              }))
+    splits=[]
+    self._add_split_if_exists(splits, tfds.Split.TRAIN, train_path)
+    self._add_split_if_exists(splits, tfds.Split.VALIDATION, val_path,
+                     'validation_labels': self._get_validation_labels(val_path))
+    self._add_split_if_exists(splits, tfds.Split.TEST, test_path,
+                     'labels_exist': False)
     return splits
 
+  def _add_split_if_exists(split_list, split, split_path, **kwargs):
+        """Add split to given list of splits only if the file exists"""
+        if not tf.io.gfile.exists(split_path):
+          logging.warning('ImageNet 2012 Challenge %s split not found at %s. '
+                          'Please download this split. Proceeding with data '
+                          'generation anyways to retain backward compatibility.',
+                          str(split), split_path)
+        else:
+          split_list.append(
+              tfds.core.SplitGenerator(
+                  name=split,
+                  gen_kwargs={
+                      'archive': dl_manager.iter_archive(split_path),
+                      **kwargs
+                  }))
+        
   def _fix_image(self, image_fname, image):
     """Fix image color system and format starting from v 3.0.0."""
     if self.version < '3.0.0':
