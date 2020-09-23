@@ -120,7 +120,7 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
-    'eurosat': ['scikit-image',],
+    'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative

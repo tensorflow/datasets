@@ -130,6 +130,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def tifffile(cls):
+    return _try_import("tifffile")
+
+  @utils.classproperty
+  @classmethod
   def tensorflow_data_validation(cls):
     return _try_import("tensorflow_data_validation")
 
