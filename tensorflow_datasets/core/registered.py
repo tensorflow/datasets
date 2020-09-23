@@ -31,10 +31,6 @@ _DATASET_REGISTRY = {}
 # <str snake_cased_name, abstract DatasetBuilder subclass>
 _ABSTRACT_DATASET_REGISTRY = {}
 
-# Datasets that are under active development and which we can't therefore load.
-# <str snake_cased_name, in development DatasetBuilder subclass>
-_IN_DEVELOPMENT_REGISTRY = {}
-
 # Keep track of Dict[str (module name), List[DatasetBuilder]]
 # This is directly accessed by `tfds.community.builder_cls_from_module` when
 # importing community packages.
@@ -61,10 +57,6 @@ class RegisteredDataset(abc.ABC):
 
   # Name of the dataset, automatically filled.
   name: ClassVar[str]
-
-  # Set to True for datasets that are under active development and should not
-  # be available through tfds.{load, builder} or documented in overview.md.
-  IN_DEVELOPMENT: ClassVar[bool] = False
 
 
   def __init_subclass__(cls, skip_registration=False, **kwargs):  # pylint: disable=redefined-outer-name
@@ -94,10 +86,6 @@ class RegisteredDataset(abc.ABC):
       pass
     elif cls.name in _DATASET_REGISTRY:
       raise ValueError(f'Dataset with name {cls.name} already registered.')
-    elif cls.name in _IN_DEVELOPMENT_REGISTRY:
-      raise ValueError(
-          f'Dataset with name {cls.name} already registered as in development.'
-      )
     elif cls.name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           f'Dataset with name {cls.name} already registered as abstract.'
@@ -106,7 +94,5 @@ class RegisteredDataset(abc.ABC):
     # Add the dataset to the registers
     if is_abstract:
       _ABSTRACT_DATASET_REGISTRY[cls.name] = cls
-    elif cls.IN_DEVELOPMENT:
-      _IN_DEVELOPMENT_REGISTRY[cls.name] = cls
     else:
       _DATASET_REGISTRY[cls.name] = cls

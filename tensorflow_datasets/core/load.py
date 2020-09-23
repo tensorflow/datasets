@@ -75,7 +75,6 @@ Check that:
       in `tfds-nightly`
     - the dataset name is spelled correctly
     - dataset class defines all base class abstract methods
-    - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
 """
 
@@ -101,15 +100,12 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
 
-  def __init__(self, name, is_abstract=False, in_development=False):
+  def __init__(self, name, is_abstract=False):
     all_datasets_str = "\n\t- ".join([""] + list_builders())
     if is_abstract:
       error_string = ("Dataset %s is an abstract class so cannot be created. "
                       "Please make sure to instantiate all abstract methods.\n"
                       "%s") % (name, _DATASET_NOT_FOUND_ERR)
-    elif in_development:
-      error_string = ("Dataset %s is under active development and is not "
-                      "available yet.\n") % name
     else:
       error_string = ("Dataset %s not found. Available datasets:%s\n"
                       "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
@@ -143,8 +139,6 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   # pylint: disable=protected-access
   if name in registered._ABSTRACT_DATASET_REGISTRY:
     raise DatasetNotFoundError(name, is_abstract=True)
-  if name in registered._IN_DEVELOPMENT_REGISTRY:
-    raise DatasetNotFoundError(name, in_development=True)
   if name not in registered._DATASET_REGISTRY:
     raise DatasetNotFoundError(name)
   return registered._DATASET_REGISTRY[name]  # pytype: disable=bad-return-type

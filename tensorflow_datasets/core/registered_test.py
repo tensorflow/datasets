@@ -50,11 +50,6 @@ class UnregisteredBuilder(EmptyDatasetBuilder):
     pass
 
 
-class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
-
-  IN_DEVELOPMENT = True
-
-
 class RegisteredTest(testing.TestCase):
 
   def test_registered(self):
@@ -89,17 +84,6 @@ class RegisteredTest(testing.TestCase):
     self.assertNotIn(name, load.list_builders())
 
     with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
-      load.builder(name)
-
-  def test_in_development(self):
-    name = "in_development_dataset_builder"
-    self.assertEqual(name, InDevelopmentDatasetBuilder.name)
-    self.assertNotIn(name, load.list_builders())
-
-    with self.assertRaisesWithPredicateMatch(
-        ValueError,
-        ("Dataset %s is under active development and is not available yet."
-        ) % name):
       load.builder(name)
 
   def test_builder_with_kwargs(self):
