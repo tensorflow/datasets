@@ -71,13 +71,7 @@ def show_examples(
     ds, ds_info = ds_info, ds
 
   # Pack `as_supervised=True` datasets
-  if (
-      ds_info.supervised_keys
-      and isinstance(ds.element_spec, tuple)
-      and len(ds.element_spec) == 2
-  ):
-    x_key, y_key = ds_info.supervised_keys
-    ds = ds.map(lambda x, y: {x_key: x, y_key: y})
+  ds = dataset_info.pack_as_supervised_ds(ds, ds_info)
 
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):

@@ -24,14 +24,15 @@ from tensorflow_datasets.core import load
 
 # Import for registration
 # pylint: disable=unused-import,g-bad-import-order
+from tensorflow_datasets.image_classification import mnist
 from tensorflow_datasets.text import anli
 # pylint: enable=unused-import,g-bad-import-order
 
 
-def _as_df(ds_name: str) -> pandas.DataFrame:
+def _as_df(ds_name: str, **kwargs) -> pandas.DataFrame:
   """Loads the dataset as `pandas.DataFrame`."""
   with testing.mock_data(num_examples=3):
-    ds, ds_info = load.load(ds_name, split='train', with_info=True)
+    ds, ds_info = load.load(ds_name, split='train', with_info=True, **kwargs)
   df = as_dataframe.as_dataframe(ds, ds_info)
   return df
 
@@ -56,3 +57,10 @@ def test_text_dataset():
   assert isinstance(df, pandas.DataFrame)
   assert isinstance(df._repr_html_(), str)
   assert list(df.columns) == ['context', 'hypothesis', 'label', 'uid']
+
+
+def test_as_supervised():
+  df = _as_df('mnist', as_supervised=True)
+  assert isinstance(df, pandas.DataFrame)
+  assert isinstance(df._repr_html_(), str)
+  assert list(df.columns) == ['image', 'label']

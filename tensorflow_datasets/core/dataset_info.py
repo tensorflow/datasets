@@ -517,6 +517,23 @@ def read_from_json(json_filename):
   return parsed_proto
 
 
+def pack_as_supervised_ds(
+    ds: tf.data.Dataset,
+    ds_info: DatasetInfo,
+) -> tf.data.Dataset:
+  """Pack `(input, label)` dataset as `{'key0': input, 'key1': label}`."""
+  if (
+      ds_info.supervised_keys
+      and isinstance(ds.element_spec, tuple)
+      and len(ds.element_spec) == 2
+  ):
+    x_key, y_key = ds_info.supervised_keys
+    ds = ds.map(lambda x, y: {x_key: x, y_key: y})
+    return ds
+  else:  # If dataset isn't a supervised tuple (input, label), return as-is
+    return ds
+
+
 @six.add_metaclass(abc.ABCMeta)
 class Metadata(dict):
   """Abstract base class for DatasetInfo metadata container.

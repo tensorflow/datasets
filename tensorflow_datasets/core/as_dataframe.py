@@ -187,6 +187,10 @@ def as_dataframe(
   # Raise a clean error message if panda isn't installed.
   lazy_imports_lib.lazy_imports.pandas  # pylint: disable=pointless-statement
 
+  # Pack `as_supervised=True` datasets
+  if ds_info:
+    ds = dataset_info.pack_as_supervised_ds(ds, ds_info)
+
   # Flatten the keys names, specs,... while keeping the feature key definition
   # order
   columns = _make_columns(ds.element_spec, ds_info=ds_info)
