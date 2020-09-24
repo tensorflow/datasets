@@ -664,13 +664,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     builder_dir = self._relative_data_dir(with_version=False)
     version_dir = self._relative_data_dir(with_version=True)
 
-    # If the data dir is explicitly given, no need to search everywhere.
-    if given_data_dir:
-      default_data_dir = os.path.expanduser(given_data_dir)
-      all_data_dirs = [default_data_dir]
-    else:
-      default_data_dir = os.path.expanduser(constants.DATA_DIR)
-      all_data_dirs = constants.list_data_dirs()
+    default_data_dir = constants.get_default_data_dir(
+        given_data_dir=given_data_dir
+    )
+    all_data_dirs = constants.list_data_dirs(given_data_dir=given_data_dir)
 
     all_version_dirs = set()
     requested_version_dirs = {}

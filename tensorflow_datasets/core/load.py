@@ -332,7 +332,7 @@ def load(
 def find_builder_dir(
     name: str,
     *,
-    data_dir: str,
+    data_dir: Optional[str] = None,
 ) -> Optional[str]:
   """Search whether the given dataset is present on disk and return its path.
 
@@ -342,6 +342,9 @@ def find_builder_dir(
      is returned.
    * If the config isn't specified, the function try to infer the default
      config name from the original `DatasetBuilder`.
+   * The function searches in all `data_dir` registered with
+     `tfds.core.add_data_dir`. If the dataset exists in multiple dirs, an error
+     is raised.
 
   Args:
     name: Builder name (e.g. `my_ds`, `my_ds/config`, `my_ds:1.2.0`,...)
@@ -351,6 +354,41 @@ def find_builder_dir(
   Returns:
     path: The dataset path found, or None if the dataset isn't found.
   """
+  # Search the dataset across all registered data_dirs
+  all_builder_dirs = []
+  for current_data_dir in constants.list_data_dirs(given_data_dir=data_dir):
+    builder_dir = _find_builder_dir_single_dir(
+        name, data_dir=current_data_dir
+    )
+    if builder_dir:
+      all_builder_dirs.append(builder_dir)
+  if not all_builder_dirs:
+    return None
+  elif len(all_builder_dirs) != 1:
+    # Rather than raising error every time, we could potentially be smarter
+    # and load the most recent version across all files, but should be
+    # carefull when partial version is requested ('my_dataset:3.*.*').
+    # Could add some `MultiDataDirManager` API:
+    # ```
+    # manager = MultiDataDirManager(given_data_dir=data_dir)
+    # with manager.merge_data_dirs() as virtual_data_dir:
+    #  virtual_builder_dir = _find_builder_dir(name, data_dir=virtual_data_dir)
+    #  builder_dir = manager.resolve(virtual_builder_dir)
+    # ```
+    raise ValueError(
+        f"Dataset {name} detected in multiple locations: {all_builder_dirs}. "
+        "Please resolve the ambiguity by explicitly setting `data_dir=`."
+    )
+  else:
+    return next(iter(all_builder_dirs))  # List has a single element
+
+
+def _find_builder_dir_single_dir(
+    name: str,
+    *,
+    data_dir: str,
+) -> Optional[str]:
+  """Same as `find_builder_dir` but require explicit dir."""
   builder_name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   config_name = builder_kwargs.pop("config", None)
   version_str = builder_kwargs.pop("version", None)
