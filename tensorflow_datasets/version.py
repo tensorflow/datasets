@@ -31,4 +31,4 @@ __version__ = '.'.join([
     _MAJOR_VERSION,
     _MINOR_VERSION,
     _PATCH_VERSION,
-]) + '-nightly'
+]) + '+nightly'
