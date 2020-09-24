@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Tests for ImageNet-v2 image classification dataset."""
 from tensorflow_datasets.image_classification import imagenet_v2
 import tensorflow_datasets.public_api as tfds
 
