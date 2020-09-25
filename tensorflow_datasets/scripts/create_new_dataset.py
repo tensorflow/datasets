@@ -88,7 +88,7 @@ _DATASET_DEFAULTS = """\
 class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
   \"""{TODO}: Short description of my dataset.\"""
 
-  # {TODO}: Set up version.
+  # {TODO}: Set up version and release notes.
   VERSION = tfds.core.Version('0.1.0')
   RELEASE_NOTES = {
       '0.1.0': 'Initial release',
