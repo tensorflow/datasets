@@ -1,6 +1,6 @@
 """audioset dataset."""
 
-import tensorflow_datasets as tfds
+import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 import tensorflow_io as tfio
 import os
