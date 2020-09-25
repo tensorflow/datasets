@@ -34,6 +34,8 @@ upper_tabs:
         path: /datasets/datasets_versioning
       - title: Store your dataset on GCS
         path: /datasets/gcs
+      - title: Community
+        path: /datasets/community
 
       - heading: "Add your dataset"
       - title: Add a dataset
