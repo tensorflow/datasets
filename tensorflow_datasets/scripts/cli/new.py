@@ -149,7 +149,7 @@ def _create_dataset_file(info: DatasetInfo) -> None:
 
         VERSION = tfds.core.Version('0.1.0')
         RELEASE_NOTES = {
-             '1.0.0': 'Initial release',
+             '0.1.0': 'Initial release',
         }
 
         def _info(self) -> tfds.core.DatasetInfo:
