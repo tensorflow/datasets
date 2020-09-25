@@ -35,11 +35,11 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 
 if nightly:
   project_name = 'tfds-nightly'
-  # Version as `X.Y.Z.dev199912312459+nightly`
+  # Version as `X.Y.Z.dev199912312459`
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
   curr_version = pkg_resources.parse_version(__version__)
-  __version__ = f'{curr_version.base_version}.dev{datestring}+nightly'
+  __version__ = f'{curr_version.base_version}.dev{datestring}'
 
 
 DOCLINES = __doc__.split('\n')
