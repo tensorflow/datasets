@@ -72,10 +72,11 @@ class BuilderConfig(object):
   `BuilderConfig` and add their own properties.
   """
 
-  def __init__(self, *, name, version=None, supported_versions=None,
+  def __init__(self, *, name, version=None, release_notes={}, supported_versions=None,
                description=None):
     self._name = name
     self._version = version
+    self._release_notes = release_notes
     self._supported_versions = supported_versions or []
     self._description = description
 
@@ -88,6 +89,10 @@ class BuilderConfig(object):
     return self._version
 
   @property
+  def release_notes(self):
+    return self._release_notes
+
+  @property
   def supported_versions(self):
     return self._supported_versions
 
@@ -96,10 +101,12 @@ class BuilderConfig(object):
     return self._description
 
   def __repr__(self):
-    return "<{cls_name} name={name}, version={version}>".format(
+    return "<{cls_name} name={name}, \
+        version={version}, release_note={release_note}>".format(
         cls_name=type(self).__name__,
         name=self.name,
-        version=self.version or "None")
+        version=self.version or "None",
+        release_note=self.release_notes.get(self.version, "None"))
 
 
 class DatasetBuilder(registered.RegisteredDataset):

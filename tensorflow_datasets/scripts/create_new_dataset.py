@@ -90,6 +90,9 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
 
   # {TODO}: Set up version.
   VERSION = tfds.core.Version('0.1.0')
+  RELEASE_NOTES = {
+      '0.1.0': 'Initial release',
+  }
 
   def _info(self):
     # {TODO}: Specifies the tfds.core.DatasetInfo object
