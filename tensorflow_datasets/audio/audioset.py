@@ -89,8 +89,9 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
         # TODO(audioset): Yields (key, example) tuples from the dataset
 
         my_files = tf.io.gfile.listdir(os.path.join(data_dir, 'trimmed_audio'))
-        with open(os.path.join(data_dir, 'id2label.json'), "r") as read_file:
+        with tf.io.gfile.GFile(os.path.join(data_dir, 'id2label.json'), "r") as read_file:
             datas = json.load(read_file)
+        
 #         with Pool(12) as p:
 #             p.map(process_examples, my_files, datas, data_dir) #multiprocessing
         
