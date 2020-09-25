@@ -71,6 +71,7 @@ class BuilderConfig(object):
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
   """
+  RELEASE_NOTES={}
 
   def __init__(self, *, name, version=None, supported_versions=None,
                description=None):
