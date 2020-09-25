@@ -91,29 +91,29 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
         my_files = tf.io.gfile.listdir(os.path.join(data_dir, 'trimmed_audio'))
         with open(os.path.join(data_dir, 'id2label.json'), "r") as read_file:
             datas = json.load(read_file)
-        with Pool(12) as p:
-            p.map(process_examples, my_files, datas, data_dir)
+#         with Pool(12) as p:
+#             p.map(process_examples, my_files, datas, data_dir) #multiprocessing
         
-#         for f in my_files:
-#             try:
-#                 label_list = []
-#                 filepath = os.path.join(data_dir,'trimmed_audio',f)
-#                 audio_binary = tf.io.read_file(filepath)
-#                 audio_tensor = tfio.audio.decode_mp3(audio_binary)
-#                 ids = f.replace(".mp3","")
-#                 for x in datas[ids]:
-#                     for y in x:
-#                         label_list.append(y)
-#                     label_tensor=np.zeros(527, dtype=np.int16)
-#                     for i in label_list:
-#                         label_tensor[i] = 1
-#                     label_tensor = tf.convert_to_tensor(label_tensor,dtype=tf.int16)
-#                     break
-#                 yield f, {
-#                     'audio': audio_tensor,
-#                     'label': label_tensor
-#                 }
-#             except:
-#                 pass
+        for f in my_files:
+            try:
+                label_list = []
+                filepath = os.path.join(data_dir,'trimmed_audio',f)
+                audio_binary = tf.io.read_file(filepath)
+                audio_tensor = tfio.audio.decode_mp3(audio_binary)
+                ids = f.replace(".mp3","")
+                for x in datas[ids]:
+                    for y in x:
+                        label_list.append(y)
+                    label_tensor=np.zeros(527, dtype=np.int16)
+                    for i in label_list:
+                        label_tensor[i] = 1
+                    label_tensor = tf.convert_to_tensor(label_tensor,dtype=tf.int16)
+                    break
+                yield f, {
+                    'audio': audio_tensor,
+                    'label': label_tensor
+                }
+            except:
+                pass
     
 
