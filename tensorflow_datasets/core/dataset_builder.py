@@ -21,9 +21,10 @@ import inspect
 import itertools
 import os
 import sys
-from typing import Any, Dict, Optional
+from typing import Any, ClassVar, Dict, List, Optional, Union
 
 from absl import logging
+import dataclasses
 import six
 import tensorflow.compat.v2 as tf
 
@@ -48,6 +49,9 @@ else:
   pathlib = Any
 
 
+VersionOrStr = Union[utils.Version, str]
+
+
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
@@ -65,41 +69,22 @@ GCS bucket (recommended if you're running on GCP), you can instead pass
 _is_py2_download_and_prepare_disabled = True
 
 
-class BuilderConfig(object):
+@dataclasses.dataclass(eq=False)
+class BuilderConfig:
   """Base class for `DatasetBuilder` data configuration.
 
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
   """
+  # TODO(py3.10): Should update dataclass to be:
+  # * Frozen (https://bugs.python.org/issue32953)
+  # * Kwargs-only (https://bugs.python.org/issue33129)
 
-  def __init__(self, *, name, version=None, supported_versions=None,
-               description=None):
-    self._name = name
-    self._version = version
-    self._supported_versions = supported_versions or []
-    self._description = description
-
-  @property
-  def name(self):
-    return self._name
-
-  @property
-  def version(self):
-    return self._version
-
-  @property
-  def supported_versions(self):
-    return self._supported_versions
-
-  @property
-  def description(self):
-    return self._description
-
-  def __repr__(self):
-    return "<{cls_name} name={name}, version={version}>".format(
-        cls_name=type(self).__name__,
-        name=self.name,
-        version=self.version or "None")
+  name: str
+  version: Optional[VersionOrStr] = None
+  release_notes: Optional[Dict[str, str]] = None
+  supported_versions: List[str] = dataclasses.field(default_factory=list)
+  description: Optional[str] = None
 
 
 class DatasetBuilder(registered.RegisteredDataset):
@@ -140,6 +125,10 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   # Semantic version of the dataset (ex: tfds.core.Version('1.2.0'))
   VERSION = None
+
+  # Release notes
+  # Multi-lines are automatically dedent
+  RELEASE_NOTES: ClassVar[Dict[str, str]] = {}
 
   # List dataset versions which can be loaded using current code.
   # Data can only be prepared with canonical VERSION or above.
