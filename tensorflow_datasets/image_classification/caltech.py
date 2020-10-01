@@ -46,7 +46,11 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
   VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+      "3.0.0")
+      
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)

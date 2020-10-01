@@ -114,7 +114,12 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
     v100 = tfds.core.Version(
-        '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+        '1.0.0')
+
+    RELEASE_NOTES = {
+        '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+    }
+    
     super(BigearthnetConfig, self).__init__(
         version=v100,
         **kwargs)

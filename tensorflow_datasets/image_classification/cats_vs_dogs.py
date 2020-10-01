@@ -49,7 +49,11 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
   VERSION = tfds.core.Version(
-      "4.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+      "4.0.0")
+      
+  RELEASE_NOTES = {
+      "4.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
