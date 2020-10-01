@@ -63,16 +63,16 @@ class Version(object):
 
     Args:
       version_str: string. Eg: "1.2.3".
-      RELEASE_NOTES: dict of versions with their release notes.
+      RELEASE_NOTES: Release note of the specified version.
       experiments: dict of experiments. See Experiment.
       tfds_version_to_prepare: string, defaults to None. If set, indicates that
         current version of TFDS cannot be used to `download_and_prepare` the
         dataset, but that TFDS at version {tfds_version_to_prepare} should be
         used instead.
     """
-    if RELEASE_NOTES is not None and not isinstance(RELEASE_NOTES, dict):
+    if RELEASE_NOTES is not None and not isinstance(RELEASE_NOTES, str):
       raise TypeError(
-          "RELEASE NOTES should be a dictionary. Got a {}: {}".format(
+          "RELEASE NOTES should be a str. Got a {}: {}".format(
            type(RELEASE_NOTES), RELEASE_NOTES))
     self.RELEASE_NOTES = RELEASE_NOTES
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
