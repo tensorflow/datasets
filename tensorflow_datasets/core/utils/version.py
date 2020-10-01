@@ -57,13 +57,13 @@ class Version(object):
       Experiment.DUMMY: False,
   }
 
-  def __init__(self, version_str, description=None, experiments=None,
+  def __init__(self, version_str, RELEASE_NOTES=None, experiments=None,
                tfds_version_to_prepare=None):
     """Version init.
 
     Args:
       version_str: string. Eg: "1.2.3".
-      description: string, a description of what is new in this version.
+      RELEASE_NOTES: dict of versions with their release notes.
       experiments: dict of experiments. See Experiment.
       tfds_version_to_prepare: string, defaults to None. If set, indicates that
         current version of TFDS cannot be used to `download_and_prepare` the
@@ -73,7 +73,7 @@ class Version(object):
     if description is not None and not isinstance(description, str):
       raise TypeError(
           "Description should be a string. Got {}".format(description))
-    self.description = description
+    self.RELEASE_NOTES = RELEASE_NOTES
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
     self.tfds_version_to_prepare = tfds_version_to_prepare
     if experiments:
