@@ -137,7 +137,12 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     v100 = tfds.core.Version(
-        "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+        "1.0.0")
+
+    RELEASE_NOTES = {
+        "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    }
+
     super(AbstractReasoningConfig, self).__init__(
         version=v100,
         **kwargs)
