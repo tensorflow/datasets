@@ -63,8 +63,11 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
-    v2 = tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v2 = tfds.core.Version("2.0.0")
+    RELEASE_NOTES = {
+        "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    }
+    
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
