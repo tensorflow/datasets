@@ -124,7 +124,7 @@ def _make_builder_configs():
   """
   config_list = []
   v1 = tfds.core.Version(
-      '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+      '1.0.0')
   for corruption in _CORRUPTIONS:
     for severity in range(1, 6):
       config_list.append(
@@ -133,6 +133,8 @@ def _make_builder_configs():
               version=v1,
               description='Corruption method: ' + corruption +
               ', severity level: ' + str(severity),
+              release_notes=
+              'New split API (https://tensorflow.org/datasets/splits)',
               corruption_type=corruption,
               severity=severity,
           ))
