@@ -73,8 +73,10 @@ class GrooveConfig(tfds.core.BuilderConfig):
     else:
       name_parts.append("midionly")
 
-    v2 = tfds.core.Version(
-        "2.0.1", "New split API (https://tensorflow.org/datasets/splits)")
+    v2 = tfds.core.Version("2.0.1")
+    RELEASE_NOTES = {
+        "2.0.1" : "New split API (https://tensorflow.org/datasets/splits)"
+    }
     super(GrooveConfig, self).__init__(
         name="-".join(name_parts), version=v2, **kwargs)
     self.split_bars = split_bars

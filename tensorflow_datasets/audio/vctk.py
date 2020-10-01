@@ -61,7 +61,8 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
               This is the same audio released in previous versions of VCTK:
               https://doi.org/10.7488/ds/1994
           """,
-          version=tfds.core.Version("1.0.0", "VCTK release 0.92.0.")),
+          version=tfds.core.Version("1.0.0"),
+          release_notes={"1.0.0" : "VCTK release 0.92.0."}),
       tfds.core.BuilderConfig(
           name="mic2",
           description="""
@@ -71,7 +72,8 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
               Two speakers, p280 and p315 had technical issues of the audio
               recordings using MKH 800.
           """,
-          version=tfds.core.Version("1.0.0", "VCTK release 0.92.0.")),
+          version=tfds.core.Version("1.0.0"),
+          release_notes={"1.0.0": "VCTK release 0.92.0."}),
   ]
 
   def _info(self):
