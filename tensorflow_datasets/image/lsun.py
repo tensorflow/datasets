@@ -72,8 +72,9 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           name=category,
           description="Images of category %s" % category,
           version=tfds.core.Version(
-              "3.0.0",
-              "New split API (https://tensorflow.org/datasets/splits)"),
+              "3.0.0"),
+          release_notes=
+          "New split API (https://tensorflow.org/datasets/splits)",
       ) for category in _CATEGORIES
   ]
 
