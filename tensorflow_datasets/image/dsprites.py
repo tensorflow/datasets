@@ -64,10 +64,13 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
   """dSprites data set."""
 
   VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+      "2.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.1.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     features_dict = {
