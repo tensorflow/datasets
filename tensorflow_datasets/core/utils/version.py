@@ -70,7 +70,7 @@ class Version(object):
         dataset, but that TFDS at version {tfds_version_to_prepare} should be
         used instead.
     """
-    if description is not None and not isinstance(description, str):
+    if description is not None:  # and not isinstance(description, str):
       raise TypeError(
           "Description should be a string. Got {}".format(description))
     self.description = description
