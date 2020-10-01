@@ -70,9 +70,10 @@ class Version(object):
         dataset, but that TFDS at version {tfds_version_to_prepare} should be
         used instead.
     """
-    if description is not None and not isinstance(description, str):
+    if RELEASE_NOTES is not None and not isinstance(RELEASE_NOTES, dict):
       raise TypeError(
-          "Description should be a string. Got {}".format(description))
+          "RELEASE NOTES should be a dictionary. Got a {}: {}".format(
+           type(RELEASE_NOTES), RELEASE_NOTES))
     self.RELEASE_NOTES = RELEASE_NOTES
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
     self.tfds_version_to_prepare = tfds_version_to_prepare
