@@ -119,7 +119,11 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['version'] = tfds.core.Version(
-        '2.0.1', 'New split API (https://tensorflow.org/datasets/splits)')
+        '2.0.1')
+    RELEASE_NOTES = {
+        '2.0.1': 'New split API (https://tensorflow.org/datasets/splits)',
+    }
+    
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
     self.patch_size = patch_size
