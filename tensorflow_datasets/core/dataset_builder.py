@@ -146,24 +146,33 @@ class DatasetBuilder(registered.RegisteredDataset):
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
-  def __init__(self, *, data_dir=None, config=None, version=None):
+  def __init__(
+      self,
+      *,
+      data_dir: Optional[utils.PathLike] = None,
+      config: Union[None, str, BuilderConfig] = None,
+      version: Union[None, str, utils.Version] = None,
+  ):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
 
     Args:
-      data_dir: `str`, directory to read/write data. Defaults to the value of
+      data_dir: directory to read/write data. Defaults to the value of
         the environment variable TFDS_DATA_DIR, if set, otherwise falls back to
         "~/tensorflow_datasets".
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
-      version: `str`. Optional version at which to load the dataset. An error is
+      version: Optional version at which to load the dataset. An error is
         raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
         The special value "experimental_latest" will use the highest version,
         even if not default. This is not recommended unless you know what you
         are doing, as the version could be broken.
     """
+    if data_dir:
+      data_dir = os.fspath(data_dir)  # Pathlib -> str
+
     # For pickling:
     self._original_state = dict(data_dir=data_dir, config=config,
                                 version=version)

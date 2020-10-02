@@ -178,12 +178,52 @@ class FeatureConnector(object):
     return subclass.from_json_content(value['content'])
 
   def to_json(self) -> Json:
+    # pylint: disable=line-too-long
     """Exports the FeatureConnector to Json.
+
+    Each feature is serialized as a `dict(type=..., content=...)`.
+
+    * `type`: The cannonical name of the feature (`module.FeatureName`).
+    * `content`: is specific to each feature connector and defined in
+      `to_json_content`. Can contain nested sub-features (like for
+      `tfds.features.FeaturesDict` and `tfds.features.Sequence`).
+
+    For example:
+
+    ```python
+    tfds.features.FeaturesDict({
+        'input': tfds.features.Image(),
+        'target': tfds.features.ClassLabel(num_classes=10),
+    })
+    ```
+
+    Is serialized as:
+
+    ```json
+    {
+        "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+        "content": {
+            "input": {
+                "type": "tensorflow_datasets.core.features.image_feature.Image",
+                "content": {
+                    "shape": [null, null, 3],
+                    "dtype": "uint8",
+                    "encoding_format": "png"
+                }
+            },
+            "target": {
+                "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "num_classes": 10
+            }
+        }
+    }
+    ```
 
     Returns:
       A `dict(type=, content=)`. Will be forwarded to
         `from_json` when reconstructing the feature.
     """
+    # pylint: enable=line-too-long
     return {
         'type': f'{type(self).__module__}.{type(self).__name__}',
         'content': self.to_json_content(),

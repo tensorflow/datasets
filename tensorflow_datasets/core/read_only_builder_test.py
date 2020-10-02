@@ -16,17 +16,24 @@
 """Tests for read_only_builder."""
 
 import pathlib
+from unittest import mock
 
 import pytest
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import read_only_builder
 
 
+class DummyNoConfMnist(testing.DummyMnist):
+  """Same as DummyMnist (but declared here to avoid skip_registering issues)."""
+
+
 class DummyConfigMnist(testing.DummyMnist):
+  """Same as DummyMnist, but with config."""
 
   BUILDER_CONFIGS = [
       dataset_builder.BuilderConfig(
@@ -35,23 +42,79 @@ class DummyConfigMnist(testing.DummyMnist):
   ]
 
 
+# All tests using `code_builder` will be executed twice (with/without config)
+@pytest.fixture(scope='module', params=[DummyNoConfMnist, DummyConfigMnist])
+def code_builder(request, tmp_path_factory) -> dataset_builder.DatasetBuilder:
+  """Parametrized fixture to test both config and non-config dataset."""
+  tmp_path = tmp_path_factory.mktemp('tfds_datasets')  # Temporary data_dir
+  builder_cls = request.param
+  # Generate the dataset (only once for all tests as scope == 'module').
+  builder = builder_cls(data_dir=tmp_path)
+  builder.download_and_prepare()
+
+  # Update the default DATA_DIR during the test.
+  with mock.patch.object(constants, 'DATA_DIR', str(tmp_path)):
+    yield builder
+
+
+# pylint: disable=redefined-outer-name
+
+
+def test_builder_files_exists(code_builder: dataset_builder.DatasetBuilder):
+  """Tests that `tfds.builder` is correctly loaded from the code/files."""
+  # When code is available, and no version specified, load from code
+  builder = load.builder(code_builder.name)
+  assert isinstance(builder, type(code_builder))  # Check builder is DummyMnist
+  assert not isinstance(builder, read_only_builder.ReadOnlyBuilder)
+
+  # If the version is specified, load from the files (backward support)
+  builder = load.builder(f'{code_builder.name}:*.*.*')  # Most recent version
+  assert not isinstance(builder, type(code_builder))
+  assert isinstance(builder, read_only_builder.ReadOnlyBuilder)
+
+  # If the version is specified but files not found, load from the code
+  builder = load.builder(
+      f'{code_builder.name}:*.*.*', data_dir='/tmp/path/tfds/not-exists'
+  )
+  assert isinstance(builder, type(code_builder))
+  assert not isinstance(builder, read_only_builder.ReadOnlyBuilder)
+
+
+def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
+  """If the code isn't found, use files instead."""
+
+  # Patch `tfds.builder_cls` to emulate that the dataset isn't registered
+  with mock.patch.object(
+      load,
+      'builder_cls',
+      side_effect=load.DatasetNotFoundError(code_builder.name),
+  ):
+    # When the code isn't found, loading dataset require explicit config name:
+    # tfds.builder('ds/config')
+    config_name = code_builder.name
+    if code_builder.builder_config:
+      config_name = f'{config_name}/{code_builder.builder_config.name}'
+
+    # Files exists, but not code, loading from files
+    builder = load.builder(config_name)
+    assert isinstance(builder, read_only_builder.ReadOnlyBuilder)
+
+    # Neither code not files found, raise DatasetNotFoundError
+    with pytest.raises(load.DatasetNotFoundError):
+      load.builder(config_name, data_dir='/tmp/non-existing/tfds/dir')
+
+
 # Test both with and without config
-@pytest.mark.parametrize('builder_cls', [testing.DummyMnist, DummyConfigMnist])
-def test_read_only_builder(
-    builder_cls: dataset_builder.DatasetBuilder,
-    tmp_path: pathlib.Path,
-):
-  # Generate the dataset
-  origin_builder = builder_cls(data_dir=tmp_path)
-  origin_builder.download_and_prepare()
+def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
+  """Builder can be created from the files only."""
 
   # Reconstruct the dataset
-  builder = read_only_builder.builder_from_directory(origin_builder.data_dir)
-  assert builder.name == origin_builder.name
-  assert builder.data_dir == origin_builder.data_dir
-  assert builder.info.version == origin_builder.info.version
-  assert builder.info.full_name == origin_builder.info.full_name
-  assert repr(builder.info) == repr(origin_builder.info)
+  builder = read_only_builder.builder_from_directory(code_builder.data_dir)
+  assert builder.name == code_builder.name
+  assert builder.data_dir == code_builder.data_dir
+  assert builder.info.version == code_builder.info.version
+  assert builder.info.full_name == code_builder.info.full_name
+  assert repr(builder.info) == repr(code_builder.info)
   assert builder.VERSION is None
 
   # Test that the dataset can be read
@@ -69,6 +132,6 @@ def test_not_exists(tmp_path: pathlib.Path):
     read_only_builder.builder_from_directory(tmp_path)
 
 
-def test_registered():
+def test_not_registered():
   """Ensure the ReadOnlyBuilder is not registered."""
   assert read_only_builder.ReadOnlyBuilder.name not in load.list_builders()

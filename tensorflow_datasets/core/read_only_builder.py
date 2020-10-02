@@ -65,6 +65,11 @@ class ReadOnlyBuilder(
         config=builder_config,
         version=info_proto.version,
     )
+    if self.info.features is None:
+      raise ValueError(
+          f'Cannot restore {self.info.full_name}. It likelly mean the dataset '
+          'was generated with an old TFDS version (<=3.2.1).'
+      )
 
   def _create_builder_config(
       self, builder_config: Optional[dataset_builder.BuilderConfig]
@@ -89,8 +94,16 @@ class ReadOnlyBuilder(
 def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
-  Note: This function reconstruct the `tfds.core.DatasetBuilder` without
+  This function reconstruct the `tfds.core.DatasetBuilder` without
   requirering the original generation code.
+
+  It will read the `<builder_dir>/features.json` in order to infer the
+  structure (feature names, nested dict,...) and content (image, sequence,...)
+  of the dataset. The serialization format is defined in
+  `tfds.features.FeatureConnector` in `to_json()`.
+
+  Note: This function only works for datasets generated with TFDS `4.0.0` or
+  above.
 
   Args:
     builder_dir: `str`, path of the directory containing the dataset to read (
