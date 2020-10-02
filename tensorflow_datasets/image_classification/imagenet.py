@@ -136,10 +136,13 @@ PNG_IMAGES = ['n02105855_2933.JPEG']
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('5.1.0', 'Added test split.')
+  VERSION = tfds.core.Version('5.1.0')
   SUPPORTED_VERSIONS = [
       tfds.core.Version('5.0.0'),
   ]
+  RELEASE_NOTES = {
+      '5.1.0': 'Added test split',
+  }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   manual_dir should contain two files: ILSVRC2012_img_train.tar and
