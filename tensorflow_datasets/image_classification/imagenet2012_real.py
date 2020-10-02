@@ -58,7 +58,10 @@ _REAL_LABELS_URL = 'https://raw.githubusercontent.com/google-research/reassessed
 class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
   """ImageNet validation images with ReaL labels."""
 
-  VERSION = tfds.core.Version('1.0.0', 'Initial release.')
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Initial release',
+  }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   manual_dir should contain `ILSVRC2012_img_val.tar` file.
