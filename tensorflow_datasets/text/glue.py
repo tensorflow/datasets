@@ -117,9 +117,9 @@ class GlueConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(GlueConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("1.0.0"),
+        release_notes=
+        "New split API (https://tensorflow.org/datasets/splits)",
         **kwargs)
     self.text_features = text_features
     self.label_column = label_column
