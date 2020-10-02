@@ -103,7 +103,7 @@ def show_statistics(
   Or:
 
   ```
-  ds, ds_info = tfds.load('mnist', with_info)
+  ds, ds_info = tfds.load('mnist', with_info=True)
   tfds.show_statistics(ds_info)
   ```
 
