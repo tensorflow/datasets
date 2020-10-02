@@ -15,28 +15,6 @@ _CITATION = """
 _DESCRIPTION = """
 """
 """Audio feature."""
-def process_examples(my_files, datas ,data_dir=None):
-    try:
-        label_list = []
-        filepath = os.path.join(data_dir,'trimmed_audio',f)
-        audio_binary = tf.io.read_file(filepath)
-        audio_tensor = tfio.audio.decode_mp3(audio_binary)
-        
-        ids = my_files.replace(".mp3","")
-        for x in datajson[ids]:
-            for y in x:
-                label_list.append(y)
-            label_tensor=np.zeros(527, dtype=np.int16)
-            for i in label_list:
-                label_tensor[i] = 1
-            label_tensor = tf.convert_to_tensor(label_tensor,dtype=tf.int16)
-            break
-        yield filepath, {
-            'audio': audio_tensor,
-            'label': label_tensor
-        }
-    except:
-        pass
 
 class Audioset(tfds.core.GeneratorBasedBuilder):
     """TODO(audioset): Short description of my dataset."""
