@@ -16,6 +16,10 @@
 """Testing utilities."""
 
 from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
+from tensorflow_datasets.testing.feature_test_case import FeatureExpectationItem
+from tensorflow_datasets.testing.feature_test_case import FeatureExpectationsTestCase
+from tensorflow_datasets.testing.feature_test_case import RaggedConstant
+from tensorflow_datasets.testing.feature_test_case import SubTestCase
 from tensorflow_datasets.testing.mocking import mock_data
 from tensorflow_datasets.testing.mocking import MockPolicy
 from tensorflow_datasets.testing.test_case import TestCase
@@ -24,16 +28,12 @@ from tensorflow_datasets.testing.test_utils import DummyMnist
 from tensorflow_datasets.testing.test_utils import DummyParser
 from tensorflow_datasets.testing.test_utils import DummySerializer
 from tensorflow_datasets.testing.test_utils import fake_examples_dir
-from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
-from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
 from tensorflow_datasets.testing.test_utils import make_tmp_dir
 from tensorflow_datasets.testing.test_utils import mock_kaggle_api
 from tensorflow_datasets.testing.test_utils import mock_tf
 from tensorflow_datasets.testing.test_utils import MockFs
-from tensorflow_datasets.testing.test_utils import RaggedConstant
 from tensorflow_datasets.testing.test_utils import rm_tmp_dir
 from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
-from tensorflow_datasets.testing.test_utils import SubTestCase
 from tensorflow_datasets.testing.test_utils import test_main
 from tensorflow_datasets.testing.test_utils import tmp_dir
 
