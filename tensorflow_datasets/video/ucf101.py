@@ -74,8 +74,10 @@ class Ucf101Config(tfds.core.BuilderConfig):
     self.split_number = split_number
 
 
-_VERSION = tfds.core.Version(
-    '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+_VERSION = tfds.core.Version('2.0.0')
+RELEASE_NOTES={
+  '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+}
 
 
 class Ucf101(tfds.core.GeneratorBasedBuilder):
