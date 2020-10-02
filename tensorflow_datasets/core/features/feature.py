@@ -419,7 +419,7 @@ class FeatureConnector(object):
     return tf.map_fn(
         self.decode_example,
         tfexample_data,
-        dtype=self.dtype,
+        fn_output_signature=self.dtype,
         parallel_iterations=10,
         back_prop=False,
         name='sequence_decode',
