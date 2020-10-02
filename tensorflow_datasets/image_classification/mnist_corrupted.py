@@ -96,9 +96,9 @@ def _make_builder_configs():
     config_list.append(
         MNISTCorruptedConfig(
             name=corruption,
-            version=tfds.core.Version(
-                '1.0.0',
-                'New split API (https://tensorflow.org/datasets/splits)'),
+            version=tfds.core.Version('1.0.0'),
+            release_notes=
+              'New split API (https://tensorflow.org/datasets/splits)',
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
         ))
