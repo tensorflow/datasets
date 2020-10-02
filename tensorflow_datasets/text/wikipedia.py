@@ -108,15 +108,14 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     self.date = date
     self.language = language
 
-
-_VERSION = tfds.core.Version(
-    "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
-
-
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
   # Use mirror (your.org) to avoid download caps.
-
+  _VERSION = tfds.core.Version("1.0.0")
+  RELEASE_NOTES = {
+      "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
+  
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
