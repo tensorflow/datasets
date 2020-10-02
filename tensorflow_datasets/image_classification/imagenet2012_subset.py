@@ -72,7 +72,7 @@ class Imagenet2012Subset(Imagenet2012):
           name=subset_size,
           description='{} of total ImageNet training set.'.format(subset_size),
           version=tfds.core.Version(
-              '5.0.0', ''),
+              '5.0.0'),
       ) for subset_size in SUBSET2FILES
   ]
 
@@ -151,4 +151,3 @@ class Imagenet2012Subset(Imagenet2012):
               'label': label,
           }
           yield image_fname, record
-
