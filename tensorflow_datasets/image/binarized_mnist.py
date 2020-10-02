@@ -48,6 +48,9 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
   """A specific binarization of the MNIST dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  RELEASE_NOTES = {
+      "1.0.0": "Initial Release",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
