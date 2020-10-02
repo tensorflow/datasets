@@ -7,18 +7,17 @@ import tensorflow_datasets.testing as tfds_test
 
 
 class AudioSetTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = audioset.AudioSet
+    
+  DATASET_CLASS = audioset.Audioset
   SPLITS = {
       'train': 4,
   }
 
   DL_EXTRACT_RESULT = {
-      'summary_table':
-          'id2label.json',
-      'all_files': [
-          'train/--PJHxphWEs.mp3', 'train/-275_wTLm-4.mp3',
-          'train/08u-jdwjM74.mp3', 'train/X-5UcZiOIhQ.mp3',
-      ]
+      'file_1' : '--PJHxphWEs.mp3',
+      'file_2' : '-275_wTLm-4.mp3',
+      'file_3' : '08u-jdwjM74.mp3',
+      'file_4' : 'X-5UcZiOIhQ.mp3',
   }
 
 if __name__ == "__main__":
