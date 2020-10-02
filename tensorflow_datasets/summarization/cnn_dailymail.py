@@ -76,12 +76,15 @@ _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
 _SUPPORTED_VERSIONS = [
     # Same data as 0.0.2
-    tfds.core.Version('1.0.0',
-                      'New split API (https://tensorflow.org/datasets/splits)'),
+    tfds.core.Version('1.0.0'),
     # Having the model predict newline separators makes it easier to evaluate
     # using summary-level ROUGE.
-    tfds.core.Version('2.0.0', 'Separate target sentences with newline.')
+    tfds.core.Version('2.0.0')
 ]
+RELEASE_NOTES - {
+    '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+    '2.0.0': 'Separate target sentences with newline.',
+}
 
 # Using cased version.
 _DEFAULT_VERSION = tfds.core.Version('3.0.0', 'Using cased version.')
