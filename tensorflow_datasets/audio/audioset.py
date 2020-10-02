@@ -43,7 +43,7 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
 
   # TODO(audioset): Set up version.
     VERSION = tfds.core.Version('0.1.0')
-    MANUAL_DOWNLOAD_INSTRUCTIONS = 'give bucket path bme590/william/manual'
+    MANUAL_DOWNLOAD_INSTRUCTIONS = 'give bucket path gs://bme590/william/manual'
     def _info(self):
         # TODO(audioset): Specifies the tfds.core.DatasetInfo object
         return tfds.core.DatasetInfo(
@@ -52,8 +52,8 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
             description=_DESCRIPTION,
             # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
-                'audio': tfds.features.Tensor(shape=(None,1),dtype=tf.float32),
-                'label': tfds.features.Tensor(shape=(527,),dtype=tf.int16),
+                'audio': tfds.features.Tensor(shape=(None,1), dtype=tf.float32),
+                'label': tfds.features.Tensor(shape=(527,), dtype=tf.int32)
                 # These are the features of your dataset like images, labels ...
             }),
             # If there's a common (input, target) tuple from the features,
@@ -101,18 +101,24 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
                 filepath = os.path.join(data_dir,'trimmed_audio',f)
                 audio_binary = tf.io.read_file(filepath)
                 audio_tensor = tfio.audio.decode_mp3(audio_binary)
+                
                 ids = f.replace(".mp3","")
                 for x in datas[ids]:
+                    indices_list = []
                     for y in x:
                         label_list.append(y)
-                    label_tensor=np.zeros(527, dtype=np.int16)
                     for i in label_list:
-                        label_tensor[i] = 1
-                    label_tensor = tf.convert_to_tensor(label_tensor,dtype=tf.int16)
+                        indice = []
+                        indice.append(i)
+                        indices_list.append(indice)
+                    indices = tf.constant(indices_list, dtype=tf.int32)
+                    updates = tf.ones(len(indices_list), dtype=tf.int32)
+                    label_tensor = tf.zeros(527, dtype=tf.int32)
+                    label_tensor = tf.tensor_scatter_nd_add(label_tensor, indices, updates)
                     break
                 yield f, {
                     'audio': audio_tensor,
-                    'label': label_tensor
+                    'label': label_tensor,
                 }
             except:
                 pass
