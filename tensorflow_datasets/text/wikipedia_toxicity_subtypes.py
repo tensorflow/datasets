@@ -82,8 +82,10 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
   https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more
   details.
   """
-  VERSION = tfds.core.Version('0.2.0', 'Updated features for consistency with '
-                              'CivilComments dataset.')
+  VERSION = tfds.core.Version('0.2.0')
+  RELEASE_NOTES = {
+      '0.2.0': 'Updated features for consistency with CivilComments dataset.',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
