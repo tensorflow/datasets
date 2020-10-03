@@ -40,6 +40,8 @@ upper_tabs:
       - heading: "Add your dataset"
       - title: Add a dataset
         path: /datasets/add_dataset
+      - title: Create a dataset
+        path: /datasets/create_dataset
       - title: Add huge datasets (Apache Beam)
         path: /datasets/beam_datasets
 
