@@ -145,8 +145,11 @@ class OpenImagesV4Config(tfds.core.BuilderConfig):
         is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    kwargs['version'] = tfds.core.Version(
-        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+    kwargs['version'] = tfds.core.Version('2.0.0')
+    kwargs['release_notes']={
+        '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+    }
+    
     super(OpenImagesV4Config, self).__init__(**kwargs)
     self._target_pixels = target_pixels
 
