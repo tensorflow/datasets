@@ -98,6 +98,8 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
     self.corruption_type = corruption_type
     self.severity = severity
 
+ _VERSION = tfds.core.Version('3.1.0')
+ 
 def _make_builder_configs():
   """Construct a list of BuilderConfigs.
 
@@ -151,9 +153,6 @@ def _decode_and_center_crop(image_bytes):
 class Imagenet2012Corrupted(Imagenet2012):
   """Corrupted ImageNet2012 dataset."""
   BUILDER_CONFIGS = _make_builder_configs()
-
-  _VERSION = tfds.core.Version('3.1.0')
-
   RELEASE_NOTES = {
       "0.0.1": "Initial dataset",
       "3.1.0":
