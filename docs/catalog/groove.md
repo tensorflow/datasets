@@ -26,8 +26,7 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Versions**:
 
-    *   **`2.0.1`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.0.1`** (default): No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

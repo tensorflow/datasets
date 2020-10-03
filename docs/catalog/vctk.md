@@ -29,7 +29,7 @@ Note that the 'p315' text was lost due to a hard disk error.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): VCTK release 0.92.0.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `10.94 GiB`
 

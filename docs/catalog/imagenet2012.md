@@ -84,7 +84,7 @@ corresponding labels file. See imagenet2012_labels.txt.
 
     *   **`5.1.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added test split.
+        No release notes.
     *   `5.0.0`: No release notes.
 
 *   **Download size**: `Unknown size`
