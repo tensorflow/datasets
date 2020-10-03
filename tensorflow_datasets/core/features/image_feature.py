@@ -168,6 +168,8 @@ class Image(feature.FeatureConnector):
     elif isinstance(image_or_path_or_fobj, six.string_types):
       with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
+    elif isinstance(image_or_path_or_fobj, bytes):
+      encoded_image = image_or_path_or_fobj
     else:
       encoded_image = image_or_path_or_fobj.read()
     return encoded_image

@@ -281,7 +281,7 @@ def _generate_images_and_annotations(tf_record_file):
 
       camera_name = open_dataset.CameraName.Name.Name(frame_image.name)
       image_and_annotation["camera_" + camera_name] = {
-          "image": io.BytesIO(frame_image.image),
+          "image": frame_image.image,
           "labels": labels
       }
 
