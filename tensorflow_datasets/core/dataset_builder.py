@@ -667,16 +667,17 @@ class DatasetBuilder(registered.RegisteredDataset):
     )
     all_data_dirs = constants.list_data_dirs(given_data_dir=given_data_dir)
 
-    all_version_dirs = set()
+    all_versions = set()
     requested_version_dirs = {}
     for data_dir_root in all_data_dirs:
       # List all existing versions
-      all_version_dirs.update(
-          _list_all_version_dirs(os.path.join(data_dir_root, builder_dir)))
-      # Check for existance of the requested dir
-      requested_version_dir = os.path.join(data_dir_root, version_dir)
-      if requested_version_dir in all_version_dirs:
-        requested_version_dirs[data_dir_root] = requested_version_dir
+      full_builder_dir = os.path.join(data_dir_root, builder_dir)
+      all_versions.update(utils.version.list_all_versions(full_builder_dir))
+      # Check for existance of the requested version
+      if self.version in all_versions:
+        requested_version_dirs[data_dir_root] = os.path.join(
+            data_dir_root, version_dir
+        )
 
     if len(requested_version_dirs) > 1:
       raise ValueError(
@@ -688,12 +689,12 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     # No dataset found, use default directory
     data_dir = os.path.join(default_data_dir, version_dir)
-    if all_version_dirs:
+    if all_versions:
       logging.warning(
           "Found a different version of the requested dataset:\n"
           "%s\n"
           "Using %s instead.",
-          "\n".join(sorted(all_version_dirs)),
+          "\n".join(str(v) for v in sorted(all_versions)),
           data_dir
       )
     return default_data_dir, data_dir
@@ -844,24 +845,6 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise ValueError(
           "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names)
     return config_dict
-
-
-def _list_all_version_dirs(root_dir):
-  """Lists all dataset versions present on disk."""
-  if not tf.io.gfile.exists(root_dir):
-    return []
-
-  def _is_version_valid(version):
-    try:
-      return utils.Version(version) and True
-    except ValueError:  # Invalid version (ex: incomplete data dir)
-      return False
-
-  return [  # Return all version dirs
-      os.path.join(root_dir, version)
-      for version in tf.io.gfile.listdir(root_dir)
-      if _is_version_valid(version)
-  ]
 
 
 class FileReaderBuilder(DatasetBuilder):
