@@ -100,8 +100,10 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
       TedHrlrConfig(  # pylint: disable=g-complex-comprehension
           language_pair=pair,
           version=tfds.core.Version("1.0.0"),
-          release_notes=
-          "New split API (https://tensorflow.org/datasets/splits)",
+          release_notes={
+              "1.0.0":
+              "New split API (https://tensorflow.org/datasets/splits)",
+          },
       ) for pair in _VALID_LANGUAGE_PAIRS
   ]
 

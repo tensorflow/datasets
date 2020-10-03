@@ -73,8 +73,10 @@ class Lm1bConfig(tfds.core.BuilderConfig):
     """
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version("1.0.0"),
-        release_notes=
-        "New split API (https://tensorflow.org/datasets/splits)",
+        release_notes={
+            "1.0.0":
+            "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
