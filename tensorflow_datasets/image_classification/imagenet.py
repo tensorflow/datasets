@@ -142,6 +142,16 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   ]
   RELEASE_NOTES = {
       '5.1.0': 'Added test split',
+      '5.1.0': 'Added test split.',
+      '5.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+      '4.0.0': '(unpublished)',
+      '3.0.0': """
+      Fix colorization on ~12 images (CMYK -> RGB).
+      Fix format for consistency (convert the single png image to Jpeg).
+      Faster generation reading directly from the archive.
+      """,
+      '2.0.1': 'Encoding fix. No changes from user point of view.',
+      '2.0.0': 'Fix validation labels.',
   }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
