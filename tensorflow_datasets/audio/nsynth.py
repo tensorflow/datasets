@@ -117,16 +117,20 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("full")
     if estimate_f0_and_loudness:
       name_parts.append("f0_and_loudness")
-    v230 = tfds.core.Version(
-        "2.3.0", "New `loudness_db` feature in decibels (unormalized).")
-    v231 = tfds.core.Version(
-        "2.3.1", "F0 computed with normalization fix in CREPE.")
-    v232 = tfds.core.Version(
-        "2.3.2", "Use Audio feature.")
-    v233 = tfds.core.Version(
-        "2.3.3",
+    v230 = tfds.core.Version("2.3.0")
+    v231 = tfds.core.Version("2.3.1")
+    v232 = tfds.core.Version("2.3.2")
+    v233 = tfds.core.Version("2.3.3")
+
+    RELEASE_NOTES={
+        "2.3.3":
         "F0 computed with fix in CREPE wave normalization "
-        "(https://github.com/marl/crepe/issues/49).")
+        "(https://github.com/marl/crepe/issues/49).",
+        "2.3.2": "Use Audio feature.",
+        "2.3.1": "F0 computed with normalization fix in CREPE.",
+        "2.3.0": "New `loudness_db` feature in decibels (unormalized).",
+    }
+    
     super(NsynthConfig, self).__init__(
         name=".".join(name_parts),
         version=v233,
