@@ -93,9 +93,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("3.0.1")
 
-  #Add future release notes for all dataset versions here
-  RELEASE_NOTES = {}
-  
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
