@@ -200,6 +200,7 @@ def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
       module = tf_lib
       for submodule in tf_submodules:
         module = getattr(module, submodule)
+      getattr(module, symbol_name)  # Trigger the lazy-loading of the TF API.
       # Patch the module/object
       stack.enter_context(
           mock.patch.object(module, symbol_name, *args, **kwargs)
