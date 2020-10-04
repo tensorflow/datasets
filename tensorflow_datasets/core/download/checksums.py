@@ -18,6 +18,8 @@
 """
 
 import os
+import dataclasses
+from typing import Optional
 from typing import Any, Dict, Iterable, List
 
 import tensorflow.compat.v2 as tf
@@ -33,6 +35,7 @@ _CHECKSUM_DIRS = [
 _CHECKSUM_SUFFIX = '.txt'
 
 
+@dataclasses.dataclass(eq=True)
 class UrlInfo(object):  # TODO(tfds): Use dataclasses
   """Small wrapper around the url metadata (checksum, size).
 
@@ -41,17 +44,13 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
     checksum: Checksum of the file
   """
 
-  def __init__(self, size: int, checksum: str):
-    self.size = size
-    self.checksum = checksum
+  size: int
+  checksum: str
 
   def asdict(self) -> Dict[str, Any]:
     """Returns the dict representation of the dataclass."""
     # TODO(tfds): Replace by `dataclasses.asdict(self)`
-    return {
-        'size': self.size,
-        'checksum': self.checksum,
-    }
+    return dataclasses.asdict(self)
 
   def __eq__(self, other) -> bool:
     return (
