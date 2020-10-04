@@ -42,6 +42,7 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
   Attributes:
     size: Download size of the file
     checksum: Checksum of the file
+    filename: Name of the file
   """
 
   size: int
