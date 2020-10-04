@@ -145,18 +145,27 @@ def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
 
 
 def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within given file."""
+  """Returns {URL: (size, checksum, filename)}s stored within given file."""
   url_infos = {}
   for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
       continue
     try:
-      url, size, checksum = line.split('\t')
+      values = line.split('\t')
     except ValueError:  # not enough values to unpack (legacy files)
       # URL might have spaces inside, but size and checksum will not.
-      url, size, checksum = line.rsplit(' ', 2)
-    url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
+      values = line.rsplit(' ', 2)
+      # If line also contains filename then 3 splits are required.
+      # two splits will not seperate size so split accordingly.
+      if not isinstance(values[1], int):
+          values = line.rsplit(' ', 3)
+    if len(values) == 4:
+        url, size, checksum, filename = values
+    else:
+        url, size, checksum = values
+        filename = None
+    url_infos[url] = UrlInfo(size=int(size), checksum=checksum, filename=filename)
   return url_infos
 
 
@@ -180,7 +189,8 @@ def get_all_url_infos() -> Dict[str, UrlInfo]:
   return url_infos
 
 
-def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
+def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo],
+                    record_checksums: bool=False) -> None:
   """Store given checksums and sizes for specific dataset.
 
   Content of file is never disgarded, only updated. This is to ensure that if
@@ -195,7 +205,8 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
 
   Args:
     dataset_name: string.
-    url_infos: dict, {url: (size_in_bytes, checksum)}.
+    url_infos: dict, {url: (size_in_bytes, checksum, filename)}.
+    record_checksums: bool.
   """
   path = _get_path(dataset_name)
   original_data = _get_url_infos(path)
@@ -205,4 +216,10 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
     return
   with tf.io.gfile.GFile(path, 'w') as f:
     for url, url_info in sorted(new_data.items()):
-      f.write('{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum))
+      if record_checksums:
+          if url_info.filename == None:
+              url_info.filename = dataset_name
+          f.write('{}\t{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum,
+                                            url_info.filename))
+      else:
+          f.write('{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum))
