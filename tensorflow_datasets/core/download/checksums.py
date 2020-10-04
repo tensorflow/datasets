@@ -46,6 +46,7 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
 
   size: int
   checksum: str
+  filename: Optional[str] = None
 
   def asdict(self) -> Dict[str, Any]:
     """Returns the dict representation of the dataclass."""
