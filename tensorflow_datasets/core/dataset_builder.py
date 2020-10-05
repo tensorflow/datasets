@@ -127,6 +127,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   VERSION = None
 
   # Release notes
+  # Metadata only used for documentation. Should be a dict[version,description]
   # Multi-lines are automatically dedent
   RELEASE_NOTES: ClassVar[Dict[str, str]] = {}
 
