@@ -43,8 +43,10 @@ _NAME_RE = re.compile(
 class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
   """Rock, Paper, Scissors dataset."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
