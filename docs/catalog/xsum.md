@@ -42,7 +42,7 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
     *   **`1.1.0`** (default): No release notes.
     *   `1.0.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Dataset without cleaning.
+        No release notes.
 
 *   **Download size**: `2.59 MiB`
 

@@ -76,8 +76,8 @@ FeaturesDict({
     (DPA 4035). Contains very low frequency noises.
 
     ```
-    This is the same audio released in previous versions of VCTK:
-    https://doi.org/10.7488/ds/1994
+          This is the same audio released in previous versions of VCTK:
+          https://doi.org/10.7488/ds/1994
     ```
 
 *   **Dataset size**: `39.87 GiB`
@@ -94,8 +94,8 @@ Split     | Examples
     microphone with very wide bandwidth (Sennheiser MKH 800).
 
     ```
-    Two speakers, p280 and p315 had technical issues of the audio
-    recordings using MKH 800.
+          Two speakers, p280 and p315 had technical issues of the audio
+          recordings using MKH 800.
     ```
 
 *   **Dataset size**: `38.86 GiB`

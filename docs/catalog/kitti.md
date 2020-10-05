@@ -35,7 +35,7 @@ the Kitti homepage.
 
 *   **Versions**:
 
-    *   **`3.2.0`** (default): Devkit updated.
+    *   **`3.2.0`** (default): No release notes.
     *   `3.1.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.

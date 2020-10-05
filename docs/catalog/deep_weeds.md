@@ -34,7 +34,7 @@ Range", "Kelso", "McKinlay" and "Paluma".
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): Fixes wrong labels in V1.
+    *   **`2.0.0`** (default): No release notes.
     *   `1.0.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
