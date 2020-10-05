@@ -6,7 +6,7 @@ import tensorflow_io as tfio
 import os
 import json
 import numpy as np
-from multiprocessing import Pool
+from pydub import AudioSegment
 # TODO(audioset): BibTeX citation
 _CITATION = """
 """
@@ -30,8 +30,8 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
             description=_DESCRIPTION,
             # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
-                'audio': tfds.features.Tensor(shape=(None,1), dtype=tf.float32),
-                'label': tfds.features.Tensor(shape=(527,), dtype=tf.int32)
+                'audio': tfds.features.Audio(file_format=None, sample_rate=48000),
+                'label': tfds.features.Tensor(shape=(None,), dtype=tf.int32)
                 # These are the features of your dataset like images, labels ...
             }),
             # If there's a common (input, target) tuple from the features,
@@ -72,24 +72,18 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
             try:
                 label_list = []
                 filepath = os.path.join(data_dir,'trimmed_audio',f)
-                audio_binary = tf.io.read_file(filepath)
-                audio_tensor = tfio.audio.decode_mp3(audio_binary) #audio_tensor read and decoded
+                with tf.io.gfile.GFile(filepath, "rb") as read_file:
+                    errorcheck = AudioSegment.from_file(read_file) #ignores bad mp3 files
                 ids = f.replace(".mp3","")
                 for x in datas[ids]:
-                    indices_list = []
                     for y in x:
-                        label_list.append(y) #gets multiple labels that apply to audio in a list in label_list
+                        label_list.append(y) #gets multiple labels index that apply to audio in a list in label_list
+                    label_tensor = np.zeros(527, dtype=np.int32)
                     for i in label_list:
-                        indice = []
-                        indice.append(i)
-                        indices_list.append(indice)
-                    indices = tf.constant(indices_list, dtype=tf.int32)
-                    updates = tf.ones(len(indices_list), dtype=tf.int32)
-                    label_tensor = tf.zeros(527, dtype=tf.int32)
-                    label_tensor = tf.tensor_scatter_nd_add(label_tensor, indices, updates) # creates a tensor of zeros with ones at indices that indicate positive for a label
+                        label_tensor[i] = 1 # creates a tensor of zeros with ones at indices that indicate positive for a label
                     break
                 yield f, {
-                    'audio': audio_tensor,
+                    'audio': filepath,
                     'label': label_tensor,
                 }
             except:
