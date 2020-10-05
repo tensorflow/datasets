@@ -219,7 +219,9 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     paths = dl_manager.download_and_extract({
-        "images": _SUN397_URL + "SUN397.tar.gz",
+        "images": tfds.download.Resource(
+            url=_SUN397_URL + "SUN397.tar.gz",
+            extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
         "partitions": _SUN397_URL + "download/Partitions.zip",
     })
     if not isinstance(paths, dict):
