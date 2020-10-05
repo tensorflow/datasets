@@ -79,9 +79,10 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           name=config_name,
           description=("A dataset consisting of images from two classes A and "
                        "B (For example: horses/zebras, apple/orange,...)"),
-          version=tfds.core.Version(
-              "2.0.0",
-              "New split API (https://tensorflow.org/datasets/splits)"),
+          version=tfds.core.Version("2.0.0"),
+          release_notes={
+              "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+          },
           data=config_name,
       ) for config_name in _DATA_OPTIONS
   ]
