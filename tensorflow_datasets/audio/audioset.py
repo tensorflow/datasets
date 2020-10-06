@@ -15,13 +15,12 @@
 
 """Google AudioSet Dataset"""
 
-import tensorflow as tf
-import tensorflow_datasets.public_api as tfds
-import tensorflow_io as tfio
 import os
 import json
+import tensorflow as tf
 import numpy as np
 from pydub import AudioSegment
+import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
 @inproceedings{45857,
@@ -41,7 +40,8 @@ To nominate segments for annotation, we relied on YouTube metadata and content-b
 
 class Audioset(tfds.core.GeneratorBasedBuilder):
   """This dataset takes in a manual directory of 10-second .mp3 files taken from Youtube.
-  It yields Audio using pydub AudioSegment and corresponding labels according to the CLASS_LABELS_CSV provided by Audioset.
+  It yields Audio using pydub AudioSegment and corresponding labels
+  according to the CLASS_LABELS_CSV provided by Audioset.
   """
 
   VERSION = tfds.core.Version('0.1.0')
@@ -70,19 +70,18 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
         },
       ),
     ]
-        
+
   def _generate_examples(self, data_dir=None):
     """Yields examples."""
-    TRIMMED_AUDIO_PATH = os.path.join(data_dir, 'trimmed_audio')
-    ID2LABEL_PATH = os.path.join(data_dir, 'id2label.json')
-    
-    my_files = tf.io.gfile.listdir(TRIMMED_AUDIO_PATH) #gets list of files in folder given
-    with tf.io.gfile.GFile(ID2LABEL_PATH, "r") as read_file: #uses json to match ids to labels
-      datas = json.load(read_file)    
+    trimmed_audio_path = os.path.join(data_dir, 'trimmed_audio')
+    id2label_path = os.path.join(data_dir, 'id2label.json')
+    my_files = tf.io.gfile.listdir(trimmed_audio_path) #gets list of files in folder given
+    with tf.io.gfile.GFile(id2label_path, "r") as read_file: #uses json to match ids to labels
+      datas = json.load(read_file)
     for f in my_files:
       try:
         label_list = []
-        filepath = os.path.join(TRIMMED_AUDIO_PATH,f)
+        filepath = os.path.join(trimmed_audio_path, f)
         with tf.io.gfile.GFile(filepath, "rb") as read_file:
           errorcheck = AudioSegment.from_file(read_file) #ignores bad mp3 files
         ids = f.replace(".mp3","")
@@ -99,5 +98,3 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
         }
       except:
         pass
-    
-
