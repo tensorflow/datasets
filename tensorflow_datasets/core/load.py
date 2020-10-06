@@ -29,6 +29,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -75,7 +76,6 @@ Check that:
       in `tfds-nightly`
     - the dataset name is spelled correctly
     - dataset class defines all base class abstract methods
-    - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
 """
 
@@ -101,15 +101,13 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
 
-  def __init__(self, name, is_abstract=False, in_development=False):
+  def __init__(self, name, is_abstract=False):
+    self.is_abstract = is_abstract
     all_datasets_str = "\n\t- ".join([""] + list_builders())
     if is_abstract:
       error_string = ("Dataset %s is an abstract class so cannot be created. "
                       "Please make sure to instantiate all abstract methods.\n"
                       "%s") % (name, _DATASET_NOT_FOUND_ERR)
-    elif in_development:
-      error_string = ("Dataset %s is under active development and is not "
-                      "available yet.\n") % name
     else:
       error_string = ("Dataset %s not found. Available datasets:%s\n"
                       "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
@@ -143,8 +141,6 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   # pylint: disable=protected-access
   if name in registered._ABSTRACT_DATASET_REGISTRY:
     raise DatasetNotFoundError(name, is_abstract=True)
-  if name in registered._IN_DEVELOPMENT_REGISTRY:
-    raise DatasetNotFoundError(name, in_development=True)
   if name not in registered._DATASET_REGISTRY:
     raise DatasetNotFoundError(name)
   return registered._DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
@@ -152,7 +148,10 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
 
 
 def builder(
-    name: str, **builder_init_kwargs: Any
+    name: str,
+    *,
+    data_dir: Optional[str] = None,
+    **builder_init_kwargs: Any
 ) -> dataset_builder.DatasetBuilder:
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
@@ -167,6 +166,7 @@ def builder(
       (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'` to
       use the `'zoo'` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
+    data_dir: Path to the dataset(s). See `tfds.load` for more information.
     **builder_init_kwargs: `dict` of keyword arguments passed to the
       `DatasetBuilder`. These will override keyword arguments passed in `name`,
       if any.
@@ -177,11 +177,37 @@ def builder(
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  builder_kwargs.update(builder_init_kwargs)
-  with py_utils.try_reraise(
-      prefix="Failed to construct dataset {}: ".format(name)):
-    return builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
+  builder_name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+
+  # Try loading the code (if it exists)
+  try:
+    cls = builder_cls(builder_name)
+  except DatasetNotFoundError as e:
+    if e.is_abstract:
+      raise  # Abstract can't be instanciated neither from code nor files.
+    cls = None  # Class not found
+    not_found_error = e  # Save the exception to eventually reraise
+
+  version_explicitly_given = "version" in builder_kwargs
+
+  # Try loading from files first:
+  # * If code not present.
+  # * If version explicitly given (backward/forward compatibility).
+  # Note: If `builder_init_kwargs` are set (e.g. version='experimental_latest',
+  # custom config,...), read from generation code.
+  if (not cls or version_explicitly_given) and not builder_init_kwargs:
+    builder_dir = find_builder_dir(name, data_dir=data_dir)
+    if builder_dir is not None:  # A generated dataset was found on disk
+      return read_only_builder.builder_from_directory(builder_dir)
+
+  # If loading from files was skipped (e.g. files not found), load from the
+  # source code.
+  if cls:
+    with py_utils.try_reraise(prefix=f"Failed to construct dataset {name}: "):
+      return cls(data_dir=data_dir, **builder_kwargs, **builder_init_kwargs)  # pytype: disable=not-instantiable
+
+  # If neither the code nor the files are found, raise DatasetNotFoundError
+  raise not_found_error
 
 
 def load(
@@ -338,7 +364,7 @@ def load(
 def find_builder_dir(
     name: str,
     *,
-    data_dir: str,
+    data_dir: Optional[str] = None,
 ) -> Optional[str]:
   """Search whether the given dataset is present on disk and return its path.
 
@@ -348,6 +374,9 @@ def find_builder_dir(
      is returned.
    * If the config isn't specified, the function try to infer the default
      config name from the original `DatasetBuilder`.
+   * The function searches in all `data_dir` registered with
+     `tfds.core.add_data_dir`. If the dataset exists in multiple dirs, an error
+     is raised.
 
   Args:
     name: Builder name (e.g. `my_ds`, `my_ds/config`, `my_ds:1.2.0`,...)
@@ -357,6 +386,41 @@ def find_builder_dir(
   Returns:
     path: The dataset path found, or None if the dataset isn't found.
   """
+  # Search the dataset across all registered data_dirs
+  all_builder_dirs = []
+  for current_data_dir in constants.list_data_dirs(given_data_dir=data_dir):
+    builder_dir = _find_builder_dir_single_dir(
+        name, data_dir=current_data_dir
+    )
+    if builder_dir:
+      all_builder_dirs.append(builder_dir)
+  if not all_builder_dirs:
+    return None
+  elif len(all_builder_dirs) != 1:
+    # Rather than raising error every time, we could potentially be smarter
+    # and load the most recent version across all files, but should be
+    # carefull when partial version is requested ('my_dataset:3.*.*').
+    # Could add some `MultiDataDirManager` API:
+    # ```
+    # manager = MultiDataDirManager(given_data_dir=data_dir)
+    # with manager.merge_data_dirs() as virtual_data_dir:
+    #  virtual_builder_dir = _find_builder_dir(name, data_dir=virtual_data_dir)
+    #  builder_dir = manager.resolve(virtual_builder_dir)
+    # ```
+    raise ValueError(
+        f"Dataset {name} detected in multiple locations: {all_builder_dirs}. "
+        "Please resolve the ambiguity by explicitly setting `data_dir=`."
+    )
+  else:
+    return next(iter(all_builder_dirs))  # List has a single element
+
+
+def _find_builder_dir_single_dir(
+    name: str,
+    *,
+    data_dir: str,
+) -> Optional[str]:
+  """Same as `find_builder_dir` but require explicit dir."""
   builder_name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   config_name = builder_kwargs.pop("config", None)
   version_str = builder_kwargs.pop("version", None)

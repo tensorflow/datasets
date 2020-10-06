@@ -21,9 +21,10 @@ import inspect
 import itertools
 import os
 import sys
-from typing import Any, Dict, Optional
+from typing import Any, ClassVar, Dict, List, Optional, Union
 
 from absl import logging
+import dataclasses
 import six
 import tensorflow.compat.v2 as tf
 
@@ -48,6 +49,9 @@ else:
   pathlib = Any
 
 
+VersionOrStr = Union[utils.Version, str]
+
+
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
@@ -65,41 +69,22 @@ GCS bucket (recommended if you're running on GCP), you can instead pass
 _is_py2_download_and_prepare_disabled = True
 
 
-class BuilderConfig(object):
+@dataclasses.dataclass(eq=False)
+class BuilderConfig:
   """Base class for `DatasetBuilder` data configuration.
 
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
   """
+  # TODO(py3.10): Should update dataclass to be:
+  # * Frozen (https://bugs.python.org/issue32953)
+  # * Kwargs-only (https://bugs.python.org/issue33129)
 
-  def __init__(self, *, name, version=None, supported_versions=None,
-               description=None):
-    self._name = name
-    self._version = version
-    self._supported_versions = supported_versions or []
-    self._description = description
-
-  @property
-  def name(self):
-    return self._name
-
-  @property
-  def version(self):
-    return self._version
-
-  @property
-  def supported_versions(self):
-    return self._supported_versions
-
-  @property
-  def description(self):
-    return self._description
-
-  def __repr__(self):
-    return "<{cls_name} name={name}, version={version}>".format(
-        cls_name=type(self).__name__,
-        name=self.name,
-        version=self.version or "None")
+  name: str
+  version: Optional[VersionOrStr] = None
+  release_notes: Optional[Dict[str, str]] = None
+  supported_versions: List[str] = dataclasses.field(default_factory=list)
+  description: Optional[str] = None
 
 
 class DatasetBuilder(registered.RegisteredDataset):
@@ -141,6 +126,11 @@ class DatasetBuilder(registered.RegisteredDataset):
   # Semantic version of the dataset (ex: tfds.core.Version('1.2.0'))
   VERSION = None
 
+  # Release notes
+  # Metadata only used for documentation. Should be a dict[version,description]
+  # Multi-lines are automatically dedent
+  RELEASE_NOTES: ClassVar[Dict[str, str]] = {}
+
   # List dataset versions which can be loaded using current code.
   # Data can only be prepared with canonical VERSION or above.
   SUPPORTED_VERSIONS = []
@@ -157,24 +147,33 @@ class DatasetBuilder(registered.RegisteredDataset):
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
-  def __init__(self, *, data_dir=None, config=None, version=None):
+  def __init__(
+      self,
+      *,
+      data_dir: Optional[utils.PathLike] = None,
+      config: Union[None, str, BuilderConfig] = None,
+      version: Union[None, str, utils.Version] = None,
+  ):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
 
     Args:
-      data_dir: `str`, directory to read/write data. Defaults to the value of
+      data_dir: directory to read/write data. Defaults to the value of
         the environment variable TFDS_DATA_DIR, if set, otherwise falls back to
         "~/tensorflow_datasets".
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
-      version: `str`. Optional version at which to load the dataset. An error is
+      version: Optional version at which to load the dataset. An error is
         raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
         The special value "experimental_latest" will use the highest version,
         even if not default. This is not recommended unless you know what you
         are doing, as the version could be broken.
     """
+    if data_dir:
+      data_dir = os.fspath(data_dir)  # Pathlib -> str
+
     # For pickling:
     self._original_state = dict(data_dir=data_dir, config=config,
                                 version=version)
@@ -664,24 +663,22 @@ class DatasetBuilder(registered.RegisteredDataset):
     builder_dir = self._relative_data_dir(with_version=False)
     version_dir = self._relative_data_dir(with_version=True)
 
-    # If the data dir is explicitly given, no need to search everywhere.
-    if given_data_dir:
-      default_data_dir = os.path.expanduser(given_data_dir)
-      all_data_dirs = [default_data_dir]
-    else:
-      default_data_dir = os.path.expanduser(constants.DATA_DIR)
-      all_data_dirs = constants.list_data_dirs()
+    default_data_dir = constants.get_default_data_dir(
+        given_data_dir=given_data_dir
+    )
+    all_data_dirs = constants.list_data_dirs(given_data_dir=given_data_dir)
 
-    all_version_dirs = set()
+    all_versions = set()
     requested_version_dirs = {}
     for data_dir_root in all_data_dirs:
       # List all existing versions
-      all_version_dirs.update(
-          _list_all_version_dirs(os.path.join(data_dir_root, builder_dir)))
-      # Check for existance of the requested dir
-      requested_version_dir = os.path.join(data_dir_root, version_dir)
-      if requested_version_dir in all_version_dirs:
-        requested_version_dirs[data_dir_root] = requested_version_dir
+      full_builder_dir = os.path.join(data_dir_root, builder_dir)
+      all_versions.update(utils.version.list_all_versions(full_builder_dir))
+      # Check for existance of the requested version
+      if self.version in all_versions:
+        requested_version_dirs[data_dir_root] = os.path.join(
+            data_dir_root, version_dir
+        )
 
     if len(requested_version_dirs) > 1:
       raise ValueError(
@@ -693,12 +690,12 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     # No dataset found, use default directory
     data_dir = os.path.join(default_data_dir, version_dir)
-    if all_version_dirs:
+    if all_versions:
       logging.warning(
           "Found a different version of the requested dataset:\n"
           "%s\n"
           "Using %s instead.",
-          "\n".join(sorted(all_version_dirs)),
+          "\n".join(str(v) for v in sorted(all_versions)),
           data_dir
       )
     return default_data_dir, data_dir
@@ -849,24 +846,6 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise ValueError(
           "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names)
     return config_dict
-
-
-def _list_all_version_dirs(root_dir):
-  """Lists all dataset versions present on disk."""
-  if not tf.io.gfile.exists(root_dir):
-    return []
-
-  def _is_version_valid(version):
-    try:
-      return utils.Version(version) and True
-    except ValueError:  # Invalid version (ex: incomplete data dir)
-      return False
-
-  return [  # Return all version dirs
-      os.path.join(root_dir, version)
-      for version in tf.io.gfile.listdir(root_dir)
-      if _is_version_valid(version)
-  ]
 
 
 class FileReaderBuilder(DatasetBuilder):

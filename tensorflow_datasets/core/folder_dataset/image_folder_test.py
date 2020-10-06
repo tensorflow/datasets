@@ -18,11 +18,14 @@
 import os
 from unittest import mock
 
+import tensorflow.compat.v2 as tf
+
 from tensorflow_datasets.core.folder_dataset import image_folder
 import tensorflow_datasets.public_api as tfds
 
 _EXAMPLE_DIR = os.path.join(
-    tfds.testing.test_utils.fake_examples_dir(), 'image_folder')
+    tfds.testing.test_utils.fake_examples_dir(), 'image_folder'
+)
 
 original_init = tfds.ImageFolder.__init__
 original_download_and_prepare = tfds.ImageFolder.download_and_prepare
@@ -88,6 +91,9 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
 
       split_examples, labels = image_folder._get_split_label_images('root_dir')
       builder = tfds.ImageFolder(root_dir='root_dir')
+      builder_params = tfds.ImageFolder(
+          root_dir='root_dir', dtype=tf.uint16, shape=(128, 128, 1)
+      )
 
     self.assertEqual(split_examples, {
         'train': [
@@ -131,6 +137,11 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
     ]
     self.assertEqual(expected_labels, labels)
     self.assertEqual(builder.info.features['label'].names, expected_labels)
+
+    self.assertEqual(builder.info.features['image'].shape, (None, None, 3))
+    self.assertEqual(builder.info.features['image'].dtype, tf.uint8)
+    self.assertEqual(builder_params.info.features['image'].shape, (128, 128, 1))
+    self.assertEqual(builder_params.info.features['image'].dtype, tf.uint16)
 
 
 if __name__ == '__main__':

@@ -38,8 +38,8 @@ The following commands (or equivalent) should be used to generate the PNG files,
 in order to guarantee reproducible results:
 
 ```
-find $DATASET_DCIM_DIR -name '*.dcm' | \
-xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+  find $DATASET_DCIM_DIR -name '*.dcm' | \
+  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
 ```
 
 *   **Homepage**:
@@ -52,7 +52,7 @@ xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
 
     *   **`2.0.1`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New split API (https://tensorflow.org/datasets/splits)
+        No release notes.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`

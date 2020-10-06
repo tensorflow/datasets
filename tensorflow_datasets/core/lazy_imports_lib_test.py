@@ -38,6 +38,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "pydub",
       "scipy",
       "skimage",
+      "tifffile",
       "tldextract",
   )
   def test_import(self, module_name):

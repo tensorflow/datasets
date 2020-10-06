@@ -31,8 +31,7 @@ cropped to 32x32.
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): No release notes.
     *   `3.1.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.

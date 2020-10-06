@@ -18,13 +18,14 @@
 import collections
 import os
 import random
-from typing import Dict, List, NoReturn, Tuple
+from typing import Dict, List, NoReturn, Optional, Tuple
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import splits as split_lib
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
 
 _SUPPORTED_IMAGE_FORMAT = ('.jpg', '.jpeg', '.png')
@@ -71,7 +72,22 @@ class ImageFolder(dataset_builder.DatasetBuilder):
 
   VERSION = version.Version('1.0.0')
 
-  def __init__(self, root_dir: str):
+  def __init__(
+      self,
+      root_dir: str,
+      *,
+      shape: Optional[type_utils.Shape] = None,
+      dtype: Optional[tf.DType] = None,
+  ):
+    """Construct the `DatasetBuilder`.
+
+    Args:
+      root_dir: Path to the directory containing the images.
+      shape: Image shape forwarded to `tfds.features.Image`.
+      dtype: Image dtype forwarded to `tfds.features.Image`.
+    """
+    self._image_shape = shape
+    self._image_dtype = dtype
     super(ImageFolder, self).__init__()
     self._data_dir = root_dir  # Set data_dir to the existing dir.
 
@@ -96,7 +112,10 @@ class ImageFolder(dataset_builder.DatasetBuilder):
         builder=self,
         description='Generic image classification dataset.',
         features=features_lib.FeaturesDict({
-            'image': features_lib.Image(),
+            'image': features_lib.Image(
+                shape=self._image_shape,
+                dtype=self._image_dtype,
+            ),
             'label': features_lib.ClassLabel(),
             'image/filename': features_lib.Text(),
         }),

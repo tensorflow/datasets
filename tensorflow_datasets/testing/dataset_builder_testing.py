@@ -33,8 +33,8 @@ from tensorflow_datasets.core import load
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.testing import feature_test_case
 from tensorflow_datasets.testing import test_utils
-
 
 # `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
@@ -79,7 +79,9 @@ def _np_load(file_, mmap_mode=None, allow_pickle=False, **kwargs):
   return _ORGINAL_NP_LOAD(file_, mmap_mode, allow_pickle, **kwargs)
 
 
-class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
+class DatasetBuilderTestCase(
+    parameterized.TestCase, feature_test_case.SubTestCase
+):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
@@ -230,10 +232,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   def test_registered(self):
     is_registered = self.builder.name in load.list_builders()
-    exceptions = self.builder.IN_DEVELOPMENT
-    self.assertTrue(is_registered or exceptions,
-                    "Dataset {} was not registered and is "
-                    "not `IN_DEVELOPMENT`.".format(self.builder.name))
+    self.assertTrue(
+        is_registered,
+        f"Dataset {self.builder.name} was not registered.",
+    )
 
   def test_info(self):
     info = self.builder.info

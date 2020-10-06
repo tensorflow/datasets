@@ -20,8 +20,13 @@ are still on `registered_test.py`.
 """
 
 import functools
+import os
+from unittest import mock
+
+import pytest
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import load
 
@@ -30,6 +35,26 @@ from tensorflow_datasets.core import load
 _find_builder_dir = functools.partial(
     load.find_builder_dir, data_dir='path/to'
 )
+
+
+def test_find_builder_dir_with_multiple_data_dir(mock_fs: testing.MockFs):
+  mock_fs.add_file('path/to/ds0/1.0.0/features.json')
+
+  # Dataset not found.
+  assert load.find_builder_dir('ds0') is None
+
+  with mock.patch.object(
+      constants,
+      'list_data_dirs',
+      return_value=[constants.DATA_DIR, 'path/to'],
+  ):
+    assert load.find_builder_dir('ds0') == 'path/to/ds0/1.0.0'
+
+    # Dataset present in 2 different data_dir
+    duplicate_path = os.path.join(constants.DATA_DIR, 'ds0/1.0.0/features.json')
+    mock_fs.add_file(duplicate_path)
+    with pytest.raises(ValueError, match='detected in multiple locations'):
+      load.find_builder_dir('ds0')
 
 
 def test_find_builder_dir_legacy_ds(mock_fs: testing.MockFs):

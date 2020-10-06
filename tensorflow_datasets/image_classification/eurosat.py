@@ -157,7 +157,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
 
 def _extract_channels(filename):
   with tf.io.gfile.GFile(filename, 'rb') as f:
-    arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(
+    arr = tfds.core.lazy_imports.tifffile.imread(
         io.BytesIO(f.read()))
 
   arr = arr.astype('float32')

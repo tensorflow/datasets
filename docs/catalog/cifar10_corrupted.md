@@ -26,8 +26,7 @@ the corrupted Cifar10 test images uploaded by the original authors.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `2.72 GiB`
 

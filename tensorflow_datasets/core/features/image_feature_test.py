@@ -32,23 +32,34 @@ randint = np.random.randint
 class ImageFeatureTest(
     testing.FeatureExpectationsTestCase, parameterized.TestCase):
 
-  @parameterized.parameters(tf.uint8, tf.uint16)
-  def test_images(self, dtype):
+  @parameterized.parameters(
+      (tf.uint8, 3),
+      (tf.uint16, 3),
+      (tf.uint8, 4),
+  )
+  def test_images(self, dtype, channels):
     np_dtype = dtype.as_numpy_dtype
-    img = randint(256, size=(128, 100, 3), dtype=np_dtype)
-    img_other_shape = randint(256, size=(64, 200, 3), dtype=np_dtype)
-    img_file_path = os.path.join(os.path.dirname(__file__),
-                                 '../../testing/test_data/6pixels.png')
+    img = randint(256, size=(128, 100, channels), dtype=np_dtype)
+    img_other_shape = randint(256, size=(64, 200, channels), dtype=np_dtype)
+
+    filename = {
+        3: '6pixels.png',
+        4: '6pixels_4chan.png',
+    }[channels]
+
+    img_file_path = os.path.join(
+        os.path.dirname(__file__), '../../testing/test_data', filename
+    )
     img_file_expected_content = np.array([  # see tests_data/README.md
-        [[0, 255, 0], [255, 0, 0], [255, 0, 255]],
-        [[0, 0, 255], [255, 255, 0], [126, 127, 128]],
-    ], dtype=np_dtype)
+        [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
+        [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
+    ], dtype=np_dtype)[:, :, :channels]  # Truncate (h, w, 4) -> (h, w, c)
     if dtype == tf.uint16:
       img_file_expected_content *= 257  # Scale int16 images
 
     self.assertFeature(
-        feature=features_lib.Image(dtype=dtype),
-        shape=(None, None, 3),
+        feature=features_lib.Image(shape=(None, None, channels), dtype=dtype),
+        shape=(None, None, channels),
         dtype=dtype,
         tests=[
             # Numpy array
@@ -68,7 +79,7 @@ class ImageFeatureTest(
             ),
             # Invalid type
             testing.FeatureExpectationItem(
-                value=randint(256, size=(128, 128, 3), dtype=np.uint32),
+                value=randint(256, size=(128, 128, channels), dtype=np.uint32),
                 raise_cls=ValueError,
                 raise_msg='dtype should be',
             ),

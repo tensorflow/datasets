@@ -35,7 +35,7 @@ ENCODE_FN = {
 }
 
 ACCEPTABLE_CHANNELS = {
-    'png': (0, 1, 2, 3),
+    'png': (0, 1, 2, 3, 4),
     'jpeg': (0, 1, 3),
 }
 

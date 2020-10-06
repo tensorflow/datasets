@@ -27,8 +27,7 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `80.23 MiB`
 

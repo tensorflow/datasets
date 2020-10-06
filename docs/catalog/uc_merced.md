@@ -29,8 +29,7 @@ While most images are 256x256 pixels, there are 44 images with different shape.
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `317.07 MiB`
 

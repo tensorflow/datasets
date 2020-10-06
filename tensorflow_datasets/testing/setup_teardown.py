@@ -13,22 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Version info (development version).
+"""Setup/teardown fixtures common to unittest/pytest.
 
-All users importing TFDS from `tfds-nightly` or synced to head will see
-the `-nightly` suffix.
+* Unittest: Those functions are wrapped in `@contextlib.contextmanager` and
+  called in `setUpClass`/`tearDownClass`.
+* Pytest: Those functions are wrapped in `@fixture`.
 
-This file is replaced by `version_stable.py` for stable releases
-(`tensorflow-datasets`) on PyPI.
 """
-
-# We follow Semantic Versioning (https://semver.org/)
-_MAJOR_VERSION = '3'
-_MINOR_VERSION = '2'
-_PATCH_VERSION = '1'
-
-__version__ = '.'.join([
-    _MAJOR_VERSION,
-    _MINOR_VERSION,
-    _PATCH_VERSION,
-]) + '+nightly'

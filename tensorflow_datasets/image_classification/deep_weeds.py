@@ -65,12 +65,15 @@ _CITATION = """\
 class DeepWeeds(tfds.core.GeneratorBasedBuilder):
   """DeepWeeds Image Dataset Class."""
 
-  VERSION = tfds.core.Version("2.0.0", "Fixes wrong labels in V1.")
+  VERSION = tfds.core.Version("2.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
           "1.0.0",
           tfds_version_to_prepare="c28a63fa9d9fb9ba3cced7052ea243e8884f9bf1"),
   ]
+  RELEASE_NOTES = {
+      "2.0.0": "Fixes wrong labels in V1.",
+  }
 
   def _info(self):
     """Define Dataset Info."""
@@ -89,11 +92,8 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
-    # The file is in ZIP format, but URL doesn't mention it.
     paths = dl_manager.download_and_extract({
-        "image": tfds.download.Resource(
-            url=_URL,
-            extract_method=tfds.download.ExtractMethod.ZIP),
+        "image": _URL,
         "label": _URL_LABELS})
 
     return [

@@ -98,11 +98,13 @@ CelebA dataset.
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version(
-      "2.0.1", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.1")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.1": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

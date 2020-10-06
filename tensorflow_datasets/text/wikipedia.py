@@ -84,6 +84,7 @@ WIKIPEDIA_LANGUAGES = [
     "war", "wo", "wuu", "xal", "xh", "xmf", "yi", "yo", "za", "zea", "zh",
     "zh-classical", "zh-min-nan", "zh-yue", "zu"]
 
+# Use mirror (your.org) to avoid download caps.
 _BASE_URL_TMPL = "https://dumps.wikimedia.your.org/{lang}wiki/{date}/"
 _INFO_FILE = "dumpstatus.json"
 
@@ -108,18 +109,19 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     self.date = date
     self.language = language
 
-
-_VERSION = tfds.core.Version(
-    "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+_VERSION = tfds.core.Version("1.0.0")
+_RELEASE_NOTES = {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+}
 
 
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
-  # Use mirror (your.org) to avoid download caps.
 
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
+          release_notes=_RELEASE_NOTES,
           language=lang,
           date="20200301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -128,6 +130,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       # previously generated datasets can still be read.
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
+          release_notes=_RELEASE_NOTES,
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES

@@ -15,13 +15,15 @@ import itertools
 import os
 import sys
 
+import pkg_resources
 from setuptools import find_packages
 from setuptools import setup
 
-nightly = False
 if '--nightly' in sys.argv:
   nightly = True
   sys.argv.remove('--nightly')
+else:
+  nightly = False
 
 project_name = 'tensorflow-datasets'
 
@@ -33,9 +35,11 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 
 if nightly:
   project_name = 'tfds-nightly'
+  # Version as `X.Y.Z.dev199912312459`
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  __version__ += 'dev%s' % datestring
+  curr_version = pkg_resources.parse_version(__version__)
+  __version__ = f'{curr_version.base_version}.dev{datestring}'
 
 
 DOCLINES = __doc__.split('\n')
@@ -120,7 +124,7 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
-    'eurosat': ['scikit-image',],
+    'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative

@@ -29,8 +29,7 @@ separable from each other.
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `4.44 KiB`
 

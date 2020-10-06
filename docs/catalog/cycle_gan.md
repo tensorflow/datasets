@@ -28,8 +28,7 @@ horses/zebras, apple/orange,...)
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 

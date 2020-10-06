@@ -24,6 +24,7 @@ from absl.testing import absltest
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.testing import setup_teardown
 
 
 GCS_ACCESS_FNS = {
@@ -48,6 +49,19 @@ class TestCase(tf.test.TestCase):
     # Test must not communicate with GCS.
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
     gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
+
+    # Apply the context managers
+    cls._setup_cls_cms = []
+    cms_to_apply = []
+    for cm in cms_to_apply:
+      cm = contextlib.contextmanager(cm)()
+      cm.__enter__()
+      cls._setup_cls_cms.append(cm)
+
+  @classmethod
+  def tearDownClass(cls):
+    for cm in cls._setup_cls_cms:
+      cm.__exit__(None, None, None)
 
   @contextlib.contextmanager
   def gcs_access(self):

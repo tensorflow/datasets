@@ -85,8 +85,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
     """Define splits."""
 
     dl_paths = dl_manager.download_and_extract({
-        "texture_vs_shape": tfds.download.Resource(
-            url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.ZIP),
+        "texture_vs_shape": _DOWNLOAD_URL,
         "imagenet_mapping": _IMAGENET_MAPPING_URL
     })
 

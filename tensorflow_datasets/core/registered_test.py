@@ -50,11 +50,6 @@ class UnregisteredBuilder(EmptyDatasetBuilder):
     pass
 
 
-class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
-
-  IN_DEVELOPMENT = True
-
-
 class RegisteredTest(testing.TestCase):
 
   def test_registered(self):
@@ -89,17 +84,6 @@ class RegisteredTest(testing.TestCase):
     self.assertNotIn(name, load.list_builders())
 
     with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
-      load.builder(name)
-
-  def test_in_development(self):
-    name = "in_development_dataset_builder"
-    self.assertEqual(name, InDevelopmentDatasetBuilder.name)
-    self.assertNotIn(name, load.list_builders())
-
-    with self.assertRaisesWithPredicateMatch(
-        ValueError,
-        ("Dataset %s is under active development and is not available yet."
-        ) % name):
       load.builder(name)
 
   def test_builder_with_kwargs(self):
@@ -189,14 +173,18 @@ class RegisteredTest(testing.TestCase):
       self.assertNotIn(name, load.list_builders())
 
       class ColabBuilder(registered.RegisteredDataset):
-        pass
+
+        def __init__(self, **kwargs):
+          del kwargs
 
       self.assertIn(name, load.list_builders())
       self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
       class ColabBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
-        pass
+
+        def __init__(self, **kwargs):
+          del kwargs
 
       self.assertIsInstance(load.builder(name), ColabBuilder)
       self.assertNotIsInstance(load.builder(name), old_colab_class)

@@ -29,8 +29,7 @@ boxes.
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): No release notes.
 
 *   **Download size**: `125.64 MiB`
 

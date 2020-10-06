@@ -73,10 +73,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           description=(
               "A dataset consisting of Train and Validation images of " +
               config_name + " resolution."),
-          version=tfds.core.Version(
-              "2.0.0",
-              "New split API (https://tensorflow.org/datasets/splits)"),
+          version=tfds.core.Version("2.0.0"),
           data=config_name,
+          release_notes={
+              "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+          },
       ) for config_name in _DATA_OPTIONS
   ]
 

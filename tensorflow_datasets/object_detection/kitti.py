@@ -68,10 +68,13 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.2.0", "Devkit updated.")
+  VERSION = tfds.core.Version("3.2.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.1.0"),
   ]
+  RELEASE_NOTES = {
+      "3.2.0": "Devkit updated."
+  }
 
   def _info(self):
     # Annotation descriptions are in the object development kit.

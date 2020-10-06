@@ -33,13 +33,13 @@ each highlight, which is the target summary
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default): Using cased version.
+    *   **`3.0.0`** (default): No release notes.
     *   `1.0.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New split API (https://tensorflow.org/datasets/splits)
+        No release notes.
     *   `2.0.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Separate target sentences with newline.
+        No release notes.
 
 *   **Download size**: `558.32 MiB`
 

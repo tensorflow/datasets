@@ -54,8 +54,10 @@ _NUM_ALPHABETS = 50
 class Omniglot(tfds.core.GeneratorBasedBuilder):
   """Omniglot dataset."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

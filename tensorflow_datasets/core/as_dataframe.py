@@ -83,7 +83,7 @@ class ColumnInfo:
 
 
 def _get_feature(
-    path: Tuple[str],
+    path: Tuple[str, ...],
     feature: features.FeatureConnector,
 ) -> Tuple[features.FeatureConnector, int]:
   """Recursively extracts the feature and sequence rank (plain, ragged, ...)."""
@@ -97,7 +97,7 @@ def _get_feature(
 
   if path:  # Has level deeper, recurse
     feature = typing.cast(features.FeaturesDict, feature)
-    feature, nested_sequence_rank = _get_feature(path[1:], feature[path[0]])
+    feature, nested_sequence_rank = _get_feature(path[1:], feature[path[0]])  # pytype: disable=wrong-arg-types
     sequence_rank += nested_sequence_rank
 
   return feature, sequence_rank

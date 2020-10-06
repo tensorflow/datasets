@@ -40,11 +40,10 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Versions**:
 
-    *   **`2.1.0`** (default): Using updated optical channels calibration
-        factor.
+    *   **`2.1.0`** (default): No release notes.
     *   `2.0.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New split API (https://tensorflow.org/datasets/splits)
+        No release notes.
 
 *   **Download size**: `Unknown size`
 

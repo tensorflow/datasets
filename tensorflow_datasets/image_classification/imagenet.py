@@ -136,10 +136,22 @@ PNG_IMAGES = ['n02105855_2933.JPEG']
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('5.1.0', 'Added test split.')
+  VERSION = tfds.core.Version('5.1.0')
   SUPPORTED_VERSIONS = [
       tfds.core.Version('5.0.0'),
   ]
+  RELEASE_NOTES = {
+      '5.1.0': 'Added test split.',
+      '5.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+      '4.0.0': '(unpublished)',
+      '3.0.0': """
+      Fix colorization on ~12 images (CMYK -> RGB).
+      Fix format for consistency (convert the single png image to Jpeg).
+      Faster generation reading directly from the archive.
+      """,
+      '2.0.1': 'Encoding fix. No changes from user point of view.',
+      '2.0.0': 'Fix validation labels.',
+  }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   manual_dir should contain two files: ILSVRC2012_img_train.tar and
