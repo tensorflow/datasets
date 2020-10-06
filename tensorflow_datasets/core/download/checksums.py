@@ -54,19 +54,8 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
     # TODO(tfds): Replace by `dataclasses.asdict(self)`
     return dataclasses.asdict(self)
 
-  def __eq__(self, other) -> bool:
-    return (
-        type(self) == type(other) and  # pylint: disable=unidiomatic-typecheck
-        self.size == other.size and
-        self.checksum == other.checksum
-    )
-
   def __ne__(self, other) -> bool:  # Required in Py2
     return not self == other
-
-  def __repr__(self) -> str:
-    return '{}(size={}, checksum={})'.format(
-        type(self).__name__, self.size, self.checksum)
 
 
 def add_checksums_dir(checksums_dir: str) -> None:
