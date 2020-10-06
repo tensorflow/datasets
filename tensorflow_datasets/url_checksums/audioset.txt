@@ -1,3 +1,3 @@
-# TODO(audioset): If your dataset downloads files, then the checksums will be
-# automatically added here when running the download_and_prepare script
-# with --register_checksums.
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/balanced_train_segments.csv
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_labels_indices.csv
+https://storage.googleapis.com/bme590/william/manual/id2label.json
