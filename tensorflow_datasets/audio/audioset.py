@@ -1,4 +1,19 @@
-"""audioset dataset."""
+# coding=utf-8
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Google AudioSet Dataset"""
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -7,86 +22,82 @@ import os
 import json
 import numpy as np
 from pydub import AudioSegment
-# TODO(audioset): BibTeX citation
+
 _CITATION = """
+@inproceedings{45857,
+title   = {Audio Set: An ontology and human-labeled dataset for audio events},
+author  = {Jort F. Gemmeke and Daniel P. W. Ellis and Dylan Freedman and Aren Jansen and Wade Lawrence and R. Channing Moore and Manoj Plakal and Marvin Ritter},
+year    = {2017},
+booktitle  = {Proc. IEEE ICASSP 2017},
+address = {New Orleans, LA}
+}
 """
 
-# TODO(audioset):
 _DESCRIPTION = """
+The AudioSet dataset is a large-scale collection of human-labeled 10-second sound clips drawn from YouTube videos. 
+To collect all our data we worked with human annotators who verified the presence of sounds they heard within YouTube segments. 
+To nominate segments for annotation, we relied on YouTube metadata and content-based search.
 """
-"""Audio feature."""
 
 class Audioset(tfds.core.GeneratorBasedBuilder):
-    """TODO(audioset): Short description of my dataset."""
+  """This dataset takes in a manual directory of 10-second .mp3 files taken from Youtube.
+  It yields Audio using pydub AudioSegment and corresponding labels according to the CLASS_LABELS_CSV provided by Audioset.
+  """
 
-  # TODO(audioset): Set up version.
-    VERSION = tfds.core.Version('0.1.0')
-    MANUAL_DOWNLOAD_INSTRUCTIONS = 'give bucket path gs://bme590/william/manual'
-    def _info(self):
-        # TODO(audioset): Specifies the tfds.core.DatasetInfo object
-        return tfds.core.DatasetInfo(
-            builder=self,
-            # This is the description that will appear on the datasets page.
-            description=_DESCRIPTION,
-            # tfds.features.FeatureConnectors
-            features=tfds.features.FeaturesDict({
-                'audio': tfds.features.Audio(file_format=None, sample_rate=48000),
-                'label': tfds.features.Tensor(shape=(None,), dtype=tf.int32)
-                # These are the features of your dataset like images, labels ...
-            }),
-            # If there's a common (input, target) tuple from the features,
-            # specify them here. They'll be used if as_supervised=True in
-            # builder.as_dataset.
-            supervised_keys=('audio','label'),
-            # Homepage of the dataset for documentation
-            homepage='https://dataset-homepage/',
-            citation=_CITATION,
-        )
+  VERSION = tfds.core.Version('0.1.0')
+  MANUAL_DOWNLOAD_INSTRUCTIONS = 'give bucket path gs://bme590/william/manual'
+  def _info(self):
+    return tfds.core.DatasetInfo(
+      builder=self,
+      description=_DESCRIPTION,
+      features=tfds.features.FeaturesDict({
+        'audio': tfds.features.Audio(file_format=None, sample_rate=48000),
+        'label': tfds.features.Tensor(shape=(None,), dtype=tf.int32)
+      }),
+      supervised_keys=('audio','label'),
+      homepage='https://research.google.com/audioset/index.html',
+      citation=_CITATION,
+    )
 
-    def _split_generators(self, dl_manager):
-        """Returns SplitGenerators."""
-        # TODO(audioset): Downloads the data and defines the splits
-        # dl_manager is a tfds.download.DownloadManager that can be used to
-        # download and extract URLs
-        data_dir = dl_manager.manual_dir
-
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                # These kwargs will be passed to _generate_examples
-                gen_kwargs={
-                    'data_dir': data_dir
-                },
-            ),
-        ]
-
-
+  def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
+    data_dir = dl_manager.manual_dir
+    return [
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TRAIN,
+        gen_kwargs={
+          'data_dir': data_dir
+        },
+      ),
+    ]
         
-    def _generate_examples(self, data_dir=None):
-        """Yields examples."""
-        my_files = tf.io.gfile.listdir(os.path.join(data_dir, 'trimmed_audio')) #gets list of files in folder given
-        with tf.io.gfile.GFile(os.path.join(data_dir, 'id2label.json'), "r") as read_file: #uses json to match ids to labels
-            datas = json.load(read_file)
-        
-        for f in my_files:
-            try:
-                label_list = []
-                filepath = os.path.join(data_dir,'trimmed_audio',f)
-                with tf.io.gfile.GFile(filepath, "rb") as read_file:
-                    errorcheck = AudioSegment.from_file(read_file) #ignores bad mp3 files
-                ids = f.replace(".mp3","")
-                for x in datas[ids]:
-                    for y in x:
-                        label_list.append(y) #gets multiple labels index that apply to audio in a list in label_list
-                    label_tensor = np.zeros(527, dtype=np.int32)
-                    for i in label_list:
-                        label_tensor[i] = 1 # creates a tensor of zeros with ones at indices that indicate positive for a label
-                    break
-                yield f, {
-                    'audio': filepath,
-                    'label': label_tensor,
-                }
-            except:
-                pass
+  def _generate_examples(self, data_dir=None):
+    """Yields examples."""
+    TRIMMED_AUDIO_PATH = os.path.join(data_dir, 'trimmed_audio')
+    ID2LABEL_PATH = os.path.join(data_dir, 'id2label.json')
+    
+    my_files = tf.io.gfile.listdir(TRIMMED_AUDIO_PATH) #gets list of files in folder given
+    with tf.io.gfile.GFile(ID2LABEL_PATH, "r") as read_file: #uses json to match ids to labels
+      datas = json.load(read_file)    
+    for f in my_files:
+      try:
+        label_list = []
+        filepath = os.path.join(TRIMMED_AUDIO_PATH,f)
+        with tf.io.gfile.GFile(filepath, "rb") as read_file:
+          errorcheck = AudioSegment.from_file(read_file) #ignores bad mp3 files
+        ids = f.replace(".mp3","")
+        for x in datas[ids]:
+          for y in x:
+            label_list.append(y) #gets multiple labels index that apply to audio in a list in label_list
+          label_tensor = np.zeros(527, dtype=np.int32)
+          for i in label_list:
+            label_tensor[i] = 1 # creates a tensor of zeros with ones at indices that indicate positive for a label
+          break
+        yield f, {
+          'audio': filepath,
+          'label': label_tensor,
+        }
+      except:
+        pass
     
 
