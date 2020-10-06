@@ -193,14 +193,17 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           'the train and/or val set and place them into: {}, {}'.format(
               train_path, val_path))
     splits=[]
-    self._add_split_if_exists(splits, tfds.Split.TRAIN, train_path)
-    self._add_split_if_exists(splits, tfds.Split.VALIDATION, val_path,
-                     'validation_labels': self._get_validation_labels(val_path))
-    self._add_split_if_exists(splits, tfds.Split.TEST, test_path,
-                     'labels_exist': False)
+    self._add_split_if_exists(split_list=splits, split=tfds.Split.TRAIN,
+            split_path=train_path, dl_manager=dl_manager)
+    self._add_split_if_exists(split_list=splits, split=tfds.Split.VALIDATION,
+            split_path=val_path,   dl_manager=dl_manager,
+            validation_labels=self._get_validation_labels(val_path))
+    self._add_split_if_exists(split_list=splits, split=tfds.Split.TEST,
+            split_path=test_path,  dl_manager=dl_manager,
+            labels_exist=False)
     return splits
 
-  def _add_split_if_exists(split_list, split, split_path, **kwargs):
+  def _add_split_if_exists(self, split_list, split, split_path, dl_manager, **kwargs):
         """Add split to given list of splits only if the file exists"""
         if not tf.io.gfile.exists(split_path):
           logging.warning('ImageNet 2012 Challenge %s split not found at %s. '
