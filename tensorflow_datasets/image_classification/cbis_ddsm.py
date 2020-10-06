@@ -709,8 +709,8 @@ def _sample_positive_patches(image,
     # Determine the region where random samples should be sampled from.
     max_h, min_h = max(abnorm_h, patch_size[0]), min(abnorm_h, patch_size[0])
     max_w, min_w = max(abnorm_w, patch_size[1]), min(abnorm_w, patch_size[1])
-    min_y = abnorm_y - int(max_h - min_h) - int((1.0 - min_overlap_threshold) * min_h)
-    min_x = abnorm_x - int(max_w - min_w) - int((1.0 - min_overlap_threshold) * min_w)
+    min_y = abnorm_y - max_h + min_overlap_threshold * min_h
+    min_x = abnorm_x - max_w + min_overlap_threshold * min_w
     max_y = abnorm_y + abnorm_h - int(min_overlap_threshold * min_h)
     max_x = abnorm_x + abnorm_w - int(min_overlap_threshold * min_w)
     # Ensure that all sampled batches are within the image.
