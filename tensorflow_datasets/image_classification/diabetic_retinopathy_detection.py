@@ -55,9 +55,10 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forward to super.
     """
     super(DiabeticRetinopathyDetectionConfig, self).__init__(
-        version=tfds.core.Version(
-            "3.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("3.0.0"),
+        release_notes={
+            "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self._target_pixels = target_pixels
 

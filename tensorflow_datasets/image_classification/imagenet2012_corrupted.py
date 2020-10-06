@@ -100,10 +100,11 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
 
 
 _VERSION = tfds.core.Version('3.1.0')
-
-# Version history:
-# 3.1.0: Implement missing corruptions. Fix crop/resize ordering, file encoding
-# 0.0.1: Initial dataset.
+_RELEASE_NOTES = {
+    '0.0.1': 'Initial dataset',
+    '3.1.0':
+    'Implement missing corruptions. Fix crop/resize ordering, file encoding',
+}
 
 
 def _make_builder_configs():
@@ -125,6 +126,7 @@ def _make_builder_configs():
           Imagenet2012CorruptedConfig(
               name=name_str,
               version=_VERSION,
+              release_notes=_RELEASE_NOTES,
               description=description_str,
               corruption_type=each_corruption,
               severity=each_severity,
