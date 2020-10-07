@@ -128,6 +128,9 @@ class DatasetInfo(object):
         config_name=(
             builder.builder_config.name if builder.builder_config else None
         ),
+        config_description=(
+            builder.builder_config.description if builder.builder_config else None
+        ),
         citation=utils.dedent(citation),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             license=utils.dedent(redistribution_info.pop("license")),
