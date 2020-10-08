@@ -42,6 +42,7 @@ from tensorflow_datasets.image_classification.eurosat import Eurosat
 from tensorflow_datasets.image_classification.flowers import TFFlowers
 from tensorflow_datasets.image_classification.food101 import Food101
 from tensorflow_datasets.image_classification.geirhos_conflict_stimuli import GeirhosConflictStimuli
+from tensorflow_datasets.image_classification.grocery import Grocery
 from tensorflow_datasets.image_classification.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 from tensorflow_datasets.image_classification.imagenet2012_corrupted import Imagenet2012Corrupted
@@ -83,4 +84,3 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image_classification.grocery import Grocery  # TODO(grocery) Sort alphabetically
