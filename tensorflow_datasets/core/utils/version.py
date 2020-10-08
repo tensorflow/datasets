@@ -170,6 +170,12 @@ def list_all_versions(root_dir: str) -> List[Version]:
   if not tf.io.gfile.exists(root_dir):
     return []
 
+  paths = tf.io.gfile.listdir(root_dir)
+
+  # Strip trailing slash if listing a GCS bucket.
+  if root_dir.startswith("gs://"):
+    paths = [path.rstrip("/") for path in paths]
+
   return sorted(  # Return all versions
-      Version(v) for v in tf.io.gfile.listdir(root_dir) if Version.is_valid(v)
+      Version(v) for v in paths if Version.is_valid(v)
   )
