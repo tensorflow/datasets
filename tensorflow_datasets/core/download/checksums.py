@@ -178,8 +178,7 @@ def get_all_url_infos() -> Dict[str, UrlInfo]:
   return url_infos
 
 
-def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo],
-                    record_checksums: bool=False) -> None:
+def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
   """Store given checksums and sizes for specific dataset.
 
   Content of file is never disgarded, only updated. This is to ensure that if
@@ -205,9 +204,7 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo],
     return
   with tf.io.gfile.GFile(path, 'w') as f:
     for url, url_info in sorted(new_data.items()):
-      if record_checksums:
-          if url_info.filename == None:
-              url_info.filename = dataset_name
+      if url_info.filename != None:
           f.write('{}\t{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum,
                                             url_info.filename))
       else:
