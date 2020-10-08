@@ -331,10 +331,8 @@ def load(
       Split-specific information is available in `ds_info.splits`.
   """
   # pylint: enable=line-too-long
-
-  name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  name_builder_kwargs.update(builder_kwargs or {})
-  builder_kwargs = name_builder_kwargs
+  if builder_kwargs is None:
+    builder_kwargs = {}
 
   # Set data_dir
   if try_gcs and gcs_utils.is_dataset_on_gcs(name):

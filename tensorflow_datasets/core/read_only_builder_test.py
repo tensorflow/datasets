@@ -98,10 +98,14 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
     # Files exists, but not code, loading from files
     builder = load.builder(config_name)
     assert isinstance(builder, read_only_builder.ReadOnlyBuilder)
+    load.load(config_name, split=[])  # Dataset found -> no error
 
     # Neither code not files found, raise DatasetNotFoundError
     with pytest.raises(load.DatasetNotFoundError):
       load.builder(config_name, data_dir='/tmp/non-existing/tfds/dir')
+
+    with pytest.raises(load.DatasetNotFoundError):
+      load.load(config_name, split=[], data_dir='/tmp/non-existing/tfds/dir')
 
 
 # Test both with and without config
