@@ -18,6 +18,7 @@
 
 import typing
 from typing import Callable, Dict, List, Optional, Tuple
+import collections
 
 import dataclasses
 import numpy as np
@@ -28,7 +29,6 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils.type_utils import TreeDict
-import tree
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
@@ -140,6 +140,31 @@ class StyledDataFrame(DataFrame):
     return self.__styler._repr_html_()  # pylint: disable=protected-access
 
 
+def _flatten_with_path(structure: TreeDict):
+  """Convert a TreeDict into a flat list of paths and their values
+
+  A path is a list of keys to get to the value
+  Yields the result elements instead of creating a list
+  """
+  if isinstance(structure, collections.Mapping):
+    for key in sorted(structure):
+      for sub_path, sub_value in _flatten_with_path(structure[key]):
+        yield [key] + sub_path, sub_value
+  else:
+    yield [], structure
+
+def _flatten(structure: TreeDict):
+  """Convert a TreeDict into a flat list of values without the keys
+
+  Yields the result elements instead of creating a list
+  """
+  if isinstance(structure, collections.Mapping):
+    for key in sorted(structure):
+      for sub_value in _flatten(structure[key]):
+        yield sub_value
+  else:
+    yield structure
+
 def _make_columns(
     specs: TreeDict[tf.TypeSpec],
     ds_info: Optional[dataset_info.DatasetInfo],
@@ -147,7 +172,7 @@ def _make_columns(
   """Extract the columns info of the `panda.DataFrame`."""
   return [
       ColumnInfo.from_spec(path, ds_info)
-      for path, _ in tree.flatten_with_path(specs)
+      for path, _ in _flatten_with_path(specs)
   ]
 
 
@@ -156,7 +181,7 @@ def _make_row_dict(
     columns: List[ColumnInfo],
 ) -> Dict[str, np.ndarray]:
   """Convert a single example into a `pandas.DataFrame` row."""
-  values = tree.flatten(ex)
+  values = _flatten(ex)
   return {column.name: v for column, v in zip(columns, values)}
 
 
