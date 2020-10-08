@@ -24,6 +24,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Audio`
 
+*   [`accentdb`](accentdb.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`common_voice`](common_voice.md)
 *   [`crema_d`](crema_d.md)
 *   [`dementiabank`](dementiabank.md)

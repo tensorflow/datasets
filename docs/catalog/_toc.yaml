@@ -2,6 +2,9 @@ toc:
 - path: /datasets/catalog/overview
   title: Overview
 - section:
+  - path: /datasets/catalog/accentdb
+    status: nightly
+    title: accentdb
   - path: /datasets/catalog/common_voice
     title: common_voice
   - path: /datasets/catalog/crema_d
