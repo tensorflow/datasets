@@ -96,7 +96,7 @@ class ImageFeatureTest(
                 raise_msg='are incompatible',
             ),
         ],
-        test_attributes=dict(_encoding_format='png')
+        test_attributes=dict(_encoding_format=None)
     )
 
   def test_image_shaped(self):
@@ -105,7 +105,7 @@ class ImageFeatureTest(
 
     self.assertFeature(
         # Image with statically defined shape
-        feature=features_lib.Image(shape=(32, 64, 3)),
+        feature=features_lib.Image(shape=(32, 64, 3), encoding_format='png'),
         shape=(32, 64, 3),
         dtype=tf.uint8,
         tests=[

@@ -375,7 +375,7 @@ class DatasetCitationSection(Section):
 
 class DatasetVisualizationSection(Section):
 
-  NAME = 'Visualization'
+  NAME = 'Figure'
   EXTRA_DOC = (
       ' ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples))'
   )
@@ -392,6 +392,27 @@ class DatasetVisualizationSection(Section):
     if not self._visualization_util.has_visualization(builder):
       return 'Not supported.'
     return Block(self._visualization_util.get_html_tag(builder))
+
+
+class DatasetDataframeSection(Section):
+
+  NAME = 'Examples'
+  EXTRA_DOC = (
+      ' ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe))'
+  )
+
+  def __init__(self, dataframe_util):
+    self._dataframe_util = dataframe_util
+
+  def get_key(self, builder):
+    if self._dataframe_util.has_visualization(builder):
+      return builder.info.full_name
+    return None  # Fuse the sections together if no configs are available
+
+  def content(self, builder):
+    if not self._dataframe_util.has_visualization(builder):
+      return 'Missing.'
+    return Block(self._dataframe_util.get_html_tag(builder))
 
 
 # pylint:enable = missing-class-docstring
@@ -491,6 +512,7 @@ def get_markdown_string(
     builder: tfds.core.DatasetBuilder,
     config_builders: List[tfds.core.DatasetBuilder],
     visu_doc_util,
+    df_doc_util,
     nightly_doc_util,
 ) -> str:
   """Build the dataset markdown."""
@@ -510,6 +532,7 @@ def get_markdown_string(
       SupervisedKeySection(),
       DatasetCitationSection(),
       DatasetVisualizationSection(visu_doc_util),
+      DatasetDataframeSection(df_doc_util),
   ]
 
   doc_str = [

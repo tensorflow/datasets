@@ -12,11 +12,6 @@
 
 # `xsum`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -40,9 +35,7 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 *   **Versions**:
 
     *   **`1.1.0`** (default): No release notes.
-    *   `1.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   `1.0.0`: No release notes.
 
 *   **Download size**: `2.59 MiB`
 
@@ -93,6 +86,10 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.

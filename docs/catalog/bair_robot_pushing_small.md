@@ -2,45 +2,37 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="bair_robot_pushing_small" />
   <meta itemprop="description" content="This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;bair_robot_pushing_small&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/bair_robot_pushing_small" />
   <meta itemprop="sameAs" content="https://sites.google.com/view/sna-visual-mpc/" />
   <meta itemprop="citation" content="@misc{1710.05268,&#10;  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},&#10;  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},&#10;  Year = {2017},&#10;  Eprint = {arXiv:1710.05268},&#10;}" />
 </div>
-
 # `bair_robot_pushing_small`
 
 *   **Description**:
 
-This data set contains roughly 44,000 examples of robot pushing motions,
-including one training set (train) and two test sets of previously seen
-(testseen) and unseen (testnovel) objects. This is the small 64x64 version.
+This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-*   **Homepage**:
-    [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
+*   **Homepage**: [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
 
-*   **Source code**:
-    [`tfds.video.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
+*   **Source code**: [`tfds.video.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `30.06 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'test'`  | 256
+Split  | Examples
+:----- | -------:
+`'test'` | 256
 `'train'` | 43,264
 
 *   **Features**:
@@ -54,9 +46,7 @@ Sequence({
 })
 ```
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `None`
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
 
 *   **Citation**:
 
@@ -69,6 +59,39 @@ Sequence({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+
+*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bair_robot_pushing_small-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
