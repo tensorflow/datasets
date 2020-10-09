@@ -36,5 +36,7 @@
         "**/__pycache__": true,
         "**/.pytest_cache": true,
         "**/*.egg-info": true
-    }
+    },
+    "python.linting.flake8Enabled": false,
+    "python.pythonPath": "/home/alex/.pyenv/versions/3.7.4/bin/python"
 }

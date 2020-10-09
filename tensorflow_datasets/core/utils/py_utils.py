@@ -18,6 +18,7 @@
 """
 
 import base64
+import collections
 import contextlib
 import functools
 import hashlib
@@ -38,6 +39,7 @@ import uuid
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils.type_utils import TreeDict
 
 
 # pylint: disable=g-import-not-at-top
@@ -204,6 +206,33 @@ def zip_nested(arg0, *args, **kwargs):
       return [zip_nested(*a, dict_only=dict_only) for a in zip(arg0, *args)]
   # Singleton
   return (arg0,) + args
+
+
+def _flatten(structure: TreeDict):
+  """Convert a TreeDict into a flat list of values without the keys
+
+  Yields the result elements instead of creating a list
+  """
+  if isinstance(structure, collections.abc.Mapping):
+    for key in sorted(structure):
+      for sub_value in _flatten(structure[key]):
+        yield sub_value
+  else:
+    yield structure
+
+
+def _flatten_with_path(structure: TreeDict):
+  """Convert a TreeDict into a flat list of paths and their values
+
+  A path is a list of keys to get to the value
+  Yields the result elements instead of creating a list
+  """
+  if isinstance(structure, collections.abc.Mapping):
+    for key in sorted(structure):
+      for sub_path, sub_value in _flatten_with_path(structure[key]):
+        yield [key] + sub_path, sub_value
+  else:
+    yield [], structure
 
 
 def flatten_nest_dict(d):

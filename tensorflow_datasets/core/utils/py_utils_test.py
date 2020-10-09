@@ -17,6 +17,7 @@
 
 import hashlib
 import os
+from collections import OrderedDict
 
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -244,6 +245,73 @@ class GetClassPathUrlTest(testing.TestCase):
     self.assertEqual(
         cls_url,
         (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'))
+
+
+def flatten(v):
+  return list(py_utils._flatten(v)) # pylint: disable=protected-access
+
+def flatten_with_path(v):
+  return list(py_utils._flatten_with_path(v)) # pylint: disable=protected-access
+
+def test_flatten():
+  """Test that the flatten function works as expected"""
+
+  assert flatten('value') == ['value']
+  assert flatten({'key': 'value'}) == ['value']
+  assert flatten({'key1': 'value', 'key2': 'value2'}) == ['value', 'value2']
+  complex_dict = {
+    'key': 'value',
+    'nested': {
+      'sub_key': 'subvalue',
+      'sub_nested': {
+        'subsubkey1': 'subsubvalue1',
+        'subsubkey2': 'subsubvalue2',
+      },
+      'key2': 'value2',
+    }
+  }
+  assert flatten(complex_dict) == \
+    ['value', 'value2', 'subvalue', 'subsubvalue1', 'subsubvalue2']
+
+
+def test_flatten_with_path():
+  """Test that the flatten function works as expected"""
+
+  assert flatten_with_path('value') == [([], 'value')]
+  assert flatten_with_path({'key': 'value'}) == [(['key'], 'value')]
+  # Order doesn't matter
+  ordered_dict1 = OrderedDict([('key1', 'value1'), ('key2', 'value2')])
+  ordered_dict2 = OrderedDict([('key2', 'value2'), ('key1', 'value1')])
+  expected_result = [(['key1'], 'value1'), (['key2'], 'value2')]
+  assert flatten_with_path(ordered_dict1) == expected_result
+  assert flatten_with_path(ordered_dict2) == expected_result
+  # Order is consistent with _flatten
+  assert [v for _,v in flatten_with_path(ordered_dict1)] == \
+    flatten(ordered_dict1)
+  assert [v for _,v in flatten_with_path(ordered_dict2)] == \
+    flatten(ordered_dict2)
+
+
+  complex_dict = {
+    'key': 'value',
+    'nested': {
+      'subkey': 'subvalue',
+      'subnested': {
+        'subsubkey1': 'subsubvalue1',
+        'subsubkey2': 'subsubvalue2',
+      },
+    },
+    'key2': 'value2',
+  }
+  assert flatten_with_path(complex_dict) == [
+    (['key'], 'value'),
+    (['key2'], 'value2'),
+    (['nested', 'subkey'], 'subvalue'),
+    (['nested', 'subnested', 'subsubkey1'], 'subsubvalue1'),
+    (['nested', 'subnested', 'subsubkey2'], 'subsubvalue2'),
+  ]
+  # Order is consistent with _flatten
+  assert [v for _,v in flatten_with_path(complex_dict)] == flatten(complex_dict)
 
 
 if __name__ == '__main__':

@@ -37,53 +37,6 @@ def _as_df(ds_name: str, **kwargs) -> pandas.DataFrame:
   return df
 
 
-def test_flatten_with_path():
-  """Test that the flatten function works as expected"""
-  from from tensorflow_datasets.core.as_dataframe import _flatten_with_path
-  assert list(_flatten_with_path('value')) == [([], 'value')]
-  assert list(_flatten_with_path({'key': 'value'})) == [('key', 'value')]
-  assert list(_flatten_with_path({'key1': 'value', 'key2': 'value2'})) == [
-    ('key1', 'value'),
-    ('key2', 'value2'),
-  ]
-  complex_dict = {
-    'key': 'value',
-    'nested': {
-      'sub_key': 'subvalue',
-      'sub_nested': {
-        'subsubkey1': 'subsubvalue1',
-        'subsubkey2': 'subsubvalue2',
-      },
-      'key2': 'value2',
-    }
-  }
-  assert list(_flatten_with_path(complex_dict)) == [
-    (['key'], 'value'),
-    (['key2'], 'value2'),
-    (['nested', 'subkey'], 'subvalue'),
-    (['nested', 'sub_nested', 'subsubkey1'], 'subsubvalue1'),
-    (['nested', 'sub_nested', 'subsubkey2'], 'subsubvalue2'),
-  ]
-
-def test_flatten():
-  """Test that the flatten function works as expected"""
-  from from tensorflow_datasets.core.as_dataframe import _flatten
-  assert list(_flatten('value')) == ['value']
-  assert list(_flatten({'key': 'value'})) == ['value']
-  assert list(_flatten({'key1': 'value', 'key2': 'value2'})) == ['value', 'value2']
-  complex_dict = {
-    'key': 'value',
-    'nested': {
-      'sub_key': 'subvalue',
-      'sub_nested': {
-        'subsubkey1': 'subsubvalue1',
-        'subsubkey2': 'subsubvalue2',
-      },
-      'key2': 'value2',
-    }
-  }
-  assert list(_flatten(complex_dict)) == ['value', 'value2', 'subvalue', 'subsubvalue1', 'subsubvalue2']
-
 def test_as_dataframe():
   """Tests that as_dataframe works without the `tfds.core.DatasetInfo`."""
   ds = tf.data.Dataset.from_tensor_slices(

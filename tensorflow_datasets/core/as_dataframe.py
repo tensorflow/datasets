@@ -18,7 +18,6 @@
 
 import typing
 from typing import Callable, Dict, List, Optional, Tuple
-import collections
 
 import dataclasses
 import numpy as np
@@ -29,6 +28,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils.type_utils import TreeDict
+from tensorflow_datasets.core.utils.py_utils import _flatten, _flatten_with_path
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
@@ -139,31 +139,6 @@ class StyledDataFrame(DataFrame):
       return super()._repr_html_()
     return self.__styler._repr_html_()  # pylint: disable=protected-access
 
-
-def _flatten_with_path(structure: TreeDict):
-  """Convert a TreeDict into a flat list of paths and their values
-
-  A path is a list of keys to get to the value
-  Yields the result elements instead of creating a list
-  """
-  if isinstance(structure, collections.Mapping):
-    for key in sorted(structure):
-      for sub_path, sub_value in _flatten_with_path(structure[key]):
-        yield [key] + sub_path, sub_value
-  else:
-    yield [], structure
-
-def _flatten(structure: TreeDict):
-  """Convert a TreeDict into a flat list of values without the keys
-
-  Yields the result elements instead of creating a list
-  """
-  if isinstance(structure, collections.Mapping):
-    for key in sorted(structure):
-      for sub_value in _flatten(structure[key]):
-        yield sub_value
-  else:
-    yield structure
 
 def _make_columns(
     specs: TreeDict[tf.TypeSpec],
