@@ -1,3 +1,0 @@
-http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/balanced_train_segments.csv
-http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_labels_indices.csv
-https://storage.googleapis.com/bme590/william/manual/id2label.json

@@ -13,12 +13,14 @@ class AudioSetTest(tfds_test.DatasetBuilderTestCase):
       'train': 4,
   }
 
-  DL_EXTRACT_RESULT = {
-      'file_1' : '--PJHxphWEs.mp3',
-      'file_2' : '-275_wTLm-4.mp3',
-      'file_3' : '08u-jdwjM74.mp3',
-      'file_4' : 'X-5UcZiOIhQ.mp3',
-  }
+  DL_EXTRACT_RESULT = None
+  SKIP_CHECKSUMS = True
+      
+#     'all_files' : [
+#         '--PJHxphWEs.mp3', '-275_wTLm-4.mp3',
+#         '08u-jdwjM74.mp3', 'X-5UcZiOIhQ.mp3',
+#     ],
+  
 
 if __name__ == "__main__":
   tfds_test.test_main()

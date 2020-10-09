@@ -38,6 +38,8 @@ To collect all our data we worked with human annotators who verified the presenc
 To nominate segments for annotation, we relied on YouTube metadata and content-based search.
 """
 
+_DOWNLOAD_LINK = 'https://storage.googleapis.com/bme590/william/audioset.tar.gz'
+
 class Audioset(tfds.core.GeneratorBasedBuilder):
   """This dataset takes in a manual directory of 10-second .mp3 files taken from Youtube.
   It yields Audio using pydub AudioSegment and corresponding labels
@@ -61,7 +63,7 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    data_dir = dl_manager.manual_dir
+    data_dir = dl_manager.download_and_extract(_DOWNLOAD_LINK)
     return [
       tfds.core.SplitGenerator(
         name=tfds.Split.TRAIN,
@@ -97,4 +99,5 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
           'label': label_tensor,
         }
       except:
+        print(filepath)
         pass
