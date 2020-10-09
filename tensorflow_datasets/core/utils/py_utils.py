@@ -209,16 +209,8 @@ def zip_nested(arg0, *args, **kwargs):
 
 
 def _flatten(structure: TreeDict):
-  """Convert a TreeDict into a flat list of values without the keys
-
-  Yields the result elements instead of creating a list
-  """
-  if isinstance(structure, collections.abc.Mapping):
-    for key in sorted(structure):
-      for sub_value in _flatten(structure[key]):
-        yield sub_value
-  else:
-    yield structure
+  """Convert a TreeDict into a flat list of values without the keys"""
+  return tf.nest.flatten(structure)
 
 
 def _flatten_with_path(structure: TreeDict):
