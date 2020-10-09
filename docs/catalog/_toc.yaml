@@ -3,7 +3,6 @@ toc:
   title: Overview
 - section:
   - path: /datasets/catalog/accentdb
-    status: nightly
     title: accentdb
   - path: /datasets/catalog/common_voice
     title: common_voice
@@ -366,7 +365,6 @@ toc:
   - path: /datasets/catalog/gpt3
     title: gpt3
   - path: /datasets/catalog/hellaswag
-    status: nightly
     title: hellaswag
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews

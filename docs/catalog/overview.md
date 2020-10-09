@@ -25,7 +25,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Audio`
 
 *   [`accentdb`](accentdb.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`common_voice`](common_voice.md)
 *   [`crema_d`](crema_d.md)
 *   [`dementiabank`](dementiabank.md)
@@ -221,7 +220,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`goemotions`](goemotions.md)
 *   [`gpt3`](gpt3.md)
 *   [`hellaswag`](hellaswag.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
 *   [`librispeech_lm`](librispeech_lm.md)
