@@ -45,13 +45,18 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version("2.3.1", "Hashing change.")
+_VERSION = tfds.core.Version("2.3.1")
 
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version("2.3.0", "Deduplicate lines within a page."),
-    tfds.core.Version("2.2.1", "Update dataset_info.json"),
+    tfds.core.Version("2.3.0"),
+    tfds.core.Version("2.2.1"),
     tfds.core.Version("2.2.0"),
 ]
+RELEASE_NOTES = {
+    "2.3.1": "Hashing change.",
+    "2.3.0": "Deduplicate lines within a page.",
+    "2.2.1": "Update dataset_info.json",
+}
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
 _WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"

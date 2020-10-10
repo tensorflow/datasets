@@ -2,36 +2,28 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="super_glue" />
   <meta itemprop="description" content="SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after&#10;GLUE with a new set of more difficult language understanding tasks, improved&#10;resources, and a new public leaderboard.&#10;&#10;BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;super_glue&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/super_glue" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset." />
 </div>
-
 # `super_glue`
 
-*   **Source code**:
-    [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+*   **Source code**: [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
 
 *   **Versions**:
 
-    *   **`1.0.2`** (default): No release notes.
+    * **`1.0.2`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `None`
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+
 
 ## super_glue/boolq (default config)
 
@@ -41,30 +33,26 @@ SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
 GLUE with a new set of more difficult language understanding tasks, improved
 resources, and a new public leaderboard.
 
-BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example
-consists of a short passage and a yes/no question about the passage. The
-questions are provided anonymously and unsolicited by users of the Google search
-engine, and afterwards paired with a paragraph from a Wikipedia article
-containing the answer. Following the original work, we evaluate with accuracy.
+BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
+passage and a yes/no question about the passage. The questions are provided anonymously and
+unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a
+Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.
 
-*   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a
-    QA task where each example consists of a short passage and a yes/no question
-    about the passage. The questions are provided anonymously and unsolicited by
-    users of the Google search engine, and afterwards paired with a paragraph
-    from a Wikipedia article containing the answer. Following the original work,
-    we evaluate with accuracy.
+*   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
+passage and a yes/no question about the passage. The questions are provided anonymously and
+unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a
+Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.
 
-*   **Homepage**:
-    [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
+*   **Homepage**: [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
 
 *   **Download size**: `3.93 MiB`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,245
-`'train'`      | 9,427
+Split  | Examples
+:----- | -------:
+`'test'` | 3,245
+`'train'` | 9,427
 `'validation'` | 3,270
 
 *   **Features**:
@@ -97,6 +85,41 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-boolq-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/cb
 
@@ -175,6 +198,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-cb-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/copa
 
 *   **Description**:
@@ -252,6 +309,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-copa-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/multirc
 
@@ -336,6 +427,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-multirc-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/record
 
 *   **Description**:
@@ -410,6 +535,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-record-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/rte
 
@@ -518,6 +677,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-rte-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/wic
 
 *   **Description**:
@@ -598,6 +791,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wic-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/wsc
 
@@ -718,6 +945,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/wsc.fixed
 
@@ -845,6 +1106,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc.fixed-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/axb
 
 *   **Description**:
@@ -917,6 +1212,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axb-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/axg
 
@@ -1003,3 +1332,37 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axg-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

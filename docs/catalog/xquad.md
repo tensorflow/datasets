@@ -12,10 +12,6 @@
 
 # `xquad`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 XQuAD (Cross-lingual Question Answering Dataset) is a benchmark dataset for
@@ -75,9 +71,13 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## xquad/ar (default config)
 

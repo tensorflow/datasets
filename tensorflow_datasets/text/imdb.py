@@ -58,9 +58,10 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(IMDBReviewsConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("1.0.0"),
+        release_notes={
+            "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.deprecated.text.TextEncoderConfig())

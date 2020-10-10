@@ -68,7 +68,10 @@ def _load_tif(path):
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
   VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+      "2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

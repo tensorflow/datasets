@@ -20,6 +20,8 @@
 import os
 from typing import List, Optional
 
+from tensorflow_datasets.core.utils import type_utils
+
 # Github base URL
 SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 

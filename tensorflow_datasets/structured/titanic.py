@@ -92,8 +92,10 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

@@ -147,7 +147,10 @@ def _create_dataset_file(info: DatasetInfo) -> None:
       class {info.cls_name}(tfds.core.GeneratorBasedBuilder):
         """DatasetBuilder for {info.name} dataset."""
 
-        VERSION = tfds.core.Version('0.1.0')
+        VERSION = tfds.core.Version('1.0.0')
+        RELEASE_NOTES = {{
+            '1.0.0': 'Initial release.',
+        }}
 
         def _info(self) -> tfds.core.DatasetInfo:
           """Returns the dataset metadata."""

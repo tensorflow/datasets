@@ -71,9 +71,10 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version(
-              "3.0.0",
-              "New split API (https://tensorflow.org/datasets/splits)"),
+          version=tfds.core.Version("3.0.0"),
+          release_notes={
+              "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+          },
       ) for category in _CATEGORIES
   ]
 

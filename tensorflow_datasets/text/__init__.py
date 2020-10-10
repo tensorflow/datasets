@@ -32,6 +32,7 @@ from tensorflow_datasets.text.gap import Gap
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.goemotions import Goemotions
 from tensorflow_datasets.text.gpt3 import Gpt3
+from tensorflow_datasets.text.hellaswag import Hellaswag
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
@@ -65,3 +66,4 @@ from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
+

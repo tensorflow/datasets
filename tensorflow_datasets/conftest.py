@@ -22,12 +22,12 @@ See: https://docs.pytest.org/en/latest/writing_plugins.html
 
 """
 from typing import Iterator
-from unittest import mock
 
 import pytest
 
 import tensorflow as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.testing import setup_teardown
 
 
 # Global setup/teardown

@@ -16,7 +16,7 @@
 """Typing annotation utils."""
 
 import os
-from typing import Dict, List, Tuple, TypeVar, Union
+from typing import Dict, List, Optional, Tuple, TypeVar, Union
 
 import tensorflow as tf
 
@@ -24,10 +24,19 @@ import tensorflow as tf
 PathLike = Union[str, os.PathLike]
 
 T = TypeVar('T')
+
+# Note: `TupleOrList` avoid abiguity from `Sequence` (`str` is `Sequence[str]`,
+# `bytes` is `Sequence[int]`).
+TupleOrList = Union[Tuple[T, ...], List[T]]
+
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
-Tree = Union[T, List['Tree'], Tuple['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
+Tree = Union[T, TupleOrList['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
+
 
 Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+
+Dim = Optional[int]
+Shape = TupleOrList[Dim]
 
 JsonValue = Union[
     str, bool, int, float, None, List['JsonValue'], Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet

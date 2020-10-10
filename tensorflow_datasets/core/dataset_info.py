@@ -121,13 +121,19 @@ class DatasetInfo(object):
     """
     self._builder = builder
 
+    if builder.builder_config:
+      config_name = builder.builder_config.name
+      config_description = builder.builder_config.description
+    else:
+      config_name = None
+      config_description = None
+
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=builder.name,
         description=utils.dedent(description),
-        version=str(builder._version),  # pylint: disable=protected-access
-        config_name=(
-            builder.builder_config.name if builder.builder_config else None
-        ),
+        version=str(builder.version),
+        config_name=config_name,
+        config_description=config_description,
         citation=utils.dedent(citation),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             license=utils.dedent(redistribution_info.pop("license")),
