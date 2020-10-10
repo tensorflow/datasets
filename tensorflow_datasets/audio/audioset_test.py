@@ -12,16 +12,8 @@ class AudioSetTest(tfds_test.DatasetBuilderTestCase):
   SPLITS = {
       'train': 4,
   }
-
   DL_EXTRACT_RESULT = None
   SKIP_CHECKSUMS = True
-      
-#     'all_files' : [
-#         '--PJHxphWEs.mp3', '-275_wTLm-4.mp3',
-#         '08u-jdwjM74.mp3', 'X-5UcZiOIhQ.mp3',
-#     ],
-  
 
 if __name__ == "__main__":
   tfds_test.test_main()
-
