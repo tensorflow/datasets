@@ -24,6 +24,8 @@ upper_tabs:
         path: /datasets/keras_example
 
       - heading: "Features & performances"
+      - title: TFDS CLI
+        path: /datasets/cli
       - title: Splits and slicing API
         path: /datasets/splits
       - title: Performance tips

@@ -22,6 +22,7 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 import collections
 from concurrent import futures
 import os
+import textwrap
 from typing import Dict, List, Optional, Tuple, Union, Set
 
 import mako.lookup
@@ -64,6 +65,62 @@ class VisualizationDocUtil(object):
     """Returns the <img> html tag."""
     url = self.get_url(builder)
     return f'<img src="{url}" alt="Visualization" width="500px">'
+
+  def has_visualization(self, builder):
+    filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
+    return tf.io.gfile.exists(filepath)
+
+
+class DataframeDocUtil(object):
+  """Small util which generate the path/urls for the dataframes."""
+  # Url used to display dataframes
+  BASE_PATH = tfds.core.gcs_path('visualization/dataframe')
+  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
+
+  def _get_name(self, builder):
+    return builder.info.full_name.replace('/', '-') + '.html'
+
+  def get_url(self, builder):
+    return self.BASE_URL + self._get_name(builder)
+
+  def get_html_tag(self, builder: tfds.core.DatasetBuilder) -> str:
+    """Returns the html tag."""
+    url = self.get_url(builder)
+    button_id = 'displaydataframe'
+    content_id = 'dataframecontent'
+    visualization_html = f"""
+    <!-- mdformat off(HTML should not be auto-formatted) -->
+
+    {{% framebox %}}
+
+    <button id="{button_id}">Display examples...</button>
+    <div id="{content_id}" style="overflow-x:scroll"></div>
+    <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+    <script>
+    var url = "{url}";
+    $(document).ready(() => {{
+      $("#{button_id}").click((event) => {{
+        // Disable the button after clicking (dataframe loaded only once).
+        $("#{button_id}").prop("disabled", true);
+
+        // Pre-fetch and display the content
+        $.get(url, (data) => {{
+          $("#{content_id}").html(data);
+        }}).fail(() => {{
+          $("#{content_id}").html(
+            'Error loading examples. If the error persist, please open '
+            + 'a new issue.'
+          );
+        }});
+      }});
+    }});
+    </script>
+
+    {{% endframebox %}}
+
+    <!-- mdformat on -->
+    """
+    return textwrap.dedent(visualization_html)
 
   def has_visualization(self, builder):
     filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
@@ -219,10 +276,12 @@ def document_single_builder(builder):
       config_builders = list(
           tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
   visu_doc_util = VisualizationDocUtil()
+  df_doc_util = DataframeDocUtil()
   out_str = dataset_markdown_builder.get_markdown_string(
       builder=builder,
       config_builders=config_builders,
       visu_doc_util=visu_doc_util,
+      df_doc_util=df_doc_util,
       nightly_doc_util=NightlyDocUtil(),
   )
   schema_org_tmpl = get_mako_template('schema_org')

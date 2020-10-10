@@ -34,5 +34,4 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
 
 def _build_datasets(args: argparse.Namespace) -> None:
   """Build the given datasets."""
-  for ds in args.datasets:
-    print(f'Building {ds}')
+  raise NotImplementedError('tfds build not supported yet (#2447).')

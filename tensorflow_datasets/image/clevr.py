@@ -46,10 +46,13 @@ _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 class CLEVR(tfds.core.GeneratorBasedBuilder):
   """CLEVR dataset."""
 
-  VERSION = tfds.core.Version("3.1.0", "Add question/answer text.")
+  VERSION = tfds.core.Version("3.1.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.0.0"),
   ]
+  RELEASE_NOTES = {
+      "3.1.0": "Add question/answer text.",
+  }
 
   def _info(self):
     features = {

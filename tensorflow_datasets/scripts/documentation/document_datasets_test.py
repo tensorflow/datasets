@@ -68,8 +68,12 @@ class DocumentDatasetsTest(tfds.testing.TestCase):
     builder.download_and_prepare()
 
     # Patch the visualization util (to avoid GCS access during test)
-    cls._old_path = document_datasets.VisualizationDocUtil.BASE_PATH
+    cls._old_path_visu = document_datasets.VisualizationDocUtil.BASE_PATH
     document_datasets.VisualizationDocUtil.BASE_PATH = cls._tfds_tmp_dir
+
+    # Patch the visualization util (to avoid GCS access during test)
+    cls._old_path_df = document_datasets.DataframeDocUtil.BASE_PATH
+    document_datasets.DataframeDocUtil.BASE_PATH = cls._tfds_tmp_dir
 
     # Patch the register
     # `pytest` do not execute the tests in isolation.
@@ -87,7 +91,8 @@ class DocumentDatasetsTest(tfds.testing.TestCase):
   def tearDownClass(cls):
     super(DocumentDatasetsTest, cls).tearDownClass()
     tfds.testing.rm_tmp_dir(cls._tfds_tmp_dir)
-    document_datasets.VisualizationDocUtil.BASE_PATH = cls._old_path
+    document_datasets.VisualizationDocUtil.BASE_PATH = cls._old_path_visu
+    document_datasets.DataframeDocUtil.BASE_PATH = cls._old_path_df
 
     cls._patch_register.stop()
 
