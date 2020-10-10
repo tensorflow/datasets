@@ -19,8 +19,7 @@
 
 import os
 import dataclasses
-from typing import Optional
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Optional
 
 import tensorflow.compat.v2 as tf
 
