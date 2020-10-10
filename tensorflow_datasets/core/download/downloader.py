@@ -204,7 +204,8 @@ class _Downloader(object):
             self._pbar_dl_size.update(size_mb // unit_mb)
             size_mb %= unit_mb
     self._pbar_url.update(1)
-    return checksums_lib.UrlInfo(checksum=checksum.hexdigest(), size=size)
+    return checksums_lib.UrlInfo(checksum=checksum.hexdigest(),
+                                 size=size, filename=fname)
 
 
 def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
