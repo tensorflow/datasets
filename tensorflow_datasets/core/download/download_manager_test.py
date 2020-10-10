@@ -49,6 +49,7 @@ class Artifact(object):
     self.url_info = checksums_lib.UrlInfo(
         size=len(content),
         checksum=_sha256(content),
+        filename=name
     )
     self.file_name = resource_lib.get_dl_fname(url, self.url_info.checksum)
     self.file_path = f'/dl_dir/{self.file_name}'
@@ -308,7 +309,11 @@ class DownloadManagerTest(testing.TestCase):
     manager = self._get_manager(
         register_checksums=False,
         url_infos={
-            a.url: checksums_lib.UrlInfo(size=a.url_info.size, checksum=sha_b),
+            a.url: checksums_lib.UrlInfo(
+                size=a.url_info.size,
+                checksum=sha_b,
+                filename=a.url_info.filename
+            ),
         },
     )
     with self.assertRaises(dm.NonMatchingChecksumError):
@@ -447,6 +452,7 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[a.url] = checksums_lib.UrlInfo(
         size=a.url_info.size,
         checksum=_sha256('Other content'),
+        filename=a.url_info.filename
     )
     dl_manager = self._get_manager(
         register_checksums=False,
