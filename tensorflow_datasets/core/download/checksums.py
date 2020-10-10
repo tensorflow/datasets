@@ -36,7 +36,7 @@ _CHECKSUM_SUFFIX = '.txt'
 
 
 @dataclasses.dataclass(eq=True)
-class UrlInfo(object):  # TODO(tfds): Use dataclasses
+class UrlInfo(object):
   """Small wrapper around the url metadata (checksum, size).
 
   Attributes:
@@ -47,15 +47,11 @@ class UrlInfo(object):  # TODO(tfds): Use dataclasses
 
   size: int
   checksum: str
-  filename: Optional[str] = None
+  filename: Optional[str]
 
   def asdict(self) -> Dict[str, Any]:
     """Returns the dict representation of the dataclass."""
-    # TODO(tfds): Replace by `dataclasses.asdict(self)`
     return dataclasses.asdict(self)
-
-  def __ne__(self, other) -> bool:  # Required in Py2
-    return not self == other
 
 
 def add_checksums_dir(checksums_dir: str) -> None:
@@ -145,10 +141,6 @@ def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
     except ValueError:  # not enough values to unpack (legacy files)
       # URL might have spaces inside, but size and checksum will not.
       values = line.rsplit(' ', 2)
-      # If line also contains filename then 3 splits are required.
-      # two splits will not seperate size so split accordingly.
-      if not isinstance(values[1], int):
-          values = line.rsplit(' ', 3)
     if len(values) == 4:
         url, size, checksum, filename = values
     else:
@@ -204,8 +196,5 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
     return
   with tf.io.gfile.GFile(path, 'w') as f:
     for url, url_info in sorted(new_data.items()):
-      if url_info.filename != None:
-          f.write('{}\t{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum,
-                                            url_info.filename))
-      else:
-          f.write('{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum))
+      filename = url_infos.filename or ''
+      f.write(f'{url}\t{url_info.size}\t{url_info.checksum}\t{filename}\n')
