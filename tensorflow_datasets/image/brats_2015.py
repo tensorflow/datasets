@@ -38,7 +38,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
         #The MRI image
         'image' : tfds.features.Tensor(shape=(240,240),dtype=tf.int16),
         ## The mask
-        'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.uint8),
+        'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.int16),
         ## Tumor Type
         'type' : tfds.features.Text(),
         ## Modality
@@ -100,6 +100,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                                 if image.endswith('.mha'):
                                     image_files.append(os.path.join(pat_path,file,image))
                     mask_array,mask_header = load(mask_file)
+                    mask_array  = mask_array.astype('int16')
                     total_slices = mask_array.shape[2]
                     for image in image_files:
                         modality = image.split('/')[-1].split('.')[-3].split('_')[-1]
