@@ -14,7 +14,11 @@ _CITATION = """
 _DESCRIPTION = """
 """
 
-
+MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You can download the images from
+  BRATS 2015 website
+  Please put all files in manual_dir.
+  """
 class Brats2015(tfds.core.GeneratorBasedBuilder):
   """TODO(brats_2015): Short description of my dataset."""
 
