@@ -63,6 +63,7 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
+    dl_manager._register_checksums = True
     data_dir = dl_manager.download_and_extract(_DOWNLOAD_LINK)
     return [
       tfds.core.SplitGenerator(
