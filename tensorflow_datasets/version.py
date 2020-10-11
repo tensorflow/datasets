@@ -23,8 +23,8 @@ This file is replaced by `version_stable.py` for stable releases
 """
 
 # We follow Semantic Versioning (https://semver.org/)
-_MAJOR_VERSION = '3'
-_MINOR_VERSION = '2'
+_MAJOR_VERSION = '4'
+_MINOR_VERSION = '0'
 _PATCH_VERSION = '1'
 
 __version__ = '.'.join([

@@ -76,15 +76,20 @@ _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
 _SUPPORTED_VERSIONS = [
     # Same data as 0.0.2
-    tfds.core.Version('1.0.0',
-                      'New split API (https://tensorflow.org/datasets/splits)'),
-    # Having the model predict newline separators makes it easier to evaluate
-    # using summary-level ROUGE.
-    tfds.core.Version('2.0.0', 'Separate target sentences with newline.')
+    tfds.core.Version('1.0.0'),
+    tfds.core.Version('2.0.0'),
 ]
-
 # Using cased version.
-_DEFAULT_VERSION = tfds.core.Version('3.0.0', 'Using cased version.')
+_DEFAULT_VERSION = tfds.core.Version('3.0.0')
+
+_RELEASE_NOTES = {
+    '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+    '2.0.0': """
+    Separate target sentences with newline. (Having the model predict newline
+    separators makes it easier to evaluate using summary-level ROUGE.)
+    """,
+    '3.0.0': 'Using cased version.',
+}
 
 
 class CnnDailymailConfig(tfds.core.BuilderConfig):
@@ -101,6 +106,7 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
     """
     super(CnnDailymailConfig, self).__init__(
         version=_DEFAULT_VERSION,
+        release_notes=_RELEASE_NOTES,
         supported_versions=_SUPPORTED_VERSIONS,
         **kwargs)
     self.text_encoder_config = (

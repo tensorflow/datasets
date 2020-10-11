@@ -206,6 +206,14 @@ def create_checksum_file(root_dir, data):
 
 
 def main(_):
+  print('*********************************************************************')
+  print('WARNING: The `create_new_dataset` script is deprecated.')
+  print('Please use: `tfds new <dataset_name>` CLI instead.')
+  print('*********************************************************************')
+  main_old(_)
+
+
+def main_old(_):
   dataset_name = FLAGS.dataset
   dataset_type = FLAGS.type
   root_dir = FLAGS.tfds_dir

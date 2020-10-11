@@ -173,14 +173,18 @@ class RegisteredTest(testing.TestCase):
       self.assertNotIn(name, load.list_builders())
 
       class ColabBuilder(registered.RegisteredDataset):
-        pass
+
+        def __init__(self, **kwargs):
+          del kwargs
 
       self.assertIn(name, load.list_builders())
       self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
       class ColabBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
-        pass
+
+        def __init__(self, **kwargs):
+          del kwargs
 
       self.assertIsInstance(load.builder(name), ColabBuilder)
       self.assertNotIsInstance(load.builder(name), old_colab_class)

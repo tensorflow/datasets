@@ -65,12 +65,15 @@ _CITATION = """\
 class DeepWeeds(tfds.core.GeneratorBasedBuilder):
   """DeepWeeds Image Dataset Class."""
 
-  VERSION = tfds.core.Version("2.0.0", "Fixes wrong labels in V1.")
+  VERSION = tfds.core.Version("2.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
           "1.0.0",
           tfds_version_to_prepare="c28a63fa9d9fb9ba3cced7052ea243e8884f9bf1"),
   ]
+  RELEASE_NOTES = {
+      "2.0.0": "Fixes wrong labels in V1.",
+  }
 
   def _info(self):
     """Define Dataset Info."""

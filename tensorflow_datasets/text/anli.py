@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Commonsense Explanations (CoS-E) Dataset."""
+"""Adversarial Natural Language Inference (ANLI) Dataset."""
 
 import json
 import os

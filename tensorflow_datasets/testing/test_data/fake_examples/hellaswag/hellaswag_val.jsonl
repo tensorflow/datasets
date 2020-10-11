@@ -1,0 +1,1 @@
+{"ind": 10, "activity_label": "Cooking", "ctx_a": "A man is chopping up tomatoes.", "ctx_b": "he", "ctx": "A man is chopping up tomatoes. he", "split": "val", "split_type": "indomain", "label": 3, "endings": ["is baking a cake.", "is climbing a mountain.", "wants to buy a bike.", "is cooking a soup."], "source_id": "abc"}

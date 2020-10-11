@@ -35,6 +35,21 @@ for image, label in ds:
   pass
 ```
 
+## TFDS core values
+
+TFDS has been built with these principles in mind:
+
+* **Simplicity**: Standard use-cases should work out-of-the box
+* **Performance**: TFDS follows
+  [best practices](https://www.tensorflow.org/guide/data_performance)
+  and can achieve state-of-the-art speed
+* **Determinism/reproducibility**: All users get the same examples in the same
+  order
+* **Customisability**: Advanced users can have fine-grained control
+
+If those use cases are not satisfied, please send us
+[feedback](https://github.com/tensorflow/datasets/issues).
+
 ## Want a certain dataset?
 
 Adding a dataset is really straightforward by following

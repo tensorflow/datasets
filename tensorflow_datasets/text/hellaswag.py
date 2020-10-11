@@ -1,0 +1,99 @@
+# coding=utf-8
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""HellaSwag dataset."""
+
+import json
+import os
+
+import tensorflow.compat.v2 as tf
+import tensorflow_datasets.public_api as tfds
+
+_CITATION = """
+@inproceedings{zellers2019hellaswag,
+    title={HellaSwag: Can a Machine Really Finish Your Sentence?},
+    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},
+    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+    year={2019}
+}
+"""
+
+_DESCRIPTION = """
+The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
+and some endings which complete the context.
+"""
+
+_HELLASWAG_URL = 'https://raw.githubusercontent.com/rowanz/hellaswag/master/data/'
+
+
+class Hellaswag(tfds.core.GeneratorBasedBuilder):
+  """HellaSwag Dataset."""
+
+  VERSION = tfds.core.Version('0.0.1')
+
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            'context': tfds.features.Text(),
+            'endings': tfds.features.Sequence(tfds.features.Text()),
+            'activity_label': tfds.features.Text(),
+            'label': tf.int32,
+            'split_type': tfds.features.Text(),
+        }),
+        supervised_keys=None,
+        homepage='https://rowanzellers.com/hellaswag/',
+        citation=_CITATION,
+    )
+
+  def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
+
+    files = dl_manager.download_and_extract({
+        'train': os.path.join(_HELLASWAG_URL, 'hellaswag_train.jsonl'),
+        'validation': os.path.join(_HELLASWAG_URL, 'hellaswag_val.jsonl'),
+        'test': os.path.join(_HELLASWAG_URL, 'hellaswag_test.jsonl'),
+    })
+
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={'filepath': files['train']},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={'filepath': files['validation']},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs={'filepath': files['test']},
+        ),
+    ]
+
+  def _generate_examples(self, filepath):
+    """Yields examples."""
+    with tf.io.gfile.GFile(filepath) as f:
+      for idx, line in enumerate(f):
+        elem = json.loads(line)
+        elem_id = '%s_%d' % (os.path.basename(filepath), idx)
+        yield elem_id, {
+            'context': elem['ctx'],
+            'endings': elem['endings'],
+            'activity_label': elem['activity_label'],
+            'label': elem.get('label', -1),
+            'split_type': elem['split_type']
+        }
+

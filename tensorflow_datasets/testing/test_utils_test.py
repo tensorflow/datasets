@@ -138,5 +138,12 @@ class RunInGraphAndEagerTest(test_case.TestCase):
       self.assertIs(tf_lib1.io.gfile.exists, f)
       self.assertIs(tf_lib2.io.gfile.exists, f)
 
+    self.assertIsNot(tf_lib1.io.gfile.exists, f)
+    self.assertIsNot(tf_lib2.io.gfile.exists, f)
+
+    with test_utils.mock_tf('tf.io.gfile.exists', f):
+      self.assertIs(tf_lib1.io.gfile.exists, f)
+      self.assertIs(tf_lib2.io.gfile.exists, f)
+
 if __name__ == '__main__':
   test_utils.test_main()

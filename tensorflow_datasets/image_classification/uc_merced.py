@@ -70,8 +70,10 @@ _ZIP_SUBDIR = "UCMerced_LandUse/Images"
 class UcMerced(tfds.core.GeneratorBasedBuilder):
   """Small 21 class remote sensing land use classification dataset."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

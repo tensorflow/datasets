@@ -49,11 +49,13 @@ The training set is composed of 5 instances of each category (instances 4, 6, 7,
 class Smallnorb(tfds.core.GeneratorBasedBuilder):
   """Smallnorb data set."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.1.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     features_dict = {
