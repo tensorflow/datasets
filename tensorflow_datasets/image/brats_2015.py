@@ -38,7 +38,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
         #The MRI image
         'image' : tfds.features.Tensor(shape=(240,240),dtype=tf.int16),
         ## The mask
-        'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.int8),
+        'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.uint8),
         ## Tumor Type
         'type' : tfds.features.Text(),
         ## Modality
