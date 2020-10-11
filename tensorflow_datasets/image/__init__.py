@@ -104,3 +104,4 @@ from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
 
+from tensorflow_datasets.image.brats_2015 import Brats2015  # TODO(brats_2015) Sort alphabetically
