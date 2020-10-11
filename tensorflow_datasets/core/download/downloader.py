@@ -159,7 +159,7 @@ class _Downloader(object):
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
-    `REQUESTS_CA_BUNDLE`,... environement variables can be exported, as
+    `REQUESTS_CA_BUNDLE`,... environment variables can be exported, as
     described in:
     https://requests.readthedocs.io/en/master/user/advanced/#proxies
 

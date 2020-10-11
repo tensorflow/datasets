@@ -63,7 +63,7 @@ Fn = TypeVar('Fn', bound=Callable[..., Any])
 
 
 def is_notebook():
-  """Returns True if running in a notebook (Colab, Jupyter) environement."""
+  """Returns True if running in a notebook (Colab, Jupyter) environment."""
   # Inspired from the tfdm autonotebook code
   try:
     import IPython  # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top

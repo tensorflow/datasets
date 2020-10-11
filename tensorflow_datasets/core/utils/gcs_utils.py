@@ -40,7 +40,7 @@ def exists(path: str) -> bool:
     return tf.io.gfile.exists(path)
   # * UnimplementedError: On windows, gs:// isn't supported.
   # * FailedPreconditionError: Raised by TF
-  # * PermissionDeniedError: Some environements block GCS access.
+  # * PermissionDeniedError: Some environments block GCS access.
   except (
       tf.errors.UnimplementedError,
       tf.errors.FailedPreconditionError,

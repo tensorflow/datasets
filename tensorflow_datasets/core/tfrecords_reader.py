@@ -172,7 +172,7 @@ def _read_files(
 
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
-  # On distributed environement, we can shard per-file if a
+  # On distributed environments, we can shard per-file if a
   # `tf.distribute.InputContext` object is provided (e.g. from
   # `experimental_distribute_datasets_from_function`)
   if (read_config.input_context and
