@@ -111,7 +111,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
 
                                                     'type' : tumor_type,
                                                     'modality': modality,
-                                                    'image':image_array[::,current_slice],
+                                                    'image':image_array[:,:,current_slice],
                                                     'mask' : mask_array[:,:,current_slice],
 
                                             })
