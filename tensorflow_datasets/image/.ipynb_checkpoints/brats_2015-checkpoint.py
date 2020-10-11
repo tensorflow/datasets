@@ -88,17 +88,19 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                     pat_path = os.path.join(tumor_type_path,pat)
                     image_files = []
                     for file in tf.io.gfile.listdir(pat_path):
-
-                        if 'OT.' in file:
-                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
-                                if image.endswith('.mha'):
-                                    mask_file = os.path.join(pat_path,file,image)
-                                    break
-
+                        if file.startswith('.'):
+                            pass
                         else:
-                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
-                                if image.endswith('.mha'):
-                                    image_files.append(os.path.join(pat_path,file,image))
+                            if 'OT.' in file:
+                                for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                    if image.endswith('.mha'):
+                                        mask_file = os.path.join(pat_path,file,image)
+                                        break
+
+                            else:
+                                for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                    if image.endswith('.mha'):
+                                        image_files.append(os.path.join(pat_path,file,image))
                     mask_array,mask_header = load(mask_file)
                     mask_array  = mask_array.astype('int16')
                     total_slices = mask_array.shape[2]
