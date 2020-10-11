@@ -86,6 +86,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                     pass
                 else:
                     pat_path = os.path.join(tumor_type_path,pat)
+                    image_files = []
                     for file in tf.io.gfile.listdir(pat_path):
 
                         if 'OT.' in file:
