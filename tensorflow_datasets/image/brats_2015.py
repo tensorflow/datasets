@@ -1,5 +1,5 @@
 """brats_2015 dataset."""
-import tensorflow_datasets as tfds
+import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 
 import numpy as np
