@@ -19,6 +19,7 @@
 
 import os
 from typing import Any, Dict, Iterable, List, Optional
+import importlib_resources
 
 import dataclasses
 import tensorflow.compat.v2 as tf
@@ -26,10 +27,9 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 
 
-_ROOT_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
-
 _CHECKSUM_DIRS = [
-    os.path.join(_ROOT_DIR, 'url_checksums'),
+  os.path.normpath(
+    importlib_resources.files('tensorflow_datasets') / 'url_checksums'),
 ]
 _CHECKSUM_SUFFIX = '.txt'
 
@@ -66,7 +66,7 @@ def add_checksums_dir(checksums_dir: str) -> None:
 
   ```
   # Set-up the folder containing the 'my_dataset.txt' checksums.
-  checksum_dir = os.path.join(os.path.dirname(__file__), 'checksums/')
+  checksum_dir = importlib_resources.files('tensorflow_datasets') / 'checksums'
   checksum_dir = os.path.normpath(checksum_dir)
 
   # Add the checksum dir (will be executed when the user import your dataset)
