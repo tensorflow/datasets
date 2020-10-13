@@ -48,7 +48,6 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'dm-tree',
     'future',
     'numpy',
     'promise',

@@ -32,12 +32,13 @@ import sys
 import textwrap
 import threading
 import types
-from typing import Any, Callable, Iterator, List, NoReturn, TypeVar, Union
+from typing import Any, Callable, Iterator, List, NoReturn, Tuple, TypeVar, Union
 import uuid
 
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils.type_utils import Tree
 
 
 # pylint: disable=g-import-not-at-top
@@ -218,6 +219,40 @@ def flatten_nest_dict(d):
     else:
       flat_dict[k] = v
   return flat_dict
+
+
+# Note: Could use `tree.flatten_with_path` instead, but makes it harder for
+# users to compile from source.
+def flatten_with_path(
+    structure: Tree[T],
+) -> Iterator[Tuple[Tuple[Union[str, int], ...], T]]:  # pytype: disable=invalid-annotation
+  """Convert a TreeDict into a flat list of paths and their values.
+
+  ```py
+  flatten_with_path({'a': {'b': v}}) == [(('a', 'b'), v)]
+  ```
+
+  Args:
+    structure: Nested input structure
+
+  Yields:
+    The `(path, value)` tuple. With path being the tuple of `dict` keys and
+      `list` indexes
+  """
+  if isinstance(structure, dict):
+    key_struct_generator = sorted(structure.items())
+  elif isinstance(structure, (list, tuple)):
+    key_struct_generator = enumerate(structure)
+  else:
+    key_struct_generator = None  # End of recursion
+
+  if key_struct_generator is not None:
+    for key, sub_structure in key_struct_generator:
+      # Recurse into sub-structures
+      for sub_path, sub_value in flatten_with_path(sub_structure):
+        yield (key,) + sub_path, sub_value
+  else:
+    yield (), structure  # Leaf, yield value
 
 
 def dedent(text):
