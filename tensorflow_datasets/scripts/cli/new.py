@@ -102,7 +102,7 @@ def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
   dataset_dir = dataset_dir.expanduser() / dataset_name
   dataset_dir.mkdir(parents=True)
   # TODO(py3.7): Should be `dir.expanduser().resolve()` but `.resolve()` fails
-  # on some environements when the file doesn't exists.
+  # on some environments when the file doesn't exists.
   # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
   dataset_dir = dataset_dir.resolve()
 

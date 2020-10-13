@@ -272,7 +272,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Otherwise, backward compatibility cannot be guaranteed as some code will
     # depend on the code version instead of the restored data version
     if not getattr(self, "_version", None):
-      # Message for developper creating new dataset. Will trigger if they are
+      # Message for developers creating new dataset. Will trigger if they are
       # using .info in the constructor before calling super().__init__
       raise AssertionError(
           "Info should not been called before version has been defined. "

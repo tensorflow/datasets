@@ -150,7 +150,7 @@ DATASET_EXTRAS = {
 
 
 # Those datasets have dependencies which conflict with the rest of TFDS, so
-# running them in an isolated environements.
+# running them in an isolated environments.
 # See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 
