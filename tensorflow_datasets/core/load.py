@@ -234,28 +234,28 @@ def load(
 
   1. Fetch the `tfds.core.DatasetBuilder` by name:
 
-  ```python
-  builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
-  ```
+      ```python
+      builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
+      ```
 
   2. Generate the data (when `download=True`):
 
-  ```python
-  builder.download_and_prepare(**download_and_prepare_kwargs)
-  ```
+      ```python
+      builder.download_and_prepare(**download_and_prepare_kwargs)
+      ```
 
   3. Load the `tf.data.Dataset` object:
 
-  ```python
-  ds = builder.as_dataset(
-      split=split,
-      as_supervised=as_supervised,
-      shuffle_files=shuffle_files,
-      read_config=read_config,
-      decoders=decoders,
-      **as_dataset_kwargs,
-  )
-  ```
+      ```python
+      ds = builder.as_dataset(
+          split=split,
+          as_supervised=as_supervised,
+          shuffle_files=shuffle_files,
+          read_config=read_config,
+          decoders=decoders,
+          **as_dataset_kwargs,
+      )
+      ```
 
   See: https://www.tensorflow.org/datasets/overview#load_a_dataset for more
   examples.
