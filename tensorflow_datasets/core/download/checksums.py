@@ -17,19 +17,16 @@
 
 """
 
-import os
 from typing import Any, Dict, Iterable, List, Optional
-import importlib_resources
+from pathlib import Path
 
 import dataclasses
-import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 
 
 _CHECKSUM_DIRS = [
-  os.path.normpath(
-    importlib_resources.files('tensorflow_datasets') / 'url_checksums'),
+    utils.resource_path('tensorflow_datasets') / 'url_checksums',
 ]
 _CHECKSUM_SUFFIX = '.txt'
 
@@ -54,7 +51,7 @@ class UrlInfo:
     return dataclasses.asdict(self)
 
 
-def add_checksums_dir(checksums_dir: str) -> None:
+def add_checksums_dir(checksums_dir: Path) -> None:
   """Registers a new checksums dir.
 
   This function allow external datasets not present in the tfds repository to
@@ -66,8 +63,7 @@ def add_checksums_dir(checksums_dir: str) -> None:
 
   ```
   # Set-up the folder containing the 'my_dataset.txt' checksums.
-  checksum_dir = importlib_resources.files('tensorflow_datasets') / 'checksums'
-  checksum_dir = os.path.normpath(checksum_dir)
+  checksum_dir = utils.resources_path('tensorflow_datasets') / 'checksums'
 
   # Add the checksum dir (will be executed when the user import your dataset)
   tfds.download.add_checksums_dir(checksum_dir)
@@ -77,34 +73,32 @@ def add_checksums_dir(checksums_dir: str) -> None:
   ```
 
   Args:
-    checksums_dir: `str`, checksums dir to add to the registry
+    checksums_dir: `Path`, checksums dir to add to the registry
   """
   if checksums_dir in _CHECKSUM_DIRS:  # Avoid duplicate
     return
   _CHECKSUM_DIRS.append(checksums_dir)
 
 
-def _list_dir(path: str) -> List[str]:
-  return tf.io.gfile.listdir(path)
+def _list_dir(path: str) -> List[Path]:
+  return [file for file in Path(path).iterdir() if str(file).endswith('.txt')]
 
 
 
 
 @utils.memoize()
-def _checksum_paths() -> Dict[str, str]:
+def _checksum_paths() -> Dict[str, Path]:
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
     for fname in _list_dir(dir_path):
-      if not fname.endswith(_CHECKSUM_SUFFIX):
-        continue
-      fpath = os.path.join(dir_path, fname)
-      dataset_name = fname[:-len(_CHECKSUM_SUFFIX)]
+      fpath = dir_path / fname
+      dataset_name = str(fname)[:-len(_CHECKSUM_SUFFIX)]
       dataset2path[dataset_name] = fpath
   return dataset2path
 
 
-def _get_path(dataset_name: str) -> str:
+def _get_path(dataset_name: str) -> Path:
   """Returns path to where checksums are stored for a given dataset."""
   path = _checksum_paths().get(dataset_name, None)
   if path:
@@ -122,10 +116,9 @@ def _get_path(dataset_name: str) -> str:
   raise AssertionError(msg)
 
 
-def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
+def _get_url_infos(checksums_path: Path) -> Dict[str, UrlInfo]:
   """Returns {URL: UrlInfo}s stored within file at given path."""
-  with tf.io.gfile.GFile(checksums_path) as f:
-    content = f.read()
+  content = checksums_path.read_text()
   return _parse_url_infos(content.splitlines())
 
 
@@ -156,8 +149,7 @@ def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
 
 
 def url_infos_from_path(checksums_path: str) -> Dict[str, UrlInfo]:
-  with tf.io.gfile.GFile(checksums_path) as f:
-    return _parse_url_infos(f.read().splitlines())
+  return _get_url_infos(Path(checksums_path))
 
 
 @utils.memoize()
@@ -198,7 +190,6 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
   new_data.update(url_infos)
   if original_data == new_data:
     return
-  with tf.io.gfile.GFile(path, 'w') as f:
-    for url, url_info in sorted(new_data.items()):
-      filename = url_info.filename or ''
-      f.write(f'{url}\t{url_info.size}\t{url_info.checksum}\t{filename}\n')
+  for url, url_info in sorted(new_data.items()):
+    filename = url_info.filename or ''
+    path.write_text(f'{url}\t{url_info.size}\t{url_info.checksum}\t{filename}\n')
