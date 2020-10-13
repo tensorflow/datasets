@@ -36,7 +36,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
         #The MRI image
-        'image' : tfds.features.Tensor(shape=(240,240),dtype=tf.int16),
+        'image' : tfds.features.Tensor(shape=(240,240),dtype=tf.float32),
         ## The mask
         'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.int16),
         ## Tumor Type
@@ -107,6 +107,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                     for image in image_files:
                         modality = image.split('/')[-1].split('.')[-3].split('_')[-1]
                         image_array, image_header = load(image)
+                        image_array = image_array.astype('float32')
                         for current_slice in range(0,total_slices):
                             key = image.split('/')[-1].split('.')[-2]+'_'+modality+'_'+str(current_slice+1)
                             yield( key,
