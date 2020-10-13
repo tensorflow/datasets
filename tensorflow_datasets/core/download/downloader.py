@@ -148,11 +148,17 @@ class _Downloader(object):
 
   def _sync_file_copy(
       self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
-    out_path = os.path.join(destination_path, os.path.basename(filepath))
+    filename = os.path.basename(filepath)
+    out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
     hexdigest, size = utils.read_checksum_digest(
-        out_path, checksum_cls=self._checksumer_cls)
-    return checksums_lib.UrlInfo(checksum=hexdigest, size=size)
+        out_path, checksum_cls=self._checksumer_cls
+    )
+    return checksums_lib.UrlInfo(
+        checksum=hexdigest,
+        size=size,
+        filename=filename,
+    )
 
   def _sync_download(
       self, url: str, destination_path: str) -> checksums_lib.UrlInfo:
@@ -204,7 +210,11 @@ class _Downloader(object):
             self._pbar_dl_size.update(size_mb // unit_mb)
             size_mb %= unit_mb
     self._pbar_url.update(1)
-    return checksums_lib.UrlInfo(checksum=checksum.hexdigest(), size=size)
+    return checksums_lib.UrlInfo(
+        checksum=checksum.hexdigest(),
+        size=size,
+        filename=fname,
+    )
 
 
 def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:

@@ -18,8 +18,9 @@
 """
 
 import os
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, Iterable, List, Optional
 
+import dataclasses
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
@@ -33,39 +34,24 @@ _CHECKSUM_DIRS = [
 _CHECKSUM_SUFFIX = '.txt'
 
 
-class UrlInfo(object):  # TODO(tfds): Use dataclasses
+@dataclasses.dataclass(eq=True)
+class UrlInfo:
   """Small wrapper around the url metadata (checksum, size).
 
   Attributes:
     size: Download size of the file
     checksum: Checksum of the file
+    filename: Name of the file
   """
-
-  def __init__(self, size: int, checksum: str):
-    self.size = size
-    self.checksum = checksum
+  size: int
+  checksum: str
+  # We exclude the filename from `__eq__` for backward compatibility
+  # Two checksums are equals even if filename is unknown or different.
+  filename: Optional[str] = dataclasses.field(compare=False)
 
   def asdict(self) -> Dict[str, Any]:
     """Returns the dict representation of the dataclass."""
-    # TODO(tfds): Replace by `dataclasses.asdict(self)`
-    return {
-        'size': self.size,
-        'checksum': self.checksum,
-    }
-
-  def __eq__(self, other) -> bool:
-    return (
-        type(self) == type(other) and  # pylint: disable=unidiomatic-typecheck
-        self.size == other.size and
-        self.checksum == other.checksum
-    )
-
-  def __ne__(self, other) -> bool:  # Required in Py2
-    return not self == other
-
-  def __repr__(self) -> str:
-    return '{}(size={}, checksum={})'.format(
-        type(self).__name__, self.size, self.checksum)
+    return dataclasses.asdict(self)
 
 
 def add_checksums_dir(checksums_dir: str) -> None:
@@ -137,7 +123,7 @@ def _get_path(dataset_name: str) -> str:
 
 
 def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within file at given path."""
+  """Returns {URL: UrlInfo}s stored within file at given path."""
   with tf.io.gfile.GFile(checksums_path) as f:
     content = f.read()
   return _parse_url_infos(content.splitlines())
@@ -150,12 +136,22 @@ def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
       continue
-    try:
-      url, size, checksum = line.split('\t')
-    except ValueError:  # not enough values to unpack (legacy files)
+    values = line.split('\t')
+    if len(values) == 1:  # not enough values to unpack (legacy files)
       # URL might have spaces inside, but size and checksum will not.
-      url, size, checksum = line.rsplit(' ', 2)
-    url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
+      values = line.rsplit(' ', 2)
+    if len(values) == 4:
+      url, size, checksum, filename = values
+    elif len(values) == 3:
+      url, size, checksum = values
+      filename = None
+    else:
+      raise AssertionError(f'Error parsing checksums: {values}')
+    url_infos[url] = UrlInfo(
+        size=int(size),
+        checksum=checksum,
+        filename=filename,
+    )
   return url_infos
 
 
@@ -166,7 +162,7 @@ def url_infos_from_path(checksums_path: str) -> Dict[str, UrlInfo]:
 
 @utils.memoize()
 def get_all_url_infos() -> Dict[str, UrlInfo]:
-  """Returns dict associating URL to (size, sha256)."""
+  """Returns dict associating URL to UrlInfo."""
   url_infos = {}
   for path in _checksum_paths().values():
     dataset_url_infos = _get_url_infos(path)
@@ -204,4 +200,5 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
     return
   with tf.io.gfile.GFile(path, 'w') as f:
     for url, url_info in sorted(new_data.items()):
-      f.write('{}\t{}\t{}\n'.format(url, url_info.size, url_info.checksum))
+      filename = url_info.filename or ''
+      f.write(f'{url}\t{url_info.size}\t{url_info.checksum}\t{filename}\n')

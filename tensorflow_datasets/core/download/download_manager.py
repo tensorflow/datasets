@@ -268,8 +268,7 @@ class DownloadManager(object):
   @utils.build_synchronize_decorator()
   def _record_url_infos(self):
     """Store in file when recorded size/checksum of downloaded files."""
-    checksums.store_checksums(self._dataset_name,
-                              self._recorded_url_infos)
+    checksums.store_checksums(self._dataset_name, self._recorded_url_infos)
 
   def _handle_download_result(
       self,
@@ -627,7 +626,9 @@ def _read_url_info(url_path: str) -> checksums.UrlInfo:
         'Could not found `url_info` in {}. This likelly indicates that '
         'the files where downloaded with a previous version of TFDS (<=3.1.0). '
     )
-  return checksums.UrlInfo(**file_info['url_info'])
+  url_info = file_info['url_info']
+  url_info.setdefault('filename', None)
+  return checksums.UrlInfo(**url_info)
 
 
 def _map_promise(map_fn, all_inputs):
