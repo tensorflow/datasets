@@ -54,6 +54,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`binarized_mnist`](binarized_mnist.md)
 *   [`celeb_a`](celeb_a.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`cityscapes`](cityscapes.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`clevr`](clevr.md)
 *   [`clic`](clic.md)
 *   [`coil100`](coil100.md)
