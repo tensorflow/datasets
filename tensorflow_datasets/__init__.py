@@ -41,9 +41,9 @@ import sys
 # TODO(py2): Cleanup once Py2 support is dropped entirely
 if sys.version_info[0] < 3:
   print("""
-  ************************************************
-  *   WARNING: TFDS IS UNSUPORTED FOR PYTHON 2   *
-  ************************************************
+  ***********************************************
+  *  WARNING: TFDS IS UNSUPPORTED FOR PYTHON 2  *
+  ***********************************************
   """)
   from tensorflow_datasets import __init__py2 as api
   from tensorflow_datasets.__init__py2 import *
