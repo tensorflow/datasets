@@ -81,7 +81,8 @@ class DownloadManagerTest(testing.TestCase):
   def _make_downloader_mock(self):
     """`downloader.download` patch which creates the returns the path."""
 
-    def _download(url, tmpdir_path):
+    def _download(url, tmpdir_path, verify):
+      del verify
       self.downloaded_urls.append(url)  # Record downloader.download() calls
       # If the name isn't explicitly provided, then it is extracted from the
       # url.

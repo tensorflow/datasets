@@ -130,7 +130,7 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url: str, destination_path: str):
+  def download(self, url: str, destination_path: str, verify: bool = True):
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
@@ -138,12 +138,14 @@ class _Downloader(object):
     Args:
       url: address of resource to download.
       destination_path: `str`, path to directory where to download the resource.
+      verify: whether to verify ssl certificates
 
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     self._pbar_url.update_total(1)
-    future = self._executor.submit(self._sync_download, url, destination_path)
+    future = self._executor.submit(
+        self._sync_download, url, destination_path, verify)
     return promise.Promise.resolve(future)
 
   def _sync_file_copy(
@@ -161,7 +163,8 @@ class _Downloader(object):
     )
 
   def _sync_download(
-      self, url: str, destination_path: str) -> checksums_lib.UrlInfo:
+      self, url: str, destination_path: str, verify: bool = True
+      ) -> checksums_lib.UrlInfo:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
@@ -172,6 +175,7 @@ class _Downloader(object):
     Args:
       url: url to download
       destination_path: path where to write it
+      verify: whether to verify ssl certificates
 
     Returns:
       None
@@ -187,7 +191,7 @@ class _Downloader(object):
     except tf.errors.UnimplementedError:
       pass
 
-    with _open_url(url) as (response, iter_content):
+    with _open_url(url, verify) as (response, iter_content):
       fname = _get_filename(response)
       path = os.path.join(destination_path, fname)
       size = 0
@@ -217,11 +221,14 @@ class _Downloader(object):
     )
 
 
-def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
+def _open_url(
+    url: str,
+    verify: bool = True) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
   """Context manager to open an url.
 
   Args:
     url: The url to open
+    verify: Whether to verify the SSL certificate.
 
   Returns:
     response: The url response with `.url` and `.header` attributes.
@@ -229,21 +236,26 @@ def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
   """
   # Download FTP urls with `urllib`, otherwise use `requests`
   open_fn = _open_with_urllib if url.startswith('ftp') else _open_with_requests
-  return open_fn(url)
+  return open_fn(url, verify)
 
 
 @contextlib.contextmanager
-def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+def _open_with_requests(
+    url: str,
+    verify: bool = True) -> Iterator[Tuple[Response, Iterable[bytes]]]:
   with requests.Session() as session:
     if _DRIVE_URL.match(url):
       url = _get_drive_url(url, session)
-    with session.get(url, stream=True) as response:
+    with session.get(url, stream=True, verify=verify) as response:
       _assert_status(response)
       yield (response, response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE))
 
 
 @contextlib.contextmanager
-def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+def _open_with_urllib(
+    url: str,
+    verify: bool = True) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  del verify
   with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
     yield (
         response,

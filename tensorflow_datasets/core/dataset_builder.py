@@ -796,6 +796,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
+        verify_ssl=download_config.verify_ssl,
     )
 
   @property

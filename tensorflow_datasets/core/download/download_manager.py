@@ -73,6 +73,7 @@ class DownloadConfig(object):
       beam_runner=None,
       beam_options=None,
       try_download_gcs=True,
+      verify_ssl=True,
   ):
     """Constructs a `DownloadConfig`.
 
@@ -99,6 +100,8 @@ class DownloadConfig(object):
       try_download_gcs: `bool`, defaults to True. If True, prepared dataset
         will be downloaded from GCS, when available. If False, dataset will be
         downloaded and prepared from scratch.
+      verify_ssl: `bool`, defaults to True. If True, will verify certificate
+        when downloading dataset.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -112,6 +115,7 @@ class DownloadConfig(object):
     self.beam_runner = beam_runner
     self.beam_options = beam_options
     self.try_download_gcs = try_download_gcs
+    self.verify_ssl = verify_ssl
 
 
 class DownloadManager(object):
@@ -175,6 +179,7 @@ class DownloadManager(object):
       force_extraction: bool = False,
       force_checksums_validation: bool = False,
       register_checksums: bool = False,
+      verify_ssl: bool = True,
   ):
     """Download manager constructor.
 
@@ -193,6 +198,8 @@ class DownloadManager(object):
         have checksums.
       register_checksums: If True, dl checksums aren't
         checked, but stored into file.
+      verify_ssl: `bool`, defaults to True. If True, will verify certificate
+        when downloading dataset.
     """
     self._dataset_name = dataset_name
     self._download_dir = os.path.expanduser(download_dir)
@@ -206,6 +213,7 @@ class DownloadManager(object):
     self._force_extraction = force_extraction
     self._force_checksums_validation = force_checksums_validation
     self._register_checksums = register_checksums
+    self._verify_ssl = verify_ssl
 
     # All known URLs: {url: UrlInfo(size=, checksum=)}
     self._url_infos = checksums.get_all_url_infos()
@@ -480,7 +488,8 @@ class DownloadManager(object):
           url_path=url_path,
           url_info=url_info,
       )
-    return self._downloader.download(url, download_dir_path).then(callback)
+    return self._downloader.download(
+        url, download_dir_path, verify=self._verify_ssl).then(callback)
 
   @utils.build_synchronize_decorator()
   @utils.memoize()
