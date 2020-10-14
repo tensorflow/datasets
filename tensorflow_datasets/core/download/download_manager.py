@@ -343,7 +343,8 @@ class DownloadManager(object):
     elif resource.url not in self._url_infos:
       if self._force_checksums_validation:
         raise ValueError(
-            'Missing checksums url: {}, yet `force_checksums_validation=True`. '
+            f'Missing checksums url: {resource.url}, yet '
+            '`force_checksums_validation=True`. '
             'Did you forgot to register checksums ?')
       # Otherwise, missing checksums, do nothing
     elif url_info != self._url_infos.get(resource.url, None):
