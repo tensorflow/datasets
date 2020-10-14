@@ -58,6 +58,7 @@ REQUIRED_PKGS = [
     'termcolor',
     'tqdm',
     # Standard library backports
+    'typing_extensions<"3.7"'
     'dataclasses;python_version<"3.7"',
     'importlib_resources;python_version<"3.9"',
 ]
