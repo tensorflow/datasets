@@ -80,7 +80,7 @@ def add_checksums_dir(checksums_dir: Path) -> None:
   _CHECKSUM_DIRS.append(checksums_dir)
 
 
-def _list_dir(path: str) -> List[Path]:
+def _list_dir(path: Path) -> List[Path]:
   return [file for file in Path(path).iterdir() if str(file).endswith('.txt')]
 
 
@@ -91,9 +91,8 @@ def _checksum_paths() -> Dict[str, Path]:
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
-    for fname in _list_dir(dir_path):
-      fpath = dir_path / fname
-      dataset_name = str(fname)[:-len(_CHECKSUM_SUFFIX)]
+    for fpath in _list_dir(dir_path):
+      dataset_name = str(fpath.name)[:-len(_CHECKSUM_SUFFIX)]
       dataset2path[dataset_name] = fpath
   return dataset2path
 
