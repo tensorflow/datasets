@@ -79,7 +79,7 @@ TESTS_REQUIRE = [
 
 # Additional deps for formatting
 DEV_REQUIRE = [
-    'pylint>=2.5.3',
+    'pylint>=2.6.0',
     'yapf',
 ]
 

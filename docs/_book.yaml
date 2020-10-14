@@ -39,11 +39,13 @@ upper_tabs:
       - title: Community
         path: /datasets/community
 
-      - heading: "Add your dataset"
-      - title: Add a dataset
+      - heading: "Create your dataset"
+      - title: Create your dataset
         path: /datasets/add_dataset
-      - title: Add huge datasets (Apache Beam)
+      - title: Huge datasets (Apache Beam)
         path: /datasets/beam_datasets
+      - title: Contribute to TFDS
+        path: /datasets/contribute
 
     - name: API
       skip_translation: true

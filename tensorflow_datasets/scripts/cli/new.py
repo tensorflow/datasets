@@ -129,14 +129,17 @@ def _create_dataset_file(info: DatasetInfo) -> None:
   """Create a new dataset from a template."""
   file_path = info.path / f'{info.name}.py'
 
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
 
       # {info.todo}: Markdown description  that will appear on the catalog page.
       _DESCRIPTION = """
+      Description is **formatted** as markdown.
+
+      It should also contain any processing which has been applied (if any),
+      (e.g. corrupted example skipped, images cropped,...):
       """
 
       # {info.todo}: BibTeX citation
@@ -186,8 +189,7 @@ def _create_dataset_file(info: DatasetInfo) -> None:
           """Yields examples."""
           # {info.todo}: Yields (key, example) tuples from the dataset
           yield 'key', {{}}
-      '''
-  )
+      ''')
   file_path.write_text(content)
 
 

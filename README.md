@@ -62,7 +62,6 @@ And vote on the current
 [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request)
 by adding a thumbs-up reaction to the issue.
 
-
 ### Citation
 
 Please include the following citation when using `tensorflow-datasets` for a
