@@ -84,6 +84,9 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
           description="Unprocessed audio without additional reverberation.",
           version=tfds.core.Version("1.2.0")),
   ]
+  
+  VERSION = tfds.core.Version('1.0.0')
+
 
   def _info(self):
     source_labels = ["background0", "foreground0", "foreground1", "foreground2"]
