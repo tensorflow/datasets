@@ -264,7 +264,7 @@ class EMNIST(MNIST):
       ),
       EMNISTConfig(
           name="letters",
-          class_number=37,
+          class_number=26,
           train_examples=88800,
           test_examples=14800,
           description="EMNIST Letters",
