@@ -238,7 +238,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=26),
 })
 ```
 
