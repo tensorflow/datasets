@@ -58,6 +58,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def gcld3(cls):
+    return _try_import("gcld3")  # pylint: disable=unreachable
+
+  @utils.classproperty
+  @classmethod
   def h5py(cls):
     return _try_import("h5py")
 
