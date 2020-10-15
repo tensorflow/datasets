@@ -36,6 +36,7 @@ from tensorflow_datasets.text.hellaswag import Hellaswag
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
+from tensorflow_datasets.text.lambada import Lambada
 from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
