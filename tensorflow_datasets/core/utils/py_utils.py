@@ -25,15 +25,11 @@ import io
 import itertools
 import logging
 import os
-import pathlib
 import random
 import shutil
 import string
-import sys
 import textwrap
 import threading
-import types
-import typing
 from typing import Any, Callable, Iterator, List, NoReturn, Tuple, TypeVar, Union
 import uuid
 
@@ -43,16 +39,6 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
 
 
-# pylint: disable=g-import-not-at-top
-if sys.version_info >= (3, 9):
-  import importlib.resources as importlib_resources
-else:
-  import importlib_resources
-
-# pylint: enable=g-import-not-at-top
-
-ReadOnlyPath = type_utils.ReadOnlyPath
-ReadWritePath = type_utils.ReadWritePath
 Tree = type_utils.Tree
 
 # NOTE: When used on an instance method, the cache is shared across all
@@ -406,24 +392,6 @@ def atomic_write(path, mode):
 def get_tfds_path(relative_path):
   """Returns absolute path to file given path relative to tfds root."""
   path = os.path.join(tfds_dir(), relative_path)
-  return path
-
-
-def resource_path(
-    package: Union[str, types.ModuleType]
-) -> ReadOnlyPath:
-  """Returns `importlib.resources.files`."""
-  return importlib_resources.files(package)  # pytype: disable=module-attr
-
-
-def to_write_path(path: ReadOnlyPath) -> ReadWritePath:
-  """Cast the path to a read-write Path."""
-  if not isinstance(path, pathlib.Path):
-    raise ValueError(
-        f'Can\'t write {path!r}. Make sure you\'re not running from a '
-        'zipapp.'
-    )
-  path = typing.cast(ReadWritePath, path)
   return path
 
 
