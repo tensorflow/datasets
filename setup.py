@@ -59,6 +59,7 @@ REQUIRED_PKGS = [
     'tqdm',
     # Standard library backports
     'dataclasses;python_version<"3.7"',
+    'typing_extensions;python_version<"3.8"',
     'importlib_resources;python_version<"3.9"',
 ]
 
