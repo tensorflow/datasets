@@ -158,7 +158,10 @@ class Voxforge(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(urls_list['urls_list']) as f:
       for line in f:
         archive_url = line.strip().replace('"', '').replace('\'', '')
-        archive_path = os.path.join(dl_manager.manual_dir, archive_url)
+        # When using `wget -i voxforge_urls.txt -x`, files are saved with
+        # filenames that only include the basename, not the full path.
+        local_filename = os.path.basename(archive_url)
+        archive_path = os.path.join(dl_manager.manual_dir, local_filename)
         if not tf.io.gfile.exists(archive_path):
           raise AssertionError(
               'VoxForge requires manual download. Path {} is missing'.format(
