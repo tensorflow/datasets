@@ -33,6 +33,7 @@ except ImportError:
 
 # Accept both `str` and `pathlib.Path`-like
 PathLike = Union[str, os.PathLike]
+PathLikeCls = (str, os.PathLike)  # For use in isinstance
 
 T = TypeVar('T')
 

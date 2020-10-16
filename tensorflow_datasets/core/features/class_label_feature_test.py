@@ -15,6 +15,8 @@
 
 """Tests for tensorflow_datasets.core.features.class_label_feature."""
 
+import textwrap
+
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
@@ -174,5 +176,21 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
       features.ClassLabel(names=['label1', 'label1', 'label2'])
 
 
-if __name__ == '__main__':
-  testing.test_main()
+def test_file_path(tmp_path):
+  label_file = tmp_path / 'label_names.txt'
+  # Empty lines are ignored
+  content = textwrap.dedent(
+      """
+      label1
+
+
+      label0
+      """
+  )
+  label_file.write_text(content)
+
+  # Both Path and str are supported
+  labels = features.ClassLabel(names_file=label_file)
+  labels_2 = features.ClassLabel(names_file=str(label_file))
+  assert labels.names == labels_2.names
+  assert labels.names == ['label1', 'label0']  # Order is kept
