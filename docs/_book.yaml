@@ -30,6 +30,8 @@ upper_tabs:
         path: /datasets/splits
       - title: Performance tips
         path: /datasets/performances
+      - title: Feature connectors
+        path: /datasets/features
       - title: Feature decoding
         path: /datasets/decode
       - title: Versioning
