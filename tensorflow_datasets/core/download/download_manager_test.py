@@ -49,6 +49,7 @@ class Artifact(object):
     self.url_info = checksums_lib.UrlInfo(
         size=len(content),
         checksum=_sha256(content),
+        filename=name,
     )
     self.file_name = resource_lib.get_dl_fname(url, self.url_info.checksum)
     self.file_path = f'/dl_dir/{self.file_name}'
@@ -80,7 +81,8 @@ class DownloadManagerTest(testing.TestCase):
   def _make_downloader_mock(self):
     """`downloader.download` patch which creates the returns the path."""
 
-    def _download(url, tmpdir_path):
+    def _download(url, tmpdir_path, verify):
+      del verify
       self.downloaded_urls.append(url)  # Record downloader.download() calls
       # If the name isn't explicitly provided, then it is extracted from the
       # url.
@@ -256,7 +258,6 @@ class DownloadManagerTest(testing.TestCase):
         'a': '/extract_dir/ZIP.%s' % a.file_name,
     })
 
-
   def test_download_and_extract_already_downloaded(self):
     a = Artifact('a')  # Extract can't be deduced from the url, but from .INFO
     # File was already downloaded:
@@ -308,7 +309,11 @@ class DownloadManagerTest(testing.TestCase):
     manager = self._get_manager(
         register_checksums=False,
         url_infos={
-            a.url: checksums_lib.UrlInfo(size=a.url_info.size, checksum=sha_b),
+            a.url: checksums_lib.UrlInfo(
+                size=a.url_info.size,
+                checksum=sha_b,
+                filename=a.url_info.filename,
+            ),
         },
     )
     with self.assertRaises(dm.NonMatchingChecksumError):
@@ -447,6 +452,7 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[a.url] = checksums_lib.UrlInfo(
         size=a.url_info.size,
         checksum=_sha256('Other content'),
+        filename=a.url_info.filename,
     )
     dl_manager = self._get_manager(
         register_checksums=False,

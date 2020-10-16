@@ -178,13 +178,13 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
     source_class_label = tfds.features.ClassLabel(
         names=IMAGE_LEVEL_SOURCES + BBOX_SOURCES)
     all_class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(os.path.join(
+        names_file=tfds.core.tfds_path(os.path.join(
             'object_detection', 'open_images_classes_all.txt')))
     trainable_class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(os.path.join(
+        names_file=tfds.core.tfds_path(os.path.join(
             'object_detection', 'open_images_classes_trainable.txt')))
     boxable_class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(os.path.join(
+        names_file=tfds.core.tfds_path(os.path.join(
             'object_detection', 'open_images_classes_boxable.txt')))
     return tfds.core.DatasetInfo(
         builder=self,

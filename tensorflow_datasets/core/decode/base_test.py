@@ -15,6 +15,8 @@
 
 """Tests for tensorflow_datasets.core.transform.image.image_transform."""
 
+import os
+
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
@@ -55,7 +57,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
           channels=feature.shape[-1],
       )
 
-    image_path = utils.get_tfds_path('testing/test_data/test_image.jpg')
+    image_path = os.fspath(utils.tfds_path('testing/test_data/test_image.jpg'))
     with tf.io.gfile.GFile(image_path, 'rb') as f:
       serialized_img = f.read()
 
@@ -89,7 +91,7 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
 
   def test_video_custom_decode(self):
 
-    image_path = utils.get_tfds_path('testing/test_data/test_image.jpg')
+    image_path = os.fspath(utils.tfds_path('testing/test_data/test_image.jpg'))
     with tf.io.gfile.GFile(image_path, 'rb') as f:
       serialized_img = f.read()
 

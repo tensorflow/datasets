@@ -118,8 +118,8 @@ class Video(sequence_feature.Sequence):
     return 'ffmpeg'
 
   def _ffmpeg_decode(self, path_or_fobj):
-    if isinstance(path_or_fobj, six.string_types):
-      ffmpeg_args = [self._ffmpeg_path, '-i', path_or_fobj]
+    if isinstance(path_or_fobj, type_utils.PathLikeCls):
+      ffmpeg_args = [self._ffmpeg_path, '-i', os.fspath(path_or_fobj)]
       ffmpeg_stdin = None
     else:
       ffmpeg_args = [self._ffmpeg_path, '-i', 'pipe:0']
@@ -159,7 +159,8 @@ class Video(sequence_feature.Sequence):
 
   def encode_example(self, video_or_path_or_fobj):
     """Converts the given image into a dict convertible to tf example."""
-    if isinstance(video_or_path_or_fobj, six.string_types):
+    if isinstance(video_or_path_or_fobj, type_utils.PathLikeCls):
+      video_or_path_or_fobj = os.fspath(video_or_path_or_fobj)
       if not os.path.isfile(video_or_path_or_fobj):
         _, video_temp_path = tempfile.mkstemp()
         try:
@@ -178,7 +179,7 @@ class Video(sequence_feature.Sequence):
         encoded_video = self._ffmpeg_decode(video_temp_path)
     elif hasattr(video_or_path_or_fobj, 'read'):
       encoded_video = self._ffmpeg_decode(video_or_path_or_fobj)
-    else:
+    else:  # List of images, np.array,...
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
 

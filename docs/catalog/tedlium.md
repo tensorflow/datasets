@@ -2,26 +2,21 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="tedlium" />
   <meta itemprop="description" content="The TED-LIUM corpus is English-language TED talks, with transcriptions,&#10;sampled at 16kHz. It contains about 118 hours of speech.&#10;&#10;This is the TED-LIUM corpus release 1,&#10;licensed under Creative Commons BY-NC-ND 3.0&#10;(http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;tedlium&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/tedlium" />
   <meta itemprop="sameAs" content="https://www.openslr.org/7/" />
   <meta itemprop="citation" content="@inproceedings{rousseau2012tedlium,&#10;  title={TED-LIUM: an Automatic Speech Recognition dedicated corpus},&#10;  author={Rousseau, Anthony and Del{\&#x27;e}glise, Paul and Est{\`e}ve, Yannick},&#10;  booktitle={Conference on Language Resources and Evaluation (LREC)},&#10;  pages={125--129},&#10;  year={2012}&#10;}" />
 </div>
-
 # `tedlium`
 
-*   **Source code**:
-    [`tfds.audio.Tedlium`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/tedlium.py)
+*   **Source code**: [`tfds.audio.Tedlium`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/tedlium.py)
 
 *   **Versions**:
 
-    *   **`1.0.1`** (default): No release notes.
+    * **`1.0.1`** (default): No release notes.
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
 
 *   **Features**:
 
@@ -35,33 +30,28 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('speech', 'text')`
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('speech', 'text')`
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+
 
 ## tedlium/release1 (default config)
 
 *   **Description**:
 
-The TED-LIUM corpus is English-language TED talks, with transcriptions, sampled
-at 16kHz. It contains about 118 hours of speech.
+The TED-LIUM corpus is English-language TED talks, with transcriptions,
+sampled at 16kHz. It contains about 118 hours of speech.
 
-This is the TED-LIUM corpus release 1, licensed under Creative Commons BY-NC-ND
-3.0 (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
+This is the TED-LIUM corpus release 1,
+licensed under Creative Commons BY-NC-ND 3.0
+(http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
 
-*   **Config description**: The TED-LIUM corpus is English-language TED talks,
-    with transcriptions, sampled at 16kHz. It contains about 118 hours of
-    speech.
+*   **Config description**: The TED-LIUM corpus is English-language TED talks, with transcriptions,
+        sampled at 16kHz. It contains about 118 hours of speech.
 
-    ```
-    This is the TED-LIUM corpus release 1,
-    licensed under Creative Commons BY-NC-ND 3.0
-    (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
-    ```
+        This is the TED-LIUM corpus release 1,
+        licensed under Creative Commons BY-NC-ND 3.0
+        (http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en).
 
 *   **Homepage**: [https://www.openslr.org/7/](https://www.openslr.org/7/)
 
@@ -71,10 +61,10 @@ This is the TED-LIUM corpus release 1, licensed under Creative Commons BY-NC-ND
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,469
-`'train'`      | 56,803
+Split  | Examples
+:----- | -------:
+`'test'` | 1,469
+`'train'` | 56,803
 `'validation'` | 591
 
 *   **Citation**:
@@ -88,6 +78,41 @@ Split          | Examples
   year={2012}
 }
 ```
+
+*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release1-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## tedlium/release2
 
@@ -146,6 +171,40 @@ Split          | Examples
   year={2014}
 }
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release2-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## tedlium/release3
 
@@ -236,3 +295,37 @@ Split          | Examples
   organization={Springer}
 }
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release3-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

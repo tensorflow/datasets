@@ -27,8 +27,8 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core.utils.type_utils import TreeDict
-import tree
+from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import type_utils
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
@@ -36,6 +36,8 @@ try:
   DataFrame = pandas.DataFrame
 except ImportError:
   DataFrame = object
+
+TreeDict = type_utils.TreeDict
 
 
 @dataclasses.dataclass
@@ -147,7 +149,7 @@ def _make_columns(
   """Extract the columns info of the `panda.DataFrame`."""
   return [
       ColumnInfo.from_spec(path, ds_info)
-      for path, _ in tree.flatten_with_path(specs)
+      for path, _ in py_utils.flatten_with_path(specs)
   ]
 
 
@@ -156,7 +158,7 @@ def _make_row_dict(
     columns: List[ColumnInfo],
 ) -> Dict[str, np.ndarray]:
   """Convert a single example into a `pandas.DataFrame` row."""
-  values = tree.flatten(ex)
+  values = tf.nest.flatten(ex)
   return {column.name: v for column, v in zip(columns, values)}
 
 

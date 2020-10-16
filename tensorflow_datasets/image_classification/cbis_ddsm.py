@@ -118,11 +118,14 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CuratedBreastImagingDDSM."""
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
-    kwargs['version'] = tfds.core.Version('2.0.1')
+    kwargs['version'] = tfds.core.Version('3.0.0')
     kwargs['release_notes'] = {
+        '3.0.0': """
+        Better cropping sampling
+        (https://github.com/tensorflow/datasets/pull/2502)
+        """,
         '2.0.1': 'New split API (https://tensorflow.org/datasets/splits)',
     }
-
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
     self.patch_size = patch_size
@@ -202,12 +205,12 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     features['abnormalities'].update({
         'calc_type':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_calc_types.txt'))),
         'calc_distribution':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification',
                         'cbis_ddsm_calc_distributions.txt'))),
@@ -221,12 +224,12 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     features['abnormalities'].update({
         'mass_shape':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_mass_shapes.txt'))),
         'mass_margins':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_mass_margins.txt'))),
     })
@@ -241,7 +244,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
             tfds.features.Image(shape=(None, None, 1), encoding_format='jpeg'),
         'label':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_patch_labels.txt'))),
     })
@@ -712,8 +715,8 @@ def _sample_positive_patches(image,
     # Determine the region where random samples should be sampled from.
     max_h, min_h = max(abnorm_h, patch_size[0]), min(abnorm_h, patch_size[0])
     max_w, min_w = max(abnorm_w, patch_size[1]), min(abnorm_w, patch_size[1])
-    min_y = abnorm_y - int((1.0 - min_overlap_threshold) * max_h)
-    min_x = abnorm_x - int((1.0 - min_overlap_threshold) * max_w)
+    min_y = abnorm_y - max_h + min_overlap_threshold * min_h
+    min_x = abnorm_x - max_w + min_overlap_threshold * min_w
     max_y = abnorm_y + abnorm_h - int(min_overlap_threshold * min_h)
     max_x = abnorm_x + abnorm_w - int(min_overlap_threshold * min_w)
     # Ensure that all sampled batches are within the image.

@@ -168,7 +168,7 @@ class Imagenet2012Corrupted(Imagenet2012):
     Returns:
       tfds.core.DatasetInfo.
     """
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,

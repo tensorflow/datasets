@@ -58,7 +58,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
+    labels_path = tfds.core.tfds_path(_QUICKDRAW_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=("The Quick Draw Dataset is a collection of 50 million "

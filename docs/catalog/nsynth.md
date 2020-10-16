@@ -2,54 +2,35 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="nsynth" />
   <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each&#10;with a unique pitch, timbre, and envelope. Each note is annotated with three&#10;additional pieces of information based on a combination of human evaluation&#10;and heuristic algorithms: Source, Family, and Qualities.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;nsynth&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/nsynth" />
   <meta itemprop="sameAs" content="https://g.co/magenta/nsynth-dataset" />
   <meta itemprop="citation" content="@InProceedings{pmlr-v70-engel17a,&#10;  title =     {Neural Audio Synthesis of Musical Notes with {W}ave{N}et Autoencoders},&#10;  author =     {Jesse Engel and Cinjon Resnick and Adam Roberts and Sander Dieleman and Mohammad Norouzi and Douglas Eck and Karen Simonyan},&#10;  booktitle =    {Proceedings of the 34th International Conference on Machine Learning},&#10;  pages =   {1068--1077},&#10;  year =      {2017},&#10;  editor =      {Doina Precup and Yee Whye Teh},&#10;  volume =     {70},&#10;  series =    {Proceedings of Machine Learning Research},&#10;  address =     {International Convention Centre, Sydney, Australia},&#10;  month =     {06--11 Aug},&#10;  publisher =     {PMLR},&#10;  pdf =     {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},&#10;  url =   {http://proceedings.mlr.press/v70/engel17a.html},&#10;}" />
 </div>
-
 # `nsynth`
-
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
-The NSynth Dataset is an audio dataset containing ~300k musical notes, each with
-a unique pitch, timbre, and envelope. Each note is annotated with three
-additional pieces of information based on a combination of human evaluation and
-heuristic algorithms: Source, Family, and Qualities.
+The NSynth Dataset is an audio dataset containing ~300k musical notes, each
+with a unique pitch, timbre, and envelope. Each note is annotated with three
+additional pieces of information based on a combination of human evaluation
+and heuristic algorithms: Source, Family, and Qualities.
 
-*   **Homepage**:
-    [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
+*   **Homepage**: [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
-*   **Source code**:
-    [`tfds.audio.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
+*   **Source code**: [`tfds.audio.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
 
 *   **Versions**:
 
-    *   **`2.3.3`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
-    *   `2.3.2`: No release notes.
-    *   `2.3.1`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
-    *   `2.3.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    * **`2.3.3`** (default): No release notes.
+    * `2.3.2`: No release notes.
+    * `2.3.1`: No release notes.
+    * `2.3.0`: No release notes.
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `None`
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
 
 *   **Citation**:
 
@@ -71,15 +52,13 @@ heuristic algorithms: Source, Family, and Qualities.
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+
 
 ## nsynth/full (default config)
 
-*   **Config description**: Full NSynth Dataset is split into train, valid, and
-    test sets, with no instruments overlapping between the train set and the
-    valid/test sets.
+*   **Config description**: Full NSynth Dataset is split into train, valid, and test sets, with no
+instruments overlapping between the train set and the valid/test sets.
 
 *   **Download size**: `73.07 GiB`
 
@@ -87,9 +66,9 @@ heuristic algorithms: Source, Family, and Qualities.
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'test'`  | 4,096
+Split  | Examples
+:----- | -------:
+`'test'` | 4,096
 `'train'` | 289,205
 `'valid'` | 12,678
 
@@ -120,6 +99,41 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/nsynth-full-2.3.3.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## nsynth/gansynth_subset
 
@@ -168,6 +182,40 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/nsynth-gansynth_subset-2.3.3.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## nsynth/gansynth_subset.f0_and_loudness
 
@@ -226,3 +274,37 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/nsynth-gansynth_subset.f0_and_loudness-2.3.3.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

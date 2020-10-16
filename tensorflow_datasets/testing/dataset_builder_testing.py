@@ -201,7 +201,7 @@ class DatasetBuilderTestCase(
     mock_os_path.sep = sep
     for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
       getattr(mock_os_path, fop).side_effect = err
-    mock_os = absltest.mock.Mock(os, path=mock_os_path)
+    mock_os = absltest.mock.Mock(os, path=mock_os_path, fspath=os.fspath)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       if os.name == "nt" and not hasattr(os, fop):
         continue  # Not all `os` functions are available on Windows (ex: chmod).
@@ -320,13 +320,15 @@ class DatasetBuilderTestCase(
                "please add `SKIP_CHECKSUMS = True` to the "
                "`DatasetBuilderTestCase`")
 
-    filepath = self.DATASET_CLASS.code_path.parent / "checksums.tsv"
-    if filepath.exists():
-      filepath = str(filepath)
-    else:
+    url_infos = self.DATASET_CLASS.url_infos
+    if url_infos is None:
       filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
-    with utils.try_reraise(suffix=err_msg):
-      url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
+      with utils.try_reraise(suffix=err_msg):
+        url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
+    else:
+      # TODO(tfds): Improve doc for dataset-as-folder (and remove
+      # try_reraise above)
+      filepath = str(self.DATASET_CLASS.code_path.parent / "checksums.tsv")
 
     missing_urls = self._download_urls - set(url_infos.keys())
     self.assertEmpty(

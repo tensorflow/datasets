@@ -25,9 +25,9 @@ WARC-Block-Digest: sha1:IAFIUCZXEQLTYOD2OFRQ2NOM5KWXB62I
 Content-Type: text/plain
 Content-Length: 6873
 
-Wow! This is so exciting!
-Here, we have a third. Yes, a third!
-THREE FAKE WEBPAGES, HA HA HA! Also, its URL makes it end up validation.
+Wow! This is so exciting! Here, we have a third. Yes, a third! THREE FAKE WEBPAGES, HA HA HA! Also, its URL makes it end up validation. Let's also make sure it ends up in the multilingual dataset. Sound good?
+How do we do that? Well, we have to make it have 3 paragraphs with at least 200 characters each. Yes, it's a bit annoying I agree. You can blame Noah for that. It makes it a bit harder to come up with fake pages.
+You'd think you could just copy and paste some text over and over again, but then it would get labelled as "und" by gcld3. We actually want at least one example like that, but not this one. This one is "en".
 
 
 WARC/1.0

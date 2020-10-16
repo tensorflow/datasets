@@ -195,7 +195,7 @@ def _get_english_words():
   if not _ENGLISH_WORDS:
     nltk = tfds.core.lazy_imports.nltk
     resource_path = tfds.core.utils.resource_path(nltk)
-    data_path = str(resource_path / "nltk_data/corpora/words/en")
+    data_path = os.fspath(resource_path / "nltk_data/corpora/words/en")
     word_list = nltk.data.load(data_path, format="raw").decode("utf-8")
     _ENGLISH_WORDS = frozenset(word_list.split("\n"))
   return _ENGLISH_WORDS

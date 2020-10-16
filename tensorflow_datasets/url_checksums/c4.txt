@@ -1,1 +1,1 @@
-https://storage.googleapis.com/tfds-data/manual_checksums/c4.txt 12594963 caa633508b54af2024b1c892b7188bb5ee66c8b06849fc0ee0ddc9fb438e5370
+https://storage.googleapis.com/tfds-data/manual_checksums/c4.txt	12667147	9a1a385a2741fd3bda8a17a7a29bada5b2e35a57fd36161cdb29dcfde628564c	c4.txt

@@ -69,7 +69,7 @@ def _get_jpeg(height, width):
 
 def _generate_images():
   """Generates training images."""
-  names_file = tfds.core.get_tfds_path(caltech._LABELS_FNAME)  # pylint: disable=protected-access
+  names_file = tfds.core.tfds_path(caltech._LABELS_FNAME)  # pylint: disable=protected-access
   label_names = tfds.features.ClassLabel(
       names_file=names_file).names[:NUM_CLASSES]
   for label in label_names:

@@ -40,6 +40,7 @@ from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import type_utils
 
 import termcolor
 
@@ -48,7 +49,7 @@ if six.PY3:
 else:
   pathlib = Any
 
-
+ReadOnlyPath = type_utils.ReadOnlyPath
 VersionOrStr = Union[utils.Version, str]
 
 
@@ -190,8 +191,30 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
-  def code_path(cls) -> pathlib.Path:
-    """Returns the path to the file where the Dataset class is located."""
+  def code_path(cls) -> ReadOnlyPath:
+    """Returns the path to the file where the Dataset class is located.
+
+    Note: As the code can be run inside zip file. The returned value is
+    a `ReadOnlyPath` by default. Use `tfds.core.utils.to_write_path()` to cast
+    the path into `ReadWritePath`.
+
+    Returns:
+      path: pathlib.Path like abstraction
+    """
+    modules = cls.__module__.split(".")
+    if len(modules) >= 2:  # Filter `__main__`, `python my_dataset.py`,...
+      # If the dataset can be loaded from a module, use this to support zipapp.
+      # Note: `utils.resource_path` will return either `zipfile.Path` (for
+      # zipapp) or `pathlib.Path`.
+      try:
+        path = utils.resource_path(modules[0])
+      except TypeError:  # Module is not a package
+        pass
+      else:
+        modules[-1] += ".py"
+        return path.joinpath("/".join(modules[1:]))
+    # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
+    # equivalent to the above return.
     return pathlib.Path(inspect.getfile(cls))
 
   def __getstate__(self):
@@ -250,18 +273,23 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
+  def _checksums_path(cls) -> ReadOnlyPath:
+    """Returns the checksums path."""
+    # Used:
+    # * To load the checksums (in url_infos)
+    # * To save the checksums (in DownloadManager)
+    return cls.code_path.parent / "checksums.tsv"
+
+  @utils.classproperty
+  @classmethod
   @functools.lru_cache(maxsize=None)
   def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
     """Load `UrlInfo` from the given path."""
     # Search for the url_info file.
-    checksums_path = cls.code_path.parent / "checksums.tsv"
-    if checksums_path.exists():
-      checksums_path = str(checksums_path)
-    else:
-      checksums_path = None
+    checksums_path = cls._checksums_path
     # If url_info file is found, load the urls
-    if checksums_path:
-      return download.checksums.url_infos_from_path(checksums_path)
+    if checksums_path.exists():
+      return download.checksums.url_infos_from_path(os.fspath(checksums_path))
     else:
       return None
 
@@ -272,7 +300,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Otherwise, backward compatibility cannot be guaranteed as some code will
     # depend on the code version instead of the restored data version
     if not getattr(self, "_version", None):
-      # Message for developper creating new dataset. Will trigger if they are
+      # Message for developers creating new dataset. Will trigger if they are
       # using .info in the constructor before calling super().__init__
       raise AssertionError(
           "Info should not been called before version has been defined. "
@@ -796,6 +824,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
+        verify_ssl=download_config.verify_ssl,
     )
 
   @property

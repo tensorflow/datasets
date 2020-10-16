@@ -15,13 +15,25 @@
 
 """Typing annotation utils."""
 
+import abc
 import os
-from typing import Dict, List, Optional, Tuple, TypeVar, Union
+import typing
+from typing import Any, AnyStr, Dict, Iterator, List, Optional, Sequence, Tuple, Type, TypeVar, Union
 
 import tensorflow as tf
 
+# pylint: disable=g-import-not-at-top
+try:
+  from typing import Protocol, runtime_checkable
+except ImportError:
+  import typing_extensions
+  Protocol = typing_extensions.Protocol
+  runtime_checkable = typing_extensions.runtime_checkable
+# pylint: enable=g-import-not-at-top
+
 # Accept both `str` and `pathlib.Path`-like
 PathLike = Union[str, os.PathLike]
+PathLikeCls = (str, os.PathLike)  # Used in `isinstance`
 
 T = TypeVar('T')
 
@@ -42,3 +54,146 @@ JsonValue = Union[
     str, bool, int, float, None, List['JsonValue'], Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
 ]
 Json = Dict[str, JsonValue]
+
+
+# pytype: disable=ignored-abstractmethod
+
+
+class PurePath(Protocol):
+  """Protocol for pathlib.PurePath-like API."""
+  parts: Tuple[str, ...]
+  drive: str
+  root: str
+  anchor: str
+  name: str
+  suffix: str
+  suffixes: List[str]
+  stem: str
+
+  # pylint: disable=multiple-statements,line-too-long
+
+  def __new__(cls: Type[T], *args: PathLike) -> T: raise NotImplementedError
+  def __fspath__(self) -> AnyStr: raise NotImplementedError
+  def __hash__(self) -> int: raise NotImplementedError
+  def __lt__(self, other: 'PurePath') -> bool: raise NotImplementedError
+  def __le__(self, other: 'PurePath') -> bool: raise NotImplementedError
+  def __gt__(self, other: 'PurePath') -> bool: raise NotImplementedError
+  def __ge__(self, other: 'PurePath') -> bool: raise NotImplementedError
+  def __truediv__(self: T, key: PathLike) -> T: raise NotImplementedError
+  def __rtruediv__(self: T, key: PathLike) -> T: raise NotImplementedError
+  def __bytes__(self) -> bytes: raise NotImplementedError
+  def as_posix(self) -> str: raise NotImplementedError
+  def as_uri(self) -> str: raise NotImplementedError
+  def is_absolute(self) -> bool: raise NotImplementedError
+  def is_reserved(self) -> bool: raise NotImplementedError
+  def match(self, path_pattern: str) -> bool: raise NotImplementedError
+  def relative_to(self: T, *other: PathLike) -> T: raise NotImplementedError
+  def with_name(self: T, name: str) -> T: raise NotImplementedError
+  def with_suffix(self: T, suffix: str) -> T: raise NotImplementedError
+  def joinpath(self: T, *other: PathLike) -> T: raise NotImplementedError
+
+  @property
+  def parents(self: T) -> Sequence[T]: raise NotImplementedError
+  @property
+  def parent(self: T) -> T: raise NotImplementedError
+
+  # pylint: enable=multiple-statements,line-too-long
+
+
+@runtime_checkable
+class ReadOnlyPath(PurePath, Protocol):
+  """Protocol for read-only methods of pathlib.Path-like API."""
+
+  @abc.abstractmethod
+  def exists(self) -> bool:
+    """Returns True if self exists."""
+
+  @abc.abstractmethod
+  def is_dir(self) -> bool:
+    """Returns True if self is a dir."""
+
+  def is_file(self) -> bool:
+    """Returns True if self is a file."""
+    return not self.is_dir()
+
+  @abc.abstractmethod
+  def iterdir(self: T) -> Iterator[T]:
+    """Iterates over the directory."""
+
+  @abc.abstractmethod
+  def glob(self: T, pattern: str) -> Iterator[T]:
+    """Yielding all matching files (of any kind)."""
+    # Might be able to implement using `iterdir` (recursivelly for `rglob`).
+
+  def rglob(self: T, pattern: str) -> Iterator[T]:
+    """Yielding all matching files recursivelly (of any kind)."""
+    return self.glob(f'**/{pattern}')
+
+  def expanduser(self: T) -> T:
+    """Return a new path with expanded `~` and `~user` constructs."""
+    return self
+
+  def resolve(self: T, strict: bool = False) -> T:
+    """Return a new path with expanded `~` and `~user` constructs."""
+    return self
+
+  @abc.abstractmethod
+  def open(
+      self,
+      mode: str = 'r',
+      encoding: Optional[str] = None,
+      errors: Optional[str] = None,
+      **kwargs: Any,
+  ) -> typing.IO[AnyStr]:
+    """Opens the file."""
+
+  def read_bytes(self) -> bytes:
+    """Reads contents of self as bytes."""
+    with self.open('rb') as f:
+      return f.read()
+
+  def read_text(self, encoding: Optional[str] = None) -> str:
+    """Reads contents of self as bytes."""
+    with self.open('r', encoding=encoding) as f:
+      return f.read()
+
+
+@runtime_checkable
+class ReadWritePath(ReadOnlyPath, Protocol):
+  """Protocol for pathlib.Path-like API."""
+
+  @abc.abstractmethod
+  def mkdir(
+      self,
+      mode: int = 0o777,
+      parents: bool = False,
+      exist_ok: bool = False,
+  ) -> None:
+    """Create a new directory at this given path."""
+
+  def write_bytes(self, data: bytes) -> None:
+    """Writes content as bytes."""
+    with self.open('wb') as f:
+      return f.write(data)
+
+  def write_text(
+      self,
+      data: str,
+      encoding: Optional[str] = None,
+      errors: Optional[str] = None,
+  ) -> None:
+    """Writes content as str."""
+    with self.open('w') as f:
+      return f.write(data)
+
+  def touch(self, mode: int = 0o666, exist_ok: bool = True) -> None:
+    """Create a file at this given path."""
+    del mode  # Unused
+    if self.exists() and not exist_ok:
+      raise FileExistsError(f'{self} already exists.')
+    self.write_text('')
+
+  # TODO(tfds):
+  # * rename
+  # * replace
+  # * rmdir

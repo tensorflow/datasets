@@ -6,6 +6,7 @@ abstract_reasoning/attrs.shape.color/1.0.0
 abstract_reasoning/extrapolation/1.0.0
 abstract_reasoning/interpolation/1.0.0
 abstract_reasoning/neutral/1.0.0
+accentdb/1.0.0
 aeslc/1.0.0
 aflw2k3d/1.0.0
 ag_news_subset/1.0.0
@@ -536,6 +537,7 @@ groove/full-16000hz/2.0.1
 groove/full-midionly/2.0.1
 gtzan/1.0.0
 gtzan_music_speech/1.0.0
+hellaswag/0.0.1
 higgs/2.0.0
 horses_or_humans/3.0.0
 i_naturalist2017/0.1.0

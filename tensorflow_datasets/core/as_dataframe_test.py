@@ -50,6 +50,7 @@ def test_as_dataframe():
   df = as_dataframe.as_dataframe(ds)
   assert isinstance(df, pandas.DataFrame)
   assert df._repr_html_().startswith('<style')
+  assert list(df.columns) == ['nested/sub1', 'some_key']
 
 
 def test_text_dataset():
