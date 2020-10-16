@@ -16,11 +16,7 @@
 """Tests for tensorflow_datasets.core.resource_utils."""
 
 import io
-import os
-import pathlib
 import zipfile
-
-import pytest
 
 from tensorflow_datasets.core.utils import resource_utils
 
@@ -45,23 +41,3 @@ def test_resource_path():
   assert len(sub_dirs) == 3
   for p in sub_dirs:  # Childs should be `ResourcePath` instances
     assert isinstance(p, resource_utils.ResourcePath)
-
-
-def test_resource_path_bad_usage():
-  path = resource_utils.resource_path('tensorflow_datasets')
-  path = path / 'core'
-
-  # os.fspath can't be used on directories
-  with pytest.raises(ValueError, match='`os.fspath` should only be called on '):
-    os.path.join(path, '__init__.py')
-
-  # But can be used on files.
-  init_path = path / '__init__.py'
-  path_str = os.fspath(init_path)
-  assert pathlib.Path(path_str) == init_path
-
-  # And can be used on write paths
-  assert isinstance(path, resource_utils._Path)
-  path = resource_utils.to_write_path(path)
-  assert not isinstance(path, resource_utils._Path)
-  assert os.fspath(path) == str(path)

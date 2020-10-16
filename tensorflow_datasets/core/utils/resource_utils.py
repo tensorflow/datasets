@@ -65,29 +65,17 @@ class ResourcePath(zipfile.Path):
     return type(self)(self.root, at)
 
 
-class _Path(type(pathlib.Path())):
-  """Small wrapper around `pathlib.Path` to prevent bad usages of `os.fspath`.
-
-  This prevent calling `os.fspath` on directories, thus improving
-  compatibility with `zipapp`.
-
-  """
-
-  def __fspath__(self) -> str:
-    if not self.is_file():
-      raise ValueError(
-          'For resources, `os.fspath` should only be called on files, not '
-          'directories. Please use `.joinpath`, `.iterdir` and other '
-          f'`pathlib.Path` method instead: {self}'
-      )
-    return super().__fspath__()
-
-
 def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
   """Returns `importlib.resources.files`."""
   path = importlib_resources.files(package)  # pytype: disable=module-attr
   if isinstance(path, pathlib.Path):
-    return _Path(path)
+    # TODO(tfds): To ensure compatibility with zipfile.Path, we should ensure
+    # that the returned `pathlib.Path` isn't missused. More specifically:
+    # * `os.fspath` should only be called on files (not directories)
+    # * `str(path)` should be forbidden (only `__format__` allowed).
+    # In practice, it is trickier to do as `__fspath__` and `__str__` are
+    # called internally.
+    return path
   elif isinstance(path, zipfile.Path):
     return ResourcePath(path.root, path.at)
   else:
