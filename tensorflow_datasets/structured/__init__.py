@@ -16,6 +16,7 @@
 """Structured datasets."""
 
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
+from tensorflow_datasets.structured.bbbp import BBBP
 from tensorflow_datasets.structured.forest_fires import ForestFires
 from tensorflow_datasets.structured.genomics_ood import GenomicsOod
 from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNumeric
