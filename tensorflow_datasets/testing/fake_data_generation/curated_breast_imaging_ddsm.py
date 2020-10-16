@@ -177,10 +177,10 @@ def _generate_csv(csv_filepath, row_yielder, number_of_mammograms):
 def _generate_data_calc(output_dir, number_of_mammograms):
   """Generate train/test CSV and images of calcification abnormalities."""
   calc_types = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
+      names_file=tfds.core.tfds_path(
           os.path.join('image', 'cbis_ddsm_calc_types.txt'))).names
   calc_distributions = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
+      names_file=tfds.core.tfds_path(
           os.path.join('image', 'cbis_ddsm_calc_distributions.txt'))).names
   _generate_csv(
       os.path.join(output_dir, 'calc_case_description_train_set.csv'),
@@ -195,10 +195,10 @@ def _generate_data_calc(output_dir, number_of_mammograms):
 def _generate_data_mass(output_dir, number_of_mammograms):
   """Generate train/test CSV and images of mass abnormalities."""
   mass_shapes = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
+      names_file=tfds.core.tfds_path(
           os.path.join('image', 'cbis_ddsm_mass_shapes.txt'))).names
   mass_margins = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
+      names_file=tfds.core.tfds_path(
           os.path.join('image', 'cbis_ddsm_mass_margins.txt'))).names
 
   _generate_csv(

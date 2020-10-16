@@ -87,7 +87,7 @@ def _encode_image(image, image_format=None, fobj=None):
 def _generate_data():
   """Generate random data for testing the Sun397 dataset builder."""
 
-  names_file = tfds.core.get_tfds_path(
+  names_file = tfds.core.tfds_path(
       os.path.join("image", "sun397_labels.txt"))
   label_names = tfds.features.ClassLabel(names_file=names_file).names
 

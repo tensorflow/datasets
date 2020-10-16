@@ -370,8 +370,8 @@ def incomplete_dir(dirname):
 def tfds_dir() -> str:
   """Path to tensorflow_datasets directory.
 
-  The difference with `tfds.core.get_tfds_path` is that this function can be
-  used for write access while `tfds.core.get_tfds_path` should be used for
+  The difference with `tfds.core.tfds_path` is that this function can be
+  used for write access while `tfds.core.tfds_path` should be used for
   read-only.
 
   Returns:
@@ -387,12 +387,6 @@ def atomic_write(path, mode):
   with tf.io.gfile.GFile(tmp_path, mode) as file_:
     yield file_
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
-
-
-def get_tfds_path(relative_path):
-  """Returns absolute path to file given path relative to tfds root."""
-  path = os.path.join(tfds_dir(), relative_path)
-  return path
 
 
 def read_checksum_digest(path, checksum_cls=hashlib.sha256):

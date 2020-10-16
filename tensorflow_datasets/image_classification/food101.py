@@ -57,7 +57,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     """Define Dataset Info."""
 
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     features_dict = {
         "image": tfds.features.Image(),
         "label": tfds.features.ClassLabel(names_file=names_file),

@@ -101,7 +101,7 @@ class ImagenetV2(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = list(_create_builder_configs())
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_IMAGENET_LABELS_FILENAME)
+    names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.

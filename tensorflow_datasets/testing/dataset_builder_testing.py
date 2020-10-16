@@ -201,7 +201,7 @@ class DatasetBuilderTestCase(
     mock_os_path.sep = sep
     for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
       getattr(mock_os_path, fop).side_effect = err
-    mock_os = absltest.mock.Mock(os, path=mock_os_path)
+    mock_os = absltest.mock.Mock(os, path=mock_os_path, fspath=os.fspath)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       if os.name == "nt" and not hasattr(os, fop):
         continue  # Not all `os` functions are available on Windows (ex: chmod).

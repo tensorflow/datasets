@@ -56,7 +56,7 @@ class ImagenetR(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_IMAGENET_LABELS_FILENAME)
+    names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.

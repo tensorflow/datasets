@@ -24,7 +24,7 @@ from absl import flags
 import numpy as np
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_utils
 
 NUM_IMAGES = 5
@@ -37,7 +37,7 @@ FACTOR_VALUES = [
 TRAINING_OUTPUT_NAME = "smallnorb-5x46789x9x18x6x2x96x96-training"
 TESTING_OUTPUT_NAME = "smallnorb-5x01235x9x18x6x2x96x96-testing"
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
+flags.DEFINE_string("tfds_dir", str(utils.tfds_write_path()),
                     "Path to tensorflow_datasets directory.")
 FLAGS = flags.FLAGS
 
