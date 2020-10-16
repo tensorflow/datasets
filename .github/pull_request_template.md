@@ -1,3 +1,7 @@
+Thank you for your contribution!
+
+Please read https://www.tensorflow.org/datasets/contribute#pr_checklist to make sure your PR follow the guidelines.
+
 # Add Dataset
 
 * Dataset Name: <name>
