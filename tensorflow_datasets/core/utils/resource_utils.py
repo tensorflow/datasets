@@ -24,12 +24,15 @@ from typing import Union
 from tensorflow_datasets.core.utils import type_utils
 
 # pylint: disable=g-import-not-at-top
-if sys.version_info >= (3, 9):
+if sys.version_info >= (3, 9):  # `importlib.resources.files` was added in 3.9
   import importlib.resources as importlib_resources
-  import zipfile
 else:
   import importlib_resources
-  import zipp as zipfile
+
+if sys.version_info >= (3, 8):  # `zipfiles.Path` was added in 3.8
+  import zipfile
+else:
+  import zipp as zipfile  # Before 3.8, importlib_resources uses backport
 # pylint: enable=g-import-not-at-top
 
 PathLike = type_utils.PathLike
