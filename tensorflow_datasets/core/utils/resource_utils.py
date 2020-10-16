@@ -111,7 +111,7 @@ def tfds_path(*relative_path: PathLike) -> ReadOnlyPath:
     *relative_path: Relative path, eventually to concatenate.
 
   Returns:
-    path: The absolute TFDS path.
+    path: The root TFDS path.
   """
   return resource_path('tensorflow_datasets').joinpath(*relative_path)
 
@@ -126,6 +126,6 @@ def tfds_write_path(*relative_path: PathLike) -> ReadWritePath:
     *relative_path: Relative path, eventually to concatenate.
 
   Returns:
-    tfds_dir: The root TFDS path.
+    path: The root TFDS path.
   """
   return to_write_path(tfds_path(*relative_path))

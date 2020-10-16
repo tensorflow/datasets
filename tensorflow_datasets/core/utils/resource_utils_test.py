@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.core.resource_utils."""
 
 import io
+import os
 import zipfile
 
 from tensorflow_datasets.core.utils import resource_utils
@@ -36,8 +37,15 @@ def make_zip_file() -> zipfile.ZipFile:
 
 def test_resource_path():
   path = resource_utils.ResourcePath(make_zip_file())
+  assert isinstance(path, os.PathLike)
   assert path.joinpath('b/c.txt').read_text() == 'content of c'
   sub_dirs = list(path.joinpath('b').iterdir())
   assert len(sub_dirs) == 3
   for p in sub_dirs:  # Childs should be `ResourcePath` instances
     assert isinstance(p, resource_utils.ResourcePath)
+
+
+def test_tfds_path():
+  """Test the proper suffix only, since the prefix can vary."""
+  assert resource_utils.tfds_path().name == 'tensorflow_datasets'
+  assert resource_utils.tfds_write_path().name == 'tensorflow_datasets'

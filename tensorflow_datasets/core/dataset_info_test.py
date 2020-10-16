@@ -26,7 +26,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
 
 from google.protobuf import text_format
@@ -34,7 +34,7 @@ from tensorflow_metadata.proto.v0 import schema_pb2
 
 tf.enable_v2_behavior()
 
-_TFDS_DIR = py_utils.tfds_dir()
+_TFDS_DIR = utils.tfds_write_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
                          "mnist", "3.0.1")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
