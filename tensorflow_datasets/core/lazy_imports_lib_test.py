@@ -40,6 +40,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "skimage",
       "tifffile",
       "tldextract",
+      "json",
+      "numpy"
   )
   def test_import(self, module_name):
     getattr(tfds.core.lazy_imports, module_name)

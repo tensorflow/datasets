@@ -147,6 +147,16 @@ class LazyImporter(object):
   @classmethod
   def tldextract(cls):
     return _try_import("tldextract")
+    
+  @utils.classproperty
+  @classmethod
+  def json(cls):
+    return _try_import("json")
+
+  @utils.classproperty
+  @classmethod
+  def numpy(cls):
+    return _try_import("numpy")
 
   @utils.classproperty
   @classmethod

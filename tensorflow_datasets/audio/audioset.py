@@ -15,11 +15,7 @@
 
 """Google AudioSet Dataset"""
 
-import os
-import json
 import tensorflow as tf
-import numpy as np
-from pydub import AudioSegment
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -35,7 +31,8 @@ address = {New Orleans, LA}
 _DESCRIPTION = """
 The AudioSet dataset is a large-scale collection of human-labeled 10-second sound clips drawn from YouTube videos. 
 To collect all our data we worked with human annotators who verified the presence of sounds they heard within YouTube segments. 
-To nominate segments for annotation, we relied on YouTube metadata and content-based search.
+To nominate segments for annotation, we relied on YouTube metadata and content-based search. Some audio examples from Audioset
+were skipped during the raw data extraction due to some videos being removed by the uploader at the time.
 """
 
 _DOWNLOAD_LINK = 'https://storage.googleapis.com/bme590/william/audioset.tar.gz'
@@ -76,6 +73,11 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_dir=None):
     """Yields examples."""
+    json = tfds.core.lazy_imports.json
+    pydub = tfds.core.lazy_imports.pydub
+    os = tfds.core.lazy_imports.os
+    np = tfds.core.lazy_imports.numpy
+    
     trimmed_audio_path = os.path.join(data_dir, 'trimmed_audio')
     id2label_path = os.path.join(data_dir, 'id2label.json')
     my_files = tf.io.gfile.listdir(trimmed_audio_path) #gets list of files in folder given
@@ -86,7 +88,7 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
         label_list = []
         filepath = os.path.join(trimmed_audio_path, f)
         with tf.io.gfile.GFile(filepath, "rb") as read_file:
-          errorcheck = AudioSegment.from_file(read_file) #ignores bad mp3 files
+          errorcheck = pydub.AudioSegment.from_file(read_file) #ignores bad mp3 files
         ids = f.replace(".mp3","")
         for x in datas[ids]:
           for y in x:
@@ -100,5 +102,4 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
           'label': label_tensor,
         }
       except:
-        print(filepath)
         pass
