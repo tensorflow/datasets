@@ -205,12 +205,12 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     features['abnormalities'].update({
         'calc_type':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_calc_types.txt'))),
         'calc_distribution':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification',
                         'cbis_ddsm_calc_distributions.txt'))),
@@ -224,12 +224,12 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     features['abnormalities'].update({
         'mass_shape':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_mass_shapes.txt'))),
         'mass_margins':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_mass_margins.txt'))),
     })
@@ -244,7 +244,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
             tfds.features.Image(shape=(None, None, 1), encoding_format='jpeg'),
         'label':
             tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         'image_classification', 'cbis_ddsm_patch_labels.txt'))),
     })

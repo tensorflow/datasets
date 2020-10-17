@@ -17,10 +17,7 @@
 
 import io
 import os
-import pathlib
 import zipfile
-
-import pytest
 
 from tensorflow_datasets.core.utils import resource_utils
 
@@ -40,6 +37,7 @@ def make_zip_file() -> zipfile.ZipFile:
 
 def test_resource_path():
   path = resource_utils.ResourcePath(make_zip_file())
+  assert isinstance(path, os.PathLike)
   assert path.joinpath('b/c.txt').read_text() == 'content of c'
   sub_dirs = list(path.joinpath('b').iterdir())
   assert len(sub_dirs) == 3
@@ -47,21 +45,7 @@ def test_resource_path():
     assert isinstance(p, resource_utils.ResourcePath)
 
 
-def test_resource_path_bad_usage():
-  path = resource_utils.resource_path('tensorflow_datasets')
-  path = path / 'core'
-
-  # os.fspath can't be used on directories
-  with pytest.raises(ValueError, match='`os.fspath` should only be called on '):
-    os.path.join(path, '__init__.py')
-
-  # But can be used on files.
-  init_path = path / '__init__.py'
-  path_str = os.fspath(init_path)
-  assert pathlib.Path(path_str) == init_path
-
-  # And can be used on write paths
-  assert isinstance(path, resource_utils._Path)
-  path = resource_utils.to_write_path(path)
-  assert not isinstance(path, resource_utils._Path)
-  assert os.fspath(path) == str(path)
+def test_tfds_path():
+  """Test the proper suffix only, since the prefix can vary."""
+  assert resource_utils.tfds_path().name == 'tensorflow_datasets'
+  assert resource_utils.tfds_write_path().name == 'tensorflow_datasets'

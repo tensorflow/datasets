@@ -183,8 +183,8 @@ def _build_nightly_dict(
 @tfds.core.utils.memoize()
 def _load_nightly_dict() -> NightlyDict:
   """Loads (and caches) the nightly dict."""
-  version_path = tfds.core.utils.get_tfds_path('stable_versions.txt')
-  with tf.io.gfile.GFile(version_path, 'r') as f:
+  version_path = tfds.core.utils.tfds_path('stable_versions.txt')
+  with tf.io.gfile.GFile(os.fspath(version_path), 'r') as f:
     stable_versions = f.read().splitlines()
 
   # Build the `full_names_dict['dataset']['config']['version']` for both
@@ -259,9 +259,9 @@ def get_mako_template(tmpl_name):
   Returns:
     mako 'Template' instance that can be rendered.
   """
-  tmpl_path = tfds.core.utils.get_tfds_path(
+  tmpl_path = tfds.core.utils.tfds_path(
       'scripts/documentation/templates/%s.mako.md' % tmpl_name)
-  with tf.io.gfile.GFile(tmpl_path, 'r') as tmpl_f:
+  with tf.io.gfile.GFile(os.fspath(tmpl_path), 'r') as tmpl_f:
     tmpl_content = tmpl_f.read()
   return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
 

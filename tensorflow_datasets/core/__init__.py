@@ -48,7 +48,7 @@ from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
 
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import gcs_path
-from tensorflow_datasets.core.utils import get_tfds_path
+from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import benchmark
 
@@ -64,7 +64,6 @@ __all__ = [
     "DatasetInfo",
     "Experiment",
     "GeneratorBasedBuilder",
-    "get_tfds_path",
     "gcs_path",
     "lazy_imports",
     "Metadata",
@@ -73,5 +72,6 @@ __all__ = [
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
+    "tfds_path",
     "Version",
 ]

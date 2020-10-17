@@ -63,7 +63,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     """Define dataset info."""
 
-    imagenet_names_file = tfds.core.get_tfds_path(_IMAGENET_LABELS_FNAME)
+    imagenet_names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),

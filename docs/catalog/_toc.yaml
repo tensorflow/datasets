@@ -277,6 +277,9 @@ toc:
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
+  - path: /datasets/catalog/e2e_cleaned
+    status: nightly
+    title: e2e_cleaned
   - path: /datasets/catalog/forest_fires
     title: forest_fires
   - path: /datasets/catalog/genomics_ood
@@ -410,6 +413,9 @@ toc:
     title: sentiment140
   - path: /datasets/catalog/snli
     title: snli
+  - path: /datasets/catalog/story_cloze
+    status: nightly
+    title: story_cloze (manual)
   - path: /datasets/catalog/super_glue
     title: super_glue
   - path: /datasets/catalog/tiny_shakespeare

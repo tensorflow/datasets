@@ -96,7 +96,7 @@ class PlantaeK(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Batch download for this dataset is broken, therefore images have to be
     # downloaded independently from a list of urls.
-    with tf.io.gfile.GFile(tfds.core.get_tfds_path(_URLS_FNAME)) as f:
+    with tf.io.gfile.GFile(os.fspath(tfds.core.tfds_path(_URLS_FNAME))) as f:
       name_to_url_map = {
           os.path.basename(l.strip()): l.strip() for l in f.readlines()
       }

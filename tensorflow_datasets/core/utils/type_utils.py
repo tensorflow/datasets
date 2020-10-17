@@ -33,7 +33,7 @@ except ImportError:
 
 # Accept both `str` and `pathlib.Path`-like
 PathLike = Union[str, os.PathLike]
-PathLikeCls = (str, os.PathLike)  # For use in isinstance
+PathLikeCls = (str, os.PathLike)  # Used in `isinstance`
 
 T = TypeVar('T')
 
@@ -158,6 +158,7 @@ class ReadOnlyPath(PurePath, Protocol):
       return f.read()
 
 
+@runtime_checkable
 class ReadWritePath(ReadOnlyPath, Protocol):
   """Protocol for pathlib.Path-like API."""
 

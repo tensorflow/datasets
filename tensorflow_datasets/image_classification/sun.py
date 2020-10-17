@@ -199,12 +199,12 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
           "va": "sun397_tfds_va.txt",
       }
       for split, filename in tfds_split_files.items():
-        tfds_split_files[split] = tfds.core.get_tfds_path(
+        tfds_split_files[split] = tfds.core.tfds_path(
             os.path.join("image_classification", filename))
     self._tfds_split_files = tfds_split_files
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(
+    names_file = tfds.core.tfds_path(
         os.path.join("image_classification", "sun397_labels.txt"))
     return tfds.core.DatasetInfo(
         builder=self,
@@ -316,5 +316,5 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
     return splits_sets
 
   def _load_image_set_from_file(self, filepath):
-    with tf.io.gfile.GFile(filepath, mode="r") as f:
+    with tf.io.gfile.GFile(os.fspath(filepath), mode="r") as f:
       return set([line.strip() for line in f])

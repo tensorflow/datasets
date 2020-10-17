@@ -20,6 +20,7 @@
 import os
 from typing import Any, Dict, Iterable, List, Optional
 
+from absl import logging
 import dataclasses
 import tensorflow.compat.v2 as tf
 
@@ -79,6 +80,12 @@ def add_checksums_dir(checksums_dir: str) -> None:
   Args:
     checksums_dir: `str`, checksums dir to add to the registry
   """
+  logging.warning(
+      '`tfds.core.add_checksums_dir` is deprecated. Refactor dataset in '
+      'self-contained folders (`my_dataset/` folder containing '
+      'my_dataset.py, my_dataset_test.py, dummy_data/, checksums.tsv). '
+      'The checksum file will be automatically detected. More info at: '
+      'https://www.tensorflow.org/datasets/add_dataset')
   if checksums_dir in _CHECKSUM_DIRS:  # Avoid duplicate
     return
   _CHECKSUM_DIRS.append(checksums_dir)

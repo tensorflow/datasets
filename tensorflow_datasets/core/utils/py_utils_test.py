@@ -180,11 +180,6 @@ class PyUtilsTest(testing.TestCase):
           'a/b': 2,  # Collision
       })
 
-  def test_tfds_dir(self):
-    """Test the proper suffix only, since the prefix can vary."""
-    self.assertEqual(
-        os.path.basename(py_utils.tfds_dir()), 'tensorflow_datasets')
-
   def test_reraise(self):
 
     class CustomError(Exception):

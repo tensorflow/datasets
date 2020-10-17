@@ -34,18 +34,20 @@ only see the last sentence preceding the target word
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `319.03 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 5,153
+`'train'` | 4,869
 
 *   **Features**:
 

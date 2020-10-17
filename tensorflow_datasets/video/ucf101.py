@@ -130,7 +130,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
 
     video_shape = (
         None, self.builder_config.height, self.builder_config.width, 3)
-    labels_names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    labels_names_file = tfds.core.tfds_path(_LABELS_FNAME)
     features = tfds.features.FeaturesDict({
         'video': tfds.features.Video(video_shape,
                                      ffmpeg_extra_args=ffmpeg_extra_args,

@@ -34,7 +34,7 @@ import tensorflow_datasets as tfds
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
+flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_write_path(),
                     'Path to tensorflow_datasets directory')
 
 

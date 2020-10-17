@@ -24,12 +24,15 @@ from typing import Union
 from tensorflow_datasets.core.utils import type_utils
 
 # pylint: disable=g-import-not-at-top
-if sys.version_info >= (3, 9):
+if sys.version_info >= (3, 9):  # `importlib.resources.files` was added in 3.9
   import importlib.resources as importlib_resources
-  import zipfile
 else:
   import importlib_resources
-  import zipp as zipfile
+
+if sys.version_info >= (3, 8):  # `zipfiles.Path` was added in 3.8
+  import zipfile
+else:
+  import zipp as zipfile  # Before 3.8, importlib_resources uses backport
 # pylint: enable=g-import-not-at-top
 
 PathLike = type_utils.PathLike
@@ -62,29 +65,17 @@ class ResourcePath(zipfile.Path):
     return type(self)(self.root, at)
 
 
-class _Path(type(pathlib.Path())):
-  """Small wrapper around `pathlib.Path` to prevent bad usages of `os.fspath`.
-
-  This prevent calling `os.fspath` on directories, thus improving
-  compatibility with `zipapp`.
-
-  """
-
-  def __fspath__(self) -> str:
-    if not self.is_file():
-      raise ValueError(
-          'For resources, `os.fspath` should only be called on files, not '
-          'directories. Please use `.joinpath`, `.iterdir` and other '
-          f'`pathlib.Path` method instead: {self}'
-      )
-    return super().__fspath__()
-
-
 def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
   """Returns `importlib.resources.files`."""
   path = importlib_resources.files(package)  # pytype: disable=module-attr
   if isinstance(path, pathlib.Path):
-    return _Path(path)
+    # TODO(tfds): To ensure compatibility with zipfile.Path, we should ensure
+    # that the returned `pathlib.Path` isn't missused. More specifically:
+    # * `os.fspath` should only be called on files (not directories)
+    # * `str(path)` should be forbidden (only `__format__` allowed).
+    # In practice, it is trickier to do as `__fspath__` and `__str__` are
+    # called internally.
+    return path
   elif isinstance(path, zipfile.Path):
     return ResourcePath(path.root, path.at)
   else:
@@ -120,7 +111,7 @@ def tfds_path(*relative_path: PathLike) -> ReadOnlyPath:
     *relative_path: Relative path, eventually to concatenate.
 
   Returns:
-    path: The absolute TFDS path.
+    path: The root TFDS path.
   """
   return resource_path('tensorflow_datasets').joinpath(*relative_path)
 
@@ -135,6 +126,6 @@ def tfds_write_path(*relative_path: PathLike) -> ReadWritePath:
     *relative_path: Relative path, eventually to concatenate.
 
   Returns:
-    tfds_dir: The root TFDS path.
+    path: The root TFDS path.
   """
   return to_write_path(tfds_path(*relative_path))
