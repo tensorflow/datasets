@@ -15,7 +15,7 @@
 
 """Audio datasets."""
 
-from tensorflow_datasets.audio.accentdb import Accentdb
+from tensorflow_datasets.audio.audioset import Audioset
 from tensorflow_datasets.audio.commonvoice import CommonVoice
 from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig
 from tensorflow_datasets.audio.crema_d import CremaD
@@ -37,3 +37,4 @@ from tensorflow_datasets.audio.vctk import Vctk
 from tensorflow_datasets.audio.voxceleb import Voxceleb
 from tensorflow_datasets.audio.voxforge import Voxforge
 from tensorflow_datasets.audio.yesno import YesNo
+
