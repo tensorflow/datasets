@@ -26,7 +26,7 @@ def mocked_gfile_path(tmp_path: pathlib.Path):
       replace=lambda p1, p2: os.replace(_norm_path(p1), _norm_path(p2)), # TODO: tf.io.gfile.rename() overwrite=True
       mkdir=lambda p: os.mkdir(_norm_path(p)),
       makedirs=lambda p: os.makedirs(_norm_path(p)),
-      glob=lambda p: Path(_norm_path(p)).parent.glob(Path(_norm_path(p)).stem)  # TODO: temporary func
+      glob=lambda p: Path(_norm_path(p)).parent.glob(Path(_norm_path(p)).stem)  # TODO: temporary function
   ):
     yield tmp_path
 
@@ -47,7 +47,7 @@ def test_gfs(mocked_gfile_path: pathlib.Path):
   assert g_path.is_dir()
 
 
-def test_functions(mocked_gfile_path: pathlib.Path):
+def test_open(mocked_gfile_path: pathlib.Path):
 
   files = ['foo.py', 'bar.py', 'foo_bar.py', 'dataset.json',
            'dataset_info.json', 'readme.md']
@@ -109,4 +109,4 @@ def test_rename_replace(mocked_gfile_path: pathlib.Path):
   assert not mocked_gfile_path.joinpath('foo.py').exists()
   assert mocked_gfile_path.joinpath('bar.py').exists()
 
-  # Replace() TODO:
+  # TODO: Replace()

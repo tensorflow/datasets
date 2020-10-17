@@ -123,4 +123,4 @@ class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
 
   def replace(self, target) -> None:
     """Replace file or directory to the given target """
-    tf.io.gfile.rename(str(self), target, overwrite=True)
+    # TODO: tf.io.gfile.rename(str(self), target, overwrite=True)
