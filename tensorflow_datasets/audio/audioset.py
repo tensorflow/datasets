@@ -38,8 +38,8 @@ were skipped during the raw data extraction due to some videos being removed by 
 _DOWNLOAD_LINK = 'https://storage.googleapis.com/bme590/william/audioset.tar.gz'
 
 class Audioset(tfds.core.GeneratorBasedBuilder):
-  """This dataset takes in a manual directory of 10-second .mp3 files taken from Youtube.
-  It yields Audio using pydub AudioSegment and corresponding labels
+  """This dataset takes in a manual directory of 10-second .mp3 files taken from
+  Youtube. It yields Audio using pydub AudioSegment and corresponding labels
   according to the CLASS_LABELS_CSV provided by Audioset.
   """
 
@@ -60,7 +60,6 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    dl_manager._register_checksums = True
     data_dir = dl_manager.download_and_extract(_DOWNLOAD_LINK)
     return [
       tfds.core.SplitGenerator(
@@ -77,25 +76,30 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
     pydub = tfds.core.lazy_imports.pydub
     os = tfds.core.lazy_imports.os
     np = tfds.core.lazy_imports.numpy
-    
+
     trimmed_audio_path = os.path.join(data_dir, 'trimmed_audio')
     id2label_path = os.path.join(data_dir, 'id2label.json')
-    my_files = tf.io.gfile.listdir(trimmed_audio_path) #gets list of files in folder given
-    with tf.io.gfile.GFile(id2label_path, "r") as read_file: #uses json to match ids to labels
+    #gets list of files in folder given
+    my_files = tf.io.gfile.listdir(trimmed_audio_path)
+    #uses json to match ids to labels
+    with tf.io.gfile.GFile(id2label_path, 'r') as read_file:
       datas = json.load(read_file)
     for f in my_files:
       try:
         label_list = []
         filepath = os.path.join(trimmed_audio_path, f)
-        with tf.io.gfile.GFile(filepath, "rb") as read_file:
-          errorcheck = pydub.AudioSegment.from_file(read_file) #ignores bad mp3 files
-        ids = f.replace(".mp3","")
+        with tf.io.gfile.GFile(filepath, 'rb') as read_file:
+          #passes bad mp3 files
+          errorcheck = pydub.AudioSegment.from_file(read_file)
+        ids = f.replace('.mp3','')
         for x in datas[ids]:
           for y in x:
-            label_list.append(y) #gets multiple labels index that apply to audio in a list in label_list
+            #gets multiple labels index
+            label_list.append(y)
           label_tensor = np.zeros(527, dtype=np.int32)
           for i in label_list:
-            label_tensor[i] = 1 # creates a tensor of zeros with ones at indices that indicate positive for a label
+            # creates a tensor of zeros with ones at indices
+            label_tensor[i] = 1
           break
         yield f, {
           'audio': filepath,
