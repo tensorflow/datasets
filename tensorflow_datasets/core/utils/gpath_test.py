@@ -30,12 +30,32 @@ def mocked_gfile_path(tmp_path: pathlib.Path):
   ):
     yield tmp_path
 
+def test_representations(mocked_gfile_path: pathlib.Path):
+  g_path = GcsPath('gs://bucket/dir')
+
+  assert isinstance(g_path, GcsPath)
+  assert isinstance(g_path.joinpath('file.py').parent, GcsPath)
+  assert str(g_path) == 'gs://bucket/dir'
+  assert os.fspath(g_path) == 'gs://bucket/dir'
+
+
+  with pytest.raises(ValueError, match='Invalid path'):
+    GcsPath('/bucket/dir')
+
 
 def test_gfs(mocked_gfile_path: pathlib.Path):
-  g_path = GcsPath('gs://bucket/dir')
-  assert not g_path.exists()
+  # touch()
+
+  touch_path = GcsPath('gs://touch.txt')
+  assert not touch_path.exists()
+
+  touch_path.touch()
+  assert touch_path.exists()
+  assert mocked_gfile_path.joinpath('touch.txt').exists()
 
   # mkdir()
+  g_path = GcsPath('gs://bucket/dir')
+  assert not g_path.exists()
   g_path.mkdir(parents=True)
 
   # exists()
@@ -94,6 +114,10 @@ def test_mkdir(mocked_gfile_path: pathlib.Path):
 
   g_path.mkdir()
   assert g_path.exists()
+
+  with pytest.raises(FileExistsError, match='already exists'):
+    g_path.mkdir()
+
   assert mocked_gfile_path.joinpath('bucket').exists()
 
 

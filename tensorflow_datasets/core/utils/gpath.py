@@ -2,6 +2,7 @@
 
 import os
 import pathlib
+
 import typing
 from typing import Any, AnyStr, Iterator, Optional, Union
 
@@ -23,44 +24,36 @@ class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
     else:
       raise ValueError('Invalid path')
 
-
   def _get_path_str(self) -> str:
     value = super().__str__()
     if value.startswith('/gs/'):
       return value.replace('/gs/', 'gs://', 1)
     return value  # TODO: Could cache the value
 
-
   def __fpath__(self) -> str:
     return self._get_path_str()
-
 
   def __str__(self) -> str:
     return self._get_path_str()
 
-
   def exists(self) -> bool:
     """Returns True if self exists."""
-    return tf.io.gfile.exists(str(self))
-
+    return tf.io.gfile.exists(self._get_path_str())
 
   def iterdir(self) -> Iterator['GcsPath']:
     """Iterates over the directory."""
-    for f in tf.io.gfile.listdir(str(self)):
+    for f in tf.io.gfile.listdir(self._get_path_str()):
       yield GcsPath(f)
-
 
   def is_dir(self) -> bool:
     """Returns True if self is a directory."""
-    return tf.io.gfile.isdir(str(self))
-
+    return tf.io.gfile.isdir(self._get_path_str())
 
   def glob(self, pattern: str) -> Iterator['GcsPath']:
     """Yielding all matching files (of any kind)."""
-    path = os.path.join(str(self), pattern)
-    for f in tf.io.gfile.glob(str(path)):
+    path = os.path.join(self._get_path_str(), pattern)
+    for f in tf.io.gfile.glob(path):
       yield GcsPath(f)
-
 
   def mkdir(
       self,
@@ -70,13 +63,12 @@ class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
   ) -> None:
     """Create a new directory at this given path."""
     if self.exists() and not exist_ok:
-      raise FileExistsError(f'{str(self)} already exists.')
+      raise FileExistsError(f'{self._get_path_str()} already exists.')
 
     if parents:
-      tf.io.gfile.makedirs(str(self))
+      tf.io.gfile.makedirs(self._get_path_str())
     else:
-      tf.io.gfile.mkdir(str(self))
-
+      tf.io.gfile.mkdir(self._get_path_str())
 
   def open(
       self,
@@ -88,39 +80,34 @@ class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
     """Opens the file."""
     return tf.io.gfile.GFile(str(self), mode, **kwargs)
 
-
   def read_bytes(self) -> bytes:
     """Reads contents of self as bytes."""
-    with tf.io.gfile.GFile(str(self), 'rb') as f:
+    with tf.io.gfile.GFile(self._get_path_str(), 'rb') as f:
       return f.read()
-
 
   def read_text(self, encoding: Optional[str] = None) -> str:
     """Reads contents of self as str."""
-    with tf.io.gfile.GFile(str(self), 'r') as f:
+    with tf.io.gfile.GFile(self._get_path_str(), 'r') as f:
       return f.read()
-
 
   def write_bytes(self, data: bytes) -> None:
     """Writes content as bytes."""
-    with tf.io.gfile.GFile(str(self), 'wb') as f:
+    with tf.io.gfile.GFile(self._get_path_str(), 'wb') as f:
       return f.write(data)
-
 
   def write_text(self,
                  data: str,
                  encoding: Optional[str] = None,
                  errors: Optional[str] = None) -> None:
     """Writes content as str."""
-    with tf.io.gfile.GFile(str(self), 'w') as f:
+    with tf.io.gfile.GFile(self._get_path_str(), 'w') as f:
       return f.write(data)
 
-
-  def rename(self, target) -> None:
+  def rename(self, target: type_utils.PathLike) -> None:
     """Rename file or directory to the given target """
-    tf.io.gfile.rename(str(self), target)
+    tf.io.gfile.rename(self._get_path_str(), target)
 
-
-  def replace(self, target) -> None:
+  def replace(self, target: type_utils.PathLike) -> None:
     """Replace file or directory to the given target """
-    # TODO: tf.io.gfile.rename(str(self), target, overwrite=True)
+    # TODO: tf.io.gfile.rename(self._get_path_str(), target, overwrite=True)
+
