@@ -2,10 +2,11 @@
 
 import os
 import pathlib
+from pathlib import Path
 
 import pytest
 import tensorflow as tf
-from pathlib import Path
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils.gpath import GcsPath
 
@@ -22,7 +23,7 @@ def mocked_gfile_path(tmp_path: pathlib.Path):
       listdir=lambda p: os.listdir(_norm_path(p)),
       GFile=lambda p, *args, **kwargs: open(_norm_path(p), *args, **kwargs),
       rename=lambda p1, p2: os.rename(_norm_path(p1), _norm_path(p2)),
-      replace=lambda p1, p2, **kwargs: os.replace(_norm_path(p1), _norm_path(p2), **kwargs),
+      replace=lambda p1, p2: os.replace(_norm_path(p1), _norm_path(p2)), # TODO: tf.io.gfile.rename() overwrite=True
       mkdir=lambda p: os.mkdir(_norm_path(p)),
       makedirs=lambda p: os.makedirs(_norm_path(p)),
       glob=lambda p: Path(_norm_path(p)).parent.glob(Path(_norm_path(p)).stem)  # TODO: temporary func
@@ -103,10 +104,9 @@ def test_rename_replace(mocked_gfile_path: pathlib.Path):
   assert mocked_gfile_path.joinpath('foo.py').exists()
 
   # Rename()
-  # target_path = GcsPath('gs://foo.py')
   src_path.rename('gs://bar.py')
-  # target = GcsPath(mocked_gfile_path.joinpath())
-  # GcsPath(mocked_gfile_path.joinpath('foo.py')).rename('bar.py')
 
   assert not mocked_gfile_path.joinpath('foo.py').exists()
   assert mocked_gfile_path.joinpath('bar.py').exists()
+
+  # Replace() TODO:

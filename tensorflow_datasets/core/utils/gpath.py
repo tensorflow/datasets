@@ -14,7 +14,6 @@ PathArg = Union[str, pathlib.Path, 'GcsPath']
 
 class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
   """Pathlib like api of tf.io.gfile"""
-
   def __new__(cls, *parts: type_utils.PathLike):
     full_path = '/'.join(os.fspath(p) for p in parts)
     if full_path.startswith(('gs://')):
@@ -41,10 +40,12 @@ class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
 
 
   def exists(self) -> bool:
+    """Returns True if self exists."""
     return tf.io.gfile.exists(str(self))
 
 
   def iterdir(self) -> Iterator['GcsPath']:
+    """Iterates over the directory."""
     for f in tf.io.gfile.listdir(str(self)):
       yield GcsPath(f)
 
