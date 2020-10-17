@@ -178,7 +178,6 @@ class DownloadManagerTest(testing.TestCase):
         'new': b.url,
         'info_deleted': c.url,
     })
-    print(downloads)
     expected = {
         'cached': a.file_path,
         'new': b.file_path,
