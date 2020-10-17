@@ -421,6 +421,21 @@ class DownloadManager(object):
         self._recorded_url_infos[url] = _read_url_info(url_path)
     return existing_path
 
+  def _check_manually_downloaded(self, url):
+    """Checks if file is already downloaded in manual_dir."""
+    url_info = self._url_infos.get(url)
+    # If url info was recorded with filename
+    manually_downloaded_path = None
+    if url_info and url_info.filename:
+        manually_downloaded_path = os.path.join(
+          self._manual_dir,
+          url_info.filename
+        )
+        # File not manually downloaded
+        if not tf.io.gfile.exists(manually_downloaded_path):
+          manually_downloaded_path = None
+    return manually_downloaded_path
+
   def download_checksums(self, checksums_url):
     """Downloads checksum file from the given URL and adds it to registry."""
     checksums_path = self.download(checksums_url)
@@ -443,6 +458,14 @@ class DownloadManager(object):
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
+
+    manually_downloaded_path = self._check_manually_downloaded(url)
+    if manually_downloaded_path is not None:
+      logging.info(
+        f'Skipping download of {url}: File manually'
+        f'downloaded in {manually_downloaded_path}'
+      )
+      return promise.Promise.resolve(manually_downloaded_path)
 
     # Compute the existing path if the file was previously downloaded
     url_path = self._get_final_dl_path(
