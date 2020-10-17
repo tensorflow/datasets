@@ -30,6 +30,7 @@ def mocked_gfile_path(tmp_path: pathlib.Path):
   ):
     yield tmp_path
 
+
 def test_representations(mocked_gfile_path: pathlib.Path):
   g_path = GcsPath('gs://bucket/dir')
 
@@ -38,6 +39,16 @@ def test_representations(mocked_gfile_path: pathlib.Path):
   assert str(g_path) == 'gs://bucket/dir'
   assert os.fspath(g_path) == 'gs://bucket/dir'
 
+  g_path = GcsPath('/gs/bucket/datasets/')
+  assert str(g_path) == 'gs://bucket/datasets'
+  assert repr(g_path).startswith('GcsPath')
+
+  p = GcsPath(g_path, 'mnist', 'dataset.json')
+  assert str(p) == 'gs://bucket/datasets/mnist/dataset.json'
+
+  parts = [g_path, Path('mnist-100'), 'dataset.json']
+  assert '/'.join(os.fspath(p)
+                  for p in parts) == 'gs://bucket/datasets/mnist-100/dataset.json'
 
   with pytest.raises(ValueError, match='Invalid path'):
     GcsPath('/bucket/dir')
