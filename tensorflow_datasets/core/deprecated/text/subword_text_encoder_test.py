@@ -22,11 +22,11 @@ import os
 from absl.testing import parameterized
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.deprecated.text import subword_text_encoder
 from tensorflow_datasets.core.deprecated.text import text_encoder
-from tensorflow_datasets.core.utils import py_utils
 
-TEST_DATA_DIR = os.path.join(py_utils.tfds_dir(), 'testing', 'test_data')
+TEST_DATA_DIR = os.path.join(utils.tfds_write_path(), 'testing', 'test_data')
 
 
 class SubwordTextEncoderTest(parameterized.TestCase, testing.TestCase):

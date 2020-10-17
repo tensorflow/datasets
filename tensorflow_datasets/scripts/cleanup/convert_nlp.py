@@ -35,7 +35,7 @@ import re
 
 from absl import app
 from absl.flags import argparse_flags
-from tensorflow_datasets.core.utils import py_utils
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.scripts.cli import new
 
 TO_CONVERT = [
@@ -107,7 +107,7 @@ def create_dataset_files(
 ) -> None:
   """Create template files."""
   #  Path of the converted dataset directory
-  tfds_root_path = pathlib.Path(py_utils.tfds_dir())
+  tfds_root_path = tfds.core.utils.tfds_write_path()
   dataset_dir = tfds_root_path / dataset_type
   if not dataset_dir.is_dir():
     raise ValueError(f"Invalid Dataset Type {dataset_type}")

@@ -499,7 +499,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
 
     def load_mnist_dataset_info(self):
       mnist_info_path = os.path.join(
-          utils.tfds_dir(),
+          utils.tfds_write_path(),
           "testing/test_data/dataset_info/mnist/3.0.1",
       )
       mnist_info_path = os.path.normpath(mnist_info_path)

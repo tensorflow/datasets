@@ -33,7 +33,7 @@ gfile = tf.io.gfile
 del tf
 
 from tensorflow_datasets.core import naming  # pylint: disable=g-import-not-at-top
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 
 FLAGS = flags.FLAGS
 
@@ -218,7 +218,7 @@ def main_old(_):
   dataset_type = FLAGS.type
   root_dir = FLAGS.tfds_dir
   if not root_dir:
-    root_dir = py_utils.tfds_dir()
+    root_dir = utils.tfds_write_path()
 
   data = dict(
       dataset_name=dataset_name,

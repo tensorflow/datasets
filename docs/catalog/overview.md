@@ -172,6 +172,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Structured`
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
@@ -243,6 +245,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`scicite`](scicite.md)
 *   [`sentiment140`](sentiment140.md)
 *   [`snli`](snli.md)
+*   [`story_cloze`](story_cloze.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`super_glue`](super_glue.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)

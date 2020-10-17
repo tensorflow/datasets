@@ -46,7 +46,7 @@ flags.DEFINE_string('datasets', None, 'Datasets to convert')
 
 FLAGS = flags.FLAGS
 
-TFDS_PATH = pathlib.Path(tfds.core.utils.tfds_dir())
+TFDS_PATH = pathlib.Path(tfds.core.utils.tfds_write_path())
 
 
 @dataclasses.dataclass(frozen=True)

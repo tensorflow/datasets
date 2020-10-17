@@ -38,7 +38,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
 
-
 Tree = type_utils.Tree
 
 # NOTE: When used on an instance method, the cache is shared across all
@@ -365,19 +364,6 @@ def incomplete_dir(dirname):
   finally:
     if tf.io.gfile.exists(tmp_dir):
       tf.io.gfile.rmtree(tmp_dir)
-
-
-def tfds_dir() -> str:
-  """Path to tensorflow_datasets directory.
-
-  The difference with `tfds.core.tfds_path` is that this function can be
-  used for write access while `tfds.core.tfds_path` should be used for
-  read-only.
-
-  Returns:
-    tfds_dir: The root TFDS path.
-  """
-  return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
 @contextlib.contextmanager
