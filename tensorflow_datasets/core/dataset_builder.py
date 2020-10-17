@@ -502,7 +502,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     ```
 
     Args:
-      split: Which split of the data to load (e.g. `'train'`, `'test'`
+      split: Which split of the data to load (e.g. `'train'`, `'test'`,
         `['train', 'test']`, `'train[80%:]'`,...). See our
         [split API guide](https://www.tensorflow.org/datasets/splits).
         If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
