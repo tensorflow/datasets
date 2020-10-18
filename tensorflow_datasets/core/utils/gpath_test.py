@@ -107,14 +107,17 @@ def test_read_write(mocked_gfile_path: pathlib.Path):
     f.write(b'abcd')
   assert mocked_gfile_path.joinpath('bytes_file.txt').read_bytes() == b'abcd'
 
-  write_file_path = GcsPath('gs://text_file1.txt')
-  write_bytes_path = GcsPath('gs://bytes_file1.txt')
-
   # write_text() write_bytes()
-  write_file_path.write_text('abcd')
-  write_bytes_path.write_bytes(b'foobar')
+  GcsPath('gs://tfds_text.txt').write_text('tfds')
+  GcsPath('gs://tfds_byte.txt').write_bytes(b'tfds')
 
-  # read_text() read_bytes()
+  # read_text() and read_bytes()
+  assert GcsPath('gs://text_file.txt').read_text() == 'abcd'
+  assert GcsPath('gs://bytes_file.txt').read_bytes() == b'abcd'
+
+  assert GcsPath('gs://tfds_text.txt').read_text() == 'tfds'
+  assert GcsPath('gs://tfds_byte.txt').read_bytes() == b'tfds'
+
   assert mocked_gfile_path.joinpath('text_file1.txt').read_text() == 'abcd'
   assert mocked_gfile_path.joinpath('bytes_file1.txt').read_bytes() == b'foobar'
 
@@ -138,7 +141,7 @@ def test_rename_replace(mocked_gfile_path: pathlib.Path):
 
   assert mocked_gfile_path.joinpath('foo.py').exists()
 
-  # Rename()
+  # rename()
   src_path.rename('gs://bar.py')
 
   assert not mocked_gfile_path.joinpath('foo.py').exists()

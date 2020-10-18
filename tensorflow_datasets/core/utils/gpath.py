@@ -80,29 +80,6 @@ class GcsPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
     """Opens the file."""
     return tf.io.gfile.GFile(str(self), mode, **kwargs)
 
-  def read_bytes(self) -> bytes:
-    """Reads contents of self as bytes."""
-    with tf.io.gfile.GFile(self._get_path_str(), 'rb') as f:
-      return f.read()
-
-  def read_text(self, encoding: Optional[str] = None) -> str:
-    """Reads contents of self as str."""
-    with tf.io.gfile.GFile(self._get_path_str(), 'r') as f:
-      return f.read()
-
-  def write_bytes(self, data: bytes) -> None:
-    """Writes content as bytes."""
-    with tf.io.gfile.GFile(self._get_path_str(), 'wb') as f:
-      return f.write(data)
-
-  def write_text(self,
-                 data: str,
-                 encoding: Optional[str] = None,
-                 errors: Optional[str] = None) -> None:
-    """Writes content as str."""
-    with tf.io.gfile.GFile(self._get_path_str(), 'w') as f:
-      return f.write(data)
-
   def rename(self, target: type_utils.PathLike) -> None:
     """Rename file or directory to the given target """
     tf.io.gfile.rename(self._get_path_str(), target)
