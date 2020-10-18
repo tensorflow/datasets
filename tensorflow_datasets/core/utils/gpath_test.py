@@ -16,14 +16,19 @@ def mocked_gfile_path(tmp_path: pathlib.Path):
   def _norm_path(path: str):
     return path.replace('gs://', os.fspath(tmp_path) + '/')
 
+  def _rename(source, target, overwrite=False):
+    if not overwrite:
+      os.rename(source, target)
+    else:
+      os.replace(source, target)
+
   with testing.mock_tf(
       'tf.io.gfile',
       exists=lambda p: os.path.exists(_norm_path(p)),
       isdir=lambda p: os.path.isdir(_norm_path(p)),
       listdir=lambda p: os.listdir(_norm_path(p)),
       GFile=lambda p, *args, **kwargs: open(_norm_path(p), *args, **kwargs),
-      rename=lambda p1, p2: os.rename(_norm_path(p1), _norm_path(p2)),
-      replace=lambda p1, p2: os.replace(_norm_path(p1), _norm_path(p2)), # TODO: tf.io.gfile.rename() overwrite=True
+      rename=lambda p1, p2, **kwargs: _rename(_norm_path(p1), _norm_path(p2), **kwargs),
       mkdir=lambda p: os.mkdir(_norm_path(p)),
       makedirs=lambda p: os.makedirs(_norm_path(p)),
       glob=lambda p: Path(_norm_path(p)).parent.glob(Path(_norm_path(p)).stem)  # TODO: temporary function
@@ -56,7 +61,6 @@ def test_representations(mocked_gfile_path: pathlib.Path):
 
 def test_gfs(mocked_gfile_path: pathlib.Path):
   # touch()
-
   touch_path = GcsPath('gs://touch.txt')
   assert not touch_path.exists()
 
@@ -135,16 +139,43 @@ def test_mkdir(mocked_gfile_path: pathlib.Path):
   assert mocked_gfile_path.joinpath('bucket').exists()
 
 
-def test_rename_replace(mocked_gfile_path: pathlib.Path):
+def test_rename(mocked_gfile_path: pathlib.Path):
   src_path = GcsPath('gs://foo.py')
   src_path.write_text(' ')
 
   assert mocked_gfile_path.joinpath('foo.py').exists()
 
-  # rename()
   src_path.rename('gs://bar.py')
 
   assert not mocked_gfile_path.joinpath('foo.py').exists()
   assert mocked_gfile_path.joinpath('bar.py').exists()
 
-  # TODO: Replace()
+  file_name = lambda l: l.name
+  assert sorted(list(map(file_name, mocked_gfile_path.iterdir()))) == ['bar.py']
+
+
+def test_replace(mocked_gfile_path: pathlib.Path):
+
+  file_path = GcsPath('gs://tfds.py')
+  file_path.write_text('tfds')
+
+  file_path.replace('gs://tfds-dataset.py')
+
+  assert not mocked_gfile_path.joinpath('tfds.py').exists()
+  assert mocked_gfile_path.joinpath('tfds-dataset.py').exists()
+  assert mocked_gfile_path.joinpath('tfds-dataset.py').read_text() == 'tfds'
+
+  mnist_path = GcsPath('gs://mnist.py')
+  mnist_path.write_text('mnist')
+
+  mnist_path.replace('gs://mnist-100.py')
+
+  assert not mocked_gfile_path.joinpath('mnist.py').exists()
+  assert mocked_gfile_path.joinpath('mnist-100.py').exists()
+  assert mocked_gfile_path.joinpath('mnist-100.py').read_text() == 'mnist'
+
+  assert len(list(mocked_gfile_path.iterdir())) == 2
+
+  file_name = lambda l: l.name
+  assert sorted(list(map(file_name, mocked_gfile_path.iterdir()))) == ['mnist-100.py',
+                                                                       'tfds-dataset.py']
