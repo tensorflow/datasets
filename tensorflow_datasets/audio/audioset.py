@@ -38,7 +38,7 @@ were skipped during the raw data extraction due to some videos being removed by 
 _DOWNLOAD_LINK = 'https://storage.googleapis.com/bme590/william/audioset.tar.gz'
 
 class Audioset(tfds.core.GeneratorBasedBuilder):
-  """This dataset takes in a manual directory of 10-second .mp3 files taken from
+  """This dataset takes in a directory of 10-second .mp3 files taken from
   Youtube. It yields Audio using pydub AudioSegment and corresponding labels
   according to the CLASS_LABELS_CSV provided by Audioset.
   """
@@ -51,7 +51,7 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
       description=_DESCRIPTION,
       features=tfds.features.FeaturesDict({
         'audio': tfds.features.Audio(file_format=None, sample_rate=48000),
-        'label': tfds.features.Tensor(shape=(None,), dtype=tf.int32)
+        'label': tfds.features.Tensor(shape=(None,), dtype=tf.int32),
       }),
       supervised_keys=('audio','label'),
       homepage='https://research.google.com/audioset/index.html',
@@ -86,21 +86,16 @@ class Audioset(tfds.core.GeneratorBasedBuilder):
       datas = json.load(read_file)
     for f in my_files:
       try:
-        label_list = []
         filepath = os.path.join(trimmed_audio_path, f)
         with tf.io.gfile.GFile(filepath, 'rb') as read_file:
           #passes bad mp3 files
           errorcheck = pydub.AudioSegment.from_file(read_file)
         ids = f.replace('.mp3','')
-        for x in datas[ids]:
-          for y in x:
-            #gets multiple labels index
-            label_list.append(y)
-          label_tensor = np.zeros(527, dtype=np.int32)
-          for i in label_list:
+        label_list = datas[ids][0]
+        label_tensor = np.zeros(527, dtype=np.int32)
+        for i in label_list:
             # creates a tensor of zeros with ones at indices
-            label_tensor[i] = 1
-          break
+          label_tensor[i] = 1
         yield f, {
           'audio': filepath,
           'label': label_tensor,
