@@ -44,6 +44,9 @@ def test_resource_path():
   for p in sub_dirs:  # Childs should be `ResourcePath` instances
     assert isinstance(p, resource_utils.ResourcePath)
 
+  assert path.joinpath() == path
+  assert path.joinpath('abc', 'def.txt').name == 'def.txt'
+
 
 def test_tfds_path():
   """Test the proper suffix only, since the prefix can vary."""
