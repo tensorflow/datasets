@@ -434,7 +434,7 @@ class DownloadManager(object):
         # File manually downloaded
         if tf.io.gfile.exists(manually_downloaded_path):
           if self._force_checksums_validation:
-            # Finding the checksum of archived file
+            # Calculate the checksum of archived file.
             # Assumed that user has not extracted the dataset.
             archived_checksum = hashlib.sha256(
               tf.io.gfile.GFile(manually_downloaded_path, mode='rb').read()
@@ -444,8 +444,6 @@ class DownloadManager(object):
         # File not manually downloaded
         else:
           manually_downloaded_path = None
-
-
     return manually_downloaded_path
 
   def download_checksums(self, checksums_url):
