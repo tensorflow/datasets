@@ -16,6 +16,7 @@
 """Utils to handle resources."""
 
 import itertools
+import os
 import pathlib
 import sys
 import types
@@ -63,6 +64,13 @@ class ResourcePath(zipfile.Path):
   # Required due to: https://bugs.python.org/issue42043
   def _next(self, at) -> 'ResourcePath':
     return type(self)(self.root, at)
+
+  def joinpath(self, *parts: PathLike) -> 'ResourcePath':
+    """Overwrite `joinpath` to be consistent with `pathlib.Path`."""
+    if not parts:
+      return self
+    else:
+      return super().joinpath(os.path.join(*parts))  # pylint: disable=no-value-for-parameter
 
 
 def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:

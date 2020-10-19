@@ -212,7 +212,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         pass
       else:
         modules[-1] += ".py"
-        return path.joinpath("/".join(modules[1:]))
+        return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
     return pathlib.Path(inspect.getfile(cls))
