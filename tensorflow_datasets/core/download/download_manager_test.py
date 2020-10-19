@@ -190,7 +190,7 @@ class DownloadManagerTest(testing.TestCase):
     self.assertEqual(  # Downloaded size include cached downloads
         manager.downloaded_size, sum([art.url_info.size for art in (a, b, c)]))
 
-  def test_check_manually_downloaded(self):
+  def test_manually_downloaded(self):
     """One file is manually downloaded, one not."""
     a, b = [Artifact(i) for i in 'ab']
 
