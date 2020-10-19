@@ -130,12 +130,14 @@ class ReadOnlyPath(PurePath, Protocol):
     return self.glob(f'**/{pattern}')
 
   def expanduser(self: T) -> T:
-    """Return a new path with expanded `~` and `~user` constructs."""
-    return self
+    """Returns a new path with expanded `~` and `~user` constructs."""
+    if '~' not in self.parts:  # pytype: disable=attribute-error
+      return self
+    raise NotImplementedError
 
+  @abc.abstractmethod
   def resolve(self: T, strict: bool = False) -> T:
-    """Return a new path with expanded `~` and `~user` constructs."""
-    return self
+    """Returns the absolute path."""
 
   @abc.abstractmethod
   def open(
@@ -171,6 +173,10 @@ class ReadWritePath(ReadOnlyPath, Protocol):
   ) -> None:
     """Create a new directory at this given path."""
 
+  @abc.abstractmethod
+  def rmdir(self) -> None:
+    """Create a new directory at this given path."""
+
   def write_bytes(self, data: bytes) -> None:
     """Writes content as bytes."""
     with self.open('wb') as f:
@@ -193,7 +199,10 @@ class ReadWritePath(ReadOnlyPath, Protocol):
       raise FileExistsError(f'{self} already exists.')
     self.write_text('')
 
-  # TODO(tfds):
-  # * rename
-  # * replace
-  # * rmdir
+  @abc.abstractmethod
+  def rename(self: T, target: PathLike) -> T:
+    """Renames the path."""
+
+  @abc.abstractmethod
+  def replace(self: T, target: PathLike) -> T:
+    """Overwrites the destination path."""
