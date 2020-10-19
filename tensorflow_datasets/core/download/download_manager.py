@@ -431,9 +431,21 @@ class DownloadManager(object):
           self._manual_dir,
           url_info.filename
         )
+        # File manually downloaded
+        if tf.io.gfile.exists(manually_downloaded_path):
+          if self._force_checksums_validation:
+            # Finding the checksum of archived file
+            # Assumed that user has not extracted the dataset.
+            archived_checksum = hashlib.sha256(
+              tf.io.gfile.GFile(manually_downloaded_path, mode='rb').read()
+            ).hashdigest()
+            if url_info.checksum != archived_checksum:
+              raise NonMatchingChecksumError(url, manually_downloaded_path)
         # File not manually downloaded
-        if not tf.io.gfile.exists(manually_downloaded_path):
+        else:
           manually_downloaded_path = None
+
+
     return manually_downloaded_path
 
   def download_checksums(self, checksums_url):
