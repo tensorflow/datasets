@@ -190,6 +190,31 @@ class DownloadManagerTest(testing.TestCase):
     self.assertEqual(  # Downloaded size include cached downloads
         manager.downloaded_size, sum([art.url_info.size for art in (a, b, c)]))
 
+  def test_check_manually_downloaded(self):
+    """One file is manually downloaded, one not."""
+    a, b = [Artifact(i) for i in 'ab']
+
+    a_file_path = '/manual_dir/a'
+    # File a is manually downloaded
+    self.fs.add_file(a_file_path)
+    self.fs.add_file(b.file_path)
+
+    self.dl_results[b.url] = b.url_info
+    manager = self._get_manager(
+      url_infos={
+        art.url: art.url_info for art in (a, b)
+      },
+    )
+    downloads = manager.download({
+      'manual': a.url,
+      'download': b.url
+    })
+    expected = {
+      'manual': a_file_path,
+      'download': b.file_path
+    }
+    self.assertEqual(downloads, expected)
+
   def test_extract(self):
     """One file already extracted, one file with NO_EXTRACT, one to extract."""
     cached = resource_lib.Resource(path='/dl_dir/cached', extract_method=ZIP)
