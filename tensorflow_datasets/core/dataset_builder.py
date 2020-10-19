@@ -285,11 +285,14 @@ class DatasetBuilder(registered.RegisteredDataset):
   @functools.lru_cache(maxsize=None)
   def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
     """Load `UrlInfo` from the given path."""
+    # Note: If the dataset is downloaded with `record_checksums=True`, urls
+    # might be updated but `url_infos` won't as it is memoized.
+
     # Search for the url_info file.
     checksums_path = cls._checksums_path
     # If url_info file is found, load the urls
     if checksums_path.exists():
-      return download.checksums.url_infos_from_path(os.fspath(checksums_path))
+      return download.checksums.load_url_infos(checksums_path)
     else:
       return None
 
@@ -813,8 +816,14 @@ class DatasetBuilder(registered.RegisteredDataset):
     else:
       manual_dir = None
 
+    if download_config.register_checksums:
+      # Note: Error will be raised here if user try to record checksums
+      # from a `zipapp`
+      register_checksums_path = utils.to_write_path(self._checksums_path)
+    else:
+      register_checksums_path = None
+
     return download.DownloadManager(
-        dataset_name=self.name,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
@@ -824,7 +833,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
+        register_checksums_path=register_checksums_path,
         verify_ssl=download_config.verify_ssl,
+        dataset_name=self.name,
     )
 
   @property

@@ -125,7 +125,6 @@ class DownloadManagerTest(testing.TestCase):
 
     # Start all mocks
     self.fs.__enter__()
-    absltest.mock.patch.object(checksums_lib, 'store_checksums').start()
     self._make_downloader_mock().start()
     self._make_extractor_mock().start()
 
@@ -153,6 +152,7 @@ class DownloadManagerTest(testing.TestCase):
         extract_dir=extract_dir,
         manual_dir='/manual_dir',
         register_checksums=register_checksums,
+        register_checksums_path=os.path.join(self.tmp_dir, 'checksums.tsv'),
         **kwargs
     )
     if url_infos:
@@ -422,7 +422,7 @@ class DownloadManagerTest(testing.TestCase):
         register_checksums=True,
     )
     with absltest.mock.patch.object(
-        checksums_lib, 'store_checksums', side_effect=StoreChecksumsError()):
+        checksums_lib, 'save_url_infos', side_effect=StoreChecksumsError()):
       with self.assertRaises(StoreChecksumsError):
         dl_manager.download(a.url)
     # Even after failure, the file was properly downloaded

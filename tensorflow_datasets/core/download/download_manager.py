@@ -18,6 +18,8 @@
 import concurrent.futures
 import hashlib
 import os
+import pathlib
+import typing
 from typing import Dict, Optional, Union
 import uuid
 
@@ -33,6 +35,7 @@ from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
+from tensorflow_datasets.core.utils import type_utils
 
 
 class NonMatchingChecksumError(Exception):
@@ -179,6 +182,7 @@ class DownloadManager(object):
       force_extraction: bool = False,
       force_checksums_validation: bool = False,
       register_checksums: bool = False,
+      register_checksums_path: Optional[type_utils.PathLike] = None,
       verify_ssl: bool = True,
   ):
     """Download manager constructor.
@@ -198,10 +202,29 @@ class DownloadManager(object):
         have checksums.
       register_checksums: If True, dl checksums aren't
         checked, but stored into file.
+      register_checksums_path: Path were to save checksums. Should be set
+        if register_checksums is True.
       verify_ssl: `bool`, defaults to True. If True, will verify certificate
         when downloading dataset.
+
+    Raises:
+      FileNotFoundError: Raised if the register_checksums_path does not exists.
     """
-    self._dataset_name = dataset_name
+    if register_checksums and not register_checksums_path:
+      raise ValueError(
+          'When register_checksums=True, register_checksums_path should be set.'
+      )
+    # TODO(tfds): Should use `path = tfds.core.Path(path)`
+    if isinstance(register_checksums_path, str):
+      register_checksums_path = pathlib.Path(register_checksums_path)
+    register_checksums_path = typing.cast(
+        type_utils.ReadOnlyPath, register_checksums_path
+    )
+    if register_checksums_path and not register_checksums_path.exists():
+      # Create the file here to make sure user has write access before starting
+      # downloads.
+      register_checksums_path.touch()
+
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
@@ -213,7 +236,9 @@ class DownloadManager(object):
     self._force_extraction = force_extraction
     self._force_checksums_validation = force_checksums_validation
     self._register_checksums = register_checksums
+    self._register_checksums_path = register_checksums_path
     self._verify_ssl = verify_ssl
+    self._dataset_name = dataset_name
 
     # All known URLs: {url: UrlInfo(size=, checksum=)}
     self._url_infos = checksums.get_all_url_infos()
@@ -276,7 +301,10 @@ class DownloadManager(object):
   @utils.build_synchronize_decorator()
   def _record_url_infos(self):
     """Store in file when recorded size/checksum of downloaded files."""
-    checksums.store_checksums(self._dataset_name, self._recorded_url_infos)
+    checksums.save_url_infos(
+        self._register_checksums_path,
+        self._recorded_url_infos,
+    )
 
   def _handle_download_result(
       self,
@@ -424,7 +452,7 @@ class DownloadManager(object):
   def download_checksums(self, checksums_url):
     """Downloads checksum file from the given URL and adds it to registry."""
     checksums_path = self.download(checksums_url)
-    self._url_infos.update(checksums.url_infos_from_path(checksums_path))
+    self._url_infos.update(checksums.load_url_infos(checksums_path))
 
   # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.

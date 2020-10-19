@@ -32,7 +32,6 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
-from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.testing import feature_test_case
 from tensorflow_datasets.testing import test_utils
 
@@ -316,28 +315,32 @@ class DatasetBuilderTestCase(
     if not self._download_urls:
       return
 
-    err_msg = ("If you are developping outside TFDS and want to opt-out, "
-               "please add `SKIP_CHECKSUMS = True` to the "
-               "`DatasetBuilderTestCase`")
-
+    err_msg = (
+        "Did you forget to record checksums with `--register_checksums` ? "
+        "See instructions at: "
+        "hhttps://www.tensorflow.org/datasets/add_dataset#run_the_generation_code"
+        "If want to opt-out of checksums validation, please add "
+        "`SKIP_CHECKSUMS = True` to the `DatasetBuilderTestCase`.\n"
+    )
     url_infos = self.DATASET_CLASS.url_infos
+    filepath = self.DATASET_CLASS._checksums_path  # pylint: disable=protected-access
+    # Legacy checksums: Search in `checksums/` dir
     if url_infos is None:
-      filepath = os.path.join(checksums._get_path(self.builder.name))  # pylint: disable=protected-access
-      with utils.try_reraise(suffix=err_msg):
-        url_infos = checksums._get_url_infos(filepath)  # pylint: disable=protected-access
-    else:
-      # TODO(tfds): Improve doc for dataset-as-folder (and remove
-      # try_reraise above)
-      filepath = str(self.DATASET_CLASS.code_path.parent / "checksums.tsv")
+      legacy_filepath = checksums._checksum_paths().get(self.builder.name)  # pylint: disable=protected-access
+      if legacy_filepath and legacy_filepath.exists():
+        filepath = legacy_filepath
+        url_infos = checksums.load_url_infos(filepath)
+    # Checksums not present neither in legacy nor package
+    if url_infos is None:
+      raise FileNotFoundError(
+          f"Checksums file not found at: {filepath}\n"
+          f"{err_msg}\n"
+      )
 
     missing_urls = self._download_urls - set(url_infos.keys())
     self.assertEmpty(
         missing_urls,
-        "Some urls checksums are missing at: {} "
-        "Did you forget to record checksums with `--register_checksums` ? "
-        "See instructions at: "
-        "https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally"
-        "\n{}".format(filepath, err_msg)
+        f"Some urls checksums are missing at: {filepath}\n{err_msg}"
     )
 
   def _download_and_prepare_as_dataset(self, builder):
@@ -486,4 +489,4 @@ def compare_shapes_and_types(tensor_info, output_types, output_shapes):
 
       expected_shape = feature_info.shape
       output_shape = output_shapes[feature_name]
-      tf_utils.assert_shape_match(expected_shape, output_shape)
+      utils.assert_shape_match(expected_shape, output_shape)
