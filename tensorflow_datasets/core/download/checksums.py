@@ -16,12 +16,10 @@
 """Methods to retrieve and store size/checksums associated to URLs."""
 
 import pathlib
-import typing
 from typing import Any, Dict, Iterable, Optional
 
 from absl import logging
 import dataclasses
-import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
@@ -148,13 +146,7 @@ def get_all_url_infos() -> Dict[str, UrlInfo]:
 
 def load_url_infos(path: type_utils.PathLike) -> Dict[str, UrlInfo]:
   """Loads the checksums."""
-  # TODO(tfds): use `path = tfds.core.Path(path)` instead of casting and `str`.
-  if isinstance(path, str):
-    with tf.io.gfile.GFile(path) as f:
-      return _parse_url_infos(f.read().splitlines())
-  else:
-    path = typing.cast(type_utils.ReadOnlyPath, path)
-    return _parse_url_infos(path.read_text().splitlines())
+  return _parse_url_infos(utils.as_path(path).read_text().splitlines())
 
 
 def save_url_infos(

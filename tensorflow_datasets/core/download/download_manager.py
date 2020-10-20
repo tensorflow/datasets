@@ -18,8 +18,6 @@
 import concurrent.futures
 import hashlib
 import os
-import pathlib
-import typing
 from typing import Dict, Optional, Union
 import uuid
 
@@ -214,16 +212,12 @@ class DownloadManager(object):
       raise ValueError(
           'When register_checksums=True, register_checksums_path should be set.'
       )
-    # TODO(tfds): Should use `path = tfds.core.Path(path)`
-    if isinstance(register_checksums_path, str):
-      register_checksums_path = pathlib.Path(register_checksums_path)
-    register_checksums_path = typing.cast(
-        type_utils.ReadOnlyPath, register_checksums_path
-    )
-    if register_checksums_path and not register_checksums_path.exists():
-      # Create the file here to make sure user has write access before starting
-      # downloads.
-      register_checksums_path.touch()
+    if register_checksums_path:
+      register_checksums_path = utils.as_path(register_checksums_path)
+      if not register_checksums_path.exists():
+        # Create the file here to make sure user has write access before
+        # starting downloads.
+        register_checksums_path.touch()
 
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(

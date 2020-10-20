@@ -20,6 +20,7 @@ import os
 import pathlib
 import sys
 import types
+import typing
 from typing import Union
 
 from tensorflow_datasets.core.utils import type_utils
@@ -85,7 +86,8 @@ def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
     # called internally.
     return path
   elif isinstance(path, zipfile.Path):
-    return ResourcePath(path.root, path.at)
+    path = ResourcePath(path.root, path.at)
+    return typing.cast(ReadOnlyPath, path)
   else:
     raise TypeError(f'Unknown resource path: {type(path)}: {path}')
 
