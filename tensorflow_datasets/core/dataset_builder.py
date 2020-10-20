@@ -704,18 +704,20 @@ class DatasetBuilder(registered.RegisteredDataset):
     for data_dir_root in all_data_dirs:
       # List all existing versions
       full_builder_dir = os.path.join(data_dir_root, builder_dir)
-      all_versions.update(utils.version.list_all_versions(full_builder_dir))
+      data_dir_versions = set(utils.version.list_all_versions(full_builder_dir))
       # Check for existance of the requested version
-      if self.version in all_versions:
+      if self.version in data_dir_versions:
         requested_version_dirs[data_dir_root] = os.path.join(
             data_dir_root, version_dir
         )
+      all_versions.update(data_dir_versions)
 
     if len(requested_version_dirs) > 1:
       raise ValueError(
           "Dataset was found in more than one directory: {}. Please resolve "
           "the ambiguity by explicitly specifying `data_dir=`."
-          "".format(requested_version_dirs))
+          "".format(requested_version_dirs.values())
+      )
     elif len(requested_version_dirs) == 1:  # The dataset is found once
       return next(iter(requested_version_dirs.items()))
 
