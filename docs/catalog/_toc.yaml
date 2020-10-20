@@ -257,6 +257,9 @@ toc:
     title: cosmos_qa
   - path: /datasets/catalog/mctaco
     title: mctaco
+  - path: /datasets/catalog/mlqa
+    status: nightly
+    title: mlqa
   - path: /datasets/catalog/natural_questions
     title: natural_questions
   - path: /datasets/catalog/natural_questions_open

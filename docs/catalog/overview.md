@@ -160,6 +160,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)
+*   [`mlqa`](mlqa.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`natural_questions`](natural_questions.md)
 *   [`natural_questions_open`](natural_questions_open.md)
 *   [`qasc`](qasc.md)
