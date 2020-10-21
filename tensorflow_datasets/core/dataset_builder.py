@@ -44,6 +44,8 @@ from tensorflow_datasets.core.utils import type_utils
 
 import termcolor
 
+from tensorflow.tools.docs import doc_controls  # pylint: disable=g-direct-tensorflow-import
+
 if six.PY3:
   import pathlib  # pylint: disable=g-import-not-at-top
 else:
@@ -1028,6 +1030,8 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
   """
 
   @abc.abstractmethod
+  @doc_controls.do_not_doc_in_subclasses
+  @doc_controls.document_private
   def _generate_examples(self, **kwargs):
     """Default function generating examples for each `SplitGenerator`.
 
