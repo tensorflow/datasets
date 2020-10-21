@@ -74,7 +74,6 @@ def _update_url_infos(url_infos) -> Dict[str, checksums.UrlInfo]:
 def main(_):
   # Legacy datasets
   url_checksums_paths = checksums._checksum_paths().values()
-  print(url_checksums_paths)
   for url_path in list(url_checksums_paths):
     if isinstance(url_path, str):
       url_path = pathlib.Path(url_path)
