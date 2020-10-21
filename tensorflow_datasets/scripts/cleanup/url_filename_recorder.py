@@ -82,12 +82,12 @@ def main(_):
     checksums.save_url_infos(url_path, url_infos)   #save checksums
 
   # New datasets - tfds.core.DatasetBuilder
-  for name in tfds.list_builders()[:20]:
-      if not tfds.builder_cls(name).url_infos:
-        url_infos = tfds.builder_cls(name).url_infos  #load checksums
-        url_infos = _update_url_infos(url_infos)      #update checkums to add filename
-        path = _get_builder_checksum_path(name)       #get checksums path
-        checksums.save_url_infos(path, url_infos)     #save checksums
+  for name in tfds.list_builders():
+    if tfds.builder_cls(name).url_infos != None:
+      url_infos = tfds.builder_cls(name).url_infos  #load checksums
+      url_infos = _update_url_infos(url_infos)      #update checkums to add filename
+      path = _get_builder_checksum_path(name)       #get checksums path
+      checksums.save_url_infos(path, url_infos)     #save checksums
 
 
 if __name__ == '__main__':
