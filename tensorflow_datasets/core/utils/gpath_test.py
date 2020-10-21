@@ -109,6 +109,8 @@ def test_repr(parts):
   assert gpath == path
   assert str(gpath.resolve()) == str(path.resolve())
   assert str(gpath.expanduser()) == str(path.expanduser())
+  assert isinstance(gpath.resolve(), gpathlib.GPath)
+  assert isinstance(gpath.expanduser(), gpathlib.GPath)
 
 
 # pylint: disable=redefined-outer-name

@@ -806,17 +806,15 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _make_download_manager(self, download_dir, download_config):
     """Creates a new download manager object."""
-    download_dir = download_dir or os.path.join(self._data_dir_root,
-                                                "downloads")
-    extract_dir = (download_config.extract_dir or
-                   os.path.join(download_dir, "extracted"))
-
-    # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
-    if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
-      manual_dir = (
-          download_config.manual_dir or os.path.join(download_dir, "manual"))
-    else:
-      manual_dir = None
+    download_dir = (
+        download_dir or os.path.join(self._data_dir_root, "downloads")
+    )
+    extract_dir = (
+        download_config.extract_dir or os.path.join(download_dir, "extracted")
+    )
+    manual_dir = (
+        download_config.manual_dir or os.path.join(download_dir, "manual")
+    )
 
     if download_config.register_checksums:
       # Note: Error will be raised here if user try to record checksums

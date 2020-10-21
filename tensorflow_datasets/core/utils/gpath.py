@@ -76,11 +76,11 @@ class GPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
 
   def expanduser(self) -> 'GPath':
     """Returns a new path with expanded `~` and `~user` constructs."""
-    return posixpath.expanduser(self._path_str)
+    return GPath(posixpath.expanduser(self._path_str))
 
   def resolve(self, strict: bool = False) -> 'GPath':
     """Returns the abolute path."""
-    return posixpath.abspath(self._path_str)
+    return GPath(posixpath.abspath(self._path_str))
 
   def glob(self, pattern: str) -> Iterator['GPath']:
     """Yielding all matching files (of any kind)."""
