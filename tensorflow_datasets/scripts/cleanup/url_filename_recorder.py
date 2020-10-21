@@ -71,41 +71,24 @@ def _update_url_infos(url_infos) -> Dict[str, checksums.UrlInfo]:
     url_infos[url].filename = filename
   return url_infos
 
-def _save_url_infos(url_infos, paths):
-  """Save UrlInfo to checksums."""
-  for url, url_info in url_infos.items():
-    path = paths[url]
-    tfds.core.download.checksums.save_url_infos(path, {url: url_info})
-
 def main(_):
   # Legacy datasets
-  url_checksums_path = checksums._checksum_paths().values()
-  url_infos = {}
-  url_paths = {}  # save paths of checksum files
-  for url_path in url_checksums_path:
+  url_checksums_paths = checksums._checksum_paths().values()
+  print(url_checksums_paths)
+  for url_path in list(url_checksums_paths):
     if isinstance(url_path, str):
       url_path = pathlib.Path(url_path)
-    url_info = checksums.load_url_infos(url_path)
-    url, url_info = list(url_info.items())[0]
-    url_paths[url] = url_path
-    url_infos[url] = url_info
+    url_infos = checksums.load_url_infos(url_path)  #load checksums
+    url_infos = _update_url_infos(url_infos)        #update checkums to add filename
+    checksums.save_url_infos(url_path, url_infos)   #save checksums
 
   # New datasets - tfds.core.DatasetBuilder
-  builder_url_infos = {}
-  builder_paths = {}  # save paths of checksum files
-  for name in tfds.list_builders():
-      if tfds.builder_cls(name).url_infos is not None:
-        url, url_info = list(tfds.builder_cls(name).url_infos.items())[0]
-        builder_url_infos[url] = url_info
-        builder_paths[url] = _get_builder_checksum_path(name)
-
-  # Add filename to checksums
-  url_infos = _update_url_infos(url_infos)
-  builder_url_infos = _update_url_infos(builder_url_infos)
-
-  # Save checksums with filename
-  _save_url_infos(url_infos, url_paths)
-  _save_url_infos(builder_url_infos, builder_paths)
+  for name in tfds.list_builders()[:20]:
+      if not tfds.builder_cls(name).url_infos:
+        url_infos = tfds.builder_cls(name).url_infos  #load checksums
+        url_infos = _update_url_infos(url_infos)      #update checkums to add filename
+        path = _get_builder_checksum_path(name)       #get checksums path
+        checksums.save_url_infos(path, url_infos)     #save checksums
 
 
 if __name__ == '__main__':
