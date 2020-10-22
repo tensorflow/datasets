@@ -311,7 +311,6 @@ class DownloadManager(object):
 
     # Eventually check the checksums
     if self._force_checksums_validation:
-      # Calculate the checksum of archived file.
       checksum, _ = utils.read_checksum_digest(manual_path)
       if checksum != url_info.checksum:
         raise NonMatchingChecksumError(url, manual_path)

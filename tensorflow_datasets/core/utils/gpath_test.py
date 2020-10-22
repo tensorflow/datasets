@@ -164,10 +164,17 @@ def test_open(gcs_mocked_path: pathlib.Path):
   dataset_path.mkdir(parents=True)
   assert dataset_path.exists()
 
+  with pytest.raises(ValueError, match='Only UTF-8 encoding supported.'):
+    dataset_path.open('w', encoding='latin-1')
+
   # open()
   for file in files:
     with dataset_path.joinpath(file).open('w') as f:
       f.write(' ')
+
+  # encoding argument
+  with dataset_path.joinpath('foo.py').open('r', encoding='UTF-8') as f:
+    f.read()
 
   # iterdir()
   assert len(list(gcs_mocked_path.joinpath('bucket/dataset').iterdir())) == 6

@@ -118,19 +118,21 @@ class GPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
       **kwargs: Any,
   ) -> typing.IO[AnyStr]:
     """Opens the file."""
-    if errors or encoding:
+    if errors:
       raise NotImplementedError
+    if encoding and not encoding.lower().startswith(('utf8', 'utf-8')):
+      raise ValueError(f'Only UTF-8 encoding supported. Not: {encoding}')
     gfile = tf.io.gfile.GFile(self._path_str, mode, **kwargs)
     gfile = typing.cast(typing.IO[AnyStr], gfile)  # pytype: disable=invalid-typevar
     return gfile
 
-  def rename(self, target: type_utils.PathLike) -> None:
+  def rename(self, target: type_utils.PathLike) -> 'GPath':
     """Rename file or directory to the given target."""
     target = os.fspath(GPath(target))  # Normalize gs:// URI
     tf.io.gfile.rename(self._path_str, target)
     return GPath(target)
 
-  def replace(self, target: type_utils.PathLike) -> None:
+  def replace(self, target: type_utils.PathLike) -> 'GPath':
     """Replace file or directory to the given target."""
     target = os.fspath(GPath(target))  # Normalize gs:// URI
     tf.io.gfile.rename(self._path_str, target, overwrite=True)
