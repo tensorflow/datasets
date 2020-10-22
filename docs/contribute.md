@@ -100,10 +100,11 @@ but with:
 *   2 spaces indentation instead of 4.
 *   Single quote `'`
 
-**Important:** Use `pylint>=2.6` from the root directory to check your code is
+**Important:** Make sure to run `pylint` on your code to check your code is
 properly formatted:
 
 ```sh
+pip install pylint --upgrade
 pylint tensorflow_datasets/core/some_file.py
 ```
 
