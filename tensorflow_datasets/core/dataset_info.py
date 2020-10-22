@@ -354,13 +354,20 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
+
+    Raises:
+      FileNotFoundError: If the file can't be found.
     """
-    if not dataset_info_dir:
-      raise ValueError(
-          "Calling read_from_directory with undefined dataset_info_dir.")
     logging.info("Load dataset info from %s", dataset_info_dir)
 
     json_filename = self._dataset_info_path(dataset_info_dir)
+    if not tf.io.gfile.exists(json_filename):
+      raise FileNotFoundError(
+          "Try to load `DatasetInfo` from a directory which does not exist or "
+          "does not contain `dataset_info.json`. Please delete the directory "
+          f"`{dataset_info_dir}`  if you are trying to re-generate the "
+          "dataset."
+      )
 
     # Load the metadata from disk
     parsed_proto = read_from_json(json_filename)

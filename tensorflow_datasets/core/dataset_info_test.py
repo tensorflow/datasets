@@ -83,21 +83,10 @@ class DatasetInfoTest(testing.TestCase):
     dataset_builder._is_py2_download_and_prepare_disabled = True
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
-  def test_undefined_dir(self):
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             "undefined dataset_info_dir"):
-      info = dataset_info.DatasetInfo(builder=self._builder)
-      info.read_from_directory(None)
-
   def test_non_existent_dir(self):
-    # The error messages raised by Windows is different from Unix.
-    if os.name == "nt":
-      err = "The system cannot find the path specified"
-    else:
-      err = "No such file or dir"
     info = dataset_info.DatasetInfo(builder=self._builder)
     with self.assertRaisesWithPredicateMatch(
-        tf.errors.NotFoundError, err):
+        FileNotFoundError, "from a directory which does not exist"):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
   def test_reading(self):
