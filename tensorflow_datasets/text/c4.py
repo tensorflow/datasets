@@ -47,16 +47,19 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version("3.0.0")
+_VERSION = tfds.core.Version("3.0.1")
 
+# TODO(adarob): Remove supported versions. Starting with 3.0.0, all generated
+# datasets are automatically forward compatible. For example,
+# tfds.load('c4:3.0.0') works even if the code is at 3.0.1.
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version("3.0.0"),
     tfds.core.Version("2.3.1"),
     tfds.core.Version("2.3.0"),
     tfds.core.Version("2.2.1"),
     tfds.core.Version("2.2.0"),
 ]
 RELEASE_NOTES = {
+    "3.0.1": "Remove mC4 languages with less than 10k pages.",
     "3.0.0": "Add multilingual version (mC4). Deterministic URL deduplication.",
     "2.3.1": "Hashing change.",
     "2.3.0": "Deduplicate lines within a page.",
@@ -127,19 +130,19 @@ _KNOWN_CORRUPT_WET_FILES = (  # as of September 23, 2020
     "crawl-data/CC-MAIN-2017-13/segments/1490218203536.73/wet/CC-MAIN-20170322213003-00052-ip-10-233-31-227.ec2.internal.warc.wet.gz",
 )
 
-# Limited to languages in CLD3 that produce non-empty train and validation sets
-# with 71 crawls.
+# Limited to languages in CLD3 that produce at least 10k pages when using the
+# "multilingual" config below.
 MC4_LANGUAGES = [
-    "af", "am", "ar", "az", "be", "bg", "bg-Latn", "bn", "bs", "ca", "ceb",
-    "co", "cs", "cy", "da", "de", "el", "el-Latn", "en", "eo", "es", "et",
-    "eu", "fa", "fi", "fil", "fr", "fy", "ga", "gd", "gl", "gu", "ha", "haw",
-    "hi", "hi-Latn", "hmn", "ht", "hu", "hy", "id", "ig", "is", "it",
-    "iw", "ja", "ja-Latn", "jv", "ka", "kk", "km", "kn", "ko", "ku", "ky",
-    "la", "lb", "lo", "lt", "lv", "mg", "mi", "mk", "ml", "mn", "mr", "ms",
-    "mt", "my", "ne", "nl", "no", "ny", "pa", "pl", "ps", "pt", "ro", "ru",
-    "ru-Latn", "sd", "si", "sk", "sl", "sm", "sn", "so", "sq", "sr", "st",
-    "su", "sv", "sw", "ta", "te", "tg", "th", "tr", "uk", "ur", "uz", "vi",
-    "xh", "yi", "yo", "zh", "zh-Latn", "zu"
+    "af", "am", "ar", "az", "be", "bg", "bg-Latn", "bn", "ca", "ceb", "co",
+    "cs", "cy", "da", "de", "el", "el-Latn", "en", "eo", "es", "et", "eu",
+    "fa", "fi", "fil", "fr", "fy", "ga", "gd", "gl", "gu", "ha", "haw", "hi",
+    "hi-Latn", "hmn", "ht", "hu", "hy", "id", "ig", "is", "it", "iw", "ja",
+    "ja-Latn", "jv", "ka", "kk", "km", "kn", "ko", "ku", "ky", "la", "lb",
+    "lo", "lt", "lv", "mg", "mi", "mk", "ml", "mn", "mr", "ms", "mt", "my",
+    "ne", "nl", "no", "ny", "pa", "pl", "ps", "pt", "ro", "ru", "ru-Latn",
+    "sd", "si", "sk", "sl", "sm", "sn", "so", "sq", "sr", "st", "su", "sv",
+    "sw", "ta", "te", "tg", "th", "tr", "uk", "ur", "uz", "vi", "xh", "yi",
+    "yo", "zh", "zh-Latn", "zu"
 ]
 
 
@@ -254,7 +257,7 @@ class C4(tfds.core.BeamBasedBuilder):
           dedupe=True,
           badwords_filter=True,
           description=
-          "Multilingual C4 (mC4) has 102 languages and is generated from 71 "
+          "Multilingual C4 (mC4) has 101 languages and is generated from 71 "
           "Common Crawl dumps."),
   ]
 
