@@ -106,7 +106,11 @@ class PurePath(Protocol, _PurePathBase):
 
 
 class ReadOnlyPath(PurePath, Protocol):
-  """Protocol for read-only methods of pathlib.Path-like API."""
+  """Protocol for read-only methods of pathlib.Path-like API.
+
+  See [pathlib.Path](https://docs.python.org/3/library/pathlib.html)
+  documentation.
+  """
 
   @abc.abstractmethod
   def exists(self) -> bool:
@@ -165,7 +169,11 @@ class ReadOnlyPath(PurePath, Protocol):
 
 
 class ReadWritePath(ReadOnlyPath, Protocol):
-  """Protocol for pathlib.Path-like API."""
+  """Protocol for pathlib.Path-like API.
+
+  See [pathlib.Path](https://docs.python.org/3/library/pathlib.html)
+  documentation.
+  """
 
   @abc.abstractmethod
   def mkdir(
