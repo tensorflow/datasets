@@ -6,11 +6,11 @@ from tensorflow_datasets.image_classification.grocery import grocery
 
 class GroceryTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for grocery dataset."""
-  # TODO(grocery):
   DATASET_CLASS = grocery.Grocery
   SPLITS = {
       'train': 3,  # Number of fake train example
       'test': 1,  # Number of fake test example
+      'validation': 1
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
