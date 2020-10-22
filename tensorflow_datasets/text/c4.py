@@ -202,13 +202,11 @@ class C4Config(tfds.core.BuilderConfig):
 class C4(tfds.core.BeamBasedBuilder):
   """C4 dataset based on Common Crawl."""
 
-  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
-  For the WebText-like config, you must manually download 'OpenWebText.zip'
-  (from https://mega.nz/#F!EZZD0YwJ!9_PlEQzdMVLaNdKv_ICNVQ) and the Common Crawl
-  WET files from August 2018 to July 2019
-  (https://commoncrawl.org/the-data/get-started/) and place them in the
-  `manual_dir`.
-  """
+  MANUAL_DOWNLOAD_INSTRUCTIONS = f"""\
+You are using a C4 config that requires some files to be manually downloaded.
+For `c4/webtextlike`, download {_OPENWEBTEXT_URLS_ZIP} from \
+{_OPENWEBTEXT_URLS_URL}.
+For `c4/multilingual` and `en/noclean` download the Common Crawl WET files."""
 
   BUILDER_CONFIGS = [
       C4Config(
@@ -329,10 +327,9 @@ class C4(tfds.core.BeamBasedBuilder):
       file_paths["wet_urls"] = wet_urls
       file_paths["wet_files"] = []
 
-    manual_dir = dl_manager.manual_dir
     for cc_version, wet_path_url in file_paths["manual_wet_paths"].items():
       crawl_dir = os.path.join(
-          manual_dir, "crawl-data", f"CC-MAIN-{cc_version}")
+          dl_manager.manual_dir, "crawl-data", f"CC-MAIN-{cc_version}")
       if not tf.io.gfile.exists(crawl_dir):
         raise AssertionError(
             "For the non-default Common Crawl version {0}, you must manually "
@@ -340,7 +337,7 @@ class C4(tfds.core.BeamBasedBuilder):
                 cc_version, crawl_dir))
       with tf.io.gfile.GFile(wet_path_url) as f:
         wet_files = [
-            os.path.join(manual_dir, line.strip())
+            os.path.join(dl_manager.manual_dir, line.strip())
             for line in f if line.strip() not in _KNOWN_CORRUPT_WET_FILES
         ]
       logging.info(
