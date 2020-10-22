@@ -24,11 +24,10 @@ import tensorflow as tf
 
 # pylint: disable=g-import-not-at-top
 try:
-  from typing import Protocol, runtime_checkable
+  from typing import Protocol
 except ImportError:
   import typing_extensions
   Protocol = typing_extensions.Protocol
-  runtime_checkable = typing_extensions.runtime_checkable
 # pylint: enable=g-import-not-at-top
 
 # Accept both `str` and `pathlib.Path`-like
@@ -58,8 +57,14 @@ Json = Dict[str, JsonValue]
 
 # pytype: disable=ignored-abstractmethod
 
+if typing.TYPE_CHECKING:
+  # TODO(b/171287205): Required because pytype `PathLike` implementation
+  _PurePathBase = os.PathLike[str]
+else:
+  _PurePathBase = object
 
-class PurePath(Protocol):
+
+class PurePath(Protocol, _PurePathBase):
   """Protocol for pathlib.PurePath-like API."""
   parts: Tuple[str, ...]
   drive: str
@@ -73,7 +78,7 @@ class PurePath(Protocol):
   # pylint: disable=multiple-statements,line-too-long
 
   def __new__(cls: Type[T], *args: PathLike) -> T: raise NotImplementedError
-  def __fspath__(self) -> AnyStr: raise NotImplementedError
+  def __fspath__(self) -> str: raise NotImplementedError
   def __hash__(self) -> int: raise NotImplementedError
   def __lt__(self, other: 'PurePath') -> bool: raise NotImplementedError
   def __le__(self, other: 'PurePath') -> bool: raise NotImplementedError
@@ -100,7 +105,6 @@ class PurePath(Protocol):
   # pylint: enable=multiple-statements,line-too-long
 
 
-@runtime_checkable
 class ReadOnlyPath(PurePath, Protocol):
   """Protocol for read-only methods of pathlib.Path-like API."""
 
@@ -130,12 +134,14 @@ class ReadOnlyPath(PurePath, Protocol):
     return self.glob(f'**/{pattern}')
 
   def expanduser(self: T) -> T:
-    """Return a new path with expanded `~` and `~user` constructs."""
-    return self
+    """Returns a new path with expanded `~` and `~user` constructs."""
+    if '~' not in self.parts:  # pytype: disable=attribute-error
+      return self
+    raise NotImplementedError
 
+  @abc.abstractmethod
   def resolve(self: T, strict: bool = False) -> T:
-    """Return a new path with expanded `~` and `~user` constructs."""
-    return self
+    """Returns the absolute path."""
 
   @abc.abstractmethod
   def open(
@@ -158,7 +164,6 @@ class ReadOnlyPath(PurePath, Protocol):
       return f.read()
 
 
-@runtime_checkable
 class ReadWritePath(ReadOnlyPath, Protocol):
   """Protocol for pathlib.Path-like API."""
 
@@ -169,6 +174,10 @@ class ReadWritePath(ReadOnlyPath, Protocol):
       parents: bool = False,
       exist_ok: bool = False,
   ) -> None:
+    """Create a new directory at this given path."""
+
+  @abc.abstractmethod
+  def rmdir(self) -> None:
     """Create a new directory at this given path."""
 
   def write_bytes(self, data: bytes) -> None:
@@ -193,7 +202,10 @@ class ReadWritePath(ReadOnlyPath, Protocol):
       raise FileExistsError(f'{self} already exists.')
     self.write_text('')
 
-  # TODO(tfds):
-  # * rename
-  # * replace
-  # * rmdir
+  @abc.abstractmethod
+  def rename(self: T, target: PathLike) -> T:
+    """Renames the path."""
+
+  @abc.abstractmethod
+  def replace(self: T, target: PathLike) -> T:
+    """Overwrites the destination path."""

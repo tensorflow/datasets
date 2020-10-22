@@ -119,6 +119,7 @@ class LazyImporter(object):
   @classmethod
   def scipy(cls):
     _try_import("scipy.io")
+    _try_import("scipy.io.wavfile")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 

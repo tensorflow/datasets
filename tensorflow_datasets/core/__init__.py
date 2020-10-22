@@ -51,10 +51,14 @@ from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import benchmark
+from tensorflow_datasets.core.utils.generic_path import as_path
+from tensorflow_datasets.core.utils.type_utils import ReadOnlyPath
+from tensorflow_datasets.core.utils.type_utils import ReadWritePath
 
 
 __all__ = [
     "add_data_dir",
+    "as_path",
     "benchmark",
     "BeamBasedBuilder",
     "BeamMetadataDict",
@@ -69,6 +73,8 @@ __all__ = [
     "Metadata",
     "MetadataDict",
     "ReadInstruction",
+    "ReadOnlyPath",
+    "ReadWritePath",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",

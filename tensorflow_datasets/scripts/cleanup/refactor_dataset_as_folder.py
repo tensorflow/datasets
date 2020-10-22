@@ -33,7 +33,6 @@ python3 -m tensorflow_datasets.scripts.cleanup.refactor_dataset_as_folder
 
 """
 
-import pathlib
 import shutil
 from typing import Type
 
@@ -46,7 +45,7 @@ flags.DEFINE_string('datasets', None, 'Datasets to convert')
 
 FLAGS = flags.FLAGS
 
-TFDS_PATH = pathlib.Path(tfds.core.utils.tfds_write_path())
+TFDS_PATH = tfds.core.utils.tfds_write_path()
 
 
 @dataclasses.dataclass(frozen=True)
@@ -61,9 +60,9 @@ class BuilderCodeInfo:
     cls_name: Dataset name, CamelCase (`MyDataset`)
     type: Dataset type (e.g. `image`, `text`, `object_detection`)
   """
-  file: pathlib.Path
-  dir: pathlib.Path
-  dst: pathlib.Path
+  file: tfds.core.ReadWritePath
+  dir: tfds.core.ReadWritePath
+  dst: tfds.core.ReadWritePath
   name: str
   cls_name: str
   type: str
@@ -86,7 +85,10 @@ class BuilderCodeInfo:
 # Util functions
 
 
-def _rename_dir(src: pathlib.Path, dst: pathlib.Path) -> None:
+def _rename_dir(
+    src: tfds.core.ReadWritePath,
+    dst: tfds.core.ReadWritePath,
+) -> None:
   """Equivalent of `src.rename(dst)`."""
   # src.rename(dst) creates `Invalid cross-device link` on some remote file
   # systems, so uses manual operation instead.

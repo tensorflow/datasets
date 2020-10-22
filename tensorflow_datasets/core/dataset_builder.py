@@ -212,7 +212,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         pass
       else:
         modules[-1] += ".py"
-        return path.joinpath("/".join(modules[1:]))
+        return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
     return pathlib.Path(inspect.getfile(cls))
@@ -285,11 +285,14 @@ class DatasetBuilder(registered.RegisteredDataset):
   @functools.lru_cache(maxsize=None)
   def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
     """Load `UrlInfo` from the given path."""
+    # Note: If the dataset is downloaded with `record_checksums=True`, urls
+    # might be updated but `url_infos` won't as it is memoized.
+
     # Search for the url_info file.
     checksums_path = cls._checksums_path
     # If url_info file is found, load the urls
     if checksums_path.exists():
-      return download.checksums.url_infos_from_path(os.fspath(checksums_path))
+      return download.checksums.load_url_infos(checksums_path)
     else:
       return None
 
@@ -502,7 +505,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     ```
 
     Args:
-      split: Which split of the data to load (e.g. `'train'`, `'test'`
+      split: Which split of the data to load (e.g. `'train'`, `'test'`,
         `['train', 'test']`, `'train[80%:]'`,...). See our
         [split API guide](https://www.tensorflow.org/datasets/splits).
         If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
@@ -701,18 +704,20 @@ class DatasetBuilder(registered.RegisteredDataset):
     for data_dir_root in all_data_dirs:
       # List all existing versions
       full_builder_dir = os.path.join(data_dir_root, builder_dir)
-      all_versions.update(utils.version.list_all_versions(full_builder_dir))
+      data_dir_versions = set(utils.version.list_all_versions(full_builder_dir))
       # Check for existance of the requested version
-      if self.version in all_versions:
+      if self.version in data_dir_versions:
         requested_version_dirs[data_dir_root] = os.path.join(
             data_dir_root, version_dir
         )
+      all_versions.update(data_dir_versions)
 
     if len(requested_version_dirs) > 1:
       raise ValueError(
           "Dataset was found in more than one directory: {}. Please resolve "
           "the ambiguity by explicitly specifying `data_dir=`."
-          "".format(requested_version_dirs))
+          "".format(requested_version_dirs.values())
+      )
     elif len(requested_version_dirs) == 1:  # The dataset is found once
       return next(iter(requested_version_dirs.items()))
 
@@ -801,20 +806,24 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _make_download_manager(self, download_dir, download_config):
     """Creates a new download manager object."""
-    download_dir = download_dir or os.path.join(self._data_dir_root,
-                                                "downloads")
-    extract_dir = (download_config.extract_dir or
-                   os.path.join(download_dir, "extracted"))
+    download_dir = (
+        download_dir or os.path.join(self._data_dir_root, "downloads")
+    )
+    extract_dir = (
+        download_config.extract_dir or os.path.join(download_dir, "extracted")
+    )
+    manual_dir = (
+        download_config.manual_dir or os.path.join(download_dir, "manual")
+    )
 
-    # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
-    if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
-      manual_dir = (
-          download_config.manual_dir or os.path.join(download_dir, "manual"))
+    if download_config.register_checksums:
+      # Note: Error will be raised here if user try to record checksums
+      # from a `zipapp`
+      register_checksums_path = utils.to_write_path(self._checksums_path)
     else:
-      manual_dir = None
+      register_checksums_path = None
 
     return download.DownloadManager(
-        dataset_name=self.name,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
@@ -824,7 +833,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
+        register_checksums_path=register_checksums_path,
         verify_ssl=download_config.verify_ssl,
+        dataset_name=self.name,
     )
 
   @property

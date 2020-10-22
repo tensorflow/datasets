@@ -182,7 +182,7 @@ def main(_):
     tfds.disable_progress_bar()
 
   if FLAGS.checksums_dir:
-    tfds.download.add_checksums_dir(FLAGS.checksums_dir)
+    tfds.deprecated.add_checksums_dir(FLAGS.checksums_dir)
 
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())

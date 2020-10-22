@@ -15,15 +15,14 @@
 
 """Tests for tensorflow_datasets.import_testing."""
 
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 
-class ImportTestingTest(tf.test.TestCase):
+class ImportTestingTest(tfds.testing.TestCase):
 
-  def test_testing_imported(self):
-    self.assertIsNotNone(tfds.testing)
+  def test_import(self):
+    pass
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds.testing.test_main()

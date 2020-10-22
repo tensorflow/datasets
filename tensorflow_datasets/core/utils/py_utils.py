@@ -375,18 +375,21 @@ def atomic_write(path, mode):
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
 
 
-def read_checksum_digest(path, checksum_cls=hashlib.sha256):
+def read_checksum_digest(
+    path: type_utils.PathLike,
+    checksum_cls=hashlib.sha256,
+) -> Tuple[str, int]:
   """Given a hash constructor, returns checksum digest and size of file."""
   checksum = checksum_cls()
   size = 0
-  with tf.io.gfile.GFile(path, 'rb') as f:
+  with tf.io.gfile.GFile(os.fspath(path), 'rb') as f:
     while True:
       block = f.read(io.DEFAULT_BUFFER_SIZE)
       size += len(block)
       if not block:
         break
       checksum.update(block)
-  return checksum.hexdigest(), size
+  return checksum.hexdigest(), size  # base64 digest would have been better.
 
 
 def reraise(

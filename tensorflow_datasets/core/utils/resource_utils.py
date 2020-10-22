@@ -16,9 +16,11 @@
 """Utils to handle resources."""
 
 import itertools
+import os
 import pathlib
 import sys
 import types
+import typing
 from typing import Union
 
 from tensorflow_datasets.core.utils import type_utils
@@ -64,6 +66,13 @@ class ResourcePath(zipfile.Path):
   def _next(self, at) -> 'ResourcePath':
     return type(self)(self.root, at)
 
+  def joinpath(self, *parts: PathLike) -> 'ResourcePath':
+    """Overwrite `joinpath` to be consistent with `pathlib.Path`."""
+    if not parts:
+      return self
+    else:
+      return super().joinpath(os.path.join(*parts))  # pylint: disable=no-value-for-parameter
+
 
 def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
   """Returns `importlib.resources.files`."""
@@ -77,7 +86,8 @@ def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
     # called internally.
     return path
   elif isinstance(path, zipfile.Path):
-    return ResourcePath(path.root, path.at)
+    path = ResourcePath(path.root, path.at)
+    return typing.cast(ReadOnlyPath, path)
   else:
     raise TypeError(f'Unknown resource path: {type(path)}: {path}')
 

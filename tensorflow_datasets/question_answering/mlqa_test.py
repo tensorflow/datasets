@@ -13,16 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test import."""
+"""Tests for mlqa dataset module."""
 
-import tensorflow_datasets as tfds
-
-
-class ImportTest(tfds.testing.TestCase):
-
-  def test_import(self):
-    pass
+from tensorflow_datasets import testing
+from tensorflow_datasets.question_answering import mlqa
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+class MlqaTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = mlqa.Mlqa
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
+
+  DL_EXTRACT_RESULT = {
+      "validation": "",
+      "test": "",
+  }
+
+  SPLITS = {
+      "validation": 1,
+      "test": 1,
+  }
+
+if __name__ == "__main__":
+  testing.test_main()

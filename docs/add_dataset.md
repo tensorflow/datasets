@@ -33,7 +33,7 @@ Use [TFDS CLI](https://www.tensorflow.org/datasets/cli) to generate the required
 template python files.
 
 ```sh
-cd path/to/project/datasets/
+cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` bellow
 tfds new my_dataset
 ```
 

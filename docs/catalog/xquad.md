@@ -77,138 +77,6 @@ Split  | Examples
 `'translate-test'` | 1,151
 `'translate-train'` | 86,787
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## xquad/de
-
-*   **Config description**: XQuAD 'de' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
-
-*   **Download size**: `127.04 MiB`
-
-*   **Dataset size**: `98.75 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,371
-`'translate-test'` | 1,168
-`'translate-train'` | 82,603
-
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## xquad/el
-
-*   **Config description**: XQuAD 'el' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
-
-*   **Download size**: `499.40 MiB`
-
-*   **Dataset size**: `157.85 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes (test, translate-dev, translate-test), Only when `shuffle_files=False` (translate-train)
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,100
-`'translate-test'` | 1,182
-`'translate-train'` | 79,946
-
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## xquad/es
-
-*   **Config description**: XQuAD 'es' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
-
-*   **Download size**: `138.41 MiB`
-
-*   **Dataset size**: `104.91 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,566
-`'translate-test'` | 1,188
-`'translate-train'` | 87,488
-
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## xquad/hi
-
-*   **Config description**: XQuAD 'hi' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
-
-*   **Download size**: `472.23 MiB`
-
-*   **Dataset size**: `207.80 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes (test, translate-dev, translate-test), Only when `shuffle_files=False` (translate-train)
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,536
-`'translate-test'` | 1,184
-`'translate-train'` | 85,804
-
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## xquad/ru
-
-*   **Config description**: XQuAD 'ru' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
-
-*   **Download size**: `513.80 MiB`
-
-*   **Dataset size**: `159.33 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes (test, translate-dev, translate-test), Only when `shuffle_files=False` (translate-train)
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,469
-`'translate-test'` | 1,190
-`'translate-train'` | 84,869
-
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## xquad/th
-
-*   **Config description**: XQuAD 'th' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
-
-*   **Download size**: `461.54 MiB`
-
-*   **Dataset size**: `199.52 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes (test, translate-dev, translate-test), Only when `shuffle_files=False` (translate-train)
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,516
-`'translate-test'` | 1,157
-`'translate-train'` | 85,846
-
 *   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
@@ -220,6 +88,352 @@ Split  | Examples
 
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-ar-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## xquad/de
+
+*   **Config description**: XQuAD 'de' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
+
+*   **Download size**: `127.04 MiB`
+
+*   **Dataset size**: `98.75 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,371
+`'translate-test'`  | 1,168
+`'translate-train'` | 82,603
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-de-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## xquad/el
+
+*   **Config description**: XQuAD 'el' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
+
+*   **Download size**: `499.40 MiB`
+
+*   **Dataset size**: `157.85 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,100
+`'translate-test'`  | 1,182
+`'translate-train'` | 79,946
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-el-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## xquad/es
+
+*   **Config description**: XQuAD 'es' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
+
+*   **Download size**: `138.41 MiB`
+
+*   **Dataset size**: `104.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,566
+`'translate-test'`  | 1,188
+`'translate-train'` | 87,488
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-es-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## xquad/hi
+
+*   **Config description**: XQuAD 'hi' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
+
+*   **Download size**: `472.23 MiB`
+
+*   **Dataset size**: `207.80 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,536
+`'translate-test'`  | 1,184
+`'translate-train'` | 85,804
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-hi-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## xquad/ru
+
+*   **Config description**: XQuAD 'ru' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
+
+*   **Download size**: `513.80 MiB`
+
+*   **Dataset size**: `159.33 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,469
+`'translate-test'`  | 1,190
+`'translate-train'` | 84,869
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-ru-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## xquad/th
+
+*   **Config description**: XQuAD 'th' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
+
+*   **Download size**: `461.54 MiB`
+
+*   **Dataset size**: `199.52 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,516
+`'translate-test'`  | 1,157
+`'translate-train'` | 85,846
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-th-2.0.0.html";
 $(document).ready(() => {
@@ -435,4 +649,34 @@ Split    | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-en-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
