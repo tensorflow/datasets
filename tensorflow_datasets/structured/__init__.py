@@ -26,4 +26,5 @@ from tensorflow_datasets.structured.movielens import Movielens
 from tensorflow_datasets.structured.radon import Radon
 from tensorflow_datasets.structured.rock_you import RockYou
 from tensorflow_datasets.structured.titanic import Titanic
+from tensorflow_datasets.structured.wiki_bio import WikiBio
 from tensorflow_datasets.structured.wine_quality import WineQuality
