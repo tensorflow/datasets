@@ -19,34 +19,25 @@ import os
 import pathlib
 import requests
 from absl import app
-from typing import Dict
+from typing import Dict, List
 from concurrent import futures
 
-import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.download import checksums
 
 
-TFDS_PATH = tfds.core.utils.tfds_path()
+TFDS_PATH = tfds.core.utils.tfds_write_path()
 
 
-def _get_builder_checksum_path(name) -> pathlib.Path:
-  """Get path of DatasetBuilder dataset."""
-  # instead of glob can also use
-  # tfds.builder_cls(name).__dict__.__module__.split('.')[1:-1] to get path
-  path = (
-    tf.io.gfile.glob(os.path.join(
-      TFDS_PATH, '*', name, 'checksums.tsv'))
-    or
-    # since yesno dataset folder name is inconsistent with the
-    # dataset.builder's dataset name (yes_no)
-    tf.io.gfile.glob(os.path.join(
-      TFDS_PATH, '*', name.replace('_', ''), 'checksums.tsv'))
-  )
-  path = path[0]
-  if isinstance(path, str):
-    path = pathlib.Path(path)
-  return path
+def _collect_path_to_update() -> List[tfds.core.utils.ReadWritePath]:
+  """Collect checksums paths to update."""
+  url_checksums_paths = list(checksums._checksum_paths().values())
+
+  builder_checksums_path = []
+  for name in tfds.list_builders():
+    if tfds.builder_cls(name).url_infos != None:
+      builder_checksums_path.append(tfds.builder_cls(name)._checksums_path)
+  return url_checksums_paths + builder_checksums_path
 
 def _request_filename(url) -> (str, str):
   """Get filename of dataset at `url`."""
@@ -72,22 +63,11 @@ def _update_url_infos(url_infos) -> Dict[str, checksums.UrlInfo]:
   return url_infos
 
 def main(_):
-  # Legacy datasets
-  url_checksums_paths = checksums._checksum_paths().values()
-  for url_path in list(url_checksums_paths):
-    if isinstance(url_path, str):
-      url_path = pathlib.Path(url_path)
+  # Collect legacy datasets as well as new datasets
+  for url_path in _collect_path_to_update():
     url_infos = checksums.load_url_infos(url_path)  #load checksums
-    url_infos = _update_url_infos(url_infos)        #update checkums to add filename
+    url_infos = _update_url_infos(url_infos)        #update checkums
     checksums.save_url_infos(url_path, url_infos)   #save checksums
-
-  # New datasets - tfds.core.DatasetBuilder
-  for name in tfds.list_builders():
-    if tfds.builder_cls(name).url_infos != None:
-      url_infos = tfds.builder_cls(name).url_infos  #load checksums
-      url_infos = _update_url_infos(url_infos)      #update checkums to add filename
-      path = _get_builder_checksum_path(name)       #get checksums path
-      checksums.save_url_infos(path, url_infos)     #save checksums
 
 
 if __name__ == '__main__':
