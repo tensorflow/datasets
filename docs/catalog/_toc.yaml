@@ -303,6 +303,9 @@ toc:
     title: rock_you
   - path: /datasets/catalog/titanic
     title: titanic
+  - path: /datasets/catalog/wiki_bio
+    status: nightly
+    title: wiki_bio
   - path: /datasets/catalog/wine_quality
     title: wine_quality
   title: Structured
