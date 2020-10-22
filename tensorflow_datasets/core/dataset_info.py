@@ -48,6 +48,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import json_format
 
@@ -520,13 +521,11 @@ def get_dataset_feature_statistics(builder, split):
   return statistics.datasets[0], schema
 
 
-def read_from_json(json_filename):
+def read_from_json(path: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Read JSON-formatted proto into DatasetInfo proto."""
-  with tf.io.gfile.GFile(json_filename) as f:
-    dataset_info_json_str = f.read()
+  json_str = utils.as_path(path).read_text()
   # Parse it back into a proto.
-  parsed_proto = json_format.Parse(dataset_info_json_str,
-                                   dataset_info_pb2.DatasetInfo())
+  parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
 
 
