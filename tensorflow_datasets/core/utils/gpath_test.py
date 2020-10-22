@@ -75,14 +75,14 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
 
 
 def test_repr_gcs():
-  path = gpathlib.GPath('gs://bucket/dir')
-  assert isinstance(path, gpathlib.GPath)
-  assert repr(path) == f'GPath(\'{_GCS_SCHEME}bucket/dir\')'
+  path = gpathlib.PosixGPath('gs://bucket/dir')
+  assert isinstance(path, gpathlib.PosixGPath)
+  assert repr(path) == f'PosixGPath(\'{_GCS_SCHEME}bucket/dir\')'
   assert str(path) == f'{_GCS_SCHEME}bucket/dir'
   assert os.fspath(path) == f'{_GCS_SCHEME}bucket/dir'
 
   path = path.parent / 'some/other/file.json'
-  assert isinstance(path, gpathlib.GPath)
+  assert isinstance(path, gpathlib.PosixGPath)
   assert os.fspath(path) == f'{_GCS_SCHEME}bucket/some/other/file.json'
 
 
@@ -101,16 +101,16 @@ def test_repr_gcs():
 )
 def test_repr(parts):
   path = pathlib.Path(*parts)
-  gpath = gpathlib.GPath(*parts)
-  assert isinstance(gpath, gpathlib.GPath)
+  gpath = gpathlib.PosixGPath(*parts)
+  assert isinstance(gpath, gpathlib.PosixGPath)
   assert str(gpath) == str(path)
   assert os.fspath(gpath) == os.fspath(path)
 
   assert gpath == path
   assert str(gpath.resolve()) == str(path.resolve())
   assert str(gpath.expanduser()) == str(path.expanduser())
-  assert isinstance(gpath.resolve(), gpathlib.GPath)
-  assert isinstance(gpath.expanduser(), gpathlib.GPath)
+  assert isinstance(gpath.resolve(), gpathlib.PosixGPath)
+  assert isinstance(gpath.expanduser(), gpathlib.PosixGPath)
 
 
 # pylint: disable=redefined-outer-name
@@ -118,7 +118,7 @@ def test_repr(parts):
 
 def test_gcs(gcs_mocked_path: pathlib.Path):
   # mkdir()
-  gpath = gpathlib.GPath(f'{_GCS_SCHEME}bucket/dir')
+  gpath = gpathlib.PosixGPath(f'{_GCS_SCHEME}bucket/dir')
   gcs_mocked_path = gcs_mocked_path.joinpath('bucket/dir')
   assert not gpath.exists()
   gpath.mkdir(parents=True)
@@ -148,18 +148,18 @@ def test_gcs(gcs_mocked_path: pathlib.Path):
   gpath = gpath.parent
   gcs_mocked_path = gcs_mocked_path.parent
   assert list(gpath.iterdir()) == [
-      gpathlib.GPath('gs://bucket/dir/some_file.txt'),
+      gpathlib.PosixGPath('gs://bucket/dir/some_file.txt'),
   ]
 
-  assert isinstance(gpath, gpathlib.GPath)
-  assert not isinstance(gcs_mocked_path, gpathlib.GPath)
+  assert isinstance(gpath, gpathlib.PosixGPath)
+  assert not isinstance(gcs_mocked_path, gpathlib.PosixGPath)
 
 
 def test_open(gcs_mocked_path: pathlib.Path):
 
   files = ['foo.py', 'bar.py', 'foo_bar.py', 'dataset.json',
            'dataset_info.json', 'readme.md']
-  dataset_path = gpathlib.GPath('gs://bucket/dataset')
+  dataset_path = gpathlib.PosixGPath('gs://bucket/dataset')
 
   dataset_path.mkdir(parents=True)
   assert dataset_path.exists()
@@ -182,7 +182,7 @@ def test_open(gcs_mocked_path: pathlib.Path):
 
 def test_read_write(gcs_mocked_path: pathlib.Path):  # pylint: disable=unused-argument
 
-  gpath = gpathlib.GPath('gs://file.txt')
+  gpath = gpathlib.PosixGPath('gs://file.txt')
 
   with gpath.open('w') as f:
     f.write('abcd')
@@ -204,7 +204,7 @@ def test_read_write(gcs_mocked_path: pathlib.Path):  # pylint: disable=unused-ar
 
 
 def test_mkdir(gcs_mocked_path: pathlib.Path):
-  g_path = gpathlib.GPath('gs://bucket')
+  g_path = gpathlib.PosixGPath('gs://bucket')
   assert not g_path.exists()
 
   g_path.mkdir()
@@ -217,7 +217,7 @@ def test_mkdir(gcs_mocked_path: pathlib.Path):
 
 
 def test_rename(gcs_mocked_path: pathlib.Path):
-  src_path = gpathlib.GPath('gs://foo.py')
+  src_path = gpathlib.PosixGPath('gs://foo.py')
   src_path.write_text(' ')
 
   assert gcs_mocked_path.joinpath('foo.py').exists()
@@ -233,7 +233,7 @@ def test_rename(gcs_mocked_path: pathlib.Path):
 
 def test_replace(tmp_path: pathlib.Path):
 
-  file_path = gpathlib.GPath(os.path.join(tmp_path, 'tfds.py'))
+  file_path = gpathlib.PosixGPath(os.path.join(tmp_path, 'tfds.py'))
   file_path.write_text('tfds')
 
   file_path.replace(os.path.join(tmp_path, 'tfds-dataset.py'))
@@ -242,7 +242,7 @@ def test_replace(tmp_path: pathlib.Path):
   assert tmp_path.joinpath('tfds-dataset.py').exists()
   assert tmp_path.joinpath('tfds-dataset.py').read_text() == 'tfds'
 
-  mnist_path = gpathlib.GPath(tmp_path / 'mnist.py')
+  mnist_path = gpathlib.PosixGPath(tmp_path / 'mnist.py')
   mnist_path.write_text('mnist')
 
   mnist_path.replace(tmp_path / 'mnist-100.py')
@@ -253,6 +253,6 @@ def test_replace(tmp_path: pathlib.Path):
 
   assert len(list(tmp_path.iterdir())) == 2
 
-  assert sorted(gpathlib.GPath(tmp_path).iterdir()) == [
+  assert sorted(gpathlib.PosixGPath(tmp_path).iterdir()) == [
       tmp_path / 'mnist-100.py', tmp_path / 'tfds-dataset.py'
   ]

@@ -23,6 +23,7 @@ import types
 import typing
 from typing import Union
 
+from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import type_utils
 
 # pylint: disable=g-import-not-at-top
@@ -42,6 +43,7 @@ ReadOnlyPath = type_utils.ReadOnlyPath
 ReadWritePath = type_utils.ReadWritePath
 
 
+@generic_path.register_pathlike_cls
 class ResourcePath(zipfile.Path):
   """Wrapper around `zipfile.Path` compatible with `os.PathLike`.
 
@@ -84,7 +86,8 @@ def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
     # * `str(path)` should be forbidden (only `__format__` allowed).
     # In practice, it is trickier to do as `__fspath__` and `__str__` are
     # called internally.
-    return path
+    # Convert to `GPath` for consistency and compatibility with `MockFs`.
+    return generic_path.as_path(path)
   elif isinstance(path, zipfile.Path):
     path = ResourcePath(path.root, path.at)
     return typing.cast(ReadOnlyPath, path)
@@ -94,12 +97,14 @@ def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
 
 def to_write_path(path: ReadOnlyPath) -> ReadWritePath:
   """Cast the path to a read-write Path."""
-  if not isinstance(path, pathlib.Path):
-    raise ValueError(
+  if isinstance(path, ResourcePath):
+    raise TypeError(
         f'Can\'t write {path!r}. Make sure you\'re not running from a '
-        'zipapp.'
+        'zipapp (e.g. `my_app.par`).'
     )
-  path = pathlib.Path(path)  # Convert `_Path` -> `Path`
+  # If a ReadOnlyPath wrapper is used above, then the wrapper should be
+  # removed here (e.g. `generic_path.as_path(pathlib.Path())`).
+  path = generic_path.as_path(path)
   return path
 
 

@@ -16,30 +16,39 @@
 """Pathlib-like generic abstraction."""
 
 import os
-import pathlib
+from typing import List, Type, Union, TypeVar
 
 from tensorflow_datasets.core.utils import gpath
-from tensorflow_datasets.core.utils import resource_utils
 from tensorflow_datasets.core.utils import type_utils
 
 PathLike = type_utils.PathLike
 ReadOnlyPath = type_utils.ReadOnlyPath
 ReadWritePath = type_utils.ReadWritePath
 
+PathLikeCls = Union[Type[ReadOnlyPath], Type[ReadWritePath]]
+T = TypeVar('T')
+
 
 # Could eventually expose some `tfds.core.register_path_cls` API to unlock
 # additional file system supports (e.g. `s3path.S3Path('s3://bucket/data')`)
-_PATHLIKE_CLS = (
-    gpath.GPath,
-    resource_utils.ResourcePath,
-    pathlib.Path,
-)
+_PATHLIKE_CLS: List[PathLikeCls] = [
+    gpath.PosixGPath,
+    gpath.WindowsGPath,
+]
+
+
+def register_pathlike_cls(path_cls: T) -> T:
+  """Register the class to be forwarded as-is in `as_path`."""
+  _PATHLIKE_CLS.append(path_cls)
+  return path_cls
 
 
 def as_path(path: PathLike) -> ReadWritePath:
   """Create a generic `pathlib.Path`-like abstraction.
 
-  This function
+  Depending on the input (e.g. `gs://` url, `ResourcePath`,...), the
+  system (Windows, Linux,...), the function will create the right pathlib-like
+  abstraction.
 
   Args:
     path: Pathlike object.
@@ -47,16 +56,16 @@ def as_path(path: PathLike) -> ReadWritePath:
   Returns:
     path: The `pathlib.Path`-like abstraction.
   """
+  is_windows = os.name == 'nt'
   if isinstance(path, str):
-    if os.name == 'nt' and not path.startswith('gs://'):
-      # On windows, all path are `pathlib.WindowsPath`, as `gpath.GPath` is
-      # `PosixPurePath`
-      return pathlib.Path(path)
+    if is_windows and not path.startswith('gs://'):
+      return gpath.WindowsGPath(path)
     else:
-      return gpath.GPath(path)  # On linux, or for `gs://`, uses `GPath`
-  elif isinstance(path, _PATHLIKE_CLS):
-    return path  # Forward resource path, gpath,... as-is
+      return gpath.PosixGPath(path)  # On linux, or for `gs://`, uses `GPath`
+  elif isinstance(path, tuple(_PATHLIKE_CLS)):
+    return path  # Forward resource path, gpath,... as-is  # pytype: disable=bad-return-type
   elif isinstance(path, os.PathLike):  # Other `os.fspath` compatible objects
-    return pathlib.Path(path)
+    path_cls = gpath.WindowsGPath if is_windows else gpath.PosixGPath
+    return path_cls(path)
   else:
     raise TypeError(f'Invalid path type: {path!r}')

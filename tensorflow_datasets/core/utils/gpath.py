@@ -20,7 +20,7 @@ import pathlib
 import posixpath
 
 import typing
-from typing import Any, AnyStr, Iterator, Optional
+from typing import Any, AnyStr, Iterator, Optional, Type, TypeVar
 
 import tensorflow as tf
 
@@ -28,16 +28,23 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
 
-class GPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
+_P = TypeVar('_P')
+
+
+class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
   """Pathlib like api around `tf.io.gfile`."""
 
-  def __new__(cls, *parts: type_utils.PathLike) -> 'GPath':
+  def __new__(cls: Type[_P], *parts: type_utils.PathLike) -> _P:
     full_path = '/'.join(os.fspath(p) for p in parts)
     if full_path.startswith('gs://'):
       root = '/gs/'
       return super().__new__(cls, full_path.replace('gs://', root, 1))
     else:
       return super().__new__(cls, *parts)
+
+  def _new(self: _P, *parts: type_utils.PathLike) -> _P:
+    """Create a new `Path` child of same type."""
+    return type(self)(*parts)
 
   @py_utils.memoized_property
   def _is_gcs(self) -> bool:
@@ -69,23 +76,23 @@ class GPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
     """Returns True if self is a directory."""
     return tf.io.gfile.isdir(self._path_str)
 
-  def iterdir(self) -> Iterator['GPath']:
+  def iterdir(self: _P) -> Iterator[_P]:
     """Iterates over the directory."""
     for f in tf.io.gfile.listdir(self._path_str):
-      yield GPath(self, f)
+      yield self._new(self, f)
 
-  def expanduser(self) -> 'GPath':
+  def expanduser(self: _P) -> _P:
     """Returns a new path with expanded `~` and `~user` constructs."""
-    return GPath(posixpath.expanduser(self._path_str))
+    return self._new(posixpath.expanduser(self._path_str))
 
-  def resolve(self, strict: bool = False) -> 'GPath':
+  def resolve(self: _P, strict: bool = False) -> _P:
     """Returns the abolute path."""
-    return GPath(posixpath.abspath(self._path_str))
+    return self._new(posixpath.abspath(self._path_str))
 
-  def glob(self, pattern: str) -> Iterator['GPath']:
+  def glob(self: _P, pattern: str) -> Iterator[_P]:
     """Yielding all matching files (of any kind)."""
     for f in tf.io.gfile.glob(posixpath.join(self._path_str, pattern)):
-      yield GPath(f)
+      yield self._new(f)
 
   def mkdir(
       self,
@@ -126,14 +133,22 @@ class GPath(pathlib.PurePosixPath, type_utils.ReadWritePath):
     gfile = typing.cast(typing.IO[AnyStr], gfile)  # pytype: disable=invalid-typevar
     return gfile
 
-  def rename(self, target: type_utils.PathLike) -> 'GPath':
+  def rename(self: _P, target: type_utils.PathLike) -> _P:
     """Rename file or directory to the given target."""
-    target = os.fspath(GPath(target))  # Normalize gs:// URI
+    target = os.fspath(self._new(target))  # Normalize gs:// URI
     tf.io.gfile.rename(self._path_str, target)
-    return GPath(target)
+    return self._new(target)
 
-  def replace(self, target: type_utils.PathLike) -> 'GPath':
+  def replace(self: _P, target: type_utils.PathLike) -> _P:
     """Replace file or directory to the given target."""
-    target = os.fspath(GPath(target))  # Normalize gs:// URI
+    target = os.fspath(self._new(target))  # Normalize gs:// URI
     tf.io.gfile.rename(self._path_str, target, overwrite=True)
-    return GPath(target)
+    return self._new(target)
+
+
+class PosixGPath(_GPath, pathlib.PurePosixPath):
+  """Pathlib like api around `tf.io.gfile`."""
+
+
+class WindowsGPath(_GPath, pathlib.PureWindowsPath):
+  """Pathlib like api around `tf.io.gfile`."""

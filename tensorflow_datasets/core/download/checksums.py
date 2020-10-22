@@ -15,7 +15,6 @@
 
 """Methods to retrieve and store size/checksums associated to URLs."""
 
-import pathlib
 from typing import Any, Dict, Iterable, Optional
 
 from absl import logging
@@ -92,7 +91,7 @@ def _checksum_paths() -> Dict[str, type_utils.ReadOnlyPath]:
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
     if isinstance(dir_path, str):
-      dir_path = pathlib.Path(dir_path)
+      dir_path = utils.as_path(dir_path)
     if not dir_path.exists():
       pass
     for file_path in dir_path.iterdir():

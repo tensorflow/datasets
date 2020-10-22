@@ -19,6 +19,9 @@ import io
 import os
 import zipfile
 
+import pytest
+
+from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import resource_utils
 
 
@@ -43,6 +46,13 @@ def test_resource_path():
   assert len(sub_dirs) == 3
   for p in sub_dirs:  # Childs should be `ResourcePath` instances
     assert isinstance(p, resource_utils.ResourcePath)
+
+  # Forwarded to `as_path` keep the resource.
+  path = generic_path.as_path(path)
+  assert isinstance(path, resource_utils.ResourcePath)
+
+  with pytest.raises(TypeError, match='not running from a zipapp'):
+    resource_utils.to_write_path(path)
 
   assert path.joinpath() == path
   assert path.joinpath('abc', 'def.txt').name == 'def.txt'

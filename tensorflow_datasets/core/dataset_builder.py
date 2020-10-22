@@ -21,7 +21,7 @@ import inspect
 import itertools
 import os
 import sys
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import ClassVar, Dict, List, Optional, Union
 
 from absl import logging
 import dataclasses
@@ -43,11 +43,6 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 
 import termcolor
-
-if six.PY3:
-  import pathlib  # pylint: disable=g-import-not-at-top
-else:
-  pathlib = Any
 
 ReadOnlyPath = type_utils.ReadOnlyPath
 VersionOrStr = Union[utils.Version, str]
@@ -215,7 +210,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
-    return pathlib.Path(inspect.getfile(cls))
+    return utils.as_path(inspect.getfile(cls))
 
   def __getstate__(self):
     return self._original_state
