@@ -50,6 +50,8 @@ Ingored examples:
 WARNING: this dataset requires users to setup a login and password in order to
 get the files.
 
+*   **Config description**: Cityscapes semantic segmentation dataset.
+
 *   **Homepage**:
     [https://www.cityscapes-dataset.com](https://www.cityscapes-dataset.com)
 
@@ -62,7 +64,7 @@ get the files.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.86 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -75,12 +77,25 @@ get the files.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,525
+`'train'`      | 2,975
+`'validation'` | 500
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -106,61 +121,3 @@ Split | Examples
     Missing.
 
 ## cityscapes/semantic_segmentation (default config)
-
-*   **Config description**: Cityscapes semantic segmentation dataset.
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-})
-```
-
-## cityscapes/semantic_segmentation_extra
-
-*   **Config description**: Cityscapes semantic segmentation dataset with
-    train_extra split and coarse labels.
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-})
-```
-
-## cityscapes/stereo_disparity
-
-*   **Config description**: Cityscapes stereo image and disparity maps dataset.
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-})
-```
-
-## cityscapes/stereo_disparity_extra
-
-*   **Config description**: Cityscapes stereo image and disparity maps dataset
-    with train_extra split.
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
-    'image_id': Text(shape=(), dtype=tf.string),
-    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
-})
-```
