@@ -751,6 +751,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         ), attrs=["bold"])
 
   @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
   def _info(self):
     """Construct the DatasetInfo object. See `DatasetInfo` for details.
 
@@ -763,6 +765,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
   def _download_and_prepare(self, dl_manager, download_config=None):
     """Downloads and prepares dataset for reading.
 
@@ -778,6 +782,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
   def _as_dataset(
       self, split, decoders=None, read_config=None, shuffle_files=False):
     """Constructs a `tf.data.Dataset`.
