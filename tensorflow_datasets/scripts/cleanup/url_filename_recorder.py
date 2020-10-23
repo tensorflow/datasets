@@ -35,8 +35,9 @@ def _collect_path_to_update() -> List[tfds.core.utils.ReadWritePath]:
 
   builder_checksums_path = []
   for name in tfds.list_builders():
-    if tfds.builder_cls(name).url_infos != None:
-      builder_checksums_path.append(tfds.builder_cls(name)._checksums_path)
+    builder_cls = tfds.builder_cls(name)
+    if builder_cls.url_infos != None:
+      builder_checksums_path.append(builder_cls._checksums_path)
   return url_checksums_paths + builder_checksums_path
 
 def _request_filename(url) -> (str, str):
@@ -48,26 +49,26 @@ def _request_filename(url) -> (str, str):
     print(f'Success for {url}')
   except requests.exceptions.HTTPError as http_err:
     print(f'HTTP Error {http_err} for {url}.')
-  except Exception as error:
-    print(f'Error {error} for {url}.')
   return (url, filename)
 
-def _update_url_infos(url_infos) -> Dict[str, checksums.UrlInfo]:
+def _update_url_infos(url_infos, filenames) -> Dict[str, checksums.UrlInfo]:
   """Get and update dataset filname in UrlInfo."""
-  with futures.ThreadPoolExecutor(max_workers=100) as executor:
-    all_content = executor.map(_request_filename, url_infos)
-
-  for content in all_content:
-    url, filename = content
+  for url, filename in filenames:
     url_infos[url].filename = filename
   return url_infos
 
+
 def main(_):
-  # Collect legacy datasets as well as new datasets
-  for url_path in _collect_path_to_update():
-    url_infos = checksums.load_url_infos(url_path)  #load checksums
-    url_infos = _update_url_infos(url_infos)        #update checkums
-    checksums.save_url_infos(url_path, url_infos)   #save checksums
+  with futures.ThreadPoolExecutor(max_workers=100) as executor:
+    future_filenames = {}
+    # Collect legacy datasets as well as new datasets
+    for url_path in _collect_path_to_update():
+      url_infos = checksums.load_url_infos(url_path)
+      future_filenames[url_path] = executor.map(_request_filename, url_infos)
+    for path, future_filename in future_filenames.items():
+      old_url_infos = checksums.load_url_infos(path)
+      updated_url_infos = _update_url_infos(old_url_infos, future_filename)
+      checksums.save_url_infos(path, updated_url_infos)
 
 
 if __name__ == '__main__':
