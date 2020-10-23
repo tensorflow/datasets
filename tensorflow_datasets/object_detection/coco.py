@@ -157,7 +157,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
               Split(
                   name=tfds.Split.VALIDATION,
                   images=['val2017'],
-                  annotation_file='instances_train2017.json',
+                  annotation_file='instances_val2017.json',
                   annotation_download='annotations_trainval2017',
                   annotation_type=AnnotationType.BBOXES,
               ),
@@ -306,23 +306,24 @@ class Coco(tfds.core.GeneratorBasedBuilder):
       for images in split.images:
         urls['{}_images'.format(images)] = '{}zips/{}.zip'.format(root_url, images)
       if self.builder_config.has_pose:
-        urls['annotations'] = \
+        urls['{}_annotations'.format(split.name)] = \
             'https://dl.fbaipublicfiles.com/densepose/{}.json'.format(split.annotation_download)
       else:
-        urls['annotations'] = '{}annotations/{}.zip'.format(
+        urls['{}_annotations'.format(split.name)] = '{}annotations/{}.zip'.format(
             root_url, split.annotation_download)
 
-      # DownloadManager memoize the url, so duplicate urls will only be downloaded
-      # once.
-      extracted = dl_manager.download_and_extract(urls)
+    # DownloadManager memoize the url, so duplicate urls will only be downloaded
+    # once.
+    extracted = dl_manager.download_and_extract(urls)
 
+    for split in self.builder_config.splits:
       image_paths = [os.path.join(extracted['{}_images'.format(images)], images)
                      for images in split.images]
 
       if self.builder_config.has_panoptic:
         # Built on assumption that there is only one image download for panoptic
         panoptic_image_zip_path = os.path.join(
-            extracted['annotations'],
+            extracted['{}_annotations'.format(split.name)],
             'annotations',
             'panoptic_{}.zip'.format(split.images[0])
         )
@@ -332,10 +333,10 @@ class Coco(tfds.core.GeneratorBasedBuilder):
       else:
         panoptic_dir = None
       if self.builder_config.has_pose:
-        annotation_path = extracted['annotations']
+        annotation_path = extracted['{}_annotations'.format(split.name)]
       else:
         annotation_path = os.path.join(
-            extracted['annotations'], 'annotations', split.annotation_file)
+            extracted['{}_annotations'.format(split.name)], 'annotations', split.annotation_file)
       splits.append(tfds.core.SplitGenerator(
           name=split.name,
           gen_kwargs=dict(

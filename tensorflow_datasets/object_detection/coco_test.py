@@ -35,11 +35,11 @@ class Coco2014Test(testing.DatasetBuilderTestCase):
       "test2015": 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_images": "train_images",
+      "train2014_images": "train_images",
       "train_annotations": "trainval_annotations",
-      "validation_images": "val_images",
+      "val2014_images": "val_images",
       "validation_annotations": "trainval_annotations",
-      "test_images": "test_images",
+      "test2014_images": "test_images",
       "test_annotations": "test_annotations",
       "test2015_images": "test2015_images",
       "test2015_annotations": "test2015_annotations",
@@ -55,11 +55,11 @@ class Coco2017Test(testing.DatasetBuilderTestCase):
       tfds.Split.TEST: 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_images": "train_images",
+      "train2017_images": "train_images",
       "train_annotations": "trainval_annotations",
-      "validation_images": "val_images",
+      "val2017_images": "val_images",
       "validation_annotations": "trainval_annotations",
-      "test_images": "test_images",
+      "test2017_images": "test_images",
       "test_annotations": "test_annotations",
   }
 
@@ -72,10 +72,30 @@ class Coco2017PanopticTest(testing.DatasetBuilderTestCase):
       tfds.Split.VALIDATION: 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_images": "train_images",
-      "validation_images": "val_images",
+      "train2017_images": "train_images",
+      "val2017_images": "val_images",
       "train_annotations": "panoptic_annotations_trainval2017",
       "validation_annotations": "panoptic_annotations_trainval2017",
+  }
+
+class Coco2014PoseTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = coco.Coco
+  BUILDER_CONFIG_NAMES_TO_TEST = ["2014_pose"]
+  SPLITS = {
+      tfds.Split.TRAIN: 3,
+      tfds.Split.VALIDATION: 2,
+      tfds.Split.TEST: 2,
+      "valminusminival2014": 2,
+  }
+  DL_EXTRACT_RESULT = {
+      "train2014_images": "train_images",
+      "val2014_images": "val_images",
+      "test2014_images": "test_images",
+      "test2015_images": "test_images",
+      "train_annotations": "densepose_coco_2014_train.json",
+      "valminusminival2014_annotations": "densepose_coco_2014_valminusminival.json",
+      "validation_annotations": "densepose_coco_2014_validation.json",
+      "test_annotations": "densepose_coco_2014_test.json",
   }
 
 
