@@ -61,12 +61,14 @@ def _update_url_infos(url_infos, filenames) -> Dict[str, checksums.UrlInfo]:
 def main(_):
   with futures.ThreadPoolExecutor(max_workers=100) as executor:
     future_filenames = {}
+    cached_url_infos = {}
     # Collect legacy datasets as well as new datasets
     for url_path in _collect_path_to_update():
       url_infos = checksums.load_url_infos(url_path)
+      cached_url_infos[url_path] = url_infos
       future_filenames[url_path] = executor.map(_request_filename, url_infos)
     for path, future_filename in future_filenames.items():
-      old_url_infos = checksums.load_url_infos(path)
+      old_url_infos = cached_url_infos[path]
       updated_url_infos = _update_url_infos(old_url_infos, future_filename)
       checksums.save_url_infos(path, updated_url_infos)
 
