@@ -77,10 +77,10 @@ class Coco2014PoseTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = coco.Coco
   BUILDER_CONFIG_NAMES_TO_TEST = ["2014_pose"]
   SPLITS = {
-      tfds.Split.TRAIN: 3,
-      tfds.Split.VALIDATION: 2,
+      tfds.Split.TRAIN: 2,
+      tfds.Split.VALIDATION: 1,
       tfds.Split.TEST: 2,
-      "valminusminival2014": 2,
+      "valminusminival2014": 1,
   }
   DL_EXTRACT_RESULT = {
       "train2014_images": "train_images",
