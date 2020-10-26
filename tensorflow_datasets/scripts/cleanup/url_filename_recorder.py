@@ -19,6 +19,7 @@ import os
 import pathlib
 import requests
 import logging
+import dataclasses
 from absl import app
 from typing import Dict, List
 from concurrent import futures
@@ -66,7 +67,8 @@ def _update_url_infos(url_infos, urls_to_filename) -> Dict[str, checksums.UrlInf
     if old_filename and old_filename != new_filename:
       logging.warning(f"Filename for {url} already exist. "
                       f"Updating {old_filename} to {new_filename}")
-    url_info.filename = new_filename
+    url_info = dataclasses.replace(url_info, filename=new_filename)
+    url_infos.update({url: url_info})
   return url_infos
 
 def main(_):
