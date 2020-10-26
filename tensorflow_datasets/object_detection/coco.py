@@ -20,9 +20,6 @@ import json
 import os
 import numpy as np
 
-# TODO external dependency
-from pycocotools import mask as maskUtils
-
 from absl import logging
 import tensorflow.compat.v2 as tf
 
@@ -362,6 +359,8 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     Yields:
       example key and data
     """
+    maskUtils = tfds.core.lazy_imports.pycocotools.mask
+
     # Load the annotations (label names, images metadata,...)
     coco_annotation = ANNOTATION_CLS[annotation_type](annotation_path)
     # Each category is a dict:
