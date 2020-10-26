@@ -1,1 +1,2 @@
-http://datasets.lids.mit.edu/fastdepth/data/nyudepthv2.tar.gz 34276493134 063b5762eeb3041614bf40722ea5cf805cb8ca052e56f3d1c63cfd229e7ff7b3
+http://datasets.lids.mit.edu/fastdepth/data/nyudepthv2.tar.gz	34276493134	063b5762eeb3041614bf40722ea5cf805cb8ca052e56f3d1c63cfd229e7ff7b3	
+http://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat	2972037809	2d724b0c0ab358aa1ce5df855e5bd14a2279ab7202efe22f32a30d612dcb86aa	nyu_depth_v2_labeled.mat
