@@ -301,8 +301,8 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     splits = []
     root_url = 'http://images.cocodataset.org/'
+    urls={}
     for split in self.builder_config.splits:
-      urls = {}
       for images in split.images:
         urls['{}_images'.format(images)] = '{}zips/{}.zip'.format(root_url, images)
       if self.builder_config.has_pose:
@@ -552,7 +552,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
       yield image_info['file_name'], example
 
     logging.info(
-        '%d/%d images do not contains any annotations',
+        '%d/%d images do not contain any annotations',
         annotation_skipped,
         len(images),
     )
