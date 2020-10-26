@@ -829,7 +829,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         extract_dir=extract_dir,
         manual_dir=manual_dir,
         url_infos=self.url_infos,
-        manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
+        manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_checksums_validation=download_config.force_checksums_validation,

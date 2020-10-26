@@ -223,6 +223,7 @@ class ManualDatasetSection(Section):
     manual_instructions = builder.MANUAL_DOWNLOAD_INSTRUCTIONS
     if not manual_instructions:
       return _SKIP_SECTION
+    manual_instructions = tfds.core.utils.dedent(manual_instructions)
     return textwrap.dedent(
         f"""
         This dataset requires you to

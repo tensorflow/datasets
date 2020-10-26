@@ -227,7 +227,7 @@ class DownloadManager(object):
     self._manual_dir: Optional[type_utils.ReadOnlyPath] = (
         manual_dir and utils.as_path(manual_dir).expanduser()
     )
-    self._manual_dir_instructions = manual_dir_instructions
+    self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     tf.io.gfile.makedirs(self._download_dir)
     tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download

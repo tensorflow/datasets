@@ -202,11 +202,12 @@ class C4Config(tfds.core.BuilderConfig):
 class C4(tfds.core.BeamBasedBuilder):
   """C4 dataset based on Common Crawl."""
 
-  MANUAL_DOWNLOAD_INSTRUCTIONS = f"""\
-You are using a C4 config that requires some files to be manually downloaded.
-For `c4/webtextlike`, download {_OPENWEBTEXT_URLS_ZIP} from \
-{_OPENWEBTEXT_URLS_URL}.
-For `c4/multilingual` and `en/noclean` download the Common Crawl WET files."""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = f"""
+  You are using a C4 config that requires some files to be manually downloaded.
+  For `c4/webtextlike`, download {_OPENWEBTEXT_URLS_ZIP} from
+  {_OPENWEBTEXT_URLS_URL}.
+  For `c4/multilingual` and `en/noclean` download the Common Crawl WET files.
+  """
 
   BUILDER_CONFIGS = [
       C4Config(
