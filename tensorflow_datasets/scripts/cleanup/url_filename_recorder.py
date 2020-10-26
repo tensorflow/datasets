@@ -18,29 +18,36 @@ r"""Update checksums to contain filename."""
 import os
 import pathlib
 import requests
+import logging
 from absl import app
 from typing import Dict, List
 from concurrent import futures
 
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
-
 
 TFDS_PATH = tfds.core.utils.tfds_write_path()
 
 
-def _collect_path_to_update() -> List[tfds.core.utils.ReadWritePath]:
-  """Collect checksums paths to update."""
+def _collect_path_to_url_infos() -> Dict[utils.ReadWritePath,
+                                          Dict[str, checksums.UrlInfo]]:
+  """Collect checksums paths to url_infos."""
+  path_to_url_infos = {}
+
   url_checksums_paths = list(checksums._checksum_paths().values())
 
   builder_checksums_path = []
   for name in tfds.list_builders():
     builder_cls = tfds.builder_cls(name)
-    if builder_cls.url_infos != None:
+    if builder_cls.url_infos is not None:
       builder_checksums_path.append(builder_cls._checksums_path)
-  return url_checksums_paths + builder_checksums_path
 
-def _request_filename(url) -> (str, str):
+  for url_path in url_checksums_paths + builder_checksums_path:
+    path_to_url_infos[url_path] = checksums.load_url_infos(url_path)
+  return path_to_url_infos
+
+def _request_filename(url) -> str:
   """Get filename of dataset at `url`."""
   filename  = ''
   try:
@@ -49,28 +56,35 @@ def _request_filename(url) -> (str, str):
     print(f'Success for {url}')
   except requests.exceptions.HTTPError as http_err:
     print(f'HTTP Error {http_err} for {url}.')
-  return (url, filename)
+  return filename
 
-def _update_url_infos(url_infos, filenames) -> Dict[str, checksums.UrlInfo]:
+def _update_url_infos(url_infos, urls_to_filename) -> Dict[str, checksums.UrlInfo]:
   """Get and update dataset filname in UrlInfo."""
-  for url, filename in filenames:
-    url_infos[url].filename = filename
+  for url, url_info in url_infos.items():
+    new_filename = urls_to_filename[url].result()
+    old_filename = url_info.filename
+    if old_filename and old_filename != new_filename:
+      logging.warning(f"Filename for {url} already exist. "
+                      f"Updating {old_filename} to {new_filename}")
+    url_info.filename = new_filename
   return url_infos
 
-
 def main(_):
+  path_to_url_infos = _collect_path_to_url_infos()
+
+  # Remove duplicate urls
+  all_url_infos = {}
+  for url_infos in path_to_url_infos.values():
+    all_url_infos.update(url_infos)
+
   with futures.ThreadPoolExecutor(max_workers=100) as executor:
-    future_filenames = {}
-    cached_url_infos = {}
-    # Collect legacy datasets as well as new datasets
-    for url_path in _collect_path_to_update():
-      url_infos = checksums.load_url_infos(url_path)
-      cached_url_infos[url_path] = url_infos
-      future_filenames[url_path] = executor.map(_request_filename, url_infos)
-    for path, future_filename in future_filenames.items():
-      old_url_infos = cached_url_infos[path]
-      updated_url_infos = _update_url_infos(old_url_infos, future_filename)
-      checksums.save_url_infos(path, updated_url_infos)
+    urls_to_filename = {
+      url: executor.submit(_request_filename, url)
+      for url in all_url_infos
+    }
+    for path, url_infos in path_to_url_infos.items():
+      url_infos = _update_url_infos(url_infos, urls_to_filename)
+      checksums.save_url_infos(path, url_infos)
 
 
 if __name__ == '__main__':
