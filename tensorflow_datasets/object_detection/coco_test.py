@@ -88,7 +88,8 @@ class Coco2014PoseTest(testing.DatasetBuilderTestCase):
       "test2014_images": "test_images",
       "test2015_images": "test_images",
       "train_annotations": "densepose_coco_2014_train.json",
-      "valminusminival2014_annotations": "densepose_coco_2014_valminusminival.json",
+      "valminusminival2014_annotations":
+          "densepose_coco_2014_valminusminival.json",
       "validation_annotations": "densepose_coco_2014_validation.json",
       "test_annotations": "densepose_coco_2014_test.json",
   }

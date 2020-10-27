@@ -246,21 +246,39 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           }),
       })
     elif self.builder_config.has_pose:
-      features.update({
-          'people': tfds.features.Sequence({
-              'id': tf.int64,
-              'num_keypoints': tf.int64,
-              'joints': tfds.features.Tensor(shape=(17, 2), dtype=tf.int64),
-              'joints_visible': tfds.features.Tensor(shape=(17,), dtype=tf.bool),
-              'area': tf.int64,
-              'body_segmentation': tfds.features.Image(shape=(256, 256, 1), encoding_format='png'),
-              'bbox': tfds.features.BBoxFeature(),
-              # This is only for consistency with other annotation formats, the only available class
-              # are people.
-              'label': tfds.features.ClassLabel(num_classes=1),
-              'is_crowd': tf.bool,
-          }),
-      })
+      features.update(
+          {
+              'people':
+                  tfds.features.Sequence(
+                      {
+                          'id':
+                              tf.int64,
+                          'num_keypoints':
+                              tf.int64,
+                          'joints':
+                              tfds.features.Tensor(
+                                  shape=(17, 2), dtype=tf.int64
+                              ),
+                          'joints_visible':
+                              tfds.features.Tensor(shape=(17,), dtype=tf.bool),
+                          'area':
+                              tf.int64,
+                          'body_segmentation':
+                              tfds.features.Image(
+                                  shape=(256, 256, 1), encoding_format='png'
+                              ),
+                          'bbox':
+                              tfds.features.BBoxFeature(),
+                          # This is only for consistency with other annotation
+                          # formats, the only available class are people.
+                          'label':
+                              tfds.features.ClassLabel(num_classes=1),
+                          'is_crowd':
+                              tf.bool,
+                      }
+                  ),
+          }
+      )
     else:
       features.update({
           'objects': tfds.features.Sequence({
@@ -296,13 +314,16 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     urls={}
     for split in self.builder_config.splits:
       for images in split.images:
-        urls['{}_images'.format(images)] = '{}zips/{}.zip'.format(root_url, images)
+        urls['{}_images'.format(images)
+            ] = '{}zips/{}.zip'.format(root_url, images)
       if self.builder_config.has_pose:
         urls['{}_annotations'.format(split.name)] = \
-            'https://dl.fbaipublicfiles.com/densepose/{}.json'.format(split.annotation_download)
+            'https://dl.fbaipublicfiles.com/densepose/{}.json'.format(
+                split.annotation_download)
       else:
-        urls['{}_annotations'.format(split.name)] = '{}annotations/{}.zip'.format(
-            root_url, split.annotation_download)
+        urls['{}_annotations'.format(
+            split.name
+        )] = '{}annotations/{}.zip'.format(root_url, split.annotation_download)
 
     # DownloadManager memoize the url, so duplicate urls will only be downloaded
     # once.
@@ -328,7 +349,9 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         annotation_path = extracted['{}_annotations'.format(split.name)]
       else:
         annotation_path = os.path.join(
-            extracted['{}_annotations'.format(split.name)], 'annotations', split.annotation_file)
+            extracted['{}_annotations'.format(split.name)],
+            'annotations',
+            split.annotation_file)
       splits.append(tfds.core.SplitGenerator(
           name=split.name,
           gen_kwargs=dict(
@@ -359,7 +382,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     Yields:
       example key and data
     """
-    maskUtils = tfds.core.lazy_imports.pycocotools.mask
+    mask_utils = tfds.core.lazy_imports.pycocotools.mask
 
     # Load the annotations (label names, images metadata,...)
     coco_annotation = ANNOTATION_CLS[annotation_type](annotation_path)
@@ -438,7 +461,9 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         # {
         #     'segmentation': [[345.28, 220.68, 348.17, 269.8, ...]],
         #     'num_keypoints': 13,
-        #     'keypoints': [0, 0, 0, 0, 0, 0, 381, 69, 2, 377, 67, 2, ...], (x y visibility)
+        #     'keypoints': [
+        #         0, 0, 0, 0, 0, 0, 381, 69, 2, 377, 67, 2, ...
+        #     ], (x y visibility)
         #     'dp_masks': [
         #        {
         #             'counts': 'hb71o70000001O0jL2ZNOd18VNHh1=UNDh1...',
@@ -448,13 +473,13 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         #      ],
         #      'area': 86145.2971,
         #      'dp_I': [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, ...],
-        #      'dp_x': [133.66580200195312, 61.39377212524414, 93.56140899658203, ...],
-        #      'dp_U': [0.07984049618244171, 0.11004531383514404, 0.19391614198684692, ...],
+        #      'dp_x': [133.6658020312, 61.39374414, 93.561408203, ...],
+        #      'dp_U': [0.079818244171, 0.110045313804, 0.193998684692, ...],
         #      'image_id': 36,
-        #      'dp_V': [0.34230515360832214, 0.6589370965957642, 0.5380166172981262, ...],
+        #      'dp_V': [0.342305153614, 0.65893709652, 0.53801661762, ...],
         #      'bbox': [167.58, 162.89, 310.61, 465.19],
         #      'category_id': 1,
-        #      'dp_y': [96.58982849121094, 97.64864349365234, 116.95169067382812, ...],
+        #      'dp_y': [96.589828494, 97.648643434, 116.951690672, ...],
         #      'id': 453991
         # }
         #
@@ -463,23 +488,30 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         # DensePose annotations are stored in dp_* fields:
         #
         # Annotated masks:
-        # dp_masks: RLE encoded dense masks. All part masks are of size 256x256. They correspond to
-        #           14 semantically meaningful parts of the body: Torso, Right Hand, Left Hand,
-        #           Left Foot, Right Foot, Upper Leg Right, Upper Leg Left, Lower Leg Right, Lower
-        #           Leg Left, Upper Arm Left, Upper Arm Right, Lower Arm Left, Lower Arm Right, Head;
+        # dp_masks: RLE encoded dense masks. All part masks are of size
+        #           256x256. They correspond to 14 semantically meaningful parts
+        #           of the body: Torso, Right Hand, Left Hand, Left Foot,
+        #           Right Foot, Upper Leg Right, Upper Leg Left,
+        #           Lower Leg Right, Lower Leg Left, Upper Arm Left,
+        #           Upper Arm Right, Lower Arm Left, Lower Arm Right, Head;
         #
         # Annotated points:
-        # dp_x, dp_y: spatial coordinates of collected points on the image. The coordinates are
-        #             scaled such that the bounding box size is 256x256;
-        # dp_I:       The patch index that indicates which of the 24 surface patches the point is
-        #             on. Patches correspond to the body parts described above. Some body parts are
-        #             split into 2 patches: 1, 2 = Torso, 3 = Right Hand, 4 = Left Hand, 5 = Left
-        #             Foot, 6 = Right Foot, 7, 9 = Upper Leg Right, 8, 10 = Upper Leg Left, 11,
-        #             13 = Lower Leg Right, 12, 14 = Lower Leg Left, 15, 17 = Upper Arm Left,
-        #             16, 18 = Upper Arm Right, 19, 21 = Lower Arm Left, 20, 22 = Lower Arm Right,
-        #             23, 24 = Head;
-        # dp_U, dp_V: Coordinates in the UV space. Each surface patch has a separate 2D parameterization.
-        pose_annotations = coco_annotation.get_annotations(img_id=image_info['id'])
+        # dp_x, dp_y: spatial coordinates of collected points on the image. The
+        #             coordinates are scaled such that the bounding box size is
+        #             256x256;
+        # dp_I:       The patch index that indicates which of the 24 surface
+        #             patches the point is on. Patches correspond to the body
+        #             parts described above. Some body parts are split into 2
+        #             patches: 1, 2 = Torso, 3 = Right Hand, 4 = Left Hand,
+        #             5 = Left Foot, 6 = Right Foot, 7, 9 = Upper Leg Right,
+        #             8, 10 = Upper Leg Left, 11, 13 = Lower Leg Right,
+        #             12, 14 = Lower Leg Left, 15, 17 = Upper Arm Left,
+        #             16, 18 = Upper Arm Right, 19, 21 = Lower Arm Left,
+        #             20, 22 = Lower Arm Right, 23, 24 = Head;
+        # dp_U, dp_V: Coordinates in the UV space. Each surface patch has a
+        #             separate 2D parameterization.
+        pose_annotations = coco_annotation.get_annotations(
+            img_id=image_info['id'])
         additional_instance_infos = []
         for annotation in pose_annotations:
           keypoints = np.array(annotation['keypoints']).reshape(17, 3)
@@ -493,7 +525,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
             assert len(annotation['dp_masks']) == 14
             for i, mask in enumerate(annotation['dp_masks']):
               if mask:  # sometimes masks are just empty
-                decoded_mask = maskUtils.decode(mask)
+                decoded_mask = mask_utils.decode(mask)
                 body_parts[decoded_mask > 0] = i + 1
           else:
             body_parts = 255 * np.ones([256, 256, 1], dtype='uint8')
