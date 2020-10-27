@@ -22,7 +22,6 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
@@ -73,14 +72,12 @@ class DatasetInfoTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetInfoTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
     super(DatasetInfoTest, cls).tearDownClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = True
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_non_existent_dir(self):

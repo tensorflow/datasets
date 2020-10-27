@@ -128,16 +128,6 @@ class FaultyS3DummyBeamDataset(DummyBeamDataset):
 
 class BeamBasedBuilderTest(testing.TestCase):
 
-  @classmethod
-  def setUpClass(cls):
-    super(BeamBasedBuilderTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
-
-  @classmethod
-  def tearDownClass(cls):
-    dataset_builder._is_py2_download_and_prepare_disabled = True
-    super(BeamBasedBuilderTest, cls).tearDownClass()
-
   def test_download_prepare_raise(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyBeamDataset(data_dir=tmp_dir)
