@@ -59,12 +59,12 @@ Json = Dict[str, JsonValue]
 
 if typing.TYPE_CHECKING:
   # TODO(b/171287205): Required because pytype `PathLike` implementation
-  _PurePathBase = os.PathLike[str]
+  _pure_path_base = (os.PathLike[str], Protocol,)
 else:
-  _PurePathBase = object
+  _pure_path_base = (Protocol,)
 
 
-class PurePath(Protocol, _PurePathBase):
+class PurePath(*_pure_path_base):
   """Protocol for pathlib.PurePath-like API."""
   parts: Tuple[str, ...]
   drive: str
