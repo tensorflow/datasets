@@ -26,7 +26,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.deprecated.text import subword_text_encoder
 from tensorflow_datasets.core.deprecated.text import text_encoder
 
-TEST_DATA_DIR = os.path.join(utils.tfds_write_path(), 'testing', 'test_data')
+TEST_DATA_DIR = os.path.join(utils.tfds_path(), 'testing', 'test_data')
 
 
 class SubwordTextEncoderTest(parameterized.TestCase, testing.TestCase):

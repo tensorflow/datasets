@@ -19,8 +19,6 @@ import io
 import os
 import zipfile
 
-import pytest
-
 from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import resource_utils
 
@@ -51,9 +49,6 @@ def test_resource_path():
   path = generic_path.as_path(path)
   assert isinstance(path, resource_utils.ResourcePath)
 
-  with pytest.raises(TypeError, match='not running from a zipapp'):
-    resource_utils.to_write_path(path)
-
   assert path.joinpath() == path
   assert path.joinpath('abc', 'def.txt').name == 'def.txt'
 
@@ -61,4 +56,4 @@ def test_resource_path():
 def test_tfds_path():
   """Test the proper suffix only, since the prefix can vary."""
   assert resource_utils.tfds_path().name == 'tensorflow_datasets'
-  assert resource_utils.tfds_write_path().name == 'tensorflow_datasets'
+  # assert resource_utils.tfds_write_path().name == 'tensorflow_datasets'

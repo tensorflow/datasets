@@ -97,14 +97,7 @@ def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:
 
 def to_write_path(path: ReadOnlyPath) -> ReadWritePath:
   """Cast the path to a read-write Path."""
-  if isinstance(path, ResourcePath):
-    raise TypeError(
-        f'Can\'t write {path!r}. Make sure you\'re not running from a '
-        'zipapp (e.g. `my_app.par`).'
-    )
-  # If a ReadOnlyPath wrapper is used above, then the wrapper should be
-  # removed here (e.g. `generic_path.as_path(pathlib.Path())`).
-  path = generic_path.as_path(path)
+  path = typing.cast(ReadWritePath, path)
   return path
 
 
@@ -135,7 +128,7 @@ def tfds_write_path(*relative_path: PathLike) -> ReadWritePath:
   """Path to `tensorflow_datasets/` root dir (read-write).
 
   Contrary to `tfds.core.tfds_path`, path returned here support write
-  operations. As tradeoff, it can't be executed from a `zipapp`.
+  operations. Used in scripts to update the TFDS repository.
 
   Args:
     *relative_path: Relative path, eventually to concatenate.

@@ -33,7 +33,7 @@ from tensorflow_metadata.proto.v0 import schema_pb2
 
 tf.enable_v2_behavior()
 
-_TFDS_DIR = utils.tfds_write_path()
+_TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
                          "mnist", "3.0.1")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
