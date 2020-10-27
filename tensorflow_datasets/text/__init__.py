@@ -48,6 +48,7 @@ from tensorflow_datasets.text.openbookqa import Openbookqa
 from tensorflow_datasets.text.paws_wiki import PawsWiki
 from tensorflow_datasets.text.paws_x_wiki import PawsXWiki
 from tensorflow_datasets.text.pg19 import Pg19
+from tensorflow_datasets.text.piqa import PIQA
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglement
 from tensorflow_datasets.text.salient_span_wikipedia import SalientSpanWikipedia
