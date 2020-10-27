@@ -64,7 +64,7 @@ else:
   _PurePathBase = object
 
 
-class PurePath(Protocol, _PurePathBase):
+class PurePath(Protocol, _PurePathBase):  # pytype: disable=mro-error
   """Protocol for pathlib.PurePath-like API."""
   parts: Tuple[str, ...]
   drive: str
