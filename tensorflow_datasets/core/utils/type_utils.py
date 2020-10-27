@@ -57,14 +57,8 @@ Json = Dict[str, JsonValue]
 
 # pytype: disable=ignored-abstractmethod
 
-if typing.TYPE_CHECKING:
-  # TODO(b/171287205): Required because pytype `PathLike` implementation
-  _pure_path_base = (os.PathLike[str], Protocol,)
-else:
-  _pure_path_base = (Protocol,)
 
-
-class PurePath(*_pure_path_base):
+class PurePath(Protocol):
   """Protocol for pathlib.PurePath-like API."""
   parts: Tuple[str, ...]
   drive: str
