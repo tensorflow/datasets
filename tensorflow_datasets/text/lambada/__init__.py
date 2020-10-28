@@ -13,17 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.import_testing."""
+"""lambda dataset."""
 
-import tensorflow.compat.v2 as tf
-import tensorflow_datasets.public_api as tfds
-
-
-class ImportTestingTest(tf.test.TestCase):
-
-  def test_testing_imported(self):
-    self.assertIsNotNone(tfds.testing)
-
-
-if __name__ == '__main__':
-  tf.test.main()
+from tensorflow_datasets.text.lambada.lambada import Lambada

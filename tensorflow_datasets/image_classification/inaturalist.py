@@ -62,11 +62,11 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
             "id": tfds.features.Text(),
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         "image_classification", "inaturalist_labels.txt"))),
             "supercategory": tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         "image_classification",
                         "inaturalist_supercategories.txt"))),

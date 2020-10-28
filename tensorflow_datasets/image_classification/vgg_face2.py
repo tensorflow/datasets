@@ -55,7 +55,7 @@ class VggFace2(tfds.core.GeneratorBasedBuilder):
   """
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.

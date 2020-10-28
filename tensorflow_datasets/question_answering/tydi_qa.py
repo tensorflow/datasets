@@ -44,7 +44,22 @@ the answer yet, (unlike SQuAD and its descendents) and the data is collected \
 directly in each language without the use of translation (unlike MLQA and \
 XQuAD).
 
-For now, only the Gold passage (GoldP) task is available in TFDS.
+IMPORTANT:  Please choose your training split carefully.
+
+Training splits:
+
+'train': This is the GoldP task from the original TyDi QA paper \
+[https://arxiv.org/abs/2003.05002] that has original-language labeled \
+training data.
+
+'translate-train-*': These splits are the automatic translations from English \
+to each target language used in the translate-train baselines in the XTREME \
+paper [https://arxiv.org/abs/2003.11080]. This purposefully ignores the \
+non-English TyDiQA-GoldP training data to simulate the transfer learning \
+scenario where original-language data is not available and system builders \
+must rely on labeled English data plus existing machine translation systems.
+
+Typically, you should use EITHER the train or translate-train split, but not both.
 """
 
 
@@ -61,6 +76,7 @@ LANGUAGES = {
 }
 
 _GOLD_URL_PREFIX = "https://storage.googleapis.com/tydiqa/v1.1/tydiqa-goldp-v1.1-"
+_GOLD_TRANSLATE_URL_FORMAT = "https://storage.googleapis.com/xtreme_translations/TyDiQA-GoldP/translate-train/tydiqa.translate.train.en-{lang_iso}.json"
 
 
 class TydiQAConfig(tfds.core.BuilderConfig):
@@ -96,6 +112,12 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
         "validation": _GOLD_URL_PREFIX + "dev.json",
         "lang-validation": _GOLD_URL_PREFIX + "dev.tgz",
     }
+    for lang_iso in LANGUAGES:
+      if lang_iso == "en":
+        continue
+      urls_to_download[
+          f"translate-train-{lang_iso}"] = _GOLD_TRANSLATE_URL_FORMAT.format(
+              lang_iso=lang_iso)
     downloaded_files = dl_manager.download_and_extract(urls_to_download)
 
     return [
@@ -114,6 +136,13 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
                              f"tydiqa-goldp-v1.1-dev/tydiqa-goldp-dev-{lang_name}.json")
             })
         for lang_iso, lang_name in LANGUAGES.items()
+    ] + [
+        tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
+            name=f"translate-train-{lang_iso}",
+            gen_kwargs={
+                "filepath": downloaded_files[f"translate-train-{lang_iso}"]
+                })
+        for lang_iso, lang_name in LANGUAGES.items() if lang_iso != "en"
     ]
 
   def _generate_examples(self, filepath):

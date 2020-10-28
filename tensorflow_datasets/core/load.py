@@ -234,28 +234,28 @@ def load(
 
   1. Fetch the `tfds.core.DatasetBuilder` by name:
 
-  ```python
-  builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
-  ```
+     ```python
+     builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
+     ```
 
   2. Generate the data (when `download=True`):
 
-  ```python
-  builder.download_and_prepare(**download_and_prepare_kwargs)
-  ```
+     ```python
+     builder.download_and_prepare(**download_and_prepare_kwargs)
+     ```
 
   3. Load the `tf.data.Dataset` object:
 
-  ```python
-  ds = builder.as_dataset(
-      split=split,
-      as_supervised=as_supervised,
-      shuffle_files=shuffle_files,
-      read_config=read_config,
-      decoders=decoders,
-      **as_dataset_kwargs,
-  )
-  ```
+     ```python
+     ds = builder.as_dataset(
+         split=split,
+         as_supervised=as_supervised,
+         shuffle_files=shuffle_files,
+         read_config=read_config,
+         decoders=decoders,
+         **as_dataset_kwargs,
+     )
+     ```
 
   See: https://www.tensorflow.org/datasets/overview#load_a_dataset for more
   examples.
@@ -276,7 +276,7 @@ def load(
       (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
       use the `"zoo"` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
-    split: Which split of the data to load (e.g. `'train'`, `'test'`
+    split: Which split of the data to load (e.g. `'train'`, `'test'`,
       `['train', 'test']`, `'train[80%:]'`,...). See our
       [split API guide](https://www.tensorflow.org/datasets/splits).
       If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`
@@ -331,10 +331,8 @@ def load(
       Split-specific information is available in `ds_info.splits`.
   """
   # pylint: enable=line-too-long
-
-  name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  name_builder_kwargs.update(builder_kwargs or {})
-  builder_kwargs = name_builder_kwargs
+  if builder_kwargs is None:
+    builder_kwargs = {}
 
   # Set data_dir
   if try_gcs and gcs_utils.is_dataset_on_gcs(name):

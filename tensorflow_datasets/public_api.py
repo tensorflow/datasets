@@ -45,6 +45,8 @@ from tensorflow_datasets.core.visualization import show_examples
 from tensorflow_datasets.core.visualization import show_statistics
 from tensorflow_datasets.version import __version__
 
+deprecated = core.utils.docs.deprecated(deprecated)
+
 with core.registered.skip_registration():
   # We import testing namespace but without registering the tests datasets
   # (e.g. DummyMnist,...).

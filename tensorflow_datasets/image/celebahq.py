@@ -63,13 +63,15 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
-    v2 = tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v2 = tfds.core.Version("2.0.0")
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
         version=v2,
+        release_notes={
+            "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -84,8 +86,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
   Detailed instructions are here:
   https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
   """
-
-  VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [
       CelebaHQConfig(resolution=1024),

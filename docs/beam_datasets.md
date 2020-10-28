@@ -7,7 +7,7 @@ generating data across many machines by using
 This doc has two sections:
 
 *   For user who want to generate an existing Beam dataset
-*   For developper who want to create a new Beam dataset
+*   For developers who want to create a new Beam dataset
 
 Table of content:
 
@@ -93,11 +93,12 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=my_new_dataset
 ```
 
-**Warning**: Beam datasets can be **huge** (TeraBytes) and take a significant
-amount of ressources to be generated (can take weeks on a local computer). It is
-recomended to generate the datasets using a distributed environement. Have a
-look at the [Apache Beam Documentation](https://beam.apache.org/) for a list of
-the supported runtimes.
+**Warning**: Beam datasets can be **huge** (terabytes or larger) and take a
+significant amount of resources to be generated (can take weeks on a local
+computer). It is recommended to generate the datasets using a distributed
+environment. Have a look at the
+[Apache Beam Documentation](https://beam.apache.org/) for a list of supported
+runtimes.
 
 ### With a custom script
 

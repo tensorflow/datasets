@@ -145,8 +145,10 @@ class OpenImagesV4Config(tfds.core.BuilderConfig):
         is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    kwargs['version'] = tfds.core.Version(
-        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+    kwargs['version'] = tfds.core.Version('2.0.0')
+    kwargs['release_notes'] = {
+        '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+    }
     super(OpenImagesV4Config, self).__init__(**kwargs)
     self._target_pixels = target_pixels
 
@@ -176,13 +178,13 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
     source_class_label = tfds.features.ClassLabel(
         names=IMAGE_LEVEL_SOURCES + BBOX_SOURCES)
     all_class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(os.path.join(
+        names_file=tfds.core.tfds_path(os.path.join(
             'object_detection', 'open_images_classes_all.txt')))
     trainable_class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(os.path.join(
+        names_file=tfds.core.tfds_path(os.path.join(
             'object_detection', 'open_images_classes_trainable.txt')))
     boxable_class_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(os.path.join(
+        names_file=tfds.core.tfds_path(os.path.join(
             'object_detection', 'open_images_classes_boxable.txt')))
     return tfds.core.DatasetInfo(
         builder=self,

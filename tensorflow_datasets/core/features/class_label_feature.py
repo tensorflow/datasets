@@ -190,6 +190,7 @@ def _get_names_filepath(data_dir, feature_name):
 
 
 def _load_names_from_file(names_filepath):
+  names_filepath = os.fspath(names_filepath)
   with tf.io.gfile.GFile(names_filepath, "r") as f:
     return [
         name.strip()

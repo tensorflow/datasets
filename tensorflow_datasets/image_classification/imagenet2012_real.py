@@ -58,7 +58,10 @@ _REAL_LABELS_URL = 'https://raw.githubusercontent.com/google-research/reassessed
 class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
   """ImageNet validation images with ReaL labels."""
 
-  VERSION = tfds.core.Version('1.0.0', 'Initial release.')
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Initial release',
+  }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   manual_dir should contain `ILSVRC2012_img_val.tar` file.
@@ -67,7 +70,7 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
   """
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -100,7 +103,7 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
     Returns:
       dict, mapping from image name (str) to label (str).
     """
-    labels_path = tfds.core.get_tfds_path(_VALIDATION_LABELS_FNAME)
+    labels_path = os.fspath(tfds.core.tfds_path(_VALIDATION_LABELS_FNAME))
     with tf.io.gfile.GFile(labels_path) as labels_f:
       # `splitlines` to remove trailing `\r` in Windows
       labels = labels_f.read().strip().splitlines()

@@ -48,7 +48,6 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'dm-tree',
     'future',
     'numpy',
     'promise',
@@ -60,6 +59,7 @@ REQUIRED_PKGS = [
     'tqdm',
     # Standard library backports
     'dataclasses;python_version<"3.7"',
+    'typing_extensions;python_version<"3.8"',
     'importlib_resources;python_version<"3.9"',
 ]
 
@@ -80,7 +80,7 @@ TESTS_REQUIRE = [
 
 # Additional deps for formatting
 DEV_REQUIRE = [
-    'pylint>=2.5.3',
+    'pylint>=2.6.0',
     'yapf',
 ]
 
@@ -120,7 +120,7 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
-    'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
+    'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
@@ -150,7 +150,7 @@ DATASET_EXTRAS = {
 
 
 # Those datasets have dependencies which conflict with the rest of TFDS, so
-# running them in an isolated environements.
+# running them in an isolated environments.
 # See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 

@@ -32,9 +32,11 @@ from tensorflow_datasets.text.gap import Gap
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.goemotions import Goemotions
 from tensorflow_datasets.text.gpt3 import Gpt3
+from tensorflow_datasets.text.hellaswag import Hellaswag
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
+from tensorflow_datasets.text.lambada import Lambada
 from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
@@ -46,6 +48,7 @@ from tensorflow_datasets.text.openbookqa import Openbookqa
 from tensorflow_datasets.text.paws_wiki import PawsWiki
 from tensorflow_datasets.text.paws_x_wiki import PawsXWiki
 from tensorflow_datasets.text.pg19 import Pg19
+from tensorflow_datasets.text.piqa import PIQA
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglement
 from tensorflow_datasets.text.salient_span_wikipedia import SalientSpanWikipedia
@@ -55,6 +58,7 @@ from tensorflow_datasets.text.scan import ScanConfig
 from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.sentiment140 import Sentiment140
 from tensorflow_datasets.text.snli import Snli
+from tensorflow_datasets.text.story_cloze import StoryCloze
 from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trec import Trec
@@ -65,3 +69,4 @@ from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
+

@@ -22,11 +22,10 @@ import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
 
 from google.protobuf import text_format
@@ -34,7 +33,7 @@ from tensorflow_metadata.proto.v0 import schema_pb2
 
 tf.enable_v2_behavior()
 
-_TFDS_DIR = py_utils.tfds_dir()
+_TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
                          "mnist", "3.0.1")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
@@ -73,31 +72,18 @@ class DatasetInfoTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetInfoTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
     super(DatasetInfoTest, cls).tearDownClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = True
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
-  def test_undefined_dir(self):
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             "undefined dataset_info_dir"):
-      info = dataset_info.DatasetInfo(builder=self._builder)
-      info.read_from_directory(None)
-
   def test_non_existent_dir(self):
-    # The error messages raised by Windows is different from Unix.
-    if os.name == "nt":
-      err = "The system cannot find the path specified"
-    else:
-      err = "No such file or dir"
     info = dataset_info.DatasetInfo(builder=self._builder)
     with self.assertRaisesWithPredicateMatch(
-        tf.errors.NotFoundError, err):
+        FileNotFoundError, "from a directory which does not exist"):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
   def test_reading(self):

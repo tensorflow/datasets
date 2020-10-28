@@ -16,7 +16,9 @@
 """Deprecated symbols."""
 
 from tensorflow_datasets.core.deprecated import text
+from tensorflow_datasets.core.download.checksums import add_checksums_dir
 
 __all__ = [
+    'add_checksums_dir',
     'text',
 ]

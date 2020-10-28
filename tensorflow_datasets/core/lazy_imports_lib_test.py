@@ -28,6 +28,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   # * librosa (NSynth)
   @parameterized.parameters(
       "cv2",
+      "gcld3",
       "langdetect",
       "matplotlib",
       "mwparserfromhell",

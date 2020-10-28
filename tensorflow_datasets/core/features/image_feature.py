@@ -15,11 +15,9 @@
 
 """Image feature."""
 
-import json
 import os
 
 import numpy as np
-import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
@@ -95,48 +93,22 @@ class Image(feature.FeatureConnector):
         Defaults to (None, None, 3).
       dtype: tf.uint16 or tf.uint8 (default).
         tf.uint16 can be used only with png encoding_format
-      encoding_format: 'jpeg' or 'png' (default). Format to serialize np.ndarray
-        images on disk.
+      encoding_format: 'jpeg' or 'png'. Format to serialize `np.ndarray` images
+        on disk. If None, encode images as PNG.
         If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
         ignored, and file original encoding is used.
 
     Raises:
       ValueError: If the shape is invalid
     """
-    self._encoding_format = None
-    self._shape = None
-    self._runner = None
-    self._dtype = None
-
     # Set and validate values
-    self.set_encoding_format(encoding_format or 'png')
-    self.set_shape(shape or (None, None, 3))
-    self.set_dtype(dtype or tf.uint8)
+    shape = shape or (None, None, 3)
+    dtype = dtype or tf.uint8
+    self._encoding_format = _get_and_validate_encoding(encoding_format)
+    self._shape = _get_and_validate_shape(shape, self._encoding_format)
+    self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
 
-  def set_dtype(self, dtype):
-    """Update the dtype."""
-    dtype = tf.as_dtype(dtype)
-    acceptable_dtypes = ACCEPTABLE_DTYPES[self._encoding_format]
-    if dtype not in acceptable_dtypes:
-      raise ValueError('Acceptable `dtype` for %s: %s (was %s)' % (
-          self._encoding_format, acceptable_dtypes, dtype))
-    self._dtype = dtype
-
-  def set_encoding_format(self, encoding_format):
-    """Update the encoding format."""
-    supported = ENCODE_FN.keys()
-    if encoding_format not in supported:
-      raise ValueError('`encoding_format` must be one of %s.' % supported)
-    self._encoding_format = encoding_format
-
-  def set_shape(self, shape):
-    """Update the shape."""
-    channels = shape[-1]
-    acceptable_channels = ACCEPTABLE_CHANNELS[self._encoding_format]
-    if channels not in acceptable_channels:
-      raise ValueError('Acceptable `channels` for %s: %s (was %s)' % (
-          self._encoding_format, acceptable_channels, channels))
-    self._shape = tuple(shape)
+    self._runner = None
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
@@ -154,7 +126,13 @@ class Image(feature.FeatureConnector):
       raise ValueError('Image dtype should be %s. Detected: %s.' % (
           self._dtype.as_numpy_dtype, np_image.dtype))
     utils.assert_shape_match(np_image.shape, self._shape)
-    return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
+    # When encoding isn't defined, default to PNG.
+    # Should we be more strict about explicitly define the encoding (raise
+    # error / warning instead) ?
+    # It has created subtle issues for imagenet_corrupted: images are read as
+    # JPEG images to apply some processing, but final image saved as PNG
+    # (default) rather than JPEG.
+    return self._runner.run(ENCODE_FN[self._encoding_format or 'png'], np_image)
 
   def __getstate__(self):
     state = self.__dict__.copy()
@@ -165,13 +143,15 @@ class Image(feature.FeatureConnector):
     """Convert the given image into a dict convertible to tf example."""
     if isinstance(image_or_path_or_fobj, np.ndarray):
       encoded_image = self._encode_image(image_or_path_or_fobj)
-    elif isinstance(image_or_path_or_fobj, six.string_types):
+    elif isinstance(image_or_path_or_fobj, type_utils.PathLikeCls):
+      image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
       with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
     elif isinstance(image_or_path_or_fobj, bytes):
       encoded_image = image_or_path_or_fobj
     else:
       encoded_image = image_or_path_or_fobj.read()
+    # If encoding is explicitly set, should verify that bytes match encoding.
     return encoded_image
 
   def decode_example(self, example):
@@ -180,25 +160,6 @@ class Image(feature.FeatureConnector):
         example, channels=self._shape[-1], dtype=self._dtype)
     img.set_shape(self._shape)
     return img
-
-  def save_metadata(self, data_dir, feature_name=None):
-    """See base class for details."""
-    filepath = _get_metadata_filepath(data_dir, feature_name)
-    with tf.io.gfile.GFile(filepath, 'w') as f:
-      json.dump({
-          'shape': [-1 if d is None else d for d in self._shape],
-          'encoding_format': self._encoding_format,
-      }, f, sort_keys=True)
-
-  def load_metadata(self, data_dir, feature_name=None):
-    """See base class for details."""
-    # Restore names if defined
-    filepath = _get_metadata_filepath(data_dir, feature_name)
-    if tf.io.gfile.exists(filepath):
-      with tf.io.gfile.GFile(filepath, 'r') as f:
-        info_data = json.load(f)
-      self.set_encoding_format(info_data['encoding_format'])
-      self.set_shape([None if d == -1 else d for d in info_data['shape']])
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
@@ -254,5 +215,33 @@ def _postprocess_convert_rgb(img):
   return img.convert('RGB')
 
 
-def _get_metadata_filepath(data_dir, feature_name):
-  return os.path.join(data_dir, '{}.image.json'.format(feature_name))
+def _get_and_validate_encoding(encoding_format):
+  """Update the encoding format."""
+  supported = ENCODE_FN.keys()
+  if encoding_format and encoding_format not in supported:
+    raise ValueError(f'`encoding_format` must be one of {supported}.')
+  return encoding_format
+
+
+def _get_and_validate_dtype(dtype, encoding_format):
+  """Update the dtype."""
+  dtype = tf.as_dtype(dtype)
+  acceptable_dtypes = ACCEPTABLE_DTYPES.get(encoding_format)
+  if acceptable_dtypes and dtype not in acceptable_dtypes:
+    raise ValueError(
+        f'Acceptable `dtype` for {encoding_format}: '
+        f'{acceptable_dtypes} (was {dtype})'
+    )
+  return dtype
+
+
+def _get_and_validate_shape(shape, encoding_format):
+  """Update the shape."""
+  channels = shape[-1]
+  acceptable_channels = ACCEPTABLE_CHANNELS.get(encoding_format)
+  if acceptable_channels and channels not in acceptable_channels:
+    raise ValueError(
+        f'Acceptable `channels` for {encoding_format}: '
+        f'{acceptable_channels} (was {channels})'
+    )
+  return tuple(shape)

@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.core.features.audio_feature."""
 
 import array
+import pathlib
 import tempfile
 
 import numpy as np
@@ -85,6 +86,10 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase):
         tests=[
             testing.FeatureExpectationItem(
                 value=tmp_file,
+                expected=np_audio,
+            ),
+            testing.FeatureExpectationItem(
+                value=pathlib.Path(tmp_file),
                 expected=np_audio,
             ),
         ],

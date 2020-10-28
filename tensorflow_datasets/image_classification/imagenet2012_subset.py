@@ -71,13 +71,12 @@ class Imagenet2012Subset(Imagenet2012):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=subset_size,
           description='{} of total ImageNet training set.'.format(subset_size),
-          version=tfds.core.Version(
-              '5.0.0', ''),
+          version=tfds.core.Version('5.0.0'),
       ) for subset_size in SUBSET2FILES
   ]
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -151,4 +150,3 @@ class Imagenet2012Subset(Imagenet2012):
               'label': label,
           }
           yield image_fname, record
-

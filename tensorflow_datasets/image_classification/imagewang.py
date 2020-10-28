@@ -90,7 +90,7 @@ class Imagewang(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,

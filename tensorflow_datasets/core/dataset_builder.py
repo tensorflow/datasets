@@ -21,7 +21,7 @@ import inspect
 import itertools
 import os
 import sys
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import ClassVar, Dict, List, Optional, Union
 
 from absl import logging
 import dataclasses
@@ -40,15 +40,11 @@ from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import type_utils
 
 import termcolor
 
-if six.PY3:
-  import pathlib  # pylint: disable=g-import-not-at-top
-else:
-  pathlib = Any
-
-
+ReadOnlyPath = type_utils.ReadOnlyPath
 VersionOrStr = Union[utils.Version, str]
 
 
@@ -62,11 +58,6 @@ local data directory. If you'd instead prefer to read directly from our public
 GCS bucket (recommended if you're running on GCP), you can instead pass
 `try_gcs=True` to `tfds.load` or set `data_dir=gs://tfds-data/datasets`.
 """
-
-
-# Some tests are still running under Python 2, so internally we still whitelist
-# Py2 temporary.
-_is_py2_download_and_prepare_disabled = True
 
 
 @dataclasses.dataclass(eq=False)
@@ -127,6 +118,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   VERSION = None
 
   # Release notes
+  # Metadata only used for documentation. Should be a dict[version,description]
   # Multi-lines are automatically dedent
   RELEASE_NOTES: ClassVar[Dict[str, str]] = {}
 
@@ -189,9 +181,31 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
-  def code_path(cls) -> pathlib.Path:
-    """Returns the path to the file where the Dataset class is located."""
-    return pathlib.Path(inspect.getfile(cls))
+  def code_path(cls) -> ReadOnlyPath:
+    """Returns the path to the file where the Dataset class is located.
+
+    Note: As the code can be run inside zip file. The returned value is
+    a `ReadOnlyPath` by default. Use `tfds.core.utils.to_write_path()` to cast
+    the path into `ReadWritePath`.
+
+    Returns:
+      path: pathlib.Path like abstraction
+    """
+    modules = cls.__module__.split(".")
+    if len(modules) >= 2:  # Filter `__main__`, `python my_dataset.py`,...
+      # If the dataset can be loaded from a module, use this to support zipapp.
+      # Note: `utils.resource_path` will return either `zipfile.Path` (for
+      # zipapp) or `pathlib.Path`.
+      try:
+        path = utils.resource_path(modules[0])
+      except TypeError:  # Module is not a package
+        pass
+      else:
+        modules[-1] += ".py"
+        return path.joinpath(*modules[1:])
+    # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
+    # equivalent to the above return.
+    return utils.as_path(inspect.getfile(cls))
 
   def __getstate__(self):
     return self._original_state
@@ -249,18 +263,26 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
+  def _checksums_path(cls) -> ReadOnlyPath:
+    """Returns the checksums path."""
+    # Used:
+    # * To load the checksums (in url_infos)
+    # * To save the checksums (in DownloadManager)
+    return cls.code_path.parent / "checksums.tsv"
+
+  @utils.classproperty
+  @classmethod
   @functools.lru_cache(maxsize=None)
   def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
     """Load `UrlInfo` from the given path."""
+    # Note: If the dataset is downloaded with `record_checksums=True`, urls
+    # might be updated but `url_infos` won't as it is memoized.
+
     # Search for the url_info file.
-    checksums_path = cls.code_path.parent / "checksums.tsv"
-    if checksums_path.exists():
-      checksums_path = str(checksums_path)
-    else:
-      checksums_path = None
+    checksums_path = cls._checksums_path
     # If url_info file is found, load the urls
-    if checksums_path:
-      return download.checksums.url_infos_from_path(checksums_path)
+    if checksums_path.exists():
+      return download.checksums.load_url_infos(checksums_path)
     else:
       return None
 
@@ -271,7 +293,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Otherwise, backward compatibility cannot be guaranteed as some code will
     # depend on the code version instead of the restored data version
     if not getattr(self, "_version", None):
-      # Message for developper creating new dataset. Will trigger if they are
+      # Message for developers creating new dataset. Will trigger if they are
       # using .info in the constructor before calling super().__init__
       raise AssertionError(
           "Info should not been called before version has been defined. "
@@ -297,13 +319,6 @@ class DatasetBuilder(registered.RegisteredDataset):
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
-
-    # Disable `download_and_prepare` (internally, we are still
-    # allowing Py2 for the `dataset_builder_tests.py` & cie
-    if _is_py2_download_and_prepare_disabled and six.PY2:
-      raise NotImplementedError(
-          "TFDS has dropped `builder.download_and_prepare` support for "
-          "Python 2. Please update your code to Python 3.")
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(str(v) for v in self.versions
@@ -473,7 +488,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     ```
 
     Args:
-      split: Which split of the data to load (e.g. `'train'`, `'test'`
+      split: Which split of the data to load (e.g. `'train'`, `'test'`,
         `['train', 'test']`, `'train[80%:]'`,...). See our
         [split API guide](https://www.tensorflow.org/datasets/splits).
         If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
@@ -667,33 +682,36 @@ class DatasetBuilder(registered.RegisteredDataset):
     )
     all_data_dirs = constants.list_data_dirs(given_data_dir=given_data_dir)
 
-    all_version_dirs = set()
+    all_versions = set()
     requested_version_dirs = {}
     for data_dir_root in all_data_dirs:
       # List all existing versions
-      all_version_dirs.update(
-          _list_all_version_dirs(os.path.join(data_dir_root, builder_dir)))
-      # Check for existance of the requested dir
-      requested_version_dir = os.path.join(data_dir_root, version_dir)
-      if requested_version_dir in all_version_dirs:
-        requested_version_dirs[data_dir_root] = requested_version_dir
+      full_builder_dir = os.path.join(data_dir_root, builder_dir)
+      data_dir_versions = set(utils.version.list_all_versions(full_builder_dir))
+      # Check for existance of the requested version
+      if self.version in data_dir_versions:
+        requested_version_dirs[data_dir_root] = os.path.join(
+            data_dir_root, version_dir
+        )
+      all_versions.update(data_dir_versions)
 
     if len(requested_version_dirs) > 1:
       raise ValueError(
           "Dataset was found in more than one directory: {}. Please resolve "
           "the ambiguity by explicitly specifying `data_dir=`."
-          "".format(requested_version_dirs))
+          "".format(requested_version_dirs.values())
+      )
     elif len(requested_version_dirs) == 1:  # The dataset is found once
       return next(iter(requested_version_dirs.items()))
 
     # No dataset found, use default directory
     data_dir = os.path.join(default_data_dir, version_dir)
-    if all_version_dirs:
+    if all_versions:
       logging.warning(
           "Found a different version of the requested dataset:\n"
           "%s\n"
           "Using %s instead.",
-          "\n".join(sorted(all_version_dirs)),
+          "\n".join(str(v) for v in sorted(all_versions)),
           data_dir
       )
     return default_data_dir, data_dir
@@ -721,6 +739,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         ), attrs=["bold"])
 
   @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
   def _info(self):
     """Construct the DatasetInfo object. See `DatasetInfo` for details.
 
@@ -733,6 +753,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
   def _download_and_prepare(self, dl_manager, download_config=None):
     """Downloads and prepares dataset for reading.
 
@@ -748,6 +770,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
   def _as_dataset(
       self, split, decoders=None, read_config=None, shuffle_files=False):
     """Constructs a `tf.data.Dataset`.
@@ -771,29 +795,36 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _make_download_manager(self, download_dir, download_config):
     """Creates a new download manager object."""
-    download_dir = download_dir or os.path.join(self._data_dir_root,
-                                                "downloads")
-    extract_dir = (download_config.extract_dir or
-                   os.path.join(download_dir, "extracted"))
+    download_dir = (
+        download_dir or os.path.join(self._data_dir_root, "downloads")
+    )
+    extract_dir = (
+        download_config.extract_dir or os.path.join(download_dir, "extracted")
+    )
+    manual_dir = (
+        download_config.manual_dir or os.path.join(download_dir, "manual")
+    )
 
-    # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
-    if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
-      manual_dir = (
-          download_config.manual_dir or os.path.join(download_dir, "manual"))
+    if download_config.register_checksums:
+      # Note: Error will be raised here if user try to record checksums
+      # from a `zipapp`
+      register_checksums_path = utils.to_write_path(self._checksums_path)
     else:
-      manual_dir = None
+      register_checksums_path = None
 
     return download.DownloadManager(
-        dataset_name=self.name,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
         url_infos=self.url_infos,
-        manual_dir_instructions=utils.dedent(self.MANUAL_DOWNLOAD_INSTRUCTIONS),
+        manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_checksums_validation=download_config.force_checksums_validation,
         register_checksums=download_config.register_checksums,
+        register_checksums_path=register_checksums_path,
+        verify_ssl=download_config.verify_ssl,
+        dataset_name=self.name,
     )
 
   @property
@@ -844,24 +875,6 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise ValueError(
           "Names in BUILDER_CONFIGS must not be duplicated. Got %s" % names)
     return config_dict
-
-
-def _list_all_version_dirs(root_dir):
-  """Lists all dataset versions present on disk."""
-  if not tf.io.gfile.exists(root_dir):
-    return []
-
-  def _is_version_valid(version):
-    try:
-      return utils.Version(version) and True
-    except ValueError:  # Invalid version (ex: incomplete data dir)
-      return False
-
-  return [  # Return all version dirs
-      os.path.join(root_dir, version)
-      for version in tf.io.gfile.listdir(root_dir)
-      if _is_version_valid(version)
-  ]
 
 
 class FileReaderBuilder(DatasetBuilder):

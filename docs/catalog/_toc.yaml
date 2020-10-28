@@ -2,6 +2,8 @@ toc:
 - path: /datasets/catalog/overview
   title: Overview
 - section:
+  - path: /datasets/catalog/accentdb
+    title: accentdb
   - path: /datasets/catalog/common_voice
     title: common_voice
   - path: /datasets/catalog/crema_d
@@ -13,10 +15,8 @@ toc:
   - path: /datasets/catalog/groove
     title: groove
   - path: /datasets/catalog/gtzan
-    status: nightly
     title: gtzan
   - path: /datasets/catalog/gtzan_music_speech
-    status: nightly
     title: gtzan_music_speech
   - path: /datasets/catalog/librispeech
     title: librispeech
@@ -31,7 +31,6 @@ toc:
   - path: /datasets/catalog/speech_commands
     title: speech_commands
   - path: /datasets/catalog/spoken_digit
-    status: nightly
     title: spoken_digit
   - path: /datasets/catalog/tedlium
     title: tedlium
@@ -42,7 +41,6 @@ toc:
   - path: /datasets/catalog/voxforge
     title: voxforge (manual)
   - path: /datasets/catalog/yes_no
-    status: nightly
     title: yes_no
   title: Audio
 - section:
@@ -53,7 +51,6 @@ toc:
   - path: /datasets/catalog/arc
     title: arc
   - path: /datasets/catalog/bccd
-    status: nightly
     title: bccd
   - path: /datasets/catalog/binarized_mnist
     title: binarized_mnist
@@ -61,10 +58,12 @@ toc:
     title: celeb_a
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
+  - path: /datasets/catalog/cityscapes
+    status: nightly
+    title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/clic
-    status: nightly
     title: clic
   - path: /datasets/catalog/coil100
     title: coil100
@@ -163,7 +162,6 @@ toc:
   - path: /datasets/catalog/imagenet_a
     title: imagenet_a
   - path: /datasets/catalog/imagenet_r
-    status: nightly
     title: imagenet_r
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
@@ -234,7 +232,6 @@ toc:
   - path: /datasets/catalog/coco
     title: coco
   - path: /datasets/catalog/coco_captions
-    status: nightly
     title: coco_captions
   - path: /datasets/catalog/kitti
     title: kitti
@@ -253,43 +250,42 @@ toc:
   - path: /datasets/catalog/ai2_arc
     title: ai2_arc
   - path: /datasets/catalog/ai2_arc_with_ir
-    status: nightly
     title: ai2_arc_with_ir
   - path: /datasets/catalog/coqa
-    status: nightly
     title: coqa
   - path: /datasets/catalog/cosmos_qa
     title: cosmos_qa
   - path: /datasets/catalog/mctaco
     title: mctaco
+  - path: /datasets/catalog/mlqa
+    status: nightly
+    title: mlqa
   - path: /datasets/catalog/natural_questions
     title: natural_questions
   - path: /datasets/catalog/natural_questions_open
-    status: nightly
     title: natural_questions_open
   - path: /datasets/catalog/qasc
-    status: nightly
     title: qasc
   - path: /datasets/catalog/squad
     title: squad
   - path: /datasets/catalog/trivia_qa
     title: trivia_qa
   - path: /datasets/catalog/tydi_qa
-    status: nightly
     title: tydi_qa
   - path: /datasets/catalog/web_questions
     title: web_questions
   - path: /datasets/catalog/xquad
-    status: nightly
     title: xquad
   title: Question answering
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
+  - path: /datasets/catalog/e2e_cleaned
+    status: nightly
+    title: e2e_cleaned
   - path: /datasets/catalog/forest_fires
     title: forest_fires
   - path: /datasets/catalog/genomics_ood
-    status: nightly
     title: genomics_ood
   - path: /datasets/catalog/german_credit_numeric
     title: german_credit_numeric
@@ -300,17 +296,17 @@ toc:
   - path: /datasets/catalog/movie_lens
     title: movie_lens
   - path: /datasets/catalog/movielens
-    status: nightly
     title: movielens
   - path: /datasets/catalog/radon
-    status: nightly
     title: radon
   - path: /datasets/catalog/rock_you
     title: rock_you
   - path: /datasets/catalog/titanic
     title: titanic
-  - path: /datasets/catalog/wine_quality
+  - path: /datasets/catalog/wiki_bio
     status: nightly
+    title: wiki_bio
+  - path: /datasets/catalog/wine_quality
     title: wine_quality
   title: Structured
 - section:
@@ -349,14 +345,12 @@ toc:
   title: Summarization
 - section:
   - path: /datasets/catalog/ag_news_subset
-    status: nightly
     title: ag_news_subset
   - path: /datasets/catalog/anli
     title: anli
   - path: /datasets/catalog/blimp
     title: blimp
   - path: /datasets/catalog/bool_q
-    status: nightly
     title: bool_q
   - path: /datasets/catalog/c4
     title: c4 (manual)
@@ -379,15 +373,18 @@ toc:
   - path: /datasets/catalog/glue
     title: glue
   - path: /datasets/catalog/goemotions
-    status: nightly
     title: goemotions
   - path: /datasets/catalog/gpt3
-    status: nightly
     title: gpt3
+  - path: /datasets/catalog/hellaswag
+    title: hellaswag
   - path: /datasets/catalog/imdb_reviews
     title: imdb_reviews
   - path: /datasets/catalog/irc_disentanglement
     title: irc_disentanglement
+  - path: /datasets/catalog/lambada
+    status: nightly
+    title: lambada
   - path: /datasets/catalog/librispeech_lm
     title: librispeech_lm
   - path: /datasets/catalog/lm1b
@@ -403,10 +400,8 @@ toc:
   - path: /datasets/catalog/openbookqa
     title: openbookqa
   - path: /datasets/catalog/paws_wiki
-    status: nightly
     title: paws_wiki
   - path: /datasets/catalog/paws_x_wiki
-    status: nightly
     title: paws_x_wiki
   - path: /datasets/catalog/pg19
     title: pg19
@@ -415,23 +410,23 @@ toc:
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
   - path: /datasets/catalog/salient_span_wikipedia
-    status: nightly
     title: salient_span_wikipedia
   - path: /datasets/catalog/scan
     title: scan
   - path: /datasets/catalog/scicite
     title: scicite
   - path: /datasets/catalog/sentiment140
-    status: nightly
     title: sentiment140
   - path: /datasets/catalog/snli
     title: snli
+  - path: /datasets/catalog/story_cloze
+    status: nightly
+    title: story_cloze (manual)
   - path: /datasets/catalog/super_glue
     title: super_glue
   - path: /datasets/catalog/tiny_shakespeare
     title: tiny_shakespeare
   - path: /datasets/catalog/trec
-    status: nightly
     title: trec
   - path: /datasets/catalog/wiki40b
     title: wiki40b

@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.core.features.image_feature."""
 
 import os
+import pathlib
 
 from absl.testing import parameterized
 import numpy as np
@@ -72,6 +73,11 @@ class ImageFeatureTest(
                 value=img_file_path,
                 expected=img_file_expected_content,
             ),
+            # File Path
+            testing.FeatureExpectationItem(
+                value=pathlib.Path(img_file_path),
+                expected=img_file_expected_content,
+            ),
             # 'img' shape can be dynamic
             testing.FeatureExpectationItem(
                 value=img_other_shape,
@@ -96,7 +102,7 @@ class ImageFeatureTest(
                 raise_msg='are incompatible',
             ),
         ],
-        test_attributes=dict(_encoding_format='png')
+        test_attributes=dict(_encoding_format=None)
     )
 
   def test_image_shaped(self):
@@ -105,7 +111,7 @@ class ImageFeatureTest(
 
     self.assertFeature(
         # Image with statically defined shape
-        feature=features_lib.Image(shape=(32, 64, 3)),
+        feature=features_lib.Image(shape=(32, 64, 3), encoding_format='png'),
         shape=(32, 64, 3),
         dtype=tf.uint8,
         tests=[

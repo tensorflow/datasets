@@ -33,16 +33,19 @@ python3 -m tensorflow_datasets.scripts.cleanup.refactor_dataset_as_folder
 
 """
 
-import itertools
-import pathlib
 import shutil
 from typing import Type
 
 from absl import app
+from absl import flags
 import dataclasses
 import tensorflow_datasets as tfds
 
-TFDS_PATH = pathlib.Path(tfds.core.utils.tfds_dir())
+flags.DEFINE_string('datasets', None, 'Datasets to convert')
+
+FLAGS = flags.FLAGS
+
+TFDS_PATH = tfds.core.utils.tfds_write_path()
 
 
 @dataclasses.dataclass(frozen=True)
@@ -57,9 +60,9 @@ class BuilderCodeInfo:
     cls_name: Dataset name, CamelCase (`MyDataset`)
     type: Dataset type (e.g. `image`, `text`, `object_detection`)
   """
-  file: pathlib.Path
-  dir: pathlib.Path
-  dst: pathlib.Path
+  file: tfds.core.ReadWritePath
+  dir: tfds.core.ReadWritePath
+  dst: tfds.core.ReadWritePath
   name: str
   cls_name: str
   type: str
@@ -68,7 +71,7 @@ class BuilderCodeInfo:
   def from_builder_cls(
       cls, builder_cls: Type[tfds.core.DatasetBuilder]
   ) -> 'BuilderCodeInfo':
-    path = _extract_tfds_path(builder_cls.code_path)
+    path = tfds.core.utils.to_write_path(builder_cls.code_path)
     return cls(
         file=path,
         dir=path.parent,
@@ -82,15 +85,10 @@ class BuilderCodeInfo:
 # Util functions
 
 
-def _extract_tfds_path(path: pathlib.Path) -> pathlib.Path:
-  """Convert read-only path (from bazel run) to writable path."""
-  # This convert the read-only path (when running with Bazel to writable path)
-  parts = reversed(path.parts)
-  parts = list(itertools.takewhile(lambda s: s != 'tensorflow_datasets', parts))
-  return TFDS_PATH.joinpath(*reversed(parts))
-
-
-def _rename_dir(src: pathlib.Path, dst: pathlib.Path) -> None:
+def _rename_dir(
+    src: tfds.core.ReadWritePath,
+    dst: tfds.core.ReadWritePath,
+) -> None:
   """Equivalent of `src.rename(dst)`."""
   # src.rename(dst) creates `Invalid cross-device link` on some remote file
   # systems, so uses manual operation instead.
@@ -179,7 +177,7 @@ def refactor_dataset(ds_name: str) -> None:
 
 def refactor_datasets() -> None:
   """Refactoring all dataset into one folder."""
-  for ds_name in tfds.list_builders():
+  for ds_name in FLAGS.datasets.split(',') or tfds.list_builders():
     refactor_dataset(ds_name)
 
 

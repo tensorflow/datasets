@@ -1,0 +1,1 @@
+{"ind": 30, "activity_label": "Soccer", "ctx_a": "A woman kicked a ball on the soccer field.", "ctx_b": "she", "ctx": "A woman kicked a ball on a soccer field. she", "split": "test", "split_type": "indomain", "label": 3, "endings": ["is baking a cake.", "is climbing a mountain.", "wants go for a hike.", "scores a goal."], "source_id": "abc"}

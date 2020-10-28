@@ -12,11 +12,6 @@
 
 # `imagenet_v2`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 ImageNet-v2 is an ImageNet test set (10 per class) collected by closely
@@ -93,30 +88,28 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## imagenet_v2/matched-frequency (default config)
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 ## imagenet_v2/threshold-0.7
 
 *   **Versions**:
 
-    *   **`0.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`0.1.1`** (default): No release notes.
 
 ## imagenet_v2/topimages
 
 *   **Versions**:
 
-    *   **`0.1.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`0.1.1`** (default): No release notes.

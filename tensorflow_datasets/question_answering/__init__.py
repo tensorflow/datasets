@@ -20,6 +20,7 @@ from tensorflow_datasets.question_answering.ai2_arc_with_ir import Ai2ArcWithIR
 from tensorflow_datasets.question_answering.coqa import Coqa
 from tensorflow_datasets.question_answering.cosmos_qa import CosmosQA
 from tensorflow_datasets.question_answering.mctaco import Mctaco
+from tensorflow_datasets.question_answering.mlqa import Mlqa
 from tensorflow_datasets.question_answering.natural_questions import NaturalQuestions
 from tensorflow_datasets.question_answering.natural_questions_open import NaturalQuestionsOpen
 from tensorflow_datasets.question_answering.qasc import Qasc

@@ -107,7 +107,6 @@ class DatasetBuilderTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls.builder = DummyDatasetSharedGenerator(
         data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
     cls.builder.download_and_prepare()
@@ -484,22 +483,12 @@ class BuilderPickleTest(testing.TestCase):
 
 class BuilderRestoreGcsTest(testing.TestCase):
 
-  @classmethod
-  def setUpClass(cls):
-    super(BuilderRestoreGcsTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
-
-  @classmethod
-  def tearDownClass(cls):
-    dataset_builder._is_py2_download_and_prepare_disabled = True
-    super(BuilderRestoreGcsTest, cls).tearDownClass()
-
   def setUp(self):
     super(BuilderRestoreGcsTest, self).setUp()
 
     def load_mnist_dataset_info(self):
       mnist_info_path = os.path.join(
-          utils.tfds_dir(),
+          utils.tfds_path(),
           "testing/test_data/dataset_info/mnist/3.0.1",
       )
       mnist_info_path = os.path.normpath(mnist_info_path)
@@ -613,7 +602,6 @@ class DatasetBuilderReadTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(DatasetBuilderReadTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
@@ -621,7 +609,6 @@ class DatasetBuilderReadTest(testing.TestCase):
   @classmethod
   def tearDownClass(cls):
     super(DatasetBuilderReadTest, cls).tearDownClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = True
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):

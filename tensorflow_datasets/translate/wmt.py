@@ -792,7 +792,7 @@ def _parse_parallel_sentences(f1, f2):
     if split_path[-1] == "gz":
       lang = split_path[-2]
       with tf.io.gfile.GFile(path, "rb") as f, gzip.GzipFile(fileobj=f) as g:
-        return g.read().decode("utf-8").splitlines(), lang
+        return g.read().decode("utf-8").split("\n"), lang
 
     if split_path[-1] == "txt":
       # CWMT
@@ -801,7 +801,7 @@ def _parse_parallel_sentences(f1, f2):
     else:
       lang = split_path[-1]
     with tf.io.gfile.GFile(path) as f:
-      return f.read().splitlines(), lang
+      return f.read().split("\n"), lang
 
   def _parse_sgm(path):
     """Returns sentences from a single SGML file."""
@@ -848,9 +848,9 @@ def _parse_parallel_sentences(f1, f2):
 
 def _parse_frde_bitext(fr_path, de_path):
   with tf.io.gfile.GFile(fr_path) as f:
-    fr_sentences = f.read().splitlines()
+    fr_sentences = f.read().split("\n")
   with tf.io.gfile.GFile(de_path) as f:
-    de_sentences = f.read().splitlines()
+    de_sentences = f.read().split("\n")
   assert len(fr_sentences) == len(de_sentences), (
       "Sizes do not match: %d vs %d for %s vs %s." % (
           len(fr_sentences), len(de_sentences), fr_path, de_path))

@@ -15,6 +15,7 @@
 
 """Tests for py_utils."""
 
+import collections
 import hashlib
 import os
 
@@ -179,11 +180,6 @@ class PyUtilsTest(testing.TestCase):
           'a/b': 2,  # Collision
       })
 
-  def test_tfds_dir(self):
-    """Test the proper suffix only, since the prefix can vary."""
-    self.assertEqual(
-        os.path.basename(py_utils.tfds_dir()), 'tensorflow_datasets')
-
   def test_reraise(self):
 
     class CustomError(Exception):
@@ -246,5 +242,48 @@ class GetClassPathUrlTest(testing.TestCase):
         (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'))
 
 
-if __name__ == '__main__':
-  testing.test_main()
+def _flatten_with_path(v):
+  return list(py_utils.flatten_with_path(v))
+
+
+def test_flatten_with_path():
+  """Test that the flatten function works as expected."""
+  assert _flatten_with_path([{'foo': 42}]) == [((0, 'foo'), 42)]
+
+  assert _flatten_with_path('value') == [((), 'value')]
+  assert _flatten_with_path({'key': 'value'}) == [(('key',), 'value')]
+  # Order doesn't matter
+  ordered_dict1 = collections.OrderedDict(
+      [('key1', 'value1'), ('key2', 'value2')]
+  )
+  ordered_dict2 = collections.OrderedDict(
+      [('key2', 'value2'), ('key1', 'value1')]
+  )
+  expected_result = [(('key1',), 'value1'), (('key2',), 'value2')]
+  assert _flatten_with_path(ordered_dict1) == expected_result
+  assert _flatten_with_path(ordered_dict2) == expected_result
+
+  complex_dict = {
+      'key': 'value',
+      'nested': {
+          'subkey': ['subvalue0', 'subvalue1'],
+          'subnested': {
+              'subsubkey1': 'subsubvalue1',
+              'subsubkey2': 'subsubvalue2',
+          },
+      },
+      'key2': 'value2',
+  }
+  assert _flatten_with_path(complex_dict) == [
+      (('key',), 'value'),
+      (('key2',), 'value2'),
+      (('nested', 'subkey', 0), 'subvalue0'),
+      (('nested', 'subkey', 1), 'subvalue1'),
+      (('nested', 'subnested', 'subsubkey1',), 'subsubvalue1'),
+      (('nested', 'subnested', 'subsubkey2',), 'subsubvalue2'),
+  ]
+  # Order is consistent with tf.nest.flatten
+  assert (
+      [v for _, v in _flatten_with_path(complex_dict)]
+      == tf.nest.flatten(complex_dict)
+  )

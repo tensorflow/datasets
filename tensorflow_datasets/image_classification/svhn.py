@@ -38,11 +38,13 @@ year = {2011}
 class SvhnCropped(tfds.core.GeneratorBasedBuilder):
   """Street View House Numbers (SVHN) Dataset, cropped version."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.1.0"),
   ]
+  RELEASE_NOTES = {
+      "3.1.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     features_dict = {
