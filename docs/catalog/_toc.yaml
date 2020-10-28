@@ -405,6 +405,9 @@ toc:
     title: paws_x_wiki
   - path: /datasets/catalog/pg19
     title: pg19
+  - path: /datasets/catalog/piqa
+    status: nightly
+    title: piqa
   - path: /datasets/catalog/qa4mre
     title: qa4mre
   - path: /datasets/catalog/reddit_disentanglement
