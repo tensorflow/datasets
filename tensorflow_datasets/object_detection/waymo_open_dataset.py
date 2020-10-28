@@ -15,7 +15,6 @@
 
 """The Waymo Open Dataset. See waymo.com/open."""
 
-import io
 import os
 from absl import logging
 import tensorflow.compat.v2 as tf
