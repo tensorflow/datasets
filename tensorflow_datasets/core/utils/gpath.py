@@ -89,6 +89,16 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
     """Returns the abolute path."""
     return self._new(posixpath.abspath(self._path_str))
 
+  def rglob(self: _P, pattern: str) -> Iterator[_P]:
+    """
+    Yielding all matching files (of any kind) recursively.
+    """
+    yield from self.glob(pattern)
+    if '**' in pattern:
+      for f in self.iterdir():
+        if f.is_dir():
+          yield from f.rglob(pattern)
+
   def glob(self: _P, pattern: str) -> Iterator[_P]:
     """Yielding all matching files (of any kind)."""
     for f in tf.io.gfile.glob(posixpath.join(self._path_str, pattern)):
