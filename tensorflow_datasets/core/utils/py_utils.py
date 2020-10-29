@@ -30,7 +30,8 @@ import shutil
 import string
 import textwrap
 import threading
-from typing import Any, Callable, Iterator, List, NoReturn, Tuple, TypeVar, Union
+import typing
+from typing import Any, Callable, Iterator, List, NoReturn, Tuple, Type, TypeVar, Union
 import uuid
 
 from six.moves import urllib
@@ -146,6 +147,16 @@ class memoized_property(property):  # pylint: disable=invalid-name
       cached = self.fget(obj)  # pytype: disable=attribute-error
       setattr(obj, attr, cached)
     return cached
+
+
+if typing.TYPE_CHECKING:
+  # TODO(b/171883689): There is likelly better way to annotate descriptors
+
+  def classproperty(fn: Callable[[Type[Any]], T]) -> T:  # pylint: disable=function-redefined
+    return fn(type(None))
+
+  def memoized_property(fn: Callable[[Any], T]) -> T:  # pylint: disable=function-redefined
+    return fn(None)
 
 
 def map_nested(function, data_struct, dict_only=False, map_tuple=False):

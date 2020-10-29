@@ -29,6 +29,7 @@ import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -287,7 +288,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return None
 
   @utils.memoized_property
-  def info(self):
+  def info(self) -> dataset_info.DatasetInfo:
     """`tfds.core.DatasetInfo` for this builder."""
     # Ensure .info hasn't been called before versioning is set-up
     # Otherwise, backward compatibility cannot be guaranteed as some code will
