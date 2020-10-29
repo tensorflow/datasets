@@ -555,3 +555,44 @@ class ReadInstruction(object):
     """
     return [_rel_to_abs_instr(rel_instr, name2len)
             for rel_instr in self._relative_instructions]
+
+  def split(self,
+            name2len: Dict[str, int],
+            num_splits: int,
+            *,
+            drop_remainder: bool = True):
+    """Splits the instructions into `num_splits` consecutive instructions.
+
+    Args:
+      name2len: dict associating split names to number of examples.
+      num_splits: Number of splits.
+      drop_remainder: If True drops some examples at the end if the total number
+        of examples cannot be divided by `num_splits`. If False some splits will
+        contain an additional example.
+
+    Returns:
+      List of `num_splits`  ReadInstruction.
+    """
+    splits = num_splits * [None]
+    for instr in self.to_absolute(name2len):
+      num_examples = instr.to - instr.from_
+      num_examples_per_split = (instr.to - instr.from_) // num_splits
+      for i in range(num_splits):
+        start = instr.from_ + num_examples_per_split * i
+        end = instr.from_ + num_examples_per_split * (i + 1)
+
+        # Handle remaining examples.
+        num_unused_examples = num_examples - num_examples_per_split * num_splits
+        if num_unused_examples and not drop_remainder:
+          # The first `num_unused_examples` split get one extra example.
+          start += min(i, num_unused_examples)
+          end += min(i + 1, num_unused_examples)
+
+        if splits[i] is None:
+          splits[i] = ReadInstruction(
+              instr.splitname, from_=start, to=end, unit='abs')
+        else:
+          splits[i] += ReadInstruction(
+              instr.splitname, from_=start, to=end, unit='abs')
+
+    return splits

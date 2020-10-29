@@ -295,6 +295,31 @@ class ReadInstructionTest(testing.TestCase):
                                             rounding='pct1_dropremainder')
       ri.to_absolute(self.splits)
 
+  def test_split(self):
+    ri = tfrecords_reader.ReadInstruction.from_spec('train[40%:60%]')
+    ris = ri.split(self.splits, 4)
+    self.assertLen(ris, 4)
+    self.check_from_ri(ris[0], [('train', 80, 90)])
+    self.check_from_ri(ris[1], [('train', 90, 100)])
+    self.check_from_ri(ris[2], [('train', 100, 110)])
+    self.check_from_ri(ris[3], [('train', 110, 120)])
+
+  def test_split_drop_remainder(self):
+    ri = tfrecords_reader.ReadInstruction.from_spec('train[40%:60%]')
+    ris = ri.split(self.splits, 3)
+    self.assertLen(ris, 3)
+    self.check_from_ri(ris[0], [('train', 80, 93)])
+    self.check_from_ri(ris[1], [('train', 93, 106)])
+    self.check_from_ri(ris[2], [('train', 106, 119)])
+
+  def test_split_not_drop_remainder(self):
+    ri = tfrecords_reader.ReadInstruction.from_spec('train[40%:60%]')
+    ris = ri.split(self.splits, 3, drop_remainder=False)
+    self.assertLen(ris, 3)
+    self.check_from_ri(ris[0], [('train', 80, 94)])
+    self.check_from_ri(ris[1], [('train', 94, 107)])
+    self.check_from_ri(ris[2], [('train', 107, 120)])
+
 
 class ReaderTest(testing.TestCase):
 
