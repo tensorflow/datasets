@@ -49,8 +49,8 @@ represented as a dictionary with the following keys:
 
 _CONFIG_VERSION = {
     'matched-frequency': tfds.core.Version('1.0.0'),
-    'threshold-0.7': tfds.core.Version('0.1.1'),
-    'topimages': tfds.core.Version('0.1.1'),
+    'threshold-0.7': tfds.core.Version('1.0.0'),
+    'topimages': tfds.core.Version('1.0.0'),
 }
 _ROOT_URL = 'https://s3-us-west-2.amazonaws.com/imagenetv2public'
 _IMAGENET_V2_URLS = {
