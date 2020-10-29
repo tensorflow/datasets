@@ -51,6 +51,8 @@ class ImageFeatureTest(
     img_file_path = os.path.join(
         os.path.dirname(__file__), '../../testing/test_data', filename
     )
+    with tf.io.gfile.GFile(img_file_path, 'rb') as f:
+      img_byte_content = f.read()
     img_file_expected_content = np.array([  # see tests_data/README.md
         [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
         [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
@@ -76,6 +78,11 @@ class ImageFeatureTest(
             # File Path
             testing.FeatureExpectationItem(
                 value=pathlib.Path(img_file_path),
+                expected=img_file_expected_content,
+            ),
+            # Images bytes
+            testing.FeatureExpectationItem(
+                value=img_byte_content,
                 expected=img_file_expected_content,
             ),
             # 'img' shape can be dynamic

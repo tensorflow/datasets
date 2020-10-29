@@ -147,6 +147,8 @@ class Image(feature.FeatureConnector):
       image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
       with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
+    elif isinstance(image_or_path_or_fobj, bytes):
+      encoded_image = image_or_path_or_fobj
     else:
       encoded_image = image_or_path_or_fobj.read()
     # If encoding is explicitly set, should verify that bytes match encoding.
