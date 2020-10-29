@@ -23,10 +23,11 @@ import io
 import os
 import re
 from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
+import urllib
+
 import promise
 import requests
 
-from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
@@ -191,7 +192,7 @@ class _Downloader(object):
     except tf.errors.UnimplementedError:
       pass
 
-    with _open_url(url, verify) as (response, iter_content):
+    with _open_url(url, verify=verify) as (response, iter_content):
       fname = _get_filename(response)
       path = os.path.join(destination_path, fname)
       size = 0
@@ -223,12 +224,13 @@ class _Downloader(object):
 
 def _open_url(
     url: str,
-    verify: bool = True) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
+    **kwargs: Any,
+) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
   """Context manager to open an url.
 
   Args:
     url: The url to open
-    verify: Whether to verify the SSL certificate.
+    **kwargs: Additional kwargs to forward to `request.get`.
 
   Returns:
     response: The url response with `.url` and `.header` attributes.
@@ -236,17 +238,19 @@ def _open_url(
   """
   # Download FTP urls with `urllib`, otherwise use `requests`
   open_fn = _open_with_urllib if url.startswith('ftp') else _open_with_requests
-  return open_fn(url, verify)
+  return open_fn(url, **kwargs)
 
 
 @contextlib.contextmanager
 def _open_with_requests(
     url: str,
-    verify: bool = True) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+    **kwargs: Any,
+) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  """Open url with request."""
   with requests.Session() as session:
     if _DRIVE_URL.match(url):
       url = _get_drive_url(url, session)
-    with session.get(url, stream=True, verify=verify) as response:
+    with session.get(url, stream=True, **kwargs) as response:
       _assert_status(response)
       yield (response, response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE))
 
@@ -254,8 +258,9 @@ def _open_with_requests(
 @contextlib.contextmanager
 def _open_with_urllib(
     url: str,
-    verify: bool = True) -> Iterator[Tuple[Response, Iterable[bytes]]]:
-  del verify
+    **kwargs: Any,
+) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  del kwargs
   with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
     yield (
         response,

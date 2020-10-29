@@ -171,10 +171,22 @@ def save_url_infos(
   original_data = load_url_infos(path) if path.exists() else {}
   new_data = original_data.copy()
   new_data.update(url_infos)
-  if original_data == new_data:
+  # Compare filenames separatelly, as filename field is eq=False
+  if original_data == new_data and _filenames_equal(original_data, new_data):
     return
   lines = [
       f'{url}\t{url_info.size}\t{url_info.checksum}\t{url_info.filename or ""}\n'
       for url, url_info in sorted(new_data.items())
   ]
   path.write_text(''.join(lines), encoding='UTF-8')
+
+
+def _filenames_equal(
+    left: Dict[str, UrlInfo],
+    right: Dict[str, UrlInfo],
+) -> bool:
+  """Compare filenames."""
+  return all(
+      l.filename == r.filename
+      for _, (l, r) in utils.zip_dict(left, right)
+  )
