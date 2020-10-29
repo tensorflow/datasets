@@ -12,6 +12,11 @@
 
 # `imagenet_v2`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 ImageNet-v2 is an ImageNet test set (10 per class) collected by closely
@@ -48,6 +53,10 @@ as a dictionary with the following keys:
 
 *   **Source code**:
     [`tfds.image_classification.ImagenetV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_v2.py)
+
+*   **Versions**:
+
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
@@ -98,18 +107,6 @@ FeaturesDict({
 
 ## imagenet_v2/matched-frequency (default config)
 
-*   **Versions**:
-
-    *   **`1.0.0`** (default): No release notes.
-
 ## imagenet_v2/threshold-0.7
 
-*   **Versions**:
-
-    *   **`0.1.1`** (default): No release notes.
-
 ## imagenet_v2/topimages
-
-*   **Versions**:
-
-    *   **`0.1.1`** (default): No release notes.
