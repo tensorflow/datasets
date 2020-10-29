@@ -6,6 +6,8 @@ repository).
 Check our [list of datasets](catalog/overview.md) to see if the dataset you want
 is already present.
 
+Note: Googlers, see [tfds-add](http://goto.google.com/tfds-add) guide.
+
 ## Overview
 
 Datasets are distributed in all kinds of formats and in all kinds of places,
@@ -50,8 +52,6 @@ my_dataset/
 ```
 
 Search for `TODO(my_dataset)` here and modify accordingly.
-
-If you're a googler, please use `gtfds new` instead.
 
 ### Dataset example
 
