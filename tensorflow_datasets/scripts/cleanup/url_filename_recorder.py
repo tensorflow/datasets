@@ -56,8 +56,15 @@ def _collect_path_to_url_infos() -> Dict[
   }
 
 
-def _request_filename(url: Url, tqdm_bar: tqdm.tqdm) -> Filename:
+def _request_filename(
+    url: Url,
+    url_info: checksums.UrlInfo,
+    tqdm_bar: tqdm.tqdm,
+) -> Filename:
   """Get filename of dataset at `url`."""
+  if url_info.filename:
+    # tqdm_bar.update(1)
+    return Filename(url_info.filename)
   # Uses `_open_url` for drive urls compatibility
   downloader = tfds.core.download.downloader
   try:
@@ -83,7 +90,6 @@ def _update_url_info(
   """Update the `UrlInfo` with the filename."""
   old_filename = url_info.filename
   if new_filename is None:
-    tqdm.tqdm.write(f'Ignoring {url}')
     return url_info
   if old_filename and old_filename != new_filename:
     tqdm.tqdm.write(
@@ -105,13 +111,13 @@ def main(_):
   logging.info('Start fetching filenames.')
   with futures.ThreadPoolExecutor(max_workers=100) as executor:
     # Query all filenames in parallel
-    iter_all_url_infos = tqdm.tqdm(all_url_infos, desc='Urls sent')
+    iter_all_url_infos = tqdm.tqdm(all_url_infos.items(), desc='Urls sent')
     received_tqdm = tqdm.tqdm(
         desc='Filenames received', total=len(all_url_infos)
     )
     urls_to_filename = {
-        url: executor.submit(_request_filename, url, received_tqdm)
-        for url in iter_all_url_infos
+        url: executor.submit(_request_filename, url, url_info, received_tqdm)
+        for url, url_info in iter_all_url_infos
     }
     # Update and save the new UrlInfo
     for path, url_infos in tqdm.tqdm(
@@ -122,7 +128,6 @@ def main(_):
           url: _update_url_info(url, url_info, urls_to_filename[url].result())
           for url, url_info in url_infos.items()
       }
-      print(path)
       checksums.save_url_infos(path, url_infos)
   received_tqdm.close()
   tqdm.tqdm.write('Url infos updated.')
