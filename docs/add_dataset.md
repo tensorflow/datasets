@@ -55,16 +55,14 @@ Search for `TODO(my_dataset)` here and modify accordingly.
 
 ### Dataset example
 
-All datasets are implemented using a subclasses of `tfds.core.DatasetBuilder`:
+All datasets are implemented as `tfds.core.GeneratorBasedBuilder`, a subclasses
+of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
 
-*   `tfds.core.GeneratorBasedBuilder`: For small/medium datasets which can be
-    generated on a single machine.
-*   `tfds.core.BeamBasedBuilder`: For large datasets, TFDS supports distributed
-    generation with [Apache Beam](https://beam.apache.org/).
-
-This tutorial uses `tfds.core.GeneratorBasedBuilder`, but implementing
-`tfds.core.BeamBasedBuilder` is very similar (see our
-[beam dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
+*   Small/medium datasets which can be generated on a single machine (this
+    tutorial).
+*   Very large datasets which require distributed generation (using
+    [Apache Beam](https://beam.apache.org/)). See our
+    [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
 
 Here is a minimal example of dataset class:
 
@@ -89,11 +87,10 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
     extracted_path = dl_manager.download_and_extract('http://data.org/data.zip')
     train_path = os.path.join(extracted_path, 'train_images')
     test_path = os.path.join(extracted_path, 'test_images')
-    # `**gen_kwargs` are forwarded to `_generate_examples`
-    return [
-        tfds.core.SplitGenerator('train', gen_kwargs=dict(path=train_path)),
-        tfds.core.SplitGenerator('test', gen_kwargs=dict(path=test_path)),
-    ]
+    return {
+        'train': self._generate_examples(path=train_path),
+        'test': self._generate_examples(path=test_path),
+    }
 
   def _generate_examples(self, path) -> Iterator[Tuple[Key, Example]]:
     """Generator of examples for each split."""
@@ -121,7 +118,7 @@ def _info(self):
       Markdown description of the dataset. The text will be automatically
       stripped and dedent.
       """,
-      homepage="https://dataset-homepage.org",
+      homepage='https://dataset-homepage.org',
       features=tfds.features.FeaturesDict({
           'image_description': tfds.features.Text(),
           'image': tfds.features.Image(),
@@ -131,11 +128,11 @@ def _info(self):
       # If there's a common `(input, target)` tuple from the features,
       # specify them here. They'll be used if as_supervised=True in
       # builder.as_dataset.
-      supervised_keys=("image", "label"),
+      supervised_keys=('image', 'label'),
       # Bibtex citation for the dataset
       citation=r"""
       @article{my-awesome-dataset-2020,
-               author = {Smith, John},"}
+               author = {Smith, John},}
       """,
   )
 ```
@@ -215,40 +212,21 @@ def _split_generators(self, dl_manager):
   extracted_path = dl_manager.download_and_extract(...)
 
   # Specify the splits
-  return [
-      tfds.core.SplitGenerator(
-          name=tfds.Split.TRAIN,
-          gen_kwargs={
-              "images_dir_path": os.path.join(extracted_path, "train_imgs"),
-              "labels": os.path.join(extracted_path, "train_labels.csv"),
-          },
+  return {
+      'train': self._generate_examples(
+          images_dir_path=os.path.join(extracted_path, 'train_imgs'),
+          labels=os.path.join(extracted_path, 'train_labels.csv'),
       ),
-      tfds.core.SplitGenerator(
-          name=tfds.Split.TEST,
-          gen_kwargs={
-              "images_dir_path": os.path.join(extracted_path, "test_imgs"),
-              "labels": os.path.join(extracted_path, "test_labels.csv"),
-          },
+      'test': self._generate_examples(
+          images_dir_path=os.path.join(extracted_path, 'test_imgs'),
+          labels=os.path.join(extracted_path, 'test_labels.csv'),
       ),
-  ]
+  }
 ```
-
-`SplitGenerator` describes how a split should be generated. `gen_kwargs`
-will be passed as keyword arguments to `_generate_examples`, which we'll define
-next.
 
 ### `_generate_examples`: Example generator
 
-`_generate_examples` generates the examples for each split from the
-source data. For the `TRAIN` split with the `gen_kwargs` defined above,
-`_generate_examples` will be called as:
-
-```python
-builder._generate_examples(
-    images_dir_path=os.path.join(extracted_path, 'train_imgs'),
-    labels=os.path.join(extracted_path, 'train_labels.csv'),
-)
-```
+`_generate_examples` generates the examples for each split from the source data.
 
 This method will typically read source dataset artifacts (e.g. a CSV file) and
 yield `(key, feature_dict)` tuples that correspond to the features specified in
@@ -272,7 +250,7 @@ def _generate_examples(self, images_dir_path, labels):
       yield image_id, {
           'image_description': row['description'],
           'image': os.path.join(images_dir_path, f'{image_id}.jpeg'),
-          "label": row['label'],
+          'label': row['label'],
       }
 ```
 
@@ -443,8 +421,8 @@ class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
   # then the tests needs to provide the fake output paths relative to the
   # fake data directory
   DL_EXTRACT_RESULT = {
-      "name1": "path/to/file1",  # Relative to dummy_data/my_dataset dir.
-      "name2": "file2",
+      'name1': 'path/to/file1',  # Relative to dummy_data/my_dataset dir.
+      'name2': 'file2',
   }
 
 
