@@ -107,10 +107,12 @@ class MockFs(object):
       yield self
 
   def add_file(self, path, content=None) -> None:
+    path = os.fspath(path)
     content = 'Content of {}'.format(path) if content is None else content
     self.files[path] = content
 
   def _list_directory(self, path):
+    path = os.fspath(path)
     path = path.rstrip(os.path.sep) + os.path.sep  # Make sure path is a `dir/`
     return list({
         # Extract `path/<dirname>/...` -> `<dirname>`
@@ -121,6 +123,7 @@ class MockFs(object):
   @contextlib.contextmanager
   def _open(self, path, mode='r'):
     """Patch `tf.io.gfile.GFile`."""
+    path = os.fspath(path)
     if mode.startswith('w'):
       self.add_file(path, '')
     is_binary = 'b' in mode
@@ -140,6 +143,8 @@ class MockFs(object):
     self.files[path] = new_content.decode('utf-8') if is_binary else new_content  # pytype: disable=attribute-error
 
   def _rename(self, from_, to, overwrite=False):
+    from_ = os.fspath(from_)
+    to = os.fspath(to)
     if not overwrite and to in self.files:
       raise FileExistsError('Cannot overwrite: {} -> {}'.format(from_, to))  # pytype: disable=name-error
     if from_ not in self.files:
@@ -148,6 +153,7 @@ class MockFs(object):
 
   def _exists(self, path: str) -> bool:
     """Returns True, if any file/directory exists."""
+    path = os.fspath(path)
     path = path.rstrip(os.path.sep)  # Normalize path
     # Check full path existence
     if path in self.files:
