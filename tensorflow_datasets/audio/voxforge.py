@@ -209,26 +209,26 @@ class Voxforge(tfds.core.BeamBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
     return (pipeline
             | beam.Create(file_names)
-            | beam.FlatMap(self._generate_examples, dl_manager=dl_manager))
+            | beam.FlatMap(_generate_examples, dl_manager=dl_manager))
 
-  def _generate_examples(self, fname, dl_manager):
-    """Yields examples."""
-    folder, archive_name = os.path.split(fname)
-    speaker_id = archive_name.split('-')[0]
-    label_idx = folder.index('/Trunk') - 2
-    label = folder[label_idx:label_idx + 2]
-    iter_archive = dl_manager.iter_archive(fname)
-    for wav_path, wav_obj in iter_archive:
-      if not wav_path.endswith('.wav'):
-        continue
-      _, wav_name = os.path.split(wav_path)
-      key = '{}_{}_{}'.format(label, archive_name, wav_name[:-len('.wav')])
-      samples, sample_rate = _wav_obj_to_samples(wav_obj)
-      if sample_rate != _SAMPLE_RATE:
-        raise ValueError(
-            f'Data sample rate was {sample_rate}, but must be {_SAMPLE_RATE}')
-      yield key, {
-          'audio': samples,
-          'label': label,
-          'speaker_id': speaker_id}
 
+def _generate_examples(fname, dl_manager):
+  """Yields examples."""
+  folder, archive_name = os.path.split(fname)
+  speaker_id = archive_name.split('-')[0]
+  label_idx = folder.index('/Trunk') - 2
+  label = folder[label_idx:label_idx + 2]
+  iter_archive = dl_manager.iter_archive(fname)
+  for wav_path, wav_obj in iter_archive:
+    if not wav_path.endswith('.wav'):
+      continue
+    _, wav_name = os.path.split(wav_path)
+    key = '{}_{}_{}'.format(label, archive_name, wav_name[:-len('.wav')])
+    samples, sample_rate = _wav_obj_to_samples(wav_obj)
+    if sample_rate != _SAMPLE_RATE:
+      raise ValueError(
+          f'Data sample rate was {sample_rate}, but must be {_SAMPLE_RATE}')
+    yield key, {
+        'audio': samples,
+        'label': label,
+        'speaker_id': speaker_id}

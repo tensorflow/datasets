@@ -29,7 +29,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
 
@@ -307,14 +306,10 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            gen_kwargs={'range_': range(20)}),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            gen_kwargs={'range_': range(20, 30)}),
-    ]
+    return {
+        'train': self._generate_examples(range_=range(20)),
+        'test': self._generate_examples(range_=range(20, 30)),
+    }
 
   def _generate_examples(self, range_):
     for i in range_:
@@ -337,14 +332,10 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            gen_kwargs=dict()),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            gen_kwargs=dict()),
-    ]
+    return {
+        'train': self._generate_examples(),
+        'test': self._generate_examples(),
+    }
 
   def _generate_examples(self):
     for i in range(20):

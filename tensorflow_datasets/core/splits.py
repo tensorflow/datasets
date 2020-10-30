@@ -15,6 +15,7 @@
 
 """Splits related API."""
 
+
 import typing
 from typing import List, Union
 
@@ -224,29 +225,6 @@ def check_splits_equals(splits1, splits2):
         split1.shard_lengths != split2.shard_lengths):
       return False
   return True
-
-
-class SplitGenerator(object):
-  """Defines the split information for the generator.
-
-  This should be used as returned value of
-  `GeneratorBasedBuilder._split_generators`.
-  See `GeneratorBasedBuilder._split_generators` for more info and example
-  of usage.
-  """
-
-  def __init__(self, name, gen_kwargs=None):
-    """Constructs a `SplitGenerator`.
-
-    Args:
-      name: `str`, name of the Split for which the generator will
-        create the examples.
-      gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
-        of the builder.
-    """
-    self.name = name
-    self.gen_kwargs = gen_kwargs or {}
-    self.split_info = SplitInfo(name=str(name))
 
 
 def even_splits(

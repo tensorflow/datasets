@@ -18,10 +18,9 @@
 import abc
 import functools
 import inspect
-import itertools
 import os
 import sys
-from typing import ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Union
 
 from absl import logging
 import dataclasses
@@ -31,12 +30,10 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
-from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tfrecords_reader
-from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
@@ -262,6 +259,11 @@ class DatasetBuilder(registered.RegisteredDataset):
   def data_dir(self):
     return self._data_dir
 
+  @property
+  def _data_path(self) -> type_utils.ReadWritePath:
+    # Instead, should make `_data_dir` be Path everywhere
+    return utils.as_path(self._data_dir)
+
   @utils.classproperty
   @classmethod
   def _checksums_path(cls) -> ReadOnlyPath:
@@ -399,7 +401,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         else:
           self._download_and_prepare(
               dl_manager=dl_manager,
-              download_config=download_config)
+              download_config=download_config,
+          )
 
           # NOTE: If modifying the lines below to put additional information in
           # DatasetInfo, you'll likely also want to update
@@ -740,45 +743,42 @@ class DatasetBuilder(registered.RegisteredDataset):
         ), attrs=["bold"])
 
   @abc.abstractmethod
-  @utils.docs.do_not_doc_in_subclasses
   @utils.docs.doc_private
   def _info(self):
-    """Construct the DatasetInfo object. See `DatasetInfo` for details.
+    """Returns the `tfds.core.DatasetInfo` object.
 
-    Warning: This function is only called once and the result is cached for all
-    following .info() calls.
+    This function is called once and the result is cached for all
+    following calls.
 
     Returns:
-      dataset_info: (DatasetInfo) The dataset information
+      dataset_info: The dataset metadata.
     """
     raise NotImplementedError
 
   @abc.abstractmethod
-  @utils.docs.do_not_doc_in_subclasses
-  @utils.docs.doc_private
   def _download_and_prepare(self, dl_manager, download_config=None):
     """Downloads and prepares dataset for reading.
 
-    This is the internal implementation to overwrite called when user calls
-    `download_and_prepare`. It should download all required data and generate
+    Internal implementation to overwrite when inheriting from DatasetBuilder.
+    Called when `builder.download_and_prepare` is called.
+    It should download all required data and generate
     the pre-processed datasets files.
 
     Args:
-      dl_manager: (DownloadManager) `DownloadManager` used to download and cache
+      dl_manager: `tfds.download.DownloadManager` used to download and cache
         data.
       download_config: `DownloadConfig`, Additional options.
     """
     raise NotImplementedError
 
   @abc.abstractmethod
-  @utils.docs.do_not_doc_in_subclasses
-  @utils.docs.doc_private
   def _as_dataset(
       self, split, decoders=None, read_config=None, shuffle_files=False):
     """Constructs a `tf.data.Dataset`.
 
-    This is the internal implementation to overwrite called when user calls
-    `as_dataset`. It should read the pre-processed datasets files and generate
+    Internal implementation to overwrite when inheriting from DatasetBuilder.
+    Called when `builder.as_dataset` is called.
+    It should read the pre-processed datasets files and generate
     the `tf.data.Dataset` object.
 
     Args:
@@ -915,120 +915,126 @@ class FileReaderBuilder(DatasetBuilder):
     return ds
 
 
-class FileAdapterBuilder(FileReaderBuilder):
-  """Base class for datasets with data generation based on file adapter."""
-
-  @abc.abstractmethod
-  def _split_generators(self, dl_manager):
-    """Specify feature dictionary generators and dataset splits.
-
-    This function returns a list of `SplitGenerator`s defining how to generate
-    data and what splits to use.
-
-    Example:
-
-      return[
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
-              gen_kwargs={'file': 'train_data.zip'},
-          ),
-          tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
-              gen_kwargs={'file': 'test_data.zip'},
-          ),
-      ]
-
-    The above code will first call `_generate_examples(file='train_data.zip')`
-    to write the train data, then `_generate_examples(file='test_data.zip')` to
-    write the test data.
-
-    Datasets are typically split into different subsets to be used at various
-    stages of training and evaluation.
-
-    Note that for datasets without a `VALIDATION` split, you can use a
-    fraction of the `TRAIN` data for evaluation as you iterate on your model
-    so as not to overfit to the `TEST` data.
-
-    For downloads and extractions, use the given `download_manager`.
-    Note that the `DownloadManager` caches downloads, so it is fine to have each
-    generator attempt to download the source data.
-
-    A good practice is to download all data in this function, and then
-    distribute the relevant parts to each split with the `gen_kwargs` argument
-
-    Args:
-      dl_manager: (DownloadManager) Download manager to download the data
-
-    Returns:
-      `list<SplitGenerator>`.
-    """
-    raise NotImplementedError()
-
-  @abc.abstractmethod
-  def _prepare_split(self, split_generator, **kwargs):
-    """Generate the examples and record them on disk.
-
-    Args:
-      split_generator: `SplitGenerator`, Split generator to process
-      **kwargs: Additional kwargs forwarded from _download_and_prepare (ex:
-        beam pipeline)
-    """
-    raise NotImplementedError()
-
-  def _make_split_generators_kwargs(self, prepare_split_kwargs):
-    """Get kwargs for `self._split_generators()` from `prepare_split_kwargs`."""
-    del prepare_split_kwargs
-    return {}
-
-  def _download_and_prepare(self, dl_manager, **prepare_split_kwargs):
-    if not tf.io.gfile.exists(self._data_dir):
-      tf.io.gfile.makedirs(self._data_dir)
-
-    # Generating data for all splits
-    split_dict = splits_lib.SplitDict(dataset_name=self.name)
-    split_generators_kwargs = self._make_split_generators_kwargs(
-        prepare_split_kwargs)
-    for split_generator in self._split_generators(
-        dl_manager, **split_generators_kwargs):
-      if str(split_generator.split_info.name).lower() == "all":
-        raise ValueError(
-            "`all` is a special split keyword corresponding to the "
-            "union of all splits, so cannot be used as key in "
-            "._split_generator()."
-        )
-
-      logging.info("Generating split %s", split_generator.split_info.name)
-      split_dict.add(split_generator.split_info)
-
-      # Prepare split will record examples associated to the split
-      self._prepare_split(split_generator, **prepare_split_kwargs)
-
-    # Update the info object with the splits.
-    self.info.update_splits_if_different(split_dict)
-
-
-class GeneratorBasedBuilder(FileAdapterBuilder):
-  """Base class for datasets with data generation based on dict generators.
+class GeneratorBasedBuilder(FileReaderBuilder):
+  """Base class for datasets with data generation based on file adapter.
 
   `GeneratorBasedBuilder` is a convenience class that abstracts away much
-  of the data writing and reading of `DatasetBuilder`. It expects subclasses to
-  implement generators of feature dictionaries across the dataset splits
-  `_split_generators`. See the method docstrings for details.
+  of the data writing and reading of `DatasetBuilder`.
+
+  It expects subclasses to overwrite `_split_generators` to return a dict of
+  splits, generators. See the method docstrings for details.
 
   """
 
   @abc.abstractmethod
-  def _generate_examples(self, **kwargs):
-    """Default function generating examples for each `SplitGenerator`.
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
+  def _split_generators(
+      self,
+      dl_manager: download.DownloadManager,
+  ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
+    """Downloads the data and returns dataset splits with associated examples.
 
-    This function preprocess the examples from the raw data to the preprocessed
-    dataset files.
-    This function is called once for each `SplitGenerator` defined in
-    `_split_generators`. The examples yielded here will be written on
-    disk.
+    Example:
+
+    ```python
+    def _split_generators(self, dl_manager):
+      path = dl_manager.download_and_extract('http://dataset.org/my_data.zip')
+      return {
+          'train': self._generate_examples(path=f'{path}/train/'),
+          'test': self._generate_examples(path=f'{path}/test/'),
+      }
+    ```
+
+    * If the original dataset do not have predefined `train`, `test`,... splits,
+      this function should only returns a single `train` split here. Users can
+      use the [subsplit API](https://www.tensorflow.org/datasets/splits) to
+      create subsplits (e.g.
+      `tfds.load(..., split=['train[:75%]', 'train[75%:]'])`).
+    * `tfds.download.DownloadManager` caches downloads, so calling `download`
+      on the same url multiple times only download it once.
+    * A good practice is to download all data in this function, and have all the
+      computation inside `_generate_examples`.
+    * Splits are generated in the order defined here. `builder.info.splits` keep
+      the same order.
+    * This function can have an extra `pipeline` kwarg only if some
+      beam preprocessing should be shared across splits. In this case,
+      a dict of `beam.PCollection` should be returned.
+      See `_generate_example` for details.
 
     Args:
-      **kwargs: `dict`, Arguments forwarded from the SplitGenerator.gen_kwargs
+      dl_manager: `tfds.download.DownloadManager` used to download/extract the
+        data
+
+    Returns:
+      The dict of split name, generators. See `_generate_examples` for details
+      about the generator format.
+    """
+    raise NotImplementedError()
+
+  @abc.abstractmethod
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.docs.doc_private
+  def _generate_examples(
+      self, **kwargs: Any
+  ) -> split_builder_lib.SplitGenerator:
+    """Default function to generate examples for each split.
+
+    The function should return a collection of `(key, examples)`. Examples
+    will be encoded are written to disk. See `yields` section for details.
+
+    The function can return/yield:
+
+    * A python generator:
+
+    ```python
+    def _generate_examples(self, path):
+      for filepath in path.iterdir():
+        yield filepath.name, {'image': ..., 'label': ...}
+    ```
+
+    * A `beam.PTransform` of (input_types: [] -> output_types: `KeyExample`):
+    For big datasets and distributed generation. See our Apache Beam
+    [datasets guide](https://www.tensorflow.org/datasets/beam_datasets)
+    for more info.
+
+    ```python
+    def _generate_examples(self, path):
+      return (
+          beam.Create(path.iterdir())
+          | beam.Map(lambda filepath: filepath.name, {'image': ..., ...})
+      )
+    ```
+
+    * A `beam.PCollection`: This should only be used if you need to share some
+    distributed processing accross splits. In this case, you can use the
+    following pattern:
+
+    ```python
+    def _split_generators(self, dl_manager, pipeline):
+      ...
+      # Distributed processing shared across splits
+      pipeline |= beam.Create(path.iterdir())
+      pipeline |= 'SharedPreprocessing' >> beam.Map(_common_processing)
+      ...
+      # Wrap the pipeline inside a ptransform_fn to add `'label' >> ` and avoid
+      # duplicated PTransform nodes names.
+      generate_examples = beam.ptransform_fn(self._generate_examples)
+      return {
+          'train': pipeline | 'train' >> generate_examples(is_train=True)
+          'test': pipeline | 'test' >> generate_examples(is_train=False)
+      }
+
+    def _generate_examples(self, pipeline, is_train: bool):
+      return pipeline | beam.Map(_split_specific_processing, is_train=is_train)
+    ```
+
+    Note: Each split should uses a different tag name (e.g.
+    `'train' >> generate_examples(path)`). Otherwise Beam will raise
+    duplicated name error.
+
+    Args:
+      **kwargs: Arguments from the `_split_generators`
 
     Yields:
       key: `str` or `int`, a unique deterministic example identification key.
@@ -1047,162 +1053,83 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager, download_config):
-    # Extract max_examples_per_split and forward it to _prepare_split
-    super(GeneratorBasedBuilder, self)._download_and_prepare(
-        dl_manager=dl_manager,
+  def _download_and_prepare(
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: download.DownloadConfig,
+  ) -> None:
+    """Generate all splits and returns the computed split infos."""
+    split_builder = split_builder_lib.SplitBuilder(
+        split_dict=self.info.splits,
+        features=self.info.features,
         max_examples_per_split=download_config.max_examples_per_split,
+        beam_options=download_config.beam_options,
+        beam_runner=download_config.beam_runner,
     )
-
-  def _prepare_split(self, split_generator, max_examples_per_split):
-    generator = self._generate_examples(**split_generator.gen_kwargs)
-    split_info = split_generator.split_info
-    if max_examples_per_split is not None:
-      logging.warning("Splits capped at %s examples max.",
-                      max_examples_per_split)
-      generator = itertools.islice(generator, max_examples_per_split)
-    fname = "{}-{}.tfrecord".format(self.name, split_generator.name)
-    fpath = os.path.join(self._data_dir, fname)
-    writer = tfrecords_writer.Writer(self._example_specs, fpath,
-                                     hash_salt=split_generator.name)
-    for key, record in utils.tqdm(generator, unit=" examples",
-                                  total=split_info.num_examples, leave=False):
-      example = self.info.features.encode_example(record)
-      writer.write(key, example)
-    shard_lengths, total_size = writer.finalize()
-    split_generator.split_info.shard_lengths.extend(shard_lengths)
-    split_generator.split_info.num_bytes = total_size
-
-
-class BeamBasedBuilder(FileAdapterBuilder):
-  """Beam based Builder."""
-
-  def __init__(self, *args, **kwargs):
-    super(BeamBasedBuilder, self).__init__(*args, **kwargs)
-    self._beam_writers = {}  # {split: beam_writer} mapping.
-
-  def _make_split_generators_kwargs(self, prepare_split_kwargs):
-    # Pass `pipeline` into `_split_generators()` from `prepare_split_kwargs` if
-    # it's in the call signature of `_split_generators()`.
-    # This allows for global preprocessing in beam.
-    split_generators_kwargs = {}
-    split_generators_arg_names = (
-        inspect.getargspec(self._split_generators).args if six.PY2 else  # pylint: disable=deprecated-method  # pytype: disable=wrong-arg-types
-        inspect.signature(self._split_generators).parameters.keys())
-    if "pipeline" in split_generators_arg_names:
-      split_generators_kwargs["pipeline"] = prepare_split_kwargs["pipeline"]
-    return split_generators_kwargs
-
-  @abc.abstractmethod
-  def _build_pcollection(self, pipeline, **kwargs):
-    """Build the beam pipeline examples for each `SplitGenerator`.
-
-    This function extracts examples from the raw data with parallel transforms
-    in a Beam pipeline. It is called once for each `SplitGenerator` defined in
-    `_split_generators`. The examples from the PCollection will be
-    encoded and written to disk.
-
-    Warning: When running in a distributed setup, make sure that the data
-    which will be read (download_dir, manual_dir,...) and written (data_dir)
-    can be accessed by the workers jobs. The data should be located in a
-    shared filesystem, like GCS.
-
-    Example:
-
-    ```
-    def _build_pcollection(pipeline, extracted_dir):
-      return (
-          pipeline
-          | beam.Create(gfile.io.listdir(extracted_dir))
-          | beam.Map(_process_file)
+    # Wrap the generation inside a context manager.
+    # If `beam` is used during generation (when a pipeline gets created),
+    # the context manager is equivalent to `with beam.Pipeline()`.
+    # Otherwise, this is a no-op.
+    with split_builder.maybe_beam_pipeline():
+      # If the signature has a `pipeline` kwargs, create the pipeline now and
+      # forward it to `self._split_generators`
+      signature = inspect.signature(self._split_generators)
+      if "pipeline" in signature.parameters.keys():
+        optional_pipeline_kwargs = dict(pipeline=split_builder.beam_pipeline)
+      else:
+        optional_pipeline_kwargs = {}
+      split_generators = self._split_generators(  # pylint: disable=unexpected-keyword-arg
+          dl_manager, **optional_pipeline_kwargs
       )
-    ```
-
-    Args:
-      pipeline: `beam.Pipeline`, root Beam pipeline
-      **kwargs: Arguments forwarded from the SplitGenerator.gen_kwargs
-
-    Returns:
-      pcollection: `PCollection`, an Apache Beam PCollection containing the
-        example to send to `self.info.features.encode_example(...)`.
-    """
-    raise NotImplementedError()
-
-  def _download_and_prepare(self, dl_manager, download_config):
-    # Create the Beam pipeline and forward it to _prepare_split
-    beam = lazy_imports_lib.lazy_imports.apache_beam
-
-    if not download_config.beam_runner and not download_config.beam_options:
-      raise ValueError(
-          "The dataset you're trying to generate is using Apache Beam. Beam"
-          "datasets are usually very large and should be generated separately."
-          "Please have a look at"
-          "https://www.tensorflow.org/datasets/beam_datasets#generating_a_beam_dataset"
-          "for instructions."
+      # TODO(tfds): Could be removed one all datasets are migrated.
+      # https://github.com/tensorflow/datasets/issues/2537
+      # Legacy mode (eventually convert list[SplitGeneratorLegacy] -> dict)
+      split_generators = split_builder.normalize_legacy_split_generators(
+          split_generators=split_generators,
+          generator_fn=self._generate_examples,
+          is_beam=isinstance(self, BeamBasedBuilder),
       )
 
-    beam_options = (download_config.beam_options or
-                    beam.options.pipeline_options.PipelineOptions())
-    # Beam type checking assumes transforms multiple outputs are of same type,
-    # which is not our case. Plus it doesn't handle correctly all types, so we
-    # are better without it.
-    beam_options.view_as(
-        beam.options.pipeline_options.TypeOptions).pipeline_type_check = False
-    # Use a single pipeline for all splits
-    with beam.Pipeline(
-        runner=download_config.beam_runner,
-        options=beam_options,
-    ) as pipeline:
-      # TODO(tfds): Should eventually try to add support to
-      # download_config.max_examples_per_split
-      super(BeamBasedBuilder, self)._download_and_prepare(
-          dl_manager,
-          pipeline=pipeline,
-      )
+      # Ensure `all` isn't used as key.
+      _check_split_names(split_generators.keys())
 
-    # Update `info.splits` with number of shards and shard lengths.
-    split_dict = self.info.splits
-    for split_name, beam_writer in self._beam_writers.items():
-      logging.info("Retrieving shard lengths for %s...", split_name)
-      shard_lengths, total_size = beam_writer.finalize()
-      split_info = split_dict[split_name]
-      split_info.shard_lengths.extend(shard_lengths)
-      split_info.num_shards = len(shard_lengths)
-      split_info.num_bytes = total_size
-    logging.info("Updating split info...")
+      # Start generating data for all splits
+      split_info_futures = [
+          split_builder.submit_split_generation(  # pylint: disable=g-complex-comprehension
+              split_name=split_name,
+              generator=generator,
+              path=self._data_path / f"{self.name}-{split_name}.tfrecord",
+          )
+          for split_name, generator
+          in utils.tqdm(split_generators.items(), unit=" splits", leave=False)
+      ]
+    # Finalize the splits (after apache beam completed, if it was used)
+    split_infos = [future.result() for future in split_info_futures]
+
+    # Update the info object with the splits.
+    # TODO(tfds): Should improve the API.
+    split_dict = splits_lib.SplitDict(dataset_name=self.name)
+    for split_info in split_infos:
+      split_dict.add(split_info)
     self.info.update_splits_if_different(split_dict)
 
-  def _prepare_split(self, split_generator, pipeline):
-    beam = lazy_imports_lib.lazy_imports.apache_beam
 
-    if not tf.io.gfile.exists(self._data_dir):
-      tf.io.gfile.makedirs(self._data_dir)
+@utils.docs.deprecated
+class BeamBasedBuilder(GeneratorBasedBuilder):
+  """Beam based Builder.
 
-    split_name = split_generator.split_info.name
-    output_prefix = naming.filename_prefix_for_split(
-        self.name, split_name)
-    output_prefix = os.path.join(self._data_dir, output_prefix)
+  DEPRECATED: Please use `tfds.core.GeneratorBasedBuilder` instead.
+  """
 
-    # To write examples to disk:
-    fname = "{}-{}.tfrecord".format(self.name, split_name)
-    fpath = os.path.join(self._data_dir, fname)
-    beam_writer = tfrecords_writer.BeamWriter(
-        self._example_specs, fpath, hash_salt=split_name)
-    self._beam_writers[split_name] = beam_writer
+  def _generate_examples(
+      self, *args: Any, **kwargs: Any
+  ) -> split_builder_lib.SplitGenerator:
+    return self._build_pcollection(*args, **kwargs)
 
-    encode_example = self.info.features.encode_example
 
-    # Note: We need to wrap the pipeline in a PTransform to avoid re-using the
-    # same label names for each split
-    @beam.ptransform_fn
-    def _build_pcollection(pipeline):
-      """PTransformation which build a single split."""
-      # Encode the PCollection
-      pcoll_examples = self._build_pcollection(
-          pipeline, **split_generator.gen_kwargs)
-      pcoll_examples |= "Encode" >> beam.Map(
-          lambda key_ex: (key_ex[0], encode_example(key_ex[1])))
-      return beam_writer.write_from_pcollection(pcoll_examples)
-
-    # Add the PCollection to the pipeline
-    _ = pipeline | split_name >> _build_pcollection()   # pylint: disable=no-value-for-parameter
+def _check_split_names(split_names: Iterable[str]) -> None:
+  """Check that split names are valid."""
+  if "all" in set(str(s).lower() for s in split_names):
+    raise ValueError(
+        "`all` is a reserved keyword. Split cannot be named like this."
+    )

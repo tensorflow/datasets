@@ -616,7 +616,17 @@ class BeamMetadataDict(MetadataDict):
       item: `beam.pvalue.PValue` or other, the metadata value.
     """
     beam = lazy_imports_lib.lazy_imports.apache_beam
-    if isinstance(item, beam.pvalue.PValue):
+    if isinstance(item, beam.PTransform):
+      # Implementing Beam support might be possible but would
+      # require very careful implementation to avoid computing the
+      # PTransform twice (once for the split and once for the metadata).
+      raise NotImplementedError(
+          "`tfds.core.BeamMetadataDict` can\'t be used on `beam.PTransform`, "
+          "only on `beam.PCollection`. See `_generate_examples` doc on how "
+          "to use `beam.PCollection`, or wrap your `_generate_examples` inside "
+          f"a @beam.ptransform_fn. Got: {key}: {item}"
+      )
+    elif isinstance(item, beam.pvalue.PValue):
       if key in self:
         raise ValueError("Already added PValue with key: %s" % key)
       logging.info("Lazily adding metadata item with Beam: %s", key)
@@ -627,13 +637,16 @@ class BeamMetadataDict(MetadataDict):
               len(item_list))
         item = item_list[0]
         return json.dumps(item)
-      _ = (item
-           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
-           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
-           | "metadata_%s_write" % key >> beam.io.WriteToText(
-               self._temp_filepath(key),
-               num_shards=1,
-               shard_name_template=""))
+      _ = (
+          item
+          | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+          | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+          | "metadata_%s_write" % key >> beam.io.WriteToText(
+              self._temp_filepath(key),
+              num_shards=1,
+              shard_name_template="",
+          )
+      )
     super(BeamMetadataDict, self).__setitem__(key, item)
 
   def save_metadata(self, data_dir):

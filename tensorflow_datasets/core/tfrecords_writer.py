@@ -257,7 +257,7 @@ class BeamWriter(object):
     """
     self._original_state = dict(example_specs=example_specs, path=path,
                                 hash_salt=hash_salt)
-    self._path = path
+    self._path = os.fspath(path)
     self._split_info_path = "%s.split_info.json" % path
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._example_specs = example_specs
