@@ -140,20 +140,32 @@ following concepts:
     and the
     [Apache Beam dependency guide](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/).
 
-### Instructions
+### Instructions (simple)
 
 If you are familiar with the
 [dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md),
-adding a Beam dataset only requires a few modifications:
+adding a Beam dataset only requires to modify the `_generate_examples` function.
+The function should returns a beam object, rather than a generator:
 
-*   Your `DatasetBuilder` will inherit from `tfds.core.BeamBasedBuilder` instead
-    of `tfds.core.GeneratorBasedBuilder`.
-*   Beam datasets should implement the abstract method `_build_pcollection(self,
-    **kwargs)` instead of the method `_generate_examples(self, **kwargs)`.
-    `_build_pcollection` should return a `beam.PCollection` with the examples
-    associated with the split.
-*   Writing a unit test for your Beam dataset is the same as with other
-    datasets.
+Non-beam dataset (`Iterator[KeyExample]`):
+
+```python
+def _generate_examples(self, path):
+  for f in path.iterdir():
+    yield _process_example(f)
+```
+
+Beam dataset (`beam.PTransform` of `() -> KeyExample`):
+
+```python
+def _generate_examples(self, path):
+  return (
+      beam.Create(path.iterdir())
+      | beam.Map(_process_example)
+  )
+```
+
+All the rest can be 100% identical, including tests.
 
 Some additional considerations:
 
@@ -162,19 +174,21 @@ Some additional considerations:
     without having to install Beam.
 *   Be careful with Python closures. When running the pipeline, the `beam.Map`
     and `beam.DoFn` functions are serialized using `pickle` and sent to all
-    workers. This can create bugs; for instance, if you are using a mutable
-    object in your functions which has been declared outside of the function,
-    you may encounter `pickle` errors or unexpected behavior. The fix is
-    typically to avoid mutating closed-over objects.
-*   Using methods on `DatasetBuilder` in the Beam pipeline is fine. However,
-    the way the class is serialized during pickle, changes done to features
-    during creation will be ignored at best.
+    workers. Do not mutable objects inside a `beam.PTransform` if the state has
+    to be shared across workers.
+*   Due to the way `tfds.core.DatasetBuilder` is serialized with pickle,
+    mutating `tfds.core.DatasetBuilder` during data creation will be ignored on
+    the workers (e.g. it's not possible to set `self.info.metadata['offset'] =
+    123` in `_split_generators` and access it from the workers like
+    `beam.Map(lambda x: x + self.info.metadata['offset'])`)
+*   If you need to share some pipeline steps between the splits, you can add add
+    an extra `pipeline: beam.Pipeline` kwarg to `_split_generator` and control
+    the full generation pipeline. See `_generate_examples` documentation of
+    `tfds.core.GeneratorBasedBuilder`.
 
 ### Example
 
-Here is an example of a Beam dataset. For a more complicated real example, have
-a look at the
-[`Wikipedia` dataset](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py).
+Here is an example of a Beam dataset.
 
 ```python
 class DummyBeamDataset(tfds.core.BeamBasedBuilder):
@@ -192,18 +206,12 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     ...
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(file_dir='path/to/train_data/'),
-        ),
-        splits_lib.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(file_dir='path/to/test_data/'),
-        ),
-    ]
+    return {
+        'train': self._generate_examples(file_dir='path/to/train_data/'),
+        'test': self._generate_examples(file_dir='path/to/test_data/'),
+    }
 
-  def _build_pcollection(self, pipeline, file_dir):
+  def _generate_examples(self, file_dir: str):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -215,8 +223,7 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
       }
 
     return (
-        pipeline
-        | beam.Create(tf.io.gfile.listdir(file_dir))
+        beam.Create(tf.io.gfile.listdir(file_dir))
         | beam.Map(_process_example)
     )
 
