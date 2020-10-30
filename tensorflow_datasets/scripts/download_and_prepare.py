@@ -216,8 +216,14 @@ def main(_):
       return
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
+    # Use `config.name` to avoid
+    # https://github.com/tensorflow/datasets/issues/2348
     builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config, **version_kwarg)
+        builder.name,
+        data_dir=FLAGS.data_dir,
+        config=config.name,
+        **version_kwarg,
+    )
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -228,7 +234,7 @@ def main(_):
           builder_for_config = tfds.builder(
               builder.name,
               data_dir=FLAGS.data_dir,
-              config=config,
+              config=config.name,
               **version_kwarg)
           download_and_prepare(builder_for_config)
       else:
