@@ -18,6 +18,7 @@
 import collections
 import json
 import os
+import numpy as np
 
 from absl import logging
 import tensorflow.compat.v2 as tf
@@ -62,7 +63,9 @@ Note:
 
 
 Split = collections.namedtuple(
-    'Split', ['name', 'images', 'annotations', 'annotation_type'])
+    'Split',
+    ['name', 'images', 'annotation_file', 'annotation_download',
+     'annotation_type'])
 
 
 class AnnotationType(object):
@@ -72,6 +75,7 @@ class AnnotationType(object):
   """
   BBOXES = 'bboxes'
   PANOPTIC = 'panoptic'
+  POSE = 'pose'
   NONE = 'none'
 
 
@@ -82,12 +86,14 @@ class CocoConfig(tfds.core.BuilderConfig):
       self,
       splits=None,
       has_panoptic=False,
+      has_pose=False,
       **kwargs):
     super(CocoConfig, self).__init__(
         version=tfds.core.Version('1.1.0'),
         **kwargs)
     self.splits = splits
     self.has_panoptic = has_panoptic
+    self.has_pose = has_pose
 
 
 class Coco(tfds.core.GeneratorBasedBuilder):
@@ -100,27 +106,31 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           splits=[
               Split(
                   name=tfds.Split.TRAIN,
-                  images='train2014',
-                  annotations='annotations_trainval2014',
+                  images=['train2014'],
+                  annotation_file='instances_train2014.json',
+                  annotation_download='annotations_trainval2014',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
                   name=tfds.Split.VALIDATION,
-                  images='val2014',
-                  annotations='annotations_trainval2014',
+                  images=['val2014'],
+                  annotation_file='instances_val2014.json',
+                  annotation_download='annotations_trainval2014',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
                   name=tfds.Split.TEST,
-                  images='test2014',
-                  annotations='image_info_test2014',
+                  images=['test2014'],
+                  annotation_file='image_info_test2014.json',
+                  annotation_download='image_info_test2014',
                   annotation_type=AnnotationType.NONE,
               ),
               # Coco2014 contains an extra test split
               Split(
                   name='test2015',
-                  images='test2015',
-                  annotations='image_info_test2015',
+                  images=['test2015'],
+                  annotation_file='image_info_test2015.json',
+                  annotation_download='image_info_test2015',
                   annotation_type=AnnotationType.NONE,
               ),
           ],
@@ -131,20 +141,23 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           splits=[
               Split(
                   name=tfds.Split.TRAIN,
-                  images='train2017',
-                  annotations='annotations_trainval2017',
+                  images=['train2017'],
+                  annotation_file='instances_train2017.json',
+                  annotation_download='annotations_trainval2017',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
                   name=tfds.Split.VALIDATION,
-                  images='val2017',
-                  annotations='annotations_trainval2017',
+                  images=['val2017'],
+                  annotation_file='instances_val2017.json',
+                  annotation_download='annotations_trainval2017',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
                   name=tfds.Split.TEST,
-                  images='test2017',
-                  annotations='image_info_test2017',
+                  images=['test2017'],
+                  annotation_file='image_info_test2017.json',
+                  annotation_download='image_info_test2017',
                   annotation_type=AnnotationType.NONE,
               ),
           ],
@@ -156,15 +169,52 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           splits=[
               Split(
                   name=tfds.Split.TRAIN,
-                  images='train2017',
-                  annotations='panoptic_annotations_trainval2017',
+                  images=['train2017'],
+                  annotation_file='panoptic_train2017.json',
+                  annotation_download='panoptic_annotations_trainval2017',
                   annotation_type=AnnotationType.PANOPTIC,
               ),
               Split(
                   name=tfds.Split.VALIDATION,
-                  images='val2017',
-                  annotations='panoptic_annotations_trainval2017',
+                  images=['val2017'],
+                  annotation_file='panoptic_val2017.json',
+                  annotation_download='panoptic_annotations_trainval2017',
                   annotation_type=AnnotationType.PANOPTIC,
+              ),
+          ],
+      ),
+      CocoConfig(
+          name='2014_pose',
+          description=DESCRIPTION.format(year=2014),
+          has_pose=True,
+          splits=[
+              Split(
+                  name=tfds.Split.TRAIN,
+                  images=['train2014'],
+                  annotation_file='densepose_coco_2014_train.json',
+                  annotation_download='densepose_coco_2014_train',
+                  annotation_type=AnnotationType.POSE,
+              ),
+              Split(
+                  name='valminusminival2014',
+                  images=['val2014'],
+                  annotation_file='densepose_coco_2014_valminusminival.json',
+                  annotation_download='densepose_coco_2014_valminusminival',
+                  annotation_type=AnnotationType.POSE,
+              ),
+              Split(
+                  name=tfds.Split.VALIDATION,
+                  images=['val2014'],
+                  annotation_file='densepose_coco_2014_minival.json',
+                  annotation_download='densepose_coco_2014_minival',
+                  annotation_type=AnnotationType.POSE,
+              ),
+              Split(
+                  name=tfds.Split.TEST,
+                  images=['test2014', 'test2015'],
+                  annotation_file='densepose_coco_2014_test.json',
+                  annotation_download='densepose_coco_2014_test',
+                  annotation_type=AnnotationType.NONE,
               ),
           ],
       ),
@@ -195,6 +245,40 @@ class Coco(tfds.core.GeneratorBasedBuilder):
               'is_crowd': tf.bool,
           }),
       })
+    elif self.builder_config.has_pose:
+      features.update(
+          {
+              'people':
+                  tfds.features.Sequence(
+                      {
+                          'id':
+                              tf.int64,
+                          'num_keypoints':
+                              tf.int64,
+                          'joints':
+                              tfds.features.Tensor(
+                                  shape=(17, 2), dtype=tf.int64
+                              ),
+                          'joints_visible':
+                              tfds.features.Tensor(shape=(17,), dtype=tf.bool),
+                          'area':
+                              tf.int64,
+                          'body_segmentation':
+                              tfds.features.Image(
+                                  shape=(256, 256, 1), encoding_format='png'
+                              ),
+                          'bbox':
+                              tfds.features.BBoxFeature(),
+                          # This is only for consistency with other annotation
+                          # formats, the only available class are people.
+                          'label':
+                              tfds.features.ClassLabel(num_classes=1),
+                          'is_crowd':
+                              tf.bool,
+                      }
+                  ),
+          }
+      )
     else:
       features.update({
           'objects': tfds.features.Sequence({
@@ -225,42 +309,54 @@ class Coco(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-
-    # Merge urls from all splits together
-    urls = {}
+    splits = []
+    root_url = 'http://images.cocodataset.org/'
+    urls={}
     for split in self.builder_config.splits:
-      urls['{}_images'.format(split.name)] = 'zips/{}.zip'.format(split.images)
-      urls['{}_annotations'.format(split.name)] = 'annotations/{}.zip'.format(
-          split.annotations)
+      for images in split.images:
+        urls['{}_images'.format(images)
+            ] = '{}zips/{}.zip'.format(root_url, images)
+      if self.builder_config.has_pose:
+        urls['{}_annotations'.format(split.name)] = \
+            'https://dl.fbaipublicfiles.com/densepose/{}.json'.format(
+                split.annotation_download)
+      else:
+        urls['{}_annotations'.format(
+            split.name
+        )] = '{}annotations/{}.zip'.format(root_url, split.annotation_download)
 
     # DownloadManager memoize the url, so duplicate urls will only be downloaded
     # once.
-    root_url = 'http://images.cocodataset.org/'
-    extracted_paths = dl_manager.download_and_extract({
-        key: root_url + url for key, url in urls.items()
-    })
+    extracted = dl_manager.download_and_extract(urls)
 
-    splits = []
     for split in self.builder_config.splits:
-      image_dir = extracted_paths['{}_images'.format(split.name)]
-      annotations_dir = extracted_paths['{}_annotations'.format(split.name)]
+      image_paths = [os.path.join(extracted['{}_images'.format(images)], images)
+                     for images in split.images]
+
       if self.builder_config.has_panoptic:
+        # Built on assumption that there is only one image download for panoptic
         panoptic_image_zip_path = os.path.join(
-            annotations_dir,
+            extracted['{}_annotations'.format(split.name)],
             'annotations',
-            'panoptic_{}.zip'.format(split.images)
+            'panoptic_{}.zip'.format(split.images[0])
         )
         panoptic_dir = dl_manager.extract(panoptic_image_zip_path)
         panoptic_dir = os.path.join(
-            panoptic_dir, 'panoptic_{}'.format(split.images))
+            panoptic_dir, 'panoptic_{}'.format(split.images[0]))
       else:
         panoptic_dir = None
+      if self.builder_config.has_pose:
+        annotation_path = extracted['{}_annotations'.format(split.name)]
+      else:
+        annotation_path = os.path.join(
+            extracted['{}_annotations'.format(split.name)],
+            'annotations',
+            split.annotation_file)
       splits.append(tfds.core.SplitGenerator(
           name=split.name,
           gen_kwargs=dict(
-              image_dir=image_dir,
-              annotation_dir=annotations_dir,
-              split_name=split.images,
+              image_paths=image_paths,
+              annotation_path=annotation_path,
               annotation_type=split.annotation_type,
               panoptic_dir=panoptic_dir,
           ),
@@ -269,17 +365,15 @@ class Coco(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(
       self,
-      image_dir,
-      annotation_dir,
-      split_name,
+      image_paths,
+      annotation_path,
       annotation_type,
       panoptic_dir):
     """Generate examples as dicts.
 
     Args:
-      image_dir: `str`, directory containing the images
-      annotation_dir: `str`, directory containing annotations
-      split_name: `str`, <split_name><year> (ex: train2014, val2017)
+      image_paths: List[`str`], directories containing the images
+      annotation_path: `str`, path containing annotations
       annotation_type: `AnnotationType`, the annotation format (NONE, BBOXES,
         PANOPTIC)
       panoptic_dir: If annotation_type is PANOPTIC, contains the panoptic
@@ -288,21 +382,10 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     Yields:
       example key and data
     """
-
-    if annotation_type == AnnotationType.BBOXES:
-      instance_filename = 'instances_{}.json'
-    elif annotation_type == AnnotationType.PANOPTIC:
-      instance_filename = 'panoptic_{}.json'
-    elif annotation_type == AnnotationType.NONE:  # No annotation for test sets
-      instance_filename = 'image_info_{}.json'
+    mask_utils = tfds.core.lazy_imports.pycocotools.mask
 
     # Load the annotations (label names, images metadata,...)
-    instance_path = os.path.join(
-        annotation_dir,
-        'annotations',
-        instance_filename.format(split_name),
-    )
-    coco_annotation = ANNOTATION_CLS[annotation_type](instance_path)
+    coco_annotation = ANNOTATION_CLS[annotation_type](annotation_path)
     # Each category is a dict:
     # {
     #    'id': 51,  # From 1-91, some entry missing
@@ -329,6 +412,8 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     # dataset names ids won't match.
     if self.builder_config.has_panoptic:
       objects_key = 'panoptic_objects'
+    elif self.builder_config.has_pose:
+      objects_key = 'people'
     else:
       objects_key = 'objects'
     self.info.features[objects_key]['label'].names = [
@@ -371,6 +456,82 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         panoptic_annotation = coco_annotation.get_annotations(
             img_id=image_info['id'])
         instances = panoptic_annotation['segments_info']
+      elif annotation_type == AnnotationType.POSE:
+        # Each pose annotation is a dict:
+        # {
+        #     'segmentation': [[345.28, 220.68, 348.17, 269.8, ...]],
+        #     'num_keypoints': 13,
+        #     'keypoints': [
+        #         0, 0, 0, 0, 0, 0, 381, 69, 2, 377, 67, 2, ...
+        #     ], (x y visibility)
+        #     'dp_masks': [
+        #        {
+        #             'counts': 'hb71o70000001O0jL2ZNOd18VNHh1=UNDh1...',
+        #             'size': [256, 256]
+        #        },
+        #        ...
+        #      ],
+        #      'area': 86145.2971,
+        #      'dp_I': [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, ...],
+        #      'dp_x': [133.6658020312, 61.39374414, 93.561408203, ...],
+        #      'dp_U': [0.079818244171, 0.110045313804, 0.193998684692, ...],
+        #      'image_id': 36,
+        #      'dp_V': [0.342305153614, 0.65893709652, 0.53801661762, ...],
+        #      'bbox': [167.58, 162.89, 310.61, 465.19],
+        #      'category_id': 1,
+        #      'dp_y': [96.589828494, 97.648643434, 116.951690672, ...],
+        #      'id': 453991
+        # }
+        #
+        # Documentation from
+        # https://github.com/facebookresearch/DensePose/blob/master/challenge/2019_COCO_DensePose/data_format.md
+        # DensePose annotations are stored in dp_* fields:
+        #
+        # Annotated masks:
+        # dp_masks: RLE encoded dense masks. All part masks are of size
+        #           256x256. They correspond to 14 semantically meaningful parts
+        #           of the body: Torso, Right Hand, Left Hand, Left Foot,
+        #           Right Foot, Upper Leg Right, Upper Leg Left,
+        #           Lower Leg Right, Lower Leg Left, Upper Arm Left,
+        #           Upper Arm Right, Lower Arm Left, Lower Arm Right, Head;
+        #
+        # Annotated points:
+        # dp_x, dp_y: spatial coordinates of collected points on the image. The
+        #             coordinates are scaled such that the bounding box size is
+        #             256x256;
+        # dp_I:       The patch index that indicates which of the 24 surface
+        #             patches the point is on. Patches correspond to the body
+        #             parts described above. Some body parts are split into 2
+        #             patches: 1, 2 = Torso, 3 = Right Hand, 4 = Left Hand,
+        #             5 = Left Foot, 6 = Right Foot, 7, 9 = Upper Leg Right,
+        #             8, 10 = Upper Leg Left, 11, 13 = Lower Leg Right,
+        #             12, 14 = Lower Leg Left, 15, 17 = Upper Arm Left,
+        #             16, 18 = Upper Arm Right, 19, 21 = Lower Arm Left,
+        #             20, 22 = Lower Arm Right, 23, 24 = Head;
+        # dp_U, dp_V: Coordinates in the UV space. Each surface patch has a
+        #             separate 2D parameterization.
+        pose_annotations = coco_annotation.get_annotations(
+            img_id=image_info['id'])
+        additional_instance_infos = []
+        for annotation in pose_annotations:
+          keypoints = np.array(annotation['keypoints']).reshape(17, 3)
+          additional_info = {
+            'num_keypoints': annotation['num_keypoints'],
+            'joints': keypoints[:, :2],
+            'joints_visible': keypoints[:, 2] > 0,
+          }
+          if 'dp_masks' in annotation:
+            body_parts = np.zeros([256, 256, 1], dtype='uint8')
+            assert len(annotation['dp_masks']) == 14
+            for i, mask in enumerate(annotation['dp_masks']):
+              if mask:  # sometimes masks are just empty
+                decoded_mask = mask_utils.decode(mask)
+                body_parts[decoded_mask > 0] = i + 1
+          else:
+            body_parts = 255 * np.ones([256, 256, 1], dtype='uint8')
+          additional_info['body_segmentation'] = body_parts
+          additional_instance_infos.append(additional_info)
+        instances = pose_annotations
       else:
         instances = []  # No annotations
 
@@ -388,8 +549,13 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         )
         # pylint: enable=cell-var-from-loop
 
+      # search for the image in all provided directories
+      possible_images = (os.path.join(directory, image_info['file_name'])
+                         for directory in image_paths)
+      image = next(i for i in possible_images if tf.io.gfile.exists(i))
+
       example = {
-          'image': os.path.join(image_dir, split_name, image_info['file_name']),
+          'image': image,
           'image/filename': image_info['file_name'],
           'image/id': image_info['id'],
           objects_key: [{   # pylint: disable=g-complex-comprehension
@@ -405,11 +571,14 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         panoptic_image_path = os.path.join(panoptic_dir, panoptic_filename)
         example['panoptic_image'] = panoptic_image_path
         example['panoptic_image/filename'] = panoptic_filename
+      if annotation_type == AnnotationType.POSE:
+        for i, additional_info in enumerate(additional_instance_infos):
+          example[objects_key][i].update(additional_info)
 
       yield image_info['file_name'], example
 
     logging.info(
-        '%d/%d images do not contains any annotations',
+        '%d/%d images do not contain any annotations',
         annotation_skipped,
         len(images),
     )
@@ -472,8 +641,27 @@ class CocoAnnotationPanoptic(CocoAnnotation):
     return self._img_id2annotations[img_id]
 
 
+class CocoAnnotationPose(CocoAnnotation):
+  """Coco human pose annotation helper class."""
+
+  def __init__(self, annotation_path):
+    super(CocoAnnotationPose, self).__init__(annotation_path)
+    img_id2annotations = collections.defaultdict(list)
+    for a in self._data['annotations']:
+      img_id2annotations[a['image_id']].append(a)
+    self._img_id2annotations = {
+        k: list(sorted(v, key=lambda a: a['id']))
+        for k, v in img_id2annotations.items()
+    }
+
+  def get_annotations(self, img_id):
+    """Return all annotations associated with the image id string."""
+    return self._img_id2annotations[img_id]
+
+
 ANNOTATION_CLS = {
     AnnotationType.NONE: CocoAnnotation,
     AnnotationType.BBOXES: CocoAnnotationBBoxes,
     AnnotationType.PANOPTIC: CocoAnnotationPanoptic,
+    AnnotationType.POSE: CocoAnnotationPose,
 }

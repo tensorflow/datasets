@@ -1,0 +1,137 @@
+{
+    "info": {
+        "description": "COCO Pose Dataset Tests",
+        "url": "",
+        "version": "1.0",
+        "year": 2014,
+        "contributor": "TensorFlow Datasets Authors",
+        "date_created": "2019/05/31"
+    },
+    "images": [
+        {
+            "license": 0,
+            "file_name": "COCO_test2014_000000000001.jpg",
+            "coco_url": "",
+            "height": 480,
+            "width": 640,
+            "date_captured": "2013-11-14 16:28:13",
+            "flickr_url": "",
+            "id": 1
+        },
+        {
+            "license": 0,
+            "file_name": "COCO_test2015_000000000001.jpg",
+            "coco_url": "",
+            "height": 480,
+            "width": 640,
+            "date_captured": "2013-11-14 16:29:45",
+            "flickr_url": "",
+            "id": 2
+        }
+    ],
+    "licenses": [],
+    "categories": [
+        {
+            "supercategory": "person",
+            "skeleton": [
+                [
+                    16,
+                    14
+                ],
+                [
+                    14,
+                    12
+                ],
+                [
+                    17,
+                    15
+                ],
+                [
+                    15,
+                    13
+                ],
+                [
+                    12,
+                    13
+                ],
+                [
+                    6,
+                    12
+                ],
+                [
+                    7,
+                    13
+                ],
+                [
+                    6,
+                    7
+                ],
+                [
+                    6,
+                    8
+                ],
+                [
+                    7,
+                    9
+                ],
+                [
+                    8,
+                    10
+                ],
+                [
+                    9,
+                    11
+                ],
+                [
+                    2,
+                    3
+                ],
+                [
+                    1,
+                    2
+                ],
+                [
+                    1,
+                    3
+                ],
+                [
+                    2,
+                    4
+                ],
+                [
+                    3,
+                    5
+                ],
+                [
+                    4,
+                    6
+                ],
+                [
+                    5,
+                    7
+                ]
+            ],
+            "id": 1,
+            "keypoints": [
+                "nose",
+                "left_eye",
+                "right_eye",
+                "left_ear",
+                "right_ear",
+                "left_shoulder",
+                "right_shoulder",
+                "left_elbow",
+                "right_elbow",
+                "left_wrist",
+                "right_wrist",
+                "left_hip",
+                "right_hip",
+                "left_knee",
+                "right_knee",
+                "left_ankle",
+                "right_ankle"
+            ],
+            "name": "person"
+        }
+    ]
+}
