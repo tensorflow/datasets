@@ -137,6 +137,49 @@ class DatasetBuilderTest(testing.TestCase):
          2],
     )
 
+  def test_global_version(self):
+    global_version = utils.Version("1.0.0")
+
+    class DummyDataset(DummyDatasetWithConfigs):
+      BUILDER_CONFIGS = [
+      DummyBuilderConfig(
+          name="plus1",
+          description="Add 1 to the records",
+          increment=1),
+      DummyBuilderConfig(
+          name="plus2",
+          description="Add 2 to the records",
+          increment=2),
+      ]
+      VERSION = global_version
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = DummyDataset(data_dir=os.path.join(tmp_dir, 'plus1'))
+      self.assertEqual(builder.version, global_version)
+
+  def test_global_vs_builder_version(self):
+    global_version = utils.Version("1.0.0")
+    builder_version = utils.Version("1.1.0")
+
+    class DummyDatasetV2(DummyDatasetWithConfigs):
+      BUILDER_CONFIGS = [
+      DummyBuilderConfig(
+          name="plus1",
+          description="Add 1 to the records",
+          version=builder_version,
+          increment=1),
+      DummyBuilderConfig(
+          name="plus2",
+          description="Add 2 to the records",
+          version=builder_version,
+          increment=2),
+      ]
+      VERSION = global_version
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = DummyDatasetV2(data_dir=os.path.join(tmp_dir, 'plus1'))
+      self.assertEqual(builder.version, builder_version)
+
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
     from tensorflow_datasets.image_classification import mnist  # pylint:disable=import-outside-toplevel,g-import-not-at-top
