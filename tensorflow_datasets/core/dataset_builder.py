@@ -860,7 +860,10 @@ class DatasetBuilder(registered.RegisteredDataset):
             "BuilderConfig. Change the name. Available BuilderConfigs: %s" %
             (list(self.builder_configs.keys())))
       if not builder_config.version:
-        raise ValueError("BuilderConfig %s must have a version" % name)
+        if not self.VERSION:
+          raise ValueError("BuilderConfig %s must have a version" % name)
+        else:
+          builder_config.version = self.VERSION
       if not builder_config.description:
         raise ValueError("BuilderConfig %s must have a description" % name)
     return builder_config
