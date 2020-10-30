@@ -668,7 +668,7 @@ class DownloadManager(object):
         return _map_promise(self._download_extract, url_or_urls)
 
   @utils.memoized_property
-  def manual_dir(self):
+  def manual_dir(self) -> utils.ReadOnlyPath:
     """Returns the directory containing the manually extracted data."""
     if not self._manual_dir:
       raise AssertionError('Manual directory not enabled.')
@@ -683,7 +683,7 @@ class DownloadManager(object):
           'Create it and download/extract dataset artifacts in there using '
           f'instructions:\n{self._manual_dir_instructions}'
       )
-    return os.fspath(self._manual_dir)
+    return self._manual_dir
 
 
 def _read_url_info(url_path: str) -> checksums.UrlInfo:
