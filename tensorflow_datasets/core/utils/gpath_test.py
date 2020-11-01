@@ -256,3 +256,28 @@ def test_replace(tmp_path: pathlib.Path):
   assert sorted(gpathlib.PosixGPath(tmp_path).iterdir()) == [
       tmp_path / 'mnist-100.py', tmp_path / 'tfds-dataset.py'
   ]
+
+@pytest.mark.parametrize(
+    'paths,patterns,results',
+    [
+      ('/tmp', 'a/**', [
+        gpathlib.PosixGPath('/tmp/a/b'),
+        gpathlib.PosixGPath('/tmp/a/b/c'),
+        gpathlib.PosixGPath('/tmp/a/b/c/d.txt')
+      ]),
+      ('/tmp/a', '**/*.txt', [
+        gpathlib.PosixGPath('/tmp/a/b/c/d.txt')
+      ]),
+      ('', '/tmp/a/**/*.txt', [
+        gpathlib.PosixGPath('/tmp/a/b/c/d.txt')
+      ]),
+    ],
+)
+def test_rglob(paths, patterns, results):
+  gpath = gpathlib.PosixGPath('/tmp/a/b/c')
+  if not gpath.exists():
+    gpath.mkdir(parents=True)
+    (gpath/'d.txt').touch()
+
+  gpath = gpathlib.PosixGPath(paths)
+  assert gpath.rglob(patterns) == results
