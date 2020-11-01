@@ -18,6 +18,7 @@
 import os
 import pathlib
 import posixpath
+import fnmatch
 
 import typing
 from typing import Any, AnyStr, Iterator, Optional, Type, TypeVar
@@ -89,15 +90,21 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
     """Returns the abolute path."""
     return self._new(posixpath.abspath(self._path_str))
 
+  def iglob(self: _P, pattern: str) -> Iterator[_P]:
+    for f in self.iterdir():
+      if fnmatch.fnmatch(f, pattern):
+        yield f
+      if f.is_dir():
+        yield from f.iglob(pattern)
+
   def rglob(self: _P, pattern: str) -> Iterator[_P]:
     """
     Yielding all matching files (of any kind) recursively.
     """
-    yield from self.glob(pattern)
-    if '**' in pattern:
-      for f in self.iterdir():
-        if f.is_dir():
-          yield from f.rglob(pattern)
+    assert '**' in pattern
+    pattern = posixpath.join(self._path_str, pattern)
+    pattern = pattern.partition('*')
+    return list(self._new(pattern[0]).iglob(''.join(pattern[1:])))
 
   def glob(self: _P, pattern: str) -> Iterator[_P]:
     """Yielding all matching files (of any kind)."""
