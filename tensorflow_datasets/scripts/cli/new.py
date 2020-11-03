@@ -175,17 +175,14 @@ def _create_dataset_file(info: DatasetInfo) -> None:
         def _split_generators(self, dl_manager: tfds.download.DownloadManager):
           """Returns SplitGenerators."""
           # {info.todo}: Downloads the data and defines the splits
-          # dl_manager is a tfds.download.DownloadManager that can be used to
-          # download and extract URLs
-          return [
-              tfds.core.SplitGenerator(
-                  name=tfds.Split.TRAIN,
-                  # These kwargs will be passed to _generate_examples
-                  gen_kwargs={{}},
-              ),
-          ]
+          path = dl_manager.download_and_extract('https://todo-data-url')
 
-        def _generate_examples(self):
+          # {info.todo}: Returns the Dict[split names, Iterator[Key, Example]]
+          return {{
+              'train': self._generate_examples(path),
+          }}
+
+        def _generate_examples(self, path):
           """Yields examples."""
           # {info.todo}: Yields (key, example) tuples from the dataset
           yield 'key', {{}}
