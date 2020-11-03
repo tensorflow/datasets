@@ -189,7 +189,7 @@ class Text(feature.Tensor):
     return cls()
 
   def to_json_content(self) -> Json:
-    if self._encoder or self._encoder_config:
+    if self._encoder:
       logging.warning(
           "Dataset is using deprecated text encoder API which will be removed "
           "soon. Please use the plain_text version of the dataset and migrate "
