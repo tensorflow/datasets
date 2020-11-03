@@ -155,21 +155,21 @@ class DatasetBuilderTestCase(
     self.builder = self._make_builder()
 
     example_dir = self.DATASET_CLASS.code_path.parent / "dummy_data"
+    fake_example_dir = utils.as_path(test_utils.fake_examples_dir())
     if self.EXAMPLE_DIR is not None:
-      self.example_dir = self.EXAMPLE_DIR
+      self.example_dir = utils.as_path(self.EXAMPLE_DIR)
     elif example_dir.exists():
-      self.example_dir = str(example_dir)
+      self.example_dir = example_dir
     else:
-      self.example_dir = os.path.join(
-          test_utils.fake_examples_dir(), self.builder.name)
+      self.example_dir = fake_example_dir / self.builder.name
 
-    if not tf.io.gfile.exists(self.example_dir):
+    if not self.example_dir.exists():
       err_msg = (
           "Dummy data not found in {}."
           ""
       ).format(self.example_dir)
 
-    if not tf.io.gfile.exists(self.example_dir):
+    if not self.example_dir.exists():
       # TODO(epot): Better documentation once datasets are migrated to the
       # folder model.
       err_msg = "fake_examples dir %s not found." % self.example_dir
@@ -257,7 +257,7 @@ class DatasetBuilderTestCase(
     if self.DL_EXTRACT_RESULT is None:
       return self.example_dir
     return tf.nest.map_structure(
-        lambda fname: os.path.join(self.example_dir, fname),
+        lambda fname: self.example_dir / fname,
         self.DL_EXTRACT_RESULT,
     )
 
@@ -268,7 +268,7 @@ class DatasetBuilderTestCase(
       # In the future it will be replaced with using self.example_dir.
       return self._get_dl_extract_result(url)
     return tf.nest.map_structure(
-        lambda fname: os.path.join(self.example_dir, fname),
+        lambda fname: self.example_dir / fname,
         self.DL_DOWNLOAD_RESULT,
     )
 

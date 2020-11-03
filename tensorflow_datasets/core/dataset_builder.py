@@ -33,6 +33,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
@@ -399,10 +400,11 @@ class DatasetBuilder(registered.RegisteredDataset):
           gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:
-          self._download_and_prepare(
-              dl_manager=dl_manager,
-              download_config=download_config,
-          )
+          with tf_compat.mock_gfile_pathlike():
+            self._download_and_prepare(
+                dl_manager=dl_manager,
+                download_config=download_config,
+            )
 
           # NOTE: If modifying the lines below to put additional information in
           # DatasetInfo, you'll likely also want to update

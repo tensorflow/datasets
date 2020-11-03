@@ -16,6 +16,7 @@
 """Natural Questions: A Benchmark for Question Answering Research."""
 
 import json
+import os
 import re
 
 import six
@@ -195,6 +196,6 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
 
     return (
         pipeline
-        | beam.Create(filepaths)
+        | beam.Create([os.fspath(f) for f in filepaths])
         | beam.io.ReadAllFromText()
         | beam.Map(_parse_example))
