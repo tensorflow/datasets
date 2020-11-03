@@ -9,18 +9,6 @@ This doc has two sections:
 *   For user who want to generate an existing Beam dataset
 *   For developers who want to create a new Beam dataset
 
-Table of content:
-
-*   [Generating a Beam dataset](#generating-a-beam-dataset)
-    *   [On Google Cloud Dataflow](#on-google-cloud-dataflow)
-    *   [Locally](#locally)
-    *   [Within a custom script](#with-a-custom-script)
-*   [Implementing a Beam dataset](#implementing-a-beam-dataset)
-    *   [Prerequisites](#prerequisites)
-    *   [Instructions](#instructions)
-    *   [Example](#example)
-    *   [Run your pipeline](#run-your-pipeline)
-
 ## Generating a Beam dataset
 
 Below are different examples of generating a Beam dataset, both on the cloud or
@@ -140,14 +128,14 @@ following concepts:
     and the
     [Apache Beam dependency guide](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/).
 
-### Instructions (simple)
+### Instructions
 
 If you are familiar with the
 [dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md),
 adding a Beam dataset only requires to modify the `_generate_examples` function.
 The function should returns a beam object, rather than a generator:
 
-Non-beam dataset (`Iterator[KeyExample]`):
+Non-beam dataset:
 
 ```python
 def _generate_examples(self, path):
@@ -155,7 +143,7 @@ def _generate_examples(self, path):
     yield _process_example(f)
 ```
 
-Beam dataset (`beam.PTransform` of `() -> KeyExample`):
+Beam dataset:
 
 ```python
 def _generate_examples(self, path):

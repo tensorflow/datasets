@@ -72,6 +72,8 @@ TESTS_REQUIRE = [
     'pandas',
     'pydub',
     'apache_beam',
+    # TODO(tfds): Remove https://github.com/fastavro/fastavro/issues/480
+    'fastavro==1.0.0',
     # TFDV is only available for Python 3.6
     'tensorflow-data-validation;python_version<"3.7"',
     # TODO(b/142892342): Re-enable
