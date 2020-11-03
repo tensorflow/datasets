@@ -139,7 +139,8 @@ def _info(self):
 
 Most fields should be self-explainatory. Some precisions:
 
-*   `features`: This specify the dataset structure, shape,... See the
+*   `features`: This specify the dataset structure, shape,... Support complex
+    data types (audio, video, nested sequences,...). See the
     [available features](https://www.tensorflow.org/datasets/api_docs/python/tfds/features#classes)
     or the
     [feature connector guide](https://www.tensorflow.org/datasets/features) for
@@ -229,16 +230,26 @@ def _split_generators(self, dl_manager):
 `_generate_examples` generates the examples for each split from the source data.
 
 This method will typically read source dataset artifacts (e.g. a CSV file) and
-yield `(key, feature_dict)` tuples that correspond to the features specified in
-`tfds.core.DatasetInfo`.
+yield `(key, feature_dict)` tuples:
 
-*   `key`: unique identifier of the example. Used to deterministically suffle
-    the examples using `hash(key)`. If two examples use the same key, an
-    exception will be raised.
-*   `feature_dict`: A `dict` containing the example values. The structure should
-    match the `features` kwarg defined in `tfds.core.DatasetInfo`. See the
-    [feature connector guide](https://www.tensorflow.org/datasets/features) for
-    more info.
+*   `key`: Example identifier. Used to deterministically suffle the examples
+    using `hash(key)`. Should be:
+    *   **unique**: If two examples use the same key, an exception will be
+        raised.
+    *   **deterministic**: Should not depend on `download_dir`,
+        `os.path.listdir` order,... Generating the data twice should yield the
+        same key.
+*   `feature_dict`: A `dict` containing the example values.
+    *   The structure should match the `features=` structure defined in
+        `tfds.core.DatasetInfo`.
+    *   Complex data types (image, video, audio,...) will be automatically
+        encoded.
+    *   Each feature often accept multiple input types (e.g. video accept
+        `/path/to/vid.mp4`, `np.array(shape=(l, h, w, c))`, `List[paths]`,
+        `List[np.array(shape=(h, w, c)]`, `List[img_bytes]`,...)
+    *   See the
+        [feature connector guide](https://www.tensorflow.org/datasets/features)
+        for more info.
 
 ```python
 def _generate_examples(self, images_dir_path, labels):
