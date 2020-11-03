@@ -256,6 +256,19 @@ class DatasetBuilder(registered.RegisteredDataset):
     return self._version
 
   @property
+  def release_notes(self):
+    builder_version = self.version
+    builder_notes = self._builder_config.release_notes
+    builder_notes = (builder_notes[builder_version]
+                     if builder_notes is not None else '')
+    global_notes = self.RELEASE_NOTES.get(builder_version, '')
+    notes = builder_notes or global_notes
+    if len(notes) == 0:
+      logging.info(f"Release Notes for dataset {self.name} at version "
+          f"{self.version} does not exist.")
+    return notes
+
+  @property
   def data_dir(self):
     return self._data_dir
 
