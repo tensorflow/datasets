@@ -21,6 +21,9 @@ fi
 # Required for opencv2
 sudo apt-get install -qq -y libsm6
 
+# Required by apache-beam / fastavro
+sudo apt install -q liblzma-dev
+
 install_tf "$TF_VERSION"
 
 # Make sure we have the latest version of numpy - avoid problems we were
