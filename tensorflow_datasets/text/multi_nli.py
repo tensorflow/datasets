@@ -53,13 +53,10 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 class MultiNLIConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MultiNLI."""
 
-  def __init__(self, *, text_encoder_config=None, **kwargs):
+  def __init__(self, **kwargs):
     """BuilderConfig for MultiNLI.
 
     Args:
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        features feature.
       **kwargs: keyword arguments forwarded to super.
     """
     super(MultiNLIConfig, self).__init__(
@@ -68,8 +65,6 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
             "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
         },
         **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 class MultiNLI(tfds.core.GeneratorBasedBuilder):
@@ -88,11 +83,9 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "premise":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.Text(),
             "hypothesis":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.Text(),
             "label":
                 tfds.features.ClassLabel(
                     names=["entailment", "neutral", "contradiction"]),
