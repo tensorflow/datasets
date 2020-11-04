@@ -706,6 +706,9 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     # Extract manually downloaded files.
     manual_files = dl_manager.extract(manual_paths)
 
+    manual_files = tf.nest.map_structure(os.fspath, manual_files)
+    downloaded_files = tf.nest.map_structure(os.fspath, downloaded_files)
+
     extraction_map = dict(downloaded_files, **manual_files)
 
     # Generate vocabulary from training data if SubwordTextEncoder configured.

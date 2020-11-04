@@ -24,7 +24,6 @@ from typing import Any, AnyStr, Iterator, Optional, Type, TypeVar
 
 import tensorflow as tf
 
-from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
 
@@ -46,11 +45,13 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
     """Create a new `Path` child of same type."""
     return type(self)(*parts)
 
-  @py_utils.memoized_property
+  # Could try to use `cached_property` when beam is compatible (currently
+  # raise mutable input error).
+  @property
   def _is_gcs(self) -> bool:
     return self.parts[:2] == ('/', 'gs')
 
-  @py_utils.memoized_property
+  @property
   def _path_str(self) -> str:
     """Returns the `__fspath__` string representation."""
     value = posixpath.join(*self.parts) if self.parts else '.'

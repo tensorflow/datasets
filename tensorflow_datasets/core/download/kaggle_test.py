@@ -28,7 +28,8 @@ class KaggleTest(testing.TestCase):
     with testing.mock_kaggle_api():
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.download_kaggle_data('digit-recognizer', tmp_dir)
-        self.assertEqual(out_path, os.path.join(tmp_dir, 'digit-recognizer'))
+        self.assertEqual(
+            os.fspath(out_path), os.path.join(tmp_dir, 'digit-recognizer'))
         with tf.io.gfile.GFile(os.path.join(out_path, 'output.txt')) as f:
           self.assertEqual('digit-recognizer', f.read())
 
@@ -36,7 +37,9 @@ class KaggleTest(testing.TestCase):
     with testing.mock_kaggle_api():
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.download_kaggle_data('user/dataset', tmp_dir)
-        self.assertEqual(out_path, os.path.join(tmp_dir, 'user_dataset'))
+        self.assertIsInstance(out_path, os.PathLike)
+        self.assertEqual(
+            os.fspath(out_path), os.path.join(tmp_dir, 'user_dataset'))
         with tf.io.gfile.GFile(os.path.join(out_path, 'output.txt')) as f:
           self.assertEqual('user/dataset', f.read())
 

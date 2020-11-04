@@ -15,7 +15,7 @@
 
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
-from absl import logging
+import os
 import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -197,9 +197,8 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return video_frames
 
   def _generate_examples(self, files):
-    logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
-      ds = tf.data.TFRecordDataset(sorted(files))
+      ds = tf.data.TFRecordDataset(sorted(os.fspath(f) for f in files))
       ds = ds.map(
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)

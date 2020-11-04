@@ -92,7 +92,7 @@ class CosmosQA(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(file_path) as f:
       # Test is in jsonl format whereas train and dev in tsv.
-      if file_path.endswith('.jsonl'):
+      if file_path.suffix == '.jsonl':
         for line in f:
           row = json.loads(line)
           row['label'] = -1

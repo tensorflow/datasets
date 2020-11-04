@@ -97,7 +97,7 @@ class BoolQ(tfds.core.GeneratorBasedBuilder):
     """
 
     with tf.io.gfile.GFile(file_path) as f:
-      if file_path.endswith(".jsonl"):
+      if file_path.suffix == ".jsonl":
         for index, line in enumerate(f):
           row = json.loads(line)
           key = index

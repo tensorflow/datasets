@@ -165,7 +165,7 @@ class _Downloader(object):
 
   def _sync_download(
       self, url: str, destination_path: str, verify: bool = True
-      ) -> checksums_lib.UrlInfo:
+  ) -> checksums_lib.UrlInfo:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,

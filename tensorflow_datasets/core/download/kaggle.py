@@ -116,7 +116,10 @@ def _download_competition_or_dataset(
         ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
 
 
-def download_kaggle_data(competition_or_dataset: str, download_dir: str) -> str:
+def download_kaggle_data(
+    competition_or_dataset: str,
+    download_dir: utils.PathLike,
+) -> utils.ReadWritePath:
   """Downloads the kaggle data to the output_dir.
 
   Args:
@@ -127,9 +130,9 @@ def download_kaggle_data(competition_or_dataset: str, download_dir: str) -> str:
     Path to the dir where the kaggle data was downloaded.
   """
   kaggle_dir = _kaggle_dir_name(competition_or_dataset)
-  download_path = os.path.join(download_dir, kaggle_dir)
+  download_path = utils.as_path(download_dir) / kaggle_dir
   # If the dataset has already been downloaded, return the path to it.
-  if os.path.isdir(download_path):
+  if download_path.is_dir():
     logging.info(
         'Dataset %s already downloaded: reusing %s.',
         competition_or_dataset,
