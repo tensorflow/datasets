@@ -221,7 +221,9 @@ class DownloadManagerTest(testing.TestCase):
     new_ = resource_lib.Resource(path='/dl_dir/new', extract_method=TAR)
     no_extract = resource_lib.Resource(path='/dl_dir/noextract',
                                        extract_method=NO_EXTRACT)
-    self.fs.add_file('/extract_dir/ZIP.cached')
+    cached_file_path = ('/extract_dir/ZIP.cached' + '.' +
+                        _sha256(os.path.dirname(cached.path)))
+    self.fs.add_file(cached_file_path)
     self.extract_results['/dl_dir/new'] = '/extract_dir/TAR.new'
     manager = self._get_manager()
     res = manager.extract({
@@ -230,7 +232,7 @@ class DownloadManagerTest(testing.TestCase):
         'noextract': no_extract,
     })
     expected = {
-        'cached': '/extract_dir/ZIP.cached',
+        'cached': cached_file_path,
         'new': '/extract_dir/TAR.new',
         'noextract': '/dl_dir/noextract',
     }

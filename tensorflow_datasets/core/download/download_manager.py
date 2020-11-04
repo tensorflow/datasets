@@ -560,8 +560,10 @@ class DownloadManager(object):
       logging.info('Skipping extraction for %s (method=NO_EXTRACT).', path)
       return promise.Promise.resolve(path)
     method_name = resource_lib.ExtractMethod(extract_method).name
+    hash_path = (os.path.basename(path) + '.' +
+                 hashlib.sha256(os.path.dirname(path).encode('utf-8')).hexdigest())
     extract_path = os.path.join(self._extract_dir,
-                                '%s.%s' % (method_name, os.path.basename(path)))
+                                '%s.%s' % (method_name, hash_path))
     if not self._force_extraction and tf.io.gfile.exists(extract_path):
       logging.info('Reusing extraction of %s at %s.', path, extract_path)
       return promise.Promise.resolve(extract_path)
