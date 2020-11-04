@@ -10,10 +10,6 @@
 </div>
 # `curated_breast_imaging_ddsm`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -46,7 +42,7 @@ in order to guarantee reproducible results:
 
 *   **Versions**:
 
-    * **`3.0.0`** (default) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>: No release notes.
+    * **`3.0.0`** (default): No release notes.
 
 *   **Manual download instructions**: This dataset requires you to
 download the source data manually into `download_config.manual_dir`

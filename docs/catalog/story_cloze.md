@@ -12,10 +12,6 @@
 
 # `story_cloze`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -36,7 +32,7 @@ system to choose the correct ending to a four-sentence story.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1015.04 KiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -50,12 +46,14 @@ system to choose the correct ending to a four-sentence story.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,571
+`'validation'` | 1,571
 
 *   **Features**:
 

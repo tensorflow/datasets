@@ -10,10 +10,6 @@
 </div>
 # `deep_weeds`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The DeepWeeds dataset consists of 17,509 images capturing eight different weed species native to Australia in situ with neighbouring flora.The selected weed species are local to pastoral grasslands across the state of Queensland.The images were collected from weed infestations at the following sites across Queensland: "Black River", "Charters Towers",  "Cluden", "Douglas", "Hervey Range", "Kelso", "McKinlay" and "Paluma".
@@ -24,7 +20,7 @@ The DeepWeeds dataset consists of 17,509 images capturing eight different weed s
 
 *   **Versions**:
 
-    * **`3.0.0`** (default) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>: No release notes.
+    * **`3.0.0`** (default): No release notes.
 
 *   **Download size**: `469.32 MiB`
 

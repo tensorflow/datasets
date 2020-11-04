@@ -10,9 +10,6 @@
 </div>
 # `e2e_cleaned`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 An update release of E2E NLG Challenge data with cleaned MRs. The E2E data

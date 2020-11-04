@@ -59,7 +59,6 @@ toc:
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/cityscapes
-    status: nightly
     title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
@@ -258,7 +257,6 @@ toc:
   - path: /datasets/catalog/mctaco
     title: mctaco
   - path: /datasets/catalog/mlqa
-    status: nightly
     title: mlqa
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -281,7 +279,6 @@ toc:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/e2e_cleaned
-    status: nightly
     title: e2e_cleaned
   - path: /datasets/catalog/forest_fires
     title: forest_fires
@@ -304,7 +301,6 @@ toc:
   - path: /datasets/catalog/titanic
     title: titanic
   - path: /datasets/catalog/wiki_bio
-    status: nightly
     title: wiki_bio
   - path: /datasets/catalog/wine_quality
     title: wine_quality
@@ -383,7 +379,6 @@ toc:
   - path: /datasets/catalog/irc_disentanglement
     title: irc_disentanglement
   - path: /datasets/catalog/lambada
-    status: nightly
     title: lambada
   - path: /datasets/catalog/librispeech_lm
     title: librispeech_lm
@@ -406,10 +401,12 @@ toc:
   - path: /datasets/catalog/pg19
     title: pg19
   - path: /datasets/catalog/piqa
-    status: nightly
     title: piqa
   - path: /datasets/catalog/qa4mre
     title: qa4mre
+  - path: /datasets/catalog/quac
+    status: nightly
+    title: quac
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
   - path: /datasets/catalog/salient_span_wikipedia
@@ -423,7 +420,6 @@ toc:
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/story_cloze
-    status: nightly
     title: story_cloze (manual)
   - path: /datasets/catalog/super_glue
     title: super_glue

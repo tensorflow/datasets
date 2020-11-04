@@ -55,7 +55,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`celeb_a`](celeb_a.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cityscapes`](cityscapes.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`clevr`](clevr.md)
 *   [`clic`](clic.md)
 *   [`coil100`](coil100.md)
@@ -161,7 +160,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)
 *   [`mlqa`](mlqa.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`natural_questions`](natural_questions.md)
 *   [`natural_questions_open`](natural_questions_open.md)
 *   [`qasc`](qasc.md)
@@ -175,7 +173,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
@@ -187,7 +184,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
 *   [`wiki_bio`](wiki_bio.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wine_quality`](wine_quality.md)
 
 ### `Summarization`
@@ -231,7 +227,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
 *   [`lambada`](lambada.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`librispeech_lm`](librispeech_lm.md)
 *   [`lm1b`](lm1b.md)
 *   [`math_dataset`](math_dataset.md)
@@ -243,8 +238,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`paws_x_wiki`](paws_x_wiki.md)
 *   [`pg19`](pg19.md)
 *   [`piqa`](piqa.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`qa4mre`](qa4mre.md)
+*   [`quac`](quac.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
 *   [`scan`](scan.md)
@@ -252,7 +248,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`sentiment140`](sentiment140.md)
 *   [`snli`](snli.md)
 *   [`story_cloze`](story_cloze.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`super_glue`](super_glue.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
