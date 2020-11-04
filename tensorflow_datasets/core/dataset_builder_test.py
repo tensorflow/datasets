@@ -188,6 +188,65 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertEqual(builder.version, builder_version)
       self.assertEqual(dataset_build.version, builder_version)
 
+  def test_global_release_notes(self):
+    global_version = utils.Version("1.0.0")
+    global_release_notes = {"1.0.0": "This is global test release note."}
+
+    class NotesDummyDataset(DummyDatasetWithConfigs):
+      BUILDER_CONFIGS = [
+      DummyBuilderConfig(
+          name="plus1",
+          description="Add 1 to the records",
+          increment=1),
+      DummyBuilderConfig(
+          name="plus2",
+          description="Add 2 to the records",
+          increment=2),
+      ]
+      VERSION = global_version
+      RELEASE_NOTES = global_release_notes
+
+    # Using DummyDataset created in `test_global_version`.
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      dataset_build = NotesDummyDataset(data_dir=tmp_dir)
+      builder = load.builder(name="notes_dummy_dataset/plus1",
+                             data_dir=tmp_dir)
+      self.assertEqual(builder.release_notes, global_release_notes["1.0.0"])
+
+  def test_global_vs_builder_release_notes(self):
+    global_version = utils.Version("1.0.0")
+    builder_version = utils.Version("1.1.0")
+
+    global_release_notes = {"1.0.0": "This is global test release note."}
+    builder_release_notes = {"1.1.0": "This is builder test release note."}
+
+    class NotesDummyDatasetV2(DummyDatasetWithConfigs):
+      BUILDER_CONFIGS = [
+      DummyBuilderConfig(
+          name="plus1",
+          description="Add 1 to the records",
+          version=builder_version,
+          release_notes=builder_release_notes,
+          increment=1),
+      DummyBuilderConfig(
+          name="plus2",
+          description="Add 2 to the records",
+          version=builder_version,
+          release_notes=builder_release_notes,
+          increment=2),
+      ]
+      VERSION = global_version
+      RELEASE_NOTES = global_release_notes
+
+    # Using DummyDatasetV2 created in `test_global_vs_builder_version`.
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      dataset_build = NotesDummyDatasetV2(data_dir=tmp_dir)
+      builder = load.builder(name="notes_dummy_dataset_v2/plus1",
+                             data_dir=tmp_dir)
+      # If builder as well as global release note are set make sure
+      # builder release note is returned for both checks.
+      self.assertEqual(builder.release_notes, builder_release_notes["1.1.0"])
+
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
     from tensorflow_datasets.image_classification import mnist  # pylint:disable=import-outside-toplevel,g-import-not-at-top
