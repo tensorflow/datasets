@@ -154,7 +154,9 @@ class DatasetBuilderTest(testing.TestCase):
       VERSION = global_version
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyDataset(data_dir=os.path.join(tmp_dir, 'plus1'))
+      dataset_build = DummyDataset(data_dir=tmp_dir)
+      builder = load.builder(name='dummy_dataset/plus1', data_dir=tmp_dir)
+      self.assertEqual(dataset_build.version, global_version)
       self.assertEqual(builder.version, global_version)
 
   def test_global_vs_builder_version(self):
@@ -177,8 +179,12 @@ class DatasetBuilderTest(testing.TestCase):
       VERSION = global_version
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyDatasetV2(data_dir=os.path.join(tmp_dir, 'plus1'))
+      dataset_build = DummyDatasetV2(data_dir=tmp_dir)
+      builder = load.builder(name="dummy_dataset_v2/plus1", data_dir=tmp_dir)
+      # If builder as well as global versions are set make sure
+      # builder version is returned for both checks.
       self.assertEqual(builder.version, builder_version)
+      self.assertEqual(dataset_build.version, builder_version)
 
   @testing.run_in_graph_and_eager_modes()
   def test_load_from_gcs(self):
