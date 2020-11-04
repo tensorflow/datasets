@@ -17,7 +17,9 @@
 
 import argparse
 import itertools
+import os
 import pathlib
+import subprocess
 import textwrap
 import dataclasses
 
@@ -115,6 +117,8 @@ def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
   _create_init(info)
   _create_dummy_data(info)
   _create_checksum(info)
+  if in_tfds:
+    _add_to_parent_init(info)
 
   print(
       'Dataset generated at {}\n'
@@ -265,3 +269,20 @@ def _create_checksum(info: DatasetInfo) -> None:
       """
   )
   file_path.write_text(content)
+
+
+def _add_to_parent_init(info: DatasetInfo) -> None:
+  """Add `import` dataset in the `<ds_type>/__init__.py` file."""
+  if not info.in_tfds:
+    # Could add global init, but would be tricky to foresee all use-cases
+    raise NotImplementedError(
+        'Adding __init__.py in non-tfds dir not supported.'
+    )
+
+  import_path = info.path.parent / '__init__.py'
+  if not import_path.exists():
+    return  # Should this be an error instead ?
+  import_path.write_text(
+      import_path.read_text()
+      + f'from {info.ds_import} import {info.cls_name}\n'
+  )
