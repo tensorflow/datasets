@@ -259,7 +259,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   def release_notes(self):
     builder_version = str(self.version)
     builder_notes = self._builder_config.release_notes
-    builder_notes = (builder_notes[builder_version]
+    builder_notes = (builder_notes.get(builder_version, None)
                      if builder_notes is not None else None)
     global_notes = self.RELEASE_NOTES.get(builder_version, None)
     notes = builder_notes or global_notes

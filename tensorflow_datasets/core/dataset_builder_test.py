@@ -140,7 +140,7 @@ class DatasetBuilderTest(testing.TestCase):
   def test_global_version(self):
     global_version = utils.Version("1.0.0")
 
-    class DummyDataset(DummyDatasetWithConfigs):
+    class VersionDummyDataset(DummyDatasetWithConfigs):
       BUILDER_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",
@@ -154,8 +154,9 @@ class DatasetBuilderTest(testing.TestCase):
       VERSION = global_version
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      dataset_build = DummyDataset(data_dir=tmp_dir)
-      builder = load.builder(name='dummy_dataset/plus1', data_dir=tmp_dir)
+      dataset_build = VersionDummyDataset(data_dir=tmp_dir)
+      builder = load.builder(name='version_dummy_dataset/plus1',
+                             data_dir=tmp_dir)
       self.assertEqual(dataset_build.version, global_version)
       self.assertEqual(builder.version, global_version)
 
@@ -163,7 +164,7 @@ class DatasetBuilderTest(testing.TestCase):
     global_version = utils.Version("1.0.0")
     builder_version = utils.Version("1.1.0")
 
-    class DummyDatasetV2(DummyDatasetWithConfigs):
+    class VersionDummyDatasetV2(DummyDatasetWithConfigs):
       BUILDER_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",
@@ -179,8 +180,9 @@ class DatasetBuilderTest(testing.TestCase):
       VERSION = global_version
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      dataset_build = DummyDatasetV2(data_dir=tmp_dir)
-      builder = load.builder(name="dummy_dataset_v2/plus1", data_dir=tmp_dir)
+      dataset_build = VersionDummyDatasetV2(data_dir=tmp_dir)
+      builder = load.builder(name="version_dummy_dataset_v2/plus1",
+                             data_dir=tmp_dir)
       # If builder as well as global versions are set make sure
       # builder version is returned for both checks.
       self.assertEqual(builder.version, builder_version)
