@@ -179,7 +179,7 @@ Some additional considerations:
 Here is an example of a Beam dataset.
 
 ```python
-class DummyBeamDataset(tfds.core.BeamBasedBuilder):
+class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
