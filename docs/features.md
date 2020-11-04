@@ -24,6 +24,17 @@ tfds.core.DatasetInfo(
 )
 ```
 
+Features can be:
+
+*   Scalar values: `tf.bool`, `tf.string`, `tf.float32`,...
+*   `tfds.features.Audio`, `tfds.features.Video`,... (see
+    [the list](https://www.tensorflow.org/datasets/api_docs/python/tfds/features?version=nightly)
+    of available features)
+*   Nested `dict` of features: `{'metadata': {'image': Image(), 'description':
+    tf.string}}`,...
+*   Nested `tfds.features.Sequence`: `Sequence({'image': ..., 'id': ...})`,
+    `Sequence(Sequence(tf.int64))`,...
+
 During generation, the examples will be automatically serialized by
 `FeatureConnector.encode_example` into a format suitable to disk (currently
 `tf.train.Example` protocol buffers):
