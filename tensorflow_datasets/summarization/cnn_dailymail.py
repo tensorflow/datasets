@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """CNN/DailyMail Summarization dataset, non-anonymized version."""
+
 import hashlib
 import os
 from absl import logging
@@ -79,38 +80,6 @@ _SUPPORTED_VERSIONS = [
     tfds.core.Version('1.0.0'),
     tfds.core.Version('2.0.0'),
 ]
-# Using cased version.
-_DEFAULT_VERSION = tfds.core.Version('3.0.0')
-
-_RELEASE_NOTES = {
-    '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
-    '2.0.0': """
-    Separate target sentences with newline. (Having the model predict newline
-    separators makes it easier to evaluate using summary-level ROUGE.)
-    """,
-    '3.0.0': 'Using cased version.',
-}
-
-
-class CnnDailymailConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for CnnDailymail."""
-
-  def __init__(self, *, text_encoder_config=None, **kwargs):
-    """BuilderConfig for CnnDailymail.
-
-    Args:
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        CnnDailymail (text) features
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(CnnDailymailConfig, self).__init__(
-        version=_DEFAULT_VERSION,
-        release_notes=_RELEASE_NOTES,
-        supported_versions=_SUPPORTED_VERSIONS,
-        **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 def _get_url_hashes(path):
@@ -233,27 +202,17 @@ def _get_art_abs(story_file, tfds_version):
 
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
-  BUILDER_CONFIGS = [
-      CnnDailymailConfig(
-          name='plain_text',
-          description='Plain text',
-      ),
-      CnnDailymailConfig(
-          name='bytes',
-          description=('Uses byte-level text encoding with '
-                       '`tfds.deprecated.text.ByteTextEncoder`'),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder=tfds.deprecated.text.ByteTextEncoder()),
-      ),
-      CnnDailymailConfig(
-          name='subwords32k',
-          description=('Uses `tfds.deprecated.text.SubwordTextEncoder` with '
-                       '32k vocab size'),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**15),
-      ),
-  ]
+
+  VERSION = tfds.core.Version('3.1.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+      '2.0.0': """
+      Separate target sentences with newline. (Having the model predict newline
+      separators makes it easier to evaluate using summary-level ROUGE.)
+      """,
+      '3.0.0': 'Using cased version.',
+      '3.1.0': 'Removed BuilderConfig',
+  }
 
   def _info(self):
     # Should return a tfds.core.DatasetInfo object
@@ -261,33 +220,17 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            _ARTICLE:
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            _HIGHLIGHTS:
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+            _ARTICLE: tfds.features.Text(),
+            _HIGHLIGHTS: tfds.features.Text(),
         }),
         supervised_keys=(_ARTICLE, _HIGHLIGHTS),
         homepage='https://github.com/abisee/cnn-dailymail',
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, paths):
-    for _, ex in self._generate_examples(paths):
-      yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
-
   def _split_generators(self, dl_manager):
     dl_paths = dl_manager.download_and_extract(_DL_URLS)
     train_files = _subset_filenames(dl_paths, tfds.Split.TRAIN)
-    # Generate shared vocabulary
-    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    self.info.features[_ARTICLE].maybe_build_from_corpus(
-        self._vocab_text_gen(train_files))
-    encoder = self.info.features[_ARTICLE].encoder
-    # Use maybe_set_encoder because the encoder may have been restored from
-    # package data.
-    self.info.features[_HIGHLIGHTS].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(

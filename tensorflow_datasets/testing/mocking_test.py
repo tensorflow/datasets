@@ -93,17 +93,6 @@ def test_mocking_imagenet_decoders():
 
 
 @pytest.mark.usefixtures('apply_mock_data')
-def test_mocking_lm1b():
-  ds = tfds.load('lm1b/bytes', split='train')
-  assert ds.element_spec == {
-      'text': tf.TensorSpec(shape=(None,), dtype=tf.int64),
-  }
-  for ex in ds.take(10):
-    assert ex['text'].dtype == tf.int64
-    ex['text'].shape.assert_is_compatible_with((None,))
-
-
-@pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_wider_face():
   ds = tfds.load('wider_face', split='train')
   assert (
@@ -125,7 +114,7 @@ def test_custom_as_dataset(mock_data):
     )
 
   with mock_data(as_dataset_fn=_as_dataset):
-    ds = tfds.load('lm1b', split='train')
+    ds = tfds.load('librispeech_lm', split='train')
     out = [ex['text'] for ex in tfds.as_numpy(ds)]
     assert out == [b'some sentence', b'some other sentence']
 

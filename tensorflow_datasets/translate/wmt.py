@@ -577,7 +577,6 @@ class WmtConfig(tfds.core.BuilderConfig):
                citation=None,
                description=None,
                language_pair=(None, None),
-               text_encoder_config=None,
                subsets=None,
                **kwargs):
     """BuilderConfig for WMT.
@@ -588,16 +587,11 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig` (optional),
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        `tfds.deprecated.text.Translation` features.
       subsets: Dict[split, list[str]]. List of the subset to use for each of the
         split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
-    if text_encoder_config:
-      name += "." + text_encoder_config.name
     if "name" in kwargs:  # Add name suffix for custom configs
       name += "." + kwargs.pop("name")
 
@@ -607,7 +601,6 @@ class WmtConfig(tfds.core.BuilderConfig):
     self.url = url or "http://www.statmt.org"
     self.citation = citation
     self.language_pair = language_pair
-    self.text_encoder_config = text_encoder_config
     self.subsets = subsets
 
 
@@ -659,15 +652,11 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair,
-            encoder_config=self.builder_config.text_encoder_config),
+        ),
         supervised_keys=(src, target),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation,
     )
-
-  def _vocab_text_gen(self, split_subsets, extraction_map, language):
-    for _, ex in self._generate_examples(split_subsets, extraction_map):
-      yield ex[language]
 
   def _split_generators(self, dl_manager):
     source, _ = self.builder_config.language_pair
@@ -710,12 +699,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     downloaded_files = tf.nest.map_structure(os.fspath, downloaded_files)
 
     extraction_map = dict(downloaded_files, **manual_files)
-
-    # Generate vocabulary from training data if SubwordTextEncoder configured.
-    for language in self.builder_config.language_pair:
-      self.info.features[language].maybe_build_from_corpus(
-          self._vocab_text_gen(
-              self.subsets[tfds.Split.TRAIN], extraction_map, language))
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension

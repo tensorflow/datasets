@@ -34,12 +34,10 @@ from tensorflow_datasets.text.goemotions import Goemotions
 from tensorflow_datasets.text.gpt3 import Gpt3
 from tensorflow_datasets.text.hellaswag import Hellaswag
 from tensorflow_datasets.text.imdb import IMDBReviews
-from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
 from tensorflow_datasets.text.lambada import Lambada
 from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
-from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.math_dataset import MathDataset
 from tensorflow_datasets.text.movie_rationales import MovieRationales
 from tensorflow_datasets.text.multi_nli import MultiNLI
