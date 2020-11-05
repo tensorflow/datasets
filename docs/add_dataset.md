@@ -322,11 +322,29 @@ This is done through `tfds.core.BuilderConfig`s:
 
 1.  Define your own configuration object as a subclass of
     `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
+
+```python
+@dataclasses.dataclass
+class MyDatasetConfig(tfds.core.BuilderConfig):
+  img_size: Tuple[int, int]
+```
+
 2.  Define the `BUILDER_CONFIGS = []` class member in `MyDataset` that lists
     `MyDatasetConfig`s that the dataset exposes.
-3.  Use `self.builder_config` in `MyDataset` to configure data generation. This
-    may include setting different values in `_info()` or changing download data
-    access.
+
+```python
+class MyDataset(tfds.core.DatasetBuilder):
+  VERSION = tfds.core.Version('1.0.0')
+  BUILDER_CONFIG = [
+      # `BuilderConfig` require a `name` and `description` for each config
+      MyDatasetConfig(name='small', description='Small ...', img_size=(8, 8)),
+      MyDatasetConfig(name='big', description='Big ...', img_size=(32, 32)),
+  ]
+```
+
+1.  Use `self.builder_config` in `MyDataset` to configure data generation (e.g.
+    `shape=self.builder_config.img_size`). This may include setting different
+    values in `_info()` or changing download data access.
 
 Notes:
 
