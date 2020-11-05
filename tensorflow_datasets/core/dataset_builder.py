@@ -227,7 +227,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return self.SUPPORTED_VERSIONS
 
   @utils.memoized_property
-  def versions(self):
+  def versions(self) -> List[utils.Version]:
     """Versions (canonical + availables), in preference order."""
     return [
         utils.Version(v) if isinstance(v, six.string_types) else v

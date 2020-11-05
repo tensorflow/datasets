@@ -114,10 +114,10 @@ class HomepageSection(Section):
 
   NAME = 'Homepage'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.info.homepage
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     homepage = builder.info.homepage
     return f'[{homepage}]({homepage})'
 
@@ -126,10 +126,10 @@ class DatasetDescriptionSection(Section):
 
   NAME = 'Description'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.info.description
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     return Block(builder.info.description)
 
 
@@ -137,10 +137,10 @@ class ConfigDescriptionSection(Section):
 
   NAME = 'Config description'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.builder_config.description
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     if not builder.builder_config:
       return _SKIP_SECTION
     return builder.builder_config.description
@@ -153,7 +153,7 @@ class SourceCodeSection(Section):
   def get_key(self, _):
     return True  # Always common to all configs
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     class_path = tfds.core.utils.get_class_path(builder).split('.')
     del class_path[-2]
     class_path = '.'.join(class_path)
@@ -168,25 +168,33 @@ class VersionSection(Section):
   def __init__(self, nightly_doc_util):
     self._nightly_doc_util = nightly_doc_util
 
-  def _list_versions(self, builder):
+  def _list_versions(self, builder: tfds.core.DatasetBuilder):
     """List versions."""
-    for v in builder.versions:  # List all available versions (in default order)
+    curr_versions = set(builder.versions)  # Registered version
+    # Merge all versions
+    all_versions = [*builder.versions, *builder.release_notes]
+    # Normalize and remove duplicates
+    all_versions = set(tfds.core.Version(v) for v in all_versions)
+    for v in sorted(all_versions):  # List all available versions
       if v == builder.version:  # Highlight the default version
         version_name = '**`{}`** (default)'.format(str(v))
       else:
         version_name = '`{}`'.format(str(v))
-      if self._nightly_doc_util.is_version_nightly(builder, str(v)):
+      if (
+          v in curr_versions  # Filter versions only present in RELEASE_NOTES
+          and self._nightly_doc_util.is_version_nightly(builder, str(v))
+      ):
         nightly_str = ' ' + self._nightly_doc_util.icon
       else:
         nightly_str = ''
-      yield '    * {}{}: {}'.format(
-          version_name, nightly_str, v.description or 'No release notes.'
-      )
+      description = builder.release_notes.get(str(v), 'No release notes.')
+      yield f'    * {version_name}{nightly_str}: {description}'
 
-  def get_key(self, builder):
-    return tuple((str(v), v.description) for v in builder.versions)
+  def get_key(self, builder: tfds.core.DatasetBuilder):
+    release_key = tuple((k, v) for k, v in builder.release_notes.items())
+    return (tuple(builder.versions), release_key)
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     return IntentedBlock('\n'.join(self._list_versions(builder)))
 
 
@@ -194,10 +202,10 @@ class DownloadSizeSection(Section):
 
   NAME = 'Download size'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.info.download_size
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     return f'`{tfds.units.size_str(builder.info.download_size)}`'
 
 
@@ -205,10 +213,10 @@ class DatasetSizeSection(Section):
 
   NAME = 'Dataset size'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.info.dataset_size
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     return f'`{tfds.units.size_str(builder.info.dataset_size)}`'
 
 
@@ -216,10 +224,10 @@ class ManualDatasetSection(Section):
 
   NAME = 'Manual download instructions'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.MANUAL_DOWNLOAD_INSTRUCTIONS
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     manual_instructions = builder.MANUAL_DOWNLOAD_INSTRUCTIONS
     if not manual_instructions:
       return _SKIP_SECTION
@@ -242,7 +250,7 @@ class AutocacheSection(Section):
       '(https://www.tensorflow.org/datasets/performances#auto-caching))'
   )
 
-  def _build_autocached_info(self, builder):
+  def _build_autocached_info(self, builder: tfds.core.DatasetBuilder):
     """Returns the auto-cache information string."""
     always_cached = {}
     never_cached = {}
@@ -283,10 +291,10 @@ class AutocacheSection(Section):
       autocached_info = ', '.join(autocached_info_parts)
     return autocached_info
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return self._build_autocached_info(builder)
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     return self._build_autocached_info(builder)
 
 
@@ -299,12 +307,12 @@ class SplitInfoSection(Section):
       return '{:,}'.format(split_info.num_examples)
     return 'Not computed'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return tuple(
         (str(s.name), int(s.num_examples)) for s in builder.info.splits.values()
     )
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     splits_str = ('\n').join([
         f'`\'{split_name}\'` | {self._get_num_examples(split_info)}'
         for split_name, split_info in sorted(builder.info.splits.items())
@@ -324,10 +332,10 @@ class FeatureInfoSection(Section):
 
   NAME = 'Features'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return repr(builder.info.features)
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     code = textwrap.dedent(
         """
         ```python
@@ -346,10 +354,10 @@ class SupervisedKeySection(Section):
       '(https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args))'
   )
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.info.supervised_keys
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     return f'`{str(builder.info.supervised_keys)}`'
 
 
@@ -357,10 +365,10 @@ class DatasetCitationSection(Section):
 
   NAME = 'Citation'
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     return builder.info.citation
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     if not builder.info.citation:
       return ''
     return Block(
@@ -384,12 +392,12 @@ class DatasetVisualizationSection(Section):
   def __init__(self, visualization_util):
     self._visualization_util = visualization_util
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     if self._visualization_util.has_visualization(builder):
       return builder.info.full_name
     return None  # Fuse the sections together if no configs are available
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     if not self._visualization_util.has_visualization(builder):
       return 'Not supported.'
     return Block(self._visualization_util.get_html_tag(builder))
@@ -405,12 +413,12 @@ class DatasetDataframeSection(Section):
   def __init__(self, dataframe_util):
     self._dataframe_util = dataframe_util
 
-  def get_key(self, builder):
+  def get_key(self, builder: tfds.core.DatasetBuilder):
     if self._dataframe_util.has_visualization(builder):
       return builder.info.full_name
     return None  # Fuse the sections together if no configs are available
 
-  def content(self, builder):
+  def content(self, builder: tfds.core.DatasetBuilder):
     if not self._dataframe_util.has_visualization(builder):
       return 'Missing.'
     return Block(self._dataframe_util.get_html_tag(builder))
@@ -467,11 +475,11 @@ def _display_all_builders(
 # --------------------------- Main page ---------------------------
 
 
-def _display_dataset_heading(builder):
+def _display_dataset_heading(builder: tfds.core.DatasetBuilder):
   return f'# `{builder.name}`'
 
 
-def _display_nightly_str(nightly_doc_util, builder):
+def _display_nightly_str(nightly_doc_util, builder: tfds.core.DatasetBuilder):
   """Header nightly note section."""
   if nightly_doc_util.is_builder_nightly(builder):
     return f"""\
@@ -488,7 +496,7 @@ def _display_nightly_str(nightly_doc_util, builder):
     return ''
 
 
-def _display_manual_instructions(builder):
+def _display_manual_instructions(builder: tfds.core.DatasetBuilder):
   """Header manual note section."""
   if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
     return 'Warning: Manual download required. See instructions below.'
