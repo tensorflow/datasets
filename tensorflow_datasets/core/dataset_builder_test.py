@@ -343,6 +343,45 @@ class DatasetBuilderTest(testing.TestCase):
             data_dir=tmp_dir,
         )
 
+  def test_global_version(self):
+    global_version = utils.Version("1.0.0")
+    global_release_notes = {
+        "1.0.0": "Global release",
+    }
+    config_version = utils.Version("1.1.0")
+    config_release_notes = {
+        "1.1.0": "Some update",
+    }
+
+    class VersionDummyDataset(DummyDatasetWithConfigs):
+
+      BUILDER_CONFIGS = [
+          dataset_builder.BuilderConfig(
+              name="default",
+              description="Add 1 to the records",
+          ),
+          dataset_builder.BuilderConfig(
+              name="custom",
+              description="Add 2 to the records",
+              version=config_version,
+              release_notes=config_release_notes,
+          ),
+      ]
+      VERSION = global_version
+      RELEASE_NOTES = global_release_notes
+
+    tmp_path = "/tmp/non-existing-dir/"
+
+    # If version is not specified at the BuilderConfig level, then
+    # the default global values are used.
+    builder = VersionDummyDataset(config="default", data_dir=tmp_path)
+    self.assertEqual(builder.version, global_version)
+    self.assertEqual(builder.release_notes, global_release_notes)
+
+    builder = VersionDummyDataset(config="custom", data_dir=tmp_path)
+    self.assertEqual(builder.version, config_version)
+    self.assertEqual(builder.release_notes, config_release_notes)
+
 
 class DatasetBuilderMultiDirTest(testing.TestCase):
   """Tests for multi-dir."""

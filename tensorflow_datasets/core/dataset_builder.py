@@ -213,11 +213,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     self.__init__(**state)
 
   @utils.memoized_property
-  def canonical_version(self):
-    if self._builder_config:
-      return self._builder_config.version
+  def canonical_version(self) -> utils.Version:
+    if self._builder_config and self._builder_config.version:
+      return utils.Version(self._builder_config.version)
     else:
-      return self.VERSION
+      return utils.Version(self.VERSION)
 
   @utils.memoized_property
   def supported_versions(self):
@@ -255,6 +255,13 @@ class DatasetBuilder(registered.RegisteredDataset):
   @property
   def version(self):
     return self._version
+
+  @property
+  def release_notes(self) -> Dict[str, str]:
+    if self.builder_config and self.builder_config.release_notes:
+      return self.builder_config.release_notes
+    else:
+      return self.RELEASE_NOTES
 
   @property
   def data_dir(self):
@@ -862,8 +869,6 @@ class DatasetBuilder(registered.RegisteredDataset):
             "Cannot name a custom BuilderConfig the same as an available "
             "BuilderConfig. Change the name. Available BuilderConfigs: %s" %
             (list(self.builder_configs.keys())))
-      if not builder_config.version:
-        raise ValueError("BuilderConfig %s must have a version" % name)
       if not builder_config.description:
         raise ValueError("BuilderConfig %s must have a description" % name)
     return builder_config
