@@ -45,21 +45,50 @@ _CITATION = """@inproceedings{sharma-etal-2018-tackling,
 }
 """
 
+_VERSION = tfds.core.Version('1.0.0')
+_RELEASE_NOTES = {
+    '1.0.0': 'Initial release.',
+}
+
+
+class StoryClozeConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for StoryClozeConfig."""
+
+  def __init__(
+      self,
+      name):
+    super().__init__(
+        name=name,
+        description=_DESCRIPTION,
+        version=_VERSION,
+        release_notes=_RELEASE_NOTES)
+
 
 class StoryCloze(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for story_cloze dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
+
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
+  BUILDER_CONFIGS = [
+      StoryClozeConfig(
+          name='2016',
+      ),
+      StoryClozeConfig(
+          name='2018',
+      )
+  ]
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Visit https://www.cs.rochester.edu/nlp/rocstories/ and fill out the google
   form to obtain the datasets. You will receive an email with the link to
-  download the datasets. For the StoryCloze dataset, use the 2018 versions. The
-  validation csv file needs to be renamed to cloze_test_val__winter2018.csv and
-  the test csv file needs to be renamed to cloze_test_test__winter2018.csv. Move
-  both these files to the manual directory.
+  download the datasets. For the 2016 data, the validation and test file needs
+  to be renamed to cloze_test_val__spring2016.csv and
+  cloze_test_test__spring2016.csv respectively. For 2018 version, the validation
+  and test file needs to be renamed to cloze_test_val__winter2018.csv and
+  to cloze_test_test__winter2018.csv respectively. Move both these files
+  to the manual directory.
   """
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -79,20 +108,25 @@ class StoryCloze(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
+    if self.builder_config.name == '2016':
+      file_postfix = 'spring2016'
+    elif self.builder_config.name == '2018':
+      file_postfix = 'winter2018'
+
+    val_file = 'cloze_test_val__' + file_postfix + '.csv'
+    test_file = 'cloze_test_test__' + file_postfix + '.csv'
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                'filepath': os.path.join(
-                    dl_manager.manual_dir, 'cloze_test_val__winter2018.csv')
+                'filepath': os.path.join(dl_manager.manual_dir, val_file)
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'filepath': os.path.join(
-                    dl_manager.manual_dir, 'cloze_test_test__winter2018.csv')
+                'filepath': os.path.join(dl_manager.manual_dir, test_file)
             },
         ),
     ]

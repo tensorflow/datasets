@@ -22,6 +22,7 @@ from tensorflow_datasets.text.story_cloze import story_cloze
 class StoryClozeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for story_cloze dataset."""
   DATASET_CLASS = story_cloze.StoryCloze
+
   SPLITS = {
       'validation': 1,  # Number of fake train example
       'test': 1,  # Number of fake test example
