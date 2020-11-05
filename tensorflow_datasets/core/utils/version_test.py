@@ -140,5 +140,11 @@ class VersionTest(testing.TestCase):
     )
 
 
+def test_str_to_version():
+  v0 = version.Version('1.2.3')
+  v1 = version.Version(v0)
+  assert v1 == v0
+
+
 if __name__ == '__main__':
   testing.test_main()

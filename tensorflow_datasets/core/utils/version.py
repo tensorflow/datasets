@@ -17,7 +17,7 @@
 
 import enum
 import re
-from typing import List
+from typing import List, Union
 
 import six
 import tensorflow as tf
@@ -57,12 +57,17 @@ class Version(object):
       Experiment.DUMMY: False,
   }
 
-  def __init__(self, version_str, description=None, experiments=None,
-               tfds_version_to_prepare=None):
+  def __init__(
+      self,
+      version: Union["Version", str],
+      description=None,
+      experiments=None,
+      tfds_version_to_prepare=None,
+  ):
     """Version init.
 
     Args:
-      version_str: string. Eg: "1.2.3".
+      version: string. Eg: "1.2.3".
       description: string, a description of what is new in this version.
       experiments: dict of experiments. See Experiment.
       tfds_version_to_prepare: string, defaults to None. If set, indicates that
@@ -70,6 +75,15 @@ class Version(object):
         dataset, but that TFDS at version {tfds_version_to_prepare} should be
         used instead.
     """
+    if isinstance(version, Version):
+      version_str = str(version)
+      description = description or version.description
+      experiments = experiments or version._experiments
+      tfds_version_to_prepare = (
+          tfds_version_to_prepare or version.tfds_version_to_prepare
+      )
+    else:
+      version_str = version
     if description is not None and not isinstance(description, str):
       raise TypeError(
           "Description should be a string. Got {}".format(description))
