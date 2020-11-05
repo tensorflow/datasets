@@ -53,8 +53,8 @@ class ReadOnlyBuilder(
     if info_proto.config_name:
       builder_config = dataset_builder.BuilderConfig(
           name=info_proto.config_name,
-          version=info_proto.version,
-          # TODO(tfds): Restore description.
+          description=info_proto.config_description,
+          version=info_proto.version or None,
       )
     else:
       builder_config = None
