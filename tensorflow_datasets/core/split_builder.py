@@ -377,8 +377,10 @@ class SplitBuilder:
         hash_salt=split_name,
     )
 
-    def _encode_example(key_ex):
-      return key_ex[0], self._features.encode_example(key_ex[1])
+    def _encode_example(key_ex, encode_fn=self._features.encode_example):
+      # We do not access self._features in this function to avoid pickling the
+      # entire class.
+      return key_ex[0], encode_fn(key_ex[1])
 
     # Note: We need to wrap the pipeline in a PTransform to avoid
     # errors due to duplicated ``>> beam_labels`
