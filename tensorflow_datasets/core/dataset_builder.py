@@ -944,8 +944,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     def _split_generators(self, dl_manager):
       path = dl_manager.download_and_extract('http://dataset.org/my_data.zip')
       return {
-          'train': self._generate_examples(path=f'{path}/train/'),
-          'test': self._generate_examples(path=f'{path}/test/'),
+          'train': self._generate_examples(path=path / 'train_imgs'),
+          'test': self._generate_examples(path=path / 'test_imgs'),
       }
     ```
 

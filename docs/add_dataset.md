@@ -85,20 +85,20 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Download the data and define splits."""
     extracted_path = dl_manager.download_and_extract('http://data.org/data.zip')
-    train_path = os.path.join(extracted_path, 'train_images')
-    test_path = os.path.join(extracted_path, 'test_images')
+    # dl_manager returns pathlib-like objects with `path.read_text()`,
+    # `path.iterdir()`,...
     return {
-        'train': self._generate_examples(path=train_path),
-        'test': self._generate_examples(path=test_path),
+        'train': self._generate_examples(path=extracted_path / 'train_images'),
+        'test': self._generate_examples(path=extracted_path / 'test_images'),
     }
 
   def _generate_examples(self, path) -> Iterator[Tuple[Key, Example]]:
     """Generator of examples for each split."""
-    for filename in tf.io.gfile.listdir(path)
+    for img_path in path.glob('*.jpeg'):
       # Yields (key, example)
-      yield filename, {
-          'image': os.path.join(path, filename),
-          'label': 'yes' if filename.startswith('yes_') else 'no',
+      yield img_path.name, {
+          'image': img_path,
+          'label': 'yes' if img_path.name.startswith('yes_') else 'no',
       }
 ```
 
@@ -171,13 +171,21 @@ Most datasets need to download data from the web. This is done using the
 *   `download_and_extract`: Same as
     `dl_manager.extract(dl_manager.download(urls))`
 
+All those methods returns `tfds.core.ReadOnlyPath`, which are
+[pathlib.Path-like](https://docs.python.org/3/library/pathlib.html) objects.
+
 Those methods supports arbitrary nested structure (`list`, `dict`), like:
 
 ```python
-dl_manager.download_and_extract({
+extracted_paths = dl_manager.download_and_extract({
     'foo': 'https://example.com/foo.zip',
     'bar': 'https://example.com/bar.zip',
-})  # return {'foo': '/path/to/extracted_foo/', 'bar': '/path/extracted_bar/'}
+})
+# This returns:
+assert extracted_paths == {
+    'foo': Path('/path/to/extracted_foo/'),
+    'bar': Path('/path/extracted_bar/'),
+}
 ```
 
 #### Manual download and extraction
@@ -215,12 +223,12 @@ def _split_generators(self, dl_manager):
   # Specify the splits
   return {
       'train': self._generate_examples(
-          images_dir_path=os.path.join(extracted_path, 'train_imgs'),
-          labels=os.path.join(extracted_path, 'train_labels.csv'),
+          images_path=extracted_path / 'train_imgs',
+          label_path=extracted_path / 'train_labels.csv',
       ),
       'test': self._generate_examples(
-          images_dir_path=os.path.join(extracted_path, 'test_imgs'),
-          labels=os.path.join(extracted_path, 'test_labels.csv'),
+          images_path=extracted_path / 'test_imgs',
+          label_path=extracted_path / 'test_labels.csv',
       ),
   }
 ```
@@ -252,15 +260,15 @@ yield `(key, feature_dict)` tuples:
         for more info.
 
 ```python
-def _generate_examples(self, images_dir_path, labels):
+def _generate_examples(self, images_path, label_path):
   # Read the input data out of the source files
-  with tf.io.gfile.GFile(labels) as f:
+  with label_path.open() as f:
     for row in csv.DictReader(f):
       image_id = row['image_id']
       # And yield (key, feature_dict)
       yield image_id, {
           'image_description': row['description'],
-          'image': os.path.join(images_dir_path, f'{image_id}.jpeg'),
+          'image': images_path / f'{image_id}.jpeg',
           'label': row['label'],
       }
 ```

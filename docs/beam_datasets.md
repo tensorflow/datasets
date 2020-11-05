@@ -93,7 +93,7 @@ runtimes.
 To generate the dataset on Beam, the API is the same as for other datasets, but
 you have to pass the Beam options or runner to the `DownloadConfig`.
 
-```py
+```python
 # If you are running on Dataflow, Spark,..., you may have to set-up runtime
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
