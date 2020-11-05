@@ -39,8 +39,7 @@ _CITATION = """
 _DESCRIPTION = """
 WikiBio is constructed using Wikipedia biography pages, it contains the first
 paragraph and the infobox tokenized.
-This dataset is constructed following a standarized table format (see
-b/170390852).
+The dataset follows a standarized table format.
 """
 
 _URL = 'https://drive.google.com/uc?export=download&id=1L7aoUXzHPzyzQ0ns4ApBbYepsjFOtXil'
