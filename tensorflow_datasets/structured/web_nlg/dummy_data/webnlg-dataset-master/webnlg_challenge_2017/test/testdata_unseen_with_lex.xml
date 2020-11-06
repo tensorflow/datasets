@@ -1,0 +1,13 @@
+<benchmark>
+  <entries><entry category="Politician" eid="Id1" size="1">
+      <originaltripleset>
+        <otriple>Aaron_S._Daggett | award | Purple_Heart</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Aaron_S._Daggett | award | Purple_Heart</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Aaron S Daggett was awarded the Purple Heart.</lex>
+      <lex comment="good" lid="Id2">Aaron S. Daggett was awarded the Purple Heart.</lex>
+    </entry>
+  </entries>
+</benchmark>

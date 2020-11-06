@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<benchmark>
+  <entries><entry category="Airport" eid="Id1" size="1">
+      <originaltripleset>
+        <otriple>Abilene_Regional_Airport | cityServed | Abilene,_Texas</otriple>
+      </originaltripleset>
+      <originaltripleset>
+        <otriple>Abilene_Regional_Airport | city | Abilene,_Texas</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Abilene_Regional_Airport | cityServed | Abilene,_Texas</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Abilene, Texas is served by the Abilene regional airport.</lex>
+      <lex comment="good" lid="Id2">Abilene Regional Airport serves the city of Abilene in Texas.</lex>
+    </entry>
+    <entry category="Airport" eid="Id2" size="1">
+      <originaltripleset>
+        <otriple>Adolfo_Suárez_Madrid–Barajas_Airport | location | "Madrid, Paracuellos de Jarama, San Sebastián de los Reyes and Alcobendas"@en</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Adolfo_Suárez_Madrid–Barajas_Airport | location | "Madrid, Paracuellos de Jarama, San Sebastián de los Reyes and Alcobendas"</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Adolfo Suárez Madrid–Barajas Airport can be found in Madrid, Paracuellos de Jarama, San Sebastián de los Reyes and Alcobendas.</lex>
+      <lex comment="good" lid="Id2">Adolfo Suarez Madrid-Barajas airport is located at Madrid, Paracuellos de Jarama, San Sebastián de los Reyes and Alcobendas.</lex>
+      <lex comment="good" lid="Id3">Adolfo Suarez Madrid-Barajas Airport is located in Madrid, Paracuellos de Jarama, San Sebastian de los Reyes and Alcobendas.</lex>
+    </entry>
+  </entries>
+</benchmark>
