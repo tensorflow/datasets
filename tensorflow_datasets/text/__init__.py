@@ -67,4 +67,5 @@ from tensorflow_datasets.text.wikipedia_toxicity_subtypes import WikipediaToxici
 from tensorflow_datasets.text.winogrande import Winogrande
 from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.xnli import Xnli
+from tensorflow_datasets.text.xtreme_xnli import XtremeXnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
