@@ -346,6 +346,8 @@ class C4(tfds.core.BeamBasedBuilder):
           len(wet_files), cc_version)
       file_paths["wet_files"].extend(wet_files)
 
+    file_paths = tf.nest.map_structure(os.fspath, file_paths)
+
     page_content_pcollection = self._get_page_content(
         pipeline, file_paths, dl_manager, self.builder_config.languages)
 
@@ -422,7 +424,9 @@ class C4(tfds.core.BeamBasedBuilder):
         "create_wet_files" >> beam.Create(file_paths["wet_files"]))
     if "wet_urls" in file_paths:
       def download_url(url, downloader):
-        return downloader.download({url: url})[url]
+        # Mock gfile as tf isn't patched on the workers
+        with tfds.core.tf_compat.mock_gfile_pathlike():
+          return os.fspath(downloader.download({url: url})[url])
       dl_wet_file_paths = (
           pipeline
           | "create_wet_urls" >> beam.Create(file_paths["wet_urls"])
