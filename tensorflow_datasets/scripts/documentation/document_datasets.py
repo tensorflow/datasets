@@ -266,7 +266,13 @@ def get_mako_template(tmpl_name):
   return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
 
 
-def document_single_builder(builder):
+def document_single_builder(builder: tfds.core.DatasetBuilder) -> str:
+  """Doc string for a single builder, with or without configs."""
+  with tfds.core.utils.try_reraise(f'Error for {builder.info.full_name}: '):
+    return _document_single_builder(builder)
+
+
+def _document_single_builder(builder: tfds.core.DatasetBuilder) -> str:
   """Doc string for a single builder, with or without configs."""
   print('Document builder %s...' % builder.name)
   get_config_builder = lambda config: tfds.builder(builder.name, config=config)
