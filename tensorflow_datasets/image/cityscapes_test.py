@@ -49,7 +49,6 @@ class CityscapesStereoDisparityTest(testing.DatasetBuilderTestCase):
   }
 
 
-
 class CityscapesStereoDisparityExtraTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cityscapes.Cityscapes
   BUILDER_CONFIG_NAMES_TO_TEST = ['stereo_disparity_extra']
