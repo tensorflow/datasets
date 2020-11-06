@@ -366,7 +366,7 @@ class DownloadManager(object):
       NonMatchingChecksumError:
     """
     # Extract the file name, path from the tmp_dir
-    fnames = tf.io.gfile.listdir(tmp_dir_path)
+    fnames = tf.io.gfile.listdir(os.fspath(tmp_dir_path))
     if len(fnames) != 1:
       raise ValueError(
           'Download not found for url {} in: {}. Found {} files, but expected '
@@ -384,8 +384,8 @@ class DownloadManager(object):
     )
     # Unconditionally overwrite because either file doesn't exist or
     # FORCE_DOWNLOAD=true
-    tf.io.gfile.rename(tmp_path, url_path, overwrite=True)
-    tf.io.gfile.rmtree(tmp_dir_path)
+    tf.io.gfile.rename(os.fspath(tmp_path), os.fspath(url_path), overwrite=True)
+    tf.io.gfile.rmtree(os.fspath(tmp_dir_path))
 
     # After this checkpoint, the url file is cached, so should never be
     # downloaded again, even if there are error in registering checksums.
@@ -440,7 +440,9 @@ class DownloadManager(object):
 
     # Rename (after checksum got saved succesfully)
     file_path = self._get_final_dl_path(url, url_info.checksum)
-    tf.io.gfile.rename(url_path, file_path, overwrite=True)
+    tf.io.gfile.rename(
+        os.fspath(url_path), os.fspath(file_path), overwrite=True
+    )
     resource_lib.rename_info_file(url_path, file_path, overwrite=True)
     return file_path
 
@@ -580,7 +582,7 @@ class DownloadManager(object):
       return promise.Promise.resolve(path)
     method_name = resource_lib.ExtractMethod(extract_method).name
     extract_path = self._extract_dir / f'{method_name}.{path.name}'
-    if not self._force_extraction and tf.io.gfile.exists(extract_path):
+    if not self._force_extraction and extract_path.exists():
       logging.info('Reusing extraction of %s at %s.', path, extract_path)
       return promise.Promise.resolve(extract_path)
     return self._extractor.extract(path, extract_method, extract_path)

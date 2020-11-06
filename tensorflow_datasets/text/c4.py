@@ -424,9 +424,7 @@ class C4(tfds.core.BeamBasedBuilder):
         "create_wet_files" >> beam.Create(file_paths["wet_files"]))
     if "wet_urls" in file_paths:
       def download_url(url, downloader):
-        # Mock gfile as tf isn't patched on the workers
-        with tfds.core.tf_compat.mock_gfile_pathlike():
-          return os.fspath(downloader.download({url: url})[url])
+        return os.fspath(downloader.download({url: url})[url])
       dl_wet_file_paths = (
           pipeline
           | "create_wet_urls" >> beam.Create(file_paths["wet_urls"])

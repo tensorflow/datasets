@@ -71,11 +71,14 @@ class _Extractor(object):
 
   def extract(self, path, extract_method, to_path):
     """Returns `promise.Promise` => to_path."""
+    path = os.fspath(path)
+    to_path = os.fspath(to_path)
     self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._executor.submit(self._sync_extract,
-                                   path, extract_method, to_path)
+    future = self._executor.submit(
+        self._sync_extract, path, extract_method, to_path
+    )
     return promise.Promise.resolve(future)
 
   def _sync_extract(self, from_path, method, to_path):

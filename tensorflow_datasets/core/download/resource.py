@@ -203,9 +203,9 @@ def _get_info_path(path: type_utils.PathLike) -> str:
 
 def _read_info(info_path: type_utils.PathLike) -> Json:
   """Returns info dict or None."""
-  if not tf.io.gfile.exists(info_path):
+  if not tf.io.gfile.exists(os.fspath(info_path)):
     return None
-  with tf.io.gfile.GFile(info_path) as info_f:
+  with tf.io.gfile.GFile(os.fspath(info_path)) as info_f:
     return json.load(info_f)
 
 
@@ -219,7 +219,8 @@ def rename_info_file(
     overwrite: bool = False,
 ) -> None:
   tf.io.gfile.rename(
-      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite)
+      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite
+  )
 
 
 @synchronize_decorator
@@ -311,6 +312,7 @@ class Resource(object):
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
+    path = os.fspath(path)
     return tf.io.gfile.exists(path) and tf.io.gfile.exists(_get_info_path(path))
 
   @property

@@ -144,6 +144,7 @@ class _Downloader(object):
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
+    destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
     future = self._executor.submit(
         self._sync_download, url, destination_path, verify)
