@@ -38,7 +38,7 @@ details.
 
 *   **Versions**:
 
-    * **`0.2.0`** (default): No release notes.
+    * **`0.2.0`** (default): Updated features for consistency with CivilComments dataset.
 
 *   **Download size**: `36.85 MiB`
 

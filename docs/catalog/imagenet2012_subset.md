@@ -32,7 +32,16 @@ has been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
 
 *   **Versions**:
 
-    * **`5.0.0`** (default): No release notes.
+    * `2.0.0`: Fix validation labels.
+    * `2.0.1`: Encoding fix. No changes from user point of view.
+    * `3.0.0`:
+      Fix colorization on ~12 images (CMYK -> RGB).
+      Fix format for consistency (convert the single png image to Jpeg).
+      Faster generation reading directly from the archive.
+
+    * `4.0.0`: (unpublished)
+    * **`5.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    * `5.1.0`: Added test split.
 
 *   **Manual download instructions**: This dataset requires you to
 download the source data manually into `download_config.manual_dir`

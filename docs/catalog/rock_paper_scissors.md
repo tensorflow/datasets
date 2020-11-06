@@ -20,7 +20,7 @@ Images of hands playing rock, paper, scissor game.
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `219.53 MiB`
 

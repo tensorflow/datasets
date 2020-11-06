@@ -26,7 +26,8 @@ is fixed so that regeneration is deterministic.
 
 *   **Versions**:
 
-    * **`3.1.0`** (default): No release notes.
+    * `0.0.1`: Initial dataset
+    * **`3.1.0`** (default): Implement missing corruptions. Fix crop/resize ordering, file encoding
 
 *   **Download size**: `1.98 MiB`
 

@@ -20,7 +20,7 @@ Classification of textures in colorectal cancer histology. Each example is a 150
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `246.14 MiB`
 

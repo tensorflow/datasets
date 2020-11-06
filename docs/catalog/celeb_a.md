@@ -30,8 +30,8 @@ CelebA dataset.
 
 *   **Versions**:
 
-    * **`2.0.1`** (default): No release notes.
     * `2.0.0`: No release notes.
+    * **`2.0.1`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `1.38 GiB`
 

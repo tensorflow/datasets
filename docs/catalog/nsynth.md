@@ -23,10 +23,10 @@ and heuristic algorithms: Source, Family, and Qualities.
 
 *   **Versions**:
 
-    * **`2.3.3`** (default): No release notes.
-    * `2.3.2`: No release notes.
-    * `2.3.1`: No release notes.
-    * `2.3.0`: No release notes.
+    * `2.3.0`: New `loudness_db` feature in decibels (unormalized).
+    * `2.3.1`: F0 computed with normalization fix in CREPE.
+    * `2.3.2`: Use Audio feature.
+    * **`2.3.3`** (default): F0 computed with fix in CREPE wave normalization (https://github.com/marl/crepe/issues/49).
 
 *   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
 

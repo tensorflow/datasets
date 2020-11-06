@@ -74,8 +74,16 @@ in the corresponding labels file. See imagenet2012_labels.txt.
 
 *   **Versions**:
 
-    * **`5.1.0`** (default): No release notes.
-    * `5.0.0`: No release notes.
+    * `2.0.0`: Fix validation labels.
+    * `2.0.1`: Encoding fix. No changes from user point of view.
+    * `3.0.0`:
+      Fix colorization on ~12 images (CMYK -> RGB).
+      Fix format for consistency (convert the single png image to Jpeg).
+      Faster generation reading directly from the archive.
+
+    * `4.0.0`: (unpublished)
+    * `5.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    * **`5.1.0`** (default): Added test split.
 
 *   **Download size**: `Unknown size`
 

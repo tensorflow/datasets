@@ -42,7 +42,11 @@ in order to guarantee reproducible results:
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * `2.0.1`: New split API (https://tensorflow.org/datasets/splits)
+    * **`3.0.0`** (default):
+        Better cropping sampling
+        (https://github.com/tensorflow/datasets/pull/2502)
+
 
 *   **Manual download instructions**: This dataset requires you to
 download the source data manually into `download_config.manual_dir`

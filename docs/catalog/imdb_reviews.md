@@ -21,7 +21,7 @@ This is a dataset for binary sentiment classification containing substantially m
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `80.23 MiB`
 

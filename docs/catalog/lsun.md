@@ -20,7 +20,7 @@ Large scale images showing different objects from given categories like bedroom,
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Dataset size**: `Unknown size`
 

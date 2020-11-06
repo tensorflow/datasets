@@ -21,7 +21,7 @@ where one is high resource and the other is low resource.
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `124.94 MiB`
 

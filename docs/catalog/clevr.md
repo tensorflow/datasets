@@ -22,8 +22,8 @@ reasoning each question requires.
 
 *   **Versions**:
 
-    * **`3.1.0`** (default): No release notes.
     * `3.0.0`: No release notes.
+    * **`3.1.0`** (default): Add question/answer text.
 
 *   **Download size**: `17.72 GiB`
 

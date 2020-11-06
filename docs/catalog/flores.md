@@ -10,6 +10,10 @@
 </div>
 # `flores`
 
+Note: This dataset has been updated since the last stable release.
+The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.
@@ -20,7 +24,7 @@ Evaluation datasets for low-resource machine translation: Nepali-English and Sin
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    * **`1.2.0`** (default): No release notes.
 
 *   **Download size**: `1.47 MiB`
 
@@ -42,9 +46,9 @@ Evaluation datasets for low-resource machine translation: Nepali-English and Sin
 *   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
 
 
-## flores/neen_plain_text (default config)
+## flores/neen (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Config description**: Translation dataset from ne to en, uses encoder plain_text.
+*   **Config description**: Translation dataset from ne to en.
 
 *   **Dataset size**: `1.89 MiB`
 
@@ -78,7 +82,7 @@ Translation({
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-neen_plain_text-1.1.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-neen-1.2.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -101,10 +105,9 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## flores/sien_plain_text
+## flores/sien <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Config description**: Translation dataset from si to en, uses encoder
-    plain_text.
+*   **Config description**: Translation dataset from si to en.
 
 *   **Dataset size**: `2.05 MiB`
 
@@ -139,7 +142,7 @@ Translation({
 <div id="dataframecontent" style="overflow-x:scroll"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-sien_plain_text-1.1.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-sien-1.2.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

@@ -22,7 +22,7 @@ generative models of images, so labels are not provided.
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    * **`1.0.0`** (default): Initial Release
 
 *   **Download size**: `104.68 MiB`
 

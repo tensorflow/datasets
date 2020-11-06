@@ -23,7 +23,7 @@ For resized ImageNet for supervised learning ([link](https://patrykchrabaszcz.gi
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Dataset size**: `Unknown size`
 

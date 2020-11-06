@@ -32,9 +32,9 @@ There are two features:
 
 *   **Versions**:
 
-    * **`2.1.2`** (default): No release notes.
-    * `1.0.0`: No release notes.
-    * `2.0.0`: No release notes.
+    * `1.0.0`: lower cased tokenized words
+    * `2.0.0`: Update to use cased raw strings
+    * **`2.1.2`** (default): Fix update to cased raw strings.
 
 *   **Download size**: `9.45 GiB`
 

@@ -21,7 +21,7 @@ handwritten characters from 50 different alphabets.
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `17.95 MiB`
 

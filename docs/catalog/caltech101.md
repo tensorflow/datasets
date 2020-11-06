@@ -25,7 +25,7 @@ contains bounding boxes.
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `125.64 MiB`
 

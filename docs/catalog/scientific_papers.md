@@ -27,8 +27,8 @@ Both "arxiv" and "pubmed" have two features:
 
 *   **Versions**:
 
-    * **`1.1.1`** (default): No release notes.
     * `1.1.0`: No release notes.
+    * **`1.1.1`** (default): No release notes.
 
 *   **Download size**: `4.20 GiB`
 

@@ -20,7 +20,7 @@ This data set contains roughly 44,000 examples of robot pushing motions, includi
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `30.06 GiB`
 

@@ -24,8 +24,8 @@ NQ to be a more realistic and challenging task than prior QA datasets.
 
 *   **Versions**:
 
-    * **`0.0.2`** (default): No release notes.
     * `0.0.1`: No release notes.
+    * **`0.0.2`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 

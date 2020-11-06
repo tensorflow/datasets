@@ -35,7 +35,7 @@ We varied one latent at a time (starting from orientation, then shape, etc), and
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `255.18 MiB`
 

@@ -20,7 +20,7 @@ Dataset describing the survival status of individual passengers on the Titanic. 
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `114.98 KiB`
 

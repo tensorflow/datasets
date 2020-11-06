@@ -24,7 +24,7 @@ markdown and unwanted sections (references, etc.).
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Features**:
 

@@ -35,8 +35,9 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Versions**:
 
-    *   **`2.1.0`** (default): No release notes.
-    *   `2.0.0`: No release notes.
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.1.0`** (default): Using updated optical channels calibration
+        factor.
 
 *   **Download size**: `Unknown size`
 

@@ -300,6 +300,9 @@ toc:
     title: rock_you
   - path: /datasets/catalog/titanic
     title: titanic
+  - path: /datasets/catalog/web_nlg
+    status: nightly
+    title: web_nlg
   - path: /datasets/catalog/wiki_bio
     title: wiki_bio
   - path: /datasets/catalog/wine_quality

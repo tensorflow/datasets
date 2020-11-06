@@ -42,7 +42,7 @@ while ensuring that all pixel outputs were different. No noise was added.
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
     * `2.1.0`: No release notes.
 
 *   **Download size**: `26.73 MiB`

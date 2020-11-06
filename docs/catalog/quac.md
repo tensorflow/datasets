@@ -34,7 +34,7 @@ or only meaningful within the dialog context.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `Unknown size`
 

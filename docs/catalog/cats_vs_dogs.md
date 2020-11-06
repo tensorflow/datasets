@@ -20,7 +20,7 @@ A large set of images of cats and dogs. There are 1738 corrupted images that are
 
 *   **Versions**:
 
-    * **`4.0.0`** (default): No release notes.
+    * **`4.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `786.68 MiB`
 

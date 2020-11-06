@@ -25,7 +25,7 @@ the enhanced protocol, resulting in multi-label and more accurate annotations.
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    * **`1.0.0`** (default): Initial release
 
 *   **Download size**: `379.37 KiB`
 

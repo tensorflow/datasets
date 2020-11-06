@@ -22,7 +22,7 @@ A dataset consisting of images from two classes A and B (For example: horses/zeb
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Dataset size**: `Unknown size`
 

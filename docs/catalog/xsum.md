@@ -31,8 +31,8 @@ The folder 'xsum-extracts-from-downloads' need to be compressed as
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
-    * `1.0.0`: No release notes.
+    * `1.0.0`: Dataset without cleaning.
+    * **`1.1.0`** (default): Removes web contents.
 
 *   **Download size**: `2.59 MiB`
 

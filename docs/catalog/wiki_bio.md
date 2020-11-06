@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="wiki_bio" />
-  <meta itemprop="description" content="WikiBio is constructed using Wikipedia biography pages, it contains the first&#10;paragraph and the infobox tokenized.&#10;This dataset is constructed following a standarized table format (see&#10;b/170390852).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wiki_bio&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="WikiBio is constructed using Wikipedia biography pages, it contains the first&#10;paragraph and the infobox tokenized.&#10;The dataset follows a standarized table format.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wiki_bio&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wiki_bio" />
   <meta itemprop="sameAs" content="https://github.com/DavidGrangier/wikipedia-biography-dataset" />
   <meta itemprop="citation" content="@inproceedings{lebret-etal-2016-neural,&#10;    title = &quot;Neural Text Generation from Structured Data with Application to the Biography Domain&quot;,&#10;    author = &quot;Lebret, R{&#x27;e}mi  and&#10;      Grangier, David  and&#10;      Auli, Michael&quot;,&#10;    booktitle = &quot;Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing&quot;,&#10;    month = nov,&#10;    year = &quot;2016&quot;,&#10;    address = &quot;Austin, Texas&quot;,&#10;    publisher = &quot;Association for Computational Linguistics&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/D16-1128&quot;,&#10;    doi = &quot;10.18653/v1/D16-1128&quot;,&#10;    pages = &quot;1203--1213&quot;,&#10;}" />
@@ -14,8 +14,7 @@
 
 WikiBio is constructed using Wikipedia biography pages, it contains the first
 paragraph and the infobox tokenized.
-This dataset is constructed following a standarized table format (see
-b/170390852).
+The dataset follows a standarized table format.
 
 *   **Homepage**: [https://github.com/DavidGrangier/wikipedia-biography-dataset](https://github.com/DavidGrangier/wikipedia-biography-dataset)
 

@@ -30,7 +30,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `Unknown size`
 

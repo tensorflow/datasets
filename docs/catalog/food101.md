@@ -20,8 +20,8 @@ This dataset consists of 101 food categories, with 101'000 images. For each clas
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
     * `1.0.0`: No release notes.
+    * **`2.0.0`** (default): No release notes.
     * `2.1.0`: No release notes.
 
 *   **Download size**: `4.65 GiB`

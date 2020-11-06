@@ -20,7 +20,7 @@ The Quick Draw Dataset is a collection of 50 million drawings across 345 categor
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `36.82 GiB`
 

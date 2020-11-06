@@ -29,7 +29,7 @@ Bayesian Decision Trees from a standard physics package and
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `2.62 GiB`
 

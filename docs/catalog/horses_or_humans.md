@@ -20,7 +20,7 @@ A large set of images of horses and humans.
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `153.59 MiB`
 

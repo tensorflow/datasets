@@ -183,6 +183,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`radon`](radon.md)
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
+*   [`web_nlg`](web_nlg.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki_bio`](wiki_bio.md)
 *   [`wine_quality`](wine_quality.md)
 

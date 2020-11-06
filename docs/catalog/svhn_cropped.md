@@ -21,7 +21,7 @@ The Street View House Numbers (SVHN) Dataset is an image digit recognition datas
 *   **Versions**:
 
     * **`3.0.0`** (default): No release notes.
-    * `3.1.0`: No release notes.
+    * `3.1.0`: New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `1.47 GiB`
 

@@ -22,7 +22,7 @@ A large set of high-resolution retina images taken under a variety of imaging co
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `1.13 MiB`
 

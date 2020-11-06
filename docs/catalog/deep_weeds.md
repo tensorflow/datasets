@@ -20,7 +20,8 @@ The DeepWeeds dataset consists of 17,509 images capturing eight different weed s
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    * `2.0.0`: Fixes wrong labels in V1.
+    * **`3.0.0`** (default): Update download URL.
 
 *   **Download size**: `469.32 MiB`
 

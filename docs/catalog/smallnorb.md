@@ -23,7 +23,7 @@ The training set is composed of 5 instances of each category (instances 4, 6, 7,
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
     * `2.1.0`: No release notes.
 
 *   **Download size**: `250.60 MiB`

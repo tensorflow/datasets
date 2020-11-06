@@ -24,7 +24,7 @@ not if they only see the last sentence preceding the target word
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    * **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `319.03 MiB`
 

@@ -10,6 +10,10 @@
 </div>
 # `cityscapes`
 
+Note: This dataset has been updated since the last stable release.
+The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -38,8 +42,6 @@ Ingored examples:
 
 WARNING: this dataset requires users to setup a login and password in order to get the files.
 
-*   **Config description**: Cityscapes semantic segmentation dataset.
-
 *   **Homepage**: [https://www.cityscapes-dataset.com](https://www.cityscapes-dataset.com)
 
 *   **Source code**: [`tfds.image.Cityscapes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cityscapes.py)
@@ -50,8 +52,6 @@ WARNING: this dataset requires users to setup a login and password in order to g
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `10.86 GiB`
-
 *   **Manual download instructions**: This dataset requires you to
 download the source data manually into `download_config.manual_dir`
 (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -60,6 +60,28 @@ You have to download files from https://www.cityscapes-dataset.com/login/
 For basic config (semantic_segmentation) you must download
 'leftImg8bit_trainvaltest.zip' and 'gtFine_trainvaltest.zip'.
 Other configs do require additional files - please see code for more details.
+
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+
+*   **Citation**:
+
+```
+@inproceedings{Cordts2016Cityscapes,
+  title={The Cityscapes Dataset for Semantic Urban Scene Understanding},
+  author={Cordts, Marius and Omran, Mohamed and Ramos, Sebastian and Rehfeld, Timo and Enzweiler, Markus and Benenson, Rodrigo and Franke, Uwe and Roth, Stefan and Schiele, Bernt},
+  booktitle={Proc. of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2016}
+}
+```
+
+*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+
+
+## cityscapes/semantic_segmentation (default config)
+
+*   **Config description**: Cityscapes semantic segmentation dataset.
+
+*   **Dataset size**: `10.86 GiB`
 
 *   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
 
@@ -80,21 +102,6 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
-
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
-
-*   **Citation**:
-
-```
-@inproceedings{Cordts2016Cityscapes,
-  title={The Cityscapes Dataset for Semantic Urban Scene Understanding},
-  author={Cordts, Marius and Omran, Mohamed and Ramos, Sebastian and Rehfeld, Timo and Enzweiler, Markus and Benenson, Rodrigo and Franke, Uwe and Roth, Stefan and Schiele, Bernt},
-  booktitle={Proc. of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year={2016}
-}
-```
-
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
 
 *   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -131,4 +138,93 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/semantic_segmentation (default config)
+## cityscapes/semantic_segmentation_extra <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Cityscapes semantic segmentation dataset with
+    train_extra split and coarse labels.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+})
+```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## cityscapes/stereo_disparity <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Cityscapes stereo image and disparity maps dataset.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+})
+```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## cityscapes/stereo_disparity_extra <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Cityscapes stereo image and disparity maps dataset
+    with train_extra split.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'disparity_map': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
+    'image_id': Text(shape=(), dtype=tf.string),
+    'image_left': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+    'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
+})
+```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.

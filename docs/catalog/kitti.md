@@ -26,8 +26,8 @@ the Kitti homepage.
 
 *   **Versions**:
 
-    * **`3.2.0`** (default): No release notes.
     * `3.1.0`: No release notes.
+    * **`3.2.0`** (default): Devkit updated.
 
 *   **Download size**: `11.71 GiB`
 
