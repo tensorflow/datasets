@@ -45,40 +45,17 @@ _CITATION = """@inproceedings{sharma-etal-2018-tackling,
 }
 """
 
-_VERSION = tfds.core.Version('1.0.0')
-_RELEASE_NOTES = {
-    '1.0.0': 'Initial release.',
-}
-
-
-class StoryClozeConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for StoryClozeConfig."""
-
-  def __init__(
-      self,
-      name):
-    super().__init__(
-        name=name,
-        description=_DESCRIPTION,
-        version=_VERSION,
-        release_notes=_RELEASE_NOTES)
-
 
 class StoryCloze(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for story_cloze dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
-
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
   BUILDER_CONFIGS = [
-      StoryClozeConfig(
-          name='2016',
-      ),
-      StoryClozeConfig(
-          name='2018',
-      )
+      tfds.core.BuilderConfig(name='2016', description='2018 year'),
+      tfds.core.BuilderConfig(name='2018', description='2018 year')
   ]
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Visit https://www.cs.rochester.edu/nlp/rocstories/ and fill out the google

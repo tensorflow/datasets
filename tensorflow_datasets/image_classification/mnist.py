@@ -224,11 +224,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
       test_examples: number of test examples
       **kwargs: keyword arguments forwarded to super.
     """
-    super(EMNISTConfig, self).__init__(
-        version=tfds.core.Version(
-            "3.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
+    super(EMNISTConfig, self).__init__(**kwargs)
     self.class_number = class_number
     self.train_examples = train_examples
     self.test_examples = test_examples
@@ -237,8 +233,10 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 class EMNIST(MNIST):
   """Emnist dataset."""
   URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
-  VERSION = None  # Configs.
-
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
   BUILDER_CONFIGS = [
       EMNISTConfig(
           name="byclass",

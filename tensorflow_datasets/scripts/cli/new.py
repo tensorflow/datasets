@@ -167,11 +167,13 @@ def _create_dataset_file(info: DatasetInfo) -> None:
               description=_DESCRIPTION,
               features=tfds.features.FeaturesDict({{
                   # These are the features of your dataset like images, labels ...
+                  'image': tfds.features.Image(shape=(None, None, 3)),
+                  'label': tfds.features.ClassLabel(names=['no', 'yes']),
               }}),
               # If there's a common (input, target) tuple from the
               # features, specify them here. They'll be used if
               # `as_supervised=True` in `builder.as_dataset`.
-              supervised_keys=None,  # e.g. ('image', 'label')
+              supervised_keys=('image', 'label'),  # Set to `None` to disable
               homepage='https://dataset-homepage/',
               citation=_CITATION,
           )
@@ -183,13 +185,17 @@ def _create_dataset_file(info: DatasetInfo) -> None:
 
           # {info.todo}: Returns the Dict[split names, Iterator[Key, Example]]
           return {{
-              'train': self._generate_examples(path),
+              'train': self._generate_examples(path / 'train_imgs'),
           }}
 
         def _generate_examples(self, path):
           """Yields examples."""
           # {info.todo}: Yields (key, example) tuples from the dataset
-          yield 'key', {{}}
+          for f in path.glob('*.jpeg'):
+            yield 'key', {{
+                'image': f,
+                'label': 'yes',
+            }}
       ''')
   file_path.write_text(content)
 

@@ -60,7 +60,6 @@ class Version(object):
   def __init__(
       self,
       version: Union["Version", str],
-      description=None,
       experiments=None,
       tfds_version_to_prepare=None,
   ):
@@ -68,7 +67,6 @@ class Version(object):
 
     Args:
       version: string. Eg: "1.2.3".
-      description: string, a description of what is new in this version.
       experiments: dict of experiments. See Experiment.
       tfds_version_to_prepare: string, defaults to None. If set, indicates that
         current version of TFDS cannot be used to `download_and_prepare` the
@@ -77,20 +75,20 @@ class Version(object):
     """
     if isinstance(version, Version):
       version_str = str(version)
-      description = description or version.description
       experiments = experiments or version._experiments
       tfds_version_to_prepare = (
           tfds_version_to_prepare or version.tfds_version_to_prepare
       )
     else:
       version_str = version
-    if description is not None and not isinstance(description, str):
-      raise TypeError(
-          "Description should be a string. Got {}".format(description))
-    self.description = description
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
     self.tfds_version_to_prepare = tfds_version_to_prepare
     if experiments:
+      if isinstance(experiments, str):
+        raise ValueError(
+            f"Invalid Version('{version}', '{experiments}'). Description is "
+            "deprecated. RELEASE_NOTES should be used instead."
+        )
       self._experiments.update(experiments)
     self.major, self.minor, self.patch = _str_to_version(version_str)
 
