@@ -442,6 +442,9 @@ toc:
     title: wordnet
   - path: /datasets/catalog/xnli
     title: xnli
+  - path: /datasets/catalog/xtreme_xnli
+    status: nightly
+    title: xtreme_xnli
   - path: /datasets/catalog/yelp_polarity_reviews
     title: yelp_polarity_reviews
   title: Text
