@@ -128,8 +128,8 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                              {
                                  'type' : tumor_type,
                                  'mask' : mask_array[:,:,current_slice],
-                                 't1',t1_array[:,:,current_slice],
-                                 't2',t2_array[:,:,current_slice],
-                                 't1c',t1c_array[:,:,current_slice],
-                                 'flair',flair_array[:,:,current_slice]
+                                 't1':t1_array[:,:,current_slice],
+                                 't2':t2_array[:,:,current_slice],
+                                 't1c':t1c_array[:,:,current_slice],
+                                 'flair':flair_array[:,:,current_slice]
                              })
