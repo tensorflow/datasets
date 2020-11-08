@@ -123,7 +123,7 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                     flair_array,flair_header = load(flair_file)
                     total_slices = mask_array.shape[2]
                     for current_slice in range(0,total_slices):
-                        key = image.split('/')[-1].split('.')[-2]+'_'+modality+'_'+str(current_slice+1)
+                        key = image.split('/')[-1].split('.')[-2]+'_'+str(current_slice+1)
                         yield(key,
                              {
                                  'type' : tumor_type,
