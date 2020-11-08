@@ -61,6 +61,8 @@ For basic config (semantic_segmentation) you must download
 'leftImg8bit_trainvaltest.zip' and 'gtFine_trainvaltest.zip'.
 Other configs do require additional files - please see code for more details.
 
+*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+
 *   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
 
 *   **Citation**:
@@ -82,8 +84,6 @@ Other configs do require additional files - please see code for more details.
 *   **Config description**: Cityscapes semantic segmentation dataset.
 
 *   **Dataset size**: `10.86 GiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
 
 *   **Splits**:
 
@@ -143,16 +143,15 @@ $(document).ready(() => {
 *   **Config description**: Cityscapes semantic segmentation dataset with
     train_extra split and coarse labels.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `51.92 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split           | Examples
+:-------------- | -------:
+`'train'`       | 2,975
+`'train_extra'` | 19,998
+`'validation'`  | 500
 
 *   **Features**:
 
@@ -172,16 +171,15 @@ FeaturesDict({
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `25.03 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,525
+`'train'`      | 2,975
+`'validation'` | 500
 
 *   **Features**:
 
@@ -203,16 +201,15 @@ FeaturesDict({
 *   **Config description**: Cityscapes stereo image and disparity maps dataset
     with train_extra split.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `119.18 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split           | Examples
+:-------------- | -------:
+`'train'`       | 2,975
+`'train_extra'` | 19,997
+`'validation'`  | 500
 
 *   **Features**:
 
