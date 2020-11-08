@@ -35,14 +35,15 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-        #The MRI image
-        'image' : tfds.features.Tensor(shape=(240,240),dtype=tf.float32),
-        ## The mask
-        'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.int16),
         ## Tumor Type
         'type' : tfds.features.Text(),
-        ## Modality
-        'modality': tfds.features.Text(),
+        ## The mask
+        'mask' : tfds.features.Tensor(shape=(240,240),dtype = tf.int16),
+        #4 modalities
+        't1' : tfds.features.Tensor(shape=(240,240),dtype=tf.float32),
+        't2' : tfds.features.Tensor(shape=(240,240),dtype=tf.float32),
+        't1c' : tfds.features.Tensor(shape=(240,240),dtype=tf.float32),
+        'flair' : tfds.features.Tensor(shape=(240,240),dtype=tf.float32),
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -88,35 +89,47 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                     pat_path = os.path.join(tumor_type_path,pat)
                     image_files = []
                     for file in tf.io.gfile.listdir(pat_path):
-                        if file.startswith('.'):
-                            pass
-                        else:
-                            if 'OT.' in file:
-                                for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
-                                    if image.endswith('.mha'):
-                                        mask_file = os.path.join(pat_path,file,image)
-                                        break
 
-                            else:
-                                for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
-                                    if image.endswith('.mha'):
-                                        image_files.append(os.path.join(pat_path,file,image))
+                        if 'OT.' in file:
+                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                if image.endswith('.mha'):
+                                    mask_file = os.path.join(pat_path,file,image)
+                                    break
+
+                        elif 'T1.' in file:
+                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                if image.endswith('.mha'):
+                                    t1_file = os.path.join(pat_path,file,image)
+                                    break
+                        elif 'T1c.' in file:
+                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                if image.endswith('.mha'):
+                                    t1c_file = os.path.join(pat_path,file,image)
+                                    break
+                        elif 'T2.' in file:
+                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                if image.endswith('.mha'):
+                                    t2_file = os.path.join(pat_path,file,image)
+                                    break
+                        elif 'Flair.' in file:
+                            for image in tf.io.gfile.listdir(os.path.join(pat_path,file)):
+                                if image.endswith('.mha'):
+                                    flair_file = os.path.join(pat_path,file,image)
+                                    break
                     mask_array,mask_header = load(mask_file)
-                    mask_array  = mask_array.astype('int16')
+                    t1_array,t1_header = load(t1_file)
+                    t1c_array,t1c_header = load(t1c_file)
+                    t2_array,t2_header = load(t2_file)
+                    flair_array,flair_header = load(flair_file)
                     total_slices = mask_array.shape[2]
-                    for image in image_files:
-                        modality = image.split('/')[-1].split('.')[-3].split('_')[-1]
-                        image_array, image_header = load(image)
-                        image_array = image_array.astype('float32')
-                        for current_slice in range(0,total_slices):
-                            key = image.split('/')[-1].split('.')[-2]+'_'+modality+'_'+str(current_slice+1)
-                            yield( key,
-                                            {
-
-                                                    'type' : tumor_type,
-                                                    'modality': modality,
-                                                    'image':image_array[:,:,current_slice],
-                                                    'mask' : mask_array[:,:,current_slice],
-
-                                            })
-
+                    for current_slice in range(0,total_slices):
+                        key = image.split('/')[-1].split('.')[-2]+'_'+modality+'_'+str(current_slice+1)
+                        yield(key,
+                             {
+                                 'type' : tumor_type,
+                                 'mask' : mask_array[:,:,current_slice],
+                                 't1',t1_array[:,:,current_slice],
+                                 't2',t2_array[:,:,current_slice],
+                                 't1c',t1c_array[:,:,current_slice],
+                                 'flair',flair_array[:,:,current_slice]
+                             })
