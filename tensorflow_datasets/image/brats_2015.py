@@ -117,10 +117,15 @@ class Brats2015(tfds.core.GeneratorBasedBuilder):
                                     flair_file = os.path.join(pat_path,file,image)
                                     break
                     mask_array,mask_header = load(mask_file)
+                    mask_array  = mask_array.astype('int16')
                     t1_array,t1_header = load(t1_file)
+                    t1_array  = t1_array.astype('float32')
                     t1c_array,t1c_header = load(t1c_file)
+                    t1c_array  = t1c_array.astype('float32')
                     t2_array,t2_header = load(t2_file)
+                    t2_array  = t2_array.astype('float32')
                     flair_array,flair_header = load(flair_file)
+                    flair_array  = flair_array.astype('float32')
                     total_slices = mask_array.shape[2]
                     for current_slice in range(0,total_slices):
                         key = image.split('/')[-1].split('.')[-2]+'_'+str(current_slice+1)
