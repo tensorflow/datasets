@@ -188,7 +188,7 @@ class WriterTest(testing.TestCase):
     with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                                     return_value=1):
       with self.assertRaisesWithPredicateMatch(
-          AssertionError, 'Two records share the same hashed key!'):
+          AssertionError, 'Two examples share the same hashed key'):
         self._write(to_write, path)
 
   def test_empty_split(self):

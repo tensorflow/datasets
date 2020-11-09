@@ -65,14 +65,14 @@ _ShardSpec = collections.namedtuple("_ShardSpec", [
 
 def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   """Log information about the examples and raise an AssertionError."""
-  msg = "Two records share the same hashed key!"
+  msg = "Two examples share the same hashed key!"
   logging.error(msg)
   parser = example_parser.ExampleParser(example_specs)
   ex1 = parser.parse_example(example1)
   ex2 = parser.parse_example(example2)
   logging.error("1st example: %s", ex1)
   logging.error("2nd example: %s", ex2)
-  raise AssertionError(msg)
+  raise AssertionError(msg + " See logs above to view the examples.")
 
 
 def _get_shard_specs(
