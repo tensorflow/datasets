@@ -36,17 +36,6 @@ The default config is made of patches extracted from the original mammograms,
 following the description from http://arxiv.org/abs/1708.09427, in order to
 frame the task to solve in a traditional image classification setting.
 
-Because special software and libraries are needed to download and read the
-images contained in the dataset, TFDS assumes that the user has downloaded the
-original DCIM files and converted them to PNG.
-
-The following commands (or equivalent) should be used to generate the PNG files,
-in order to guarantee reproducible results:
-
-```
-  find $DATASET_DCIM_DIR -name '*.dcm' | \\
-  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
-```
 """
 
 _CITATION = """\
@@ -137,8 +126,21 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You can download the images from
   https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
-  Please look at the source file (cbis_ddsm.py) to see the instructions
-  on how to convert them into png (using dcmj2pnm).
+
+  Because special software and libraries are needed to download and read the
+  images contained in the dataset, TFDS assumes that the user has downloaded the
+  original DCIM files and converted them to PNG.
+
+  The following commands (or equivalent) should be used to generate the PNG
+  files, in order to guarantee reproducible results:
+
+  ```sh
+  find $DATASET_DCIM_DIR -name '*.dcm' | \\
+  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+  ```
+
+  Resulting images should be put in `manual_dir`, like:
+  `<manual_dir>/Mass-Training_P_01981_RIGHT_MLO_1/1.3.6.../000000.png`.
   """
 
   BUILDER_CONFIGS = [
