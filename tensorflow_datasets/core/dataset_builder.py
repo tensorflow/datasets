@@ -310,7 +310,13 @@ class DatasetBuilder(registered.RegisteredDataset):
           "Info should not been called before version has been defined. "
           "Otherwise, the created .info may not match the info version from "
           "the restored dataset.")
-    return self._info()
+    info = self._info()
+    if not isinstance(info, dataset_info.DatasetInfo):
+      raise TypeError(
+          "DatasetBuilder._info should returns `tfds.core.DatasetInfo`, not "
+          f" {type(info)}."
+      )
+    return info
 
   def download_and_prepare(self, *, download_dir=None, download_config=None):
     """Downloads and prepares dataset for reading.
