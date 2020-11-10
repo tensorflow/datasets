@@ -36,18 +36,20 @@ or only meaningful within the dialog context.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `73.47 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `298.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 83,568
+`'validation'` | 7,354
 
 *   **Features**:
 
