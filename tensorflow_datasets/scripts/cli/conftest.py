@@ -13,20 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.scripts.cli.main."""
+"""CLI Fixtures."""
 
+import argparse
 from unittest import mock
 
-from tensorflow_datasets.scripts.cli import main
+import pytest
 
 
-def test_main():
-
-  def _check_exit(status=0, message=None):
-    del message
-    assert status == 0  # Check argparse exit gracefully
-
-  # Argparse call `sys.exit(0)` when `--version` is passed.
-  with mock.patch('sys.exit', _check_exit):
-    version_flag = '--version'
-    main.main(main._parse_flags(['', version_flag]))
+@pytest.fixture(scope='session', autouse=True)
+def _mock_argparse_flags():
+  """Mock absl argparse_flag with argparse."""
+  # absl flags are globally registered during pytest tests collection.
+  # This creates conflict if the same flag is defined outside the CLI (in
+  # another test):
+  # `flags.DEFINE_string('data_dir')` with `parser.add_argument('--data_dir')`
+  # We patch argparse_flags during test, so absl flags are ignored.
+  with mock.patch(
+      'absl.flags.argparse_flags.ArgumentParser', argparse.ArgumentParser
+  ):
+    yield

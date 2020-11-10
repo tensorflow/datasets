@@ -18,6 +18,8 @@ r"""CLI for Tensorflow Datasets.
 TFDS CLI to help creates and build datasets (e.g. `tfds new my_dataset`,
 `tfds build`,...)
 
+See: https://www.tensorflow.org/datasets/cli
+
 """
 
 import argparse
