@@ -22,6 +22,10 @@ from tensorflow_datasets.text.quac import quac
 class QuacTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for quac dataset."""
   DATASET_CLASS = quac.Quac
+  DL_EXTRACT_RESULT = {
+      "train": "train_v0.2.json",
+      "val": "val_v0.2.json",
+  }
   SPLITS = {
       "train": 8,  # Number of fake train example
       "validation": 8,  # Number of fake validation example

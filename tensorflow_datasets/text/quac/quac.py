@@ -16,7 +16,6 @@
 """quac dataset."""
 
 import json
-import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -90,18 +89,14 @@ class Quac(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerator."""
 
-    train_dir = dl_manager.download_and_extract(
-        os.path.join(_DATA_URL, "train_v0.2.json"))
-    val_dir = dl_manager.download_and_extract(
-        os.path.join(_DATA_URL, "val_v0.2.json"))
+    expected_paths = dl_manager.download_and_extract({
+        "train": _DATA_URL + "train_v0.2.json",
+        "val": _DATA_URL + "val_v0.2.json"
+    })
 
     return {
-        "train":
-            self._generate_examples(
-                filepath=os.path.join(train_dir, "train_v0.2.json")),
-        "validation":
-            self._generate_examples(
-                filepath=os.path.join(val_dir, "val_v0.2.json"))
+        "train": self._generate_examples(expected_paths["train"]),
+        "validation": self._generate_examples(expected_paths["val"])
     }
 
   def _generate_examples(self, filepath):
