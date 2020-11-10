@@ -15,15 +15,13 @@ import itertools
 import os
 import sys
 
-import pkg_resources
 from setuptools import find_packages
 from setuptools import setup
 
+nightly = False
 if '--nightly' in sys.argv:
   nightly = True
   sys.argv.remove('--nightly')
-else:
-  nightly = False
 
 project_name = 'tensorflow-datasets'
 
@@ -35,11 +33,9 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 
 if nightly:
   project_name = 'tfds-nightly'
-  # Version as `X.Y.Z.dev199912312459`
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  curr_version = pkg_resources.parse_version(__version__)
-  __version__ = f'{curr_version.base_version}.dev{datestring}'
+  __version__ += 'dev%s' % datestring
 
 
 DOCLINES = __doc__.split('\n')
@@ -48,6 +44,7 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'dm-tree',
     'future',
     'numpy',
     'promise',
@@ -59,7 +56,6 @@ REQUIRED_PKGS = [
     'tqdm',
     # Standard library backports
     'dataclasses;python_version<"3.7"',
-    'typing_extensions;python_version<"3.8"',
     'importlib_resources;python_version<"3.9"',
 ]
 
@@ -80,7 +76,7 @@ TESTS_REQUIRE = [
 
 # Additional deps for formatting
 DEV_REQUIRE = [
-    'pylint>=2.6.0',
+    'pylint>=2.5.3',
     'yapf',
 ]
 
@@ -120,11 +116,11 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
-    'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
+    'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
-    'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
+    'eurosat': ['scikit-image',],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
@@ -151,7 +147,7 @@ DATASET_EXTRAS = {
 
 
 # Those datasets have dependencies which conflict with the rest of TFDS, so
-# running them in an isolated environments.
+# running them in an isolated environements.
 # See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 
@@ -164,7 +160,8 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
-    'tensorflow': ['tensorflow>=2.1'],
+    'tensorflow': ['tensorflow>=1.15.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
 
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh

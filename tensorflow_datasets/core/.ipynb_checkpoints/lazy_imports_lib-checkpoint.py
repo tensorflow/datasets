@@ -58,11 +58,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def gcld3(cls):
-    return _try_import("gcld3")  # pylint: disable=unreachable
-
-  @utils.classproperty
-  @classmethod
   def h5py(cls):
     return _try_import("h5py")
 
@@ -119,7 +114,6 @@ class LazyImporter(object):
   @classmethod
   def scipy(cls):
     _try_import("scipy.io")
-    _try_import("scipy.io.wavfile")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 
@@ -133,11 +127,6 @@ class LazyImporter(object):
     except ImportError:
       pass
     return _try_import("skimage")
-
-  @utils.classproperty
-  @classmethod
-  def tifffile(cls):
-    return _try_import("tifffile")
 
   @utils.classproperty
   @classmethod
