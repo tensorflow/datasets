@@ -19,7 +19,7 @@ import argparse
 import functools
 import os
 import pathlib
-from typing import Iterator, Type
+from typing import Iterator, Optional, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
@@ -111,6 +111,20 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   # **** Generation options ****
   generation_group = build_parser.add_argument_group('Generation')
   generation_group.add_argument(
+      '--config', '-c',
+      type=str,
+      help='Config name to build. Build all configs if not set.'
+  )
+  # We are forced to have 2 flags to avoid ambiguity when config name is
+  # a number (e.g. `voc/2017`)
+  generation_group.add_argument(
+      '--config_idx',
+      type=int,
+      help=
+      'Config id to build (`builder_cls.BUILDER_CONFIGS[config_idx]`). '
+      'Mutually exclusive with `--config`.'
+  )
+  generation_group.add_argument(
       '--register_checksums',
       action='store_true',
       help='If True, store size and checksum of downloaded files.',
@@ -142,11 +156,6 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       'Comma separated list of datasets to exclude. '
   )
   automation_group.add_argument(
-      '--builder_config_id',
-      type=int,
-      help='Id of the config to build: `builder_cls.BUILDER_CONFIGS[id]`'
-  )
-  automation_group.add_argument(
       '--experimental_latest_version',
       action='store_true',
       help='Build the latest Version(experiments=...) available rather than '
@@ -167,11 +176,6 @@ def _build_datasets(args: argparse.Namespace) -> None:
   else:
     datasets = datasets or ['']  # Empty string for default
 
-  if len(datasets) > 1 and args.builder_config_id is not None:
-    raise ValueError(
-        '--builder_config_id can only be used when building a single dataset.'
-    )
-
   # Generate all datasets sequencially
   for ds_to_build in datasets:
     # Each `str` may correspond to multiple builder (e.g. multiple configs)
@@ -189,56 +193,48 @@ def _make_builders(
   # * From file (`.py`), dataset-as-folder (`my_dataset/`):
   # * Nothing (use current directory)
   # * From module `tensorflow_datasets.text.my_dataset`
-  # * From partial / full name: `my_dataset/config`, `my_dataset:1.0.0`
   # * Community datasets: `namespace/my_dataset`
 
   # If no dataset selected, use current directory
   if not ds_to_build:
     raise NotImplementedError('No datasets provided not supported yet.')
 
-  # Currently only single name supported
-  builder_cls = tfds.builder_cls(ds_to_build)
+  # Extract `name/config:version`
+  extract_name_and_kwargs = tfds.core.load.dataset_name_and_kwargs_from_name_str
+  builder_name, builder_kwargs = extract_name_and_kwargs(ds_to_build)
+  builder_cls = tfds.builder_cls(builder_name)
 
-  # Only pass the version kwargs when required. Otherwise, `version=None`
-  # overwrite the version parsed from the name.
-  # `tfds.builder('my_dataset:1.2.0', version=None)`
+  # Eventually overwrite version
   if args.experimental_latest_version:
-    version_kwarg = {'version': 'experimental_latest'}
-  else:
-    version_kwarg = {}
+    if 'version' in builder_kwargs:
+      raise ValueError(
+          'Can\'t have both `--experimental_latest` and version set (`:1.0.0`)'
+      )
+    builder_kwargs['version'] = 'experimental_latest'
+
+  # Eventually overwrite config
+  builder_kwargs['config'] = _get_config_name(
+      builder_cls=builder_cls,
+      config_kwarg=builder_kwargs.get('config'),
+      config_name=args.config,
+      config_idx=args.config_idx,
+  )
 
   make_builder = functools.partial(
       _make_builder,
       builder_cls,
       overwrite=args.overwrite,
       data_dir=args.data_dir,
-      **version_kwarg,
+      **builder_kwargs,
   )
-  if args.builder_config_id is not None:
-    # Only generate a single builder if --builder_config_id is set.
-    if not builder_cls.BUILDER_CONFIGS:
-      raise ValueError(
-          '--builder_config_id can only be used with datasets with configs'
-      )
-    if args.builder_config_id > len(builder_cls.BUILDER_CONFIGS):
-      logging.warning(
-          f'--builder_config_id {args.builder_config_id} greater than number '
-          f'of configs {len(builder_cls.BUILDER_CONFIGS)} for '
-          f'{builder_cls.name}. Skipping...'
-      )
-      return
-    # Use `config.name` to avoid
-    # https://github.com/tensorflow/datasets/issues/2348
-    config = builder_cls.BUILDER_CONFIGS[args.builder_config_id]
-    yield make_builder(config=config.name)
+
+  # Generate all configs if no config requested.
+  if builder_cls.BUILDER_CONFIGS and builder_kwargs['config'] is None:
+    for config in builder_cls.BUILDER_CONFIGS:
+      yield make_builder(config=config.name)
+  # Generate only the dataset
   else:
-    # Generate all configs
-    if builder_cls.BUILDER_CONFIGS:
-      for config in builder_cls.BUILDER_CONFIGS:
-        yield make_builder(config=config.name)
-    # Generate only the dataset
-    else:
-      yield make_builder()
+    yield make_builder()
 
 
 def _make_builder(
@@ -303,3 +299,53 @@ def _make_download_config(
       )
 
   return dl_config
+
+
+def _get_config_name(
+    builder_cls: Type[tfds.core.DatasetBuilder],
+    config_kwarg: Optional[str],
+    config_name: Optional[str],
+    config_idx: Optional[int],
+) -> Optional[str]:
+  """Extract the config name.
+
+  Args:
+    builder_cls: Builder class
+    config_kwarg: Config passed as `ds_name/config`
+    config_name: Config passed as `--config name`
+    config_idx: Config passed as `--config_idx 0`
+
+  Returns:
+    The config name to generate, or None.
+  """
+  num_config = sum(
+      c is not None for c in (config_kwarg, config_name, config_idx)
+  )
+  if num_config > 1:
+    raise ValueError(
+        'Config should only be defined once by either `ds_name/config`, '
+        '`--config` or `--config_idx`'
+    )
+  elif num_config == 1 and not builder_cls.BUILDER_CONFIGS:
+    raise ValueError(
+        f'Cannot generate requested config: Dataset {builder_cls.name} does '
+        'not have config.'
+    )
+
+  if config_kwarg:  # `ds_name/config`
+    return config_kwarg
+  elif config_name:  # `--config name`
+    return config_name
+  elif config_idx is not None:  # `--config_idx 123`
+    if config_idx > len(builder_cls.BUILDER_CONFIGS):
+      raise ValueError(
+          f'--config_idx {config_idx} greater than number '
+          f'of configs {len(builder_cls.BUILDER_CONFIGS)} for '
+          f'{builder_cls.name}.'
+      )
+    else:
+      # Use `config.name` to avoid
+      # https://github.com/tensorflow/datasets/issues/2348
+      return builder_cls.BUILDER_CONFIGS[config_idx].name
+  else:  # No config defined
+    return None

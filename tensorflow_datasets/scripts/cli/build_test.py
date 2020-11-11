@@ -55,8 +55,17 @@ def test_build_single():
   dl_and_prepare = _build('mnist')
   assert dl_and_prepare.call_count == 1
 
+  dl_and_prepare = _build('mnist:3.0.1')
+  assert dl_and_prepare.call_count == 1
+
   with pytest.raises(tfds.core.load.DatasetNotFoundError):
     _build('unknown_dataset')
+
+  with pytest.raises(AssertionError, match='cannot be loaded at version 1.0.0'):
+    _build('mnist:1.0.0')  # Can only built the last version
+
+  with pytest.raises(ValueError, match='not have config'):
+    _build('mnist --config_idx 0')
 
   # Keyword arguments also possible
   dl_and_prepare = _build('--datasets mnist')
@@ -78,9 +87,25 @@ def test_build_dataset_configs():
   dl_and_prepare = _build('trivia_qa')
   assert dl_and_prepare.call_count == 4
 
-  # If --builder_config_id is set, only the defined config is generated.
-  dl_and_prepare = _build('trivia_qa --builder_config_id=0')
+  # If config is set, only the defined config is generated
+
+  # --config_idx
+  dl_and_prepare = _build('trivia_qa --config_idx=0')
   assert dl_and_prepare.call_count == 1
+
+  # --config
+  dl_and_prepare = _build('trivia_qa --config unfiltered.nocontext')
+  assert dl_and_prepare.call_count == 1
+
+  # name/config
+  dl_and_prepare = _build('trivia_qa/unfiltered.nocontext')
+  assert dl_and_prepare.call_count == 1
+
+  with pytest.raises(ValueError, match='Config should only be defined once'):
+    _build('trivia_qa/unfiltered.nocontext --config_idx=0')
+
+  with pytest.raises(ValueError, match='greater than number of configs'):
+    _build('trivia_qa --config_idx 100')
 
 
 def test_exclude_datasets():

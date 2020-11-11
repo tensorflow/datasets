@@ -19,7 +19,7 @@ import os
 import posixpath
 import re
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
 
 from absl import flags
 from absl import logging
@@ -132,7 +132,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  name, kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  name, kwargs = dataset_name_and_kwargs_from_name_str(name)
   if kwargs:
     raise ValueError(
         "`builder_cls` only accept the `dataset_name` without config, "
@@ -177,7 +177,7 @@ def builder(
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  builder_name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
 
   # Try loading the code (if it exists)
   try:
@@ -419,7 +419,7 @@ def _find_builder_dir_single_dir(
     data_dir: str,
 ) -> Optional[str]:
   """Same as `find_builder_dir` but require explicit dir."""
-  builder_name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
   config_name = builder_kwargs.pop("config", None)
   version_str = builder_kwargs.pop("version", None)
   if builder_kwargs:
@@ -500,7 +500,9 @@ def _get_version_str(
   return None
 
 
-def _dataset_name_and_kwargs_from_name_str(name_str):
+def dataset_name_and_kwargs_from_name_str(
+    name_str: str,
+) -> Tuple[str, Dict[str, Union[str, int, float, bool]]]:
   """Extract kwargs from name str."""
   res = _NAME_REG.match(name_str)
   if not res:
