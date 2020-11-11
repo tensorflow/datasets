@@ -118,6 +118,10 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
       raise ValueError(f'Directory {self._path_str} is not empty')
     tf.io.gfile.rmtree(self._path_str)
 
+  def rmtree(self) -> None:
+    """Remove the directory."""
+    tf.io.gfile.rmtree(self._path_str)
+
   def open(
       self,
       mode: str = 'r',

@@ -186,7 +186,11 @@ class ReadWritePath(ReadOnlyPath, Protocol):
 
   @abc.abstractmethod
   def rmdir(self) -> None:
-    """Create a new directory at this given path."""
+    """Remove the empty directory at this given path."""
+
+  @abc.abstractmethod
+  def rmtree(self) -> None:
+    """Remove the directory, including all sub-files."""
 
   def write_bytes(self, data: bytes) -> None:
     """Writes content as bytes."""

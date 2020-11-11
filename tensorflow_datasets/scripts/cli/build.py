@@ -19,7 +19,7 @@ import argparse
 import functools
 import os
 import pathlib
-from typing import Iterator
+from typing import Iterator, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
@@ -54,7 +54,11 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       description='--pdb Enter post-mortem debugging mode '
       'if an exception is raised.'
   )
-  # TODO(tfds): Add flag to overwrite the existing dataset.
+  debug_group.add_argument(
+      '--overwrite',
+      action='store_true',
+      help='Delete pre-existing dataset if it exists.',
+  )
   debug_group.add_argument(
       '--max_examples_per_split',
       type=int,
@@ -171,11 +175,11 @@ def _build_datasets(args: argparse.Namespace) -> None:
   # Generate all datasets sequencially
   for ds_to_build in datasets:
     # Each `str` may correspond to multiple builder (e.g. multiple configs)
-    for builder in _make_builder(args, ds_to_build):
+    for builder in _make_builders(args, ds_to_build):
       _download_and_prepare(args, builder)
 
 
-def _make_builder(
+def _make_builders(
     args: argparse.Namespace,
     ds_to_build: str,
 ) -> Iterator[tfds.core.DatasetBuilder]:
@@ -204,7 +208,9 @@ def _make_builder(
     version_kwarg = {}
 
   make_builder = functools.partial(
+      _make_builder,
       builder_cls,
+      overwrite=args.overwrite,
       data_dir=args.data_dir,
       **version_kwarg,
   )
@@ -233,6 +239,20 @@ def _make_builder(
     # Generate only the dataset
     else:
       yield make_builder()
+
+
+def _make_builder(
+    builder_cls: Type[tfds.core.DatasetBuilder],
+    overwrite: bool,
+    **builder_kwargs,
+) -> tfds.core.DatasetBuilder:
+  """Builder factory, eventually deleting pre-existing dataset."""
+  builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
+  if overwrite and builder.data_path.exists():
+    builder.data_path.rmtree()  # Delete pre-existing data
+    # Re-create the builder with clean state
+    builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
+  return builder
 
 
 def _download_and_prepare(
@@ -264,7 +284,6 @@ def _make_download_config(
   dl_config = tfds.download.DownloadConfig(
       extract_dir=args.extract_dir,
       manual_dir=args.manual_dir,
-      # TODO(b/116270825): Add flag to force extraction / preparation.
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=args.max_examples_per_split,
       register_checksums=args.register_checksums,

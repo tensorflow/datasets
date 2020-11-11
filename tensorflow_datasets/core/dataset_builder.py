@@ -268,7 +268,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     return self._data_dir
 
   @property
-  def _data_path(self) -> type_utils.ReadWritePath:
+  def data_path(self) -> type_utils.ReadWritePath:
     # Instead, should make `_data_dir` be Path everywhere
     return utils.as_path(self._data_dir)
 
@@ -1112,7 +1112,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
           split_builder.submit_split_generation(  # pylint: disable=g-complex-comprehension
               split_name=split_name,
               generator=generator,
-              path=self._data_path / f"{self.name}-{split_name}.tfrecord",
+              path=self.data_path / f"{self.name}-{split_name}.tfrecord",
           )
           for split_name, generator
           in utils.tqdm(split_generators.items(), unit=" splits", leave=False)

@@ -26,7 +26,7 @@ from tensorflow_datasets.scripts.cli import main
 
 
 @pytest.fixture(scope='function', autouse=True)
-def _mock_default_data_dir(tmp_path: pathlib.Path):
+def mock_default_data_dir(tmp_path: pathlib.Path):
   """Changes the default `--data_dir` to tmp_path."""
   tmp_path = tmp_path / 'datasets'
   default_data_dir = os.environ.get('TFDS_DATA_DIR')
@@ -93,3 +93,23 @@ def test_exclude_datasets():
 
   with pytest.raises(ValueError, match='--exclude_datasets can\'t be used'):
     dl_and_prepare = _build('mnist --exclude_datasets cifar10')
+
+
+def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disable=redefined-outer-name
+  data_dir = mock_default_data_dir / 'mnist/3.0.1'
+  data_dir.mkdir(parents=True)
+  metadata_path = tfds.core.tfds_path(
+      'testing/test_data/dataset_info/mnist/3.0.1'
+  )
+
+  for f in metadata_path.iterdir():  # Copy metadata files.
+    data_dir.joinpath(f.name).write_text(f.read_text())
+
+  # By default, will skip generation if the data already exists
+  dl_and_prepare = _build('mnist')
+  assert dl_and_prepare.call_count == 1  # Called, but no-op
+  assert data_dir.exists()
+
+  dl_and_prepare = _build('mnist --overwrite')
+  assert dl_and_prepare.call_count == 1
+  assert not data_dir.exists()  # Previous data-dir has been removed
