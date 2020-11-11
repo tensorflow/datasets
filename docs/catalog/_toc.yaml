@@ -440,6 +440,9 @@ toc:
     title: winogrande
   - path: /datasets/catalog/wordnet
     title: wordnet
+  - path: /datasets/catalog/wsc273
+    status: nightly
+    title: wsc273
   - path: /datasets/catalog/xnli
     title: xnli
   - path: /datasets/catalog/xtreme_xnli

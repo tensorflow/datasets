@@ -55,18 +55,20 @@ escaped by a backslash followed with an "n" character, that is " ".
 
     *   **`0.2.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `158.67 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `435.14 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 38,000
+`'train'` | 560,000
 
 *   **Features**:
 

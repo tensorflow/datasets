@@ -33,18 +33,25 @@ project, and has been carefully segmented and aligned.87
 
     *   **`2.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `57.14 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `304.47 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split              | Examples
+:----------------- | -------:
+`'dev_clean'`      | 2,703
+`'dev_other'`      | 2,864
+`'test_clean'`     | 2,620
+`'test_other'`     | 2,939
+`'train_clean100'` | 28,539
+`'train_clean360'` | 104,014
+`'train_other500'` | 148,688
 
 *   **Features**:
 

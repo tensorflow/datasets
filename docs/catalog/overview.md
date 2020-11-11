@@ -258,6 +258,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wikipedia_toxicity_subtypes`](wikipedia_toxicity_subtypes.md)
 *   [`winogrande`](winogrande.md)
 *   [`wordnet`](wordnet.md)
+*   [`wsc273`](wsc273.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xnli`](xnli.md)
 *   [`xtreme_xnli`](xtreme_xnli.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>

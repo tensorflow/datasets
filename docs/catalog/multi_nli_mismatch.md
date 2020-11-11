@@ -36,18 +36,20 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `216.34 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `90.91 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 392,702
+`'validation'` | 10,000
 
 *   **Features**:
 

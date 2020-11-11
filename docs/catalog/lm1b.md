@@ -32,18 +32,20 @@ modeling. This has almost one billion words in the training data.
 
     *   **`1.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.67 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.40 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | ---------:
+`'test'`  | 306,688
+`'train'` | 30,301,028
 
 *   **Features**:
 
