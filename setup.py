@@ -146,6 +146,7 @@ DATASET_EXTRAS = {
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'lsun': ['tensorflow-io'],
+    'wsc273': ['bs4', 'lxml'],
 }
 
 

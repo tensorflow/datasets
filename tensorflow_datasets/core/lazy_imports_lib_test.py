@@ -27,9 +27,11 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   # * crepe (NSynth)
   # * librosa (NSynth)
   @parameterized.parameters(
+      "bs4",
       "cv2",
       "gcld3",
       "langdetect",
+      "lxml",
       "matplotlib",
       "mwparserfromhell",
       "nltk",

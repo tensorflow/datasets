@@ -48,6 +48,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def bs4(cls):
+    return _try_import("bs4")
+
+  @utils.classproperty
+  @classmethod
   def crepe(cls):
     return _try_import("crepe")
 
@@ -75,6 +80,11 @@ class LazyImporter(object):
   @classmethod
   def librosa(cls):
     return _try_import("librosa")
+
+  @utils.classproperty
+  @classmethod
+  def lxml(cls):
+    return _try_import("lxml")
 
   @utils.classproperty
   @classmethod
