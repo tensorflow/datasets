@@ -20,6 +20,7 @@ import tempfile
 from unittest import mock
 
 from absl.testing import absltest
+import dataclasses
 import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -40,11 +41,9 @@ tf.enable_v2_behavior()
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
+@dataclasses.dataclass
 class DummyBuilderConfig(dataset_builder.BuilderConfig):
-
-  def __init__(self, increment=0, **kwargs):
-    super(DummyBuilderConfig, self).__init__(**kwargs)
-    self.increment = increment
+  increment: int = 0
 
 
 class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):

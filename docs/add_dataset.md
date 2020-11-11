@@ -329,8 +329,10 @@ This is done through `tfds.core.BuilderConfig`s:
 ```python
 @dataclasses.dataclass
 class MyDatasetConfig(tfds.core.BuilderConfig):
-  img_size: Tuple[int, int]
+  img_size: Tuple[int, int] = (0, 0)
 ```
+
+Note: Default values are required because of https://bugs.python.org/issue33129.
 
 2.  Define the `BUILDER_CONFIGS = []` class member in `MyDataset` that lists
     `MyDatasetConfig`s that the dataset exposes.
