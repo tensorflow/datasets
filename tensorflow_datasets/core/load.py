@@ -21,7 +21,6 @@ import re
 import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
 
-from absl import flags
 from absl import logging
 import tensorflow.compat.v2 as tf
 
@@ -39,15 +38,14 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
 
-
 # pylint: disable=logging-format-interpolation
-
-FLAGS = flags.FLAGS
 
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 
 PredicateFn = Callable[[Type[dataset_builder.DatasetBuilder]], bool]
+
+DatasetNotFoundError = registered.DatasetNotFoundError
 
 _NAME_STR_ERR = """\
 Parsing builder name string {} failed.
@@ -70,15 +68,6 @@ The builder name string must be of the following format:
     my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
 """
 
-_DATASET_NOT_FOUND_ERR = """\
-Check that:
-    - if dataset was added recently, it may only be available
-      in `tfds-nightly`
-    - the dataset name is spelled correctly
-    - dataset class defines all base class abstract methods
-    - the module defining the dataset class is imported
-"""
-
 
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(
@@ -98,25 +87,8 @@ _FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
 ))
 
 
-class DatasetNotFoundError(ValueError):
-  """The requested Dataset was not found."""
-
-  def __init__(self, name, is_abstract=False):
-    self.is_abstract = is_abstract
-    all_datasets_str = "\n\t- ".join([""] + list_builders())
-    if is_abstract:
-      error_string = ("Dataset %s is an abstract class so cannot be created. "
-                      "Please make sure to instantiate all abstract methods.\n"
-                      "%s") % (name, _DATASET_NOT_FOUND_ERR)
-    else:
-      error_string = ("Dataset %s not found. Available datasets:%s\n"
-                      "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
-    ValueError.__init__(self, error_string)
-
-
 def list_builders() -> List[str]:
-  """Returns the string names of all `tfds.core.DatasetBuilder`s."""
-  return sorted(list(registered._DATASET_REGISTRY))  # pylint: disable=protected-access
+  return registered.list_registered_datasets()
 
 
 def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
@@ -137,14 +109,9 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     raise ValueError(
         "`builder_cls` only accept the `dataset_name` without config, "
         "version or arguments. Got: name='{}', kwargs={}".format(name, kwargs))
-
-  # pylint: disable=protected-access
-  if name in registered._ABSTRACT_DATASET_REGISTRY:
-    raise DatasetNotFoundError(name, is_abstract=True)
-  if name not in registered._DATASET_REGISTRY:
-    raise DatasetNotFoundError(name)
-  return registered._DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
-  # pylint: enable=protected-access
+  cls = registered.registered_dataset_cls(name)
+  cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
+  return cls
 
 
 def builder(
@@ -593,14 +560,14 @@ def _iter_full_names(
     current_version_only: bool,
 ) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
-  for builder_name, builder_cls in registered._DATASET_REGISTRY.items():  # pylint: disable=redefined-outer-name,protected-access
-    builder_cls = typing.cast(Type[dataset_builder.DatasetBuilder], builder_cls)
+  for builder_name in list_builders():
+    builder_cls_ = builder_cls(builder_name)
     # Only keep requested datasets
-    if predicate_fn is not None and not predicate_fn(builder_cls):
+    if predicate_fn is not None and not predicate_fn(builder_cls_):
       continue
     for full_name in _iter_single_full_names(
         builder_name,
-        builder_cls,
+        builder_cls_,
         current_version_only=current_version_only,
     ):
       yield full_name
@@ -636,7 +603,7 @@ def single_full_names(
   """Returns the list `['ds/c0/v0',...]` or `['ds/v']` for a single builder."""
   return sorted(_iter_single_full_names(
       builder_name,
-      registered._DATASET_REGISTRY[builder_name],  # pylint: disable=protected-access
+      builder_cls(builder_name),
       current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
   ))
 

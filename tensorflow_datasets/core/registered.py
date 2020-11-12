@@ -19,7 +19,8 @@ import abc
 import collections
 import contextlib
 import inspect
-from typing import ClassVar, Iterator
+import textwrap
+from typing import ClassVar, Iterator, List, Type
 
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import py_utils
@@ -50,6 +51,34 @@ def skip_registration() -> Iterator[None]:
     yield
   finally:
     _skip_registration = False
+
+
+class DatasetNotFoundError(ValueError):
+  """The requested Dataset was not found."""
+
+  def __init__(self, name, is_abstract=False):
+    self.is_abstract = is_abstract
+    if is_abstract:
+      error_string = (
+          f'Dataset {name} is an abstract class so cannot be created. '
+          'Please make sure to instantiate all abstract methods.\n'
+      )
+    else:
+      all_datasets_str = '\n\t- '.join([''] + list_registered_datasets())
+      error_string = (
+          f'Dataset {name} not found. Available datasets:{all_datasets_str}\n'
+      )
+    error_string += textwrap.dedent(
+        """
+        Check that:
+            - if dataset was added recently, it may only be available
+              in `tfds-nightly`
+            - the dataset name is spelled correctly
+            - dataset class defines all base class abstract methods
+            - the module defining the dataset class is imported
+        """
+    )
+    ValueError.__init__(self, error_string)
 
 
 class RegisteredDataset(abc.ABC):
@@ -96,3 +125,17 @@ class RegisteredDataset(abc.ABC):
       _ABSTRACT_DATASET_REGISTRY[cls.name] = cls
     else:
       _DATASET_REGISTRY[cls.name] = cls
+
+
+def list_registered_datasets() -> List[str]:
+  """Returns the string names of all `tfds.core.DatasetBuilder`s."""
+  return sorted(list(_DATASET_REGISTRY))
+
+
+def registered_dataset_cls(name: str) -> Type[RegisteredDataset]:
+  """Returns the Registered dataset class."""
+  if name in _ABSTRACT_DATASET_REGISTRY:
+    raise DatasetNotFoundError(name, is_abstract=True)
+  if name not in _DATASET_REGISTRY:
+    raise DatasetNotFoundError(name)
+  return _DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
