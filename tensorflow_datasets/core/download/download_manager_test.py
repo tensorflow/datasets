@@ -539,6 +539,27 @@ class DownloadManagerTest(testing.TestCase):
     )
     dl_manager.download(a.url)
 
+  def test_register_checksums_url_info_already_exists(self):
+    a = Artifact('a.tar.gz')
+
+    # File already downloaded to it's final path (with checksums)
+    self.fs.add_file(a.file_path)
+    self.fs.add_file(_info_path(a.file_path))
+
+    # Download the file reuse existing path
+    manager = self._get_manager(
+        register_checksums=True,
+        url_infos={a.url: a.url_info},  # Url_info already registered
+    )
+    res = manager.download(a.url)
+    self.assertEqual(res, a.file_path)
+
+    # Checksums are created and url recorded
+    self.assertEqual(
+        self.fs.files['/checksums/checksums.tsv'],
+        f'{a.url}\t{a.url_info.size}\t{a.url_info.checksum}\t{a.url_info.filename}\n',
+    )
+
 
 if __name__ == '__main__':
   testing.test_main()

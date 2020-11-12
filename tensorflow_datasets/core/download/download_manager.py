@@ -256,8 +256,8 @@ class DownloadManager(object):
     if url_infos is not None:
       self._url_infos.update(url_infos)
 
-    # To record what is being used: {url: (size, checksum)}
-    self._recorded_url_infos = {}
+    # To record what is being used: {url: UrlInfo(size, checksum, filename)}
+    self._recorded_url_infos: Dict[str, checksums.UrlInfo] = {}
     # These attributes are lazy-initialized since they must be cleared when this
     # object is pickled for Beam. They are then recreated on each worker.
     self.__downloader = None
@@ -526,24 +526,29 @@ class DownloadManager(object):
       )
       return promise.Promise.resolve(manually_downloaded_path)
 
-    # If register checksums and file already downloaded, then:
-    # * Record the url_infos of the downloaded file
-    # * Rename the filename `url_path` -> `file_path`, and return it.
-    if self._register_checksums and existing_path == url_path:
-      logging.info(
-          'URL %s already downloaded: Recording checksums from %s.',
-          url,
-          existing_path,
-      )
-      future = self._executor.submit(
-          self._save_url_info_and_rename,
-          url=url,
-          url_path=url_path,
-          url_info=self._recorded_url_infos[url],
-      )
-      return promise.Promise.resolve(future)
-    # Otherwise, url_infos are either already registered, or will be registered
-    # in the `_handle_download_result` callback.
+    if self._register_checksums:
+      if existing_path == url_path:
+        # File already downloaded but url_info not registered, then:
+        # * Record the url_infos of the downloaded file
+        # * Rename the filename `url_path` -> `file_path`, and return it.
+        logging.info(
+            'URL %s already downloaded. Recording checksums '
+            'from %s.', url, existing_path
+        )
+        future = self._executor.submit(
+            self._save_url_info_and_rename,
+            url=url,
+            url_path=url_path,
+            url_info=self._recorded_url_infos[url],
+        )
+        return promise.Promise.resolve(future)
+      elif existing_path:
+        # url_info already registered, but maybe in a different dataset (e.g.
+        # should save `imagenet_real/checksums.txt`, but url_info loaded from
+        # `checksums/imagenet2012.txt`)
+        self._record_url_infos()
+      # Otherwise, url_info will be registered in the `_handle_download_result`
+      # callback.
 
     # If the file file already exists (`file_path` or `url_path`), return it.
     if existing_path:
