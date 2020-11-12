@@ -73,6 +73,7 @@ from tensorflow_datasets.image_classification.plantae_k import PlantaeK
 from tensorflow_datasets.image_classification.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image_classification.resisc45 import Resisc45
 from tensorflow_datasets.image_classification.rock_paper_scissors import RockPaperScissors
+from tensorflow_datasets.image_classification.siscore import Siscore
 from tensorflow_datasets.image_classification.smallnorb import Smallnorb
 from tensorflow_datasets.image_classification.so2sat import So2sat
 from tensorflow_datasets.image_classification.stanford_dogs import StanfordDogs
