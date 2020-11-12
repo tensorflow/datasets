@@ -1,0 +1,1 @@
+http://archive.ics.uci.edu/ml/machine-learning-databases/00372/HTRU2.zip 1563015 ba442c076dd22a8952700f26e38499fc1806037dcf7bea0e125e6bfba393f379
