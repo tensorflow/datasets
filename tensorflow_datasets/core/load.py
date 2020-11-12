@@ -15,16 +15,14 @@
 
 """Access registered datasets."""
 
-import os
+import difflib
 import posixpath
 import re
+import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Type
 
-from absl import flags
-from absl import logging
-import tensorflow.compat.v2 as tf
-
+from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
@@ -32,91 +30,33 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
 
-
 # pylint: disable=logging-format-interpolation
-
-FLAGS = flags.FLAGS
 
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 
 PredicateFn = Callable[[Type[dataset_builder.DatasetBuilder]], bool]
 
-_NAME_STR_ERR = """\
-Parsing builder name string {} failed.
-The builder name string must be of the following format:
-  dataset_name[/config_name][:version][/kwargs]
-
-  Where:
-
-    * dataset_name and config_name are string following python variable naming.
-    * version is of the form x.y.z where {{x,y,z}} can be any digit or *.
-    * kwargs is a comma list separated of arguments and values to pass to
-      builder.
-
-  Examples:
-    my_dataset
-    my_dataset:1.2.*
-    my_dataset/config1
-    my_dataset/config1:1.*.*
-    my_dataset/config1/arg1=val1,arg2=val2
-    my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
-"""
-
-_DATASET_NOT_FOUND_ERR = """\
-Check that:
-    - if dataset was added recently, it may only be available
-      in `tfds-nightly`
-    - the dataset name is spelled correctly
-    - dataset class defines all base class abstract methods
-    - the module defining the dataset class is imported
-"""
-
-
-# Regex matching 'dataset/config:1.*.*/arg=123'
-_NAME_REG = re.compile(
-    r"^"
-    r"(?P<dataset_name>\w+)"
-    r"(/(?P<config>[\w\-\.]+))?"
-    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
-    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
-    r"$")
-
 
 # Regex matching 'dataset/config/1.3.0'
-_FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
-    ds_name=r"\w+",
-    config_name=r"[\w\-\.]+",
-    version=r"[0-9]+\.[0-9]+\.[0-9]+",
+_FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
+    ds_name=r'\w+',
+    config_name=r'[\w\-\.]+',
+    version=r'[0-9]+\.[0-9]+\.[0-9]+',
 ))
 
 
-class DatasetNotFoundError(ValueError):
-  """The requested Dataset was not found."""
-
-  def __init__(self, name, is_abstract=False):
-    self.is_abstract = is_abstract
-    all_datasets_str = "\n\t- ".join([""] + list_builders())
-    if is_abstract:
-      error_string = ("Dataset %s is an abstract class so cannot be created. "
-                      "Please make sure to instantiate all abstract methods.\n"
-                      "%s") % (name, _DATASET_NOT_FOUND_ERR)
-    else:
-      error_string = ("Dataset %s not found. Available datasets:%s\n"
-                      "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
-    ValueError.__init__(self, error_string)
-
-
-def list_builders() -> List[str]:
+def list_builders(
+) -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
-  return sorted(list(registered._DATASET_REGISTRY))  # pylint: disable=protected-access
+  datasets = registered.list_imported_builders()
+  return datasets
 
 
 def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
@@ -132,27 +72,30 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  name, kwargs = dataset_name_and_kwargs_from_name_str(name)
+  ns_name, builder_name, kwargs = naming.parse_builder_name_kwargs(name)
   if kwargs:
     raise ValueError(
-        "`builder_cls` only accept the `dataset_name` without config, "
-        "version or arguments. Got: name='{}', kwargs={}".format(name, kwargs))
-
-  # pylint: disable=protected-access
-  if name in registered._ABSTRACT_DATASET_REGISTRY:
-    raise DatasetNotFoundError(name, is_abstract=True)
-  if name not in registered._DATASET_REGISTRY:
-    raise DatasetNotFoundError(name)
-  return registered._DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
-  # pylint: enable=protected-access
+        '`builder_cls` only accept the `dataset_name` without config, '
+        f"version or arguments. Got: name='{name}', kwargs={kwargs}"
+    )
+  if ns_name:
+    raise ValueError(
+        f'Namespaces not supported for `builder_cls`. Got: {ns_name}'
+    )
+  # Imported datasets
+  try:
+    cls = registered.imported_builder_cls(builder_name)
+    cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
+    return cls
+  except registered.DatasetNotFoundError as e:
+    _reraise_with_list_builders(e, ns_name=ns_name, builder_name=builder_name)
 
 
 def builder(
     name: str,
     *,
-    data_dir: Optional[str] = None,
     try_gcs: bool = False,
-    **builder_init_kwargs: Any
+    **builder_kwargs: Any
 ) -> dataset_builder.DatasetBuilder:
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
@@ -167,12 +110,10 @@ def builder(
       (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'` to
       use the `'zoo'` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
-    data_dir: Path to the dataset(s). See `tfds.load` for more information.
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
       the public GCS bucket before building it locally.
-    **builder_init_kwargs: `dict` of keyword arguments passed to the
-      `DatasetBuilder`. These will override keyword arguments passed in `name`,
-      if any.
+    **builder_kwargs: `dict` of keyword arguments passed to the
+      `tfds.core.DatasetBuilder`.
 
   Returns:
     A `tfds.core.DatasetBuilder`.
@@ -180,40 +121,62 @@ def builder(
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
-  # Set data_dir.
-  if try_gcs and gcs_utils.is_dataset_on_gcs(builder_name):
-    data_dir = gcs_utils.gcs_path("datasets")
+  # 'kaggle:my_dataset:1.0.0' -> ('kaggle', 'my_dataset', {'version': '1.0.0'})
+  ns_name, builder_name, builder_kwargs = naming.parse_builder_name_kwargs(
+      name, **builder_kwargs
+  )
 
-  # Try loading the code (if it exists)
+  # `try_gcs` currently only support non-community datasets
+  if try_gcs and not ns_name and gcs_utils.is_dataset_on_gcs(builder_name):
+    data_dir = builder_kwargs.get('data_dir')
+    if data_dir:
+      raise ValueError(
+          f'Cannot have both `try_gcs=True` and `data_dir={data_dir}` '
+          'explicitly set'
+      )
+    builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
+
+  # Community datasets
+  if ns_name:
+    raise NotImplementedError
+
+  # First check whether code exists or not (imported datasets)
   try:
     cls = builder_cls(builder_name)
-  except DatasetNotFoundError as e:
-    if e.is_abstract:
-      raise  # Abstract can't be instanciated neither from code nor files.
+  except registered.DatasetNotFoundError as e:
     cls = None  # Class not found
     not_found_error = e  # Save the exception to eventually reraise
 
-  version_explicitly_given = "version" in builder_kwargs
+  # Eventually try loading from files first
+  if _try_load_from_files_first(cls, **builder_kwargs):
+    try:
+      b = read_only_builder.builder_from_files(builder_name, **builder_kwargs)
+      return b
+    except registered.DatasetNotFoundError as e:
+      pass
 
-  # Try loading from files first:
-  # * If code not present.
-  # * If version explicitly given (backward/forward compatibility).
-  # Note: If `builder_init_kwargs` are set (e.g. version='experimental_latest',
-  # custom config,...), read from generation code.
-  if (not cls or version_explicitly_given) and not builder_init_kwargs:
-    builder_dir = find_builder_dir(name, data_dir=data_dir)
-    if builder_dir is not None:  # A generated dataset was found on disk
-      return read_only_builder.builder_from_directory(builder_dir)
-
-  # If loading from files was skipped (e.g. files not found), load from the
-  # source code.
+  # If code exists and loading from files was skipped (e.g. files not found),
+  # load from the source code.
   if cls:
-    with py_utils.try_reraise(prefix=f"Failed to construct dataset {name}: "):
-      return cls(data_dir=data_dir, **builder_kwargs, **builder_init_kwargs)  # pytype: disable=not-instantiable
+    with py_utils.try_reraise(prefix=f'Failed to construct dataset {name}: '):
+      return cls(**builder_kwargs)  # pytype: disable=not-instantiable
 
   # If neither the code nor the files are found, raise DatasetNotFoundError
   raise not_found_error
+
+
+def _try_load_from_files_first(cls, **builder_kwargs) -> bool:
+  """Returns True if files should be used rather than code."""
+  if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
+    return False  # Has extra kwargs, require original code.
+  elif builder_kwargs.get('version') == 'experimental_latest':
+    return False  # Requested version require original code
+  elif not cls:
+    return True  # Code does not exists
+  elif 'version' in builder_kwargs:
+    return True  # Version explicitly given (unlock backward compatibility)
+  else:
+    return False  # Code exists and no version given, use code.
 
 
 def load(
@@ -274,13 +237,13 @@ def load(
 
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
-      version of the class name). This can be either `"dataset_name"` or
-      `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+      version of the class name). This can be either `'dataset_name'` or
+      `'dataset_name/config_name'` for datasets with `BuilderConfig`s.
       As a convenience, this string may contain comma-separated keyword
-      arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+      arguments for the builder. For example `'foo_bar/a=True,b=3'` would use
       the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
-      (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
-      use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+      (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'` to
+      use the `'zoo'` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
     split: Which split of the data to load (e.g. `'train'`, `'test'`,
       `['train', 'test']`, `'train[80%:]'`,...). See our
@@ -288,7 +251,7 @@ def load(
       If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: `str`, directory to read/write data. Defaults to the value of
       the environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-      "~/tensorflow_datasets".
+      '~/tensorflow_datasets'.
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
@@ -348,209 +311,17 @@ def load(
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
   as_dataset_kwargs = dict(as_dataset_kwargs)
-  as_dataset_kwargs.setdefault("split", split)
-  as_dataset_kwargs.setdefault("as_supervised", as_supervised)
-  as_dataset_kwargs.setdefault("batch_size", batch_size)
-  as_dataset_kwargs.setdefault("decoders", decoders)
-  as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
-  as_dataset_kwargs.setdefault("read_config", read_config)
+  as_dataset_kwargs.setdefault('split', split)
+  as_dataset_kwargs.setdefault('as_supervised', as_supervised)
+  as_dataset_kwargs.setdefault('batch_size', batch_size)
+  as_dataset_kwargs.setdefault('decoders', decoders)
+  as_dataset_kwargs.setdefault('shuffle_files', shuffle_files)
+  as_dataset_kwargs.setdefault('read_config', read_config)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:
     return ds, dbuilder.info
   return ds
-
-
-def find_builder_dir(
-    name: str,
-    *,
-    data_dir: Optional[str] = None,
-) -> Optional[str]:
-  """Search whether the given dataset is present on disk and return its path.
-
-  Note:
-
-   * If the dataset is present, but is legacy (no feature config file), None
-     is returned.
-   * If the config isn't specified, the function try to infer the default
-     config name from the original `DatasetBuilder`.
-   * The function searches in all `data_dir` registered with
-     `tfds.core.add_data_dir`. If the dataset exists in multiple dirs, an error
-     is raised.
-
-  Args:
-    name: Builder name (e.g. `my_ds`, `my_ds/config`, `my_ds:1.2.0`,...)
-    data_dir: Path where to search for the dataset
-      (e.g. `~/tensorflow_datasets`).
-
-  Returns:
-    path: The dataset path found, or None if the dataset isn't found.
-  """
-  # Search the dataset across all registered data_dirs
-  all_builder_dirs = []
-  for current_data_dir in constants.list_data_dirs(given_data_dir=data_dir):
-    builder_dir = _find_builder_dir_single_dir(
-        name, data_dir=current_data_dir
-    )
-    if builder_dir:
-      all_builder_dirs.append(builder_dir)
-  if not all_builder_dirs:
-    return None
-  elif len(all_builder_dirs) != 1:
-    # Rather than raising error every time, we could potentially be smarter
-    # and load the most recent version across all files, but should be
-    # carefull when partial version is requested ('my_dataset:3.*.*').
-    # Could add some `MultiDataDirManager` API:
-    # ```
-    # manager = MultiDataDirManager(given_data_dir=data_dir)
-    # with manager.merge_data_dirs() as virtual_data_dir:
-    #  virtual_builder_dir = _find_builder_dir(name, data_dir=virtual_data_dir)
-    #  builder_dir = manager.resolve(virtual_builder_dir)
-    # ```
-    raise ValueError(
-        f"Dataset {name} detected in multiple locations: {all_builder_dirs}. "
-        "Please resolve the ambiguity by explicitly setting `data_dir=`."
-    )
-  else:
-    return next(iter(all_builder_dirs))  # List has a single element
-
-
-def _find_builder_dir_single_dir(
-    name: str,
-    *,
-    data_dir: str,
-) -> Optional[str]:
-  """Same as `find_builder_dir` but require explicit dir."""
-  builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
-  config_name = builder_kwargs.pop("config", None)
-  version_str = builder_kwargs.pop("version", None)
-  if builder_kwargs:
-    # Datasets with additional kwargs require the original builder code.
-    return None
-
-  # Construct the `ds_name/config/` path
-  builder_dir = os.path.join(data_dir, builder_name)
-  if not config_name:
-    # If the BuilderConfig is not specified:
-    # * Either the dataset don't have config
-    # * Either the default config should be used
-    # Currently, in order to infer the default config, we are still relying on
-    # the code.
-    # TODO(tfds): How to avoid code dependency and automatically infer the
-    # config existance and name ?
-    config_name = _get_default_config_name(builder_name)
-
-  # If has config (explicitly given or default config), append it to the path
-  if config_name:
-    builder_dir = os.path.join(builder_dir, config_name)
-
-  # Extract the version
-  version_str = _get_version_str(builder_dir, requested_version=version_str)
-
-  if not version_str:  # Version not given or found
-    return None
-
-  builder_dir = os.path.join(builder_dir, version_str)
-
-  # Check for builder dir existance
-  if not tf.io.gfile.exists(builder_dir):
-    return None
-  # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
-  # has to contain the feature configuration.
-  if not tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
-    return None
-  return builder_dir
-
-
-def _get_default_config_name(name: str) -> Optional[str]:
-  """Returns the default config of the given dataset, None if not found."""
-  # Search for the DatasetBuilder generation code
-  try:
-    builder_cls_ = builder_cls(name)
-  except DatasetNotFoundError:
-    return None
-
-  # If code found, return the default config
-  if builder_cls_.BUILDER_CONFIGS:
-    return builder_cls_.BUILDER_CONFIGS[0].name
-  return None
-
-
-def _get_version_str(
-    builder_dir: str,
-    *,
-    requested_version: Optional[str] = None,
-) -> Optional[str]:
-  """Returns the version name found in the directory.
-
-  Args:
-    builder_dir: Directory containing the versions (`builder_dir/1.0.0/`,...)
-    requested_version: Optional version to search (e.g. `1.0.0`, `2.*.*`,...)
-
-  Returns:
-    version_str: The version directory name found in `builder_dir`.
-  """
-  all_versions = version.list_all_versions(builder_dir)
-  # Version not given, using the last one.
-  if not requested_version and all_versions:
-    return str(all_versions[-1])
-  # Version given, return the biggest version matching `requested_version`
-  for v in reversed(all_versions):
-    if v.match(requested_version):
-      return str(v)
-  # Directory don't has version, or requested_version don't match
-  return None
-
-
-def dataset_name_and_kwargs_from_name_str(
-    name_str: str,
-) -> Tuple[str, Dict[str, Union[str, int, float, bool]]]:
-  """Extract kwargs from name str."""
-  res = _NAME_REG.match(name_str)
-  if not res:
-    raise ValueError(_NAME_STR_ERR.format(name_str))
-  name = res.group("dataset_name")
-  # Normalize the name to accept CamelCase
-  name = naming.camelcase_to_snakecase(name)
-  kwargs = _kwargs_str_to_kwargs(res.group("kwargs"))
-  try:
-    for attr in ["config", "version"]:
-      val = res.group(attr)
-      if val is None:
-        continue
-      if attr in kwargs:
-        raise ValueError("Dataset %s: cannot pass %s twice." % (name, attr))
-      kwargs[attr] = val
-    return name, kwargs
-  except:
-    logging.error(_NAME_STR_ERR.format(name_str))   # pylint: disable=logging-format-interpolation
-    raise
-
-
-def _kwargs_str_to_kwargs(kwargs_str):
-  """Converts given `kwargs` as str into kwargs dict."""
-  if not kwargs_str:
-    return {}
-  kwarg_strs = kwargs_str.split(",")
-  kwargs = {}
-  for kwarg_str in kwarg_strs:
-    kwarg_name, kwarg_val = kwarg_str.split("=")
-    kwargs[kwarg_name] = _cast_to_pod(kwarg_val)
-  return kwargs
-
-
-def _cast_to_pod(val):
-  """Try cast to int, float, bool, str, in that order."""
-  bools = {"True": True, "False": False}
-  if val in bools:
-    return bools[val]
-  try:
-    return int(val)
-  except ValueError:
-    try:
-      return float(val)
-    except ValueError:
-      return tf.compat.as_text(val)
 
 
 def _get_all_versions(
@@ -596,14 +367,14 @@ def _iter_full_names(
     current_version_only: bool,
 ) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
-  for builder_name, builder_cls in registered._DATASET_REGISTRY.items():  # pylint: disable=redefined-outer-name,protected-access
-    builder_cls = typing.cast(Type[dataset_builder.DatasetBuilder], builder_cls)
+  for builder_name in registered.list_imported_builders():
+    builder_cls_ = builder_cls(builder_name)
     # Only keep requested datasets
-    if predicate_fn is not None and not predicate_fn(builder_cls):
+    if predicate_fn is not None and not predicate_fn(builder_cls_):
       continue
     for full_name in _iter_single_full_names(
         builder_name,
-        builder_cls,
+        builder_cls_,
         current_version_only=current_version_only,
     ):
       yield full_name
@@ -639,7 +410,7 @@ def single_full_names(
   """Returns the list `['ds/c0/v0',...]` or `['ds/v']` for a single builder."""
   return sorted(_iter_single_full_names(
       builder_name,
-      registered._DATASET_REGISTRY[builder_name],  # pylint: disable=protected-access
+      builder_cls(builder_name),
       current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
   ))
 
@@ -654,3 +425,34 @@ def is_full_name(full_name: str) -> bool:
     `bool`.
   """
   return bool(_FULL_NAME_REG.match(full_name))
+
+
+def _reraise_with_list_builders(
+    e: Exception,
+    ns_name: Optional[str],
+    builder_name: str,
+) -> NoReturn:
+  """Add the list of available builders to the DatasetNotFoundError."""
+  # Should optimize to only filter through given namespace
+  all_datasets = list_builders(
+  )
+  all_datasets_str = '\n\t- '.join([''] + all_datasets)
+  error_string = f'Available datasets:{all_datasets_str}\n'
+  error_string += textwrap.dedent(
+      """
+      Check that:
+          - if dataset was added recently, it may only be available
+            in `tfds-nightly`
+          - the dataset name is spelled correctly
+          - dataset class defines all base class abstract methods
+          - the module defining the dataset class is imported
+      """
+  )
+
+  # Add close matches
+  name = f'{ns_name}:{builder_name}' if ns_name else builder_name
+  close_matches = difflib.get_close_matches(name, all_datasets, n=1)
+  if close_matches:
+    error_string += f'\nDid you meant: {close_matches[0]}'
+
+  raise py_utils.reraise(e, suffix=error_string)

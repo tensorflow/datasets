@@ -258,7 +258,7 @@ def _get_builder_cls(
   # 2nd case: Dataset is registered through imports.
 
   # Extract `name/config:version`
-  extract_name_and_kwargs = tfds.core.load.dataset_name_and_kwargs_from_name_str
+  extract_name_and_kwargs = tfds.core.naming.dataset_name_and_kwargs_from_name_str
   builder_name, builder_kwargs = extract_name_and_kwargs(ds_to_build)
   builder_cls = tfds.builder_cls(builder_name)
   builder_kwargs = typing.cast(Dict[str, str], builder_kwargs)

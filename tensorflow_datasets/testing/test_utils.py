@@ -351,6 +351,34 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
       }
 
 
+class DummyDataset(
+    dataset_builder.GeneratorBasedBuilder,
+    skip_registration=True,
+):
+  """Minimal DatasetBuilder."""
+
+  VERSION = utils.Version('1.0.0')
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            'id': tf.int64,
+        }),
+        description='Minimal DatasetBuilder.',
+    )
+
+  def _split_generators(self, dl_manager):
+    del dl_manager
+    return {
+        'train': self._generate_examples(),
+    }
+
+  def _generate_examples(self):
+    for i in range(3):
+      yield i, {'id': i}
+
+
 def test_main():
   """Entrypoint for tests."""
   tf.enable_v2_behavior()
