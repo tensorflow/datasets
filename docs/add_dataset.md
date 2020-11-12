@@ -195,8 +195,8 @@ assert extracted_paths == {
 
 For data that cannot be automatically downloaded (e.g. require a login), the
 user will manually download the source data and place it in `manual_dir/`
-(defaults to `~/tensorflow_datasets/manual/`), which you can access with
-`dl_manager.manual_dir` .
+(defaults to `~/tensorflow_datasets/downloads/manual/`), which you can access
+with `dl_manager.manual_dir` .
 
 #### Read archive directly
 
@@ -398,28 +398,27 @@ import to its subdirectory's `__init__.py` (e.g.
 
 ## Test your dataset
 
-### Run the generation code
+### Download and prepare: `tfds build`
 
-From the `my_dataset/` directory, run `download_and_prepare` to ensure that data
-generation works:
+To generate the dataset, run `tfds build` from the `my_dataset/` directory:
 
 ```sh
-cd path/to/my_dataset/
-python -m tensorflow_datasets.scripts.download_and_prepare \
-    --register_checksums \
-    --module_import=my_dataset \
-    --datasets=my_dataset
+cd path/to/datasets/my_dataset/
+tfds build --register_checksums
 ```
 
-*   `--datasets`: The dataset to build (e.g. `my_dataset/config`)
-*   `--module_import`: Required if the dataset is defined outside of TFDS, so
-    your class can be detected (e.g. `my_project.submodules.datasets`)
+Some useful flags for developpement:
+
+*   `--pdb`: Enter debugging mode if an exception is raised.
+*   `--overwrite`: Delete existing files if the dataset was already generated.
+*   `--max_examples_per_split`: Only generate the first X examples (default to
+    1), rather than the full dataset.
 *   `--register_checksums`: Record the checksums of downloaded urls. Should only
     be used while in development.
 
-Note: We're working on adding a `tfds build` command. Don't hesitate to
-[contribute](https://github.com/tensorflow/datasets/issues/2447) if you're
-interested.
+See the
+[CLI documentation](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)
+for full list of flags.
 
 ### Checksums
 

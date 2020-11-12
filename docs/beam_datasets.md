@@ -62,8 +62,7 @@ echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
 Finally, you can launch the job using the command below:
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=$DATASET_NAME/$DATASET_CONFIG \
+tfds build $DATASET_NAME/$DATASET_CONFIG \
   --data_dir=$GCS_BUCKET/tensorflow_datasets \
   --beam_pipeline_options=\
 "runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\
