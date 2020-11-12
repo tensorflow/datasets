@@ -204,6 +204,8 @@ toc:
     title: resisc45 (manual)
   - path: /datasets/catalog/rock_paper_scissors
     title: rock_paper_scissors
+  - path: /datasets/catalog/siscore
+    title: siscore
   - path: /datasets/catalog/smallnorb
     title: smallnorb
   - path: /datasets/catalog/so2sat
@@ -445,6 +447,9 @@ toc:
     title: wsc273
   - path: /datasets/catalog/xnli
     title: xnli
+  - path: /datasets/catalog/xtreme_pawsx
+    status: nightly
+    title: xtreme_pawsx
   - path: /datasets/catalog/xtreme_xnli
     status: nightly
     title: xtreme_xnli

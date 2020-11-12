@@ -129,6 +129,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`quickdraw_bitmap`](quickdraw_bitmap.md)
 *   [`resisc45`](resisc45.md)
 *   [`rock_paper_scissors`](rock_paper_scissors.md)
+*   [`siscore`](siscore.md)
 *   [`smallnorb`](smallnorb.md)
 *   [`so2sat`](so2sat.md)
 *   [`stanford_dogs`](stanford_dogs.md)
@@ -261,6 +262,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wsc273`](wsc273.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xnli`](xnli.md)
+*   [`xtreme_pawsx`](xtreme_pawsx.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xtreme_xnli`](xtreme_xnli.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
