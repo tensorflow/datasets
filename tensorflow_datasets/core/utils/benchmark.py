@@ -16,17 +16,27 @@
 """Benchmark utils."""
 
 import time
-from typing import Optional, Dict, Union
+from typing import Any, Dict, Optional, Union
 
 from absl import logging
-
+import dataclasses
 import tensorflow as tf
-
 from tensorflow_datasets.core.utils import tqdm_utils
+
+try:
+  import pandas as pd  # pylint: disable=g-import-not-at-top
+except ImportError:
+  pd = Any
 
 # pylint: disable=logging-format-interpolation
 
 StatDict = Dict[str, Union[int, float]]
+
+
+@dataclasses.dataclass
+class BenchmarkResult:
+  stats: 'pd.DataFrame'
+  raw_stats: 'pd.DataFrame'
 
 
 def benchmark(
@@ -34,7 +44,7 @@ def benchmark(
     *,
     num_iter: Optional[int] = None,
     batch_size: int = 1,
-) -> Dict[str, StatDict]:
+) -> BenchmarkResult:
   """Benchmarks a `tf.data.Dataset`.
 
   Usage:
@@ -80,7 +90,7 @@ def benchmark(
 
   print('\n************ Summary ************\n')
   num_examples = (i + 1) * batch_size
-  return {
+  stats = {
       'first+last': _log_stats(
           'First included', start_time, end_time, num_examples + batch_size
       ),
@@ -89,14 +99,18 @@ def benchmark(
       ),
       'last': _log_stats(
           'First excluded', first_batch_time, end_time, num_examples
-      ),
-      'raw': {
-          'start_time': start_time,
-          'first_batch_time': first_batch_time,
-          'end_time': end_time,
-          'num_iter': i + 2,  # First batch and zero-shifted
-      },
+      )
   }
+  raw_stats = {
+      'start_time': start_time,
+      'first_batch_time': first_batch_time,
+      'end_time': end_time,
+      'num_iter': i + 2,  # First batch and zero-shifted
+  }
+  stats = pd.DataFrame.from_dict(stats, orient='index')
+  raw_stats = pd.DataFrame.from_dict(raw_stats, orient='index',
+                                     columns=['duration'])
+  return BenchmarkResult(stats=stats, raw_stats=raw_stats)
 
 
 def _log_stats(
