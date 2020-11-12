@@ -25,7 +25,7 @@ import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
 @misc{djolonga2020robustness,
-      title={On Robustness and Transferability of Convolutional Neural Networks}, 
+      title={On Robustness and Transferability of Convolutional Neural Networks},
       author={Josip Djolonga and Jessica Yung and Michael Tschannen and Rob Romijnders and Lucas Beyer and Alexander Kolesnikov and Joan Puigcerver and Matthias Minderer and Alexander D'Amour and Dan Moldovan and Sylvain Gelly and Neil Houlsby and Xiaohua Zhai and Mario Lucic},
       year={2020},
       eprint={2007.08558},
@@ -35,12 +35,12 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """
-SI-Score (Synthetic Interventions on Scenes for Robustness Evaluation) is a 
-dataset to evaluate robustness of image classification models to changes in 
+SI-Score (Synthetic Interventions on Scenes for Robustness Evaluation) is a
+dataset to evaluate robustness of image classification models to changes in
 object size, location and rotation angle.
 
-In SI-SCORE, we take objects and backgrounds and systematically vary object 
-size, location and rotation angle so we can study the effect of changing these 
+In SI-SCORE, we take objects and backgrounds and systematically vary object
+size, location and rotation angle so we can study the effect of changing these
 factors on model performance. The image label space is the ImageNet
 label space (1k classes) for easy evaluation of models.
 
@@ -50,8 +50,6 @@ More information about the dataset can be found at https://github.com/google-res
 _NUM_CLASSES = 61
 
 _BASE_URL = "https://s3.us-east-1.amazonaws.com/si-score-dataset"
-
-_VERSION = tfds.core.Version("1.0.0")
 
 _VARIANT_EXPANDED_DIR_NAMES = {
     "size": "area",
@@ -72,23 +70,20 @@ class SiscoreConfig(tfds.core.BuilderConfig):
         global dataset description).
   """
   variant: str = ""
-  name: str = ""
-  description: str = ""
 
 
 class Siscore(tfds.core.GeneratorBasedBuilder):
   """SI-Score synthetic image dataset."""
 
-  print("build configs")
-  VERSION = _VERSION
-  BUILDER_CONFIGS = [
-      SiscoreConfig(variant=x, name=x, description=f"factor of variation: {x}")
-      for x in ["rotation", "size", "location"]
-  ]
-
+  VERSION = tfds.core.Version("1.0.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
   }
+
+  BUILDER_CONFIGS = [
+      SiscoreConfig(variant=x, name=x, description=f"factor of variation: {x}")
+      for x in ["rotation", "size", "location"]  # pytype: disable=wrong-keyword-args
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
