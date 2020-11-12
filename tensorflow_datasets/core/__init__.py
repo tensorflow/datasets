@@ -22,6 +22,8 @@ tf_compat.ensure_tf_install()
 
 # pylint:disable=g-import-not-at-top
 
+from tensorflow_datasets.core import community  # pylint: disable=g-bad-import-order
+
 from tensorflow_datasets.core.constants import add_data_dir
 
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder

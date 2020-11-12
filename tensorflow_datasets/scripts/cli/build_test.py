@@ -15,14 +15,20 @@
 
 """Tests for tensorflow_datasets.scripts.cli.build."""
 
+import contextlib
 import os
 import pathlib
+from typing import Iterator, List
 from unittest import mock
 
 import pytest
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.cli import main
+
+type_utils = tfds.core.utils.type_utils
+
+_DUMMY_DATASET_PATH = tfds.core.tfds_path() / 'testing/dummy_dataset'
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -40,23 +46,45 @@ def mock_default_data_dir(tmp_path: pathlib.Path):
       del os.environ['TFDS_DATA_DIR']
 
 
-def _build(cmd_flags: str) -> mock.Mock:
-  """Executes `tfds build` command with the given flags."""
+@contextlib.contextmanager
+def mock_cwd(path: type_utils.PathLike) -> Iterator[None]:
+  """Mock the current directory."""
+  path = pathlib.Path(path)
+  assert path.exists() and path.is_dir()  # Check given path is valid cwd dir
+  with mock.patch('os.getcwd', return_value=os.fspath(path)):
+    yield
+
+
+def _build(cmd_flags: str) -> List[str]:
+  """Executes `tfds build {cmd_flags}` and returns the list of generated ds."""
   # Execute the command
   args = main._parse_flags(f'tfds build {cmd_flags}'.split())
+
+  # Unfortunatelly, `mock.Mock` remove `self` from `call_args`, so we have
+  # to patch manually the function to record the generated_ds.
+  # See:
+  # https://stackoverflow.com/questions/64792295/how-to-get-self-instance-in-mock-mock-call-args
+  generated_ds_names = []
+  def _download_and_prepare(self, *args, **kwargs):
+    del args, kwargs
+    # Remove version from generated name (as only last version can be generated)
+    full_name = '/'.join(self.info.full_name.split('/')[:-1])
+    generated_ds_names.append(full_name)
+    return
+
   with mock.patch(
-      'tensorflow_datasets.core.DatasetBuilder.download_and_prepare'
-  ) as mock_download_and_prepare:
+      'tensorflow_datasets.core.DatasetBuilder.download_and_prepare',
+      _download_and_prepare,
+  ):
     main.main(args)
-  return mock_download_and_prepare
+  return generated_ds_names
 
 
 def test_build_single():
-  dl_and_prepare = _build('mnist')
-  assert dl_and_prepare.call_count == 1
-
-  dl_and_prepare = _build('mnist:3.0.1')
-  assert dl_and_prepare.call_count == 1
+  assert _build('mnist') == ['mnist']
+  assert _build('mnist:3.0.1') == ['mnist']
+  # Keyword arguments also possible
+  assert _build('--datasets mnist') == ['mnist']
 
   with pytest.raises(tfds.core.load.DatasetNotFoundError):
     _build('unknown_dataset')
@@ -67,39 +95,45 @@ def test_build_single():
   with pytest.raises(ValueError, match='not have config'):
     _build('mnist --config_idx 0')
 
-  # Keyword arguments also possible
-  dl_and_prepare = _build('--datasets mnist')
-  assert dl_and_prepare.call_count == 1
-
 
 def test_build_multiple():
   # Multiple datasets can be built in a single call
-  dl_and_prepare = _build('mnist imagenet2012 cifar10')
-  assert dl_and_prepare.call_count == 3
-
+  assert _build('mnist imagenet2012 cifar10') == [
+      'mnist',
+      'imagenet2012',
+      'cifar10',
+  ]
   # Keyword arguments also possible
-  dl_and_prepare = _build('mnist --datasets imagenet2012 cifar10')
-  assert dl_and_prepare.call_count == 3
+  assert _build('mnist --datasets imagenet2012 cifar10') == [
+      'mnist',
+      'imagenet2012',
+      'cifar10',
+  ]
 
 
 def test_build_dataset_configs():
   # By default, all configs are build
-  dl_and_prepare = _build('trivia_qa')
-  assert dl_and_prepare.call_count == 4
+  assert _build('trivia_qa') == [
+      'trivia_qa/rc',
+      'trivia_qa/rc.nocontext',
+      'trivia_qa/unfiltered',
+      'trivia_qa/unfiltered.nocontext',
+  ]
 
   # If config is set, only the defined config is generated
 
   # --config_idx
-  dl_and_prepare = _build('trivia_qa --config_idx=0')
-  assert dl_and_prepare.call_count == 1
+  assert _build('trivia_qa --config_idx=0') == ['trivia_qa/rc']
 
   # --config
-  dl_and_prepare = _build('trivia_qa --config unfiltered.nocontext')
-  assert dl_and_prepare.call_count == 1
+  assert _build('trivia_qa --config unfiltered.nocontext') == [
+      'trivia_qa/unfiltered.nocontext',
+  ]
 
   # name/config
-  dl_and_prepare = _build('trivia_qa/unfiltered.nocontext')
-  assert dl_and_prepare.call_count == 1
+  assert _build('trivia_qa/unfiltered.nocontext') == [
+      'trivia_qa/unfiltered.nocontext'
+  ]
 
   with pytest.raises(ValueError, match='Config should only be defined once'):
     _build('trivia_qa/unfiltered.nocontext --config_idx=0')
@@ -113,11 +147,13 @@ def test_exclude_datasets():
   all_ds = [b for b in tfds.list_builders() if b not in ('mnist', 'cifar10')]
   all_ds_str = ','.join(all_ds)
 
-  dl_and_prepare = _build(f'--exclude_datasets {all_ds_str}')
-  assert dl_and_prepare.call_count == 2
+  assert _build(f'--exclude_datasets {all_ds_str}') == [
+      'cifar10',
+      'mnist',
+  ]
 
   with pytest.raises(ValueError, match='--exclude_datasets can\'t be used'):
-    dl_and_prepare = _build('mnist --exclude_datasets cifar10')
+    _build('mnist --exclude_datasets cifar10')
 
 
 def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disable=redefined-outer-name
@@ -131,10 +167,34 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
     data_dir.joinpath(f.name).write_text(f.read_text())
 
   # By default, will skip generation if the data already exists
-  dl_and_prepare = _build('mnist')
-  assert dl_and_prepare.call_count == 1  # Called, but no-op
+  assert _build('mnist') == ['mnist']  # Called, but no-op
   assert data_dir.exists()
 
-  dl_and_prepare = _build('mnist --overwrite')
-  assert dl_and_prepare.call_count == 1
+  assert _build('mnist --overwrite') == ['mnist']
   assert not data_dir.exists()  # Previous data-dir has been removed
+
+
+def test_build_files():
+
+  # Make sure DummyDataset isn't registered by default
+  with pytest.raises(tfds.core.load.DatasetNotFoundError):
+    _build('dummy_dataset')
+
+  with pytest.raises(FileNotFoundError, match='Could not find .* script'):
+    _build('')
+
+  # cd .../datasets/dummy_dataset && gtfds build
+  with mock_cwd(_DUMMY_DATASET_PATH):
+    assert _build('') == ['dummy_dataset']
+
+  # cd .../datasets/dummy_dataset && gtfds build dummy_dataset.py
+  with mock_cwd(_DUMMY_DATASET_PATH):
+    assert _build('dummy_dataset.py') == ['dummy_dataset']
+
+  # cd .../datasets/ && gtfds build dummy_dataset
+  with mock_cwd(_DUMMY_DATASET_PATH.parent):
+    assert _build('dummy_dataset') == ['dummy_dataset']
+
+  # cd .../datasets/ && gtfds build dummy_dataset/dummy_dataset
+  with mock_cwd(_DUMMY_DATASET_PATH.parent):
+    assert _build('dummy_dataset/dummy_dataset') == ['dummy_dataset']

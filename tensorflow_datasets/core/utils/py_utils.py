@@ -28,6 +28,7 @@ import os
 import random
 import shutil
 import string
+import sys
 import textwrap
 import threading
 import typing
@@ -557,3 +558,14 @@ def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
   buffer = io.BytesIO()
   write_fn(buffer)
   return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type
+
+
+@contextlib.contextmanager
+def add_sys_path(path: type_utils.PathLike) -> Iterator[None]:
+  """Temporary add given path to `sys.path`."""
+  path = os.fspath(path)
+  try:
+    sys.path.insert(0, path)
+    yield
+  finally:
+    sys.path.remove(path)

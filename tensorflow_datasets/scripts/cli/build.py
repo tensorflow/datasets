@@ -19,7 +19,8 @@ import argparse
 import functools
 import os
 import pathlib
-from typing import Iterator, Optional, Type
+import typing
+from typing import Dict, Iterator, Optional, Tuple, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
@@ -173,6 +174,7 @@ def _build_datasets(args: argparse.Namespace) -> None:
     if datasets:
       raise ValueError('--exclude_datasets can\'t be used with `datasets`')
     datasets = set(tfds.list_builders()) - set(args.exclude_datasets.split(','))
+    datasets = sorted(datasets)  # `set` is not deterministic
   else:
     datasets = datasets or ['']  # Empty string for default
 
@@ -188,21 +190,7 @@ def _make_builders(
     ds_to_build: str,
 ) -> Iterator[tfds.core.DatasetBuilder]:
   """Yields builders to generate."""
-  # TODO(tfds): Infer the dataset format.
-  # And make sure --record_checksums works.
-  # * From file (`.py`), dataset-as-folder (`my_dataset/`):
-  # * Nothing (use current directory)
-  # * From module `tensorflow_datasets.text.my_dataset`
-  # * Community datasets: `namespace/my_dataset`
-
-  # If no dataset selected, use current directory
-  if not ds_to_build:
-    raise NotImplementedError('No datasets provided not supported yet.')
-
-  # Extract `name/config:version`
-  extract_name_and_kwargs = tfds.core.load.dataset_name_and_kwargs_from_name_str
-  builder_name, builder_kwargs = extract_name_and_kwargs(ds_to_build)
-  builder_cls = tfds.builder_cls(builder_name)
+  builder_cls, builder_kwargs = _get_builder_cls(ds_to_build)
 
   # Eventually overwrite version
   if args.experimental_latest_version:
@@ -235,6 +223,94 @@ def _make_builders(
   # Generate only the dataset
   else:
     yield make_builder()
+
+
+def _get_builder_cls(
+    ds_to_build: str,
+) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
+  """Infer the builder class to build.
+
+  Args:
+    ds_to_build: Dataset argument.
+
+  Returns:
+    builder_cls: The dataset class to download and prepare
+    kwargs:
+  """
+  # TODO(tfds): Infer the dataset format.
+  # And make sure --record_checksums works.
+  # * From module `tensorflow_datasets.text.my_dataset`
+  # * Community datasets: `namespace/my_dataset`
+
+  # 1st case: Requested dataset is a path to `.py` script
+  path = _search_script_path(ds_to_build)
+  if path is not None:
+    # Dynamically load user dataset script
+    with tfds.core.utils.add_sys_path(path.parent):
+      builder_cls = tfds.core.community.builder_cls_from_module(path.stem)
+    return builder_cls, {}
+
+  # 2nd case: Dataset is registered through imports.
+
+  # Extract `name/config:version`
+  extract_name_and_kwargs = tfds.core.load.dataset_name_and_kwargs_from_name_str
+  builder_name, builder_kwargs = extract_name_and_kwargs(ds_to_build)
+  builder_cls = tfds.builder_cls(builder_name)
+  builder_kwargs = typing.cast(Dict[str, str], builder_kwargs)
+  return builder_cls, builder_kwargs
+
+
+def _search_script_path(ds_to_build: str) -> Optional[pathlib.Path]:
+  """Check whether the requested dataset match a file on disk."""
+  # If the dataset file exists, use it. Valid values are:
+  # * Empty string (use default directory)
+  # * Dataset folder (e.g. `my_dataset/`)
+  # * Dataset file (e.g. `my_dataset.py`)
+  # * Dataset module (e.g. `my_dataset`)
+
+  # TODO(py3.7): Should be `path.expanduser().resolve()` but `.resolve()` fails
+  # on some environments when the file doesn't exists.
+  # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
+  path = pathlib.Path(ds_to_build).expanduser()
+  if not path.exists():
+    path = pathlib.Path().resolve() / path
+  else:
+    path = path.resolve()
+
+  if path.exists():
+    if path.is_dir():  # dataset-as-folder, use `my_dataset/my_dataset.py`
+      return _validate_script_path(path / f'{path.name}.py')
+    else:  # `my_dataset.py` script
+      return _validate_script_path(path)
+
+  # Try with `.py`
+  path = path.with_suffix('.py')
+  if path.exists():
+    return path
+  # Path not found. Use heuristic to detect if user intended to pass a path:
+  elif (
+      not ds_to_build
+      or ds_to_build.endswith((os.sep, '.py'))  # ds.py
+      or pathlib.Path(ds_to_build).is_absolute()  # /path/to
+      or ds_to_build.count(os.sep) > 1  # path/dataset/config
+  ):
+    raise FileNotFoundError(
+        f'Could not find generation script for `{ds_to_build}`: '
+        f'{path} not found.'
+    )
+  else:
+    return None
+
+
+def _validate_script_path(path: pathlib.Path) -> Optional[pathlib.Path]:
+  """Validates and returns the `dataset.py` generation script path."""
+  if path.suffix != '.py':
+    raise ValueError(f'Expected `.py` file. Invalid dataset path: {path}.')
+  if not path.exists():
+    raise FileNotFoundError(
+        f'Could not find dataset generation script: {path}. '
+    )
+  return path
 
 
 def _make_builder(
