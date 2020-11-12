@@ -176,10 +176,6 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
 
 def test_build_files():
 
-  # Make sure DummyDataset isn't registered by default
-  with pytest.raises(tfds.core.load.DatasetNotFoundError):
-    _build('dummy_dataset')
-
   with pytest.raises(FileNotFoundError, match='Could not find .* script'):
     _build('')
 
@@ -198,3 +194,10 @@ def test_build_files():
   # cd .../datasets/ && gtfds build dummy_dataset/dummy_dataset
   with mock_cwd(_DUMMY_DATASET_PATH.parent):
     assert _build('dummy_dataset/dummy_dataset') == ['dummy_dataset']
+
+
+def test_build_import():
+
+  # --imports register the dataset
+  ds_module = 'tensorflow_datasets.testing.dummy_dataset.dummy_dataset'
+  assert _build(f'dummy_dataset --imports {ds_module}') == ['dummy_dataset']

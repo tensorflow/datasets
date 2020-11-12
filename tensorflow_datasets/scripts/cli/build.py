@@ -17,6 +17,7 @@
 
 import argparse
 import functools
+import importlib
 import os
 import pathlib
 import typing
@@ -126,6 +127,11 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       'Mutually exclusive with `--config`.'
   )
   generation_group.add_argument(
+      '--imports', '-i',
+      type=str,
+      help='Comma separated list of module to import to register datasets.'
+  )
+  generation_group.add_argument(
       '--register_checksums',
       action='store_true',
       help='If True, store size and checksum of downloaded files.',
@@ -168,6 +174,10 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
 
 def _build_datasets(args: argparse.Namespace) -> None:
   """Build the given datasets."""
+  # Eventually register additional datasets imports
+  if args.imports:
+    list(importlib.import_module(m) for m in args.imports.split(','))
+
   # Select datasets to generate
   datasets = (args.datasets or []) + (args.datasets_keyword or [])
   if args.exclude_datasets:  # Generate all datasets if `--exclude_datasets` set
@@ -237,11 +247,6 @@ def _get_builder_cls(
     builder_cls: The dataset class to download and prepare
     kwargs:
   """
-  # TODO(tfds): Infer the dataset format.
-  # And make sure --record_checksums works.
-  # * From module `tensorflow_datasets.text.my_dataset`
-  # * Community datasets: `namespace/my_dataset`
-
   # 1st case: Requested dataset is a path to `.py` script
   path = _search_script_path(ds_to_build)
   if path is not None:
