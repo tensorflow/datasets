@@ -178,6 +178,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
 *   [`higgs`](higgs.md)
+*   [`howell`](howell.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)

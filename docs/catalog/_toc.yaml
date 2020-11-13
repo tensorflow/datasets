@@ -290,6 +290,9 @@ toc:
     title: german_credit_numeric
   - path: /datasets/catalog/higgs
     title: higgs
+  - path: /datasets/catalog/howell
+    status: nightly
+    title: howell
   - path: /datasets/catalog/iris
     title: iris
   - path: /datasets/catalog/movie_lens
