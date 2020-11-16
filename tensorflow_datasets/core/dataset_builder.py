@@ -875,8 +875,6 @@ class DatasetBuilder(registered.RegisteredDataset):
             "Cannot name a custom BuilderConfig the same as an available "
             "BuilderConfig. Change the name. Available BuilderConfigs: %s" %
             (list(self.builder_configs.keys())))
-      if not builder_config.description:
-        raise ValueError("BuilderConfig %s must have a description" % name)
     return builder_config
 
   @utils.classproperty
