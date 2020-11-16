@@ -305,9 +305,9 @@ def load(
       for more info.
     read_config: `tfds.ReadConfig`, Additional options to configure the
       input pipeline (e.g. seed, num parallel reads,...).
-    with_info: `bool`, if True, tfds.load will return the tuple
-      (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
-      with the builder.
+    with_info: `bool`, if `True`, `tfds.load` will return the tuple
+      (`tf.data.Dataset`, `tfds.core.DatasetInfo`), the latter containing the
+      info associated with the builder.
     builder_kwargs: `dict` (optional), keyword arguments to be passed to the
       `tfds.core.DatasetBuilder` constructor. `data_dir` will be passed
       through by default.
