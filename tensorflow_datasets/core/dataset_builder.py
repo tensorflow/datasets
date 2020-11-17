@@ -895,8 +895,10 @@ class FileReaderBuilder(DatasetBuilder):
 
   Subclasses are:
 
-   * `FileAdapterBuilder`: Can both generate and read generated dataset.
-   * `ReadOnlyBuilder`: Can only read pre-generated datasets.
+   * `GeneratorBasedBuilder`: Can both generate and read generated dataset.
+   * `ReadOnlyBuilder`: Can only read pre-generated datasets. A user can
+     generate a dataset with `GeneratorBasedBuilder`, and read them with
+     `ReadOnlyBuilder` without requiring the original generation code.
 
   """
 
@@ -1082,9 +1084,14 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     # If `beam` is used during generation (when a pipeline gets created),
     # the context manager is equivalent to `with beam.Pipeline()`.
     # Otherwise, this is a no-op.
+    # By auto-detecting Beam, the user only has to change `_generate_examples`
+    # to go from non-beam to beam dataset:
+    # https://www.tensorflow.org/datasets/beam_datasets#instructions
     with split_builder.maybe_beam_pipeline():
       # If the signature has a `pipeline` kwargs, create the pipeline now and
       # forward it to `self._split_generators`
+      # We add this magic because the pipeline kwargs is only used by c4 and
+      # we do not want to make the API more verbose for a single advanced case.
       signature = inspect.signature(self._split_generators)
       if "pipeline" in signature.parameters.keys():
         optional_pipeline_kwargs = dict(pipeline=split_builder.beam_pipeline)
