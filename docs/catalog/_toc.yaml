@@ -415,6 +415,8 @@ toc:
   - path: /datasets/catalog/quac
     status: nightly
     title: quac
+  - path: /datasets/catalog/race
+    title: race
   - path: /datasets/catalog/reddit_disentanglement
     title: reddit_disentanglement (manual)
   - path: /datasets/catalog/salient_span_wikipedia

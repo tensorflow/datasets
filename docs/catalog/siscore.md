@@ -24,18 +24,9 @@
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -77,10 +68,40 @@ FeaturesDict({
 
 *   **Config description**: factor of variation: rotation
 
+*   **Download size**: `1.40 GiB`
+
+*   **Dataset size**: `1.40 GiB`
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+`'test'` | 39,540
+
 ## siscore/size
 
 *   **Config description**: factor of variation: size
 
+*   **Download size**: `3.25 GiB`
+
+*   **Dataset size**: `3.27 GiB`
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+`'test'` | 92,884
+
 ## siscore/location
 
 *   **Config description**: factor of variation: location
+
+*   **Download size**: `18.21 GiB`
+
+*   **Dataset size**: `18.31 GiB`
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+`'test'` | 541,548
