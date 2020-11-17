@@ -49,6 +49,7 @@ from tensorflow_datasets.text.pg19 import Pg19
 from tensorflow_datasets.text.piqa import PIQA
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.quac import Quac
+from tensorflow_datasets.text.race import Race
 from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglement
 from tensorflow_datasets.text.salient_span_wikipedia import SalientSpanWikipedia
 from tensorflow_datasets.text.salient_span_wikipedia import SalientSpanWikipediaConfig
