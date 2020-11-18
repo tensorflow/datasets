@@ -376,7 +376,7 @@ class DownloadManager(object):
 
     # Write `.INFO` file and rename `tmp_dir/file.xyz` -> `url_path`
     resource_lib.write_info_file(
-        resource=resource,
+        url=resource.url,
         path=url_path,
         dataset_name=self._dataset_name,
         original_fname=original_fname,

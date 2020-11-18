@@ -230,7 +230,7 @@ def read_info_file(info_path: type_utils.PathLike) -> Json:
 
 @synchronize_decorator
 def write_info_file(
-    resource: 'Resource',
+    url: str,
     path: type_utils.PathLike,
     dataset_name: str,
     original_fname: str,
@@ -243,7 +243,7 @@ def write_info_file(
   data (`dataset_name`) is only for human consumption.
 
   Args:
-    resource: resource for which to write the INFO file.
+    url: Url for which to write the INFO file.
     path: path of downloaded file.
     dataset_name: data used to dl the file.
     original_fname: name of file as downloaded.
@@ -252,7 +252,7 @@ def write_info_file(
   url_info_dict = url_info.asdict()
   info_path = _get_info_path(path)
   info = _read_info(info_path) or {}
-  urls = set(info.get('urls', []) + [resource.url])
+  urls = set(info.get('urls', []) + [url])
   dataset_names = info.get('dataset_names', [])
   if dataset_name:
     dataset_names.append(dataset_name)
