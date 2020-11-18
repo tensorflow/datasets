@@ -151,6 +151,7 @@ def builder(
     name: str,
     *,
     data_dir: Optional[str] = None,
+    try_gcs: bool = False,
     **builder_init_kwargs: Any
 ) -> dataset_builder.DatasetBuilder:
   """Fetches a `tfds.core.DatasetBuilder` by string name.
@@ -167,6 +168,8 @@ def builder(
       use the `'zoo'` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
     data_dir: Path to the dataset(s). See `tfds.load` for more information.
+    try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
+      the public GCS bucket before building it locally.
     **builder_init_kwargs: `dict` of keyword arguments passed to the
       `DatasetBuilder`. These will override keyword arguments passed in `name`,
       if any.
@@ -178,6 +181,9 @@ def builder(
     DatasetNotFoundError: if `name` is unrecognized.
   """
   builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
+  # Set data_dir.
+  if try_gcs and gcs_utils.is_dataset_on_gcs(builder_name):
+    data_dir = gcs_utils.gcs_path("datasets")
 
   # Try loading the code (if it exists)
   try:
@@ -334,11 +340,7 @@ def load(
   if builder_kwargs is None:
     builder_kwargs = {}
 
-  # Set data_dir
-  if try_gcs and gcs_utils.is_dataset_on_gcs(name):
-    data_dir = gcs_utils.gcs_path("datasets")
-
-  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
+  dbuilder = builder(name, data_dir=data_dir, try_gcs=try_gcs, **builder_kwargs)
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
     dbuilder.download_and_prepare(**download_and_prepare_kwargs)
