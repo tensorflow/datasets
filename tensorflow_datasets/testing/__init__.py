@@ -54,5 +54,6 @@ __all__ = [
     "mock_kaggle_api",
     "mock_data",
     "MockFs",
+    "MockPolicy",
     "rm_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
 ]
