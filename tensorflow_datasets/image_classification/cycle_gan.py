@@ -77,8 +77,6 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CycleGANConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
-          description=("A dataset consisting of images from two classes A and "
-                       "B (For example: horses/zebras, apple/orange,...)"),
           version=tfds.core.Version("2.0.0"),
           release_notes={
               "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
@@ -90,7 +88,9 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=
+        "A dataset consisting of images from two classes A and "
+        "B (For example: horses/zebras, apple/orange,...)",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names=["A", "B"]),

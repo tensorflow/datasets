@@ -107,7 +107,6 @@ class CFQConfig(tfds.core.BuilderConfig):
     super(CFQConfig, self).__init__(
         name=name,
         version=tfds.core.Version('1.2.0'),
-        description=_DESCRIPTION,
         **kwargs)
     self.split_file = os.path.join(directory, split_name + '.json')
 

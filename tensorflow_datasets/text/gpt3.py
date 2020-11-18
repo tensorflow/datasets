@@ -66,16 +66,13 @@ def _is_gzip_file(task):
 
 
 def _make_builder_config(module):
-  return tfds.core.BuilderConfig(
-      name=module,
-      version=tfds.core.Version("1.0.0"),
-      description=_DESCRIPTION,
-  )
+  return tfds.core.BuilderConfig(name=module)
 
 
 class Gpt3(tfds.core.GeneratorBasedBuilder):
   """GPT-3 Dataset."""
 
+  VERSION = tfds.core.Version("1.0.0")
   BUILDER_CONFIGS = [_make_builder_config(module) for module in _MODULES]
 
   def _info(self):

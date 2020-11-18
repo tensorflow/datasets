@@ -169,9 +169,8 @@ class Qa4mreConfig(tfds.core.BuilderConfig):
 
     name = self.year + '.' + self.track + '.' + self.lang
 
-    description = _DESCRIPTION
-    description += ('This configuration includes the {} track for {} language '
-                    'in {} year.').format(self.track, self.lang, self.year)
+    description = ('This configuration includes the {} track for {} language '
+                   'in {} year.').format(self.track, self.lang, self.year)
 
     super(Qa4mreConfig, self).__init__(
         name=name,

@@ -197,7 +197,6 @@ def _generate_builder_configs():
         tfds.core.BuilderConfig(
             name=module,
             version=tfds.core.Version("1.0.0"),
-            description=_DESCRIPTION,
         ))
 
   return configs

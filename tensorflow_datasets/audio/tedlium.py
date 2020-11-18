@@ -167,7 +167,10 @@ class Tedlium(tfds.core.BeamBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description="""
+        The TED-LIUM corpus is English-language TED talks, with transcriptions,
+        sampled at 16kHz. It contains about 118 hours of speech.
+        """,
         features=tfds.features.FeaturesDict({
             "speech":
                 tfds.features.Audio(sample_rate=16000),

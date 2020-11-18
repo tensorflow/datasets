@@ -465,7 +465,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_GLUE_DESCRIPTION + self.builder_config.description,
+        description=_GLUE_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,

@@ -99,7 +99,6 @@ class ScanConfig(tfds.core.BuilderConfig):
     super(ScanConfig, self).__init__(
         name=name,
         version=tfds.core.Version('1.1.1'),
-        description=_DESCRIPTION,
         **kwargs)
     self.splitfile = splitfile
     if 'mcd' in name:

@@ -201,7 +201,7 @@ class Opus(tfds.core.GeneratorBasedBuilder):
     src, target = self.builder_config.language_pair
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION + "\n" + self.builder_config.description,
+        description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair),
         supervised_keys=(src, target),

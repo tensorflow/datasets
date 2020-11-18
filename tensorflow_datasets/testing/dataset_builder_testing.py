@@ -15,10 +15,12 @@
 
 """Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
+import difflib
 import hashlib
 import itertools
 import numbers
 import os
+import textwrap
 
 from absl.testing import absltest
 from absl.testing import parameterized
@@ -392,6 +394,9 @@ class DatasetBuilderTestCase(
       with self._subTest("as_dataset"):
         self._assertAsDataset(builder_reloaded)
 
+    with self._subTest("config_description"):
+      self._test_description_builder_config(builder)
+
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
@@ -426,6 +431,31 @@ class DatasetBuilderTestCase(
         builder.info.splits.total_num_examples,
         sum(self.SPLITS.values()),
     )
+
+  def _test_description_builder_config(self, builder):
+    # Do not test on external datasets for backward compatibility
+    # TODO(tfds): Update once datasets are migrated
+    if "tensorflow_datasets" not in self.DATASET_CLASS.__module__:
+      return
+
+    # If configs specified, ensure they are all valid
+    if builder.builder_config and builder.builder_config.description:
+      err_msg = textwrap.dedent(
+          """\
+          The BuilderConfig description should be a one-line description of
+          the config.
+          It shouldn't be the same as `builder.info.description` to avoid
+          redundancy. Both `config.description` and `builder.info.description`
+          will be displayed in the catalog.
+          """
+      )
+      ratio = difflib.SequenceMatcher(
+          None,
+          builder.builder_config.description,
+          builder.info.description,
+      ).ratio()
+      if ratio > 0.9:
+        raise AssertionError(err_msg)
 
 
 def checksum(example):

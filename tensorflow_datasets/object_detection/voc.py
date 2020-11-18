@@ -28,18 +28,25 @@ _VOC_CITATION = """\
 	title = "The {{PASCAL}} {{V}}isual {{O}}bject {{C}}lasses {{C}}hallenge {year} {{(VOC{year})}} {{R}}esults",
 	howpublished = "http://www.pascal-network.org/challenges/VOC/voc{year}/workshop/index.html"}}
 """
-_VOC_DESCRIPTION = """\
-This dataset contains the data from the PASCAL Visual Object Classes Challenge
-{year}, a.k.a. VOC{year}, corresponding to the Classification and Detection
-competitions.
-A total of {num_images} images are included in this dataset, where each image
-contains a set of objects, out of 20 different classes, making a total of
-{num_objects} annotated objects.
+
+_VOC_DESCRIPTION = """
+This dataset contains the data from the PASCAL Visual Object Classes Challenge,
+corresponding to the Classification and Detection competitions.
+
 In the Classification competition, the goal is to predict the set of labels
 contained in the image, while in the Detection competition the goal is to
 predict the bounding box and label of each individual object.
 WARNING: As per the official dataset, the test set of VOC2012 does not contain
 annotations.
+"""
+
+_VOC_CONFIG_DESCRIPTION = """\
+This dataset contains the data from the PASCAL Visual Object Classes Challenge
+{year}, a.k.a. VOC{year}.
+
+A total of {num_images} images are included in this dataset, where each image
+contains a set of objects, out of 20 different classes, making a total of
+{num_objects} annotated objects.
 """
 _VOC_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Original site, it is down very often.
@@ -136,7 +143,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       VocConfig(
           year="2007",
-          description=_VOC_DESCRIPTION.format(
+          description=_VOC_CONFIG_DESCRIPTION.format(
               year=2007, num_images=9963, num_objects=24640),
           filenames={
               "trainval": "VOCtrainval_06-Nov-2007.tar",
@@ -146,7 +153,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       ),
       VocConfig(
           year="2012",
-          description=_VOC_DESCRIPTION.format(
+          description=_VOC_CONFIG_DESCRIPTION.format(
               year=2012, num_images=11540, num_objects=27450),
           filenames={
               "trainval": "VOCtrainval_11-May-2012.tar",
@@ -159,7 +166,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_VOC_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),

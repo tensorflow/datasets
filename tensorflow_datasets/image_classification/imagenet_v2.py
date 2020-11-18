@@ -89,10 +89,11 @@ class ImagenetV2Config(tfds.core.BuilderConfig):
 
 def _create_builder_configs():
   for variant in _IMAGENET_V2_URLS:
-    yield ImagenetV2Config(variant=variant,
-                           name=variant,
-                           version=_CONFIG_VERSION[variant],
-                           description=_DESCRIPTION)
+    yield ImagenetV2Config(
+        variant=variant,
+        name=variant,
+        version=_CONFIG_VERSION[variant],
+    )
 
 
 class ImagenetV2(tfds.core.GeneratorBasedBuilder):

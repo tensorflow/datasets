@@ -52,13 +52,9 @@ class BlimpConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     name = paradigm_uid
-
-    description = _DESCRIPTION
-    description += ('This configuration includes the paradigm {}.').format(name)
-
     super(BlimpConfig, self).__init__(
         name=name,
-        description=description,
+        description=f'This configuration includes the paradigm {name}.',
         version=tfds.core.Version('0.1.0'),
         **kwargs)
 
