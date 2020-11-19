@@ -115,6 +115,8 @@ class DatasetBuilderTestCase(
       recommended `tf.io.gfile` API.
     * SKIP_CHECKSUMS: Checks that the urls called by `dl_manager.download`
       are registered.
+    * BEAM_BASED_BUILDER: Indicates whether the dataset builder is based on
+      beam or not.
 
   This test case will check for the following:
 
@@ -140,6 +142,8 @@ class DatasetBuilderTestCase(
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
   SKIP_CHECKSUMS = False
+  BEAM_BASED_BUILDER = False
+
 
   @classmethod
   def setUpClass(cls):
@@ -362,7 +366,8 @@ class DatasetBuilderTestCase(
         download_checksums=self._download_checksums,
         manual_dir=manual_dir,
     ):
-      if isinstance(builder, dataset_builder.BeamBasedBuilder):
+      if (isinstance(builder, dataset_builder.BeamBasedBuilder) or
+          self.BEAM_BASED_BUILDER):
         # For Beam datasets, set-up the runner config
         import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
         beam_runner = None
