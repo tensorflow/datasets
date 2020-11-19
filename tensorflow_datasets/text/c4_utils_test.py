@@ -231,7 +231,9 @@ This line should be okay."""
     counters, counter_inc_fn = _get_counters()
     list(
         c4_utils.split_wet_file(
-            os.path.join(testing.fake_examples_dir(), "c4", "cc_0.warc.wet.gz"),
+            os.path.join(
+                testing.fake_examples_dir(),
+                "c4/c4_wet_files/cc_0.warc.wet.gz"),
             counter_inc_fn=counter_inc_fn))
     self.assertEqual(
         {

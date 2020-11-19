@@ -654,6 +654,10 @@ class DownloadManager(object):
       with self._extractor.tqdm():
         return _map_promise(self._download_extract, url_or_urls)
 
+  @property
+  def download_dir(self) -> ReadOnlyPath:
+    return self._download_dir
+
   @utils.memoized_property
   def manual_dir(self) -> ReadOnlyPath:
     """Returns the directory containing the manually extracted data."""

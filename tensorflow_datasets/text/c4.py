@@ -19,6 +19,7 @@ import collections
 import functools
 import json
 import os
+import uuid
 
 from absl import logging
 import tensorflow.compat.v2 as tf
@@ -206,7 +207,6 @@ class C4(tfds.core.BeamBasedBuilder):
   You are using a C4 config that requires some files to be manually downloaded.
   For `c4/webtextlike`, download {_OPENWEBTEXT_URLS_ZIP} from
   {_OPENWEBTEXT_URLS_URL}.
-  For `c4/multilingual` and `en/noclean` download the Common Crawl WET files.
   """
 
   BUILDER_CONFIGS = [
@@ -283,18 +283,10 @@ class C4(tfds.core.BeamBasedBuilder):
     # We will automatically download the first default CC version, but others
     # need to be manually downloaded.
     cc_versions = set(self.builder_config.cc_versions)
-    default_version = set([DEFAULT_CC_VERSION])
-    auto_cc_versions = cc_versions & default_version
-    manual_cc_versions = cc_versions - default_version
-
     files_to_download = {}
     files_to_download["wet_path_urls"] = [
         _WET_PATH_URL.format(cc_version=cc_version)
-        for cc_version in auto_cc_versions]
-    files_to_download["manual_wet_paths"] = {
-        cc_version: _WET_PATH_URL.format(cc_version=cc_version)
-        for cc_version in manual_cc_versions
-    }
+        for cc_version in cc_versions]
     if self.builder_config.badwords_filter:
       files_to_download["badwords"] = {
           lang: _BADWORDS_URL.format(lang=lang)
@@ -316,40 +308,10 @@ class C4(tfds.core.BeamBasedBuilder):
                 _OPENWEBTEXT_URLS_ZIP))
       file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)
 
-    wet_urls = []
-    for wet_path_url in file_paths["wet_path_urls"]:
-      with tf.io.gfile.GFile(wet_path_url) as f:
-        wet_urls.extend(["%s/%s" % (_DOWNLOAD_HOST, l.strip()) for l in f])
-    if dl_manager.register_checksums:
-      # Download locally to register checksums.
-      file_paths.update(dl_manager.download({"wet_files": wet_urls}))
-    else:
-      # Download on the beam workers.
-      file_paths["wet_urls"] = wet_urls
-      file_paths["wet_files"] = []
-
-    for cc_version, wet_path_url in file_paths["manual_wet_paths"].items():
-      crawl_dir = os.path.join(
-          dl_manager.manual_dir, "crawl-data", f"CC-MAIN-{cc_version}")
-      if not tf.io.gfile.exists(crawl_dir):
-        raise AssertionError(
-            "For the non-default Common Crawl version {0}, you must manually "
-            "download the WET files to the directory {1}.".format(
-                cc_version, crawl_dir))
-      with tf.io.gfile.GFile(wet_path_url) as f:
-        wet_files = [
-            os.path.join(dl_manager.manual_dir, line.strip())
-            for line in f if line.strip() not in _KNOWN_CORRUPT_WET_FILES
-        ]
-      logging.info(
-          "Adding %d WET files for manually downloaded version %s.",
-          len(wet_files), cc_version)
-      file_paths["wet_files"].extend(wet_files)
-
     file_paths = tf.nest.map_structure(os.fspath, file_paths)
 
     page_content_pcollection = self._get_page_content(
-        pipeline, file_paths, dl_manager, self.builder_config.languages)
+        pipeline, file_paths, dl_manager)
 
     def _lang_filter(url_and_page, lang):
       _, page = url_and_page
@@ -415,21 +377,42 @@ class C4(tfds.core.BeamBasedBuilder):
       ])
     return splits
 
-  def _get_page_content(self, pipeline, file_paths, dl_manager, language):
+  def _get_page_content(self, pipeline, file_paths, dl_manager):
     """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
 
+    def download_wet_file(path, dl_dir):
+      url = f"{_DOWNLOAD_HOST}/{path}"
+      out_path = f"{dl_dir}/{path}"
+
+      if tf.io.gfile.exists(out_path):
+        c4_utils.get_counter_inc_fn("download_wet_url")("exists")
+        return out_path
+
+      tmp_dir = f"{out_path}.incomplete{uuid.uuid4().hex}"
+      try:
+        tf.io.gfile.makedirs(tmp_dir)
+        downloader = tfds.download.downloader.get_downloader()
+        with downloader.tqdm():
+          dl_path = downloader.download(url, tmp_dir).get().path
+        tf.io.gfile.rename(os.fspath(dl_path), out_path, overwrite=True)
+      finally:
+        if tf.io.gfile.exists(tmp_dir):
+          tf.io.gfile.rmtree(tmp_dir)
+
+        c4_utils.get_counter_inc_fn("download_wet_url")("downloaded")
+      return out_path
+
     wet_file_paths = (
-        pipeline |
-        "create_wet_files" >> beam.Create(file_paths["wet_files"]))
-    if "wet_urls" in file_paths:
-      def download_url(url, downloader):
-        return os.fspath(downloader.download({url: url})[url])
-      dl_wet_file_paths = (
-          pipeline
-          | "create_wet_urls" >> beam.Create(file_paths["wet_urls"])
-          | beam.Map(download_url, downloader=dl_manager))
-      wet_file_paths = (wet_file_paths, dl_wet_file_paths) | beam.Flatten()
+        pipeline
+        | "create_wet_path_urls" >> beam.Create(file_paths["wet_path_urls"])
+        | beam.io.ReadAllFromText(
+            compression_type=beam.io.filesystem.CompressionTypes.UNCOMPRESSED)
+        | "filter_corrupt_wet_files" >> beam.Filter(
+            lambda p: p not in _KNOWN_CORRUPT_WET_FILES)
+        | beam.Map(
+            download_wet_file,
+            dl_dir=os.path.join(dl_manager.download_dir, "c4_wet_files")))
 
     # Parse WET files and filter by length.
     # Output: url, text
