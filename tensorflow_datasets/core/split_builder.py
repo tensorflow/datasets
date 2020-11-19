@@ -26,6 +26,7 @@ from absl import logging
 import dataclasses
 
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tfrecords_writer
@@ -113,6 +114,7 @@ class SplitBuilder:
       beam_options: Optional['beam.options.pipeline_options.PipelineOptions'],
       beam_runner: Optional['beam.runners.PipelineRunner'],
       max_examples_per_split: Optional[int],
+      file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
   ):
     self._split_dict = split_dict
     self._features = features
@@ -122,6 +124,7 @@ class SplitBuilder:
     self._beam_options = beam_options
     self._beam_runner = beam_runner
     self._beam_pipeline: Optional['beam.Pipeline'] = None
+    self._file_format = file_format
 
   @contextlib.contextmanager
   def maybe_beam_pipeline(self) -> Iterator[None]:
@@ -346,6 +349,7 @@ class SplitBuilder:
         example_specs=self._features.get_serialized_info(),
         path=path,
         hash_salt=split_name,
+        file_format=self._file_format,
     )
     for key, example in utils.tqdm(
         generator, unit=' examples', total=total_num_examples, leave=False
@@ -375,6 +379,7 @@ class SplitBuilder:
         example_specs=self._features.get_serialized_info(),
         path=path,
         hash_salt=split_name,
+        file_format=self._file_format,
     )
 
     def _encode_example(key_ex, encode_fn=self._features.encode_example):

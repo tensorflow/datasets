@@ -38,6 +38,7 @@ import uuid
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.utils import type_utils
 
 Tree = type_utils.Tree
@@ -542,14 +543,13 @@ def basename_from_url(url: str) -> str:
   return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
 
 
-def list_info_files(dir_path: str) -> List[str]:
+def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
-  # TODO(tfds): Is there a better filtering scheme which would be more
-  # resistant to future modifications (ex: tfrecord => other format)
+  path = os.fspath(dir_path)
   return [
-      fname for fname in tf.io.gfile.listdir(dir_path)
-      if '.tfrecord' not in fname and
-      not tf.io.gfile.isdir(os.path.join(dir_path, fname))
+      fname for fname in tf.io.gfile.listdir(path)
+      if not tf.io.gfile.isdir(os.path.join(path, fname)) and
+      not file_adapters.is_record_file(fname)
   ]
 
 

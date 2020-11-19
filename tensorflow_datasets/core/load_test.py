@@ -187,3 +187,35 @@ def test_get_version_str(mock_fs: testing.MockFs):
   assert _find_builder_dir('ds:1.0.0') == 'path/to/ds/1.0.0'
   assert _find_builder_dir('ds:1.3.*') is None
   assert _find_builder_dir('ds:2.3.5') is None
+
+
+def dataset_name_and_kwargs_from_name_str():
+  assert load.dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
+  assert load.dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == ('ds1', {
+      'version': '1.2.*'
+  })
+  assert load.dataset_name_and_kwargs_from_name_str('ds1/config1') == ('ds1', {
+      'config': 'config1'
+  })
+  assert load.dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
+      'ds1', {
+          'config': 'config1',
+          'version': '1.*.*'
+      })
+  assert load.dataset_name_and_kwargs_from_name_str(
+      'ds1/config1/arg1=val1,arg2=val2') == ('ds1', {
+          'config': 'config1',
+          'arg1': 'val1',
+          'arg2': 'val2'
+      })
+  assert load.dataset_name_and_kwargs_from_name_str(
+      'ds1/config1:1.2.3/arg1=val1,arg2=val2') == ('ds1', {
+          'config': 'config1',
+          'version': '1.2.3',
+          'arg1': 'val1',
+          'arg2': 'val2'
+      })
+  assert load.dataset_name_and_kwargs_from_name_str('ds1/arg1=val1') == (
+      'ds1', {
+          'arg1': 'val1'
+      })

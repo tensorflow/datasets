@@ -18,6 +18,7 @@
 import collections
 import hashlib
 import os
+import pathlib
 
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -240,6 +241,19 @@ class GetClassPathUrlTest(testing.TestCase):
     self.assertEqual(
         cls_url,
         (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'))
+
+
+def test_list_info_files(tmp_path: pathlib.Path):
+  tmp_path.joinpath('test.tfrecord').touch()
+  tmp_path.joinpath('test.riegeli').touch()
+  tmp_path.joinpath('info.json').touch()
+
+  # Have a info file in the sub-directory. Shouldn't be listed.
+  tmp_path.joinpath('diff').mkdir()
+  tmp_path.joinpath('diff/info.json').touch()
+  info_files = py_utils.list_info_files(tmp_path)
+
+  assert info_files == ['info.json']
 
 
 def _flatten_with_path(v):

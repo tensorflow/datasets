@@ -52,7 +52,7 @@ def _write_tfrecord_from_shard_spec(shard_spec, get):
     skip, take = instruction.skip, instruction.take
     stop = skip+take if take > 0 else None
     iterators.append(itertools.islice(iterator, skip, stop))
-  tfrecords_writer._write_tfrecord(shard_spec.path, itertools.chain(*iterators))
+  tfrecords_writer._write_examples(shard_spec.path, itertools.chain(*iterators))
 
 
 class GetDatasetFilesTest(testing.TestCase):

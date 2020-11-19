@@ -30,6 +30,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
@@ -902,13 +903,38 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
+  def __init__(
+      self,
+      *,
+      file_format: Union[
+          None, str,
+          file_adapters.FileFormat] = file_adapters.DEFAULT_FILE_FORMAT,
+      **kwargs: Any):
+    """Initializes an instance of FileReaderBuilder.
+
+    Callers must pass arguments as keyword arguments.
+
+    Args:
+      file_format: EXPERIMENTAL, may change at any time; Format of the record
+        files in which dataset will be read/written to. Defaults to `tfrecord`.
+      **kwargs: Arguments passed to `DatasetBuilder`.
+    """
+    super().__init__(**kwargs)
+    try:
+      self._file_format = file_adapters.FileFormat(file_format)
+    except ValueError:
+      all_values = [f.value for f in file_adapters.FileFormat]
+      raise ValueError(f"{file_format} is not a valid format. "
+                       f"Valid file formats: {all_values}")
+
   @utils.memoized_property
   def _example_specs(self):
     return self.info.features.get_serialized_info()
 
   @property
   def _tfrecords_reader(self):
-    return tfrecords_reader.Reader(self._data_dir, self._example_specs)
+    return tfrecords_reader.Reader(self._data_dir, self._example_specs,
+                                   self._file_format)
 
   def _as_dataset(
       self,
@@ -1079,6 +1105,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
+        file_format=self._file_format,
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),
@@ -1113,11 +1140,14 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       _check_split_names(split_generators.keys())
 
       # Start generating data for all splits
+      path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
+          self._file_format].FILE_SUFFIX
+
       split_info_futures = [
           split_builder.submit_split_generation(  # pylint: disable=g-complex-comprehension
               split_name=split_name,
               generator=generator,
-              path=self.data_path / f"{self.name}-{split_name}.tfrecord",
+              path=self.data_path / f"{self.name}-{split_name}.{path_suffix}",
           )
           for split_name, generator
           in utils.tqdm(split_generators.items(), unit=" splits", leave=False)

@@ -528,6 +528,7 @@ def dataset_name_and_kwargs_from_name_str(
 
 
 def _kwargs_str_to_kwargs(kwargs_str):
+  """Converts given `kwargs` as str into kwargs dict."""
   if not kwargs_str:
     return {}
   kwarg_strs = kwargs_str.split(",")
