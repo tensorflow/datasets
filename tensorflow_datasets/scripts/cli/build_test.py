@@ -175,6 +175,9 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
 
 
 def test_build_files():
+  # Make sure DummyDataset isn't registered by default
+  with pytest.raises(tfds.core.load.DatasetNotFoundError):
+    _build('dummy_dataset')
 
   with pytest.raises(FileNotFoundError, match='Could not find .* script'):
     _build('')
@@ -196,7 +199,14 @@ def test_build_files():
     assert _build('dummy_dataset/dummy_dataset') == ['dummy_dataset']
 
 
+# Somehow only with tf-nightly, `dummy_dataset` is already imported by
+# community/load_test.py (with `skip_registration()`). Thus import here have
+# no-effects.
+@pytest.mark.skip(reason='Conflict with `load_test.py`')
 def test_build_import():
+  # DummyDataset isn't registered by default
+  with pytest.raises(tfds.core.load.DatasetNotFoundError):
+    _build('dummy_dataset')
 
   # --imports register the dataset
   ds_module = 'tensorflow_datasets.testing.dummy_dataset.dummy_dataset'

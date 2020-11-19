@@ -16,11 +16,21 @@
 """Dummy dataset tests."""
 
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.testing.dummy_dataset import dummy_dataset
 
 
 class DummyDatasetTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = dummy_dataset.DummyDataset
+
+  @classmethod
+  def setUpClass(cls):
+    # DummyDataset is used by other tests to test dynamic class registration
+    # (e.g. in `cli/build_test.py`)
+    # However, pytest test collection import all `_test.py` files, thus
+    # registering the dataset for all tests.
+    # To avoid this, we move the import registration inside the test.
+    from tensorflow_datasets.testing.dummy_dataset import dummy_dataset  # pylint: disable=g-import-not-at-top
+    cls.DATASET_CLASS = dummy_dataset.DummyDataset
+    super().setUpClass()
+
   SPLITS = {
       'train': 20,
   }
