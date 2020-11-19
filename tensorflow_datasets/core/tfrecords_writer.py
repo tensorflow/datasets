@@ -19,7 +19,6 @@ import collections
 import itertools
 import json
 import os
-import pathlib
 
 from typing import Any, Iterable, List, Tuple
 
@@ -35,6 +34,7 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils import type_utils
 
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
@@ -126,12 +126,11 @@ def _get_shard_boundaries(
 
 
 def _write_examples(
-    path: str,
+    path: type_utils.PathLike,
     iterator: Iterable[bytes],
     file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT):
   """Write examples from iterator in the given `file_format`."""
-  file_adapters.ADAPTER_FOR_FORMAT[file_format].write_examples(
-      pathlib.Path(path), iterator)
+  file_adapters.ADAPTER_FOR_FORMAT[file_format].write_examples(path, iterator)
 
 
 def _get_number_shards(
