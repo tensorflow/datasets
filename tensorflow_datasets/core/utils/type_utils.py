@@ -102,6 +102,15 @@ class PurePath(Protocol, _PurePathBase):  # pytype: disable=mro-error
   @property
   def parent(self: T) -> T: raise NotImplementedError
 
+  # py3.9 backport of PurePath.is_relative_to.
+  def is_relative_to(self, *other: PathLike) -> bool:
+    """Return True if the path is relative to another path or False."""
+    try:
+      self.relative_to(*other)
+      return True
+    except ValueError:
+      return False
+
   # pylint: enable=multiple-statements,line-too-long
 
 

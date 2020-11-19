@@ -17,7 +17,6 @@
 
 import concurrent.futures
 import hashlib
-import os
 import typing
 from typing import Dict, Iterator, Optional, Tuple, Union
 import uuid
@@ -50,20 +49,9 @@ class NonMatchingChecksumError(Exception):
 
   def __init__(self, url, tmp_path):
     msg = (
-        f'Artifact {url}, downloaded to {tmp_path}, has wrong checksum. This '
-        'might indicate:\n'
-        ' * The website may be down (e.g. returned a 503 status code). Please '
-        'check the url.\n'
-        ' * For Google Drive URLs, try again later as Drive sometimes rejects '
-        'downloads when too many people access the same URL. See '
-        'https://github.com/tensorflow/datasets/issues/1482\n'
-        ' * The original datasets files may have been updated. In this case '
-        'the TFDS dataset builder should be updated to use the new files '
-        'and checksums. Sorry about that. Please open an issue or send us a PR '
-        'with a fix.\n'
-        ' * If you\'re adding a new dataset, don\'t forget to register the '
-        'checksums as explained in: '
-        'https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally\n'
+        f'Artifact {url}, downloaded to {tmp_path}, has wrong checksum. '
+        'To debug, see: '
+        'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
     )
     Exception.__init__(self, msg)
 
@@ -217,16 +205,20 @@ class DownloadManager(object):
     Raises:
       FileNotFoundError: Raised if the register_checksums_path does not exists.
     """
-    if register_checksums and not register_checksums_path:
-      raise ValueError(
-          'When register_checksums=True, register_checksums_path should be set.'
-      )
-    if register_checksums_path:
+    if register_checksums:
+      if not register_checksums_path:
+        raise ValueError(
+            'When register_checksums=True, register_checksums_path should be set.'
+        )
       register_checksums_path = utils.as_path(register_checksums_path)
       if not register_checksums_path.exists():
         # Create the file here to make sure user has write access before
         # starting downloads.
         register_checksums_path.touch()
+      else:
+        # Make sure the user has write access before downloading any files.
+        # (e.g. TFDS installed by admin)
+        register_checksums_path.write_text(register_checksums_path.read_text())
 
     download_dir = utils.as_path(download_dir).expanduser()
     if extract_dir:
@@ -300,36 +292,13 @@ class DownloadManager(object):
     """Returns the total size of downloaded files."""
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
-  def _get_final_dl_path(self, url, sha256) -> ReadWritePath:
+  def _get_dl_path(self, url: str, sha256: str) -> ReadWritePath:
     return self._download_dir / resource_lib.get_dl_fname(url, sha256)
 
   @property
   def register_checksums(self):
     """Returns whether checksums are being computed and recorded to file."""
     return self._register_checksums
-
-  def _check_manually_downloaded(
-      self, url: str,
-  ) -> Optional[ReadOnlyPath]:
-    """Checks if file is already downloaded in manual_dir."""
-    if not self._manual_dir:  # Manual dir not passed
-      return None
-
-    url_info = self._url_infos.get(url)
-    if not url_info or not url_info.filename:  # Filename unknown.
-      return None
-
-    manual_path = self._manual_dir / url_info.filename
-    if not manual_path.exists():  # File not manually downloaded
-      return None
-
-    # Eventually check the checksums
-    if self._force_checksums_validation:
-      checksum, _ = utils.read_checksum_digest(manual_path)
-      if checksum != url_info.checksum:
-        raise NonMatchingChecksumError(url, manual_path)
-
-    return manual_path
 
   @utils.build_synchronize_decorator()
   def _record_url_infos(self):
@@ -339,158 +308,6 @@ class DownloadManager(object):
         self._recorded_url_infos,
     )
 
-  def _handle_download_result(
-      self,
-      resource: resource_lib.Resource,
-      tmp_dir_path: ReadWritePath,
-      url_path: ReadWritePath,
-      url_info: checksums.UrlInfo,
-  ) -> ReadWritePath:
-    """Post-processing of the downloaded file.
-
-    * Write `.INFO` file
-    * Rename `tmp_dir/file.xyz` -> `url_path`
-    * Validate/record checksums
-    * Eventually rename `url_path` -> `file_path` when `record_checksums=True`
-
-    Args:
-      resource: The url to download.
-      tmp_dir_path: Temporary dir where the file was downloaded.
-      url_path: Destination path.
-      url_info: File checksums, size, computed during download.
-
-    Returns:
-      dst_path: `url_path` (or `file_path` when `register_checksums=True`)
-
-    Raises:
-      NonMatchingChecksumError:
-    """
-    # Extract the file name, path from the tmp_dir
-    fnames = tf.io.gfile.listdir(os.fspath(tmp_dir_path))
-    if len(fnames) != 1:
-      raise ValueError(
-          'Download not found for url {} in: {}. Found {} files, but expected '
-          '1.'.format(resource.url, tmp_dir_path, len(fnames)))
-    original_fname, = fnames  # Unpack list
-    tmp_path = os.path.join(tmp_dir_path, original_fname)
-
-    # Write `.INFO` file and rename `tmp_dir/file.xyz` -> `url_path`
-    resource_lib.write_info_file(
-        url=resource.url,
-        path=url_path,
-        dataset_name=self._dataset_name,
-        original_fname=original_fname,
-        url_info=url_info,
-    )
-    # Unconditionally overwrite because either file doesn't exist or
-    # FORCE_DOWNLOAD=true
-    tf.io.gfile.rename(os.fspath(tmp_path), os.fspath(url_path), overwrite=True)
-    tf.io.gfile.rmtree(os.fspath(tmp_dir_path))
-
-    # After this checkpoint, the url file is cached, so should never be
-    # downloaded again, even if there are error in registering checksums.
-
-    # Even if `_handle_download_result` is executed asyncronously, Python
-    # built-in ops are atomic in CPython (and Pypy), so it should be safe
-    # to update `_recorded_url_infos`.
-    self._recorded_url_infos[resource.url] = url_info
-
-    # Validate the download checksum, or register checksums
-    dst_path = url_path
-    if self._register_checksums:
-      # Change `dst_path` from `url_path` -> `file_path`
-      dst_path = self._save_url_info_and_rename(
-          url=resource.url, url_path=url_path, url_info=url_info)
-    elif resource.url not in self._url_infos:
-      if self._force_checksums_validation:
-        raise ValueError(
-            f'Missing checksums url: {resource.url}, yet '
-            '`force_checksums_validation=True`. '
-            'Did you forgot to register checksums ?')
-      # Otherwise, missing checksums, do nothing
-    elif url_info != self._url_infos.get(resource.url, None):
-      raise NonMatchingChecksumError(resource.url, tmp_path)
-
-    return dst_path
-
-  def _save_url_info_and_rename(
-      self,
-      url: str,
-      url_path: ReadWritePath,
-      url_info: checksums.UrlInfo,
-  ) -> ReadWritePath:
-    """Saves the checksums on disk and renames `url_path` -> `file_path`.
-
-    This function assume the file has already be downloaded in `url_path`.
-
-    Args:
-      url: Url downloaded
-      url_path: Path of the downloaded file.
-      url_info: Downloaded file information.
-
-    Returns:
-      file_path: The downloaded file after renaming.
-    """
-    # Record checksums/download size
-    # As downloads are cached even without checksum, we could
-    # avoid recording the checksums for each urls, and record them once
-    # globally at the end.
-    assert url in self._recorded_url_infos
-    self._record_url_infos()
-
-    # Rename (after checksum got saved succesfully)
-    file_path = self._get_final_dl_path(url, url_info.checksum)
-    tf.io.gfile.rename(
-        os.fspath(url_path), os.fspath(file_path), overwrite=True
-    )
-    resource_lib.rename_info_file(url_path, file_path, overwrite=True)
-    return file_path
-
-  def _find_existing_path(
-      self, url: str, url_path: ReadWritePath
-  ) -> Optional[ReadOnlyPath]:
-    """Returns the downloaded file path if it exists.
-
-    The file can be located in two different locations:
-
-    * `file_path = f(url, hash(file))`
-    * `url_path = f(url, hash(url))`
-
-    `file_path` can only be computed if the file checksum is known in
-    advance. Otherwise, `url_path` is used as fallback.
-
-    Args:
-      url: Downloaded url
-      url_path: File path when the file checksums is unknown
-
-    Returns:
-      existing_path: `file_path` or `url_path` if the file was already
-        downloaded. `None` otherwise.
-    """
-    existing_path = None
-    # If download is forced, then have to re-download in all cases
-    if not self._force_download:
-      # File checksum is registered (`file_path` known)
-      if url in self._url_infos:
-        expected_file_checksum = self._url_infos[url].checksum
-        file_path = self._get_final_dl_path(url, expected_file_checksum)
-        if resource_lib.Resource.exists_locally(file_path):
-          existing_path = file_path
-          # Info restored from `checksums/dataset.txt` files.
-          self._recorded_url_infos[url] = self._url_infos[url]
-
-      # If `file_path` isn't found (or unknown), fall back to `url_path`
-      if not existing_path and resource_lib.Resource.exists_locally(url_path):
-        existing_path = url_path
-        # Info restored from `.INFO` file
-        self._recorded_url_infos[url] = _read_url_info(url_path)
-    return existing_path
-
-  def download_checksums(self, checksums_url):
-    """Downloads checksum file from the given URL and adds it to registry."""
-    checksums_path = self.download(checksums_url)
-    self._url_infos.update(checksums.load_url_infos(checksums_path))
-
   # Synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
   @utils.build_synchronize_decorator()
@@ -499,6 +316,12 @@ class DownloadManager(object):
       self, resource: Union[str, resource_lib.Resource]
   ) -> promise.Promise[ReadOnlyPath]:
     """Download resource, returns Promise->path to downloaded file.
+
+    This function:
+
+    1. Reuse cache (`_get_cached_path`) or download the file
+    2. Register or validate checksums (`_register_or_validate_checksums`)
+    3. Rename download to final path (`_rename_and_get_final_dl_path`)
 
     Args:
       resource: The URL to download.
@@ -511,68 +334,160 @@ class DownloadManager(object):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
 
-    # Compute the existing path if the file was previously downloaded
-    url_path = self._get_final_dl_path(
-        url, hashlib.sha256(url.encode('utf-8')).hexdigest()
-    )
-    existing_path = self._find_existing_path(url=url, url_path=url_path)
+    expected_url_info = self._url_infos.get(url)
 
-    # Check if the user has manually downloaded the file.
-    manually_downloaded_path = self._check_manually_downloaded(url)
-    if manually_downloaded_path:
+    # 3 possible destinations for the path:
+    # * In `manual_dir` (manually downloaded data)
+    # * In `downloads/url_path` (checksum unknown)
+    # * In `downloads/checksum_path` (checksum registered)
+    manually_downloaded_path = _get_manually_downloaded_path(
+        manual_dir=self._manual_dir,
+        expected_url_info=expected_url_info,
+    )
+    url_path = self._get_dl_path(
+        url, sha256=hashlib.sha256(url.encode('utf-8')).hexdigest()
+    )
+    checksum_path = self._get_dl_path(
+        url, sha256=expected_url_info.checksum
+    ) if expected_url_info else None
+
+    # Get the cached path and url_info (if they exists)
+    dl_result = _get_cached_path(
+        manually_downloaded_path=manually_downloaded_path,
+        checksum_path=checksum_path,
+        url_path=url_path,
+        expected_url_info=expected_url_info,
+    )
+    if dl_result.path and not self._force_download:  # Download was cached
       logging.info(
-          f'Skipping download of {url}: File manually '
-          f'downloaded in {manually_downloaded_path}'
+          f'Skipping download of {url}: File cached in {dl_result.path}'
       )
-      return promise.Promise.resolve(manually_downloaded_path)
+      future = promise.Promise.resolve(dl_result)
+    else:
+      # Download in an empty tmp directory (to avoid name collisions)
+      # `download_tmp_dir` is cleaned-up in `_rename_and_get_final_dl_path`
+      dirname = f'{resource_lib.get_dl_dirname(url)}.tmp.{uuid.uuid4().hex}'
+      download_tmp_dir = self._download_dir / dirname
+      download_tmp_dir.mkdir()
+      logging.info(f'Downloading {url} into {download_tmp_dir}...')
+      future = self._downloader.download(
+          url, download_tmp_dir, verify=self._verify_ssl
+      )
+
+    # Post-process the result
+    return future.then(lambda dl_result: self._register_or_validate_checksums(  # pylint: disable=g-long-lambda
+        url=url,
+        path=dl_result.path,
+        computed_url_info=dl_result.url_info,
+        expected_url_info=expected_url_info,
+        checksum_path=checksum_path,
+        url_path=url_path,
+    ))
+
+  def _register_or_validate_checksums(
+      self,
+      path: ReadWritePath,
+      url: str,
+      expected_url_info: Optional[checksums.UrlInfo],
+      computed_url_info: Optional[checksums.UrlInfo],
+      checksum_path: Optional[ReadWritePath],
+      url_path: ReadWritePath,
+  ) -> ReadOnlyPath:
+    """Validates/records checksums and renames final downloaded path."""
+    # `path` can be:
+    # * Manually downloaded
+    # * (cached) checksum_path
+    # * (cached) url_path
+    # * `tmp_dir/file` (downloaded path)
+
+    if computed_url_info:
+      # Used both in `.downloaded_size` and `_record_url_infos()`
+      self._recorded_url_infos[url] = computed_url_info
 
     if self._register_checksums:
-      if existing_path == url_path:
-        # File already downloaded but url_info not registered, then:
-        # * Record the url_infos of the downloaded file
-        # * Rename the filename `url_path` -> `file_path`, and return it.
-        logging.info(
-            'URL %s already downloaded. Recording checksums '
-            'from %s.', url, existing_path
+      if not computed_url_info:
+        raise ValueError(
+            f'Cannot register checksums for {url}: no computed chechsum. '
+            '--register_checksums with manually downloaded data not supported.'
         )
-        future = self._executor.submit(
-            self._save_url_info_and_rename,
-            url=url,
-            url_path=url_path,
-            url_info=self._recorded_url_infos[url],
-        )
-        return promise.Promise.resolve(future)
-      elif existing_path:
-        # url_info already registered, but maybe in a different dataset (e.g.
-        # should save `imagenet_real/checksums.txt`, but url_info loaded from
-        # `checksums/imagenet2012.txt`)
-        self._record_url_infos()
-      # Otherwise, url_info will be registered in the `_handle_download_result`
-      # callback.
+      # Note:
+      # * We save even if `expected_url_info == computed_url_info` as
+      #   `expected_url_info` might have been loaded from another dataset.
+      # * `register_checksums_path` was validated in `__init__` so this
+      #   shouldn't fail.
+      self._record_url_infos()
 
-    # If the file file already exists (`file_path` or `url_path`), return it.
-    if existing_path:
-      logging.info('URL %s already downloaded: reusing %s.', url, existing_path)
-      return promise.Promise.resolve(existing_path)
-
-    # Otherwise, download the file, and eventually computing the checksums.
-    # There is a slight difference between downloader and extractor here:
-    # the extractor manages its own temp directory, while the DownloadManager
-    # manages the temp directory of downloader.
-    dirname = f'{resource_lib.get_dl_dirname(url)}.tmp.{uuid.uuid4().hex}'
-    download_dir_path = self._download_dir / dirname
-    download_dir_path.mkdir()
-
-    logging.info('Downloading %s into %s...', url, download_dir_path)
-    def callback(dl_result):
-      return self._handle_download_result(
-          resource=resource,
-          tmp_dir_path=download_dir_path,
-          url_path=url_path,
-          url_info=dl_result.url_info,
+      # Checksum path should now match the new registered checksum (even if
+      # checksums were previously registered)
+      expected_url_info = computed_url_info
+      checksum_path = self._get_dl_path(url, computed_url_info.checksum)
+    else:
+      # Eventually validate checksums
+      # Note:
+      # * If path is cached at `url_path` but cached
+      #   `computed_url_info != expected_url_info`, a new download has
+      #   been triggered (as _get_cached_path returns None)
+      # * If path was downloaded but checksums don't match expected, then
+      #   the download isn't cached (re-running build will retrigger a new
+      #   download). This is expected as it might mean the downloaded file
+      #   was corrupted. Note: The tmp file isn't deleted to allow inspection.
+      _validate_checksums(
+          url=url,
+          path=path,
+          expected_url_info=expected_url_info,
+          computed_url_info=computed_url_info,
+          force_checksums_validation=self._force_checksums_validation,
       )
-    return self._downloader.download(
-        url, download_dir_path, verify=self._verify_ssl).then(callback)
+
+    return self._rename_and_get_final_dl_path(
+        url=url,
+        path=path,
+        expected_url_info=expected_url_info,
+        computed_url_info=computed_url_info,
+        checksum_path=checksum_path,
+        url_path=url_path,
+    )
+
+  def _rename_and_get_final_dl_path(
+      self,
+      url: str,
+      path: ReadWritePath,
+      expected_url_info: Optional[checksums.UrlInfo],
+      computed_url_info: Optional[checksums.UrlInfo],
+      checksum_path: Optional[ReadWritePath],
+      url_path: ReadWritePath,
+  ) -> ReadWritePath:
+    """Eventually rename the downloaded file if checksums were recorded."""
+    # `path` can be:
+    # * Manually downloaded
+    # * (cached) checksum_path
+    # * (cached) url_path
+    # * `tmp_dir/file` (downloaded path)
+    if path.is_relative_to(self._manual_dir):  # Manually downloaded data
+      return path
+    elif path == checksum_path:  # Path already at final destination
+      assert computed_url_info == expected_url_info  # Sanity check
+      return checksum_path  # pytype: disable=bad-return-type
+    elif path == url_path:
+      if checksum_path:
+        # Checksums were registered: Rename -> checksums_path
+        resource_lib.rename_info_file(path, checksum_path, overwrite=True)
+        return path.replace(checksum_path)
+      else:
+        # Checksums not registered: -> do nothing
+        return path
+    else:  # Path was downloaded in tmp dir
+      dst_path = checksum_path or url_path
+      resource_lib.write_info_file(
+          url=url,
+          path=dst_path,
+          dataset_name=self._dataset_name,
+          original_fname=path.name,
+          url_info=computed_url_info,
+      )
+      path.replace(dst_path)
+      path.parent.rmdir()  # Cleanup tmp dir (will fail if dir not empty)
+      return dst_path
 
   @utils.build_synchronize_decorator()
   @utils.memoize()
@@ -602,6 +517,11 @@ class DownloadManager(object):
       resource.path = path
       return self._extract(resource)
     return self._download(resource).then(callback)
+
+  def download_checksums(self, checksums_url):
+    """Downloads checksum file from the given URL and adds it to registry."""
+    checksums_path = self.download(checksums_url)
+    self._url_infos.update(checksums.load_url_infos(checksums_path))
 
   def download_kaggle_data(self, competition_or_dataset: str) -> ReadWritePath:
     """Download data for a given Kaggle Dataset or competition.
@@ -751,6 +671,98 @@ class DownloadManager(object):
           f'instructions:\n{self._manual_dir_instructions}'
       )
     return self._manual_dir
+
+
+def _get_cached_path(
+    manually_downloaded_path: Optional[ReadWritePath],
+    checksum_path: Optional[ReadWritePath],
+    url_path: ReadWritePath,
+    expected_url_info: Optional[checksums.UrlInfo],
+) -> downloader.DownloadResult:
+  """Returns the downloaded path and computed url-info.
+
+  If the path is not cached, or that `url_path` does not match checksums,
+  the file will be downloaded again.
+
+  Path can be cached at three different locations:
+
+  Args:
+    manually_downloaded_path: Manually downloaded in `dl_manager.manual_dir`
+    checksum_path: Cached in the final destination (if checksum known)
+    url_path: Cached in the tmp destination (if checksum unknown).
+    expected_url_info: Registered checksum (if known)
+  """
+  # User has manually downloaded the file.
+  if manually_downloaded_path and manually_downloaded_path.exists():
+    return downloader.DownloadResult(manually_downloaded_path, url_info=None)  # pytype: disable=wrong-arg-types
+
+  # Download has been cached (checksum known)
+  elif checksum_path and resource_lib.Resource.exists_locally(checksum_path):
+    # `path = f(checksum)` was found, so url_info match
+    return downloader.DownloadResult(checksum_path, url_info=expected_url_info)
+
+  # Download has been cached (checksum unknown)
+  elif resource_lib.Resource.exists_locally(url_path):
+    # Info restored from `.INFO` file
+    computed_url_info = _read_url_info(url_path)
+    # If checksums are now registered but do not match, trigger a new
+    # download (e.g. previous file corrupted, checksums updated)
+    if expected_url_info and computed_url_info != expected_url_info:
+      return downloader.DownloadResult(path=None, url_info=None)  # pytype: disable=wrong-arg-types
+    else:
+      return downloader.DownloadResult(url_path, url_info=computed_url_info)
+
+  # Else file not found (or has bad checksums). (re)download.
+  else:
+    return downloader.DownloadResult(path=None, url_info=None)  # pytype: disable=wrong-arg-types
+
+
+def _get_manually_downloaded_path(
+    manual_dir: Optional[ReadOnlyPath],
+    expected_url_info: Optional[checksums.UrlInfo],
+) -> Optional[ReadOnlyPath]:
+  """Checks if file is already downloaded in manual_dir."""
+  if not manual_dir:  # Manual dir not passed
+    return None
+
+  if not expected_url_info or not expected_url_info.filename:
+    return None  # Filename unknown.
+
+  manual_path = manual_dir / expected_url_info.filename
+  if not manual_path.exists():  # File not manually downloaded
+    return None
+
+  return manual_path
+
+
+def _validate_checksums(
+    url: str,
+    path: ReadOnlyPath,
+    computed_url_info: Optional[checksums.UrlInfo],
+    expected_url_info: Optional[checksums.UrlInfo],
+    force_checksums_validation: bool,
+) -> None:
+  """Validate computed_url_info match expected_url_info."""
+  # If force-checksums validations, both expected and computed url_info
+  # should exists
+  if force_checksums_validation:
+    # Checksum of the downloaded file unknown (for manually downloaded file)
+    if not computed_url_info:
+      computed_url_info = utils.read_checksum_digest(path)
+    # Checksums have not been registered
+    if not expected_url_info:
+      raise ValueError(
+          f'Missing checksums url: {url}, yet '
+          '`force_checksums_validation=True`. '
+          'Did you forgot to register checksums ?'
+      )
+
+  if (
+      expected_url_info
+      and computed_url_info
+      and expected_url_info != computed_url_info
+  ):
+    raise NonMatchingChecksumError(url, path)
 
 
 def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
