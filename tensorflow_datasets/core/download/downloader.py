@@ -25,6 +25,7 @@ import re
 from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
 import urllib
 
+import dataclasses
 import promise
 import requests
 
@@ -38,6 +39,12 @@ _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
 # Response interface. Has `.url` and `.headers` attribute
 Response = Union[requests.Response, urllib.response.addinfourl]
+
+
+@dataclasses.dataclass(eq=False, frozen=True)
+class DownloadResult:
+  path: utils.ReadWritePath
+  url_info: checksums_lib.UrlInfo
 
 
 @utils.memoize()
@@ -131,7 +138,9 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url: str, destination_path: str, verify: bool = True):
+  def download(
+      self, url: str, destination_path: str, verify: bool = True
+  ) -> 'promise.Promise[concurrent.futures.Future[DownloadResult]]':
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
@@ -151,22 +160,26 @@ class _Downloader(object):
     return promise.Promise.resolve(future)
 
   def _sync_file_copy(
-      self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
+      self, filepath: str, destination_path: str,
+  ) -> DownloadResult:
     filename = os.path.basename(filepath)
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
     hexdigest, size = utils.read_checksum_digest(
         out_path, checksum_cls=self._checksumer_cls
     )
-    return checksums_lib.UrlInfo(
-        checksum=hexdigest,
-        size=size,
-        filename=filename,
+    return DownloadResult(
+        path=utils.as_path(out_path),
+        url_info=checksums_lib.UrlInfo(
+            checksum=hexdigest,
+            size=size,
+            filename=filename,
+        ),
     )
 
   def _sync_download(
       self, url: str, destination_path: str, verify: bool = True
-  ) -> checksums_lib.UrlInfo:
+  ) -> DownloadResult:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
@@ -216,10 +229,13 @@ class _Downloader(object):
             self._pbar_dl_size.update(size_mb // unit_mb)
             size_mb %= unit_mb
     self._pbar_url.update(1)
-    return checksums_lib.UrlInfo(
-        checksum=checksum.hexdigest(),
-        size=size,
-        filename=fname,
+    return DownloadResult(
+        path=utils.as_path(path),
+        url_info=checksums_lib.UrlInfo(
+            checksum=checksum.hexdigest(),
+            size=size,
+            filename=fname,
+        ),
     )
 
 

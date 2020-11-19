@@ -115,8 +115,13 @@ class DownloadManagerTest(testing.TestCase):
       # url.
       filename = self.dl_fnames.get(url, os.path.basename(url))
       # Save the file in the tmp_dir
-      self.fs.add_file(os.path.join(tmpdir_path, filename))
-      return promise.Promise.resolve(self.dl_results[url])
+      path = os.path.join(tmpdir_path, filename)
+      self.fs.add_file(path)
+      dl_result = downloader.DownloadResult(
+          path=path,
+          url_info=self.dl_results[url],
+      )
+      return promise.Promise.resolve(dl_result)
 
     return absltest.mock.patch.object(
         downloader._Downloader, 'download', side_effect=_download)

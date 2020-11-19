@@ -81,7 +81,9 @@ class DownloaderTest(testing.TestCase):
 
   def test_ok(self):
     promise = self.downloader.download(self.url, self.tmp_dir)
-    url_info = promise.get()
+    future = promise.get()
+    url_info = future.url_info
+    self.assertEqual(self.path, os.fspath(future.path))
     self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
@@ -90,7 +92,9 @@ class DownloaderTest(testing.TestCase):
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
-    url_info = promise.get()
+    future = promise.get()
+    url_info = future.url_info
+    self.assertEqual(self.path, os.fspath(future.path))
     self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
@@ -121,7 +125,9 @@ class DownloaderTest(testing.TestCase):
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
-    url_info = promise.get()
+    future = promise.get()
+    url_info = future.url_info
+    self.assertEqual(self.path, os.fspath(future.path))
     self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
