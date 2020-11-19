@@ -15,9 +15,6 @@
 
 """QA4MRE (CLEF 2011/2012/2013): a reading comprehension dataset."""
 
-from __future__ import division
-from __future__ import print_function
-
 import os
 import xml.etree.ElementTree as ET
 from absl import logging
@@ -141,8 +138,7 @@ def _get_question(topic_id, topic_name, test_id, document_id, document_str,
 class Qa4mreConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Qa4mre."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, year, track='main', language='EN', **kwargs):
+  def __init__(self, *, year, track='main', language='EN', **kwargs):
     """BuilderConfig for Qa4Mre.
 
     Args:
@@ -173,9 +169,8 @@ class Qa4mreConfig(tfds.core.BuilderConfig):
 
     name = self.year + '.' + self.track + '.' + self.lang
 
-    description = _DESCRIPTION
-    description += ('This configuration includes the {} track for {} language '
-                    'in {} year.').format(self.track, self.lang, self.year)
+    description = ('This configuration includes the {} track for {} language '
+                   'in {} year.').format(self.track, self.lang, self.year)
 
     super(Qa4mreConfig, self).__init__(
         name=name,

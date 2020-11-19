@@ -1,0 +1,35 @@
+{
+  "citation": "@InProceedings{pawsx2019emnlp,\n  title = {{PAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification}},\n  author = {Yang, Yinfei and Zhang, Yuan and Tar, Chris and Baldridge, Jason},\n  booktitle = {Proc. of EMNLP},\n  year = {2019}\n}",
+  "description": "This dataset contains 23,659 human translated PAWS evaluation pairs and\n296,406 machine translated training pairs in six typologically distinct languages:\n\nFrench,\nSpanish,\nGerman,\nChinese,\nJapanese,\nand Korean.\n\nFor further details, see the accompanying paper:\nPAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification\nat  https://arxiv.org/abs/1908.11828\n\nSimilar to PAWS Dataset, examples are split into Train/Dev/Test sections.\nAll files are in the tsv format with four columns:\n\nid\tA unique id for each pair\nsentence1\tThe first sentence\nsentence2\tThe second sentence\n(noisy_)label\t(Noisy) label for each pair\n\nEach label has two possible values: 0 indicates the pair has different meaning,\nwhile 1 indicates the pair is a paraphrase.",
+  "downloadSize": "30282057",
+  "location": {
+    "urls": [
+      "https://github.com/google-research-datasets/paws/tree/master/pawsx"
+    ]
+  },
+  "name": "paws_x_wiki",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "554140",
+      "shardLengths": [
+        "2000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "12738267",
+      "shardLengths": [
+        "49401"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "552409",
+      "shardLengths": [
+        "2000"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

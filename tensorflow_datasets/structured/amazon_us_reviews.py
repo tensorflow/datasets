@@ -15,10 +15,6 @@
 
 """Amazon Customer Reviews Dataset --- US REVIEWS DATASET."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import csv
 import tensorflow.compat.v2 as tf
@@ -90,8 +86,7 @@ _DL_URLS = {
 class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AmazonUSReviews."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a AmazonUSReviewsConfig.
 
     Args:

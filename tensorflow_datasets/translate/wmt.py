@@ -15,10 +15,6 @@
 
 """WMT: Translate dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import codecs
 import functools
 import gzip
@@ -575,13 +571,12 @@ _CZENG17_FILTER = SubDataset(
 class WmtConfig(tfds.core.BuilderConfig):
   """BuilderConfig for WMT."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                url=None,
                citation=None,
                description=None,
                language_pair=(None, None),
-               text_encoder_config=None,
                subsets=None,
                **kwargs):
     """BuilderConfig for WMT.
@@ -592,16 +587,11 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
-      text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
-        configuration for the `tfds.features.text.TextEncoder` used for the
-        `tfds.features.text.Translation` features.
       subsets: Dict[split, list[str]]. List of the subset to use for each of the
         split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
-    if text_encoder_config:
-      name += "." + text_encoder_config.name
     if "name" in kwargs:  # Add name suffix for custom configs
       name += "." + kwargs.pop("name")
 
@@ -611,7 +601,6 @@ class WmtConfig(tfds.core.BuilderConfig):
     self.url = url or "http://www.statmt.org"
     self.citation = citation
     self.language_pair = language_pair
-    self.text_encoder_config = text_encoder_config
     self.subsets = subsets
 
 
@@ -663,15 +652,11 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair,
-            encoder_config=self.builder_config.text_encoder_config),
+        ),
         supervised_keys=(src, target),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation,
     )
-
-  def _vocab_text_gen(self, split_subsets, extraction_map, language):
-    for _, ex in self._generate_examples(split_subsets, extraction_map):
-      yield ex[language]
 
   def _split_generators(self, dl_manager):
     source, _ = self.builder_config.language_pair
@@ -710,18 +695,14 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     # Extract manually downloaded files.
     manual_files = dl_manager.extract(manual_paths)
 
-    extraction_map = dict(downloaded_files, **manual_files)
+    manual_files = tf.nest.map_structure(os.fspath, manual_files)
+    downloaded_files = tf.nest.map_structure(os.fspath, downloaded_files)
 
-    # Generate vocabulary from training data if SubwordTextEncoder configured.
-    for language in self.builder_config.language_pair:
-      self.info.features[language].maybe_build_from_corpus(
-          self._vocab_text_gen(
-              self.subsets[tfds.Split.TRAIN], extraction_map, language))
+    extraction_map = dict(downloaded_files, **manual_files)
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            num_shards=10 if split == tfds.Split.TRAIN else 1,
             gen_kwargs={"split_subsets": split_subsets,
                         "extraction_map": extraction_map})
         for split, split_subsets in self.subsets.items()
@@ -885,7 +866,7 @@ def _parse_tmx(path):
       utf_f = codecs.getreader("utf-8")(f)
     else:
       utf_f = f
-    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
         yield line_id, {
             _get_tuv_lang(tuv):
@@ -937,10 +918,8 @@ def _parse_czeng(*paths, **kwargs):
   if filter_path:
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with tf.io.gfile.GFile(filter_path) as f:
-      bad_blocks = {
-          blk for blk in re.search(
-              r"qw{([\s\d]*)}", f.read()).groups()[0].split()
-      }
+      bad_blocks = set(
+          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
     logging.info(
         "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
         len(bad_blocks))

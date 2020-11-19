@@ -1,0 +1,34 @@
+<annotation>
+<folder>JPEGImages</folder>
+<filename>0.jpg</filename>
+<path>/home/pi/detection_dataset/JPEGImages/0.jpg</path><source>
+<database>Unknown</database>
+</source><size>
+<width>640</width>
+<height>480</height>
+</size>
+<object>
+  <name>WBC</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+    <xmin>56</xmin>
+    <ymin>126</ymin>
+    <xmax>185</xmax>
+    <ymax>243</ymax>
+  </bndbox>
+</object>
+<object>
+  <name>WBC</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>1</difficult>
+  <bndbox>
+    <xmin>348</xmin>
+    <ymin>28</ymin>
+    <xmax>504</xmax>
+    <ymax>386</ymax>
+  </bndbox>
+</object>
+</annotation>

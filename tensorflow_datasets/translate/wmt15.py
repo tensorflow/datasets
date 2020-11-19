@@ -49,21 +49,6 @@ class Wmt15Translate(wmt.WmtTranslate):
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
       ) for l1, l2 in _LANGUAGE_PAIRS
-  ] + [
-      wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description=(
-              "WMT 2015 %s-%s translation task dataset with subword encoding."
-              % (l1, l2)),
-          url=_URL,
-          citation=_CITATION,
-          language_pair=(l1, l2),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              name="subwords8k",
-              vocab_size=2**13),
-          version=tfds.core.Version("1.0.0"),
-          )
-      for l1, l2 in _LANGUAGE_PAIRS
   ]
 
   @property

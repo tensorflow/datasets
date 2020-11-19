@@ -15,11 +15,6 @@
 
 """dSprites dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import h5py
 import numpy as np
 from six import moves
 import tensorflow.compat.v2 as tf
@@ -68,37 +63,34 @@ while ensuring that all pixel outputs were different. No noise was added.
 class Dsprites(tfds.core.GeneratorBasedBuilder):
   """dSprites data set."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.1.0"),
+  ]
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
+    features_dict = {
+        "image": tfds.features.Image(shape=(64, 64, 1)),
+        "label_shape": tfds.features.ClassLabel(num_classes=3),
+        "label_scale": tfds.features.ClassLabel(num_classes=6),
+        "label_orientation": tfds.features.ClassLabel(num_classes=40),
+        "label_x_position": tfds.features.ClassLabel(num_classes=32),
+        "label_y_position": tfds.features.ClassLabel(num_classes=32),
+        "value_shape": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_scale": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_orientation": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_x_position": tfds.features.Tensor(shape=[], dtype=tf.float32),
+        "value_y_position": tfds.features.Tensor(shape=[], dtype=tf.float32),
+    }
+    if self.version > "2.0.0":
+      features_dict["id"] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=(64, 64, 1)),
-            "label_shape":
-                tfds.features.ClassLabel(num_classes=3),
-            "label_scale":
-                tfds.features.ClassLabel(num_classes=6),
-            "label_orientation":
-                tfds.features.ClassLabel(num_classes=40),
-            "label_x_position":
-                tfds.features.ClassLabel(num_classes=32),
-            "label_y_position":
-                tfds.features.ClassLabel(num_classes=32),
-            "value_shape":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_scale":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_orientation":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_x_position":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-            "value_y_position":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         homepage="https://github.com/deepmind/dsprites-dataset",
         citation=_CITATION,
     )
@@ -125,7 +117,11 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
     # Simultaneously iterating through the different data sets in the hdf5
     # file is >100x slower and the data set is small (26.7MB). Hence, we first
     # load everything into memory before yielding the samples.
-    image_array, class_array, values_array = _load_data(filepath)
+    with tfds.core.lazy_imports.h5py.File(filepath, "r") as h5dataset:
+      image_array = np.array(h5dataset["imgs"])
+      class_array = np.array(h5dataset["latents"]["classes"])
+      values_array = np.array(h5dataset["latents"]["values"])
+
     for i, (image, classes, values) in enumerate(moves.zip(
         image_array, class_array, values_array)):
       record = dict(
@@ -140,13 +136,6 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
           value_orientation=values[3],
           value_x_position=values[4],
           value_y_position=values[5])
+      if self.version > "2.0.0":
+        record["id"] = "{:06d}".format(i)
       yield i, record
-
-
-def _load_data(filepath):
-  """Loads the images, latent classes, and latent values into Numpy arrays."""
-  with h5py.File(filepath, "r") as h5dataset:
-    image_array = np.array(h5dataset["imgs"])
-    class_array = np.array(h5dataset["latents"]["classes"])
-    values_array = np.array(h5dataset["latents"]["values"])
-  return image_array, class_array, values_array

@@ -1,6 +1,7 @@
 book_path: /datasets/_book.yaml
 project_path: /datasets/_project.yaml
-description: <!--no description-->
+description: A collection of datasets ready to use with TensorFlow or other Python ML frameworks,
+ such as Jax, enabling easy-to-use and high-performance input pipelines.
 landing_page:
   custom_css_path: /site-assets/css/style.css
   rows:
@@ -20,25 +21,19 @@ landing_page:
         To get started see the
         <a href="./overview">guide</a>
         and our
-        <a href="./datasets">list of datasets</a>.
+        <a href="./catalog">list of datasets</a>.
     - code_block: |
         <pre class = "prettyprint">
         import tensorflow.compat.v2 as tf
         import tensorflow_datasets as tfds
 
-        # tfds works in both Eager and Graph modes
-        tf.compat.v1.enable_eager_execution()
-
-        # See available datasets
-        print(tfds.list_builders())
-
         # Construct a tf.data.Dataset
-        dataset = tfds.load(name="mnist", split="train")
+        ds = tfds.load('mnist', split='train', shuffle_files=True)
 
         # Build your input pipeline
-        dataset = dataset.shuffle(1024).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
-        for features in dataset.take(1):
-          image, label = features["image"], features["label"]
+        ds = ds.shuffle(1024).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
+        for example in ds.take(1):
+          image, label = example["image"], example["label"]
         </pre>
 
         {% dynamic if request.tld != 'cn' %}
@@ -58,3 +53,8 @@ landing_page:
       buttons:
       - label: View on GitHub
         path: https://github.com/tensorflow/datasets
+    - heading: "TensorFlow Datasets (TF Dev Summit '19)"
+      youtube_id: -nTe44WT0ZI
+      buttons:
+      - label: Watch the video
+        path: https://www.youtube.com/watch?v=-nTe44WT0ZI

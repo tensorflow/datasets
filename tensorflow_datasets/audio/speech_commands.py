@@ -15,10 +15,6 @@
 
 """SpeechCommands dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import numpy as np
 
@@ -77,7 +73,8 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            'audio': tfds.features.Audio(file_format='wav'),
+            'audio': tfds.features.Audio(
+                file_format='wav', sample_rate=SAMPLE_RATE),
             'label': tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
         }),
         supervised_keys=('audio', 'label'),

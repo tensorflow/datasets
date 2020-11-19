@@ -15,10 +15,6 @@
 
 """The rockyou dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -26,7 +22,14 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-This dataset contains 14,344,391 passwords that were leaked or stolen from from various sites. The author of this dataset states that "I'm hosting them because it seems like nobody else does (hopefully it isn't because hosting them is illegal :)). Naturally, I'm not the one who stole these; I simply found them online, removed any names/email addresses/etc.". This dataset is used to train Machine Learning models for password guessing and cracking.
+This dataset contains 14,344,391 passwords that were leaked or stolen from
+various sites. The author of this dataset states that "I'm hosting them because
+it seems like nobody else does (hopefully it isn't because hosting them is
+illegal :)). Naturally, I'm not the one who stole these; I simply found them
+online, removed any names/email addresses/etc.".
+
+This dataset is used to train Machine Learning models for password guessing
+and cracking.
 """
 
 _DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt"
@@ -35,16 +38,14 @@ _DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/downloa
 class RockYou(tfds.core.GeneratorBasedBuilder):
   """This dataset contains passwords that were leaked or stolen from from various sites."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "password":
-                tfds.features.Text(encoder=tfds.features.text.ByteTextEncoder()
-                                  ),
+            "password": tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage="https://wiki.skullsecurity.org/Passwords",

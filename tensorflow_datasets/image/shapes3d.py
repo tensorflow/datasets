@@ -15,11 +15,6 @@
 
 """Shapes3D dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import h5py
 import numpy as np
 from six import moves
 import tensorflow.compat.v2 as tf
@@ -60,8 +55,10 @@ We varied one latent at a time (starting from orientation, then shape, etc), and
 class Shapes3d(tfds.core.GeneratorBasedBuilder):
   """Shapes3d data set."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -121,7 +118,11 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     # Simultaneously iterating through the different data sets in the hdf5
     # file will be slow with a single file. Instead, we first load everything
     # into memory before yielding the samples.
-    image_array, values_array = _load_data(filepath)
+    with tfds.core.lazy_imports.h5py.File(filepath, "r") as h5dataset:
+      image_array = np.array(h5dataset["images"])
+      # The 'label' data set in the hdf5 file actually contains the float values
+      # and not the class labels.
+      values_array = np.array(h5dataset["labels"])
 
     # We need to calculate the class labels from the float values in the file.
     labels_array = np.zeros_like(values_array, dtype=np.int64)
@@ -146,16 +147,6 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
           "value_orientation": values[5],
       }
       yield i, record
-
-
-def _load_data(filepath):
-  """Loads the images and latent values into Numpy arrays."""
-  with h5py.File(filepath, "r") as h5dataset:
-    image_array = np.array(h5dataset["images"])
-    # The 'label' data set in the hdf5 file actually contains the float values
-    # and not the class labels.
-    values_array = np.array(h5dataset["labels"])
-  return image_array, values_array
 
 
 def _discretize(a):

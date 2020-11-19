@@ -17,25 +17,43 @@ upper_tabs:
       - include: /datasets/catalog/_toc.yaml
     - name: Guide
       contents:
-      - title: Overview
+      - heading: "Get started"
+      - title: Introduction
         path: /datasets/overview
+      - title: End-to-end Keras example
+        path: /datasets/keras_example
+
+      - heading: "Features & performances"
+      - title: TFDS CLI
+        path: /datasets/cli
+      - title: Splits and slicing API
+        path: /datasets/splits
       - title: Performance tips
         path: /datasets/performances
-      - title: Versioning
-        path: /datasets/datasets_versioning
-      - title: Splits
-        path: /datasets/splits
-      - title: Add a dataset
-        path: /datasets/add_dataset
+      - title: Feature connectors
+        path: /datasets/features
       - title: Feature decoding
         path: /datasets/decode
-      - title: Add huge datasets (Apache Beam)
-        path: /datasets/beam_datasets
+      - title: Versioning
+        path: /datasets/datasets_versioning
       - title: Store your dataset on GCS
         path: /datasets/gcs
+      - title: Community
+        path: /datasets/community
+
+      - heading: "Create your dataset"
+      - title: Create your dataset
+        path: /datasets/add_dataset
+      - title: Huge datasets (Apache Beam)
+        path: /datasets/beam_datasets
+      - title: Contribute to TFDS
+        path: /datasets/contribute
+
     - name: API
       skip_translation: true
       contents:
-      - include: /datasets/api_docs/python/_toc.yaml
+      - title: All Symbols
+        path: /datasets/api_docs/python/tfds/all_symbols
+      - include: /datasets/api_docs/python/tfds/_toc.yaml
 
 - include: /_upper_tabs_right.yaml

@@ -13,93 +13,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Feature connector.
-
-FeatureConnector is a way of abstracting what data is returned by the
-tensorflow/datasets builders from how they are encoded/decoded from file.
-
-# Use FeatureConnector in `GeneratorBasedBuilder`
-
-1) In the _build_info() function, define the features as you would like them
-to be returned by the tf.data.Dataset() object.
-
-Ex:
-
-  ```
-  features=features.FeaturesDict({
-      'input': features.Image(),
-      'target': features.Text(encoder=SubWordEncoder()),
-      'extra_data': {
-          'label_id': tf.int64,
-          'language': tf.string,
-      }
-  })
-  ```
-
-The tf.data.Dataset will return each examples as a dict:
-
-  ```
-  {
-      'input': tf.Tensor(shape=(batch, height, width, channel), tf.uint8),
-      'target': tf.Tensor(shape=(batch, sequence_length), tf.int64),
-      'extra_data': {
-          'label_id': tf.Tensor(shape=(batch,), tf.int64),
-          'language': tf.Tensor(shape=(batch,), tf.string),
-      }
-  }
-  ```
-
-2) In the generator function, yield the examples to match what you have defined
-in the spec. The values will automatically be encoded.
-
-  ```
-  yield {
-      'input': np_image,
-      'target': 'This is some text',
-      'extra_data': {
-          'label_id': 43,
-          'language': 'en',
-      }
-  }
-  ```
-
-# Create your own FeatureConnector
-
-To create your own feature connector, you need to inherit from FeatureConnector
-and implement the abstract methods.
-
-1. If your connector only contains one value, then the get_serialized_info,
-   get_tensor_info, encode_example, and decode_example can directly process
-   single value, without wrapping it in a dict.
-
-2. If your connector is a container of multiple sub-connectors, the easiest
-   way is to inherit from features.FeaturesDict and use the super() methods to
-   automatically encode/decode the sub-connectors.
-
-This file contains the following FeatureConnector:
- * FeatureConnector: The abstract base class defining the interface
- * FeaturesDict: Container of FeatureConnector
- * Tensor: Simple tensor value with static or dynamic shape
-
-"""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Feature connector."""
 
 import abc
 import collections
+import json
+import os
+from typing import Dict, Type, TypeVar
 
 import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
+
+T = TypeVar('T', bound='FeatureConnector')
 
 
 class TensorInfo(object):
   """Structure containing info on the `tf.Tensor` shape/dtype."""
+
+  __slots__ = ['shape', 'dtype', 'default_value', 'sequence_rank']
 
   def __init__(self, shape, dtype, default_value=None, sequence_rank=None):
     """Constructor.
@@ -161,6 +98,13 @@ class FeatureConnector(object):
 
   """
 
+  # Keep track of all sub-classes.
+  _registered_features: Dict[str, 'FeatureConnector'] = {}
+
+  def __init_subclass__(cls):
+    """Registers subclasses features."""
+    cls._registered_features[f'{cls.__module__}.{cls.__name__}'] = cls
+
   @abc.abstractmethod
   def get_tensor_info(self):
     """Return the tf.Tensor dtype/shape of the feature.
@@ -195,12 +139,162 @@ class FeatureConnector(object):
   @property
   def shape(self):
     """Return the shape (or dict of shape) of this FeatureConnector."""
-    return utils.map_nested(lambda t: t.shape, self.get_tensor_info())
+    return tf.nest.map_structure(lambda t: t.shape, self.get_tensor_info())
 
   @property
   def dtype(self):
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
-    return utils.map_nested(lambda t: t.dtype, self.get_tensor_info())
+    return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
+
+  @classmethod
+  def from_json(cls, value: Json) -> 'FeatureConnector':
+    """FeatureConnector factory.
+
+    This function should be called from the `tfds.features.FeatureConnector`
+    base class. Subclass should implement the `from_json_content`.
+
+    Example:
+
+    ```py
+    feature = tfds.features.FeatureConnector.from_json(
+        {'type': 'Image', 'content': {'shape': [32, 32, 3], 'dtype': 'uint8'}}
+    )
+    assert isinstance(feature, tfds.features.Image)
+    ```
+
+    Args:
+      value: `dict(type=, content=)` containing the feature to restore.
+        Match dict returned by `to_json`.
+
+    Returns:
+      The reconstructed FeatureConnector.
+    """
+    subclass = cls._registered_features.get(value['type'])
+    if subclass is None:
+      raise ValueError(
+          f'Unrecognized FeatureConnector type: {value["type"]}\n'
+          f'Supported: {list(cls._registered_features)}'
+      )
+    return subclass.from_json_content(value['content'])
+
+  def to_json(self) -> Json:
+    # pylint: disable=line-too-long
+    """Exports the FeatureConnector to Json.
+
+    Each feature is serialized as a `dict(type=..., content=...)`.
+
+    * `type`: The cannonical name of the feature (`module.FeatureName`).
+    * `content`: is specific to each feature connector and defined in
+      `to_json_content`. Can contain nested sub-features (like for
+      `tfds.features.FeaturesDict` and `tfds.features.Sequence`).
+
+    For example:
+
+    ```python
+    tfds.features.FeaturesDict({
+        'input': tfds.features.Image(),
+        'target': tfds.features.ClassLabel(num_classes=10),
+    })
+    ```
+
+    Is serialized as:
+
+    ```json
+    {
+        "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+        "content": {
+            "input": {
+                "type": "tensorflow_datasets.core.features.image_feature.Image",
+                "content": {
+                    "shape": [null, null, 3],
+                    "dtype": "uint8",
+                    "encoding_format": "png"
+                }
+            },
+            "target": {
+                "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "num_classes": 10
+            }
+        }
+    }
+    ```
+
+    Returns:
+      A `dict(type=, content=)`. Will be forwarded to
+        `from_json` when reconstructing the feature.
+    """
+    # pylint: enable=line-too-long
+    return {
+        'type': f'{type(self).__module__}.{type(self).__name__}',
+        'content': self.to_json_content(),
+    }
+
+  @classmethod
+  def from_json_content(cls: Type[T], value: Json) -> T:
+    """FeatureConnector factory (to overwrite).
+
+    Subclasses should overwritte this method. importing
+    the feature connector from the config.
+
+    This function should not be called directly. `FeatureConnector.from_json`
+    should be called instead.
+
+    This function  See existing FeatureConnector for
+    example of implementation.
+
+    Args:
+      value: FeatureConnector information. Match the `dict` returned by
+        `to_json_content`.
+
+    Returns:
+      The reconstructed FeatureConnector.
+    """
+    # Should this be an abstract method once user features have been updated ?
+    return cls(**value)  # pytype: disable=not-instantiable
+
+  def to_json_content(self) -> Json:
+    """FeatureConnector factory (to overwrite).
+
+    This function should be overwritten by the subclass to allow re-importing
+    the feature connector from the config. See existing FeatureConnector for
+    example of implementation.
+
+    Returns:
+      Dict containing the FeatureConnector metadata. Will be forwarded to
+        `from_json_content` when reconstructing the feature.
+    """
+    return dict()
+
+  def save_config(self, root_dir: str) -> None:
+    """Exports the `FeatureConnector` to a file.
+
+    Args:
+      root_dir: `path/to/dir` containing the `features.json`
+    """
+    with tf.io.gfile.GFile(make_config_path(root_dir), 'w') as f:
+      f.write(json.dumps(self.to_json(), indent=4))
+    self.save_metadata(root_dir, feature_name=None)
+
+  @classmethod
+  def from_config(cls, root_dir: str) -> 'FeatureConnector':
+    """Reconstructs the FeatureConnector from the config file.
+
+    Usage:
+
+    ```
+    features = FeatureConnector.from_config('path/to/features.json')
+    ```
+
+    Args:
+      root_dir: Directory containing to the features.json file.
+
+    Returns:
+      The reconstructed feature instance.
+    """
+    with tf.io.gfile.GFile(make_config_path(root_dir)) as f:
+      feature = FeatureConnector.from_json(json.loads(f.read()))
+    feature.load_metadata(root_dir, feature_name=None)
+    return feature
 
   def get_serialized_info(self):
     """Return the shape/dtype of features after encoding (for the adapter).
@@ -325,7 +419,7 @@ class FeatureConnector(object):
     return tf.map_fn(
         self.decode_example,
         tfexample_data,
-        dtype=self.dtype,
+        fn_output_signature=self.dtype,
         parallel_iterations=10,
         back_prop=False,
         name='sequence_decode',
@@ -349,6 +443,18 @@ class FeatureConnector(object):
         output of the tf.data.Dataset object
     """
     return tf.ragged.map_flat_values(self.decode_batch_example, tfexample_data)
+
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object."""
+    return _repr_html(ex)
+
+  def repr_html_batch(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object (Sequence)."""
+    return _repr_html(ex)
+
+  def repr_html_ragged(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of the object (Nested sequence)."""
+    return _repr_html(ex)
 
   def _flatten(self, x):
     """Flatten the input dict into a list of values.
@@ -513,8 +619,7 @@ class FeatureConnector(object):
 class Tensor(FeatureConnector):
   """`FeatureConnector` for generic data of arbitrary shape and type."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, shape, dtype):
+  def __init__(self, *, shape, dtype):
     """Construct a Tensor feature."""
     self._shape = tuple(shape)
     self._dtype = dtype
@@ -545,6 +650,23 @@ class Tensor(FeatureConnector):
     utils.assert_shape_match(example_data.shape, self._shape)
     return example_data
 
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Tensor':
+    shape = tuple(value['shape'])
+    dtype = tf.dtypes.as_dtype(value['dtype'])
+    return cls(shape=shape, dtype=dtype)
+
+  def to_json_content(self) -> Json:
+    return {
+        'shape': list(self._shape),
+        'dtype': self._dtype.name,
+    }
+
+
+def make_config_path(root_dir: str) -> str:
+  """Returns the path to the features config."""
+  return os.path.join(root_dir, 'features.json')
+
 
 def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.
@@ -566,3 +688,12 @@ def get_inner_feature_repr(feature):
     return repr(feature.dtype)
   else:
     return repr(feature)
+
+
+def _repr_html(ex) -> str:
+  """Default HTML repr."""
+  if isinstance(ex, np.ndarray) and ex.size > 1:
+    # Do not print individual values for array as it is slow
+    # TODO(tfds): We could display a snippet, like the first/last tree items
+    return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
+  return repr(ex)

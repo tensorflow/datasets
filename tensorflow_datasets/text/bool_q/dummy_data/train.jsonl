@@ -1,0 +1,2 @@
+{"question": "Is this a python file", "title": "Train Example", "answer": false, "passage": "The files that contain the data are in .jsonl format"}
+{"question": "Is there a Google office in Tokyo", "title": "Google Japan", "answer": true, "passage": "The first office of Google in APAC was opened in Japan"}

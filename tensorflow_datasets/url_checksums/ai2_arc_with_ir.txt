@@ -1,0 +1,1 @@
+http://aristo-data.s3.amazonaws.com/custom-datasets/ARC-IR10V8.zip	3855104	c74f0628f3bf7a71e95e195754c805a387c6b0cfe67c366a43b5bf9f67bdcc15	ARC-IR10V8.zip

@@ -18,17 +18,13 @@
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import textwrap
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class AnInputConnector(features_lib.FeatureConnector):
@@ -255,7 +251,8 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
             ),
             # Invalid dtype
             testing.FeatureExpectationItem(
-                value=np.random.randint(256, size=(2, 3)),
+                # On Windows, np default dtype is `int32`
+                value=np.random.randint(256, size=(2, 3), dtype=np.int64),
                 raise_cls=ValueError,
                 raise_msg='int64 do not match',
             ),

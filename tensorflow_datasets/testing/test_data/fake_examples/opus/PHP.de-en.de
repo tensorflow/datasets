@@ -1,0 +1,15 @@
+PHP Handbuch
+Zurück
+Anhang K.
+Über das Handbuch
+Nach vorne
+Experimentell wird auch XSLT (Extensible Stylesheet Language Transformations) für Bearbeitung und Formatierung verwendet.
+Die Verwendung von XML als Quellformat bietet uns die Möglichkeit, aus den Quelldateien sehr viele verschiedene Formaten zu generieren, während man nur ein QUelldokument für alle Formate pflegen muß.
+Die Programme für die Formatierung der HTML - und TeX -Versionen sind Jade, von James Clark und The Modular DocBook Stylesheets von Norman Walsh.
+Microsoft HTML Help Workshop wird dazu verwendet, das Handbuch im Windows HTML Help Format zu erzeugen und natürlich auch PHP selbst, um eine zusätzliche Konvertierung und Formatierung zu erledigen.
+Sie können das Handbuch in verschiedenen Sprachen und Formaten wie Text, HTML, PDF, PalmPilot DOC, PalmPilot iSilo und Windows HTML Help, unter http: / /www.php.net / docs.php downloaden.
+Die Handbücher werden automatisch auf dem neuesten Stand gehalten, sobald der Inhalt verändert wurde.
+Weitere Informationen zum Download des XML -Quellcodes dieser Dokumentation unter http: / /cvs.php.net /.
+Die Dokumentation befindet sich im Modul phpdoc.
+Zurück
+Zum Anfang

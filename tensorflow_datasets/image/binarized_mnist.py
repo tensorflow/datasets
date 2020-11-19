@@ -15,14 +15,10 @@
 
 """BinarizedMNIST."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import numpy as np
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.image import mnist
+from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -52,6 +48,9 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
   """A specific binarization of the MNIST dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  RELEASE_NOTES = {
+      "1.0.0": "Initial Release",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

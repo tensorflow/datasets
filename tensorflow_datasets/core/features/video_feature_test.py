@@ -15,18 +15,16 @@
 
 """Tests for tensorflow_datasets.core.features.video_feature."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
-import os.path
+import os
+import pathlib
+
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 
-tf.compat.v1.enable_eager_execution()
+tf.enable_v2_behavior()
 
 
 class VideoFeatureTest(testing.FeatureExpectationsTestCase):
@@ -48,18 +46,27 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_video,
             ),
         ],
+        test_attributes=dict(
+            _encoding_format='png',
+            _extra_ffmpeg_args=[]
+        )
     )
 
   def test_video_concatenated_frames(self):
     video_shape = (None, 400, 640, 3)
     lsun_examples_path = os.path.join(self._test_data_path, 'lsun_examples')
-    frames_paths = [os.path.join(lsun_examples_path, '{}.jpg'.format(i))
-                    for i in (1, 2, 3, 4)]
+    frames_paths = [
+        os.path.join(lsun_examples_path, '{}.jpg'.format(i))
+        for i in (1, 2, 3, 4)
+    ]
     frames = []
     for frame_path in frames_paths:
       with tf.io.gfile.GFile(frame_path, 'rb') as frame_fp:
         frames.append(tf.image.decode_jpeg(frame_fp.read(), channels=3))
     video = tf.stack(frames)
+
+    # Check both str and Path objects
+    frames_paths[-1] = pathlib.Path(frames_paths[-1])
 
     self.assertFeature(
         feature=features.Video(shape=video_shape),
@@ -89,16 +96,8 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
                 value=video_path,
                 expected=video_array,
             ),
-        ],
-    )
-
-    self.assertFeature(
-        feature=features.Video(shape=(5, 4, 2, 3)),
-        shape=(5, 4, 2, 3),
-        dtype=tf.uint8,
-        tests=[
             testing.FeatureExpectationItem(
-                value=video_path,
+                value=pathlib.Path(video_path),
                 expected=video_array,
             ),
         ],

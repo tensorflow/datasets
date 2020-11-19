@@ -15,10 +15,6 @@
 
 """Kitti dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import csv
 import os
@@ -72,10 +68,13 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.2.0", "Devkit updated.")
+  VERSION = tfds.core.Version("3.2.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.1.0"),
   ]
+  RELEASE_NOTES = {
+      "3.2.0": "Devkit updated."
+  }
 
   def _info(self):
     # Annotation descriptions are in the object development kit.
@@ -158,7 +157,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       prefix, ext = os.path.splitext(fpath)
       if ext != ".txt":
         continue
-      if prefix.split("/")[0] != subdir:
+      if prefix.split(os.path.sep)[0] != subdir:
         continue
 
       # Key is the datapoint id. E.g. training/label_2/label_000016 -> 16.
@@ -168,7 +167,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       prefix, ext = os.path.splitext(fpath)
       if ext != ".png":
         continue
-      if prefix.split("/")[0] != subdir:
+      if prefix.split(os.path.sep)[0] != subdir:
         continue
       image_id = int(prefix[-6:])
       if image_id not in image_ids:
@@ -256,13 +255,13 @@ def _build_splits(devkit):
   mapping_line_ids = None
   mapping_lines = None
   for fpath, fobj in devkit:
-    if fpath == "mapping/train_rand.txt":
+    if fpath == os.path.join("mapping", "train_rand.txt"):
       # Converts 1-based line index to 0-based line index.
       mapping_line_ids = [
           int(x.strip()) - 1 for x in fobj.read().decode("utf-8").split(",")
       ]
-    if fpath == "mapping/train_mapping.txt":
-      mapping_lines = fobj.readlines()
+    elif fpath == os.path.join("mapping", "train_mapping.txt"):
+      mapping_lines = fobj.read().splitlines()
       mapping_lines = [x.decode("utf-8") for x in mapping_lines]
 
   assert mapping_line_ids

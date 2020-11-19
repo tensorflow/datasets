@@ -15,10 +15,6 @@
 
 """The Multi-Genre NLI Corpus."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
@@ -54,35 +50,10 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 """
 
 
-class MultiNLIConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for MultiNLI."""
-
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
-    """BuilderConfig for MultiNLI.
-
-    Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(MultiNLIConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
-
-
 class MultiNLI(tfds.core.GeneratorBasedBuilder):
   """MultiNLI: The Stanford Question Answering Dataset. Version 1.1."""
 
-  BUILDER_CONFIGS = [
-      MultiNLIConfig(
-          name="plain_text",
-          description="Plain text",
-      ),
-  ]
+  VERSION = tfds.core.Version("1.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -90,11 +61,9 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "premise":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.Text(),
             "hypothesis":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.Text(),
             "label":
                 tfds.features.ClassLabel(
                     names=["entailment", "neutral", "contradiction"]),
@@ -106,30 +75,16 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, filepath):
-    for _, ex in self._generate_examples(filepath):
-      yield " ".join([ex["premise"], ex["hypothesis"]])
-
   def _split_generators(self, dl_manager):
 
     downloaded_dir = dl_manager.download_and_extract(
-        "http://storage.googleapis.com/tfds-data/downloads/multi_nli/"
-        "multinli_1.0.zip")
+        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip")
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
     matched_validation_path = os.path.join(mnli_path,
                                            "multinli_1.0_dev_matched.txt")
     mismatched_validation_path = os.path.join(
         mnli_path, "multinli_1.0_dev_mismatched.txt")
-    # Generate shared vocabulary
-    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    self.info.features["premise"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_path))
-    encoder = self.info.features["premise"].encoder
-    # Use maybe_set_encoder because the encoder may have been restored from
-    # package data.
-    self.info.features["premise"].maybe_set_encoder(encoder)
-    self.info.features["hypothesis"].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(

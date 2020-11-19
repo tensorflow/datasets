@@ -14,26 +14,30 @@
 # limitations under the License.
 
 """To write records into sharded tfrecord files."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import itertools
 import json
 import os
 
+from typing import Any, Iterable, List, Tuple
+
 from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils import type_utils
+
+# TODO(tfds): Should be `TreeDict[FeatureValue]`
+Example = Any
 
 MIN_SHARD_SIZE = 64<<20  # 64 MiB
 MAX_SHARD_SIZE = 1024<<20  # 2 GiB
@@ -56,26 +60,29 @@ _ShardSpec = collections.namedtuple("_ShardSpec", [
     "path",
     # Number of examples in shard
     "examples_number",
-    # Reading instructions. Eg:
-    # [dict(shard_index=1, skip=2, take=-1),
-    #  dict(shard_index=2, skip=0, take=3)]
-    "reading_instructions",
+    # Reading instructions (List[FileInstruction]).
+    "file_instructions",
 ])
 
 
 def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   """Log information about the examples and raise an AssertionError."""
-  msg = "Two records share the same hashed key!"
+  msg = "Two examples share the same hashed key!"
   logging.error(msg)
   parser = example_parser.ExampleParser(example_specs)
   ex1 = parser.parse_example(example1)
   ex2 = parser.parse_example(example2)
   logging.error("1st example: %s", ex1)
   logging.error("2nd example: %s", ex2)
-  raise AssertionError(msg)
+  raise AssertionError(msg + " See logs above to view the examples.")
 
 
-def _get_shard_specs(num_examples, total_size, bucket_lengths, path):
+def _get_shard_specs(
+    num_examples: int,
+    total_size: int,
+    bucket_lengths: List[int],
+    path: str,
+) -> List[_ShardSpec]:
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
   Args:
@@ -87,57 +94,49 @@ def _get_shard_specs(num_examples, total_size, bucket_lengths, path):
   num_shards = _get_number_shards(total_size, num_examples)
   shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
   shard_specs = []
-  bucket_indexes = list(range(len(bucket_lengths)))
+  bucket_indexes = [str(i) for i in range(len(bucket_lengths))]
   from_ = 0
   for shard_index, to in enumerate(shard_boundaries):
-    instructions = _sharded_files.get_read_instructions(
-        from_, to, bucket_indexes, bucket_lengths, shardref_name="bucket_index")
+    # Read the bucket indexes
+    file_instructions = shard_utils.get_file_instructions(
+        from_, to, bucket_indexes, bucket_lengths)
     shard_specs.append(_ShardSpec(
         shard_index=shard_index,
         path="%s-%05d-of-%05d" % (path, shard_index, num_shards),
         examples_number=to-from_,
-        reading_instructions=instructions,
-        ))
+        file_instructions=file_instructions,
+    ))
     from_ = to
   return shard_specs
 
 
-def _get_shard_boundaries(num_examples, number_of_shards):
+def _get_shard_boundaries(
+    num_examples: int,
+    number_of_shards: int,
+) -> List[int]:
   if num_examples == 0:
     raise AssertionError("No examples were yielded.")
   if num_examples < number_of_shards:
     raise AssertionError("num_examples ({}) < number_of_shards ({})".format(
         num_examples, number_of_shards))
-  return [round(num_examples * (float(i)/number_of_shards))
-          for i in range(1, number_of_shards+1)]
+  return [
+      int(round(num_examples * (float(i)/number_of_shards)))
+      for i in range(1, number_of_shards+1)
+  ]
 
 
-def _write_tfrecord(path, iterator):
-  """Write single (non sharded) TFrecord file from iterator."""
-  with tf.io.TFRecordWriter(path) as writer:
-    for serialized_example in iterator:
-      writer.write(serialized_example)
-    writer.flush()
+def _write_examples(
+    path: type_utils.PathLike,
+    iterator: Iterable[bytes],
+    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT):
+  """Write examples from iterator in the given `file_format`."""
+  file_adapters.ADAPTER_FOR_FORMAT[file_format].write_examples(path, iterator)
 
 
-def _write_tfrecord_from_shard_spec(shard_spec, get):
-  """Write tfrecord shard given shard_spec and buckets to read data from.
-
-  Args:
-    shard_spec: _ShardSpec, the spec for shard to write.
-    get: callable taking the shard index (of bucket) and returning iterator over
-      its elements.
-  """
-  iterators = []
-  for instruction in shard_spec.reading_instructions:
-    iterator = get(instruction["bucket_index"])
-    skip, take = instruction["skip"], instruction["take"]
-    stop = skip+take if take > 0 else None
-    iterators.append(itertools.islice(iterator, skip, stop))
-  _write_tfrecord(shard_spec.path, itertools.chain(*iterators))
-
-
-def _get_number_shards(total_size, num_examples):
+def _get_number_shards(
+    total_size: int,
+    num_examples: int,
+) -> int:
   """Returns number of shards for num_examples of total_size in bytes.
 
   Each shard should be at least 128MB.
@@ -178,16 +177,28 @@ class Writer(object):
 
   The number of shards is computed automatically.
 
-  This class is a replacement for file_format_adapter.TFRecordExampleAdapter,
-  which will eventually be deleted.
   """
 
-  def __init__(self, example_specs, path, hash_salt):
+  def __init__(self,
+               example_specs,
+               path,
+               hash_salt,
+               file_format=file_adapters.DEFAULT_FILE_FORMAT):
+    """Initializes Writer.
+
+    Args:
+      example_specs: spec to build ExampleSerializer.
+      path (str): path where records should be written in.
+      hash_salt (str or bytes): salt to hash keys.
+      file_format (FileFormat): format of the record files in which the
+        dataset should be written in.
+    """
     self._example_specs = example_specs
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._shuffler = shuffle.Shuffler(os.path.dirname(path), hash_salt)
     self._num_examples = 0
     self._path = path
+    self._file_format = file_format
 
   def write(self, key, example):
     """Writes given Example.
@@ -219,7 +230,7 @@ class Writer(object):
       for shard_spec in shard_specs:
         iterator = itertools.islice(
             examples_generator, 0, shard_spec.examples_number)
-        _write_tfrecord(shard_spec.path, iterator)
+        _write_examples(shard_spec.path, iterator, self._file_format)
     except shuffle.DuplicatedKeysError as err:
       _raise_error_for_duplicated_keys(err.item1, err.item2,
                                        self._example_specs)
@@ -231,7 +242,7 @@ class Writer(object):
 
 # Make a long out of int. Necessary for Beam on Py2.
 if six.PY2:
-  _long_for_py2 = long  # pylint: disable=invalid-name
+  _long_for_py2 = long  # pylint: disable=invalid-name,undefined-variable
 else:
   _long_for_py2 = lambda int_val: int_val
 
@@ -244,27 +255,34 @@ class BeamWriter(object):
   """
   _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
 
-  def __init__(self, example_specs, path, hash_salt):
+  def __init__(self,
+               example_specs,
+               path,
+               hash_salt,
+               file_format=file_adapters.DEFAULT_FILE_FORMAT):
     """Init BeamWriter.
 
     Args:
       example_specs:
       path: str, path where to write tfrecord file. Eg:
         "/foo/mnist-train.tfrecord".
-        The suffix (eg: `.00000-of-00004` will be added by the BeamWriter.
-        Note that file "{path}.shard_lengths.json" is also created. It contains
+        The suffix (eg: `.00000-of-00004` will be added by the BeamWriter. Note
+          that file "{path}.shard_lengths.json" is also created. It contains
           a list with the number of examples in each final shard. Eg:
-          "[10,11,10,11]".
+            "[10,11,10,11]".
       hash_salt: string, the salt to use for hashing of keys.
+      file_format: file_adapters.FileFormat, format of the record files in
+        which the dataset will be read/written from.
     """
     self._original_state = dict(example_specs=example_specs, path=path,
                                 hash_salt=hash_salt)
-    self._path = path
+    self._path = os.fspath(path)
     self._split_info_path = "%s.split_info.json" % path
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._example_specs = example_specs
     self._hasher = hashing.Hasher(hash_salt)
     self._split_info = None
+    self._file_format = file_format
 
   def __getstate__(self):
     return self._original_state
@@ -272,7 +290,10 @@ class BeamWriter(object):
   def __setstate__(self, state):
     self.__init__(**state)
 
-  def _serialize_shard(self, key_example):
+  def _serialize_shard(
+      self,
+      key_example: Tuple[hashing.HashKey, Example],
+  ) -> Tuple[int, Tuple[int, bytes]]:
     """Returns (shard#, (hkey, serialized_example))."""
     key, example = key_example
     serialized_example = self._serializer.serialize_example(example)
@@ -329,12 +350,12 @@ class BeamWriter(object):
                   int(shard.examples_number) for shard in shard_specs]
           }))
     for shard_spec in shard_specs:
-      for instruction in shard_spec.reading_instructions:
-        bucketid = instruction["bucket_index"]
-        from_ = instruction["skip"]
-        take = instruction["take"]
+      for instruction in shard_spec.file_instructions:
+        bucketid = int(instruction.filename)
+        from_ = instruction.skip
+        take = instruction.take
         to = from_ + take if take >= 0 else None
-        yield (_long_for_py2(bucketid), (shard_spec.path, from_, to))
+        yield (bucketid, (shard_spec.path, from_, to))
 
   def _emits_examples_per_shard(self, bucketid_data):
     """Split examples of a bucket given list of instructions applying to it."""
@@ -347,7 +368,7 @@ class BeamWriter(object):
     shard_path, examples_by_bucket = shardid_examples
     examples = list(itertools.chain(*[
         ex[1] for ex in sorted(examples_by_bucket)]))
-    _write_tfrecord(shard_path, examples)
+    _write_examples(shard_path, examples, self._file_format)
 
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection to tfrecords."""

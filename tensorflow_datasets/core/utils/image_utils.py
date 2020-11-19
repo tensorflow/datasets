@@ -18,9 +18,7 @@
 Note: these functions are not meant to be used inside of a TF graph.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+import numpy as np
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import py_utils
@@ -32,13 +30,13 @@ def _get_runner():
   return tf_utils.TFGraphRunner()
 
 
-def decode_image(image_bytes):
+def decode_image(image_bytes: bytes) -> np.ndarray:
   """Returns np.array corresponding to encoded image."""
   runner = _get_runner()
   return runner.run(tf.image.decode_image, image_bytes)
 
 
-def png_to_jpeg(image_bytes, quality=100):
+def png_to_jpeg(image_bytes: bytes, quality: int = 100) -> np.ndarray:
   """Converts PNG image (bytes or str) to JPEG (bytes)."""
   runner = _get_runner()
   decode_fn = lambda img: tf.image.decode_png(img, channels=3)
@@ -47,7 +45,7 @@ def png_to_jpeg(image_bytes, quality=100):
   return runner.run(fn, image)
 
 
-def jpeg_cmyk_to_rgb(image_bytes, quality=100):
+def jpeg_cmyk_to_rgb(image_bytes: bytes, quality: int = 100) -> np.ndarray:
   """Converts JPEG CMYK image (bytes) to RGB JPEG (bytes)."""
   runner = _get_runner()
   image = runner.run(tf.image.decode_jpeg, image_bytes)

@@ -1,0 +1,55 @@
+{
+  "citation": "\n",
+  "description": "\nClean-up text for 40+ Wikipedia languages editions of pages\ncorrespond to entities. The datasets have train/dev/test splits per language.\nThe dataset is cleaned up by page filtering to remove disambiguation pages,\nredirect pages, deleted pages, and non-entity pages. Each example contains the\nwikidata id of the entity, and the full Wikipedia article after page processing\nthat removes non-content sections and structured objects.\n",
+  "location": {
+    "urls": [
+      "https://research.google/pubs/pub49029/"
+    ]
+  },
+  "name": "wiki40b",
+  "redistributionInfo": {
+    "license": "\nThis work is licensed under the Creative Commons Attribution-ShareAlike\n3.0 Unported License. To view a copy of this license, visit\nhttp://creativecommons.org/licenses/by-sa/3.0/ or send a letter to\nCreative Commons, PO Box 1866, Mountain View, CA 94042, USA.\n"
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "88813883",
+      "numShards": "1",
+      "shardLengths": [
+        "26581"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "1611883645",
+      "numShards": "16",
+      "shardLengths": [
+        "29851",
+        "29851",
+        "29851",
+        "29851",
+        "29852",
+        "29851",
+        "29851",
+        "29851",
+        "29851",
+        "29851",
+        "29851",
+        "29852",
+        "29851",
+        "29851",
+        "29851",
+        "29851"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "87292091",
+      "numShards": "1",
+      "shardLengths": [
+        "26324"
+      ]
+    }
+  ],
+  "version": "1.1.0"
+}

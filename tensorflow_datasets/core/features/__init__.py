@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""`tfds.features.FeatureConnector` API defining feature types."""
+"""API defining dataset features (image, text, scalar,...).
 
-from tensorflow_datasets.core.features import text
+See [the guide](https://www.tensorflow.org/datasets/features).
+
+"""
 
 from tensorflow_datasets.core.features.audio_feature import Audio
 from tensorflow_datasets.core.features.bounding_boxes import BBox
@@ -33,7 +35,6 @@ from tensorflow_datasets.core.features.translation_feature import TranslationVar
 from tensorflow_datasets.core.features.video_feature import Video
 
 __all__ = [
-    "text",
     "Audio",
     "BBox",
     "BBoxFeature",

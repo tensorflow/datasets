@@ -15,10 +15,6 @@
 
 """Tests for tensorflow_datasets.core.tfrecords_writer."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl.testing import absltest
@@ -30,11 +26,12 @@ from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core.tfrecords_writer import _ShardSpec
+from tensorflow_datasets.core.utils import shard_utils
 
 
 class GetShardSpecsTest(testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
-  # by _sharded_files_test.py.
+  # by shard_utils.py.
 
   @absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                               absltest.mock.Mock(return_value=6))
@@ -44,18 +41,30 @@ class GetShardSpecsTest(testing.TestCase):
         path='/bar.tfrecord')
     self.assertEqual(specs, [
         # Shard#, path, from_bucket, examples_number, reading instructions.
-        _ShardSpec(0, '/bar.tfrecord-00000-of-00006', 1,
-                   [{'bucket_index': 0, 'skip': 0, 'take': 1}]),
-        _ShardSpec(1, '/bar.tfrecord-00001-of-00006', 2,
-                   [{'bucket_index': 0, 'skip': 1, 'take': 2}]),
-        _ShardSpec(2, '/bar.tfrecord-00002-of-00006', 1,
-                   [{'bucket_index': 0, 'skip': 3, 'take': 1}]),
-        _ShardSpec(3, '/bar.tfrecord-00003-of-00006', 1,
-                   [{'bucket_index': 0, 'skip': 4, 'take': 1}]),
-        _ShardSpec(4, '/bar.tfrecord-00004-of-00006', 2,
-                   [{'bucket_index': 0, 'skip': 5, 'take': 2}]),
-        _ShardSpec(5, '/bar.tfrecord-00005-of-00006', 1,
-                   [{'bucket_index': 0, 'skip': 7, 'take': -1}]),
+        _ShardSpec(0, '/bar.tfrecord-00000-of-00006', 1, [
+            shard_utils.FileInstruction(
+                filename='0', skip=0, take=1, num_examples=1),
+        ]),
+        _ShardSpec(1, '/bar.tfrecord-00001-of-00006', 2, [
+            shard_utils.FileInstruction(
+                filename='0', skip=1, take=2, num_examples=2),
+        ]),
+        _ShardSpec(2, '/bar.tfrecord-00002-of-00006', 1, [
+            shard_utils.FileInstruction(
+                filename='0', skip=3, take=1, num_examples=1),
+        ]),
+        _ShardSpec(3, '/bar.tfrecord-00003-of-00006', 1, [
+            shard_utils.FileInstruction(
+                filename='0', skip=4, take=1, num_examples=1),
+        ]),
+        _ShardSpec(4, '/bar.tfrecord-00004-of-00006', 2, [
+            shard_utils.FileInstruction(
+                filename='0', skip=5, take=2, num_examples=2),
+        ]),
+        _ShardSpec(5, '/bar.tfrecord-00005-of-00006', 1, [
+            shard_utils.FileInstruction(
+                filename='0', skip=7, take=-1, num_examples=1),
+        ]),
     ])
 
   @absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
@@ -67,12 +76,16 @@ class GetShardSpecsTest(testing.TestCase):
     self.assertEqual(specs, [
         # Shard#, path, examples_number, reading instructions.
         _ShardSpec(0, '/bar.tfrecord-00000-of-00002', 4, [
-            {'bucket_index': 0, 'skip': 0, 'take': -1},
-            {'bucket_index': 1, 'skip': 0, 'take': 2},
+            shard_utils.FileInstruction(
+                filename='0', skip=0, take=-1, num_examples=2),
+            shard_utils.FileInstruction(
+                filename='1', skip=0, take=2, num_examples=2),
         ]),
         _ShardSpec(1, '/bar.tfrecord-00001-of-00002', 4, [
-            {'bucket_index': 1, 'skip': 2, 'take': -1},
-            {'bucket_index': 3, 'skip': 0, 'take': -1},
+            shard_utils.FileInstruction(
+                filename='1', skip=2, take=-1, num_examples=1),
+            shard_utils.FileInstruction(
+                filename='3', skip=0, take=-1, num_examples=3),
         ]),
     ])
 
@@ -175,7 +188,7 @@ class WriterTest(testing.TestCase):
     with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                                     return_value=1):
       with self.assertRaisesWithPredicateMatch(
-          AssertionError, 'Two records share the same hashed key!'):
+          AssertionError, 'Two examples share the same hashed key'):
         self._write(to_write, path)
 
   def test_empty_split(self):

@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Celeba-HQ dataset."""
+
 import os
 
 import tensorflow.compat.v2 as tf
@@ -42,6 +43,11 @@ _DESCRIPTION = """\
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
+Note: CelebAHQ dataset may contain potential bias. The fairness indicators
+[example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
+goes into detail about several considerations to keep in mind while using the
+CelebAHQ dataset.
+
 WARNING: This dataset currently requires you to prepare images on your own.
 """
 
@@ -49,8 +55,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, resolution, **kwargs):
+  def __init__(self, *, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
     Args:
@@ -58,13 +63,15 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
-    v2 = tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v2 = tfds.core.Version("2.0.0")
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
         version=v2,
+        release_notes={
+            "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -79,8 +86,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
   Detailed instructions are here:
   https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
   """
-
-  VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [
       CelebaHQConfig(resolution=1024),

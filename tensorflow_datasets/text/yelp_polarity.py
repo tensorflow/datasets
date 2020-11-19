@@ -13,24 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Copyright 2019 The TensorFlow Datasets Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 """Yelp Polarity Reviews dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import tensorflow.compat.v2 as tf
@@ -44,7 +27,7 @@ We provide a set of 560,000 highly polar yelp reviews for training, and 38,000 f
 ORIGIN
 The Yelp reviews dataset consists of reviews from Yelp. It is extracted
 from the Yelp Dataset Challenge 2015 data. For more information, please
-refer to http://www.yelp.com/dataset_challenge
+refer to http://www.yelp.com/dataset
 
 The Yelp reviews polarity dataset is constructed by
 Xiang Zhang (xiang.zhang@nyu.edu) from the above dataset.
@@ -89,87 +72,29 @@ _CITATION = """\
 _DOWNLOAD_URL = "https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz"
 
 
-class YelpPolarityReviewsConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for YelpPolarityReviews."""
-
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
-    """BuilderConfig for YelpPolarityReviews.
-
-    Args:
-        text_encoder_config: `tfds.features.text.TextEncoderConfig`,
-          configuration for the `tfds.features.text.TextEncoder` used for the
-          Yelp `"text"` feature.
-        **kwargs: keyword arguments forwarded to super.
-    """
-    super(YelpPolarityReviewsConfig, self).__init__(**kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
-
-
 class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
   """Yelp Polarity reviews dataset."""
-  BUILDER_CONFIGS = [
-      YelpPolarityReviewsConfig(
-          name="plain_text",
-          version="0.1.0",
-          description="Plain text",
-      ),
-      YelpPolarityReviewsConfig(
-          name="bytes",
-          version="0.1.0",
-          description=("Uses byte-level text encoding with "
-                       "`tfds.features.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
-      ),
-      YelpPolarityReviewsConfig(
-          name="subwords8k",
-          version="0.1.0",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
-                       "vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**13),
-      ),
-      YelpPolarityReviewsConfig(
-          name="subwords32k",
-          version="0.1.0",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
-                       "32k vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**15),
-      ),
-  ]
+
+  VERSION = tfds.core.Version("0.2.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "text":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "label":
-                tfds.features.ClassLabel(names=["1", "2"]),
+            "text": tfds.features.Text(),
+            "label": tfds.features.ClassLabel(names=["1", "2"]),
         }),
         supervised_keys=("text", "label"),
         homepage="https://course.fast.ai/datasets",
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, train_file):
-    for _, ex in self._generate_examples(train_file):
-      yield ex["text"]
-
   def _split_generators(self, dl_manager):
     arch_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-    train_file = os.path.join(arch_path, "yelp_review_polarity_csv",
-                              "train.csv")
+    train_file = os.path.join(
+        arch_path, "yelp_review_polarity_csv", "train.csv")
     test_file = os.path.join(arch_path, "yelp_review_polarity_csv", "test.csv")
-    self.info.features["text"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_file))
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,

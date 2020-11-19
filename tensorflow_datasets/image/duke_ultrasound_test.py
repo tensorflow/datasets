@@ -15,10 +15,6 @@
 
 """DAS beamformed phantom images and paired clinical post-processed images test."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import duke_ultrasound
 

@@ -1,0 +1,2 @@
+https://everest.hds.utc.fr/lib/exe/fetch.php?media=en:wordnet-mlj12.tar.gz	3293663	75e5abfa21db74f188ec6f2436b89a870ecd7b6af0c5e29195dc94c1dacc47f3	wordnet-mlj12.tar.gz
+https://github.com/TimDettmers/ConvE/raw/master/WN18RR.tar.gz	892861	1eb9152f804c140d163462c0d49f65e5a0b30ab5fbb375c5e3353c11a6249060	WN18RR.tar.gz

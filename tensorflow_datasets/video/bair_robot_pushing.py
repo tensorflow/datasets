@@ -20,10 +20,6 @@ Frederik Ebert, Chelsea Finn, Alex X. Lee, and Sergey Levine.
 https://arxiv.org/abs/1710.05268
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl import logging
@@ -52,8 +48,10 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
@@ -109,7 +107,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {   # pylint: disable=
+          frame_feature = {   # pylint: disable=g-complex-comprehension
               out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
@@ -126,7 +124,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
 
           # Decode images (from encoded string)
           for key in ("image_main", "image_aux1"):
-            img = frame_feature[key].bytes_list.value[0]
+            img = frame_feature[key].bytes_list.value[0]  # pytype: disable=attribute-error
             img = np.frombuffer(img, dtype=np.uint8)
             img = np.reshape(img, IMG_SHAPE)
             frame_feature[key] = img

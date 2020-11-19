@@ -26,6 +26,14 @@ pushd $TMP_DIR
 echo "Cloning tensorflow/datasets and checking out commit $GIT_COMMIT_ID"
 git clone https://github.com/tensorflow/datasets.git
 cd datasets
+
+
+if [ "$GIT_COMMIT_ID" != "master" ]  # commit id = nightly is overwritten above
+then
+  # For stable version, we overwrite `version.py` by `version_stable.py` to
+  # remove the `-nightly` suffix.
+  mv tensorflow_datasets/version_stable.py tensorflow_datasets/version.py
+fi
 git checkout $GIT_COMMIT_ID
 
 echo "Building source distribution"

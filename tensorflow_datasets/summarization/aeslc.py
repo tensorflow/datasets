@@ -15,10 +15,6 @@
 
 """Annotated Enron Subject Line Corpus Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
@@ -69,9 +65,7 @@ class Aeslc(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    dl_path = dl_manager.download_and_extract(tfds.download.Resource(
-        url=_URL,
-        extract_method=tfds.download.ExtractMethod.ZIP))
+    dl_path = dl_manager.download_and_extract(_URL)
     input_path = os.path.join(dl_path, "AESLC-master", "enron_subject_line")
     return [
         tfds.core.SplitGenerator(

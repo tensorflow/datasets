@@ -15,30 +15,21 @@
 
 """Test utilities."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import contextlib
-import functools
+import io
 import os
 import subprocess
 import tempfile
+from typing import Any, Iterator
+from unittest import mock
 
-from absl.testing import absltest
-
-import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import file_format_adapter
-from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.testing import test_case
 
 
 @contextlib.contextmanager
@@ -69,71 +60,159 @@ def remake_dir(d):
 
 
 def fake_examples_dir():
-  return os.path.join(os.path.dirname(__file__), "test_data", "fake_examples")
+  return os.path.join(os.path.dirname(__file__), 'test_data', 'fake_examples')
 
 
-class FeatureExpectationItem(object):
-  """Test item of a FeatureExpectation."""
+class MockFs(object):
+  """This util wraps mock for the `tf.io.gfile` API.
 
-  def __init__(
-      self,
-      value,
-      expected=None,
-      expected_serialized=None,
-      decoders=None,
-      dtype=None,
-      shape=None,
-      raise_cls=None,
-      raise_msg=None):
-    self.value = value
-    self.expected = expected
-    self.expected_serialized = expected_serialized
-    self.decoders = decoders
-    self.dtype = dtype
-    self.shape = shape
-    if not decoders and (dtype is not None or shape is not None):
-      raise ValueError("dtype and shape should only be set with transform")
-    self.raise_cls = raise_cls
-    self.raise_msg = raise_msg
+  Usage:
 
+  ```
+  fs = MockFs()
+  with fs.mock():
 
-class SubTestCase(test_case.TestCase):
-  """Adds subTest() context manager to the TestCase if supported.
+    fs.add_file('/path/to/file1', 'Content of file 1')
 
-  Note: To use this feature, make sure you call super() in setUpClass to
-  initialize the sub stack.
+    assert tf.io.gfile.exists('/path/to/file1')
+    with tf.io.gfile.GFile('/path/to/file2', 'w') as f:
+      f.write('Content of file 2')
+    tf.io.gfile.rename('/path/to/file1', '/path/to/file1_moved')
+
+    assert fs.files == {
+        '/path/to/file2': 'Content of file 2',
+        '/path/to/file1_moved': 'Content of file 1',
+    }
+  ```
+
+  Attributes:
+    files: Dict[str, str], mapping existing files -> file content
   """
 
-  @classmethod
-  def setUpClass(cls):
-    super(SubTestCase, cls).setUpClass()
-    cls._sub_test_stack = []
+  def __init__(self):
+    self.files = {}
+    self._cm = None
+
+  def __enter__(self):
+    self._cm = self.contextmanager()
+    return self._cm.__enter__()
+
+  def __exit__(self, exc_type, exc_value, traceback):
+    return self._cm.__exit__(exc_type, exc_value, traceback)
 
   @contextlib.contextmanager
-  def _subTest(self, test_str):
-    sub_test_not_implemented = True
-    if sub_test_not_implemented:
-      yield
-    else:
-      self._sub_test_stack.append(test_str)
-      sub_test_str = "/".join(self._sub_test_stack)
-      with self.subTest(sub_test_str):
-        yield
-      self._sub_test_stack.pop()
+  def contextmanager(self) -> Iterator['MockFs']:
+    """Open the file."""
+    with self.mock():
+      yield self
 
-  def assertAllEqualNested(self, d1, d2):
-    """Same as assertAllEqual but compatible with nested dict."""
-    if isinstance(d1, dict):
-      # assertAllEqual do not works well with dictionaries so assert
-      # on each individual elements instead
-      zipped_examples = utils.zip_nested(d1, d2, dict_only=True)
-      utils.map_nested(
-          lambda x: self.assertAllEqual(x[0], x[1]),
-          zipped_examples,
-          dict_only=True,
-      )
+  def add_file(self, path, content=None) -> None:
+    path = os.fspath(path)
+    content = 'Content of {}'.format(path) if content is None else content
+    self.files[path] = content
+
+  def _list_directory(self, path):
+    path = os.fspath(path)
+    path = path.rstrip(os.path.sep) + os.path.sep  # Make sure path is a `dir/`
+    return list({
+        # Extract `path/<dirname>/...` -> `<dirname>`
+        os.path.relpath(p, path).split(os.path.sep)[0]
+        for p in self.files if p.startswith(path)
+    })
+
+  @contextlib.contextmanager
+  def _open(self, path, mode='r'):
+    """Patch `tf.io.gfile.GFile`."""
+    path = os.fspath(path)
+    if mode.startswith('w'):
+      self.add_file(path, '')
+    is_binary = 'b' in mode
+
+    if path not in self.files:
+      raise FileNotFoundError(f'File {path} does not exists.')
+    content = self.files[path]
+    if is_binary:
+      fobj = io.BytesIO(content.encode('utf-8'))
     else:
-      self.assertAllEqual(d1, d2)
+      fobj = io.StringIO(content)
+
+    with fobj as f:
+      yield f
+      new_content = f.getvalue()  # Update the content
+
+    self.files[path] = new_content.decode('utf-8') if is_binary else new_content  # pytype: disable=attribute-error
+
+  def _rename(self, from_, to, overwrite=False):
+    from_ = os.fspath(from_)
+    to = os.fspath(to)
+    if not overwrite and to in self.files:
+      raise FileExistsError('Cannot overwrite: {} -> {}'.format(from_, to))  # pytype: disable=name-error
+    if from_ not in self.files:
+      raise FileNotFoundError('Cannot rename unknown file: {}'.format(from_))  # pytype: disable=name-error
+    self.files[to] = self.files.pop(from_)
+
+  def _exists(self, path: str) -> bool:
+    """Returns True, if any file/directory exists."""
+    path = os.fspath(path)
+    path = path.rstrip(os.path.sep)  # Normalize path
+    # Check full path existence
+    if path in self.files:
+      return True
+    # Check parent directory
+    path = path + os.path.sep
+    if any(f.startswith(path) for f in self.files):
+      return True
+    return False
+
+  def mock(self):
+    return mock_tf(
+        'tf.io.gfile',
+        exists=self._exists,
+        makedirs=lambda _: None,
+        # Used to get name of file as downloaded:
+        listdir=self._list_directory,
+        GFile=self._open,
+        rename=self._rename,
+    )
+
+
+@contextlib.contextmanager
+def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
+  """Patch TF API.
+
+  This function is similar to `mock.patch.object`, but patch both
+  `tf.Xyz` and `tf.compat.v2.Xyz`.
+
+  Args:
+    symbol_name: Symbol to patch (e.g. `tf.io.gfile`)
+    *args: Arguments to forward to `mock.patch.object`
+    **kwargs: Arguments to forward to `mock.patch.object`
+
+  Yields:
+    None
+  """
+  # pylint: disable=g-import-not-at-top,reimported
+  import tensorflow as tf_lib1
+  import tensorflow.compat.v2 as tf_lib2
+  # pylint: enable=g-import-not-at-top,reimported
+
+  tf_symbol, *tf_submodules, symbol_name = symbol_name.split('.')
+  if tf_symbol != 'tf':
+    raise ValueError('Symbol name to patch should start by `tf`.')
+
+  with contextlib.ExitStack() as stack:
+    # Patch both `tf` and `tf.compat.v2`
+    for tf_lib in (tf_lib1, tf_lib2):
+      # Recursivelly load the submodules/subobjects (e.g. `tf.io.gfile`)
+      module = tf_lib
+      for submodule in tf_submodules:
+        module = getattr(module, submodule)
+      getattr(module, symbol_name)  # Trigger the lazy-loading of the TF API.
+      # Patch the module/object
+      stack.enter_context(
+          mock.patch.object(module, symbol_name, *args, **kwargs)
+      )
+    yield
 
 
 def run_in_graph_and_eager_modes(func=None,
@@ -153,19 +232,17 @@ def run_in_graph_and_eager_modes(func=None,
   For example, consider the following unittest:
 
   ```python
-  tf.compat.v1.enable_eager_execution()
+  class SomeTest(tfds.testing.TestCase):
 
-  class SomeTest(testing.TestCase):
-
-    @testing.run_in_graph_and_eager_modes
+    @tfds.testing.run_in_graph_and_eager_modes
     def test_foo(self):
       x = tf.constant([1, 2])
       y = tf.constant([3, 4])
       z = tf.add(x, y)
       self.assertAllEqual([4, 6], self.evaluate(z))
 
-  if __name__ == "__main__":
-    testing.test_main()
+  if __name__ == '__main__':
+    tfds.testing.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with
@@ -188,11 +265,12 @@ def run_in_graph_and_eager_modes(func=None,
 
   def decorator(f):
     """Decorator for a method."""
+
     def decorated(self, *args, **kwargs):
       """Run the decorated test method."""
       if not tf.executing_eagerly():
-        raise ValueError("Must be executing eagerly when using the "
-                         "run_in_graph_and_eager_modes decorator.")
+        raise ValueError('Must be executing eagerly when using the '
+                         'run_in_graph_and_eager_modes decorator.')
 
       # Run eager block
       f(self, *args, **kwargs)
@@ -212,228 +290,78 @@ def run_in_graph_and_eager_modes(func=None,
   return decorator
 
 
-class RaggedConstant(object):
-  """Container of tf.ragged.constant values.
-
-  This simple wrapper forward the arguments to delay the RaggedTensor
-  construction after `@run_in_graph_and_eager_modes` has been called.
-  This is required to avoid incompabilities between Graph/eager.
-  """
-
-  def __init__(self, *args, **kwargs):
-    self._args = args
-    self._kwargs = dict(kwargs)
-
-  def build(self):
-    return tf.ragged.constant(*self._args, **self._kwargs)
-
-
-class FeatureExpectationsTestCase(SubTestCase):
-  """Tests FeatureExpectations with full encode-decode."""
-
-  @run_in_graph_and_eager_modes()
-  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
-    """Test the given feature against the predicates."""
-
-    # Check the shape/dtype
-    with self._subTest("shape"):
-      self.assertEqual(feature.shape, shape)
-    with self._subTest("dtype"):
-      self.assertEqual(feature.dtype, dtype)
-
-    # Check the serialized features
-    if serialized_info is not None:
-      with self._subTest("serialized_info"):
-        self.assertEqual(
-            serialized_info,
-            feature.get_serialized_info(),
-        )
-
-    # Create the feature dict
-    fdict = features.FeaturesDict({"inner": feature})
-    fdict._set_top_level()  # pylint: disable=protected-access
-
-    for i, test in enumerate(tests):
-      with self._subTest(str(i)):
-        self.assertFeatureTest(
-            fdict=fdict,
-            test=test,
-            feature=feature,
-            shape=shape,
-            dtype=dtype,
-        )
-
-  def assertFeatureTest(self, fdict, test, feature, shape, dtype):
-    """Test that encode=>decoding of a value works correctly."""
-    # test feature.encode_example can be pickled and unpickled for beam.
-    dill.loads(dill.dumps(feature.encode_example))
-
-    input_value = {"inner": test.value}
-
-    if test.raise_cls is not None:
-      with self._subTest("raise"):
-        if not test.raise_msg:
-          raise ValueError(
-              "test.raise_msg should be set with {} for test {}".format(
-                  test.raise_cls, type(feature)))
-        with self.assertRaisesWithPredicateMatch(
-            test.raise_cls, test.raise_msg):
-          features_encode_decode(fdict, input_value, decoders=test.decoders)
-    else:
-      # Test the serialization only
-      if test.expected_serialized is not None:
-        with self._subTest("out_serialize"):
-          self.assertEqual(
-              test.expected_serialized,
-              feature.encode_example(test.value),
-          )
-
-      # Test serialization + decoding from disk
-      with self._subTest("out"):
-        out_tensor, out_numpy = features_encode_decode(
-            fdict,
-            input_value,
-            decoders={"inner": test.decoders},
-        )
-        out_tensor = out_tensor["inner"]
-        out_numpy = out_numpy["inner"]
-
-        # Assert the returned type match the expected one
-        with self._subTest("dtype"):
-          out_dtypes = utils.map_nested(lambda s: s.dtype, out_tensor)
-          self.assertEqual(out_dtypes, test.dtype or feature.dtype)
-        with self._subTest("shape"):
-          # For shape, because (None, 3) match with (5, 3), we use
-          # tf.TensorShape.assert_is_compatible_with on each of the elements
-          expected_shape = feature.shape if test.shape is None else test.shape
-          out_shapes = utils.zip_nested(out_tensor, expected_shape)
-          utils.map_nested(
-              lambda x: x[0].shape.assert_is_compatible_with(x[1]),
-              out_shapes
-          )
-
-        # Assert value
-        with self._subTest("out_value"):
-          # Eventually construct the tf.RaggedTensor
-          expected = utils.map_nested(
-              lambda t: t.build() if isinstance(t, RaggedConstant) else t,
-              test.expected)
-          self.assertAllEqualNested(out_numpy, expected)
-
-
-def features_encode_decode(features_dict, example, decoders):
-  """Runs the full pipeline: encode > write > tmp files > read > decode."""
-  # Encode example
-  encoded_example = features_dict.encode_example(example)
-
-  with tmp_dir() as tmp_dir_:
-    tmp_filename = os.path.join(tmp_dir_, "tmp.tfrecord")
-
-    # Read/write the file
-    file_adapter = file_format_adapter.TFRecordExampleAdapter(
-        features_dict.get_serialized_info())
-    file_adapter.write_from_generator(
-        generator=[encoded_example],
-        output_files=[tmp_filename],
-    )
-    ds = file_adapter.dataset_from_filename(tmp_filename)
-
-    # Decode the example
-    decode_fn = functools.partial(
-        features_dict.decode_example,
-        decoders=decoders,
-    )
-    ds = ds.map(decode_fn)
-
-    if tf.executing_eagerly():
-      out_tensor = next(iter(ds))
-    else:
-      out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
-    out_numpy = dataset_utils.as_numpy(out_tensor)
-    return out_tensor, out_numpy
-
-
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
-  VERSION = utils.Version("1.0.0")
+  VERSION = utils.Version('1.0.0')
   SUPPORTED_VERSIONS = [
-      "2.0.0",
-      "0.0.9",
-      "0.0.8",
-      utils.Version("0.0.7", tfds_version_to_prepare="v1.0.0"),
+      '2.0.0',
+      '0.0.9',
+      '0.0.8',
+      utils.Version('0.0.7', tfds_version_to_prepare='v1.0.0'),
   ]
 
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({"x": tf.int64}),
-        supervised_keys=("x", "x"),
+        features=features.FeaturesDict({'x': tf.int64}),
+        supervised_keys=('x', 'x'),
     )
 
   def _split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            gen_kwargs={"range_": range(20)}),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            gen_kwargs={"range_": range(20, 30)}),
-    ]
+    return {
+        'train': self._generate_examples(range_=range(20)),
+        'test': self._generate_examples(range_=range(20, 30)),
+    }
 
   def _generate_examples(self, range_):
     for i in range_:
-      yield i, {"x": i}
+      yield i, {'x': i}
 
 
 class DummyMnist(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
-  VERSION = utils.Version("1.0.0")
+  VERSION = utils.Version('1.0.0')
 
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({
-            "image": features.Image(shape=(28, 28, 1)),
-            "label": features.ClassLabel(num_classes=10),
+            'image': features.Image(shape=(28, 28, 1)),
+            'label': features.ClassLabel(num_classes=10),
         }),
-        description="Mnist description.",
+        description='Mnist description.',
     )
 
   def _split_generators(self, dl_manager):
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            gen_kwargs=dict()),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            gen_kwargs=dict()),
-    ]
+    return {
+        'train': self._generate_examples(),
+        'test': self._generate_examples(),
+    }
 
   def _generate_examples(self):
     for i in range(20):
       yield i, {
-          "image": np.ones((28, 28, 1), dtype=np.uint8),
-          "label": i % 10,
+          'image': np.ones((28, 28, 1), dtype=np.uint8),
+          'label': i % 10,
       }
 
 
 def test_main():
   """Entrypoint for tests."""
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
   tf.test.main()
 
 
 @contextlib.contextmanager
-def mock_kaggle_api(filenames=None, err_msg=None):
+def mock_kaggle_api(err_msg=None):
   """Mock out the kaggle CLI.
 
   Args:
-    filenames: `list<str>`, names of the competition files.
     err_msg: `str`, if provided, the kaggle CLI will raise a CalledProcessError
       and this will be the command output.
 
@@ -441,51 +369,20 @@ def mock_kaggle_api(filenames=None, err_msg=None):
     None, context will have kaggle CLI mocked out.
   """
 
-  def make_mock_files_call(filenames, err_msg):
-    """Mock subprocess.check_output for files call."""
-
-    def check_output(command_args):
-      assert command_args[2] == "files"
-      if err_msg:
-        raise subprocess.CalledProcessError(1, command_args,
-                                            tf.compat.as_bytes(err_msg))
-      return tf.compat.as_bytes(
-          "\n".join(["name,size,creationDate"] +
-                    ["%s,34MB,None\n" % fname for fname in filenames]))
-
-    return check_output
-
-  def make_mock_download_call():
+  def check_output(command_args, encoding=None):
     """Mock subprocess.check_output for download call."""
+    assert encoding
+    assert command_args[2] == 'download'
+    competition_or_dataset = command_args[-1]
+    if err_msg:
+      raise subprocess.CalledProcessError(1, command_args, err_msg)
+    out_dir = command_args[command_args.index('--path') + 1]
+    fpath = os.path.join(out_dir, 'output.txt')
+    with tf.io.gfile.GFile(fpath, 'w') as f:
+      f.write(competition_or_dataset)
+    return 'Downloading {} to {}'.format(competition_or_dataset, fpath)
 
-    def check_output(command_args):
-      assert command_args[2] == "download"
-      fname = command_args[command_args.index("--file") + 1]
-      out_dir = command_args[command_args.index("--path") + 1]
-      fpath = os.path.join(out_dir, fname)
-      with tf.io.gfile.GFile(fpath, "w") as f:
-        f.write(fname)
-      return tf.compat.as_bytes("Downloading %s to %s" % (fname, fpath))
-
-    return check_output
-
-  def make_mock_check_output(filenames, err_msg):
-    """Mock subprocess.check_output for both calls."""
-
-    files_call = make_mock_files_call(filenames, err_msg)
-    dl_call = make_mock_download_call()
-
-    def check_output(command_args):
-      if command_args[2] == "files":
-        return files_call(command_args)
-      else:
-        assert command_args[2] == "download"
-        return dl_call(command_args)
-
-    return check_output
-
-  with absltest.mock.patch("subprocess.check_output",
-                           make_mock_check_output(filenames, err_msg)):
+  with mock.patch('subprocess.check_output', check_output):
     yield
 
 
@@ -507,4 +404,3 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
-

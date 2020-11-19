@@ -15,10 +15,6 @@
 
 """The SuperGLUE benchmark."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
 import os
 
@@ -284,8 +280,8 @@ _AXG_CITATION = """\
 class SuperGlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SuperGLUE."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                features,
                data_url,
                citation,
@@ -469,7 +465,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_GLUE_DESCRIPTION + self.builder_config.description,
+        description=_GLUE_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,
@@ -583,10 +579,10 @@ def _fix_wst(ex):
       return
 
     if "theyscold" in text:
-      ex["text"].replace("theyscold", "they scold")
+      ex["text"].replace("theyscold", "they scold")  # pytype: disable=attribute-error
       ex["span2_index"] = 10
     # Make sure case of the first words match.
-    first_word = ex["text"].split()[index]
+    first_word = ex["text"].split()[index]  # pytype: disable=attribute-error
     if first_word[0].islower():
       text = text[0].lower() + text[1:]
     else:

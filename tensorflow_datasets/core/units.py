@@ -15,10 +15,6 @@
 
 """Defines convenience constants/functions for converting various units."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 # The constants below are used for conveniently defining memory quantities.
 # pylint: disable=invalid-name
 KiB = 2**10

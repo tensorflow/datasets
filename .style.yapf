@@ -1,0 +1,5 @@
+[style]
+based_on_style = google
+indent_width = 2
+dedent_closing_brackets = True
+split_before_dot = True

@@ -15,10 +15,6 @@
 
 """The General Language Understanding Evaluation (GLUE) benchmark."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import csv
 import os
 import textwrap
@@ -90,8 +86,8 @@ _MNLI_BASE_KWARGS = dict(
 class GlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for GLUE."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                text_features,
                label_column,
                data_url,
@@ -121,9 +117,10 @@ class GlueConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(GlueConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("1.0.0"),
+        release_notes={
+            "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.text_features = text_features
     self.label_column = label_column
@@ -252,7 +249,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       GlueConfig(
           name="mnli",
           description=textwrap.dedent("""\
-            The Multi-Genre Natural Language Inference Corpusn is a crowdsourced
+            The Multi-Genre Natural Language Inference Corpus is a crowdsourced
             collection of sentence pairs with textual entailment annotations. Given a premise sentence
             and a hypothesis sentence, the task is to predict whether the premise entails the hypothesis
             (entailment), contradicts the hypothesis (contradiction), or neither (neutral). The premise sentences are

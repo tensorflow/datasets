@@ -58,6 +58,12 @@ message DatasetInfo {
   // Version string of the dataset (ex: '1.0.5')
   string version = 9;
 
+  // Config name of the dataset
+  string config_name = 13;
+
+  // Config description of the dataset
+  string config_description = 14;
+
   // A citation string if one exists for this dataset.
   string citation = 3;
 
@@ -87,5 +93,5 @@ message DatasetInfo {
 
   RedistributionInfo redistribution_info = 11;
 
-  // Next available: 13
+  // Next available: 15
 }

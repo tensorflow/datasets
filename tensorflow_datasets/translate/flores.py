@@ -15,10 +15,6 @@
 
 """Facebook Low Resource (FLoRes) machine translation benchmark dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 
 import tensorflow.compat.v2 as tf
@@ -51,37 +47,25 @@ TranslateData = collections.namedtuple("TranslateData",
 class FloresConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLoRes."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self,
-               text_encoder_config=None,
-               language_pair=(None, None),
-               **kwargs):
+  def __init__(self, *, language_pair=(None, None), **kwargs):
     """BuilderConfig for FLoRes.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
       language_pair: pair of languages that will be used for translation. Should
         contain 2-letter coded strings. First will be used at source and second
         as target in supervised mode. For example: ("se", "en").
       **kwargs: keyword arguments forwarded to super.
     """
-    encoder_name = (
-        text_encoder_config.name if text_encoder_config else "plain_text")
-    name = "%s%s_%s" % (language_pair[0], language_pair[1], encoder_name)
+    name = f"{language_pair[0]}{language_pair[1]}"
 
     description = (
-        "Translation dataset from %s to %s, uses encoder %s.") % (
-            language_pair[0], language_pair[1], encoder_name)
+        f"Translation dataset from {language_pair[0]} to {language_pair[1]}."
+    )
     super(FloresConfig, self).__init__(
         name=name,
         description=description,
-        version=tfds.core.Version(
-            "1.1.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("1.2.0"),
         **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
 
     # Validate language pair.
     assert "en" in language_pair, (
@@ -113,16 +97,12 @@ class Flores(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair,
-            encoder_config=self.builder_config.text_encoder_config),
+            languages=self.builder_config.language_pair
+        ),
         supervised_keys=(source, target),
         homepage="https://github.com/facebookresearch/flores/",
         citation=_CITATION,
     )
-
-  def _vocab_text_gen(self, files, language):
-    for _, ex in self._generate_examples(**files):
-      yield ex[language]
 
   def _split_generators(self, dl_manager):
     dl_dir = dl_manager.download_and_extract(_DATA_URL)
@@ -142,19 +122,12 @@ class Flores(tfds.core.GeneratorBasedBuilder):
               dl_dir=dl_dir, split=split, non_en=non_en, lang=target),
       }
 
-    # Generate vocabulary from dev data if text encoder configured.
-    for language in self.builder_config.language_pair:
-      self.info.features[source].maybe_build_from_corpus(
-          self._vocab_text_gen(files["dev"], language))
-
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=files["dev"]),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs=files["devtest"]),
     ]
 

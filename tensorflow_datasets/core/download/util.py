@@ -15,16 +15,7 @@
 
 """Utils functions."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import functools
-import os
-import threading
-
 import enum
-from six.moves import urllib
 
 
 class GenerateMode(enum.Enum):
@@ -64,43 +55,3 @@ class ComputeStatsMode(enum.Enum):
   AUTO = 'auto'
   FORCE = 'force'
   SKIP = 'skip'
-
-
-# TODO(epot): Move some of those functions into core.py_utils
-
-
-def build_synchronize_decorator():
-  """Returns a decorator which prevents concurrent calls to functions.
-
-  Usage:
-    synchronized = build_synchronize_decorator()
-
-    @synchronized
-    def read_value():
-      ...
-
-    @synchronized
-    def write_value(x):
-      ...
-
-  Returns:
-    make_threadsafe (fct): The decorator which lock all functions to which it
-      is applied under a same lock
-  """
-  lock = threading.Lock()
-
-  def lock_decorator(fn):
-
-    @functools.wraps(fn)
-    def lock_decorated(*args, **kwargs):
-      with lock:
-        return fn(*args, **kwargs)
-
-    return lock_decorated
-
-  return lock_decorator
-
-
-def get_file_name(url):
-  """Returns file name of file at given url."""
-  return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'

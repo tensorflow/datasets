@@ -15,12 +15,12 @@
 
 """Tests for py_utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import collections
 import hashlib
 import os
+import pathlib
+
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import py_utils
@@ -181,9 +181,38 @@ class PyUtilsTest(testing.TestCase):
           'a/b': 2,  # Collision
       })
 
-  def test_tfds_dir(self):
-    """Test the proper suffix only, since the prefix can vary."""
-    self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
+  def test_reraise(self):
+
+    class CustomError(Exception):
+
+      def __init__(self, *args, **kwargs):  # pylint: disable=super-init-not-called
+        pass  # Do not call super() to ensure this would work with bad code.
+
+    with self.assertRaisesRegex(ValueError, 'Caught: '):
+      with py_utils.try_reraise('Caught: '):
+        raise ValueError
+
+    with self.assertRaisesRegex(ValueError, 'Caught: With message'):
+      with py_utils.try_reraise('Caught: '):
+        raise ValueError('With message')
+
+    with self.assertRaisesRegex(CustomError, 'Caught: 123'):
+      with py_utils.try_reraise('Caught: '):
+        raise CustomError(123)
+
+    with self.assertRaisesRegex(CustomError, "('Caught: ', 123, {})"):
+      with py_utils.try_reraise('Caught: '):
+        raise CustomError(123, {})
+
+    with self.assertRaisesRegex(Exception, 'Caught: '):
+      with py_utils.try_reraise('Caught: '):
+        ex = CustomError(123, {})
+        ex.args = 'Not a tuple'
+        raise ex
+
+    with self.assertRaisesRegex(RuntimeError, 'Caught: message'):
+      with py_utils.try_reraise('Caught: '):
+        raise tf.errors.FailedPreconditionError(None, None, 'message')
 
 
 class ReadChecksumDigestTest(testing.TestCase):
@@ -214,5 +243,61 @@ class GetClassPathUrlTest(testing.TestCase):
         (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'))
 
 
-if __name__ == '__main__':
-  testing.test_main()
+def test_list_info_files(tmp_path: pathlib.Path):
+  tmp_path.joinpath('test.tfrecord').touch()
+  tmp_path.joinpath('test.riegeli').touch()
+  tmp_path.joinpath('info.json').touch()
+
+  # Have a info file in the sub-directory. Shouldn't be listed.
+  tmp_path.joinpath('diff').mkdir()
+  tmp_path.joinpath('diff/info.json').touch()
+  info_files = py_utils.list_info_files(tmp_path)
+
+  assert info_files == ['info.json']
+
+
+def _flatten_with_path(v):
+  return list(py_utils.flatten_with_path(v))
+
+
+def test_flatten_with_path():
+  """Test that the flatten function works as expected."""
+  assert _flatten_with_path([{'foo': 42}]) == [((0, 'foo'), 42)]
+
+  assert _flatten_with_path('value') == [((), 'value')]
+  assert _flatten_with_path({'key': 'value'}) == [(('key',), 'value')]
+  # Order doesn't matter
+  ordered_dict1 = collections.OrderedDict(
+      [('key1', 'value1'), ('key2', 'value2')]
+  )
+  ordered_dict2 = collections.OrderedDict(
+      [('key2', 'value2'), ('key1', 'value1')]
+  )
+  expected_result = [(('key1',), 'value1'), (('key2',), 'value2')]
+  assert _flatten_with_path(ordered_dict1) == expected_result
+  assert _flatten_with_path(ordered_dict2) == expected_result
+
+  complex_dict = {
+      'key': 'value',
+      'nested': {
+          'subkey': ['subvalue0', 'subvalue1'],
+          'subnested': {
+              'subsubkey1': 'subsubvalue1',
+              'subsubkey2': 'subsubvalue2',
+          },
+      },
+      'key2': 'value2',
+  }
+  assert _flatten_with_path(complex_dict) == [
+      (('key',), 'value'),
+      (('key2',), 'value2'),
+      (('nested', 'subkey', 0), 'subvalue0'),
+      (('nested', 'subkey', 1), 'subvalue1'),
+      (('nested', 'subnested', 'subsubkey1',), 'subsubvalue1'),
+      (('nested', 'subnested', 'subsubkey2',), 'subsubvalue2'),
+  ]
+  # Order is consistent with tf.nest.flatten
+  assert (
+      [v for _, v in _flatten_with_path(complex_dict)]
+      == tf.nest.flatten(complex_dict)
+  )

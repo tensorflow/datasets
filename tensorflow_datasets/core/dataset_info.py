@@ -30,34 +30,28 @@ processed the dataset as well:
  - etc.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import abc
-import collections
 import json
 import os
 import posixpath
 import tempfile
 
 from absl import logging
-import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from tensorflow_datasets.core.proto import json_format
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import type_utils
 
-from tensorflow_metadata.proto.v0 import schema_pb2
-from tensorflow_metadata.proto.v0 import statistics_pb2
+from google.protobuf import json_format
+
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
@@ -92,14 +86,13 @@ class DatasetInfo(object):
   builder.download_and_prepare()`).
   """
 
-  @api_utils.disallow_positional_args
   def __init__(self,
+               *,
                builder,
                description=None,
                features=None,
                supervised_keys=None,
                homepage=None,
-               urls=None,
                citation=None,
                metadata=None,
                redistribution_info=None):
@@ -118,7 +111,6 @@ class DatasetInfo(object):
         with `as_supervised=True`, the `tf.data.Dataset` object will yield
         the (input, target) defined here.
       homepage: `str`, optional, the homepage for this dataset.
-      urls: DEPRECATED, use `homepage` instead.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
@@ -130,17 +122,24 @@ class DatasetInfo(object):
     """
     self._builder = builder
 
+    if builder.builder_config:
+      config_name = builder.builder_config.name
+      config_description = builder.builder_config.description
+    else:
+      config_name = None
+      config_description = None
+
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=builder.name,
-        description=description,
-        version=str(builder._version),  # pylint: disable=protected-access
-        citation=citation,
+        description=utils.dedent(description),
+        version=str(builder.version),
+        config_name=config_name,
+        config_description=config_description,
+        citation=utils.dedent(citation),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
+            license=utils.dedent(redistribution_info.pop("license")),
             **redistribution_info) if redistribution_info else None)
 
-    if urls:  # TODO(epot):Delete field once every user have been migrated
-      raise ValueError("`urls=` field is deprecated. Please use "
-                       "`homepage='{}'` instead.".format(urls[0]))
     if homepage:
       self._info_proto.location.urls[:] = [homepage]
 
@@ -149,7 +148,6 @@ class DatasetInfo(object):
         raise ValueError(
             "DatasetInfo.features only supports FeaturesDict or Sequence at "
             "the top-level. Got {}".format(features))
-      features._set_top_level()  # pylint: disable=protected-access
     self._features = features
     self._splits = splits_lib.SplitDict(self._builder.name)
     if supervised_keys is not None:
@@ -331,9 +329,9 @@ class DatasetInfo(object):
 
   def write_to_directory(self, dataset_info_dir):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
-    # Save the metadata from the features (vocabulary, labels,...)
+    # Save the features structure & metadata (vocabulary, labels,...)
     if self.features:
-      self.features.save_metadata(dataset_info_dir)
+      self.features.save_config(dataset_info_dir)
 
     # Save any additional metadata
     if self.metadata is not None:
@@ -357,12 +355,20 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
+
+    Raises:
+      FileNotFoundError: If the file can't be found.
     """
-    if not dataset_info_dir:
-      raise ValueError(
-          "Calling read_from_directory with undefined dataset_info_dir.")
+    logging.info("Load dataset info from %s", dataset_info_dir)
 
     json_filename = self._dataset_info_path(dataset_info_dir)
+    if not tf.io.gfile.exists(json_filename):
+      raise FileNotFoundError(
+          "Try to load `DatasetInfo` from a directory which does not exist or "
+          "does not contain `dataset_info.json`. Please delete the directory "
+          f"`{dataset_info_dir}`  if you are trying to re-generate the "
+          "dataset."
+      )
 
     # Load the metadata from disk
     parsed_proto = read_from_json(json_filename)
@@ -374,7 +380,11 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
-
+    # For `ReadOnlyBuilder`, reconstruct the features from the config.
+    elif tf.io.gfile.exists(feature_lib.make_config_path(dataset_info_dir)):
+      self._features = feature_lib.FeatureConnector.from_config(
+          dataset_info_dir
+      )
     if self.metadata is not None:
       self.metadata.load_metadata(dataset_info_dir)
 
@@ -428,10 +438,11 @@ class DatasetInfo(object):
     data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
       return
-    logging.info("Loading info from GCS for %s", self.full_name)
+    logging.info("Load pre-computed DatasetInfo (eg: splits, num examples,...) "
+                 "from GCS: %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      gcs_utils.download_gcs_file(fname, out_fname)
+      tf.io.gfile.copy(gcs_utils.gcs_path(fname), out_fname)
     self.read_from_directory(tmp_dir)
 
   def __repr__(self):
@@ -460,167 +471,79 @@ def _indent(content):
   lines = content.split("\n")
   return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
-#
-#
-# This part is quite a bit messy and can be easily simplified with TFDV
-# libraries, we can cut down the complexity by implementing cases on a need to
-# do basis.
-#
-# My understanding of possible TF's types and shapes and kinds
-# (ex: SparseTensor) is limited, please shout hard and guide on implementation.
-#
-#
 
-_FEATURE_TYPE_MAP = {
-    tf.float16: schema_pb2.FLOAT,
-    tf.float32: schema_pb2.FLOAT,
-    tf.float64: schema_pb2.FLOAT,
-    tf.int8: schema_pb2.INT,
-    tf.int16: schema_pb2.INT,
-    tf.int32: schema_pb2.INT,
-    tf.int64: schema_pb2.INT,
-    tf.uint8: schema_pb2.INT,
-    tf.uint16: schema_pb2.INT,
-    tf.uint32: schema_pb2.INT,
-    tf.uint64: schema_pb2.INT,
-}
-
-_SCHEMA_TYPE_MAP = {
-    schema_pb2.INT: statistics_pb2.FeatureNameStatistics.INT,
-    schema_pb2.FLOAT: statistics_pb2.FeatureNameStatistics.FLOAT,
-    schema_pb2.BYTES: statistics_pb2.FeatureNameStatistics.BYTES,
-    schema_pb2.STRUCT: statistics_pb2.FeatureNameStatistics.STRUCT,
-}
+def _populate_shape(shape_or_dict, prefix, schema_features):
+  """Populates shape in the schema."""
+  if isinstance(shape_or_dict, (tuple, list)):
+    feature_name = "/".join(prefix)
+    if shape_or_dict and feature_name in schema_features:
+      schema_feature = schema_features[feature_name]
+      schema_feature.ClearField("shape")
+      for dim in shape_or_dict:
+        # We denote `None`s as -1 in the shape proto.
+        schema_feature.shape.dim.add().size = -1 if dim is None else dim
+    return
+  for name, val in shape_or_dict.items():
+    prefix.append(name)
+    _populate_shape(val, prefix, schema_features)
+    prefix.pop()
 
 
-# TODO(afrozm): What follows below can *VERY EASILY* be done by TFDV - rewrite
-# this section once they are python 3 ready.
 def get_dataset_feature_statistics(builder, split):
   """Calculate statistics for the specified split."""
-  statistics = statistics_pb2.DatasetFeatureStatistics()
+  tfdv = lazy_imports_lib.lazy_imports.tensorflow_data_validation
+  # TODO(epot): Avoid hardcoding file format.
+  filetype_suffix = "tfrecord"
+  if filetype_suffix not in ["tfrecord", "csv"]:
+    raise ValueError(
+        "Cannot generate statistics for filetype {}".format(filetype_suffix))
+  filepattern = naming.filepattern_for_dataset_split(
+      builder.name, split, builder.data_dir, filetype_suffix)
+  # Avoid generating a large number of buckets in rank histogram
+  # (default is 1000).
+  stats_options = tfdv.StatsOptions(num_top_values=10,
+                                    num_rank_histogram_buckets=10)
+  if filetype_suffix == "csv":
+    statistics = tfdv.generate_statistics_from_csv(
+        filepattern, stats_options=stats_options)
+  else:
+    statistics = tfdv.generate_statistics_from_tfrecord(
+        filepattern, stats_options=stats_options)
+  schema = tfdv.infer_schema(statistics)
+  schema_features = {feature.name: feature for feature in schema.feature}
+  # Override shape in the schema.
+  for feature_name, feature in builder.info.features.items():
+    _populate_shape(feature.shape, [feature_name], schema_features)
 
-  # Make this to the best of our abilities.
-  schema = schema_pb2.Schema()
-
-  dataset = builder.as_dataset(split=split)
-
-  # Just computing the number of examples for now.
-  statistics.num_examples = 0
-
-  # Feature dictionaries.
-  feature_to_num_examples = collections.defaultdict(int)
-  feature_to_min = {}
-  feature_to_max = {}
-
-  np_dataset = dataset_utils.as_numpy(dataset)
-  for example in utils.tqdm(np_dataset, unit=" examples", leave=False):
-    statistics.num_examples += 1
-
-    assert isinstance(example, dict)
-
-    feature_names = sorted(example.keys())
-    for feature_name in feature_names:
-
-      # Update the number of examples this feature appears in.
-      feature_to_num_examples[feature_name] += 1
-
-      feature_np = example[feature_name]
-
-      # For compatibility in graph and eager mode, we can get PODs here and
-      # everything may not be neatly wrapped up in numpy's ndarray.
-
-      feature_dtype = type(feature_np)
-
-      if isinstance(feature_np, np.ndarray):
-        # If we have an empty array, then don't proceed further with computing
-        # statistics on it.
-        if feature_np.size == 0:
-          continue
-
-        feature_dtype = feature_np.dtype.type
-
-      feature_min, feature_max = None, None
-      is_numeric = (np.issubdtype(feature_dtype, np.number) or
-                    feature_dtype == np.bool_)
-      if is_numeric:
-        feature_min = np.min(feature_np)
-        feature_max = np.max(feature_np)
-
-      # TODO(afrozm): What if shapes don't match? Populate ValueCount? Add
-      # logic for that.
-
-      # Set or update the min, max.
-      if is_numeric:
-        if ((feature_name not in feature_to_min) or
-            (feature_to_min[feature_name] > feature_min)):
-          feature_to_min[feature_name] = feature_min
-
-        if ((feature_name not in feature_to_max) or
-            (feature_to_max[feature_name] < feature_max)):
-          feature_to_max[feature_name] = feature_max
-
-  # Start here, we've processed all examples.
-
-  output_shapes_dict = tf.compat.v1.data.get_output_shapes(dataset)
-  output_types_dict = tf.compat.v1.data.get_output_types(dataset)
-
-  for feature_name in sorted(feature_to_num_examples.keys()):
-    # Try to fill in the schema.
-    feature = schema.feature.add()
-    feature.name = feature_name
-
-    # TODO(afrozm): Make this work with nested structures, currently the Schema
-    # proto has no support for it.
-    maybe_feature_shape = output_shapes_dict[feature_name]
-    if not isinstance(maybe_feature_shape, tf.TensorShape):
-      logging.error(
-          "Statistics generation doesn't work for nested structures yet")
-      continue
-
-    for dim in maybe_feature_shape.as_list():
-      # We denote `None`s as -1 in the shape proto.
-      feature.shape.dim.add().size = dim if dim else -1
-    feature_type = output_types_dict[feature_name]
-    feature.type = _FEATURE_TYPE_MAP.get(feature_type, schema_pb2.BYTES)
-
-    common_statistics = statistics_pb2.CommonStatistics()
-    common_statistics.num_non_missing = feature_to_num_examples[feature_name]
-    common_statistics.num_missing = (
-        statistics.num_examples - common_statistics.num_non_missing)
-
-    feature_name_statistics = statistics.features.add()
-    feature_name_statistics.name = feature_name
-
-    # TODO(afrozm): This can be skipped, since type information was added to
-    # the Schema.
-    feature_name_statistics.type = _SCHEMA_TYPE_MAP.get(
-        feature.type, statistics_pb2.FeatureNameStatistics.BYTES)
-
-    if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
-      numeric_statistics = statistics_pb2.NumericStatistics()
-      # Uses `.get` as Sequence(int) containing only empty array won't contains
-      # any value.
-      numeric_statistics.min = feature_to_min.get(feature_name, 0)
-      numeric_statistics.max = feature_to_max.get(feature_name, 0)
-      numeric_statistics.common_stats.CopyFrom(common_statistics)
-      feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
-    else:
-      # Let's shove it into BytesStatistics for now.
-      bytes_statistics = statistics_pb2.BytesStatistics()
-      bytes_statistics.common_stats.CopyFrom(common_statistics)
-      feature_name_statistics.bytes_stats.CopyFrom(bytes_statistics)
-
-  return statistics, schema
+  # Remove legacy field.
+  if getattr(schema, "generate_legacy_feature_spec", None) is not None:
+    schema.ClearField("generate_legacy_feature_spec")
+  return statistics.datasets[0], schema
 
 
-def read_from_json(json_filename):
+def read_from_json(path: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Read JSON-formatted proto into DatasetInfo proto."""
-  with tf.io.gfile.GFile(json_filename) as f:
-    dataset_info_json_str = f.read()
+  json_str = utils.as_path(path).read_text()
   # Parse it back into a proto.
-  parsed_proto = json_format.Parse(dataset_info_json_str,
-                                   dataset_info_pb2.DatasetInfo())
+  parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
+
+
+def pack_as_supervised_ds(
+    ds: tf.data.Dataset,
+    ds_info: DatasetInfo,
+) -> tf.data.Dataset:
+  """Pack `(input, label)` dataset as `{'key0': input, 'key1': label}`."""
+  if (
+      ds_info.supervised_keys
+      and isinstance(ds.element_spec, tuple)
+      and len(ds.element_spec) == 2
+  ):
+    x_key, y_key = ds_info.supervised_keys
+    ds = ds.map(lambda x, y: {x_key: x, y_key: y})
+    return ds
+  else:  # If dataset isn't a supervised tuple (input, label), return as-is
+    return ds
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -693,7 +616,17 @@ class BeamMetadataDict(MetadataDict):
       item: `beam.pvalue.PValue` or other, the metadata value.
     """
     beam = lazy_imports_lib.lazy_imports.apache_beam
-    if isinstance(item, beam.pvalue.PValue):
+    if isinstance(item, beam.PTransform):
+      # Implementing Beam support might be possible but would
+      # require very careful implementation to avoid computing the
+      # PTransform twice (once for the split and once for the metadata).
+      raise NotImplementedError(
+          "`tfds.core.BeamMetadataDict` can\'t be used on `beam.PTransform`, "
+          "only on `beam.PCollection`. See `_generate_examples` doc on how "
+          "to use `beam.PCollection`, or wrap your `_generate_examples` inside "
+          f"a @beam.ptransform_fn. Got: {key}: {item}"
+      )
+    elif isinstance(item, beam.pvalue.PValue):
       if key in self:
         raise ValueError("Already added PValue with key: %s" % key)
       logging.info("Lazily adding metadata item with Beam: %s", key)
@@ -704,13 +637,16 @@ class BeamMetadataDict(MetadataDict):
               len(item_list))
         item = item_list[0]
         return json.dumps(item)
-      _ = (item
-           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
-           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
-           | "metadata_%s_write" % key >> beam.io.WriteToText(
-               self._temp_filepath(key),
-               num_shards=1,
-               shard_name_template=""))
+      _ = (
+          item
+          | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+          | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+          | "metadata_%s_write" % key >> beam.io.WriteToText(
+              self._temp_filepath(key),
+              num_shards=1,
+              shard_name_template="",
+          )
+      )
     super(BeamMetadataDict, self).__setitem__(key, item)
 
   def save_metadata(self, data_dir):

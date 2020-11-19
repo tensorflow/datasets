@@ -1,0 +1,2 @@
+train/example00000.wav	train/example00000_sources/background0_sound.wav	train/example00000_sources/foreground0_sound.wav
+train/example00001.wav	train/example00001_sources/background0_sound.wav

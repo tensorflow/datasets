@@ -1,0 +1,22 @@
+{
+  "LabelName": "1",
+  "Subcategory": [
+    {
+      "LabelName": "2"
+    },
+    {
+      "LabelName": "3"
+    },
+    {
+      "LabelName": "4",
+      "Subcategory": [
+        {
+          "LabelName": "5"
+        },
+        {
+          "LabelName": "6"
+        }
+      ]
+    }
+  ]
+}

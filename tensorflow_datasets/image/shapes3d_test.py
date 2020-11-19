@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Shapes3D dataset test."""
+
 from tensorflow_datasets.image import shapes3d
 import tensorflow_datasets.testing as tfds_test
 

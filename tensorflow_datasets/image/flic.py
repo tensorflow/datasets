@@ -15,10 +15,6 @@
 
 """Frames Labeled In Cinema (FLIC)."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
@@ -69,8 +65,7 @@ def _normalize_bbox(raw_bbox, img_path):
 class FlicConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLIC."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data, **kwargs):
+  def __init__(self, *, data, **kwargs):
     """Constructs a FlicConfig."""
     if data not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)

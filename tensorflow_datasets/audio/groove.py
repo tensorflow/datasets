@@ -15,10 +15,6 @@
 
 """Groove Midi Dataset (GMD)."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import collections
 import copy
 import csv
@@ -77,10 +73,11 @@ class GrooveConfig(tfds.core.BuilderConfig):
     else:
       name_parts.append("midionly")
 
-    v2 = tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(GrooveConfig, self).__init__(
-        name="-".join(name_parts), version=v2, **kwargs)
+        name="-".join(name_parts),
+        version=tfds.core.Version("2.0.1"),
+        **kwargs,
+    )
     self.split_bars = split_bars
     self.include_audio = include_audio
     self.audio_rate = audio_rate
@@ -131,8 +128,8 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         "midi": tf.string
     }
     if self.builder_config.include_audio:
-      features_dict["audio"] = tfds.features.Tensor(
-          shape=[None], dtype=tf.float32)
+      features_dict["audio"] = tfds.features.Audio(
+          dtype=tf.float32, sample_rate=self.builder_config.audio_rate)
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,

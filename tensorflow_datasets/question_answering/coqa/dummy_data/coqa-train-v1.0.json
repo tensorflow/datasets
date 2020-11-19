@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "data": [{
+    "source": "train",
+    "id": "1",
+    "filename": "train",
+    "story": "Google is a multi-natinal company. It has its headquarters in Mountain View, California, United States. It was founded by Larry Page and Sergey Brin in 1998",
+    "questions": [{
+        "input_text": "When was Google founded?",
+        "turn_id": 1
+      },
+      {
+        "input_text": "In which country is the HQ of Google?",
+        "turn_id": 2
+      },
+      {
+        "input_text": "Who founded Google?",
+        "turn_id": 3
+      }
+    ],
+    "answers": [{
+        "span_start": 105,
+        "span_end": 156,
+        "span_text": "It has its headquarters in Mountain View, California, United States",
+        "input_text": "1998",
+        "turn_id": 1
+      },
+      {
+        "span_start": 36,
+        "span_end": 103,
+        "span_text": "It has its headquarters in Mountain View, California, United States",
+        "input_text": "United States",
+        "turn_id": 2
+      },
+      {
+        "span_start": 105,
+        "span_end": 156,
+        "span_text": "It was founded by Larry Page and Sergey Brin in 1998",
+        "input_text": "Larry Page and Sergey Brin",
+        "turn_id": 3
+      }
+    ]
+  }]
+}

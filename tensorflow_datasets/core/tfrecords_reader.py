@@ -15,32 +15,34 @@
 
 """Defined Reader and ReadInstruction to read tfrecord files."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import copy
 import functools
 import math
 import os
 import re
+from typing import Any, Callable, Dict, Iterable, List, Sequence, Union
 
 import attr
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import _sharded_files
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import shard_utils
+
+SplitInfo = Any
+
+# Should be: Callable[[Tensor], Nested[Tensor]]
+ParseFn = Callable[[Any], Any]
 
 
 _BUFFER_SIZE = 8<<20  # 8 MiB per file.
 
 _SUB_SPEC_RE = re.compile(r'''
 ^
- (?P<split>\w+)
+ (?P<split>[\w-]+)
  (\[
   ((?P<from>-?\d+)
    (?P<from_pct>%)?)?
@@ -54,18 +56,8 @@ $
 _ADDITION_SEP_RE = re.compile(r'\s*\+\s*')
 
 
-def _default_options():
-  """Returns optimization options to given dataset."""
-  options = tf.data.Options()
-  options.experimental_threading.max_intra_op_parallelism = 1
-  options.experimental_threading.private_threadpool_size = 16
-  options.experimental_optimization.apply_default_optimizations = True
-  options.experimental_optimization.map_fusion = True
-  options.experimental_optimization.map_parallelization = True
-  return options
-
-
-def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
+def _get_dataset_from_filename(filename_skip_take, do_skip, do_take,
+                               file_format):
   """Returns a tf.data.Dataset instance from given (filename, skip, take)."""
   filename, skip, take = (filename_skip_take['filename'],
                           filename_skip_take['skip'],
@@ -74,11 +66,8 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   # Explictly use DatasetV1 for backward compatibility:
   # * isinstance(ds, tf.data.Dataset)
   # * ds.make_one_shot_iterator()
-  ds = tf.compat.v1.data.TFRecordDataset(
-      filename,
-      buffer_size=_BUFFER_SIZE,
-      num_parallel_reads=1,
-      )
+  ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
+      filename, _BUFFER_SIZE)
   if do_skip:
     ds = ds.skip(skip)
   if do_take:
@@ -86,27 +75,20 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   return ds
 
 
-@attr.s(frozen=True)
-class FileInstructions(object):
-  """The file instructions associated with a split ReadInstruction.
-
-  Attributes:
-    num_examples: `int`, The total number of examples
-    file_instructions: List[dict(filename, skip, take)], the files information.
-      The filenames contains the relative path, not absolute.
-      skip/take indicates which example read in the shard: `ds.skip().take()`
-  """
-  num_examples = attr.ib()
-  file_instructions = attr.ib()
-
-
-def make_file_instructions(name, split_infos, instruction):
+def make_file_instructions(
+    name: str,
+    split_infos: Iterable[SplitInfo],
+    instruction: Union['ReadInstruction', str],
+    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
+) -> List[shard_utils.FileInstruction]:
   """Returns instructions of the split dict.
 
   Args:
     name: Name of the dataset.
-    split_infos: `List[SplitInfo]`, Dataset splits information
+    split_infos: Dataset splits information
     instruction: `ReadInstruction` or `str`
+    file_format: Format of the record files in which the dataset
+      will be read/written from.
 
   Returns:
     file_intructions: FileInstructions instance
@@ -126,18 +108,19 @@ def make_file_instructions(name, split_infos, instruction):
       name=name,
       name2shard_lengths=name2shard_lengths,
       absolute_instructions=absolute_instructions,
+      file_format=file_format,
   )
 
 
 def _make_file_instructions_from_absolutes(
-    name,
-    name2shard_lengths,
-    absolute_instructions,
-):
+    name: str,
+    name2shard_lengths: Dict[str, List[int]],
+    absolute_instructions: 'ReadInstruction',
+    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
+) -> List[shard_utils.FileInstruction]:
   """Returns the files instructions from the absolute instructions list."""
   # For each split, return the files instruction (skip/take)
   file_instructions = []
-  num_examples = 0
   for abs_instr in absolute_instructions:
     shard_lengths = name2shard_lengths[abs_instr.splitname]
     if not shard_lengths:
@@ -148,70 +131,94 @@ def _make_file_instructions_from_absolutes(
         dataset_name=name,
         split=abs_instr.splitname,
         num_shards=len(shard_lengths),
-        filetype_suffix='tfrecord')
+        filetype_suffix=file_adapters.ADAPTER_FOR_FORMAT[file_format]
+        .FILE_SUFFIX)
     from_ = 0 if abs_instr.from_ is None else abs_instr.from_
     to = sum(shard_lengths) if abs_instr.to is None else abs_instr.to
-    num_examples += to - from_
-    single_file_instructions = _sharded_files.get_read_instructions(
+    single_file_instructions = shard_utils.get_file_instructions(
         from_, to, filenames, shard_lengths)
     file_instructions.extend(single_file_instructions)
-  return FileInstructions(
-      num_examples=int(num_examples),  # int() due to proto shard_length `long`
-      file_instructions=file_instructions,
-  )
+  return file_instructions
 
 
 def _read_files(
-    files,
-    parse_fn,
-    read_config,
-    shuffle_files,
-    num_examples):
+    file_instructions: Sequence[shard_utils.FileInstruction],
+    parse_fn: ParseFn,
+    read_config: read_config_lib.ReadConfig,
+    shuffle_files: bool,
+    file_format: file_adapters.FileFormat,
+) -> tf.data.Dataset:
   """Returns tf.data.Dataset for given file instructions.
 
   Args:
-    files: List[dict(filename, skip, take)], the files information.
-      The filenames contain the absolute path, not relative.
-      skip/take indicates which example read in the shard: `ds.skip().take()`
-    parse_fn (callable): function used to parse each record.
-    read_config: `tfds.ReadConfig`, Additional options to configure the
+    file_instructions: the information on the files to read including
+      `ds.skip().take()`
+    parse_fn: function used to parse each record.
+    read_config: Additional options to configure the
       input pipeline (e.g. seed, num parallel reads,...).
-    shuffle_files (bool): Defaults to False. True to shuffle input files.
-    num_examples: `int`, if defined, set the cardinality on the
-      tf.data.Dataset instance with `tf.data.experimental.with_cardinality`.
+    shuffle_files: Defaults to False. True to shuffle input files.
+    file_format: Format of the record files in which the dataset
+      will be read/written from.
+
+  Returns:
+    The dataset object.
   """
   # Eventually apply a transformation to the instruction function.
   # This allow the user to have direct control over the interleave order.
   if read_config.experimental_interleave_sort_fn is not None:
-    files = read_config.experimental_interleave_sort_fn(files)
+    file_instructions = read_config.experimental_interleave_sort_fn(
+        file_instructions)
 
-  do_skip = any(f['skip'] > 0 for f in files)
-  do_take = any(f['take'] > -1 for f in files)
+  do_skip = any(f.skip > 0 for f in file_instructions)
+  do_take = any(f.take > -1 for f in file_instructions)
 
   # Transpose the list[dict] into dict[list]
   tensor_inputs = {
       # skip/take need to be converted to int64 explicitly
       k: list(vals) if k == 'filename' else np.array(vals, dtype=np.int64)
-      for k, vals in utils.zip_dict(*files)
+      for k, vals in utils.zip_dict(*[f.asdict() for f in file_instructions])
   }
 
-  parallel_reads = read_config.interleave_parallel_reads
+  cycle_length = read_config.interleave_cycle_length
   block_length = read_config.interleave_block_length
 
-  instruction_ds = tf.compat.v1.data.Dataset.from_tensor_slices(tensor_inputs)
+  instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
+
+  # On distributed environments, we can shard per-file if a
+  # `tf.distribute.InputContext` object is provided (e.g. from
+  # `experimental_distribute_datasets_from_function`)
+  if (read_config.input_context and
+      read_config.input_context.num_input_pipelines > 1):
+    if len(file_instructions) < read_config.input_context.num_input_pipelines:
+      raise ValueError(
+          'Cannot shard the pipeline with given `input_context`.'
+          '`num_shards={}` but `num_input_pipelines={}`. '
+          'This means that some workers won\'t read any data. '
+          'To shard the data, you may want to use the subsplit API '
+          'instead: https://www.tensorflow.org/datasets/splits'.format(
+              len(file_instructions),
+              read_config.input_context.num_input_pipelines)
+      )
+    instruction_ds = instruction_ds.shard(
+        num_shards=read_config.input_context.num_input_pipelines,
+        index=read_config.input_context.input_pipeline_id,
+    )
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
     instruction_ds = instruction_ds.shuffle(
-        len(tensor_inputs['filename']),
+        len(file_instructions),
         seed=read_config.shuffle_seed,
         reshuffle_each_iteration=read_config.shuffle_reshuffle_each_iteration,
     )
 
   ds = instruction_ds.interleave(
-      functools.partial(_get_dataset_from_filename,
-                        do_skip=do_skip, do_take=do_take),
-      cycle_length=parallel_reads,
+      functools.partial(
+          _get_dataset_from_filename,
+          do_skip=do_skip,
+          do_take=do_take,
+          file_format=file_format),
+      cycle_length=cycle_length,
       block_length=block_length,
       num_parallel_calls=tf.data.experimental.AUTOTUNE,
   )
@@ -219,12 +226,13 @@ def _read_files(
   # If the number of examples read in the tf-record is known, we forward
   # the information to the tf.data.Dataset object.
   # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
-  if num_examples and hasattr(tf.data.experimental, 'assert_cardinality'):
-    ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
+  if (not read_config.input_context and  # TODO(epot): Restore cardinality
+      hasattr(tf.data.experimental, 'assert_cardinality')):
+    # TODO(b/154963426): Replace by per-shard cardinality (warning if
+    # `experimental_interleave_sort_fn` is set).
+    cardinality = sum(f.num_examples for f in file_instructions)
+    ds = ds.apply(tf.data.experimental.assert_cardinality(cardinality))
 
-  # TODO(tfds): Should merge the default options with read_config to allow users
-  # to overwrite the default options.
-  ds = ds.with_options(_default_options())  # Default performance options
   ds = ds.with_options(read_config.options)  # Additional users options
 
   # TODO(pierrot): `parse_example` uses
@@ -240,15 +248,21 @@ class Reader(object):
   This class should not typically be exposed to the TFDS user.
   """
 
-  def __init__(self, path, example_specs):
+  def __init__(self,
+               path,
+               example_specs,
+               file_format=file_adapters.DEFAULT_FILE_FORMAT):
     """Initializes Reader.
 
     Args:
       path (str): path where tfrecords are stored.
       example_specs: spec to build ExampleParser.
+      file_format: file_adapters.FileFormat, format of the record files in
+        which the dataset will be read/written from.
     """
     self._path = path
     self._parser = example_parser.ExampleParser(example_specs)
+    self._file_format = file_format
 
   def read(
       self,
@@ -275,59 +289,58 @@ class Reader(object):
        corresponding to given instructions param shape.
     """
     def _read_instruction_to_ds(instruction):
-      file_instructions = make_file_instructions(name, split_infos, instruction)
-      files = file_instructions.file_instructions
-      if not files:
-        msg = 'Instruction "%s" corresponds to no data!' % instruction
-        raise AssertionError(msg)
+      file_instructions = make_file_instructions(
+          name, split_infos, instruction, file_format=self._file_format)
       return self.read_files(
-          files=tuple(files),
+          file_instructions,
           read_config=read_config,
           shuffle_files=shuffle_files,
-          num_examples=file_instructions.num_examples,
       )
 
     return tf.nest.map_structure(_read_instruction_to_ds, instructions)
 
   def read_files(
       self,
-      files,
-      read_config,
-      shuffle_files,
-      num_examples=None,
-  ):
+      file_instructions: Sequence[shard_utils.FileInstruction],
+      read_config: read_config_lib.ReadConfig,
+      shuffle_files: bool,
+  ) -> tf.data.Dataset:
     """Returns single tf.data.Dataset instance for the set of file instructions.
 
     Args:
-      files: List[dict(filename, skip, take)], the files information.
+      file_instructions: The files information.
         The filenames contains the relative path, not absolute.
         skip/take indicates which example read in the shard: `ds.skip().take()`
-      read_config: `tfds.ReadConfig`, the input pipeline options
-      shuffle_files (bool): If True, input files are shuffled before being read.
-      num_examples: `int`, if defined, set the cardinality on the
-        tf.data.Dataset instance with `tf.data.experimental.with_cardinality`.
+      read_config: The input pipeline options
+      shuffle_files: If True, input files are shuffled before being read.
 
     Returns:
        a tf.data.Dataset instance.
     """
+    if not file_instructions:
+      msg = 'Instruction {} corresponds to no data!'.format(
+          file_instructions)
+      raise AssertionError(msg)
+
     # Prepend path to filename
-    files = copy.deepcopy(files)
-    for f in files:
-      f.update(filename=os.path.join(self._path, f['filename']))
-    dataset = _read_files(
-        files=files,
+    file_instructions = [
+        f.replace(filename=os.path.join(self._path, f.filename))
+        for f in file_instructions
+    ]
+    ds = _read_files(
+        file_instructions=file_instructions,
         read_config=read_config,
         parse_fn=self._parser.parse_example,
         shuffle_files=shuffle_files,
-        num_examples=num_examples,
+        file_format=self._file_format,
     )
-    return dataset
+    return ds
 
 
 @attr.s(frozen=True)
 class _AbsoluteInstruction(object):
   """A machine friendly slice: defined absolute positive boundaries."""
-  splitname = attr.ib()  # type: Text
+  splitname = attr.ib()  # : str
   from_ = attr.ib()  # uint (starting index).
   to = attr.ib()  # uint (ending index).
 
@@ -335,12 +348,14 @@ class _AbsoluteInstruction(object):
 @attr.s(frozen=True)
 class _RelativeInstruction(object):
   """Represents a single parsed slicing instruction, can use % and negatives."""
-  splitname = attr.ib()  # type: Text
-  from_ = attr.ib()  # int (starting index) or None if no lower boundary.
-  to = attr.ib()  # int (ending index) or None if no upper boundary.
-  unit = attr.ib(validator=attr.validators.in_(['%', 'abs']))  # str
-  rounding = attr.ib(validator=attr.validators.in_([
-      'closest', 'pct1_dropremainder']))  # str
+  splitname = attr.ib()  # : str
+  # starting index, or None if no lower boundary.
+  from_ = attr.ib()  # : Optional[int]
+  # ending index, or None if no upper boundary.
+  to = attr.ib()  # : Optional[int]
+  unit = attr.ib(validator=attr.validators.in_(['%', 'abs']))  # : str
+  rounding = attr.ib(validator=attr.validators.in_([  # : str
+      'closest', 'pct1_dropremainder']))
 
   @from_.validator
   @to.validator
@@ -417,32 +432,40 @@ def _rel_to_abs_instr(rel_instr, name2len):
 class ReadInstruction(object):
   """Reading instruction for a dataset.
 
+  Note: Due to the shards being read in parallel, order isn't guaranteed to be
+  consistent between sub-splits. In other words reading `test[0:100]` followed
+  by `test[100:200]` may yield examples in a different order than reading
+  `test[:200]`.
+
   Examples of usage:
 
   ```
   # The following lines are equivalent:
   ds = tfds.load('mnist', split='test[:33%]')
-  ds = tfds.load('mnist', split=ReadInstruction.from_spec('test[:33%]'))
-  ds = tfds.load('mnist', split=ReadInstruction('test', to=33, unit='%'))
-  ds = tfds.load('mnist', split=ReadInstruction(
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
+      'test[:33%]'))
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
+      'test', to=33, unit='%'))
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
       'test', from_=0, to=33, unit='%'))
 
   # The following lines are equivalent:
   ds = tfds.load('mnist', split='test[:33%]+train[1:-1]')
-  ds = tfds.load('mnist', split=ReadInstruction.from_spec(
+  ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
       'test[:33%]+train[1:-1]'))
   ds = tfds.load('mnist', split=(
-      ReadInstruction.('test', to=33, unit='%') +
-      ReadInstruction.('train', from_=1, to=-1, unit='abs')))
+      tfds.core.ReadInstruction('test', to=33, unit='%') +
+      tfds.core.ReadInstruction('train', from_=1, to=-1, unit='abs')))
 
   # 10-fold validation:
   tests = tfds.load(
       'mnist',
-      [ReadInstruction('train', from_=k, to=k+10, unit='%')
+      [tfds.core.ReadInstruction('train', from_=k, to=k+10, unit='%')
        for k in range(0, 100, 10)])
   trains = tfds.load(
       'mnist',
-      [RI('train', to=k, unit='%') + RI('train', from_=k+10, unit='%')
+      [tfds.core.ReadInstruction('train', to=k, unit='%') +
+       tfds.core.ReadInstruction('train', from_=k+10, unit='%')
        for k in range(0, 100, 10)])
   ```
 
@@ -460,9 +483,15 @@ class ReadInstruction(object):
     result._init(relative_instructions)  # pylint: disable=protected-access
     return result
 
-  @api_utils.disallow_positional_args(allowed=['split_name'])
-  def __init__(self, split_name, rounding='closest', from_=None, to=None,
-               unit=None):
+  def __init__(
+      self,
+      split_name,
+      *,
+      rounding='closest',
+      from_=None,
+      to=None,
+      unit=None,
+  ):
     """Initialize ReadInstruction.
 
     Args:
@@ -486,6 +515,10 @@ class ReadInstruction(object):
         '%': to set the slicing unit as percents of the split size.
         'abs': to set the slicing unit as absolute numbers.
     """
+    # Unit is optional only if the full dataset is read, otherwise, will
+    # `_RelativeInstruction` validator will fail.
+    if from_ is None and to is None and unit is None:
+      unit = '%'
     # This constructor is not always called. See factory method
     # `_read_instruction_from_relative_instructions`. Common init instructions
     # MUST be placed in the _init method.
@@ -509,7 +542,7 @@ class ReadInstruction(object):
     Returns:
       ReadInstruction instance.
     """
-    spec = str(spec)  # Need to convert to str in case of NamedSplit instance.
+    spec = str(spec)  # Need to convert to str in case of `Split` instance.
     subs = _ADDITION_SEP_RE.split(spec)
     if not subs:
       raise AssertionError('No instructions could be built out of %s' % spec)

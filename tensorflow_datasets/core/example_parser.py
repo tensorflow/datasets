@@ -15,10 +15,6 @@
 
 """To deserialize bytes (Example) to tf.Example."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 
@@ -158,7 +154,7 @@ def _to_tf_example_spec(tensor_info):
   elif tensor_info.sequence_rank > 1:  # RaggedTensor
     # Decoding here should match encoding from `_add_ragged_fields` in
     # `example_serializer.py`
-    tf_specs = {
+    tf_specs = {  # pylint: disable=g-complex-comprehension
         "ragged_row_lengths_{}".format(k): tf.io.FixedLenSequenceFeature(  # pylint: disable=g-complex-comprehension
             shape=(),
             dtype=tf.int64,

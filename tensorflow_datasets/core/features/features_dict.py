@@ -16,16 +16,29 @@
 """FeatureDict: Main feature connector container.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
+
+
+class _DictGetCounter(object):
+  """Wraps dict.get and counts successful key accesses."""
+
+  def __init__(self, d):
+    self.count = 0
+    self.wrapped_mapping = d
+
+  def get(self, key: str):
+    if self.wrapped_mapping and key in self.wrapped_mapping:
+      self.count += 1
+      return self.wrapped_mapping[key]
+    return None
 
 
 class FeaturesDict(top_level_feature.TopLevelFeature):
@@ -161,6 +174,19 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
         for feature_key, feature in self._feature_dict.items()
     }
 
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'FeaturesDict':
+    return cls({
+        k: feature_lib.FeatureConnector.from_json(v)
+        for k, v in value.items()
+    })
+
+  def to_json_content(self) -> Json:
+    return {
+        feature_key: feature.to_json()
+        for feature_key, feature in self._feature_dict.items()
+    }
+
   def encode_example(self, example_dict):
     """See base class for details."""
     return {
@@ -176,18 +202,12 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
           'Error while flattening dict: FeaturesDict received a non dict item: '
           '{}'.format(x))
 
-    cache = {'counter': 0}  # Could use nonlocal in Python
-    def _get(k):
-      if x and k in x:
-        cache['counter'] += 1
-        return x[k]
-      return None
-
+    dict_counter = _DictGetCounter(x)
     out = []
     for k, f in sorted(self.items()):
-      out.extend(f._flatten(_get(k)))  # pylint: disable=protected-access
+      out.extend(f._flatten(dict_counter.get(k)))  # pylint: disable=protected-access
 
-    if x and cache['counter'] != len(x):
+    if x and dict_counter.count != len(x):
       raise ValueError(
           'Error while flattening dict: Not all dict items have been consumed, '
           'this means that the provided dict structure does not match the '

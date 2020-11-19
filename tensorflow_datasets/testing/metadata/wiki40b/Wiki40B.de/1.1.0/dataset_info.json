@@ -1,0 +1,105 @@
+{
+  "citation": "\n",
+  "description": "\nClean-up text for 40+ Wikipedia languages editions of pages\ncorrespond to entities. The datasets have train/dev/test splits per language.\nThe dataset is cleaned up by page filtering to remove disambiguation pages,\nredirect pages, deleted pages, and non-entity pages. Each example contains the\nwikidata id of the entity, and the full Wikipedia article after page processing\nthat removes non-content sections and structured objects.\n",
+  "location": {
+    "urls": [
+      "https://research.google/pubs/pub49029/"
+    ]
+  },
+  "name": "wiki40b",
+  "redistributionInfo": {
+    "license": "\nThis work is licensed under the Creative Commons Attribution-ShareAlike\n3.0 Unported License. To view a copy of this license, visit\nhttp://creativecommons.org/licenses/by-sa/3.0/ or send a letter to\nCreative Commons, PO Box 1866, Mountain View, CA 94042, USA.\n"
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "257183121",
+      "numShards": "2",
+      "shardLengths": [
+        "43297",
+        "43297"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "4614160779",
+      "numShards": "64",
+      "shardLengths": [
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295",
+        "24296",
+        "24295"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "257270158",
+      "numShards": "2",
+      "shardLengths": [
+        "43034",
+        "43034"
+      ]
+    }
+  ],
+  "version": "1.1.0"
+}

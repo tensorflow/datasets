@@ -15,10 +15,6 @@
 
 """Tests for libritts dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.audio import libritts
 
@@ -34,14 +30,14 @@ class LibriTTSTest(testing.DatasetBuilderTestCase):
       "dev_clean": 2,
       "dev_other": 2,
   }
-  DL_EXTRACT_RESULT = {
-      "train_clean100": "train-clean-100",
-      "train_clean360": "train-clean-360",
-      "train_other500": "train-other-500",
-      "test_clean": "test-clean",
-      "test_other": "test-other",
-      "dev_clean": "dev-clean",
-      "dev_other": "dev-other",
+  DL_DOWNLOAD_RESULT = {
+      "train_clean100": "train-clean-100.tar.gz",
+      "train_clean360": "train-clean-360.tar.gz",
+      "train_other500": "train-other-500.tar.gz",
+      "test_clean": "test-clean.tar.gz",
+      "test_other": "test-other.tar.gz",
+      "dev_clean": "dev-clean.tar.gz",
+      "dev_other": "dev-other.tar.gz",
   }
 
 

@@ -1,0 +1,1724 @@
+{
+  "citation": "@article{10.1145/219717.219748,\nauthor = {Miller, George A.},\ntitle = {WordNet: A Lexical Database for English},\nyear = {1995},\nissue_date = {Nov. 1995},\npublisher = {Association for Computing Machinery},\naddress = {New York, NY, USA},\nvolume = {38},\nnumber = {11},\nissn = {0001-0782},\nurl = {https://doi.org/10.1145/219717.219748},\ndoi = {10.1145/219717.219748},\njournal = {Commun. ACM},\nmonth = nov,\npages = {39--41},\nnumpages = {3}\n}\n\n@inproceedings{dettmers2018conve,\n\tAuthor = {Dettmers, Tim and Pasquale, Minervini and Pontus, Stenetorp and Riedel, Sebastian},\n\tBooktitle = {Proceedings of the 32th AAAI Conference on Artificial Intelligence},\n\tTitle = {Convolutional 2D Knowledge Graph Embeddings},\n\tUrl = {https://arxiv.org/abs/1707.01476},\n\tYear = {2018},\n        pages  = {1811--1818},\n  \tMonth = {February}\n}",
+  "description": "WordNet is a large lexical database of English. Nouns, verbs,\nadjectives and adverbs are grouped into sets of cognitive synonyms (synsets),\neach expressing a distinct concept. Synsets are interlinked by means of\nconceptual-semantic and lexical relations.",
+  "downloadSize": "4186524",
+  "location": {
+    "urls": [
+      "https://wordnet.princeton.edu/"
+    ]
+  },
+  "name": "wordnet",
+  "redistributionInfo": {
+    "license": "WordNet Release 3.0 This software and database is being provided\nto you, the LICENSEE, by Princeton University under the following license. By\nobtaining, using and/or copying this software and database, you agree that you\nhave read, understood, and will comply with these terms and conditions.:\nPermission to use, copy, modify and distribute this software and database and\nits documentation for any purpose and without fee or royalty is hereby granted,\nprovided that you agree to comply with the following copyright notice and\nstatements, including the disclaimer, and that the same appear on ALL copies of\nthe software, database and documentation, including modifications that you make\nfor internal use or for distribution. WordNet 3.0 Copyright 2006 by Princeton\nUniversity. All rights reserved. THIS SOFTWARE AND DATABASE IS PROVIDED \"AS IS\"\nAND PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR\nIMPLIED. BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON UNIVERSITY MAKES NO\nREPRESENTATIONS OR WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY PARTICULAR\nPURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL\nNOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.\nThe name of Princeton University or Princeton may not be used in advertising or\npublicity pertaining to distribution of the software and/or database. Title to\ncopyright in this software, database and any associated documentation shall at\nall times remain with Princeton University and LICENSEE agrees to preserve same."
+  },
+  "schema": {
+    "feature": [
+      {
+        "intDomain": {},
+        "name": "lhs",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "relation",
+        "name": "relation",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "intDomain": {},
+        "name": "rhs",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "relation",
+        "value": [
+          "_also_see",
+          "_derivationally_related_form",
+          "_has_part",
+          "_hypernym",
+          "_instance_hypernym",
+          "_member_meronym",
+          "_member_of_domain_region",
+          "_member_of_domain_usage",
+          "_synset_domain_topic_of",
+          "_verb_group"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "247942",
+      "shardLengths": [
+        "3134"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "lhs"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 8.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3134",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3134"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "08860123",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "06845599",
+                    "lowRank": "1",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "08766988",
+                    "lowRank": "2",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "12423565",
+                    "lowRank": "3",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "11911591",
+                    "lowRank": "4",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "12501745",
+                    "lowRank": "5",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "12039743",
+                    "lowRank": "6",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "09044862",
+                    "lowRank": "7",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "06295235",
+                    "lowRank": "8",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "11867525",
+                    "lowRank": "9",
+                    "sampleCount": 3.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 17.0,
+                  "value": "08860123"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "06845599"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "08766988"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "12423565"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "11911591"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "12501745"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "12039743"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "09044862"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "06295235"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "11867525"
+                }
+              ],
+              "unique": "2958"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "relation"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 17.113592,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3134",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3134"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "_hypernym",
+                    "sampleCount": 1251.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "_derivationally_related_form",
+                    "lowRank": "1",
+                    "sampleCount": 1074.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "_member_meronym",
+                    "lowRank": "2",
+                    "sampleCount": 253.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "_has_part",
+                    "lowRank": "3",
+                    "sampleCount": 172.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "_instance_hypernym",
+                    "lowRank": "4",
+                    "sampleCount": 122.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "_synset_domain_topic_of",
+                    "lowRank": "5",
+                    "sampleCount": 114.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "_also_see",
+                    "lowRank": "6",
+                    "sampleCount": 56.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "_verb_group",
+                    "lowRank": "7",
+                    "sampleCount": 39.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "_member_of_domain_region",
+                    "lowRank": "8",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "_member_of_domain_usage",
+                    "lowRank": "9",
+                    "sampleCount": 24.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1251.0,
+                  "value": "_hypernym"
+                },
+                {
+                  "frequency": 1074.0,
+                  "value": "_derivationally_related_form"
+                },
+                {
+                  "frequency": 253.0,
+                  "value": "_member_meronym"
+                },
+                {
+                  "frequency": 172.0,
+                  "value": "_has_part"
+                },
+                {
+                  "frequency": 122.0,
+                  "value": "_instance_hypernym"
+                },
+                {
+                  "frequency": 114.0,
+                  "value": "_synset_domain_topic_of"
+                },
+                {
+                  "frequency": 56.0,
+                  "value": "_also_see"
+                },
+                {
+                  "frequency": 39.0,
+                  "value": "_verb_group"
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "_member_of_domain_region"
+                },
+                {
+                  "frequency": 24.0,
+                  "value": "_member_of_domain_usage"
+                }
+              ],
+              "unique": "11"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "rhs"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 8.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3134",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 313.4
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3134"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "08524735",
+                    "sampleCount": 24.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "00007846",
+                    "lowRank": "1",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "00126264",
+                    "lowRank": "2",
+                    "sampleCount": 13.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "11579418",
+                    "lowRank": "3",
+                    "sampleCount": 12.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "08199025",
+                    "lowRank": "4",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "11585340",
+                    "lowRank": "5",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "08441203",
+                    "lowRank": "6",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "01864707",
+                    "lowRank": "7",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "01759182",
+                    "lowRank": "8",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "13112664",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 24.0,
+                  "value": "08524735"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": "00007846"
+                },
+                {
+                  "frequency": 13.0,
+                  "value": "00126264"
+                },
+                {
+                  "frequency": 12.0,
+                  "value": "11579418"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "08199025"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "11585340"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "08441203"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "01864707"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "01759182"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "13112664"
+                }
+              ],
+              "unique": "2619"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "3134"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "6869282",
+      "shardLengths": [
+        "86835"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "lhs"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 8.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "86835",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "86835"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "08860123",
+                    "sampleCount": 462.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "06845599",
+                    "lowRank": "1",
+                    "sampleCount": 230.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "11911591",
+                    "lowRank": "2",
+                    "sampleCount": 163.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "09044862",
+                    "lowRank": "3",
+                    "sampleCount": 140.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "06295235",
+                    "lowRank": "4",
+                    "sampleCount": 115.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "07157273",
+                    "lowRank": "5",
+                    "sampleCount": 79.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "12501745",
+                    "lowRank": "6",
+                    "sampleCount": 77.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "12039743",
+                    "lowRank": "7",
+                    "sampleCount": 72.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "08766988",
+                    "lowRank": "8",
+                    "sampleCount": 64.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "08723006",
+                    "lowRank": "9",
+                    "sampleCount": 64.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 462.0,
+                  "value": "08860123"
+                },
+                {
+                  "frequency": 230.0,
+                  "value": "06845599"
+                },
+                {
+                  "frequency": 163.0,
+                  "value": "11911591"
+                },
+                {
+                  "frequency": 140.0,
+                  "value": "09044862"
+                },
+                {
+                  "frequency": 115.0,
+                  "value": "06295235"
+                },
+                {
+                  "frequency": 79.0,
+                  "value": "07157273"
+                },
+                {
+                  "frequency": 77.0,
+                  "value": "12501745"
+                },
+                {
+                  "frequency": 72.0,
+                  "value": "12039743"
+                },
+                {
+                  "frequency": 64.0,
+                  "value": "08766988"
+                },
+                {
+                  "frequency": 64.0,
+                  "value": "08723006"
+                }
+              ],
+              "unique": "39610"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "relation"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 17.107296,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "86835",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "86835"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "_hypernym",
+                    "sampleCount": 34796.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "_derivationally_related_form",
+                    "lowRank": "1",
+                    "sampleCount": 29715.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "_member_meronym",
+                    "lowRank": "2",
+                    "sampleCount": 7402.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "_has_part",
+                    "lowRank": "3",
+                    "sampleCount": 4816.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "_synset_domain_topic_of",
+                    "lowRank": "4",
+                    "sampleCount": 3116.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "_instance_hypernym",
+                    "lowRank": "5",
+                    "sampleCount": 2921.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "_also_see",
+                    "lowRank": "6",
+                    "sampleCount": 1299.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "_verb_group",
+                    "lowRank": "7",
+                    "sampleCount": 1138.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "_member_of_domain_region",
+                    "lowRank": "8",
+                    "sampleCount": 923.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "_member_of_domain_usage",
+                    "lowRank": "9",
+                    "sampleCount": 629.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 34796.0,
+                  "value": "_hypernym"
+                },
+                {
+                  "frequency": 29715.0,
+                  "value": "_derivationally_related_form"
+                },
+                {
+                  "frequency": 7402.0,
+                  "value": "_member_meronym"
+                },
+                {
+                  "frequency": 4816.0,
+                  "value": "_has_part"
+                },
+                {
+                  "frequency": 3116.0,
+                  "value": "_synset_domain_topic_of"
+                },
+                {
+                  "frequency": 2921.0,
+                  "value": "_instance_hypernym"
+                },
+                {
+                  "frequency": 1299.0,
+                  "value": "_also_see"
+                },
+                {
+                  "frequency": 1138.0,
+                  "value": "_verb_group"
+                },
+                {
+                  "frequency": 923.0,
+                  "value": "_member_of_domain_region"
+                },
+                {
+                  "frequency": 629.0,
+                  "value": "_member_of_domain_usage"
+                }
+              ],
+              "unique": "11"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "rhs"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 8.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "86835",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 8683.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "86835"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "08524735",
+                    "sampleCount": 476.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "00007846",
+                    "lowRank": "1",
+                    "sampleCount": 368.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "08199025",
+                    "lowRank": "2",
+                    "sampleCount": 341.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "11579418",
+                    "lowRank": "3",
+                    "sampleCount": 286.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "08441203",
+                    "lowRank": "4",
+                    "sampleCount": 284.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "01507175",
+                    "lowRank": "5",
+                    "sampleCount": 277.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "00126264",
+                    "lowRank": "6",
+                    "sampleCount": 252.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "01864707",
+                    "lowRank": "7",
+                    "sampleCount": 250.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "12205694",
+                    "lowRank": "8",
+                    "sampleCount": 233.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "11585340",
+                    "lowRank": "9",
+                    "sampleCount": 233.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 476.0,
+                  "value": "08524735"
+                },
+                {
+                  "frequency": 368.0,
+                  "value": "00007846"
+                },
+                {
+                  "frequency": 341.0,
+                  "value": "08199025"
+                },
+                {
+                  "frequency": 286.0,
+                  "value": "11579418"
+                },
+                {
+                  "frequency": 284.0,
+                  "value": "08441203"
+                },
+                {
+                  "frequency": 277.0,
+                  "value": "01507175"
+                },
+                {
+                  "frequency": 252.0,
+                  "value": "00126264"
+                },
+                {
+                  "frequency": 250.0,
+                  "value": "01864707"
+                },
+                {
+                  "frequency": 233.0,
+                  "value": "12205694"
+                },
+                {
+                  "frequency": 233.0,
+                  "value": "11585340"
+                }
+              ],
+              "unique": "31881"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "86835"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "240877",
+      "shardLengths": [
+        "3034"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "lhs"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 8.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3034",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3034"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "08860123",
+                    "sampleCount": 15.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "11911591",
+                    "lowRank": "1",
+                    "sampleCount": 9.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "06845599",
+                    "lowRank": "2",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "06295235",
+                    "lowRank": "3",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "01312096",
+                    "lowRank": "4",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "09044862",
+                    "lowRank": "5",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "02553196",
+                    "lowRank": "6",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "12992464",
+                    "lowRank": "7",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "12226322",
+                    "lowRank": "8",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "09410928",
+                    "lowRank": "9",
+                    "sampleCount": 3.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 15.0,
+                  "value": "08860123"
+                },
+                {
+                  "frequency": 9.0,
+                  "value": "11911591"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "06845599"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "06295235"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "01312096"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "09044862"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "02553196"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "12992464"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "12226322"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "09410928"
+                }
+              ],
+              "unique": "2851"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "relation"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 17.392551,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3034",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3034"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "_hypernym",
+                    "sampleCount": 1174.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "_derivationally_related_form",
+                    "lowRank": "1",
+                    "sampleCount": 1078.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "_member_meronym",
+                    "lowRank": "2",
+                    "sampleCount": 273.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "_has_part",
+                    "lowRank": "3",
+                    "sampleCount": 154.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "_instance_hypernym",
+                    "lowRank": "4",
+                    "sampleCount": 107.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "_synset_domain_topic_of",
+                    "lowRank": "5",
+                    "sampleCount": 105.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "_verb_group",
+                    "lowRank": "6",
+                    "sampleCount": 43.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "_also_see",
+                    "lowRank": "7",
+                    "sampleCount": 41.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "_member_of_domain_region",
+                    "lowRank": "8",
+                    "sampleCount": 34.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "_member_of_domain_usage",
+                    "lowRank": "9",
+                    "sampleCount": 22.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1174.0,
+                  "value": "_hypernym"
+                },
+                {
+                  "frequency": 1078.0,
+                  "value": "_derivationally_related_form"
+                },
+                {
+                  "frequency": 273.0,
+                  "value": "_member_meronym"
+                },
+                {
+                  "frequency": 154.0,
+                  "value": "_has_part"
+                },
+                {
+                  "frequency": 107.0,
+                  "value": "_instance_hypernym"
+                },
+                {
+                  "frequency": 105.0,
+                  "value": "_synset_domain_topic_of"
+                },
+                {
+                  "frequency": 43.0,
+                  "value": "_verb_group"
+                },
+                {
+                  "frequency": 41.0,
+                  "value": "_also_see"
+                },
+                {
+                  "frequency": 34.0,
+                  "value": "_member_of_domain_region"
+                },
+                {
+                  "frequency": 22.0,
+                  "value": "_member_of_domain_usage"
+                }
+              ],
+              "unique": "11"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "rhs"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 8.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "3034",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 303.4
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "3034"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "00007846",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "08524735",
+                    "lowRank": "1",
+                    "sampleCount": 14.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "12205694",
+                    "lowRank": "2",
+                    "sampleCount": 13.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "08199025",
+                    "lowRank": "3",
+                    "sampleCount": 12.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "11585340",
+                    "lowRank": "4",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "01507175",
+                    "lowRank": "5",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "08441203",
+                    "lowRank": "6",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "01342529",
+                    "lowRank": "7",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "00126264",
+                    "lowRank": "8",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "00759694",
+                    "lowRank": "9",
+                    "sampleCount": 8.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 19.0,
+                  "value": "00007846"
+                },
+                {
+                  "frequency": 14.0,
+                  "value": "08524735"
+                },
+                {
+                  "frequency": 13.0,
+                  "value": "12205694"
+                },
+                {
+                  "frequency": 12.0,
+                  "value": "08199025"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "11585340"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "01507175"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "08441203"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "01342529"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "00126264"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "00759694"
+                }
+              ],
+              "unique": "2575"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "3034"
+      }
+    }
+  ],
+  "version": "0.1.0"
+}

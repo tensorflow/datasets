@@ -1,0 +1,25 @@
+{
+  "citation": "@ONLINE {YesNo,\n    author = \"Created for the Kaldi Project\",\n    title  = \"YesNo\",\n    url    = \"http://www.openslr.org/1/\"\n}",
+  "description": "Sixty recordings of one individual saying yes or no in Hebrew; each recording is eight words long.\n\nThe main point of the dataset is to provide an easy and fast way to test out the Kaldi scripts for free.\n\nThe archive \"waves_yesno.tar.gz\" contains 60 .wav files, sampled at 8 kHz.\nAll were recorded by the same male speaker, in Hebrew.\nIn each file, the individual says 8 words; each word is either the Hebrew for \"yes\" or \"no\",\nso each file is a random sequence of 8 yes-es or noes.\nThere is no separate transcription provided; the sequence is encoded in the filename, with 1 for yes and 0 for no.",
+  "downloadSize": "4703754",
+  "location": {
+    "urls": [
+      "https://www.openslr.org/1/"
+    ]
+  },
+  "name": "yes_no",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "17064693",
+      "shardLengths": [
+        "60"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "audio",
+    "output": "label"
+  },
+  "version": "1.0.0"
+}

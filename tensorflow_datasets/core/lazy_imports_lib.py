@@ -15,10 +15,6 @@
 
 """Lazy imports for heavy dependencies."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import importlib
 
 from tensorflow_datasets.core.utils import py_utils as utils
@@ -29,12 +25,12 @@ def _try_import(module_name):
   try:
     mod = importlib.import_module(module_name)
     return mod
-  except ImportError:
+  except ImportError as e:
     err_msg = ("Failed importing {name}. This likely means that the dataset "
                "requires additional dependencies that have to be "
                "manually installed (usually with `pip install {name}`). See "
                "setup.py extras_require.").format(name=module_name)
-    utils.reraise(suffix=err_msg)
+    utils.reraise(e, suffix=err_msg)
 
 
 class LazyImporter(object):
@@ -52,6 +48,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def bs4(cls):
+    return _try_import("bs4")
+
+  @utils.classproperty
+  @classmethod
   def crepe(cls):
     return _try_import("crepe")
 
@@ -59,6 +60,16 @@ class LazyImporter(object):
   @classmethod
   def cv2(cls):
     return _try_import("cv2")  # pylint: disable=unreachable
+
+  @utils.classproperty
+  @classmethod
+  def gcld3(cls):
+    return _try_import("gcld3")  # pylint: disable=unreachable
+
+  @utils.classproperty
+  @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
 
   @utils.classproperty
   @classmethod
@@ -72,7 +83,13 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def lxml(cls):
+    return _try_import("lxml")
+
+  @utils.classproperty
+  @classmethod
   def matplotlib(cls):
+    _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
 
   @utils.classproperty
@@ -112,6 +129,7 @@ class LazyImporter(object):
   @classmethod
   def scipy(cls):
     _try_import("scipy.io")
+    _try_import("scipy.io.wavfile")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 
@@ -120,8 +138,21 @@ class LazyImporter(object):
   def skimage(cls):
     _try_import("skimage.color")
     _try_import("skimage.filters")
-    _try_import("skimage.external.tifffile")
+    try:
+      _try_import("skimage.external.tifffile")
+    except ImportError:
+      pass
     return _try_import("skimage")
+
+  @utils.classproperty
+  @classmethod
+  def tifffile(cls):
+    return _try_import("tifffile")
+
+  @utils.classproperty
+  @classmethod
+  def tensorflow_data_validation(cls):
+    return _try_import("tensorflow_data_validation")
 
   @utils.classproperty
   @classmethod

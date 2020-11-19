@@ -1,0 +1,7 @@
+14854262	__stool_NN_2	solid excretory product evacuated from the bowels
+00590383	__chieftainship_NN_1	the position of chieftain
+08769179	__saxony_NN_1	an area in Germany around the upper Elbe river; the original home of the Saxons
+02338145	__ondatra_zibethica_NN_1	beaver-like aquatic rodent of North America with dark glossy brown fur
+01990168	__founder_VB_2	sink below the surface
+11812094	__rose_campion_NN_1	an old cottage garden plant of southeastern Europe widely cultivated for its attractive white woolly foliage and showy crimson flowers
+07491708	__enjoyment_NN_1	the pleasure felt when having a good time

@@ -19,23 +19,20 @@ As used for the challenges @ NTIRE (CVPR 2017 and CVPR 2018)
 and @ PIRM (ECCV 2018)
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os.path
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-_CITATION = """@InProceedings{Ignatov_2018_ECCV_Workshops,
-author = {Ignatov, Andrey and Timofte, Radu and others},
-title = {PIRM challenge on perceptual image enhancement on smartphones: report},
-booktitle = {European Conference on Computer Vision (ECCV) Workshops},
-url = "http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf",
-month = {January},
-year = {2019}
-}
+_CITATION = """
+@InProceedings{Agustsson_2017_CVPR_Workshops,
+	author = {Agustsson, Eirikur and Timofte, Radu},
+	title = {NTIRE 2017 Challenge on Single Image Super-Resolution: Dataset and Study},
+	booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    url = "http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf",
+	month = {July},
+	year = {2017}
+} 
 """
 
 _DESCRIPTION = """

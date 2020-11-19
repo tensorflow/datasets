@@ -5,6 +5,21 @@ datasets as `tf.data.Dataset`s, so the advice from the
 [`tf.data` guide](https://www.tensorflow.org/guide/data_performance#optimize_performance)
 still applies.
 
+## Benchmark datasets
+
+Use `tfds.core.benchmark(ds)` to benchmark any `tf.data.Dataset` object.
+
+Make sure to indicate the `batch_size=` to normalize the results (e.g. 100
+iter/sec -> 3200 ex/sec).
+
+```python
+ds = tfds.load('mnist', split='train').batch(32).prefetch()
+# Display some benchmark statistics
+tfds.core.benchmark(ds, batch_size=32)
+# Second iteration is much faster, due to auto-caching
+tfds.core.benchmark(ds, batch_size=32)
+```
+
 ## Small datasets (< GB)
 
 All TFDS datasets store the data on disk in the
@@ -103,6 +118,34 @@ which may give a slight performance boost. To get deterministic shuffling, it is
 possible to opt-out of this feature with `tfds.ReadConfig`: either by setting
 `read_config.shuffle_seed` or overwriting
 `read_config.options.experimental_deterministic`.
+
+### Auto-shard your data across workers
+
+When training on multiple workers, you can use the `input_context` argument of
+`tfds.ReadConfig`, so each worker will read a subset of the data.
+
+```python
+input_context = tf.distribute.InputContext(
+    input_pipeline_id=1,  # Worker id
+    num_input_pipelines=4,  # Total number of workers
+)
+read_config = tfds.ReadConfig(
+    input_context=input_context,
+)
+ds = tfds.load('dataset', split='train', read_config=read_config)
+```
+
+This is complementary to the subsplit API. First the subplit API is applied (
+`train[:50%]` is converted into a list of files to read), then a `ds.shard()` op
+is applied on those files. Example: when using `train[:50%]` with
+`num_input_pipelines=2`, each of the 2 worker will read 1/4 of the data.
+
+When `shuffle_files=True`, files are shuffled within one worker, but not across
+workers. Each worker will read the same subset of files between epochs.
+
+Note: When using `tf.distribute.Strategy`, the `input_context` can be
+automatically created with
+[experimental_distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy?version=nightly#experimental_distribute_datasets_from_function)
 
 ### Faster image decoding
 

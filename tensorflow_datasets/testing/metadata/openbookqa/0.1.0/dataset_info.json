@@ -1,0 +1,39 @@
+{
+  "citation": "@article{mihaylov2018can,\n  title={Can a suit of armor conduct electricity? a new dataset for open book question answering},\n  author={Mihaylov, Todor and Clark, Peter and Khot, Tushar and Sabharwal, Ashish},\n  journal={arXiv preprint arXiv:1809.02789},\n  year={2018}\n}",
+  "description": "The dataset contains 5,957 4-way multiple choice questions. Additionally, they\nprovide 5,167 crowd-sourced common knowledge facts, and an expanded version of\nthe train/dev/test questions where each question is associated with its\noriginating core fact, a human accuracy score, a clarity score, and an\nanonymized crowd-worker ID.",
+  "downloadSize": "1446098",
+  "location": {
+    "urls": [
+      "https://leaderboard.allenai.org/open_book_qa/submissions/get-started"
+    ]
+  },
+  "name": "openbookqa",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "212114",
+      "shardLengths": [
+        "500"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "2089153",
+      "shardLengths": [
+        "4957"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "217315",
+      "shardLengths": [
+        "500"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "question",
+    "output": "answerKey"
+  },
+  "version": "0.1.0"
+}

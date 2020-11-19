@@ -15,10 +15,6 @@
 
 """PASCAL VOC datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import xml.etree.ElementTree
 
@@ -33,6 +29,7 @@ _VOC_CITATION = """\
 	title = "The {{PASCAL}} {{V}}isual {{O}}bject {{C}}lasses {{C}}hallenge {year} {{(VOC{year})}} {{R}}esults",
 	howpublished = "http://www.pascal-network.org/challenges/VOC/voc{year}/workshop/index.html"}}
 """
+
 _SBD_CITATION = """\
 @InProceedings{{BharathICCV2011,
     author = "Bharath Hariharan and Pablo Arbelaez and Lubomir Bourdev and Subhransu Maji and Jitendra Malik",
@@ -41,23 +38,38 @@ _SBD_CITATION = """\
     year = "2011"}}
 """
 
-_VOC_DETECTION_DESCRIPTION = """\
-This dataset contains the data from the PASCAL Visual Object Classes Challenge
-{year}, a.k.a. VOC{year}, corresponding to the Classification and Detection
-competitions.
-A total of {num_images} images are included in this dataset, where each image
-contains a set of objects, out of 20 different classes, making a total of
-{num_objects} annotated objects.
+_VOC_DESCRIPTION = """\
+This dataset contains the data from the PASCAL Visual Object Classes Challenge,
+corresponding to the Classification and Detection competitions.
+
 In the Classification competition, the goal is to predict the set of labels
-contained in the image, while in the Detection competition the goal is to
-predict the bounding box and label of each individual object.
+contained in the image.
+
+In the Detection competition, the goal is to predict the bounding box and label
+of each individual object.
+
+In the Segmentation competition, the goal is to predict a pixel-wise
+segmentation mask giving the class of the object visible at each pixel, or
+"background" otherwise.
+
 WARNING: As per the official dataset, the test set of VOC2012 does not contain
 annotations.
 """
 
-_VOC_SEGMENTATION_DESCRIPTION_COMMON = """\
+_VOC_DETECTION_CONFIG_DESCRIPTION = """\
 This dataset contains the data from the PASCAL Visual Object Classes Challenge
+{year}, a.k.a. VOC{year}, corresponding to the Classification and Detection
+competitions.
+
+A total of {num_images} images are included in this dataset, where each image
+contains a set of objects, out of 20 different classes, making a total of
+{num_objects} annotated objects.
+"""
+
+_VOC_SEGMENTATION_CONFIG_DESCRIPTION_COMMON = """\
+This dataset contains the data from the PASCAL Visual Object Classes Challenge,
 {year}, a.k.a. VOC{year}, corresponding to the Segmentation competition.
+
 A total of {num_images} images are included in this dataset, where each image
 has corresponding class and instance masks which label each pixel with a class
 between 1 and 20, or an instance id. Label 0 is reserved and is used to mark the
@@ -65,12 +77,12 @@ background of images. Likewise, label 255 is reserved and is used to label
 regions of the image which should be ignored (the boundaries between
 classes/instances).
 """
-_VOC_SEGMENTATION_DESCRIPTION_2007 = _VOC_SEGMENTATION_DESCRIPTION_COMMON.format(
-    year=2007, num_images=632)
-_VOC_SEGMENTATION_DESCRIPTION_2012 = _VOC_SEGMENTATION_DESCRIPTION_COMMON.format(
-    year=2012, num_images=12031) + \
+_VOC_SEGMENTATION_CONFIG_DESCRIPTION_2007 = _VOC_SEGMENTATION_CONFIG_DESCRIPTION_COMMON.format(
+        year=2007, num_images=632)
+_VOC_SEGMENTATION_CONFIG_DESCRIPTION_2012 = _VOC_SEGMENTATION_CONFIG_DESCRIPTION_COMMON.format(
+        year=2012, num_images=12031) + \
 """\
-The splits "train" amd "validation" are the original training and validation
+The splits "train" and "validation" are the original training and validation
 splits from VOC2012. The VOC2012 test split is not included as it does not have
 publicly available annotations.
 Also included are splits "sbd_train" and "sbd_validation", containing data from
@@ -365,7 +377,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       VocDetectionConfig(
           name="2007",
-          description=_VOC_DETECTION_DESCRIPTION.format(
+          description=_VOC_DETECTION_CONFIG_DESCRIPTION.format(
               year=2007, num_images=9963, num_objects=24640),
           homepage=_VOC_URL.format(year="2007"),
           citation=_VOC_CITATION.format(year="2007"),
@@ -390,7 +402,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       ),
       VocDetectionConfig(
           name="2012",
-          description=_VOC_DETECTION_DESCRIPTION.format(
+          description=_VOC_DETECTION_CONFIG_DESCRIPTION.format(
               year=2012, num_images=11540, num_objects=27450),
           homepage=_VOC_URL.format(year="2012"),
           citation=_VOC_CITATION.format(year="2012"),
@@ -417,7 +429,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       ),
       VocSegmentationConfig(
           name="2007-segmentation",
-          description=_VOC_SEGMENTATION_DESCRIPTION_2007,
+          description=_VOC_SEGMENTATION_CONFIG_DESCRIPTION_2007,
           homepage=_VOC_URL.format(year=2007),
           citation=_VOC_CITATION.format(year=2007),
           filenames={
@@ -441,7 +453,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       ),
       VocSegmentationConfig(
           name="2012-segmentation",
-          description=_VOC_SEGMENTATION_DESCRIPTION_2012,
+          description=_VOC_SEGMENTATION_CONFIG_DESCRIPTION_2012,
           homepage=_VOC_URL.format(year="2012"),
           citation=_VOC_CITATION.format(year="2012") + _SBD_CITATION,
           filenames={

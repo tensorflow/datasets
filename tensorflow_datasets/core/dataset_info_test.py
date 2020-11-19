@@ -15,10 +15,6 @@
 
 """Tests for tensorflow_datasets.core.dataset_info."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import json
 import os
 import tempfile
@@ -27,17 +23,21 @@ import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import mnist
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.image_classification import mnist
 
-tf.compat.v1.enable_eager_execution()
+from google.protobuf import text_format
+from tensorflow_metadata.proto.v0 import schema_pb2
 
-_TFDS_DIR = py_utils.tfds_dir()
+tf.enable_v2_behavior()
+
+_TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
-                         "mnist", "3.0.0")
+                         "mnist", "3.0.1")
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
-                                   "dataset_info", "mnist_unlabeled", "3.0.0")
+                                   "dataset_info", "mnist_unlabeled", "3.0.1")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
@@ -80,16 +80,10 @@ class DatasetInfoTest(testing.TestCase):
     super(DatasetInfoTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
-  def test_undefined_dir(self):
-    with self.assertRaisesWithPredicateMatch(ValueError,
-                                             "undefined dataset_info_dir"):
-      info = dataset_info.DatasetInfo(builder=self._builder)
-      info.read_from_directory(None)
-
   def test_non_existent_dir(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
     with self.assertRaisesWithPredicateMatch(
-        tf.errors.NotFoundError, "No such file or dir"):
+        FileNotFoundError, "from a directory which does not exist"):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
   def test_reading(self):
@@ -123,7 +117,7 @@ class DatasetInfoTest(testing.TestCase):
     info.read_from_directory(_INFO_DIR_UNLABELED)
 
     # Assert supervised_keys has not been set
-    self.assertEqual(None, info.supervised_keys)
+    self.assertIsNone(None, info.supervised_keys)
 
   def test_writing(self):
     # First read in stuff.
@@ -252,7 +246,11 @@ class DatasetInfoTest(testing.TestCase):
   def test_statistics_generation(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare()
+      builder.download_and_prepare(
+          download_config=download.DownloadConfig(
+              compute_stats=download.ComputeStatsMode.AUTO,
+          ),
+      )
 
       # Overall
       self.assertEqual(30, builder.info.splits.total_num_examples)
@@ -260,22 +258,73 @@ class DatasetInfoTest(testing.TestCase):
       # Per split.
       test_split = builder.info.splits["test"].get_proto()
       train_split = builder.info.splits["train"].get_proto()
-      self.assertEqual(10, test_split.statistics.num_examples)
-      self.assertEqual(20, train_split.statistics.num_examples)
+      expected_schema = text_format.Parse("""
+      feature {
+        name: "x"
+        type: INT
+        presence {
+          min_fraction: 1.0
+          min_count: 1
+        }
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }""", schema_pb2.Schema())
+      self.assertEqual(train_split.statistics.num_examples, 20)
+      self.assertLen(train_split.statistics.features, 1)
+      self.assertEqual(
+          train_split.statistics.features[0].path.step[0], "x")
+      self.assertLen(
+          train_split.statistics.features[0].num_stats.common_stats.
+          num_values_histogram.buckets, 10)
+      self.assertLen(
+          train_split.statistics.features[0].num_stats.histograms, 2)
+
+      self.assertEqual(test_split.statistics.num_examples, 10)
+      self.assertLen(test_split.statistics.features, 1)
+      self.assertEqual(
+          test_split.statistics.features[0].path.step[0], "x")
+      self.assertLen(
+          test_split.statistics.features[0].num_stats.common_stats.
+          num_values_histogram.buckets, 10)
+      self.assertLen(
+          test_split.statistics.features[0].num_stats.histograms, 2)
+      self.assertEqual(builder.info.as_proto.schema, expected_schema)
 
   @testing.run_in_graph_and_eager_modes()
-  def test_statistics_generation_variable_sizes(self):
+  def test_schema_generation_variable_sizes(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare()
+      builder.download_and_prepare(
+          download_config=download.DownloadConfig(
+              compute_stats=download.ComputeStatsMode.AUTO,
+          ),
+      )
 
-      # Get the expected type of the feature.
-      schema_feature = builder.info.as_proto.schema.feature[0]
-      self.assertEqual("im", schema_feature.name)
-
-      self.assertEqual(-1, schema_feature.shape.dim[0].size)
-      self.assertEqual(-1, schema_feature.shape.dim[1].size)
-      self.assertEqual(3, schema_feature.shape.dim[2].size)
+      expected_schema = text_format.Parse(
+          """
+feature {
+  name: "im"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: -1
+    }
+    dim {
+      size: -1
+    }
+    dim {
+      size: 3
+    }
+  }
+}""", schema_pb2.Schema())
+      self.assertEqual(builder.info.as_proto.schema, expected_schema)
 
   def test_metadata(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -310,7 +359,7 @@ class DatasetInfoTest(testing.TestCase):
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='mnist',
-    version=3.0.0,
+    version=3.0.1,
     description='The MNIST database of handwritten digits.',
     homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     features=FeaturesDict({

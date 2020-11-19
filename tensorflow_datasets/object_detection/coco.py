@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""MS Coco Dataset.
-"""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""MS Coco Dataset."""
 
 import collections
 import json
@@ -54,15 +49,19 @@ _CITATION = """\
 }
 """
 
-DESCRIPTION = """COCO is a large-scale object detection, segmentation, and
-captioning dataset. This version contains images, bounding boxes "
-and labels for the {year} version.
+_DESCRIPTION = """COCO is a large-scale object detection, segmentation, and
+captioning dataset.
+
 Note:
  * Some images from the train and validation sets don't have annotations.
  * Coco 2014 and 2017 uses the same images, but different train/val/test splits
  * The test split don't have any annotations (only images).
  * Coco defines 91 classes but the data only uses 80 classes.
  * Panotptic annotations defines defines 200 classes but only uses 133.
+"""
+
+_CONFIG_DESCRIPTION = """
+This version contains images, bounding boxes and labels for the {year} version.
 """
 
 
@@ -101,7 +100,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CocoConfig(
           name='2014',
-          description=DESCRIPTION.format(year=2014),
+          description=_CONFIG_DESCRIPTION.format(year=2014),
           splits=[
               Split(
                   name=tfds.Split.TRAIN,
@@ -132,7 +131,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
       ),
       CocoConfig(
           name='2017',
-          description=DESCRIPTION.format(year=2017),
+          description=_CONFIG_DESCRIPTION.format(year=2017),
           splits=[
               Split(
                   name=tfds.Split.TRAIN,
@@ -156,7 +155,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
       ),
       CocoConfig(
           name='2017_panoptic',
-          description=DESCRIPTION.format(year=2017),
+          description=_CONFIG_DESCRIPTION.format(year=2017),
           has_panoptic=True,
           splits=[
               Split(
@@ -218,7 +217,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_DESCRIPTION,
         # More info could be added, like the segmentation (as png mask),
         # captions, person key-points. For caption encoding, it would probably
         # be better to have a separate class CocoCaption2014 to avoid poluting

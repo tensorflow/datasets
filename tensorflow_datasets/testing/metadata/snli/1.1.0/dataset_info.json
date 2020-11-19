@@ -1,0 +1,35 @@
+{
+  "citation": "@inproceedings{snli:emnlp2015,\n\tAuthor = {Bowman, Samuel R. and Angeli, Gabor and Potts, Christopher, and Manning, Christopher D.},\n\tBooktitle = {Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP)},\n\tPublisher = {Association for Computational Linguistics},\n\tTitle = {A large annotated corpus for learning natural language inference},\n\tYear = {2015}\n}",
+  "description": "The SNLI corpus (version 1.0) is a collection of 570k human-written English\nsentence pairs manually labeled for balanced classification with the labels\nentailment, contradiction, and neutral, supporting the task of natural language\ninference (NLI), also known as recognizing textual entailment (RTE).",
+  "downloadSize": "94550081",
+  "location": {
+    "urls": [
+      "https://nlp.stanford.edu/projects/snli/"
+    ]
+  },
+  "name": "snli",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "1661862",
+      "shardLengths": [
+        "10000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "87898165",
+      "shardLengths": [
+        "550152"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "1665721",
+      "shardLengths": [
+        "10000"
+      ]
+    }
+  ],
+  "version": "1.1.0"
+}

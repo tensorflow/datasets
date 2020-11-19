@@ -15,19 +15,18 @@
 
 """Translation feature that supports multiple languages."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import six
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.utils import type_utils
 try:
   # This fallback applies for all versions of Python before 3.3
-  import collections.abc as collections_abc  # pylint:disable=g-import-not-at-top
+  import collections.abc as collections_abc  # pylint:disable=g-import-not-at-top  # pytype: disable=module-attr
 except ImportError:
   import collections as collections_abc  # pylint:disable=g-import-not-at-top
+
+Json = type_utils.Json
 
 
 class Translation(features_dict.FeaturesDict):
@@ -72,17 +71,19 @@ class Translation(features_dict.FeaturesDict):
 
     Args:
       languages: `list<string>` Full list of languages codes.
-      encoder: `tfds.features.text.TextEncoder` or
-        list<tfds.features.text.TextEncoder> (optional), an encoder that can
+      encoder: `tfds.deprecated.text.TextEncoder` or
+        list<tfds.deprecated.text.TextEncoder> (optional), an encoder that can
         convert text to integer. One can be shared one per language provided. If
         None, the text will be utf-8 byte-encoded.
-      encoder_config: `tfds.features.text.TextEncoderConfig` or
-        `list<tfds.features.text.TextEncoderConfig>` (optional), needed
+      encoder_config: `tfds.deprecated.text.TextEncoderConfig` or
+        `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed
         if restoring from a file with `load_metadata`. One config can be shared
         or one per language can be provided.
     """
     # If encoder and encoder_config aren't lists, use the same values for all
     # languages.
+    self._encoder = encoder
+    self._encoder_config = encoder_config
     if not isinstance(encoder, collections_abc.Iterable):
       encoder = [encoder] * len(languages)
     if not isinstance(encoder_config, collections_abc.Iterable):
@@ -96,6 +97,24 @@ class Translation(features_dict.FeaturesDict):
   def languages(self):
     """List of languages."""
     return sorted(self.keys())
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> "Translation":
+    if "use_encoder" in value:
+      raise ValueError(
+          "TFDS does not support datasets with Encoder. Please use the plain "
+          "text version with `tensorflow_text`."
+      )
+    return cls(**value)
+
+  def to_json_content(self) -> Json:
+    if self._encoder or self._encoder_config:
+      print(
+          "WARNING: TFDS encoder are deprecated and will be removed soon. "
+          "Please use `tensorflow_text` instead with the plain text dataset."
+      )
+      return {"languages": self.languages, "use_encoder": True}
+    return {"languages": self.languages}
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -190,3 +209,9 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
         {"language": languages,
          "translation": translations})
 
+  @classmethod
+  def from_json_content(cls, value: Json) -> "TranslationVariableLanguages":
+    return cls(**value)
+
+  def to_json_content(self) -> Json:
+    return {"languages": self.languages}

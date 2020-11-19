@@ -15,10 +15,6 @@
 
 """WikiHow Datasets."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import csv
 import os
 import re
@@ -74,8 +70,7 @@ _URLS = {
 class WikihowConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wikihow."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, filename=None, **kwargs):
+  def __init__(self, *, filename=None, **kwargs):
     """BuilderConfig for Wikihow.
 
     Args:

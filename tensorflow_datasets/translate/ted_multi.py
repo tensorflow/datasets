@@ -14,9 +14,6 @@
 # limitations under the License.
 
 """TED talk multilingual data set."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import csv
 import os
@@ -59,15 +56,7 @@ _LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
 class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk multilingual data set."""
 
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version(
-              '1.0.0',
-              'New split API (https://tensorflow.org/datasets/splits)'),
-          description='Plain text import of multilingual TED talk translations',
-      )
-  ]
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -90,18 +79,15 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_train.tsv')
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={'data_file': os.path.join(dl_dir,
                                                   'all_talks_dev.tsv')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_test.tsv')
             }),

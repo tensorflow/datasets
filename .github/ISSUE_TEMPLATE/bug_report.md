@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+/!\ IF YOU WANT PEOPLE TO HELP YOU, PLEASE GIVE AS MUCH DETAIL AS POSSIBLE, INCLUDING THE FULL STACKTRACE AND CODE SNIPPET
+
 **Short description**
 Description of the bug.
 
@@ -14,7 +16,9 @@ Description of the bug.
 * Operating System: <os>
 * Python version: <version>
 * `tensorflow-datasets`/`tfds-nightly` version: <package and version>
-* `tensorflow`/`tensorflow-gpu`/`tf-nightly`/`tf-nightly-gpu` version: <package and version>
+* `tensorflow`/`tf-nightly` version: <package and version>
+
+* Does the issue still exists with the last `tfds-nightly` package (`pip install --upgrade tfds-nightly`) ?
 
 **Reproduction instructions**
 

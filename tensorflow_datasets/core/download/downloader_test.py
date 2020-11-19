@@ -15,16 +15,14 @@
 
 """Tests for downloader."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import hashlib
 import io
 import os
 import tempfile
+from typing import Optional
 
 from absl.testing import absltest
+import pytest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
@@ -41,6 +39,12 @@ class _FakeResponse(object):
     self.status_code = status_code
     # For urllib codepath
     self.read = self.raw.read
+
+  def __enter__(self):
+    return self
+
+  def __exit__(self, *args):
+    return
 
   def iter_content(self, chunk_size):
     del chunk_size
@@ -74,22 +78,13 @@ class DownloaderTest(testing.TestCase):
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    if not hasattr(downloader.ssl, '_create_unverified_context'):
-      # To not throw error for python<=2.7.8 while mocking SSLContext functions
-      downloader.ssl.__dict__['_create_unverified_context'] = None
-      downloader.ssl.__dict__['create_default_context'] = None
-    # dummy ssl contexts returns for testing
-    absltest.mock.patch.object(
-        downloader.ssl,
-        '_create_unverified_context', lambda *a, **kw: 'skip_ssl').start()
-    absltest.mock.patch.object(
-        downloader.ssl,
-        'create_default_context', lambda *a, **kw: 'use_ssl').start()
 
   def test_ok(self):
     promise = self.downloader.download(self.url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
+    future = promise.get()
+    url_info = future.url_info
+    self.assertEqual(self.path, os.fspath(future.path))
+    self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
@@ -97,8 +92,10 @@ class DownloaderTest(testing.TestCase):
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
+    future = promise.get()
+    url_info = future.url_info
+    self.assertEqual(self.path, os.fspath(future.path))
+    self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
@@ -125,21 +122,13 @@ class DownloaderTest(testing.TestCase):
     with self.assertRaises(downloader.DownloadError):
       promise.get()
 
-  def test_kaggle_api(self):
-    fname = 'a.csv'
-    with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
-      promise = self.downloader.download('kaggle://some-competition/a.csv',
-                                         self.tmp_dir)
-      _, dl_size = promise.get()
-      self.assertEqual(dl_size, len(fname))
-      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
-        self.assertEqual(fname, f.read())
-
   def test_ftp(self):
     url = 'ftp://username:password@example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
-    checksum, _ = promise.get()
-    self.assertEqual(checksum, self.resp_checksum)
+    future = promise.get()
+    url_info = future.url_info
+    self.assertEqual(self.path, os.fspath(future.path))
+    self.assertEqual(url_info.checksum, self.resp_checksum)
     with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
@@ -156,55 +145,96 @@ class DownloaderTest(testing.TestCase):
     with self.assertRaises(downloader.urllib.error.URLError):
       promise.get()
 
-  def test_ssl_mock(self):
-    # Testing ssl for ftp
-    absltest.mock.patch.dict(os.environ, {
-        'TFDS_CA_BUNDLE': '/path/to/dummy.pem'
-    }).start()
-    self.test_ftp_ssl('use_ssl')
 
-  def test_ftp_ssl(self, ssl_type='skip_ssl'):
-    absltest.mock.patch.object(
-        downloader.urllib.request,
-        'Request', lambda *a, **kw: 'dummy_request').start()
+# Gramar examples inspired from: https://tools.ietf.org/html/rfc6266#section-5
+_CONTENT_DISPOSITION_FILENAME_PAIRS = [
+    ("""attachment; filename=filename.txt""", 'filename.txt'),
+    # Should strip space
+    ("""attachment; filename=  filename.txt  """, 'filename.txt'),
+    ("""attachment; filename=  filename.txt  ;""", 'filename.txt'),
+    # If both encoded and ascii are present, only keep encoded
+    (
+        """attachment; filename="EURO rates"; filename*=utf-8''%e2%82%ac%20rates""",
+        'EURO rates',
+    ),
+    (
+        """attachment; filename=EURO rates; filename*=utf-8''%e2%82%ac%20rates""",
+        'EURO rates',
+    ),
+    (
+        """attachment; filename=EXAMPLE-Im ößä.dat; filename*=iso-8859-1''EXAMPLE-%20I%27m%20%F6%DF%E4.dat""",
+        'EXAMPLE-Im ößä.dat',
+    ),
+    (
+        """attachment;filename="hello.zip";filename*=UTF-8''hello.zip""",
+        'hello.zip',
+    ),
+    (
+        """attachment;filename=hello.zip;filename*=UTF-8''hello.zip""",
+        'hello.zip',
+    ),
+    # Should be case insensitive
+    ("""INLINE; FILENAME= "an example.html""", 'an example.html'),
+    ("""Attachment; filename=example.html""", 'example.html'),
+    # Only encoded not supported for now
+    ("""attachment; filename*=UTF-8''filename.txt""", None),
+    ("""attachment; filename*=iso-8859-1'en'%A3%20rates""", None),
+    # Multi-line also supported
+    (
+        """attachment;
+            filename="hello.zip";
+            filename*=UTF-8''hello.zip""",
+        'hello.zip',
+    ),
+    ("""attachment;filename*=UTF-8''hello.zip""", None),
+    (
+        """attachment;
+            filename*= UTF-8''%e2%82%ac%20rates.zip""",
+        None,
+    ),
+]
 
-    method = absltest.mock.patch.object(
-        downloader.urllib.request,
-        'urlopen',
-        return_value=_FakeResponse(self.url, self.response,
-                                   self.cookies)).start()
-    self.test_ftp()
-    method.assert_called_once_with('dummy_request', context=ssl_type)
 
-  def test_py2_ftp_ssl_mock(self):
-    ssl_mock_dict = downloader.ssl.__dict__.copy()
-    if ssl_mock_dict.get('_create_unverified_context', None):
-      ssl_mock_dict.pop('_create_unverified_context')
-    absltest.mock.patch.dict(
-        downloader.ssl.__dict__, ssl_mock_dict, clear=True).start()
-    method = absltest.mock.patch.object(
-        downloader.logging, 'info', return_value=None).start()
-    self.test_ftp()
-    with self.assertRaises(AssertionError):
-      method.assert_not_called()
+@pytest.mark.parametrize(
+    ('content_disposition', 'filename'), _CONTENT_DISPOSITION_FILENAME_PAIRS
+)
+def test_filename_from_content_disposition(
+    content_disposition: str,
+    filename: Optional[str],
+):
+  get_filename = downloader._filename_from_content_disposition
+  assert get_filename(content_disposition) == filename
 
 
-class GetFilenameTest(testing.TestCase):
-
-  def test_no_headers(self):
-    resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
-    res = downloader._get_filename(resp)
-    self.assertEqual(res, 'baz.zip')
-
-  def test_headers(self):
-    cdisp = ('attachment;filename="hello.zip";'
-             'filename*=UTF-8\'\'hello.zip')
-    resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers={
-        'content-disposition': cdisp,
-    })
-    res = downloader._get_filename(resp)
-    self.assertEqual(res, 'hello.zip')
-
-
-if __name__ == '__main__':
-  testing.test_main()
+@pytest.mark.parametrize(
+    ('content_disposition', 'filename'),
+    [
+        (
+            # Filename should be parsed from the ascii name, not UTF-8
+            """attachment;filename="hello.zip";filename*=UTF-8''other.zip""",
+            'hello.zip'
+        ),
+        (
+            # If ascii filename can't be parsed, filename parsed from url
+            """attachment;filename*=UTF-8''other.zip""",
+            'baz.zip'
+        ),
+        (
+            # No headers, filename parsed from url
+            None,
+            'baz.zip'
+        ),
+    ],
+)
+def test_filename_from_headers(
+    content_disposition: Optional[str],
+    filename: Optional[str],
+):
+  if content_disposition:
+    headers = {
+        'content-disposition': content_disposition,
+    }
+  else:
+    headers = None
+  resp = _FakeResponse('http://foo.bar/baz.zip', b'content', headers=headers)
+  assert downloader._get_filename(resp), filename

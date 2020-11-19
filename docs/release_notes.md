@@ -4,7 +4,6 @@
 
 ### Features
 
-*   Add `in_memory` option to cache small dataset in RAM.
 *   Better sharding, shuffling and sub-split
 *   It is now possible to add arbitrary metadata to `tfds.core.DatasetInfo`
     which will be stored/restored with the dataset. See `tfds.core.Metadata`.

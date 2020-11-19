@@ -1,0 +1,1 @@
+validation/example0000.wav	validation/example0000_sources/background0_sound.wav

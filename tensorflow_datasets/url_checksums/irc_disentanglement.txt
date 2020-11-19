@@ -1,0 +1,1 @@
+https://github.com/jkkummerfeld/irc-disentanglement/zipball/fd379e9	119047410	4abb6db5c8a63139d0bedfcd0f5e3be3612c16e64f90f0135f3686f2c862916f	jkkummerfeld-irc-disentanglement-v1.0-6-gfd379e9.zip

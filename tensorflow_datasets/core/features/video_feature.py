@@ -14,18 +14,20 @@
 # limitations under the License.
 
 """Video feature."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import subprocess
 import tempfile
 
+import numpy as np
 import six
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Video(sequence_feature.Sequence):
@@ -115,10 +117,9 @@ class Video(sequence_feature.Sequence):
   def _ffmpeg_path(self):
     return 'ffmpeg'
 
-
   def _ffmpeg_decode(self, path_or_fobj):
-    if isinstance(path_or_fobj, six.string_types):
-      ffmpeg_args = [self._ffmpeg_path, '-i', path_or_fobj]
+    if isinstance(path_or_fobj, type_utils.PathLikeCls):
+      ffmpeg_args = [self._ffmpeg_path, '-i', os.fspath(path_or_fobj)]
       ffmpeg_stdin = None
     else:
       ffmpeg_args = [self._ffmpeg_path, '-i', 'pipe:0']
@@ -158,7 +159,8 @@ class Video(sequence_feature.Sequence):
 
   def encode_example(self, video_or_path_or_fobj):
     """Converts the given image into a dict convertible to tf example."""
-    if isinstance(video_or_path_or_fobj, six.string_types):
+    if isinstance(video_or_path_or_fobj, type_utils.PathLikeCls):
+      video_or_path_or_fobj = os.fspath(video_or_path_or_fobj)
       if not os.path.isfile(video_or_path_or_fobj):
         _, video_temp_path = tempfile.mkstemp()
         try:
@@ -169,8 +171,52 @@ class Video(sequence_feature.Sequence):
           os.unlink(video_temp_path)
       else:
         encoded_video = self._ffmpeg_decode(video_or_path_or_fobj)
+    elif isinstance(video_or_path_or_fobj, bytes):
+      with tempfile.TemporaryDirectory() as tmpdirname:
+        video_temp_path = os.path.join(tmpdirname, 'video')
+        with tf.io.gfile.GFile(video_temp_path, 'wb') as f:
+          f.write(video_or_path_or_fobj)
+        encoded_video = self._ffmpeg_decode(video_temp_path)
     elif hasattr(video_or_path_or_fobj, 'read'):
       encoded_video = self._ffmpeg_decode(video_or_path_or_fobj)
-    else:
+    else:  # List of images, np.array,...
       encoded_video = video_or_path_or_fobj
     return super(Video, self).encode_example(encoded_video)
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Video':
+    shape = tuple(value['shape'])
+    encoding_format = value['encoding_format']
+    ffmpeg_extra_args = value['ffmpeg_extra_args']
+    return cls(shape, encoding_format, ffmpeg_extra_args)
+
+  def to_json_content(self) -> Json:
+    return {
+        'shape': list(self.shape),
+        'encoding_format': self._encoding_format,
+        'ffmpeg_extra_args': self._extra_ffmpeg_args
+    }
+
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Video are displayed as GIFs."""
+    # Use GIF as there is no easy way to generate a HTML5 compatible video
+    # without FFMPEG or other lib that the user is likelly to have on
+    # colab by default.
+    gif = [image_feature.create_thumbnail(frame) for frame in ex]
+
+    def write_buff(buff):
+      gif[0].save(
+          buff,
+          format='GIF',
+          save_all=True,
+          append_images=gif[1:],
+          # Could add a frame_rate kwargs in __init__ to customize this.
+          duration=41,  # 41ms / img ~= 24 img / sec
+          loop=0,
+      )
+
+    # Convert to base64
+    gif_str = utils.get_base64(write_buff)
+
+    # Display HTML
+    return f'<img src="data:image/gif;base64,{gif_str}"  alt="Gif" />'

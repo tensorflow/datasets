@@ -15,10 +15,6 @@
 
 """Tests for definite_pronoun_resolution dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import definite_pronoun_resolution
 

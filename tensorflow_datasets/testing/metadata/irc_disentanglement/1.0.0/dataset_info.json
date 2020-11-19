@@ -1,0 +1,2266 @@
+{
+  "citation": "@InProceedings{acl19disentangle,\n  author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},\n  title     = {A Large-Scale Corpus for Conversation Disentanglement},\n  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\n  location  = {Florence, Italy},\n  month     = {July},\n  year      = {2019},\n  doi       = {10.18653/v1/P19-1374},\n  pages     = {3846--3856},\n  url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},\n  arxiv     = {https://arxiv.org/abs/1810.11118},\n  software  = {https://jkk.name/irc-disentanglement},\n  data      = {https://jkk.name/irc-disentanglement},\n}",
+  "description": "IRC Disentanglement dataset contains over 77,563 messages from Ubuntu IRC\nchannel.\n\nFeatures include message id, message text and timestamp.\nTarget is list of messages that current message replies to.",
+  "downloadSize": "119047410",
+  "location": {
+    "urls": [
+      "https://jkk.name/irc-disentanglement"
+    ]
+  },
+  "name": "irc_disentanglement",
+  "schema": {
+    "feature": [
+      {
+        "domain": "id",
+        "name": "id",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "parents",
+        "name": "parents",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "text",
+        "name": "text",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "timestamp",
+        "name": "timestamp",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "id",
+        "value": [
+          "2016-12-19_01240",
+          "2016-12-19_01241",
+          "2016-12-19_01242",
+          "2016-12-19_01243",
+          "2016-12-19_01244",
+          "2016-12-19_01245",
+          "2016-12-19_01246",
+          "2016-12-19_01247",
+          "2016-12-19_01248",
+          "2016-12-19_01249"
+        ]
+      },
+      {
+        "name": "parents",
+        "value": [
+          "2008-12-11_01027",
+          "2008-12-11_01080",
+          "2009-03-03_01126",
+          "2009-10-01_01026",
+          "2011-05-29_01018",
+          "2011-05-29_01107",
+          "2011-05-29_01166",
+          "2011-05-29_01200",
+          "2011-11-13_01105",
+          "2011-11-13_01228"
+        ]
+      },
+      {
+        "name": "text",
+        "value": [
+          " <nickla1> !usb",
+          " <sruli> i am having problems with blutooth headset a2dp profile, after a minute or so the audio looses sync, i have to reconnect every time to get back in sync, how can i resolve this?",
+          " <ubottu> Error: I am only a bot, please don't think I'm intelligent :)",
+          " <ubottu> For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent",
+          "=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu",
+          "=== Will_ [9010@quake.swe.net]  has joined #ubuntu",
+          "=== _icebreaker_ [~icebreake@dsl-084-060-183-041.arcor-ip.net]  has joined #ubuntu",
+          "=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu",
+          "=== stevenj [~steven@pcp02411765pcs.laurel01.ms.comcast.net]  has joined #ubuntu",
+          "=== usual [~colin@alb-69-200-178-150.nycap.rr.com]  has joined #ubuntu"
+        ]
+      },
+      {
+        "name": "timestamp",
+        "value": [
+          "",
+          "2004-11-15_12_23",
+          "2005-06-27_10_19",
+          "2005-06-27_11_53",
+          "2005-06-27_12_27",
+          "2005-08-08_11_33",
+          "2005-08-08_11_34",
+          "2005-08-08_12_41",
+          "2009-02-23_08_31",
+          "2011-05-29_16_29"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "2573965",
+      "shardLengths": [
+        "15000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "15000",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "15000"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "2016-06-08_01499",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2016-06-08_01498",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2016-06-08_01497",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2016-06-08_01496",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2016-06-08_01495",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2016-06-08_01494",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2016-06-08_01493",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2016-06-08_01492",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2016-06-08_01491",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2016-06-08_01490",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01499"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01498"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01497"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01496"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01495"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01494"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01493"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01492"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01491"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-06-08_01490"
+                }
+              ],
+              "unique": "15000"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "parents"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.0,
+              "commonStats": {
+                "avgNumValues": 0.3458,
+                "maxNumValues": "3",
+                "numNonMissing": "15000",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "5187"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "2007-01-11_01447",
+                    "sampleCount": 14.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2008-07-14_01154",
+                    "lowRank": "1",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2007-12-01_01429",
+                    "lowRank": "2",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2016-06-08_01237",
+                    "lowRank": "3",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2013-09-01_01371",
+                    "lowRank": "4",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2013-09-01_01211",
+                    "lowRank": "5",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2013-09-01_01167",
+                    "lowRank": "6",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2013-09-01_01149",
+                    "lowRank": "7",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2010-08-17_01095",
+                    "lowRank": "8",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2007-12-01_01120",
+                    "lowRank": "9",
+                    "sampleCount": 6.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 14.0,
+                  "value": "2007-01-11_01447"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "2008-07-14_01154"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "2007-12-01_01429"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2016-06-08_01237"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2013-09-01_01371"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2013-09-01_01211"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2013-09-01_01167"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2013-09-01_01149"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2010-08-17_01095"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2007-12-01_01120"
+                }
+              ],
+              "unique": "3813"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "text"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 71.24633,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "15000",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "15000"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "=== ucenik [n=ucenik@89-172-204-188.adsl.net.t-com.hr]  has joined #ubuntu",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": " <LinuxNewbie> ah?",
+                    "lowRank": "1",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "=== xabbott [n=xabbott@c-24-129-86-149.hsd1.fl.comcast.net]  has joined #ubuntu",
+                    "lowRank": "2",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "=== ucenik_ [n=ucenik@89-172-204-188.adsl.net.t-com.hr]  has joined #ubuntu",
+                    "lowRank": "3",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "=== felipealmeida_AW is now known as felipealmeida",
+                    "lowRank": "4",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "=== bazhang_ is now known as bazhang",
+                    "lowRank": "5",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": " <wiak> :P",
+                    "lowRank": "6",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": " <kurkkupoikaFi> K",
+                    "lowRank": "7",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": " <ToddEDM> ok",
+                    "lowRank": "8",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "=== ucenik is now known as evelin",
+                    "lowRank": "9",
+                    "sampleCount": 4.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 11.0,
+                  "value": "=== ucenik [n=ucenik@89-172-204-188.adsl.net.t-com.hr]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": " <LinuxNewbie> ah?"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "=== xabbott [n=xabbott@c-24-129-86-149.hsd1.fl.comcast.net]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "=== ucenik_ [n=ucenik@89-172-204-188.adsl.net.t-com.hr]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "=== felipealmeida_AW is now known as felipealmeida"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "=== bazhang_ is now known as bazhang"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": " <wiak> :P"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": " <kurkkupoikaFi> K"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": " <ToddEDM> ok"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "=== ucenik is now known as evelin"
+                }
+              ],
+              "unique": "14655"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "timestamp"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 14.816,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "15000",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1500.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "15000"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "sampleCount": 1110.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2007-12-01_01_46",
+                    "lowRank": "1",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2007-12-01_01_45",
+                    "lowRank": "2",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2013-09-01_20_38",
+                    "lowRank": "3",
+                    "sampleCount": 25.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2008-07-14_16_33",
+                    "lowRank": "4",
+                    "sampleCount": 25.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2010-08-17_17_06",
+                    "lowRank": "5",
+                    "sampleCount": 22.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2007-01-11_11_17",
+                    "lowRank": "6",
+                    "sampleCount": 21.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2008-07-14_17_36",
+                    "lowRank": "7",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2007-12-01_01_51",
+                    "lowRank": "8",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2007-12-01_01_47",
+                    "lowRank": "9",
+                    "sampleCount": 19.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1110.0
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "2007-12-01_01_46"
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "2007-12-01_01_45"
+                },
+                {
+                  "frequency": 25.0,
+                  "value": "2013-09-01_20_38"
+                },
+                {
+                  "frequency": 25.0,
+                  "value": "2008-07-14_16_33"
+                },
+                {
+                  "frequency": 22.0,
+                  "value": "2010-08-17_17_06"
+                },
+                {
+                  "frequency": 21.0,
+                  "value": "2007-01-11_11_17"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "2008-07-14_17_36"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "2007-12-01_01_51"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "2007-12-01_01_47"
+                }
+              ],
+              "unique": "3468"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "15000"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "37147567",
+      "shardLengths": [
+        "220463"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "220463",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "220463"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "2018-02-27_01499",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2018-02-27_01498",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2018-02-27_01497",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2018-02-27_01496",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2018-02-27_01495",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2018-02-27_01494",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2018-02-27_01493",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2018-02-27_01492",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2018-02-27_01491",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2018-02-27_01490",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01499"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01498"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01497"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01496"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01495"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01494"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01493"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01492"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01491"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2018-02-27_01490"
+                }
+              ],
+              "unique": "220463"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "parents"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.0,
+              "commonStats": {
+                "avgNumValues": 0.31476936,
+                "maxNumValues": "7",
+                "numNonMissing": "220463",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 7.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "69395"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "2006-06-21_01142",
+                    "sampleCount": 14.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2014-12-27_01199",
+                    "lowRank": "1",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2009-11-13_01376",
+                    "lowRank": "2",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2007-02-06_01188",
+                    "lowRank": "3",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2006-06-28_01187",
+                    "lowRank": "4",
+                    "sampleCount": 11.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2015-08-10_01033",
+                    "lowRank": "5",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2011-04-28_01272",
+                    "lowRank": "6",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2008-02-07_01110",
+                    "lowRank": "7",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2007-06-17_01282",
+                    "lowRank": "8",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2008-04-27_01043",
+                    "lowRank": "9",
+                    "sampleCount": 9.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 14.0,
+                  "value": "2006-06-21_01142"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "2014-12-27_01199"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "2009-11-13_01376"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "2007-02-06_01188"
+                },
+                {
+                  "frequency": 11.0,
+                  "value": "2006-06-28_01187"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "2015-08-10_01033"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "2011-04-28_01272"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "2008-02-07_01110"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "2007-06-17_01282"
+                },
+                {
+                  "frequency": 9.0,
+                  "value": "2008-04-27_01043"
+                }
+              ],
+              "unique": "50533"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "text"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 69.31819,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "220463",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "220463"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "=== vtg [vertigo@route6.alumina.nl]  has joined #ubuntu",
+                    "sampleCount": 53.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "=== Bhaal [i=bhaal@freenode/staff/bhaal]  has left #ubuntu [\"Coming]",
+                    "lowRank": "1",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "=== Bhaal [i=bhaal@freenode/staff/bhaal]  has joined #ubuntu",
+                    "lowRank": "2",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": " <neersighted> :p",
+                    "lowRank": "3",
+                    "sampleCount": 23.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": " <Psil0Cybin> okay",
+                    "lowRank": "4",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": " <FloodBot1> Psil0Cybin: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.",
+                    "lowRank": "5",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "=== mode/#ubuntu [+o Seveas]  by ChanServ",
+                    "lowRank": "6",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": " <ubotu> To install the Ati/NVidia drivers for your video card, see https://help.ubuntu.com/community/BinaryDriverHowto",
+                    "lowRank": "7",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": " <el> ola",
+                    "lowRank": "8",
+                    "sampleCount": 17.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "=== gnomefreak [n=gnomefre@ubuntu/member/gnomefreak]  has joined #ubuntu",
+                    "lowRank": "9",
+                    "sampleCount": 16.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 53.0,
+                  "value": "=== vtg [vertigo@route6.alumina.nl]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "=== Bhaal [i=bhaal@freenode/staff/bhaal]  has left #ubuntu [\"Coming]"
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "=== Bhaal [i=bhaal@freenode/staff/bhaal]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 23.0,
+                  "value": " <neersighted> :p"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": " <Psil0Cybin> okay"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": " <FloodBot1> Psil0Cybin: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation."
+                },
+                {
+                  "frequency": 17.0,
+                  "value": "=== mode/#ubuntu [+o Seveas]  by ChanServ"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": " <ubotu> To install the Ati/NVidia drivers for your video card, see https://help.ubuntu.com/community/BinaryDriverHowto"
+                },
+                {
+                  "frequency": 17.0,
+                  "value": " <el> ola"
+                },
+                {
+                  "frequency": 16.0,
+                  "value": "=== gnomefreak [n=gnomefre@ubuntu/member/gnomefreak]  has joined #ubuntu"
+                }
+              ],
+              "unique": "211855"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "timestamp"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 14.271492,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "220463",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 22046.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "220463"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "sampleCount": 23817.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2006-12-20_05_12",
+                    "lowRank": "1",
+                    "sampleCount": 114.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2006-05-27_12_21",
+                    "lowRank": "2",
+                    "sampleCount": 38.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2005-12-16_06_49",
+                    "lowRank": "3",
+                    "sampleCount": 35.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2006-06-01_11_42",
+                    "lowRank": "4",
+                    "sampleCount": 34.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2007-06-04_09_33",
+                    "lowRank": "5",
+                    "sampleCount": 33.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2007-08-19_12_49",
+                    "lowRank": "6",
+                    "sampleCount": 31.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2007-02-06_10_46",
+                    "lowRank": "7",
+                    "sampleCount": 31.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2006-06-01_12_22",
+                    "lowRank": "8",
+                    "sampleCount": 31.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2006-05-02_01_45",
+                    "lowRank": "9",
+                    "sampleCount": 31.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 23817.0
+                },
+                {
+                  "frequency": 114.0,
+                  "value": "2006-12-20_05_12"
+                },
+                {
+                  "frequency": 38.0,
+                  "value": "2006-05-27_12_21"
+                },
+                {
+                  "frequency": 35.0,
+                  "value": "2005-12-16_06_49"
+                },
+                {
+                  "frequency": 34.0,
+                  "value": "2006-06-01_11_42"
+                },
+                {
+                  "frequency": 33.0,
+                  "value": "2007-06-04_09_33"
+                },
+                {
+                  "frequency": 31.0,
+                  "value": "2007-08-19_12_49"
+                },
+                {
+                  "frequency": 31.0,
+                  "value": "2007-02-06_10_46"
+                },
+                {
+                  "frequency": 31.0,
+                  "value": "2006-06-01_12_22"
+                },
+                {
+                  "frequency": 31.0,
+                  "value": "2006-05-02_01_45"
+                }
+              ],
+              "unique": "37604"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "220463"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "2054384",
+      "shardLengths": [
+        "12500"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.0,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "12500",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "12500"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "2016-12-19_01249",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2016-12-19_01248",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2016-12-19_01247",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2016-12-19_01246",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2016-12-19_01245",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2016-12-19_01244",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2016-12-19_01243",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2016-12-19_01242",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2016-12-19_01241",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2016-12-19_01240",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01249"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01248"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01247"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01246"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01245"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01244"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01243"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01242"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01241"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "2016-12-19_01240"
+                }
+              ],
+              "unique": "12500"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "parents"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 16.0,
+              "commonStats": {
+                "avgNumValues": 0.20856,
+                "maxNumValues": "3",
+                "numNonMissing": "12500",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2607"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "2011-05-29_01166",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2009-10-01_01026",
+                    "lowRank": "1",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2009-03-03_01126",
+                    "lowRank": "2",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2008-12-11_01080",
+                    "lowRank": "3",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2008-12-11_01027",
+                    "lowRank": "4",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2011-11-13_01228",
+                    "lowRank": "5",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2011-11-13_01105",
+                    "lowRank": "6",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2011-05-29_01200",
+                    "lowRank": "7",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2011-05-29_01107",
+                    "lowRank": "8",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2011-05-29_01018",
+                    "lowRank": "9",
+                    "sampleCount": 5.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 8.0,
+                  "value": "2011-05-29_01166"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2009-10-01_01026"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2009-03-03_01126"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2008-12-11_01080"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "2008-12-11_01027"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "2011-11-13_01228"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "2011-11-13_01105"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "2011-05-29_01200"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "2011-05-29_01107"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "2011-05-29_01018"
+                }
+              ],
+              "unique": "1796"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "text"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 66.52176,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "12500",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "12500"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "=== Will_ [9010@quake.swe.net]  has joined #ubuntu",
+                    "sampleCount": 23.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": " <ubottu> Error: I am only a bot, please don't think I'm intelligent :)",
+                    "lowRank": "1",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "=== _icebreaker_ [~icebreake@dsl-084-060-183-041.arcor-ip.net]  has joined #ubuntu",
+                    "lowRank": "2",
+                    "sampleCount": 6.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "=== stevenj [~steven@pcp02411765pcs.laurel01.ms.comcast.net]  has joined #ubuntu",
+                    "lowRank": "3",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu",
+                    "lowRank": "4",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu",
+                    "lowRank": "5",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": " <ubottu> For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent",
+                    "lowRank": "6",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": " <sruli> i am having problems with blutooth headset a2dp profile, after a minute or so the audio looses sync, i have to reconnect every time to get back in sync, how can i resolve this?",
+                    "lowRank": "7",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": " <nickla1> !usb",
+                    "lowRank": "8",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "=== usual [~colin@alb-69-200-178-150.nycap.rr.com]  has joined #ubuntu",
+                    "lowRank": "9",
+                    "sampleCount": 3.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 23.0,
+                  "value": "=== Will_ [9010@quake.swe.net]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": " <ubottu> Error: I am only a bot, please don't think I'm intelligent :)"
+                },
+                {
+                  "frequency": 6.0,
+                  "value": "=== _icebreaker_ [~icebreake@dsl-084-060-183-041.arcor-ip.net]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "=== stevenj [~steven@pcp02411765pcs.laurel01.ms.comcast.net]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": " <ubottu> For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": " <sruli> i am having problems with blutooth headset a2dp profile, after a minute or so the audio looses sync, i have to reconnect every time to get back in sync, how can i resolve this?"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": " <nickla1> !usb"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "=== usual [~colin@alb-69-200-178-150.nycap.rr.com]  has joined #ubuntu"
+                }
+              ],
+              "unique": "12220"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "timestamp"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 14.90432,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "12500",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1250.0
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "12500"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "sampleCount": 856.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "2009-02-23_08_31",
+                    "lowRank": "1",
+                    "sampleCount": 35.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "2011-05-29_16_29",
+                    "lowRank": "2",
+                    "sampleCount": 28.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "2005-08-08_11_33",
+                    "lowRank": "3",
+                    "sampleCount": 25.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "2005-08-08_11_34",
+                    "lowRank": "4",
+                    "sampleCount": 21.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "2005-08-08_12_41",
+                    "lowRank": "5",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "2005-06-27_12_27",
+                    "lowRank": "6",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "2005-06-27_11_53",
+                    "lowRank": "7",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "2004-11-15_12_23",
+                    "lowRank": "8",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "2005-06-27_10_19",
+                    "lowRank": "9",
+                    "sampleCount": 18.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 856.0
+                },
+                {
+                  "frequency": 35.0,
+                  "value": "2009-02-23_08_31"
+                },
+                {
+                  "frequency": 28.0,
+                  "value": "2011-05-29_16_29"
+                },
+                {
+                  "frequency": 25.0,
+                  "value": "2005-08-08_11_33"
+                },
+                {
+                  "frequency": 21.0,
+                  "value": "2005-08-08_11_34"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": "2005-08-08_12_41"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": "2005-06-27_12_27"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": "2005-06-27_11_53"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "2004-11-15_12_23"
+                },
+                {
+                  "frequency": 18.0,
+                  "value": "2005-06-27_10_19"
+                }
+              ],
+              "unique": "2407"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "12500"
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

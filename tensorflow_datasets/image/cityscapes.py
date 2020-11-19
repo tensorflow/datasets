@@ -19,7 +19,6 @@ import os
 import re
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = '''\
@@ -32,30 +31,29 @@ _CITATION = '''\
 '''
 
 _DESCRIPTION = '''\
-  Cityscapes is a dataset consisting of diverse urban street scenes across 50 different cities
-  at varying times of the year as well as ground truths for several vision tasks including
-  semantic segmentation, instance level segmentation (TODO), and stereo pair disparity inference.
+Cityscapes is a dataset consisting of diverse urban street scenes across 50 different cities
+at varying times of the year as well as ground truths for several vision tasks including
+semantic segmentation, instance level segmentation (TODO), and stereo pair disparity inference.
 
+For segmentation tasks (default split, accessible via 'cityscapes/semantic_segmentation'), Cityscapes provides
+dense pixel level annotations for 5000 images at 1024 * 2048 resolution pre-split into training (2975),
+validation (500) and test (1525) sets. Label annotations for segmentation tasks span across 30+ classes
+commonly encountered during driving scene perception. Detailed label information may be found here:
+https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/helpers/labels.py#L52-L99
 
-  For segmentation tasks (default split, accessible via 'cityscapes/semantic_segmentation'), Cityscapes provides
-  dense pixel level annotations for 5000 images at 1024 * 2048 resolution pre-split into training (2975),
-  validation (500) and test (1525) sets. Label annotations for segmentation tasks span across 30+ classes
-  commonly encountered during driving scene perception. Detailed label information may be found here:
-  https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/helpers/labels.py#L52-L99
+Cityscapes also provides coarse grain segmentation annotations (accessible via 'cityscapes/semantic_segmentation_extra')
+for 19998 images in a 'train_extra' split which may prove useful for pretraining / data-heavy models.
 
-  Cityscapes also provides coarse grain segmentation annotations (accessible via 'cityscapes/semantic_segmentation_extra')
-  for 19998 images in a 'train_extra' split which may prove useful for pretraining / data-heavy models.
+Besides segmentation, cityscapes also provides stereo image pairs and ground truths for disparity inference
+tasks on both the normal and extra splits (accessible via 'cityscapes/stereo_disparity' and
+'cityscapes/stereo_disparity_extra' respectively).
 
+Ingored examples:
 
-  Besides segmentation, cityscapes also provides stereo image pairs and ground truths for disparity inference
-  tasks on both the normal and extra splits (accessible via 'cityscapes/stereo_disparity' and
-  'cityscapes/stereo_disparity_extra' respectively).
+- For 'cityscapes/stereo_disparity_extra':
+  - troisdorf_000000_000073_{*} images (no disparity map present)
 
-  Ingored examples:
-  - For 'cityscapes/stereo_disparity_extra':
-    - troisdorf_000000_000073_{*} images (no disparity map present)
-
-  WARNING: this dataset requires users to setup a login and password in order to get the files.
+WARNING: this dataset requires users to setup a login and password in order to get the files.
 '''
 
 
@@ -70,8 +68,7 @@ class CityscapesConfig(tfds.core.BuilderConfig):
           enables coarse grain segmentations, if segmentation labels are used.
   """
 
-  @api_utils.disallow_positional_args
-  def __init__(self, right_images=False, segmentation_labels=True,
+  def __init__(self, *, right_images=False, segmentation_labels=True,
                disparity_maps=False, train_extra_split=False, **kwargs):
     super(CityscapesConfig, self).__init__(version='1.0.0', **kwargs)
 

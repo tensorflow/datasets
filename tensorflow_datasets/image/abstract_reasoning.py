@@ -15,9 +15,6 @@
 
 """AbstractReasoning data set."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 import os
 import random
 import numpy as np
@@ -130,8 +127,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, split_type="neutral", **kwargs):
+  def __init__(self, *, split_type="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
     Args:
@@ -140,11 +136,10 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
         "attrs.pairs", "attrs.shape.color", "attrs.line.type",].
       **kwargs: keyword arguments forwarded to super.
     """
-    v100 = tfds.core.Version(
-        "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(AbstractReasoningConfig, self).__init__(
-        version=v100,
-        **kwargs)
+        version=tfds.core.Version("1.0.0"),
+        **kwargs,
+    )
     self.split_type = split_type
 
 

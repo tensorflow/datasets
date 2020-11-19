@@ -15,10 +15,6 @@
 
 """NSynth Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import csv
 import os
 
@@ -121,10 +117,23 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("full")
     if estimate_f0_and_loudness:
       name_parts.append("f0_and_loudness")
-    v230 = tfds.core.Version(
-        "2.3.0", "New `loudness_db` feature in decibels (unormalized).")
+    v230 = tfds.core.Version("2.3.0")
+    v231 = tfds.core.Version("2.3.1")
+    v232 = tfds.core.Version("2.3.2")
+    v233 = tfds.core.Version("2.3.3")
     super(NsynthConfig, self).__init__(
-        name=".".join(name_parts), version=v230, **kwargs)
+        name=".".join(name_parts),
+        version=v233,
+        supported_versions=[v232, v231, v230],
+        release_notes={
+            "2.3.3":
+            "F0 computed with fix in CREPE wave normalization "
+            "(https://github.com/marl/crepe/issues/49).",
+            "2.3.2": "Use Audio feature.",
+            "2.3.1": "F0 computed with normalization fix in CREPE.",
+            "2.3.0": "New `loudness_db` feature in decibels (unormalized).",
+        },
+        **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
 
@@ -145,8 +154,11 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         "id":
             tf.string,
         "audio":
-            tfds.features.Tensor(
-                shape=(_AUDIO_RATE * _NUM_SECS,), dtype=tf.float32),
+            tfds.features.Audio(
+                shape=(_AUDIO_RATE * _NUM_SECS,),
+                dtype=tf.float32,
+                sample_rate=_AUDIO_RATE,
+            ),
         "pitch":
             tfds.features.ClassLabel(num_classes=128),
         "velocity":

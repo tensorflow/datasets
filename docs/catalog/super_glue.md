@@ -6,21 +6,24 @@
   <meta itemprop="description" content="SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after&#10;GLUE with a new set of more difficult language understanding tasks, improved&#10;resources, and a new public leaderboard.&#10;&#10;BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;super_glue&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/super_glue" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
-  <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset.&#10;" />
+  <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset." />
 </div>
 # `super_glue`
 
-*   **Source code**:
-    [`tfds.text.super_glue.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+*   **Source code**: [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+
 *   **Versions**:
-    *   **`1.0.2`** (default): No release notes.
+
+    * **`1.0.2`** (default): No release notes.
+
 *   **Dataset size**: `Unknown size`
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load)):
-    `None`
+
+*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+
+*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+
 
 ## super_glue/boolq (default config)
 
@@ -30,28 +33,27 @@ SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
 GLUE with a new set of more difficult language understanding tasks, improved
 resources, and a new public leaderboard.
 
-BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example
-consists of a short passage and a yes/no question about the passage. The
-questions are provided anonymously and unsolicited by users of the Google search
-engine, and afterwards paired with a paragraph from a Wikipedia article
-containing the answer. Following the original work, we evaluate with accuracy.
+BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
+passage and a yes/no question about the passage. The questions are provided anonymously and
+unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a
+Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.
 
-*   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a
-    QA task where each example consists of a short passage and a yes/no question
-    about the passage. The questions are provided anonymously and unsolicited by
-    users of the Google search engine, and afterwards paired with a paragraph
-    from a Wikipedia article containing the answer. Following the original work,
-    we evaluate with accuracy.
-*   **Homepage**:
-    [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
+*   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
+passage and a yes/no question about the passage. The questions are provided anonymously and
+unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a
+Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.
+
+*   **Homepage**: [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
+
 *   **Download size**: `3.93 MiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,245
-'train'      | 9,427
-'validation' | 3,270
+Split  | Examples
+:----- | -------:
+`'test'` | 3,245
+`'train'` | 9,427
+`'validation'` | 3,270
 
 *   **Features**:
 
@@ -63,6 +65,7 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
 *   **Citation**:
 
 ```
@@ -82,6 +85,41 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-boolq-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/cb
 
@@ -115,16 +153,19 @@ for multi-class F1 we compute the unweighted average of the F1 per class.
     inter-annotator agreement above 0.85. The data is imbalanced (relatively
     fewer neutral examples), so we evaluate using accuracy and F1, where for
     multi-class F1 we compute the unweighted average of the F1 per class.
+
 *   **Homepage**:
     [https://github.com/mcdm/CommitmentBank](https://github.com/mcdm/CommitmentBank)
+
 *   **Download size**: `73.71 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 250
-'train'      | 250
-'validation' | 56
+Split          | Examples
+:------------- | -------:
+`'test'`       | 250
+`'train'`      | 250
+`'validation'` | 56
 
 *   **Features**:
 
@@ -157,6 +198,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-cb-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/copa
 
 *   **Description**:
@@ -188,16 +263,19 @@ accuracy.
     instance types for the model. All examples are handcrafted and focus on
     topics from online blogs and a photography-related encyclopedia. Following
     the recommendation of the authors, we evaluate using accuracy.
+
 *   **Homepage**:
     [http://people.ict.usc.edu/~gordon/copa.html](http://people.ict.usc.edu/~gordon/copa.html)
+
 *   **Download size**: `42.96 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 500
-'train'      | 400
-'validation' | 100
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 400
+`'validation'` | 100
 
 *   **Features**:
 
@@ -231,6 +309,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-copa-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/multirc
 
@@ -266,15 +378,18 @@ domains including news, fiction, and historical text.
     format more closely matches the API of other SuperGLUE tasks than span-based
     extractive QA does. The paragraphs are drawn from seven domains including
     news, fiction, and historical text.
+
 *   **Homepage**: [https://cogcomp.org/multirc/](https://cogcomp.org/multirc/)
+
 *   **Download size**: `1.06 MiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 9,693
-'train'      | 27,243
-'validation' | 4,848
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,693
+`'train'`      | 27,243
+`'validation'` | 4,848
 
 *   **Features**:
 
@@ -312,6 +427,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-multirc-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/record
 
 *   **Description**:
@@ -338,16 +487,19 @@ all mentions) token-level F1 and exact match (EM).
     of which are considered correct. Articles are drawn from CNN and Daily Mail.
     Following the original work, we evaluate with max (over all mentions)
     token-level F1 and exact match (EM).
+
 *   **Homepage**:
     [https://sheng-z.github.io/ReCoRD-explorer/](https://sheng-z.github.io/ReCoRD-explorer/)
+
 *   **Download size**: `49.36 MiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 10,000
-'train'      | 100,730
-'validation' | 10,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,000
+`'train'`      | 100,730
+`'validation'` | 10,000
 
 *   **Features**:
 
@@ -383,6 +535,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-record-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/rte
 
@@ -420,16 +606,19 @@ and we expect the remaining gap to be difficult to close.
     the time of writing. Given the eight point gap with respect to human
     performance, however, the task is not yet solved by machines, and we expect
     the remaining gap to be difficult to close.
+
 *   **Homepage**:
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
+
 *   **Download size**: `733.32 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 3,000
-'train'      | 2,490
-'validation' | 277
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,000
+`'train'`      | 2,490
+`'validation'` | 277
 
 *   **Features**:
 
@@ -488,6 +677,40 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-rte-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## super_glue/wic
 
 *   **Description**:
@@ -512,16 +735,19 @@ evaluate using accuracy.
     sentences. Sentences are drawn from WordNet (Miller, 1995), VerbNet
     (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
     using accuracy.
+
 *   **Homepage**:
     [https://pilehvar.github.io/wic/](https://pilehvar.github.io/wic/)
+
 *   **Download size**: `386.93 KiB`
+
 *   **Splits**:
 
-Split        | Examples
-:----------- | -------:
-'test'       | 1,400
-'train'      | 5,428
-'validation' | 638
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,400
+`'train'`      | 5,428
+`'validation'` | 638
 
 *   **Features**:
 
@@ -565,6 +791,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wic-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/wsc
 
@@ -637,16 +897,20 @@ However, the validation and test sets come from different domains, with the
 validation set consisting of ambiguous examples such that changing one non-noun
 phrase word will change the coreference dependencies in the sentence. The test
 set consists only of more straightforward examples, with a high number of noun
-phrases (and thus more choices for the model), but low to no ambiguity. *
-**Homepage**:
-[https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-* **Download size**: `31.98 KiB` * **Splits**:
+phrases (and thus more choices for the model), but low to no ambiguity.
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 554
-'validation' | 104
+*   **Homepage**:
+    [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
+*   **Download size**: `31.98 KiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 554
+`'validation'` | 104
 
 *   **Features**:
 
@@ -681,6 +945,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/wsc.fixed
 
@@ -759,15 +1057,20 @@ set consists only of more straightforward examples, with a high number of noun
 phrases (and thus more choices for the model), but low to no ambiguity.
 
 This version fixes issues where the spans are not actually substrings of the
-text. * **Homepage**:
-[https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-* **Download size**: `31.98 KiB` * **Splits**:
+text.
 
-Split        | Examples
-:----------- | -------:
-'test'       | 146
-'train'      | 554
-'validation' | 104
+*   **Homepage**:
+    [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+
+*   **Download size**: `31.98 KiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 146
+`'train'`      | 554
+`'validation'` | 104
 
 *   **Features**:
 
@@ -802,6 +1105,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc.fixed-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/axb
 
@@ -839,14 +1176,17 @@ used for the RTE task.
     collapse contradiction and neutral into a single not_entailment label, and
     request that submissions include predictions on the resulting set from the
     model used for the RTE task.
+
 *   **Homepage**:
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
+
 *   **Download size**: `33.15 KiB`
+
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 1,104
+Split    | Examples
+:------- | -------:
+`'test'` | 1,104
 
 *   **Features**:
 
@@ -872,6 +1212,40 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axb-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## super_glue/axg
 
@@ -912,14 +1286,17 @@ demonstrate the presence of gender bias in a system, but not prove its absence.
     high positive predictive value and low negative predictive value; that is,
     they may demonstrate the presence of gender bias in a system, but not prove
     its absence.
+
 *   **Homepage**:
     [https://github.com/rudinger/winogender-schemas](https://github.com/rudinger/winogender-schemas)
+
 *   **Download size**: `10.17 KiB`
+
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-'test' | 356
+Split    | Examples
+:------- | -------:
+`'test'` | 356
 
 *   **Features**:
 
@@ -955,3 +1332,37 @@ FeaturesDict({
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axg-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

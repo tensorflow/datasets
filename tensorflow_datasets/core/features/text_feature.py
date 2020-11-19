@@ -17,16 +17,18 @@
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import html
 import os
+import textwrap
 
+from absl import logging
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import feature
-from tensorflow_datasets.core.features import text as text_lib
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Text(feature.Tensor):
@@ -36,9 +38,9 @@ class Text(feature.Tensor):
     """Constructs a Text FeatureConnector.
 
     Args:
-      encoder: `tfds.features.text.TextEncoder`, an encoder that can convert
+      encoder: `tfds.deprecated.text.TextEncoder`, an encoder that can convert
         text to integers. If None, the text will be utf-8 byte-encoded.
-      encoder_config: `tfds.features.text.TextEncoderConfig`, needed if
+      encoder_config: `tfds.deprecated.text.TextEncoderConfig`, needed if
         restoring from a file with `load_metadata`.
     """
     if encoder and encoder_config:
@@ -54,6 +56,13 @@ class Text(feature.Tensor):
     self._encoder_config = encoder_config
 
     has_encoder = bool(encoder or self._encoder_cls)
+    if has_encoder:
+      logging.warning(
+          "TFDS datasets with text encoding are deprecated and will be removed "
+          "in a future version. Instead, you should use the plain text version "
+          "and tokenize the text using `tensorflow_text` (See: "
+          "https://www.tensorflow.org/tutorials/tensorflow_text/intro#tfdata_example)"
+      )
     super(Text, self).__init__(
         shape=(None,) if has_encoder else (),
         dtype=tf.int64 if has_encoder else tf.string,
@@ -102,8 +111,6 @@ class Text(feature.Tensor):
   def encode_example(self, example_data):
     if self.encoder:
       example_data = self.encoder.encode(example_data)
-    else:
-      example_data = example_data
     return super(Text, self).encode_example(example_data)
 
   def save_metadata(self, data_dir, feature_name):
@@ -116,7 +123,7 @@ class Text(feature.Tensor):
     fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
     encoder_cls = self._encoder_cls
     if encoder_cls:
-      self._encoder = encoder_cls.load_from_file(fname_prefix)
+      self._encoder = encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
       return
 
     # Error checking: ensure there are no metadata files
@@ -160,3 +167,33 @@ class Text(feature.Tensor):
     if self.encoder is None:
       return {}
     return {"encoder": repr(self.encoder)}
+
+  def repr_html(self, ex: bytes) -> str:
+    """Text are decoded."""
+    if self.encoder is not None:
+      return repr(ex)
+
+    ex = ex.decode("utf-8")
+    ex = html.escape(ex)
+    ex = textwrap.shorten(ex, width=1000)  # Truncate long text
+    return ex
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> "Text":
+    if "use_encoder" in value:
+      raise ValueError(
+          "Deprecated encoder not supported. Please use the plain text version "
+          "with `tensorflow_text`."
+      )
+    del value  # Unused
+    return cls()
+
+  def to_json_content(self) -> Json:
+    if self._encoder:
+      logging.warning(
+          "Dataset is using deprecated text encoder API which will be removed "
+          "soon. Please use the plain_text version of the dataset and migrate "
+          "to `tensorflow_text`."
+      )
+      return dict(use_encoder=True)
+    return dict()

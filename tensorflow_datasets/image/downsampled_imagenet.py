@@ -15,10 +15,6 @@
 
 """Downsampled Imagenet dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -54,8 +50,7 @@ _DATA_OPTIONS = ["32x32", "64x64"]
 class DownsampledImagenetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Downsampled Imagenet."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a DownsampledImagenetConfig.
 
     Args:
@@ -78,10 +73,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           description=(
               "A dataset consisting of Train and Validation images of " +
               config_name + " resolution."),
-          version=tfds.core.Version(
-              "2.0.0",
-              "New split API (https://tensorflow.org/datasets/splits)"),
+          version=tfds.core.Version("2.0.0"),
           data=config_name,
+          release_notes={
+              "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+          },
       ) for config_name in _DATA_OPTIONS
   ]
 
@@ -90,7 +86,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
+            "image": tfds.features.Image(encoding_format="jpeg"),
         }),
         supervised_keys=None,
         homepage="http://image-net.org/small/download.php",

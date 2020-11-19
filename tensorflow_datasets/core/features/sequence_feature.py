@@ -15,16 +15,16 @@
 
 """Sequence feature."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import numpy as np
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class Sequence(top_level_feature.TopLevelFeature):
@@ -91,6 +91,7 @@ class Sequence(top_level_feature.TopLevelFeature):
     # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
+    assert not kwargs, 'Json export/import should be updated'
     super(Sequence, self).__init__(**kwargs)
 
   @property
@@ -109,13 +110,13 @@ class Sequence(top_level_feature.TopLevelFeature):
     """See base class for details."""
     # Add the additional length dimension to every shape
     tensor_info = self._feature.get_tensor_info()
-    return utils.map_nested(self._add_length_dim, tensor_info)
+    return tf.nest.map_structure(self._add_length_dim, tensor_info)
 
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
     tensor_info = self._feature.get_serialized_info()
-    return utils.map_nested(self._add_length_dim, tensor_info)
+    return tf.nest.map_structure(self._add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
@@ -136,7 +137,7 @@ class Sequence(top_level_feature.TopLevelFeature):
             dtype=serialized_info.dtype.as_numpy_dtype,
         )
 
-      return utils.map_nested(_build_empty_np, self.get_serialized_info())
+      return tf.nest.map_structure(_build_empty_np, self.get_serialized_info())
 
     # Encode each individual elements
     sequence_elements = [
@@ -207,6 +208,19 @@ class Sequence(top_level_feature.TopLevelFeature):
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
+  @classmethod
+  def from_json_content(cls, value: Json) -> 'Sequence':
+    return cls(
+        feature=feature_lib.FeatureConnector.from_json(value['feature']),
+        length=value['length']
+    )
+
+  def to_json_content(self) -> Json:
+    return {
+        'feature': self.feature.to_json(),
+        'length': self._length,
+    }
+
 
 def _np_to_list(elem):
   """Returns list from list, tuple or ndarray."""
@@ -230,6 +244,7 @@ def _transpose_dict_list(dict_list):
   # 2. Extract the sequence length (and ensure the length is constant for all
   # elements)
   length = {'value': None}  # dict because `nonlocal` is Python3 only
+
   def update_length(elem):
     if length['value'] is None:
       length['value'] = len(elem)
@@ -242,6 +257,7 @@ def _transpose_dict_list(dict_list):
 
   # 3. Extract each individual elements
   return [
-      utils.map_nested(lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
-      for i in range(length['value'])
+      utils.map_nested(
+          lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
+      for i in range(length['value'])  # pytype: disable=wrong-arg-types
   ]

@@ -16,10 +16,6 @@
 # -*- coding: utf-8 -*-
 """Tests for WMT translate dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 import six
 from tensorflow_datasets import testing
@@ -78,6 +74,10 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
       "train": 2,
       "validation": 4,
   }
+
+  # Wmt itself do not define checksums. Checksums are contained in individual
+  # `wmt16.txt`, `wmt17.txt`,... files.
+  SKIP_CHECKSUMS = True
 
   def test_gzip_reading(self):
     results = [

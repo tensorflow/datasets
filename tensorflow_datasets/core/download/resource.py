@@ -15,25 +15,25 @@
 
 """Classes to specify download or extraction information."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import base64
 import codecs
+import enum
 import hashlib
 import itertools
 import json
 import os
 import re
+from typing import Any, Optional
 
-import enum
 from six.moves import urllib
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core.download import util
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums as checksums_lib
+from tensorflow_datasets.core.utils import type_utils
+
+# Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
+Json = Any
 
 
 _hex_codec = codecs.getdecoder('hex_codec')
@@ -184,7 +184,7 @@ def get_dl_fname(url, checksum):
   Returns:
     string of 90 chars max.
   """
-  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
+  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))  # pytype: disable=wrong-arg-types
   checksum = tf.compat.as_text(checksum)[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return '%s%s%s' % (name, checksum, extension)
@@ -196,22 +196,46 @@ def get_dl_dirname(url):
   return get_dl_fname(url, checksum)
 
 
-def _get_info_path(path):
+def _get_info_path(path: type_utils.PathLike) -> str:
   """Returns path (`str`) of INFO file associated with resource at path."""
-  return '%s.INFO' % path
+  return '%s.INFO' % os.fspath(path)
 
 
-def _read_info(info_path):
+def _read_info(info_path: type_utils.PathLike) -> Json:
   """Returns info dict or None."""
-  if not tf.io.gfile.exists(info_path):
+  if not tf.io.gfile.exists(os.fspath(info_path)):
     return None
-  with tf.io.gfile.GFile(info_path) as info_f:
+  with tf.io.gfile.GFile(os.fspath(info_path)) as info_f:
     return json.load(info_f)
 
 
 # TODO(pierrot): one lock per info path instead of locking everything.
-@util.build_synchronize_decorator()
-def write_info_file(resource, path, dataset_name, original_fname):
+synchronize_decorator = utils.build_synchronize_decorator()
+
+
+def rename_info_file(
+    src_path: type_utils.PathLike,
+    dst_path: type_utils.PathLike,
+    overwrite: bool = False,
+) -> None:
+  tf.io.gfile.rename(
+      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite
+  )
+
+
+@synchronize_decorator
+def read_info_file(info_path: type_utils.PathLike) -> Json:
+  return _read_info(_get_info_path(info_path))
+
+
+@synchronize_decorator
+def write_info_file(
+    url: str,
+    path: type_utils.PathLike,
+    dataset_name: str,
+    original_fname: str,
+    url_info: checksums_lib.UrlInfo,
+) -> None:
   """Write the INFO file next to local file.
 
   Although the method is synchronized, there is still a risk two processes
@@ -219,29 +243,41 @@ def write_info_file(resource, path, dataset_name, original_fname):
   data (`dataset_name`) is only for human consumption.
 
   Args:
-    resource: resource for which to write the INFO file.
+    url: Url for which to write the INFO file.
     path: path of downloaded file.
     dataset_name: data used to dl the file.
     original_fname: name of file as downloaded.
+    url_info: checksums/size info of the url
   """
+  url_info_dict = url_info.asdict()
   info_path = _get_info_path(path)
   info = _read_info(info_path) or {}
-  urls = set(info.get('urls', []) + [resource.url])
+  urls = set(info.get('urls', []) + [url])
   dataset_names = info.get('dataset_names', [])
   if dataset_name:
     dataset_names.append(dataset_name)
-  if 'original_fname' in info and info['original_fname'] != original_fname:
-    raise AssertionError(
-        '`original_fname` "%s" stored in %s does NOT match "%s".' % (
+  if info.get('original_fname', original_fname) != original_fname:
+    raise ValueError(
+        '`original_fname` "{}" stored in {} does NOT match "{}".'.format(
             info['original_fname'], info_path, original_fname))
-  info = dict(urls=list(urls), dataset_names=list(set(dataset_names)),
-              original_fname=original_fname)
-  with py_utils.atomic_write(info_path, 'w') as info_f:
+  if info.get('url_info', url_info_dict) != url_info_dict:
+    raise ValueError(
+        'File info {} contains a different checksum that the downloaded one: '
+        'Stored: {}; Expected: {}'.format(
+            info_path, info['url_info'], url_info_dict))
+  info = dict(
+      urls=list(urls),
+      dataset_names=list(set(dataset_names)),
+      original_fname=original_fname,
+      url_info=url_info_dict,
+  )
+  with utils.atomic_write(info_path, 'w') as info_f:
     json.dump(info, info_f, sort_keys=True)
 
 
-def get_extract_method(path):
+def get_extract_method(path: type_utils.PathLike):
   """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
+  path = os.fspath(path)
   info_path = _get_info_path(path)
   info = _read_info(info_path)
   fname = info.get('original_fname', path) if info else path
@@ -251,11 +287,13 @@ def get_extract_method(path):
 class Resource(object):
   """Represents a resource to download, extract, or both."""
 
-  @api_utils.disallow_positional_args()
-  def __init__(self,
-               url=None,
-               extract_method=None,
-               path=None):
+  def __init__(
+      self,
+      *,
+      url: Optional[str] = None,
+      extract_method: Optional[ExtractMethod] = None,
+      path: Optional[type_utils.PathLike] = None,
+  ):
     """Resource constructor.
 
     Args:
@@ -266,16 +304,16 @@ class Resource(object):
         not be downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self.path = path
+    self.path: utils.ReadWritePath = utils.as_path(path) if path else None
     self._extract_method = extract_method
 
   @classmethod
-  def exists_locally(cls, path):
+  def exists_locally(cls, path: type_utils.PathLike):
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
-    return (tf.io.gfile.exists(path) and
-            tf.io.gfile.exists(_get_info_path(path)))
+    path = os.fspath(path)
+    return tf.io.gfile.exists(path) and tf.io.gfile.exists(_get_info_path(path))
 
   @property
   def extract_method(self):

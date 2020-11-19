@@ -1,0 +1,35 @@
+{
+  "citation": "@InProceedings{paws2019naacl,\n  title = {{PAWS: Paraphrase Adversaries from Word Scrambling}},\n  author = {Zhang, Yuan and Baldridge, Jason and He, Luheng},\n  booktitle = {Proc. of NAACL},\n  year = {2019}\n}",
+  "description": "Existing paraphrase identification datasets lack sentence pairs\nthat have high lexical overlap without being paraphrases.\nModels trained on such data fail to distinguish pairs like flights\nfrom New York to Florida and flights from Florida to New York.\nThis dataset contains 108,463 human-labeled and 656k noisily labeled pairs\nthat feature the importance of modeling structure, context, and word order information\nfor the problem of paraphrase identification.\n\nFor further details, see the accompanying paper: PAWS: Paraphrase Adversaries from Word Scrambling\nat https://arxiv.org/abs/1904.01130\n\nThis corpus contains pairs generated from Wikipedia pages,\ncontaining pairs that are generated from both word swapping and back translation methods.\nAll pairs have human judgements on both paraphrasing and fluency\nand they are split into Train/Dev/Test sections.\n\nAll files are in the tsv format with four columns:\n\nid\tA unique id for each pair\nsentence1\tThe first sentence\nsentence2\tThe second sentence\n(noisy_)label\t(Noisy) label for each pair\n\nEach label has two possible values: 0 indicates the pair has different meaning,\nwhile 1 indicates the pair is a paraphrase.",
+  "downloadSize": "4687157",
+  "location": {
+    "urls": [
+      "https://github.com/google-research-datasets/paws"
+    ]
+  },
+  "name": "paws_wiki",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "2309984",
+      "shardLengths": [
+        "8000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "14230123",
+      "shardLengths": [
+        "49401"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "2296966",
+      "shardLengths": [
+        "8000"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

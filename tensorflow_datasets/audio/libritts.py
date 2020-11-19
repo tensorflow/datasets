@@ -15,12 +15,11 @@
 
 """LibriTTS dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import io
 import os
+import tarfile
 
+import six
 import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -67,14 +66,15 @@ _DL_URLS = {
 class Libritts(tfds.core.BeamBasedBuilder):
   """LibriTTS dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "speech": tfds.features.Audio(),
+            "speech": tfds.features.Audio(
+                file_format="wav", sample_rate=24000),
             "text_original": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
             "speaker_id": tf.int64,
@@ -87,18 +87,19 @@ class Libritts(tfds.core.BeamBasedBuilder):
         metadata=tfds.core.MetadataDict(sample_rate=24000,),
     )
 
-  def _populate_metadata(self, dirs):
-    # All dirs contain the same metadata.
-    directory = list(dirs.values())[0]
+  def _populate_metadata(self, archive_paths):
+    # All archives contain the same metadata.
+    archive_path = list(archive_paths.values())[0]
 
     speaker_info = {}
-    path = os.path.join(directory, "LibriTTS/speakers.tsv")
-    with tf.io.gfile.GFile(path) as f:
-      for n, line in enumerate(f):
+    with tf.io.gfile.GFile(archive_path, "rb") as f:
+      tarf = tarfile.open(mode="r:gz", fileobj=f)
+      speakers_tsv = tarf.extractfile("LibriTTS/speakers.tsv")
+      for n, line in enumerate(speakers_tsv):
         # Skip the first line which is just a header.
         if n == 0:
           continue
-        fields = line.strip().split("\t")
+        fields = line.decode("utf-8").strip().split("\t")
         if len(fields) == 3:
           # Some lines are missing the final field, so leave it blank.
           fields.append("")
@@ -111,37 +112,54 @@ class Libritts(tfds.core.BeamBasedBuilder):
     self.info.metadata["speakers"] = speaker_info
 
   def _split_generators(self, dl_manager):
-    extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
-    self._populate_metadata(extracted_dirs)
-    splits = [tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
-              for k, v in extracted_dirs.items()]
+    archives = dl_manager.download(_DL_URLS)
+    self._populate_metadata(archives)
+    splits = [
+        tfds.core.SplitGenerator(name=k, gen_kwargs={"archive_path": v})
+        for k, v in archives.items()
+    ]
     return splits
 
-  def _build_pcollection(self, pipeline, directory):
+  def _build_pcollection(self, pipeline, archive_path):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
     return (pipeline
-            | beam.Create([directory])
-            | beam.FlatMap(_generate_libritts_examples)
-            | beam.Reshuffle())
+            | beam.Create([archive_path])
+            | beam.FlatMap(_extract_libritts_data)
+            | beam.Reshuffle()
+            | "merge_transcripts_and_audio" >> beam.CombinePerKey(_merge_dicts))
 
 
-def _generate_libritts_examples(directory):
-  """Generate examples from a LibriTTS directory."""
-  transcripts_glob = os.path.join(directory, "LibriTTS", "*/*/*/*.trans.tsv")
-  for transcript_file in tf.io.gfile.glob(transcripts_glob):
-    path = os.path.dirname(transcript_file)
-    with tf.io.gfile.GFile(os.path.join(path, transcript_file)) as f:
-      for line in f:
-        key, text_original, text_normalized = line.split("\t")
-        audio_file = "%s.wav" % key
-        speaker_id, chapter_id = [int(el) for el in key.split("_")[:2]]
-        example = {
-            "speech": os.path.join(path, audio_file),
-            "text_normalized": text_normalized,
-            "text_original": text_original,
-            "speaker_id": speaker_id,
-            "chapter_id": chapter_id,
-            "id": key,
-        }
+def _generate_transcripts(transcript_csv_file):
+  """Generates partial examples from transcript CSV file."""
+  for line in transcript_csv_file:
+    key, text_original, text_normalized = line.decode("utf-8").split("\t")
+    speaker_id, chapter_id = [int(el) for el in key.split("_")[:2]]
+    example = {
+        "text_normalized": text_normalized,
+        "text_original": text_original,
+        "speaker_id": speaker_id,
+        "chapter_id": chapter_id,
+        "id": key,
+    }
+    yield key, example
+
+
+def _extract_libritts_data(archive_path):
+  """Generate partial audio or transcript examples from a LibriTTS archive."""
+  for path, contents in tfds.core.download.extractor.iter_tar(archive_path):
+    if path.endswith(".trans.tsv"):
+      for key, example in _generate_transcripts(contents):
         yield key, example
+    elif path.endswith(".wav"):
+      key = six.ensure_text(os.path.splitext(os.path.basename(path))[0])
+      memfile = io.BytesIO(contents.read())
+      example = {"speech": memfile}
+      yield key, example
+
+
+def _merge_dicts(dicts):
+  merged = {}
+  for d in dicts:
+    merged.update(d)
+  return merged

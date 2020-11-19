@@ -15,19 +15,14 @@
 
 """Test import."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import tensorflow_datasets as tfds  # pylint: disable=unused-import
-from tensorflow_datasets import testing
+import tensorflow_datasets as tfds
 
 
-class ImportTest(testing.TestCase):
+class ImportTest(tfds.testing.TestCase):
 
   def test_import(self):
     pass
 
 
 if __name__ == '__main__':
-  testing.test_main()
+  tfds.testing.test_main()

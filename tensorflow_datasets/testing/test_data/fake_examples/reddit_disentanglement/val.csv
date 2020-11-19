@@ -1,0 +1,4 @@
+author,id,parent_id,created_utc,link_id,body
+person1,t3_c100xxx,t3_c100xxx,1347800000.0,t3_c100xxx,"This is topic starter"
+person2,t1_c101xxx,t3_c100xxx,1347800150.0,t3_c100xxx,"First comment"
+person1,t1_c102xxx,t1_c101xxx,1347800500.0,t3_c100xxx,"Second comment"

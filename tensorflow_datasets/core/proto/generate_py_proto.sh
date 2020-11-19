@@ -5,10 +5,14 @@
 
 
 # Ensure we have the desired protoc version.
-if [[ $(protoc --version) != 'libprotoc 3.11.2' ]]; then
+MIN_VERSION="libprotoc 3.11.2"
+CURR_VERSION="$(protoc --version)"
+if ["$(printf '%s\n' "$MIN_VERSION" "$CURR_VERSION" | sort -V | head -n1)" != "$MIN_VERSION"]; then
   echo 'Please use version 3.11.2 or above.'
   echo 'Please run install_protoc.sh to install it.'
   exit
+else
+  echo "Using $CURR_VERSION"
 fi
 
 # Function to prepend a pylint directive to skip the generated python file.

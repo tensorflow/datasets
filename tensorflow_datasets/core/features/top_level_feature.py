@@ -16,11 +16,6 @@
 """Wrapper around FeatureDict to allow better control over decoding.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import feature as feature_lib
 
 
@@ -28,32 +23,12 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   """Top-level `FeatureConnector` to manage decoding.
 
   Note that `FeatureConnector` which are declared as `TopLevelFeature` can be
-  nested. However, only the top-level feature can be decoded.
+  nested. However, only the top-level feature should be decoded.
 
   `TopLevelFeature` allows better control over the decoding, and
   eventually better support for augmentations.
   """
 
-  def __init__(self, *args, **kwargs):
-    """Constructor."""
-    self.__is_top_level = False
-    super(TopLevelFeature, self).__init__(*args, **kwargs)
-
-  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
-  # disable it in methods that use them, to avoid the warning.
-  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
-  @tf.autograph.experimental.do_not_convert()
-  def _set_top_level(self):
-    """Indicates that the feature is top level.
-
-    Internal function called by `DatasetInfo`.
-    """
-    self.__is_top_level = True
-
-  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
-  # disable it in methods that use them, to avoid the warning.
-  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
-  @tf.autograph.experimental.do_not_convert()
   def decode_example(self, serialized_example, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.
@@ -69,13 +44,6 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     Returns:
       example: Nested `dict` containing the decoded nested examples.
     """
-    # pylint: enable=line-too-long
-    if not self.__is_top_level:
-      raise AssertionError(
-          'Feature {} can only be decoded when defined as top-level '
-          'feature, through info.features.decode_example()'.format(
-              type(self).__name__))
-
     # Step 1: Flatten the nested dict => []
     flat_example = self._flatten(serialized_example)
     flat_features = self._flatten(self)
@@ -83,23 +51,24 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     flat_decoders = self._flatten(decoders)
 
     # Step 2: Apply the decoding
-    flatten_decoded = []
-    for (
-        feature,
-        example,
-        serialized_info,
-        decoder,
-    ) in zip(
-        flat_features,
-        flat_example,
-        flat_serialized_info,
-        flat_decoders):
-      flatten_decoded.append(_decode_feature(
-          feature=feature,
-          example=example,
-          serialized_info=serialized_info,
-          decoder=decoder,
-      ))
+    flatten_decoded = [
+        _decode_feature(  # pylint: disable=g-complex-comprehension
+            feature=feature,
+            example=example,
+            serialized_info=serialized_info,
+            decoder=decoder,
+        ) for (
+            feature,
+            example,
+            serialized_info,
+            decoder,
+        ) in zip(
+            flat_features,
+            flat_example,
+            flat_serialized_info,
+            flat_decoders
+        )
+    ]
 
     # Step 3: Restore nesting [] => {}
     nested_decoded = self._nest(flatten_decoded)

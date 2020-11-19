@@ -15,10 +15,6 @@
 
 """Tests for extractor."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl.testing import absltest
@@ -71,7 +67,8 @@ class ExtractorTest(testing.TestCase):
 
   def _test_extract(self, method, archive_name, expected_files):
     from_path = os.path.join(self.test_data, 'archives', archive_name)
-    self.extractor.extract(from_path, method, self.to_path).get()
+    path = self.extractor.extract(from_path, method, self.to_path).get()
+    self.assertIsInstance(path, os.PathLike)
     for name, content in expected_files.items():
       path = os.path.join(self.to_path, name)
       self.assertEqual(_read(path), content, 'File %s has bad content.' % path)

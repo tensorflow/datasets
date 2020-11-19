@@ -15,10 +15,6 @@
 
 """Tests for amazon_us_reviews dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.structured import amazon_us_reviews
 

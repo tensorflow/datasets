@@ -22,6 +22,7 @@ By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
 
 Instructions:
+
 ```
 python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=cifar10
@@ -33,10 +34,6 @@ containing your `DatasetBuilder` definition imported.
 
 
 """
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import importlib
 import os
@@ -64,7 +61,9 @@ flags.DEFINE_string("exclude_datasets", "",
 flags.DEFINE_multi_string(
     "module_import", None,
     "Modules to import. Use this when your DatasetBuilder is defined outside "
-    "of tensorflow_datasets so that it is registered.")
+    "of tensorflow_datasets so that it is registered. Multiple imports can "
+    "be passed by calling the flag multiple times, or using coma separated "
+    "values.")
 flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
@@ -81,7 +80,12 @@ flags.DEFINE_string(
 flags.DEFINE_string("checksums_dir", None,
                     "For external datasets, specify the location of the "
                     "dataset checksums.")
-default_compute_stats = tfds.download.ComputeStatsMode.AUTO
+
+flags.DEFINE_boolean(
+    "add_name_to_manual_dir", False, "If true, append the dataset name to the "
+    "`manual_dir`")
+
+default_compute_stats = tfds.download.ComputeStatsMode.SKIP
 flags.DEFINE_enum(
     "compute_stats",
     default_compute_stats.value,
@@ -102,6 +106,9 @@ flags.DEFINE_list(
 # Development flags
 flags.DEFINE_boolean("register_checksums", False,
                      "If True, store size and checksum of downloaded files.")
+flags.DEFINE_boolean(
+    "force_checksums_validation",
+    False, "If True, raise an error if the checksums are not found.")
 
 # Debug flags
 flags.DEFINE_boolean("debug", False,
@@ -122,6 +129,7 @@ def download_config():
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
       register_checksums=FLAGS.register_checksums,
+      force_checksums_validation=FLAGS.force_checksums_validation,
   )
 
 
@@ -139,6 +147,9 @@ def download_and_prepare(builder):
     dl_config.beam_options = beam.options.pipeline_options.PipelineOptions(
         flags=["--%s" % opt for opt in FLAGS.beam_pipeline_options])
 
+  if FLAGS.add_name_to_manual_dir:
+    dl_config.manual_dir = os.path.join(dl_config.manual_dir, builder.name)
+
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
       download_config=dl_config,
@@ -153,7 +164,8 @@ def download_and_prepare(builder):
 
 def import_modules(modules):
   for module in modules:
-    importlib.import_module(module)
+    for m in module.split(","):  # Allow to pass imports as coma separated vals.
+      importlib.import_module(m)
 
 
 def main(_):
@@ -170,17 +182,24 @@ def main(_):
     tfds.disable_progress_bar()
 
   if FLAGS.checksums_dir:
-    tfds.download.add_checksums_dir(FLAGS.checksums_dir)
+    tfds.deprecated.add_checksums_dir(FLAGS.checksums_dir)
 
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())
   datasets_to_build -= set(FLAGS.exclude_datasets.split(","))
-  version = "experimental_latest" if FLAGS.experimental_latest_version else None
-  logging.info("Running download_and_prepare for datasets:\n%s",
+
+  # Only pass the version kwargs when required. Otherwise, `version=None`
+  # overwrite the version parsed from the name.
+  # `tfds.builder('my_dataset:1.2.0', version=None)`
+  if FLAGS.experimental_latest_version:
+    version_kwarg = {"version": "experimental_latest"}
+  else:
+    version_kwarg = {}
+
+  logging.info("Running download_and_prepare for dataset(s):\n%s",
                "\n".join(datasets_to_build))
-  logging.info('Version: "%s"', version)
   builders = {
-      name: tfds.builder(name, data_dir=FLAGS.data_dir, version=version)
+      name: tfds.builder(name, data_dir=FLAGS.data_dir, **version_kwarg)
       for name in datasets_to_build
   }
 
@@ -193,10 +212,18 @@ def main(_):
     if not builder.BUILDER_CONFIGS:
       raise ValueError(
           "--builder_config_id can only be used with datasets with configs")
+    if FLAGS.builder_config_id >= len(builder.BUILDER_CONFIGS):
+      return
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
+    # Use `config.name` to avoid
+    # https://github.com/tensorflow/datasets/issues/2348
     builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config, version=version)
+        builder.name,
+        data_dir=FLAGS.data_dir,
+        config=config.name,
+        **version_kwarg,
+    )
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -205,8 +232,10 @@ def main(_):
         # requested, then compute all.
         for config in builder.BUILDER_CONFIGS:
           builder_for_config = tfds.builder(
-              builder.name, data_dir=FLAGS.data_dir, config=config,
-              version=version)
+              builder.name,
+              data_dir=FLAGS.data_dir,
+              config=config.name,
+              **version_kwarg)
           download_and_prepare(builder_for_config)
       else:
         # If there is a slash in the name, then user requested a specific
@@ -215,5 +244,5 @@ def main(_):
 
 
 if __name__ == "__main__":
-  tf.compat.v1.enable_eager_execution()
+  tf.enable_v2_behavior()
   app.run(main)

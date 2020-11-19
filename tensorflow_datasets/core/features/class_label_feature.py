@@ -18,15 +18,16 @@
 import os
 import six
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
 class ClassLabel(feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, num_classes=None, names=None, names_file=None):
+  def __init__(self, *, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
 
     There are 3 ways to define a ClassLabel, which correspond to the 3
@@ -52,17 +53,19 @@ class ClassLabel(feature.Tensor):
     self._int2str = None
 
     # The label is explicitly set as undefined (no label defined)
-    if not sum(bool(a) for a in (num_classes, names, names_file)):
+    if all(a is None for a in (num_classes, names, names_file)):
       return
 
-    if sum(bool(a) for a in (num_classes, names, names_file)) != 1:
+    if sum(a is not None for a in (num_classes, names, names_file)) != 1:
       raise ValueError(
           "Only a single argument of ClassLabel() should be provided.")
 
-    if num_classes:
+    if num_classes is not None:
       self._num_classes = num_classes
+    elif names is not None:
+      self.names = names
     else:
-      self.names = names or _load_names_from_file(names_file)
+      self.names = _load_names_from_file(names_file)
 
   @property
   def num_classes(self):
@@ -165,12 +168,29 @@ class ClassLabel(feature.Tensor):
   def _additional_repr_info(self):
     return {"num_classes": self.num_classes}
 
+  def repr_html(self, ex: int) -> str:
+    """Class labels are displayed with their name."""
+    if ex == -1:
+      return "-"
+    elif not self._int2str:
+      return str(ex)
+    else:
+      return f"{ex} ({self.int2str(ex)})"
+
+  @classmethod
+  def from_json_content(cls, value: Json) -> "ClassLabel":
+    return cls(**value)
+
+  def to_json_content(self) -> Json:
+    return {"num_classes": self.num_classes}
+
 
 def _get_names_filepath(data_dir, feature_name):
   return os.path.join(data_dir, "{}.labels.txt".format(feature_name))
 
 
 def _load_names_from_file(names_filepath):
+  names_filepath = os.fspath(names_filepath)
   with tf.io.gfile.GFile(names_filepath, "r") as f:
     return [
         name.strip()

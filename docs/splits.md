@@ -19,6 +19,11 @@ Instructions can be provided as either strings or `ReadInstruction`s. Strings
 are more compact and readable for simple cases, while `ReadInstruction`s provide
 more options and might be easier to use with variable slicing parameters.
 
+NOTE: Due to the shards being read in parallel, order isn't guaranteed to be
+consistent between sub-splits. In other words reading `test[0:100]` followed by
+`test[100:200]` may yield examples in a different order than reading
+`test[:200]`.
+
 ### Examples
 
 Examples using the string API:
@@ -30,7 +35,7 @@ train_ds = tfds.load('mnist', split='train')
 # The full `train` split and the full `test` split as two distinct datasets.
 train_ds, test_ds = tfds.load('mnist', split=['train', 'test'])
 
-# The full `train` and `test` splits, concatenated together.
+# The full `train` and `test` splits, interleaved together.
 train_test_ds = tfds.load('mnist', split='train+test')
 
 # From record 10 (included) to record 20 (excluded) of `train` split.
@@ -69,7 +74,7 @@ train_ds, test_ds = tfds.load('mnist', split=[
     tfds.core.ReadInstruction('test'),
 ])
 
-# The full `train` and `test` splits, concatenated together.
+# The full `train` and `test` splits, interleaved together.
 ri = tfds.core.ReadInstruction('train') + tfds.core.ReadInstruction('test')
 train_test_ds = tfds.load('mnist', split=ri)
 
@@ -102,6 +107,16 @@ trains_ds = tfds.load('mnist', [
     for k in range(0, 100, 10)])
 ```
 
+### `tfds.even_splits`
+
+`tfds.even_splits` generates a list of non-overlapping sub-splits of same size.
+
+```python
+assert tfds.even_splits('train', n=3) == [
+    'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
+]
+```
+
 ### Percentage slicing and rounding
 
 If a slice of a split is requested using the percent (`%`) unit, and the
@@ -119,13 +134,20 @@ tfds.load("mnist", split="test[49%:50%]")
 
 Alternatively, the user can use the rounding `pct1_dropremainder`, so specified
 percentage boundaries are treated as multiples of 1%. This option should be used
-when consistency is needed (eg: `len(5%) == 5 * len(1%)`).
+when consistency is needed (eg: `len(5%) == 5 * len(1%)`). This means the last
+examples may be truncated if `info.split[split_name].num_examples % 100 != 0`.
 
 Example:
 
 ```py
 # Records 0 (included) to 99 (excluded).
-tfds.load("mnist", split="test[:99%]", rounding="pct1_dropremainder")
+split = tfds.core.ReadInstruction(
+    'test',
+    to=99,
+    rounding='pct1_dropremainder',
+    unit = '%',
+)
+tfds.load("mnist", split=split)
 ```
 
 ### Reproducibility

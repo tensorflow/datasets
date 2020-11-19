@@ -15,10 +15,6 @@
 
 """The Multi-Genre NLI Corpus."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 import tensorflow.compat.v2 as tf
@@ -53,51 +49,22 @@ distinctive cross-genre generalization evaluation. The corpus served as the
 basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 """
 
-ROOT_URL = "http://storage.googleapis.com/tfds-data/downloads/multi_nli/multinli_1.0.zip"
-
-
-class MultiNLIMismatchConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for MultiNLI Mismatch."""
-
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
-    """BuilderConfig for MultiNLI Mismatch.
-
-    Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(MultiNLIMismatchConfig, self).__init__(**kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+ROOT_URL = "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip"
 
 
 class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
   """MultiNLI: The Stanford Question Answering Dataset. Version 1.1."""
 
-  BUILDER_CONFIGS = [
-      MultiNLIMismatchConfig(
-          name="plain_text",
-          version="0.0.1",
-          description="Plain text",
-      ),
-  ]
+  VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "premise":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "hypothesis":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "label":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+            "premise": tfds.features.Text(),
+            "hypothesis": tfds.features.Text(),
+            "label": tfds.features.Text(),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -106,10 +73,6 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, filepath):
-    for _, ex in self._generate_examples(filepath):
-      yield " ".join([ex["premise"], ex["hypothesis"], ex["label"]])
-
   def _split_generators(self, dl_manager):
 
     downloaded_dir = dl_manager.download_and_extract(ROOT_URL)
@@ -117,16 +80,6 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
 
     validation_path = os.path.join(mnli_path, "multinli_1.0_dev_mismatched.txt")
-
-    # Generate shared vocabulary
-    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    self.info.features["premise"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_path))
-    encoder = self.info.features["premise"].encoder
-
-    self.info.features["premise"].maybe_set_encoder(encoder)
-    self.info.features["hypothesis"].maybe_set_encoder(encoder)
-    self.info.features["label"].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(

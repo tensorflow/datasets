@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Tests for tensorflow_datasets.image.celeba."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import celeba
 
@@ -32,7 +28,7 @@ class CelebATest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = {
-      "img_align_celeba": "",  # Code looks into 'img_align_celeba' subdir.
+      "img_align_celeba": "img_align_celeba.zip",
       "list_eval_partition": "list_eval_partition.txt",
       "list_attr_celeba": "list_attr_celeba.txt",
       "landmarks_celeba": "list_landmarks_align_celeba.txt",

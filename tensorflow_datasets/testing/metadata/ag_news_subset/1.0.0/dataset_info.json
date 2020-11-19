@@ -1,0 +1,32 @@
+{
+  "citation": "@misc{zhang2015characterlevel,\n    title={Character-level Convolutional Networks for Text Classification},\n    author={Xiang Zhang and Junbo Zhao and Yann LeCun},\n    year={2015},\n    eprint={1509.01626},\n    archivePrefix={arXiv},\n    primaryClass={cs.LG}\n}",
+  "description": "AG is a collection of more than 1 million news articles.\nNews articles have been gathered from more than 2000  news sources by ComeToMyHead in more than 1 year of activity.\nComeToMyHead is an academic news search engine which has been running since July, 2004.\nThe dataset is provided by the academic comunity for research purposes in data mining (clustering, classification, etc),\ninformation retrieval (ranking, search, etc), xml, data compression, data streaming,\nand any other non-commercial activity.\nFor more information, please refer to the link http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html .\n\nThe AG's news topic classification dataset is constructed by Xiang Zhang (xiang.zhang@nyu.edu) from the dataset above.\nIt is used as a text classification benchmark in the following paper:\nXiang Zhang, Junbo Zhao, Yann LeCun. Character-level Convolutional Networks for Text Classification. Advances in Neural Information Processing Systems 28 (NIPS 2015).\n\nThe AG's news topic classification dataset is constructed by choosing 4 largest classes from the original corpus.\nEach class contains 30,000 training samples and 1,900 testing samples.\nThe total number of training samples is 120,000 and testing 7,600.",
+  "downloadSize": "11784327",
+  "location": {
+    "urls": [
+      "https://arxiv.org/abs/1509.01626"
+    ]
+  },
+  "name": "ag_news_subset",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "2226751",
+      "shardLengths": [
+        "7600"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "35301386",
+      "shardLengths": [
+        "120000"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "description",
+    "output": "label"
+  },
+  "version": "1.0.0"
+}

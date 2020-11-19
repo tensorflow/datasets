@@ -15,10 +15,6 @@
 
 """Tests for titanic data loading."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.structured import titanic
 import tensorflow_datasets.testing as tfds_test
 

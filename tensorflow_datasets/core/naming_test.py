@@ -15,10 +15,6 @@
 
 """Tests tensorflow_datasets.core.naming."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from absl.testing import parameterized
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
@@ -45,6 +41,8 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
   )
   def test_snake_to_camelcase(self, camel, snake):
     self.assertEqual(naming.snake_to_camelcase(snake), camel)
+    # camelcase_to_snakecase is a no-op if the name is already snake_case.
+    self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
   def test_sharded_filenames(self):
     prefix = "/tmp/foo"

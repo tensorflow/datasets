@@ -13,11 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""TODO(scicite): Add a description here."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Test for scicite dataset."""
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import scicite

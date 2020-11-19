@@ -15,10 +15,7 @@
 
 """Module to use to extract archives. No business logic."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import concurrent.futures
 import contextlib
 import gzip
 import io
@@ -27,7 +24,7 @@ import tarfile
 import uuid
 import zipfile
 
-import concurrent.futures
+from absl import logging
 import promise
 import six
 import tensorflow.compat.v2 as tf
@@ -74,11 +71,14 @@ class _Extractor(object):
 
   def extract(self, path, extract_method, to_path):
     """Returns `promise.Promise` => to_path."""
+    path = os.fspath(path)
+    to_path = os.fspath(to_path)
     self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._executor.submit(self._sync_extract,
-                                   path, extract_method, to_path)
+    future = self._executor.submit(
+        self._sync_extract, path, extract_method, to_path
+    )
     return promise.Promise.resolve(future)
 
   def _sync_extract(self, from_path, method, to_path):
@@ -86,13 +86,23 @@ class _Extractor(object):
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     path = None
+    dst_path = None  # To avoid undefined variable if exception is raised
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
-        _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
+        dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
+        _copy(handle, dst_path)
     except BaseException as err:
-      msg = 'Error while extracting %s to %s (file: %s) : %s' % (
+      msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
           from_path, to_path, path, err)
+      # Check if running on windows
+      if os.name == 'nt' and dst_path and len(dst_path) > 250:
+        msg += (
+            '\n'
+            'On windows, path lengths greater than 260 characters may '
+            'result in an error. See the doc to remove the limitation: '
+            'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
+        )
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
@@ -100,7 +110,7 @@ class _Extractor(object):
       tf.io.gfile.rmtree(to_path)
     tf.io.gfile.rename(to_path_tmp, to_path)
     self._pbar_path.update(1)
-    return to_path
+    return utils.as_path(to_path)
 
 
 def _copy(src_file, dest_path):
@@ -126,7 +136,7 @@ def _normpath(path):
 
 @contextlib.contextmanager
 def _open_or_pass(path_or_fobj):
-  if isinstance(path_or_fobj, six.string_types):
+  if isinstance(path_or_fobj, utils.PathLikeCls):
     with tf.io.gfile.GFile(path_or_fobj, 'rb') as f_obj:
       yield f_obj
   else:
@@ -150,9 +160,13 @@ def iter_tar(arch_f, stream=False):
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
     for member in tar:
+      if stream and (member.islnk() or member.issym()):
+        # Links cannot be dereferenced in stream mode.
+        logging.warning('Skipping link during extraction: %s', member.name)
+        continue
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
-        path = _normpath(member.path)
+        path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
           continue
         yield [path, extract_file]
@@ -175,15 +189,17 @@ def iter_bzip2(arch_f):
 
 
 def iter_zip(arch_f):
+  """Iterate over zip archive."""
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
-      if extract_file:  # File with data (not directory):
-        path = _normpath(member.filename)
-        if not path:
-          continue
-        yield [path, extract_file]
+      if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
+        continue
+      path = _normpath(member.filename)
+      if not path:
+        continue
+      yield [path, extract_file]
 
 
 _EXTRACT_METHODS = {
@@ -198,5 +214,13 @@ _EXTRACT_METHODS = {
 
 
 def iter_archive(path, method):
-  """Yields (path_in_archive, f_obj) for archive at path using `tfds.download.ExtractMethod`."""  # pylint: disable=line-too-long
+  """Iterate over an archive.
+
+  Args:
+    path: `str`, archive path
+    method: `tfds.download.ExtractMethod`, extraction method
+
+  Returns:
+    An iterator of `(path_in_archive, f_obj)`
+  """
   return _EXTRACT_METHODS[method](path)

@@ -1,0 +1,45 @@
+# coding=utf-8
+# Copyright 2020 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Tests for tensorflow_datasets.core.utils.generic_path."""
+
+import os
+import pathlib
+
+from unittest import mock
+
+from tensorflow_datasets.core.utils import generic_path
+from tensorflow_datasets.core.utils import gpath
+
+
+def test_windows_encoding():
+  with mock.patch('os.name', 'nt'):
+    assert os.name == 'nt'
+
+    # On windows, paths should be `WindowsGPath`
+    path = generic_path.as_path('c:/Program Files/text.txt')
+    assert isinstance(path, gpath.WindowsGPath)
+
+    path = generic_path.as_path(pathlib.PosixPath('some_dir/abc'))
+    assert isinstance(path, gpath.WindowsGPath)
+
+    # Other `GPath` and `gs://` should be `PosixPurePath`
+    path = generic_path.as_path('gs://some_dir/abc')
+    assert not isinstance(path, gpath.WindowsGPath)
+    assert isinstance(path, gpath.PosixGPath)
+
+    path = generic_path.as_path(gpath.PosixGPath('some_dir/abc'))
+    assert not isinstance(path, gpath.WindowsGPath)
+    assert isinstance(path, gpath.PosixGPath)
