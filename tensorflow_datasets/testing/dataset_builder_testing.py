@@ -362,19 +362,12 @@ class DatasetBuilderTestCase(
         download_checksums=self._download_checksums,
         manual_dir=manual_dir,
     ):
-      if isinstance(builder, dataset_builder.BeamBasedBuilder):
-        # For Beam datasets, set-up the runner config
-        import apache_beam as beam   # pylint: disable=import-outside-toplevel,g-import-not-at-top
-        beam_runner = None
-        beam_options = beam.options.pipeline_options.PipelineOptions()
-      else:
-        beam_runner = None
-        beam_options = None
+      # For Beam datasets, set-up the runner config
+      beam_runner = None
 
       download_config = download.DownloadConfig(
           compute_stats=download.ComputeStatsMode.SKIP,
           beam_runner=beam_runner,
-          beam_options=beam_options,
       )
       builder.download_and_prepare(download_config=download_config)
 
