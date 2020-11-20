@@ -101,7 +101,6 @@ class Quac(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples based on filepath."""
-    print("filepath: ", filepath)
     with tf.io.gfile.GFile(filepath) as f:
       row = json.loads(f.readline())
       for data in row["data"]:

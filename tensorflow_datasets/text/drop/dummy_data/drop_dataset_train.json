@@ -1,0 +1,809 @@
+{
+  "nfl_995": {
+    "passage": " Still searching for their first win, the Bengals flew to Texas Stadium for a Week 5 interconference duel with the Dallas Cowboys.  In the first quarter, Cincinnati trailed early as Cowboys kicker Nick Folk got a 30-yard field goal, along with RB Felix Jones getting a 33-yard TD run.  In the second quarter, Dallas increased its lead as QB Tony Romo completed a 4-yard TD pass to TE Jason Witten.  The Bengals would end the half with kicker Shayne Graham getting a 41-yard and a 31-yard field goal. In the third quarter, Cincinnati tried to rally as QB Carson Palmer completed an 18-yard TD pass to WR T. J. Houshmandzadeh.  In the fourth quarter, the Bengals got closer as Graham got a 40-yard field goal, yet the Cowboys answered with Romo completing a 57-yard TD pass to WR Terrell Owens.  Cincinnati tried to come back as Palmer completed a 10-yard TD pass to Houshmandzadeh (with a failed 2-point conversion), but Dallas pulled away with Romo completing a 15-yard TD pass to WR Patrick Crayton.",
+    "qa_pairs": [
+      {
+        "question": "Which Bengals receiver scored two touchdowns?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "T. J. Houshmandzadeh"
+          ]
+        },
+        "query_id": "5b6a9699-f8a9-44f4-8912-0adfa49decc0",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Houshmandzadeh"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "T. J. Houshmandzadeh"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "Who caught the last touchdown of the game?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "WR Patrick Crayton"
+          ]
+        },
+        "query_id": "3e0f9c3d-2bd8-46b4-960d-42457b3e2802",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Patrick Crayton"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Patrick Crayton"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many field goals did Shayne Graham kick in the first half?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "e2169f5d-b3b9-4931-8bfa-f99b9bc4348e",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "Which player had the longest rushing TD?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "Felix Jones"
+          ]
+        },
+        "query_id": "ddbb57c6-c1d5-4a25-93fd-9bea7cf5ff50",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Terrell Owens"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Felix Jones"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "What was the longest TD pass of the game?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "57-yard"
+          ]
+        },
+        "query_id": "405ab3fb-9392-4a23-9589-8c9c5d9b9508",
+        "validated_answers": [
+          {
+            "number": "57",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "57",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many second quarter field goals did the Bengals get?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "66eed2c2-e1d9-4092-b21d-5dc2551a3118",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "Which team scored the final TD of the game?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "Dallas"
+          ]
+        },
+        "query_id": "bdf5020a-ec3e-49fb-925c-4a967b6bb911",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Dallas"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Dallas"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many touchdowns did T.J. Houshmandzadeh have?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "08c59a80-401a-446b-966b-7a87818b20f4",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many touchdowns did Jones have?",
+        "answer": {
+          "number": "1",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "fec21716-8ca2-4565-9f88-d6e1cb74ce3a",
+        "validated_answers": [
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many passed did Houshmandzadeh catch?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "3c6c2eaf-12ea-40ab-963d-c029828634e4",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many touchdowns did Crayton have?",
+        "answer": {
+          "number": "1",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "e1e183dc-566f-4bcf-ab3e-c0df5b1a292b",
+        "validated_answers": [
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many wins did the Bengals have before this game?",
+        "answer": {
+          "number": "0",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "eaf004f3-b98b-4456-ae5e-fade5744f222",
+        "validated_answers": [
+          {
+            "number": "0",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "0",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "0",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many points did Dallas score in the first quarter?",
+        "answer": {
+          "number": "10",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "4d3c49da-0c96-466d-a20b-e83e68fda2de",
+        "validated_answers": [
+          {
+            "number": "17",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "10",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many field goals did the Bengals have in the first half?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "f38d7fa8-910c-44fd-b6ee-026fa5d585fd",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "Which team scored the least points?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "Bengals"
+          ]
+        },
+        "query_id": "ae75262b-f7d5-466f-a24b-e1ee32b20e02",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Bengals"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Cowboys"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many field goals were there in the fourth quarter?",
+        "answer": {
+          "number": "1",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "375e6679-1834-4769-97cf-7cc04196e43c",
+        "validated_answers": [
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "1",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many touchdown passes did Tony Romo throw?",
+        "answer": {
+          "number": "3",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "ee308676-57f9-4932-af29-c756bf7fe15d",
+        "validated_answers": [
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "Which player had the longest touchdown reception?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "WR Terrell Owens"
+          ]
+        },
+        "query_id": "0f3ed05c-4173-4db4-97eb-e30f7342bcb5",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Terrell Owens"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Terrell Owens"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Terrell Owens"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Terrell Owens"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many times did the Cowboys score in the first half?",
+        "answer": {
+          "number": "3",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "37b4f978-9915-457d-be0a-691e2373fd89",
+        "validated_answers": [
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many first-half field goals were kicked by Shayne Graham?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "a9e66c93-3995-4aa7-b065-a3d679dad2ce",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "wiki_url": "https://en.wikipedia.org/wiki/Earl's_Court"
+  }
+}
