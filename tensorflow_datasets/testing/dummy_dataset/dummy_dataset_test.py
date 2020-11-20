@@ -35,6 +35,14 @@ class DummyDatasetTest(tfds.testing.DatasetBuilderTestCase):
       'train': 20,
   }
 
+  def test_registered(self):
+    # We disable the registration test:
+    # * `load_test.py` import `dummy_dataset` with `skip_registration` to test
+    #   dynamic loading of community datasets.
+    # * It seems imports are global between tests.
+    # So dataset may or may not be registered depending on test execution order.
+    pass
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()
