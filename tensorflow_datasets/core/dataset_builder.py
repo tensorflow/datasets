@@ -217,12 +217,17 @@ class DatasetBuilder(registered.RegisteredDataset):
   def canonical_version(self) -> utils.Version:
     if self._builder_config and self._builder_config.version:
       return utils.Version(self._builder_config.version)
-    else:
+    elif self.VERSION:
       return utils.Version(self.VERSION)
+    else:
+      raise ValueError(
+          f"DatasetBuilder {self.name} does not have a defined version. "
+          "Please add a `VERSION = tfds.core.Version('x.y.z')` to the class."
+      )
 
   @utils.memoized_property
   def supported_versions(self):
-    if self._builder_config:
+    if self._builder_config and self._builder_config.supported_versions:
       return self._builder_config.supported_versions
     else:
       return self.SUPPORTED_VERSIONS
@@ -237,11 +242,8 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _pick_version(self, requested_version):
     """Returns utils.Version instance, or raise AssertionError."""
-    if not self._builder_config and not self.VERSION:
-      raise AssertionError(
-          "DatasetBuilder {} does not have a defined version. Please add a "
-          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
-              self.name))
+    # Validate that `canonical_version` is correctly defined
+    assert self.canonical_version
 
     if requested_version == "experimental_latest":
       return max(self.versions)
