@@ -143,6 +143,7 @@ DATASET_EXTRAS = {
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'duke_ultrasound': ['scipy'],
+    'duke_ultranet': ['h5py', 'scipy', 'apache_beam'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'lsun': ['tensorflow-io'],
