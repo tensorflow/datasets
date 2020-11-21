@@ -290,6 +290,7 @@ class DownloadManager(object):
   @property
   def downloaded_size(self):
     """Returns the total size of downloaded files."""
+    #return sum(size for size, sha256 in self._recorded_url_infos.values())
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
   def _get_dl_path(self, url: str, sha256: str) -> ReadWritePath:

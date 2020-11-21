@@ -137,6 +137,7 @@ DATASET_EXTRAS = {
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
+    'mimiciii_cxr': ['apache_beam', 'pydicom', 'pandas'],
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
@@ -146,6 +147,7 @@ DATASET_EXTRAS = {
     'duke_ultranet': ['h5py', 'scipy', 'apache_beam'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'deeplesion': ['pandas'],
     'lsun': ['tensorflow-io'],
     'wsc273': ['bs4', 'lxml'],
 }

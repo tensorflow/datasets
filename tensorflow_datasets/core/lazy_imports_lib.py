@@ -109,6 +109,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def pydicom(cls):
+    return _try_import("pydicom")
+
+  @utils.classproperty
+  @classmethod
   def PIL_Image(cls):  # pylint: disable=invalid-name
     # TiffImagePlugin need to be activated explicitly on some systems
     # https://github.com/python-pillow/Pillow/blob/5.4.x/src/PIL/Image.py#L407
