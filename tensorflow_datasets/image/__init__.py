@@ -18,7 +18,6 @@
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.arc import ARC
-from tensorflow_datasets.image.bccd import BCCD
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
@@ -29,13 +28,9 @@ from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.div2k import Div2k
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
-from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
-from tensorflow_datasets.image.jsrt import Jsrt  # TODO(jsrt) Sort alphabetically
-from tensorflow_datasets.image.mimiciii_cxr import MimiciiiCxr  # TODO(mimiciii_cxr) Sort alphabetically
-from tensorflow_datasets.image.montgomery_xray import MontgomeryXray  # TODO(montgomery_xray) Sort alphabetically
 from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
@@ -58,11 +53,8 @@ from tensorflow_datasets.image_classification.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image_classification.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image_classification.citrus import CitrusLeaves
 from tensorflow_datasets.image_classification.cmaterdb import Cmaterdb
-from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistology
-from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistologyLarge
 from tensorflow_datasets.image_classification.cycle_gan import CycleGAN
 from tensorflow_datasets.image_classification.deep_weeds import DeepWeeds
-from tensorflow_datasets.image_classification.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image_classification.dmlab import Dmlab
 from tensorflow_datasets.image_classification.dtd import Dtd
 from tensorflow_datasets.image_classification.eurosat import Eurosat
@@ -78,7 +70,6 @@ from tensorflow_datasets.image_classification.imagenette import Imagenette
 from tensorflow_datasets.image_classification.imagewang import Imagewang
 from tensorflow_datasets.image_classification.inaturalist import INaturalist2017
 from tensorflow_datasets.image_classification.lfw import LFW
-from tensorflow_datasets.image_classification.malaria import Malaria
 from tensorflow_datasets.image_classification.mnist import EMNIST
 from tensorflow_datasets.image_classification.mnist import FashionMNIST
 from tensorflow_datasets.image_classification.mnist import KMNIST
@@ -105,7 +96,16 @@ from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.montgomery_xray import MontgomeryXray  # TODO(montgomery_xray) Sort alphabetically
+
+"""Medical datasets."""
 from tensorflow_datasets.image.jsrt import Jsrt  # TODO(jsrt) Sort alphabetically
+from tensorflow_datasets.image.mimiciii_cxr import MimiciiiCxr  # TODO(mimiciii_cxr) Sort alphabetically
+from tensorflow_datasets.image.montgomery_xray import MontgomeryXray  # TODO(montgomery_xray) Sort alphabetically
 from tensorflow_datasets.image.duke_ultranet import DukeUltranet  # TODO(duke_ultranet) Sort alphabetically
 from tensorflow_datasets.image.xcat import Xcat  # TODO(xcat) Sort alphabetically
+from tensorflow_datasets.image.bccd import BCCD
+from tensorflow_datasets.image_classification.malaria import Malaria
+from tensorflow_datasets.image_classification.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
+from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistology
+from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistologyLarge
+from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
