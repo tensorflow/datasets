@@ -1,0 +1,31 @@
+version: 2.1
+workflows:
+ version: 2
+ build-deploy:
+   jobs:
+     - deploy:
+         filters:
+           branches:
+             only: master
+jobs:
+  deploy:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = __token__ " >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+      - run:
+          name: create packages
+          command: |
+            python setup.py sdist --nightly
+            python setup.py bdist_wheel --nightly
+      - run:
+          name: upload to pypi
+          command: |
+            pip install twine
+            python -m twine upload --repository pypi dist/*

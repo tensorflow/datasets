@@ -1,4 +1,6 @@
-# TensorFlow Datasets
+# Gradient TensorFlow Datasets
+
+The following is a fork from TFDS maintained by Gradient Health for internal dataset versioning. It is the hope that these datasets can be made public in the future. We will match major versions for TFDS version releases.
 
 TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 

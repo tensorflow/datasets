@@ -25,7 +25,7 @@ if '--nightly' in sys.argv:
 else:
   nightly = False
 
-project_name = 'tensorflow-datasets'
+project_name = 'tensorflow-datasets-gradient'
 
 # To enable importing version.py directly, we add its path to sys.path.
 version_path = os.path.join(
@@ -34,7 +34,7 @@ sys.path.append(version_path)
 from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
 if nightly:
-  project_name = 'tfds-nightly'
+  project_name = 'tfds-nightly-gradient'
   # Version as `X.Y.Z.dev199912312459`
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
@@ -161,7 +161,6 @@ all_dataset_extras = list(itertools.chain.from_iterable(
     if ds_name not in ISOLATED_DATASETS
 ))
 
-
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
@@ -179,10 +178,10 @@ setup(
     version=__version__,
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
-    author='Google Inc.',
-    author_email='packages@tensorflow.org',
-    url='https://github.com/tensorflow/datasets',
-    download_url='https://github.com/tensorflow/datasets/tags',
+    author='Gradient Health Inc.',
+    author_email='tech@gradienthealth.io',
+    url='https://github.com/gradienthealth/datasets',
+    download_url='https://github.com/gradienthealth/datasets/tags',
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
@@ -210,7 +209,7 @@ setup(
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
-    keywords='tensorflow machine learning datasets',
+    keywords='gradienthealth tensorflow machine learning datasets',
     entry_points={
         'console_scripts': [
             'tfds = tensorflow_datasets.scripts.cli.main:launch_cli'
