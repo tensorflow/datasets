@@ -85,6 +85,37 @@ def test_repr_gcs():
   assert isinstance(path, gpathlib.PosixGPath)
   assert os.fspath(path) == f'{_GCS_SCHEME}bucket/some/other/file.json'
 
+  path = gpathlib.PosixGPath(path, 'other')
+  assert isinstance(path, gpathlib.PosixGPath)
+  assert os.fspath(path) == f'{_GCS_SCHEME}bucket/some/other/file.json/other'
+
+
+def test_repr_s3():
+  path = gpathlib.PosixGPath('s3://bucket/dir')
+  assert isinstance(path, gpathlib.PosixGPath)
+  assert repr(path) == "PosixGPath('s3://bucket/dir')"
+  assert str(path) == 's3://bucket/dir'
+  assert os.fspath(path) == 's3://bucket/dir'
+
+  path = path.parent / 'some/other/file.json'
+  assert isinstance(path, gpathlib.PosixGPath)
+  assert os.fspath(path) == 's3://bucket/some/other/file.json'
+
+  path = gpathlib.PosixGPath(path, 'other')
+  assert isinstance(path, gpathlib.PosixGPath)
+  assert os.fspath(path) == 's3://bucket/some/other/file.json/other'
+
+
+def test_repr_windows():
+  path = gpathlib.WindowsGPath('C:\\Program Files\\Directory')
+  assert isinstance(path, gpathlib.WindowsGPath)
+  assert str(path) == 'C:\\Program Files\\Directory'
+  assert os.fspath(path) == 'C:\\Program Files\\Directory'
+
+  path = path.parent / 'other/file.json'
+  assert isinstance(path, gpathlib.WindowsGPath)
+  assert os.fspath(path) == 'C:\\Program Files\\other\\file.json'
+
 
 @pytest.mark.parametrize(
     'parts',
