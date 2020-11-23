@@ -60,7 +60,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "angle_label": tfds.features.ClassLabel(names=_ANGLE_LABELS),
-            "object_id": tfds.features.Text()
+            "object_id": tfds.features.ClassLabel(names=_OBJECT_IDS),
         }),
         supervised_keys=("image", "angle_label"),
         homepage=
@@ -90,6 +90,6 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
         object_id = file_name.split("_")[0]
         yield file_name, {
             "image": image,
-            "angel_label": angle_label,
+            "angle_label": angle_label,
             "object_id": object_id,
         }
