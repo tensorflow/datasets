@@ -40,6 +40,11 @@ def test_windows_encoding():
     assert not isinstance(path, gpath.WindowsGPath)
     assert isinstance(path, gpath.PosixGPath)
 
+    # Other `GPath` and `s3://` should be `PosixPurePath`
+    path = generic_path.as_path('s3://some_dir/abc')
+    assert not isinstance(path, gpath.WindowsGPath)
+    assert isinstance(path, gpath.PosixGPath)
+
     path = generic_path.as_path(gpath.PosixGPath('some_dir/abc'))
     assert not isinstance(path, gpath.WindowsGPath)
     assert isinstance(path, gpath.PosixGPath)
