@@ -61,6 +61,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "angle_label": tfds.features.ClassLabel(names=_ANGLE_LABELS),
             "object_id": tfds.features.ClassLabel(names=_OBJECT_IDS),
+            "angle": tfds.features.Tensor(shape=[], dtype=tf.int64),
         }),
         supervised_keys=("image", "angle_label"),
         homepage=
@@ -87,9 +88,11 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
       if file_name.endswith(".png"):
         image = os.path.join(data_dir_path, file_name)
         angle_label = file_name.split("_")[2].split(".")[0]
+        angle = tf.cast(int(angle_label), tf.int64)
         object_id = file_name.split("_")[0]
         yield file_name, {
             "image": image,
             "angle_label": angle_label,
             "object_id": object_id,
+            "angle": angle,
         }
