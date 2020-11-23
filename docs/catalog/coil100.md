@@ -44,12 +44,13 @@ Split  | Examples
 ```python
 FeaturesDict({
     'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=72),
-    'object_id': Text(shape=(), dtype=tf.string),
+    'angle_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=72),
+    'object_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=100),
+    'angle': Tensor(shape=(), dtype=tf.int64),
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'angle_label')`
 
 *   **Citation**:
 
