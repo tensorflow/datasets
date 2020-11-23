@@ -78,6 +78,8 @@ class Drop(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_DATA_LINK)
 
+    path = path / "drop_dataset"
+
     return {
         "train": self._generate_examples(path / "drop_dataset_train.json"),
         "dev": self._generate_examples(path / "drop_dataset_dev.json"),
