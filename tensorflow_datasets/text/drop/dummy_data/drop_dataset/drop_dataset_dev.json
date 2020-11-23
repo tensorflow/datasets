@@ -1,0 +1,883 @@
+{
+  "nfl_1184": {
+    "passage": " Hoping to rebound from their loss to the Patriots, the Raiders stayed at home for a Week 16 duel with the Houston Texans.  Oakland would get the early lead in the first quarter as quarterback JaMarcus Russell completed a 20-yard touchdown pass to rookie wide receiver Chaz Schilens.  The Texans would respond with fullback Vonta Leach getting a 1-yard touchdown run, yet the Raiders would answer with kicker Sebastian Janikowski getting a 33-yard and a 30-yard field goal.  Houston would tie the game in the second quarter with kicker Kris Brown getting a 53-yard and a 24-yard field goal. Oakland would take the lead in the third quarter with wide receiver Johnnie Lee Higgins catching a 29-yard touchdown pass from Russell, followed up by an 80-yard punt return for a touchdown.  The Texans tried to rally in the fourth quarter as Brown nailed a 40-yard field goal, yet the Raiders' defense would shut down any possible attempt.",
+    "qa_pairs": [
+      {
+        "question": "Who scored the first touchdown of the game?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "Chaz Schilens"
+          ]
+        },
+        "query_id": "f37e81fa-ef7b-4583-b671-762fc433faa9",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Chaz Schilens"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "JaMarcus Russell"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many field goals did Kris Brown kick?",
+        "answer": {
+          "number": "3",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "ac6ba235-3024-4f63-a6ab-730a14def4cb",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "Which team won the game?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "Raiders"
+          ]
+        },
+        "query_id": "2c7c93f6-69ed-47cc-a5af-94a00c185a26",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Raiders"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Raiders"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Raiders"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "the Raiders"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "the Raiders"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many field goals did both teams kick in the first half?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "7dfd2b64-f39e-4bb4-aeb0-1900adda6018",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many more yards was Kris Browns's first field goal over his second?",
+        "answer": {
+          "number": "29",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "121a8f57-7752-4373-a9ba-748b2c577cd2",
+        "validated_answers": [
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "20",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "Who threw the longest pass?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "Russell"
+          ]
+        },
+        "query_id": "05d06269-191b-4638-97ca-e1304e7883d1",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "JaMarcus Russell"
+            ]
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Russell"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "JaMarcus Russell"
+            ]
+          },
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "Russell"
+            ]
+          }
+        ]
+      },
+      {
+        "question": "How many yards was the longest touchdown of the game?",
+        "answer": {
+          "number": "",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": [
+            "80-yard"
+          ]
+        },
+        "query_id": "01c67c32-9281-4d13-afd2-33aa922994dc",
+        "validated_answers": [
+          {
+            "number": "",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": [
+              "80-yard punt return"
+            ]
+          },
+          {
+            "number": "80",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "80",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "80",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "80",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many field goals did Sebastian Janikowski and Kris Brown both score each?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "03fdc8a0-d62b-49a0-8087-af92e6659650",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "5",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards difference is there between Sebastian Janikowski's longest field goal and his shortest field goal?",
+        "answer": {
+          "number": "3",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "17bdcfb1-8ad9-46b5-8a3b-1f9769dfd60a",
+        "validated_answers": [
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "3",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards difference is there between Kris Brown's longest and shortest field goals?",
+        "answer": {
+          "number": "29",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "d4547161-dd97-4164-93a1-144986d94c51",
+        "validated_answers": [
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards longer was the 80-yard punt than the touchdown pass from Russell to Johnnie Lee Higgins?",
+        "answer": {
+          "number": "51",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "0aa153e9-057a-4347-acb7-8114cb1d68e8",
+        "validated_answers": [
+          {
+            "number": "51",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "51",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "51",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "51",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many touchdowns were scored in the game?",
+        "answer": {
+          "number": "4",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "142b8af7-b9b0-446b-9cb6-a6940b80461f",
+        "validated_answers": [
+          {
+            "number": "4",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "4",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many of the touchdowns were passing touchdowns?",
+        "answer": {
+          "number": "2",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "4fbb0c95-06a8-4205-9edb-156a22eecaa7",
+        "validated_answers": [
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "2",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards was the longest passing touchdown?",
+        "answer": {
+          "number": "29",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "0a92ef8a-1780-4379-8ab8-6f2939fce562",
+        "validated_answers": [
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards longer was the longest passing touchdown than the shortest?",
+        "answer": {
+          "number": "9",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "43810a23-d66e-49bb-816b-16f5a331fbb0",
+        "validated_answers": [
+          {
+            "number": "9",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "9",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many field goals were scored in the game?",
+        "answer": {
+          "number": "5",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "084814c7-cc64-40a6-a308-4de211d531b4",
+        "validated_answers": [
+          {
+            "number": "5",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "5",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards was the longest field goal in the game?",
+        "answer": {
+          "number": "53",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "17e35029-a5d0-44d3-844e-edd0759d5797",
+        "validated_answers": [
+          {
+            "number": "53",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "53",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards was the shortest field goal in the game?",
+        "answer": {
+          "number": "24",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "fe7754d3-322e-41b2-b1b7-a9bc0cbca9a2",
+        "validated_answers": [
+          {
+            "number": "24",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "24",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      },
+      {
+        "question": "How many yards longer was the longest field goal than the shortest?",
+        "answer": {
+          "number": "29",
+          "date": {
+            "day": "",
+            "month": "",
+            "year": ""
+          },
+          "spans": []
+        },
+        "query_id": "8b442d27-241b-4fd9-87d4-1e5bee19cb2e",
+        "validated_answers": [
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          },
+          {
+            "number": "29",
+            "date": {
+              "day": "",
+              "month": "",
+              "year": ""
+            },
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "wiki_url": "https://en.wikipedia.org/wiki/Earl's_Court"
+  }
+}

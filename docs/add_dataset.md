@@ -8,6 +8,32 @@ is already present.
 
 Note: Googlers, see [tfds-add](http://goto.google.com/tfds-add) guide.
 
+## TL;DR
+
+The easiest way to write a new dataset is to use the
+[TFDS CLI](https://www.tensorflow.org/datasets/cli):
+
+```sh
+cd path/to/my/project/datasets/
+tfds new my_dataset  # Create `my_dataset/my_dataset.py` template files
+# [...] Manually modify `my_dataset/my_dataset.py` to implement your dataset.
+cd my_dataset/
+tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
+```
+
+To use the new dataset with `tfds.load('my_dataset')`:
+
+*   `tfds.load` will automatically detect and load the dataset generated in
+    `~/tensorflow_datasets/my_dataset/` (e.g. by `tfds build`).
+*   Alternativelly, you can explicitly `import my.project.datasets.my_dataset`
+    to register your dataset:
+
+```python
+import my.project.datasets.my_dataset  # Register `my_dataset`
+
+ds = tfds.load('my_dataset')  # `my_dataset` registered
+```
+
 ## Overview
 
 Datasets are distributed in all kinds of formats and in all kinds of places,
@@ -46,9 +72,9 @@ structure:
 my_dataset/
     __init__.py
     my_dataset.py # Dataset definition
-    my_dataset_test.py # Test
-    dummy_data/ # Fake data (used for testing)
-    checksum.tsv # URL checksums (see `checksums` section).
+    my_dataset_test.py # (optional) Test
+    dummy_data/ # (optional) Fake data (used for testing)
+    checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
 
 Search for `TODO(my_dataset)` here and modify accordingly.

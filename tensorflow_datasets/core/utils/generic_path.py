@@ -58,7 +58,7 @@ def as_path(path: PathLike) -> ReadWritePath:
   """
   is_windows = os.name == 'nt'
   if isinstance(path, str):
-    if is_windows and not path.startswith('gs://'):
+    if is_windows and not path.startswith(gpath.URI_PREFIXES):
       return gpath.WindowsGPath(path)
     else:
       return gpath.PosixGPath(path)  # On linux, or for `gs://`, uses `GPath`
