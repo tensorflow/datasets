@@ -29,7 +29,8 @@ The turntable was rotated through 360 degrees to vary object pose with respect t
 Images of the objects were taken at pose intervals of	5 degrees.This corresponds to
 72 poses per object""")
 
-_LABELS = [str(x) for x in range(0, 360, 5)]
+_ANGLE_LABELS = [str(x) for x in range(0, 360, 5)]
+_OBJECT_IDS = [f'obj{str(x)}' for x in range(1, 101)]
 
 _IMAGE_SHAPE = (128, 128, 3)
 
@@ -58,10 +59,10 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(names=_LABELS),
+            "angle_label": tfds.features.ClassLabel(names=_ANGLE_LABELS),
             "object_id": tfds.features.Text()
         }),
-        supervised_keys=("image", "label"),
+        supervised_keys=("image", "angle_label"),
         homepage=
         "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
         citation=_CITATION,
@@ -85,10 +86,10 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
     for file_name in tf.io.gfile.listdir(data_dir_path):
       if file_name.endswith(".png"):
         image = os.path.join(data_dir_path, file_name)
-        label = file_name.split("_")[2].split(".")[0]
+        angle_label = file_name.split("_")[2].split(".")[0]
         object_id = file_name.split("_")[0]
         yield file_name, {
             "image": image,
-            "label": label,
+            "angel_label": angle_label,
             "object_id": object_id,
         }
