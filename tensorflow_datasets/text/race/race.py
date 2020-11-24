@@ -48,10 +48,6 @@ def _make_builder_config(module):
   )
 
 
-def _get_option_index(answer):
-  return ord(answer) - ord("A")
-
-
 class Race(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for race dataset."""
 
@@ -65,8 +61,10 @@ class Race(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "article": tfds.features.Text(),
-            "question": tfds.features.Text(),
-            "answer": tfds.features.Text()
+            "questions": tfds.features.Sequence(tfds.features.Text()),
+            "answers": tfds.features.Sequence(tfds.features.Text()),
+            "options": tfds.features.Sequence(
+                tfds.features.Sequence(tfds.features.Text()))
         }),
         supervised_keys=None,  # Set to `None` to disable
         homepage="https://www.cs.cmu.edu/~glai1/data/race/",
@@ -99,14 +97,10 @@ class Race(tfds.core.GeneratorBasedBuilder):
     for file in path.iterdir():
       # Each file is one example and only has one line of the content.
       row = json.loads(file.read_text())
-      article = row["article"]
       ex_id = row["id"]
-      question_length = len(row["questions"])
-      for idx in range(question_length):
-        question = row["questions"][idx]
-        option = row["options"][idx][_get_option_index(row["answers"][idx])]
-        yield ex_id + "_" + str(idx), {
-            "article": article,
-            "question": question,
-            "answer": option
-        }
+      yield ex_id, {
+          "article": row["article"],
+          "questions": row["questions"],
+          "answers": row["answers"],
+          "options": row["options"]
+      }

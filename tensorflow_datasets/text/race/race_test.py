@@ -24,9 +24,9 @@ class RaceTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = race.Race
   BUILDER_CONFIG_NAMES_TO_TEST = ["high"]
   SPLITS = {
-      "train": 4,  # Number of fake train example
-      "test": 4,  # Number of fake test example
-      "dev": 4,  # Number of fake dev example
+      "train": 1,  # Number of fake train example
+      "test": 1,  # Number of fake test example
+      "dev": 1,  # Number of fake dev example
   }
 
 
