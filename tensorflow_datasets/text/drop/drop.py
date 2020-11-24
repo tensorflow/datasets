@@ -56,6 +56,7 @@ class Drop(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.0.0")
   RELEASE_NOTES = {
+      "2.0.0": "A general version lease",
       "1.0.0": "Initial release.",
   }
 
@@ -93,9 +94,10 @@ class Drop(tfds.core.GeneratorBasedBuilder):
       for qa in example["qa_pairs"]:
         question = qa["question"]
         answer = _get_answer(qa["answer"])
-        validated_answers = []
-        for v_answer in qa["validated_answers"]:
-          validated_answers.append(_get_answer(v_answer))
+        validated_answers = [
+            _get_answer(v_answer)
+            for v_answer in qa.get("validated_answers", [])
+        ]
         yield qa["query_id"], {
             "passage": passage,
             "question": question,
