@@ -17,6 +17,7 @@
 
 import os
 
+import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -88,7 +89,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
       if file_name.endswith(".png"):
         image = os.path.join(data_dir_path, file_name)
         angle_label = file_name.split("_")[2].split(".")[0]
-        angle = tf.cast(int(angle_label), tf.int64)
+        angle = np.int64(angle_label)
         object_id = file_name.split("_")[0]
         yield file_name, {
             "image": image,
