@@ -21,14 +21,14 @@ from unittest import mock
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import document_datasets
 
-DummyMnist = tfds.testing.DummyMnist
+DummyDataset = tfds.testing.DummyDataset
 
 
-class DummyNewDs(DummyMnist):
+class DummyNewDs(DummyDataset):
   pass
 
 
-class DummyNewConfig(DummyMnist):
+class DummyNewConfig(DummyDataset):
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='new_config',
@@ -46,7 +46,7 @@ class DummyNewConfig(DummyMnist):
   ]
 
 
-class DummyMnistConfigs(DummyMnist):
+class DummyDatasetConfigs(DummyDataset):
   """Builder with config and manual instructions."""
   MANUAL_DOWNLOAD_INSTRUCTIONS = """Some manual instructions."""
   BUILDER_CONFIGS = [
@@ -58,13 +58,22 @@ class DummyMnistConfigs(DummyMnist):
   ]
 
 
+class DummyDatasetConfigsSharedVersion(DummyDataset):
+  """Builder with config ."""
+  # No BuilderConfig description, and version shared across configs.
+  VERSION = tfds.core.Version('1.0.0')
+  BUILDER_CONFIGS = [
+      tfds.core.BuilderConfig(name='config_name'),
+  ]
+
+
 class DocumentDatasetsTest(tfds.testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(DocumentDatasetsTest, cls).setUpClass()
     cls._tfds_tmp_dir = tfds.testing.make_tmp_dir()
-    builder = DummyMnist(data_dir=cls._tfds_tmp_dir)
+    builder = DummyDataset(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
 
     # Patch the visualization util (to avoid GCS access during test)
@@ -98,7 +107,7 @@ class DocumentDatasetsTest(tfds.testing.TestCase):
 
   def setUp(self):
     super(DocumentDatasetsTest, self).setUp()
-    self.builder = DummyMnist(data_dir=self._tfds_tmp_dir)
+    self.builder = DummyDataset(data_dir=self._tfds_tmp_dir)
 
   def test_document_datasets(self):
     document_datasets.dataset_docs_str(datasets=['mnist', 'cifar10'])
@@ -113,14 +122,20 @@ class DocumentDatasetsTest(tfds.testing.TestCase):
 
   def test_with_config(self):
     """Test that builder with configs are correctly generated."""
-    with tfds.testing.tmp_dir() as tmp_dir:
-      builder = DummyMnistConfigs(data_dir=tmp_dir)
-      builder.download_and_prepare()
+    builder = DummyDatasetConfigs(data_dir='/tmp/non-existing-dir')
     doc_str = document_datasets.document_single_builder(builder)
 
     self.assertIn('Some manual instructions.', doc_str)
-    self.assertIn('Mnist description.', doc_str)  # Shared description.
+    self.assertIn('Minimal DatasetBuilder.', doc_str)  # Shared description.
     self.assertIn('Config description.', doc_str)  # Config-specific description
+
+  def test_with_config_shared_version(self):
+    """Test that builder with configs are correctly generated."""
+    builder = DummyDatasetConfigsSharedVersion(data_dir='/tmp/non-existing-dir')
+    doc_str = document_datasets.document_single_builder(builder)
+
+    self.assertIn('Minimal DatasetBuilder.', doc_str)  # Shared description.
+    self.assertNotIn('Config description:', doc_str)  # No config description
 
 
 class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
@@ -192,7 +207,7 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
     data_dir = '/tmp/dummy_dir'
 
     nightly_dict = {
-        'dummy_mnist': {'': {'1.0.0': False}},
+        'dummy_dataset': {'': {'1.0.0': False}},
         'dummy_new_ds': True,
         'dummy_new_config': {
             'new_config': True,
@@ -206,32 +221,32 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
         document_datasets, '_load_nightly_dict', return_value=nightly_dict):
       ndu = document_datasets.NightlyDocUtil()
 
-    dummy_mnist = DummyMnist(data_dir=data_dir)
+    dummy_dataset = DummyDataset(data_dir=data_dir)
     dummy_new_ds = DummyNewDs(data_dir=data_dir)
     dummy_new_config = DummyNewConfig(data_dir=data_dir, config='new_config')
     dummy_new_version = DummyNewConfig(data_dir=data_dir, config='old_config')
 
     # Only `dummy_new_ds` is a new builder
-    self.assertFalse(ndu.is_builder_nightly(dummy_mnist))
+    self.assertFalse(ndu.is_builder_nightly(dummy_dataset))
     self.assertTrue(ndu.is_builder_nightly(dummy_new_ds))
     self.assertFalse(ndu.is_builder_nightly(dummy_new_config))
     self.assertFalse(ndu.is_builder_nightly(dummy_new_version))
 
     # Only `dummy_new_ds/new_config` is a new config
-    self.assertFalse(ndu.is_config_nightly(dummy_mnist))
+    self.assertFalse(ndu.is_config_nightly(dummy_dataset))
     self.assertFalse(ndu.is_config_nightly(dummy_new_ds))
     self.assertTrue(ndu.is_config_nightly(dummy_new_config))
     self.assertFalse(ndu.is_config_nightly(dummy_new_version))
 
     # Only `dummy_new_ds/new_version/2.0.0` is a new version
-    self.assertFalse(ndu.is_version_nightly(dummy_mnist, '1.0.0'))
+    self.assertFalse(ndu.is_version_nightly(dummy_dataset, '1.0.0'))
     self.assertFalse(ndu.is_version_nightly(dummy_new_ds, 'x.x.x'))
     self.assertFalse(ndu.is_version_nightly(dummy_new_config, 'x.x.x'))
     self.assertFalse(ndu.is_version_nightly(dummy_new_version, '1.0.0'))
     self.assertTrue(ndu.is_version_nightly(dummy_new_version, '2.0.0'))
 
-    # Only `dummy_mnist` don't have a nightly version
-    self.assertFalse(ndu.has_nightly(dummy_mnist))
+    # Only `dummy_dataset` don't have a nightly version
+    self.assertFalse(ndu.has_nightly(dummy_dataset))
     self.assertTrue(ndu.has_nightly(dummy_new_ds))
     self.assertTrue(ndu.has_nightly(dummy_new_config))
     self.assertTrue(ndu.has_nightly(dummy_new_version))

@@ -141,7 +141,7 @@ class ConfigDescriptionSection(Section):
     return builder.builder_config.description
 
   def content(self, builder: tfds.core.DatasetBuilder):
-    if not builder.builder_config:
+    if not builder.builder_config or not builder.builder_config.description:
       return _SKIP_SECTION
     return builder.builder_config.description
 
