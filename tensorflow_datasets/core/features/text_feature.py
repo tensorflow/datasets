@@ -173,7 +173,11 @@ class Text(feature.Tensor):
     if self.encoder is not None:
       return repr(ex)
 
-    ex = ex.decode("utf-8")
+    try:
+      ex = ex.decode("utf-8")
+    except UnicodeDecodeError:
+      # Some datasets have invalid UTF-8 examples (e.g. opinosis)
+      return repr(ex[:1000])
     ex = html.escape(ex)
     ex = textwrap.shorten(ex, width=1000)  # Truncate long text
     return ex

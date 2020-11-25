@@ -78,9 +78,20 @@ class ColumnInfo:
     elif sequence_rank > 1:
       repr_fn = feature.repr_html_ragged
 
+    def repr_fn_with_debug(val):  # Wrap repr_fn to add debug info
+      try:
+        return repr_fn(val)
+      except Exception as e:  # pylint: disable=broad-except
+        err_msg = (
+            f'HTML formatting of column {name} failed:\n'
+            f' * feature: {feature}\n'
+            f' * input: {val!r}\n'
+        )
+        py_utils.reraise(e, prefix=err_msg)
+
     return ColumnInfo(
         name='/'.join(path),
-        format_fn=repr_fn,
+        format_fn=repr_fn_with_debug,
     )
 
 
@@ -92,8 +103,15 @@ def _get_feature(
   sequence_rank = 0
 
   # Collapse the nested sequences
-  # Subclasses like `Video` shouldn't be recursed into.
-  while type(feature) == features.Sequence:  # pylint: disable=unidiomatic-typecheck
+  while isinstance(feature, features.Sequence):
+    # Subclasses like `Video` shouldn't be recursed into.
+    # But sequence of dict like `TranslationVariableLanguages` should.
+    # Currently, there is no good way for a composed sub-feature to only
+    # display a single column instead of one per sub-feature.
+    # So `MyFeature({'x': tf.int32, 'y': tf.bool})` will have 2 columns `x`
+    # and `y`.
+    if type(feature) != features.Sequence and not path:  # pylint: disable=unidiomatic-typecheck
+      break
     sequence_rank += 1
     feature = feature.feature  # Extract inner feature  # pytype: disable=attribute-error
 

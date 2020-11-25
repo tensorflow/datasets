@@ -18,15 +18,11 @@
 import pandas
 
 import tensorflow as tf
+
+import tensorflow_datasets  # Import for registration  # pylint: disable=unused-import
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import as_dataframe
 from tensorflow_datasets.core import load
-
-# Import for registration
-# pylint: disable=unused-import,g-bad-import-order
-from tensorflow_datasets.image_classification import mnist
-from tensorflow_datasets.text import anli
-# pylint: enable=unused-import,g-bad-import-order
 
 
 def _as_df(ds_name: str, **kwargs) -> pandas.DataFrame:
