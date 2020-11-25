@@ -82,19 +82,19 @@ Check that:
 
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(
-    r"^"
-    r"(?P<dataset_name>\w+)"
-    r"(/(?P<config>[\w\-\.]+))?"
-    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
-    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
-    r"$")
+    r'^'
+    r'(?P<dataset_name>\w+)'
+    r'(/(?P<config>[\w\-\.]+))?'
+    r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
+    r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
+    r'$')
 
 
 # Regex matching 'dataset/config/1.3.0'
-_FULL_NAME_REG = re.compile(r"^{ds_name}/({config_name}/)?{version}$".format(
-    ds_name=r"\w+",
-    config_name=r"[\w\-\.]+",
-    version=r"[0-9]+\.[0-9]+\.[0-9]+",
+_FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
+    ds_name=r'\w+',
+    config_name=r'[\w\-\.]+',
+    version=r'[0-9]+\.[0-9]+\.[0-9]+',
 ))
 
 
@@ -103,14 +103,14 @@ class DatasetNotFoundError(ValueError):
 
   def __init__(self, name, is_abstract=False):
     self.is_abstract = is_abstract
-    all_datasets_str = "\n\t- ".join([""] + list_builders())
+    all_datasets_str = '\n\t- '.join([''] + list_builders())
     if is_abstract:
-      error_string = ("Dataset %s is an abstract class so cannot be created. "
-                      "Please make sure to instantiate all abstract methods.\n"
-                      "%s") % (name, _DATASET_NOT_FOUND_ERR)
+      error_string = ('Dataset %s is an abstract class so cannot be created. '
+                      'Please make sure to instantiate all abstract methods.\n'
+                      '%s') % (name, _DATASET_NOT_FOUND_ERR)
     else:
-      error_string = ("Dataset %s not found. Available datasets:%s\n"
-                      "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
+      error_string = ('Dataset %s not found. Available datasets:%s\n'
+                      '%s') % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
     ValueError.__init__(self, error_string)
 
 
@@ -135,7 +135,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   name, kwargs = dataset_name_and_kwargs_from_name_str(name)
   if kwargs:
     raise ValueError(
-        "`builder_cls` only accept the `dataset_name` without config, "
+        '`builder_cls` only accept the `dataset_name` without config, '
         "version or arguments. Got: name='{}', kwargs={}".format(name, kwargs))
 
   # pylint: disable=protected-access
@@ -183,7 +183,7 @@ def builder(
   builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
   # Set data_dir.
   if try_gcs and gcs_utils.is_dataset_on_gcs(builder_name):
-    data_dir = gcs_utils.gcs_path("datasets")
+    data_dir = gcs_utils.gcs_path('datasets')
 
   # Try loading the code (if it exists)
   try:
@@ -194,7 +194,7 @@ def builder(
     cls = None  # Class not found
     not_found_error = e  # Save the exception to eventually reraise
 
-  version_explicitly_given = "version" in builder_kwargs
+  version_explicitly_given = 'version' in builder_kwargs
 
   # Try loading from files first:
   # * If code not present.
@@ -209,7 +209,7 @@ def builder(
   # If loading from files was skipped (e.g. files not found), load from the
   # source code.
   if cls:
-    with py_utils.try_reraise(prefix=f"Failed to construct dataset {name}: "):
+    with py_utils.try_reraise(prefix=f'Failed to construct dataset {name}: '):
       return cls(data_dir=data_dir, **builder_kwargs, **builder_init_kwargs)  # pytype: disable=not-instantiable
 
   # If neither the code nor the files are found, raise DatasetNotFoundError
@@ -274,13 +274,13 @@ def load(
 
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
-      version of the class name). This can be either `"dataset_name"` or
-      `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+      version of the class name). This can be either `'dataset_name'` or
+      `'dataset_name/config_name'` for datasets with `BuilderConfig`s.
       As a convenience, this string may contain comma-separated keyword
-      arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+      arguments for the builder. For example `'foo_bar/a=True,b=3'` would use
       the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
-      (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
-      use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+      (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'` to
+      use the `'zoo'` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
     split: Which split of the data to load (e.g. `'train'`, `'test'`,
       `['train', 'test']`, `'train[80%:]'`,...). See our
@@ -288,7 +288,7 @@ def load(
       If `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: `str`, directory to read/write data. Defaults to the value of
       the environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-      "~/tensorflow_datasets".
+      '~/tensorflow_datasets'.
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
@@ -348,12 +348,12 @@ def load(
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
   as_dataset_kwargs = dict(as_dataset_kwargs)
-  as_dataset_kwargs.setdefault("split", split)
-  as_dataset_kwargs.setdefault("as_supervised", as_supervised)
-  as_dataset_kwargs.setdefault("batch_size", batch_size)
-  as_dataset_kwargs.setdefault("decoders", decoders)
-  as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
-  as_dataset_kwargs.setdefault("read_config", read_config)
+  as_dataset_kwargs.setdefault('split', split)
+  as_dataset_kwargs.setdefault('as_supervised', as_supervised)
+  as_dataset_kwargs.setdefault('batch_size', batch_size)
+  as_dataset_kwargs.setdefault('decoders', decoders)
+  as_dataset_kwargs.setdefault('shuffle_files', shuffle_files)
+  as_dataset_kwargs.setdefault('read_config', read_config)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:
@@ -408,8 +408,8 @@ def find_builder_dir(
     #  builder_dir = manager.resolve(virtual_builder_dir)
     # ```
     raise ValueError(
-        f"Dataset {name} detected in multiple locations: {all_builder_dirs}. "
-        "Please resolve the ambiguity by explicitly setting `data_dir=`."
+        f'Dataset {name} detected in multiple locations: {all_builder_dirs}. '
+        'Please resolve the ambiguity by explicitly setting `data_dir=`.'
     )
   else:
     return next(iter(all_builder_dirs))  # List has a single element
@@ -422,8 +422,8 @@ def _find_builder_dir_single_dir(
 ) -> Optional[str]:
   """Same as `find_builder_dir` but require explicit dir."""
   builder_name, builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
-  config_name = builder_kwargs.pop("config", None)
-  version_str = builder_kwargs.pop("version", None)
+  config_name = builder_kwargs.pop('config', None)
+  version_str = builder_kwargs.pop('version', None)
   if builder_kwargs:
     # Datasets with additional kwargs require the original builder code.
     return None
@@ -509,17 +509,17 @@ def dataset_name_and_kwargs_from_name_str(
   res = _NAME_REG.match(name_str)
   if not res:
     raise ValueError(_NAME_STR_ERR.format(name_str))
-  name = res.group("dataset_name")
+  name = res.group('dataset_name')
   # Normalize the name to accept CamelCase
   name = naming.camelcase_to_snakecase(name)
-  kwargs = _kwargs_str_to_kwargs(res.group("kwargs"))
+  kwargs = _kwargs_str_to_kwargs(res.group('kwargs'))
   try:
-    for attr in ["config", "version"]:
+    for attr in ['config', 'version']:
       val = res.group(attr)
       if val is None:
         continue
       if attr in kwargs:
-        raise ValueError("Dataset %s: cannot pass %s twice." % (name, attr))
+        raise ValueError('Dataset %s: cannot pass %s twice.' % (name, attr))
       kwargs[attr] = val
     return name, kwargs
   except:
@@ -531,17 +531,17 @@ def _kwargs_str_to_kwargs(kwargs_str):
   """Converts given `kwargs` as str into kwargs dict."""
   if not kwargs_str:
     return {}
-  kwarg_strs = kwargs_str.split(",")
+  kwarg_strs = kwargs_str.split(',')
   kwargs = {}
   for kwarg_str in kwarg_strs:
-    kwarg_name, kwarg_val = kwarg_str.split("=")
+    kwarg_name, kwarg_val = kwarg_str.split('=')
     kwargs[kwarg_name] = _cast_to_pod(kwarg_val)
   return kwargs
 
 
 def _cast_to_pod(val):
   """Try cast to int, float, bool, str, in that order."""
-  bools = {"True": True, "False": False}
+  bools = {'True': True, 'False': False}
   if val in bools:
     return bools[val]
   try:

@@ -23,6 +23,7 @@ See: https://www.tensorflow.org/datasets/cli
 """
 
 import argparse
+import re
 from typing import List
 
 from absl import app
@@ -37,6 +38,10 @@ from tensorflow_datasets.scripts.cli import new
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
+  # Normalize explicit boolean flags for absl.flags compatibility
+  # See b/174043007 for context.
+  argv = _normalize_flags(argv)
+
   parser = argparse_flags.ArgumentParser(
       description='Tensorflow Datasets CLI tool',
   )
@@ -51,6 +56,24 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   build.register_subparser(subparser)
   new.register_subparser(subparser)
   return parser.parse_args(argv[1:])
+
+
+def _normalize_flags(argv: List[str]) -> List[str]:
+  """Normalize explicit bolean flags for absl.flags compatibility."""
+  bolean_flag_patern = re.compile(r'--[\w_]+=(true|false)')
+
+  def _normalize_flag(arg: str) -> str:
+    if not bolean_flag_patern.match(arg):
+      return arg
+    if arg.endswith('=true'):
+      return arg[:-len('=true')]  # `--flag=true` -> `--flag`
+    elif arg.endswith('=false'):
+      # `--flag=false` -> `--noflag`
+      return '--no' + arg[len('--'):-len('=false')]
+    else:
+      raise AssertionError(f'Unrecognized arg: {arg}')
+
+  return [_normalize_flag(a) for a in argv]
 
 
 def main(args: argparse.Namespace) -> None:

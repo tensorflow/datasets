@@ -31,7 +31,7 @@ Images of the objects were taken at pose intervals of	5 degrees.This corresponds
 72 poses per object""")
 
 _ANGLE_LABELS = [str(x) for x in range(0, 360, 5)]
-_OBJECT_IDS = [f'obj{str(x)}' for x in range(1, 101)]
+_OBJECT_IDS = [f"obj{str(x)}" for x in range(1, 101)]
 
 _IMAGE_SHAPE = (128, 128, 3)
 
@@ -48,9 +48,13 @@ _CITATION = """\
 class Coil100(tfds.core.GeneratorBasedBuilder):
   """COIL-100 Image Dataset Class."""
 
-  VERSION = tfds.core.Version("1.0.0")
-
-  UNSTABLE = "Unable to download on secured networks(eg. University Network)"
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0":
+          "Change features (`object_id` is now `ClassLabel`, rename "
+          "`label` -> `angle_label`, add `angle`)",
+      "1.0.0": "Initial release",
+  }
 
   def _info(self):
     """Define Dataset Info."""
@@ -62,7 +66,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "angle_label": tfds.features.ClassLabel(names=_ANGLE_LABELS),
             "object_id": tfds.features.ClassLabel(names=_OBJECT_IDS),
-            "angle": tfds.features.Tensor(shape=[], dtype=tf.int64),
+            "angle": tf.int64,
         }),
         supervised_keys=("image", "angle_label"),
         homepage=
@@ -73,15 +77,9 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Define Splits."""
     path = dl_manager.download_and_extract(_URL)
-
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "data_dir_path": os.path.join(path, "coil-100")
-            },
-        ),
-    ]
+    return {
+        tfds.Split.TRAIN: self._generate_examples(path / "coil-100"),
+    }
 
   def _generate_examples(self, data_dir_path):
     """Generate images and labels for splits."""
@@ -95,5 +93,5 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
             "image": image,
             "angle_label": angle_label,
             "object_id": object_id,
-            "angle": angle,
+            "angle": int(angle_label),
         }
