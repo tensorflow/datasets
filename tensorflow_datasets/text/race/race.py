@@ -51,7 +51,11 @@ def _make_builder_config(module):
 class Race(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for race dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "Add the example id.",
+      "1.0.0": "Initial release.",
+  }
   BUILDER_CONFIGS = [_make_builder_config(module) for module in _MODULES]
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -60,11 +64,17 @@ class Race(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "article": tfds.features.Text(),
-            "questions": tfds.features.Sequence(tfds.features.Text()),
-            "answers": tfds.features.Sequence(tfds.features.Text()),
-            "options": tfds.features.Sequence(
-                tfds.features.Sequence(tfds.features.Text()))
+            "article":
+                tfds.features.Text(),
+            "questions":
+                tfds.features.Sequence(tfds.features.Text()),
+            "answers":
+                tfds.features.Sequence(tfds.features.Text()),
+            "options":
+                tfds.features.Sequence(
+                    tfds.features.Sequence(tfds.features.Text())),
+            "example_id":
+                tfds.features.Text()
         }),
         supervised_keys=None,  # Set to `None` to disable
         homepage="https://www.cs.cmu.edu/~glai1/data/race/",
@@ -97,10 +107,10 @@ class Race(tfds.core.GeneratorBasedBuilder):
     for file in path.iterdir():
       # Each file is one example and only has one line of the content.
       row = json.loads(file.read_text())
-      ex_id = row["id"]
-      yield ex_id, {
+      yield row["id"], {
           "article": row["article"],
           "questions": row["questions"],
           "answers": row["answers"],
-          "options": row["options"]
+          "options": row["options"],
+          "example_id": row["id"]
       }
