@@ -86,7 +86,7 @@ def test_build_single():
   # Keyword arguments also possible
   assert _build('--datasets mnist') == ['mnist']
 
-  with pytest.raises(tfds.core.load.DatasetNotFoundError):
+  with pytest.raises(tfds.core.registered.DatasetNotFoundError):
     _build('unknown_dataset')
 
   with pytest.raises(AssertionError, match='cannot be loaded at version 1.0.0'):
@@ -176,7 +176,7 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
 
 def test_build_files():
   # Make sure DummyDataset isn't registered by default
-  with pytest.raises(tfds.core.load.DatasetNotFoundError):
+  with pytest.raises(tfds.core.registered.DatasetNotFoundError):
     _build('dummy_dataset')
 
   with pytest.raises(FileNotFoundError, match='Could not find .* script'):
@@ -205,7 +205,7 @@ def test_build_files():
 @pytest.mark.skip(reason='Conflict with `load_test.py`')
 def test_build_import():
   # DummyDataset isn't registered by default
-  with pytest.raises(tfds.core.load.DatasetNotFoundError):
+  with pytest.raises(tfds.core.registered.DatasetNotFoundError):
     _build('dummy_dataset')
 
   # --imports register the dataset

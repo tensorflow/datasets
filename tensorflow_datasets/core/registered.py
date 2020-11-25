@@ -19,7 +19,7 @@ import abc
 import collections
 import contextlib
 import inspect
-from typing import ClassVar, Iterator
+from typing import ClassVar, Iterator, List, Type
 
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import py_utils
@@ -36,6 +36,10 @@ _ABSTRACT_DATASET_REGISTRY = {}
 # importing community packages.
 _MODULE_TO_DATASETS = collections.defaultdict(list)
 
+
+
+class DatasetNotFoundError(ValueError):
+  """Exception raised when the dataset cannot be found."""
 
 
 _skip_registration = False
@@ -96,3 +100,23 @@ class RegisteredDataset(abc.ABC):
       _ABSTRACT_DATASET_REGISTRY[cls.name] = cls
     else:
       _DATASET_REGISTRY[cls.name] = cls
+
+
+def list_imported_builders() -> List[str]:
+  """Returns the string names of all `tfds.core.DatasetBuilder`s."""
+  all_builders = list(_DATASET_REGISTRY)
+  return sorted(all_builders)
+
+
+def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
+  """Returns the Registered dataset class."""
+  if name in _ABSTRACT_DATASET_REGISTRY:
+    # Will raise TypeError: Can't instantiate abstract class X with abstract
+    # methods y, before __init__ even get called
+    _ABSTRACT_DATASET_REGISTRY[name]()  # pytype: disable=not-callable
+    # Alternativelly, could manually extract the list of non-implemented
+    # abstract methods.
+    raise AssertionError(f'Dataset {name} is an abstract class.')
+  if name not in _DATASET_REGISTRY:
+    raise DatasetNotFoundError(f'Dataset {name} not found.')
+  return _DATASET_REGISTRY[name]  # pytype: disable=bad-return-type

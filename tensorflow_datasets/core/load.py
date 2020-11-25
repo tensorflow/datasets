@@ -15,13 +15,14 @@
 
 """Access registered datasets."""
 
+import difflib
 import os
 import posixpath
 import re
+import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, Union
 
-from absl import flags
 from absl import logging
 import tensorflow.compat.v2 as tf
 
@@ -39,10 +40,7 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
 
-
 # pylint: disable=logging-format-interpolation
-
-FLAGS = flags.FLAGS
 
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
@@ -70,16 +68,6 @@ The builder name string must be of the following format:
     my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
 """
 
-_DATASET_NOT_FOUND_ERR = """\
-Check that:
-    - if dataset was added recently, it may only be available
-      in `tfds-nightly`
-    - the dataset name is spelled correctly
-    - dataset class defines all base class abstract methods
-    - the module defining the dataset class is imported
-"""
-
-
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(
     r'^'
@@ -98,25 +86,10 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
 ))
 
 
-class DatasetNotFoundError(ValueError):
-  """The requested Dataset was not found."""
-
-  def __init__(self, name, is_abstract=False):
-    self.is_abstract = is_abstract
-    all_datasets_str = '\n\t- '.join([''] + list_builders())
-    if is_abstract:
-      error_string = ('Dataset %s is an abstract class so cannot be created. '
-                      'Please make sure to instantiate all abstract methods.\n'
-                      '%s') % (name, _DATASET_NOT_FOUND_ERR)
-    else:
-      error_string = ('Dataset %s not found. Available datasets:%s\n'
-                      '%s') % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
-    ValueError.__init__(self, error_string)
-
-
 def list_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
-  return sorted(list(registered._DATASET_REGISTRY))  # pylint: disable=protected-access
+  datasets = registered.list_imported_builders()
+  return datasets
 
 
 def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
@@ -132,19 +105,20 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  name, kwargs = dataset_name_and_kwargs_from_name_str(name)
+  ns_name = None
+  builder_name, kwargs = dataset_name_and_kwargs_from_name_str(name)
   if kwargs:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
-        "version or arguments. Got: name='{}', kwargs={}".format(name, kwargs))
-
-  # pylint: disable=protected-access
-  if name in registered._ABSTRACT_DATASET_REGISTRY:
-    raise DatasetNotFoundError(name, is_abstract=True)
-  if name not in registered._DATASET_REGISTRY:
-    raise DatasetNotFoundError(name)
-  return registered._DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
-  # pylint: enable=protected-access
+        f"version or arguments. Got: name='{name}', kwargs={kwargs}"
+    )
+  # Imported datasets
+  try:
+    cls = registered.imported_builder_cls(builder_name)
+    cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
+    return cls
+  except registered.DatasetNotFoundError as e:
+    _reraise_with_list_builders(e, ns_name=ns_name, builder_name=builder_name)
 
 
 def builder(
@@ -188,9 +162,7 @@ def builder(
   # Try loading the code (if it exists)
   try:
     cls = builder_cls(builder_name)
-  except DatasetNotFoundError as e:
-    if e.is_abstract:
-      raise  # Abstract can't be instanciated neither from code nor files.
+  except registered.DatasetNotFoundError as e:
     cls = None  # Class not found
     not_found_error = e  # Save the exception to eventually reraise
 
@@ -467,7 +439,7 @@ def _get_default_config_name(name: str) -> Optional[str]:
   # Search for the DatasetBuilder generation code
   try:
     builder_cls_ = builder_cls(name)
-  except DatasetNotFoundError:
+  except registered.DatasetNotFoundError:
     return None
 
   # If code found, return the default config
@@ -654,3 +626,33 @@ def is_full_name(full_name: str) -> bool:
     `bool`.
   """
   return bool(_FULL_NAME_REG.match(full_name))
+
+
+def _reraise_with_list_builders(
+    e: Exception,
+    ns_name: Optional[str],
+    builder_name: str,
+) -> NoReturn:
+  """Add the list of available builders to the DatasetNotFoundError."""
+  # Should optimize to only filter through given namespace
+  all_datasets = list_builders()
+  all_datasets_str = '\n\t- '.join([''] + all_datasets)
+  error_string = f'Available datasets:{all_datasets_str}\n'
+  error_string += textwrap.dedent(
+      """
+      Check that:
+          - if dataset was added recently, it may only be available
+            in `tfds-nightly`
+          - the dataset name is spelled correctly
+          - dataset class defines all base class abstract methods
+          - the module defining the dataset class is imported
+      """
+  )
+
+  # Add close matches
+  name = f'{ns_name}:{builder_name}' if ns_name else builder_name
+  close_matches = difflib.get_close_matches(name, all_datasets, n=1)
+  if close_matches:
+    error_string += f'\nDid you meant: {close_matches[0]}'
+
+  raise py_utils.reraise(e, suffix=error_string)

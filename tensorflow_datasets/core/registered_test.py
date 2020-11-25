@@ -59,7 +59,8 @@ class RegisteredTest(testing.TestCase):
     self.assertIn(name, load.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
-    with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
+    with self.assertRaisesWithPredicateMatch(
+        registered.DatasetNotFoundError, "not found"):
       load.builder(nonexistent)
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
@@ -83,7 +84,9 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(name, UnregisteredBuilder.name)
     self.assertNotIn(name, load.list_builders())
 
-    with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
+    with self.assertRaisesWithPredicateMatch(
+        TypeError, "Can't instantiate abstract class"
+    ):
       load.builder(name)
 
   def test_builder_with_kwargs(self):

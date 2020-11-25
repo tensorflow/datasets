@@ -26,6 +26,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import read_only_builder
+from tensorflow_datasets.core import registered
 
 
 class DummyNoConfMnist(testing.DummyMnist):
@@ -87,7 +88,7 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
   with mock.patch.object(
       load,
       'builder_cls',
-      side_effect=load.DatasetNotFoundError(code_builder.name),
+      side_effect=registered.DatasetNotFoundError(code_builder.name),
   ):
     # When the code isn't found, loading dataset require explicit config name:
     # tfds.builder('ds/config')
@@ -101,10 +102,10 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
     load.load(config_name, split=[])  # Dataset found -> no error
 
     # Neither code not files found, raise DatasetNotFoundError
-    with pytest.raises(load.DatasetNotFoundError):
+    with pytest.raises(registered.DatasetNotFoundError):
       load.builder(config_name, data_dir='/tmp/non-existing/tfds/dir')
 
-    with pytest.raises(load.DatasetNotFoundError):
+    with pytest.raises(registered.DatasetNotFoundError):
       load.load(config_name, split=[], data_dir='/tmp/non-existing/tfds/dir')
 
 
