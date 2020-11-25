@@ -115,7 +115,9 @@ ADAPTER_FOR_FORMAT = {
 }
 
 
-def is_record_file(filename: str) -> bool:
+def is_example_file(filename: str) -> bool:
   """Whether the given filename is a record file."""
-  return any(filename.endswith(f'.{file_format.value}')
-             for file_format in FileFormat)
+  return any(
+      f'.{adapter.FILE_SUFFIX}' in filename
+      for adapter in ADAPTER_FOR_FORMAT.values()
+  )
