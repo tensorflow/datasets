@@ -22,6 +22,7 @@ import textwrap
 import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Type
 
+from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
@@ -51,7 +52,8 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
 ))
 
 
-def list_builders() -> List[str]:
+def list_builders(
+) -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   datasets = registered.list_imported_builders()
   return datasets
@@ -134,6 +136,7 @@ def builder(
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
 
+  # Community datasets
   if ns_name:
     raise NotImplementedError
 
@@ -431,7 +434,8 @@ def _reraise_with_list_builders(
 ) -> NoReturn:
   """Add the list of available builders to the DatasetNotFoundError."""
   # Should optimize to only filter through given namespace
-  all_datasets = list_builders()
+  all_datasets = list_builders(
+  )
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
   error_string += textwrap.dedent(
