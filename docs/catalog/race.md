@@ -30,21 +30,31 @@ comprehension.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
+    *   `1.0.0`: Initial release.
+    *   **`2.0.0`** (default): Add the example id.
 
-*   **Download size**: `24.26 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
+    'answers': Sequence(Text(shape=(), dtype=tf.string)),
     'article': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
+    'example_id': Text(shape=(), dtype=tf.string),
+    'options': Sequence(Sequence(Text(shape=(), dtype=tf.string))),
+    'questions': Sequence(Text(shape=(), dtype=tf.string)),
 })
 ```
 
@@ -73,24 +83,4 @@ FeaturesDict({
 
 ## race/high (default config)
 
-*   **Dataset size**: `127.23 MiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'dev'`   | 3,451
-`'test'`  | 3,498
-`'train'` | 62,445
-
 ## race/middle
-
-*   **Dataset size**: `31.35 MiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'dev'`   | 1,436
-`'test'`  | 1,436
-`'train'` | 25,421

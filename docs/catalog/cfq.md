@@ -28,22 +28,6 @@ Example usage:
 data = tfds.load('cfq/mcd1')
 ```
 
-*   **Config description**: The CFQ dataset (and it's splits) for measuring compositional generalization.
-
-See https://arxiv.org/abs/1912.09713.pdf for background.
-
-A note about the validation set: Since it has the same distribution as the test
-set and we are interested in measuring the compositional generalization of a
-*model* with respect to an *unknown* test distribution we suggest that any
-tuning should be done on a subset of the train set only (see section 5.1 of the
-paper).
-
-Example usage:
-
-```
-data = tfds.load('cfq/mcd1')
-```
-
 *   **Homepage**: [https://github.com/google-research/google-research/tree/master/cfq](https://github.com/google-research/google-research/tree/master/cfq)
 
 *   **Source code**: [`tfds.text.CFQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cfq.py)

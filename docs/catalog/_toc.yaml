@@ -280,6 +280,9 @@ toc:
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
+  - path: /datasets/catalog/cherry_blossoms
+    status: nightly
+    title: cherry_blossoms
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/forest_fires
@@ -310,6 +313,9 @@ toc:
     title: web_nlg
   - path: /datasets/catalog/wiki_bio
     title: wiki_bio
+  - path: /datasets/catalog/wiki_table_text
+    status: nightly
+    title: wiki_table_text
   - path: /datasets/catalog/wine_quality
     title: wine_quality
   title: Structured
@@ -368,6 +374,9 @@ toc:
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/drop
+    status: nightly
+    title: drop
   - path: /datasets/catalog/eraser_multi_rc
     title: eraser_multi_rc
   - path: /datasets/catalog/esnli

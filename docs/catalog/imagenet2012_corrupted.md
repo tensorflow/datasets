@@ -28,6 +28,7 @@ is fixed so that regeneration is deterministic.
 
     * `0.0.1`: Initial dataset
     * **`3.1.0`** (default): Implement missing corruptions. Fix crop/resize ordering, file encoding
+    * `5.0.0`: No release notes.
 
 *   **Download size**: `1.98 MiB`
 

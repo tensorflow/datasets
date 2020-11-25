@@ -85,14 +85,7 @@ isbn="978-3-642-40802-1"
 
 ## qa4mre/2011.main.DE (default config)
 
-*   **Config description**: QA4MRE dataset was created for the CLEF 2011/2012/2013 shared tasks to promote research in
-question answering and reading comprehension. The dataset contains a supporting
-passage and a set of questions corresponding to the passage. Multiple options
-for answers are provided for each question, of which only one is correct. The
-training and test datasets are available for the main track.
-Additional gold standard documents are available for two pilot studies: one on
-alzheimers data, and the other on entrance exams data.
-This configuration includes the main track for DE language in 2011 year.
+*   **Config description**: This configuration includes the main track for DE language in 2011 year.
 
 *   **Dataset size**: `1.69 MiB`
 
@@ -139,15 +132,8 @@ $(document).ready(() => {
 
 ## qa4mre/2011.main.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for EN language in 2011 year.
+*   **Config description**: This configuration includes the main track for EN
+    language in 2011 year.
 
 *   **Dataset size**: `1.52 MiB`
 
@@ -193,15 +179,8 @@ $(document).ready(() => {
 
 ## qa4mre/2011.main.ES
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for ES language in 2011 year.
+*   **Config description**: This configuration includes the main track for ES
+    language in 2011 year.
 
 *   **Dataset size**: `1.64 MiB`
 
@@ -247,15 +226,8 @@ $(document).ready(() => {
 
 ## qa4mre/2011.main.IT
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for IT language in 2011 year.
+*   **Config description**: This configuration includes the main track for IT
+    language in 2011 year.
 
 *   **Dataset size**: `1.61 MiB`
 
@@ -301,15 +273,8 @@ $(document).ready(() => {
 
 ## qa4mre/2011.main.RO
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for RO language in 2011 year.
+*   **Config description**: This configuration includes the main track for RO
+    language in 2011 year.
 
 *   **Dataset size**: `1.68 MiB`
 
@@ -355,15 +320,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.AR
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for AR language in 2012 year.
+*   **Config description**: This configuration includes the main track for AR
+    language in 2012 year.
 
 *   **Dataset size**: `2.62 MiB`
 
@@ -409,15 +367,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.BG
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for BG language in 2012 year.
+*   **Config description**: This configuration includes the main track for BG
+    language in 2012 year.
 
 *   **Dataset size**: `3.33 MiB`
 
@@ -463,15 +414,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.DE
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for DE language in 2012 year.
+*   **Config description**: This configuration includes the main track for DE
+    language in 2012 year.
 
 *   **Dataset size**: `2.02 MiB`
 
@@ -517,15 +461,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for EN language in 2012 year.
+*   **Config description**: This configuration includes the main track for EN
+    language in 2012 year.
 
 *   **Dataset size**: `1.71 MiB`
 
@@ -571,15 +508,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.ES
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for ES language in 2012 year.
+*   **Config description**: This configuration includes the main track for ES
+    language in 2012 year.
 
 *   **Dataset size**: `1.99 MiB`
 
@@ -625,15 +555,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.IT
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for IT language in 2012 year.
+*   **Config description**: This configuration includes the main track for IT
+    language in 2012 year.
 
 *   **Dataset size**: `2.01 MiB`
 
@@ -679,15 +602,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.main.RO
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for RO language in 2012 year.
+*   **Config description**: This configuration includes the main track for RO
+    language in 2012 year.
 
 *   **Dataset size**: `2.01 MiB`
 
@@ -733,15 +649,8 @@ $(document).ready(() => {
 
 ## qa4mre/2012.alzheimers.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the alzheimers
-    track for EN language in 2012 year.
+*   **Config description**: This configuration includes the alzheimers track for
+    EN language in 2012 year.
 
 *   **Dataset size**: `1.57 MiB`
 
@@ -787,15 +696,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.main.AR
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for AR language in 2013 year.
+*   **Config description**: This configuration includes the main track for AR
+    language in 2013 year.
 
 *   **Dataset size**: `4.04 MiB`
 
@@ -841,15 +743,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.main.BG
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for BG language in 2013 year.
+*   **Config description**: This configuration includes the main track for BG
+    language in 2013 year.
 
 *   **Dataset size**: `5.21 MiB`
 
@@ -895,15 +790,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.main.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for EN language in 2013 year.
+*   **Config description**: This configuration includes the main track for EN
+    language in 2013 year.
 
 *   **Dataset size**: `2.81 MiB`
 
@@ -949,15 +837,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.main.ES
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for ES language in 2013 year.
+*   **Config description**: This configuration includes the main track for ES
+    language in 2013 year.
 
 *   **Dataset size**: `3.35 MiB`
 
@@ -1003,15 +884,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.main.RO
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for RO language in 2013 year.
+*   **Config description**: This configuration includes the main track for RO
+    language in 2013 year.
 
 *   **Dataset size**: `3.26 MiB`
 
@@ -1057,15 +931,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.alzheimers.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the alzheimers
-    track for EN language in 2013 year.
+*   **Config description**: This configuration includes the alzheimers track for
+    EN language in 2013 year.
 
 *   **Dataset size**: `2.50 MiB`
 
@@ -1111,15 +978,8 @@ $(document).ready(() => {
 
 ## qa4mre/2013.entrance_exam.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the
-    entrance_exam track for EN language in 2013 year.
+*   **Config description**: This configuration includes the entrance_exam track
+    for EN language in 2013 year.
 
 *   **Dataset size**: `186.01 KiB`
 

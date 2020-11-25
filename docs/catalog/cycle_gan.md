@@ -14,8 +14,6 @@
 
 A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   **Config description**: A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
-
 *   **Homepage**: [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 *   **Source code**: [`tfds.image_classification.CycleGAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cycle_gan.py)

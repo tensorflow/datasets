@@ -14,8 +14,6 @@
 
 Synthetic datasets for word scramble and arithmetic tasks described in the GPT3 paper.
 
-*   **Config description**: Synthetic datasets for word scramble and arithmetic tasks described in the GPT3 paper.
-
 *   **Homepage**: [https://github.com/openai/gpt-3](https://github.com/openai/gpt-3)
 
 *   **Source code**: [`tfds.text.Gpt3`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gpt3.py)

@@ -173,6 +173,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Structured`
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
+*   [`cherry_blossoms`](cherry_blossoms.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
@@ -189,6 +191,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`web_nlg`](web_nlg.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki_bio`](wiki_bio.md)
+*   [`wiki_table_text`](wiki_table_text.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wine_quality`](wine_quality.md)
 
 ### `Summarization`
@@ -222,6 +226,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`clinc_oos`](clinc_oos.md)
 *   [`cos_e`](cos_e.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
+*   [`drop`](drop.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
 *   [`gap`](gap.md)

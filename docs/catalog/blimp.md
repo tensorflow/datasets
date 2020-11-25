@@ -69,12 +69,7 @@ FeaturesDict({
 
 ## blimp/adjunct_island (default config)
 
-*   **Config description**: BLiMP is a challenge set for evaluating what language models (LMs) know about
-major grammatical phenomena in English. BLiMP consists of 67 sub-datasets, each
-containing 1000 minimal pairs isolating specific contrasts in syntax,
-morphology, or semantics. The data is automatically generated according to
-expert-crafted grammars.
-This configuration includes the paradigm adjunct_island.
+*   **Config description**: This configuration includes the paradigm adjunct_island.
 
 *   **Download size**: `350.86 KiB`
 
@@ -117,12 +112,8 @@ $(document).ready(() => {
 
 ## blimp/anaphor_gender_agreement
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm anaphor_gender_agreement.
+*   **Config description**: This configuration includes the paradigm
+    anaphor_gender_agreement.
 
 *   **Download size**: `426.51 KiB`
 
@@ -164,12 +155,8 @@ $(document).ready(() => {
 
 ## blimp/anaphor_number_agreement
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm anaphor_number_agreement.
+*   **Config description**: This configuration includes the paradigm
+    anaphor_number_agreement.
 
 *   **Download size**: `440.29 KiB`
 
@@ -211,12 +198,8 @@ $(document).ready(() => {
 
 ## blimp/animate_subject_passive
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm animate_subject_passive.
+*   **Config description**: This configuration includes the paradigm
+    animate_subject_passive.
 
 *   **Download size**: `451.46 KiB`
 
@@ -258,12 +241,8 @@ $(document).ready(() => {
 
 ## blimp/animate_subject_trans
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm animate_subject_trans.
+*   **Config description**: This configuration includes the paradigm
+    animate_subject_trans.
 
 *   **Download size**: `422.95 KiB`
 
@@ -305,12 +284,7 @@ $(document).ready(() => {
 
 ## blimp/causative
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm causative.
+*   **Config description**: This configuration includes the paradigm causative.
 
 *   **Download size**: `309.73 KiB`
 
@@ -352,12 +326,8 @@ $(document).ready(() => {
 
 ## blimp/complex_NP_island
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm complex_NP_island.
+*   **Config description**: This configuration includes the paradigm
+    complex_NP_island.
 
 *   **Download size**: `383.17 KiB`
 
@@ -399,12 +369,7 @@ $(document).ready(() => {
 
 ## blimp/coordinate_structure_constraint_complex_left_branch
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     coordinate_structure_constraint_complex_left_branch.
 
 *   **Download size**: `558.30 KiB`
@@ -447,12 +412,7 @@ $(document).ready(() => {
 
 ## blimp/coordinate_structure_constraint_object_extraction
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     coordinate_structure_constraint_object_extraction.
 
 *   **Download size**: `357.47 KiB`
@@ -495,12 +455,8 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm determiner_noun_agreement_1.
+*   **Config description**: This configuration includes the paradigm
+    determiner_noun_agreement_1.
 
 *   **Download size**: `457.66 KiB`
 
@@ -542,12 +498,8 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm determiner_noun_agreement_2.
+*   **Config description**: This configuration includes the paradigm
+    determiner_noun_agreement_2.
 
 *   **Download size**: `477.40 KiB`
 
@@ -589,12 +541,8 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_irregular_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm determiner_noun_agreement_irregular_1.
+*   **Config description**: This configuration includes the paradigm
+    determiner_noun_agreement_irregular_1.
 
 *   **Download size**: `463.80 KiB`
 
@@ -636,12 +584,8 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_irregular_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm determiner_noun_agreement_irregular_2.
+*   **Config description**: This configuration includes the paradigm
+    determiner_noun_agreement_irregular_2.
 
 *   **Download size**: `479.35 KiB`
 
@@ -683,12 +627,8 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_with_adj_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm determiner_noun_agreement_with_adj_2.
+*   **Config description**: This configuration includes the paradigm
+    determiner_noun_agreement_with_adj_2.
 
 *   **Download size**: `514.46 KiB`
 
@@ -730,12 +670,7 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_with_adj_irregular_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     determiner_noun_agreement_with_adj_irregular_1.
 
 *   **Download size**: `487.95 KiB`
@@ -778,12 +713,7 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_with_adj_irregular_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     determiner_noun_agreement_with_adj_irregular_2.
 
 *   **Download size**: `516.14 KiB`
@@ -826,12 +756,7 @@ $(document).ready(() => {
 
 ## blimp/determiner_noun_agreement_with_adjective_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     determiner_noun_agreement_with_adjective_1.
 
 *   **Download size**: `492.85 KiB`
@@ -874,12 +799,8 @@ $(document).ready(() => {
 
 ## blimp/distractor_agreement_relational_noun
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm distractor_agreement_relational_noun.
+*   **Config description**: This configuration includes the paradigm
+    distractor_agreement_relational_noun.
 
 *   **Download size**: `513.33 KiB`
 
@@ -921,12 +842,8 @@ $(document).ready(() => {
 
 ## blimp/distractor_agreement_relative_clause
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm distractor_agreement_relative_clause.
+*   **Config description**: This configuration includes the paradigm
+    distractor_agreement_relative_clause.
 
 *   **Download size**: `551.53 KiB`
 
@@ -968,12 +885,8 @@ $(document).ready(() => {
 
 ## blimp/drop_argument
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm drop_argument.
+*   **Config description**: This configuration includes the paradigm
+    drop_argument.
 
 *   **Download size**: `297.07 KiB`
 
@@ -1015,12 +928,8 @@ $(document).ready(() => {
 
 ## blimp/ellipsis_n_bar_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm ellipsis_n_bar_1.
+*   **Config description**: This configuration includes the paradigm
+    ellipsis_n_bar_1.
 
 *   **Download size**: `402.32 KiB`
 
@@ -1062,12 +971,8 @@ $(document).ready(() => {
 
 ## blimp/ellipsis_n_bar_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm ellipsis_n_bar_2.
+*   **Config description**: This configuration includes the paradigm
+    ellipsis_n_bar_2.
 
 *   **Download size**: `417.53 KiB`
 
@@ -1109,12 +1014,8 @@ $(document).ready(() => {
 
 ## blimp/existential_there_object_raising
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm existential_there_object_raising.
+*   **Config description**: This configuration includes the paradigm
+    existential_there_object_raising.
 
 *   **Download size**: `537.77 KiB`
 
@@ -1156,12 +1057,8 @@ $(document).ready(() => {
 
 ## blimp/existential_there_quantifiers_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm existential_there_quantifiers_1.
+*   **Config description**: This configuration includes the paradigm
+    existential_there_quantifiers_1.
 
 *   **Download size**: `348.95 KiB`
 
@@ -1203,12 +1100,8 @@ $(document).ready(() => {
 
 ## blimp/existential_there_quantifiers_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm existential_there_quantifiers_2.
+*   **Config description**: This configuration includes the paradigm
+    existential_there_quantifiers_2.
 
 *   **Download size**: `350.80 KiB`
 
@@ -1250,12 +1143,8 @@ $(document).ready(() => {
 
 ## blimp/existential_there_subject_raising
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm existential_there_subject_raising.
+*   **Config description**: This configuration includes the paradigm
+    existential_there_subject_raising.
 
 *   **Download size**: `385.21 KiB`
 
@@ -1297,12 +1186,8 @@ $(document).ready(() => {
 
 ## blimp/expletive_it_object_raising
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm expletive_it_object_raising.
+*   **Config description**: This configuration includes the paradigm
+    expletive_it_object_raising.
 
 *   **Download size**: `573.88 KiB`
 
@@ -1344,12 +1229,7 @@ $(document).ready(() => {
 
 ## blimp/inchoative
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm inchoative.
+*   **Config description**: This configuration includes the paradigm inchoative.
 
 *   **Download size**: `291.71 KiB`
 
@@ -1391,12 +1271,8 @@ $(document).ready(() => {
 
 ## blimp/intransitive
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm intransitive.
+*   **Config description**: This configuration includes the paradigm
+    intransitive.
 
 *   **Download size**: `298.33 KiB`
 
@@ -1438,12 +1314,8 @@ $(document).ready(() => {
 
 ## blimp/irregular_past_participle_adjectives
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm irregular_past_participle_adjectives.
+*   **Config description**: This configuration includes the paradigm
+    irregular_past_participle_adjectives.
 
 *   **Download size**: `434.10 KiB`
 
@@ -1485,12 +1357,8 @@ $(document).ready(() => {
 
 ## blimp/irregular_past_participle_verbs
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm irregular_past_participle_verbs.
+*   **Config description**: This configuration includes the paradigm
+    irregular_past_participle_verbs.
 
 *   **Download size**: `410.27 KiB`
 
@@ -1532,12 +1400,7 @@ $(document).ready(() => {
 
 ## blimp/irregular_plural_subject_verb_agreement_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     irregular_plural_subject_verb_agreement_1.
 
 *   **Download size**: `449.91 KiB`
@@ -1580,12 +1443,7 @@ $(document).ready(() => {
 
 ## blimp/irregular_plural_subject_verb_agreement_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     irregular_plural_subject_verb_agreement_2.
 
 *   **Download size**: `442.75 KiB`
@@ -1628,12 +1486,8 @@ $(document).ready(() => {
 
 ## blimp/left_branch_island_echo_question
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm left_branch_island_echo_question.
+*   **Config description**: This configuration includes the paradigm
+    left_branch_island_echo_question.
 
 *   **Download size**: `471.31 KiB`
 
@@ -1675,12 +1529,8 @@ $(document).ready(() => {
 
 ## blimp/left_branch_island_simple_question
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm left_branch_island_simple_question.
+*   **Config description**: This configuration includes the paradigm
+    left_branch_island_simple_question.
 
 *   **Download size**: `335.40 KiB`
 
@@ -1722,12 +1572,8 @@ $(document).ready(() => {
 
 ## blimp/matrix_question_npi_licensor_present
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm matrix_question_npi_licensor_present.
+*   **Config description**: This configuration includes the paradigm
+    matrix_question_npi_licensor_present.
 
 *   **Download size**: `447.08 KiB`
 
@@ -1769,12 +1615,8 @@ $(document).ready(() => {
 
 ## blimp/npi_present_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm npi_present_1.
+*   **Config description**: This configuration includes the paradigm
+    npi_present_1.
 
 *   **Download size**: `427.75 KiB`
 
@@ -1816,12 +1658,8 @@ $(document).ready(() => {
 
 ## blimp/npi_present_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm npi_present_2.
+*   **Config description**: This configuration includes the paradigm
+    npi_present_2.
 
 *   **Download size**: `412.24 KiB`
 
@@ -1863,12 +1701,8 @@ $(document).ready(() => {
 
 ## blimp/only_npi_licensor_present
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm only_npi_licensor_present.
+*   **Config description**: This configuration includes the paradigm
+    only_npi_licensor_present.
 
 *   **Download size**: `448.41 KiB`
 
@@ -1910,12 +1744,8 @@ $(document).ready(() => {
 
 ## blimp/only_npi_scope
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm only_npi_scope.
+*   **Config description**: This configuration includes the paradigm
+    only_npi_scope.
 
 *   **Download size**: `570.04 KiB`
 
@@ -1957,12 +1787,7 @@ $(document).ready(() => {
 
 ## blimp/passive_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm passive_1.
+*   **Config description**: This configuration includes the paradigm passive_1.
 
 *   **Download size**: `332.30 KiB`
 
@@ -2004,12 +1829,7 @@ $(document).ready(() => {
 
 ## blimp/passive_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm passive_2.
+*   **Config description**: This configuration includes the paradigm passive_2.
 
 *   **Download size**: `301.12 KiB`
 
@@ -2051,12 +1871,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_c_command
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_c_command.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_c_command.
 
 *   **Download size**: `515.32 KiB`
 
@@ -2098,12 +1914,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_case_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_case_1.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_case_1.
 
 *   **Download size**: `466.05 KiB`
 
@@ -2145,12 +1957,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_case_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_case_2.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_case_2.
 
 *   **Download size**: `481.42 KiB`
 
@@ -2192,12 +2000,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_domain_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_domain_1.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_domain_1.
 
 *   **Download size**: `488.15 KiB`
 
@@ -2239,12 +2043,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_domain_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_domain_2.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_domain_2.
 
 *   **Download size**: `481.63 KiB`
 
@@ -2286,12 +2086,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_domain_3
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_domain_3.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_domain_3.
 
 *   **Download size**: `501.84 KiB`
 
@@ -2333,12 +2129,8 @@ $(document).ready(() => {
 
 ## blimp/principle_A_reconstruction
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm principle_A_reconstruction.
+*   **Config description**: This configuration includes the paradigm
+    principle_A_reconstruction.
 
 *   **Download size**: `337.40 KiB`
 
@@ -2380,12 +2172,8 @@ $(document).ready(() => {
 
 ## blimp/regular_plural_subject_verb_agreement_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm regular_plural_subject_verb_agreement_1.
+*   **Config description**: This configuration includes the paradigm
+    regular_plural_subject_verb_agreement_1.
 
 *   **Download size**: `441.26 KiB`
 
@@ -2427,12 +2215,8 @@ $(document).ready(() => {
 
 ## blimp/regular_plural_subject_verb_agreement_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm regular_plural_subject_verb_agreement_2.
+*   **Config description**: This configuration includes the paradigm
+    regular_plural_subject_verb_agreement_2.
 
 *   **Download size**: `445.78 KiB`
 
@@ -2474,12 +2258,7 @@ $(document).ready(() => {
 
 ## blimp/sentential_negation_npi_licensor_present
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm
+*   **Config description**: This configuration includes the paradigm
     sentential_negation_npi_licensor_present.
 
 *   **Download size**: `479.49 KiB`
@@ -2522,12 +2301,8 @@ $(document).ready(() => {
 
 ## blimp/sentential_negation_npi_scope
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm sentential_negation_npi_scope.
+*   **Config description**: This configuration includes the paradigm
+    sentential_negation_npi_scope.
 
 *   **Download size**: `600.52 KiB`
 
@@ -2569,12 +2344,8 @@ $(document).ready(() => {
 
 ## blimp/sentential_subject_island
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm sentential_subject_island.
+*   **Config description**: This configuration includes the paradigm
+    sentential_subject_island.
 
 *   **Download size**: `357.25 KiB`
 
@@ -2616,12 +2387,8 @@ $(document).ready(() => {
 
 ## blimp/superlative_quantifiers_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm superlative_quantifiers_1.
+*   **Config description**: This configuration includes the paradigm
+    superlative_quantifiers_1.
 
 *   **Download size**: `372.25 KiB`
 
@@ -2663,12 +2430,8 @@ $(document).ready(() => {
 
 ## blimp/superlative_quantifiers_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm superlative_quantifiers_2.
+*   **Config description**: This configuration includes the paradigm
+    superlative_quantifiers_2.
 
 *   **Download size**: `504.02 KiB`
 
@@ -2710,12 +2473,8 @@ $(document).ready(() => {
 
 ## blimp/tough_vs_raising_1
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm tough_vs_raising_1.
+*   **Config description**: This configuration includes the paradigm
+    tough_vs_raising_1.
 
 *   **Download size**: `334.99 KiB`
 
@@ -2757,12 +2516,8 @@ $(document).ready(() => {
 
 ## blimp/tough_vs_raising_2
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm tough_vs_raising_2.
+*   **Config description**: This configuration includes the paradigm
+    tough_vs_raising_2.
 
 *   **Download size**: `355.54 KiB`
 
@@ -2804,12 +2559,7 @@ $(document).ready(() => {
 
 ## blimp/transitive
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm transitive.
+*   **Config description**: This configuration includes the paradigm transitive.
 
 *   **Download size**: `449.50 KiB`
 
@@ -2851,12 +2601,7 @@ $(document).ready(() => {
 
 ## blimp/wh_island
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_island.
+*   **Config description**: This configuration includes the paradigm wh_island.
 
 *   **Download size**: `438.12 KiB`
 
@@ -2898,12 +2643,8 @@ $(document).ready(() => {
 
 ## blimp/wh_questions_object_gap
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_questions_object_gap.
+*   **Config description**: This configuration includes the paradigm
+    wh_questions_object_gap.
 
 *   **Download size**: `378.35 KiB`
 
@@ -2945,12 +2686,8 @@ $(document).ready(() => {
 
 ## blimp/wh_questions_subject_gap
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_questions_subject_gap.
+*   **Config description**: This configuration includes the paradigm
+    wh_questions_subject_gap.
 
 *   **Download size**: `380.84 KiB`
 
@@ -2992,12 +2729,8 @@ $(document).ready(() => {
 
 ## blimp/wh_questions_subject_gap_long_distance
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_questions_subject_gap_long_distance.
+*   **Config description**: This configuration includes the paradigm
+    wh_questions_subject_gap_long_distance.
 
 *   **Download size**: `451.82 KiB`
 
@@ -3039,12 +2772,8 @@ $(document).ready(() => {
 
 ## blimp/wh_vs_that_no_gap
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_vs_that_no_gap.
+*   **Config description**: This configuration includes the paradigm
+    wh_vs_that_no_gap.
 
 *   **Download size**: `374.28 KiB`
 
@@ -3086,12 +2815,8 @@ $(document).ready(() => {
 
 ## blimp/wh_vs_that_no_gap_long_distance
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_vs_that_no_gap_long_distance.
+*   **Config description**: This configuration includes the paradigm
+    wh_vs_that_no_gap_long_distance.
 
 *   **Download size**: `431.08 KiB`
 
@@ -3133,12 +2858,8 @@ $(document).ready(() => {
 
 ## blimp/wh_vs_that_with_gap
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_vs_that_with_gap.
+*   **Config description**: This configuration includes the paradigm
+    wh_vs_that_with_gap.
 
 *   **Download size**: `359.16 KiB`
 
@@ -3180,12 +2901,8 @@ $(document).ready(() => {
 
 ## blimp/wh_vs_that_with_gap_long_distance
 
-*   **Config description**: BLiMP is a challenge set for evaluating what
-    language models (LMs) know about major grammatical phenomena in English.
-    BLiMP consists of 67 sub-datasets, each containing 1000 minimal pairs
-    isolating specific contrasts in syntax, morphology, or semantics. The data
-    is automatically generated according to expert-crafted grammars. This
-    configuration includes the paradigm wh_vs_that_with_gap_long_distance.
+*   **Config description**: This configuration includes the paradigm
+    wh_vs_that_with_gap_long_distance.
 
 *   **Download size**: `416.00 KiB`
 
