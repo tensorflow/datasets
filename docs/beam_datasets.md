@@ -15,11 +15,11 @@ Below are different examples of generating a Beam dataset, both on the cloud or
 locally.
 
 **Warning**: When generating the dataset with the
-`tensorflow_datasets.scripts.download_and_prepare` script, make sure to specify
-the dataset config you want to generate or it will default to generate all
-existing configs. For example, for
-[wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia), use
-`--dataset=wikipedia/20200301.en` instead of `--dataset=wikipedia`.
+[`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset),
+make sure to specify the dataset config you want to generate or it will default
+to generate all existing configs. For example, for
+[wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia), use `tfds
+build wikipedia/20200301.en` instead of `tfds build wikipedia`.
 
 ### On Google Cloud Dataflow
 
@@ -28,7 +28,8 @@ To run the pipeline using
 of distributed computation, first follow the
 [Quickstart instructions](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python).
 
-Once your environment is set up, you can run the `download_and_prepare` script
+Once your environment is set up, you can run the
+[`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)
 using a data directory on [GCS](https://cloud.google.com/storage/) and
 specifying the
 [required options](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
@@ -76,8 +77,7 @@ To run your script locally using the default Apache Beam runner, the command is
 the same as for other datasets:
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=my_new_dataset
+tfds build my_dataset
 ```
 
 **Warning**: Beam datasets can be **huge** (terabytes or larger) and take a
@@ -89,25 +89,23 @@ runtimes.
 
 ### With a custom script
 
-To generate the dataset on Beam, the API is the same as for other datasets, but
-you have to pass the Beam options or runner to the `DownloadConfig`.
+To generate the dataset on Beam, the API is the same as for other datasets. You
+can customize the
+[`beam.Pipeline`](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline)
+using the `beam_options` (and `beam_runner`) arguments of `DownloadConfig`.
 
 ```python
 # If you are running on Dataflow, Spark,..., you may have to set-up runtime
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
 
-# To use Beam, you have to set at least one of `beam_options` or `beam_runner`
+# `beam_options` (and `beam_runner`) will be forwarded to `beam.Pipeline`
 dl_config = tfds.download.DownloadConfig(
     beam_options=beam.options.pipeline_options.PipelineOptions(flags=flags)
 )
-
 data_dir = 'gs://my-gcs-bucket/tensorflow_datasets'
 builder = tfds.builder('wikipedia/20190301.en', data_dir=data_dir)
-builder.download_and_prepare(
-    download_dir=FLAGS.download_dir,
-    download_config=dl_config,
-)
+builder.download_and_prepare(download_config=dl_config)
 ```
 
 ## Implementing a Beam dataset
@@ -220,12 +218,10 @@ class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
 
 To run the pipeline, have a look at the above section.
 
-**Warning**: Do not forget to add the register checksums `--register_checksums`
-flags to the `download_and_prepare` script when running the dataset the first
-time to register the downloads.
+**Note**: Like for non-beam datasets, do not forget to register download
+checksums with `--register_checksums` (only the first time to register the
+downloads).
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --register_checksums \
-  --datasets=my_new_dataset
+tfds build my_dataset --register_checksums
 ```
