@@ -549,7 +549,7 @@ def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   return [
       fname for fname in tf.io.gfile.listdir(path)
       if not tf.io.gfile.isdir(os.path.join(path, fname)) and
-      not file_adapters.is_record_file(fname)
+      not file_adapters.is_example_file(fname)
   ]
 
 
