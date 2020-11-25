@@ -568,14 +568,14 @@ def _iter_full_names(
     current_version_only: bool,
 ) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
-  for builder_name, builder_cls in registered._DATASET_REGISTRY.items():  # pylint: disable=redefined-outer-name,protected-access
-    builder_cls = typing.cast(Type[dataset_builder.DatasetBuilder], builder_cls)
+  for builder_name in registered.list_imported_builders():
+    builder_cls_ = builder_cls(builder_name)
     # Only keep requested datasets
-    if predicate_fn is not None and not predicate_fn(builder_cls):
+    if predicate_fn is not None and not predicate_fn(builder_cls_):
       continue
     for full_name in _iter_single_full_names(
         builder_name,
-        builder_cls,
+        builder_cls_,
         current_version_only=current_version_only,
     ):
       yield full_name
@@ -611,7 +611,7 @@ def single_full_names(
   """Returns the list `['ds/c0/v0',...]` or `['ds/v']` for a single builder."""
   return sorted(_iter_single_full_names(
       builder_name,
-      registered._DATASET_REGISTRY[builder_name],  # pylint: disable=protected-access
+      builder_cls(builder_name),
       current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
   ))
 
