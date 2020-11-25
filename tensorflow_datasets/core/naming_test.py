@@ -16,6 +16,9 @@
 """Tests tensorflow_datasets.core.naming."""
 
 from absl.testing import parameterized
+
+import pytest
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
@@ -24,20 +27,20 @@ from tensorflow_datasets.core import splits
 class NamingTest(parameterized.TestCase, testing.TestCase):
 
   @parameterized.parameters(
-      ("HelloWorld", "hello_world"),
-      ("FooBARBaz", "foo_bar_baz"),
-      ("FooBar123", "foo_bar123"),
-      ("FooBar123Baz", "foo_bar123_baz"),
-      ("FooBar123baz", "foo_bar123baz"),
+      ('HelloWorld', 'hello_world'),
+      ('FooBARBaz', 'foo_bar_baz'),
+      ('FooBar123', 'foo_bar123'),
+      ('FooBar123Baz', 'foo_bar123_baz'),
+      ('FooBar123baz', 'foo_bar123baz'),
   )
   def test_camelcase_to_snakecase(self, camel, snake):
     self.assertEqual(snake, naming.camelcase_to_snakecase(camel))
 
   @parameterized.parameters(
-      ("HelloWorld", "hello_world"),
-      ("FooBar123", "foo_bar123"),
-      ("FooBar123Baz", "foo_bar123_baz"),
-      ("FooBar123baz", "foo_bar123baz"),
+      ('HelloWorld', 'hello_world'),
+      ('FooBar123', 'foo_bar123'),
+      ('FooBar123Baz', 'foo_bar123_baz'),
+      ('FooBar123baz', 'foo_bar123baz'),
   )
   def test_snake_to_camelcase(self, camel, snake):
     self.assertEqual(naming.snake_to_camelcase(snake), camel)
@@ -45,18 +48,18 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
   def test_sharded_filenames(self):
-    prefix = "/tmp/foo"
+    prefix = '/tmp/foo'
     num_shards = 2
     expected = [
-        "/tmp/foo-00000-of-00002",
-        "/tmp/foo-00001-of-00002",
+        '/tmp/foo-00000-of-00002',
+        '/tmp/foo-00001-of-00002',
     ]
     self.assertEqual(expected, naming.sharded_filenames(prefix, num_shards))
 
   @parameterized.parameters(
-      ("foo", "foo-train"),
-      ("Foo", "foo-train"),
-      ("FooBar", "foo_bar-train"),
+      ('foo', 'foo-train'),
+      ('Foo', 'foo-train'),
+      ('FooBar', 'foo_bar-train'),
   )
   def test_filename_prefix_for_split(self, prefix, expected):
     split = splits.Split.TRAIN
@@ -64,49 +67,107 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
 
   def test_filenames_for_dataset_split(self):
     self.assertEqual([
-        "foo-train-00000-of-00002",
-        "foo-train-00001-of-00002",
+        'foo-train-00000-of-00002',
+        'foo-train-00001-of-00002',
     ], naming.filenames_for_dataset_split(
-        dataset_name="foo",
+        dataset_name='foo',
         split=splits.Split.TRAIN,
         num_shards=2))
 
   def test_filepaths_for_dataset_split(self):
     self.assertEqual([
-        "/tmp/bar/foo-train-00000-of-00002",
-        "/tmp/bar/foo-train-00001-of-00002",
+        '/tmp/bar/foo-train-00000-of-00002',
+        '/tmp/bar/foo-train-00001-of-00002',
     ],
                      naming.filepaths_for_dataset_split(
-                         dataset_name="foo",
+                         dataset_name='foo',
                          split=splits.Split.TRAIN,
                          num_shards=2,
-                         data_dir="/tmp/bar/"))
+                         data_dir='/tmp/bar/'))
 
   def test_filepaths_for_dataset_split_with_suffix(self):
     self.assertEqual([
-        "/tmp/bar/foo-train.bar-00000-of-00002",
-        "/tmp/bar/foo-train.bar-00001-of-00002",
+        '/tmp/bar/foo-train.bar-00000-of-00002',
+        '/tmp/bar/foo-train.bar-00001-of-00002',
     ],
                      naming.filepaths_for_dataset_split(
-                         dataset_name="foo",
+                         dataset_name='foo',
                          split=splits.Split.TRAIN,
                          num_shards=2,
-                         data_dir="/tmp/bar/",
-                         filetype_suffix="bar"))
+                         data_dir='/tmp/bar/',
+                         filetype_suffix='bar'))
 
   def test_filepattern_for_dataset_split(self):
-    self.assertEqual("/tmp/bar/foo-test*",
+    self.assertEqual('/tmp/bar/foo-test*',
                      naming.filepattern_for_dataset_split(
-                         dataset_name="foo",
+                         dataset_name='foo',
                          split=splits.Split.TEST,
-                         data_dir="/tmp/bar/"))
-    self.assertEqual("/tmp/bar/foo-test.bar*",
+                         data_dir='/tmp/bar/'))
+    self.assertEqual('/tmp/bar/foo-test.bar*',
                      naming.filepattern_for_dataset_split(
-                         dataset_name="foo",
+                         dataset_name='foo',
                          split=splits.Split.TEST,
-                         filetype_suffix="bar",
-                         data_dir="/tmp/bar/"))
+                         filetype_suffix='bar',
+                         data_dir='/tmp/bar/'))
 
 
-if __name__ == "__main__":
-  testing.test_main()
+def test_dataset_name_and_kwargs_from_name_str():
+  assert naming.dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
+  assert naming.dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == (
+      'ds1',
+      {'version': '1.2.*'},
+  )
+  assert naming.dataset_name_and_kwargs_from_name_str('ds1/config1') == (
+      'ds1', {'config': 'config1'}
+  )
+  assert naming.dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
+      'ds1', {
+          'config': 'config1',
+          'version': '1.*.*'
+      })
+  assert naming.dataset_name_and_kwargs_from_name_str(
+      'ds1/config1/arg1=val1,arg2=val2') == ('ds1', {
+          'config': 'config1',
+          'arg1': 'val1',
+          'arg2': 'val2'
+      })
+  assert naming.dataset_name_and_kwargs_from_name_str(
+      'ds1/config1:1.2.3/arg1=val1,arg2=val2') == ('ds1', {
+          'config': 'config1',
+          'version': '1.2.3',
+          'arg1': 'val1',
+          'arg2': 'val2'
+      })
+  assert naming.dataset_name_and_kwargs_from_name_str('ds1/arg1=val1') == (
+      'ds1', {
+          'arg1': 'val1'
+      })
+
+
+@pytest.mark.parametrize(
+    ['name', 'result'],
+    [
+        ('ds1', (None, 'ds1', {})),
+        ('ds1:1.0.0', (None, 'ds1', {'version': '1.0.0'})),
+        ('ns1:ds1', ('ns1', 'ds1', {})),
+        ('ns1:ds1:1.0.0', ('ns1', 'ds1', {'version': '1.0.0'})),
+        ('ns1:ds1/conf:1.0.0', ('ns1', 'ds1', {
+            'version': '1.0.0',
+            'config': 'conf',
+        })),
+    ],
+)
+def test_parse_builder_name_kwargs(name, result):
+  assert naming.parse_builder_name_kwargs(name) == result
+
+
+def test_parse_builder_name_kwargs_with_kwargs():
+  parse = naming.parse_builder_name_kwargs
+
+  assert parse('ds1', data_dir='/abc') == (None, 'ds1', {'data_dir': '/abc'})
+
+  with pytest.raises(TypeError, match='got multiple values for keyword arg'):
+    parse('ds1:1.0.0', version='1.0.0')  # Version defined twice
+
+  with pytest.raises(ValueError, match='Parsing builder name string .* failed'):
+    parse('ds/config:ns:1.0.0')
