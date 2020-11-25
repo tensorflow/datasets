@@ -641,6 +641,11 @@ class Tensor(FeatureConnector):
   def encode_example(self, example_data):
     """See base class for details."""
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
+    if isinstance(example_data, tf.Tensor):
+      raise TypeError(
+          f'Error encoding: {example_data}. `_generate_examples` should '
+          'yield `np.array`-compatible values, not `tf.Tensor`'
+      )
     if not isinstance(example_data, np.ndarray):
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
