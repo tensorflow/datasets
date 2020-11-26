@@ -66,36 +66,6 @@ Translation({
 
 *   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('en', 'bg')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)): Missing.
-
-
-## para_crawl/encs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Config description**: Translation dataset from English to cs.
-
-*   **Download size**: `187.31 MiB`
-
-*   **Dataset size**: `666.34 MiB`
-
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
-
-*   **Splits**:
-
-Split  | Examples
-:----- | -------:
-`'train'` | 2,981,949
-
-*   **Features**:
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
-
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('en', 'cs')`
-
 *   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
@@ -107,6 +77,71 @@ Translation({
 
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enbg-1.2.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## para_crawl/encs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Translation dataset from English to cs.
+
+*   **Download size**: `187.31 MiB`
+
+*   **Dataset size**: `666.34 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,981,949
+
+*   **Features**:
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('en', 'cs')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-encs-1.2.0.html";
 $(document).ready(() => {

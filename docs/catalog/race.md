@@ -33,18 +33,11 @@ comprehension.
     *   `1.0.0`: Initial release.
     *   **`2.0.0`** (default): Add the example id.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `24.26 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Features**:
 
@@ -83,4 +76,24 @@ FeaturesDict({
 
 ## race/high (default config)
 
+*   **Dataset size**: `52.39 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,021
+`'test'`  | 1,045
+`'train'` | 18,728
+
 ## race/middle
+
+*   **Dataset size**: `12.51 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 368
+`'test'`  | 362
+`'train'` | 6,409
