@@ -456,7 +456,7 @@ class FeatureConnector(object):
 
     for i in range(ex.shape[0]):
       # Rescale coordinates to match size of blank_image
-      ymin, xmin, ymax, xmax = ex[i, :]*150
+      ymin, xmin, ymax, xmax = ex[i, :]*SIZE
       # Generate random rgb values for Bbox ouline
       r, g, b = list(np.random.randint(0, 256, size=3))
       draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
