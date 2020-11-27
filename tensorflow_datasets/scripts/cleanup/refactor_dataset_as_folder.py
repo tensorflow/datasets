@@ -177,7 +177,10 @@ def refactor_dataset(ds_name: str) -> None:
 
 def refactor_datasets() -> None:
   """Refactoring all dataset into one folder."""
-  for ds_name in FLAGS.datasets.split(',') or tfds.list_builders():
+  for ds_name in (
+      FLAGS.datasets.split(',')
+      or tfds.list_builders(with_community_datasets=False)
+  ):
     refactor_dataset(ds_name)
 
 

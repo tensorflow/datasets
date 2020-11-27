@@ -306,7 +306,9 @@ def make_category_to_builders_dict(
   """Returns the `Dict[dataset_type, List[Builder]]`."""
   if not datasets:
     datasets = [
-        name for name in tfds.list_builders() if name not in BUILDER_BLACKLIST
+        name
+        for name in tfds.list_builders(with_community_datasets=False)
+        if name not in BUILDER_BLACKLIST
     ]
   print('Creating the vanilla builders for %s datasets...' % len(datasets))
   with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:

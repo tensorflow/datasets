@@ -43,7 +43,7 @@ def _collect_path_to_url_infos() -> Dict[
   url_info_paths = list(checksums._checksum_paths().values())  # pylint: disable=protected-access
 
   # Collect dataset-as-folder checksums path
-  for name in tfds.list_builders():
+  for name in tfds.list_builders(with_community_datasets=False):
     url_info_path = tfds.builder_cls(name)._checksums_path  # pylint: disable=protected-access
     if url_info_path.exists():
       url_info_paths.append(url_info_path)

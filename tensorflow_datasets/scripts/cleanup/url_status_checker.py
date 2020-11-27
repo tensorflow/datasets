@@ -46,7 +46,7 @@ def main(_):
   # dataset should be updated.
   url_infos = {
       name: tfds.builder_cls(name).url_infos
-      for name in tfds.list_builders()
+      for name in tfds.list_builders(with_community_datasets=False)
   }
   for url_info in url_infos.values():
     if url_info:
