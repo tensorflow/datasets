@@ -26,7 +26,6 @@ import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -445,34 +444,12 @@ class FeatureConnector(object):
     """
     return tf.ragged.map_flat_values(self.decode_batch_example, tfexample_data)
 
-  def _build_thumbnail_with_bbox(self, ex: np.ndarray) -> str:
-    """Returns the HTML str representation of an Image with BBoxes."""
-    PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
-    PIL_ImageDraw = lazy_imports_lib.lazy_imports.PIL_ImageDraw
-
-    SIZE = 150
-    blank_img = PIL_Image.new('RGB', (SIZE, SIZE), (255, 255, 255))
-    draw = PIL_ImageDraw.Draw(blank_img)
-
-    for i in range(ex.shape[0]):
-      # Rescale coordinates to match size of blank_image
-      ymin, xmin, ymax, xmax = ex[i, :]*SIZE
-      # Generate random rgb values for Bbox ouline
-      r, g, b = list(np.random.randint(0, 256, size=3))
-      draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
-
-    img_str = utils.get_base64(lambda buff: blank_img.save(buff, format='PNG'))
-
-    return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
-
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object."""
     return _repr_html(ex)
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
-    if len(ex.shape) > 1 and ex.shape[1] == 4:
-      return self._build_thumbnail_with_bbox(ex)
     return _repr_html(ex)
 
   def repr_html_ragged(self, ex: np.ndarray) -> str:
