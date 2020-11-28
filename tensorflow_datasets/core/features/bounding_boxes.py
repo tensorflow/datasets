@@ -83,7 +83,7 @@ class BBoxFeature(feature.Tensor):
     )
 
   def _build_thumbnail_with_bbox(self, ex: np.ndarray) -> str:
-    """Returns the HTML str representation of an Image with BBoxes."""
+    """Returns blank image with Bboxes drawn on it."""
     PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
     PIL_ImageDraw = lazy_imports_lib.lazy_imports.PIL_ImageDraw
 
@@ -100,11 +100,9 @@ class BBoxFeature(feature.Tensor):
     return blank_img
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
-    """Returns the HTML str representation of the object."""
+    """Returns the HTML str representation of an Image with BBoxes."""
     img = self._build_thumbnail_with_bbox(ex)
-
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
-
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
 
   @classmethod
