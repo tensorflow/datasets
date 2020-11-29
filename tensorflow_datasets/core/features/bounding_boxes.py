@@ -82,7 +82,7 @@ class BBoxFeature(feature.Tensor):
         [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
     )
 
-  def _build_thumbnail_with_bbox(self, ex: np.ndarray) -> str:
+  def _build_thumbnail_with_bbox(self, ex: np.ndarray):
     """Returns blank image with Bboxes drawn on it."""
     PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
     PIL_ImageDraw = lazy_imports_lib.lazy_imports.PIL_ImageDraw
