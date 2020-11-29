@@ -197,26 +197,75 @@ class Video(sequence_feature.Sequence):
         'ffmpeg_extra_args': self._extra_ffmpeg_args
     }
 
+  def _generate_video(self, images, encoding_format='mp4') -> str:
+    """Converts sequence of images into video string."""
+    # CODE REDUNDANT: Could somehow use `_ffmpeg_decode`?
+    imgs = len(images)-1
+    video_dir = tempfile.mkdtemp()
+    for i, img in enumerate(images):
+      f = os.path.join(video_dir, f'img{i:0{imgs}d}.png')
+      img.save(f, format='png')
+
+    ffmpeg_args = [self._ffmpeg_path, '-i',
+                   os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png'))]
+    ffmpeg_stdin = None
+
+    output_pattern = os.path.join(video_dir, 'output.' + encoding_format)
+    ffmpeg_args += self._extra_ffmpeg_args
+    ffmpeg_args.append(output_pattern)
+    try:
+      # try using ffmpeg to convert pngs to mp4
+      process = subprocess.Popen(ffmpeg_args,
+                                 stdin=subprocess.PIPE,
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
+      stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
+      ffmpeg_ret_code = process.returncode
+      if ffmpeg_ret_code:
+        raise ValueError(
+            'ffmpeg returned error code {}, command={}\n'
+            'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
+                                            ' '.join(ffmpeg_args),
+                                            stdout_data,
+                                            stderr_data))
+      video = None
+      video_file = os.path.join(video_dir, 'output.mp4')
+      with tf.io.gfile.GFile(video_file, 'rb') as vf:
+        video = vf.read()
+
+      def write_buff(buff):
+        buff.write(video)
+      video_str = utils.get_base64(write_buff)
+      return video_str
+
+    except OSError:
+      # if ffmpeg is not installed, generate GIF using pngs
+      def write_buff(buff):
+        images[0].save(
+            buff,
+            format='GIF',
+            save_all=True,
+            append_images=images[1:],
+            # Could add a frame_rate kwargs in __init__ to customize this.
+            duration=41,  # 41ms / img ~= 24 img / sec
+            loop=0,
+        )
+
+      # Convert to base64
+      gif_str = utils.get_base64(write_buff)
+      return gif_str
+
+    finally:
+      tf.io.gfile.rmtree(video_dir)
+
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as GIFs."""
-    # Use GIF as there is no easy way to generate a HTML5 compatible video
-    # without FFMPEG or other lib that the user is likelly to have on
-    # colab by default.
-    gif = [image_feature.create_thumbnail(frame) for frame in ex]
-
-    def write_buff(buff):
-      gif[0].save(
-          buff,
-          format='GIF',
-          save_all=True,
-          append_images=gif[1:],
-          # Could add a frame_rate kwargs in __init__ to customize this.
-          duration=41,  # 41ms / img ~= 24 img / sec
-          loop=0,
-      )
-
-    # Convert to base64
-    gif_str = utils.get_base64(write_buff)
+    # Use GIF to generate a HTML5 compatible video if FFMPEG is not
+    # installed on the system.
+    images = [image_feature.create_thumbnail(frame) for frame in ex]
+    video_str = self._generate_video(images)
 
     # Display HTML
-    return f'<img src="data:image/gif;base64,{gif_str}"  alt="Gif" />'
+    return (f'<video height="128" width="128" controls loop>'
+            f'<source src="data:image/gif;base64,{video_str}"'
+            f' type="video/mp4" alt="Video"></video>')
