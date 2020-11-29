@@ -197,7 +197,7 @@ class Video(sequence_feature.Sequence):
         'ffmpeg_extra_args': self._extra_ffmpeg_args
     }
 
-  def _generate_video(self, images, encoding_format='mp4') -> str:
+  def _generate_video(self, images, framerate=24, encoding_format='mp4') -> str:
     """Converts sequence of images into video string."""
     # CODE REDUNDANT: Could somehow use `_ffmpeg_decode`?
     imgs = len(images)-1
@@ -206,7 +206,7 @@ class Video(sequence_feature.Sequence):
       f = os.path.join(video_dir, f'img{i:0{imgs}d}.png')
       img.save(f, format='png')
 
-    ffmpeg_args = [self._ffmpeg_path, '-i',
+    ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
                    os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png'))]
     ffmpeg_stdin = None
 
@@ -240,6 +240,7 @@ class Video(sequence_feature.Sequence):
 
     except OSError:
       # if ffmpeg is not installed, generate GIF using pngs
+      duration = (41*24)/framerate
       def write_buff(buff):
         images[0].save(
             buff,
@@ -247,7 +248,7 @@ class Video(sequence_feature.Sequence):
             save_all=True,
             append_images=images[1:],
             # Could add a frame_rate kwargs in __init__ to customize this.
-            duration=41,  # 41ms / img ~= 24 img / sec
+            duration=duration,  # 41ms / img ~= 24 img / sec
             loop=0,
         )
 
@@ -263,7 +264,7 @@ class Video(sequence_feature.Sequence):
     # Use GIF to generate a HTML5 compatible video if FFMPEG is not
     # installed on the system.
     images = [image_feature.create_thumbnail(frame) for frame in ex]
-    video_str = self._generate_video(images)
+    video_str = self._generate_video(images, framerate=10)
 
     # Display HTML
     return (f'<video height="128" width="128" controls loop>'
