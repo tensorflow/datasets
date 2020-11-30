@@ -197,10 +197,10 @@ class Video(sequence_feature.Sequence):
         'ffmpeg_extra_args': self._extra_ffmpeg_args
     }
 
-  def _generate_video(self, images, framerate=24, encoding_format='mp4') -> str:
+  def _generate_video_html(self, images, framerate=24, encoding_format='mp4') -> str:
     """Converts sequence of images into video string."""
     # CODE REDUNDANT: Could somehow use `_ffmpeg_decode`?
-    imgs = len(str(len(images)))+1  # Find number of digits required to give names.
+    imgs = len(str(len(images)))+1  # Find number of digits in len to give names.
     video_dir = tempfile.mkdtemp()
     for i, img in enumerate(images):
       f = os.path.join(video_dir, f'img{i:0{imgs}d}.png')
@@ -236,7 +236,9 @@ class Video(sequence_feature.Sequence):
       def write_buff(buff):
         buff.write(video)
       video_str = utils.get_base64(write_buff)
-      return video_str
+      return (f'<video height="128" width="128" controls loop>'
+              f'<source src="data:image/gif;base64,{video_str}"'
+              f' type="video/mp4" alt="Video"></video>')
 
     except OSError:
       # if ffmpeg is not installed, generate GIF using pngs
@@ -254,7 +256,7 @@ class Video(sequence_feature.Sequence):
 
       # Convert to base64
       gif_str = utils.get_base64(write_buff)
-      return gif_str
+      return f'<img src="data:image/png;base64,{gif_str}" alt="Gif" />'
 
     finally:
       tf.io.gfile.rmtree(video_dir)
@@ -264,9 +266,7 @@ class Video(sequence_feature.Sequence):
     # Use GIF to generate a HTML5 compatible video if FFMPEG is not
     # installed on the system.
     images = [image_feature.create_thumbnail(frame) for frame in ex]
-    video_str = self._generate_video(images, framerate=10)
+    video_html = self._generate_video_html(images, framerate=10)
 
     # Display HTML
-    return (f'<video height="128" width="128" controls loop>'
-            f'<source src="data:image/gif;base64,{video_str}"'
-            f' type="video/mp4" alt="Video"></video>')
+    return video_html
