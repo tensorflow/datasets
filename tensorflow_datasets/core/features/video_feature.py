@@ -200,7 +200,7 @@ class Video(sequence_feature.Sequence):
   def _generate_video(self, images, framerate=24, encoding_format='mp4') -> str:
     """Converts sequence of images into video string."""
     # CODE REDUNDANT: Could somehow use `_ffmpeg_decode`?
-    imgs = len(images)-1
+    imgs = len(str(len(images)))+1  # Find number of digits required to give names.
     video_dir = tempfile.mkdtemp()
     for i, img in enumerate(images):
       f = os.path.join(video_dir, f'img{i:0{imgs}d}.png')
