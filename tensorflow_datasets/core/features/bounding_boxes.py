@@ -101,6 +101,7 @@ class BBoxFeature(feature.Tensor):
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
+    ex = np.expand_dims(ex, axis=0)  # Convert single bounding box to single batch.
     return self._repr_html(ex)
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
