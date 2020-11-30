@@ -82,24 +82,6 @@ class BBoxFeature(feature.Tensor):
         [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
     )
 
-  def _build_thumbnail_with_bbox(self, ex: np.ndarray):
-    """Returns blank image with Bboxes drawn on it."""
-    PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
-    PIL_ImageDraw = lazy_imports_lib.lazy_imports.PIL_ImageDraw
-
-    SIZE = 150
-    blank_img = PIL_Image.new('RGB', (SIZE, SIZE), (255, 255, 255))
-    draw = PIL_ImageDraw.Draw(blank_img)
-    rs = np.random.RandomState(97531)  # freeze random state
-
-    for i in range(ex.shape[0]):
-      # Rescale coordinates to match size of blank_image
-      ymin, xmin, ymax, xmax = ex[i, :]*SIZE
-      # Generate random rgb values for Bbox ouline
-      r, g, b = list(rs.randint(0, 256, size=3))
-      draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
-    return blank_img
-
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
     ex = np.expand_dims(ex, axis=0)  # Convert single bounding box to single batch.
@@ -111,7 +93,7 @@ class BBoxFeature(feature.Tensor):
 
   def _repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
-    img = self._build_thumbnail_with_bbox(ex)
+    img = _build_thumbnail_with_bbox(ex)
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
 
@@ -122,3 +104,21 @@ class BBoxFeature(feature.Tensor):
 
   def to_json_content(self) -> Json:
     return dict()
+
+def _build_thumbnail_with_bbox(ex: np.ndarray):
+  """Returns blank image with Bboxes drawn on it."""
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
+  PIL_ImageDraw = lazy_imports_lib.lazy_imports.PIL_ImageDraw
+
+  SIZE = 150
+  blank_img = PIL_Image.new('RGB', (SIZE, SIZE), (255, 255, 255))
+  draw = PIL_ImageDraw.Draw(blank_img)
+  rs = np.random.RandomState(97531)  # freeze random state
+
+  for i in range(ex.shape[0]):
+    # Rescale coordinates to match size of blank_image
+    ymin, xmin, ymax, xmax = ex[i, :]*SIZE
+    # Generate random rgb values for Bbox ouline
+    r, g, b = list(rs.randint(0, 256, size=3))
+    draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
+  return blank_img
