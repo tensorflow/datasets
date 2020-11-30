@@ -25,8 +25,8 @@ To use the new dataset with `tfds.load('my_dataset')`:
 
 *   `tfds.load` will automatically detect and load the dataset generated in
     `~/tensorflow_datasets/my_dataset/` (e.g. by `tfds build`).
-*   Alternativelly, you can explicitly `import my.project.datasets.my_dataset`
-    to register your dataset:
+*   Alternatively, you can explicitly `import my.project.datasets.my_dataset` to
+    register your dataset:
 
 ```python
 import my.project.datasets.my_dataset  # Register `my_dataset`
