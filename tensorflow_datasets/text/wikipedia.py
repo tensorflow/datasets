@@ -15,6 +15,7 @@
 
 """Wikipedia dataset containing cleaned articles of all languages."""
 
+import bz2
 import codecs
 import json
 import re
@@ -25,11 +26,12 @@ import six
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-if six.PY3:
-  import bz2  # pylint:disable=g-import-not-at-top
-else:
-  # py2's built-in bz2 package does not support reading from file objects.
-  import bz2file as bz2  # pylint:disable=g-import-not-at-top
+from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
+FLAGS = flags.FLAGS
+flags.DEFINE_boolean(
+    "wikipedia_auto_select_flume_mode", True,
+    "If True, will automatically determine whether to run flume on borg or "
+    "locally based on the dump size for each language.")
 
 _CITATION = """\
 @ONLINE {wikidump,
