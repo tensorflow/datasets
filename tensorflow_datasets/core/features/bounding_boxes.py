@@ -99,7 +99,15 @@ class BBoxFeature(feature.Tensor):
       draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
     return blank_img
 
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of an Image with BBoxes."""
+    return self._repr_html(ex)
+
   def repr_html_batch(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of an Image with BBoxes (Sequence)."""
+    return self._repr_html(ex)
+
+  def _repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
     img = self._build_thumbnail_with_bbox(ex)
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))

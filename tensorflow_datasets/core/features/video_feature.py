@@ -236,7 +236,7 @@ class Video(sequence_feature.Sequence):
       def write_buff(buff):
         buff.write(video)
       video_str = utils.get_base64(write_buff)
-      return (f'<video height="128" width="128" controls loop>'
+      return (f'<video height="128" width="128" controls loop plays-inline>'
               f'<source src="data:image/gif;base64,{video_str}"'
               f' type="video/mp4" alt="Video"></video>')
 
