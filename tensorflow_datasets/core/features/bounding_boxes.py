@@ -90,12 +90,13 @@ class BBoxFeature(feature.Tensor):
     SIZE = 150
     blank_img = PIL_Image.new('RGB', (SIZE, SIZE), (255, 255, 255))
     draw = PIL_ImageDraw.Draw(blank_img)
+    rs = np.random.RandomState(97531)  # freeze random state
 
     for i in range(ex.shape[0]):
       # Rescale coordinates to match size of blank_image
       ymin, xmin, ymax, xmax = ex[i, :]*SIZE
       # Generate random rgb values for Bbox ouline
-      r, g, b = list(np.random.randint(0, 256, size=3))
+      r, g, b = list(rs.randint(0, 256, size=3))
       draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
     return blank_img
 
