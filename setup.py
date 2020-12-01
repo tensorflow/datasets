@@ -65,7 +65,6 @@ REQUIRED_PKGS = [
 
 TESTS_REQUIRE = [
     'jupyter',
-    'mako',
     'pytest',
     'pytest-xdist',
     # Lazy-deps required by core

@@ -22,13 +22,10 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 import collections
 from concurrent import futures
 import functools
-import os
 from typing import Any, Dict, Iterator, List, Optional, Tuple, Type
 
 import dataclasses
 
-import mako.lookup
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 from tensorflow_datasets.scripts.documentation import doc_utils
@@ -64,23 +61,6 @@ class BuilderDocumentation:
   section: str
   is_manual: bool
   is_nightly: bool
-
-
-@tfds.core.utils.memoize()
-def get_mako_template(tmpl_name):
-  """Returns mako.lookup.Template object to use to render documentation.
-
-  Args:
-    tmpl_name: string, name of template to load.
-
-  Returns:
-    mako 'Template' instance that can be rendered.
-  """
-  tmpl_path = tfds.core.utils.tfds_path(
-      'scripts/documentation/templates/%s.mako.md' % tmpl_name)
-  with tf.io.gfile.GFile(os.fspath(tmpl_path), 'r') as tmpl_f:
-    tmpl_content = tmpl_f.read()
-  return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
 
 
 def _load_builder(
@@ -150,13 +130,6 @@ def _document_single_builder_inner(
       df_doc_util=df_doc_util,
       nightly_doc_util=nightly_doc_util,
   )
-  schema_org_tmpl = get_mako_template('schema_org')
-  schema_org_out_str = schema_org_tmpl.render_unicode(
-      builder=builder,
-      config_builders=config_builders,
-      visu_doc_util=visu_doc_util,
-  ).strip()
-  out_str = schema_org_out_str + '\n' + out_str
   return BuilderDocumentation(
       name=name,
       content=out_str,
