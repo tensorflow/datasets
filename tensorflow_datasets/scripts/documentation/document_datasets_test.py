@@ -15,10 +15,7 @@
 
 """Test of `document_datasets.py`."""
 
-import contextlib
 import functools
-import tempfile
-from unittest import mock
 
 import pytest
 
@@ -48,43 +45,30 @@ class DummyDatasetConfigsSharedVersion(tfds.testing.DummyDataset):
   ]
 
 
-@pytest.fixture(scope='module')
-def document_single_builder_fn():
-  with contextlib.ExitStack() as stack:
-    tmp_dir = stack.enter_context(tempfile.TemporaryDirectory())
-
-    # Patch the visualization utils (to avoid GCS access during test)
-    stack.enter_context(mock.patch.object(
-        doc_utils.VisualizationDocUtil, 'BASE_PATH', tmp_dir
-    ))
-    stack.enter_context(mock.patch.object(
-        doc_utils.DataframeDocUtil, 'BASE_PATH', tmp_dir
-    ))
-    # Patch the register
-    # `pytest` do not execute the tests in isolation.
-    # All tests seems to be imported before execution, which leak the
-    # registration. Datasets from `register_test.py` are registered when
-    # `document_dataset_test.py` is executed.
-    # As `_load_nightly_dict` load the full register, we patch it
-    # to avoid invalid dataset errors.
-    # Context: https://github.com/tensorflow/datasets/issues/1960
-    stack.enter_context(mock.patch.object(
-        tfds.core.load, 'list_full_names', return_value=[]
-    ))
-
-    fn = functools.partial(
-        document_datasets._document_single_builder,
-        visu_doc_util=doc_utils.VisualizationDocUtil(),
-        df_doc_util=doc_utils.DataframeDocUtil(),
-        nightly_doc_util=doc_utils.NightlyDocUtil(),
-    )
-    yield fn
+@pytest.fixture
+def document_single_builder_fn(tmp_path):
+  yield functools.partial(
+      document_datasets._document_single_builder,
+      visu_doc_util=doc_utils.VisualizationDocUtil(
+          base_path=tmp_path,
+          base_url=doc_utils.DocUtilPaths.fig_base_url,
+      ),
+      df_doc_util=doc_utils.DataframeDocUtil(
+          base_path=tmp_path,
+          base_url=doc_utils.DocUtilPaths.df_base_url,
+      ),
+      nightly_doc_util=None,
+  )
 
 
-@pytest.mark.usefixtures('document_single_builder_fn')
 def test_document_datasets():
   all_docs = list(document_datasets.iter_documentation_builders(
       datasets=['mnist', 'coco'],  # Builder with and without config
+      doc_util_paths=doc_utils.DocUtilPaths(
+          fig_base_path=None,
+          df_base_path=None,
+          nightly_path=None,
+      ),
   ))
   assert {d.name for d in all_docs} == {'mnist', 'coco'}
 

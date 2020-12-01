@@ -77,7 +77,9 @@ def _create_section_toc(
 
 def build_catalog(
     datasets: Optional[List[str]] = None,
+    *,
     catalog_dir: Optional[tfds.core.utils.PathLike] = None,
+    doc_util_paths: Optional[doc_utils.DocUtilPaths] = None,
     toc_relative_path: str = '/datasets/catalog/',
 ) -> None:
   """Document all datasets, including the table of content.
@@ -85,6 +87,7 @@ def build_catalog(
   Args:
     datasets: Lists of dataset to document (all if not set)
     catalog_dir: Destination path for the catalog
+    doc_util_paths: Additional path for visualization, nightly info,...
     toc_relative_path: Relative path of the catalog directory, used to
       generate the table of content relative links.
   """
@@ -92,7 +95,9 @@ def build_catalog(
 
   # Iterate over the builder documentations
   section_to_builder_docs = collections.defaultdict(list)
-  for builder_doc in document_datasets.iter_documentation_builders(datasets):
+  for builder_doc in document_datasets.iter_documentation_builders(
+      datasets, doc_util_paths=doc_util_paths or doc_utils.DocUtilPaths()
+  ):
     # Write the builder documentation
     dataset_file = catalog_dir / f'{builder_doc.name}.md'
     dataset_file.write_text(builder_doc.content)

@@ -22,7 +22,9 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 import collections
 import os
 import textwrap
-from typing import Dict, List, Tuple, Union, Set
+from typing import Dict, List, Optional, Tuple, Union, Set
+
+import dataclasses
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
@@ -37,17 +39,43 @@ FullNamesDict = Dict[str, Dict[str, Set[str]]]
 NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
 
 
+@dataclasses.dataclass
+class DocUtilPaths:
+  """Structure containing the utils paths."""
+  # VisualizationDocUtil
+  fig_base_path: Optional[tfds.core.PathLike] = tfds.core.gcs_path(
+      'visualization/fig/'
+  )
+  fig_base_url: str = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
+  # DataframeDocUtil
+  df_base_path: Optional[tfds.core.PathLike] = tfds.core.gcs_path(
+      'visualization/dataframe'
+  )
+  df_base_url: str = 'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
+  # NightlyDocUtil
+  nightly_path: Optional[tfds.core.PathLike] = tfds.core.utils.tfds_path(
+      'stable_versions.txt'
+  )
+
+
 class VisualizationDocUtil(object):
   """Small util which generate the path/urls for the visualizations."""
-  # Url used to display images
-  BASE_PATH = tfds.core.gcs_path('visualization/fig/')
-  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
+
+  def __init__(self, base_path: tfds.core.PathLike, base_url: str):
+    """Constructor.
+
+    Args:
+      base_path: Path where images are stored.
+      base_url: Base url where images are displayed.
+    """
+    self._base_path = base_path
+    self._base_url = base_url
 
   def _get_name(self, builder):
     return builder.info.full_name.replace('/', '-') + '.png'
 
   def get_url(self, builder):
-    return self.BASE_URL + self._get_name(builder)
+    return self._base_url + self._get_name(builder)
 
   def get_html_tag(self, builder: tfds.core.DatasetBuilder) -> str:
     """Returns the <img> html tag."""
@@ -55,21 +83,28 @@ class VisualizationDocUtil(object):
     return f'<img src="{url}" alt="Visualization" width="500px">'
 
   def has_visualization(self, builder):
-    filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
+    filepath = os.path.join(self._base_path, self._get_name(builder))
     return tf.io.gfile.exists(filepath)
 
 
 class DataframeDocUtil(object):
   """Small util which generate the path/urls for the dataframes."""
-  # Url used to display dataframes
-  BASE_PATH = tfds.core.gcs_path('visualization/dataframe')
-  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
+
+  def __init__(self, base_path: tfds.core.PathLike, base_url: str):
+    """Constructor.
+
+    Args:
+      base_path: Path where images are stored.
+      base_url: Base url where images are displayed.
+    """
+    self._base_path = base_path
+    self._base_url = base_url
 
   def _get_name(self, builder):
     return builder.info.full_name.replace('/', '-') + '.html'
 
   def get_url(self, builder):
-    return self.BASE_URL + self._get_name(builder)
+    return self._base_url + self._get_name(builder)
 
   def get_html_tag(self, builder: tfds.core.DatasetBuilder) -> str:
     """Returns the html tag."""
@@ -111,7 +146,7 @@ class DataframeDocUtil(object):
     return textwrap.dedent(visualization_html)
 
   def has_visualization(self, builder):
-    filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
+    filepath = os.path.join(self._base_path, self._get_name(builder))
     return tf.io.gfile.exists(filepath)
 
 
@@ -169,9 +204,8 @@ def _build_nightly_dict(
 
 
 @tfds.core.utils.memoize()
-def _load_nightly_dict() -> NightlyDict:
+def _load_nightly_dict(version_path: tfds.core.PathLike) -> NightlyDict:
   """Loads (and caches) the nightly dict."""
-  version_path = tfds.core.utils.tfds_path('stable_versions.txt')
   with tf.io.gfile.GFile(os.fspath(version_path), 'r') as f:
     stable_versions = f.read().splitlines()
 
@@ -188,8 +222,13 @@ def _load_nightly_dict() -> NightlyDict:
 class NightlyDocUtil(object):
   """Small util to format the doc."""
 
-  def __init__(self):
-    self._nightly_dict: NightlyDict = _load_nightly_dict()
+  def __init__(self, path: tfds.core.PathLike):
+    """Constructor.
+
+    Args:
+      path: Path containing the nightly versions
+    """
+    self._nightly_dict: NightlyDict = _load_nightly_dict(path)
 
   def is_builder_nightly(
       self,

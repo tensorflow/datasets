@@ -130,12 +130,15 @@ def _document_single_builder_inner(
       df_doc_util=df_doc_util,
       nightly_doc_util=nightly_doc_util,
   )
+  is_nightly = bool(
+      nightly_doc_util and nightly_doc_util.is_builder_nightly(name)
+  )
   return BuilderDocumentation(
       name=name,
       content=out_str,
       section=section,
       is_manual=bool(builder_cls.MANUAL_DOWNLOAD_INSTRUCTIONS),
-      is_nightly=nightly_doc_util.is_builder_nightly(name),
+      is_nightly=is_nightly,
   )
 
 
@@ -150,12 +153,15 @@ def _all_tfds_datasets() -> List[str]:
 
 def iter_documentation_builders(
     datasets: Optional[List[str]] = None,
+    *,
+    doc_util_paths: doc_utils.DocUtilPaths = None,
 ) -> Iterator[BuilderDocumentation]:
   """Create dataset documentation string for given datasets.
 
   Args:
     datasets: list of datasets for which to create documentation.
               If None, then all available datasets will be used.
+    doc_util_paths: Additional path for visualization, nightly info,...
 
   Yields:
     builder_documetation: The documentation information for each builder
@@ -163,11 +169,34 @@ def iter_documentation_builders(
   print('Retrieving the list of builders...')
   datasets = datasets or _all_tfds_datasets()
 
+  if doc_util_paths.fig_base_path:
+    visu_doc_util = doc_utils.VisualizationDocUtil(
+        base_path=doc_util_paths.fig_base_path,
+        base_url=doc_util_paths.fig_base_url,
+    )
+  else:
+    visu_doc_util = None
+
+  if doc_util_paths.df_base_path:
+    df_doc_util = doc_utils.DataframeDocUtil(
+        base_path=doc_util_paths.df_base_path,
+        base_url=doc_util_paths.df_base_url,
+    )
+  else:
+    df_doc_util = None
+
+  if doc_util_paths.fig_base_path:
+    nightly_doc_util = doc_utils.NightlyDocUtil(
+        path=doc_util_paths.nightly_path,
+    )
+  else:
+    nightly_doc_util = None
+
   document_single_builder_fn = functools.partial(
       _document_single_builder,
-      visu_doc_util=doc_utils.VisualizationDocUtil(),
-      df_doc_util=doc_utils.DataframeDocUtil(),
-      nightly_doc_util=doc_utils.NightlyDocUtil(),
+      visu_doc_util=visu_doc_util,
+      df_doc_util=df_doc_util,
+      nightly_doc_util=nightly_doc_util,
   )
 
   # Document all builders

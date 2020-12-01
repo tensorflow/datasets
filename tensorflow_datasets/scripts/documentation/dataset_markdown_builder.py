@@ -167,7 +167,7 @@ class VersionSection(Section):
 
   NAME = 'Versions'
 
-  def __init__(self, nightly_doc_util):
+  def __init__(self, nightly_doc_util: Optional[doc_utils.NightlyDocUtil]):
     self._nightly_doc_util = nightly_doc_util
 
   def _list_versions(self, builder: tfds.core.DatasetBuilder):
@@ -184,6 +184,7 @@ class VersionSection(Section):
         version_name = '`{}`'.format(str(v))
       if (
           v in curr_versions  # Filter versions only present in RELEASE_NOTES
+          and self._nightly_doc_util
           and self._nightly_doc_util.is_version_nightly(builder, str(v))
       ):
         nightly_str = ' ' + self._nightly_doc_util.icon
@@ -444,7 +445,7 @@ def _display_builder(
 
 
 def _display_all_builders(
-    nightly_doc_util,
+    nightly_doc_util: Optional[doc_utils.NightlyDocUtil],
     builders: List[tfds.core.DatasetBuilder],
     all_sections: List[Section],
 ) -> str:
@@ -463,8 +464,10 @@ def _display_all_builders(
   unique_builder_str = []
   for i, builder in enumerate(builders):
     header_suffix = ' (default config)' if i == 0 else ''
-    nightly_str = (' ' + nightly_doc_util.icon) \
-        if nightly_doc_util.is_config_nightly(builder) else ''
+    if nightly_doc_util and nightly_doc_util.is_config_nightly(builder):
+      nightly_str = ' ' + nightly_doc_util.icon
+    else:
+      nightly_str = ''
     unique_builder_str.append(
         f'## {builder.name}/{builder.builder_config.name}'
         f'{header_suffix}{nightly_str}\n')
@@ -481,14 +484,17 @@ def _display_dataset_heading(builder: tfds.core.DatasetBuilder):
   return f'# `{builder.name}`'
 
 
-def _display_nightly_str(nightly_doc_util, builder: tfds.core.DatasetBuilder):
+def _display_nightly_str(
+    nightly_doc_util: Optional[doc_utils.NightlyDocUtil],
+    builder: tfds.core.DatasetBuilder,
+) -> str:
   """Header nightly note section."""
-  if nightly_doc_util.is_builder_nightly(builder):
+  if nightly_doc_util and nightly_doc_util.is_builder_nightly(builder):
     return f"""\
       Note: This dataset was added recently and is only available in our
       `tfds-nightly` package  {nightly_doc_util.icon}.
       """
-  elif nightly_doc_util.has_nightly(builder):
+  elif nightly_doc_util and nightly_doc_util.has_nightly(builder):
     return f"""\
       Note: This dataset has been updated since the last stable release.
       The new versions and config marked with {nightly_doc_util.icon}
@@ -605,9 +611,11 @@ def get_markdown_string(
       FeatureInfoSection(),
       SupervisedKeySection(),
       DatasetCitationSection(),
-      DatasetVisualizationSection(visu_doc_util),
-      DatasetDataframeSection(df_doc_util),
   ]
+  if visu_doc_util:
+    all_sections.append(DatasetVisualizationSection(visu_doc_util))
+  if df_doc_util:
+    all_sections.append(DatasetDataframeSection(df_doc_util))
 
   doc_str = [
       _display_schema_org(builder, visu_doc_util),

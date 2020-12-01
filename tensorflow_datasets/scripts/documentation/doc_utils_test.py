@@ -124,7 +124,7 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
     }
     with mock.patch.object(
         doc_utils, '_load_nightly_dict', return_value=nightly_dict):
-      ndu = doc_utils.NightlyDocUtil()
+      ndu = doc_utils.NightlyDocUtil(path='/tmp/some/patched/path')
 
     dummy_dataset = tfds.testing.DummyDataset(data_dir=data_dir)
     dummy_new_ds = DummyNewDs(data_dir=data_dir)
