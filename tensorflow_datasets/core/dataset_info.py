@@ -266,7 +266,7 @@ class DatasetInfo(object):
 
     self._set_splits(split_dict)
 
-  def _set_splits(self, split_dict):
+  def _set_splits(self, split_dict: splits_lib.SplitDict):
     """Split setter (private method)."""
     # Update the dictionary representation.
     # Use from/to proto for a clean copy

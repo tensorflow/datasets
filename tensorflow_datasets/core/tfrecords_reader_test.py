@@ -149,7 +149,7 @@ class GetDatasetFilesTest(testing.TestCase):
   def test_missing_shard_lengths(self):
     with self.assertRaisesWithPredicateMatch(ValueError, 'Shard empty.'):
       split_info = [
-          splits.SplitInfo(name='train', shard_lengths=[]),
+          splits.SplitInfo(name='train', shard_lengths=[], num_bytes=0),
       ]
       tfrecords_reader.make_file_instructions('mnist', split_info, 'train')
 
@@ -323,13 +323,18 @@ class ReaderTest(testing.TestCase):
     return splits.SplitInfo(
         name=split_name,
         shard_lengths=[int(s.examples_number) for s in shard_specs],
+        num_bytes=0,
     )
 
   def test_nodata_instruction(self):
     # Given instruction corresponds to no data.
     with self.assertRaisesWithPredicateMatch(AssertionError,
                                              'corresponds to no data!'):
-      train_info = splits.SplitInfo(name='train', shard_lengths=[2, 3, 2, 3, 2])
+      train_info = splits.SplitInfo(
+          name='train',
+          shard_lengths=[2, 3, 2, 3, 2],
+          num_bytes=0,
+      )
       self.reader.read('mnist', 'train[0:0]', [train_info])
 
   def test_noskip_notake(self):

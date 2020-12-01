@@ -30,17 +30,9 @@ class SplitDictTest(testing.TestCase):
 
   def test_num_shards(self):
     sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", shard_lengths=[1, 2, 3]))
-    self.assertEqual(sd["train"].num_shards, 3)
-
-    # When both values are set, shard_lengths has priority.
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=3, shard_lengths=[1,]))
-    self.assertEqual(sd["train"].num_shards, 1)
-
-    # With legacy mode, use legacy value
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=3))
+    sd.add(tfds.core.SplitInfo(
+        name="train", shard_lengths=[1, 2, 3], num_bytes=0,
+    ))
     self.assertEqual(sd["train"].num_shards, 3)
 
 
@@ -49,19 +41,23 @@ class SplitsDictTest(testing.TestCase):
   @property
   def split_dict(self):
     sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    sd.add(tfds.core.SplitInfo(name="test", num_shards=1))
+    sd.add(tfds.core.SplitInfo(
+        name="train", shard_lengths=[10, 10], num_bytes=0
+    ))
+    sd.add(tfds.core.SplitInfo(name="test", shard_lengths=[1], num_bytes=0))
     return sd
 
   # .add is implicitly tested, since s was created by calling .add
   def test_get(self):
     s = self.split_dict["train"]
     self.assertEqual("train", s.name)
-    self.assertEqual(10, s.num_shards)
+    self.assertEqual(2, s.num_shards)
 
   def test_from_proto(self):
     sd = splits.SplitDict.from_proto(
-        "ds_name", [proto.SplitInfo(name="validation", num_shards=5)])
+        "ds_name", [
+            proto.SplitInfo(name="validation", shard_lengths=[5], num_bytes=0)
+        ])
     self.assertIn("validation", sd)
     self.assertNotIn("train", sd)
     self.assertNotIn("test", sd)
@@ -71,54 +67,39 @@ class SplitsDictTest(testing.TestCase):
     sdp = sd.to_proto()
 
     self.assertEqual("test", sdp[0].name)
-    self.assertEqual(1, sdp[0].num_shards)
+    self.assertEqual([1], sdp[0].shard_lengths)
 
     self.assertEqual("train", sdp[1].name)
-    self.assertEqual(10, sdp[1].num_shards)
+    self.assertEqual([10, 10], sdp[1].shard_lengths)
 
   def test_bool(self):
     sd = splits.SplitDict("ds_name")
     self.assertFalse(sd)  # Empty split is False
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    sd.add(tfds.core.SplitInfo(name="train", shard_lengths=[5], num_bytes=0))
     self.assertTrue(sd)  # Non-empty split is True
 
   def test_check_splits_equals(self):
     s1 = splits.SplitDict("ds_name")
-    s1.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    s1.add(tfds.core.SplitInfo(name="test", num_shards=3))
+    s1.add(tfds.core.SplitInfo(name="train", shard_lengths=[10], num_bytes=0))
+    s1.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
 
     s2 = splits.SplitDict("ds_name")
-    s2.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    s2.add(tfds.core.SplitInfo(name="test", num_shards=3))
+    s2.add(tfds.core.SplitInfo(name="train", shard_lengths=[10], num_bytes=0))
+    s2.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
 
     s3 = splits.SplitDict("ds_name")
-    s3.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    s3.add(tfds.core.SplitInfo(name="test", num_shards=3))
-    s3.add(tfds.core.SplitInfo(name="valid", num_shards=0))
+    s3.add(tfds.core.SplitInfo(name="train", shard_lengths=[10], num_bytes=0))
+    s3.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
+    s3.add(tfds.core.SplitInfo(name="valid", shard_lengths=[0], num_bytes=0))
 
     s4 = splits.SplitDict("ds_name")
-    s4.add(tfds.core.SplitInfo(name="train", num_shards=11))
-    s4.add(tfds.core.SplitInfo(name="test", num_shards=3))
+    s4.add(tfds.core.SplitInfo(name="train", shard_lengths=[11], num_bytes=0))
+    s4.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
 
     self.assertTrue(splits.check_splits_equals(s1, s1))
     self.assertTrue(splits.check_splits_equals(s1, s2))
     self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
     self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
-
-  def test_split_overwrite(self):
-    s1 = splits.SplitDict("ds_name")
-    s1.add(tfds.core.SplitInfo(name="train", shard_lengths=[15]))
-
-    s2 = splits.SplitDict("ds_name")
-    s2.add(tfds.core.SplitInfo(name="train", shard_lengths=[15]))
-
-    self.assertTrue(splits.check_splits_equals(s1, s2))
-
-    # Modifying num_shards should also modify the underlying proto
-    s2["train"].shard_lengths = [5, 5, 5]
-    self.assertEqual(s2["train"].shard_lengths, [5, 5, 5])
-    self.assertEqual(s2["train"].get_proto().shard_lengths, [5, 5, 5])
-    self.assertFalse(splits.check_splits_equals(s1, s2))
 
 
 class SplitsTest(testing.TestCase):

@@ -19,7 +19,7 @@ import json
 import os
 import tempfile
 import numpy as np
-import six
+
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
@@ -150,9 +150,8 @@ class DatasetInfoTest(testing.TestCase):
     # Assert correct license was written.
     self.assertEqual(existing_json["redistributionInfo"]["license"], license_)
 
-    if six.PY3:
-      # Only test on Python 3 to avoid u'' formatting issues
-      self.assertEqual(repr(info), INFO_STR)
+    # Only test on Python 3 to avoid u'' formatting issues
+    self.assertEqual(repr(info), INFO_STR)
 
   def test_restore_after_modification(self):
     # Create a DatasetInfo
@@ -256,8 +255,8 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(30, builder.info.splits.total_num_examples)
 
       # Per split.
-      test_split = builder.info.splits["test"].get_proto()
-      train_split = builder.info.splits["train"].get_proto()
+      test_split = builder.info.splits["test"].to_proto()
+      train_split = builder.info.splits["train"].to_proto()
       expected_schema = text_format.Parse("""
       feature {
         name: "x"

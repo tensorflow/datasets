@@ -77,6 +77,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
       split_dict.add(split_lib.SplitInfo(
           name=split_name,
           shard_lengths=[len(next(iter(examples.values())))],
+          num_bytes=0,
       ))
     self.info.update_splits_if_different(split_dict)
 

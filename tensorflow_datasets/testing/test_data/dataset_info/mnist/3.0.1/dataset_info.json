@@ -36,7 +36,6 @@
   "splits": [
     {
       "name": "test",
-      "numShards": "1",
       "shardLengths": [
         "20"
       ],
@@ -67,7 +66,6 @@
     },
     {
       "name": "train",
-      "numShards": "1",
       "shardLengths": [
         "20"
       ],

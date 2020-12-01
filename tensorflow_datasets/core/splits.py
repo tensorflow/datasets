@@ -19,31 +19,63 @@
 import typing
 from typing import List, Union
 
-from tensorflow_datasets.core import proto
+import dataclasses
+
+from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_metadata.proto.v0 import statistics_pb2
 
 
-@utils.as_proto_cls(proto.SplitInfo)
-class SplitInfo(object):
-  """Wraps `proto.SplitInfo` with an additional property."""
+@dataclasses.dataclass(eq=False, frozen=True)
+class SplitInfo:
+  """Wraps `proto.SplitInfo` with an additional property.
+
+  Attributes:
+    name: Name of the split (e.g. `train`, `test`,...)
+    shard_lengths: List of length <number of files> containing the number of
+      examples stored in each file.
+    num_examples: Total number of examples (`sum(shard_lengths)`)
+    num_shards: Number of files (`len(shard_lengths)`)
+    num_bytes: Size of the files
+    statistics: Additional statistics of the split.
+  """
+  name: str
+  shard_lengths: List[int]
+  num_bytes: int
+  statistics: statistics_pb2.DatasetFeatureStatistics = dataclasses.field(
+      default_factory=statistics_pb2.DatasetFeatureStatistics,
+  )
+
+  @classmethod
+  def from_proto(cls, proto: proto_lib.SplitInfo) -> "SplitInfo":
+    return cls(
+        name=proto.name,
+        shard_lengths=list(proto.shard_lengths),
+        num_bytes=proto.num_bytes,
+        statistics=proto.statistics,
+    )
+
+  def to_proto(self) -> proto_lib.SplitInfo:
+    return proto_lib.SplitInfo(
+        name=self.name,
+        shard_lengths=self.shard_lengths,
+        num_bytes=self.num_bytes,
+        statistics=self.statistics if self.statistics.ByteSize() else None,
+    )
 
   @property
   def num_examples(self) -> int:
-    if self.shard_lengths:  # pytype: disable=attribute-error
-      return sum(int(sl) for sl in self.shard_lengths)  # pytype: disable=attribute-error
-    return int(self.statistics.num_examples)  # pytype: disable=attribute-error
+    return sum(self.shard_lengths)
 
   @property
   def num_shards(self) -> int:
-    if self.shard_lengths:
-      return len(self.shard_lengths)
-    return self._ProtoCls__proto.num_shards
+    return len(self.shard_lengths)
 
   def __repr__(self) -> str:
     num_examples = self.num_examples or "unknown"
-    return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)
+    return f"<tfds.core.SplitInfo num_examples={num_examples}>"
 
   @property
   def file_instructions(self) -> List[shard_utils.FileInstruction]:
@@ -182,7 +214,7 @@ class SplitDict(utils.NonMutableDict):
   def __setitem__(self, key, value):
     raise ValueError("Cannot add elem. Use .add() instead.")
 
-  def add(self, split_info):
+  def add(self, split_info: SplitInfo):
     """Add the split info."""
     if split_info.name in self:
       raise ValueError("Split {} already present".format(split_info.name))
@@ -196,16 +228,14 @@ class SplitDict(utils.NonMutableDict):
   def from_proto(cls, dataset_name, repeated_split_infos):
     """Returns a new SplitDict initialized from the `repeated_split_infos`."""
     split_dict = cls(dataset_name)
-    for split_info_proto in repeated_split_infos:
-      split_info = SplitInfo()
-      split_info.CopyFrom(split_info_proto)
-      split_dict.add(split_info)
+    for split_info in repeated_split_infos:
+      split_dict.add(SplitInfo.from_proto(split_info))
     return split_dict
 
   def to_proto(self):
     """Returns a list of SplitInfo protos that we have."""
     # Return the proto.SplitInfo, sorted by name
-    return sorted((s.get_proto() for s in self.values()), key=lambda s: s.name)
+    return sorted((s.to_proto() for s in self.values()), key=lambda s: s.name)
 
   @property
   def total_num_examples(self):
