@@ -66,10 +66,12 @@ def dummy_register():
 def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-name
   builder = dummy_register.builder('kaggle', 'ds0')
   assert 'kaggle' in builder.data_path.parts
+  assert builder.namespace == 'kaggle'
 
   # Same dataset name can be loaded from different namespace
   builder = dummy_register.builder('mlds', 'ds0')
   assert 'mlds' in builder.data_path.parts
+  assert builder.namespace == 'mlds'
 
   with pytest.raises(ValueError, match='`data_dir` cannot be set for'):
     dummy_register.builder('mlds', 'ds0', data_dir='/path/to/data_dir')

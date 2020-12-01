@@ -105,6 +105,7 @@ class DataDirRegister(register_base.BaseRegister):
     return read_only_builder.builder_from_files(
         builder_name,
         data_dir=self._ns2data_dir[ns_name],
+        namespace=ns_name,
         **builder_kwargs,
     )
 

@@ -31,17 +31,20 @@ from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 
 
-class DummyNoConfMnist(testing.DummyMnist):
+class DummyNoConfMnist(testing.DummyDataset):
   """Same as DummyMnist (but declared here to avoid skip_registering issues)."""
 
 
-class DummyConfigMnist(testing.DummyMnist):
+class DummyConfigMnist(testing.DummyDataset):
   """Same as DummyMnist, but with config."""
 
   BUILDER_CONFIGS = [
       dataset_builder.BuilderConfig(
           name='dummy_config', version='0.1.0', description='testing config',
-      )
+      ),
+      dataset_builder.BuilderConfig(
+          name='dummy_config2', version='0.1.0', description='testing config',
+      ),
   ]
 
 
@@ -92,23 +95,28 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
       'builder_cls',
       side_effect=registered.DatasetNotFoundError(code_builder.name),
   ):
-    # When the code isn't found, loading dataset require explicit config name:
-    # tfds.builder('ds/config')
-    config_name = code_builder.name
-    if code_builder.builder_config:
-      config_name = f'{config_name}/{code_builder.builder_config.name}'
-
     # Files exists, but not code, loading from files
-    builder = load.builder(config_name)
+    builder = load.builder(code_builder.name)
     assert isinstance(builder, read_only_builder.ReadOnlyBuilder)
-    load.load(config_name, split=[])  # Dataset found -> no error
+    load.load(code_builder.name, split=[])  # Dataset found -> no error
+
+    if code_builder.builder_config:
+      # When the code isn't found, default config is infered from `.config/`
+      assert builder.builder_config.name == code_builder.BUILDER_CONFIGS[0].name
+
+      # Explicitly passing a config should works too.
+      config_name = f'{code_builder.name}/{code_builder.builder_config.name}'
+      builder = load.builder(config_name)
+      assert isinstance(builder, read_only_builder.ReadOnlyBuilder)
 
     # Neither code not files found, raise DatasetNotFoundError
     with pytest.raises(registered.DatasetNotFoundError):
-      load.builder(config_name, data_dir='/tmp/non-existing/tfds/dir')
+      load.builder(code_builder.name, data_dir='/tmp/non-existing/tfds/dir')
 
     with pytest.raises(registered.DatasetNotFoundError):
-      load.load(config_name, split=[], data_dir='/tmp/non-existing/tfds/dir')
+      load.load(
+          code_builder.name, split=[], data_dir='/tmp/non-existing/tfds/dir'
+      )
 
 
 # Test both with and without config
@@ -124,10 +132,19 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
   assert repr(builder.info) == repr(code_builder.info)
   assert builder.VERSION is None
 
+  if code_builder.builder_config:
+    assert builder.builder_config
+    code_config = code_builder.builder_config
+    file_config = builder.builder_config
+    # Config attributes should be restored too
+    assert code_config.name == file_config.name
+    assert code_config.description == file_config.description
+    assert code_config.version == file_config.version
+
   # Test that the dataset can be read
   ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
   origin_ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
-  assert [ex['label'] for ex in ds] == [ex['label'] for ex in origin_ds]
+  assert [ex['id'] for ex in ds] == [ex['id'] for ex in origin_ds]
 
   builder.download_and_prepare()  # Should be a no-op
 
