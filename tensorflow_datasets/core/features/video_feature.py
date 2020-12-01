@@ -117,22 +117,6 @@ class Video(sequence_feature.Sequence):
   def _ffmpeg_path(self):
     return 'ffmpeg'
 
-  def _ffmpeg_run(self, ffmpeg_args, ffmpeg_stdin=None):
-    process = subprocess.Popen(ffmpeg_args,
-                                 stdin=subprocess.PIPE,
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
-
-    stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
-    ffmpeg_ret_code = process.returncode
-    if ffmpeg_ret_code:
-      raise ValueError(
-          'ffmpeg returned error code {}, command={}\n'
-          'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
-                                          ' '.join(ffmpeg_args),
-                                          stdout_data,
-                                          stderr_data))
-
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, type_utils.PathLikeCls):
       ffmpeg_args = [self._ffmpeg_path, '-i', os.fspath(path_or_fobj)]
@@ -146,7 +130,7 @@ class Video(sequence_feature.Sequence):
     ffmpeg_args += self._extra_ffmpeg_args
     ffmpeg_args.append(output_pattern)
     try:
-      self._ffmped_run(ffmpeg_args, ffmpeg_stdin)
+      _ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
       frames = []
       for image_name in sorted(tf.io.gfile.listdir(ffmpeg_dir)):
         image_path = os.path.join(ffmpeg_dir, image_name)
@@ -221,7 +205,7 @@ class Video(sequence_feature.Sequence):
       ffmpeg_args += extra_ffmpeg_args
       ffmpeg_args.append(output_pattern)
       try:
-        self._ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
+        _ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
 
         video = None
         video_file = os.path.join(video_dir, 'output.mp4')
@@ -262,3 +246,19 @@ class Video(sequence_feature.Sequence):
 
     # Display HTML
     return video_html
+
+def _ffmpeg_run(ffmpeg_args, ffmpeg_stdin=None):
+  process = subprocess.Popen(ffmpeg_args,
+                                stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+
+  stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
+  ffmpeg_ret_code = process.returncode
+  if ffmpeg_ret_code:
+    raise ValueError(
+        'ffmpeg returned error code {}, command={}\n'
+        'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
+                                        ' '.join(ffmpeg_args),
+                                        stdout_data,
+                                        stderr_data))
