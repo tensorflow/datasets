@@ -115,7 +115,7 @@ class Video(sequence_feature.Sequence):
 
   @property
   def _ffmpeg_path(self):
-    return '/Users/harsh/Desktop/ffmpeg_dependencies/ffmpeg/ffmpeg'
+    return 'ffmpeg'
 
   def _ffmpeg_run(self, ffmpeg_args, ffmpeg_stdin=None):
     process = subprocess.Popen(ffmpeg_args,
