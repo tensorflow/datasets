@@ -37,6 +37,7 @@ from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.the300w_lp import The300wLp
+from tensorflow_datasets.image.pancreas_ct import PancreasCt
 
 # Legacy aliases
 from tensorflow_datasets.image_classification.beans import Beans
@@ -84,6 +85,7 @@ from tensorflow_datasets.image_classification.mnist_corrupted import MNISTCorrup
 from tensorflow_datasets.image_classification.omniglot import Omniglot
 from tensorflow_datasets.image_classification.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
+from tensorflow_datasets.image.pancreas_ct import PancreasCt
 from tensorflow_datasets.image_classification.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image_classification.pet_finder import PetFinder
 from tensorflow_datasets.image_classification.places365_small import Places365Small

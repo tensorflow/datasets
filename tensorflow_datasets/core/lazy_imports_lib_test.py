@@ -34,10 +34,12 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "lxml",
       "matplotlib",
       "mwparserfromhell",
+      "nibabel",
       "nltk",
       "os",
       "pandas",
       "pretty_midi",
+      "pydicom".
       "pydub",
       "scipy",
       "skimage",

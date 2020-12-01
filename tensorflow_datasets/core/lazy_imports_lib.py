@@ -96,6 +96,11 @@ class LazyImporter(object):
   @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
+  
+  @utils.classproperty
+  @classmethod
+  def nibabel(cls):
+    return _try_import("nibabel")
 
   @utils.classproperty
   @classmethod
@@ -119,6 +124,11 @@ class LazyImporter(object):
   @classmethod
   def pretty_midi(cls):
     return _try_import("pretty_midi")
+  
+  @utils.classproperty
+  @classmethod
+  def pydicom(cls):
+    return _try_import("pydicom")
 
   @utils.classproperty
   @classmethod
