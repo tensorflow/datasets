@@ -20,8 +20,8 @@ import io
 import os
 import tempfile
 from typing import Optional
+from unittest import mock
 
-from absl.testing import absltest
 import pytest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
@@ -56,7 +56,7 @@ class DownloaderTest(testing.TestCase):
 
   def setUp(self):
     super(DownloaderTest, self).setUp()
-    self.addCleanup(absltest.mock.patch.stopall)
+    self.addCleanup(mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
     self.url = 'http://example.com/foo.tar.gz'
@@ -66,14 +66,14 @@ class DownloaderTest(testing.TestCase):
     self.response = b'This \nis an \nawesome\n response!'
     self.resp_checksum = hashlib.sha256(self.response).hexdigest()
     self.cookies = {}
-    absltest.mock.patch.object(
+    mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    self.downloader._pbar_url = absltest.mock.MagicMock()
-    self.downloader._pbar_dl_size = absltest.mock.MagicMock()
-    absltest.mock.patch.object(
+    self.downloader._pbar_url = mock.MagicMock()
+    self.downloader._pbar_dl_size = mock.MagicMock()
+    mock.patch.object(
         downloader.urllib.request,
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
@@ -106,14 +106,14 @@ class DownloaderTest(testing.TestCase):
 
   def test_http_error(self):
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
-    absltest.mock.patch.object(
+    mock.patch.object(
         downloader.requests.Session, 'get', side_effect=error).start()
     promise = self.downloader.download(self.url, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
       promise.get()
 
   def test_bad_http_status(self):
-    absltest.mock.patch.object(
+    mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),
@@ -135,7 +135,7 @@ class DownloaderTest(testing.TestCase):
 
   def test_ftp_error(self):
     error = downloader.urllib.error.URLError('Problem serving file.')
-    absltest.mock.patch.object(
+    mock.patch.object(
         downloader.urllib.request,
         'urlopen',
         side_effect=error,

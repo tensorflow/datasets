@@ -16,8 +16,8 @@
 """Tests for extractor."""
 
 import os
+from unittest import mock
 
-from absl.testing import absltest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import extractor
@@ -53,7 +53,7 @@ class ExtractorTest(testing.TestCase):
   def setUp(self):
     super(ExtractorTest, self).setUp()
     self.extractor = extractor.get_extractor()
-    self.extractor._pbar_path = absltest.mock.MagicMock()
+    self.extractor._pbar_path = mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
     # Obviously it must not exist before test runs:

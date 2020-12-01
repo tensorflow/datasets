@@ -21,8 +21,8 @@ import itertools
 import numbers
 import os
 import textwrap
+from unittest import mock
 
-from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -198,29 +198,29 @@ class DatasetBuilderTestCase(
     err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead. "
                          "This makes code compatible with more filesystems.")
     sep = os.path.sep
-    mock_os_path = absltest.mock.Mock(os.path, wraps=os.path)
+    mock_os_path = mock.Mock(os.path, wraps=os.path)
     mock_os_path.sep = sep
     for fop in FORBIDDEN_OS_PATH_FUNCTIONS:
       getattr(mock_os_path, fop).side_effect = err
-    mock_os = absltest.mock.Mock(os, path=mock_os_path, fspath=os.fspath)
+    mock_os = mock.Mock(os, path=mock_os_path, fspath=os.fspath)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       if os.name == "nt" and not hasattr(os, fop):
         continue  # Not all `os` functions are available on Windows (ex: chmod).
       getattr(mock_os, fop).side_effect = err
-    os_patcher = absltest.mock.patch(
+    os_patcher = mock.patch(
         self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
     os_patcher.start()
     self.patchers.append(os_patcher)
 
     mock_builtins = __builtins__.copy()  # pytype: disable=module-attr
-    mock_builtins["open"] = absltest.mock.Mock(side_effect=err)
-    open_patcher = absltest.mock.patch(
+    mock_builtins["open"] = mock.Mock(side_effect=err)
+    open_patcher = mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
     open_patcher.start()
     self.patchers.append(open_patcher)
 
     # It's hard to mock open within numpy, so mock np.load.
-    np_load_patcher = absltest.mock.patch("numpy.load", _np_load)
+    np_load_patcher = mock.patch("numpy.load", _np_load)
     np_load_patcher.start()
     self.patchers.append(np_load_patcher)
 
@@ -349,13 +349,13 @@ class DatasetBuilderTestCase(
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
     # set.
 
-    missing_dir_mock = absltest.mock.PropertyMock(
+    missing_dir_mock = mock.PropertyMock(
         side_effect=Exception("Missing MANUAL_DOWNLOAD_INSTRUCTIONS"))
 
     manual_dir = (
         self.example_dir
         if builder.MANUAL_DOWNLOAD_INSTRUCTIONS else missing_dir_mock)
-    with absltest.mock.patch.multiple(
+    with mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_download_result,

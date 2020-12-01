@@ -18,8 +18,8 @@
 import functools
 import itertools
 import os
+from unittest import mock
 
-from absl.testing import absltest
 import six
 
 import tensorflow.compat.v2 as tf
@@ -300,8 +300,9 @@ class ReaderTest(testing.TestCase):
 
   def setUp(self):
     super(ReaderTest, self).setUp()
-    with absltest.mock.patch.object(example_parser,
-                                    'ExampleParser', testing.DummyParser):
+    with mock.patch.object(
+        example_parser, 'ExampleParser', testing.DummyParser
+    ):
       self.reader = tfrecords_reader.Reader(self.tmp_dir, 'some_spec')
       self.reader.read = functools.partial(
           self.reader.read,
@@ -312,8 +313,9 @@ class ReaderTest(testing.TestCase):
   def _write_tfrecord(self, split_name, shards_number, records):
     path = os.path.join(self.tmp_dir, 'mnist-%s.tfrecord' % split_name)
     num_examples = len(records)
-    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                                    return_value=shards_number):
+    with mock.patch.object(
+        tfrecords_writer, '_get_number_shards', return_value=shards_number
+    ):
       shard_specs = tfrecords_writer._get_shard_specs(
           num_examples, 0, [num_examples], path)
     serialized_records = [six.b(rec) for rec in records]

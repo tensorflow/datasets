@@ -20,8 +20,8 @@ import hashlib
 import json
 import os
 import pickle
+from unittest import mock
 
-from absl.testing import absltest
 import promise
 
 import tensorflow as tf
@@ -123,7 +123,7 @@ class DownloadManagerTest(testing.TestCase):
       )
       return promise.Promise.resolve(dl_result)
 
-    return absltest.mock.patch.object(
+    return mock.patch.object(
         downloader._Downloader, 'download', side_effect=_download)
 
   def _make_extractor_mock(self):
@@ -137,7 +137,7 @@ class DownloadManagerTest(testing.TestCase):
             f'Destination {dest} do not match extraction method {method}')
       return promise.Promise.resolve(self.extract_results[path])
 
-    return absltest.mock.patch.object(
+    return mock.patch.object(
         extractor._Extractor, 'extract', side_effect=_extract).start()
 
   def setUp(self):
@@ -160,7 +160,7 @@ class DownloadManagerTest(testing.TestCase):
     self._make_downloader_mock().start()
     self._make_extractor_mock().start()
 
-    self.addCleanup(absltest.mock.patch.stopall)
+    self.addCleanup(mock.patch.stopall)
 
   def tearDown(self):
     super().tearDown()

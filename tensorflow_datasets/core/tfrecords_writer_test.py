@@ -16,8 +16,8 @@
 """Tests for tensorflow_datasets.core.tfrecords_writer."""
 
 import os
+from unittest import mock
 
-from absl.testing import absltest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
@@ -33,8 +33,9 @@ class GetShardSpecsTest(testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
   # by shard_utils.py.
 
-  @absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                              absltest.mock.Mock(return_value=6))
+  @mock.patch.object(
+      tfrecords_writer, '_get_number_shards', mock.Mock(return_value=6)
+  )
   def test_1bucket_6shards(self):
     specs = tfrecords_writer._get_shard_specs(
         num_examples=8, total_size=16, bucket_lengths=[8],
@@ -67,8 +68,9 @@ class GetShardSpecsTest(testing.TestCase):
         ]),
     ])
 
-  @absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                              absltest.mock.Mock(return_value=2))
+  @mock.patch.object(
+      tfrecords_writer, '_get_number_shards', mock.Mock(return_value=2)
+  )
   def test_4buckets_2shards(self):
     specs = tfrecords_writer._get_shard_specs(
         num_examples=8, total_size=16, bucket_lengths=[2, 3, 0, 3],
@@ -147,7 +149,7 @@ class WriterTest(testing.TestCase):
   EMPTY_SPLIT_ERROR = 'No examples were yielded.'
   TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
 
-  @absltest.mock.patch.object(
+  @mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)
   def _write(self, to_write, path, salt=''):
     writer = tfrecords_writer.Writer('some spec', path, hash_salt=salt)
@@ -168,8 +170,8 @@ class WriterTest(testing.TestCase):
         (6, b'f'),
         (7, b'g'), (8, b'hi'),
     ]
-    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                                    return_value=5):
+    with mock.patch.object(
+        tfrecords_writer, '_get_number_shards', return_value=5):
       shards_length, total_size = self._write(to_write, path)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
     self.assertEqual(total_size, 9)
@@ -180,13 +182,13 @@ class WriterTest(testing.TestCase):
         [b'f', b'g'], [b'd'], [b'a', b'b'], [b'hi'], [b'e', b'c'],
     ])
 
-  @absltest.mock.patch.object(
+  @mock.patch.object(
       example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
-    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                                    return_value=1):
+    with mock.patch.object(
+        tfrecords_writer, '_get_number_shards', return_value=1):
       with self.assertRaisesWithPredicateMatch(
           AssertionError, 'Two examples share the same hashed key'):
         self._write(to_write, path)
@@ -194,8 +196,8 @@ class WriterTest(testing.TestCase):
   def test_empty_split(self):
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = []
-    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                                    return_value=1):
+    with mock.patch.object(
+        tfrecords_writer, '_get_number_shards', return_value=1):
       with self.assertRaisesWithPredicateMatch(
           AssertionError, self.EMPTY_SPLIT_ERROR):
         self._write(to_write, path)
@@ -203,8 +205,8 @@ class WriterTest(testing.TestCase):
   def test_too_small_split(self):
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a')]
-    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
-                                    return_value=2):
+    with mock.patch.object(
+        tfrecords_writer, '_get_number_shards', return_value=2):
       with self.assertRaisesWithPredicateMatch(
           AssertionError, self.TOO_SMALL_SPLIT_ERROR):
         self._write(to_write, path)
@@ -214,7 +216,7 @@ class TfrecordsWriterBeamTest(WriterTest):
 
   EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
 
-  @absltest.mock.patch.object(
+  @mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)
   def _write(self, to_write, path, salt=''):
     beam = lazy_imports_lib.lazy_imports.apache_beam

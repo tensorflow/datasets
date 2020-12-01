@@ -18,9 +18,9 @@
 import contextlib
 import os
 import tempfile
+from unittest import mock
 
 from absl import logging
-from absl.testing import absltest
 import six
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import gcs_utils
@@ -89,7 +89,7 @@ class TestCase(tf.test.TestCase):
 
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):
-    with absltest.mock.patch.object(logging, level) as mock_log:
+    with mock.patch.object(logging, level) as mock_log:
       yield
       concat_logs = ""
       for log_call in mock_log.call_args_list:
