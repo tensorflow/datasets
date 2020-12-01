@@ -115,7 +115,7 @@ class Video(sequence_feature.Sequence):
 
   @property
   def _ffmpeg_path(self):
-    return 'ffmpeg'
+    return '/Users/harsh/Desktop/ffmpeg_dependencies/ffmpeg/ffmpeg'
 
   def _ffmpeg_run(self, ffmpeg_args, ffmpeg_stdin=None):
     process = subprocess.Popen(ffmpeg_args,
@@ -211,13 +211,14 @@ class Video(sequence_feature.Sequence):
         img.save(f, format='png')
 
       ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
-                    os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png')),
-                    '-vf', 'scale=128:128', '-vcodec', 'h264',
-                    '-pix_fmt', 'yuv420p', '-allow_sw', '1']
+                    os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png'))]
+
+      extra_ffmpeg_args = ['-vf', 'scale=128:128', '-vcodec', 'h264',
+                           '-pix_fmt', 'yuv420p', '-allow_sw', '1']
       ffmpeg_stdin = None
 
       output_pattern = os.path.join(video_dir, 'output.' + encoding_format)
-      ffmpeg_args += self._extra_ffmpeg_args
+      ffmpeg_args += extra_ffmpeg_args
       ffmpeg_args.append(output_pattern)
       try:
         self._ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
