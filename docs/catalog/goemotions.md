@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/google-research/google-research/tree/master/goemotions" />
   <meta itemprop="citation" content="@inproceedings{demszky-2020-goemotions,&#10;    title = &quot;{G}o{E}motions: A Dataset of Fine-Grained Emotions&quot;,&#10;    author = &quot;Demszky, Dorottya  and&#10;      Movshovitz-Attias, Dana  and&#10;      Ko, Jeongwoo  and&#10;      Cowen, Alan  and&#10;      Nemade, Gaurav  and&#10;      Ravi, Sujith&quot;,&#10;    booktitle = &quot;Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics&quot;,&#10;    month = jul,&#10;    year = &quot;2020&quot;,&#10;    address = &quot;Online&quot;,&#10;    publisher = &quot;Association for Computational Linguistics&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/2020.acl-main.372&quot;,&#10;    pages = &quot;4040--4054&quot;,&#10;}" />
 </div>
+
 # `goemotions`
 
 *   **Description**:
@@ -19,26 +20,30 @@ disappointment, disapproval, disgust, embarrassment, excitement, fear,
 gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief,
 remorse, sadness, surprise.
 
-*   **Homepage**: [https://github.com/google-research/google-research/tree/master/goemotions](https://github.com/google-research/google-research/tree/master/goemotions)
+*   **Homepage**:
+    [https://github.com/google-research/google-research/tree/master/goemotions](https://github.com/google-research/google-research/tree/master/goemotions)
 
-*   **Source code**: [`tfds.text.Goemotions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/goemotions.py)
+*   **Source code**:
+    [`tfds.text.Goemotions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/goemotions.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `4.19 MiB`
 
 *   **Dataset size**: `32.25 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 5,427
-`'train'` | 43,410
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,427
+`'train'`      | 43,410
 `'validation'` | 5,426
 
 *   **Features**:
@@ -77,7 +82,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -100,9 +107,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -110,9 +120,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/goemotions-0.1.0.html";
 $(document).ready(() => {

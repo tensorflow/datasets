@@ -8,23 +8,25 @@
   <meta itemprop="sameAs" content="https://dumps.wikimedia.org" />
   <meta itemprop="citation" content="@ONLINE {wikidump,&#10;    author = &quot;Wikimedia Foundation&quot;,&#10;    title  = &quot;Wikimedia Downloads&quot;,&#10;    url    = &quot;https://dumps.wikimedia.org&quot;&#10;}" />
 </div>
+
 # `wikipedia`
 
 *   **Description**:
 
-Wikipedia dataset containing cleaned articles of all languages.
-The datasets are built from the Wikipedia dump
-(https://dumps.wikimedia.org/) with one split per language. Each example
-contains the content of one full Wikipedia article with cleaning to strip
-markdown and unwanted sections (references, etc.).
+Wikipedia dataset containing cleaned articles of all languages. The datasets are
+built from the Wikipedia dump (https://dumps.wikimedia.org/) with one split per
+language. Each example contains the content of one full Wikipedia article with
+cleaning to strip markdown and unwanted sections (references, etc.).
 
 *   **Homepage**: [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
 
-*   **Source code**: [`tfds.text.Wikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py)
+*   **Source code**:
+    [`tfds.text.Wikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Features**:
 
@@ -35,7 +37,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -47,8 +51,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## wikipedia/20200301.aa (default config)
 
@@ -58,15 +63,18 @@ FeaturesDict({
 
 *   **Dataset size**: `3.46 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 1
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +82,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20200301.aa-1.0.0.html";
 $(document).ready(() => {

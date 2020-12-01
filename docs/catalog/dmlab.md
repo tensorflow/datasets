@@ -8,39 +8,43 @@
   <meta itemprop="sameAs" content="https://github.com/google-research/task_adaptation" />
   <meta itemprop="citation" content="@article{zhai2019visual,&#10;        title={The Visual Task Adaptation Benchmark},&#10;        author={Xiaohua Zhai and Joan Puigcerver and Alexander Kolesnikov and&#10;               Pierre Ruyssen and Carlos Riquelme and Mario Lucic and&#10;               Josip Djolonga and Andre Susano Pinto and Maxim Neumann and&#10;               Alexey Dosovitskiy and Lucas Beyer and Olivier Bachem and&#10;               Michael Tschannen and Marcin Michalski and Olivier Bousquet and&#10;               Sylvain Gelly and Neil Houlsby},&#10;                              year={2019},&#10;                              eprint={1910.04867},&#10;                              archivePrefix={arXiv},&#10;                              primaryClass={cs.CV},&#10;                              url = {https://arxiv.org/abs/1910.04867}&#10;                          }" />
 </div>
+
 # `dmlab`
 
 *   **Description**:
 
-The Dmlab dataset contains frames observed by the agent acting in the
-DeepMind Lab environment, which are annotated by the distance between
-the agent and various objects present in the environment. The goal is to
-is to evaluate the ability of a visual model to reason about distances
-from the visual input in 3D environments. The Dmlab dataset consists of
-360x480 color images in 6 classes. The classes are
-{close, far, very far} x {positive reward, negative reward}
+The Dmlab dataset contains frames observed by the agent acting in the DeepMind
+Lab environment, which are annotated by the distance between the agent and
+various objects present in the environment. The goal is to is to evaluate the
+ability of a visual model to reason about distances from the visual input in 3D
+environments. The Dmlab dataset consists of 360x480 color images in 6 classes.
+The classes are {close, far, very far} x {positive reward, negative reward}
 respectively.
 
-*   **Homepage**: [https://github.com/google-research/task_adaptation](https://github.com/google-research/task_adaptation)
+*   **Homepage**:
+    [https://github.com/google-research/task_adaptation](https://github.com/google-research/task_adaptation)
 
-*   **Source code**: [`tfds.image_classification.Dmlab`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dmlab.py)
+*   **Source code**:
+    [`tfds.image_classification.Dmlab`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dmlab.py)
 
 *   **Versions**:
 
-    * **`2.0.1`** (default): No release notes.
+    *   **`2.0.1`** (default): No release notes.
 
 *   **Download size**: `2.81 GiB`
 
 *   **Dataset size**: `3.13 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 22,735
-`'train'` | 65,550
+Split          | Examples
+:------------- | -------:
+`'test'`       | 22,735
+`'train'`      | 65,550
 `'validation'` | 22,628
 
 *   **Features**:
@@ -53,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -74,11 +80,13 @@ FeaturesDict({
                           }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/dmlab-2.0.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -86,9 +94,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/dmlab-2.0.1.html";
 $(document).ready(() => {

@@ -8,27 +8,34 @@
   <meta itemprop="sameAs" content="https://github.com/facebookresearch/flores/" />
   <meta itemprop="citation" content="@misc{guzmn2019new,&#10;    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},&#10;    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc&#x27;Aurelio Ranzato},&#10;    year={2019},&#10;    eprint={1902.01382},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `flores`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
-Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.
+Evaluation datasets for low-resource machine translation: Nepali-English and
+Sinhala-English.
 
-*   **Homepage**: [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+*   **Homepage**:
+    [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
-*   **Source code**: [`tfds.translate.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
+*   **Source code**:
+    [`tfds.translate.Flores`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores.py)
 
 *   **Versions**:
 
-    * **`1.2.0`** (default): No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
 *   **Download size**: `1.47 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Citation**:
 
@@ -43,8 +50,9 @@ Evaluation datasets for low-resource machine translation: Nepali-English and Sin
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## flores/neen (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -54,9 +62,9 @@ Evaluation datasets for low-resource machine translation: Nepali-English and Sin
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 2,835
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,835
 `'validation'` | 2,559
 
 *   **Features**:
@@ -68,9 +76,12 @@ Translation({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('ne', 'en')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('ne', 'en')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +89,7 @@ Translation({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-neen-1.2.0.html";
 $(document).ready(() => {

@@ -8,32 +8,42 @@
   <meta itemprop="sameAs" content="https://cogcomp.seas.upenn.edu/Data/QA/QC/" />
   <meta itemprop="citation" content="@inproceedings{li-roth-2002-learning,&#10;    title = &quot;Learning Question Classifiers&quot;,&#10;    author = &quot;Li, Xin  and&#10;      Roth, Dan&quot;,&#10;    booktitle = &quot;{COLING} 2002: The 19th International Conference on Computational Linguistics&quot;,&#10;    year = &quot;2002&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/C02-1150&quot;,&#10;}&#10;@inproceedings{hovy-etal-2001-toward,&#10;    title = &quot;Toward Semantics-Based Answer Pinpointing&quot;,&#10;    author = &quot;Hovy, Eduard  and&#10;      Gerber, Laurie  and&#10;      Hermjakob, Ulf  and&#10;      Lin, Chin-Yew  and&#10;      Ravichandran, Deepak&quot;,&#10;    booktitle = &quot;Proceedings of the First International Conference on Human Language Technology Research&quot;,&#10;    year = &quot;2001&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/H01-1069&quot;,&#10;}" />
 </div>
+
 # `trec`
 
 *   **Description**:
 
-The Text REtrieval Conference (TREC) Question Classification dataset contains 5500 labeled questions in training set and another 500 for test set. The dataset has 6 labels, 47 level-2 labels. Average length of each sentence is 10, vocabulary size of 8700.
-Data are collected from four sources: 4,500 English questions published by USC (Hovy et al., 2001), about 500 manually constructed questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and also 500 questions from TREC 10 which serves as the test set.
+The Text REtrieval Conference (TREC) Question Classification dataset contains
+5500 labeled questions in training set and another 500 for test set. The dataset
+has 6 labels, 47 level-2 labels. Average length of each sentence is 10,
+vocabulary size of 8700. Data are collected from four sources: 4,500 English
+questions published by USC (Hovy et al., 2001), about 500 manually constructed
+questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and also 500
+questions from TREC 10 which serves as the test set.
 
-*   **Homepage**: [https://cogcomp.seas.upenn.edu/Data/QA/QC/](https://cogcomp.seas.upenn.edu/Data/QA/QC/)
+*   **Homepage**:
+    [https://cogcomp.seas.upenn.edu/Data/QA/QC/](https://cogcomp.seas.upenn.edu/Data/QA/QC/)
 
-*   **Source code**: [`tfds.text.trec.Trec`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trec/trec.py)
+*   **Source code**:
+    [`tfds.text.trec.Trec`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trec/trec.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `350.79 KiB`
 
 *   **Dataset size**: `636.90 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 500
+Split     | Examples
+:-------- | -------:
+`'test'`  | 500
 `'train'` | 5,452
 
 *   **Features**:
@@ -46,7 +56,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -72,9 +84,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -82,9 +97,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trec-1.0.0.html";
 $(document).ready(() => {

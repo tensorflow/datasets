@@ -8,39 +8,43 @@
   <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/HIGGS" />
   <meta itemprop="citation" content="@article{Baldi:2014kfa,&#10;      author         = &quot;Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel&quot;,&#10;      title          = &quot;{Searching for Exotic Particles in High-Energy Physics&#10;                        with Deep Learning}&quot;,&#10;      journal        = &quot;Nature Commun.&quot;,&#10;      volume         = &quot;5&quot;,&#10;      year           = &quot;2014&quot;,&#10;      pages          = &quot;4308&quot;,&#10;      doi            = &quot;10.1038/ncomms5308&quot;,&#10;      eprint         = &quot;1402.4735&quot;,&#10;      archivePrefix  = &quot;arXiv&quot;,&#10;      primaryClass   = &quot;hep-ph&quot;,&#10;      SLACcitation   = &quot;%%CITATION = ARXIV:1402.4735;%%&quot;&#10;}" />
 </div>
+
 # `higgs`
 
 *   **Description**:
 
-The data has been produced using Monte Carlo simulations.
-The first 21 features (columns 2-22) are kinematic properties
-measured by the particle detectors in the accelerator.
-The last seven features are functions of the first 21 features;
-these are high-level features derived by physicists to help
-discriminate between the two classes. There is an interest
-in using deep learning methods to obviate the need for physicists
-to manually develop such features. Benchmark results using
-Bayesian Decision Trees from a standard physics package and
-5-layer neural networks are presented in the original paper.
+The data has been produced using Monte Carlo simulations. The first 21 features
+(columns 2-22) are kinematic properties measured by the particle detectors in
+the accelerator. The last seven features are functions of the first 21 features;
+these are high-level features derived by physicists to help discriminate between
+the two classes. There is an interest in using deep learning methods to obviate
+the need for physicists to manually develop such features. Benchmark results
+using Bayesian Decision Trees from a standard physics package and 5-layer neural
+networks are presented in the original paper.
 
-*   **Homepage**: [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
+*   **Homepage**:
+    [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
 
-*   **Source code**: [`tfds.structured.Higgs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/higgs.py)
+*   **Source code**:
+    [`tfds.structured.Higgs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/higgs.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `2.62 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | ---------:
 `'train'` | 11,000,000
 
 *   **Features**:
@@ -79,7 +83,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -100,9 +106,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -110,9 +119,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/higgs-2.0.0.html";
 $(document).ready(() => {

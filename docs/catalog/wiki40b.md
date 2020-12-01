@@ -8,26 +8,29 @@
   <meta itemprop="sameAs" content="https://research.google/pubs/pub49029/" />
   <meta itemprop="citation" content="@inproceedings{49029,&#10;title = {Wiki-40B: Multilingual Language Model Dataset},&#10;author = {Mandy Guo and Zihang Dai and Denny Vrandecic and Rami Al-Rfou},&#10;year = {2020},&#10;booktitle  = {LREC 2020}&#10;}" />
 </div>
+
 # `wiki40b`
 
 *   **Description**:
 
-Clean-up text for 40+ Wikipedia languages editions of pages
-correspond to entities. The datasets have train/dev/test splits per language.
-The dataset is cleaned up by page filtering to remove disambiguation pages,
-redirect pages, deleted pages, and non-entity pages. Each example contains the
-wikidata id of the entity, and the full Wikipedia article after page processing
-that removes non-content sections and structured objects. The language models
-trained on this corpus - including 41 monolingual models, and 2 multilingual
-models - can be found at https://tfhub.dev/google/collections/wiki40b-lm/1.
+Clean-up text for 40+ Wikipedia languages editions of pages correspond to
+entities. The datasets have train/dev/test splits per language. The dataset is
+cleaned up by page filtering to remove disambiguation pages, redirect pages,
+deleted pages, and non-entity pages. Each example contains the wikidata id of
+the entity, and the full Wikipedia article after page processing that removes
+non-content sections and structured objects. The language models trained on this
+corpus - including 41 monolingual models, and 2 multilingual models - can be
+found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 
-*   **Homepage**: [https://research.google/pubs/pub49029/](https://research.google/pubs/pub49029/)
+*   **Homepage**:
+    [https://research.google/pubs/pub49029/](https://research.google/pubs/pub49029/)
 
-*   **Source code**: [`tfds.text.Wiki40b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wiki40b.py)
+*   **Source code**:
+    [`tfds.text.Wiki40b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wiki40b.py)
 
 *   **Versions**:
 
-    * **`1.3.0`** (default): No release notes.
+    *   **`1.3.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
@@ -41,7 +44,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -54,8 +59,9 @@ booktitle   = {LREC 2020}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## wiki40b/en (default config)
 
@@ -63,17 +69,20 @@ booktitle   = {LREC 2020}
 
 *   **Dataset size**: `9.91 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 162,274
-`'train'` | 2,926,536
+Split          | Examples
+:------------- | --------:
+`'test'`       | 162,274
+`'train'`      | 2,926,536
 `'validation'` | 163,597
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -81,9 +90,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wiki40b-en-1.3.0.html";
 $(document).ready(() => {

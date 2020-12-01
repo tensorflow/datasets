@@ -8,34 +8,39 @@
   <meta itemprop="sameAs" content="http://sceneparsing.csail.mit.edu/" />
   <meta itemprop="citation" content="@inproceedings{zhou2017scene,&#10;title={Scene Parsing through ADE20K Dataset},&#10;author={Zhou, Bolei and Zhao, Hang and Puig, Xavier and Fidler, Sanja and Barriuso, Adela and Torralba, Antonio},&#10;booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},&#10;year={2017}&#10;}" />
 </div>
+
 # `scene_parse150`
 
 *   **Description**:
 
 Scene parsing is to segment and parse an image into different image regions
-associated with semantic categories, such as sky, road, person, and bed.
-MIT Scene Parsing Benchmark (SceneParse150) provides a standard training and
+associated with semantic categories, such as sky, road, person, and bed. MIT
+Scene Parsing Benchmark (SceneParse150) provides a standard training and
 evaluation platform for the algorithms of scene parsing.
 
-*   **Homepage**: [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
+*   **Homepage**:
+    [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 
-*   **Source code**: [`tfds.image.SceneParse150`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/scene_parse_150.py)
+*   **Source code**:
+    [`tfds.image.SceneParse150`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/scene_parse_150.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `936.97 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 2,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
 `'train'` | 20,210
 
 *   **Features**:
@@ -47,7 +52,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'annotation')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'annotation')`
 
 *   **Citation**:
 
@@ -60,9 +67,12 @@ year={2017}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -70,9 +80,7 @@ year={2017}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/scene_parse150-1.0.0.html";
 $(document).ready(() => {

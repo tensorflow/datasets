@@ -8,34 +8,40 @@
   <meta itemprop="sameAs" content="https://github.com/rgeirhos/texture-vs-shape" />
   <meta itemprop="citation" content="@inproceedings{&#10;  geirhos2018imagenettrained,&#10;  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape&#10;         bias improves accuracy and robustness.},&#10;  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and&#10;          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},&#10;  booktitle={International Conference on Learning Representations},&#10;  year={2019},&#10;  url={https://openreview.net/forum?id=Bygh9j09KX},&#10;}" />
 </div>
+
 # `geirhos_conflict_stimuli`
 
 *   **Description**:
 
-Shape/texture conflict stimuli from "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness."
+Shape/texture conflict stimuli from "ImageNet-trained CNNs are biased towards
+texture; increasing shape bias improves accuracy and robustness."
 
 Note that, although the dataset source contains images with matching shape and
 texture and we include them here, they are ignored for most evaluations in the
 original paper.
 
-*   **Homepage**: [https://github.com/rgeirhos/texture-vs-shape](https://github.com/rgeirhos/texture-vs-shape)
+*   **Homepage**:
+    [https://github.com/rgeirhos/texture-vs-shape](https://github.com/rgeirhos/texture-vs-shape)
 
-*   **Source code**: [`tfds.image_classification.GeirhosConflictStimuli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/geirhos_conflict_stimuli.py)
+*   **Source code**:
+    [`tfds.image_classification.GeirhosConflictStimuli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/geirhos_conflict_stimuli.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `153.96 MiB`
 
 *   **Dataset size**: `130.44 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Only when `shuffle_files=False` (test)
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (test)
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split    | Examples
+:------- | -------:
 `'test'` | 1,280
 
 *   **Features**:
@@ -51,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'shape_label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'shape_label')`
 
 *   **Citation**:
 
@@ -68,11 +76,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/geirhos_conflict_stimuli-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -80,9 +90,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/geirhos_conflict_stimuli-1.0.0.html";
 $(document).ready(() => {

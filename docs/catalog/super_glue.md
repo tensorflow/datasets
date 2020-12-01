@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset." />
 </div>
+
 # `super_glue`
 
 *   **Description**:
@@ -16,38 +17,47 @@ SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
 GLUE with a new set of more difficult language understanding tasks, improved
 resources, and a new public leaderboard.
 
-*   **Source code**: [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+*   **Source code**:
+    [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
 
 *   **Versions**:
 
-    * **`1.0.2`** (default): No release notes.
+    *   **`1.0.2`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## super_glue/boolq (default config)
 
-*   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
-passage and a yes/no question about the passage. The questions are provided anonymously and
-unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a
-Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.
+*   **Config description**: BoolQ (Boolean Questions, Clark et al., 2019a) is a
+    QA task where each example consists of a short passage and a yes/no question
+    about the passage. The questions are provided anonymously and unsolicited by
+    users of the Google search engine, and afterwards paired with a paragraph
+    from a Wikipedia article containing the answer. Following the original work,
+    we evaluate with accuracy.
 
-*   **Homepage**: [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
+*   **Homepage**:
+    [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
 
 *   **Download size**: `3.93 MiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 3,245
-`'train'` | 9,427
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,245
+`'train'`      | 9,427
 `'validation'` | 3,270
 
 *   **Features**:
@@ -81,7 +91,8 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +100,7 @@ get the correct citation for each contained dataset.
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-boolq-1.0.2.html";
 $(document).ready(() => {

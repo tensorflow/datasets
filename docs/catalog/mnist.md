@@ -8,31 +8,36 @@
   <meta itemprop="sameAs" content="http://yann.lecun.com/exdb/mnist/" />
   <meta itemprop="citation" content="@article{lecun2010mnist,&#10;  title={MNIST handwritten digit database},&#10;  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},&#10;  journal={ATT Labs [Online]. Available: http://yann.lecun.com/exdb/mnist},&#10;  volume={2},&#10;  year={2010}&#10;}" />
 </div>
+
 # `mnist`
 
 *   **Description**:
 
 The MNIST database of handwritten digits.
 
-*   **Homepage**: [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
+*   **Homepage**:
+    [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 
-*   **Source code**: [`tfds.image_classification.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+*   **Source code**:
+    [`tfds.image_classification.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
 
 *   **Versions**:
 
-    * **`3.0.1`** (default): No release notes.
+    *   **`3.0.1`** (default): No release notes.
 
 *   **Download size**: `11.06 MiB`
 
 *   **Dataset size**: `21.00 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 10,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
 `'train'` | 60,000
 
 *   **Features**:
@@ -44,7 +49,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -58,11 +65,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/mnist-3.0.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -70,9 +79,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mnist-3.0.1.html";
 $(document).ready(() => {

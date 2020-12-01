@@ -8,25 +8,32 @@
   <meta itemprop="sameAs" content="https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia" />
   <meta itemprop="citation" content="@article{guu2020realm,&#10;    title={REALM: Retrieval-Augmented Language Model Pre-Training},&#10;    author={Kelvin Guu and Kenton Lee and Zora Tung and Panupong Pasupat and Ming-Wei Chang},&#10;    year={2020},&#10;    journal = {arXiv e-prints},&#10;    archivePrefix = {arXiv},&#10;    eprint={2002.08909},&#10;}" />
 </div>
+
 # `salient_span_wikipedia`
 
 *   **Description**:
 
 Wikipedia sentences with labeled salient spans.
 
-*   **Homepage**: [https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia](https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia)
+*   **Homepage**:
+    [https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia](https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia)
 
-*   **Source code**: [`tfds.text.SalientSpanWikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/salient_span_wikipedia.py)
+*   **Source code**:
+    [`tfds.text.SalientSpanWikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/salient_span_wikipedia.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -41,19 +48,21 @@ Wikipedia sentences with labeled salient spans.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## salient_span_wikipedia/sentences (default config)
 
-*   **Config description**: Examples are individual sentences containing entities.
+*   **Config description**: Examples are individual sentences containing
+    entities.
 
 *   **Dataset size**: `20.57 GiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | ---------:
 `'train'` | 82,291,706
 
 *   **Features**:
@@ -70,7 +79,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/salient_span_wikipedia-sentences-1.0.0.html";
 $(document).ready(() => {

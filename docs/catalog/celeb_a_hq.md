@@ -8,14 +8,15 @@
   <meta itemprop="sameAs" content="https://github.com/tkarras/progressive_growing_of_gans" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1710-10196,&#10;  author    = {Tero Karras and&#10;               Timo Aila and&#10;               Samuli Laine and&#10;               Jaakko Lehtinen},&#10;  title     = {Progressive Growing of GANs for Improved Quality, Stability, and Variation},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1710.10196},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1710.10196},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1710.10196},&#10;  timestamp = {Mon, 13 Aug 2018 16:46:42 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-10196},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `celeb_a_hq`
 
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-High-quality version of the CELEBA
-dataset, consisting of 30000 images in 1024 x 1024 resolution.
+High-quality version of the CELEBA dataset, consisting of 30000 images in 1024 x
+1024 resolution.
 
 Note: CelebAHQ dataset may contain potential bias. The fairness indicators
 [example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
@@ -24,35 +25,42 @@ CelebAHQ dataset.
 
 WARNING: This dataset currently requires you to prepare images on your own.
 
-*   **Homepage**: [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+*   **Homepage**:
+    [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
 
-*   **Source code**: [`tfds.image.CelebAHq`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celebahq.py)
+*   **Source code**:
+    [`tfds.image.CelebAHq`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celebahq.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-manual_dir should contain multiple tar files with images (data2x2.tar,
-data4x4.tar .. data1024x1024.tar).
-Detailed instructions are here:
-https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    manual_dir should contain multiple tar files with images (data2x2.tar,
+    data4x4.tar .. data1024x1024.tar).
+    Detailed instructions are here:
+    https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 30,000
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -75,7 +83,6 @@ Split  | Examples
 }
 ```
 
-
 ## celeb_a_hq/1024 (default config)
 
 *   **Config description**: CelebaHQ images in 1024 x 1024 resolution
@@ -89,11 +96,13 @@ FeaturesDict({
 })
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/celeb_a_hq-1024-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -101,9 +110,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/celeb_a_hq-1024-2.0.0.html";
 $(document).ready(() => {

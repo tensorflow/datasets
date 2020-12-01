@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://g.co/magenta/groove-dataset" />
   <meta itemprop="citation" content="@inproceedings{groove2019,&#10;    Author = {Jon Gillick and Adam Roberts and Jesse Engel and Douglas Eck and David Bamman},&#10;    Title = {Learning to Groove with Inverse Sequence Transformations},&#10;    Booktitle = {International Conference on Machine Learning (ICML)}&#10;    Year = {2019},&#10;}" />
 </div>
+
 # `groove`
 
 *   **Description**:
@@ -16,15 +17,19 @@ The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and
 (synthesized) audio of human-performed, tempo-aligned expressive drumming
 captured on a Roland TD-11 V-Drum electronic drum kit.
 
-*   **Homepage**: [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+*   **Homepage**:
+    [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
-*   **Source code**: [`tfds.audio.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+*   **Source code**:
+    [`tfds.audio.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
 
 *   **Versions**:
 
-    * **`2.0.1`** (default): No release notes.
+    *   **`2.0.1`** (default): No release notes.
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -37,8 +42,9 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## groove/full-midionly (default config)
 
@@ -48,14 +54,16 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Dataset size**: `5.22 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 129
-`'train'` | 897
+Split          | Examples
+:------------- | -------:
+`'test'`       | 129
+`'train'`      | 897
 `'validation'` | 124
 
 *   **Features**:
@@ -75,7 +83,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +92,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/groove-full-midionly-2.0.1.html";
 $(document).ready(() => {

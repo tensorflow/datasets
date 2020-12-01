@@ -8,44 +8,67 @@
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/tydiqa" />
   <meta itemprop="citation" content="@article{tydiqa,&#10;   title = {TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages},&#10;  author = {Jonathan H. Clark and Eunsol Choi and Michael Collins and Dan Garrette and Tom Kwiatkowski and Vitaly Nikolaev and Jennimaria Palomaki}&#10;    year = {2020},&#10; journal = {Transactions of the Association for Computational Linguistics}&#10;}" />
 </div>
+
 # `tydi_qa`
 
 *   **Description**:
 
-TyDi QA is a question answering dataset covering 11 typologically diverse languages with 204K question-answer pairs. The languages of TyDi QA are diverse with regard to their typology -- the set of linguistic features that each language expresses -- such that we expect models performing well on this set to generalize across a large number of the languages in the world. It contains language phenomena that would not be found in English-only corpora. To provide a realistic information-seeking task and avoid priming effects, questions are written by people who want to know the answer, but don’t know the answer yet, (unlike SQuAD and its descendents) and the data is collected directly in each language without the use of translation (unlike MLQA and XQuAD).
+TyDi QA is a question answering dataset covering 11 typologically diverse
+languages with 204K question-answer pairs. The languages of TyDi QA are diverse
+with regard to their typology -- the set of linguistic features that each
+language expresses -- such that we expect models performing well on this set to
+generalize across a large number of the languages in the world. It contains
+language phenomena that would not be found in English-only corpora. To provide a
+realistic information-seeking task and avoid priming effects, questions are
+written by people who want to know the answer, but don’t know the answer yet,
+(unlike SQuAD and its descendents) and the data is collected directly in each
+language without the use of translation (unlike MLQA and XQuAD).
 
-IMPORTANT:  Please choose your training split carefully.
+IMPORTANT: Please choose your training split carefully.
 
 Training splits:
 
-'train': This is the GoldP task from the original TyDi QA paper [https://arxiv.org/abs/2003.05002] that has original-language labeled training data.
+'train': This is the GoldP task from the original TyDi QA paper
+[https://arxiv.org/abs/2003.05002] that has original-language labeled training
+data.
 
-'translate-train-*': These splits are the automatic translations from English to each target language used in the translate-train baselines in the XTREME paper [https://arxiv.org/abs/2003.11080]. This purposefully ignores the non-English TyDiQA-GoldP training data to simulate the transfer learning scenario where original-language data is not available and system builders must rely on labeled English data plus existing machine translation systems.
+'translate-train-*': These splits are the automatic translations from English to
+each target language used in the translate-train baselines in the XTREME paper
+[https://arxiv.org/abs/2003.11080]. This purposefully ignores the non-English
+TyDiQA-GoldP training data to simulate the transfer learning scenario where
+original-language data is not available and system builders must rely on labeled
+English data plus existing machine translation systems.
 
-Typically, you should use EITHER the train or translate-train split, but not both.
+Typically, you should use EITHER the train or translate-train split, but not
+both.
 
-*   **Config description**: Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).
+*   **Config description**: Gold passage (GoldP) task
+    (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).
 
-*   **Homepage**: [https://github.com/google-research-datasets/tydiqa](https://github.com/google-research-datasets/tydiqa)
+*   **Homepage**:
+    [https://github.com/google-research-datasets/tydiqa](https://github.com/google-research-datasets/tydiqa)
 
-*   **Source code**: [`tfds.question_answering.TydiQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/tydi_qa.py)
+*   **Source code**:
+    [`tfds.question_answering.TydiQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/tydi_qa.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `62.32 MiB`
 
 *   **Dataset size**: `65.22 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 49,881
-`'validation'` | 5,077
+Split             | Examples
+:---------------- | -------:
+`'train'`         | 49,881
+`'validation'`    | 5,077
 `'validation-ar'` | 921
 `'validation-bn'` | 113
 `'validation-en'` | 440
@@ -71,7 +94,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -84,9 +109,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -94,9 +122,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tydi_qa-goldp-2.0.0.html";
 $(document).ready(() => {

@@ -8,44 +8,48 @@
   <meta itemprop="sameAs" content="https://github.com/google-research/xtreme" />
   <meta itemprop="citation" content="@article{hu2020xtreme,&#10;      author    = {Junjie Hu and Sebastian Ruder and Aditya Siddhant and Graham Neubig and Orhan Firat and Melvin Johnson},&#10;      title     = {XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization},&#10;      journal   = {CoRR},&#10;      volume    = {abs/2003.11080},&#10;      year      = {2020},&#10;      archivePrefix = {arXiv},&#10;      eprint    = {2003.11080}&#10;}" />
 </div>
+
 # `xtreme_pawsx`
 
 Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
-This dataset contains machine translations of the English PAWS training
-data. The translations are provided by the XTREME benchmark and cover the following
+This dataset contains machine translations of the English PAWS training data.
+The translations are provided by the XTREME benchmark and cover the following
 languages:
 
-* French
-* Spanish
-* German
-* Chinese
-* Japanese
-* Korean
+*   French
+*   Spanish
+*   German
+*   Chinese
+*   Japanese
+*   Korean
 
-For further details on PAWS, see the  papers:
-PAWS: Paraphrase Adversaries from Word Scrambling
-at https://arxiv.org/abs/1904.01130
-and
-PAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification
-at  https://arxiv.org/abs/1908.11828
+For further details on PAWS, see the papers: PAWS: Paraphrase Adversaries from
+Word Scrambling at https://arxiv.org/abs/1904.01130 and PAWS-X: A Cross-lingual
+Adversarial Dataset for Paraphrase Identification at
+https://arxiv.org/abs/1908.11828
 
-For details related to XTREME, please refer to:
-XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization
-at https://arxiv.org/abs/2003.11080
+For details related to XTREME, please refer to: XTREME: A Massively Multilingual
+Multi-task Benchmark for Evaluating Cross-lingual Generalization at
+https://arxiv.org/abs/2003.11080
 
-*   **Homepage**: [https://github.com/google-research/xtreme](https://github.com/google-research/xtreme)
+*   **Homepage**:
+    [https://github.com/google-research/xtreme](https://github.com/google-research/xtreme)
 
-*   **Source code**: [`tfds.text.xtreme_pawsx.XtremePawsx`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xtreme_pawsx/xtreme_pawsx.py)
+*   **Source code**:
+    [`tfds.text.xtreme_pawsx.XtremePawsx`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xtreme_pawsx/xtreme_pawsx.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -57,7 +61,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -73,8 +79,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## xtreme_pawsx/de (default config)
 
@@ -86,11 +93,12 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 49,340
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -98,9 +106,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xtreme_pawsx-de-1.0.0.html";
 $(document).ready(() => {

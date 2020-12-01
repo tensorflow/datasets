@@ -8,10 +8,12 @@
   <meta itemprop="sameAs" content="https://wiki.skullsecurity.org/Passwords" />
   <meta itemprop="citation" content="" />
 </div>
+
 # `rock_you`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
@@ -22,27 +24,33 @@ it seems like nobody else does (hopefully it isn't because hosting them is
 illegal :)). Naturally, I'm not the one who stole these; I simply found them
 online, removed any names/email addresses/etc.".
 
-This dataset is used to train Machine Learning models for password guessing
-and cracking.
+This dataset is used to train Machine Learning models for password guessing and
+cracking.
 
-*   **Homepage**: [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
+*   **Homepage**:
+    [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
 
-*   **Source code**: [`tfds.structured.RockYou`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/rock_you.py)
+*   **Source code**:
+    [`tfds.structured.RockYou`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/rock_you.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>: No release notes.
+    *   **`1.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `133.44 MiB`
 
 *   **Dataset size**: `393.36 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | ---------:
 `'train'` | 14,344,391
 
 *   **Features**:
@@ -53,13 +61,18 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -67,9 +80,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rock_you-1.0.0.html";
 $(document).ready(() => {

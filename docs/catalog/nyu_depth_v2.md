@@ -8,33 +8,38 @@
   <meta itemprop="sameAs" content="https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html" />
   <meta itemprop="citation" content="@inproceedings{Silberman:ECCV12,&#10;  author    = {Nathan Silberman, Derek Hoiem, Pushmeet Kohli and Rob Fergus},&#10;  title     = {Indoor Segmentation and Support Inference from RGBD Images},&#10;  booktitle = {ECCV},&#10;  year      = {2012}&#10;}&#10;@inproceedings{icra_2019_fastdepth,&#10;  author    = {Wofk, Diana and Ma, Fangchang and Yang, Tien-Ju and Karaman, Sertac and Sze, Vivienne},&#10;  title     = {FastDepth: Fast Monocular Depth Estimation on Embedded Systems},&#10;  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},&#10;  year      = {2019}&#10;}" />
 </div>
+
 # `nyu_depth_v2`
 
 *   **Description**:
 
 The NYU-Depth V2 data set is comprised of video sequences from a variety of
-indoor scenes as recorded by both the RGB and Depth cameras from the
-Microsoft Kinect.
+indoor scenes as recorded by both the RGB and Depth cameras from the Microsoft
+Kinect.
 
-*   **Homepage**: [https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
+*   **Homepage**:
+    [https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
 
-*   **Source code**: [`tfds.image.NyuDepthV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/nyu_depth_v2.py)
+*   **Source code**:
+    [`tfds.image.NyuDepthV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/nyu_depth_v2.py)
 
 *   **Versions**:
 
-    * **`0.0.1`** (default): No release notes.
+    *   **`0.0.1`** (default): No release notes.
 
 *   **Download size**: `31.92 GiB`
 
 *   **Dataset size**: `74.03 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 47,584
+Split          | Examples
+:------------- | -------:
+`'train'`      | 47,584
 `'validation'` | 654
 
 *   **Features**:
@@ -46,7 +51,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'depth')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'depth')`
 
 *   **Citation**:
 
@@ -65,11 +72,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/nyu_depth_v2-0.0.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -77,9 +86,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/nyu_depth_v2-0.0.1.html";
 $(document).ready(() => {

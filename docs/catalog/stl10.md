@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://ai.stanford.edu/~acoates/stl10/" />
   <meta itemprop="citation" content="@inproceedings{coates2011stl10,&#10;  title={{An Analysis of Single Layer Networks in Unsupervised Feature Learning}},&#10;  author={Coates, Adam and Ng, Andrew and Lee, Honglak},&#10;  booktitle={AISTATS},&#10;  year={2011},&#10;  note = {\url{https://cs.stanford.edu/~acoates/papers/coatesleeng_aistats_2011.pdf}},&#10;}" />
 </div>
+
 # `stl10`
 
 *   **Description**:
@@ -21,26 +22,30 @@ training. The primary challenge is to make use of the unlabeled data (which
 comes from a similar but different distribution from the labeled data) to build
 a useful prior. All images were acquired from labeled examples on ImageNet.
 
-*   **Homepage**: [http://ai.stanford.edu/~acoates/stl10/](http://ai.stanford.edu/~acoates/stl10/)
+*   **Homepage**:
+    [http://ai.stanford.edu/~acoates/stl10/](http://ai.stanford.edu/~acoates/stl10/)
 
-*   **Source code**: [`tfds.image_classification.Stl10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stl10.py)
+*   **Source code**:
+    [`tfds.image_classification.Stl10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/stl10.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `2.46 GiB`
 
 *   **Dataset size**: `1.86 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 8,000
-`'train'` | 5,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 8,000
+`'train'`      | 5,000
 `'unlabelled'` | 100,000
 
 *   **Features**:
@@ -52,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -66,11 +73,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/stl10-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +87,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/stl10-1.0.0.html";
 $(document).ready(() => {

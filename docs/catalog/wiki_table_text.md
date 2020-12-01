@@ -8,10 +8,12 @@
   <meta itemprop="sameAs" content="https://github.com/msra-nlc/Table2Text" />
   <meta itemprop="citation" content="@inproceedings{bao2018table,&#10;  title={Table-to-Text: Describing Table Region with Natural Language},&#10;  author={Junwei Bao and Duyu Tang and Nan Duan and Zhao Yan and Yuanhua Lv and Ming Zhou and Tiejun Zhao},&#10;  booktitle={AAAI},&#10;  url={https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/16138/16782},&#10;  year={2018}&#10;}" />
 </div>
+
 # `wiki_table_text`
 
 Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -19,29 +21,32 @@ Wikipedia tables with at least 3 rows and 2 columns, 3 random rows for each
 table were selected for further annotation. Each row was annotated by a
 different person, so the dataset is composed by (one row table, text
 description) pairs. Annotations include at least 2 cells of the row, but do not
-require to include them all.
-The dataset follows a standarized table format.
+require to include them all. The dataset follows a standarized table format.
 
-*   **Homepage**: [https://github.com/msra-nlc/Table2Text](https://github.com/msra-nlc/Table2Text)
+*   **Homepage**:
+    [https://github.com/msra-nlc/Table2Text](https://github.com/msra-nlc/Table2Text)
 
-*   **Source code**: [`tfds.structured.wiki_table_text.WikiTableText`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/wiki_table_text/wiki_table_text.py)
+*   **Source code**:
+    [`tfds.structured.wiki_table_text.WikiTableText`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/wiki_table_text/wiki_table_text.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): Initial release.
+    *   **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `3.70 MiB`
 
 *   **Dataset size**: `4.64 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 2,000
-`'train'` | 10,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 10,000
 `'validation'` | 1,318
 
 *   **Features**:
@@ -59,7 +64,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('input_text', 'target_text')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('input_text', 'target_text')`
 
 *   **Citation**:
 
@@ -73,9 +80,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +93,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wiki_table_text-1.0.0.html";
 $(document).ready(() => {

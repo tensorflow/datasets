@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
   <meta itemprop="citation" content="@inproceedings{Ye2018WordEmbeddings,&#10;  author  = {Ye, Qi and Devendra, Sachan and Matthieu, Felix and Sarguna, Padmanabhan and Graham, Neubig},&#10;  title   = {When and Why are pre-trained word embeddings useful for Neural Machine Translation},&#10;  booktitle = {HLT-NAACL},&#10;  year    = {2018},&#10;  }" />
 </div>
+
 # `ted_hrlr_translate`
 
 *   **Description**:
@@ -15,19 +16,24 @@
 Data sets derived from TED talk transcripts for comparing similar language pairs
 where one is high resource and the other is low resource.
 
-*   **Homepage**: [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+*   **Homepage**:
+    [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
-*   **Source code**: [`tfds.translate.TedHrlrTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_hrlr.py)
+*   **Source code**:
+    [`tfds.translate.TedHrlrTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_hrlr.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `124.94 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Citation**:
 
@@ -40,8 +46,9 @@ where one is high resource and the other is low resource.
   }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## ted_hrlr_translate/az_to_en (default config)
 
@@ -49,10 +56,10 @@ where one is high resource and the other is low resource.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 903
-`'train'` | 5,946
+Split          | Examples
+:------------- | -------:
+`'test'`       | 903
+`'train'`      | 5,946
 `'validation'` | 671
 
 *   **Features**:
@@ -64,9 +71,12 @@ Translation({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('az', 'en')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('az', 'en')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +84,7 @@ Translation({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_hrlr_translate-az_to_en-1.0.0.html";
 $(document).ready(() => {

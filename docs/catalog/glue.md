@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://nyu-mll.github.io/CoLA/" />
   <meta itemprop="citation" content="@article{warstadt2018neural,&#10;  title={Neural Network Acceptability Judgments},&#10;  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1805.12471},&#10;  year={2018}&#10;}&#10;@inproceedings{wang2019glue,&#10;  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},&#10;  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},&#10;  note={In the Proceedings of ICLR.},&#10;  year={2019}&#10;}&#10;&#10;Note that each GLUE dataset has its own citation. Please see the source to see&#10;the correct citation for each contained dataset." />
 </div>
+
 # `glue`
 
 *   **Description**:
@@ -16,38 +17,46 @@ GLUE, the General Language Understanding Evaluation benchmark
 (https://gluebenchmark.com/) is a collection of resources for training,
 evaluating, and analyzing natural language understanding systems.
 
-*   **Source code**: [`tfds.text.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
+*   **Source code**:
+    [`tfds.text.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## glue/cola (default config)
 
-*   **Config description**: The Corpus of Linguistic Acceptability consists of English
-acceptability judgments drawn from books and journal articles on
-linguistic theory. Each example is a sequence of words annotated
-with whether it is a grammatical English sentence.
+*   **Config description**: The Corpus of Linguistic Acceptability consists of
+    English acceptability judgments drawn from books and journal articles on
+    linguistic theory. Each example is a sequence of words annotated with
+    whether it is a grammatical English sentence.
 
-*   **Homepage**: [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
+*   **Homepage**:
+    [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
 
 *   **Download size**: `368.14 KiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,063
-`'train'` | 8,551
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,063
+`'train'`      | 8,551
 `'validation'` | 1,043
 
 *   **Features**:
@@ -80,7 +89,8 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -88,9 +98,7 @@ the correct citation for each contained dataset.
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-cola-1.0.0.html";
 $(document).ready(() => {

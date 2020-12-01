@@ -8,23 +8,27 @@
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
   <meta itemprop="citation" content="@misc {paracrawl,&#10;    title  = &quot;ParaCrawl&quot;,&#10;    year   = &quot;2018&quot;,&#10;    url    = &quot;http://paracrawl.eu/download.html.&quot;&#10;}" />
 </div>
+
 # `para_crawl`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
 Web-Scale Parallel Corpora for Official European Languages.
 
-*   **Homepage**: [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+*   **Homepage**:
+    [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 
-*   **Source code**: [`tfds.translate.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+*   **Source code**:
+    [`tfds.translate.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
 
 *   **Versions**:
 
-    * **`1.2.0`** (default): No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
 *   **Citation**:
 
@@ -36,8 +40,9 @@ Web-Scale Parallel Corpora for Official European Languages.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## para_crawl/enbg (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -47,12 +52,14 @@ Web-Scale Parallel Corpora for Official European Languages.
 
 *   **Dataset size**: `362.46 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | --------:
 `'train'` | 1,039,885
 
 *   **Features**:
@@ -64,9 +71,12 @@ Translation({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('en', 'bg')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('en', 'bg')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +84,7 @@ Translation({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enbg-1.2.0.html";
 $(document).ready(() => {

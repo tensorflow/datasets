@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://weegee.vision.ucmerced.edu/datasets/landuse.html" />
   <meta itemprop="citation" content="@InProceedings{Nilsback08,&#10;   author = &quot;Yang, Yi and Newsam, Shawn&quot;,&#10;   title = &quot;Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification&quot;,&#10;   booktitle = &quot;ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS)&quot;,&#10;   year = &quot;2010&quot;,&#10;}" />
 </div>
+
 # `uc_merced`
 
 *   **Description**:
@@ -19,24 +20,29 @@ country. The pixel resolution of this public domain imagery is 0.3 m.
 
 While most images are 256x256 pixels, there are 44 images with different shape.
 
-*   **Homepage**: [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
+*   **Homepage**:
+    [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
 
-*   **Source code**: [`tfds.image_classification.UcMerced`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/uc_merced.py)
+*   **Source code**:
+    [`tfds.image_classification.UcMerced`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/uc_merced.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `317.07 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 2,100
 
 *   **Features**:
@@ -49,7 +55,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -62,11 +70,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/uc_merced-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +84,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/uc_merced-2.0.0.html";
 $(document).ready(() => {

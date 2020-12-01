@@ -8,33 +8,38 @@
   <meta itemprop="sameAs" content="https://allenai.org/data/qasc" />
   <meta itemprop="citation" content="@article{allenai:qasc,&#10;      author    = {Tushar Khot and Peter Clark and Michal Guerquin and Peter Jansen and Ashish Sabharwal},&#10;      title     = {QASC: A Dataset for Question Answering via Sentence Composition},&#10;      journal   = {arXiv:1910.11473v2},&#10;      year      = {2020},&#10;}" />
 </div>
+
 # `qasc`
 
 *   **Description**:
 
-QASC is a question-answering dataset with a focus on sentence composition. It consists of 9,980 8-way multiple-choice
-questions about grade school science (8,134 train, 926 dev, 920 test), and comes with a corpus of 17M sentences.
+QASC is a question-answering dataset with a focus on sentence composition. It
+consists of 9,980 8-way multiple-choice questions about grade school science
+(8,134 train, 926 dev, 920 test), and comes with a corpus of 17M sentences.
 
 *   **Homepage**: [https://allenai.org/data/qasc](https://allenai.org/data/qasc)
 
-*   **Source code**: [`tfds.question_answering.qasc.Qasc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/qasc/qasc.py)
+*   **Source code**:
+    [`tfds.question_answering.qasc.Qasc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/qasc/qasc.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `1.54 MiB`
 
 *   **Dataset size**: `6.61 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 920
-`'train'` | 8,134
+Split          | Examples
+:------------- | -------:
+`'test'`       | 920
+`'train'`      | 8,134
 `'validation'` | 926
 
 *   **Features**:
@@ -55,7 +60,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -68,9 +75,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qasc-0.1.0.html";
 $(document).ready(() => {

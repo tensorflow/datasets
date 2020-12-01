@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://www.openslr.org/60" />
   <meta itemprop="citation" content="@inproceedings{zen2019libritts,&#10;  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},&#10;  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},&#10;  booktitle = {Proc. Interspeech},&#10;  month = sep,&#10;  year = {2019},&#10;  doi = {10.21437/Interspeech.2019-2441},&#10;}" />
 </div>
+
 # `libritts`
 
 *   **Description**:
@@ -19,34 +20,37 @@ for TTS research. It is derived from the original materials (mp3 audio files
 from LibriVox and text files from Project Gutenberg) of the LibriSpeech corpus.
 The main differences from the LibriSpeech corpus are listed below:
 
-1. The audio files are at 24kHz sampling rate.
-2. The speech is split at sentence breaks.
-3. Both original and normalized texts are included.
-4. Contextual information (e.g., neighbouring sentences) can be extracted.
-5. Utterances with significant background noise are excluded.
+1.  The audio files are at 24kHz sampling rate.
+2.  The speech is split at sentence breaks.
+3.  Both original and normalized texts are included.
+4.  Contextual information (e.g., neighbouring sentences) can be extracted.
+5.  Utterances with significant background noise are excluded.
 
 *   **Homepage**: [http://www.openslr.org/60](http://www.openslr.org/60)
 
-*   **Source code**: [`tfds.audio.Libritts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/libritts.py)
+*   **Source code**:
+    [`tfds.audio.Libritts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/libritts.py)
 
 *   **Versions**:
 
-    * **`1.0.1`** (default): No release notes.
+    *   **`1.0.1`** (default): No release notes.
 
 *   **Download size**: `78.42 GiB`
 
 *   **Dataset size**: `271.41 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'dev_clean'` | 5,736
-`'dev_other'` | 4,613
-`'test_clean'` | 4,837
-`'test_other'` | 5,120
+Split              | Examples
+:----------------- | -------:
+`'dev_clean'`      | 5,736
+`'dev_other'`      | 4,613
+`'test_clean'`     | 4,837
+`'test_other'`     | 5,120
 `'train_clean100'` | 33,236
 `'train_clean360'` | 116,500
 `'train_other500'` | 205,044
@@ -64,7 +68,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text_normalized', 'speech')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text_normalized', 'speech')`
 
 *   **Citation**:
 
@@ -79,9 +85,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +98,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/libritts-1.0.1.html";
 $(document).ready(() => {

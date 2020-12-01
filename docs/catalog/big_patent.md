@@ -8,37 +8,39 @@
   <meta itemprop="sameAs" content="https://evasharma.github.io/bigpatent/" />
   <meta itemprop="citation" content="@misc{sharma2019bigpatent,&#10;    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},&#10;    author={Eva Sharma and Chen Li and Lu Wang},&#10;    year={2019},&#10;    eprint={1906.03741},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `big_patent`
 
 *   **Description**:
 
-BIGPATENT, consisting of 1.3 million records of U.S. patent documents
-along with human written abstractive summaries.
-Each US patent application is filed under a Cooperative Patent Classification
-(CPC) code. There are nine such classification categories:
-A (Human Necessities), B (Performing Operations; Transporting),
-C (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),
-F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),
-G (Physics), H (Electricity), and
-Y (General tagging of new or cross-sectional technology)
+BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with
+human written abstractive summaries. Each US patent application is filed under a
+Cooperative Patent Classification (CPC) code. There are nine such classification
+categories: A (Human Necessities), B (Performing Operations; Transporting), C
+(Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions), F
+(Mechanical Engineering; Lightning; Heating; Weapons; Blasting), G (Physics), H
+(Electricity), and Y (General tagging of new or cross-sectional technology)
 
-There are two features:
-  - description: detailed description of patent.
-  - summary: Patent abastract.
+There are two features: - description: detailed description of patent. -
+summary: Patent abastract.
 
-*   **Homepage**: [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+*   **Homepage**:
+    [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 
-*   **Source code**: [`tfds.summarization.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
+*   **Source code**:
+    [`tfds.summarization.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
 
 *   **Versions**:
 
-    * `1.0.0`: lower cased tokenized words
-    * `2.0.0`: Update to use cased raw strings
-    * **`2.1.2`** (default): Fix update to cased raw strings.
+    *   `1.0.0`: lower cased tokenized words
+    *   `2.0.0`: Update to use cased raw strings
+    *   **`2.1.2`** (default): Fix update to cased raw strings.
 
 *   **Download size**: `9.45 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -49,7 +51,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('description', 'abstract')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('description', 'abstract')`
 
 *   **Citation**:
 
@@ -64,8 +68,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## big_patent/all (default config)
 
@@ -75,13 +80,14 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 67,072
-`'train'` | 1,207,222
+Split          | Examples
+:------------- | --------:
+`'test'`       | 67,072
+`'train'`      | 1,207,222
 `'validation'` | 67,068
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +95,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-all-2.1.2.html";
 $(document).ready(() => {

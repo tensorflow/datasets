@@ -8,39 +8,46 @@
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/flowers/102/" />
   <meta itemprop="citation" content="@InProceedings{Nilsback08,&#10;   author = &quot;Nilsback, M-E. and Zisserman, A.&quot;,&#10;   title = &quot;Automated Flower Classification over a Large Number of Classes&quot;,&#10;   booktitle = &quot;Proceedings of the Indian Conference on Computer Vision, Graphics and Image Processing&quot;,&#10;   year = &quot;2008&quot;,&#10;   month = &quot;Dec&quot;&#10;}" />
 </div>
+
 # `oxford_flowers102`
 
 *   **Description**:
 
-The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring
-in the United Kingdom. Each class consists of between 40 and 258 images. The images have
-large scale, pose and light variations. In addition, there are categories that have large
-variations within the category and several very similar categories.
+The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly
+occurring in the United Kingdom. Each class consists of between 40 and 258
+images. The images have large scale, pose and light variations. In addition,
+there are categories that have large variations within the category and several
+very similar categories.
 
-The dataset is divided into a training set, a validation set and a test set.
-The training set and validation set each consist of 10 images per class (totalling 1020 images each).
-The test set consists of the remaining 6149 images (minimum 20 per class).
+The dataset is divided into a training set, a validation set and a test set. The
+training set and validation set each consist of 10 images per class (totalling
+1020 images each). The test set consists of the remaining 6149 images (minimum
+20 per class).
 
-*   **Homepage**: [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+*   **Homepage**:
+    [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 
-*   **Source code**: [`tfds.image_classification.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_flowers102.py)
+*   **Source code**:
+    [`tfds.image_classification.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/oxford_flowers102.py)
 
 *   **Versions**:
 
-    * **`2.1.1`** (default): No release notes.
+    *   **`2.1.1`** (default): No release notes.
 
 *   **Download size**: `328.90 MiB`
 
 *   **Dataset size**: `331.34 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 6,149
-`'train'` | 1,020
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,149
+`'train'`      | 1,020
 `'validation'` | 1,020
 
 *   **Features**:
@@ -53,7 +60,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -67,11 +76,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/oxford_flowers102-2.1.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +90,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/oxford_flowers102-2.1.1.html";
 $(document).ready(() => {

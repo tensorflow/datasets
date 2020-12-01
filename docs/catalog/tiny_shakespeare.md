@@ -8,11 +8,14 @@
   <meta itemprop="sameAs" content="https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt" />
   <meta itemprop="citation" content="@misc{&#10;  author={Karpathy, Andrej},&#10;  title={char-rnn},&#10;  year={2015},&#10;  howpublished={\url{https://github.com/karpathy/char-rnn}}&#10;}" />
 </div>
+
 # `tiny_shakespeare`
 
 *   **Description**:
 
-40,000 lines of Shakespeare from a variety of Shakespeare's plays. Featured in Andrej Karpathy's blog post 'The Unreasonable Effectiveness of Recurrent Neural Networks': http://karpathy.github.io/2015/05/21/rnn-effectiveness/.
+40,000 lines of Shakespeare from a variety of Shakespeare's plays. Featured in
+Andrej Karpathy's blog post 'The Unreasonable Effectiveness of Recurrent Neural
+Networks': http://karpathy.github.io/2015/05/21/rnn-effectiveness/.
 
 To use for e.g. character modelling:
 
@@ -29,26 +32,30 @@ d = d.batch(seq_len)
 d = d.batch(batch_size)
 ```
 
-*   **Homepage**: [https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt](https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt)
+*   **Homepage**:
+    [https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt](https://github.com/karpathy/char-rnn/blob/master/data/tinyshakespeare/input.txt)
 
-*   **Source code**: [`tfds.text.TinyShakespeare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/tiny_shakespeare.py)
+*   **Source code**:
+    [`tfds.text.TinyShakespeare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/tiny_shakespeare.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `1.06 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1
-`'train'` | 1
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1
+`'train'`      | 1
 `'validation'` | 1
 
 *   **Features**:
@@ -59,7 +66,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -72,9 +81,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -82,9 +94,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tiny_shakespeare-1.0.0.html";
 $(document).ready(() => {

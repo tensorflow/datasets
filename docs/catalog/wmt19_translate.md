@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt19/translation-task.html" />
   <meta itemprop="citation" content="@ONLINE {wmt19translate,&#10;    author = &quot;Wikimedia Foundation&quot;,&#10;    title  = &quot;ACL 2019 Fourth Conference on Machine Translation (WMT19), Shared Task: Machine Translation of News&quot;,&#10;    url    = &quot;http://www.statmt.org/wmt19/translation-task.html&quot;&#10;}" />
 </div>
+
 # `wmt19_translate`
 
 Warning: Manual download required. See instructions below.
@@ -32,24 +33,28 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
-*   **Homepage**: [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+*   **Homepage**:
+    [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
-*   **Source code**: [`tfds.translate.Wmt19Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt19.py)
+*   **Source code**:
+    [`tfds.translate.Wmt19Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt19.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-Some of the wmt configs here, require a manual download.
-Please look into wmt.py to see the exact path (and file name) that has to
-be downloaded.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    Some of the wmt configs here, require a manual download.
+    Please look into wmt.py to see the exact path (and file name) that has to
+    be downloaded.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Citation**:
 
@@ -61,8 +66,9 @@ be downloaded.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## wmt19_translate/cs-en (default config)
 
@@ -72,9 +78,9 @@ be downloaded.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 20,246,548
+Split          | Examples
+:------------- | ---------:
+`'train'`      | 20,246,548
 `'validation'` | 2,983
 
 *   **Features**:
@@ -86,9 +92,12 @@ Translation({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('cs', 'en')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('cs', 'en')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -96,9 +105,7 @@ Translation({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wmt19_translate-cs-en-1.0.0.html";
 $(document).ready(() => {

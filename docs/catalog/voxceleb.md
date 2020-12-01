@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html" />
   <meta itemprop="citation" content="@InProceedings{Nagrani17,&#10; author       = &quot;Nagrani, A. and Chung, J.~S. and Zisserman, A.&quot;,&#10; title        = &quot;VoxCeleb: a large-scale speaker identification dataset&quot;,&#10; booktitle    = &quot;INTERSPEECH&quot;,&#10;    year         = &quot;2017&quot;,&#10;}" />
 </div>
+
 # `voxceleb`
 
 Warning: Manual download required. See instructions below.
@@ -15,35 +16,39 @@ Warning: Manual download required. See instructions below.
 *   **Description**:
 
 An large scale dataset for speaker identification. This data is collected from
-over 1,251 speakers, with over 150k samples in total.
-This release contains the audio part of the voxceleb1.1 dataset.
+over 1,251 speakers, with over 150k samples in total. This release contains the
+audio part of the voxceleb1.1 dataset.
 
-*   **Homepage**: [http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html](http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html)
+*   **Homepage**:
+    [http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html](http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html)
 
-*   **Source code**: [`tfds.audio.Voxceleb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxceleb.py)
+*   **Source code**:
+    [`tfds.audio.Voxceleb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/voxceleb.py)
 
 *   **Versions**:
 
-    * **`1.1.1`** (default): No release notes.
+    *   **`1.1.1`** (default): No release notes.
 
 *   **Download size**: `4.68 MiB`
 
 *   **Dataset size**: `107.97 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-manual_dir should contain the file vox_dev_wav.zip. The instructions for
-downloading this file are found in http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html. This dataset requires registration.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    manual_dir should contain the file vox_dev_wav.zip. The instructions for
+    downloading this file are found in http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html. This dataset requires registration.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 7,972
-`'train'` | 134,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,972
+`'train'`      | 134,000
 `'validation'` | 6,670
 
 *   **Features**:
@@ -55,7 +60,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -68,9 +75,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/voxceleb-1.1.1.html";
 $(document).ready(() => {

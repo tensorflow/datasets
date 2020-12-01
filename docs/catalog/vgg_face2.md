@@ -8,41 +8,53 @@
   <meta itemprop="sameAs" content="http://zeus.robots.ox.ac.uk/vgg_face2/" />
   <meta itemprop="citation" content="@InProceedings{Cao18,&#10;author = &quot;Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.&quot;,&#10;title  = &quot;VGGFace2: A dataset for recognising faces across pose and age&quot;,&#10;booktitle = &quot;International Conference on Automatic Face and Gesture Recognition&quot;,&#10;year  = &quot;2018&quot;}" />
 </div>
+
 # `vgg_face2`
 
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-VGGFace2 is a large-scale face recognition dataset. Images are downloaded from Google Image Search and have large variations in pose, age, illumination, ethnicity and profession. VGGFace2 contains images from identities spanning a wide range of different ethnicities, accents, professions and ages. All face images are captured "in the wild", with pose and emotion variations and different lighting and occlusion conditions. Face distribution for different identities is varied, from 87 to 843, with an average of 362 images for each subject.
+VGGFace2 is a large-scale face recognition dataset. Images are downloaded from
+Google Image Search and have large variations in pose, age, illumination,
+ethnicity and profession. VGGFace2 contains images from identities spanning a
+wide range of different ethnicities, accents, professions and ages. All face
+images are captured "in the wild", with pose and emotion variations and
+different lighting and occlusion conditions. Face distribution for different
+identities is varied, from 87 to 843, with an average of 362 images for each
+subject.
 
-*   **Homepage**: [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
+*   **Homepage**:
+    [http://zeus.robots.ox.ac.uk/vgg_face2/](http://zeus.robots.ox.ac.uk/vgg_face2/)
 
-*   **Source code**: [`tfds.image_classification.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/vgg_face2.py)
+*   **Source code**:
+    [`tfds.image_classification.VggFace2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/vgg_face2.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-manual_dir should contain two files: vggface2_test.tar.gz and
-vggface2_train.tar.gz.
-You need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in
-order to get the link to download the dataset.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    manual_dir should contain two files: vggface2_test.tar.gz and
+    vggface2_train.tar.gz.
+    You need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in
+    order to get the link to download the dataset.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 169,396
+Split     | Examples
+:-------- | --------:
+`'test'`  | 169,396
 `'train'` | 3,141,890
 
 *   **Features**:
@@ -55,7 +67,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -67,11 +81,13 @@ booktitle = "International Conference on Automatic Face and Gesture Recognition"
 year  = "2018"}
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/vgg_face2-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +95,7 @@ year  = "2018"}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/vgg_face2-1.0.0.html";
 $(document).ready(() => {

@@ -8,10 +8,12 @@
   <meta itemprop="sameAs" content="http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/" />
   <meta itemprop="citation" content="@ONLINE {&#10;    author = &quot;Aono, Yasuyuki&quot;,&#10;    title  = &quot;Historical Series of Phenological data for Cherry Tree Flowering at Kyoto City (and March Mean Temperature Reconstructions)&quot;,&#10;    year   = &quot;2012&quot;,&#10;    url    = &quot;http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/&quot;&#10;}" />
 </div>
+
 # `cherry_blossoms`
 
 Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -19,41 +21,45 @@ Historical phenological data for cherry tree flowering at Kyoto City.
 
 This data was collected from diaries and chronicles dating back to the 9th
 century. Data from the 9th to the 14th century were collected by Aono and Saito
-(2010;  International Journal of Biometeorology, 54, 211-219), while the 15th
-to 21st  century were collected by Aono and Kazui (2008; International Journal
-of  Climatology, 28, 905-914).
+(2010; International Journal of Biometeorology, 54, 211-219), while the 15th to
+21st century were collected by Aono and Kazui (2008; International Journal of
+Climatology, 28, 905-914).
 
 All dates are expressed in the Gregorian calendar.
-
 
 Number of instances: 1216
 
 Variables:
 
-1. year: Year CE  (int)
-2. doy: Day of year of first bloom. Day 89 is April 1. Day 119 is May 1. (float)
-3. temp: March temperature estimate (float)
-4. temp_upper: Upper 95% bound for estimate (float)
-5. temp_lower: Lower 95% bound for estimate (float)
+1.  year: Year CE (int)
+2.  doy: Day of year of first bloom. Day 89 is April 1. Day 119 is May 1.
+    (float)
+3.  temp: March temperature estimate (float)
+4.  temp_upper: Upper 95% bound for estimate (float)
+5.  temp_lower: Lower 95% bound for estimate (float)
 
-*   **Homepage**: [http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/](http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/)
+*   **Homepage**:
+    [http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/](http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/)
 
-*   **Source code**: [`tfds.structured.cherry_blossoms.CherryBlossoms`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/cherry_blossoms/cherry_blossoms.py)
+*   **Source code**:
+    [`tfds.structured.cherry_blossoms.CherryBlossoms`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/cherry_blossoms/cherry_blossoms.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): Initial release.
+    *   **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `26.90 KiB`
 
 *   **Dataset size**: `119.84 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 1,215
 
 *   **Features**:
@@ -68,7 +74,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -81,9 +89,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -91,9 +102,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cherry_blossoms-1.0.0.html";
 $(document).ready(() => {

@@ -8,38 +8,44 @@
   <meta itemprop="sameAs" content="https://www.openslr.org/1/" />
   <meta itemprop="citation" content="@ONLINE {YesNo,&#10;    author = &quot;Created for the Kaldi Project&quot;,&#10;    title  = &quot;YesNo&quot;,&#10;    url    = &quot;http://www.openslr.org/1/&quot;&#10;}" />
 </div>
+
 # `yes_no`
 
 *   **Description**:
 
-Sixty recordings of one individual saying yes or no in Hebrew; each recording is eight words long.
+Sixty recordings of one individual saying yes or no in Hebrew; each recording is
+eight words long.
 
-The main point of the dataset is to provide an easy and fast way to test out the Kaldi scripts for free.
+The main point of the dataset is to provide an easy and fast way to test out the
+Kaldi scripts for free.
 
-The archive "waves_yesno.tar.gz" contains 60 .wav files, sampled at 8 kHz.
-All were recorded by the same male speaker, in Hebrew.
-In each file, the individual says 8 words; each word is either the Hebrew for "yes" or "no",
-so each file is a random sequence of 8 yes-es or noes.
-There is no separate transcription provided; the sequence is encoded in the filename, with 1 for yes and 0 for no.
+The archive "waves_yesno.tar.gz" contains 60 .wav files, sampled at 8 kHz. All
+were recorded by the same male speaker, in Hebrew. In each file, the individual
+says 8 words; each word is either the Hebrew for "yes" or "no", so each file is
+a random sequence of 8 yes-es or noes. There is no separate transcription
+provided; the sequence is encoded in the filename, with 1 for yes and 0 for no.
 
 *   **Homepage**: [https://www.openslr.org/1/](https://www.openslr.org/1/)
 
-*   **Source code**: [`tfds.audio.yesno.YesNo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/yesno/yesno.py)
+*   **Source code**:
+    [`tfds.audio.yesno.YesNo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/yesno/yesno.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `4.49 MiB`
 
 *   **Dataset size**: `16.27 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 60
 
 *   **Features**:
@@ -52,7 +58,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -64,9 +72,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +85,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/yes_no-1.0.0.html";
 $(document).ready(() => {

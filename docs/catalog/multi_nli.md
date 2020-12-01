@@ -8,41 +8,47 @@
   <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/multinli/" />
   <meta itemprop="citation" content="@InProceedings{N18-1101,&#10;  author = &quot;Williams, Adina&#10;            and Nangia, Nikita&#10;            and Bowman, Samuel&quot;,&#10;  title = &quot;A Broad-Coverage Challenge Corpus for&#10;           Sentence Understanding through Inference&quot;,&#10;  booktitle = &quot;Proceedings of the 2018 Conference of&#10;               the North American Chapter of the&#10;               Association for Computational Linguistics:&#10;               Human Language Technologies, Volume 1 (Long&#10;               Papers)&quot;,&#10;  year = &quot;2018&quot;,&#10;  publisher = &quot;Association for Computational Linguistics&quot;,&#10;  pages = &quot;1112--1122&quot;,&#10;  location = &quot;New Orleans, Louisiana&quot;,&#10;  url = &quot;http://aclweb.org/anthology/N18-1101&quot;&#10;}" />
 </div>
+
 # `multi_nli`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
-The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
-crowd-sourced collection of 433k sentence pairs annotated with textual
-entailment information. The corpus is modeled on the SNLI corpus, but differs in
-that covers a range of genres of spoken and written text, and supports a
-distinctive cross-genre generalization evaluation. The corpus served as the
-basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
+The Multi-Genre Natural Language Inference (MultiNLI) corpus is a crowd-sourced
+collection of 433k sentence pairs annotated with textual entailment information.
+The corpus is modeled on the SNLI corpus, but differs in that covers a range of
+genres of spoken and written text, and supports a distinctive cross-genre
+generalization evaluation. The corpus served as the basis for the shared task of
+the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
-*   **Homepage**: [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
+*   **Homepage**:
+    [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
 
-*   **Source code**: [`tfds.text.MultiNLI`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli.py)
+*   **Source code**:
+    [`tfds.text.MultiNLI`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `216.34 MiB`
 
 *   **Dataset size**: `89.50 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 392,702
-`'validation_matched'` | 9,815
+Split                     | Examples
+:------------------------ | -------:
+`'train'`                 | 392,702
+`'validation_matched'`    | 9,815
 `'validation_mismatched'` | 9,832
 
 *   **Features**:
@@ -55,7 +61,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -79,9 +87,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +100,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/multi_nli-1.1.0.html";
 $(document).ready(() => {

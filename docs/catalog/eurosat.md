@@ -8,36 +8,41 @@
   <meta itemprop="sameAs" content="https://github.com/phelber/eurosat" />
   <meta itemprop="citation" content="@misc{helber2017eurosat,&#10;    title={EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification},&#10;    author={Patrick Helber and Benjamin Bischke and Andreas Dengel and Damian Borth},&#10;    year={2017},&#10;    eprint={1709.00029},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CV}&#10;}" />
 </div>
+
 # `eurosat`
 
 *   **Description**:
 
 EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral
-bands and consisting of 10 classes with 27000 labeled and
-geo-referenced samples.
+bands and consisting of 10 classes with 27000 labeled and geo-referenced
+samples.
 
-Two datasets are offered:
-- rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.
-- all: Contains all 13 bands in the original value range (float32).
+Two datasets are offered: - rgb: Contains only the optical R, G, B frequency
+bands encoded as JPEG image. - all: Contains all 13 bands in the original value
+range (float32).
 
 URL: https://github.com/phelber/eurosat
 
-*   **Homepage**: [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+*   **Homepage**:
+    [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
-*   **Source code**: [`tfds.image_classification.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/eurosat.py)
+*   **Source code**:
+    [`tfds.image_classification.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/eurosat.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 27,000
 
 *   **Citation**:
@@ -52,7 +57,6 @@ Split  | Examples
     primaryClass={cs.CV}
 }
 ```
-
 
 ## eurosat/rgb (default config)
 
@@ -70,13 +74,17 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/eurosat-rgb-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -84,9 +92,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/eurosat-rgb-2.0.0.html";
 $(document).ready(() => {

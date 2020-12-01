@@ -8,33 +8,40 @@
   <meta itemprop="sameAs" content="http://ufldl.stanford.edu/housenumbers/" />
   <meta itemprop="citation" content="@article{Netzer2011,&#10;author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},&#10;booktitle = {Advances in Neural Information Processing Systems ({NIPS})},&#10;title = {Reading Digits in Natural Images with Unsupervised Feature Learning},&#10;year = {2011}&#10;}" />
 </div>
+
 # `svhn_cropped`
 
 *   **Description**:
 
-The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
+The Street View House Numbers (SVHN) Dataset is an image digit recognition
+dataset of over 600,000 digit images coming from real world data. Images are
+cropped to 32x32.
 
-*   **Homepage**: [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
+*   **Homepage**:
+    [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
-*   **Source code**: [`tfds.image_classification.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/svhn.py)
+*   **Source code**:
+    [`tfds.image_classification.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/svhn.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
-    * `3.1.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): No release notes.
+    *   `3.1.0`: New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `1.47 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'extra'` | 531,131
-`'test'` | 26,032
+`'test'`  | 26,032
 `'train'` | 73,257
 
 *   **Features**:
@@ -46,7 +53,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -59,11 +68,13 @@ year = {2011}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/svhn_cropped-3.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -71,9 +82,7 @@ year = {2011}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/svhn_cropped-3.0.0.html";
 $(document).ready(() => {

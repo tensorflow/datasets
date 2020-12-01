@@ -8,32 +8,38 @@
   <meta itemprop="sameAs" content="http://places2.csail.mit.edu/" />
   <meta itemprop="citation" content="@article{zhou2017places,&#10;  title={Places: A 10 million Image Database for Scene Recognition},&#10;  author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},&#10;  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},&#10;  year={2017},&#10;  publisher={IEEE}&#10;}" />
 </div>
+
 # `places365_small`
 
 *   **Description**:
 
-The Places365-Standard dataset contains 1.8 million train images from 365 scene categories,which are used to train the Places365 CNNs.There are 50 images per category in the validation set and 900 images per category in the testing set.
+The Places365-Standard dataset contains 1.8 million train images from 365 scene
+categories,which are used to train the Places365 CNNs.There are 50 images per
+category in the validation set and 900 images per category in the testing set.
 
 *   **Homepage**: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
 
-*   **Source code**: [`tfds.image_classification.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/places365_small.py)
+*   **Source code**:
+    [`tfds.image_classification.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/places365_small.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `29.27 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 328,500
-`'train'` | 1,803,460
+Split          | Examples
+:------------- | --------:
+`'test'`       | 328,500
+`'train'`      | 1,803,460
 `'validation'` | 36,500
 
 *   **Features**:
@@ -45,7 +51,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -59,11 +67,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/places365_small-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -71,9 +81,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/places365_small-2.0.0.html";
 $(document).ready(() => {

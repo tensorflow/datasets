@@ -8,44 +8,51 @@
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/diabetic-retinopathy-detection/data" />
   <meta itemprop="citation" content="@ONLINE {kaggle-diabetic-retinopathy,&#10;    author = &quot;Kaggle and EyePacs&quot;,&#10;    title  = &quot;Kaggle Diabetic Retinopathy Detection&quot;,&#10;    month  = &quot;jul&quot;,&#10;    year   = &quot;2015&quot;,&#10;    url    = &quot;https://www.kaggle.com/c/diabetic-retinopathy-detection/data&quot;&#10;}" />
 </div>
+
 # `diabetic_retinopathy_detection`
 
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-A large set of high-resolution retina images taken under a variety of imaging conditions.
+A large set of high-resolution retina images taken under a variety of imaging
+conditions.
 
-*   **Homepage**: [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
+*   **Homepage**:
+    [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
-*   **Source code**: [`tfds.image_classification.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/diabetic_retinopathy_detection.py)
+*   **Source code**:
+    [`tfds.image_classification.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/diabetic_retinopathy_detection.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `1.13 MiB`
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-You have to download this dataset from Kaggle.
-https://www.kaggle.com/c/diabetic-retinopathy-detection/data
-After downloading, unpack the test.zip file into test/ directory in manual_dir
-and sample.zip to sample/. Also unpack the sampleSubmissions.csv and
-trainLabels.csv.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    You have to download this dataset from Kaggle.
+    https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+    After downloading, unpack the test.zip file into test/ directory in manual_dir
+    and sample.zip to sample/. Also unpack the sampleSubmissions.csv and
+    trainLabels.csv.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'sample'` | 10
-`'test'` | 42,670
-`'train'` | 35,126
+Split          | Examples
+:------------- | -------:
+`'sample'`     | 10
+`'test'`       | 42,670
+`'train'`      | 35,126
 `'validation'` | 10,906
 
 *   **Features**:
@@ -58,7 +65,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -72,16 +81,17 @@ FeaturesDict({
 }
 ```
 
-
 ## diabetic_retinopathy_detection/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/diabetic_retinopathy_detection-original-3.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +99,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/diabetic_retinopathy_detection-original-3.0.0.html";
 $(document).ready(() => {

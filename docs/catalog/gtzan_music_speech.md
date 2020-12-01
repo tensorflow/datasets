@@ -8,33 +8,38 @@
   <meta itemprop="sameAs" content="http://marsyas.info/index.html" />
   <meta itemprop="citation" content="@ONLINE {Music Speech,&#10;    author = &quot;Tzanetakis, George&quot;,&#10;    title  = &quot;GTZAN Music/Speech Collection&quot;,&#10;    year   = &quot;1999&quot;,&#10;    url    = &quot;http://marsyas.info/index.html&quot;&#10;}" />
 </div>
+
 # `gtzan_music_speech`
 
 *   **Description**:
 
-The dataset was collected for the purposes of music/speech discrimination.
-The dataset consists of 120 tracks, each 30 seconds long.
-Each class (music/speech) has 60 examples.
-The tracks are all 22050Hz Mono 16-bit audio files in .wav format.
+The dataset was collected for the purposes of music/speech discrimination. The
+dataset consists of 120 tracks, each 30 seconds long. Each class (music/speech)
+has 60 examples. The tracks are all 22050Hz Mono 16-bit audio files in .wav
+format.
 
-*   **Homepage**: [http://marsyas.info/index.html](http://marsyas.info/index.html)
+*   **Homepage**:
+    [http://marsyas.info/index.html](http://marsyas.info/index.html)
 
-*   **Source code**: [`tfds.audio.gtzan_music_speech.GTZANMusicSpeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/gtzan_music_speech/gtzan_music_speech.py)
+*   **Source code**:
+    [`tfds.audio.gtzan_music_speech.GTZANMusicSpeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/gtzan_music_speech/gtzan_music_speech.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `283.29 MiB`
 
 *   **Dataset size**: `424.64 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 128
 
 *   **Features**:
@@ -47,7 +52,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -60,9 +67,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -70,9 +80,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gtzan_music_speech-1.0.0.html";
 $(document).ready(() => {

@@ -8,15 +8,17 @@
   <meta itemprop="sameAs" content="https://github.com/deepmind/3d-shapes" />
   <meta itemprop="citation" content="@misc{3dshapes18,&#10;  title={3D Shapes Dataset},&#10;  author={Burgess, Chris and Kim, Hyunjik},&#10;  howpublished={https://github.com/deepmind/3dshapes-dataset/},&#10;  year={2018}&#10;}" />
 </div>
+
 # `shapes3d`
 
 *   **Description**:
 
 3dshapes is a dataset of 3D shapes procedurally generated from 6 ground truth
-independent latent factors. These factors are *floor colour*, *wall colour*, *object colour*,
-*scale*, *shape* and *orientation*.
+independent latent factors. These factors are *floor colour*, *wall colour*,
+*object colour*, *scale*, *shape* and *orientation*.
 
-All possible combinations of these latents are present exactly once, generating N = 480000 total images.
+All possible combinations of these latents are present exactly once, generating
+N = 480000 total images.
 
 ### Latent factor values
 
@@ -27,26 +29,34 @@ All possible combinations of these latents are present exactly once, generating 
 *   shape: 4 values in [0, 1, 2, 3]
 *   orientation: 15 values linearly spaced in [-30, 30]
 
-We varied one latent at a time (starting from orientation, then shape, etc), and sequentially stored the images in fixed order in the `images` array. The corresponding values of the factors are stored in the same order in the `labels` array.
+We varied one latent at a time (starting from orientation, then shape, etc), and
+sequentially stored the images in fixed order in the `images` array. The
+corresponding values of the factors are stored in the same order in the `labels`
+array.
 
-*   **Homepage**: [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
+*   **Homepage**:
+    [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
 
-*   **Source code**: [`tfds.image.Shapes3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/shapes3d.py)
+*   **Source code**:
+    [`tfds.image.Shapes3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/shapes3d.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `255.18 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 480,000
 
 *   **Features**:
@@ -69,7 +79,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -82,11 +94,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/shapes3d-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -94,9 +108,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/shapes3d-2.0.0.html";
 $(document).ready(() => {

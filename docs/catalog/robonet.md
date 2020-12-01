@@ -8,29 +8,33 @@
   <meta itemprop="sameAs" content="https://www.robonet.wiki/" />
   <meta itemprop="citation" content="@article{dasari2019robonet,&#10;  title={RoboNet: Large-Scale Multi-Robot Learning},&#10;  author={Dasari, Sudeep and Ebert, Frederik and Tian, Stephen and&#10;  Nair, Suraj and Bucher, Bernadette and Schmeckpeper, Karl&#10;  and Singh, Siddharth and Levine, Sergey and Finn, Chelsea},&#10;  journal={arXiv preprint arXiv:1910.11215},&#10;  year={2019}&#10;}" />
 </div>
+
 # `robonet`
 
 *   **Description**:
 
-RoboNet contains over 15 million video frames of robot-object
-interaction, taken from 113 unique camera viewpoints.
+RoboNet contains over 15 million video frames of robot-object interaction, taken
+from 113 unique camera viewpoints.
 
-* The actions are deltas in position and rotation to the robot
-end-effector with one additional dimension of the action vector
-reserved for the gripper joint.
+*   The actions are deltas in position and rotation to the robot end-effector
+    with one additional dimension of the action vector reserved for the gripper
+    joint.
 
-* The states are cartesian end-effector control action space
-with restricted rotation, and a gripper joint
+*   The states are cartesian end-effector control action space with restricted
+    rotation, and a gripper joint
 
 *   **Homepage**: [https://www.robonet.wiki/](https://www.robonet.wiki/)
 
-*   **Source code**: [`tfds.video.Robonet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/robonet.py)
+*   **Source code**:
+    [`tfds.video.Robonet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/robonet.py)
 
 *   **Versions**:
 
-    * **`4.0.1`** (default): No release notes.
+    *   **`4.0.1`** (default): No release notes.
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -45,8 +49,9 @@ with restricted rotation, and a gripper joint
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## robonet/robonet_sample_64 (default config)
 
@@ -56,12 +61,14 @@ with restricted rotation, and a gripper joint
 
 *   **Dataset size**: `183.04 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Only when `shuffle_files=False` (train)
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 700
 
 *   **Features**:
@@ -75,7 +82,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +91,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/robonet-robonet_sample_64-4.0.1.html";
 $(document).ready(() => {

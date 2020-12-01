@@ -8,31 +8,37 @@
   <meta itemprop="sameAs" content="http://laurencemoroney.com/horses-or-humans-dataset" />
   <meta itemprop="citation" content="@ONLINE {horses_or_humans,&#10;author = &quot;Laurence Moroney&quot;,&#10;title = &quot;Horses or Humans Dataset&quot;,&#10;month = &quot;feb&quot;,&#10;year = &quot;2019&quot;,&#10;url = &quot;http://laurencemoroney.com/horses-or-humans-dataset&quot;&#10;}" />
 </div>
+
 # `horses_or_humans`
 
 *   **Description**:
 
 A large set of images of horses and humans.
 
-*   **Homepage**: [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+*   **Homepage**:
+    [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 
-*   **Source code**: [`tfds.image_classification.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/horses_or_humans.py)
+*   **Source code**:
+    [`tfds.image_classification.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/horses_or_humans.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `153.59 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 256
+Split     | Examples
+:-------- | -------:
+`'test'`  | 256
 `'train'` | 1,027
 
 *   **Features**:
@@ -44,7 +50,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -58,11 +66,13 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/horses_or_humans-3.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -70,9 +80,7 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/horses_or_humans-3.0.0.html";
 $(document).ready(() => {

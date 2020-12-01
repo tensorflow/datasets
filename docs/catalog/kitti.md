@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://www.cvlibs.net/datasets/kitti/" />
   <meta itemprop="citation" content="@inproceedings{Geiger2012CVPR,&#10;  author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},&#10;  title = {Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite},&#10;  booktitle = {Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;  year = {2012}&#10;}" />
 </div>
+
 # `kitti`
 
 *   **Description**:
@@ -20,27 +21,31 @@ training images annotated with 3D bounding boxes. A full description of the
 annotations can be found in the readme of the object development kit readme on
 the Kitti homepage.
 
-*   **Homepage**: [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
+*   **Homepage**:
+    [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 
-*   **Source code**: [`tfds.object_detection.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
+*   **Source code**:
+    [`tfds.object_detection.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
 
 *   **Versions**:
 
-    * `3.1.0`: No release notes.
-    * **`3.2.0`** (default): Devkit updated.
+    *   `3.1.0`: No release notes.
+    *   **`3.2.0`** (default): Devkit updated.
 
 *   **Download size**: `11.71 GiB`
 
 *   **Dataset size**: `5.27 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 711
-`'train'` | 6,347
+Split          | Examples
+:------------- | -------:
+`'test'`       | 711
+`'train'`      | 6,347
 `'validation'` | 423
 
 *   **Features**:
@@ -62,7 +67,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -75,11 +82,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/kitti-3.2.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -87,9 +96,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/kitti-3.2.0.html";
 $(document).ready(() => {

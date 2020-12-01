@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="web_nlg" />
   <meta itemprop="description" content="The data contains sets of 1 to 7 triples of the form subject-predicate-object&#10;extracted from (DBpedia)[https://wiki.dbpedia.org/] and natural language text&#10;that&#x27;s a verbalisation of these triples.&#10;The test data spans 15 different domains where only 10 appear in the training&#10;data.&#10;The dataset follows a standarized table format.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;web_nlg&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/web_nlg" />

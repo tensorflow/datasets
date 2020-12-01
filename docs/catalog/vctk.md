@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://doi.org/10.7488/ds/2645" />
   <meta itemprop="citation" content="@misc{yamagishi2019vctk,&#10;  author={Yamagishi, Junichi and Veaux, Christophe and MacDonald, Kirsten},&#10;  title={{CSTR VCTK Corpus}: English Multi-speaker Corpus for {CSTR} Voice Cloning Toolkit (version 0.92)},&#10;  publisher={University of Edinburgh. The Centre for Speech Technology Research (CSTR)},&#10;  year=2019,&#10;  doi={10.7488/ds/2645},&#10;}" />
 </div>
+
 # `vctk`
 
 *   **Description**:
@@ -19,17 +20,21 @@ speech accent archive.
 
 Note that the 'p315' text was lost due to a hard disk error.
 
-*   **Homepage**: [https://doi.org/10.7488/ds/2645](https://doi.org/10.7488/ds/2645)
+*   **Homepage**:
+    [https://doi.org/10.7488/ds/2645](https://doi.org/10.7488/ds/2645)
 
-*   **Source code**: [`tfds.audio.Vctk`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/vctk.py)
+*   **Source code**:
+    [`tfds.audio.Vctk`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/vctk.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): VCTK release 0.92.0.
+    *   **`1.0.0`** (default): VCTK release 0.92.0.
 
 *   **Download size**: `10.94 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -44,7 +49,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'speech')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'speech')`
 
 *   **Citation**:
 
@@ -58,26 +65,30 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## vctk/mic1 (default config)
 
-*   **Config description**: Audio recorded using an omni-directional microphone (DPA 4035).
-              Contains very low frequency noises.
+*   **Config description**: Audio recorded using an omni-directional microphone
+    (DPA 4035). Contains very low frequency noises.
 
-              This is the same audio released in previous versions of VCTK:
-              https://doi.org/10.7488/ds/1994
+    ```
+          This is the same audio released in previous versions of VCTK:
+          https://doi.org/10.7488/ds/1994
+    ```
 
 *   **Dataset size**: `39.87 GiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 44,455
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +96,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/vctk-mic1-1.0.0.html";
 $(document).ready(() => {

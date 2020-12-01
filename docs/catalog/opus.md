@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://opus.nlpl.eu/" />
   <meta itemprop="citation" content="@inproceedings{Tiedemann2012ParallelData,&#10;  author = {Tiedemann, J},&#10;  title = {Parallel Data, Tools and Interfaces in OPUS},&#10;  booktitle = {LREC}&#10;  year = {2012}}" />
 </div>
+
 # `opus`
 
 *   **Description**:
@@ -27,11 +28,12 @@ builder = tfds.builder("opus", config=config)
 
 *   **Homepage**: [http://opus.nlpl.eu/](http://opus.nlpl.eu/)
 
-*   **Source code**: [`tfds.translate.Opus`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/opus.py)
+*   **Source code**:
+    [`tfds.translate.Opus`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/opus.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Features**:
 
@@ -42,7 +44,9 @@ Translation({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('de', 'en')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('de', 'en')`
 
 *   **Citation**:
 
@@ -54,8 +58,9 @@ Translation({
   year = {2012}}
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## opus/medical (default config)
 
@@ -65,15 +70,18 @@ Translation({
 
 *   **Dataset size**: `188.85 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Only when `shuffle_files=False` (train)
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | --------:
 `'train'` | 1,108,752
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -81,9 +89,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/opus-medical-0.1.0.html";
 $(document).ready(() => {

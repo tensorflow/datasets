@@ -8,33 +8,37 @@
   <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/LinMBHPRDZ14,&#10;  author    = {Tsung{-}Yi Lin and&#10;               Michael Maire and&#10;               Serge J. Belongie and&#10;               Lubomir D. Bourdev and&#10;               Ross B. Girshick and&#10;               James Hays and&#10;               Pietro Perona and&#10;               Deva Ramanan and&#10;               Piotr Doll{&#x27;{a}}r and&#10;               C. Lawrence Zitnick},&#10;  title     = {Microsoft {COCO:} Common Objects in Context},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1405.0312},&#10;  year      = {2014},&#10;  url       = {http://arxiv.org/abs/1405.0312},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1405.0312},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `coco`
 
 *   **Description**:
 
-COCO is a large-scale object detection, segmentation, and
-captioning dataset.
+COCO is a large-scale object detection, segmentation, and captioning dataset.
 
-Note:
- * Some images from the train and validation sets don't have annotations.
- * Coco 2014 and 2017 uses the same images, but different train/val/test splits
- * The test split don't have any annotations (only images).
- * Coco defines 91 classes but the data only uses 80 classes.
- * Panotptic annotations defines defines 200 classes but only uses 133.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
 
 *   **Homepage**: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
-*   **Source code**: [`tfds.object_detection.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/coco.py)
+*   **Source code**:
+    [`tfds.object_detection.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/coco.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -63,20 +67,20 @@ Note:
 }
 ```
 
-
 ## coco/2014 (default config)
 
-*   **Config description**: This version contains images, bounding boxes and labels for the 2014 version.
+*   **Config description**: This version contains images, bounding boxes and
+    labels for the 2014 version.
 
 *   **Download size**: `37.57 GiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 40,775
-`'test2015'` | 81,434
-`'train'` | 82,783
+Split          | Examples
+:------------- | -------:
+`'test'`       | 40,775
+`'test2015'`   | 81,434
+`'train'`      | 82,783
 `'validation'` | 40,504
 
 *   **Features**:
@@ -96,11 +100,13 @@ FeaturesDict({
 })
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/coco-2014-1.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -108,9 +114,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coco-2014-1.1.0.html";
 $(document).ready(() => {

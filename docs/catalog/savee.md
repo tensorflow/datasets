@@ -8,50 +8,54 @@
   <meta itemprop="sameAs" content="http://kahlan.eps.surrey.ac.uk/savee/" />
   <meta itemprop="citation" content="@inproceedings{Vlasenko_combiningframe,&#10;author = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},&#10;year = {2007},&#10;month = {01},&#10;pages = {2249-2252},&#10;title = {Combining frame and turn-level information for robust recognition of emotions within speech},&#10;journal = {Proceedings of Interspeech}&#10;}" />
 </div>
+
 # `savee`
 
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-SAVEE (Surrey Audio-Visual Expressed Emotion) is an emotion recognition
-dataset. It consists of recordings from 4 male actors in 7 different emotions,
-480 British English utterances in total. The sentences were chosen from the
-standard TIMIT corpus and phonetically-balanced for each emotion.
-This release contains only the audio stream from the original audio-visual
-recording.
-The data is split so that the training set consists of 2 speakers, and both the
-validation and test set consists of samples from 1 speaker, respectively.
+SAVEE (Surrey Audio-Visual Expressed Emotion) is an emotion recognition dataset.
+It consists of recordings from 4 male actors in 7 different emotions, 480
+British English utterances in total. The sentences were chosen from the standard
+TIMIT corpus and phonetically-balanced for each emotion. This release contains
+only the audio stream from the original audio-visual recording. The data is
+split so that the training set consists of 2 speakers, and both the validation
+and test set consists of samples from 1 speaker, respectively.
 
-*   **Homepage**: [http://kahlan.eps.surrey.ac.uk/savee/](http://kahlan.eps.surrey.ac.uk/savee/)
+*   **Homepage**:
+    [http://kahlan.eps.surrey.ac.uk/savee/](http://kahlan.eps.surrey.ac.uk/savee/)
 
-*   **Source code**: [`tfds.audio.Savee`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/savee.py)
+*   **Source code**:
+    [`tfds.audio.Savee`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/savee.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `259.15 MiB`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-manual_dir should contain the file AudioData.zip. This file should be under
-Data/Zip/AudioData.zip in the dataset folder provided upon registration.
-You need to register at
-http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Register.html in
-order to get the link to download the dataset.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    manual_dir should contain the file AudioData.zip. This file should be under
+    Data/Zip/AudioData.zip in the dataset folder provided upon registration.
+    You need to register at
+    http://personal.ee.surrey.ac.uk/Personal/P.Jackson/SAVEE/Register.html in
+    order to get the link to download the dataset.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 120
-`'train'` | 240
+Split          | Examples
+:------------- | -------:
+`'test'`       | 120
+`'train'`      | 240
 `'validation'` | 120
 
 *   **Features**:
@@ -64,7 +68,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -79,9 +85,12 @@ journal = {Proceedings of Interspeech}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +98,7 @@ journal = {Proceedings of Interspeech}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/savee-1.0.0.html";
 $(document).ready(() => {

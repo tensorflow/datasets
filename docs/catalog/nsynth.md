@@ -8,29 +8,37 @@
   <meta itemprop="sameAs" content="https://g.co/magenta/nsynth-dataset" />
   <meta itemprop="citation" content="@InProceedings{pmlr-v70-engel17a,&#10;  title =     {Neural Audio Synthesis of Musical Notes with {W}ave{N}et Autoencoders},&#10;  author =     {Jesse Engel and Cinjon Resnick and Adam Roberts and Sander Dieleman and Mohammad Norouzi and Douglas Eck and Karen Simonyan},&#10;  booktitle =    {Proceedings of the 34th International Conference on Machine Learning},&#10;  pages =   {1068--1077},&#10;  year =      {2017},&#10;  editor =      {Doina Precup and Yee Whye Teh},&#10;  volume =     {70},&#10;  series =    {Proceedings of Machine Learning Research},&#10;  address =     {International Convention Centre, Sydney, Australia},&#10;  month =     {06--11 Aug},&#10;  publisher =     {PMLR},&#10;  pdf =     {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},&#10;  url =   {http://proceedings.mlr.press/v70/engel17a.html},&#10;}" />
 </div>
+
 # `nsynth`
 
 *   **Description**:
 
-The NSynth Dataset is an audio dataset containing ~300k musical notes, each
-with a unique pitch, timbre, and envelope. Each note is annotated with three
-additional pieces of information based on a combination of human evaluation
-and heuristic algorithms: Source, Family, and Qualities.
+The NSynth Dataset is an audio dataset containing ~300k musical notes, each with
+a unique pitch, timbre, and envelope. Each note is annotated with three
+additional pieces of information based on a combination of human evaluation and
+heuristic algorithms: Source, Family, and Qualities.
 
-*   **Homepage**: [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
+*   **Homepage**:
+    [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
-*   **Source code**: [`tfds.audio.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
+*   **Source code**:
+    [`tfds.audio.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
 
 *   **Versions**:
 
-    * `2.3.0`: New `loudness_db` feature in decibels (unormalized).
-    * `2.3.1`: F0 computed with normalization fix in CREPE.
-    * `2.3.2`: Use Audio feature.
-    * **`2.3.3`** (default): F0 computed with fix in CREPE wave normalization (https://github.com/marl/crepe/issues/49).
+    *   `2.3.0`: New `loudness_db` feature in decibels (unormalized).
+    *   `2.3.1`: F0 computed with normalization fix in CREPE.
+    *   `2.3.2`: Use Audio feature.
+    *   **`2.3.3`** (default): F0 computed with fix in CREPE wave normalization
+        (https://github.com/marl/crepe/issues/49).
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -52,13 +60,15 @@ and heuristic algorithms: Source, Family, and Qualities.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## nsynth/full (default config)
 
-*   **Config description**: Full NSynth Dataset is split into train, valid, and test sets, with no
-instruments overlapping between the train set and the valid/test sets.
+*   **Config description**: Full NSynth Dataset is split into train, valid, and
+    test sets, with no instruments overlapping between the train set and the
+    valid/test sets.
 
 *   **Download size**: `73.07 GiB`
 
@@ -66,9 +76,9 @@ instruments overlapping between the train set and the valid/test sets.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 4,096
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,096
 `'train'` | 289,205
 `'valid'` | 12,678
 
@@ -100,7 +110,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -108,9 +119,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/nsynth-full-2.3.3.html";
 $(document).ready(() => {

@@ -8,18 +8,18 @@
   <meta itemprop="sameAs" content="https://storage.googleapis.com/openimages/web/challenge2019.html" />
   <meta itemprop="citation" content="" />
 </div>
+
 # `open_images_challenge2019_detection`
 
 *   **Description**:
 
 Open Images is a collaborative release of ~9 million images annotated with
-image-level labels, object bounding boxes, object segmentation masks, and
-visual relationships. This uniquely large and diverse dataset is designed to
-spur state of the art advances in analyzing and understanding images.
+image-level labels, object bounding boxes, object segmentation masks, and visual
+relationships. This uniquely large and diverse dataset is designed to spur state
+of the art advances in analyzing and understanding images.
 
-
-This contains the data from thee Object Detection track of the competition.
-The goal in this track is to predict a tight bounding box around all object
+This contains the data from thee Object Detection track of the competition. The
+goal in this track is to predict a tight bounding box around all object
 instances of 500 classes.
 
 The images are annotated with positive image-level labels, indicating certain
@@ -28,24 +28,28 @@ certain classes are absent. In the competition, all other unannotated classes
 are excluded from evaluation in that image. For each positive image-level label
 in an image, every instance of that object class in the image was annotated.
 
-*   **Homepage**: [https://storage.googleapis.com/openimages/web/challenge2019.html](https://storage.googleapis.com/openimages/web/challenge2019.html)
+*   **Homepage**:
+    [https://storage.googleapis.com/openimages/web/challenge2019.html](https://storage.googleapis.com/openimages/web/challenge2019.html)
 
-*   **Source code**: [`tfds.object_detection.OpenImagesChallenge2019Detection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images_challenge2019.py)
+*   **Source code**:
+    [`tfds.object_detection.OpenImagesChallenge2019Detection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images_challenge2019.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `534.63 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 99,999
-`'train'` | 1,743,042
+Split          | Examples
+:------------- | --------:
+`'test'`       | 99,999
+`'train'`      | 1,743,042
 `'validation'` | 41,620
 
 *   **Features**:
@@ -67,22 +71,26 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
-
 ## open_images_challenge2019_detection/200k (default config)
 
-*   **Config description**: Images have at most 200,000 pixels, at 72 JPEG quality.
+*   **Config description**: Images have at most 200,000 pixels, at 72 JPEG
+    quality.
 
 *   **Dataset size**: `59.40 GiB`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/open_images_challenge2019_detection-200k-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -90,9 +98,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/open_images_challenge2019_detection-200k-1.0.0.html";
 $(document).ready(() => {

@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/alexwarstadt/blimp/tree/master/" />
   <meta itemprop="citation" content="@article{warstadt2019blimp,&#10;  title={BLiMP: A Benchmark of Linguistic Minimal Pairs for English},&#10;  author={Warstadt, Alex and Parrish, Alicia and Liu, Haokun and Mohananey, Anhad and Peng, Wei, and Wang, Sheng-Fu and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1912.00582},&#10;  year={2019}&#10;}" />
 </div>
+
 # `blimp`
 
 *   **Description**:
@@ -18,20 +19,24 @@ containing 1000 minimal pairs isolating specific contrasts in syntax,
 morphology, or semantics. The data is automatically generated according to
 expert-crafted grammars.
 
-*   **Homepage**: [https://github.com/alexwarstadt/blimp/tree/master/](https://github.com/alexwarstadt/blimp/tree/master/)
+*   **Homepage**:
+    [https://github.com/alexwarstadt/blimp/tree/master/](https://github.com/alexwarstadt/blimp/tree/master/)
 
-*   **Source code**: [`tfds.text.Blimp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/blimp.py)
+*   **Source code**:
+    [`tfds.text.Blimp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/blimp.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 1,000
 
 *   **Features**:
@@ -51,7 +56,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -64,18 +71,21 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## blimp/adjunct_island (default config)
 
-*   **Config description**: This configuration includes the paradigm adjunct_island.
+*   **Config description**: This configuration includes the paradigm
+    adjunct_island.
 
 *   **Download size**: `350.86 KiB`
 
 *   **Dataset size**: `366.47 KiB`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +93,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/blimp-adjunct_island-0.1.0.html";
 $(document).ready(() => {

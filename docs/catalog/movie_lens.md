@@ -8,28 +8,29 @@
   <meta itemprop="sameAs" content="https://grouplens.org/datasets/movielens/" />
   <meta itemprop="citation" content="@article{10.1145/2827872,&#10;author = {Harper, F. Maxwell and Konstan, Joseph A.},&#10;title = {The MovieLens Datasets: History and Context},&#10;year = {2015},&#10;issue_date = {January 2016},&#10;publisher = {Association for Computing Machinery},&#10;address = {New York, NY, USA},&#10;volume = {5},&#10;number = {4},&#10;issn = {2160-6455},&#10;url = {https://doi.org/10.1145/2827872},&#10;doi = {10.1145/2827872},&#10;journal = {ACM Trans. Interact. Intell. Syst.},&#10;month = dec,&#10;articleno = {19},&#10;numpages = {19},&#10;keywords = {Datasets, recommendations, ratings, MovieLens}&#10;}" />
 </div>
+
 # `movie_lens`
 
 *   **Description**:
 
 This dataset contains a set of movie ratings from the MovieLens website, a movie
-recommendation service. This dataset was collected and maintained by [GroupLens]
-(https://grouplens.org/), a research group at the University of Minnesota. There
-are 5 versions included: "25m", "latest-small", "100k", "1m", "20m". In all
-datasets, the movies data and ratings data are joined on "movieId". The 25m
-dataset, latest-small dataset, and 20m dataset contain only movie data and
-rating data. The 1m dataset and 100k dataset contain demographic data in
-addition to movie and rating data.
+recommendation service. This dataset was collected and maintained by
+[GroupLens](https://grouplens.org/), a research group at the University of
+Minnesota. There are 5 versions included: "25m", "latest-small", "100k", "1m",
+"20m". In all datasets, the movies data and ratings data are joined on
+"movieId". The 25m dataset, latest-small dataset, and 20m dataset contain only
+movie data and rating data. The 1m dataset and 100k dataset contain demographic
+data in addition to movie and rating data.
 
-- "25m": This is the latest stable version of the MovieLens dataset. It is
-recommended for research purposes.
-- "latest-small": This is a small subset of the latest version of the MovieLens
-dataset. It is changed and updated over time by GroupLens.
-- "100k": This is the oldest version of the MovieLens datasets. It is a small
-dataset with demographic data.
-- "1m": This is the largest MovieLens dataset that contains demographic data.
-- "20m": This is one of the most used MovieLens datasets in academic papers
-along with the 1m dataset.
+-   "25m": This is the latest stable version of the MovieLens dataset. It is
+    recommended for research purposes.
+-   "latest-small": This is a small subset of the latest version of the
+    MovieLens dataset. It is changed and updated over time by GroupLens.
+-   "100k": This is the oldest version of the MovieLens datasets. It is a small
+    dataset with demographic data.
+-   "1m": This is the largest MovieLens dataset that contains demographic data.
+-   "20m": This is one of the most used MovieLens datasets in academic papers
+    along with the 1m dataset.
 
 For each version, users can view either only the movies data by adding the
 "-movies" suffix (e.g. "25m-movies") or the ratings data joined with the movies
@@ -38,36 +39,36 @@ suffix (e.g. "25m-ratings").
 
 The features below are included in all versions with the "-ratings" suffix.
 
-- "movie_id": a unique identifier of the rated movie
-- "movie_title": the title of the rated movie with the release year in
-parentheses
-- "movie_genres": a sequence of genres to which the rated movie belongs
-- "user_id": a unique identifier of the user who made the rating
-- "user_rating": the score of the rating on a five-star scale
-- "timestamp": the timestamp of the ratings, represented in seconds since
-midnight Coordinated Universal Time (UTC) of January 1, 1970
+-   "movie_id": a unique identifier of the rated movie
+-   "movie_title": the title of the rated movie with the release year in
+    parentheses
+-   "movie_genres": a sequence of genres to which the rated movie belongs
+-   "user_id": a unique identifier of the user who made the rating
+-   "user_rating": the score of the rating on a five-star scale
+-   "timestamp": the timestamp of the ratings, represented in seconds since
+    midnight Coordinated Universal Time (UTC) of January 1, 1970
 
 The "100k-ratings" and "1m-ratings" versions in addition include the following
 demographic features.
 
-- "user_gender": gender of the user who made the rating; a true value
-corresponds to male
-- "bucketized_user_age": bucketized age values of the user who made the rating,
-the values and the corresponding ranges are:
-  - 1: "Under 18"
-  - 18: "18-24"
-  - 25: "25-34"
-  - 35: "35-44"
-  - 45: "45-49"
-  - 50: "50-55"
-  - 56: "56+"
-- "user_occupation_label": the occupation of the user who made the rating
-represented by an integer-encoded label; labels are preprocessed to be
-consistent across different versions
-- "user_occupation_text": the occupation of the user who made the rating in
-the original string; different versions can have different set of raw text
-labels
-- "user_zip_code": the zip code of the user who made the rating
+-   "user_gender": gender of the user who made the rating; a true value
+    corresponds to male
+-   "bucketized_user_age": bucketized age values of the user who made the
+    rating, the values and the corresponding ranges are:
+    -   1: "Under 18"
+    -   18: "18-24"
+    -   25: "25-34"
+    -   35: "35-44"
+    -   45: "45-49"
+    -   50: "50-55"
+    -   56: "56+"
+-   "user_occupation_label": the occupation of the user who made the rating
+    represented by an integer-encoded label; labels are preprocessed to be
+    consistent across different versions
+-   "user_occupation_text": the occupation of the user who made the rating in
+    the original string; different versions can have different set of raw text
+    labels
+-   "user_zip_code": the zip code of the user who made the rating
 
 In addition, the "100k-ratings" dataset would also have a feature "raw_user_age"
 which is the exact ages of the users who made the rating
@@ -75,15 +76,19 @@ which is the exact ages of the users who made the rating
 Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 "movie_genres" features.
 
-*   **Homepage**: [https://grouplens.org/datasets/movielens/](https://grouplens.org/datasets/movielens/)
+*   **Homepage**:
+    [https://grouplens.org/datasets/movielens/](https://grouplens.org/datasets/movielens/)
 
-*   **Source code**: [`tfds.structured.MovieLens`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/movielens.py)
+*   **Source code**:
+    [`tfds.structured.MovieLens`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/movielens.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -108,30 +113,33 @@ keywords = {Datasets, recommendations, ratings, MovieLens}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## movie_lens/25m-ratings (default config)
 
-*   **Config description**: This dataset contains 25,000,095 ratings across 62,423 movies,
-created by 162,541 users between January 09, 1995 and November 21,
-2019. This dataset is the latest stable version of the MovieLens
-dataset, generated on November 21, 2019.
+*   **Config description**: This dataset contains 25,000,095 ratings across
+    62,423 movies, created by 162,541 users between January 09, 1995 and
+    November 21,
+*   This dataset is the latest stable version of the MovieLens dataset,
+    generated on November 21, 2019.
 
-Each user has rated at least 20 movies. The ratings are in
-half-star increments. This dataset does not include demographic
-data.
+Each user has rated at least 20 movies. The ratings are in half-star increments.
+This dataset does not include demographic data.
 
 *   **Download size**: `249.84 MiB`
 
 *   **Dataset size**: `3.89 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | ---------:
 `'train'` | 25,000,095
 
 *   **Features**:
@@ -147,7 +155,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -155,9 +164,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-ratings-0.1.0.html";
 $(document).ready(() => {

@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/brendenlake/SCAN" />
   <meta itemprop="citation" content="@inproceedings{Lake2018GeneralizationWS,&#10;  title={Generalization without Systematicity: On the Compositional Skills of&#10;         Sequence-to-Sequence Recurrent Networks},&#10;  author={Brenden M. Lake and Marco Baroni},&#10;  booktitle={ICML},&#10;  year={2018},&#10;  url={https://arxiv.org/pdf/1711.00350.pdf},&#10;}&#10;@inproceedings{Keysers2020,&#10;  title={Measuring Compositional Generalization: A Comprehensive Method on&#10;         Realistic Data},&#10;  author={Daniel Keysers and Nathanael Sch&quot;{a}rli and Nathan Scales and&#10;          Hylke Buisman and Daniel Furrer and Sergii Kashubin and&#10;          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and&#10;          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and&#10;          Olivier Bousquet},&#10;  note={Additional citation for MCD splits},&#10;  booktitle={ICLR},&#10;  year={2020},&#10;  url={https://arxiv.org/abs/1912.09713.pdf},&#10;}" />
 </div>
+
 # `scan`
 
 *   **Description**:
@@ -36,15 +37,19 @@ data = tfds.load(
             name='simple_p8', directory='simple_split/size_variations')))
 ```
 
-*   **Homepage**: [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
+*   **Homepage**:
+    [https://github.com/brendenlake/SCAN](https://github.com/brendenlake/SCAN)
 
-*   **Source code**: [`tfds.text.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
+*   **Source code**:
+    [`tfds.text.Scan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scan.py)
 
 *   **Versions**:
 
-    * **`1.1.1`** (default): No release notes.
+    *   **`1.1.1`** (default): No release notes.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -55,7 +60,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('commands', 'actions')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('commands', 'actions')`
 
 *   **Citation**:
 
@@ -83,8 +90,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## scan/simple (default config)
 
@@ -94,12 +102,13 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 4,182
+Split     | Examples
+:-------- | -------:
+`'test'`  | 4,182
 `'train'` | 16,728
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -107,9 +116,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/scan-simple-1.1.1.html";
 $(document).ready(() => {

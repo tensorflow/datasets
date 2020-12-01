@@ -8,41 +8,46 @@
   <meta itemprop="sameAs" content="https://quac.ai/" />
   <meta itemprop="citation" content="@article{choi2018quac,&#10;  title={Quac: Question answering in context},&#10;  author={Choi, Eunsol and He, He and Iyyer, Mohit and Yatskar, Mark and Yih, Wen-tau and Choi, Yejin and Liang, Percy and Zettlemoyer, Luke},&#10;  journal={arXiv preprint arXiv:1808.07036},&#10;  year={2018}&#10;}" />
 </div>
+
 # `quac`
 
 Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
-Question Answering in Context is a dataset for modeling, understanding,
-and participating in information seeking dialog. Data instances consist
-of an interactive dialog between two crowd workers: (1) a student who poses
-a sequence of freeform questions to learn as much as possible about a hidden
-Wikipedia text, and (2) a teacher who answers the questions by providing
-short excerpts (spans) from the text. QuAC introduces challenges not found
-in existing machine comprehension datasets: its questions are often more
-open-ended, unanswerable, or only meaningful within the dialog context.
+Question Answering in Context is a dataset for modeling, understanding, and
+participating in information seeking dialog. Data instances consist of an
+interactive dialog between two crowd workers: (1) a student who poses a sequence
+of freeform questions to learn as much as possible about a hidden Wikipedia
+text, and (2) a teacher who answers the questions by providing short excerpts
+(spans) from the text. QuAC introduces challenges not found in existing machine
+comprehension datasets: its questions are often more open-ended, unanswerable,
+or only meaningful within the dialog context.
 
 *   **Homepage**: [https://quac.ai/](https://quac.ai/)
 
-*   **Source code**: [`tfds.text.quac.Quac`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/quac/quac.py)
+*   **Source code**:
+    [`tfds.text.quac.Quac`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/quac/quac.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): Initial release.
+    *   **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `73.47 MiB`
 
 *   **Dataset size**: `298.04 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 83,568
+Split          | Examples
+:------------- | -------:
+`'train'`      | 83,568
 `'validation'` | 7,354
 
 *   **Features**:
@@ -67,7 +72,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('context', 'answers')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('context', 'answers')`
 
 *   **Citation**:
 
@@ -80,9 +87,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -90,9 +100,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/quac-1.0.0.html";
 $(document).ready(() => {

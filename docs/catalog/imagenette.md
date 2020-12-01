@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/fastai/imagenette" />
   <meta itemprop="citation" content="@misc{imagenette,&#10;  author    = &quot;Jeremy Howard&quot;,&#10;  title     = &quot;imagenette&quot;,&#10;  url       = &quot;https://github.com/fastai/imagenette/&quot;&#10;}" />
 </div>
+
 # `imagenette`
 
 *   **Description**:
@@ -21,20 +22,22 @@ lot of time.
 This version of the dataset allows researchers/practitioners to quickly try out
 ideas and share with others. The dataset comes in three variants:
 
-  * Full size
-  * 320 px
-  * 160 px
+*   Full size
+*   320 px
+*   160 px
 
-Note: The v2 config correspond to the new 70/30 train/valid split (released
-in Dec 6 2019).
+Note: The v2 config correspond to the new 70/30 train/valid split (released in
+Dec 6 2019).
 
-*   **Homepage**: [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
+*   **Homepage**:
+    [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
-*   **Source code**: [`tfds.image_classification.Imagenette`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenette.py)
+*   **Source code**:
+    [`tfds.image_classification.Imagenette`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenette.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Features**:
 
@@ -45,7 +48,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -57,7 +62,6 @@ FeaturesDict({
 }
 ```
 
-
 ## imagenette/full-size-v2 (default config)
 
 *   **Config description**: full-size variant.
@@ -66,20 +70,24 @@ FeaturesDict({
 
 *   **Dataset size**: `1.46 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 9,469
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
 `'validation'` | 3,925
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenette-full-size-v2-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -87,9 +95,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imagenette-full-size-v2-0.1.0.html";
 $(document).ready(() => {

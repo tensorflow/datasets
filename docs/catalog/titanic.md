@@ -8,30 +8,39 @@
   <meta itemprop="sameAs" content="https://www.openml.org/d/40945" />
   <meta itemprop="citation" content="@ONLINE {titanic,&#10;author = &quot;Frank E. Harrell Jr., Thomas Cason&quot;,&#10;title  = &quot;Titanic dataset&quot;,&#10;month  = &quot;oct&quot;,&#10;year   = &quot;2017&quot;,&#10;url    = &quot;https://www.openml.org/d/40945&quot;&#10;}" />
 </div>
+
 # `titanic`
 
 *   **Description**:
 
-Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.
+Dataset describing the survival status of individual passengers on the Titanic.
+Missing values in the original dataset are represented using ?. Float and int
+missing values are replaced with -1, string missing values are replaced with
+'Unknown'.
 
-*   **Homepage**: [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
+*   **Homepage**:
+    [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 
-*   **Source code**: [`tfds.structured.Titanic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/titanic.py)
+*   **Source code**:
+    [`tfds.structured.Titanic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/titanic.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `114.98 KiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 1,309
 
 *   **Features**:
@@ -57,7 +66,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('features', 'survived')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('features', 'survived')`
 
 *   **Citation**:
 
@@ -71,9 +82,12 @@ url    = "https://www.openml.org/d/40945"
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -81,9 +95,7 @@ url    = "https://www.openml.org/d/40945"
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/titanic-2.0.0.html";
 $(document).ready(() => {

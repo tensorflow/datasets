@@ -8,21 +8,29 @@
   <meta itemprop="sameAs" content="https://rajpurkar.github.io/SQuAD-explorer/" />
   <meta itemprop="citation" content="@article{2016arXiv160605250R,&#10;       author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},&#10;                 Konstantin and {Liang}, Percy},&#10;        title = &quot;{SQuAD: 100,000+ Questions for Machine Comprehension of Text}&quot;,&#10;      journal = {arXiv e-prints},&#10;         year = 2016,&#10;          eid = {arXiv:1606.05250},&#10;        pages = {arXiv:1606.05250},&#10;archivePrefix = {arXiv},&#10;       eprint = {1606.05250},&#10;}" />
 </div>
+
 # `squad`
 
 *   **Description**:
 
-Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.
+Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset,
+consisting of questions posed by crowdworkers on a set of Wikipedia articles,
+where the answer to every question is a segment of text, or span, from the
+corresponding reading passage, or the question might be unanswerable.
 
-*   **Homepage**: [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
+*   **Homepage**:
+    [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
-*   **Source code**: [`tfds.question_answering.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/squad/squad.py)
+*   **Source code**:
+    [`tfds.question_answering.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/squad/squad.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -40,8 +48,9 @@ archivePrefix = {arXiv},
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## squad/v1.1 (default config)
 
@@ -51,13 +60,15 @@ archivePrefix = {arXiv},
 
 *   **Dataset size**: `94.04 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 87,599
+Split          | Examples
+:------------- | -------:
+`'train'`      | 87,599
 `'validation'` | 10,570
 
 *   **Features**:
@@ -75,7 +86,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/squad-v1.1-2.0.0.html";
 $(document).ready(() => {

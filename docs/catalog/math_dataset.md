@@ -8,16 +8,16 @@
   <meta itemprop="sameAs" content="https://github.com/deepmind/mathematics_dataset" />
   <meta itemprop="citation" content="@article{2019arXiv,&#10;  author = {Saxton, Grefenstette, Hill, Kohli},&#10;  title = {Analysing Mathematical Reasoning Abilities of Neural Models},&#10;  year = {2019},&#10;  journal = {arXiv:1904.01557}&#10;}" />
 </div>
+
 # `math_dataset`
 
 *   **Description**:
 
 Mathematics database.
 
-This dataset code generates mathematical question and answer pairs,
-from a range of question types at roughly school-level difficulty.
-This is designed to test the mathematical learning and algebraic
-reasoning skills of learning models.
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
 
 Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 (Saxton, Grefenstette, Hill, Kohli).
@@ -31,25 +31,29 @@ train_examples, val_examples = tfds.load(
     as_supervised=True)
 ```
 
-*   **Homepage**: [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+*   **Homepage**:
+    [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
-*   **Source code**: [`tfds.text.MathDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_dataset.py)
+*   **Source code**:
+    [`tfds.text.MathDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/math_dataset.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `2.17 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 10,000
+Split     | Examples
+:-------- | --------:
+`'test'`  | 10,000
 `'train'` | 1,999,998
 
 *   **Features**:
@@ -61,7 +65,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('question', 'answer')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('question', 'answer')`
 
 *   **Citation**:
 
@@ -74,12 +80,14 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## math_dataset/algebra__linear_1d (default config)
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -87,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/math_dataset-algebra__linear_1d-1.0.0.html";
 $(document).ready(() => {

@@ -8,32 +8,36 @@
   <meta itemprop="sameAs" content="http://vis-www.cs.umass.edu/lfw" />
   <meta itemprop="citation" content="@TechReport{LFWTech,&#10;    author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},&#10;    title = {Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments},&#10;    institution = {University of Massachusetts, Amherst},&#10;    year = 2007,&#10;    number = {07-49},&#10;    month = {October}&#10;}" />
 </div>
+
 # `lfw`
 
 *   **Description**:
 
-Labeled Faces in the Wild:
-        A Database for Studying Face Recognition in
-        Unconstrained Environments
+Labeled Faces in the Wild: A Database for Studying Face Recognition in
+Unconstrained Environments
 
-*   **Homepage**: [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
+*   **Homepage**:
+    [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
 
-*   **Source code**: [`tfds.image_classification.LFW`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/lfw.py)
+*   **Source code**:
+    [`tfds.image_classification.LFW`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/lfw.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `172.20 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 13,233
 
 *   **Features**:
@@ -45,7 +49,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('label', 'image')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('label', 'image')`
 
 *   **Citation**:
 
@@ -60,11 +66,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/lfw-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -72,9 +80,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lfw-0.1.0.html";
 $(document).ready(() => {

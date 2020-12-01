@@ -8,40 +8,49 @@
   <meta itemprop="sameAs" content="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php" />
   <meta itemprop="citation" content="@article{nene1996columbia,&#10;  title={Columbia object image library (coil-20)},&#10;  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},&#10;  year={1996},&#10;  publisher={Technical report CUCS-005-96}&#10;}" />
 </div>
+
 # `coil100`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
-The dataset contains 7200 color images of 100 objects
-(72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.
-The objects were placed on a motorized turntable against a black background.
-The turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.
-Images of the objects were taken at pose intervals of   5 degrees.This corresponds to
-72 poses per object
+The dataset contains 7200 color images of 100 objects (72 images per object).
+The objects have a wide variety of complex geometric and reflectance
+characteristics. The objects were placed on a motorized turntable against a
+black background. The turntable was rotated through 360 degrees to vary object
+pose with respect to a fxed color camera. Images of the objects were taken at
+pose intervals of 5 degrees.This corresponds to 72 poses per object
 
-*   **Homepage**: [http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php](http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php)
+*   **Homepage**:
+    [http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php](http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php)
 
-*   **Source code**: [`tfds.image.Coil100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coil100.py)
+*   **Source code**:
+    [`tfds.image.Coil100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coil100.py)
 
 *   **Versions**:
 
-    * `1.0.0`: Initial release
-    * **`2.0.0`** (default) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>: Change features (`object_id` is now `ClassLabel`, rename `label` -> `angle_label`, add `angle`)
+    *   `1.0.0`: Initial release
+    *   **`2.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Change features (`object_id` is now `ClassLabel`, rename `label` ->
+        `angle_label`, add `angle`)
 
 *   **Download size**: `124.63 MiB`
 
 *   **Dataset size**: `124.74 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 7,200
 
 *   **Features**:
@@ -55,7 +64,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'angle_label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'angle_label')`
 
 *   **Citation**:
 
@@ -68,11 +79,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/coil100-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -80,9 +93,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coil100-2.0.0.html";
 $(document).ready(() => {

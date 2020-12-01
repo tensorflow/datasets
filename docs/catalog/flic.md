@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://bensapp.github.io/flic-dataset.html" />
   <meta itemprop="citation" content="@inproceedings{modec13,&#10;    title={MODEC: Multimodal Decomposable Models for Human Pose Estimation},&#10;    author={Sapp, Benjamin and Taskar, Ben},&#10;    booktitle={In Proc. CVPR},&#10;    year={2013},&#10;  }" />
 </div>
+
 # `flic`
 
 *   **Description**:
@@ -22,23 +23,27 @@ was taken in each image to be robust to outlier annotation. Finally, images were
 rejected manually by us if the person was occluded or severely non-frontal. We
 set aside 20% (1016 images) of the data for testing.
 
-*   **Homepage**: [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
+*   **Homepage**:
+    [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
 
-*   **Source code**: [`tfds.image.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
+*   **Source code**:
+    [`tfds.image.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,016
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,016
 `'train'` | 3,987
 
 *   **Features**:
@@ -55,7 +60,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -68,18 +75,19 @@ FeaturesDict({
   }
 ```
 
-
 ## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.
 
 *   **Download size**: `286.35 MiB`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/flic-small-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -87,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flic-small-2.0.0.html";
 $(document).ready(() => {

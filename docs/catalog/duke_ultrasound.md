@@ -8,43 +8,47 @@
   <meta itemprop="sameAs" content="https://github.com/ouwen/mimicknet" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1908-05782,&#10;  author    = {Ouwen Huang and&#10;               Will Long and&#10;               Nick Bottenus and&#10;               Gregg E. Trahey and&#10;               Sina Farsiu and&#10;               Mark L. Palmeri},&#10;  title     = {MimickNet, Matching Clinical Post-Processing Under Realistic Black-Box&#10;               Constraints},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1908.05782},&#10;  year      = {2019},&#10;  url       = {http://arxiv.org/abs/1908.05782},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1908.05782},&#10;  timestamp = {Mon, 19 Aug 2019 13:21:03 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1908-05782},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `duke_ultrasound`
 
 *   **Description**:
 
 DukeUltrasound is an ultrasound dataset collected at Duke University with a
-Verasonics c52v probe. It contains delay-and-sum (DAS) beamformed data
-as well as data post-processed with Siemens Dynamic TCE for speckle
-reduction, contrast enhancement and improvement in conspicuity of
-anatomical structures. These data were collected with support from the
-National Institute of Biomedical Imaging and Bioengineering under Grant
-R01-EB026574 and National Institutes of Health under Grant 5T32GM007171-44.
-A usage example is available
+Verasonics c52v probe. It contains delay-and-sum (DAS) beamformed data as well
+as data post-processed with Siemens Dynamic TCE for speckle reduction, contrast
+enhancement and improvement in conspicuity of anatomical structures. These data
+were collected with support from the National Institute of Biomedical Imaging
+and Bioengineering under Grant R01-EB026574 and National Institutes of Health
+under Grant 5T32GM007171-44. A usage example is available
 [here](https://colab.research.google.com/drive/1R_ARqpWoiHcUQWg1Fxwyx-ZkLi0IZ5qs).
 
-*   **Homepage**: [https://github.com/ouwen/mimicknet](https://github.com/ouwen/mimicknet)
+*   **Homepage**:
+    [https://github.com/ouwen/mimicknet](https://github.com/ouwen/mimicknet)
 
-*   **Source code**: [`tfds.image.DukeUltrasound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/duke_ultrasound.py)
+*   **Source code**:
+    [`tfds.image.DukeUltrasound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/duke_ultrasound.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `12.78 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'A'` | 1,362
-`'B'` | 1,194
-`'MARK'` | 420
-`'test'` | 438
-`'train'` | 2,556
+Split          | Examples
+:------------- | -------:
+`'A'`          | 1,362
+`'B'`          | 1,194
+`'MARK'`       | 420
+`'test'`       | 438
+`'train'`      | 2,556
 `'validation'` | 278
 
 *   **Features**:
@@ -74,7 +78,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('das/dB', 'dtce')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('das/dB', 'dtce')`
 
 *   **Citation**:
 
@@ -100,9 +106,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -110,9 +119,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/duke_ultrasound-1.0.0.html";
 $(document).ready(() => {

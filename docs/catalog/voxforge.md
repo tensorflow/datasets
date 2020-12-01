@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="voxforge" />
   <meta itemprop="description" content="VoxForge is a language classification dataset. It consists of user submitted&#10;audio clips submitted to the website. In this release, data from 6 languages&#10;is collected - English, Spanish, French, German, Russian, and Italian.&#10;Since the website is constantly updated, and for the sake of reproducibility,&#10;this release contains only recordings submitted prior to 2020-01-01.&#10;The samples are splitted between train, validation and testing so that samples&#10;from each speaker belongs to exactly one split.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;voxforge&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/voxforge" />

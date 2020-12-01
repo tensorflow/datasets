@@ -8,29 +8,33 @@
   <meta itemprop="sameAs" content="http://www.waymo.com/open/" />
   <meta itemprop="citation" content="@InProceedings{Sun_2020_CVPR,&#10;author = {Sun, Pei and Kretzschmar, Henrik and Dotiwalla, Xerxes and Chouard, Aurelien and Patnaik, Vijaysai and Tsui, Paul and Guo, James and Zhou, Yin and Chai, Yuning and Caine, Benjamin and Vasudevan, Vijay and Han, Wei and Ngiam, Jiquan and Zhao, Hang and Timofeev, Aleksei and Ettinger, Scott and Krivokon, Maxim and Gao, Amy and Joshi, Aditya and Zhang, Yu and Shlens, Jonathon and Chen, Zhifeng and Anguelov, Dragomir},&#10;title = {Scalability in Perception for Autonomous Driving: Waymo Open Dataset},&#10;booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;month = {June},&#10;year = {2020}&#10;}" />
 </div>
+
 # `waymo_open_dataset`
 
 *   **Description**:
 
-The Waymo Open Dataset is comprised of high resolution sensor data
-collected by Waymo self-driving cars in a wide variety of conditions.
-This data is licensed for non-commercial use.
+The Waymo Open Dataset is comprised of high resolution sensor data collected by
+Waymo self-driving cars in a wide variety of conditions. This data is licensed
+for non-commercial use.
 
-WARNING: this dataset requires additional authorization and registration.
-Please look at tfds documentation for accessing GCS, and
-afterwards, please register via https://waymo.com/open/licensing/
+WARNING: this dataset requires additional authorization and registration. Please
+look at tfds documentation for accessing GCS, and afterwards, please register
+via https://waymo.com/open/licensing/
 
 *   **Homepage**: [http://www.waymo.com/open/](http://www.waymo.com/open/)
 
-*   **Source code**: [`tfds.object_detection.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
+*   **Source code**:
+    [`tfds.object_detection.WaymoOpenDataset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/waymo_open_dataset.py)
 
 *   **Versions**:
 
-    * **`0.2.0`** (default): No release notes.
+    *   **`0.2.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -78,7 +82,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -92,8 +98,9 @@ year = {2020}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## waymo_open_dataset/v1.2 (default config)
 
@@ -103,12 +110,13 @@ year = {2020}
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 158,081
+Split          | Examples
+:------------- | -------:
+`'train'`      | 158,081
 `'validation'` | 39,987
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -116,9 +124,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.2-0.2.0.html";
 $(document).ready(() => {

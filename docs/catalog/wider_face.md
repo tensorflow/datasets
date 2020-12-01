@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://shuoyang1213.me/WIDERFACE/" />
   <meta itemprop="citation" content="@inproceedings{yang2016wider,&#10; Author = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},&#10; Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;   Title = {WIDER FACE: A Face Detection Benchmark},&#10;  Year = {2016}}" />
 </div>
+
 # `wider_face`
 
 *   **Description**:
@@ -22,26 +23,30 @@ metric employed in the PASCAL VOC dataset. Similar to MALF and Caltech datasets,
 we do not release bounding box ground truth for the test images. Users are
 required to submit final prediction files, which we shall proceed to evaluate.
 
-*   **Homepage**: [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
+*   **Homepage**:
+    [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
 
-*   **Source code**: [`tfds.object_detection.WiderFace`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/wider_face.py)
+*   **Source code**:
+    [`tfds.object_detection.WiderFace`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/wider_face.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `3.42 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 16,097
-`'train'` | 12,880
+Split          | Examples
+:------------- | -------:
+`'test'`       | 16,097
+`'train'`      | 12,880
 `'validation'` | 3,226
 
 *   **Features**:
@@ -62,7 +67,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -74,11 +81,13 @@ FeaturesDict({
     Year = {2016}}
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/wider_face-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -86,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wider_face-0.1.0.html";
 $(document).ready(() => {

@@ -8,37 +8,42 @@
   <meta itemprop="sameAs" content="https://wilburone.github.io/cosmos/" />
   <meta itemprop="citation" content="@inproceedings{huang-etal-2019-cosmos,&#10;    title = &quot;Cosmos {QA}: Machine Reading Comprehension with Contextual Commonsense Reasoning&quot;,&#10;    author = &quot;Huang, Lifu  and&#10;      Le Bras, Ronan  and&#10;      Bhagavatula, Chandra  and&#10;      Choi, Yejin&quot;,&#10;    booktitle = &quot;Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)&quot;,&#10;    year = &quot;2019&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/D19-1243&quot;&#10;}" />
 </div>
+
 # `cosmos_qa`
 
 *   **Description**:
 
 Cosmos QA is a large-scale dataset of 35.6K problems that require
- commonsense-based reading comprehension, formulated as multiple-choice
- questions. It focuses on reading between the lines over a diverse collection
- of people's everyday narratives, asking questions concerning on the likely
- causes or effects of events that require reasoning beyond the exact text
- spans in the context.
+commonsense-based reading comprehension, formulated as multiple-choice
+questions. It focuses on reading between the lines over a diverse collection of
+people's everyday narratives, asking questions concerning on the likely causes
+or effects of events that require reasoning beyond the exact text spans in the
+context.
 
-*   **Homepage**: [https://wilburone.github.io/cosmos/](https://wilburone.github.io/cosmos/)
+*   **Homepage**:
+    [https://wilburone.github.io/cosmos/](https://wilburone.github.io/cosmos/)
 
-*   **Source code**: [`tfds.question_answering.CosmosQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/cosmos_qa.py)
+*   **Source code**:
+    [`tfds.question_answering.CosmosQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/cosmos_qa.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `23.27 MiB`
 
 *   **Dataset size**: `27.09 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 6,963
-`'train'` | 25,262
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,963
+`'train'`      | 25,262
 `'validation'` | 2,985
 
 *   **Features**:
@@ -56,7 +61,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -73,9 +80,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +93,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cosmos_qa-1.0.0.html";
 $(document).ready(() => {

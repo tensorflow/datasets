@@ -8,40 +8,46 @@
   <meta itemprop="sameAs" content="http://www.openslr.org/12" />
   <meta itemprop="citation" content="@inproceedings{panayotov2015librispeech,&#10;  title={Librispeech: an ASR corpus based on public domain audio books},&#10;  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},&#10;  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},&#10;  pages={5206--5210},&#10;  year={2015},&#10;  organization={IEEE}&#10;}" />
 </div>
+
 # `librispeech`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
-LibriSpeech is a corpus of approximately 1000 hours of read English speech with sampling rate of 16 kHz,
-prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read
-audiobooks from the LibriVox project, and has been carefully segmented and aligned.87
+LibriSpeech is a corpus of approximately 1000 hours of read English speech with
+sampling rate of 16 kHz, prepared by Vassil Panayotov with the assistance of
+Daniel Povey. The data is derived from read audiobooks from the LibriVox
+project, and has been carefully segmented and aligned.87
 
 *   **Homepage**: [http://www.openslr.org/12](http://www.openslr.org/12)
 
-*   **Source code**: [`tfds.audio.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
+*   **Source code**:
+    [`tfds.audio.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
 
 *   **Versions**:
 
-    * **`2.1.0`** (default): No release notes.
+    *   **`2.1.0`** (default): No release notes.
 
 *   **Download size**: `57.14 GiB`
 
 *   **Dataset size**: `304.47 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'dev_clean'` | 2,703
-`'dev_other'` | 2,864
-`'test_clean'` | 2,620
-`'test_other'` | 2,939
+Split              | Examples
+:----------------- | -------:
+`'dev_clean'`      | 2,703
+`'dev_other'`      | 2,864
+`'test_clean'`     | 2,620
+`'test_other'`     | 2,939
 `'train_clean100'` | 28,539
 `'train_clean360'` | 104,014
 `'train_other500'` | 148,688
@@ -58,7 +64,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('speech', 'text')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('speech', 'text')`
 
 *   **Citation**:
 
@@ -73,9 +81,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +94,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/librispeech-2.1.0.html";
 $(document).ready(() => {

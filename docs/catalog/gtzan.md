@@ -8,45 +8,50 @@
   <meta itemprop="sameAs" content="http://marsyas.info/index.html" />
   <meta itemprop="citation" content="@misc{tzanetakis_essl_cook_2001,&#10;author    = &quot;Tzanetakis, George and Essl, Georg and Cook, Perry&quot;,&#10;title     = &quot;Automatic Musical Genre Classification Of Audio Signals&quot;,&#10;url       = &quot;http://ismir2001.ismir.net/pdf/tzanetakis.pdf&quot;,&#10;publisher = &quot;The International Society for Music Information Retrieval&quot;,&#10;year      = &quot;2001&quot;&#10;}" />
 </div>
+
 # `gtzan`
 
 *   **Description**:
 
-The dataset consists of 1000 audio tracks each 30 seconds long.
-It contains 10 genres, each represented by 100 tracks.
-The tracks are all 22050Hz Mono 16-bit audio files in .wav format.
+The dataset consists of 1000 audio tracks each 30 seconds long. It contains 10
+genres, each represented by 100 tracks. The tracks are all 22050Hz Mono 16-bit
+audio files in .wav format.
 
 The genres are:
 
-* blues
-* classical
-* country
-* disco
-* hiphop
-* jazz
-* metal
-* pop
-* reggae
-* rock
+*   blues
+*   classical
+*   country
+*   disco
+*   hiphop
+*   jazz
+*   metal
+*   pop
+*   reggae
+*   rock
 
-*   **Homepage**: [http://marsyas.info/index.html](http://marsyas.info/index.html)
+*   **Homepage**:
+    [http://marsyas.info/index.html](http://marsyas.info/index.html)
 
-*   **Source code**: [`tfds.audio.gtzan.GTZAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/gtzan/gtzan.py)
+*   **Source code**:
+    [`tfds.audio.gtzan.GTZAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/gtzan/gtzan.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `1.14 GiB`
 
 *   **Dataset size**: `3.71 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 1,000
 
 *   **Features**:
@@ -59,7 +64,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -73,9 +80,12 @@ year      = "2001"
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +93,7 @@ year      = "2001"
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gtzan-1.0.0.html";
 $(document).ready(() => {

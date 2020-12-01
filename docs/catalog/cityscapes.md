@@ -8,62 +8,76 @@
   <meta itemprop="sameAs" content="https://www.cityscapes-dataset.com" />
   <meta itemprop="citation" content="@inproceedings{Cordts2016Cityscapes,&#10;  title={The Cityscapes Dataset for Semantic Urban Scene Understanding},&#10;  author={Cordts, Marius and Omran, Mohamed and Ramos, Sebastian and Rehfeld, Timo and Enzweiler, Markus and Benenson, Rodrigo and Franke, Uwe and Roth, Stefan and Schiele, Bernt},&#10;  booktitle={Proc. of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;  year={2016}&#10;}" />
 </div>
+
 # `cityscapes`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-Cityscapes is a dataset consisting of diverse urban street scenes across 50 different cities
-at varying times of the year as well as ground truths for several vision tasks including
-semantic segmentation, instance level segmentation (TODO), and stereo pair disparity inference.
+Cityscapes is a dataset consisting of diverse urban street scenes across 50
+different cities at varying times of the year as well as ground truths for
+several vision tasks including semantic segmentation, instance level
+segmentation (TODO), and stereo pair disparity inference.
 
-For segmentation tasks (default split, accessible via 'cityscapes/semantic_segmentation'), Cityscapes provides
-dense pixel level annotations for 5000 images at 1024 * 2048 resolution pre-split into training (2975),
-validation (500) and test (1525) sets. Label annotations for segmentation tasks span across 30+ classes
-commonly encountered during driving scene perception. Detailed label information may be found here:
+For segmentation tasks (default split, accessible via
+'cityscapes/semantic_segmentation'), Cityscapes provides dense pixel level
+annotations for 5000 images at 1024 * 2048 resolution pre-split into training
+(2975), validation (500) and test (1525) sets. Label annotations for
+segmentation tasks span across 30+ classes commonly encountered during driving
+scene perception. Detailed label information may be found here:
 https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/helpers/labels.py#L52-L99
 
-Cityscapes also provides coarse grain segmentation annotations (accessible via 'cityscapes/semantic_segmentation_extra')
-for 19998 images in a 'train_extra' split which may prove useful for pretraining / data-heavy models.
+Cityscapes also provides coarse grain segmentation annotations (accessible via
+'cityscapes/semantic_segmentation_extra') for 19998 images in a 'train_extra'
+split which may prove useful for pretraining / data-heavy models.
 
-Besides segmentation, cityscapes also provides stereo image pairs and ground truths for disparity inference
-tasks on both the normal and extra splits (accessible via 'cityscapes/stereo_disparity' and
+Besides segmentation, cityscapes also provides stereo image pairs and ground
+truths for disparity inference tasks on both the normal and extra splits
+(accessible via 'cityscapes/stereo_disparity' and
 'cityscapes/stereo_disparity_extra' respectively).
 
 Ingored examples:
 
-- For 'cityscapes/stereo_disparity_extra':
-  - troisdorf_000000_000073_{*} images (no disparity map present)
+-   For 'cityscapes/stereo_disparity_extra':
+    -   troisdorf_000000_000073_{*} images (no disparity map present)
 
-WARNING: this dataset requires users to setup a login and password in order to get the files.
+WARNING: this dataset requires users to setup a login and password in order to
+get the files.
 
-*   **Homepage**: [https://www.cityscapes-dataset.com](https://www.cityscapes-dataset.com)
+*   **Homepage**:
+    [https://www.cityscapes-dataset.com](https://www.cityscapes-dataset.com)
 
-*   **Source code**: [`tfds.image.Cityscapes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cityscapes.py)
+*   **Source code**:
+    [`tfds.image.Cityscapes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cityscapes.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-You have to download files from https://www.cityscapes-dataset.com/login/
-(This dataset requires registration).
-For basic config (semantic_segmentation) you must download
-'leftImg8bit_trainvaltest.zip' and 'gtFine_trainvaltest.zip'.
-Other configs do require additional files - please see code for more details.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    You have to download files from https://www.cityscapes-dataset.com/login/
+    (This dataset requires registration).
+    For basic config (semantic_segmentation) you must download
+    'leftImg8bit_trainvaltest.zip' and 'gtFine_trainvaltest.zip'.
+    Other configs do require additional files - please see code for more details.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -76,8 +90,9 @@ Other configs do require additional files - please see code for more details.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## cityscapes/semantic_segmentation (default config)
 
@@ -87,10 +102,10 @@ Other configs do require additional files - please see code for more details.
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,525
-`'train'` | 2,975
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,525
+`'train'`      | 2,975
 `'validation'` | 500
 
 *   **Features**:
@@ -103,7 +118,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -111,9 +127,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cityscapes-semantic_segmentation-1.0.0.html";
 $(document).ready(() => {

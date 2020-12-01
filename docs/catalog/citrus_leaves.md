@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://data.mendeley.com/datasets/3f83gxmv57/2" />
   <meta itemprop="citation" content="@article{rauf2019citrus,&#10;  title={A citrus fruits and leaves dataset for detection and classification of&#10;citrus diseases through machine learning},&#10;  author={Rauf, Hafiz Tayyab and Saleem, Basharat Ali and Lali, M Ikram Ullah&#10;and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},&#10;  journal={Data in brief},&#10;  volume={26},&#10;  pages={104340},&#10;  year={2019},&#10;  publisher={Elsevier}&#10;}" />
 </div>
+
 # `citrus_leaves`
 
 *   **Description**:
@@ -20,27 +21,31 @@ exported images are in PNG format and have 256x256 pixels.
 NOTE: Leaf images with Melanose label were dropped due to very small count and
 other non-leaf images being present in the same directory.
 
-Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2
-License: http://creativecommons.org/licenses/by/4.0
+Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2 License:
+http://creativecommons.org/licenses/by/4.0
 
-*   **Homepage**: [https://data.mendeley.com/datasets/3f83gxmv57/2](https://data.mendeley.com/datasets/3f83gxmv57/2)
+*   **Homepage**:
+    [https://data.mendeley.com/datasets/3f83gxmv57/2](https://data.mendeley.com/datasets/3f83gxmv57/2)
 
-*   **Source code**: [`tfds.image_classification.CitrusLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/citrus.py)
+*   **Source code**:
+    [`tfds.image_classification.CitrusLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/citrus.py)
 
 *   **Versions**:
 
-    * **`0.1.1`** (default): No release notes.
+    *   **`0.1.1`** (default): No release notes.
 
 *   **Download size**: `63.87 MiB`
 
 *   **Dataset size**: `37.89 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 594
 
 *   **Features**:
@@ -53,7 +58,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -71,11 +78,13 @@ and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/citrus_leaves-0.1.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +92,7 @@ and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/citrus_leaves-0.1.1.html";
 $(document).ready(() => {

@@ -8,41 +8,49 @@
   <meta itemprop="sameAs" content="http://www.6d-vision.com/lostandfounddataset" />
   <meta itemprop="citation" content="@inproceedings{pinggera2016lost,&#10;  title={Lost and found: detecting small road hazards for self-driving vehicles},&#10;  author={Pinggera, Peter and Ramos, Sebastian and Gehrig, Stefan and Franke, Uwe and Rother, Carsten and Mester, Rudolf},&#10;  booktitle={2016 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},&#10;  year={2016}&#10;}" />
 </div>
+
 # `lost_and_found`
 
 *   **Description**:
 
-The LostAndFound Dataset addresses the problem of detecting unexpected small obstacles on
-the road often caused by lost cargo. The dataset comprises 112 stereo video sequences
-with 2104 annotated frames (picking roughly every tenth frame from the recorded data).
+The LostAndFound Dataset addresses the problem of detecting unexpected small
+obstacles on the road often caused by lost cargo. The dataset comprises 112
+stereo video sequences with 2104 annotated frames (picking roughly every tenth
+frame from the recorded data).
 
-The dataset is designed analogous to the 'Cityscapes' dataset. The datset provides:
-- stereo image pairs in either 8 or 16 bit color resolution
-- precomputed disparity maps
-- coarse semantic labels for objects and street
+The dataset is designed analogous to the 'Cityscapes' dataset. The datset
+provides: - stereo image pairs in either 8 or 16 bit color resolution -
+precomputed disparity maps - coarse semantic labels for objects and street
 
-Descriptions of the labels are given here: http://www.6d-vision.com/laf_table.pdf
+Descriptions of the labels are given here:
+http://www.6d-vision.com/laf_table.pdf
 
-*   **Homepage**: [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
+*   **Homepage**:
+    [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
 
-*   **Source code**: [`tfds.image.LostAndFound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lost_and_found.py)
+*   **Source code**:
+    [`tfds.image.LostAndFound`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lost_and_found.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,203
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,203
 `'train'` | 1,036
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -55,8 +63,9 @@ Split  | Examples
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## lost_and_found/semantic_segmentation (default config)
 
@@ -74,7 +83,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -82,9 +92,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lost_and_found-semantic_segmentation-1.0.0.html";
 $(document).ready(() => {

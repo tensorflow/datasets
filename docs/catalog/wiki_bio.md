@@ -8,34 +8,39 @@
   <meta itemprop="sameAs" content="https://github.com/DavidGrangier/wikipedia-biography-dataset" />
   <meta itemprop="citation" content="@inproceedings{lebret-etal-2016-neural,&#10;    title = &quot;Neural Text Generation from Structured Data with Application to the Biography Domain&quot;,&#10;    author = &quot;Lebret, R{&#x27;e}mi  and&#10;      Grangier, David  and&#10;      Auli, Michael&quot;,&#10;    booktitle = &quot;Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing&quot;,&#10;    month = nov,&#10;    year = &quot;2016&quot;,&#10;    address = &quot;Austin, Texas&quot;,&#10;    publisher = &quot;Association for Computational Linguistics&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/D16-1128&quot;,&#10;    doi = &quot;10.18653/v1/D16-1128&quot;,&#10;    pages = &quot;1203--1213&quot;,&#10;}" />
 </div>
+
 # `wiki_bio`
 
 *   **Description**:
 
 WikiBio is constructed using Wikipedia biography pages, it contains the first
-paragraph and the infobox tokenized.
-The dataset follows a standarized table format.
+paragraph and the infobox tokenized. The dataset follows a standarized table
+format.
 
-*   **Homepage**: [https://github.com/DavidGrangier/wikipedia-biography-dataset](https://github.com/DavidGrangier/wikipedia-biography-dataset)
+*   **Homepage**:
+    [https://github.com/DavidGrangier/wikipedia-biography-dataset](https://github.com/DavidGrangier/wikipedia-biography-dataset)
 
-*   **Source code**: [`tfds.structured.WikiBio`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/wiki_bio.py)
+*   **Source code**:
+    [`tfds.structured.WikiBio`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/wiki_bio.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `318.53 MiB`
 
 *   **Dataset size**: `795.98 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 72,831
-`'train'` | 582,659
+Split          | Examples
+:------------- | -------:
+`'test'`       | 72,831
+`'train'`      | 582,659
 `'validation'` | 72,831
 
 *   **Features**:
@@ -54,7 +59,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('input_text', 'target_text')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('input_text', 'target_text')`
 
 *   **Citation**:
 
@@ -75,9 +82,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wiki_bio-0.1.0.html";
 $(document).ready(() => {

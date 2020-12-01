@@ -8,31 +8,37 @@
   <meta itemprop="sameAs" content="http://kavita-ganesan.com/opinosis/" />
   <meta itemprop="citation" content="@inproceedings{ganesan2010opinosis,&#10;  title={Opinosis: a graph-based approach to abstractive summarization of highly redundant opinions},&#10;  author={Ganesan, Kavita and Zhai, ChengXiang and Han, Jiawei},&#10;  booktitle={Proceedings of the 23rd International Conference on Computational Linguistics},&#10;  pages={340--348},&#10;  year={2010},&#10;  organization={Association for Computational Linguistics}&#10;}" />
 </div>
+
 # `opinosis`
 
 *   **Description**:
 
-The Opinosis Opinion Dataset consists of sentences extracted from reviews for 51 topics.
-Topics and opinions are obtained from Tripadvisor, Edmunds.com and Amazon.com.
+The Opinosis Opinion Dataset consists of sentences extracted from reviews for 51
+topics. Topics and opinions are obtained from Tripadvisor, Edmunds.com and
+Amazon.com.
 
-*   **Homepage**: [http://kavita-ganesan.com/opinosis/](http://kavita-ganesan.com/opinosis/)
+*   **Homepage**:
+    [http://kavita-ganesan.com/opinosis/](http://kavita-ganesan.com/opinosis/)
 
-*   **Source code**: [`tfds.summarization.Opinosis`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinosis.py)
+*   **Source code**:
+    [`tfds.summarization.Opinosis`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinosis.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `739.65 KiB`
 
 *   **Dataset size**: `725.45 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 51
 
 *   **Features**:
@@ -44,7 +50,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('review_sents', 'summaries')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('review_sents', 'summaries')`
 
 *   **Citation**:
 
@@ -59,9 +67,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -69,9 +80,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/opinosis-1.0.0.html";
 $(document).ready(() => {

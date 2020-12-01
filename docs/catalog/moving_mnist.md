@@ -8,33 +8,39 @@
   <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~nitish/unsupervised_video/" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/SrivastavaMS15,&#10;  author    = {Nitish Srivastava and&#10;               Elman Mansimov and&#10;               Ruslan Salakhutdinov},&#10;  title     = {Unsupervised Learning of Video Representations using LSTMs},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1502.04681},&#10;  year      = {2015},&#10;  url       = {http://arxiv.org/abs/1502.04681},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1502.04681},&#10;  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `moving_mnist`
 
 *   **Description**:
 
-Moving variant of MNIST database of handwritten digits. This is the
-data used by the authors for reporting model performance. See
-`tfds.video.moving_mnist.image_as_moving_sequence`
-for generating training/validation data from the MNIST dataset.
+Moving variant of MNIST database of handwritten digits. This is the data used by
+the authors for reporting model performance. See
+`tfds.video.moving_mnist.image_as_moving_sequence` for generating
+training/validation data from the MNIST dataset.
 
-*   **Homepage**: [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
+*   **Homepage**:
+    [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
-*   **Source code**: [`tfds.video.MovingMnist`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/moving_mnist.py)
+*   **Source code**:
+    [`tfds.video.MovingMnist`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/moving_mnist.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `91.70 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split    | Examples
+:------- | -------:
 `'test'` | 10,000
 
 *   **Features**:
@@ -45,7 +51,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -67,9 +75,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -77,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/moving_mnist-1.0.0.html";
 $(document).ready(() => {

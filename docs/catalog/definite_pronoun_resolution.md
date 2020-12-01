@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://www.hlt.utdallas.edu/~vince/data/emnlp12/" />
   <meta itemprop="citation" content="@inproceedings{rahman2012resolving,&#10;  title={Resolving complex cases of definite pronouns: the winograd schema challenge},&#10;  author={Rahman, Altaf and Ng, Vincent},&#10;  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},&#10;  pages={777--789},&#10;  year={2012},&#10;  organization={Association for Computational Linguistics}&#10;}" />
 </div>
+
 # `definite_pronoun_resolution`
 
 *   **Description**:
@@ -22,25 +23,29 @@ the target pronoun, the third line contains the two candidate antecedents, and
 the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 
-*   **Homepage**: [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+*   **Homepage**:
+    [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
-*   **Source code**: [`tfds.text.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
+*   **Source code**:
+    [`tfds.text.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `222.12 KiB`
 
 *   **Dataset size**: `334.22 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 564
+Split     | Examples
+:-------- | -------:
+`'test'`  | 564
 `'train'` | 1,322
 
 *   **Features**:
@@ -54,7 +59,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('sentence', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('sentence', 'label')`
 
 *   **Citation**:
 
@@ -69,9 +76,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +89,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/definite_pronoun_resolution-1.1.0.html";
 $(document).ready(() => {

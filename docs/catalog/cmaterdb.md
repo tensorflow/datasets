@@ -8,28 +8,38 @@
   <meta itemprop="sameAs" content="https://code.google.com/archive/p/cmaterdb/" />
   <meta itemprop="citation" content="@article{Das:2012:GAB:2161007.2161320,&#10;  author = {Das, Nibaran and Sarkar, Ram and Basu, Subhadip and Kundu, Mahantapas &#10;            and Nasipuri, Mita and Basu, Dipak Kumar},&#10;  title = {A Genetic Algorithm Based Region Sampling for Selection of Local Features &#10;          in Handwritten Digit Recognition Application},&#10;  journal = {Appl. Soft Comput.},&#10;  issue_date = {May, 2012},&#10;  volume = {12},&#10;  number = {5},&#10;  month = may,&#10;  year = {2012},&#10;  issn = {1568-4946},&#10;  pages = {1592--1606},&#10;  numpages = {15},&#10;  url = {http://dx.doi.org/10.1016/j.asoc.2011.11.030},&#10;  doi = {10.1016/j.asoc.2011.11.030},&#10;  acmid = {2161320},&#10;  publisher = {Elsevier Science Publishers B. V.},&#10;  address = {Amsterdam, The Netherlands, The Netherlands},&#10;  keywords = {Feature selection, Genetic algorithm, N-Quality consensus, &#10;  Optimal local regions, Region sampling, Variable sized local regions},&#10;}&#10;@article{Das:2012:SFC:2240301.2240421,&#10;  author = {Das, Nibaran and Reddy, Jagan Mohan and Sarkar, Ram and Basu, Subhadip and Kundu, &#10;            Mahantapas and Nasipuri, Mita and Basu, Dipak Kumar},&#10;  title = {A Statistical-topological Feature Combination for Recognition of Handwritten Numerals},&#10;  journal = {Appl. Soft Comput.},&#10;  issue_date = {August, 2012},&#10;  volume = {12},&#10;  number = {8},&#10;  month = aug,&#10;  year = {2012},&#10;  issn = {1568-4946},&#10;  pages = {2486--2495},&#10;  numpages = {10},&#10;  url = {http://dx.doi.org/10.1016/j.asoc.2012.03.039},&#10;  doi = {10.1016/j.asoc.2012.03.039},&#10;  acmid = {2240421},&#10;  publisher = {Elsevier Science Publishers B. V.},&#10;  address = {Amsterdam, The Netherlands, The Netherlands},&#10;  keywords = {Character recognition, Feature combination, MPCA, PCA, SVM, Statistical, Topological},&#10;}" />
 </div>
+
 # `cmaterdb`
 
 *   **Description**:
 
-This dataset contains images of -
-  Handwritten Bangla numerals - balanced dataset of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600 images per class(per digit).
-  Handwritten Devanagari numerals - balanced dataset of total 3000 Devanagari numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit).
-  Handwritten Telugu numerals - balanced dataset of total 3000 Telugu numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit).
+This dataset contains images of - Handwritten Bangla numerals - balanced dataset
+of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600
+images per class(per digit). Handwritten Devanagari numerals - balanced dataset
+of total 3000 Devanagari numerals (32x32 RGB coloured, 3000 images), each having
+300 images per class(per digit). Handwritten Telugu numerals - balanced dataset
+of total 3000 Telugu numerals (32x32 RGB coloured, 3000 images), each having 300
+images per class(per digit).
 
-CMATERdb is the pattern recognition database repository created at the 'Center for Microprocessor Applications for Training Education and Research' (CMATER) research lab, Jadavpur University, India.
+CMATERdb is the pattern recognition database repository created at the 'Center
+for Microprocessor Applications for Training Education and Research' (CMATER)
+research lab, Jadavpur University, India.
 
-*   **Homepage**: [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
+*   **Homepage**:
+    [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
-*   **Source code**: [`tfds.image_classification.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cmaterdb.py)
+*   **Source code**:
+    [`tfds.image_classification.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cmaterdb.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Features**:
 
@@ -40,7 +50,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -89,7 +101,6 @@ FeaturesDict({
 }
 ```
 
-
 ## cmaterdb/bangla (default config)
 
 *   **Config description**: CMATERdb Bangla Numerals
@@ -98,16 +109,18 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,000
 `'train'` | 5,000
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/cmaterdb-bangla-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -115,9 +128,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cmaterdb-bangla-1.0.0.html";
 $(document).ready(() => {

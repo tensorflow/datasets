@@ -8,38 +8,43 @@
   <meta itemprop="sameAs" content="http://winogrande.allenai.org/" />
   <meta itemprop="citation" content="@article{sakaguchi2019winogrande,&#10;    title={WinoGrande: An Adversarial Winograd Schema Challenge at Scale},&#10;    author={Sakaguchi, Keisuke and Bras, Ronan Le and Bhagavatula, Chandra and Choi, Yejin},&#10;    journal={arXiv preprint arXiv:1907.10641},&#10;    year={2019}&#10;}" />
 </div>
+
 # `winogrande`
 
 *   **Description**:
 
-The  WinoGrande, a large-scale dataset of 44k problems, inspired by the original
- Winograd Schema Challenge design, but adjusted to improve both the scale and
- the hardness of the dataset.
+The WinoGrande, a large-scale dataset of 44k problems, inspired by the original
+Winograd Schema Challenge design, but adjusted to improve both the scale and the
+hardness of the dataset.
 
-*   **Homepage**: [http://winogrande.allenai.org/](http://winogrande.allenai.org/)
+*   **Homepage**:
+    [http://winogrande.allenai.org/](http://winogrande.allenai.org/)
 
-*   **Source code**: [`tfds.text.Winogrande`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/winogrande.py)
+*   **Source code**:
+    [`tfds.text.Winogrande`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/winogrande.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `2.67 MiB`
 
 *   **Dataset size**: `9.97 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,767
-`'train_l'` | 10,234
-`'train_m'` | 2,558
-`'train_s'` | 640
-`'train_xl'` | 40,398
-`'train_xs'` | 160
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,767
+`'train_l'`    | 10,234
+`'train_m'`    | 2,558
+`'train_s'`    | 640
+`'train_xl'`   | 40,398
+`'train_xs'`   | 160
 `'validation'` | 1,267
 
 *   **Features**:
@@ -53,7 +58,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -66,9 +73,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -76,9 +86,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/winogrande-1.1.0.html";
 $(document).ready(() => {

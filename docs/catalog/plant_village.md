@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://arxiv.org/abs/1511.08060" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/HughesS15,&#10;  author    = {David P. Hughes and&#10;               Marcel Salath{&#x27;{e}}},&#10;  title     = {An open access repository of images on plant health to enable the&#10;               development of mobile disease diagnostics through machine&#10;               learning and crowdsourcing},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1511.08060},&#10;  year      = {2015},&#10;  url       = {http://arxiv.org/abs/1511.08060},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1511.08060},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:21 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/HughesS15},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `plant_village`
 
 *   **Description**:
@@ -21,27 +22,31 @@ used that dataset and republished it. Moreover, we dropped images with
 Background_without_leaves label, because these were not present in the original
 dataset.
 
-Original paper URL: https://arxiv.org/abs/1511.08060
-Dataset URL: https://data.mendeley.com/datasets/tywbtsjrjv/1
+Original paper URL: https://arxiv.org/abs/1511.08060 Dataset URL:
+https://data.mendeley.com/datasets/tywbtsjrjv/1
 
-*   **Homepage**: [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
+*   **Homepage**:
+    [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
 
-*   **Source code**: [`tfds.image_classification.PlantVillage`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_village.py)
+*   **Source code**:
+    [`tfds.image_classification.PlantVillage`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_village.py)
 
 *   **Versions**:
 
-    * **`1.0.2`** (default): No release notes.
+    *   **`1.0.2`** (default): No release notes.
 
 *   **Download size**: `827.82 MiB`
 
 *   **Dataset size**: `815.37 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 54,303
 
 *   **Features**:
@@ -54,7 +59,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -77,11 +84,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/plant_village-1.0.2.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +98,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/plant_village-1.0.2.html";
 $(document).ready(() => {

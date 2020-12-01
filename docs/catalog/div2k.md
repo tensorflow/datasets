@@ -8,23 +8,29 @@
   <meta itemprop="sameAs" content="https://data.vision.ee.ethz.ch/cvl/DIV2K/" />
   <meta itemprop="citation" content="@InProceedings{Agustsson_2017_CVPR_Workshops,&#10; author = {Agustsson, Eirikur and Timofte, Radu},&#10;   title = {NTIRE 2017 Challenge on Single Image Super-Resolution: Dataset and Study},&#10;    booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},&#10;    url = &quot;http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf&quot;,&#10; month = {July},&#10;    year = {2017}&#10;}" />
 </div>
+
 # `div2k`
 
 *   **Description**:
 
-DIV2K dataset: DIVerse 2K resolution high quality images as used for the challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
+DIV2K dataset: DIVerse 2K resolution high quality images as used for the
+challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
 
-*   **Homepage**: [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
+*   **Homepage**:
+    [https://data.vision.ee.ethz.ch/cvl/DIV2K/](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
 
-*   **Source code**: [`tfds.image.Div2k`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/div2k.py)
+*   **Source code**:
+    [`tfds.image.Div2k`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/div2k.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Features**:
 
@@ -35,7 +41,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('lr', 'hr')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('lr', 'hr')`
 
 *   **Citation**:
 
@@ -50,8 +58,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## div2k/bicubic_x2 (default config)
 
@@ -61,12 +70,13 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 800
+Split          | Examples
+:------------- | -------:
+`'train'`      | 800
 `'validation'` | 100
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +84,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/div2k-bicubic_x2-2.0.0.html";
 $(document).ready(() => {

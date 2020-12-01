@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://data.mendeley.com/datasets/hb74ynkjcn/1" />
   <meta itemprop="citation" content="@misc{,&#10;  author={Siddharth Singh Chouhan, Ajay Kaul, Uday Pratap Singh, Sanjeev&#10;Jain},&#10;  title={A Database of Leaf Images: Practice towards Plant Conservation with&#10;Plant Pathology},&#10;  howpublished={Mendeley Data},&#10;  year={2019}&#10;}" />
 </div>
+
 # `plant_leaves`
 
 *   **Description**:
@@ -23,27 +24,31 @@ Note: Each image is a separate download. Some might rarely fail, therefore make
 sure to restart if that happens. An exception will be raised in case one of the
 downloads repeatedly fails.
 
-Dataset URL: https://data.mendeley.com/datasets/hb74ynkjcn/1
-License: http://creativecommons.org/licenses/by/4.0
+Dataset URL: https://data.mendeley.com/datasets/hb74ynkjcn/1 License:
+http://creativecommons.org/licenses/by/4.0
 
-*   **Homepage**: [https://data.mendeley.com/datasets/hb74ynkjcn/1](https://data.mendeley.com/datasets/hb74ynkjcn/1)
+*   **Homepage**:
+    [https://data.mendeley.com/datasets/hb74ynkjcn/1](https://data.mendeley.com/datasets/hb74ynkjcn/1)
 
-*   **Source code**: [`tfds.image_classification.PlantLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_leaves.py)
+*   **Source code**:
+    [`tfds.image_classification.PlantLeaves`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/plant_leaves.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `6.81 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 4,502
 
 *   **Features**:
@@ -56,7 +61,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -71,11 +78,13 @@ Plant Pathology},
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/plant_leaves-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -83,9 +92,7 @@ Plant Pathology},
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/plant_leaves-0.1.0.html";
 $(document).ready(() => {

@@ -8,36 +8,46 @@
   <meta itemprop="sameAs" content="http://ai.stanford.edu/~amaas/data/sentiment/" />
   <meta itemprop="citation" content="@InProceedings{maas-EtAl:2011:ACL-HLT2011,&#10;  author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},&#10;  title     = {Learning Word Vectors for Sentiment Analysis},&#10;  booktitle = {Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies},&#10;  month     = {June},&#10;  year      = {2011},&#10;  address   = {Portland, Oregon, USA},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {142--150},&#10;  url       = {http://www.aclweb.org/anthology/P11-1015}&#10;}" />
 </div>
+
 # `imdb_reviews`
 
 *   **Description**:
 
-Large Movie Review Dataset.
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well.
+Large Movie Review Dataset. This is a dataset for binary sentiment
+classification containing substantially more data than previous benchmark
+datasets. We provide a set of 25,000 highly polar movie reviews for training,
+and 25,000 for testing. There is additional unlabeled data for use as well.
 
-*   **Homepage**: [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
+*   **Homepage**:
+    [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
-*   **Source code**: [`tfds.text.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
+*   **Source code**:
+    [`tfds.text.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `80.23 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 25,000
-`'train'` | 25,000
+Split            | Examples
+:--------------- | -------:
+`'test'`         | 25,000
+`'train'`        | 25,000
 `'unsupervised'` | 50,000
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'label')`
 
 *   **Citation**:
 
@@ -55,8 +65,9 @@ Split  | Examples
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## imdb_reviews/plain_text (default config)
 
@@ -71,7 +82,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +91,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-plain_text-1.0.0.html";
 $(document).ready(() => {

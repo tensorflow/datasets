@@ -8,32 +8,40 @@
   <meta itemprop="sameAs" content="https://ai.stanford.edu/~jkrause/cars/car_dataset.html" />
   <meta itemprop="citation" content="@inproceedings{KrauseStarkDengFei-Fei_3DRR2013,&#10;title = {3D Object Representations for Fine-Grained Categorization},&#10;booktitle = {4th International IEEE Workshop on  3D Representation and Recognition (3dRR-13)},&#10;year = {2013},&#10;address = {Sydney, Australia},&#10;author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}&#10;}" />
 </div>
+
 # `cars196`
 
 *   **Description**:
 
-The Cars dataset contains 16,185 images of 196 classes of cars. The data is split into 8,144 training images and 8,041 testing images, where each class has been split roughly in a 50-50 split. Classes are typically at the level of Make, Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
+The Cars dataset contains 16,185 images of 196 classes of cars. The data is
+split into 8,144 training images and 8,041 testing images, where each class has
+been split roughly in a 50-50 split. Classes are typically at the level of Make,
+Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
-*   **Homepage**: [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
+*   **Homepage**:
+    [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
 
-*   **Source code**: [`tfds.image_classification.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cars196.py)
+*   **Source code**:
+    [`tfds.image_classification.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cars196.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
-    * `2.1.0`: No release notes.
+    *   **`2.0.0`** (default): No release notes.
+    *   `2.1.0`: No release notes.
 
 *   **Download size**: `1.82 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 8,041
+Split     | Examples
+:-------- | -------:
+`'test'`  | 8,041
 `'train'` | 8,144
 
 *   **Features**:
@@ -46,7 +54,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -60,11 +70,13 @@ author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/cars196-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -72,9 +84,7 @@ author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cars196-2.0.0.html";
 $(document).ready(() => {

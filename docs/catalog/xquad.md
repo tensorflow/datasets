@@ -8,21 +8,34 @@
   <meta itemprop="sameAs" content="https://github.com/deepmind/xquad" />
   <meta itemprop="citation" content="@article{Artetxe:etal:2019,&#10;      author    = {Mikel Artetxe and Sebastian Ruder and Dani Yogatama},&#10;      title     = {On the cross-lingual transferability of monolingual representations},&#10;      journal   = {CoRR},&#10;      volume    = {abs/1910.11856},&#10;      year      = {2019},&#10;      archivePrefix = {arXiv},&#10;      eprint    = {1910.11856}&#10;}" />
 </div>
+
 # `xquad`
 
 *   **Description**:
 
-XQuAD (Cross-lingual Question Answering Dataset) is a benchmark dataset for evaluating cross-lingual question answering performance. The dataset consists of a subset of 240 paragraphs and 1190 question-answer pairs from the development set of SQuAD v1.1 (Rajpurkar et al., 2016) together with their professional translations into ten languages: Spanish, German, Greek, Russian, Turkish, Arabic, Vietnamese, Thai, Chinese, and Hindi. Consequently, the dataset is entirely parallel across 11 languages. To run XQuAD in the default zero-shot setting, use the SQuAD v1.1 training and validation data here: https://www.tensorflow.org/datasets/catalog/squad
+XQuAD (Cross-lingual Question Answering Dataset) is a benchmark dataset for
+evaluating cross-lingual question answering performance. The dataset consists of
+a subset of 240 paragraphs and 1190 question-answer pairs from the development
+set of SQuAD v1.1 (Rajpurkar et al., 2016) together with their professional
+translations into ten languages: Spanish, German, Greek, Russian, Turkish,
+Arabic, Vietnamese, Thai, Chinese, and Hindi. Consequently, the dataset is
+entirely parallel across 11 languages. To run XQuAD in the default zero-shot
+setting, use the SQuAD v1.1 training and validation data here:
+https://www.tensorflow.org/datasets/catalog/squad
 
-We also include "translate-train", "translate-dev", and "translate-test" splits for each non-English language from XTREME (Hu et al., 2020). These can be used to run XQuAD in the "translate-train" or "translate-test" settings.
+We also include "translate-train", "translate-dev", and "translate-test" splits
+for each non-English language from XTREME (Hu et al., 2020). These can be used
+to run XQuAD in the "translate-train" or "translate-test" settings.
 
-*   **Homepage**: [https://github.com/deepmind/xquad](https://github.com/deepmind/xquad)
+*   **Homepage**:
+    [https://github.com/deepmind/xquad](https://github.com/deepmind/xquad)
 
-*   **Source code**: [`tfds.question_answering.Xquad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/xquad.py)
+*   **Source code**:
+    [`tfds.question_answering.Xquad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/xquad.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Features**:
 
@@ -39,7 +52,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -55,29 +70,35 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## xquad/ar (default config)
 
-*   **Config description**: XQuAD 'ar' test split, with machine-translated translate-train/translate-dev/translate-test splits from XTREME (Hu et al., 2020).
+*   **Config description**: XQuAD 'ar' test split, with machine-translated
+    translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
+    2020).
 
 *   **Download size**: `420.97 MiB`
 
 *   **Dataset size**: `134.78 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,190
-`'translate-dev'` | 10,541
-`'translate-test'` | 1,151
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,541
+`'translate-test'`  | 1,151
 `'translate-train'` | 86,787
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +106,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xquad-ar-2.0.0.html";
 $(document).ready(() => {

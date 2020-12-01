@@ -8,23 +8,30 @@
   <meta itemprop="sameAs" content="https://github.com/facebookresearch/MLQA" />
   <meta itemprop="citation" content="@article{lewis2019mlqa,&#10;  title={MLQA: Evaluating Cross-lingual Extractive Question Answering},&#10;  author={Lewis, Patrick and Ouguz, Barlas and Rinott, Ruty and Riedel,   Sebastian and Schwenk, Holger},&#10;  journal={arXiv preprint arXiv:1910.07475},&#10;  year={2019}&#10;}" />
 </div>
+
 # `mlqa`
 
 *   **Description**:
 
-MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for evaluating multilingual question answering performance. The dataset consists of 7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.
+MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for
+evaluating multilingual question answering performance. The dataset consists of
+7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.
 
-*   **Homepage**: [https://github.com/facebookresearch/MLQA](https://github.com/facebookresearch/MLQA)
+*   **Homepage**:
+    [https://github.com/facebookresearch/MLQA](https://github.com/facebookresearch/MLQA)
 
-*   **Source code**: [`tfds.question_answering.Mlqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/mlqa.py)
+*   **Source code**:
+    [`tfds.question_answering.Mlqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/mlqa.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `72.21 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -41,7 +48,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -54,8 +63,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## mlqa/ar (default config)
 
@@ -65,12 +75,13 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 5,335
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,335
 `'validation'` | 517
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +89,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mlqa-ar-1.0.0.html";
 $(document).ready(() => {

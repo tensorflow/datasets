@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/google-research/google-research/tree/master/genomics_ood" />
   <meta itemprop="citation" content="@inproceedings{ren2019likelihood,&#10;  title={Likelihood ratios for out-of-distribution detection},&#10;  author={Ren, Jie and&#10;  Liu, Peter J and&#10;  Fertig, Emily and&#10;  Snoek, Jasper and&#10;  Poplin, Ryan and&#10;  Depristo, Mark and&#10;  Dillon, Joshua and&#10;  Lakshminarayanan, Balaji},&#10;  booktitle={Advances in Neural Information Processing Systems},&#10;  pages={14707--14718},&#10;  year={2019}&#10;}" />
 </div>
+
 # `genomics_ood`
 
 *   **Description**:
@@ -34,37 +35,40 @@ The genomic sequence is 250 long, composed by characters of {A, C, G, T}. The
 sample size of each class is 100,000 in the training and 10,000 for the
 validation and test sets.
 
-For each example, the features include:
-  seq: the input DNA sequence composed by {A, C, G, T}.
-  label: the name of the bacteria class.
-  seq_info: the source of the DNA sequence, i.e., the genome name, NCBI
-  accession number, and the position where it was sampled from.
-  domain: if the bacteria is in-distribution (in), or OOD (ood)
+For each example, the features include: seq: the input DNA sequence composed by
+{A, C, G, T}. label: the name of the bacteria class. seq_info: the source of the
+DNA sequence, i.e., the genome name, NCBI accession number, and the position
+where it was sampled from. domain: if the bacteria is in-distribution (in), or
+OOD (ood)
 
 The details of the dataset can be found in the paper supplemental.
 
-*   **Homepage**: [https://github.com/google-research/google-research/tree/master/genomics_ood](https://github.com/google-research/google-research/tree/master/genomics_ood)
+*   **Homepage**:
+    [https://github.com/google-research/google-research/tree/master/genomics_ood](https://github.com/google-research/google-research/tree/master/genomics_ood)
 
-*   **Source code**: [`tfds.structured.GenomicsOod`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/genomics_ood.py)
+*   **Source code**:
+    [`tfds.structured.GenomicsOod`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/genomics_ood.py)
 
 *   **Versions**:
 
-    * **`0.0.1`** (default): No release notes.
+    *   **`0.0.1`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `926.87 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 100,000
-`'test_ood'` | 600,000
-`'train'` | 1,000,000
-`'validation'` | 100,000
+Split              | Examples
+:----------------- | --------:
+`'test'`           | 100,000
+`'test_ood'`       | 600,000
+`'train'`          | 1,000,000
+`'validation'`     | 100,000
 `'validation_ood'` | 600,000
 
 *   **Features**:
@@ -78,7 +82,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('seq', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('seq', 'label')`
 
 *   **Citation**:
 
@@ -99,9 +105,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -109,9 +118,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/genomics_ood-0.0.1.html";
 $(document).ready(() => {

@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html" />
   <meta itemprop="citation" content="@InProceedings{cimpoi14describing,&#10;Author    = {M. Cimpoi and S. Maji and I. Kokkinos and S. Mohamed and A. Vedaldi},&#10;Title     = {Describing Textures in the Wild},&#10;Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Recognition ({CVPR})},&#10;Year      = {2014}}" />
 </div>
+
 # `dtd`
 
 *   **Description**:
@@ -21,26 +22,30 @@ The "label" of each example is its "key attribute" (see the official website).
 The official release of the dataset defines a 10-fold cross-validation
 partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
-*   **Homepage**: [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
+*   **Homepage**:
+    [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 
-*   **Source code**: [`tfds.image_classification.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dtd.py)
+*   **Source code**:
+    [`tfds.image_classification.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/dtd.py)
 
 *   **Versions**:
 
-    * **`3.0.1`** (default): No release notes.
+    *   **`3.0.1`** (default): No release notes.
 
 *   **Download size**: `596.28 MiB`
 
 *   **Dataset size**: `603.00 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,880
-`'train'` | 1,880
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,880
+`'train'`      | 1,880
 `'validation'` | 1,880
 
 *   **Features**:
@@ -53,7 +58,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -65,11 +72,13 @@ Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Reco
 Year      = {2014}}
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/dtd-3.0.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -77,9 +86,7 @@ Year      = {2014}}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/dtd-3.0.1.html";
 $(document).ready(() => {

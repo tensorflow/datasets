@@ -8,36 +8,41 @@
   <meta itemprop="sameAs" content="http://nlp.cs.washington.edu/triviaqa/" />
   <meta itemprop="citation" content="@article{2017arXivtriviaqa,&#10;       author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},&#10;                 Daniel and {Zettlemoyer}, Luke},&#10;        title = &quot;{triviaqa: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension}&quot;,&#10;      journal = {arXiv e-prints},&#10;         year = 2017,&#10;          eid = {arXiv:1705.03551},&#10;        pages = {arXiv:1705.03551},&#10;archivePrefix = {arXiv},&#10;       eprint = {1705.03551},&#10;}" />
 </div>
+
 # `trivia_qa`
 
 *   **Description**:
 
 TriviaqQA is a reading comprehension dataset containing over 650K
-question-answer-evidence triples. TriviaqQA includes 95K question-answer
-pairs authored by trivia enthusiasts and independently gathered evidence
-documents, six per question on average, that provide high quality distant
-supervision for answering the questions.
+question-answer-evidence triples. TriviaqQA includes 95K question-answer pairs
+authored by trivia enthusiasts and independently gathered evidence documents,
+six per question on average, that provide high quality distant supervision for
+answering the questions.
 
-*   **Homepage**: [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+*   **Homepage**:
+    [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 
-*   **Source code**: [`tfds.question_answering.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/trivia_qa.py)
+*   **Source code**:
+    [`tfds.question_answering.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/trivia_qa.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `119.78 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 10,832
-`'train'` | 87,622
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,832
+`'train'`      | 87,622
 `'validation'` | 11,313
 
 *   **Features**:
@@ -73,7 +78,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -91,16 +98,18 @@ archivePrefix = {arXiv},
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## trivia_qa/rc (default config)
 
-*   **Config description**: Question-answer pairs where all documents for a given question contain the
-answer string(s).
-Includes context from Wikipedia and search results.
+*   **Config description**: Question-answer pairs where all documents for a
+    given question contain the answer string(s). Includes context from Wikipedia
+    and search results.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -108,9 +117,7 @@ Includes context from Wikipedia and search results.
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trivia_qa-rc-1.1.0.html";
 $(document).ready(() => {

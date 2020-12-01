@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset" />
   <meta itemprop="citation" content="@article{Narayan2018DontGM,&#10;  title={Don&#x27;t Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},&#10;  author={Shashi Narayan and Shay B. Cohen and Mirella Lapata},&#10;  journal={ArXiv},&#10;  year={2018},&#10;  volume={abs/1808.08745}&#10;}" />
 </div>
+
 # `xsum`
 
 Warning: Manual download required. See instructions below.
@@ -16,44 +17,47 @@ Warning: Manual download required. See instructions below.
 
 Extreme Summarization (XSum) Dataset.
 
-There are two features:
-  - document: Input news article.
-  - summary: One sentence summary of the article.
+There are two features: - document: Input news article. - summary: One sentence
+summary of the article.
 
 This data need to manaully downloaded and extracted as described in
-https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md.
-The folder 'xsum-extracts-from-downloads' need to be compressed as
+https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md. The
+folder 'xsum-extracts-from-downloads' need to be compressed as
 'xsum-extracts-from-downloads.tar.gz' and put in manually downloaded folder.
 
-*   **Homepage**: [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
+*   **Homepage**:
+    [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
 
-*   **Source code**: [`tfds.summarization.Xsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/xsum.py)
+*   **Source code**:
+    [`tfds.summarization.Xsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/xsum.py)
 
 *   **Versions**:
 
-    * `1.0.0`: Dataset without cleaning.
-    * **`1.1.0`** (default): Removes web contents.
+    *   `1.0.0`: Dataset without cleaning.
+    *   **`1.1.0`** (default): Removes web contents.
 
 *   **Download size**: `2.59 MiB`
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-Detailed download instructions (which require running a custom script) are
-here:
-https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
-Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the manual_dir.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    Detailed download instructions (which require running a custom script) are
+    here:
+    https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
+    Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the manual_dir.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 11,301
-`'train'` | 203,577
+Split          | Examples
+:------------- | -------:
+`'test'`       | 11,301
+`'train'`      | 203,577
 `'validation'` | 11,305
 
 *   **Features**:
@@ -65,7 +69,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('document', 'summary')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('document', 'summary')`
 
 *   **Citation**:
 
@@ -79,9 +85,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +98,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xsum-1.1.0.html";
 $(document).ready(() => {

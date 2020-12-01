@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/gap-coreference" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1810-05201,&#10;  author    = {Kellie Webster and&#10;               Marta Recasens and&#10;               Vera Axelrod and&#10;               Jason Baldridge},&#10;  title     = {Mind the {GAP:} {A} Balanced Corpus of Gendered Ambiguous Pronouns},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1810.05201},&#10;  year      = {2018},&#10;  url       = {http://arxiv.org/abs/1810.05201},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1810.05201},&#10;  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-05201},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `gap`
 
 *   **Description**:
@@ -17,26 +18,30 @@ GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
 Google AI Language for the evaluation of coreference resolution in practical
 applications.
 
-*   **Homepage**: [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
+*   **Homepage**:
+    [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
 
-*   **Source code**: [`tfds.text.Gap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gap.py)
+*   **Source code**:
+    [`tfds.text.Gap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gap.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `2.29 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 2,000
-`'train'` | 2,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 2,000
 `'validation'` | 454
 
 *   **Features**:
@@ -57,7 +62,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -80,9 +87,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -90,9 +100,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gap-0.1.0.html";
 $(document).ready(() => {

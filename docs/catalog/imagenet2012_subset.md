@@ -8,50 +8,56 @@
   <meta itemprop="sameAs" content="http://image-net.org/" />
   <meta itemprop="citation" content="@article{chen2020simple,&#10;  title={A Simple Framework for Contrastive Learning of Visual Representations},&#10;  author={Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},&#10;  journal={arXiv preprint arXiv:2002.05709},&#10;  year={2020}&#10;}&#10;@article{ILSVRC15,&#10;  Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},&#10;  Title = {{ImageNet Large Scale Visual Recognition Challenge}},&#10;  Year = {2015},&#10;  journal   = {International Journal of Computer Vision (IJCV)},&#10;  doi = {10.1007/s11263-015-0816-y},&#10;  volume={115},&#10;  number={3},&#10;  pages={211-252}&#10;}" />
 </div>
+
 # `imagenet2012_subset`
 
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
 
-Imagenet2012Subset is a subset of original ImageNet ILSVRC 2012 dataset.
-The dataset share the *same* validation set as the original ImageNet ILSVRC 2012
-dataset. However, the training set is subsampled in a label balanced fashion.
-In `1pct` configuration, 1%, or 12811, images are sampled, most classes have
-the same number of images (average 12.8), some classes randomly have 1 more
-example than others; and in `10pct` configuration, ~10%, or 128116, most classes
-have the same number of images (average 128), and some classes randomly have 1
-more example than others.
+Imagenet2012Subset is a subset of original ImageNet ILSVRC 2012 dataset. The
+dataset share the *same* validation set as the original ImageNet ILSVRC 2012
+dataset. However, the training set is subsampled in a label balanced fashion. In
+`1pct` configuration, 1%, or 12811, images are sampled, most classes have the
+same number of images (average 12.8), some classes randomly have 1 more example
+than others; and in `10pct` configuration, ~10%, or 128116, most classes have
+the same number of images (average 128), and some classes randomly have 1 more
+example than others.
 
-This is supposed to be used as a benchmark for semi-supervised learning, and
-has been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
+This is supposed to be used as a benchmark for semi-supervised learning, and has
+been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
 
 *   **Homepage**: [http://image-net.org/](http://image-net.org/)
 
-*   **Source code**: [`tfds.image_classification.Imagenet2012Subset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_subset.py)
+*   **Source code**:
+    [`tfds.image_classification.Imagenet2012Subset`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet2012_subset.py)
 
 *   **Versions**:
 
-    * `2.0.0`: Fix validation labels.
-    * `2.0.1`: Encoding fix. No changes from user point of view.
-    * `3.0.0`:
-      Fix colorization on ~12 images (CMYK -> RGB).
-      Fix format for consistency (convert the single png image to Jpeg).
-      Faster generation reading directly from the archive.
+    *   `2.0.0`: Fix validation labels.
+    *   `2.0.1`: Encoding fix. No changes from user point of view.
+    *   `3.0.0`: Fix colorization on ~12 images (CMYK -> RGB). Fix format for
+        consistency (convert the single png image to Jpeg). Faster generation
+        reading directly from the archive.
 
-    * `4.0.0`: (unpublished)
-    * **`5.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
-    * `5.1.0`: Added test split.
+    *   `4.0.0`: (unpublished)
+
+    *   **`5.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
+
+    *   `5.1.0`: Added test split.
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-manual_dir should contain two files: ILSVRC2012_img_train.tar and
-ILSVRC2012_img_val.tar.
-You need to register on http://www.image-net.org/download-images in order
-to get the link to download the dataset.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    manual_dir should contain two files: ILSVRC2012_img_train.tar and
+    ILSVRC2012_img_val.tar.
+    You need to register on http://www.image-net.org/download-images in order
+    to get the link to download the dataset.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -63,7 +69,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -86,7 +94,6 @@ FeaturesDict({
 }
 ```
 
-
 ## imagenet2012_subset/1pct (default config)
 
 *   **Config description**: 1pct of total ImageNet training set.
@@ -97,16 +104,18 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 12,811
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,811
 `'validation'` | 50,000
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenet2012_subset-1pct-5.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -114,9 +123,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imagenet2012_subset-1pct-5.0.0.html";
 $(document).ready(() => {

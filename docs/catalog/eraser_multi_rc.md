@@ -8,38 +8,41 @@
   <meta itemprop="sameAs" content="https://cogcomp.seas.upenn.edu/multirc/" />
   <meta itemprop="citation" content="@unpublished{eraser2019,&#10;    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},&#10;    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}&#10;}&#10;@inproceedings{MultiRC2018,&#10;    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},&#10;    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},&#10;    booktitle = {NAACL},&#10;    year = {2018}&#10;}" />
 </div>
+
 # `eraser_multi_rc`
 
 *   **Description**:
 
 Eraser Multi RC is a dataset for queries over multi-line passages, along with
 answers and a rationalte. Each example in this dataset has the following 5 parts
-1. A Mutli-line Passage
-2. A Query about the passage
-3. An Answer to the query
-4. A Classification as to whether the answer is right or wrong
-5. An Explanation justifying the classification
+1. A Mutli-line Passage 2. A Query about the passage 3. An Answer to the query
+4. A Classification as to whether the answer is right or wrong 5. An Explanation
+justifying the classification
 
-*   **Homepage**: [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
+*   **Homepage**:
+    [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
 
-*   **Source code**: [`tfds.text.EraserMultiRc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/eraser_multi_rc.py)
+*   **Source code**:
+    [`tfds.text.EraserMultiRc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/eraser_multi_rc.py)
 
 *   **Versions**:
 
-    * **`0.1.1`** (default): No release notes.
+    *   **`0.1.1`** (default): No release notes.
 
 *   **Download size**: `1.59 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 4,848
-`'train'` | 24,029
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,848
+`'train'`      | 24,029
 `'validation'` | 3,214
 
 *   **Features**:
@@ -53,7 +56,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -70,9 +75,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -80,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/eraser_multi_rc-0.1.1.html";
 $(document).ready(() => {

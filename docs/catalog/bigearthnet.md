@@ -8,39 +8,39 @@
   <meta itemprop="sameAs" content="http://bigearth.net" />
   <meta itemprop="citation" content="@article{Sumbul2019BigEarthNetAL,&#10;  title={BigEarthNet: A Large-Scale Benchmark Archive For Remote Sensing Image Understanding},&#10;  author={Gencer Sumbul and Marcela Charfuelan and Beg{&quot;u}m Demir and Volker Markl},&#10;  journal={CoRR},&#10;  year={2019},&#10;  volume={abs/1902.06148}&#10;}" />
 </div>
+
 # `bigearthnet`
 
 *   **Description**:
 
 The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of
-590,326 Sentinel-2 image patches. The image patch size on the ground is
-1.2 x 1.2 km with variable image size depending on the channel resolution.
-This is a multi-label dataset with 43 imbalanced labels.
+590,326 Sentinel-2 image patches. The image patch size on the ground is 1.2 x
+1.2 km with variable image size depending on the channel resolution. This is a
+multi-label dataset with 43 imbalanced labels.
 
-To construct the BigEarthNet, 125 Sentinel-2
-tiles acquired between June 2017 and May 2018 over the 10 countries (Austria,
-Belgium, Finland, Ireland, Kosovo, Lithuania, Luxembourg, Portugal, Serbia,
-Switzerland) of Europe were initially selected. All the tiles were
-atmospherically corrected by the Sentinel-2 Level 2A product generation and
-formatting tool (sen2cor). Then, they were divided into 590,326 non-overlapping
-image patches. Each image patch was annotated by the multiple land-cover classes
-(i.e., multi-labels) that were provided from the CORINE Land Cover database of
-the year 2018 (CLC 2018).
+To construct the BigEarthNet, 125 Sentinel-2 tiles acquired between June 2017
+and May 2018 over the 10 countries (Austria, Belgium, Finland, Ireland, Kosovo,
+Lithuania, Luxembourg, Portugal, Serbia, Switzerland) of Europe were initially
+selected. All the tiles were atmospherically corrected by the Sentinel-2 Level
+2A product generation and formatting tool (sen2cor). Then, they were divided
+into 590,326 non-overlapping image patches. Each image patch was annotated by
+the multiple land-cover classes (i.e., multi-labels) that were provided from the
+CORINE Land Cover database of the year 2018 (CLC 2018).
 
 Bands and pixel resolution in meters:
 
-* B01: Coastal aerosol; 60m
-* B02: Blue; 10m
-* B03: Green; 10m
-* B04: Red; 10m
-* B05: Vegetation red edge; 20m
-* B06: Vegetation red edge; 20m
-* B07: Vegetation red edge; 20m
-* B08: NIR; 10m
-* B09: Water vapor; 60m
-* B11: SWIR; 20m
-* B12: SWIR; 20m
-* B8A: Narrow NIR; 20m
+*   B01: Coastal aerosol; 60m
+*   B02: Blue; 10m
+*   B03: Green; 10m
+*   B04: Red; 10m
+*   B05: Vegetation red edge; 20m
+*   B06: Vegetation red edge; 20m
+*   B07: Vegetation red edge; 20m
+*   B08: NIR; 10m
+*   B09: Water vapor; 60m
+*   B11: SWIR; 20m
+*   B12: SWIR; 20m
+*   B8A: Narrow NIR; 20m
 
 License: Community Data License Agreement - Permissive, Version 1.0.
 
@@ -48,22 +48,26 @@ URL: http://bigearth.net/
 
 *   **Homepage**: [http://bigearth.net](http://bigearth.net)
 
-*   **Source code**: [`tfds.image_classification.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/bigearthnet.py)
+*   **Source code**:
+    [`tfds.image_classification.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/bigearthnet.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `65.22 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 590,326
 
 *   **Citation**:
@@ -77,7 +81,6 @@ Split  | Examples
   volume={abs/1902.06148}
 }
 ```
-
 
 ## bigearthnet/rgb (default config)
 
@@ -104,13 +107,17 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'labels')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'labels')`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/bigearthnet-rgb-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -118,9 +125,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bigearthnet-rgb-1.0.0.html";
 $(document).ready(() => {

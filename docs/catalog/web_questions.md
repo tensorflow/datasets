@@ -8,34 +8,39 @@
   <meta itemprop="sameAs" content="https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a" />
   <meta itemprop="citation" content="@inproceedings{berant-etal-2013-semantic,&#10;    title = &quot;Semantic Parsing on {F}reebase from Question-Answer Pairs&quot;,&#10;    author = &quot;Berant, Jonathan  and&#10;      Chou, Andrew  and&#10;      Frostig, Roy  and&#10;      Liang, Percy&quot;,&#10;    booktitle = &quot;Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing&quot;,&#10;    month = oct,&#10;    year = &quot;2013&quot;,&#10;    address = &quot;Seattle, Washington, USA&quot;,&#10;    publisher = &quot;Association for Computational Linguistics&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/D13-1160&quot;,&#10;    pages = &quot;1533--1544&quot;,&#10;}" />
 </div>
+
 # `web_questions`
 
 *   **Description**:
 
-This dataset consists of 6,642 question/answer pairs.
-The questions are supposed to be answerable by Freebase, a large knowledge graph.
-The questions are mostly centered around a single named entity.
-The questions are popular ones asked on the web (at least in 2013).
+This dataset consists of 6,642 question/answer pairs. The questions are supposed
+to be answerable by Freebase, a large knowledge graph. The questions are mostly
+centered around a single named entity. The questions are popular ones asked on
+the web (at least in 2013).
 
-*   **Homepage**: [https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a](https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a)
+*   **Homepage**:
+    [https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a](https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a)
 
-*   **Source code**: [`tfds.question_answering.WebQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/web_questions.py)
+*   **Source code**:
+    [`tfds.question_answering.WebQuestions`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/web_questions.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `1.21 MiB`
 
 *   **Dataset size**: `983.88 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 2,032
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,032
 `'train'` | 3,778
 
 *   **Features**:
@@ -48,7 +53,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -69,9 +76,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +89,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/web_questions-1.0.0.html";
 $(document).ready(() => {

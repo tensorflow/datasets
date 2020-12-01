@@ -8,32 +8,40 @@
   <meta itemprop="sameAs" content="http://image-net.org/small/download.php" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/OordKK16,&#10;  author    = {A{&quot;{a}}ron van den Oord and&#10;               Nal Kalchbrenner and&#10;               Koray Kavukcuoglu},&#10;  title     = {Pixel Recurrent Neural Networks},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1601.06759},&#10;  year      = {2016},&#10;  url       = {http://arxiv.org/abs/1601.06759},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1601.06759},&#10;  timestamp = {Mon, 13 Aug 2018 16:46:29 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/OordKK16},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `downsampled_imagenet`
 
 *   **Description**:
 
-Dataset with images of 2 resolutions (see config name for information on the resolution).
-It is used for density estimation and generative modeling experiments.
+Dataset with images of 2 resolutions (see config name for information on the
+resolution). It is used for density estimation and generative modeling
+experiments.
 
-For resized ImageNet for supervised learning ([link](https://patrykchrabaszcz.github.io/Imagenet32/)) see `imagenet_resized`.
+For resized ImageNet for supervised learning
+([link](https://patrykchrabaszcz.github.io/Imagenet32/)) see `imagenet_resized`.
 
-*   **Homepage**: [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
+*   **Homepage**:
+    [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 
-*   **Source code**: [`tfds.image.DownsampledImagenet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/downsampled_imagenet.py)
+*   **Source code**:
+    [`tfds.image.DownsampledImagenet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/downsampled_imagenet.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 1,281,149
+Split          | Examples
+:------------- | --------:
+`'train'`      | 1,281,149
 `'validation'` | 49,999
 
 *   **Features**:
@@ -44,7 +52,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -66,18 +76,20 @@ FeaturesDict({
 }
 ```
 
-
 ## downsampled_imagenet/32x32 (default config)
 
-*   **Config description**: A dataset consisting of Train and Validation images of 32x32 resolution.
+*   **Config description**: A dataset consisting of Train and Validation images
+    of 32x32 resolution.
 
 *   **Download size**: `3.98 GiB`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/downsampled_imagenet-32x32-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +97,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/downsampled_imagenet-32x32-2.0.0.html";
 $(document).ready(() => {

@@ -8,41 +8,43 @@
   <meta itemprop="sameAs" content="https://github.com/FiscalNote/BillSum" />
   <meta itemprop="citation" content="@misc{kornilova2019billsum,&#10;    title={BillSum: A Corpus for Automatic Summarization of US Legislation},&#10;    author={Anastassia Kornilova and Vlad Eidelman},&#10;    year={2019},&#10;    eprint={1910.00523},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `billsum`
 
 *   **Description**:
 
 BillSum, summarization of US Congressional and California state bills.
 
-There are several features:
-  - text: bill text.
-  - summary: summary of the bills.
-  - title: title of the bills.
-features for us bills. ca bills does not have.
-  - text_len: number of chars in text.
-  - sum_len: number of chars in summary.
+There are several features: - text: bill text. - summary: summary of the
+bills. - title: title of the bills. features for us bills. ca bills does not
+have. - text_len: number of chars in text. - sum_len: number of chars in
+summary.
 
-*   **Homepage**: [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
+*   **Homepage**:
+    [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
 
-*   **Source code**: [`tfds.summarization.Billsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/billsum.py)
+*   **Source code**:
+    [`tfds.summarization.Billsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/billsum.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): No release notes.
+    *   **`3.0.0`** (default): No release notes.
 
 *   **Download size**: `64.14 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split       | Examples
+:---------- | -------:
 `'ca_test'` | 1,237
-`'test'` | 3,269
-`'train'` | 18,949
+`'test'`    | 3,269
+`'train'`   | 18,949
 
 *   **Features**:
 
@@ -54,7 +56,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'summary')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'summary')`
 
 *   **Citation**:
 
@@ -69,9 +73,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +86,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/billsum-3.0.0.html";
 $(document).ready(() => {

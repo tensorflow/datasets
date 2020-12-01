@@ -8,43 +8,53 @@
   <meta itemprop="sameAs" content="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html" />
   <meta itemprop="citation" content="@inproceedings{conf/iccv/LiuLWT15,&#10;  added-at = {2018-10-09T00:00:00.000+0200},&#10;  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},&#10;  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},&#10;  booktitle = {ICCV},&#10;  crossref = {conf/iccv/2015},&#10;  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},&#10;  interhash = {3f735aaa11957e73914bbe2ca9d5e702},&#10;  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},&#10;  isbn = {978-1-4673-8391-2},&#10;  keywords = {dblp},&#10;  pages = {3730-3738},&#10;  publisher = {IEEE Computer Society},&#10;  timestamp = {2018-10-11T11:43:28.000+0200},&#10;  title = {Deep Learning Face Attributes in the Wild.},&#10;  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},&#10;  year = 2015&#10;}" />
 </div>
+
 # `celeb_a`
 
 *   **Description**:
 
-CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including
- - 10,177 number of identities,
- - 202,599 number of face images, and
- - 5 landmark locations, 40 binary attributes annotations per image.
+CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset
+with more than 200K celebrity images, each with 40 attribute annotations. The
+images in this dataset cover large pose variations and background clutter.
+CelebA has large diversities, large quantities, and rich annotations,
+including - 10,177 number of identities, - 202,599 number of face images, and -
+5 landmark locations, 40 binary attributes annotations per image.
 
-The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.
+The dataset can be employed as the training and test sets for the following
+computer vision tasks: face attribute recognition, face detection, and landmark
+(or facial part) localization.
 
 Note: CelebA dataset may contain potential bias. The fairness indicators
 [example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
 goes into detail about several considerations to keep in mind while using the
 CelebA dataset.
 
-*   **Homepage**: [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
+*   **Homepage**:
+    [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
-*   **Source code**: [`tfds.image.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
+*   **Source code**:
+    [`tfds.image.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
 
 *   **Versions**:
 
-    * `2.0.0`: No release notes.
-    * **`2.0.1`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   `2.0.0`: No release notes.
+    *   **`2.0.1`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `1.38 GiB`
 
 *   **Dataset size**: `1.62 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 19,962
-`'train'` | 162,770
+Split          | Examples
+:------------- | -------:
+`'test'`       | 19,962
+`'train'`      | 162,770
 `'validation'` | 19,867
 
 *   **Features**:
@@ -109,7 +119,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -134,11 +146,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/celeb_a-2.0.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -146,9 +160,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/celeb_a-2.0.1.html";
 $(document).ready(() => {

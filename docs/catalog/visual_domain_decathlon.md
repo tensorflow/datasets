@@ -8,30 +8,35 @@
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/decathlon/" />
   <meta itemprop="citation" content="@ONLINE{hakanbilensylvestrerebuffitomasjakab2017,&#10;    author = &quot;Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab&quot;,&#10;    title  = &quot;Visual Domain Decathlon&quot;,&#10;    year   = &quot;2017&quot;,&#10;    url    = &quot;https://www.robots.ox.ac.uk/~vgg/decathlon/&quot;&#10;}" />
 </div>
+
 # `visual_domain_decathlon`
 
 *   **Description**:
 
-This contains the 10 datasets used in the Visual Domain Decathlon, part of
-the PASCAL in Detail Workshop Challenge (CVPR 2017).
-The goal of this challenge is to solve simultaneously ten image classification
-problems representative of very different visual domains.
+This contains the 10 datasets used in the Visual Domain Decathlon, part of the
+PASCAL in Detail Workshop Challenge (CVPR 2017). The goal of this challenge is
+to solve simultaneously ten image classification problems representative of very
+different visual domains.
 
 Some of the datasets included here are also available as separate datasets in
 TFDS. However, notice that images were preprocessed for the Visual Domain
-Decathlon (resized isotropically to have a shorter size of 72 pixels) and
-might have different train/validation/test splits. Here we use the official
-splits for the competition.
+Decathlon (resized isotropically to have a shorter size of 72 pixels) and might
+have different train/validation/test splits. Here we use the official splits for
+the competition.
 
-*   **Homepage**: [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+*   **Homepage**:
+    [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
-*   **Source code**: [`tfds.image_classification.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/visual_domain_decathlon.py)
+*   **Source code**:
+    [`tfds.image_classification.VisualDomainDecathlon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/visual_domain_decathlon.py)
 
 *   **Versions**:
 
-    * **`1.2.0`** (default): No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -44,23 +49,25 @@ splits for the competition.
 }
 ```
 
-
 ## visual_domain_decathlon/aircraft (default config)
 
-*   **Config description**: Data based on "Aircraft", with images resized isotropically to have a shorter size of 72 pixels.
+*   **Config description**: Data based on "Aircraft", with images resized
+    isotropically to have a shorter size of 72 pixels.
 
 *   **Download size**: `409.94 MiB`
 
 *   **Dataset size**: `20.96 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 3,333
-`'train'` | 3,334
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,333
+`'train'`      | 3,334
 `'validation'` | 3,333
 
 *   **Features**:
@@ -73,11 +80,13 @@ FeaturesDict({
 })
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/visual_domain_decathlon-aircraft-1.2.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +94,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/visual_domain_decathlon-aircraft-1.2.0.html";
 $(document).ready(() => {

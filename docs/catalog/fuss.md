@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md" />
   <meta itemprop="citation" content="\&#10;@inproceedings{wisdom2020fuss,&#10;  title = {What&#x27;s All the {FUSS} About Free Universal Sound Separation Data?},&#10;  author = {Scott Wisdom and Hakan Erdogan and Daniel P. W. Ellis and Romain Serizel and Nicolas Turpault and Eduardo Fonseca and Justin Salamon and Prem Seetharaman and John R. Hershey},&#10;  year = {2020},&#10;  url = {https://arxiv.org/abs/2011.00803},&#10;}&#10;&#10;@inproceedings{fonseca2020fsd50k,&#10;  author = {Eduardo Fonseca and Xavier Favory and Jordi Pons and Frederic Font Corbera and Xavier Serra},&#10;  title = {{FSD}50k: an open dataset of human-labeled sound events},&#10;  year = {2020},&#10;  url = {https://arxiv.org/abs/2010.00475},&#10;}" />
 </div>
+
 # `fuss`
 
 *   **Description**:
@@ -25,32 +26,36 @@ with labels from the AudioSet Ontology. Using the FSD50K labels, these source
 files have been screened such that they likely only contain a single type of
 sound. Labels are not provided for these source files, and are not considered
 part of the challenge. For the purpose of the DCASE Task4 Sound Separation and
-Event Detection challenge,  systems should not use FSD50K labels, even though
+Event Detection challenge, systems should not use FSD50K labels, even though
 they may become available upon FSD50K release.
 
 To create mixtures, 10 second clips of sources are convolved with simulated room
-impulse responses and added together. Each 10 second mixture contains between
-1 and 4 sources. Source files longer than 10 seconds are considered "background"
+impulse responses and added together. Each 10 second mixture contains between 1
+and 4 sources. Source files longer than 10 seconds are considered "background"
 sources. Every mixture contains one background source, which is active for the
 entire duration. We provide: a software recipe to create the dataset, the room
 impulse responses, and the original source audio.
 
-*   **Homepage**: [https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md](https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md)
+*   **Homepage**:
+    [https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md](https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md)
 
-*   **Source code**: [`tfds.audio.Fuss`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/fuss.py)
+*   **Source code**:
+    [`tfds.audio.Fuss`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/fuss.py)
 
 *   **Versions**:
 
-    * **`1.2.0`** (default): No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,000
-`'train'` | 20,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,000
+`'train'`      | 20,000
 `'validation'` | 1,000
 
 *   **Features**:
@@ -72,7 +77,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('mixture_audio', 'sources')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('mixture_audio', 'sources')`
 
 *   **Citation**:
 
@@ -93,8 +100,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## fuss/reverberant (default config)
 
@@ -104,7 +112,8 @@ FeaturesDict({
 
 *   **Dataset size**: `43.20 GiB`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -112,9 +121,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/fuss-reverberant-1.2.0.html";
 $(document).ready(() => {

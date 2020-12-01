@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/mahnazkoupaee/WikiHow-Dataset" />
   <meta itemprop="citation" content="@misc{koupaee2018wikihow,&#10;    title={WikiHow: A Large Scale Text Summarization Dataset},&#10;    author={Mahnaz Koupaee and William Yang Wang},&#10;    year={2018},&#10;    eprint={1810.09305},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `wikihow`
 
 Warning: Manual download required. See instructions below.
@@ -17,43 +18,47 @@ Warning: Manual download required. See instructions below.
 WikiHow is a new large-scale dataset using the online WikiHow
 (http://www.wikihow.com/) knowledge base.
 
-There are two features:
-  - text: wikihow answers texts.
-  - headline: bold lines as summary.
+There are two features: - text: wikihow answers texts. - headline: bold lines as
+summary.
 
-There are two separate versions:
-  - all: consisting of the concatenation of all paragraphs as the articles and
-         the bold lines as the reference summaries.
-  - sep: consisting of each paragraph and its summary.
+There are two separate versions: - all: consisting of the concatenation of all
+paragraphs as the articles and the bold lines as the reference summaries. - sep:
+consisting of each paragraph and its summary.
 
 Download "wikihowAll.csv" and "wikihowSep.csv" from
 https://github.com/mahnazkoupaee/WikiHow-Dataset and place them in manual folder
 https://www.tensorflow.org/datasets/api_docs/python/tfds/download/DownloadConfig.
-Train/validation/test splits are provided by the authors.
-Preprocessing is applied to remove short articles
-(abstract length < 0.75 article length) and clean up extra commas.
+Train/validation/test splits are provided by the authors. Preprocessing is
+applied to remove short articles (abstract length < 0.75 article length) and
+clean up extra commas.
 
-*   **Homepage**: [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
+*   **Homepage**:
+    [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
-*   **Source code**: [`tfds.summarization.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
+*   **Source code**:
+    [`tfds.summarization.Wikihow`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/wikihow.py)
 
 *   **Versions**:
 
-    * **`1.2.0`** (default): No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
 *   **Download size**: `5.21 MiB`
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
-Please download both wikihowAll.csv and wikihowSep.csv.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
+    Please download both wikihowAll.csv and wikihowSep.csv.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'headline')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'headline')`
 
 *   **Citation**:
 
@@ -68,19 +73,21 @@ Please download both wikihowAll.csv and wikihowSep.csv.
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## wikihow/all (default config)
 
-*   **Config description**: Use the concatenation of all paragraphs as the articles and the bold lines as the reference summaries
+*   **Config description**: Use the concatenation of all paragraphs as the
+    articles and the bold lines as the reference summaries
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 5,577
-`'train'` | 157,252
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,577
+`'train'`      | 157,252
 `'validation'` | 5,599
 
 *   **Features**:
@@ -93,7 +100,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -101,9 +109,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikihow-all-1.2.0.html";
 $(document).ready(() => {

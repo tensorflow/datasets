@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://patchcamelyon.grand-challenge.org/" />
   <meta itemprop="citation" content="@misc{b_s_veeling_j_linmans_j_winkens_t_cohen_2018_2546921,&#10;  author       = {B. S. Veeling, J. Linmans, J. Winkens, T. Cohen, M. Welling},&#10;  title        = {Rotation Equivariant CNNs for Digital Pathology},&#10;  month        = sep,&#10;  year         = 2018,&#10;  doi          = {10.1007/978-3-030-00934-2_24},&#10;  url          = {https://doi.org/10.1007/978-3-030-00934-2_24}&#10;}" />
 </div>
+
 # `patch_camelyon`
 
 *   **Description**:
@@ -19,26 +20,31 @@ binary label indicating presence of metastatic tissue. PCam provides a new
 benchmark for machine learning models: bigger than CIFAR10, smaller than
 Imagenet, trainable on a single GPU.
 
-*   **Homepage**: [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
+*   **Homepage**:
+    [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 
-*   **Source code**: [`tfds.image_classification.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/patch_camelyon.py)
+*   **Source code**:
+    [`tfds.image_classification.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/patch_camelyon.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `7.48 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 32,768
-`'train'` | 262,144
+Split          | Examples
+:------------- | -------:
+`'test'`       | 32,768
+`'train'`      | 262,144
 `'validation'` | 32,768
 
 *   **Features**:
@@ -51,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -66,11 +74,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/patch_camelyon-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -78,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/patch_camelyon-2.0.0.html";
 $(document).ready(() => {

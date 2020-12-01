@@ -8,39 +8,44 @@
   <meta itemprop="sameAs" content="https://github.com/Jakobovski/free-spoken-digit-dataset" />
   <meta itemprop="citation" content="@ONLINE {Free Spoken Digit Dataset,&#10;    author = &quot;Zohar Jackson&quot;,&#10;    title  = &quot;Spoken_Digit&quot;,&#10;    year   = &quot;2016&quot;,&#10;    url    = &quot;https://github.com/Jakobovski/free-spoken-digit-dataset&quot;&#10;}" />
 </div>
+
 # `spoken_digit`
 
 *   **Description**:
 
 A free audio dataset of spoken digits. Think MNIST for audio.
 
-A simple audio/speech dataset consisting of recordings of spoken digits in wav files at 8kHz.
-The recordings are trimmed so that they have near minimal silence at the beginnings and ends.
+A simple audio/speech dataset consisting of recordings of spoken digits in wav
+files at 8kHz. The recordings are trimmed so that they have near minimal silence
+at the beginnings and ends.
 
-5 speakers
-2,500 recordings (50 of each digit per speaker)
-English pronunciations
+5 speakers 2,500 recordings (50 of each digit per speaker) English
+pronunciations
 
 Files are named in the following format: {digitLabel}_{speakerName}_{index}.wav
 
-*   **Homepage**: [https://github.com/Jakobovski/free-spoken-digit-dataset](https://github.com/Jakobovski/free-spoken-digit-dataset)
+*   **Homepage**:
+    [https://github.com/Jakobovski/free-spoken-digit-dataset](https://github.com/Jakobovski/free-spoken-digit-dataset)
 
-*   **Source code**: [`tfds.audio.spoken_digit.SpokenDigit`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/spoken_digit/spoken_digit.py)
+*   **Source code**:
+    [`tfds.audio.spoken_digit.SpokenDigit`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/spoken_digit/spoken_digit.py)
 
 *   **Versions**:
 
-    * **`1.0.9`** (default): No release notes.
+    *   **`1.0.9`** (default): No release notes.
 
 *   **Download size**: `11.42 MiB`
 
 *   **Dataset size**: `45.68 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 2,500
 
 *   **Features**:
@@ -53,7 +58,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -66,9 +73,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -76,9 +86,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/spoken_digit-1.0.9.html";
 $(document).ready(() => {

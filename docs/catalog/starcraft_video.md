@@ -8,33 +8,41 @@
   <meta itemprop="sameAs" content="https://storage.googleapis.com/scv_dataset/README.html" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1812-01717,&#10;  author    = {Thomas Unterthiner and&#10;               Sjoerd van Steenkiste and&#10;               Karol Kurach and&#10;               Rapha{&quot;{e}}l Marinier and&#10;               Marcin Michalski and&#10;               Sylvain Gelly},&#10;  title     = {Towards Accurate Generative Models of Video: {A} New Metric and&#10;               Challenges},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1812.01717},&#10;  year      = {2018},&#10;  url       = {http://arxiv.org/abs/1812.01717},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1812.01717},&#10;  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `starcraft_video`
 
 *   **Description**:
 
 This data set contains videos generated from Starcraft.
 
-*   **Homepage**: [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+*   **Homepage**:
+    [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
-*   **Source code**: [`tfds.video.StarcraftVideo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py)
+*   **Source code**:
+    [`tfds.video.StarcraftVideo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`1.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 2,000
-`'train'` | 10,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 10,000
 `'validation'` | 2,000
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -60,8 +68,9 @@ Split  | Examples
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## starcraft_video/brawl_64 (default config)
 
@@ -77,7 +86,8 @@ FeaturesDict({
 })
 ```
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/starcraft_video-brawl_64-1.0.0.html";
 $(document).ready(() => {

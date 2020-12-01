@@ -8,31 +8,37 @@
   <meta itemprop="sameAs" content="http://laurencemoroney.com/rock-paper-scissors-dataset" />
   <meta itemprop="citation" content="@ONLINE {rps,&#10;author = &quot;Laurence Moroney&quot;,&#10;title = &quot;Rock, Paper, Scissors Dataset&quot;,&#10;month = &quot;feb&quot;,&#10;year = &quot;2019&quot;,&#10;url = &quot;http://laurencemoroney.com/rock-paper-scissors-dataset&quot;&#10;}" />
 </div>
+
 # `rock_paper_scissors`
 
 *   **Description**:
 
 Images of hands playing rock, paper, scissor game.
 
-*   **Homepage**: [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+*   **Homepage**:
+    [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
 
-*   **Source code**: [`tfds.image_classification.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/rock_paper_scissors.py)
+*   **Source code**:
+    [`tfds.image_classification.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/rock_paper_scissors.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `219.53 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 372
+Split     | Examples
+:-------- | -------:
+`'test'`  | 372
 `'train'` | 2,520
 
 *   **Features**:
@@ -44,7 +50,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -58,11 +66,13 @@ url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/rock_paper_scissors-3.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -70,9 +80,7 @@ url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rock_paper_scissors-3.0.0.html";
 $(document).ready(() => {

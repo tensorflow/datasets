@@ -8,48 +8,52 @@
   <meta itemprop="sameAs" content="https://github.com/fastai/imagenette" />
   <meta itemprop="citation" content="@misc{imagewang,&#10;  author    = &quot;Jeremy Howard&quot;,&#10;  title     = &quot;Imagewang&quot;,&#10;  url       = &quot;https://github.com/fastai/imagenette/&quot;&#10;}" />
 </div>
+
 # `imagewang`
 
 *   **Description**:
 
-Imagewang contains Imagenette and Imagewoof combined
-Image网 (pronounced "Imagewang"; 网 means "net" in Chinese) contains Imagenette
-and Imagewoof combined, but with some twists that make it into a tricky
-semi-supervised unbalanced classification problem:
+Imagewang contains Imagenette and Imagewoof combined Image网 (pronounced
+"Imagewang"; 网 means "net" in Chinese) contains Imagenette and Imagewoof
+combined, but with some twists that make it into a tricky semi-supervised
+unbalanced classification problem:
 
-* The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);
-  there are no Imagenette images in the validation set (they're all in the
-  training set)
-* Only 10% of Imagewoof images are in the training set!
-* The remaining are in the unsup ("unsupervised") directory, and you can not
-  use their labels in training!
-* It's even hard to type and hard to say!
+*   The validation set is the same as Imagewoof (i.e. 30% of Imagewoof images);
+    there are no Imagenette images in the validation set (they're all in the
+    training set)
+*   Only 10% of Imagewoof images are in the training set!
+*   The remaining are in the unsup ("unsupervised") directory, and you can not
+    use their labels in training!
+*   It's even hard to type and hard to say!
 
 The dataset comes in three variants:
 
-  * Full size
-  * 320 px
-  * 160 px
+*   Full size
+*   320 px
+*   160 px
 
 This dataset consists of the Imagenette dataset {size} variant.
 
-*   **Config description**: Imagewang contains Imagenette and Imagewoof combined.
+*   **Config description**: Imagewang contains Imagenette and Imagewoof
+    combined.
 
-*   **Homepage**: [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
+*   **Homepage**:
+    [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
-*   **Source code**: [`tfds.image_classification.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagewang.py)
+*   **Source code**:
+    [`tfds.image_classification.Imagewang`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagewang.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): No release notes.
+    *   **`2.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 14,669
+Split          | Examples
+:------------- | -------:
+`'train'`      | 14,669
 `'validation'` | 3,929
 
 *   **Features**:
@@ -61,7 +65,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -73,18 +79,21 @@ FeaturesDict({
 }
 ```
 
-
 ## imagewang/full-size (default config)
 
 *   **Dataset size**: `1.97 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagewang-full-size-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -92,9 +101,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imagewang-full-size-2.0.0.html";
 $(document).ready(() => {

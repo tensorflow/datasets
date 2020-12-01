@@ -8,38 +8,43 @@
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/cassava-disease/overview" />
   <meta itemprop="citation" content="@misc{mwebaze2019icassava,&#10;    title={iCassava 2019Fine-Grained Visual Categorization Challenge},&#10;    author={Ernest Mwebaze and Timnit Gebru and Andrea Frome and Solomon Nsumba and Jeremy Tusubira},&#10;    year={2019},&#10;    eprint={1908.02900},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CV}&#10;}" />
 </div>
+
 # `cassava`
 
 *   **Description**:
 
-Cassava consists of leaf images for the cassava plant depicting healthy and
-four (4) disease conditions; Cassava Mosaic Disease (CMD), Cassava Bacterial
-Blight (CBB), Cassava Greem Mite (CGM) and Cassava Brown Streak Disease (CBSD).
-Dataset consists of a total of 9430 labelled images.
-The 9430 labelled images are split into a training set (5656), a test set(1885)
-and a validation set (1889). The number of images per class are unbalanced with
-the two disease classes CMD and CBSD having 72% of the images.
+Cassava consists of leaf images for the cassava plant depicting healthy and four
+(4) disease conditions; Cassava Mosaic Disease (CMD), Cassava Bacterial Blight
+(CBB), Cassava Greem Mite (CGM) and Cassava Brown Streak Disease (CBSD). Dataset
+consists of a total of 9430 labelled images. The 9430 labelled images are split
+into a training set (5656), a test set(1885) and a validation set (1889). The
+number of images per class are unbalanced with the two disease classes CMD and
+CBSD having 72% of the images.
 
-*   **Homepage**: [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
+*   **Homepage**:
+    [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
 
-*   **Source code**: [`tfds.image_classification.Cassava`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cassava.py)
+*   **Source code**:
+    [`tfds.image_classification.Cassava`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cassava.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `1.26 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,885
-`'train'` | 5,656
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,885
+`'train'`      | 5,656
 `'validation'` | 1,889
 
 *   **Features**:
@@ -52,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -67,11 +74,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/cassava-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -79,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cassava-0.1.0.html";
 $(document).ready(() => {

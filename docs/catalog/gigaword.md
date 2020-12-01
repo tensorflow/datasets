@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/harvardnlp/sent-summary" />
   <meta itemprop="citation" content="@article{graff2003english,&#10;  title={English gigaword},&#10;  author={Graff, David and Kong, Junbo and Chen, Ke and Maeda, Kazuaki},&#10;  journal={Linguistic Data Consortium, Philadelphia},&#10;  volume={4},&#10;  number={1},&#10;  pages={34},&#10;  year={2003}&#10;}&#10;&#10;@article{Rush_2015,&#10;   title={A Neural Attention Model for Abstractive Sentence Summarization},&#10;   url={http://dx.doi.org/10.18653/v1/D15-1044},&#10;   DOI={10.18653/v1/d15-1044},&#10;   journal={Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing},&#10;   publisher={Association for Computational Linguistics},&#10;   author={Rush, Alexander M. and Chopra, Sumit and Weston, Jason},&#10;   year={2015}&#10;}" />
 </div>
+
 # `gigaword`
 
 *   **Description**:
@@ -17,30 +18,32 @@ around 4 million articles. Use the 'org_data' provided by
 https://github.com/microsoft/unilm/ which is identical to
 https://github.com/harvardnlp/sent-summary but with better format.
 
-There are two features:
-  - document: article.
-  - summary: headline.
+There are two features: - document: article. - summary: headline.
 
-*   **Homepage**: [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
+*   **Homepage**:
+    [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
 
-*   **Source code**: [`tfds.summarization.Gigaword`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/gigaword.py)
+*   **Source code**:
+    [`tfds.summarization.Gigaword`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/gigaword.py)
 
 *   **Versions**:
 
-    * **`1.2.0`** (default): No release notes.
+    *   **`1.2.0`** (default): No release notes.
 
 *   **Download size**: `551.61 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,951
-`'train'` | 3,803,957
+Split          | Examples
+:------------- | --------:
+`'test'`       | 1,951
+`'train'`      | 3,803,957
 `'validation'` | 189,651
 
 *   **Features**:
@@ -52,7 +55,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('document', 'summary')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('document', 'summary')`
 
 *   **Citation**:
 
@@ -78,9 +83,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -88,9 +96,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gigaword-1.2.0.html";
 $(document).ready(() => {

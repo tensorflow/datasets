@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/fchollet/ARC/" />
   <meta itemprop="citation" content="@misc{chollet_francois_2019,&#10;  title     = {The Measure of Intelligence},&#10;  url       = {https://arxiv.org/abs/1911.01547},&#10;  journal   = {arXiv.org},&#10;  author    = {Francois Chollet},&#10;  year      = {2019},&#10;  month     = {Nov}&#10;}" />
 </div>
+
 # `arc`
 
 *   **Description**:
@@ -19,25 +20,29 @@ human-like form of general fluid intelligence.
 
 *   **Config description**: ARC commit bd9e2c9 from 2019-12-06
 
-*   **Homepage**: [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
+*   **Homepage**:
+    [https://github.com/fchollet/ARC/](https://github.com/fchollet/ARC/)
 
-*   **Source code**: [`tfds.image.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
+*   **Source code**:
+    [`tfds.image.ARC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/arc.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `465.07 KiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 400
+Split     | Examples
+:-------- | -------:
+`'test'`  | 400
 `'train'` | 400
 
 *   **Features**:
@@ -56,7 +61,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -71,9 +78,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -81,9 +91,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/arc-2019-12-06-1.0.0.html";
 $(document).ready(() => {

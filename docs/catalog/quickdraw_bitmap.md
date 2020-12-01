@@ -8,30 +8,38 @@
   <meta itemprop="sameAs" content="https://github.com/googlecreativelab/quickdraw-dataset" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/HaE17,&#10;  author    = {David Ha and&#10;               Douglas Eck},&#10;  title     = {A Neural Representation of Sketch Drawings},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1704.03477},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1704.03477},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1704.03477},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:30 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/HaE17},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `quickdraw_bitmap`
 
 *   **Description**:
 
-The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
+The Quick Draw Dataset is a collection of 50 million drawings across 345
+categories, contributed by players of the game Quick, Draw!. The bitmap dataset
+contains these drawings converted from vector format into 28x28 grayscale images
 
-*   **Homepage**: [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+*   **Homepage**:
+    [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
-*   **Source code**: [`tfds.image_classification.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/quickdraw.py)
+*   **Source code**:
+    [`tfds.image_classification.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/quickdraw.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `36.82 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | ---------:
 `'train'` | 50,426,266
 
 *   **Features**:
@@ -43,7 +51,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -64,11 +74,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/quickdraw_bitmap-3.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -76,9 +88,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/quickdraw_bitmap-3.0.0.html";
 $(document).ready(() => {

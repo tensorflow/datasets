@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://rowanzellers.com/hellaswag/" />
   <meta itemprop="citation" content="@inproceedings{zellers2019hellaswag,&#10;    title={HellaSwag: Can a Machine Really Finish Your Sentence?},&#10;    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},&#10;    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},&#10;    year={2019}&#10;}" />
 </div>
+
 # `hellaswag`
 
 *   **Description**:
@@ -15,26 +16,30 @@
 The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
 and some endings which complete the context.
 
-*   **Homepage**: [https://rowanzellers.com/hellaswag/](https://rowanzellers.com/hellaswag/)
+*   **Homepage**:
+    [https://rowanzellers.com/hellaswag/](https://rowanzellers.com/hellaswag/)
 
-*   **Source code**: [`tfds.text.Hellaswag`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/hellaswag.py)
+*   **Source code**:
+    [`tfds.text.Hellaswag`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/hellaswag.py)
 
 *   **Versions**:
 
-    * **`0.0.1`** (default): No release notes.
+    *   **`0.0.1`** (default): No release notes.
 
 *   **Download size**: `68.18 MiB`
 
 *   **Dataset size**: `51.66 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 10,003
-`'train'` | 39,905
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,003
+`'train'`      | 39,905
 `'validation'` | 10,042
 
 *   **Features**:
@@ -49,7 +54,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -62,9 +69,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -72,9 +82,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/hellaswag-0.0.1.html";
 $(document).ready(() => {

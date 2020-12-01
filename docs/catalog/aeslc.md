@@ -8,36 +8,40 @@
   <meta itemprop="sameAs" content="https://github.com/ryanzhumich/AESLC" />
   <meta itemprop="citation" content="@misc{zhang2019email,&#10;    title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},&#10;    author={Rui Zhang and Joel Tetreault},&#10;    year={2019},&#10;    eprint={1906.03497},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `aeslc`
 
 *   **Description**:
 
 A collection of email messages of employees in the Enron Corporation.
 
-There are two features:
-  - email_body: email body text.
-  - subject_line: email subject text.
+There are two features: - email_body: email body text. - subject_line: email
+subject text.
 
-*   **Homepage**: [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
+*   **Homepage**:
+    [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
 
-*   **Source code**: [`tfds.summarization.Aeslc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/aeslc.py)
+*   **Source code**:
+    [`tfds.summarization.Aeslc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/aeslc.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `11.10 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,906
-`'train'` | 14,436
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,906
+`'train'`      | 14,436
 `'validation'` | 1,960
 
 *   **Features**:
@@ -49,7 +53,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('email_body', 'subject_line')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('email_body', 'subject_line')`
 
 *   **Citation**:
 
@@ -64,9 +70,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -74,9 +83,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/aeslc-1.0.0.html";
 $(document).ready(() => {

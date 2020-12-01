@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://summari.es" />
   <meta itemprop="citation" content="@article{Grusky_2018,&#10;   title={Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies},&#10;   url={http://dx.doi.org/10.18653/v1/n18-1065},&#10;   DOI={10.18653/v1/n18-1065},&#10;   journal={Proceedings of the 2018 Conference of the North American Chapter of&#10;          the Association for Computational Linguistics: Human Language&#10;          Technologies, Volume 1 (Long Papers)},&#10;   publisher={Association for Computational Linguistics},&#10;   author={Grusky, Max and Naaman, Mor and Artzi, Yoav},&#10;   year={2018}&#10;}" />
 </div>
+
 # `newsroom`
 
 Warning: Manual download required. See instructions below.
@@ -15,54 +16,49 @@ Warning: Manual download required. See instructions below.
 *   **Description**:
 
 NEWSROOM is a large dataset for training and evaluating summarization systems.
-It contains 1.3 million articles and summaries written by authors and
-editors in the newsrooms of 38 major publications.
+It contains 1.3 million articles and summaries written by authors and editors in
+the newsrooms of 38 major publications.
 
-Dataset features includes:
-  - text: Input news text.
-  - summary: Summary for the news.
-And additional features:
-  - title: news title.
-  - url: url of the news.
-  - date: date of the article.
-  - density: extractive density.
-  - coverage: extractive coverage.
-  - compression: compression ratio.
-  - density_bin: low, medium, high.
-  - coverage_bin: extractive, abstractive.
-  - compression_bin: low, medium, high.
+Dataset features includes: - text: Input news text. - summary: Summary for the
+news. And additional features: - title: news title. - url: url of the news. -
+date: date of the article. - density: extractive density. - coverage: extractive
+coverage. - compression: compression ratio. - density_bin: low, medium, high. -
+coverage_bin: extractive, abstractive. - compression_bin: low, medium, high.
 
 This dataset can be downloaded upon requests. Unzip all the contents
 "train.jsonl, dev.josnl, test.jsonl" to the tfds folder.
 
 *   **Homepage**: [https://summari.es](https://summari.es)
 
-*   **Source code**: [`tfds.summarization.Newsroom`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/newsroom.py)
+*   **Source code**:
+    [`tfds.summarization.Newsroom`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/newsroom.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
-download the source data manually into `download_config.manual_dir`
-(defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-You should download the dataset from https://summari.es/download/
-The webpage requires registration.
-After downloading, please put dev.jsonl, test.jsonl and train.jsonl
-files in the manual_dir.
+    download the source data manually into `download_config.manual_dir`
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
+    You should download the dataset from https://summari.es/download/
+    The webpage requires registration.
+    After downloading, please put dev.jsonl, test.jsonl and train.jsonl
+    files in the manual_dir.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 108,862
-`'train'` | 995,041
+Split          | Examples
+:------------- | -------:
+`'test'`       | 108,862
+`'train'`      | 995,041
 `'validation'` | 108,837
 
 *   **Features**:
@@ -83,7 +79,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'summary')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'summary')`
 
 *   **Citation**:
 
@@ -101,9 +99,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -111,9 +112,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/newsroom-1.0.0.html";
 $(document).ready(() => {

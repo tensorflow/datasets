@@ -8,37 +8,42 @@
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle = {NAACL},&#10;  year =      {2019},&#10;}" />
 </div>
+
 # `bool_q`
 
 *   **Description**:
 
-BoolQ is a question answering dataset for yes/no questions containing 15942 examples.
-These questions are naturally occurring, they are generated in unprompted and unconstrained settings.
+BoolQ is a question answering dataset for yes/no questions containing 15942
+examples. These questions are naturally occurring, they are generated in
+unprompted and unconstrained settings.
 
-Each example is a triplet of (question, passage, answer),
-with the title of the page as optional additional context.
-The text-pair classification setup is similar to existing
-natural language inference tasks.
+Each example is a triplet of (question, passage, answer), with the title of the
+page as optional additional context. The text-pair classification setup is
+similar to existing natural language inference tasks.
 
-*   **Homepage**: [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
+*   **Homepage**:
+    [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
 
-*   **Source code**: [`tfds.text.bool_q.BoolQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/bool_q/bool_q.py)
+*   **Source code**:
+    [`tfds.text.bool_q.BoolQ`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/bool_q/bool_q.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `8.36 MiB`
 
 *   **Dataset size**: `8.51 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 9,427
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,427
 `'validation'` | 3,270
 
 *   **Features**:
@@ -52,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -65,9 +72,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -75,9 +85,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bool_q-1.0.0.html";
 $(document).ready(() => {

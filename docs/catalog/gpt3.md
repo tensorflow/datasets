@@ -8,23 +8,29 @@
   <meta itemprop="sameAs" content="https://github.com/openai/gpt-3" />
   <meta itemprop="citation" content="@article{brown2020language,&#10;    title={Language Models are Few-Shot Learners},&#10;    author={Tom B. Brown et. al.}&#10;    year={2020},&#10;    eprint={2005.14165},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `gpt3`
 
 *   **Description**:
 
-Synthetic datasets for word scramble and arithmetic tasks described in the GPT3 paper.
+Synthetic datasets for word scramble and arithmetic tasks described in the GPT3
+paper.
 
-*   **Homepage**: [https://github.com/openai/gpt-3](https://github.com/openai/gpt-3)
+*   **Homepage**:
+    [https://github.com/openai/gpt-3](https://github.com/openai/gpt-3)
 
-*   **Source code**: [`tfds.text.Gpt3`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gpt3.py)
+*   **Source code**:
+    [`tfds.text.Gpt3`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gpt3.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `2.15 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -35,7 +41,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('context', 'completion')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('context', 'completion')`
 
 *   **Citation**:
 
@@ -50,8 +58,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## gpt3/cycle_letters_in_word (default config)
 
@@ -59,11 +68,12 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split    | Examples
+:------- | -------:
 `'test'` | 10,000
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -71,9 +81,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gpt3-cycle_letters_in_word-1.0.0.html";
 $(document).ready(() => {

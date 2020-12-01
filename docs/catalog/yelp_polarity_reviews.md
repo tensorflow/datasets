@@ -8,64 +8,65 @@
   <meta itemprop="sameAs" content="https://course.fast.ai/datasets" />
   <meta itemprop="citation" content="@article{zhangCharacterlevelConvolutionalNetworks2015,&#10;  archivePrefix = {arXiv},&#10;  eprinttype = {arxiv},&#10;  eprint = {1509.01626},&#10;  primaryClass = {cs},&#10;  title = {Character-Level {{Convolutional Networks}} for {{Text Classification}}},&#10;  abstract = {This article offers an empirical exploration on the use of character-level convolutional networks (ConvNets) for text classification. We constructed several large-scale datasets to show that character-level convolutional networks could achieve state-of-the-art or competitive results. Comparisons are offered against traditional models such as bag of words, n-grams and their TFIDF variants, and deep learning models such as word-based ConvNets and recurrent neural networks.},&#10;  journal = {arXiv:1509.01626 [cs]},&#10;  author = {Zhang, Xiang and Zhao, Junbo and LeCun, Yann},&#10;  month = sep,&#10;  year = {2015},&#10;}" />
 </div>
+
 # `yelp_polarity_reviews`
 
-Note: This dataset has been updated since the last stable release.
-The new versions and config marked with <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
-Large Yelp Review Dataset.
-This is a dataset for binary sentiment classification. We provide a set of 560,000 highly polar yelp reviews for training, and 38,000 for testing.
-ORIGIN
-The Yelp reviews dataset consists of reviews from Yelp. It is extracted
-from the Yelp Dataset Challenge 2015 data. For more information, please
-refer to http://www.yelp.com/dataset
+Large Yelp Review Dataset. This is a dataset for binary sentiment
+classification. We provide a set of 560,000 highly polar yelp reviews for
+training, and 38,000 for testing. ORIGIN The Yelp reviews dataset consists of
+reviews from Yelp. It is extracted from the Yelp Dataset Challenge 2015 data.
+For more information, please refer to http://www.yelp.com/dataset
 
-The Yelp reviews polarity dataset is constructed by
-Xiang Zhang (xiang.zhang@nyu.edu) from the above dataset.
-It is first used as a text classification benchmark in the following paper:
-Xiang Zhang, Junbo Zhao, Yann LeCun. Character-level Convolutional Networks
-for Text Classification. Advances in Neural Information Processing Systems 28
-(NIPS 2015).
-
+The Yelp reviews polarity dataset is constructed by Xiang Zhang
+(xiang.zhang@nyu.edu) from the above dataset. It is first used as a text
+classification benchmark in the following paper: Xiang Zhang, Junbo Zhao, Yann
+LeCun. Character-level Convolutional Networks for Text Classification. Advances
+in Neural Information Processing Systems 28 (NIPS 2015).
 
 DESCRIPTION
 
 The Yelp reviews polarity dataset is constructed by considering stars 1 and 2
 negative, and 3 and 4 positive. For each polarity 280,000 training samples and
 19,000 testing samples are take randomly. In total there are 560,000 trainig
-samples and 38,000 testing samples. Negative polarity is class 1,
-and positive class 2.
+samples and 38,000 testing samples. Negative polarity is class 1, and positive
+class 2.
 
 The files train.csv and test.csv contain all the training samples as
-comma-sparated values. There are 2 columns in them, corresponding to class
-index (1 and 2) and review text. The review texts are escaped using double
-quotes ("), and any internal double quote is escaped by 2 double quotes ("").
-New lines are escaped by a backslash followed with an "n" character,
-that is "
-".
+comma-sparated values. There are 2 columns in them, corresponding to class index
+(1 and 2) and review text. The review texts are escaped using double quotes ("),
+and any internal double quote is escaped by 2 double quotes (""). New lines are
+escaped by a backslash followed with an "n" character, that is " ".
 
-*   **Homepage**: [https://course.fast.ai/datasets](https://course.fast.ai/datasets)
+*   **Homepage**:
+    [https://course.fast.ai/datasets](https://course.fast.ai/datasets)
 
-*   **Source code**: [`tfds.text.YelpPolarityReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/yelp_polarity.py)
+*   **Source code**:
+    [`tfds.text.YelpPolarityReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/yelp_polarity.py)
 
 *   **Versions**:
 
-    * **`0.2.0`** (default): No release notes.
+    *   **`0.2.0`** (default): No release notes.
 
 *   **Download size**: `158.67 MiB`
 
 *   **Dataset size**: `435.14 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 38,000
+Split     | Examples
+:-------- | -------:
+`'test'`  | 38,000
 `'train'` | 560,000
 
 *   **Features**:
@@ -77,7 +78,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'label')`
 
 *   **Citation**:
 
@@ -96,9 +99,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -106,9 +112,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/yelp_polarity_reviews-0.2.0.html";
 $(document).ready(() => {

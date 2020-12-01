@@ -8,36 +8,35 @@
   <meta itemprop="sameAs" content="https://github.com/ctr4si/MMN" />
   <meta itemprop="citation" content="@misc{kim2018abstractive,&#10;    title={Abstractive Summarization of Reddit Posts with Multi-level Memory Networks},&#10;    author={Byeongchang Kim and Hyunwoo Kim and Gunhee Kim},&#10;    year={2018},&#10;    eprint={1811.00783},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `reddit_tifu`
 
 *   **Description**:
 
-Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu.
-As defined in the publication, styel "short" uses title as summary and
-"long" uses tldr as summary.
+Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu. As defined in
+the publication, styel "short" uses title as summary and "long" uses tldr as
+summary.
 
-Features includes:
-  - document: post text without tldr.
-  - tldr: tldr line.
-  - title: trimmed title without tldr.
-  - ups: upvotes.
-  - score: score.
-  - num_comments: number of comments.
-  - upvote_ratio: upvote ratio.
+Features includes: - document: post text without tldr. - tldr: tldr line. -
+title: trimmed title without tldr. - ups: upvotes. - score: score. -
+num_comments: number of comments. - upvote_ratio: upvote ratio.
 
 *   **Homepage**: [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
-*   **Source code**: [`tfds.summarization.RedditTifu`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit_tifu.py)
+*   **Source code**:
+    [`tfds.summarization.RedditTifu`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/reddit_tifu.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
 *   **Download size**: `639.54 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Features**:
 
@@ -66,8 +65,9 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## reddit_tifu/short (default config)
 
@@ -75,13 +75,16 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 79,740
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('documents', 'title')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('documents', 'title')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -89,9 +92,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/reddit_tifu-short-1.1.0.html";
 $(document).ready(() => {

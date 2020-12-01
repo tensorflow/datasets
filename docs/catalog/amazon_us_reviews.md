@@ -8,44 +8,59 @@
   <meta itemprop="sameAs" content="https://s3.amazonaws.com/amazon-reviews-pds/readme.html" />
   <meta itemprop="citation" content="" />
 </div>
+
 # `amazon_us_reviews`
 
 *   **Description**:
 
-Amazon Customer Reviews (a.k.a. Product Reviews) is one of Amazons iconic products. In a period of over two decades since the first review in 1995, millions of Amazon customers have contributed over a hundred million reviews to express opinions and describe their experiences regarding products on the Amazon.com website. This makes Amazon Customer Reviews a rich source of information for academic researchers in the fields of Natural Language Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst others. Accordingly, we are releasing this data to further research in multiple disciplines related to understanding customer product experiences. Specifically, this dataset was constructed to represent a sample of customer evaluations and opinions, variation in the perception of a product across geographical regions, and promotional intent or bias in reviews.
+Amazon Customer Reviews (a.k.a. Product Reviews) is one of Amazons iconic
+products. In a period of over two decades since the first review in 1995,
+millions of Amazon customers have contributed over a hundred million reviews to
+express opinions and describe their experiences regarding products on the
+Amazon.com website. This makes Amazon Customer Reviews a rich source of
+information for academic researchers in the fields of Natural Language
+Processing (NLP), Information Retrieval (IR), and Machine Learning (ML), amongst
+others. Accordingly, we are releasing this data to further research in multiple
+disciplines related to understanding customer product experiences. Specifically,
+this dataset was constructed to represent a sample of customer evaluations and
+opinions, variation in the perception of a product across geographical regions,
+and promotional intent or bias in reviews.
 
-Over 130+ million customer reviews are available to researchers as part of this release. The data is available in TSV files in the amazon-reviews-pds S3 bucket in AWS US East Region. Each line in the data files corresponds to an individual review (tab delimited, with no quote and escape characters).
+Over 130+ million customer reviews are available to researchers as part of this
+release. The data is available in TSV files in the amazon-reviews-pds S3 bucket
+in AWS US East Region. Each line in the data files corresponds to an individual
+review (tab delimited, with no quote and escape characters).
 
-Each Dataset contains the following columns :
-  marketplace       - 2 letter country code of the marketplace where the review was written.
-  customer_id       - Random identifier that can be used to aggregate reviews written by a single author.
-  review_id         - The unique ID of the review.
-  product_id        - The unique Product ID the review pertains to. In the multilingual dataset the reviews
-                      for the same product in different countries can be grouped by the same product_id.
-  product_parent    - Random identifier that can be used to aggregate reviews for the same product.
-  product_title     - Title of the product.
-  product_category  - Broad product category that can be used to group reviews
-                      (also used to group the dataset into coherent parts).
-  star_rating       - The 1-5 star rating of the review.
-  helpful_votes     - Number of helpful votes.
-  total_votes       - Number of total votes the review received.
-  vine              - Review was written as part of the Vine program.
-  verified_purchase - The review is on a verified purchase.
-  review_headline   - The title of the review.
-  review_body       - The review text.
-  review_date       - The date the review was written.
+Each Dataset contains the following columns : marketplace - 2 letter country
+code of the marketplace where the review was written. customer_id - Random
+identifier that can be used to aggregate reviews written by a single author.
+review_id - The unique ID of the review. product_id - The unique Product ID the
+review pertains to. In the multilingual dataset the reviews for the same product
+in different countries can be grouped by the same product_id. product_parent -
+Random identifier that can be used to aggregate reviews for the same product.
+product_title - Title of the product. product_category - Broad product category
+that can be used to group reviews (also used to group the dataset into coherent
+parts). star_rating - The 1-5 star rating of the review. helpful_votes - Number
+of helpful votes. total_votes - Number of total votes the review received.
+vine - Review was written as part of the Vine program. verified_purchase - The
+review is on a verified purchase. review_headline - The title of the review.
+review_body - The review text. review_date - The date the review was written.
 
-*   **Homepage**: [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+*   **Homepage**:
+    [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
 
-*   **Source code**: [`tfds.structured.AmazonUSReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/amazon_us_reviews.py)
+*   **Source code**:
+    [`tfds.structured.AmazonUSReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/amazon_us_reviews.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Features**:
 
@@ -71,26 +86,32 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## amazon_us_reviews/Wireless_v1_00 (default config)
 
-*   **Config description**: A dataset consisting of reviews of Amazon Wireless_v1_00 products in US marketplace. Each product has its own version as specified with it.
+*   **Config description**: A dataset consisting of reviews of Amazon
+    Wireless_v1_00 products in US marketplace. Each product has its own version
+    as specified with it.
 
 *   **Download size**: `1.59 GiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | --------:
 `'train'` | 9,002,021
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -98,9 +119,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Wireless_v1_00-0.1.0.html";
 $(document).ready(() => {

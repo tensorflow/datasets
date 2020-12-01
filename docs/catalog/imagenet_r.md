@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/hendrycks/imagenet-r" />
   <meta itemprop="citation" content="@article{hendrycks2020many,&#10;  title={The Many Faces of Robustness: A Critical Analysis of Out-of-Distribution Generalization},&#10;  author={Dan Hendrycks and Steven Basart and Norman Mu and Saurav Kadavath and Frank Wang and Evan Dorundo and Rahul Desai and Tyler Zhu and Samyak Parajuli and Mike Guo and Dawn Song and Jacob Steinhardt and Justin Gilmer},&#10;  journal={arXiv preprint arXiv:2006.16241},&#10;  year={2020}&#10;}" />
 </div>
+
 # `imagenet_r`
 
 *   **Description**:
@@ -16,35 +17,39 @@ ImageNet-R is a set of images labelled with ImageNet labels that were obtained
 by collecting art, cartoons, deviantart, graffiti, embroidery, graphics,
 origami, paintings, patterns, plastic objects, plush objects, sculptures,
 sketches, tattoos, toys, and video game renditions of ImageNet classes.
-ImageNet-R has renditions of 200 ImageNet classes resulting in 30,000 images.
-by collecting new data and keeping only those images that ResNet-50 models fail
-to correctly classify. For more details please refer to the paper.
+ImageNet-R has renditions of 200 ImageNet classes resulting in 30,000 images. by
+collecting new data and keeping only those images that ResNet-50 models fail to
+correctly classify. For more details please refer to the paper.
 
-The label space is the same as that of ImageNet2012. Each example is
-represented as a dictionary with the following keys:
+The label space is the same as that of ImageNet2012. Each example is represented
+as a dictionary with the following keys:
 
-* 'image': The image, a (H, W, 3)-tensor.
-* 'label': An integer in the range [0, 1000).
-* 'file_name': A unique sting identifying the example within the dataset.
+*   'image': The image, a (H, W, 3)-tensor.
+*   'label': An integer in the range [0, 1000).
+*   'file_name': A unique sting identifying the example within the dataset.
 
-*   **Homepage**: [https://github.com/hendrycks/imagenet-r](https://github.com/hendrycks/imagenet-r)
+*   **Homepage**:
+    [https://github.com/hendrycks/imagenet-r](https://github.com/hendrycks/imagenet-r)
 
-*   **Source code**: [`tfds.image_classification.ImagenetR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_r.py)
+*   **Source code**:
+    [`tfds.image_classification.ImagenetR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_r.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `2.04 GiB`
 
 *   **Dataset size**: `2.03 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split    | Examples
+:------- | -------:
 `'test'` | 30,000
 
 *   **Features**:
@@ -57,7 +62,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -70,11 +77,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenet_r-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -82,9 +91,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imagenet_r-0.1.0.html";
 $(document).ready(() => {

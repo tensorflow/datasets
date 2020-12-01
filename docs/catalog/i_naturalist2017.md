@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/visipedia/inat_comp/tree/master/2017" />
   <meta itemprop="citation" content="@InProceedings{Horn_2018_CVPR,&#10;author = {&#10;Van Horn, Grant and Mac Aodha, Oisin and Song, Yang and Cui, Yin and Sun, Chen&#10;and Shepard, Alex and Adam, Hartwig and Perona, Pietro and Belongie, Serge},&#10;title = {The INaturalist Species Classification and Detection Dataset},&#10;booktitle = {&#10;The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},&#10;month = {June},&#10;year = {2018}&#10;}" />
 </div>
+
 # `i_naturalist2017`
 
 *   **Description**:
@@ -18,30 +19,34 @@ images per category follows the observation frequency of that category by the
 iNaturalist community.
 
 Although the original dataset contains some images with bounding boxes,
-currently, only image-level annotations are provided (single label/image).
-In addition, the organizers have not published the test labels, so we only
-provide the test images (label = -1).
+currently, only image-level annotations are provided (single label/image). In
+addition, the organizers have not published the test labels, so we only provide
+the test images (label = -1).
 
-*   **Homepage**: [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
+*   **Homepage**:
+    [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
 
-*   **Source code**: [`tfds.image_classification.INaturalist2017`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/inaturalist.py)
+*   **Source code**:
+    [`tfds.image_classification.INaturalist2017`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/inaturalist.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `237.35 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 182,707
-`'train'` | 579,184
+Split          | Examples
+:------------- | -------:
+`'test'`       | 182,707
+`'train'`      | 579,184
 `'validation'` | 95,986
 
 *   **Features**:
@@ -55,7 +60,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -72,11 +79,13 @@ year = {2018}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/i_naturalist2017-0.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -84,9 +93,7 @@ year = {2018}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/i_naturalist2017-0.1.0.html";
 $(document).ready(() => {

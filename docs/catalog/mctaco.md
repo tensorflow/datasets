@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/CogComp/MCTACO" />
   <meta itemprop="citation" content="@inproceedings{ZKNR19,&#10;    author = {Ben Zhou, Daniel Khashabi, Qiang Ning and Dan Roth},&#10;    title = {&quot;Going on a vacation&quot; takes longer than &quot;Going for a walk&quot;: A Study of Temporal Commonsense Understanding },&#10;    booktitle = {EMNLP},&#10;    year = {2019},&#10;}" />
 </div>
+
 # `mctaco`
 
 *   **Description**:
@@ -15,34 +16,39 @@
 MC-TACO is a dataset of 13k question-answer pairs that require temporal
 commonsense comprehension. The dataset contains five temporal properties:
 
-1. duration (how long an event takes)
-2. temporal ordering (typical order of events)
-3. typical time (when an event occurs)
-4. frequency (how often an event occurs)
-5. stationarity (whether a state is maintained for a very long time or indefinitely)
+1.  duration (how long an event takes)
+2.  temporal ordering (typical order of events)
+3.  typical time (when an event occurs)
+4.  frequency (how often an event occurs)
+5.  stationarity (whether a state is maintained for a very long time or
+    indefinitely)
 
-We hope that this dataset can promote the future exploration of this
- particular class of reasoning problems.
+We hope that this dataset can promote the future exploration of this particular
+class of reasoning problems.
 
-*   **Homepage**: [https://github.com/CogComp/MCTACO](https://github.com/CogComp/MCTACO)
+*   **Homepage**:
+    [https://github.com/CogComp/MCTACO](https://github.com/CogComp/MCTACO)
 
-*   **Source code**: [`tfds.question_answering.Mctaco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/mctaco.py)
+*   **Source code**:
+    [`tfds.question_answering.Mctaco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/mctaco.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `2.27 MiB`
 
 *   **Dataset size**: `3.18 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 9,442
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,442
 `'validation'` | 3,783
 
 *   **Features**:
@@ -57,7 +63,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -70,9 +78,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -80,9 +91,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mctaco-1.0.0.html";
 $(document).ready(() => {

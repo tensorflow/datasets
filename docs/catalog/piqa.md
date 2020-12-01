@@ -8,39 +8,45 @@
   <meta itemprop="sameAs" content="https://leaderboard.allenai.org/physicaliqa/submissions/get-started" />
   <meta itemprop="citation" content="@inproceedings{Bisk2020,&#10;  author = {Yonatan Bisk and Rowan Zellers and&#10;            Ronan Le Bras and Jianfeng Gao&#10;            and Yejin Choi},&#10;  title = {PIQA: Reasoning about Physical Commonsense in&#10;           Natural Language},&#10;  booktitle = {Thirty-Fourth AAAI Conference on&#10;               Artificial Intelligence},&#10;  year = {2020},&#10;}" />
 </div>
+
 # `piqa`
 
 *   **Description**:
 
-Physical IQa: Physical Interaction QA, a new commonsense QA benchmark for naive physics
-reasoning focusing on how we interact with everyday objects in everyday situations. This
-dataset focuses on affordances of objects, i.e., what actions each physical object affords
-(e.g., it is possible to use a shoe as a doorstop), and what physical interactions a group
-of objects afford (e.g., it is possible to place an apple on top of a book, but not the
-other way around). The dataset requires reasoning about both the prototypical use of
-objects (e.g., shoes are used for walking) and non-prototypical but practically plausible
-use of objects (e.g., shoes can be used as a doorstop). The dataset includes 20,000 QA
-pairs that are either multiple-choice or true/false questions.
+Physical IQa: Physical Interaction QA, a new commonsense QA benchmark for naive
+physics reasoning focusing on how we interact with everyday objects in everyday
+situations. This dataset focuses on affordances of objects, i.e., what actions
+each physical object affords (e.g., it is possible to use a shoe as a doorstop),
+and what physical interactions a group of objects afford (e.g., it is possible
+to place an apple on top of a book, but not the other way around). The dataset
+requires reasoning about both the prototypical use of objects (e.g., shoes are
+used for walking) and non-prototypical but practically plausible use of objects
+(e.g., shoes can be used as a doorstop). The dataset includes 20,000 QA pairs
+that are either multiple-choice or true/false questions.
 
-*   **Homepage**: [https://leaderboard.allenai.org/physicaliqa/submissions/get-started](https://leaderboard.allenai.org/physicaliqa/submissions/get-started)
+*   **Homepage**:
+    [https://leaderboard.allenai.org/physicaliqa/submissions/get-started](https://leaderboard.allenai.org/physicaliqa/submissions/get-started)
 
-*   **Source code**: [`tfds.text.PIQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/piqa.py)
+*   **Source code**:
+    [`tfds.text.PIQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/piqa.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `1.74 MiB`
 
 *   **Dataset size**: `5.92 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 16,113
+Split          | Examples
+:------------- | -------:
+`'train'`      | 16,113
 `'validation'` | 1,838
 
 *   **Features**:
@@ -55,7 +61,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -72,9 +80,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -82,9 +93,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/piqa-1.0.0.html";
 $(document).ready(() => {

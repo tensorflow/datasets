@@ -8,35 +8,41 @@
   <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/iris" />
   <meta itemprop="citation" content="@misc{Dua:2019 ,&#10;author = &quot;Dua, Dheeru and Graff, Casey&quot;,&#10;year = &quot;2017&quot;,&#10;title = &quot;{UCI} Machine Learning Repository&quot;,&#10;url = &quot;http://archive.ics.uci.edu/ml&quot;,&#10;institution = &quot;University of California, Irvine, School of Information and Computer Sciences&quot;&#10;}" />
 </div>
+
 # `iris`
 
 *   **Description**:
 
 This is perhaps the best known database to be found in the pattern recognition
 literature. Fisher's paper is a classic in the field and is referenced
-frequently to this day. (See Duda & Hart, for example.) The data set contains
-3 classes of 50 instances each, where each class refers to a type of iris
-plant. One class is linearly separable from the other 2; the latter are NOT
-linearly separable from each other.
+frequently to this day. (See Duda & Hart, for example.) The data set contains 3
+classes of 50 instances each, where each class refers to a type of iris plant.
+One class is linearly separable from the other 2; the latter are NOT linearly
+separable from each other.
 
-*   **Homepage**: [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+*   **Homepage**:
+    [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 
-*   **Source code**: [`tfds.structured.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
+*   **Source code**:
+    [`tfds.structured.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `4.44 KiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 150
 
 *   **Features**:
@@ -48,7 +54,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('features', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('features', 'label')`
 
 *   **Citation**:
 
@@ -62,9 +70,12 @@ institution = "University of California, Irvine, School of Information and Compu
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -72,9 +83,7 @@ institution = "University of California, Irvine, School of Information and Compu
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/iris-2.0.0.html";
 $(document).ready(() => {

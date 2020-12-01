@@ -8,47 +8,45 @@
   <meta itemprop="sameAs" content="https://github.com/allenai/scicite" />
   <meta itemprop="citation" content="@InProceedings{Cohan2019Structural,&#10;  author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},&#10;  title={Structural Scaffolds for Citation Intent Classification in Scientific Publications},&#10;  booktitle=&quot;NAACL&quot;,&#10;  year=&quot;2019&quot;&#10;}" />
 </div>
+
 # `scicite`
 
 *   **Description**:
 
-This is a dataset for classifying citation intents in academic papers.
-The main citation intent label for each Json object is specified with the label
-key while the citation context is specified in with a context key. Example:
-{
- 'string': 'In chacma baboons, male-infant relationships can be linked to both
-    formation of friendships and paternity success [30,31].'
- 'sectionName': 'Introduction',
- 'label': 'background',
- 'citingPaperId': '7a6b2d4b405439',
- 'citedPaperId': '9d1abadc55b5e0',
- ...
- }
-You may obtain the full information about the paper using the provided paper ids
-with the Semantic Scholar API (https://api.semanticscholar.org/).
-The labels are:
-Method, Background, Result
+This is a dataset for classifying citation intents in academic papers. The main
+citation intent label for each Json object is specified with the label key while
+the citation context is specified in with a context key. Example: { 'string':
+'In chacma baboons, male-infant relationships can be linked to both formation of
+friendships and paternity success [30,31].' 'sectionName': 'Introduction',
+'label': 'background', 'citingPaperId': '7a6b2d4b405439', 'citedPaperId':
+'9d1abadc55b5e0', ... } You may obtain the full information about the paper
+using the provided paper ids with the Semantic Scholar API
+(https://api.semanticscholar.org/). The labels are: Method, Background, Result
 
-*   **Homepage**: [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
+*   **Homepage**:
+    [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
 
-*   **Source code**: [`tfds.text.Scicite`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scicite.py)
+*   **Source code**:
+    [`tfds.text.Scicite`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scicite.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `22.12 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,859
-`'train'` | 8,194
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,859
+`'train'`      | 8,194
 `'validation'` | 916
 
 *   **Features**:
@@ -72,7 +70,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('string', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('string', 'label')`
 
 *   **Citation**:
 
@@ -85,9 +85,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -95,9 +98,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/scicite-1.0.0.html";
 $(document).ready(() => {

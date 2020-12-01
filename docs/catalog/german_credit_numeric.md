@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)" />
   <meta itemprop="citation" content="@misc{Dua:2019 ,&#10;author = &quot;Dua, Dheeru and Graff, Casey&quot;,&#10;year = &quot;2017&quot;,&#10;title = &quot;{UCI} Machine Learning Repository&quot;,&#10;url = &quot;http://archive.ics.uci.edu/ml&quot;,&#10;institution = &quot;University of California, Irvine, School of Information and Computer Sciences&quot;&#10;}" />
 </div>
+
 # `german_credit_numeric`
 
 *   **Description**:
@@ -17,24 +18,28 @@ credit risks. The version here is the "numeric" variant where categorical and
 ordered categorical attributes have been encoded as indicator and integer
 quantities respectively.
 
-*   **Homepage**: [https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)](https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data))
+*   **Homepage**:
+    [https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)](https://archive.ics.uci.edu/ml/datasets/Statlog+\(German+Credit+Data\))
 
-*   **Source code**: [`tfds.structured.GermanCreditNumeric`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/german_credit_numeric.py)
+*   **Source code**:
+    [`tfds.structured.GermanCreditNumeric`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/german_credit_numeric.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `99.61 KiB`
 
 *   **Dataset size**: `58.61 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 1,000
 
 *   **Features**:
@@ -46,7 +51,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('features', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('features', 'label')`
 
 *   **Citation**:
 
@@ -60,9 +67,12 @@ institution = "University of California, Irvine, School of Information and Compu
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -70,9 +80,7 @@ institution = "University of California, Irvine, School of Information and Compu
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/german_credit_numeric-1.0.0.html";
 $(document).ready(() => {

@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://cs.stanford.edu/people/jcjohns/clevr/" />
   <meta itemprop="citation" content="@inproceedings{johnson2017clevr,&#10;  title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},&#10;  author={Johnson, Justin and Hariharan, Bharath and van der Maaten, Laurens and Fei-Fei, Li and Lawrence Zitnick, C and Girshick, Ross},&#10;  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},&#10;  year={2017}&#10;}" />
 </div>
+
 # `clevr`
 
 *   **Description**:
@@ -16,27 +17,31 @@ CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
 It contains minimal biases and has detailed annotations describing the kind of
 reasoning each question requires.
 
-*   **Homepage**: [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
+*   **Homepage**:
+    [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 
-*   **Source code**: [`tfds.image.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
+*   **Source code**:
+    [`tfds.image.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
 
 *   **Versions**:
 
-    * `3.0.0`: No release notes.
-    * **`3.1.0`** (default): Add question/answer text.
+    *   `3.0.0`: No release notes.
+    *   **`3.1.0`** (default): Add question/answer text.
 
 *   **Download size**: `17.72 GiB`
 
 *   **Dataset size**: `17.75 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 15,000
-`'train'` | 70,000
+Split          | Examples
+:------------- | -------:
+`'test'`       | 15,000
+`'train'`      | 70,000
 `'validation'` | 15,000
 
 *   **Features**:
@@ -61,7 +66,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -74,11 +81,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/clevr-3.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -86,9 +95,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/clevr-3.1.0.html";
 $(document).ready(() => {

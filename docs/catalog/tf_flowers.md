@@ -8,30 +8,35 @@
   <meta itemprop="sameAs" content="https://www.tensorflow.org/tutorials/load_data/images" />
   <meta itemprop="citation" content="@ONLINE {tfflowers,&#10;author = &quot;The TensorFlow Team&quot;,&#10;title = &quot;Flowers&quot;,&#10;month = &quot;jan&quot;,&#10;year = &quot;2019&quot;,&#10;url = &quot;http://download.tensorflow.org/example_images/flower_photos.tgz&quot; }" />
 </div>
+
 # `tf_flowers`
 
 *   **Description**:
 
 A large set of images of flowers
 
-*   **Homepage**: [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
+*   **Homepage**:
+    [https://www.tensorflow.org/tutorials/load_data/images](https://www.tensorflow.org/tutorials/load_data/images)
 
-*   **Source code**: [`tfds.image_classification.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/flowers.py)
+*   **Source code**:
+    [`tfds.image_classification.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/flowers.py)
 
 *   **Versions**:
 
-    * **`3.0.1`** (default): No release notes.
+    *   **`3.0.1`** (default): No release notes.
 
 *   **Download size**: `218.21 MiB`
 
 *   **Dataset size**: `221.83 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Only when `shuffle_files=False` (train)
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 3,670
 
 *   **Features**:
@@ -43,7 +48,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -56,11 +63,13 @@ year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/tf_flowers-3.0.1.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -68,9 +77,7 @@ url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tf_flowers-3.0.1.html";
 $(document).ready(() => {

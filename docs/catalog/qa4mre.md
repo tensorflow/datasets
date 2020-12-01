@@ -8,29 +8,34 @@
   <meta itemprop="sameAs" content="http://nlp.uned.es/clef-qa/repository/pastCampaigns.php" />
   <meta itemprop="citation" content="@InProceedings{10.1007/978-3-642-40802-1_29,&#10;author=&quot;Pe{\~{n}}as, Anselmo&#10;and Hovy, Eduard&#10;and Forner, Pamela&#10;and Rodrigo, {\&#x27;A}lvaro&#10;and Sutcliffe, Richard&#10;and Morante, Roser&quot;,&#10;editor=&quot;Forner, Pamela&#10;and M{\&quot;u}ller, Henning&#10;and Paredes, Roberto&#10;and Rosso, Paolo&#10;and Stein, Benno&quot;,&#10;title=&quot;QA4MRE 2011-2013: Overview of Question Answering for Machine Reading Evaluation&quot;,&#10;booktitle=&quot;Information Access Evaluation. Multilinguality, Multimodality, and Visualization&quot;,&#10;year=&quot;2013&quot;,&#10;publisher=&quot;Springer Berlin Heidelberg&quot;,&#10;address=&quot;Berlin, Heidelberg&quot;,&#10;pages=&quot;303--320&quot;,&#10;abstract=&quot;This paper describes the methodology for testing the performance of Machine Reading systems through Question Answering and Reading Comprehension Tests. This was the attempt of the QA4MRE challenge which was run as a Lab at CLEF 2011--2013. The traditional QA task was replaced by a new Machine Reading task, whose intention was to ask questions that required a deep knowledge of individual short texts and in which systems were required to choose one answer, by analysing the corresponding test document in conjunction with background text collections provided by the organization. Four different tasks have been organized during these years: Main Task, Processing Modality and Negation for Machine Reading, Machine Reading of Biomedical Texts about Alzheimer&#x27;s disease, and Entrance Exams. This paper describes their motivation, their goals, their methodology for preparing the data sets, their background collections, their metrics used for the evaluation, and the lessons learned along these three years.&quot;,&#10;isbn=&quot;978-3-642-40802-1&quot;&#10;}" />
 </div>
+
 # `qa4mre`
 
 *   **Description**:
 
-QA4MRE dataset was created for the CLEF 2011/2012/2013 shared tasks to promote research in
-question answering and reading comprehension. The dataset contains a supporting
-passage and a set of questions corresponding to the passage. Multiple options
-for answers are provided for each question, of which only one is correct. The
-training and test datasets are available for the main track.
+QA4MRE dataset was created for the CLEF 2011/2012/2013 shared tasks to promote
+research in question answering and reading comprehension. The dataset contains a
+supporting passage and a set of questions corresponding to the passage. Multiple
+options for answers are provided for each question, of which only one is
+correct. The training and test datasets are available for the main track.
 Additional gold standard documents are available for two pilot studies: one on
 alzheimers data, and the other on entrance exams data.
 
-*   **Homepage**: [http://nlp.uned.es/clef-qa/repository/pastCampaigns.php](http://nlp.uned.es/clef-qa/repository/pastCampaigns.php)
+*   **Homepage**:
+    [http://nlp.uned.es/clef-qa/repository/pastCampaigns.php](http://nlp.uned.es/clef-qa/repository/pastCampaigns.php)
 
-*   **Source code**: [`tfds.text.Qa4mre`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/qa4mre.py)
+*   **Source code**:
+    [`tfds.text.Qa4mre`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/qa4mre.py)
 
 *   **Versions**:
 
-    * **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -52,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -80,22 +87,25 @@ isbn="978-3-642-40802-1"
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## qa4mre/2011.main.DE (default config)
 
-*   **Config description**: This configuration includes the main track for DE language in 2011 year.
+*   **Config description**: This configuration includes the main track for DE
+    language in 2011 year.
 
 *   **Dataset size**: `1.69 MiB`
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 120
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -103,9 +113,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2011.main.DE-0.1.0.html";
 $(document).ready(() => {

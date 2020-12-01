@@ -8,33 +8,43 @@
   <meta itemprop="sameAs" content="https://www.vision.ee.ethz.ch/datasets_extra/food-101/" />
   <meta itemprop="citation" content="@inproceedings{bossard14,&#10;  title = {Food-101 -- Mining Discriminative Components with Random Forests},&#10;  author = {Bossard, Lukas and Guillaumin, Matthieu and Van Gool, Luc},&#10;  booktitle = {European Conference on Computer Vision},&#10;  year = {2014}&#10;}" />
 </div>
+
 # `food101`
 
 *   **Description**:
 
-This dataset consists of 101 food categories, with 101'000 images. For each class, 250 manually reviewed test images are provided as well as 750 training images. On purpose, the training images were not cleaned, and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels.
+This dataset consists of 101 food categories, with 101'000 images. For each
+class, 250 manually reviewed test images are provided as well as 750 training
+images. On purpose, the training images were not cleaned, and thus still contain
+some amount of noise. This comes mostly in the form of intense colors and
+sometimes wrong labels. All images were rescaled to have a maximum side length
+of 512 pixels.
 
-*   **Homepage**: [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
+*   **Homepage**:
+    [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
 
-*   **Source code**: [`tfds.image_classification.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/food101.py)
+*   **Source code**:
+    [`tfds.image_classification.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/food101.py)
 
 *   **Versions**:
 
-    * `1.0.0`: No release notes.
-    * **`2.0.0`** (default): No release notes.
-    * `2.1.0`: No release notes.
+    *   `1.0.0`: No release notes.
+    *   **`2.0.0`** (default): No release notes.
+    *   `2.1.0`: No release notes.
 
 *   **Download size**: `4.65 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'train'` | 75,750
+Split          | Examples
+:------------- | -------:
+`'train'`      | 75,750
 `'validation'` | 25,250
 
 *   **Features**:
@@ -46,7 +56,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -59,11 +71,13 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/food101-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -71,9 +85,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/food101-2.0.0.html";
 $(document).ready(() => {

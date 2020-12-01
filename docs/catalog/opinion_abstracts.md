@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="http://www.ccs.neu.edu/home/luwang/data.html" />
   <meta itemprop="citation" content="@inproceedings{wang-ling-2016-neural,&#10;    title = &quot;Neural Network-Based Abstract Generation for Opinions and Arguments&quot;,&#10;    author = &quot;Wang, Lu  and&#10;      Ling, Wang&quot;,&#10;    booktitle = &quot;Proceedings of the 2016 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies&quot;,&#10;    month = jun,&#10;    year = &quot;2016&quot;,&#10;    address = &quot;San Diego, California&quot;,&#10;    publisher = &quot;Association for Computational Linguistics&quot;,&#10;    url = &quot;https://www.aclweb.org/anthology/N16-1007&quot;,&#10;    doi = &quot;10.18653/v1/N16-1007&quot;,&#10;    pages = &quot;47--57&quot;,&#10;}" />
 </div>
+
 # `opinion_abstracts`
 
 *   **Description**:
@@ -21,17 +22,21 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 (2) IDebate: The arguments crawled from http://idebate.org/. It has fields of
 "_debate_name", "_debate_id", "_claim", "_claim_id", "_argument_sentences".
 
-*   **Homepage**: [http://www.ccs.neu.edu/home/luwang/data.html](http://www.ccs.neu.edu/home/luwang/data.html)
+*   **Homepage**:
+    [http://www.ccs.neu.edu/home/luwang/data.html](http://www.ccs.neu.edu/home/luwang/data.html)
 
-*   **Source code**: [`tfds.summarization.OpinionAbstracts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinion_abstracts.py)
+*   **Source code**:
+    [`tfds.summarization.OpinionAbstracts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/opinion_abstracts.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `20.08 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Citation**:
 
@@ -51,8 +56,9 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
-
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 ## opinion_abstracts/rotten_tomatoes (default config)
 
@@ -62,8 +68,8 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 3,731
 
 *   **Features**:
@@ -80,9 +86,12 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('_critics', '_critic_consensus')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('_critics', '_critic_consensus')`
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -90,9 +99,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/opinion_abstracts-rotten_tomatoes-1.0.0.html";
 $(document).ready(() => {

@@ -8,29 +8,41 @@
   <meta itemprop="sameAs" content="https://www.nist.gov/itl/products-and-services/emnist-dataset" />
   <meta itemprop="citation" content="@article{cohen_afshar_tapson_schaik_2017,&#10;    title={EMNIST: Extending MNIST to handwritten letters},&#10;    DOI={10.1109/ijcnn.2017.7966217},&#10;    journal={2017 International Joint Conference on Neural Networks (IJCNN)},&#10;    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},&#10;    year={2017}&#10;}" />
 </div>
+
 # `emnist`
 
 *   **Description**:
 
-The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.
+The EMNIST dataset is a set of handwritten character digits derived from the
+NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
+structure that directly matches the MNIST dataset.
 
-Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.
+Note: Like the original EMNIST data, images provided here are inverted
+horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
+`ds.map` to convert the images to a human-friendlier format.
 
-*   **Homepage**: [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
+*   **Homepage**:
+    [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
-*   **Source code**: [`tfds.image_classification.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
+*   **Source code**:
+    [`tfds.image_classification.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/mnist.py)
 
 *   **Versions**:
 
-    * **`3.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `535.73 MiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -44,16 +56,15 @@ Note: Like the original EMNIST data, images provided here are inverted horizonta
 }
 ```
 
-
 ## emnist/byclass (default config)
 
 *   **Config description**: EMNIST ByClass
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 116,323
+Split     | Examples
+:-------- | -------:
+`'test'`  | 116,323
 `'train'` | 697,932
 
 *   **Features**:
@@ -65,11 +76,13 @@ FeaturesDict({
 })
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-byclass-3.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -77,9 +90,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-byclass-3.0.0.html";
 $(document).ready(() => {

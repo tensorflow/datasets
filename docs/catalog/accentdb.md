@@ -8,35 +8,39 @@
   <meta itemprop="sameAs" content="https://accentdb.github.io/" />
   <meta itemprop="citation" content="@InProceedings{ahamad-anand-bhargava:2020:LREC,&#10;  author    = {Ahamad, Afroz  and  Anand, Ankit  and  Bhargava, Pranesh},&#10;  title     = {AccentDB: A Database of Non-Native English Accents to Assist Neural Speech Recognition},&#10;  booktitle      = {Proceedings of The 12th Language Resources and Evaluation Conference},&#10;  month          = {May},&#10;  year           = {2020},&#10;  address        = {Marseille, France},&#10;  publisher      = {European Language Resources Association},&#10;  pages     = {5353--5360},&#10;  url       = {https://www.aclweb.org/anthology/2020.lrec-1.659}&#10;}" />
 </div>
+
 # `accentdb`
 
 *   **Description**:
 
-AccentDB is a multi-pairwise parallel corpus of structured and labelled
-accented speech. It contains speech samples from speakers of 4 non-native
-accents of English (8 speakers, 4 Indian languages); and also has a compilation
-of 4 native accents of English (4 countries, 13 speakers) and a metropolitan
-Indian accent (2 speakers). The dataset available here corresponds to release
-titled accentdb_extended on https://accentdb.github.io/#dataset.
+AccentDB is a multi-pairwise parallel corpus of structured and labelled accented
+speech. It contains speech samples from speakers of 4 non-native accents of
+English (8 speakers, 4 Indian languages); and also has a compilation of 4 native
+accents of English (4 countries, 13 speakers) and a metropolitan Indian accent
+(2 speakers). The dataset available here corresponds to release titled
+accentdb_extended on https://accentdb.github.io/#dataset.
 
 *   **Homepage**: [https://accentdb.github.io/](https://accentdb.github.io/)
 
-*   **Source code**: [`tfds.audio.Accentdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/accentdb.py)
+*   **Source code**:
+    [`tfds.audio.Accentdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/accentdb.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `3.56 GiB`
 
 *   **Dataset size**: `19.47 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 17,313
 
 *   **Features**:
@@ -49,7 +53,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -67,9 +73,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -77,9 +86,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/accentdb-1.0.0.html";
 $(document).ready(() => {

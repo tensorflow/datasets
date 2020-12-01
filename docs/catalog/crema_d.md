@@ -8,6 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/CheyneyComputerScience/CREMA-D" />
   <meta itemprop="citation" content="@article{cao2014crema,&#10;  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},&#10;  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},&#10;  journal={IEEE transactions on affective computing},&#10;  volume={5},&#10;  number={4},&#10;  pages={377--390},&#10;  year={2014},&#10;  publisher={IEEE}&#10;}" />
 </div>
+
 # `crema_d`
 
 *   **Description**:
@@ -15,32 +16,35 @@
 CREMA-D is an audio-visual data set for emotion recognition. The data set
 consists of facial and vocal emotional expressions in sentences spoken in a
 range of basic emotional states (happy, sad, anger, fear, disgust, and neutral).
-7,442 clips of 91 actors with diverse ethnic backgrounds were collected.
-This release contains only the audio stream from the original audio-visual
-recording.
+7,442 clips of 91 actors with diverse ethnic backgrounds were collected. This
+release contains only the audio stream from the original audio-visual recording.
 The samples are splitted between train, validation and testing so that samples
 from each speaker belongs to exactly one split.
 
-*   **Homepage**: [https://github.com/CheyneyComputerScience/CREMA-D](https://github.com/CheyneyComputerScience/CREMA-D)
+*   **Homepage**:
+    [https://github.com/CheyneyComputerScience/CREMA-D](https://github.com/CheyneyComputerScience/CREMA-D)
 
-*   **Source code**: [`tfds.audio.CremaD`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/crema_d.py)
+*   **Source code**:
+    [`tfds.audio.CremaD`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/crema_d.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Download size**: `579.25 MiB`
 
 *   **Dataset size**: `1.65 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 1,556
-`'train'` | 5,144
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,556
+`'train'`      | 5,144
 `'validation'` | 738
 
 *   **Features**:
@@ -53,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('audio', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('audio', 'label')`
 
 *   **Citation**:
 
@@ -70,9 +76,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -80,9 +89,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/crema_d-1.0.0.html";
 $(document).ready(() => {

@@ -8,12 +8,13 @@
   <meta itemprop="sameAs" content="https://storage.googleapis.com/openimages/web/index.html" />
   <meta itemprop="citation" content="@article{OpenImages,&#10;  author = {Alina Kuznetsova and&#10;            Hassan Rom and&#10;            Neil Alldrin and&#10;            Jasper Uijlings and&#10;            Ivan Krasin and&#10;            Jordi Pont-Tuset and&#10;            Shahab Kamali and&#10;            Stefan Popov and&#10;            Matteo Malloci and&#10;            Tom Duerig and&#10;            Vittorio Ferrari},&#10;  title = {The Open Images Dataset V4: Unified image classification,&#10;           object detection, and visual relationship detection at scale},&#10;  year = {2018},&#10;  journal = {arXiv:1811.00982}&#10;}&#10;@article{OpenImages2,&#10;  author = {Krasin, Ivan and&#10;            Duerig, Tom and&#10;            Alldrin, Neil and&#10;            Ferrari, Vittorio&#10;            and Abu-El-Haija, Sami and&#10;            Kuznetsova, Alina and&#10;            Rom, Hassan and&#10;            Uijlings, Jasper and&#10;            Popov, Stefan and&#10;            Kamali, Shahab and&#10;            Malloci, Matteo and&#10;            Pont-Tuset, Jordi and&#10;            Veit, Andreas and&#10;            Belongie, Serge and&#10;            Gomes, Victor and&#10;            Gupta, Abhinav and&#10;            Sun, Chen and&#10;            Chechik, Gal and&#10;            Cai, David and&#10;            Feng, Zheyun and&#10;            Narayanan, Dhyanesh and&#10;            Murphy, Kevin},&#10;  title = {OpenImages: A public dataset for large-scale multi-label and&#10;           multi-class image classification.},&#10;  journal = {Dataset available from&#10;             https://storage.googleapis.com/openimages/web/index.html},&#10;  year={2017}&#10;}" />
 </div>
+
 # `open_images_v4`
 
 *   **Description**:
 
 Open Images is a dataset of ~9M images that have been annotated with image-level
- labels and object bounding boxes.
+labels and object bounding boxes.
 
 The training set of V4 contains 14.6M bounding boxes for 600 object classes on
 1.74M images, making it the largest existing dataset with object location
@@ -23,26 +24,31 @@ often contain complex scenes with several objects (8.4 per image on average).
 Moreover, the dataset is annotated with image-level labels spanning thousands of
 classes.
 
-*   **Homepage**: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
+*   **Homepage**:
+    [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
-*   **Source code**: [`tfds.object_detection.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
+*   **Source code**:
+    [`tfds.object_detection.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
 
 *   **Versions**:
 
-    * **`2.0.0`** (default): New split API (https://tensorflow.org/datasets/splits)
+    *   **`2.0.0`** (default): New split API
+        (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `565.11 GiB`
 
 *   **Dataset size**: `Unknown size`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Unknown
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 125,436
-`'train'` | 1,743,042
+Split          | Examples
+:------------- | --------:
+`'test'`       | 125,436
+`'train'`      | 1,743,042
 `'validation'` | 41,620
 
 *   **Features**:
@@ -74,7 +80,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -127,16 +135,17 @@ FeaturesDict({
 }
 ```
 
-
 ## open_images_v4/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/open_images_v4-original-2.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -144,9 +153,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/open_images_v4-original-2.0.0.html";
 $(document).ready(() => {

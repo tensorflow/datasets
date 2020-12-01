@@ -8,52 +8,58 @@
   <meta itemprop="sameAs" content="https://tspace.library.utoronto.ca/handle/1807/10395" />
   <meta itemprop="citation" content="@ONLINE {&#10;    author = &quot;Howell, Nancy&quot;,&#10;    title  = &quot;Dobe !Kung Census of All Population.&quot;,&#10;    year   = &quot;2009&quot;,&#10;    url    = &quot;https://tspace.library.utoronto.ca/handle/1807/17973&quot;&#10;}" />
 </div>
+
 # `howell`
 
 Note: This dataset was added recently and is only available in our
-`tfds-nightly` package  <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
 Demographic data from Kalahari !Kung San people collected by Nancy Howell
 
 Howell’s observations of the !Kung San were made by Howell in Botswana between
-August 1967 and May 1969. Fuller descriptions of the region and the people
-under study can be found in R. B. Lee and I. DeVore (eds), 1976, Kalahari
+August 1967 and May 1969. Fuller descriptions of the region and the people under
+study can be found in R. B. Lee and I. DeVore (eds), 1976, Kalahari
 Hunter-Gatherers: Studies of the !Kung San and Their Neighbors, Harvard
 University Press, Cambridge, Mass. And in N. Howell, 2000, Demography of the
 Dobe !Kung, Aldine de Gruyter, New York.
 
-Only columns on height, weight, age, and sex were kept. Rows with any
-null values were dropped.
+Only columns on height, weight, age, and sex were kept. Rows with any null
+values were dropped.
 
 Number of instances: 544
 
 Variables:
 
-1. height in cm   (float)
-2. weight in kg   (float)
-3. age in years   (int)
-4. male indicator (int)
+1.  height in cm (float)
+2.  weight in kg (float)
+3.  age in years (int)
+4.  male indicator (int)
 
-*   **Homepage**: [https://tspace.library.utoronto.ca/handle/1807/10395](https://tspace.library.utoronto.ca/handle/1807/10395)
+*   **Homepage**:
+    [https://tspace.library.utoronto.ca/handle/1807/10395](https://tspace.library.utoronto.ca/handle/1807/10395)
 
-*   **Source code**: [`tfds.structured.howell.Howell`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/howell/howell.py)
+*   **Source code**:
+    [`tfds.structured.howell.Howell`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/howell/howell.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): Initial release.
+    *   **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `11.92 KiB`
 
 *   **Dataset size**: `39.31 KiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split     | Examples
+:-------- | -------:
 `'train'` | 544
 
 *   **Features**:
@@ -67,7 +73,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `None`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
 *   **Citation**:
 
@@ -80,9 +88,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -90,9 +101,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/howell-1.0.0.html";
 $(document).ready(() => {

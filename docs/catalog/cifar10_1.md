@@ -8,26 +8,33 @@
   <meta itemprop="sameAs" content="https://github.com/modestyachts/CIFAR-10.1" />
   <meta itemprop="citation" content="@article{recht2018cifar10.1,&#10;  author = {Benjamin Recht and Rebecca Roelofs and Ludwig Schmidt and Vaishaal Shankar},&#10;  title = {Do CIFAR-10 Classifiers Generalize to CIFAR-10?},&#10;  year = {2018},&#10;  note = {\url{https://arxiv.org/abs/1806.00451}},&#10;}&#10;&#10;@article{torralba2008tinyimages, &#10;  author = {Antonio Torralba and Rob Fergus and William T. Freeman}, &#10;  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence}, &#10;  title = {80 Million Tiny Images: A Large Data Set for Nonparametric Object and Scene Recognition}, &#10;  year = {2008}, &#10;  volume = {30}, &#10;  number = {11}, &#10;  pages = {1958-1970}&#10;}" />
 </div>
+
 # `cifar10_1`
 
 *   **Description**:
 
-The CIFAR-10.1 dataset is a new test set for CIFAR-10. CIFAR-10.1 contains roughly 2,000 new test images
-that were sampled after multiple years of research on the original CIFAR-10 dataset. The data collection
-for CIFAR-10.1 was designed to minimize distribution shift relative to the original dataset. We describe
-the creation of CIFAR-10.1 in the paper "Do CIFAR-10 Classifiers Generalize to CIFAR-10?".
-The images in CIFAR-10.1 are a subset of the TinyImages dataset.
-There are currently two versions of the CIFAR-10.1 dataset: v4 and v6.
+The CIFAR-10.1 dataset is a new test set for CIFAR-10. CIFAR-10.1 contains
+roughly 2,000 new test images that were sampled after multiple years of research
+on the original CIFAR-10 dataset. The data collection for CIFAR-10.1 was
+designed to minimize distribution shift relative to the original dataset. We
+describe the creation of CIFAR-10.1 in the paper "Do CIFAR-10 Classifiers
+Generalize to CIFAR-10?". The images in CIFAR-10.1 are a subset of the
+TinyImages dataset. There are currently two versions of the CIFAR-10.1 dataset:
+v4 and v6.
 
-*   **Homepage**: [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
+*   **Homepage**:
+    [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
 
-*   **Source code**: [`tfds.image_classification.Cifar10_1`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cifar10_1.py)
+*   **Source code**:
+    [`tfds.image_classification.Cifar10_1`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cifar10_1.py)
 
 *   **Versions**:
 
-    * **`1.1.0`** (default): No release notes.
+    *   **`1.1.0`** (default): No release notes.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -38,7 +45,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -61,10 +70,15 @@ FeaturesDict({
 }
 ```
 
-
 ## cifar10_1/v4 (default config)
 
-*   **Config description**: It is the first version of our dataset on which we tested any classifier. As mentioned above, this makes the v4 dataset independent of the classifiers we evaluate. The numbers reported in the main sections of our paper use this version of the dataset. It was built from the top 25 TinyImages keywords for each class, which led to a slight class imbalance. The largest difference is that ships make up only 8% of the test set instead of 10%. v4 contains 2,021 images.
+*   **Config description**: It is the first version of our dataset on which we
+    tested any classifier. As mentioned above, this makes the v4 dataset
+    independent of the classifiers we evaluate. The numbers reported in the main
+    sections of our paper use this version of the dataset. It was built from the
+    top 25 TinyImages keywords for each class, which led to a slight class
+    imbalance. The largest difference is that ships make up only 8% of the test
+    set instead of 10%. v4 contains 2,021 images.
 
 *   **Download size**: `5.93 MiB`
 
@@ -72,15 +86,17 @@ FeaturesDict({
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split    | Examples
+:------- | -------:
 `'test'` | 2,021
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/cifar10_1-v4-1.1.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -88,9 +104,7 @@ Split  | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cifar10_1-v4-1.1.0.html";
 $(document).ready(() => {

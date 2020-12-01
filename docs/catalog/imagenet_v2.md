@@ -8,38 +8,43 @@
   <meta itemprop="sameAs" content="https://github.com/modestyachts/ImageNetV2" />
   <meta itemprop="citation" content="@inproceedings{recht2019imagenet,&#10;  title={Do ImageNet Classifiers Generalize to ImageNet?},&#10;  author={Recht, Benjamin and Roelofs, Rebecca and Schmidt, Ludwig and Shankar, Vaishaal},&#10;  booktitle={International Conference on Machine Learning},&#10;  pages={5389--5400},&#10;  year={2019}&#10;}" />
 </div>
+
 # `imagenet_v2`
 
 *   **Description**:
 
 ImageNet-v2 is an ImageNet test set (10 per class) collected by closely
-following the original labelling protocol. Each image has been labelled by
-at least 10 MTurk workers, possibly more, and depending on the strategy used to
+following the original labelling protocol. Each image has been labelled by at
+least 10 MTurk workers, possibly more, and depending on the strategy used to
 select which images to include among the 10 chosen for the given class there are
 three different versions of the dataset. Please refer to section four of the
 paper for more details on how the different variants were compiled.
 
-The label space is the same as that of ImageNet2012. Each example is
-represented as a dictionary with the following keys:
+The label space is the same as that of ImageNet2012. Each example is represented
+as a dictionary with the following keys:
 
-* 'image': The image, a (H, W, 3)-tensor.
-* 'label': An integer in the range [0, 1000).
-* 'file_name': A unique sting identifying the example within the dataset.
+*   'image': The image, a (H, W, 3)-tensor.
+*   'label': An integer in the range [0, 1000).
+*   'file_name': A unique sting identifying the example within the dataset.
 
-*   **Homepage**: [https://github.com/modestyachts/ImageNetV2](https://github.com/modestyachts/ImageNetV2)
+*   **Homepage**:
+    [https://github.com/modestyachts/ImageNetV2](https://github.com/modestyachts/ImageNetV2)
 
-*   **Source code**: [`tfds.image_classification.ImagenetV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_v2.py)
+*   **Source code**:
+    [`tfds.image_classification.ImagenetV2`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/imagenet_v2.py)
 
 *   **Versions**:
 
-    * **`1.0.0`** (default): No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
+Split    | Examples
+:------- | -------:
 `'test'` | 10,000
 
 *   **Features**:
@@ -52,7 +57,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -66,18 +73,19 @@ FeaturesDict({
 }
 ```
 
-
 ## imagenet_v2/matched-frequency (default config)
 
 *   **Download size**: `1.17 GiB`
 
 *   **Dataset size**: `1.16 GiB`
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
 <img src="https://storage.googleapis.com/tfds-data/visualization/fig/imagenet_v2-matched-frequency-1.0.0.png" alt="Visualization" width="500px">
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -85,9 +93,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imagenet_v2-matched-frequency-1.0.0.html";
 $(document).ready(() => {

@@ -8,35 +8,39 @@
   <meta itemprop="sameAs" content="http://www.vision.caltech.edu/visipedia/CUB-200.html" />
   <meta itemprop="citation" content="@techreport{WelinderEtal2010,&#10;Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},&#10;Institution = {California Institute of Technology},&#10;Number = {CNS-TR-2010-001},&#10;Title = {{Caltech-UCSD Birds 200}},&#10;Year = {2010}&#10;}" />
 </div>
+
 # `caltech_birds2011`
 
 *   **Description**:
 
-Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos
-of 200 bird species (mostly North American). The total number of
-categories of birds is 200 and there are 6033 images in the 2010
-dataset and 11,788 images in the 2011 dataset.
-Annotations include bounding boxes, segmentation labels.
+Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos of 200 bird
+species (mostly North American). The total number of categories of birds is 200
+and there are 6033 images in the 2010 dataset and 11,788 images in the 2011
+dataset. Annotations include bounding boxes, segmentation labels.
 
-*   **Homepage**: [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
+*   **Homepage**:
+    [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 
-*   **Source code**: [`tfds.image_classification.CaltechBirds2011`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech_birds.py)
+*   **Source code**:
+    [`tfds.image_classification.CaltechBirds2011`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/caltech_birds.py)
 
 *   **Versions**:
 
-    * **`0.1.1`** (default): No release notes.
+    *   **`0.1.1`** (default): No release notes.
 
 *   **Download size**: `1.11 GiB`
 
 *   **Dataset size**: `1.11 GiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): No
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 5,794
+Split     | Examples
+:-------- | -------:
+`'test'`  | 5,794
 `'train'` | 5,994
 
 *   **Features**:
@@ -52,7 +56,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('image', 'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
 *   **Citation**:
 
@@ -66,9 +72,12 @@ Year = {2010}
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -76,9 +85,7 @@ Year = {2010}
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/caltech_birds2011-0.1.1.html";
 $(document).ready(() => {

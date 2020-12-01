@@ -8,15 +8,16 @@
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data" />
   <meta itemprop="citation" content="@inproceedings{10.1145/3038912.3052591,&#10;  author = {Wulczyn, Ellery and Thain, Nithum and Dixon, Lucas},&#10;  title = {Ex Machina: Personal Attacks Seen at Scale},&#10;  year = {2017},&#10;  isbn = {9781450349130},&#10;  publisher = {International World Wide Web Conferences Steering Committee},&#10;  address = {Republic and Canton of Geneva, CHE},&#10;  url = {https://doi.org/10.1145/3038912.3052591},&#10;  doi = {10.1145/3038912.3052591},&#10;  booktitle = {Proceedings of the 26th International Conference on World Wide Web},&#10;  pages = {1391-1399},&#10;  numpages = {9},&#10;  keywords = {online discussions, wikipedia, online harassment},&#10;  location = {Perth, Australia},&#10;  series = {WWW &#x27;17}&#10;}" />
 </div>
+
 # `wikipedia_toxicity_subtypes`
 
 *   **Description**:
 
 This version of the Wikipedia Toxicity Subtypes dataset provides access to the
 primary toxicity label, as well the five toxicity subtype labels annotated by
-crowd workers. The toxicity and toxicity subtype labels are binary values
-(0 or 1) indicating whether the majority of annotators assigned that
-attributes to the comment text.
+crowd workers. The toxicity and toxicity subtype labels are binary values (0 or
+1) indicating whether the majority of annotators assigned that attributes to the
+comment text.
 
 The comments in this dataset come from an archive of Wikipedia talk pages
 comments. These have been annotated by Jigsaw for toxicity, as well as a variety
@@ -32,25 +33,30 @@ See the Kaggle documentation or
 https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more
 details.
 
-*   **Homepage**: [https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)
+*   **Homepage**:
+    [https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)
 
-*   **Source code**: [`tfds.text.WikipediaToxicitySubtypes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia_toxicity_subtypes.py)
+*   **Source code**:
+    [`tfds.text.WikipediaToxicitySubtypes`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia_toxicity_subtypes.py)
 
 *   **Versions**:
 
-    * **`0.2.0`** (default): Updated features for consistency with CivilComments dataset.
+    *   **`0.2.0`** (default): Updated features for consistency with
+        CivilComments dataset.
 
 *   **Download size**: `36.85 MiB`
 
 *   **Dataset size**: `118.09 MiB`
 
-*   **Auto-cached** ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)): Yes
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
-Split  | Examples
-:----- | -------:
-`'test'` | 63,978
+Split     | Examples
+:-------- | -------:
+`'test'`  | 63,978
 `'train'` | 159,571
 
 *   **Features**:
@@ -67,7 +73,9 @@ FeaturesDict({
 })
 ```
 
-*   **Supervised keys** (See [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)): `('text', 'toxicity')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'toxicity')`
 
 *   **Citation**:
 
@@ -90,9 +98,12 @@ FeaturesDict({
 }
 ```
 
-*   **Figure** ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)): Not supported.
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Examples** ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
 <!-- mdformat off(HTML should not be auto-formatted) -->
 
@@ -100,9 +111,7 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:scroll"></div>
-
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia_toxicity_subtypes-0.2.0.html";
 $(document).ready(() => {
