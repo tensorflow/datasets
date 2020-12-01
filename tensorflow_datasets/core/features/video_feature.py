@@ -208,7 +208,9 @@ class Video(sequence_feature.Sequence):
         img.save(f, format='png')
 
       ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
-                    os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png'))]
+                    os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png')),
+                    '-vf', 'scale=128:128', '-vcodec', 'h264',
+                    '-pix_fmt', 'yuv420p', '-allow_sw', '1']
       ffmpeg_stdin = None
 
       output_pattern = os.path.join(video_dir, 'output.' + encoding_format)
