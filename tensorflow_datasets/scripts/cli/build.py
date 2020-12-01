@@ -183,7 +183,10 @@ def _build_datasets(args: argparse.Namespace) -> None:
   if args.exclude_datasets:  # Generate all datasets if `--exclude_datasets` set
     if datasets:
       raise ValueError('--exclude_datasets can\'t be used with `datasets`')
-    datasets = set(tfds.list_builders()) - set(args.exclude_datasets.split(','))
+    datasets = (
+        set(tfds.list_builders(with_community_datasets=False))
+        - set(args.exclude_datasets.split(','))
+    )
     datasets = sorted(datasets)  # `set` is not deterministic
   else:
     datasets = datasets or ['']  # Empty string for default

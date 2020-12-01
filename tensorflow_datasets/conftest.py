@@ -39,6 +39,12 @@ def activate_eager():
   tf.compat.v1.enable_v2_behavior()
 
 
+# Register fixtures which are automatically applied once when tests start.
+disable_community_datasets = pytest.fixture(scope='session', autouse=True)(
+    setup_teardown.disable_community_datasets,
+)
+
+
 # Fixtures globally available
 
 

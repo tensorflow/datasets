@@ -52,7 +52,13 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
 ))
 
 
+# Variable to globally disable community datasets (e.g. inside tests)
+COMMUNITY_DATASET_DISABLED = False
+
+
 def list_builders(
+    *,
+    with_community_datasets: bool = True,
 ) -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   datasets = registered.list_imported_builders()
@@ -434,8 +440,7 @@ def _reraise_with_list_builders(
 ) -> NoReturn:
   """Add the list of available builders to the DatasetNotFoundError."""
   # Should optimize to only filter through given namespace
-  all_datasets = list_builders(
-  )
+  all_datasets = list_builders(with_community_datasets=bool(ns_name))
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
   error_string += textwrap.dedent(
