@@ -117,6 +117,22 @@ class Video(sequence_feature.Sequence):
   def _ffmpeg_path(self):
     return 'ffmpeg'
 
+  def _ffmpeg_run(self, ffmpeg_args, ffmpeg_stdin=None):
+    process = subprocess.Popen(ffmpeg_args,
+                                 stdin=subprocess.PIPE,
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
+
+    stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
+    ffmpeg_ret_code = process.returncode
+    if ffmpeg_ret_code:
+      raise ValueError(
+          'ffmpeg returned error code {}, command={}\n'
+          'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
+                                          ' '.join(ffmpeg_args),
+                                          stdout_data,
+                                          stderr_data))
+
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, type_utils.PathLikeCls):
       ffmpeg_args = [self._ffmpeg_path, '-i', os.fspath(path_or_fobj)]
@@ -130,19 +146,7 @@ class Video(sequence_feature.Sequence):
     ffmpeg_args += self._extra_ffmpeg_args
     ffmpeg_args.append(output_pattern)
     try:
-      process = subprocess.Popen(ffmpeg_args,
-                                 stdin=subprocess.PIPE,
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
-      stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
-      ffmpeg_ret_code = process.returncode
-      if ffmpeg_ret_code:
-        raise ValueError(
-            'ffmpeg returned error code {}, command={}\n'
-            'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
-                                            ' '.join(ffmpeg_args),
-                                            stdout_data,
-                                            stderr_data))
+      self._ffmped_run(ffmpeg_args, ffmpeg_stdin)
       frames = []
       for image_name in sorted(tf.io.gfile.listdir(ffmpeg_dir)):
         image_path = os.path.join(ffmpeg_dir, image_name)
@@ -199,7 +203,6 @@ class Video(sequence_feature.Sequence):
 
   def _generate_video_html(self, images, framerate=24, encoding_format='mp4') -> str:
     """Converts sequence of images into video string."""
-    # CODE REDUNDANT: Could somehow use `_ffmpeg_decode`?
     imgs = len(str(len(images)))+1  # Find number of digits in len to give names.
 
     with tempfile.TemporaryDirectory() as video_dir:
@@ -217,19 +220,8 @@ class Video(sequence_feature.Sequence):
       ffmpeg_args += self._extra_ffmpeg_args
       ffmpeg_args.append(output_pattern)
       try:
-        process = subprocess.Popen(ffmpeg_args,
-                                 stdin=subprocess.PIPE,
-                                 stdout=subprocess.PIPE,
-                                 stderr=subprocess.PIPE)
-        stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
-        ffmpeg_ret_code = process.returncode
-        if ffmpeg_ret_code:
-          raise ValueError(
-              'ffmpeg returned error code {}, command={}\n'
-              'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
-                                              ' '.join(ffmpeg_args),
-                                              stdout_data,
-                                              stderr_data))
+        self._ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
+
         video = None
         video_file = os.path.join(video_dir, 'output.mp4')
         with tf.io.gfile.GFile(video_file, 'rb') as vf:
