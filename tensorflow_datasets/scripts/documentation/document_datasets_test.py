@@ -15,38 +15,19 @@
 
 """Test of `document_datasets.py`."""
 
-# import collections
+import contextlib
+import functools
+import tempfile
 from unittest import mock
 
+import pytest
+
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.documentation import doc_utils
 from tensorflow_datasets.scripts.documentation import document_datasets
 
-DummyDataset = tfds.testing.DummyDataset
 
-
-class DummyNewDs(DummyDataset):
-  pass
-
-
-class DummyNewConfig(DummyDataset):
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='new_config',
-          version=tfds.core.Version('1.0.0'),
-          description='Config description.',
-      ),
-      tfds.core.BuilderConfig(
-          name='old_config',
-          version=tfds.core.Version('2.0.0'),
-          supported_versions=[
-              tfds.core.Version('1.0.0'),
-          ],
-          description='Config description.',
-      ),
-  ]
-
-
-class DummyDatasetConfigs(DummyDataset):
+class DummyDatasetConfigs(tfds.testing.DummyDataset):
   """Builder with config and manual instructions."""
   MANUAL_DOWNLOAD_INSTRUCTIONS = """Some manual instructions."""
   BUILDER_CONFIGS = [
@@ -58,7 +39,7 @@ class DummyDatasetConfigs(DummyDataset):
   ]
 
 
-class DummyDatasetConfigsSharedVersion(DummyDataset):
+class DummyDatasetConfigsSharedVersion(tfds.testing.DummyDataset):
   """Builder with config ."""
   # No BuilderConfig description, and version shared across configs.
   VERSION = tfds.core.Version('1.0.0')
@@ -67,23 +48,18 @@ class DummyDatasetConfigsSharedVersion(DummyDataset):
   ]
 
 
-class DocumentDatasetsTest(tfds.testing.TestCase):
+@pytest.fixture(scope='module')
+def document_single_builder_fn():
+  with contextlib.ExitStack() as stack:
+    tmp_dir = stack.enter_context(tempfile.TemporaryDirectory())
 
-  @classmethod
-  def setUpClass(cls):
-    super(DocumentDatasetsTest, cls).setUpClass()
-    cls._tfds_tmp_dir = tfds.testing.make_tmp_dir()
-    builder = DummyDataset(data_dir=cls._tfds_tmp_dir)
-    builder.download_and_prepare()
-
-    # Patch the visualization util (to avoid GCS access during test)
-    cls._old_path_visu = document_datasets.VisualizationDocUtil.BASE_PATH
-    document_datasets.VisualizationDocUtil.BASE_PATH = cls._tfds_tmp_dir
-
-    # Patch the visualization util (to avoid GCS access during test)
-    cls._old_path_df = document_datasets.DataframeDocUtil.BASE_PATH
-    document_datasets.DataframeDocUtil.BASE_PATH = cls._tfds_tmp_dir
-
+    # Patch the visualization utils (to avoid GCS access during test)
+    stack.enter_context(mock.patch.object(
+        doc_utils.VisualizationDocUtil, 'BASE_PATH', tmp_dir
+    ))
+    stack.enter_context(mock.patch.object(
+        doc_utils.DataframeDocUtil, 'BASE_PATH', tmp_dir
+    ))
     # Patch the register
     # `pytest` do not execute the tests in isolation.
     # All tests seems to be imported before execution, which leak the
@@ -92,165 +68,43 @@ class DocumentDatasetsTest(tfds.testing.TestCase):
     # As `_load_nightly_dict` load the full register, we patch it
     # to avoid invalid dataset errors.
     # Context: https://github.com/tensorflow/datasets/issues/1960
-    cls._patch_register = mock.patch.object(
-        tfds.core.load, 'list_full_names', return_value=[])
-    cls._patch_register.start()
+    stack.enter_context(mock.patch.object(
+        tfds.core.load, 'list_full_names', return_value=[]
+    ))
 
-  @classmethod
-  def tearDownClass(cls):
-    super(DocumentDatasetsTest, cls).tearDownClass()
-    tfds.testing.rm_tmp_dir(cls._tfds_tmp_dir)
-    document_datasets.VisualizationDocUtil.BASE_PATH = cls._old_path_visu
-    document_datasets.DataframeDocUtil.BASE_PATH = cls._old_path_df
-
-    cls._patch_register.stop()
-
-  def setUp(self):
-    super(DocumentDatasetsTest, self).setUp()
-    self.builder = DummyDataset(data_dir=self._tfds_tmp_dir)
-
-  def test_document_datasets(self):
-    document_datasets.dataset_docs_str(datasets=['mnist', 'cifar10'])
-
-  def test_schema_org(self):
-    schema_str = document_datasets.document_single_builder(self.builder)
-    self.assertIn('http://schema.org/Dataset', schema_str)
-    self.assertIn(
-        '<meta itemprop="url" '
-        'content="https://www.tensorflow.org'
-        '/datasets/catalog/%s" />' % self.builder.name, schema_str)
-
-  def test_with_config(self):
-    """Test that builder with configs are correctly generated."""
-    builder = DummyDatasetConfigs(data_dir='/tmp/non-existing-dir')
-    doc_str = document_datasets.document_single_builder(builder)
-
-    self.assertIn('Some manual instructions.', doc_str)
-    self.assertIn('Minimal DatasetBuilder.', doc_str)  # Shared description.
-    self.assertIn('Config description.', doc_str)  # Config-specific description
-
-  def test_with_config_shared_version(self):
-    """Test that builder with configs are correctly generated."""
-    builder = DummyDatasetConfigsSharedVersion(data_dir='/tmp/non-existing-dir')
-    doc_str = document_datasets.document_single_builder(builder)
-
-    self.assertIn('Minimal DatasetBuilder.', doc_str)  # Shared description.
-    self.assertNotIn('Config description:', doc_str)  # No config description
-
-
-class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
-
-  def test_full_names_to_dict(self):
-    full_names_dict = document_datasets._full_names_to_dict([
-        'ds1/c1/1.0.0',
-        'ds1/c1/2.0.0',
-        'ds1/c2/2.0.0',
-        'ds2/1.0.0',
-        'ds2/2.0.0',
-    ])
-    self.assertEqual(full_names_dict, {
-        'ds1': {
-            'c1': {'1.0.0', '2.0.0'},
-            'c2': {'2.0.0'},
-        },
-        'ds2': {
-            '': {'1.0.0', '2.0.0'}
-        }
-    })
-
-  def test_build_nightly_dict(self):
-    nightly_dict = document_datasets._build_nightly_dict(
-        # Registered datasets
-        document_datasets._full_names_to_dict([
-            'ds_same/config/1.0.0',
-            'ds_with_config/config_new/2.0.0',  # Added config
-            'ds_with_config/config_same/2.0.0',  # Added version
-            'ds_with_config/config_same/1.0.0',
-            'ds_new/1.0.0',  # Added dataset
-            'ds_changed/2.0.0',  # Added version
-            'ds_changed/1.0.0',
-            'ds_type/config/1.0.0',  # `ds/version` -> `ds/config/version`
-        ]),
-        # Stable datasets
-        document_datasets._full_names_to_dict([
-            'ds_same/config/1.0.0',
-            'ds_with_config/config_same/1.0.0',
-            'ds_with_config/config_same/0.0.0',  # Removed version
-            'ds_with_config/config_removed/1.0.0',  # Removed config
-            'ds_changed/1.0.0',
-            'ds_changed/0.0.0',  # Removed version
-            'ds_removed/1.0.0',  # Removed dataset',
-            'ds_type/1.0.0',  # `ds/version` -> `ds/config/version`
-        ]),
+    fn = functools.partial(
+        document_datasets._document_single_builder,
+        visu_doc_util=doc_utils.VisualizationDocUtil(),
+        df_doc_util=doc_utils.DataframeDocUtil(),
+        nightly_doc_util=doc_utils.NightlyDocUtil(),
     )
-    # Check that the added datasets, config, versions are marked as nightly
-    self.assertEqual(nightly_dict, {
-        'ds_with_config': {
-            'config_new': True,
-            'config_same': {
-                '2.0.0': True,
-                '1.0.0': False,
-            },
-        },
-        'ds_new': True,
-        'ds_changed': {
-            '': {
-                '2.0.0': True,
-                '1.0.0': False,
-            },
-        },
-        'ds_same': {'config': {'1.0.0': False}},
-        'ds_type': {'config': True},
-    })
-
-  def test_nightly_doc_util(self):
-    data_dir = '/tmp/dummy_dir'
-
-    nightly_dict = {
-        'dummy_dataset': {'': {'1.0.0': False}},
-        'dummy_new_ds': True,
-        'dummy_new_config': {
-            'new_config': True,
-            'old_config': {
-                '2.0.0': True,  # New versions
-                '1.0.0': False,
-            },
-        },
-    }
-    with mock.patch.object(
-        document_datasets, '_load_nightly_dict', return_value=nightly_dict):
-      ndu = document_datasets.NightlyDocUtil()
-
-    dummy_dataset = DummyDataset(data_dir=data_dir)
-    dummy_new_ds = DummyNewDs(data_dir=data_dir)
-    dummy_new_config = DummyNewConfig(data_dir=data_dir, config='new_config')
-    dummy_new_version = DummyNewConfig(data_dir=data_dir, config='old_config')
-
-    # Only `dummy_new_ds` is a new builder
-    self.assertFalse(ndu.is_builder_nightly(dummy_dataset))
-    self.assertTrue(ndu.is_builder_nightly(dummy_new_ds))
-    self.assertFalse(ndu.is_builder_nightly(dummy_new_config))
-    self.assertFalse(ndu.is_builder_nightly(dummy_new_version))
-
-    # Only `dummy_new_ds/new_config` is a new config
-    self.assertFalse(ndu.is_config_nightly(dummy_dataset))
-    self.assertFalse(ndu.is_config_nightly(dummy_new_ds))
-    self.assertTrue(ndu.is_config_nightly(dummy_new_config))
-    self.assertFalse(ndu.is_config_nightly(dummy_new_version))
-
-    # Only `dummy_new_ds/new_version/2.0.0` is a new version
-    self.assertFalse(ndu.is_version_nightly(dummy_dataset, '1.0.0'))
-    self.assertFalse(ndu.is_version_nightly(dummy_new_ds, 'x.x.x'))
-    self.assertFalse(ndu.is_version_nightly(dummy_new_config, 'x.x.x'))
-    self.assertFalse(ndu.is_version_nightly(dummy_new_version, '1.0.0'))
-    self.assertTrue(ndu.is_version_nightly(dummy_new_version, '2.0.0'))
-
-    # Only `dummy_dataset` don't have a nightly version
-    self.assertFalse(ndu.has_nightly(dummy_dataset))
-    self.assertTrue(ndu.has_nightly(dummy_new_ds))
-    self.assertTrue(ndu.has_nightly(dummy_new_config))
-    self.assertTrue(ndu.has_nightly(dummy_new_version))
+    yield fn
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+@pytest.mark.usefixtures('document_single_builder_fn')
+def test_document_datasets():
+  all_docs = list(document_datasets.iter_documentation_builders(
+      datasets=['mnist', 'coco'],  # Builder with and without config
+  ))
+  assert {d.name for d in all_docs} == {'mnist', 'coco'}
+
+
+def test_with_config(document_single_builder_fn):  # pylint: disable=redefined-outer-name
+  """Test that builder with configs are correctly generated."""
+  doc = document_single_builder_fn(DummyDatasetConfigs.name)
+  assert 'Some manual instructions.' in doc.content
+  assert 'Minimal DatasetBuilder.' in doc.content  # Shared description.
+  # Config-description
+  assert '**Config description**: Config description.' in doc.content
+  assert (
+      '<meta itemprop="url" content="'
+      f'https://www.tensorflow.org/datasets/catalog/{DummyDatasetConfigs.name}"'
+      ' />'
+  ) in doc.content
+
+
+def test_with_config_shared_version(document_single_builder_fn):  # pylint: disable=redefined-outer-name
+  """Test that builder with configs are correctly generated."""
+  doc = document_single_builder_fn(DummyDatasetConfigsSharedVersion.name)
+  assert 'Minimal DatasetBuilder.' in doc.content  # Shared description.
+  assert 'Config description:' not in doc.content  # No config description

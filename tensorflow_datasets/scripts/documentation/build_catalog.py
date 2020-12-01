@@ -17,15 +17,15 @@ r"""Tool to generate the dataset catalog documentation.
 """
 
 import argparse
+import collections
 import os
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from absl import app
 from absl.flags import argparse_flags
-import dataclasses
 
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.documentation import doc_utils
 from tensorflow_datasets.scripts.documentation import document_datasets
 import yaml
 
@@ -61,26 +61,23 @@ def main(args: argparse.Namespace):
   )
 
 
-@dataclasses.dataclass
-class DatasetItem(object):
-  name: str
-  path: str
-  is_nightly: bool = False
-
-
-def create_section_toc(section, section_datasets):
+def _create_section_toc(
+    section: str,
+    builder_docs: List[document_datasets.BuilderDocumentation],
+) -> str:
+  """Creates the section of the `overview.md` table of content."""
   heading = '\n### `%s`\n' % section
-  nightly_suffix = ' ' + document_datasets.NightlyDocUtil.icon
+  nightly_suffix = ' ' + doc_utils.NightlyDocUtil.icon
   entries = [
-      f' * [`{item.name}`]({item.path})' +
-      (item.is_nightly and nightly_suffix or '') for item in section_datasets
+      f' * [`{doc.name}`]({doc.name}.md)' +
+      (doc.is_nightly and nightly_suffix or '') for doc in builder_docs
   ]
   return '\n'.join([heading] + entries)
 
 
 def build_catalog(
     datasets: Optional[List[str]] = None,
-    catalog_dir: Optional[str] = None,
+    catalog_dir: Optional[tfds.core.utils.PathLike] = None,
     toc_relative_path: str = '/datasets/catalog/',
 ) -> None:
   """Document all datasets, including the table of content.
@@ -91,58 +88,69 @@ def build_catalog(
     toc_relative_path: Relative path of the catalog directory, used to
       generate the table of content relative links.
   """
-  # Build datasets doc
-  print('Build datasets overview...')
-  overview_doc, datasets_dict = document_datasets.dataset_docs_str(datasets)
+  catalog_dir = tfds.core.as_path(catalog_dir)
 
+  # Iterate over the builder documentations
+  section_to_builder_docs = collections.defaultdict(list)
+  for builder_doc in document_datasets.iter_documentation_builders(datasets):
+    # Write the builder documentation
+    dataset_file = catalog_dir / f'{builder_doc.name}.md'
+    dataset_file.write_text(builder_doc.content)
+    # Save the category
+    section_to_builder_docs[builder_doc.section].append(builder_doc)
+
+  _save_table_of_content(
+      catalog_dir=catalog_dir,
+      section_to_builder_docs=section_to_builder_docs,
+      toc_relative_path=toc_relative_path,
+  )
+
+
+def _save_table_of_content(
+    catalog_dir: tfds.core.ReadWritePath,
+    section_to_builder_docs: Dict[str, document_datasets.BuilderDocumentation],
+    toc_relative_path: str,
+) -> None:
+  """Builds and saves the table of contents (`_toc.yaml` and `overview.md`)."""
   # For _toc.yaml
-  toc_dictionary = {'toc': [{
+  toc_yaml = {'toc': [{
       'title': 'Overview',
       'path': os.path.join(toc_relative_path, 'overview'),
   }]}
+  # For overview.md
+  toc_overview = []
 
-  section_tocs = []
-
-  nightly_util = document_datasets.NightlyDocUtil()
-
-  print('Build Sections')
-  for section, datasets_in_section in sorted(list(datasets_dict.items())):
-    print('Section %s...' % section)
+  # All builder documented, save the table of content
+  for section, builder_docs in sorted(section_to_builder_docs.items()):
+    builder_docs = sorted(builder_docs, key=lambda doc: doc.name)
+    # `object_detection` -> `Object detection`
     section_str = section.replace('_', ' ').capitalize()
-    sec_dict = {'title': section_str}
-    sec_paths = list()
-    section_toc = []
-    for dataset_name, is_manual, doc in datasets_in_section:
-      print('Dataset %s...' % dataset_name)
 
+    # Add `_toc.yaml` section
+    sec_dict = {'title': section_str, 'section': []}
+    for doc in builder_docs:
       sidebar_item = {
-          'path': os.path.join(toc_relative_path, dataset_name),
-          'title': dataset_name + (' (manual)' if is_manual else '')
+          'path': os.path.join(toc_relative_path, doc.name),
+          'title': doc.name + (' (manual)' if doc.is_manual else '')
       }
-      ds_item = DatasetItem(
-          name=dataset_name,
-          path=dataset_name + '.md',
-      )
-      if nightly_util.is_builder_nightly(dataset_name):
+      if doc.is_nightly:
         sidebar_item['status'] = 'nightly'
-        ds_item.is_nightly = True
+      sec_dict['section'].append(sidebar_item)
+    toc_yaml['toc'].append(sec_dict)
 
-      sec_paths.append(sidebar_item)
-      section_toc.append(ds_item)
+    # Add `overview.md` section
+    toc_overview.append(_create_section_toc(section_str, builder_docs))
 
-      dataset_file = os.path.join(catalog_dir, dataset_name + '.md')
-      with tf.io.gfile.GFile(dataset_file, 'w') as f:
-        f.write(doc)
+  # Write the `overview.md` page
+  index_template = tfds.core.tfds_path(
+      'scripts/documentation/templates/catalog_overview.md'
+  ).read_text()
+  index_str = index_template.format(toc='\n'.join(toc_overview))
+  catalog_dir.joinpath('overview.md').write_text(index_str)
 
-    section_tocs.append(create_section_toc(section_str, section_toc))
-    sec_dict['section'] = sec_paths
-    toc_dictionary['toc'].append(sec_dict)
-
-  with tf.io.gfile.GFile(os.path.join(catalog_dir, 'overview.md'), 'w') as f:
-    f.write(overview_doc.format(toc='\n'.join(section_tocs)))
-
-  with tf.io.gfile.GFile(os.path.join(catalog_dir, '_toc.yaml'), 'w') as f:
-    yaml.dump(toc_dictionary, f, default_flow_style=False)
+  # Write the `_toc.yaml` TF documentation navigation bar
+  with catalog_dir.joinpath('_toc.yaml').open('w') as f:
+    yaml.dump(toc_yaml, f, default_flow_style=False)
 
 
 if __name__ == '__main__':
