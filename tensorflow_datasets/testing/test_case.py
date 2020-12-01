@@ -53,6 +53,7 @@ class TestCase(tf.test.TestCase):
     # Apply the context managers
     cls._setup_cls_cms = []
     cms_to_apply = []
+    cms_to_apply.append(setup_teardown.disable_community_datasets)
     for cm in cms_to_apply:
       cm = contextlib.contextmanager(cm)()
       cm.__enter__()
