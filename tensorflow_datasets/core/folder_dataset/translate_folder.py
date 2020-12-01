@@ -72,14 +72,16 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
     self._data_dir = root_dir
 
     # Update DatasetInfo splits
-    split_dict = split_lib.SplitDict(self.name)
-    for split_name, examples in self._split_examples.items():
-      split_dict.add(split_lib.SplitInfo(
-          name=split_name,
-          shard_lengths=[len(next(iter(examples.values())))],
-          num_bytes=0,
-      ))
-    self.info.update_splits_if_different(split_dict)
+    split_infos = [
+        split_lib.SplitInfo(  # pylint: disable=g-complex-comprehension
+            name=split_name,
+            shard_lengths=[len(next(iter(examples.values())))],
+            num_bytes=0,
+        )
+        for split_name, examples in self._split_examples.items()
+    ]
+    split_dict = split_lib.SplitDict(split_infos, dataset_name=self.name)
+    self.info.set_splits(split_dict)
 
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(

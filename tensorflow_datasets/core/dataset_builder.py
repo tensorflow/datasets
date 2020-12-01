@@ -1158,11 +1158,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     split_infos = [future.result() for future in split_info_futures]
 
     # Update the info object with the splits.
-    # TODO(tfds): Should improve the API.
-    split_dict = splits_lib.SplitDict(dataset_name=self.name)
-    for split_info in split_infos:
-      split_dict.add(split_info)
-    self.info.update_splits_if_different(split_dict)
+    split_dict = splits_lib.SplitDict(split_infos, dataset_name=self.name)
+    self.info.set_splits(split_dict)
 
 
 @utils.docs.deprecated

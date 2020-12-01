@@ -29,10 +29,8 @@ RANGE_VAL = list(range(6000, 6010))
 class SplitDictTest(testing.TestCase):
 
   def test_num_shards(self):
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(
-        name="train", shard_lengths=[1, 2, 3], num_bytes=0,
-    ))
+    si = tfds.core.SplitInfo(name="train", shard_lengths=[1, 2, 3], num_bytes=0)
+    sd = splits.SplitDict([si], dataset_name="ds_name")
     self.assertEqual(sd["train"].num_shards, 3)
 
 
@@ -40,14 +38,13 @@ class SplitsDictTest(testing.TestCase):
 
   @property
   def split_dict(self):
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(
-        name="train", shard_lengths=[10, 10], num_bytes=0
-    ))
-    sd.add(tfds.core.SplitInfo(name="test", shard_lengths=[1], num_bytes=0))
+    si = [
+        tfds.core.SplitInfo(name="train", shard_lengths=[10, 10], num_bytes=0),
+        tfds.core.SplitInfo(name="test", shard_lengths=[1], num_bytes=0),
+    ]
+    sd = splits.SplitDict(si, dataset_name="ds_name")
     return sd
 
-  # .add is implicitly tested, since s was created by calling .add
   def test_get(self):
     s = self.split_dict["train"]
     self.assertEqual("train", s.name)
@@ -66,40 +63,19 @@ class SplitsDictTest(testing.TestCase):
     sd = self.split_dict
     sdp = sd.to_proto()
 
-    self.assertEqual("test", sdp[0].name)
-    self.assertEqual([1], sdp[0].shard_lengths)
+    # Split order is preserved
+    self.assertEqual("train", sdp[0].name)
+    self.assertEqual([10, 10], sdp[0].shard_lengths)
 
-    self.assertEqual("train", sdp[1].name)
-    self.assertEqual([10, 10], sdp[1].shard_lengths)
+    self.assertEqual("test", sdp[1].name)
+    self.assertEqual([1], sdp[1].shard_lengths)
 
   def test_bool(self):
-    sd = splits.SplitDict("ds_name")
+    sd = splits.SplitDict([], dataset_name="ds_name")
     self.assertFalse(sd)  # Empty split is False
-    sd.add(tfds.core.SplitInfo(name="train", shard_lengths=[5], num_bytes=0))
+    si = [tfds.core.SplitInfo(name="train", shard_lengths=[5], num_bytes=0)]
+    sd = splits.SplitDict(si, dataset_name="ds_name")
     self.assertTrue(sd)  # Non-empty split is True
-
-  def test_check_splits_equals(self):
-    s1 = splits.SplitDict("ds_name")
-    s1.add(tfds.core.SplitInfo(name="train", shard_lengths=[10], num_bytes=0))
-    s1.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
-
-    s2 = splits.SplitDict("ds_name")
-    s2.add(tfds.core.SplitInfo(name="train", shard_lengths=[10], num_bytes=0))
-    s2.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
-
-    s3 = splits.SplitDict("ds_name")
-    s3.add(tfds.core.SplitInfo(name="train", shard_lengths=[10], num_bytes=0))
-    s3.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
-    s3.add(tfds.core.SplitInfo(name="valid", shard_lengths=[0], num_bytes=0))
-
-    s4 = splits.SplitDict("ds_name")
-    s4.add(tfds.core.SplitInfo(name="train", shard_lengths=[11], num_bytes=0))
-    s4.add(tfds.core.SplitInfo(name="test", shard_lengths=[3], num_bytes=0))
-
-    self.assertTrue(splits.check_splits_equals(s1, s1))
-    self.assertTrue(splits.check_splits_equals(s1, s2))
-    self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
-    self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
 
 
 class SplitsTest(testing.TestCase):

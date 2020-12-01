@@ -17,7 +17,7 @@
 
 
 import typing
-from typing import List, Union
+from typing import Any, List, Optional, Union
 
 import dataclasses
 
@@ -47,6 +47,11 @@ class SplitInfo:
   statistics: statistics_pb2.DatasetFeatureStatistics = dataclasses.field(
       default_factory=statistics_pb2.DatasetFeatureStatistics,
   )
+  # Inside `SplitDict`, `SplitInfo` has additional arguments required for
+  # `file_instructions`
+  # Rather than `dataset_name`, should use a structure containing file format,
+  # data_dir,...
+  _dataset_name: Optional[str] = None
 
   @classmethod
   def from_proto(cls, proto: proto_lib.SplitInfo) -> "SplitInfo":
@@ -119,6 +124,10 @@ class SplitInfo:
   def filenames(self) -> List[str]:
     """Returns the list of filenames."""
     return sorted(f.filename for f in self.file_instructions)
+
+  def replace(self, **kwargs: Any) -> "SplitInfo":
+    """Returns a copy of the `SplitInfo` with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
 
 
 class SubSplitInfo(object):
@@ -194,8 +203,15 @@ if typing.TYPE_CHECKING:
 class SplitDict(utils.NonMutableDict):
   """Split info object."""
 
-  def __init__(self, dataset_name):
-    super(SplitDict, self).__init__(error_msg="Split {key} already present")
+  def __init__(self, split_infos: List[SplitInfo], *, dataset_name: str):
+    # Forward the dataset name required to build file instructions:
+    # info.splits['train'].file_instructions
+    split_infos = [s.replace(_dataset_name=dataset_name) for s in split_infos]
+
+    super(SplitDict, self).__init__(
+        {split_info.name: split_info for split_info in split_infos},
+        error_msg="Split {key} already present"
+    )
     self._dataset_name = dataset_name
 
   def __getitem__(self, key):
@@ -211,50 +227,20 @@ class SplitDict(utils.NonMutableDict):
       )
       return SubSplitInfo(instructions)
 
-  def __setitem__(self, key, value):
-    raise ValueError("Cannot add elem. Use .add() instead.")
-
-  def add(self, split_info: SplitInfo):
-    """Add the split info."""
-    if split_info.name in self:
-      raise ValueError("Split {} already present".format(split_info.name))
-    # Forward the dataset name required to build file instructions:
-    # info.splits['train'].file_instructions
-    # Use `object.__setattr__`, because ProtoCls forbid new fields assignement.
-    object.__setattr__(split_info, "_dataset_name", self._dataset_name)
-    super(SplitDict, self).__setitem__(split_info.name, split_info)
-
   @classmethod
   def from_proto(cls, dataset_name, repeated_split_infos):
     """Returns a new SplitDict initialized from the `repeated_split_infos`."""
-    split_dict = cls(dataset_name)
-    for split_info in repeated_split_infos:
-      split_dict.add(SplitInfo.from_proto(split_info))
-    return split_dict
+    split_infos = [SplitInfo.from_proto(s) for s in repeated_split_infos]
+    return cls(split_infos, dataset_name=dataset_name)
 
   def to_proto(self):
     """Returns a list of SplitInfo protos that we have."""
-    # Return the proto.SplitInfo, sorted by name
-    return sorted((s.to_proto() for s in self.values()), key=lambda s: s.name)
+    return [s.to_proto() for s in self.values()]
 
   @property
   def total_num_examples(self):
     """Return the total number of examples."""
     return sum(s.num_examples for s in self.values())
-
-  def copy(self):
-    return SplitDict.from_proto(self._dataset_name, self.to_proto())
-
-
-def check_splits_equals(splits1, splits2):
-  """Check two split dicts have same name, shard_lengths and num_shards."""
-  if set(splits1) ^ set(splits2):  # Name intersection should be null
-    return False
-  for _, (split1, split2) in utils.zip_dict(splits1, splits2):
-    if (split1.num_shards != split2.num_shards or
-        split1.shard_lengths != split2.shard_lengths):
-      return False
-  return True
 
 
 def even_splits(
