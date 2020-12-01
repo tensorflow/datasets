@@ -34,12 +34,6 @@ import tqdm
 _WORKER_COUNT_DATASETS = 50
 _WORKER_COUNT_CONFIGS = 20
 
-_TEST_SECTION = 'testing'
-# We do not document datasets in those sections
-_FILTERED_SECTIONS = frozenset({
-    'testing',
-})
-
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
 # TODO(tfds): Document image_label_folder datasets in a separate section
 BUILDER_BLACKLIST = ['wmt_translate']
@@ -94,8 +88,6 @@ def _get_section(builder_cls: Type[tfds.core.DatasetBuilder]) -> str:
   module_parts = builder_cls.__module__.split('.')
   if module_parts[0] != 'tensorflow_datasets':
     raise AssertionError(f'Unexpected builder {builder_cls}: module')
-  if 'testing' in module_parts:
-    return _TEST_SECTION
   _, category, *_ = module_parts  # tfds.<category>.xyz
   return category
 
@@ -117,8 +109,6 @@ def _document_single_builder_inner(
   """Doc string for a single builder, with or without configs."""
   builder_cls = tfds.builder_cls(name)
   section = _get_section(builder_cls)
-  if section in _FILTERED_SECTIONS:
-    return None
 
   tqdm.tqdm.write(f'Document builder {name}...')
   builder, config_builders = _load_builder(builder_cls)
@@ -145,8 +135,7 @@ def _document_single_builder_inner(
 def _all_tfds_datasets() -> List[str]:
   """Returns all "official" TFDS dataset names."""
   return sorted([
-      name
-      for name in tfds.list_builders(with_community_datasets=False)
+      name for name in tfds.list_builders(with_community_datasets=False)  # pylint: disable=g-complex-comprehension
       if name not in BUILDER_BLACKLIST
   ])
 
