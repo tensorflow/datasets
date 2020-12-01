@@ -251,7 +251,7 @@ def _find_builder_dir_single_dir(
     # the code.
     # TODO(tfds): How to avoid code dependency and automatically infer the
     # config existance and name ?
-    config_name = _get_default_config_name(builder_name)
+    config_name = _get_default_config_name(builder_dir, builder_name)
 
   # If has config (explicitly given or default config), append it to the path
   if config_name:
@@ -275,19 +275,21 @@ def _find_builder_dir_single_dir(
   return builder_dir
 
 
-def _get_default_config_name(name: str) -> Optional[str]:
+def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
   """Returns the default config of the given dataset, None if not found."""
   # Search for the DatasetBuilder generation code
   try:
     cls = registered.imported_builder_cls(name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
   except registered.DatasetNotFoundError:
-    return None
+    pass
+  else:
+    # If code found, return the default config
+    if cls.BUILDER_CONFIGS:
+      return cls.BUILDER_CONFIGS[0].name
 
-  # If code found, return the default config
-  if cls.BUILDER_CONFIGS:
-    return cls.BUILDER_CONFIGS[0].name
-  return None
+  # Otherwise, try to load default config from common metadata
+  return dataset_builder.load_default_config_name(utils.as_path(builder_dir))
 
 
 def _get_version_str(

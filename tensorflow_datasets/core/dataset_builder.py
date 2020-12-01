@@ -18,6 +18,7 @@
 import abc
 import functools
 import inspect
+import json
 import os
 import sys
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Union
@@ -45,6 +46,7 @@ from tensorflow_datasets.core.utils import type_utils
 import termcolor
 
 ReadOnlyPath = type_utils.ReadOnlyPath
+ReadWritePath = type_utils.ReadWritePath
 VersionOrStr = Union[utils.Version, str]
 
 
@@ -403,7 +405,16 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
-        download_config=download_config)
+        download_config=download_config,
+    )
+
+    # Maybe save the `builder_cls` metadata common to all builder configs.
+    if self.BUILDER_CONFIGS:
+      _save_default_config_name(
+          # `data_dir/ds_name/config/version/` -> `data_dir/ds_name/`
+          common_dir=self.data_path.parent.parent,
+          default_config_name=self.BUILDER_CONFIGS[0].name,
+      )
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
     with utils.incomplete_dir(self._data_dir) as tmp_data_dir:
@@ -740,11 +751,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     return default_data_dir, data_dir
 
   def _log_download_done(self):
-    msg = ("Dataset {name} downloaded and prepared to {data_dir}. "
-           "Subsequent calls will reuse this data.").format(
-               name=self.name,
-               data_dir=self._data_dir,
-           )
+    msg = (f"Dataset {self.name} downloaded and prepared to {self._data_dir}. "
+           "Subsequent calls will reuse this data.")
     termcolor.cprint(msg, attrs=["bold"])
 
   def _log_download_bytes(self):
@@ -1181,3 +1189,35 @@ def _check_split_names(split_names: Iterable[str]) -> None:
     raise ValueError(
         "`all` is a reserved keyword. Split cannot be named like this."
     )
+
+
+def _save_default_config_name(
+    common_dir: ReadWritePath,
+    *,
+    default_config_name: str,
+) -> None:
+  """Saves `builder_cls` metadata (common to all builder configs)."""
+  data = {
+      "default_config_name": default_config_name,
+  }
+  # `data_dir/ds_name/config/version/` -> `data_dir/ds_name/.config`
+  config_dir = common_dir / ".config"
+  config_dir.mkdir(parents=True, exist_ok=True)
+  # Note:
+  # * Save inside a dir to support some replicated filesystem
+  # * There is a risk of concurent write access. Acceptable trade-of ?
+  # * Config file is overwritten each time a config is generated. If the
+  #   default config is changed, this will be updated.
+  config_path = config_dir / "metadata.json"
+  config_path.write_text(json.dumps(data))
+
+
+def load_default_config_name(
+    common_dir: ReadOnlyPath,
+) -> Optional[str]:
+  """Load `builder_cls` metadata (common to all builder configs)."""
+  config_path = common_dir / ".config/metadata.json"
+  if not config_path.exists():
+    return None
+  data = json.loads(config_path.read_text())
+  return data.get("default_config_name")
