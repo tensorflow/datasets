@@ -31,5 +31,5 @@ from tensorflow_datasets.testing import test_utils
 
 def disable_community_datasets():
   """During tests, `tfds.list_builders` disable community datasets."""
-  with mock.patch.object(load, 'COMMUNITY_DATASET_DISABLED', False):
+  with mock.patch.object(load, 'COMMUNITY_DATASET_DISABLED', True):
     yield

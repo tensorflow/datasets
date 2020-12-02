@@ -232,7 +232,9 @@ class DatasetBuilderTestCase(
     # all needed methods were implemented.
 
   def test_registered(self):
-    is_registered = self.builder.name in load.list_builders()
+    is_registered = self.builder.name in load.list_builders(
+        with_community_datasets=False,
+    )
     self.assertTrue(
         is_registered,
         f"Dataset {self.builder.name} was not registered.",

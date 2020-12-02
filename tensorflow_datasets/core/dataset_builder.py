@@ -1137,7 +1137,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       split_generators = self._split_generators(  # pylint: disable=unexpected-keyword-arg
           dl_manager, **optional_pipeline_kwargs
       )
-      # TODO(tfds): Could be removed one all datasets are migrated.
+      # TODO(tfds): Could be removed once all datasets are migrated.
       # https://github.com/tensorflow/datasets/issues/2537
       # Legacy mode (eventually convert list[SplitGeneratorLegacy] -> dict)
       split_generators = split_builder.normalize_legacy_split_generators(
