@@ -160,21 +160,14 @@ class DatasetBuilderTestCase(
     fake_example_dir = utils.as_path(test_utils.fake_examples_dir())
     if self.EXAMPLE_DIR is not None:
       self.example_dir = utils.as_path(self.EXAMPLE_DIR)
+      example_dir = self.example_dir  # Dir to display in the error
     elif example_dir.exists():
       self.example_dir = example_dir
     else:
       self.example_dir = fake_example_dir / self.builder.name
 
     if not self.example_dir.exists():
-      err_msg = (
-          "Dummy data not found in {}."
-          ""
-      ).format(self.example_dir)
-
-    if not self.example_dir.exists():
-      # TODO(epot): Better documentation once datasets are migrated to the
-      # folder model.
-      err_msg = "fake_examples dir %s not found." % self.example_dir
+      err_msg = f"Dummy data not found in: {example_dir}"
       raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
