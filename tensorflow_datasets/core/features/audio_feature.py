@@ -53,9 +53,9 @@ class Audio(feature.Tensor):
         encoding nor decoding.
     """
     self._file_format = file_format
-    if len(shape) != 1:
+    if len(shape) > 2:
       raise TypeError(
-          'Audio feature currently only supports 1-D values, got %s.' % shape)
+          'Audio shape should be either (length,) or (length, num_channels), got %s.' % shape)
     self._shape = shape
     self._sample_rate = sample_rate
     super(Audio, self).__init__(shape=shape, dtype=dtype)
@@ -129,13 +129,12 @@ def _save_wav(buff, data, rate) -> None:
   """Transform a numpy array to a PCM bytestring."""
   # Code inspired from `IPython.display.Audio`
   data = np.array(data, dtype=float)
-  if len(data.shape) > 1:
-    raise ValueError('encoding of stereo PCM signals are unsupported')
-  scaled = np.int16(data / np.max(np.abs(data)) * 32767).tolist()
+  num_channels = data.shape[1] if len(data.shape) > 1 else 1
+  scaled = np.int16(data / np.max(np.abs(data)) * 32767)
 
-  with wave.open(buff, mode='wb') as waveobj:
-    waveobj.setnchannels(1)
-    waveobj.setframerate(rate)
-    waveobj.setsampwidth(2)
-    waveobj.setcomptype('NONE', 'NONE')
-    waveobj.writeframes(b''.join([struct.pack('<h', x) for x in scaled]))
+  with wave.open(buff, mode="wb") as waveobj:
+      waveobj.setnchannels(num_channels)
+      waveobj.setframerate(rate)
+      waveobj.setsampwidth(2)
+      waveobj.setcomptype("NONE", "NONE")
+      waveobj.writeframes(scaled.astype("<i2", copy=False).tostring())
