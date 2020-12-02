@@ -217,6 +217,7 @@ class Video(sequence_feature.Sequence):
           '-vcodec', 'h264',      # output video stream codec - H.264
           # When outputting H.264 ensures compatibility so crappy
           # players can decode the video
+          # Ref: https://trac.ffmpeg.org/wiki/Slideshow
           '-pix_fmt', 'yuv420p',  # use yuv420v pixel format
           # native encoder cannot encode images of small scale
           # or the the hardware encoder may be busy which raises
