@@ -85,17 +85,11 @@ class BBoxFeature(feature.Tensor):
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""
     ex = np.expand_dims(ex, axis=0)  # Convert single bounding box to single batch.
-    return self._repr_html(ex)
+    return _repr_html(ex)
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes (Sequence)."""
-    return self._repr_html(ex)
-
-  def _repr_html(self, ex: np.ndarray) -> str:
-    """Returns the HTML str representation of an Image with BBoxes."""
-    img = _build_thumbnail_with_bbox(ex)
-    img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
-    return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
+    return _repr_html(ex)
 
   @classmethod
   def from_json_content(cls, value: Json) -> 'BBoxFeature':
@@ -104,6 +98,12 @@ class BBoxFeature(feature.Tensor):
 
   def to_json_content(self) -> Json:
     return dict()
+
+def _repr_html(ex: np.ndarray) -> str:
+  """Returns the HTML str representation of an Image with BBoxes."""
+  img = _build_thumbnail_with_bbox(ex)
+  img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
+  return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
 
 def _build_thumbnail_with_bbox(ex: np.ndarray):
   """Returns blank image with Bboxes drawn on it."""
