@@ -201,7 +201,7 @@ class Video(sequence_feature.Sequence):
         '-vf', 'scale=128:128', # scale output videos to 128x128
         # using native h264 encoder
         '-vcodec', 'h264',      # output video stream codec - H.264
-        '-pix_fmt', 'yuv420p',  # use yuv420v pixel format (ensure wide compatibility)
+        '-pix_fmt', 'yuv420p',  # use yuv420v pixel format (enhance compatibility)
         '-allow_sw', '1'        # allow software encoding
       ]
       ffmpeg_stdin = None
@@ -226,7 +226,6 @@ class Video(sequence_feature.Sequence):
 
       except OSError:
         # if ffmpeg is not installed, generate GIF using pngs
-        duration = (41*24)/framerate
         def write_buff(buff):
           images[0].save(
               buff,
@@ -234,7 +233,7 @@ class Video(sequence_feature.Sequence):
               save_all=True,
               append_images=images[1:],
               # Could add a frame_rate kwargs in __init__ to customize this.
-              duration=duration,  # 41ms / img ~= 24 img / sec
+              duration=1000/framerate,  # 41ms / img ~= 24 img / sec
               loop=0,
           )
 
