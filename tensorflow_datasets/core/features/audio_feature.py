@@ -131,9 +131,9 @@ def _save_wav(buff, data, rate) -> None:
   num_channels = data.shape[1] if len(data.shape) > 1 else 1
   scaled = np.int16(data / np.max(np.abs(data)) * 32767)
 
-  with wave.open(buff, mode="wb") as waveobj:
+  with wave.open(buff, mode='wb') as waveobj:
     waveobj.setnchannels(num_channels)
     waveobj.setframerate(rate)
     waveobj.setsampwidth(2)
-    waveobj.setcomptype("NONE", "NONE")
-    waveobj.writeframes(scaled.astype("<i2", copy=False).tostring())
+    waveobj.setcomptype('NONE', 'NONE')
+    waveobj.writeframes(scaled.astype('<i2', copy=False).tostring())
