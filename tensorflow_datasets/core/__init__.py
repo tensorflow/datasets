@@ -40,6 +40,8 @@ from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
 
+from tensorflow_datasets.core.registered import DatasetNotFoundError
+
 from tensorflow_datasets.core.split_builder import SplitGeneratorLegacy as SplitGenerator
 
 from tensorflow_datasets.core.splits import Split
@@ -70,6 +72,7 @@ __all__ = [
     "builder_from_directory",
     "DatasetBuilder",
     "DatasetInfo",
+    "DatasetNotFoundError",
     "Experiment",
     "GeneratorBasedBuilder",
     "gcs_path",

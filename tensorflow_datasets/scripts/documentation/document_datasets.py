@@ -22,7 +22,7 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 import collections
 from concurrent import futures
 import functools
-from typing import Any, Dict, Iterator, List, Optional, Tuple, Type
+from typing import Any, Dict, Iterator, List, Optional, Type
 
 import dataclasses
 
@@ -36,7 +36,16 @@ _WORKER_COUNT_CONFIGS = 20
 
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
 # TODO(tfds): Document image_label_folder datasets in a separate section
-BUILDER_BLACKLIST = ['wmt_translate']
+_BUILDER_BLACKLIST = ['wmt_translate']
+
+
+@dataclasses.dataclass(eq=False, frozen=True)
+class BuilderToDocument:
+  """Structure containing metadata."""
+  section: str
+  namespace: Optional[str]
+  builder: tfds.core.DatasetBuilder
+  config_builders: List[tfds.core.DatasetBuilder]
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
@@ -44,13 +53,17 @@ class BuilderDocumentation:
   """Documentation output of a single builder.
 
   Attributes:
-    name: Documentation page name (e.g. `mnist`)
+    name: Documentation page name (e.g. `mnist`, `kaggle:mnist`)
+    filestem: Documentation page name without suffix
+      (e.g. `mnist`, `kaggle_mnist`)
     content: Documentation content
     section: Documentation section (e.g `text`, `image`,...)
+    namespace: Dataset namespace
     is_manual: Whether the dataset require manual download
     is_nightly: Whether the dataset was recently added in `tfds-nightly`
   """
   name: str
+  filestem: str
   content: str
   section: str
   is_manual: bool
@@ -58,17 +71,81 @@ class BuilderDocumentation:
 
 
 def _load_builder(
-    builder_cls: Type[tfds.core.DatasetBuilder],
-) -> Tuple[tfds.core.DatasetBuilder, List[tfds.core.DatasetBuilder]]:
+    name: str,
+) -> Optional[BuilderToDocument]:
   """Load the builder to document.
 
   Args:
-    builder_cls: Builder to load
+    name: Builder to load
 
   Returns:
+    section: The section in which the builder is documented
     builder: Main builder instance
     config_builders: Additional builders (one of each configs)
   """
+  if ':' in name:  # Community dataset
+    return _load_builder_from_location(name)
+  else:  # Code dataset
+    return _load_builder_from_code(name)
+
+
+def _load_builder_from_location(
+    name: str,
+) -> Optional[BuilderToDocument]:
+  """Load the builder, config,... to document."""
+  namespace, _ = name.split(':')
+  try:
+    builder = tfds.builder(name)
+  except tfds.core.DatasetNotFoundError:
+    # TODO(tfds): If tfds.core.DatasetNotFoundError, it might be the default
+    # config isn't found. Should try to load all sub-configs.
+    return None
+  if builder.builder_config:
+    config_builders = _load_all_configs(name, builder)
+  else:
+    config_builders = []
+  return BuilderToDocument(
+      section=namespace,
+      namespace=namespace,
+      builder=builder,
+      config_builders=config_builders,
+  )
+
+
+def _load_all_configs(
+    name: str, builder: tfds.core.DatasetBuilder,
+) -> List[tfds.core.DatasetBuilder]:
+  """Load all builder configs."""
+  # `data_dir/name/config/version/` -> `data_dir/name/`
+  common_dir = builder.data_path.parent.parent
+  filtered_dirs = {builder.builder_config.name, '.config'}
+
+  def get_config_builder(path):
+    if path.name in filtered_dirs:
+      return None  # Default config is already loaded
+    try:
+      return tfds.builder(f'{name}/{path.name}')
+    except tfds.core.DatasetNotFoundError:
+      return None
+
+  with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
+    config_names = sorted(common_dir.iterdir())
+    config_builders = [
+        config_builder
+        for config_builder in tpool.map(get_config_builder, config_names)
+        if config_builder is not None  # Filter invalid configs
+    ]
+
+  return [builder] + config_builders
+
+
+def _load_builder_from_code(
+    name: str,
+) -> BuilderToDocument:
+  """Load the builder, config,... to document."""
+  builder_cls = tfds.builder_cls(name)
+  section = _get_section(builder_cls)
+
   if builder_cls.BUILDER_CONFIGS:  # Builder with configs
 
     def get_config_builder(config) -> tfds.core.DatasetBuilder:
@@ -78,9 +155,19 @@ def _load_builder(
       config_builders = list(
           tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),
       )
-    return config_builders[0], config_builders
+    return BuilderToDocument(
+        section=section,
+        namespace=None,
+        builder=config_builders[0],
+        config_builders=config_builders,
+    )
   else:  # Builder without configs
-    return builder_cls(), []  # pytype: disable=not-instantiable
+    return BuilderToDocument(
+        section=section,
+        namespace=None,
+        builder=builder_cls(),  # pytype: disable=not-instantiable
+        config_builders=[],
+    )
 
 
 def _get_section(builder_cls: Type[tfds.core.DatasetBuilder]) -> str:
@@ -96,7 +183,7 @@ def _document_single_builder(
     name: str, **kwargs: Any,
 ) -> Optional[BuilderDocumentation]:
   """Doc string for a single builder, with or without configs."""
-  with tfds.core.utils.try_reraise(f'Error for {name}: '):
+  with tfds.core.utils.try_reraise(f'Error for `{name}`: '):
     return _document_single_builder_inner(name, **kwargs)
 
 
@@ -107,15 +194,15 @@ def _document_single_builder_inner(
     nightly_doc_util: doc_utils.NightlyDocUtil,
 ) -> Optional[BuilderDocumentation]:
   """Doc string for a single builder, with or without configs."""
-  builder_cls = tfds.builder_cls(name)
-  section = _get_section(builder_cls)
-
   tqdm.tqdm.write(f'Document builder {name}...')
-  builder, config_builders = _load_builder(builder_cls)
+  doc_info = _load_builder(name)
+  if doc_info is None:
+    return None
 
   out_str = dataset_markdown_builder.get_markdown_string(
-      builder=builder,
-      config_builders=config_builders,
+      namespace=doc_info.namespace,
+      builder=doc_info.builder,
+      config_builders=doc_info.config_builders,
       visu_doc_util=visu_doc_util,
       df_doc_util=df_doc_util,
       nightly_doc_util=nightly_doc_util,
@@ -125,9 +212,10 @@ def _document_single_builder_inner(
   )
   return BuilderDocumentation(
       name=name,
+      filestem=name.replace(':', '_'),
       content=out_str,
-      section=section,
-      is_manual=bool(builder_cls.MANUAL_DOWNLOAD_INSTRUCTIONS),
+      section=doc_info.section,
+      is_manual=bool(doc_info.builder.MANUAL_DOWNLOAD_INSTRUCTIONS),
       is_nightly=is_nightly,
   )
 
@@ -136,7 +224,7 @@ def _all_tfds_datasets() -> List[str]:
   """Returns all "official" TFDS dataset names."""
   return sorted([
       name for name in tfds.list_builders(with_community_datasets=False)  # pylint: disable=g-complex-comprehension
-      if name not in BUILDER_BLACKLIST
+      if name not in _BUILDER_BLACKLIST
   ])
 
 

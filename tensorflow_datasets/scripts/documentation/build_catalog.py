@@ -69,7 +69,7 @@ def _create_section_toc(
   heading = '\n### `%s`\n' % section
   nightly_suffix = ' ' + doc_utils.NightlyDocUtil.icon
   entries = [
-      f' * [`{doc.name}`]({doc.name}.md)' +
+      f' * [`{doc.name}`]({doc.filestem}.md)' +
       (doc.is_nightly and nightly_suffix or '') for doc in builder_docs
   ]
   return '\n'.join([heading] + entries)
@@ -81,6 +81,8 @@ def build_catalog(
     catalog_dir: Optional[tfds.core.utils.PathLike] = None,
     doc_util_paths: Optional[doc_utils.DocUtilPaths] = None,
     toc_relative_path: str = '/datasets/catalog/',
+    index_template: Optional[tfds.core.utils.PathLike] = None,
+    index_filename: str = 'overview.md',
 ) -> None:
   """Document all datasets, including the table of content.
 
@@ -90,8 +92,14 @@ def build_catalog(
     doc_util_paths: Additional path for visualization, nightly info,...
     toc_relative_path: Relative path of the catalog directory, used to
       generate the table of content relative links.
+    index_template: Default template for the index page.
+    index_filename: Name of the catalog index file.
   """
   catalog_dir = tfds.core.as_path(catalog_dir)
+  index_template = index_template or tfds.core.tfds_path(
+      'scripts/documentation/templates/catalog_overview.md'
+  )
+  index_template = tfds.core.as_path(index_template)
 
   # Iterate over the builder documentations
   section_to_builder_docs = collections.defaultdict(list)
@@ -99,7 +107,7 @@ def build_catalog(
       datasets, doc_util_paths=doc_util_paths or doc_utils.DocUtilPaths()
   ):
     # Write the builder documentation
-    dataset_file = catalog_dir / f'{builder_doc.name}.md'
+    dataset_file = catalog_dir / f'{builder_doc.filestem}.md'
     dataset_file.write_text(builder_doc.content)
     # Save the category
     section_to_builder_docs[builder_doc.section].append(builder_doc)
@@ -108,13 +116,19 @@ def build_catalog(
       catalog_dir=catalog_dir,
       section_to_builder_docs=section_to_builder_docs,
       toc_relative_path=toc_relative_path,
+      index_template=index_template,
+      index_filename=index_filename,
   )
 
 
 def _save_table_of_content(
     catalog_dir: tfds.core.ReadWritePath,
-    section_to_builder_docs: Dict[str, document_datasets.BuilderDocumentation],
+    section_to_builder_docs: Dict[
+        str, List[document_datasets.BuilderDocumentation]
+    ],
     toc_relative_path: str,
+    index_template: tfds.core.ReadOnlyPath,
+    index_filename: str,
 ) -> None:
   """Builds and saves the table of contents (`_toc.yaml` and `overview.md`)."""
   # For _toc.yaml
@@ -135,7 +149,7 @@ def _save_table_of_content(
     sec_dict = {'title': section_str, 'section': []}
     for doc in builder_docs:
       sidebar_item = {
-          'path': os.path.join(toc_relative_path, doc.name),
+          'path': os.path.join(toc_relative_path, doc.filestem),
           'title': doc.name + (' (manual)' if doc.is_manual else '')
       }
       if doc.is_nightly:
@@ -147,11 +161,8 @@ def _save_table_of_content(
     toc_overview.append(_create_section_toc(section_str, builder_docs))
 
   # Write the `overview.md` page
-  index_template = tfds.core.tfds_path(
-      'scripts/documentation/templates/catalog_overview.md'
-  ).read_text()
-  index_str = index_template.format(toc='\n'.join(toc_overview))
-  catalog_dir.joinpath('overview.md').write_text(index_str)
+  index_str = index_template.read_text().format(toc='\n'.join(toc_overview))
+  catalog_dir.joinpath(index_filename).write_text(index_str)
 
   # Write the `_toc.yaml` TF documentation navigation bar
   with catalog_dir.joinpath('_toc.yaml').open('w') as f:
