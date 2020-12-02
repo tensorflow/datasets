@@ -185,17 +185,17 @@ class Video(sequence_feature.Sequence):
         'ffmpeg_extra_args': self._extra_ffmpeg_args
     }
 
-  def _generate_video_html(self, images, framerate=24, encoding_format='mp4') -> str:
+  def _generate_video_html(self, images, framerate=24) -> str:
     """Converts sequence of images into video string."""
-    imgs = len(str(len(images)))+1  # Find number of digits in len to give names.
+    num_digits = len(str(len(images)))+1  # Find number of digits in len to give names.
 
     with tempfile.TemporaryDirectory() as video_dir:
       for i, img in enumerate(images):
-        f = os.path.join(video_dir, f'img{i:0{imgs}d}.png')
+        f = os.path.join(video_dir, f'img{i:0{num_digits}d}.png')
         img.save(f, format='png')
 
       ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
-                    os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png'))]
+                    os.fspath(os.path.join(video_dir, f'img%0{num_digits}d.png'))]
 
       extra_ffmpeg_args = [
         '-vf', 'scale=128:128', # scale output videos to 128x128
@@ -206,7 +206,7 @@ class Video(sequence_feature.Sequence):
       ]
       ffmpeg_stdin = None
 
-      output_pattern = os.path.join(video_dir, 'output.' + encoding_format)
+      output_pattern = os.path.join(video_dir, 'output.mp4')
       ffmpeg_args += extra_ffmpeg_args
       ffmpeg_args.append(output_pattern)
       try:
