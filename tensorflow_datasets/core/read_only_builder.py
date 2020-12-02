@@ -56,6 +56,7 @@ class ReadOnlyBuilder(
     # Restore name, config, info
     info_proto = dataset_info.read_from_json(info_path)
     self.name = info_proto.name
+    self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
     if info_proto.config_name:
       builder_config = dataset_builder.BuilderConfig(
           name=info_proto.config_name,
