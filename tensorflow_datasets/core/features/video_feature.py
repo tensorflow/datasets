@@ -115,7 +115,7 @@ class Video(sequence_feature.Sequence):
 
   @property
   def _ffmpeg_path(self):
-    return '/Users/harsh/Desktop/ffmpeg_dependencies/ffmpeg/ffmpeg'
+    return 'ffmpeg'
 
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, type_utils.PathLikeCls):
@@ -125,11 +125,10 @@ class Video(sequence_feature.Sequence):
       ffmpeg_args = [self._ffmpeg_path, '-i', 'pipe:0']
       ffmpeg_stdin = path_or_fobj.read()
 
-    ffmpeg_dir = tempfile.mkdtemp()
-    output_pattern = os.path.join(ffmpeg_dir, '%010d.' + self._encoding_format)
-    ffmpeg_args += self._extra_ffmpeg_args
-    ffmpeg_args.append(output_pattern)
-    try:
+    with tempfile.TemporaryDirectory() as ffmpeg_dir:
+      output_pattern = os.path.join(ffmpeg_dir, '%010d.' + self._encoding_format)
+      ffmpeg_args += self._extra_ffmpeg_args
+      ffmpeg_args.append(output_pattern)
       _ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
       frames = []
       for image_name in sorted(tf.io.gfile.listdir(ffmpeg_dir)):
@@ -137,13 +136,6 @@ class Video(sequence_feature.Sequence):
         with tf.io.gfile.GFile(image_path, 'rb') as frame_file:
           frames.append(six.BytesIO(frame_file.read()))
       return frames
-    except OSError as exception:
-      raise IOError(
-          'It seems that ffmpeg is not installed on the system. Please follow '
-          'the instrutions at https://ffmpeg.org/. '
-          'Original exception: {}'.format(exception))
-    finally:
-      tf.io.gfile.rmtree(ffmpeg_dir)
 
   def encode_example(self, video_or_path_or_fobj):
     """Converts the given image into a dict convertible to tf example."""
@@ -189,28 +181,49 @@ class Video(sequence_feature.Sequence):
     """Converts sequence of images into video string."""
     num_digits = len(str(len(images)))+1  # Find number of digits in len to give names.
 
-    with tempfile.TemporaryDirectory() as video_dir:
-      for i, img in enumerate(images):
-        f = os.path.join(video_dir, f'img{i:0{num_digits}d}.png')
-        img.save(f, format='png')
+    try:
+      dummy_ffmpeg_args = [self._ffmpeg_path, '-version']
+      _ffmpeg_run(dummy_ffmpeg_args)
 
-      ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
-                    os.fspath(os.path.join(video_dir, f'img%0{num_digits}d.png'))]
+    except IOError:
+      # if ffmpeg is not installed, generate GIF using pngs
+      def write_buff(buff):
+        images[0].save(
+            buff,
+            format='GIF',
+            save_all=True,
+            append_images=images[1:],
+            # Could add a frame_rate kwargs in __init__ to customize this.
+            duration=1000/framerate,  # 41ms / img ~= 24 img / sec
+            loop=0,
+        )
 
-      extra_ffmpeg_args = [
-        '-vf', 'scale=128:128', # scale output videos to 128x128
-        # using native h264 encoder
-        '-vcodec', 'h264',      # output video stream codec - H.264
-        '-pix_fmt', 'yuv420p',  # use yuv420v pixel format (enhance compatibility)
-        '-allow_sw', '1'        # allow software encoding
-      ]
-      ffmpeg_stdin = None
+      # Convert to base64
+      gif_str = utils.get_base64(write_buff)
+      return f'<img src="data:image/png;base64,{gif_str}" alt="Gif" />'
 
-      output_pattern = os.path.join(video_dir, 'output.mp4')
-      ffmpeg_args += extra_ffmpeg_args
-      ffmpeg_args.append(output_pattern)
-      try:
-        _ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
+    else:
+      with tempfile.TemporaryDirectory() as video_dir:
+        for i, img in enumerate(images):
+          f = os.path.join(video_dir, f'img{i:0{num_digits}d}.png')
+          img.save(f, format='png')
+
+        ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
+                      os.fspath(os.path.join(video_dir, f'img%0{num_digits}d.png'))]
+
+        extra_ffmpeg_args = [
+          '-vf', 'scale=128:128', # scale output videos to 128x128
+          # using native h264 encoder
+          '-vcodec', 'h264',      # output video stream codec - H.264
+          '-pix_fmt', 'yuv420p',  # use yuv420v pixel format (enhance compatibility)
+          '-allow_sw', '1'        # allow software encoding
+        ]
+
+        output_pattern = os.path.join(video_dir, 'output.mp4')
+        ffmpeg_args += extra_ffmpeg_args
+        ffmpeg_args.append(output_pattern)
+
+        _ffmpeg_run(ffmpeg_args)
 
         video = None
         video_file = os.path.join(video_dir, 'output.mp4')
@@ -224,23 +237,6 @@ class Video(sequence_feature.Sequence):
                 f'<source src="data:image/video;base64,{video_str}"'
                 f' type="video/mp4" alt="Video"></video>')
 
-      except OSError:
-        # if ffmpeg is not installed, generate GIF using pngs
-        def write_buff(buff):
-          images[0].save(
-              buff,
-              format='GIF',
-              save_all=True,
-              append_images=images[1:],
-              # Could add a frame_rate kwargs in __init__ to customize this.
-              duration=1000/framerate,  # 41ms / img ~= 24 img / sec
-              loop=0,
-          )
-
-        # Convert to base64
-        gif_str = utils.get_base64(write_buff)
-        return f'<img src="data:image/png;base64,{gif_str}" alt="Gif" />'
-
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as GIFs."""
     # Use GIF to generate a HTML5 compatible video if FFMPEG is not
@@ -252,17 +248,23 @@ class Video(sequence_feature.Sequence):
     return video_html
 
 def _ffmpeg_run(ffmpeg_args, ffmpeg_stdin=None):
-  process = subprocess.Popen(ffmpeg_args,
-                                stdin=subprocess.PIPE,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+  try:
+    process = subprocess.Popen(ffmpeg_args,
+                                  stdin=subprocess.PIPE,
+                                  stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE)
 
-  stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
-  ffmpeg_ret_code = process.returncode
-  if ffmpeg_ret_code:
-    raise ValueError(
-        'ffmpeg returned error code {}, command={}\n'
-        'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
-                                        ' '.join(ffmpeg_args),
-                                        stdout_data,
-                                        stderr_data))
+    stdout_data, stderr_data = process.communicate(ffmpeg_stdin)
+    ffmpeg_ret_code = process.returncode
+    if ffmpeg_ret_code:
+      raise ValueError(
+          'ffmpeg returned error code {}, command={}\n'
+          'stdout={}\nstderr={}\n'.format(ffmpeg_ret_code,
+                                          ' '.join(ffmpeg_args),
+                                          stdout_data,
+                                          stderr_data))
+  except OSError as exception:
+        raise IOError(
+            'It seems that ffmpeg is not installed on the system. Please follow '
+            'the instrutions at https://ffmpeg.org/. '
+            'Original exception: {}'.format(exception))
