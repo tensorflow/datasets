@@ -225,7 +225,6 @@ class Video(sequence_feature.Sequence):
 
         _ffmpeg_run(ffmpeg_args)
 
-        video = None
         video_file = os.path.join(video_dir, 'output.mp4')
         with tf.io.gfile.GFile(video_file, 'rb') as vf:
           video = vf.read()
