@@ -16,7 +16,6 @@
 """Audio feature."""
 
 import os
-import struct
 import wave
 
 import numpy as np
