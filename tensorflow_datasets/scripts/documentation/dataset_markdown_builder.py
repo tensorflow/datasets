@@ -156,6 +156,12 @@ class SourceCodeSection(Section):
     return True  # Always common to all configs
 
   def content(self, builder: tfds.core.DatasetBuilder):
+    # TODO(tfds): Display the source code
+    if isinstance(builder, tfds.core.read_only_builder.ReadOnlyBuilder):
+      return (
+          'Missing '
+          '([#2813](https://github.com/tensorflow/datasets/issues/2813))'
+      )
     class_path = tfds.core.utils.get_class_path(builder).split('.')
     del class_path[-2]
     class_path = '.'.join(class_path)
@@ -445,6 +451,7 @@ def _display_builder(
 
 
 def _display_all_builders(
+    namespace: Optional[str],
     nightly_doc_util: Optional[doc_utils.NightlyDocUtil],
     builders: List[tfds.core.DatasetBuilder],
     all_sections: List[Section],
@@ -468,8 +475,9 @@ def _display_all_builders(
       nightly_str = ' ' + nightly_doc_util.icon
     else:
       nightly_str = ''
+    cannonical_name = doc_utils.make_cannonical_name(namespace, builder.name)
     unique_builder_str.append(
-        f'## {builder.name}/{builder.builder_config.name}'
+        f'## {cannonical_name}/{builder.builder_config.name}'
         f'{header_suffix}{nightly_str}\n')
     unique_builder_str.append(_display_builder(builder, unique_sections))
   unique_builder_str = '\n'.join(unique_builder_str)
@@ -480,8 +488,12 @@ def _display_all_builders(
 # --------------------------- Main page ---------------------------
 
 
-def _display_dataset_heading(builder: tfds.core.DatasetBuilder):
-  return f'# `{builder.name}`'
+def _display_dataset_heading(
+    namespace: Optional[str],
+    builder: tfds.core.DatasetBuilder,
+) -> str:
+  cannonical_name = doc_utils.make_cannonical_name(namespace, builder.name)
+  return f'# `{cannonical_name}`'
 
 
 def _display_nightly_str(
@@ -513,7 +525,8 @@ def _display_manual_instructions(builder: tfds.core.DatasetBuilder):
 
 def _display_builder_configs(
     builder: tfds.core.DatasetBuilder,
-    nightly_doc_util,
+    namespace: Optional[str],
+    nightly_doc_util: Optional[doc_utils.NightlyDocUtil],
     config_builders: List[tfds.core.DatasetBuilder],
     all_sections: List[Section],
 ) -> str:
@@ -522,7 +535,12 @@ def _display_builder_configs(
   if not builder.builder_config:
     return _display_builder(builder, all_sections)
   # Second case: Builder configs
-  return _display_all_builders(nightly_doc_util, config_builders, all_sections)
+  return _display_all_builders(
+      nightly_doc_util=nightly_doc_util,
+      namespace=namespace,
+      builders=config_builders,
+      all_sections=all_sections,
+  )
 
 
 def _escape(val: str) -> str:
@@ -589,8 +607,10 @@ def _display_schema_org(
 
 
 def get_markdown_string(
+    *,
     builder: tfds.core.DatasetBuilder,
     config_builders: List[tfds.core.DatasetBuilder],
+    namespace: Optional[str],
     visu_doc_util: Optional[doc_utils.VisualizationDocUtil],
     df_doc_util: Optional[doc_utils.DataframeDocUtil],
     nightly_doc_util: Optional[doc_utils.NightlyDocUtil],
@@ -619,11 +639,15 @@ def get_markdown_string(
 
   doc_str = [
       _display_schema_org(builder, visu_doc_util),
-      _display_dataset_heading(builder),
+      _display_dataset_heading(namespace, builder),
       _display_nightly_str(nightly_doc_util, builder),
       _display_manual_instructions(builder),
       _display_builder_configs(
-          builder, nightly_doc_util, config_builders, all_sections
+          builder=builder,
+          namespace=namespace,
+          nightly_doc_util=nightly_doc_util,
+          config_builders=config_builders,
+          all_sections=all_sections,
       ),
   ]
   return '\n\n'.join([tfds.core.utils.dedent(s) for s in doc_str if s])
