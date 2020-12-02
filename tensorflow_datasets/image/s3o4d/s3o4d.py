@@ -58,7 +58,7 @@ _CITATION = r"""
 """
 
 
-class S3O4D(tfds.core.GeneratorBasedBuilder):
+class S3o4d(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for s3o4d dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

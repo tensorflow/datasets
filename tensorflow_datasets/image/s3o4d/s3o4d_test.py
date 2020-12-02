@@ -21,7 +21,7 @@ from tensorflow_datasets.image.s3o4d import s3o4d
 
 class S3o4dTest(testing.DatasetBuilderTestCase):
   """Tests for s3o4d dataset."""
-  DATASET_CLASS = s3o4d.S3O4D
+  DATASET_CLASS = s3o4d.S3o4d
   SPLITS = {
       'bunny_train': 3,  # Number of fake train example
       'bunny_test': 1,  # Number of fake test example

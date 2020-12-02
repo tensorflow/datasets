@@ -15,4 +15,4 @@
 
 """S3O4D Dataset."""
 
-from tensorflow_datasets.image.s3o4d.s3o4d import S3O4D
+from tensorflow_datasets.image.s3o4d.s3o4d import S3o4d
