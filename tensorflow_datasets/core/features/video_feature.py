@@ -115,7 +115,7 @@ class Video(sequence_feature.Sequence):
 
   @property
   def _ffmpeg_path(self):
-    return 'ffmpeg'
+    return '/Users/harsh/Desktop/ffmpeg_dependencies/ffmpeg/ffmpeg'
 
   def _ffmpeg_decode(self, path_or_fobj):
     if isinstance(path_or_fobj, type_utils.PathLikeCls):
@@ -197,8 +197,13 @@ class Video(sequence_feature.Sequence):
       ffmpeg_args = [self._ffmpeg_path, '-framerate', str(framerate), '-i',
                     os.fspath(os.path.join(video_dir, f'img%0{imgs}d.png'))]
 
-      extra_ffmpeg_args = ['-vf', 'scale=128:128', '-vcodec', 'h264',
-                           '-pix_fmt', 'yuv420p', '-allow_sw', '1']
+      extra_ffmpeg_args = [
+        '-vf', 'scale=128:128', # scale output videos to 128x128
+        # using native h264 encoder
+        '-vcodec', 'h264',      # output video stream codec - H.264
+        '-pix_fmt', 'yuv420p',  # use yuv420v pixel format (ensure wide compatibility)
+        '-allow_sw', '1'        # allow software encoding
+      ]
       ffmpeg_stdin = None
 
       output_pattern = os.path.join(video_dir, 'output.' + encoding_format)
@@ -216,7 +221,7 @@ class Video(sequence_feature.Sequence):
           buff.write(video)
         video_str = utils.get_base64(write_buff)
         return (f'<video height="128" width="128" controls loop plays-inline>'
-                f'<source src="data:image/gif;base64,{video_str}"'
+                f'<source src="data:image/video;base64,{video_str}"'
                 f' type="video/mp4" alt="Video"></video>')
 
       except OSError:
