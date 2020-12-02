@@ -212,10 +212,16 @@ class Video(sequence_feature.Sequence):
                       os.fspath(os.path.join(video_dir, f'img%0{num_digits}d.png'))]
 
         extra_ffmpeg_args = [
-          '-vf', 'scale=128:128', # scale output videos to 128x128
-          # using native h264 encoder
+          # using native h264 to encode video stream to H.264 codec
+          # it enables chrome support
           '-vcodec', 'h264',      # output video stream codec - H.264
-          '-pix_fmt', 'yuv420p',  # use yuv420v pixel format (enhance compatibility)
+          # When outputting H.264 ensures compatibility so crappy
+          # players can decode the video
+          '-pix_fmt', 'yuv420p',  # use yuv420v pixel format
+          # native encoder cannot encode images of small scale
+          # or the the hardware encoder may be busy which raises
+          # Error: cannot create compression session
+          # so allow software encoding
           '-allow_sw', '1'        # allow software encoding
         ]
 
@@ -233,7 +239,7 @@ class Video(sequence_feature.Sequence):
           buff.write(video)
         video_str = utils.get_base64(write_buff)
         return (f'<video height="128" width="128" controls loop plays-inline>'
-                f'<source src="data:image/video;base64,{video_str}"'
+                f'<source src="data:video/mp4;base64,{video_str}"'
                 f' type="video/mp4" alt="Video"></video>')
 
   def repr_html(self, ex: np.ndarray) -> str:
