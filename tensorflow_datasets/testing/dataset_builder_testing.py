@@ -392,6 +392,12 @@ class DatasetBuilderTestCase(
   def _assertNoFileName(self, builder):
       original_generate_examples = builder._generate_examples
 
+      def new_generate_examples(self, *args, **kwargs):
+        return original_generate_examples(self, *args, **kwargs)
+
+      with mock.patch.object(builder, '_generate_examples', new_generate_examples):
+
+
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
