@@ -90,7 +90,7 @@ def _decode_image(fobj, session, filename):
 
   buf = fobj.read()
   image = tfds.core.lazy_imports.cv2.imdecode(
-      np.fromstring(buf, dtype=np.uint8), flags=3)  # Note: Converts to RGB.
+      np.frombuffer(buf, dtype=np.uint8), flags=3)  # Note: Converts to RGB.
   if image is None:
     logging.warning(
         "Image %s could not be decoded by OpenCV, falling back to TF", filename)

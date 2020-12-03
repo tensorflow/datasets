@@ -271,7 +271,7 @@ class CaltechBirds2011(CaltechBirds2010):
         if fname.endswith(".png"):
           with tf.io.gfile.GFile(os.path.join(root, fname), "rb") as png_f:
             mask = tfds.core.lazy_imports.cv2.imdecode(
-                np.fromstring(png_f.read(), dtype=np.uint8), flags=0)
+                np.frombuffer(png_f.read(), dtype=np.uint8), flags=0)
           attributes[fname.split(".")[0]].append(mask)
 
     return [

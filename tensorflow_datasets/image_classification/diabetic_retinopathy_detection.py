@@ -218,7 +218,7 @@ def _resize_image_if_necessary(image_fobj, target_pixels=None):
   cv2 = tfds.core.lazy_imports.cv2
   # Decode image using OpenCV2.
   image = cv2.imdecode(
-      np.fromstring(image_fobj.read(), dtype=np.uint8), flags=3)
+      np.frombuffer(image_fobj.read(), dtype=np.uint8), flags=3)
   # Get image height and width.
   height, width, _ = image.shape
   actual_pixels = height * width
@@ -246,7 +246,7 @@ def _btgraham_processing(
   cv2 = tfds.core.lazy_imports.cv2
   # Decode image using OpenCV2.
   image = cv2.imdecode(
-      np.fromstring(image_fobj.read(), dtype=np.uint8), flags=3)
+      np.frombuffer(image_fobj.read(), dtype=np.uint8), flags=3)
   # Process the image.
   image = _scale_radius_size(image, filepath, target_radius_size=target_pixels)
   image = _subtract_local_average(image, target_radius_size=target_pixels)

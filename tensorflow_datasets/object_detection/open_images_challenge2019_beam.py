@@ -53,7 +53,7 @@ class ProcessImageFn(beam.DoFn):
   def process(self, element):
     filename, content = element
     try:
-      image = cv2.imdecode(np.fromstring(content, dtype=np.uint8), flags=3)
+      image = cv2.imdecode(np.frombuffer(content, dtype=np.uint8), flags=3)
     except:
       logging.info("Exception raised while decoding image %s", filename)
       raise

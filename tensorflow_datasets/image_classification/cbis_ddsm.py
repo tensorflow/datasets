@@ -583,7 +583,7 @@ def _read_image(filepath, image_size=None):
   cv2 = tfds.core.lazy_imports.cv2
   with tf.io.gfile.GFile(filepath, 'rb') as f:
     image = cv2.imdecode(
-        np.fromstring(f.read(), dtype=np.uint8), flags=cv2.IMREAD_GRAYSCALE)
+        np.frombuffer(f.read(), dtype=np.uint8), flags=cv2.IMREAD_GRAYSCALE)
     if image_size:
       # Note: cv2.resize actually expects (width, size).
       image = cv2.resize(image, (image_size[1], image_size[0]))

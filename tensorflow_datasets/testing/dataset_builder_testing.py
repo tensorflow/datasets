@@ -469,7 +469,7 @@ def checksum(example):
     elif isinstance(element,
                     (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
       flat_str.append(str(element.to_list()))
-    elif isinstance(element, np.ndarray):
+    elif isinstance(element, (np.ndarray, np.generic)):
       # tf.Tensor() returns np.array of dtype object, which don't work
       # with x.to_bytes(). So instead convert numpy into list.
       if element.dtype.type is np.object_:

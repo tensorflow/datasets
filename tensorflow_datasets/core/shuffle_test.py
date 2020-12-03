@@ -92,7 +92,8 @@ class ShuffleTest(testing.TestCase):
         if not bucket._fobj:
           continue
         bucket._fobj.close()
-        size += len(open(bucket._path, 'rb').read())
+        with open(bucket._path, 'rb') as f:
+          size += len(f.read())
       self.assertEqual(size, expected_size)
     # Check records can be read as expected:
     records = list(iter(shuffler))

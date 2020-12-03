@@ -547,7 +547,7 @@ def snow(x, severity=1):
         output = f.read()
 
   snow_layer = cv2.imdecode(
-      np.fromstring(output, np.uint8), cv2.IMREAD_UNCHANGED) / 255.
+      np.frombuffer(output, np.uint8), cv2.IMREAD_UNCHANGED) / 255.
   snow_layer = snow_layer[..., np.newaxis]
 
   x = c[6] * x + (1 - c[6]) * np.maximum(
@@ -590,7 +590,7 @@ def motion_blur(x, severity=1):
         output = f.read()
 
   x = tfds.core.lazy_imports.cv2.imdecode(
-      np.fromstring(output, np.uint8),
+      np.frombuffer(output, np.uint8),
       tfds.core.lazy_imports.cv2.IMREAD_UNCHANGED)
 
   if x.shape != (224, 224):
