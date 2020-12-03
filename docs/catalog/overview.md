@@ -68,7 +68,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
-*   [`s3_o4_d`](s3_o4_d.md)
+*   [`s3o4d`](s3o4d.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
@@ -178,6 +178,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`cherry_blossoms`](cherry_blossoms.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`dart`](dart.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`forest_fires`](forest_fires.md)

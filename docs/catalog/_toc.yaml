@@ -82,9 +82,9 @@ toc:
     title: lsun
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
-  - path: /datasets/catalog/s3_o4_d
+  - path: /datasets/catalog/s3o4d
     status: nightly
-    title: s3_o4_d
+    title: s3o4d
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
   - path: /datasets/catalog/shapes3d
@@ -286,6 +286,9 @@ toc:
   - path: /datasets/catalog/cherry_blossoms
     status: nightly
     title: cherry_blossoms
+  - path: /datasets/catalog/dart
+    status: nightly
+    title: dart
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/forest_fires
