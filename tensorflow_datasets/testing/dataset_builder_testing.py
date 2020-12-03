@@ -367,6 +367,9 @@ class DatasetBuilderTestCase(
       )
       builder.download_and_prepare(download_config=download_config)
 
+    with self._subTest("check_filename"):
+      self._assertNoFileName(builder)
+
     with self._subTest("as_dataset"):
       self._assertAsDataset(builder)
 
@@ -385,6 +388,9 @@ class DatasetBuilderTestCase(
 
     with self._subTest("config_description"):
       self._test_description_builder_config(builder)
+
+  def _assertNoFileName(self, builder):
+      original_generate_examples = builder._generate_examples
 
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
