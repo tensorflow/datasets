@@ -25,7 +25,6 @@ from unittest import mock
 
 from absl.testing import parameterized
 import numpy as np
-import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -37,6 +36,7 @@ from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.testing import feature_test_case
 from tensorflow_datasets.testing import test_utils
 
+import tensorflow.compat.v2 as tf
 # `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
     "chmod",
@@ -371,7 +371,7 @@ class DatasetBuilderTestCase(
       def new_generate_examples(self, *args, **kwargs):
         records =  original_generate_examples(self, *args, **kwargs)
         #Validating the keys for any potential filenames
-        for key, data in records:
+        for key, _ in records:
           if self.example_dir in key:
             err_msg = "The keys yielded by the '_generate_examples' method \
             contain user directory path, which might disrupt the deterministic\
@@ -380,7 +380,9 @@ class DatasetBuilderTestCase(
             raise ValueError(err_msg)
         return records
 
-      with mock.patch.object(builder, '_generate_examples', new_generate_examples):
+      with mock.patch.object(builder,
+                            '_generate_examples',
+                            new_generate_examples):
         builder.download_and_prepare(download_config=download_config)
 
     with self._subTest("as_dataset"):
