@@ -51,7 +51,7 @@ REQUIRED_PKGS = [
     'future',
     'numpy',
     'promise',
-    'protobuf>=3.6.1',
+    'protobuf>=3.12.2',
     'requests>=2.19.0',
     'six',
     'tensorflow-metadata',

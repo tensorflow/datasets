@@ -42,5 +42,10 @@ then
   # `tensorflow` is automatically installed with `tensorflow-data-validation`
   # so uninstall `tensorflow` to avoid conflicts with `tf-nightly`
   pip uninstall -y tensorflow
-  pip install tf-nightly --upgrade --force-reinstall
+  # Use --no-deps, otherwise protobuf and other package are reverted to
+  # previous version
+  pip install tf-nightly --upgrade --force-reinstall --no-deps
+  python -c "import tensorflow as tf ; assert 'dev' in tf.__version__"
 fi
+
+pip freeze
