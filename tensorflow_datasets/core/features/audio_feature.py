@@ -54,17 +54,25 @@ class Audio(feature.Tensor):
     self._file_format = file_format
     if len(shape) > 2:
       raise TypeError(
-          'Audio shape should be either (length,) or (length, num_channels), got %s.' % shape)
+          'Audio shape should be either (length,) or '
+          f'(length, num_channels), got {shape}.'
+      )
     self._shape = shape
     self._sample_rate = sample_rate
     super(Audio, self).__init__(shape=shape, dtype=dtype)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
-        fobj, format=file_format)
+        fobj, format=file_format
+    )
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
-    return super(Audio, self).encode_example(
-        np.array(audio_segment.get_array_of_samples()).astype(np_dtype))
+    raw_samples = np.array(audio_segment.get_array_of_samples())
+    raw_samples = raw_samples.astype(np_dtype)
+    if audio_segment.channels > 1:
+      audio_data = raw_samples.reshape((-1, audio_segment.channels))
+    else:
+      audio_data = raw_samples
+    return super(Audio, self).encode_example(audio_data)
 
   def encode_example(self, audio_or_path_or_fobj):
     if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
@@ -128,12 +136,22 @@ def _save_wav(buff, data, rate) -> None:
   """Transform a numpy array to a PCM bytestring."""
   # Code inspired from `IPython.display.Audio`
   data = np.array(data, dtype=float)
+
+  bit_depth = 16
+  max_sample_value = int(2**(bit_depth - 1)) - 1
+
   num_channels = data.shape[1] if len(data.shape) > 1 else 1
-  scaled = np.int16(data / np.max(np.abs(data)) * 32767)
+  scaled = np.int16(data / np.max(np.abs(data)) * max_sample_value)
 
   with wave.open(buff, mode='wb') as waveobj:
     waveobj.setnchannels(num_channels)
     waveobj.setframerate(rate)
-    waveobj.setsampwidth(2)
+    waveobj.setsampwidth(bit_depth // 8)
     waveobj.setcomptype('NONE', 'NONE')
-    waveobj.writeframes(scaled.astype('<i2', copy=False).tostring())
+    # The WAVE spec expects little-endian integers of "sampwidth" bytes each.
+    # Numpy's `astype` accepts array-protocol type strings, so we specify:
+    #  - '<' to indicate little endian
+    #  - 'i' to specify signed integer
+    #  - the number of bytes used to represent each integer
+    encoded_wav = scaled.astype(f'<i{bit_depth // 8}', copy=False).tostring()
+    waveobj.writeframes(encoded_wav)
