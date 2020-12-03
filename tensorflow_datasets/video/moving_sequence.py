@@ -44,7 +44,7 @@ def _create_moving_sequence(image, pad_lefts, total_padding):
 
     padded_images = tf.map_fn(
         get_padded_image, [pad_lefts], dtype=tf.uint8, infer_shape=False,
-        back_prop=False)
+    )
 
   return padded_images
 

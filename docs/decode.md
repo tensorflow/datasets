@@ -143,7 +143,6 @@ def decode_video(example):
       video,
       dtype=ds_info.features['video'].dtype,
       parallel_iterations=10,
-      back_prop=False,
   )
   example['video'] = video
   return example

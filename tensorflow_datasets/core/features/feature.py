@@ -421,7 +421,6 @@ class FeatureConnector(object):
         tfexample_data,
         fn_output_signature=self.dtype,
         parallel_iterations=10,
-        back_prop=False,
         name='sequence_decode',
     )
 

@@ -89,7 +89,6 @@ class Decoder(object):
         serialized_example,
         dtype=self.dtype,
         parallel_iterations=10,
-        back_prop=False,
         name='sequence_decode',
     )
 
