@@ -390,15 +390,17 @@ class DatasetBuilderTestCase(
       original_generate_examples = builder._generate_examples
 
       def new_generate_examples(self, *args, **kwargs):
-        return original_generate_examples(self, *args, **kwargs)
+        keys, data =  original_generate_examples(self, *args, **kwargs)
+        #Validating the keys for any potential filenames
+        for key in keys:
+          if self.example_dir in key:
+            err_msg = "The keys yielded by the '_generate_examples' method \
+            contain user directory path, which might disrupt the deterministic\
+            order of the generated examples. Please moify the dataset \
+            generation script to resolve the issue."
+            raise ValueError(err_msg)
 
       with mock.patch.object(builder, '_generate_examples', new_generate_examples):
-        keys, data = new_generate_examples(self)
-        if self.example_dir in keys:
-          err_msg = "The keys yielded by the '_generate_examples' method \
-          contain user directory path somewhere. Please change the dataset \
-          implementation to resolve the issue."
-          raise ValueError(err_msg)
 
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
