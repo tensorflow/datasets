@@ -367,9 +367,6 @@ class DatasetBuilderTestCase(
       )
       builder.download_and_prepare(download_config=download_config)
 
-    with self._subTest("check_filename"):
-      self._assertNoFileName(builder)
-
     with self._subTest("as_dataset"):
       self._assertAsDataset(builder)
 
