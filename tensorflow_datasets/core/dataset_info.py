@@ -68,6 +68,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     supervised_keys={supervised_keys},
     citation={citation},
     redistribution_info={redistribution_info},
+    module_name={module_name},
 )
 """
 
@@ -136,6 +137,7 @@ class DatasetInfo(object):
         config_name=config_name,
         config_description=config_description,
         citation=utils.dedent(citation),
+        module_name=builder.__module__,
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             license=utils.dedent(redistribution_info.pop("license")),
             **redistribution_info) if redistribution_info else None)
@@ -239,6 +241,10 @@ class DatasetInfo(object):
   @property
   def redistribution_info(self):
     return self.as_proto.redistribution_info
+
+  @property
+  def module_name(self):
+    return self.as_proto.module_name
 
   @property
   def splits(self):
