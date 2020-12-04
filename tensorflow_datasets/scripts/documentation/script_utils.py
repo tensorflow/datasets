@@ -16,6 +16,7 @@
 r"""Script utils for generating datasets figures and dataframes.
 """
 
+import concurrent.futures
 import functools
 import itertools
 import multiprocessing
@@ -33,7 +34,7 @@ import tensorflow_datasets as tfds
 
 T = TypeVar('T')
 
-WORKER_COUNT_DATASETS = 10
+_WORKER_COUNT_DATASETS = 10
 
 
 def _log_exception(fn):
@@ -137,8 +138,26 @@ def multi_process_map(
   """
   full_names = _get_full_names(datasets)
   logging.info(f'Generate figures for {len(full_names)} builders')
-  with multiprocessing.Pool(WORKER_COUNT_DATASETS) as tpool:
-    tpool.map(worker_fn, full_names)
+  with multiprocessing.Pool(_WORKER_COUNT_DATASETS) as tpool:
+    list(tpool.map(worker_fn, full_names))
+
+
+def multi_thread_map(
+    worker_fn: Callable[..., None],
+    datasets: Optional[List[str]] = None,
+) -> None:
+  """Apply the function for each given datasets.
+
+  Args:
+    worker_fn: Function called on each dataset version.
+    datasets: List of all `dataset` names to generate. If None, visualization
+      for all available datasets will be generated.
+  """
+  full_names = _get_full_names(datasets)
+  with concurrent.futures.ThreadPoolExecutor(
+      max_workers=_WORKER_COUNT_DATASETS,
+  ) as executor:
+    list(executor.map(worker_fn, full_names))
 
 
 def multi_process_run(main: Callable[[Any], None]) -> None:

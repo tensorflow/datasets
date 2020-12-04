@@ -19,6 +19,7 @@ r"""Script which generates datasets dataframes HTML.
 
 import functools
 
+from absl import app
 from absl import flags
 import pandas
 
@@ -54,12 +55,11 @@ def main(_):
       get_artifact_fn=tfds.as_dataframe,
       save_artifact_fn=_save_html,
   )
-  script_utils.multi_process_map(
+  script_utils.multi_thread_map(
       worker_fn=generate_and_save_dataframe_fn,
       datasets=datasets,
   )
 
 
 if __name__ == '__main__':
-  flags.mark_flags_as_required(['dst_dir'])
-  script_utils.multi_process_run(main)
+  app.run(main)

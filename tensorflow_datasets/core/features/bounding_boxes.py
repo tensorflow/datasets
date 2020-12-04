@@ -16,15 +16,22 @@
 """Bounding boxes feature."""
 
 import collections
+from typing import Any
 
+import numpy as np
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 BBox = collections.namedtuple('BBox', 'ymin, xmin, ymax, xmax')
+
+PilImage = Any
 
 
 class BBoxFeature(feature.Tensor):
@@ -79,6 +86,15 @@ class BBoxFeature(feature.Tensor):
         [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
     )
 
+  def repr_html(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of an Image with BBoxes."""
+    ex = np.expand_dims(ex, axis=0)  # Expand single bounding box to batch.
+    return _repr_html(ex)
+
+  def repr_html_batch(self, ex: np.ndarray) -> str:
+    """Returns the HTML str representation of an Image with BBoxes (Sequence)."""
+    return _repr_html(ex)
+
   @classmethod
   def from_json_content(cls, value: Json) -> 'BBoxFeature':
     del value  # Unused
@@ -86,3 +102,29 @@ class BBoxFeature(feature.Tensor):
 
   def to_json_content(self) -> Json:
     return dict()
+
+
+def _repr_html(ex: np.ndarray) -> str:
+  """Returns the HTML str representation of an Image with BBoxes."""
+  img = _build_thumbnail_with_bbox(ex)
+  img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
+  return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
+
+
+def _build_thumbnail_with_bbox(ex: np.ndarray) -> PilImage:
+  """Returns blank image with Bboxes drawn on it."""
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+  PIL_ImageDraw = lazy_imports_lib.lazy_imports.PIL_ImageDraw  # pylint: disable=invalid-name
+
+  shape = (image_feature.THUMBNAIL_SIZE, image_feature.THUMBNAIL_SIZE)
+  blank_img = PIL_Image.new('RGB', shape, (255, 255, 255))
+  draw = PIL_ImageDraw.Draw(blank_img)
+  rs = np.random.RandomState(97531)  # freeze random state
+
+  for i in range(ex.shape[0]):
+    # Rescale coordinates to match size of blank_image
+    ymin, xmin, ymax, xmax = ex[i, :] * image_feature.THUMBNAIL_SIZE
+    # Generate random rgb values for Bbox ouline
+    r, g, b = list(rs.randint(0, 256, size=3))
+    draw.rectangle(((xmin, ymin), (xmax, ymax)), outline=(r, g, b))
+  return blank_img

@@ -42,6 +42,8 @@ ACCEPTABLE_DTYPES = {
     'jpeg': [tf.uint8],
 }
 
+THUMBNAIL_SIZE = 128
+
 
 class Image(feature.FeatureConnector):
   """`FeatureConnector` for images.
@@ -203,7 +205,7 @@ def create_thumbnail(ex):
     mode = None
   img = PIL_Image.fromarray(ex, mode=mode)
   img = postprocess(img)
-  img.thumbnail((128, 128))  # Resize the image in-place
+  img.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))  # Resize the image in-place
   return img
 
 

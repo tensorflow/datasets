@@ -117,6 +117,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def PIL_ImageDraw(cls):  # pylint: disable=invalid-name
+    return _try_import("PIL.ImageDraw")
+
+  @utils.classproperty
+  @classmethod
   def pretty_midi(cls):
     return _try_import("pretty_midi")
 

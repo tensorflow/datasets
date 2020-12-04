@@ -481,11 +481,17 @@ def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   ]
 
 
-def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
+def get_base64(
+    write_fn: Union[bytes, Callable[[io.BytesIO], None]],
+) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
-  buffer = io.BytesIO()
-  write_fn(buffer)
-  return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type
+  if isinstance(write_fn, bytes):  # Value already encoded
+    bytes_value = write_fn
+  else:
+    buffer = io.BytesIO()
+    write_fn(buffer)
+    bytes_value = buffer.getvalue()
+  return base64.b64encode(bytes_value).decode('ascii')  # pytype: disable=bad-return-type
 
 
 @contextlib.contextmanager
