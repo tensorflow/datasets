@@ -368,8 +368,8 @@ class DatasetBuilderTestCase(
 
       original_generate_examples = builder._generate_examples
 
-      def new_generate_examples(self, *args, **kwargs):
-        records =  original_generate_examples(self, *args, **kwargs)
+      def new_generate_examples(*args, **kwargs):
+        records =  original_generate_examples(*args, **kwargs)
         #Validating the keys for any potential filenames
         for key, _ in records:
           if self.example_dir in key:
