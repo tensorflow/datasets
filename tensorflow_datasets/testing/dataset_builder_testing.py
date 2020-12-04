@@ -377,7 +377,7 @@ class DatasetBuilderTestCase(
             """\
             The keys yielded by the '_generate_examples' method
             contain user directory path, which might disrupt the
-            deterministic order of the generated examples. Please moify
+            deterministic order of the generated examples. Please modify
             the dataset generation script to resolve the issue."
             """)
             raise ValueError(err_msg)
