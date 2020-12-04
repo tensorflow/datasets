@@ -166,7 +166,7 @@ def _info(self):
   )
 ```
 
-Most fields should be self-explainatory. Some precisions:
+Most fields should be self-explanatory. Some precisions:
 
 *   `features`: This specify the dataset structure, shape,... Support complex
     data types (audio, video, nested sequences,...). See the
@@ -238,7 +238,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
 #### Read archive directly
 
-`dl_manager.iter_archive` reads an archives sequencially without extracting
+`dl_manager.iter_archive` reads an archives sequentially without extracting
 them. This can save storage space and improve performances on some file systems.
 
 ```python
@@ -467,7 +467,7 @@ for full list of flags.
 
 ### Checksums
 
-It is recommanded to record the checksums of your datasets to guarantee
+It is recommended to record the checksums of your datasets to guarantee
 determinism, help with documentation,... This is done by generating the dataset
 with the `--register_checksums` (see previous section).
 
@@ -524,8 +524,8 @@ python my_dataset_test.py
 
 ## Send us feedback
 
-We are continously trying to improve the dataset creation workflow, but can only
-do so if we are aware of the issues. Which issues, errors did you encountered
-while creating the dataset ? Was there a part which was confusing, boilerplate
-or wasn't working the first time ? Please share your
+We are continuously trying to improve the dataset creation workflow, but can
+only do so if we are aware of the issues. Which issues, errors did you
+encountered while creating the dataset ? Was there a part which was confusing,
+boilerplate or wasn't working the first time ? Please share your
 [feedback on github](https://github.com/tensorflow/datasets/issues).
