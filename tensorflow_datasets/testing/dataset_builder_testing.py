@@ -373,10 +373,13 @@ class DatasetBuilderTestCase(
         #Validating the keys for any potential filenames
         for key, data in records:
           if str(self.example_dir) in key:
-            err_msg = "The keys yielded by the '_generate_examples' method \
-            contain user directory path, which might disrupt the deterministic\
-            order of the generated examples. Please moify the dataset \
-            generation script to resolve the issue."
+            err_msg = textwrap.dedent(
+            """\
+            The keys yielded by the '_generate_examples' method
+            contain user directory path, which might disrupt the
+            deterministic order of the generated examples. Please moify
+            the dataset generation script to resolve the issue."
+            """)
             raise ValueError(err_msg)
           yield key, data
 

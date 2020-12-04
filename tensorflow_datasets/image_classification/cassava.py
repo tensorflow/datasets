@@ -102,4 +102,3 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
             "label": label,
         }
         yield fname, record
-
