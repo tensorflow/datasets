@@ -368,19 +368,20 @@ class DatasetBuilderTestCase(
 
       original_generate_examples = builder._generate_examples
 
-      def new_generate_examples(*args, **kwargs):
+      def new_generate_examples(self, *args, **kwargs):
         records =  original_generate_examples(*args, **kwargs)
         #Validating the keys for any potential filenames
         for key, _ in records:
-          if self.example_dir in key:
+          raise ValueError(key)
+          if str(self.example_dir) in key:
             err_msg = "The keys yielded by the '_generate_examples' method \
             contain user directory path, which might disrupt the deterministic\
             order of the generated examples. Please moify the dataset \
             generation script to resolve the issue."
             raise ValueError(err_msg)
-        return records
+        yield records
 
-      with mock.patch.object(builder,
+      with mock.patch.object(type(builder),
                             '_generate_examples',
                             new_generate_examples):
         builder.download_and_prepare(download_config=download_config)
