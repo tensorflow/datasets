@@ -467,6 +467,7 @@ class DatasetInfo(object):
         citation=citation_pprint,
         homepage=self.homepage,
         supervised_keys=self.supervised_keys,
+        module_name=self.module_name,
         # Proto add a \n that we strip.
         redistribution_info=str(self.redistribution_info).strip())
 
