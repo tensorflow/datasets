@@ -161,7 +161,7 @@ def _get_extra_dirs(
 ) -> Tuple[List[pathlib.Path], List[pathlib.Path]]:
   """Returns a tuple of installed datasets and extra dirs to delete.
 
-  Arguments:
+  Args:
       data_dir : The path to the data directory
       current_full_names : Names of the latest datasets supported in TFDS
 
