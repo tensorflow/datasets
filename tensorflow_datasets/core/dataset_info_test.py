@@ -379,6 +379,7 @@ INFO_STR = """tfds.core.DatasetInfo(
       year={2010}
     }\"\"\",
     redistribution_info=license: "test license",
+    module_name='tensorflow_datasets.image_classification.mnist',
 )
 """
 

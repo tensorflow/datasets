@@ -68,7 +68,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     supervised_keys={supervised_keys},
     citation={citation},
     redistribution_info={redistribution_info},
-    module_name={module_name},
+    module_name='{module_name}',
 )
 """
 
@@ -137,7 +137,7 @@ class DatasetInfo(object):
         config_name=config_name,
         config_description=config_description,
         citation=utils.dedent(citation),
-        module_name=builder.__module__,
+        module_name=str(builder.__module__),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             license=utils.dedent(redistribution_info.pop("license")),
             **redistribution_info) if redistribution_info else None)
@@ -467,9 +467,10 @@ class DatasetInfo(object):
         citation=citation_pprint,
         homepage=self.homepage,
         supervised_keys=self.supervised_keys,
-        module_name=self.module_name,
         # Proto add a \n that we strip.
-        redistribution_info=str(self.redistribution_info).strip())
+        redistribution_info=str(self.redistribution_info).strip(),
+        module_name=str(self.module_name)
+        )
 
 
 def _indent(content):
