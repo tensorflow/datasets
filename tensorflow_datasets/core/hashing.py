@@ -48,21 +48,27 @@ result in same order.
 import hashlib
 from typing import Union
 
-import six
-import tensorflow.compat.v2 as tf
+import numpy as np
 
 
-HashKey = Union[str, bytes, int]
+HashKey = Union[str, bytes, int, np.ndarray]
 
 
-def _to_bytes(data):
-  if not isinstance(data, (six.string_types, bytes)):
-    data = str(data)
+def _to_bytes(data: HashKey) -> bytes:
+  """Converts the key to bytes."""
+  if isinstance(data, bytes):
+    return data
   elif isinstance(data, str):
     # For windows compatibility, we normalize the key in case a
     # filepath is passed as key ('path\\to\\file' -> 'path/to/file')
     data = data.replace('\\', '/')
-  return tf.compat.as_bytes(data)
+  elif isinstance(data, int):
+    data = str(data)
+  elif isinstance(data, np.ndarray) and data.size == 1:  # Singleton array
+    return _to_bytes(data.item())
+  else:
+    raise TypeError(f'Invalid key type: {data!r} ({type(data)})')
+  return data.encode('utf-8')
 
 
 class Hasher(object):
