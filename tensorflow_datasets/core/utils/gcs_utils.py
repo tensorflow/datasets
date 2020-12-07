@@ -22,8 +22,10 @@ from typing import List, Optional
 
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tqdm_utils
+from tensorflow_datasets.core.utils import type_utils
 
 GCS_ROOT_DIR = 'gs://tfds-data'
 
@@ -34,10 +36,10 @@ GCS_DATASETS_DIR = 'datasets'
 _is_gcs_disabled = False
 
 
-def exists(path: str) -> bool:
+def exists(path: type_utils.ReadWritePath) -> bool:
   """Checks if path exists. Returns False if issues occur connecting to GCS."""
   try:
-    return tf.io.gfile.exists(path)
+    return path.exists()
   # * UnimplementedError: On windows, gs:// isn't supported.
   # * FailedPreconditionError: Raised by TF
   # * PermissionDeniedError: Some environments block GCS access.
@@ -51,23 +53,16 @@ def exists(path: str) -> bool:
     return False
 
 
-def gcs_path(suffix: Optional[str] = None) -> str:
+def gcs_path(*relative_path: type_utils.PathLike) -> type_utils.ReadWritePath:
   """Returns the GCS URI path.
 
   Args:
-    suffix: Eventual relative path in the bucket. If `None`, returns the root
-      GCS bucket uri.
+    *relative_path: Eventual relative path in the bucket.
 
   Returns:
     path: The GCS uri.
   """
-  if not suffix:
-    path = GCS_ROOT_DIR
-  elif suffix.startswith('gs://'):  # Path is already a full path
-    path = suffix
-  else:
-    path = posixpath.join(GCS_ROOT_DIR, suffix)
-  return path
+  return generic_path.as_path(GCS_ROOT_DIR).joinpath(*relative_path)
 
 
 @py_utils.memoize()
@@ -76,7 +71,7 @@ def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   root_dir = gcs_path(dir_name)
   if _is_gcs_disabled or not exists(root_dir):
     return None
-  return [posixpath.join(dir_name, f) for f in tf.io.gfile.listdir(root_dir)]
+  return [posixpath.join(dir_name, f.name) for f in root_dir.iterdir()]
 
 
 def gcs_dataset_info_files(dataset_dir: str) -> Optional[List[str]]:
@@ -112,7 +107,7 @@ def download_gcs_dataset(
     def _copy_from_gcs(gcs_path_):
       # Copy 'gs://tfds-data/datasets/ds/1.0.0/file' -> `local_dir/file`
       tf.io.gfile.copy(
-          gcs_path(gcs_path_),
+          os.fspath(gcs_path(gcs_path_)),
           os.path.join(local_dataset_dir, posixpath.basename(gcs_path_)),
       )
       pbar.update(1)

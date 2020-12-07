@@ -56,7 +56,7 @@ def _log_exception(fn):
 def generate_and_save_artifact(
     full_name: str,
     *,
-    dst_dir: str,
+    dst_dir: tfds.core.PathLike,
     overwrite: bool,
     file_extension: str,
     get_artifact_fn: Callable[[tf.data.Dataset, tfds.core.DatasetInfo], T],

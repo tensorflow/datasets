@@ -32,8 +32,7 @@ flags.DEFINE_string(
     'from_directory', tfds.core.constants.DATA_DIR,
     'Where to get the info files from (datasets/ dir on placer).')
 flags.DEFINE_string(
-    'to_directory', tfds.core.gcs_path('dataset_info'),
-    'Path where dataset info files will be copied.')
+    'to_directory', None, 'Path where dataset info files will be copied.')
 
 FLAGS = flags.FLAGS
 
@@ -50,7 +49,7 @@ def _copy_metadata(from_dir, to_dir):
       tf.io.gfile.copy(from_path, to_path, overwrite=True)
 
 
-def copy(from_dir: str, to_dir: str) -> None:
+def copy(from_dir: tfds.core.PathLike, to_dir: tfds.core.PathLike) -> None:
   """Copy the info files from within `from_dir` to `to_dir`."""
   predicate_fn = lambda _: True  # All datasets
 
@@ -70,7 +69,10 @@ def copy(from_dir: str, to_dir: str) -> None:
 
 
 def main(_):
-  copy(FLAGS.from_directory, FLAGS.to_directory)
+  copy(
+      FLAGS.from_directory,
+      FLAGS.to_directory or tfds.core.gcs_path('dataset_info'),
+  )
 
 if __name__ == '__main__':
   app.run(main)
