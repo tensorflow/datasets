@@ -101,4 +101,4 @@ class ImagenetR(tfds.core.GeneratorBasedBuilder):
             'label': class_synset,
             'file_name': image_path,
         }
-        yield image_path, features
+        yield f'{class_synset}_{image_filename}', features

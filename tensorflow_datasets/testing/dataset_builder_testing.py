@@ -15,12 +15,15 @@
 
 """Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
+import collections
+import contextlib
 import difflib
 import hashlib
 import itertools
 import numbers
 import os
 import textwrap
+from typing import Iterator
 from unittest import mock
 
 from absl.testing import parameterized
@@ -365,7 +368,8 @@ class DatasetBuilderTestCase(
           compute_stats=download.ComputeStatsMode.SKIP,
           beam_runner=beam_runner,
       )
-      builder.download_and_prepare(download_config=download_config)
+      with self._test_key_not_local_path(builder):
+        builder.download_and_prepare(download_config=download_config)
 
     with self._subTest("as_dataset"):
       self._assertAsDataset(builder)
@@ -385,6 +389,47 @@ class DatasetBuilderTestCase(
 
     with self._subTest("config_description"):
       self._test_description_builder_config(builder)
+
+  @contextlib.contextmanager
+  def _test_key_not_local_path(self, builder) -> Iterator[None]:
+    if not isinstance(builder, dataset_builder.GeneratorBasedBuilder):
+      yield  # Do not test non-generator builder
+      return
+
+    original_generate_examples = builder._generate_examples  # pylint: disable=protected-access
+
+    def _iter_examples(generator):
+      for key, ex in generator:
+        self._assert_key_valid(key)
+        yield key, ex
+
+    def new_generate_examples(*args, **kwargs):
+      examples = original_generate_examples(*args, **kwargs)
+      try:
+        import apache_beam as beam  # pylint: disable=g-import-not-at-top
+      except ImportError:
+        beam = None
+      if beam and isinstance(examples, (beam.PCollection, beam.PTransform)):
+        return examples  # Beam keys not supported for now
+      elif isinstance(examples, collections.abc.Iterable):
+        return _iter_examples(examples)
+      else:  # Unexpected
+        return examples
+
+    with mock.patch.object(
+        builder, "_generate_examples", new_generate_examples
+    ):
+      yield
+
+  def _assert_key_valid(self, key):
+    if isinstance(key, str) and os.fspath(self.example_dir) in key:
+      err_msg = (
+          "Key yield in '_generate_examples' method "
+          f"contain user directory path: {key}.\n"
+          "This makes the dataset example order non-deterministic. "
+          "Please use `filepath.name`, or `os.path.basename` instead."
+      )
+      raise ValueError(err_msg)
 
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}

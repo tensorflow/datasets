@@ -148,7 +148,7 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
       xml_root = xml_file.getroot()
       for entry in list(xml_root)[0]:
         category = entry.attrib['category']
-        entry_id = '{}_{}'.format(file, entry.attrib['eid'])
+        entry_id = '{}_{}'.format(os.path.basename(file), entry.attrib['eid'])
         triples_set = []
         target_text_i = 0
         for child_element in entry:

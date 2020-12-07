@@ -106,4 +106,4 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
             'label': label,
             'filename': os.path.basename(filename)
         }
-        yield filename, example
+        yield f'{label}_{os.path.basename(filename)}', example

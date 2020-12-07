@@ -148,4 +148,4 @@ class ImagenetV2(tfds.core.GeneratorBasedBuilder):
             'label': int(class_id),
             'file_name': image_path,
         }
-        yield image_path, features
+        yield f'{class_id}_{image_filename}', features

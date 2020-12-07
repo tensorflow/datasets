@@ -152,7 +152,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
             'label': label,
             'filename': os.path.basename(filename)
         }
-      yield filename, record
+      yield f'{label}_{os.path.basename(filename)}', record
 
 
 def _extract_channels(filename):
