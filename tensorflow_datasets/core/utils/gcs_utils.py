@@ -43,10 +43,12 @@ def exists(path: type_utils.ReadWritePath) -> bool:
   # * UnimplementedError: On windows, gs:// isn't supported.
   # * FailedPreconditionError: Raised by TF
   # * PermissionDeniedError: Some environments block GCS access.
+  # * AbortedError: All 10 retry attempts failed.
   except (
       tf.errors.UnimplementedError,
       tf.errors.FailedPreconditionError,
       tf.errors.PermissionDeniedError,
+      tf.errors.AbortedError,
   ):
     # TODO(tfds): Investigate why windows, gs:// isn't supported.
     # https://github.com/tensorflow/tensorflow/issues/38477
