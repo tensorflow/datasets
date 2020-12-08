@@ -16,6 +16,7 @@
 """Image Classification Folder datasets."""
 
 import collections
+import functools
 import os
 import random
 from typing import Dict, List, NoReturn, Optional, Tuple
@@ -23,6 +24,7 @@ from typing import Dict, List, NoReturn, Optional, Tuple
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core.utils import type_utils
@@ -135,15 +137,21 @@ class ImageFolder(dataset_builder.DatasetBuilder):
 
   def _as_dataset(
       self,
-      split,
-      shuffle_files=False,
-      decoders=None,
+      split: str,
+      shuffle_files: bool = False,
+      decoders: Optional[Dict[str, decode.Decoder]] = None,
       read_config=None) -> tf.data.Dataset:
     """Generate dataset for given split."""
     del read_config  # Unused (automatically created in `DatasetBuilder`)
+
     if decoders:
-      raise NotImplementedError(
-          '`decoders` is not supported with {}'.format(type(self).__name__))
+        unrecognized_features = (set(decoders.keys())
+                                 .difference(set(self.info.features.keys())))
+        if unrecognized_features:
+          raise ValueError(
+              'Unrecognized features {}. '
+              'Decoder feature name should be one of {}.'.format(
+                  unrecognized_features, list(self.info.features.keys())))
     if split not in self.info.splits.keys():
       raise ValueError(
           'Unrecognized split {}. Subsplit API not yet supported for {}. '
@@ -163,18 +171,31 @@ class ImageFolder(dataset_builder.DatasetBuilder):
     if shuffle_files:
       ds = ds.shuffle(len(examples))
     ds = ds.map(_load_example, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    if not decoders:
+      decode_fn = _default_decode_fn
+    else:
+      decode_fn = functools.partial(
+          self.info.features.decode_example, decoders=decoders)
+
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return ds
 
 
 def _load_example(path: tf.Tensor, label: tf.Tensor) -> Dict[str, tf.Tensor]:
   img = tf.io.read_file(path)
-  # Uses `channels` and `expand_animations` to make sure shape=(None, None, 3)
-  img = tf.image.decode_image(img, channels=3, expand_animations=False)
   return {
       'image': img,
       'label': tf.cast(label, tf.int64),
       'image/filename': path,
   }
+
+
+def _default_decode_fn(x: Dict[str, tf.Tensor]) -> Dict[str, tf.Tensor]:
+  # Uses `channels` and `expand_animations` to make sure shape=(None, None, 3)
+  x["image"] = tf.image.decode_image(x["image"],
+                                     channels=3,
+                                     expand_animations=False)
+  return x
 
 
 def _get_split_label_images(
