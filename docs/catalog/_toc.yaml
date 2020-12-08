@@ -239,6 +239,9 @@ toc:
     title: coco_captions
   - path: /datasets/catalog/kitti
     title: kitti
+  - path: /datasets/catalog/lvis
+    status: nightly
+    title: lvis
   - path: /datasets/catalog/open_images_challenge2019_detection
     title: open_images_challenge2019_detection
   - path: /datasets/catalog/open_images_v4
