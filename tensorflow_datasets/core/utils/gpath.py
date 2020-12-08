@@ -106,7 +106,7 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
 
   def expanduser(self: _P) -> _P:
     """Returns a new path with expanded `~` and `~user` constructs."""
-    return self._new(posixpath.expanduser(self._path_str))
+    return self._new(os.path.expanduser(self._path_str))
 
   def resolve(self: _P, strict: bool = False) -> _P:
     """Returns the abolute path."""
