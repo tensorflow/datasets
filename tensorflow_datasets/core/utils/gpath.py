@@ -19,9 +19,9 @@ import ntpath
 import os
 import pathlib
 import posixpath
-
+import types
 import typing
-from typing import Any, AnyStr, Callable, ClassVar, Iterator, Optional, Type, TypeVar
+from typing import Any, AnyStr, ClassVar, Iterator, Optional, Type, TypeVar
 
 import tensorflow as tf
 
@@ -42,10 +42,11 @@ _URI_MAP_ROOT = {
 class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
   """Pathlib like api around `tf.io.gfile`."""
 
-  # `_JOIN_FN` is `posixpath.join` or `ntpath.join`.
-  # Use explicit variable rather than `super().joinpath()` to avoid infinite
-  # recursion
-  _JOIN_FN: ClassVar[Callable[..., str]]
+  # `_PATH` is `posixpath` or `ntpath`.
+  # Use explicit `join()` rather than `super().joinpath()` to avoid infinite
+  # recursion.
+  # Do not use `os.path`, so `PosixGPath('gs://abc')` works on windows.
+  _PATH: ClassVar[types.ModuleType]
 
   def __new__(cls: Type[_P], *parts: type_utils.PathLike) -> _P:
     full_path = '/'.join(os.fspath(p) for p in parts)
@@ -78,9 +79,9 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
     """Returns the `__fspath__` string representation."""
     uri_scheme = self._uri_scheme
     if uri_scheme:  # pylint: disable=using-constant-test
-      return self._JOIN_FN(f'{uri_scheme}://', *self.parts[2:])
+      return self._PATH.join(f'{uri_scheme}://', *self.parts[2:])
     else:
-      return self._JOIN_FN(*self.parts) if self.parts else '.'
+      return self._PATH.join(*self.parts) if self.parts else '.'
 
   def __fspath__(self) -> str:
     return self._path_str
@@ -106,15 +107,15 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
 
   def expanduser(self: _P) -> _P:
     """Returns a new path with expanded `~` and `~user` constructs."""
-    return self._new(posixpath.expanduser(self._path_str))
+    return self._new(self._PATH.expanduser(self._path_str))
 
   def resolve(self: _P, strict: bool = False) -> _P:
     """Returns the abolute path."""
-    return self._new(posixpath.abspath(self._path_str))
+    return self._new(self._PATH.abspath(self._path_str))
 
   def glob(self: _P, pattern: str) -> Iterator[_P]:
     """Yielding all matching files (of any kind)."""
-    for f in tf.io.gfile.glob(posixpath.join(self._path_str, pattern)):
+    for f in tf.io.gfile.glob(self._PATH.join(self._path_str, pattern)):
       yield self._new(f)
 
   def mkdir(
@@ -175,9 +176,9 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
 
 class PosixGPath(_GPath, pathlib.PurePosixPath):
   """Pathlib like api around `tf.io.gfile`."""
-  _JOIN_FN = staticmethod(posixpath.join)
+  _PATH = posixpath
 
 
 class WindowsGPath(_GPath, pathlib.PureWindowsPath):
   """Pathlib like api around `tf.io.gfile`."""
-  _JOIN_FN = staticmethod(ntpath.join)
+  _PATH = ntpath
