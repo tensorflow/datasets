@@ -505,6 +505,74 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def test_image_unknown_len(self):
+
+    imgs = [
+        np.random.randint(256, size=(28, 28, 3), dtype=np.uint8),
+        np.random.randint(256, size=(28, 28, 3), dtype=np.uint8),
+    ]
+    imgs_stacked = np.stack(imgs)
+
+    self.assertFeature(
+        feature=feature_lib.Sequence(feature_lib.Image(shape=(None, None, 3))),
+        dtype=tf.uint8,
+        shape=(None, None, None, 3),  # (length, h, w, c)
+        tests=[
+            testing.FeatureExpectationItem(
+                value=[],  # Empty input
+                expected=np.empty(shape=(0, 0, 0, 3), dtype=np.uint8),
+            ),
+            testing.FeatureExpectationItem(
+                value=imgs,
+                expected=imgs_stacked,
+            ),
+        ],
+    )
+
+  def test_image_nested_empty_len(self):
+    imgs = [
+        np.random.randint(256, size=(28, 28, 3), dtype=np.uint8),
+        np.random.randint(256, size=(28, 28, 3), dtype=np.uint8),
+    ]
+    imgs_stacked = np.stack(imgs)
+
+    self.assertFeature(
+        feature=feature_lib.Sequence({
+            'a': feature_lib.Image(shape=(None, None, 3)),
+            'b': tf.int32,
+        }),
+        shape={
+            'a': (None, None, None, 3),
+            'b': (None,),
+        },
+        dtype={
+            'a': tf.uint8,
+            'b': tf.int32,
+        },
+        tests=[
+            testing.FeatureExpectationItem(
+                value={
+                    'a': imgs,
+                    'b': [1, 2],
+                },
+                expected={
+                    'a': imgs_stacked,
+                    'b': [1, 2],
+                },
+            ),
+            testing.FeatureExpectationItem(
+                value={
+                    'a': [],
+                    'b': [],
+                },
+                expected={
+                    'a': np.empty(shape=(0, 0, 0, 3), dtype=np.uint8),
+                    'b': [],
+                },
+            ),
+        ],
+    )
+
   def test_getattr(self):
     feature = feature_lib.Sequence(
         feature_lib.ClassLabel(names=['left', 'right']),

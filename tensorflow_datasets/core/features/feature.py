@@ -17,6 +17,7 @@
 
 import abc
 import collections
+import functools
 import json
 import os
 from typing import Dict, Type, TypeVar
@@ -29,6 +30,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
+Shape = type_utils.Shape
 
 T = TypeVar('T', bound='FeatureConnector')
 
@@ -412,17 +414,39 @@ class FeatureConnector(object):
       tensor_data: Tensor or dictionary of tensor, output of the tf.data.Dataset
         object
     """
+    ex = tfexample_data
+
     # Note: This all works fine in Eager mode (without tf.function) because
     # tf.data pipelines are always executed in Graph mode.
 
     # Apply the decoding to each of the individual distributed features.
-    return tf.map_fn(
+    decode_map_fn = functools.partial(
+        tf.map_fn,
         self.decode_example,
-        tfexample_data,
         fn_output_signature=self.dtype,
         parallel_iterations=10,
         name='sequence_decode',
     )
+
+    if (
+        # input/output could potentially be a `dict` for custom feature
+        # connectors. Empty length not supported for those for now.
+        isinstance(ex, dict)
+        or isinstance(self.shape, dict)
+        or not _has_shape_ambiguity(in_shape=ex.shape, out_shape=self.shape)
+    ):
+      return decode_map_fn(ex)
+    else:
+      # `tf.map_fn` cannot resolve ambiguity when decoding an empty sequence
+      # with unknown output shape (e.g. decode images `tf.string`):
+      # `(0,)` -> `(0, None, None, 3)`.
+      # Instead, we arbitrarily set unknown shape to `0`:
+      # `(0,)` -> `(0, 0, 0, 3)`
+      return tf.cond(
+          tf.equal(tf.shape(ex)[0], 0),  # Empty sequence
+          lambda: _make_empty_seq_output(shape=self.shape, dtype=self.dtype),
+          lambda: decode_map_fn(ex),
+      )
 
   def decode_ragged_example(self, tfexample_data):
     """Decode nested features from a tf.RaggedTensor.
@@ -701,3 +725,29 @@ def _repr_html(ex) -> str:
     # TODO(tfds): We could display a snippet, like the first/last tree items
     return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
   return repr(ex)
+
+
+def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
+  """Returns True if the shape can be an empty sequence with unknown shape."""
+  # Normalize shape if running with `tf.compat.v1.disable_v2_tensorshape`
+  if isinstance(in_shape, tf.TensorShape):
+    in_shape = in_shape.as_list()  # pytype: disable=attribute-error
+
+  return bool(
+      in_shape[0] is None  # Empty sequence
+      # Unknown output shape (note that sequence length isn't present,
+      # as `self.shape` is called from the inner feature).
+      and None in out_shape
+  )
+
+
+def _make_empty_seq_output(
+    shape: Shape,
+    dtype: tf.dtypes.DType,
+) -> tf.Tensor:
+  """Return an empty (0, *shape) `tf.Tensor` with `0` instead of `None`."""
+  if not isinstance(shape, (tuple, list)) or None not in shape:
+    raise ValueError(f'Could not construct empty output for shape: {shape}')
+  return tf.constant(
+      [], shape=[0] + [0 if d is None else d for d in shape], dtype=dtype
+  )
