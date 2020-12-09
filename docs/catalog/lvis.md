@@ -29,18 +29,21 @@ LVIS: A dataset for large vocabulary instance segmentation.
     *   **`1.0.0`** (default): Initial release. Test split has dummy
         annotations.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `25.35 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `22.28 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 19,822
+`'train'`      | 100,170
+`'validation'` | 19,809
 
 *   **Features**:
 
