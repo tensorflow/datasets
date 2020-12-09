@@ -16,7 +16,6 @@
 """Audio feature."""
 
 import os
-import struct
 import wave
 
 import numpy as np
@@ -31,7 +30,17 @@ Json = type_utils.Json
 
 
 class Audio(feature.Tensor):
-  """`FeatureConnector` for audio, encoded as raw integer wave form."""
+  """`tfds.features.FeatureConnector` for audio.
+
+  In `_generate_examples`, Audio accept:
+
+  * A `np.ndarray` of shape `(length,)` or `(length, channels)`
+  * A path to a `.mp3`, `.wav`,... file.
+  * A file-object (e.g. `with path.open('rb') as fobj:`)
+
+  By default, Audio features are decoded as the raw integer wave form
+  `tf.Tensor(shape=(None,), dtype=tf.int64)`.
+  """
 
   def __init__(
       self,
@@ -53,19 +62,27 @@ class Audio(feature.Tensor):
         encoding nor decoding.
     """
     self._file_format = file_format
-    if len(shape) != 1:
-      raise TypeError(
-          'Audio feature currently only supports 1-D values, got %s.' % shape)
+    if len(shape) > 2:
+      raise ValueError(
+          'Audio shape should be either (length,) or '
+          f'(length, num_channels), got {shape}.'
+      )
     self._shape = shape
     self._sample_rate = sample_rate
-    super(Audio, self).__init__(shape=shape, dtype=dtype)
+    super().__init__(shape=shape, dtype=dtype)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
-        fobj, format=file_format)
+        fobj, format=file_format
+    )
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
-    return super(Audio, self).encode_example(
-        np.array(audio_segment.get_array_of_samples()).astype(np_dtype))
+    raw_samples = np.array(audio_segment.get_array_of_samples())
+    raw_samples = raw_samples.astype(np_dtype)
+    if audio_segment.channels > 1:
+      audio_data = raw_samples.reshape((-1, audio_segment.channels))
+    else:
+      audio_data = raw_samples
+    return super().encode_example(audio_data)
 
   def encode_example(self, audio_or_path_or_fobj):
     if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
@@ -129,13 +146,23 @@ def _save_wav(buff, data, rate) -> None:
   """Transform a numpy array to a PCM bytestring."""
   # Code inspired from `IPython.display.Audio`
   data = np.array(data, dtype=float)
-  if len(data.shape) > 1:
-    raise ValueError('encoding of stereo PCM signals are unsupported')
-  scaled = np.int16(data / np.max(np.abs(data)) * 32767).tolist()
+
+  bit_depth = 16
+  max_sample_value = int(2**(bit_depth - 1)) - 1
+
+  num_channels = data.shape[1] if len(data.shape) > 1 else 1
+  scaled = np.int16(data / np.max(np.abs(data)) * max_sample_value)
+  # The WAVE spec expects little-endian integers of "sampwidth" bytes each.
+  # Numpy's `astype` accepts array-protocol type strings, so we specify:
+  #  - '<' to indicate little endian
+  #  - 'i' to specify signed integer
+  #  - the number of bytes used to represent each integer
+  # See: https://numpy.org/doc/stable/reference/arrays.dtypes.html
+  encoded_wav = scaled.astype(f'<i{bit_depth // 8}', copy=False).tobytes()
 
   with wave.open(buff, mode='wb') as waveobj:
-    waveobj.setnchannels(1)
+    waveobj.setnchannels(num_channels)
     waveobj.setframerate(rate)
-    waveobj.setsampwidth(2)
+    waveobj.setsampwidth(bit_depth // 8)
     waveobj.setcomptype('NONE', 'NONE')
-    waveobj.writeframes(b''.join([struct.pack('<h', x) for x in scaled]))
+    waveobj.writeframes(encoded_wav)
