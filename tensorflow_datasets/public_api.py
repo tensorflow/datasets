@@ -38,6 +38,7 @@ from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
 from tensorflow_datasets.core.splits import even_splits
 from tensorflow_datasets.core.splits import Split
+from tensorflow_datasets.core.utils import type_utils as typing
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
@@ -77,6 +78,7 @@ __all__ = [
     "show_statistics",
     "testing",
     "TranslateFolder",
+    "typing",
     "units",
     "visualization",
     "__version__",
