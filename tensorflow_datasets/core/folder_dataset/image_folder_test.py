@@ -143,6 +143,47 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
     self.assertEqual(builder_params.info.features['image'].shape, (128, 128, 1))
     self.assertEqual(builder_params.info.features['image'].dtype, tf.uint16)
 
+  def test_decoders(self):
+    """Test with decoders (e.g., SkipDecoding)."""
+    images = [
+        'root_dir/train/label1/img1.png',
+        'root_dir/train/label3/img3.png',
+        'root_dir/train/label3/img1.png',
+        'root_dir/train/label3/img2.png',
+        'root_dir/train/label2/img1.png',
+        'root_dir/train/label2/img2.png',
+    ]
+
+    with tfds.testing.MockFs() as fs:
+      for file in images:
+        fs.add_file(file)
+
+      builder = tfds.ImageFolder(root_dir='root_dir', dtype=tf.uint8)
+
+      # Decoded images should be found if passing decoders=None
+      ds = builder.as_dataset(split='train', decoders=None)
+      self.assertEqual(ds.element_spec, {
+          'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
+          'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
+          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+      })
+
+      # Encoded images should be found if passing decoders=SkipDecoding()
+      ds = builder.as_dataset(
+          split='train', decoders={'image': tfds.decode.SkipDecoding()}
+      )
+      self.assertEqual(ds.element_spec, {
+          'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
+          'image': tf.TensorSpec(shape=(), dtype=tf.string),
+          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+      })
+
+      # Invalid keys should throw ValueError
+      with self.assertRaisesWithPredicateMatch(ValueError, 'Unrecognized keys'):
+        builder.as_dataset(
+            split='train', decoders={'invalid_key': tfds.decode.SkipDecoding()}
+        )
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()
