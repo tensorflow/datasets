@@ -111,6 +111,9 @@ class DatasetInfoTest(testing.TestCase):
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
+    self.assertEqual(
+        info.module_name, "tensorflow_datasets.testing.test_utils"
+    )
 
   def test_reading_empty_properties(self):
     info = dataset_info.DatasetInfo(builder=self._builder)

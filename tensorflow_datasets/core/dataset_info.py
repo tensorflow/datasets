@@ -136,6 +136,7 @@ class DatasetInfo(object):
         config_name=config_name,
         config_description=config_description,
         citation=utils.dedent(citation),
+        module_name=str(builder.__module__),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             license=utils.dedent(redistribution_info.pop("license")),
             **redistribution_info) if redistribution_info else None)
@@ -239,6 +240,10 @@ class DatasetInfo(object):
   @property
   def redistribution_info(self):
     return self.as_proto.redistribution_info
+
+  @property
+  def module_name(self):
+    return self.as_proto.module_name
 
   @property
   def splits(self):
@@ -462,7 +467,8 @@ class DatasetInfo(object):
         homepage=self.homepage,
         supervised_keys=self.supervised_keys,
         # Proto add a \n that we strip.
-        redistribution_info=str(self.redistribution_info).strip())
+        redistribution_info=str(self.redistribution_info).strip(),
+    )
 
 
 def _indent(content):

@@ -93,5 +93,10 @@ message DatasetInfo {
 
   RedistributionInfo redistribution_info = 11;
 
-  // Next available: 15
+  // Original module location of the dataset.
+  // Allow to point to the original dataset source code in the documentation
+  // even for datasets read from.
+  string module_name = 15;
+
+  // Next available: 16
 }

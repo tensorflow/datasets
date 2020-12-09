@@ -101,5 +101,6 @@
   "version": "3.0.1",
   "redistributionInfo": {
     "license": "test license"
-  }
+  },
+  "moduleName": "tensorflow_datasets.image_classification.mnist"
 }
