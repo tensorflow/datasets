@@ -131,6 +131,7 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
   assert builder.info.full_name == code_builder.info.full_name
   assert repr(builder.info) == repr(code_builder.info)
   assert builder.VERSION == code_builder.info.version
+  assert builder.__module__ == type(code_builder).__module__
   assert read_only_builder.ReadOnlyBuilder.VERSION is None
 
   if code_builder.builder_config:
