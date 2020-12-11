@@ -458,6 +458,6 @@ def _reraise_with_list_builders(
   name = f'{ns_name}:{builder_name}' if ns_name else builder_name
   close_matches = difflib.get_close_matches(name, all_datasets, n=1)
   if close_matches:
-    error_string += f'\nDid you meant: {close_matches[0]}'
+    error_string += f'\nDid you meant: {name} -> {close_matches[0]}'
 
   raise py_utils.reraise(e, suffix=error_string)

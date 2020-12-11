@@ -31,6 +31,14 @@ type_utils = tfds.core.utils.type_utils
 _DUMMY_DATASET_PATH = tfds.core.tfds_path() / 'testing/dummy_dataset'
 
 
+class DummyDatasetNoGenerate(tfds.testing.DummyDataset):
+
+  def _generate_examples(self):
+    if True:  # pylint: disable=using-constant-test
+      raise NotImplementedError('Should not be called')
+    yield
+
+
 @pytest.fixture(scope='function', autouse=True)
 def mock_default_data_dir(tmp_path: pathlib.Path):
   """Changes the default `--data_dir` to tmp_path."""
@@ -55,10 +63,12 @@ def mock_cwd(path: type_utils.PathLike) -> Iterator[None]:
     yield
 
 
-def _build(cmd_flags: str) -> List[str]:
+def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
   """Executes `tfds build {cmd_flags}` and returns the list of generated ds."""
   # Execute the command
   args = main._parse_flags(f'tfds build {cmd_flags}'.split())
+
+  original_dl_and_prepare = tfds.core.DatasetBuilder.download_and_prepare
 
   # Unfortunatelly, `mock.Mock` remove `self` from `call_args`, so we have
   # to patch manually the function to record the generated_ds.
@@ -66,11 +76,13 @@ def _build(cmd_flags: str) -> List[str]:
   # https://stackoverflow.com/questions/64792295/how-to-get-self-instance-in-mock-mock-call-args
   generated_ds_names = []
   def _download_and_prepare(self, *args, **kwargs):
-    del args, kwargs
     # Remove version from generated name (as only last version can be generated)
     full_name = '/'.join(self.info.full_name.split('/')[:-1])
     generated_ds_names.append(full_name)
-    return
+    if mock_download_and_prepare:
+      return
+    else:
+      return original_dl_and_prepare(self, *args, **kwargs)
 
   with mock.patch(
       'tensorflow_datasets.core.DatasetBuilder.download_and_prepare',
@@ -172,6 +184,22 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
 
   assert _build('mnist --overwrite') == ['mnist']
   assert not data_dir.exists()  # Previous data-dir has been removed
+
+
+def test_max_examples_per_split_0(mock_default_data_dir: pathlib.Path):  # pylint: disable=redefined-outer-name
+  assert _build(
+      'dummy_dataset_no_generate --max_examples_per_split 0',
+      mock_download_and_prepare=False,
+  ) == ['dummy_dataset_no_generate']
+
+  builder_path = mock_default_data_dir / 'dummy_dataset_no_generate/1.0.0'
+  # Dataset has been generated
+  assert builder_path.exists()
+  # tf-records files have not been generated
+  assert sorted(builder_path.iterdir()) == [
+      builder_path / 'dataset_info.json',
+      builder_path / 'features.json',
+  ]
 
 
 def test_build_files():

@@ -18,10 +18,11 @@
 import concurrent.futures
 import hashlib
 import typing
-from typing import Dict, Iterator, Optional, Tuple, Union
+from typing import Any, Dict, Iterator, Optional, Tuple, Union
 import uuid
 
 from absl import logging
+import dataclasses
 import promise
 import tensorflow.compat.v2 as tf
 
@@ -56,64 +57,53 @@ class NonMatchingChecksumError(Exception):
     Exception.__init__(self, msg)
 
 
-class DownloadConfig(object):
-  """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`."""
+# Even if `DownloadConfig` is immutable inside TFDS, we do not set `frozen=True`
+# to allow user to set:
+# dl_config = tfds.download.DownloadConfig()
+# dl_config.beam_runner = ...
+@dataclasses.dataclass(eq=False)
+class DownloadConfig:
+  """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`.
 
-  def __init__(
-      self,
-      extract_dir=None,
-      manual_dir=None,
-      download_mode=None,
-      compute_stats=None,
-      max_examples_per_split=None,
-      register_checksums=False,
-      force_checksums_validation=False,
-      beam_runner=None,
-      beam_options=None,
-      try_download_gcs=True,
-      verify_ssl=True,
-  ):
-    """Constructs a `DownloadConfig`.
-
-    Args:
-      extract_dir: `str`, directory where extracted files are stored.
-        Defaults to "<download_dir>/extracted".
-      manual_dir: `str`, read-only directory where manually downloaded/extracted
-        data is stored. Defaults to `<download_dir>/manual`.
-      download_mode: `tfds.GenerateMode`, how to deal with downloads or data
-        that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
-        reuse both downloads and data if it already exists.
-      compute_stats: `tfds.download.ComputeStats`, whether to compute
-        statistics over the generated data. Defaults to `AUTO`.
-      max_examples_per_split: `int`, optional max number of examples to write
-        into each split (used for testing).
-      register_checksums: `bool`, defaults to False. If True, checksum of
-        downloaded files are recorded.
-      force_checksums_validation: `bool`, defaults to False. If True, raises
-        an error if an URL do not have checksums.
-      beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
-        based on Beam for the generation.
-      beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
-        datasets based on Beam for the generation.
-      try_download_gcs: `bool`, defaults to True. If True, prepared dataset
-        will be downloaded from GCS, when available. If False, dataset will be
-        downloaded and prepared from scratch.
-      verify_ssl: `bool`, defaults to True. If True, will verify certificate
-        when downloading dataset.
-    """
-    self.extract_dir = extract_dir
-    self.manual_dir = manual_dir
-    self.download_mode = util.GenerateMode(
-        download_mode or util.GenerateMode.REUSE_DATASET_IF_EXISTS)
-    self.compute_stats = util.ComputeStatsMode(
-        compute_stats or util.ComputeStatsMode.SKIP)
-    self.max_examples_per_split = max_examples_per_split
-    self.register_checksums = register_checksums
-    self.force_checksums_validation = force_checksums_validation
-    self.beam_runner = beam_runner
-    self.beam_options = beam_options
-    self.try_download_gcs = try_download_gcs
-    self.verify_ssl = verify_ssl
+  Attributes:
+    extract_dir: `str`, directory where extracted files are stored.
+      Defaults to "<download_dir>/extracted".
+    manual_dir: `str`, read-only directory where manually downloaded/extracted
+      data is stored. Defaults to `<download_dir>/manual`.
+    download_mode: `tfds.GenerateMode`, how to deal with downloads or data
+      that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
+      reuse both downloads and data if it already exists.
+    compute_stats: `tfds.download.ComputeStats`, whether to compute
+      statistics over the generated data. Defaults to `AUTO`.
+    max_examples_per_split: `int`, optional max number of examples to write
+      into each split (used for testing).
+      If set to 0, only execute the `_split_generators` (download the
+      original data), but skip `_generator_examples`.
+    register_checksums: `bool`, defaults to False. If True, checksum of
+      downloaded files are recorded.
+    force_checksums_validation: `bool`, defaults to False. If True, raises
+      an error if an URL do not have checksums.
+    beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
+      based on Beam for the generation.
+    beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
+      datasets based on Beam for the generation.
+    try_download_gcs: `bool`, defaults to True. If True, prepared dataset
+      will be downloaded from GCS, when available. If False, dataset will be
+      downloaded and prepared from scratch.
+    verify_ssl: `bool`, defaults to True. If True, will verify certificate
+      when downloading dataset.
+  """
+  extract_dir: Optional[utils.PathLike] = None
+  manual_dir: Optional[utils.PathLike] = None
+  download_mode: util.GenerateMode = util.GenerateMode.REUSE_DATASET_IF_EXISTS
+  compute_stats: util.ComputeStatsMode = util.ComputeStatsMode.SKIP
+  max_examples_per_split: Optional[int] = None
+  register_checksums: bool = False
+  force_checksums_validation: bool = False
+  beam_runner: Optional[Any] = None
+  beam_options: Optional[Any] = None
+  try_download_gcs: bool = True
+  verify_ssl: bool = True
 
 
 class DownloadManager(object):

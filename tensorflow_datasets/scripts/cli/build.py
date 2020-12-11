@@ -68,7 +68,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       const=1,
       help=
       'When set, only generate the first X examples (default to 1), rather '
-      'than the full dataset.',
+      'than the full dataset.'
+      'If set to 0, only execute the `_split_generators` (which download the '
+      'original data), but skip `_generator_examples`',
   )
 
   # **** Path options ****
@@ -354,7 +356,7 @@ def _download_and_prepare(
   )
 
   # Dataset generated successfully
-  logging.info('Dataset generation complete...')
+  logging.info(f'Dataset generation complete in {builder.data_path}...')
   termcolor.cprint(str(builder.info.as_proto), attrs=['bold'])
 
 

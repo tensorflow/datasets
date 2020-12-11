@@ -1149,6 +1149,10 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       # Ensure `all` isn't used as key.
       _check_split_names(split_generators.keys())
 
+      # Writer fail if the number of example yield is `0`, so we return here.
+      if download_config.max_examples_per_split == 0:
+        return
+
       # Start generating data for all splits
       path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
           self._file_format].FILE_SUFFIX
