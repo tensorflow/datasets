@@ -622,8 +622,7 @@ class DatasetBuilder(registered.RegisteredDataset):
             "as_supervised=True but %s does not support a supervised "
             "(input, label) structure." % self.name)
       input_f, target_f = self.info.supervised_keys
-      ds = ds.map(lambda fs: (fs[input_f], fs[target_f]),
-                  num_parallel_calls=tf.data.experimental.AUTOTUNE)
+      ds = ds.map(lambda fs: (fs[input_f], fs[target_f]))
 
     # Add prefetch by default
     if not read_config.skip_prefetch:
@@ -961,7 +960,9 @@ class FileReaderBuilder(DatasetBuilder):
     )
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
-    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    read_config = read_config or read_config_lib.ReadConfig()
+    ds = ds.map(
+        decode_fn, num_parallel_calls=read_config.num_parallel_calls_for_decode)
     return ds
 
 

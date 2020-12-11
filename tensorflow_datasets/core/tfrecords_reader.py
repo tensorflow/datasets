@@ -220,7 +220,7 @@ def _read_files(
           file_format=file_format),
       cycle_length=cycle_length,
       block_length=block_length,
-      num_parallel_calls=tf.data.experimental.AUTOTUNE,
+      num_parallel_calls=read_config.num_parallel_calls_for_interleave_files,
   )
 
   # If the number of examples read in the tf-record is known, we forward
@@ -239,7 +239,8 @@ def _read_files(
   # `tf.io.parse_single_example`. It might be faster to use `parse_example`,
   # after batching.
   # https://www.tensorflow.org/api_docs/python/tf/io/parse_example
-  return ds.map(parse_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+  return ds.map(
+      parse_fn, num_parallel_calls=read_config.num_parallel_calls_for_decode)
 
 
 class Reader(object):

@@ -68,6 +68,10 @@ class ReadConfig:
     skip_prefetch: If False (default), add a `ds.prefetch()` op at the end.
       Might be set for performance optimization in some cases (e.g. if you're
       already calling `ds.prefetch()` at the end of your pipeline)
+    num_parallel_calls_for_decode: The number of parallel calls for decoding
+      record. By default using tf.data's AUTOTUNE.
+    num_parallel_calls_for_interleave_files: The number of parallel calls for
+      interleaving files. By default using tf.data's AUTOTUNE.
   """
   # General tf.data.Dataset parametters
   options: tf.data.Options = dataclasses.field(default_factory=tf.data.Options)
@@ -82,3 +86,6 @@ class ReadConfig:
   input_context: Optional[tf.distribute.InputContext] = None
   experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
   skip_prefetch: bool = False
+  num_parallel_calls_for_decode: Optional[int] = tf.data.experimental.AUTOTUNE
+  num_parallel_calls_for_interleave_files: Optional[int] = (
+      tf.data.experimental.AUTOTUNE)
