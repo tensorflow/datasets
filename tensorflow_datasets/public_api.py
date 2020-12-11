@@ -25,7 +25,6 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import deprecated
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import units
 from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.as_dataframe import as_dataframe
 from tensorflow_datasets.core.folder_dataset import ImageFolder
@@ -79,7 +78,6 @@ __all__ = [
     "testing",
     "TranslateFolder",
     "typing",
-    "units",
     "visualization",
     "__version__",
 ]

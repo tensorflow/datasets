@@ -215,7 +215,7 @@ class DownloadSizeSection(Section):
     return builder.info.download_size
 
   def content(self, builder: tfds.core.DatasetBuilder):
-    return f'`{tfds.units.size_str(builder.info.download_size)}`'
+    return f'`{tfds.core.units.size_str(builder.info.download_size)}`'
 
 
 class DatasetSizeSection(Section):
@@ -226,7 +226,7 @@ class DatasetSizeSection(Section):
     return builder.info.dataset_size
 
   def content(self, builder: tfds.core.DatasetBuilder):
-    return f'`{tfds.units.size_str(builder.info.dataset_size)}`'
+    return f'`{tfds.core.units.size_str(builder.info.dataset_size)}`'
 
 
 class ManualDatasetSection(Section):

@@ -32,7 +32,7 @@ def size_str(size_in_bytes):
 
   If size_in_bytes is None, then returns "Unknown size".
 
-  For example `size_str(1.5 * tfds.units.GiB) == "1.50 GiB"`.
+  For example `size_str(1.5 * tfds.core.units.GiB) == "1.50 GiB"`.
 
   Args:
     size_in_bytes: `int` or `None`, the size, in bytes, that we want to
