@@ -629,14 +629,14 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
-    super(DatasetBuilderReadTest, cls).setUpClass()
+    super().setUpClass()
     cls._tfds_tmp_dir = testing.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
 
   @classmethod
   def tearDownClass(cls):
-    super(DatasetBuilderReadTest, cls).tearDownClass()
+    super().tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
@@ -735,6 +735,10 @@ class DatasetBuilderReadTest(testing.TestCase):
         shuffle_files=True,
         read_config=read_config_lib.ReadConfig(),
     ))
+
+  def test_with_tfds_info(self):
+    ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
+    self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
 
 
 

@@ -337,11 +337,19 @@ class ReaderTest(testing.TestCase):
           shard_lengths=[2, 3, 2, 3, 2],
           num_bytes=0,
       )
-      self.reader.read('mnist', 'train[0:0]', [train_info])
+      self.reader.read(
+          name='mnist',
+          instructions='train[0:0]',
+          split_infos=[train_info],
+      )
 
   def test_noskip_notake(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
-    ds = self.reader.read('mnist', 'train', [train_info])
+    ds = self.reader.read(
+        name='mnist',
+        instructions='train',
+        split_infos=[train_info],
+    )
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijkl'])
 
@@ -352,7 +360,11 @@ class ReaderTest(testing.TestCase):
 
   def test_overlap(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
-    ds = self.reader.read('mnist', 'train+train[:2]', [train_info])
+    ds = self.reader.read(
+        name='mnist',
+        instructions='train+train[:2]',
+        split_infos=[train_info],
+    )
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'abcdefghijklab'])
 
@@ -369,7 +381,11 @@ class ReaderTest(testing.TestCase):
     self.assertEqual(train_info.shard_lengths, [2, 3, 2, 3, 2])  # 12 ex.
     self.assertEqual(test_info.shard_lengths, [2, 3, 2])  # 7 ex.
     split_info = [train_info, test_info]
-    ds = self.reader.read('mnist', 'train[1:-1]+test[:-50%]', split_info)
+    ds = self.reader.read(
+        name='mnist',
+        instructions='train[1:-1]+test[:-50%]',
+        split_infos=split_info,
+    )
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'bcdefghijkmno'])
 
@@ -380,8 +396,12 @@ class ReaderTest(testing.TestCase):
 
   def test_shuffle_files(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
-    ds = self.reader.read('mnist', 'train', [train_info],
-                          shuffle_files=True)
+    ds = self.reader.read(
+        name='mnist',
+        instructions='train',
+        split_infos=[train_info],
+        shuffle_files=True,
+    )
     shards = [  # The shards of the dataset:
         [b'a', b'b'],
         [b'c', b'd', b'e'],
@@ -406,9 +426,12 @@ class ReaderTest(testing.TestCase):
         shuffle_seed=123,
     )
     ds = self.reader.read(
-        'mnist', 'train', [split_info],
+        name='mnist',
+        instructions='train',
+        split_infos=[split_info],
         read_config=read_config,
-        shuffle_files=True)
+        shuffle_files=True,
+    )
     ds_values = list(tfds.as_numpy(ds))
 
     # Check that shuffle=True with a seed provides deterministic results.
@@ -421,12 +444,20 @@ class ReaderTest(testing.TestCase):
     instructions = [
         tfrecords_reader.ReadInstruction('train', from_=k, to=k+25, unit='%')
         for k in range(0, 100, 25)]
-    tests = self.reader.read('mnist', instructions, [train_info])
+    tests = self.reader.read(
+        name='mnist',
+        instructions=instructions,
+        split_infos=[train_info],
+    )
     instructions = [
         (tfrecords_reader.ReadInstruction('train', to=k, unit='%') +
          tfrecords_reader.ReadInstruction('train', from_=k+25, unit='%'))
         for k in range(0, 100, 25)]
-    trains = self.reader.read('mnist', instructions, [train_info])
+    trains = self.reader.read(
+        name='mnist',
+        instructions=instructions,
+        split_infos=[train_info],
+    )
     read_tests = [list(r) for r in tfds.as_numpy(tests)]
     read_trains = [list(r) for r in tfds.as_numpy(trains)]
     self.assertEqual(read_tests, [[b'a', b'b', b'c'],
@@ -461,8 +492,8 @@ class ReaderTest(testing.TestCase):
 
     def read(num_workers, index):
       return list(tfds.as_numpy(self.reader.read(
-          'mnist',
-          'train',
+          name='mnist',
+          instructions='train',
           split_infos=[split_info],
           read_config=read_config_lib.ReadConfig(
               input_context=tf.distribute.InputContext(

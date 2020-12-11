@@ -365,6 +365,7 @@ class DummyDataset(
         features=features.FeaturesDict({
             'id': tf.int64,
         }),
+        supervised_keys=('id', 'id'),
         description='Minimal DatasetBuilder.',
     )
 

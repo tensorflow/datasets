@@ -950,20 +950,19 @@ class FileReaderBuilder(DatasetBuilder):
       split=splits_lib.Split.TRAIN,
       decoders=None,
       read_config=None,
-      shuffle_files=False):
-    ds = self._tfrecords_reader.read(
+      shuffle_files=False,
+  ) -> tf.data.Dataset:
+    decode_fn = functools.partial(
+        self.info.features.decode_example, decoders=decoders
+    )
+    return self._tfrecords_reader.read(
         name=self.name,
         instructions=split,
         split_infos=self.info.splits.values(),
+        decode_fn=decode_fn,
         read_config=read_config,
         shuffle_files=shuffle_files,
     )
-    decode_fn = functools.partial(
-        self.info.features.decode_example, decoders=decoders)
-    read_config = read_config or read_config_lib.ReadConfig()
-    ds = ds.map(
-        decode_fn, num_parallel_calls=read_config.num_parallel_calls_for_decode)
-    return ds
 
 
 class GeneratorBasedBuilder(FileReaderBuilder):
