@@ -384,8 +384,7 @@ class Reader(object):
        a tf.data.Dataset instance.
     """
     if not file_instructions:
-      msg = 'Instruction {} corresponds to no data!'.format(
-          file_instructions)
+      msg = f'Instruction {file_instructions} corresponds to no data!'
       raise AssertionError(msg)
 
     # Prepend path to filename
