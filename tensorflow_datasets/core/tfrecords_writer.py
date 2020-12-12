@@ -217,26 +217,44 @@ class Writer(object):
 
   def finalize(self):
     """Effectively writes examples to the tfrecord files."""
-    print("Shuffling and writing examples to %s" % self._path)
+    filename = os.path.basename(self._path)
     shard_specs = _get_shard_specs(self._num_examples, self._shuffler.size,
                                    self._shuffler.bucket_lengths, self._path)
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
     examples_generator = iter(utils.tqdm(
-        self._shuffler, total=self._num_examples, unit=" examples",
-        leave=False))
+        self._shuffler,
+        desc=f"Shuffling {filename}...",
+        total=self._num_examples,
+        unit=" examples",
+        leave=False,
+    ))
     try:
       for shard_spec in shard_specs:
         iterator = itertools.islice(
             examples_generator, 0, shard_spec.examples_number)
         _write_examples(shard_spec.path, iterator, self._file_format)
     except shuffle.DuplicatedKeysError as err:
-      _raise_error_for_duplicated_keys(err.item1, err.item2,
-                                       self._example_specs)
+      _raise_error_for_duplicated_keys(
+          err.item1, err.item2, self._example_specs
+      )
+
+    # Finalize the iterator to clear-up TQDM
+    try:
+      val = next(examples_generator)
+    except StopIteration:
+      pass
+    else:
+      raise ValueError(
+          f"Shuffling more elements than expected. Additional element: {val}"
+      )
+
     shard_lengths = [int(spec.examples_number) for spec in shard_specs]
-    logging.info("Done writing %s. Shard lengths: %s",
-                 self._path, shard_lengths)
+    logging.info(
+        "Done writing %s. Number of examples: %s (shards: %s)",
+        filename, sum(shard_lengths), shard_lengths
+    )
     return shard_lengths, self._shuffler.size
 
 

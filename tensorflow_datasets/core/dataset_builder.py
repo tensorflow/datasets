@@ -450,14 +450,13 @@ class DatasetBuilder(registered.RegisteredDataset):
           statistics_already_computed = bool(
               splits and splits[0].statistics.num_examples)
           # Update DatasetInfo metadata by computing statistics from the data.
-          if (skip_stats_computation or
-              download_config.compute_stats == download.ComputeStatsMode.SKIP or
-              download_config.compute_stats == download.ComputeStatsMode.AUTO
+          if (
+              skip_stats_computation
+              or download_config.compute_stats == download.ComputeStatsMode.SKIP
+              or download_config.compute_stats == download.ComputeStatsMode.AUTO
               and statistics_already_computed
-             ):
-            logging.info(
-                "Skipping computing stats for mode %s.",
-                download_config.compute_stats)
+          ):
+            pass
           else:  # Mode is forced or stats do not exists yet
             logging.info("Computing statistics.")
             self.info.compute_dynamic_properties()
@@ -1164,7 +1163,12 @@ class GeneratorBasedBuilder(FileReaderBuilder):
               path=self.data_path / f"{self.name}-{split_name}.{path_suffix}",
           )
           for split_name, generator
-          in utils.tqdm(split_generators.items(), unit=" splits", leave=False)
+          in utils.tqdm(
+              split_generators.items(),
+              desc="Generating splits...",
+              unit=" splits",
+              leave=False,
+          )
       ]
     # Finalize the splits (after apache beam completed, if it was used)
     split_infos = [future.result() for future in split_info_futures]
