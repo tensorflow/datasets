@@ -22,6 +22,34 @@ import os
 from tqdm import auto as tqdm_lib
 
 
+class TqdmStream:
+  """File-object-like abstraction which wrap`tqdm.write`.
+
+  By default using `logging.info` inside a `tqdm` scope creates visual
+  artifacts. This simple wrapper uses `tqdm.write` instead.
+
+  Usage:
+
+  ```python
+  logger = logging.getLogger()
+  logger.addHandler(logging.StreamHandler(TqdmStream()))
+
+  for _ in tqdm.tqdm(range(10)):
+    logger.info('No visual artifacts')
+  ```
+
+  """
+
+  def write(self, x):
+    tqdm_lib.tqdm.write(x, end='')
+
+  def flush(self):
+    pass
+
+  def close(self):
+    pass
+
+
 class EmptyTqdm(object):
   """Dummy tqdm which doesn't do anything."""
 
