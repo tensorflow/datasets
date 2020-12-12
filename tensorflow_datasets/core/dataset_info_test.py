@@ -153,8 +153,9 @@ class DatasetInfoTest(testing.TestCase):
     # Assert correct license was written.
     self.assertEqual(existing_json["redistributionInfo"]["license"], license_)
 
-    # Only test on Python 3 to avoid u'' formatting issues
-    self.assertEqual(repr(info), INFO_STR)
+    # Do not check the full string as it display the generated path.
+    self.assertIn(_INFO_STR, repr(info))
+    self.assertIn("'test': <SplitInfo num_examples=", repr(info))
 
   def test_restore_after_modification(self):
     # Create a DatasetInfo
@@ -359,31 +360,15 @@ feature {
     self.assertEqual(2, len(info.as_proto.schema.feature))
 
 
-INFO_STR = """tfds.core.DatasetInfo(
+# pylint: disable=g-inconsistent-quotes
+_INFO_STR = '''tfds.core.DatasetInfo(
     name='mnist',
-    version=3.0.1,
-    description='The MNIST database of handwritten digits.',
-    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
-    features=FeaturesDict({
-        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    }),
-    total_num_examples=40,
-    splits={
-        'test': 20,
-        'train': 20,
-    },
-    supervised_keys=('image', 'label'),
-    citation=\"\"\"@article{lecun2010mnist,
-      title={MNIST handwritten digit database},
-      author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-      journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-      volume={2},
-      year={2010}
-    }\"\"\",
-    redistribution_info=license: "test license",
-)
-"""
+    full_name='mnist/3.0.1',
+    description="""
+    The MNIST database of handwritten digits.
+    """,
+    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/','''
+# pylint: enable=g-inconsistent-quotes
 
 
 if __name__ == "__main__":

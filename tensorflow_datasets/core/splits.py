@@ -80,7 +80,9 @@ class SplitInfo:
 
   def __repr__(self) -> str:
     num_examples = self.num_examples or "unknown"
-    return f"<tfds.core.SplitInfo num_examples={num_examples}>"
+    return (
+        f"<SplitInfo num_examples={num_examples}, num_shards={self.num_shards}>"
+    )
 
   @property
   def file_instructions(self) -> List[shard_utils.FileInstruction]:

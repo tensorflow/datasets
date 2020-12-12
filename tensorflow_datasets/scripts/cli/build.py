@@ -25,7 +25,6 @@ from typing import Dict, Iterator, Optional, Tuple, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
-import termcolor
 
 # pylint: disable=logging-format-interpolation
 
@@ -356,8 +355,10 @@ def _download_and_prepare(
   )
 
   # Dataset generated successfully
-  logging.info(f'Dataset generation complete in {builder.data_path}...')
-  termcolor.cprint(str(builder.info.as_proto), attrs=['bold'])
+  logging.info('Dataset generation complete...')
+  print()
+  print(repr(builder.info))
+  print()
 
 
 def _make_download_config(

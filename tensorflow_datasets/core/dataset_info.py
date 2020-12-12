@@ -43,6 +43,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
@@ -56,20 +57,6 @@ from google.protobuf import json_format
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 LICENSE_FILENAME = "LICENSE"
-
-INFO_STR = """tfds.core.DatasetInfo(
-    name='{name}',
-    version={version},
-    description='{description}',
-    homepage='{homepage}',
-    features={features},
-    total_num_examples={total_num_examples},
-    splits={splits},
-    supervised_keys={supervised_keys},
-    citation={citation},
-    redistribution_info={redistribution_info},
-)
-"""
 
 
 # TODO(tfds): Do we require to warn the user about the peak memory used while
@@ -450,25 +437,42 @@ class DatasetInfo(object):
     self.read_from_directory(tmp_dir)
 
   def __repr__(self):
-    splits_pprint = _indent("\n".join(["{"] + [
-        "    '{}': {},".format(k, split.num_examples)
-        for k, split in sorted(self.splits.items())
-    ] + ["}"]))
-    features_pprint = _indent(repr(self.features))
-    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
-    return INFO_STR.format(
-        name=self.name,
-        version=self.version,
-        description=self.description,
-        total_num_examples=self.splits.total_num_examples,
-        features=features_pprint,
-        splits=splits_pprint,
-        citation=citation_pprint,
-        homepage=self.homepage,
-        supervised_keys=self.supervised_keys,
+    SKIP = object()  # pylint: disable=invalid-name
+
+    splits = _indent("\n".join(
+        ["{"]
+        + [f"    '{k}': {split}," for k, split in sorted(self.splits.items())]
+        + ["}"]
+    ))
+
+    if self._info_proto.config_description:
+      config_description = _indent(
+          f'"""\n{self._info_proto.config_description}\n"""'
+      )
+    else:
+      config_description = SKIP
+
+    lines = ["tfds.core.DatasetInfo("]
+    for key, value in [
+        ("name", repr(self.name)),
+        ("full_name", repr(self.full_name)),
+        ("description", _indent(f'"""\n{self.description}\n"""')),
+        ("config_description", config_description),
+        ("homepage", repr(self.homepage)),
+        ("data_path", repr(self.data_dir)),
+        ("download_size", units.size_str(self.download_size)),
+        ("dataset_size", units.size_str(self.dataset_size)),
+        ("features", _indent(repr(self.features))),
+        ("supervised_keys", self.supervised_keys),
+        ("splits", splits),
+        ("citation", _indent(f'"""{self.citation}"""')),
         # Proto add a \n that we strip.
-        redistribution_info=str(self.redistribution_info).strip(),
-    )
+        ("redistribution_info", str(self.redistribution_info).strip() or SKIP),
+    ]:
+      if value != SKIP:
+        lines.append(f"    {key}={value},")
+    lines.append(")")
+    return "\n".join(lines)
 
 
 def _indent(content):
