@@ -217,8 +217,13 @@ class SplitDict(utils.NonMutableDict):
     self._dataset_name = dataset_name
 
   def __getitem__(self, key):
+    if not self:
+      raise KeyError(
+          f"Trying to access `splits[{key!r}]` but `splits` is empty. "
+          "This likely indicate the dataset has not been generated yet."
+      )
     # 1st case: The key exists: `info.splits['train']`
-    if str(key) in self:
+    elif str(key) in self:
       return super(SplitDict, self).__getitem__(str(key))
     # 2nd case: Uses instructions: `info.splits['train[50%]']`
     else:
