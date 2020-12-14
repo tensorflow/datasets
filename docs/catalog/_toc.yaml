@@ -322,6 +322,9 @@ toc:
     title: web_nlg
   - path: /datasets/catalog/wiki_bio
     title: wiki_bio
+  - path: /datasets/catalog/wiki_table_questions
+    status: nightly
+    title: wiki_table_questions
   - path: /datasets/catalog/wiki_table_text
     status: nightly
     title: wiki_table_text
