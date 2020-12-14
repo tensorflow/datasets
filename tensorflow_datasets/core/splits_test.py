@@ -33,6 +33,11 @@ class SplitDictTest(testing.TestCase):
     sd = splits.SplitDict([si], dataset_name="ds_name")
     self.assertEqual(sd["train"].num_shards, 3)
 
+  def test_empty_split(self):
+    sd = splits.SplitDict([], dataset_name="ds_name")
+    with self.assertRaisesWithPredicateMatch(KeyError, "`splits` is empty"):
+      _ = sd["train"]
+
 
 class SplitsDictTest(testing.TestCase):
 
