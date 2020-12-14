@@ -46,7 +46,7 @@ _CITATION = """\
 
 
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
-  """Robot pushing dataset from BAIR (Small 64x64 version)."""
+  """Robot pushing dataset from BAIR."""
 
   VERSION = tfds.core.Version("2.0.0")
   RELEASE_NOTES = {
@@ -68,7 +68,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         description="This data set contains roughly 44,000 examples of robot "
         "pushing motions, including one training set (train) and "
         "two test sets of previously seen (testseen) and unseen "
-        "(testnovel) objects. This is the small 64x64 version.",
+        "(testnovel) objects.",
         features=features,
         homepage="https://sites.google.com/view/sna-visual-mpc/",
         citation=_CITATION,
