@@ -22,7 +22,7 @@ from tensorflow_datasets.text import wikipedia
 class WikipediaTest(testing.DatasetBuilderTestCase):
   """Test Wikipedia Dataset generation on fake dataset."""
   DATASET_CLASS = wikipedia.Wikipedia
-  BUILDER_CONFIG_NAMES_TO_TEST = ["20200301.en"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["20201201.en"]
 
   # url_checksums are read from `dumpstatus.json`
   # Modify dumpstatus.json if `date` is not `20200301`
