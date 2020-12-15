@@ -40,18 +40,26 @@ selected among Wikipedia tables with at least 8 rows and 5 columns.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `65.36 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `237.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split             | Examples
+:---------------- | -------:
+`'split-1-dev'`   | 2,810
+`'split-1-train'` | 11,321
+`'split-2-dev'`   | 2,838
+`'split-2-train'` | 11,312
+`'split-3-dev'`   | 2,838
+`'split-3-train'` | 11,311
+`'test'`          | 4,344
+`'train'`         | 14,149
 
 *   **Features**:
 
@@ -97,4 +105,34 @@ FeaturesDict({
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wiki_table_questions-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
