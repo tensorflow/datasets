@@ -33,18 +33,22 @@ standarized table format.
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `19.76 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split           | Examples
+:-------------- | -------:
+`'test_all'`    | 4,928
+`'test_unseen'` | 2,433
+`'train'`       | 18,102
+`'validation'`  | 2,268
 
 *   **Features**:
 
