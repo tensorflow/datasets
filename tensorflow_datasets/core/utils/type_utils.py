@@ -213,8 +213,11 @@ class ReadWritePath(ReadOnlyPath, Protocol):
   def touch(self, mode: int = 0o666, exist_ok: bool = True) -> None:
     """Create a file at this given path."""
     del mode  # Unused
-    if self.exists() and not exist_ok:
-      raise FileExistsError(f'{self} already exists.')
+    if self.exists():
+      if exist_ok:
+        return
+      else:
+        raise FileExistsError(f'{self} already exists.')
     self.write_text('')
 
   @abc.abstractmethod

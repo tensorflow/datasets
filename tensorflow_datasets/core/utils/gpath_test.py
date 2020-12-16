@@ -211,7 +211,29 @@ def test_open(gcs_mocked_path: pathlib.Path):
   assert len(list(gcs_mocked_path.joinpath('bucket/dataset').iterdir())) == 6
 
 
-def test_read_write(gcs_mocked_path: pathlib.Path):  # pylint: disable=unused-argument
+@pytest.mark.usefixtures('gcs_mocked_path')
+def test_touch():
+  root_path = gpathlib.PosixGPath('gs://bucket/')
+  root_path.mkdir(parents=True)
+  assert root_path.exists()
+
+  # File don't exists, touch create it
+  file_path = root_path / 'test.txt'
+  assert not file_path.exists()
+  file_path.touch()
+  assert file_path.exists()
+  assert file_path.read_text() == ''  # File content is empty  # pylint: disable=g-explicit-bool-comparison
+
+  file_path.write_text('Some content')
+  file_path.touch()  # Should be a no-op
+  assert file_path.read_text() == 'Some content'  # Content still exists
+
+  with pytest.raises(FileExistsError):
+    file_path.touch(exist_ok=False)
+
+
+@pytest.mark.usefixtures('gcs_mocked_path')
+def test_read_write():
 
   gpath = gpathlib.PosixGPath('gs://file.txt')
 
