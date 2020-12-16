@@ -18,6 +18,7 @@
 import xml.etree.ElementTree as etree
 
 import mock
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.web_nlg import web_nlg
 
@@ -182,10 +183,11 @@ class WebNlgTest(tfds.testing.DatasetBuilderTestCase):
     return_mock = mock.Mock()
     parse_mock.return_value = return_mock
     return_mock.getroot.return_value = etree.fromstring(xml_str)
-    for i, (_,
-            example) in enumerate(web_nlg.WebNlg()._generate_examples([''],
-                                                                      'train')):
-      self.assertCountEqual(example, expected_examples[i])
+    dataset = web_nlg.WebNlg()
+    with mock.patch.object(tf, 'io'):
+      for i, (_,
+              example) in enumerate(dataset._generate_examples([''], 'train')):
+        self.assertCountEqual(example, expected_examples[i])
 
 
 if __name__ == '__main__':

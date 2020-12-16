@@ -143,33 +143,35 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, list_files, set_name):
     """Yields examples."""
-    for file in list_files:
-      xml_file = etree.parse(file)
-      xml_root = xml_file.getroot()
-      for entry in list(xml_root)[0]:
-        category = entry.attrib['category']
-        entry_id = '{}_{}'.format(os.path.basename(file), entry.attrib['eid'])
-        triples_set = []
-        target_text_i = 0
-        for child_element in entry:
-          if child_element.tag == 'modifiedtripleset':
-            for i, triple in enumerate(child_element):
-              for header, content in zip(['subject', 'predicate', 'object'],
-                                         triple.text.split(' | ')):
-                triples_set.append({
-                    'column_header': header,
-                    'row_number': i,
-                    'content': content,
-                })
-          elif child_element.tag == 'lex':
-            if not triples_set:
-              raise UnexpectedFormatError(
-                  'Found language expresion with no previous triplesets.')
-            yield '{}_#{}'.format(entry_id, target_text_i), {
-                'input_text': {
-                    'table': triples_set,
-                    'context': category
-                },
-                'target_text': child_element.text
-            }
-            target_text_i += 1
+    for file_path in list_files:
+      with tf.io.gfile.GFile(file_path, 'r') as f:
+        xml_file = etree.parse(f)
+        xml_root = xml_file.getroot()
+        for entry in list(xml_root)[0]:
+          category = entry.attrib['category']
+          entry_id = '{}_{}'.format(
+              os.path.basename(file_path), entry.attrib['eid'])
+          triples_set = []
+          target_text_i = 0
+          for child_element in entry:
+            if child_element.tag == 'modifiedtripleset':
+              for i, triple in enumerate(child_element):
+                for header, content in zip(['subject', 'predicate', 'object'],
+                                           triple.text.split(' | ')):
+                  triples_set.append({
+                      'column_header': header,
+                      'row_number': i,
+                      'content': content,
+                  })
+            elif child_element.tag == 'lex':
+              if not triples_set:
+                raise UnexpectedFormatError(
+                    'Found language expresion with no previous triplesets.')
+              yield '{}_#{}'.format(entry_id, target_text_i), {
+                  'input_text': {
+                      'table': triples_set,
+                      'context': category
+                  },
+                  'target_text': child_element.text
+              }
+              target_text_i += 1
