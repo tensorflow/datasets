@@ -36,12 +36,13 @@ class ReadOnlyBuilder(
 ):
   """Generic DatasetBuilder loading from a directory."""
 
-  def __init__(self, builder_dir: str):
+  def __init__(self, builder_dir: str, *, namespace: Optional[str] = None):
     """Constructor.
 
     Args:
       builder_dir: Directory of the dataset to load (e.g.
         `~/tensorflow_datasets/mnist/3.0.0/`)
+      namespace: Dataset namespace (when constructed from community dataset)
 
     Raises:
       FileNotFoundError: If the builder_dir does not exists.
@@ -75,6 +76,7 @@ class ReadOnlyBuilder(
         data_dir=builder_dir,
         config=builder_config,
         version=info_proto.version,
+        namespace=namespace,
     )
     if self.info.features is None:
       raise ValueError(
@@ -102,7 +104,10 @@ class ReadOnlyBuilder(
     raise AssertionError('ReadOnlyBuilder can\'t be generated.')
 
 
-def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
+def builder_from_directory(
+    builder_dir: str,
+    **kwargs: Any,
+) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
   This function reconstruct the `tfds.core.DatasetBuilder` without
@@ -119,15 +124,16 @@ def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
   Args:
     builder_dir: `str`, path of the directory containing the dataset to read (
       e.g. `~/tensorflow_datasets/mnist/3.0.0/`).
+    **kwargs: Any kwargs to forward to `ReadOnlyBuilder`.
 
   Returns:
     builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
   """
-  return ReadOnlyBuilder(builder_dir=builder_dir)
+  return ReadOnlyBuilder(builder_dir=builder_dir, **kwargs)
 
 
 def builder_from_files(
-    name: str, **builder_kwargs: Any,
+    name: str, *, namespace: Optional[str] = None, **builder_kwargs: Any,
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from files, auto-infering location.
 
@@ -143,6 +149,7 @@ def builder_from_files(
 
   Args:
     name: Dataset name.
+    namespace: `tfds.core.DatasetBuilder` kwarg.
     **builder_kwargs: `tfds.core.DatasetBuilder` kwargs.
 
   Returns:
@@ -154,7 +161,7 @@ def builder_from_files(
   # Find and load dataset builder.
   builder_dir = _find_builder_dir(name, **builder_kwargs)
   if builder_dir is not None:  # A generated dataset was found on disk
-    return builder_from_directory(builder_dir)
+    return builder_from_directory(builder_dir, namespace=namespace)
   else:
     data_dirs = constants.list_data_dirs(
         given_data_dir=builder_kwargs.get('data_dir')

@@ -143,6 +143,15 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
     assert code_config.description == file_config.description
     assert code_config.version == file_config.version
 
+  if code_builder.builder_config:
+    assert builder.builder_config
+    code_config = code_builder.builder_config
+    file_config = builder.builder_config
+    # Config attributes should be restored too
+    assert code_config.name == file_config.name
+    assert code_config.description == file_config.description
+    assert code_config.version == file_config.version
+
   # Test that the dataset can be read
   ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
   origin_ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))

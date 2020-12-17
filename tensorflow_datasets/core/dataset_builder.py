@@ -146,6 +146,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       data_dir: Optional[utils.PathLike] = None,
       config: Union[None, str, BuilderConfig] = None,
       version: Union[None, str, utils.Version] = None,
+      namespace: Optional[str] = None,
   ):
     """Constructs a DatasetBuilder.
 
@@ -163,14 +164,20 @@ class DatasetBuilder(registered.RegisteredDataset):
         The special value "experimental_latest" will use the highest version,
         even if not default. This is not recommended unless you know what you
         are doing, as the version could be broken.
+      namespace: Dataset namespace, if the dataset is created through the
+        community datasets.
     """
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
 
     # For pickling:
-    self._original_state = dict(data_dir=data_dir, config=config,
-                                version=version)
-    # To do the work:
+    self._original_state = dict(
+        data_dir=data_dir,
+        config=config,
+        version=version,
+        namespace=namespace,
+    )
+    self._namespace = namespace
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     self._version = self._pick_version(version)
@@ -276,6 +283,10 @@ class DatasetBuilder(registered.RegisteredDataset):
   def data_path(self) -> type_utils.ReadWritePath:
     # Instead, should make `_data_dir` be Path everywhere
     return utils.as_path(self._data_dir)
+
+  @property
+  def namespace(self) -> Optional[str]:
+    return self._namespace
 
   @utils.classproperty
   @classmethod
