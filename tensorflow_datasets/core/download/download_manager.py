@@ -769,6 +769,7 @@ def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
     )
   url_info = file_info['url_info']
   url_info.setdefault('filename', None)
+  url_info['size'] = utils.Size(url_info['size'])
   return checksums.UrlInfo(**url_info)
 
 

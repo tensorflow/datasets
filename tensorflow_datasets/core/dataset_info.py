@@ -43,7 +43,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
@@ -194,16 +193,18 @@ class DatasetInfo(object):
     return self._builder.data_dir
 
   @property
-  def dataset_size(self):
+  def dataset_size(self) -> utils.Size:
     """Generated dataset files size, in bytes."""
     # For old datasets, maybe empty.
-    return sum(split.num_bytes for split in self.splits.values())
+    return utils.Size(sum(split.num_bytes for split in self.splits.values()))
 
   @property
-  def download_size(self):
+  def download_size(self) -> utils.Size:
     """Downloaded files size, in bytes."""
     # Fallback to deprecated `size_in_bytes` if `download_size` is empty.
-    return self.as_proto.download_size or self.as_proto.size_in_bytes
+    return utils.Size(
+        self.as_proto.download_size or self.as_proto.size_in_bytes
+    )
 
   @download_size.setter
   def download_size(self, size):
@@ -460,8 +461,8 @@ class DatasetInfo(object):
         ("config_description", config_description),
         ("homepage", repr(self.homepage)),
         ("data_path", repr(self.data_dir)),
-        ("download_size", units.size_str(self.download_size)),
-        ("dataset_size", units.size_str(self.dataset_size)),
+        ("download_size", self.download_size),
+        ("dataset_size", self.dataset_size),
         ("features", _indent(repr(self.features))),
         ("supervised_keys", self.supervised_keys),
         ("splits", splits),

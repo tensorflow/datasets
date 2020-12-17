@@ -38,7 +38,7 @@ class UrlInfo:
     checksum: Checksum of the file
     filename: Name of the file
   """
-  size: int
+  size: utils.Size
   checksum: str
   # We exclude the filename from `__eq__` for backward compatibility
   # Two checksums are equals even if filename is unknown or different.
@@ -121,7 +121,7 @@ def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
     else:
       raise AssertionError(f'Error parsing checksums: {values}')
     url_infos[url] = UrlInfo(
-        size=int(size),
+        size=utils.Size(size),
         checksum=checksum,
         filename=filename,
     )
@@ -175,7 +175,8 @@ def save_url_infos(
   if original_data == new_data and _filenames_equal(original_data, new_data):
     return
   lines = [
-      f'{url}\t{url_info.size}\t{url_info.checksum}\t{url_info.filename or ""}\n'
+      f'{url}\t{int(url_info.size)}\t{url_info.checksum}\t'
+      f'{url_info.filename or ""}\n'
       for url, url_info in sorted(new_data.items())
   ]
   path.write_text(''.join(lines), encoding='UTF-8')

@@ -154,7 +154,7 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(existing_json["redistributionInfo"]["license"], license_)
 
     # Do not check the full string as it display the generated path.
-    self.assertIn(_INFO_STR, repr(info))
+    self.assertEqual(_INFO_STR % mnist_builder.data_dir, repr(info))
     self.assertIn("'test': <SplitInfo num_examples=", repr(info))
 
   def test_restore_after_modification(self):
@@ -367,7 +367,29 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     description="""
     The MNIST database of handwritten digits.
     """,
-    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/','''
+    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
+    data_path='%s',
+    download_size=1.95 KiB,
+    dataset_size=11.06 MiB,
+    features=FeaturesDict({
+        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    }),
+    supervised_keys=('image', 'label'),
+    splits={
+        'test': <SplitInfo num_examples=20, num_shards=1>,
+        'train': <SplitInfo num_examples=20, num_shards=1>,
+    },
+    citation="""@article{lecun2010mnist,
+      title={MNIST handwritten digit database},
+      author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+      journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+      volume={2},
+      year={2010}
+    }
+    """,
+    redistribution_info=license: "test license",
+)'''
 # pylint: enable=g-inconsistent-quotes
 
 

@@ -397,9 +397,9 @@ class DatasetBuilder(registered.RegisteredDataset):
       raise IOError(
           "Not enough disk space. Needed: {} (download: {}, generated: {})"
           .format(
-              units.size_str(self.info.dataset_size + self.info.download_size),
-              units.size_str(self.info.download_size),
-              units.size_str(self.info.dataset_size),
+              self.info.dataset_size + self.info.download_size,
+              self.info.download_size,
+              self.info.dataset_size,
           ))
     self._log_download_bytes()
 
@@ -758,14 +758,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
     termcolor.cprint(
-        "Downloading and preparing dataset {} (download: {}, generated: {}, "
-        "total: {}) to {}...".format(
-            self.info.full_name,
-            units.size_str(self.info.download_size),
-            units.size_str(self.info.dataset_size),
-            units.size_str(self.info.download_size + self.info.dataset_size),
-            self._data_dir,
-        ), attrs=["bold"])
+        f"Downloading and preparing dataset {self.info.download_size} "
+        f"(download: {self.info.download_size}, "
+        f"generated: {self.info.dataset_size}, "
+        f"total: {self.info.download_size + self.info.dataset_size}) "
+        f"to {self._data_dir}...",
+        attrs=["bold"],
+    )
 
   @abc.abstractmethod
   @utils.docs.doc_private

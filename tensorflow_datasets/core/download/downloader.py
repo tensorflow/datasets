@@ -233,7 +233,7 @@ class _Downloader(object):
         path=utils.as_path(path),
         url_info=checksums_lib.UrlInfo(
             checksum=checksum.hexdigest(),
-            size=size,
+            size=utils.Size(size),
             filename=fname,
         ),
     )
