@@ -34,17 +34,16 @@ class UnitsTest(testing.TestCase):
     self.assertEqual("150 bytes", units._size_str(150))
 
   def test_size(self):
-    self.assertEqual(repr(units.Size()), "Size(Unknown size)")
-    self.assertEqual(repr(units.Size(150)), "Size(150 bytes)")
-    self.assertEqual(repr(units.Size(1.5 * units.GiB)), "Size(1.50 GiB)")
+    self.assertEqual(repr(units.Size()), "Unknown size")
+    self.assertEqual(repr(units.Size(150)), "150 bytes")
+    self.assertEqual(repr(units.Size(1.5 * units.GiB)), "1.50 GiB")
+    self.assertEqual(repr(units.Size(150) + 150), "300 bytes")
+    self.assertEqual(repr(units.Size(300) - 150), "150 bytes")
     self.assertEqual(str(units.Size()), "Unknown size")
     self.assertEqual(str(units.Size(150)), "150 bytes")
-
-    self.assertEqual(str(units.Size(150) + 150), "300 bytes")
-    self.assertEqual(str(units.Size(300) - 150), "150 bytes")
     x = units.Size(300)
     x += 300
-    self.assertEqual(str(x), "600 bytes")
+    self.assertEqual(repr(x), "600 bytes")
 
 
 if __name__ == "__main__":

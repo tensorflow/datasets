@@ -53,10 +53,10 @@ class Size(int):
   """Typed integer containing the number of `bytes` with human-readable str."""
 
   def __str__(self) -> str:
-    return _size_str(self)
+    return self.__repr__()
 
   def __repr__(self) -> str:
-    return f"{type(self).__name__}({_size_str(self)})"
+    return _size_str(self)
 
   def __add__(self, x: int) -> int:
     return Size(super().__add__(x))

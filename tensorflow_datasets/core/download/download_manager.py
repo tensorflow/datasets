@@ -48,14 +48,6 @@ ExtractPath = Union[type_utils.PathLike, resource_lib.Resource]
 class NonMatchingChecksumError(Exception):
   """The downloaded file doesn't have expected checksum."""
 
-  def __init__(self, url, tmp_path):
-    msg = (
-        f'Artifact {url}, downloaded to {tmp_path}, has wrong checksum. '
-        'To debug, see: '
-        'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
-    )
-    Exception.__init__(self, msg)
-
 
 # Even if `DownloadConfig` is immutable inside TFDS, we do not set `frozen=True`
 # to allow user to set:
@@ -756,7 +748,13 @@ def _validate_checksums(
       and computed_url_info
       and expected_url_info != computed_url_info
   ):
-    raise NonMatchingChecksumError(url, path)
+    msg = (
+        f'Artifact {url}, downloaded to {path}, has wrong checksum. '
+        f'Expected: {expected_url_info}. Got: {computed_url_info}.'
+        'To debug, see: '
+        'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
+    )
+    raise NonMatchingChecksumError(msg)
 
 
 def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
