@@ -64,6 +64,14 @@ class DatasetAsNumPyTest(testing.TestCase):
     # Iterating twice on the dataset recreate the iterator.
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
 
+    if tf.executing_eagerly():
+      self.assertEqual(len(np_ds), 10)
+    else:
+      with self.assertRaisesWithPredicateMatch(
+          TypeError, "__len__() is not supported for `tfds.as_numpy`"
+      ):
+        _ = len(np_ds)
+
   def test_with_graph(self):
     with tf.Graph().as_default():
       ds = _create_dataset(range(10))
