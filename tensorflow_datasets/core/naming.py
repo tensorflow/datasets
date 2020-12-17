@@ -73,6 +73,12 @@ def parse_builder_name_kwargs(
   return ns_name, ds_name, builder_kwargs
 
 
+def is_valid_dataset_name(name_str: str) -> bool:
+  """Returns True is the given name is a valid dataset name."""
+  res = _NAME_REG.match(name_str)
+  return bool(res)
+
+
 def dataset_name_and_kwargs_from_name_str(
     name_str: str,
 ) -> Tuple[str, Dict[str, Value]]:

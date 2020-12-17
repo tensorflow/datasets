@@ -171,3 +171,9 @@ def test_parse_builder_name_kwargs_with_kwargs():
 
   with pytest.raises(ValueError, match='Parsing builder name string .* failed'):
     parse('ds/config:ns:1.0.0')
+
+
+def test_is_valid_dataset_name():
+  assert naming.is_valid_dataset_name('dataset123_abc')
+  assert not naming.is_valid_dataset_name('dataset-abc')
+  assert not naming.is_valid_dataset_name('dataset.old')

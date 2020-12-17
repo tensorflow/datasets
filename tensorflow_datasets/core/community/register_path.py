@@ -20,6 +20,7 @@ from typing import Any, Dict, Iterator, List, Optional, Type
 
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
@@ -132,5 +133,7 @@ def _iter_builder_names(
     # this is an acceptable trade-of.
     for builder_dir in _maybe_iterdir(data_dir):
       if builder_dir.name in FILTERED_DIRNAME:
+        continue
+      if not naming.is_valid_dataset_name(builder_dir.name):
         continue
       yield f'{ns_name}:{builder_dir.name}'
