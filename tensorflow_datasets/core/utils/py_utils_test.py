@@ -23,6 +23,7 @@ import pathlib
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 
 
@@ -301,3 +302,13 @@ def test_flatten_with_path():
       [v for _, v in _flatten_with_path(complex_dict)]
       == tf.nest.flatten(complex_dict)
   )
+
+
+def test_incomplete_file(tmp_path: pathlib.Path):
+  tmp_path = utils.as_path(tmp_path)
+  filepath = tmp_path / 'test.txt'
+  with py_utils.incomplete_file(filepath) as tmp_filepath:
+    tmp_filepath.write_text('content')
+    assert not filepath.exists()
+  assert filepath.read_text() == 'content'
+  assert not tmp_filepath.exists()  # Tmp file is deleted

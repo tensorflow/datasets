@@ -309,6 +309,20 @@ def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
 
 
 @contextlib.contextmanager
+def incomplete_file(
+    path: type_utils.ReadWritePath,
+) -> Iterator[type_utils.ReadWritePath]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
+  try:
+    yield tmp_path
+    tmp_path.replace(path)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    tmp_path.unlink(missing_ok=True)
+
+
+@contextlib.contextmanager
 def atomic_write(path, mode):
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = '%s%s_%s' % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)

@@ -1213,11 +1213,13 @@ def _save_default_config_name(
   config_dir.mkdir(parents=True, exist_ok=True)
   # Note:
   # * Save inside a dir to support some replicated filesystem
-  # * There is a risk of concurent write access. Acceptable trade-of ?
+  # * Write inside a `.incomplete` file and rename to avoid multiple configs
+  #   writing concurently the same file
   # * Config file is overwritten each time a config is generated. If the
   #   default config is changed, this will be updated.
   config_path = config_dir / "metadata.json"
-  config_path.write_text(json.dumps(data))
+  with utils.incomplete_file(config_path) as tmp_config_path:
+    tmp_config_path.write_text(json.dumps(data))
 
 
 def load_default_config_name(
