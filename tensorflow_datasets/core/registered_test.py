@@ -42,6 +42,8 @@ class EmptyDatasetBuilder(registered.RegisteredDataset):
     self.as_dataset_kwargs = kwargs
     return self
 
+  builder_configs = {}
+
 
 class UnregisteredBuilder(EmptyDatasetBuilder):
 

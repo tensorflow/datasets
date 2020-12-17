@@ -171,7 +171,10 @@ def builder(
   raise not_found_error
 
 
-def _try_load_from_files_first(cls, **builder_kwargs) -> bool:
+def _try_load_from_files_first(
+    cls: Optional[Type[dataset_builder.DatasetBuilder]],
+    **builder_kwargs: Any,
+) -> bool:
   """Returns True if files should be used rather than code."""
   if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
     return False  # Has extra kwargs, require original code.
@@ -181,6 +184,12 @@ def _try_load_from_files_first(cls, **builder_kwargs) -> bool:
     return True  # Code does not exists
   elif 'version' in builder_kwargs:
     return True  # Version explicitly given (unlock backward compatibility)
+  elif (
+      'config' in builder_kwargs
+      and isinstance(builder_kwargs['config'], str)
+      and builder_kwargs['config'] not in cls.builder_configs
+  ):
+    return True  # Requested config isn't found in the code
   else:
     return False  # Code exists and no version given, use code.
 
