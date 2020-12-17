@@ -195,6 +195,10 @@ class ReadWritePath(ReadOnlyPath, Protocol):
   def rmtree(self) -> None:
     """Remove the directory, including all sub-files."""
 
+  @abc.abstractmethod
+  def unlink(self, missing_ok: bool = False) -> None:
+    """Remove this file or symbolic link."""
+
   def write_bytes(self, data: bytes) -> None:
     """Writes content as bytes."""
     with self.open('wb') as f:

@@ -145,6 +145,16 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
     """Remove the directory."""
     tf.io.gfile.rmtree(self._path_str)
 
+  def unlink(self, missing_ok: bool = False) -> None:
+    """Remove this file or symbolic link."""
+    try:
+      tf.io.gfile.remove(self._path_str)
+    except tf.errors.NotFoundError as e:
+      if missing_ok:
+        pass
+      else:
+        raise FileNotFoundError(str(e))
+
   def open(
       self,
       mode: str = 'r',
