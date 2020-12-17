@@ -16,7 +16,7 @@
 """Location-based register."""
 
 import difflib
-from typing import Any, Dict, Iterator, List, Optional, Type
+from typing import Any, Dict, Iterator, List, Type
 
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
@@ -77,16 +77,16 @@ class DataDirRegister(register_base.BaseRegister):
     return sorted(_iter_builder_names(self._ns2data_dir))
 
   def builder_cls(
-      self, ns_name: Optional[str], builder_name: str, **builder_kwargs: Any,
+      self, name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder classes."""
     raise NotImplementedError(
         'builder_cls does not support data_dir-based community datasets. Got: '
-        f'{ns_name}:{builder_name}'
+        f'{name}'
     )
 
   def builder(
-      self, ns_name: Optional[str], builder_name: str, **builder_kwargs: Any,
+      self, name: utils.DatasetName, **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
     if 'data_dir' in builder_kwargs:
@@ -94,18 +94,20 @@ class DataDirRegister(register_base.BaseRegister):
           '`data_dir` cannot be set for data_dir-based community datasets. '
           'Dataset should already be generated.'
       )
-    if ns_name is None:
-      raise AssertionError(f'No namespace found: {builder_name}')
-    if ns_name not in self._ns2data_dir:
-      close_matches = difflib.get_close_matches(ns_name, self._ns2data_dir, n=1)
+    if name.namespace is None:
+      raise AssertionError(f'No namespace found: {name}')
+    if name.namespace not in self._ns2data_dir:
+      close_matches = difflib.get_close_matches(
+          name.namespace, self._ns2data_dir, n=1
+      )
       hint = f'\nDid you meant: {close_matches[0]}' if close_matches else ''
       raise KeyError(
-          f'Namespace `{ns_name}` for `{builder_name}` not found. '
+          f'Namespace `{name.namespace}` for `{name}` not found. '
           f'Should be one of {sorted(self._ns2data_dir)}{hint}'
       )
     return read_only_builder.builder_from_files(
-        builder_name,
-        data_dir=self._ns2data_dir[ns_name],
+        name.name,
+        data_dir=self._ns2data_dir[name.namespace],
         **builder_kwargs,
     )
 
@@ -136,4 +138,4 @@ def _iter_builder_names(
         continue
       if not naming.is_valid_dataset_name(builder_dir.name):
         continue
-      yield f'{ns_name}:{builder_dir.name}'
+      yield str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))

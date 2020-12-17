@@ -16,9 +16,10 @@
 """Base register class."""
 
 import abc
-from typing import Any, List, Optional, Type
+from typing import Any, List, Type
 
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import utils
 
 
 class BaseRegister(abc.ABC):
@@ -53,7 +54,7 @@ class BaseRegister(abc.ABC):
 
   @abc.abstractmethod
   def builder_cls(
-      self, ns_name: Optional[str], builder_name: str,
+      self, name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the `tfds.core.DatasetBuilder` instance.
 
@@ -61,8 +62,7 @@ class BaseRegister(abc.ABC):
     `my_dataset/my_config` -> `my_dataset`, `{'config': 'my_config'}`).
 
     Args:
-      ns_name: Optional builder namespace (e.g. `'kaggle'`)
-      builder_name: Builder name (e.g. `'mnist'`)
+      name: Builder name (e.g. `DatasetName('kaggle:mnist')`)
 
     Returns:
       builder_cls
@@ -71,7 +71,7 @@ class BaseRegister(abc.ABC):
 
   @abc.abstractmethod
   def builder(
-      self, ns_name: Optional[str], builder_name: str, **builder_kwargs: Any,
+      self, name: utils.DatasetName, **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the `tfds.core.DatasetBuilder` instance.
 
@@ -79,8 +79,7 @@ class BaseRegister(abc.ABC):
     `my_dataset/my_config` -> `my_dataset`, `{'config': 'my_config'}`).
 
     Args:
-      ns_name: Optional builder namespace (e.g. `'kaggle'`)
-      builder_name: Builder name (e.g. `'mnist'`)
+      name: Builder name (e.g. `DatasetName('kaggle:mnist')`)
       **builder_kwargs: Additional kwargs forwarded to
         `tfds.core.DatasetBuilder` (version, config,...)
 

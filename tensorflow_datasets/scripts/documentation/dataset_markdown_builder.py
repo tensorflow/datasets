@@ -475,9 +475,12 @@ def _display_all_builders(
       nightly_str = ' ' + nightly_doc_util.icon
     else:
       nightly_str = ''
-    cannonical_name = doc_utils.make_cannonical_name(namespace, builder.name)
+    ds_name = tfds.core.utils.DatasetName(
+        namespace=namespace,
+        name=builder.name,
+    )
     unique_builder_str.append(
-        f'## {cannonical_name}/{builder.builder_config.name}'
+        f'## {ds_name}/{builder.builder_config.name}'
         f'{header_suffix}{nightly_str}\n')
     unique_builder_str.append(_display_builder(builder, unique_sections))
   unique_builder_str = '\n'.join(unique_builder_str)
@@ -492,8 +495,8 @@ def _display_dataset_heading(
     namespace: Optional[str],
     builder: tfds.core.DatasetBuilder,
 ) -> str:
-  cannonical_name = doc_utils.make_cannonical_name(namespace, builder.name)
-  return f'# `{cannonical_name}`'
+  ds_name = tfds.core.utils.DatasetName(namespace=namespace, name=builder.name)
+  return f'# `{ds_name}`'
 
 
 def _display_nightly_str(

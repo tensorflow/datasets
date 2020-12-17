@@ -58,11 +58,6 @@ class DocUtilPaths:
   )
 
 
-def make_cannonical_name(namespace: Optional[str], name: str) -> str:
-  """Returns the full `ns:ds` name."""
-  return f'{namespace}:{name}' if namespace else name
-
-
 class VisualizationDocUtil(object):
   """Small util which generate the path/urls for the visualizations."""
 

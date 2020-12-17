@@ -186,7 +186,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     path: The dataset path found, or None if the dataset isn't found.
   """
   # Normalize builder kwargs
-  ns_name, ds_name, builder_kwargs = naming.parse_builder_name_kwargs(
+  name, builder_kwargs = naming.parse_builder_name_kwargs(
       name, **builder_kwargs
   )
   version = builder_kwargs.pop('version', None)
@@ -199,7 +199,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   # * config objects (rather than `str`)
   # * custom DatasetBuilder.__init__ kwargs
   if (
-      ns_name
+      name.namespace
       or version == 'experimental_latest'
       or isinstance(config, dataset_builder.BuilderConfig)
       or builder_kwargs
@@ -210,7 +210,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   all_builder_dirs = []
   for current_data_dir in constants.list_data_dirs(given_data_dir=data_dir):
     builder_dir = _find_builder_dir_single_dir(
-        ds_name,
+        name.name,
         data_dir=current_data_dir,
         version_str=str(version) if version else None,
         config_name=config,
