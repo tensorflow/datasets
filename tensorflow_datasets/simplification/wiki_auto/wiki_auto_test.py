@@ -15,8 +15,11 @@
 
 """wiki_auto dataset."""
 
+import sys
+sys.path.insert(0,'.')
+
 import tensorflow_datasets.public_api as tfds
-import wiki_auto
+from tensorflow_datasets.simplification.wiki_auto import wiki_auto
 
 class WikiAutoTestMANUAL(tfds.testing.DatasetBuilderTestCase):
   """Tests for wiki_auto dataset for manual configuration."""
