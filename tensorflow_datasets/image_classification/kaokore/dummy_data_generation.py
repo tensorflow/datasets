@@ -13,22 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+r"""Generate kaokore data.
+
+"""
+
 import os
-import random
 
 from absl import app
 from absl import flags
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image.bccd import bccd
-import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
 tf.compat.v1.disable_eager_execution()
 
 flags.DEFINE_string(
-    'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
+  'tfds_dir', py_utils.tfds_dir(), 'Path to tensorflow_datasets directory'
 )
 flags.DEFINE_integer('num', 4, 'Number of images to generate')
 
@@ -37,22 +38,22 @@ _IMAGE_SIZE = 256
 
 
 def _output_dir():
-    return os.path.join(FLAGS.tfds_dir, 'dummy_data')
+  return os.path.join(FLAGS.tfds_dir, 'dummy_data')
 
 
 def _generate_jpeg(example_id):
-    jpeg = fake_data_utils.get_random_jpeg(height=_IMAGE_SIZE, width=_IMAGE_SIZE)
-    filepath = os.path.join(_output_dir(), '{:08d}.jpg'.format(example_id))
-    dirname = os.path.dirname(filepath)
-    if not tf.io.gfile.exists(dirname):
-        tf.io.gfile.makedirs(dirname)
-    tf.io.gfile.copy(jpeg, filepath, overwrite=True)
+  jpeg = fake_data_utils.get_random_jpeg(height=_IMAGE_SIZE, width=_IMAGE_SIZE)
+  filepath = os.path.join(_output_dir(), '{:08d}.jpg'.format(example_id))
+  dirname = os.path.dirname(filepath)
+  if not tf.io.gfile.exists(dirname):
+    tf.io.gfile.makedirs(dirname)
+  tf.io.gfile.copy(jpeg, filepath, overwrite=True)
 
 
-def main(argv):
-    for i in range(FLAGS.num):
-        _generate_jpeg(i)
+def main():
+  for i in range(FLAGS.num):
+    _generate_jpeg(i)
 
 
 if __name__ == '__main__':
-    app.run(main)
+  app.run(main)
