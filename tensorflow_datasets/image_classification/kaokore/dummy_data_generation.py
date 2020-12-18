@@ -22,9 +22,9 @@ import os
 from absl import app
 from absl import flags
 
-import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils
+import tensorflow.compat.v2 as tf
 
 tf.compat.v1.disable_eager_execution()
 

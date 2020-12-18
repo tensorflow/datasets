@@ -1,8 +1,8 @@
 """kaokore dataset."""
 
 import csv
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
+import tensorflow.compat.v2 as tf
 
 _DESCRIPTION = """
 KaoKore is a novel dataset of face images from Japanese illustrations along with multiple labels for each face, derived from the Collection of Facial Expressions.
