@@ -51,6 +51,7 @@ from tensorflow_datasets import object_detection
 from tensorflow_datasets import question_answering
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
+from tensorflow_datasets import simplification
 from tensorflow_datasets import text
 from tensorflow_datasets import translate
 from tensorflow_datasets import video

@@ -1,0 +1,7 @@
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.dst	47859304	d9e2106722e2e29f34d5d9b697c236b38e920724727cefb71f42072dd9fd8807	train.dst
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.src	70209062	02141edbb735be50c9942f5e0bced4528dc8d844753d46a1f3bdf0b6e550c0e6	train.src
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/all_data/wiki-auto-part-1-data.json	2067424750	136d8e113a773d3669228a57cae733fca079954daf0b3514505410c66d1a69b6	wiki-auto-part-1-data.json
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/all_data/wiki-auto-part-2-data.json	93214171	94b33a11447c121a0ce7293de20fb969c36d8a62b31afc5873a4174ed17a1d4e	wiki-auto-part-2-data.json
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/dev.tsv	20232621	c56a9d2a739f9da83f90c54e266e1d60dd036cb80c463f118cb55613232e2e41	dev.tsv
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/test.tsv	32432523	ab8b818b0eeb7aa7712d244ee0ea16cfd915a896c40f02a34a808b597a5e68a0	test.tsv
+https://github.com/chaojiang06/wiki-auto/raw/master/wiki-manual/train.tsv	106346588	82fa388de3ded6d303b95fcd11ba70e0b6158d2df1cbf24913bb54503bd32e95	train.tsv
