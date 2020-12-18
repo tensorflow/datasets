@@ -305,6 +305,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Video`
 
 *   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
+*   [`davis`](davis.md)
 *   [`moving_mnist`](moving_mnist.md)
 *   [`robonet`](robonet.md)
 *   [`starcraft_video`](starcraft_video.md)

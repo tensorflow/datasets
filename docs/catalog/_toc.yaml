@@ -511,6 +511,8 @@ toc:
 - section:
   - path: /datasets/catalog/bair_robot_pushing_small
     title: bair_robot_pushing_small
+  - path: /datasets/catalog/davis
+    title: davis
   - path: /datasets/catalog/moving_mnist
     title: moving_mnist
   - path: /datasets/catalog/robonet
