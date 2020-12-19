@@ -730,7 +730,11 @@ def _repr_html(ex) -> str:
   if isinstance(ex, np.ndarray) and ex.size > 1:
     # Do not print individual values for array as it is slow
     # TODO(tfds): We could display a snippet, like the first/last tree items
-    return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
+    return ("<div style='overflow-x: scroll;"
+              "white-space: nowrap; width: 90px;"
+              "padding:2em 0em 2em 0em; float: right'>"
+              f"{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})"
+              "</div>")
   return repr(ex)
 
 
