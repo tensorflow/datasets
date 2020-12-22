@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.core.shuffle."""
 
 import collections
+import resource
 
 from absl.testing.absltest import mock
 from tensorflow_datasets import testing
@@ -80,8 +81,8 @@ class GetShardTest(testing.TestCase):
 
 class ShuffleTest(testing.TestCase):
 
-  def _test_items(self, salt, expected_order):
-    shuffler = shuffle.Shuffler(self.get_temp_dir(), salt)
+  def _test_items(self, salt, expected_order, max_mem_buffer_size=1024**3):
+    shuffler = shuffle.Shuffler(self.get_temp_dir(), salt, max_mem_buffer_size)
     for key, item in _ITEMS:
       shuffler.add(key, item)
     self.assertEqual(shuffler.size, _TOTAL_SIZE)
@@ -103,10 +104,9 @@ class ShuffleTest(testing.TestCase):
     self._test_items('split1', _ORDERED_ITEMS_SPLIT1)
     self._test_items('split2', _ORDERED_ITEMS_SPLIT2)
 
-  @mock.patch.object(shuffle, 'MAX_MEM_BUFFER_SIZE', 0)
   def test_disk(self):
-    self._test_items('split1', _ORDERED_ITEMS_SPLIT1)
-    self._test_items('split2', _ORDERED_ITEMS_SPLIT2)
+    self._test_items('split1', _ORDERED_ITEMS_SPLIT1, max_mem_buffer_size=0)
+    self._test_items('split2', _ORDERED_ITEMS_SPLIT2, max_mem_buffer_size=0)
 
   def test_nonbytes(self):
     shuffler = shuffle.Shuffler(self.get_temp_dir(), 'split1')

@@ -17,6 +17,7 @@
 
 import math
 import os
+import resource
 import struct
 import uuid
 
@@ -24,22 +25,6 @@ import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import hashing
-
-# Approximately how much data to store in memory before writing to disk.
-# If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary
-# data is written to disk.
-MAX_MEM_BUFFER_SIZE = 1000 << 20  # 1GB
-
-# If data to shuffle is too large for memory. Records are split among 1K
-# buckets stored on disk, then each bucket is sorted in memory.
-# For a dataset split of about 1TB, each bucket is going to
-# be about 1GB. Larger datasets will likely be handled by Beam.
-#
-# Increasing the number of buckets would decrease the size of each bucket.
-# Current implementation relies on having one open file per bucket.
-# Windows has a limit of ~2K open files per process (Linux ~32K); so increasing
-# the number of buckets might warrant some changes in implementation.
-BUCKETS_NUMBER = 1000  # Number of buckets to pre-sort and hold generated data.
 
 HKEY_SIZE = 128  # Hash of keys is 128 bits (md5).
 HKEY_SIZE_BYTES = HKEY_SIZE // 8
@@ -166,24 +151,38 @@ class _Bucket(object):
 class Shuffler(object):
   """Stores data in temp buckets, restitute it shuffled."""
 
-  def __init__(self, dirpath, hash_salt):
+  def __init__(self, dirpath, hash_salt, max_mem_buffer_size=1024**3, num_buckets=None):
     """Initialize Shuffler.
 
     Args:
       dirpath (string): directory in which to store temporary files.
       hash_salt (string or bytes): salt to hash keys.
+      max_mem_buffer_size (int): maximum size of memory buffer allowed for in memory shuffling, in bytes; exceeding this
+      leads to caching files on disk.
+      num_buckets (int): If data to shuffle are too large for memory, then they are split among `num_buckets` buckets
+      stored on disk; each bucket is then sorted in memory; increasing the number of buckets decreases the size of
+      each bucket; current implementation relies on having one open file per bucket; thus, if `num_buckets` is too large
+      , the process can exceed the maximum number of open files allowed; conversely, if it is too small each bucket
+      is too large to be sorted in memory; set it to `None` to use the default behavior, which uses 1000 or half of the
+      process limit on number of open files, whichever is smaller.
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
-    self._buckets = []
-    for i in range(BUCKETS_NUMBER):
-      path = os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i))
-      self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
     # To keep data in memory until enough data has been gathered.
     self._in_memory = True
     self._mem_buffer = []
+    self._max_mem_buffer_size = max_mem_buffer_size
+    if num_buckets:
+      self._num_buckets = num_buckets
+    else:
+      max_open_files, _ = resource.getrlimit(resource.RLIMIT_NOFILE)
+      self._num_buckets = min(1000, max_open_files // 2)
+    self._buckets = []
+    for i in range(self._num_buckets):
+      path = os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i))
+      self._buckets.append(_Bucket(path))
 
   @property
   def size(self):
@@ -197,12 +196,12 @@ class Shuffler(object):
     return [len(b) for b in self._buckets]
 
   def _add_to_bucket(self, hkey, data):
-    bucket_number = get_bucket_number(hkey, BUCKETS_NUMBER)
+    bucket_number = get_bucket_number(hkey, self._num_buckets)
     self._buckets[bucket_number].add(hkey, data)
 
   def _add_to_mem_buffer(self, hkey, data):
     self._mem_buffer.append((hkey, data))
-    if self._total_bytes > MAX_MEM_BUFFER_SIZE:
+    if self._total_bytes > self._max_mem_buffer_size:
       for hkey, data  in self._mem_buffer:
         self._add_to_bucket(hkey, data)
       self._mem_buffer = None
