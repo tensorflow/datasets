@@ -408,14 +408,13 @@ class C4(tfds.core.BeamBasedBuilder):
         | "create_wet_path_urls" >> beam.Create(file_paths["wet_path_urls"])
         | beam.io.ReadAllFromText(
             compression_type=beam.io.filesystem.CompressionTypes.UNCOMPRESSED)
+        # Increase parallelism.
+        | beam.Reshuffle()
         | "filter_corrupt_wet_files" >> beam.Filter(
             lambda p: p not in _KNOWN_CORRUPT_WET_FILES)
         | beam.Map(
             download_wet_file,
             dl_dir=os.path.join(dl_manager.download_dir, "c4_wet_files")))
-
-    # Increase parallelism.
-    wet_file_paths |= beam.Reshuffle()
 
     # Parse WET files and filter by length.
     # Output: url, text
