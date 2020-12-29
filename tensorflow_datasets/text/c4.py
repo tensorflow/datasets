@@ -414,6 +414,9 @@ class C4(tfds.core.BeamBasedBuilder):
             download_wet_file,
             dl_dir=os.path.join(dl_manager.download_dir, "c4_wet_files")))
 
+    # Increase parallelism.
+    wet_file_paths |= beam.Reshuffle()
+
     # Parse WET files and filter by length.
     # Output: url, text
     page_content = (
