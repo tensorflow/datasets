@@ -54,7 +54,7 @@ _LEAVES_LABELS = ["Black spot", "canker", "greening", "healthy"]
 class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
   """Subset of the citrus dataset with just leaves."""
 
-  VERSION = tfds.core.Version("0.1.1")
+  VERSION = tfds.core.Version("0.1.2")
   RELEASE_NOTES = {
     "0.1.1": "Citrus Leaves dataset",
     "0.1.2": "Website URL update"
