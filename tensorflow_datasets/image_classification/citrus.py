@@ -47,7 +47,7 @@ Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2
 License: http://creativecommons.org/licenses/by/4.0
 """
 
-_URL = "https://data.mendeley.com/datasets/3f83gxmv57/2/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/Citrus.zip"
+_URL = "https://data.mendeley.com/public-files/datasets/3f83gxmv57/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/file_downloaded"
 _LEAVES_LABELS = ["Black spot", "canker", "greening", "healthy"]
 
 
