@@ -289,6 +289,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     if path.split('\\')[-1] == cls.name:
       return cls.code_path.parent / "checksums.tsv"
     else:
+      #Record checksums in the common folder for older structured datasets
       chksm_path = utils.gpath.WindowsGPath(
         'f:/tfds/datasets/tensorflow_datasets/url_checksums/' +
         cls.name +
