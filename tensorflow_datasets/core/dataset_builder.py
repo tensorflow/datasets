@@ -284,7 +284,16 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Used:
     # * To load the checksums (in url_infos)
     # * To save the checksums (in DownloadManager)
-    return cls.code_path.parent / "checksums.tsv"
+    #Checking whether the dataset follow the folder structure
+    path = str(cls.code_path.parent)
+    if path.split('\\')[-1] == cls.name:
+      return cls.code_path.parent / "checksums.tsv"
+    else:
+      chksm_path = utils.gpath.WindowsGPath(
+        'f:/tfds/datasets/tensorflow_datasets/url_checksums/' +
+        cls.name +
+        '.txt')
+      return chksm_path
 
   @utils.classproperty
   @classmethod
