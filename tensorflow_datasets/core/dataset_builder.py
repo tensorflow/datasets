@@ -285,8 +285,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # * To load the checksums (in url_infos)
     # * To save the checksums (in DownloadManager)
     #Checking whether the dataset follow the folder structure
-    path = str(cls.code_path.parent)
-    if path.split('\\')[-1] == cls.name:
+    if cls.code_path.parent.name == cls.name:
       return cls.code_path.parent / "checksums.tsv"
     else:
       #Record checksums in the common folder for older structured datasets
