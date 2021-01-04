@@ -289,10 +289,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return cls.code_path.parent / "checksums.tsv"
     else:
       #Record checksums in the common folder for older structured datasets
-      chksm_path = utils.gpath.WindowsGPath(
-        'f:/tfds/datasets/tensorflow_datasets/url_checksums/' +
-        cls.name +
-        '.txt')
+      chksm_path = utils.tfds_path()/ 'url_checksums'/ (cls.name + '.txt')
       return chksm_path
 
   @utils.classproperty
