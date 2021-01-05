@@ -734,7 +734,7 @@ def _validate_checksums(
   if force_checksums_validation:
     # Checksum of the downloaded file unknown (for manually downloaded file)
     if not computed_url_info:
-      computed_url_info = utils.read_checksum_digest(path)
+      computed_url_info = checksums.compute_url_info(path)
     # Checksums have not been registered
     if not expected_url_info:
       raise ValueError(

@@ -15,6 +15,8 @@
 
 """Methods to retrieve and store size/checksums associated to URLs."""
 
+import hashlib
+import io
 from typing import Any, Dict, Iterable, Optional
 
 from absl import logging
@@ -47,6 +49,30 @@ class UrlInfo:
   def asdict(self) -> Dict[str, Any]:
     """Returns the dict representation of the dataclass."""
     return dataclasses.asdict(self)
+
+
+def compute_url_info(
+    path: utils.PathLike,
+    checksum_cls=hashlib.sha256,
+) -> UrlInfo:
+  """Locally compute size, checksums of the given file."""
+  path = utils.as_path(path)
+
+  checksum = checksum_cls()
+  size = 0
+  with path.open('rb') as f:
+    while True:
+      block = f.read(io.DEFAULT_BUFFER_SIZE)
+      size += len(block)
+      if not block:
+        break
+      checksum.update(block)
+
+  return UrlInfo(
+      checksum=checksum.hexdigest(),  # base64 digest would have been better.
+      size=utils.Size(size),
+      filename=path.name,
+  )
 
 
 def add_checksums_dir(checksums_dir: str) -> None:

@@ -165,17 +165,10 @@ class _Downloader(object):
     filename = os.path.basename(filepath)
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
-    hexdigest, size = utils.read_checksum_digest(
+    url_info = checksums_lib.compute_url_info(
         out_path, checksum_cls=self._checksumer_cls
     )
-    return DownloadResult(
-        path=utils.as_path(out_path),
-        url_info=checksums_lib.UrlInfo(
-            checksum=hexdigest,
-            size=size,
-            filename=filename,
-        ),
-    )
+    return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
 
   def _sync_download(
       self, url: str, destination_path: str, verify: bool = True

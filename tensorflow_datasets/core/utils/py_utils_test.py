@@ -16,8 +16,6 @@
 """Tests for py_utils."""
 
 import collections
-import hashlib
-import os
 import pathlib
 
 import tensorflow as tf
@@ -214,17 +212,6 @@ class PyUtilsTest(testing.TestCase):
     with self.assertRaisesRegex(RuntimeError, 'Caught: message'):
       with py_utils.try_reraise('Caught: '):
         raise tf.errors.FailedPreconditionError(None, None, 'message')
-
-
-class ReadChecksumDigestTest(testing.TestCase):
-
-  def test_digest(self):
-    digest, size = py_utils.read_checksum_digest(
-        os.path.join(self.test_data, '6pixels.png'), hashlib.sha256)
-    self.assertEqual(
-        digest,
-        '04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c')
-    self.assertEqual(102, size)
 
 
 class GetClassPathUrlTest(testing.TestCase):
