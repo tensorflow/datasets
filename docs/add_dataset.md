@@ -241,6 +241,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
     ...
 ```
 
+The `manual_dir` location can be customized with `tfds build --manual_dir=` or
+using `tfds.download.DownloadConfig`.
+
 #### Read archive directly
 
 `dl_manager.iter_archive` reads an archives sequentially without extracting
