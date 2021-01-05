@@ -284,7 +284,17 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Used:
     # * To load the checksums (in url_infos)
     # * To save the checksums (in DownloadManager)
-    return cls.code_path.parent / "checksums.tsv"
+    new_path = cls.code_path.parent / "checksums.tsv"
+    # Checksums of legacy datasets are located in a separate dir.
+    legacy_path = utils.tfds_path() / "url_checksums" / f"{cls.name}.txt"
+    if (
+        "tensorflow_datasets" in new_path.parts
+        and legacy_path.exists()
+        and not new_path.exists()
+    ):
+      return legacy_path
+    else:
+      return new_path
 
   @utils.classproperty
   @classmethod
