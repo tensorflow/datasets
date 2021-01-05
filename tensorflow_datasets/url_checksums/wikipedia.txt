@@ -149,7 +149,7 @@ https://dumps.wikimedia.your.org/elwiki/20201201/dumpstatus.json	11523	86df37878
 https://dumps.wikimedia.your.org/elwiki/20201201/elwiki-20201201-pages-articles-multistream.xml.bz2	409123166	c8cc30fab3f870c2143504b4d9b2cf7acae8220cb27dac70a9a126cdcd858f07	elwiki-20201201-pages-articles-multistream.xml.bz2
 https://dumps.wikimedia.your.org/emlwiki/20201201/dumpstatus.json	11001	b907707394d7913fc7d9d53fc993cd3016e930eb1096618ed0c680313ae87c5d	dumpstatus.json
 https://dumps.wikimedia.your.org/emlwiki/20201201/emlwiki-20201201-pages-articles-multistream.xml.bz2	8983121	aa3ddbfb41c8cd1cb83f9de416008568b05847e98c3f1baff41006e23e837a4d	emlwiki-20201201-pages-articles-multistream.xml.bz2
-https://dumps.wikimedia.your.org/enwiki/20201201/dumpstatus.json	98860	ca1e26070375c5a34fb7dd886c777dce2af3e4f9e5354bba8daa800689dc1cbd	dumpstatus.json
+https://dumps.wikimedia.your.org/enwiki/20201201/dumpstatus.json	478894	449eb2a7c35060c2c07090c606d4be243569facda72b51ce983492ca1afb5a01	dumpstatus.json
 https://dumps.wikimedia.your.org/enwiki/20201201/enwiki-20201201-pages-articles-multistream1.xml-p1p41242.bz2	244404304	7c1202ae1f2f74118a91d91e1b93f3830bbb533230dc9fc8763cbfd49646fdf5	enwiki-20201201-pages-articles-multistream1.xml-p1p41242.bz2
 https://dumps.wikimedia.your.org/enwiki/20201201/enwiki-20201201-pages-articles-multistream10.xml-p4045403p5399366.bz2	528390393	a9fc881137dddaed87ae5cb63f6fd873539a1b85d20393aec0762c3e03ffdc10	enwiki-20201201-pages-articles-multistream10.xml-p4045403p5399366.bz2
 https://dumps.wikimedia.your.org/enwiki/20201201/enwiki-20201201-pages-articles-multistream11.xml-p5399367p6899366.bz2	515363950	6ffcab17b3191b1c55ee05fc5fab21d810a8ff20a36265201f740a117c950df0	enwiki-20201201-pages-articles-multistream11.xml-p5399367p6899366.bz2
