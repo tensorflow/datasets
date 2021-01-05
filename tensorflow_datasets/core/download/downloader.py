@@ -162,12 +162,16 @@ class _Downloader(object):
   def _sync_file_copy(
       self, filepath: str, destination_path: str,
   ) -> DownloadResult:
+    """Downloads the file through `tf.io.gfile` API."""
     filename = os.path.basename(filepath)
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
     url_info = checksums_lib.compute_url_info(
         out_path, checksum_cls=self._checksumer_cls
     )
+    self._pbar_dl_size.update_total(url_info.size)
+    self._pbar_dl_size.update(url_info.size)
+    self._pbar_url.update(1)
     return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
 
   def _sync_download(
