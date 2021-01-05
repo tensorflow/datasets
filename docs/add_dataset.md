@@ -221,8 +221,9 @@ assert extracted_paths == {
 
 Some data cannot be automatically downloaded (e.g. require a login), in this
 case, user will manually download the source data and place it in `manual_dir/`
-(defaults to `~/tensorflow_datasets/downloads/manual/`). Files can then be
-accessed through `dl_manager.manual_dir`:
+(defaults to `~/tensorflow_datasets/downloads/manual/`).
+
+Files can then be accessed through `dl_manager.manual_dir`:
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -233,7 +234,11 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
   """
 
   def _split_generators(self, dl_manager):
-    data = dl_manager.manual_dir / 'data.zip'
+    # data_path is a pathlib-like `Path('<manual_dir>/data.zip')`
+    archive_path = dl_manager.manual_dir / 'data.zip'
+    # Extract the manually downloaded `data.zip`
+    extracted_path = dl_manager.extract(archive_path)
+    ...
 ```
 
 #### Read archive directly
