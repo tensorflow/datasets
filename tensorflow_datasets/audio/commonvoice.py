@@ -22,7 +22,7 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-_DOWNLOAD_URL = "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/{}.tar.gz"
+_DOWNLOAD_URL = "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-6.1-2020-12-11/{}.tar.gz"
 _SPLITS = {
     tfds.Split.TRAIN: "train",
     tfds.Split.TEST: "test",
@@ -63,6 +63,7 @@ _LANGUAGE_ACCENTS = collections.OrderedDict([
     ("nl", ["netherlands", "belgium", "other"]),
     ("cnh", ["other"]),
     ("eo", ["internacia", "other"]),
+    ("id",[])
 ])
 
 
@@ -71,7 +72,6 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, language, accents=None, **kwargs):
     """Constructs CommonVoiceConfig.
-
     Args:
      language: `str`, one of [ca, nl, br, de, sl, cy, en, kab, tt, zh-TW, eo,
        it, fr, ga-IE, tr, ky, cnh, cv]. Language Code of the Dataset to be used.
@@ -125,6 +125,8 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     dl_path = dl_manager.download_and_extract(
         _DOWNLOAD_URL.format(self.builder_config.language))
+    dl_path=os.path.join(dl_path,"cv-corpus-6.1-2020-12-11")
+    dl_path=os.path.join(dl_path,self.builder_config.language)
     clip_folder = os.path.join(dl_path, "clips")
     return [
         tfds.core.SplitGenerator(  # pylint: disable=g-complex-comprehension
@@ -138,18 +140,16 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, audio_path, label_path):
     """Generate Voice samples and statements given the data paths.
-
     Args:
       audio_path: str, path to audio storage folder
       label_path: str, path to the label files
-
     Yields:
       example: The example `dict`
     """
     with tf.io.gfile.GFile(label_path) as file_:
       dataset = csv.DictReader(file_, delimiter="\t")
       for i, row in enumerate(dataset):
-        file_path = os.path.join(audio_path, "%s.mp3" % row["path"])
+        file_path = os.path.join(audio_path, "%s" % row["path"])
         if tf.io.gfile.exists(file_path):
           yield i, {
               "client_id": row["client_id"],
