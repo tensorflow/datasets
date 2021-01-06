@@ -47,20 +47,15 @@ represented as a dictionary with the following keys:
 
 # Note: Bump the version if the links change.
 
-_CONFIG_VERSION = {
-    'matched-frequency': tfds.core.Version('1.0.0'),
-    'threshold-0.7': tfds.core.Version('1.0.0'),
-    'topimages': tfds.core.Version('1.0.0'),
-}
 _ROOT_URL = 'https://s3-us-west-2.amazonaws.com/imagenetv2public'
 _IMAGENET_V2_URLS = {
     'matched-frequency': _ROOT_URL + '/imagenetv2-matched-frequency.tar.gz',
     'threshold-0.7': _ROOT_URL + '/imagenetv2-threshold0.7.tar.gz',
-    'topimages': _ROOT_URL + '/imagenetv2-topimages.tar.gz',
+    'topimages': _ROOT_URL + '/imagenetv2-top-images.tar.gz',
 }
 _TAR_TOPDIR = {
     'matched-frequency': 'imagenetv2-matched-frequency-format-val',
-    'threshold-0.7': 'imagenetv2-threshold-0.7-format-val',
+    'threshold-0.7': 'imagenetv2-threshold0.7-format-val',
     'topimages': 'imagenetv2-top-images-format-val',
 }
 
@@ -92,13 +87,17 @@ def _create_builder_configs():
     yield ImagenetV2Config(
         variant=variant,
         name=variant,
-        version=_CONFIG_VERSION[variant],
     )
 
 
 class ImagenetV2(tfds.core.GeneratorBasedBuilder):
   """An ImageNet test set recollected by following the original protocol."""
 
+  VERSION = tfds.core.Version('2.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Initial version.',
+      '2.0.0': 'Files updated.',
+  }
   BUILDER_CONFIGS = list(_create_builder_configs())
 
   def _info(self):
