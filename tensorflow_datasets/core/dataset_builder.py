@@ -288,7 +288,9 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Checksums of legacy datasets are located in a separate dir.
     legacy_path = utils.tfds_path() / "url_checksums" / f"{cls.name}.txt"
     if (
-        "tensorflow_datasets" in new_path.parts
+        # zipfile.Path does not have `.parts`. Additionally, `os.fspath`
+        # will extract the file, so use `str`.
+        "tensorflow_datasets" in str(new_path)
         and legacy_path.exists()
         and not new_path.exists()
     ):
