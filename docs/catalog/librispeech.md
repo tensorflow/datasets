@@ -11,11 +11,6 @@
 
 # `librispeech`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 LibriSpeech is a corpus of approximately 1000 hours of read English speech with

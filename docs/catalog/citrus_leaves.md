@@ -11,11 +11,6 @@
 
 # `citrus_leaves`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The original citrus dataset contains 759 images of healthy and unhealthy citrus
@@ -38,22 +33,21 @@ http://creativecommons.org/licenses/by/4.0
 *   **Versions**:
 
     *   `0.1.1`: Citrus Leaves dataset
-    *   **`0.1.2`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Website URL update
+    *   **`0.1.2`** (default): Website URL update
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `63.87 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `37.89 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 594
 
 *   **Features**:
 

@@ -83,7 +83,6 @@ toc:
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
   - path: /datasets/catalog/s3o4d
-    status: nightly
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
@@ -240,7 +239,6 @@ toc:
   - path: /datasets/catalog/kitti
     title: kitti
   - path: /datasets/catalog/lvis
-    status: nightly
     title: lvis
   - path: /datasets/catalog/open_images_challenge2019_detection
     title: open_images_challenge2019_detection
@@ -287,10 +285,8 @@ toc:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/cherry_blossoms
-    status: nightly
     title: cherry_blossoms
   - path: /datasets/catalog/dart
-    status: nightly
     title: dart
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -303,7 +299,6 @@ toc:
   - path: /datasets/catalog/higgs
     title: higgs
   - path: /datasets/catalog/howell
-    status: nightly
     title: howell
   - path: /datasets/catalog/iris
     title: iris
@@ -318,15 +313,12 @@ toc:
   - path: /datasets/catalog/titanic
     title: titanic
   - path: /datasets/catalog/web_nlg
-    status: nightly
     title: web_nlg
   - path: /datasets/catalog/wiki_bio
     title: wiki_bio
   - path: /datasets/catalog/wiki_table_questions
-    status: nightly
     title: wiki_table_questions
   - path: /datasets/catalog/wiki_table_text
-    status: nightly
     title: wiki_table_text
   - path: /datasets/catalog/wine_quality
     title: wine_quality
@@ -387,7 +379,6 @@ toc:
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/drop
-    status: nightly
     title: drop
   - path: /datasets/catalog/eraser_multi_rc
     title: eraser_multi_rc
@@ -434,7 +425,6 @@ toc:
   - path: /datasets/catalog/qa4mre
     title: qa4mre
   - path: /datasets/catalog/quac
-    status: nightly
     title: quac
   - path: /datasets/catalog/race
     title: race
@@ -469,15 +459,12 @@ toc:
   - path: /datasets/catalog/wordnet
     title: wordnet
   - path: /datasets/catalog/wsc273
-    status: nightly
     title: wsc273
   - path: /datasets/catalog/xnli
     title: xnli
   - path: /datasets/catalog/xtreme_pawsx
-    status: nightly
     title: xtreme_pawsx
   - path: /datasets/catalog/xtreme_xnli
-    status: nightly
     title: xtreme_xnli
   - path: /datasets/catalog/yelp_polarity_reviews
     title: yelp_polarity_reviews
