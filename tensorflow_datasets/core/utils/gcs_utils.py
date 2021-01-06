@@ -16,9 +16,10 @@
 """Utilities for accessing TFDS GCS buckets."""
 
 import concurrent.futures
+import contextlib
 import os
 import posixpath
-from typing import List, Optional
+from typing import Iterator, List, Optional
 
 import tensorflow.compat.v2 as tf
 
@@ -67,6 +68,15 @@ def gcs_path(*relative_path: type_utils.PathLike) -> type_utils.ReadWritePath:
   return generic_path.as_path(GCS_ROOT_DIR).joinpath(*relative_path)
 
 
+@contextlib.contextmanager
+def disable_gce_check() -> Iterator[None]:
+  """Contextmanager which disable the GCE checks."""
+  # When accessing GCS bucket without being authentified, `tf.io.gfile`
+  # log a warning.
+  with py_utils.set_environ('NO_GCE_CHECK', 'true'):
+    yield
+
+
 @py_utils.memoize()
 def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   """List all files in the given GCS dir (`['dataset/1.0.0/file0', ...]`)."""
@@ -83,8 +93,9 @@ def gcs_dataset_info_files(dataset_dir: str) -> Optional[List[str]]:
 
 def is_dataset_on_gcs(dataset_name: str) -> bool:
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
-  dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
-  return not _is_gcs_disabled and exists(gcs_path(dir_name))
+  with disable_gce_check():
+    dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
+    return not _is_gcs_disabled and exists(gcs_path(dir_name))
 
 
 def download_gcs_dataset(

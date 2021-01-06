@@ -424,18 +424,22 @@ class DatasetInfo(object):
 
   def initialize_from_bucket(self):
     """Initialize DatasetInfo from GCS bucket info files."""
-    # In order to support Colab, we use the HTTP GCS API to access the metadata
-    # files. They are copied locally and then loaded.
-    tmp_dir = tempfile.mkdtemp("tfds")
-    data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
-    if not data_files:
-      return
-    logging.info("Load pre-computed DatasetInfo (eg: splits, num examples,...) "
-                 "from GCS: %s", self.full_name)
-    for fname in data_files:
-      out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      tf.io.gfile.copy(os.fspath(gcs_utils.gcs_path(fname)), out_fname)
-    self.read_from_directory(tmp_dir)
+    # Disable token check when accessing the public GCS bucket.
+    with gcs_utils.disable_gce_check():
+      # In order to support Colab, we use the HTTP GCS API to access the
+      # metadata files. They are copied locally and then loaded.
+      tmp_dir = tempfile.mkdtemp("tfds")
+      data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
+      if not data_files:
+        return
+      logging.info(
+          "Load pre-computed DatasetInfo (eg: splits, num examples,...) "
+          "from GCS: %s", self.full_name
+      )
+      for fname in data_files:
+        out_fname = os.path.join(tmp_dir, os.path.basename(fname))
+        tf.io.gfile.copy(os.fspath(gcs_utils.gcs_path(fname)), out_fname)
+      self.read_from_directory(tmp_dir)
 
   def __repr__(self):
     SKIP = object()  # pylint: disable=invalid-name
