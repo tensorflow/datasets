@@ -111,6 +111,12 @@ class DataDirRegister(register_base.BaseRegister):
         **builder_kwargs,
     )
 
+  def get_builder_root_dir(
+      self, name: utils.DatasetName
+  ) -> utils.ReadWritePath:
+    """Returns root dir of the generated builder (without version/config)."""
+    return self._ns2data_dir[name.namespace] / name.name
+
 
 def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
   """Same as `path.iterdir()`, but don't fail if path does not exists."""

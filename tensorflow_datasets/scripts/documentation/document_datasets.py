@@ -97,9 +97,11 @@ def _load_builder_from_location(
   try:
     builder = tfds.builder(name)
   except tfds.core.DatasetNotFoundError:
-    # TODO(tfds): If tfds.core.DatasetNotFoundError, it might be the default
-    # config isn't found. Should try to load all sub-configs.
-    return None
+    # If tfds.core.DatasetNotFoundError, it might be the default
+    # config isn't found. Should try to load a sub-folder (to check ).
+    builder = _maybe_load_config(name)
+    if not builder:
+      return builder
   if builder.builder_config:
     config_builders = _load_all_configs(name, builder)
   else:
@@ -110,6 +112,11 @@ def _load_builder_from_location(
       builder=builder,
       config_builders=config_builders,
   )
+
+
+def _maybe_load_config(name: str) -> Optional[tfds.core.DatasetBuilder]:
+  del name  # unused
+  return None
 
 
 def _load_all_configs(
