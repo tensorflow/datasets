@@ -433,7 +433,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
         if (download_config.try_download_gcs and
             gcs_utils.is_dataset_on_gcs(self.info.full_name)):
-          logging.warning(GCS_HOSTED_MSG, self.name)
+          logging.info(GCS_HOSTED_MSG, self.name)
           gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:
