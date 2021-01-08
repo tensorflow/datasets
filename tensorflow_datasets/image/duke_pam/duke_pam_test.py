@@ -24,13 +24,16 @@ class DukePAMTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = duke_pam.DukePAM
   BUILDER_CONFIG_NAMES_TO_TEST = ['clean', 'patches', 'raw']
   SPLITS = {
-    tfds.Split.TRAIN: 2,  # Number of fake training examples
-    tfds.Split.VALIDATION: 2,  # Number of fake validation examples
+      tfds.Split.TRAIN: 2,  # Number of fake training examples
+      tfds.Split.VALIDATION: 2,  # Number of fake validation examples
   }
 
-  DL_EXTRACT_RESULT = {'clean_train': 'clean/train', 'clean_valid': 'clean/valid',
-                       'patches_train': 'patches/train', 'patches_valid': 'patches/valid',
-                       'raw_train': 'raw/train', 'raw_valid': 'raw/valid'}
+  DL_EXTRACT_RESULT = {'clean_train': 'clean/train',
+                       'clean_valid': 'clean/valid',
+                       'patches_train': 'patches/train',
+                       'patches_valid': 'patches/valid',
+                       'raw_train': 'raw/train',
+                       'raw_valid': 'raw/valid'}
 
 if __name__ == "__main__":
   tfds.testing.test_main()
