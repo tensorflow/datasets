@@ -39,7 +39,6 @@ contains bounding boxes.
 _LABELS_FNAME = "image_classification/caltech101_labels.txt"
 _URL = "https://drive.google.com/uc?export=download&id=137RyRjvTBkBiIfeYBNZBtViDHQ6_Ewsp"
 _HOMEPAGE = "http://www.vision.caltech.edu/Image_Datasets/Caltech101/"
-_IMAGES_FNAME = "101_ObjectCategories.tar.gz"
 _TRAIN_POINTS_PER_CLASS = 30
 
 
