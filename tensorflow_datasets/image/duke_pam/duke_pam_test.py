@@ -35,5 +35,5 @@ class DukePAMTest(tfds.testing.DatasetBuilderTestCase):
                        'raw_train': 'raw/train',
                        'raw_valid': 'raw/valid'}
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   tfds.testing.test_main()

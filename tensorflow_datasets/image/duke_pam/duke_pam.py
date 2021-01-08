@@ -90,7 +90,7 @@ class DukePAMConfig(tfds.core.BuilderConfig):
                   Heavy Config (not in _DATA_OPTIONS).
     """
     if data not in _DATA_OPTIONS:
-      raise ValueError("data must be one of %s" % list(_DATA_OPTIONS))
+      raise ValueError('data must be one of %s' % list(_DATA_OPTIONS))
 
     super(DukePAMConfig, self).__init__(**kwargs)
     self.data = data
@@ -104,9 +104,9 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       DukePAMConfig(name=config_name,
                     description=
-                    f"A dataset consisting of Train and Validation \
+                    f'A dataset consisting of Train and Validation \
                     images of {config_name} images. \
-                    {_DATA_OPTIONS[config_name]}",
+                    {_DATA_OPTIONS[config_name]}',
                     version=tfds.core.Version('0.1.0'),
                     data=config_name,) for config_name in _DATA_OPTIONS
   ]
@@ -123,8 +123,8 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
           builder=self,
           description=_DESCRIPTION,
           features=tfds.features.FeaturesDict({
-              "image": tfds.features.Image(shape=(128, 128, 1),
-                                           encoding_format="jpeg")
+              'image': tfds.features.Image(shape=(128, 128, 1),
+                                           encoding_format='jpeg')
           }),
           supervised_keys=None,
           # Homepage of the dataset for documentation
@@ -136,8 +136,8 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
           builder=self,
           description=_DESCRIPTION,
           features=tfds.features.FeaturesDict({
-              "image": tfds.features.Image(shape=(None, None, 1),
-                                           encoding_format="jpeg")
+              'image': tfds.features.Image(shape=(None, None, 1),
+                                           encoding_format='jpeg')
           }),
           supervised_keys=None,
           # Homepage of the dataset for documentation
@@ -149,8 +149,8 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
           builder=self,
           description=_DESCRIPTION,
           features=tfds.features.FeaturesDict({
-              "image": tfds.features.Image(shape=(None, None, 1),
-                                           encoding_format="png",
+              'image': tfds.features.Image(shape=(None, None, 1),
+                                           encoding_format='png',
                                            dtype=tf.uint16)
           }),
           supervised_keys=None,
@@ -182,12 +182,12 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "images_dir_path": data_dirs[train_key],
+                'images_dir_path': data_dirs[train_key],
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "images_dir_path": data_dirs[valid_key],
+                'images_dir_path': data_dirs[valid_key],
             }),
     ]
 
@@ -203,4 +203,4 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
     """
     for filename in tf.io.gfile.listdir(images_dir_path):
       image_path = os.path.join(images_dir_path, filename)
-      yield filename, {"image": image_path}
+      yield filename, {'image': image_path}
