@@ -140,6 +140,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, audio_path, label_path):
     """Generate Voice samples and statements given the data paths.
+    
     Args:
       audio_path: str, path to audio storage folder
       label_path: str, path to the label files
