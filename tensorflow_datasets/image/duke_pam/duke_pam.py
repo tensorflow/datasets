@@ -168,10 +168,10 @@ class DukePAM(tfds.core.GeneratorBasedBuilder):
     Returns:
       tuple: Tuple with Train and Valid `tfds.core.SplitGenerator` objects.
     """
-    train_url = f'{_DATASET_URL}/{self.builder_config.name} \
-                  _train.zip?download=1'
-    valid_url = f'{_DATASET_URL}/{self.builder_config.name} \
-                  _valid.zip?download=1'
+    train_url = f'{_DATASET_URL}/{self.builder_config.name}' +
+                 '_train.zip?download=1'
+    valid_url = f'{_DATASET_URL}/{self.builder_config.name}' +
+                 '_valid.zip?download=1'
     data_dirs = dl_manager.download_and_extract({
         f'{self.builder_config.name}_train': train_url,
         f'{self.builder_config.name}_valid': valid_url,
