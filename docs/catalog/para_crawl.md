@@ -11,11 +11,6 @@
 
 # `para_crawl`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Web-Scale Parallel Corpora for Official European Languages.
@@ -44,7 +39,7 @@ Web-Scale Parallel Corpora for Official European Languages.
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-## para_crawl/enbg (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enbg (default config)
 
 *   **Config description**: Translation dataset from English to bg.
 
@@ -109,7 +104,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/encs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/encs
 
 *   **Config description**: Translation dataset from English to cs.
 
@@ -174,7 +169,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enda <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enda
 
 *   **Config description**: Translation dataset from English to da.
 
@@ -239,7 +234,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ende <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ende
 
 *   **Config description**: Translation dataset from English to de.
 
@@ -304,7 +299,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enel <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enel
 
 *   **Config description**: Translation dataset from English to el.
 
@@ -369,7 +364,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enes <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enes
 
 *   **Config description**: Translation dataset from English to es.
 
@@ -434,7 +429,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enet <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enet
 
 *   **Config description**: Translation dataset from English to et.
 
@@ -499,7 +494,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enfi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enfi
 
 *   **Config description**: Translation dataset from English to fi.
 
@@ -564,7 +559,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enfr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enfr
 
 *   **Config description**: Translation dataset from English to fr.
 
@@ -629,7 +624,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enga <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enga
 
 *   **Config description**: Translation dataset from English to ga.
 
@@ -694,7 +689,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enhr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enhr
 
 *   **Config description**: Translation dataset from English to hr.
 
@@ -759,7 +754,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enhu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enhu
 
 *   **Config description**: Translation dataset from English to hu.
 
@@ -824,7 +819,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enit <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enit
 
 *   **Config description**: Translation dataset from English to it.
 
@@ -889,7 +884,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enlt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enlt
 
 *   **Config description**: Translation dataset from English to lt.
 
@@ -954,7 +949,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enlv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enlv
 
 *   **Config description**: Translation dataset from English to lv.
 
@@ -1019,7 +1014,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enmt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enmt
 
 *   **Config description**: Translation dataset from English to mt.
 
@@ -1084,7 +1079,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ennl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ennl
 
 *   **Config description**: Translation dataset from English to nl.
 
@@ -1149,7 +1144,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enpl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enpl
 
 *   **Config description**: Translation dataset from English to pl.
 
@@ -1214,7 +1209,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enpt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enpt
 
 *   **Config description**: Translation dataset from English to pt.
 
@@ -1279,7 +1274,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enro
 
 *   **Config description**: Translation dataset from English to ro.
 
@@ -1344,7 +1339,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ensk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ensk
 
 *   **Config description**: Translation dataset from English to sk.
 
@@ -1409,7 +1404,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ensl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ensl
 
 *   **Config description**: Translation dataset from English to sl.
 
@@ -1474,7 +1469,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ensv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ensv
 
 *   **Config description**: Translation dataset from English to sv.
 

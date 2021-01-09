@@ -45,10 +45,10 @@ Install the development dependencies:
 
 ```sh
 pip install -e .  # Install minimal deps to use tensorflow_datasets
-pip install -e .[dev]  # Install all deps required for testing and development
+pip install -e ".[dev]"  # Install all deps required for testing and development
 ```
 
-Note there is also a `pip install -e .[tests-all]` to install all
+Note there is also a `pip install -e ".[tests-all]"` to install all
 dataset-specific deps.
 
 ### Visual Studio Code
@@ -115,9 +115,9 @@ likelly have to manually apply fixes afterward.
 yapf tensorflow_datasets/core/some_file.py
 ```
 
-Both `pylint` and `yapf` should have been installed with `pip install -e .[dev]`
-but can also be manually installed with `pip install`. If you're using VS Code,
-those tools should be integrated in the UI.
+Both `pylint` and `yapf` should have been installed with `pip install -e
+".[dev]"` but can also be manually installed with `pip install`. If you're using
+VS Code, those tools should be integrated in the UI.
 
 ### Docstrings and typing annotations
 

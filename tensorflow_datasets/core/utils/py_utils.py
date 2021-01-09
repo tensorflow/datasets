@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
 import base64
 import contextlib
 import functools
-import hashlib
 import io
 import itertools
 import logging
@@ -39,7 +38,6 @@ from six.moves import urllib
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import units
 from tensorflow_datasets.core.utils import type_utils
 
 Tree = type_utils.Tree
@@ -330,24 +328,6 @@ def atomic_write(path, mode):
   with tf.io.gfile.GFile(tmp_path, mode) as file_:
     yield file_
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
-
-
-def read_checksum_digest(
-    path: type_utils.PathLike,
-    checksum_cls=hashlib.sha256,
-) -> Tuple[str, units.Size]:
-  """Given a hash constructor, returns checksum digest and size of file."""
-  checksum = checksum_cls()
-  size = 0
-  with tf.io.gfile.GFile(os.fspath(path), 'rb') as f:
-    while True:
-      block = f.read(io.DEFAULT_BUFFER_SIZE)
-      size += len(block)
-      if not block:
-        break
-      checksum.update(block)
-  # base64 digest would have been better.
-  return checksum.hexdigest(), units.Size(size)
 
 
 def reraise(

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -284,7 +284,19 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Used:
     # * To load the checksums (in url_infos)
     # * To save the checksums (in DownloadManager)
-    return cls.code_path.parent / "checksums.tsv"
+    new_path = cls.code_path.parent / "checksums.tsv"
+    # Checksums of legacy datasets are located in a separate dir.
+    legacy_path = utils.tfds_path() / "url_checksums" / f"{cls.name}.txt"
+    if (
+        # zipfile.Path does not have `.parts`. Additionally, `os.fspath`
+        # will extract the file, so use `str`.
+        "tensorflow_datasets" in str(new_path)
+        and legacy_path.exists()
+        and not new_path.exists()
+    ):
+      return legacy_path
+    else:
+      return new_path
 
   @utils.classproperty
   @classmethod
@@ -423,7 +435,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
         if (download_config.try_download_gcs and
             gcs_utils.is_dataset_on_gcs(self.info.full_name)):
-          logging.warning(GCS_HOSTED_MSG, self.name)
+          logging.info(GCS_HOSTED_MSG, self.name)
           gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:

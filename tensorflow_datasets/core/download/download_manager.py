@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -734,7 +734,7 @@ def _validate_checksums(
   if force_checksums_validation:
     # Checksum of the downloaded file unknown (for manually downloaded file)
     if not computed_url_info:
-      computed_url_info = utils.read_checksum_digest(path)
+      computed_url_info = checksums.compute_url_info(path)
     # Checksums have not been registered
     if not expected_url_info:
       raise ValueError(

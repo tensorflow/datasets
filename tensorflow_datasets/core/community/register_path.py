@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -110,6 +110,12 @@ class DataDirRegister(register_base.BaseRegister):
         data_dir=self._ns2data_dir[name.namespace],
         **builder_kwargs,
     )
+
+  def get_builder_root_dir(
+      self, name: utils.DatasetName
+  ) -> utils.ReadWritePath:
+    """Returns root dir of the generated builder (without version/config)."""
+    return self._ns2data_dir[name.namespace] / name.name
 
 
 def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:

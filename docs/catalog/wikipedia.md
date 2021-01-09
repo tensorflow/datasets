@@ -59,1625 +59,3951 @@ FeaturesDict({
 
 *   **Config description**: Wikipedia dataset for aa, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `45.29 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.46 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.aa-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ab
 
 *   **Config description**: Wikipedia dataset for ab, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.80 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,136
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ab-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ace
 
 *   **Config description**: Wikipedia dataset for ace, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.17 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,561
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ace-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ady
 
 *   **Config description**: Wikipedia dataset for ady, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `457.46 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `515.14 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 562
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ady-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.af
 
 *   **Config description**: Wikipedia dataset for af, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `111.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `192.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 117,154
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.af-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ak
 
 *   **Config description**: Wikipedia dataset for ak, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `680.35 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `732.95 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,424
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ak-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.als
 
 *   **Config description**: Wikipedia dataset for als, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `52.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `70.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 29,826
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.als-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.am
 
 *   **Config description**: Wikipedia dataset for am, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `17.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,502
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.am-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.an
 
 *   **Config description**: Wikipedia dataset for an, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `34.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `48.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 53,071
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.an-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ang
 
 *   **Config description**: Wikipedia dataset for ang, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.32 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.46 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,360
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ang-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ar
 
 *   **Config description**: Wikipedia dataset for ar, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.22 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.32 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,049,549
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ar-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.arc
 
 *   **Config description**: Wikipedia dataset for arc, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.09 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `851.19 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,534
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.arc-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.arz
 
 *   **Config description**: Wikipedia dataset for arz, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `153.51 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `851.84 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,182,669
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.arz-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.as
 
 *   **Config description**: Wikipedia dataset for as, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.77 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `48.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,643
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.as-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ast
 
 *   **Config description**: Wikipedia dataset for ast, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `218.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `447.75 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 116,833
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ast-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.atj
 
 *   **Config description**: Wikipedia dataset for atj, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `602.22 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `756.58 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,424
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.atj-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.av
 
 *   **Config description**: Wikipedia dataset for av, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.27 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.54 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,173
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.av-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ay
 
 *   **Config description**: Wikipedia dataset for ay, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.26 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.14 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,253
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ay-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.az
 
 *   **Config description**: Wikipedia dataset for az, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `200.75 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `344.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 203,051
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.az-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.azb
 
 *   **Config description**: Wikipedia dataset for azb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `91.79 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `156.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 265,450
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.azb-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ba
 
 *   **Config description**: Wikipedia dataset for ba, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `72.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `207.55 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 61,290
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ba-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bar
 
 *   **Config description**: Wikipedia dataset for bar, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `33.42 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `41.25 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 46,935
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bar-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bat-smg
 
 *   **Config description**: Wikipedia dataset for bat-smg, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.91 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 19,779
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bat-smg-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bcl
 
 *   **Config description**: Wikipedia dataset for bcl, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `10.22 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.45 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,763
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bcl-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.be
 
 *   **Config description**: Wikipedia dataset for be, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `224.26 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `465.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 198,957
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.be-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.be-x-old
 
 *   **Config description**: Wikipedia dataset for be-x-old, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `84.30 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `187.21 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 103,888
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.be-x-old-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bg
 
 *   **Config description**: Wikipedia dataset for bg, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `362.31 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `909.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 387,980
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bg-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bh
 
 *   **Config description**: Wikipedia dataset for bh, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.57 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,395
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bh-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bi
 
 *   **Config description**: Wikipedia dataset for bi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `461.56 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `306.05 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,406
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bi-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bjn
 
 *   **Config description**: Wikipedia dataset for bjn, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.44 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,790
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bjn-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bm
 
 *   **Config description**: Wikipedia dataset for bm, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `602.51 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `353.23 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 754
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bm-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bn
 
 *   **Config description**: Wikipedia dataset for bn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `223.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `594.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 156,991
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bn-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bo
 
 *   **Config description**: Wikipedia dataset for bo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `13.32 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `117.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,670
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bo-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bpy
 
 *   **Config description**: Wikipedia dataset for bpy, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.23 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `39.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 25,475
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bpy-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.br
 
 *   **Config description**: Wikipedia dataset for br, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `52.28 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `74.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 79,725
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.br-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bs
 
 *   **Config description**: Wikipedia dataset for bs, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `117.25 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `159.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 190,059
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bs-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bug
 
 *   **Config description**: Wikipedia dataset for bug, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,424
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bug-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.bxr
 
 *   **Config description**: Wikipedia dataset for bxr, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,665
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.bxr-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ca
 
 *   **Config description**: Wikipedia dataset for ca, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `947.73 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.57 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 740,415
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ca-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cbk-zam
 
 *   **Config description**: Wikipedia dataset for cbk-zam, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.23 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,479
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cbk-zam-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cdo
 
 *   **Config description**: Wikipedia dataset for cdo, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.46 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 16,879
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cdo-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ce
 
 *   **Config description**: Wikipedia dataset for ce, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `60.74 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `323.18 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 349,688
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ce-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ceb
 
 *   **Config description**: Wikipedia dataset for ceb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.87 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.69 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,377,442
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ceb-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ch
 
 *   **Config description**: Wikipedia dataset for ch, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `723.85 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `168.11 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 544
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ch-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cho
 
 *   **Config description**: Wikipedia dataset for cho, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `27.02 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.44 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cho-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.chr
 
 *   **Config description**: Wikipedia dataset for chr, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `659.67 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `641.72 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 969
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.chr-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.chy
 
 *   **Config description**: Wikipedia dataset for chy, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `353.22 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `116.82 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 783
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.chy-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ckb
 
 *   **Config description**: Wikipedia dataset for ckb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `31.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `55.92 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 30,058
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ckb-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.co
 
 *   **Config description**: Wikipedia dataset for co, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.14 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,617
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.co-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cr
 
 *   **Config description**: Wikipedia dataset for cr, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `287.29 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `65.23 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 135
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cr-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.crh
 
 *   **Config description**: Wikipedia dataset for crh, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.79 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,237
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.crh-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cs
 
 *   **Config description**: Wikipedia dataset for cs, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `882.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.22 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 603,353
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cs-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.csb
 
 *   **Config description**: Wikipedia dataset for csb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,727
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.csb-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cu
 
 *   **Config description**: Wikipedia dataset for cu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `695.33 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `706.87 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,592
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cu-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cv
 
 *   **Config description**: Wikipedia dataset for cv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `25.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `63.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 48,049
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cv-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.cy
 
 *   **Config description**: Wikipedia dataset for cy, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `78.15 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `114.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 173,604
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.cy-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.da
 
 *   **Config description**: Wikipedia dataset for da, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `356.47 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `471.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 263,308
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.da-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.de
 
 *   **Config description**: Wikipedia dataset for de, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.58 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.85 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,229,667
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.de-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.din
 
 *   **Config description**: Wikipedia dataset for din, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `506.05 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `486.08 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 303
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.din-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.diq
 
 *   **Config description**: Wikipedia dataset for diq, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 42,014
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.diq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.dsb
 
 *   **Config description**: Wikipedia dataset for dsb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.13 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,541
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.dsb-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.dty
 
 *   **Config description**: Wikipedia dataset for dty, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,584
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.dty-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.dv
 
 *   **Config description**: Wikipedia dataset for dv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.36 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.42 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,271
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.dv-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.dz
 
 *   **Config description**: Wikipedia dataset for dz, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `386.98 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `800.32 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 290
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.dz-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ee
 
 *   **Config description**: Wikipedia dataset for ee, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `478.59 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `217.86 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 385
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ee-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.el
 
 *   **Config description**: Wikipedia dataset for el, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `390.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1008.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 259,509
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.el-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.eml
 
 *   **Config description**: Wikipedia dataset for eml, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.58 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,658
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.eml-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.en
 
 *   **Config description**: Wikipedia dataset for en, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.70 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `17.76 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,210,110
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.en-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.eo
 
 *   **Config description**: Wikipedia dataset for eo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `281.09 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `427.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 398,951
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.eo-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.es
 
 *   **Config description**: Wikipedia dataset for es, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.38 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.84 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,943,343
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.es-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.et
 
 *   **Config description**: Wikipedia dataset for et, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `223.58 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `369.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 328,713
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.et-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.eu
 
 *   **Config description**: Wikipedia dataset for eu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `214.93 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `417.98 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 463,673
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.eu-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ext
 
 *   **Config description**: Wikipedia dataset for ext, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.55 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,536
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ext-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.fa
 
 *   **Config description**: Wikipedia dataset for fa, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `850.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.45 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,427,541
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.fa-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.ff
 
 *   **Config description**: Wikipedia dataset for ff, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `516.43 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `524.57 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 364
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia-20201201.ff-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikipedia/20201201.fi
 
 *   **Config description**: Wikipedia dataset for fi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `744.51 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `964.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 682,734
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1688,18 +4014,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for fiu-vro, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.46 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,266
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1709,18 +4036,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for fj, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.90 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `456.89 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,118
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1730,18 +4058,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for fo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,453
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1751,18 +4080,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for fr, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.75 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.34 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,274,691
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1773,18 +4103,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for frp, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.60 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.95 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,125
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1795,18 +4126,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for frr, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.78 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.88 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,251
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1817,18 +4149,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for fur, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,658
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1838,18 +4171,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for fy, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `53.07 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `100.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 44,749
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1859,18 +4193,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ga, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `29.73 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `46.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 61,009
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1881,18 +4216,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for gag, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.07 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,021
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1903,18 +4239,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for gan, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.91 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.45 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,525
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1924,18 +4261,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for gd, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,270
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1945,18 +4283,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for gl, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `268.72 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `397.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 226,449
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1967,18 +4306,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for glk, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.46 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,001
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1988,18 +4328,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for gn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,887
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2010,18 +4351,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for gom, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `29.64 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,482
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2032,18 +4374,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for gor, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.02 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.37 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,335
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2054,18 +4397,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for got, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `699.97 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 955
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2075,18 +4419,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for gu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `29.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `108.56 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 29,449
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2096,18 +4441,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for gv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.47 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,036
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2117,18 +4463,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ha, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,017
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2139,18 +4486,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for hak, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,053
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2161,18 +4509,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for haw, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.26 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,516
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2182,18 +4531,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for he, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `690.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.48 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 454,321
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2203,18 +4553,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for hi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `166.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `545.88 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 178,324
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2225,18 +4576,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for hif, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,118
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2246,18 +4598,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ho, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `19.30 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.27 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2267,18 +4620,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for hr, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `277.38 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `408.92 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 254,662
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2289,18 +4643,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for hsb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `10.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `14.61 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,025
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2310,18 +4665,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ht, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.39 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 61,756
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2331,18 +4687,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for hu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `909.08 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.25 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 673,740
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2352,18 +4709,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for hy, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `357.39 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `967.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 627,523
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2373,18 +4731,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ia, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.15 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 20,254
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2394,18 +4753,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for id, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `658.39 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `865.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,077,758
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2415,18 +4775,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ie, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,272
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2436,18 +4797,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ig, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.14 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,426
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2457,18 +4819,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ii, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `31.96 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.31 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2478,18 +4841,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ik, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `257.86 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `93.95 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 668
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2500,18 +4864,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for ilo, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.14 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `15.81 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,390
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2522,18 +4887,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for inh, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.98 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.34 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,017
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2543,18 +4909,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for io, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `13.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `30.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 31,448
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2564,18 +4931,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for is, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `47.31 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `73.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 73,114
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2585,18 +4953,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for it, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.03 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.91 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,001,603
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2606,18 +4975,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for iu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `311.91 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `148.25 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 587
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2627,18 +4997,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ja, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.14 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.61 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,529,692
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2649,18 +5020,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for jam, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `925.16 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.01 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,720
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2671,18 +5043,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for jbo, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.13 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,330
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2692,18 +5065,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for jv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `46.35 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `57.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 79,598
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2713,18 +5087,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ka, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `159.31 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `543.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 182,623
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2735,18 +5110,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for kaa, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.44 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,197
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2757,18 +5133,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for kab, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.55 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,058
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2779,18 +5156,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for kbd, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.69 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,607
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2801,18 +5179,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for kbp, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.40 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,915
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2822,18 +5201,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kg, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `484.12 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `292.64 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,271
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2843,18 +5223,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ki, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `390.92 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `309.05 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,486
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2864,18 +5245,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kj, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.54 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.93 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2885,18 +5267,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kk, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `120.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `424.64 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 270,628
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2906,18 +5289,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kl, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `654.67 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `447.23 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 867
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2927,18 +5311,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for km, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `25.74 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `150.43 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 11,995
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2948,18 +5333,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `76.13 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `333.31 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,325
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2969,18 +5355,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ko, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `747.33 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.09 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,139,678
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2991,18 +5378,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for koi, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.26 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,967
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3013,18 +5401,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for krc, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.25 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,341
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3034,18 +5423,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ks, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `363.64 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `199.02 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 509
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3056,18 +5446,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for ksh, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.92 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,409
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3077,18 +5468,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ku, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `21.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `28.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 43,802
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3098,18 +5490,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.58 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,790
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3119,18 +5512,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for kw, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.42 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.15 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,524
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3140,18 +5534,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ky, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `34.15 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `147.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 79,798
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3161,18 +5556,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for la, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `89.33 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `128.71 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 134,356
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3183,18 +5579,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lad, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.41 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,957
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3204,18 +5601,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for lb, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `49.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `78.17 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 65,562
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3226,18 +5624,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lbe, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.39 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `644.30 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,554
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3248,18 +5647,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lez, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.75 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.89 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3270,18 +5670,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lfn, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,647
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3291,18 +5692,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for lg, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.69 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,405
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3312,18 +5714,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for li, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `26.01 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,238
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3334,18 +5737,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lij, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.94 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,441
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3356,18 +5760,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lmo, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.17 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `32.41 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 51,386
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3377,18 +5782,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ln, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.94 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.69 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,294
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3398,18 +5804,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for lo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,536
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3420,18 +5827,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for lrc, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.94 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.63 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,216
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3441,18 +5849,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for lt, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `188.31 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `293.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 226,648
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3463,18 +5872,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for ltg, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `900.39 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `860.83 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,005
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3484,18 +5894,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for lv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `145.93 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `179.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 104,487
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3506,18 +5917,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mai, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.77 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.57 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,891
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3528,18 +5940,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for map-bms, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.67 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,882
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3550,18 +5963,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mdf, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.21 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.75 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,363
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3571,18 +5985,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mg, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `27.85 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `63.42 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 129,968
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3592,18 +6007,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mh, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `28.69 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.04 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3614,18 +6030,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mhr, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.15 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.94 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3635,18 +6052,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.04 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.51 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,203
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3657,18 +6075,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for min, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `29.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `99.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 228,196
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3678,18 +6097,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mk, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `166.60 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `465.95 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 150,831
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3699,18 +6119,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ml, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `143.17 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `369.54 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 131,128
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3720,18 +6141,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `32.25 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `73.71 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 25,077
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3741,18 +6163,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mr, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `58.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `170.52 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 112,917
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3763,18 +6186,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mrj, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.29 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,810
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3784,18 +6208,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ms, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `250.50 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `341.93 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 386,945
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3805,18 +6230,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for mt, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.06 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.35 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,967
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3827,18 +6253,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mus, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.13 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `875 bytes`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3849,18 +6276,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mwl, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.37 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,400
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3870,18 +6298,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for my, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `42.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `195.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 54,562
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3892,18 +6321,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for myv, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,155
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3914,18 +6344,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for mzn, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.80 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 18,599
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3935,18 +6366,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for na, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `531.75 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `357.01 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,576
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3957,18 +6389,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nah, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.51 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 10,714
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3979,18 +6412,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nap, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.31 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.91 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,278
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4001,18 +6435,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nds, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `42.06 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `85.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 87,896
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4023,18 +6458,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nds-nl, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.39 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,429
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4044,18 +6480,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ne, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `37.50 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `88.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,310
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4066,18 +6503,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for new, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.27 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `140.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 72,998
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4087,18 +6525,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ng, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `92.26 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `66.12 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 21
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4108,18 +6547,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for nl, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.53 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.21 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,523,440
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4129,18 +6569,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for nn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `139.43 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `208.84 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 231,090
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4150,18 +6591,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for no, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `649.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `890.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 847,202
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4172,18 +6614,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nov, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `810.66 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,792
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4194,18 +6637,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nrm, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.86 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,541
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4216,18 +6660,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for nso, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.12 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,282
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4237,18 +6682,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for nv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.32 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 15,855
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4258,18 +6704,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ny, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `963.44 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 850
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4279,18 +6726,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for oc, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `75.53 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `111.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 94,068
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4301,18 +6749,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for olo, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.61 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,508
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4322,18 +6771,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for om, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.26 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.70 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,163
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4343,18 +6793,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for or, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `28.60 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `59.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 31,029
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4364,18 +6815,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for os, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.08 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.88 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,964
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4385,18 +6837,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for pa, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `49.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `129.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 44,984
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4407,18 +6860,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pag, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.66 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,942
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4429,18 +6883,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pam, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.11 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.38 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,794
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4451,18 +6906,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pap, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.50 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,179
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4473,18 +6929,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pcd, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.89 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,113
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4495,18 +6952,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pdc, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,424
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4517,18 +6975,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pfl, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.51 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.43 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,933
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4538,18 +6997,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for pi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `631.83 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.05 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,074
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4560,18 +7020,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pih, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `750.70 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `230.96 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 844
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4581,18 +7042,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for pl, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.98 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.46 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,765,088
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4603,18 +7065,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pms, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `13.90 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `30.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 66,115
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4625,18 +7088,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pnb, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `72.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `209.71 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 64,698
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4647,18 +7111,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for pnt, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `549.36 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `590.82 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 532
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4668,18 +7133,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ps, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `21.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `46.15 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,138
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4689,18 +7155,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for pt, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.79 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.24 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,491,646
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4710,18 +7177,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for qu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.49 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `15.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 31,387
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4731,18 +7199,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for rm, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.52 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,863
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4753,18 +7222,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for rmy, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `553.83 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `396.09 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 733
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4774,18 +7244,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for rn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `815.81 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `361.36 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 713
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4795,18 +7266,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ro, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `502.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `693.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 414,477
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4817,18 +7289,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for roa-rup, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1002.33 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,260
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4839,18 +7312,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for roa-tara, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.37 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,375
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4860,18 +7334,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ru, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.02 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.08 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,732,016
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4882,18 +7357,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for rue, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.41 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.82 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,503
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4903,18 +7379,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for rw, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.21 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4924,18 +7401,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sa, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `58.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 22,040
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4946,18 +7424,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for sah, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `13.61 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `35.90 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 16,796
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4968,18 +7447,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for sat, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `10.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `23.52 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,480
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4989,18 +7469,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sc, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.11 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.70 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,970
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5011,18 +7492,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for scn, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.53 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 31,416
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5033,18 +7515,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for sco, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `57.27 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `47.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 42,615
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5054,18 +7537,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sd, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `31.18 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 20,282
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5075,18 +7559,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for se, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,561
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5096,18 +7581,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sg, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `313.06 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `93.31 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 295
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5117,18 +7603,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sh, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `423.87 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `822.87 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,935,417
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5138,18 +7625,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for si, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `41.32 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `112.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,846
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5160,18 +7648,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for simple, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `193.55 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `197.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 177,615
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5181,18 +7670,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sk, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `275.53 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `356.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 253,372
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5202,18 +7692,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sl, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `228.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `360.64 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 202,357
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5223,18 +7714,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sm, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `839.52 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `750.10 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,023
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5244,18 +7736,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.90 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,779
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5265,18 +7758,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for so, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.13 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,979
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5286,18 +7780,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sq, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `92.58 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `153.56 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 111,846
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5307,18 +7802,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sr, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `825.89 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.58 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,116,253
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5329,18 +7825,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for srn, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `655.77 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `614.35 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,253
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5350,18 +7847,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ss, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `827.67 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `490.69 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 554
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5371,18 +7869,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for st, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `673.61 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `580.35 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,136
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5393,18 +7892,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for stq, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.44 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,510
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5414,18 +7914,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for su, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `25.46 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `40.87 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 66,493
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5435,18 +7936,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sv, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.67 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.79 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,750,968
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5456,18 +7958,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for sw, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `33.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `52.26 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 60,185
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5478,18 +7981,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for szl, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `17.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 53,270
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5499,18 +8003,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ta, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `165.13 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `632.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 167,112
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5521,18 +8026,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for tcy, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,684
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5542,18 +8048,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for te, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `110.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `591.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 94,652
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5564,18 +8071,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for tet, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.25 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,602
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5585,18 +8093,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tg, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `42.76 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `110.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 105,298
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5606,18 +8115,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for th, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `290.74 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `823.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 245,869
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5627,18 +8137,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ti, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `533.37 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `376.02 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 369
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5648,18 +8159,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tk, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.03 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.63 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,122
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5669,18 +8181,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tl, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `61.86 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `66.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 64,930
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5690,18 +8203,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tn, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.42 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 834
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5711,18 +8225,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for to, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `818.38 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `921.00 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,628
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5733,18 +8248,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for tpi, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `408.34 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,656
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5754,18 +8270,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tr, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `613.30 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `724.38 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 624,333
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5775,18 +8292,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ts, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `713.63 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 713
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5796,18 +8314,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tt, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `75.07 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `248.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 278,882
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5818,18 +8337,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for tum, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `352.25 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `231.66 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 718
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5839,18 +8359,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for tw, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `449.69 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `339.91 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 782
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5860,18 +8381,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ty, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `517.96 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `260.86 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5882,18 +8404,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for tyv, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,779
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5904,18 +8427,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for udm, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.39 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,191
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5925,18 +8449,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ug, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `36.13 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,258
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5946,18 +8471,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for uk, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.60 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.66 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,611,728
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5967,18 +8493,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ur, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `162.89 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `264.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 350,090
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5988,18 +8515,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for uz, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `67.47 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `99.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 158,823
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6009,18 +8537,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for ve, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `283.99 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `219.86 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 446
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6031,18 +8560,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for vec, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `21.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `28.21 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 71,790
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6053,18 +8583,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for vep, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.30 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,027
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6074,18 +8605,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for vi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `793.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.32 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,465,721
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6096,18 +8628,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for vls, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.03 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.33 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,778
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6117,18 +8650,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for vo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `80.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 125,494
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6138,18 +8672,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for wa, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 14,373
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6160,18 +8695,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for war, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `263.43 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `412.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,264,845
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6181,18 +8717,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for wo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.25 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,664
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6203,18 +8740,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for wuu, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.28 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 42,762
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6225,18 +8763,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for xal, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.17 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,801
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6246,18 +8785,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for xh, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.52 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,373
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6268,18 +8808,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for xmf, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.13 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `26.69 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 16,061
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6289,18 +8830,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for yi, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `33.30 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 25,227
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6310,18 +8852,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for yo, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.22 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,548
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6331,18 +8874,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for za, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `791.45 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `721.42 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,496
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6353,18 +8897,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for zea, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.46 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,599
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6374,18 +8919,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for zh, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.05 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.08 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,670,356
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6396,18 +8942,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for zh-classical, parsed from
     20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.89 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 12,237
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6418,18 +8965,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for zh-min-nan, parsed from
     20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `73.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `130.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 448,229
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6440,18 +8988,19 @@ Split | Examples
 *   **Config description**: Wikipedia dataset for zh-yue, parsed from 20201201
     dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `67.14 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `71.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 103,834
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6461,18 +9010,19 @@ Split | Examples
 
 *   **Config description**: Wikipedia dataset for zu, parsed from 20201201 dump.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.43 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,359
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

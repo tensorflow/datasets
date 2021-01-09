@@ -11,11 +11,6 @@
 
 # `coil100`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The dataset contains 7200 color images of 100 objects (72 images per object).
@@ -34,10 +29,8 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
 *   **Versions**:
 
     *   `1.0.0`: Initial release
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Change features (`object_id` is now `ClassLabel`, rename `label` ->
-        `angle_label`, add `angle`)
+    *   **`2.0.0`** (default): Change features (`object_id` is now `ClassLabel`,
+        rename `label` -> `angle_label`, add `angle`)
 
 *   **Download size**: `124.63 MiB`
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -367,8 +367,8 @@ def _iter_single_full_names(
   if builder_cls.BUILDER_CONFIGS:
     for config in builder_cls.BUILDER_CONFIGS:
       for v in _get_all_versions(
-          config.version,
-          config.supported_versions,
+          config.version or builder_cls.VERSION,
+          config.supported_versions or builder_cls.SUPPORTED_VERSIONS,
           current_version_only=current_version_only,
       ):
         yield posixpath.join(builder_name, config.name, v)
