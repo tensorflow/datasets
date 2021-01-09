@@ -480,7 +480,7 @@ class FeatureConnector(object):
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
-    return _repr_html(ex)
+    return _repr_html_batch(ex)
 
   def repr_html_ragged(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Nested sequence)."""
@@ -724,17 +724,23 @@ def get_inner_feature_repr(feature):
   else:
     return repr(feature)
 
+def _repr_html_batch(ex) -> str:
+  """Default HTML batch repr."""
+  batch_ex = ''
+  for value in ex:
+    batch_ex += _repr_html(value) + ', '
+  return ("<div style='overflow-x: scroll;"
+              "white-space: nowrap; width: 90px;"
+              "padding:2em 0em 2em 0em; float: right'>"
+              f"{type(ex).__qualname__}([{batch_ex[:-2]}])"
+              "</div>")
 
 def _repr_html(ex) -> str:
   """Default HTML repr."""
   if isinstance(ex, np.ndarray) and ex.size > 1:
     # Do not print individual values for array as it is slow
     # TODO(tfds): We could display a snippet, like the first/last tree items
-    return ("<div style='overflow-x: scroll;"
-              "white-space: nowrap; width: 90px;"
-              "padding:2em 0em 2em 0em; float: right'>"
-              f"{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})"
-              "</div>")
+    return f"{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})"
   return repr(ex)
 
 
