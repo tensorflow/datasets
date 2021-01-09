@@ -743,7 +743,6 @@ def _repr_html(ex) -> str:
     return f"{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})"
   return repr(ex)
 
-
 def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
   """Returns True if the shape can be an empty sequence with unknown shape."""
   # Normalize shape if running with `tf.compat.v1.disable_v2_tensorshape`
