@@ -730,10 +730,10 @@ def _repr_html_batch(ex) -> str:
   for value in ex:
     batch_ex += _repr_html(value) + ', '
   return ("<div style='overflow-x: scroll;"
-              "white-space: nowrap; width: 90px;"
-              "padding:2em 0em 2em 0em; float: right'>"
-              f"{type(ex).__qualname__}([{batch_ex[:-2]}])"
-              "</div>")
+          "white-space: nowrap; width: 90px;"
+          "padding:2em 0em 2em 0em; float: right'>"
+          f"{type(ex).__qualname__}([{batch_ex[:-2]}])" # exclude last ,[space]
+          "</div>")
 
 def _repr_html(ex) -> str:
   """Default HTML repr."""
