@@ -54,6 +54,7 @@ from tensorflow_datasets import summarization
 from tensorflow_datasets import text
 from tensorflow_datasets import translate
 from tensorflow_datasets import video
+from tensorflow_datasets import vision_language
 
 
 # Public API to create and generate a dataset
