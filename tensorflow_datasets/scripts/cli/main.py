@@ -84,6 +84,12 @@ def _normalize_flags(argv: List[str]) -> List[str]:
 
 def main(args: argparse.Namespace) -> None:
 
+  # From the CLI, all datasets are visible
+  tfds.core.visibility.set_availables([
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+      tfds.core.visibility.DatasetType.COMMUNITY_PUBLIC,
+  ])
+
   # By default, ABSL won't display any `logging.info` unless the
   # user explicitly set `--logtostderr`.
   # For usability, we activate by default the python log information, but

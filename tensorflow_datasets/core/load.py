@@ -30,6 +30,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -50,10 +51,6 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
     config_name=r'[\w\-\.]+',
     version=r'[0-9]+\.[0-9]+\.[0-9]+',
 ))
-
-
-# Variable to globally disable community datasets (e.g. inside tests)
-COMMUNITY_DATASET_DISABLED = False
 
 
 def list_builders(
@@ -381,16 +378,10 @@ def _iter_single_full_names(
       yield posixpath.join(builder_name, v)
 
 
-def _iter_full_names(
-    predicate_fn: Optional[PredicateFn],
-    current_version_only: bool,
-) -> Iterator[str]:
+def _iter_full_names(current_version_only: bool) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
   for builder_name in registered.list_imported_builders():
     builder_cls_ = builder_cls(builder_name)
-    # Only keep requested datasets
-    if predicate_fn is not None and not predicate_fn(builder_cls_):
-      continue
     for full_name in _iter_single_full_names(
         builder_name,
         builder_cls_,
@@ -399,27 +390,16 @@ def _iter_full_names(
       yield full_name
 
 
-_DEFAULT_PREDICATE_FN = None
-
-
-def list_full_names(
-    predicate_fn: Optional[PredicateFn] = _DEFAULT_PREDICATE_FN,
-    current_version_only: bool = False,
-) -> List[str]:
+def list_full_names(current_version_only: bool = False) -> List[str]:
   """Lists all registered datasets full_names.
 
   Args:
-    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
-      returns the dataset names which satisfy the predicate.
     current_version_only: If True, only returns the current version.
 
   Returns:
     The list of all registered dataset full names.
   """
-  return sorted(_iter_full_names(
-      predicate_fn=predicate_fn,
-      current_version_only=current_version_only,
-  ))
+  return sorted(_iter_full_names(current_version_only=current_version_only))
 
 
 def single_full_names(

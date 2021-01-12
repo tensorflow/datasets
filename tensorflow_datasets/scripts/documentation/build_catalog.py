@@ -49,6 +49,10 @@ def _parse_flags(_) -> argparse.Namespace:
 
 
 def main(args: argparse.Namespace):
+  tfds.core.visibility.set_availables([
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+  ])
+
   catalog_dir = args.catalog_dir or os.path.join(
       tfds.core.utils.tfds_write_path(),
       'docs',
