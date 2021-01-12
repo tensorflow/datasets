@@ -558,7 +558,7 @@ class FeatureConnector(object):
     ])
     ```
 
-    Will produce the following flattened output:
+    Will produce the following nested output:
     ```
     {
         'a': None,
