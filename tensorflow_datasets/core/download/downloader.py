@@ -92,7 +92,7 @@ def _filename_from_content_disposition(
         f'Error while parsing filename for: {content_disposition}\n'
         f'Multiple filename detected: {list(match)}'
     )
-  return match[0].rstrip()
+  return os.path.basename(match[0].rstrip())
 
 
 def _get_filename(response: Response) -> str:
