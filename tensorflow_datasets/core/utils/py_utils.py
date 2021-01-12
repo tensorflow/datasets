@@ -464,7 +464,12 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
 
 def basename_from_url(url: str) -> str:
   """Returns file name of file at given url."""
-  return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
+  filename = urllib.parse.urlparse(url).path
+  filename = os.path.basename(filename)
+  # Replace `%2F` (html code for `/`) by `_`.
+  # This is consistent with how Chrome rename downloaded files.
+  filename = filename.replace('%2F', '_')
+  return filename or 'unknown_name'
 
 
 def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
