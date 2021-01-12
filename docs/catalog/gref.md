@@ -38,7 +38,7 @@ Unambiguous Object Descriptions.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.60 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -57,12 +57,14 @@ The coco_train2014 folder contains all of COCO 2014 training images.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 24,698
+`'validation'` | 4,650
 
 *   **Features**:
 
