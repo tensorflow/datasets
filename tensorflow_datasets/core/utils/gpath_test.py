@@ -39,7 +39,7 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
 
   gfile_fn_names = [
       'GFile',
-      # 'copy',
+      'copy',
       'exists',
       'glob',
       'isdir',
@@ -59,6 +59,9 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
       'tf.io.gfile',
       GFile=lambda p, *args, **kwargs: origin_gfile.GFile(  # pylint: disable=g-long-lambda
           _norm_path(p), *args, **kwargs
+      ),
+      copy=lambda p1, p2, **kwargs: origin_gfile.copy(  # pylint: disable=g-long-lambda
+          _norm_path(p1), _norm_path(p2), **kwargs
       ),
       exists=lambda p: origin_gfile.exists(_norm_path(p)),
       glob=lambda p: origin_gfile.glob(_norm_path(p)),
@@ -328,3 +331,19 @@ def test_replace(tmp_path: pathlib.Path):
   assert sorted(gpathlib.PosixGPath(tmp_path).iterdir()) == [
       tmp_path / 'mnist-100.py', tmp_path / 'tfds-dataset.py'
   ]
+
+
+@pytest.mark.usefixtures('gcs_mocked_path')
+def test_copy():
+  src_path = gpathlib.PosixGPath('gs://foo.py')
+  src_path.write_text('abc')
+
+  assert not src_path.parent.joinpath('bar.py').exists()
+  assert not src_path.parent.joinpath('bar2.py').exists()
+
+  src_path.copy('gs://bar.py')
+  src_path.copy(gpathlib.PosixGPath('gs://bar2.py'))
+
+  assert src_path.exists()
+  assert src_path.parent.joinpath('bar.py').read_text() == 'abc'
+  assert src_path.parent.joinpath('bar2.py').read_text() == 'abc'
