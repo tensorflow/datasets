@@ -24,7 +24,6 @@ import typing
 from typing import Any, AnyStr, ClassVar, Iterator, Optional, Type, TypeVar
 
 import tensorflow as tf
-
 from tensorflow_datasets.core.utils import type_utils
 
 
@@ -33,6 +32,7 @@ _P = TypeVar('_P')
 
 URI_PREFIXES = ('gs://', 's3://')
 _URI_SCHEMES = frozenset(('gs', 's3'))
+
 _URI_MAP_ROOT = {
     'gs://': '/gs/',
     's3://': '/s3/',
