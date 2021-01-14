@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -112,46 +112,78 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
 
 
 def test_dataset_name_and_kwargs_from_name_str():
-  assert naming.dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
-  assert naming.dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == (
+  assert naming._dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
+  assert naming._dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == (
       'ds1',
       {'version': '1.2.*'},
   )
-  assert naming.dataset_name_and_kwargs_from_name_str('ds1/config1') == (
+  assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1') == (
       'ds1', {'config': 'config1'}
   )
-  assert naming.dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
+  assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
       'ds1', {
           'config': 'config1',
           'version': '1.*.*'
       })
-  assert naming.dataset_name_and_kwargs_from_name_str(
+  assert naming._dataset_name_and_kwargs_from_name_str(
       'ds1/config1/arg1=val1,arg2=val2') == ('ds1', {
           'config': 'config1',
           'arg1': 'val1',
           'arg2': 'val2'
       })
-  assert naming.dataset_name_and_kwargs_from_name_str(
+  assert naming._dataset_name_and_kwargs_from_name_str(
       'ds1/config1:1.2.3/arg1=val1,arg2=val2') == ('ds1', {
           'config': 'config1',
           'version': '1.2.3',
           'arg1': 'val1',
           'arg2': 'val2'
       })
-  assert naming.dataset_name_and_kwargs_from_name_str('ds1/arg1=val1') == (
+  assert naming._dataset_name_and_kwargs_from_name_str('ds1/arg1=val1') == (
       'ds1', {
           'arg1': 'val1'
       })
 
 
+def dataset_name():
+  name = naming.DatasetName('ds1')
+  assert name.name == 'ds1'
+  assert name.namespace is None
+  assert str(name) == 'ds1'
+  assert repr(name) == "DatasetName('ds1')"
+
+  name = naming.DatasetName('namespace123:ds1')
+  assert name.name == 'ds1'
+  assert name.namespace == 'namespace123'
+  assert str(name) == 'namespace123:ds1'
+  assert repr(name) == "DatasetName('namespace123:ds1')"
+
+  name = naming.DatasetName(name='ds1', namespace='namespace123')
+  assert name.name == 'ds1'
+  assert name.namespace == 'namespace123'
+  assert str(name) == 'namespace123:ds1'
+  assert repr(name) == "DatasetName('namespace123:ds1')"
+
+  name = naming.DatasetName(name='ds1')
+  assert name.name == 'ds1'
+  assert name.namespace is None
+  assert str(name) == 'ds1'
+  assert repr(name) == "DatasetName('ds1')"
+
+  with pytest.raises(ValueError, match='Mixing args and kwargs'):
+    name = naming.DatasetName('namespace123', name='abc')
+
+
 @pytest.mark.parametrize(
     ['name', 'result'],
     [
-        ('ds1', (None, 'ds1', {})),
-        ('ds1:1.0.0', (None, 'ds1', {'version': '1.0.0'})),
-        ('ns1:ds1', ('ns1', 'ds1', {})),
-        ('ns1:ds1:1.0.0', ('ns1', 'ds1', {'version': '1.0.0'})),
-        ('ns1:ds1/conf:1.0.0', ('ns1', 'ds1', {
+        ('ds1', (naming.DatasetName('ds1'), {})),
+        ('ds1:1.0.0', (naming.DatasetName('ds1'), {'version': '1.0.0'})),
+        ('ns1:ds1', (naming.DatasetName('ns1:ds1'), {})),
+        (
+            'ns1:ds1:1.0.0',
+            (naming.DatasetName('ns1:ds1'), {'version': '1.0.0'}),
+        ),
+        ('ns1:ds1/conf:1.0.0', (naming.DatasetName('ns1:ds1'), {
             'version': '1.0.0',
             'config': 'conf',
         })),
@@ -164,10 +196,18 @@ def test_parse_builder_name_kwargs(name, result):
 def test_parse_builder_name_kwargs_with_kwargs():
   parse = naming.parse_builder_name_kwargs
 
-  assert parse('ds1', data_dir='/abc') == (None, 'ds1', {'data_dir': '/abc'})
+  assert parse('ds1', data_dir='/abc') == (
+      naming.DatasetName('ds1'), {'data_dir': '/abc'}
+  )
 
   with pytest.raises(TypeError, match='got multiple values for keyword arg'):
     parse('ds1:1.0.0', version='1.0.0')  # Version defined twice
 
   with pytest.raises(ValueError, match='Parsing builder name string .* failed'):
     parse('ds/config:ns:1.0.0')
+
+
+def test_is_valid_dataset_name():
+  assert naming.is_valid_dataset_name('dataset123_abc')
+  assert not naming.is_valid_dataset_name('dataset-abc')
+  assert not naming.is_valid_dataset_name('dataset.old')

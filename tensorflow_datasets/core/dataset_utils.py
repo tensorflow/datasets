@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,12 +40,24 @@ class _IterableDataset(collections.abc.Iterable):
   def __init__(
       self,
       make_iterator_fn: Callable[..., Iterator[NumpyElem]],
+      ds: Union[tf.data.Dataset, Any],
       *args: Any,
       **kwargs: Any,
   ):
+    self._ds = ds
     self._make_iterator_fn = functools.partial(
-        make_iterator_fn, *args, **kwargs
+        make_iterator_fn, ds, *args, **kwargs
     )
+
+  def __len__(self) -> int:
+    """Dataset length."""
+    if isinstance(self._ds, tf.data.Dataset):
+      return len(self._ds)
+    else:
+      raise TypeError(
+          '__len__() is not supported for `tfds.as_numpy` datasets '
+          'created in graph mode.'
+      )
 
   def __iter__(self) ->  Iterator[NumpyElem]:
     """Calling `iter(ds)` multiple times recreates a new iterator."""

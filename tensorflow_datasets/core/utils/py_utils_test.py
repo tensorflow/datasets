@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,13 +16,14 @@
 """Tests for py_utils."""
 
 import collections
-import hashlib
-import os
 import pathlib
+
+import pytest
 
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 
 
@@ -215,17 +216,6 @@ class PyUtilsTest(testing.TestCase):
         raise tf.errors.FailedPreconditionError(None, None, 'message')
 
 
-class ReadChecksumDigestTest(testing.TestCase):
-
-  def test_digest(self):
-    digest, size = py_utils.read_checksum_digest(
-        os.path.join(self.test_data, '6pixels.png'), hashlib.sha256)
-    self.assertEqual(
-        digest,
-        '04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c')
-    self.assertEqual(102, size)
-
-
 class GetClassPathUrlTest(testing.TestCase):
 
   def test_get_class_path(self):
@@ -301,3 +291,27 @@ def test_flatten_with_path():
       [v for _, v in _flatten_with_path(complex_dict)]
       == tf.nest.flatten(complex_dict)
   )
+
+
+@pytest.mark.parametrize(
+    ['url', 'filename'],
+    [
+        (
+            'http://test.com/appspot.com/tsvsWithoutLabels%2FAX.tsv?'
+            'Id=firebase&Expires=2498860800',
+            'tsvsWithoutLabels_AX.tsv'  # `%2F` -> `_`
+        ),
+    ]
+)
+def test_basename_from_url(url: str, filename: str):
+  assert utils.basename_from_url(url) == filename
+
+
+def test_incomplete_file(tmp_path: pathlib.Path):
+  tmp_path = utils.as_path(tmp_path)
+  filepath = tmp_path / 'test.txt'
+  with py_utils.incomplete_file(filepath) as tmp_filepath:
+    tmp_filepath.write_text('content')
+    assert not filepath.exists()
+  assert filepath.read_text() == 'content'
+  assert not tmp_filepath.exists()  # Tmp file is deleted

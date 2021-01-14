@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,6 +63,14 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
     # Iterating twice on the dataset recreate the iterator.
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+
+    if tf.executing_eagerly():
+      self.assertEqual(len(np_ds), 10)
+    else:
+      with self.assertRaisesWithPredicateMatch(
+          TypeError, "__len__() is not supported for `tfds.as_numpy`"
+      ):
+        _ = len(np_ds)
 
   def test_with_graph(self):
     with tf.Graph().as_default():

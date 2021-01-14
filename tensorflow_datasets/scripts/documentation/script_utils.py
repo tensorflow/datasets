@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -114,9 +114,7 @@ def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
     builder_names: The builder names.
   """
   if datasets is None:
-    return tfds.core.load.list_full_names(
-        current_version_only=True,
-    )
+    return tfds.core.load.list_full_names(current_version_only=True)
   else:
     builder_names = list(itertools.chain.from_iterable([
         tfds.core.load.single_full_names(builder_name)

@@ -67,5 +67,33 @@ class WikiAutoTestAUTOACL(tfds.testing.DatasetBuilderTestCase):
     'full': 5
   }
 
+class WikiAutoTestAUTOACLNOSPLIT(tfds.testing.DatasetBuilderTestCase):
+  """Tests for wiki_auto dataset for auto_acl configuration."""
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ['auto_full_no_split']
+  DATASET_CLASS = wiki_auto.WikiAuto
+
+  DL_EXTRACT_RESULT = {
+    'normal': 'auto_full_no_split/1.0.0/train.dst',
+    'simple': 'auto_full_no_split/1.0.0/train.src',
+  }
+  SPLITS = {
+    'full': 5
+  }
+
+class WikiAutoTestAUTOACLWITHSPLIT(tfds.testing.DatasetBuilderTestCase):
+  """Tests for wiki_auto dataset for auto_acl configuration."""
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ['auto_full_with_split']
+  DATASET_CLASS = wiki_auto.WikiAuto
+
+  DL_EXTRACT_RESULT = {
+    'normal': 'auto_full_with_split/1.0.0/train.dst',
+    'simple': 'auto_full_with_split/1.0.0/train.src',
+  }
+  SPLITS = {
+    'full': 5
+  }
+
 if __name__ == '__main__':
   tfds.testing.test_main()

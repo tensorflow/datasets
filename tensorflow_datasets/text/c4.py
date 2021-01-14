@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -408,6 +408,8 @@ class C4(tfds.core.BeamBasedBuilder):
         | "create_wet_path_urls" >> beam.Create(file_paths["wet_path_urls"])
         | beam.io.ReadAllFromText(
             compression_type=beam.io.filesystem.CompressionTypes.UNCOMPRESSED)
+        # Increase parallelism.
+        | beam.Reshuffle()
         | "filter_corrupt_wet_files" >> beam.Filter(
             lambda p: p not in _KNOWN_CORRUPT_WET_FILES)
         | beam.Map(

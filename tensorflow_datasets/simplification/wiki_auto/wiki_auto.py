@@ -40,7 +40,8 @@ versions in English Wikipedia (this corresponds to the `manual` config), \
 then trained a neural CRF system to predict these alignments. The trained \
 model was then applied to the other articles in Simple English Wikipedia \
 with an English counterpart to create a larger corpus of aligned sentences \
-(corresponding to the `auto` and `auto_acl` configs here).
+(corresponding to the `auto`, `auto_acl`, `auto_full_no_split`, and \
+`auto_full_with_split` configs here).
 """
 
 _URLs = {
@@ -57,6 +58,18 @@ _URLs = {
       'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.src',
     'simple':
       'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/ACL2020/train.dst',
+  },
+  'auto_full_no_split': {
+    'normal':
+      'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_no_split/train.src',
+    'simple':
+      'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_no_split/train.dst',
+  },
+  'auto_full_with_split': {
+    'normal':
+      'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.src',
+    'simple':
+      'https://github.com/chaojiang06/wiki-auto/raw/master/wiki-auto/GEM2021/full_with_split/train.dst',
   },
   'auto': {
     'part_1':
@@ -79,6 +92,12 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
 by crowd workers.'),
       tfds.core.BuilderConfig(name='auto_acl',
         description='Sentence pairs aligned to train the ACL2020 system.'),
+      tfds.core.BuilderConfig(name='auto_full_no_split',
+        description='All automatically aligned sentence pairs without sentence \
+splitting.'),
+      tfds.core.BuilderConfig(name='auto_full_with_split',
+        description='All automatically aligned sentence pairs with sentence \
+splitting.'),
       tfds.core.BuilderConfig(name='auto',
         description='A large set of automatically aligned sentence pairs.')
   ]
@@ -96,7 +115,11 @@ by crowd workers.'),
         'normal_sentence': tfds.features.Text(),
         'simple_sentence': tfds.features.Text(),
       })
-    elif self.builder_config.name == 'auto_acl':
+    elif (
+      self.builder_config.name == 'auto_acl'
+      or self.builder_config.name == 'auto_full_no_split'
+      or self.builder_config.name == 'auto_full_with_split'
+    ):
       features = tfds.features.FeaturesDict({
         'normal_sentence': tfds.features.Text(),
         'simple_sentence': tfds.features.Text(),
@@ -181,7 +204,11 @@ by crowd workers.'),
             dict_[k] = v
           yield id_, dict_
 
-    elif self.builder_config.name == 'auto_acl':
+    elif (
+      self.builder_config.name == 'auto_acl'
+      or self.builder_config.name == 'auto_full_no_split'
+      or self.builder_config.name == 'auto_full_with_split'
+    ):
       with tf.io.gfile.GFile(filepaths['normal']) as fi:
         with tf.io.gfile.GFile(filepaths['simple']) as fo:
           for id_, (norm_se, simp_se) in enumerate(zip(fi, fo)):

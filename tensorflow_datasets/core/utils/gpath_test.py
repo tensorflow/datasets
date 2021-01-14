@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
       'listdir',
       'makedirs',
       'mkdir',
-      # 'remove',
+      'remove',
       'rename',
       'rmtree',
       # 'stat',
@@ -66,6 +66,7 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
       listdir=lambda p: origin_gfile.listdir(_norm_path(p)),
       makedirs=lambda p: origin_gfile.makedirs(_norm_path(p)),
       mkdir=lambda p: origin_gfile.mkdir(_norm_path(p)),
+      remove=lambda p: origin_gfile.remove(_norm_path(p)),
       rename=lambda p1, p2, **kwargs: origin_gfile.rename(  # pylint: disable=g-long-lambda
           _norm_path(p1), _norm_path(p2), **kwargs
       ),
@@ -254,6 +255,24 @@ def test_read_write():
 
   gpath.write_bytes(b'def')
   assert gpath.read_bytes() == b'def'
+
+
+@pytest.mark.usefixtures('gcs_mocked_path')
+def test_unlink():
+  path = gpathlib.PosixGPath('gs://bucket')
+  path.mkdir()
+
+  path = path / 'text.txt'
+
+  with pytest.raises(FileNotFoundError):
+    path.unlink()
+
+  path.unlink(missing_ok=True)  # no-op if missing_ok=True
+
+  path.touch()  # Path created
+  assert path.exists()
+  path.unlink()  # Path deleted
+  assert not path.exists()
 
 
 def test_mkdir(gcs_mocked_path: pathlib.Path):

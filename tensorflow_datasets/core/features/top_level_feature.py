@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,6 +77,8 @@ class TopLevelFeature(feature_lib.FeatureConnector):
 
 def _decode_feature(feature, example, serialized_info, decoder):
   """Decode a single feature."""
+  # TODO(tfds): Support decoders for tfds.features.Dataset
+
   # Eventually overwrite the default decoding
   if decoder is not None:
     decoder.setup(feature=feature)
@@ -96,11 +98,19 @@ def _decode_feature(feature, example, serialized_info, decoder):
 
 def _get_sequence_rank(serialized_info):
   """Return the number of sequence dimensions of the feature."""
-  if isinstance(serialized_info, dict):
-    all_sequence_rank = [s.sequence_rank for s in serialized_info.values()]
-  else:
-    all_sequence_rank = [serialized_info.sequence_rank]
 
+  if isinstance(serialized_info, dict):
+    # If the element is a dictionary, it might correspond to a nested dataset
+    # whose serialized_info is not flattened (so it might be a nested dict).
+    all_sequence_rank = [
+        _get_sequence_rank(s) for s in serialized_info.values()
+    ]
+  else:
+    # If this is a nested dataset, we ignore the sequence_rank. We will decode
+    # the full dataset example with the Dataset decoder.
+    if serialized_info.dataset_lvl > 0:
+      return 0
+    all_sequence_rank = [serialized_info.sequence_rank]
   sequence_ranks = set(all_sequence_rank)
   if len(sequence_ranks) != 1:
     raise NotImplementedError(

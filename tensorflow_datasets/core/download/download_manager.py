@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,14 +47,6 @@ ExtractPath = Union[type_utils.PathLike, resource_lib.Resource]
 
 class NonMatchingChecksumError(Exception):
   """The downloaded file doesn't have expected checksum."""
-
-  def __init__(self, url, tmp_path):
-    msg = (
-        f'Artifact {url}, downloaded to {tmp_path}, has wrong checksum. '
-        'To debug, see: '
-        'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
-    )
-    Exception.__init__(self, msg)
 
 
 # Even if `DownloadConfig` is immutable inside TFDS, we do not set `frozen=True`
@@ -742,7 +734,7 @@ def _validate_checksums(
   if force_checksums_validation:
     # Checksum of the downloaded file unknown (for manually downloaded file)
     if not computed_url_info:
-      computed_url_info = utils.read_checksum_digest(path)
+      computed_url_info = checksums.compute_url_info(path)
     # Checksums have not been registered
     if not expected_url_info:
       raise ValueError(
@@ -756,7 +748,13 @@ def _validate_checksums(
       and computed_url_info
       and expected_url_info != computed_url_info
   ):
-    raise NonMatchingChecksumError(url, path)
+    msg = (
+        f'Artifact {url}, downloaded to {path}, has wrong checksum. '
+        f'Expected: {expected_url_info}. Got: {computed_url_info}.'
+        'To debug, see: '
+        'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
+    )
+    raise NonMatchingChecksumError(msg)
 
 
 def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
@@ -769,6 +767,7 @@ def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
     )
   url_info = file_info['url_info']
   url_info.setdefault('filename', None)
+  url_info['size'] = utils.Size(url_info['size'])
   return checksums.UrlInfo(**url_info)
 
 

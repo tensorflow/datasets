@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,14 +47,18 @@ Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2
 License: http://creativecommons.org/licenses/by/4.0
 """
 
-_URL = "https://data.mendeley.com/datasets/3f83gxmv57/2/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/Citrus.zip"
+_URL = "https://data.mendeley.com/public-files/datasets/3f83gxmv57/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/file_downloaded"
 _LEAVES_LABELS = ["Black spot", "canker", "greening", "healthy"]
 
 
 class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
   """Subset of the citrus dataset with just leaves."""
 
-  VERSION = tfds.core.Version("0.1.1")
+  VERSION = tfds.core.Version("0.1.2")
+  RELEASE_NOTES = {
+      "0.1.1": "Citrus Leaves dataset",
+      "0.1.2": "Website URL update",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

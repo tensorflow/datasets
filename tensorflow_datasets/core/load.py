@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -50,10 +51,6 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
     config_name=r'[\w\-\.]+',
     version=r'[0-9]+\.[0-9]+\.[0-9]+',
 ))
-
-
-# Variable to globally disable community datasets (e.g. inside tests)
-COMMUNITY_DATASET_DISABLED = False
 
 
 def list_builders(
@@ -78,23 +75,23 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  ns_name, builder_name, kwargs = naming.parse_builder_name_kwargs(name)
+  ds_name, kwargs = naming.parse_builder_name_kwargs(name)
   if kwargs:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}"
     )
-  if ns_name:
+  if ds_name.namespace:
     raise ValueError(
-        f'Namespaces not supported for `builder_cls`. Got: {ns_name}'
+        f'Namespaces not supported for `builder_cls`. Got: {ds_name}'
     )
   # Imported datasets
   try:
-    cls = registered.imported_builder_cls(builder_name)
+    cls = registered.imported_builder_cls(ds_name.name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
     return cls
   except registered.DatasetNotFoundError as e:
-    _reraise_with_list_builders(e, ns_name=ns_name, builder_name=builder_name)
+    _reraise_with_list_builders(e, name=ds_name)
 
 
 def builder(
@@ -128,12 +125,16 @@ def builder(
     DatasetNotFoundError: if `name` is unrecognized.
   """
   # 'kaggle:my_dataset:1.0.0' -> ('kaggle', 'my_dataset', {'version': '1.0.0'})
-  ns_name, builder_name, builder_kwargs = naming.parse_builder_name_kwargs(
+  name, builder_kwargs = naming.parse_builder_name_kwargs(
       name, **builder_kwargs
   )
 
   # `try_gcs` currently only support non-community datasets
-  if try_gcs and not ns_name and gcs_utils.is_dataset_on_gcs(builder_name):
+  if (
+      try_gcs
+      and not name.namespace
+      and gcs_utils.is_dataset_on_gcs(str(name))
+  ):
     data_dir = builder_kwargs.get('data_dir')
     if data_dir:
       raise ValueError(
@@ -143,12 +144,12 @@ def builder(
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
 
   # Community datasets
-  if ns_name:
+  if name.namespace:
     raise NotImplementedError
 
   # First check whether code exists or not (imported datasets)
   try:
-    cls = builder_cls(builder_name)
+    cls = builder_cls(str(name))
   except registered.DatasetNotFoundError as e:
     cls = None  # Class not found
     not_found_error = e  # Save the exception to eventually reraise
@@ -156,7 +157,7 @@ def builder(
   # Eventually try loading from files first
   if _try_load_from_files_first(cls, **builder_kwargs):
     try:
-      b = read_only_builder.builder_from_files(builder_name, **builder_kwargs)
+      b = read_only_builder.builder_from_files(str(name), **builder_kwargs)
       return b
     except registered.DatasetNotFoundError as e:
       pass
@@ -171,7 +172,10 @@ def builder(
   raise not_found_error
 
 
-def _try_load_from_files_first(cls, **builder_kwargs) -> bool:
+def _try_load_from_files_first(
+    cls: Optional[Type[dataset_builder.DatasetBuilder]],
+    **builder_kwargs: Any,
+) -> bool:
   """Returns True if files should be used rather than code."""
   if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
     return False  # Has extra kwargs, require original code.
@@ -181,6 +185,12 @@ def _try_load_from_files_first(cls, **builder_kwargs) -> bool:
     return True  # Code does not exists
   elif 'version' in builder_kwargs:
     return True  # Version explicitly given (unlock backward compatibility)
+  elif (
+      'config' in builder_kwargs
+      and isinstance(builder_kwargs['config'], str)
+      and builder_kwargs['config'] not in cls.builder_configs
+  ):
+    return True  # Requested config isn't found in the code
   else:
     return False  # Code exists and no version given, use code.
 
@@ -354,8 +364,8 @@ def _iter_single_full_names(
   if builder_cls.BUILDER_CONFIGS:
     for config in builder_cls.BUILDER_CONFIGS:
       for v in _get_all_versions(
-          config.version,
-          config.supported_versions,
+          config.version or builder_cls.VERSION,
+          config.supported_versions or builder_cls.SUPPORTED_VERSIONS,
           current_version_only=current_version_only,
       ):
         yield posixpath.join(builder_name, config.name, v)
@@ -368,16 +378,10 @@ def _iter_single_full_names(
       yield posixpath.join(builder_name, v)
 
 
-def _iter_full_names(
-    predicate_fn: Optional[PredicateFn],
-    current_version_only: bool,
-) -> Iterator[str]:
+def _iter_full_names(current_version_only: bool) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
   for builder_name in registered.list_imported_builders():
     builder_cls_ = builder_cls(builder_name)
-    # Only keep requested datasets
-    if predicate_fn is not None and not predicate_fn(builder_cls_):
-      continue
     for full_name in _iter_single_full_names(
         builder_name,
         builder_cls_,
@@ -386,27 +390,16 @@ def _iter_full_names(
       yield full_name
 
 
-_DEFAULT_PREDICATE_FN = None
-
-
-def list_full_names(
-    predicate_fn: Optional[PredicateFn] = _DEFAULT_PREDICATE_FN,
-    current_version_only: bool = False,
-) -> List[str]:
+def list_full_names(current_version_only: bool = False) -> List[str]:
   """Lists all registered datasets full_names.
 
   Args:
-    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
-      returns the dataset names which satisfy the predicate.
     current_version_only: If True, only returns the current version.
 
   Returns:
     The list of all registered dataset full names.
   """
-  return sorted(_iter_full_names(
-      predicate_fn=predicate_fn,
-      current_version_only=current_version_only,
-  ))
+  return sorted(_iter_full_names(current_version_only=current_version_only))
 
 
 def single_full_names(
@@ -435,12 +428,11 @@ def is_full_name(full_name: str) -> bool:
 
 def _reraise_with_list_builders(
     e: Exception,
-    ns_name: Optional[str],
-    builder_name: str,
+    name: naming.DatasetName,
 ) -> NoReturn:
   """Add the list of available builders to the DatasetNotFoundError."""
   # Should optimize to only filter through given namespace
-  all_datasets = list_builders(with_community_datasets=bool(ns_name))
+  all_datasets = list_builders(with_community_datasets=bool(name.namespace))
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
   error_string += textwrap.dedent(
@@ -455,8 +447,7 @@ def _reraise_with_list_builders(
   )
 
   # Add close matches
-  name = f'{ns_name}:{builder_name}' if ns_name else builder_name
-  close_matches = difflib.get_close_matches(name, all_datasets, n=1)
+  close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
   if close_matches:
     error_string += f'\nDid you meant: {name} -> {close_matches[0]}'
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -263,9 +263,8 @@ def _get_builder_cls(
   # 2nd case: Dataset is registered through imports.
 
   # Extract `name/config:version`
-  extract_name_and_kwargs = tfds.core.naming.dataset_name_and_kwargs_from_name_str
-  builder_name, builder_kwargs = extract_name_and_kwargs(ds_to_build)
-  builder_cls = tfds.builder_cls(builder_name)
+  name, builder_kwargs = tfds.core.naming.parse_builder_name_kwargs(ds_to_build)
+  builder_cls = tfds.builder_cls(str(name))
   logging.info(
       f'Loading dataset {ds_to_build} from imports: {builder_cls.__module__}'
   )

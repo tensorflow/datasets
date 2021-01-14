@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ _MNLI_BASE_KWARGS = dict(
     },
     label_classes=["entailment", "neutral", "contradiction"],
     label_column="gold_label",
-    data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FMNLI.zip?alt=media&token=50329ea1-e339-40e2-809c-10c40afff3ce",
+    data_url="https://dl.fbaipublicfiles.com/glue/data/MNLI.zip",
     data_dir="MNLI",
     citation=textwrap.dedent("""\
       @InProceedings{N18-1101,
@@ -120,6 +120,7 @@ class GlueConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version("1.0.0"),
         release_notes={
             "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+            "1.0.1": "Update dead URL links.",
         },
         **kwargs)
     self.text_features = text_features
@@ -145,7 +146,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           text_features={"sentence": "sentence"},
           label_classes=["unacceptable", "acceptable"],
           label_column="is_acceptable",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FCoLA.zip?alt=media&token=46d5e637-3411-4188-bc44-5809b5bfb5f4",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/CoLA.zip",
           data_dir="CoLA",
           citation=textwrap.dedent("""\
             @article{warstadt2018neural,
@@ -165,7 +166,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           text_features={"sentence": "sentence"},
           label_classes=["negative", "positive"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FSST-2.zip?alt=media&token=aabc5f6b-e466-44a2-b9b4-cf6337f84ac8",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/SST-2.zip",
           data_dir="SST-2",
           citation=textwrap.dedent("""\
             @inproceedings{socher2013recursive,
@@ -235,7 +236,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               "sentence2": "sentence2",
           },
           label_column="score",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FSTS-B.zip?alt=media&token=bddb94a7-8706-4e0d-a694-1109e12273b5",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/STS-B.zip",
           data_dir="STS-B",
           citation=textwrap.dedent("""\
             @article{cer2017semeval,
@@ -288,7 +289,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           },
           label_classes=["entailment", "not_entailment"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FQNLIv2.zip?alt=media&token=6fdcf570-0fc5-4631-8456-9505272d1601",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/QNLIv2.zip",
           data_dir="QNLI",
           citation=textwrap.dedent("""\
             @article{rajpurkar2016squad,
@@ -312,7 +313,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           },
           label_classes=["entailment", "not_entailment"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FRTE.zip?alt=media&token=5efa7e85-a0bb-4f19-8ea2-9e1840f077fb",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/RTE.zip",
           data_dir="RTE",
           citation=textwrap.dedent("""\
             @inproceedings{dagan2005pascal,
@@ -373,7 +374,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           },
           label_classes=["not_entailment", "entailment"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FWNLI.zip?alt=media&token=068ad0a0-ded7-4bd7-99a5-5e00222e0faf",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/WNLI.zip",
           data_dir="WNLI",
           citation=textwrap.dedent("""\
             @inproceedings{levesque2012winograd,

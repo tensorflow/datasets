@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,6 +49,10 @@ def _parse_flags(_) -> argparse.Namespace:
 
 
 def main(args: argparse.Namespace):
+  tfds.core.visibility.set_availables([
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+  ])
+
   catalog_dir = args.catalog_dir or os.path.join(
       tfds.core.utils.tfds_write_path(),
       'docs',

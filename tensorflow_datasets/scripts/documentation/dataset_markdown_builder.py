@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -215,7 +215,7 @@ class DownloadSizeSection(Section):
     return builder.info.download_size
 
   def content(self, builder: tfds.core.DatasetBuilder):
-    return f'`{tfds.core.units.size_str(builder.info.download_size)}`'
+    return f'`{builder.info.download_size}`'
 
 
 class DatasetSizeSection(Section):
@@ -226,7 +226,7 @@ class DatasetSizeSection(Section):
     return builder.info.dataset_size
 
   def content(self, builder: tfds.core.DatasetBuilder):
-    return f'`{tfds.core.units.size_str(builder.info.dataset_size)}`'
+    return f'`{builder.info.dataset_size}`'
 
 
 class ManualDatasetSection(Section):
@@ -475,9 +475,12 @@ def _display_all_builders(
       nightly_str = ' ' + nightly_doc_util.icon
     else:
       nightly_str = ''
-    cannonical_name = doc_utils.make_cannonical_name(namespace, builder.name)
+    ds_name = tfds.core.utils.DatasetName(
+        namespace=namespace,
+        name=builder.name,
+    )
     unique_builder_str.append(
-        f'## {cannonical_name}/{builder.builder_config.name}'
+        f'## {ds_name}/{builder.builder_config.name}'
         f'{header_suffix}{nightly_str}\n')
     unique_builder_str.append(_display_builder(builder, unique_sections))
   unique_builder_str = '\n'.join(unique_builder_str)
@@ -492,8 +495,8 @@ def _display_dataset_heading(
     namespace: Optional[str],
     builder: tfds.core.DatasetBuilder,
 ) -> str:
-  cannonical_name = doc_utils.make_cannonical_name(namespace, builder.name)
-  return f'# `{cannonical_name}`'
+  ds_name = tfds.core.utils.DatasetName(namespace=namespace, name=builder.name)
+  return f'# `{ds_name}`'
 
 
 def _display_nightly_str(

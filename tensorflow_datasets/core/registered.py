@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import inspect
 from typing import ClassVar, Iterator, List, Type
 
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import py_utils
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
@@ -35,7 +36,6 @@ _ABSTRACT_DATASET_REGISTRY = {}
 # This is directly accessed by `tfds.community.builder_cls_from_module` when
 # importing community packages.
 _MODULE_TO_DATASETS = collections.defaultdict(list)
-
 
 
 class DatasetNotFoundError(ValueError):
@@ -102,9 +102,18 @@ class RegisteredDataset(abc.ABC):
       _DATASET_REGISTRY[cls.name] = cls
 
 
+def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
+  """Returns `True` is the builder is available."""
+  return visibility.DatasetType.TFDS_PUBLIC.is_available()
+
+
 def list_imported_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
-  all_builders = list(_DATASET_REGISTRY)
+  all_builders = [
+      builder_name
+      for builder_name, builder_cls in _DATASET_REGISTRY.items()
+      if _is_builder_available(builder_cls)
+  ]
   return sorted(all_builders)
 
 
@@ -117,6 +126,13 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
     # Alternativelly, could manually extract the list of non-implemented
     # abstract methods.
     raise AssertionError(f'Dataset {name} is an abstract class.')
+
   if name not in _DATASET_REGISTRY:
     raise DatasetNotFoundError(f'Dataset {name} not found.')
-  return _DATASET_REGISTRY[name]  # pytype: disable=bad-return-type
+
+  builder_cls = _DATASET_REGISTRY[name]
+  if not _is_builder_available(builder_cls):
+    msg = f'Dataset {name} is not available.'
+    raise ValueError(msg)
+  return builder_cls  # pytype: disable=bad-return-type
+

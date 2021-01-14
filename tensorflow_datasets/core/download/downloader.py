@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ def _filename_from_content_disposition(
         f'Error while parsing filename for: {content_disposition}\n'
         f'Multiple filename detected: {list(match)}'
     )
-  return match[0].rstrip()
+  return os.path.basename(match[0].rstrip())
 
 
 def _get_filename(response: Response) -> str:
@@ -162,20 +162,17 @@ class _Downloader(object):
   def _sync_file_copy(
       self, filepath: str, destination_path: str,
   ) -> DownloadResult:
+    """Downloads the file through `tf.io.gfile` API."""
     filename = os.path.basename(filepath)
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
-    hexdigest, size = utils.read_checksum_digest(
+    url_info = checksums_lib.compute_url_info(
         out_path, checksum_cls=self._checksumer_cls
     )
-    return DownloadResult(
-        path=utils.as_path(out_path),
-        url_info=checksums_lib.UrlInfo(
-            checksum=hexdigest,
-            size=size,
-            filename=filename,
-        ),
-    )
+    self._pbar_dl_size.update_total(url_info.size)
+    self._pbar_dl_size.update(url_info.size)
+    self._pbar_url.update(1)
+    return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
 
   def _sync_download(
       self, url: str, destination_path: str, verify: bool = True
@@ -233,7 +230,7 @@ class _Downloader(object):
         path=utils.as_path(path),
         url_info=checksums_lib.UrlInfo(
             checksum=checksum.hexdigest(),
-            size=size,
+            size=utils.Size(size),
             filename=fname,
         ),
     )

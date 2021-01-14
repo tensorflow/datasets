@@ -75,6 +75,8 @@ TESTS_REQUIRE = [
     'tensorflow-data-validation;python_version<"3.7"',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
+    # Required by scripts/documentation/
+    'pyyaml',
 ]
 
 # Additional deps for formatting

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,9 +38,16 @@ T = TypeVar('T', bound='FeatureConnector')
 class TensorInfo(object):
   """Structure containing info on the `tf.Tensor` shape/dtype."""
 
-  __slots__ = ['shape', 'dtype', 'default_value', 'sequence_rank']
+  __slots__ = [
+      'shape', 'dtype', 'default_value', 'sequence_rank', 'dataset_lvl'
+  ]
 
-  def __init__(self, shape, dtype, default_value=None, sequence_rank=None):
+  def __init__(self,
+               shape,
+               dtype,
+               default_value=None,
+               sequence_rank=None,
+               dataset_lvl=0):
     """Constructor.
 
     Args:
@@ -49,11 +56,13 @@ class TensorInfo(object):
       default_value: Used for retrocompatibility with previous files if a new
         field is added to provide a default value when reading the file.
       sequence_rank: `int`, Number of `tfds.features.Sequence` dimension.
+      dataset_lvl: `int`, if >0, nesting level of a `tfds.features.Dataset`.
     """
     self.shape = shape
     self.dtype = dtype
     self.default_value = default_value
     self.sequence_rank = sequence_rank or 0
+    self.dataset_lvl = dataset_lvl
 
   @classmethod
   def copy_from(cls, tensor_info):
@@ -63,15 +72,13 @@ class TensorInfo(object):
         dtype=tensor_info.dtype,
         default_value=tensor_info.default_value,
         sequence_rank=tensor_info.sequence_rank,
+        dataset_lvl=tensor_info.dataset_lvl,
     )
 
   def __eq__(self, other):
     """Equality."""
-    return (
-        self.shape == other.shape and
-        self.dtype == other.dtype and
-        self.default_value == other.default_value
-    )
+    return (self.shape == other.shape and self.dtype == other.dtype and
+            self.default_value == other.default_value)
 
   def __repr__(self):
     return '{}(shape={}, dtype={})'.format(
@@ -551,7 +558,7 @@ class FeatureConnector(object):
     ])
     ```
 
-    Will produce the following flattened output:
+    Will produce the following nested output:
     ```
     {
         'a': None,

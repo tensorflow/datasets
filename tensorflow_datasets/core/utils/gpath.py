@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import typing
 from typing import Any, AnyStr, ClassVar, Iterator, Optional, Type, TypeVar
 
 import tensorflow as tf
-
 from tensorflow_datasets.core.utils import type_utils
 
 
@@ -33,6 +32,7 @@ _P = TypeVar('_P')
 
 URI_PREFIXES = ('gs://', 's3://')
 _URI_SCHEMES = frozenset(('gs', 's3'))
+
 _URI_MAP_ROOT = {
     'gs://': '/gs/',
     's3://': '/s3/',
@@ -144,6 +144,16 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
   def rmtree(self) -> None:
     """Remove the directory."""
     tf.io.gfile.rmtree(self._path_str)
+
+  def unlink(self, missing_ok: bool = False) -> None:
+    """Remove this file or symbolic link."""
+    try:
+      tf.io.gfile.remove(self._path_str)
+    except tf.errors.NotFoundError as e:
+      if missing_ok:
+        pass
+      else:
+        raise FileNotFoundError(str(e))
 
   def open(
       self,

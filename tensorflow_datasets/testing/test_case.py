@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,6 @@ class TestCase(tf.test.TestCase):
     # Apply the context managers
     cls._setup_cls_cms = []
     cms_to_apply = []
-    cms_to_apply.append(setup_teardown.disable_community_datasets)
     for cm in cms_to_apply:
       cm = contextlib.contextmanager(cm)()
       cm.__enter__()

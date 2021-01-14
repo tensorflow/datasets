@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,12 +47,13 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
   except ImportError:
     # Print more informative error message, then reraise.
-    print("\n\nFailed to import TensorFlow. Please note that TensorFlow is not "
-          "installed by default when you install TensorFlow Datasets. This is "
-          "so that users can decide whether to install the GPU-enabled "
-          "TensorFlow package. To use TensorFlow Datasets, please install the "
-          "most recent version of TensorFlow, by following instructions at "
-          "https://tensorflow.org/install.\n\n")
+    print("\n\n***************************************************************")
+    print("Failed to import TensorFlow. Please note that TensorFlow is not "
+          "installed by default when you install TFDS. This allow you "
+          "to choose to install either `tf-nightly` or `tensorflow`. "
+          "Please install the most recent version of TensorFlow, by "
+          "following instructions at https://tensorflow.org/install.")
+    print("***************************************************************\n\n")
     raise
 
   tf_version = distutils.version.LooseVersion(tf.__version__)

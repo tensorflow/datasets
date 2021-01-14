@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.testing import feature_test_case
 from tensorflow_datasets.testing import test_utils
@@ -147,12 +148,22 @@ class DatasetBuilderTestCase(
   @classmethod
   def setUpClass(cls):
     tf.enable_v2_behavior()
-    super(DatasetBuilderTestCase, cls).setUpClass()
+    super().setUpClass()
     name = cls.__name__
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
       raise AssertionError(
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
+
+    cls._available_cm = visibility.set_availables([
+        visibility.DatasetType.TFDS_PUBLIC,
+    ])
+    cls._available_cm.__enter__()
+
+  @classmethod
+  def tearDownClass(cls):
+    super().tearDownClass()
+    cls._available_cm.__exit__(None, None, None)
 
   def setUp(self):
     super(DatasetBuilderTestCase, self).setUp()
@@ -228,13 +239,9 @@ class DatasetBuilderTestCase(
     # all needed methods were implemented.
 
   def test_registered(self):
-    is_registered = self.builder.name in load.list_builders(
+    self.assertIn(self.builder.name, load.list_builders(
         with_community_datasets=False,
-    )
-    self.assertTrue(
-        is_registered,
-        f"Dataset {self.builder.name} was not registered.",
-    )
+    ))
 
   def test_info(self):
     info = self.builder.info
