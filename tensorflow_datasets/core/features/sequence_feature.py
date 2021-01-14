@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -131,13 +131,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
     # Empty sequences return empty arrays
     if not sequence_elements:
-      def _build_empty_np(serialized_info):
-        return np.empty(
-            shape=tuple(s if s else 0 for s in serialized_info.shape),
-            dtype=serialized_info.dtype.as_numpy_dtype,
-        )
-
-      return tf.nest.map_structure(_build_empty_np, self.get_serialized_info())
+      return tf.nest.map_structure(build_empty_np, self.get_serialized_info())
 
     # Encode each individual elements
     sequence_elements = [
@@ -146,21 +140,7 @@ class Sequence(top_level_feature.TopLevelFeature):
     ]
 
     # Then convert back list[nested dict] => nested dict[list]
-    def _stack_nested(sequence_elements):
-      """Recursivelly stack the tensors from the same dict field."""
-      if isinstance(sequence_elements[0], dict):
-        return {
-            # Stack along the first dimension
-            k: _stack_nested(sub_sequence)
-            for k, sub_sequence in utils.zip_dict(*sequence_elements)
-        }
-      # Note: As each field can be a nested ragged list, we don't check here
-      # that all elements from the list have matching dtype/shape.
-      # Checking is done in `example_serializer` when elements
-      # are converted to numpy array and stacked togethers.
-      return list(sequence_elements)
-
-    return _stack_nested(sequence_elements)
+    return stack_nested(sequence_elements)
 
   def _flatten(self, x):
     """See base class for details."""
@@ -220,6 +200,29 @@ class Sequence(top_level_feature.TopLevelFeature):
         'feature': self.feature.to_json(),
         'length': self._length,
     }
+
+
+def build_empty_np(serialized_info):
+  """Build empty sequence with the shape of serialized_info."""
+  return np.empty(
+      shape=tuple(s if s else 0 for s in serialized_info.shape),
+      dtype=serialized_info.dtype.as_numpy_dtype,
+  )
+
+
+def stack_nested(sequence_elements):
+  """Recursivelly stack the tensors from the same dict field."""
+  if isinstance(sequence_elements[0], dict):
+    return {
+        # Stack along the first dimension
+        k: stack_nested(sub_sequence)
+        for k, sub_sequence in utils.zip_dict(*sequence_elements)
+    }
+  # Note: As each field can be a nested ragged list, we don't check here
+  # that all elements from the list have matching dtype/shape.
+  # Checking is done in `example_serializer` when elements
+  # are converted to numpy array and stacked togethers.
+  return list(sequence_elements)
 
 
 def _np_to_list(elem):

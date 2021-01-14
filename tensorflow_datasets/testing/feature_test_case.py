@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,10 +83,17 @@ class SubTestCase(test_case.TestCase):
       # on each individual elements instead
       zipped_examples = utils.zip_nested(d1, d2, dict_only=True)
       utils.map_nested(
-          lambda x: self.assertAllEqual(x[0], x[1]),
+          # recursively call assertAllEqualNested in case there is a dataset.
+          lambda x: self.assertAllEqualNested(x[0], x[1]),
           zipped_examples,
           dict_only=True,
       )
+    elif isinstance(d1, (tf.data.Dataset, dataset_utils._IterableDataset)):  # pylint: disable=protected-access
+      # Checks length and elements of the dataset. At the moment, more than one
+      # level of nested datasets is not supported.
+      self.assertEqual(len(d1), len(d2))
+      for ex1, ex2 in zip(d1, d2):
+        self.assertAllEqualNested(ex1, ex2)
     else:
       self.assertAllEqual(d1, d2)
 
@@ -120,6 +127,18 @@ class FeatureExpectationsTestCase(SubTestCase):
       serialized_info=None,
       skip_feature_tests=False,
       test_attributes=None):
+    """Test the given feature against the predicates."""
+    self.assertFeatureEagerOnly(feature, shape, dtype, tests, serialized_info,
+                                skip_feature_tests, test_attributes)
+
+  def assertFeatureEagerOnly(self,
+                             feature,
+                             shape,
+                             dtype,
+                             tests,
+                             serialized_info=None,
+                             skip_feature_tests=False,
+                             test_attributes=None):
     """Test the given feature against the predicates."""
 
     with self._subTest('feature'):
@@ -226,17 +245,31 @@ class FeatureExpectationsTestCase(SubTestCase):
 
         # Assert the returned type match the expected one
         with self._subTest('dtype'):
-          out_dtypes = tf.nest.map_structure(lambda s: s.dtype, out_tensor)
+
+          def _get_dtype(s):
+            if isinstance(s, tf.data.Dataset):
+              return tf.nest.map_structure(_get_dtype, s.element_spec)
+            else:
+              return s.dtype
+
+          out_dtypes = tf.nest.map_structure(_get_dtype, out_tensor)
           self.assertEqual(out_dtypes, test.dtype or feature.dtype)
         with self._subTest('shape'):
           # For shape, because (None, 3) match with (5, 3), we use
           # tf.TensorShape.assert_is_compatible_with on each of the elements
           expected_shape = feature.shape if test.shape is None else test.shape
-          out_shapes = utils.zip_nested(out_tensor, expected_shape)
-          utils.map_nested(
-              lambda x: x[0].shape.assert_is_compatible_with(x[1]),
-              out_shapes
-          )
+
+          def _get_shape(s):
+            if isinstance(s, tf.data.Dataset):
+              return utils.map_nested(_get_shape, s.element_spec)
+            else:
+              return s.shape
+
+          out_shapes = utils.map_nested(_get_shape, out_tensor)
+
+          shapes_tuple = utils.zip_nested(out_shapes, expected_shape)
+          utils.map_nested(lambda x: x[0].assert_is_compatible_with(x[1]),
+                           shapes_tuple)
 
         # Assert value
         with self._subTest('out_value'):

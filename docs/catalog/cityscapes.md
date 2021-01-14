@@ -11,11 +11,6 @@
 
 # `cityscapes`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -152,7 +147,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/semantic_segmentation_extra <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cityscapes/semantic_segmentation_extra
 
 *   **Config description**: Cityscapes semantic segmentation dataset with
     train_extra split and coarse labels.
@@ -211,7 +206,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/stereo_disparity <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cityscapes/stereo_disparity
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset.
 
@@ -270,7 +265,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/stereo_disparity_extra <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cityscapes/stereo_disparity_extra
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset
     with train_extra split.

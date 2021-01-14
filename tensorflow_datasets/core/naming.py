@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ import re
 import textwrap
 from typing import Any, Dict, Optional, Tuple, Union
 
+import dataclasses
+
 from tensorflow_datasets.core.utils import py_utils
 
 _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
@@ -38,20 +40,61 @@ _NAME_REG = re.compile(
 Value = Union[str, int, float, bool]
 
 
+@dataclasses.dataclass(eq=True, frozen=False)
+class DatasetName:
+  """Dataset namespace+name."""
+  namespace: Optional[str]
+  name: str
+
+  def __init__(
+      self,
+      namespace_name: Optional[str] = None,
+      # TODO(py3.8): Positional-only arg /,
+      *,
+      namespace: Optional[str] = None,
+      name: Optional[str] = None,
+  ):
+    if namespace_name and bool(namespace or name):
+      raise ValueError(
+          "Name should be defined by `DatasetName('ns:name')` or "
+          "`DatasetName(namespace='ns', name='name'). Mixing args and kwargs "
+          "is invalid."
+      )
+    if namespace_name:
+      if ':' in namespace_name:
+        namespace, name = namespace_name.split(':')
+      else:
+        namespace, name = None, namespace_name
+    super().__setattr__('namespace', namespace)
+    super().__setattr__('name', name)
+
+  def __str__(self) -> str:
+    return f'{self.namespace}:{self.name}' if self.namespace else self.name
+
+  def __repr__(self) -> str:
+    return f'{type(self).__name__}({str(self)!r})'
+
+
+def is_valid_dataset_name(name_str: str) -> bool:
+  """Returns True is the given name is a valid dataset name."""
+  res = _NAME_REG.match(name_str)
+  return bool(res)
+
+
 def parse_builder_name_kwargs(
     name: str,
     **builder_kwargs: Any,
-) -> Tuple[Optional[str], str, Dict[str, Any]]:
+) -> Tuple[DatasetName, Dict[str, Any]]:
   """Normalize builder kwargs.
 
   Example:
 
   ```python
-  ns_name, ds_name, builder_kwargs = parse_builder_name_kwargs(
+  ds_name, builder_kwargs = parse_builder_name_kwargs(
       'kaggle:ds/cfg:1.2.3', data_dir='...'
   )
-  ns_name == 'kaggle'
-  ds_name == 'ds'
+  ds_name.namespace == 'kaggle'
+  ds_name.name == 'ds'
   builder_kwargs == {'config': 'cfg', 'version': '1.2.3', 'data_dir': '...'}
   ```
 
@@ -64,16 +107,12 @@ def parse_builder_name_kwargs(
     ds_name: Dataset name
     builder_kwargs: Builder kwargs (version, config, data_dir,...)
   """
-  name, parsed_builder_kwargs = dataset_name_and_kwargs_from_name_str(name)
+  name, parsed_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   builder_kwargs = dict(**parsed_builder_kwargs, **builder_kwargs)
-  if ':' in name:
-    ns_name, ds_name = name.split(':')
-  else:
-    ns_name, ds_name = None, name
-  return ns_name, ds_name, builder_kwargs
+  return DatasetName(name), builder_kwargs
 
 
-def dataset_name_and_kwargs_from_name_str(
+def _dataset_name_and_kwargs_from_name_str(
     name_str: str,
 ) -> Tuple[str, Dict[str, Value]]:
   """Extract kwargs from name str."""

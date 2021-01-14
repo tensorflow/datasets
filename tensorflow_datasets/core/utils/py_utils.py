@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
 import base64
 import contextlib
 import functools
-import hashlib
 import io
 import itertools
 import logging
@@ -309,29 +308,26 @@ def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
 
 
 @contextlib.contextmanager
+def incomplete_file(
+    path: type_utils.ReadWritePath,
+) -> Iterator[type_utils.ReadWritePath]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
+  try:
+    yield tmp_path
+    tmp_path.replace(path)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    tmp_path.unlink(missing_ok=True)
+
+
+@contextlib.contextmanager
 def atomic_write(path, mode):
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = '%s%s_%s' % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)
   with tf.io.gfile.GFile(tmp_path, mode) as file_:
     yield file_
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
-
-
-def read_checksum_digest(
-    path: type_utils.PathLike,
-    checksum_cls=hashlib.sha256,
-) -> Tuple[str, int]:
-  """Given a hash constructor, returns checksum digest and size of file."""
-  checksum = checksum_cls()
-  size = 0
-  with tf.io.gfile.GFile(os.fspath(path), 'rb') as f:
-    while True:
-      block = f.read(io.DEFAULT_BUFFER_SIZE)
-      size += len(block)
-      if not block:
-        break
-      checksum.update(block)
-  return checksum.hexdigest(), size  # base64 digest would have been better.
 
 
 def reraise(
@@ -468,7 +464,12 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
 
 def basename_from_url(url: str) -> str:
   """Returns file name of file at given url."""
-  return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
+  filename = urllib.parse.urlparse(url).path
+  filename = os.path.basename(filename)
+  # Replace `%2F` (html code for `/`) by `_`.
+  # This is consistent with how Chrome rename downloaded files.
+  filename = filename.replace('%2F', '_')
+  return filename or 'unknown_name'
 
 
 def list_info_files(dir_path: type_utils.PathLike) -> List[str]:

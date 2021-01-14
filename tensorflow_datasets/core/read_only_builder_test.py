@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -84,6 +84,26 @@ def test_builder_files_exists(code_builder: dataset_builder.DatasetBuilder):
   )
   assert isinstance(builder, type(code_builder))
   assert not isinstance(builder, read_only_builder.ReadOnlyBuilder)
+
+
+def test_builder_config(code_builder: dataset_builder.DatasetBuilder):
+  """Tests that code found but config not loads from files."""
+  if not code_builder.BUILDER_CONFIGS:
+    return
+
+  # Remove the registered configs
+  with mock.patch.object(type(code_builder), 'BUILDER_CONFIGS', []), \
+       mock.patch.object(type(code_builder), 'builder_configs', {}):
+    # Config isn't present in the code anymore
+    with pytest.raises(ValueError, match='BuilderConfig .* not found'):
+      load.builder(
+          f'{code_builder.name}/dummy_config', data_dir='/tmp/path/not-exists'
+      )
+
+    # But previously generated configs still be loaded from disk
+    builder = load.builder(f'{code_builder.name}/dummy_config')
+    assert not isinstance(builder, type(code_builder))
+    assert isinstance(builder, read_only_builder.ReadOnlyBuilder)
 
 
 def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):

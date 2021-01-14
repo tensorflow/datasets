@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,11 +56,6 @@ class DocUtilPaths:
   nightly_path: Optional[tfds.core.PathLike] = tfds.core.utils.tfds_path(
       'stable_versions.txt'
   )
-
-
-def make_cannonical_name(namespace: Optional[str], name: str) -> str:
-  """Returns the full `ns:ds` name."""
-  return f'{namespace}:{name}' if namespace else name
 
 
 class VisualizationDocUtil(object):
@@ -216,8 +211,7 @@ def _load_nightly_dict(version_path: tfds.core.PathLike) -> NightlyDict:
 
   # Build the `full_names_dict['dataset']['config']['version']` for both
   # nightly and stable version
-  registered_ds = _full_names_to_dict(
-      tfds.core.load.list_full_names())
+  registered_ds = _full_names_to_dict(tfds.core.load.list_full_names())
   stable_version_ds = _full_names_to_dict(stable_versions)
 
   # Nightly versions are `registered - stable`

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -160,7 +160,21 @@ def iter_tar(arch_f, stream=False):
         # Links cannot be dereferenced in stream mode.
         logging.warning('Skipping link during extraction: %s', member.name)
         continue
-      extract_file = tar.extractfile(member)
+
+      try:
+        extract_file = tar.extractfile(member)
+      except KeyError:
+        if not (member.islnk() or member.issym()):
+          raise  # Forward exception non-link files which couldn't be extracted
+        # The link could not be extracted, which likely indicates a corrupted
+        # archive.
+        logging.warning(
+            'Skipping extraction of invalid link: %s -> %s',
+            member.name,
+            member.linkname,
+        )
+        continue
+
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:

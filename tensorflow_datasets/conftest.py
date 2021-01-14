@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import pytest
 
 import tensorflow as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.testing import setup_teardown
 
 
@@ -40,9 +41,17 @@ def activate_eager():
 
 
 # Register fixtures which are automatically applied once when tests start.
-disable_community_datasets = pytest.fixture(scope='session', autouse=True)(
-    setup_teardown.disable_community_datasets,
-)
+
+
+@pytest.fixture(scope='session', autouse=True)
+def disable_community_datasets():
+  """During tests, `tfds.list_builders` disable community datasets."""
+  # For tests, only public datasets are available (no-community datasets)
+  # Kokoro pytest tests are executed without absl.app, so the default
+  # visibility isn't automatically set.
+  visibility.set_availables([
+      visibility.DatasetType.TFDS_PUBLIC,
+  ])
 
 
 # Fixtures globally available

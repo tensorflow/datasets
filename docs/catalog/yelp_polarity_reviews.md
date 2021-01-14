@@ -11,11 +11,6 @@
 
 # `yelp_polarity_reviews`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Large Yelp Review Dataset. This is a dataset for binary sentiment

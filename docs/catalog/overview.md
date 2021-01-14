@@ -69,7 +69,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`lsun`](lsun.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`s3o4d`](s3o4d.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
 *   [`the300w_lp`](the300w_lp.md)
@@ -152,7 +151,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`coco_captions`](coco_captions.md)
 *   [`kitti`](kitti.md)
 *   [`lvis`](lvis.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
 *   [`open_images_v4`](open_images_v4.md)
 *   [`voc`](voc.md)
@@ -180,16 +178,13 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`cherry_blossoms`](cherry_blossoms.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dart`](dart.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
 *   [`higgs`](higgs.md)
 *   [`howell`](howell.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
@@ -197,12 +192,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
 *   [`web_nlg`](web_nlg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki_bio`](wiki_bio.md)
 *   [`wiki_table_questions`](wiki_table_questions.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki_table_text`](wiki_table_text.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wine_quality`](wine_quality.md)
 
 ### `Summarization`
@@ -237,7 +229,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cos_e`](cos_e.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`drop`](drop.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
 *   [`gap`](gap.md)
@@ -261,7 +252,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`piqa`](piqa.md)
 *   [`qa4mre`](qa4mre.md)
 *   [`quac`](quac.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`race`](race.md)
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
@@ -279,12 +269,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`winogrande`](winogrande.md)
 *   [`wordnet`](wordnet.md)
 *   [`wsc273`](wsc273.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xnli`](xnli.md)
 *   [`xtreme_pawsx`](xtreme_pawsx.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xtreme_xnli`](xtreme_xnli.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 
 ### `Translate`
@@ -305,9 +292,15 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Video`
 
 *   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
+*   [`davis`](davis.md)
 *   [`moving_mnist`](moving_mnist.md)
 *   [`robonet`](robonet.md)
 *   [`starcraft_video`](starcraft_video.md)
 *   [`ucf101`](ucf101.md)
+
+### `Vision language`
+
+*   [`gref`](gref.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 --------------------------------------------------------------------------------
