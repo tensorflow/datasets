@@ -173,15 +173,25 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
 
   def rename(self: _P, target: type_utils.PathLike) -> _P:
     """Rename file or directory to the given target."""
-    target = os.fspath(self._new(target))  # Normalize gs:// URI
-    tf.io.gfile.rename(self._path_str, target)
-    return self._new(target)
+    # Note: Issue if WindowsPath and target is gs://. Rather than using `_new`,
+    # `GPath.__new__` should dynamically return either `PosixGPath` or
+    # `WindowsPath`, similarly to `pathlib.Path`.
+    target = self._new(target)
+    tf.io.gfile.rename(self._path_str, os.fspath(target))
+    return target
 
   def replace(self: _P, target: type_utils.PathLike) -> _P:
     """Replace file or directory to the given target."""
-    target = os.fspath(self._new(target))  # Normalize gs:// URI
-    tf.io.gfile.rename(self._path_str, target, overwrite=True)
-    return self._new(target)
+    target = self._new(target)
+    tf.io.gfile.rename(self._path_str, os.fspath(target), overwrite=True)
+    return target
+
+  def copy(self: _P, dst: type_utils.PathLike, overwrite: bool = False) -> _P:
+    """Remove the directory."""
+    # Could add a recursive=True mode
+    dst = self._new(dst)
+    tf.io.gfile.copy(self._path_str, os.fspath(dst), overwrite=overwrite)
+    return dst
 
 
 class PosixGPath(_GPath, pathlib.PurePosixPath):
