@@ -57,9 +57,10 @@ Fn = TypeVar('Fn', bound=Callable[..., Any])
 
 def is_notebook():
   """Returns True if running in a notebook (Colab, Jupyter) environment."""
-  # Inspired from the tfdm autonotebook code
+  # Inspired from the tqdm autonotebook code
   try:
-    import IPython  # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
+    # Use sys.module as we do not want to trigger import
+    IPython = sys.modules['IPython']  # pylint: disable=invalid-name
     if 'IPKernelApp' not in IPython.get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except
