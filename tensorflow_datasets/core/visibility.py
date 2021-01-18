@@ -42,7 +42,7 @@ Updating the visibility affect the following functions:
 import contextlib
 import enum
 import pathlib
-from typing import ContextManager, Iterable
+from typing import Iterable, Iterator
 
 from absl import app
 
@@ -63,31 +63,29 @@ _current_available = {
 }
 
 
-def set_availables(new_ds_types: Iterable[DatasetType]) -> ContextManager[None]:
+def set_availables(new_ds_types: Iterable[DatasetType]) -> None:
   """Overwrites the current visibility permissions.
 
-  Can be used as standalone function, or contextmanager. Calling this
-  function will affect the returned value of `tfds.list_builders`,...
+  Calling this function will affect the returned value of
+  `tfds.list_builders`,...
 
   Args:
     new_ds_types: New ds types.
 
-  Returns:
-    An optional contextmanager which restore the value if exited.
   """
-  old_ds_types = set(_current_available)
   _current_available.clear()
   _current_available.update(new_ds_types)
 
-  @contextlib.contextmanager
-  def close_set_availables():
-    try:
-      yield
-    finally:
-      set_availables(old_ds_types)  # Restore previous permissions
 
-  # If used as contextmanager, will restore previous permissions on exit.
-  return close_set_availables()
+@contextlib.contextmanager
+def set_availables_tmp(new_ds_types: Iterable[DatasetType]) -> Iterator[None]:
+  """Contextmanager/decorator version of `set_availables`."""
+  old_ds_types = set(_current_available)
+  try:
+    set_availables(new_ds_types)
+    yield
+  finally:
+    set_availables(old_ds_types)  # Restore previous permissions
 
 
 def _set_default_visibility() -> None:

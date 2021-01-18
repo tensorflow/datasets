@@ -155,7 +155,7 @@ class DatasetBuilderTestCase(
       raise AssertionError(
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
-    cls._available_cm = visibility.set_availables([
+    cls._available_cm = visibility.set_availables_tmp([
         visibility.DatasetType.TFDS_PUBLIC,
     ])
     cls._available_cm.__enter__()
