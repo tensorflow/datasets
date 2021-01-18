@@ -286,6 +286,20 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
   yield enter_result
 
 
+@contextlib.contextmanager
+def set_environ(key: str, value: str) -> Iterator[None]:
+  """Contextmanager which temporary set the envoronement variable."""
+  prev_value = os.environ.get(key)
+  try:
+    os.environ[key] = value
+    yield
+  finally:
+    if prev_value is None:
+      del os.environ[key]
+    else:
+      os.environ[key] = prev_value
+
+
 def _get_incomplete_path(filename):
   """Returns a temporary filename based on filename."""
   random_suffix = ''.join(

@@ -16,6 +16,7 @@
 """Tests for py_utils."""
 
 import collections
+import os
 import pathlib
 
 import pytest
@@ -315,3 +316,15 @@ def test_incomplete_file(tmp_path: pathlib.Path):
     assert not filepath.exists()
   assert filepath.read_text() == 'content'
   assert not tmp_filepath.exists()  # Tmp file is deleted
+
+
+def test_set_environ():
+  assert 'TEST_TFDS_ABCD' not in os.environ
+  with py_utils.set_environ('TEST_TFDS_ABCD', 'abc'):
+    assert os.environ['TEST_TFDS_ABCD'] == 'abc'
+  assert 'TEST_TFDS_ABCD' not in os.environ
+
+  os.environ['TEST_TFDS_ABCD'] = 'def'
+  with py_utils.set_environ('TEST_TFDS_ABCD', 'abc'):
+    assert os.environ['TEST_TFDS_ABCD'] == 'abc'
+  assert os.environ['TEST_TFDS_ABCD'] == 'def'
