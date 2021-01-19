@@ -290,6 +290,9 @@ toc:
     title: dart
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
+  - path: /datasets/catalog/efron_morris75
+    status: nightly
+    title: efron_morris75
   - path: /datasets/catalog/forest_fires
     title: forest_fires
   - path: /datasets/catalog/genomics_ood
