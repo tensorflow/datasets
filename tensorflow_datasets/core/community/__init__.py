@@ -16,8 +16,10 @@
 """Community dataset API."""
 
 from tensorflow_datasets.core.community.load import builder_cls_from_module
+from tensorflow_datasets.core.community.register_package import community_register
 
 
 __all__ = [
     'builder_cls_from_module',
+    'community_register',
 ]

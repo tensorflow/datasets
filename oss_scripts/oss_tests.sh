@@ -35,6 +35,7 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 # * test_utils.py is not a test file
 # * build_docs_test: See b/142892342
 pytest \
+  -vv \
   -n auto \
   --disable-warnings $EXTRA_IGNORE \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \

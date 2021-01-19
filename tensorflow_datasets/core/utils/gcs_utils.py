@@ -36,23 +36,18 @@ GCS_DATASETS_DIR = 'datasets'
 _is_gcs_disabled = False
 
 
-def exists(path: type_utils.ReadWritePath) -> bool:
-  """Checks if path exists. Returns False if issues occur connecting to GCS."""
-  try:
-    return path.exists()
-  # * UnimplementedError: On windows, gs:// isn't supported.
-  # * FailedPreconditionError: Raised by TF
-  # * PermissionDeniedError: Some environments block GCS access.
-  # * AbortedError: All 10 retry attempts failed.
-  except (
-      tf.errors.UnimplementedError,
-      tf.errors.FailedPreconditionError,
-      tf.errors.PermissionDeniedError,
-      tf.errors.AbortedError,
-  ):
-    # TODO(tfds): Investigate why windows, gs:// isn't supported.
-    # https://github.com/tensorflow/tensorflow/issues/38477
-    return False
+# Exception raised when GCS isn't available
+# * UnimplementedError: On windows, gs:// isn't supported on old TF versions.
+#   https://github.com/tensorflow/tensorflow/issues/38477
+# * FailedPreconditionError: (e.g. no internet)
+# * PermissionDeniedError: Some environments block GCS access.
+# * AbortedError: All 10 retry attempts failed.
+GCS_UNAVAILABLE_EXCEPTIONS = (
+    tf.errors.UnimplementedError,
+    tf.errors.FailedPreconditionError,
+    tf.errors.PermissionDeniedError,
+    tf.errors.AbortedError,
+)
 
 
 def gcs_path(*relative_path: type_utils.PathLike) -> type_utils.ReadWritePath:
@@ -65,6 +60,22 @@ def gcs_path(*relative_path: type_utils.PathLike) -> type_utils.ReadWritePath:
     path: The GCS uri.
   """
   return generic_path.as_path(GCS_ROOT_DIR).joinpath(*relative_path)
+
+
+# Community datasets index.
+# This file contains the list of all community datasets with their associated
+# location.
+# Datasets there are downloaded and installed locally by the
+# `PackageRegister` during `tfds.builder`
+GCS_COMMUNITY_INDEX_PATH = gcs_path() / 'community-datasets-list.jsonl'
+
+
+def exists(path: type_utils.ReadWritePath) -> bool:
+  """Checks if path exists. Returns False if issues occur connecting to GCS."""
+  try:
+    return path.exists()
+  except GCS_UNAVAILABLE_EXCEPTIONS:
+    return False
 
 
 @py_utils.memoize()
