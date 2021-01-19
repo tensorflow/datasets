@@ -33,34 +33,57 @@ _GENDER_CLASSES = ["male", "female", "other"]
 # OrderedDict to keep collection order constant (en is the default config)
 _LANGUAGE_ACCENTS = collections.OrderedDict([
     ("en", [
-        "canada", "us", "indian", "philippines", "england", "scotland", "other",
-        "australia", "hongkong", "african", "newzealand", "wales", "ireland",
-        "malaysia", "bermuda", "singapore", "southatlandtic"
+        "african","australia","bermuda","canada","england","hongkong","indian",
+        "ireland","malaysia","newzealand","philippines","scotland","singapore",
+        "southatlandtic","us","wales"
     ]),
     ("de", [
-        "germany", "switzerland", "austria", "other", "liechtenstein", "france",
-        "netherlands", "united_kingdom", "hungary", "poland"
+        "austria","belgium","brazil","bulgaria","canada","czechia","denmark",
+        "finland","france","germany","greece","hungary","italy","kazakhstan",
+        "liechtenstein","lithuania","luxembourg","namibia","netherlands",
+        "paraguay","poland","romania","russia","slovakia","slovenia",
+        "switzerland","turkey","united_kingdom","united_states"
+
     ]),
-    ("fr", [
-        "france", "switzerland", "belgium", "algeria", "canada", "other",
-        "germany", "tunisia", "senegal", "united_states",
-        "st_pierre_et_miquelon", "monaco", "mayotte", "cote_d_ivoire",
-        "guadeloupe", "martinique", "reunion", "portugal", "netherlands"
+   ("fr", [
+          "algeria","andorra","austria","belgium","benin","burkina_faso",
+          "burundi","cameroon","canada","central_african_republic","chad",
+          "comoros","congo_brazzaville","congo_kinshasa","cote_d_ivoire",
+          "cyprus","djibouti","equatorial_guinea","france","french_guiana",
+          "french_polynesia","gabon","germany","greece","guadeloupe",
+          "guinea","haiti","hungary","ireland","italy","lebanon","luxembourg",
+          "madagascar","mali","malta","martinique","mauritania","mauritius",
+          "mayotte","monaco","morocco","netherlands","new_caledonia","niger",
+          "portugal","reunion","romania","rwanda","senegal","seychelles",
+          "st_barthelemy","st_martin","st_pierre_et_miquelon","switzerland",
+          "syria","togo","tunisia","united_kingdom","united_states","vanuatu",
+          "wallis_et_futuna"
+
     ]),
     ("cy", ["united_kingdom", "other"]),
-    ("br", ["other"]),
+    ("br", ["gwenedeg","kerneveg","leoneg","tregerieg"]),
     ("cv", []),
     ("tr", ["other"]),
     ("tt", []),
     ("ky", ["other"]),
-    ("ga-IE", ["other", "ulaidh", "connachta"]),
+    ("ga-IE", [ "connachta", "ulaidh","mumhain","other"]),
     ("kab", ["other"]),
     ("ca",
-     ["northwestern", "central", "other", "valencian", "balearic", "northern"]),
-    ("zh-TW", ["other"]),
+     ["northwestern", "central", "other","valencian","balearic","northern"]),
+    ("zh-TW", 
+    [
+        "changhua_county","chiayi_city","chiayi_county","hong_kong",
+        "hsinchu_city","hsinchu_county","hualien_county","kaohsiung_city",
+        "keelung_city","kinmen_county","lienchiang_county","miaoli_county",
+        "nantou_county","new_taipei_city","penghu_county","pingtung_county",
+        "taichung_city","tainan_city","taipei_city","taitung_county",
+        "taoyuan_city","yilan_county","yunlin_county"
+    ]),
     ("sl", ["other"]),
     ("it", ["other"]),
-    ("nl", ["netherlands", "belgium", "other"]),
+    ("nl", [
+            "aruba","belgium","curacao","france","germany","indonesia","namibia",
+            "netherlands","sint_maarten","south_africa","suriname"]),
     ("cnh", ["other"]),
     ("eo", ["internacia", "other"]),
     ("id",[])
