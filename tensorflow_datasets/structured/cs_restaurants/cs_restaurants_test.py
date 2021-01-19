@@ -36,7 +36,7 @@ class CSRestaurantsTest(tfds.testing.DatasetBuilderTestCase):
   def test_get_table_from_da(self):
     da = 'inform(food=Mexican,kids_allowed=no,name=Ferdinanda)'
     self.assertCountEqual(
-        cs_restaurants._get_table_from_da(da), [{
+        cs_restaurants.cs_restaurants._get_table_from_da(da), [{
             'column_header': 'intent',
             'row_number': 1,
             'content': 'inform',
